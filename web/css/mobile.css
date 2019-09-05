@@ -1,0 +1,40 @@
+*, *:after, *:before {-webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;}
+html,body {height: 100%;}
+
+body{background: #2d0c03; color: #f2dede;}
+
+.fa-whatsapp{color: #25d366;;}
+.wrap {min-height: 100%; height: auto; margin: 0 auto -60px; padding: 0 0 60px; width: 80%;}
+.left-col{float: left; width: 50%; padding: 1%;}
+.right-col{float: right; width: 50%; padding: 1%;}
+.btn-main{background: rgba(0, 0, 0, .2);display: inline-block;font-weight: bold; text-decoration: none;text-transform: uppercase; padding: 1em;  border: 1px #FF1A4A solid; text-align: center; color: #FF1A4A; }
+.btn-main.btn-green{color: green; border-color: green;}
+.btn-main:hover{text-decoration: none!important; color: #f4f6ec;border-color: #f4f6ec;}
+textarea{resize: vertical;}
+
+.menu{width: 100%;padding: 0; margin: 0; background: #F8B786;}
+    .menu-item{padding: 2% 3%; margin: 0;float: left; list-style-type: none;}
+        .menu-item a{color: white; font-weight: bold;}
+        .menu-item .active{background: #FF1A4A; color: white; padding: 5%; -webkit-border-radius: 0.5em; -moz-border-radius: 0.5em; border-radius: 0.5em;}
+
+
+.slider{width: 100%; height: 450px;}
+    .slider img{width: 100%; height: 100%;}
+
+.search-wrap{ width: 70%; height: 80px; background: #2d0c03; padding: 1%; position: absolute; margin: 10% 15%;-webkit-border-radius: 0.2em;-moz-border-radius: 0.2em;border-radius: 0.2em;}
+    .search{width: 100%; height: 30px;}
+        .search__input{width: 94%; height: 100%; padding: 1%; margin: 0; border: 1px #ddd solid; background: #f4f6ec;}
+        .search__input:focus {border-color: #FF1A4A;}
+        .search__input::placeholder {font-style: italic; color: black;}
+            .search__submit{width: 5%; height: 99%; border: 0; padding: 0; margin: 0; background: #FF1A4A; color: #f4f6ec;}
+            .search-tags{margin: 1% 0; padding: 0;}
+                .search-tags__element{list-style-type: none; float: left; margin: 0 2%; font-style: italic;}
+                .search-tags__element:first-child{margin: 0;}
+                .search-tags__element a{color: #f4f6ec; border-bottom: 1px #f4f6ec dashed; text-decoration: none;}
+                .search-tags__element a:hover{color: #f4f6ec;}
+
+@media screen and (min-width:150px) and (max-width:680px) {
+    .slider{width: 100%; height: 250px;}
+        .search__input{width: 80%;}
+        .search__submit{width: 15%;}
+}

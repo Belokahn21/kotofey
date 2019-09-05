@@ -1,0 +1,2 @@
+<?= Yii::$app->i18n->format("{n, plural, =0{Корзина пуста} =1{В крзине - # товар} one{В крзине - # товар} few{В корзине - # товара} many{В корзине - # товаров} other{dev -}}",
+    ['n' => \app\models\entity\Basket::count()], 'ru_RU'); ?>

@@ -1,0 +1,23 @@
+User-agent: *
+Allow: *
+Disallow: /admin/
+Disallow: /admin/?*
+Disallow: /ajax/
+Disallow: /ajax/?*
+Disallow: /success/
+Disallow: /fail/
+Disallow: /clear/
+Disallow: /profile/
+Disallow: /profile/*
+Disallow: /basket/
+Disallow: /favorite/
+Disallow: /signin/
+Disallow: /signup/
+Disallow: /support/
+Disallow: /support/*
+Disallow: /web/
+Disallow: /web/*
+
+Sitemap: https://eventhorizont.ru/sitemap.xml
+
+Clean-param: page&per-page /
