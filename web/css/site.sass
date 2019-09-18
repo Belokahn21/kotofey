@@ -1366,12 +1366,108 @@ textarea
   color: green
 
 .checkout
-  .right-col
-    padding: 1%
+  width: 100%
 
-  .left-col
-    padding: 1%
+.type-order
+  width: 100%
 
+.type-order-list
+  list-style: none
+  width: 100%
+  display: flex
+  flex-direction: row
+  justify-content: space-around
+
+.type-order-list__item
+  border: 1px #e2e2e2 solid
+  -webkit-border-radius: 0.2em
+  -moz-border-radius: 0.2em
+  border-radius: 0.2em
+  width: 20%
+  height: 200px
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  cursor: pointer
+
+  &.active
+    border: 1px $mainActiveHoverColor solid
+
+  &:hover
+    border: 1px $mainActiveHoverColor solid
+
+.type-order-list__item-title
+  text-align: center
+  font-weight: 600
+  font-size: 18px
+
+.type-order-list__item-reason
+  width: 100%
+
+.list-advantages
+  width: 100%
+  list-style: none
+  text-align: center
+
+.advantage-item
+  width: 100%
+
+  &:before
+    margin: 1%
+
+.advantage-true
+  color: green
+
+.advantage-true:before
+  font-family: 'FontAwesome'
+  content: '\f067'
+
+.advantage-false:before
+  font-family: 'FontAwesome'
+  content: '\f068'
+
+.advantage-false
+  color: red
+
+.checkout-form-wrap
+  display: flex
+  flex-direction: column
+  align-items: center
+  justify-content: center
+
+.out-smm
+  font-weight: 600
+  font-size: 20px
+
+.checkout-form
+  display: none
+  width: 70%
+
+.cart-checkout-fast
+  width: 100%
+  display: flex
+  flex-direction: column
+
+.cart-checkout-fast__item
+  width: 100%
+  display: flex
+  flex-direction: row
+  justify-content: space-around
+  margin: 1% 0
+  padding: 1% 0
+  border-bottom: 1px #e2e2e2 solid
+
+.cart-checkout-fast__item-image-wrap
+  width: 300px
+  height: 150px
+
+.cart-checkout-fast__item-image
+  width: 100%
+  height: 100%
+
+.cart-checkout-fast__item-title
+  width: 300px
 
 .articles
   width: 100%
@@ -1390,6 +1486,7 @@ textarea
 .article-image-wrap
   width: 100%
   height: 70%
+
   img
     width: 100%
     height: 100%
@@ -1525,7 +1622,7 @@ textarea
   font-size: 18px
   font-weight: 600
   color: white
-  text-decoration: none!important
+  text-decoration: none !important
 
   &:hover
     color: $mainHoverColor

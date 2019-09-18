@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-    $('.phone_mask').text(function(i, text) {
+    $('.phone_mask').text(function (i, text) {
         return text.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3 $4-$5');
     });
 
@@ -108,6 +108,18 @@ $(document).ready(function () {
 
     $('.show-drop').click(function () {
         $('.drop-all-cats').toggleClass("show hide");
+    });
+
+
+    $('.type-order-list__item').click(function () {
+        var $this = $(this);
+
+        $('.type-order-list__item').each(function () {
+            $(this).removeClass('active')
+        });
+        $this.addClass('active');
+
+        $('.checkout-form').hide().eq($this.index()).show();
     });
 
 });

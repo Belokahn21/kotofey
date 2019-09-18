@@ -1,6 +1,9 @@
 <?
 
+use app\models\entity\Product;
 use app\models\tool\seo\Title;
+use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\entity\Informers;
@@ -25,3 +28,43 @@ $this->title = Title::showTitle("Справочники"); ?>
     <?= Html::submitButton('Добавить'); ?>
     <? ActiveForm::end(); ?>
 </section>
+
+<?= GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'emptyText' => 'Значения отсутствуют',
+    'columns' => [
+        [
+            'attribute' => 'id',
+        ],
+        [
+            'attribute' => 'value',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::a($model->value, '/admin/informersvalues/' . $model->id . '/');
+            }
+        ],
+        [
+            'attribute' => 'informer_id',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return \app\models\entity\Informers::findOne($model->informer_id)->name;
+            }
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+//                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
+                },
+                'update' => function ($url, $model, $key) {
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/category/$key"]));
+                },
+                'delete' => function ($url, $model, $key) {
+                    return Html::a('<i class="fas fa-trash-alt"></i>',
+                        Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
+                },
+            ]
+        ],
+    ],
+]); ?>

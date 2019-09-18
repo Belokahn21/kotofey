@@ -90,7 +90,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
                 'avatarFile'
             ],
             self::SCENARIO_REGISTER_WITH_VK => ['email', 'new_password', 'vk_uid'],
-            self::SCENARIO_REGISTER_IN_CHECKOUT => ['email', 'new_password'],
+            self::SCENARIO_REGISTER_IN_CHECKOUT => ['email', 'new_password','phone'],
             self::SCENARIO_LOGIN => ['email', 'password', 'new_password'],
             self::SCENARIO_LOGIN_WITH_VK => ['email', 'new_password'],
             self::SCENARIO_NEW_REVIEW => ['name'],
@@ -111,17 +111,13 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [
-                ['email', 'new_password'],
-                'required',
-                'message' => 'Поле {attribute} должно быть заполнено',
-                'except' => self::SCENARIO_USER_UPDATE
+            [['email', 'new_password', 'phone'], 'required', 'message' => 'Поле {attribute} должно быть заполнено', 'except' => self::SCENARIO_USER_UPDATE
             ],
             [['vk_uid'], 'integer', 'message' => 'Поле {attribute} должно содержать цифры'],
 
             [['first_name', 'name', 'last_name'], 'string'],
 
-            [['sex', 'birthday'], 'string'],
+            [['sex', 'birthday','phone'], 'string'],
 
             [['email'], 'unique', 'except' => self::SCENARIO_LOGIN, 'message' => 'Данный {attribute} уже используется'],
             ['email', 'email', 'message' => 'Неккоректный формат электронной почты'],
@@ -134,6 +130,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
+            'phone' => "Телефон",
             'first_name' => "Фамилия",
             'name' => "Имя",
             'last_name' => "Отчество",

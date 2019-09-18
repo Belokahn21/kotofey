@@ -1,7 +1,7 @@
 
 order deny,allow
 deny from all
-allow from 127.0.0.1 109.171.61.86 109.171.61.107
+allow from 127.0.0.1 109.171.61.86 109.171.61.107 176.212.127.47
 
 
 RewriteEngine on
