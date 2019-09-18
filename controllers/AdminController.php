@@ -29,6 +29,7 @@ use app\models\search\AuthItemSearchForm;
 use app\models\search\CategorySearchForm;
 use app\models\search\DeliverySearchForm;
 use app\models\search\InformersSearchForm;
+use app\models\search\InformersValuesSearchForm;
 use app\models\search\OrderSearchForm;
 use app\models\search\OrderStatusSearchForm;
 use app\models\search\PagesCategorySearchForm;
@@ -815,7 +816,7 @@ class AdminController extends Controller
     public function actionInformersvalues($id = null)
     {
         if ($id) {
-            $model = Informers::findOne($id);
+            $model = InformersValues::findOne($id);
             if (\Yii::$app->request->isPost) {
 
                 if ($model->load(\Yii::$app->request->post())) {
@@ -831,13 +832,13 @@ class AdminController extends Controller
 
 
             return $this->render('detail/informersvalues', [
-                'model' => $model
+                'model' => $model,
             ]);
         }
 
         $model = new InformersValues();
-//        $searchModel = new InformersSearchForm();
-//        $dataProvider = $searchModel->search(\Yii::$app->request->get());
+        $searchModel = new InformersValuesSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
 
@@ -854,8 +855,8 @@ class AdminController extends Controller
 
         return $this->render('informersvalues', [
             'model' => $model,
-//            'searchModel' => $searchModel,
-//            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

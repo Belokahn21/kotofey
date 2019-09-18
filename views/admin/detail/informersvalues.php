@@ -6,9 +6,11 @@ use yii\helpers\Html;
 use app\models\entity\Informers;
 use yii\helpers\ArrayHelper;
 
-$this->title = Title::showTitle("Справочники"); ?>
+$this->title = Title::showTitle($model->value); ?>
 <section>
-    <h1 class="title">Справочники</h1>
+    <h1 class="title"><?= $model->value; ?></h1>
+    <br />
+    <?= Html::a("Назад", '/admin/informersvalues/', ['class' => 'btn-back']) ?>
     <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="tabs-container">
         <ul class="tabs">
@@ -16,7 +18,8 @@ $this->title = Title::showTitle("Справочники"); ?>
         </ul>
 
         <div id="tab-1" class="tab-content current">
-            <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(Informers::find()->all(), 'id','name')) ?>
+            <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(Informers::find()->all(), 'id',
+                'name')) ?>
             <?= $form->field($model, 'value')->textInput() ?>
             <?= $form->field($model, 'description')->textarea(); ?>
         </div>
