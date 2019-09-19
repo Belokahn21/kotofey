@@ -46,7 +46,9 @@ $this->title = Title::showTitle($product->name); ?>
             <div class="block-buy-wrap">
                 <div class="detail-product__price"><?= Price::format($product->price) ?> <?= (new Currency())->show(); ?></div>
                 <a href="" class="detail-product__cart add-basket" data-id="<?=$product->id;?>"><i class="fas fa-shopping-cart"></i></a>
-                <?= FastBuyWidget::widget(); ?>
+                <?= FastBuyWidget::widget([
+                        'product'=>$product
+                ]); ?>
             </div>
             <ul class="detail-product-properties">
                 <li class="detail-product-properties__item">

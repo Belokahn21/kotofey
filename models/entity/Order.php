@@ -43,23 +43,19 @@ class Order extends ActiveRecord
     public function rules()
     {
         return [
-            [['payment', 'delivery'], 'required', 'message' => 'Выберите {attribute}'],
 
-            [['user'], 'required', 'message' => '{attribute} необходимо указать'],
-
-//            [['product_id'], 'required', 'message' => '{attribute} необходимо указать', 'except'=>self::SCENARIO_DEFAULT],
 
             [['payment', 'delivery', 'user'], 'integer'],
 
+            [['payment', 'delivery', 'user'], 'default', 'value' => 0],
             ['paid', 'default', 'value' => false],
-
             ['status', 'default', 'value' => 0],
 
-            ['user', 'default', 'value' => \Yii::$app->user->identity->id],
+
+            [['payment', 'delivery'], 'required', 'message' => 'Выберите {attribute}'],
+            [['user'], 'required', 'message' => '{attribute} необходимо указать'],
 
             [['comment', 'promo_code'], 'string'],
-
-            [['user'], 'safe'],
 
             [['product_id'], 'safe'],
         ];

@@ -57,13 +57,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     <?= $form->field($billing, 'house')->textInput(); ?>
                 </div>
                 <div class="col-md-8 col-sm-6">
-                    <?= $form->field($billing, 'phone'); ?>
+                    <?= $form->field($user, 'phone'); ?>
                 </div>
             </div>
         </div>
-        <?= Html::submitButton('Оплатить заказ',
-            ['class' => 'btn-main btn-green', 'value' => 'paid', 'name' => 'type']) ?>
-        <?= Html::submitButton('Заказать без оплаты', ['class' => 'btn-main', 'value' => 'nopaid', 'name' => 'type']) ?>
+        <?= Html::submitButton('Заказать', ['class' => 'btn-main', 'value' => 'nopaid', 'name' => 'type']) ?>
         <?= Html::a("Персональные данные", (new Policy())->getPath(), ['class' => 'policy-link-checkout']); ?>
         <? ActiveForm::end(); ?>
     </div>

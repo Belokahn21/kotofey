@@ -21,158 +21,59 @@ use app\models\entity\user\Billing;
 use app\models\tool\Debug;
 use app\models\tool\payments\Robokassa;
 use app\widgets\notification\Notify;
+use yii\debug\models\search\Base;
 
 class FastBuyWidget extends \yii\base\Widget
 {
+    public $template = 'default';
+    public $product = 'default';
+
     public function run()
     {
-        $delivery = Delivery::find()->all();
-        $payments = Payment::find()->all();
-        $route = Yii::$app->urlManager->parseRequest(Yii::$app->request);
+        $user = new User(['scenario' => User::SCENARIO_REGISTER_IN_CHECKOUT]);
+        $order = new Order();
+        $order_items = new OrderItems();
 
-        if (\Yii::$app->controller->action->id == 'product') {
+        if (Yii::$app->request->isPost) {
 
-            if (array_key_exists('id', $route[1])) {
-                $product = Product::findBySlug($route[1]['id']);
+            if ($user->load(Yii::$app->request->post())) {
+                if ($user->validate()) {
+                    if ($user->save() === false) {
+                        Yii::$app->controller->refresh();
+                    }
+                }
+            }
+
+            if (Yii::$app->user->login($user)) {
+
+                $order->user = $user->id;
+
+                if ($order->validate()) {
+                    if ($order->save() === false) {
+                        Yii::$app->controller->refresh();
+                    }
+                }
+
+
+                $order_items->orderId = $order->id;
+                $order_items->productId = $this->product->id;
+                $order_items->count = 1;
+                $order_items->summ = $this->product->price;
+
+                if ($order_items->save()) {
+                    Yii::$app->controller->refresh();
+                }
             }
 
         }
 
-        if (\Yii::$app->user->isGuest) {
-            $order = new Order();
-            $billing = new Billing();
-            $user = new User(['scenario' => User::SCENARIO_REGISTER_IN_CHECKOUT]);
-            $items = new OrderItems();
-            $basket = new Basket();
-        } else {
-            $order = new Order();
-            $user = User::findOne(\Yii::$app->user->identity->id);
-            $billing = Billing::findByUser($user->id);
-            if (!$billing) {
-                $billing = new Billing();
-            }
-            $items = new OrderItems();
-            $basket = new Basket();
-        }
-
-        $basket->product = $product;
-        $basket->count = 1;
-        $basket->add();
-
-
-        if (\Yii::$app->user->isGuest) {
-            // форма отправлена
-
-            $template = 'fast_buy_guest';
-
-            if (\Yii::$app->request->isPost) {
-                $newUser = $user->createUser();
-                if ($newUser instanceof User) {
-                    if ($newUser->login()) {
-                        $order->user = $newUser->id;
-
-                        if ($billing->load(\Yii::$app->request->post())) {
-                            $billing->user_id = $newUser->id;
-                            if ($billing->validate()) {
-                                if ($billing->save() === false) {
-                                    return false;
-                                }
-                            }
-                        }
-
-                        if ($order->saveOrder()) {
-                            $items->orderId = $order->id;
-                            if ($items->saveItems()) {
-
-                                $robokassa = new Robokassa();
-                                $robokassa->config->setInvID($order->id);
-                                $robokassa->config->setDescription("Оплата товара");
-                                $robokassa->config->setSum($order->cash());
-
-
-                                $basket->clear();
-                                Promo::clear();
-
-                                $order->userNotify();
-                                $order->adminNotify();
-
-                                if ($_POST['type'] == 'paid') {
-                                    \Yii::$app->controller->redirect($robokassa->generateUrl());
-                                } else {
-                                    Notify::setSuccessNotify("Заказ успешно создан!");
-                                    \Yii::$app->controller->redirect("/");
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } else {
-            $template = 'fast_buy_user';
-
-            if (\Yii::$app->request->isPost) {
-
-                $order->user = \Yii::$app->user->identity->id;
-                if ($billing->load(\Yii::$app->request->post())) {
-
-                    if (empty($billing->user_id)) {
-                        $billing->user_id = \Yii::$app->user->identity->id;
-
-                        if ($billing->validate()) {
-                            if ($billing->save() === false) {
-                                return false;
-                            }
-                        }
-
-                    } else {
-
-                        if ($billing->validate()) {
-                            if ($billing->update() === false) {
-                                return false;
-                            }
-
-                        }
-                    }
-                }
-
-                if ($order->saveOrder()) {
-                    $items->orderId = $order->id;
-                    if ($items->saveItems()) {
-
-                        $robokassa = new Robokassa();
-                        $robokassa->config->setInvID($order->id);
-                        $robokassa->config->setSum($order->cash());
-
-                        $basket->clear();
-                        Promo::clear();
-
-                        $order->userNotify();
-                        $order->adminNotify();
-
-                        if ($_POST['type'] == 'paid') {
-                            \Yii::$app->controller->redirect($robokassa->generateUrl());
-                        } else {
-                            Notify::setSuccessNotify("Заказ успешно создан!");
-                            \Yii::$app->controller->redirect("/");
-                        }
-                    }
-
-                }
-            }
-        }
-
-
-        return $this->render($template, [
-            'order' => $order,
-            'billing' => $billing,
-            'user' => $user,
-
-            'delivery' => $delivery,
-            'payments' => $payments,
+        return $this->render($this->template, [
+            'user' => $user
         ]);
     }
 
-    public function init()
+    public
+    function init()
     {
         return;
     }
