@@ -26,7 +26,7 @@ use yii\debug\models\search\Base;
 class FastBuyWidget extends \yii\base\Widget
 {
     public $template = 'default';
-    public $product = 'default';
+    public $product;
 
     public function run()
     {
@@ -44,36 +44,38 @@ class FastBuyWidget extends \yii\base\Widget
                 }
             }
 
-            if (Yii::$app->user->login($user)) {
+            if (Yii::$app->user->isGuest) {
+                Yii::$app->user->login($user);
+            }
 
-                $order->user = $user->id;
+            $order->user = Yii::$app->user->identity->id;
 
-                if ($order->validate()) {
-                    if ($order->save() === false) {
-                        Yii::$app->controller->refresh();
-                    }
-                }
-
-
-                $order_items->orderId = $order->id;
-                $order_items->productId = $this->product->id;
-                $order_items->count = 1;
-                $order_items->summ = $this->product->price;
-
-                if ($order_items->save()) {
+            if ($order->validate()) {
+                if ($order->save() === false) {
                     Yii::$app->controller->refresh();
                 }
+            }
+
+
+            $order_items->orderId = $order->id;
+            $order_items->productId = $this->product->id;
+            $order_items->count = 1;
+            $order_items->summ = $this->product->price;
+
+            if ($order_items->save()) {
+                Notify::setSuccessNotify("Заказ успешно создан!");
+//                Yii::$app->controller->refresh();
             }
 
         }
 
         return $this->render($this->template, [
-            'user' => $user
+            'user' => $user,
+            'product' => $this->product,
         ]);
     }
 
-    public
-    function init()
+    public function init()
     {
         return;
     }

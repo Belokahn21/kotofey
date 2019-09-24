@@ -43,7 +43,7 @@ class Billing extends ActiveRecord
     {
         return [
             [['city', 'street', 'home', 'house'], 'string'],
-            [['user_id','phone'], 'integer'],
+            [['user_id'], 'integer'],
         ];
     }
 
@@ -55,7 +55,6 @@ class Billing extends ActiveRecord
             'street' => 'Улица',
             'home' => 'Дом',
             'house' => 'Квартира',
-            'phone' => 'Телефон',
         ];
     }
 

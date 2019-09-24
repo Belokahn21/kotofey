@@ -46,12 +46,12 @@ Modal::begin([
     <div class="profile">
         <ul class="profile-menu">
             <li class="profile-menu__item">
-                <h2 class="profile-menu__item__title">Профиль <i class="fas fa-user-cog"></i></h2>
+                <h2 class="profile-menu__item__title">Профиль <i class="fas fa-user-cog" data-toggle='modal', data-target='#edit-profile'></i></h2>
                 <ul class="user-info">
                     <li class="user-info__item"><?= $profile->first_name ?> <?= $profile->name ?></li>
                     <li class="user-info__item">Дата регистрации: <?=date("d.m.Y", $profile->created_at);?></li>
                     <li class="user-info__item"><?=$profile->email;?></li>
-                    <li class="user-info__item"><?=$profile->billing->phone;?></li>
+                    <li class="user-info__item"><span class="phone_mask"><?=$profile->phone;?></span></li>
                 </ul>
                 <ul class="user-info">
                     <li class="user-info__item">Город <?=$profile->billing->city;?>, ул. <?=$profile->billing->street;?>, д. <?=$profile->billing->home;?> кв. <?=$profile->billing->house;?></li>

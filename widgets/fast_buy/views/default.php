@@ -12,17 +12,22 @@ use app\models\tool\Policy;
 /* @var $billing \app\models\entity\user\Billing */
 /* @var $delivery array */
 /* @var $payments array */
+/* @var $product \app\models\entity\Product */
 ?>
 <? Modal::begin([
     'header' => '<h2>Быстрая покупка</h2>',
     'toggleButton' => ['label' => 'Купить в 1 клик', 'class' => 'detail-product__buy'],
 ]); ?>
-
-<ul>
-
-</ul>
-
 <?php $form = ActiveForm::begin(); ?>
+
+    <div class="fast_buy_detail_product">
+        <div class="fast_buy_detail_product__image-wrap">
+            <img class="fast_buy_detail_product__image" src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>" title="<?php echo $product->name; ?>">
+        </div>
+        <div class="fast_buy_detail_product__title"><?php echo $product->name; ?></div>
+    </div>
+
+    <hr/>
 
 <?php if (Yii::$app->user->isGuest): ?>
     <?php include_once "_form.php"; ?>

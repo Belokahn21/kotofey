@@ -318,10 +318,6 @@ class SiteController extends Controller
                                 $robokassa->config->setDescription("Оплата товара");
                                 $robokassa->config->setSum($order->cash());
 
-//                                $robokassa = new Robokassa();
-//                                $robokassa->invID = $order->id;
-//                                $robokassa->sum = $order->cash();
-
                                 $basket->clear();
                                 Promo::clear();
 

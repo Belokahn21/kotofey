@@ -15,12 +15,7 @@ use app\models\entity\Category;
 $this->title = Title::showTitle("Товары");
 $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['/catalog/']];
 if ($category) {
-
     $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
-//    foreach ($category->navChain() as $item) {
-//        $this->params['breadcrumbs'][] = ['label' => $item->name, 'url' => ['/catalog/' . $item->slug . "/"]];
-//    }
-
     $this->title = Title::showTitle($category->name);
 }
 ?>
@@ -30,7 +25,10 @@ if ($category) {
         <? foreach ($products as $product): ?>
             <li class="catalog-list__item">
                 <a href="<?= $product->getDetail(); ?>">
-                    <img src="<?= $product->image; ?>" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
+                    <div class="catalog-list__item-image-wrap">
+                        <img class="catalog-list__item-image" src="<?= $product->image; ?>" title="<?= $product->detail; ?>"
+                             alt="<?= $product->detail; ?>">
+                    </div>
                     <h2 class="catalog-list__item-title"><?= $product->name; ?></h2>
                     <div class="catalog-list__item-category"><?= Category::findOne($product->category)->name; ?></div>
                     <div class="catalog-list__item-price"><?= Price::format($product->price); ?> <?= (new Currency())->show(); ?></div>

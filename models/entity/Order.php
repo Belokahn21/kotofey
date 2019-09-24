@@ -195,15 +195,15 @@ class Order extends ActiveRecord
 
     public function adminNotify()
     {
-        $message = sprintf("На сайте eventhorizont новый заказ! Сумма заказа: %sр. Подробнее по ссылке: https://eventhorizont.ru/admin/order/%s/",
+        $message = sprintf("На сайте " . $_SERVER['SERVER_NAME'] . " новый заказ! Сумма заказа: %sр. Подробнее по ссылке: https://" . $_SERVER['SERVER_NAME'] . "/admin/order/%s/",
             Price::format($this->cash()), $this->id);
         (new VKMethods())->sendUserMessage("111815168", $message);
 
         \Yii::$app->mailer->compose()
             ->setFrom(\Yii::$app->params['email']['infoEmail'])
             ->setTo('popugau@gmail.com')
-            ->setSubject('Новый заказ на eventhorizont.ru')
-            ->setHtmlBody(sprintf('Приятные новости! На сайте новый заказ на сумму %sр. Подробнее <a href="https://eventhorizont.ru/admin/order/%s/">по ссылке</a>',
+            ->setSubject('Новый заказ на ' . $_SERVER['SERVER_NAME'])
+            ->setHtmlBody(sprintf('Приятные новости! На сайте новый заказ на сумму %sр. Подробнее <a href="https://' . $_SERVER["SERVER_NAME"] . '/admin/order/%s/">по ссылке</a>',
                 Price::format($this->cash()), $this->id))
             ->send();
     }
