@@ -4,12 +4,10 @@
 /* @var $products \app\models\entity\Product */
 /* @var $category \app\models\entity\Category */
 
-
-/* @var (new Currency) Currency */
-
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
+use yii\widgets\ActiveForm;
 use app\models\entity\Category;
 
 $this->title = Title::showTitle("Товары");
@@ -20,6 +18,13 @@ if ($category) {
 }
 ?>
 <div class="catalog filtred">
+    <div class="filter">
+        <?php $model = new \app\models\forms\CatalogFilter();?>
+        <?php $form = ActiveForm::begin() ?>
+        <?php echo $form->field($model, 'price_from');?>
+        <?php echo $form->field($model, 'price_to');?>
+        <?php ActiveForm::end() ?>
+    </div>
     <ul class="catalog-list">
         <? /* @var $product \app\models\entity\Product */ ?>
         <? foreach ($products as $product): ?>
@@ -36,10 +41,7 @@ if ($category) {
             </li>
         <? endforeach; ?>
     </ul>
-
-    <div class="clearfix"></div>
 </div>
-<div class="clearfix"></div>
 
 <?= \yii\widgets\LinkPager::widget([
     'pagination' => $pagerItems,
