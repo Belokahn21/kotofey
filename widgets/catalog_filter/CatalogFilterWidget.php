@@ -4,8 +4,10 @@ namespace app\widgets\catalog_filter;
 
 
 use app\models\entity\InformersValues;
+use app\models\entity\ProductPropertiesValues;
 use app\models\forms\CatalogFilter;
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
 
 class CatalogFilterWidget extends Widget
 {
@@ -13,12 +15,14 @@ class CatalogFilterWidget extends Widget
 
     public function run()
     {
-        $catalogFilter = new CatalogFilter();
+        $filterModel = new CatalogFilter();
         $listCompany = InformersValues::find()->where(['informer_id' => '1'])->all();
-        $listType = InformersValues::find()->where(['informer_id' => '2'])->all();
+        
+        $listType = InformersValues::find()->where(['informer_id' => '2']);
+        $listType = $listType->all();
 
         return $this->render($this->template, [
-            'catalogFilter' => $catalogFilter,
+            'filterModel' => $filterModel,
             'listType' => $listType,
             'listCompany' => $listCompany,
         ]);
