@@ -19,6 +19,7 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportMessage;
 use app\models\entity\support\Tickets;
 use app\models\entity\user\Billing;
+use app\models\forms\CatalogFilter;
 use app\models\tool\Debug;
 use app\models\tool\payments\Robokassa;
 use app\models\tool\seo\Attributes;
@@ -151,14 +152,19 @@ class SiteController extends Controller
 
     public function actionCatalog($id = null)
     {
-        $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['active' => 1]);
+        $filterModel = new CatalogFilter();
+        $category = Category::findBySlug($id);
+        if ($id) {
+            $query = Product::find()->orderBy(['created_at' => SORT_DESC])->where(['category' => $category->id])->andWhere(['active' => 1]);
+        } else {
+            $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['active' => 1]);
+        }
+
+        $filterModel->applyFilter($query);
         $countQuery = clone $query;
         $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 12]);
         $pagerItems->pageSizeParam = false;
         $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
-
-
-        $category = Category::findBySlug($id);
 
         if (!empty($category->seo_keywords)) {
             $keywords = $category->seo_keywords;
@@ -191,21 +197,11 @@ class SiteController extends Controller
         Attributes::metaKeywords($keywords);
         Attributes::canonical($canonical);
 
-        if ($id) {
-//            $products = Product::find()->where(['category' => $category->id])->andWhere(['active' => 1])->orderBy(['created_at' => SORT_DESC])->all();
-
-            $query = Product::find()->where(['category' => $category->id])->andWhere(['active' => 1])->orderBy(['created_at' => SORT_DESC]);
-            $countQuery = clone $query;
-            $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 12]);
-            $pagerItems->pageSizeParam = false;
-            $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
-        }
 
         return $this->render('catalog', [
             'pagerItems' => $pagerItems,
             'products' => $products,
             'category' => $category,
-            'id' => $id,
         ]);
     }
 

@@ -447,6 +447,10 @@ textarea {
     .support-categories__list_element a:hover {
       color: #ff1a4a; }
 
+.filter {
+  padding: 1%;
+  width: 15%; }
+
 .catalog {
   width: 100%;
   display: flex;
