@@ -46,7 +46,7 @@ class CatalogFilter extends Model
      */
     public function applyFilter(&$query)
     {
-        if (\Yii::$app->request->isPjax) {
+        if (\Yii::$app->request->isPost) {
             if ($this->load(\Yii::$app->request->post())) {
 
                 $ids = array();

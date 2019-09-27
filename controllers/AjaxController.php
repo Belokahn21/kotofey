@@ -4,11 +4,15 @@ namespace app\controllers;
 
 use app\models\entity\Basket;
 use app\models\entity\Favorite;
+use app\models\entity\InformersValues;
+use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
+use app\models\tool\Debug;
 use app\models\tool\delivery\calc\CalculateDelllin;
 use app\models\tool\Price;
 use Dadata\Client;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -214,5 +218,29 @@ class AjaxController extends Controller
         return Json::encode([
             'result' => $result
         ]);
+    }
+
+    public function actionLoadtype()
+    {
+        $companyId = $_POST['company'];
+
+        // приходит id производителя. нужно найти товары, у которых есть этот производитель
+        $properties = ProductPropertiesValues::find()->where(['value' => $companyId])->all();
+
+        //товары определенного производителя
+        $productIds = ArrayHelper::getColumn($properties, 'product_id');
+
+        // теперь надо выбрать значения свойств, где есть
+        $listTypes = InformersValues::find()->where(['informer_id' => 2])->all();
+        $query = ProductPropertiesValues::find()->where(['product_id' => $productIds])->andWhere([
+            'value' => ArrayHelper::getColumn($listTypes, 'id')
+        ])->all();
+
+        $ids = InformersValues::findAll(['id' => ArrayHelper::getColumn($query, 'value')]);
+
+        return $this->renderPartial('listtype', [
+            'items' => $ids
+        ]);
+
     }
 }
