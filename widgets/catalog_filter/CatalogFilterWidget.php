@@ -16,7 +16,7 @@ class CatalogFilterWidget extends Widget
     public function run()
     {
         $filterModel = new CatalogFilter();
-        if (\Yii::$app->request->isPjax) {
+        if (\Yii::$app->request->isPost) {
             $filterModel->load(\Yii::$app->request->post());
         }
 
