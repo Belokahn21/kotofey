@@ -8,7 +8,7 @@ use yii\console\ExitCode;
 
 class CronController extends Controller
 {
-    public function actionIndex()
+    public function actionDumpbase()
     {
         $backup = new Backup();
 

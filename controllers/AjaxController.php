@@ -240,11 +240,8 @@ class AjaxController extends Controller
             'id' => ArrayHelper::getColumn($ids, 'value')
         ])->all();
 
-        Debug::printFile($items);
-
         return $this->renderPartial('listtype', [
             'items' => $items
         ]);
-
     }
 }
