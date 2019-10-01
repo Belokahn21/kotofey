@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use app\models\entity\Basket;
 use app\models\entity\Favorite;
+use app\models\entity\Informers;
 use app\models\entity\InformersValues;
+use app\models\entity\ProductProperties;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
 use app\models\tool\Debug;
@@ -223,23 +225,25 @@ class AjaxController extends Controller
     public function actionLoadtype()
     {
         $companyId = $_POST['company'];
-
-        // приходит id производителя. нужно найти товары, у которых есть этот производитель
-        $properties = ProductPropertiesValues::find()->where(['value' => $companyId])->all();
-
-        //товары определенного производителя
-        $productIds = ArrayHelper::getColumn($properties, 'product_id');
-
-        // теперь надо выбрать значения свойств, где есть
-        $listTypes = InformersValues::find()->where(['informer_id' => 2])->all();
-        $query = ProductPropertiesValues::find()->where(['product_id' => $productIds])->andWhere([
-            'value' => ArrayHelper::getColumn($listTypes, 'id')
+        $getIds = ProductPropertiesValues::find()->where([
+            'value' => $companyId,
+            'property_id' => 1
         ])->all();
 
-        $ids = InformersValues::findAll(['id' => ArrayHelper::getColumn($query, 'value')]);
+        $ids = ProductPropertiesValues::find()->where([
+            'property_id' => 3,
+            'product_id' => ArrayHelper::getColumn($getIds, 'product_id')
+        ])->all();
+
+        $items = InformersValues::find()->where([
+            'informer_id' => 2,
+            'id' => ArrayHelper::getColumn($ids, 'value')
+        ])->all();
+
+        Debug::printFile($items);
 
         return $this->renderPartial('listtype', [
-            'items' => $ids
+            'items' => $items
         ]);
 
     }
