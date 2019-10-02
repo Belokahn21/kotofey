@@ -222,26 +222,41 @@ class AjaxController extends Controller
         ]);
     }
 
-    public function actionLoadtype()
+    public function actionFilter()
     {
-        $companyId = $_POST['company'];
-        $getIds = ProductPropertiesValues::find()->where([
-            'value' => $companyId,
-            'property_id' => 1
-        ])->all();
 
-        $ids = ProductPropertiesValues::find()->where([
-            'property_id' => 3,
-            'product_id' => ArrayHelper::getColumn($getIds, 'product_id')
-        ])->all();
+        if (!array_key_exists('CatalogFilter', $_POST)) {
+            throw new \Exception('Массив днных не пришёл');
+        }
+        $form = $_POST['CatalogFilter'];
+        $arBankIds = array();
+        $arKeyToPropertyId = array(
+            'company' => 1,
+            'type' => 3,
+            'line' => 4,
+            'taste' => 5,
+        );
 
-        $items = InformersValues::find()->where([
-            'informer_id' => 2,
-            'id' => ArrayHelper::getColumn($ids, 'value')
-        ])->all();
+        foreach ($arKeyToPropertyId as $key => $id) {
 
-        return $this->renderPartial('listtype', [
-            'items' => $items
-        ]);
+            if (array_key_exists($key, $form) && !empty($form[$key])) {
+
+                $query = ProductPropertiesValues::find()->where([
+                    'value' => $form[$key],
+                    'property_id' => $id
+                ])->select(['product_id'])->all();
+
+                $arListIds = ArrayHelper::getColumn($query, 'product_id');
+
+
+                if (count($arBankIds) > 0) {
+                    $arBankIds = array_intersect($arListIds, $arBankIds);
+                } else {
+                    $arBankIds = $arListIds;
+                }
+
+                Debug::printFile($arBankIds, true);
+            }
+        }
     }
 }
