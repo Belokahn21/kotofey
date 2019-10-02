@@ -7,6 +7,18 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+
+/**
+ * Informers model
+ *
+ * @property integer $id
+ * @property string $name
+ * @property string $description
+ * @property string $slug
+ * @property integer $sort
+ * @property integer $created_at
+ * @property integer $updated_at
+ */
 class Informers extends ActiveRecord
 {
     public function behaviors()

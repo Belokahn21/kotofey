@@ -10,10 +10,11 @@ use yii\widgets\Pjax;
 /* @var $filterModel CatalogFilter */
 /* @var $listCompany InformersValues[] */
 /* @var $listType InformersValues[] */
+/* @var $listLines InformersValues[] */
+/* @var $listTaste InformersValues[] */
 
 ?>
 <div class="filter">
-    <?php // Pjax::begin(); ?>
 
     <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true]]); ?>
     <div style="display: flex; flex-direction: row;">
@@ -33,8 +34,13 @@ use yii\widgets\Pjax;
     <?php echo $form->field($filterModel, 'type')->dropDownList(ArrayHelper::map($listType, 'id', 'value'),
         ['prompt' => 'Тип корма', 'id' => 'id_list_type']); ?>
 
+    <?php echo $form->field($filterModel, 'line')->dropDownList(ArrayHelper::map($listLines, 'id', 'value'),
+        ['prompt' => 'Линейка', 'id' => 'id_list_line']); ?>
+
+    <?php echo $form->field($filterModel, 'taste')->dropDownList(ArrayHelper::map($listTaste, 'id', 'value'),
+        ['prompt' => 'Вкус', 'id' => 'id_list_taste']); ?>
+
     <?= Html::submitButton('Фильтр', ['class' => 'btn-main']); ?>
     <?php ActiveForm::end() ?>
 
-    <?php // Pjax::end(); ?>
 </div>

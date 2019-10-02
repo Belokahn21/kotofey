@@ -7,6 +7,14 @@ use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+/**
+ * InformersValues model
+ *
+ * @property integer $id
+ * @property integer $informer_id
+ * @property string $value
+ * @property string $description
+ */
 class InformersValues extends ActiveRecord
 {
     public function rules()
