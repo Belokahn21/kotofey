@@ -255,8 +255,21 @@ class AjaxController extends Controller
                     $arBankIds = $arListIds;
                 }
 
-                Debug::printFile($arBankIds, true);
             }
         }
+
+
+        $info = InformersValues::find()->where([
+            'informer_id' => 2,
+            'id' => ArrayHelper::getColumn(ProductPropertiesValues::find()->where([
+                'product_id' => $arBankIds,
+                'property_id' => 3
+            ])->all(), 'value')
+        ])->all();
+
+        return Json::encode([
+                'type' => $info,
+            ]
+        );
     }
 }
