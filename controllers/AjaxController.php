@@ -13,6 +13,7 @@ use app\models\tool\Debug;
 use app\models\tool\delivery\calc\CalculateDelllin;
 use app\models\tool\Price;
 use Dadata\Client;
+use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -229,7 +230,7 @@ class AjaxController extends Controller
             throw new \Exception('Массив днных не пришёл');
         }
         $form = $_POST['CatalogFilter'];
-        $arBankIds = array();
+        $ar_bank_products_ids = array();
         $arKeyToPropertyId = array(
             'company' => 1,
             'type' => 3,
@@ -249,27 +250,18 @@ class AjaxController extends Controller
                 $arListIds = ArrayHelper::getColumn($query, 'product_id');
 
 
-                if (count($arBankIds) > 0) {
-                    $arBankIds = array_intersect($arListIds, $arBankIds);
+                if (count($ar_bank_products_ids) > 0) {
+                    $ar_bank_products_ids = array_intersect($arListIds, $ar_bank_products_ids);
                 } else {
-                    $arBankIds = $arListIds;
+                    $ar_bank_products_ids = $arListIds;
                 }
 
             }
         }
 
 
-        $info = InformersValues::find()->where([
-            'informer_id' => 2,
-            'id' => ArrayHelper::getColumn(ProductPropertiesValues::find()->where([
-                'product_id' => $arBankIds,
-                'property_id' => 3
-            ])->all(), 'value')
-        ])->all();
-
         return Json::encode([
-                'type' => $info,
-            ]
-        );
+//            'company' => $selectCompany
+        ]);
     }
 }
