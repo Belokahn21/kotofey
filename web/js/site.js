@@ -113,6 +113,9 @@ $(document).ready(function () {
 
     $('.type-order-list__item').click(function () {
         var $this = $(this);
+        var cookie_value = $this.data('cookie');
+
+        $.cookie('order', cookie_value);
 
         $('.type-order-list__item').each(function () {
             $(this).removeClass('active')

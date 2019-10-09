@@ -10,6 +10,11 @@ namespace app\models\tool;
 
 class Policy
 {
+    public static function getInstance()
+    {
+        return new Policy();
+    }
+
     public function getPath()
     {
         return "/web/policy.docx";

@@ -53,6 +53,14 @@ class CatalogFilter extends Model
         if (\Yii::$app->request->isGet) {
             if ($this->load(\Yii::$app->request->get())) {
 
+                $list_property_ids = array();
+                $list_attribute_to_property_id = array(
+                    'company' => 1,
+                    'type' => 3,
+                    'line' => 4,
+                    'taste' => 5,
+                );
+
                 // set price
                 if (!empty($this->price_from)) {
                     $query->where(['>=', 'price', $this->price_from]);
@@ -62,6 +70,27 @@ class CatalogFilter extends Model
                     $query->andWhere(['<=', 'price', $this->price_to]);
                 }
 
+                // properties
+                $values = ProductPropertiesValues::find();
+                foreach ($this->getAttributes() as $attributeKey => $hisValue) {
+
+                    if (!empty($hisValue) && array_key_exists($attributeKey, $list_attribute_to_property_id)) {
+                        $values->orWhere([
+                            'property_id' => $list_attribute_to_property_id[$attributeKey],
+                            'value' => $hisValue
+                        ]);
+                    }
+                }
+                Debug::printFile($values->prepare(\Yii::$app->db->queryBuilder)->createCommand()->rawSql);
+                $values = $values->all();
+                $list_property_ids = array_merge($list_property_ids, ArrayHelper::getColumn($values, 'product_id'));
+                Debug::printFile($list_property_ids);
+
+                if (is_array($list_property_ids)) {
+                    $query->andWhere([
+                        'id' => $list_property_ids
+                    ]);
+                }
             }
         }
     }

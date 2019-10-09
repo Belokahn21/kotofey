@@ -1,9 +1,4 @@
 <?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 18:20
- */
 
 namespace app\models\entity;
 
@@ -21,6 +16,11 @@ class Basket
 {
     public $product;
     public $count;
+
+    public static function getInstance()
+    {
+        return new Basket();
+    }
 
     public function add()
     {

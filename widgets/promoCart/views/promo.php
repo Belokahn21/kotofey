@@ -9,13 +9,13 @@ use app\models\entity\Basket;
 
 <div class="promo-cart-warp">
 
-    <? Pjax::begin(); ?>
+    <?php Pjax::begin(); ?>
 
-    <? /* @var $promo  \app\models\entity\Promo */ ?>
-    <? if ($promo): ?>
+    <?php /* @var $promo  \app\models\entity\Promo */ ?>
+    <?php if ($promo): ?>
         <div class="your-title-promo">
             Ваш промокод: <span class="your-title-promo-code"><?= $promo->code; ?></span>.
-            Скидка <?= $promo->discount; ?>%
+            Скидка <?php echo $promo->discount; ?>%
         </div>
     <? else: ?>
         <? $form = ActiveForm::begin([
@@ -23,10 +23,10 @@ use app\models\entity\Basket;
                 'data-pjax' => true,
             ]
         ]); ?>
-        <?= $form->field($model, 'code') ?>
-        <? ActiveForm::end() ?>
-    <? endif; ?>
+        <?php echo $form->field($model, 'code') ?>
+        <?php ActiveForm::end() ?>
+    <?php endif; ?>
 
-    <? Pjax::end(); ?>
+    <?php Pjax::end(); ?>
 
 </div>
