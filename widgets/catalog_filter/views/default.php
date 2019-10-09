@@ -16,7 +16,7 @@ use yii\widgets\Pjax;
 ?>
 <div class="filter">
 
-    <?php $form = ActiveForm::begin(['options' => ['data-pjax' => true], 'id' => 'filter-form-id']); ?>
+    <?php $form = ActiveForm::begin(['options' => [/*'data-pjax' => true*/], 'id' => 'filter-form-id', 'method' => 'get']); ?>
     <div style="display: flex; flex-direction: row;">
         <?php echo $form->field($filterModel, 'price_from'); ?>
         <?php echo $form->field($filterModel, 'price_to'); ?>

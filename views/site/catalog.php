@@ -36,19 +36,18 @@ if ($category) {
             <li class="catalog-list__item">
                 <a href="<?php echo $product->getDetail(); ?>">
                     <div class="catalog-list__item-image-wrap">
-                        <img class="catalog-list__item-image" src="<?php echo $product->image; ?>" title="<?php echo $product->detail; ?>" alt="<?php echo $product->detail; ?>">
+                        <img class="catalog-list__item-image" src="<?php echo $product->image; ?>"
+                             title="<?php echo $product->detail; ?>" alt="<?php echo $product->detail; ?>">
                     </div>
                     <h2 class="catalog-list__item-title"><?php echo $product->name; ?></h2>
                     <div class="catalog-list__item-category"><?php echo Category::findOne($product->category)->name; ?></div>
-                    <div class="catalog-list__item-price"><?php echo Price::format($product->price); ?> <?php echo (new Currency())->show(); ?></div>
+                    <div class="catalog-list__item-price"><?php echo Price::format($product->price); ?><?php echo (new Currency())->show(); ?></div>
                 </a>
             </li>
         <?php endforeach; ?>
     </ul>
 </div>
 
-
 <?php echo LinkPager::widget([
     'pagination' => $pagerItems,
 ]); ?>
-

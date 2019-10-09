@@ -17,8 +17,8 @@ class CatalogFilterWidget extends Widget
     public function run()
     {
         $filterModel = new CatalogFilter();
-        if (\Yii::$app->request->isPost) {
-            $filterModel->load(\Yii::$app->request->post());
+        if (\Yii::$app->request->isGet) {
+            $filterModel->load(\Yii::$app->request->get());
         }
 
         $listCompany = InformersValues::find()->where(['informer_id' => '1'])->all();

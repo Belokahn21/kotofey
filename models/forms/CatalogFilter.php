@@ -50,21 +50,8 @@ class CatalogFilter extends Model
      */
     public function applyFilter(&$query)
     {
-        if (\Yii::$app->request->isPost) {
-            if ($this->load(\Yii::$app->request->post())) {
-
-                $ids = array();
-                if($this->company){
-                    $productsWithCompany = ProductPropertiesValues::find()->where(['property_id'=>'1','value' => $this->company])->select('product_id')->all();
-                    $ids = ArrayHelper::getColumn($productsWithCompany, 'product_id');
-                }
-
-
-                if($this->type){
-                    $productsWithType = ProductPropertiesValues::find()->where(['property_id'=>'3','value' => $this->type, 'product_id'=>$ids])->select('product_id')->all();
-                    $ids = ArrayHelper::getColumn($productsWithType, 'product_id');
-                }
-
+        if (\Yii::$app->request->isGet) {
+            if ($this->load(\Yii::$app->request->get())) {
 
                 // set price
                 if (!empty($this->price_from)) {
@@ -74,9 +61,6 @@ class CatalogFilter extends Model
                 if (!empty($this->price_to)) {
                     $query->andWhere(['<=', 'price', $this->price_to]);
                 }
-
-
-                $query->andWhere(['id' => $ids]);
 
             }
         }

@@ -147,9 +147,38 @@ $(document).ready(function () {
         this.find("input, select").each(function () {
 
             $(this).change(function () {
-                $.post("/ajax/filter/", $this.serialize(), function (data) {
-                    console.log(data);
-                }, "JSON");
+
+                $.ajax({
+                    'url': location.href + '?' + $this.serialize(),
+                    'method': 'get',
+                    beforeSend: function () {
+                        $('.catalog-list').html($('<img>', {
+                            src: '/web/upload/images/loading.gif',
+                            css: {
+                                width: ' 300px',
+                                height: ' 300px',
+                                'align-self': 'center',
+                                'align-content': 'center'
+                            }
+                        }));
+                    },
+                    success: function (data) {
+
+                        setTimeout(function () {
+
+                            var $page = $(data);
+                            $('.catalog-list').html("");
+                            $page.find('.catalog-list').find('li').each(function () {
+                                $('.catalog-list').append($(this));
+                            });
+                        }, 2500);
+
+                    }
+                });
+
+                // $.post("/ajax/filter/", $this.serialize(), function (data) {
+                //     console.log(data);
+                // }, "JSON");
             });
         });
 

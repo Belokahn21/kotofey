@@ -33,10 +33,10 @@ class Backup
     public function checkLimitSize()
     {
         if (Converter::mbyteToKbyte($this->getDirSize()) > SiteSettings::getValueByCode('backup_catalog_size')) {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     public function getSizeDirectoryDatabaseDumps()
