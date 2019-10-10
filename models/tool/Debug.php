@@ -26,6 +26,7 @@ class Debug
         $filePath = $_SERVER['DOCUMENT_ROOT'] . "/web/debug.html";
 
         if (!empty($target)) {
+            $target .= $target . "\n";
             $info = print_r($target, true);
 
             if ($clear === true) {

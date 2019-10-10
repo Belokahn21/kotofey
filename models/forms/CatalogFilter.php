@@ -71,11 +71,11 @@ class CatalogFilter extends Model
                 }
 
                 // properties
-                $values = ProductPropertiesValues::find();
+                $values = ProductPropertiesValues::find()->select('product_id');
                 foreach ($this->getAttributes() as $attributeKey => $hisValue) {
 
                     if (!empty($hisValue) && array_key_exists($attributeKey, $list_attribute_to_property_id)) {
-                        $values->orWhere([
+                        $values->andWhere([
                             'property_id' => $list_attribute_to_property_id[$attributeKey],
                             'value' => $hisValue
                         ]);
