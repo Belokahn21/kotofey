@@ -22,6 +22,10 @@
 
 /* mobile */
 @media screen and (max-width: 768px) {
+    .show-catalog-filter{display: block;}
+    .filter{width: 100%; display: none;}
+        .filter button{width: 100%;}
+    .footer-socials__item:last-child{width: 100%; text-align: center;}
 }
 
 /* iPad in portrait & landscape */

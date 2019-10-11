@@ -57,5 +57,5 @@ $this->title = Title::showTitle("Главная страница");
             </div>
         </div>
     </div>
-    <?= ToDoWidget::widget(); ?>
+    <?php echo ToDoWidget::widget(); ?>
 </section>

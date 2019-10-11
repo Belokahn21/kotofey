@@ -8,6 +8,8 @@ textarea{resize: vertical;}
 .btn-main{color: white; background: #212529; font-size: 15px!important; padding: 0.1% 0.5%!important; border: 1px black solid; -webkit-border-radius: 0.3em; -moz-border-radius: 0.3em; border-radius: 0.3em;}
     .btn-main:hover{background: #0f475a;}
 
+.show-dashboard{display: none;background: #0b0b0b; color: white; padding: 0.25em 0.5em; border-radius: 0.3em;}
+
 .btn-back{color: white!important; background: deepskyblue; padding: 0.1% 0.5%; border: 0; margin: 1% 0.2%; display: inline-block; font-size: 18px; border-radius: 0.1em; text-decoration: none!important; }
     .btn-back:hover{background: #2e8fcb;}
 
@@ -50,18 +52,18 @@ textarea{resize: vertical;}
     .content .title{padding: 0; margin: 0;}
 
 .site-form{width: 500px; background: #ddd;-webkit-border-radius: 0.3em;-moz-border-radius: 0.3em;border-radius: 0.3em;padding: 1%;}
-
-.product-form{width: 60%; float: left;}
-    .product-form__price{float: left; width: 32%;}
-        .product-form__price div{padding: 0; margin: 0;}
-    .product-form__purchase{float: left; width: 32%; margin: 0 2%;}
-    .product-form__count{float: right; width: 32%;}
-.tabs-container{width: 100%; padding: 0; margin: 1% 0;}
-    ul.tabs{margin: 0;padding: 0;list-style: none;}
-        ul.tabs li{background: none;color: #222;display: inline-block;padding: 10px 15px;cursor: pointer;}
-        ul.tabs li.current{background: #ededed;color: #222;}
-    .tab-content{display: none;background: #ededed;padding: 15px;}
-    .tab-content.current{display: inherit;}
+.product-wrap{display: flex; flex-direction: row; justify-content: space-around; flex-wrap: wrap;}
+    .product-form{width: 60%; float: left;}
+        .product-form__price{float: left; width: 32%;}
+            .product-form__price div{padding: 0; margin: 0;}
+        .product-form__purchase{float: left; width: 32%; margin: 0 2%;}
+        .product-form__count{float: right; width: 32%;}
+    .tabs-container{width: 100%; padding: 0; margin: 1% 0;}
+        ul.tabs{margin: 0;padding: 0;list-style: none;}
+            ul.tabs li{background: none;color: #222;display: inline-block;padding: 10px 15px;cursor: pointer;}
+            ul.tabs li.current{background: #ededed;color: #222;}
+        .tab-content{display: none;background: #ededed;padding: 15px;}
+        .tab-content.current{display: inherit;}
 
 .set-price{}
 
@@ -97,10 +99,11 @@ textarea{resize: vertical;}
     .todo-btn-new{background: none; border: 0; font-size: 18px; padding: 0; margin: 0;}
     .todo__title{margin: 0; padding: 0;}
         .todo-items{width: 100%;}
-            .todo-item{}
+            .todo-item{width: 100%;}
             .todo-item td{padding: 0.5%;}
             .todo-item:nth-child(2n){background: #ddd;}
-            .todo-item__close{color: red; cursor: pointer;}
+                .todo-item__name{width: 55%;}
+                .todo-item__close{color: red; cursor: pointer;}
 
 .new-order-block{margin: 0 0 2% 0;}
     .new-order-block h1.title{display: inline-block;}
@@ -123,7 +126,7 @@ textarea{resize: vertical;}
             .list-childs__item{}
 
 .site-settings{width: 100%; margin: 1% 0;}
-    .site-settings-wrap{width: 100%; display: flex; flex-direction: row; }
+    .site-settings-wrap{width: 100%; display: flex; flex-direction: row; justify-content: stretch; flex-wrap: wrap;}
         .site-settings-form{width: 20%; padding: 1%;}
         .site-settings-list-wrap{width: 80%; padding: 1% 0;}
             .site-settings-list{list-style: none; padding: 0; margin: 0; }
@@ -140,3 +143,118 @@ textarea{resize: vertical;}
 .order-info{}
     .order-info-list{list-style: none; padding: 0; margin: 0;}
         .order-info-list-item{margin: 0.5em 0;}
+
+/* monitors and laptops v2*/
+@media screen and (min-width: 1240px) {
+}
+
+/* monitors and laptops */
+@media screen and (min-width: 1240px) {
+}
+
+/* tablet */
+@media screen and (min-width: 1024px) and (max-width: 1240px) {
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+}
+
+/* mobile */
+@media screen and (max-width: 768px) {
+    /*body{background: green;}*/
+
+    .product-form{width: 100%;}
+    .product-preview{width: 100%;}
+
+    .dashboard-left-sidebar{width: 0;}
+        .show-dashboard{display: block;}
+        .dashboard-left-sidebar__content{display: none;}
+
+    .page-content{width: 100%;}
+        .dashboard-left-sidebar__content{width: 100%;}
+
+    .desktop-items{justify-content: stretch; flex-wrap: wrap;}
+        .desktop-item__logo{width: 40px; height: 40px; line-height: 40px; font-size: 18px;}
+        .desktop-item__title{font-size: 18px;}
+        .desktop-item{width: 49%; box-sizing: border-box!important;}
+            .desktop-item__resume{height: 100%; font-size: 12px;}
+
+
+    .site-settings-form{width: 100%;}
+    .site-settings-list-wrap{width: 100%;}
+}
+
+/* iPad in portrait & landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
+}
+
+/* iPad in landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) {
+}
+
+/* iPad in portrait */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) {
+}
+
+/* Retina iPad in portrait & landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* Retina iPad in landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape)
+and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* Retina iPad in portrait */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 2) {
+}
+
+/* iPad 1 & 2 in portrait & landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+}
+
+/* iPad 1 & 2 in landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+}
+
+/* iPad 1 & 2 in portrait */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+}
+
+/* iPad mini in portrait & landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (-webkit-min-device-pixel-ratio: 1) {
+}
+
+/* iPad mini in landscape */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1) {
+}
+
+/* iPad mini in portrait */
+@media only screen and (min-device-width: 768px) and (max-device-width: 1024px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 1) {
+}
+
+/* iPhone 5 in portrait & landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+}
+
+/* iPhone 5 in landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: landscape) {
+}
+
+/* iPhone 5 in portrait */
+@media only screen and (min-device-width: 320px) and (max-device-width: 568px) and (orientation: portrait) {
+
+}
+
+/* iPhone 2G-4S in portrait & landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+}
+
+/* iPhone 2G-4S in landscape */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: landscape) {
+}
+
+/* iPhone 2G-4S in portrait */
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (orientation: portrait) {
+
+}

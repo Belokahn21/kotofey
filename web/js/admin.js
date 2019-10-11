@@ -52,4 +52,27 @@ $(document).ready(function () {
         window.location = '?type=' + $this.val();
     });
 
+    $('.show-dashboard').click(function () {
+        var $pageContent = $('.page-content'),
+            $dashBoard = $('.dashboard-left-sidebar'),
+            $dashBoardContent = $dashBoard.find('.dashboard-left-sidebar__content'),
+            $this = $(this),
+            isShow;
+
+        isShow = $this.data('show');
+
+        if (isShow == 'true') {
+            $this.data('show', 'false');
+            $pageContent.css('display', 'block');
+            $dashBoard.css('width', '0');
+            $dashBoardContent.css('display', 'none');
+        } else {
+            $this.data('show', 'true');
+            $pageContent.css('display', 'none');
+            $dashBoard.css('width', '100%');
+            $dashBoardContent.css('display', 'block');
+        }
+
+    });
+
 });

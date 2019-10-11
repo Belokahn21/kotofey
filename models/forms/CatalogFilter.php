@@ -95,6 +95,7 @@ class CatalogFilter extends Model
 //                    $values->andWhere(new Expression('`property_id`="2" and CAST(`value` AS INT) > "' . $this->weight_from . '" and CAST(`value` AS INT) < "' . $this->weight_to . '"'));
 //                }
 
+
                 $values->groupBy('product_id');
                 $values->having("count(*) = " . $iter);
 

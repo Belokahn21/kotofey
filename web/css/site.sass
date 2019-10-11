@@ -498,10 +498,27 @@ textarea
   padding: 1%
   width: 25%
 
+.show-catalog-filter
+  display: none
+  width: 100%
+  padding: 1%
+  margin: 1%
+  background: $mainActiveColor
+  color: white
+  font-weight: bold
+  border: 0
+  border-bottom: 5px solid #c21e0a
+  border-radius: 0.3em
+  text-transform: uppercase
+
+.show-catalog-filter.run
+  display: block
+
 .catalog
   width: 100%
   display: flex
   flex-direction: row
+  flex-wrap: wrap
 
 .catalog-list
   width: 100%
@@ -1221,6 +1238,8 @@ textarea
   list-style: none
   display: flex
   flex-direction: row
+  flex-wrap: wrap
+  justify-content: space-around
   width: 100%
 
 .footer-socials__item

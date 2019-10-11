@@ -14,8 +14,8 @@ use yii\widgets\Pjax;
 /* @var $listTaste InformersValues[] */
 
 ?>
+<button class="show-catalog-filter">Показать фильтр</button>
 <div class="filter">
-
     <?php $form = ActiveForm::begin([
         'options' => [/*'data-pjax' => true*/],
         'id' => 'filter-form-id',
@@ -52,7 +52,7 @@ use yii\widgets\Pjax;
             'class' => 'checkbox_list',
         ]); ?>
 
-    <?= Html::submitButton('Фильтр', ['class' => 'btn-main']); ?>
+    <?= Html::submitButton('Применить', ['class' => 'btn-main show-catalog-filter run']); ?>
     <?php ActiveForm::end() ?>
 
 </div>

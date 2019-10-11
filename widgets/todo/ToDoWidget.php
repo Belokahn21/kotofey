@@ -1,9 +1,4 @@
 <?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 0:11
- */
 
 namespace app\widgets\todo;
 
