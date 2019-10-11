@@ -16,7 +16,11 @@ use yii\widgets\Pjax;
 ?>
 <div class="filter">
 
-    <?php $form = ActiveForm::begin(['options' => [/*'data-pjax' => true*/], 'id' => 'filter-form-id', 'method' => 'get']); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [/*'data-pjax' => true*/],
+        'id' => 'filter-form-id',
+        'method' => 'get'
+    ]); ?>
     <div style="display: flex; flex-direction: row;">
         <?php echo $form->field($filterModel, 'price_from'); ?>
         <?php echo $form->field($filterModel, 'price_to'); ?>
@@ -28,20 +32,24 @@ use yii\widgets\Pjax;
     <?php echo $form->field($filterModel, 'company')->checkboxList(ArrayHelper::map($listCompany, 'id', 'value'), [
         'prompt' => 'Производитель',
         'id' => 'id_list_company',
+        'class' => 'checkbox_list',
     ]); ?>
     <?php echo $form->field($filterModel, 'type')->checkboxList(ArrayHelper::map($listType, 'id', 'value'), [
         'prompt' => 'Тип корма',
         'id' => 'id_list_type',
+        'class' => 'checkbox_list',
     ]); ?>
     <?php echo $form->field($filterModel, 'line')->checkboxList(ArrayHelper::map($listLines, 'id', 'value'),
         [
             'prompt' => 'Линейка',
             'id' => 'id_list_line',
+            'class' => 'checkbox_list',
         ]); ?>
     <?php echo $form->field($filterModel, 'taste')->checkboxList(ArrayHelper::map($listTaste, 'id', 'value'),
         [
             'prompt' => 'Вкус',
             'id' => 'id_list_taste',
+            'class' => 'checkbox_list',
         ]); ?>
 
     <?= Html::submitButton('Фильтр', ['class' => 'btn-main']); ?>

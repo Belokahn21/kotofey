@@ -1543,4 +1543,22 @@ textarea {
 .edit-profile__image img {
   width: 100%; }
 
+.checkbox_list {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  flex-wrap: wrap;
+  width: 100%; }
+  .checkbox_list label {
+    width: 50%; }
+    .checkbox_list label input {
+      outline: 1px solid grey; }
+
+.pagination-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 100%; }
+
 /*# sourceMappingURL=site.css.map */

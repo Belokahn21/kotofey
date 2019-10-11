@@ -26,14 +26,13 @@ class Debug
         $filePath = $_SERVER['DOCUMENT_ROOT'] . "/web/debug.html";
 
         if (!empty($target)) {
-            $target .= $target . "\n";
             $info = print_r($target, true);
 
             if ($clear === true) {
                 unlink($filePath);
             }
 
-            file_put_contents($filePath, $info, FILE_APPEND | LOCK_EX);
+            file_put_contents($filePath, $info . "\n", FILE_APPEND | LOCK_EX);
         }
     }
 }

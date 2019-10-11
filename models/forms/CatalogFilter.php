@@ -8,6 +8,7 @@ use app\models\tool\Debug;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
+use yii\db\Expression;
 use yii\helpers\ArrayHelper;
 
 class CatalogFilter extends Model
@@ -72,19 +73,34 @@ class CatalogFilter extends Model
 
                 // properties
                 $values = ProductPropertiesValues::find()->select('product_id');
+                $properties_ids = array();
+                $value_list = array();
+                $iter = 0;
+
                 foreach ($this->getAttributes() as $attributeKey => $hisValue) {
 
                     if (!empty($hisValue) && array_key_exists($attributeKey, $list_attribute_to_property_id)) {
-                        $values->andWhere([
-                            'property_id' => $list_attribute_to_property_id[$attributeKey],
-                            'value' => $hisValue
-                        ]);
+                        $properties_ids[] = $list_attribute_to_property_id[$attributeKey];
+                        $value_list = array_merge($value_list, $hisValue);
+                        $iter++;
                     }
                 }
-                Debug::printFile($values->prepare(\Yii::$app->db->queryBuilder)->createCommand()->rawSql);
+
+                $values->orWhere([
+                    'property_id' => $properties_ids,
+                    'value' => $value_list
+                ]);
+
+//                if (!empty($this->weight_from) or !empty($this->weight_to)) {
+//                    $values->andWhere(new Expression('`property_id`="2" and CAST(`value` AS INT) > "' . $this->weight_from . '" and CAST(`value` AS INT) < "' . $this->weight_to . '"'));
+//                }
+
+                $values->groupBy('product_id');
+                $values->having("count(*) = " . $iter);
+
+//                Debug::printFile($values->prepare(\Yii::$app->db->queryBuilder)->createCommand()->rawSql);
                 $values = $values->all();
                 $list_property_ids = array_merge($list_property_ids, ArrayHelper::getColumn($values, 'product_id'));
-                Debug::printFile($list_property_ids);
 
                 if (is_array($list_property_ids)) {
                     $query->andWhere([

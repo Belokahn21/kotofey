@@ -155,11 +155,14 @@ $(document).ready(function () {
                     'url': location.href + '?' + $this.serialize(),
                     'method': 'get',
                     beforeSend: function () {
+                        $('.pagination-wrap').html("");
+
+
                         $('.catalog-list').html($('<img>', {
                             src: '/web/upload/images/loading.gif',
                             css: {
-                                width: ' 300px',
-                                height: ' 300px',
+                                'width': ' 300px',
+                                'height': ' 300px',
                                 'align-self': 'center',
                                 'align-content': 'center'
                             }
@@ -170,10 +173,14 @@ $(document).ready(function () {
                         setTimeout(function () {
 
                             var $page = $(data);
+
                             $('.catalog-list').html("");
+
                             $page.find('.catalog-list').find('li').each(function () {
                                 $('.catalog-list').append($(this));
                             });
+                            $('.pagination-wrap').html($page.find('.pagination'));
+
                         }, 2500);
 
                     }

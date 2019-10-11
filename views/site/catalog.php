@@ -47,7 +47,9 @@ if ($category) {
         <?php endforeach; ?>
     </ul>
 </div>
+<div class="pagination-wrap">
+    <?php echo LinkPager::widget([
+        'pagination' => $pagerItems,
+    ]); ?>
+</div>
 
-<?php echo LinkPager::widget([
-    'pagination' => $pagerItems,
-]); ?>
