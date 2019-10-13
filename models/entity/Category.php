@@ -165,8 +165,21 @@ class Category extends ActiveRecord
         return $this->items;
     }
 
-//    public function navChain($id = null, $items = array())
-//    {
-//        return $items;
-//    }
+    public $subsections;
+
+    public function subsections($parent_id = null)
+    {
+        if (is_null($parent_id)) {
+            $parent_id = $this->id;
+            $category = Category::findOne($parent_id);
+        } else {
+
+            $category = Category::findOne(['parent' => $parent_id]);
+        }
+        if ($category) {
+            $this->subsections[] = $category;
+            $this->subsections($category->id);
+        }
+        return $this->subsections;
+    }
 }

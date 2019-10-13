@@ -31,6 +31,7 @@ use app\models\tool\vk\VKWeb;
 use app\widgets\notification\Notify;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\entity\Search;
@@ -154,8 +155,13 @@ class SiteController extends Controller
     {
         $filterModel = new CatalogFilter();
         $category = Category::findBySlug($id);
+        if ($category) {
+            $sb = $category->subsections();
+        }
         if ($id) {
-            $query = Product::find()->orderBy(['created_at' => SORT_DESC])->where(['category' => $category->id])->andWhere(['active' => 1]);
+            $query = Product::find()->orderBy(['created_at' => SORT_DESC])->where([
+                'category' => ArrayHelper::getColumn($sb, 'id')
+            ])->andWhere(['active' => 1]);
         } else {
             $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['active' => 1]);
         }
