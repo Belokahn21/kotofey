@@ -111,15 +111,16 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'new_password', 'phone'], 'required', 'message' => 'Поле {attribute} должно быть заполнено', 'except' => self::SCENARIO_USER_UPDATE
-            ],
+            [['email', 'new_password', 'phone'], 'required', 'message' => 'Поле {attribute} должно быть заполнено', 'except' => self::SCENARIO_USER_UPDATE],
+
             [['vk_uid'], 'integer', 'message' => 'Поле {attribute} должно содержать цифры'],
 
             [['first_name', 'name', 'last_name'], 'string'],
 
-            [['sex', 'birthday','phone'], 'string'],
+            [['sex', 'birthday', 'phone'], 'integer'],
 
-            [['email'], 'unique', 'except' => self::SCENARIO_LOGIN, 'message' => 'Данный {attribute} уже используется'],
+            [['email', 'phone'], 'unique', 'except' => self::SCENARIO_LOGIN, 'message' => 'Данный {attribute} уже используется'],
+
             ['email', 'email', 'message' => 'Неккоректный формат электронной почты'],
 
             [['avatarFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],

@@ -41,6 +41,9 @@ class FastBuyWidget extends \yii\base\Widget
                     if ($user->save() === false) {
                         Yii::$app->controller->refresh();
                     }
+                } else {
+                    Notify::setErrorNotify("Ошибка валидации данных!");
+                    return false;
                 }
             }
 
@@ -54,6 +57,9 @@ class FastBuyWidget extends \yii\base\Widget
                 if ($order->save() === false) {
                     Yii::$app->controller->refresh();
                 }
+            } else {
+                Notify::setErrorNotify("Ошибка валидации данных!");
+                return false;
             }
 
 
@@ -64,7 +70,9 @@ class FastBuyWidget extends \yii\base\Widget
 
             if ($order_items->save()) {
                 Notify::setSuccessNotify("Заказ успешно создан!");
-//                Yii::$app->controller->refresh();
+            } else {
+                Notify::setErrorNotify("Ошибка сохранения корзины");
+                return false;
             }
 
         }

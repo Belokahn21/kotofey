@@ -60,28 +60,28 @@ CSS;
         }
     }
 
-    public function clearNotify()
+    public static function clearNotify()
     {
         \Yii::$app->session->removeFlash('notify');
         \Yii::$app->session->removeFlash('notify-text');
     }
 
 
-    public function setSuccessNotify($message)
+    public static function setSuccessNotify($message)
     {
         \Yii::$app->session->setFlash('notify', 'success');
         \Yii::$app->session->setFlash('notify-text', $message);
     }
 
 
-    public function setWarningNotify($message)
+    public static function setWarningNotify($message)
     {
         \Yii::$app->session->setFlash('notify', 'warning');
         \Yii::$app->session->setFlash('notify-text', $message);
     }
 
 
-    public function setErrorNotify($message)
+    public static function setErrorNotify($message)
     {
         \Yii::$app->session->setFlash('notify', 'error');
         \Yii::$app->session->setFlash('notify-text', $message);
