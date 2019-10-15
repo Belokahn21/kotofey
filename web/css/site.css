@@ -36,14 +36,20 @@ textarea {
   font-weight: bold;
   border: 0;
   outline: 0;
-  padding: 1% 1%;
+  padding: 1%;
   cursor: pointer;
   display: inline-block;
-  text-decoration: none !important; }
+  text-decoration: none !important;
+  border-bottom: 5px solid #c21e0a;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  border-radius: 0.3em; }
   .btn-main.grey {
     background: white;
     color: black;
     border: 1px #e2e2e2 solid; }
+  .btn-main:hover {
+    color: #641303; }
 
 .link-main {
   color: #ff1a4a;

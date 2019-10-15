@@ -4,6 +4,7 @@ $mainActiveColor: #ff1a4a
 $mainActiveHoverColor: #e41a46
 $mainColor: #2d0c03
 $mainHoverColor: #641303
+$mainBorderColor: #c21e0a
 
 *
   -webkit-box-sizing: border-box !important
@@ -41,15 +42,22 @@ textarea
   font-weight: bold
   border: 0
   outline: 0
-  padding: 1% 1%
+  padding: 1%
   cursor: pointer
   display: inline-block
   text-decoration: none !important
+  border-bottom: 5px solid $mainBorderColor
+  -webkit-border-radius: 0.3em
+  -moz-border-radius: 0.3em
+  border-radius: 0.3em
 
   &.grey
     background: white
     color: black
     border: 1px #e2e2e2 solid
+
+  &:hover
+    color: $mainHoverColor
 
 .link-main
   color: $mainActiveColor
@@ -507,7 +515,7 @@ textarea
   color: white
   font-weight: bold
   border: 0
-  border-bottom: 5px solid #c21e0a
+  border-bottom: 5px solid $mainBorderColor
   border-radius: 0.3em
   text-transform: uppercase
 

@@ -25,6 +25,7 @@ class AppAsset extends AssetBundle
         'js/basket.js',
         'js/tools.js',
         'js/tabs.js',
+        'js/cookie.js',
         'js/configurator.js',
         'js/jquery.magnific-popup.js',
         'js/owl/owl.carousel.min.js',
