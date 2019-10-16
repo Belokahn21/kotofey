@@ -10,7 +10,7 @@ use yii\helpers\Url;
 ?>
 <? $this->title = Title::showTitle("Статусы заказа"); ?>
 <section>
-    <h1 class="title">Пользователи</h1>
+    <h1 class="title">Статусы заказа</h1>
     <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="tabs-container">
         <ul class="tabs">
@@ -47,7 +47,8 @@ use yii\helpers\Url;
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/catalog/$key"]));
                 },
                 'delete' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
+                    return Html::a('<i class="fas fa-trash-alt"></i>',
+                        Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
                 },
             ]
         ],

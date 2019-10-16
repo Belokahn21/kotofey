@@ -76,6 +76,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                             <li class="panel-menu__item sub"><a href="/admin/payment/">Оплаты</a></li>
                             <li class="panel-menu__item sub"><a href="/admin/selling/">Продажи</a></li>
                             <li class="panel-menu__item sub"><a href="/admin/promo/">Промокоды</a></li>
+                            <li class="panel-menu__item sub"><a href="/admin/provider/">Поставщики</a></li>
                         </ul>
                     </li>
                     <li class="panel-menu__item"><a href="/admin/catalog/"><i class="fas fa-cookie"></i>Товары<span

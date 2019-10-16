@@ -15,6 +15,7 @@ use app\models\entity\PagesCategory;
 use app\models\entity\Payment;
 use app\models\entity\ProductProperties;
 use app\models\entity\Promo;
+use app\models\entity\Providers;
 use app\models\entity\Selling;
 use app\models\entity\SiteSettings;
 use app\models\entity\Stocks;
@@ -38,6 +39,7 @@ use app\models\search\PaymentSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
+use app\models\search\ProvidersSearchForm;
 use app\models\search\StockSearchForm;
 use app\models\search\TicketsSearchForm;
 use app\models\search\UserSearchForm;
@@ -903,6 +905,34 @@ class AdminController extends Controller
             }
         }
         return $this->render('promo', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionProvider($id = null)
+    {
+        if ($id) {
+            $model = Providers::findOne($id);
+            return $this->render('view/provider', [
+                'model' => $model
+            ]);
+        }
+
+        $model = new Providers();
+        $searchModel = new ProvidersSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->save()) {
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('provider', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
