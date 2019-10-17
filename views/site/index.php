@@ -1,6 +1,7 @@
 <?
 /* @var $this yii\web\View */
-
+/* @var $providers \app\models\entity\Providers[] */
+/* @var $news \app\models\entity\News[] */
 use app\models\entity\SiteSettings;
 use app\models\tool\seo\Title;
 use app\widgets\order_custom_product\OrderCustomProduct;
@@ -39,7 +40,12 @@ $this->title = Title::showTitle("Главная страница");
 
 <div class="test">
     <div class="index_about">
-
+        <h2>Наши поставщики</h2>
+        <ul>
+		    <?php foreach ($providers as $provider): ?>
+                <li><?php echo $provider->name; ?></li>
+		    <?php endforeach; ?>
+        </ul>
     </div>
 
     <div class="me-inst">
@@ -51,6 +57,11 @@ $this->title = Title::showTitle("Главная страница");
     </div>
 
     <div class="index-search">
-        <?//= OrderCustomProduct::widget(); ?>
+        <h2>Новости</h2>
+        <ul>
+		    <?php foreach ($news as $new): ?>
+                <li><?php echo $new->name; ?></li>
+		    <?php endforeach; ?>
+        </ul>
     </div>
 </div>

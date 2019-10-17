@@ -27,7 +27,8 @@
     "bizley/migration": "~3.0.0",
     "gietos/dadata": "^1.1",
     "ext-curl": "*",
-    "ext-dom": "*"
+    "ext-dom": "*",
+    "mohorev/yii2-upload-behavior": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

@@ -1,7 +1,7 @@
 <?
 /* @var $this yii\web\View */
 
-/* @var $article \app\models\entity\Pages */
+/* @var $article \app\models\entity\News */
 
 use app\models\tool\seo\Title;
 use app\models\entity\Category;

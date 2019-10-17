@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 use app\models\tool\seo\Title;
 use mihaildev\ckeditor\CKEditor;
 
-/* @var $model \app\models\entity\Pages */
+/* @var $model \app\models\entity\News */
 
 $this->title = Title::showTitle($model->title);
 ?>

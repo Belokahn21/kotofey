@@ -9,7 +9,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use mihaildev\ckeditor\CKEditor;
 
-/* @var $model \app\models\entity\Pages */
+/* @var $model \app\models\entity\News */
 
 $this->title = Title::showTitle("Страницы");
 ?>

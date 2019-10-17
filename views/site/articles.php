@@ -15,7 +15,7 @@ $this->title = Title::showTitle("Статьи");
 <section class="articles">
     <h1 class="articles__title">Статьи</h1>
     <div class="article-list">
-        <? /* @var $page \app\models\entity\Pages */ ?>
+        <? /* @var $page \app\models\entity\News */ ?>
         <? foreach ($pages as $page): ?>
             <article class="article">
                 <a href="<?=$page->detailurl?>" class="special-font">

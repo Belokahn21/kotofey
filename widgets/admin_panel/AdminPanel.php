@@ -9,7 +9,7 @@ namespace app\widgets\admin_panel;
 
 
 use app\models\entity\Category;
-use app\models\entity\Pages;
+use app\models\entity\News;
 use app\models\entity\Product;
 use app\models\entity\User;
 use app\widgets\notification\Notify;
@@ -46,8 +46,8 @@ CSS;
 
 
             if ($action === "article"){
-                $model = Pages::findBySlug($slug);
-                if($model instanceof Pages){
+                $model = News::findBySlug($slug);
+                if($model instanceof News){
                     $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                 }
             }

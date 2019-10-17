@@ -9,7 +9,7 @@ use app\models\entity\Product;
 use app\models\entity\Order;
 use yii\bootstrap\Modal;
 use yii\helpers\ArrayHelper;
-use app\models\entity\Pages;
+use app\models\entity\News;
 use mihaildev\ckeditor\CKEditor;
 
 /* @var string $slug */
@@ -56,7 +56,7 @@ use mihaildev\ckeditor\CKEditor;
                         }
                         echo "";
                     }elseif(Yii::$app->controller->action->id === "article"){
-                        $article = Pages::findBySlug($slug);
+                        $article = News::findBySlug($slug);
                         if ($article) {
                             Modal::begin([
                                 'header' => '<h2 class="edit-product-modal__title">Редактировать: ' . $article->title . '</h2>',

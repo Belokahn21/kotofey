@@ -4,7 +4,7 @@
 
 /* @var $content string */
 
-use app\models\entity\Pages;
+use app\models\entity\News;
 use yii\helpers\Html;
 use app\models\entity\Product;
 use app\models\entity\Order;
@@ -103,7 +103,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                         </ul>
                     </li>
                     <li class="panel-menu__item"><a href="/admin/pages/"><i class="fas fa-file"></i></i>Страницы<span
-                                    class="count"><?= Pages::find()->count(); ?></span></a>
+                                    class="count"><?= News::find()->count(); ?></span></a>
                         <ul>
                             <li class="panel-menu__item sub"><a href="/admin/pagesections/">Рубрики</a></li>
                         </ul>
