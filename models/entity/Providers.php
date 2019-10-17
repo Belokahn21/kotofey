@@ -10,9 +10,12 @@ use yii\db\ActiveRecord;
 
 class Providers extends ActiveRecord
 {
+<<<<<<< HEAD
 	const SCENARIO_INSERT = 'insert';
 	const SCENARIO_UPDATE = 'update';
 
+=======
+>>>>>>> 9e707bd95789acd6c612a4f0df789f7632540aad
 	public function rules()
 	{
 		return [
@@ -20,8 +23,11 @@ class Providers extends ActiveRecord
 
 			[['name', 'notes', 'description'], 'string'],
 
+<<<<<<< HEAD
 			[['sort'], 'default', 'value' => 500],
 
+=======
+>>>>>>> 9e707bd95789acd6c612a4f0df789f7632540aad
 			[['image'], 'file', 'extensions' => 'png, jpg, jpeg'],
 		];
 	}
@@ -45,6 +51,7 @@ class Providers extends ActiveRecord
 		];
 	}
 
+<<<<<<< HEAD
 	public function scenarios()
 	{
 		return [
@@ -53,6 +60,8 @@ class Providers extends ActiveRecord
 		];
 	}
 
+=======
+>>>>>>> 9e707bd95789acd6c612a4f0df789f7632540aad
 	public function attributeLabels()
 	{
 		return [

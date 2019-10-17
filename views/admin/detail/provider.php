@@ -18,7 +18,7 @@ $this->title = Title::showTitle("Поставщик:" . $model->name); ?>
 <section>
     <h1 class="title">Поставщик: <?php echo $model->name; ?></h1>
     <div class="product-form">
-		<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+        <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="tabs-container">
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -27,20 +27,20 @@ $this->title = Title::showTitle("Поставщик:" . $model->name); ?>
             </ul>
 
             <div id="tab-1" class="tab-content current">
-				<?php echo $form->field($model, 'name')->textInput(); ?>
-				<?php echo $form->field($model, 'description')->textarea(); ?>
-				<?php echo $form->field($model, 'notes')->textarea(); ?>
-				<?php echo $form->field($model, 'link')->textInput(); ?>
+                <?php echo $form->field($model, 'name')->textInput(); ?>
+                <?php echo $form->field($model, 'description')->textarea(); ?>
+                <?php echo $form->field($model, 'notes')->textarea(); ?>
+                <?php echo $form->field($model, 'link')->textInput(); ?>
             </div>
             <div id="tab-2" class="tab-content">
-				<?php echo $form->field($model, 'image')->fileInput(); ?>
+                <?php echo $form->field($model, 'image')->fileInput(); ?>
             </div>
             <div id="tab-3" class="tab-content">
-				<?php echo $form->field($model, 'active')->radioList(['Нет', 'Да']); ?>
-				<?php echo $form->field($model, 'sort')->textInput(); ?>
+                <?php echo $form->field($model, 'active')->radioList(['Нет', 'Да']); ?>
+                <?php echo $form->field($model, 'sort')->textInput(); ?>
             </div>
         </div>
-		<?= Html::submitButton('Обновить'); ?>
-		<? ActiveForm::end(); ?>
+        <?= Html::submitButton('Обновить'); ?>
+        <? ActiveForm::end(); ?>
     </div>
 </section>
