@@ -36,6 +36,7 @@ class ComposerStaticInit1d0c67359a103593ad72b0f4d0905bb2
         ),
         'm' => 
         array (
+            'mohorev\\file\\' => 13,
             'mihaildev\\ckeditor\\' => 19,
         ),
         'c' => 
@@ -127,6 +128,10 @@ class ComposerStaticInit1d0c67359a103593ad72b0f4d0905bb2
             0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
             1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
             2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+        ),
+        'mohorev\\file\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/mohorev/yii2-upload-behavior/src',
         ),
         'mihaildev\\ckeditor\\' => 
         array (

@@ -66,4 +66,13 @@ return array (
       '@bizley/migration' => $vendorDir . '/bizley/migration/src',
     ),
   ),
+  'mohorev/yii2-upload-behavior' => 
+  array (
+    'name' => 'mohorev/yii2-upload-behavior',
+    'version' => '0.2.1.0',
+    'alias' => 
+    array (
+      '@mohorev/file' => $vendorDir . '/mohorev/yii2-upload-behavior/src',
+    ),
+  ),
 );
