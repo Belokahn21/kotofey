@@ -1,7 +1,7 @@
 <?
 
 use app\models\entity\Category;
-use app\models\entity\PagesCategory;
+use app\models\entity\NewsCategory;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\entity\User;
@@ -72,7 +72,7 @@ use mihaildev\ckeditor\CKEditor;
                                         'inline' => false,
                                     ],
                                 ]); ?>
-                                <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(PagesCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?>
+                                <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?>
                                 <?= $form->field($model, 'detail')->widget(CKEditor::className(), [
                                     'editorOptions' => [
                                         'preset' => 'full',

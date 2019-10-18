@@ -8,6 +8,7 @@
 namespace app\models\entity;
 
 
+use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -34,121 +35,109 @@ use yii\web\UploadedFile;
  */
 class News extends ActiveRecord
 {
-	public static function tableName()
-	{
-		return "pages";
-	}
+    const SCENARIO_INSERT = 'insert';
+    const SCENARIO_UPDATE = 'update';
 
-	public $preview_image_file;
-	public $detail_image_file;
+    public static function tableName()
+    {
+        return "pages";
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className(),
-			[
-				'class' => SluggableBehavior::className(),
-				'attribute' => 'title',
-				'ensureUnique' => true,
-			],
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'title',
+                'ensureUnique' => true,
+            ],
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'preview_image',
+                'scenarios' => ['insert', 'update'],
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/',
+            ],
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'detail_image',
+                'scenarios' => ['insert', 'update'],
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/',
+            ],
+        ];
+    }
 
-	public function rules()
-	{
-		return [
-			[['title'], 'required', 'message' => "{attribute} обязательное"],
+    public function rules()
+    {
+        return [
+            [['title'], 'required', 'message' => "{attribute} обязательное"],
 
-			[
-				['title', 'preview', 'detail', 'seo_keywords', 'seo_description'],
-				'string',
-				'message' => "{attribute} должен быть строкой"
-			],
+            [
+                ['title', 'preview', 'detail', 'seo_keywords', 'seo_description'],
+                'string',
+                'message' => "{attribute} должен быть строкой"
+            ],
 
-			['sort', 'default', 'value' => 500],
+            ['sort', 'default', 'value' => 500],
 
-			[['category'], 'integer'],
+            [['category'], 'integer'],
 
-			[['preview_image_file', 'detail_image_file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-		];
-	}
+            [['preview_image', 'detail_image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+        ];
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			"title" => 'Заголовок',
-			"preview" => 'Краткое описание',
-			"detail" => 'Текст страницы',
-			"category" => 'Раздел',
-			"seo_keywords" => '(SEO) Ключи',
-			"seo_description" => '(SEO) Описание',
-			"created_at" => 'Дата создания',
-			"preview_image_file" => 'Изображение анонса',
-			"detail_image_file" => 'Детальное изображение',
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            "title" => 'Заголовок',
+            "preview" => 'Краткое описание',
+            "detail" => 'Текст страницы',
+            "category" => 'Раздел',
+            "seo_keywords" => '(SEO) Ключи',
+            "seo_description" => '(SEO) Описание',
+            "created_at" => 'Дата создания',
+            "preview_image_file" => 'Изображение анонса',
+            "detail_image_file" => 'Детальное изображение',
+        ];
+    }
 
-	public function savePreviewPicture()
-	{
-		$this->preview_image_file = UploadedFile::getInstance($this, 'preview_image_file');
-		if (!empty($this->preview_image_file)) {
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_INSERT => [
+                'title',
+                'preview',
+                'detail',
+                'category',
+                'seo_keywords',
+                'seo_description',
+                'created_at',
+                'preview_image',
+                'detail_image',
+            ],
+            self::SCENARIO_UPDATE => [
+                'title',
+                'preview',
+                'detail',
+                'category',
+                'seo_keywords',
+                'seo_description',
+                'created_at',
+                'preview_image',
+                'detail_image',
+            ]
+        ];
+    }
 
-			// удалить старое фото
-			$this->removeOldPreviewImage();
+    public function getDetailurl()
+    {
+        return "/news/" . $this->slug . "/";
+    }
 
-			$fileName = substr(md5($this->preview_image_file->baseName), 0,
-					32) . '.' . $this->preview_image_file->extension;
-			$path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
-
-			$this->preview_image_file->saveAs($path);
-			$this->preview_image = "/web/upload/" . $fileName;
-
-			$this->preview_image_file = null;
-		}
-		return true;
-	}
-
-	public function removeOldPreviewImage()
-	{
-		if (!empty($this->preview_image)) {
-			unlink(\Yii::getAlias('@app') . $this->preview_image);
-		}
-	}
-
-	public function saveDetailPicture()
-	{
-		$this->detail_image_file = UploadedFile::getInstance($this, 'detail_image_file');
-		if (!empty($this->detail_image_file)) {
-
-			// удалить старое фото
-			$this->removeOldDetailImage();
-
-			$fileName = substr(md5($this->detail_image_file->baseName), 0,
-					32) . '.' . $this->detail_image_file->extension;
-			$path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
-
-			$this->detail_image_file->saveAs($path);
-			$this->detail_image = "/web/upload/" . $fileName;
-
-			$this->detail_image_file = null;
-		}
-		return true;
-	}
-
-	public function removeOldDetailImage()
-	{
-		if (!empty($this->detail_image)) {
-			unlink(\Yii::getAlias('@app') . $this->detail_image);
-		}
-	}
-
-	public function getDetailurl()
-	{
-		return "/articles/" . $this->slug . "/";
-	}
-
-	public static function findBySlug($slug)
-	{
-		return static::findOne(['slug' => $slug]);
-	}
+    public static function findBySlug($slug)
+    {
+        return static::findOne(['slug' => $slug]);
+    }
 }

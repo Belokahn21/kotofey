@@ -237,7 +237,7 @@ $this->beginPage() ?>
                     <li class="footer-menu__item"><a href="/support/">Поддержка</a></li>
                     <li class="footer-menu__item"><a href="/vacancy/">Вакансии</a></li>
                     <li class="footer-menu__item"><a href="/profile/">Личный кабинет</a></li>
-                    <li class="footer-menu__item"><a href="/articles/">Статьи</a></li>
+                    <li class="footer-menu__item"><a href="/news/">Новости</a></li>
                 </ul>
             </div>
             <div class="footer-block">

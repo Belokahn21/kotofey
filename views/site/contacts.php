@@ -15,5 +15,5 @@ $this->title = Title::showTitle("Контакты");
     <li class="contacts-list__item">Телефон: <span class="phone_mask"><?= SiteSettings::getValueByCode('phone_1'); ?></span></li>
     <li class="contacts-list__item">Наш адрес: <span>Россия, Алтайский край, г. Барнаул</span></li>
 </ul>
-
-<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1f9b2285d3a2aa01708721bf43ba58cb3c9065d7c01e0ca9aa70d854fc3f5697&amp;width=100%25&amp;height=470&amp;lang=ru_RU&amp;scroll=true"></script>
+<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75a2c08cf453a0309392fdcb243329f2301db73bdb97f18c8bc32cb9e14c1f93&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+<!--<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1f9b2285d3a2aa01708721bf43ba58cb3c9065d7c01e0ca9aa70d854fc3f5697&amp;width=100%25&amp;height=470&amp;lang=ru_RU&amp;scroll=true"></script>-->

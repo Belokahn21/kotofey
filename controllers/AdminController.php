@@ -7,17 +7,19 @@ use app\models\entity\Category;
 use app\models\entity\Delivery;
 use app\models\entity\Informers;
 use app\models\entity\InformersValues;
+use app\models\entity\News;
 use app\models\entity\Order;
 use app\models\entity\OrderItems;
 use app\models\entity\OrderStatus;
 use app\models\entity\Pages;
-use app\models\entity\PagesCategory;
+use app\models\entity\NewsCategory;
 use app\models\entity\Payment;
 use app\models\entity\ProductProperties;
 use app\models\entity\Promo;
 use app\models\entity\Providers;
 use app\models\entity\Selling;
 use app\models\entity\SiteSettings;
+use app\models\entity\Sliders;
 use app\models\entity\Stocks;
 use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportStatus;
@@ -31,15 +33,17 @@ use app\models\search\CategorySearchForm;
 use app\models\search\DeliverySearchForm;
 use app\models\search\InformersSearchForm;
 use app\models\search\InformersValuesSearchForm;
+use app\models\search\NewsSearchForm;
 use app\models\search\OrderSearchForm;
 use app\models\search\OrderStatusSearchForm;
-use app\models\search\PagesCategorySearchForm;
+use app\models\search\NewsCategorySearchForm;
 use app\models\search\PagesSearchForm;
 use app\models\search\PaymentSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\ProvidersSearchForm;
+use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
 use app\models\search\TicketsSearchForm;
 use app\models\search\UserSearchForm;
@@ -653,29 +657,24 @@ class AdminController extends Controller
         ]);
     }
 
-    public function actionPages($id = null)
+    public function actionNews($id = null)
     {
         // Удалить
         if ($id && !empty($_GET['action']) && $_GET['action'] == "delete") {
-            $article = Pages::findOne($id);
-
-            $article->removeOldDetailImage();
-            $article->removeOldPreviewImage();
+            $article = News::findOne($id);
 
             if ($article->delete()) {
-                return $this->redirect('/admin/pages/');
+                return $this->redirect('/admin/news/');
             }
         }
 
         if ($id) {
-            $model = Pages::findOne($id);
+            $model = News::findOne($id);
+            $model->scenario = News::SCENARIO_UPDATE;
 
             if (\Yii::$app->request->isPost) {
                 if ($model->load(\Yii::$app->request->post())) {
                     if ($model->validate()) {
-
-                        $model->savePreviewPicture();
-                        $model->saveDetailPicture();
 
                         if ($model->update()) {
                             return $this->refresh();
@@ -689,16 +688,13 @@ class AdminController extends Controller
             ]);
         }
 
-        $model = new Pages();
-        $searchModel = new PagesSearchForm();
+        $model = new News(['scenario' => News::SCENARIO_INSERT]);
+        $searchModel = new NewsSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
-
-                    $model->savePreviewPicture();
-                    $model->saveDetailPicture();
 
                     if ($model->save()) {
                         return $this->refresh();
@@ -745,10 +741,10 @@ class AdminController extends Controller
         ]);
     }
 
-    public function actionPagesections()
+    public function actionNewssections()
     {
-        $model = new PagesCategory();
-        $searchModel = new PagesCategorySearchForm();
+        $model = new NewsCategory();
+        $searchModel = new NewsCategorySearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
@@ -915,12 +911,20 @@ class AdminController extends Controller
     {
         if ($id) {
             $model = Providers::findOne($id);
-            return $this->render('view/provider', [
+            $model->scenario = Providers::SCENARIO_UPDATE;
+            if (Yii::$app->request->isPost) {
+                if ($model->load(Yii::$app->request->post())) {
+                    if ($model->update()) {
+                        return $this->refresh();
+                    }
+                }
+            }
+            return $this->render('detail/provider', [
                 'model' => $model
             ]);
         }
 
-        $model = new Providers();
+        $model = new Providers(['scenario' => Providers::SCENARIO_INSERT]);
         $searchModel = new ProvidersSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
@@ -933,6 +937,42 @@ class AdminController extends Controller
         }
 
         return $this->render('provider', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionSliders($id = null)
+    {
+        if ($id) {
+            $model = Sliders::findOne($id);
+            $model->scenario = Providers::SCENARIO_UPDATE;
+            if (Yii::$app->request->isPost) {
+                if ($model->load(Yii::$app->request->post())) {
+                    if ($model->update()) {
+                        return $this->refresh();
+                    }
+                }
+            }
+            return $this->render('detail/sliders', [
+                'model' => $model
+            ]);
+        }
+
+        $model = new Sliders();
+        $searchModel = new SlidersSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->save()) {
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('sliders', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

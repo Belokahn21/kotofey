@@ -6,9 +6,9 @@ use app\models\tool\seo\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
-use app\models\entity\PagesCategory;
+use app\models\entity\NewsCategory;
 
-/* @var $model \app\models\entity\PagesCategory */
+/* @var $model \app\models\entity\NewsCategory */
 
 $this->title = Title::showTitle("Рубрики");
 ?>
@@ -24,7 +24,7 @@ $this->title = Title::showTitle("Рубрики");
             <div id="tab-1" class="tab-content current">
                 <?= $form->field($model, 'name'); ?>
                 <?= $form->field($model, 'sort'); ?>
-                <?= $form->field($model, 'parent')->dropDownList(ArrayHelper::map(PagesCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать родительский раздел']); ?>
+                <?= $form->field($model, 'parent')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать родительский раздел']); ?>
             </div>
 
             <?= Html::submitButton('Добавить'); ?>
