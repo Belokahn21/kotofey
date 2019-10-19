@@ -34,8 +34,8 @@ class Providers extends ActiveRecord
                 'class' => UploadBehavior::class,
                 'attribute' => 'image',
                 'scenarios' => ['insert', 'update'],
-                'path' => '@webroot/upload/{slug}',
-                'url' => '@web/upload/{slug}',
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/',
             ],
             [
                 'class' => SluggableBehavior::class,
@@ -48,8 +48,8 @@ class Providers extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_INSERT => ['name', 'description', 'notes', 'active', 'sort'],
-            self::SCENARIO_UPDATE => ['name', 'description', 'notes', 'active', 'sort'],
+            self::SCENARIO_INSERT => ['name', 'description', 'notes', 'active', 'sort', 'image', 'link'],
+            self::SCENARIO_UPDATE => ['name', 'description', 'notes', 'active', 'sort', 'image', 'link'],
         ];
     }
 

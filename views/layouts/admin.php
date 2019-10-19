@@ -12,6 +12,7 @@ use app\assets\AdminAsset;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
 use app\widgets\notification\Notify;
+use app\models\entity\Sliders;
 
 AdminAsset::register($this);
 $this->beginPage();
@@ -102,10 +103,24 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                             <li class="panel-menu__item sub"><a href="/admin/permission/">Разрешения</a></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="/admin/pages/"><i class="fas fa-file"></i></i>Страницы<span
-                                    class="count"><?= News::find()->count(); ?></span></a>
+                    <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-shopping-cart"></i>Контент</a>
                         <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/pagesections/">Рубрики</a></li>
+                            <li class="panel-menu__item sub">
+                                <a href="/admin/news/">
+                                    Новости<span class="count"><?= News::find()->count() ?></span>
+                                </a>
+                                <ul>
+                                    <li class="panel-menu__item sub"><a href="/admin/newssections/">Рубрики</a></li>
+                                </ul>
+                            </li>
+                            <li class="panel-menu__item sub">
+                                <a href="/admin/sliders/">
+                                    Слайдеры<span class="count"><?= Sliders::find()->count() ?></span>
+                                </a>
+                                <ul>
+                                    <li class="panel-menu__item sub"><a href="/admin/newssections/">Изображения</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
                 </ul>

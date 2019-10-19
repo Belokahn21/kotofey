@@ -24,6 +24,26 @@ $(document).ready(function () {
         $this.siblings(".harmon-content").slideToggle("slow");
     });
 
+    var providers = $('.list-providers').owlCarousel({
+        loop: true,
+        items: 1,
+        slideBy: 1,
+        scrollPerPage: true,
+        autoHeight: true,
+        autoWeight: true
+        // dots: true
+    });
+
+    var news = $('.list-news').owlCarousel({
+        loop: true,
+        items: 1,
+        slideBy: 1,
+        scrollPerPage: true,
+        autoHeight: true,
+        autoWeight: true
+        // dots: true
+    });
+
 
     var owl = $('.owl-main').owlCarousel({
         margin: 10,

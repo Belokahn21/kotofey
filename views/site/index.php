@@ -1,10 +1,12 @@
 <?
 /* @var $this yii\web\View */
 /* @var $providers \app\models\entity\Providers[] */
+
 /* @var $news \app\models\entity\News[] */
+
 use app\models\entity\SiteSettings;
 use app\models\tool\seo\Title;
-use app\widgets\order_custom_product\OrderCustomProduct;
+use yii\helpers\StringHelper;
 
 $this->title = Title::showTitle("Главная страница");
 ?>
@@ -41,27 +43,57 @@ $this->title = Title::showTitle("Главная страница");
 <div class="test">
     <div class="index_about">
         <h2>Наши поставщики</h2>
-        <ul>
-		    <?php foreach ($providers as $provider): ?>
-                <li><?php echo $provider->name; ?></li>
-		    <?php endforeach; ?>
+        <ul class="list-providers owl-carousel">
+            <?php foreach ($providers as $provider): ?>
+                <li class="provider_item">
+                    <img src="/web/upload/<?php echo $provider->image; ?>" alt="<?php echo $provider->name; ?>"
+                         title="<?php echo $provider->name; ?>">
+                    <div class="provider_item__title">
+                        <?php if ($provider->link): ?>
+                            <a href="<?php echo $provider->link ?>" target="_blank">
+                                <?php echo $provider->name; ?>
+                            </a>
+                        <?php else: ?>
+                            <?php echo $provider->name; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="provider_item__desc"><?php echo StringHelper::truncate($provider->description, 250,
+                            '...') ?></div>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 
     <div class="me-inst">
         <h2>Мы в Instagramm</h2>
-        <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank" ><img src="/web/upload/images/inst.png"></a>
+        <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank"><img
+                    src="/web/upload/images/inst.png"></a>
         <div class="me-inst-block-link">
-            <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank" class="me-inst-link">Перейти</a>
+            <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank"
+               class="me-inst-link">Перейти</a>
         </div>
     </div>
 
     <div class="index-search">
-        <h2>Новости</h2>
-        <ul>
-		    <?php foreach ($news as $new): ?>
-                <li><?php echo $new->name; ?></li>
-		    <?php endforeach; ?>
+        <div class="news-head-panel">
+            <h2>Новости</h2>
+            <a href="/news/">Все новости</a>
+        </div>
+        <ul class="list-news owl-carousel">
+            <?php foreach ($news as $new): ?>
+                <li class="list-news__item">
+                    <a class="list-news__item-link" href="<?php echo $new->detailurl; ?>">
+                        <?php if ($new->preview_image): ?>
+                            <div class="list-news__item-wrap-image">
+                                <img class="list-news__item-image" src="/web/upload/<?php echo $new->preview_image; ?>"
+                                     title="<?php echo $new->title; ?>" alt="<?php echo $new->title; ?>">
+                            </div>
+                        <?php endif; ?>
+                    </a>
+                    <div class="list-news__item-title"><?php echo $new->title; ?></div>
+                    <div class="list-news__item-preview"><?php echo $new->preview; ?></div>
+                </li>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>

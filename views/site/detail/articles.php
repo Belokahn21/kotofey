@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use app\models\tool\System;
 use app\widgets\reviews\Reviews;
 
-$this->params['breadcrumbs'][] = ['label' => 'Статьи', 'url' => ['/articles/']];
+$this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/']];
 $this->params['breadcrumbs'][] = ['label' => $article->title, 'url' => [$article->detailurl]];
 $this->title = Title::showTitle($article->title);
 ?>

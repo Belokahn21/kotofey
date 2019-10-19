@@ -1,7 +1,7 @@
 <?
 
 use yii\helpers\ArrayHelper;
-use app\models\entity\PagesCategory;
+use app\models\entity\NewsCategory;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\tool\seo\Title;
@@ -14,7 +14,7 @@ use mihaildev\ckeditor\CKEditor;
 $this->title = Title::showTitle("Страницы");
 ?>
 <section>
-    <h1 class="title">Страницы</h1>
+    <h1 class="title">Новости</h1>
     <div class="product-form">
         <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="tabs-container">
@@ -27,11 +27,11 @@ $this->title = Title::showTitle("Страницы");
 
             <div id="tab-1" class="tab-content current">
                 <?= $form->field($model, 'title'); ?>
-                <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(PagesCategory::find()->all(), 'id',
+                <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id',
                     'name'), ['prompt' => 'Выбрать рубрику']); ?>
             </div>
             <div id="tab-2" class="tab-content">
-                <?= $form->field($model, 'preview_image_file')->fileInput(); ?>
+                <?= $form->field($model, 'preview_image')->fileInput(); ?>
                 <?= $form->field($model, 'preview')->widget(CKEditor::className(), [
                     'editorOptions' => [
                         'preset' => 'full',
@@ -40,7 +40,7 @@ $this->title = Title::showTitle("Страницы");
                 ]); ?>
             </div>
             <div id="tab-3" class="tab-content">
-                <?= $form->field($model, 'detail_image_file')->fileInput(); ?>
+                <?= $form->field($model, 'detail_image')->fileInput(); ?>
                 <?= $form->field($model, 'detail')->widget(CKEditor::className(), [
                     'editorOptions' => [
                         'preset' => 'full',
@@ -57,11 +57,11 @@ $this->title = Title::showTitle("Страницы");
         </div>
 </section>
 <div class="clearfix"></div>
-<h2>Список страницы</h2>
+<h2>Список новостей</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Страницы отсутствуют',
+    'emptyText' => 'Новости отсутствуют',
     'columns' => [
         [
             'attribute' => 'id',
@@ -83,7 +83,7 @@ $this->title = Title::showTitle("Страницы");
             'attribute' => 'category',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::a(PagesCategory::findOne($model->category)->name, "/admin/pagesections/" . $model->category . "/", ['target' => '_blank']);
+                return Html::a(NewsCategory::findOne($model->category)->name, "/admin/pagesections/" . $model->category . "/", ['target' => '_blank']);
             }
         ],
         [
@@ -127,7 +127,7 @@ $this->title = Title::showTitle("Страницы");
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
                 },
                 'update' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/pages/$key"]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/news/$key"]));
                 },
                 'delete' => function ($url, $model, $key) {
                     return Html::a('<i class="fas fa-trash-alt"></i>',

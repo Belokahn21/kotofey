@@ -10,7 +10,7 @@ use app\models\entity\Favorite;
 use app\models\entity\Order;
 use app\models\entity\OrderItems;
 use app\models\entity\News;
-use app\models\entity\PagesCategory;
+use app\models\entity\NewsCategory;
 use app\models\entity\Payment;
 use app\models\entity\Product;
 use app\models\entity\Promo;
@@ -913,7 +913,7 @@ class SiteController extends Controller
 		return $this->render('about');
 	}
 
-	public function actionArticles($id = null)
+	public function actionNews($id = null)
 	{
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
@@ -946,15 +946,14 @@ class SiteController extends Controller
 			]);
 		}
 
-		$categories = PagesCategory::find()->all();
+		$categories = NewsCategory::find()->all();
 		$pages = News::find()->all();
 
 //        Attributes::metaKeywords("уход за натуральной кожей, уход за сумкой из натуральной кожи,");
 		Attributes::metaDescription("Самые полезные и актуальные статьи о том как ухаживать за кожей, как выбрать правильно продукт и другие новости компани!");
 
 		return $this->render('articles', [
-			'categories' => $categories,
-			'pages' => $pages
+			'news' => $pages
 		]);
 	}
 
