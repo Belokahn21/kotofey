@@ -10,8 +10,9 @@ namespace app\models\tool;
 
 class Converter
 {
+    /* byte in kbyte*/
     public static function mbyteToKbyte($size)
     {
-        return round(($size / 1024) / 1024, 2);
+        return round(($size / 1024), 2);
     }
 }

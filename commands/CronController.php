@@ -13,6 +13,7 @@ class CronController extends Controller
         $backup = new Backup();
 
         if($backup->isOverSize()){
+
             $backup->clearDumpCatalog();
         }
 

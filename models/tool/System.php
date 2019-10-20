@@ -1,15 +1,15 @@
-<?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 12:31
- */
+<?php
 
 namespace app\models\tool;
 
 
 class System
 {
+    public static function getInstance()
+    {
+        return new System();
+    }
+
     public function getRealIpAddr($ip = false)
     {
         if ($ip) {
@@ -65,5 +65,17 @@ class System
         }
 
         return false;
+    }
+
+    function folderSize($dir)
+    {
+        $size = 0;
+        foreach (glob(rtrim($dir, '/') . '/*', GLOB_NOSORT) as $each) {
+            $size += is_file($each) ? filesize($each) : $this->folderSize($each);
+        }
+        echo "----\n";
+        echo $size;
+        echo "----\n";
+        return $size;
     }
 }

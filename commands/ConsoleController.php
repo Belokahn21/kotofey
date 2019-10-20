@@ -9,6 +9,16 @@ use yii\console\ExitCode;
 
 class ConsoleController extends Controller
 {
+
+    public function actionImport($type)
+    {
+        switch ($type) {
+            case"rk":
+                echo 'run = ' . $type;
+                break;
+        }
+    }
+
     public function actionIndex()
     {
         $_SERVER['DOCUMENT_ROOT'] = "/home/c/cd91333/shop-kotofey/public_html";
