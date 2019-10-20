@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'JsonException' => $vendorDir . '/symfony/polyfill-php73/Resources/stubs/JsonException.php',
     'PHPUnit\\Exception' => $vendorDir . '/phpunit/phpunit/src/Exception.php',
     'PHPUnit\\Framework\\Assert' => $vendorDir . '/phpunit/phpunit/src/Framework/Assert.php',
     'PHPUnit\\Framework\\AssertionFailedError' => $vendorDir . '/phpunit/phpunit/src/Framework/AssertionFailedError.php',
@@ -70,6 +71,7 @@ return array(
     'PHPUnit\\Framework\\IncompleteTestCase' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestCase.php',
     'PHPUnit\\Framework\\IncompleteTestError' => $vendorDir . '/phpunit/phpunit/src/Framework/IncompleteTestError.php',
     'PHPUnit\\Framework\\InvalidCoversTargetException' => $vendorDir . '/phpunit/phpunit/src/Framework/InvalidCoversTargetException.php',
+    'PHPUnit\\Framework\\InvalidParameterGroupException' => $vendorDir . '/phpunit/phpunit/src/Framework/InvalidParameterGroupException.php',
     'PHPUnit\\Framework\\MissingCoversAnnotationException' => $vendorDir . '/phpunit/phpunit/src/Framework/MissingCoversAnnotationException.php',
     'PHPUnit\\Framework\\MockObject\\BadMethodCallException' => $vendorDir . '/phpunit/phpunit/src/Framework/MockObject/Exception/BadMethodCallException.php',
     'PHPUnit\\Framework\\MockObject\\Builder\\Identity' => $vendorDir . '/phpunit/phpunit/src/Framework/MockObject/Builder/Identity.php',
@@ -134,6 +136,7 @@ return array(
     'PHPUnit\\Framework\\TestResult' => $vendorDir . '/phpunit/phpunit/src/Framework/TestResult.php',
     'PHPUnit\\Framework\\TestSuite' => $vendorDir . '/phpunit/phpunit/src/Framework/TestSuite.php',
     'PHPUnit\\Framework\\TestSuiteIterator' => $vendorDir . '/phpunit/phpunit/src/Framework/TestSuiteIterator.php',
+    'PHPUnit\\Framework\\UnexpectedValueException' => $vendorDir . '/phpunit/phpunit/src/Framework/UnexpectedValueException.php',
     'PHPUnit\\Framework\\UnintentionallyCoveredCodeError' => $vendorDir . '/phpunit/phpunit/src/Framework/UnintentionallyCoveredCodeError.php',
     'PHPUnit\\Framework\\Warning' => $vendorDir . '/phpunit/phpunit/src/Framework/Warning.php',
     'PHPUnit\\Framework\\WarningTestCase' => $vendorDir . '/phpunit/phpunit/src/Framework/WarningTestCase.php',
@@ -232,6 +235,7 @@ return array(
     'PHP_Token_CLOSE_SQUARE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_CLOSE_TAG' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_COALESCE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'PHP_Token_COALESCE_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_COLON' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_COMMA' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_COMMENT' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
@@ -277,6 +281,7 @@ return array(
     'PHP_Token_FILE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_FINAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_FINALLY' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'PHP_Token_FN' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_FOR' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_FOREACH' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_FUNCTION' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
@@ -367,6 +372,7 @@ return array(
     'PHP_Token_UNSET_CAST' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_USE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_USE_FUNCTION' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'PHP_Token_Util' => $vendorDir . '/phpunit/php-token-stream/src/Token/Util.php',
     'PHP_Token_VAR' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_VARIABLE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_WHILE' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',

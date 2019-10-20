@@ -3,9 +3,12 @@
 namespace app\commands;
 
 use app\models\entity\Product;
+use app\models\entity\ProductPropertiesValues;
 use app\models\tool\Debug;
+use app\models\tool\import\RoyalCanin;
 use yii\console\Controller;
 use yii\console\ExitCode;
+use yii\helpers\ArrayHelper;
 
 class ConsoleController extends Controller
 {
@@ -14,8 +17,29 @@ class ConsoleController extends Controller
     {
         switch ($type) {
             case"rk":
-                echo 'run = ' . $type;
+                echo 'run = ' . $type . '\n';
+                $rk = new RoyalCanin();
                 break;
+        }
+    }
+
+    public function actionPrice()
+    {
+
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
+
+        $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
+
+
+        foreach ($products as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->price = $product->purchase;
+            $product->purchase = ceil($product->purchase - ($product->purchase * 15 / 100));
+//            $product->purchase = $product->price;
+            $product->update();
+
+
+            echo $product->name . " update\n";
         }
     }
 
@@ -78,11 +102,11 @@ class ConsoleController extends Controller
                 $arWeight = explode(" ", trim($weight));
 
                 switch ($arWeight[1]) {
-                    case "–∫–≥":
+                    case "Í„":
                         $weight = $arWeight[0];
                         break;
 
-                    case "–≥":
+                    case "„":
                         $weight = round($arWeight[0] / 1000, 3);
                         break;
                 }

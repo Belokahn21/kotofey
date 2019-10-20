@@ -95,10 +95,10 @@ use Symfony\Component\DomCrawler\Crawler;
  *              port: 9515
  *              browser: chrome
  *              capabilities:
- *                  chromeOptions: # additional chrome options
+ *                  "goog:chromeOptions": # additional chrome options
  * ```
  *
- * Additional [Chrome options](https://sites.google.com/a/chromium.org/chromedriver/capabilities) can be set in `chromeOptions` capabilities.
+ * Additional [Chrome options](https://sites.google.com/a/chromium.org/chromedriver/capabilities) can be set in `goog:chromeOptions` capabilities. Note that Selenium 3.8 renamed this capability from `chromeOptions` to `goog:chromeOptions`.
  *
  *
  * ### PhantomJS
@@ -822,6 +822,18 @@ class WebDriver extends CodeceptionModule implements
             $urlParts = parse_url($this->config['url']);
             if (isset($urlParts['host'])) {
                 $params['domain'] = $urlParts['host'];
+            }
+        }
+        // #5401 Supply defaults, otherwise chromedriver 2.46 complains.
+        $defaults = [
+            'path' => '/',
+            'expiry' => time() + 86400,
+            'secure' => false,
+            'httpOnly' => false,
+        ];
+        foreach ($defaults as $key => $default) {
+            if (empty($params[$key])) {
+                $params[$key] = $default;
             }
         }
         $this->webDriver->manage()->addCookie($params);
@@ -3097,7 +3109,7 @@ class WebDriver extends CodeceptionModule implements
         }
         
         foreach ($this->sessionSnapshots[$name] as $cookie) {
-            $this->webDriver->manage()->addCookie($cookie);
+            $this->setCookie($cookie['name'], $cookie['value'], (array)$cookie);
         }
         $this->debugSection('Snapshot', "Restored \"$name\" session snapshot");
         return true;
