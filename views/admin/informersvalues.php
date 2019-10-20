@@ -58,7 +58,7 @@ $this->title = Title::showTitle("Справочники"); ?>
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
                 },
                 'update' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/category/$key"]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/informersvalues/$key"]));
                 },
                 'delete' => function ($url, $model, $key) {
                     return Html::a('<i class="fas fa-trash-alt"></i>',

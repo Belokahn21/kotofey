@@ -36,7 +36,7 @@ class ConsoleController extends Controller
             $product->price = $product->purchase;
             $product->purchase = ceil($product->purchase - ($product->purchase * 15 / 100));
 //            $product->purchase = $product->price;
-            $product->update();
+//            $product->update();
 
 
             echo $product->name . " update\n";

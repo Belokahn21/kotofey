@@ -4,6 +4,7 @@
 
 /* @var $content string */
 
+use yii\helpers\Url;
 use app\models\entity\News;
 use yii\helpers\Html;
 use app\models\entity\Product;
@@ -114,11 +115,13 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                                 </ul>
                             </li>
                             <li class="panel-menu__item sub">
-                                <a href="/admin/sliders/">
+                                <a href="<?php echo Url::to(['admin/sliders']); ?>">
                                     Слайдеры<span class="count"><?= Sliders::find()->count() ?></span>
                                 </a>
                                 <ul>
-                                    <li class="panel-menu__item sub"><a href="/admin/newssections/">Изображения</a></li>
+                                    <li class="panel-menu__item sub">
+                                        <a href="<?php echo Url::to(['admin/sliderimages'])?>">Изображения</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

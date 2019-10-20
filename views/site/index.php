@@ -7,13 +7,15 @@
 use app\models\entity\SiteSettings;
 use app\models\tool\seo\Title;
 use yii\helpers\StringHelper;
+use app\widgets\slider\SliderWidget;
 
 $this->title = Title::showTitle("Главная страница");
 ?>
-<div class="slider-index">
-    <img src="/web/upload/images/sale.png">
-</div>
 
+<?php echo SliderWidget::widget([
+    'slider_id' => 1,
+    'use_carousel' => true
+]) ?>
 
 <div class="edge">
     <ul>
@@ -46,8 +48,9 @@ $this->title = Title::showTitle("Главная страница");
         <ul class="list-providers owl-carousel">
             <?php foreach ($providers as $provider): ?>
                 <li class="provider_item">
-                    <img src="/web/upload/<?php echo $provider->image; ?>" alt="<?php echo $provider->name; ?>"
-                         title="<?php echo $provider->name; ?>">
+                    <div class="provider_item-image-wrap">
+                        <img src="/web/upload/<?php echo $provider->image; ?>" alt="<?php echo $provider->name; ?>" title="<?php echo $provider->name; ?>">
+                    </div>
                     <div class="provider_item__title">
                         <?php if ($provider->link): ?>
                             <a href="<?php echo $provider->link ?>" target="_blank">
@@ -66,8 +69,8 @@ $this->title = Title::showTitle("Главная страница");
 
     <div class="me-inst">
         <h2>Мы в Instagramm</h2>
-        <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank"><img
-                    src="/web/upload/images/inst.png"></a>
+        <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank">
+            <img src="/web/upload/images/inst.png"></a>
         <div class="me-inst-block-link">
             <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank"
                class="me-inst-link">Перейти</a>
@@ -85,8 +88,7 @@ $this->title = Title::showTitle("Главная страница");
                     <a class="list-news__item-link" href="<?php echo $new->detailurl; ?>">
                         <?php if ($new->preview_image): ?>
                             <div class="list-news__item-wrap-image">
-                                <img class="list-news__item-image" src="/web/upload/<?php echo $new->preview_image; ?>"
-                                     title="<?php echo $new->title; ?>" alt="<?php echo $new->title; ?>">
+                                <img class="list-news__item-image" src="/web/upload/<?php echo $new->preview_image; ?>" title="<?php echo $new->title; ?>" alt="<?php echo $new->title; ?>">
                             </div>
                         <?php endif; ?>
                     </a>

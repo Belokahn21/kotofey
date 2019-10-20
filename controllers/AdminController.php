@@ -20,6 +20,7 @@ use app\models\entity\Providers;
 use app\models\entity\Selling;
 use app\models\entity\SiteSettings;
 use app\models\entity\Sliders;
+use app\models\entity\SlidersImages;
 use app\models\entity\Stocks;
 use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportStatus;
@@ -43,6 +44,7 @@ use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\ProvidersSearchForm;
+use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
 use app\models\search\TicketsSearchForm;
@@ -973,6 +975,42 @@ class AdminController extends Controller
         }
 
         return $this->render('sliders', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionSliderimages($id = null)
+    {
+        if ($id) {
+            $model = SlidersImages::findOne($id);
+            $model->scenario = Providers::SCENARIO_UPDATE;
+            if (Yii::$app->request->isPost) {
+                if ($model->load(Yii::$app->request->post())) {
+                    if ($model->update()) {
+                        return $this->refresh();
+                    }
+                }
+            }
+            return $this->render('detail/sliders_images', [
+                'model' => $model
+            ]);
+        }
+
+        $model = new SlidersImages(['scenario' => SlidersImages::SCENARIO_INSERT]);
+        $searchModel = new SlidersImagesSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->save()) {
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('sliders_images', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

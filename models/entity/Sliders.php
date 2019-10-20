@@ -17,16 +17,20 @@ class Sliders extends ActiveRecord
 
     public function rules()
     {
-        return [];
+        return [
+            [['name'], 'required'],
+
+            [['name'], 'string'],
+        ];
     }
 
     public function attributeLabels()
     {
         return [
             'name' => 'Название',
-            'link' => 'Ссылка',
             'active' => 'Активность',
             'sort' => 'Сортировка',
+            'created_at' => 'Дата создания',
         ];
     }
 }

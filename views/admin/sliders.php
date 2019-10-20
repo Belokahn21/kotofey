@@ -28,7 +28,6 @@ $this->title = Title::showTitle("Слайдеры"); ?>
 
                 <div id="tab-1" class="tab-content current">
                     <?php echo $form->field($model, 'name')->textInput(); ?>
-                    <?php echo $form->field($model, 'link')->textInput(); ?>
                 </div>
                 <div id="tab-2" class="tab-content">
                 </div>
