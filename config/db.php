@@ -1,7 +1,7 @@
 <?php
 
 
-if (YII_ENV == 'prod' or Yii::$app instanceof \yii\web\Application) {
+if (YII_ENV == 'prod' and !Yii::$app instanceof \yii\web\Application) {
     return [
         'class' => 'yii\db\Connection',
         'dsn' => 'mysql:host=localhost;dbname=cd91333_kotofey',
