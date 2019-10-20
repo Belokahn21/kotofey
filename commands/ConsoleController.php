@@ -25,7 +25,6 @@ class ConsoleController extends Controller
 
     public function actionPrice()
     {
-
         $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
 
         $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
