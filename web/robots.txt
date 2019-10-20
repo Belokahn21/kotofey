@@ -17,6 +17,7 @@ Disallow: /support/
 Disallow: /support/*
 Disallow: /web/
 Disallow: /web/*
+Disallow: /*?*
 
 Sitemap: https://eventhorizont.ru/sitemap.xml
 
