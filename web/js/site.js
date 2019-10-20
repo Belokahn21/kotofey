@@ -25,6 +25,8 @@ $(document).ready(function () {
     });
 
     var providers = $('.list-providers').owlCarousel({
+        autoplay: true,
+        autoplayTimeout: 5000,
         loop: true,
         items: 1,
         slideBy: 1,
@@ -35,6 +37,8 @@ $(document).ready(function () {
     });
 
     var news = $('.list-news').owlCarousel({
+        autoplay: true,
+        autoplayTimeout: 3500,
         loop: true,
         items: 1,
         slideBy: 1,
