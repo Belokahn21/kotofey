@@ -29,12 +29,14 @@ $this->beginPage() ?>
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <?php echo $this->render('include/head/yandex/metrika.php' ); ?>
-    <?php echo $this->render('include/head/yandex/webmaster.php' ); ?>
+    <?php if (YII_ENV == 'prod'): ?>
+        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
+        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
+        <?php echo $this->render('include/head/jivo.php'); ?>
+    <? endif; ?>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <? $this->head() ?>
-    <script src="//code.jivosite.com/widget.js" data-jv-id="NPe6xOUckS" async></script>
 </head>
 <body>
 <? $this->beginBody() ?>
