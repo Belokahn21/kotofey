@@ -166,7 +166,7 @@ $this->title = Title::showTitle("Товары"); ?>
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-//                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
+                    return Html::a('<i class="fas fa-copy"></i>', "/admin/catalog/$key/?action=copy");
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/catalog/$key"]));

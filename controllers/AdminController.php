@@ -163,9 +163,20 @@ class AdminController extends Controller
 
         $model = Product::findOne($id);
         $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-        $searchModel = new ProductSearchForm();
-        $dataProvider = $searchModel->search(\Yii::$app->request->get());
         $properties = ProductProperties::find()->all();
+
+        if ($_GET['action'] == 'copy') {
+
+
+            if ($_POST['action'] == 'Копировать') {
+                $model->id = null;
+                $model->isNewRecord = true;
+                if ($model->createProduct()) {
+                    return $this->redirect('/admin/catalog');
+                }
+            }
+
+        }
 
         if ($model->updateProduct()) {
             return $this->refresh();
@@ -173,8 +184,6 @@ class AdminController extends Controller
 
         return $this->render('detail/catalog', [
             'model' => $model,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
             'properties' => $properties,
         ]);
     }

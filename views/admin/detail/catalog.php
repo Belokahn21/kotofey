@@ -100,6 +100,10 @@ $this->title = Title::showTitle("Товары"); ?>
         </div>
     </div>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
+    <?php if ($_GET['action'] == 'copy'): ?>
+        <?php echo Html::submitInput('Копировать', ['name' => 'action', 'class' => 'btn-main', 'value' => 'new']); ?>
+        <?php echo Html::submitInput('Отмена', ['name' => 'action', 'class' => 'btn-main', 'value' => 'cancel']); ?>
+    <? endif; ?>
     <? ActiveForm::end(); ?>
 </div>
 
