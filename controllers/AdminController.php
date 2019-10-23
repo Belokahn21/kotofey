@@ -170,6 +170,7 @@ class AdminController extends Controller
 
             if ($_POST['action'] == 'Копировать') {
                 $model->id = null;
+                $model->article = null;
                 $model->isNewRecord = true;
                 if ($model->createProduct()) {
                     return $this->redirect('/admin/catalog');
