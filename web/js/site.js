@@ -149,9 +149,9 @@ $(document).ready(function () {
         $('.checkout-form').hide().eq($this.index()).show();
     });
 
-    $('.show-catalog-filter').click(function (e) {
-        $('.filter').toggle();
-    });
+    // $('.show-catalog-filter').click(function (e) {
+    //     $('.filter').toggle();
+    // });
 
     $("#filter-form-id").catalogFilter();
 });
