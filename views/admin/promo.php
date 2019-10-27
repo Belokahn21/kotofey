@@ -32,7 +32,7 @@ use yii\helpers\Html;
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Товары отсутствуют',
+    'emptyText' => 'Промокоды отсутствуют',
     'columns' => [
         [
             'attribute' => 'id',

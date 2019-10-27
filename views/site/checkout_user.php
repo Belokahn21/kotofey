@@ -47,9 +47,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
             <div class="left-col">
                 <h2>Быстрый заказ</h2>
                 <?php $form = ActiveForm::begin(); ?>
-                <?php echo $form->field($user, 'email'); ?>
                 <?php echo $form->field($user, 'phone'); ?>
-                <?php echo $form->field($user, 'new_password'); ?>
                 <?php echo Html::submitButton('Сделать заказ', ['class' => 'btn-main']); ?>
                 <?php ActiveForm::end(); ?>
             </div>
