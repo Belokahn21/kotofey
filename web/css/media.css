@@ -26,6 +26,7 @@
     .catalog{flex-wrap: wrap}
     .filter{width: 100%; display: none;}
         .filter button{width: 100%;}
+    .type-order-list__item{width:90%;}
     .footer-socials__item{flex-wrap: wrap;justify-content: space-around;}
         .footer-socials__item:last-child{width: 100%; text-align: center;}
 }
