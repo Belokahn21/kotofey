@@ -20,7 +20,7 @@ class ToDoWidget extends \yii\base\Widget
             $this->init = true;
         }
 
-        if ($_GET['run'] == "y") {
+        if (\Yii::$app->request->get('run') == "y") {
             $this->createNewTable();
 
             if ($this->checkExistTable() === true) {

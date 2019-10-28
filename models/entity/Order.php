@@ -173,7 +173,7 @@ class Order extends ActiveRecord
         return static::find()->where($params['filter'])->all();
     }
 
-    public function orderProfit()
+    public static function orderProfit()
     {
         $cash = 0;
         $orders = Order::find()->where(['paid' => 1])->all();
