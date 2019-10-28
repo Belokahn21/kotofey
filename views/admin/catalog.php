@@ -143,8 +143,8 @@ $this->title = Title::showTitle("Товары"); ?>
 			'attribute' => 'price',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return sprintf("(%s%%)", ($model->price - $model->purchase) / $model->purchase * 100);
-            }
+				return sprintf("%s (%s%%)", $model->price, ceil(($model->price - $model->purchase) / $model->purchase * 100));
+			}
 		],
 		'purchase',
 		[
