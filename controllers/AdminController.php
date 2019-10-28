@@ -122,7 +122,7 @@ class AdminController extends Controller
     public function actionCatalog($id = null)
     {
         // удалить товар
-        if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'delete') {
+        if (Yii::$app->request->get('action') == 'delete') {
             $item = Product::findOne($id);
 
             $item->removeOldImage();    // удалить превью
@@ -165,10 +165,10 @@ class AdminController extends Controller
         $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
         $properties = ProductProperties::find()->all();
 
-        if ($_GET['action'] == 'copy') {
+        if (Yii::$app->request->get('action') == 'copy') {
 
 
-            if ($_POST['action'] == 'Копировать') {
+            if (Yii::$app->request->post('action') == 'Копировать') {
                 $model->id = null;
                 $model->article = null;
                 $model->isNewRecord = true;
@@ -232,13 +232,13 @@ class AdminController extends Controller
 
     public function actionOrder($id = null)
     {
-        if ($_GET['id'] && $_GET['action'] && $_GET['action'] == 'delete') {
-            $order = Order::findOne((int)$_GET['id']);
+        if (Yii::$app->request->get('id') && Yii::$app->request->get('action') && Yii::$app->request->get('action') == 'delete') {
+            $order = Order::findOne((int)Yii::$app->request->get('id'));
             if ($order) {
                 $order->delete();
             }
 
-            $items = OrderItems::findAll(['orderId' => (int)$_GET['id']]);
+            $items = OrderItems::findAll(['orderId' => (int)Yii::$app->request->get('id')]);
             if ($items) {
                 foreach ($items as $item) {
                     $item->delete();

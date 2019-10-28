@@ -79,28 +79,30 @@ $this->title = Title::showTitle("Товары"); ?>
             <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
         </div>
         <div id="tab-5" class="tab-content">
-            <ul style="list-style: none; margin: 0; padding: 0;">
-                <? foreach ($properties as $property): ?>
-                    <? if($property->type==1): ?>
-                        <? $model->properties[$property->id] = ProductPropertiesValues::findOne([
-                            'product_id' => $model->id,
-                            'property_id' => $property->id
-                        ])->value; ?>
-                        <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id'=>$property->informer_id])->all(), 'id', 'value'), ['prompt'=>$property->name])->label($property->name); ?>
-                    <? else: ?>
-                        <?= $form->field($model, 'properties[' . $property->id . ']')->textInput([
-                            'value' => ProductPropertiesValues::findOne([
+            <?php try{ ?>
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    <? foreach ($properties as $property): ?>
+                        <? if($property->type==1): ?>
+                            <?php $value = ProductPropertiesValues::findOne([
                                 'product_id' => $model->id,
                                 'property_id' => $property->id
-                            ])->value
-                        ])->label($property->name); ?>
-                    <? endif; ?>
-                <? endforeach; ?>
-            </ul>
+                            ]);
+                            if ($value):
+                                $model->properties[$property->id] = $value->value;
+                            endif; ?>
+                            <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id'=>$property->informer_id])->all(), 'id', 'value'), ['prompt'=>$property->name])->label($property->name); ?>
+                        <? else: ?>
+                            <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => ProductPropertiesValues::findOne(['product_id' => $model->id,'property_id' => $property->id])->value])->label($property->name); ?>
+                        <? endif; ?>
+                    <? endforeach; ?>
+                </ul>
+            <?php }catch (ErrorException $exception){ ?>
+                <?= $exception->getMessage(); ?>
+            <?php } ?>
         </div>
     </div>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
-    <?php if ($_GET['action'] == 'copy'): ?>
+    <?php if (Yii::$app->request->get('action') == 'copy'): ?>
         <?php echo Html::submitInput('Копировать', ['name' => 'action', 'class' => 'btn-main', 'value' => 'new']); ?>
         <?php echo Html::submitInput('Отмена', ['name' => 'action', 'class' => 'btn-main', 'value' => 'cancel']); ?>
     <? endif; ?>
