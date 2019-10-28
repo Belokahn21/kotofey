@@ -22,11 +22,11 @@ class Backup
 
     public function config()
     {
-        if (YII_ENV == 'dev') {
-            $this->setDbUser(\Yii::$app->db->username);
-            $this->setDbPassword(\Yii::$app->db->password);
-            $this->setDbName('kotofey_shop');
-        }
+//        if (YII_ENV == 'dev') {
+//            $this->setDbUser(\Yii::$app->db->username);
+//            $this->setDbPassword(\Yii::$app->db->password);
+//            $this->setDbName('kotofey_shop');
+//        }
     }
 
     /**
