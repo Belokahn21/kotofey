@@ -51,7 +51,7 @@ class Basket
 
     public function getPromo()
     {
-        return $_SESSION['promobasket'];
+        return \Yii::$app->session->get('promobasket');
     }
 
     public function clear()
