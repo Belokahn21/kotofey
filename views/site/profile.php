@@ -89,7 +89,9 @@ Modal::begin([
                         <? /* @var $supportCategory \app\models\entity\support\SupportCategory */ ?>
                         <? foreach (SupportCategory::find()->all() as $supportCategory): ?>
                             <li class="support-categories-list_item" title="<?=$supportCategory->name;?>">
-                                <?= $supportCategory->html ?>
+                                <a href="<?= $supportCategory->getDetail(); ?>">
+                                    <?= $supportCategory->html ?>
+                                </a>
                             </li>
                         <? endforeach; ?>
 
