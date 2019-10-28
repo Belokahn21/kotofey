@@ -19,12 +19,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
         <?= Html::a('Очистить корзину', "/clear/", ['class' => 'btn-main grey']); ?>
         <?= Html::a('Оформить заказ', "/checkout/", ['class' => 'btn-main']); ?>
     <? endif; ?>
-    <? if (!empty($_SESSION['basket'])): ?>
+	<? if (!empty(Yii::$app->session->get('basket'))): ?>
         <div class="cart-wrap">
             <ul class="cart-list-items">
                 <? foreach ((new Basket())->listItems() as $item): ?>
                     <li class="cart-list-item">
-                        <img src="<?= $item->product->image ?>" title="<?= $item->prodcut->name ?>" alt="<?= $item->prodcut->name ?>">
+                        <img src="<?= $item->product->image ?>" title="<?= $item->product->name ?>" alt="<?= $item->product->name ?>">
                         <div class="cart-list-item__title"><?= $item->product->name ?></div>
                         <div class="cart-list-item__calc">
                             <form class="cart-list-item__calc-form">

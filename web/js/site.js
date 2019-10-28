@@ -160,7 +160,6 @@ $(document).ready(function () {
 (function ($) {
     var methods = {
         init: function (options) {
-            console.log("plugin catalog filter runed");
         },
         show: function () {
             // ПОДХОД

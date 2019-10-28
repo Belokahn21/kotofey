@@ -110,9 +110,9 @@ class SiteController extends Controller
 		}
 
 
-		if (System::isMobile() or $_GET['mobile'] == "Y") {
+//		if (System::isMobile() or Yii::$app->request->get('mobile') == "Y") {
 //            $this->layout = "mobile";
-		}
+//		}
 
 
 		return parent::beforeAction($action);

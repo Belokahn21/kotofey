@@ -59,9 +59,10 @@ class Basket
         unset($_SESSION['basket']);
     }
 
-    public function count()
+    public static function count()
     {
-        return count($_SESSION['basket']);
+        return count(\Yii::$app->session->get('basket'));
+//        return count($_SESSION['basket']);
     }
 
     public function isEmpty()

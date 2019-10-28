@@ -28,7 +28,7 @@ class System
 
     }
 
-    public function domain()
+    public static function domain()
     {
         return $_SERVER['HTTP_HOST'];
     }
@@ -38,7 +38,7 @@ class System
         return $this->protocol() . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
     }
 
-    public function protocol()
+    public static function protocol()
     {
         if (isset($_SERVER['HTTPS'])) {
             $scheme = $_SERVER['HTTPS'];
@@ -54,7 +54,7 @@ class System
         return $scheme;
     }
 
-    public function isMobile()
+    public static function isMobile()
     {
         $useragent = $_SERVER['HTTP_USER_AGENT'];
 

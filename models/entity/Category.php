@@ -112,9 +112,9 @@ class Category extends ActiveRecord
         return "/catalog/" . $this->slug . "/";
     }
 
-    public function findBySlug($slug)
+    public static function findBySlug($slug)
     {
-        return self::findOne(['slug' => $slug]);
+        return static::findOne(['slug' => $slug]);
     }
 
 
