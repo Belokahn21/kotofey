@@ -173,6 +173,7 @@ class AdminController extends Controller
 				$model->id = null;
 				$model->article = null;
 				$model->isNewRecord = true;
+				$model->scenario = Product::SCENARIO_NEW_PRODUCT;
 				if ($model->createProduct()) {
 					return $this->redirect('/admin/catalog/');
 				}

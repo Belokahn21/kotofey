@@ -156,7 +156,7 @@ class Product extends \yii\db\ActiveRecord
     {
         if (\Yii::$app->request->isPost) {
             if ($this->load(\Yii::$app->request->post())) {
-                $this->upload();
+//                $this->upload();
                 $this->uploadGallery();
                 if ($this->validate()) {
                     if (!$this->save()) {
@@ -185,7 +185,7 @@ class Product extends \yii\db\ActiveRecord
     {
         if (\Yii::$app->request->isPost) {
             if ($this->load(\Yii::$app->request->post())) {
-                $this->upload();
+//                $this->upload();
                 $this->uploadGallery();
                 if ($this->validate()) {
                     if (!$this->update()) {
@@ -209,23 +209,6 @@ class Product extends \yii\db\ActiveRecord
                 }
             }
         }
-    }
-
-
-    public function upload()
-    {
-//        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
-//        if (!empty($this->imageFile)) {
-//
-//            // удалить старое фото
-//            $this->removeOldImage();
-//
-//            $fileName = substr(md5($this->imageFile->baseName), 0, 32) . '.' . $this->imageFile->extension;
-//            $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
-//
-//            $this->imageFile->saveAs($path);
-//            $this->image = "/web/upload/" . $fileName;
-//        }
     }
 
     public function removeOldImage()
