@@ -30,7 +30,7 @@ class ConsoleController extends Controller
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->image = str_replace("/web/upload/", "", $product->image);
-            $product->update();
+            $product->update(false);
         }
     }
 
