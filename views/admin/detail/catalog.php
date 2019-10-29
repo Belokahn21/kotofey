@@ -112,7 +112,7 @@ $this->title = Title::showTitle("Товары"); ?>
 <div class="product-preview">
     <h2 class="title">Предпросмотр</h2>
     <div class="product-preview__image">
-        <img src="<?= $model->image; ?>" title="" alt="">
+        <img src="/web/upload/<?= $model->image; ?>" title="" alt="">
     </div>
     <div class="product-preview__name">
         <?= $model->name; ?>
