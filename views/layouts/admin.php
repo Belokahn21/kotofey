@@ -120,7 +120,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                                 </a>
                                 <ul>
                                     <li class="panel-menu__item sub">
-                                        <a href="<?php echo Url::to(['admin/sliderimages'])?>">Изображения</a>
+                                        <a href="<?php echo Url::to(['admin/sliderimages']) ?>">Изображения</a>
                                     </li>
                                 </ul>
                             </li>
