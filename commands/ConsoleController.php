@@ -28,6 +28,7 @@ class ConsoleController extends Controller
     {
         echo "run clean";
         $products = Product::find()->all();
+        print_r($products);
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->image = str_replace("/web/upload/", "", $product->image);
