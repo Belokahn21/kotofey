@@ -26,6 +26,7 @@ class ConsoleController extends Controller
 
     public function actionClean()
     {
+        echo "run clean";
         $products = Product::find()->all();
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
@@ -34,6 +35,7 @@ class ConsoleController extends Controller
                 print_r($product->getErrors());
             };
         }
+        echo "end clean";
     }
 
     public function actionPrice()
