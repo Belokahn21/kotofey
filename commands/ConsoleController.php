@@ -29,7 +29,7 @@ class ConsoleController extends Controller
         $products = Product::find()->all();
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->image = str_replace("/web/upload/", "", $product);
+            $product->image = str_replace("/web/upload/", "", $product->image);
             $product->update();
         }
     }
