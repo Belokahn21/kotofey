@@ -67,7 +67,7 @@ Modal::begin([
                                 <a href="/order/<?= $order->id; ?>/">
                                     <ul class="slide-order-info">
                                         <li class="slide-order-info__item">№ заказа <?= $order->id; ?></li>
-                                        <li class="slide-order-info__item">Сатус <?=$order->status->name;?></li>
+                                        <li class="slide-order-info__item">Сатус <? $order->getStatus()->name; ?></li>
                                         <li class="slide-order-info__item">Дата: <?= date("d.m.y", $order->created_at); ?></li>
                                         <li class="slide-order-info__item">Сумма: <?= $order->allsum(); ?> <?= (new Currency())->show(); ?></li>
                                         <li class="slide-order-info__item">Оплачен: <?= ($order->paid==true) ? '<i class="fas fa-check-circle" style="color: green;"></i>' : '<i class="fas fa-minus-circle" style="color: red;"></i>' ?></li>

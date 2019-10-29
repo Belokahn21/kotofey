@@ -592,17 +592,9 @@ class SiteController extends Controller
 	public function actionSignup()
 	{
 		$model = new User(['scenario' => User::SCENARIO_REGISTER]);
-		$vkweb = new VKWeb();
-		$vkweb->setRedirectUri("https://eventhorizont.ru/signup/");
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
-
-				if ($_SESSION['STORAGE']['vkuser']) {
-
-					$model->vk_uid = $_SESSION['STORAGE']['vkuser']->id;
-					VKUser::deleteFromSession();
-				}
 
 				if ($model->createUser()) {
 					if ($model->login()) {
@@ -614,23 +606,9 @@ class SiteController extends Controller
 			}
 		}
 
-		if (isset($_GET['code'])) {
-			$vkuser = $vkweb->getVKUser();
-			if ($vkuser) {
-				$vkuser->saveToSession();
-				return $this->render('auth/vk_signup', [
-					'model' => $model,
-					'vkweb' => $vkweb,
-					'vkuser' => $vkuser,
-				]);
-			} else {
-				VKUser::deleteFromSession();
-			}
-		}
 
 		return $this->render('auth/signup', [
 			'model' => $model,
-			'vkweb' => $vkweb,
 		]);
 	}
 
