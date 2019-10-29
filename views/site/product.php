@@ -25,7 +25,7 @@ $this->title = Title::showTitle($product->name); ?>
 <div class="detail-product" itemtype="http://schema.org/Product" itemscope>
     <div class="detail-product-wrap">
         <div class="detail-product-galery">
-            <a href="<?=$product->image;?>" class="image-link">
+            <a href="/web/upload/<?=$product->image;?>" class="image-link">
                 <img src="/web/upload/<?= $product->image ?>" alt="<?=$product->name;?>" title="<?=$product->name;?>" class="detail-product__image">
             </a>
         </div>
