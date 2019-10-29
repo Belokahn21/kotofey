@@ -24,6 +24,16 @@ class ConsoleController extends Controller
         }
     }
 
+    public function actionClean()
+    {
+        $products = Product::find()->all();
+        foreach ($products as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->image = str_replace("/web/upload/", "", $product);
+            $product->update();
+        }
+    }
+
     public function actionPrice()
     {
         $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
