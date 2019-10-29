@@ -1,13 +1,7 @@
 <?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 23:51
- */
 
 namespace app\models\behaviors;
 
-use yii\base\Behavior;
 use yii\behaviors\AttributeBehavior;
 use yii\db\BaseActiveRecord;
 use yii\db\Expression;
@@ -38,6 +32,6 @@ class ArticleBehavior extends AttributeBehavior
 
     public function generateUniqueValue()
     {
-        return strtoupper(\Yii::$app->security->generateRandomString(5));
+        return rand(0, 99999);
     }
 }

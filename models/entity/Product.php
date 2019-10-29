@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 use app\models\behaviors\ArticleBehavior;
+use mohorev\file\UploadBehavior;
 use yii\base\ErrorException;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
@@ -40,8 +41,8 @@ class Product extends \yii\db\ActiveRecord
     public $imagesFiles;
     public $properties;
 
-    const SCENARIO_NEW_PRODUCT = 1;
-    const SCENARIO_UPDATE_PRODUCT = 2;
+    const SCENARIO_NEW_PRODUCT = 'insert';
+    const SCENARIO_UPDATE_PRODUCT = 'update';
 
     public function scenarios()
     {
@@ -94,13 +95,13 @@ class Product extends \yii\db\ActiveRecord
 
             [['count', 'price', 'purchase', 'category', 'vitrine', 'stock_id', 'active'], 'integer'],
 
-            [['image', 'images', 'code'], 'string'],
+            [['images', 'code'], 'string'],
 
             [['vitrine'], 'default', 'value' => false],
             [['active'], 'default', 'value' => 1],
 
 
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
             [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
         ];
     }
@@ -139,6 +140,13 @@ class Product extends \yii\db\ActiveRecord
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'name',
                 'ensureUnique' => true,
+            ],
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'image',
+                'scenarios' => ['insert', 'update'],
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/',
             ],
             ArticleBehavior::className()
         ];
@@ -206,18 +214,18 @@ class Product extends \yii\db\ActiveRecord
 
     public function upload()
     {
-        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
-        if (!empty($this->imageFile)) {
-
-            // удалить старое фото
-            $this->removeOldImage();
-
-            $fileName = substr(md5($this->imageFile->baseName), 0, 32) . '.' . $this->imageFile->extension;
-            $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
-
-            $this->imageFile->saveAs($path);
-            $this->image = "/web/upload/" . $fileName;
-        }
+//        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
+//        if (!empty($this->imageFile)) {
+//
+//            // удалить старое фото
+//            $this->removeOldImage();
+//
+//            $fileName = substr(md5($this->imageFile->baseName), 0, 32) . '.' . $this->imageFile->extension;
+//            $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
+//
+//            $this->imageFile->saveAs($path);
+//            $this->image = "/web/upload/" . $fileName;
+//        }
     }
 
     public function removeOldImage()
