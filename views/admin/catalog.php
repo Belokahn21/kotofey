@@ -164,7 +164,7 @@ $this->title = Title::showTitle("Товары"); ?>
             'attribute' => 'image',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::img($model->image, ['width' => 70]);
+                return Html::img('/web/upload/' . $model->image, ['width' => 70]);
             }
         ],
         [

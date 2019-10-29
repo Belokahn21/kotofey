@@ -26,7 +26,7 @@ $this->title = Title::showTitle($product->name); ?>
     <div class="detail-product-wrap">
         <div class="detail-product-galery">
             <a href="<?=$product->image;?>" class="image-link">
-                <img src="<?= $product->image ?>" alt="<?=$product->name;?>" title="<?=$product->name;?>" class="detail-product__image">
+                <img src="/web/upload/<?= $product->image ?>" alt="<?=$product->name;?>" title="<?=$product->name;?>" class="detail-product__image">
             </a>
         </div>
         <div class="detail-product-info">

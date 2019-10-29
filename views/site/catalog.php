@@ -32,7 +32,7 @@ if ($category) {
             <li class="catalog-list__item">
                 <a href="<?php echo $product->getDetail(); ?>">
                     <div class="catalog-list__item-image-wrap">
-                        <img class="catalog-list__item-image" src="<?php echo $product->image; ?>" title="<?php echo $product->detail; ?>" alt="<?php echo $product->detail; ?>">
+                        <img class="catalog-list__item-image" src="/web/upload/<?php echo $product->image; ?>" title="<?php echo $product->detail; ?>" alt="<?php echo $product->detail; ?>">
                     </div>
                     <h2 class="catalog-list__item-title" title="<?= $product->name; ?>"><?php echo StringHelper::truncate($product->name,70,'...'); ?></h2>
                     <div class="catalog-list__item-category"><?php echo Category::findOne($product->category)->name; ?></div>
