@@ -54,7 +54,7 @@ class Basket
 		return \Yii::$app->session->get('promobasket');
 	}
 
-	public function clear()
+	public static function clear()
 	{
 		unset($_SESSION['basket']);
 	}

@@ -32,23 +32,39 @@ $this->title = Title::showTitle($product->name); ?>
         <div class="detail-product-info">
 
             <div class="detail-product__title-wrap">
-                <span class="item-bookmark" data-id="<?= $product->id; ?>">
-                    <? if (Favorite::isProductInFavorite($product->id)): ?>
-                        <i class="fas fa-bookmark"></i>
-                    <? else: ?>
-                        <i class="far fa-bookmark"></i>
-                    <? endif; ?>
-                </span>
+
                 <h1 class="detail-product__title"><?= $product->name ?></h1>
             </div>
 
             <div class="detail-product__category"><a href="<?= $category->detail; ?>"><?= $category->name; ?></a></div>
             <div class="block-buy-wrap">
-                <div class="detail-product__price"><?= Price::format($product->price) ?> <?= (new Currency())->show(); ?></div>
-                <a href="" class="detail-product__cart add-basket" data-id="<?=$product->id;?>"><i class="fas fa-shopping-cart"></i></a>
+                <div class="detail-product__price">
+                    <?= Price::format($product->price) ?> <?= Currency::getInstance()->show(); ?>
+                    <span class="detail-product__available">
+                        <?php if ($product->vitrine == 1): ?>
+                            В наличии
+						<?php else: ?>
+							<?php if ($product->count > 0): ?>
+                                В наличии <?= $product->count; ?> шт.
+							<?php else: ?>
+                                <span class="error">Нет в наличии</span>
+							<?php endif; ?>
+						<?php endif ?>
+                    </span>
+                </div>
+                <a class="detail-product__cart add-basket" data-id="<?=$product->id;?>">
+                    <i class="fas fa-shopping-cart"></i>
+                </a>
                 <?= FastBuyWidget::widget([
                         'product'=>$product
                 ]); ?>
+                <span class="item-bookmark" data-id="<?= $product->id; ?>">
+                    <? if (Favorite::isProductInFavorite($product->id)): ?>
+                        <i class="fas fa-bookmark"></i>
+					<? else: ?>
+                        <i class="far fa-bookmark"></i>
+					<? endif; ?>
+                </span>
             </div>
             <ul class="detail-product-properties">
                 <li class="detail-product-properties__item">

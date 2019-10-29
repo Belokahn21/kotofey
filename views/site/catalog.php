@@ -6,17 +6,13 @@
 
 /* @var $category \app\models\entity\Category */
 
-use app\models\entity\InformersValues;
+use yii\helpers\StringHelper;
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
 use app\widgets\catalog_filter\CatalogFilterWidget;
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use app\models\entity\Category;
 use app\models\forms\CatalogFilter;
-use yii\helpers\ArrayHelper;
-use yii\widgets\Pjax;
 use yii\widgets\LinkPager;
 
 $this->title = Title::showTitle("Товары");
@@ -36,12 +32,11 @@ if ($category) {
             <li class="catalog-list__item">
                 <a href="<?php echo $product->getDetail(); ?>">
                     <div class="catalog-list__item-image-wrap">
-                        <img class="catalog-list__item-image" src="<?php echo $product->image; ?>"
-                             title="<?php echo $product->detail; ?>" alt="<?php echo $product->detail; ?>">
+                        <img class="catalog-list__item-image" src="<?php echo $product->image; ?>" title="<?php echo $product->detail; ?>" alt="<?php echo $product->detail; ?>">
                     </div>
-                    <h2 class="catalog-list__item-title"><?php echo $product->name; ?></h2>
+                    <h2 class="catalog-list__item-title" title="<?= $product->name; ?>"><?php echo StringHelper::truncate($product->name,70,'...'); ?></h2>
                     <div class="catalog-list__item-category"><?php echo Category::findOne($product->category)->name; ?></div>
-                    <div class="catalog-list__item-price"><?php echo Price::format($product->price); ?><?php echo (new Currency())->show(); ?></div>
+                    <div class="catalog-list__item-price"><?php echo Price::format($product->price); ?><?php echo Currency::getInstance()->show(); ?></div>
                 </a>
             </li>
         <?php endforeach; ?>

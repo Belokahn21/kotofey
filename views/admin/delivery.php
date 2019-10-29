@@ -1,6 +1,7 @@
 <?
 
 /* @var $this yii\web\View */
+/* @var $model \app\models\entity\Delivery */
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -13,6 +14,7 @@ $this->title = Title::showTitle("Управление доставками");
 <section class="delivery">
     <h1 class="title">Доставки</h1>
     <? $form = ActiveForm::begin(); ?>
+    <?= $form->field($model, 'active')->checkbox(); ?>
     <?= $form->field($model, 'name') ?>
     <?= $form->field($model, 'description')->textarea(); ?>
     <?= Html::submitButton('Добавить') ?>
@@ -38,10 +40,10 @@ $this->title = Title::showTitle("Управление доставками");
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
                 },
                 'update' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/catalog/$key"]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/delivery/$key"]));
                 },
                 'delete' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
+                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["/admin/delivery/", 'id' => $key, 'action' => 'delete']));
                 },
             ]
         ],

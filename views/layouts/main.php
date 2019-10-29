@@ -92,8 +92,9 @@ $this->beginPage() ?>
                 </div>
                 <div class="basket-title">
                     Корзина
-                    <div class="basket-count"><?= Yii::$app->i18n->format("{n, plural, =0{Корзина пуста} =1{В крзине - # товар} one{В крзине - # товар} few{В корзине - # товара} many{В корзине - # товаров} other{dev -}}",
-                            ['n' => Basket::count()], 'ru_RU'); ?></div>
+                    <div class="basket-count">
+                        <?= Yii::$app->i18n->format("{n, plural, =0{Корзина пуста} =1{В крзине - # товар} one{В крзине - # товар} few{В корзине - # товара} many{В корзине - # товаров} other{В корзине - # товара}}", ['n' => Basket::count()], 'ru_RU'); ?>
+                    </div>
                 </div>
             </a>
             <? if (count((new Basket())->listItems()) > 0): ?>

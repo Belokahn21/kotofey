@@ -13,7 +13,9 @@ class Delivery extends ActiveRecord
         return [
             ['name', 'required', 'message' => '{attribute} должно быть заполнено'],
 
-            ['description', 'string']
+            ['description', 'string'],
+
+            ['active', 'boolean'],
         ];
     }
 
@@ -30,6 +32,7 @@ class Delivery extends ActiveRecord
             'id' => "ID",
             'name' => "Нвазвание",
             'description' => "Описаниие",
+            'active' => "Активность",
         ];
     }
 

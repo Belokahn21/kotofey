@@ -9,6 +9,7 @@ use app\models\tool\Price;
 use app\models\tool\Currency;
 use yii\helpers\Html;
 use app\models\entity\Basket;
+use yii\helpers\StringHelper;
 
 $this->title = Title::showTitle("Корзина товаров");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'url' => ['/basket/']];
@@ -24,8 +25,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
             <ul class="cart-list-items">
                 <? foreach ((new Basket())->listItems() as $item): ?>
                     <li class="cart-list-item">
-                        <img src="<?= $item->product->image ?>" title="<?= $item->product->name ?>" alt="<?= $item->product->name ?>">
-                        <div class="cart-list-item__title"><?= $item->product->name ?></div>
+                        <div class="cart-list-item__image-wrap">
+                            <img src="<?= $item->product->image ?>" title="<?= $item->product->name ?>" alt="<?= $item->product->name ?>">
+                        </div>
+                        <div class="cart-list-item__title"><?= StringHelper::truncate($item->product->name,70,'...')?></div>
                         <div class="cart-list-item__calc">
                             <form class="cart-list-item__calc-form">
                                 <i class="fas fa-minus" data-id="<?=$item->product->id;?>"></i> <input size="1" class="cart-list-item__calc-count" name="count" placeholder="1" value="<?=$item->count;?>"> <i class="fas fa-plus" data-id="<?=$item->product->id;?>"></i>

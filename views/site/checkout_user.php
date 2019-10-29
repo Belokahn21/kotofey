@@ -4,16 +4,13 @@
 
 /* @var $billing \app\models\entity\user\Billing */
 
-use app\models\tool\seo\Title;
 use yii\helpers\ArrayHelper;
-use yii\web\View;
+use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use app\models\entity\Basket;
-use app\models\tool\Policy;
-use app\widgets\promoCart\promoCartWidget;
 
 $this->title = Title::showTitle("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
@@ -54,11 +51,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     <h2 class="checkout__title">Заказ</h2>
                     <div>
                         <div class="left-col" style="padding: 0 1% 0 0;">
-                            <?= $form->field($order, 'delivery')->dropDownList(\yii\helpers\ArrayHelper::map($delivery, 'id', 'name'),
+                            <?= $form->field($order, 'delivery')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'),
                                 ['prompt' => "Способ доставки"]); ?>
                         </div>
                         <div class="right-col" style="padding: 0;">
-                            <?= $form->field($order, 'payment')->dropDownList(\yii\helpers\ArrayHelper::map($payment, 'id', 'name'),
+                            <?= $form->field($order, 'payment')->dropDownList(ArrayHelper::map($payment, 'id', 'name'),
                                 ['prompt' => "Способ оплаты"]); ?>
                         </div>
                     </div>

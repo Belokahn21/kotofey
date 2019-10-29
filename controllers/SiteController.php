@@ -120,7 +120,14 @@ class SiteController extends Controller
 
 	public function actionIndex()
 	{
-		$providers = Providers::find()->where(['active' => true])->select(['name','description','link','image','sort','active'])->all();
+		$providers = Providers::find()->where(['active' => true])->select([
+			'name',
+			'description',
+			'link',
+			'image',
+			'sort',
+			'active'
+		])->all();
 		$news = News::find()->all();
 
 		Attributes::metaDescription("Зоотовары онлайн с доставкой по Барнаулу и по всей России. Всегда свежие товары и по низкой цене!");
@@ -134,7 +141,7 @@ class SiteController extends Controller
 
 		return $this->render('index', [
 			'providers' => $providers,
-			'news'=>$news
+			'news' => $news
 		]);
 	}
 
@@ -220,13 +227,7 @@ class SiteController extends Controller
 		}
 
 
-		$delivery = Delivery::find()->all();
-		$payment = Payment::find()->all();
-		$basket = new Basket();
-		$order = new Order();
-
 		$category = Category::findOne($product->category);
-		$properties = \app\models\entity\ProductPropertiesValues::find()->where(['product_id' => $product->id])->all();
 
 		if (!empty($product->seo_description)) {
 			Attributes::metaDescription($product->seo_description);
@@ -254,12 +255,6 @@ class SiteController extends Controller
 		return $this->render('product', [
 			'product' => $product,
 			'category' => $category,
-			'properties' => $properties,
-
-			'order' => $order,
-			'delivery' => $delivery,
-			'payment' => $payment,
-			'basket' => $basket,
 		]);
 	}
 
@@ -271,8 +266,8 @@ class SiteController extends Controller
 
 	public function actionCheckout()
 	{
-		$delivery = Delivery::find()->all();
-		$payment = Payment::find()->all();
+		$delivery = Delivery::find()->where(['active' => 1])->all();
+		$payment = Payment::find()->where(['active' => 1])->all();
 		$basket = new Basket();
 
 		if ($basket->isEmpty()) {
