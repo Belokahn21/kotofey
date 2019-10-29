@@ -26,22 +26,25 @@ class ConsoleController extends Controller
 
     public function actionClean()
     {
-        echo "run clean";
-        $products = Product::find()->all();
-        print_r($products);
-        foreach ($products as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->image = str_replace("/web/upload/", "", $product->image);
+        $sql = 'select `id`, `image` from `product` ';
+        $q = Yii::$app->db->createCommand($sql);
 
-            if (!$product->validate()) {
-                if (!$product->update(false)) {
-                    print_r($product->getErrors());
-                }
-            } else {
-                print_r($product->getErrors());
+        $products = $q->queryAll();
+
+        foreach ($products as $product) {
+            echo $product['image'];
+
+            if (!empty($product['image'])) {
+
+                $image = str_replace('/web/upload/', '', $product['image']);
+
+                $sql = 'UPDATE `product` SET `image`=:image WHERE `id`=:id';
+                Yii::$app->db->createCommand($sql)->bindValues([
+                    ':image' => $image,
+                    ':id' => $product['id']
+                ])->query();
             }
         }
-        echo "end clean";
     }
 
     public function actionPrice()
