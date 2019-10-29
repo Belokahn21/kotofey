@@ -32,9 +32,14 @@ class ConsoleController extends Controller
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->image = str_replace("/web/upload/", "", $product->image);
-            if (!$product->update(false)) {
+
+            if (!$product->validate()) {
+                if (!$product->update(false)) {
+                    print_r($product->getErrors());
+                }
+            } else {
                 print_r($product->getErrors());
-            };
+            }
         }
         echo "end clean";
     }
