@@ -42,6 +42,9 @@ class Billing extends ActiveRecord
     {
         return [
             [['city', 'street', 'home', 'house'], 'string'],
+
+            [['city', 'street', 'home', 'house'], 'default', 'value' => null],
+
             [['user_id'], 'integer'],
         ];
     }

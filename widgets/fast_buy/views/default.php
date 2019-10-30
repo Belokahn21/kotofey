@@ -22,9 +22,9 @@ use app\models\tool\Policy;
 
     <div class="fast_buy_detail_product">
         <div class="fast_buy_detail_product__image-wrap">
-            <img class="fast_buy_detail_product__image" src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>" title="<?php echo $product->name; ?>">
+            <img class="fast_buy_detail_product__image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?=$product->name; ?>">
         </div>
-        <div class="fast_buy_detail_product__title"><?php echo $product->name; ?></div>
+        <div class="fast_buy_detail_product__title"><?= $product->name; ?></div>
     </div>
 
     <hr/>

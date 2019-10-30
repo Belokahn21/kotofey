@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
                 <? foreach ((new Basket())->listItems() as $item): ?>
                     <li class="cart-list-item">
                         <div class="cart-list-item__image-wrap">
-                            <img src="<?= $item->product->image ?>" title="<?= $item->product->name ?>" alt="<?= $item->product->name ?>">
+                            <img src="/web/upload/<?= $item->product->image ?>" title="<?= $item->product->name ?>" alt="<?= $item->product->name ?>">
                         </div>
                         <div class="cart-list-item__title"><?= StringHelper::truncate($item->product->name,70,'...')?></div>
                         <div class="cart-list-item__calc">

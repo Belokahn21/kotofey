@@ -28,7 +28,7 @@ use yii\helpers\ArrayHelper;
  * @property integer $status
  * @property boolean $paid
  * @property string $promo_code
- * @property string $summary
+ * @property string $summared
  * @property integer $created_at
  * @property integer $updated_at
  */

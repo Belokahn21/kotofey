@@ -4,6 +4,7 @@ namespace app\models\tool;
 
 
 use app\models\entity\User;
+use yii\db\ActiveRecord;
 
 class Debug
 {
@@ -34,5 +35,17 @@ class Debug
 
             file_put_contents($filePath, $info . "\n", FILE_APPEND | LOCK_EX);
         }
+    }
+
+    public static function modelErrors($model)
+    {
+        $strError = '';
+        if ($model instanceof ActiveRecord) {
+            foreach ($model->getErrors() as $key => $errors) {
+                $strError .= '<br/>' . implode(';', $errors);
+            }
+        }
+
+        return $strError;
     }
 }

@@ -22,13 +22,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
             <div class="form-wrap">
                 <h2>Быстрый заказ</h2>
 				<?php $form = ActiveForm::begin(); ?>
-				<?= $form->field($user, 'email'); ?>
+                <?= $form->field($user, 'email'); ?>
 				<?= $form->field($user, 'phone'); ?>
-				<?= $form->field($user, 'password'); ?>
-				<?= $form->field($order, 'type')->hiddenInput([
-					'value' => Order::SCENARIO_FAST_ORDER,
-					'readonly' => true
-				])->label(false); ?>
+				<?= $form->field($user, 'password')->passwordInput(); ?>
+				<?= $form->field($order, 'type')->hiddenInput(['value' => Order::SCENARIO_FAST_ORDER,'readonly' => true])->label(false); ?>
 				<?= Html::submitButton('Сделать заказ', ['class' => 'btn-main']); ?>
 				<?php ActiveForm::end(); ?>
             </div>
@@ -58,8 +55,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                 <div class="elem-form">
                     <h2 class="checkout__title">Покупатель</h2>
 					<?= $form->field($user, 'email'); ?>
-					<?= $form->field($user, 'phone'); ?>
-					<?= $form->field($user, 'password'); ?>
+					<?= $form->field($user, 'password')->passwordInput(); ?>
                 </div>
                 <div class="elem-form">
                     <h2 class="checkout__title">Адрес доставки</h2>

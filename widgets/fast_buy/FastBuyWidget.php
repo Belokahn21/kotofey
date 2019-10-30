@@ -1,10 +1,4 @@
 <?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 14:03
- */
-
 
 namespace app\widgets\fast_buy;
 
@@ -30,9 +24,44 @@ class FastBuyWidget extends \yii\base\Widget
 
     public function run()
     {
-        $user = new User();
-        $order = new Order();
-        $order_items = new OrderItems();
+        $user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
+
+        if (Yii::$app->request->isPost) {
+            if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+                if ($user->save() === false) {
+                    Notify::setErrorNotify(Debug::modelErrors($user));
+                    Yii::$app->controller->refresh();
+                }
+
+                $user->login($user->id);
+            } else {
+                $user = User::findOne(Yii::$app->user->id);
+            }
+
+            $basket = new Basket();
+            $basket->product = $this->product;
+            $basket->count = 1;
+            $basket->add();
+
+            $order = new Order(['scenario' => Order::SCENARIO_FAST_ORDER]);
+            $order->user = $user->id;
+            if (Basket::getInstance()->cash() < 500) {
+                $order->summared = 100;
+            }
+            if ($order->validate() == false) {
+                Notify::setErrorNotify(Debug::modelErrors($order));
+                Yii::$app->controller->refresh();
+            }
+
+            $order->save();
+
+            $items = new OrderItems();
+            $items->orderId = $order->id;
+            if ($items->saveItems() === false) {
+                Notify::setErrorNotify(Debug::modelErrors($items));
+                Yii::$app->controller->refresh();
+            }
+        }
 
 
         return $this->render($this->template, [
