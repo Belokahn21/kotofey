@@ -1,231 +1,234 @@
 $(document).ready(function () {
 
-    $('.phone_mask').text(function (i, text) {
-        return text.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3 $4-$5');
-    });
+	$('.phone_mask').text(function (i, text) {
+		return text.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3 $4-$5');
+	});
 
-    var placeholder = "";
-    $("input[type=text]").click(function () {
+	var placeholder = "";
+	$("input[type=text]").click(function () {
 
-        placeholder = $(this).attr('placeholder');
-        $(this).attr('placeholder', "");
+		placeholder = $(this).attr('placeholder');
+		$(this).attr('placeholder', "");
 
-    }).blur(function () {
+	}).blur(function () {
 
-        $(this).attr('placeholder', placeholder);
-        placeholder = "";
+		$(this).attr('placeholder', placeholder);
+		placeholder = "";
 
-    });
+	});
 
-    // пункты описания в детальном просмотре товара
-    $(".harmon-title").click(function () {
-        var $this = $(this);
-        $this.find('i').toggleClass("fa-chevron-up fa-chevron-down");
-        $this.siblings(".harmon-content").slideToggle("slow");
-    });
+	// пункты описания в детальном просмотре товара
+	$(".harmon-title").click(function () {
+		var $this = $(this);
+		$this.find('i').toggleClass("fa-chevron-up fa-chevron-down");
+		$this.siblings(".harmon-content").slideToggle("slow");
+	});
 
-    var providers = $('.list-providers').owlCarousel({
-        autoplay: true,
-        autoplayTimeout: 5000,
-        loop: true,
-        items: 1,
-        slideBy: 1,
-        scrollPerPage: true,
-        autoHeight: true,
-        autoWeight: true
-        // dots: true
-    });
+	var providers = $('.list-providers').owlCarousel({
+		autoplay: true,
+		autoplayTimeout: 5000,
+		loop: true,
+		items: 1,
+		slideBy: 1,
+		scrollPerPage: true,
+		autoHeight: true,
+		autoWeight: true
+		// dots: true
+	});
 
-    var news = $('.list-news').owlCarousel({
-        autoplay: true,
-        autoplayTimeout: 3500,
-        loop: true,
-        items: 1,
-        slideBy: 1,
-        scrollPerPage: true,
-        autoHeight: true,
-        autoWeight: true
-        // dots: true
-    });
-
-
-    var owl = $('.owl-main').owlCarousel({
-        margin: 10,
-        loop: true,
-        items: 1,
-        slideBy: 1,
-        scrollPerPage: true,
-        autoHeight: true,
-        autoWeight: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            960: {
-                items: 3
-            },
-            1200: {
-                items: 4
-            }
-        }
-    });
-
-    var owlDetail = $('.owl-detail').owlCarousel({
-        margin: 10,
-        loop: true,
-        items: 3,
-        autoHeight: true,
-        autoWeight: true,
-    });
-
-    //Firefox:
-    owl.on('DOMMouseScroll', '.owl-stage', function (e) {
-        if (e.originalEvent.detail > 0) {
-            $(this).trigger('next.owl');
-        } else {
-            $(this).trigger('prev.owl');
-        }
-        e.preventDefault();
-    });
-    //Chrome, IE
-    owl.on('mousewheel', '.owl-stage', function (e) {
-        if (e.originalEvent.wheelDelta > 0) {
-            $(this).trigger('next.owl');
-        } else {
-            $(this).trigger('prev.owl');
-        }
-        e.preventDefault();
-    });
+	var news = $('.list-news').owlCarousel({
+		autoplay: true,
+		autoplayTimeout: 3500,
+		loop: true,
+		items: 1,
+		slideBy: 1,
+		scrollPerPage: true,
+		autoHeight: true,
+		autoWeight: true
+		// dots: true
+	});
 
 
-    // удалить из закладок в личном профиле
-    $(".owl-carousel div i").click(function () {
-        var $this = $(this);
-        $.post("/ajax/removebookmark/", {id: $this.data('id')}, function (data) {
-            if (data.result == 2) {
+	var owl = $('.owl-main').owlCarousel({
+		margin: 10,
+		loop: true,
+		items: 1,
+		slideBy: 1,
+		scrollPerPage: true,
+		autoHeight: true,
+		autoWeight: true,
+		responsive: {
+			0: {
+				items: 1
+			},
+			600: {
+				items: 2
+			},
+			960: {
+				items: 3
+			},
+			1200: {
+				items: 4
+			}
+		}
+	});
 
-                $this.parent("div").remove();
+	var owlDetail = $('.owl-detail').owlCarousel({
+		margin: 10,
+		loop: true,
+		items: 3,
+		autoHeight: true,
+		autoWeight: true,
+	});
 
-                owl.trigger('refresh.owl.carousel');
-
-            }
-        }, 'JSON');
-    });
-
-    showTab(0);
-    $(".select-type-order div").click(function () {
-
-        var $this = $(this);
-        $this.siblings('div').removeClass("active");
-        $this.addClass("active");
-
-        showTab($this.index())
-    });
-
-    function showTab(index) {
-
-        $(".custom-order-elems").hide().eq(index).show();
-    }
-
-    $('.show-drop').click(function () {
-        $('.drop-all-cats').toggleClass("show hide");
-    });
+	//Firefox:
+	owl.on('DOMMouseScroll', '.owl-stage', function (e) {
+		if (e.originalEvent.detail > 0) {
+			$(this).trigger('next.owl');
+		} else {
+			$(this).trigger('prev.owl');
+		}
+		e.preventDefault();
+	});
+	//Chrome, IE
+	owl.on('mousewheel', '.owl-stage', function (e) {
+		if (e.originalEvent.wheelDelta > 0) {
+			$(this).trigger('next.owl');
+		} else {
+			$(this).trigger('prev.owl');
+		}
+		e.preventDefault();
+	});
 
 
-    $('.type-order-list__item').click(function () {
-        var $this = $(this);
-        var cookie_value = $this.data('cookie');
+	// удалить из закладок в личном профиле
+	$(".owl-carousel div i").click(function () {
+		var $this = $(this);
+		$.post("/ajax/removebookmark/", {id: $this.data('id')}, function (data) {
+			if (data.result == 2) {
 
-        $.cookie('order', cookie_value);
+				$this.parent("div").remove();
 
-        $('.type-order-list__item').each(function () {
-            $(this).removeClass('active')
-        });
-        $this.addClass('active');
+				owl.trigger('refresh.owl.carousel');
 
-        $('.checkout-form').hide().eq($this.index()).show();
-    });
+			}
+		}, 'JSON');
+	});
 
-    $('.show-catalog-filter.filter-mobile').click(function (e) {
-        $('.filter').toggle();
-    });
+	showTab(0);
+	$(".select-type-order div").click(function () {
 
-    $("#filter-form-id").catalogFilter();
+		var $this = $(this);
+		$this.siblings('div').removeClass("active");
+		$this.addClass("active");
+
+		showTab($this.index());
+	});
+
+	function showTab(index) {
+
+		$(".custom-order-elems").hide().eq(index).show();
+	}
+
+	$('.show-drop').click(function () {
+		$('.drop-all-cats').toggleClass("show hide");
+	});
+
+
+	$('.checkout-form.' + $.cookie('order')).css('display', 'flex');
+	$('.type-order-list__item[data-cookie=' + $.cookie('order') + ']').addClass('active');
+	$('.type-order-list__item').click(function () {
+		var $this = $(this);
+		var cookie_value = $this.data('cookie');
+
+		$.cookie('order', cookie_value);
+
+		$('.type-order-list__item').each(function () {
+			$(this).removeClass('active');
+		});
+		$this.addClass('active');
+
+		$('.checkout-form').hide();
+		$('.checkout-form.' + cookie_value).css('display', 'flex');
+	});
+
+	$('.show-catalog-filter.filter-mobile').click(function (e) {
+		$('.filter').toggle();
+	});
+
+	$("#filter-form-id").catalogFilter();
 });
 
 
 (function ($) {
-    var methods = {
-        init: function (options) {
-        },
-        show: function () {
-            // ПОДХОД
-        },
-        hide: function () {
-            // ПРАВИЛЬНЫЙ
-        },
-        update: function (content) {
-            // !!!
-        }
-    };
-    $.fn.catalogFilter = function (method) {
-        var $this = this;
+	var methods = {
+		init: function (options) {
+		},
+		show: function () {
+			// ПОДХОД
+		},
+		hide: function () {
+			// ПРАВИЛЬНЫЙ
+		},
+		update: function (content) {
+			// !!!
+		}
+	};
+	$.fn.catalogFilter = function (method) {
+		var $this = this;
 
-        this.find("input, select").each(function () {
+		this.find("input, select").each(function () {
 
-            $(this).change(function () {
+			$(this).change(function () {
 
-                $.ajax({
-                    'url': location.href + '?' + $this.serialize(),
-                    'method': 'get',
-                    beforeSend: function () {
-                        $('.pagination-wrap').html("");
+				$.ajax({
+					'url': location.href + '?' + $this.serialize(),
+					'method': 'get',
+					beforeSend: function () {
+						$('.pagination-wrap').html("");
 
 
-                        $('.catalog-list').html($('<img>', {
-                            src: '/web/upload/images/loading.gif',
-                            css: {
-                                'width': ' 300px',
-                                'height': ' 300px',
-                                'align-self': 'center',
-                                'align-content': 'center'
-                            }
-                        }));
-                    },
-                    success: function (data) {
+						$('.catalog-list').html($('<img>', {
+							src: '/web/upload/images/loading.gif',
+							css: {
+								'width': ' 300px',
+								'height': ' 300px',
+								'align-self': 'center',
+								'align-content': 'center'
+							}
+						}));
+					},
+					success: function (data) {
 
-                        setTimeout(function () {
+						setTimeout(function () {
 
-                            var $page = $(data);
+							var $page = $(data);
 
-                            $('.catalog-list').html("");
+							$('.catalog-list').html("");
 
-                            $page.find('.catalog-list').find('li').each(function () {
-                                $('.catalog-list').append($(this));
-                            });
-                            $('.pagination-wrap').html($page.find('.pagination'));
+							$page.find('.catalog-list').find('li').each(function () {
+								$('.catalog-list').append($(this));
+							});
+							$('.pagination-wrap').html($page.find('.pagination'));
 
-                        }, 2500);
+						}, 2500);
 
-                    }
-                });
+					}
+				});
 
-                // $.post("/ajax/filter/", $this.serialize(), function (data) {
-                //     console.log(data);
-                // }, "JSON");
-            });
-        });
+				// $.post("/ajax/filter/", $this.serialize(), function (data) {
+				//     console.log(data);
+				// }, "JSON");
+			});
+		});
 
-        // логика вызова метода
-        if (methods[method]) {
-            return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
-        } else if (typeof method === 'object' || !method) {
-            return methods.init.apply(this, arguments);
-        } else {
-            $.error('Метод с именем ' + method + ' не существует для catalog filter');
-        }
-    };
+		// логика вызова метода
+		if (methods[method]) {
+			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+		} else if (typeof method === 'object' || !method) {
+			return methods.init.apply(this, arguments);
+		} else {
+			$.error('Метод с именем ' + method + ' не существует для catalog filter');
+		}
+	};
 })(jQuery);
