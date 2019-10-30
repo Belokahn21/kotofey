@@ -100,8 +100,8 @@ class Product extends \yii\db\ActiveRecord
             [['active'], 'default', 'value' => 1],
 
 
-            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-            [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg', 'maxFiles' => 10],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp'],
+            [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp', 'maxFiles' => 10],
         ];
     }
 
@@ -155,7 +155,6 @@ class Product extends \yii\db\ActiveRecord
     {
         if (\Yii::$app->request->isPost) {
             if ($this->load(\Yii::$app->request->post())) {
-//                $this->upload();
                 $this->uploadGallery();
                 if ($this->validate()) {
                     if (!$this->save()) {
