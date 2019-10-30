@@ -285,39 +285,10 @@ class AdminController extends Controller
         }
 
         $model = new Order();
-        $searchModel = new OrderSearchForm();
-        $dataProvider = $searchModel->search(\Yii::$app->request->post());
-
-        if (Yii::$app->request->isPost) {
-
-
-            $orderId = $model->createOrder();
-
-            if (!is_bool($orderId)) {   // если пришел ID нового заказа, то сохраняем товары этого заказа
-
-
-                foreach ($model->product_id as $productId) {
-                    $basket = new Basket();
-                    $basket->count = 1;
-                    $basket->product = Product::findOne($productId);
-                    $basket->add();
-                }
-
-
-                $items = new OrderItems();
-                $items->orderId = $orderId;
-                $items->saveItems();
-
-                $basket->clear();
-
-                return $this->refresh();
-
-            }
-        }
+        $dataProvider = $model->search(\Yii::$app->request->get());
 
 
         return $this->render('order', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
             'model' => $model,
         ]);
@@ -325,17 +296,14 @@ class AdminController extends Controller
 
     public function actionUser($id = null)
     {
-        $model = new User(['scenario' => User::SCENARIO_REGISTER]);
+        $model = new User(['scenario' => User::SCENARIO_INSERT]);
         $authAssigment = new AuthAssignment();
-        $searchModel = new UserSearchForm();
-        $dataProvider = $searchModel->search(\Yii::$app->request->post());
+        $dataProvider = $model->search(\Yii::$app->request->post());
         $groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
 
         // удалить юзера
         if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'delete') {
             $user = User::findOne($id);
-
-            $user->removeOldImage();
 
             if ($user->delete()) {
                 return $this->redirect('/admin/user/');
@@ -345,15 +313,15 @@ class AdminController extends Controller
         // детальный юзер
         if ($id) {
             $model = User::findOne($id);
-            $model->scenario = User::SCENARIO_USER_UPDATE;
+            $model->scenario = User::SCENARIO_UPDATE;
 
             // обновить юзера
             if (\Yii::$app->request->isPost) {
 
                 if ($model->load(\Yii::$app->request->post())) {
 
-                    if (!empty($model->new_password)) {
-                        $model->setPassword($model->new_password);
+                    if (!empty($model->password)) {
+                        $model->setPassword($model->password);
                     }
 
                     if ($model->validate()) {
@@ -373,9 +341,6 @@ class AdminController extends Controller
 
             return $this->render('detail/user', [
                 'model' => $model,
-                'groups' => $groups,
-                'searchModel' => $searchModel,
-                'dataProvider' => $dataProvider,
             ]);
         }
 
@@ -384,9 +349,8 @@ class AdminController extends Controller
 
             if ($model->load(\Yii::$app->request->post())) {
 
-                $model->setPassword($model->new_password);
+                $model->setPassword($model->password);
                 $model->generateAuthKey();
-                $model->uploadAvatar();
 
                 if ($model->validate()) {
 
@@ -405,8 +369,6 @@ class AdminController extends Controller
 
         return $this->render('user', [
             'model' => $model,
-            'groups' => $groups,
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

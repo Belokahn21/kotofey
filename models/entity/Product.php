@@ -37,7 +37,6 @@ use yii\web\UploadedFile;
 class Product extends \yii\db\ActiveRecord
 {
 
-    public $imageFile;
     public $imagesFiles;
     public $properties;
 

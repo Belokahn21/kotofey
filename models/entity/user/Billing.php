@@ -23,7 +23,6 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  *
- * @property Assignment $roles
  */
 class Billing extends ActiveRecord
 {

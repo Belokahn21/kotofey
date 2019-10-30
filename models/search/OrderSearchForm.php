@@ -24,23 +24,5 @@ class OrderSearchForm extends Order
         return Model::scenarios();
     }
 
-    public function search($params)
-    {
-        $query = Order::find()->orderBy(['created_at' => SORT_DESC]);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'delivery', $this->delivery])
-            ->andFilterWhere(['like', 'paid', $this->paid])
-            ->andFilterWhere(['like', 'user', $this->user])
-            ->andFilterWhere(['like', 'payment', $this->payment]);
-
-        return $dataProvider;
-    }
 }

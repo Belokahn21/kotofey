@@ -26,46 +26,48 @@ use yii\db\ActiveRecord;
  */
 class OrderItems extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "order_items";
-    }
+	public static function tableName()
+	{
+		return "order_items";
+	}
 
-    public function rules()
-    {
-        return [
-            [['summ', 'count', 'productId'], 'integer']
-        ];
-    }
+	public function rules()
+	{
+		return [
+			[['summ', 'count', 'productId', 'orderId'], 'integer']
+		];
+	}
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className()
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className()
+		];
+	}
 
-    public function saveItems()
-    {
-        $basket = new Basket();
-        foreach ($basket->listItems() as $item) {
-            $self = new OrderItems();
-            $self->productId = $item->product->id;
-            $self->count = $item->count;
-            $self->orderId = $this->orderId;
-            $self->summ = $item->count * $item->product->price;
-            if ($self->validate()) {
-                if ($self->save() === false) {
-                    return false;
-                }
-            }
-        }
+	public function saveItems()
+	{
+		$basket = new Basket();
+		foreach ($basket->listItems() as $item) {
+			$self = new OrderItems();
+			$self->productId = $item->product->id;
+			$self->count = $item->count;
+			$self->orderId = $this->orderId;
+			$self->summ = $item->count * $item->product->price;
+			if ($self->validate()) {
+				if ($self->save() === false) {
+					return false;
+				}
+			} else {
+				return false;
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    public function getProduct()
-    {
-        return Product::findOne($this->productId);
-    }
+	public function getProduct()
+	{
+		return Product::findOne($this->productId);
+	}
 }

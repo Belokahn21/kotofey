@@ -12,6 +12,7 @@ use app\models\tool\payments\Robokassa;
 use app\models\tool\Price;
 use app\models\tool\vk\VKMethods;
 use yii\behaviors\TimestampBehavior;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
@@ -27,11 +28,14 @@ use yii\helpers\ArrayHelper;
  * @property integer $status
  * @property boolean $paid
  * @property string $promo_code
+ * @property string $summary
  * @property integer $created_at
  * @property integer $updated_at
  */
 class Order extends ActiveRecord
 {
+	const SCENARIO_FAST_ORDER = 1;
+	const SCENARIO_SIMPLE_ORDER = 2;
 
 	public $product_id;
 
@@ -40,19 +44,29 @@ class Order extends ActiveRecord
 		return "orders";
 	}
 
+	public function scenarios()
+	{
+		return [
+			self::SCENARIO_FAST_ORDER => ['payment', 'delivery', 'user', 'summared', 'paid', 'status','comment','product_id','type'],
+			self::SCENARIO_SIMPLE_ORDER => ['payment', 'delivery', 'user', 'summared', 'paid', 'status','comment','product_id','type'],
+		];
+	}
+
 	public function rules()
 	{
 		return [
-
-
-			[['payment', 'delivery', 'user'], 'integer'],
+			[['payment', 'delivery', 'user', 'summared','type'], 'integer'],
 
 			[['payment', 'delivery', 'user'], 'default', 'value' => 0],
+
 			['paid', 'default', 'value' => false],
-			['status', 'default', 'value' => 0],
+
+			[['summared', 'status'], 'default', 'value' => 0],
+
+			['type', 'default', 'value' => self::SCENARIO_SIMPLE_ORDER],
 
 
-			[['payment', 'delivery'], 'required', 'message' => 'Выберите {attribute}'],
+			[['payment', 'delivery'], 'required', 'message' => 'Выберите {attribute}', 'on' => self::SCENARIO_SIMPLE_ORDER],
 			[['user'], 'required', 'message' => '{attribute} необходимо указать'],
 
 			[['comment', 'promo_code'], 'string'],
@@ -145,7 +159,7 @@ class Order extends ActiveRecord
 			$status = OrderStatus::findOne($this->status);
 		}
 
-		return $status;
+		return $status->name;
 	}
 
 	public function getPailink()
@@ -248,5 +262,23 @@ class Order extends ActiveRecord
 				->setHtmlBody($message)
 				->send();
 		}
+	}
+
+	public function search($params)
+	{
+		$query = static::find()->orderBy(['created_at' => SORT_DESC]);
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
+
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
+
+		$query->andFilterWhere(['like', 'delivery', $this->delivery])
+			->andFilterWhere(['like', 'payment', $this->payment]);
+
+		return $dataProvider;
 	}
 }

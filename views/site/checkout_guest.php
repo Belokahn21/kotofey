@@ -6,11 +6,9 @@
 /* @var $billing \app\models\entity\user\Billing */
 
 use app\models\tool\seo\Title;
+use app\models\entity\Order;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\tool\Currency;
-use app\models\tool\Price;
-use app\models\entity\Basket;
 use app\widgets\promoCart\promoCartWidget;
 
 $this->title = Title::showTitle("Оформление заказа");
@@ -26,7 +24,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 				<?php $form = ActiveForm::begin(); ?>
 				<?= $form->field($user, 'email'); ?>
 				<?= $form->field($user, 'phone'); ?>
-				<?= $form->field($user, 'new_password'); ?>
+				<?= $form->field($user, 'password'); ?>
+				<?= $form->field($order, 'type')->hiddenInput([
+					'value' => Order::SCENARIO_FAST_ORDER,
+					'readonly' => true
+				])->label(false); ?>
 				<?= Html::submitButton('Сделать заказ', ['class' => 'btn-main']); ?>
 				<?php ActiveForm::end(); ?>
             </div>
@@ -54,6 +56,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     <div class="clearfix"></div>
                 </div>
                 <div class="elem-form">
+                    <h2 class="checkout__title">Покупатель</h2>
+					<?= $form->field($user, 'email'); ?>
+					<?= $form->field($user, 'phone'); ?>
+					<?= $form->field($user, 'password'); ?>
+                </div>
+                <div class="elem-form">
                     <h2 class="checkout__title">Адрес доставки</h2>
                     <div>
                         <div class="left-col" style="padding: 0 1% 0 0;">
@@ -75,7 +83,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                         </div>
                     </div>
                 </div>
-				<?= Html::submitButton('Заказать', ['class' => 'btn-main', 'value' => 'nopaid', 'name' => 'type']) ?>
+				<?= Html::submitButton('Заказать',
+					['class' => 'btn-main', 'value' => Order::SCENARIO_SIMPLE_ORDER, 'name' => 'type']) ?>
 				<?= Html::a("Персональные данные", \app\models\tool\Policy::getInstance()->getPath(),
 					['class' => 'policy-link-checkout']); ?>
 				<? ActiveForm::end(); ?>

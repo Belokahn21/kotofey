@@ -8,8 +8,10 @@
 namespace app\models\entity;
 
 use app\models\entity\user\Billing;
+use mohorev\file\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\data\ActiveDataProvider;
 use yii\rbac\Assignment;
 use yii\web\IdentityInterface;
 use yii\web\UploadedFile;
@@ -22,7 +24,6 @@ use yii\web\UploadedFile;
  * @property string $access_token
  * @property string $email
  * @property string $password
- * @property string $new_password
  * @property string $avatar
  * @property integer $vk_uid
  * @property integer $birthday
@@ -39,71 +40,29 @@ use yii\web\UploadedFile;
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
-	const SCENARIO_REGISTER = 1;
-	const SCENARIO_REGISTER_WITH_VK = 2;
-	const SCENARIO_LOGIN = 3;
-	const SCENARIO_LOGIN_WITH_VK = 4;
-	const SCENARIO_NEW_REVIEW = 5;
-	const SCENARIO_REGISTER_IN_CHECKOUT = 6;
-	const SCENARIO_USER_UPDATE = 7;
+	const SCENARIO_INSERT = 'insert';
+	const SCENARIO_UPDATE = 'update';
+	const SCENARIO_LOGIN = 'login';
 
-	const EVENT_NEW_DISCOUNT = "new_discount";
-
-	public $new_password;
-	public $avatarFile;
-	public $roleName;
-
-	public function createDiscount()
+	public function scenarios()
 	{
-		$existDiscount = Discount::findByUserId($this->id);
-		if (!$existDiscount instanceof Discount) {
-			$discount = new Discount();
-			$discount->user_id = $this->id;
-			$discount->count = 0;
-			if ($discount->save() !== false) {
-				return true;
-			}
-		}
-
-		return false;
+		return [
+			self::SCENARIO_INSERT => ['phone', 'email', 'password'],
+			self::SCENARIO_UPDATE => ['phone', 'email', 'password'],
+			self::SCENARIO_LOGIN => ['phone', 'email', 'password'],
+		];
 	}
 
 	public function behaviors()
 	{
 		return [
-			TimestampBehavior::className()
-		];
-	}
-
-	public function scenarios()
-	{
-		return [
-			self::SCENARIO_REGISTER => [
-				'email',
-				'new_password',
-				'first_name',
-				'name',
-				'last_name',
-				'sex',
-				'roleName',
-				'birthday',
-				'avatarFile'
-			],
-			self::SCENARIO_REGISTER_WITH_VK => ['email', 'new_password', 'vk_uid'],
-			self::SCENARIO_REGISTER_IN_CHECKOUT => ['email', 'new_password', 'phone'],
-			self::SCENARIO_LOGIN => ['email', 'password', 'new_password'],
-			self::SCENARIO_LOGIN_WITH_VK => ['email', 'new_password'],
-			self::SCENARIO_NEW_REVIEW => ['name'],
-			self::SCENARIO_USER_UPDATE => [
-				'email',
-				'new_password',
-				'first_name',
-				'name',
-				'last_name',
-				'sex',
-				'roleName',
-				'birthday',
-				'avatarFile'
+			TimestampBehavior::className(),
+			[
+				'class' => UploadBehavior::class,
+				'attribute' => 'avatar',
+				'scenarios' => ['insert', 'update'],
+				'path' => '@webroot/upload/avatar/',
+				'url' => '@web/upload/avatar/',
 			],
 		];
 	}
@@ -111,30 +70,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
-			[
-				['email', 'new_password', 'phone'],
-				'required',
-				'message' => 'Поле {attribute} должно быть заполнено',
-				'except' => self::SCENARIO_USER_UPDATE
-			],
+			[['email', 'password'], 'required', 'on' => self::SCENARIO_INSERT],
+			[['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN],
 
-			[['vk_uid'], 'integer', 'message' => 'Поле {attribute} должно содержать цифры'],
+			['password', 'string', 'min' => 5, 'max' => 16],
 
-			[['first_name', 'name', 'last_name'], 'string'],
+			['phone', 'integer'],
+			['phone', 'default', 'value' => 0],
 
-			[['sex', 'birthday', 'phone'], 'integer'],
+			['email', 'email'],
 
-			[
-				['email', 'phone'],
-				'unique',
-				'except' => self::SCENARIO_LOGIN,
-				'message' => 'Данный {attribute} уже используется'
-			],
-
-			['email', 'email', 'message' => 'Неккоректный формат электронной почты'],
-
-			[['avatarFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-
+			[['email', 'phone'], 'unique', 'targetClass' => User::className(), 'on' => self::SCENARIO_INSERT],
 		];
 	}
 
@@ -147,7 +93,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 			'last_name' => "Отчество",
 			'email' => "E-Mail",
 			'password' => "Пароль",
-			'new_password' => "Пароль",
 			'birthday' => "День рождения",
 			'sex' => "Пол",
 			'avatarFile' => "Загрузить аватар",
@@ -156,40 +101,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 		];
 	}
 
-	public function createUser()
+	public function login($user_id)
 	{
-		if ($this->load(Yii::$app->request->post())) {
-			$this->setPassword($this->new_password);
-			$this->generateAuthKey();
-			if ($this->validate()) {
-				if ($this->save() !== false) {
-
-					if ($this->createDiscount() === false) {
-						return false;
-					}
-					return $this;
-
-				}
-			}
-		}
-		return false;
-	}
-
-	public function login()
-	{
-		$user = static::findByEmail($this->email);
-		if ($user instanceof User) {
-			if ($user->validatePassword($this->new_password)) {
-				return Yii::$app->user->login($user);
-			}
-		}
-
-		return false;
-	}
-
-	public function loginVk()
-	{
-		$user = self::findByVKUid($this->vk_uid);
+		$user = static::findOne($user_id);
 		if ($user instanceof User) {
 			return Yii::$app->user->login($user);
 		}
@@ -197,42 +111,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 		return false;
 	}
 
-	public function uploadAvatar()
-	{
-		$this->avatarFile = UploadedFile::getInstance($this, 'avatarFile');
-		if (!empty($this->avatarFile)) {
-
-			// удалить старое фото
-			$this->removeOldImage();
-
-			$fileName = substr(md5($this->avatarFile->baseName), 0, 32) . '.' . $this->avatarFile->extension;
-			$path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
-
-			$this->avatarFile->saveAs($path, false);
-			$this->avatar = "/web/upload/" . $fileName;
-		}
-
-		return true;
-	}
-
-	public function removeOldImage()
-	{
-		if (!empty($this->avatar)) {
-			if (file_exists(\Yii::getAlias('@app') . $this->avatar)) {
-				unlink(\Yii::getAlias('@app') . $this->avatar);
-			}
-		}
-	}
-
 	public static function findByEmail($email)
 	{
 		return static::findOne(['email' => $email]);
-	}
-
-
-	public static function findByVKUid($vkuid)
-	{
-		return static::findOne(['vk_uid' => $vkuid]);
 	}
 
 	public function getDiscount()
@@ -327,5 +208,22 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 		$today = date("Y-m-d");
 		$diff = date_diff(date_create($dateOfBirth), date_create($today));
 		return $diff->format('%y год и %m месяца');
+	}
+
+	public function search($params)
+	{
+		$query = static::find();
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
+
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
+
+		$query->andFilterWhere(['like', 'email', $this->email]);
+
+		return $dataProvider;
 	}
 }

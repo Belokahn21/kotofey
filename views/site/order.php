@@ -13,7 +13,7 @@ $currency = new Currency();
 $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url' => ['/order/']];?>
 <section class="list-orders">
     <h1>Список заказов</h1>
-    <?if($orders):?>
+	<?php if ($orders): ?>
     <table class="list-orders__table">
         <? foreach ($orders as $order): ?>
             <tr class="list-orders__table-item">

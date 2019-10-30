@@ -276,62 +276,52 @@ class SiteController extends Controller
 
 
 		if (\Yii::$app->user->isGuest) {
-			$order = new Order();
-			$user = new User(['scenario' => User::SCENARIO_REGISTER_IN_CHECKOUT]);
+			$order = new Order(['scenario' => Order::SCENARIO_SIMPLE_ORDER]);
+			$user = new User(['scenario' => User::SCENARIO_INSERT]);
 			$billing = new Billing();
 			$items = new OrderItems();
 
 			// форма отправлена
 			if (\Yii::$app->request->isPost) {
-				$newUser = $user->createUser();
-				if ($newUser instanceof User) {
-					if ($newUser->login()) {
-						$order->user = $newUser->id;
-
-						/* @var $promo Promo */
-						if ($promo = (new Basket())->getPromo()) {
-							$order->promo_code = $promo->code;
-						}
-
-
-						if ($billing->load(\Yii::$app->request->post())) {
-							$billing->user_id = $newUser->id;
-							if ($billing->validate()) {
-								if ($billing->save() === false) {
-									return false;
-								}
-							}
-						}
-
-						if ($order->saveOrder()) {
-
-							Promo::minusCode($order->promo_code);
-
-							$items->orderId = $order->id;
-							if ($items->saveItems()) {
-
-
-								$robokassa = new Robokassa();
-								$robokassa->config->setInvID($order->id);
-								$robokassa->config->setDescription("Оплата товара");
-								$robokassa->config->setSum($order->cash());
-
-								$basket->clear();
-								Promo::clear();
-
-								$order->userNotify();
-								$order->adminNotify();
-
-								if ($_POST['type'] == 'paid') {
-									return $this->redirect($robokassa->generateUrl());
-								} else {
-									Notify::setSuccessNotify("Заказ успешно создан!");
-									return $this->redirect("/");
-								}
-							}
-						}
+				if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+					if ($user->save() === false) {
+						Notify::setErrorNotify(print_r($user->getErrors(), true));
+						return $this->refresh();
 					}
 				}
+
+				$billing->user_id = $user->id;
+				if ($billing->load(Yii::$app->request->post()) && $billing->validate()) {
+					if ($billing->save() === false) {
+						Notify::setErrorNotify(print_r($billing->getErrors(), true));
+						return $this->refresh();
+					}
+				}
+
+				if (Yii::$app->request->post('type')) {
+					$order->scenario = Yii::$app->request->post('type');
+				}
+				$order->user = $user->id;
+				if ($order->load(Yii::$app->request->post()) && $order->validate()) {
+					if ($order->save() === false) {
+						Notify::setErrorNotify(print_r($order->getErrors(), true));
+						return $this->refresh();
+					}
+				} else {
+					Notify::setErrorNotify(print_r($order->getErrors(), true));
+					return $this->refresh();
+				}
+
+				$items->orderId = $order->id;
+				if ($items->saveItems() === false) {
+					Notify::setErrorNotify(print_r($items->getErrors(), true));
+					return $this->refresh();
+				}
+
+				Basket::clear();
+				unset($_COOKIE['order']);
+				Notify::setSuccessNotify("Заказ успешно создан создан");
+				return $this->redirect('/');
 			}
 
 			return $this->render('checkout_guest', [
@@ -342,78 +332,59 @@ class SiteController extends Controller
 				'billing' => $billing,
 			]);
 		} else {
-			$user = User::findOne(\Yii::$app->user->identity->id);
-			$order = new Order();
+			$order = new Order(['scenario' => Order::SCENARIO_SIMPLE_ORDER]);
 			$items = new OrderItems();
-			if (!$billing = Billing::findByUser(\Yii::$app->user->identity->id)) {
-				$billing = new Billing();
-			}
+			$user = User::findOne(Yii::$app->user->id);
+			$user->scenario = User::SCENARIO_UPDATE;
+			$billing = $user->billing;
 
 			if (\Yii::$app->request->isPost) {
-
-				$order->user = \Yii::$app->user->identity->id;
-
-				/* @var $promo Promo */
-				if ($promo = (new Basket())->getPromo()) {
-					$order->promo_code = $promo->code;
-				}
-
-				if ($billing->load(\Yii::$app->request->post())) {
-
-					if (empty($billing->user_id)) {
-						$billing->user_id = \Yii::$app->user->identity->id;
-
-						if ($billing->validate()) {
-							if ($billing->save() === false) {
-								return false;
-							}
-						}
-
-					} else {
-
-						if ($billing->validate()) {
-							if ($billing->update() === false) {
-								return false;
-							}
-
-						}
+				if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+					if ($user->update() === false) {
+						Notify::setErrorNotify(print_r($user->getErrors(), true));
+						return $this->refresh();
 					}
 				}
 
-				if ($order->saveOrder()) {
-
-					Promo::minusCode($order->promo_code);
-
-					$items->orderId = $order->id;
-					if ($items->saveItems()) {
-
-						$robokassa = new Robokassa();
-						$robokassa->config->setInvID($order->id);
-						$robokassa->config->setDescription("Оплата товара");
-						$robokassa->config->setSum($order->cash());
-
-						$basket->clear();
-						Promo::clear();
-
-						$order->userNotify();
-						$order->adminNotify();
-
-						if ($_POST['type'] == 'paid') {
-							return $this->redirect($robokassa->generateUrl());
-						} else {
-							Notify::setSuccessNotify("Заказ успешно создан!");
-							return $this->redirect("/");
-						}
+				if ($billing->load(Yii::$app->request->post()) && $billing->validate()) {
+					if ($billing->update() === false) {
+						Notify::setErrorNotify(print_r($billing->getErrors(), true));
+						return $this->refresh();
 					}
-
 				}
+
+				if (Yii::$app->request->post('type')) {
+					$order->scenario = Yii::$app->request->post('type');
+				}
+				$order->user = $user->id;
+				if ($order->load(Yii::$app->request->post()) && $order->validate()) {
+					if ($order->save() === false) {
+						Notify::setErrorNotify(print_r($order->getErrors(), true));
+						return $this->refresh();
+					}
+				} else {
+					Notify::setErrorNotify(print_r($order->getErrors(), true));
+					return $this->refresh();
+				}
+
+				$items->orderId = $order->id;
+				if ($items->saveItems() === false) {
+					Notify::setErrorNotify(print_r($items->getErrors(), true));
+					return $this->refresh();
+				}
+
+				Basket::clear();
+				unset($_COOKIE['order']);
+				Notify::setSuccessNotify("Заказ успешно создан создан");
+				return $this->redirect('/');
 			}
+
 			return $this->render('checkout_user', [
 				'order' => $order,
+				'user' => $user,
+				'billing' => $billing,
 				'delivery' => $delivery,
 				'payment' => $payment,
-				'billing' => $billing,
-				'user' => $user,
 			]);
 		}
 	}
@@ -531,17 +502,15 @@ class SiteController extends Controller
 			$userId = \Yii::$app->user->identity->id;
 			$favorite = (new Favorite())->listProducts();
 			$profile = User::findOne($userId);
-			$profile->scenario = User::SCENARIO_USER_UPDATE;
+			$profile->scenario = User::SCENARIO_UPDATE;
 			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
 			if (\Yii::$app->request->isPost) {
 				if ($profile->load(\Yii::$app->request->post())) {
 					if ($profile->validate()) {
-						if ($profile->uploadAvatar()) {
-							if ($profile->update()) {
-								Notify::setSuccessNotify("Профиль успешно обновлен");
-								return $this->refresh();
-							}
+						if ($profile->update()) {
+							Notify::setSuccessNotify("Профиль успешно обновлен");
+							return $this->refresh();
 						}
 					}
 				}
@@ -557,50 +526,38 @@ class SiteController extends Controller
 	public function actionSignin()
 	{
 		$model = new User(['scenario' => User::SCENARIO_LOGIN]);
-		$vkweb = new VKWeb();
-		$vkweb->setRedirectUri("https://eventhorizont.ru/signin/");
-
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
-				if ($model->login()) {
-					Notify::setSuccessNotify("Вы успешно авторизовались!");
-					return $this->redirect("/");
+				if ($model->validate()) {
+
+					$user = User::findByEmail($model->email);
+					if ($user instanceof User) {
+						if ($model->login($user->id)) {
+							Notify::setSuccessNotify('Успешная авторизация');
+							return $this->redirect('/');
+						}
+					}
+
 				}
 			}
 		}
-
-		if (isset($_GET['code'])) {
-			$vkuser = $vkweb->getVKUser();
-			if ($vkuser) {
-				$model->vk_uid = $vkuser->id;
-				if ($model->loginVk()) {
-					Notify::setSuccessNotify("Вы успешно авторизовались!");
-					return $this->redirect("/");
-				} else {
-					Notify::setWarningNotify("Пользователь не найден!");
-					return $this->redirect("/signin/");
-				}
-			}
-		}
-
 		return $this->render('auth/signin', [
 			'model' => $model,
-			'vkweb' => $vkweb,
 		]);
 	}
 
 	public function actionSignup()
 	{
-		$model = new User(['scenario' => User::SCENARIO_REGISTER]);
+		$model = new User(['scenario' => User::SCENARIO_INSERT]);
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
-
-				if ($model->createUser()) {
-					if ($model->login()) {
-
-						Notify::setSuccessNotify("Успешная регистрация!");
-						return $this->redirect("/");
+				if ($model->validate()) {
+					if ($model->save()) {
+						if ($model->login($model->id)) {
+							Notify::setSuccessNotify("Успешная регистрация!");
+							return $this->redirect("/");
+						}
 					}
 				}
 			}

@@ -39,18 +39,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     <?= $order->getStatus(); ?>
                 </td>
             </tr>
-            <tr>
-                <td>
-                    Оплата
-                </td>
-                <td>
-                    <?= ($order->paid == 1)
-                        ?
-                        Html::tag("span", "Оплачено",['class' => 'order-paid', 'style' => 'color:#3c763d; font-weight: bold;'])
-                        :
-                        Html::a("Оплатить", $order->getPailink(), ['class'=>"pay-link"]); ?>
-                </td>
-            </tr>
         </table>
     </div>
     <div class="detail-order-info-items-wrap">

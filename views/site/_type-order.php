@@ -18,7 +18,7 @@ use app\models\entity\Basket;
 			<?php if (Basket::getInstance()->cash() < 500): ?>
                 <div class="type-order-list__choice-sub-title alarm">Доставка: 100р</div>
 			<?php else: ?>
-                <div class="type-order-list__choice-sub-title good">Бесплатная доставка заказа от 500р</div>
+                <div class="type-order-list__choice-sub-title good">Бесплатная доставка</div>
 			<?php endif; ?>
         </li>
         <li class="type-order-list__item" data-cookie="normal">

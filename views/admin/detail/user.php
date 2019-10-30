@@ -23,19 +23,18 @@ $this->title = Title::showTitle("Пользователи"); ?>
 
         <div id="tab-1" class="tab-content current">
             <?= $form->field($model, 'email'); ?>
-            <?//= $form->field($model, 'phone'); ?>
-            <?= $form->field($model, 'new_password')->passwordInput(); ?>
+            <?= $form->field($model, 'password')->passwordInput(); ?>
         </div>
         <div id="tab-2" class="tab-content">
             <img src="<?= $model->avatar; ?>" width="300" alt="<?= $model->email ?>" title="<?= $model->email; ?>">
-            <?= $form->field($model, 'avatarFile')->fileInput(); ?>
+            <?= $form->field($model, 'avatar')->fileInput(); ?>
         </div>
         <div id="tab-3" class="tab-content">
-            <div class="left-col">
-                <h2>Группы</h2>
-                <?= $form->field($model, 'roleName')->dropDownList(ArrayHelper::map($groups, 'name', 'name'),
-                    ['prompt' => 'Группа']); ?>
-            </div>
+<!--            <div class="left-col">-->
+<!--                <h2>Группы</h2>-->
+<!--                --><?//= $form->field($model, 'roleName')->dropDownList(ArrayHelper::map($groups, 'name', 'name'),
+//                    ['prompt' => 'Группа']); ?>
+<!--            </div>-->
             <div class="right-col">
                 <h2>Разрешения</h2>
             </div>

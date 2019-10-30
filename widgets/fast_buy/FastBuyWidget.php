@@ -30,52 +30,10 @@ class FastBuyWidget extends \yii\base\Widget
 
     public function run()
     {
-        $user = new User(['scenario' => User::SCENARIO_REGISTER_IN_CHECKOUT]);
+        $user = new User();
         $order = new Order();
         $order_items = new OrderItems();
 
-        if (Yii::$app->request->isPost) {
-
-            if ($user->load(Yii::$app->request->post())) {
-                if ($user->validate()) {
-                    if ($user->save() === false) {
-                        Yii::$app->controller->refresh();
-                    }
-                } else {
-                    Notify::setErrorNotify("Ошибка валидации данных!");
-                    return false;
-                }
-            }
-
-            if (Yii::$app->user->isGuest) {
-                Yii::$app->user->login($user);
-            }
-
-            $order->user = Yii::$app->user->identity->id;
-
-            if ($order->validate()) {
-                if ($order->save() === false) {
-                    Yii::$app->controller->refresh();
-                }
-            } else {
-                Notify::setErrorNotify("Ошибка валидации данных!");
-                return false;
-            }
-
-
-            $order_items->orderId = $order->id;
-            $order_items->productId = $this->product->id;
-            $order_items->count = 1;
-            $order_items->summ = $this->product->price;
-
-            if ($order_items->save()) {
-                Notify::setSuccessNotify("Заказ успешно создан!");
-            } else {
-                Notify::setErrorNotify("Ошибка сохранения корзины");
-                return false;
-            }
-
-        }
 
         return $this->render($this->template, [
             'user' => $user,

@@ -28,20 +28,4 @@ class UserSearchForm extends User
         return Model::scenarios();
     }
 
-    public function search($params)
-    {
-        $query = User::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'email', $this->email]);
-
-        return $dataProvider;
-    }
 }
