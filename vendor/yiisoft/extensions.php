@@ -48,15 +48,6 @@ return array (
       '@mihaildev/ckeditor' => $vendorDir . '/mihaildev/yii2-ckeditor',
     ),
   ),
-  'bizley/migration' => 
-  array (
-    'name' => 'bizley/migration',
-    'version' => '3.0.5.0',
-    'alias' => 
-    array (
-      '@bizley/migration' => $vendorDir . '/bizley/migration/src',
-    ),
-  ),
   'mohorev/yii2-upload-behavior' => 
   array (
     'name' => 'mohorev/yii2-upload-behavior',
@@ -73,6 +64,15 @@ return array (
     'alias' => 
     array (
       '@yii/bootstrap' => $vendorDir . '/yiisoft/yii2-bootstrap/src',
+    ),
+  ),
+  'bizley/migration' => 
+  array (
+    'name' => 'bizley/migration',
+    'version' => '3.6.2.0',
+    'alias' => 
+    array (
+      '@bizley/migration' => $vendorDir . '/bizley/migration/src',
     ),
   ),
 );

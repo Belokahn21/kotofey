@@ -1,20 +1,81 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace bizley\tests\table;
 
 use bizley\migration\table\TableColumnText;
+use bizley\migration\table\TableStructure;
+use bizley\tests\cases\TableColumnTestCase;
 
 class TableColumnTextTest extends TableColumnTestCase
 {
-    public function testDefinitionSpecific(): void
+    public function noSchemaDataProvider(): array
     {
-        $column = new TableColumnText(['size' => 1024]);
-        $this->assertEquals('$this->text(1024)', $column->renderDefinition($this->getTable(false)));
+        return [
+            [['size' => 'max'], false, '$this->text()'],
+            [['size' => 1024], false, '$this->text()'],
+            [['size' => 'max'], true, '$this->text()'],
+            [['size' => 1024], true, '$this->text()'],
+        ];
     }
 
-    public function testDefinitionGeneral(): void
+    /**
+     * @dataProvider noSchemaDataProvider
+     * @param array $column
+     * @param bool $generalSchema
+     * @param string $result
+     */
+    public function testDefinitionNoSchema(array $column, bool $generalSchema, string $result): void
     {
-        $column = new TableColumnText(['size' => 1024]);
-        $this->assertEquals('$this->text()', $column->renderDefinition($this->getTable()));
+        $column = new TableColumnText($column);
+        $this->assertEquals($result, $column->renderDefinition($this->getTable($generalSchema)));
+    }
+
+    public function withSchemaDataProvider(): array
+    {
+        return [
+            [['size' => 'max'], false, '$this->text(\'max\')'],
+            [['size' => 1024], false, '$this->text(1024)'],
+            [['size' => 'max'], true, '$this->text(\'max\')'],
+            [['size' => 1024], true, '$this->text(1024)'],
+        ];
+    }
+
+    /**
+     * @dataProvider withSchemaDataProvider
+     * @param array $column
+     * @param bool $generalSchema
+     * @param string $result
+     */
+    public function testDefinitionWithSchema(array $column, bool $generalSchema, string $result): void
+    {
+        $column['schema'] = TableStructure::SCHEMA_MSSQL;
+        $column = new TableColumnText($column);
+        $this->assertEquals($result, $column->renderDefinition($this->getTable($generalSchema)));
+    }
+
+    public function withMappingAndSchemaDataProvider(): array
+    {
+        return [
+            [['size' => 'max'], false, '$this->text(\'max\')'],
+            [['size' => 1024], false, '$this->text(1024)'],
+            [['size' => 'max'], true, '$this->text()'],
+            [['size' => 1024], true, '$this->text(1024)'],
+        ];
+    }
+
+    /**
+     * @dataProvider withMappingAndSchemaDataProvider
+     * @param array $column
+     * @param bool $generalSchema
+     * @param string $result
+     */
+    public function testDefinitionWithMappingAndSchema(array $column, bool $generalSchema, string $result): void
+    {
+        $column['schema'] = TableStructure::SCHEMA_MSSQL;
+        $column['defaultMapping'] = 'nvarchar(max)';
+        $column = new TableColumnText($column);
+        $this->assertEquals($result, $column->renderDefinition($this->getTable($generalSchema)));
     }
 }

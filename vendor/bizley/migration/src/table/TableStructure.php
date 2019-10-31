@@ -1,9 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace bizley\migration\table;
 
 use yii\base\BaseObject;
 use yii\base\InvalidArgumentException;
+use function mb_strlen;
+use function sprintf;
+use function strpos;
+use function substr;
 
 /**
  * Class TableStructure
@@ -25,44 +31,54 @@ class TableStructure extends BaseObject
      * @var string
      */
     public $name;
+
     /**
      * @var TablePrimaryKey
      */
     public $primaryKey;
+
     /**
      * @var TableColumn[]
      */
     public $columns = [];
+
     /**
      * @var TableIndex[]
      */
     public $indexes = [];
+
     /**
      * @var TableForeignKey[]
      */
     public $foreignKeys = [];
+
     /**
      * @var bool
      */
     public $generalSchema = true;
+
     /**
      * @var bool
      */
     public $usePrefix = true;
+
     /**
      * @var string
      */
     public $dbPrefix;
+
     /**
      * @var string|null
      * @since 3.0.4
      */
     public $tableOptionsInit;
+
     /**
      * @var string|null
      * @since 3.0.4
      */
     public $tableOptions;
+
 
     protected $_schema;
 
@@ -76,33 +92,44 @@ class TableStructure extends BaseObject
     }
 
     /**
+     * Returns schema code based on its class name.
+     * @param null|string $schemaClass
+     * @return string
+     * @since 3.1
+     */
+    public static function identifySchema(?string $schemaClass): string
+    {
+        switch ($schemaClass) {
+            case 'yii\db\mssql\Schema':
+                return self::SCHEMA_MSSQL;
+
+            case 'yii\db\oci\Schema':
+                return self::SCHEMA_OCI;
+
+            case 'yii\db\pgsql\Schema':
+                return self::SCHEMA_PGSQL;
+
+            case 'yii\db\sqlite\Schema':
+                return self::SCHEMA_SQLITE;
+
+            case 'yii\db\cubrid\Schema':
+                return self::SCHEMA_CUBRID;
+
+            case 'yii\db\mysql\Schema':
+                return self::SCHEMA_MYSQL;
+
+            default:
+                return self::SCHEMA_UNSUPPORTED;
+        }
+    }
+
+    /**
      * Sets schema type based on the currently used schema class.
      * @param string|null $schemaClass
      */
     public function setSchema(?string $schemaClass): void
     {
-        switch ($schemaClass) {
-            case 'yii\db\mssql\Schema':
-                $this->_schema = self::SCHEMA_MSSQL;
-                break;
-            case 'yii\db\oci\Schema':
-                $this->_schema = self::SCHEMA_OCI;
-                break;
-            case 'yii\db\pgsql\Schema':
-                $this->_schema = self::SCHEMA_PGSQL;
-                break;
-            case 'yii\db\sqlite\Schema':
-                $this->_schema = self::SCHEMA_SQLITE;
-                break;
-            case 'yii\db\cubrid\Schema':
-                $this->_schema = self::SCHEMA_CUBRID;
-                break;
-            case 'yii\db\mysql\Schema':
-                $this->_schema = self::SCHEMA_MYSQL;
-                break;
-            default:
-                $this->_schema = self::SCHEMA_UNSUPPORTED;
-        }
+        $this->_schema = static::identifySchema($schemaClass);
     }
 
     /**
@@ -112,12 +139,15 @@ class TableStructure extends BaseObject
     public function renderName(): string
     {
         $tableName = $this->name;
+
         if (!$this->usePrefix) {
             return $tableName;
         }
+
         if ($this->dbPrefix && strpos($this->name, $this->dbPrefix) === 0) {
             $tableName = substr($this->name, mb_strlen($this->dbPrefix, 'UTF-8'));
         }
+
         return '{{%' . $tableName . '}}';
     }
 
@@ -141,11 +171,17 @@ class TableStructure extends BaseObject
         if ($this->tableOptionsInit !== null) {
             $output .= "        {$this->tableOptionsInit}\n\n";
         }
-        $output .= "        \$this->createTable('" . $this->renderName() . "', [";
+
+        $output .= sprintf('        $this->createTable(\'%s\', [', $this->renderName());
+
         foreach ($this->columns as $column) {
             $output .= "\n" . $column->render($this);
         }
-        $output .= "\n        ]" . ($this->tableOptions !== null ? ", {$this->tableOptions}" : '') . ");\n";
+
+        $output .= "\n" . sprintf(
+            '        ]%s);',
+            $this->tableOptions !== null ? ", {$this->tableOptions}" : ''
+        ) . "\n";
 
         return $output;
     }
@@ -157,9 +193,11 @@ class TableStructure extends BaseObject
     public function renderPk(): string
     {
         $output = '';
+
         if ($this->primaryKey->isComposite()) {
             $output .= "\n" . $this->primaryKey->render($this);
         }
+
         return $output;
     }
 
@@ -170,6 +208,7 @@ class TableStructure extends BaseObject
     public function renderIndexes(): string
     {
         $output = '';
+
         if ($this->indexes) {
             foreach ($this->indexes as $index) {
                 foreach ($this->foreignKeys as $foreignKey) {
@@ -177,9 +216,11 @@ class TableStructure extends BaseObject
                         continue 2;
                     }
                 }
+
                 $output .= "\n" . $index->render($this);
             }
         }
+
         return $output;
     }
 
@@ -190,11 +231,13 @@ class TableStructure extends BaseObject
     public function renderForeignKeys(): string
     {
         $output = '';
+
         if ($this->foreignKeys) {
             foreach ($this->foreignKeys as $foreignKey) {
                 $output .= "\n" . $foreignKey->render($this);
             }
         }
+
         return $output;
     }
 
@@ -210,12 +253,14 @@ class TableStructure extends BaseObject
             if (!$change instanceof TableChange) {
                 throw new InvalidArgumentException('You must provide array of TableChange objects.');
             }
+
             switch ($change->method) {
                 case 'createTable':
                     /* @var $column TableColumn */
                     foreach ($change->value as $column) {
                         $this->columns[$column->name] = $column;
-                        if ($column->isPrimaryKey || $column->isColumnAppendPK($this->schema)) {
+
+                        if ($column->isPrimaryKey || $column->isColumnAppendPK()) {
                             if ($this->primaryKey === null) {
                                 $this->primaryKey = new TablePrimaryKey(['columns' => [$column->name]]);
                             } else {
@@ -224,9 +269,11 @@ class TableStructure extends BaseObject
                         }
                     }
                     break;
+
                 case 'addColumn':
                     $this->columns[$change->value->name] = $change->value;
-                    if ($change->value->isPrimaryKey || $change->value->isColumnAppendPK($this->schema)) {
+
+                    if ($change->value->isPrimaryKey || $change->value->isColumnAppendPK()) {
                         if ($this->primaryKey === null) {
                             $this->primaryKey = new TablePrimaryKey(['columns' => [$change->value->name]]);
                         } else {
@@ -234,58 +281,91 @@ class TableStructure extends BaseObject
                         }
                     }
                     break;
+
                 case 'dropColumn':
                     unset($this->columns[$change->value]);
                     break;
+
                 case 'renameColumn':
                     if (isset($this->columns[$change->value['old']])) {
                         $this->columns[$change->value['new']] = $this->columns[$change->value['old']];
                         $this->columns[$change->value['new']]->name = $change->value['new'];
+
                         unset($this->columns[$change->value['old']]);
                     }
                     break;
+
                 case 'alterColumn':
                     $this->columns[$change->value->name] = $change->value;
                     break;
+
                 case 'addPrimaryKey':
                     $this->primaryKey = $change->value;
+
                     foreach ($this->primaryKey->columns as $column) {
                         if (isset($this->columns[$column])) {
                             if (empty($this->columns[$column]->append)) {
-                                $this->columns[$column]->append = $this->columns[$column]->prepareSchemaAppend($this, true, false);
-                            } elseif (!$this->columns[$column]->isColumnAppendPK($this->schema)) {
-                                $this->columns[$column]->append .= ' ' . $this->columns[$column]->prepareSchemaAppend($this, true, false);
+                                $this->columns[$column]->append = $this->columns[$column]->prepareSchemaAppend(
+                                    true,
+                                    false
+                                );
+                            } elseif (!$this->columns[$column]->isColumnAppendPK()) {
+                                $this->columns[$column]->append .= ' ' . $this->columns[$column]->prepareSchemaAppend(
+                                    true,
+                                    false
+                                );
                             }
                         }
                     }
                     break;
+
                 case 'dropPrimaryKey':
                     if ($this->primaryKey !== null) {
                         foreach ($this->primaryKey->columns as $column) {
                             if (isset($this->columns[$column]) && !empty($this->columns[$column]->append)) {
-                                $this->columns[$column]->append = $this->columns[$column]->removePKAppend($this->schema);
+                                $this->columns[$column]->append = $this->columns[$column]->removePKAppend();
                             }
                         }
                     }
+
                     $this->primaryKey = null;
                     break;
+
                 case 'addForeignKey':
                     $this->foreignKeys[$change->value->name] = $change->value;
                     break;
+
                 case 'dropForeignKey':
                     unset($this->foreignKeys[$change->value]);
                     break;
+
                 case 'createIndex':
                     $this->indexes[$change->value->name] = $change->value;
+                    if ($change->value->unique
+                        && isset($this->columns[$change->value->columns[0]])
+                        && count($change->value->columns) === 1
+                    ) {
+                        $this->columns[$change->value->columns[0]]->isUnique = true;
+                    }
                     break;
+
                 case 'dropIndex':
+                    if ($this->indexes[$change->value]->unique
+                        && count($this->indexes[$change->value]->columns) === 1
+                        && isset($this->columns[$this->indexes[$change->value]->columns[0]])
+                        && $this->columns[$this->indexes[$change->value]->columns[0]]->isUnique
+                    ) {
+                        $this->columns[$this->indexes[$change->value]->columns[0]]->isUnique = false;
+                    }
                     unset($this->indexes[$change->value]);
                     break;
+
                 case 'addCommentOnColumn':
                     if (isset($this->columns[$change->value->name])) {
                         $this->columns[$change->value->name]->comment = $change->value->comment;
                     }
                     break;
+
                 case 'dropCommentFromColumn':
                     if (isset($this->columns[$change->value])) {
                         $this->columns[$change->value]->comment = null;

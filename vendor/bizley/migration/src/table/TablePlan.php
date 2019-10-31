@@ -1,8 +1,11 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace bizley\migration\table;
 
 use yii\base\BaseObject;
+use function sprintf;
 
 /**
  * Class TablePlan
@@ -65,21 +68,31 @@ class TablePlan extends BaseObject
         $output = '';
 
         foreach ($this->dropColumn as $name) {
-            $output .= "        \$this->dropColumn('" . $table->renderName() . "', '{$name}');\n";
+            $output .= sprintf('        $this->dropColumn(\'%s\', \'%s\');', $table->renderName(), $name) . "\n";
         }
 
         /* @var $column TableColumn */
         foreach ($this->addColumn as $name => $column) {
-            $output .= "        \$this->addColumn('" . $table->renderName() . "', '{$name}', " . $column->renderDefinition($table) . ");\n";
+            $output .= sprintf(
+                '        $this->addColumn(\'%s\', \'%s\', %s);',
+                $table->renderName(),
+                $name,
+                $column->renderDefinition($table)
+            ) . "\n";
         }
 
         /* @var $column TableColumn */
         foreach ($this->alterColumn as $name => $column) {
-            $output .= "        \$this->alterColumn('" . $table->renderName() . "', '{$name}', " . $column->renderDefinition($table) . ");\n";
+            $output .= sprintf(
+                '        $this->alterColumn(\'%s\', \'%s\', %s);',
+                $table->renderName(),
+                $name,
+                $column->renderDefinition($table)
+            ) . "\n";
         }
 
         foreach ($this->dropForeignKey as $name) {
-            $output .= "        \$this->dropForeignKey('{$name}', '" . $table->renderName() . "');\n";
+            $output .= sprintf('        $this->dropForeignKey(\'%s\', \'%s\');', $name, $table->renderName()) . "\n";
         }
 
         /* @var $foreignKey TableForeignKey */
@@ -88,7 +101,7 @@ class TablePlan extends BaseObject
         }
 
         foreach ($this->dropIndex as $name) {
-            $output .= "        \$this->dropIndex('{$name}', '" . $table->renderName() . "');\n";
+            $output .= sprintf('        $this->dropIndex(\'%s\', \'%s\');', $name, $table->renderName()) . "\n";
         }
 
         /* @var $index TableIndex */
@@ -97,7 +110,11 @@ class TablePlan extends BaseObject
         }
 
         if (!empty($this->dropPrimaryKey)) {
-            $output .= "        \$this->dropPrimaryKey('{$this->dropPrimaryKey}', '" . $table->renderName() . "');\n";
+            $output .= sprintf(
+                '        $this->dropPrimaryKey(\'%s\', \'%s\');',
+                $this->dropPrimaryKey,
+                $table->renderName()
+            ) . "\n";
         }
 
         if ($this->addPrimaryKey) {

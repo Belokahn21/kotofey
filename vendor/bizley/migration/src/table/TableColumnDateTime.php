@@ -1,6 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace bizley\migration\table;
+
+use function in_array;
 
 /**
  * Class TableColumnDateTime
@@ -9,12 +13,18 @@ namespace bizley\migration\table;
 class TableColumnDateTime extends TableColumn
 {
     /**
+     * @var array Schemas using length for this column
+     * @since 3.1
+     */
+    public $lengthSchemas = [TableStructure::SCHEMA_PGSQL];
+
+    /**
      * Returns length of the column.
      * @return int|string
      */
     public function getLength()
     {
-        return $this->precision;
+        return in_array($this->schema, $this->lengthSchemas, true) ? $this->precision : null;
     }
 
     /**
@@ -23,7 +33,9 @@ class TableColumnDateTime extends TableColumn
      */
     public function setLength($value): void
     {
-        $this->precision = $value;
+        if (in_array($this->schema, $this->lengthSchemas, true)) {
+            $this->precision = $value;
+        }
     }
 
     /**
@@ -32,6 +44,6 @@ class TableColumnDateTime extends TableColumn
      */
     public function buildSpecificDefinition(TableStructure $table): void
     {
-        $this->definition[] = 'dateTime(' . ($table->generalSchema ? null : $this->length) . ')';
+        $this->definition[] = 'dateTime(' . $this->getRenderLength($table->generalSchema) . ')';
     }
 }

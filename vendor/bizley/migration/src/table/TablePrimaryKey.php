@@ -1,8 +1,15 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace bizley\migration\table;
 
 use yii\base\BaseObject;
+use function count;
+use function implode;
+use function in_array;
+use function sprintf;
+use function str_repeat;
 
 /**
  * Class TablePrimaryKey
@@ -16,6 +23,7 @@ class TablePrimaryKey extends BaseObject
      * @var string
      */
     public $name;
+
     /**
      * @var array
      */
@@ -27,7 +35,7 @@ class TablePrimaryKey extends BaseObject
      */
     public function isComposite(): bool
     {
-        return \count($this->columns) > 1;
+        return count($this->columns) > 1;
     }
 
     /**
@@ -38,11 +46,12 @@ class TablePrimaryKey extends BaseObject
      */
     public function render(TableStructure $table, int $indent = 8): string
     {
-        return str_repeat(' ', $indent) . "\$this->addPrimaryKey('"
-            . ($this->name ?: self::GENERIC_PRIMARY_KEY)
-            . "', '" . $table->renderName() . "', ['"
-            . implode("', '", $this->columns)
-            . "']);";
+        return str_repeat(' ', $indent) . sprintf(
+            '$this->addPrimaryKey(\'%s\', \'%s\', [\'%s\']);',
+            $this->name ?: self::GENERIC_PRIMARY_KEY,
+            $table->renderName(),
+            implode("', '", $this->columns)
+        );
     }
 
     /**
@@ -51,7 +60,7 @@ class TablePrimaryKey extends BaseObject
      */
     public function addColumn(string $name): void
     {
-        if (!\in_array($name, $this->columns, true)) {
+        if (!in_array($name, $this->columns, true)) {
             $this->columns[] = $name;
         }
     }
