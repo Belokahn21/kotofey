@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Backend</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="./assets/js/script.js"></script>
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+</head>
+<body>
+<div class="page-wrap login">
+    <form class="auth">
+        <div class="title">Панель управления</div>
+        <div class="auth-item">
+            <label>
+                <input class="auth-item__input" type="text" name="login" placeholder="Логин">
+            </label>
+        </div>
+
+        <div class="auth-item">
+            <label>
+                <input class="auth-item__input" type="password" name="password" placeholder="Пароль">
+            </label>
+        </div>
+
+
+        <div class="auth-item">
+            <label>
+                Запомнить меня
+                <input class="auth-item__input" type="checkbox" name="rememberMe">
+            </label>
+        </div>
+
+        <div class="auth-item">
+            <button class="btn-main" type="submit">Войти</button>
+            <button class="btn-main color-red" type="reset">Сбросить</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

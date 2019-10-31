@@ -9,13 +9,7 @@ class SearchWidget extends Widget
 {
     public function run()
     {
-
         $model = new Search();
-
-
-        if ($model->load(\Yii::$app->request->get())) {
-        }
-
         return $this->render('default', [
             'model' => $model,
         ]);

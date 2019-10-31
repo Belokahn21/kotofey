@@ -1,0 +1,47 @@
+.nav-tabs {
+  li {
+    padding: 1%;
+
+
+    &.active {
+      background: deepskyblue;
+
+      a {
+        color: white;
+      }
+    }
+
+
+  }
+}
+
+.tab-content {
+  .tab-pane {
+    padding: 10px;
+    border: 1px #e3e3e3 solid;
+  }
+}
+
+.preview-image-wrap {
+  width: 100%;
+}
+
+.preview-image {
+  width: 100%;
+  margin: 1% 0 5% 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  flex-wrap: wrap;
+
+  img {
+    width: 100%;
+  }
+}
+
+.preview-image.list {
+  img {
+    width: 20%;
+    margin: 10px;
+  }
+}

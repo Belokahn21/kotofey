@@ -1,0 +1,33 @@
+@import "include/color";
+
+@import "modules/init";
+
+@import "include/general";
+@import "include/control-panel";
+@import "include/tasks";
+@import "include/shop-info";
+@import "include/login";
+@import "include/form";
+@import "include/new-product";
+
+.page-wrap {
+  width: 80%;
+  height: 100%;
+  margin-left: 20%;
+  padding: 10px;
+}
+
+.page-wrap.login {
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px green solid;
+}
+
+.page {
+  width: 100%;
+}
+

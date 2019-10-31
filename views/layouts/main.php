@@ -1,7 +1,6 @@
 <?
 
 /* @var $this \yii\web\View */
-
 /* @var $content string */
 
 use app\widgets\admin_panel\AdminPanel;
@@ -16,6 +15,7 @@ use app\models\tool\Currency;
 use yii\widgets\ActiveForm;
 use app\models\entity\Subscribe;
 use app\models\entity\Search;
+use app\widgets\search\SearchWidget;
 
 AppAsset::register($this);
 
@@ -72,7 +72,7 @@ $this->beginPage() ?>
         </div>
         <div class="search-wrap">
 
-            <?= \app\widgets\search\SearchWidget::widget(); ?>
+            <?= SearchWidget::widget(); ?>
 
         </div>
         <div class="contact-wrap">

@@ -32,5 +32,11 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 /dump.html
+/web/debug.php
 /web/index.php
 /backup
+composer.lock
+markup/build/
+markup/node_modules/
+markup/package-lock.json
+/application/
