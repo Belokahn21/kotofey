@@ -1,133 +1,13 @@
 @charset "UTF-8";
 
-@import url("https://fonts.googleapis.com/css?family=Roboto|Raleway+Bold");
-
-* {
-  -webkit-box-sizing: border-box !important;
-  -moz-box-sizing: border-box !important;
-  box-sizing: border-box !important;
-  padding: 0;
-  margin: 0;
-}
-
-html {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  width: 100%;
-  height: 100%;
-  font-family: "Raleway-Bold", sans-serif !important;
-}
-
-.left-col {
-  width: 50%;
-  float: left;
-}
-
-.right-col {
-  width: 50%;
-  float: right;
-}
-
-.clearfix {
-  clear: both;
-}
-
-textarea {
-  resize: vertical;
-}
-
-.btn-main {
-  background: #ff1a4a;
-  color: white;
-  font-weight: bold;
-  border: 0;
-  outline: 0;
-  padding: 1%;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none !important;
-  border-bottom: 5px solid #c21e0a;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
-
-  &.grey {
-    background: white;
-    color: black;
-    border: 1px #e2e2e2 solid;
-  }
-
-  &:hover {
-    color: #641303;
-  }
-}
-
-.link-main {
-  color: #ff1a4a;
-  text-decoration: none !important;
-  font-weight: bold;
-
-  &:hover {
-    color: #2d0c03;
-  }
-}
-
-/*border: 1px red solid; */
+@import "include/general";
+@import "include/buttons";
+@import "include/colors";
+@import "include/up-header-menu";
 
 .wrap-page {
   width: 80%;
   margin: 0 auto;
-}
-
-.top-menu-wrap {
-  padding: 1% 0;
-  background: #f5f5f5;
-  display: flex;
-  flex-direction: row;
-}
-
-.current-city {
-  width: 15%;
-  margin: 0 2% 0 0;
-  padding: 0 1%;
-  color: grey;
-
-  span {
-    color: #2D0C03;
-  }
-}
-
-.top-menu {
-  width: 80%;
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-  margin: 0;
-}
-
-.top-menu__item {
-  margin: 0 1% 0 0;
-  position: relative;
-  padding: 0 1%;
-
-  &:not(:last-child)::after {
-    position: absolute;
-    top: 50%;
-    right: -1px;
-    width: 1px;
-    height: 20px;
-    margin-top: -10px;
-    content: "";
-    background-color: #e2e2e2;
-  }
-
-  a {
-    text-decoration: none;
-    color: #2D0C03;
-  }
 }
 
 .header {
