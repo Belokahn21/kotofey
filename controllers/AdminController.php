@@ -302,6 +302,14 @@ class AdminController extends Controller
         $groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
 
         // удалить юзера
+        if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'auth') {
+            $user = User::findOne(Yii::$app->request->get('id'));
+            if ($user) {
+                if (Yii::$app->user->login($user)) {
+                    return $this->redirect('/admin/user/');
+                }
+            }
+        }
         if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'delete') {
             $user = User::findOne($id);
 

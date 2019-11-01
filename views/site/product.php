@@ -140,86 +140,10 @@ $this->title = Title::showTitle($product->name); ?>
             </div>
         <? endif; ?>
 
-    <? }catch(\yii\base\InvalidArgumentException $exception){?>
+    <? }catch(ErrorException $exception){?>
 
     <?} ?>
 
 
 </div>
-
-
-<?
-
-?>
-
-<!--<section class="detail-product" itemtype="http://schema.org/Product" itemscope>-->
-<!--    <div class="detail-product__gallery gallery-item">-->
-<!--        <a href="--><?//= $product->image ?><!--">-->
-<!--            <img src="--><?//= $product->image; ?><!--" itemprop="image" alt="--><?//= $product->name; ?><!--" title="--><?//= $product->name; ?><!--">-->
-<!--        </a>-->
-<!--        <div class="clearfix"></div>-->
-<!--        --><?// if (!empty($product->images)): ?>
-<!--            --><?// foreach (Json::decode($product->images) as $image): ?>
-<!--            <a href="--><?//= $image ?><!--" >-->
-<!--                <img src="--><?//= $image ?><!--" alt="--><?//= $product->name; ?><!--" title="--><?//= $product->name; ?><!--" class="detail-product__gallery-more">-->
-<!--            </a>-->
-<!--            --><?// endforeach; ?>
-<!--        --><?// endif; ?>
-<!--    </div>-->
-<!--    <div class="detail-product__info">-->
-<!--        <div class="detail-product__info-top-line">-->
-<!--            <div class="detail-product__info-top-line__article">Артикул <span itemprop="sku">--><?//= $product->article; ?><!--</span></div>-->
-<!--            --><?// if ($product->count > 0): ?>
-<!--                <div class="detail-product__info-top-line__actual">В наличии</div>-->
-<!--            --><?// else: ?>
-<!--                <div class="detail-product__info-top-line__not_actual">Нет в наличии</div>-->
-<!--            --><?// endif; ?>
-<!--        </div>-->
-<!--        <h1 class="detail-product__info-title" itemprop="name">--><?//= $product->name; ?><!--</h1>-->
-<!--        <table class="detail-product__info-attributes">-->
-<!--            <tr>-->
-<!--                <td>Цена</td>-->
-<!--                <td>--><?//= Price::format($product->price); ?><!-- --><?//=(new Currency())->show();?><!--</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>Количество</td>-->
-<!--                <td>--><?//= $product->count; ?><!--</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td>Категория</td>-->
-<!--                <td itemprop="brand">-->
-<!--                    --><?// if ($category): ?>
-<!--                        <a class="detail-product__info-detail-url" href="--><?//= $category->detail; ?><!--">--><?//= $category->name; ?><!--</a>-->
-<!--                    --><?// else: ?>
-<!--                        <a href="" class="detail-product__info-detail-url">Без категории</a>-->
-<!--                    --><?// endif; ?>
-<!--                </td>-->
-<!--            </tr>-->
-<!--            --><?// /* @var $property \app\models\entity\ProductPropertiesValues */ ?>
-<!--            --><?// foreach ($properties as $property): ?>
-<!--                <tr>-->
-<!--                    <td>-->
-<!--                        --><?//= ProductProperties::findOne($property->property_id)->name; ?>
-<!--                    </td>-->
-<!--                    <td>--><?//= $property->value; ?><!--</td>-->
-<!--                </tr>-->
-<!--            --><?// endforeach; ?>
-<!--            <tr>-->
-<!--                <td colspan="2">-->
-<!--                    --><?// if ($product->count > 0): ?>
-<!--                        <a href="" class="btn-effect bubble left catalog-element__links-element add-basket" data-id="--><?//= $product->id; ?><!--">Вкорзину</a>-->
-<!--                    --><?// endif; ?>
-<!--                </td>-->
-<!--            </tr>-->
-<!--        </table>-->
-<!--        <div class="detail-product__info-description">-->
-<!--            <h3>Описание товара</h3>-->
-<!--            <div class="detail-product__info-description__text" itemprop="description">--><?//= $product->description; ?><!--</div>-->
-<!--        </div>-->
-<!--    </div>-->
-<!--    <div class="clearfix"></div>-->
-<!--    --><?//= Related::widget(['category' => $product->category]); ?>
-<!--    --><?//= ReviewsProduct::widget(['product' => $product]); ?>
-<!--</section>-->
-
 <div class="clearfix"></div>

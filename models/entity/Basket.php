@@ -14,82 +14,85 @@ use app\models\tool\Debug;
  */
 class Basket
 {
-	public $product;
-	public $count;
+    public $product;
+    public $count;
 
-	public static function getInstance()
-	{
-		return new Basket();
-	}
+    public static function getInstance()
+    {
+        return new Basket();
+    }
 
-	public function add()
-	{
-		\Yii::$app->session->open();
-		$_SESSION['basket'][$this->product->id]['product'] = $this->product;
-		$_SESSION['basket'][$this->product->id]['count'] = $this->count;
-	}
+    public function add()
+    {
+        \Yii::$app->session->open();
+        $_SESSION['basket'][$this->product->id]['product'] = $this->product;
+        $_SESSION['basket'][$this->product->id]['count'] = $this->count;
+    }
 
-	public function listItems()
-	{
-		$items = [];
-		if (!empty($_SESSION['basket'])) {
-			foreach ($_SESSION['basket'] as $id => $item) {
-				$basket = new Basket();
-				$basket->product = $item['product'];
-				$basket->count = $item['count'];
-				$items[] = $basket;
-			}
-		}
+    public function listItems()
+    {
+        $items = [];
+        if (!empty($_SESSION['basket'])) {
+            foreach ($_SESSION['basket'] as $id => $item) {
+                $basket = new Basket();
+                $basket->product = $item['product'];
+                $basket->count = $item['count'];
+                $items[] = $basket;
+            }
+        }
 
-		return $items;
-	}
+        return $items;
+    }
 
-	public function addPromo(Promo $promo)
-	{
-		$_SESSION['promobasket'] = $promo;
-	}
+    public function addPromo(Promo $promo)
+    {
+        $_SESSION['promobasket'] = $promo;
+    }
 
-	public function getPromo()
-	{
-		return \Yii::$app->session->get('promobasket');
-	}
+    public function getPromo()
+    {
+        return \Yii::$app->session->get('promobasket');
+    }
 
-	public static function clear()
-	{
-		unset($_SESSION['basket']);
-	}
+    public static function clear()
+    {
+        unset($_SESSION['basket']);
+    }
 
-	public static function count()
-	{
-		return count(\Yii::$app->session->get('basket'));
-	}
+    public static function count()
+    {
+        if (\Yii::$app->session->get('basket')) {
+            return count(\Yii::$app->session->get('basket'));
+        }
+        return false;
+    }
 
-	public function isEmpty()
-	{
-		if (!\Yii::$app->session->get('basket') or $this->count() == 0) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+    public function isEmpty()
+    {
+        if (!\Yii::$app->session->get('basket') or $this->count() == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
-	public function cash()
-	{
-		$cash = 0;
+    public function cash()
+    {
+        $cash = 0;
 
-		/* @var $promo Promo */
-		$promo = $this->getPromo();
-		if (!empty($_SESSION['basket'])) {
-			foreach ($_SESSION['basket'] as $id => $item) {
-				if ($promo) {
-					$cash += $item['product']->price - (($item['product']->price * $promo->discount) / 100);
-				} else {
-					$cash += $item['product']->price;
-				}
-			}
-		}
+        /* @var $promo Promo */
+        $promo = $this->getPromo();
+        if (!empty($_SESSION['basket'])) {
+            foreach ($_SESSION['basket'] as $id => $item) {
+                if ($promo) {
+                    $cash += $item['product']->price - (($item['product']->price * $promo->discount) / 100);
+                } else {
+                    $cash += $item['product']->price;
+                }
+            }
+        }
 
-		return $cash;
-	}
+        return $cash;
+    }
 }

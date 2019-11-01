@@ -8,13 +8,13 @@
 namespace app\models\entity;
 
 use app\models\entity\user\Billing;
+use app\models\tool\Debug;
 use mohorev\file\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\data\ActiveDataProvider;
 use yii\rbac\Assignment;
 use yii\web\IdentityInterface;
-use yii\web\UploadedFile;
 
 /**
  * User model
@@ -72,18 +72,40 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [['email', 'password'], 'required', 'on' => [self::SCENARIO_INSERT,self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
-            [['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
+            [
+                ['email', 'password'],
+                'required',
+                'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT],
+                'message' => '{attribute} не может быть пустым'
+            ],
+            [
+                ['email', 'password'],
+                'required',
+                'on' => self::SCENARIO_LOGIN,
+                'message' => '{attribute} не может быть пустым'
+            ],
 
             ['password', 'string', 'min' => 5, 'max' => 16],
 
             ['phone', 'required', 'on' => self::SCENARIO_CHECKOUT, 'message' => '{attribute} не может быть пустым'],
             ['phone', 'integer'],
-            ['phone', 'default', 'value' => 0],
-            ['phone', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Номер телефона {value} уже занят'],
+            ['phone', 'default', 'value' => null],
+            [
+                'phone',
+                'unique',
+                'targetClass' => User::className(),
+                'except' => self::SCENARIO_LOGIN,
+                'message' => 'Номер телефона {value} уже занят'
+            ],
 
             ['email', 'email'],
-            ['email', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Почта {value} уже занята'],
+            [
+                'email',
+                'unique',
+                'targetClass' => User::className(),
+                'except' => self::SCENARIO_LOGIN,
+                'message' => 'Почта {value} уже занята'
+            ],
 
         ];
     }
@@ -105,14 +127,17 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function login($user_id)
+    public function afterSave($insert, $changedAttributes)
     {
-        $user = static::findOne($user_id);
-        if ($user instanceof User) {
-            return Yii::$app->user->login($user);
-        }
+        parent::afterSave($insert, $changedAttributes);
 
-        return false;
+        if ($insert) {
+            $billing = new Billing();
+            $billing->user_id = $this->id;
+            if ($billing->validate()) {
+                $billing->save();
+            }
+        }
     }
 
     public static function findByEmail($email)
@@ -123,11 +148,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function getDiscount()
     {
         return Discount::findByUserId($this->id);
-    }
-
-    public function getRoles()
-    {
-        return Yii::$app->authManager->getAssignments($this->id);
     }
 
     public static function isRole($roleName)

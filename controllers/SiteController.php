@@ -576,11 +576,15 @@ class SiteController extends Controller
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->save()) {
-                        if ($model->login($model->id)) {
+                        if (Yii::$app->user->login($model)) {
                             Notify::setSuccessNotify("Успешная регистрация!");
                             return $this->redirect("/");
                         }
+                    } else {
+                        Debug::p($model->getErrors());
                     }
+                } else {
+                    Debug::p($model->getErrors());
                 }
             }
         }

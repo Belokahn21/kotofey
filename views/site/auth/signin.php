@@ -9,18 +9,11 @@ $this->title = Title::showTitle("Войти на сайт"); ?>
 <div class="signin-wrap">
     <section class="signin">
         <h1 class="title">Войти на сайт</h1>
-		<? $form = ActiveForm::begin(); ?>
-		<?= $form->field($model, 'email') ?>
-		<?= $form->field($model, 'password')->passwordInput(); ?>
-		<?= Html::submitButton('Войти', ['class' => 'btn-main']) ?>
-		<?= Html::a('Регистрация', '/signup/', ['class' => 'link-main']) ?>
-
-		<? /*
-        <div class="signin__auth-social">
-            <h6 class="signin__auth-social-title">войти с помощью</h6>
-            <?= Html::a('<i class="fab fa-vk"></i>', $vkweb->authLink(), ['class' => '']) ?>
-        </div>
-        */ ?>
-		<? ActiveForm::end(); ?>
+        <? $form = ActiveForm::begin(); ?>
+        <?= $form->field($model, 'email') ?>
+        <?= $form->field($model, 'password')->passwordInput(); ?>
+        <?= Html::submitButton('Войти', ['class' => 'btn-main']) ?>
+        <?= Html::a('Регистрация', '/signup/', ['class' => 'link-main']) ?>
+        <? ActiveForm::end(); ?>
     </section>
 </div>

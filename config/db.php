@@ -1,4 +1,5 @@
 <?php
+//if (YII_ENV == 'prod' or empty($_SERVER['DOCUMENT_ROOT'])) {
 if (YII_ENV == 'prod') {
 	return [
 		'class' => 'yii\db\Connection',
