@@ -5,6 +5,7 @@
 @import "include/buttons";
 @import "include/colors";
 
+@import "include/block/admin-panel";
 @import "include/block/up-header-menu";
 @import "include/block/header";
 @import "include/block/menu";
@@ -24,6 +25,7 @@
 @import "include/page/profile";
 @import "include/page/basket";
 
+@import "include/media";
 
 .wrap-page {
   width: 80%;

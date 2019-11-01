@@ -1,16 +1,31 @@
 /* monitors and laptops v2*/
 @media screen and (min-width: 1240px) {
+
 }
+
 
 /* monitors and laptops */
 @media screen and (min-width: 1240px) {
+
 }
 
 /* tablet */
+@media screen and (min-width: 1024px) and (max-width: 1390px) {
+  .contact-wrap {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .phone-group {
+    justify-content: stretch;
+  }
+}
+
 @media screen and (min-width: 1024px) and (max-width: 1240px) {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
+
 }
 
 /* mobile */

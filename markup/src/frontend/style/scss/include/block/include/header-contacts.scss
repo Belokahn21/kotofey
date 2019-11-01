@@ -1,11 +1,32 @@
 .contact-wrap {
+  width: 33%;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
-  margin: 0 5px;
+  justify-content: space-between;
+}
+
+.contact-block {
+  margin: 0 10px;
+}
+
+.phone-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.contact-block__wa {
+  width: 20px;
+  margin: 5px;
 }
 
 .contacts-reglament {
   color: silver;
-  font-size: 12px;
+  font-size: 13px;
+}
+
+.contact-value {
+  font-size: 19px;
+  font-weight: 600;
 }

@@ -1,9 +1,10 @@
 .header {
   display: flex;
   flex-direction: row;
-  justify-content: stretch;
+  justify-content: space-between;
   align-items: center;
   margin: 1% 0;
+  width: 100%;
 
   & * {
     box-sizing: border-box;
