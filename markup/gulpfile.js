@@ -10,8 +10,8 @@ var gulp = require('gulp'),
 	cssminify = require('gulp-clean-css'),
 	changed = require('gulp-changed'),
 	imagemin = require('gulp-imagemin'),
+	babel = require('gulp-babel'),
 	sass = require('gulp-sass');
-
 var config = {
 	paths: {
 		css: {
@@ -73,10 +73,12 @@ gulp.task('js', function () {
 		es.concat(
 			gulp.src(config.paths.js.src_frontend)
 				.pipe(rigger())
+				.pipe(babel())
 				.pipe(concat('script.js'))
 				.pipe(gulp.dest(config.paths.js.build_frontend)),
 			gulp.src(config.paths.js.src_backend)
 				.pipe(rigger())
+				.pipe(babel())
 				.pipe(concat('script.js'))
 				.pipe(gulp.dest(config.paths.js.build_backend))
 				.pipe(gulp.dest(config.paths.js.application_backend))

@@ -1,0 +1,185 @@
+
+.footer {
+  margin: 2% 0;
+  border: 1px white solid;
+}
+
+.footer-wrap {
+  display: flex;
+  flex-direction: row;
+}
+
+.footer-block {
+  padding: 1%;
+  width: 25%;
+}
+
+.footer-menu__title {
+  color: #ff1a4a;
+  margin: 0 0 1% 0;
+}
+
+.footer-menu {
+  list-style-type: none;
+  font-size: 14px;
+}
+
+.footer-menu__item {
+  color: #2D0C03;
+
+  a {
+    color: #2D0C03;
+    text-decoration: none;
+
+    &:hover {
+      color: #f23839;
+      font-weight: 500;
+    }
+  }
+}
+
+.footer-info {
+  list-style: none;
+  margin: 0;
+}
+
+.footer-info__item {
+  margin: 5% 0;
+}
+
+.footer-current-city, .time-work, .contact-email {
+  color: #8a8a8a;
+  font-size: 14px;
+}
+
+.footer-current-city div {
+  color: #2D0C03;
+  font-size: 18px;
+}
+
+.time-work div {
+  color: #2D0C03;
+  font-size: 23px;
+}
+
+.contact-email div {
+  color: #2D0C03;
+  font-size: 17px;
+}
+
+.subscribe-wrap {
+  width: 100%;
+}
+
+.subscribe-description {
+  color: #8a8a8a;
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0 0 2% 0;
+}
+
+.subscribe-form {
+  width: 100%;
+  flex-direction: row;
+  display: flex;
+
+  .form-group {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.subscribe-form__input {
+  border: 1px #ddd solid;
+  padding: 1% 2%;
+  margin: 0 1% 0 0;
+  height: 100%;
+}
+
+.subscribe-form__submit {
+  border: 0;
+  padding: 1.2% 2%;
+  color: white;
+  background: #ff1a4a;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.footer-socials-wrap {
+  background: #fbfbfb;
+}
+
+.footer-socials {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.footer-socials__item {
+  padding: 1%;
+  width: 60px;
+
+  &:hover {
+    .footer-socials__item__inst {
+      padding: 15%;
+      border-radius: 20%;
+      color: white !important;
+      background: #f09433;
+      background: -moz-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      background: -webkit-linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+    }
+
+    .footer-socials__item__vk {
+      padding: 15%;
+      border-radius: 20%;
+      color: white !important;
+      background: #4143f0;
+      background: -moz-linear-gradient(45deg, #597da3 0%, #597da3 25%, #597da3 50%, #597da3 75%, #597da3 100%);
+      background: -webkit-linear-gradient(45deg, #597da3 0%, #597da3 25%, #597da3 50%, #597da3 75%, #597da3 100%);
+      background: linear-gradient(45deg, #597da3 0%, #597da3 25%, #597da3 50%, #597da3 75%, #597da3 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+    }
+
+    .footer-socials__item__ok {
+      padding: 15%;
+      border-radius: 20%;
+      color: white !important;
+      background: #4143f0;
+      background: -moz-linear-gradient(45deg, #F6881F 0%, #F6881F 25%, #F6881F 50%, #F6881F 75%, #F6881F 100%);
+      background: -webkit-linear-gradient(45deg, #F6881F 0%, #F6881F 25%, #F6881F 50%, #F6881F 75%, #F6881F 100%);
+      background: linear-gradient(45deg, #F6881F 0%, #F6881F 25%, #F6881F 50%, #F6881F 75%, #F6881F 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+    }
+
+    .footer-socials__item__twit {
+      padding: 15%;
+      border-radius: 20%;
+      color: white !important;
+      background: #4143f0;
+      background: -moz-linear-gradient(45deg, #38A1F3 0%, #38A1F3 25%, #38A1F3 50%, #38A1F3 75%, #38A1F3 100%);
+      background: -webkit-linear-gradient(45deg, #38A1F3 0%, #38A1F3 25%, #38A1F3 50%, #38A1F3 75%, #38A1F3 100%);
+      background: linear-gradient(45deg, #38A1F3 0%, #38A1F3 25%, #38A1F3 50%, #38A1F3 75%, #38A1F3 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f09433', endColorstr='#bc1888', GradientType=1);
+    }
+  }
+
+  a {
+    color: #8a8a8a;
+
+    &:hover {
+      color: blue;
+    }
+  }
+}
+
+.copyring {
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  color: #8a8a8a;
+  padding: 0 5%;
+  width: 200px;
+}

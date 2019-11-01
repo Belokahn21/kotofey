@@ -1,0 +1,21 @@
+.search-wrap {
+  margin: 0 10px;
+}
+
+.search-form {
+  display: flex;
+  flex-direction: row;
+  border: 1px silver solid;
+  border-radius: 2em;
+  padding: 10px 20px;
+}
+
+.search-form__query {
+  border: 0;
+}
+
+.search-form__submit {
+  background: white;
+  border: 0;
+  outline: 0;
+}

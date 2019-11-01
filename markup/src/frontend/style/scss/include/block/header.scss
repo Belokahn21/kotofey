@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+  margin: 1% 0;
+
+  & * {
+    box-sizing: border-box;
+  }
+}
+
+@import "include/header-logo";
+@import "include/header-search";
+@import "include/header-contacts";
+@import "include/header-basket";

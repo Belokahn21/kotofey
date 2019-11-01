@@ -1,0 +1,40 @@
+
+.news-head-panel {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  a {
+    color: #ff1a4a;
+    font-weight: 600;
+  }
+
+  h2 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.list-news {
+  width: 100%;
+  list-style: none;
+}
+
+.list-news__item-title {
+  color: #ff1a4a;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.list-news__item-wrap-image {
+  width: 100%;
+  height: 200px;
+}
+
+.list-news__item-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}

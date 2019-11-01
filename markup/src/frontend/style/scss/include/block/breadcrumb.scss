@@ -1,0 +1,37 @@
+
+.breadcrumb-wrap {
+  margin: 1% 0;
+  font-family: "Raleway-Bold", sans-serif;
+}
+
+.breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+}
+
+.breadcrumb__item {
+  padding: 0.5% 1%;
+  position: relative;
+
+  &:first-child {
+    padding-left: 0;
+  }
+
+  &:not(:last-child)::after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "";
+    font-size: 12px;
+    position: absolute;
+    right: 0;
+    top: 11px;
+    color: #ff1a4a;
+  }
+
+  a {
+    color: #2D0C03;
+    text-decoration: none;
+    font-size: 18px;
+  }
+}

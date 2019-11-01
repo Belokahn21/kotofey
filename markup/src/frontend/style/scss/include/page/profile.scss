@@ -1,0 +1,168 @@
+
+.profile-menu {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: stretch;
+  list-style: none;
+}
+
+.profile-menu__item {
+  width: 33%;
+  min-height: 200px;
+  border: 1px #ddd solid;
+  margin: 0.1%;
+  padding: 1%;
+}
+
+.profile-menu__item__title {
+  padding: 0;
+  margin: 0;
+  font-weight: 600;
+}
+
+.profile-menu__item {
+  .fa-user-cog {
+    cursor: pointer;
+  }
+
+  i {
+    color: #ff1a4a;
+  }
+}
+
+.owl-main {
+  margin: 1% 0;
+
+  div {
+    position: relative;
+    height: 140px;
+  }
+}
+
+.remove-favorite {
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+
+.item-slide {
+  width: 160px;
+  height: 100%;
+  cursor: e-resize;
+}
+
+.profile-order {
+  display: flex;
+  flex-direction: column;
+
+  a {
+    color: #2d0c03;
+    outline: 0;
+
+    &:focus {
+      outline: 0;
+    }
+  }
+}
+
+.order-item {
+  width: 100%;
+  height: 30px;
+  border: 1px #ddd solid;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  border-radius: 0.3em;
+  padding: 0;
+  margin: 3px 0;
+
+  a {
+    color: #2D0C03;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.slide-order-info {
+  width: 100%;
+  font-size: 10px;
+  font-weight: 600;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border: 1px #e3e3e3 solid;
+  margin: 3px 0;
+  padding: 0;
+}
+
+.slide-order-info__item {
+  margin: 5px 0;
+}
+
+.support-categories {
+  width: 100%;
+  height: 90%;
+  padding: 1% 0;
+}
+
+.profile-menu__discount {
+  width: 100%;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.profile-menu__discount-container {
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  font-size: 25px;
+}
+
+.span {
+  display: inline-block;
+  background: #ff1a4a;
+  color: #fff;
+  text-align: center;
+  border-radius: 50%;
+  padding: 50% 0;
+  width: 100%;
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+.text {
+  position: relative;
+  top: -0.5em;
+  padding: 0 0.65em;
+  color: #fff;
+}
+
+.user-info {
+  list-style: none;
+  margin: 1% 0;
+  color: #8a8a8a;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user-info__item {
+  margin: 0.5% 0;
+}
+
+.profile-billing {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  li {
+    text-align: center;
+  }
+}
