@@ -381,7 +381,7 @@ class SiteController extends Controller
                     if ($order->save() === false) {
                         Notify::setErrorNotify(Debug::modelErrors($order));
                         return $this->refresh();
-                    }else{
+                    } else {
 
                     }
                 } else {
@@ -554,7 +554,7 @@ class SiteController extends Controller
 
                     $user = User::findByEmail($model->email);
                     if ($user instanceof User) {
-                        if ($model->login($user->id)) {
+                        if (Yii::$app->user->login($user)) {
                             Notify::setSuccessNotify('Успешная авторизация');
                             return $this->redirect('/');
                         }
