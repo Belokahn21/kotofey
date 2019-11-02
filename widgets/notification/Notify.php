@@ -30,7 +30,7 @@ class Notify extends Widget
             $(document).ready(function() {
                 setTimeout(function() {
                   $(".alert-notify-wrap").slideUp();
-                }, 60000);
+                }, 2500);
             });
 JS;
 

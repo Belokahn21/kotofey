@@ -103,7 +103,7 @@ $this->beginPage() ?>
                     <ul>
                         <? foreach ((new Basket())->listItems() as $item): ?>
                             <li class="slide-down-basket__item">
-                                <img src="<?= $item->product->image ?>">
+                                <img src="/web/upload/<?= $item->product->image ?>">
                                 <a class="slide-down-basket__item-name" href=""><?= $item->product->name ?></a>
                                 <div class="slide-down-basket__item-price"><?= $price = $item->product->price; ?><?= (new Currency())->show(); ?></div>
                                 <div class="slide-down-basket__item-count"><?= $count = $item->count; ?></div>

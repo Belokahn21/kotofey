@@ -72,40 +72,18 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            [
-                ['email', 'password'],
-                'required',
-                'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT],
-                'message' => '{attribute} не может быть пустым'
-            ],
-            [
-                ['email', 'password'],
-                'required',
-                'on' => self::SCENARIO_LOGIN,
-                'message' => '{attribute} не может быть пустым'
-            ],
+            [['email', 'password'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
+            [['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
 
             ['password', 'string', 'min' => 5, 'max' => 16],
 
             ['phone', 'required', 'on' => self::SCENARIO_CHECKOUT, 'message' => '{attribute} не может быть пустым'],
             ['phone', 'integer'],
             ['phone', 'default', 'value' => null],
-            [
-                'phone',
-                'unique',
-                'targetClass' => User::className(),
-                'except' => self::SCENARIO_LOGIN,
-                'message' => 'Номер телефона {value} уже занят'
-            ],
+            ['phone', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Номер телефона {value} уже занят'],
 
             ['email', 'email'],
-            [
-                'email',
-                'unique',
-                'targetClass' => User::className(),
-                'except' => self::SCENARIO_LOGIN,
-                'message' => 'Почта {value} уже занята'
-            ],
+            ['email', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Почта {value} уже занята'],
 
         ];
     }
@@ -136,6 +114,15 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             $billing->user_id = $this->id;
             if ($billing->validate()) {
                 $billing->save();
+            }
+
+            if (!Discount::findOne($this->id)) {
+                $discount = new Discount();
+                $discount->user_id = $this->id;
+                $discount->count = 0;
+                if ($discount->validate()) {
+                    $discount->save();
+                }
             }
         }
     }

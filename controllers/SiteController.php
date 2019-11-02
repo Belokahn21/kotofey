@@ -359,7 +359,7 @@ class SiteController extends Controller
                     return $this->refresh();
                 }
 
-                if ($billing->load(Yii::$app->request->post()) && $billing->validate()) {
+                if ($billing->load(Yii::$app->request->post()) or $billing->validate()) {
                     if ($billing->update() === false) {
                         Notify::setErrorNotify(Debug::modelErrors($billing));
                         return $this->refresh();
@@ -375,11 +375,14 @@ class SiteController extends Controller
                 if (Basket::getInstance()->cash() < 500) {
                     $order->summared = 100;
                 }
+
                 $order->user = $user->id;
                 if ($order->load(Yii::$app->request->post()) && $order->validate()) {
                     if ($order->save() === false) {
                         Notify::setErrorNotify(Debug::modelErrors($order));
                         return $this->refresh();
+                    }else{
+
                     }
                 } else {
                     Notify::setErrorNotify(Debug::modelErrors($order));
@@ -388,9 +391,6 @@ class SiteController extends Controller
 
                 $items->orderId = $order->id;
                 if ($items->saveItems() === false) {
-                    Notify::setErrorNotify(Debug::modelErrors($items));
-                    return $this->refresh();
-                } else {
                     Notify::setErrorNotify(Debug::modelErrors($items));
                     return $this->refresh();
                 }
