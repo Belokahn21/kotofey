@@ -4,12 +4,30 @@
 @import "include/general";
 @import "include/buttons";
 @import "include/colors";
-
 @import "include/block/admin-panel";
 @import "include/block/up-header-menu";
 @import "include/block/header";
 @import "include/block/menu";
 @import "include/block/breadcrumb";
+@import "include/block/advantages";
+
+.three-line {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 35px 0;
+}
+
+.block-title {
+  font-weight: bold;
+  font-size: 22px;
+  margin: 5px 0;
+}
+
+@import "include/block/providers";
+@import "include/block/social";
+@import "include/block/news";
+
 @import "include/block/login";
 @import "include/block/slider-index";
 @import "include/block/fast-buy";

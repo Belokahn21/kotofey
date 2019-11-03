@@ -1,0 +1,13 @@
+.news-control {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.block-full__link {
+  color: $mainActiveColor;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: bold;
+}
