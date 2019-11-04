@@ -1,25 +1,31 @@
-.btn-main {
-  background: #ff1a4a;
-  color: white;
+.btn-main, .btn-cancel {
+  font-size: 14px;
   font-weight: bold;
+  text-transform: uppercase;
   border: 0;
   outline: 0;
-  padding: 1%;
+  padding: .375rem .75rem;
   cursor: pointer;
   display: inline-block;
   text-decoration: none !important;
-  border-bottom: 5px solid #c21e0a;
   -webkit-border-radius: 0.3em;
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
 
-  &.grey {
-    background: white;
-    color: black;
-    border: 1px #e2e2e2 solid;
-  }
-
   &:hover {
-    color: #641303;
+    opacity: 0.9;
+    color: white;
   }
+}
+
+.btn-main {
+  background: $mainActiveColor;
+  border-bottom: 5px solid #c21e0a;
+  color: white;
+}
+
+.btn-cancel {
+  background: silver;
+  border-bottom: 5px solid grey;
+  color: white;
 }

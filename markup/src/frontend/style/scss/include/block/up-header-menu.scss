@@ -47,4 +47,8 @@
 .top-menu__link {
   color: $mainColor;
   text-decoration: none !important;
+
+  &:hover {
+    color: silver;
+  }
 }

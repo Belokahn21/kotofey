@@ -1,4 +1,3 @@
-
 .profile-menu {
   width: 100%;
   display: flex;
@@ -32,26 +31,11 @@
   }
 }
 
-.owl-main {
-  margin: 1% 0;
-
-  div {
-    position: relative;
-    height: 140px;
-  }
-}
-
 .remove-favorite {
   position: absolute;
   right: 0;
   top: 0;
   cursor: pointer;
-}
-
-.item-slide {
-  width: 160px;
-  height: 100%;
-  cursor: e-resize;
 }
 
 .profile-order {
@@ -164,5 +148,87 @@
 
   li {
     text-align: center;
+  }
+}
+
+.list-favorite-wrap {
+  width: 100%;
+}
+
+.list-favorite {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+}
+
+.favorite-item__image-wrap {
+  width: 100%;
+  height: 100px;
+}
+
+.favorite-item__image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.favorite-item {
+  width: 25%;
+  padding: 5px;
+}
+
+.favorite-item__link {
+  font-size: 12px;
+  text-align: center;
+}
+
+.favorite-item__link-a {
+  color: silver;
+  text-decoration: none;
+
+  &:hover {
+    color: grey;
+    text-decoration: none;
+  }
+}
+
+
+.profile-edit-modal-wrap {
+  width: 100%;
+}
+
+.profile-edit-modal-element.avatar-file {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-edit-modal-avatar-wrap {
+  margin: 5px 0;
+}
+
+.profile-edit-modal-element {
+  width: 100%;
+  margin: 5px 0;
+
+  input {
+    width: 100%;
+    border: 1px silver solid;
+    padding: 5px;
+  }
+
+  select {
+    width: 100%;
+    border: 1px silver solid;
+    padding: 5px;
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
   }
 }

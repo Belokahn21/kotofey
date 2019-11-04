@@ -23,8 +23,8 @@
     "gulp-include-file": "^0.1.1",
     "gulp-include-tag": "^1.1.2",
     "gulp-rigger": "^0.5.8",
-    "pug": "^2.0.4",
-    "typescript": "^3.6.4"
+    "gulp-uglify": "^3.0.2",
+    "pug": "^2.0.4"
   },
   "dependencies": {
     "gulp": "^4.0.2",

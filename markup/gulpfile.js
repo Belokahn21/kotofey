@@ -11,6 +11,7 @@ var gulp = require('gulp'),
 	changed = require('gulp-changed'),
 	imagemin = require('gulp-imagemin'),
 	babel = require('gulp-babel'),
+	ugli = require('gulp-uglify'),
 	sass = require('gulp-sass');
 var config = {
 	paths: {
@@ -74,12 +75,14 @@ gulp.task('js', function () {
 			gulp.src(config.paths.js.src_frontend)
 				.pipe(rigger())
 				.pipe(babel())
-				.pipe(concat('script.js'))
+				.pipe(concat('script.min.js'))
+				.pipe(ugli())
 				.pipe(gulp.dest(config.paths.js.build_frontend)),
 			gulp.src(config.paths.js.src_backend)
 				.pipe(rigger())
 				.pipe(babel())
-				.pipe(concat('script.js'))
+				.pipe(concat('script.min.js'))
+				.pipe(ugli())
 				.pipe(gulp.dest(config.paths.js.build_backend))
 				.pipe(gulp.dest(config.paths.js.application_backend))
 		);
