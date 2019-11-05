@@ -31,7 +31,7 @@ $this->beginPage() ?>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <?php if (YII_ENV == 'prod'): ?>
         <?php echo $this->render('include/head/yandex/metrika.php'); ?>
-        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
+        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
         <?php echo $this->render('include/head/jivo.php'); ?>
     <? endif; ?>
     <?= Html::csrfMetaTags() ?>
