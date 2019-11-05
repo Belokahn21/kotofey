@@ -10,7 +10,7 @@ use app\models\entity\ProductProperties;
 use app\models\entity\InformersValues;
 use app\widgets\fast_buy\FastBuyWidget;
 
-
+/* @var \yii\web\View $this */
 /* @var \app\models\entity\Product $product */
 /* @var \app\models\entity\Category $category */
 
@@ -20,7 +20,8 @@ if($category){
 }
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product->detail]];
 
-$this->title = Title::showTitle($product->name); ?>
+$this->title = Title::showTitle($product->name);
+?>
 
 <div class="detail-product" itemtype="http://schema.org/Product" itemscope>
     <div class="detail-product-wrap">
