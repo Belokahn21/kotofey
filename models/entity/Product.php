@@ -100,8 +100,8 @@ class Product extends \yii\db\ActiveRecord
             [['active'], 'default', 'value' => 1],
 
 
-            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp'],
-            [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp', 'maxFiles' => 10],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp, jpeg'],
+            [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp, jpeg', 'maxFiles' => 10],
         ];
     }
 
