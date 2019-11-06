@@ -30,6 +30,13 @@ $this->title = Title::showTitle("Гео объекты"); ?>
 		'id',
 		'name',
 		[
+			'attribute' => 'type',
+			'value' => function ($model) {
+                /* @var $model \app\models\entity\Geo */
+                return $model->getTypes()[$model->type];
+			}
+		],
+		[
 			'attribute' => 'created_at',
 			'format' => ['date', 'dd.MM.YYYY'],
 			'options' => ['width' => '200']
@@ -38,7 +45,7 @@ $this->title = Title::showTitle("Гео объекты"); ?>
 			'class' => 'yii\grid\ActionColumn',
 			'buttons' => [
 				'view' => function ($url, $model, $key) {
-					return Html::a('<i class="fas fa-copy"></i>', "/admin/geo/$key/?action=copy");
+//					return Html::a('<i class="fas fa-copy"></i>', "/admin/geo/$key/?action=copy");
 				},
 				'update' => function ($url, $model, $key) {
 					return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/geo/$key"]));

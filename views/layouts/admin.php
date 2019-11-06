@@ -69,7 +69,6 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                         <a href="/admin/"><i class="fa fa-tachometer-alt"></i>Гео</a>
                         <ul>
                             <li class="panel-menu__item sub"><a href="/admin/geo/">Гео объекты</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/geo-type/">Типы гео объектов</a></li>
                         </ul>
                     </li>
                     <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-shopping-cart"></i>Магазин</a>

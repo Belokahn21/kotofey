@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\ArrayHelper;
-use app\models\entity\GeoType;
-
 /* @var $model \app\models\entity\Geo */
 ?>
 <div class="tabs-container">
@@ -12,6 +9,8 @@ use app\models\entity\GeoType;
 
     <div id="tab-1" class="tab-content current">
 		<?= $form->field($model, 'name'); ?>
-		<?= $form->field($model, 'type_id')->dropDownList(ArrayHelper::map(GeoType::find()->all(), 'id', 'name'), ['prompt' => 'Тип гео объекта']); ?>
+		<?= $form->field($model, 'active')->checkbox(); ?>
+		<?= $form->field($model, 'sort')->textInput(['value'=>500]); ?>
+		<?= $form->field($model, 'type')->dropDownList($model->getTypes(), ['prompt' => 'Тип гео объекта']); ?>
     </div>
 </div>

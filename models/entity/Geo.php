@@ -21,9 +21,11 @@ use yii\data\ActiveDataProvider;
  */
 class Geo extends \yii\db\ActiveRecord
 {
-	/**
-	 * {@inheritdoc}
-	 */
+	const TYPE_OBJECT_CITY = 'city';
+	const TYPE_OBJECT_STREET = 'street';
+	const TYPE_OBJECT_REGION = 'region';
+	const TYPE_OBJECT_COUNTRY = 'country';
+
 	public static function tableName()
 	{
 		return 'geo';
@@ -48,8 +50,8 @@ class Geo extends \yii\db\ActiveRecord
 	{
 		return [
 			[['name'], 'required'],
-			[['sort', 'active', 'type_id', 'created_at', 'updated_at'], 'integer'],
-			[['name', 'slug'], 'string', 'max' => 255],
+			[['sort', 'active', 'created_at', 'updated_at'], 'integer'],
+			[['name', 'slug', 'type'], 'string', 'max' => 255],
 		];
 	}
 
@@ -64,9 +66,19 @@ class Geo extends \yii\db\ActiveRecord
 			'slug' => 'Симольный код',
 			'sort' => 'Сортировка',
 			'active' => 'Активность',
-			'type_id' => 'Тип объекта',
+			'type' => 'Тип объекта',
 			'created_at' => 'Дата создания',
 			'updated_at' => 'Дата обновления',
+		];
+	}
+
+	public function getTypes()
+	{
+		return [
+			self::TYPE_OBJECT_COUNTRY=>'Страна',
+			self::TYPE_OBJECT_REGION=>'Регион',
+			self::TYPE_OBJECT_CITY => 'Город',
+			self::TYPE_OBJECT_STREET=>'Улица',
 		];
 	}
 

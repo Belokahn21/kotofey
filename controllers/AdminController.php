@@ -6,6 +6,7 @@ use app\models\entity\Basket;
 use app\models\entity\Category;
 use app\models\entity\Delivery;
 use app\models\entity\Geo;
+use app\models\entity\GeoType;
 use app\models\entity\Informers;
 use app\models\entity\InformersValues;
 use app\models\entity\News;
@@ -132,6 +133,7 @@ class AdminController extends Controller
 			$item->removeOldImages();   // удалить галерею
 
 			if ($item->delete()) {
+				Notify::setSuccessNotify('Продукт удален');
 				return $this->redirect('/admin/catalog/');
 			}
 		}
@@ -152,6 +154,7 @@ class AdminController extends Controller
 			$properties = ProductProperties::find()->all();
 
 			if ($model->createProduct()) {
+				Notify::setSuccessNotify('Продукт создан');
 				return $this->refresh();
 			}
 
@@ -176,6 +179,7 @@ class AdminController extends Controller
 				$model->isNewRecord = true;
 				$model->scenario = Product::SCENARIO_NEW_PRODUCT;
 				if ($model->createProduct()) {
+					Notify::setSuccessNotify('Продукт скопирован');
 					return $this->redirect('/admin/catalog/');
 				}
 			}
@@ -183,6 +187,7 @@ class AdminController extends Controller
 		}
 
 		if ($model->updateProduct()) {
+			Notify::setSuccessNotify('Продукт обновлен');
 			return $this->refresh();
 		}
 
@@ -1069,7 +1074,9 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail/geo');
+			return $this->render('detail/geo', [
+				'model' => $model
+			]);
 		}
 		$model = new Geo();
 		if (\Yii::$app->request->isPost) {
