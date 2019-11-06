@@ -55,6 +55,7 @@ $config = [
 			'showScriptName' => false,
 			'enableStrictParsing' => false,
 			'rules' => [
+				'gii' => 'gii',
 				'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
 				'<controller:(admin|ajax|apivk)>/' => '<controller>/index',
 				'<controller:(admin|ajax|apivk)>' => '<controller>/<action>',

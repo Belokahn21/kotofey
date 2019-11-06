@@ -30,11 +30,11 @@ class Stocks extends ActiveRecord
     {
         return [
 
-            [['name', 'address'], 'required', 'message' => '{attribute} обязательно'],
+            [['name', 'address','city_id'], 'required', 'message' => '{attribute} обязательно'],
 
             [['name', 'address'], 'string'],
 
-            [['time_start', 'time_end'], 'integer'],
+            [['time_start', 'time_end','city_id'], 'integer'],
 
             [['hour_start', 'minute_start', 'hour_end', 'minute_end'], 'integer'],
 
@@ -55,6 +55,9 @@ class Stocks extends ActiveRecord
             'address' => 'Адрес',
             'time_start' => 'Время открытия',
             'time_end' => 'Время закрытия',
+            'sort' => 'Сортировка',
+            'active' => 'Активность',
+            'city_id' => 'Город',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
 
