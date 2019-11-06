@@ -14,7 +14,7 @@ use app\models\entity\SiteSettings;
 use app\models\tool\Currency;
 use yii\widgets\ActiveForm;
 use app\models\entity\Subscribe;
-use app\models\entity\Search;
+use app\widgets\geo\GeoWidget;
 use app\widgets\search\SearchWidget;
 
 AppAsset::register($this);
@@ -47,9 +47,7 @@ $this->beginPage() ?>
 
 <div class="wrap-page">
     <div class="top-menu-wrap">
-        <div class="current-city">
-            Ваш город: <span>Барнаул</span>
-        </div>
+		<?= GeoWidget::widget(); ?>
         <ul class="top-menu">
             <li class="top-menu__item"><a href="/delivery/">Доставка</a></li>
             <li class="top-menu__item"><a href="/payment/">Оплата</a></li>

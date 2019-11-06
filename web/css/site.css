@@ -1737,4 +1737,7 @@ textarea {
   justify-content: center;
   width: 100%; }
 
+.city-list {
+  list-style: none; }
+
 /*# sourceMappingURL=site.css.map */
