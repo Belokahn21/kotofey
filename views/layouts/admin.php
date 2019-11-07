@@ -98,7 +98,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                                     class="far fa-life-ring"></i>Поддержка<span
                                     class="count"><?= Tickets::find()->count() ?></span></a>
                         <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/supportcategory/">Разделы</a></li>
+                            <li class="panel-menu__item sub"><a href="/admin/support-category/">Разделы</a></li>
                             <li class="panel-menu__item sub"><a href="/admin/supportstatus/">Статусы</a></li>
                         </ul>
                     </li>

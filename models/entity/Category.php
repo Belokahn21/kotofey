@@ -3,8 +3,10 @@
 namespace app\models\entity;
 
 use app\models\tool\Debug;
+use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
 
@@ -13,6 +15,7 @@ use yii\web\UploadedFile;
  *
  * @property integer $id
  * @property string $name
+ * @property string $image
  * @property string $slug
  * @property integer $sort
  * @property integer $parent
@@ -21,165 +24,115 @@ use yii\web\UploadedFile;
  */
 class Category extends ActiveRecord
 {
-    const SCENARIO_NEW_CATEGORY = 1;
-    const SCENARIO_UPDATE_CATEGORY = 2;
 
-    public $imageFile;
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className(),
+			[
+				'class' => UploadBehavior::class,
+				'attribute' => 'image',
+				'scenarios' => ['insert', 'update'],
+				'path' => '@webroot/upload/',
+				'url' => '@web/upload/',
+			],
+			[
+				'class' => SluggableBehavior::className(),
+				'attribute' => 'name',
+				'ensureUnique' => true,
+			],
+		];
+	}
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'name',
-                'ensureUnique' => true,
-            ],
-        ];
-    }
+	public function rules()
+	{
+		return [
+			[['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-    public function scenarios()
-    {
-        return [
-            self::SCENARIO_NEW_CATEGORY => [
-                'name',
-                'sort',
-                'parent',
-                'imageFile',
-                'seo_keywords',
-                'seo_description',
-                'image'
-            ],
-            self::SCENARIO_UPDATE_CATEGORY => [
-                'name',
-                'sort',
-                'parent',
-                'imageFile',
-                'seo_keywords',
-                'seo_description',
-                'image'
-            ]
-        ];
-    }
+			[['parent', 'seo_keywords', 'seo_description', 'image'], 'string'],
 
-    public function rules()
-    {
-        return [
-            [['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
+			['sort', 'integer'],
 
-            [['parent', 'seo_keywords', 'seo_description', 'image'], 'string'],
+			['parent', 'default', 'value' => '0'],
 
-            ['sort', 'integer'],
+			[['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+		];
+	}
 
-            ['parent', 'default', 'value' => '0'],
+	public function attributeLabels()
+	{
+		return [
+			'name' => 'Название',
+			'sort' => 'Сортировка',
+			'parent' => 'Родительский раздел',
+			'imageFile' => 'Изображение',
+			'seo_keywords' => 'Ключевые слова (seo)',
+			'seo_description' => 'Описание (seo)',
+		];
+	}
 
-            [['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
-        ];
-    }
+	public function getDetail()
+	{
+		return "/catalog/" . $this->slug . "/";
+	}
 
-    public function attributeLabels()
-    {
-        return [
-            'name' => 'Название',
-            'sort' => 'Сортировка',
-            'parent' => 'Родительский раздел',
-            'imageFile' => 'Изображение',
-            'seo_keywords' => 'Ключевые слова (seo)',
-            'seo_description' => 'Описание (seo)',
-        ];
-    }
+	public static function findBySlug($slug)
+	{
+		return static::findOne(['slug' => $slug]);
+	}
 
-    public function createCategory()
-    {
-        if (\Yii::$app->request->isPost) {
-            if ($this->load(\Yii::$app->request->post())) {
+	public function search($params)
+	{
+		$query = static::find();
 
-                $this->upload();
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
 
-                if ($this->validate()) {
-                    if (!$this->save()) {
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
-            }
-        }
-    }
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
 
-    public function getDetail()
-    {
-        return "/catalog/" . $this->slug . "/";
-    }
+		$query->andFilterWhere(['like', 'id', $this->id])
+			->andFilterWhere(['like', 'name', $this->name]);
 
-    public static function findBySlug($slug)
-    {
-        return static::findOne(['slug' => $slug]);
-    }
+		return $dataProvider;
+	}
 
+	public $items;
 
-    public function upload()
-    {
-        $this->imageFile = UploadedFile::getInstance($this, 'imageFile');
-        if (!empty($this->imageFile)) {
+	public function categoryTree($parent_id = 0, $delim = "")
+	{
+		$categories = \app\models\entity\Category::find()->where(['parent' => $parent_id])->all();
 
-            // удалить старое фото
-            $this->removeOldImage();
+		if ($categories) {
 
-            $fileName = substr(md5($this->imageFile->baseName), 0, 32) . '.' . $this->imageFile->extension;
-            $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
+			foreach ($categories as &$category) {
+				$category->name = $delim . $category->name;
+				$this->items[] = $category;
+				self::categoryTree($category->id, $delim . '---');
+			}
 
-            $this->imageFile->saveAs($path);
-            $this->image = "/web/upload/" . $fileName;
+		}
 
-            $this->imageFile = "";
-        }
-    }
+		return $this->items;
+	}
 
-    public function removeOldImage()
-    {
-        if (!empty($this->image)) {
-            try {
-                unlink(\Yii::getAlias('@app') . $this->image);
-            } catch (\ErrorException $exception) {
-            }
-        }
-    }
+	public $subsections;
 
-    public $items;
+	public function subsections($parent_id = null)
+	{
+		if (is_null($parent_id)) {
+			$parent_id = $this->id;
+			$category = Category::findOne($parent_id);
+		} else {
 
-    public function categoryTree($parent_id = 0, $delim = "")
-    {
-        $categories = \app\models\entity\Category::find()->where(['parent' => $parent_id])->all();
-
-        if ($categories) {
-
-            foreach ($categories as &$category) {
-                $category->name = $delim . $category->name;
-                $this->items[] = $category;
-                self::categoryTree($category->id, $delim . '---');
-            }
-
-        }
-
-        return $this->items;
-    }
-
-    public $subsections;
-
-    public function subsections($parent_id = null)
-    {
-        if (is_null($parent_id)) {
-            $parent_id = $this->id;
-            $category = Category::findOne($parent_id);
-        } else {
-
-            $category = Category::findOne(['parent' => $parent_id]);
-        }
-        if ($category) {
-            $this->subsections[] = $category;
-            $this->subsections($category->id);
-        }
-        return $this->subsections;
-    }
+			$category = Category::findOne(['parent' => $parent_id]);
+		}
+		if ($category) {
+			$this->subsections[] = $category;
+			$this->subsections($category->id);
+		}
+		return $this->subsections;
+	}
 }

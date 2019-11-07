@@ -9,6 +9,7 @@ namespace app\models\entity\support;
 
 
 use yii\behaviors\TimestampBehavior;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 
 /**
@@ -71,6 +72,24 @@ class Tickets extends ActiveRecord
 
         ];
     }
+
+	public function search($params)
+	{
+		$query = static::find();
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
+
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
+
+		$query->andFilterWhere(['like', 'id', $this->id])
+			->andFilterWhere(['like', 'status', $this->status]);
+
+		return $dataProvider;
+	}
 
     public function getCategory()
     {

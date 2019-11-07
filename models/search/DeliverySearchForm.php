@@ -24,21 +24,4 @@ class DeliverySearchForm extends Delivery
     {
         return Model::scenarios();
     }
-
-    public function search($params)
-    {
-        $query = Delivery::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'name', $this->name]);
-
-        return $dataProvider;
-    }
 }

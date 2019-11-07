@@ -137,7 +137,7 @@ class AdminController extends Controller
 
 			if ($item->delete()) {
 				Notify::setSuccessNotify('Продукт удален');
-				return $this->redirect(' / admin / catalog / ');
+				return $this->redirect('/admin/catalog/');
 			}
 		}
 
@@ -152,8 +152,7 @@ class AdminController extends Controller
 
 		if ($id == null) {
 			$model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
-			$searchModel = new ProductSearchForm();
-			$dataProvider = $searchModel->search(\Yii::$app->request->get());
+			$dataProvider = $model->search(\Yii::$app->request->get());
 			$properties = ProductProperties::find()->all();
 
 			if ($model->createProduct()) {
@@ -163,7 +162,6 @@ class AdminController extends Controller
 
 			return $this->render('catalog', [
 				'model' => $model,
-				'searchModel' => $searchModel,
 				'dataProvider' => $dataProvider,
 				'properties' => $properties,
 			]);
@@ -183,7 +181,7 @@ class AdminController extends Controller
 				$model->scenario = Product::SCENARIO_NEW_PRODUCT;
 				if ($model->createProduct()) {
 					Notify::setSuccessNotify('Продукт скопирован');
-					return $this->redirect(' / admin / catalog / ');
+					return $this->redirect('/admin/catalog/');
 				}
 			}
 
@@ -194,7 +192,7 @@ class AdminController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('detail / catalog', [
+		return $this->render('detail/catalog', [
 			'model' => $model,
 			'properties' => $properties,
 		]);
@@ -204,39 +202,44 @@ class AdminController extends Controller
 	{
 		if ($id) {
 			$model = Category::findOne($id);
-			$model->scenario = Category::SCENARIO_UPDATE_CATEGORY;
+			if (!$model) {
+				throw new HttpException(404, 'Раздел товара не существует');
+			}
 
 			if (\Yii::$app->request->isPost) {
 				if ($model->load(\Yii::$app->request->post())) {
-
-					$model->upload();
-
 					if ($model->validate()) {
 						if ($model->save()) {
+							Notify::setSuccessNotify('Категория обновлена');
 							return $this->refresh();
 						}
 					}
 				}
 			}
 
-			return $this->render('detail / category', [
+			return $this->render('detail/category', [
 				'model' => $model,
 				'categories' => $model->categoryTree(),
 			]);
 		}
 
-		$model = new Category(['scenario' => Category::SCENARIO_NEW_CATEGORY]);
-		$searchModel = new CategorySearchForm();
-		$dataProvider = $searchModel->search(\Yii::$app->request->get());
+		$model = new Category();
+		$dataProvider = $model->search(\Yii::$app->request->get());
 
-		if ($model->createCategory()) {
-			return $this->refresh();
+		if (\Yii::$app->request->isPost) {
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Notify::setSuccessNotify('Категория создана');
+						return $this->refresh();
+					}
+				}
+			}
 		}
 
 		return $this->render('category', [
 			'model' => $model,
 			'categories' => $model->categoryTree(),
-			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
 		]);
 	}
@@ -248,47 +251,15 @@ class AdminController extends Controller
 			if ($order) {
 				$order->delete();
 			}
-
-			$items = OrderItems::findAll(['orderId' => (int)Yii::$app->request->get('id')]);
-			if ($items) {
-				foreach ($items as $item) {
-					$item->delete();
-				}
-			}
-
-			return $this->redirect(' / admin / order / ');
+			return $this->redirect('/admin/order/');
 		}
 
 		if ($id) {
 			$order = Order::findOne($id);
-
-			if (Yii::$app->request->isPost) {
-				if ($order->load(Yii::$app->request->post())) {
-					if ($order->update()) {
-
-						if ($order->product_id) {
-
-							foreach ($order->product_id as $productId) {
-								$basket = new Basket();
-								$basket->product = Product::findOne($productId);
-								$basket->count = 1;
-								$basket->add();
-							}
-
-							OrderItems::deleteAll(['orderId' => $order->id]);
-
-							$items = new OrderItems();
-							$items->orderId = $order->id;
-							$items->saveItems();
-
-							$basket->clear();
-
-						}
-					}
-				}
+			if (!$order) {
+				throw new HttpException(404, 'Заказ не найден');
 			}
-
-			return $this->render('detail / order', [
+			return $this->render('detail/order', [
 				'model' => $order
 			]);
 		}
@@ -308,14 +279,13 @@ class AdminController extends Controller
 		$model = new User(['scenario' => User::SCENARIO_INSERT]);
 		$authAssigment = new AuthAssignment();
 		$dataProvider = $model->search(\Yii::$app->request->post());
-		$groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
 
 		// удалить юзера
 		if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'auth') {
 			$user = User::findOne(Yii::$app->request->get('id'));
 			if ($user) {
 				if (Yii::$app->user->login($user)) {
-					return $this->redirect(' / admin / user / ');
+					return $this->redirect('/admin/user/');
 				}
 			}
 		}
@@ -323,7 +293,7 @@ class AdminController extends Controller
 			$user = User::findOne($id);
 
 			if ($user->delete()) {
-				return $this->redirect(' / admin / user / ');
+				return $this->redirect('/admin/user/');
 			}
 		}
 
@@ -356,7 +326,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail / user', [
+			return $this->render('detail/user', [
 				'model' => $model,
 			]);
 		}
@@ -437,34 +407,37 @@ class AdminController extends Controller
 				throw new HttpException(404, 'Доставка не существует');
 			}
 
-
 			if (\Yii::$app->request->isPost) {
 				if ($model->load(Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
+							Notify::setSuccessNotify('Доставка обновлена');
 							return $this->refresh();
 						}
 					}
 				}
 			}
-			return $this->render('detail / delivery', [
+			return $this->render('detail/delivery', [
 				'model' => $model
 			]);
 		}
 
 		$model = new Delivery();
-		$searchModel = new DeliverySearchForm();
-		$dataProvider = $searchModel->search(\Yii::$app->request->get());
+		$dataProvider = $model->search(\Yii::$app->request->get());
 
 		if (\Yii::$app->request->isPost) {
-			if ($model->createDelivery() === true) {
-				return $this->refresh();
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Notify::setSuccessNotify('Доставка создана');
+						return $this->refresh();
+					}
+				}
 			}
 		}
 
 		return $this->render('delivery', [
 			'model' => $model,
-			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
 		]);
 	}
@@ -483,66 +456,91 @@ class AdminController extends Controller
 				if ($model->load(Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
+							Notify::setSuccessNotify('Ооплата обновлена');
 							return $this->refresh();
 						}
 					}
 				}
 			}
-			return $this->render('detail / payment', [
+			return $this->render('detail/payment', [
 				'model' => $model
 			]);
 		}
 
 		$model = new Payment();
-		$searchModel = new PaymentSearchForm();
-		$dataProvider = $searchModel->search(\Yii::$app->request->get());
+		$dataProvider = $model->search(\Yii::$app->request->get());
 
 		if (\Yii::$app->request->isPost) {
-			if ($model->createPayment() === true) {
-				return $this->refresh();
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Notify::setSuccessNotify('Ооплата добавлена');
+						return $this->refresh();
+					}
+				}
 			}
 		}
 
 
 		return $this->render('payment', [
 			'model' => $model,
-			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
 		]);
 	}
 
-	public function actionStatus()
+	public function actionStatus($id = null)
 	{
-		$status = new OrderStatus();
-		$searchModel = new OrderStatusSearchForm();
-		$dataProvider = $searchModel->search(\Yii::$app->request->get());
+		if ($id) {
+			$model = OrderStatus::findOne($id);
+			if (!$model) {
+				throw new HttpException(404, 'Статус не существует');
+			}
+			if (\Yii::$app->request->isPost) {
+				if ($model->load(\Yii::$app->request->post())) {
+					if ($model->validate()) {
+						if ($model->update()) {
+							Notify::setSuccessNotify('Статус обновлен');
+							return $this->refresh();
+						}
+					}
+				}
+			}
+			return $this->render('detail/status', [
+				'model' => $model
+			]);
+		}
+		$model = new OrderStatus();
+		$dataProvider = $model->search(\Yii::$app->request->get());
 
 		if (\Yii::$app->request->isPost) {
-			if ($status->createStatus()) {
-				return $this->refresh();
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Notify::setSuccessNotify('Статус добавлен');
+						return $this->refresh();
+					}
+				}
 			}
 		}
+
+
 		return $this->render('status', [
-			'model' => $status,
-			'searchModel' => $searchModel,
+			'model' => $model,
 			'dataProvider' => $dataProvider,
 		]);
 	}
 
 	public function actionSupport($id = null)
 	{
-		$status = new Tickets();
-		$searchModel = new TicketsSearchForm();
-		$dataProvider = $searchModel->search(\Yii::$app->request->get());
+		$model = new Tickets();
+		$dataProvider = $model->search(\Yii::$app->request->get());
 
 		return $this->render('support', [
-			'model' => $status,
-			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
 		]);
 	}
 
-	public function actionSupportcategory($id = null)
+	public function actionSupportCategory($id = null)
 	{
 		$model = new SupportCategory();
 
@@ -550,6 +548,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
+						Notify::setSuccessNotify('Раздел тех. поддержки создан');
 						return $this->refresh();
 					}
 				}
@@ -591,7 +590,7 @@ class AdminController extends Controller
 			}
 
 			if ($element->delete()) {
-				return $this->redirect(' / admin / settings / ');
+				return $this->redirect('/admin/settings/');
 			}
 		}
 
@@ -606,13 +605,13 @@ class AdminController extends Controller
 					if ($model->validate()) {
 						if ($model->update()) {
 							Notify::setSuccessNotify("Настройки обновлены");
-							return $this->redirect(' / admin / settings / ' . $id . ' / ');
+							return $this->redirect('/admin/settings/' . $id . '/');
 						}
 					}
 				}
 			}
 
-			return $this->render('detail / settings', [
+			return $this->render('detail/settings', [
 				'model' => $model,
 				'paramsList' => $paramsList,
 			]);
@@ -628,7 +627,7 @@ class AdminController extends Controller
 
 						if (!empty($model->file)) {
 							$fileName = substr(md5($model->file->baseName), 0, 32) . ' . ' . $model->file->extension;
-							$path = \Yii::getAlias('@app') . ' / web / upload / ' . $fileName;
+							$path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
 
 							$model->file->saveAs($path);
 							$model->value = "/web/upload/" . $fileName;
@@ -638,7 +637,7 @@ class AdminController extends Controller
 					if ($model->validate()) {
 						if ($model->save()) {
 							Notify::setSuccessNotify("Настройки сохранены");
-							return $this->redirect(' / admin / settings / ');
+							return $this->redirect('/admin/settings/');
 						}
 					}
 				}
@@ -700,7 +699,7 @@ class AdminController extends Controller
 			$article = News::findOne($id);
 
 			if ($article->delete()) {
-				return $this->redirect(' / admin / news / ');
+				return $this->redirect('/admin/news/');
 			}
 		}
 
@@ -719,7 +718,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail / pages', [
+			return $this->render('detail/pages', [
 				'model' => $model,
 			]);
 		}
@@ -755,7 +754,7 @@ class AdminController extends Controller
 					return $this->refresh();
 				}
 			}
-			return $this->render('detail / stocks', [
+			return $this->render('detail/stocks', [
 				'model' => $model,
 			]);
 		}
@@ -818,7 +817,7 @@ class AdminController extends Controller
 			}
 
 
-			return $this->render('detail / informers', [
+			return $this->render('detail/informers', [
 				'model' => $model
 			]);
 		}
@@ -855,7 +854,7 @@ class AdminController extends Controller
 			if ($obj) {
 				$obj->delete();
 			}
-			return $this->redirect(' / admin / informersvalues / ');
+			return $this->redirect('/admin/informersvalues/');
 		}
 
 		if ($id) {
@@ -874,7 +873,7 @@ class AdminController extends Controller
 			}
 
 
-			return $this->render('detail / informersvalues', [
+			return $this->render('detail/informersvalues', [
 				'model' => $model,
 			]);
 		}
@@ -928,7 +927,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail / promo', [
+			return $this->render('detail/promo', [
 				'model' => $promo
 			]);
 		}
@@ -964,7 +963,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail / provider', [
+			return $this->render('detail/provider', [
 				'model' => $model
 			]);
 		}
@@ -1000,7 +999,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail / sliders', [
+			return $this->render('detail/sliders', [
 				'model' => $model
 			]);
 		}
@@ -1036,7 +1035,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail / sliders_images', [
+			return $this->render('detail/sliders_images', [
 				'model' => $model
 			]);
 		}
@@ -1077,7 +1076,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail / geo', [
+			return $this->render('detail/geo', [
 				'model' => $model
 			]);
 		}
