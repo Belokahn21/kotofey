@@ -19,6 +19,7 @@ use app\models\entity\Payment;
 use app\models\entity\ProductProperties;
 use app\models\entity\Promo;
 use app\models\entity\Providers;
+use app\models\entity\SearchQuery;
 use app\models\entity\Selling;
 use app\models\entity\SiteSettings;
 use app\models\entity\Sliders;
@@ -115,10 +116,12 @@ class AdminController extends Controller
 	{
 		$product = Product::find();
 		$order = Order::find();
+		$last_search = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
 
 		return $this->render('index', [
 			'product' => $product,
 			'order' => $order,
+			'last_search' => $last_search
 		]);
 	}
 
@@ -134,7 +137,7 @@ class AdminController extends Controller
 
 			if ($item->delete()) {
 				Notify::setSuccessNotify('Продукт удален');
-				return $this->redirect('/admin/catalog/');
+				return $this->redirect(' / admin / catalog / ');
 			}
 		}
 
@@ -180,7 +183,7 @@ class AdminController extends Controller
 				$model->scenario = Product::SCENARIO_NEW_PRODUCT;
 				if ($model->createProduct()) {
 					Notify::setSuccessNotify('Продукт скопирован');
-					return $this->redirect('/admin/catalog/');
+					return $this->redirect(' / admin / catalog / ');
 				}
 			}
 
@@ -191,7 +194,7 @@ class AdminController extends Controller
 			return $this->refresh();
 		}
 
-		return $this->render('detail/catalog', [
+		return $this->render('detail / catalog', [
 			'model' => $model,
 			'properties' => $properties,
 		]);
@@ -216,7 +219,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail/category', [
+			return $this->render('detail / category', [
 				'model' => $model,
 				'categories' => $model->categoryTree(),
 			]);
@@ -253,7 +256,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->redirect('/admin/order/');
+			return $this->redirect(' / admin / order / ');
 		}
 
 		if ($id) {
@@ -285,7 +288,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail/order', [
+			return $this->render('detail / order', [
 				'model' => $order
 			]);
 		}
@@ -312,7 +315,7 @@ class AdminController extends Controller
 			$user = User::findOne(Yii::$app->request->get('id'));
 			if ($user) {
 				if (Yii::$app->user->login($user)) {
-					return $this->redirect('/admin/user/');
+					return $this->redirect(' / admin / user / ');
 				}
 			}
 		}
@@ -320,7 +323,7 @@ class AdminController extends Controller
 			$user = User::findOne($id);
 
 			if ($user->delete()) {
-				return $this->redirect('/admin/user/');
+				return $this->redirect(' / admin / user / ');
 			}
 		}
 
@@ -353,7 +356,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail/user', [
+			return $this->render('detail / user', [
 				'model' => $model,
 			]);
 		}
@@ -444,7 +447,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail/delivery', [
+			return $this->render('detail / delivery', [
 				'model' => $model
 			]);
 		}
@@ -485,7 +488,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail/payment', [
+			return $this->render('detail / payment', [
 				'model' => $model
 			]);
 		}
@@ -588,7 +591,7 @@ class AdminController extends Controller
 			}
 
 			if ($element->delete()) {
-				return $this->redirect('/admin/settings/');
+				return $this->redirect(' / admin / settings / ');
 			}
 		}
 
@@ -603,13 +606,13 @@ class AdminController extends Controller
 					if ($model->validate()) {
 						if ($model->update()) {
 							Notify::setSuccessNotify("Настройки обновлены");
-							return $this->redirect('/admin/settings/' . $id . '/');
+							return $this->redirect(' / admin / settings / ' . $id . ' / ');
 						}
 					}
 				}
 			}
 
-			return $this->render('detail/settings', [
+			return $this->render('detail / settings', [
 				'model' => $model,
 				'paramsList' => $paramsList,
 			]);
@@ -624,8 +627,8 @@ class AdminController extends Controller
 						$model->file = UploadedFile::getInstance($model, 'file');
 
 						if (!empty($model->file)) {
-							$fileName = substr(md5($model->file->baseName), 0, 32) . '.' . $model->file->extension;
-							$path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
+							$fileName = substr(md5($model->file->baseName), 0, 32) . ' . ' . $model->file->extension;
+							$path = \Yii::getAlias('@app') . ' / web / upload / ' . $fileName;
 
 							$model->file->saveAs($path);
 							$model->value = "/web/upload/" . $fileName;
@@ -635,7 +638,7 @@ class AdminController extends Controller
 					if ($model->validate()) {
 						if ($model->save()) {
 							Notify::setSuccessNotify("Настройки сохранены");
-							return $this->redirect('/admin/settings/');
+							return $this->redirect(' / admin / settings / ');
 						}
 					}
 				}
@@ -697,7 +700,7 @@ class AdminController extends Controller
 			$article = News::findOne($id);
 
 			if ($article->delete()) {
-				return $this->redirect('/admin/news/');
+				return $this->redirect(' / admin / news / ');
 			}
 		}
 
@@ -716,7 +719,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail/pages', [
+			return $this->render('detail / pages', [
 				'model' => $model,
 			]);
 		}
@@ -752,7 +755,7 @@ class AdminController extends Controller
 					return $this->refresh();
 				}
 			}
-			return $this->render('detail/stocks', [
+			return $this->render('detail / stocks', [
 				'model' => $model,
 			]);
 		}
@@ -815,7 +818,7 @@ class AdminController extends Controller
 			}
 
 
-			return $this->render('detail/informers', [
+			return $this->render('detail / informers', [
 				'model' => $model
 			]);
 		}
@@ -852,7 +855,7 @@ class AdminController extends Controller
 			if ($obj) {
 				$obj->delete();
 			}
-			return $this->redirect('/admin/informersvalues/');
+			return $this->redirect(' / admin / informersvalues / ');
 		}
 
 		if ($id) {
@@ -871,7 +874,7 @@ class AdminController extends Controller
 			}
 
 
-			return $this->render('detail/informersvalues', [
+			return $this->render('detail / informersvalues', [
 				'model' => $model,
 			]);
 		}
@@ -925,7 +928,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail/promo', [
+			return $this->render('detail / promo', [
 				'model' => $promo
 			]);
 		}
@@ -961,7 +964,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail/provider', [
+			return $this->render('detail / provider', [
 				'model' => $model
 			]);
 		}
@@ -997,7 +1000,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail/sliders', [
+			return $this->render('detail / sliders', [
 				'model' => $model
 			]);
 		}
@@ -1033,7 +1036,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail/sliders_images', [
+			return $this->render('detail / sliders_images', [
 				'model' => $model
 			]);
 		}
@@ -1074,7 +1077,7 @@ class AdminController extends Controller
 					}
 				}
 			}
-			return $this->render('detail/geo', [
+			return $this->render('detail / geo', [
 				'model' => $model
 			]);
 		}

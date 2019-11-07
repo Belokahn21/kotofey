@@ -1,5 +1,5 @@
 <?php
-if (YII_ENV == 'prod' and empty($_SERVER['DOCUMENT_ROOT'])) {
+if (YII_ENV == 'prod' and empty($_SERVER['DOCUMENT_ROOT']) or YII_ENV == 'prod') {
 	return [
 		'class' => 'yii\db\Connection',
 		'dsn' => 'mysql:host=localhost;dbname=cd91333_kotofey',
@@ -13,7 +13,7 @@ if (YII_ENV == 'prod' and empty($_SERVER['DOCUMENT_ROOT'])) {
 		'schemaCache' => 'cache',
 	];
 }
-if (YII_ENV == 'dev' and empty($_SERVER['DOCUMENT_ROOT'])) {
+if (YII_ENV == 'dev' and empty($_SERVER['DOCUMENT_ROOT']) or YII_ENV == 'dev') {
 	return [
 		'class' => 'yii\db\Connection',
 		'dsn' => 'mysql:host=localhost;dbname=kotofey_shop',
