@@ -43,7 +43,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
             <div class="current-profile">
                 <div class="avatar-wrap">
                     <img class="current-profile__avatar"
-                         src="<?= ((!empty($user->avatar)) ? $user->avatar : "/web/upload/images/boy.png"); ?>"
+                         src="/web/upload/<?= ((!empty($user->avatar)) ? $user->avatar : "/web/upload/images/boy.png"); ?>"
                          alt="Аватар пользователя <?= $user->email; ?>"
                          title="Аватар пользователя <?= $user->email; ?>">
                 </div>
