@@ -55,7 +55,7 @@ class Category extends ActiveRecord
 
 			['parent', 'default', 'value' => '0'],
 
-			[['imageFile'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
 		];
 	}
 
