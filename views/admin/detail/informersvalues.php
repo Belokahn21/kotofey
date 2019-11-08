@@ -7,7 +7,7 @@ use app\models\entity\Informers;
 use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
-$this->title = Title::showTitle($model->value); ?>
+$this->title = Title::showTitle($model->name); ?>
 <section>
     <h1 class="title">Значение справочника: <?= $model->name; ?></h1>
     <?= Html::a("Назад", '/admin/informers-values/', ['class' => 'btn-back']) ?>

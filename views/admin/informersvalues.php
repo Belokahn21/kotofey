@@ -26,7 +26,7 @@ $this->title = Title::showTitle("Справочники"); ?>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel' => $model,
+    'filterModel' => $searchModel,
     'emptyText' => 'Значения отсутствуют',
     'columns' => [
         'id',

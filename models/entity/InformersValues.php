@@ -73,26 +73,4 @@ class InformersValues extends ActiveRecord
             'updated_at' => 'Дата обновления',
         ];
     }
-
-
-    public function search($params)
-    {
-        $query = static::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'sort', $this->sort])
-            ->andFilterWhere(['like', '$this->active', $this->active])
-            ->andFilterWhere(['like', 'informer_id', $this->informer_id]);
-
-        return $dataProvider;
-    }
 }

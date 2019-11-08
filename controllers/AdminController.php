@@ -877,7 +877,8 @@ class AdminController extends Controller
         }
 
         $model = new InformersValues();
-        $dataProvider = $model->search(\Yii::$app->request->get());
+        $searchModel = new InformersValuesSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -886,7 +887,7 @@ class AdminController extends Controller
                         Notify::setSuccessNotify('Значение справочника добавлено');
                         return $this->refresh();
                     }
-                }else{
+                } else {
                     Notify::setErrorNotify(Debug::modelErrors($model));
                 }
             }
@@ -894,6 +895,7 @@ class AdminController extends Controller
 
         return $this->render('informersvalues', [
             'model' => $model,
+            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

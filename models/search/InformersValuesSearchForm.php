@@ -18,8 +18,11 @@ class InformersValuesSearchForm extends InformersValues
     public function rules()
     {
         return [
-            [['value'], 'string'],
-            [['informer_id'], 'string'],
+            [['informer_id', 'sort'], 'integer'],
+
+            [['active'], 'boolean'],
+
+            [['name', 'description'], 'string'],
         ];
     }
 
@@ -27,4 +30,27 @@ class InformersValuesSearchForm extends InformersValues
     {
         return Model::scenarios();
     }
+
+
+    public function search($params)
+    {
+        $query = self::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description])
+            ->andFilterWhere(['like', 'sort', $this->sort])
+            ->andFilterWhere(['like', '$this->active', $this->active])
+            ->andFilterWhere(['like', 'informer_id', $this->informer_id]);
+
+        return $dataProvider;
+    }
+
 }
