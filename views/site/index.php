@@ -12,90 +12,95 @@ use app\widgets\slider\SliderWidget;
 $this->title = Title::showTitle("Главная страница");
 ?>
 
-<?php echo SliderWidget::widget([
-    'slider_id' => 1,
-    'use_carousel' => true
+<?= SliderWidget::widget([
+	'slider_id' => 1,
+	'use_carousel' => true
 ]) ?>
 
-<div class="edge">
-    <ul>
-        <li>
-            <img src="https://image.flaticon.com/icons/svg/664/664468.svg">
-            <p>Быстрая доставка</p>
-        </li>
-        <li>
-            <img src="https://image.flaticon.com/icons/svg/1524/1524983.svg">
-            <p>Удобные заказы</p>
-        </li>
-        <li>
-            <img src="/web/upload/images/fire.png">
-            <p>Популярные бренды</p>
-        </li>
-        <li>
-            <img src="https://image.flaticon.com/icons/svg/45/45925.svg">
-            <p>Широкий ассортимент</p>
-        </li>
-        <li>
-            <img src="https://image.flaticon.com/icons/svg/1611/1611260.svg">
-            <p>Низкие цены</p>
-        </li>
-    </ul>
-</div>
+<ul class="advantages">
+    <li class="advantages-item">
+        <div class="advantage-title">Делаете заказ</div>
+        <div class="advantage-description">Большой выбор товаров и низкие цены</div>
+        <i class="fas fa-shopping-cart"></i>
+    </li>
+    <li class="advantages-item">
+        <div class="advantage-title">Мы доставляем заказ</div>
+        <div class="advantage-description">Доставка в течении дня</div>
+        <i class="fas fa-truck"></i>
+    </li>
+    <li class="advantages-item">
+        <div class="advantage-title">Получаете заказ</div>
+        <div class="advantage-description">Получаете бонусы</div>
+        <i class="fas fa-gifts"></i>
+    </li>
+</ul>
 
-<div class="test">
-    <div class="index_about">
-        <h2>Наши поставщики</h2>
-        <ul class="list-providers owl-carousel">
-            <?php foreach ($providers as $provider): ?>
-                <li class="provider_item">
-                    <div class="provider_item-image-wrap">
-                        <img src="/web/upload/<?php echo $provider->image; ?>" alt="<?php echo $provider->name; ?>" title="<?php echo $provider->name; ?>">
+<div class="three-line">
+    <div id="provider-carousel" class="carousel slide providers-wrap" data-ride="carousel">
+        <div class="block-title">Наши поставщики</div>
+        <div class="carousel-inner providers">
+			<?php $provider_iterator = 1; ?>
+			<?php foreach ($providers as $provider): ?>
+                <div class="carousel-item provider-item <?= ($provider_iterator == 1 ? 'active' : ''); ?>">
+                    <div class="provider-item__image-wrap">
+                        <img class="d-block w-100" src="/web/upload/<?= $provider->image; ?>" alt="First slide">
                     </div>
-                    <div class="provider_item__title">
-                        <?php if ($provider->link): ?>
-                            <a href="<?php echo $provider->link ?>" target="_blank">
-                                <?php echo $provider->name; ?>
-                            </a>
-                        <?php else: ?>
-                            <?php echo $provider->name; ?>
-                        <?php endif; ?>
-                    </div>
-                    <div class="provider_item__desc"><?php echo StringHelper::truncate($provider->description, 250,
-                            '...') ?></div>
-                </li>
-            <?php endforeach; ?>
+                    <div class="provider-item__title"><a href="<?= $provider->detailUrl; ?>"><?= $provider->name; ?></a></div>
+                    <div class="provider-item__description"><?= $provider->description; ?></div>
+                </div>
+				<?php $provider_iterator++; ?>
+			<?php endforeach; ?>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    <div class="social-wrap">
+        <div class="block-title">Мы в социальных сетях</div>
+        <ul class="social">
+            <li class="social-item">
+                <div class="social-item__image-wrap">
+                    <img src="/web/upload/images/inst.png">
+                </div>
+                <div class="social-item__title">Профиль Instagramm</div>
+                <div class="social-item__link">
+                    <a class="social-item__link-a" href="<?= SiteSettings::getValueByCode('insta_link'); ?>" target="_blank">Перейти</a>
+                </div>
+            </li>
         </ul>
     </div>
-
-    <div class="me-inst">
-        <h2>Мы в Instagramm</h2>
-        <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank">
-            <img src="/web/upload/images/inst.png"></a>
-        <div class="me-inst-block-link">
-            <a href="<?= SiteSettings::getValueByCode('insta_link'); ?>" rel="nofollow" target="_blank"
-               class="me-inst-link">Перейти</a>
+    <div id="news-carousel" class="carousel slide providers-wrap" data-ride="carousel">
+        <div class="news-control">
+            <div class="block-title">Новости</div>
+            <div class="block-full">
+                <a class="block-full__link" href="/news/">Все новости</a>
+            </div>
         </div>
-    </div>
-
-    <div class="index-search">
-        <div class="news-head-panel">
-            <h2>Новости</h2>
-            <a href="/news/">Все новости</a>
+        <div class="carousel-inner providers">
+			<?php $news_iterator = 1; ?>
+			<?php foreach ($news as $new): ?>
+                <div class="carousel-item provider-item <?= ($news_iterator == 1 ? 'active' : ''); ?>">
+                    <div class="provider-item__image-wrap">
+                        <img class="d-block w-100" src="/web/upload/<?= $new->preview_image; ?>" alt="First slide">
+                    </div>
+                    <div class="provider-item__title"><a href="<?= $new->getDetailurl(); ?>"><?= $new->title; ?></a></div>
+                    <div class="provider-item__description"><?= $new->preview; ?></div>
+                </div>
+				<?php $news_iterator++; ?>
+			<?php endforeach; ?>
         </div>
-        <ul class="list-news owl-carousel">
-            <?php foreach ($news as $new): ?>
-                <li class="list-news__item">
-                    <a class="list-news__item-link" href="<?php echo $new->detailurl; ?>">
-                        <?php if ($new->preview_image): ?>
-                            <div class="list-news__item-wrap-image">
-                                <img class="list-news__item-image" src="/web/upload/<?php echo $new->preview_image; ?>" title="<?php echo $new->title; ?>" alt="<?php echo $new->title; ?>">
-                            </div>
-                        <?php endif; ?>
-                    </a>
-                    <div class="list-news__item-title"><?php echo $new->title; ?></div>
-                    <div class="list-news__item-preview"><?php echo $new->preview; ?></div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 </div>

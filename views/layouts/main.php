@@ -1,6 +1,7 @@
 <?
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\widgets\admin_panel\AdminPanel;
@@ -14,7 +15,7 @@ use app\models\entity\SiteSettings;
 use app\models\tool\Currency;
 use yii\widgets\ActiveForm;
 use app\models\entity\Subscribe;
-use app\widgets\geo\GeoWidget;
+use app\models\entity\Search;
 use app\widgets\search\SearchWidget;
 
 AppAsset::register($this);
@@ -29,15 +30,15 @@ $this->beginPage() ?>
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <?php if (YII_ENV == 'prod'): ?>
-        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
-        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
-        <?php echo $this->render('include/head/google/google_metrika.php'); ?>
-        <?php echo $this->render('include/head/jivo.php'); ?>
-    <? endif; ?>
-    <?= Html::csrfMetaTags() ?>
+	<?php if (YII_ENV == 'prod'): ?>
+		<?php echo $this->render('include/head/yandex/metrika.php'); ?>
+		<?php echo $this->render('include/head/yandex/webmaster.php'); ?>
+		<?php echo $this->render('include/head/google/google_metrika.php'); ?>
+		<?php echo $this->render('include/head/jivo.php'); ?>
+	<? endif; ?>
+	<?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <? $this->head() ?>
+	<? $this->head() ?>
 </head>
 <body>
 <? $this->beginBody() ?>
@@ -47,125 +48,155 @@ $this->beginPage() ?>
 
 <div class="wrap-page">
     <div class="top-menu-wrap">
-		<?= GeoWidget::widget(); ?>
+        <div class="current-city">
+            Ваш город: <span>Барнаул</span>
+        </div>
         <ul class="top-menu">
-            <li class="top-menu__item"><a href="/delivery/">Доставка</a></li>
-            <li class="top-menu__item"><a href="/payment/">Оплата</a></li>
-            <li class="top-menu__item"><a href="/contacts/">Контакты</a></li>
-            <li class="top-menu__item"><a href="/about/">О компании</a></li>
-            <li class="top-menu__item"><a href="/support/">Поддержка</a></li>
-            <li class="top-menu__item"><a href="/">Вакансии</a></li>
-            <li class="top-menu__item"><a href="/profile/">Личный
-                    кабинет</a><?= (Yii::$app->user->isGuest ? '' : ' (<a href="/logout/">Выйти</a>)'); ?></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/delivery/">Доставка</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/payment/">Оплата</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/contacts/">Контакты</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/about/">О компании</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/support/">Поддержка</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/">Вакансии</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/profile/">Личный кабинет</a> <?= (Yii::$app->user->isGuest ? '' : ' (<a href="/logout/" class="top-menu__link">Выйти</a>)'); ?></li>
         </ul>
     </div>
     <header class="header">
         <div class="logo-wrap">
-            <a href="/">
-                <img src="/web/upload/images/_logo.png" alt="Интернет магазин аксессуаров из натуральной кожи" title="Интернет магазин аксессуаров из натуральной кожи" class="logo__image">
+            <a href="/" class="logo-link">
+                <div class="logo__image-wrap">
+                    <img src="/web/upload/images/_logo.png" alt="Интернет магазин зоотоваров с доставкой на дом" title="Интернет магазин зоотоваров с доставкой на дом">
+                </div>
                 <div class="logo-title-wrap">
-                    <h1 class="logo__title"><?= SiteSettings::getValueByCode('site_logo'); ?></h1>
-                    <div>интернент магазин зоотоваров</div>
+                    <div class="logo-title"><?= SiteSettings::getValueByCode('site_logo'); ?></div>
+                    <div class="logo-sub-title">интернет магазин зоотоваров</div>
                 </div>
             </a>
         </div>
+
         <div class="search-wrap">
-
 			<?= SearchWidget::widget(); ?>
+        </div>
 
-        </div>
         <div class="contact-wrap">
-            Ежедневно с 08:00 до 23:00
-            <div><span class="phone_mask"><?= SiteSettings::getValueByCode('phone_1') ?></span> <span><a href="tel:<?= SiteSettings::getValueByCode('phone_1') ?>"><img style="display: inline;" width="20" src="https://image.flaticon.com/icons/svg/220/220236.svg"></a></span>
+            <div class="contact-block">
+                <div class="contacts-reglament">Ежедневно с 08:00 до 23:00</div>
+                <div class="phone-group">
+                    <div class="contact-value phone_mask"><?= SiteSettings::getValueByCode('phone_1') ?></div>
+                    <span>
+                        <a href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1') ?>">
+                            <img class="contact-block__wa" src="/web/upload/images/whatsapp.png">
+                        </a>
+                    </span>
+                </div>
             </div>
-        </div>
-        <div class="contact-wrap">
-            Информация по любым вопросам
-            <div>
-                <a href="mailto:<?= SiteSettings::getValueByCode('email') ?>"><?= SiteSettings::getValueByCode('email') ?></a>
+            <div class="contact-block">
+                <div class="contacts-reglament">Информация по любым вопросам</div>
+                <div class="contact-value">
+                    <a href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
+                </div>
             </div>
         </div>
         <div class="basket-wrap">
-            <a href="/basket/">
-                <div class="basket-image">
-                    <i class="fas fa-shopping-basket"></i>
-                </div>
-                <div class="basket-title">
-                    Корзина
-                    <div class="basket-count">
-						<?= Yii::$app->i18n->format("{n, plural, =0{Корзина пуста} =1{В крзине - # товар} one{В крзине - # товар} few{В корзине - # товара} many{В корзине - # товаров} other{В корзине - # товара}}", ['n' => Basket::count()], 'ru_RU'); ?>
-                    </div>
-                </div>
-            </a>
-			<? if (count((new Basket())->listItems()) > 0): ?>
-                <div class="slide-down-basket">
-                    <ul>
-						<? foreach ((new Basket())->listItems() as $item): ?>
-                            <li class="slide-down-basket__item">
-                                <img src="/web/upload/<?= $item->product->image ?>">
-                                <a class="slide-down-basket__item-name" href=""><?= $item->product->name ?></a>
-                                <div class="slide-down-basket__item-price"><?= $price = $item->product->price; ?><?= (new Currency())->show(); ?></div>
-                                <div class="slide-down-basket__item-count"><?= $count = $item->count; ?></div>
-                                <div class="slide-down-basket__item-summ"><?= $summ = $price * $count; ?><?= (new Currency())->show(); ?></div>
-                            </li>
-						<? endforeach; ?>
-                    </ul>
-                    <a href="/checkout/" class="detail-product__buy">Оформить</a>
-                </div>
-			<? endif; ?>
+            <div class="basket-icon">
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+            <div class="basket">
+                <div>Корзина</div>
+                <div class="basket__summary">В корзине <?= Basket::getInstance()->count; ?> товаров</div>
+            </div>
         </div>
     </header>
+
     <div class="menu-wrap">
         <div class="menu-controller">
             <i class="fas fa-bars  show-drop"></i>
         </div>
 
         <ul class="menu">
-			<? /* @var $category \app\models\entity\Category */ ?>
-			<? foreach (\app\models\entity\Category::find()->where(['parent'=>0])->all() as $category): ?>
+			<? foreach (Category::find()->where(['parent' => 0])->all() as $category): ?>
                 <li class="menu__item"><a href="<?= $category->getDetail(); ?>"><?= $category->name; ?></a></li>
 			<? endforeach; ?>
         </ul>
-
-
-        <div class="drop-all-cats hide">
-            <ul class="list-drop-items">
-				<? /* @var $category Category */ ?>
-				<? foreach (Category::find()->where(['parent'=>0])->all() as $category): ?>
-                    <li class="drop-item">
-                        <div class="drop-item-wrap">
-                            <img src="<?= $category->image; ?>" class="drop-item__image" alt="<?= $category->name; ?>" title="<?= $category->name; ?>">
-                            <span class="drop-item__name">
-                                <a href="<?= $category->detail; ?>" class="drop-item__link">
-                                    <?= $category->name; ?>
-                                </a>
-                            </span>
+        <div class="full-menu-wrap hide">
+            <ul class="full-menu">
+                <li class="full-menu-item">
+                    <a href="" class="full-menu-link">
+                        <div class="full-menu-title">
+                            <img class="full-menu-image" src="./assets/images/svg/cat.svg">
+                            Кошки
                         </div>
-
-                        <ul class="sub-list-drop-items">
-							<? /* @var $category2 Category */ ?>
-							<? foreach (Category::find()->where(['parent' => $category->id])->all() as $category2): ?>
-                                <li>
-                                    <a href="<?= $category2->detail; ?>" class="drop-item__link">
-										<?= $category2->name; ?>
-                                    </a>
-                                    <ul class="sub-list-drop-items">
-										<? foreach (Category::find()->where(['parent' => $category2->id])->all() as $category3): ?>
-                                            <li>
-                                                <a class="drop-item__link" href="<?=$category3->detail;?>"><?=$category3->name;?></a>
-                                            </li>
-										<? endforeach; ?>
-                                    </ul>
-                                </li>
-							<? endforeach; ?>
-                        </ul>
-                    </li>
-				<? endforeach; ?>
+                    </a>
+                    <ul class="full-menu-sub">
+                        <li class="full-menu-item-sub">
+                            <a href="" class="full-menu-link">Сухой корм</a>
+                            <ul class="full-menu-sub">
+                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Лоя взрослых</a></li>
+                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Для котят</a></li>
+                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">От заболеваний</a></li>
+                            </ul>
+                        </li>
+                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Влажный корм</a></li>
+                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">От заболеваний</a></li>
+                    </ul>
+                </li>
+                <li class="full-menu-item">
+                    <a href="" class="full-menu-link">
+                        <div class="full-menu-title">
+                            <img class="full-menu-image" src="./assets/images/svg/dog.svg">
+                            Собаки
+                        </div>
+                    </a>
+                    <ul class="full-menu-sub">
+                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Сухой корм</a></li>
+                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Влажный корм</a></li>
+                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">От заболеваний</a></li>
+                    </ul>
+                </li>
+                <li class="full-menu-item">
+                    <a href="" class="full-menu-link">
+                        <div class="full-menu-title">
+                            <img class="full-menu-image" src="./assets/images/svg/rabbit.svg">
+                            Грызуны
+                        </div>
+                    </a>
+                </li>
+                <li class="full-menu-item">
+                    <a href="" class="full-menu-link">
+                        <div class="full-menu-title">
+                            <img class="full-menu-image" src="./assets/images/svg/bird.svg">
+                            Птицы
+                        </div>
+                    </a>
+                </li>
+                <li class="full-menu-item">
+                    <a href="" class="full-menu-link">
+                        <div class="full-menu-title">
+                            <img class="full-menu-image" src="./assets/images/svg/fish.svg">
+                            Рыбки
+                        </div>
+                    </a>
+                    <ul class="full-menu-sub">
+                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Хищник</a></li>
+                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Мирная рыба</a></li>
+                        <li class="full-menu-item-sub">
+                            <a href="" class="full-menu-link">Озерная рыба</a>
+                            <ul class="full-menu-sub">
+                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Ротан</a></li>
+                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Карась</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
             </ul>
         </div>
     </div>
     <div class="breadcrumb-wrap">
 		<?= Breadcrumbs::widget([
+//			'tag' => 'div',
+//			'options' => [
+//				'class' => 'breadcrumb'
+//			],
 			'homeLink' => ['label' => 'Главная', 'url' => '/'],
 			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 		]); ?>
@@ -179,7 +210,7 @@ $this->beginPage() ?>
                 <h3 class="footer-menu__title">Продукция</h3>
                 <ul class="footer-menu">
 
-					<? foreach (Category::find()->where(['parent'=>'0'])->all() as $category): ?>
+					<? foreach (Category::find()->where(['parent' => '0'])->all() as $category): ?>
                         <li class="footer-menu__item"><a href="<?= $category->detail; ?>"><?= $category->name ?></a>
                         </li>
 					<? endforeach; ?>

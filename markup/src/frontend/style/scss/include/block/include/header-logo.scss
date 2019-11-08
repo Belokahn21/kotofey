@@ -1,4 +1,10 @@
 .logo-wrap {
+}
+
+.logo-link {
+  width: 100%;
+  color: $mainColor;
+  text-decoration: none !important;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -8,6 +14,10 @@
   font-family: "ZCOOL XiaoWei", serif;
   padding: 0;
   margin: 0;
+
+  &:hover {
+    color: inherit;
+  }
 
   & * {
     padding: 0;

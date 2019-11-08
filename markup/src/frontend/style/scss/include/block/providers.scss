@@ -15,7 +15,16 @@
   color: $mainActiveColor;
   font-weight: 600;
   margin: 10px 0;
+
+  a {
+    color: $mainActiveColor;
+
+    &:hover {
+      color: grey;
+    }
+  }
 }
+
 
 .provider-item__description {
   color: silver;
