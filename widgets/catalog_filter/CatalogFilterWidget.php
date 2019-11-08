@@ -21,10 +21,10 @@ class CatalogFilterWidget extends Widget
             $filterModel->load(\Yii::$app->request->get());
         }
 
-        $listCompany = InformersValues::find()->where(['informer_id' => '1'])->all();
-        $listType = InformersValues::find()->where(['informer_id' => '2'])->all();
-        $listLines = InformersValues::find()->where(['informer_id' => '3'])->all();
-        $listTaste = InformersValues::find()->where(['informer_id' => '4'])->all();
+        $listCompany = InformersValues::find()->where(['informer_id' => '1', 'active' => true])->all();
+        $listType = InformersValues::find()->where(['informer_id' => '2', 'active' => true])->all();
+        $listLines = InformersValues::find()->where(['informer_id' => '3', 'active' => true])->all();
+        $listTaste = InformersValues::find()->where(['informer_id' => '4', 'active' => true])->all();
 
         return $this->render($this->template, [
             'filterModel' => $filterModel,

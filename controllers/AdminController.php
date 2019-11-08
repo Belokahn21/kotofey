@@ -886,6 +886,8 @@ class AdminController extends Controller
                         Notify::setSuccessNotify('Значение справочника добавлено');
                         return $this->refresh();
                     }
+                }else{
+                    Notify::setErrorNotify(Debug::modelErrors($model));
                 }
             }
         }

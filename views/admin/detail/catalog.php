@@ -90,7 +90,7 @@ $this->title = Title::showTitle("Товары"); ?>
                             if ($value):
                                 $model->properties[$property->id] = $value->value;
                             endif; ?>
-                            <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id'=>$property->informer_id])->all(), 'id', 'value'), ['prompt'=>$property->name])->label($property->name); ?>
+                            <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id'=>$property->informer_id])->all(), 'id', 'name'), ['prompt'=>$property->name])->label($property->name); ?>
                         <? else: ?>
                             <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => ProductPropertiesValues::findOne(['product_id' => $model->id,'property_id' => $property->id])->value])->label($property->name); ?>
                         <? endif; ?>

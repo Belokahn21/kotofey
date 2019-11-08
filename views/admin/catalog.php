@@ -87,7 +87,7 @@ $this->title = Title::showTitle("Товары"); ?>
                                 <? if ($property->type == 1): ?>
                                     <?= $form->field($model,
                                         'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->all(),
-                                        'id', 'value'), ['prompt' => $property->name])->label($property->name); ?>
+                                        'id', 'name'), ['prompt' => $property->name])->label($property->name); ?>
                                 <? else: ?>
                                     <?= $form->field($model,
                                         'properties[' . $property->id . ']')->textInput()->label($property->name); ?>

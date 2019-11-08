@@ -29,23 +29,23 @@ use yii\widgets\Pjax;
         <?php echo $form->field($filterModel, 'weight_from'); ?>
         <?php echo $form->field($filterModel, 'weight_to'); ?>
     </div>
-    <?php echo $form->field($filterModel, 'company')->checkboxList(ArrayHelper::map($listCompany, 'id', 'value'), [
+    <?php echo $form->field($filterModel, 'company')->checkboxList(ArrayHelper::map($listCompany, 'id', 'name'), [
         'prompt' => 'Производитель',
         'id' => 'id_list_company',
         'class' => 'checkbox_list',
     ]); ?>
-    <?php echo $form->field($filterModel, 'type')->checkboxList(ArrayHelper::map($listType, 'id', 'value'), [
+    <?php echo $form->field($filterModel, 'type')->checkboxList(ArrayHelper::map($listType, 'id', 'name'), [
         'prompt' => 'Тип корма',
         'id' => 'id_list_type',
         'class' => 'checkbox_list',
     ]); ?>
-    <?php echo $form->field($filterModel, 'line')->checkboxList(ArrayHelper::map($listLines, 'id', 'value'),
+    <?php echo $form->field($filterModel, 'line')->checkboxList(ArrayHelper::map($listLines, 'id', 'name'),
         [
             'prompt' => 'Линейка',
             'id' => 'id_list_line',
             'class' => 'checkbox_list',
         ]); ?>
-    <?php echo $form->field($filterModel, 'taste')->checkboxList(ArrayHelper::map($listTaste, 'id', 'value'),
+    <?php echo $form->field($filterModel, 'taste')->checkboxList(ArrayHelper::map($listTaste, 'id', 'name'),
         [
             'prompt' => 'Вкус',
             'id' => 'id_list_taste',

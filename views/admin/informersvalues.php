@@ -1,13 +1,12 @@
 <?
 
-use app\models\entity\Product;
 use app\models\tool\seo\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\entity\Informers;
 use yii\helpers\ArrayHelper;
+use app\models\entity\Informers;
 
 /* @var $model \app\models\entity\InformersValues */
 /* @var $this \yii\web\View */
@@ -30,21 +29,23 @@ $this->title = Title::showTitle("Справочники"); ?>
     'filterModel' => $model,
     'emptyText' => 'Значения отсутствуют',
     'columns' => [
+        'id',
+        'active',
         [
-            'attribute' => 'id',
-        ],
-        [
-            'attribute' => 'value',
+            'attribute' => 'name',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::a($model->value, '/admin/informersvalues/' . $model->id . '/');
+                return Html::a($model->name, '/admin/informers-values/' . $model->id . '/');
             }
         ],
+        'sort',
+        'description',
         [
             'attribute' => 'informer_id',
             'format' => 'raw',
+            'filter' => ArrayHelper::map(Informers::find()->asArray(true)->all(), 'id', 'name'),
             'value' => function ($model) {
-                return \app\models\entity\Informers::findOne($model->informer_id)->name;
+                return Informers::findOne($model->informer_id)->name;
             }
         ],
         [
