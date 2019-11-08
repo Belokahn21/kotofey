@@ -9,29 +9,25 @@ use yii\helpers\Html;
 use app\models\entity\Informers;
 use yii\helpers\ArrayHelper;
 
+/* @var $model \app\models\entity\InformersValues */
+/* @var $this \yii\web\View */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
+
 $this->title = Title::showTitle("Справочники"); ?>
-<section>
-    <h1 class="title">Справочники</h1>
-    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <div class="tabs-container">
-        <ul class="tabs">
-            <li class="tab-link current" data-tab="tab-1">Основное</li>
-        </ul>
-
-        <div id="tab-1" class="tab-content current">
-            <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(Informers::find()->all(), 'id','name'), ['prompt'=>'Справочник']) ?>
-            <?= $form->field($model, 'value')->textInput() ?>
-            <?= $form->field($model, 'description')->textarea() ?>
-        </div>
-
-    </div>
-    <?= Html::submitButton('Добавить'); ?>
-    <? ActiveForm::end(); ?>
-</section>
+    <section>
+        <h1 class="title">Значения справочников</h1>
+        <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+        <?= $this->render('_forms/_informers-values', [
+            'model' => $model,
+            'form' => $form,
+        ]) ?>
+        <?= Html::submitButton('Добавить'); ?>
+        <? ActiveForm::end(); ?>
+    </section>
 
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
+    'filterModel' => $model,
     'emptyText' => 'Значения отсутствуют',
     'columns' => [
         [
@@ -58,11 +54,11 @@ $this->title = Title::showTitle("Справочники"); ?>
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
                 },
                 'update' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/informersvalues/$key"]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/informers-values/$key"]));
                 },
                 'delete' => function ($url, $model, $key) {
                     return Html::a('<i class="fas fa-trash-alt"></i>',
-                        Url::to(["/admin/informersvalues/", 'id' => $key, 'action' => 'delete']));
+                        Url::to(["/admin/informers-values/", 'id' => $key, 'action' => 'delete']));
                 },
             ]
         ],

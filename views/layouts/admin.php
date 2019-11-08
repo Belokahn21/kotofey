@@ -91,6 +91,12 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                         <ul>
                             <li class="panel-menu__item sub"><a href="/admin/category/">Разделы</a></li>
                             <li class="panel-menu__item sub"><a href="/admin/properties/">Свойства</a></li>
+                            <li class="panel-menu__item sub">
+                                <a href="/admin/informers/">Справочники</a>
+                                <ul>
+                                    <li><a href="/admin/informers-values/">Значения справочников</a></li>
+                                </ul>
+                            </li>
                             <li class="panel-menu__item sub"><a href="/admin/stocks/">Склады</a></li>
                         </ul>
                     </li>

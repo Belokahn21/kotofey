@@ -27,22 +27,4 @@ class InformersValuesSearchForm extends InformersValues
     {
         return Model::scenarios();
     }
-
-    public function search($params)
-    {
-        $query = InformersValues::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'value', $this->value])
-            ->andFilterWhere(['like', 'informer_id', $this->informer_id]);
-
-        return $dataProvider;
-    }
 }

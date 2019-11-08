@@ -5,6 +5,7 @@ namespace app\models\entity;
 
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 
 /**
@@ -35,5 +36,24 @@ class InformersValues extends ActiveRecord
             'value' => 'Значение',
             'description' => 'Описание',
         ];
+    }
+
+
+    public function search($params)
+    {
+        $query = static::find();
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere(['like', 'value', $this->value])
+            ->andFilterWhere(['like', 'informer_id', $this->informer_id]);
+
+        return $dataProvider;
     }
 }
