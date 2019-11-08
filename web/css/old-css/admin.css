@@ -26,11 +26,13 @@ textarea{resize: vertical;}
             .panel-menu__title{font-weight: bold; font-size: 14px; padding: 0; margin: 0;}
             .panel-menu{width: 100%; list-style: none; padding: 0; margin: 0;}
                 .panel-menu__item{margin: 2% 0; width: 100%; list-style-type: none; padding: 0;}
+                    .panel-menu__item ul{list-style: none;}
+                        .panel-menu__item ul li{list-style-type: none;}
                     .panel-menu__item a{text-decoration: none!important;}
                     .panel-menu__item i{ background: #3a3f48; padding: 0.5em; margin: 1% 5% 1% 1%; text-align: center; -webkit-border-radius: 0.3em; -moz-border-radius: 0.3em; border-radius: 0.3em;}
                     .panel-menu__item a:hover{color: silver;}
                         .panel-menu__item a:hover i{color: deepskyblue;}
-                    .panel-menu__item.sub a::before{content: "\f111"; font-family: "Font Awesome 5 Free"; font-weight: 400; font-style: normal; display: inline-block; text-align: center; text-decoration: none; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin-right: 10px; font-size: 8px;}
+                    /*.panel-menu__item.sub a::before{content: "\f111"; font-family: "Font Awesome 5 Free"; font-weight: 400; font-style: normal; display: inline-block; text-align: center; text-decoration: none; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; margin-right: 10px; font-size: 8px;}*/
                     .panel-menu__item.sub ul{ padding: 0 15px; margin: 0;}
 
         .count{margin: 0 2%;padding:1.5% 2%; background: #5cb85c;-webkit-border-radius: 0.3em;-moz-border-radius: 0.3em;border-radius: 0.3em;color: white; font-size: 10px; text-align: center;}
@@ -124,6 +126,8 @@ textarea{resize: vertical;}
         .group-item{border-bottom: 1px #ddd solid; padding: 1%; text-align: center;}
             .list-childs{list-style: none; padding: 0; margin: 0;}
             .list-childs__item{}
+
+.search-query-list{list-style: none;}
 
 .site-settings{width: 100%; margin: 1% 0;}
     .site-settings-wrap{width: 100%; display: flex; flex-direction: row; justify-content: stretch; flex-wrap: wrap;}

@@ -1,4 +1,4 @@
-<?
+<?php
 return [
 	'email' => [
 		'supportEmail' => 'support@eventhorizont.ru',

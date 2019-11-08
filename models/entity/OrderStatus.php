@@ -8,6 +8,7 @@
 namespace app\models\entity;
 
 
+use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 
 class OrderStatus extends ActiveRecord
@@ -32,12 +33,20 @@ class OrderStatus extends ActiveRecord
         ];
     }
 
-    public function createStatus()
-    {
-        if ($this->load(\Yii::$app->request->post())) {
-            if ($this->validate()) {
-                return $this->save();
-            }
-        }
-    }
+	public function search($params)
+	{
+		$query = static::find();
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
+
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
+
+		$query->andFilterWhere(['like', 'name', $this->name]);
+
+		return $dataProvider;
+	}
 }

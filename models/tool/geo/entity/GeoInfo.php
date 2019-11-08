@@ -1,9 +1,4 @@
-<?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 13:24
- */
+<?php
 
 namespace app\models\tool\geo\entity;
 

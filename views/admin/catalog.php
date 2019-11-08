@@ -115,7 +115,7 @@ $this->title = Title::showTitle("Товары"); ?>
     <h2>Список товаров</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
+    'filterModel' => $model,
     'emptyText' => 'Товары отсутствуют',
     'columns' => [
         'id',
