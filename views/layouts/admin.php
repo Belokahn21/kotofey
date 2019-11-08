@@ -66,7 +66,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                     <li class="panel-menu__item"><a href="/"><i class="fas fa-home"></i>Сайт</a></li>
                     <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-tachometer-alt"></i>Рабочий стол</a></li>
                     <li class="panel-menu__item">
-                        <a href="/admin/"><i class="fa fa-tachometer-alt"></i>Гео</a>
+                        <a href="/admin/"><i class="fas fa-globe-asia"></i>Гео</a>
                         <ul>
                             <li class="panel-menu__item sub"><a href="/admin/geo/">Гео объекты</a></li>
                         </ul>

@@ -53,7 +53,7 @@ $this->title = Title::showTitle("Главная страница");
         </div>
         <div class="desktop-item">
             <div class="desktop-item__logo core-logo">
-                <i class="fas fa-loop"></i>
+                <i class="fas fa-search"></i>
             </div>
             <div class="desktop-item__content">
                 <h2 class="desktop-item__title">Поиск</h2>
@@ -68,7 +68,7 @@ $this->title = Title::showTitle("Главная страница");
 						]); ?>
                         <ul class="search-query-list">
 							<?php foreach ($last_search as $phrase): ?>
-                                <li><?= $phrase->text; ?>|<?= date('d.m.Y', $phrase->created_at) ?>|<?= $phrase->user->email; ?></li>
+                                <li><?= $phrase->text; ?>|<?= date('d.m.Y H:i:s', $phrase->created_at) ?>|<?= ($phrase->user->email ? $phrase->user->email : 'Гость'); ?></li>
 							<?php endforeach ?>
                         </ul>
 						<?php Modal::end(); ?>
