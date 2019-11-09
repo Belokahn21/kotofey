@@ -103,7 +103,7 @@ $this->title = Title::showTitle($product->name);
                                             <?= $property->property->name; ?>
                                         </span>
                                         <? if ($property->property->type == 1): ?>
-                                            <span>: <?= InformersValues::find()->where(['id' => $property->value])->andWhere(['informer_id' => $property->informer->id])->one()->value; ?></span>
+                                            <span>: <?= InformersValues::find()->where(['id' => $property->value])->andWhere(['informer_id' => $property->informer->id])->one()->name; ?></span>
                                         <? else: ?>
                                             <span>: <?= $property->value; ?></span>
                                         <? endif; ?>
