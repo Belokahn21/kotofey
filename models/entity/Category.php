@@ -49,7 +49,7 @@ class Category extends ActiveRecord
         return [
             [['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-            [['parent', 'seo_keywords', 'seo_description', 'image'], 'string'],
+            [['parent', 'seo_keywords', 'seo_description'], 'string'],
 
             ['sort', 'integer'],
 
