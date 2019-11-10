@@ -65,7 +65,7 @@ class Category extends ActiveRecord
 			'name' => 'Название',
 			'sort' => 'Сортировка',
 			'parent' => 'Родительский раздел',
-			'imageFile' => 'Изображение',
+			'image' => 'Изображение',
 			'seo_keywords' => 'Ключевые слова (seo)',
 			'seo_description' => 'Описание (seo)',
 		];
