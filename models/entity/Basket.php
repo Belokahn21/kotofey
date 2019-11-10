@@ -56,6 +56,7 @@ class Basket
 
     public static function clear()
     {
+        \Yii::$app->session->open();
         unset($_SESSION['basket']);
     }
 
