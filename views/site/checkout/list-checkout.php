@@ -12,14 +12,21 @@ use app\models\tool\Price;
                 <div class="checkout-summary__key">Сумма заказа</div>
                 <div class="checkout-summary__value"><?= Price::format(Basket::getInstance()->cash()); ?> <?= Currency::getInstance()->show(); ?></div>
             </li>
-            <li class="checkout-summary-item">
-                <div class="checkout-summary__key">Доставка</div>
-                <div class="checkout-summary__value">100 <?= Currency::getInstance()->show(); ?></div>
-            </li>
-            <li class="checkout-summary-item">
-                <div class="checkout-summary__key">Итого</div>
-                <div class="checkout-summary__value"><?= Price::format(Basket::getInstance()->cash()); ?> <?= Currency::getInstance()->show(); ?></div>
-            </li>
+            <?php if (Basket::getInstance()->cash() < 500): ?>
+                <li class="checkout-summary-item">
+                    <div class="checkout-summary__key">Доставка</div>
+                    <div class="checkout-summary__value">100 <?= Currency::getInstance()->show(); ?></div>
+                </li>
+                <li class="checkout-summary-item">
+                    <div class="checkout-summary__key">Итого</div>
+                    <div class="checkout-summary__value"><?= Price::format(Basket::getInstance()->cash() + 100); ?> <?= Currency::getInstance()->show(); ?></div>
+                </li>
+            <?php else: ?>
+                <li class="checkout-summary-item">
+                    <div class="checkout-summary__key">Итого</div>
+                    <div class="checkout-summary__value"><?= Price::format(Basket::getInstance()->cash()); ?> <?= Currency::getInstance()->show(); ?></div>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
     <ul class="checkout-total-items">
