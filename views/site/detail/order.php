@@ -44,7 +44,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
     <div class="detail-order-info-items-wrap">
         <? if ($items): ?>
             <h1 class="detail-order-info-items__title">Товары в заказе</h1>
-            <? /* @var $item \app\models\entity\OrderItems */ ?>
+            <? /* @var $item \app\models\entity\OrdersItems */ ?>
             <ul class="detail-order-info-items-list">
                 <? foreach ($items as $item): ?>
                 <li class="detail-order-info-items-list-item">

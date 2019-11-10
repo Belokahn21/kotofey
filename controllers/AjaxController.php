@@ -101,25 +101,6 @@ class AjaxController extends Controller
         }
     }
 
-    public function actionBookmark()
-    {
-        $POST = \Yii::$app->request->post();
-        $favorite = new Favorite();
-        $favorite->setProductId($POST['id']);
-        if ($favorite->issetProduct()) {
-            $favorite->delete();
-            $result = Favorite::STATUS_REMOVE;
-        } else {
-            $favorite->save();
-            $result = Favorite::STATUS_ADD;
-        }
-
-
-        return Json::encode([
-            'result' => $result
-        ]);
-    }
-
     public function actionRemovetodo()
     {
         $POST = \Yii::$app->request->post();
@@ -144,41 +125,6 @@ class AjaxController extends Controller
         ]);
     }
 
-    public function actionPlus()
-    {
-        $POST = \Yii::$app->request->post();
-        $product = Product::findOne($POST['id']);
-
-        if ($product->count >= $_SESSION['basket'][$product->id]['count'] + 1) {
-            $_SESSION['basket'][$product->id]['count']++;
-        }
-
-
-        return Json::encode([
-            'htmldata' => [
-                'summ' => Price::format($product->price * $_SESSION['basket'][$product->id]['count']),
-                'allout' => $_SESSION['basket'][$product->id]['count'],
-            ]
-        ]);
-    }
-
-    public function actionMinus()
-    {
-        $POST = \Yii::$app->request->post();
-        $product = Product::findOne($POST['id']);
-
-        if ($_SESSION['basket'][$product->id]['count'] - 1 >= 0) {
-            $_SESSION['basket'][$product->id]['count']--;
-        }
-
-        return Json::encode([
-            'htmldata' => [
-                'summ' => Price::format($product->price * $_SESSION['basket'][$product->id]['count']),
-                'allout' => $_SESSION['basket'][$product->id]['count'],
-            ]
-        ]);
-    }
-
     public function actionKladr()
     {
         $post = $_POST;
@@ -191,35 +137,6 @@ class AjaxController extends Controller
 
         return Json::encode([
             'address' => $response
-        ]);
-    }
-
-    public function actionCalcdelivery()
-    {
-        $post = $_POST;
-
-        $calc = new CalculateDelllin();
-        $calc->calc([
-            'arrivalPoint' => $post['kladr']
-        ]);
-
-        return Json::encode($calc);
-
-    }
-
-    public function actionRemovebookmark()
-    {
-        $POST = \Yii::$app->request->post();
-        $favorite = new Favorite();
-        $favorite->setProductId($POST['id']);
-        if ($favorite->issetProduct()) {
-            $favorite->delete();
-            $result = Favorite::STATUS_REMOVE;
-        }
-
-
-        return Json::encode([
-            'result' => $result
         ]);
     }
 

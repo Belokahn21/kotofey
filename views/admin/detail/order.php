@@ -1,7 +1,7 @@
 <?
 
 use app\models\entity\OrderStatus;
-use app\models\entity\OrderItems;
+use app\models\entity\OrdersItems;
 use app\models\entity\Payment;
 use app\models\entity\Delivery;
 use yii\helpers\Html;
@@ -18,11 +18,11 @@ $this->title = Title::showTitle("Заказ №" . $model->id); ?>
 <section class="new-order-block">
     <? $form = ActiveForm::begin(); ?>
     <div class="left-col">
-        <h1 class="title">Заказ №<?=$model->id;?></h1>
-        <br />
+        <h1 class="title">Заказ №<?= $model->id; ?></h1>
+        <br/>
         <?= Html::a("Назад", '/admin/order/', ['class' => 'btn-back']) ?>
         <h3 class="title">Информация о заказе</h3>
-        <div style="margin: 1% 0; color: green; font-weight: bold; border: 1px #e2e2e2 solid; display: inline-block; padding: 1%; -webkit-border-radius: 0.2em;-moz-border-radius: 0.2em;border-radius: 0.2em;">Сумма заказа: <?=Price::format($model->cash());?><?=(new Currency())->show();?></div>
+        <div style="margin: 1% 0; color: green; font-weight: bold; border: 1px #e2e2e2 solid; display: inline-block; padding: 1%; -webkit-border-radius: 0.2em;-moz-border-radius: 0.2em;border-radius: 0.2em;">Сумма заказа: <?= Price::format($model->cash()); ?><?= (new Currency())->show(); ?></div>
         <div class="new-order-info">
             <?= $form->field($model, 'status')->dropDownList(ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'), ['prompt' => 'Статус заказа']); ?>
             <?= $form->field($model, 'payment')->dropDownList(ArrayHelper::map(Payment::find()->all(), 'id', 'name'), ['prompt' => 'Способ оплаты']); ?>
@@ -31,13 +31,20 @@ $this->title = Title::showTitle("Заказ №" . $model->id); ?>
         <?= $form->field($model, 'paid')->radioList(array("Не оплачено", "Оплачено")); ?>
         <?= $form->field($model, 'comment')->textarea(); ?>
         <h3 class="title">Покупатель</h3>
-        <?= $form->field($model, 'user')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'name'),['prompt' => 'Покупатель']); ?>
+        <?= $form->field($model, 'user')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'name'), ['prompt' => 'Покупатель']); ?>
 
     </div>
     <div class="right-col">
         <h3 class="title">Товары в заказе</h3>
-        <? $model->product_id = ArrayHelper::getColumn(OrderItems::find()->select('productId')->where(['orderId'=>$model->id])->all(), 'productId'); ?>
-        <?= $form->field($model, 'product_id')->widget('\app\widgets\SelectProductDropdown')->label(false) ?>
+        <ul>
+            <li>название|цена|количество|итого</li>
+            <?php /* @var $item OrdersItems */ ?>
+            <?php foreach ($items as $item): ?>
+                <li><?= $item->name; ?>|<?= $item->price; ?>|<?= $item->count; ?>|<?= $item->count * $item->price; ?></li>
+            <?php endforeach; ?>
+        </ul>
+        <?php // $model->product_id = ArrayHelper::getColumn(OrdersItems::find()->select('product_id')->where(['order_id' => $model->id])->all(), 'product_id'); ?>
+        <?php //$form->field($model, 'product_id')->widget('\app\widgets\SelectProductDropdown')->label(false) ?>
     </div>
     <div class="clearfix"></div>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>

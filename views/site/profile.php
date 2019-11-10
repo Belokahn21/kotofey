@@ -14,7 +14,7 @@ use app\models\tool\Currency;
 /* @var $support_categories \app\models\entity\support\SupportCategory[] */
 
 $this->title = Title::showTitle("Личный кабинет");
-$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
+$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => '/profile/'];
 ?>
 <h1>Личный кабинет</h1>
 <div class="profile">

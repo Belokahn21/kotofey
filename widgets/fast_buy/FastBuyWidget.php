@@ -7,7 +7,7 @@ use Yii;
 use app\models\entity\Basket;
 use app\models\entity\Delivery;
 use app\models\entity\Order;
-use app\models\entity\OrderItems;
+use app\models\entity\OrdersItems;
 use app\models\entity\Payment;
 use app\models\entity\Product;
 use app\models\entity\User;
@@ -55,8 +55,8 @@ class FastBuyWidget extends \yii\base\Widget
 
             $order->save();
 
-            $items = new OrderItems();
-            $items->orderId = $order->id;
+            $items = new OrdersItems();
+            $items->order_id = $order->id;
             if ($items->saveItems() === false) {
                 Notify::setErrorNotify(Debug::modelErrors($items));
                 Yii::$app->controller->refresh();

@@ -8,7 +8,7 @@ use app\models\entity\Delivery;
 use app\models\entity\Discount;
 use app\models\entity\Favorite;
 use app\models\entity\Order;
-use app\models\entity\OrderItems;
+use app\models\entity\OrdersItems;
 use app\models\entity\News;
 use app\models\entity\NewsCategory;
 use app\models\entity\Payment;
@@ -282,7 +282,7 @@ class SiteController extends Controller
             $order = new Order(['scenario' => Order::SCENARIO_SIMPLE_ORDER]);
             $user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
             $billing = new Billing();
-            $items = new OrderItems();
+            $items = new OrdersItems();
 
             // форма отправлена
             if (\Yii::$app->request->isPost) {
@@ -325,7 +325,7 @@ class SiteController extends Controller
                     return $this->refresh();
                 }
 
-                $items->orderId = $order->id;
+                $items->order_id = $order->id;
                 if ($items->saveItems() === false) {
                     Notify::setErrorNotify(Debug::modelErrors($items));
                     return $this->refresh();
@@ -347,7 +347,7 @@ class SiteController extends Controller
             ]);
         } else {
             $order = new Order(['scenario' => Order::SCENARIO_SIMPLE_ORDER]);
-            $items = new OrderItems();
+            $items = new OrdersItems();
             $user = User::findOne(Yii::$app->user->id);
             $user->scenario = User::SCENARIO_UPDATE;
             $billing = $user->billing;
@@ -392,7 +392,7 @@ class SiteController extends Controller
                     return $this->refresh();
                 }
 
-                $items->orderId = $order->id;
+                $items->order_id = $order->id;
                 if ($items->saveItems() === false) {
                     Notify::setErrorNotify(Debug::modelErrors($items));
                     return $this->refresh();
@@ -434,7 +434,7 @@ class SiteController extends Controller
             }
 
             // Учёт товара
-            $items = OrderItems::find()->where(['orderId' => $orderId])->all();
+            $items = OrdersItems::find()->where(['orderId' => $orderId])->all();
             foreach ($items as $item) {
                 $product = Product::findOne($item->productId);
 
@@ -480,9 +480,9 @@ class SiteController extends Controller
             }
 
             // Учёт товара
-            $items = OrderItems::find()->where(['orderId' => $orderId])->all();
+            $items = OrdersItems::find()->where(['orderId' => $orderId])->all();
             foreach ($items as $item) {
-                $product = Product::findOne($item->productId);
+                $product = Product::findOne($item->product_id);
 
                 if ($product->vitrine === true) {
                     continue;
@@ -669,7 +669,7 @@ class SiteController extends Controller
                 throw new \Exception("Доступ к чужому заказу запрещён");
             }
 
-            $items = OrderItems::findAll(['orderId' => $order->id]);
+            $items = OrdersItems::findAll(['orderId' => $order->id]);
 
             return $this->render('detail/order', [
                 'order' => $order,

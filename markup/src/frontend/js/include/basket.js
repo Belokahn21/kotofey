@@ -4,7 +4,7 @@ $(document).ready(function () {
 		var $element = $(this);
 		$.post("/ajax/tobasket/", {id: $element.data('id')}, function (data) {
 			if (data.status == true) {
-				$('.basket-count').html(data.htmlData);
+				$('.basket__summary').html(data.htmlData);
 				$element.css('background', 'green');
 				$element.css('border', '1px green solid');
 				$element.children('i').toggleClass('fa-shopping-cart fa-check');

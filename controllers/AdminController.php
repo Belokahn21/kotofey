@@ -2,18 +2,15 @@
 
 namespace app\controllers;
 
-use app\models\entity\Basket;
 use app\models\entity\Category;
 use app\models\entity\Delivery;
 use app\models\entity\Geo;
-use app\models\entity\GeoType;
 use app\models\entity\Informers;
 use app\models\entity\InformersValues;
 use app\models\entity\News;
 use app\models\entity\Order;
-use app\models\entity\OrderItems;
+use app\models\entity\OrdersItems;
 use app\models\entity\OrderStatus;
-use app\models\entity\Pages;
 use app\models\entity\NewsCategory;
 use app\models\entity\Payment;
 use app\models\entity\ProductProperties;
@@ -29,39 +26,22 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportStatus;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
-use app\models\forms\OrderForm;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
-use app\models\search\CategorySearchForm;
-use app\models\search\DeliverySearchForm;
 use app\models\search\InformersSearchForm;
 use app\models\search\InformersValuesSearchForm;
 use app\models\search\NewsSearchForm;
-use app\models\search\OrderSearchForm;
-use app\models\search\OrderStatusSearchForm;
 use app\models\search\NewsCategorySearchForm;
-use app\models\search\PagesSearchForm;
-use app\models\search\PaymentSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
-use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\ProvidersSearchForm;
 use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
-use app\models\search\TicketsSearchForm;
-use app\models\search\UserSearchForm;
-use app\models\tool\Currency;
 use app\models\tool\Debug;
-use app\models\tool\export\TiuExport;
 use app\models\tool\export\YMLExport;
-use app\models\tool\Price;
-use app\models\tool\System;
-use app\models\tool\vk\VKMethods;
 use app\widgets\notification\Notify;
-use yii\base\Model;
-use yii\db\Exception;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -259,8 +239,11 @@ class AdminController extends Controller
             if (!$order) {
                 throw new HttpException(404, 'Заказ не найден');
             }
+
+            $items = OrdersItems::find()->where(['order_id' => $id])->all();
             return $this->render('detail/order', [
-                'model' => $order
+                'model' => $order,
+                'items' => $items
             ]);
         }
 
