@@ -66,7 +66,7 @@ class Order extends ActiveRecord
 			['type', 'default', 'value' => self::SCENARIO_SIMPLE_ORDER],
 
 
-			[['payment', 'delivery'], 'required', 'message' => 'Выберите {attribute}', 'on' => self::SCENARIO_SIMPLE_ORDER],
+//			[['payment', 'delivery'], 'required', 'message' => 'Выберите {attribute}', 'on' => self::SCENARIO_SIMPLE_ORDER],
 			[['user'], 'required', 'message' => '{attribute} необходимо указать'],
 
 			[['comment', 'promo_code'], 'string'],

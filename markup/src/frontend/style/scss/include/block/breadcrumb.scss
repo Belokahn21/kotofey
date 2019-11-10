@@ -26,7 +26,11 @@
   padding: 0 10px 0 60px;
   position: relative;
   background: var(--breadcrumb-theme-2);
-  color: var(--breadcrumb-theme-1);
+
+  a {
+    color: var(--breadcrumb-theme-1);
+  }
+
   transition: background 0.5s;
 }
 
@@ -80,7 +84,10 @@
 }
 
 .breadcrumb__step--active {
-  color: var(--breadcrumb-theme-2);
+  a {
+    color: var(--breadcrumb-theme-2);
+  }
+
   background: var(--breadcrumb-theme-1);
 }
 
@@ -93,7 +100,10 @@
 }
 
 .breadcrumb__step:hover {
-  color: var(--breadcrumb-theme-2);
+  a {
+    color: var(--breadcrumb-theme-2);
+  }
+
   background: var(--breadcrumb-theme-3);
 }
 

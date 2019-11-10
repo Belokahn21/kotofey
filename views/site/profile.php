@@ -5,15 +5,17 @@ use yii\helpers\Html;
 use app\models\entity\UserSex;
 use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
+use app\models\tool\Price;
 use app\models\entity\Order;
+use app\models\tool\Currency;
 
 /* @var \app\models\entity\User $profile */
 /* @var $orders Order[] */
 /* @var $support_categories \app\models\entity\support\SupportCategory[] */
 
 $this->title = Title::showTitle("Личный кабинет");
-$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => ['/profile/']];
-$this->params['breadcrumbs'][] = ['label' => 'Выйти из профиля', 'url' => ['/logout/']]; ?>
+$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
+?>
 <h1>Личный кабинет</h1>
 <div class="profile">
     <ul class="profile-menu">
@@ -27,19 +29,19 @@ $this->params['breadcrumbs'][] = ['label' => 'Выйти из профиля', '
             </ul>
             <ul class="user-info">
                 <li class="user-info__item">
-					<?php if ($profile->billing): ?>
+                    <?php if ($profile->billing): ?>
                         <ul class="profile-billing">
-							<?php $attr = array('city', 'street', 'home', 'house'); ?>
-							<?php foreach ($attr as $attribute): ?>
-								<?php if (isset($profile->billing->{$attribute}) && !empty($profile->billing->{$attribute})): ?>
+                            <?php $attr = array('city', 'street', 'home', 'house'); ?>
+                            <?php foreach ($attr as $attribute): ?>
+                                <?php if (isset($profile->billing->{$attribute}) && !empty($profile->billing->{$attribute})): ?>
                                     <li>
-										<?= $profile->billing->getAttributeLabel($attribute); ?>
-										<?= $profile->billing->{$attribute}; ?>
+                                        <?= $profile->billing->getAttributeLabel($attribute); ?>
+                                        <?= $profile->billing->{$attribute}; ?>
                                     </li>
-								<?php endif; ?>
-							<?php endforeach; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </ul>
-					<?php endif; ?>
+                    <?php endif; ?>
                 </li>
             </ul>
             <a class="profile-exit btn-main" href="/logout/">Выйти из профиля</a>
@@ -47,31 +49,31 @@ $this->params['breadcrumbs'][] = ['label' => 'Выйти из профиля', '
         <li class="profile-menu__item">
             <h2 class="profile-menu__item__title">Заказы <i class="fas fa-shopping-bag"></i></h2>
             <div class="profile-order">
-				<?php if ($orders): ?>
-					<?php foreach ($orders as $order): ?>
+                <?php if ($orders): ?>
+                    <?php foreach ($orders as $order): ?>
                         <a href="/order/<?= $order->id; ?>/">
                             <ul class="slide-order-info">
                                 <li class="slide-order-info__item">
-                                    № заказа 1
+                                    ID: <?= $order->id; ?>
                                 </li>
                                 <li class="slide-order-info__item">
-                                    В обработке
+                                    <?= $order->getStatus(); ?>
                                 </li>
                                 <li class="slide-order-info__item">
-                                    Дата: 04.11.2019
+                                    Дата: <?= date('d.m.Y', $order->created_at) ?>
                                 </li>
                                 <li class="slide-order-info__item">
-                                    Сумма: 20000Р
+                                    Сумма: <?= Price::format($order->cash()); ?> <?= Currency::getInstance()->show(); ?>
                                 </li>
                                 <li class="slide-order-info__item">
-                                    Оплачен
+                                    <?= (($order->paid == 1) ? 'Оплачен' : 'Не оплачен'); ?>
                                 </li>
                             </ul>
                         </a>
-					<?php endforeach; ?>
-				<?php else: ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
                     <div>Вы ничего не покупали</div>
-				<?php endif; ?>
+                <?php endif; ?>
             </div>
         </li>
         <li class="profile-menu__item">
@@ -80,17 +82,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Выйти из профиля', '
         <li class="profile-menu__item">
             <h2 class="profile-menu__item__title">Поддержка <i class="far fa-question-circle"></i></h2>
             <div class="support-categories">
-				<?php if ($support_categories): ?>
+                <?php if ($support_categories): ?>
                     <ul class="support-categories-list">
-						<?php foreach ($support_categories as $category): ?>
+                        <?php foreach ($support_categories as $category): ?>
                             <li class="support-categories-list_item" title="title">
                                 <a href="<?= $category->detail; ?>">
-									<?= $category->html; ?>
+                                    <?= $category->html; ?>
                                 </a>
                             </li>
-						<?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
-				<?php endif; ?>
+                <?php endif; ?>
             </div>
         </li>
         <li class="profile-menu__item">
@@ -114,10 +116,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Выйти из профиля', '
                 <div class='profile-menu__discount-container'><span class="span"></span>
                     <span class=text>
                         <?php if ($profile->discount): ?>
-							<?= $profile->discount->count; ?>%
-						<?php else: ?>
+                            <?= $profile->discount->count; ?>%
+                        <?php else: ?>
                             0%
-						<?php endif; ?>
+                        <?php endif; ?>
                         </span>
                 </div>
             </div>
@@ -134,7 +136,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Выйти из профиля', '
                 </button>
             </div>
             <div class="modal-body">
-				<?php $form = ActiveForm::begin() ?>
+                <?php $form = ActiveForm::begin() ?>
                 <div class="profile-edit-modal-wrap">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -148,50 +150,50 @@ $this->params['breadcrumbs'][] = ['label' => 'Выйти из профиля', '
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'first_name'); ?>
+                                <?= $form->field($profile, 'first_name'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'name'); ?>
+                                <?= $form->field($profile, 'name'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'last_name'); ?>
+                                <?= $form->field($profile, 'last_name'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'birthday'); ?>
+                                <?= $form->field($profile, 'birthday'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'sex')->dropDownList(ArrayHelper::map(UserSex::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать пол']); ?>
+                                <?= $form->field($profile, 'sex')->dropDownList(ArrayHelper::map(UserSex::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать пол']); ?>
                             </div>
                             <div class="profile-edit-modal-element avatar-file">
                                 <div class="profile-edit-modal-avatar-wrap">
-									<?= Html::img('/web/upload/' . $profile->avatar); ?>
+                                    <?= Html::img('/web/upload/' . $profile->avatar); ?>
                                 </div>
-								<?= $form->field($profile, 'avatar')->fileInput() ?>
+                                <?= $form->field($profile, 'avatar')->fileInput() ?>
                             </div>
 
                         </div>
                         <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'city'); ?>
+                                <?= $form->field($profile->billing, 'city'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'street'); ?>
+                                <?= $form->field($profile->billing, 'street'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'home'); ?>
+                                <?= $form->field($profile->billing, 'home'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'house'); ?>
+                                <?= $form->field($profile->billing, 'house'); ?>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-				<?= Html::button('Отмена', ['class' => 'btn btn-cancel', 'data-dismiss' => 'modal']); ?>
-				<?= Html::submitButton('Обновить', ['class' => 'btn btn-main']); ?>
+                <?= Html::button('Отмена', ['class' => 'btn btn-cancel', 'data-dismiss' => 'modal']); ?>
+                <?= Html::submitButton('Обновить', ['class' => 'btn btn-main']); ?>
             </div>
-			<?php ActiveForm::end() ?>
+            <?php ActiveForm::end() ?>
         </div>
     </div>
 </div>

@@ -30,15 +30,15 @@ $this->beginPage() ?>
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<?php if (YII_ENV == 'prod'): ?>
-		<?php echo $this->render('include/head/yandex/metrika.php'); ?>
-		<?php echo $this->render('include/head/yandex/webmaster.php'); ?>
-		<?php echo $this->render('include/head/google/google_metrika.php'); ?>
-		<?php echo $this->render('include/head/jivo.php'); ?>
-	<? endif; ?>
-	<?= Html::csrfMetaTags() ?>
+    <?php if (YII_ENV == 'prod'): ?>
+        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
+        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
+        <?php echo $this->render('include/head/google/google_metrika.php'); ?>
+        <?php echo $this->render('include/head/jivo.php'); ?>
+    <? endif; ?>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-	<? $this->head() ?>
+    <? $this->head() ?>
 </head>
 <body>
 <? $this->beginBody() ?>
@@ -75,7 +75,7 @@ $this->beginPage() ?>
         </div>
 
         <div class="search-wrap">
-			<?= SearchWidget::widget(); ?>
+            <?= SearchWidget::widget(); ?>
         </div>
 
         <div class="contact-wrap">
@@ -98,13 +98,17 @@ $this->beginPage() ?>
             </div>
         </div>
         <div class="basket-wrap">
-            <div class="basket-icon">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-            <div class="basket">
-                <div>Корзина</div>
-                <div class="basket__summary">В корзине <?= Basket::getInstance()->count; ?> товаров</div>
-            </div>
+            <a href="/basket/">
+                <div class="basket-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="basket">
+                    <div>Корзина</div>
+                    <div class="basket__summary">
+                        <?= Yii::$app->i18n->format("{n, plural, =0{Корзина пуста} =1{В крзине # товар} one{В крзине # товар} few{В корзине # товара} many{В корзине # товаров} other{Корзина пуста}}", ['n' => Basket::count()], 'ru_RU'); ?>
+                    </div>
+                </div>
+            </a>
         </div>
     </header>
 
@@ -114,95 +118,51 @@ $this->beginPage() ?>
         </div>
 
         <ul class="menu">
-			<? foreach (Category::find()->where(['parent' => 0])->all() as $category): ?>
+            <? foreach (Category::find()->where(['parent' => 0])->all() as $category): ?>
                 <li class="menu__item"><a href="<?= $category->getDetail(); ?>"><?= $category->name; ?></a></li>
-			<? endforeach; ?>
+            <? endforeach; ?>
         </ul>
         <div class="full-menu-wrap hide">
             <ul class="full-menu">
-                <li class="full-menu-item">
-                    <a href="" class="full-menu-link">
-                        <div class="full-menu-title">
-                            <img class="full-menu-image" src="./assets/images/svg/cat.svg">
-                            Кошки
-                        </div>
-                    </a>
-                    <ul class="full-menu-sub">
-                        <li class="full-menu-item-sub">
-                            <a href="" class="full-menu-link">Сухой корм</a>
+                <?php foreach (Category::find()->where(['parent' => 0])->all() as $category): ?>
+                    <li class="full-menu-item">
+                        <a href="" class="full-menu-link">
+                            <div class="full-menu-title">
+                                <img src="/web/upload/<?= $category->image; ?>" class="full-menu-image">
+                                <?= $category->name; ?>
+                            </div>
+                        </a>
+                        <?php if ($sub_categories = Category::find()->where(['parent' => $category->id])->all()): ?>
                             <ul class="full-menu-sub">
-                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Лоя взрослых</a></li>
-                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Для котят</a></li>
-                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">От заболеваний</a></li>
+                                <?php foreach ($sub_categories as $sub_category): ?>
+                                    <li class="full-menu-item-sub">
+                                        <a href="" class="full-menu-link"><?= $sub_category->name; ?></a>
+                                        <?php if ($sub_sub_categories = Category::find()->where(['parent' => $sub_category->id])->all()): ?>
+                                            <ul class="full-menu-sub">
+                                                <?php foreach ($sub_sub_categories as $sub_sub_category): ?>
+                                                    <li class="full-menu-item-sub">
+                                                        <a href="" class="full-menu-link"><?= $sub_sub_category->name; ?></a>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
                             </ul>
-                        </li>
-                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Влажный корм</a></li>
-                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">От заболеваний</a></li>
-                    </ul>
-                </li>
-                <li class="full-menu-item">
-                    <a href="" class="full-menu-link">
-                        <div class="full-menu-title">
-                            <img class="full-menu-image" src="./assets/images/svg/dog.svg">
-                            Собаки
-                        </div>
-                    </a>
-                    <ul class="full-menu-sub">
-                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Сухой корм</a></li>
-                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Влажный корм</a></li>
-                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">От заболеваний</a></li>
-                    </ul>
-                </li>
-                <li class="full-menu-item">
-                    <a href="" class="full-menu-link">
-                        <div class="full-menu-title">
-                            <img class="full-menu-image" src="./assets/images/svg/rabbit.svg">
-                            Грызуны
-                        </div>
-                    </a>
-                </li>
-                <li class="full-menu-item">
-                    <a href="" class="full-menu-link">
-                        <div class="full-menu-title">
-                            <img class="full-menu-image" src="./assets/images/svg/bird.svg">
-                            Птицы
-                        </div>
-                    </a>
-                </li>
-                <li class="full-menu-item">
-                    <a href="" class="full-menu-link">
-                        <div class="full-menu-title">
-                            <img class="full-menu-image" src="./assets/images/svg/fish.svg">
-                            Рыбки
-                        </div>
-                    </a>
-                    <ul class="full-menu-sub">
-                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Хищник</a></li>
-                        <li class="full-menu-item-sub"><a href="" class="full-menu-link">Мирная рыба</a></li>
-                        <li class="full-menu-item-sub">
-                            <a href="" class="full-menu-link">Озерная рыба</a>
-                            <ul class="full-menu-sub">
-                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Ротан</a></li>
-                                <li class="full-menu-item-sub"><a href="" class="full-menu-link">Карась</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </li>
+                        <?php endif; ?>
+                    </li>
+                <? endforeach; ?>
             </ul>
         </div>
     </div>
     <div class="breadcrumb-wrap">
-		<?= Breadcrumbs::widget([
-//			'tag' => 'div',
-//			'options' => [
-//				'class' => 'breadcrumb'
-//			],
-			'homeLink' => ['label' => 'Главная', 'url' => '/'],
-			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-		]); ?>
+        <?= Breadcrumbs::widget([
+            'homeLink' => ['label' => 'Главная', 'url' => '/'],
+            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+        ]); ?>
     </div>
     <div class="page-content">
-		<?= $content; ?>
+        <?= $content; ?>
     </div>
     <footer class="footer">
         <div class="footer-wrap">
@@ -210,10 +170,11 @@ $this->beginPage() ?>
                 <h3 class="footer-menu__title">Продукция</h3>
                 <ul class="footer-menu">
 
-					<? foreach (Category::find()->where(['parent' => '0'])->all() as $category): ?>
-                        <li class="footer-menu__item"><a href="<?= $category->detail; ?>"><?= $category->name ?></a>
+                    <? foreach (Category::find()->where(['parent' => '0'])->all() as $category): ?>
+                        <li class="footer-menu__item">
+                            <a href="<?= $category->detail; ?>"><?= $category->name ?></a>
                         </li>
-					<? endforeach; ?>
+                    <? endforeach; ?>
 
                 </ul>
             </div>
@@ -221,26 +182,26 @@ $this->beginPage() ?>
                 <div class="subscribe-wrap">
                     <h2 class="subscribe-title">Будьте всегда вкурсе!</h2>
                     <div class="subscribe-description">Получай уведомления о новых акциях</div>
-					<?
-					$model = new Subscribe();
-					if (Yii::$app->request->isPost) {
-						if ($model->load(Yii::$app->request->post())) {
-							if ($model->validate()) {
-								if ($model->save()) {
-									Notify::setSuccessNotify("Вы успешно подписались на рассылку!");
-									return Yii::$app->controller->refresh();
-								}
-							}
-						}
-					}
-					$form = ActiveForm::begin(['options' => ['class' => 'subscribe-form']]);
-					echo $form->field($model, 'email', ['template' => "{label}\n{input}"])->textInput([
-						'class' => 'subscribe-form__input',
-						'placeholder' => 'Ваш Email'
-					])->label(false);
-					echo Html::submitButton('Подписаться', ['class' => 'subscribe-form__submit']);
-					ActiveForm::end();
-					?>
+                    <?
+                    $model = new Subscribe();
+                    if (Yii::$app->request->isPost) {
+                        if ($model->load(Yii::$app->request->post())) {
+                            if ($model->validate()) {
+                                if ($model->save()) {
+                                    Notify::setSuccessNotify("Вы успешно подписались на рассылку!");
+                                    return Yii::$app->controller->refresh();
+                                }
+                            }
+                        }
+                    }
+                    $form = ActiveForm::begin(['options' => ['class' => 'subscribe-form']]);
+                    echo $form->field($model, 'email', ['template' => "{label}\n{input}"])->textInput([
+                        'class' => 'subscribe-form__input',
+                        'placeholder' => 'Ваш Email'
+                    ])->label(false);
+                    echo Html::submitButton('Подписаться', ['class' => 'subscribe-form__submit']);
+                    ActiveForm::end();
+                    ?>
                 </div>
             </div>
             <div class="footer-block">

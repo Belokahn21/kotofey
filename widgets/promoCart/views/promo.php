@@ -8,7 +8,7 @@ use app\models\entity\Basket;
 ?>
 
 <div class="promo-cart-warp">
-
+    <div class="order-type-form__title">Промокод</div>
     <?php Pjax::begin(); ?>
 
     <?php /* @var $promo  \app\models\entity\Promo */ ?>
@@ -23,7 +23,7 @@ use app\models\entity\Basket;
                 'data-pjax' => true,
             ]
         ]); ?>
-        <?php echo $form->field($model, 'code') ?>
+        <?= $form->field($model, 'code')->textInput(['placeholder' => 'Промокод'])->label(false) ?>
         <?php ActiveForm::end() ?>
     <?php endif; ?>
 

@@ -1,9 +1,17 @@
 .basket-wrap {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   padding: 0;
   margin: 0;
+  color: $mainActiveColor;
+
+  a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    text-decoration: none !important;
+    color: $mainActiveColor;
+  }
 }
 
 .basket-icon {

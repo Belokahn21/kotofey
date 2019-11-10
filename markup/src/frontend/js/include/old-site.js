@@ -6,96 +6,96 @@ $(document).ready(function () {
 		$this.siblings(".harmon-content").slideToggle("slow");
 	});
 
-	var providers = $('.list-providers').owlCarousel({
-		autoplay: true,
-		autoplayTimeout: 5000,
-		loop: true,
-		items: 1,
-		slideBy: 1,
-		scrollPerPage: true,
-		autoHeight: true,
-		autoWeight: true
-		// dots: true
-	});
-
-	var news = $('.list-news').owlCarousel({
-		autoplay: true,
-		autoplayTimeout: 3500,
-		loop: true,
-		items: 1,
-		slideBy: 1,
-		scrollPerPage: true,
-		autoHeight: true,
-		autoWeight: true
-		// dots: true
-	});
-
-
-	var owl = $('.owl-main').owlCarousel({
-		margin: 10,
-		loop: true,
-		items: 1,
-		slideBy: 1,
-		scrollPerPage: true,
-		autoHeight: true,
-		autoWeight: true,
-		responsive: {
-			0: {
-				items: 1
-			},
-			600: {
-				items: 2
-			},
-			960: {
-				items: 3
-			},
-			1200: {
-				items: 4
-			}
-		}
-	});
-
-	var owlDetail = $('.owl-detail').owlCarousel({
-		margin: 10,
-		loop: true,
-		items: 3,
-		autoHeight: true,
-		autoWeight: true,
-	});
-
-	//Firefox:
-	owl.on('DOMMouseScroll', '.owl-stage', function (e) {
-		if (e.originalEvent.detail > 0) {
-			$(this).trigger('next.owl');
-		} else {
-			$(this).trigger('prev.owl');
-		}
-		e.preventDefault();
-	});
-	//Chrome, IE
-	owl.on('mousewheel', '.owl-stage', function (e) {
-		if (e.originalEvent.wheelDelta > 0) {
-			$(this).trigger('next.owl');
-		} else {
-			$(this).trigger('prev.owl');
-		}
-		e.preventDefault();
-	});
+	// var providers = $('.list-providers').owlCarousel({
+	// 	autoplay: true,
+	// 	autoplayTimeout: 5000,
+	// 	loop: true,
+	// 	items: 1,
+	// 	slideBy: 1,
+	// 	scrollPerPage: true,
+	// 	autoHeight: true,
+	// 	autoWeight: true
+	// 	// dots: true
+	// });
+	//
+	// var news = $('.list-news').owlCarousel({
+	// 	autoplay: true,
+	// 	autoplayTimeout: 3500,
+	// 	loop: true,
+	// 	items: 1,
+	// 	slideBy: 1,
+	// 	scrollPerPage: true,
+	// 	autoHeight: true,
+	// 	autoWeight: true
+	// 	// dots: true
+	// });
+	//
+	//
+	// var owl = $('.owl-main').owlCarousel({
+	// 	margin: 10,
+	// 	loop: true,
+	// 	items: 1,
+	// 	slideBy: 1,
+	// 	scrollPerPage: true,
+	// 	autoHeight: true,
+	// 	autoWeight: true,
+	// 	responsive: {
+	// 		0: {
+	// 			items: 1
+	// 		},
+	// 		600: {
+	// 			items: 2
+	// 		},
+	// 		960: {
+	// 			items: 3
+	// 		},
+	// 		1200: {
+	// 			items: 4
+	// 		}
+	// 	}
+	// });
+	//
+	// var owlDetail = $('.owl-detail').owlCarousel({
+	// 	margin: 10,
+	// 	loop: true,
+	// 	items: 3,
+	// 	autoHeight: true,
+	// 	autoWeight: true,
+	// });
+	//
+	// //Firefox:
+	// owl.on('DOMMouseScroll', '.owl-stage', function (e) {
+	// 	if (e.originalEvent.detail > 0) {
+	// 		$(this).trigger('next.owl');
+	// 	} else {
+	// 		$(this).trigger('prev.owl');
+	// 	}
+	// 	e.preventDefault();
+	// });
+	// //Chrome, IE
+	// owl.on('mousewheel', '.owl-stage', function (e) {
+	// 	if (e.originalEvent.wheelDelta > 0) {
+	// 		$(this).trigger('next.owl');
+	// 	} else {
+	// 		$(this).trigger('prev.owl');
+	// 	}
+	// 	e.preventDefault();
+	// });
 
 
 	// удалить из закладок в личном профиле
-	$(".owl-carousel div i").click(function () {
-		var $this = $(this);
-		$.post("/ajax/removebookmark/", {id: $this.data('id')}, function (data) {
-			if (data.result == 2) {
-
-				$this.parent("div").remove();
-
-				owl.trigger('refresh.owl.carousel');
-
-			}
-		}, 'JSON');
-	});
+	// $(".owl-carousel div i").click(function () {
+	// 	var $this = $(this);
+	// 	$.post("/ajax/removebookmark/", {id: $this.data('id')}, function (data) {
+	// 		if (data.result == 2) {
+	//
+	// 			$this.parent("div").remove();
+	//
+	// 			owl.trigger('refresh.owl.carousel');
+	//
+	// 		}
+	// 	}, 'JSON');
+	// });
 
 	showTab(0);
 	$(".select-type-order div").click(function () {

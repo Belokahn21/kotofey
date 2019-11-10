@@ -17,28 +17,34 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
 <section class="basket">
     <h1>Корзина товаров</h1>
     <? if (Basket::count() > 0): ?>
-        <?= Html::a('Очистить корзину', "/clear/", ['class' => 'btn-main grey']); ?>
+        <?= Html::a('Очистить корзину', "/clear/", ['class' => 'btn-cancel']); ?>
         <?= Html::a('Оформить заказ', "/checkout/", ['class' => 'btn-main']); ?>
     <? endif; ?>
-	<? if (!empty(Yii::$app->session->get('basket'))): ?>
-        <div class="cart-wrap">
-            <ul class="cart-list-items">
-                <? foreach ((new Basket())->listItems() as $item): ?>
-                    <li class="cart-list-item">
-                        <div class="cart-list-item__image-wrap">
-                            <img src="/web/upload/<?= $item->product->image ?>" title="<?= $item->product->name ?>" alt="<?= $item->product->name ?>">
+    <? if (!empty(Yii::$app->session->get('basket'))): ?>
+        <ul class="basket-page-list">
+            <? foreach ((new Basket())->listItems() as $item): ?>
+                <li class="basket-page-item">
+                    <div class="basket-page-item__image-wrap">
+                        <a href="<?= $item->product->detail; ?>">
+                            <img src="/web/upload/<?= $item->product->image; ?>">
+                        </a>
+                    </div>
+                    <div class="basket-page-item__title">
+                        <a href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
+                    </div>
+                    <div class="basket-page-item__calculate">
+                        <div class="basket-page-item__price">
+                            <?= Price::format($item->product->price); ?> <?= Currency::getInstance()->show(); ?>
                         </div>
-                        <div class="cart-list-item__title"><?= StringHelper::truncate($item->product->name,70,'...')?></div>
-                        <div class="cart-list-item__calc">
-                            <form class="cart-list-item__calc-form">
-                                <i class="fas fa-minus" data-id="<?=$item->product->id;?>"></i> <input size="1" class="cart-list-item__calc-count" name="count" placeholder="1" value="<?=$item->count;?>"> <i class="fas fa-plus" data-id="<?=$item->product->id;?>"></i>
-                            </form>
-                            <div class="cart-list-item__calc-summ"><span><?=Price::format($item->product->price*$item->count);?></span> <?=(new Currency())->show();?></div>
-                        </div>
-                    </li>
-                <? endforeach; ?>
-            </ul>
-        </div>
+                        <form class="basket-page-item__form">
+                            <span><i class="fas fa-minus"></i></span>
+                            <input class="basket-page-item__form-input" type="text" name="count" placeholder="1">
+                            <span><i class="fas fa-plus"></i></span>
+                        </form>
+                    </div>
+                </li>
+            <? endforeach; ?>
+        </ul>
     <? else: ?>
         Ничего не выбрано
     <? endif; ?>

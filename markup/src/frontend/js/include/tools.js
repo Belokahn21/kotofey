@@ -44,15 +44,15 @@ $(document).ready(function () {
 
 
     //одиночные изображения магнифика
-    $('.image-link').magnificPopup({type: 'image'});
-
-    $('.gallery-item').magnificPopup({
-        type: 'image',
-        delegate: 'a',
-        gallery: {
-            enabled: true
-        }
-    });
+    // $('.image-link').magnificPopup({type: 'image'});
+    //
+    // $('.gallery-item').magnificPopup({
+    //     type: 'image',
+    //     delegate: 'a',
+    //     gallery: {
+    //         enabled: true
+    //     }
+    // });
     $('body').on('click', '.select-point', function () {
         $(".geoData_pos").val($(this).text());
         $(".geoData_code").val($(this).data('code'));

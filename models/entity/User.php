@@ -73,12 +73,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 	public function rules()
 	{
 		return [
-			[['email', 'password'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
+			[['email', 'password','phone'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
 			[['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
 
 			['password', 'string', 'min' => 5, 'max' => 16],
 
-			['phone', 'required', 'on' => self::SCENARIO_CHECKOUT, 'message' => '{attribute} не может быть пустым'],
 			['phone', 'integer'],
 			['phone', 'default', 'value' => null],
 			['phone', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Номер телефона {value} уже занят'],
