@@ -32,7 +32,7 @@ class Category extends ActiveRecord
 			[
 				'class' => UploadBehavior::class,
 				'attribute' => 'image',
-				'scenarios' => ['insert', 'update'],
+				'scenarios' => ['default'],
 				'path' => '@webroot/upload/',
 				'url' => '@web/upload/',
 			],
