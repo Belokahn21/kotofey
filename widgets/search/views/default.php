@@ -5,18 +5,23 @@ use yii\widgets\ActiveForm;
 
 ?>
 
-<div class="search">
-    <? $form = ActiveForm::begin([
-        'method' => 'get',
-        'action'=>'/search/'
-    ]);
-    ?>
-    <?= $form->field($model, 'search', [
-        'template' => '{input}',
-        'options' => [
-            'tag' => false,
-        ]
-    ])->textInput(['class' => 'search__text', 'value' => $model->search, 'placeholder' => 'Поиск овара'])->label(false); ?>
-    <?= Html::submitButton('<i class="fas fa-search"></i>') ?>
-    <? ActiveForm::end(); ?>
-</div>
+<? $form = ActiveForm::begin([
+	'method' => 'get',
+	'action' => '/search/',
+	'options' => [
+		'class' => 'search-form'
+	]
+]);
+?>
+<?= $form->field($model, 'search', [
+	'template' => '{input}',
+	'options' => [
+		'tag' => false,
+	]
+])->textInput([
+	'class' => 'search-form__query',
+	'value' => $model->search,
+	'placeholder' => 'Поиск товара'
+])->label(false); ?>
+<?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'search-form__submit']) ?>
+<? ActiveForm::end(); ?>

@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property integer $id
  * @property string $name
  * @property integer $sort
+ * @property string $html
  * @property string $description
  * @property integer $created_at
  * @property integer $updated_at
@@ -34,7 +35,7 @@ class SupportCategory extends ActiveRecord
         return [
             [['name'], 'required', 'message' => 'Поле {attribute} должно быть заполнено'],
             [['sort'], 'integer'],
-            [['description', 'name'], 'string'],
+            [['description', 'name', 'html'], 'string'],
         ];
     }
 
@@ -44,6 +45,7 @@ class SupportCategory extends ActiveRecord
             'name' => 'Название',
             'description' => 'Описание',
             'sort' => 'Сортировка',
+            'html' => 'HTML вид',
         ];
     }
 

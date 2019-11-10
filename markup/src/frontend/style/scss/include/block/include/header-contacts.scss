@@ -29,4 +29,12 @@
 .contact-value {
   font-size: 19px;
   font-weight: 600;
+
+  a {
+    color: $mainColor;
+
+    &:hover {
+      color: inherit;
+    }
+  }
 }

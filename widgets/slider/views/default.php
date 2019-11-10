@@ -6,45 +6,29 @@ use yii\helpers\Html;
 /* @var $use_carousel boolean */
 
 ?>
-<div class="slider-index <?php echo(($use_carousel === true) ? 'owl-carousel' : ''); ?>">
-    <? if ($images): ?>
-        <?php foreach ($images as $image): ?>
-            <div class="slider-item">
-                <?php if (!empty($image->link)): ?>
-                    <a href="<?php echo $image->link; ?>" target="_blank">
-                <?php endif; ?>
-                    <?php echo Html::img('/web/upload/' . $image->image, ['title' => $image->text, 'title' => $image->text]); ?>
-                        <? if (!empty($image->text)): ?>
-                            <div class="slider-item__title">Подробнее</div>
-                        <? endif; ?>
-                        <? if (!empty($image->description)): ?>
-                            <div class="slider-item__description"><?php echo $image->description; ?></div>
-                        <? endif; ?>
-                <?php if (!empty($image->link)): ?>
-                    </a>
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
-    <? else: ?>
-        <img src="/web/upload/images/sale.png">
-    <? endif; ?>
-</div>
-
-<?php
-if ($use_carousel === true) {
-    $JS = <<<OWL
-    var news = $('.slider-index').owlCarousel({
-        autoplay: true,
-        autoplayTimeout: 3500,
-        loop: true,
-        items: 1,
-        slideBy: 1,
-        scrollPerPage: true,
-        autoHeight: true,
-        autoWeight: true
-    });
-OWL;
-
-    Yii::$app->view->registerJs($JS);
-}
-?>
+<?php if ($images): ?>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+			<?php $iterator = 1; ?>
+			<?php foreach ($images as $image): ?>
+                <div class="carousel-item <?= ($iterator == 1 ? 'active' : ''); ?>">
+                    <img class="d-block w-100 h-100" src="/web/upload/<?= $image->image; ?>" alt="<?= $image->text; ?>">
+                </div>
+				<?php $iterator++; ?>
+			<?php endforeach; ?>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+<?php endif; ?>

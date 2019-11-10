@@ -243,7 +243,7 @@ class SiteController extends Controller
 
 
 		OpenGraph::title($product->display);
-		if(!empty($product->description)){
+		if (!empty($product->description)) {
 			OpenGraph::description($product->description);
 			Attributes::metaDescription($product->description);
 		}
@@ -525,25 +525,34 @@ class SiteController extends Controller
 			]);
 		} else {
 			$userId = \Yii::$app->user->identity->id;
-			$favorite = (new Favorite())->listProducts();
 			$profile = User::findOne($userId);
 			$profile->scenario = User::SCENARIO_UPDATE;
+			$orders = Order::find()->where(['user' => $profile->id])->all();
+			$support_categories = SupportCategory::find()->all();
 			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
 			if (\Yii::$app->request->isPost) {
 				if ($profile->load(\Yii::$app->request->post())) {
 					if ($profile->validate()) {
-						if ($profile->update()) {
-							Notify::setSuccessNotify("Профиль успешно обновлен");
-							return $this->refresh();
+						$profile->update();
+					}
+				}
+				if ($profile->billing->load(\Yii::$app->request->post())) {
+					if ($profile->billing->validate()) {
+						if ($profile->billing->update()) {
+							$profile->billing->update();
 						}
 					}
 				}
+
+				Notify::setSuccessNotify('Данные успешно обновлены');
+				return $this->refresh();
 			}
 
 			return $this->render('profile', [
 				'profile' => $profile,
-				'favorite' => $favorite,
+				'orders' => $orders,
+				'support_categories' => $support_categories
 			]);
 		}
 	}
