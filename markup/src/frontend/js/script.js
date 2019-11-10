@@ -1,5 +1,6 @@
 $(document).ready(function () {
     $('.carousel').carousel();
+    $('[data-toggle="tooltip"]').tooltip()
 
     /* установить активный класс первому элементу --- начало */
     $('.breadcrumb').find('.breadcrumb__step').eq(0).each(function (index, element) {

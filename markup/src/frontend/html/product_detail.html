@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ru">
+<include src="include/head.html"></include>
+<body>
+<include src="include/admin-panel.html"></include>
+<div class="wrap-page">
+
+    <include src="include/modal/product-detail-delivery-modal.html"></include>
+    <include src="include/modal/product-detail-delivery-payment.html"></include>
+    <include src="include/modal/product-detail-delivery-sale.html"></include>
+
+    <include src="include/header/up-header-menu.html"></include>
+    <include src="include/header/header.html"></include>
+    <include src="include/header/menu.html"></include>
+    <include src="include/header/breadcrumb.html"></include>
+
+
+    <div class="page-content">
+        <div class="product-detail-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="product-detail-image-wrap">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                            <img class="product-detail-image" src="./assets/images/product.png">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="product-title">Gplpsi Enenrgy корм для собак со вкусом курицы, говядины и риса, 3кг</div>
+                        <div class="product-control">
+                            <div class="product-available green">В наличии</div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <div class="product-favorite"><i class="far fa-heart"></i>В избранное</div>
+<!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
+                        </div>
+                        <div class="product-description">
+                            <p>
+                                Показания Для кастрированных котов с момента операции до 7 лет. Оптимальный вес Обогащенная белками формула способствует лучшему поддержанию мышечного тонуса по сравнению с обычным режимом питания, повышению вкусовых качеств корма. При одном и том же уровне метаболизма белки дают на 30% меньше чистой энергии, чем углеводы. L-карнитин улучшает транспорт жирных кислот в митохондрии. Умеренное содержание крахмала Умеренно пониженный уровень крахмала и, соответственно, энергии позволяет не набирать лишний вес и уменьшает риск развития диабета. S/O Index Знак S/O Index на упаковке означает, что диета предназначена для создания в мочевыделительной системе среды, неблагоприятной для образования струвитных кристаллов и кристаллов оксалата кальция.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="product-detail-sidebar">
+                            <div class="product-price-wrap">
+                                <span class="product-price">85 P</span> за шт
+                            </div>
+                            <div class="product-button product-add-basket">
+                                В корзину
+                            </div>
+
+
+                            <div class="product-detail-calc-wrap hide">
+                                <form class="product-detail-calc-form">
+
+                                    <div class="product-detail-calc-element">
+                                        <div class="product-detail-calc-min">-</div>
+                                    </div>
+
+                                    <div class="product-detail-calc-element">
+                                        <input type="text" class="product-detail-calc-count" name="count" placeholder="1">
+                                    </div>
+
+                                    <div class="product-detail-calc-element">
+                                        <div class="product-detail-calc-plus">+</div>
+                                    </div>
+                                </form>
+                            </div>
+
+
+                            <div class="product-button product-fast-buy">
+                                Купить в 1 клик
+                            </div>
+                            <hr/>
+                            <ul class="product-pluses">
+                                <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-delivery">
+                                    <div class="product-pluses__icon">
+                                        <i class="fas fa-truck"></i>
+                                    </div>
+                                    <div class="product-pluses__title">Бесплатная доставка</div>
+                                </li>
+
+                                <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-sale">
+                                    <div class="product-pluses__icon">
+                                        <i class="fas fa-piggy-bank"></i>
+                                    </div>
+                                    <div class="product-pluses__title">Скидки на покупки</div>
+                                </li>
+
+                                <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-payment">
+                                    <div class="product-pluses__icon"><i class="far fa-credit-card"></i>
+                                    </div>
+                                    <div class="product-pluses__title">Оплата при получении</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="product-attributes-wrap">
+                <div class="container">
+                    <div class="product-attributes__title">Характеристики товара</div>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key">Атрибут</div>
+                        <div class="col product-attributes__value">Значение атрибута</div>
+                    </div>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key">Производитель</div>
+                        <div class="col product-attributes__value">Италия</div>
+                    </div>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key">Вес</div>
+                        <div class="col product-attributes__value">9кг</div>
+                    </div>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key">Вкус</div>
+                        <div class="col product-attributes__value">Курица</div>
+                    </div>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key">Линейка</div>
+                        <div class="col product-attributes__value">Dual fresh</div>
+                    </div>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key">Ширина</div>
+                        <div class="col product-attributes__value">100см</div>
+                    </div>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key">Длина</div>
+                        <div class="col product-attributes__value">20см</div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="product-attributes__title">Отзывы покупателей</div>
+                    <div class="product-review-wrap">
+                        <ul class="review-list">
+                            <li class="review-item">
+                                <div class="review-item__author-wrap">
+                                    <div class="review-item__image-wrap">
+                                        <img class="review-item__image" src="./assets/images/product.png">
+                                    </div>
+                                    <div>
+                                        <div class="review-item__author">Алексей Несмышлёный</div>
+                                        <div class="review-item__verify">Товар был куплен</div>
+                                    </div>
+                                </div>
+                                <div class="review-item__description">
+                                    Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером
+                                </div>
+                            </li>
+                            <li class="review-item">
+                                <div class="review-item__author-wrap">
+                                    <div class="review-item__image-wrap">
+                                        <img class="review-item__image" src="./assets/images/product.png">
+                                    </div>
+                                    <div class="review-item__author">Алексей Несмышлёный</div>
+                                </div>
+                                <div class="review-item__description">
+                                    Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером
+                                </div>
+                            </li>
+                            <li class="review-item">
+                                <div class="review-item__author-wrap">
+                                    <div class="review-item__image-wrap">
+                                        <img class="review-item__image" src="./assets/images/product.png">
+                                    </div>
+                                    <div class="review-item__author">Алексей Несмышлёный</div>
+                                </div>
+                                <div class="review-item__description">
+                                    Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером
+                                </div>
+                            </li>
+                            <li class="review-item">
+                                <div class="review-item__author-wrap">
+                                    <div class="review-item__image-wrap">
+                                        <img class="review-item__image" src="./assets/images/product.png">
+                                    </div>
+                                    <div class="review-item__author">Алексей Несмышлёный</div>
+                                </div>
+                                <div class="review-item__description">
+                                    Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="review-form-wrap">
+                            <form class="review-form">
+                                <div class="review-form__element">
+                                    <input type="text" name="name" placeholder="Автор">
+                                </div>
+                                <div class="review-form__element">
+                                    <textarea placeholder="Ваш отзыв"></textarea>
+                                </div>
+                                <div class="review-form__element">
+                                    <button class="btn-main">Отправить</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <include src="include/footer/footer.html"></include>
+</div>
+
+</body>
+</html>
