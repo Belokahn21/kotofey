@@ -1,5 +1,21 @@
-<input id="username" style="display:none" type="text" name="fakeusernameremembered">
-<input id="password" style="display:none" type="password" name="fakepasswordremembered">
-<?php echo $form->field($user, 'phone')->textInput(['autocomplete' => 'off']); ?>
-<?php echo $form->field($user, 'email')->textInput(['autocomplete' => 'off']); ?>
-<?php echo $form->field($user, 'password')->passwordInput(['autocomplete' => 'off']) ?>
+<?php
+
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
+
+?>
+<div class="fast-buy-billing">
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <?= $form->field($user, 'email')->textInput(['class' => 'fast-buy-billing-form__item', 'placeholder' => 'Email']); ?>
+            </div>
+            <div class="col">
+                <?= $form->field($user, 'phone')->textInput(['class' => 'fast-buy-billing-form__item', 'placeholder' => 'Телефон']); ?>
+            </div>
+            <div class="col">
+                <?= $form->field($user, 'password')->passwordInput(['class' => 'fast-buy-billing-form__item', 'placeholder' => 'Пароль']); ?>
+            </div>
+        </div>
+    </div>
+</div>

@@ -20,6 +20,7 @@ use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\entity\Product;
+use yii\web\HttpException;
 
 class AjaxController extends Controller
 {
@@ -59,6 +60,26 @@ class AjaxController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function actionAddToBasket($product_id, $count)
+    {
+        if (\Yii::$app->request->isAjax) {
+            $product = Product::findOne($product_id);
+            if (!$product) {
+                throw new HttpException(404, 'Товар не найден');
+            }
+
+            if (!$product->vitrine) {
+                if ($product->count > $count) {
+                }
+            }
+
+
+            return true;
+        }
+
+        return false;
     }
 
     public function actionTobasket()

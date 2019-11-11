@@ -26,7 +26,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
                 <li class="basket-page-item">
                     <div class="basket-page-item__image-wrap">
                         <a href="<?= $item->product->detail; ?>">
-                            <img src="/web/upload/<?= $item->product->image; ?>">
+                            <?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
+                                <img src="/web/upload/<?= $item->product->image; ?>">
+                            <?php else: ?>
+                                <img src="/web/upload/images/not-image.png">
+                            <?php endif; ?>
                         </a>
                     </div>
                     <div class="basket-page-item__title">

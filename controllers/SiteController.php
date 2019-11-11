@@ -673,7 +673,7 @@ class SiteController extends Controller
                 throw new \Exception("Доступ к чужому заказу запрещён");
             }
 
-            $items = OrdersItems::findAll(['orderId' => $order->id]);
+            $items = OrdersItems::findAll(['order_id' => $order->id]);
 
             return $this->render('detail/order', [
                 'order' => $order,

@@ -17,6 +17,6 @@ class Policy
 
     public function getPath()
     {
-        return "/web/policy.docx";
+        return "/policy.docx";
     }
 }

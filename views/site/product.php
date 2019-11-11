@@ -65,9 +65,10 @@ echo $this->render('modal/product-modal-payment');
             <div class="col-2">
                 <div class="product-detail-sidebar">
                     <div class="product-price-wrap">
-                        <span class="product-price"><?= Price::format($product->price); ?> P</span> за шт
+                        <span class="product-price"><?= Price::format($product->price); ?> <?= Currency::getInstance()->show(); ?></span> за шт
                     </div>
-                    <div class="product-button product-add-basket">
+                    <!--                    <div class="product-button product-add-basket" data-product="1">-->
+                    <div class="product-button product-add-basket add-basket" data-id="<?= $product->id; ?>">
                         В корзину
                     </div>
 
@@ -88,11 +89,9 @@ echo $this->render('modal/product-modal-payment');
                             </div>
                         </form>
                     </div>
-
-
-                    <div class="product-button product-fast-buy">
-                        Купить в 1 клик
-                    </div>
+                    <?= FastBuyWidget::widget([
+                        'product' => $product
+                    ]); ?>
                     <hr/>
                     <ul class="product-pluses">
                         <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-delivery">

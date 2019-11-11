@@ -31,6 +31,8 @@ use yii\helpers\ArrayHelper;
  * @property string $summared
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property OrdersItems[] $items
  */
 class Order extends ActiveRecord
 {
@@ -164,13 +166,6 @@ class Order extends ActiveRecord
         }
 
         return $status->name;
-    }
-
-    public function getItems()
-    {
-        return Product::find()->where([
-            'id' => ArrayHelper::getColumn(OrdersItems::findAll(['orderId' => $this->id]), 'productId')
-        ])->all();
     }
 
     public function findByFilter($params)

@@ -47,14 +47,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
             <? /* @var $item \app\models\entity\OrdersItems */ ?>
             <ul class="detail-order-info-items-list">
                 <? foreach ($items as $item): ?>
-                <li class="detail-order-info-items-list-item">
-                    <a href="<?=$item->product->detail;?>" class="detail-order-info-items-list-item__link">
-                        <img class="detail-order-info-items-list-item__image" src="/web/upload/<?=$item->product->image?>">
-                        <div class="detail-order-info-items-list-item__title">
-                            <h3><?=$item->product->display?></h3>
-                        </div>
-                    </a>
-                </li>
+                    <li class="detail-order-info-items-list-item">
+                        <a href="<?= $item->product->detail; ?>" class="detail-order-info-items-list-item__link">
+                            <img class="detail-order-info-items-list-item__image" src="/web/upload/<?= $item->product->image ?>">
+                            <div class="detail-order-info-items-list-item__title">
+                                <h3><?= $item->name; ?></h3>
+                            </div>
+                        </a>
+                    </li>
                 <? endforeach; ?>
             </ul>
         <? else: ?>

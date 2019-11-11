@@ -33,7 +33,7 @@ class FastBuyWidget extends \yii\base\Widget
                     Yii::$app->controller->refresh();
                 }
 
-                $user->login($user->id);
+                Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration']);
             } else {
                 $user = User::findOne(Yii::$app->user->id);
             }
@@ -45,9 +45,6 @@ class FastBuyWidget extends \yii\base\Widget
 
             $order = new Order(['scenario' => Order::SCENARIO_FAST_ORDER]);
             $order->user = $user->id;
-            if (Basket::getInstance()->cash() < 500) {
-                $order->summared = 100;
-            }
             if ($order->validate() == false) {
                 Notify::setErrorNotify(Debug::modelErrors($order));
                 Yii::$app->controller->refresh();
@@ -61,6 +58,11 @@ class FastBuyWidget extends \yii\base\Widget
                 Notify::setErrorNotify(Debug::modelErrors($items));
                 Yii::$app->controller->refresh();
             }
+
+            Basket::clear();
+            Promo::clear();
+            Notify::setSuccessNotify('Вы успешно купили товар');
+            Yii::$app->controller->refresh();
         }
 
 

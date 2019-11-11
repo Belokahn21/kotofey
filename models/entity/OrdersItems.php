@@ -27,11 +27,6 @@ use yii\db\ActiveRecord;
  */
 class OrdersItems extends ActiveRecord
 {
-//	public static function tableName()
-//	{
-//		return "orders_items";
-//	}
-
     public function rules()
     {
         return [

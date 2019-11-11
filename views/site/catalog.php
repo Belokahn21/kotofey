@@ -32,11 +32,15 @@ if ($category) {
             <li class="catalog-list__item">
                 <a href="<?php echo $product->getDetail(); ?>">
                     <div class="catalog-list__item-image-wrap">
-                        <img class="catalog-list__item-image" src="/web/upload/<?php echo $product->image; ?>" title="<?php echo $product->detail; ?>" alt="<?php echo $product->detail; ?>">
+                        <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                            <img class="catalog-list__item-image" src="/web/upload/<?= $product->image; ?>" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
+                        <?php else: ?>
+                            <img class="catalog-list__item-image" src="/web/upload/images/not-image.png" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
+                        <?php endif; ?>
                     </div>
-                    <h2 class="catalog-list__item-title" title="<?= $product->name; ?>"><?php echo StringHelper::truncate($product->name,70,'...'); ?></h2>
-                    <div class="catalog-list__item-category"><?php echo Category::findOne($product->category)->name; ?></div>
-                    <div class="catalog-list__item-price"><?php echo Price::format($product->price); ?><?php echo Currency::getInstance()->show(); ?></div>
+                    <h2 class="catalog-list__item-title" title="<?= $product->name; ?>"><?= StringHelper::truncate($product->name, 70, '...'); ?></h2>
+                    <div class="catalog-list__item-category"><?= Category::findOne($product->category)->name; ?></div>
+                    <div class="catalog-list__item-price"><?= Price::format($product->price); ?><?= Currency::getInstance()->show(); ?></div>
                 </a>
             </li>
         <?php endforeach; ?>
