@@ -2,6 +2,7 @@
 
 namespace app\widgets\fast_buy;
 
+use app\models\entity\BasketItem;
 use app\models\entity\Promo;
 use Yii;
 use app\models\entity\Basket;
@@ -38,10 +39,12 @@ class FastBuyWidget extends \yii\base\Widget
                 $user = User::findOne(Yii::$app->user->id);
             }
 
+            $item = new BasketItem();
+            $item->setCount(1);
+            $item->setProductId($this->product->id);
+
             $basket = new Basket();
-            $basket->product = $this->product;
-            $basket->count = 1;
-            $basket->add();
+            $basket->add($item);
 
             $order = new Order(['scenario' => Order::SCENARIO_FAST_ORDER]);
             $order->user = $user->id;
