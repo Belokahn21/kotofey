@@ -10,141 +10,194 @@ use app\models\entity\ProductProperties;
 use app\models\entity\InformersValues;
 use app\widgets\fast_buy\FastBuyWidget;
 
+/* @var $properties ProductPropertiesValues[] */
 /* @var \yii\web\View $this */
 /* @var \app\models\entity\Product $product */
 /* @var \app\models\entity\Category $category */
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
-if($category){
-    $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/'.$category->slug."/"]];
+if ($category) {
+    $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
 }
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product->detail]];
 
 $this->title = Title::showTitle($product->name);
+
+echo $this->render('modal/product-modal-bonus');
+echo $this->render('modal/product-modal-buy-click');
+echo $this->render('modal/product-modal-delivery');
+echo $this->render('modal/product-modal-payment');
 ?>
-
-<div class="detail-product" itemtype="http://schema.org/Product" itemscope>
-    <div class="detail-product-wrap">
-        <div class="detail-product-galery">
-            <a href="/web/upload/<?=$product->image;?>" class="image-link">
-                <img src="/web/upload/<?= $product->image ?>" alt="<?=$product->name;?>" title="<?=$product->name;?>" class="detail-product__image">
-            </a>
-        </div>
-        <div class="detail-product-info">
-
-            <div class="detail-product__title-wrap">
-
-                <h1 class="detail-product__title"><?= $product->name ?></h1>
-            </div>
-
-            <div class="detail-product__category"><a href="<?= $category->detail; ?>"><?= $category->name; ?></a></div>
-            <div class="block-buy-wrap">
-                <div class="detail-product__price">
-                    <?= Price::format($product->price) ?> <?= Currency::getInstance()->show(); ?>
-                    <span class="detail-product__available">
-                        <?php if ($product->vitrine == 1): ?>
-                            В наличии
-						<?php else: ?>
-							<?php if ($product->count > 0): ?>
-                                В наличии <?= $product->count; ?> шт.
-							<?php else: ?>
-                                <span class="error">Нет в наличии</span>
-							<?php endif; ?>
-						<?php endif ?>
-                    </span>
+<div class="product-detail-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <div class="product-detail-image-wrap">
+                    <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                        <img class="product-detail-image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                    <?php else: ?>
+                        <img class="product-detail-image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                    <?php endif; ?>
                 </div>
-                <a class="detail-product__cart add-basket" data-id="<?=$product->id;?>">
-                    <i class="fas fa-shopping-cart"></i>
-                </a>
-                <?= FastBuyWidget::widget([
-                        'product'=>$product
-                ]); ?>
-                <span class="item-bookmark" data-id="<?= $product->id; ?>">
-                    <? if (Favorite::isProductInFavorite($product->id)): ?>
-                        <i class="fas fa-bookmark"></i>
-					<? else: ?>
-                        <i class="far fa-bookmark"></i>
-					<? endif; ?>
-                </span>
             </div>
-            <ul class="detail-product-properties">
-                <li class="detail-product-properties__item">
-                    <div>
-                        <h2 class="harmon-title detail-product-properties__item__title">Описание изделия<i class="fas fa-chevron-up"></i></h2>
-                        <div class="harmon-content first">
-                            <p>
-                                <?= $product->description ?>
-                            </p>
-                        </div>
+            <div class="col-6">
+                <div class="product-title"><?= $product->name; ?></div>
+                <div class="product-control">
+                    <?php if ($product->vitrine == 1 or $product->count > 0): ?>
+                        <div class="product-available green">В наличии</div>
+                    <?php endif; ?>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                        <i class="far fa-star"></i>
                     </div>
-                </li>
-<!--                <li class="detail-product-properties__item">-->
-<!--                    <div>-->
-<!--                        <h2 class="harmon-title detail-product-properties__item__title">Нанесение инициалов<i class="fas fa-chevron-down"></i></h2>-->
-<!--                        <div class="harmon-content">-->
-<!--                            <p>-->
-<!--                                На это изделие можно бесплатно нанести персональные инициалы владельца. Мы используем один-->
-<!--                                универсальный шрифт нейтрального стиля, чтобы он вписывался в любой формат аксессуаров и одежды.-->
-<!--                                Для того, чтобы согласовать нанесение инициалов, Вам необходимо оформить заказ и сообщить-->
-<!--                                инициалы менеджеру магазина, который будет принимать Ваш заказ.-->
-<!--                            </p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-                <li class="detail-product-properties__item">
-                    <div>
-                        <h2 class="harmon-title detail-product-properties__item__title">Свойства продукта<i class="fas fa-chevron-down"></i></h2>
-                        <div class="harmon-content">
-                            <ul class="list-properties">
-                                <? /* @var $property ProductPropertiesValues */ ?>
-                                <? foreach (ProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in','property_id',ProductProperties::find()->select('id')->where(['need_show' => 0])])->all() as $property): ?>
-                                    <li class="list-properties-item">
-                                        <span class="list-properties-item__key">
-                                            <?= $property->property->name; ?>
-                                        </span>
-                                        <? if ($property->property->type == 1): ?>
-                                            <span>: <?= InformersValues::find()->where(['id' => $property->value])->andWhere(['informer_id' => $property->informer->id])->one()->name; ?></span>
-                                        <? else: ?>
-                                            <span>: <?= $property->value; ?></span>
-                                        <? endif; ?>
-                                    </li>
-                                <? endforeach; ?>
-                            </ul>
-                        </div>
+                    <div class="product-favorite"><i class="far fa-heart"></i>В избранное</div>
+                    <!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
+                </div>
+                <div class="product-description">
+                    <?php if ($product->description): ?>
+                        <?= $product->description; ?>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="product-detail-sidebar">
+                    <div class="product-price-wrap">
+                        <span class="product-price"><?= Price::format($product->price); ?> P</span> за шт
                     </div>
-                </li>
-                <li class="detail-product-properties__item">
-                    <div>
-                        <h2 class="harmon-title detail-product-properties__item__title">Информация о доставке<i class="fas fa-chevron-down"></i></h2>
-                        <div class="harmon-content">
-                            <p>
-                                <?//= \app\widgets\calc_porduct_delivery\Delivery::widget(); ?>
-                            </p>
-                        </div>
+                    <div class="product-button product-add-basket">
+                        В корзину
                     </div>
-                </li>
-            </ul>
+
+
+                    <div class="product-detail-calc-wrap hide">
+                        <form class="product-detail-calc-form">
+
+                            <div class="product-detail-calc-element">
+                                <div class="product-detail-calc-min">-</div>
+                            </div>
+
+                            <div class="product-detail-calc-element">
+                                <input type="text" class="product-detail-calc-count" name="count" placeholder="1">
+                            </div>
+
+                            <div class="product-detail-calc-element">
+                                <div class="product-detail-calc-plus">+</div>
+                            </div>
+                        </form>
+                    </div>
+
+
+                    <div class="product-button product-fast-buy">
+                        Купить в 1 клик
+                    </div>
+                    <hr/>
+                    <ul class="product-pluses">
+                        <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-delivery">
+                            <div class="product-pluses__icon">
+                                <i class="fas fa-truck"></i>
+                            </div>
+                            <div class="product-pluses__title">Бесплатная доставка</div>
+                        </li>
+
+                        <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-sale">
+                            <div class="product-pluses__icon">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <div class="product-pluses__title">Скидки на покупки</div>
+                        </li>
+
+                        <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-payment">
+                            <div class="product-pluses__icon"><i class="far fa-credit-card"></i>
+                            </div>
+                            <div class="product-pluses__title">Оплата при получении</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
+    <div class="product-attributes-wrap">
+        <div class="container">
+            <div class="product-attributes__title">Характеристики товара</div>
+            <?php if ($properties): ?>
+                <?php foreach ($properties as $property): ?>
+                    <div class="row product-attributes__item">
+                        <div class="col-4 product-attributes__key"><?= $property->property->name; ?></div>
+                        <div class="col product-attributes__value"><?= $property->finalValue; ?></div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
 
-    <div class="clearfix"></div>
-
-    <? try{ ?>
-
-        <? if (count(Json::decode($product->images)) > 0): ?>
-            <div class="gallery-more">
-                <div class="owl-carousel owl-detail">
-                    <? foreach (Json::decode($product->images) as $image): ?>
-                        <img src="<?= $image; ?>" alt="<?= $product->detail; ?>" title="<?= $product->detail; ?>">
-                    <? endforeach; ?>
-                </div>
-            </div>
-        <? endif; ?>
-
-    <? }catch(ErrorException $exception){?>
-
-    <?} ?>
-
-
+        </div>
+        <div class="container">
+            <!--            <div class="product-attributes__title">Отзывы покупателей</div>-->
+            <!--            <div class="product-review-wrap">-->
+            <!--                <ul class="review-list">-->
+            <!--                    <li class="review-item">-->
+            <!--                        <div class="review-item__author-wrap">-->
+            <!--                            <div class="review-item__image-wrap">-->
+            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
+            <!--                            </div>-->
+            <!--                            <div>-->
+            <!--                                <div class="review-item__author">Алексей Несмышлёный</div>-->
+            <!--                                <div class="review-item__verify">Товар был куплен</div>-->
+            <!--                            </div>-->
+            <!--                        </div>-->
+            <!--                        <div class="review-item__description">-->
+            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
+            <!--                        </div>-->
+            <!--                    </li>-->
+            <!--                    <li class="review-item">-->
+            <!--                        <div class="review-item__author-wrap">-->
+            <!--                            <div class="review-item__image-wrap">-->
+            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
+            <!--                            </div>-->
+            <!--                            <div class="review-item__author">Алексей Несмышлёный</div>-->
+            <!--                        </div>-->
+            <!--                        <div class="review-item__description">-->
+            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
+            <!--                        </div>-->
+            <!--                    </li>-->
+            <!--                    <li class="review-item">-->
+            <!--                        <div class="review-item__author-wrap">-->
+            <!--                            <div class="review-item__image-wrap">-->
+            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
+            <!--                            </div>-->
+            <!--                            <div class="review-item__author">Алексей Несмышлёный</div>-->
+            <!--                        </div>-->
+            <!--                        <div class="review-item__description">-->
+            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
+            <!--                        </div>-->
+            <!--                    </li>-->
+            <!--                    <li class="review-item">-->
+            <!--                        <div class="review-item__author-wrap">-->
+            <!--                            <div class="review-item__image-wrap">-->
+            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
+            <!--                            </div>-->
+            <!--                            <div class="review-item__author">Алексей Несмышлёный</div>-->
+            <!--                        </div>-->
+            <!--                        <div class="review-item__description">-->
+            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
+            <!--                        </div>-->
+            <!--                    </li>-->
+            <!--                </ul>-->
+            <!--                <div class="review-form-wrap">-->
+            <!--                    <form class="review-form">-->
+            <!--                        <div class="review-form__element">-->
+            <!--                            <input type="text" name="name" placeholder="Автор">-->
+            <!--                        </div>-->
+            <!--                        <div class="review-form__element">-->
+            <!--                            <textarea placeholder="Ваш отзыв"></textarea>-->
+            <!--                        </div>-->
+            <!--                        <div class="review-form__element">-->
+            <!--                            <button class="btn-main">Отправить</button>-->
+            <!--                        </div>-->
+            <!--                    </form>-->
+            <!--                </div>-->
+            <!--            </div>-->
+        </div>
+    </div>
 </div>
-<div class="clearfix"></div>

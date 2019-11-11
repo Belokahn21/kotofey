@@ -19,6 +19,8 @@ use yii\db\ActiveRecord;
  * @property string $product_id
  * @property string $value
  * @property ProductProperties $property
+ * @property Informers $informer
+ * @property string $finalValue
  */
 class ProductPropertiesValues extends ActiveRecord
 {
@@ -45,6 +47,15 @@ class ProductPropertiesValues extends ActiveRecord
     {
         $property = $this->getProperty();
         return (($property->type == 0) ?: Informers::findOne($property->informer_id));
+    }
+
+    public function getFinalValue()
+    {
+        if ($this->property->type == 1) {
+            return InformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one()->name;
+        } else {
+            return $this->value;
+        }
     }
 
 }

@@ -3,9 +3,7 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip()
 
     /* установить активный класс первому элементу --- начало */
-    $('.breadcrumb').find('.breadcrumb__step').eq(0).each(function (index, element) {
-        $(element).addClass('breadcrumb__step--active');
-    });
+    $('.breadcrumb').find('.breadcrumb__step').eq(0).addClass('breadcrumb__step--active');
     /* установить активный класс первому элементу --- конец */
 
 

@@ -19,6 +19,6 @@ Disallow: /web/
 Disallow: /web/*
 Disallow: /*?*
 
-Sitemap: https://eventhorizont.ru/sitemap.xml
+Sitemap: https://kotofey.store/sitemap.xml
 
 Clean-param: page&per-page /

@@ -13,6 +13,8 @@ use app\models\entity\News;
 use app\models\entity\NewsCategory;
 use app\models\entity\Payment;
 use app\models\entity\Product;
+use app\models\entity\ProductProperties;
+use app\models\entity\ProductPropertiesValues;
 use app\models\entity\Promo;
 use app\models\entity\Providers;
 use app\models\entity\SiteReviews;
@@ -254,10 +256,12 @@ class SiteController extends Controller
             OpenGraph::image(System::protocol() . "://" . System::domain() . $product->image);
         }
 
+        $properties = ProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', ProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
 
         return $this->render('product', [
             'product' => $product,
             'category' => $category,
+            'properties' => $properties
         ]);
     }
 
