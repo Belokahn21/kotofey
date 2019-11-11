@@ -14,30 +14,71 @@ use app\models\tool\Debug;
  */
 class Basket
 {
-    public $product;
-    public $count;
-
     public static function getInstance()
     {
         return new Basket();
     }
 
-    public function add()
+    public function __construct()
     {
         \Yii::$app->session->open();
-        $_SESSION['basket'][$this->product->id]['product'] = $this->product;
-        $_SESSION['basket'][$this->product->id]['count'] = $this->count;
     }
 
-    public function listItems()
+    public function add(BasketItem $item)
     {
-        $items = [];
-        if (!empty($_SESSION['basket'])) {
-            foreach ($_SESSION['basket'] as $id => $item) {
-                $basket = new Basket();
-                $basket->product = $item['product'];
-                $basket->count = $item['count'];
-                $items[] = $basket;
+        $_SESSION['basket'][$item->getProductId()] = $item;
+    }
+
+    public function delete($product_id)
+    {
+//        \Yii::$app->session->open();
+        unset($_SESSION['basket'][$product_id]);
+//        if ($this->exist($product_id)) {
+//            return false;
+//        }
+        return true;
+    }
+
+    /**
+     * @param $product_id
+     * @return BasketItem
+     */
+    public static function findOne($product_id)
+    {
+        $basket = \Yii::$app->session->get('basket');
+        return $basket[$product_id] ? $basket[$product_id] : new BasketItem();
+    }
+
+    public function update(BasketItem $item, $count)
+    {
+//        \Yii::$app->session->open();
+
+        /* @var $item BasketItem */
+        if ($item = $_SESSION['basket'][$item->getProductId()]) {
+            $item->setCount($count);
+        }
+
+        $_SESSION['basket'][$item->getProductId()] = $item;
+    }
+
+    public function exist($product_id)
+    {
+        \Yii::$app->session->open();
+        $basket = \Yii::$app->session->get('basket');
+        if ($basket[$product_id]) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function findAll()
+    {
+        $items = false;
+//        \Yii::$app->session->open();
+        if ($basket = \Yii::$app->session->get('basket')) {
+            $items = array();
+            foreach ($basket as $product_id => $item) {
+                $items[$product_id] = $item;
             }
         }
 
@@ -46,17 +87,17 @@ class Basket
 
     public function addPromo(Promo $promo)
     {
-        $_SESSION['promobasket'] = $promo;
+//        $_SESSION['promobasket'] = $promo;
     }
 
     public function getPromo()
     {
-        return \Yii::$app->session->get('promobasket');
+//        return \Yii::$app->session->get('promobasket');
     }
 
-    public static function clear()
+    public function clear()
     {
-        \Yii::$app->session->open();
+//        \Yii::$app->session->open();
         unset($_SESSION['basket']);
     }
 
@@ -70,11 +111,11 @@ class Basket
 
     public function isEmpty()
     {
-        if (!\Yii::$app->session->get('basket') or $this->count() == 0) {
-            return true;
-        } else {
-            return false;
-        }
+//        if (!\Yii::$app->session->get('basket') or $this->count() == 0) {
+//            return true;
+//        } else {
+//            return false;
+//        }
     }
 
 

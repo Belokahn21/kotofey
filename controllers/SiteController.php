@@ -785,7 +785,7 @@ class SiteController extends Controller
 
     public function actionClear()
     {
-        Basket::clear();
+        Basket::getInstance()->clear();
         Promo::clear();
         Notify::setSuccessNotify("Корзина очищена!");
         return $this->redirect('/');

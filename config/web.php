@@ -59,6 +59,7 @@ $config = [
                 'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
                 '<controller:(admin|ajax)>/' => '<controller>/index',
                 '<controller:(admin|ajax)>' => '<controller>/<action>',
+                '<controller:ajax>/<action>/<product_id:\d+>' => '<controller>/<action>',
                 '<controller:ajax>/<action>/<product_id:\d+>/<count:\d+>' => '<controller>/<action>',
                 '<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
                 '<controller:(admin|ajax)>/<action>/<id[a-zA-Z-\/\d]+>' => '<controller>/<action>',

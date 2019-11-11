@@ -22,27 +22,28 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
     <? endif; ?>
     <? if (!empty(Yii::$app->session->get('basket'))): ?>
         <ul class="basket-page-list">
-            <? foreach ((new Basket())->listItems() as $item): ?>
+            <?php /* @var $item \app\models\entity\BasketItem */ ?>
+            <? foreach (Basket::findAll() as $item): ?>
                 <li class="basket-page-item">
                     <div class="basket-page-item__image-wrap">
-                        <a href="<?= $item->product->detail; ?>">
-                            <?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
-                                <img src="/web/upload/<?= $item->product->image; ?>">
+                        <a href="<?= $item->getProduct()->detail; ?>">
+                            <?php if (!empty($item->getProduct()->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->getProduct()->image)): ?>
+                                <img src="/web/upload/<?= $item->getProduct()->image; ?>">
                             <?php else: ?>
                                 <img src="/web/upload/images/not-image.png">
                             <?php endif; ?>
                         </a>
                     </div>
                     <div class="basket-page-item__title">
-                        <a href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
+                        <a href="<?= $item->getProduct()->detail; ?>"><?= $item->getProduct()->name; ?></a>
                     </div>
                     <div class="basket-page-item__calculate">
                         <div class="basket-page-item__price">
-                            <?= Price::format($item->product->price); ?> <?= Currency::getInstance()->show(); ?>
+                            <?= Price::format($item->getProduct()->price); ?> <?= Currency::getInstance()->show(); ?>
                         </div>
                         <form class="basket-page-item__form">
                             <span><i class="fas fa-minus"></i></span>
-                            <input class="basket-page-item__form-input" type="text" name="count" placeholder="1">
+                            <input class="basket-page-item__form-input" type="text" name="count" placeholder="1" value="<?= $item->getCount(); ?>">
                             <span><i class="fas fa-plus"></i></span>
                         </form>
                     </div>

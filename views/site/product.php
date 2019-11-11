@@ -1,13 +1,10 @@
 <?
 
+use app\models\entity\Basket;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
-use yii\helpers\Json;
 use app\models\tool\Currency;
-use app\models\entity\Favorite;
 use app\models\entity\ProductPropertiesValues;
-use app\models\entity\ProductProperties;
-use app\models\entity\InformersValues;
 use app\widgets\fast_buy\FastBuyWidget;
 
 /* @var $properties ProductPropertiesValues[] */
@@ -67,25 +64,24 @@ echo $this->render('modal/product-modal-payment');
                     <div class="product-price-wrap">
                         <span class="product-price"><?= Price::format($product->price); ?> <?= Currency::getInstance()->show(); ?></span> за шт
                     </div>
-                    <!--                    <div class="product-button product-add-basket" data-product="1">-->
-                    <div class="product-button product-add-basket add-basket" data-id="<?= $product->id; ?>">
+                    <div class="product-button product-add-basket <?= (!Basket::getInstance()->exist($product->id)) ? '' : 'hide'; ?>" data-product="<?= $product->id; ?>">
                         В корзину
                     </div>
 
 
-                    <div class="product-detail-calc-wrap hide">
+                    <div class="product-detail-calc-wrap <?= ((Basket::getInstance()->exist($product->id)) ? '' : 'hide'); ?>">
                         <form class="product-detail-calc-form">
 
                             <div class="product-detail-calc-element">
-                                <div class="product-detail-calc-min">-</div>
+                                <div class="product-detail-calc-min" data-product="<?= $product->id; ?>">-</div>
                             </div>
 
                             <div class="product-detail-calc-element">
-                                <input type="text" class="product-detail-calc-count" name="count" placeholder="1">
+                                <input type="text" class="product-detail-calc-count" name="count" placeholder="1" value="<?= Basket::findOne($product->id)->getCount(); ?>">
                             </div>
 
                             <div class="product-detail-calc-element">
-                                <div class="product-detail-calc-plus">+</div>
+                                <div class="product-detail-calc-plus" data-product="<?= $product->id; ?>">+</div>
                             </div>
                         </form>
                     </div>

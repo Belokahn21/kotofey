@@ -13,58 +13,92 @@ $(document).ready(function () {
 
     $plus.click(function (e) {
         var count = parseInt($input.val());
-        $input.val(count + 1);
+        var $this = $(this);
+
+        addBasket($this.data('product'), count + 1).done(function (data) {
+            if (data == 1) {
+                $input.val(count + 1);
+            }
+        });
     });
 
     $minus.click(function (e) {
         var count = parseInt($input.val());
+        var $this = $(this);
 
-        if (count === 1) {
+
+        if (count - 1 === 0) {
+            removeFromBasket($this.data('product')).done(function (data) {
+                if (data == 1) {
+                    $('.product-button.product-add-basket').toggleClass('hide');
+                    $('.product-detail-calc-wrap').toggleClass('hide');
+                }
+            });
             return false;
         }
 
-        $input.val(count - 1);
+        if (count === 0) {
+            return false;
+        }
+
+        addBasket($this.data('product'), count - 1).done(function (data) {
+            if (data == 1) {
+                $input.val(count - 1);
+            }
+        });
     });
 
     // старый метод
-    $('.add-basket').click(function (e) {
-        e.preventDefault();
-        var $element = $(this);
-        $.post("/ajax/tobasket/", {id: $element.data('id')}, function (data) {
-            if (data.status == true) {
-                $('.basket__summary').html(data.htmlData);
-                // $element.css('background', 'green');
-                // $element.css('border', '1px green solid');
-                // $element.children('i').toggleClass('fa-shopping-cart fa-check');
-            }
-        }, "JSON");
-    });
-
-
-    // $('.product-button.product-add-basket').click(function (e) {
-    //     var $this = $(this);
-    //     var product_id = $(this).data('product');
-    //
-    //     addBasket(product_id, 1).done(function (data) {
-    //         if (data == 1) {
-    //             $this.toggleClass('hide');
-    //             $('.product-detail-calc-wrap').toggleClass('hide');
+    // $('.add-basket').click(function (e) {
+    //     e.preventDefault();
+    //     var $element = $(this);
+    //     $.post("/ajax/tobasket/", {id: $element.data('id')}, function (data) {
+    //         if (data.status == true) {
+    //             $('.basket__summary').html(data.htmlData);
+    //             // $element.css('background', 'green');
+    //             // $element.css('border', '1px green solid');
+    //             // $element.children('i').toggleClass('fa-shopping-cart fa-check');
     //         }
-    //     });
-    //
+    //     }, "JSON");
     // });
 
-    // function addBasket(product_id, count) {
-    //     return $.ajax({
-    //         url: '/ajax/add-to-basket/' + product_id + '/' + count + '/',
-    //         async: true,
-    //         success: function (data) {
-    //         },
-    //         complete: function (data) {
-    //
-    //         }
-    //     });
-    // }
+
+    $('.product-button.product-add-basket').click(function (e) {
+        var $this = $(this);
+        var product_id = $(this).data('product');
+
+        addBasket(product_id, 1).done(function (data) {
+            if (data == 1) {
+                $this.toggleClass('hide');
+                $('.product-detail-calc-wrap').toggleClass('hide');
+            }
+        });
+
+    });
+
+    function addBasket(product_id, count) {
+        return $.ajax({
+            url: '/ajax/add-to-basket/' + product_id + '/' + count + '/',
+            async: true,
+            success: function (data) {
+            },
+            complete: function (data) {
+
+            }
+        });
+    }
+
+    function removeFromBasket(product_id) {
+        return $.ajax({
+            url: '/ajax/remove-from-basket/' + product_id + '/',
+            async: true,
+            success: function (data) {
+            },
+            complete: function (data) {
+
+            }
+        });
+    }
 
 });
 

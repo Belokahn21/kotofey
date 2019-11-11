@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\entity\Basket;
+use app\models\entity\BasketItem;
 use app\models\entity\Favorite;
 use app\models\entity\Informers;
 use app\models\entity\InformersValues;
@@ -62,6 +63,22 @@ class AjaxController extends Controller
         ];
     }
 
+    public function actionRemoveFromBasket($product_id)
+    {
+        if (\Yii::$app->request->isAjax) {
+            $product = Product::findOne($product_id);
+            if (!$product) {
+                throw new HttpException(404, 'Товар не найден');
+            }
+
+            Basket::getInstance()->delete($product_id);
+            if (Basket::getInstance()->delete($product_id) and !Basket::getInstance()->exist($product_id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function actionAddToBasket($product_id, $count)
     {
         if (\Yii::$app->request->isAjax) {
@@ -71,10 +88,21 @@ class AjaxController extends Controller
             }
 
             if (!$product->vitrine) {
-                if ($product->count > $count) {
+                if ($product->count - $count <= 0) {
+                    return false;
                 }
             }
 
+            $basketItem = new BasketItem();
+            $basketItem->setProductId($product->id);
+            $basketItem->setCount($count);
+
+            $basket = new Basket();
+            if ($basket->exist($basketItem->getProductId())) {
+                $basket->update($basketItem, $count);
+            } else {
+                $basket->add($basketItem);
+            }
 
             return true;
         }
