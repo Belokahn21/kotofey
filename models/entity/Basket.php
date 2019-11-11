@@ -131,7 +131,7 @@ class Basket
                 if ($promo) {
                     $cash += $item->getProduct()->price - (($item->getProduct()->price * $promo->discount) / 100);
                 } else {
-                    $cash += $item->getProduct()->price;
+                    $cash += $item->getProduct()->price * $item->getCount();
                 }
             }
         }
