@@ -44,18 +44,18 @@ class OrdersItems extends ActiveRecord
 
     public function saveItems()
     {
-        $basket = new Basket();
-        foreach ($basket->listItems() as $item) {
+        /* @var $item BasketItem */
+        foreach (Basket::findAll() as $item) {
             $self = new OrdersItems();
-            $self->name = $item->product->name;
+            $self->name = $item->getProduct()->name;
 
-            if ($item->product->id) {
-                $self->product_id = $item->product->id;
+            if ($item->getProduct()->id) {
+                $self->product_id = $item->getProduct()->id;
             }
 
-            $self->count = $item->count;
+            $self->count = $item->getCount();
             $self->order_id = $this->order_id;
-            $self->price = $item->count * $item->product->price;
+            $self->price = $item->getCount() * $item->getProduct()->price;
             if ($self->validate()) {
                 if ($self->save() === false) {
                     return false;

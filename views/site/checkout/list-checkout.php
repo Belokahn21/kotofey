@@ -30,13 +30,13 @@ use app\models\tool\Price;
         </ul>
     </div>
     <ul class="checkout-total-items">
-        <?php foreach (Basket::getInstance()->listItems() as $item): ?>
+        <?php foreach (Basket::findAll() as $item): ?>
             <li class="checkout-total-item">
                 <div class="checkout-total-item__image-wrap">
-                    <img src="/web/upload/<?= $item->product->image; ?>">
+                    <img src="/web/upload/<?= $item->getProduct()->image; ?>">
                 </div>
                 <div class="checkout-total-item__title">
-                    <a href="<?= $item->product->detail; ?>" class="checkout-total-item__link"><?= $item->product->name; ?></a>
+                    <a href="<?= $item->getProduct()->detail; ?>" class="checkout-total-item__link"><?= $item->getProduct()->name; ?></a>
                 </div>
             </li>
         <?php endforeach; ?>

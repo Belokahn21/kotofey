@@ -87,12 +87,12 @@ class Basket
 
     public function addPromo(Promo $promo)
     {
-//        $_SESSION['promobasket'] = $promo;
+        $_SESSION['promobasket'] = $promo;
     }
 
     public function getPromo()
     {
-//        return \Yii::$app->session->get('promobasket');
+        return \Yii::$app->session->get('promobasket');
     }
 
     public function clear()
@@ -126,11 +126,12 @@ class Basket
         /* @var $promo Promo */
         $promo = $this->getPromo();
         if (!empty($_SESSION['basket'])) {
+            /* @var $item BasketItem */
             foreach ($_SESSION['basket'] as $id => $item) {
                 if ($promo) {
-                    $cash += $item['product']->price - (($item['product']->price * $promo->discount) / 100);
+                    $cash += $item->getProduct()->price - (($item->getProduct()->price * $promo->discount) / 100);
                 } else {
-                    $cash += $item['product']->price;
+                    $cash += $item->getProduct()->price;
                 }
             }
         }
