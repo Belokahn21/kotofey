@@ -26,15 +26,13 @@
 						$('.pagination-wrap').html("");
 
 
-						$('.catalog-list').html($('<img>', {
-							src: '/web/upload/images/loading.gif',
+						$('.catalog-list').addClass('flex-position-center').html($('<li>', {
 							css: {
-								'width': ' 300px',
-								'height': ' 300px',
-								'align-self': 'center',
-								'align-content': 'center'
+								'align-self': 'flex-start'
 							}
-						}));
+						}).html($('<img>', {
+							src: '/web/upload/images/loading.gif'
+						})));
 					},
 					success: function (data) {
 
@@ -42,7 +40,7 @@
 
 							var $page = $(data);
 
-							$('.catalog-list').html("");
+							$('.catalog-list').removeClass('flex-position-center').html("");
 
 							$page.find('.catalog-list').find('li').each(function () {
 								$('.catalog-list').append($(this));

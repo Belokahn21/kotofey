@@ -14,6 +14,10 @@
   list-style: none;
   padding: 0;
   margin: 0;
+
+  &.flex-position-center {
+    justify-content: center;
+  }
 }
 
 .catalog-list__item {

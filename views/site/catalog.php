@@ -18,17 +18,17 @@ use yii\widgets\LinkPager;
 $this->title = Title::showTitle("Товары");
 $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['/catalog/']];
 if ($category) {
-    $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
-    $this->title = Title::showTitle($category->name);
+	$this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
+	$this->title = Title::showTitle($category->name);
 }
 ?>
 <div class="catalog filtred">
 
-    <?php echo CatalogFilterWidget::widget(); ?>
+	<?php echo CatalogFilterWidget::widget(); ?>
 
-    <ul class="catalog-list">
-        <?php /* @var $product \app\models\entity\Product */ ?>
-        <?php foreach ($products as $product): ?>
+    <ul class="catalog-list flex-position-center">
+		<?php /* @var $product \app\models\entity\Product */ ?>
+		<?php foreach ($products as $product): ?>
             <li class="catalog-list__item">
                 <a href="<?php echo $product->getDetail(); ?>">
                     <div class="catalog-list__item-image-wrap">
@@ -47,8 +47,8 @@ if ($category) {
     </ul>
 </div>
 <div class="pagination-wrap">
-    <?php echo LinkPager::widget([
-        'pagination' => $pagerItems,
-    ]); ?>
+	<?php echo LinkPager::widget([
+		'pagination' => $pagerItems,
+	]); ?>
 </div>
 
