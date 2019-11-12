@@ -9,6 +9,7 @@ class Favorite
 
 	public function __construct()
 	{
+		\Yii::$app->session->open();
 	}
 
 	public static function getInstance()
@@ -18,13 +19,11 @@ class Favorite
 
 	public function add($product_id)
 	{
-		\Yii::$app->session->open();
 		$_SESSION[$this->name_key_favorite][$product_id] = $product_id;
 	}
 
 	public function delete($product_id)
 	{
-		\Yii::$app->session->open();
 		unset($_SESSION[$this->name_key_favorite][$product_id]);
 	}
 
