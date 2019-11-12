@@ -22,6 +22,7 @@
     "gulp-imagemin": "^6.1.1",
     "gulp-include-file": "^0.1.1",
     "gulp-include-tag": "^1.1.2",
+    "gulp-plumber": "^1.2.1",
     "gulp-rigger": "^0.5.8",
     "gulp-uglify": "^3.0.2",
     "pug": "^2.0.4"

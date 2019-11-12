@@ -1,71 +1,45 @@
 <?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 18:10
- */
 
 namespace app\models\entity;
 
 
-use app\models\tool\Debug;
-
 class Favorite
 {
+	private $name_key_favorite = 'favorite';
 
-    const STATUS_ADD = 1;
-    const STATUS_REMOVE = 2;
+	public function __construct()
+	{
+	}
 
-    private $productId;
+	public static function getInstance()
+	{
+		return new Favorite();
+	}
 
-    public function save()
-    {
-        \Yii::$app->session->open();
-        $_SESSION['favorite'][$this->productId] = $this->productId;
-    }
+	public function add($product_id)
+	{
+		\Yii::$app->session->open();
+		$_SESSION[$this->name_key_favorite][$product_id] = $product_id;
+	}
 
-    public function delete()
-    {
-        unset($_SESSION['favorite'][$this->productId]);
-    }
+	public function delete($product_id)
+	{
+		\Yii::$app->session->open();
+		unset($_SESSION[$this->name_key_favorite][$product_id]);
+	}
 
-    public function listProducts()
-    {
-        $items = [];
-        if (isset($_SESSION['favorite'])) {
-            foreach ($_SESSION['favorite'] as $id) {
-                $items[] = Product::findOne($id);
-            }
-        }
+	public function clear()
+	{
+		\Yii::$app->session->remove($this->name_key_favorite);
+	}
 
-        return $items;
-    }
+	public function exist($product_id)
+	{
+		if ($_SESSION[$this->name_key_favorite][$product_id]) {
+			return true;
+		}
+		return false;
+	}
 
-    public function count()
-    {
-        return count($_SESSION['favorite']);
-    }
-
-    public static function isProductInFavorite($productId)
-    {
-        if (isset($_SESSION['favorite'][$productId])) {
-            return true;
-        }
-        return false;
-    }
-
-    public function setProductId($productId)
-    {
-        $this->productId = $productId;
-    }
-
-    public function getProductId()
-    {
-        return $this->productId;
-    }
-
-    public function issetProduct()
-    {
-        return (!empty($_SESSION['favorite'][$this->productId])) ? true : false;
-    }
+	// public function update(){}
 }

@@ -12,6 +12,7 @@ var gulp = require('gulp'),
 	imagemin = require('gulp-imagemin'),
 	babel = require('gulp-babel'),
 	ugli = require('gulp-uglify'),
+	plumber = require('gulp-plumber'),
 	sass = require('gulp-sass');
 var config = {
 	paths: {
@@ -36,11 +37,11 @@ var config = {
 
 		},
 		js: {
-			src_backend: './src/backend/js/**/*.js',
+			src_backend: './src/backend/js/*.js',
 			watch_backend: './src/backend/js/**/*.js',
 			build_backend: './build/backend/assets/js/',
 
-			src_frontend: './src/frontend/js/**/*.js',
+			src_frontend: './src/frontend/js/*.js',
 			watch_frontend: './src/frontend/js/**/*.js',
 			build_frontend: './build/frontend/assets/js/',
 			application_frontend: '../web/js/',
@@ -73,17 +74,21 @@ gulp.task('js', function () {
 	return new Promise(function (resolve, reject) {
 		es.concat(
 			gulp.src(config.paths.js.src_frontend)
+				.pipe(plumber())
 				.pipe(rigger())
 				.pipe(babel())
 				.pipe(concat('script.min.js'))
 				.pipe(ugli())
+				.pipe(plumber.stop())
 				.pipe(gulp.dest(config.paths.js.build_frontend))
 				.pipe(gulp.dest(config.paths.js.application_frontend)),
 			gulp.src(config.paths.js.src_backend)
+				.pipe(plumber())
 				.pipe(rigger())
 				.pipe(babel())
 				.pipe(concat('script.min.js'))
 				.pipe(ugli())
+				.pipe(plumber.stop())
 				.pipe(gulp.dest(config.paths.js.build_backend))
 		);
 		resolve();
@@ -93,6 +98,7 @@ gulp.task('js', function () {
 gulp.task('sass', function () {
 	return new Promise(function (resolve, reject) {
 		es.concat(gulp.src(config.paths.css.src_backend)
+				.pipe(plumber())
 				.pipe(sass())
 				.pipe(autoprefixer({
 					overrideBrowserslist: ['> 1%', 'last 2 versions', 'firefox >= 4', 'safari 7', 'safari 8', 'IE 8', 'IE 9', 'IE 10', 'IE 11'],
@@ -100,10 +106,12 @@ gulp.task('sass', function () {
 				}))
 				.pipe(cssminify({compatibility: 'ie8'}))
 				.pipe(concat('style.min.css'))
+				.pipe(plumber.stop())
 				.pipe(reload({stream: true}))
 				.pipe(gulp.dest(config.paths.css.build_backend)),
 
 			gulp.src(config.paths.css.src_frontend)
+				.pipe(plumber())
 				.pipe(sass())
 				.pipe(autoprefixer({
 					overrideBrowserslist: ['> 1%', 'last 2 versions', 'firefox >= 4', 'safari 7', 'safari 8', 'IE 8', 'IE 9', 'IE 10', 'IE 11'],
@@ -112,6 +120,7 @@ gulp.task('sass', function () {
 				.pipe(cssminify({compatibility: 'ie8'}))
 				.pipe(concat('style.min.css'))
 				.pipe(reload({stream: true}))
+				.pipe(plumber.stop())
 				.pipe(gulp.dest(config.paths.css.build_frontend))
 				.pipe(gulp.dest(config.paths.css.application_frontend))
 		);
@@ -122,11 +131,17 @@ gulp.task('sass', function () {
 gulp.task('html', function () {
 	return new Promise(function (resolve, reject) {
 		es.concat(gulp.src(config.paths.html.src_backend)
-				.pipe(includeHtml()).pipe(reload({stream: true}))
+				.pipe(plumber())
+				.pipe(includeHtml())
+				.pipe(plumber.stop())
+				.pipe(reload({stream: true}))
 				.pipe(gulp.dest(config.paths.html.build_backend)),
 
 			gulp.src(config.paths.html.src_frontend)
-				.pipe(includeHtml()).pipe(reload({stream: true}))
+				.pipe(plumber())
+				.pipe(includeHtml())
+				.pipe(plumber.stop())
+				.pipe(reload({stream: true}))
 				.pipe(gulp.dest(config.paths.html.build_frontend))
 		);
 		resolve();

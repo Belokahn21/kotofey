@@ -1,3 +1,6 @@
+//= lib/init
+//= include/init
+
 $(document).ready(function () {
     $('.carousel').carousel();
     $('[data-toggle="tooltip"]').tooltip();

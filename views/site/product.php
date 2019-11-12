@@ -6,6 +6,7 @@ use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\models\entity\ProductPropertiesValues;
 use app\widgets\fast_buy\FastBuyWidget;
+use app\models\entity\Favorite;
 
 /* @var $properties ProductPropertiesValues[] */
 /* @var \yii\web\View $this */
@@ -14,7 +15,7 @@ use app\widgets\fast_buy\FastBuyWidget;
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
 if ($category) {
-    $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
+	$this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
 }
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product->detail]];
 
@@ -30,19 +31,19 @@ echo $this->render('modal/product-modal-payment');
         <div class="row">
             <div class="col-4">
                 <div class="product-detail-image-wrap">
-                    <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+					<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                         <img class="product-detail-image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-                    <?php else: ?>
+					<?php else: ?>
                         <img class="product-detail-image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-                    <?php endif; ?>
+					<?php endif; ?>
                 </div>
             </div>
             <div class="col-6">
                 <div class="product-title"><?= $product->name; ?></div>
                 <div class="product-control">
-                    <?php if ($product->vitrine == 1 or $product->count > 0): ?>
+					<?php if ($product->vitrine == 1 or $product->count > 0): ?>
                         <div class="product-available green">В наличии</div>
-                    <?php endif; ?>
+					<?php endif; ?>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -50,13 +51,13 @@ echo $this->render('modal/product-modal-payment');
                         <i class="far fa-star"></i>
                         <i class="far fa-star"></i>
                     </div>
-                    <div class="product-favorite"><i class="far fa-heart"></i>В избранное</div>
+                    <div class="product-favorite add-to-favorite" data-product="<?= $product->id; ?>"><i class="<?= ((Favorite::getInstance()->exist($product->id)) ? 'fas' : 'far'); ?> fa-heart"></i>В избранное</div>
                     <!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
                 </div>
                 <div class="product-description">
-                    <?php if ($product->description): ?>
-                        <?= $product->description; ?>
-                    <?php endif; ?>
+					<?php if ($product->description): ?>
+						<?= $product->description; ?>
+					<?php endif; ?>
                 </div>
             </div>
             <div class="col-2">
@@ -85,9 +86,9 @@ echo $this->render('modal/product-modal-payment');
                             </div>
                         </form>
                     </div>
-                    <?= FastBuyWidget::widget([
-                        'product' => $product
-                    ]); ?>
+					<?= FastBuyWidget::widget([
+						'product' => $product
+					]); ?>
                     <hr/>
                     <ul class="product-pluses">
                         <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-delivery">
@@ -117,14 +118,14 @@ echo $this->render('modal/product-modal-payment');
     <div class="product-attributes-wrap">
         <div class="container">
             <div class="product-attributes__title">Характеристики товара</div>
-            <?php if ($properties): ?>
-                <?php foreach ($properties as $property): ?>
+			<?php if ($properties): ?>
+				<?php foreach ($properties as $property): ?>
                     <div class="row product-attributes__item">
                         <div class="col-4 product-attributes__key"><?= $property->property->name; ?></div>
                         <div class="col product-attributes__value"><?= $property->finalValue; ?></div>
                     </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
+				<?php endforeach; ?>
+			<?php endif; ?>
 
         </div>
         <div class="container">
