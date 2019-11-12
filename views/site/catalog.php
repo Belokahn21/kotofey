@@ -26,7 +26,7 @@ if ($category) {
 
 	<?php echo CatalogFilterWidget::widget(); ?>
 
-    <ul class="catalog-list flex-position-center">
+    <ul class="catalog-list">
 		<?php /* @var $product \app\models\entity\Product */ ?>
 		<?php foreach ($products as $product): ?>
             <li class="catalog-list__item">
