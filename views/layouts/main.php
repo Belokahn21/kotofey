@@ -126,7 +126,7 @@ $this->beginPage() ?>
             <ul class="full-menu">
                 <?php foreach (Category::find()->where(['parent' => 0])->all() as $category): ?>
                     <li class="full-menu-item">
-                        <a href="" class="full-menu-link">
+                        <a href="<?= $category->detail; ?>" class="full-menu-link">
                             <div class="full-menu-title">
                                 <img src="/web/upload/<?= $category->image; ?>" class="full-menu-image">
                                 <?= $category->name; ?>
@@ -136,12 +136,12 @@ $this->beginPage() ?>
                             <ul class="full-menu-sub">
                                 <?php foreach ($sub_categories as $sub_category): ?>
                                     <li class="full-menu-item-sub">
-                                        <a href="" class="full-menu-link"><?= $sub_category->name; ?></a>
+                                        <a href="<?= $sub_category->detail; ?>" class="full-menu-link"><?= $sub_category->name; ?></a>
                                         <?php if ($sub_sub_categories = Category::find()->where(['parent' => $sub_category->id])->all()): ?>
                                             <ul class="full-menu-sub">
                                                 <?php foreach ($sub_sub_categories as $sub_sub_category): ?>
                                                     <li class="full-menu-item-sub">
-                                                        <a href="" class="full-menu-link"><?= $sub_sub_category->name; ?></a>
+                                                        <a href="<?= $sub_sub_category->detail; ?>" class="full-menu-link"><?= $sub_sub_category->name; ?></a>
                                                     </li>
                                                 <?php endforeach; ?>
                                             </ul>

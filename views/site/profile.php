@@ -1,5 +1,6 @@
 <?
 
+use app\models\entity\Favorite;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\entity\UserSex;
@@ -99,14 +100,20 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
             <h2 class="profile-menu__item__title">Избранное <i class="fas fa-heart"></i></h2>
             <div class="list-favorite-wrap">
                 <ul class="list-favorite">
-                    <!--                    <li class="favorite-item">-->
-                    <!--                        <div class="favorite-item__image-wrap">-->
-                    <!--                            <img src="./assets/images/product.png" class="favorite-item__image">-->
-                    <!--                        </div>-->
-                    <!--                        <div class="favorite-item__link">-->
-                    <!--                            <a class="favorite-item__link-a" href="">LiveRa LAMB & RICE, сухой корм для взрослых собак, 0.5кг</a>-->
-                    <!--                        </div>-->
-                    <!--                    </li>-->
+                    <?php foreach (Favorite::findAll() as $product): ?>
+                        <li class="favorite-item">
+                            <div class="favorite-item__image-wrap">
+                                <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                                    <img src="/web/upload/<?= $product->image; ?>" class="favorite-item__image">
+                                <?php else: ?>
+                                    <img src="/web/upload/images/not-image.png" class="favorite-item__image">
+                                <?php endif; ?>
+                            </div>
+                            <div class="favorite-item__link">
+                                <a class="favorite-item__link-a" href="<?= $product->detail; ?>"><?= $product->name; ?></a>
+                            </div>
+                        </li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </li>

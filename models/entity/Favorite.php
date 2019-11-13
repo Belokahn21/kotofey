@@ -5,40 +5,50 @@ namespace app\models\entity;
 
 class Favorite
 {
-	private $name_key_favorite = 'favorite';
+    const NAME_KEY_SESSION_FAVORITE = 'favorite';
 
-	public function __construct()
-	{
-		\Yii::$app->session->open();
-	}
+    public function __construct()
+    {
+        \Yii::$app->session->open();
+    }
 
-	public static function getInstance()
-	{
-		return new Favorite();
-	}
+    public static function getInstance()
+    {
+        return new Favorite();
+    }
 
-	public function add($product_id)
-	{
-		$_SESSION[$this->name_key_favorite][$product_id] = $product_id;
-	}
 
-	public function delete($product_id)
-	{
-		unset($_SESSION[$this->name_key_favorite][$product_id]);
-	}
+    public function add($product_id)
+    {
+        $_SESSION[self::NAME_KEY_SESSION_FAVORITE][$product_id] = $product_id;
+    }
 
-	public function clear()
-	{
-		\Yii::$app->session->remove($this->name_key_favorite);
-	}
+    public function delete($product_id)
+    {
+        unset($_SESSION[self::NAME_KEY_SESSION_FAVORITE][$product_id]);
+    }
 
-	public function exist($product_id)
-	{
-		if ($_SESSION[$this->name_key_favorite][$product_id]) {
-			return true;
-		}
-		return false;
-	}
+    public function clear()
+    {
+        \Yii::$app->session->remove(self::NAME_KEY_SESSION_FAVORITE);
+    }
 
-	// public function update(){}
+    public function exist($product_id)
+    {
+        if ($_SESSION[self::NAME_KEY_SESSION_FAVORITE][$product_id]) {
+            return true;
+        }
+        return false;
+    }
+
+    public static function findAll()
+    {
+        $items = array();
+        foreach ($_SESSION[self::NAME_KEY_SESSION_FAVORITE] as $product_id) {
+            $items[] = Product::findOne($product_id);
+        }
+        return $items;
+    }
+
+    // public function update(){}
 }
