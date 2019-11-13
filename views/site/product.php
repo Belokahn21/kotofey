@@ -1,5 +1,6 @@
 <?
 
+use app\widgets\product_reviews\ProductReviewsWidget;
 use app\models\entity\Basket;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
@@ -129,71 +130,9 @@ echo $this->render('modal/product-modal-payment');
 
         </div>
         <div class="container">
-            <!--            <div class="product-attributes__title">Отзывы покупателей</div>-->
-            <!--            <div class="product-review-wrap">-->
-            <!--                <ul class="review-list">-->
-            <!--                    <li class="review-item">-->
-            <!--                        <div class="review-item__author-wrap">-->
-            <!--                            <div class="review-item__image-wrap">-->
-            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
-            <!--                            </div>-->
-            <!--                            <div>-->
-            <!--                                <div class="review-item__author">Алексей Несмышлёный</div>-->
-            <!--                                <div class="review-item__verify">Товар был куплен</div>-->
-            <!--                            </div>-->
-            <!--                        </div>-->
-            <!--                        <div class="review-item__description">-->
-            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
-            <!--                        </div>-->
-            <!--                    </li>-->
-            <!--                    <li class="review-item">-->
-            <!--                        <div class="review-item__author-wrap">-->
-            <!--                            <div class="review-item__image-wrap">-->
-            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
-            <!--                            </div>-->
-            <!--                            <div class="review-item__author">Алексей Несмышлёный</div>-->
-            <!--                        </div>-->
-            <!--                        <div class="review-item__description">-->
-            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
-            <!--                        </div>-->
-            <!--                    </li>-->
-            <!--                    <li class="review-item">-->
-            <!--                        <div class="review-item__author-wrap">-->
-            <!--                            <div class="review-item__image-wrap">-->
-            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
-            <!--                            </div>-->
-            <!--                            <div class="review-item__author">Алексей Несмышлёный</div>-->
-            <!--                        </div>-->
-            <!--                        <div class="review-item__description">-->
-            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
-            <!--                        </div>-->
-            <!--                    </li>-->
-            <!--                    <li class="review-item">-->
-            <!--                        <div class="review-item__author-wrap">-->
-            <!--                            <div class="review-item__image-wrap">-->
-            <!--                                <img class="review-item__image" src="./assets/images/product.png">-->
-            <!--                            </div>-->
-            <!--                            <div class="review-item__author">Алексей Несмышлёный</div>-->
-            <!--                        </div>-->
-            <!--                        <div class="review-item__description">-->
-            <!--                            Мой котик очень полюбил этот пауч. Неуспеваю открыть пачку, как котик сразу сносит меня сног игриво виляя хвостом словно Карлсон пропеллером-->
-            <!--                        </div>-->
-            <!--                    </li>-->
-            <!--                </ul>-->
-            <!--                <div class="review-form-wrap">-->
-            <!--                    <form class="review-form">-->
-            <!--                        <div class="review-form__element">-->
-            <!--                            <input type="text" name="name" placeholder="Автор">-->
-            <!--                        </div>-->
-            <!--                        <div class="review-form__element">-->
-            <!--                            <textarea placeholder="Ваш отзыв"></textarea>-->
-            <!--                        </div>-->
-            <!--                        <div class="review-form__element">-->
-            <!--                            <button class="btn-main">Отправить</button>-->
-            <!--                        </div>-->
-            <!--                    </form>-->
-            <!--                </div>-->
-            <!--            </div>-->
+			<?= ProductReviewsWidget::widget([
+				'product' => $product
+			]); ?>
         </div>
     </div>
 </div>

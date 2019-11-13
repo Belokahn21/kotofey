@@ -59,5 +59,13 @@ textarea {
 }
 
 .help-block {
-  color: red;
+  color: $mainActiveColor;
+}
+
+input[aria-invalid='true'] {
+  border: 1px solid $mainActiveColor!important;
+}
+
+input[aria-invalid='false'] {
+  border: 1px solid green!important;
 }

@@ -83,15 +83,15 @@ class Order extends ActiveRecord
         if ($insert) {
 
             if (Basket::getInstance()->cash() < 500) {
-                $delivery = new Product();
-                $delivery->id = 0;
-                $delivery->name = 'Доставка';
-                $delivery->price = 100;
+
+                $basket_item = new BasketItem();
+                $basket_item->setCount(1);
+                $basket_item->setPrice(100);
+                $basket_item->setProductId(0);
+                $basket_item->setName('Доставка');
 
                 $basket = new Basket();
-                $basket->product = $delivery;
-                $basket->count = 1;
-                $basket->add();
+                $basket->add($basket_item);
             }
 
         }

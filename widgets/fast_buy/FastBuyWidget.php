@@ -27,7 +27,7 @@ class FastBuyWidget extends \yii\base\Widget
     {
         $user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
 
-        if (Yii::$app->request->isPost) {
+		if (\Yii::$app->request->isPost) {
             if ($user->load(Yii::$app->request->post()) && $user->validate()) {
                 if ($user->save() === false) {
                     Notify::setErrorNotify(Debug::modelErrors($user));
@@ -41,7 +41,9 @@ class FastBuyWidget extends \yii\base\Widget
 
             $item = new BasketItem();
             $item->setCount(1);
+            $item->setName($this->product->name);
             $item->setProductId($this->product->id);
+            $item->setPrice($this->product->price);
 
             $basket = new Basket();
             $basket->add($item);
@@ -62,7 +64,7 @@ class FastBuyWidget extends \yii\base\Widget
                 Yii::$app->controller->refresh();
             }
 
-            Basket::clear();
+            Basket::getInstance()->clear();
             Promo::clear();
             Notify::setSuccessNotify('Вы успешно купили товар');
             Yii::$app->controller->refresh();

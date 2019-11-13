@@ -74,7 +74,6 @@ class Basket
     public static function findAll()
     {
         $items = false;
-//        \Yii::$app->session->open();
         if ($basket = \Yii::$app->session->get('basket')) {
             $items = array();
             foreach ($basket as $product_id => $item) {

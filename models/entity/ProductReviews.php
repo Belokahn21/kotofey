@@ -1,9 +1,4 @@
-<?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 18:22
- */
+<?php
 
 namespace app\models\entity;
 
@@ -11,75 +6,60 @@ namespace app\models\entity;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
+/**
+ * ProductReviews model
+ *
+ * @property integer $id
+ * @property string $text
+ * @property string $author
+ * @property string $images
+ * @property integer $rate
+ * @property integer $product_id
+ * @property integer $user_id
+ * @property integer $created_at
+ * @property integer $updated_at
+ *
+ * @property User $user
+ */
 class ProductReviews extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "product_reviews";
-    }
+	public static function tableName()
+	{
+		return "product_reviews";
+	}
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className()
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className()
+		];
+	}
 
-    public function rules()
-    {
-        return [
-            [['text', 'product'], 'required', 'message' => '{attribute} поле должно быть заполнено'],
-            [['text'], 'string'],
+	public function rules()
+	{
+		return [
+			[['text', 'product_id', 'rate', 'author'], 'required', 'message' => 'Поле {attribute} должно быть заполнено'],
+			[['text', 'author'], 'string'],
 
-            [['product', 'user_id'], 'integer'],
+			[['product_id', 'user_id', 'rate'], 'integer'],
 
-            [['user_id'], 'default', 'value' => \Yii::$app->user->identity->id],
-        ];
-    }
+			[['user_id'], 'default', 'value' => \Yii::$app->user->identity->id],
+		];
+	}
 
-    public function attributeLabels()
-    {
-        return [
-            'text' => "Ваш отзыв"
-        ];
-    }
+	public function attributeLabels()
+	{
+		return [
+			'text' => "Ваш отзыв",
+			'rate' => "Оценка",
+			'author' => "Автор",
+			'product_id' => "Товар",
+			'user_id' => "Пользователь",
+		];
+	}
 
-    public function getUser()
-    {
-        return User::findOne($this->user_id);
-    }
-
-    public function canCreateReview($product)
-    {
-        if ($product instanceof Product) {
-            $result = \Yii::$app->db->createCommand("
-            select * from `orders`,`order_items`
-            where `orders`.`user`='" . \Yii::$app->user->identity->id . "'
-            and `orders`.`paid`='1'
-            and `order_items`.`orderId`=`orders`.`id`
-            and `order_items`.`productId`='" . $product->id . "'
-            ")->queryAll();
-
-            return (empty($result)) ? false : true;
-        }
-    }
-
-    public function needPay($product)
-    {
-        if ($product instanceof Product) {
-            $sql = "
-            select * from `orders`,`order_items`,`product_reviews`
-            where `orders`.`user`='" . \Yii::$app->user->identity->id . "'
-            and `order_items`.`orderId`=`orders`.`id`
-            and `product_reviews`.`paid`='1'
-            and `order_items`.`productId`=`product_reviews`.`product`
-            and `order_items`.`productId`='" . $product->id . "'
-            ";
-
-            $result = \Yii::$app->db->createCommand($sql)->queryAll();
-
-            return empty($result) ? true : false;
-        }
-    }
-
+	public function getUser()
+	{
+		return User::findOne($this->user_id);
+	}
 }

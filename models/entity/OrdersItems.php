@@ -47,7 +47,7 @@ class OrdersItems extends ActiveRecord
         /* @var $item BasketItem */
         foreach (Basket::findAll() as $item) {
             $self = new OrdersItems();
-            $self->name = $item->getProduct()->name;
+            $self->name = $item->getName();
 
             if ($item->getProduct()->id) {
                 $self->product_id = $item->getProduct()->id;
@@ -55,7 +55,7 @@ class OrdersItems extends ActiveRecord
 
             $self->count = $item->getCount();
             $self->order_id = $this->order_id;
-            $self->price = $item->getCount() * $item->getProduct()->price;
+            $self->price = $item->getCount() * $item->getPrice();
             if ($self->validate()) {
                 if ($self->save() === false) {
                     return false;
