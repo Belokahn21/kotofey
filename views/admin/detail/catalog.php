@@ -57,7 +57,7 @@ $this->title = Title::showTitle("Товары"); ?>
         </div>
         <div id="tab-3" class="tab-content">
             <div class="product-form__simple-image">
-                <img src="<?= $model->image; ?>">
+                <img src="/web/upload/<?= $model->image; ?>">
                 <?= $form->field($model, 'image')->fileInput(); ?>
             </div>
             <div class="product-form__more-image">
