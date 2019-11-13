@@ -63,9 +63,20 @@ textarea {
 }
 
 input[aria-invalid='true'] {
-  border: 1px solid $mainActiveColor!important;
+  border: 1px solid $mainActiveColor !important;
 }
 
 input[aria-invalid='false'] {
-  border: 1px solid green!important;
+  border: 1px solid green !important;
+}
+
+.modal-header {
+  background: $mainActiveColor;
+  color: white;
+
+  button {
+    span {
+      color: white;
+    }
+  }
 }
