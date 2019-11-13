@@ -6,7 +6,6 @@
 /* @var $exception Exception */
 
 use yii\helpers\Html;
-use app\widgets\notify_about_error\NotifyAboutError;
 
 $this->title = $name;
 ?>
@@ -17,7 +16,4 @@ $this->title = $name;
     <div class="alert alert-danger">
         <?= nl2br(Html::encode($message)) ?>
     </div>
-
-
-    <?= NotifyAboutError::widget(); ?>
 </div>
