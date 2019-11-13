@@ -8,8 +8,13 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-
+            <div class="modal-body" style="text-align: justify;">
+                <p style="text-indent: 1.25em;">
+                    Каждая покупка в нашем магазине дарит клиенту скидку на последующие покупки. Максимальная скидка составляет <span style="color: #ff1a4a;">15%</span>
+                </p>
+                <p style="text-indent: 1.25em;">
+                    Так же при покупке товара рабоотает система промокодов. Промокоды можно получить в розыгрышах в нишх группах в социальных сетях, на листовка или флаерах, либо в день особого события. Особым событием может быть день рождение хозяина петомца, день рождение самого петомца либо знаменальное событии в жизни магазина.
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn-main" data-dismiss="modal">Закрыть</button>

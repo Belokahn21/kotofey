@@ -24,7 +24,6 @@ $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product-
 $this->title = Title::showTitle($product->name);
 
 echo $this->render('modal/product-modal-bonus');
-echo $this->render('modal/product-modal-buy-click');
 echo $this->render('modal/product-modal-delivery');
 echo $this->render('modal/product-modal-payment');
 ?>
