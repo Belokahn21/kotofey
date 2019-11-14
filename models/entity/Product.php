@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 use app\models\behaviors\ArticleBehavior;
+use app\models\behaviors\SocialStore;
 use mohorev\file\UploadBehavior;
 use yii\base\ErrorException;
 use yii\behaviors\TimestampBehavior;
@@ -47,44 +48,8 @@ class Product extends \yii\db\ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_NEW_PRODUCT => [
-				'name',
-				'sort',
-				'category',
-				'description',
-				'price',
-				'purchase',
-				'count',
-				'vitrine',
-				'seo_description',
-				'seo_keywords',
-				'image',
-				'images',
-				'vitrine',
-				'properties',
-				'stock_id',
-				'active',
-				'code'
-			],
-			self::SCENARIO_UPDATE_PRODUCT => [
-				'name',
-				'sort',
-				'category',
-				'description',
-				'price',
-				'purchase',
-				'count',
-				'vitrine',
-				'seo_description',
-				'seo_keywords',
-				'image',
-				'images',
-				'vitrine',
-				'properties',
-				'stock_id',
-				'active',
-				'code'
-			],
+			self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code'],
+			self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code'],
 		];
 	}
 
@@ -147,6 +112,10 @@ class Product extends \yii\db\ActiveRecord
 				'scenarios' => ['insert', 'update'],
 				'path' => '@webroot/upload/',
 				'url' => '@web/upload/',
+			],
+			[
+				'class' => SocialStore::class,
+				'attributes' => ['id', 'has_store'],
 			],
 			ArticleBehavior::className()
 		];
