@@ -125,17 +125,15 @@ class ConsoleController extends Controller
                 $arWeight = explode(" ", trim($weight));
 
                 switch ($arWeight[1]) {
-                    case "êã":
+                    case "ÐºÐ³":
                         $weight = $arWeight[0];
                         break;
 
-                    case "ã":
+                    case "Ð³":
                         $weight = round($arWeight[0] / 1000, 3);
                         break;
                 }
 
-
-//                die($weight);
                 if (Product::findOne(['code' => $lineInfo[1]])) {
                     continue;
                 }

@@ -61,3 +61,33 @@
 
 .page-content {
 }
+
+.requisites-wrap {
+  width: 100%;
+  height: 30px;
+}
+
+.requisites {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 12px;
+  background: $mainActiveColor;
+  color: white;
+  align-items: center;
+}
+
+.requisites___item {
+  margin: 5px;
+
+  a {
+    color: white;
+  }
+}

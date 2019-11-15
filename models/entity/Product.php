@@ -38,7 +38,7 @@ use yii\web\UploadedFile;
  */
 class Product extends \yii\db\ActiveRecord
 {
-
+	public $has_store;
 	public $imagesFiles;
 	public $properties;
 
@@ -65,6 +65,7 @@ class Product extends \yii\db\ActiveRecord
 			[['vitrine'], 'default', 'value' => false],
 			[['active'], 'default', 'value' => 1],
 
+			['has_store', 'boolean'],
 
 			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp, jpeg'],
 			[['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp, jpeg', 'maxFiles' => 10],
@@ -115,7 +116,8 @@ class Product extends \yii\db\ActiveRecord
 			],
 			[
 				'class' => SocialStore::class,
-				'attributes' => ['id', 'has_store'],
+				'has_store' => 'has_store',
+				'scenario' => self::SCENARIO_NEW_PRODUCT
 			],
 			ArticleBehavior::className()
 		];

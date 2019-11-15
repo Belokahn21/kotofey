@@ -264,6 +264,15 @@ $this->beginPage() ?>
     </footer>
 </div>
 
+<div class="requisites-wrap">
+    <ul class="requisites">
+        <li class="requisites___item">ИП Малахов И.В.</li>
+        <li class="requisites___item">ОГРН: 313450121100059</li>
+        <li class="requisites___item">ИНН: 450122395101</li>
+        <li class="requisites___item"><a href="https://www.rusprofile.ru/ip/313450121100059" target="_blank">(Проверить)</a></li>
+    </ul>
+</div>
+
 <? $this->endBody() ?>
 </body>
 </html>
