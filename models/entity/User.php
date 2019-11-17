@@ -8,6 +8,8 @@
 namespace app\models\entity;
 
 use app\models\entity\user\Billing;
+use app\models\rbac\AuthAssignment;
+use app\models\rbac\AuthItem;
 use app\models\tool\Debug;
 use mohorev\file\UploadBehavior;
 use Yii;
@@ -35,206 +37,216 @@ use yii\web\IdentityInterface;
  * @property integer $created_at
  * @property integer $updated_at
  *
- * @property Assignment $roles
+ * @property AuthItem $group
  * @property Billing $billing
  * @property Discount $discount
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
-	const SCENARIO_INSERT = 'insert';
-	const SCENARIO_UPDATE = 'update';
-	const SCENARIO_LOGIN = 'login';
-	const SCENARIO_CHECKOUT = 'checkout';
+    const SCENARIO_INSERT = 'insert';
+    const SCENARIO_UPDATE = 'update';
+    const SCENARIO_LOGIN = 'login';
+    const SCENARIO_CHECKOUT = 'checkout';
 
-	public function scenarios()
-	{
-		return [
-			self::SCENARIO_INSERT => ['phone', 'email', 'password'],
-			self::SCENARIO_UPDATE => ['phone', 'email', 'password'],
-			self::SCENARIO_LOGIN => ['phone', 'email', 'password'],
-			self::SCENARIO_CHECKOUT => ['phone', 'email', 'password'],
-		];
-	}
+    public $groups;
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className(),
-			[
-				'class' => UploadBehavior::class,
-				'attribute' => 'avatar',
-				'scenarios' => ['insert', 'update'],
-				'path' => '@webroot/upload/avatar/',
-				'url' => '@web/upload/avatar/',
-			],
-		];
-	}
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_INSERT => ['phone', 'email', 'password', 'groups'],
+            self::SCENARIO_UPDATE => ['phone', 'email', 'password'],
+            self::SCENARIO_LOGIN => ['phone', 'email', 'password'],
+            self::SCENARIO_CHECKOUT => ['phone', 'email', 'password'],
+        ];
+    }
 
-	public function rules()
-	{
-		return [
-			[['email', 'password','phone'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
-			[['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'avatar',
+                'scenarios' => ['insert', 'update'],
+                'path' => '@webroot/upload/avatar/',
+                'url' => '@web/upload/avatar/',
+            ],
+        ];
+    }
 
-			['password', 'string', 'min' => 5, 'max' => 16],
+    public function rules()
+    {
+        return [
+            [['email', 'password', 'phone'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
+            [['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
 
-			['phone', 'integer'],
-			['phone', 'default', 'value' => null],
-			['phone', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Номер телефона {value} уже занят'],
+//            ['password', 'string', 'length' => [5, 24]],
+            ['password', 'string'],
+            ['groups', 'string'],
 
-			['email', 'email'],
-			['email', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Почта {value} уже занята'],
+            ['phone', 'integer'],
+            ['phone', 'default', 'value' => null],
+            ['phone', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Номер телефона {value} уже занят'],
 
-		];
-	}
+            ['email', 'email'],
+            ['email', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Почта {value} уже занята'],
 
-	public function attributeLabels()
-	{
-		return [
-			'phone' => "Телефон",
-			'first_name' => "Фамилия",
-			'name' => "Имя",
-			'last_name' => "Отчество",
-			'email' => "E-Mail",
-			'password' => "Пароль",
-			'birthday' => "День рождения",
-			'sex' => "Пол",
-			'avatar' => "Аватар",
-			'roleName' => "Группа",
-			'created_at' => "Дата регистрации",
-		];
-	}
+        ];
+    }
 
-	public function afterSave($insert, $changedAttributes)
-	{
-		parent::afterSave($insert, $changedAttributes);
+    public function attributeLabels()
+    {
+        return [
+            'phone' => "Телефон",
+            'first_name' => "Фамилия",
+            'name' => "Имя",
+            'last_name' => "Отчество",
+            'email' => "E-Mail",
+            'password' => "Пароль",
+            'birthday' => "День рождения",
+            'sex' => "Пол",
+            'avatar' => "Аватар",
+            'roleName' => "Группа",
+            'created_at' => "Дата регистрации",
+            'groups' => "Группа",
+        ];
+    }
 
-		if ($insert) {
-			$billing = new Billing();
-			$billing->user_id = $this->id;
-			if ($billing->validate()) {
-				$billing->save();
-			}
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
 
-			if (!Discount::findOne($this->id)) {
-				$discount = new Discount();
-				$discount->user_id = $this->id;
-				$discount->count = 0;
-				if ($discount->validate()) {
-					$discount->save();
-				}
-			}
-		}
-	}
+        if ($insert) {
+            $billing = new Billing();
+            $billing->user_id = $this->id;
+            if ($billing->validate()) {
+                $billing->save();
+            }
 
-	public static function findByEmail($email)
-	{
-		return static::findOne(['email' => $email]);
-	}
+            if (!Discount::findOne($this->id)) {
+                $discount = new Discount();
+                $discount->user_id = $this->id;
+                $discount->count = 0;
+                if ($discount->validate()) {
+                    $discount->save();
+                }
+            }
+        }
+    }
 
-	public function getDiscount()
-	{
-		return Discount::findByUserId($this->id);
-	}
+    public static function findByEmail($email)
+    {
+        return static::findOne(['email' => $email]);
+    }
 
-	public static function isRole($roleName)
-	{
-		if (empty($roleName)) {
-			throw new \InvalidArgumentException("Не указана роль для проверки");
-		}
+    public function getDiscount()
+    {
+        return Discount::findByUserId($this->id);
+    }
 
-		if (Yii::$app->user->isGuest) {
-			return false;
-		}
+    public static function isRole($roleName)
+    {
+        if (empty($roleName)) {
+            throw new \InvalidArgumentException("Не указана роль для проверки");
+        }
 
-		$user_id = Yii::$app->user->identity->id;
-		$roles = \Yii::$app->authManager->getRolesByUser($user_id);
+        if (Yii::$app->user->isGuest) {
+            return false;
+        }
 
-		if (!empty($roles)) {
-			foreach ($roles as $key => $role) {
-				if (strcasecmp($role->name, $roleName) == 0) {
-					return true;
-				}
-			}
-		}
+        $user_id = Yii::$app->user->identity->id;
+        $roles = \Yii::$app->authManager->getRolesByUser($user_id);
 
-		return false;
-	}
+        if (!empty($roles)) {
+            foreach ($roles as $key => $role) {
+                if (strcasecmp($role->name, $roleName) == 0) {
+                    return true;
+                }
+            }
+        }
 
-	public function getBilling()
-	{
-		return Billing::findByUser($this->id);
-	}
+        return false;
+    }
 
-	//---------------------------------
+    public function getBilling()
+    {
+        return Billing::findByUser($this->id);
+    }
 
-	public function getId()
-	{
-		return $this->getPrimaryKey();
-	}
+    public function getGroup()
+    {
+        return AuthItem::findOne(['name' => AuthAssignment::findOne(['user_id' => $this->id])]);
+    }
 
-	public function getAuthKey()
-	{
-		return $this->auth_key;
-	}
+    //---------------------------------
 
-	public function validateAuthKey($authKey)
-	{
-		return $this->getAuthKey() === $authKey;
-	}
+    public function getId()
+    {
+        return $this->getPrimaryKey();
+    }
 
-	public function validatePassword($password)
-	{
-		return Yii::$app->security->validatePassword($password, $this->password);
-	}
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
 
-	public function setPassword($password)
-	{
-		$this->password = Yii::$app->security->generatePasswordHash($password);
-	}
+    public function validateAuthKey($authKey)
+    {
+        return $this->getAuthKey() === $authKey;
+    }
 
-	public function generateAuthKey()
-	{
-		$this->auth_key = Yii::$app->security->generateRandomString();
-	}
+    public function validatePassword($password)
+    {
+        return Yii::$app->security->validatePassword($password, $this->password);
+    }
 
-	public static function findIdentity($id)
-	{
-		return static::findOne(['id' => $id]);
-	}
+    public function setPassword($password)
+    {
+        $this->password = Yii::$app->security->generatePasswordHash($password);
+    }
 
-	public static function findIdentityByAccessToken($token, $type = null)
-	{
-		throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
-	}
+    public function generateAuthKey()
+    {
+        $this->auth_key = Yii::$app->security->generateRandomString();
+    }
 
-	public static function findByUsername($username)
-	{
-		return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
-	}
+    public static function findIdentity($id)
+    {
+        return static::findOne(['id' => $id]);
+    }
 
-	public function calcCurrentAge($birthday = "17-10-1985")
-	{
-		$dateOfBirth = $birthday;
-		$today = date("Y-m-d");
-		$diff = date_diff(date_create($dateOfBirth), date_create($today));
-		return $diff->format('%y год и %m месяца');
-	}
+    public static function findIdentityByAccessToken($token, $type = null)
+    {
+        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+    }
 
-	public function search($params)
-	{
-		$query = static::find();
+    public static function findByUsername($username)
+    {
+        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+    }
 
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
+    public function calcCurrentAge($birthday = "17-10-1985")
+    {
+        $dateOfBirth = $birthday;
+        $today = date("Y-m-d");
+        $diff = date_diff(date_create($dateOfBirth), date_create($today));
+        return $diff->format('%y год и %m месяца');
+    }
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
-		}
+    public function search($params)
+    {
+        $query = static::find();
 
-		$query->andFilterWhere(['like', 'email', $this->email]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
-		return $dataProvider;
-	}
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
+
+        $query->andFilterWhere(['like', 'email', $this->email]);
+
+        return $dataProvider;
+    }
 }

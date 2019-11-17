@@ -262,6 +262,7 @@ class AdminController extends Controller
         $model = new User(['scenario' => User::SCENARIO_INSERT]);
         $authAssigment = new AuthAssignment();
         $dataProvider = $model->search(\Yii::$app->request->post());
+        $groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
 
         // удалить юзера
         if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'auth') {
@@ -290,11 +291,15 @@ class AdminController extends Controller
 
                 if ($model->load(\Yii::$app->request->post())) {
 
-                    if (!empty($model->password)) {
-                        $model->setPassword($model->password);
-                    }
 
                     if ($model->validate()) {
+
+
+                        if (!empty($model->password)) {
+                            $model->setPassword($model->password);
+                        }
+
+
                         if ($model->update()) {
                             Notify::setSuccessNotify("Информация о пользователе успешно обновлена");
                             return $this->refresh();
@@ -311,6 +316,7 @@ class AdminController extends Controller
 
             return $this->render('detail/user', [
                 'model' => $model,
+                'groups' => $groups
             ]);
         }
 
@@ -319,19 +325,25 @@ class AdminController extends Controller
 
             if ($model->load(\Yii::$app->request->post())) {
 
-                $model->setPassword($model->password);
-                $model->generateAuthKey();
-
                 if ($model->validate()) {
+
+                    $model->setPassword($model->password);
+                    $model->generateAuthKey();
 
                     if ($model->save()) {
 
-                        if (!empty($model->role)) {
-                            $authAssigment->addUserRole(AuthItem::findOne(['name' => $model->role]), $model);
+                        if (!empty($model->group)) {
+                            $authAssigment->addUserRole(AuthItem::findOne(['name' => $model->group]), $model);
                         }
 
                         return $this->refresh();
+                    } else {
+                        Notify::setErrorNotify(Debug::modelErrors($model));
+                        return $this->refresh();
                     }
+                } else {
+                    Notify::setErrorNotify(Debug::modelErrors($model));
+                    return $this->refresh();
                 }
             }
             return $this->refresh();
@@ -340,6 +352,7 @@ class AdminController extends Controller
         return $this->render('user', [
             'model' => $model,
             'dataProvider' => $dataProvider,
+            'groups' => $groups
         ]);
     }
 
