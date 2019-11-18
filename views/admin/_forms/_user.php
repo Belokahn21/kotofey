@@ -17,7 +17,7 @@ use yii\helpers\ArrayHelper;
     <div id="tab-1" class="tab-content current">
         <?= $form->field($model, 'email'); ?>
         <?= $form->field($model, 'phone'); ?>
-        <?= $form->field($model, 'password')->passwordInput(); ?>
+        <?= $form->field($model, 'new_password')->passwordInput(); ?>
     </div>
     <div id="tab-2" class="tab-content">
         <?= $form->field($model, 'avatar')->fileInput(); ?>
