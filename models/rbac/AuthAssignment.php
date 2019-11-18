@@ -20,8 +20,8 @@ class AuthAssignment extends ActiveRecord
 		return true;
 	}
 
-	public function removeUserRoles($role, $user_id)
+	public function removeUserRoles($user_id)
 	{
-		return Yii::$app->authManager->revoke(Yii::$app->authManager->getRole($role), $user_id);
+		return Yii::$app->authManager->revokeAll($user_id);
 	}
 }
