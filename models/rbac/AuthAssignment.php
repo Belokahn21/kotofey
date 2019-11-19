@@ -3,6 +3,7 @@
 namespace app\models\rbac;
 
 
+use app\models\tool\Debug;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -15,7 +16,7 @@ class AuthAssignment extends ActiveRecord
 
 	public function addUserRole($role, $user)
 	{
-		$userRole = Yii::$app->authManager->getRole($role->name);
+		$userRole = Yii::$app->authManager->getRole($role);
 		Yii::$app->authManager->assign($userRole, $user->id);
 		return true;
 	}

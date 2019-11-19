@@ -42,6 +42,7 @@ use app\models\search\StockSearchForm;
 use app\models\tool\Debug;
 use app\models\tool\export\YMLExport;
 use app\widgets\notification\Notify;
+use Codeception\Lib\Di;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
@@ -301,7 +302,8 @@ class AdminController extends Controller
                         }
 
 
-                        if ($authAssigment->removeUserRoles($model->id)) {
+                        if ($model->groups) {
+                            $authAssigment->removeUserRoles($model->id);
                             $authAssigment->addUserRole($model->groups, $model);
                         }
 
