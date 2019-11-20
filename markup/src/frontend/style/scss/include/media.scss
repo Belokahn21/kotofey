@@ -33,6 +33,59 @@
 
 /* mobile */
 @media screen and (max-width: 768px) {
+  .wrap-page {
+    width: 100%;
+  }
+  .top-menu-wrap {
+    display: none;
+  }
+  .header {
+    width: 100%;
+    flex-direction: column;
+  }
+  .search-wrap {
+    margin: 15px 0;
+  }
+  .contact-wrap {
+    width: 100%;
+    flex-direction: column;
+  }
+  .contact-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu-wrap {
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .menu {
+    display: flex;
+    flex-direction: column;
+  }
+  .advantages {
+    flex-direction: column;
+    width: 100%;
+  }
+  .advantages-item {
+    width: 100%;
+  }
+  .three-line {
+    flex-direction: column;
+    width: 100%;
+  }
+  .providers-wrap, .social-wrap {
+    width: 100%;
+  }
+  .footer-wrap {
+    width: 100%;
+    flex-direction: column;
+  }
+  .footer-block {
+    width: 100%;
+  }
 }
 
 /* iPad in portrait & landscape */

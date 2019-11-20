@@ -230,7 +230,8 @@
 .product-review-wrap {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
+  align-items: flex-start;
   padding: 5px;
 }
 
@@ -360,4 +361,13 @@
   width: 100%;
   border: 1px silver solid;
   padding: 5px
+}
+
+.review-disable {
+  border: 1px silver solid;
+  padding: 30px 10px;
+  margin: 10px 0;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  border-radius: 0.3em;
 }
