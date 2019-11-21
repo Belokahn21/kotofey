@@ -22,7 +22,7 @@ echo \yii\helpers\Html::a('click', $browser_url);
 $access_token = '445c6e32c40949c9ebae2b1dd9f193f823ba7128320b5644b4baf85109a9b4f52df298910e9689225d29d';
 $vk = new VKApiClient();
 if ($access_token) {
-	\app\models\tool\Debug::p($vk->market()->getCategories($access_token, [
-		'count' => 1000
-	]));
+//	\app\models\tool\Debug::p($vk->market()->getCategories($access_token, [
+//		'count' => 1000
+//	]));
 }
