@@ -30,7 +30,7 @@ echo $this->render('modal/product-modal-payment');
 <div class="product-detail-wrap">
     <div class="container">
         <div class="row">
-            <div class="col-4">
+            <div class="col col-sm-4">
                 <div class="product-detail-image-wrap">
                     <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                         <img class="product-detail-image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
@@ -46,7 +46,8 @@ echo $this->render('modal/product-modal-payment');
 
                 </div>
             </div>
-            <div class="col-6">
+            <div class="w-100 hide"></div>
+            <div class="col col-sm-6">
                 <div class="product-title"><?= $product->name; ?></div>
                 <div class="product-control">
                     <?php if ($product->vitrine == 1 or $product->count > 0): ?>
