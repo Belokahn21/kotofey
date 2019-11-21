@@ -40,7 +40,7 @@ class SocialStore extends Behavior
 		if ((boolean)$model->{$this->has_store} === true) {
 
 			if ($model->scenario == 'insert' && !empty($model->image) && strlen($model->description) > 10) {
-				$access_token = '445c6e32c40949c9ebae2b1dd9f193f823ba7128320b5644b4baf85109a9b4f52df298910e9689225d29d';
+				$access_token = '9a59bee577bfac9297aaab387a5d22ca36b847e5b414823b33f7c53f0e214d4ee828f1e8755004c99c515';
 				$vk = new VKApiClient();
 				if ($access_token) {
 					$response = $vk->photos()->getMarketUploadServer($access_token, [
