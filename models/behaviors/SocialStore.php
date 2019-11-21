@@ -34,7 +34,7 @@ class SocialStore extends Behavior
 
 	public function afterSave()
 	{
-		/** @var BaseActiveRecord $model */
+		/** @var Product $model */
 		$model = $this->owner;
 		$group_id = 185683081;
 		if ((boolean)$model->{$this->has_store} === true) {
@@ -83,7 +83,7 @@ class SocialStore extends Behavior
 							'category_id' => '1006',
 							'main_photo_id' => $answer[0]['id'],
 							'price' => $model->price,
-							'url' => 'https://kotofey.store/test/'
+							'url' => $model->getDetail()
 						]);
 
 						if (array_key_exists('market_item_id', $response)) {
