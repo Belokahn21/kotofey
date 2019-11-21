@@ -79,7 +79,7 @@ class SocialStore extends Behavior
 							'owner_id' => -$group_id,
 							'name' => $model->name,
 							'description' => $model->description,
-							'category_id' => '1',
+							'category_id' => '10',
 							'main_photo_id' => $answer[0]['id'],
 							'price' => $model->price,
 							'url' => 'https://kotofey.store/test/'
