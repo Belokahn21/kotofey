@@ -36,6 +36,7 @@ class SocialStore extends Behavior
     {
         /** @var Product $model */
         $model = $this->owner;
+        Debug::printFile($model);
         $group_id = 185683081;
         if ((boolean)$model->{$this->has_store} === true) {
 
