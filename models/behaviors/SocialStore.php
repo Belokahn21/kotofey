@@ -67,16 +67,17 @@ class SocialStore extends Behavior
 
                     }
 
-                    $answer = $vk->photos()->saveMarketPhoto($access_token, [
-                        'group_id' => $group_id,
-                        'photo' => $obj['photo'],
-                        'server' => $obj['server'],
-                        'hash' => $obj['hash'],
-                        'crop_data' => $obj['crop_data'],
-                        'crop_hash' => $obj['crop_hash'],
-                    ]);
+                    if (!array_key_exists('error', $obj)) {
 
-                    if (!array_key_exists('error', $answer)) {
+                        $answer = $vk->photos()->saveMarketPhoto($access_token, [
+                            'group_id' => $group_id,
+                            'photo' => $obj['photo'],
+                            'server' => $obj['server'],
+                            'hash' => $obj['hash'],
+                            'crop_data' => $obj['crop_data'],
+                            'crop_hash' => $obj['crop_hash'],
+                        ]);
+
                         $response = $vk->market()->add($access_token, [
                             'owner_id' => -$group_id,
                             'name' => $model->name,
@@ -96,8 +97,8 @@ class SocialStore extends Behavior
                             }
                         }
                     }
-
                 }
+
             }
         }
     }
