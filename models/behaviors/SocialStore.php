@@ -49,7 +49,8 @@ class SocialStore extends Behavior
 					]);
 					if ($curl = curl_init()) {
 
-						$filename = str_replace('/', "\\", \Yii::getAlias('@webroot/upload/' . $model->image));
+//						$filename = str_replace('/', "\\", \Yii::getAlias('@webroot/upload/' . $model->image));
+						$filename = \Yii::getAlias('@webroot/upload/' . $model->image);
 						$finfo = new \finfo(FILEINFO_MIME_TYPE);
 						$mimetype = $finfo->file($filename);
 
