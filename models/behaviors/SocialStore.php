@@ -49,7 +49,6 @@ class SocialStore extends Behavior
                     ]);
                     if ($curl = curl_init()) {
 
-//						$filename = str_replace('/', "\\", \Yii::getAlias('@webroot/upload/' . $model->image));
                         $filename = \Yii::getAlias('@webroot/upload/' . $model->image);
                         $finfo = new \finfo(FILEINFO_MIME_TYPE);
                         $mimetype = $finfo->file($filename);
@@ -68,8 +67,6 @@ class SocialStore extends Behavior
 
                     }
 
-                    Debug::printFile($obj);
-
                     $answer = $vk->photos()->saveMarketPhoto($access_token, [
                         'group_id' => $group_id,
                         'photo' => $obj['photo'],
@@ -79,23 +76,24 @@ class SocialStore extends Behavior
                         'crop_hash' => $obj['crop_hash'],
                     ]);
 
-                    Debug::printFile($answer);
-                    $response = $vk->market()->add($access_token, [
-                        'owner_id' => -$group_id,
-                        'name' => $model->name,
-                        'description' => $model->description,
-                        'category_id' => '1006',
-                        'main_photo_id' => $answer[0]['id'],
-                        'price' => $model->price,
-                        'url' => $model->getDetail()
-                    ]);
+                    if (!array_key_exists('error', $answer)) {
+                        $response = $vk->market()->add($access_token, [
+                            'owner_id' => -$group_id,
+                            'name' => $model->name,
+                            'description' => $model->description,
+                            'category_id' => '1006',
+                            'main_photo_id' => $answer[0]['id'],
+                            'price' => $model->price,
+                            'url' => $model->getDetail()
+                        ]);
 
-                    if (array_key_exists('market_item_id', $response)) {
-                        $market_store = new ProductMarket();
-                        $market_store->product_id = $model->id;
-                        $market_store->market_id = $response['market_item_id'];
-                        if ($market_store->validate()) {
-                            $market_store->save();
+                        if (array_key_exists('market_item_id', $response)) {
+                            $market_store = new ProductMarket();
+                            $market_store->product_id = $model->id;
+                            $market_store->market_id = $response['market_item_id'];
+                            if ($market_store->validate()) {
+                                $market_store->save();
+                            }
                         }
                     }
 
