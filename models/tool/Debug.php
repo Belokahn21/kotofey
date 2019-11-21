@@ -27,7 +27,10 @@ class Debug
         $filePath = $_SERVER['DOCUMENT_ROOT'] . "/web/debug.html";
 
         if (!empty($target)) {
-            $info = print_r($target, true);
+            $info = '<pre>';
+            $info .= print_r($target, true);
+            $info .= '</pre>';
+            $info .= PHP_EOL;
 
             if ($clear === true) {
                 unlink($filePath);

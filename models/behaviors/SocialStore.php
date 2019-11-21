@@ -36,7 +36,6 @@ class SocialStore extends Behavior
     {
         /** @var Product $model */
         $model = $this->owner;
-        Debug::printFile($model->image);
         $group_id = 185683081;
         if ((boolean)$model->{$this->has_store} === true) {
 
@@ -69,6 +68,8 @@ class SocialStore extends Behavior
 
                     }
 
+                    Debug::printFile($obj);
+
                     $answer = $vk->photos()->saveMarketPhoto($access_token, [
                         'group_id' => $group_id,
                         'photo' => $obj['photo'],
@@ -78,6 +79,7 @@ class SocialStore extends Behavior
                         'crop_hash' => $obj['crop_hash'],
                     ]);
 
+                    Debug::printFile($answer);
                     $response = $vk->market()->add($access_token, [
                         'owner_id' => -$group_id,
                         'name' => $model->name,
