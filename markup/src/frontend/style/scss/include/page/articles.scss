@@ -36,11 +36,10 @@
 
 .article-detail {
   width: 100%;
-  border: 1px red solid;
 }
 
 .article-detail__title {
-  color: #ff1a4a;
+  color: $mainActiveColor;
 }
 
 .article-detail-image {

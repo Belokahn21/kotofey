@@ -1,6 +1,6 @@
 <?
 /* @var $this yii\web\View */
-/* @var $providers \app\models\entity\Providers[] */
+/* @var $providers \app\models\entity\InformersValues[] */
 
 /* @var $news \app\models\entity\News[] */
 
@@ -45,7 +45,7 @@ $this->title = Title::showTitle("Главная страница");
                     <div class="provider-item__image-wrap">
                         <img class="d-block w-100" src="/web/upload/<?= $provider->image; ?>" alt="First slide">
                     </div>
-                    <div class="provider-item__title"><a href="<?= $provider->detailUrl; ?>"><?= $provider->name; ?></a></div>
+                    <div class="provider-item__title"><a href='/brands/<?= $provider->id; ?>/'><?= $provider->name; ?></a></div>
                     <div class="provider-item__description"><?= $provider->description; ?></div>
                 </div>
 				<?php $provider_iterator++; ?>

@@ -68,7 +68,7 @@ $this->title = Title::showTitle("Главная страница");
 						]); ?>
                         <ul class="search-query-list">
 							<?php foreach ($last_search as $phrase): ?>
-                                <li><?= $phrase->text; ?>|<?= date('d.m.Y H:i:s', $phrase->created_at) ?>|<?= ($phrase->user->email ? $phrase->user->email : 'Гость'); ?></li>
+                                <li><?= $phrase->text; ?>|<?= date('d.m.Y H:i:s', $phrase->created_at) ?>|<?= ($phrase->user ? $phrase->user->email : 'Гость'); ?></li>
 							<?php endforeach ?>
                         </ul>
 						<?php Modal::end(); ?>

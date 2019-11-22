@@ -8,6 +8,7 @@ use app\models\entity\Category;
 use app\models\entity\Delivery;
 use app\models\entity\Discount;
 use app\models\entity\Favorite;
+use app\models\entity\InformersValues;
 use app\models\entity\Order;
 use app\models\entity\OrdersItems;
 use app\models\entity\News;
@@ -185,14 +186,7 @@ class SiteController extends Controller
 
 	public function actionIndex()
 	{
-		$providers = Providers::find()->where(['active' => true])->select([
-			'name',
-			'description',
-			'link',
-			'image',
-			'sort',
-			'active'
-		])->all();
+		$providers = InformersValues::find()->where(['active' => true, 'informer_id' => 1])->all();
 		$news = News::find()->all();
 
 		Attributes::metaDescription("Зоотовары онлайн с доставкой по Барнаулу и по всей России. Всегда свежие товары и по низкой цене!");
@@ -1004,5 +998,16 @@ class SiteController extends Controller
 		Attributes::metaDescription("Контакты нашего интернет магазина");
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 		return $this->render('contacts');
+	}
+
+	public function actionBrands($id = null)
+	{
+		if ($id) {
+			$model = InformersValues::findOne($id);
+			return $this->render('detail/brands', [
+				'model' => $model
+			]);
+		}
+		return $this->render('brands');
 	}
 }
