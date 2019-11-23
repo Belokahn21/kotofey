@@ -5,15 +5,9 @@ namespace app\models\behaviors;
 
 use app\models\entity\Product;
 use app\models\entity\ProductMarket;
-use app\models\tool\Debug;
 use VK\Client\VKApiClient;
-use VK\OAuth\Scopes\VKOAuthUserScope;
-use VK\OAuth\VKOAuth;
-use VK\OAuth\VKOAuthDisplay;
-use VK\OAuth\VKOAuthResponseType;
 use yii\base\Behavior;
 use yii\db\BaseActiveRecord;
-use yii\helpers\Json;
 
 class SocialStore extends Behavior
 {

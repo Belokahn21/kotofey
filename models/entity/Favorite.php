@@ -44,8 +44,10 @@ class Favorite
     public static function findAll()
     {
         $items = array();
-        foreach ($_SESSION[self::NAME_KEY_SESSION_FAVORITE] as $product_id) {
-            $items[] = Product::findOne($product_id);
+        if ($_SESSION[self::NAME_KEY_SESSION_FAVORITE]) {
+            foreach ($_SESSION[self::NAME_KEY_SESSION_FAVORITE] as $product_id) {
+                $items[] = Product::findOne($product_id);
+            }
         }
         return $items;
     }
