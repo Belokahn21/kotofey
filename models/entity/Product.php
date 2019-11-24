@@ -41,6 +41,7 @@ class Product extends \yii\db\ActiveRecord
     public $has_store;
     public $imagesFiles;
     public $properties;
+    public $is_product_order;
 
     const SCENARIO_NEW_PRODUCT = 'insert';
     const SCENARIO_UPDATE_PRODUCT = 'update';
@@ -48,8 +49,8 @@ class Product extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store'],
-            self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store'],
+            self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order'],
+            self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order'],
         ];
     }
 
@@ -67,7 +68,7 @@ class Product extends \yii\db\ActiveRecord
             [['vitrine'], 'default', 'value' => false],
             [['active'], 'default', 'value' => 1],
 
-            ['has_store', 'boolean'],
+            [['has_store', 'is_product_order'], 'boolean'],
 
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp, jpeg'],
             [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, webp, jpeg', 'maxFiles' => 10],
@@ -98,6 +99,7 @@ class Product extends \yii\db\ActiveRecord
             'code' => 'Внешний код',
             'has_store' => 'Сохранить в маркете Вконтакте',
             'created_at' => 'Дата создания',
+            'is_product_order' => 'Товар под заказ',
         ];
     }
 
@@ -151,10 +153,13 @@ class Product extends \yii\db\ActiveRecord
     public function createProduct()
     {
         if (\Yii::$app->request->isPost) {
+            $db = \Yii::$app->db;
+            $transaction = $db->beginTransaction();
             if ($this->load(\Yii::$app->request->post())) {
                 $this->uploadGallery();
                 if ($this->validate()) {
                     if (!$this->save()) {
+                        $transaction->rollBack();
                         return false;
                     }
 
@@ -167,20 +172,38 @@ class Product extends \yii\db\ActiveRecord
                         $propertyValues->property_id = $propertyId;
                         $propertyValues->value = $value;
                         if ($propertyValues->save() === false) {
+                            $transaction->rollBack();
                             return false;
                         }
                     }
+
+
+                    if ($this->is_product_order == true) {
+                        $productOrder = new ProductOrder();
+                        $productOrder->product_id = $this->id;
+                        if ($productOrder->load(\Yii::$app->request->post())) {
+                            if ($productOrder->validate()) {
+                                if (!$productOrder->save()) {
+                                    $transaction->rollBack();
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+
+                    $transaction->commit();
                     return true;
                 }
             }
         }
+
+        return false;
     }
 
     public function updateProduct()
     {
         if (\Yii::$app->request->isPost) {
             if ($this->load(\Yii::$app->request->post())) {
-//                $this->upload();
                 $this->uploadGallery();
                 if ($this->validate()) {
                     if (!$this->update()) {
@@ -203,16 +226,6 @@ class Product extends \yii\db\ActiveRecord
                     return true;
                 }
             }
-        }
-    }
-
-    public function removeOldImage()
-    {
-        try {
-            if (!empty($this->image)) {
-                unlink(\Yii::getAlias('@app') . $this->image);
-            }
-        } catch (ErrorException $exception) {
         }
     }
 
@@ -265,14 +278,6 @@ class Product extends \yii\db\ActiveRecord
     public static function findBySlug($slug)
     {
         return self::findOne(['slug' => $slug]);
-    }
-
-    public function isCommented()
-    {
-        return (ProductReviews::find()->where([
-                'product' => $this->id,
-                'user_id' => \Yii::$app->user->identity->id
-            ])->count() > 0) ? true : false;
     }
 
     public static function countRent()

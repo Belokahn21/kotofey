@@ -9,6 +9,7 @@ use app\models\entity\ProductPropertiesValues;
 use app\widgets\fast_buy\FastBuyWidget;
 use app\models\entity\Favorite;
 use yii\helpers\Json;
+use app\models\entity\ProductOrder;
 
 /* @var $properties ProductPropertiesValues[] */
 /* @var \yii\web\View $this */
@@ -50,8 +51,12 @@ echo $this->render('modal/product-modal-payment');
             <div class="col col-sm-6">
                 <div class="product-title"><?= $product->name; ?></div>
                 <div class="product-control">
-                    <?php if ($product->vitrine == 1 or $product->count > 0): ?>
-                        <div class="product-available green">В наличии</div>
+                    <?php if ($date = ProductOrder::productIsOrder($product->id)): ?>
+                        <div class="product-available red">Под заказ от <?= $date->start; ?> до <?= $date->end; ?> дней</div>
+                    <?php else: ?>
+                        <?php if ($product->vitrine == 1 or $product->count > 0): ?>
+                            <div class="product-available green">В наличии</div>
+                        <?php endif; ?>
                     <?php endif; ?>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
