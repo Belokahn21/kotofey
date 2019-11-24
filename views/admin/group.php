@@ -18,19 +18,13 @@ $this->title = Title::showTitle("Управление группами");
     <section class="group-form">
         <div class="group-form-wrap">
             <h1 class="title">Группы</h1>
-            <? $form = ActiveForm::begin(); ?>
-            <div class="tabs-container">
-                <ul class="tabs">
-                    <li class="tab-link current" data-tab="tab-1">Основное</li>
-                </ul>
-                <div id="tab-1" class="tab-content current">
-                    <?= $form->field($model, 'name')->textInput(); ?>
-                    <?= $form->field($model, 'parent')->dropDownList(ArrayHelper::map((new AuthItem())->threeGroups(), 'name', 'format_name'), ['prompt' => 'Родительская группа']); ?>
-                    <?= $form->field($model, 'description')->textInput(); ?>
-                </div>
-            </div>
-            <?= Html::submitButton('Добавить'); ?>
-            <? ActiveForm::end(); ?>
+            <?php $form = ActiveForm::begin(); ?>
+            <?= $this->render('_forms/_group', [
+                'model' => $model,
+                'form' => $form
+            ]); ?>
+            <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+            <?php ActiveForm::end(); ?>
         </div>
     </section>
     <h2 class="title">Список групп</h2>

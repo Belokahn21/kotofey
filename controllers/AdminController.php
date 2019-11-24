@@ -370,8 +370,23 @@ class AdminController extends Controller
         ]);
     }
 
-    public function actionGroup()
+    public function actionGroup($id = null)
     {
+
+        if ($id) {
+
+            $model = AuthItem::findOne(['name' => $id]);
+
+            if (!$model) {
+                throw new HttpException(404, 'Группа не найдена');
+            }
+
+
+            return $this->render('detail/group', [
+                'model' => $model
+            ]);
+        }
+
         $model = new AuthItem();
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
