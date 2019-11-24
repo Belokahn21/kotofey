@@ -1,13 +1,17 @@
 <?
 
 /* @var $this yii\web\View */
+
 /* @var $model \app\models\rbac\AuthItem */
 
+use app\models\rbac\AuthItemChild;
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use app\models\rbac\AuthItem;
+use yii\helpers\ArrayHelper;
 
 $this->title = Title::showTitle("Управление группами");
 ?>
@@ -21,33 +25,12 @@ $this->title = Title::showTitle("Управление группами");
                 </ul>
                 <div id="tab-1" class="tab-content current">
                     <?= $form->field($model, 'name')->textInput(); ?>
-                    <?= $form->field($model, 'parent')->dropDownList(\yii\helpers\ArrayHelper::map(Yii::$app->getAuthManager()->getRoles(), 'name', 'name'), ['prompt' => 'Родительская группа']); ?>
+                    <?= $form->field($model, 'parent')->dropDownList(ArrayHelper::map((new AuthItem())->threeGroups(), 'name', 'format_name'), ['prompt' => 'Родительская группа']); ?>
                     <?= $form->field($model, 'description')->textInput(); ?>
                 </div>
             </div>
             <?= Html::submitButton('Добавить'); ?>
             <? ActiveForm::end(); ?>
-        </div>
-        <div class="list-groups">
-            <? $auth = \Yii::$app->authManager; ?>
-            <? foreach(Yii::$app->getAuthManager()->getRoles() as &$role): ?>
-                <div class="group-item">
-                    <h4><?= $role->name; ?></h4>
-                    <?
-                    $childs = $auth->getChildRoles($role->name);
-                    array_shift($childs);
-                    ?>
-                    <ul class="list-childs">
-                        <?
-                        foreach ($childs as $child){
-                         ?>
-                            <li class="list-childs__item"><?=$child->name?></li>
-                        <?
-                        }
-                        ?>
-                    </ul>
-                </div>
-            <? endforeach; ?>
         </div>
     </section>
     <h2 class="title">Список групп</h2>

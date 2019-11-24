@@ -9,7 +9,7 @@ use app\models\entity\Order;
 <div class="order-type-form__title">Регистрация</div>
 <?= $form->field($user, 'phone')->textInput(['placeholder' => 'Телефон'])->label(false); ?>
 <?= $form->field($user, 'email')->textInput(['placeholder' => 'Почта'])->label(false); ?>
-<?= $form->field($user, 'password')->textInput(['placeholder' => 'Пароль'])->label(false); ?>
+<?= $form->field($user, 'password')->passwordInput(['placeholder' => 'Пароль'])->label(false); ?>
 <?= Html::hiddenInput('type', Order::SCENARIO_FAST_ORDER) ?>
 <?= Html::submitButton('Купить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>
