@@ -12,7 +12,8 @@ use app\models\tool\Currency;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\Stocks;
 
-/* @var @model \app\models\entity\Product $model */
+/* @var $model \app\models\entity\Product */
+/* @var $modelDelivery \app\models\entity\ProductOrder */
 /* @var $properties \app\models\entity\ProductProperties[] */
 
 $this->title = Title::showTitle("Товары"); ?>
@@ -21,12 +22,16 @@ $this->title = Title::showTitle("Товары"); ?>
 <?= Html::a("Посмотреть на сайте", $model->detail, ['target' => '_blank', 'class' => 'btn-back']); ?>
 <div class="clearfix"></div>
 <section>
-	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-	<?= $this->render('../_forms/_catalog', [
-		'model' => $model,
-		'form' => $form,
-		'properties' => $properties
-	]); ?>
-	<?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
-	<? ActiveForm::end(); ?>
+    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?= $this->render('../_forms/_catalog', [
+        'model' => $model,
+        'modelDelivery' => $modelDelivery,
+        'form' => $form,
+        'properties' => $properties
+    ]); ?>
+    <?php if (Yii::$app->request->get('action') == 'copy'): ?>
+        <?php echo Html::submitInput('Копировать', ['name' => 'action', 'class' => 'btn-main', 'value' => 'new']); ?>
+        <?php echo Html::submitInput('Отмена', ['name' => 'action', 'class' => 'btn-main', 'value' => 'cancel']); ?>
+    <? endif; ?>
+    <? ActiveForm::end(); ?>
 </section>

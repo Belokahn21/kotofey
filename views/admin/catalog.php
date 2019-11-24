@@ -11,7 +11,9 @@ use app\models\entity\InformersValues;
 use app\models\entity\Stocks;
 use app\models\entity\SiteSettings;
 
-/* @var @model \app\models\entity\Product $model */
+
+/* @var $model \app\models\entity\Product */
+/* @var $modelDelivery \app\models\entity\ProductOrder */
 /* @var $properties \app\models\entity\ProductProperties[] */
 
 $this->title = Title::showTitle("Товары"); ?>
@@ -24,6 +26,7 @@ $this->title = Title::showTitle("Товары"); ?>
 	<?= $this->render('_forms/_catalog', [
 		'model' => $model,
 		'form' => $form,
+		'modelDelivery' => $modelDelivery,
 		'properties' => $properties
 	]); ?>
 	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>

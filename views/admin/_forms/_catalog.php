@@ -1,5 +1,6 @@
 <?php
 
+use app\models\entity\ProductOrder;
 use app\models\entity\SiteSettings;
 use app\models\entity\Stocks;
 use yii\helpers\ArrayHelper;
@@ -7,6 +8,9 @@ use app\models\entity\Category;
 use app\models\entity\InformersValues;
 use app\models\entity\ProductPropertiesValues;
 use yii\helpers\Json;
+
+/* @var $model \app\models\entity\Product */
+/* @var $modelDelivery \app\models\entity\ProductOrder */
 
 ?>
 <div class="tabs-container">
@@ -19,24 +23,38 @@ use yii\helpers\Json;
     </ul>
 
     <div id="tab-1" class="tab-content current">
-        <?= $form->field($model, 'name'); ?>
-        <?= $form->field($model, 'description')->textarea(); ?>
-        <div class="product-form__price">
-            <?= $form->field($model, 'price')->textInput(['id' => 'id-price']); ?>
-            <div class="set-price">
-                <a href="" onclick="document.getElementById('id-price').value=(parseInt(document.getElementById('id-purchase').value)+parseInt((document.getElementById('id-purchase').value*<?= SiteSettings::getValueByCode('saleup') ?>)/100)); return false;">% наценка</a>
+        <div class="left-col">
+            <?= $form->field($model, 'name'); ?>
+            <?= $form->field($model, 'description')->textarea(); ?>
+            <div class="product-form__price">
+                <?= $form->field($model, 'price')->textInput(['id' => 'id-price']); ?>
+                <div class="set-price">
+                    <a href="" onclick="document.getElementById('id-price').value=(parseInt(document.getElementById('id-purchase').value)+parseInt((document.getElementById('id-purchase').value*<?= SiteSettings::getValueByCode('saleup') ?>)/100)); return false;">% наценка</a>
+                </div>
             </div>
+            <div class="product-form__purchase">
+                <?= $form->field($model, 'purchase')->textInput(['id' => 'id-purchase']); ?>
+            </div>
+            <div class="product-form__count">
+                <?= $form->field($model, 'count'); ?>
+            </div>
+            <div class="clearfix"></div>
+            <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел']); ?>
+            <div class="clearfix"></div>
+            <?= $form->field($model, 'has_store')->checkbox(); ?>
         </div>
-        <div class="product-form__purchase">
-            <?= $form->field($model, 'purchase')->textInput(['id' => 'id-purchase']); ?>
-        </div>
-        <div class="product-form__count">
-            <?= $form->field($model, 'count'); ?>
+        <div class="right-col">
+            Условия доставки заказа
+            <?= $form->field($model, 'is_product_order')->checkbox(); ?>
+            <div class="left-col">
+                <?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>
+            </div>
+            <div class="right-col">
+                <?= $form->field($modelDelivery, 'end')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать максимальное значение']); ?>
+            </div>
+            <div class="clearfix"></div>
         </div>
         <div class="clearfix"></div>
-        <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел']); ?>
-        <div class="clearfix"></div>
-        <?= $form->field($model, 'has_store')->checkbox(); ?>
     </div>
     <div id="tab-2" class="tab-content">
         <?= $form->field($model, 'seo_description')->textarea(); ?>

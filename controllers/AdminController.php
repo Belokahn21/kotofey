@@ -13,6 +13,7 @@ use app\models\entity\OrdersItems;
 use app\models\entity\OrderStatus;
 use app\models\entity\NewsCategory;
 use app\models\entity\Payment;
+use app\models\entity\ProductOrder;
 use app\models\entity\ProductProperties;
 use app\models\entity\Promo;
 use app\models\entity\Providers;
@@ -112,8 +113,6 @@ class AdminController extends Controller
         if (Yii::$app->request->get('action') == 'delete') {
             $item = Product::findOne($id);
 
-            $item->removeOldImage();    // удалить превью
-
             $item->removeOldImages();   // удалить галерею
 
             if ($item->delete()) {
@@ -133,6 +132,7 @@ class AdminController extends Controller
 
         if ($id == null) {
             $model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
+            $modelDelivery = new ProductOrder();
             $dataProvider = $model->search(\Yii::$app->request->get());
             $properties = ProductProperties::find()->all();
 
@@ -143,6 +143,7 @@ class AdminController extends Controller
 
             return $this->render('catalog', [
                 'model' => $model,
+                'modelDelivery' => $modelDelivery,
                 'dataProvider' => $dataProvider,
                 'properties' => $properties,
             ]);
@@ -151,6 +152,9 @@ class AdminController extends Controller
         $model = Product::findOne($id);
         $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
         $properties = ProductProperties::find()->all();
+        if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) {
+            $modelDelivery = new ProductOrder();
+        }
 
         if (Yii::$app->request->get('action') == 'copy') {
 
@@ -175,6 +179,7 @@ class AdminController extends Controller
 
         return $this->render('detail/catalog', [
             'model' => $model,
+            'modelDelivery' => $modelDelivery,
             'properties' => $properties,
         ]);
     }

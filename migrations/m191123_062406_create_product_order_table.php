@@ -14,7 +14,7 @@ class m191123_062406_create_product_order_table extends Migration
     {
         $this->createTable('{{%product_order}}', [
             'id' => $this->primaryKey(),
-            'product_id' => $this->integer()->notNull(),
+            'product_id' => $this->integer()->notNull()->unique(),
             'start' => $this->integer()->notNull(),
             'end' => $this->integer()->notNull(),
             'created_at' => $this->integer(),

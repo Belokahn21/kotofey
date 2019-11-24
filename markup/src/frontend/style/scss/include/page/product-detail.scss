@@ -132,6 +132,10 @@
   border: 1px solid green;
   display: inline;
   padding: 3px;
+
+  &.red {
+    border: 1px $mainActiveColor solid;
+  }
 }
 
 .product-rating {
