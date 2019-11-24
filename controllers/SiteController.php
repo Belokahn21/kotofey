@@ -373,9 +373,9 @@ class SiteController extends Controller
 					$order->scenario = Yii::$app->request->post('type');
 				}
 				$order->user = $user->id;
-				if (Basket::getInstance()->cash() < 500) {
-					$order->summared = 100;
-				}
+//				if (Basket::getInstance()->cash() < 500) {
+//					$order->summared = 100;
+//				}
 				if ($order->load(Yii::$app->request->post()) && $order->validate()) {
 					if ($order->save() === false) {
 						Notify::setErrorNotify(Debug::modelErrors($order));

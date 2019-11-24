@@ -36,11 +36,27 @@ $this->title = Title::showTitle("Заказ №" . $model->id); ?>
     </div>
     <div class="right-col">
         <h3 class="title">Товары в заказе</h3>
-        <ul>
-            <li>название|цена|количество|итого</li>
+        <ul class="order-list-item">
+            <li class="list-item header">
+                <div class="list-item__name">название</div>
+                <div class="list-item__price">цена</div>
+                <div class="list-item__count">количество</div>
+                <div class="list-item__total">итого</div>
+            </li>
             <?php /* @var $item OrdersItems */ ?>
             <?php foreach ($items as $item): ?>
-                <li><?= $item->name; ?>|<?= $item->price; ?>|<?= $item->count; ?>|<?= $item->count * $item->price; ?></li>
+                <li class="list-item">
+                    <div class="list-item__name">
+                        <?php if ($item->product_id): ?>
+                            <?= Html::a($item->product->name, '/admin/catalog/' . $item->product->id . '/'); ?>
+                        <?php else: ?>
+                            <?= $item->name; ?>
+                        <?php endif; ?>
+                    </div>
+                    <div class="list-item__price"><?= $item->price; ?></div>
+                    <div class="list-item__count"><?= $item->count; ?></div>
+                    <div class="list-item__total"><?= $item->count * $item->price; ?></div>
+                </li>
             <?php endforeach; ?>
         </ul>
         <?php // $model->product_id = ArrayHelper::getColumn(OrdersItems::find()->select('product_id')->where(['order_id' => $model->id])->all(), 'product_id'); ?>

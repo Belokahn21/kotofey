@@ -96,7 +96,7 @@ class AjaxController extends Controller
 			$basketItem = new BasketItem();
 			$basketItem->setProductId($product->id);
 			$basketItem->setCount($count);
-			$basketItem->setPrice($product->id);
+			$basketItem->setPrice($product->price);
 			$basketItem->setName($product->name);
 
 			$basket = new Basket();
