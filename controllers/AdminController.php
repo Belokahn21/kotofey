@@ -34,6 +34,7 @@ use app\models\search\InformersSearchForm;
 use app\models\search\InformersValuesSearchForm;
 use app\models\search\NewsSearchForm;
 use app\models\search\NewsCategorySearchForm;
+use app\models\search\PermissionsSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\ProvidersSearchForm;
@@ -394,6 +395,8 @@ class AdminController extends Controller
     public function actionPermission()
     {
         $model = new AuthItem();
+        $searchModel = new PermissionsSearchForm();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
@@ -404,7 +407,9 @@ class AdminController extends Controller
             }
         }
         return $this->render('permission', [
-            'model' => $model
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel
         ]);
     }
 

@@ -1,22 +1,26 @@
 <?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 23:13
- */
 
 namespace app\models\rbac;
 
-use app\models\tool\Debug;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
+/**
+ * AuthItem model
+ *
+ * @property string $name
+ * @property string $type
+ * @property string $description
+ * @property string $rule_name
+ * @property string $data
+ * @property integer $created_at
+ * @property integer $updated_at
+ */
 class AuthItem extends \yii\db\ActiveRecord
 {
     const TYPE_ROLE = 1;
     const TYPE_PERMISSION = 2;
 
-//    public $name;
-//    public $description;
     public $parent;
 
     public function attributeLabels()
@@ -25,6 +29,13 @@ class AuthItem extends \yii\db\ActiveRecord
             'name' => 'Название',
             'description' => 'Описание',
             'parent' => 'Родительская группа',
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
         ];
     }
 

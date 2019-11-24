@@ -51,9 +51,7 @@ $this->title = Title::showTitle("Список заказов"); ?>
     'filterModel' => $model,
     'emptyText' => 'Закзаы отсутствуют',
     'columns' => [
-        [
-            'attribute' => 'id',
-        ],
+        'id',
         [
             'attribute' => 'status',
             'value' => function ($model) {
@@ -124,9 +122,9 @@ $this->title = Title::showTitle("Список заказов"); ?>
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
-				'view' => function ($url, $model, $key) {
+                'view' => function ($url, $model, $key) {
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
-				},
+                },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/order/$key"]));
                 },
