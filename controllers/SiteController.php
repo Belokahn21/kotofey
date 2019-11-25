@@ -316,7 +316,7 @@ class SiteController extends Controller
 
 		$properties = ProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', ProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
 
-		$left_product = Product::find()->where(['category' => $category->,'active' => true])->andWhere(['<>', 'id', $product->id])->orderBy(new Expression('rand()'))->one();
+		$left_product = Product::find()->where(['category' => $category->id, 'active' => true])->andWhere(['<>', 'id', $product->id])->orderBy(new Expression('rand()'))->one();
 		$right_product = Product::find()->where(['category' => $category->id, 'active' => true])->andWhere(['<>', 'id', $product->id])->orderBy(new Expression('rand()'))->one();
 
 		return $this->render('product', [
