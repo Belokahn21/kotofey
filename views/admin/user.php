@@ -52,7 +52,7 @@ $this->title = Title::showTitle("Пользователи"); ?>
             'attribute' => 'last_name',
         ],
         [
-            'attribute' => 'bonus',
+            'label' => 'Бонусы',
             'format' => 'raw',
             'value' => function ($model) {
                 return Discount::findByUserId($model->id)->count;
