@@ -35,6 +35,7 @@ use app\models\tool\vk\entity\VKUser;
 use app\models\tool\vk\VKWeb;
 use app\widgets\notification\Notify;
 use yii\data\Pagination;
+use yii\db\Expression;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
@@ -315,8 +316,13 @@ class SiteController extends Controller
 
 		$properties = ProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', ProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
 
+		$left_product = Product::find()->where(['category' => $category->id])->andWhere(['<>', 'id', $product->id])->orderBy(new Expression('rand()'))->one();
+		$right_product = Product::find()->where(['category' => $category->id])->andWhere(['<>', 'id', $product->id])->orderBy(new Expression('rand()'))->one();
+
 		return $this->render('product', [
 			'product' => $product,
+			'left_product' => $left_product,
+			'right_product' => $right_product,
 			'category' => $category,
 			'properties' => $properties
 		]);

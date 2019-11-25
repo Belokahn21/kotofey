@@ -375,3 +375,29 @@
   -moz-border-radius: 0.3em;
   border-radius: 0.3em;
 }
+
+.product-switch {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.product-switch__item {
+  border: 1px $mainActiveColor solid;
+
+  &:hover {
+    border: 1px $mainActiveColor dashed;
+  }
+}
+
+.product-switch__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: $mainActiveColor!important;
+  padding: 10px;
+  text-decoration: none!important;
+}
