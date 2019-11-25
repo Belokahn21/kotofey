@@ -21,10 +21,10 @@ use app\widgets\promoCart\promoCartWidget;
 <!--</div>-->
 <div class="order-type-form__title">Информация о заказе</div>
 <div class="order-type-form__element">
-    <?= $form->field($order, 'delivery')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'), ['prompt' => 'Вариант доставки'])->label(false) ?>
+    <?= $form->field($order, 'delivery_id')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'), ['prompt' => 'Вариант доставки'])->label(false) ?>
 </div>
 <div class="order-type-form__element">
-    <?= $form->field($order, 'delivery')->dropDownList(ArrayHelper::map($payment, 'id', 'name'), ['prompt' => 'Вариант оплаты'])->label(false) ?>
+    <?= $form->field($order, 'payment_id')->dropDownList(ArrayHelper::map($payment, 'id', 'name'), ['prompt' => 'Вариант оплаты'])->label(false) ?>
 </div>
 <div class="order-type-form__element">
     <?= $form->field($order, 'comment')->textarea(['placeholder' => 'Комментарий к заказу']) ?>

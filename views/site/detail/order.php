@@ -39,6 +39,18 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     <?= $order->getStatus(); ?>
                 </td>
             </tr>
+            <tr>
+                <td>
+                    Оплачен
+                </td>
+                <td>
+                    <?php if ($order->is_paid): ?>
+                        <span class="green">Оплачен</span>
+                    <?php else: ?>
+                        <span class="red">Не оплачен</span>
+                    <?php endif; ?>
+                </td>
+            </tr>
         </table>
     </div>
     <div class="detail-order-info-items-wrap">

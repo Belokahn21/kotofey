@@ -378,10 +378,7 @@ class SiteController extends Controller
 				if (Yii::$app->request->post('type')) {
 					$order->scenario = Yii::$app->request->post('type');
 				}
-				$order->user = $user->id;
-//				if (Basket::getInstance()->cash() < 500) {
-//					$order->summared = 100;
-//				}
+				$order->user_id = $user->id;
 				if ($order->load(Yii::$app->request->post()) && $order->validate()) {
 					if ($order->save() === false) {
 						Notify::setErrorNotify(Debug::modelErrors($order));
@@ -447,7 +444,7 @@ class SiteController extends Controller
 					$order->summared = 100;
 				}
 
-				$order->user = $user->id;
+				$order->user_id = $user->id;
 				if ($order->load(Yii::$app->request->post()) or $order->validate()) {
 					if ($order->save() === false) {
 						Notify::setErrorNotify(Debug::modelErrors($order));
@@ -489,10 +486,10 @@ class SiteController extends Controller
 				'user' => $user
 			]);
 		} else {
-			$userId = \Yii::$app->user->identity->id;
+			$userId = \Yii::$app->user->id;
 			$profile = User::findOne($userId);
 			$profile->scenario = User::SCENARIO_UPDATE;
-			$orders = Order::find()->where(['user' => $profile->id])->all();
+			$orders = Order::find()->where(['user_id' => $profile->id])->all();
 			$support_categories = SupportCategory::find()->all();
 			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
@@ -620,7 +617,7 @@ class SiteController extends Controller
 		try {
 			$orders = Order::findByFilter(\Yii::$app->request->get());
 		} catch (\Exception $exception) {
-			$orders = Order::findAll(['user' => \Yii::$app->user->identity->id]);
+			$orders = Order::findAll(['user_id' => \Yii::$app->user->id]);
 		}
 
 		if ($id) {

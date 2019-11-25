@@ -25,18 +25,18 @@ $this->title = Title::showTitle("Список заказов"); ?>
             <h3 class="title">Информация о заказе</h3>
             <div class="new-order-info">
                 <?= $form->field($model, 'status')->dropDownList(ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'), ['prompt' => 'Статус заказа']); ?>
-                <?= $form->field($model, 'payment')->dropDownList(ArrayHelper::map(Payment::find()->all(), 'id', 'name'), ['prompt' => 'Способ оплаты']); ?>
-                <?= $form->field($model, 'delivery')->dropDownList(ArrayHelper::map(Delivery::find()->all(), 'id', 'name'), ['prompt' => 'Способ доставки']); ?>
+                <?= $form->field($model, 'payment_id')->dropDownList(ArrayHelper::map(Payment::find()->all(), 'id', 'name'), ['prompt' => 'Способ оплаты']); ?>
+                <?= $form->field($model, 'delivery_id')->dropDownList(ArrayHelper::map(Delivery::find()->all(), 'id', 'name'), ['prompt' => 'Способ доставки']); ?>
             </div>
-            <?= $form->field($model, 'paid')->radioList(array("Не оплачено", "Оплачено")); ?>
+            <?= $form->field($model, 'is_paid')->radioList(array("Не оплачено", "Оплачено")); ?>
             <?= $form->field($model, 'comment')->textarea(); ?>
             <h3 class="title">Покупатель</h3>
-            <?= $form->field($model, 'user')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Покупатель']); ?>
+            <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Покупатель']); ?>
         </div>
-        <div class="right-col">
-            <h3 class="title">Товары в заказе</h3>
-            <?= $form->field($model, 'product_id[]')->widget('\app\widgets\SelectProductDropdown')->label(false) ?>
-        </div>
+<!--        <div class="right-col">-->
+<!--            <h3 class="title">Товары в заказе</h3>-->
+<!--            --><?//= $form->field($model, 'product_id[]')->widget('\app\widgets\SelectProductDropdown')->label(false) ?>
+<!--        </div>-->
         <div class="clearfix"></div>
         <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
         <? ActiveForm::end(); ?>
@@ -55,36 +55,36 @@ $this->title = Title::showTitle("Список заказов"); ?>
             }
         ],
         [
-            'attribute' => 'delivery',
+            'attribute' => 'delivery_id',
             'value' => function ($model) {
-                if ($model->delivery > 0) {
-                    return Delivery::findOne($model->delivery)->name;
+                if ($model->delivery_id > 0) {
+                    return Delivery::findOne($model->delivery_id)->name;
                 } else {
                     return "Не указано";
                 }
             }
         ],
         [
-            'attribute' => 'payment',
+            'attribute' => 'payment_id',
             'value' => function ($model) {
-                if ($model->payment > 0) {
-                    return Payment::findOne($model->payment)->name;
+                if ($model->payment_id > 0) {
+                    return Payment::findOne($model->payment_id)->name;
                 } else {
                     return "Не указано";
                 }
             }
         ],
         [
-            'attribute' => 'paid',
+            'attribute' => 'is_paid',
             'value' => function ($model) {
-                return ($model->paid == true) ? "Оплачено" : "Не оплачено";
+                return ($model->is_paid == true) ? "Оплачено" : "Не оплачено";
             }
         ],
         [
-            'attribute' => 'user',
+            'attribute' => 'user_id',
             "format" => 'raw',
             'value' => function ($model) {
-                return Html::a(User::findOne($model->user)->email, '/admin/user/' . $model->user . '/');
+                return Html::a(User::findOne($model->user_id)->email, '/admin/user/' . $model->user_id . '/');
             }
         ],
         [

@@ -45,10 +45,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
                         <? endif; ?>
                     </td>
                     <td class="list-products__table-pay">
-                        <? if ($order->paid == false): ?>
-                            <?= Html::a('Оплатить', $order->pailink, ['class' => 'btn-pay']); ?>
+                        <? if ($order->is_paid == false): ?>
+                            <span class="red">Не оплачено</span>
                         <? else: ?>
-                            <span style="color:#3c763d;">Оплачено</span>
+                            <span class="green">Оплачено</span>
                         <? endif; ?>
                     </td>
                     <td>

@@ -1,34 +1,25 @@
-<?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 14:22
- */
+<?php
 
 namespace app\models\entity;
 
 
-use app\models\tool\payments\Robokassa;
-use app\models\tool\Price;
-use app\models\tool\vk\VKMethods;
 use yii\behaviors\TimestampBehavior;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
 
 
 /**
  * Order model
  *
  * @property integer $id
- * @property integer $user
- * @property integer $delivery
- * @property integer $payment
+ * @property integer $user_id
+ * @property integer $delivery_id
+ * @property integer $payment_id
  * @property string $comment
  * @property integer $status
- * @property boolean $paid
+ * @property boolean $is_paid
  * @property string $promo_code
- * @property string $summared
+ * @property string $is_bonus
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -50,25 +41,25 @@ class Order extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_FAST_ORDER => ['payment', 'delivery', 'user', 'summared', 'paid', 'status', 'comment', 'product_id', 'type'],
-            self::SCENARIO_SIMPLE_ORDER => ['payment', 'delivery', 'user', 'summared', 'paid', 'status', 'comment', 'product_id', 'type'],
+            self::SCENARIO_FAST_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
+            self::SCENARIO_SIMPLE_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
         ];
     }
 
     public function rules()
     {
         return [
-            [['payment', 'delivery', 'user', 'summared', 'type'], 'integer'],
+            [['payment_id', 'delivery_id', 'user_id', 'type'], 'integer'],
 
-            [['payment', 'delivery', 'user'], 'default', 'value' => 0],
+            [['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
 
-            ['paid', 'default', 'value' => false],
+            [['is_paid', 'is_bonus'], 'default', 'value' => false],
 
-            [['summared', 'status'], 'default', 'value' => 0],
+            [['is_bonus'], 'boolean'],
 
             ['type', 'default', 'value' => self::SCENARIO_SIMPLE_ORDER],
 
-            [['user'], 'required', 'message' => '{attribute} необходимо указать'],
+            [['user_id'], 'required', 'message' => '{attribute} необходимо указать'],
 
             [['comment', 'promo_code'], 'string'],
 
@@ -87,25 +78,29 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        parent::afterSave($insert, $changedAttributes);
 
         if ($this->is_update) {
-            if ($this->paid == 1) {
-                if ($discount = Discount::findByUserId(\Yii::$app->user->id)) {
+            if ($this->is_paid == 1 && $this->is_bonus == 0) {
+                if ($discount = Discount::findByUserId($this->user_id)) {
                     $discount->count += ceil($this->cash() * 0.05);
                     if ($discount->validate()) {
                         $discount->update();
                     }
                 } else {
                     $discount = new Discount();
-                    $discount->user_id = $this->user;
+                    $discount->user_id = $this->user_id;
                     $discount->count = ceil($this->cash() * 0.05);
                     if ($discount->validate()) {
                         $discount->save();
                     }
                 }
+
+                $this->is_bonus = true;
+                $this->update();
             }
         }
+
+        parent::afterSave($insert, $changedAttributes);
     }
 
     public function behaviors()
@@ -120,10 +115,10 @@ class Order extends ActiveRecord
         return [
             'id' => 'ID',
             'status' => 'Статус',
-            'payment' => 'Способ оплаты',
-            'delivery' => 'Способ доставки',
-            'paid' => 'Оплачено',
-            'user' => 'Покупатель',
+            'payment_id' => 'Способ оплаты',
+            'delivery_id' => 'Способ доставки',
+            'is_paid' => 'Оплачено',
+            'user_id' => 'Покупатель',
             'cash' => 'Сумма заказа',
             'created_at' => 'Дата создания',
             'comment' => 'Комментарий к заказу',
@@ -188,7 +183,7 @@ class Order extends ActiveRecord
             throw new \Exception("Need auth user.");
         }
 
-        $params['filter']['user'] = \Yii::$app->user->identity->id;
+        $params['filter']['user_id'] = \Yii::$app->user->identity->id;
 
         return static::find()->where($params['filter'])->all();
     }
@@ -196,7 +191,7 @@ class Order extends ActiveRecord
     public static function orderProfit()
     {
         $cash = 0;
-        $orders = Order::find()->where(['paid' => 1])->all();
+        $orders = Order::find()->where(['is_paid' => 1])->all();
 
 
         /* @var $order Order */
@@ -210,7 +205,7 @@ class Order extends ActiveRecord
 
     public function hasAccess()
     {
-        return $this->user == \Yii::$app->user->identity->id;
+        return $this->user_id == \Yii::$app->user->id;
     }
 
     public function search($params)
@@ -225,8 +220,8 @@ class Order extends ActiveRecord
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'delivery', $this->delivery])
-            ->andFilterWhere(['like', 'payment', $this->payment]);
+        $query->andFilterWhere(['like', 'delivery_id', $this->delivery_id])
+            ->andFilterWhere(['like', 'payment_id', $this->payment_id]);
 
         return $dataProvider;
     }

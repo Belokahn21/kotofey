@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                                     Сумма: <?= Price::format($order->cash()); ?> <?= Currency::getInstance()->show(); ?>
                                 </li>
                                 <li class="slide-order-info__item">
-                                    <?= (($order->paid == 1) ? 'Оплачен' : 'Не оплачен'); ?>
+                                    <?= (($order->is_paid == 1) ? 'Оплачен' : 'Не оплачен'); ?>
                                 </li>
                             </ul>
                         </a>
