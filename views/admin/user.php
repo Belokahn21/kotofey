@@ -1,12 +1,12 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use app\models\entity\UserSex;
+use app\models\entity\Discount;
 
 /* @var $model \app\models\entity\User */
 /* @var $groups \app\models\rbac\AuthItem[] */
@@ -30,12 +30,8 @@ $this->title = Title::showTitle("Пользователи"); ?>
     'filterModel' => $model,
     'emptyText' => 'Пользователи отсутствуют',
     'columns' => [
-        [
-            'attribute' => 'id',
-        ],
-        [
-            'attribute' => 'email',
-        ],
+        'id',
+        'email',
         [
             'attribute' => 'sex',
             'value' => function ($model) {
@@ -54,6 +50,13 @@ $this->title = Title::showTitle("Пользователи"); ?>
         ],
         [
             'attribute' => 'last_name',
+        ],
+        [
+            'attribute' => 'bonus',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Discount::findByUserId($model->id)->count;
+            }
         ],
         [
             'attribute' => 'created_at',
