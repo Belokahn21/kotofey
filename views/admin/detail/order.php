@@ -31,7 +31,7 @@ $this->title = Title::showTitle("Заказ №" . $model->id); ?>
         <?= $form->field($model, 'paid')->radioList(array("Не оплачено", "Оплачено")); ?>
         <?= $form->field($model, 'comment')->textarea(); ?>
         <h3 class="title">Покупатель</h3>
-        <?= $form->field($model, 'user')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'name'), ['prompt' => 'Покупатель']); ?>
+        <?= $form->field($model, 'user')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Покупатель']); ?>
 
     </div>
     <div class="right-col">

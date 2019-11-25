@@ -24,18 +24,14 @@ $this->title = Title::showTitle("Список заказов"); ?>
                         class="order-summ-count"><?= rand(); ?></span><?= (new Currency())->show(); ?></span>
             <h3 class="title">Информация о заказе</h3>
             <div class="new-order-info">
-                <?= $form->field($model, 'status')->dropDownList(ArrayHelper::map(OrderStatus::find()->all(), 'id',
-                    'name'), ['prompt' => 'Статус заказа']); ?>
-                <?= $form->field($model, 'payment')->dropDownList(ArrayHelper::map(Payment::find()->all(), 'id',
-                    'name'), ['prompt' => 'Способ оплаты']); ?>
-                <?= $form->field($model, 'delivery')->dropDownList(ArrayHelper::map(Delivery::find()->all(), 'id',
-                    'name'), ['prompt' => 'Способ доставки']); ?>
+                <?= $form->field($model, 'status')->dropDownList(ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'), ['prompt' => 'Статус заказа']); ?>
+                <?= $form->field($model, 'payment')->dropDownList(ArrayHelper::map(Payment::find()->all(), 'id', 'name'), ['prompt' => 'Способ оплаты']); ?>
+                <?= $form->field($model, 'delivery')->dropDownList(ArrayHelper::map(Delivery::find()->all(), 'id', 'name'), ['prompt' => 'Способ доставки']); ?>
             </div>
             <?= $form->field($model, 'paid')->radioList(array("Не оплачено", "Оплачено")); ?>
             <?= $form->field($model, 'comment')->textarea(); ?>
             <h3 class="title">Покупатель</h3>
-            <?= $form->field($model, 'user')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'name'),
-                ['prompt' => 'Покупатель']); ?>
+            <?= $form->field($model, 'user')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Покупатель']); ?>
         </div>
         <div class="right-col">
             <h3 class="title">Товары в заказе</h3>

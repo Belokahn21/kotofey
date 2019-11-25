@@ -118,14 +118,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
             </div>
         </li>
         <li class="profile-menu__item">
-            <h2 class="profile-menu__item__title">Скидка <i class="fas fa-coins"></i></h2>
+            <h2 class="profile-menu__item__title">Бонусы за покупку <i class="fas fa-coins"></i></h2>
             <div class="profile-menu__discount">
                 <div class='profile-menu__discount-container'><span class="span"></span>
                     <span class=text>
                         <?php if ($profile->discount): ?>
-                            <?= $profile->discount->count; ?>%
+                            <?= $profile->discount->count; ?>
                         <?php else: ?>
-                            0%
+                            0
                         <?php endif; ?>
                         </span>
                 </div>
