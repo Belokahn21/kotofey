@@ -34,11 +34,14 @@ class TodoList extends ActiveRecord
 	public function rules()
 	{
 		return [
-			[['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
+			[['name', 'user_id'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
 			[['description'], 'string'],
 
+			[['close'], 'boolean'],
 			[['close'], 'default', 'value' => false],
+
+			[['user_id'], 'default', 'value' => \Yii::$app->user->id],
 		];
 	}
 
