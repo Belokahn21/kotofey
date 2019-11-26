@@ -1,33 +1,18 @@
-@import "include/color";
-
-@import "modules/init";
-
+@import "modules/bootstrap";
 @import "include/general";
-@import "include/control-panel";
-@import "include/tasks";
-@import "include/shop-info";
-@import "include/login";
-@import "include/form";
-@import "include/new-product";
+@import "include/buttons";
 
-.page-wrap {
-  width: 80%;
-  height: 100%;
-  margin-left: 20%;
-  padding: 10px;
+.show-dashboard {
+  display: none;
+  background: #0b0b0b;
+  color: white;
+  padding: 0.25em 0.5em;
+  border-radius: 0.3em;
 }
 
-.page-wrap.login {
-  width: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px green solid;
-}
 
-.page {
-  width: 100%;
-}
+@import "include/left_sidebar";
+@import "include/main";
 
+
+@import "include/page/index";
