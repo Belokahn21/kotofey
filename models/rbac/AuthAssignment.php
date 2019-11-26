@@ -3,10 +3,16 @@
 namespace app\models\rbac;
 
 
-use app\models\tool\Debug;
 use Yii;
 use yii\db\ActiveRecord;
 
+/**
+ * AuthAssignment model
+ *
+ * @property string $item_name
+ * @property integer $user_id
+ * @property integer $created_at
+ */
 class AuthAssignment extends ActiveRecord
 {
 	public static function tableName()

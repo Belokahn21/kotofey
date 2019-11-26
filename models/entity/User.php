@@ -1,9 +1,4 @@
-<?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 2:25
- */
+<?php
 
 namespace app\models\entity;
 
@@ -15,7 +10,6 @@ use mohorev\file\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\data\ActiveDataProvider;
-use yii\rbac\Assignment;
 use yii\web\IdentityInterface;
 
 /**
@@ -176,7 +170,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function getGroup()
     {
-        return AuthItem::findOne(['name' => AuthAssignment::findOne(['user_id' => $this->id])]);
+        return AuthItem::findOne(['name' => AuthAssignment::findOne(['user_id' => $this->id])->item_name]);
     }
 
     //---------------------------------
