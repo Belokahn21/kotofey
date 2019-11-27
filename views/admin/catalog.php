@@ -19,97 +19,105 @@ use app\models\entity\SiteSettings;
 $this->title = Title::showTitle("Товары"); ?>
 <section>
     <h1 class="title">Товары</h1>
+
+    <div class="catalog-control">
+        <?= Html::a("Экспорт товаров в YML", "?export=yml", ['class' => 'btn-main']); ?>
+
+        <div class="pre-load-catalog-wrap">
+            <input type="text" name="url" placeholder="Ссылка на подгрузку" class="pre-load-catalog">
+        </div>
+    </div>
+
+
     <div class="celearfix"></div>
-	<?= Html::a("Экспорт товаров в YML", "?export=yml"); ?>
-    <div class="celearfix"></div>
-	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-	<?= $this->render('_forms/_catalog', [
-		'model' => $model,
-		'form' => $form,
-		'modelDelivery' => $modelDelivery,
-		'properties' => $properties
-	]); ?>
-	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-	<? ActiveForm::end(); ?>
+    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?= $this->render('_forms/_catalog', [
+        'model' => $model,
+        'form' => $form,
+        'modelDelivery' => $modelDelivery,
+        'properties' => $properties
+    ]); ?>
+    <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+    <? ActiveForm::end(); ?>
 </section>
 <div class="clearfix"></div>
 <h2>Список товаров</h2>
 <?= GridView::widget([
-	'dataProvider' => $dataProvider,
-	'filterModel' => $model,
-	'emptyText' => 'Товары отсутствуют',
-	'columns' => [
-		'id',
-		'article',
-		'code',
-		[
-			'attribute' => 'active',
-			'format' => 'raw',
-			'value' => function ($model) {
-				if ($model->active == 1) {
-					return Html::tag('div', 'Активен', ['style' => 'color: green;']);
-				} else {
-					return Html::tag('div', 'Неактивен', ['style' => 'color: red;']);
-				}
-			}
-		],
-		[
-			'attribute' => 'name',
-			'format' => 'raw',
-			'value' => function ($model) {
-				return Html::a($model->name, '/admin/catalog/' . $model->id . '/');
-			}
-		],
-		[
-			'attribute' => 'price',
-			'format' => 'raw',
-			'value' => function ($model) {
-				if (!empty($model->purchase) && !empty($model->price)) {
-					return sprintf("%s (%s%%)", $model->price, ceil(($model->price - $model->purchase) / $model->purchase * 100));
-				}
-				return $model->price;
-			}
-		],
-		'purchase',
-		[
-			'attribute' => 'category',
-			'format' => 'raw',
-			'value' => function ($model) {
-				$category = Category::findOne($model->category);
-				if ($category) {
-					return Html::a($category->name, '/admin/category/' . $model->id . '/', ['target' => '_blank']);
-				}
-				return "Без категории";
-			}
-		],
-		'count',
-		[
-			'attribute' => 'image',
-			'format' => 'raw',
-			'value' => function ($model) {
-				return Html::img('/web/upload/' . $model->image, ['width' => 70]);
-			}
-		],
-		[
-			'attribute' => 'created_at',
-			'format' => ['date', 'dd.MM.YYYY'],
-			'options' => ['width' => '200']
-		],
-		[
-			'class' => 'yii\grid\ActionColumn',
-			'buttons' => [
-				'view' => function ($url, $model, $key) {
-					return Html::a('<i class="fas fa-copy"></i>', "/admin/catalog/$key/?action=copy");
-				},
-				'update' => function ($url, $model, $key) {
-					return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/catalog/$key"]));
-				},
-				'delete' => function ($url, $model, $key) {
-					return Html::a('<i class="fas fa-trash-alt"></i>',
-						Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
-				},
-			]
-		],
-	],
+    'dataProvider' => $dataProvider,
+    'filterModel' => $model,
+    'emptyText' => 'Товары отсутствуют',
+    'columns' => [
+        'id',
+        'article',
+        'code',
+        [
+            'attribute' => 'active',
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->active == 1) {
+                    return Html::tag('div', 'Активен', ['style' => 'color: green;']);
+                } else {
+                    return Html::tag('div', 'Неактивен', ['style' => 'color: red;']);
+                }
+            }
+        ],
+        [
+            'attribute' => 'name',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::a($model->name, '/admin/catalog/' . $model->id . '/');
+            }
+        ],
+        [
+            'attribute' => 'price',
+            'format' => 'raw',
+            'value' => function ($model) {
+                if (!empty($model->purchase) && !empty($model->price)) {
+                    return sprintf("%s (%s%%)", $model->price, ceil(($model->price - $model->purchase) / $model->purchase * 100));
+                }
+                return $model->price;
+            }
+        ],
+        'purchase',
+        [
+            'attribute' => 'category',
+            'format' => 'raw',
+            'value' => function ($model) {
+                $category = Category::findOne($model->category);
+                if ($category) {
+                    return Html::a($category->name, '/admin/category/' . $model->id . '/', ['target' => '_blank']);
+                }
+                return "Без категории";
+            }
+        ],
+        'count',
+        [
+            'attribute' => 'image',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::img('/web/upload/' . $model->image, ['width' => 70]);
+            }
+        ],
+        [
+            'attribute' => 'created_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+            'options' => ['width' => '200']
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+                    return Html::a('<i class="fas fa-copy"></i>', "/admin/catalog/$key/?action=copy");
+                },
+                'update' => function ($url, $model, $key) {
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/catalog/$key"]));
+                },
+                'delete' => function ($url, $model, $key) {
+                    return Html::a('<i class="fas fa-trash-alt"></i>',
+                        Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
+                },
+            ]
+        ],
+    ],
 ]); ?>
 <div style="clear: both;"></div>

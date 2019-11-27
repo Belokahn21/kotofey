@@ -92,7 +92,7 @@ $this->title = Title::showTitle("Главная страница");
 
             <li class="block-info__item">
                 <div class="item-wrap">
-                    <div class="block-info__icon" data-toggle="modal" data-target="#show-search-stat">
+                    <div class="block-info__icon interactive" data-toggle="modal" data-target="#show-search-stat">
                         <i class="fas fa-search"></i>
                     </div>
                     <div class="block-info__content">

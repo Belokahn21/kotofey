@@ -42,6 +42,13 @@
     border-radius: 50%;
     font-size: 35px;
   }
+
+  &.interactive {
+    i:hover {
+      cursor: pointer;
+      border: 3px #00a7df solid;
+    }
+  }
 }
 
 .block-info__content {
@@ -127,6 +134,20 @@
 
 .todo__title {
   font-size: 22px;
+
+  i {
+    font-size: 14px;
+    padding: 4px;
+    cursor: pointer;
+    border-radius: 1em;
+    background: deepskyblue;
+    border: 3px deepskyblue solid;
+    color: white;
+  }
+
+  i:hover {
+    border: 3px #00a9e2 solid;
+  }
 }
 
 .todo-list {
@@ -142,6 +163,11 @@
   flex-direction: row;
   justify-content: stretch;
   text-align: center;
+  padding: 5px;
+
+  &:not(:last-child) {
+    border-bottom: 1px silver solid;
+  }
 
   div {
     width: 25%;
