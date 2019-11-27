@@ -20,17 +20,19 @@ class AdminAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/admin.css',
-        'css/tabs.css',
+        'css/backend.min.css',
+//        'css/admin.css',
+//        'css/tabs.css',
     ];
     public $js = [
 //        'plugins/editor/ckeditor/ckeditor.js',
-        'https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js',
-        'js/tabs.js',
-        'js/admin.js',
+//        'https://cdn.ckeditor.com/4.11.3/standard/ckeditor.js',
+//        'js/tabs.js',
+//        'js/admin.js',
+        'js/backend.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
+//        'yii\bootstrap\BootstrapAsset',
     ];
 }

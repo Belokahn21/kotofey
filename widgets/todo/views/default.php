@@ -1,55 +1,38 @@
-<?
-
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\bootstrap\Modal;
-use yii\helpers\ArrayHelper;
-use app\models\entity\User;
+<?php
 
 /* @var $model \app\models\entity\TodoList */
+/* @var $items \app\models\entity\TodoList[] */
+
+/* @var $this \yii\web\View */
+
+use yii\helpers\Url;
 
 ?>
-<div class="todo">
-    <h2 class="todo__title">
-        Задачи
-		<?
-		Modal::begin([
-			'header' => '<h2>Новое задание</h2>',
-			'toggleButton' => [
-				'label' => '<i class="fas fa-plus-circle"></i>',
-				'tag' => 'button',
-				'class' => 'todo-btn-new',
-			],
-		]);
-		?>
-		<? $form = ActiveForm::begin() ?>
-		<?= $form->field($model, 'name') ?>
-		<?php $model->user_id = Yii::$app->user->id; ?>
-		<?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Кому назначить']) ?>
-		<?= $form->field($model, 'description')->textarea(); ?>
-		<?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
-		<? ActiveForm::end() ?>
-		<? Modal::end(); ?>
-    </h2>
-    <table class="todo-items">
-		<? if (!empty($items)): ?>
-			<? /* @var $item \app\models\entity\TodoList */ ?>
-			<? foreach ($items as $item): ?>
-                <tr class="todo-item">
-                    <td class="todo-item__time"><?= date("[d.m.Y]", $item->created_at); ?></td>
-                    <td class="todo-item__name"><?= $item->name; ?></td>
-                    <td class="todo-item__close" data-id="<?= $item->id; ?>">
-						<? if ($item->close): ?>
-                            <i class="fas fa-lock"></i>
-						<? else: ?>
-                            <i class="fas fa-lock-open"></i>
-						<? endif; ?>
-                    </td>
-                    <td class="todo-item__remove" data-id="<?= $item->id; ?>">
-                        <i class="fas fa-trash-alt"></i>
-                    </td>
-                </tr>
-			<? endforeach; ?>
-		<? endif; ?>
-    </table>
+<?= $this->render('include/modal/modal-form', [
+	'model' => $model
+]); ?>
+<div class="todo-wrap">
+    <div class="todo__title">Список заданий <i class="fas fa-plus-square" data-toggle="modal" data-target="#new-task"></i></div>
+	<?php if ($items): ?>
+        <ul class="todo-list">
+            <li class="todo-list__item header">
+                <div class="todo-list__item-date">Дата</div>
+                <div class="todo-list__item-title">Заголовок</div>
+                <div class="todo-list__item-description">Описание</div>
+                <div class="todo-list__item-user">Кому назначена</div>
+            </li>
+			<?php foreach ($items as $item): ?>
+                <li class="todo-list__item">
+                    <div class="todo-list__item-date"><?= date('d.m.Y', $item->created_at); ?></div>
+                    <div class="todo-list__item-title"><?= $item->name; ?></div>
+                    <div class="todo-list__item-description"><?= $item->description; ?></div>
+                    <div class="todo-list__item-user">
+                        <a href="<?= Url::to(['admin/user', 'id' => $item->user_id]) ?>">
+							<?= $item->user->email; ?>
+                        </a>
+                    </div>
+                </li>
+			<?php endforeach; ?>
+        </ul>
+	<?php endif; ?>
 </div>

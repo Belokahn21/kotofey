@@ -97,13 +97,9 @@ class AdminController extends Controller
 
     public function actionIndex()
     {
-        $product = Product::find();
-        $order = Order::find();
-        $last_search = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $last_search = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
 
         return $this->render('index', [
-            'product' => $product,
-            'order' => $order,
             'last_search' => $last_search
         ]);
     }

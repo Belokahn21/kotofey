@@ -1,14 +1,17 @@
 .btn-main {
   color: white;
-  background: #212529;
-  font-size: 15px !important;
-  padding: 0.1% 0.5% !important;
-  border: 1px black solid;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border-radius: 1em;
+  background: deepskyblue;
+  border: 0;
+  border-bottom: 3px blue solid;
+  outline: 0;
+  margin: 5px 0;
+  padding: 5px;
 }
 
 .btn-main:hover {
-  background: #0f475a;
+  background: #0092c3;
 }

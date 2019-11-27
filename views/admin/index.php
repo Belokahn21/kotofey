@@ -1,83 +1,116 @@
 <?
 
-use yii\bootstrap\Modal;
 use app\models\tool\seo\Title;
-use app\models\tool\Currency;
-use app\models\tool\Price;
 use app\models\entity\Product;
 use app\models\entity\Order;
 use app\widgets\todo\ToDoWidget;
-use yii\helpers\Html;
+use app\models\entity\User;
+use app\models\entity\SearchQuery;
 
-/* @var $this yii\web\View */
-/* @var $all integer */
-/* @var $price integer */
-/* @var $purchase integer */
-/* @var $order Order */
+/* @var $this yii\web\View
+ * @var $last_search \app\models\entity\SearchQuery[]
+ */
 
 $this->title = Title::showTitle("Главная страница");
 ?>
+<?= $this->render('modal/search', [
+	'last_search' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all()
+]); ?>
 <section class="desktop">
     <h1 class="title">Рабочий стол</h1>
-    <div class="desktop-items">
-        <div class="desktop-item">
-            <div class="desktop-item__logo money-logo">
-                <i class="fas fa-dollar-sign"></i>
-            </div>
-            <div class="desktop-item__content">
-                <h2 class="desktop-item__title">Доход</h2>
-                <div class="desktop-item__money"><?= Price::format(rand()); ?> <?= (new Currency())->show(); ?></div>
-            </div>
-            <div class="desktop-item__resume">+ <?= Price::format(rand(1000,
-					10000)) ?> <?= (new Currency())->show(); ?></div>
-        </div>
-        <div class="desktop-item">
-            <div class="desktop-item__logo order-logo">
-                <i class="fas fa-shopping-cart"></i>
-            </div>
-            <div class="desktop-item__content">
-                <h2 class="desktop-item__title">Заказов</h2>
-                <div class="desktop-item__money"><?= $order->count(); ?></div>
-            </div>
-            <div class="desktop-item__resume">+ <?= Order::orderProfit(); ?></div>
-        </div>
-        <div class="desktop-item">
-            <div class="desktop-item__logo product-logo">
-                <i class="fas fa-cash-register"></i>
-            </div>
-            <div class="desktop-item__content">
-                <h2 class="desktop-item__title">Товаров</h2>
-                <div class="desktop-item__money"><?= $product->count(); ?></div>
-            </div>
-            <div class="desktop-item__resume"><?= Price::format(Product::countRent()) ?> / +<?= Price::format(Product::countProfit()) ?></div>
-        </div>
-        <div class="desktop-item">
-            <div class="desktop-item__logo core-logo">
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="desktop-item__content">
-                <h2 class="desktop-item__title">Поиск</h2>
-                <div class="desktop-item__search">
-					<?php /* @var $last_search \app\models\entity\SearchQuery[] */ ?>
-					<?php if ($last_search): ?>
-						<?= Html::button('Все фразы', ['class' => 'btn-main', 'data-toggle' => "modal", 'data-target' => "#exampleModal"]); ?>
-						<?php Modal::begin([
-							'header' => '<h4>Поисковые фразы</h4>',
-							'id' => 'exampleModal',
-							'size' => 'modal-lg',
-						]); ?>
-                        <ul class="search-query-list">
-							<?php foreach ($last_search as $phrase): ?>
-                                <li><?= $phrase->text; ?>|<?= date('d.m.Y H:i:s', $phrase->created_at) ?>|<?= ($phrase->user ? $phrase->user->email : 'Гость'); ?></li>
-							<?php endforeach ?>
+    <div class="block-info-wrap">
+        <ul class="block-info__list">
+            <li class="block-info__item">
+                <div class="item-wrap">
+                    <div class="block-info__icon">
+                        <i class="fas fa-cash-register"></i>
+                    </div>
+                    <div class="block-info__content">
+                        <ul class="statistic__list">
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">Всего заказов</div>
+                                <div class="statistic__item-value"><?= Order::find()->count(); ?></div>
+                            </li>
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">Выручка</div>
+                                <div class="statistic__item-value">+525</div>
+                            </li>
                         </ul>
-						<?php Modal::end(); ?>
-					<?php else: ?>
-                        Никто не пользовался поиском
-					<?php endif; ?>
+                    </div>
                 </div>
-            </div>
-        </div>
+
+                <div class="block-info__summary">900/+9000</div>
+            </li>
+
+            <li class="block-info__item">
+                <div class="item-wrap">
+                    <div class="block-info__icon">
+                        <i class="fas fa-gifts"></i>
+                    </div>
+                    <div class="block-info__content">
+                        <ul class="statistic__list">
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">Всего товарв</div>
+                                <div class="statistic__item-value"><?= Product::find()->count(); ?></div>
+                            </li>
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">Доход</div>
+                                <div class="statistic__item-value">+700</div>
+                            </li>
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">Общая сумма</div>
+                                <div class="statistic__item-value">+9700</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="block-info__summary">900/+9000</div>
+            </li>
+
+            <li class="block-info__item">
+                <div class="item-wrap">
+                    <div class="block-info__icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="block-info__content">
+                        <ul class="statistic__list">
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">Всего пользователей</div>
+                                <div class="statistic__item-value"><?= User::find()->count(); ?></div>
+                            </li>
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">В сети</div>
+                                <div class="statistic__item-value">0</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="block-info__summary">900/+9000</div>
+            </li>
+
+            <li class="block-info__item">
+                <div class="item-wrap">
+                    <div class="block-info__icon" data-toggle="modal" data-target="#show-search-stat">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <div class="block-info__content">
+						<?php if ($last_search): ?>
+                            <ul class="statistic__list">
+								<?php foreach ($last_search as $phrase): ?>
+                                    <li class="statistic__item">
+										<?= $phrase->text; ?>
+                                    </li>
+								<?php endforeach; ?>
+                            </ul>
+						<?php endif; ?>
+                    </div>
+                </div>
+
+                <div class="block-info__summary">900/+9000</div>
+            </li>
+        </ul>
     </div>
 	<?= ToDoWidget::widget(); ?>
 </section>

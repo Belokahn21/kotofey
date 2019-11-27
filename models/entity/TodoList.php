@@ -16,6 +16,8 @@ use yii\db\ActiveRecord;
  * @property boolean $close
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property User $user
  */
 class TodoList extends ActiveRecord
 {
@@ -62,5 +64,10 @@ class TodoList extends ActiveRecord
 				return $this->save();
 			}
 		}
+	}
+
+	public function getUser()
+	{
+		return User::findOne($this->user_id);
 	}
 }

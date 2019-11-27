@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="ru">
+<include src="include/block/head.html"></include>
+<body>
+<include src="include/block/left-sidebar.html"></include>
+<div class="main">
+    <form>
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">SEO</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Изображения</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tab-content-form">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="form-element">
+                    <input type="text" name="name" placeholder="Название товара">
+                </div>
+
+                <div class="form-element">
+                    <select>
+                        <option>Категория товара</option>
+                        <option>какая-то категория товара</option>
+                        <option>какая-то категория товара</option>
+                        <option>какая-то категория товара</option>
+                        <option>какая-то категория товара</option>
+                    </select>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-element">
+                            <input type="text" name="price" placeholder="Закупочная цена">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-element">
+                            <input type="text" name="price" placeholder="Цена продажи">
+                        </div>
+                        <div class="set-price">
+                            <a href="javascript:void(0);" onclick="document.getElementById('id-price').value=(parseInt(document.getElementById('id-purchase').value)+parseInt((document.getElementById('id-purchase').value*50)/100)); return false;">% наценка</a>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-element">
+                            <input type="text" name="price" placeholder="Количество">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-element">
+                    <textarea placeholder="Описание товара"></textarea>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div class="form-element">
+                    <input type="text" name="name" placeholder="Ключевые слова">
+                </div>
+                <div class="form-element">
+                    <input type="text" name="name" placeholder="Описание">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-image single">
+                            <img src="./assets/images/product.png">
+                        </div>
+
+                        <input type="file">
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-image more">
+                            <img src="./assets/images/product.png">
+                            <img src="./assets/images/product.png">
+                            <img src="./assets/images/product.png">
+                            <img src="./assets/images/product.png">
+                            <img src="./assets/images/product.png">
+                        </div>
+
+                        <input type="file">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-main">Добавить</button>
+        <button class="btn-main">Очистить</button>
+    </form>
+</div>
+</body>
+</html>

@@ -26,16 +26,16 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
+	<?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+	<?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 <?= Notify::widget(); ?>
-<div class="page-wrapper">
+<aside class="left-sidebar">
     <nav class="dashboard-left-sidebar" data-show="false">
-        <button class="show-dashboard">X</button>
+<!--        <button class="show-dashboard">X</button>-->
         <div class="dashboard-left-sidebar__content">
             <h4 style="color: white; text-align: center; padding: 0 0 2% 0; margin: 0; border-bottom: 1px grey solid;">
                 Панель управления</h4>
@@ -54,8 +54,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
 
             <div class="search-form-wrap">
                 <form autocomplete="off" method="post" action="/admin/" class="search-form__form">
-                    <input class="search-form__item" type="text" name="word" placeholder="Поиск..."
-                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Поиск...'"/>>
+                    <input class="search-form__item" type="text" name="word" placeholder="Поиск..." onfocus="this.placeholder = ''" onblur="this.placeholder = 'Поиск...'"/>
                 </form>
             </div>
 
@@ -147,13 +146,10 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
             </div>
         </div>
     </nav>
-    <div class="page-content">
-        <?= $content; ?>
-        <div class="clearfix"></div>
-    </div>
-    <div class="clearfix"></div>
+</aside>
+<div class="main">
+	<?= $content; ?>
 </div>
-
 <? $this->endBody() ?>
 </body>
 </html>
