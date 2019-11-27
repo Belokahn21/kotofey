@@ -118,10 +118,18 @@ use yii\helpers\Json;
         </div>
     </div>
     <div class="tab-pane fade" id="nav-additional" role="tabpanel" aria-labelledby="nav-additional-tab">
-		<?= $form->field($model, 'code')->textInput(); ?>
-		<?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
-		<?= $form->field($model, 'active')->radioList(["Не активен", "Активен"]); ?>
-		<?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
+        <div class="form-element">
+			<?= $form->field($model, 'code')->textInput(); ?>
+        </div>
+        <div class="form-element">
+			<?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
+        </div>
+        <div class="form-element">
+			<?= $form->field($model, 'active')->radioList(["Не активен", "Активен"]); ?>
+        </div>
+        <div class="form-element">
+			<?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
+        </div>
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
         <ul style="list-style: none; margin: 0; padding: 0;">

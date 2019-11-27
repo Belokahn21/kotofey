@@ -20,7 +20,7 @@ $this->title = Title::showTitle("Пользователи"); ?>
 			'form' => $form,
 			'groups' => $groups
 		]); ?>
-		<?= Html::submitButton('Добавить'); ?>
+		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 		<? ActiveForm::end(); ?>
     </section>
     <h1>Список пользователей</h1>
@@ -59,7 +59,7 @@ $this->title = Title::showTitle("Пользователи"); ?>
 				if ($discount) {
 					return $discount->count;
 				} else {
-				    return 0;
+					return 0;
 				}
 			}
 		],

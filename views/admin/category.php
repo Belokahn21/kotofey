@@ -4,7 +4,7 @@ use app\models\entity\Product;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\seo\Title;
-use yii\helpers\ArrayHelper;
+use app\models\entity\Category;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
@@ -29,9 +29,7 @@ use yii\helpers\Url;
 	'filterModel' => $model,
 	'emptyText' => 'Разделы отсутствуют',
 	'columns' => [
-		[
-			'attribute' => 'id',
-		],
+		'attribute' => 'id',
 		[
 			'attribute' => 'name',
 			'format' => 'raw',
@@ -58,8 +56,12 @@ use yii\helpers\Url;
 			'attribute' => 'parent',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return Html::a(\app\models\entity\Category::findOne($model->parent)->name,
-					"/admin/category/" . $model->parent . "/");
+				$category = Category::findOne($model->parent);
+				if ($category) {
+					return Html::a($category->name, "/admin/category/" . $model->parent . "/");
+				}else{
+				    return "Родитель";
+                }
 			},
 		],
 		[
