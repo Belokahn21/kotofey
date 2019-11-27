@@ -8,10 +8,15 @@
   border: 0;
   border-bottom: 3px blue solid;
   outline: 0;
-  margin: 5px 0;
+  margin: 5px;
   padding: 5px;
 }
 
 .btn-main:hover {
   background: #0092c3;
+}
+
+a.btn-main {
+  display: inline-block;
+  text-decoration: none !important;
 }

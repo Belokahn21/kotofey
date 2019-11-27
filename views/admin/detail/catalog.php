@@ -18,11 +18,11 @@ use app\models\entity\Stocks;
 
 $this->title = Title::showTitle("Товары"); ?>
 <h1 class="title">Просмотр: <?= $model->name; ?></h1>
-<?= Html::a("Назад", '/admin/catalog/', ['class' => 'btn-back']) ?>
-<?= Html::a("Посмотреть на сайте", $model->detail, ['target' => '_blank', 'class' => 'btn-back']); ?>
+<?= Html::a("Назад", '/admin/catalog/', ['class' => 'btn-main']) ?>
+<?= Html::a("Посмотреть на сайте", $model->detail, ['target' => '_blank', 'class' => 'btn-main']); ?>
 <div class="clearfix"></div>
 <section>
-    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $this->render('../_forms/_catalog', [
         'model' => $model,
         'modelDelivery' => $modelDelivery,
@@ -32,6 +32,8 @@ $this->title = Title::showTitle("Товары"); ?>
     <?php if (Yii::$app->request->get('action') == 'copy'): ?>
         <?php echo Html::submitInput('Копировать', ['name' => 'action', 'class' => 'btn-main', 'value' => 'new']); ?>
         <?php echo Html::submitInput('Отмена', ['name' => 'action', 'class' => 'btn-main', 'value' => 'cancel']); ?>
+    <? else: ?>
+        <?php echo Html::submitInput('Обновить', ['class' => 'btn-main']); ?>
     <? endif; ?>
-    <? ActiveForm::end(); ?>
+    <?php ActiveForm::end(); ?>
 </section>

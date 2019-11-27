@@ -13,22 +13,18 @@
   width: 100%;
   margin: 10px 0;
 
-  input:not([type=radio], [type=checkbox]), select, textarea {
+  input:not(input[type=radio]), input:not(input[type=checkbox]) select, textarea {
     width: 100%;
     border: 1px silver solid;
     padding: 5px;
     color: black;
-
-    &::-moz-placeholder, &::placeholder, &::-webkit-input-placeholder {
-      color: black;
-    }
   }
 }
 
 .form-element {
   label {
     input[type=checkbox] {
-      display: inline-block;
+      display: inherit;
     }
   }
 }
@@ -58,4 +54,15 @@
     margin: 5px;
     object-fit: contain;
   }
+}
+
+.form-title {
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.form-label {
+  margin: 0;
+  padding: 0;
 }
