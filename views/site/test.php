@@ -14,20 +14,20 @@ define('USER_AGENT', 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, li
 define('COOKIE_FILE', 'cookie.txt');
 
 //URL of the login form.
-define('LOGIN_FORM_URL', 'https://kotofey.store/signin/');
+define('LOGIN_FORM_URL', 'http://www.sat-altai.ru/');
 
 //Login action URL. Sometimes, this is the same URL as the login form.
-define('LOGIN_ACTION_URL', 'https://kotofey.store/signin/');
+define('LOGIN_ACTION_URL', 'http://www.sat-altai.ru/');
 
 
 //An associative array that represents the required form fields.
 //You will need to change the keys / index names to match the name of the form
 //fields.
 $postValues = array(
-	'User[email]' => USERNAME,
-	'User[password]' => PASSWORD,
-	'_csrf' => '7vM2jzFtxjxDoEwVGPTEDeVINB0pC7OJE90kTFItK2qat3LmdyONU3HpDVMug5NiiH1BKX49_M5y8H4nF3VuEg=='
-//	'_csrf' => Yii::$app->request->getCsrfToken()
+	'login' => USERNAME,
+//	'User[email]' => USERNAME,
+	'password' => PASSWORD,
+//	'User[password]' => PASSWORD,
 );
 
 //Initiate cURL.
@@ -63,9 +63,10 @@ curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($curl, CURLOPT_REFERER, LOGIN_FORM_URL);
 
 //Do we want to follow any redirects?
-curl_setopt($curl, CURLOPT_FOLLOWLOCATION, false);
+curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 
 //Execute the login request.
+//curl_exec($curl);
 echo curl_exec($curl);
 
 //Check for errors!
@@ -74,7 +75,7 @@ if (curl_errno($curl)) {
 }
 
 //We should be logged in by now. Let's attempt to access a password protected page
-curl_setopt($curl, CURLOPT_URL, 'http://kotofey.store/profile/');
+curl_setopt($curl, CURLOPT_URL, 'http://www.sat-altai.ru/catalog/?c=profile');
 
 //Use the same cookie file.
 curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);
@@ -85,6 +86,8 @@ curl_setopt($curl, CURLOPT_USERAGENT, USER_AGENT);
 //We don't want any HTTPS / SSL errors.
 curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+//curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 //Execute the GET request and print out the result.
-echo curl_exec($curl);
+
+\app\models\tool\Debug::p(curl_exec($curl));
