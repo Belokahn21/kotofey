@@ -17,21 +17,36 @@ $(document).ready(function () {
 
 
 (function ($) {
+
+    var options = {
+        name: $('#product-name'),
+        description: $('#product-description'),
+        price: $('#id-price'),
+        purchase: $('#id-purchase'),
+        count: $('#product-count')
+    };
+
     $.fn.catalogLoader = function () {
         this.change(function (e) {
             var url = $(this).val();
 
-
-            $.ajax({
-                url: '/ajax/loader/',
-                method: 'POST',
-                data: {
-                    url: url
-                },
-                success: function (data) {
-                    console.log(data);
-                }
-            });
+            if (url.length > 0) {
+                $.ajax({
+                    url: '/ajax/loader/',
+                    method: 'POST',
+                    data: {
+                        url: url
+                    },
+                    success: function (data) {
+                        var product = $.parseJSON(data);
+                        for (var key in product) {
+                            if (options[key].length > 0) {
+                                options[key].val(product[key]);
+                            }
+                        }
+                    }
+                });
+            }
         });
     };
 })(jQuery);
