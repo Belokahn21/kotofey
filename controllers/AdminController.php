@@ -36,6 +36,7 @@ use app\models\search\NewsSearchForm;
 use app\models\search\NewsCategorySearchForm;
 use app\models\search\PermissionsSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
+use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\ProvidersSearchForm;
 use app\models\search\SlidersImagesSearchForm;
@@ -130,6 +131,7 @@ class AdminController extends Controller
         if ($id == null) {
             $model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
             $modelDelivery = new ProductOrder();
+            $searchModel = new ProductSearchForm();
             $dataProvider = $model->search(\Yii::$app->request->get());
             $properties = ProductProperties::find()->all();
 
@@ -142,6 +144,7 @@ class AdminController extends Controller
                 'model' => $model,
                 'modelDelivery' => $modelDelivery,
                 'dataProvider' => $dataProvider,
+                'searchModel' => $searchModel,
                 'properties' => $properties,
             ]);
         }

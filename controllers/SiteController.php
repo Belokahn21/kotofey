@@ -6,7 +6,6 @@ use app\models\entity\Auth;
 use app\models\entity\Basket;
 use app\models\entity\Category;
 use app\models\entity\Delivery;
-use app\models\entity\Discount;
 use app\models\entity\Favorite;
 use app\models\entity\InformersValues;
 use app\models\entity\Order;
@@ -18,7 +17,6 @@ use app\models\entity\Product;
 use app\models\entity\ProductProperties;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\Promo;
-use app\models\entity\Providers;
 use app\models\entity\SiteReviews;
 use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportMessage;
@@ -26,13 +24,10 @@ use app\models\entity\support\Tickets;
 use app\models\entity\user\Billing;
 use app\models\forms\CatalogFilter;
 use app\models\tool\Debug;
-use app\models\tool\payments\Robokassa;
 use app\models\tool\seo\Attributes;
 use app\models\entity\User;
 use app\models\tool\seo\og\OpenGraph;
 use app\models\tool\System;
-use app\models\tool\vk\entity\VKUser;
-use app\models\tool\vk\VKWeb;
 use app\widgets\notification\Notify;
 use yii\data\Pagination;
 use yii\db\Expression;
@@ -172,9 +167,9 @@ class SiteController extends Controller
 
 	public function beforeAction($action)
 	{
-		if (in_array($action->id, ['success', 'fail', 'test'])) {
+//		if (in_array($action->id, ['success', 'fail', 'test'])) {
 			$this->enableCsrfValidation = false;
-		}
+//		}
 
 
 //		if (System::isMobile() or Yii::$app->request->get('mobile') == "Y") {
