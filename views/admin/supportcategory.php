@@ -11,7 +11,7 @@ $this->title = Title::showTitle("Разделы технической подд�
     <?= $form->field($model, 'name'); ?>
     <?= $form->field($model, 'description')->textarea(); ?>
     <?= $form->field($model, 'sort'); ?>
-    <?= Html::submitButton('Добавить'); ?>
+	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
     <? ActiveForm::end(); ?>
 </section>
 

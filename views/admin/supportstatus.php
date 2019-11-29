@@ -10,6 +10,6 @@ $this->title = Title::showTitle("Статусы технической подд�
     <? $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'name'); ?>
     <?= $form->field($model, 'sort'); ?>
-    <?= Html::submitButton('Добавить'); ?>
+	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
     <? ActiveForm::end(); ?>
 </section>

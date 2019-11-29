@@ -19,7 +19,7 @@ $this->title = Title::showTitle("Управление доставками");
 		'model' => $model,
 		'form' => $form,
 	]) ?>
-	<?= Html::submitButton('Добавить') ?>
+	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 	<?php ActiveForm::end(); ?>
 </section>
 <h2 class="title">Список доставок</h2>

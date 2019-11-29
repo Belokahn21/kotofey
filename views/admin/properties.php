@@ -43,7 +43,7 @@ $this->title = Title::showTitle("Свойства товаров"); ?>
             </div>
 
         </div>
-        <?= Html::submitButton('Добавить'); ?>
+		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
         <? ActiveForm::end(); ?>
     </section>
 <?= GridView::widget([

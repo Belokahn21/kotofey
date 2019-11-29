@@ -40,7 +40,7 @@ $this->title = Title::showTitle("Поставщики"); ?>
 					<?php echo $form->field($model, 'sort')->textInput(); ?>
                 </div>
             </div>
-			<?= Html::submitButton('Добавить'); ?>
+			<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 			<? ActiveForm::end(); ?>
         </div>
     </section>
