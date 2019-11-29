@@ -23,7 +23,7 @@ $this->title = Title::showTitle("Справочники"); ?>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 		<? ActiveForm::end(); ?>
     </section>
-
+<h2>Список значений</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
