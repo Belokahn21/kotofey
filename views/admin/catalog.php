@@ -55,7 +55,7 @@ $this->title = Title::showTitle("Товары"); ?>
     </div>
 	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('_forms/_catalog', [
-		'model' => $model,
+		'model' => $searchModel,
 		'form' => $form,
 		'modelDelivery' => $modelDelivery,
 		'properties' => $properties

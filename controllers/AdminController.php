@@ -132,7 +132,7 @@ class AdminController extends Controller
             $model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
             $modelDelivery = new ProductOrder();
             $searchModel = new ProductSearchForm();
-            $dataProvider = $model->search(\Yii::$app->request->get());
+            $dataProvider = $searchModel->search(\Yii::$app->request->get());
             $properties = ProductProperties::find()->all();
 
             if ($model->createProduct()) {
