@@ -127,29 +127,6 @@ class Product extends \yii\db\ActiveRecord
         ];
     }
 
-    public function search($params)
-    {
-        $query = static::find()->orderBy(['created_at' => SORT_DESC]);
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-            'pagination' => [
-                'pageSize' => 10,
-            ],
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'code', $this->code]);
-
-        return $dataProvider;
-    }
-
-
     public function createProduct()
     {
         if (\Yii::$app->request->isPost) {

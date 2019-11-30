@@ -1,11 +1,14 @@
 <?
 
+use app\models\tool\Currency;
+use app\models\tool\Price;
 use app\models\tool\seo\Title;
-use app\models\entity\Product;
 use app\models\entity\Order;
 use app\widgets\todo\ToDoWidget;
 use app\models\entity\User;
 use app\models\entity\SearchQuery;
+use app\models\tool\statistic\OrderStatistic;
+use app\models\tool\statistic\ProductStatistic;
 
 /* @var $this yii\web\View
  * @var $last_search \app\models\entity\SearchQuery[]
@@ -33,7 +36,7 @@ $this->title = Title::showTitle("Главная страница");
                             </li>
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Выручка</div>
-                                <div class="statistic__item-value">+525</div>
+                                <div class="statistic__item-value"><?= OrderStatistic::income(); ?></div>
                             </li>
                         </ul>
                     </div>
@@ -51,15 +54,15 @@ $this->title = Title::showTitle("Главная страница");
                         <ul class="statistic__list">
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Всего товарв</div>
-                                <div class="statistic__item-value"><?= Product::find()->count(); ?></div>
+                                <div class="statistic__item-value"><?= ProductStatistic::countAllProducts(); ?></div>
                             </li>
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Доход</div>
-                                <div class="statistic__item-value">+700</div>
+                                <div class="statistic__item-value"><?= Price::format(ProductStatistic::income()); ?><?= Currency::getInstance()->show(); ?></div>
                             </li>
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Общая сумма</div>
-                                <div class="statistic__item-value">+9700</div>
+                                <div class="statistic__item-value"><?= Price::format(ProductStatistic::countPurchase()); ?><?= Currency::getInstance()->show(); ?></div>
                             </li>
                         </ul>
                     </div>
