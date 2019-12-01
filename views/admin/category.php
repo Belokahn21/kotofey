@@ -20,7 +20,7 @@ use yii\helpers\Url;
 			'model' => $model,
 			'categories' => $categories,
 		]); ?>
-		<?= Html::submitButton('Добавить'); ?>
+		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 		<? ActiveForm:: end(); ?>
     </section>
     <h2>Разделы товаров</h2>
@@ -49,7 +49,7 @@ use yii\helpers\Url;
 			'label' => 'Изображение',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return Html::img($model->image, ["width" => 40]);
+				return Html::img('/web/upload/' . $model->image, ["width" => 40]);
 			},
 		],
 		[
@@ -59,9 +59,9 @@ use yii\helpers\Url;
 				$category = Category::findOne($model->parent);
 				if ($category) {
 					return Html::a($category->name, "/admin/category/" . $model->parent . "/");
-				}else{
-				    return "Родитель";
-                }
+				} else {
+					return "Родитель";
+				}
 			},
 		],
 		[
