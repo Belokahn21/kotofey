@@ -11,7 +11,7 @@ use yii\helpers\Url;
 $this->title = Title::showTitle("Раздел: " . $model->name); ?>
 <section>
     <h1 class="title">Раздел: <?= $model->name; ?></h1>
-	<?= Html::a("Назад", '/admin/category/', ['class' => 'btn-back']) ?>
+	<?= Html::a("Назад", '/admin/category/', ['class' => 'btn-main']) ?>
 	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('../_forms/_category', [
 		'form' => $form,

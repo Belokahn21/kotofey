@@ -116,6 +116,23 @@
   .requisites___item {
     text-align: center;
   }
+  .catalog {
+    flex-direction: column;
+  }
+  .filter {
+    width: 100%;
+    display: none;
+  }
+  .catalog-list {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .filter-mobile {
+    display: block;
+  }
+  .catalog-list__item {
+    width: 100%;
+  }
 }
 
 /* iPad in portrait & landscape */
