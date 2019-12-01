@@ -10,4 +10,8 @@ class CatalogInfo
 	public $price;
 	public $purchase;
 	public $count;
+	public $active;
+	public $vitrine;
+	public $code;
+	public $weight;
 }
