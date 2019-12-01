@@ -12,9 +12,10 @@ use app\models\entity\Stocks;
 use app\models\entity\SiteSettings;
 
 
-/* @var $model \app\models\entity\Product */
-/* @var $modelDelivery \app\models\entity\ProductOrder */
-/* @var $properties \app\models\entity\ProductProperties[] */
+/* @var $model \app\models\entity\Product
+ * @var $modelDelivery \app\models\entity\ProductOrder
+ * @var $properties \app\models\entity\ProductProperties[]
+ */
 
 $this->title = Title::showTitle("Товары"); ?>
 <section>
@@ -37,7 +38,7 @@ $this->title = Title::showTitle("Товары"); ?>
                 </rect>
 
                 <rect width="10%" x="45%" rx="5%">
-                    <animate attributeName="height" values="20%; 70%; 20%" dur="0.7s"  begin="0.3s" repeatCount="indefinite"></animate>
+                    <animate attributeName="height" values="20%; 70%; 20%" dur="0.7s" begin="0.3s" repeatCount="indefinite"></animate>
                     <animate attributeName="y" values="40%; 15%; 40%" dur="0.7s" begin="0.3s" repeatCount="indefinite"></animate>
                 </rect>
 
@@ -55,7 +56,7 @@ $this->title = Title::showTitle("Товары"); ?>
     </div>
 	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('_forms/_catalog', [
-		'model' => $searchModel,
+		'model' => $model,
 		'form' => $form,
 		'modelDelivery' => $modelDelivery,
 		'properties' => $properties

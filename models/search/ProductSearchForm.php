@@ -30,7 +30,7 @@ class ProductSearchForm extends Product
 
 	public function search($params)
 	{
-		$query = Product::find();
+		$query = Product::find()->orderBy(['created_at' => SORT_DESC]);
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
