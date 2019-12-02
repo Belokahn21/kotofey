@@ -54,6 +54,13 @@
   margin: 0 auto;
 }
 
+.text-block-wrap {
+  p {
+    text-indent: 1.25em;
+    text-align: justify;
+  }
+}
+
 .about p {
   padding: 1% 0;
   font-weight: 600;
