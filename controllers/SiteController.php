@@ -7,6 +7,7 @@ use app\models\entity\Basket;
 use app\models\entity\Category;
 use app\models\entity\Delivery;
 use app\models\entity\Favorite;
+use app\models\entity\Geo;
 use app\models\entity\InformersValues;
 use app\models\entity\Order;
 use app\models\entity\OrdersItems;
@@ -167,10 +168,16 @@ class SiteController extends Controller
 
 	public function beforeAction($action)
 	{
-//		if (in_array($action->id, ['success', 'fail', 'test'])) {
+		if (in_array($action->id, ['success', 'fail', 'test'])) {
 			$this->enableCsrfValidation = false;
-//		}
+		}
 
+		if (!Yii::$app->session->get('city_id')) {
+			$CityDefault = Geo::find()->where(['is_default' => true])->one();
+			if ($CityDefault) {
+				Yii::$app->session->set('city_id', $CityDefault->id);
+			}
+		}
 
 //		if (System::isMobile() or Yii::$app->request->get('mobile') == "Y") {
 //            $this->layout = "mobile";

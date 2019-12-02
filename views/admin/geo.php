@@ -16,7 +16,7 @@ $this->title = Title::showTitle("Гео объекты"); ?>
     <div class="product-form">
 		<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $this->render('_forms/_geo', ['form' => $form, 'model' => $model]); ?>
-		<?= Html::submitButton('Добавить'); ?>
+		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 		<? ActiveForm::end(); ?>
     </div>
 </section>
@@ -24,7 +24,7 @@ $this->title = Title::showTitle("Гео объекты"); ?>
 <h2>Список гео объектов</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
-	'filterModel' => $model,
+	'filterModel' => $searchModel,
 	'emptyText' => 'Гео объекты отсутствуют',
 	'columns' => [
 		'id',
@@ -32,8 +32,8 @@ $this->title = Title::showTitle("Гео объекты"); ?>
 		[
 			'attribute' => 'type',
 			'value' => function ($model) {
-                /* @var $model \app\models\entity\Geo */
-                return $model->getTypes()[$model->type];
+				/* @var $model \app\models\entity\Geo */
+				return $model->getTypes()[$model->type];
 			}
 		],
 		[

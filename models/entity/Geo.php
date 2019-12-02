@@ -11,6 +11,7 @@ use yii\data\ActiveDataProvider;
  * This is the model class for table "geo".
  *
  * @property int $id
+ * @property boolean $is_default
  * @property string $name
  * @property string $slug
  * @property int $sort
@@ -51,6 +52,11 @@ class Geo extends \yii\db\ActiveRecord
 		return [
 			[['name'], 'required'],
 			[['sort', 'active', 'created_at', 'updated_at'], 'integer'],
+
+			['is_default', 'default', 'value' => null],
+			['is_default', 'unique', 'targetClass' => Geo::className(), 'message' => '{attribute} уже назначен'],
+			['is_default', 'boolean'],
+
 			[['name', 'slug', 'type'], 'string', 'max' => 255],
 		];
 	}
@@ -67,6 +73,7 @@ class Geo extends \yii\db\ActiveRecord
 			'sort' => 'Сортировка',
 			'active' => 'Активность',
 			'type' => 'Тип объекта',
+			'is_default' => 'Город по умолчанию',
 			'created_at' => 'Дата создания',
 			'updated_at' => 'Дата обновления',
 		];
@@ -75,27 +82,10 @@ class Geo extends \yii\db\ActiveRecord
 	public function getTypes()
 	{
 		return [
-			self::TYPE_OBJECT_COUNTRY=>'Страна',
-			self::TYPE_OBJECT_REGION=>'Регион',
+			self::TYPE_OBJECT_COUNTRY => 'Страна',
+			self::TYPE_OBJECT_REGION => 'Регион',
 			self::TYPE_OBJECT_CITY => 'Город',
-			self::TYPE_OBJECT_STREET=>'Улица',
+			self::TYPE_OBJECT_STREET => 'Улица',
 		];
-	}
-
-	public function search($params)
-	{
-		$query = static::find();
-
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
-
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
-		}
-
-		$query->andFilterWhere(['like', 'name', $this->name]);
-
-		return $dataProvider;
 	}
 }

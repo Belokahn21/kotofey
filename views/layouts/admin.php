@@ -14,6 +14,7 @@ use app\models\entity\support\Tickets;
 use app\models\entity\User;
 use app\widgets\notification\Notify;
 use app\models\entity\Sliders;
+use app\models\entity\Geo;
 
 AdminAsset::register($this);
 $this->beginPage();
@@ -66,13 +67,14 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                     <li class="panel-menu__item">
                         <a href="/admin/"><i class="fas fa-globe-asia"></i>Гео</a>
                         <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/geo/">Гео объекты</a></li>
+                            <li class="panel-menu__item sub"><a href="/admin/geo/">Гео объекты<span class="count"><?= Geo::find()->count() ?></span></a></li>
                         </ul>
                     </li>
                     <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-shopping-cart"></i>Магазин</a>
                         <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/order/">Заказы<span
-                                            class="count"><?= Order::find()->count() ?></span></a>
+                            <li class="panel-menu__item sub"><a href="/admin/order/">Заказы
+                                    <span class="count"><?= Order::find()->count() ?></span>
+                                </a>
                                 <ul>
                                     <li class="panel-menu__item sub"><a href="/admin/status/">Статус заказа</a></li>
                                 </ul>

@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\entity\Basket;
 use app\models\entity\BasketItem;
 use app\models\entity\Favorite;
+use app\models\entity\Geo;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
 use app\models\tool\Debug;
@@ -229,5 +230,24 @@ class AjaxController extends Controller
 		$parser = new ParseProvider($url);
 		$parser->contract();
 		return Json::encode($parser->getInfo());
+	}
+
+	public function actionSetCityId($id)
+	{
+		if (!\Yii::$app->request->isAjax) {
+			return false;
+		}
+		$city_id = $_REQUEST['id'];
+
+		$geo = Geo::findOne($city_id);
+		if (!$geo) {
+			throw new \Exception('Error find');
+		}
+
+		\Yii::$app->session->set('city_id', $city_id);
+
+		return true;
+
+
 	}
 }

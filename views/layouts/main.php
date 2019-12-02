@@ -12,10 +12,9 @@ use app\models\entity\Basket;
 use app\widgets\notification\Notify;
 use app\widgets\Breadcrumbs;
 use app\models\entity\SiteSettings;
-use app\models\tool\Currency;
 use yii\widgets\ActiveForm;
+use app\models\entity\Geo;
 use app\models\entity\Subscribe;
-use app\models\entity\Search;
 use app\widgets\search\SearchWidget;
 
 AppAsset::register($this);
@@ -52,7 +51,7 @@ $this->beginPage() ?>
     <div class="top-menu-wrap">
         <div class="current-city">
             Ваш город: <span class="select-city">
-                <span class="select-city__city">Барнаул</span>
+                <span class="select-city__city"><?= Geo::findOne($_SESSION['city_id'])->name; ?></span>
                 <span class="select-city__change" data-toggle="modal" data-target="#select-city-id">(изменить)</span>
             </span>
         </div>

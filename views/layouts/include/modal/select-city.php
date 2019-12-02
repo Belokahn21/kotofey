@@ -1,3 +1,8 @@
+<?php
+
+use app\models\entity\Geo;
+
+?>
 <!-- Modal -->
 <div class="modal fade" id="select-city-id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -10,16 +15,16 @@
             </div>
             <div class="modal-body">
                 <ul class="list-city">
-					<?php if ($cities = \app\models\entity\Geo::find()->all()): ?>
+					<?php if ($cities = Geo::find()->all()): ?>
 						<?php foreach ($cities as $city): ?>
                             <li class="city__item">
                                 <a href="javascript:void(0);" class="city__item-link" data-city-id="<?= $city->id; ?>"><?= $city->name; ?></a>
                             </li>
 						<?php endforeach; ?>
 					<?php endif; ?>
-<!--                    <li class="city__item">-->
-<!--                        <a href="javascript:void(0);" class="city__item-link" data-city-id="2">Барнаул</a>-->
-<!--                    </li>-->
+                    <!--                    <li class="city__item">-->
+                    <!--                        <a href="javascript:void(0);" class="city__item-link" data-city-id="2">Барнаул</a>-->
+                    <!--                    </li>-->
                 </ul>
             </div>
             <div class="modal-footer">

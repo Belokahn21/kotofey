@@ -31,6 +31,7 @@ use app\models\entity\User;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
+use app\models\search\GeoSearchForm;
 use app\models\search\InformersSearchForm;
 use app\models\search\InformersValuesSearchForm;
 use app\models\search\NewsSearchForm;
@@ -1131,6 +1132,8 @@ class AdminController extends Controller
 			]);
 		}
 		$model = new Geo();
+		$searchModel = new GeoSearchForm();
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
@@ -1143,7 +1146,8 @@ class AdminController extends Controller
 		}
 		return $this->render('geo', [
 			'model' => $model,
-			'dataProvider' => $model->search(Yii::$app->request->get())
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider
 		]);
 	}
 }

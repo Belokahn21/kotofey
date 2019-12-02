@@ -16,7 +16,7 @@ $this->title = Title::showTitle("Гео объекты"); ?>
     <div class="product-form">
 		<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $this->render('../_forms/_geo', ['form' => $form, 'model' => $model]); ?>
-		<?= Html::submitButton('Обновить'); ?>
+		<?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
 		<? ActiveForm::end(); ?>
     </div>
 </section>
