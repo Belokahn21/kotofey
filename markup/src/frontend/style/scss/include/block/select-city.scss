@@ -1,0 +1,37 @@
+.select-city {
+  border-bottom: silver 1px dashed;
+  cursor: pointer;
+  position: relative;
+  height: 40px;
+  overflow: hidden;
+
+  &:hover .select-city__change {
+    display: inline;
+  }
+
+  &:hover .select-city__city {
+    display: none;
+  }
+}
+
+.select-city__change {
+  display: none;
+}
+
+.list-city {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.city__item {
+  margin: 3px 0;
+
+  a {
+    color: $mainColor;
+
+    &:hover {
+      color: $mainActiveColor;
+    }
+  }
+}
