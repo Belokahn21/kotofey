@@ -1,6 +1,39 @@
 .auth-wrap {
-  display: inline-block;
-  border: 1px silver solid;
-  padding: 10px;
-  width: auto;
+  padding: 50px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-form {
+  width: 40%;
+
+  .btn-main {
+    margin: 0 20px 0 0;
+  }
+
+  .link-main {
+    padding-top: 5px;
+  }
+}
+
+.auth-input-group {
+  .form-group {
+    width: 100%;
+  }
+}
+
+.auth-image {
+  width: 100px;
+  height: 100px;
+  -webkit-border-radius: 0.3em;
+  -moz-border-radius: 0.3em;
+  border-radius: 0.3em;
+}
+
+.auth-input-group-text {
+  background: $mainActiveColor;
+  color: #ffffff;
 }

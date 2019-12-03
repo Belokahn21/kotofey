@@ -555,10 +555,13 @@ class SiteController extends Controller
 							return $this->redirect("/");
 						}
 					} else {
-						Debug::p($model->getErrors());
+						Notify::setErrorNotify(Debug::modelErrors($model));
+						return $this->refresh();
 					}
 				} else {
-					Debug::p($model->getErrors());
+					Notify::setErrorNotify(Debug::modelErrors($model));
+					return $this->refresh();
+
 				}
 			}
 		}

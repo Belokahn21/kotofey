@@ -185,6 +185,9 @@
 
 /* iPhone 5 in portrait & landscape */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .auth-form {
+    width: 100%;
+  }
 }
 
 /* iPhone 5 in landscape */
