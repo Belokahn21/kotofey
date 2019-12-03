@@ -46,8 +46,8 @@ class Favorite
 	public static function findAll()
 	{
 		$items = array();
-		if ($_SESSION[self::NAME_KEY_SESSION_FAVORITE]) {
-			foreach ($_SESSION[self::NAME_KEY_SESSION_FAVORITE] as $product_id) {
+		if (\Yii::$app->session->get(self::NAME_KEY_SESSION_FAVORITE)) {
+			foreach (\Yii::$app->session->get(self::NAME_KEY_SESSION_FAVORITE) as $product_id) {
 				$items[] = Product::findOne($product_id);
 			}
 		}

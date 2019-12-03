@@ -6,17 +6,11 @@ use app\models\entity\BasketItem;
 use app\models\entity\Promo;
 use Yii;
 use app\models\entity\Basket;
-use app\models\entity\Delivery;
 use app\models\entity\Order;
 use app\models\entity\OrdersItems;
-use app\models\entity\Payment;
-use app\models\entity\Product;
 use app\models\entity\User;
-use app\models\entity\user\Billing;
 use app\models\tool\Debug;
-use app\models\tool\payments\Robokassa;
 use app\widgets\notification\Notify;
-use yii\debug\models\search\Base;
 
 class FastBuyWidget extends \yii\base\Widget
 {
@@ -49,7 +43,7 @@ class FastBuyWidget extends \yii\base\Widget
             $basket->add($item);
 
             $order = new Order(['scenario' => Order::SCENARIO_FAST_ORDER]);
-            $order->user = $user->id;
+            $order->user_id = $user->id;
             if ($order->validate() == false) {
                 Notify::setErrorNotify(Debug::modelErrors($order));
                 Yii::$app->controller->refresh();

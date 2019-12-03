@@ -14,6 +14,11 @@ class OrderStatistic extends Product
 		return "order";
 	}
 
+	public static function orderSummary($order_id)
+	{
+		return OrdersItems::find()->where(['order_id' => $order_id])->sum('price');
+	}
+
 	public static function income()
 	{
 		return OrdersItems::find()->sum('price');
