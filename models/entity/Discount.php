@@ -18,7 +18,6 @@ class Discount extends ActiveRecord
     {
         return [
             [['count', 'user_id'], 'required', 'message' => '{attribute} поле должно быть заполнено'],
-            ['user_id', 'default', 'value' => \Yii::$app->user->identity->id],
         ];
     }
 
