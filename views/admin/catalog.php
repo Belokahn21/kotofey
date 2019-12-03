@@ -145,4 +145,3 @@ $this->title = Title::showTitle("Товары"); ?>
 		],
 	],
 ]); ?>
-<div style="clear: both;"></div>

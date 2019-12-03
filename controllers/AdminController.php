@@ -41,6 +41,7 @@ use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\ProvidersSearchForm;
+use app\models\search\SettingsSearchForm;
 use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
@@ -648,8 +649,6 @@ class AdminController extends Controller
 		}
 
 		$model = new SiteSettings();
-		$paramsList = SiteSettings::find()->all();
-
 		if ($id) {
 			$model = SiteSettings::findOne($id);
 
@@ -666,7 +665,6 @@ class AdminController extends Controller
 
 			return $this->render('detail/settings', [
 				'model' => $model,
-				'paramsList' => $paramsList,
 			]);
 
 		}
@@ -675,7 +673,7 @@ class AdminController extends Controller
 			if (\Yii::$app->request->isPost) {
 				if ($model->load(\Yii::$app->request->post())) {
 
-					if ($_GET['type'] == 'file') {
+					if (Yii::$app->request->get('type') == 'file') {
 						$model->file = UploadedFile::getInstance($model, 'file');
 
 						if (!empty($model->file)) {
@@ -697,9 +695,12 @@ class AdminController extends Controller
 			}
 		}
 
+		$searchModel = new SettingsSearchForm();
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
 		return $this->render('settings', [
 			'model' => $model,
-			'paramsList' => $paramsList
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
 		]);
 	}
 

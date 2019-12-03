@@ -8,6 +8,7 @@
 namespace app\models\entity;
 
 
+use app\models\tool\Notice;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -27,49 +28,59 @@ use yii\db\ActiveRecord;
  */
 class OrdersItems extends ActiveRecord
 {
-    public function rules()
-    {
-        return [
-            [['name'], 'string'],
-            [['price', 'count', 'product_id', 'order_id'], 'integer']
-        ];
-    }
+	const EVENT_CREATE_ITEMS = 'create_items';
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className()
-        ];
-    }
+	public function rules()
+	{
+		return [
+			[['name'], 'string'],
+			[['price', 'count', 'product_id', 'order_id'], 'integer']
+		];
+	}
 
-    public function saveItems()
-    {
-        /* @var $item BasketItem */
-        foreach (Basket::findAll() as $item) {
-            $self = new OrdersItems();
-            $self->name = $item->getName();
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className()
+		];
+	}
 
-            if ($item->getProduct()->id) {
-                $self->product_id = $item->getProduct()->id;
-            }
+	public function saveItems()
+	{
+		/* @var $item BasketItem */
+		foreach (Basket::findAll() as $item) {
+			$self = new OrdersItems();
+			$self->name = $item->getName();
 
-            $self->count = $item->getCount();
-            $self->order_id = $this->order_id;
-            $self->price = $item->getCount() * $item->getPrice();
-            if ($self->validate()) {
-                if ($self->save() === false) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
-        }
+			if ($item->getProduct()->id) {
+				$self->product_id = $item->getProduct()->id;
+			}
 
-        return true;
-    }
+			$self->count = $item->getCount();
+			$self->order_id = $this->order_id;
+			$self->price = $item->getCount() * $item->getPrice();
+			if ($self->validate()) {
+				if ($self->save() === false) {
+					return false;
+				}
+			} else {
+				return false;
+			}
 
-    public function getProduct()
-    {
-        return Product::findOne($this->product_id);
-    }
+
+		$this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
+				'order_id' => $this->order_id
+			]
+		);
+		$this->trigger(OrdersItems::EVENT_CREATE_ITEMS);
+		}
+
+
+		return true;
+	}
+
+	public function getProduct()
+	{
+		return Product::findOne($this->product_id);
+	}
 }
