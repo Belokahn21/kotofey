@@ -10,17 +10,38 @@
     <include src="include/header/menu.html"></include>
     <include src="include/header/breadcrumb.html"></include>
 
-    <div class="page-wrapper">
-        <h1>Регистрация</h1>
-        <div class="auth-wrap">
-            <h1 class="title">Войти на сайт</h1>
-            <form>
-                <input type="text" name="email">
-                <input type="password" name="email">
-                <button>Войти</button>
-                <a href="" class="link-main">Регистрация</a>
-            </form>
-        </div>
+    <h1>Регистрация</h1>
+    <div class="auth-wrap">
+        <h1 class="title">Войти на сайт</h1>
+        <form>
+
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">@</span>
+                </div>
+                <input type="text" class="form-control" id="usernam1e" placeholder="Username" required="">
+                <div class="invalid-feedback" style="width: 100%;">
+                    Your username is required.
+                </div>
+            </div>
+
+
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                </div>
+                <input type="text" class="form-control" id="usernam1e" placeholder="Username" required="">
+                <div class="invalid-feedback" style="width: 100%;">
+                    Your username is required.
+                </div>
+            </div>
+
+
+            <input type="password" name="email">
+            <button>Войти</button>
+            <a href="" class="link-main">Регистрация</a>
+        </form>
     </div>
 
     <include src="include/footer/footer.html"></include>

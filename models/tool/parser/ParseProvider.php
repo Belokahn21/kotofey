@@ -21,7 +21,7 @@ class ParseProvider
 
     public function contract()
     {
-        $this->provider = ProviderInfo::getInstance()->parse($this->url);
+        $this->provider = ProviderFactory::getInstance()->parse($this->url);
     }
 
     public function getInfo()

@@ -5,11 +5,11 @@ namespace app\models\tool\parser;
 
 use app\models\tool\parser\providers\SibagroTrade;
 
-class ProviderInfo
+class ProviderFactory
 {
     public static function getInstance()
     {
-        return new ProviderInfo();
+        return new ProviderFactory();
     }
 
     public function parse($url)
