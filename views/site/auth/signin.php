@@ -44,7 +44,7 @@ $this->title = Title::showTitle("Войти на сайт"); ?>
                 </div>
                 {input}
             </div>{error}'
-		])->passwordInput(['class' => 'form-control', 'id' => 'password-auth-id', 'placeholder' => 'Email', 'autocomplete' => 'h87h58g7h8hd'])->label(false); ?>
+		])->passwordInput(['class' => 'form-control', 'id' => 'password-auth-id', 'placeholder' => 'Пароль', 'autocomplete' => 'h87h58g7h8hd'])->label(false); ?>
     </div>
 
 	<?= Html::submitButton('Войти', ['class' => 'btn-main']); ?>
