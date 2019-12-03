@@ -36,14 +36,14 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
 <?= Notify::widget(); ?>
 <aside class="left-sidebar">
     <nav class="dashboard-left-sidebar" data-show="false">
-<!--        <button class="show-dashboard">X</button>-->
+        <!--        <button class="show-dashboard">X</button>-->
         <div class="dashboard-left-sidebar__content">
             <h4 style="color: white; text-align: center; padding: 0 0 2% 0; margin: 0; border-bottom: 1px grey solid;">
                 Панель управления</h4>
             <div class="current-profile">
                 <div class="avatar-wrap">
                     <img class="current-profile__avatar"
-                         src="/upload/<?= ((!empty($user->avatar)) ? $user->avatar : "/web/upload/images/boy.png"); ?>"
+                         src="/upload/<?= ((!empty($user->avatar)) ? $user->avatar : "/images/boy.png"); ?>"
                          alt="Аватар пользователя <?= $user->email; ?>"
                          title="Аватар пользователя <?= $user->email; ?>">
                 </div>
