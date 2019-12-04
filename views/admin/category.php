@@ -75,7 +75,7 @@ use yii\helpers\Url;
 				},
 				'delete' => function ($url, $model, $key) {
 					return Html::a('<i class="fas fa-trash-alt"></i>',
-						Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
+						Url::to(["admin/category", 'id' => $key, 'action' => 'delete']));
 				},
 			]
 		],
