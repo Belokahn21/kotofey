@@ -16,6 +16,7 @@ use yii\widgets\ActiveForm;
 use app\models\entity\Geo;
 use app\models\entity\Subscribe;
 use app\widgets\search\SearchWidget;
+use app\widgets\cookie\CookieWidget;
 
 AppAsset::register($this);
 
@@ -276,6 +277,8 @@ $this->beginPage() ?>
         <li class="requisites___item"><a href="https://www.rusprofile.ru/ip/313450121100059" target="_blank">(Проверить)</a></li>
     </ul>
 </div>
+
+<?= CookieWidget::widget(); ?>
 
 <? $this->endBody() ?>
 </body>

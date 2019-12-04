@@ -48,7 +48,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                          title="Аватар пользователя <?= $user->email; ?>">
                 </div>
                 <div class="user-email"><?= $user->email; ?></div>
-                <div class="user-role">Developer</div>
+                <div class="user-role"><?= $user->group->name; ?></div>
                 <div class="is-online"><i class="fas fa-circle"></i> Online</div>
                 <div class="clearfix"></div>
             </div>

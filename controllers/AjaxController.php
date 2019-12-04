@@ -10,6 +10,7 @@ use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
 use app\models\tool\Debug;
 use app\models\tool\parser\ParseProvider;
+use app\widgets\cookie\CookieWidget;
 use Dadata\Client;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
@@ -249,5 +250,19 @@ class AjaxController extends Controller
 		return true;
 
 
+	}
+
+	public function actionAcceptCookie()
+	{
+		if (!\Yii::$app->request->isAjax) {
+			return false;
+		}
+
+		\Yii::$app->session->set(CookieWidget::COOKIE_SESSION_KEY, CookieWidget::COOKIE_SESSION_VALUE);
+		if (\Yii::$app->session->get(CookieWidget::COOKIE_SESSION_KEY) == CookieWidget::COOKIE_SESSION_VALUE) {
+			return true;
+		}
+
+		return false;
 	}
 }

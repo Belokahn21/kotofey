@@ -23,6 +23,9 @@ use yii\helpers\ArrayHelper;
 				<?= $form->field($model, 'new_password')->passwordInput(); ?>
             </div>
             <div class="col-sm-6">
+				<?php if (is_object($model->group)): ?>
+					<?php $model->groups = $model->group->name; ?>
+				<?php endif ?>
 				<?= $form->field($model, 'groups')->dropDownList(ArrayHelper::map($groups, 'name', 'name'), ['prompt' => 'Выбрать группу']); ?>
             </div>
         </div>

@@ -31,6 +31,7 @@ $(document).ready(function () {
 	});
 	/* В разделе каталога при нажатии кнопки "Показать фильтр" -- конец */
 
+	/* Выбор города в попапе - начало */
 	$('.city__item-link').click(function (e) {
 		var $this = $(this), city_id = $this.data('city-id');
 		$.ajax({
@@ -48,6 +49,7 @@ $(document).ready(function () {
 			}
 		});
 	});
+	/* Выбор города в попапе - конец */
 
 	/* Скрытие placeholder элемента */
 	var placeholder = "";
@@ -58,5 +60,29 @@ $(document).ready(function () {
 		$(this).attr('placeholder', placeholder);
 		placeholder = "";
 	});
+
+	/* Обновление времени в полоске панели управления в публичке - начало */
+	if ($('.admin-panel-list__item-ts').length > 0) {
+		setInterval(function () {
+			$('.admin-panel-list__item-ts').text(Math.floor(Date.now() / 1000));
+		}, 1000);
+	}
+	/* Обновление времени в полоске панели управления в публичке - конец */
+
+	/* принятие согласия о куках, пишем в сессию - начало */
+	$('.cookie__button').click(function (e) {
+		e.preventDefault();
+		$.ajax({
+			url: '/ajax/accept-cookie/',
+			success: function (data) {
+				if (data === '1') {
+					$('.cookie').remove();
+				}
+			}
+		});
+	}).hover(function () {
+		$(this).find('span').toggleClass('hide'); // небольшая юзабильность- меняем слово с "Понял" на "Закрыть"
+	});
+	/* принятие согласия о куках, пишем в сессию - конец */
 
 });
