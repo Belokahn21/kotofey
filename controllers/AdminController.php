@@ -192,6 +192,17 @@ class AdminController extends Controller
 
 	public function actionCategory($id = null)
 	{
+
+		// удалить раздел
+		if (Yii::$app->request->get('action') == 'delete') {
+			$item = Category::findOne($id);
+			if ($item->delete()) {
+				Notify::setSuccessNotify('Раздел удален');
+				return $this->redirect('admin/category');
+			}
+		}
+
+
 		if ($id) {
 			$model = Category::findOne($id);
 			if (!$model) {
