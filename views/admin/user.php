@@ -14,14 +14,14 @@ use app\models\entity\Discount;
 $this->title = Title::showTitle("Пользователи"); ?>
     <section>
         <h1 class="title">Пользователи</h1>
-		<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $this->render('_forms/_user', [
 			'model' => $model,
 			'form' => $form,
 			'groups' => $groups
 		]); ?>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-		<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
     </section>
     <h1>Список пользователей</h1>
 

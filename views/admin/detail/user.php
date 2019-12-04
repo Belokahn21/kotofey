@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -12,12 +12,12 @@ $this->title = Title::showTitle("Пользователи"); ?>
 <section>
     <h1 class="title">Пользователь: <?= $model->email; ?></h1>
     <?= Html::a("Назад", '/admin/user/', ['class' => 'btn-back']) ?>
-    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $this->render('../_forms/_user', [
         'model' => $model,
         'form' => $form,
         'groups' => $groups
     ]); ?>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
-    <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>

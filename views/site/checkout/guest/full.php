@@ -13,7 +13,7 @@ use app\widgets\promoCart\promoCartWidget;
 <?php $form = ActiveForm::begin(); ?>
 <!--<div class="order-type-form__title">Промокод</div>-->
 <!--<div class="order-type-form__element">-->
-<!--    --><? //= $form->field($promo_model, 'code')->textInput(['placeholder' => 'Промокод'])->label(false); ?>
+<?php //= $form->field($promo_model, 'code')->textInput(['placeholder' => 'Промокод'])->label(false); ?>
 <!--</div>-->
 <!--<div class="order-type-form__promo">-->
 <!--    <span>Промокод: zoocat</span>-->

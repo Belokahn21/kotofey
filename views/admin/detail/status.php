@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -14,11 +14,11 @@ use yii\helpers\Url;
 <section>
     <h1 class="title">Статус: <?= $model->name; ?></h1>
 	<?= Html::a("Назад", '/admin/status/', ['class' => 'btn-back']) ?>
-	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('../_forms/_status', [
 		'model' => $model,
 		'form' => $form
 	]) ?>
 	<?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
-	<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -13,13 +13,13 @@ use yii\helpers\Url;
 <? $this->title = Title::showTitle("Статусы заказа"); ?>
 <section>
     <h1 class="title">Статусы заказа</h1>
-	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('_forms/_status', [
 		'model' => $model,
 		'form' => $form
 	]) ?>
 	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-	<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>
 <h2 class="title">Список статусов</h2>
 <?= GridView::widget([

@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use app\models\entity\User;

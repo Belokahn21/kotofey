@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\entity\Product;
 use yii\widgets\ActiveForm;
@@ -12,12 +12,12 @@ $this->title = Title::showTitle("Раздел: " . $model->name); ?>
 <section>
     <h1 class="title">Раздел: <?= $model->name; ?></h1>
 	<?= Html::a("Назад", '/admin/category/', ['class' => 'btn-main']) ?>
-	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('../_forms/_category', [
 		'form' => $form,
 		'model' => $model,
 		'categories' => $categories,
 	]); ?>
 	<?= Html::submitButton('Обновить'); ?>
-	<? ActiveForm:: end(); ?>
+<?php ActiveForm:: end(); ?>
 </section>

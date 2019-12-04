@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\ArrayHelper;
 use app\models\entity\NewsCategory;
@@ -16,7 +16,7 @@ $this->title = Title::showTitle("Страницы");
 <section>
     <h1 class="title">Новости</h1>
     <div class="product-form">
-        <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="tabs-container">
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -53,7 +53,7 @@ $this->title = Title::showTitle("Страницы");
                 <?= $form->field($model, 'seo_description')->textarea(); ?>
             </div>
             <?= Html::submitButton('Добавить'); ?>
-            <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
         </div>
 </section>
 <div class="clearfix"></div>

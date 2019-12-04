@@ -22,13 +22,9 @@ use app\models\entity\Geo;
                             </li>
 						<?php endforeach; ?>
 					<?php endif; ?>
-                    <!--                    <li class="city__item">-->
-                    <!--                        <a href="javascript:void(0);" class="city__item-link" data-city-id="2">Барнаул</a>-->
-                    <!--                    </li>-->
                 </ul>
             </div>
             <div class="modal-footer">
-                <!--                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
                 <button type="button" class="btn btn-main" data-dismiss="modal">Закрыть</button>
             </div>
         </div>

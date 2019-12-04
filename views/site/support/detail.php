@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\helpers\Html;
@@ -11,21 +11,21 @@ $this->title = Title::showTitle($ticket->title); ?>
 <section class="support-ticket-detail">
     <div class="left-col">
         <div class="support-ticket-detail__list-messages">
-            <? /* @var $message \app\models\entity\support\SupportMessage */ ?>
-            <? foreach ($messages as $message): ?>
+<?php /* @var $message \app\models\entity\support\SupportMessage */ ?>
+<?php foreach ($messages as $message): ?>
                 <div class="support-ticket-detail__list-messages__item <?= ($message->user_id == Yii::$app->user->identity->id) ? "owner" : "user"; ?>">
                     <h6 class="support-ticket-detail__list-messages__item-title"><?= $message->user->email; ?></h6>
                     <p><?= $message->text; ?></p>
                 </div>
                 <div class="clearfix"></div>
-            <? endforeach; ?>
+<?php endforeach; ?>
         </div>
         <div class="clearfix"></div>
         <div class="support-ticket-detail__form">
-            <? $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
             <?= $form->field($model, 'text')->textarea(); ?>
             <?= Html::submitButton('Отправить', ['class' => 'btn-main']); ?>
-            <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
         </div>
         <div class="clearfix"></div>
     </div>

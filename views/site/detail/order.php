@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
@@ -54,11 +54,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
         </table>
     </div>
     <div class="detail-order-info-items-wrap">
-        <? if ($items): ?>
+<?php if ($items): ?>
             <h1 class="detail-order-info-items__title">Товары в заказе</h1>
-            <? /* @var $item \app\models\entity\OrdersItems */ ?>
+<?php /* @var $item \app\models\entity\OrdersItems */ ?>
             <ul class="detail-order-info-items-list">
-                <? foreach ($items as $item): ?>
+<?php foreach ($items as $item): ?>
                     <li class="detail-order-info-items-list-item">
                         <a href="<?= $item->product->detail; ?>" class="detail-order-info-items-list-item__link">
                             <img class="detail-order-info-items-list-item__image" src="/web/upload/<?= $item->product->image ?>">
@@ -67,10 +67,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                             </div>
                         </a>
                     </li>
-                <? endforeach; ?>
+<?php endforeach; ?>
             </ul>
-        <? else: ?>
+<?php else: ?>
             К сожалению вы ничего не купили
-        <? endif; ?>
+<?php endif; ?>
     </div>
 </section>

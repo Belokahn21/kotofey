@@ -1,4 +1,4 @@
-<?
+<?php
 
 /* @var $this \yii\web\View */
 
@@ -35,13 +35,13 @@ $this->beginPage() ?>
 		<?php echo $this->render('include/head/yandex/webmaster.php'); ?>
 		<?php echo $this->render('include/head/google/google_metrika.php'); ?>
 		<?php echo $this->render('include/head/jivo.php'); ?>
-	<? endif; ?>
+	<?php endif; ?>
 	<?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-	<? $this->head() ?>
+	<?php $this->head() ?>
 </head>
 <body>
-<? $this->beginBody() ?>
+<?php $this->beginBody() ?>
 
 <?= $this->render('include/modal/select-city'); ?>
 
@@ -123,9 +123,9 @@ $this->beginPage() ?>
         </div>
 
         <ul class="menu">
-			<? foreach (Category::find()->where(['parent' => 0])->all() as $category): ?>
+			<?php foreach (Category::find()->where(['parent' => 0])->all() as $category): ?>
                 <li class="menu__item"><a href="<?= $category->getDetail(); ?>"><?= $category->name; ?></a></li>
-			<? endforeach; ?>
+			<?php endforeach; ?>
         </ul>
         <div class="full-menu-wrap hide">
             <ul class="full-menu">
@@ -156,7 +156,7 @@ $this->beginPage() ?>
                             </ul>
 						<?php endif; ?>
                     </li>
-				<? endforeach; ?>
+				<?php endforeach; ?>
             </ul>
         </div>
     </div>
@@ -175,11 +175,11 @@ $this->beginPage() ?>
                 <h3 class="footer-menu__title">Продукция</h3>
                 <ul class="footer-menu">
 
-					<? foreach (Category::find()->where(['parent' => '0'])->all() as $category): ?>
+					<?php foreach (Category::find()->where(['parent' => '0'])->all() as $category): ?>
                         <li class="footer-menu__item">
                             <a href="<?= $category->detail; ?>"><?= $category->name ?></a>
                         </li>
-					<? endforeach; ?>
+					<?php endforeach; ?>
 
                 </ul>
             </div>
@@ -280,7 +280,7 @@ $this->beginPage() ?>
 
 <?= CookieWidget::widget(); ?>
 
-<? $this->endBody() ?>
+<?php $this->endBody(); ?>
 </body>
 </html>
-<? $this->endPage() ?>
+<?php $this->endPage(); ?>

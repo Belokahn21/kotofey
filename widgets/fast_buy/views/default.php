@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\widgets\ActiveForm;
 use yii\bootstrap\Modal;

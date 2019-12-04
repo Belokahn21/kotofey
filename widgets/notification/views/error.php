@@ -1,4 +1,4 @@
-<?
+<?php
 /* @var string $message */
 ?>
 <div class="alert-notify-wrap">

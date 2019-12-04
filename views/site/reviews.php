@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
@@ -12,15 +12,15 @@ $this->title = Title::showTitle("Отзывы");
 $this->params['breadcrumbs'][] = ['label' => 'Отзывы', 'url' => ['/reviews/']];?>
 <section class="site-more-reviews">
     <h1 class="site-more-reviews__title">Отзывы
-        <? if (Yii::$app->user->isGuest): ?>
+<?php if (Yii::$app->user->isGuest): ?>
             <img src="/web/upload/images/good-review.png" class="site-more-reviews__image">
-        <? else: ?>
+<?php else: ?>
             <div class="pulse" data-target='#new-reviews' data-toggle='modal'>
                 <img src="/web/upload/images/good-review.png" class="site-more-reviews__image">
             </div>
-        <? endif; ?>
+<?php endif; ?>
     </h1>
-    <? foreach ($reviews as $review): ?>
+<?php foreach ($reviews as $review): ?>
         <div class="site-more-reviews__item">
             <div class="site-more-reviews__avatar">
                 <img src="<?= (!empty($review->user->avatar)) ? $review->user->avatar : "/web/upload/images/man.png"; ?>">
@@ -31,10 +31,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Отзывы', 'url' => ['/reviews
             </div>
             <div class="clearfix"></div>
         </div>
-    <? endforeach; ?>
+<?php endforeach; ?>
     <div class="clearfix"></div>
 </section>
-<?
+<?php
 Modal::begin([
     'header' => '<h2>Добавить отзыв</h2>',
     'id' => 'new-reviews',

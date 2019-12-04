@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -9,7 +9,7 @@ use yii\grid\GridView;
 $this->title = Title::showTitle("Справочники"); ?>
     <section>
         <h1 class="title">Справочники</h1>
-		<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="tabs-container">
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -23,7 +23,7 @@ $this->title = Title::showTitle("Справочники"); ?>
 
         </div>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-		<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
     </section>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,

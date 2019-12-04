@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\ArrayHelper;
 use app\models\entity\Informers;
@@ -20,7 +20,7 @@ $this->title = Title::showTitle("Свойства товаров"); ?>
     </section>
     <section>
         <h1 class="title">Свойства товаров</h1>
-        <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="tabs-container">
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -32,19 +32,19 @@ $this->title = Title::showTitle("Свойства товаров"); ?>
                 <?= $form->field($model, 'name') ?>
                 <?= $form->field($model, 'sort')->textInput() ?>
 
-                <? if (Yii::$app->request->get('type')) {
+<?php if (Yii::$app->request->get('type')) {
                     $model->type = Yii::$app->request->get('type');
                 } ?>
 
                 <?= $form->field($model, 'type')->dropDownList((new TypeProductProperties())->listType(), ['prompt' => "Тип свойства", 'id'=>'select-type-prop']) ?>
-                <? if (Yii::$app->request->get('type') == "1"): ?>
+<?php if (Yii::$app->request->get('type') == "1"): ?>
                     <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(Informers::find()->all(), 'id', 'name'), ['prompt'=>'Справочник']) ?>
-                <? endif; ?>
+<?php endif; ?>
             </div>
 
         </div>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-        <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
     </section>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

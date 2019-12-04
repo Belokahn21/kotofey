@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\entity\Favorite;
 use yii\widgets\ActiveForm;

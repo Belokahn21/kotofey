@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -54,7 +54,7 @@ $this->title = Title::showTitle("Товары"); ?>
             </svg>
         </div>
     </div>
-	<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('_forms/_catalog', [
 		'model' => $model,
 		'form' => $form,
@@ -62,7 +62,7 @@ $this->title = Title::showTitle("Товары"); ?>
 		'properties' => $properties
 	]); ?>
 	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-	<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>
 <div class="clearfix"></div>
 <h2>Список товаров</h2>

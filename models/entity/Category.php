@@ -1,5 +1,4 @@
-<?
-
+<?php
 namespace app\models\entity;
 
 use app\models\tool\Debug;

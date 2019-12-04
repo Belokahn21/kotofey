@@ -1,14 +1,7 @@
-<?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 16:02
- */
+<?php
 
 namespace app\models\entity;
 
-
-use app\models\tool\Notice;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 

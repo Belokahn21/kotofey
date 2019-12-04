@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\Url;
 use app\models\tool\seo\Title;
@@ -14,7 +14,7 @@ $this->title = Title::showTitle("Изображения слайдеров"); ?>
     <section>
         <h1 class="title">Изображения слайдеров</h1>
         <div class="product-form">
-            <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
             <div class="tabs-container">
                 <ul class="tabs">
                     <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -34,7 +34,7 @@ $this->title = Title::showTitle("Изображения слайдеров"); ?>
                 </div>
             </div>
             <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-            <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
         </div>
     </section>
     <div class="clearfix"></div>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -10,7 +10,7 @@ $this->title = Title::showTitle("Справочники"); ?>
 <section>
     <h1 class="title">Справочник: <?= $model->name; ?></h1>
     <?= Html::a("Назад", '/admin/informers/', ['class' => 'btn-back']) ?>
-    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="tabs-container">
         <ul class="tabs">
             <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -24,5 +24,5 @@ $this->title = Title::showTitle("Справочники"); ?>
 
     </div>
     <?= Html::submitButton('Обновить'); ?>
-    <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>

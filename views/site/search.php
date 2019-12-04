@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\StringHelper;
 use yii\widgets\ActiveForm;
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
 <? if ($products): ?>
     <div class="catalog filtred">
         <ul class="catalog-list">
-            <? /* @var $product \app\models\entity\Product */ ?>
-            <? foreach ($products as $product): ?>
+<?php /* @var $product \app\models\entity\Product */ ?>
+<?php foreach ($products as $product): ?>
                 <li class="catalog-list__item">
                     <a href="<?php echo $product->getDetail(); ?>">
                         <div class="catalog-list__item-image-wrap">
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
                         <div class="catalog-list__item-price"><?php echo Price::format($product->price); ?><?php echo Currency::getInstance()->show(); ?></div>
                     </a>
                 </li>
-            <? endforeach; ?>
+<?php endforeach; ?>
         </ul>
 
         <div class="clearfix"></div>

@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\Html;
 use app\models\tool\seo\Title;

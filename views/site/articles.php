@@ -1,4 +1,4 @@
-<?
+<?php
 /* @var $this yii\web\View */
 
 use app\models\tool\seo\Title;
@@ -15,8 +15,8 @@ $this->title = Title::showTitle("Статьи");
 <section class="articles">
     <h1 class="articles__title">Статьи</h1>
     <div class="article-list">
-        <? /* @var $new \app\models\entity\News */ ?>
-        <? foreach ($news as $new): ?>
+<?php /* @var $new \app\models\entity\News */ ?>
+<?php foreach ($news as $new): ?>
             <article class="article">
                 <a href="<?=$new->detailurl?>" class="special-font">
                     <div class="article-image-wrap">
@@ -27,6 +27,6 @@ $this->title = Title::showTitle("Статьи");
                     </div>
                 </a>
             </article>
-        <? endforeach; ?>
+<?php endforeach; ?>
     </div>
 </section>

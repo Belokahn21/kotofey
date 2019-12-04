@@ -1,11 +1,11 @@
-<?
+<?php
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 ?>
 
-<? $form = ActiveForm::begin([
+<?php $form = ActiveForm::begin([
 	'method' => 'get',
 	'action' => '/search/',
 	'options' => [
@@ -24,4 +24,4 @@ use yii\widgets\ActiveForm;
 	'placeholder' => 'Поиск товара'
 ])->label(false); ?>
 <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'search-form__submit']) ?>
-<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>

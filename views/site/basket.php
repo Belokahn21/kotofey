@@ -1,4 +1,4 @@
-<?
+<?php
 /* @var $this yii\web\View */
 /* @var $products \app\models\entity\Product */
 
@@ -16,14 +16,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
 ?>
 <section class="basket">
     <h1>Корзина товаров</h1>
-    <? if (Basket::count() > 0): ?>
+<?php if (Basket::count() > 0): ?>
         <?= Html::a('Очистить корзину', "/clear/", ['class' => 'btn-cancel']); ?>
         <?= Html::a('Оформить заказ', "/checkout/", ['class' => 'btn-main']); ?>
-    <? endif; ?>
-    <? if (!empty(Yii::$app->session->get('basket'))): ?>
+<?php endif; ?>
+<?php if (!empty(Yii::$app->session->get('basket'))): ?>
         <ul class="basket-page-list">
             <?php /* @var $item \app\models\entity\BasketItem */ ?>
-            <? foreach (Basket::findAll() as $item): ?>
+<?php foreach (Basket::findAll() as $item): ?>
                 <li class="basket-page-item">
                     <div class="basket-page-item__image-wrap">
                         <a href="<?= $item->getProduct()->detail; ?>">
@@ -48,9 +48,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
                         </form>
                     </div>
                 </li>
-            <? endforeach; ?>
+<?php endforeach; ?>
         </ul>
-    <? else: ?>
+<?php else: ?>
         Ничего не выбрано
-    <? endif; ?>
+<?php endif; ?>
 </section>

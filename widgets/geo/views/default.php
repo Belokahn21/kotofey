@@ -2,11 +2,6 @@
 use yii\bootstrap\Modal;
 ?>
 
-<!--<div class="top-line__city">-->
-<!--    Ваш город: <span class="top-line__current-city">--><? //= $location->city; ?><!--</span>-->
-<!--</div>-->
-
-
 <div class="current-city">
     Ваш город: <span data-toggle="modal" data-target="#exampleModal">Барнаул</span>
 </div>

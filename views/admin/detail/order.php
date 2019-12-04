@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\entity\OrderStatus;
 use app\models\entity\OrdersItems;
@@ -16,7 +16,7 @@ use app\models\tool\Currency;
 
 $this->title = Title::showTitle("Заказ №" . $model->id); ?>
 <section class="new-order-block">
-    <? $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
     <div class="left-col">
         <h1 class="title">Заказ №<?= $model->id; ?></h1>
         <br/>
@@ -64,5 +64,5 @@ $this->title = Title::showTitle("Заказ №" . $model->id); ?>
     </div>
     <div class="clearfix"></div>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
-    <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>

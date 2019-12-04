@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\entity\OrderStatus;
 use app\models\tool\Price;
@@ -18,7 +18,7 @@ use yii\helpers\Url;
 
 $this->title = Title::showTitle("Список заказов"); ?>
     <section class="new-order-block">
-        <? $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
         <div class="left-col">
             <h1 class="title">Новый заказ</h1> <span class="order-summ">Сумма заказа: <span
                         class="order-summ-count"><?= rand(); ?></span><?= (new Currency())->show(); ?></span>
@@ -39,7 +39,7 @@ $this->title = Title::showTitle("Список заказов"); ?>
 <!--        </div>-->
         <div class="clearfix"></div>
         <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
-        <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
     </section>
     <h2 class="title">Список заказов</h2>
 <?php echo GridView::widget([

@@ -1,4 +1,4 @@
-<?
+<?php
 
 /* @var $this \yii\web\View */
 
@@ -152,7 +152,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
 <div class="main">
 	<?= $content; ?>
 </div>
-<? $this->endBody() ?>
+<?php $this->endBody() ?>
 </body>
 </html>
-<? $this->endPage() ?>
+<?php $this->endPage() ?>

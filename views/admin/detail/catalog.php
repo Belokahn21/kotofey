@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\entity\InformersValues;
 use app\models\entity\SiteSettings;
@@ -32,8 +32,8 @@ $this->title = Title::showTitle("Товары"); ?>
     <?php if (Yii::$app->request->get('action') == 'copy'): ?>
         <?php echo Html::submitInput('Копировать', ['name' => 'action', 'class' => 'btn-main', 'value' => 'new']); ?>
         <?php echo Html::submitInput('Отмена', ['name' => 'action', 'class' => 'btn-main', 'value' => 'cancel']); ?>
-    <? else: ?>
+<?php else: ?>
         <?php echo Html::submitInput('Обновить', ['class' => 'btn-main']); ?>
-    <? endif; ?>
+<?php endif; ?>
     <?php ActiveForm::end(); ?>
 </section>

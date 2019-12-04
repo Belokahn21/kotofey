@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\entity\Category;
 use app\models\tool\seo\Title;
@@ -13,7 +13,7 @@ use yii\helpers\Html;
 <? $this->title = Title::showTitle("Промокоды"); ?>
 <section>
     <h1 class="title">Промокоды</h1>
-    <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <div class="tabs-container">
         <ul class="tabs">
             <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -27,5 +27,5 @@ use yii\helpers\Html;
 
     </div>
     <?= Html::submitButton('Обновить'); ?>
-    <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>

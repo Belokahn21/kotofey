@@ -1,4 +1,4 @@
-<?
+<?php
 /* @var $this yii\web\View */
 
 use app\models\tool\seo\Title;

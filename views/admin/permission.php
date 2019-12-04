@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\entity\Delivery;
 use app\models\entity\Payment;
@@ -15,7 +15,7 @@ use yii\helpers\Html;
 $this->title = Title::showTitle("Разрешения"); ?>
     <section>
         <h1 class="title">Разрешения</h1>
-        <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="tabs-container">
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -24,13 +24,13 @@ $this->title = Title::showTitle("Разрешения"); ?>
             <div id="tab-1" class="tab-content current">
                 <?= $form->field($model, 'name'); ?>
                 <?= $form->field($model, 'description'); ?>
-                <? //= $form->field($model, 'parent')->dropDownList(); ?>
+<?php //= $form->field($model, 'parent')->dropDownList(); ?>
                 <div class="clearfix"></div>
                 <hr/>
             </div>
         </div>
         <?= Html::submitButton('Добавить'); ?>
-        <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
     </section>
 
     <h2 class="title">Список разрешений</h2>

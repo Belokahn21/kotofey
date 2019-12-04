@@ -1,10 +1,4 @@
-<?
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 12:32
- */
-
+<?php
 namespace app\models\entity;
 
 

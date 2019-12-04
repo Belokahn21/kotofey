@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\seo\Title;
 use yii\grid\GridView;
@@ -15,13 +15,13 @@ use app\models\entity\Informers;
 $this->title = Title::showTitle("Справочники"); ?>
     <section>
         <h1 class="title">Значения справочников</h1>
-		<? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $this->render('_forms/_informers-values', [
 			'model' => $model,
 			'form' => $form,
 		]) ?>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-		<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
     </section>
 <h2>Список значений</h2>
 <?= GridView::widget([

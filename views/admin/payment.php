@@ -1,4 +1,4 @@
-<?
+<?php
 
 /* @var $this yii\web\View */
 
@@ -12,13 +12,13 @@ $this->title = Title::showTitle("Управление оплатами");
 ?>
 <section class="payment">
     <h1 class="title">Оплаты</h1>
-	<? $form = ActiveForm::begin(); ?>
+<?php $form = ActiveForm::begin(); ?>
 	<?= $this->render('_forms/_payment', [
 		'model' => $model,
 		'form' => $form,
 	]) ?>
 	<?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
-	<? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
 </section>
 <h2 class="title">Список оплат</h2>
 <?= GridView::widget([

@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -15,7 +15,7 @@ $this->title = Title::showTitle("Рубрики");
 <section>
     <h1 class="title">Рубрики</h1>
     <div class="product-form">
-        <? $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <div class="tabs-container">
             <ul class="tabs">
                 <li class="tab-link current" data-tab="tab-1">Основное</li>
@@ -28,7 +28,7 @@ $this->title = Title::showTitle("Рубрики");
             </div>
 
             <?= Html::submitButton('Добавить'); ?>
-            <? ActiveForm::end(); ?>
+<?php ActiveForm::end(); ?>
         </div>
 </section>
 <div class="clearfix"></div>

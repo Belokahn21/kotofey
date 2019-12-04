@@ -1,4 +1,4 @@
-<?
+<?php
 /* @var $this yii\web\View */
 
 use app\models\tool\seo\Title;
@@ -11,7 +11,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Избранные товары', 
 <h1 class="favorite__title">Избранные товары</h1>
 <? if (!empty($products)): ?>
     <div class="catalog">
-        <? foreach ($products as $product): ?>
+<?php foreach ($products as $product): ?>
             <div class="item">
                 <div class="item-bookmark" data-id="<?= $product->id; ?>">
                     <i class="<?= (Favorite::isProductInFavorite($product->id)) ? "fas" : "far"; ?> fa-bookmark"></i>
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Избранные товары', 
                 </div>
                 <div class="clearfix"></div>
             </div>
-        <? endforeach; ?>
+<?php endforeach; ?>
         <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>

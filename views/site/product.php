@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\widgets\product_reviews\ProductReviewsWidget;
 use app\models\entity\Basket;

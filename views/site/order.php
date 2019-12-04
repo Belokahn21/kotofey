@@ -1,4 +1,4 @@
-<?
+<?php
 
 use yii\helpers\Html;
 use app\models\tool\Price;
@@ -17,7 +17,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
     <h1>Список заказов</h1>
     <?php if ($orders): ?>
         <table class="list-orders__table">
-            <? foreach ($orders as $order): ?>
+<?php foreach ($orders as $order): ?>
                 <tr class="list-orders__table-item">
                     <td>
                         №<?= $order->id; ?>
@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
                     </td>
                     <td>
                         <table class="list-products__table">
-                            <? foreach (OrdersItems::find()->where(['order_id' => $order->id])->all() as $item): ?>
+<?php foreach (OrdersItems::find()->where(['order_id' => $order->id])->all() as $item): ?>
                                 <tr class="list-products__table-item" href="<?= $item->product->detail; ?>">
                                     <?php if (!empty($item->product->image)): ?>
                                         <td class="list-products__table-image">
@@ -35,29 +35,29 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
                                     <?php endif; ?>
                                     <td class="list-products__table-name"><?= $item->name; ?></td>
                                 </tr>
-                            <? endforeach; ?>
+<?php endforeach; ?>
                         </table>
                     </td>
                     <td class="list-products__table-price">
-                        <? if (!empty($order->cash)): ?>
+<?php if (!empty($order->cash)): ?>
                             <?= Price::format($order->cash); ?>
                             <?= $currency->show(); ?>
-                        <? endif; ?>
+<?php endif; ?>
                     </td>
                     <td class="list-products__table-pay">
-                        <? if ($order->is_paid == false): ?>
+<?php if ($order->is_paid == false): ?>
                             <span class="red">Не оплачено</span>
-                        <? else: ?>
+<?php else: ?>
                             <span class="green">Оплачено</span>
-                        <? endif; ?>
+<?php endif; ?>
                     </td>
                     <td>
                         <?= Html::a('Подробнее', '/order/' . $order->id . '/', ['class' => 'detail-more']) ?>
                     </td>
                 </tr>
-            <? endforeach; ?>
+<?php endforeach; ?>
         </table>
-    <? else: ?>
+<?php else: ?>
         Вы ничего не покупали
-    <? endif; ?>
+<?php endif; ?>
 </section>

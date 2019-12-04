@@ -1,4 +1,4 @@
-<?
+<?php
 
 use app\models\tool\Currency;
 use app\models\tool\Price;

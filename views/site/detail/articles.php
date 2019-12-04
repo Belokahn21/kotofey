@@ -1,4 +1,4 @@
-<?
+<?php
 /* @var $this yii\web\View */
 
 /* @var $article \app\models\entity\News */
@@ -17,11 +17,11 @@ $this->title = Title::showTitle($article->title);
 
 <section class="article-detail">
     <h1 class="article-detail__title"><?= $article->title; ?></h1>
-    <? if (!empty($article->detail_image)): ?>
+<?php if (!empty($article->detail_image)): ?>
         <img class="article-detail-image" src="<?= $article->detail_image; ?>" alt="<?= $article->title ?>" title="<?= $article->title; ?>">
-    <? else: ?>
+<?php else: ?>
         <img class="article-detail-image" src="<?= $article->preview_image; ?>" alt="<?= $article->title ?>" title="<?= $article->title; ?>">
-    <? endif; ?>
+<?php endif; ?>
     <div class="article-detail-text">
         <?= $article->detail; ?>
     </div>
