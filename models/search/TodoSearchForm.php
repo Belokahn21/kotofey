@@ -20,8 +20,9 @@ class TodoSearchForm extends TodoList
 	public function rules()
 	{
 		return [
-			[['name'], 'string'],
-			[['description'], 'string'],
+			[['name', 'description'], 'string'],
+			[['user_id'], 'integer'],
+			[['close'], 'boolean'],
 		];
 	}
 
@@ -50,6 +51,8 @@ class TodoSearchForm extends TodoList
 		}
 
 		$query->andFilterWhere(['like', 'name', $this->name])
+			->andFilterWhere(['like', 'close', $this->close])
+			->andFilterWhere(['like', 'user_id', $this->user_id])
 			->andFilterWhere(['like', 'description', $this->description]);
 
 		return $dataProvider;
