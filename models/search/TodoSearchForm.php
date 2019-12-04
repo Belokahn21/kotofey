@@ -5,6 +5,7 @@ namespace app\models\search;
 
 use app\models\entity\News;
 use app\models\entity\TodoList;
+use app\models\entity\User;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -31,7 +32,11 @@ class TodoSearchForm extends TodoList
 
 	public function search($params)
 	{
-		$query = TodoList::find()->orderBy(['created_at' => SORT_DESC]);
+		if (User::isRole('Developer')) {
+			$query = TodoList::find()->orderBy(['created_at' => SORT_DESC]);
+		} else {
+			$query = TodoList::find()->orderBy(['created_at' => SORT_DESC])->where(['user_id' => \Yii::$app->user->id]);
+		}
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
