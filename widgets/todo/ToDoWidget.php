@@ -7,6 +7,7 @@ use app\models\tool\System;
 use app\models\entity\TodoList;
 use app\widgets\notification\Notify;
 use yii\helpers\Url;
+use yii\web\HttpException;
 
 class ToDoWidget extends \yii\base\Widget
 {
@@ -16,18 +17,23 @@ class ToDoWidget extends \yii\base\Widget
 		$searchModel = new TodoSearchForm();
 		$dataProvider = $searchModel->search(\Yii::$app->request->get());
 
-		if (\Yii::$app->request->get('action') == 'delete' && \Yii::$app->request->get('target') == 'todo') {
+		if (!empty(\Yii::$app->request->get('id')) && \Yii::$app->request->get('action') == 'delete' && \Yii::$app->request->get('target') == 'todo') {
 			$entity = TodoList::findOne(\Yii::$app->request->get('id'));
 			if ($entity) {
 				if ($entity->delete()) {
 					Notify::setSuccessNotify('Задание удалено');
 					\Yii::$app->controller->redirect(Url::to(['admin/index']));
+					return '';
 				}
 			}
 		}
 
 		if (\Yii::$app->request->get('id')) {
 			$model = TodoList::findOne(\Yii::$app->request->get('id'));
+
+			if (!$model) {
+				throw new HttpException(404, 'Задание не найдено');
+			}
 
 			if (\Yii::$app->request->isPost) {
 				if ($model->edit()) {
