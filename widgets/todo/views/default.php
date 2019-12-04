@@ -4,6 +4,7 @@
 
 /* @var $this \yii\web\View */
 
+use yii\helpers\ArrayHelper;
 use app\models\entity\User;
 use yii\helpers\Url;
 use yii\helpers\Html;
@@ -32,9 +33,9 @@ use yii\grid\GridView;
 				'format' => 'raw',
 				'value' => function ($model) {
 					if ($model->close == 1) {
-						return Html::tag('div', 'Активен', ['style' => 'color: green;']);
+						return Html::tag('div', 'Закрыто', ['style' => 'color: red;']);
 					} else {
-						return Html::tag('div', 'Неактивен', ['style' => 'color: red;']);
+						return Html::tag('div', 'Открыто', ['style' => 'color: green;']);
 					}
 				}
 			],
@@ -43,6 +44,7 @@ use yii\grid\GridView;
 			[
 				'attribute' => 'user_id',
 				'format' => 'raw',
+				'filter' => ArrayHelper::map(User::find()->all(), 'id', 'email'),
 				'value' => function ($model) {
 					return Html::a(User::findOne($model->user_id)->email, Url::to(['admin/user', 'id' => $model->user_id]));
 				}
