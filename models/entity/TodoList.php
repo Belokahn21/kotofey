@@ -64,6 +64,19 @@ class TodoList extends ActiveRecord
 				return $this->save();
 			}
 		}
+
+		return false;
+	}
+
+	public function edit()
+	{
+		if ($this->load(\Yii::$app->request->post())) {
+			if ($this->validate()) {
+				return $this->update();
+			}
+		}
+
+		return false;
 	}
 
 	public function getUser()
