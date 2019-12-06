@@ -783,7 +783,7 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail/pages', [
+			return $this->render('detail/news', [
 				'model' => $model,
 			]);
 		}
@@ -803,7 +803,7 @@ class AdminController extends Controller
 			}
 		}
 
-		return $this->render('pages', [
+		return $this->render('news', [
 			'model' => $model,
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
@@ -857,7 +857,7 @@ class AdminController extends Controller
 			}
 		}
 
-		return $this->render('pagesections', [
+		return $this->render('news-category', [
 			'model' => $model,
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,

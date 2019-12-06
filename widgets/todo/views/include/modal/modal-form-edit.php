@@ -16,15 +16,10 @@ use yii\helpers\Url;
 				<?= Html::a('<span aria-hidden="true">&times;</span>', Url::to(['admin/index']), ['class' => 'close', 'aria-label' => 'Close']); ?>
             </div>
             <div class="modal-body">
-                <div class="task-element-form">
-					<?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Кому поставить задачу ? ']); ?>
-                </div>
-                <div class="task-element-form">
-					<?= $form->field($model, 'name')->textInput(); ?>
-                </div>
-                <div class="task-element-form">
-					<?= $form->field($model, 'description')->textarea(); ?>
-                </div>
+				<?= $this->render('_form', [
+					'model' => $model,
+					'form' => $form
+				]); ?>
             </div>
             <div class="modal-footer">
 				<?= Html::a('Закрыть', Url::to(['admin/index']), ['class' => 'btn btn-secondary']); ?>

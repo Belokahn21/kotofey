@@ -17,30 +17,14 @@ use app\models\entity\SiteSettings;
 $this->title = Title::showTitle("Поставщик:" . $model->name); ?>
 <section>
     <h1 class="title">Поставщик: <?php echo $model->name; ?></h1>
+	<?= Html::a('Назад', ['admin/provider'], ['class' => 'btn-main']) ?>
     <div class="product-form">
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-        <div class="tabs-container">
-            <ul class="tabs">
-                <li class="tab-link current" data-tab="tab-1">Основное</li>
-                <li class="tab-link" data-tab="tab-2">Галерея</li>
-                <li class="tab-link" data-tab="tab-3">Прочее</li>
-            </ul>
-
-            <div id="tab-1" class="tab-content current">
-                <?php echo $form->field($model, 'name')->textInput(); ?>
-                <?php echo $form->field($model, 'description')->textarea(); ?>
-                <?php echo $form->field($model, 'notes')->textarea(); ?>
-                <?php echo $form->field($model, 'link')->textInput(); ?>
-            </div>
-            <div id="tab-2" class="tab-content">
-                <?php echo $form->field($model, 'image')->fileInput(); ?>
-            </div>
-            <div id="tab-3" class="tab-content">
-                <?php echo $form->field($model, 'active')->radioList(['Нет', 'Да']); ?>
-                <?php echo $form->field($model, 'sort')->textInput(); ?>
-            </div>
-        </div>
-        <?= Html::submitButton('Обновить'); ?>
-<?php ActiveForm::end(); ?>
+		<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+		<?= $this->render('../_forms/_provider', [
+			'model' => $model,
+			'form' => $form
+		]); ?>
+		<?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
+		<?php ActiveForm::end(); ?>
     </div>
 </section>
