@@ -9,6 +9,7 @@ use app\models\tool\seo\Title;
 use app\models\tool\Price;
 use app\models\entity\Order;
 use app\models\tool\Currency;
+use app\models\helpers\OrderHelper;
 
 /* @var \app\models\entity\User $profile */
 /* @var $orders Order[] */
@@ -64,7 +65,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                                     Дата: <?= date('d.m.Y', $order->created_at) ?>
                                 </li>
                                 <li class="slide-order-info__item">
-                                    Сумма: <?= Price::format($order->cash()); ?> <?= Currency::getInstance()->show(); ?>
+                                    Сумма: <?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?>
                                 </li>
                                 <li class="slide-order-info__item">
                                     <?= (($order->is_paid == 1) ? 'Оплачен' : 'Не оплачен'); ?>

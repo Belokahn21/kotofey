@@ -4,6 +4,7 @@ use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use yii\helpers\Html;
+use app\models\helpers\OrderHelper;
 
 /* @var $order \app\models\entity\Order */
 
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     Сумма заказа
                 </td>
                 <td>
-                    <?= Price::format($order->getCash()); ?> <?= (new Currency())->show(); ?>
+                    <?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= (new Currency())->show(); ?>
                 </td>
             </tr>
             <tr>

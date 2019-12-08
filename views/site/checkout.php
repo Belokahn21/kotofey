@@ -1,90 +1,95 @@
 <?php
 
 /* @var $this yii\web\View
- * @var $order \app\models\entity\Order
- * @var $billing \app\models\entity\user\Billing
- * @var $user \app\models\entity\User
+ * @var $Order \app\models\entity\Order
+ * @var $Billing \app\models\entity\user\Billing
+ * @var $User \app\models\entity\User
+ * @var $DiscountModel \app\models\forms\DiscountForm
  * @var $delivery \app\models\entity\Delivery[]
  * @var $payment \app\models\entity\Payment[]
  */
 
+use app\models\tool\Price;
 use app\models\tool\seo\Title;
 use app\models\entity\Basket;
 use app\models\tool\Currency;
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 
 $this->title = Title::showTitle("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
 $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа', 'url' => ['/checkout/']];
 ?>
-<ul class="type-order-list">
-    <li class="type-order-item" data-order-type="fast">
-        <div class="type-order-title">Быстрая покупка</div>
-        <ul class="type-order-advanages minuses">
-            <li class="type-order-advanage">- Не начислят бонусы</li>
-            <li class="type-order-advanage">- Нет промокода</li>
-            <li class="type-order-advanage">- Звонок оператора</li>
+<h1>Оформление заказа</h1>
+<?php $form = ActiveForm::begin(); ?>
+<div class="row">
+    <div class="col-sm-6">
+        <ul class="select-type-order">
+            <li class="type-order__item active" data-checkout="fast">Быстрый заказ
+                <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
+            </li>
+            <li class="type-order__item" data-checkout="simple">Обычный заказ
+                <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
+            </li>
         </ul>
-    </li>
-    <li class="type-order-item no-hover">
-        <div class="type-order-title">Выберите вариант заказа</div>
-        <?php if (Basket::getInstance()->cash() > 500): ?>
-            <div class="type-order-description green">Бесплатная доставка</div>
-        <?php else: ?>
-            <div class="type-order-description red">Доставка 100 <?= Currency::getInstance()->show(); ?></div>
-        <?php endif; ?>
-    </li>
-    <li class="type-order-item" data-order-type="simple">
-        <div class="type-order-title">Обычная покупка</div>
-        <ul class="type-order-advanages pluses">
-            <li class="type-order-advanage">+ Промокод</li>
-            <li class="type-order-advanage">+ Начислят бонусы</li>
-            <li class="type-order-advanage">+ Нет звонка оператора</li>
-        </ul>
-    </li>
-</ul>
 
-<div class="order-type-form-wrap">
-    <div class="order-type-form fast">
-        <h3 class="order-type-form__title">Быстрый заказ</h3>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <?php if (Yii::$app->user->isGuest): ?>
-                        <?= $this->render('checkout/guest/fast', [
-                            'user' => $user,
-                        ]); ?>
-                    <?php else: ?>
-                        <?= $this->render('checkout/user/fast'); ?>
-                    <?php endif; ?>
-                </div>
-                <?= $this->render('checkout/list-checkout'); ?>
+        <div class="checkout-order-wrap">
+            <div class="checkout-order hide" data-type="fast">
+				<?php if (Yii::$app->user->isGuest): ?>
+					<?= $this->render('checkout/fast/guest/form'); ?>
+				<?php else: ?>
+					<?= $this->render('checkout/fast/user/form'); ?>
+				<?php endif; ?>
+            </div>
+            <div class="checkout-order hide" data-type="simple">
+				<?= $this->render('checkout/simple/form', [
+					'form' => $form,
+					'discount_model' => $discount_model,
+					'user' => $user,
+					'billing' => $billing,
+					'order' => $order,
+					'delivery' => $delivery,
+					'payment' => $payment,
+				]); ?>
             </div>
         </div>
     </div>
-    <div class="order-type-form simple">
-        <h3 class="order-type-form__title">Обычный заказ</h3>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <?php if (Yii::$app->user->isGuest): ?>
-                        <?= $this->render('checkout/guest/full', [
-                            'order' => $order,
-                            'delivery' => $delivery,
-                            'payment' => $payment,
-                            'billing' => $billing,
-                            'user' => $user,
-                        ]); ?>
-                    <?php else: ?>
-                        <?= $this->render('checkout/user/full', [
-                            'order' => $order,
-                            'delivery' => $delivery,
-                            'payment' => $payment,
-                            'billing' => $billing,
-                        ]); ?>
-                    <?php endif; ?>
-                </div>
-                <?= $this->render('checkout/list-checkout'); ?>
+    <div class="col-sm-6">
+        <div class="checkout__summary">
+            <div class="checkout__title">Сумма заказа:</div>
+            <div class="checkout__control-wrap">
+                <div class="checkout__price"><?= Price::format(Basket::getInstance()->cash()); ?> <?= Currency::getInstance()->show(); ?></div>
+				<?= Html::submitButton('Оформить', ['class' => 'checkout__submit']) ?>
             </div>
         </div>
+        <div class="checkout__title">Корзина:</div>
+		<?php if ($basket = Basket::findAll()): ?>
+            <ul class="checkout__cart">
+				<?php foreach (Basket::findAll() as $item): ?>
+                    <li class="checkout__cart-item">
+                        <div class="checkout__cart-item__title">
+                            <a href="" class="checkout__cart-item__link"><?= $item->getName(); ?></a>
+                        </div>
+                        <div class="checkout__cart-item__count">
+                            <div class="checkout__cart-item__action-plus">
+                                <i class="fas fa-minus"></i>
+                            </div>
+
+
+                            <div class="checkout__cart-item__integer">
+								<?= $item->getCount(); ?>
+                            </div>
+
+
+                            <div class="checkout__cart-item__action-minus">
+                                <i class="fas fa-plus"></i>
+                            </div>
+                        </div>
+                        <div class="checkout__cart-item__summary"><?= Price::format($item->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
+                    </li>
+				<?php endforeach; ?>
+            </ul>
+		<?php endif; ?>
     </div>
 </div>
+<?php ActiveForm::end(); ?>

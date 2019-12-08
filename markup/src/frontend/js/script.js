@@ -53,7 +53,7 @@ $(document).ready(function () {
 
 	/* Скрытие placeholder элемента */
 	var placeholder = "";
-	$("input[type=text]").click(function () {
+	$("input[type=text], textarea").click(function () {
 		placeholder = $(this).attr('placeholder');
 		$(this).attr('placeholder', "");
 	}).blur(function () {

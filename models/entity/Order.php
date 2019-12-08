@@ -3,8 +3,8 @@
 namespace app\models\entity;
 
 
+use app\models\helpers\OrderHelper;
 use yii\behaviors\TimestampBehavior;
-use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 
 
@@ -82,14 +82,14 @@ class Order extends ActiveRecord
         if ($this->is_update) {
             if ($this->is_paid == 1 && $this->is_bonus == 0) {
                 if ($discount = Discount::findByUserId($this->user_id)) {
-                    $discount->count += ceil($this->cash() * 0.05);
+                    $discount->count += ceil(OrderHelper::orderSummary($this->id) * 0.05);
                     if ($discount->validate()) {
                         $discount->update();
                     }
                 } else {
                     $discount = new Discount();
                     $discount->user_id = $this->user_id;
-                    $discount->count = ceil($this->cash() * 0.05);
+                    $discount->count = ceil(OrderHelper::orderSummary($this->id) * 0.05);
                     if ($discount->validate()) {
                         $discount->save();
                     }
@@ -140,27 +140,6 @@ class Order extends ActiveRecord
         return false;
     }
 
-    public function cash()
-    {
-        $cash = false;
-        $items = OrdersItems::findAll(['order_id' => $this->id]);
-        /* @var $promo Promo */
-        $promo = Promo::findByCode($this->promo_code);
-        foreach ($items as $item) {
-            if ($promo) {
-                $cash += $item->price - (($item->price * $promo->discount) / 100);
-            } else {
-                $cash += $item->price;
-            }
-        }
-        return $cash;
-    }
-
-    public function getCash()
-    {
-        return $this->cash();
-    }
-
     public function getStatus()
     {
         $status = null;
@@ -174,55 +153,9 @@ class Order extends ActiveRecord
         return $status->name;
     }
 
-    public function findByFilter($params)
-    {
-        if (!$params) {
-            throw new \InvalidArgumentException("Empty params.");
-        }
-        if (\Yii::$app->user->isGuest) {
-            throw new \Exception("Need auth user.");
-        }
-
-        $params['filter']['user_id'] = \Yii::$app->user->identity->id;
-
-        return static::find()->where($params['filter'])->all();
-    }
-
-    public static function orderProfit()
-    {
-        $cash = 0;
-        $orders = Order::find()->where(['is_paid' => 1])->all();
-
-
-        /* @var $order Order */
-        foreach ($orders as $order) {
-            $cash += $order->cash();
-        }
-
-        return $cash;
-
-    }
 
     public function hasAccess()
     {
         return $this->user_id == \Yii::$app->user->id;
-    }
-
-    public function search($params)
-    {
-        $query = static::find()->orderBy(['created_at' => SORT_DESC]);
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'delivery_id', $this->delivery_id])
-            ->andFilterWhere(['like', 'payment_id', $this->payment_id]);
-
-        return $dataProvider;
     }
 }

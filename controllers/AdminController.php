@@ -36,6 +36,7 @@ use app\models\search\InformersSearchForm;
 use app\models\search\InformersValuesSearchForm;
 use app\models\search\NewsSearchForm;
 use app\models\search\NewsCategorySearchForm;
+use app\models\search\OrderSearchForm;
 use app\models\search\PermissionsSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
@@ -281,11 +282,13 @@ class AdminController extends Controller
 		}
 
 		$model = new Order();
-		$dataProvider = $model->search(\Yii::$app->request->get());
+		$searchModel = new OrderSearchForm();
+		$dataProvider = $searchModel->search(\Yii::$app->request->get());
 
 
 		return $this->render('order', [
 			'dataProvider' => $dataProvider,
+			'searchModel' => $searchModel,
 			'model' => $model,
 		]);
 	}

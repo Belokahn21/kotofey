@@ -11,6 +11,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\tool\Price;
 use app\models\tool\Currency;
+use app\models\helpers\OrderHelper;
 
 /* @var $model \app\models\entity\Order */
 
@@ -20,9 +21,9 @@ $this->title = Title::showTitle("Заказ №" . $model->id); ?>
     <div class="left-col">
         <h1 class="title">Заказ №<?= $model->id; ?></h1>
         <br/>
-        <?= Html::a("Назад", '/admin/order/', ['class' => 'btn-back']) ?>
+        <?= Html::a("Назад", '/admin/order/', ['class' => 'btn-main']) ?>
         <h3 class="title">Информация о заказе</h3>
-        <div style="margin: 1% 0; color: green; font-weight: bold; border: 1px #e2e2e2 solid; display: inline-block; padding: 1%; -webkit-border-radius: 0.2em;-moz-border-radius: 0.2em;border-radius: 0.2em;">Сумма заказа: <?= Price::format($model->cash()); ?><?= (new Currency())->show(); ?></div>
+        <div style="margin: 1% 0; color: green; font-weight: bold; border: 1px #e2e2e2 solid; display: inline-block; padding: 1%; -webkit-border-radius: 0.2em;-moz-border-radius: 0.2em;border-radius: 0.2em;">Сумма заказа: <?= Price::format(OrderHelper::orderSummary($model->id)); ?><?= (new Currency())->show(); ?></div>
         <div class="new-order-info">
             <?= $form->field($model, 'status')->dropDownList(ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'), ['prompt' => 'Статус заказа']); ?>
             <?= $form->field($model, 'payment_id')->dropDownList(ArrayHelper::map(Payment::find()->all(), 'id', 'name'), ['prompt' => 'Способ оплаты']); ?>

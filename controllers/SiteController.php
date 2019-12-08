@@ -10,6 +10,7 @@ use app\models\entity\Favorite;
 use app\models\entity\Geo;
 use app\models\entity\InformersValues;
 use app\models\entity\Order;
+use app\models\entity\OrderSimple;
 use app\models\entity\OrdersItems;
 use app\models\entity\News;
 use app\models\entity\NewsCategory;
@@ -24,6 +25,7 @@ use app\models\entity\support\SupportMessage;
 use app\models\entity\support\Tickets;
 use app\models\entity\user\Billing;
 use app\models\forms\CatalogFilter;
+use app\models\forms\DiscountForm;
 use app\models\tool\Debug;
 use app\models\tool\seo\Attributes;
 use app\models\entity\User;
@@ -338,9 +340,11 @@ class SiteController extends Controller
 
 	public function actionCheckout()
 	{
+
 		$delivery = Delivery::find()->where(['active' => 1])->all();
 		$payment = Payment::find()->where(['active' => 1])->all();
 		$basket = new Basket();
+		$discount_model = new DiscountForm();
 
 		if ($basket->isEmpty()) {
 			return $this->redirect("/");
@@ -405,12 +409,12 @@ class SiteController extends Controller
 			}
 
 			return $this->render('checkout', [
-				'order' => $order,
+				'discount_model' => $discount_model,
 				'user' => $user,
+				'billing' => $billing,
+				'order' => $order,
 				'delivery' => $delivery,
 				'payment' => $payment,
-				'billing' => $billing,
-
 			]);
 		} else {
 			$order = new Order(['scenario' => Order::SCENARIO_SIMPLE_ORDER]);
@@ -469,9 +473,10 @@ class SiteController extends Controller
 			}
 
 			return $this->render('checkout', [
-				'order' => $order,
+				'discount_model' => $discount_model,
 				'user' => $user,
 				'billing' => $billing,
+				'order' => $order,
 				'delivery' => $delivery,
 				'payment' => $payment,
 			]);
@@ -617,11 +622,6 @@ class SiteController extends Controller
 
 	public function actionOrder($id = null)
 	{
-		try {
-			$orders = Order::findByFilter(\Yii::$app->request->get());
-		} catch (\Exception $exception) {
-			$orders = Order::findAll(['user_id' => \Yii::$app->user->id]);
-		}
 
 		if ($id) {
 			$order = Order::findOne($id);
@@ -640,11 +640,13 @@ class SiteController extends Controller
 				'order' => $order,
 				'items' => $items,
 			]);
-		} else {
-			return $this->render('order', [
-				'orders' => $orders
-			]);
 		}
+
+
+		$orders = Order::findAll(['user_id' => \Yii::$app->user->id]);
+		return $this->render('order', [
+			'orders' => $orders
+		]);
 	}
 
 	public function actionSupport($category = null, $id = null)
