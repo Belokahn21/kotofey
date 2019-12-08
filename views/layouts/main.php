@@ -187,7 +187,7 @@ $this->beginPage() ?>
                 <div class="subscribe-wrap">
                     <h2 class="subscribe-title">Будьте всегда вкурсе!</h2>
                     <div class="subscribe-description">Получай уведомления о новых акциях</div>
-					<?
+					<?php
 					$model = new Subscribe();
 					if (Yii::$app->request->isPost) {
 						if ($model->load(Yii::$app->request->post())) {
