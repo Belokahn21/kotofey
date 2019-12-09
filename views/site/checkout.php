@@ -1,10 +1,10 @@
 <?php
 
 /* @var $this yii\web\View
- * @var $Order \app\models\entity\Order
- * @var $Billing \app\models\entity\user\Billing
- * @var $User \app\models\entity\User
- * @var $DiscountModel \app\models\forms\DiscountForm
+ * @var $order \app\models\entity\Order
+ * @var $billing \app\models\entity\user\Billing
+ * @var $user \app\models\entity\User
+ * @var $discount_model \app\models\forms\DiscountForm
  * @var $delivery \app\models\entity\Delivery[]
  * @var $payment \app\models\entity\Payment[]
  */
@@ -42,15 +42,26 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 				<?php endif; ?>
             </div>
             <div class="checkout-order hide" data-type="simple">
-				<?= $this->render('checkout/simple/form', [
-					'form' => $form,
-					'discount_model' => $discount_model,
-					'user' => $user,
-					'billing' => $billing,
-					'order' => $order,
-					'delivery' => $delivery,
-					'payment' => $payment,
-				]); ?>
+				<?php if (Yii::$app->user->isGuest): ?>
+					<?= $this->render('checkout/simple/guest/form', [
+						'form' => $form,
+						'discount_model' => $discount_model,
+						'user' => $user,
+						'billing' => $billing,
+						'order' => $order,
+						'delivery' => $delivery,
+						'payment' => $payment,
+					]); ?>
+				<?php else: ?>
+					<?= $this->render('checkout/simple/user/form', [
+						'form' => $form,
+						'discount_model' => $discount_model,
+						'billing' => $billing,
+						'order' => $order,
+						'delivery' => $delivery,
+						'payment' => $payment,
+					]); ?>
+				<?php endif; ?>
             </div>
         </div>
     </div>

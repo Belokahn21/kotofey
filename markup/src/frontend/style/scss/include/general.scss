@@ -55,12 +55,15 @@ textarea {
   color: $mainActiveColor;
 }
 
-input[aria-invalid='true'] {
-  border: 1px solid $mainActiveColor !important;
-}
+input[type='text'], input[type='password'], select, textarea {
+  &[aria-invalid="false"] {
+    border: 1px green solid;
+  }
 
-input[aria-invalid='false'] {
-  border: 1px solid green !important;
+  &[aria-invalid="true"] {
+    border: 1px red solid;
+    outline: 0;
+  }
 }
 
 .modal-header {

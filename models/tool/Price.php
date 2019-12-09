@@ -1,9 +1,4 @@
 <?php
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 14:11
- */
 
 namespace app\models\tool;
 

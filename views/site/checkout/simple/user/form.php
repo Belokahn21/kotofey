@@ -12,32 +12,25 @@ use yii\helpers\ArrayHelper;
 
 ?>
 
-<?php if (!Yii::$app->user->isGuest): ?>
-	<?= $this->render('bonus', [
-		'form' => $form,
-		'DiscountModel' => $discount_model
-	]); ?>
-<?php else: ?>
-	<?= $this->render('fast-auth-modal'); ?>
-    Чтобы воспользоваться бонусами выполните <a href="javascript:void();" data-target="#fast-auth-id" data-toggle="modal">авторизацию</a> на сайте
-<?php endif; ?>
-
+<?= $this->render('../bonus', [
+	'form' => $form,
+	'DiscountModel' => $discount_model
+]); ?>
 
 <div class="checkout-block">
     <div class="checkout-block__title">
         Покупатель
     </div>
-    <div class="row">
-        <div class="col-sm-4">
-			<?= $form->field($user, 'email')->textInput(['class' => 'checkout__input', 'placeholder' => 'Email'])->label(false); ?>
-        </div>
-        <div class="col-sm-4">
-			<?= $form->field($user, 'phone')->textInput(['class' => 'checkout__input', 'placeholder' => 'Телефон'])->label(false); ?>
-        </div>
-        <div class="col-sm-4">
-			<?= $form->field($user, 'password')->passwordInput(['class' => 'checkout__input', 'placeholder' => 'Пароль'])->label(false); ?>
-        </div>
-    </div>
+    <ul class="checkout-user-reqs">
+        <li class="user-reqs__item">
+            <div class="user-reqs__item__key">Телефон</div>
+            <div class="user-reqs__item__value phone_mask"><?= \Yii::$app->user->identity->phone; ?></div>
+        </li>
+        <li class="user-reqs__item">
+            <div class="user-reqs__item__key">Email</div>
+            <div class="user-reqs__item__value"><?= \Yii::$app->user->identity->email; ?></div>
+        </li>
+    </ul>
 </div>
 
 

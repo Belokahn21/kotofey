@@ -340,11 +340,11 @@ class SiteController extends Controller
 
 	public function actionCheckout()
 	{
-
 		$delivery = Delivery::find()->where(['active' => 1])->all();
 		$payment = Payment::find()->where(['active' => 1])->all();
 		$basket = new Basket();
 		$discount_model = new DiscountForm();
+		$db = Yii::$app->db;
 
 		if ($basket->isEmpty()) {
 			return $this->redirect("/");
@@ -359,8 +359,10 @@ class SiteController extends Controller
 
 			// форма отправлена
 			if (\Yii::$app->request->isPost) {
+				$transaction = $db->beginTransaction();
 				if ($user->load(Yii::$app->request->post()) && $user->validate()) {
 					if ($user->save() === false) {
+						$transaction->rollBack();
 						Notify::setErrorNotify(print_r($user->getErrors(), true));
 						return $this->refresh();
 					}
@@ -372,6 +374,7 @@ class SiteController extends Controller
 				$billing->user_id = $user->id;
 				if ($billing->load(Yii::$app->request->post()) or $billing->validate()) {
 					if ($billing->save() === false) {
+						$transaction->rollBack();
 						Notify::setErrorNotify(Debug::modelErrors($billing));
 						return $this->refresh();
 					}
@@ -388,6 +391,7 @@ class SiteController extends Controller
 				$order->user_id = $user->id;
 				if ($order->load(Yii::$app->request->post()) or $order->validate()) {
 					if ($order->save() === false) {
+						$transaction->rollBack();
 						Notify::setErrorNotify(Debug::modelErrors($order));
 						return $this->refresh();
 					}
@@ -398,6 +402,7 @@ class SiteController extends Controller
 
 				$items->order_id = $order->id;
 				if ($items->saveItems() === false) {
+					$transaction->rollBack();
 					Notify::setErrorNotify(Debug::modelErrors($items));
 					return $this->refresh();
 				}
@@ -405,6 +410,7 @@ class SiteController extends Controller
 				Basket::clear();
 				unset($_COOKIE['order']);
 				Notify::setSuccessNotify("Заказ успешно создан создан");
+				$transaction->commit();
 				return $this->redirect('/');
 			}
 
@@ -424,6 +430,7 @@ class SiteController extends Controller
 			$billing = $user->billing;
 
 			if (\Yii::$app->request->isPost) {
+				$transaction = $db->beginTransaction();
 //                if ($user->load(Yii::$app->request->post()) or $user->validate()) {
 //                    if ($user->update() === false) {
 //                        Notify::setErrorNotify(Debug::modelErrors($user));
@@ -436,6 +443,7 @@ class SiteController extends Controller
 
 				if ($billing->load(Yii::$app->request->post()) or $billing->validate()) {
 					if ($billing->update() === false) {
+						$transaction->rollBack();
 						Notify::setErrorNotify(Debug::modelErrors($billing));
 						return $this->refresh();
 					}
@@ -448,12 +456,20 @@ class SiteController extends Controller
 					$order->scenario = Yii::$app->request->post('type');
 				}
 
+				if ($discount_model->load(Yii::$app->request->post())) {
+					if ($discount_model->validate()) {
+						if ($discount_model->calc($order, 'promo_code') === false) {
+							$transaction->rollBack();
+						}
+					}
+				}
+
 				$order->user_id = $user->id;
 				if ($order->load(Yii::$app->request->post()) or $order->validate()) {
 					if ($order->save() === false) {
+						$transaction->rollBack();
 						Notify::setErrorNotify(Debug::modelErrors($order));
 						return $this->refresh();
-					} else {
 					}
 				} else {
 					Notify::setErrorNotify(Debug::modelErrors($order));
@@ -462,6 +478,7 @@ class SiteController extends Controller
 
 				$items->order_id = $order->id;
 				if ($items->saveItems() === false) {
+					$transaction->rollBack();
 					Notify::setErrorNotify(Debug::modelErrors($items));
 					return $this->refresh();
 				}
@@ -469,6 +486,7 @@ class SiteController extends Controller
 				Basket::clear();
 				unset($_COOKIE['order']);
 				Notify::setSuccessNotify("Заказ успешно создан создан");
+				$transaction->commit();
 				return $this->redirect('/');
 			}
 

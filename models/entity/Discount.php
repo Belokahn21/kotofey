@@ -14,15 +14,17 @@ use yii\db\ActiveRecord;
  */
 class Discount extends ActiveRecord
 {
-    public function rules()
-    {
-        return [
-            [['count', 'user_id'], 'required', 'message' => '{attribute} поле должно быть заполнено'],
-        ];
-    }
+	const PERCENT_AFTER_SALE = 5;
 
-    public static function findByUserId($userId)
-    {
-        return static::findOne(['user_id' => $userId]);
-    }
+	public function rules()
+	{
+		return [
+			[['count', 'user_id'], 'required', 'message' => '{attribute} поле должно быть заполнено'],
+		];
+	}
+
+	public static function findByUserId($userId)
+	{
+		return static::findOne(['user_id' => $userId]);
+	}
 }

@@ -13,7 +13,7 @@
   text-align: center;
   font-weight: 600;
 
-  &:hover{
+  &:hover {
     cursor: pointer;
     border: 1px $mainActiveColor solid;
   }
@@ -143,10 +143,19 @@
   flex-direction: column;
   justify-content: space-between;
   list-style: none;
+  margin: 5px;
 }
 
 .user-reqs__item {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.count__bouns {
+  color: $mainActiveColor!important;
+  border-bottom: 1px $mainActiveColor dashed;
+  text-decoration: none !important;
+  margin: 0;
+  padding: 0;
 }
