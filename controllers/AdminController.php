@@ -263,7 +263,6 @@ class AdminController extends Controller
 			if (!$order) {
 				throw new HttpException(404, 'Заказ не найден');
 			}
-			$order->scenario = Order::SCENARIO_SIMPLE_ORDER;
 
 			if (Yii::$app->request->isPost) {
 				if ($order->load(Yii::$app->request->post())) {

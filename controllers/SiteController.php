@@ -352,7 +352,7 @@ class SiteController extends Controller
 
 
 		if (\Yii::$app->user->isGuest) {
-			$order = new Order(['scenario' => Order::SCENARIO_SIMPLE_ORDER]);
+			$order = new Order();
 			$user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
 			$billing = new Billing();
 			$items = new OrdersItems();
@@ -384,9 +384,7 @@ class SiteController extends Controller
 				}
 
 				Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration']);
-				if (Yii::$app->request->post('type')) {
-					$order->scenario = Yii::$app->request->post('type');
-				}
+
 
 				$order->user_id = $user->id;
 				if ($order->load(Yii::$app->request->post()) or $order->validate()) {
@@ -423,7 +421,7 @@ class SiteController extends Controller
 				'payment' => $payment,
 			]);
 		} else {
-			$order = new Order(['scenario' => Order::SCENARIO_SIMPLE_ORDER]);
+			$order = new Order();
 			$items = new OrdersItems();
 			$user = User::findOne(Yii::$app->user->id);
 			$user->scenario = User::SCENARIO_UPDATE;
@@ -431,15 +429,6 @@ class SiteController extends Controller
 
 			if (\Yii::$app->request->isPost) {
 				$transaction = $db->beginTransaction();
-//                if ($user->load(Yii::$app->request->post()) or $user->validate()) {
-//                    if ($user->update() === false) {
-//                        Notify::setErrorNotify(Debug::modelErrors($user));
-//                        return $this->refresh();
-//                    }
-//                } else {
-//                    Notify::setErrorNotify(Debug::modelErrors($user));
-//                    return $this->refresh();
-//                }
 
 				if ($billing->load(Yii::$app->request->post()) or $billing->validate()) {
 					if ($billing->update() === false) {
@@ -450,10 +439,6 @@ class SiteController extends Controller
 				} else {
 					Notify::setErrorNotify(Debug::modelErrors($billing));
 					return $this->refresh();
-				}
-
-				if (Yii::$app->request->post('type')) {
-					$order->scenario = Yii::$app->request->post('type');
 				}
 
 				if ($discount_model->load(Yii::$app->request->post())) {

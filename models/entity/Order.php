@@ -28,8 +28,8 @@ use yii\db\ActiveRecord;
  */
 class Order extends ActiveRecord
 {
-	const SCENARIO_FAST_ORDER = 1;
-	const SCENARIO_SIMPLE_ORDER = 2;
+//	const SCENARIO_FAST_ORDER = 1;
+//	const SCENARIO_SIMPLE_ORDER = 2;
 
 	public $product_id;
 	public $is_update;
@@ -39,13 +39,13 @@ class Order extends ActiveRecord
 		return "orders";
 	}
 
-	public function scenarios()
-	{
-		return [
-			self::SCENARIO_FAST_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
-			self::SCENARIO_SIMPLE_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
-		];
-	}
+//	public function scenarios()
+//	{
+//		return [
+////			self::SCENARIO_FAST_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
+////			self::SCENARIO_SIMPLE_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
+//		];
+//	}
 
 	public function rules()
 	{
@@ -58,7 +58,7 @@ class Order extends ActiveRecord
 
 			[['is_bonus'], 'boolean'],
 
-			['type', 'default', 'value' => self::SCENARIO_SIMPLE_ORDER],
+			['type', 'default', 'value' => 'disabled'],
 
 			[['user_id'], 'required', 'message' => '{attribute} необходимо указать'],
 

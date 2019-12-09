@@ -10,6 +10,6 @@ class OrderHelper
 {
 	public static function orderSummary($order_id)
 	{
-		return OrdersItems::find()->where(['id' => $order_id])->sum('price');
+		return OrdersItems::find()->where(['order_id' => $order_id])->sum('price');
 	}
 }

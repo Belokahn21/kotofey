@@ -24,8 +24,24 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 <?php $form = ActiveForm::begin(); ?>
 <div class="row">
     <div class="col-sm-6">
+        <ul class="select-type-order">
+            <li class="type-order__item active" data-checkout="fast">Быстрый заказ
+                <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
+            </li>
+            <li class="type-order__item" data-checkout="simple">Обычный заказ
+                <i class="far fa-question-circle" data-toggle="tooltip" data-placement="top" title="Tooltip on top"></i>
+            </li>
+        </ul>
+
         <div class="checkout-order-wrap">
-            <div class="checkout-order">
+            <div class="checkout-order hide" data-type="fast">
+				<?php if (Yii::$app->user->isGuest): ?>
+					<?= $this->render('checkout/fast/guest/form'); ?>
+				<?php else: ?>
+					<?= $this->render('checkout/fast/user/form'); ?>
+				<?php endif; ?>
+            </div>
+            <div class="checkout-order hide" data-type="simple">
 				<?php if (Yii::$app->user->isGuest): ?>
 					<?= $this->render('checkout/simple/guest/form', [
 						'form' => $form,

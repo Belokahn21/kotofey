@@ -8,14 +8,14 @@ $(document).ready(function () {
     });
 
 
-    $('.type-order__item').click(function (e) {
-        var target = $(this).data('checkout');
-
-
-        $('.checkout-order').addClass('hide');
-        $('.checkout-order[data-type=' + target + ']').removeClass('hide')
-
-    });
+    // $('.type-order__item').click(function (e) {
+    //     var target = $(this).data('checkout');
+    //
+    //
+    //     $('.checkout-order').addClass('hide');
+    //     $('.checkout-order[data-type=' + target + ']').removeClass('hide')
+    //
+    // });
 
 
 });
