@@ -226,7 +226,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 		return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
 	}
 
-	public function calcCurrentAge($birthday = "17-10-1985")
+	public static function calcCurrentAge($birthday = "17-10-1985")
 	{
 		$dateOfBirth = $birthday;
 		$today = date("Y-m-d");

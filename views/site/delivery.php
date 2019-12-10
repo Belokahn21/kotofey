@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use app\models\tool\System;
 
 ?>
-<? $this->title = Title::showTitle("Доставка заказов");
+<?php $this->title = Title::showTitle("Доставка заказов");
 $this->params['breadcrumbs'][] = ['label' => 'Доставка', 'url' => ['/delivery/']];
 ?>
 <h1>Доставка</h1>

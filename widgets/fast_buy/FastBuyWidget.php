@@ -42,6 +42,7 @@ class FastBuyWidget extends \yii\base\Widget
 			$item->setPrice($this->product->price);
 
 			$basket = new Basket();
+			Basket::clear();
 			$basket->add($item);
 
 			$order = new Order();

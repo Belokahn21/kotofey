@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use app\models\tool\System;
 
 ?>
-<? $this->title = Title::showTitle("Оплата");
+<?php $this->title = Title::showTitle("Оплата");
 $this->params['breadcrumbs'][] = ['label' => 'Оплата', 'url' => ['/payment/']]; ?>
 <h1>Информация об оплате</h1>
 <div class="text-block-wrap">

@@ -63,7 +63,11 @@ $this->beginPage() ?>
             <li class="top-menu__item"><a class="top-menu__link" href="/about/">О компании</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="/support/">Поддержка</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="/">Вакансии</a></li>
-            <li class="top-menu__item"><a class="top-menu__link" href="/profile/">Личный кабинет</a> <?= (Yii::$app->user->isGuest ? '' : ' (<a href="/logout/" class="top-menu__link">Выйти</a>)'); ?></li>
+			<?php if (Yii::$app->user->isGuest): ?>
+                <li class="top-menu__item"><a class="top-menu__link" href="/signin/">Войти на сайт</li>
+			<?php else: ?>
+                <li class="top-menu__item"><a class="top-menu__link" href="/profile/">Личный кабинет</a> (<a href="/logout/" class="top-menu__link">Выйти</a>)</li>
+			<?php endif; ?>
         </ul>
     </div>
     <header class="header">
