@@ -371,9 +371,9 @@ class SiteController extends Controller
 					return $this->refresh();
 				}
 
-				$billing->user_id = $user->id;
-				if ($billing->load(Yii::$app->request->post()) or $billing->validate()) {
-					if ($billing->save() === false) {
+				$billing = Billing::findByUser($user->id);
+				if ($billing->load(Yii::$app->request->post()) and $billing->validate()) {
+					if ($billing->update() === false) {
 						$transaction->rollBack();
 						Notify::setErrorNotify(Debug::modelErrors($billing));
 						return $this->refresh();
