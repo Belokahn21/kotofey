@@ -3,6 +3,7 @@
 namespace app\models\tool\parser;
 
 
+use app\models\tool\parser\providers\Lukas;
 use app\models\tool\parser\providers\SibagroTrade;
 
 class ProviderFactory
@@ -16,6 +17,9 @@ class ProviderFactory
     {
         if ($this->compare('sat-altai.ru', $url)) {
             return new SibagroTrade();
+        }
+        if ($this->compare('lukasn.ru', $url)) {
+            return new Lukas();
         }
 
         return false;
