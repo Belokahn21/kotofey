@@ -31,6 +31,7 @@ use app\models\entity\User;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
+use app\models\search\DeliverySearchForm;
 use app\models\search\GeoSearchForm;
 use app\models\search\InformersSearchForm;
 use app\models\search\InformersValuesSearchForm;
@@ -490,7 +491,8 @@ class AdminController extends Controller
 		}
 
 		$model = new Delivery();
-		$dataProvider = $model->search(\Yii::$app->request->get());
+		$searchModel = new DeliverySearchForm();
+		$dataProvider = $searchModel->search(\Yii::$app->request->get());
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
@@ -505,6 +507,7 @@ class AdminController extends Controller
 
 		return $this->render('delivery', [
 			'model' => $model,
+			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
 		]);
 	}

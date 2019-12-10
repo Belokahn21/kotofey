@@ -25,7 +25,7 @@ $this->title = Title::showTitle("Управление доставками");
 <h2 class="title">Список доставок</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
-	'filterModel' => $model,
+	'filterModel' => $searchModel,
 	'emptyText' => 'Доставки отсутствуют',
 	'columns' => [
 		[

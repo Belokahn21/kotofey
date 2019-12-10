@@ -4,6 +4,7 @@ namespace app\models\entity;
 
 
 use app\models\tool\Debug;
+use yii\base\Model;
 
 /**
  * Basket model
@@ -12,15 +13,19 @@ use app\models\tool\Debug;
  * @property integer $count
  * @property Promo $promo
  */
-class Basket
+class Basket extends Model
 {
+	const EVENT_AFTER_ADD_ITEM = 'item_add';
+
 	public static function getInstance()
 	{
 		return new Basket();
 	}
 
-	public function __construct()
+	public function __construct($config = [])
 	{
+		parent::__construct($config);
+
 		\Yii::$app->session->open();
 	}
 

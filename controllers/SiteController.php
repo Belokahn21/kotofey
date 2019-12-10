@@ -497,7 +497,7 @@ class SiteController extends Controller
 			$userId = \Yii::$app->user->id;
 			$profile = User::findOne($userId);
 			$profile->scenario = User::SCENARIO_UPDATE;
-			$orders = Order::find()->where(['user_id' => $profile->id])->all();
+			$orders = Order::find()->where(['user_id' => $profile->id])->orderBy(['created_at' => SORT_DESC])->all();
 			$support_categories = SupportCategory::find()->all();
 			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 

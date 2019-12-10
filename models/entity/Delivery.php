@@ -9,6 +9,9 @@ use yii\db\ActiveRecord;
 
 class Delivery extends ActiveRecord
 {
+	const LIMIT_ORDER_SUMM_TO_ACTIVATE = 500;
+	const PRICE_DELIVERY = 100;
+
 	public function rules()
 	{
 		return [
@@ -35,31 +38,5 @@ class Delivery extends ActiveRecord
 			'description' => "Описаниие",
 			'active' => "Активность",
 		];
-	}
-
-	public function createDelivery()
-	{
-		if ($this->load(\Yii::$app->request->post())) {
-			if ($this->validate()) {
-				return $this->save();
-			}
-		}
-	}
-
-	public function search($params)
-	{
-		$query = static::find();
-
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
-
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
-		}
-
-		$query->andFilterWhere(['like', 'name', $this->name]);
-
-		return $dataProvider;
 	}
 }

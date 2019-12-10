@@ -11,13 +11,13 @@ $currency = new Currency();
 /* @var $orders \app\models\entity\Order[] */
 /* @var $items \app\models\entity\OrdersItems[] */
 ?>
-<? $this->title = Title::showTitle("Список заказов");
+<?php $this->title = Title::showTitle("Список заказов");
 $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url' => ['/order/']]; ?>
 <section class="list-orders">
     <h1>Список заказов</h1>
-    <?php if ($orders): ?>
+	<?php if ($orders): ?>
         <table class="list-orders__table">
-<?php foreach ($orders as $order): ?>
+			<?php foreach ($orders as $order): ?>
                 <tr class="list-orders__table-item">
                     <td>
                         №<?= $order->id; ?>
@@ -26,38 +26,47 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
                     </td>
                     <td>
                         <table class="list-products__table">
-<?php foreach (OrdersItems::find()->where(['order_id' => $order->id])->all() as $item): ?>
-                                <tr class="list-products__table-item" href="<?= $item->product->detail; ?>">
-                                    <?php if (!empty($item->product->image)): ?>
+							<?php foreach (OrdersItems::find()->where(['order_id' => $order->id])->all() as $item): ?>
+								<?php if ($item->product instanceof \app\models\entity\Product): ?>
+                                    <tr class="list-products__table-item" href="<?= $item->product->detail; ?>">
+										<?php if (!empty($item->product->image)): ?>
+                                            <td class="list-products__table-image">
+                                                <img src="<?= $item->product->image; ?>">
+                                            </td>
+										<?php endif; ?>
+                                        <td class="list-products__table-name"><?= $item->name; ?></td>
+                                    </tr>
+								<?php else: ?>
+                                    <tr class="list-products__table-item" href="javascript:void(0);">
                                         <td class="list-products__table-image">
-                                            <img src="<?= $item->product->image; ?>">
+                                            <img src="/web/upload/images/not-image.png">
                                         </td>
-                                    <?php endif; ?>
-                                    <td class="list-products__table-name"><?= $item->name; ?></td>
-                                </tr>
-<?php endforeach; ?>
+                                        <td class="list-products__table-name"><?= $item->name; ?></td>
+                                    </tr>
+								<?php endif; ?>
+							<?php endforeach; ?>
                         </table>
                     </td>
                     <td class="list-products__table-price">
-<?php if (!empty($order->cash)): ?>
-                            <?= Price::format($order->cash); ?>
-                            <?= $currency->show(); ?>
-<?php endif; ?>
+						<?php if (!empty($order->cash)): ?>
+							<?= Price::format($order->cash); ?>
+							<?= $currency->show(); ?>
+						<?php endif; ?>
                     </td>
                     <td class="list-products__table-pay">
-<?php if ($order->is_paid == false): ?>
+						<?php if ($order->is_paid == false): ?>
                             <span class="red">Не оплачено</span>
-<?php else: ?>
+						<?php else: ?>
                             <span class="green">Оплачено</span>
-<?php endif; ?>
+						<?php endif; ?>
                     </td>
                     <td>
-                        <?= Html::a('Подробнее', '/order/' . $order->id . '/', ['class' => 'detail-more']) ?>
+						<?= Html::a('Подробнее', '/order/' . $order->id . '/', ['class' => 'detail-more']) ?>
                     </td>
                 </tr>
-<?php endforeach; ?>
+			<?php endforeach; ?>
         </table>
-<?php else: ?>
+	<?php else: ?>
         Вы ничего не покупали
-<?php endif; ?>
+	<?php endif; ?>
 </section>

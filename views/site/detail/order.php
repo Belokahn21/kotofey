@@ -21,7 +21,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     Дата покупки
                 </td>
                 <td>
-                    <?= date("d.m.Y", $order->created_at); ?>
+					<?= date("d.m.Y", $order->created_at); ?>
                 </td>
             </tr>
             <tr>
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     Сумма заказа
                 </td>
                 <td>
-                    <?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= (new Currency())->show(); ?>
+					<?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= (new Currency())->show(); ?>
                 </td>
             </tr>
             <tr>
@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     Статус
                 </td>
                 <td>
-                    <?= $order->getStatus(); ?>
+					<?= $order->getStatus(); ?>
                 </td>
             </tr>
             <tr>
@@ -45,33 +45,45 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     Оплачен
                 </td>
                 <td>
-                    <?php if ($order->is_paid): ?>
+					<?php if ($order->is_paid): ?>
                         <span class="green">Оплачен</span>
-                    <?php else: ?>
+					<?php else: ?>
                         <span class="red">Не оплачен</span>
-                    <?php endif; ?>
+					<?php endif; ?>
                 </td>
             </tr>
         </table>
     </div>
     <div class="detail-order-info-items-wrap">
-<?php if ($items): ?>
+		<?php if ($items): ?>
             <h1 class="detail-order-info-items__title">Товары в заказе</h1>
-<?php /* @var $item \app\models\entity\OrdersItems */ ?>
+			<?php /* @var $item \app\models\entity\OrdersItems */ ?>
             <ul class="detail-order-info-items-list">
-<?php foreach ($items as $item): ?>
-                    <li class="detail-order-info-items-list-item">
-                        <a href="<?= $item->product->detail; ?>" class="detail-order-info-items-list-item__link">
-                            <img class="detail-order-info-items-list-item__image" src="/web/upload/<?= $item->product->image ?>">
-                            <div class="detail-order-info-items-list-item__title">
-                                <h3><?= $item->name; ?></h3>
-                            </div>
-                        </a>
-                    </li>
-<?php endforeach; ?>
+				<?php foreach ($items as $item): ?>
+					<?php if ($item->product instanceof \app\models\entity\Product): ?>
+                        <li class="detail-order-info-items-list-item">
+                            <a href="<?= $item->product->detail; ?>" class="detail-order-info-items-list-item__link">
+                                <img class="detail-order-info-items-list-item__image" src="/web/upload/<?= $item->product->image ?>">
+                                <div class="detail-order-info-items-list-item__title">
+                                    <h3><?= $item->name; ?></h3>
+                                </div>
+                            </a>
+                        </li>
+					<?php else: ?>
+                        <li class="detail-order-info-items-list-item">
+                            <a href="javascript:void(0);" class="detail-order-info-items-list-item__link">
+                                <img class="detail-order-info-items-list-item__image" src="/web/upload/images/not-image.png">
+                                <div class="detail-order-info-items-list-item__title">
+                                    <h3><?= $item->name; ?></h3>
+                                </div>
+                            </a>
+                        </li>
+					<?php endif; ?>
+
+				<?php endforeach; ?>
             </ul>
-<?php else: ?>
+		<?php else: ?>
             К сожалению вы ничего не купили
-<?php endif; ?>
+		<?php endif; ?>
     </div>
 </section>

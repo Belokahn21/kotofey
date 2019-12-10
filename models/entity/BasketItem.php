@@ -10,10 +10,6 @@ class BasketItem
 	private $count;
 	private $price;
 
-	public function __construct()
-	{
-	}
-
 	/**
 	 * @param mixed $price
 	 */

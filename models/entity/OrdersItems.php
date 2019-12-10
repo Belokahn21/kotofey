@@ -40,13 +40,25 @@ class OrdersItems extends ActiveRecord
 
 	public function saveItems()
 	{
+		if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
+			$item = new BasketItem();
+			$item->setPrice(Delivery::PRICE_DELIVERY);
+			$item->setName('Доставка');
+			$item->setCount(1);
+
+			$basket = new Basket();
+			$basket->add($item);
+		}
+
 		/* @var $item BasketItem */
 		foreach (Basket::findAll() as $item) {
 			$self = new OrdersItems();
 			$self->name = $item->getName();
 
-			if ($item->getProduct()->id) {
-				$self->product_id = $item->getProduct()->id;
+			if (is_object($item->getProduct())) {
+				if ($item->getProduct()->id) {
+					$self->product_id = $item->getProduct()->id;
+				}
 			}
 
 			$self->count = $item->getCount();
