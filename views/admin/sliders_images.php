@@ -31,6 +31,7 @@ $this->title = Title::showTitle("Изображения слайдеров"); ?>
 	'emptyText' => 'Сладеры отсутствуют',
 	'columns' => [
 		'id',
+		'active',
 		'text',
 		'description',
 		[
@@ -54,7 +55,7 @@ $this->title = Title::showTitle("Изображения слайдеров"); ?>
 				},
 				'update' => function ($url, $model, $key) {
 					return Html::a('<i class="far fa-eye"></i>',
-						Url::to(['admin/sliderimages', 'id' => $model->slider_id]));
+						Url::to(['admin/sliderimages', 'id' => $model->id]));
 				},
 				'delete' => function ($url, $model, $key) {
 					return Html::a('<i class="fas fa-trash-alt"></i>',

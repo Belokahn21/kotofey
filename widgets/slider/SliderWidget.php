@@ -8,19 +8,19 @@ use yii\base\Widget;
 
 class SliderWidget extends Widget
 {
-    public $slider_id;
-    public $use_carousel;
+	public $slider_id;
+	public $use_carousel;
 
-    public function run()
-    {
-        $images = [];
-        if (!empty($this->slider_id)) {
-            $images = SlidersImages::find()->where(['slider_id' => $this->slider_id])->all();
-        }
+	public function run()
+	{
+		$images = [];
+		if (!empty($this->slider_id)) {
+			$images = SlidersImages::find()->where(['slider_id' => $this->slider_id, 'active' => true])->all();
+		}
 
-        return $this->render('default', [
-            'images' => $images,
-            'use_carousel' => $this->use_carousel,
-        ]);
-    }
+		return $this->render('default', [
+			'images' => $images,
+			'use_carousel' => $this->use_carousel,
+		]);
+	}
 }
