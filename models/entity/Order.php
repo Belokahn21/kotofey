@@ -58,7 +58,7 @@ class Order extends ActiveRecord
 
 			[['is_bonus'], 'boolean'],
 
-			['type', 'default', 'value' => 'disabled'],
+			['type', 'default', 'value' => 3],
 
 			[['user_id'], 'required', 'message' => '{attribute} необходимо указать'],
 
@@ -81,7 +81,7 @@ class Order extends ActiveRecord
 	{
 
 		if ($this->is_update) {
-			if ($this->is_paid == 1 && $this->is_bonus == 0) {
+			if ($this->is_paid == 1 && $this->is_bonus == 0 && $this->promo_code == 0) {
 				if ($discount = Discount::findByUserId($this->user_id)) {
 					$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
 					if ($discount->validate()) {
@@ -126,19 +126,6 @@ class Order extends ActiveRecord
 			'product_id' => 'Товар',
 			'promo_code' => 'Промо код',
 		];
-	}
-
-	public function saveOrder()
-	{
-		if ($this->load(\Yii::$app->request->post())) {
-			if ($this->validate()) {
-				if ($this->save() === true) {
-					$this->id = \Yii::$app->db->lastInsertID;
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	public function getStatus()

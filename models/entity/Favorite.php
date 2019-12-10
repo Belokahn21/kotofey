@@ -36,7 +36,7 @@ class Favorite
 	public function exist($product_id)
 	{
 		if (array_key_exists(self::NAME_KEY_SESSION_FAVORITE, $_SESSION)) {
-			if ($_SESSION[self::NAME_KEY_SESSION_FAVORITE][$product_id]) {
+			if (array_key_exists($product_id, $_SESSION[self::NAME_KEY_SESSION_FAVORITE])) {
 				return true;
 			}
 		}

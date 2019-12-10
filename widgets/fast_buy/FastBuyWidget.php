@@ -14,65 +14,75 @@ use app\widgets\notification\Notify;
 
 class FastBuyWidget extends \yii\base\Widget
 {
-    public $template = 'default';
-    public $product;
+	public $template = 'default';
+	public $product;
 
-    public function run()
-    {
-        $user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
+	public function run()
+	{
+		$user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
 
 		if (\Yii::$app->request->isPost) {
-            if ($user->load(Yii::$app->request->post()) && $user->validate()) {
-                if ($user->save() === false) {
-                    Notify::setErrorNotify(Debug::modelErrors($user));
-                    Yii::$app->controller->refresh();
-                }
+			$db = Yii::$app->db;
+			$transaction = $db->beginTransaction();
+			if ($user->load(Yii::$app->request->post()) && $user->validate()) {
+				if ($user->save() === false) {
+					Notify::setErrorNotify(Debug::modelErrors($user));
+					Yii::$app->controller->refresh();
+				}
 
-                Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration']);
-            } else {
-                $user = User::findOne(Yii::$app->user->id);
-            }
+				Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration']);
+			} else {
+				$user = User::findOne(Yii::$app->user->id);
+			}
 
-            $item = new BasketItem();
-            $item->setCount(1);
-            $item->setName($this->product->name);
-            $item->setProductId($this->product->id);
-            $item->setPrice($this->product->price);
+			$item = new BasketItem();
+			$item->setCount(1);
+			$item->setName($this->product->name);
+			$item->setProductId($this->product->id);
+			$item->setPrice($this->product->price);
 
-            $basket = new Basket();
-            $basket->add($item);
+			$basket = new Basket();
+			$basket->add($item);
 
-            $order = new Order(['scenario' => Order::SCENARIO_FAST_ORDER]);
-            $order->user_id = $user->id;
-            if ($order->validate() == false) {
-                Notify::setErrorNotify(Debug::modelErrors($order));
-                Yii::$app->controller->refresh();
-            }
+			$order = new Order();
+			$order->user_id = $user->id;
+			if ($order->validate() === false) {
+				$transaction->rollBack();
+				Notify::setErrorNotify(Debug::modelErrors($order));
+				Yii::$app->controller->refresh();
+			}
 
-            $order->save();
+			if ($order->save() === false) {
+				Notify::setErrorNotify(Debug::modelErrors($order));
+				Yii::$app->controller->refresh();
+				$transaction->rollBack();
+				return false;
+			}
 
-            $items = new OrdersItems();
-            $items->order_id = $order->id;
-            if ($items->saveItems() === false) {
-                Notify::setErrorNotify(Debug::modelErrors($items));
-                Yii::$app->controller->refresh();
-            }
+			$items = new OrdersItems();
+			$items->order_id = $order->id;
+			if ($items->saveItems() === false) {
+				$transaction->rollBack();
+				Notify::setErrorNotify(Debug::modelErrors($items));
+				Yii::$app->controller->refresh();
+			}
 
-            Basket::getInstance()->clear();
-            Promo::clear();
-            Notify::setSuccessNotify('Вы успешно купили товар');
-            Yii::$app->controller->refresh();
-        }
+			Basket::getInstance()->clear();
+			Promo::clear();
+			Notify::setSuccessNotify('Вы успешно купили товар');
+			$transaction->commit();
+			Yii::$app->controller->refresh();
+		}
 
 
-        return $this->render($this->template, [
-            'user' => $user,
-            'product' => $this->product,
-        ]);
-    }
+		return $this->render($this->template, [
+			'user' => $user,
+			'product' => $this->product,
+		]);
+	}
 
-    public function init()
-    {
-        return;
-    }
+	public function init()
+	{
+		return;
+	}
 }

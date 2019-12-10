@@ -95,20 +95,24 @@ $this->title = Title::showTitle("Список заказов"); ?>
 				return OrderHelper::orderSummary($model->id);
 			}
 		],
+		'promo_code',
+		[
+			'label' => 'Итого к оплате',
+			'format' => 'raw',
+			'value' => function ($model) {
+				$out_summ = OrderHelper::orderSummary($model->id);
+
+				if ($model->promo_code) {
+					$out_summ = strval($out_summ) - strval($model->promo_code);
+				}
+
+				return $out_summ;
+			}
+		],
 		[
 			'attribute' => 'created_at',
 			'value' => function ($model) {
 				return date("d.m.Y", $model->created_at);
-			}
-		],
-		[
-			'attribute' => 'promo_code',
-			'value' => function ($model) {
-				if ($model->promo_code) {
-					return $model->promo_code . "(" . Promo::findByCode($model->promo_code)->discount . "%)";
-				} else {
-					return "Отстуствует";
-				}
 			}
 		],
 		[
