@@ -32,7 +32,7 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 /dump.html
-/web/debug.php
+/debug.php
 /web/index.php
 /backup
 composer.lock

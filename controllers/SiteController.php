@@ -40,6 +40,8 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\entity\Search;
 use Yii;
+use yii\web\Response;
+use yii\widgets\ActiveForm;
 
 class SiteController extends Controller
 {
@@ -360,6 +362,17 @@ class SiteController extends Controller
 			// форма отправлена
 			if (\Yii::$app->request->isPost) {
 				$transaction = $db->beginTransaction();
+
+
+				// ajax valid
+
+				// validate for ajax request
+				if (Yii::$app->request->isAjax && $user->load(Yii::$app->request->post())) {
+					Yii::$app->response->format = Response::FORMAT_JSON;
+					return ActiveForm::validate($user);
+				}
+
+
 				if ($user->load(Yii::$app->request->post()) && $user->validate()) {
 					if ($user->save() === false) {
 						$transaction->rollBack();

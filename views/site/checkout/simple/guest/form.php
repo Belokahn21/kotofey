@@ -23,10 +23,10 @@ use yii\helpers\ArrayHelper;
     </div>
     <div class="row">
         <div class="col-sm-4">
-			<?= $form->field($user, 'email')->textInput(['class' => 'checkout__input', 'placeholder' => 'Email'])->label(false); ?>
+			<?= $form->field($user, 'email', ['enableAjaxValidation' => true])->textInput(['class' => 'checkout__input', 'placeholder' => 'Email'])->label(false); ?>
         </div>
         <div class="col-sm-4">
-			<?= $form->field($user, 'phone')->textInput(['class' => 'checkout__input', 'placeholder' => 'Телефон'])->label(false); ?>
+			<?= $form->field($user, 'phone', ['enableAjaxValidation' => true])->textInput(['class' => 'checkout__input', 'placeholder' => 'Телефон'])->label(false); ?>
         </div>
         <div class="col-sm-4">
 			<?= $form->field($user, 'password')->passwordInput(['class' => 'checkout__input', 'placeholder' => 'Пароль'])->label(false); ?>

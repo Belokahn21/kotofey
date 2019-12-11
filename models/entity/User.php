@@ -75,7 +75,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 			[['email', 'password', 'phone'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
 			[['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
 
-//            ['password', 'string', 'length' => [5, 24]],
 			['password', 'string'],
 			['groups', 'string'],
 
