@@ -17,7 +17,7 @@ class m191211_065831_create_short_links_table extends Migration
 			'is_active' => $this->boolean()->defaultValue(true),
 			'sort' => $this->integer()->defaultValue(500),
 			'link' => $this->text()->notNull(),
-			'short_code' => $this->string(255)->unique()->notNull(),
+			'short_code' => $this->string(150)->unique()->notNull(),
 			'created_at' => $this->integer(),
 			'updated_at' => $this->integer(),
 		]);
