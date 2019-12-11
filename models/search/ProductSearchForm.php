@@ -45,10 +45,19 @@ class ProductSearchForm extends Product
 			->andFilterWhere(['like', 'article', $this->article])
 			->andFilterWhere(['like', 'code', $this->code])
 			->andFilterWhere(['like', 'count', $this->count])
-			->andFilterWhere(['like', 'count', $this->count])
 			->andFilterWhere(['like', 'price', $this->price])
-			->andFilterWhere(['like', 'purchase', $this->purchase])
-			->andFilterWhere(['like', 'name', $this->name]);
+			->andFilterWhere(['like', 'purchase', $this->purchase]);
+
+
+		if (!empty($this->name)) {
+			$explode = explode(' ', $this->name);
+			$sql = "";
+			foreach ($explode as $search_phrase) {
+				$sql .= sprintf("`name` like '%%%s%%' and ", $search_phrase);
+			}
+			$sql = substr($sql,0,-5);
+			$query->andWhere($sql);
+		}
 
 		return $dataProvider;
 	}
