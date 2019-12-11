@@ -10,6 +10,7 @@ use app\widgets\fast_buy\FastBuyWidget;
 use app\models\entity\Favorite;
 use yii\helpers\Json;
 use app\models\entity\ProductOrder;
+use app\models\entity\Product;
 
 /* @var $properties ProductPropertiesValues[]
  * @var \yii\web\View $this
@@ -135,6 +136,12 @@ echo $this->render('modal/product-modal-payment');
     <div class="product-attributes-wrap">
         <div class="container">
             <div class="product-attributes__title">Характеристики товара</div>
+			<?php if (!empty($product->article)): ?>
+                <div class="row product-attributes__item">
+                    <div class="col-4 product-attributes__key"><?= (new Product())->getAttributeLabel('article'); ?></div>
+                    <div class="col product-attributes__value"><?= $product->article; ?></div>
+                </div>
+			<?php endif; ?>
 			<?php if ($properties): ?>
 				<?php foreach ($properties as $property): ?>
                     <div class="row product-attributes__item">
