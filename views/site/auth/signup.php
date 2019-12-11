@@ -27,6 +27,7 @@ $this->title = Title::showTitle("Регистрация"); ?>
 
     <div class="input-group auth-input-group">
 		<?= $form->field($model, 'email', [
+			'enableAjaxValidation' => true,
 			'template' => '
             <div class="input-group auth-input-group">
                 <div class="input-group-prepend">
@@ -39,6 +40,7 @@ $this->title = Title::showTitle("Регистрация"); ?>
 
     <div class="input-group auth-input-group">
 		<?= $form->field($model, 'phone', [
+			'enableAjaxValidation' => true,
 			'template' => '
             <div class="input-group auth-input-group">
                 <div class="input-group-prepend">
@@ -63,5 +65,5 @@ $this->title = Title::showTitle("Регистрация"); ?>
 
 	<?= Html::submitButton('Завершить', ['class' => 'btn-main']); ?>
 	<?= Html::a('Авторизация', Url::to(['site/signin']), ['class' => 'link-main']); ?>
-    <?php ActiveForm::end(); ?>
+	<?php ActiveForm::end(); ?>
 </div>

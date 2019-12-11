@@ -361,10 +361,6 @@ class SiteController extends Controller
 
 			// форма отправлена
 			if (\Yii::$app->request->isPost) {
-				$transaction = $db->beginTransaction();
-
-
-				// ajax valid
 
 				// validate for ajax request
 				if (Yii::$app->request->isAjax && $user->load(Yii::$app->request->post())) {
@@ -373,6 +369,7 @@ class SiteController extends Controller
 				}
 
 
+				$transaction = $db->beginTransaction();
 				if ($user->load(Yii::$app->request->post()) && $user->validate()) {
 					if ($user->save() === false) {
 						$transaction->rollBack();
@@ -566,6 +563,12 @@ class SiteController extends Controller
 	public function actionSignup()
 	{
 		$model = new User(['scenario' => User::SCENARIO_INSERT]);
+
+		// validate for ajax request
+		if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+			Yii::$app->response->format = Response::FORMAT_JSON;
+			return ActiveForm::validate($model);
+		}
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
