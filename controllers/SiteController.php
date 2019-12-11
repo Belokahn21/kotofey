@@ -19,6 +19,7 @@ use app\models\entity\Product;
 use app\models\entity\ProductProperties;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\Promo;
+use app\models\entity\ShortLinks;
 use app\models\entity\SiteReviews;
 use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportMessage;
@@ -227,6 +228,12 @@ class SiteController extends Controller
 
 	public function actionCatalog($id = null)
 	{
+		// need reidrect?
+		$link = ShortLinks::findOne(['short_code' => $id]);
+		if ($link) {
+			return $this->redirect($link->link, 301);
+		}
+
 		$filterModel = new CatalogFilter();
 		$category = Category::findBySlug($id);
 		if ($category) {

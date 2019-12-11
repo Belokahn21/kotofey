@@ -20,6 +20,7 @@ use app\models\entity\Promo;
 use app\models\entity\Providers;
 use app\models\entity\SearchQuery;
 use app\models\entity\Selling;
+use app\models\entity\ShortLinks;
 use app\models\entity\SiteSettings;
 use app\models\entity\Sliders;
 use app\models\entity\SlidersImages;
@@ -44,6 +45,7 @@ use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\ProvidersSearchForm;
 use app\models\search\SettingsSearchForm;
+use app\models\search\ShortLinksSearchModel;
 use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
@@ -1165,6 +1167,49 @@ class AdminController extends Controller
 			'model' => $model,
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider
+		]);
+	}
+
+	public function actionSeo()
+	{
+		return $this->render('seo');
+	}
+
+	public function actionShortly($id = null)
+	{
+		if ($id) {
+			$model = ShortLinks::findOne($id);
+
+			if (!$model) {
+				throw new HttpException(404, 'Запись не найдена');
+			}
+
+			return $this->render('detail/shortly', [
+				'model' => $model
+			]);
+		}
+
+		$model = new ShortLinks();
+		$searchModel = new ShortLinksSearchModel();
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
+
+
+		if (\Yii::$app->request->isPost) {
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Notify::setSuccessNotify('Короткая ссылка успешно добавлена');
+						return $this->refresh();
+					}
+				}
+			}
+		}
+
+
+		return $this->render('shortly', [
+			'model' => $model,
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
 		]);
 	}
 }

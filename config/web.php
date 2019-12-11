@@ -82,7 +82,7 @@ $config = [
 				'<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
 				'<controller:(admin|ajax)>/<action>/<id[a-zA-Z-\/\d]+>' => '<controller>/<action>',
 				'<action>' => 'site/<action>',
-				'<action>/<id[a-z-\/\d]+>' => 'site/<action>',
+				'<action>/<id[a-z-\/\d_]+>' => 'site/<action>',
 			]
 		],
 	],

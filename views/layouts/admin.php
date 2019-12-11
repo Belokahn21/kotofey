@@ -1,7 +1,6 @@
 <?php
 
 /* @var $this \yii\web\View */
-
 /* @var $content string */
 
 use yii\helpers\Url;
@@ -15,6 +14,7 @@ use app\models\entity\User;
 use app\widgets\notification\Notify;
 use app\models\entity\Sliders;
 use app\models\entity\Geo;
+use app\models\entity\ShortLinks;
 
 AdminAsset::register($this);
 $this->beginPage();
@@ -115,7 +115,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                             <li class="panel-menu__item sub"><a href="/admin/permission/">Разрешения</a></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-shopping-cart"></i>Контент</a>
+                    <li class="panel-menu__item"><a href="/admin/"><i class="fas fa-pencil-alt"></i>Контент</a>
                         <ul>
                             <li class="panel-menu__item sub">
                                 <a href="/admin/news/">
@@ -134,6 +134,15 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                                         <a href="<?php echo Url::to(['admin/sliderimages']) ?>">Изображения</a>
                                     </li>
                                 </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="panel-menu__item"><a href="<?= Url::to(['admin/seo']) ?>"><i class="fab fa-empire"></i>SEO</a>
+                        <ul>
+                            <li class="panel-menu__item sub">
+                                <a href="<?= Url::to(['admin/shortly']); ?>">
+                                    Короткие ссылки<span class="count"><?= ShortLinks::find()->count() ?></span>
+                                </a>
                             </li>
                         </ul>
                     </li>
