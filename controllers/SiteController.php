@@ -231,6 +231,10 @@ class SiteController extends Controller
 		// need reidrect?
 		$link = ShortLinks::findOne(['short_code' => $id]);
 		if ($link) {
+
+			$link->visits += 1;
+			$link->update();
+
 			return $this->redirect($link->link, 301);
 		}
 

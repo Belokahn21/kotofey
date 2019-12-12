@@ -9,8 +9,9 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "short_links".
  *
  * @property int $id
- * @property int $name
- * @property int $is_active
+ * @property string $name
+ * @property int $visits
+ * @property boolean $is_active
  * @property int $sort
  * @property string $link
  * @property string $short_code
