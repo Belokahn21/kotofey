@@ -41,7 +41,7 @@ class ShortLinks extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['sort', 'created_at', 'updated_at'], 'integer'],
+			[['sort', 'visits', 'created_at', 'updated_at'], 'integer'],
 
 			[['link', 'short_code'], 'required'],
 
@@ -64,6 +64,7 @@ class ShortLinks extends \yii\db\ActiveRecord
 		return [
 			'id' => 'ID',
 			'name' => 'Название',
+			'visits' => 'Переходы',
 			'is_active' => 'Активность',
 			'sort' => 'Порядок сортировки',
 			'link' => 'Ссылка',

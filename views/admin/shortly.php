@@ -28,6 +28,7 @@ $this->title = Title::showTitle("Короткие ссылки");
 	'columns' => [
 		'id',
 		'is_active',
+		'visits',
 		'name',
 		'link',
 		'short_code',
