@@ -29,9 +29,9 @@ $this->title = Title::showTitle("Короткие ссылки");
 		'id',
 		'is_active',
 		'visits',
+		'short_code',
 		'name',
 		'link',
-		'short_code',
 		[
 			'attribute' => 'created_at',
 			'format' => ['date', 'dd.MM.YYYY'],
