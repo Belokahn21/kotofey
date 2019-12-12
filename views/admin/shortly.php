@@ -41,10 +41,10 @@ $this->title = Title::showTitle("Короткие ссылки");
 			'class' => 'yii\grid\ActionColumn',
 			'buttons' => [
 				'view' => function ($url, $model, $key) {
-					return Html::a('<i class="fas fa-copy"></i>', Url::to(['admin/catalog', 'action' => 'copy', 'id' => $key]));
+//					return Html::a('<i class="fas fa-copy"></i>', Url::to(['admin/shortly', 'action' => 'copy', 'id' => $key]));
 				},
 				'update' => function ($url, $model, $key) {
-					return Html::a('<i class="far fa-eye"></i>', Url::to(["admin/catalog", 'id' => $key]));
+					return Html::a('<i class="far fa-eye"></i>', Url::to(["admin/shortly", 'id' => $key]));
 				},
 				'delete' => function ($url, $model, $key) {
 					return Html::a('<i class="fas fa-trash-alt"></i>',
