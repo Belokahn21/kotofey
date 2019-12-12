@@ -1184,6 +1184,18 @@ class AdminController extends Controller
 				throw new HttpException(404, 'Запись не найдена');
 			}
 
+
+			if (\Yii::$app->request->isPost) {
+				if ($model->load(\Yii::$app->request->post())) {
+					if ($model->validate()) {
+						if ($model->update()) {
+							Notify::setSuccessNotify('Короткая ссылка успешно обновлена');
+							return $this->refresh();
+						}
+					}
+				}
+			}
+
 			return $this->render('detail/shortly', [
 				'model' => $model
 			]);

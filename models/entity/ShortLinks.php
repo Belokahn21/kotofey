@@ -52,7 +52,9 @@ class ShortLinks extends \yii\db\ActiveRecord
 			['name', 'unique', 'targetClass' => ShortLinks::className()],
 
 			[['is_active'], 'boolean'],
-			[['is_active'], 'default', 'value' => true],
+
+			['is_active', 'default', 'value' => true],
+			['visits', 'default', 'value' => 0],
 		];
 	}
 
