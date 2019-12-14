@@ -18,15 +18,15 @@ use yii\helpers\ArrayHelper;
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 		<?= $form->field($model, 'name'); ?>
+		<?= $form->field($model, 'parent')->dropDownList(ArrayHelper::map($categories, 'id', 'name'), ['prompt' => 'Родительская категория']); ?>
+		<?= $form->field($model, 'sort'); ?>
 		<?= $form->field($model, 'description')->widget(CKEditor::className(), [
 			'editorOptions' => [
 				'preset' => 'full',
 //				'preset' => 'basic',
 				'inline' => false
 			]
-		]) ?>
-		<?= $form->field($model, 'parent')->dropDownList(ArrayHelper::map($categories, 'id', 'name'), ['prompt' => 'Родительская категория']); ?>
-		<?= $form->field($model, 'sort'); ?>
+		]); ?>
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
 		<?= $form->field($model, 'seo_keywords'); ?>

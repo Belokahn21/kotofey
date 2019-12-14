@@ -37,6 +37,14 @@
     margin: 5px 0;
   }
 
+  &__link {
+    color: $mainActiveColor;
+
+    &:hover {
+      color: $mainColor;
+    }
+  }
+
   &__description {
     height: 150px;
   }

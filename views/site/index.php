@@ -65,7 +65,7 @@ $this->title = Title::showTitle("Главная страница");
                         <img class="news-index__image d-block w-100" src="/web/upload/<?= $new->preview_image; ?>" alt="<?= $new->title; ?>">
                     </div>
                     <div class="news-index__title">
-                        <a href="<?= $new->getDetailurl(); ?>"><?= $new->title; ?></a>
+                        <a class="news-index__link" href="<?= $new->getDetailurl(); ?>"><?= $new->title; ?></a>
                     </div>
                     <div class="news-index__description"><?= $new->preview; ?></div>
                 </div>

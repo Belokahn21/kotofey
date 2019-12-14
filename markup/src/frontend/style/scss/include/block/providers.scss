@@ -38,7 +38,8 @@
   }
 
   &__link {
-    color: silver;
+    font-weight: 600;
+    color: $mainColor;
     text-decoration: none !important;
 
     &:hover {
