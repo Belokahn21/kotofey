@@ -10,48 +10,48 @@ use yii\data\ActiveDataProvider;
 class InformersValuesSearchForm extends InformersValues
 {
 
-    public static function tableName()
-    {
-        return "informers_values";
-    }
+	public static function tableName()
+	{
+		return "informers_values";
+	}
 
-    public function rules()
-    {
-        return [
-            [['informer_id', 'sort', 'id'], 'integer'],
+	public function rules()
+	{
+		return [
+			[['informer_id', 'sort', 'id'], 'integer'],
 
-            [['active'], 'boolean'],
+			[['active'], 'boolean'],
 
-            [['name', 'description'], 'string'],
-        ];
-    }
+			[['name', 'description'], 'string'],
+		];
+	}
 
-    public function scenarios()
-    {
-        return Model::scenarios();
-    }
+	public function scenarios()
+	{
+		return Model::scenarios();
+	}
 
 
-    public function search($params)
-    {
-        $query = self::find();
+	public function search($params)
+	{
+		$query = self::find();
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
 
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['id', $this->id])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'sort', $this->sort])
-            ->andFilterWhere(['like', 'active', $this->active])
-            ->andFilterWhere(['like', 'informer_id', $this->informer_id]);
+		$query->andFilterWhere(['like', 'name', $this->name])
+			->andFilterWhere(['id' => $this->id])
+			->andFilterWhere(['like', 'description', $this->description])
+			->andFilterWhere(['like', 'sort', $this->sort])
+			->andFilterWhere(['like', 'active', $this->active])
+			->andFilterWhere(['like', 'informer_id', $this->informer_id]);
 
-        return $dataProvider;
-    }
+		return $dataProvider;
+	}
 
 }
