@@ -18,6 +18,7 @@ use yii\helpers\ArrayHelper;
 		<?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(Informers::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
 		<?= $form->field($model, 'active')->checkbox() ?>
 		<?= $form->field($model, 'sort')->textInput(['value' => 500]) ?>
+		<?= $form->field($model, 'link')->textInput() ?>
 		<?= $form->field($model, 'name')->textInput() ?>
 		<?= $form->field($model, 'description')->textarea() ?>
     </div>

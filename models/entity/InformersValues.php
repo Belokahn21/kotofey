@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property integer $sort
  * @property integer $informer_id
  * @property string $name
+ * @property string $link
  * @property string $description
  * @property string $image
  * @property integer $created_at
@@ -24,53 +25,55 @@ use yii\db\ActiveRecord;
  */
 class InformersValues extends ActiveRecord
 {
-    public function rules()
-    {
-        return [
-            [['informer_id', 'name'], 'required', 'message' => 'Поле {attribute} обязательно'],
+	public function rules()
+	{
+		return [
+			[['informer_id', 'name'], 'required', 'message' => 'Поле {attribute} обязательно'],
 
-            [['informer_id', 'sort'], 'integer'],
-            [['sort'], 'default', 'value' => 500],
+			[['informer_id', 'sort'], 'integer'],
+			[['sort'], 'default', 'value' => 500],
 
-            [['active'], 'boolean'],
-            [['active'], 'default', 'value' => true],
+			[['active'], 'boolean'],
+			[['active'], 'default', 'value' => true],
 
-            [['name', 'description'], 'string'],
+			[['name', 'description', 'link'], 'string'],
 
-            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
-        ];
-    }
+			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
+		];
+	}
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'name',
-                'ensureUnique' => true,
-            ],
-            [
-                'class' => UploadBehavior::class,
-                'attribute' => 'image',
-                'scenarios' => ['default'],
-                'path' => '@webroot/upload/',
-                'url' => '@web/upload/',
-            ],
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className(),
+			[
+				'class' => SluggableBehavior::className(),
+				'attribute' => 'name',
+				'ensureUnique' => true,
+			],
+			[
+				'class' => UploadBehavior::class,
+				'attribute' => 'image',
+				'scenarios' => ['default'],
+				'path' => '@webroot/upload/',
+				'url' => '@web/upload/',
+			],
+		];
+	}
 
-    public function attributeLabels()
-    {
-        return [
-            'informer_id' => 'Справочник',
-            'name' => 'Название',
-            'description' => 'Описание',
-            'active' => 'Активность',
-            'sort' => 'Сортировка',
-            'image' => 'Картинка',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата обновления',
-        ];
-    }
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'informer_id' => 'Справочник',
+			'name' => 'Название',
+			'link' => 'Ссылка',
+			'description' => 'Описание',
+			'active' => 'Активность',
+			'sort' => 'Сортировка',
+			'image' => 'Картинка',
+			'created_at' => 'Дата создания',
+			'updated_at' => 'Дата обновления',
+		];
+	}
 }
