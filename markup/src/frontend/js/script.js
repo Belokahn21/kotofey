@@ -21,7 +21,7 @@ $(document).ready(function () {
     });
 
     /* В разделе каталога при нажатии кнопки "Показать фильтр" -- начало */
-    $('.show-catalog-filter').click(function (e) {
+    $('.show-catalog-filter.switcher').click(function (e) {
         var $filter = $('.filter');
         if ($filter.css('display') === 'none') {
             $filter.css('display', 'block');

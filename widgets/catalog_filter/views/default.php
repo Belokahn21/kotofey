@@ -14,7 +14,7 @@ use yii\widgets\Pjax;
 /* @var $listTaste InformersValues[] */
 
 ?>
-<button class="show-catalog-filter filter-mobile">Показать фильтр</button>
+<button class="show-catalog-filter filter-mobile switcher">Показать фильтр</button>
 <div class="filter">
     <?php $form = ActiveForm::begin([
         'options' => [/*'data-pjax' => true*/],
