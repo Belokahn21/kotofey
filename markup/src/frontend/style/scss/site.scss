@@ -50,7 +50,6 @@
 
 @import "include/modal/modal-product-detail-sale";
 
-@import "include/media";
 
 .wrap-page {
   width: 80%;
@@ -102,3 +101,5 @@
     color: white;
   }
 }
+
+@import "include/media";

@@ -185,8 +185,38 @@
 
 /* iPhone 5 in portrait & landscape */
 @media only screen and (min-device-width: 320px) and (max-device-width: 568px) {
+  .wrap-page {
+    width: 100%;
+  }
   .auth-form {
     width: 100%;
+  }
+  .main-page-slider {
+    width: 100%;
+
+    &__item {
+      height: 200px;
+    }
+  }
+
+  .news-index__wrap {
+    width: 100%;
+  }
+
+  .homepage-providers {
+    &__item {
+      width: 25%;
+    }
+
+    &__detail {
+      font-size: 0.5em;
+    }
+  }
+
+  .profile-menu {
+    &__item {
+      width: 100%;
+    }
   }
 }
 
