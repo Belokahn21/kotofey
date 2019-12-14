@@ -11,26 +11,30 @@ use app\models\entity\Informers;
 /* @var $model \app\models\entity\InformersValues */
 /* @var $this \yii\web\View */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
+/* @var $searchModel \app\models\search\InformersValuesSearchForm */
 
 $this->title = Title::showTitle("Справочники"); ?>
     <section>
         <h1 class="title">Значения справочников</h1>
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+		<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $this->render('_forms/_informers-values', [
 			'model' => $model,
 			'form' => $form,
 		]) ?>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-<?php ActiveForm::end(); ?>
+		<?php ActiveForm::end(); ?>
     </section>
-<h2>Список значений</h2>
+    <h2>Список значений</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
 	'emptyText' => 'Значения отсутствуют',
 	'columns' => [
 		'id',
-		'active',
+		[
+			'attribute' => 'active',
+			'filter' => ['Не активен', 'Активен'],
+		],
 		[
 			'attribute' => 'name',
 			'format' => 'raw',

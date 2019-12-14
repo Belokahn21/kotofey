@@ -47,7 +47,7 @@ class InformersValuesSearchForm extends InformersValues
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'sort', $this->sort])
-            ->andFilterWhere(['like', '$this->active', $this->active])
+            ->andFilterWhere(['like', 'active', $this->active])
             ->andFilterWhere(['like', 'informer_id', $this->informer_id]);
 
         return $dataProvider;
