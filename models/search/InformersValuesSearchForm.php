@@ -18,7 +18,7 @@ class InformersValuesSearchForm extends InformersValues
     public function rules()
     {
         return [
-            [['informer_id', 'sort'], 'integer'],
+            [['informer_id', 'sort', 'id'], 'integer'],
 
             [['active'], 'boolean'],
 
@@ -45,6 +45,7 @@ class InformersValuesSearchForm extends InformersValues
         }
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['id', $this->id])
             ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'sort', $this->sort])
             ->andFilterWhere(['like', 'active', $this->active])
