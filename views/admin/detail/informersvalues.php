@@ -10,12 +10,12 @@ use yii\helpers\ArrayHelper;
 $this->title = Title::showTitle($model->name); ?>
 <section>
     <h1 class="title">Значение справочника: <?= $model->name; ?></h1>
-    <?= Html::a("Назад", '/admin/informers-values/', ['class' => 'btn-back']) ?>
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $this->render('../_forms/_informers-values', [
-        'form' => $form,
-        'model' => $model,
-    ]) ?>
-    <?= Html::submitButton('Обновить'); ?>
-<?php ActiveForm::end(); ?>
+	<?= Html::a("Назад", '/admin/informers-values/', ['class' => 'btn-main']) ?>
+	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+	<?= $this->render('../_forms/_informers-values', [
+		'form' => $form,
+		'model' => $model,
+	]) ?>
+	<?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
+	<?php ActiveForm::end(); ?>
 </section>

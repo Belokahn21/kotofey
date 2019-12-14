@@ -50,31 +50,33 @@ $this->title = Title::showTitle("Главная страница");
             </li>
         </ul>
     </div>
-    <div id="news-carousel" class="carousel slide providers-wrap" data-ride="carousel">
+    <div id="news-carousel" class="carousel slide news-index__wrap" data-ride="carousel">
         <div class="news-control">
             <div class="block-title">Новости</div>
             <div class="block-full">
                 <a class="block-full__link" href="/news/">Все новости</a>
             </div>
         </div>
-        <div class="carousel-inner providers">
+        <div class="carousel-inner news-index">
 			<?php $news_iterator = 1; ?>
 			<?php foreach ($news as $new): ?>
-                <div class="carousel-item provider-item <?= ($news_iterator == 1 ? 'active' : ''); ?>">
-                    <div class="provider-item__image-wrap">
-                        <img class="d-block w-100" src="/web/upload/<?= $new->preview_image; ?>" alt="First slide">
+                <div class="carousel-item news-index__item <?= ($news_iterator == 1 ? 'active' : ''); ?>">
+                    <div class="news-index__image-wrap">
+                        <img class="news-index__image d-block w-100" src="/web/upload/<?= $new->preview_image; ?>" alt="<?= $new->title; ?>">
                     </div>
-                    <div class="provider-item__title"><a href="<?= $new->getDetailurl(); ?>"><?= $new->title; ?></a></div>
-                    <div class="provider-item__description"><?= $new->preview; ?></div>
+                    <div class="news-index__title">
+                        <a href="<?= $new->getDetailurl(); ?>"><?= $new->title; ?></a>
+                    </div>
+                    <div class="news-index__description"><?= $new->preview; ?></div>
                 </div>
 				<?php $news_iterator++; ?>
 			<?php endforeach; ?>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#news-carousel" role="button" data-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#news-carousel" role="button" data-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="sr-only">Next</span>
         </a>
