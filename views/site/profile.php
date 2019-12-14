@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
 <div class="profile">
     <ul class="profile-menu">
         <li class="profile-menu__item">
-            <h2 class="profile-menu__item__title">Профиль <i class="fas fa-user-cog" data-toggle="modal" data-target="#exampleModal"></i></h2>
+            <h2 class="profile-menu__item__title active-title">Профиль <i class="fas fa-user-cog" data-toggle="modal" data-target="#exampleModal"></i></h2>
             <ul class="user-info">
                 <li class="user-info__item"><?= $profile->first_name; ?> <?= $profile->name; ?></li>
                 <li class="user-info__item"><?= date('d.m.Y', $profile->created_at); ?></li>

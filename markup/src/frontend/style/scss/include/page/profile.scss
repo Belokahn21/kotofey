@@ -21,13 +21,21 @@
   font-weight: 600;
 }
 
+.active-title {
+  i {
+    &:hover {
+      color: #d2133c;
+    }
+  }
+}
+
 .profile-menu__item {
   .fa-user-cog {
     cursor: pointer;
   }
 
   i {
-    color: #ff1a4a;
+    color: $mainActiveColor;
   }
 }
 
