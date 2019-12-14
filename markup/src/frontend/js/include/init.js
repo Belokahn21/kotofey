@@ -7,5 +7,4 @@
 
 
 
-
 $("#filter-form-id").catalogFilter();

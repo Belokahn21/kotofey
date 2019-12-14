@@ -11,3 +11,33 @@
   font-size: 14px;
   font-weight: bold;
 }
+
+.news-index {
+
+  &__wrap {
+    width: 33%;
+  }
+
+  &__image-wrap {
+    width: 100%;
+    height: 200px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &__title {
+    min-height: 40px;
+    text-align: center;
+    font-weight: bold;
+    color: $mainActiveColor;
+    margin: 5px 0;
+  }
+
+  &__description {
+    height: 150px;
+  }
+}

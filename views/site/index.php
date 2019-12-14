@@ -36,30 +36,6 @@ $this->title = Title::showTitle("Главная страница");
 </ul>
 
 <div class="three-line">
-    <div id="provider-carousel" class="carousel slide providers-wrap" data-ride="carousel">
-        <div class="block-title">Наши поставщики</div>
-        <div class="carousel-inner providers">
-			<?php $provider_iterator = 1; ?>
-			<?php foreach ($providers as $provider): ?>
-                <div class="carousel-item provider-item <?= ($provider_iterator == 1 ? 'active' : ''); ?>">
-                    <div class="provider-item__image-wrap">
-                        <img class="d-block w-100" src="/web/upload/<?= $provider->image; ?>" alt="First slide">
-                    </div>
-                    <div class="provider-item__title"><a href='/brands/<?= $provider->id; ?>/'><?= $provider->name; ?></a></div>
-                    <div class="provider-item__description"><?= $provider->description; ?></div>
-                </div>
-				<?php $provider_iterator++; ?>
-			<?php endforeach; ?>
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
     <div class="social-wrap">
         <div class="block-title">Мы в социальных сетях</div>
         <ul class="social">
@@ -104,3 +80,20 @@ $this->title = Title::showTitle("Главная страница");
         </a>
     </div>
 </div>
+
+
+<?php if ($providers): ?>
+    <section>
+        <div class="homepage-providers__title">В продаже известные производители товаров</div>
+        <ul class="homepage-providers">
+			<?php foreach ($providers as $provider): ?>
+                <li class="homepage-providers__item">
+                    <a class="homepage-providers__link" href="/brands/<?= $provider->id; ?>/">
+                        <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>">
+                        <div class="homepage-providers__detail">К ассортимену</div>
+                    </a>
+                </li>
+			<?php endforeach; ?>
+        </ul>
+    </section>
+<?php endif; ?>
