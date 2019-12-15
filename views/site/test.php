@@ -23,3 +23,18 @@
 //$html = $page->content($url);
 //
 //echo $html;
+?>
+
+<?php
+$res  = Yii::$app->mailer->compose()
+	->setFrom('info@kotofey.store')
+	->setTo('rusengo@yandex.ru')
+//	->setTo('popugau@gmail.com')
+	->setSubject('Тема сообщения')
+	->setTextBody('Текст сообщения')
+	->setHtmlBody('<b>текст сообщения в формате HTML</b>')
+	->send();
+
+
+var_dump($res);
+?>
