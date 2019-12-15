@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models\entity;
 
 use app\models\tool\Debug;
@@ -127,17 +128,20 @@ class Category extends ActiveRecord
 
 	public function subsections($parent_id = null)
 	{
-		if (is_null($parent_id)) {
-			$parent_id = $this->id;
-			$category = Category::findOne($parent_id);
-		} else {
+		$current_category_id = $this->id;
+		if ($parent_id) {
+			$current_category_id = $parent_id;
+		}
 
-			$category = Category::findOne(['parent' => $parent_id]);
+		$categories = Category::find()->where(['parent' => $current_category_id])->all();
+
+		if ($categories) {
+			foreach ($categories as $category) {
+				$this->subsections[] = $category;
+				$this->subsections($category->id);
+			}
 		}
-		if ($category) {
-			$this->subsections[] = $category;
-			$this->subsections($category->id);
-		}
+
 		return $this->subsections;
 	}
 }
