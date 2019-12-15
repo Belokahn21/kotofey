@@ -12,6 +12,7 @@
         <div style="width: 50%; text-align: center;">
             <h2>Товары в заказе</h2>
             <ul style="list-style: none; display: flex; flex-direction: row;">
+                <?php \app\models\tool\Debug::p($order_items); ?>
 				<?php foreach ($order_items as $item): ?>
                     <li style="width: 25%; margin: 5px;">
                         <img src="/web/upload/<?= $item->product->image; ?>">
