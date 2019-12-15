@@ -42,7 +42,7 @@
 
 
 $ns = new \app\models\services\NotifyService();
-$ns->sendEmailClient(2);
+$ns->sendEmailClient(1);
 
 
 ?>
