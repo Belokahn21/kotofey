@@ -26,15 +26,23 @@
 ?>
 
 <?php
-$res  = Yii::$app->mailer->compose()
-	->setFrom('info@kotofey.store')
-	->setTo('rusengo@yandex.ru')
-//	->setTo('popugau@gmail.com')
-	->setSubject('Тема сообщения')
-	->setTextBody('Текст сообщения')
-	->setHtmlBody('<b>текст сообщения в формате HTML</b>')
-	->send();
+//$res  = Yii::$app->mailer->compose()
+//	->setFrom('sale@kotofey.store')
+//	->setTo('rusengo@yandex.ru')
+////	->setTo('popugau@gmail.com')
+//	->setSubject('Тема сообщения')
+//	->setTextBody('Текст сообщения')
+////	->setHtmlBody('<b>текст сообщения в формате HTML</b>')
+//	->send();
+//
+//
+//var_dump($res);
+?>
+<?php
 
 
-var_dump($res);
+$ns = new \app\models\services\NotifyService();
+$ns->sendEmailClient(2);
+
+
 ?>

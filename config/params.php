@@ -4,9 +4,10 @@ return [
 		'adminVkontakteId' => '111815168',
 	],
 	'email' => [
-		'supportEmail' => 'support@eventhorizont.ru',
-		'infoEmail' => 'info@eventhorizont.ru',
-		'mainEmail' => 'popugau@gmail.com',
+		'support' => 'support@kotofey.store',
+		'info' => 'info@kotofey.store',
+		'sale' => 'sale@kotofey.store',
+		'main' => 'popugau@gmail.com',
 	],
 	'users' => [
 		'rememberMeDuration' => 3600 * 24 * 14

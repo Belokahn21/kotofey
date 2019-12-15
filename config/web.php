@@ -52,14 +52,16 @@ $config = [
 		],
 		'mailer' => [
 			'class' => 'yii\swiftmailer\Mailer',
-			'useFileTransport' => 'false',
+			'useFileTransport' => false,
+			'enableSwiftMailerLogging' => true,
+			'viewPath' => '@app/mail',
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
 				'host' => 'smtp.timeweb.ru',
 				'username' => 'sale@kotofey.store',
 				'password' => '123qweR%',
-				'port' => '465',
-				'encryption' => 'tls',
+//				'port' => '465',
+//				'encryption' => 'tls',
 			],
 			// send all mails to a file by default. You have to set
 			// 'useFileTransport' to false and configure a transport
@@ -71,6 +73,7 @@ $config = [
 				[
 					'class' => 'yii\log\FileTarget',
 					'levels' => ['error', 'warning'],
+					'categories' => ['yii\swiftmailer\Logger::add'],
 				],
 			],
 		],
