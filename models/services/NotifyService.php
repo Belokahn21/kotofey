@@ -46,7 +46,7 @@ class NotifyService
 		}
 	}
 
-	public function sendEmailClient($order_id)
+	public function sendEmailClient($order_id = 1)
 	{
 
 //		$order = Order::findOne($order_id);
