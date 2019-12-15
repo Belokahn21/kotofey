@@ -41,8 +41,8 @@
 <?php
 
 
-$ns = new \app\models\services\NotifyService();
-$ns->sendEmailClient(1);
+//$ns = new \app\models\services\NotifyService();
+//$ns->sendEmailClient(1);
 
 
 ?>

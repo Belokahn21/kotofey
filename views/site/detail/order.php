@@ -37,7 +37,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     Статус
                 </td>
                 <td>
-					<?= $order->getStatus(); ?>
+					<?= OrderHelper::getStatus($order); ?>
                 </td>
             </tr>
             <tr>

@@ -70,9 +70,10 @@ class FastBuyWidget extends \yii\base\Widget
 
 			Basket::getInstance()->clear();
 			Promo::clear();
-			Notify::setSuccessNotify('Вы успешно купили товар');
 			$transaction->commit();
-			Yii::$app->controller->refresh();
+			Notify::setSuccessNotify('Вы успешно купили товар');
+			Yii::$app->controller->redirect(Yii::$app->request->url);
+			return '';
 		}
 
 

@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                                     ID: <?= $order->id; ?>
                                 </li>
                                 <li class="slide-order-info__item">
-                                    <?= $order->getStatus(); ?>
+	                                <?= OrderHelper::getStatus($order); ?>
                                 </li>
                                 <li class="slide-order-info__item">
                                     Дата: <?= date('d.m.Y', $order->created_at) ?>
