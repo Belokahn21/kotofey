@@ -93,7 +93,7 @@ $this->beginPage() ?>
                 <div class="phone-group">
                     <div class="contact-value phone_mask"><?= SiteSettings::getValueByCode('phone_1') ?></div>
                     <span>
-                        <a href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1') ?>">
+                        <a onclick="ym(55089223, 'reachGoal', 'whatsapp');" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
                             <img class="contact-block__wa" src="/web/upload/images/whatsapp.png">
                         </a>
                     </span>
@@ -122,7 +122,7 @@ $this->beginPage() ?>
     </header>
 
     <div class="menu-wrap">
-        <div class="menu-controller">
+        <div class="menu-controller" onclick="ym(55089223, 'reachGoal', 'full-catalog');">
             <i class="fas fa-bars  show-drop"></i>
         </div>
 
