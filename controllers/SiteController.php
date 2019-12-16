@@ -244,9 +244,15 @@ class SiteController extends Controller
 			$sb = $category->subsections();
 		}
 		if ($id) {
-			$query = Product::find()->orderBy(['created_at' => SORT_DESC])->where([
-				'category' => ArrayHelper::getColumn($sb, 'id')
-			])->andWhere(['active' => 1]);
+			$query = Product::find()->orderBy(['created_at' => SORT_DESC]);
+
+			if ($sb) {
+				$query->where(['category' => ArrayHelper::getColumn($sb, 'id')]);
+//			}else{
+//				$query->where(['category' => ArrayHelper::getColumn($sb, 'id')]);
+			}
+
+			$query->andWhere(['active' => 1]);
 		} else {
 			$query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['active' => 1]);
 		}
