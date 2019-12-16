@@ -24,5 +24,6 @@ $(document).ready(function () {
 	$('.pre-load-catalog').catalogLoader();
 	/* Запуск своих плагинов -- конец */
 
+	$('[data-toggle="tooltip"]').tooltip();
 });
 
