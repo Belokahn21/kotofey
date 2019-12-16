@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\StringHelper;
+use app\models\tool\Backup;
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
@@ -102,8 +104,8 @@ $this->title = Title::showTitle("Главная страница");
 						<?php if ($last_search): ?>
                             <ul class="statistic__list">
 								<?php foreach ($last_search as $phrase): ?>
-                                    <li class="statistic__item">
-										<?= $phrase->text; ?>
+                                    <li class="statistic__item" data-toggle="tooltip" data-placement="bottom" title="<?= $phrase->text; ?>">
+										<?= StringHelper::truncate($phrase->text, 7, '...'); ?>
                                     </li>
 								<?php endforeach; ?>
                             </ul>
@@ -112,6 +114,19 @@ $this->title = Title::showTitle("Главная страница");
                 </div>
 
                 <div class="block-info__summary">900/+9000</div>
+            </li>
+
+            <li class="block-info__item">
+                <div class="item-wrap">
+                    <div class="block-info__icon interactive" data-toggle="modal" data-target="#show-search-stat">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <div class="block-info__content">
+                        Копия базы данных
+                    </div>
+                </div>
+
+                <div class="block-info__summary">Последняя копия: <?= date('d.m.Y', Backup::getInstance()->getFileDate()); ?></div>
             </li>
         </ul>
     </div>
