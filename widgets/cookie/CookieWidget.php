@@ -12,7 +12,11 @@ class CookieWidget extends Widget
 
 	public function run()
 	{
-		if (\Yii::$app->session->get(self::COOKIE_SESSION_KEY) == self::COOKIE_SESSION_VALUE) {
+		// получение коллекции кук (yii\web\CookieCollection) из компонента "request"
+		$cookies = \Yii::$app->request->cookies;
+		// получение куки с названием "language. Если кука не существует, "en"  будет возвращено как значение по-умолчанию.
+		$cookie = $cookies->getValue(self::COOKIE_SESSION_KEY);
+		if ($cookie == self::COOKIE_SESSION_VALUE) {
 			return false;
 		}
 		return $this->render('default');

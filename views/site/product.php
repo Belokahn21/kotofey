@@ -1,5 +1,6 @@
 <?php
 
+use app\models\helpers\DiscountHelper;
 use app\widgets\product_reviews\ProductReviewsWidget;
 use app\models\entity\Basket;
 use app\models\tool\Price;
@@ -11,6 +12,7 @@ use app\models\entity\Favorite;
 use yii\helpers\Json;
 use app\models\entity\ProductOrder;
 use app\models\entity\Product;
+use app\models\entity\Discount;
 
 /* @var $properties ProductPropertiesValues[]
  * @var \yii\web\View $this
@@ -83,6 +85,12 @@ echo $this->render('modal/product-modal-payment');
                     <div class="product-price-wrap">
                         <span class="product-price"><?= Price::format($product->price); ?> <?= Currency::getInstance()->show(); ?></span> за шт
                     </div>
+
+
+                    <div class="product-discount-wrap">
+                        получаете <span class="product-discount__value"><?= DiscountHelper::calcBonus($product->price); ?></span> бонусов
+                    </div>
+
                     <div class="product-button product-add-basket <?= (!Basket::getInstance()->exist($product->id)) ? '' : 'hide'; ?>" data-product="<?= $product->id; ?>">
                         В корзину
                     </div>

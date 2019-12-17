@@ -29,6 +29,7 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportStatus;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
+use app\models\entity\Vaccination;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
@@ -49,6 +50,7 @@ use app\models\search\ShortLinksSearchModel;
 use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
+use app\models\search\VaccinationSearchForm;
 use app\models\tool\Debug;
 use app\models\tool\export\YMLExport;
 use app\widgets\notification\Notify;
@@ -1222,6 +1224,62 @@ class AdminController extends Controller
 			'model' => $model,
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
+		]);
+	}
+
+	public function actionManagement()
+	{
+		return $this->render('management');
+	}
+
+	public function actionVaccination($id = null)
+	{
+		$city_list = Geo::find()->where(['type' => Geo::TYPE_OBJECT_CITY])->all();
+
+
+		if ($id) {
+			$model = Vaccination::findOne($id);
+
+			if (!$model) {
+				throw new HttpException(404, 'Элемент не найден');
+			}
+
+			if (\Yii::$app->request->isPost) {
+				if ($model->load(\Yii::$app->request->post())) {
+					if ($model->validate()) {
+						if ($model->save()) {
+							Notify::setSuccessNotify('Вакансия успешно обновлена');
+							return $this->refresh();
+						}
+					}
+				}
+			}
+
+			return $this->render('detail/vaccination', [
+				'model' => $model,
+				'city_list' => $city_list
+			]);
+		}
+		$model = new Vaccination();
+		$searchModel = new VaccinationSearchForm();
+		$dataProvider = $searchModel->search(Yii::$app->request->get());
+
+		if (\Yii::$app->request->isPost) {
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Notify::setSuccessNotify('Вакансия успешно добавлена');
+						return $this->refresh();
+					}
+				}
+			}
+		}
+
+		return $this->render('vaccination', [
+			'model' => $model,
+			'searchModel' => $searchModel,
+			'dataProvider' => $dataProvider,
+			'city_list' => $city_list
 		]);
 	}
 }

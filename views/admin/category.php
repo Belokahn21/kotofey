@@ -13,16 +13,14 @@ use yii\helpers\Url;
 ?>
 <? $this->title = Title::showTitle("Разделы"); ?>
     <h1 class="title">Разделы</h1>
-    <section>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-		<?= $this->render('_forms/_category', [
-			'form' => $form,
-			'model' => $model,
-			'categories' => $categories,
-		]); ?>
-		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?= $this->render('_forms/_category', [
+	'form' => $form,
+	'model' => $model,
+	'categories' => $categories,
+]); ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 <?php ActiveForm:: end(); ?>
-    </section>
     <h2>Разделы товаров</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,

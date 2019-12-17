@@ -2,9 +2,17 @@
   width: 100%;
 }
 
-.product-price-wrap {
+.product-price-wrap, .product-discount-wrap {
   width: 100%;
   font-size: 12px;
+}
+
+.product-discount {
+  &__value {
+    color: $mainActiveColor;
+    font-size: 22px;
+    font-weight: 600;
+  }
 }
 
 .product-attributes-wrap {
@@ -396,7 +404,7 @@
   display: block;
   width: 100%;
   height: 100%;
-  color: $mainActiveColor!important;
+  color: $mainActiveColor !important;
   padding: 10px;
-  text-decoration: none!important;
+  text-decoration: none !important;
 }

@@ -259,11 +259,20 @@ class AjaxController extends Controller
 			return false;
 		}
 
-		\Yii::$app->session->set(CookieWidget::COOKIE_SESSION_KEY, CookieWidget::COOKIE_SESSION_VALUE);
-		if (\Yii::$app->session->get(CookieWidget::COOKIE_SESSION_KEY) == CookieWidget::COOKIE_SESSION_VALUE) {
+		// получение коллекции (yii\web\CookieCollection) из компонента "response"
+		$cookies = \Yii::$app->response->cookies;
+
+		// добавление новой куки в HTTP-ответ
+		$cookies->add(new \yii\web\Cookie([
+			'name' => CookieWidget::COOKIE_SESSION_KEY,
+			'value' => CookieWidget::COOKIE_SESSION_VALUE,
+		]));
+		$cookies = \Yii::$app->request->cookies;
+		// получение куки с названием "language. Если кука не существует, "en"  будет возвращено как значение по-умолчанию.
+		$cookie = $cookies->getValue(CookieWidget::COOKIE_SESSION_KEY);
+		if ($cookie == CookieWidget::COOKIE_SESSION_VALUE) {
 			return true;
 		}
-
 		return false;
 	}
 }

@@ -10,17 +10,11 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 
 $this->title = Title::showTitle("Гео объекты"); ?>
-<section>
-    <h1 class="title">Гео объекты</h1>
-    <div class="celearfix"></div>
-    <div class="product-form">
+<h1 class="title">Гео объекты</h1>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-		<?= $this->render('_forms/_geo', ['form' => $form, 'model' => $model]); ?>
-		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?= $this->render('_forms/_geo', ['form' => $form, 'model' => $model]); ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end(); ?>
-    </div>
-</section>
-<div class="clearfix"></div>
 <h2>Список гео объектов</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,

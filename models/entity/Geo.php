@@ -16,7 +16,7 @@ use yii\data\ActiveDataProvider;
  * @property string $slug
  * @property int $sort
  * @property int $active
- * @property int $type_id link:geo_type
+ * @property int $type
  * @property int $created_at
  * @property int $updated_at
  */

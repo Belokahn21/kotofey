@@ -84,6 +84,7 @@ $config = [
 			'showScriptName' => false,
 			'enableStrictParsing' => false,
 			'rules' => [
+//				'<module:vaccination>' => '<module>/default/index',
 				'gii' => 'gii',
 				'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
 				'<controller:(admin|ajax)>/' => '<controller>/index',
@@ -95,6 +96,11 @@ $config = [
 				'<action>' => 'site/<action>',
 				'<action>/<id[a-z-\/\d_]+>' => 'site/<action>',
 			]
+		],
+	],
+	'modules' => [
+		'vaccination' => [
+			'class' => 'app\modules\vaccination\Module',
 		],
 	],
 	'params' => $params,
