@@ -8,6 +8,7 @@ return [
 		'info' => 'info@kotofey.store',
 		'sale' => 'sale@kotofey.store',
 		'main' => 'popugau@gmail.com',
+		'job' => 'info@kotofey.store',
 	],
 	'users' => [
 		'rememberMeDuration' => 3600 * 24 * 14
