@@ -8,7 +8,7 @@ use yii\grid\GridView;
 use app\models\tool\seo\Title;
 
 /* @var $this \yii\web\View */
-/* @var $model \app\models\entity\Vaccination */
+/* @var $model \app\models\entity\Vacancy */
 /* @var $city_list \app\models\entity\Geo[] */
 
 $this->title = Title::showTitle("Вакансии");;
@@ -16,7 +16,7 @@ $this->title = Title::showTitle("Вакансии");;
 ?>
     <h1 class="title">Вакансия: <?= $model->title; ?></h1>
 <?php $form = ActiveForm::begin(); ?>
-<?= $this->render('../_forms/_vaccination', [
+<?= $this->render('../_forms/_vacancy', [
 	'form' => $form,
 	'model' => $model,
 	'city_list' => $city_list

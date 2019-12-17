@@ -8,7 +8,7 @@ use yii\grid\GridView;
 use app\models\tool\seo\Title;
 
 /* @var $this \yii\web\View */
-/* @var $model \app\models\entity\Vaccination */
+/* @var $model \app\models\entity\Vacancy */
 /* @var $city_list \app\models\entity\Geo[] */
 
 $this->title = Title::showTitle("Вакансии");;
@@ -16,7 +16,7 @@ $this->title = Title::showTitle("Вакансии");;
 ?>
     <h1 class="title">Вакансии</h1>
 <?php $form = ActiveForm::begin(); ?>
-<?= $this->render('_forms/_vaccination', [
+<?= $this->render('_forms/_vacancy', [
 	'form' => $form,
 	'model' => $model,
 	'city_list' => $city_list
@@ -31,6 +31,7 @@ $this->title = Title::showTitle("Вакансии");;
 	'columns' => [
 		'id',
 		'title',
+		'slug',
 		'description',
 		'price',
 		[
@@ -50,11 +51,11 @@ $this->title = Title::showTitle("Вакансии");;
 //					return Html::a('<i class="fas fa-sign-in-alt"></i>', Url::to(["/admin/user/", 'id' => $model->id, 'action' => 'auth']));
 				},
 				'update' => function ($url, $model, $key) {
-					return Html::a('<i class="far fa-eye"></i>', Url::to(["admin/vaccination", 'id' => $key]));
+					return Html::a('<i class="far fa-eye"></i>', Url::to(["admin/vacancy", 'id' => $key]));
 				},
 				'delete' => function ($url, $model, $key) {
 					return Html::a('<i class="fas fa-trash-alt"></i>',
-						Url::to(["admin/vaccination", 'id' => $key, 'action' => 'delete']));
+						Url::to(["admin/vacancy", 'id' => $key, 'action' => 'delete']));
 				},
 			]
 		],

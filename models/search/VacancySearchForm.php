@@ -3,16 +3,16 @@
 namespace app\models\search;
 
 
-use app\models\entity\Vaccination;
+use app\models\entity\Vacancy;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class VaccinationSearchForm extends Vaccination
+class VacancySearchForm extends Vacancy
 {
 
 	public static function tableName()
 	{
-		return "vaccination";
+		return "vacancy";
 	}
 
 	public function rules()
@@ -30,7 +30,7 @@ class VaccinationSearchForm extends Vaccination
 
 	public function search($params)
 	{
-		$query = Vaccination::find()->orderBy(['created_at' => SORT_DESC]);
+		$query = Vacancy::find()->orderBy(['created_at' => SORT_DESC]);
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,

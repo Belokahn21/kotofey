@@ -17,6 +17,7 @@ use app\models\entity\Geo;
 use app\models\entity\Subscribe;
 use app\widgets\search\SearchWidget;
 use app\widgets\cookie\CookieWidget;
+use yii\helpers\Url;
 
 AppAsset::register($this);
 
@@ -62,7 +63,7 @@ $this->beginPage() ?>
             <li class="top-menu__item"><a class="top-menu__link" href="/contacts/">Контакты</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="/about/">О компании</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="/support/">Поддержка</a></li>
-            <li class="top-menu__item"><a class="top-menu__link" href="/">Вакансии</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="<?= Url::to(['site/vacancy']) ?>">Вакансии</a></li>
 			<?php if (Yii::$app->user->isGuest): ?>
                 <li class="top-menu__item"><a class="top-menu__link" href="/signin/">Войти на сайт</li>
 			<?php else: ?>

@@ -29,7 +29,7 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportStatus;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
-use app\models\entity\Vaccination;
+use app\models\entity\vacancy;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
@@ -50,7 +50,7 @@ use app\models\search\ShortLinksSearchModel;
 use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
-use app\models\search\VaccinationSearchForm;
+use app\models\search\vacancySearchForm;
 use app\models\tool\Debug;
 use app\models\tool\export\YMLExport;
 use app\widgets\notification\Notify;
@@ -1232,13 +1232,13 @@ class AdminController extends Controller
 		return $this->render('management');
 	}
 
-	public function actionVaccination($id = null)
+	public function actionVacancy($id = null)
 	{
 		$city_list = Geo::find()->where(['type' => Geo::TYPE_OBJECT_CITY])->all();
 
 
 		if ($id) {
-			$model = Vaccination::findOne($id);
+			$model = vacancy::findOne($id);
 
 			if (!$model) {
 				throw new HttpException(404, 'Элемент не найден');
@@ -1255,13 +1255,13 @@ class AdminController extends Controller
 				}
 			}
 
-			return $this->render('detail/vaccination', [
+			return $this->render('detail/vacancy', [
 				'model' => $model,
 				'city_list' => $city_list
 			]);
 		}
-		$model = new Vaccination();
-		$searchModel = new VaccinationSearchForm();
+		$model = new Vacancy();
+		$searchModel = new VacancySearchForm();
 		$dataProvider = $searchModel->search(Yii::$app->request->get());
 
 		if (\Yii::$app->request->isPost) {
@@ -1275,7 +1275,7 @@ class AdminController extends Controller
 			}
 		}
 
-		return $this->render('vaccination', [
+		return $this->render('vacancy', [
 			'model' => $model,
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,

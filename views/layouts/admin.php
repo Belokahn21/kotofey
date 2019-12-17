@@ -3,7 +3,7 @@
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-use app\models\entity\Vaccination;
+use app\models\entity\Vacancy;
 use yii\helpers\Url;
 use app\models\entity\News;
 use yii\helpers\Html;
@@ -151,8 +151,8 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                         <a href="<?= Url::to(['admin/management']) ?>"><i class="fas fa-users"></i>Персонал</a>
                         <ul>
                             <li class="panel-menu__item sub">
-                                <a href="<?= Url::to(['admin/vaccination']); ?>">
-                                    Список вакансий<span class="count"><?= Vaccination::find()->count() ?></span>
+                                <a href="<?= Url::to(['admin/vacancy']); ?>">
+                                    Список вакансий<span class="count"><?= Vacancy::find()->count() ?></span>
                                 </a>
                             </li>
                         </ul>

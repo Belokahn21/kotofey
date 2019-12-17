@@ -25,6 +25,7 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportMessage;
 use app\models\entity\support\Tickets;
 use app\models\entity\user\Billing;
+use app\models\entity\Vacancy;
 use app\models\forms\CatalogFilter;
 use app\models\forms\DiscountForm;
 use app\models\tool\Debug;
@@ -41,6 +42,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\entity\Search;
 use Yii;
+use yii\web\HttpException;
 use yii\web\Response;
 use yii\widgets\ActiveForm;
 
@@ -928,11 +930,28 @@ class SiteController extends Controller
 		]);
 	}
 
-	public function actionVacancy()
+	public function actionVacancy($id = null)
 	{
 		Attributes::metaDescription("Здесь вы можете узнать о вакансиях нашей компании. Бывают момент, когда мы ищем новых людей в нашу команду");
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		return $this->render('vacancy');
+
+		if ($id) {
+
+			$model = Vacancy::findOne(['slug' => $id, 'city_id' => Yii::$app->session->get('city_id')]);
+
+			if(!$model){
+				throw new HttpException(404, 'Вакансия не найдена.');
+			}
+
+			return $this->render('detail/vacancy', [
+				'model' => $model
+			]);
+		}
+
+		$items = Vacancy::find()->where(['city_id' => Yii::$app->session->get('city_id')])->all();
+		return $this->render('vacancy', [
+			'items' => $items
+		]);
 	}
 
 	public function actionContacts()
