@@ -14,6 +14,7 @@ use app\widgets\catalog_filter\CatalogFilterWidget;
 use app\models\entity\Category;
 use app\models\forms\CatalogFilter;
 use yii\widgets\LinkPager;
+use app\models\entity\ProductPropertiesValues;
 
 $this->title = Title::showTitle("Товары");
 $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['/catalog/']];
@@ -31,19 +32,23 @@ if ($category) {
 		<?php foreach ($products as $product): ?>
             <li class="catalog-list__item">
                 <a href="<?php echo $product->getDetail(); ?>">
+                    <div class="catalog-list__weight">
+						<?= ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])->value; ?> кг
+                    </div>
+
                     <div class="catalog-list__item-image-wrap">
-                        <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+						<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                             <img class="catalog-list__item-image" src="/web/upload/<?= $product->image; ?>" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
-                        <?php else: ?>
+						<?php else: ?>
                             <img class="catalog-list__item-image" src="/web/upload/images/not-image.png" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
-                        <?php endif; ?>
+						<?php endif; ?>
                     </div>
                     <h2 class="catalog-list__item-title" title="<?= $product->name; ?>"><?= StringHelper::truncate($product->name, 70, '...'); ?></h2>
                     <div class="catalog-list__item-category"><?= Category::findOne($product->category)->name; ?></div>
                     <div class="catalog-list__item-price"><?= Price::format($product->price); ?><?= Currency::getInstance()->show(); ?></div>
                 </a>
             </li>
-        <?php endforeach; ?>
+		<?php endforeach; ?>
     </ul>
 </div>
 <div class="pagination-wrap">
