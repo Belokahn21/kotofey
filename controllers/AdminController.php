@@ -29,7 +29,7 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportStatus;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
-use app\models\entity\vacancy;
+use app\models\entity\Vacancy;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
@@ -50,7 +50,7 @@ use app\models\search\ShortLinksSearchModel;
 use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
-use app\models\search\vacancySearchForm;
+use app\models\search\VacancySearchForm;
 use app\models\tool\Debug;
 use app\models\tool\export\YMLExport;
 use app\widgets\notification\Notify;
@@ -1238,7 +1238,7 @@ class AdminController extends Controller
 
 
 		if ($id) {
-			$model = vacancy::findOne($id);
+			$model = Vacancy::findOne($id);
 
 			if (!$model) {
 				throw new HttpException(404, 'Элемент не найден');
