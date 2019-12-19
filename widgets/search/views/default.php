@@ -20,8 +20,8 @@ use yii\widgets\ActiveForm;
 	]
 ])->textInput([
 	'class' => 'search-form__query',
-	'value' => $model->search,
-	'placeholder' => 'Поиск товара'
+	'value' => Yii::$app->request->get('Search')['search'],
+	'placeholder' => 'Поиск товара',
 ])->label(false); ?>
 <?= Html::submitButton('<i class="fas fa-search"></i>', ['class' => 'search-form__submit']) ?>
 <?php ActiveForm::end(); ?>
