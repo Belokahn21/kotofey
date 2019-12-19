@@ -18,6 +18,7 @@ use app\models\entity\Subscribe;
 use app\widgets\search\SearchWidget;
 use app\widgets\cookie\CookieWidget;
 use yii\helpers\Url;
+use app\models\services\CompareService;
 
 AppAsset::register($this);
 
@@ -107,6 +108,16 @@ $this->beginPage() ?>
                 </div>
             </div>
         </div>
+
+        <div class="compare-wrap">
+            <a href="<?= Url::to(['site/compare']); ?>" class="compare">
+                <i class="compare__icon fas fa-balance-scale"></i>
+                <div class="compare__count">
+                    <span><?= CompareService::count(); ?></span>
+                </div>
+            </a>
+        </div>
+
         <div class="basket-wrap">
             <a href="/basket/">
                 <div class="basket-icon">

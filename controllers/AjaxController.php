@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\entity\Basket;
 use app\models\entity\BasketItem;
+use app\models\entity\Compare;
 use app\models\entity\Delivery;
 use app\models\entity\Favorite;
 use app\models\entity\Geo;
@@ -274,5 +275,13 @@ class AjaxController extends Controller
 			return true;
 		}
 		return false;
+	}
+
+	public function actionToCompare($product_id)
+	{
+		$compare = new Compare();
+		$compare->product_id = $product_id;
+
+		return $compare->save();
 	}
 }

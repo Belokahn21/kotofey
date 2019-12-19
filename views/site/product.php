@@ -72,6 +72,8 @@ echo $this->render('modal/product-modal-payment');
                         <i class="far fa-star"></i>
                     </div>
                     <div class="product-favorite add-to-favorite" data-product="<?= $product->id; ?>"><i class="<?= ((Favorite::getInstance()->exist($product->id)) ? 'fas' : 'far'); ?> fa-heart"></i>В избранное</div>
+                    <div class="product-favorite add-to-compare" data-product="<?= $product->id; ?>"><i class="fas fa-balance-scale"></i>Сравнить</div>
+
                     <!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
                 </div>
                 <div class="product-description">
