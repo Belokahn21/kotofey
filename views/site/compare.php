@@ -1,5 +1,7 @@
 <?php
 
+use app\models\entity\ProductPropertiesValues;
+use app\models\entity\ProductProperties;
 use app\models\entity\Compare;
 use app\models\tool\seo\Title;
 
@@ -15,22 +17,12 @@ $this->title = Title::showTitle("Сравните выбранные товар�
             <div class="compare-list__title"><?= $item->name; ?></div>
 
             <ul class="compare-properties">
-                <li class="compare-properties__item identity">
-                    <div class="compare-properties__key">Количество</div>
-                    <div class="compare-properties__value">10</div>
-                </li>
-                <li class="compare-properties__item">
-                    <div class="compare-properties__key">Вес</div>
-                    <div class="compare-properties__value">10 кг</div>
-                </li>
-                <li class="compare-properties__item">
-                    <div class="compare-properties__key">Производитель</div>
-                    <div class="compare-properties__value">Пурина</div>
-                </li>
-                <li class="compare-properties__item">
-                    <div class="compare-properties__key">Страна</div>
-                    <div class="compare-properties__value">Австрия</div>
-                </li>
+				<?php foreach (ProductPropertiesValues::find()->where(['product_id' => $item->id])->all() as $property_value): ?>
+                    <li class="compare-properties__item <?php // identity ?>">
+                        <div class="compare-properties__key"><?= $property_value->property->name; ?></div>
+                        <div class="compare-properties__value"><?= $property_value->finalValue; ?></div>
+                    </li>
+				<?php endforeach; ?>
             </ul>
         </li>
 	<?php endforeach; ?>
