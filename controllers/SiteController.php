@@ -977,4 +977,9 @@ class SiteController extends Controller
 		}
 		return $this->render('brands');
 	}
+
+	public function actionCompare()
+	{
+		return $this->render('compare');
+	}
 }

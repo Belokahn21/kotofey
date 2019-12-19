@@ -1,4 +1,6 @@
 .basket-wrap {
+  display: flex;
+  flex-direction: row;
   padding: 0;
   margin: 0;
   color: $mainActiveColor;
@@ -17,7 +19,7 @@
 .basket-icon {
   color: $mainActiveColor;
   font-size: 35px;
-  padding: 5px 10px;
+  padding: 0 10px;
 }
 
 .basket {
