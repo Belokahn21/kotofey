@@ -317,11 +317,17 @@ class SiteController extends Controller
 		if (!empty($product->seo_description)) {
 			Attributes::metaDescription($product->seo_description);
 		} else {
-			Attributes::metaDescription($product->description);
+			if (!empty($product->description)) {
+				Attributes::metaDescription($product->description);
+			} else {
+				Attributes::metaDescription(sprintf('В нашем интернет-магазине зоотоваров в продаже  имеется %s по низкой цене в Барнауле. За каждую покупку выполучите 5%% бонусов, а мы доставим бесплатно!', $product->name));
+			}
 		}
 
 		if (!empty($product->seo_keywords)) {
 			Attributes::metaKeywords($product->seo_keywords);
+		} else {
+			Attributes::metaKeywords(explode(';', sprintf("купить %s в барнауле;интернет-зоомагазин;зоомагазин интернет барнаул;анго зоомагазин интернет барнаул;интернет зоомагазин с доставкой", $product->name)));
 		}
 
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/product/" . $product->slug . "/");
@@ -939,7 +945,7 @@ class SiteController extends Controller
 
 			$model = Vacancy::findOne(['slug' => $id, 'city_id' => Yii::$app->session->get('city_id')]);
 
-			if(!$model){
+			if (!$model) {
 				throw new HttpException(404, 'Вакансия не найдена.');
 			}
 

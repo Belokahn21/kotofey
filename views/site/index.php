@@ -9,7 +9,7 @@ use app\models\tool\seo\Title;
 use yii\helpers\StringHelper;
 use app\widgets\slider\SliderWidget;
 
-$this->title = Title::showTitle("Главная страница");
+$this->title = Title::showTitle("зоотовары для животных в Барнауле");
 ?>
 
 <?= SliderWidget::widget([
