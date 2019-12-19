@@ -10,6 +10,7 @@ use app\models\entity\Favorite;
 use app\models\entity\Geo;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
+use app\models\services\CompareService;
 use app\models\tool\Debug;
 use app\models\tool\parser\ParseProvider;
 use app\widgets\cookie\CookieWidget;
@@ -279,9 +280,17 @@ class AjaxController extends Controller
 
 	public function actionToCompare($product_id)
 	{
+		$response = array();
 		$compare = new Compare();
 		$compare->product_id = $product_id;
 
-		return $compare->save();
+		if ($compare->save()) {
+			$response['code'] = "success";
+			$response['message'] = "Товар добавлен в список сравнения";
+			$response['other'] = [
+				'count' => CompareService::count()
+			];
+		}
+		return Json::encode($response);
 	}
 }
