@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 
+use app\models\tool\Debug;
 use app\models\tool\Text;
 use yii\base\Model;
 use yii\db\ActiveRecord;
@@ -58,7 +59,6 @@ class Search extends Model
 
 				foreach ($words as $word) {
 					$products->andWhere(['like', 'name', $word]);
-					exit($word);
 
 					if (Text::existCyrilic($word)) {
 						$word = Text::toTraslit($word);
