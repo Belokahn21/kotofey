@@ -27,29 +27,38 @@ if ($category) {
 
 	<?php echo CatalogFilterWidget::widget(); ?>
 
-    <ul class="catalog-list">
-		<?php /* @var $product \app\models\entity\Product */ ?>
-		<?php foreach ($products as $product): ?>
-            <li class="catalog-list__item">
-                <a href="<?php echo $product->getDetail(); ?>">
-                    <div class="catalog-list__weight">
-						<?= ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])->value; ?> кг
-                    </div>
+    <div class="catalog-wrap">
+        <ul class="filter-variant">
+            <li class="filter-variant__item" data-show="list"><i class="fas fa-list"></i></li>
+            <li class="filter-variant__item active" data-show="block"><i class="fas fa-th-large"></i></li>
+        </ul>
+        <ul class="catalog-list">
+			<?php /* @var $product \app\models\entity\Product */ ?>
+			<?php foreach ($products as $product): ?>
+                <li class="catalog-list__item">
+                    <a href="<?php echo $product->getDetail(); ?>">
+                        <div class="catalog-list__weight"><?= ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])->value; ?> кг</div>
 
-                    <div class="catalog-list__item-image-wrap">
-						<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
-                            <img class="catalog-list__item-image" src="/web/upload/<?= $product->image; ?>" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
-						<?php else: ?>
-                            <img class="catalog-list__item-image" src="/web/upload/images/not-image.png" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
-						<?php endif; ?>
-                    </div>
-                    <h2 class="catalog-list__item-title" title="<?= $product->name; ?>"><?= StringHelper::truncate($product->name, 70, '...'); ?></h2>
-                    <div class="catalog-list__item-category"><?= Category::findOne($product->category)->name; ?></div>
-                    <div class="catalog-list__item-price"><?= Price::format($product->price); ?><?= Currency::getInstance()->show(); ?></div>
-                </a>
-            </li>
-		<?php endforeach; ?>
-    </ul>
+                        <div class="catalog-list__item-image-wrap">
+							<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                                <img class="catalog-list__item-image" src="/web/upload/<?= $product->image; ?>" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
+							<?php else: ?>
+                                <img class="catalog-list__item-image" src="/web/upload/images/not-image.png" title="<?= $product->detail; ?>" alt="<?= $product->detail; ?>">
+							<?php endif; ?>
+                        </div>
+
+                        <div class="catalog-list__info">
+                            <h2 class="catalog-list__item-title" title="<?= $product->name; ?>"><?= StringHelper::truncate($product->name, 70, '...'); ?></h2>
+                            <div class="catalog-list__item-category"><?= Category::findOne($product->category)->name; ?></div>
+                            <div class="catalog-list__item-available">В наличии</div>
+                            <div class="catalog-list__item-article">Акртикул: <?= $product->article; ?></div>
+                        </div>
+                        <div class="catalog-list__item-price"><?= Price::format($product->price); ?><?= Currency::getInstance()->show(); ?></div>
+                    </a>
+                </li>
+			<?php endforeach; ?>
+        </ul>
+    </div>
 </div>
 <div class="pagination-wrap">
 	<?php echo LinkPager::widget([

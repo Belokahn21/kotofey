@@ -103,10 +103,30 @@ $(document).ready(function () {
 	});
 
 
+	/* Скрытие уведомления -- начало */
 	$(document).ready(function () {
 		setTimeout(function () {
 			$(".alert-notify-wrap").slideUp();
 		}, 2500);
 	});
+	/* Скрытие уведомления -- конец */
 
+
+	$('.filter-variant__item').click(function (e) {
+		var $this = $(this);
+		var variant = $this.data('show');
+		var $catalog = $('.catalog-list');
+
+
+		$('.filter-variant__item').each(function () {
+			$(this).removeClass('active');
+		});
+		$this.addClass('active');
+
+		$catalog.removeClass('block');
+		$catalog.removeClass('list');
+		if (variant != 'block') {
+			$catalog.addClass(variant);
+		}
+	});
 });
