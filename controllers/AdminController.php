@@ -1025,6 +1025,17 @@ class AdminController extends Controller
 
 	public function actionProvider($id = null)
 	{
+		if (Yii::$app->request->get('action') == 'delete') {
+			if (!$model = Providers::findOne($id)) {
+				throw new HttpException(404, 'Запись не найдена');
+			}
+
+			if ($model->delete()) {
+				Notify::setSuccessNotify('Поставщик успешно удалён');
+				return $this->redirect('/admin/provider/');
+			}
+		}
+
 		if ($id) {
 			$model = Providers::findOne($id);
 			$model->scenario = Providers::SCENARIO_UPDATE;

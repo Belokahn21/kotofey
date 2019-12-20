@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\models\entity\Vacancy;
@@ -34,7 +35,9 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= Notify::widget(); ?>
+<?= Notify::widget([
+	'template' => 'backend'
+]); ?>
 <aside class="left-sidebar">
     <nav class="dashboard-left-sidebar" data-show="false">
         <!--        <button class="show-dashboard">X</button>-->

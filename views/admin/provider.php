@@ -47,11 +47,11 @@ $this->title = Title::showTitle("Поставщики"); ?>
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
 				},
 				'update' => function ($url, $model, $key) {
-					return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/provider/$key"]));
+					return Html::a('<i class="far fa-eye"></i>', Url::to(["admin/provider", 'id' => $key]));
 				},
 				'delete' => function ($url, $model, $key) {
 					return Html::a('<i class="fas fa-trash-alt"></i>',
-						Url::to(["/admin/catalog/", 'id' => $key, 'action' => 'delete']));
+						Url::to(["admin/provider", 'id' => $key, 'action' => 'delete']));
 				},
 			]
 		],
