@@ -14,6 +14,6 @@ return [
 		'rememberMeDuration' => 3600 * 24 * 14
 	],
 	'files' => [
-		'extensions' => 'png, jpeg, jpg, svg, bmp',
+		'extensions' => 'png, jpeg, jpg, svg, bmp, webp',
 	]
 ];
