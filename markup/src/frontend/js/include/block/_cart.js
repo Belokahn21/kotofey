@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     var $input = $('.product-detail-calc-count');
     var $plus = $('.product-detail-calc-plus');
