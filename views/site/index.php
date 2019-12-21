@@ -91,7 +91,7 @@ $this->title = Title::showTitle("зоотовары для животных в �
 			<?php foreach ($providers as $provider): ?>
                 <li class="homepage-providers__item">
                     <a class="homepage-providers__link" href="<?= $provider->link; ?>/">
-                        <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>">
+                        <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>" title="<?= $provider->name; ?>" alt="<?= $provider->name; ?>">
                         <div class="homepage-providers__detail">К ассортимену</div>
                     </a>
                 </li>
