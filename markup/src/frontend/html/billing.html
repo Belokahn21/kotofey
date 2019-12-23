@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ru">
+<include src="include/head.html"></include>
+<body>
+<include src="include/admin-panel.html"></include>
+<div class="wrap-page">
+
+    <include src="include/block/modal-edit-profile.html"></include>
+
+    <include src="include/header/up-header-menu.html"></include>
+    <include src="include/header/header.html"></include>
+    <include src="include/header/menu.html"></include>
+    <include src="include/header/breadcrumb.html"></include>
+    <div class="page-content">
+        <h1>Список доставок</h1>
+
+        <div class="billing-wrap">
+            <ul class="billing">
+                <li class="billing__item">
+                    <div class="billing__title">
+                        <div>Доставка на дом <a class="billing__edit" href="javascript:void(0);">(Редактировать)</a></div>
+                        <div><i class="fas fa-check-circle" data-toggle="tooltip" data-placement="right" title="Адрес назначен как основной"></i></div>
+                        <!--                        <i class="far fa-check-circle"></i>-->
+                    </div>
+                    <ul class="billing-info">
+                        <li class="billing-info__item">
+                            <div class="key">Город</div>
+                            <div class="value">Барнаул</div>
+                        </li>
+                        <li class="billing-info__item">
+                            <div class="key">Улица</div>
+                            <div class="value">Весенняя</div>
+                        </li>
+                        <li class="billing-info__item">
+                            <div class="key">Дом</div>
+                            <div class="value">6</div>
+                        </li>
+                        <li class="billing-info__item">
+                            <div class="key">Квартира</div>
+                            <div class="value">88</div>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <include src="include/footer/footer.html"></include>
+</div>
+
+<include src="include/block/requisites.html"></include>
+<include src="include/block/cookie.html"></include>
+</body>
+</html>

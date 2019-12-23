@@ -1,0 +1,59 @@
+.billing-wrap {
+  width: 30%;
+}
+
+.billing {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+
+  &__item {
+    border: 1px silver solid;
+    margin: 15px 0;
+  }
+
+  &__title {
+    font-weight: 600;
+    padding: 5px 15px;
+    border-bottom: 1px silver solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    i {
+      cursor: pointer;
+
+      &.fas {
+        color: #25d366;
+      }
+    }
+  }
+
+  &__edit {
+    text-transform: uppercase;
+    color: $mainColor;
+    font-size: 10px;
+    font-weight: 600;
+    text-decoration: none!important;
+
+    &:hover {
+      color: $mainActiveColor;
+      border-bottom: 1px $mainActiveColor dashed;
+    }
+  }
+}
+
+.billing-info {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    width: 25%;
+    padding: 5px;
+  }
+}
