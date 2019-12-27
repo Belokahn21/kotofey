@@ -14,7 +14,10 @@ Disallow: /favorite/
 Disallow: /signin/
 Disallow: /signup/
 Disallow: /support/
-Disallow: /support/*
+Disallow: /support/
+Disallow: /compare/*
+Disallow: /favorite/*
+Disallow: /billing/*
 Disallow: /web/
 Disallow: /web/*
 Disallow: /*?*
