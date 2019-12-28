@@ -109,7 +109,7 @@ $this->title = Title::showTitle("Главная страница");
                             <ul class="statistic__list">
 								<?php foreach ($last_search as $phrase): ?>
                                     <li class="statistic__item" data-toggle="tooltip" data-placement="bottom" title="<?= $phrase->text; ?>">
-										<?= StringHelper::truncate($phrase->text, 7, '...'); ?>
+										<?= StringHelper::truncate($phrase->text, 15, '...'); ?>
                                     </li>
 								<?php endforeach; ?>
                             </ul>
