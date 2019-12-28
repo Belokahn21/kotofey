@@ -40,6 +40,10 @@ $this->title = Title::showTitle("Главная страница");
                                 <div class="statistic__item-key">Выручка</div>
                                 <div class="statistic__item-value"><?= OrderStatistic::income(); ?></div>
                             </li>
+                            <li class="statistic__item">
+                                <div class="statistic__item-key">Маржинальность</div>
+                                <div class="statistic__item-value"><?= OrderStatistic::marginality(); ?></div>
+                            </li>
                         </ul>
                     </div>
                 </div>
