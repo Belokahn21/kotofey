@@ -562,6 +562,36 @@ class SiteController extends Controller
 		}
 	}
 
+	public function actionBilling($id = null)
+	{
+		if ($id) {
+			$model = Billing::find()->where(['user_id' => Yii::$app->user->id, 'id' => $id])->one();
+
+			if (!$model) {
+				throw new HttpException(404, 'Адрес не найден');
+			}
+
+			if(Yii::$app->request->isPost){
+				if($model->load(Yii::$app->request->post())){
+					if($model->validate()){
+						if($model->update()){
+							Notify::setSuccessNotify('Адрес доставки успешно обновлён');
+							return $this->refresh();
+						}
+					}
+				}
+			}
+
+			return $this->render('detail/billing', [
+				'model' => $model
+			]);
+		}
+		$models = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
+		return $this->render('billing', [
+			'models' => $models
+		]);
+	}
+
 	public function actionSignin()
 	{
 		$model = new User(['scenario' => User::SCENARIO_LOGIN]);

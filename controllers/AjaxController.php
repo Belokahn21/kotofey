@@ -10,6 +10,7 @@ use app\models\entity\Favorite;
 use app\models\entity\Geo;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
+use app\models\entity\user\Billing;
 use app\models\services\CompareService;
 use app\models\tool\Debug;
 use app\models\tool\parser\ParseProvider;
@@ -291,6 +292,58 @@ class AjaxController extends Controller
 				'count' => CompareService::count()
 			];
 		}
+		return Json::encode($response);
+	}
+
+	public function actionBilling($product_id)
+	{
+		if (\Yii::$app->user->isGuest or !\Yii::$app->request->isAjax) {
+			return false;
+		}
+		$billing = Billing::findOne($product_id);
+
+		if (!$billing) {
+			throw new HttpException(404, 'Элемент не найден');
+		}
+
+		$response = [
+			'code' => 'success',
+			'message' => 'Адрес доставки: `' . $billing->getName() . '` выбран основным'
+		];
+
+		foreach (Billing::find()->where(['user_id' => \Yii::$app->user->id])->all() as $change_billing) {
+			$change_billing->is_main = false;
+			if ($change_billing->validate()) {
+				if (!$change_billing->update()) {
+					$response = [
+						'code' => 'error',
+						'message' => 'Ошибка при общей смене статуса доставки'
+					];
+				}
+			} else {
+				$response = [
+					'code' => 'error',
+					'message' => 'Ошибка валидации обновления адресов'
+				];
+			}
+		}
+
+		$billing->is_main = true;
+		if ($billing->validate()) {
+			if (!$billing->update()) {
+				$response = [
+					'code' => 'error',
+					'message' => 'Ошибка при обновлении адреса доставки'
+				];
+			}
+		} else {
+			$response = [
+				'code' => 'error',
+				'message' => 'Ошибка валидации обновления адреса (' . implode('-', $billing->getErrors()) . ')'
+			];
+		}
+
+
 		return Json::encode($response);
 	}
 }

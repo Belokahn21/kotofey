@@ -14,6 +14,8 @@ use yii\db\ActiveRecord;
  * Billing model
  *
  * @property integer $id
+ * @property boolean $is_main
+ * @property integer $name
  * @property integer $user_id
  * @property string $city
  * @property string $street
@@ -26,42 +28,54 @@ use yii\db\ActiveRecord;
  */
 class Billing extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "user_billing";
-    }
+	public static function tableName()
+	{
+		return "user_billing";
+	}
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className()
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className()
+		];
+	}
 
-    public function rules()
-    {
-        return [
-            [['city', 'street', 'home', 'house'], 'string'],
+	public function rules()
+	{
+		return [
+			[['city', 'street', 'home', 'house', 'name'], 'string'],
 
-            [['city', 'street', 'home', 'house'], 'default', 'value' => null],
+			[['city', 'street', 'home', 'house'], 'default', 'value' => null],
 
-            [['user_id'], 'integer'],
-        ];
-    }
+			[['user_id'], 'integer'],
 
-    public function attributeLabels()
-    {
-        return [
-            'user_id' => 'ID пользователя',
-            'city' => 'Город',
-            'street' => 'Улица',
-            'home' => 'Дом',
-            'house' => 'Квартира',
-        ];
-    }
+			[['is_main'], 'boolean'],
+		];
+	}
 
-    public static function findByUser($userId)
-    {
-        return static::findOne(['user_id' => $userId]);
-    }
+	public function attributeLabels()
+	{
+		return [
+			'user_id' => 'ID пользователя',
+			'city' => 'Город',
+			'street' => 'Улица',
+			'home' => 'Дом',
+			'house' => 'Квартира',
+			'name' => 'Название',
+			'is_main' => 'Основная доставка',
+		];
+	}
+
+	public static function findByUser($userId)
+	{
+		return static::findOne(['user_id' => $userId]);
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getName()
+	{
+		return !empty($this->name) ? $this->name : 'Без названия';
+	}
 }

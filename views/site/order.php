@@ -12,6 +12,7 @@ $currency = new Currency();
 /* @var $items \app\models\entity\OrdersItems[] */
 ?>
 <?php $this->title = Title::showTitle("Список заказов");
+$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => ['/profile/']];
 $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url' => ['/order/']]; ?>
 <section class="list-orders">
     <h1>Список заказов</h1>
