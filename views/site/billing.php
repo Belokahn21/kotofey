@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Адреса доставки', 'u
                 <li class="billing__item">
                     <div class="billing__title">
                         <div><?= ($model->getName()); ?> <a class="billing__edit" href="<?= Url::to(['site/billing', 'id' => $model->id]); ?>">(Редактировать)</a></div>
-                        <div>
+                        <div class="billing__indicator" data-bliing-id="">
 							<?php if ($model->is_main): ?>
                                 <i class="fas fa-check-circle" data-toggle="tooltip" data-placement="right" title="Адрес назначен как основной"></i>
 							<?php else: ?>
