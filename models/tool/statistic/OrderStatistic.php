@@ -28,10 +28,16 @@ class OrderStatistic extends Product
     }
 
 
-    public static function marginality()
+    public static function marginality($order_id = null)
     {
         $out_summ = 0;
-        $orders = Order::find()->all();
+        $orders = Order::find();
+
+        if ($order_id) {
+            $orders->where(['id' => $order_id]);
+        }
+
+        $orders = $orders->all();
 
         foreach ($orders as $order) {
             $items = OrdersItems::find()->where(['order_id' => $order->id])->all();
@@ -39,6 +45,10 @@ class OrderStatistic extends Product
                 $product = Product::findOne($item->product_id);
                 if ($product) {
                     $out_summ += $product->price - $product->purchase;
+                }
+
+                if (empty($item->product_id)) {
+                    $out_summ += $item->price * $item->count;
                 }
             }
         }
