@@ -571,6 +571,17 @@ class SiteController extends Controller
 				throw new HttpException(404, 'Адрес не найден');
 			}
 
+			if(Yii::$app->request->isPost){
+				if($model->load(Yii::$app->request->post())){
+					if($model->validate()){
+						if($model->update()){
+							Notify::setSuccessNotify('Адрес доставки успешно обновлён');
+							return $this->refresh();
+						}
+					}
+				}
+			}
+
 			return $this->render('detail/billing', [
 				'model' => $model
 			]);

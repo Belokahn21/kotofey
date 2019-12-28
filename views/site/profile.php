@@ -118,7 +118,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
     </ul>
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Редактировать профиль</h5>
@@ -132,9 +132,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Основное</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Доставка</a>
                         </li>
                     </ul>
                     <div class="tab-content" id="myTabContent">
@@ -162,20 +159,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
 								<?= $form->field($profile, 'avatar')->fileInput() ?>
                             </div>
 
-                        </div>
-                        <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'city'); ?>
-                            </div>
-                            <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'street'); ?>
-                            </div>
-                            <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'home'); ?>
-                            </div>
-                            <div class="profile-edit-modal-element">
-								<?= $form->field($profile->billing, 'house'); ?>
-                            </div>
                         </div>
                     </div>
                 </div>
