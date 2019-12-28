@@ -28,54 +28,59 @@ use yii\db\ActiveRecord;
  */
 class Billing extends ActiveRecord
 {
-	public static function tableName()
-	{
-		return "user_billing";
-	}
+    public static function tableName()
+    {
+        return "user_billing";
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className()
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
 
-	public function rules()
-	{
-		return [
-			[['city', 'street', 'home', 'house', 'name'], 'string'],
+    public function rules()
+    {
+        return [
+            [['city', 'street', 'home', 'house', 'name'], 'string'],
 
-			[['city', 'street', 'home', 'house'], 'default', 'value' => null],
+            [['city', 'street', 'home', 'house'], 'default', 'value' => null],
 
-			[['user_id'], 'integer'],
+            [['user_id'], 'integer'],
 
-			[['is_main'], 'boolean'],
-		];
-	}
+            [['is_main'], 'boolean'],
+        ];
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			'user_id' => 'ID пользователя',
-			'city' => 'Город',
-			'street' => 'Улица',
-			'home' => 'Дом',
-			'house' => 'Квартира',
-			'name' => 'Название',
-			'is_main' => 'Основная доставка',
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            'user_id' => 'ID пользователя',
+            'city' => 'Город',
+            'street' => 'Улица',
+            'home' => 'Дом',
+            'house' => 'Квартира',
+            'name' => 'Название',
+            'is_main' => 'Основная доставка',
+        ];
+    }
 
-	public static function findByUser($userId)
-	{
-		return static::findOne(['user_id' => $userId]);
-	}
+    public static function findByUser($userId)
+    {
+        return static::findOne(['user_id' => $userId]);
+    }
 
-	/**
-	 * @return int
-	 */
-	public function getName()
-	{
-		return !empty($this->name) ? $this->name : 'Без названия';
-	}
+    /**
+     * @return int
+     */
+    public function getName()
+    {
+        return !empty($this->name) ? $this->name : 'Без названия';
+    }
+
+    public function getTest()
+    {
+        return sprintf("город %s, улица %s, дом %s, квартира %s", $this->city, $this->street, $this->home, $this->house);
+    }
 }

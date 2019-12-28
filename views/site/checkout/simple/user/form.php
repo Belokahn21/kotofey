@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
+use app\models\entity\user\Billing;
 
 /* @var $this \yii\web\View */
 /* @var $discount_model \app\models\forms\DiscountForm */
@@ -13,8 +14,8 @@ use yii\helpers\ArrayHelper;
 ?>
 
 <?= $this->render('../bonus', [
-	'form' => $form,
-	'DiscountModel' => $discount_model
+    'form' => $form,
+    'DiscountModel' => $discount_model
 ]); ?>
 
 <div class="checkout-block">
@@ -40,10 +41,10 @@ use yii\helpers\ArrayHelper;
     </div>
     <div class="row">
         <div class="col-sm-6">
-			<?= $form->field($order, 'delivery_id')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'), ['prompt' => 'Вариант доставки'])->label(false); ?>
+            <?= $form->field($order, 'delivery_id')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'), ['prompt' => 'Вариант доставки'])->label(false); ?>
         </div>
         <div class="col-sm-6">
-			<?= $form->field($order, 'payment_id')->dropDownList(ArrayHelper::map($payment, 'id', 'name'), ['prompt' => 'Вариант оплаты'])->label(false); ?>
+            <?= $form->field($order, 'payment_id')->dropDownList(ArrayHelper::map($payment, 'id', 'name'), ['prompt' => 'Вариант оплаты'])->label(false); ?>
         </div>
     </div>
 </div>
@@ -54,19 +55,26 @@ use yii\helpers\ArrayHelper;
         Информация о заказе
     </div>
     <div class="row">
-        <div class="col-sm-3">
-			<?= $form->field($billing, 'city')->textInput(['class' => 'checkout__input', 'placeholder' => 'Город'])->label(false); ?>
-        </div>
-        <div class="col-sm-3">
-			<?= $form->field($billing, 'street')->textInput(['class' => 'checkout__input', 'placeholder' => 'Улица'])->label(false); ?>
-        </div>
-        <div class="col-sm-3">
-			<?= $form->field($billing, 'home')->textInput(['class' => 'checkout__input', 'placeholder' => 'Дом'])->label(false); ?>
-        </div>
-        <div class="col-sm-3">
-			<?= $form->field($billing, 'house')->textInput(['class' => 'checkout__input', 'placeholder' => 'Квартира'])->label(false); ?>
+        <div class="col-sm-12">
+            <?= $form->field($order, 'select_billing')->dropDownList(ArrayHelper::map(Billing::find()->where(['user_id' => Yii::$app->user->id])->all(), 'id', 'test'), ['prompt' => 'Указать адрес доставки'])->label(false); ?>
         </div>
     </div>
+    <?php /*
+    <div class="row">
+        <div class="col-sm-3">
+            <?= $form->field($billing, 'city')->textInput(['class' => 'checkout__input', 'placeholder' => 'Город'])->label(false); ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($billing, 'street')->textInput(['class' => 'checkout__input', 'placeholder' => 'Улица'])->label(false); ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($billing, 'home')->textInput(['class' => 'checkout__input', 'placeholder' => 'Дом'])->label(false); ?>
+        </div>
+        <div class="col-sm-3">
+            <?= $form->field($billing, 'house')->textInput(['class' => 'checkout__input', 'placeholder' => 'Квартира'])->label(false); ?>
+        </div>
+    </div>
+ */ ?>
     <div class="row">
         <div class="col-sm-12">
             <textarea class="checkout__textarea" placeholder="Комментарий к заказу"></textarea>

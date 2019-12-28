@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
         <div class="checkout__title">Корзина:</div>
 		<?php if ($basket = Basket::findAll()): ?>
             <ul class="checkout__cart">
-				<?php foreach (Basket::findAll() as $item): ?>
+				<?php foreach ($basket as $item): ?>
                     <li class="checkout__cart-item">
                         <div class="checkout__cart-item__title">
                             <a href="" class="checkout__cart-item__link"><?= $item->getName(); ?></a>

@@ -28,122 +28,117 @@ use yii\db\ActiveRecord;
  */
 class Order extends ActiveRecord
 {
-//	const SCENARIO_FAST_ORDER = 1;
-//	const SCENARIO_SIMPLE_ORDER = 2;
+    public $product_id;
+    public $is_update;
+    public $select_billing;
 
-	public $product_id;
-	public $is_update;
+    public static function tableName()
+    {
+        return "orders";
+    }
 
-	public static function tableName()
-	{
-		return "orders";
-	}
+    public function rules()
+    {
+        return [
+            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing'], 'integer'],
 
-//	public function scenarios()
-//	{
-//		return [
-////			self::SCENARIO_FAST_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
-////			self::SCENARIO_SIMPLE_ORDER => ['payment_id', 'delivery_id', 'user_id', 'is_bonus', 'is_paid', 'status', 'comment', 'product_id', 'type'],
-//		];
-//	}
+            [['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
 
-	public function rules()
-	{
-		return [
-			[['payment_id', 'delivery_id', 'user_id', 'type'], 'integer'],
+            [['is_paid', 'is_bonus'], 'default', 'value' => false],
 
-			[['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
+            [['is_bonus'], 'boolean'],
 
-			[['is_paid', 'is_bonus'], 'default', 'value' => false],
+            ['type', 'default', 'value' => 3],
 
-			[['is_bonus'], 'boolean'],
+            [['user_id'], 'required', 'message' => '{attribute} необходимо указать'],
 
-			['type', 'default', 'value' => 3],
+            [['comment', 'promo_code'], 'string'],
 
-			[['user_id'], 'required', 'message' => '{attribute} необходимо указать'],
+            [['product_id'], 'safe'],
 
-			[['comment', 'promo_code'], 'string'],
+            [['select_billing'], 'required', 'message' => 'Укажите {attribute}', 'when'=>function(){
+                return \Yii::$app->user->isGuest === true;
+            }],
+        ];
+    }
 
-			[['product_id'], 'safe'],
-		];
-	}
+    public function beforeSave($insert)
+    {
+        if (!$this->isNewRecord) {
+            $this->is_update = true;
+        }
 
-	public function beforeSave($insert)
-	{
-		if (!$this->isNewRecord) {
-			$this->is_update = true;
-		}
+        return parent::beforeSave($insert);
+    }
 
-		return parent::beforeSave($insert);
-	}
+    public function afterSave($insert, $changedAttributes)
+    {
 
-	public function afterSave($insert, $changedAttributes)
-	{
+        if ($this->is_update) {
+            if ($this->is_paid == 1 && $this->is_bonus == 0 && $this->promo_code == 0) {
+                if ($discount = Discount::findByUserId($this->user_id)) {
+                    $discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
+                    if ($discount->validate()) {
+                        $discount->update();
+                    }
+                } else {
+                    $discount = new Discount();
+                    $discount->user_id = $this->user_id;
+                    $discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
+                    if ($discount->validate()) {
+                        $discount->save();
+                    }
+                }
 
-		if ($this->is_update) {
-			if ($this->is_paid == 1 && $this->is_bonus == 0 && $this->promo_code == 0) {
-				if ($discount = Discount::findByUserId($this->user_id)) {
-					$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
-					if ($discount->validate()) {
-						$discount->update();
-					}
-				} else {
-					$discount = new Discount();
-					$discount->user_id = $this->user_id;
-					$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
-					if ($discount->validate()) {
-						$discount->save();
-					}
-				}
+                $this->is_bonus = true;
+                $this->update();
+            }
+        }
 
-				$this->is_bonus = true;
-				$this->update();
-			}
-		}
+        parent::afterSave($insert, $changedAttributes);
+    }
 
-		parent::afterSave($insert, $changedAttributes);
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className()
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'status' => 'Статус',
+            'payment_id' => 'Способ оплаты',
+            'delivery_id' => 'Способ доставки',
+            'is_paid' => 'Оплачено',
+            'user_id' => 'Покупатель',
+            'cash' => 'Сумма заказа',
+            'created_at' => 'Дата создания',
+            'comment' => 'Комментарий к заказу',
+            'product_id' => 'Товар',
+            'promo_code' => 'Промо код',
+            'select_billing' => 'Адрес доставки',
+        ];
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'status' => 'Статус',
-			'payment_id' => 'Способ оплаты',
-			'delivery_id' => 'Способ доставки',
-			'is_paid' => 'Оплачено',
-			'user_id' => 'Покупатель',
-			'cash' => 'Сумма заказа',
-			'created_at' => 'Дата создания',
-			'comment' => 'Комментарий к заказу',
-			'product_id' => 'Товар',
-			'promo_code' => 'Промо код',
-		];
-	}
+    public function getStatus()
+    {
+        $status = null;
+        if ($this->status == 0) {
+            $status = new OrderStatus();
+            $status->name = 'В обработке';
+        } else {
+            $status = OrderStatus::findOne($this->status);
+        }
 
-	public function getStatus()
-	{
-		$status = null;
-		if ($this->status == 0) {
-			$status = new OrderStatus();
-			$status->name = 'В обработке';
-		} else {
-			$status = OrderStatus::findOne($this->status);
-		}
-
-		return $status->name;
-	}
+        return $status->name;
+    }
 
 
-	public function hasAccess()
-	{
-		return $this->user_id == \Yii::$app->user->id;
-	}
+    public function hasAccess()
+    {
+        return $this->user_id == \Yii::$app->user->id;
+    }
 }
