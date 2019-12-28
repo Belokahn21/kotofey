@@ -47,7 +47,6 @@ jQuery.fn.cartCalc = function () {
                 }
             });
         });
-<<<<<<< HEAD
 
         $elementMinus.click(function (e) {
             var product_id = $(this).data('product');
@@ -62,18 +61,6 @@ jQuery.fn.cartCalc = function () {
                     }
                 });
                 return false;
-=======
-    });
-
-    $('.product-button.product-add-basket').click(function (e) {
-        var $this = $(this);
-        var product_id = $(this).data('product');
-
-        addBasket(product_id, 1).done(function (data) {
-            if (data == 1) {
-                $this.toggleClass('hide');
-                $('.product-detail-calc-wrap').toggleClass('hide');
->>>>>>> markup
             }
 
             if (count === 0) {
