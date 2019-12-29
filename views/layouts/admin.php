@@ -29,21 +29,20 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<?= Html::csrfMetaTags() ?>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-	<?php $this->head() ?>
+    <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 <?= Alert::widget([
-	'template' => 'backend'
+    'template' => 'backend'
 ]); ?>
 <aside class="left-sidebar">
     <nav class="dashboard-left-sidebar" data-show="false">
-        <!--        <button class="show-dashboard">X</button>-->
+        <button class="switch-menu">Меню</button>
         <div class="dashboard-left-sidebar__content">
-            <h4 style="color: white; text-align: center; padding: 0 0 2% 0; margin: 0; border-bottom: 1px grey solid;">
-                Панель управления</h4>
+            <h4 style="color: white; text-align: center; padding: 0 0 2% 0; margin: 0; border-bottom: 1px grey solid;">Панель управления</h4>
             <div class="current-profile">
                 <div class="avatar-wrap">
                     <img class="current-profile__avatar"
@@ -173,7 +172,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
     </nav>
 </aside>
 <div class="main">
-	<?= $content; ?>
+    <?= $content; ?>
 </div>
 <?php $this->endBody() ?>
 </body>
