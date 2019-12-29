@@ -5,7 +5,7 @@ namespace app\widgets\todo;
 use app\models\search\TodoSearchForm;
 use app\models\tool\System;
 use app\models\entity\TodoList;
-use app\widgets\notification\Notify;
+use app\widgets\notification\Alert;
 use yii\helpers\Url;
 use yii\web\HttpException;
 
@@ -21,7 +21,7 @@ class ToDoWidget extends \yii\base\Widget
 			$entity = TodoList::findOne(\Yii::$app->request->get('id'));
 			if ($entity) {
 				if ($entity->delete()) {
-					Notify::setSuccessNotify('Задание удалено');
+					Alert::setSuccessNotify('Задание удалено');
 					\Yii::$app->controller->redirect(Url::to(['admin/index']));
 					return '';
 				}
@@ -37,7 +37,7 @@ class ToDoWidget extends \yii\base\Widget
 
 			if (\Yii::$app->request->isPost) {
 				if ($model->edit()) {
-					Notify::setSuccessNotify('Задача успешно обновлена');
+					Alert::setSuccessNotify('Задача успешно обновлена');
 					\Yii::$app->controller->redirect(Url::to(['admin/index']));
 				}
 			}
@@ -52,7 +52,7 @@ class ToDoWidget extends \yii\base\Widget
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->create()) {
-				Notify::setSuccessNotify('Задача успешно создана');
+				Alert::setSuccessNotify('Задача успешно создана');
 				\Yii::$app->controller->refresh();
 			}
 		}

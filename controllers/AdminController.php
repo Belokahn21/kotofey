@@ -53,7 +53,7 @@ use app\models\search\StockSearchForm;
 use app\models\search\VacancySearchForm;
 use app\models\tool\Debug;
 use app\models\tool\export\YMLExport;
-use app\widgets\notification\Notify;
+use app\widgets\notification\Alert;
 use Codeception\Lib\Di;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -123,7 +123,7 @@ class AdminController extends Controller
 			$item->removeOldImages();   // удалить галерею
 
 			if ($item->delete()) {
-				Notify::setSuccessNotify('Продукт удален');
+				Alert::setSuccessNotify('Продукт удален');
 				return $this->redirect('/admin/catalog/');
 			}
 		}
@@ -145,7 +145,7 @@ class AdminController extends Controller
 			$properties = ProductProperties::find()->all();
 
 			if ($model->createProduct()) {
-				Notify::setSuccessNotify('Продукт создан');
+				Alert::setSuccessNotify('Продукт создан');
 				return $this->refresh();
 			}
 
@@ -177,7 +177,7 @@ class AdminController extends Controller
 				$model->isNewRecord = true;
 				$model->scenario = Product::SCENARIO_NEW_PRODUCT;
 				if ($model->createProduct()) {
-					Notify::setSuccessNotify('Продукт скопирован');
+					Alert::setSuccessNotify('Продукт скопирован');
 					return $this->redirect('/admin/catalog/');
 				}
 			}
@@ -185,7 +185,7 @@ class AdminController extends Controller
 		}
 
 		if ($model->updateProduct()) {
-			Notify::setSuccessNotify('Продукт обновлен');
+			Alert::setSuccessNotify('Продукт обновлен');
 			return $this->refresh();
 		}
 
@@ -203,7 +203,7 @@ class AdminController extends Controller
 		if (Yii::$app->request->get('action') == 'delete') {
 			$item = Category::findOne($id);
 			if ($item->delete()) {
-				Notify::setSuccessNotify('Раздел удален');
+				Alert::setSuccessNotify('Раздел удален');
 				return $this->redirect('admin/category');
 			}
 		}
@@ -219,7 +219,7 @@ class AdminController extends Controller
 				if ($model->load(\Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->save()) {
-							Notify::setSuccessNotify('Категория обновлена');
+							Alert::setSuccessNotify('Категория обновлена');
 							return $this->refresh();
 						}
 					}
@@ -239,7 +239,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Категория создана');
+						Alert::setSuccessNotify('Категория создана');
 						return $this->refresh();
 					}
 				}
@@ -272,7 +272,7 @@ class AdminController extends Controller
 			if (Yii::$app->request->isPost) {
 				if ($order->load(Yii::$app->request->post())) {
 					if ($order->update()) {
-						Notify::setSuccessNotify('Заказ успешно обновлён');
+						Alert::setSuccessNotify('Заказ успешно обновлён');
 						return $this->refresh();
 					}
 				}
@@ -347,17 +347,17 @@ class AdminController extends Controller
 						}
 
 						if ($model->update() !== false) {
-							Notify::setSuccessNotify("Информация о пользователе успешно обновлена");
+							Alert::setSuccessNotify("Информация о пользователе успешно обновлена");
 							return $this->refresh();
 						} else {
-							Notify::setWarningNotify(Debug::modelErrors($model));
+							Alert::setWarningNotify(Debug::modelErrors($model));
 							return $this->refresh();
 						}
 					} else {
-						Notify::setWarningNotify("Ошибка валидации");
+						Alert::setWarningNotify("Ошибка валидации");
 					}
 				} else {
-					Notify::setWarningNotify("Ошибка получения данных из формы");
+					Alert::setWarningNotify("Ошибка получения данных из формы");
 				}
 			}
 
@@ -385,11 +385,11 @@ class AdminController extends Controller
 
 						return $this->refresh();
 					} else {
-						Notify::setErrorNotify(Debug::modelErrors($model));
+						Alert::setErrorNotify(Debug::modelErrors($model));
 						return $this->refresh();
 					}
 				} else {
-					Notify::setErrorNotify(Debug::modelErrors($model));
+					Alert::setErrorNotify(Debug::modelErrors($model));
 					return $this->refresh();
 				}
 			}
@@ -412,7 +412,7 @@ class AdminController extends Controller
 				$transaction->rollBack();
 			}
 			$transaction->commit();
-			Notify::setSuccessNotify('Группа успешно удалена');
+			Alert::setSuccessNotify('Группа успешно удалена');
 			return $this->redirect('/admin/group/');
 		}
 
@@ -483,7 +483,7 @@ class AdminController extends Controller
 				if ($model->load(Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
-							Notify::setSuccessNotify('Доставка обновлена');
+							Alert::setSuccessNotify('Доставка обновлена');
 							return $this->refresh();
 						}
 					}
@@ -502,7 +502,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Доставка создана');
+						Alert::setSuccessNotify('Доставка создана');
 						return $this->refresh();
 					}
 				}
@@ -530,7 +530,7 @@ class AdminController extends Controller
 				if ($model->load(Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
-							Notify::setSuccessNotify('Ооплата обновлена');
+							Alert::setSuccessNotify('Ооплата обновлена');
 							return $this->refresh();
 						}
 					}
@@ -548,7 +548,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Ооплата добавлена');
+						Alert::setSuccessNotify('Ооплата добавлена');
 						return $this->refresh();
 					}
 				}
@@ -573,7 +573,7 @@ class AdminController extends Controller
 				if ($model->load(\Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
-							Notify::setSuccessNotify('Статус обновлен');
+							Alert::setSuccessNotify('Статус обновлен');
 							return $this->refresh();
 						}
 					}
@@ -590,7 +590,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Статус добавлен');
+						Alert::setSuccessNotify('Статус добавлен');
 						return $this->refresh();
 					}
 				}
@@ -622,7 +622,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Раздел тех. поддержки создан');
+						Alert::setSuccessNotify('Раздел тех. поддержки создан');
 						return $this->refresh();
 					}
 				}
@@ -676,7 +676,7 @@ class AdminController extends Controller
 				if ($model->load(\Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
-							Notify::setSuccessNotify("Настройки обновлены");
+							Alert::setSuccessNotify("Настройки обновлены");
 							return $this->redirect('/admin/settings/' . $id . '/');
 						}
 					}
@@ -707,7 +707,7 @@ class AdminController extends Controller
 
 					if ($model->validate()) {
 						if ($model->save()) {
-							Notify::setSuccessNotify("Настройки сохранены");
+							Alert::setSuccessNotify("Настройки сохранены");
 							return $this->redirect('/admin/settings/');
 						}
 					}
@@ -937,7 +937,7 @@ class AdminController extends Controller
 				if ($model->load(\Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
-							Notify::setSuccessNotify('Значение справочника обновлено');
+							Alert::setSuccessNotify('Значение справочника обновлено');
 							return $this->refresh();
 						}
 					}
@@ -958,11 +958,11 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Значение справочника добавлено');
+						Alert::setSuccessNotify('Значение справочника добавлено');
 						return $this->refresh();
 					}
 				} else {
-					Notify::setErrorNotify(Debug::modelErrors($model));
+					Alert::setErrorNotify(Debug::modelErrors($model));
 				}
 			}
 		}
@@ -1031,7 +1031,7 @@ class AdminController extends Controller
 			}
 
 			if ($model->delete()) {
-				Notify::setSuccessNotify('Поставщик успешно удалён');
+				Alert::setSuccessNotify('Поставщик успешно удалён');
 				return $this->redirect('/admin/provider/');
 			}
 		}
@@ -1153,7 +1153,7 @@ class AdminController extends Controller
 				if ($model->load(\Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
-							Notify::setSuccessNotify('Гео объект обновлен');
+							Alert::setSuccessNotify('Гео объект обновлен');
 							return $this->refresh();
 						}
 					}
@@ -1170,7 +1170,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Гео объект добавлен');
+						Alert::setSuccessNotify('Гео объект добавлен');
 						return $this->refresh();
 					}
 				}
@@ -1202,7 +1202,7 @@ class AdminController extends Controller
 				if ($model->load(\Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->update()) {
-							Notify::setSuccessNotify('Короткая ссылка успешно обновлена');
+							Alert::setSuccessNotify('Короткая ссылка успешно обновлена');
 							return $this->refresh();
 						}
 					}
@@ -1223,7 +1223,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Короткая ссылка успешно добавлена');
+						Alert::setSuccessNotify('Короткая ссылка успешно добавлена');
 						return $this->refresh();
 					}
 				}
@@ -1259,7 +1259,7 @@ class AdminController extends Controller
 				if ($model->load(\Yii::$app->request->post())) {
 					if ($model->validate()) {
 						if ($model->save()) {
-							Notify::setSuccessNotify('Вакансия успешно обновлена');
+							Alert::setSuccessNotify('Вакансия успешно обновлена');
 							return $this->refresh();
 						}
 					}
@@ -1279,7 +1279,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Вакансия успешно добавлена');
+						Alert::setSuccessNotify('Вакансия успешно добавлена');
 						return $this->refresh();
 					}
 				}

@@ -13,7 +13,7 @@ use app\models\entity\Order;
 use app\assets\AdminAsset;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
-use app\widgets\notification\Notify;
+use app\widgets\notification\Alert;
 use app\models\entity\Sliders;
 use app\models\entity\Geo;
 use app\models\entity\ShortLinks;
@@ -35,7 +35,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= Notify::widget([
+<?= Alert::widget([
 	'template' => 'backend'
 ]); ?>
 <aside class="left-sidebar">

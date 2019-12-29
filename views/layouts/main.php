@@ -9,7 +9,7 @@ use app\models\entity\Category;
 use yii\helpers\Html;
 use app\assets\AppAsset;
 use app\models\entity\Basket;
-use app\widgets\notification\Notify;
+use app\widgets\notification\Alert;
 use app\widgets\Breadcrumbs;
 use app\models\entity\SiteSettings;
 use yii\widgets\ActiveForm;
@@ -18,6 +18,7 @@ use app\models\entity\Subscribe;
 use app\widgets\search\SearchWidget;
 use app\widgets\cookie\CookieWidget;
 use yii\helpers\Url;
+use app\widgets\notification\NotifyWidget;
 use app\models\services\CompareService;
 
 AppAsset::register($this);
@@ -45,9 +46,10 @@ $this->beginPage() ?>
 <body>
 <?php $this->beginBody() ?>
 
+<?= NotifyWidget::widget(); ?>
 <?= $this->render('include/modal/select-city'); ?>
 
-<?= Notify::widget(); ?>
+<?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
 
 <div class="wrap-page">
@@ -209,7 +211,7 @@ $this->beginPage() ?>
 						if ($model->load(Yii::$app->request->post())) {
 							if ($model->validate()) {
 								if ($model->save()) {
-									Notify::setSuccessNotify("Вы успешно подписались на рассылку!");
+									Alert::setSuccessNotify("Вы успешно подписались на рассылку!");
 									return Yii::$app->controller->refresh();
 								}
 							}

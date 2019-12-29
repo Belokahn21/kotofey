@@ -33,7 +33,7 @@ use app\models\tool\seo\Attributes;
 use app\models\entity\User;
 use app\models\tool\seo\og\OpenGraph;
 use app\models\tool\System;
-use app\widgets\notification\Notify;
+use app\widgets\notification\Alert;
 use yii\data\Pagination;
 use yii\db\Expression;
 use yii\filters\AccessControl;
@@ -398,11 +398,11 @@ class SiteController extends Controller
                 if ($user->load(Yii::$app->request->post()) && $user->validate()) {
                     if ($user->save() === false) {
                         $transaction->rollBack();
-                        Notify::setErrorNotify(print_r($user->getErrors(), true));
+                        Alert::setErrorNotify(print_r($user->getErrors(), true));
                         return $this->refresh();
                     }
                 } else {
-                    Notify::setErrorNotify(Debug::modelErrors($user));
+                    Alert::setErrorNotify(Debug::modelErrors($user));
                     return $this->refresh();
                 }
 
@@ -410,11 +410,11 @@ class SiteController extends Controller
                 if ($billing->load(Yii::$app->request->post()) and $billing->validate()) {
                     if ($billing->update() === false) {
                         $transaction->rollBack();
-                        Notify::setErrorNotify(Debug::modelErrors($billing));
+                        Alert::setErrorNotify(Debug::modelErrors($billing));
                         return $this->refresh();
                     }
                 } else {
-                    Notify::setErrorNotify(Debug::modelErrors($billing));
+                    Alert::setErrorNotify(Debug::modelErrors($billing));
                     return $this->refresh();
                 }
 
@@ -425,11 +425,11 @@ class SiteController extends Controller
                 if ($order->load(Yii::$app->request->post()) or $order->validate()) {
                     if ($order->save() === false) {
                         $transaction->rollBack();
-                        Notify::setErrorNotify(Debug::modelErrors($order));
+                        Alert::setErrorNotify(Debug::modelErrors($order));
                         return $this->refresh();
                     }
                 } else {
-                    Notify::setErrorNotify(Debug::modelErrors($order));
+                    Alert::setErrorNotify(Debug::modelErrors($order));
                     return $this->refresh();
                 }
 
@@ -445,13 +445,13 @@ class SiteController extends Controller
                 $items->order_id = $order->id;
                 if ($items->saveItems() === false) {
                     $transaction->rollBack();
-                    Notify::setErrorNotify(Debug::modelErrors($items));
+                    Alert::setErrorNotify(Debug::modelErrors($items));
                     return $this->refresh();
                 }
 
                 Basket::clear();
                 unset($_COOKIE['order']);
-                Notify::setSuccessNotify("Заказ успешно создан создан");
+                Alert::setSuccessNotify("Заказ успешно создан создан");
                 $transaction->commit();
                 return $this->redirect('/');
             }
@@ -486,11 +486,11 @@ class SiteController extends Controller
                 if ($order->load(Yii::$app->request->post()) or $order->validate()) {
                     if ($order->save() === false) {
                         $transaction->rollBack();
-                        Notify::setErrorNotify(Debug::modelErrors($order));
+                        Alert::setErrorNotify(Debug::modelErrors($order));
                         return $this->refresh();
                     }
                 } else {
-                    Notify::setErrorNotify(Debug::modelErrors($order));
+                    Alert::setErrorNotify(Debug::modelErrors($order));
                     return $this->refresh();
                 }
 
@@ -510,13 +510,13 @@ class SiteController extends Controller
 
                 if ($items->saveItems() === false) {
                     $transaction->rollBack();
-                    Notify::setErrorNotify(Debug::modelErrors($items));
+                    Alert::setErrorNotify(Debug::modelErrors($items));
                     return $this->refresh();
                 }
 
                 Basket::clear();
                 unset($_COOKIE['order']);
-                Notify::setSuccessNotify("Заказ успешно создан создан");
+                Alert::setSuccessNotify("Заказ успешно создан создан");
                 $transaction->commit();
                 return $this->redirect('/');
             }
@@ -561,7 +561,7 @@ class SiteController extends Controller
                     }
                 }
 
-                Notify::setSuccessNotify('Данные успешно обновлены');
+                Alert::setSuccessNotify('Данные успешно обновлены');
                 return $this->refresh();
             }
 
@@ -586,7 +586,7 @@ class SiteController extends Controller
                 if ($model->load(Yii::$app->request->post())) {
                     if ($model->validate()) {
                         if ($model->update()) {
-                            Notify::setSuccessNotify('Адрес доставки успешно обновлён');
+                            Alert::setSuccessNotify('Адрес доставки успешно обновлён');
                             return $this->refresh();
                         }
                     }
@@ -613,7 +613,7 @@ class SiteController extends Controller
                     $user = User::findByEmail($model->email);
                     if ($user instanceof User) {
                         if (Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration'])) {
-                            Notify::setSuccessNotify('Успешная авторизация');
+                            Alert::setSuccessNotify('Успешная авторизация');
                             return $this->redirect('/');
                         }
                     }
@@ -641,15 +641,15 @@ class SiteController extends Controller
                 if ($model->validate()) {
                     if ($model->save()) {
                         if (Yii::$app->user->login($model, Yii::$app->params['users']['rememberMeDuration'])) {
-                            Notify::setSuccessNotify("Успешная регистрация!");
+                            Alert::setSuccessNotify("Успешная регистрация!");
                             return $this->redirect("/");
                         }
                     } else {
-                        Notify::setErrorNotify(Debug::modelErrors($model));
+                        Alert::setErrorNotify(Debug::modelErrors($model));
                         return $this->refresh();
                     }
                 } else {
-                    Notify::setErrorNotify(Debug::modelErrors($model));
+                    Alert::setErrorNotify(Debug::modelErrors($model));
                     return $this->refresh();
 
                 }
@@ -746,7 +746,7 @@ class SiteController extends Controller
                 if ($model->load(\Yii::$app->request->post())) {
                     if ($model->validate()) {
                         if ($model->save()) {
-                            Notify::setSuccessNotify("Обращение создано!");
+                            Alert::setSuccessNotify("Обращение создано!");
                             return $this->refresh();
                         }
                     }
@@ -777,7 +777,7 @@ class SiteController extends Controller
 
                     if ($model->validate()) {
                         if ($model->save()) {
-                            Notify::setSuccessNotify("Обращение создано!");
+                            Alert::setSuccessNotify("Обращение создано!");
                             return $this->refresh();
                         }
                     }
@@ -803,7 +803,7 @@ class SiteController extends Controller
 
                     if ($model->validate()) {
                         if ($model->save()) {
-                            Notify::setSuccessNotify("Сообщение отправлено!");
+                            Alert::setSuccessNotify("Сообщение отправлено!");
                             return $this->refresh();
                         }
                     }
@@ -835,7 +835,7 @@ class SiteController extends Controller
     {
         Basket::getInstance()->clear();
         Promo::clear();
-        Notify::setSuccessNotify("Корзина очищена!");
+        Alert::setSuccessNotify("Корзина очищена!");
         return $this->redirect('/');
     }
 
@@ -876,7 +876,7 @@ class SiteController extends Controller
                 if ($user->validate()) {
                     if ($user->update() !== false) {
                         if ($model->create()) {
-                            Notify::setSuccessNotify("Отзыв успешно добавлен!");
+                            Alert::setSuccessNotify("Отзыв успешно добавлен!");
                             return $this->refresh();
                         }
                     }

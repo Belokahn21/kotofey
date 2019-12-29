@@ -10,7 +10,7 @@ use app\models\entity\Order;
 use app\models\entity\OrdersItems;
 use app\models\entity\User;
 use app\models\tool\Debug;
-use app\widgets\notification\Notify;
+use app\widgets\notification\Alert;
 
 class FastBuyWidget extends \yii\base\Widget
 {
@@ -26,7 +26,7 @@ class FastBuyWidget extends \yii\base\Widget
 			$transaction = $db->beginTransaction();
 			if ($user->load(Yii::$app->request->post()) && $user->validate()) {
 				if ($user->save() === false) {
-					Notify::setErrorNotify(Debug::modelErrors($user));
+					Alert::setErrorNotify(Debug::modelErrors($user));
 					Yii::$app->controller->refresh();
 				}
 
@@ -49,12 +49,12 @@ class FastBuyWidget extends \yii\base\Widget
 			$order->user_id = $user->id;
 			if ($order->validate() === false) {
 				$transaction->rollBack();
-				Notify::setErrorNotify(Debug::modelErrors($order));
+				Alert::setErrorNotify(Debug::modelErrors($order));
 				Yii::$app->controller->refresh();
 			}
 
 			if ($order->save() === false) {
-				Notify::setErrorNotify(Debug::modelErrors($order));
+				Alert::setErrorNotify(Debug::modelErrors($order));
 				Yii::$app->controller->refresh();
 				$transaction->rollBack();
 				return false;
@@ -64,14 +64,14 @@ class FastBuyWidget extends \yii\base\Widget
 			$items->order_id = $order->id;
 			if ($items->saveItems() === false) {
 				$transaction->rollBack();
-				Notify::setErrorNotify(Debug::modelErrors($items));
+				Alert::setErrorNotify(Debug::modelErrors($items));
 				Yii::$app->controller->refresh();
 			}
 
 			Basket::getInstance()->clear();
 			Promo::clear();
 			$transaction->commit();
-			Notify::setSuccessNotify('Вы успешно купили товар');
+			Alert::setSuccessNotify('Вы успешно купили товар');
 			Yii::$app->controller->redirect(Yii::$app->request->url);
 			return '';
 		}

@@ -1,6 +1,7 @@
 //= page/checkout
 
 
+//= block/notify
 //= block/billing
 //= block/compare
 //= block/cart

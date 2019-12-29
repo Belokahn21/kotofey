@@ -6,7 +6,7 @@ namespace app\widgets\product_reviews;
 use app\models\entity\Product;
 use app\models\entity\ProductReviews;
 use app\models\tool\Debug;
-use app\widgets\notification\Notify;
+use app\widgets\notification\Alert;
 use yii\base\Widget;
 
 /**
@@ -30,7 +30,7 @@ class ProductReviewsWidget extends Widget
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
-						Notify::setSuccessNotify('Отзыв успешно добавлен');
+						Alert::setSuccessNotify('Отзыв успешно добавлен');
 						\Yii::$app->controller->refresh();
 					}
 				}
