@@ -101,6 +101,14 @@
   .block-info__item {
     width: 100%;
   }
+  .order-items {
+    flex-direction: column;
+
+    &__item {
+      width: 100%;
+      margin: 5px 0;
+    }
+  }
 }
 
 /* iPhone 5 in landscape */
