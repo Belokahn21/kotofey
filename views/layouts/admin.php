@@ -39,8 +39,8 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
     'template' => 'backend'
 ]); ?>
 <aside class="left-sidebar">
+    <button class="switch-menu">Меню</button>
     <nav class="dashboard-left-sidebar" data-show="false">
-        <button class="switch-menu">Меню</button>
         <div class="dashboard-left-sidebar__content">
             <h4 style="color: white; text-align: center; padding: 0 0 2% 0; margin: 0; border-bottom: 1px grey solid;">Панель управления</h4>
             <div class="current-profile">
