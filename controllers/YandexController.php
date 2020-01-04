@@ -45,8 +45,8 @@ class YandexController extends Controller
             $offer = $dom->createElement('offer');
             $offer->setAttribute('id', $product->id);
 
-            $name = $dom->createElement('name', $product->name);
-            $offer->appendChild($name);
+//            $name = $dom->createElement('name', $product->name);
+//            $offer->appendChild($name);
 
             $currencyId = $dom->createElement('currencyId', "RUB");
             $offer->appendChild($currencyId);
