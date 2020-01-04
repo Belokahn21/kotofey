@@ -51,8 +51,8 @@ class YandexController extends Controller
             $currencyId = $dom->createElement('currencyId', "RUB");
             $offer->appendChild($currencyId);
 
-//            $url = $dom->createElement('vendor', sprintf("https://%s/%s", $_SERVER['SERVER_NAME'], $product->detail));
-//            $offer->appendChild($url);
+            $url = $dom->createElement('url', sprintf("https://%s/%s", $_SERVER['SERVER_NAME'], $product->detail));
+            $offer->appendChild($url);
 
             $price = $dom->createElement('price', $product->price);
             $offer->appendChild($price);
@@ -63,12 +63,12 @@ class YandexController extends Controller
 //            $categoryId = $dom->createElement('categoryId', $product->category_id);
 //            $offer->appendChild($categoryId);
 
-//            if (!empty($product->description)) {
-//
-//                $description = $dom->createElement('description', htmlspecialchars($product->description));
-//                $offer->appendChild($description);
-//
-//            }
+            if (!empty($product->description)) {
+
+                $description = $dom->createElement('description', htmlspecialchars($product->description));
+                $offer->appendChild($description);
+
+            }
 
             $delivery = $dom->createElement('delivery', "true");
             $offer->appendChild($delivery);
