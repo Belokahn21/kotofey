@@ -53,6 +53,6 @@ class YandexController extends Controller
         </promos>
     </shop>
 </yml_catalog>';
-        return iconv('utf-8', 'windows-1251', $content);
+        return iconv('utf-8', 'windows-1251//TRANSLIT//IGNORE', $content);
     }
 }
