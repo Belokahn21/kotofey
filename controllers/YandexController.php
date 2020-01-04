@@ -64,9 +64,9 @@ class YandexController extends Controller
             $offers->appendChild($offer);
         }
 
+        $yml_catalog->appendChild($shop);
         $shop->appendChild($offers);
 
-        $yml_catalog->appendChild($shop);
         $content = $dom->saveXML();
         return $content;
     }
