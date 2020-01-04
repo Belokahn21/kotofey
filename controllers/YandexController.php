@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\tool\Debug;
 use Yii;
 use app\models\entity\Product;
 use yii\web\Controller;
@@ -66,7 +67,8 @@ class YandexController extends Controller
         }
 
 
-
-        return $dom->saveXML();
+        $content = $dom->saveXML();
+        file_put_contents('asd.yml', $content);
+        return $content;
     }
 }
