@@ -51,8 +51,8 @@ class YandexController extends Controller
             $currencyId = $dom->createElement('currencyId', "RUB");
             $offer->appendChild($currencyId);
 
-            $url = $dom->createElement('vendor', sprintf("https://%s/%s", $_SERVER['SERVER_NAME'], $product->detail));
-            $offer->appendChild($url);
+//            $url = $dom->createElement('vendor', sprintf("https://%s/%s", $_SERVER['SERVER_NAME'], $product->detail));
+//            $offer->appendChild($url);
 
             $price = $dom->createElement('price', $product->price);
             $offer->appendChild($price);
