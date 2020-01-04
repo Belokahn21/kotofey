@@ -34,30 +34,30 @@ class YandexController extends Controller
             $name = $dom->createElement('name', htmlspecialchars($product->display));
             $offer->appendChild($name);
 
-//            $currencyId = $dom->createElement('currencyId', "RUB");
-//            $offer->appendChild($currencyId);
+            $currencyId = $dom->createElement('currencyId', "RUB");
+            $offer->appendChild($currencyId);
 
-//            $url = $dom->createElement('url', sprintf("https://kotofey.store/%s", $product->detail));
-//            $offer->appendChild($url);
+            $url = $dom->createElement('url', sprintf("https://kotofey.store/%s", $product->detail));
+            $offer->appendChild($url);
 
-//            $price = $dom->createElement('price', $product->price);
-//            $offer->appendChild($price);
+            $price = $dom->createElement('price', $product->price);
+            $offer->appendChild($price);
 
-//            $picture = $dom->createElement('picture', sprintf("https://kotofey.store/%s", $product->image));
-//            $offer->appendChild($picture);
+            $picture = $dom->createElement('picture', sprintf("https://kotofey.store/%s", $product->image));
+            $offer->appendChild($picture);
 
-//            $categoryId = $dom->createElement('categoryId', $product->category_id);
-//            $offer->appendChild($categoryId);
+            $categoryId = $dom->createElement('categoryId', $product->category_id);
+            $offer->appendChild($categoryId);
 
-//            if (!empty($product->description)) {
-//
-//                $description = $dom->createElement('description', htmlspecialchars($product->description));
-//                $offer->appendChild($description);
-//
-//            }
+            if (!empty($product->description)) {
 
-//            $delivery = $dom->createElement('delivery', "true");
-//            $offer->appendChild($delivery);
+                $description = $dom->createElement('description', htmlspecialchars($product->description));
+                $offer->appendChild($description);
+
+            }
+
+            $delivery = $dom->createElement('delivery', "true");
+            $offer->appendChild($delivery);
 
             $offers->appendChild($offer);
         }
