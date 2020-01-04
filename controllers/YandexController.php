@@ -45,23 +45,23 @@ class YandexController extends Controller
             $offer = $dom->createElement('offer');
             $offer->setAttribute('id', $product->id);
 
-//            $name = $dom->createElement('name', htmlspecialchars($product->display));
-//            $offer->appendChild($name);
+            $name = $dom->createElement('name', $product->name);
+            $offer->appendChild($name);
 
             $currencyId = $dom->createElement('currencyId', "RUB");
             $offer->appendChild($currencyId);
 
-//            $url = $dom->createElement('vendor', sprintf("https://%s%s", $_SERVER['SERVER_NAME'], $product->detail));
-//            $offer->appendChild($url);
+            $url = $dom->createElement('vendor', sprintf("https://%s%s", $_SERVER['SERVER_NAME'], $product->detail));
+            $offer->appendChild($url);
 
             $price = $dom->createElement('price', $product->price);
             $offer->appendChild($price);
 
-//            $picture = $dom->createElement('picture', sprintf("https://%s/upload/%s", $_SERVER['SERVER_NAME'], $product->image));
-//            $offer->appendChild($picture);
+            $picture = $dom->createElement('picture', sprintf("https://%s/upload/%s", $_SERVER['SERVER_NAME'], $product->image));
+            $offer->appendChild($picture);
 
-//            $categoryId = $dom->createElement('categoryId', $product->category_id);
-//            $offer->appendChild($categoryId);
+            $categoryId = $dom->createElement('categoryId', $product->category_id);
+            $offer->appendChild($categoryId);
 
 //            if (!empty($product->description)) {
 //
@@ -72,9 +72,6 @@ class YandexController extends Controller
 
             $delivery = $dom->createElement('delivery', "true");
             $offer->appendChild($delivery);
-
-//            $pickup = $dom->createElement('pickup', "true");
-//            $offer->appendChild($pickup);
 
             $offers->appendChild($offer);
         }
