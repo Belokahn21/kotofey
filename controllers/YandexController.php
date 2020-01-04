@@ -11,6 +11,8 @@ class YandexController extends Controller
     public function actionExport()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+        echo "12";
+        die();
         $dom = new \DOMDocument("1.0", "UTF-8");
         $yml_catalog = $dom->createElement('yml_catalog');
         $shop = $dom->createElement('shop');
