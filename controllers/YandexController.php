@@ -27,11 +27,17 @@ class YandexController extends Controller
         $shop->appendChild($dom->createElement('email', 'info@kotofey.store'));
 
         $categoryModel = new Category();
-
         $categories = $dom->createElement('categories');
         $categoryModel->loadYml($dom, $categories);
-
         $shop->appendChild($categories);
+
+
+        $currencies = $dom->createElement('currencies');
+        $currency_rub = $dom->createElement('currency');
+        $currency_rub->setAttribute('id', 'RUR');
+        $currency_rub->setAttribute('rate', '1');
+        $currencies->appendChild($currency_rub);
+        $shop->appendChild($currencies);
 
         /* @var $product Product */
         foreach (Product::find()->all() as $product) {
@@ -42,7 +48,7 @@ class YandexController extends Controller
             $name = $dom->createElement('name', htmlspecialchars($product->display));
             $offer->appendChild($name);
 
-            $currencyId = $dom->createElement('currencyId', "RUB");
+            $currencyId = $dom->createElement('currencyId', "RUR");
             $offer->appendChild($currencyId);
 
             $url = $dom->createElement('url', sprintf("https://kotofey.store/%s", $product->detail));
