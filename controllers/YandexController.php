@@ -2,9 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\tool\Debug;
-use Yii;
-use app\models\entity\Product;
 use yii\web\Controller;
 
 class YandexController extends Controller
@@ -56,6 +53,6 @@ class YandexController extends Controller
         </promos>
     </shop>
 </yml_catalog>';
-        return $content;
+        return iconv('utf-8', 'windows-1251', $content);
     }
 }
