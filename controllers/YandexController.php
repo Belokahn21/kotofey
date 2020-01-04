@@ -13,9 +13,6 @@ class YandexController extends Controller
 
     public function actionExport()
     {
-//        \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
-
-
         $dom = new \DOMDocument("1.0", "UTF-8");
         $yml_catalog = $dom->createElement('yml_catalog');
         $shop = $dom->createElement('shop');
@@ -23,6 +20,10 @@ class YandexController extends Controller
         $dom->appendChild($yml_catalog);
 
         $yml_catalog->setAttribute('date', date("Y-m-d H:i"));
+
+        $shop->appendChild($dom->createElement('name', 'Зоомагазин Котофей'));
+        $shop->appendChild($dom->createElement('company', 'ИП Васин К.В.'));
+        $shop->appendChild($dom->createElement('email', 'info@kotofey.store'));
 
         /* @var $product Product */
         foreach (Product::find()->all() as $product) {
