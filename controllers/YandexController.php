@@ -31,8 +31,8 @@ class YandexController extends Controller
             $offer = $dom->createElement('offer');
             $offer->setAttribute('id', $product->id);
 
-            $name = $dom->createElement('name', htmlspecialchars($product->display));
-            $offer->appendChild($name);
+//            $name = $dom->createElement('name', htmlspecialchars($product->display));
+//            $offer->appendChild($name);
 
             $currencyId = $dom->createElement('currencyId', "RUB");
             $offer->appendChild($currencyId);
@@ -43,24 +43,21 @@ class YandexController extends Controller
             $price = $dom->createElement('price', $product->price);
             $offer->appendChild($price);
 
-            $picture = $dom->createElement('picture', sprintf("https://kotofey.store/%s", $product->image));
-            $offer->appendChild($picture);
+//            $picture = $dom->createElement('picture', sprintf("https://kotofey.store/%s", $product->image));
+//            $offer->appendChild($picture);
 
             $categoryId = $dom->createElement('categoryId', $product->category_id);
             $offer->appendChild($categoryId);
 
-            if (!empty($product->description)) {
-
-                $description = $dom->createElement('description', htmlspecialchars($product->description));
-                $offer->appendChild($description);
-
-            }
+//            if (!empty($product->description)) {
+//
+//                $description = $dom->createElement('description', htmlspecialchars($product->description));
+//                $offer->appendChild($description);
+//
+//            }
 
             $delivery = $dom->createElement('delivery', "true");
             $offer->appendChild($delivery);
-
-            $pickup = $dom->createElement('pickup', "true");
-            $offer->appendChild($pickup);
 
             $offers->appendChild($offer);
         }
