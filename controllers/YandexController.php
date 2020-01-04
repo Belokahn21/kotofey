@@ -51,30 +51,30 @@ class YandexController extends Controller
             $name = $dom->createElement('name', htmlspecialchars($product->display));
             $offer->appendChild($name);
 
-            $currencyId = $dom->createElement('currencyId', "RUB");
-            $offer->appendChild($currencyId);
-
-//            $url = $dom->createElement('vendor', sprintf("https://%s%s", $_SERVER['SERVER_NAME'], $product->detail));
-//            $offer->appendChild($url);
-
-            $price = $dom->createElement('price', $product->price);
-            $offer->appendChild($price);
-
-//            $picture = $dom->createElement('picture', sprintf("https://%s/upload/%s", $_SERVER['SERVER_NAME'], $product->image));
-//            $offer->appendChild($picture);
-
-            $categoryId = $dom->createElement('categoryId', $product->category_id);
-            $offer->appendChild($categoryId);
-
-            if (!empty($product->description)) {
-
-                $description = $dom->createElement('description', htmlspecialchars($product->description));
-                $offer->appendChild($description);
-
-            }
-
-            $delivery = $dom->createElement('delivery', "true");
-            $offer->appendChild($delivery);
+//            $currencyId = $dom->createElement('currencyId', "RUB");
+//            $offer->appendChild($currencyId);
+//
+////            $url = $dom->createElement('vendor', sprintf("https://%s%s", $_SERVER['SERVER_NAME'], $product->detail));
+////            $offer->appendChild($url);
+//
+//            $price = $dom->createElement('price', $product->price);
+//            $offer->appendChild($price);
+//
+////            $picture = $dom->createElement('picture', sprintf("https://%s/upload/%s", $_SERVER['SERVER_NAME'], $product->image));
+////            $offer->appendChild($picture);
+//
+//            $categoryId = $dom->createElement('categoryId', $product->category_id);
+//            $offer->appendChild($categoryId);
+//
+//            if (!empty($product->description)) {
+//
+//                $description = $dom->createElement('description', htmlspecialchars($product->description));
+//                $offer->appendChild($description);
+//
+//            }
+//
+//            $delivery = $dom->createElement('delivery', "true");
+//            $offer->appendChild($delivery);
 
 //            $pickup = $dom->createElement('pickup', "true");
 //            $offer->appendChild($pickup);
