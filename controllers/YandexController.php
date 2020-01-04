@@ -21,8 +21,8 @@ class YandexController extends Controller
 
         $yml_catalog->setAttribute('date', date("Y-m-d H:i"));
 
-        $shop->appendChild($dom->createElement('name', 'Çîîìàãàçèí Êîòîôåé'));
-        $shop->appendChild($dom->createElement('company', 'ÈÏ Âàñèí Ê.Â.'));
+        $shop->appendChild($dom->createElement('name', 'Ð—Ð¾Ð¾Ð¼Ð°Ð³Ð°Ð·Ð¸Ð½ ÐšÐ¾Ñ‚Ð¾Ñ„ÐµÐ¹'));
+        $shop->appendChild($dom->createElement('company', 'Ð˜ÐŸ Ð’Ð°ÑÐ¸Ð½ Ðš.Ð’.'));
         $shop->appendChild($dom->createElement('email', 'info@kotofey.store'));
 
         /* @var $product Product */
@@ -67,5 +67,6 @@ class YandexController extends Controller
 
         $content = $dom->saveXML();
         return iconv('utf-8', 'windows-1251//TRANSLIT//IGNORE', $content);
+//        return $content;
     }
 }
