@@ -29,19 +29,19 @@ class YandexController extends Controller
         foreach (Product::find()->all() as $product) {
 
             $offer = $dom->createElement('offer');
-            $offer->setAttribute('id', $product->id);
+//            $offer->setAttribute('id', $product->id);
 
 //            $name = $dom->createElement('name', htmlspecialchars($product->display));
 //            $offer->appendChild($name);
 
-            $currencyId = $dom->createElement('currencyId', "RUB");
-            $offer->appendChild($currencyId);
+//            $currencyId = $dom->createElement('currencyId', "RUB");
+//            $offer->appendChild($currencyId);
 
-            $url = $dom->createElement('url', sprintf("https://kotofey.store/%s", $product->detail));
-            $offer->appendChild($url);
+//            $url = $dom->createElement('url', sprintf("https://kotofey.store/%s", $product->detail));
+//            $offer->appendChild($url);
 
-            $price = $dom->createElement('price', $product->price);
-            $offer->appendChild($price);
+//            $price = $dom->createElement('price', $product->price);
+//            $offer->appendChild($price);
 
 //            $picture = $dom->createElement('picture', sprintf("https://kotofey.store/%s", $product->image));
 //            $offer->appendChild($picture);
@@ -56,8 +56,8 @@ class YandexController extends Controller
 //
 //            }
 
-            $delivery = $dom->createElement('delivery', "true");
-            $offer->appendChild($delivery);
+//            $delivery = $dom->createElement('delivery', "true");
+//            $offer->appendChild($delivery);
 
             $offers->appendChild($offer);
         }
