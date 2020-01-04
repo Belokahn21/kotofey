@@ -30,7 +30,7 @@ class YandexController extends Controller
         $currencies->appendChild($currency);
         $shop->appendChild($currencies);
 
-        $shop->appendChild($dom->createElement('url', sprintf('https://%s/', $_SERVER['SERVER_NAME'])));
+//        $shop->appendChild($dom->createElement('url', sprintf('https://%s/', $_SERVER['SERVER_NAME'])));
 
         $dom->appendChild($yml_catalog);
 
