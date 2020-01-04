@@ -15,59 +15,47 @@ class YandexController extends Controller
     {
 //        \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
 
-
-        $dom = new \DOMDocument("1.0", "UTF-8");
-        $yml_catalog = $dom->createElement('yml_catalog');
-        $shop = $dom->createElement('shop');
-        $offers = $dom->createElement('offers');
-        $dom->appendChild($yml_catalog);
-
-        $yml_catalog->setAttribute('date', date("Y-m-d H:i"));
-
-        /* @var $product Product */
-        foreach (Product::find()->all() as $product) {
-
-            $offer = $dom->createElement('offer');
-            $offer->setAttribute('id', $product->id);
-
-            $name = $dom->createElement('name', htmlspecialchars($product->display));
-            $offer->appendChild($name);
-
-            $currencyId = $dom->createElement('currencyId', "RUB");
-            $offer->appendChild($currencyId);
-
-            $url = $dom->createElement('url', sprintf("https://kotofey.store/%s", $product->detail));
-            $offer->appendChild($url);
-
-            $price = $dom->createElement('price', $product->price);
-            $offer->appendChild($price);
-
-            $picture = $dom->createElement('picture', sprintf("https://kotofey.store/%s", $product->image));
-            $offer->appendChild($picture);
-
-            $categoryId = $dom->createElement('categoryId', $product->category_id);
-            $offer->appendChild($categoryId);
-
-            if (!empty($product->description)) {
-
-                $description = $dom->createElement('description', htmlspecialchars($product->description));
-                $offer->appendChild($description);
-
-            }
-
-            $delivery = $dom->createElement('delivery', "true");
-            $offer->appendChild($delivery);
-
-            $pickup = $dom->createElement('pickup', "true");
-            $offer->appendChild($pickup);
-
-            $offers->appendChild($offer);
-        }
-
-        $shop->appendChild($offers);
-
-        $yml_catalog->appendChild($shop);
-        $content = $dom->saveXML();
+        $content = '<?xml version="1.0" encoding="UTF-8"?>
+<yml_catalog date="2019-11-01 17:22">
+    <shop>
+        <name>BestSeller</name>
+        <company>Tne Best inc.</company>
+        <url>http://best.seller.ru</url>
+        <currencies>
+            <currency id="RUR" rate="1"/>
+            <currency id="USD" rate="60"/>
+        </currencies>
+        <categories>
+            <category id="1">Бытовая техника</category>
+            <category id="10" parentId="1">Мелкая техника для кухни</category>
+        </categories>
+        <delivery-options>
+            <option cost="200" days="1"/>
+        </delivery-options>
+        <offers>
+            <offer id="9012">
+                <name>Мороженица Brand 3811</name>
+                <url>http://best.seller.ru/product_page.asp?pid=12345</url>
+                <price>8990</price>
+                <currencyId>RUR</currencyId>
+                <categoryId>10</categoryId>
+                <delivery>true</delivery>
+                <delivery-options>
+                    <option cost="300" days="1" order-before="18"/>
+                </delivery-options>
+                <param name="Цвет">белый</param>
+                <weight>3.6</weight>
+                <dimensions>20.1/20.551/22.5</dimensions>
+                </offer>
+        </offers>
+        <gifts>
+            <!-- подарки не из прайс?листа -->
+        </gifts>
+        <promos>
+            <!-- промоакции -->
+        </promos>
+    </shop>
+</yml_catalog>';
         return $content;
     }
 }
