@@ -60,8 +60,8 @@ class YandexController extends Controller
             $picture = $dom->createElement('picture', sprintf("https://%s/upload/%s", $_SERVER['SERVER_NAME'], $product->image));
             $offer->appendChild($picture);
 
-            $categoryId = $dom->createElement('categoryId', $product->category_id);
-            $offer->appendChild($categoryId);
+//            $categoryId = $dom->createElement('categoryId', $product->category_id);
+//            $offer->appendChild($categoryId);
 
 //            if (!empty($product->description)) {
 //
