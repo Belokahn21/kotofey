@@ -23,8 +23,13 @@ class YandexController extends Controller
             <currency id="USD" rate="60"/>
         </currencies>
         <categories>
-            <category id="1">Бытовая техника</category>
-            <category id="10" parentId="1">Мелкая техника для кухни</category>
+            <category id="1">Книги</category>
+            <category id="2" parentId="1">Детективы</category>
+            <category id="3" parentId="1">Боевики</category>
+            <category id="4">Видео</category>
+            <category id="5" parentId="4">Комедии</category>
+            <category id="6">Принтеры</category>
+            <category id="7">Оргтехника</category>
         </categories>
         <delivery-options>
             <option cost="200" days="1"/>
