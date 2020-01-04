@@ -82,6 +82,7 @@ class YandexController extends Controller
 
         $content = $dom->saveXML();
 //        return iconv('utf-8', 'windows-1251//TRANSLIT//IGNORE', $content);
+//        file_put_contents('yml.yml',$content);
         return $content;
     }
 }
