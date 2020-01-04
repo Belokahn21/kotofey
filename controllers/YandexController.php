@@ -66,6 +66,6 @@ class YandexController extends Controller
         $shop->appendChild($offers);
 
         $content = $dom->saveXML();
-        return $content;
+        return iconv('utf-8', 'windows-1251', $content);
     }
 }
