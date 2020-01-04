@@ -66,7 +66,7 @@ class YandexController extends Controller
 
             if (!empty($product->description)) {
                 try {
-                    $description = $dom->createElement('description', "<![CDATA[" . $product->description . "]]>");
+                    $description = $dom->createElement('description', "<![CDATA[" . htmlspecialchars($product->description) . "]]>");
                     $offer->appendChild($description);
                 } catch (\ErrorException $exception) {
                 }
