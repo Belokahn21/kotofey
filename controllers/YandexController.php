@@ -23,7 +23,6 @@ class YandexController extends Controller
         $dom->appendChild($yml_catalog);
 
         $yml_catalog->setAttribute('date', date("Y-m-d H:i"));
-        $yml_catalog->appendChild($shop);
 
         /* @var $product Product */
         foreach (Product::find()->all() as $product) {
@@ -67,6 +66,7 @@ class YandexController extends Controller
 
         $shop->appendChild($offers);
 
+        $yml_catalog->appendChild($shop);
         $content = $dom->saveXML();
         return $content;
     }
