@@ -312,7 +312,7 @@ class SiteController extends Controller
         }
 
 
-        $category = Category::findOne($product->category);
+        $category = Category::findOne($product->category_id);
 
         if (!empty($product->seo_description)) {
             Attributes::metaDescription($product->seo_description);

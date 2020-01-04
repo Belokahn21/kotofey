@@ -23,6 +23,7 @@ $this->title = Title::showTitle("Товары"); ?>
 
     <div class="catalog-control">
 		<?= Html::a("Экспорт товаров в YML", "?export=yml", ['class' => 'btn-main']); ?>
+		<?= Html::a("Экспорт товаров в Yandex Catalog", "?export=yandex", ['class' => 'btn-main']); ?>
 
         <div class="pre-load-catalog-wrap">
             <input type="text" name="url" placeholder="Ссылка на подгрузку" class="pre-load-catalog">

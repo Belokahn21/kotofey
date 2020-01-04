@@ -32,7 +32,8 @@
     "ext-iconv": "*",
     "yiisoft/yii2-authclient": "*",
     "vkcom/vk-php-sdk": "^5.101",
-    "ext-libxml": "*"
+    "ext-libxml": "*",
+    "phpoffice/phpspreadsheet": "^1.10"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",

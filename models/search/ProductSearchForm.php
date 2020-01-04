@@ -41,7 +41,7 @@ class ProductSearchForm extends Product
 		}
 
 		$query->andFilterWhere(['like', 'id', $this->id])
-			->andFilterWhere(['like', 'category', $this->category])
+			->andFilterWhere(['like', 'category', $this->category_id])
 			->andFilterWhere(['like', 'article', $this->article])
 			->andFilterWhere(['like', 'code', $this->code])
 			->andFilterWhere(['like', 'count', $this->count])

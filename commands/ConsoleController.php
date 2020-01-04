@@ -139,7 +139,7 @@ class ConsoleController extends Controller
                 }
                 $product = new \app\models\entity\Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
                 $product->name = $title;
-                $product->category = 1;
+                $product->category_id = 1;
                 $product->description = $desc;
                 $product->article = $sku;
                 $product->count = 1;

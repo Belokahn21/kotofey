@@ -44,7 +44,7 @@ class YMLExport
             $picture = $dom->createElement('picture', sprintf("https://eventhorizont.ru%s", $product->image));
             $offer->appendChild($picture);
 
-            $categoryId = $dom->createElement('categoryId', $product->category);
+            $categoryId = $dom->createElement('categoryId', $product->category_id);
             $offer->appendChild($categoryId);
 
             if (!empty($product->description)) {

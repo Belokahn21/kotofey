@@ -1,9 +1,4 @@
 <?php
-/**
- * Developer: Konstantin Vasin by PhpStorm
- * Company: Altasib
- * Time: 15:15
- */
 
 namespace app\models\tool\export;
 
@@ -39,7 +34,7 @@ class TiuExport
             $vendor = $dom->createElement('vendor', 'eventhorizont');
             $description = $dom->createElement('description', $product->description);
             $available = $dom->createElement('available', 'В наличии');
-            $categoryId = $dom->createElement('categoryId',!empty($this->associateCategories[$product->category]) ?: 33903);
+            $categoryId = $dom->createElement('categoryId',!empty($this->associateCategories[$product->category_id]) ?: 33903);
 
             if (!empty($product->seo_keywords)) {
                 $keywords = $dom->createElement('keywords', $product->seo_keywords);
