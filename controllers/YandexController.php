@@ -68,7 +68,6 @@ class YandexController extends Controller
 
 
         $content = $dom->saveXML();
-        file_put_contents('asd.yml', $content);
         return $content;
     }
 }
