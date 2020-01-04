@@ -37,7 +37,7 @@ class YandexController extends Controller
         foreach (Product::find()->all() as $product) {
 
             $offer = $dom->createElement('offer');
-//            $offer->setAttribute('id', $product->id);
+            $offer->setAttribute('id', $product->id);
 
             $name = $dom->createElement('name', htmlspecialchars($product->display));
             $offer->appendChild($name);
