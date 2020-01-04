@@ -25,125 +25,146 @@ use yii\web\UploadedFile;
  */
 class Category extends ActiveRecord
 {
-	public static function tableName()
-	{
-		return "product_category";
-	}
+    public static function tableName()
+    {
+        return "product_category";
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className(),
-			[
-				'class' => UploadBehavior::class,
-				'attribute' => 'image',
-				'scenarios' => ['default'],
-				'path' => '@webroot/upload/',
-				'url' => '@web/upload/',
-			],
-			[
-				'class' => SluggableBehavior::className(),
-				'attribute' => 'name',
-				'ensureUnique' => true,
-			],
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'image',
+                'scenarios' => ['default'],
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/',
+            ],
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'ensureUnique' => true,
+            ],
+        ];
+    }
 
-	public function rules()
-	{
-		return [
-			[['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
+    public function rules()
+    {
+        return [
+            [['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-			[['parent', 'seo_keywords', 'seo_description', 'description'], 'string'],
+            [['parent', 'seo_keywords', 'seo_description', 'description'], 'string'],
 
-			['sort', 'integer'],
+            ['sort', 'integer'],
 
-			['parent', 'default', 'value' => '0'],
+            ['parent', 'default', 'value' => '0'],
 
-			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
-		];
-	}
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
+        ];
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			'name' => 'Название',
-			'description' => 'Описание',
-			'sort' => 'Сортировка',
-			'parent' => 'Родительский раздел',
-			'image' => 'Изображение',
-			'seo_keywords' => 'Ключевые слова (seo)',
-			'seo_description' => 'Описание (seo)',
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Название',
+            'description' => 'Описание',
+            'sort' => 'Сортировка',
+            'parent' => 'Родительский раздел',
+            'image' => 'Изображение',
+            'seo_keywords' => 'Ключевые слова (seo)',
+            'seo_description' => 'Описание (seo)',
+        ];
+    }
 
-	public function getDetail()
-	{
-		return "/catalog/" . $this->slug . "/";
-	}
+    public function getDetail()
+    {
+        return "/catalog/" . $this->slug . "/";
+    }
 
-	public static function findBySlug($slug)
-	{
-		return static::findOne(['slug' => $slug]);
-	}
+    public static function findBySlug($slug)
+    {
+        return static::findOne(['slug' => $slug]);
+    }
 
-	public function search($params)
-	{
-		$query = static::find();
+    public function search($params)
+    {
+        $query = static::find();
 
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
-		}
+        if (!($this->load($params) && $this->validate())) {
+            return $dataProvider;
+        }
 
-		$query->andFilterWhere(['like', 'id', $this->id])
-			->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'id', $this->id])
+            ->andFilterWhere(['like', 'name', $this->name]);
 
-		return $dataProvider;
-	}
+        return $dataProvider;
+    }
 
-	public $items;
+    public $items;
 
-	public function categoryTree($parent_id = 0, $delim = "")
-	{
-		$categories = \app\models\entity\Category::find()->where(['parent' => $parent_id])->all();
+    public function categoryTree($parent_id = 0, $delim = "")
+    {
+        $categories = \app\models\entity\Category::find()->where(['parent' => $parent_id])->all();
 
-		if ($categories) {
+        if ($categories) {
 
-			foreach ($categories as &$category) {
-				$category->name = $delim . $category->name;
-				$this->items[] = $category;
-				self::categoryTree($category->id, $delim . '---');
-			}
+            foreach ($categories as &$category) {
+                $category->name = $delim . $category->name;
+                $this->items[] = $category;
+                self::categoryTree($category->id, $delim . '---');
+            }
 
-		}
+        }
 
-		return $this->items;
-	}
+        return $this->items;
+    }
 
-	public $subsections;
+    public $subsections;
 
-	public function subsections($parent_id = null)
-	{
-		$current_category_id = $this->id;
-		if ($parent_id) {
-			$current_category_id = $parent_id;
-		} else {
-			$this->subsections[] = Category::findOne($current_category_id);
-		}
+    public function subsections($parent_id = null)
+    {
+        $current_category_id = $this->id;
+        if ($parent_id) {
+            $current_category_id = $parent_id;
+        } else {
+            $this->subsections[] = Category::findOne($current_category_id);
+        }
 
-		$categories = Category::find()->where(['parent' => $current_category_id])->all();
+        $categories = Category::find()->where(['parent' => $current_category_id])->all();
 
-		if ($categories) {
-			foreach ($categories as $category) {
-				$this->subsections[] = $category;
-				$this->subsections($category->id);
-			}
-		}
+        if ($categories) {
+            foreach ($categories as $category) {
+                $this->subsections[] = $category;
+                $this->subsections($category->id);
+            }
+        }
 
-		return $this->subsections;
-	}
+        return $this->subsections;
+    }
+
+    public $yml_categories;
+
+    public function loadYml(\DOMDocument &$dom, \DOMElement &$domElement, $parent_id = 0)
+    {
+        $categories = \app\models\entity\Category::find()->where(['parent' => $parent_id])->all();
+
+        if ($categories) {
+            foreach ($categories as &$category) {
+                $category_dom = $dom->createElement('category', $category->name);
+                $category_dom->setAttribute('id', $category->id);
+
+                if ($parent_id > 0) {
+                    $category_dom->setAttribute('parentId', $parent_id);
+                }
+
+                $domElement->appendChild($category_dom);
+                $this->loadYml($dom, $domElement, $category->id);
+            }
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\entity\Category;
 use app\models\tool\Debug;
 use Yii;
 use app\models\entity\Product;
@@ -24,6 +25,13 @@ class YandexController extends Controller
         $shop->appendChild($dom->createElement('name', 'Зоомагазин Котофей'));
         $shop->appendChild($dom->createElement('company', 'ИП Васин К.В.'));
         $shop->appendChild($dom->createElement('email', 'info@kotofey.store'));
+
+        $categoryModel = new Category();
+
+        $categories = $dom->createElement('categories');
+        $categoryModel->loadYml($dom, $categories);
+
+        $shop->appendChild($categories);
 
         /* @var $product Product */
         foreach (Product::find()->all() as $product) {
@@ -50,10 +58,11 @@ class YandexController extends Controller
             $offer->appendChild($categoryId);
 
             if (!empty($product->description)) {
-
-                $description = $dom->createElement('description', htmlspecialchars($product->description));
-                $offer->appendChild($description);
-
+                try {
+                    $description = $dom->createElement('description', "<![CDATA[" . $product->description . "]]>");
+                    $offer->appendChild($description);
+                } catch (\ErrorException $exception) {
+                }
             }
 
             $delivery = $dom->createElement('delivery', "true");
