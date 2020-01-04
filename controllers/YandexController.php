@@ -25,6 +25,7 @@ class YandexController extends Controller
         $shop->appendChild($dom->createElement('name', 'Зоомагазин Котофей'));
         $shop->appendChild($dom->createElement('company', 'ИП Васин К.В.'));
         $shop->appendChild($dom->createElement('email', 'info@kotofey.store'));
+        $shop->appendChild($dom->createElement('url', 'https://kotofey.store/'));
 
         $categoryModel = new Category();
         $categories = $dom->createElement('categories');
