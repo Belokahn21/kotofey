@@ -6,6 +6,7 @@
 
 /* @var $category \app\models\entity\Category */
 
+use app\models\entity\Category;
 use app\models\entity\Basket;
 use app\models\tool\Currency;
 use app\models\tool\seo\Title;
@@ -18,32 +19,50 @@ use app\models\helpers\DiscountHelper;
 $this->title = Title::showTitle("Товары");
 $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['/catalog/']];
 if ($category) {
-	$this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
-	$this->title = Title::showTitle($category->name);
+    $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
+    $this->title = Title::showTitle($category->name);
 }
 ?>
 <div class="catalog filtred">
 
-	<?= CatalogFilterWidget::widget(); ?>
+    <?= CatalogFilterWidget::widget(); ?>
 
     <div class="catalog-wrap">
+        <?php if ($category): ?>
+            <div class="sub-categories-wrap">
+                <ul class="sub-categories">
+                    <?php // TODO: проверить условие исключения родителських категорий ?>
+                    <?php foreach (Category::find()->where(['parent' => $category->id])->andWhere(['>', 'parent', '0'])->all() as $child): ?>
+                        <?php if (!empty($child->image)): ?>
+                            <li class="sub-categories__item">
+                                <a class="sub-categories__link" href="<?= $child->detail; ?>">
+                                    <div class="sub-categories__title"><?= $child->name; ?></div>
+                                    <img class="sub-categories__image" src="/web/upload/<?= $child->image; ?>">
+                                </a>
+                            </li>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+
         <ul class="filter-variant">
             <li class="filter-variant__item" data-show="list"><i class="fas fa-list"></i></li>
             <li class="filter-variant__item active" data-show="block"><i class="fas fa-th-large"></i></li>
         </ul>
         <ul class="catalog-list">
-			<?php /* @var $product \app\models\entity\Product */ ?>
-			<?php foreach ($products as $product): ?>
+            <?php /* @var $product \app\models\entity\Product */ ?>
+            <?php foreach ($products as $product): ?>
                 <li class="catalog-list__item">
 
                     <div class="catalog-list__weight"><?= ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])->value; ?> КГ</div>
 
                     <a href="<?= $product->detail; ?>" class="catalog-list__link">
-						<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                        <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                             <img class="catalog-list__image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-						<?php else: ?>
+                        <?php else: ?>
                             <img class="catalog-list__image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-						<?php endif; ?>
+                        <?php endif; ?>
                     </a>
 
                     <a href="<?= $product->detail; ?>" class="catalog-list__link">
@@ -86,13 +105,13 @@ if ($category) {
                         </div>
                     </div>
                 </li>
-			<?php endforeach; ?>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>
 <div class="pagination-wrap">
-	<?php echo LinkPager::widget([
-		'pagination' => $pagerItems,
-	]); ?>
+    <?php echo LinkPager::widget([
+        'pagination' => $pagerItems,
+    ]); ?>
 </div>
 

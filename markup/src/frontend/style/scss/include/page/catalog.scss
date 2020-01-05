@@ -5,6 +5,44 @@
   flex-direction: row;
 }
 
+.sub-categories {
+  width: 100%;
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+
+  &__item {
+    width: 25%;
+    margin: 5px;
+  }
+
+  &__link {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    color: white;
+
+    &:hover {
+      color: $mainActiveColor;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 0 0 0 12px;
+    width: 140px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+  }
+}
+
 .catalog-wrap {
   display: flex;
   flex-direction: column;
