@@ -937,41 +937,42 @@ class SiteController extends Controller
 
         if ($id) {
 
-            $article = News::findBySlug($id);
-            if ($article->slug) {
-                Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $article->slug . "/");
+            $new = News::findBySlug($id);
+            if ($new->slug) {
+                Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
             }
 
-            if ($article->seo_description) {
-                Attributes::metaDescription($article->seo_description);
+            if ($new->seo_description) {
+                Attributes::metaDescription($new->seo_description);
             }
 
-            if ($article->seo_keywords) {
-                Attributes::metaKeywords($article->seo_keywords);
+            if ($new->seo_keywords) {
+                Attributes::metaKeywords($new->seo_keywords);
             }
 
-            OpenGraph::title($article->title);
-            OpenGraph::description(((!empty($article->preview)) ? $article->preview : $article->detail));
-            OpenGraph::type("article");
-            OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $article->slug . "/");
+            OpenGraph::title($new->title);
+            OpenGraph::description(((!empty($new->preview)) ? $new->preview : $new->detail));
+            OpenGraph::type("new");
+            OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
 
-            if (!empty($article->preview_image)) {
-                OpenGraph::image($article->preview_image);
+            if (!empty($new->preview_image)) {
+                OpenGraph::image($new->preview_image);
             }
 
-            return $this->render('detail/articles', [
-                'article' => $article
+            return $this->render('detail/news', [
+                'model' => $new
             ]);
         }
 
         $categories = NewsCategory::find()->all();
-        $pages = News::find()->all();
+        $news = News::find()->all();
 
 //        Attributes::metaKeywords("уход за натуральной кожей, уход за сумкой из натуральной кожи,");
         Attributes::metaDescription("Самые полезные и актуальные статьи о том как ухаживать за кожей, как выбрать правильно продукт и другие новости компани!");
 
-        return $this->render('articles', [
-            'news' => $pages
+        return $this->render('news', [
+            'news' => $news,
+            'categories' => $categories
         ]);
     }
 
