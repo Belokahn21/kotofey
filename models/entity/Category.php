@@ -87,24 +87,6 @@ class Category extends ActiveRecord
         return static::findOne(['slug' => $slug]);
     }
 
-    public function search($params)
-    {
-        $query = static::find();
-
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
-
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
-
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name]);
-
-        return $dataProvider;
-    }
-
     public $items;
 
     public function categoryTree($parent_id = 0, $delim = "")

@@ -33,6 +33,7 @@ use app\models\entity\Vacancy;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
+use app\models\search\CategorySearchForm;
 use app\models\search\DeliverySearchForm;
 use app\models\search\GeoSearchForm;
 use app\models\search\InformersSearchForm;
@@ -239,7 +240,8 @@ class AdminController extends Controller
         }
 
         $model = new Category();
-        $dataProvider = $model->search(\Yii::$app->request->get());
+        $searchForm = new CategorySearchForm();
+        $dataProvider = $searchForm->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -254,6 +256,7 @@ class AdminController extends Controller
 
         return $this->render('category', [
             'model' => $model,
+            'searchForm' => $searchForm,
             'categories' => $model->categoryTree(),
             'dataProvider' => $dataProvider,
         ]);

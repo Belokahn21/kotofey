@@ -24,7 +24,7 @@ use yii\helpers\Url;
     <h2>Разделы товаров</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
-	'filterModel' => $model,
+	'filterModel' => $searchForm,
 	'emptyText' => 'Разделы отсутствуют',
 	'columns' => [
 		'attribute' => 'id',
@@ -39,7 +39,7 @@ use yii\helpers\Url;
 			'attribute' => 'test',
 			'label' => 'Количество товаров',
 			'value' => function ($model) {
-				return Product::find()->where(['category' => $model->id])->count();
+				return Product::find()->where(['category_id' => $model->id])->count();
 			},
 		],
 		[
