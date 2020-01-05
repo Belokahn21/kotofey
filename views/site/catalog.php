@@ -38,7 +38,6 @@ if ($category) {
     <div class="catalog-wrap">
         <div class="sub-categories-wrap">
             <ul class="sub-categories">
-                <?php // TODO: проверить условие исключения родителських категорий ?>
                 <?php foreach (Category::find()->where(['parent' => $category_id])->all() as $child): ?>
                     <li class="sub-categories__item">
                         <a class="sub-categories__link" href="<?= $child->detail; ?>">
@@ -49,10 +48,13 @@ if ($category) {
             </ul>
         </div>
 
-        <ul class="filter-variant">
-            <li class="filter-variant__item" data-show="list"><i class="fas fa-list"></i></li>
-            <li class="filter-variant__item active" data-show="block"><i class="fas fa-th-large"></i></li>
-        </ul>
+        <div class="filter-variant__wrap">
+            <h1 class="catalog__title"><?= ($category ? $category->name : 'Каталог зоотоваров'); ?></h1>
+            <ul class="filter-variant">
+                <li class="filter-variant__item" data-show="list"><i class="fas fa-list"></i></li>
+                <li class="filter-variant__item active" data-show="block"><i class="fas fa-th-large"></i></li>
+            </ul>
+        </div>
         <ul class="catalog-list">
             <?php /* @var $product \app\models\entity\Product */ ?>
             <?php foreach ($products as $product): ?>
