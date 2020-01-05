@@ -249,9 +249,7 @@ class SiteController extends Controller
             $query = Product::find()->orderBy(['created_at' => SORT_DESC]);
 
             if ($sb) {
-                $query->where(['category' => ArrayHelper::getColumn($sb, 'id')]);
-//			}else{
-//				$query->where(['category' => ArrayHelper::getColumn($sb, 'id')]);
+                $query->where(['category_id' => ArrayHelper::getColumn($sb, 'id')]);
             }
 
             $query->andWhere(['active' => 1]);
