@@ -19,32 +19,35 @@ use app\models\helpers\DiscountHelper;
 $this->title = Title::showTitle("Товары");
 $this->params['breadcrumbs'][] = ['label' => 'Товары', 'url' => ['/catalog/']];
 if ($category) {
-    $this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
+    foreach ($category->undersections() as $parents) {
+        $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+    }
     $this->title = Title::showTitle($category->name);
 }
+$category_id = 0;
+if ($category) {
+    $category_id = $category->id;
+}
+
+
 ?>
 <div class="catalog filtred">
 
     <?= CatalogFilterWidget::widget(); ?>
 
     <div class="catalog-wrap">
-        <?php if ($category): ?>
-            <div class="sub-categories-wrap">
-                <ul class="sub-categories">
-                    <?php // TODO: проверить условие исключения родителських категорий ?>
-                    <?php foreach (Category::find()->where(['parent' => $category->id])->andWhere(['>', 'parent', '0'])->all() as $child): ?>
-                        <?php if (!empty($child->image)): ?>
-                            <li class="sub-categories__item">
-                                <a class="sub-categories__link" href="<?= $child->detail; ?>">
-                                    <div class="sub-categories__title"><?= $child->name; ?></div>
-                                    <img class="sub-categories__image" src="/web/upload/<?= $child->image; ?>">
-                                </a>
-                            </li>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
-                </ul>
-            </div>
-        <?php endif; ?>
+        <div class="sub-categories-wrap">
+            <ul class="sub-categories">
+                <?php // TODO: проверить условие исключения родителських категорий ?>
+                <?php foreach (Category::find()->where(['parent' => $category_id])->all() as $child): ?>
+                    <li class="sub-categories__item">
+                        <a class="sub-categories__link" href="<?= $child->detail; ?>">
+                            <div class="sub-categories__title"><?= $child->name; ?></div>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
 
         <ul class="filter-variant">
             <li class="filter-variant__item" data-show="list"><i class="fas fa-list"></i></li>

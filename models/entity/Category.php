@@ -129,6 +129,23 @@ class Category extends ActiveRecord
         return $this->subsections;
     }
 
+    public $under_sections;
+
+    public function undersections($parent_id = null)
+    {
+        if ($parent_id === null) {
+            $parent_id = $this->id;
+        }
+        $category = Category::findOne($parent_id);
+
+        if ($category) {
+            $this->under_sections[] = $category;
+            $this->undersections($category->parent);
+        }
+
+        return array_reverse($this->under_sections);
+    }
+
     public $yml_categories;
 
     public function loadYml(\DOMDocument &$dom, \DOMElement &$domElement, $parent_id = 0)
