@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
                                 </li>
                                 <li class="order-info__item">
                                     <div class="order-info__item-key">Статус</div>
-                                    <div class="order-info__item-value"><?= $order->status; ?></div>
+                                    <div class="order-info__item-value"><?= OrderHelper::getStatus($order); ?></div>
                                 </li>
                                 <li class="order-info__item">
                                     <div class="order-info__item-key">Оплата</div>
