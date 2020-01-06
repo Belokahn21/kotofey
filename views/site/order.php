@@ -1,73 +1,84 @@
 <?php
 
+use app\models\entity\OrdersItems;
 use yii\helpers\Html;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
-use app\models\entity\OrdersItems;
+use app\models\helpers\OrderHelper;
 
 $currency = new Currency();
 
 /* @var $orders \app\models\entity\Order[] */
 /* @var $items \app\models\entity\OrdersItems[] */
+/* @var $item \app\models\entity\OrdersItems */
 ?>
 <?php $this->title = Title::showTitle("Список заказов");
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => ['/profile/']];
 $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url' => ['/order/']]; ?>
 <section class="list-orders">
     <h1>Список заказов</h1>
-	<?php if ($orders): ?>
-        <table class="list-orders__table">
-			<?php foreach ($orders as $order): ?>
-                <tr class="list-orders__table-item">
-                    <td>
-                        №<?= $order->id; ?>
-                        <br/>
-                        <a class="list-orders__table-link" href="/order/<?= $order->id; ?>/">от <?= date("d.m.Y", $order->created_at); ?></a>
-                    </td>
-                    <td>
-                        <table class="list-products__table">
-							<?php foreach (OrdersItems::find()->where(['order_id' => $order->id])->all() as $item): ?>
-								<?php if ($item->product instanceof \app\models\entity\Product): ?>
-                                    <tr class="list-products__table-item" href="<?= $item->product->detail; ?>">
-										<?php if (!empty($item->product->image)): ?>
-                                            <td class="list-products__table-image">
-                                                <img src="<?= $item->product->image; ?>">
-                                            </td>
-										<?php endif; ?>
-                                        <td class="list-products__table-name"><?= $item->name; ?></td>
-                                    </tr>
-								<?php else: ?>
-                                    <tr class="list-products__table-item" href="javascript:void(0);">
-                                        <td class="list-products__table-image">
-                                            <img src="/web/upload/images/not-image.png">
-                                        </td>
-                                        <td class="list-products__table-name"><?= $item->name; ?></td>
-                                    </tr>
-								<?php endif; ?>
-							<?php endforeach; ?>
-                        </table>
-                    </td>
-                    <td class="list-products__table-price">
-						<?php if (!empty($order->cash)): ?>
-							<?= Price::format($order->cash); ?>
-							<?= $currency->show(); ?>
-						<?php endif; ?>
-                    </td>
-                    <td class="list-products__table-pay">
-						<?php if ($order->is_paid == false): ?>
-                            <span class="red">Не оплачено</span>
-						<?php else: ?>
-                            <span class="green">Оплачено</span>
-						<?php endif; ?>
-                    </td>
-                    <td>
-						<?= Html::a('Подробнее', '/order/' . $order->id . '/', ['class' => 'detail-more']) ?>
-                    </td>
-                </tr>
-			<?php endforeach; ?>
-        </table>
-	<?php else: ?>
+    <?php if ($orders): ?>
+        <ul class="orders">
+            <?php foreach ($orders as $order): ?>
+                <li class="orders__item">
+                    <div class="orders__header">
+                        <div class="orders__number">
+                            <span>Заказ №<?= $order->id; ?></span>
+                        </div>
+                        <div class="order-info-wrap">
+                            <ul class="order-info">
+                                <li class="order-info__item">
+                                    <div class="order-info__item-key">Дата покупки</div>
+                                    <div class="order-info__item-value"><?= date('d.m.Y', $order->created_at); ?></div>
+                                </li>
+                                <li class="order-info__item">
+                                    <div class="order-info__item-key">Статус</div>
+                                    <div class="order-info__item-value"><?= $order->status; ?></div>
+                                </li>
+                                <li class="order-info__item">
+                                    <div class="order-info__item-key">Оплата</div>
+                                    <div class="order-info__item-value">
+                                        <?php if ($order->is_paid): ?>
+                                            <span class="green">Оплачено</span>
+                                        <?php else: ?>
+                                            Не оплачено
+                                        <?php endif; ?>
+                                    </div>
+                                </li>
+                                <li class="order-info__item">
+                                    <div class="order-info__item-key">Сумма заказа</div>
+                                    <div class="order-info__item-value"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="orders__content">
+                        <ul class="orders-items">
+                            <?php foreach (OrdersItems::findAll(['order_id' => $order->id]) as $item): ?>
+                                <li class="orders-items__item">
+                                    <div class="orders-items__image-wrap">
+                                        <?php if ($item->product): ?>
+                                            <img src="/web/upload/<?= $item->product->image; ?>" class="orders-items__image">
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="orders-items-info">
+                                        <div class="orders-items-info__title"><?= $item->name; ?></div>
+                                        <div class="row d-flex justify-content-between">
+                                            <div class="col-sm-4"><?= $item->count; ?> шт</div>
+                                            <div class="col-sm-4"><?= $item->price; ?> р</div>
+                                            <div class="col-sm-4"><?= $item->count * $item->price; ?> р</div>
+                                        </div>
+                                    </div>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
         Вы ничего не покупали
-	<?php endif; ?>
+    <?php endif; ?>
 </section>

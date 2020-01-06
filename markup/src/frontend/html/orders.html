@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<include src="include/head.html"></include>
+<body>
+<div class="wrap-page">
+    <include src="include/header/up-header-menu.html"></include>
+    <include src="include/header/header.html"></include>
+    <include src="include/header/menu.html"></include>
+    <include src="include/header/breadcrumb.html"></include>
+    <div class="page-content">
+        <h1>Список заказов</h1>
+        <ul class="orders">
+            <li class="orders__item">
+                <div class="orders__header">
+                    <div class="orders__number">
+                        <span>Заказ №1</span>
+                    </div>
+                    <div class="order-info-wrap">
+                        <ul class="order-info">
+                            <li class="order-info__item">
+                                <div class="order-info__item-key">Дата покупки</div>
+                                <div class="order-info__item-value">11.11.2020</div>
+                            </li>
+                            <li class="order-info__item">
+                                <div class="order-info__item-key">Статус</div>
+                                <div class="order-info__item-value">Доставляется курьером</div>
+                            </li>
+                            <li class="order-info__item">
+                                <div class="order-info__item-key">Оплата</div>
+                                <div class="order-info__item-value"><span class="green">Оплачено</span></div>
+                            </li>
+                            <li class="order-info__item">
+                                <div class="order-info__item-key">Сумма заказа</div>
+                                <div class="order-info__item-value">2 000 Р</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="orders__content">
+                    <ul class="orders-items">
+                        <li class="orders-items__item">
+                            <div class="orders-items__image-wrap">
+                                <img src="./assets/images/product.png" class="orders-items__image">
+                            </div>
+                            <div class="orders-items-info">
+                                <div class="orders-items-info__title">Liver для взрослых кошек</div>
+                                <div class="row d-flex justify-content-between">
+                                    <div class="col-sm-4">12 шт</div>
+                                    <div class="col-sm-4">250 р</div>
+                                    <div class="col-sm-4">950 р</div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <include src="include/footer/footer.html"></include>
+</div>
+
+<include src="include/block/requisites.html"></include>
+<include src="include/block/cookie.html"></include>
+</body>
+</html>
