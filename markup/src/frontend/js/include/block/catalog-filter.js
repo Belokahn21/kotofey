@@ -42,7 +42,7 @@
 
 							$('.catalog-list').removeClass('flex-position-center').html("");
 
-							$page.find('.catalog-list').find('li').each(function () {
+							$page.find('.catalog-list').find('.catalog-list__item').each(function () {
 								$('.catalog-list').append($(this));
 							});
 							$('.pagination-wrap').html($page.find('.pagination'));
