@@ -101,28 +101,8 @@ class News extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_INSERT => [
-                'title',
-                'preview',
-                'detail',
-                'category',
-                'seo_keywords',
-                'seo_description',
-                'created_at',
-                'preview_image',
-                'detail_image',
-            ],
-            self::SCENARIO_UPDATE => [
-                'title',
-                'preview',
-                'detail',
-                'category',
-                'seo_keywords',
-                'seo_description',
-                'created_at',
-                'preview_image',
-                'detail_image',
-            ]
+            self::SCENARIO_INSERT => ['title', 'sort', 'preview', 'detail', 'category', 'seo_keywords', 'seo_description', 'created_at', 'preview_image', 'detail_image',],
+            self::SCENARIO_UPDATE => ['title', 'sort', 'preview', 'detail', 'category', 'seo_keywords', 'seo_description', 'created_at', 'preview_image', 'detail_image',]
         ];
     }
 

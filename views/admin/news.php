@@ -37,7 +37,7 @@ $this->title = Title::showTitle("Новости");
 			'attribute' => 'title',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return Html::a($model->title, "/admin/pages/" . $model->id . "/");
+				return Html::a($model->title, "/admin/news/" . $model->id . "/");
 			}
 		],
 		[
@@ -98,7 +98,7 @@ $this->title = Title::showTitle("Новости");
 				},
 				'delete' => function ($url, $model, $key) {
 					return Html::a('<i class="fas fa-trash-alt"></i>',
-						Url::to(["/admin/pages/", 'id' => $key, 'action' => 'delete']));
+						Url::to(["/admin/news/", 'id' => $key, 'action' => 'delete']));
 				},
 			]
 		],
