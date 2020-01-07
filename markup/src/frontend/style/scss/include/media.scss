@@ -228,6 +228,12 @@
   .footer-socials {
     flex-wrap: wrap;
   }
+
+  .sub-categories {
+    &__item {
+      width: 45%;
+    }
+  }
 }
 
 /* iPhone 5 in landscape */
