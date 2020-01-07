@@ -118,7 +118,10 @@
 
 .footer-socials__item {
   padding: 1%;
-  width: 60px;
+
+  &:not(.copyright) {
+    width: 60px;
+  }
 
   &:hover {
     .footer-socials__item__inst {
