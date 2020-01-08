@@ -234,6 +234,27 @@
       width: 45%;
     }
   }
+
+  .index-news {
+    flex-direction: column;
+
+    &__item {
+      width: 100%;
+    }
+  }
+
+  .notify {
+    width: 100%;
+    flex-direction: column;
+
+    &__text {
+      width: 100%;
+    }
+
+    &__action {
+      width: 100%;
+    }
+  }
 }
 
 /* iPhone 5 in landscape */

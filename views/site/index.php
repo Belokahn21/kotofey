@@ -6,15 +6,15 @@
 
 use app\models\entity\SiteSettings;
 use app\models\tool\seo\Title;
-use yii\helpers\StringHelper;
+use yii\helpers\Url;
 use app\widgets\slider\SliderWidget;
 
 $this->title = Title::showTitle("зоотовары для животных в Барнауле");
 ?>
 
 <?= SliderWidget::widget([
-	'slider_id' => 1,
-	'use_carousel' => true
+    'slider_id' => 1,
+    'use_carousel' => true
 ]) ?>
 
 <ul class="advantages">
@@ -50,52 +50,42 @@ $this->title = Title::showTitle("зоотовары для животных в �
             </li>
         </ul>
     </div>
-    <div id="news-carousel" class="carousel slide news-index__wrap" data-ride="carousel">
-        <div class="news-control">
-            <div class="block-title">Новости</div>
-            <div class="block-full">
-                <a class="block-full__link" href="/news/">Все новости</a>
-            </div>
-        </div>
-        <div class="carousel-inner news-index">
-			<?php $news_iterator = 1; ?>
-			<?php foreach ($news as $new): ?>
-                <div class="carousel-item news-index__item <?= ($news_iterator == 1 ? 'active' : ''); ?>">
-                    <div class="news-index__image-wrap">
-                        <img class="news-index__image d-block w-100" src="/web/upload/<?= $new->preview_image; ?>" alt="<?= $new->title; ?>">
-                    </div>
-                    <div class="news-index__title">
-                        <a class="news-index__link" href="<?= $new->getDetailurl(); ?>"><?= $new->title; ?></a>
-                    </div>
-                    <div class="news-index__description"><?= $new->preview; ?></div>
-                </div>
-				<?php $news_iterator++; ?>
-			<?php endforeach; ?>
-        </div>
-        <a class="carousel-control-prev" href="#news-carousel" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#news-carousel" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-        </a>
-    </div>
 </div>
 
+<div class="index-news__wrap">
+    <h2 class="homepage-providers__title">Интересные новости</h2>
+    <ul class="index-news">
+        <?php foreach ($news as $new): ?>
+            <li class="index-news__item">
+                <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
+                    <img src="/web/upload/<?= $new->preview_image; ?>" class="index-news__image">
+                </a>
+                <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
+                    <h3 class="index-news__title"><?= $new->title; ?></h3>
+                </a>
+                <div class="index-news__preview">
+                    <?= $new->preview; ?>
+                </div>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+    <div class="index-news__control">
+        <a class="index-news__control-link" href="<?= Url::to(['site/news']); ?>">Читать больше</a>
+    </div>
+</div>
 
 <?php if ($providers): ?>
     <section>
         <div class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</div>
         <ul class="homepage-providers">
-			<?php foreach ($providers as $provider): ?>
+            <?php foreach ($providers as $provider): ?>
                 <li class="homepage-providers__item">
                     <a class="homepage-providers__link" href="<?= $provider->link; ?>/">
                         <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>" title="<?= $provider->name; ?>" alt="<?= $provider->name; ?>">
                         <div class="homepage-providers__detail">К ассортимену</div>
                     </a>
                 </li>
-			<?php endforeach; ?>
+            <?php endforeach; ?>
         </ul>
     </section>
 <?php endif; ?>
