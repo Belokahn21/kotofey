@@ -9,8 +9,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => [$model->detailurl]];
 $this->title = Title::showTitle($model->title);
 ?>
+<h1><?= $model->title; ?></h1>
 <div class="news-detail__info">
-    <h1><?= $model->title; ?></h1>
     <div class="row justify-content-center align-items-center">
         <div class="col-sm-5">
             <div class="news-detail__date">Дата публикации: <?= date('d.m.Y', $model->created_at); ?></div>

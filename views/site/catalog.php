@@ -60,7 +60,11 @@ if ($category) {
             <?php foreach ($products as $product): ?>
                 <li class="catalog-list__item">
 
-                    <div class="catalog-list__weight"><?= ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])->value; ?> КГ</div>
+                    <?php if ($weight = ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])): ?>
+                        <div class="catalog-list__weight">
+                            <?= $weight->value; ?> КГ
+                        </div>
+                    <?php endif; ?>
 
                     <a href="<?= $product->detail; ?>" class="catalog-list__link">
                         <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>

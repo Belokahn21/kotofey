@@ -3,6 +3,7 @@
 namespace app\models\tool\seo\og;
 
 
+use yii\helpers\Html;
 use yii\helpers\StringHelper;
 
 class OpenGraph

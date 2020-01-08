@@ -32,6 +32,7 @@ use app\models\tool\Debug;
 use app\models\tool\seo\Attributes;
 use app\models\entity\User;
 use app\models\tool\seo\og\OpenGraph;
+use app\models\tool\seo\og\OpenGraphProduct;
 use app\models\tool\System;
 use app\widgets\notification\Alert;
 use yii\data\Pagination;
@@ -331,16 +332,18 @@ class SiteController extends Controller
         Attributes::canonical(System::protocol() . "://" . System::domain() . "/product/" . $product->slug . "/");
 
 
-        OpenGraph::title($product->display);
+        OpenGraphProduct::title($product->display);
         if (!empty($product->description)) {
             OpenGraph::description($product->description);
             Attributes::metaDescription($product->description);
         }
-        OpenGraph::type("product");
-        OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $product->slug . "/");
+        OpenGraphProduct::type();
+        OpenGraphProduct::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $product->slug . "/");
+        OpenGraphProduct::amount($product->price);
+        OpenGraphProduct::currency('RUB');
 
         if (!empty($product->image)) {
-            OpenGraph::image(System::protocol() . "://" . System::domain() . $product->image);
+            OpenGraphProduct::image(System::protocol() . "://" . System::domain() . '/web/upload/' . $product->image);
         }
 
         $properties = ProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', ProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
@@ -956,7 +959,7 @@ class SiteController extends Controller
             OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
 
             if (!empty($new->preview_image)) {
-                OpenGraph::image($new->preview_image);
+                OpenGraph::image(sprintf('%s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
             }
 
             return $this->render('detail/news', [
