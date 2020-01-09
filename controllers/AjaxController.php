@@ -387,13 +387,15 @@ class AjaxController extends Controller
 			throw new HttpException(404, 'Элемент не найден');
 		}
 
+		// todo: проверка на возможность покупать на разнавес по свойству is_wegiht
+
 		$product_weight = ProductPropertiesHelper::getProductWeight($product->id);
 		if (!$product_weight) {
 			return false;
 		}
 
 		$price_by_one_position_weight = round($product->price / $product_weight);
-		$summary_price = round($price_by_one_position_weight * $request_data['weight']);
+		$summary_price = round($price_by_one_position_weight * ($request_data['weight'] / 1000));
 
 		$data = array(
 			'summary_price' => $summary_price,
