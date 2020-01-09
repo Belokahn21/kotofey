@@ -49,7 +49,7 @@ $this->beginPage() ?>
 <?= NotifyWidget::widget(); ?>
 <?= $this->render('include/modal/select-city'); ?>
 
-<?= Alert::widget(); ?>
+<?php //= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
 
 <div class="wrap-page">
