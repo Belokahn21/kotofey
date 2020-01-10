@@ -36,7 +36,7 @@ use yii\helpers\Json;
                 </div>
 
                 <div class="form-element">
-					<?= $form->field($model, 'category')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?>
+					<?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?>
                 </div>
 
                 <div class="row">
