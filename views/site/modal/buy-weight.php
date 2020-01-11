@@ -41,7 +41,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Отменить</button>
-                <button type="button" class="btn btn-primary">Купить</button>
+                <button type="button" class="btn btn-main">Добавить в корзину</button>
             </div>
         </div>
     </div>
