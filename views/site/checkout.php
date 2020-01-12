@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 				<?php foreach ($basket as $item): ?>
                     <li class="checkout__cart-item">
                         <div class="checkout__cart-item__title">
-                            <a href="" class="checkout__cart-item__link"><?= $item->getName(); ?></a>
+                            <a href="" class="checkout__cart-item__link"><?= $item->name; ?></a>
                         </div>
                         <div class="checkout__cart-item__count">
                             <div class="checkout__cart-item__action-plus">
@@ -72,7 +72,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 
 
                             <div class="checkout__cart-item__integer">
-								<?= $item->getCount(); ?>
+								<?= $item->count; ?>
                             </div>
 
 
@@ -80,7 +80,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                                 <i class="fas fa-plus"></i>
                             </div>
                         </div>
-                        <div class="checkout__cart-item__summary"><?= Price::format($item->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
+                        <div class="checkout__cart-item__summary"><?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                     </li>
 				<?php endforeach; ?>
             </ul>

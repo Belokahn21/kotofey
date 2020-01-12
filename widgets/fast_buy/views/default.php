@@ -49,6 +49,7 @@ use app\models\tool\Policy;
 				<?php endif; ?>
             </div>
             <div class="modal-footer">
+                <input name="action" value="fast_buy" type="hidden">
 				<?= Html::a('Персональные данные', Policy::getInstance()->getPath(), ['target' => '_blank']) ?>
 				<?= Html::button('Закрыть', ['class' => 'btn-cancel', 'data-dismiss' => 'modal']) ?>
 				<?= Html::submitButton('Купить', ['class' => 'btn-main']) ?>

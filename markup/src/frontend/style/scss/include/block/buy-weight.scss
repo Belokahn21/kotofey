@@ -27,6 +27,12 @@
   list-style: none;
 
   &__item {
+    &.active {
+      .packaging-list__image {
+        border: 1px $mainActiveColor solid;
+      }
+    }
+
     width: 50%;
   }
 
@@ -36,9 +42,6 @@
 
     &:hover {
       cursor: pointer;
-    }
-
-    &.active, &:hover {
       border: 1px $mainActiveColor solid;
     }
   }

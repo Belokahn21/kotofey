@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 
+use app\models\helpers\BasketHelper;
 use app\models\tool\Debug;
 use yii\base\Model;
 
@@ -29,9 +30,9 @@ class Basket extends Model
         \Yii::$app->session->open();
     }
 
-    public function add(BasketItem $item)
+    public function add(OrdersItems $item)
     {
-        $_SESSION['basket'][$item->getProductId()] = $item;
+        $_SESSION['basket'][$item->product_id] = $item;
     }
 
     public function delete($product_id)
@@ -42,7 +43,7 @@ class Basket extends Model
 
     /**
      * @param $product_id
-     * @return BasketItem
+     * @return OrdersItems
      */
     public static function findOne($product_id)
     {
@@ -53,17 +54,17 @@ class Basket extends Model
             }
         }
 
-        return new BasketItem();
+        return new OrdersItems();
     }
 
-    public function update(BasketItem $item, $count)
+    public function update(OrdersItems $item, $count)
     {
-        /* @var $item BasketItem */
-        if ($item = $_SESSION['basket'][$item->getProductId()]) {
-            $item->setCount($count);
+        /* @var $item OrdersItems */
+        if ($item = $_SESSION['basket'][$item->product_id]) {
+            $item->count = $count;
         }
 
-        $_SESSION['basket'][$item->getProductId()] = $item;
+        $_SESSION['basket'][$item->product_id] = $item;
     }
 
     public function exist($product_id)
@@ -123,9 +124,9 @@ class Basket extends Model
 
         /* @var $promo Promo */
         if (!empty($_SESSION['basket'])) {
-            /* @var $item BasketItem */
+            /* @var $item OrdersItems */
             foreach ($_SESSION['basket'] as $id => $item) {
-                $cash += $item->getProduct()->price * $item->getCount();
+                $cash += $item->price * $item->count;
             }
         }
 
