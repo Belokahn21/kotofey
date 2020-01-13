@@ -255,6 +255,21 @@
       width: 100%;
     }
   }
+  .product-review-wrap {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .review-disable {
+    width: 100%;
+    border-bottom: 1px #e3e3e3 solid;
+    text-align: center;
+  }
+
+  .review-form-wrap {
+    width: 80%;
+  }
 }
 
 /* iPhone 5 in landscape */

@@ -24,28 +24,28 @@ use yii\db\ActiveRecord;
  */
 class OrdersItems extends ActiveRecord
 {
-    const EVENT_CREATE_ITEMS = 'create_items';
+	const EVENT_CREATE_ITEMS = 'create_items';
 
-    public function rules()
-    {
-        return [
-            [['name'], 'string'],
+	public function rules()
+	{
+		return [
+			[['name'], 'string'],
 
-            [['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
+			[['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
 
-            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
-        ];
-    }
+			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
+		];
+	}
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className()
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className()
+		];
+	}
 
-    public function saveItems()
-    {
+	public function saveItems()
+	{
         if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
             $item = new OrdersItems();
             $item->price = Delivery::PRICE_DELIVERY;
@@ -56,34 +56,36 @@ class OrdersItems extends ActiveRecord
             $basket->add($item);
         }
 
-        /* @var $item OrdersItems */
-        foreach (Basket::findAll() as $item) {
+		/* @var $item OrdersItems */
+		foreach (Basket::findAll() as $item) {
 
-            $item->order_id = $this->order_id;
+			Debug::printFile($item);
 
-            if ($item->validate()) {
-                if ($item->save() === false) {
-                    return false;
-                }
-            } else {
-                return false;
-            }
+			$item->order_id = $this->order_id;
 
-        }
+			if ($item->validate()) {
+				if ($item->save() === false) {
+					return false;
+				}
+			} else {
+				return false;
+			}
 
-
-        $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
-                'order_id' => $this->order_id
-            ]
-        );
-        $this->trigger(OrdersItems::EVENT_CREATE_ITEMS);
+		}
 
 
-        return true;
-    }
+		$this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
+				'order_id' => $this->order_id
+			]
+		);
+		$this->trigger(OrdersItems::EVENT_CREATE_ITEMS);
 
-    public function getProduct()
-    {
-        return Product::findOne($this->product_id);
-    }
+
+		return true;
+	}
+
+	public function getProduct()
+	{
+		return Product::findOne($this->product_id);
+	}
 }

@@ -409,3 +409,17 @@
   padding: 10px;
   text-decoration: none !important;
 }
+
+
+.lkj {
+  border: 1px $mainActiveColor solid;
+  padding: 3%;
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  color: $mainActiveColor;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 14px;
+  background: white;
+}
