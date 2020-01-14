@@ -8,9 +8,13 @@ use app\models\entity\Compare;
 use app\models\entity\Delivery;
 use app\models\entity\Favorite;
 use app\models\entity\Geo;
+use app\models\entity\OrdersItems;
+use app\models\entity\ProductProperties;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
 use app\models\entity\user\Billing;
+use app\models\helpers\ProductHelper;
+use app\models\helpers\ProductPropertiesHelper;
 use app\models\services\CompareService;
 use app\models\tool\Debug;
 use app\models\tool\parser\ParseProvider;
@@ -95,14 +99,14 @@ class AjaxController extends Controller
                 }
             }
 
-            $basketItem = new BasketItem();
-            $basketItem->setProductId($product->id);
-            $basketItem->setCount($count);
-            $basketItem->setPrice($product->price);
-            $basketItem->setName($product->name);
+            $basketItem = new OrdersItems();
+            $basketItem->product_id = $product->id;
+            $basketItem->count = $count;
+            $basketItem->name = $product->name;
+            $basketItem->price = $product->price;
 
             $basket = new Basket();
-            if ($basket->exist($basketItem->getProductId())) {
+            if ($basket->exist($basketItem->product_id)) {
                 $basket->update($basketItem, $count);
             } else {
                 $basket->add($basketItem);
@@ -126,46 +130,6 @@ class AjaxController extends Controller
             Favorite::getInstance()->add($product_id);
         }
         return true;
-    }
-
-    public function actionTobasket()
-    {
-        if (\Yii::$app->request->isPost) {
-
-            $POST = \Yii::$app->request->post();
-            $product = Product::findOne($POST['id']);
-            if (($product->count - 1) >= 0) {
-                $basket = new Basket();
-                $basket->product = Product::findOne($POST['id']);
-                $basket->count = 1;
-                $basket->add();
-
-                $result = [
-                    'status' => true,
-                    'htmlData' => $this->renderFile('@app/views/ajax/basket.php'),
-                ];
-            } else {
-                $result = [
-                    'status' => false,
-                ];
-            }
-
-
-            return Json::encode($result);
-        } else {
-
-            $GET = \Yii::$app->request->get();
-            $product = Product::findOne($GET['id']);
-            if (($product->count - 1) >= 0) {
-
-                $basket = new Basket();
-                $basket->product = Product::findOne($GET['id']);
-                $basket->count = 1;
-                $basket->add();
-
-            }
-
-        }
     }
 
     public function actionRemovetodo()

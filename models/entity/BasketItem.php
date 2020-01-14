@@ -9,6 +9,40 @@ class BasketItem
 	private $product_id;
 	private $count;
 	private $price;
+	private $weight;
+	private $image;
+
+	/**
+	 * @return mixed
+	 */
+	public function getImage()
+	{
+		return $this->image;
+	}
+
+	/**
+	 * @return mixed
+	 */
+	public function getWeight()
+	{
+		return $this->weight;
+	}
+
+	/**
+	 * @param mixed $image
+	 */
+	public function setImage($image)
+	{
+		$this->image = $image;
+	}
+
+	/**
+	 * @param mixed $weight
+	 */
+	public function setWeight($weight)
+	{
+		$this->weight = $weight;
+	}
 
 	/**
 	 * @param mixed $price

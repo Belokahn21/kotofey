@@ -18,7 +18,7 @@ $user = Yii::$app->user->identity;
     <div class="container">
         <div class="row">
             <div class="col">
-                <span class="fast-buy-user_billing" data-html="true" data-toggle="tooltip" data-placement="bottom" title='<?= $tooltip_html; ?>'>Плательщик</span>
+                <span class="fast-buy-user_billing" data-html="true" data-toggle="tooltip" data-placement="bottom" title='<?= $tooltip_html; ?>'>Покупатель</span>
                 <span class="user_billing_change"><a href="/profile/">(Изменить)</a></span>
             </div>
         </div>

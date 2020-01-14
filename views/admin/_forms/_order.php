@@ -6,6 +6,7 @@ use app\models\entity\OrderStatus;
 use app\models\entity\Payment;
 use app\models\entity\Delivery;
 use yii\helpers\Url;
+use app\models\entity\Product;
 
 ?>
 <nav>
@@ -33,7 +34,14 @@ use yii\helpers\Url;
             <ul class="order-items">
 				<?php foreach ($items as $item): ?>
                     <li class="order-items__item">
-						<?php if ($item->product instanceof \app\models\entity\Product): ?>
+						<?php if ($item->product instanceof Product): ?>
+                            <a class="order-items__link" href="">
+								<?php if ($item->product instanceof Product): ?>
+                                    <img class="order-items__image" src="/web/upload/<?= $item->product->image; ?>">
+								<?php else: ?>
+                                    <img class="order-items__image" src="/web/upload/images/not-image.png">
+								<?php endif; ?>
+                            </a>
                             <ul class="product-attrs">
                                 <li class="product-attrs__item">
                                     <div class="product-attrs__item-key">Артикул</div>
@@ -57,15 +65,13 @@ use yii\helpers\Url;
                                 </li>
                             </ul>
 						<?php endif; ?>
-                        <a class="order-items__link" href="">
-							<?php if ($item->product instanceof \app\models\entity\Product): ?>
-                                <img class="order-items__image" src="/web/upload/<?= $item->product->image; ?>">
-							<?php else: ?>
-                                <img class="order-items__image" src="/web/upload/images/not-image.png">
-							<?php endif; ?>
-                        </a>
+
                         <div class="order-items__title">
-                            <a href="<?= Url::to(['admin/catalog', 'id' => $item->product->id]) ?>"><?= $item->product ? $item->product->name : $item->name; ?></a>
+							<?php if ($item->product instanceof Product): ?>
+                                <a href="<?= Url::to(['admin/catalog', 'id' => $item->product->id]) ?>"><?= ($item->product instanceof \app\models\entity\Product) ? $item->product->name : $item->name; ?></a>
+							<?php else: ?>
+                                <a href="javascript:void(0);"><?= $item->name; ?></a>
+							<?php endif; ?>
                         </div>
                     </li>
 				<?php endforeach; ?>

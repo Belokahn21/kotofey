@@ -51,7 +51,7 @@
                             </div>
                             <div class="product-favorite add-to-favorite" data-product="1"><i class="far fa-heart"></i>В избранное</div>
                             <div class="product-favorite add-to-compare" data-product="1"><i class="fas fa-balance-scale"></i>Сравнить</div>
-<!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
+                            <!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
                         </div>
                         <div class="product-description">
                             <p>
@@ -72,11 +72,9 @@
                                 получаете <span class="product-discount__value">99</span> бонусов
                             </div>
 
-
                             <div class="product-button product-add-basket">
                                 В корзину
                             </div>
-
 
                             <div class="product-detail-calc-wrap hide">
                                 <form class="product-detail-calc-form">
@@ -99,6 +97,8 @@
                             <div class="product-button product-fast-buy" data-toggle="modal" data-target="#modal-product-detail-buy-click">
                                 Купить в 1 клик
                             </div>
+                            <hr/>
+                            <include src="/include/block/buy_weight.html"></include>
                             <hr/>
                             <ul class="product-pluses">
                                 <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-delivery">
@@ -161,7 +161,7 @@
                     <div class="product-attributes__title">Отзывы покупателей</div>
                     <div class="product-review-wrap">
                         <include src="include/block/reviews_error.html"></include>
-<!--                        <include src="include/block/reviews_logged.html"></include>-->
+                        <!--                        <include src="include/block/reviews_logged.html"></include>-->
                     </div>
                 </div>
             </div>
@@ -176,6 +176,38 @@
                     <a class="product-switch__link" href="">Royal Canin adult big small croc</a>
                 </li>
             </ul>
+            <div class="lkj d-sm-none">
+                <div class="row">
+                    <div class="col-4">
+                        <div class="row d-flex justify-content-center align-items-center h-100">
+                            <div class="col-4">Цена</div>
+                            <div class="col-8">5000 Р</div>
+                        </div>
+                    </div>
+                    <div class="col-8">
+                        <div class="product-button product-add-basket">
+                            В корзину
+                        </div>
+
+                        <div class="product-detail-calc-wrap hide">
+                            <form class="product-detail-calc-form">
+
+                                <div class="product-detail-calc-element">
+                                    <div class="product-detail-calc-min">-</div>
+                                </div>
+
+                                <div class="product-detail-calc-element">
+                                    <input type="text" class="product-detail-calc-count" name="count" placeholder="1">
+                                </div>
+
+                                <div class="product-detail-calc-element">
+                                    <div class="product-detail-calc-plus">+</div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -183,6 +215,6 @@
 </div>
 
 <include src="include/block/requisites.html"></include>
-<include src="include/block/cookie.html"></include>
+<!--<include src="include/block/cookie.html"></include>-->
 </body>
 </html>

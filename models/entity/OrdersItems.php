@@ -2,6 +2,7 @@
 
 namespace app\models\entity;
 
+use app\models\tool\Debug;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -14,6 +15,8 @@ use yii\db\ActiveRecord;
  * @property integer $product_id
  * @property integer $count
  * @property integer $price
+ * @property integer $weight
+ * @property string $image
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -27,7 +30,10 @@ class OrdersItems extends ActiveRecord
 	{
 		return [
 			[['name'], 'string'],
-			[['price', 'count', 'product_id', 'order_id'], 'integer']
+
+			[['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
+
+			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
 		];
 	}
 
@@ -40,32 +46,22 @@ class OrdersItems extends ActiveRecord
 
 	public function saveItems()
 	{
-		if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
-			$item = new BasketItem();
-			$item->setPrice(Delivery::PRICE_DELIVERY);
-			$item->setName('Доставка');
-			$item->setCount(1);
+        if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
+            $item = new OrdersItems();
+            $item->price = Delivery::PRICE_DELIVERY;
+            $item->name = 'Доставка';
+            $item->count = 1;
 
-			$basket = new Basket();
-			$basket->add($item);
-		}
+            $basket = new Basket();
+            $basket->add($item);
+        }
 
-		/* @var $item BasketItem */
+		/* @var $item OrdersItems */
 		foreach (Basket::findAll() as $item) {
-			$self = new OrdersItems();
-			$self->name = $item->getName();
+			$item->order_id = $this->order_id;
 
-			if (is_object($item->getProduct())) {
-				if ($item->getProduct()->id) {
-					$self->product_id = $item->getProduct()->id;
-				}
-			}
-
-			$self->count = $item->getCount();
-			$self->order_id = $this->order_id;
-			$self->price = $item->getCount() * $item->getPrice();
-			if ($self->validate()) {
-				if ($self->save() === false) {
+			if ($item->validate()) {
+				if ($item->save() === false) {
 					return false;
 				}
 			} else {
@@ -73,6 +69,7 @@ class OrdersItems extends ActiveRecord
 			}
 
 		}
+
 
 		$this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
 				'order_id' => $this->order_id
