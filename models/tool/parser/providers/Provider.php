@@ -25,13 +25,14 @@ class Provider implements ProviderInterface
 		$xpath = new \DOMXPath($dom);
 		$price = $xpath->query('//div[@class="lead"]')->item(0)->nodeValue;
 
+
 		$price = explode(' ', $price);
 		if (is_array($price)) {
 			preg_match('/(\d+)р./', $price[1], $price);
 			$price = $price[1];
 		}
 
-		$weight = $dom->getElementsByTagName('strong')->item(2)->nodeValue;
+		$weight = $dom->getElementsByTagName('strong')->item(3)->nodeValue;
 		$weight = explode(" ", $weight);
 
 		switch ($weight[1]) {
@@ -52,9 +53,10 @@ class Provider implements ProviderInterface
 		$product->description = $xpath->query('//div[@class="desc"]')->item(0)->nodeValue;
 		$product->vitrine = 1;
 		$product->active = 1;
-		$product->code = $dom->getElementsByTagName('strong')->item(1)->nodeValue;
+		$product->code = $dom->getElementsByTagName('strong')->item(2)->nodeValue;
 		$product->weight = $weight;
 
+		Debug::p($product);
 
 		return $product;
 	}
