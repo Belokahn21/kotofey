@@ -46,10 +46,10 @@ $this->beginPage() ?>
 <body>
 <?php $this->beginBody() ?>
 
-<?= NotifyWidget::widget(); ?>
+<?php // NotifyWidget::widget(); ?>
 <?= $this->render('include/modal/select-city'); ?>
 
-<?php //= Alert::widget(); ?>
+<?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
 
 <div class="wrap-page">
