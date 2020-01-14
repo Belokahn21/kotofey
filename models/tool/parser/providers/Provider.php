@@ -56,8 +56,6 @@ class Provider implements ProviderInterface
 		$product->code = $dom->getElementsByTagName('strong')->item(2)->nodeValue;
 		$product->weight = $weight;
 
-		Debug::p($product);
-
 		return $product;
 	}
 }
