@@ -25,6 +25,7 @@ class CatalogFilterWidget extends Widget
         $listType = InformersValues::find()->where(['informer_id' => '2', 'active' => true])->all();
         $listLines = InformersValues::find()->where(['informer_id' => '3', 'active' => true])->all();
         $listTaste = InformersValues::find()->where(['informer_id' => '4', 'active' => true])->all();
+		$test = InformersValues::find()->where(['informer_id' => '8', 'active' => true])->all();
 
         return $this->render($this->template, [
             'filterModel' => $filterModel,
@@ -32,6 +33,7 @@ class CatalogFilterWidget extends Widget
             'listCompany' => $listCompany,
             'listLines' => $listLines,
             'listTaste' => $listTaste,
+            'test' => $test,
         ]);
     }
 }

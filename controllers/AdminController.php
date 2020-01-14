@@ -176,8 +176,6 @@ class AdminController extends Controller
         }
 
         if (Yii::$app->request->get('action') == 'copy') {
-
-
             if (Yii::$app->request->post('action') == 'Копировать') {
                 $model->id = null;
                 $model->article = null;

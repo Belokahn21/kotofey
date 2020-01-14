@@ -11,6 +11,7 @@ use yii\helpers\Json;
 
 /* @var $model \app\models\entity\Product */
 /* @var $modelDelivery \app\models\entity\ProductOrder */
+/* @var $properties \app\models\entity\ProductProperties[] */
 
 ?>
 
@@ -141,19 +142,18 @@ use yii\helpers\Json;
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
         <ul style="list-style: none; margin: 0; padding: 0;">
-			<?php /* @var $property \app\models\entity\ProductProperties */ ?>
 			<?php try { ?>
                 <ul style="list-style: none; margin: 0; padding: 0;">
 					<?php foreach ($properties as $property): ?>
 						<?php if ($property->type == 1): ?>
-							<?php $value = ProductPropertiesValues::findOne([
+							<?php $value = ProductPropertiesValues::findAll([
 								'product_id' => $model->id,
 								'property_id' => $property->id
 							]);
 							if ($value):
-								$model->properties[$property->id] = $value->value;
+								$model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
 							endif; ?>
-							<?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name'), ['prompt' => $property->name])->label($property->name); ?>
+							<?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name'), ['prompt' => $property->name, 'multiple' => (boolean)$property->multiple])->label($property->name); ?>
 						<?php else: ?>
 							<?php if ($value = ProductPropertiesValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
 								<?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
