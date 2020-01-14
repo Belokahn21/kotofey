@@ -58,9 +58,6 @@ class OrdersItems extends ActiveRecord
 
 		/* @var $item OrdersItems */
 		foreach (Basket::findAll() as $item) {
-
-			Debug::printFile($item);
-
 			$item->order_id = $this->order_id;
 
 			if ($item->validate()) {

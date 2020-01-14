@@ -121,10 +121,9 @@ echo $this->render('modal/product-modal-payment');
 					]); ?>
 
                     <hr/>
-					<?= WeightBuyWidget::widget([
+					<?php /* WeightBuyWidget::widget([
 						'product_id' => $product->id
-					]); ?>
-                    <hr/>
+					]); */ ?>
 
                     <ul class="product-pluses">
                         <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-delivery">

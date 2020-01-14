@@ -32,13 +32,7 @@ class Basket extends Model
 
 	public function add(OrdersItems $item)
 	{
-		if ($item->product_id) {
-			//товар
-			$_SESSION['basket'][$item->product_id] = $item;
-		} else {
-			//услуга
-			$_SESSION['basket'][] = $item;
-		}
+		$_SESSION['basket'][$item->product_id] = $item;
 	}
 
 	public function delete($product_id)

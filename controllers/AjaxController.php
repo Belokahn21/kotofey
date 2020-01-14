@@ -132,46 +132,6 @@ class AjaxController extends Controller
         return true;
     }
 
-    public function actionTobasket()
-    {
-        if (\Yii::$app->request->isPost) {
-
-            $POST = \Yii::$app->request->post();
-            $product = Product::findOne($POST['id']);
-            if (($product->count - 1) >= 0) {
-                $basket = new Basket();
-                $basket->product = Product::findOne($POST['id']);
-                $basket->count = 1;
-                $basket->add();
-
-                $result = [
-                    'status' => true,
-                    'htmlData' => $this->renderFile('@app/views/ajax/basket.php'),
-                ];
-            } else {
-                $result = [
-                    'status' => false,
-                ];
-            }
-
-
-            return Json::encode($result);
-        } else {
-
-            $GET = \Yii::$app->request->get();
-            $product = Product::findOne($GET['id']);
-            if (($product->count - 1) >= 0) {
-
-                $basket = new Basket();
-                $basket->product = Product::findOne($GET['id']);
-                $basket->count = 1;
-                $basket->add();
-
-            }
-
-        }
-    }
-
     public function actionRemovetodo()
     {
         $POST = \Yii::$app->request->post();
@@ -373,31 +333,5 @@ class AjaxController extends Controller
 
 
         return Json::encode($response);
-    }
-
-    public function actionBuyWeight()
-    {
-        if (!\Yii::$app->request->isAjax) {
-            return false;
-        }
-
-        $request_data = $_POST;
-        $product_id = $request_data['product_id'];
-
-        $product = Product::findOne($product_id);
-        if (!$product) {
-            throw new HttpException(404, 'Элемент не найден');
-        }
-
-        // todo: проверка на возможность покупать на разнавес по свойству is_wegiht
-
-        $summary_price = ProductHelper::getPriceByWeight($product, $request_data['weight']);
-
-        $data = array(
-            'summary_price' => $summary_price,
-        );
-
-
-        return Json::encode($data);
     }
 }

@@ -7,8 +7,5 @@
 //= block/cart
 //= block/favorite
 //= block/catalog-filter
-//= block/buy-weight
-
-
 
 $("#filter-form-id").catalogFilter();
