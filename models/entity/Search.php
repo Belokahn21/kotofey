@@ -6,6 +6,7 @@ namespace app\models\entity;
 use app\models\tool\Debug;
 use app\models\tool\Text;
 use yii\base\Model;
+use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
 
 class Search extends Model
@@ -40,7 +41,7 @@ class Search extends Model
 		return $products->all();
 	}
 
-	public function setFilter($products)
+	public function setFilter(ActiveQuery $products)
 	{
 		if (!empty($this->search)) {
 
@@ -49,9 +50,6 @@ class Search extends Model
 			$SearchQuery->text = $phrase;
 			if (!\Yii::$app->user->isGuest) {
 				$SearchQuery->user_id = \Yii::$app->user->id;
-			}
-			if ($SearchQuery->validate()) {
-				$SearchQuery->save();
 			}
 			$words = explode(" ", $phrase);
 
@@ -66,15 +64,12 @@ class Search extends Model
 			}
 
 		}
-//        if (!empty($this->category)) {
-//            $products->andWhere(['category' => $this->category]);
-//        }
-//        if (!empty($this->pricefrom)) {
-//            $products->andWhere(['>', 'price', $this->pricefrom]);
-//        }
-//        if (!empty($this->priceto)) {
-//            $products->andWhere(['<', 'price', $this->priceto]);
-//        }
+
+		$SearchQuery->count_find = $products->count();
+
+		if ($SearchQuery->validate()) {
+			$SearchQuery->save();
+		}
 
 		return $products;
 

@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property string $text
  * @property int $user_id
+ * @property int $count_find
  * @property int $created_at
  * @property int $updated_at
  *
@@ -34,7 +35,7 @@ class SearchQuery extends \yii\db\ActiveRecord
 		return [
 			[['text'], 'required'],
 			[['text'], 'string'],
-			[['user_id', 'created_at', 'updated_at'], 'integer'],
+			[['user_id', 'created_at', 'updated_at', 'count_find'], 'integer'],
 		];
 	}
 
@@ -54,6 +55,7 @@ class SearchQuery extends \yii\db\ActiveRecord
 			'id' => 'ID',
 			'text' => 'Поисковая фраза',
 			'user_id' => 'User ID',
+			'count_find' => 'Количество найденых товаров',
 			'created_at' => 'Дата создания',
 			'updated_at' => 'Дата обновления',
 		];

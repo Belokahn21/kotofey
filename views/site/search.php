@@ -57,7 +57,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
                                 </div>
 
                                 <div class="product-detail-calc-element">
-                                    <input type="text" class="product-detail-calc-count" name="count" placeholder="1" value="<?= Basket::findOne($product->id)->getCount(); ?>">
+                                    <input type="text" class="product-detail-calc-count" name="count" placeholder="1" value="<?= Basket::findOne($product->id)->count; ?>">
                                 </div>
 
                                 <div class="product-detail-calc-element">
