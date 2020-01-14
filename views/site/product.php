@@ -71,8 +71,8 @@ echo $this->render('modal/product-modal-payment');
                         <i class="far fa-star"></i>
                         <i class="far fa-star"></i>
                     </div>
-                    <div class="product-favorite add-to-favorite" data-product="<?= $product->id; ?>"><i class="<?= ((Favorite::getInstance()->exist($product->id)) ? 'fas' : 'far'); ?> fa-heart"></i>В избранное</div>
-                    <div class="product-favorite add-to-compare " data-product="<?= $product->id; ?>">
+                    <div class="product-favorite add-to-favorite" onclick="ym(55089223, 'reachGoal', 'favorite'); return true;" data-product="<?= $product->id; ?>"><i class="<?= ((Favorite::getInstance()->exist($product->id)) ? 'fas' : 'far'); ?> fa-heart"></i>В избранное</div>
+                    <div class="product-favorite add-to-compare" onclick="ym(55089223, 'reachGoal', 'compare'); return true;"  data-product="<?= $product->id; ?>">
                         <i class="fas fa-balance-scale"></i>Сравнить
                     </div>
 
