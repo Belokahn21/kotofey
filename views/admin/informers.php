@@ -9,22 +9,15 @@ use yii\grid\GridView;
 $this->title = Title::showTitle("Справочники"); ?>
     <section>
         <h1 class="title">Справочники</h1>
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-        <div class="tabs-container">
-            <ul class="tabs">
-                <li class="tab-link current" data-tab="tab-1">Основное</li>
-            </ul>
-
-            <div id="tab-1" class="tab-content current">
-				<?= $form->field($model, 'name') ?>
-				<?= $form->field($model, 'description')->textarea(); ?>
-				<?= $form->field($model, 'sort')->textInput() ?>
-            </div>
-
-        </div>
+		<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+		<?= $this->render('_forms/_informers', [
+			'model' => $model,
+			'form' => $form,
+		]); ?>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-<?php ActiveForm::end(); ?>
+		<?php ActiveForm::end(); ?>
     </section>
+    <h2 class="title">Список справочников</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
 	'filterModel' => $searchModel,
@@ -37,7 +30,7 @@ $this->title = Title::showTitle("Справочники"); ?>
 			'attribute' => 'name',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return Html::a($model->name, '/admin/catalog/' . $model->id . '/');
+				return Html::a($model->name, Url::to(['admin/informers', 'id' => $model->id]));
 			}
 		],
 		[
