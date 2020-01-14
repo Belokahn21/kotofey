@@ -51,12 +51,6 @@ use yii\widgets\Pjax;
             'id' => 'id_list_taste',
             'class' => 'checkbox_list',
         ]); ?>
-    <?php echo $form->field($filterModel, 'test')->checkboxList(ArrayHelper::map($test, 'id', 'name'),
-        [
-            'prompt' => 'test',
-            'id' => 'id_list_test',
-            'class' => 'checkbox_list',
-        ]); ?>
 
     <?= Html::submitButton('Применить', ['class' => 'btn-main show-catalog-filter run']); ?>
     <?php ActiveForm::end() ?>
