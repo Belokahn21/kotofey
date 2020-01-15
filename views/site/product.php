@@ -95,7 +95,7 @@ echo $this->render('modal/product-modal-payment');
                         получаете <span class="product-discount__value"><?= DiscountHelper::calcBonus($product->price); ?></span> бонусов
                     </div>
 
-                    <div class="product-button product-add-basket <?= (!Basket::getInstance()->exist($product->id)) ? '' : 'hide'; ?>" data-product="<?= $product->id; ?>">
+                    <div onclick="ym(55089223, 'reachGoal', 'basket'); return true;" class="product-button product-add-basket <?= (!Basket::getInstance()->exist($product->id)) ? '' : 'hide'; ?>" data-product="<?= $product->id; ?>">
                         В корзину
                     </div>
 
