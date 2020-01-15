@@ -26,7 +26,7 @@
 
 .checkout__summary {
   border-bottom: 1px silver solid;
-  padding: 0 0 40px 0
+  padding: 0;
 }
 
 .checkout__title {
@@ -153,9 +153,16 @@
 }
 
 .count__bouns {
-  color: $mainActiveColor!important;
+  color: $mainActiveColor !important;
   border-bottom: 1px $mainActiveColor dashed;
   text-decoration: none !important;
   margin: 0;
   padding: 0;
+}
+
+.delivery-alert {
+  text-transform: uppercase;
+  color: $mainActiveColor;
+  font-size: 14px;
+  margin: 10px 0;
 }
