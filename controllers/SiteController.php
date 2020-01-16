@@ -361,7 +361,8 @@ class SiteController extends Controller
 
     public function actionBasket()
     {
-        Attributes::canonical(System::protocol() . "://" . System::domain() . "/basket/");
+		Attributes::metaDescription('Корзина товаров в интернет магазине Котофей');
+		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
         return $this->render('basket');
     }
 
@@ -621,6 +622,10 @@ class SiteController extends Controller
                 }
             }
         }
+
+        Attributes::metaDescription('Вход на сайт интернет магазина Котофей');
+		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+
         return $this->render('auth/signin', [
             'model' => $model,
         ]);
@@ -1022,6 +1027,8 @@ class SiteController extends Controller
 
     public function actionCompare()
     {
+		Attributes::metaDescription('Сравнение товаров в интернет магазине Котофей');
+		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
         return $this->render('compare');
     }
 }
