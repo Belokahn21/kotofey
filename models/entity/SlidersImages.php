@@ -23,20 +23,9 @@ use yii\db\ActiveRecord;
  */
 class SlidersImages extends ActiveRecord
 {
-    const SCENARIO_INSERT = 'insert';
-    const SCENARIO_UPDATE = 'update';
-
     public static function tableName()
     {
         return "sliders_images";
-    }
-
-    public function scenarios()
-    {
-        return [
-            self::SCENARIO_INSERT => ['image', 'sort', 'active', 'text', 'description', 'slider_id', 'link'],
-            self::SCENARIO_UPDATE => ['image', 'sort', 'active', 'text', 'description', 'slider_id', 'link'],
-        ];
     }
 
     public function behaviors()
@@ -64,7 +53,7 @@ class SlidersImages extends ActiveRecord
 
             [['link'], 'string'],
 
-            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
     }
 

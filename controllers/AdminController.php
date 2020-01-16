@@ -1117,10 +1117,10 @@ class AdminController extends Controller
     {
         if ($id) {
             $model = SlidersImages::findOne($id);
-            $model->scenario = Providers::SCENARIO_UPDATE;
             if (Yii::$app->request->isPost) {
                 if ($model->load(Yii::$app->request->post())) {
                     if ($model->update()) {
+						Alert::setSuccessNotify('Изображение обновлено');
                         return $this->refresh();
                     }
                 }
@@ -1130,13 +1130,14 @@ class AdminController extends Controller
             ]);
         }
 
-        $model = new SlidersImages(['scenario' => SlidersImages::SCENARIO_INSERT]);
+        $model = new SlidersImages();
         $searchModel = new SlidersImagesSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
                 if ($model->save()) {
+                	Alert::setSuccessNotify('Изображение к слайду добавлено');
                     return $this->refresh();
                 }
             }

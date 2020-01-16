@@ -8,6 +8,8 @@ use app\models\entity\Delivery;
 use yii\helpers\Url;
 use app\models\entity\Product;
 
+/* @var $model \app\models\entity\Order */
+
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -24,7 +26,14 @@ use app\models\entity\Product;
 		<?= $form->field($model, 'payment_id')->dropDownList(ArrayHelper::map(Payment::find()->all(), 'id', 'name'), ['prompt' => 'Способ оплаты']); ?>
 		<?= $form->field($model, 'delivery_id')->dropDownList(ArrayHelper::map(Delivery::find()->all(), 'id', 'name'), ['prompt' => 'Способ доставки']); ?>
 		<?= $form->field($model, 'is_paid')->radioList(array("Не оплачено", "Оплачено")); ?>
-		<?= $form->field($model, 'comment')->textarea(); ?>
+        <div class="row">
+            <div class="col-sm-6">
+				<?= $form->field($model, 'notes')->textarea(); ?>
+            </div>
+            <div class="col-sm-6">
+				<?= $form->field($model, 'comment')->textarea(); ?>
+            </div>
+        </div>
     </div>
     <div class="tab-pane fade" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
 		<?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Покупатель']); ?>
