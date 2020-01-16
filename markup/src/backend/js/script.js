@@ -40,7 +40,7 @@ $(document).ready(function () {
 
 
     /* реплейсер - старт */
-    $('.feed-replace').change(function () {
+    $('#feed-replace').change(function () {
         var $this = $(this);
 
         var current_text = $this.val();
