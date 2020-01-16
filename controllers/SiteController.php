@@ -197,7 +197,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $providers = InformersValues::find()->where(['active' => true, 'informer_id' => 1])->all();
+        $providers = InformersValues::find()->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC])->all();
         $news = News::find()->limit(3)->orderBy(['created_at' => SORT_DESC])->all();
 
         Attributes::metaDescription("Зоотовары онлайн с доставкой по Барнаулу и по всей России. Всегда свежие товары и по низкой цене!");
@@ -361,8 +361,8 @@ class SiteController extends Controller
 
     public function actionBasket()
     {
-		Attributes::metaDescription('Корзина товаров в интернет магазине Котофей');
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+        Attributes::metaDescription('Корзина товаров в интернет магазине Котофей');
+        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
         return $this->render('basket');
     }
 
@@ -624,7 +624,7 @@ class SiteController extends Controller
         }
 
         Attributes::metaDescription('Вход на сайт интернет магазина Котофей');
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
         return $this->render('auth/signin', [
             'model' => $model,
@@ -1027,8 +1027,8 @@ class SiteController extends Controller
 
     public function actionCompare()
     {
-		Attributes::metaDescription('Сравнение товаров в интернет магазине Котофей');
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+        Attributes::metaDescription('Сравнение товаров в интернет магазине Котофей');
+        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
         return $this->render('compare');
     }
 }
