@@ -100,6 +100,9 @@ use yii\helpers\Json;
         <div class="form-element">
 			<?= $form->field($model, 'seo_description')->textarea(); ?>
         </div>
+        <div class="form-element">
+			<?= $form->field($model, 'feed')->textarea(); ?>
+        </div>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">

@@ -21,6 +21,7 @@ use yii\web\UploadedFile;
  * @property integer $active
  * @property string $name
  * @property string $description
+ * @property string $feed
  * @property string $seo_description
  * @property string $seo_keywords
  * @property string $image
@@ -52,8 +53,8 @@ class Product extends \yii\db\ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order'],
-			self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order'],
+			self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+			self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
 		];
 	}
 
@@ -64,7 +65,7 @@ class Product extends \yii\db\ActiveRecord
 
 			[['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active'], 'integer'],
 
-			[['images', 'code', 'description'], 'string'],
+			[['images', 'code', 'description', 'feed'], 'string'],
 
 			['description', 'string', 'min' => 10],
 
@@ -104,6 +105,7 @@ class Product extends \yii\db\ActiveRecord
 			'has_store' => 'Сохранить в маркете Вконтакте',
 			'created_at' => 'Дата создания',
 			'is_product_order' => 'Товар под заказ',
+			'feed' => 'Поисковой контент',
 		];
 	}
 

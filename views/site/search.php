@@ -3,21 +3,15 @@
 use app\models\entity\Basket;
 use app\models\entity\ProductPropertiesValues;
 use app\models\helpers\DiscountHelper;
-use yii\helpers\StringHelper;
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
-use yii\helpers\ArrayHelper;
-use app\models\entity\Category;
 use app\models\tool\seo\Title;
-use app\models\entity\Favorite;
-use app\models\tool\Price;
 use app\models\tool\Currency;
+
+/* @var $products \app\models\entity\Product[] */
 
 $this->title = Title::showTitle("Поиск по сайту");
 $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url' => ['/search/']]; ?>
-<? if ($products): ?>
+<?php if ($products): ?>
     <ul class="catalog-list w-100">
-		<?php /* @var $product \app\models\entity\Product */ ?>
 		<?php foreach ($products as $product): ?>
             <li class="catalog-list__item">
 
@@ -76,6 +70,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
             </li>
 		<?php endforeach; ?>
     </ul>
-<? else: ?>
+<?php else: ?>
     К сожаление ничего не нашлось :(
-<? endif; ?>
+<?php endif; ?>

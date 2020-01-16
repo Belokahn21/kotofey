@@ -224,7 +224,6 @@ class SiteController extends Controller
         }
 
         return $this->render('search', [
-            'model' => $model,
             'products' => $products
         ]);
     }

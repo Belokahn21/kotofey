@@ -57,10 +57,12 @@ class Search extends Model
 
 				foreach ($words as $word) {
 					$products->andWhere(['like', 'name', $word]);
+					$products->orWhere(['like', 'feed', $word]);
 				}
 
 			} else {
 				$products->where(['like', 'name', $this->search]);
+				$products->orWhere(['like', 'feed', $this->search]);
 			}
 
 		}
@@ -72,12 +74,6 @@ class Search extends Model
 		}
 
 		return $products;
-
-	}
-
-
-	private function formatSearchPhrase()
-	{
 
 	}
 }
