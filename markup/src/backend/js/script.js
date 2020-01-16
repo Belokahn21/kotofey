@@ -53,5 +53,7 @@ $(document).ready(function () {
         $this.val(current_text.replace(/0, /g, ''));
     });
     /* реплейсер - конец */
+
+
 });
 
