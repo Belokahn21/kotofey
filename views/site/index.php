@@ -19,7 +19,7 @@ $this->title = Title::showTitle("зоотовары для животных в �
 
 <?php if ($providers): ?>
     <section>
-        <div class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</div>
+        <h1 class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</h1>
         <ul class="homepage-providers">
 			<?php foreach ($providers as $provider): ?>
                 <li class="homepage-providers__item">
