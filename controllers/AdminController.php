@@ -338,9 +338,6 @@ class AdminController extends Controller
 
                 if ($model->load(\Yii::$app->request->post())) {
 
-                    if (!empty($model->new_password)) {
-                        $model->password;
-                    }
                     if ($model->validate()) {
 
                         if (!empty($model->new_password)) {
