@@ -612,7 +612,7 @@ class SiteController extends Controller
                 if ($model->validate()) {
 
                     $user = User::findByEmail($model->email);
-                    if ($user instanceof User) {
+                    if ($user instanceof User && $user->validatePassword($model->password)) {
                         if (Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration'])) {
                             Alert::setSuccessNotify('Успешная авторизация');
                             return $this->redirect('/');
