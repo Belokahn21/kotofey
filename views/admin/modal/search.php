@@ -16,6 +16,7 @@
                         <div class="search-info__item-date">Дата</div>
                         <div class="search-info__item-user">Посетитель</div>
                         <div class="search-info__item-query">Запрос</div>
+                        <div class="search-info__item-count">Количество</div>
                         <div class="search-info__item-ip">IP</div>
                     </li>
 					<?php foreach ($last_search as $item): ?>
@@ -27,6 +28,7 @@
 								<?php endif; ?>
                             </div>
                             <div class="search-info__item-query"><?= $item->text; ?></div>
+                            <div class="search-info__item-count"><?= $item->count_find; ?></div>
                             <div class="search-info__item-ip">-</div>
                         </li>
 					<?php endforeach; ?>

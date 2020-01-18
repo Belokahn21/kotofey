@@ -13,11 +13,12 @@ use yii\helpers\ArrayHelper;
 </nav>
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-		<?= $form->field($model, 'active')->radioList(['Нет', 'Да']) ?>
+		<?= $form->field($model, 'active')->radioList(['Нет', 'Да']); ?>
 		<?= $form->field($model, 'slider_id')->dropDownList(ArrayHelper::map(Sliders::find()->all(), 'id', 'name'), ['prompt' => 'Слайдер']); ?>
-		<?= $form->field($model, 'text')->textInput() ?>
-		<?= $form->field($model, 'description')->textInput() ?>
-		<?= $form->field($model, 'sort')->textInput() ?>
+		<?= $form->field($model, 'text')->textInput(); ?>
+		<?= $form->field($model, 'link')->textInput(); ?>
+		<?= $form->field($model, 'description')->textInput(); ?>
+		<?= $form->field($model, 'sort')->textInput(); ?>
 		<?= $form->field($model, 'image')->fileInput(); ?>
     </div>
     <!--	<div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">-->

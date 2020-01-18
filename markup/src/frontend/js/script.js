@@ -133,4 +133,11 @@ $(document).ready(function () {
             inst.hide();
         }
     });
+
+    $('.order-time__item').click(function (e) {
+        $('.order-time__item').each(function () {
+            $(this).removeClass('active');
+        });
+        $(this).addClass('active')
+    });
 });

@@ -17,6 +17,22 @@ $this->title = Title::showTitle("зоотовары для животных в �
     'use_carousel' => true
 ]) ?>
 
+<?php if ($providers): ?>
+    <section>
+        <h1 class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</h1>
+        <ul class="homepage-providers">
+			<?php foreach ($providers as $provider): ?>
+                <li class="homepage-providers__item">
+                    <a class="homepage-providers__link" href="<?= $provider->link; ?>">
+                        <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>" title="<?= $provider->name; ?>" alt="<?= $provider->name; ?>">
+                        <div class="homepage-providers__detail">К ассортимену</div>
+                    </a>
+                </li>
+			<?php endforeach; ?>
+        </ul>
+    </section>
+<?php endif; ?>
+
 <ul class="advantages">
     <li class="advantages-item">
         <div class="advantage-title">Делаете заказ</div>
@@ -34,23 +50,6 @@ $this->title = Title::showTitle("зоотовары для животных в �
         <i class="fas fa-gifts"></i>
     </li>
 </ul>
-
-<div class="three-line">
-    <div class="social-wrap">
-        <div class="block-title">Мы в социальных сетях</div>
-        <ul class="social">
-            <li class="social-item">
-                <div class="social-item__image-wrap">
-                    <img src="/web/upload/images/inst.png">
-                </div>
-                <div class="social-item__title">Профиль Instagramm</div>
-                <div class="social-item__link">
-                    <a class="social-item__link-a" href="<?= SiteSettings::getValueByCode('insta_link'); ?>" target="_blank">Перейти</a>
-                </div>
-            </li>
-        </ul>
-    </div>
-</div>
 
 <div class="index-news__wrap">
     <h2 class="homepage-providers__title">Интересные новости</h2>
@@ -74,18 +73,19 @@ $this->title = Title::showTitle("зоотовары для животных в �
     </div>
 </div>
 
-<?php if ($providers): ?>
-    <section>
-        <div class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</div>
-        <ul class="homepage-providers">
-            <?php foreach ($providers as $provider): ?>
-                <li class="homepage-providers__item">
-                    <a class="homepage-providers__link" href="<?= $provider->link; ?>/">
-                        <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>" title="<?= $provider->name; ?>" alt="<?= $provider->name; ?>">
-                        <div class="homepage-providers__detail">К ассортимену</div>
-                    </a>
-                </li>
-            <?php endforeach; ?>
+<div class="three-line">
+    <div class="social-wrap">
+        <div class="block-title">Мы в социальных сетях</div>
+        <ul class="social">
+            <li class="social-item">
+                <div class="social-item__image-wrap">
+                    <img src="/web/upload/images/inst.png">
+                </div>
+                <div class="social-item__title">Профиль Instagramm</div>
+                <div class="social-item__link">
+                    <a class="social-item__link-a" href="<?= SiteSettings::getValueByCode('insta_link'); ?>" target="_blank">Перейти</a>
+                </div>
+            </li>
         </ul>
-    </section>
-<?php endif; ?>
+    </div>
+</div>

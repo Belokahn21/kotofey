@@ -37,5 +37,23 @@ $(document).ready(function () {
     /* поаказать меню -- конец */
 
     $('[data-toggle="tooltip"]').tooltip();
+
+
+    /* реплейсер - старт */
+    $('#feed-replace').change(function () {
+        var $this = $(this);
+
+        var current_text = $this.val();
+        $this.val(current_text.replace(/\t/g, ', '));
+
+        current_text = $this.val();
+        $this.val(current_text.replace(/, , /g, ', '));
+
+        current_text = $this.val();
+        $this.val(current_text.replace(/0, /g, ''));
+    });
+    /* реплейсер - конец */
+
+
 });
 

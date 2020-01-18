@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  *
  * @property integer $id
  * @property integer $active
+ * @property boolean $multiple
  * @property integer $need_show
  * @property integer $sort
  * @property integer $type
@@ -48,9 +49,13 @@ class ProductProperties extends ActiveRecord
 
             [['active','need_show', 'sort', 'type', 'informer_id'], 'integer'],
 
+            [['multiple'], 'boolean'],
+
             [['active'], 'default', 'value' => 1],
 
             [['need_show'], 'default', 'value' => 1],
+
+            [['multiple'], 'default', 'value' => false],
 
             [['sort'], 'default', 'value' => 500],
         ];
@@ -64,6 +69,7 @@ class ProductProperties extends ActiveRecord
             'need_show' => 'Выводить на сайте',
             'sort' => 'Сортировка',
             'type' => 'Тип',
+            'multiple' => 'Множественный выбор',
             'informer_id' => 'ID справочника',
         ];
     }

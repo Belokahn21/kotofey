@@ -14,8 +14,8 @@ use app\models\entity\user\Billing;
 ?>
 
 <?= $this->render('../bonus', [
-    'form' => $form,
-    'DiscountModel' => $discount_model
+	'form' => $form,
+	'DiscountModel' => $discount_model
 ]); ?>
 
 <div class="checkout-block">
@@ -37,14 +37,22 @@ use app\models\entity\user\Billing;
 
 <div class="checkout-block">
     <div class="checkout-block__title">
-        Доставка и оплата
+        Дата доставки
     </div>
     <div class="row">
-        <div class="col-sm-6">
-            <?= $form->field($order, 'delivery_id')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'), ['prompt' => 'Вариант доставки'])->label(false); ?>
+        <div class="col-sm-12">
+            <input type="text" class="js-datepicker checkout__input">
         </div>
-        <div class="col-sm-6">
-            <?= $form->field($order, 'payment_id')->dropDownList(ArrayHelper::map($payment, 'id', 'name'), ['prompt' => 'Вариант оплаты'])->label(false); ?>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <ul class="order-time">
+                <li class="order-time__item">с 12.00 до 13.00</li>
+                <li class="order-time__item">с 12.00 до 13.00</li>
+                <li class="order-time__item">с 12.00 до 13.00</li>
+                <li class="order-time__item">с 12.00 до 13.00</li>
+                <li class="order-time__item">с 12.00 до 13.00</li>
+            </ul>
         </div>
     </div>
 </div>
@@ -56,28 +64,12 @@ use app\models\entity\user\Billing;
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <?= $form->field($order, 'select_billing')->dropDownList(ArrayHelper::map(Billing::find()->where(['user_id' => Yii::$app->user->id])->all(), 'id', 'test'), ['prompt' => 'Указать адрес доставки'])->label(false); ?>
+			<?= $form->field($order, 'select_billing')->dropDownList(ArrayHelper::map(Billing::find()->where(['user_id' => Yii::$app->user->id])->all(), 'id', 'test'), ['prompt' => 'Указать адрес доставки'])->label(false); ?>
         </div>
     </div>
-    <?php /*
-    <div class="row">
-        <div class="col-sm-3">
-            <?= $form->field($billing, 'city')->textInput(['class' => 'checkout__input', 'placeholder' => 'Город'])->label(false); ?>
-        </div>
-        <div class="col-sm-3">
-            <?= $form->field($billing, 'street')->textInput(['class' => 'checkout__input', 'placeholder' => 'Улица'])->label(false); ?>
-        </div>
-        <div class="col-sm-3">
-            <?= $form->field($billing, 'home')->textInput(['class' => 'checkout__input', 'placeholder' => 'Дом'])->label(false); ?>
-        </div>
-        <div class="col-sm-3">
-            <?= $form->field($billing, 'house')->textInput(['class' => 'checkout__input', 'placeholder' => 'Квартира'])->label(false); ?>
-        </div>
-    </div>
- */ ?>
     <div class="row">
         <div class="col-sm-12">
-            <textarea class="checkout__textarea" placeholder="Комментарий к заказу"></textarea>
+			<?= $form->field($order, 'comment')->textarea(['class' => 'checkout__textarea', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
         </div>
     </div>
 </div>

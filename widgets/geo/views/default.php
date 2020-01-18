@@ -12,7 +12,7 @@ use yii\bootstrap\Modal;
 ]); ?>
 <ul class="city-list">
 	<?php foreach ($cities as $city): ?>
-        <li><a href=""><?= $city->name; ?></a></li>
+        <li><a rel="nofollow" href=""><?= $city->name; ?></a></li>
 	<?php endforeach ?>
 </ul>
 <?php Modal::end(); ?>

@@ -70,7 +70,7 @@ use yii\helpers\ArrayHelper;
     </div>
     <div class="row">
         <div class="col-sm-12">
-            <textarea class="checkout__textarea" placeholder="Комментарий к заказу"></textarea>
+			<?= $form->field($order, 'comment')->textarea(['class' => 'checkout__textarea', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
         </div>
     </div>
 </div>

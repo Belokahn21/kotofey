@@ -52,7 +52,7 @@ class Order extends ActiveRecord
 
             [['user_id'], 'required', 'message' => '{attribute} необходимо указать'],
 
-            [['comment', 'promo_code'], 'string'],
+            [['comment', 'promo_code','notes'], 'string'],
 
             [['product_id'], 'safe'],
 
@@ -117,6 +117,7 @@ class Order extends ActiveRecord
             'cash' => 'Сумма заказа',
             'created_at' => 'Дата создания',
             'comment' => 'Комментарий к заказу',
+            'notes' => 'Заметки(Для админов)',
             'product_id' => 'Товар',
             'promo_code' => 'Промо код',
             'select_billing' => 'Адрес доставки',

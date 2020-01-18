@@ -38,7 +38,7 @@ class InformersValues extends ActiveRecord
 
 			[['name', 'description', 'link'], 'string'],
 
-			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg, jpeg'],
+			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
 		];
 	}
 

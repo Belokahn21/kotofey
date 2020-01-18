@@ -37,7 +37,7 @@ tests/_support/_generated
 /backup
 composer.lock
 markup/build/
-markup/node_modules/
-markup/package-lock.json
+node_modules
 /application/
 yii
+package-lock.json

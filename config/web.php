@@ -86,7 +86,6 @@ $config = [
             'rules' => [
 //				'<module:vaccination>' => '<module>/default/index',
                 'gii' => 'gii',
-                'yandex/export' => 'yandex/export',
                 'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
                 '<controller:(admin|ajax)>/' => '<controller>/index',
                 '<controller:(admin|ajax)>' => '<controller>/<action>',

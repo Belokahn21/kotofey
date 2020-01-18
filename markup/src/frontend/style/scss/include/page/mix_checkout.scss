@@ -26,7 +26,7 @@
 
 .checkout__summary {
   border-bottom: 1px silver solid;
-  padding: 0 0 40px 0
+  padding: 0 0 20px 0;
 }
 
 .checkout__title {
@@ -105,11 +105,8 @@
   margin: 5px 0 35px 0;
 
   &__title {
-    //color: white;
-    //background: #2d0c03;
     color: $mainActiveColor;
     background: #f9f9f9;
-    //border-bottom: 1px silver solid;
     padding: 10px;
     font-weight: bold;
   }
@@ -153,9 +150,16 @@
 }
 
 .count__bouns {
-  color: $mainActiveColor!important;
+  color: $mainActiveColor !important;
   border-bottom: 1px $mainActiveColor dashed;
   text-decoration: none !important;
   margin: 0;
   padding: 0;
+}
+
+.delivery-alert {
+  text-transform: uppercase;
+  color: $mainActiveColor;
+  font-size: 14px;
+  margin: 10px 0;
 }

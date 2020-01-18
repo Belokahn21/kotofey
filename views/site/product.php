@@ -71,8 +71,8 @@ echo $this->render('modal/product-modal-payment');
                         <i class="far fa-star"></i>
                         <i class="far fa-star"></i>
                     </div>
-                    <div class="product-favorite add-to-favorite" data-product="<?= $product->id; ?>"><i class="<?= ((Favorite::getInstance()->exist($product->id)) ? 'fas' : 'far'); ?> fa-heart"></i>В избранное</div>
-                    <div class="product-favorite add-to-compare " data-product="<?= $product->id; ?>">
+                    <div class="product-favorite add-to-favorite" onclick="ym(55089223, 'reachGoal', 'favorite'); return true;" data-product="<?= $product->id; ?>"><i class="<?= ((Favorite::getInstance()->exist($product->id)) ? 'fas' : 'far'); ?> fa-heart"></i>В избранное</div>
+                    <div class="product-favorite add-to-compare" onclick="ym(55089223, 'reachGoal', 'compare'); return true;"  data-product="<?= $product->id; ?>">
                         <i class="fas fa-balance-scale"></i>Сравнить
                     </div>
 
@@ -95,7 +95,7 @@ echo $this->render('modal/product-modal-payment');
                         получаете <span class="product-discount__value"><?= DiscountHelper::calcBonus($product->price); ?></span> бонусов
                     </div>
 
-                    <div class="product-button product-add-basket <?= (!Basket::getInstance()->exist($product->id)) ? '' : 'hide'; ?>" data-product="<?= $product->id; ?>">
+                    <div onclick="ym(55089223, 'reachGoal', 'basket'); return true;" class="product-button product-add-basket <?= (!Basket::getInstance()->exist($product->id)) ? '' : 'hide'; ?>" data-product="<?= $product->id; ?>">
                         В корзину
                     </div>
 
@@ -121,10 +121,9 @@ echo $this->render('modal/product-modal-payment');
 					]); ?>
 
                     <hr/>
-					<?= WeightBuyWidget::widget([
+					<?php /* WeightBuyWidget::widget([
 						'product_id' => $product->id
-					]); ?>
-                    <hr/>
+					]); */ ?>
 
                     <ul class="product-pluses">
                         <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-delivery">

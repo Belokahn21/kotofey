@@ -19,6 +19,7 @@ class NotifyService
 		$access_token = '9b20f6f75e3d6afce2cfa6b16024dad5fadfbdc83cf92e57c7897a3310b4a5f17b7e0ce4ccd708fec1674';
 		$vk = new VKApiClient();
 		if ($access_token) {
+			$Order = Order::findOne($order_id);
 			$Client = User::findOne(Order::findOne($order_id)->user_id);
 			$ClientBilling = Billing::findByUser($Client->id);
 			$delivery_info = "";
@@ -35,12 +36,13 @@ class NotifyService
 				'random_id' => rand(1, 999999),
 				'peer_id' => Yii::$app->params['vk']['adminVkontakteId'],
 				'message' => sprintf("Новый заказ на сумму: %sр.\n
+				Комментарий к заказу: %s\n
 				Информация о клиенте:
 				- Email: %s
 				- Телефон: %s\n
 				Доставка: %s\n
 				Подробнее: https://kotofey.store/admin/order/%d/",
-					Price::format(OrderStatistic::orderSummary($order_id)), $Client->email, $Client->phone, substr($delivery_info, 0, -2), $order_id),
+					Price::format(OrderStatistic::orderSummary($order_id)), $Order->comment, $Client->email, $Client->phone, substr($delivery_info, 0, -2), $order_id),
 			]);
 
 		}

@@ -109,9 +109,9 @@ $this->title = Title::showTitle("Товары"); ?>
 			'format' => 'raw',
 			'filter' => ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'),
 			'value' => function ($model) {
-				$category = Category::findOne($model->category);
+				$category = Category::findOne($model->category_id);
 				if ($category) {
-					return Html::a($category->name, '/admin/category/' . $model->id . '/', ['target' => '_blank']);
+					return Html::a($category->name, '/admin/category/' . $model->category_id . '/', ['target' => '_blank']);
 				}
 				return "Без категории";
 			}

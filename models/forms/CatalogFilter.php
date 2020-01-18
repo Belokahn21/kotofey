@@ -19,6 +19,7 @@ class CatalogFilter extends Model
     public $company;
     public $line;
     public $taste;
+    public $test;
     public $weight_from;
     public $weight_to;
 
@@ -27,7 +28,7 @@ class CatalogFilter extends Model
         return [
             [['price_from', 'price_to', 'weight_from', 'weight_to'], 'integer'],
 
-            [['type', 'company', 'line', 'taste'], 'safe'],
+            [['type', 'company', 'line', 'taste','test'], 'safe'],
         ];
     }
 
@@ -42,6 +43,7 @@ class CatalogFilter extends Model
             'weight_to' => 'Вес до',
             'line' => 'Линейка',
             'taste' => 'Вкус',
+            'test' => 'test',
         ];
     }
 
@@ -60,6 +62,7 @@ class CatalogFilter extends Model
                     'type' => 3,
                     'line' => 4,
                     'taste' => 5,
+                    'test' => 9,
                 );
 
                 // set price

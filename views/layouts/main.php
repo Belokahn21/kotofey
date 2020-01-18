@@ -18,7 +18,6 @@ use app\models\entity\Subscribe;
 use app\widgets\search\SearchWidget;
 use app\widgets\cookie\CookieWidget;
 use yii\helpers\Url;
-use app\widgets\notification\NotifyWidget;
 use app\models\services\CompareService;
 
 AppAsset::register($this);
@@ -46,7 +45,7 @@ $this->beginPage() ?>
 <body>
 <?php $this->beginBody() ?>
 
-<?= NotifyWidget::widget(); ?>
+<?php // NotifyWidget::widget(); ?>
 <?= $this->render('include/modal/select-city'); ?>
 
 <?= Alert::widget(); ?>
@@ -65,7 +64,7 @@ $this->beginPage() ?>
             <li class="top-menu__item"><a class="top-menu__link" href="/payment/">Оплата</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="/contacts/">Контакты</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="/about/">О компании</a></li>
-            <li class="top-menu__item"><a class="top-menu__link" href="/support/">Поддержка</a></li>
+            <li class="top-menu__item"><a class="top-menu__link" href="/support/" rel="nofollow">Поддержка</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="<?= Url::to(['site/vacancy']) ?>">Вакансии</a></li>
 			<?php if (Yii::$app->user->isGuest): ?>
                 <li class="top-menu__item"><a class="top-menu__link" href="/signin/">Войти на сайт</li>
@@ -97,7 +96,7 @@ $this->beginPage() ?>
                 <div class="phone-group">
                     <div class="contact-value phone_mask"><?= SiteSettings::getValueByCode('phone_1') ?></div>
                     <span>
-                        <a onclick="ym(55089223, 'reachGoal', 'whatsapp');" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
+                        <a rel="nofollow" onclick="ym(55089223, 'reachGoal', 'whatsapp');" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
                             <img class="contact-block__wa" src="/web/upload/images/whatsapp.png">
                         </a>
                     </span>
@@ -234,9 +233,9 @@ $this->beginPage() ?>
                     <li class="footer-menu__item"><a href="/payment/">Оплата</a></li>
                     <li class="footer-menu__item"><a href="/contacts/">Контакты</a></li>
                     <li class="footer-menu__item"><a href="/about/">О компании</a></li>
-                    <li class="footer-menu__item"><a href="/support/">Поддержка</a></li>
+                    <li class="footer-menu__item"><a href="/support/" rel="nofollow">Поддержка</a></li>
                     <li class="footer-menu__item"><a href="/vacancy/">Вакансии</a></li>
-                    <li class="footer-menu__item"><a href="/profile/">Личный кабинет</a></li>
+                    <li class="footer-menu__item"><a href="/profile/" rel="nofollow">Личный кабинет</a></li>
                     <li class="footer-menu__item"><a href="/news/">Новости</a></li>
                 </ul>
             </div>
@@ -292,7 +291,7 @@ $this->beginPage() ?>
         <li class="requisites___item">ИП Васин К.В.</li>
         <li class="requisites___item">ОГРН: 319222500105168</li>
         <li class="requisites___item">ИНН: 222261129226</li>
-        <li class="requisites___item"><a href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></li>
+        <li class="requisites___item"><a rel="nofollow" href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></li>
     </ul>
 </div>
 
