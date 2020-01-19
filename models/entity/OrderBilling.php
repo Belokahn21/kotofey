@@ -21,7 +21,7 @@ class OrderBilling extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'order_billing';
+        return 'orders_billing';
     }
 
     public function behaviors()
