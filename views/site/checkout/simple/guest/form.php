@@ -62,14 +62,16 @@ use yii\helpers\ArrayHelper;
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 order-time-wrap">
-            <ul class="order-time">
-                <?php foreach ($delivery_time->getTimeList() as $key => $time): ?>
-                    <li data-value="с <?= $key; ?>.00 до <?= $time; ?>.00" class="order-time__item">с <?= $key; ?>.00 до <?= $time; ?>.00</li>
-                <?php endforeach; ?>
-            </ul>
+        <div class="col-sm-12">
+            <div class="order-time-wrap">
+                <ul class="order-time">
+                    <?php foreach ($delivery_time->getTimeList() as $key => $time): ?>
+                        <li data-value="с <?= $key; ?>.00 до <?= $time; ?>.00" class="order-time__item">с <?= $key; ?>.00 до <?= $time; ?>.00</li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?= $form->field($order_date, 'time')->hiddenInput(['class' => 'order-time-input'])->label(false); ?>
         </div>
-        <?= $form->field($order_date, 'time')->hiddenInput(['class' => 'order-time-input'])->label(false); ?>
     </div>
 </div>
 
