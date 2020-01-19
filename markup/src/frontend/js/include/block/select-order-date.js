@@ -10,7 +10,7 @@ var myDatepicker = $('.js-datepicker').datepicker({
                 date: formattedDate
             },
             success: function (data) {
-                $('.order-time-input').val('');
+                $('.order-time-input').val(false);
                 $('.order-time-wrap').html(data);
             }
         });
