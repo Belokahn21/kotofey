@@ -10,6 +10,7 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.8.3",
     "bootstrap": "^4.3.1",
     "browser-sync": "^2.26.7",
     "event-stream": "^4.0.1",
@@ -28,7 +29,14 @@
     "pug": "^2.0.4"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "air-datepicker": "^2.2.3",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0",
     "gulp": "^4.0.2",
-    "gulp-sass": "^4.0.2"
+    "gulp-sass": "^4.0.2",
+    "js-datepicker": "^5.2.1",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
   }
 }

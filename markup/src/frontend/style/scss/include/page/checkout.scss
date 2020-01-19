@@ -157,3 +157,24 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+.order-time {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+
+  &__item {
+    border: 1px #e3e3e3 solid;
+    text-transform: lowercase;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 3px 7px;
+    margin: 5px;
+    cursor: pointer;
+
+    &:hover, &.active {
+      border-color: green;
+    }
+  }
+}
