@@ -42,272 +42,274 @@ use yii\web\UploadedFile;
  */
 class Product extends \yii\db\ActiveRecord
 {
-	public $has_store;
-	public $imagesFiles;
-	public $properties;
-	public $is_product_order;
+    public $has_store;
+    public $imagesFiles;
+    public $properties;
+    public $is_product_order;
 
-	const SCENARIO_NEW_PRODUCT = 'insert';
-	const SCENARIO_UPDATE_PRODUCT = 'update';
+    const SCENARIO_NEW_PRODUCT = 'insert';
+    const SCENARIO_UPDATE_PRODUCT = 'update';
 
-	public function scenarios()
-	{
-		return [
-			self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-			self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-		];
-	}
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+        ];
+    }
 
-	public function rules()
-	{
-		return [
-			[['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
+    public function rules()
+    {
+        return [
+            [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-			[['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active'], 'integer'],
 
-			[['images', 'code', 'description', 'feed'], 'string'],
+            [['images', 'code', 'description', 'feed'], 'string'],
 
-			['description', 'string', 'min' => 10],
+            [['code'], 'unique', 'targetClass' => Product::className(), 'message' => 'Такой {attribute} уже используется'],
 
-			[['vitrine'], 'default', 'value' => 0],
-			[['active'], 'default', 'value' => 1],
+            ['description', 'string', 'min' => 10],
 
-			[['has_store', 'is_product_order'], 'boolean'],
+            [['vitrine'], 'default', 'value' => 0],
+            [['active'], 'default', 'value' => 1],
 
-			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
-			[['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions'], 'maxFiles' => 10],
-		];
-	}
+            [['has_store', 'is_product_order'], 'boolean'],
 
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'active' => 'Активность',
-			'article' => 'Артикул',
-			'name' => 'Название',
-			'description' => 'Описание',
-			'sort' => 'Сортировка',
-			'category_id' => 'ID Раздела',
-			'category' => 'Раздел',
-			'price' => 'Цена',
-			'purchase' => 'Закупочная цена',
-			'count' => 'Количество',
-			'vitrine' => 'Товар витрина',
-			'seo_description' => 'Описание (SEO)',
-			'seo_keywords' => 'Ключые слова (SEO)',
-			'image' => 'Изображение товара',
-			'imageFile' => 'Изображение товара',
-			'imagesFiles' => 'Галлерея фото',
-			'properties' => 'Свойства',
-			'stock_id' => 'Склад',
-			'code' => 'Внешний код',
-			'has_store' => 'Сохранить в маркете Вконтакте',
-			'created_at' => 'Дата создания',
-			'is_product_order' => 'Товар под заказ',
-			'feed' => 'Поисковой контент',
-		];
-	}
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
+            [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions'], 'maxFiles' => 10],
+        ];
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className(),
-			[
-				'class' => SluggableBehavior::className(),
-				'attribute' => 'name',
-				'ensureUnique' => true,
-			],
-			[
-				'class' => UploadBehavior::class,
-				'attribute' => 'image',
-				'scenarios' => ['insert', 'update'],
-				'path' => '@webroot/upload/',
-				'url' => '@web/upload/',
-			],
-			[
-				'class' => SocialStore::class,
-				'has_store' => 'has_store',
-			],
-			ArticleBehavior::className()
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'active' => 'Активность',
+            'article' => 'Артикул',
+            'name' => 'Название',
+            'description' => 'Описание',
+            'sort' => 'Сортировка',
+            'category_id' => 'ID Раздела',
+            'category' => 'Раздел',
+            'price' => 'Цена',
+            'purchase' => 'Закупочная цена',
+            'count' => 'Количество',
+            'vitrine' => 'Товар витрина',
+            'seo_description' => 'Описание (SEO)',
+            'seo_keywords' => 'Ключые слова (SEO)',
+            'image' => 'Изображение товара',
+            'imageFile' => 'Изображение товара',
+            'imagesFiles' => 'Галлерея фото',
+            'properties' => 'Свойства',
+            'stock_id' => 'Склад',
+            'code' => 'Внешний код',
+            'has_store' => 'Сохранить в маркете Вконтакте',
+            'created_at' => 'Дата создания',
+            'is_product_order' => 'Товар под заказ',
+            'feed' => 'Поисковой контент',
+        ];
+    }
 
-	public function createProduct()
-	{
-		if (\Yii::$app->request->isPost) {
-			$db = \Yii::$app->db;
-			$transaction = $db->beginTransaction();
-			if ($this->load(\Yii::$app->request->post())) {
-				$this->uploadGallery();
-				if ($this->validate()) {
-					if (!$this->save()) {
-						$transaction->rollBack();
-						return false;
-					}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'ensureUnique' => true,
+            ],
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'image',
+                'scenarios' => ['insert', 'update'],
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/',
+            ],
+            [
+                'class' => SocialStore::class,
+                'has_store' => 'has_store',
+            ],
+            ArticleBehavior::className()
+        ];
+    }
 
-					foreach ($this->properties as $propertyId => $value) {
-						if (empty($value)) {
-							continue;
-						}
-						//save multiple property
-						if (is_array($value) && count($value) > 0) {
-							foreach ($value as $select_variant) {
-								$propertyValues = new ProductPropertiesValues();
-								$propertyValues->product_id = $this->id;
-								$propertyValues->property_id = $propertyId;
-								$propertyValues->value = $select_variant;
-								if ($propertyValues->save() === false) {
-									return false;
-								}
-							}
-						} else {
-							$propertyValues = new ProductPropertiesValues();
-							$propertyValues->product_id = $this->id;
-							$propertyValues->property_id = $propertyId;
-							$propertyValues->value = $value;
-							if ($propertyValues->save() === false) {
-								$transaction->rollBack();
-								return false;
-							}
-						}
-					}
+    public function createProduct()
+    {
+        if (\Yii::$app->request->isPost) {
+            $db = \Yii::$app->db;
+            $transaction = $db->beginTransaction();
+            if ($this->load(\Yii::$app->request->post())) {
+                $this->uploadGallery();
+                if ($this->validate()) {
+                    if (!$this->save()) {
+                        $transaction->rollBack();
+                        return false;
+                    }
 
-
-					if ($this->is_product_order == true) {
-						$productOrder = new ProductOrder();
-						$productOrder->product_id = $this->id;
-						if ($productOrder->load(\Yii::$app->request->post())) {
-							if ($productOrder->validate()) {
-								if (!$productOrder->save()) {
-									$transaction->rollBack();
-									return false;
-								}
-							}
-						}
-					}
-
-					$transaction->commit();
-					return true;
-				}
-			}
-		}
-
-		return false;
-	}
-
-	public function updateProduct()
-	{
-		if (\Yii::$app->request->isPost) {
-			$db = \Yii::$app->db;
-			$transaction = $db->beginTransaction();
-			if ($this->load(\Yii::$app->request->post())) {
-				$this->uploadGallery();
-				if ($this->validate()) {
-					if (!$this->update()) {
-						return false;
-					}
-					ProductPropertiesValues::deleteAll(['product_id' => $this->id]);
-
-					foreach ($this->properties as $propertyId => $value) {
-						if (empty($value)) {
-							continue;
-						}
-
-						//save multiple property
-						if (is_array($value) && count($value) > 0) {
-							foreach ($value as $select_variant) {
-								$propertyValues = new ProductPropertiesValues();
-								$propertyValues->product_id = $this->id;
-								$propertyValues->property_id = $propertyId;
-								$propertyValues->value = $select_variant;
-								if ($propertyValues->save() === false) {
-									$transaction->rollBack();
-									return false;
-								}
-							}
-						} else {
+                    foreach ($this->properties as $propertyId => $value) {
+                        if (empty($value)) {
+                            continue;
+                        }
+                        //save multiple property
+                        if (is_array($value) && count($value) > 0) {
+                            foreach ($value as $select_variant) {
+                                $propertyValues = new ProductPropertiesValues();
+                                $propertyValues->product_id = $this->id;
+                                $propertyValues->property_id = $propertyId;
+                                $propertyValues->value = $select_variant;
+                                if ($propertyValues->save() === false) {
+                                    return false;
+                                }
+                            }
+                        } else {
+                            $propertyValues = new ProductPropertiesValues();
+                            $propertyValues->product_id = $this->id;
+                            $propertyValues->property_id = $propertyId;
+                            $propertyValues->value = $value;
+                            if ($propertyValues->save() === false) {
+                                $transaction->rollBack();
+                                return false;
+                            }
+                        }
+                    }
 
 
-							$propertyValues = new ProductPropertiesValues();
-							$propertyValues->product_id = $this->id;
-							$propertyValues->property_id = $propertyId;
-							$propertyValues->value = $value;
-							if ($propertyValues->save() === false) {
-								$transaction->rollBack();
-								return false;
-							}
-						}
-					}
-					$transaction->commit();
+                    if ($this->is_product_order == true) {
+                        $productOrder = new ProductOrder();
+                        $productOrder->product_id = $this->id;
+                        if ($productOrder->load(\Yii::$app->request->post())) {
+                            if ($productOrder->validate()) {
+                                if (!$productOrder->save()) {
+                                    $transaction->rollBack();
+                                    return false;
+                                }
+                            }
+                        }
+                    }
 
-					return true;
-				}
-			}
-		}
-		return false;
-	}
+                    $transaction->commit();
+                    return true;
+                }
+            }
+        }
 
-	public function uploadGallery()
-	{
-		$items = [];
-		$this->imagesFiles = UploadedFile::getInstances($this, 'imagesFiles');
+        return false;
+    }
 
-		if (count($this->imagesFiles) > 0 && is_array($this->imagesFiles)) {
+    public function updateProduct()
+    {
+        if (\Yii::$app->request->isPost) {
+            $db = \Yii::$app->db;
+            $transaction = $db->beginTransaction();
+            if ($this->load(\Yii::$app->request->post())) {
+                $this->uploadGallery();
+                if ($this->validate()) {
+                    if (!$this->update()) {
+                        return false;
+                    }
+                    ProductPropertiesValues::deleteAll(['product_id' => $this->id]);
 
-			$this->removeOldImages();
+                    foreach ($this->properties as $propertyId => $value) {
+                        if (empty($value)) {
+                            continue;
+                        }
 
-			if ($this->validate()) {
-				/* @var $file UploadedFile */
-				foreach ($this->imagesFiles as $file) {
-					$fileName = substr(md5($file->baseName), 0, 32) . '.' . $file->extension;
-					$path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
-					$items[] = "/web/upload/" . $fileName;
-					$file->saveAs($path);
-				}
+                        //save multiple property
+                        if (is_array($value) && count($value) > 0) {
+                            foreach ($value as $select_variant) {
+                                $propertyValues = new ProductPropertiesValues();
+                                $propertyValues->product_id = $this->id;
+                                $propertyValues->property_id = $propertyId;
+                                $propertyValues->value = $select_variant;
+                                if ($propertyValues->save() === false) {
+                                    $transaction->rollBack();
+                                    return false;
+                                }
+                            }
+                        } else {
 
-				$this->images = Json::encode($items);
 
-				return true;
-			}
-		} else {
-			return false;
-		}
-	}
+                            $propertyValues = new ProductPropertiesValues();
+                            $propertyValues->product_id = $this->id;
+                            $propertyValues->property_id = $propertyId;
+                            $propertyValues->value = $value;
+                            if ($propertyValues->save() === false) {
+                                $transaction->rollBack();
+                                return false;
+                            }
+                        }
+                    }
+                    $transaction->commit();
 
-	public function removeOldImages()
-	{
-		if (!empty($this->images)) {
-			foreach (Json::decode($this->images) as $image) {
-				unlink(\Yii::getAlias('@app') . $image);
-			}
-		}
-	}
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
-	public function getDetail()
-	{
-		return "/product/" . (!empty($this->slug) ? $this->slug : $this->id) . "/";
-	}
+    public function uploadGallery()
+    {
+        $items = [];
+        $this->imagesFiles = UploadedFile::getInstances($this, 'imagesFiles');
 
-	public function getDisplay()
-	{
-		return $this->name;
-	}
+        if (count($this->imagesFiles) > 0 && is_array($this->imagesFiles)) {
 
-	public static function findBySlug($slug)
-	{
-		return self::findOne(['slug' => $slug]);
-	}
+            $this->removeOldImages();
 
-	public function getCategory()
-	{
-		if ($this->category_id) {
-			return Category::findOne($this->category_id);
-		}
+            if ($this->validate()) {
+                /* @var $file UploadedFile */
+                foreach ($this->imagesFiles as $file) {
+                    $fileName = substr(md5($file->baseName), 0, 32) . '.' . $file->extension;
+                    $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
+                    $items[] = "/web/upload/" . $fileName;
+                    $file->saveAs($path);
+                }
 
-		$category = new Category();
-		$category->name = 'Без категории';
+                $this->images = Json::encode($items);
 
-		return $category;
-	}
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public function removeOldImages()
+    {
+        if (!empty($this->images)) {
+            foreach (Json::decode($this->images) as $image) {
+                unlink(\Yii::getAlias('@app') . $image);
+            }
+        }
+    }
+
+    public function getDetail()
+    {
+        return "/product/" . (!empty($this->slug) ? $this->slug : $this->id) . "/";
+    }
+
+    public function getDisplay()
+    {
+        return $this->name;
+    }
+
+    public static function findBySlug($slug)
+    {
+        return self::findOne(['slug' => $slug]);
+    }
+
+    public function getCategory()
+    {
+        if ($this->category_id) {
+            return Category::findOne($this->category_id);
+        }
+
+        $category = new Category();
+        $category->name = 'Без категории';
+
+        return $category;
+    }
 }
