@@ -19,7 +19,7 @@ use yii\helpers\Url;
 $this->title = Title::showTitle("Личный кабинет");
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => '/profile/'];
 ?>
-<h1>Личный кабинет</h1>
+<h1>Добро пожаловать, <?= (!empty($profile->name) ? $profile->name : $profile->email); ?></h1>
 <div class="profile">
     <ul class="profile-menu">
         <li class="profile-menu__item">
@@ -34,15 +34,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
         <li class="profile-menu__item">
             <h2 class="profile-menu__item__title">Заказы <i class="fas fa-shopping-bag"></i></h2>
             <div class="profile-order">
-				<?php if ($orders): ?>
-					<?php foreach ($orders as $order): ?>
+                <?php if ($orders): ?>
+                    <?php foreach ($orders as $order): ?>
                         <a href="/order/<?= $order->id; ?>/">
                             <ul class="slide-order-info">
                                 <li class="slide-order-info__item">
                                     ID: <?= $order->id; ?>
                                 </li>
                                 <li class="slide-order-info__item">
-									<?= OrderHelper::getStatus($order); ?>
+                                    <?= OrderHelper::getStatus($order); ?>
                                 </li>
                                 <li class="slide-order-info__item">
                                     Дата: <?= date('d.m.Y', $order->created_at) ?>
@@ -51,14 +51,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                                     Сумма: <?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?>
                                 </li>
                                 <li class="slide-order-info__item">
-									<?= (($order->is_paid == 1) ? 'Оплачен' : 'Не оплачен'); ?>
+                                    <?= (($order->is_paid == 1) ? 'Оплачен' : 'Не оплачен'); ?>
                                 </li>
                             </ul>
                         </a>
-					<?php endforeach; ?>
-				<?php else: ?>
+                    <?php endforeach; ?>
+                <?php else: ?>
                     <div>Вы ничего не покупали</div>
-				<?php endif; ?>
+                <?php endif; ?>
             </div>
         </li>
         <li class="profile-menu__item">
@@ -67,37 +67,37 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
         <li class="profile-menu__item">
             <h2 class="profile-menu__item__title">Поддержка <i class="far fa-question-circle"></i></h2>
             <div class="support-categories">
-				<?php if ($support_categories): ?>
+                <?php if ($support_categories): ?>
                     <ul class="support-categories-list">
-						<?php foreach ($support_categories as $category): ?>
+                        <?php foreach ($support_categories as $category): ?>
                             <li class="support-categories-list_item" title="title">
                                 <a href="<?= $category->detail; ?>">
-									<?= $category->html; ?>
+                                    <?= $category->html; ?>
                                 </a>
                             </li>
-						<?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
-				<?php endif; ?>
+                <?php endif; ?>
             </div>
         </li>
         <li class="profile-menu__item">
             <h2 class="profile-menu__item__title">Избранное <i class="fas fa-heart"></i></h2>
             <div class="list-favorite-wrap">
                 <ul class="list-favorite">
-					<?php foreach (Favorite::findAll() as $product): ?>
+                    <?php foreach (Favorite::findAll() as $product): ?>
                         <li class="favorite-item">
                             <div class="favorite-item__image-wrap">
-								<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                                <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                                     <img src="/web/upload/<?= $product->image; ?>" class="favorite-item__image">
-								<?php else: ?>
+                                <?php else: ?>
                                     <img src="/web/upload/images/not-image.png" class="favorite-item__image">
-								<?php endif; ?>
+                                <?php endif; ?>
                             </div>
                             <div class="favorite-item__link">
                                 <a class="favorite-item__link-a" href="<?= $product->detail; ?>"><?= $product->name; ?></a>
                             </div>
                         </li>
-					<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
         </li>
@@ -107,10 +107,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                 <div class='profile-menu__discount-container'><span class="span"></span>
                     <span class=text>
                         <?php if ($profile->discount): ?>
-							<?= $profile->discount->count; ?>
-						<?php else: ?>
+                            <?= $profile->discount->count; ?>
+                        <?php else: ?>
                             0
-						<?php endif; ?>
+                        <?php endif; ?>
                         </span>
                 </div>
             </div>
@@ -127,7 +127,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                 </button>
             </div>
             <div class="modal-body">
-				<?php $form = ActiveForm::begin() ?>
+                <?php $form = ActiveForm::begin() ?>
                 <div class="profile-edit-modal-wrap">
                     <ul class="nav nav-tabs" id="myTab" role="tablist">
                         <li class="nav-item">
@@ -138,25 +138,25 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                         <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
 
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'first_name'); ?>
+                                <?= $form->field($profile, 'first_name'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'name'); ?>
+                                <?= $form->field($profile, 'name'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'last_name'); ?>
+                                <?= $form->field($profile, 'last_name'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'birthday'); ?>
+                                <?= $form->field($profile, 'birthday'); ?>
                             </div>
                             <div class="profile-edit-modal-element">
-								<?= $form->field($profile, 'sex')->dropDownList(ArrayHelper::map(UserSex::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать пол']); ?>
+                                <?= $form->field($profile, 'sex')->dropDownList(ArrayHelper::map(UserSex::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать пол']); ?>
                             </div>
                             <div class="profile-edit-modal-element avatar-file">
                                 <div class="profile-edit-modal-avatar-wrap">
-									<?= Html::img('/web/upload/' . $profile->avatar); ?>
+                                    <?= Html::img('/web/upload/' . $profile->avatar); ?>
                                 </div>
-								<?= $form->field($profile, 'avatar')->fileInput() ?>
+                                <?= $form->field($profile, 'avatar')->fileInput() ?>
                             </div>
 
                         </div>
@@ -164,10 +164,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                 </div>
             </div>
             <div class="modal-footer">
-				<?= Html::button('Отмена', ['class' => 'btn btn-cancel', 'data-dismiss' => 'modal']); ?>
-				<?= Html::submitButton('Обновить', ['class' => 'btn btn-main']); ?>
+                <?= Html::button('Отмена', ['class' => 'btn btn-cancel', 'data-dismiss' => 'modal']); ?>
+                <?= Html::submitButton('Обновить', ['class' => 'btn btn-main']); ?>
             </div>
-			<?php ActiveForm::end() ?>
+            <?php ActiveForm::end() ?>
         </div>
     </div>
 </div>

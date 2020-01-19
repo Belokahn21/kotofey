@@ -53,6 +53,7 @@ use app\models\search\ShortLinksSearchModel;
 use app\models\search\SlidersImagesSearchForm;
 use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
+use app\models\search\UserSearchForm;
 use app\models\search\VacancySearchForm;
 use app\models\tool\Debug;
 use app\models\tool\export\YandexCatalogExport;
@@ -320,7 +321,8 @@ class AdminController extends Controller
     {
         $model = new User(['scenario' => User::SCENARIO_INSERT]);
         $authAssigment = new AuthAssignment();
-        $dataProvider = $model->search(\Yii::$app->request->post());
+        $searchModel = new UserSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
         $groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
 
         // удалить юзера
@@ -415,6 +417,7 @@ class AdminController extends Controller
         return $this->render('user', [
             'model' => $model,
             'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
             'groups' => $groups
         ]);
     }
