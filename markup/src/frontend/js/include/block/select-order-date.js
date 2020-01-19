@@ -12,6 +12,7 @@ var myDatepicker = $('.js-datepicker').datepicker({
             success: function (data) {
                 $('.order-time-input').val("");
                 $('.order-time-wrap').html(data);
+
             }
         });
 
