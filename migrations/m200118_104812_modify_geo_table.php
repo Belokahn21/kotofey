@@ -6,7 +6,7 @@ class m200118_104812_modify_geo_table extends Migration
 {
     public function safeUp()
     {
-        $this->addColumn('{{%geo}}', 'time_zone', $this->string(255)->null()->after('type'));
+        $this->addColumn('{{%geo}}', 'time_zone_id', $this->string(255)->null()->after('type'));
     }
 
     public function safeDown()

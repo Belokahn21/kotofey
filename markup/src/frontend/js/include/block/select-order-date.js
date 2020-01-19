@@ -19,8 +19,12 @@ var myDatepicker = $('.js-datepicker').datepicker({
 });
 
 $('.order-time__item').click(function (e) {
+    var $this = $(this);
     $('.order-time__item').each(function () {
         $(this).removeClass('active');
     });
-    $(this).addClass('active')
+    $(this).addClass('active');
+
+
+    $('.order-time-input').val($this.data('value'));
 });

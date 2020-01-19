@@ -174,7 +174,7 @@
     cursor: pointer;
 
     &:hover, &.active {
-      border-color: $mainActiveColor;
+      border-color: green;
     }
   }
 }

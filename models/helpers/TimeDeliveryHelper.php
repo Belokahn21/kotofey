@@ -29,7 +29,14 @@ class TimeDeliveryHelper
 
     public static function isOldDay($date)
     {
-        return strtotime(date('d.m.Y')) < strtotime($date);
+        return strtotime(date('d.m.Y')) > strtotime($date);
+    }
+
+    public static function isWeekend($date)
+    {
+        $unix_date = strtotime($date);
+
+        return date('N', $unix_date) == 6 or date('N', $unix_date) == 7;
     }
 
     public static function isMorningTime()

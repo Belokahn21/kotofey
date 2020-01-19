@@ -3,14 +3,16 @@
 use yii\helpers\ArrayHelper;
 use app\models\entity\user\Billing;
 
-/* @var $this \yii\web\View */
-/* @var $discount_model \app\models\forms\DiscountForm */
-/* @var $user \app\models\entity\User */
-/* @var $delivery \app\models\entity\Delivery[] */
-/* @var $payment \app\models\entity\Payment[] */
-/* @var $order \app\models\entity\Order */
-/* @var $billing \app\models\entity\user\Billing */
-/* @var $delivery_time \app\models\services\DeliveryTimeService */
+/* @var $this \yii\web\View
+ * @var $discount_model \app\models\forms\DiscountForm
+ * @var $user \app\models\entity\User
+ * @var $delivery \app\models\entity\Delivery[]
+ * @var $payment \app\models\entity\Payment[]
+ * @var $order \app\models\entity\Order
+ * @var $billing \app\models\entity\user\Billing
+ * @var $order_date \app\models\entity\OrderDate
+ * @var $delivery_time \app\models\services\DeliveryTimeService
+ */
 
 ?>
 
@@ -42,16 +44,17 @@ use app\models\entity\user\Billing;
     </div>
     <div class="row">
         <div class="col-sm-12 select-day">
-            <input type="text" class="js-datepicker checkout__input" placeholder="Указать день доставки" value="<?= $delivery_time->getAvailableDate(); ?>">
+            <?= $form->field($order_date, 'date')->textInput(['class' => 'js-datepicker checkout__input', 'value' => $delivery_time->getAvailableDate(), 'placeholder' => 'Указать день доставки'])->label(false); ?>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12 order-time-wrap">
             <ul class="order-time">
                 <?php foreach ($delivery_time->getTimeList() as $key => $time): ?>
-                    <li class="order-time__item">с <?= $key; ?>.00 до <?= $time; ?>.00</li>
+                    <li data-value="с <?= $key; ?>.00 до <?= $time; ?>.00" class="order-time__item">с <?= $key; ?>.00 до <?= $time; ?>.00</li>
                 <?php endforeach; ?>
             </ul>
+            <?= $form->field($order_date, 'time')->hiddenInput(['class' => 'order-time-input'])->label(false); ?>
         </div>
     </div>
 </div>
