@@ -153,13 +153,13 @@ class AdminController extends Controller
             $dataProvider = $searchModel->search(\Yii::$app->request->get());
             $properties = ProductProperties::find()->all();
 
-            if(Yii::$app->request->isPost){
-                // validate for ajax request
-                if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-                    Yii::$app->response->format = Response::FORMAT_JSON;
-                    return ActiveForm::validate($model);
-                }
-            }
+//            if(Yii::$app->request->isPost){
+//                 validate for ajax request
+//                if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+//                    Yii::$app->response->format = Response::FORMAT_JSON;
+//                    return ActiveForm::validate($model);
+//                }
+//            }
 
             if ($model->createProduct()) {
                 Alert::setSuccessNotify('Продукт создан');

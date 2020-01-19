@@ -131,7 +131,7 @@ use yii\helpers\Json;
     </div>
     <div class="tab-pane fade" id="nav-additional" role="tabpanel" aria-labelledby="nav-additional-tab">
         <div class="form-element">
-            <?= $form->field($model, 'code', ['enableAjaxValidation' => true])->textInput(); ?>
+            <?= $form->field($model, 'code'/*, ['enableAjaxValidation' => true]*/)->textInput(); ?>
         </div>
         <div class="form-element">
             <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>

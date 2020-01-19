@@ -67,7 +67,7 @@ class Product extends \yii\db\ActiveRecord
 
             [['images', 'code', 'description', 'feed'], 'string'],
 
-            [['code'], 'unique', 'targetClass' => Product::className(), 'message' => 'Такой {attribute} уже используется'],
+//            [['code'], 'unique', 'targetClass' => Product::className(), 'message' => 'Такой {attribute} уже используется'],
 
             ['description', 'string', 'min' => 10],
 
