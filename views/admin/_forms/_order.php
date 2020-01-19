@@ -38,8 +38,8 @@ use app\models\entity\Product;
     <div class="tab-pane fade" id="nav-client" role="tabpanel" aria-labelledby="nav-client-tab">
         <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Покупатель']); ?>
         <?php if ($model->billing): ?>
-            <h6 style="margin: 10px 0; border-bottom: 1px #e3e3e3 solid; padding: 5px 0;">Адрес доставки</h6>
-            <div class="row">
+            <h6 style="margin: 10px 0; border-bottom: 1px #e3e3e3 solid; padding: 5px 0;" class="w-25">Адрес доставки</h6>
+            <div class="row w-25">
                 <?php foreach (['city', 'street', 'home', 'house'] as $attr): ?>
                     <div class="col-sm-6"><?= $model->billing->getAttributeLabel($attr); ?></div>
                     <div class="col-sm-6"><?= $model->billing->{$attr}; ?></div>
@@ -48,7 +48,8 @@ use app\models\entity\Product;
         <?php endif; ?>
 
         <?php if ($model->dateDelivery): ?>
-            <div class="row">
+            <hr/>
+            <div class="row w-25">
                 <div class="col-sm-6">Дата доставки</div>
                 <div class="col-sm-6"><?= $model->dateDelivery->date; ?></div>
             </div>
