@@ -54,6 +54,10 @@ class DeliveryTimeService
     {
         $time_list = array();
 
+        if (TimeDeliveryHelper::isOldDay($date)) {
+            return $time_list;
+        }
+
         if (TimeDeliveryHelper::isDayToDay($date)) {
             if (TimeDeliveryHelper::isBeforeMorningTime()) {
                 $time_list = TimeDeliveryHelper::getNightTimes() + $time_list;
