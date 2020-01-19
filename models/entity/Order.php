@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 
+use app\models\entity\user\Billing;
 use app\models\helpers\DiscountHelper;
 use app\models\helpers\OrderHelper;
 use yii\behaviors\TimestampBehavior;
@@ -52,13 +53,18 @@ class Order extends ActiveRecord
 
             [['user_id'], 'required', 'message' => '{attribute} необходимо указать'],
 
-            [['comment', 'promo_code','notes'], 'string'],
+            [['comment', 'promo_code', 'notes'], 'string'],
 
             [['product_id'], 'safe'],
 
-            [['select_billing'], 'required', 'message' => 'Укажите {attribute}', 'when'=>function(){
-                return \Yii::$app->user->isGuest === true;
-            }],
+            [
+                ['select_billing'],
+                'required',
+                'message' => 'Укажите {attribute}',
+                'when' => function () {
+                    return \Yii::$app->user->isGuest === true;
+                }
+            ],
         ];
     }
 
@@ -141,5 +147,18 @@ class Order extends ActiveRecord
     public function hasAccess()
     {
         return $this->user_id == \Yii::$app->user->id;
+    }
+
+    public function getBilling()
+    {
+        $order_billing = OrderBilling::findOne(['order_id' => $this->id]);
+        if ($order_billing) {
+            return Billing::findOne($order_billing->user_billing_id);
+        }
+    }
+
+    public function getDateDelivery()
+    {
+        return OrderDate::findOne(['order_id' => $this->id]);
     }
 }
