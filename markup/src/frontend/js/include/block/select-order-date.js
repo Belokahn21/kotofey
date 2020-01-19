@@ -18,7 +18,7 @@ var myDatepicker = $('.js-datepicker').datepicker({
     }
 });
 
-$('.order-time__item').click(function (e) {
+$(document).on('click', '.order-time__item', function (e) {
     var $this = $(this);
     $('.order-time__item').each(function () {
         $(this).removeClass('active');
