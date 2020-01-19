@@ -15,12 +15,17 @@ class TimeDeliveryHelper
     // morning
     const STEP_HOUR_MORNING = 2;
     const START_HOUR_MORNING = 7;
-    const END_HOUR_MORNING = 10;
+    const END_HOUR_MORNING = 9;
 
     // night
     const STEP_HOUR_NIGHT = 1;
     const START_HOUR_NIGHT = 19;
-    const END_HOUR_NIGHT = 21;
+    const END_HOUR_NIGHT = 22;
+
+    public static function isNextDay($date)
+    {
+        return abs(date('d', strtotime(date('d.m.Y'))) - date('d', strtotime($date))) == 1;
+    }
 
     public static function isDayToDay($date)
     {

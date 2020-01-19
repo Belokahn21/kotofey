@@ -63,9 +63,12 @@ class DeliveryTimeService
         }
 
         if (TimeDeliveryHelper::isDayToDay($date)) {
-            if (TimeDeliveryHelper::isBeforeMorningTime()) {
+            if (TimeDeliveryHelper::isBeforeMorningTime() && TimeDeliveryHelper::isBeforeNightTime()) {
                 $time_list = TimeDeliveryHelper::getNightTimes() + $time_list;
             }
+        }
+        if (TimeDeliveryHelper::isNextDay($date)) {
+            $time_list = TimeDeliveryHelper::getNightTimes() + $time_list;
         } else {
             $time_list = TimeDeliveryHelper::getNightTimes() + $time_list;
             $time_list = TimeDeliveryHelper::getMorningTimes() + $time_list;
