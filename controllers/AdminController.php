@@ -154,7 +154,7 @@ class AdminController extends Controller
             $modelDelivery = new ProductOrder();
             $searchModel = new ProductSearchForm();
             $dataProvider = $searchModel->search(\Yii::$app->request->get());
-            $properties = ProductProperties::find()->all();
+            $properties = ProductProperties::find()->orderBy(['name' => SORT_ASC])->all();
 
 //            if(Yii::$app->request->isPost){
 //                 validate for ajax request
