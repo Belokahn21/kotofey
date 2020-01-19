@@ -68,8 +68,8 @@ use yii\helpers\ArrayHelper;
                     <li data-value="с <?= $key; ?>.00 до <?= $time; ?>.00" class="order-time__item">с <?= $key; ?>.00 до <?= $time; ?>.00</li>
                 <?php endforeach; ?>
             </ul>
-            <?= $form->field($order_date, 'time')->hiddenInput(['class' => 'order-time-input'])->label(false); ?>
         </div>
+        <?= $form->field($order_date, 'time')->hiddenInput(['class' => 'order-time-input'])->label(false); ?>
     </div>
 </div>
 
