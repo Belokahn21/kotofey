@@ -1,6 +1,9 @@
 <?php
 
+use yii\helpers\ArrayHelper;
+
 /* @var $model \app\models\entity\Geo */
+/* @var $time_zones \app\models\entity\GeoTimezone[] */
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -11,11 +14,12 @@
 </nav>
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-		<?= $form->field($model, 'name'); ?>
-		<?= $form->field($model, 'is_default')->checkbox(); ?>
-		<?= $form->field($model, 'active')->checkbox(); ?>
-		<?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
-		<?= $form->field($model, 'type')->dropDownList($model->getTypes(), ['prompt' => 'Тип гео объекта']); ?>
+        <?= $form->field($model, 'name'); ?>
+        <?= $form->field($model, 'is_default')->checkbox(); ?>
+        <?= $form->field($model, 'active')->checkbox(); ?>
+        <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
+        <?= $form->field($model, 'type')->dropDownList($model->getTypes(), ['prompt' => 'Тип гео объекта']); ?>
+        <?= $form->field($model, 'time_zone_id')->dropDownList(ArrayHelper::map($time_zones, 'id', 'name'), ['prompt' => 'Временная зона']); ?>
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
     </div>

@@ -1,9 +1,9 @@
 <?php
 
 /* @var $this \yii\web\View */
-
 /* @var $content string */
 
+use app\models\entity\GeoTimezone;
 use app\models\entity\Vacancy;
 use yii\helpers\Url;
 use app\models\entity\News;
@@ -20,7 +20,7 @@ use app\models\entity\ShortLinks;
 
 AdminAsset::register($this);
 $this->beginPage();
-$user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
+$user = User::findOne(Yii::$app->user->identity->id);
 ?>
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
@@ -45,10 +45,7 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
             <h4 style="color: white; text-align: center; padding: 0 0 2% 0; margin: 0; border-bottom: 1px grey solid;">Панель управления</h4>
             <div class="current-profile">
                 <div class="avatar-wrap">
-                    <img class="current-profile__avatar"
-                         src="/upload/<?= ((!empty($user->avatar)) ? $user->avatar : "/images/boy.png"); ?>"
-                         alt="Аватар пользователя <?= $user->email; ?>"
-                         title="Аватар пользователя <?= $user->email; ?>">
+                    <img class="current-profile__avatar" src="/upload/<?= ((!empty($user->avatar)) ? $user->avatar : "/images/boy.png"); ?>" alt="Аватар пользователя <?= $user->email; ?>" title="Аватар пользователя <?= $user->email; ?>">
                 </div>
                 <div class="user-email"><?= $user->email; ?></div>
                 <div class="user-role"><?= $user->group->name; ?></div>
@@ -70,13 +67,23 @@ $user = \app\models\entity\User::findOne(Yii::$app->user->identity->id);
                     <li class="panel-menu__item">
                         <a href="/admin/"><i class="fas fa-globe-asia"></i>Гео</a>
                         <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/geo/">Гео объекты<span class="count"><?= Geo::find()->count() ?></span></a></li>
+                            <li class="panel-menu__item sub">
+                                <a href="/admin/geo/">
+                                    Гео объекты<span class="count"><?= Geo::find()->count() ?></span>
+                                </a>
+                            </li>
+                            <li class="panel-menu__item sub">
+                                <a href="<?=Url::to(['admin/timezone'])?>">
+                                    Временные зоны<span class="count"><?= GeoTimezone::find()->count() ?></span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                     <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-shopping-cart"></i>Магазин</a>
                         <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/order/">Заказы
-                                    <span class="count"><?= Order::find()->count() ?></span>
+                            <li class="panel-menu__item sub">
+                                <a href="/admin/order/">
+                                    Заказы<span class="count"><?= Order::find()->count() ?></span>
                                 </a>
                                 <ul>
                                     <li class="panel-menu__item sub"><a href="/admin/status/">Статус заказа</a></li>

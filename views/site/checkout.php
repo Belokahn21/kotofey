@@ -7,6 +7,7 @@
  * @var $discount_model \app\models\forms\DiscountForm
  * @var $delivery \app\models\entity\Delivery[]
  * @var $payment \app\models\entity\Payment[]
+ * @var $delivery_time \app\models\services\DeliveryTimeService
  */
 
 use app\models\tool\Price;
@@ -36,6 +37,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 						'order' => $order,
 						'delivery' => $delivery,
 						'payment' => $payment,
+                        'delivery_time' => $delivery_time,
 					]); ?>
 				<?php else: ?>
 					<?= $this->render('checkout/simple/user/form', [
@@ -45,6 +47,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 						'order' => $order,
 						'delivery' => $delivery,
 						'payment' => $payment,
+						'delivery_time' => $delivery_time,
 					]); ?>
 				<?php endif; ?>
             </div>

@@ -13,9 +13,12 @@ use app\models\entity\ProductProperties;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
 use app\models\entity\user\Billing;
+use app\models\helpers\OrderHelper;
 use app\models\helpers\ProductHelper;
 use app\models\helpers\ProductPropertiesHelper;
+use app\models\helpers\TimeDeliveryHelper;
 use app\models\services\CompareService;
+use app\models\services\DeliveryTimeService;
 use app\models\tool\Debug;
 use app\models\tool\parser\ParseProvider;
 use app\widgets\cookie\CookieWidget;
@@ -333,5 +336,17 @@ class AjaxController extends Controller
 
 
         return Json::encode($response);
+    }
+
+    public function actionOrderTime()
+    {
+        $data = \Yii::$app->request->post();
+
+        $delivery_service = new DeliveryTimeService();
+        $delivery_times = $delivery_service->getTimes($data['date']);
+
+        return $this->renderPartial('order-time', [
+            'delivery_times' => $delivery_times
+        ]);
     }
 }

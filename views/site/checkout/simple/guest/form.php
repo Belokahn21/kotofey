@@ -9,6 +9,7 @@ use yii\helpers\ArrayHelper;
 /* @var $payment \app\models\entity\Payment[] */
 /* @var $order \app\models\entity\Order */
 /* @var $billing \app\models\entity\user\Billing */
+/* @var $delivery_time \app\models\services\DeliveryTimeService */
 
 ?>
 

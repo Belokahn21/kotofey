@@ -10,12 +10,13 @@ use app\models\entity\user\Billing;
 /* @var $payment \app\models\entity\Payment[] */
 /* @var $order \app\models\entity\Order */
 /* @var $billing \app\models\entity\user\Billing */
+/* @var $delivery_time \app\models\services\DeliveryTimeService */
 
 ?>
 
 <?= $this->render('../bonus', [
-	'form' => $form,
-	'DiscountModel' => $discount_model
+    'form' => $form,
+    'DiscountModel' => $discount_model
 ]); ?>
 
 <div class="checkout-block">
@@ -40,18 +41,16 @@ use app\models\entity\user\Billing;
         Дата доставки
     </div>
     <div class="row">
-        <div class="col-sm-12">
-            <input type="text" class="js-datepicker checkout__input">
+        <div class="col-sm-12 select-day">
+            <input type="text" class="js-datepicker checkout__input" placeholder="Указать день доставки" value="<?= $delivery_time->getAvailableDate(); ?>">
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-12 order-time-wrap">
             <ul class="order-time">
-                <li class="order-time__item">с 12.00 до 13.00</li>
-                <li class="order-time__item">с 12.00 до 13.00</li>
-                <li class="order-time__item">с 12.00 до 13.00</li>
-                <li class="order-time__item">с 12.00 до 13.00</li>
-                <li class="order-time__item">с 12.00 до 13.00</li>
+                <?php foreach ($delivery_time->getTimeList() as $key => $time): ?>
+                    <li class="order-time__item">с <?= $key; ?>.00 до <?= $time; ?>.00</li>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
@@ -64,12 +63,12 @@ use app\models\entity\user\Billing;
     </div>
     <div class="row">
         <div class="col-sm-12">
-			<?= $form->field($order, 'select_billing')->dropDownList(ArrayHelper::map(Billing::find()->where(['user_id' => Yii::$app->user->id])->all(), 'id', 'test'), ['prompt' => 'Указать адрес доставки'])->label(false); ?>
+            <?= $form->field($order, 'select_billing')->dropDownList(ArrayHelper::map(Billing::find()->where(['user_id' => Yii::$app->user->id])->all(), 'id', 'test'), ['prompt' => 'Указать адрес доставки'])->label(false); ?>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-12">
-			<?= $form->field($order, 'comment')->textarea(['class' => 'checkout__textarea', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
+            <?= $form->field($order, 'comment')->textarea(['class' => 'checkout__textarea', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
         </div>
     </div>
 </div>

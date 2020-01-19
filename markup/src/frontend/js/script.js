@@ -124,20 +124,4 @@ $(document).ready(function () {
         $catalog.removeClass('list');
         $catalog.addClass(display);
     });
-
-
-    var myDatepicker = $('.js-datepicker').datepicker({
-        range: false,
-        showEvent: 'click',
-        onSelect: function onSelect(formattedDate, date, inst) {
-            inst.hide();
-        }
-    });
-
-    $('.order-time__item').click(function (e) {
-        $('.order-time__item').each(function () {
-            $(this).removeClass('active');
-        });
-        $(this).addClass('active')
-    });
 });

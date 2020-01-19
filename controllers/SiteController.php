@@ -28,6 +28,8 @@ use app\models\entity\user\Billing;
 use app\models\entity\Vacancy;
 use app\models\forms\CatalogFilter;
 use app\models\forms\DiscountForm;
+use app\models\helpers\OrderHelper;
+use app\models\services\DeliveryTimeService;
 use app\models\tool\Debug;
 use app\models\tool\seo\Attributes;
 use app\models\entity\User;
@@ -45,6 +47,7 @@ use app\models\entity\Search;
 use Yii;
 use yii\web\HttpException;
 use yii\web\Response;
+use app\models\entity\CurrentGeo;
 use yii\widgets\ActiveForm;
 
 class SiteController extends Controller
@@ -187,9 +190,9 @@ class SiteController extends Controller
 			}
 		}
 
-//		if (System::isMobile() or Yii::$app->request->get('mobile') == "Y") {
-//            $this->layout = "mobile";
-//		}
+
+        $geo = CurrentGeo::find()->one();
+        date_default_timezone_set($geo->timeZone->value);
 
 
 		return parent::beforeAction($action);
@@ -373,6 +376,7 @@ class SiteController extends Controller
 		$basket = new Basket();
 		$discount_model = new DiscountForm();
 		$db = Yii::$app->db;
+		$delivery_time = new DeliveryTimeService();
 
 		if ($basket->isEmpty()) {
 			return $this->redirect("/");
@@ -465,6 +469,7 @@ class SiteController extends Controller
 				'order' => $order,
 				'delivery' => $delivery,
 				'payment' => $payment,
+				'delivery_time' => $delivery_time,
 			]);
 		} else {
 			$order = new Order();
@@ -530,6 +535,7 @@ class SiteController extends Controller
 				'order' => $order,
 				'delivery' => $delivery,
 				'payment' => $payment,
+                'delivery_time' => $delivery_time,
 			]);
 		}
 	}

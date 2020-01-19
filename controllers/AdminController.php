@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\entity\Category;
 use app\models\entity\Delivery;
 use app\models\entity\Geo;
+use app\models\entity\GeoTimezone;
 use app\models\entity\Informers;
 use app\models\entity\InformersValues;
 use app\models\entity\News;
@@ -36,6 +37,7 @@ use app\models\search\AuthItemSearchForm;
 use app\models\search\CategorySearchForm;
 use app\models\search\DeliverySearchForm;
 use app\models\search\GeoSearchForm;
+use app\models\search\GeoTimezoneSearch;
 use app\models\search\InformersSearchForm;
 use app\models\search\InformersValuesSearchForm;
 use app\models\search\NewsSearchForm;
@@ -1117,7 +1119,7 @@ class AdminController extends Controller
             if (Yii::$app->request->isPost) {
                 if ($model->load(Yii::$app->request->post())) {
                     if ($model->update()) {
-						Alert::setSuccessNotify('Изображение обновлено');
+                        Alert::setSuccessNotify('Изображение обновлено');
                         return $this->refresh();
                     }
                 }
@@ -1134,7 +1136,7 @@ class AdminController extends Controller
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
                 if ($model->save()) {
-                	Alert::setSuccessNotify('Изображение к слайду добавлено');
+                    Alert::setSuccessNotify('Изображение к слайду добавлено');
                     return $this->refresh();
                 }
             }
@@ -1149,6 +1151,7 @@ class AdminController extends Controller
 
     public function actionGeo($id = null)
     {
+        $time_zones = GeoTimezone::find()->all();
         if ($id) {
             $model = Geo::findOne($id);
             if (!$model) {
@@ -1165,9 +1168,11 @@ class AdminController extends Controller
                 }
             }
             return $this->render('detail/geo', [
-                'model' => $model
+                'model' => $model,
+                'time_zones' => $time_zones,
             ]);
         }
+
         $model = new Geo();
         $searchModel = new GeoSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
@@ -1183,8 +1188,57 @@ class AdminController extends Controller
         }
         return $this->render('geo', [
             'model' => $model,
+            'time_zones' => $time_zones,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
+        ]);
+    }
+
+    public function actionTimezone($id = null)
+    {
+        if ($id) {
+            $model = GeoTimezone::findOne($id);
+
+            if (!$model) {
+                throw new HttpException(404, 'Элемент не найден');
+            }
+
+
+            if (Yii::$app->request->isPost) {
+                if ($model->load(Yii::$app->request->post())) {
+                    if ($model->validate()) {
+                        if ($model->update()) {
+                            Alert::setSuccessNotify('Временая зона успешно обновлена');
+                            return $this->refresh();
+                        }
+                    }
+                }
+            }
+
+            return $this->render('detail/timezone', [
+                'model' => $model
+            ]);
+        }
+
+        $model = new GeoTimezone();
+        $searchModel = new GeoTimezoneSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate()) {
+                    if ($model->save()) {
+                        Alert::setSuccessNotify('Временая зона успешно добвлена');
+                        return $this->refresh();
+                    }
+                }
+            }
+        }
+
+        return $this->render('timezone', [
+            'model' => $model,
+            'dataProvider' => $dataProvider,
+            'searchModel' => $searchModel,
         ]);
     }
 
