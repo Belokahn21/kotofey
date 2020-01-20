@@ -23,12 +23,12 @@ use yii\helpers\ArrayHelper;
 		<?= $form->field($model, 'description')->widget(CKEditor::className(), [
 			'editorOptions' => [
 				'preset' => 'full',
-//				'preset' => 'basic',
 				'inline' => false
 			]
 		]); ?>
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
+		<?= $form->field($model, 'seo_title'); ?>
 		<?= $form->field($model, 'seo_keywords'); ?>
 		<?= $form->field($model, 'seo_description'); ?>
     </div>

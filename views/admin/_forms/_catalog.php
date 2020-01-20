@@ -30,26 +30,26 @@ use yii\helpers\Json;
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-element">
-                    <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
+					<?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
                 </div>
                 <div class="form-element">
-                    <?= $form->field($model, 'description')->textarea(['placeholder' => 'Описание'])->label(false); ?>
+					<?= $form->field($model, 'description')->textarea(['placeholder' => 'Описание'])->label(false); ?>
                 </div>
 
                 <div class="form-element">
-                    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?>
+					<?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-element">
-                            <?= $form->field($model, 'purchase')->textInput(['id' => 'id-purchase', 'placeholder' => 'Закупочная цена'])->label(false); ?>
+							<?= $form->field($model, 'purchase')->textInput(['id' => 'id-purchase', 'placeholder' => 'Закупочная цена'])->label(false); ?>
                         </div>
                     </div>
 
                     <div class="col-sm-4">
                         <div class="form-element">
-                            <?= $form->field($model, 'price')->textInput(['id' => 'id-price', 'placeholder' => 'Цена продажи'])->label(false); ?>
+							<?= $form->field($model, 'price')->textInput(['id' => 'id-price', 'placeholder' => 'Цена продажи'])->label(false); ?>
                         </div>
 
                         <div class="set-price">
@@ -59,13 +59,13 @@ use yii\helpers\Json;
 
                     <div class="col-sm-4">
                         <div class="form-element">
-                            <?= $form->field($model, 'count')->textInput(['placeholder' => 'Количество'])->label(false); ?>
+							<?= $form->field($model, 'count')->textInput(['placeholder' => 'Количество'])->label(false); ?>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-element">
-                    <?= $form->field($model, 'has_store')->checkbox()->label(false); ?>
+					<?= $form->field($model, 'has_store')->checkbox()->label(false); ?>
                 </div>
             </div>
             <div class="col-sm-6">
@@ -73,16 +73,16 @@ use yii\helpers\Json;
                     Условия доставки заказа
                 </div>
                 <div class="form-element">
-                    <?= $form->field($model, 'is_product_order')->checkbox()->label(false); ?>
+					<?= $form->field($model, 'is_product_order')->checkbox()->label(false); ?>
                 </div>
 
                 <div class="form-element">
                     <div class="row">
                         <div class="col-sm-6">
-                            <?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>
+							<?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>
                         </div>
                         <div class="col-sm-6">
-                            <?= $form->field($modelDelivery, 'end')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать максимальное значение']); ?>
+							<?= $form->field($modelDelivery, 'end')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать максимальное значение']); ?>
                         </div>
                     </div>
                 </div>
@@ -95,81 +95,87 @@ use yii\helpers\Json;
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
         <div class="form-element">
-            <?= $form->field($model, 'seo_keywords'); ?>
+			<?= $form->field($model, 'seo_keywords'); ?>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'seo_description')->textarea(); ?>
+			<?= $form->field($model, 'seo_description')->textarea(); ?>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'feed')->textarea(['id' => 'feed-replace']); ?>
+			<?= $form->field($model, 'feed')->textarea(['id' => 'feed-replace']); ?>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-image single">
-                    <?php if ($model->image): ?>
+					<?php if ($model->image): ?>
                         <img src="/web/upload/<?= $model->image; ?>">
-                    <?php endif; ?>
+					<?php endif; ?>
                 </div>
-                <?= $form->field($model, 'image')->fileInput(); ?>
+				<?= $form->field($model, 'image')->fileInput(); ?>
             </div>
             <div class="col-sm-6">
                 <div class="form-image more">
-                    <?php if ($model->images): ?>
-                        <?php foreach (Json::decode($model->images) as $image): ?>
+					<?php if ($model->images): ?>
+						<?php foreach (Json::decode($model->images) as $image): ?>
                             <img src="/web/upload/<?= $image; ?>">
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+						<?php endforeach; ?>
+					<?php endif; ?>
                 </div>
-                <?= $form->field($model, 'imagesFiles[]')->fileInput([
-                    'multiple' => true,
-                    'accept' => 'image/*'
-                ]); ?>
+				<?= $form->field($model, 'imagesFiles[]')->fileInput([
+					'multiple' => true,
+					'accept' => 'image/*'
+				]); ?>
             </div>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-additional" role="tabpanel" aria-labelledby="nav-additional-tab">
         <div class="form-element">
-            <?= $form->field($model, 'code'/*, ['enableAjaxValidation' => true]*/)->textInput(); ?>
+			<?= $form->field($model, 'code'/*, ['enableAjaxValidation' => true]*/)->textInput(); ?>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
+			<?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'active')->radioList(["Не активен", "Активен"]); ?>
+			<?= $form->field($model, 'active')->radioList(["Не активен", "Активен"]); ?>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
+			<?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
         <ul style="list-style: none; margin: 0; padding: 0;">
-            <?php try { ?>
+			<?php try { ?>
                 <ul style="list-style: none; margin: 0; padding: 0;">
-                    <?php foreach ($properties as $property): ?>
-                        <?php if ($property->type == 1): ?>
-                            <?php $value = ProductPropertiesValues::findAll([
-                                'product_id' => $model->id,
-                                'property_id' => $property->id
-                            ]);
-                            if ($value):
-                                $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
-                            endif; ?>
-                            <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name'), ['prompt' => $property->name, 'multiple' => (boolean)$property->multiple])->label($property->name); ?>
-                        <?php else: ?>
-                            <?php if ($value = ProductPropertiesValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
-                                <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
-                            <?php else: ?>
-                                <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?php endforeach; ?>
+					<?php foreach ($properties as $property): ?>
+						<?php if ($property->type == 1): ?>
+							<?php $value = ProductPropertiesValues::findAll([
+								'product_id' => $model->id,
+								'property_id' => $property->id
+							]);
+							if ($value):
+								$model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
+							endif; ?>
+							<?php
+							$drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->multiple];
+							if ((boolean)$property->multiple == true) {
+								$drop_down_params['size'] = 10;
+							}
+							?>
+							<?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name'), $drop_down_params)->label($property->name); ?>
+						<?php else: ?>
+							<?php if ($value = ProductPropertiesValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
+								<?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
+							<?php else: ?>
+								<?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php endforeach; ?>
                 </ul>
-            <?php } catch (ErrorException $exception) { ?>
-                <?= $exception->getMessage(); ?>
-                <?= $exception->getLine(); ?>
-            <?php } ?>
+			<?php } catch (ErrorException $exception) { ?>
+				<?= $exception->getMessage(); ?>
+				<?= $exception->getLine(); ?>
+			<?php } ?>
         </ul>
     </div>
 </div>

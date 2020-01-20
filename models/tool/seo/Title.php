@@ -6,7 +6,7 @@ class Title
 {
     public static function showTitle($text)
     {
-        $format = "Зоомагазин Котофей - %s";
+        $format = "%s - интернет зоомагазин Котофей";
         return sprintf($format, $text);
     }
 }
