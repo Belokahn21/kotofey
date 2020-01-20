@@ -16,6 +16,9 @@ use yii\web\UploadedFile;
  * @property integer $id
  * @property string $name
  * @property string $description
+ * @property string $seo_title
+ * @property string $seo_keywords
+ * @property string $seo_description
  * @property string $image
  * @property string $slug
  * @property integer $sort
@@ -54,7 +57,7 @@ class Category extends ActiveRecord
         return [
             [['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-            [['parent', 'seo_keywords', 'seo_description', 'description'], 'string'],
+            [['parent', 'seo_keywords', 'seo_description', 'description', 'seo_title'], 'string'],
 
             ['sort', 'integer'],
 
@@ -72,6 +75,7 @@ class Category extends ActiveRecord
             'sort' => 'Сортировка',
             'parent' => 'Родительский раздел',
             'image' => 'Изображение',
+            'seo_title' => 'Заголовок (seo)',
             'seo_keywords' => 'Ключевые слова (seo)',
             'seo_description' => 'Описание (seo)',
         ];
@@ -144,26 +148,5 @@ class Category extends ActiveRecord
         }
 
         return array_reverse($this->under_sections);
-    }
-
-    public $yml_categories;
-
-    public function loadYml(\DOMDocument &$dom, \DOMElement &$domElement, $parent_id = 0)
-    {
-        $categories = \app\models\entity\Category::find()->where(['parent' => $parent_id])->all();
-
-        if ($categories) {
-            foreach ($categories as &$category) {
-                $category_dom = $dom->createElement('category', $category->name);
-                $category_dom->setAttribute('id', $category->id);
-
-                if ($parent_id > 0) {
-                    $category_dom->setAttribute('parentId', $parent_id);
-                }
-
-                $domElement->appendChild($category_dom);
-                $this->loadYml($dom, $domElement, $category->id);
-            }
-        }
     }
 }
