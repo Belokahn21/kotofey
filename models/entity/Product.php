@@ -53,8 +53,8 @@ class Product extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_NEW_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-            self::SCENARIO_UPDATE_PRODUCT => ['name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_NEW_PRODUCT => ['base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_UPDATE_PRODUCT => ['base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
         ];
     }
 
@@ -63,7 +63,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active', 'base_price'], 'integer'],
 
             [['images', 'code', 'description', 'feed'], 'string'],
 
@@ -92,6 +92,7 @@ class Product extends \yii\db\ActiveRecord
             'category' => 'Раздел',
             'price' => 'Цена',
             'purchase' => 'Закупочная цена',
+            'base_price' => 'Базовая цена',
             'count' => 'Количество',
             'vitrine' => 'Товар витрина',
             'seo_description' => 'Описание (SEO)',

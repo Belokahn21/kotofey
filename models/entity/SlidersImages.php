@@ -35,7 +35,7 @@ class SlidersImages extends ActiveRecord
             [
                 'class' => UploadBehavior::class,
                 'attribute' => 'image',
-                'scenarios' => ['insert', 'update'],
+                'scenarios' => ['default'],
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/',
             ],
@@ -51,7 +51,7 @@ class SlidersImages extends ActiveRecord
 
             [['slider_id', 'sort', 'active'], 'integer'],
 
-            [['link'], 'string'],
+            [['link', 'text', 'description'], 'string'],
 
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
