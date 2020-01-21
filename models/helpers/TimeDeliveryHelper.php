@@ -95,7 +95,7 @@ class TimeDeliveryHelper
 	public static function isAfterNightTime()
 	{
 		$current_hour = date('H');
-		if ($current_hour <= self::END_HOUR_NIGHT) {
+		if ($current_hour >= self::END_HOUR_NIGHT) {
 			return true;
 		}
 		return false;
