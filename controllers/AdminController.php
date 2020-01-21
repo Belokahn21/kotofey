@@ -55,6 +55,7 @@ use app\models\search\SlidersSearchForm;
 use app\models\search\StockSearchForm;
 use app\models\search\UserSearchForm;
 use app\models\search\VacancySearchForm;
+use app\models\tool\Backup;
 use app\models\tool\Debug;
 use app\models\tool\export\YandexCatalogExport;
 use app\models\tool\export\YMLExport;
@@ -115,6 +116,16 @@ class AdminController extends Controller
     public function actionIndex()
     {
         $last_search = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
+
+        if (Yii::$app->request->get('save_dump') == 'Y') {
+            $backup = new Backup();
+            if ($backup->isOverSize()) {
+                $backup->clearDumpCatalog();
+            }
+            $backup->createDumpDatabase();
+
+            return $this->redirect(['admin/index']);
+        }
 
         return $this->render('index', [
             'last_search' => $last_search

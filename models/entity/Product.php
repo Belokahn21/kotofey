@@ -30,6 +30,7 @@ use yii\web\UploadedFile;
  * @property integer $sort
  * @property integer $category_id
  * @property integer $price
+ * @property integer $base_price
  * @property integer $purchase
  * @property integer $count
  * @property boolean $vitrine

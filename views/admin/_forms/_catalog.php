@@ -41,13 +41,18 @@ use yii\helpers\Json;
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
+                        <div class="form-element">
+							<?= $form->field($model, 'base_price')->textInput(['placeholder' => 'Базовая цена'])->label(false); ?>
+                        </div>
+                    </div>
+                    <div class="col-sm-3">
                         <div class="form-element">
 							<?= $form->field($model, 'purchase')->textInput(['id' => 'id-purchase', 'placeholder' => 'Закупочная цена'])->label(false); ?>
                         </div>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="form-element">
 							<?= $form->field($model, 'price')->textInput(['id' => 'id-price', 'placeholder' => 'Цена продажи'])->label(false); ?>
                         </div>
@@ -57,7 +62,7 @@ use yii\helpers\Json;
                         </div>
                     </div>
 
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <div class="form-element">
 							<?= $form->field($model, 'count')->textInput(['placeholder' => 'Количество'])->label(false); ?>
                         </div>

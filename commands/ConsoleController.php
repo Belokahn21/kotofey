@@ -24,46 +24,36 @@ class ConsoleController extends Controller
         }
     }
 
-    public function actionClean()
-    {
-        $sql = 'select `id`, `image` from `product` ';
-        $q = Yii::$app->db->createCommand($sql);
-
-        $products = $q->queryAll();
-
-        foreach ($products as $product) {
-            echo $product['image'];
-
-            if (!empty($product['image'])) {
-
-                $image = str_replace('/web/upload/', '', $product['image']);
-
-                $sql = 'UPDATE `product` SET `image`=:image WHERE `id`=:id';
-                Yii::$app->db->createCommand($sql)->bindValues([
-                    ':image' => $image,
-                    ':id' => $product['id']
-                ])->query();
-            }
-        }
-    }
-
     public function actionPrice()
     {
-        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
+        // hills
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
+        $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
 
-        $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
-
-
-        foreach ($products as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->price = $product->purchase;
-            $product->purchase = ceil($product->purchase - ($product->purchase * 15 / 100));
-//            $product->purchase = $product->price;
-//            $product->update();
-
-
-            echo $product->name . " update\n";
+        foreach ($products->all() as $product) {
+            if (empty($product->base_price)) {
+                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+                $product->base_price = $product->purchase;
+                $product->update();
+            }
         }
+
+        foreach ($products->all() as $product) {
+            if (!empty($product->base_price)) {
+                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+                $product->purchase = ceil($product->base_price - ($product->base_price * 0.12));
+                $product->update();
+            }
+        }
+
+        foreach ($products->all() as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->price = ceil($product->purchase + ($product->purchase * 0.30));
+            $product->update();
+            echo $product->name . PHP_EOL;
+        }
+
+        echo $products->count();
     }
 
     public function actionIndex()

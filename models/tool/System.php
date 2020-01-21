@@ -73,9 +73,6 @@ class System
         foreach (glob(rtrim($dir, '/') . '/*', GLOB_NOSORT) as $each) {
             $size += is_file($each) ? filesize($each) : $this->folderSize($each);
         }
-        echo "----\n";
-        echo $size;
-        echo "----\n";
         return $size;
     }
 }

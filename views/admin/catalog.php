@@ -93,6 +93,8 @@ $this->title = Title::showTitle("Товары"); ?>
 				return Html::a($model->name, '/admin/catalog/' . $model->id . '/');
 			}
 		],
+        'base_price',
+        'purchase',
 		[
 			'attribute' => 'price',
 			'format' => 'raw',
@@ -103,7 +105,6 @@ $this->title = Title::showTitle("Товары"); ?>
 				return $model->price;
 			}
 		],
-		'purchase',
 		[
 			'attribute' => 'category',
 			'format' => 'raw',
