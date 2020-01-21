@@ -13,24 +13,26 @@ $this->title = Title::showTitle("Зоотовары для животных в �
 ?>
 
 <?= SliderWidget::widget([
-    'slider_id' => 1,
-    'use_carousel' => true
+	'slider_id' => 1,
+	'use_carousel' => true
 ]) ?>
 
 <?php if ($providers): ?>
-    <section>
-        <h1 class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</h1>
-        <ul class="homepage-providers">
-			<?php foreach ($providers as $provider): ?>
-                <li class="homepage-providers__item">
-                    <a class="homepage-providers__link" href="<?= $provider->link; ?>">
-                        <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>" title="<?= $provider->name; ?>" alt="<?= $provider->name; ?>">
-                        <div class="homepage-providers__detail">К ассортимену</div>
-                    </a>
-                </li>
-			<?php endforeach; ?>
-        </ul>
-    </section>
+	<?php if ($this->beginCache('providers-cache', ['duration' => 3600 * 24 * 7])): ?>
+        <section>
+            <h1 class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</h1>
+            <ul class="homepage-providers">
+				<?php foreach ($providers as $provider): ?>
+                    <li class="homepage-providers__item">
+                        <a class="homepage-providers__link" href="<?= $provider->link; ?>">
+                            <img class="homepage-providers__image" src="/web/upload/<?= $provider->image; ?>" title="<?= $provider->name; ?>" alt="<?= $provider->name; ?>">
+                            <div class="homepage-providers__detail">К ассортимену</div>
+                        </a>
+                    </li>
+				<?php endforeach; ?>
+            </ul>
+        </section>
+		<?php $this->endCache(); endif; ?>
 <?php endif; ?>
 
 <ul class="advantages">
@@ -54,7 +56,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
 <div class="index-news__wrap">
     <h2 class="homepage-providers__title">Интересные новости</h2>
     <ul class="index-news">
-        <?php foreach ($news as $new): ?>
+		<?php foreach ($news as $new): ?>
             <li class="index-news__item">
                 <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
                     <img src="/web/upload/<?= $new->preview_image; ?>" class="index-news__image">
@@ -63,10 +65,10 @@ $this->title = Title::showTitle("Зоотовары для животных в �
                     <h3 class="index-news__title"><?= $new->title; ?></h3>
                 </a>
                 <div class="index-news__preview">
-                    <?= $new->preview; ?>
+					<?= $new->preview; ?>
                 </div>
             </li>
-        <?php endforeach; ?>
+		<?php endforeach; ?>
     </ul>
     <div class="index-news__control">
         <a class="index-news__control-link" href="<?= Url::to(['site/news']); ?>">Читать больше</a>
