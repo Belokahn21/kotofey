@@ -49,6 +49,11 @@ class ConsoleController extends Controller
         foreach ($products->all() as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->price = ceil($product->purchase + ($product->purchase * 0.30));
+
+            if ($product->active == 0) {
+                $product->active = 1;
+            }
+
             $product->update();
             echo $product->name . PHP_EOL;
         }
