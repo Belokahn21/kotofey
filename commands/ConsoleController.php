@@ -47,9 +47,9 @@ class ConsoleController extends Controller
             '2.5' => '24',
             '3' => '23',
             '4' => '22',
-            '5' => '18',
-            '6' => '17',
-            '7' => '16',
+            '5' => '16',
+            '6' => '15',
+            '7' => '14',
             '7.5' => '13',
             '10' => '12',
             '12' => '11',
@@ -64,9 +64,12 @@ class ConsoleController extends Controller
 
             if ($percent = $sale[$product_weight->value]) {
                 $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-                $product->price = $product->purchase + ($product->purchase * ($percent / 100));
-                $product->update();
-                echo sprintf('id:%s (%s%%) oldPrice: %s newPrice: %s %s', $product->id, $percent, $product->price, $product->purchase + ($product->purchase * ($percent / 100)), $product->name) . PHP_EOL;
+                $product->price = ceil($product->purchase + ($product->purchase * ($percent / 100)));
+                if ($product->validate()) {
+                    if ($product->update() !== false) {
+                        echo sprintf('id:%s (%s%%) oldPrice: %s newPrice: %s %s', $product->id, $percent, $product->price, $product->purchase + ($product->purchase * ($percent / 100)), $product->name) . PHP_EOL;
+                    }
+                }
             }
         }
     }
