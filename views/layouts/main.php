@@ -19,6 +19,7 @@ use app\widgets\search\SearchWidget;
 use app\widgets\cookie\CookieWidget;
 use yii\helpers\Url;
 use app\models\services\CompareService;
+use app\widgets\geo\GeoWidget;
 
 AppAsset::register($this);
 
@@ -53,12 +54,7 @@ $this->beginPage() ?>
 
 <div class="wrap-page">
     <div class="top-menu-wrap">
-        <div class="current-city">
-            Ваш город: <span class="select-city">
-                <span class="select-city__city"><?= Geo::findOne($_SESSION['city_id'])->name; ?></span>
-                <span class="select-city__change" data-toggle="modal" data-target="#select-city-id">(изменить)</span>
-            </span>
-        </div>
+		<?= GeoWidget::widget(); ?>
         <ul class="top-menu">
             <li class="top-menu__item"><a class="top-menu__link" href="/delivery/">Доставка</a></li>
             <li class="top-menu__item"><a class="top-menu__link" href="/payment/">Оплата</a></li>
