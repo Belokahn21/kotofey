@@ -11,11 +11,8 @@ class GeoWidget extends Widget
 
 	public function run()
 	{
-		$location = (new CityDefine())->init();
-		$cities = Geo::find()->where(['type' => Geo::TYPE_OBJECT_CITY])->all();
-
+		$cities = Geo::find()->where(['type' => Geo::TYPE_OBJECT_CITY, 'active' => 1])->all();
 		return $this->render('default', [
-			'location' => $location,
 			'cities' => $cities
 		]);
 	}
