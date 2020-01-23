@@ -10,8 +10,18 @@ $(document).ready(function () {
     /* установить активный класс первому элементу --- конец */
 
     /* показать выпдающее меню --- начало */
-    $('.menu-controller').click(function (e) {
-        $('.full-menu-wrap').toggleClass('hide');
+    $('body').click(function (e) {
+        var div = $(".full-menu-wrap");
+        var menu_controller = $('.show-drop');
+        if (menu_controller.is(e.target)) {
+            div.removeClass('hide');
+            return true;
+        }
+
+        if (!div.is(e.target) && div.has(e.target).length === 0) {
+            div.addClass('hide');
+            return true;
+        }
     });
     /* показать выпдающее меню --- конец */
 
