@@ -47,7 +47,6 @@ $this->beginPage() ?>
 <?php $this->beginBody() ?>
 
 <?php // NotifyWidget::widget(); ?>
-<?= $this->render('include/modal/select-city'); ?>
 
 <?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
