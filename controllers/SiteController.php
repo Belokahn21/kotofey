@@ -26,6 +26,7 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportMessage;
 use app\models\entity\support\Tickets;
 use app\models\entity\user\Billing;
+use app\models\entity\UsersReferal;
 use app\models\entity\Vacancy;
 use app\models\forms\CatalogFilter;
 use app\models\forms\DiscountForm;
@@ -663,7 +664,7 @@ class SiteController extends Controller
 		]);
 	}
 
-	public function actionSignup()
+	public function actionSignup($referal_key = null)
 	{
 		$model = new User(['scenario' => User::SCENARIO_INSERT]);
 
@@ -679,6 +680,21 @@ class SiteController extends Controller
 					$model->setPassword($model->password);
 					if ($model->save()) {
 						if (Yii::$app->user->login($model, Yii::$app->params['users']['rememberMeDuration'])) {
+
+
+							// если указан реферальный код, то запишем тому кто регнулся код того кто позвал
+							if (!empty($referal_key)) {
+								$referal_called = UsersReferal::findOneByKey($referal_key);
+								if (!$referal_called->isOwner($referal_key)) {
+									$self_referal = UsersReferal::findOneByUserId($model->id);
+									if ($self_referal) {
+										$self_referal->key_called = $referal_called->key:
+										$self_referal->update();
+									}
+								}
+							}
+
+
 							Alert::setSuccessNotify("Успешная регистрация!");
 							return $this->redirect("/");
 						}

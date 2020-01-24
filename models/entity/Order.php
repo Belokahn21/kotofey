@@ -82,6 +82,7 @@ class Order extends ActiveRecord
 	{
 
 		if ($this->is_update) {
+			// заказ оплачен, не получили бонусов и не отменён
 			if ($this->is_paid == 1 && $this->is_bonus == 0 && $this->promo_code == 0 && $this->is_cancel == 0) {
 				if ($discount = Discount::findByUserId($this->user_id)) {
 					$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
@@ -100,6 +101,11 @@ class Order extends ActiveRecord
 				$this->is_bonus = true;
 				$this->update();
 			}
+
+//			if ($this->is_paid == 1 && $this->is_cancel == 0) {
+//				// наградим приглосившего
+//				$referal_called = UsersReferal::findOneByUserId();
+//			}
 		}
 
 		parent::afterSave($insert, $changedAttributes);
