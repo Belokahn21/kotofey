@@ -50,13 +50,18 @@ class ProductSearchForm extends Product
 
 
 		if (!empty($this->name)) {
-			$explode = explode(' ', $this->name);
-			$sql = "";
-			foreach ($explode as $search_phrase) {
-				$sql .= sprintf("`name` like '%%%s%%' and ", $search_phrase);
+			$query->where(['like', 'name', $this->name]);
+			$query->orWhere(['like', 'feed', $this->name]);
+
+			if ($query->count() == 0) {
+				$words = explode(" ", $this->name);
+				if (count($words) > 1) {
+					foreach ($words as $word) {
+						$query->andWhere(['like', 'name', $word]);
+						$query->orWhere(['like', 'feed', $word]);
+					}
+				}
 			}
-			$sql = substr($sql,0,-5);
-			$query->andWhere($sql);
 		}
 
 		return $dataProvider;

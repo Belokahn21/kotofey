@@ -111,12 +111,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         parent::afterSave($insert, $changedAttributes);
 
         if ($insert) {
-            $billing = new Billing();
-            $billing->user_id = $this->id;
-            if ($billing->validate()) {
-                $billing->save();
-            }
-
             if (!Discount::findByUserId($this->id)) {
                 $discount = new Discount();
                 $discount->user_id = $this->id;

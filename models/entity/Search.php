@@ -51,19 +51,31 @@ class Search extends Model
 			if (!\Yii::$app->user->isGuest) {
 				$SearchQuery->user_id = \Yii::$app->user->id;
 			}
-			$words = explode(" ", $phrase);
 
-			if (count($words) > 1) {
+			$products->where(['like', 'name', $phrase]);
+			$products->orWhere(['like', 'feed', $phrase]);
 
-				foreach ($words as $word) {
-					$products->andWhere(['like', 'name', $word]);
-					$products->orWhere(['like', 'feed', $word]);
+			if ($products->count() == 0) {
+				$words = explode(" ", $phrase);
+				if (count($words) > 1) {
+					foreach ($words as $word) {
+						$products->andWhere(['like', 'name', $word]);
+						$products->orWhere(['like', 'feed', $word]);
+					}
 				}
-
-			} else {
-				$products->where(['like', 'name', $this->search]);
-				$products->orWhere(['like', 'feed', $this->search]);
 			}
+
+//			if (count($words) > 1) {
+//
+//				foreach ($words as $word) {
+//					$products->andWhere(['like', 'name', $word]);
+//					$products->orWhere(['like', 'feed', $word]);
+//				}
+//
+//			} else {
+//				$products->where(['like', 'name', $this->search]);
+//				$products->orWhere(['like', 'feed', $this->search]);
+//			}
 
 		}
 

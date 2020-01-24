@@ -20,6 +20,7 @@ use yii\db\ActiveRecord;
  * @property string $comment
  * @property integer $status
  * @property boolean $is_paid
+ * @property boolean $is_cancel
  * @property string $promo_code
  * @property string $is_bonus
  * @property integer $created_at
@@ -45,9 +46,9 @@ class Order extends ActiveRecord
 
             [['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
 
-            [['is_paid', 'is_bonus'], 'default', 'value' => false],
+            [['is_paid', 'is_bonus', 'is_cancel'], 'default', 'value' => false],
 
-            [['is_bonus'], 'boolean'],
+            [['is_bonus','is_cancel'], 'boolean'],
 
             ['type', 'default', 'value' => 3],
 
@@ -119,6 +120,7 @@ class Order extends ActiveRecord
             'payment_id' => 'Способ оплаты',
             'delivery_id' => 'Способ доставки',
             'is_paid' => 'Оплачено',
+            'is_cancel' => 'Закакз отменён',
             'user_id' => 'Покупатель',
             'cash' => 'Сумма заказа',
             'created_at' => 'Дата создания',
