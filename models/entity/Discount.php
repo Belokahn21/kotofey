@@ -15,6 +15,7 @@ use yii\db\ActiveRecord;
 class Discount extends ActiveRecord
 {
 	const PERCENT_AFTER_SALE = 5;
+	const REFERAL_COUNT_REWARD_MONEY = 200;
 
 	public function rules()
 	{

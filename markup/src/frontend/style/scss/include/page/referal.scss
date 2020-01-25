@@ -1,0 +1,73 @@
+.referal-stats {
+  margin: 40px 0;
+
+  &__item {
+    &:not(:last-child) {
+      border-right: 1px #e3e3e3 solid;
+    }
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2% 0;
+  }
+
+  &__title {
+    font-size: 18px;
+  }
+
+  &__counter {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 2% 0;
+    padding: 3%;
+    color: white;
+    font-weight: bold;
+    background: $mainActiveColor;
+  }
+}
+
+.personal-link {
+  &__wrap-link {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__link {
+    width: 90%;
+  }
+
+  &__input {
+    width: 100%;
+    border: 1px #e3e3e3 solid;
+    padding: 1%;
+  }
+
+  &__copy {
+    width: 15%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: $mainActiveColor;
+
+    &:hover {
+      border: 1px $mainActiveColor solid;
+      cursor: pointer;
+    }
+  }
+
+  &__label {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+  }
+}

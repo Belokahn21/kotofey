@@ -13,7 +13,6 @@ use app\widgets\notification\Alert;
 use app\widgets\Breadcrumbs;
 use app\models\entity\SiteSettings;
 use yii\widgets\ActiveForm;
-use app\models\entity\Geo;
 use app\models\entity\Subscribe;
 use app\widgets\search\SearchWidget;
 use app\widgets\cookie\CookieWidget;
@@ -45,12 +44,9 @@ $this->beginPage() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-
 <?php // NotifyWidget::widget(); ?>
-
 <?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
-
 <div class="wrap-page">
     <div class="top-menu-wrap">
 		<?= GeoWidget::widget(); ?>
@@ -237,8 +233,9 @@ $this->beginPage() ?>
             <div class="footer-block">
                 <ul class="footer-info">
                     <li class="footer-info__item footer-current-city">
-                        Ваш город
-                        <div>Барнаул</div>
+						<?= GeoWidget::widget([
+							'template' => 'footer'
+						]); ?>
                     </li>
                     <li class="footer-info__item time-work">
                         Ежедневно с 08.00 до 23.00

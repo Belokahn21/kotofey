@@ -9,6 +9,7 @@
  * @var $payment \app\models\entity\Payment[]
  * @var $order_date \app\models\entity\OrderDate
  * @var $delivery_time \app\models\services\DeliveryTimeService
+ * @var $billing_list \app\models\entity\user\Billing[]
  */
 
 use app\models\tool\Price;
@@ -55,6 +56,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                         'payment' => $payment,
                         'delivery_time' => $delivery_time,
                         'order_date' => $order_date,
+                        'billing_list' => $billing_list,
                     ]); ?>
                 <?php endif; ?>
             </div>

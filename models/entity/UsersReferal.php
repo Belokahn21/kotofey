@@ -2,7 +2,9 @@
 
 namespace app\models\entity;
 
+use app\models\services\ReferalService;
 use Yii;
+use yii\base\UnknownPropertyException;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -12,6 +14,8 @@ use yii\behaviors\TimestampBehavior;
  * @property int $is_active
  * @property int $user_id
  * @property string $key
+ * @property string $key_called
+ * @property int $has_rewarded
  * @property int $created_at
  * @property int $updated_at
  */
@@ -62,12 +66,20 @@ class UsersReferal extends \yii\db\ActiveRecord
 
 	public function createRefreal($user_id)
 	{
-		echo $user_id . PHP_EOL;
+		$referal_called = ReferalService::getInstance()->getCookieValue();
+		if ($referal_called !== false) {
+			$this->key_called = $referal_called;
+		}
+
 		$this->user_id = $user_id;
 		$this->generateKey();
 
 		if ($this->validate()) {
 			if ($this->save()) {
+				try {
+					ReferalService::getInstance()->destroyKeyGuest();
+				} catch (UnknownPropertyException $exception) {
+				}
 				return true;
 			}
 		}
@@ -93,5 +105,10 @@ class UsersReferal extends \yii\db\ActiveRecord
 	public function isOwner($key)
 	{
 		return $this->key === $key;
+	}
+
+	public function getCalled()
+	{
+		return static::findOneByKey($this->key_called);
 	}
 }

@@ -32,6 +32,7 @@ use app\models\forms\CatalogFilter;
 use app\models\forms\DiscountForm;
 use app\models\helpers\OrderHelper;
 use app\models\services\DeliveryTimeService;
+use app\models\services\ReferalService;
 use app\models\tool\Debug;
 use app\models\tool\seo\Attributes;
 use app\models\entity\User;
@@ -199,6 +200,10 @@ class SiteController extends Controller
 				date_default_timezone_set($geo->timeZone->value);
 			}
 		}
+
+
+		$referal = new ReferalService();
+		$referal->saveKeyToGuest();
 
 
 		return parent::beforeAction($action);
@@ -491,12 +496,25 @@ class SiteController extends Controller
 		} else {
 			$order = new Order();
 			$items = new OrdersItems();
+			$order_billing = new OrderBilling();
 			$user = User::findOne(Yii::$app->user->id);
 			$user->scenario = User::SCENARIO_UPDATE;
-			$billing = $user->billing;
+			$billing = new Billing();
+			$billing_list = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
 
 			if (\Yii::$app->request->isPost) {
 				$transaction = $db->beginTransaction();
+
+
+				if ($billing->load(Yii::$app->request->post()) && $billing->validate()) {
+					if ($billing->save()) {
+						$order_billing->user_billing_id = $billing->id;
+					} else {
+						$transaction->rollBack();
+						Alert::setErrorNotify('Ошибка создания заказа #1');
+						return $this->refresh();
+					}
+				}
 
 				if ($discount_model->load(Yii::$app->request->post())) {
 					if ($discount_model->validate()) {
@@ -512,6 +530,15 @@ class SiteController extends Controller
 						$transaction->rollBack();
 						Alert::setErrorNotify(Debug::modelErrors($order));
 						return $this->refresh();
+					}
+
+					$order_billing->order_id = $order->id;
+					if ($order_billing->validate()) {
+						if (!$order_billing->save()) {
+							$transaction->rollBack();
+							Alert::setErrorNotify('Ошибка при создаии заказа #2');
+							return $this->refresh();
+						}
 					}
 				} else {
 					Alert::setErrorNotify(Debug::modelErrors($order));
@@ -562,6 +589,7 @@ class SiteController extends Controller
 				'payment' => $payment,
 				'delivery_time' => $delivery_time,
 				'order_date' => $order_date,
+				'billing_list' => $billing_list
 			]);
 		}
 	}
@@ -664,7 +692,7 @@ class SiteController extends Controller
 		]);
 	}
 
-	public function actionSignup($referal_key = null)
+	public function actionSignup()
 	{
 		$model = new User(['scenario' => User::SCENARIO_INSERT]);
 
@@ -680,21 +708,6 @@ class SiteController extends Controller
 					$model->setPassword($model->password);
 					if ($model->save()) {
 						if (Yii::$app->user->login($model, Yii::$app->params['users']['rememberMeDuration'])) {
-
-
-							// если указан реферальный код, то запишем тому кто регнулся код того кто позвал
-							if (!empty($referal_key)) {
-								$referal_called = UsersReferal::findOneByKey($referal_key);
-								if (!$referal_called->isOwner($referal_key)) {
-									$self_referal = UsersReferal::findOneByUserId($model->id);
-									if ($self_referal) {
-										$self_referal->key_called = $referal_called->key:
-										$self_referal->update();
-									}
-								}
-							}
-
-
 							Alert::setSuccessNotify("Успешная регистрация!");
 							return $this->redirect("/");
 						}
@@ -1079,5 +1092,10 @@ class SiteController extends Controller
 		Attributes::metaDescription('Сравнение товаров в интернет магазине Котофей');
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 		return $this->render('compare');
+	}
+
+	public function actionReferal()
+	{
+		return $this->render('referal');
 	}
 }

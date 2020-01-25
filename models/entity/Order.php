@@ -102,10 +102,17 @@ class Order extends ActiveRecord
 				$this->update();
 			}
 
-//			if ($this->is_paid == 1 && $this->is_cancel == 0) {
-//				// наградим приглосившего
-//				$referal_called = UsersReferal::findOneByUserId();
-//			}
+			if ($this->is_paid == 1 && $this->is_cancel == 0) {
+				$referal = UsersReferal::findOneByUserId($this->user_id);
+				if ($referal && $referal->has_rewarded == false) {
+					$referal->has_rewarded = true;
+					if ($referal->validate()) {
+						if ($referal->update() !== false) {
+							DiscountHelper::addBonus($referal->called->user_id, Discount::REFERAL_COUNT_REWARD_MONEY);
+						}
+					}
+				}
+			}
 		}
 
 		parent::afterSave($insert, $changedAttributes);
