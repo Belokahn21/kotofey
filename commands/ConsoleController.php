@@ -32,20 +32,13 @@ class ConsoleController extends Controller
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 6])->all();
 
         // hills
-        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
+//        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
+
+        // royal
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
         $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
 
         $sale = [
-            '0.082' => '30',
-            '0.085' => '30',
-            '0.156' => '30',
-            '0.354' => '30',
-            '0.37' => '30',
-            '0.3' => '30',
-            '0.36' => '30',
-            '0.25' => '30',
-            '0.4' => '30',
-            '0.8' => '30',
             '1' => '10',
             '1.5' => '10',
             '2' => '10',
@@ -65,22 +58,19 @@ class ConsoleController extends Controller
         foreach ($products->all() as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-//            $product->purchase = ceil($product->base_price - ($product->base_price * 0.12));
-//            $product->price = ceil($product->purchase + ($product->purchase * 0.10));
-//            $product->update();
+            $product_weight = ProductPropertiesValues::find()->where(['property_id' => 2, 'product_id' => $product->id])->one();
 
-            // для хилса
-			$product_weight = ProductPropertiesValues::find()->where(['property_id' => 2, 'product_id' => $product->id])->one();
-
-			if ($percent = $sale[$product_weight->value]) {
-				$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-				$product->price = ceil($product->purchase + ($product->purchase * ($percent / 100)));
-				if ($product->validate()) {
-					if ($product->update() !== false) {
-						echo sprintf('id:%s (%s%%) oldPrice: %s newPrice: %s %s', $product->id, $percent, $product->price, $product->purchase + ($product->purchase * ($percent / 100)), $product->name) . PHP_EOL;
-					}
-				}
-			}
+            $percent = 30;
+            if (array_key_exists($product_weight->value, $sale) && $product_weight->value >= 1) {
+                $percent = $sale[$product_weight->value];
+            }
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->price = ceil($product->purchase + ($product->purchase * ($percent / 100)));
+            if ($product->validate()) {
+                if ($product->update() !== false) {
+                    echo sprintf('id:%s (%s%%) oldPrice: %s newPrice: %s %s', $product->id, $percent, $product->price, $product->purchase + ($product->purchase * ($percent / 100)), $product->name) . PHP_EOL;
+                }
+            }
         }
     }
 
