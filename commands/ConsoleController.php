@@ -28,8 +28,10 @@ class ConsoleController extends Controller
 
 	public function actionPrice()
 	{
+	    // purina
+		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 6])->all();
 		// hills
-		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
+//		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
 		$products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
 
 		$sale = [
@@ -58,21 +60,24 @@ class ConsoleController extends Controller
 			'15' => '10',
 		];
 
-//        $show_product = [2004, 2005, 2064, 2107];
-
 		/* @var $product Product */
 		foreach ($products->all() as $product) {
-			$product_weight = ProductPropertiesValues::find()->where(['property_id' => 2, 'product_id' => $product->id])->one();
+		    $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+		    $product->active = 0;
+		    $product->update();
 
-			if ($percent = $sale[$product_weight->value]) {
-				$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-				$product->price = ceil($product->purchase + ($product->purchase * ($percent / 100)));
-				if ($product->validate()) {
-					if ($product->update() !== false) {
-						echo sprintf('id:%s (%s%%) oldPrice: %s newPrice: %s %s', $product->id, $percent, $product->price, $product->purchase + ($product->purchase * ($percent / 100)), $product->name) . PHP_EOL;
-					}
-				}
-			}
+		    // для хилса
+//			$product_weight = ProductPropertiesValues::find()->where(['property_id' => 2, 'product_id' => $product->id])->one();
+//
+//			if ($percent = $sale[$product_weight->value]) {
+//				$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+//				$product->price = ceil($product->purchase + ($product->purchase * ($percent / 100)));
+//				if ($product->validate()) {
+//					if ($product->update() !== false) {
+//						echo sprintf('id:%s (%s%%) oldPrice: %s newPrice: %s %s', $product->id, $percent, $product->price, $product->purchase + ($product->purchase * ($percent / 100)), $product->name) . PHP_EOL;
+//					}
+//				}
+//			}
 		}
 	}
 
