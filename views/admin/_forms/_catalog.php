@@ -8,6 +8,7 @@ use app\models\entity\Category;
 use app\models\entity\InformersValues;
 use app\models\entity\ProductPropertiesValues;
 use yii\helpers\Json;
+use app\models\entity\Vendor;
 
 /* @var $model \app\models\entity\Product */
 /* @var $modelDelivery \app\models\entity\ProductOrder */
@@ -38,6 +39,10 @@ use yii\helpers\Json;
 
                 <div class="form-element">
 					<?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?>
+                </div>
+
+                <div class="form-element">
+					<?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map(Vendor::find()->all(), 'id', 'name'), ['prompt' => 'Поставщик'])->label(false); ?>
                 </div>
 
                 <div class="row">

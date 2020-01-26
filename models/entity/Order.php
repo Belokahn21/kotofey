@@ -107,7 +107,7 @@ class Order extends ActiveRecord
                 $referal = UsersReferal::findOneByUserId($this->user_id);
                 if ($referal && $referal->has_rewarded == false) {
                     $referal->has_rewarded = true;
-                    $referal->coun_reward = Discount::REFERAL_COUNT_REWARD_MONEY;
+                    $referal->count_reward = Discount::REFERAL_COUNT_REWARD_MONEY;
                     if ($referal->validate()) {
                         if ($referal->update() !== false) {
                             DiscountHelper::addBonus($referal->called->user_id, Discount::REFERAL_COUNT_REWARD_MONEY);

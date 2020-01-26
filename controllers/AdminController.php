@@ -31,6 +31,8 @@ use app\models\entity\support\SupportStatus;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
 use app\models\entity\Vacancy;
+use app\models\entity\Vendor;
+use app\models\entity\VendorGroup;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
@@ -47,7 +49,8 @@ use app\models\search\PermissionsSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
-use app\models\search\ProvidersSearchForm;
+use app\models\search\VendorGroupSearchForm;
+use app\models\search\VendorSearchForm;
 use app\models\search\SettingsSearchForm;
 use app\models\search\ShortLinksSearchModel;
 use app\models\search\SlidersImagesSearchForm;
@@ -1053,22 +1056,16 @@ class AdminController extends Controller
         ]);
     }
 
-    public function actionProvider($id = null)
+    public function actionVendor($id = null)
     {
         if (Yii::$app->request->get('action') == 'delete') {
-            if (!$model = Providers::findOne($id)) {
+            if (!Vendor::findOne($id)->delete()) {
                 throw new HttpException(404, 'Запись не найдена');
-            }
-
-            if ($model->delete()) {
-                Alert::setSuccessNotify('Поставщик успешно удалён');
-                return $this->redirect('/admin/provider/');
             }
         }
 
         if ($id) {
-            $model = Providers::findOne($id);
-            $model->scenario = Providers::SCENARIO_UPDATE;
+            $model = Vendor::findOne($id);
             if (Yii::$app->request->isPost) {
                 if ($model->load(Yii::$app->request->post())) {
                     if ($model->update()) {
@@ -1076,13 +1073,13 @@ class AdminController extends Controller
                     }
                 }
             }
-            return $this->render('detail/provider', [
+            return $this->render('detail/vendor', [
                 'model' => $model
             ]);
         }
 
-        $model = new Providers(['scenario' => Providers::SCENARIO_INSERT]);
-        $searchModel = new ProvidersSearchForm();
+        $model = new Vendor();
+        $searchModel = new VendorSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (Yii::$app->request->isPost) {
@@ -1093,7 +1090,54 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('provider', [
+        return $this->render('vendor', [
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionVendorGroup($id = null)
+    {
+        if (Yii::$app->request->get('action') == 'delete') {
+            if (!VendorGroup::findOne($id)->delete()) {
+                throw new HttpException(404, 'Запись не найдена');
+            }
+        }
+
+        if ($id) {
+            $model = VendorGroup::findOne($id);
+            if (Yii::$app->request->isPost) {
+                if ($model->load(Yii::$app->request->post())) {
+                    if ($model->update()) {
+                        return $this->refresh();
+                    }
+                }
+            }
+            return $this->render('detail/vendor-group', [
+                'model' => $model
+            ]);
+        }
+
+        $model = new VendorGroup();
+        $searchModel = new VendorGroupSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate()) {
+                    if ($model->save()) {
+                        return $this->refresh();
+                    } else {
+                        exit(1);
+                    }
+                } else {
+                    exit(2);
+                }
+            }
+        }
+
+        return $this->render('vendor-group', [
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

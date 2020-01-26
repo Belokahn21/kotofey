@@ -3,6 +3,7 @@
 use app\models\tool\seo\Title;
 use app\models\helpers\UserReferalHelper;
 use app\models\entity\UsersReferal;
+use app\models\tool\System;
 
 /* @var $this \yii\web\View */
 
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Реферальная прогр�
     <div class="col-sm-5 personal-link">
         <label for="referal-input-id" class="personal-link__label">Ваша ссылка</label>
         <div class="personal-link__wrap-link">
-            <input id="referal-input-id" class="personal-link__input" type="text" value="https://kotofey.store/?ref=<?= UsersReferal::findOneByUserId(Yii::$app->user->id)->key; ?>">
+            <input id="referal-input-id" class="personal-link__input" type="text" value="<?= System::protocol(); ?>://<?= System::domain(); ?>/?ref=<?= UsersReferal::findOneByUserId(Yii::$app->user->id)->key; ?>">
             <div class="personal-link__copy" onclick="copyClipboard('referal-input-id');">
                 <i class="fas fa-copy"></i>
             </div>

@@ -1,6 +1,7 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
 use app\models\entity\GeoTimezone;
@@ -73,7 +74,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                                 </a>
                             </li>
                             <li class="panel-menu__item sub">
-                                <a href="<?=Url::to(['admin/timezone'])?>">
+                                <a href="<?= Url::to(['admin/timezone']) ?>">
                                     Временные зоны<span class="count"><?= GeoTimezone::find()->count() ?></span>
                                 </a>
                             </li>
@@ -93,11 +94,16 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <li class="panel-menu__item sub"><a href="/admin/payment/">Оплаты</a></li>
                             <li class="panel-menu__item sub"><a href="/admin/selling/">Продажи</a></li>
                             <li class="panel-menu__item sub"><a href="/admin/promo/">Промокоды</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/provider/">Поставщики</a></li>
+                            <li class="panel-menu__item sub">
+                                <a href="/admin/vendor/">Поставщики</a>
+                                <ul>
+                                    <li class="panel-menu__item sub"><a href="<?= Url::to(['admin/vendor-group']) ?>">Группы поставщиков</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="/admin/catalog/"><i class="fas fa-cookie"></i>Товары<span
-                                    class="count"><?= Product::find()->count() ?></span></a>
+                    <li class="panel-menu__item">
+                        <a href="/admin/catalog/"><i class="fas fa-cookie"></i>Товары<span class="count"><?= Product::find()->count() ?></span></a>
                         <ul>
                             <li class="panel-menu__item sub"><a href="/admin/category/">Разделы</a></li>
                             <li class="panel-menu__item sub"><a href="/admin/properties/">Свойства</a></li>
