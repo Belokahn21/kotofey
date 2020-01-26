@@ -19,6 +19,7 @@ class m200124_093537_create_users_referal_table extends Migration
 			'key' => $this->string(255)->notNull()->unique(),
 			'key_called' => $this->string(255)->null(),
 			'has_rewarded' => $this->boolean()->defaultValue(0),
+			'count_reward' => $this->integer()->defaultValue(0),
 			'created_at' => $this->integer(),
 			'updated_at' => $this->integer(),
 		]);

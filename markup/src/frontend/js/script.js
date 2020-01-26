@@ -1,6 +1,5 @@
 //= lib/init
 //= include/init
-
 $(document).ready(function () {
     $('.carousel').carousel();
     $('[data-toggle="tooltip"]').tooltip();
@@ -135,3 +134,11 @@ $(document).ready(function () {
         $catalog.addClass(display);
     });
 });
+
+function copyClipboard(id) {
+    var copyText = document.getElementById(id);
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /*For mobile devices*/
+    document.execCommand("copy");
+    // alert("Copied the text: " + copyText.value);
+}

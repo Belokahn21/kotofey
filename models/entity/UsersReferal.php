@@ -16,99 +16,104 @@ use yii\behaviors\TimestampBehavior;
  * @property string $key
  * @property string $key_called
  * @property int $has_rewarded
+ * @property int $count_reward
  * @property int $created_at
  * @property int $updated_at
  */
 class UsersReferal extends \yii\db\ActiveRecord
 {
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className()
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function tableName()
-	{
-		return 'users_referal';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'users_referal';
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function rules()
-	{
-		return [
-			[['is_active', 'user_id', 'created_at', 'updated_at'], 'integer'],
-			[['user_id', 'key'], 'required'],
-			[['key'], 'string', 'max' => 255],
-			[['key'], 'unique', 'targetClass' => UsersReferal::className()],
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['is_active', 'user_id', 'created_at', 'updated_at'], 'integer'],
+            [['user_id', 'key'], 'required'],
+            [['key'], 'string', 'max' => 255],
+            [['key'], 'unique', 'targetClass' => UsersReferal::className()],
+        ];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'is_active' => 'Is Active',
-			'user_id' => 'User ID',
-			'key' => 'Key',
-			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
-		];
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'is_active' => 'Is Active',
+            'user_id' => 'User ID',
+            'key' => 'Key',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+        ];
+    }
 
-	public function createRefreal($user_id)
-	{
-		$referal_called = ReferalService::getInstance()->getCookieValue();
-		if ($referal_called !== false) {
-			$this->key_called = $referal_called;
-		}
+    public function createRefreal($user_id)
+    {
 
-		$this->user_id = $user_id;
-		$this->generateKey();
+        try {
+            $referal_called = ReferalService::getInstance()->getCookieValue();
+            if ($referal_called !== false) {
+                $this->key_called = $referal_called;
+            }
+        } catch (UnknownPropertyException $exception) {
+        }
 
-		if ($this->validate()) {
-			if ($this->save()) {
-				try {
-					ReferalService::getInstance()->destroyKeyGuest();
-				} catch (UnknownPropertyException $exception) {
-				}
-				return true;
-			}
-		}
+        $this->user_id = $user_id;
+        $this->generateKey();
 
-		return false;
-	}
+        if ($this->validate()) {
+            if ($this->save()) {
+                try {
+                    ReferalService::getInstance()->destroyKeyGuest();
+                } catch (UnknownPropertyException $exception) {
+                }
+                return true;
+            }
+        }
 
-	public static function findOneByUserId($user_id)
-	{
-		return static::findOne(['user_id' => $user_id]);
-	}
+        return false;
+    }
 
-	public static function findOneByKey($key)
-	{
-		return static::findOne(['key' => $key]);
-	}
+    public static function findOneByUserId($user_id)
+    {
+        return static::findOne(['user_id' => $user_id]);
+    }
 
-	public function generateKey()
-	{
-		$this->key = substr(md5(time() . rand()), 0, 20);
-	}
+    public static function findOneByKey($key)
+    {
+        return static::findOne(['key' => $key]);
+    }
 
-	public function isOwner($key)
-	{
-		return $this->key === $key;
-	}
+    public function generateKey()
+    {
+        $this->key = substr(md5(time() . rand()), 0, 20);
+    }
 
-	public function getCalled()
-	{
-		return static::findOneByKey($this->key_called);
-	}
+    public function isOwner($key)
+    {
+        return $this->key === $key;
+    }
+
+    public function getCalled()
+    {
+        return static::findOneByKey($this->key_called);
+    }
 }

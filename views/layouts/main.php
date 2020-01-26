@@ -68,7 +68,7 @@ $this->beginPage() ?>
         <div class="logo-wrap">
             <a href="/" class="logo-link">
                 <div class="logo__image-wrap">
-                    <img src="/web/upload/images/_logo.png" alt="Интернет магазин зоотоваров с доставкой на дом" title="Интернет магазин зоотоваров с доставкой на дом">
+                    <img src="/upload/images/_logo.png" alt="Интернет магазин зоотоваров с доставкой на дом" title="Интернет магазин зоотоваров с доставкой на дом">
                 </div>
                 <div class="logo-title-wrap">
                     <div class="logo-title"><?= SiteSettings::getValueByCode('site_logo'); ?></div>
@@ -88,7 +88,7 @@ $this->beginPage() ?>
                     <div class="contact-value phone_mask"><?= SiteSettings::getValueByCode('phone_1') ?></div>
                     <span>
                         <a rel="nofollow" onclick="ym(55089223, 'reachGoal', 'whatsapp');" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
-                            <img class="contact-block__wa" src="/web/upload/images/whatsapp.png">
+                            <img class="contact-block__wa" src="/upload/images/whatsapp.png">
                         </a>
                     </span>
                 </div>
@@ -141,7 +141,7 @@ $this->beginPage() ?>
                     <li class="full-menu-item">
                         <a href="<?= $category->detail; ?>" class="full-menu-link">
                             <div class="full-menu-title">
-                                <img src="/web/upload/<?= $category->image; ?>" class="full-menu-image">
+                                <img src="/upload/<?= $category->image; ?>" class="full-menu-image">
 								<?= $category->name; ?>
                             </div>
                         </a>

@@ -25,6 +25,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
         <li class="profile-menu__item">
             <h2 class="profile-menu__item__title active-title">Профиль <i class="fas fa-user-cog" data-toggle="modal" data-target="#exampleModal"></i></h2>
             <ul class="profile-nav">
+                <li class="profile-nav__item"><a href="<?= Url::to(['site/referal']); ?>" class="profile-nav__link">Реферальная программа</a></li>
                 <li class="profile-nav__item"><a href="<?= Url::to(['site/billing']); ?>" class="profile-nav__link">Адреса доставки</a></li>
                 <li class="profile-nav__item"><a href="<?= Url::to(['site/order']); ?>" class="profile-nav__link">Ваши заказы (<?= Order::find()->where(['user_id' => Yii::$app->user->id])->count() ?>)</a></li>
                 <li class="profile-nav__item"><a href="javascript:void(0);" class="profile-nav__link" data-toggle="modal" data-target="#exampleModal">Редактировать профиль</a></li>
