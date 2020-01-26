@@ -115,7 +115,10 @@ class AjaxController extends Controller
                 $basket->add($basketItem);
             }
 
-            return true;
+            return Json::encode([
+                'status' => 200,
+                'body' => $this->renderPartial('basket')
+            ]);
         }
 
         return false;

@@ -7,9 +7,12 @@ $(document).ready(function () {
         var product_id = $(this).data('product');
 
         addBasket(product_id, 1).done(function (data) {
-            if (data == 1) {
+            var response = JSON.parse(data);
+            if (response.status == 200) {
                 $this.toggleClass('hide');
                 $this.next('.product-detail-calc-wrap').toggleClass('hide');
+
+                $('.basket__summary').html(response.body);
             }
         });
 
