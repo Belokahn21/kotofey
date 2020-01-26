@@ -36,6 +36,7 @@
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "js-datepicker": "^5.2.1",
+    "magnific-popup": "^1.1.0",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   }
