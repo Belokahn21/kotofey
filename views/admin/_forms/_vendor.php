@@ -3,6 +3,8 @@
 use yii\helpers\ArrayHelper;
 use app\models\entity\VendorGroup;
 
+/* @var $model \app\models\entity\Vendor */
+
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -19,6 +21,9 @@ use app\models\entity\VendorGroup;
         </div>
         <div class="form-element">
             <?php echo $form->field($model, 'address')->textInput(); ?>
+        </div>
+        <div class="form-element">
+            <?php echo $form->field($model, 'discount')->textInput(); ?>
         </div>
         <div class="form-element">
             <?php echo $form->field($model, 'group_id')->dropDownList(ArrayHelper::map(VendorGroup::find()->all(), 'id', 'name'), ['prompt' => 'Группа поставщиков']) ?>
