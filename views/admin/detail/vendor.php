@@ -17,7 +17,7 @@ use app\models\entity\SiteSettings;
 $this->title = Title::showTitle("Поставщик:" . $model->name); ?>
 <section>
     <h1 class="title">Поставщик: <?php echo $model->name; ?></h1>
-	<?= Html::a('Назад', ['admin/provider'], ['class' => 'btn-main']) ?>
+	<?= Html::a('Назад', ['admin/vendor'], ['class' => 'btn-main']) ?>
     <div class="product-form">
 		<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 		<?= $this->render('../_forms/_vendor', [
