@@ -1,7 +1,6 @@
 <?php
 
 /* @var $this \yii\web\View */
-
 /* @var $content string */
 
 use app\widgets\admin_panel\AdminPanel;
@@ -19,6 +18,7 @@ use app\widgets\cookie\CookieWidget;
 use yii\helpers\Url;
 use app\models\services\CompareService;
 use app\widgets\geo\GeoWidget;
+use app\widgets\inspector\InspectorWidget;
 
 AppAsset::register($this);
 
@@ -47,6 +47,7 @@ $this->beginPage() ?>
 <?php // NotifyWidget::widget(); ?>
 <?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
+<?= InspectorWidget::widget(); ?>
 <div class="wrap-page">
     <div class="top-menu-wrap">
 		<?= GeoWidget::widget(); ?>
