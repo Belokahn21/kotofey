@@ -23,6 +23,6 @@ class InspectorWidget extends Widget
 			return false;
 		}
 
-//		return $this->render($this->template);
+		return $this->render($this->template);
 	}
 }

@@ -8,5 +8,6 @@
 //= block/favorite
 //= block/catalog-filter
 //= block/select-order-date
+//= block/inspector
 
 $("#filter-form-id").catalogFilter();
