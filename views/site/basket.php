@@ -17,59 +17,59 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
 ?>
 <section class="basket">
     <h1>Корзина товаров</h1>
-    <?php if (Basket::count() > 0): ?>
-        <?= Html::a('Очистить корзину', "/clear/", ['class' => 'btn-cancel']); ?>
-        <?= Html::a('Оформить заказ', "/checkout/", ['class' => 'btn-main']); ?>
-    <?php endif; ?>
-    <?php if (!empty(Yii::$app->session->get('basket'))): ?>
+	<?php if (Basket::count() > 0): ?>
+		<?= Html::a('Очистить корзину', "/clear/", ['class' => 'btn-cancel']); ?>
+		<?= Html::a('Оформить заказ', "/checkout/", ['class' => 'btn-main']); ?>
+	<?php endif; ?>
+	<?php if (!empty(Yii::$app->session->get('basket'))): ?>
         <ul class="basket-page-list">
-            <?php /* @var $item \app\models\entity\OrdersItems */ ?>
-            <?php foreach (Basket::findAll() as $item): ?>
+			<?php /* @var $item \app\models\entity\OrdersItems */ ?>
+			<?php foreach (Basket::findAll() as $item): ?>
                 <li class="basket-page-item">
                     <div class="basket-page-item__image-wrap">
 
-                        <?php if ($item->product instanceof Product): ?>
+						<?php if ($item->product instanceof Product): ?>
                             <a href="<?= $item->product->detail; ?>">
-                                <?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
+								<?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
                                     <img src="/web/upload/<?= $item->product->image; ?>">
-                                <?php else: ?>
+								<?php else: ?>
                                     <img src="/web/upload/images/not-image.png">
-                                <?php endif; ?>
+								<?php endif; ?>
                             </a>
-                        <?php else: ?>
+						<?php else: ?>
                             <a href="javascript:void(0);">
-                                <?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
+								<?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
                                     <img src="/web/upload/<?= $item->product->image; ?>">
-                                <?php else: ?>
+								<?php else: ?>
                                     <img src="/web/upload/images/not-image.png">
-                                <?php endif; ?>
+								<?php endif; ?>
                             </a>
-                        <?php endif; ?>
+						<?php endif; ?>
 
                     </div>
                     <div class="basket-page-item__title">
 
-                        <?php if ($item->product instanceof Product): ?>
+						<?php if ($item->product instanceof Product): ?>
                             <a href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
-                        <?php else: ?>
+						<?php else: ?>
                             <a href="javascript:void(0);"><?= $item->name; ?></a>
-                        <?php endif; ?>
+						<?php endif; ?>
 
                     </div>
                     <div class="basket-page-item__calculate">
                         <div class="basket-page-item__price">
-                            <?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?>
+							<?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?>
                         </div>
-                        <form class="basket-page-item__form">
-                            <span><i class="fas fa-minus"></i></span>
-                            <input class="basket-page-item__form-input" type="text" name="count" placeholder="1" value="<?= $item->count; ?>">
-                            <span><i class="fas fa-plus"></i></span>
-                        </form>
+                        <div class="basket-page-item__form product-detail-calc-form">
+                            <span class="calc-min" data-product="<?= $item->product->id; ?>"><i class="fas fa-minus"></i></span>
+                            <input class="basket-page-item__form-input calc-count" type="text" name="count" placeholder="1" value="<?= $item->count; ?>">
+                            <span class="calc-plus" data-product="<?= $item->product->id; ?>"><i class="fas fa-plus"></i></span>
+                        </div>
                     </div>
                 </li>
-            <?php endforeach; ?>
+			<?php endforeach; ?>
         </ul>
-    <?php else: ?>
+	<?php else: ?>
         Ничего не выбрано
-    <?php endif; ?>
+	<?php endif; ?>
 </section>

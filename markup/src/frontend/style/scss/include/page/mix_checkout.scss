@@ -71,6 +71,10 @@
   font-size: 12px;
   margin: 3px 0;
 
+  &__title {
+    width: 70%;
+  }
+
   &__link {
     color: $mainColor;
 

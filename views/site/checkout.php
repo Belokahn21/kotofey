@@ -82,18 +82,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                             <a href="" class="checkout__cart-item__link"><?= $item->name; ?></a>
                         </div>
                         <div class="checkout__cart-item__count">
-                            <div class="checkout__cart-item__action-plus">
-                                <i class="fas fa-minus"></i>
-                            </div>
-
-
-                            <div class="checkout__cart-item__integer">
-                                <?= $item->count; ?>
-                            </div>
-
-
-                            <div class="checkout__cart-item__action-minus">
-                                <i class="fas fa-plus"></i>
+                            <div class="basket-page-item__form product-detail-calc-form">
+                                <span class="calc-min" data-product="<?= $item->product->id; ?>"><i class="fas fa-minus"></i></span>
+                                <input class="basket-page-item__form-input calc-count" type="text" name="count" placeholder="1" value="<?= $item->count; ?>">
+                                <span class="calc-plus" data-product="<?= $item->product->id; ?>"><i class="fas fa-plus"></i></span>
                             </div>
                         </div>
                         <div class="checkout__cart-item__summary"><?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
