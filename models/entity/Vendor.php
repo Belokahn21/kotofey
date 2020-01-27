@@ -54,7 +54,7 @@ class Vendor extends \yii\db\ActiveRecord
 		return [
 			[['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale'], 'integer'],
 			[['name'], 'required'],
-			[['name', 'slug', 'address'], 'string', 'max' => 255],
+			[['name', 'slug', 'address', 'legal_name'], 'string', 'max' => 255],
 		];
 	}
 
@@ -68,6 +68,7 @@ class Vendor extends \yii\db\ActiveRecord
 			'is_active' => 'Активность',
 			'sort' => 'Сортировка',
 			'name' => 'Название',
+			'legal_name' => 'Юридическое название',
 			'slug' => 'Символьный код',
 			'address' => 'Адрес',
 			'group_id' => 'Группа',

@@ -14,13 +14,22 @@ use app\models\entity\VendorGroup;
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="form-element">
-            <?= $form->field($model, 'is_active')->checkbox(); ?>
+			<?= $form->field($model, 'is_active')->checkbox(); ?>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-element">
+					<?= $form->field($model, 'name')->textInput(); ?>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-element">
+					<?= $form->field($model, 'legal_name')->textInput(); ?>
+                </div>
+            </div>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'name')->textInput(); ?>
-        </div>
-        <div class="form-element">
-            <?= $form->field($model, 'address')->textInput(); ?>
+			<?= $form->field($model, 'address')->textInput(); ?>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -40,7 +49,7 @@ use app\models\entity\VendorGroup;
             </div>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map(VendorGroup::find()->all(), 'id', 'name'), ['prompt' => 'Группа поставщиков']) ?>
+			<?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map(VendorGroup::find()->all(), 'id', 'name'), ['prompt' => 'Группа поставщиков']) ?>
         </div>
     </div>
 </div>
