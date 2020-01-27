@@ -128,7 +128,7 @@ use app\models\entity\Vendor;
                 <div class="form-image more">
 					<?php if ($model->images): ?>
 						<?php foreach (Json::decode($model->images) as $image): ?>
-                            <img src="/web/upload/<?= $image; ?>">
+                            <img src="<?= $image; ?>">
 						<?php endforeach; ?>
 					<?php endif; ?>
                 </div>
