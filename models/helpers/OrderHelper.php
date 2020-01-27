@@ -14,7 +14,11 @@ class OrderHelper
 {
 	public static function orderSummary($order_id)
 	{
-		return OrdersItems::find()->where(['order_id' => $order_id])->sum('price');
+		$summ = 0;
+		foreach (OrdersItems::find()->where(['order_id' => $order_id])->all() as $item) {
+			$summ += $item->count * $item->price;
+		}
+		return $summ;
 	}
 
 	public static function getStatus(Order $order)

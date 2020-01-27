@@ -67,8 +67,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
                                         <div class="orders-items-info__title"><?= $item->name; ?></div>
                                         <div class="row d-flex justify-content-between">
                                             <div class="col-sm-4"><?= $item->count; ?> шт</div>
-                                            <div class="col-sm-4"><?= $item->price; ?> р</div>
-                                            <div class="col-sm-4"><?= $item->count * $item->price; ?> р</div>
+                                            <div class="col-sm-4"><?= Price::format($item->price); ?> р</div>
+                                            <div class="col-sm-4"><?= Price::format($item->count * $item->price); ?> р</div>
                                         </div>
                                     </div>
                                 </li>
