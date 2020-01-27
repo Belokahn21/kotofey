@@ -478,7 +478,7 @@ class SiteController extends Controller
 
 				Basket::clear();
 				unset($_COOKIE['order']);
-				Alert::setSuccessNotify("Заказ успешно создан создан");
+				Alert::setSuccessNotify("Заказ успешно создан");
 				$transaction->commit();
 				return $this->redirect('/');
 			}
