@@ -47,7 +47,7 @@ class OrderStatistic extends Product
 			foreach ($items as $item) {
 				$product = Product::findOne($item->product_id);
 				if ($product) {
-					$out_summ += $product->price - $product->purchase;
+					$out_summ += ($product->price - $product->purchase) * $item->count;
 				}
 
 				if (empty($item->product_id)) {
