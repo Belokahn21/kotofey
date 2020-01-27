@@ -22,18 +22,18 @@ $this->title = Title::showTitle("Товары"); ?>
 <?= Html::a("Посмотреть на сайте", $model->detail, ['target' => '_blank', 'class' => 'btn-main']); ?>
 <div class="clearfix"></div>
 <section>
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $this->render('../_forms/_catalog', [
-        'model' => $model,
-        'modelDelivery' => $modelDelivery,
-        'form' => $form,
-        'properties' => $properties
-    ]); ?>
-    <?php if (Yii::$app->request->get('action') == 'copy'): ?>
-        <?php echo Html::submitInput('Копировать', ['name' => 'action', 'class' => 'btn-main', 'value' => 'new']); ?>
-        <?php echo Html::submitInput('Отмена', ['name' => 'action', 'class' => 'btn-main', 'value' => 'cancel']); ?>
-<?php else: ?>
-        <?php echo Html::submitInput('Обновить', ['class' => 'btn-main']); ?>
-<?php endif; ?>
-    <?php ActiveForm::end(); ?>
+	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+	<?= $this->render('../_forms/_catalog', [
+		'model' => $model,
+		'modelDelivery' => $modelDelivery,
+		'form' => $form,
+		'properties' => $properties
+	]); ?>
+	<?php if (Yii::$app->request->get('action') == 'copy'): ?>
+		<?php echo Html::submitInput('Копировать', ['name' => 'action', 'class' => 'btn-main', 'value' => 'new']); ?>
+		<?php echo Html::submitInput('Отмена', ['name' => 'action', 'class' => 'btn-main', 'value' => 'cancel']); ?>
+	<?php else: ?>
+		<?php echo Html::submitInput('Обновить', ['class' => 'btn-main']); ?>
+	<?php endif; ?>
+	<?php ActiveForm::end(); ?>
 </section>

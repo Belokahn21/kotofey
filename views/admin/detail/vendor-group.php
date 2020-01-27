@@ -18,7 +18,7 @@ $this->title = Title::showTitle("Поставщики"); ?>
 <section>
     <h1 class="title">Поставщики</h1>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $this->render('_forms/_vendor-group', [
+    <?= $this->render('../_forms/_vendor-group', [
         'model' => $model,
         'form' => $form
     ]); ?>

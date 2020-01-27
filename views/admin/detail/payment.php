@@ -15,11 +15,11 @@ $this->title = Title::showTitle($model->name);
 <section class="payment">
     <h1 class="title">Оплата: <?= $model->name; ?></h1>
 	<?= Html::a("Назад", '/admin/payment/', ['class' => 'btn-back']) ?>
-<?php $form = ActiveForm::begin(); ?>
+	<?php $form = ActiveForm::begin(); ?>
 	<?= $this->render('../_forms/_payment', [
 		'model' => $model,
 		'form' => $form,
 	]) ?>
 	<?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
-<?php ActiveForm::end(); ?>
+	<?php ActiveForm::end(); ?>
 </section>

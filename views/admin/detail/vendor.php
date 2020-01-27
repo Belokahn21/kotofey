@@ -20,7 +20,7 @@ $this->title = Title::showTitle("Поставщик:" . $model->name); ?>
 	<?= Html::a('Назад', ['admin/provider'], ['class' => 'btn-main']) ?>
     <div class="product-form">
 		<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-		<?= $this->render('../_forms/_provider', [
+		<?= $this->render('../_forms/_vendor', [
 			'model' => $model,
 			'form' => $form
 		]); ?>
