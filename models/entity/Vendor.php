@@ -17,6 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $address
  * @property int $group_id
  * @property int $discount
+ * @property int $min_summary_sale
  * @property int $time_open
  * @property int $time_close
  * @property int $created_at
@@ -25,56 +26,57 @@ use yii\behaviors\TimestampBehavior;
 class Vendor extends \yii\db\ActiveRecord
 {
 
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'name',
-                'ensureUnique' => true,
-            ],
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className(),
+			[
+				'class' => SluggableBehavior::className(),
+				'attribute' => 'name',
+				'ensureUnique' => true,
+			],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'vendor';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function tableName()
+	{
+		return 'vendor';
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close'], 'integer'],
-            [['name'], 'required'],
-            [['name', 'slug', 'address'], 'string', 'max' => 255],
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale'], 'integer'],
+			[['name'], 'required'],
+			[['name', 'slug', 'address'], 'string', 'max' => 255],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'is_active' => 'Активность',
-            'sort' => 'Сортировка',
-            'name' => 'Название',
-            'slug' => 'Символьный код',
-            'address' => 'Адрес',
-            'group_id' => 'Группа',
-            'discount' => 'Скидка',
-            'time_open' => 'Время открытия',
-            'time_close' => 'Время закрытия',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата опоздания',
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'is_active' => 'Активность',
+			'sort' => 'Сортировка',
+			'name' => 'Название',
+			'slug' => 'Символьный код',
+			'address' => 'Адрес',
+			'group_id' => 'Группа',
+			'discount' => 'Скидка',
+			'min_summary_sale' => 'Минимальная сумма заказа',
+			'time_open' => 'Время открытия',
+			'time_close' => 'Время закрытия',
+			'created_at' => 'Дата создания',
+			'updated_at' => 'Дата опоздания',
+		];
+	}
 }
