@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "order_date".
@@ -16,41 +17,48 @@ use Yii;
  */
 class OrderDate extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'order_date';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function tableName()
+	{
+		return 'order_date';
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['date'], 'required', 'message' => 'Пожалуйста укажите день доставки'],
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className(),
+		];
+	}
 
-            [['time'], 'required', 'message' => 'Пожалуйста выберите время доставки'],
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['date'], 'required', 'message' => 'Пожалуйста укажите день доставки'],
 
-            [['order_id', 'created_at', 'updated_at'], 'integer'],
-            [['date', 'time'], 'string', 'max' => 255],
-        ];
-    }
+			[['time'], 'required', 'message' => 'Пожалуйста выберите время доставки'],
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'order_id' => 'ID заказа',
-            'date' => 'День',
-            'time' => 'Время',
-            'created_at' => 'Время создания',
-            'updated_at' => 'Время обновления',
-        ];
-    }
+			[['order_id', 'created_at', 'updated_at'], 'integer'],
+			[['date', 'time'], 'string', 'max' => 255],
+		];
+	}
+
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'order_id' => 'ID заказа',
+			'date' => 'День',
+			'time' => 'Время',
+			'created_at' => 'Время создания',
+			'updated_at' => 'Время обновления',
+		];
+	}
 }
