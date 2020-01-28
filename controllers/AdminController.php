@@ -897,8 +897,30 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionNewssections()
+	public function actionNewssections($id = null)
 	{
+		if ($id) {
+			$model = NewsCategory::findOne($id);
+			if (!$model) {
+				throw new HttpException(404, 'Запись не найдена');
+			}
+
+			if (\Yii::$app->request->isPost) {
+				if ($model->load(\Yii::$app->request->post())) {
+					if ($model->validate()) {
+						if ($model->update()) {
+							Alert::setSuccessNotify('Рубрика обновлена');
+							return $this->refresh();
+						}
+					}
+				}
+			}
+
+			return $this->render('detail/news-category', [
+				'model' => $model,
+			]);
+		}
+
 		$model = new NewsCategory();
 		$searchModel = new NewsCategorySearchForm();
 		$dataProvider = $searchModel->search(\Yii::$app->request->get());
@@ -907,6 +929,7 @@ class AdminController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
+						Alert::setSuccessNotify('Рубрика создана');
 						return $this->refresh();
 					}
 				}
