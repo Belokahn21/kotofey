@@ -47,7 +47,7 @@ $this->beginPage() ?>
 <?php // NotifyWidget::widget(); ?>
 <?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
-<?= InspectorWidget::widget(); ?>
+<?php // InspectorWidget::widget(); ?>
 <div class="wrap-page">
     <div class="top-menu-wrap">
 		<?= GeoWidget::widget(); ?>
