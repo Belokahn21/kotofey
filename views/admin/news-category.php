@@ -20,7 +20,7 @@ $this->title = Title::showTitle("Рубрики");
 		'model' => $model,
 		'form' => $form,
 	]); ?>
-	<?= Html::submitButton('Добавить'); ?>
+	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 	<?php ActiveForm::end(); ?>
 </section>
 <div class="clearfix"></div>

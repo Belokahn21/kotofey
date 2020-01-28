@@ -4,7 +4,7 @@ use yii\helpers\ArrayHelper;
 use app\models\entity\NewsCategory;
 use mihaildev\ckeditor\CKEditor;
 
-/* @var $model \app\models\entity\News */
+/* @var $model \app\models\entity\NewsCategory */
 
 ?>
 <nav>
@@ -22,9 +22,6 @@ use mihaildev\ckeditor\CKEditor;
         </div>
         <div class="form-element">
 			<?= $form->field($model, 'parent')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать родительский раздел']); ?>
-        </div>
-        <div class="form-element">
-			<?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?>
         </div>
     </div>
 </div>
