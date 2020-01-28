@@ -94,15 +94,9 @@ class CatalogFilter extends Model
                     'value' => $value_list
                 ]);
 
-//                if (!empty($this->weight_from) or !empty($this->weight_to)) {
-//                    $values->andWhere(new Expression('`property_id`="2" and CAST(`value` AS INT) > "' . $this->weight_from . '" and CAST(`value` AS INT) < "' . $this->weight_to . '"'));
-//                }
-
-
                 $values->groupBy('product_id');
                 $values->having("count(*) = " . $iter);
 
-//                Debug::printFile($values->prepare(\Yii::$app->db->queryBuilder)->createCommand()->rawSql);
                 $values = $values->all();
                 $list_property_ids = array_merge($list_property_ids, ArrayHelper::getColumn($values, 'product_id'));
 
