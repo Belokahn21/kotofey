@@ -33,7 +33,15 @@ $this->title = Title::showTitle("Справочники"); ?>
 		'id',
 		[
 			'attribute' => 'active',
+			'format' => 'raw',
 			'filter' => ['Не активен', 'Активен'],
+			'value' => function ($model) {
+				if ($model->active) {
+					return Html::tag('span', 'Активен', ['class' => 'green']);
+				} else {
+					return Html::tag('span', 'Не активен', ['class' => 'red']);
+				}
+			}
 		],
 		[
 			'attribute' => 'name',

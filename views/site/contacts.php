@@ -3,17 +3,59 @@
 
 use app\models\tool\seo\Title;
 use app\models\entity\SiteSettings;
+use yii\helpers\Url;
 
 $this->title = Title::showTitle("Контакты");
 ?>
 
-<h1 class="title">Контакты компании</h1>
+<?php
+$this->params['breadcrumbs'][] = ['label' => 'Контакты', 'url' => Url::to(['site/contacts'])];
+?>
+<h1 class="title">Контакты зоомагазина</h1>
+<div class="d-flex flex-row justify-content-start">
+    <ul class="fa-ul w-50">
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            Email: <span><?= SiteSettings::getValueByCode('email'); ?></span>
+        </li>
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            Email поддержки сайта: <span>support@kotofey.store</span>
+        </li>
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            Телефон: <span class="phone_mask"><?= SiteSettings::getValueByCode('phone_1'); ?></span>
+        </li>
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            Телефон: <span class="phone_mask"><?= SiteSettings::getValueByCode('phone_2'); ?></span>
+        </li>
+    </ul>
+    <ul class="fa-ul w-50">
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            ИП Васин К.В.
+        </li>
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            ИНН <span>222261129226</span>
+        </li>
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            ОГРН <span>319222500105168</span>
+        </li>
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            Юридический адрес <span>г.Барнаул, ул. Весенняя, д. 4.</span>
+        </li>
+        <li>
+            <span class="fa-li"><i class="fas fa-paw"></i></span>
+            Физический адрес <span>г.Барнаул, ул. Весенняя, д. 4.</span>
+        </li>
+    </ul>
+</div>
+<h2>Режим работы зоомагазина</h2>
+<p>Заявки на сайте принимаются круглосуточно.</p>
+<p>Доставка заказов производится с <strong>понедельника по пятницу</strong> в утренние часы с <strong>8.00 до 11.00</strong> и в вечернее время с <strong>19.00 до 23.00.</strong></p>
 
-<ul class="contacts-list">
-    <li class="contacts-list__item">Email: <span><?= SiteSettings::getValueByCode('email'); ?></span></li>
-    <li class="contacts-list__item">Email поддержки сайта: <span>support@kotofey.store</span></li>
-    <li class="contacts-list__item">Телефон: <span class="phone_mask"><?= SiteSettings::getValueByCode('phone_1'); ?></span></li>
-    <li class="contacts-list__item">Наш адрес: <span>Россия, Алтайский край, г. Барнаул</span></li>
-</ul>
 <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75a2c08cf453a0309392fdcb243329f2301db73bdb97f18c8bc32cb9e14c1f93&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
-<!--<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A1f9b2285d3a2aa01708721bf43ba58cb3c9065d7c01e0ca9aa70d854fc3f5697&amp;width=100%25&amp;height=470&amp;lang=ru_RU&amp;scroll=true"></script>-->

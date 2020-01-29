@@ -52,6 +52,8 @@ class Informers extends ActiveRecord
             'slug' => 'Символьный код',
             'description' => 'Описание',
             'id' => 'ID',
+            'is_active' => 'Активность',
+            'is_show_filter' => 'Выводить в фильтре',
         ];
     }
 }
