@@ -31,7 +31,19 @@
   }
   .catalog-list {
     &__item {
-      width: 29.7%;
+      width: 32%;
+    }
+  }
+
+  .subscribe-form {
+    display: flex;
+    flex-direction: column;
+
+    &__input, &__submit {
+      width: 100%;
+    }
+    &__submit {
+      margin: 3% 0;
     }
   }
 }

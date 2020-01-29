@@ -57,5 +57,4 @@ $this->params['breadcrumbs'][] = ['label' => 'Контакты', 'url' => Url::t
 <h2>Режим работы зоомагазина</h2>
 <p>Заявки на сайте принимаются круглосуточно.</p>
 <p>Доставка заказов производится с <strong>понедельника по пятницу</strong> в утренние часы с <strong>8.00 до 11.00</strong> и в вечернее время с <strong>19.00 до 23.00.</strong></p>
-
 <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75a2c08cf453a0309392fdcb243329f2301db73bdb97f18c8bc32cb9e14c1f93&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
