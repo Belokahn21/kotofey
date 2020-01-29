@@ -29,6 +29,11 @@
   .phone-group {
     justify-content: stretch;
   }
+  .catalog-list {
+    &__item {
+      width: 29.7%;
+    }
+  }
 }
 
 @media screen and (min-width: 1024px) and (max-width: 1240px) {

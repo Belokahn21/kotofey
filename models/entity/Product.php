@@ -54,8 +54,8 @@ class Product extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_NEW_PRODUCT => ['vendor_id', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-            self::SCENARIO_UPDATE_PRODUCT => ['vendor_id', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_NEW_PRODUCT => ['vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_UPDATE_PRODUCT => ['vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
         ];
     }
 
@@ -64,7 +64,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active', 'base_price', 'vendor_id'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active', 'base_price', 'vendor_id', 'discount_price'], 'integer'],
 
             [['images', 'code', 'description', 'feed'], 'string'],
 
@@ -94,6 +94,7 @@ class Product extends \yii\db\ActiveRecord
             'price' => 'Цена',
             'purchase' => 'Закупочная цена',
             'base_price' => 'Базовая цена',
+            'discount_price' => 'Цена со скидкой',
             'count' => 'Количество',
             'vitrine' => 'Товар витрина',
             'seo_description' => 'Описание (SEO)',
