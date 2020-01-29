@@ -467,636 +467,670 @@ class SiteController extends Controller
 				if ($order_billing->validate()) {
 					if (!$order_billing->save()) {
 						$transaction->rollBack();
-					}
-				}
-
-				$items->order_id = $order->id;
-				if ($items->saveItems() === false) {
-					$transaction->rollBack();
-					Alert::setErrorNotify(Debug::modelErrors($items));
-					return $this->refresh();
-				}
-
-				Basket::clear();
-				unset($_COOKIE['order']);
-				Alert::setSuccessNotify("Заказ успешно создан");
-				$transaction->commit();
-				return $this->redirect('/');
-			}
-
-			return $this->render('checkout', [
-				'discount_model' => $discount_model,
-				'user' => $user,
-				'billing' => $billing,
-				'order' => $order,
-				'delivery' => $delivery,
-				'payment' => $payment,
-				'delivery_time' => $delivery_time,
-				'order_date' => $order_date,
-			]);
-		} else {
-			$order = new Order();
-			$items = new OrdersItems();
-			$order_billing = new OrderBilling();
-			$user = User::findOne(Yii::$app->user->id);
-			$user->scenario = User::SCENARIO_UPDATE;
-			$billing = new Billing();
-			$billing_list = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
-
-			if (\Yii::$app->request->isPost) {
-				$transaction = $db->beginTransaction();
-
-
-				if ($billing->load(Yii::$app->request->post()) && $billing->validate()) {
-					if ($billing->save()) {
-						$order_billing->user_billing_id = $billing->id;
-					} else {
-						$transaction->rollBack();
-						Alert::setErrorNotify('Ошибка создания заказа #1');
 						return $this->refresh();
-					}
-				}
-
-				if ($discount_model->load(Yii::$app->request->post())) {
-					if ($discount_model->validate()) {
-						if ($discount_model->calc($order, 'promo_code') === false) {
-							$transaction->rollBack();
-						}
-					}
-				}
-
-				$order->user_id = $user->id;
-				if ($order->load(Yii::$app->request->post()) or $order->validate()) {
-					if ($order->save() === false) {
-						$transaction->rollBack();
-						Alert::setErrorNotify(Debug::modelErrors($order));
-						return $this->refresh();
-					}
-
-					$order_billing->order_id = $order->id;
-					if ($order_billing->validate()) {
-						if (!$order_billing->save()) {
-							$transaction->rollBack();
-							Alert::setErrorNotify('Ошибка при создаии заказа #2');
-							return $this->refresh();
-						}
 					}
 				} else {
-					Alert::setErrorNotify(Debug::modelErrors($order));
-					return $this->refresh();
-				}
-
-				$order_date->order_id = $order->id;
-				if ($order_date->load(Yii::$app->request->post())) {
-					if ($order_date->validate()) {
-						if (!$order_date->save()) {
-							$transaction->rollBack();
-							return $this->refresh();
-						}
-					}
-				}
-
-				if ($order->select_billing) {
-					$order_billing = new OrderBilling();
-					$order_billing->user_billing_id = $order->select_billing;
-					$order_billing->order_id = $order->id;
-					if ($order_billing->validate()) {
-						if (!$order_billing->save()) {
-							$transaction->rollBack();
-						}
-					}
-				}
-
-				$items->order_id = $order->id;
-				if ($items->saveItems() === false) {
+					Alert::setErrorNotify('Ошибка создания заказа');
 					$transaction->rollBack();
-					Alert::setErrorNotify(Debug::modelErrors($items));
 					return $this->refresh();
 				}
 
-				Basket::clear();
-				unset($_COOKIE['order']);
-				Alert::setSuccessNotify("Заказ успешно создан создан");
-				$transaction->commit();
-				return $this->redirect('/');
-			}
-
-			return $this->render('checkout', [
-				'discount_model' => $discount_model,
-				'user' => $user,
-				'billing' => $billing,
-				'order' => $order,
-				'delivery' => $delivery,
-				'payment' => $payment,
-				'delivery_time' => $delivery_time,
-				'order_date' => $order_date,
-				'billing_list' => $billing_list
-			]);
-		}
-	}
-
-	public function actionProfile($id = null)
-	{
-		if ($id) {
-			$user = User::findOne($id);
-			return $this->render('detail/profile', [
-				'user' => $user
-			]);
-		} else {
-			$userId = \Yii::$app->user->id;
-			$profile = User::findOne($userId);
-			$profile->scenario = User::SCENARIO_UPDATE;
-			$orders = Order::find()->where(['user_id' => $profile->id])->orderBy(['created_at' => SORT_DESC])->all();
-			$support_categories = SupportCategory::find()->all();
-			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-
-			if (\Yii::$app->request->isPost) {
-				if ($profile->load(\Yii::$app->request->post())) {
-					if ($profile->validate()) {
-						$profile->update();
-					}
-				}
-				if ($profile->billing->load(\Yii::$app->request->post())) {
-					if ($profile->billing->validate()) {
-						if ($profile->billing->update()) {
-							$profile->billing->update();
-						}
-					}
-				}
-
-				Alert::setSuccessNotify('Данные успешно обновлены');
+			$items->order_id = $order->id;
+			if ($items->saveItems() === false) {
+				$transaction->rollBack();
+				Alert::setErrorNotify(Debug::modelErrors($items));
 				return $this->refresh();
 			}
 
-			return $this->render('profile', [
-				'profile' => $profile,
-				'orders' => $orders,
-				'support_categories' => $support_categories
-			]);
+			Basket::clear();
+			unset($_COOKIE['order']);
+			Alert::setSuccessNotify("Заказ успешно создан");
+			$transaction->commit();
+			return $this->redirect('/');
 		}
-	}
 
-	public function actionBilling($id = null)
-	{
-		if ($id) {
-			$model = Billing::find()->where(['user_id' => Yii::$app->user->id, 'id' => $id])->one();
-
-			if (!$model) {
-				throw new HttpException(404, 'Адрес не найден');
-			}
-
-			if (Yii::$app->request->isPost) {
-				if ($model->load(Yii::$app->request->post())) {
-					if ($model->validate()) {
-						if ($model->update()) {
-							Alert::setSuccessNotify('Адрес доставки успешно обновлён');
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('detail/billing', [
-				'model' => $model
-			]);
-		}
-		$models = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
-		return $this->render('billing', [
-			'models' => $models
+		return $this->render('checkout', [
+			'discount_model' => $discount_model,
+			'user' => $user,
+			'billing' => $billing,
+			'order' => $order,
+			'delivery' => $delivery,
+			'payment' => $payment,
+			'delivery_time' => $delivery_time,
+			'order_date' => $order_date,
 		]);
+	} else
+{
+$order = new Order();
+$items = new OrdersItems();
+$order_billing = new OrderBilling();
+$user = User::findOne(Yii::$app->user->id);
+$user->scenario = User::SCENARIO_UPDATE;
+$billing = new Billing();
+$billing_list = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
+
+if (\Yii::$app->request->isPost)
+{
+$transaction = $db->beginTransaction();
+
+
+if ($billing->load(Yii::$app->request->post()) && $billing->validate())
+{
+if ($billing->save())
+{
+$order_billing->user_billing_id = $billing->id;
+}
+
+else {
+	$transaction->rollBack();
+	Alert::setErrorNotify('Ошибка создания заказа #1');
+	return $this->refresh();
+}
+}
+
+if ($discount_model->load(Yii::$app->request->post())) {
+	if ($discount_model->validate()) {
+		if ($discount_model->calc($order, 'promo_code') === false) {
+			$transaction->rollBack();
+		}
+	}
+}
+
+$order->user_id = $user->id;
+if ($order->load(Yii::$app->request->post()) or $order->validate()) {
+	if ($order->save() === false) {
+		$transaction->rollBack();
+		Alert::setErrorNotify(Debug::modelErrors($order));
+		return $this->refresh();
 	}
 
-	public function actionSignin()
-	{
-		$model = new User(['scenario' => User::SCENARIO_LOGIN]);
-		if (\Yii::$app->request->isPost) {
-			if ($model->load(\Yii::$app->request->post())) {
-				if ($model->validate()) {
-
-					$user = User::findByEmail($model->email);
-					if ($user instanceof User && $user->validatePassword($model->password)) {
-						if (Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration'])) {
-							Alert::setSuccessNotify('Успешная авторизация');
-							return $this->redirect('/');
-						}
-					}
-
-				}
-			}
+	$order_billing->order_id = $order->id;
+	if ($order_billing->validate()) {
+		if (!$order_billing->save()) {
+			$transaction->rollBack();
+			Alert::setErrorNotify('Ошибка при создаии заказа #2');
+			return $this->refresh();
 		}
+	}
+} else {
+	Alert::setErrorNotify(Debug::modelErrors($order));
+	return $this->refresh();
+}
 
-		Attributes::metaDescription('Вход на сайт интернет магазина Котофей');
+$order_date->order_id = $order->id;
+if ($order_date->load(Yii::$app->request->post())) {
+	if ($order_date->validate()) {
+		if (!$order_date->save()) {
+			$transaction->rollBack();
+			return $this->refresh();
+		}
+	}
+}
+
+if ($order->select_billing) {
+	$order_billing = new OrderBilling();
+	$order_billing->user_billing_id = $order->select_billing;
+	$order_billing->order_id = $order->id;
+	if ($order_billing->validate()) {
+		if (!$order_billing->save()) {
+			$transaction->rollBack();
+		}
+	}
+}
+
+$items->order_id = $order->id;
+if ($items->saveItems() === false) {
+	$transaction->rollBack();
+	Alert::setErrorNotify(Debug::modelErrors($items));
+	return $this->refresh();
+}
+
+Basket::clear();
+unset($_COOKIE['order']);
+Alert::setSuccessNotify("Заказ успешно создан создан");
+$transaction->commit();
+return $this->redirect('/');
+}
+
+return $this->render('checkout', [
+	'discount_model' => $discount_model,
+	'user' => $user,
+	'billing' => $billing,
+	'order' => $order,
+	'delivery' => $delivery,
+	'payment' => $payment,
+	'delivery_time' => $delivery_time,
+	'order_date' => $order_date,
+	'billing_list' => $billing_list
+]);
+}
+}
+
+public
+function actionProfile($id = null)
+{
+	if ($id) {
+		$user = User::findOne($id);
+		return $this->render('detail/profile', [
+			'user' => $user
+		]);
+	} else {
+		$userId = \Yii::$app->user->id;
+		$profile = User::findOne($userId);
+		$profile->scenario = User::SCENARIO_UPDATE;
+		$orders = Order::find()->where(['user_id' => $profile->id])->orderBy(['created_at' => SORT_DESC])->all();
+		$support_categories = SupportCategory::find()->all();
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
-		return $this->render('auth/signin', [
-			'model' => $model,
-		]);
-	}
+		if (\Yii::$app->request->isPost) {
+			if ($profile->load(\Yii::$app->request->post())) {
+				if ($profile->validate()) {
+					$profile->update();
+				}
+			}
+			if ($profile->billing->load(\Yii::$app->request->post())) {
+				if ($profile->billing->validate()) {
+					if ($profile->billing->update()) {
+						$profile->billing->update();
+					}
+				}
+			}
 
-	public function actionSignup()
-	{
-		$model = new User(['scenario' => User::SCENARIO_INSERT]);
-
-		// validate for ajax request
-		if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-			Yii::$app->response->format = Response::FORMAT_JSON;
-			return ActiveForm::validate($model);
+			Alert::setSuccessNotify('Данные успешно обновлены');
+			return $this->refresh();
 		}
 
-		if (\Yii::$app->request->isPost) {
-			if ($model->load(\Yii::$app->request->post())) {
+		return $this->render('profile', [
+			'profile' => $profile,
+			'orders' => $orders,
+			'support_categories' => $support_categories
+		]);
+	}
+}
+
+public
+function actionBilling($id = null)
+{
+	if ($id) {
+		$model = Billing::find()->where(['user_id' => Yii::$app->user->id, 'id' => $id])->one();
+
+		if (!$model) {
+			throw new HttpException(404, 'Адрес не найден');
+		}
+
+		if (Yii::$app->request->isPost) {
+			if ($model->load(Yii::$app->request->post())) {
 				if ($model->validate()) {
-					$model->setPassword($model->password);
-					if ($model->save()) {
-						if (Yii::$app->user->login($model, Yii::$app->params['users']['rememberMeDuration'])) {
-							Alert::setSuccessNotify("Успешная регистрация!");
-							return $this->redirect("/");
-						}
-					} else {
-						Alert::setErrorNotify(Debug::modelErrors($model));
+					if ($model->update()) {
+						Alert::setSuccessNotify('Адрес доставки успешно обновлён');
 						return $this->refresh();
+					}
+				}
+			}
+		}
+
+		return $this->render('detail/billing', [
+			'model' => $model
+		]);
+	}
+	$models = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
+	return $this->render('billing', [
+		'models' => $models
+	]);
+}
+
+public
+function actionSignin()
+{
+	$model = new User(['scenario' => User::SCENARIO_LOGIN]);
+	if (\Yii::$app->request->isPost) {
+		if ($model->load(\Yii::$app->request->post())) {
+			if ($model->validate()) {
+
+				$user = User::findByEmail($model->email);
+				if ($user instanceof User && $user->validatePassword($model->password)) {
+					if (Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration'])) {
+						Alert::setSuccessNotify('Успешная авторизация');
+						return $this->redirect('/');
+					}
+				}
+
+			}
+		}
+	}
+
+	Attributes::metaDescription('Вход на сайт интернет магазина Котофей');
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+
+	return $this->render('auth/signin', [
+		'model' => $model,
+	]);
+}
+
+public
+function actionSignup()
+{
+	$model = new User(['scenario' => User::SCENARIO_INSERT]);
+
+	// validate for ajax request
+	if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+		Yii::$app->response->format = Response::FORMAT_JSON;
+		return ActiveForm::validate($model);
+	}
+
+	if (\Yii::$app->request->isPost) {
+		if ($model->load(\Yii::$app->request->post())) {
+			if ($model->validate()) {
+				$model->setPassword($model->password);
+				if ($model->save()) {
+					if (Yii::$app->user->login($model, Yii::$app->params['users']['rememberMeDuration'])) {
+						Alert::setSuccessNotify("Успешная регистрация!");
+						return $this->redirect("/");
 					}
 				} else {
 					Alert::setErrorNotify(Debug::modelErrors($model));
 					return $this->refresh();
+				}
+			} else {
+				Alert::setErrorNotify(Debug::modelErrors($model));
+				return $this->refresh();
 
+			}
+		}
+	}
+
+
+	return $this->render('auth/signup', [
+		'model' => $model,
+	]);
+}
+
+public
+function actionPayment()
+{
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	Attributes::metaDescription("Условия оплаты заказов на нашем сайте");
+	Attributes::metaKeywords([
+		"зоотовары каталог",
+		"каталог магазина зоотоваров",
+		"валта зоотовары каталог",
+		"магазин зоотоваров",
+		"интернет магазин зоотоваров",
+		"купить зоотовары в интернет магазине",
+		"магазин зоотоваров барнаул",
+		"зоотовары интернет магазин барнаул",
+		"альф барнаул зоотовары",
+	]);
+	return $this->render('payment');
+}
+
+public
+function actionDelivery()
+{
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	Attributes::metaDescription("Условия доставки заказов на нашем сайте");
+	Attributes::metaKeywords([
+		"зоотовары каталог",
+		"каталог магазина зоотоваров",
+		"валта зоотовары каталог",
+		"магазин зоотоваров",
+		"интернет магазин зоотоваров",
+		"купить зоотовары в интернет магазине",
+		"магазин зоотоваров барнаул",
+		"зоотовары интернет магазин барнаул",
+		"альф барнаул зоотовары",
+	]);
+
+	return $this->render('delivery');
+}
+
+public
+function actionLogout()
+{
+	\Yii::$app->user->logout();
+	return $this->redirect('/');
+}
+
+public
+function actionOrder($id = null)
+{
+
+	if ($id) {
+		$order = Order::findOne($id);
+
+		if (empty($order)) {
+			throw new \Exception("Такого заказа не существует");
+		}
+
+		if (!$order->hasAccess()) {
+			throw new \Exception("Доступ к чужому заказу запрещён");
+		}
+
+		$items = OrdersItems::findAll(['order_id' => $order->id]);
+
+		return $this->render('detail/order', [
+			'order' => $order,
+			'items' => $items,
+		]);
+	}
+
+
+	$orders = Order::findAll(['user_id' => \Yii::$app->user->id]);
+	return $this->render('order', [
+		'orders' => $orders
+	]);
+}
+
+public
+function actionSupport($category = null, $id = null)
+{
+	if (empty($category) && empty($id)) {   // list categories
+		$categories = SupportCategory::find()->all();
+		$tickets = Tickets::find()->where(['user_id' => \Yii::$app->user->identity->id])->all();
+		$model = new Tickets();
+		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+
+		if (\Yii::$app->request->isPost) {
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Alert::setSuccessNotify("Обращение создано!");
+						return $this->refresh();
+					}
 				}
 			}
 		}
 
-
-		return $this->render('auth/signup', [
+		return $this->render('support/categories', [
+			'categories' => $categories,
+			'tickets' => $tickets,
 			'model' => $model,
 		]);
 	}
 
-	public function actionPayment()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		Attributes::metaDescription("Условия оплаты заказов на нашем сайте");
-		Attributes::metaKeywords([
-			"зоотовары каталог",
-			"каталог магазина зоотоваров",
-			"валта зоотовары каталог",
-			"магазин зоотоваров",
-			"интернет магазин зоотоваров",
-			"купить зоотовары в интернет магазине",
-			"магазин зоотоваров барнаул",
-			"зоотовары интернет магазин барнаул",
-			"альф барнаул зоотовары",
-		]);
-		return $this->render('payment');
-	}
+	if (empty($category) && !empty($id)) {  // list tickets
 
-	public function actionDelivery()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		Attributes::metaDescription("Условия доставки заказов на нашем сайте");
-		Attributes::metaKeywords([
-			"зоотовары каталог",
-			"каталог магазина зоотоваров",
-			"валта зоотовары каталог",
-			"магазин зоотоваров",
-			"интернет магазин зоотоваров",
-			"купить зоотовары в интернет магазине",
-			"магазин зоотоваров барнаул",
-			"зоотовары интернет магазин барнаул",
-			"альф барнаул зоотовары",
-		]);
-
-		return $this->render('delivery');
-	}
-
-	public function actionLogout()
-	{
-		\Yii::$app->user->logout();
-		return $this->redirect('/');
-	}
-
-	public function actionOrder($id = null)
-	{
-
-		if ($id) {
-			$order = Order::findOne($id);
-
-			if (empty($order)) {
-				throw new \Exception("Такого заказа не существует");
-			}
-
-			if (!$order->hasAccess()) {
-				throw new \Exception("Доступ к чужому заказу запрещён");
-			}
-
-			$items = OrdersItems::findAll(['order_id' => $order->id]);
-
-			return $this->render('detail/order', [
-				'order' => $order,
-				'items' => $items,
-			]);
-		}
-
-
-		$orders = Order::findAll(['user_id' => \Yii::$app->user->id]);
-		return $this->render('order', [
-			'orders' => $orders
-		]);
-	}
-
-	public function actionSupport($category = null, $id = null)
-	{
-		if (empty($category) && empty($id)) {   // list categories
-			$categories = SupportCategory::find()->all();
-			$tickets = Tickets::find()->where(['user_id' => \Yii::$app->user->identity->id])->all();
-			$model = new Tickets();
-			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-
-			if (\Yii::$app->request->isPost) {
-				if ($model->load(\Yii::$app->request->post())) {
-					if ($model->validate()) {
-						if ($model->save()) {
-							Alert::setSuccessNotify("Обращение создано!");
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('support/categories', [
-				'categories' => $categories,
-				'tickets' => $tickets,
-				'model' => $model,
-			]);
-		}
-
-		if (empty($category) && !empty($id)) {  // list tickets
-
-			$model = new Tickets();
-			$category = SupportCategory::findOne($id);
-			if (User::isRole('Support')) {
-				$tickets = Tickets::findAll(['category_id' => $id]);
-			} else {
-				$tickets = Tickets::findAll(['user_id' => \Yii::$app->user->identity->id, 'category_id' => $id]);
-			}
-
-			if (\Yii::$app->request->isPost) {
-				if ($model->load(\Yii::$app->request->post())) {
-
-					$model->category_id = $id;
-
-					if ($model->validate()) {
-						if ($model->save()) {
-							Alert::setSuccessNotify("Обращение создано!");
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('support/new_ticket', [
-				'model' => $model,
-				'tickets' => $tickets,
-				'category' => $category
-			]);
-		}
-
-		if (!empty($category) && !empty($id)) { //detail
-			$ticket = Tickets::findOne($id);
-			$model = new SupportMessage();
-			$messages = SupportMessage::find()->where(['ticket_id' => $id])->orderBy(['created_at' => SORT_ASC])->all();
-
-			if (\Yii::$app->request->isPost) {
-				if ($model->load(\Yii::$app->request->post())) {
-
-					$model->ticket_id = $id;
-
-					if ($model->validate()) {
-						if ($model->save()) {
-							Alert::setSuccessNotify("Сообщение отправлено!");
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('support/detail', [
-				'ticket' => $ticket,
-				'model' => $model,
-				'messages' => $messages,
-			]);
-		}
-	}
-
-	public function actionError()
-	{
-		$exception = Yii::$app->errorHandler->exception;
-		if ($exception !== null) {
-			return $this->render('error', ['exception' => $exception]);
-		}
-	}
-
-	public function actionTest()
-	{
-		return $this->render('test');
-	}
-
-	public function actionClear()
-	{
-		Basket::getInstance()->clear();
-		Promo::clear();
-		Alert::setSuccessNotify("Корзина очищена!");
-		return $this->redirect('/');
-	}
-
-	public function actionFavorite()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		$products = Favorite::listProducts();
-		return $this->render('favorite', [
-			'products' => $products
-		]);
-	}
-
-	public function actionReviews()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		Attributes::metaDescription("Узнайте, что думают о нас клиенты и простые пользователи сайта. Мы рады новым отзывам о нашей работе. Для клиентов оставивших отзыв за покупку мы дарим скидку на последующие покупки");
-		Attributes::metaKeywords([
-			"зоотовары каталог",
-			"каталог магазина зоотоваров",
-			"валта зоотовары каталог",
-			"магазин зоотоваров",
-			"интернет магазин зоотоваров",
-			"купить зоотовары в интернет магазине",
-			"магазин зоотоваров барнаул",
-			"зоотовары интернет магазин барнаул",
-			"альф барнаул зоотовары",
-		]);
-		$reviews = SiteReviews::find()->all();
-		$model = new SiteReviews();
-		if ($user = User::findOne(\Yii::$app->user->identity->id)) {
-			$user->scenario = User::SCENARIO_NEW_REVIEW;
+		$model = new Tickets();
+		$category = SupportCategory::findOne($id);
+		if (User::isRole('Support')) {
+			$tickets = Tickets::findAll(['category_id' => $id]);
 		} else {
-			$user = new User(['scenario' => User::SCENARIO_NEW_REVIEW]);
+			$tickets = Tickets::findAll(['user_id' => \Yii::$app->user->identity->id, 'category_id' => $id]);
 		}
 
 		if (\Yii::$app->request->isPost) {
-			if ($user->load(\Yii::$app->request->post())) {
-				if ($user->validate()) {
-					if ($user->update() !== false) {
-						if ($model->create()) {
-							Alert::setSuccessNotify("Отзыв успешно добавлен!");
-							return $this->refresh();
-						}
+			if ($model->load(\Yii::$app->request->post())) {
+
+				$model->category_id = $id;
+
+				if ($model->validate()) {
+					if ($model->save()) {
+						Alert::setSuccessNotify("Обращение создано!");
+						return $this->refresh();
 					}
 				}
 			}
 		}
-		return $this->render('reviews', [
-			'reviews' => $reviews,
+
+		return $this->render('support/new_ticket', [
 			'model' => $model,
-			'user' => $user,
+			'tickets' => $tickets,
+			'category' => $category
 		]);
 	}
 
-	public function actionFaq()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		Attributes::metaDescription("Система быстрой помощи по сайту, в которой можно найти ответы на вопросы, которые возникил в ходе посещения вами нашего сайта. Если вы не найдете ответ на вопрос, то оставьте заявку и мы вам перезвоним");
-		Attributes::metaKeywords([
-			"зоотовары каталог",
-			"каталог магазина зоотоваров",
-			"валта зоотовары каталог",
-			"магазин зоотоваров",
-			"интернет магазин зоотоваров",
-			"купить зоотовары в интернет магазине",
-			"магазин зоотоваров барнаул",
-			"зоотовары интернет магазин барнаул",
-			"альф барнаул зоотовары",
-		]);
-		return $this->render('faq');
-	}
+	if (!empty($category) && !empty($id)) { //detail
+		$ticket = Tickets::findOne($id);
+		$model = new SupportMessage();
+		$messages = SupportMessage::find()->where(['ticket_id' => $id])->orderBy(['created_at' => SORT_ASC])->all();
 
-	public function actionBuy()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		Attributes::metaDescription("Система быстрой помощи по сайту, в которой можно найти ответы на вопросы, которые возникил в ходе посещения вами нашего сайта. Если вы не найдете ответ на вопрос, то оставьте заявку и мы вам перезвоним");
-		Attributes::metaKeywords([
-			"зоотовары каталог",
-			"каталог магазина зоотоваров",
-			"валта зоотовары каталог",
-			"магазин зоотоваров",
-			"интернет магазин зоотоваров",
-			"купить зоотовары в интернет магазине",
-			"магазин зоотоваров барнаул",
-			"зоотовары интернет магазин барнаул",
-			"альф барнаул зоотовары",
-		]);
-		return $this->render('buy');
-	}
+		if (\Yii::$app->request->isPost) {
+			if ($model->load(\Yii::$app->request->post())) {
 
-	public function actionAbout()
-	{
-		Attributes::metaDescription("Небольшой рассказ о нашей компании, наших целях и планах на будущее");
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		return $this->render('about');
-	}
+				$model->ticket_id = $id;
 
-	public function actionNews($id = null)
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-
-		if ($id) {
-
-			$new = News::findBySlug($id);
-			if ($new->slug) {
-				Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
+				if ($model->validate()) {
+					if ($model->save()) {
+						Alert::setSuccessNotify("Сообщение отправлено!");
+						return $this->refresh();
+					}
+				}
 			}
-
-			if ($new->seo_description) {
-				Attributes::metaDescription($new->seo_description);
-			}
-
-			if ($new->seo_keywords) {
-				Attributes::metaKeywords($new->seo_keywords);
-			}
-
-			OpenGraph::title($new->title);
-			OpenGraph::description(((!empty($new->preview)) ? $new->preview : $new->detail));
-			OpenGraph::type("new");
-			OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
-
-			if (!empty($new->preview_image)) {
-				OpenGraph::image(sprintf('%s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
-			}
-
-			return $this->render('detail/news', [
-				'model' => $new
-			]);
 		}
 
-		$categories = NewsCategory::find()->all();
-		$news = News::find()->all();
+		return $this->render('support/detail', [
+			'ticket' => $ticket,
+			'model' => $model,
+			'messages' => $messages,
+		]);
+	}
+}
+
+public
+function actionError()
+{
+	$exception = Yii::$app->errorHandler->exception;
+	if ($exception !== null) {
+		return $this->render('error', ['exception' => $exception]);
+	}
+}
+
+public
+function actionTest()
+{
+	return $this->render('test');
+}
+
+public
+function actionClear()
+{
+	Basket::getInstance()->clear();
+	Promo::clear();
+	Alert::setSuccessNotify("Корзина очищена!");
+	return $this->redirect('/');
+}
+
+public
+function actionFavorite()
+{
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	$products = Favorite::listProducts();
+	return $this->render('favorite', [
+		'products' => $products
+	]);
+}
+
+public
+function actionReviews()
+{
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	Attributes::metaDescription("Узнайте, что думают о нас клиенты и простые пользователи сайта. Мы рады новым отзывам о нашей работе. Для клиентов оставивших отзыв за покупку мы дарим скидку на последующие покупки");
+	Attributes::metaKeywords([
+		"зоотовары каталог",
+		"каталог магазина зоотоваров",
+		"валта зоотовары каталог",
+		"магазин зоотоваров",
+		"интернет магазин зоотоваров",
+		"купить зоотовары в интернет магазине",
+		"магазин зоотоваров барнаул",
+		"зоотовары интернет магазин барнаул",
+		"альф барнаул зоотовары",
+	]);
+	$reviews = SiteReviews::find()->all();
+	$model = new SiteReviews();
+	if ($user = User::findOne(\Yii::$app->user->identity->id)) {
+		$user->scenario = User::SCENARIO_NEW_REVIEW;
+	} else {
+		$user = new User(['scenario' => User::SCENARIO_NEW_REVIEW]);
+	}
+
+	if (\Yii::$app->request->isPost) {
+		if ($user->load(\Yii::$app->request->post())) {
+			if ($user->validate()) {
+				if ($user->update() !== false) {
+					if ($model->create()) {
+						Alert::setSuccessNotify("Отзыв успешно добавлен!");
+						return $this->refresh();
+					}
+				}
+			}
+		}
+	}
+	return $this->render('reviews', [
+		'reviews' => $reviews,
+		'model' => $model,
+		'user' => $user,
+	]);
+}
+
+public
+function actionFaq()
+{
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	Attributes::metaDescription("Система быстрой помощи по сайту, в которой можно найти ответы на вопросы, которые возникил в ходе посещения вами нашего сайта. Если вы не найдете ответ на вопрос, то оставьте заявку и мы вам перезвоним");
+	Attributes::metaKeywords([
+		"зоотовары каталог",
+		"каталог магазина зоотоваров",
+		"валта зоотовары каталог",
+		"магазин зоотоваров",
+		"интернет магазин зоотоваров",
+		"купить зоотовары в интернет магазине",
+		"магазин зоотоваров барнаул",
+		"зоотовары интернет магазин барнаул",
+		"альф барнаул зоотовары",
+	]);
+	return $this->render('faq');
+}
+
+public
+function actionBuy()
+{
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	Attributes::metaDescription("Система быстрой помощи по сайту, в которой можно найти ответы на вопросы, которые возникил в ходе посещения вами нашего сайта. Если вы не найдете ответ на вопрос, то оставьте заявку и мы вам перезвоним");
+	Attributes::metaKeywords([
+		"зоотовары каталог",
+		"каталог магазина зоотоваров",
+		"валта зоотовары каталог",
+		"магазин зоотоваров",
+		"интернет магазин зоотоваров",
+		"купить зоотовары в интернет магазине",
+		"магазин зоотоваров барнаул",
+		"зоотовары интернет магазин барнаул",
+		"альф барнаул зоотовары",
+	]);
+	return $this->render('buy');
+}
+
+public
+function actionAbout()
+{
+	Attributes::metaDescription("Небольшой рассказ о нашей компании, наших целях и планах на будущее");
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	return $this->render('about');
+}
+
+public
+function actionNews($id = null)
+{
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+
+	if ($id) {
+
+		$new = News::findBySlug($id);
+		if ($new->slug) {
+			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
+		}
+
+		if ($new->seo_description) {
+			Attributes::metaDescription($new->seo_description);
+		}
+
+		if ($new->seo_keywords) {
+			Attributes::metaKeywords($new->seo_keywords);
+		}
+
+		OpenGraph::title($new->title);
+		OpenGraph::description(((!empty($new->preview)) ? $new->preview : $new->detail));
+		OpenGraph::type("new");
+		OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
+
+		if (!empty($new->preview_image)) {
+			OpenGraph::image(sprintf('%s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
+		}
+
+		return $this->render('detail/news', [
+			'model' => $new
+		]);
+	}
+
+	$categories = NewsCategory::find()->all();
+	$news = News::find()->all();
 
 //        Attributes::metaKeywords("уход за натуральной кожей, уход за сумкой из натуральной кожи,");
-		Attributes::metaDescription("Самые полезные и актуальные статьи о том как ухаживать за кожей, как выбрать правильно продукт и другие новости компани!");
+	Attributes::metaDescription("Самые полезные и актуальные статьи о том как ухаживать за кожей, как выбрать правильно продукт и другие новости компани!");
 
-		return $this->render('news', [
-			'news' => $news,
-			'categories' => $categories
+	return $this->render('news', [
+		'news' => $news,
+		'categories' => $categories
+	]);
+}
+
+public
+function actionVacancy($id = null)
+{
+	Attributes::metaDescription("Здесь вы можете узнать о вакансиях нашей компании. Бывают момент, когда мы ищем новых людей в нашу команду");
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+
+	if ($id) {
+
+		$model = Vacancy::findOne(['slug' => $id, 'city_id' => Yii::$app->session->get('city_id')]);
+
+		if (!$model) {
+			throw new HttpException(404, 'Вакансия не найдена.');
+		}
+
+		return $this->render('detail/vacancy', [
+			'model' => $model
 		]);
 	}
 
-	public function actionVacancy($id = null)
-	{
-		Attributes::metaDescription("Здесь вы можете узнать о вакансиях нашей компании. Бывают момент, когда мы ищем новых людей в нашу команду");
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	$items = Vacancy::find()->where(['city_id' => Yii::$app->session->get('city_id')])->all();
+	return $this->render('vacancy', [
+		'items' => $items
+	]);
+}
 
-		if ($id) {
+public
+function actionContacts()
+{
+	Attributes::metaDescription("Контакты нашего интернет магазина");
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	return $this->render('contacts');
+}
 
-			$model = Vacancy::findOne(['slug' => $id, 'city_id' => Yii::$app->session->get('city_id')]);
-
-			if (!$model) {
-				throw new HttpException(404, 'Вакансия не найдена.');
-			}
-
-			return $this->render('detail/vacancy', [
-				'model' => $model
-			]);
-		}
-
-		$items = Vacancy::find()->where(['city_id' => Yii::$app->session->get('city_id')])->all();
-		return $this->render('vacancy', [
-			'items' => $items
+public
+function actionBrands($id = null)
+{
+	if ($id) {
+		$model = InformersValues::findOne($id);
+		return $this->render('detail/brands', [
+			'model' => $model
 		]);
 	}
+	return $this->render('brands');
+}
 
-	public function actionContacts()
-	{
-		Attributes::metaDescription("Контакты нашего интернет магазина");
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		return $this->render('contacts');
-	}
+public
+function actionCompare()
+{
+	Attributes::metaDescription('Сравнение товаров в интернет магазине Котофей');
+	Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+	return $this->render('compare');
+}
 
-	public function actionBrands($id = null)
-	{
-		if ($id) {
-			$model = InformersValues::findOne($id);
-			return $this->render('detail/brands', [
-				'model' => $model
-			]);
-		}
-		return $this->render('brands');
-	}
-
-	public function actionCompare()
-	{
-		Attributes::metaDescription('Сравнение товаров в интернет магазине Котофей');
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		return $this->render('compare');
-	}
-
-	public function actionReferal()
-	{
-		return $this->render('referal');
-	}
+public
+function actionReferal()
+{
+	return $this->render('referal');
+}
 }

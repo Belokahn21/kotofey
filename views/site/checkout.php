@@ -96,3 +96,5 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
     </div>
 </div>
 <?php ActiveForm::end(); ?>
+
+<?= $this->render('checkout/simple/fast-auth-modal'); ?>

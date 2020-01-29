@@ -13,7 +13,6 @@ use app\models\entity\Basket;
     <div class="row">
         <div class="col-sm-12">
 			<?php if (Yii::$app->user->isGuest): ?>
-				<?= $this->render('fast-auth-modal'); ?>
                 Чтобы воспользоваться бонусами выполните <a href="javascript:void(0);" data-target="#fast-auth-id" data-toggle="modal">авторизацию</a> на сайте
 			<?php else: ?>
 				<?= $form->field($DiscountModel, 'discount')->textInput(['placeholder' => sprintf("С этой покупки вы получите %s бонусов", DiscountHelper::calcBonus(Basket::getInstance()->cash())), 'class' => 'checkout__input'])->label(false); ?>

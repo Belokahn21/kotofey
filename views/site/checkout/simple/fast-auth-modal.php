@@ -4,13 +4,13 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$model = new \app\models\entity\User();
+$model = new \app\models\entity\User(['scenario' => \app\models\entity\User::SCENARIO_LOGIN]);
 ?>
 <div class="modal fade" id="fast-auth-id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
 		<?php $form = ActiveForm::begin([
 			'options' => [
-				'class' => 'auth-form'
+				'class' => 'ajax-login'
 			],
 		]); ?>
         <div class="modal-content">
@@ -57,7 +57,7 @@ $model = new \app\models\entity\User();
             <div class="modal-footer">
 				<?= Html::a('Регистрация', Url::to(['site/signup']), ['class' => 'link-main']); ?>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть окно</button>
-                <button type="button" class="btn btn-main">Авторизоваться</button>
+                <button type="submit" class="btn btn-main">Авторизоваться</button>
             </div>
         </div>
 		<?php ActiveForm::end(); ?>

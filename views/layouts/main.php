@@ -88,7 +88,7 @@ $this->beginPage() ?>
                 <div class="phone-group">
                     <div class="contact-value phone_mask"><?= SiteSettings::getValueByCode('phone_1') ?></div>
                     <span>
-                        <a rel="nofollow" onclick="ym(55089223, 'reachGoal', 'whatsapp');" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
+                        <a rel="nofollow" onclick="ym(55089223, 'reachGoal', 'whatsapp');" href="whatsapp://send?phone=+79967026637">
                             <img class="contact-block__wa" src="/upload/images/whatsapp.png">
                         </a>
                     </span>
