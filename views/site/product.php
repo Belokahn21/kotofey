@@ -8,7 +8,7 @@ use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\models\entity\ProductPropertiesValues;
 use app\widgets\fast_buy\FastBuyWidget;
-use app\widgets\weight_buy\WeightBuyWidget;
+use app\models\helpers\ProductHelper;
 use app\models\entity\Favorite;
 use yii\helpers\Json;
 use app\models\entity\ProductOrder;
@@ -87,7 +87,7 @@ echo $this->render('modal/product-modal-payment');
             <div class="col-2">
                 <div class="product-detail-sidebar">
                     <div class="product-price-wrap">
-                        <span class="product-price"><?= Price::format($product->price); ?> <?= Currency::getInstance()->show(); ?></span> за шт
+                        <span class="product-price"><?= Price::format(ProductHelper::getResultPrice($product)); ?> <?= Currency::getInstance()->show(); ?></span> за шт
                     </div>
 
 

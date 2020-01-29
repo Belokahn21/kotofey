@@ -29,6 +29,7 @@ use yii\web\UploadedFile;
  * @property string $slug
  * @property integer $sort
  * @property integer $category_id
+ * @property integer $discount_price
  * @property integer $price
  * @property integer $base_price
  * @property integer $purchase

@@ -15,6 +15,8 @@ use app\models\forms\CatalogFilter;
 use yii\widgets\LinkPager;
 use app\models\entity\ProductPropertiesValues;
 use app\models\helpers\DiscountHelper;
+use app\models\helpers\ProductHelper;
+use app\models\tool\Price;
 
 
 $this->title = Title::showTitle("Зоотовары");
@@ -82,7 +84,7 @@ if ($category) {
                     </a>
                     <div class="catalog-list__group-price">
                         <div class="catalog-list__price">
-                            <div class="value"><?= $product->price; ?> <?= Currency::getInstance()->show(); ?></div>
+                            <div class="value"><?= Price::format(ProductHelper::getResultPrice($product)); ?> <?= Currency::getInstance()->show(); ?></div>
                             <div class="bonus"><?= DiscountHelper::calcBonus($product->price); ?> бонуса</div>
                         </div>
 
