@@ -16,6 +16,8 @@ use yii\db\ActiveRecord;
  * @property string $description
  * @property string $slug
  * @property integer $sort
+ * @property boolean $is_active
+ * @property boolean $is_show_filter
  * @property integer $created_at
  * @property integer $updated_at
  */

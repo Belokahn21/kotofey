@@ -3,8 +3,10 @@
 namespace app\models\forms;
 
 
+use app\models\entity\ProductProperties;
 use app\models\entity\ProductPropertiesValues;
 use app\models\tool\Debug;
+use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;
@@ -13,99 +15,72 @@ use yii\helpers\ArrayHelper;
 
 class CatalogFilter extends Model
 {
-    public $price_from;
-    public $price_to;
-    public $type;
-    public $company;
-    public $line;
-    public $taste;
-    public $test;
-    public $weight_from;
-    public $weight_to;
+	public $price_from;
+	public $price_to;
+	public $weight_from;
+	public $weight_to;
+	public $informer;
 
-    public function rules()
-    {
-        return [
-            [['price_from', 'price_to', 'weight_from', 'weight_to'], 'integer'],
+	public function rules()
+	{
+		return [
+			[['price_from', 'price_to', 'weight_from', 'weight_to', 'informer'], 'integer'],
+		];
+	}
 
-            [['type', 'company', 'line', 'taste','test'], 'safe'],
-        ];
-    }
-
-    public function attributeLabels()
-    {
-        return [
-            'price_from' => 'Цена от',
-            'price_to' => 'Цена до',
-            'type' => 'Тип',
-            'company' => 'Производитель',
-            'weight_from' => 'Вес от',
-            'weight_to' => 'Вес до',
-            'line' => 'Линейка',
-            'taste' => 'Вкус',
-            'test' => 'test',
-        ];
-    }
+	public function attributeLabels()
+	{
+		return [
+			'informer' => 'Справочник',
+			'price_from' => 'Цена от',
+			'price_to' => 'Цена до',
+			'weight_from' => 'Вес от',
+			'weight_to' => 'Вес до',
+		];
+	}
 
 
-    /**
-     * @param ActiveQuery $query
-     */
-    public function applyFilter(&$query)
-    {
-        if (\Yii::$app->request->isGet) {
-            if ($this->load(\Yii::$app->request->get())) {
+	/**
+	 * @param ActiveQuery $query
+	 */
+	public function applyFilter(&$query)
+	{
+		if (\Yii::$app->request->isGet) {
+			if ($this->load(\Yii::$app->request->get())) {
 
-                $list_property_ids = array();
-                $list_attribute_to_property_id = array(
-                    'company' => 1,
-                    'type' => 3,
-                    'line' => 4,
-                    'taste' => 5,
-                    'test' => 9,
-                );
+				$ar_product_id = array();
 
-                // set price
-                if (!empty($this->price_from)) {
-                    $query->where(['>=', 'price', $this->price_from]);
-                }
+				// properties
+				$values = ProductPropertiesValues::find()->select('product_id');
+				$properties_ids = array();
+				$value_list = array();
+				$iter = 0;
 
-                if (!empty($this->price_to)) {
-                    $query->andWhere(['<=', 'price', $this->price_to]);
-                }
+				foreach ($this->informer as $informer_id => $arValues) {
+					if (is_array($arValues)) {
+						$properties_ids[] = ProductProperties::find()->where(['informer_id' => $informer_id])->one()->id;
+						$value_list = array_merge($value_list, $arValues);
+						$iter++;
+					}
+				}
 
-                // properties
-                $values = ProductPropertiesValues::find()->select('product_id');
-                $properties_ids = array();
-                $value_list = array();
-                $iter = 0;
+				$values->orWhere([
+					'property_id' => $properties_ids,
+					'value' => $value_list
+				]);
 
-                foreach ($this->getAttributes() as $attributeKey => $hisValue) {
+				$values->groupBy('product_id');
+				$values->having("count(*) = " . $iter);
 
-                    if (!empty($hisValue) && array_key_exists($attributeKey, $list_attribute_to_property_id)) {
-                        $properties_ids[] = $list_attribute_to_property_id[$attributeKey];
-                        $value_list = array_merge($value_list, $hisValue);
-                        $iter++;
-                    }
-                }
+				$values = $values->all();
+				$ar_product_id = array_merge($ar_product_id, ArrayHelper::getColumn($values, 'product_id'));
 
-                $values->orWhere([
-                    'property_id' => $properties_ids,
-                    'value' => $value_list
-                ]);
-
-                $values->groupBy('product_id');
-                $values->having("count(*) = " . $iter);
-
-                $values = $values->all();
-                $list_property_ids = array_merge($list_property_ids, ArrayHelper::getColumn($values, 'product_id'));
-
-                if (is_array($list_property_ids)) {
-                    $query->andWhere([
-                        'id' => $list_property_ids
-                    ]);
-                }
-            }
-        }
-    }
+				if (is_array($ar_product_id)) {
+					$query->andWhere([
+						'id' => $ar_product_id
+					]);
+				}
+			}
+		}
+	}
 }
