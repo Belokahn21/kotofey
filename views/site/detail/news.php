@@ -20,8 +20,10 @@ $this->title = Title::showTitle($model->title);
         </div>
     </div>
 </div>
-<img src="/web/upload/<?= ($model->detail_image ? $model->detail_image : $model->preview_image); ?>" class="news-detail__image">
+<?php if ($url = $model->detail_image ? $model->detail_image : $model->preview_image): ?>
+    <img src="/upload/<?= $url; ?>" class="news-detail__image">
+<?php endif; ?>
 <div class="news-detail__content">
-    <?= ($model->detail ? $model->detail : $model->preview); ?>
+	<?= ($model->detail ? $model->detail : $model->preview); ?>
 </div>
 <div class="clearfix"></div>
