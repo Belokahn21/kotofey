@@ -53,11 +53,12 @@
   width: 100%;
   min-height: 300px;
   position: absolute;
-  background: $mainActiveColor;
+  background: white;
   z-index: 999;
   top: 100%;
   left: 0;
   list-style: none;
+  border: 1px $mainActiveColor solid;
 }
 
 .full-menu {
@@ -74,12 +75,12 @@
 .full-menu-item {
   width: 27%;
   margin: 15px 5px;
-  border-bottom: 1px silver solid;
+  border-bottom: 1px $mainActiveColor solid;
   padding: 15px 5px;
 }
 
 .full-menu-link {
-  color: white;
+  color: $mainActiveColor;
   text-decoration: none !important;
 
   &:hover {
@@ -101,7 +102,5 @@
 .full-menu-image {
   width: 20px;
   height: 20px;
-  //background: $mainActiveColor;
-  //color:  $mainActiveColor;
   filter: invert(12%) sepia(78%) saturate(4325%) hue-rotate(338deg) brightness(91%) contrast(92%);
 }
