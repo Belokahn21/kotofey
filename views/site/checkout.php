@@ -69,8 +69,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                 <div class="checkout__control-wrap">
                     <div class="checkout__price"><?= Price::format(Basket::getInstance()->cash()); ?> <?= Currency::getInstance()->show(); ?></div>
 					<?= Html::submitButton('Оформить', ['class' => 'checkout__submit']) ?>
-					<?= Html::a('Политика конфиденциальности', Policy::getInstance()->getPath()) ?>
                 </div>
+				<?= Html::a('Политика конфиденциальности', Policy::getInstance()->getPath(), ['class' => 'link-main']) ?>
 				<?php if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE): ?>
                     <div class="delivery-alert"><span class="font-weight-bold">Внимание: </span>У вас доставка <?= Delivery::PRICE_DELIVERY; ?><?= Currency::getInstance()->show(); ?>. Сумма заказа меньше <?= Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE; ?><?= Currency::getInstance()->show(); ?></div>
 				<?php endif; ?>
