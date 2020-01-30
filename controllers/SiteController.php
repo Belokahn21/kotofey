@@ -1033,10 +1033,8 @@ class SiteController extends Controller
 		return $this->render('about');
 	}
 
-	public
-	function actionNews(
-		$id = null
-	) {
+	public function actionNews($id = null)
+	{
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
 		if ($id) {
@@ -1069,7 +1067,7 @@ class SiteController extends Controller
 		}
 
 		$categories = NewsCategory::find()->all();
-		$news = News::find()->all();
+		$news = News::find()->orderBy(['created_at' => SORT_DESC])->all();
 
 //        Attributes::metaKeywords("уход за натуральной кожей, уход за сумкой из натуральной кожи,");
 		Attributes::metaDescription("Самые полезные и актуальные статьи о том как ухаживать за кожей, как выбрать правильно продукт и другие новости компани!");
