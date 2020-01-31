@@ -8,7 +8,7 @@ use yii\helpers\Url;
 $this->title = Title::showTitle("Техническая поддержка"); ?>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
-	'filterModel' => $model,
+	'filterModel' => $searchModel,
 	'emptyText' => 'Обращения отсутствуют',
 	'columns' => [
 		'id',

@@ -15,9 +15,19 @@ use app\assets\AdminAsset;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
 use app\widgets\notification\Alert;
-use app\models\entity\Sliders;
+use app\models\entity\Stocks;
+use app\models\entity\OrderStatus;
+use app\models\entity\Delivery;
+use app\models\entity\Payment;
+use app\models\entity\Promo;
+use app\models\entity\VendorGroup;
+use app\models\entity\Vendor;
 use app\models\entity\Geo;
 use app\models\entity\ShortLinks;
+use app\models\entity\Category;
+use app\models\entity\ProductProperties;
+use app\models\entity\Informers;
+use app\models\entity\InformersValues;
 
 AdminAsset::register($this);
 $this->beginPage();
@@ -30,14 +40,14 @@ $user = User::findOne(Yii::$app->user->identity->id);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
+	<?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+	<?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 <?= Alert::widget([
-    'template' => 'backend'
+	'template' => 'backend'
 ]); ?>
 <aside class="left-sidebar">
     <button class="switch-menu">Меню</button>
@@ -62,114 +72,91 @@ $user = User::findOne(Yii::$app->user->identity->id);
 
             <div class="panel-menu-wrap">
                 <h3 class="panel-menu__title">Навигация</h3>
-                <ul class="panel-menu">
-                    <li class="panel-menu__item"><a href="/"><i class="fas fa-home"></i>Сайт</a></li>
-                    <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-tachometer-alt"></i>Рабочий стол</a></li>
-                    <li class="panel-menu__item">
-                        <a href="/admin/"><i class="fas fa-globe-asia"></i>Гео</a>
-                        <ul>
-                            <li class="panel-menu__item sub">
-                                <a href="/admin/geo/">
-                                    Гео объекты<span class="count"><?= Geo::find()->count() ?></span>
-                                </a>
-                            </li>
-                            <li class="panel-menu__item sub">
-                                <a href="<?= Url::to(['admin/timezone']) ?>">
-                                    Временные зоны<span class="count"><?= GeoTimezone::find()->count() ?></span>
-                                </a>
-                            </li>
+
+                <ul class="accordion-menu">
+                    <li class="accordion-menu__single"><a href="/"><i class="fas fa-home"></i>Сайт</a></li>
+                    <li class="accordion-menu__single"><a href="/admin/"><i class="fa fa-tachometer-alt"></i>Рабочий стол</a></li>
+                    <li>
+                        <div class="dropdownlink"><i class="fa fa-road" aria-hidden="true"></i> Гео
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/geo']); ?>">Города</a><span class="count"><?= Geo::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/timezone']); ?>">Временные зоны</a><span class="count"><?= GeoTimezone::find()->count() ?></span></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="/admin/"><i class="fa fa-shopping-cart"></i>Магазин</a>
-                        <ul>
-                            <li class="panel-menu__item sub">
-                                <a href="/admin/order/">
-                                    Заказы<span class="count"><?= Order::find()->count() ?></span>
-                                </a>
-                                <ul>
-                                    <li class="panel-menu__item sub"><a href="/admin/status/">Статус заказа</a></li>
-                                </ul>
-                            </li>
-                            <li class="panel-menu__item sub"><a href="/admin/delivery/">Доставки</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/payment/">Оплаты</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/selling/">Продажи</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/promo/">Промокоды</a></li>
-                            <li class="panel-menu__item sub">
-                                <a href="/admin/vendor/">Поставщики</a>
-                                <ul>
-                                    <li class="panel-menu__item sub"><a href="<?= Url::to(['admin/vendor-group']) ?>">Группы поставщиков</a></li>
-                                </ul>
-                            </li>
+                    <li>
+                        <div class="dropdownlink"><i class="fas fa-cubes" aria-hidden="true"></i> Склад
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/catalog']); ?>">Товары <span class="count"><?= Product::find()->count() ?></span></a></li>
+                            <li><a href="<?= Url::to(['admin/category']); ?>">Разделы <span class="count"><?= Category::find()->count() ?></span></a></li>
+                            <li><a href="<?= Url::to(['admin/properties']); ?>">Свойства <span class="count"><?= ProductProperties::find()->count() ?></span></a></li>
+                            <li><a href="<?= Url::to(['admin/informers']); ?>">Справочники <span class="count"><?= Informers::find()->count() ?></span></a></li>
+                            <li><a href="<?= Url::to(['admin/informers-values']); ?>">Значения справочников <span class="count"><?= InformersValues::find()->count() ?></span></a></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item">
-                        <a href="/admin/catalog/"><i class="fas fa-cookie"></i>Товары<span class="count"><?= Product::find()->count() ?></span></a>
-                        <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/category/">Разделы</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/properties/">Свойства</a></li>
-                            <li class="panel-menu__item sub">
-                                <a href="/admin/informers/">Справочники</a>
-                                <ul>
-                                    <li><a href="/admin/informers-values/">Значения справочников</a></li>
-                                </ul>
-                            </li>
-                            <li class="panel-menu__item sub"><a href="/admin/stocks/">Склады</a></li>
+                    <li>
+                        <div class="dropdownlink"><i class="fas fa-shopping-basket" aria-hidden="true"></i> Магазин
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/order']); ?>">Заказы</a> <span class="count"><?= Order::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/stocks']); ?>">Склады</a> <span class="count"><?= Stocks::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/status']); ?>">Статус заказа</a> <span class="count"><?= OrderStatus::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/delivery']); ?>">Доставки</a> <span class="count"><?= Delivery::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/payment']); ?>">Оплаты</a> <span class="count"><?= Payment::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/promo']); ?>">Промокоды</a> <span class="count"><?= Promo::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/vendor']); ?>">Поставщики</a> <span class="count"><?= Vendor::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/vendor-group']); ?>">Группы поставщиков</a> <span class="count"><?= VendorGroup::find()->count() ?></span></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="/admin/support/"><i
-                                    class="far fa-life-ring"></i>Поддержка<span
-                                    class="count"><?= Tickets::find()->count() ?></span></a>
-                        <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/support-category/">Разделы</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/supportstatus/">Статусы</a></li>
+                    <li>
+                        <div class="dropdownlink"><i class="fas fa-question-circle" aria-hidden="true"></i> Поддержка</span>
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/support']) ?>">Обращения </a> <span class="count"><?= Tickets::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/support-category']) ?>">Разделы</a></li>
+                            <li><a href="<?= Url::to(['admin/supportstatus']) ?>">Статус</a></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="/admin/user/"><i class="fa fa-user-alt"></i>Пользователи<span
-                                    class="count"><?= User::find()->count(); ?></span></a>
-                        <ul>
-                            <li class="panel-menu__item sub"><a href="/admin/group/">Группы</a></li>
-                            <li class="panel-menu__item sub"><a href="/admin/permission/">Разрешения</a></li>
+                    <li>
+                        <div class="dropdownlink"><i class="fas fa-users" aria-hidden="true"></i> Пользователи
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/user']) ?>">Пользователи</a> <span class="count"><?= User::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/group']) ?>">Группы</a></li>
+                            <li><a href="<?= Url::to(['admin/permission']) ?>">Разрешения</a></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="/admin/"><i class="fas fa-pencil-alt"></i>Контент</a>
-                        <ul>
-                            <li class="panel-menu__item sub">
-                                <a href="/admin/news/">
-                                    Новости<span class="count"><?= News::find()->count() ?></span>
-                                </a>
-                                <ul>
-                                    <li class="panel-menu__item sub"><a href="/admin/newssections/">Рубрики</a></li>
-                                </ul>
-                            </li>
-                            <li class="panel-menu__item sub">
-                                <a href="<?php echo Url::to(['admin/sliders']); ?>">
-                                    Слайдеры<span class="count"><?= Sliders::find()->count() ?></span>
-                                </a>
-                                <ul>
-                                    <li class="panel-menu__item sub">
-                                        <a href="<?php echo Url::to(['admin/sliderimages']) ?>">Изображения</a>
-                                    </li>
-                                </ul>
-                            </li>
+                    <li>
+                        <div class="dropdownlink"><i class="far fa-file-alt" aria-hidden="true"></i> Контент
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/news']) ?>">Новости</a> <span class="count"><?= News::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/newssections']) ?>">Рубрики</a></li>
+                            <li><a href="<?= Url::to(['admin/sliders']) ?>">Слайдеры</a></li>
+                            <li><a href="<?= Url::to(['admin/sliderimages']) ?>">Изображения слайдеров</a></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item"><a href="<?= Url::to(['admin/seo']) ?>"><i class="fab fa-empire"></i>SEO</a>
-                        <ul>
-                            <li class="panel-menu__item sub">
-                                <a href="<?= Url::to(['admin/shortly']); ?>">
-                                    Короткие ссылки<span class="count"><?= ShortLinks::find()->count() ?></span>
-                                </a>
-                            </li>
+                    <li>
+                        <div class="dropdownlink"><i class="fas fa-jedi" aria-hidden="true"></i> Seo
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/shortly']) ?>">Короткие ссылки</a> <span class="count"><?= ShortLinks::find()->count() ?></span></li>
                         </ul>
                     </li>
-                    <li class="panel-menu__item">
-                        <a href="<?= Url::to(['admin/management']) ?>"><i class="fas fa-users"></i>Персонал</a>
-                        <ul>
-                            <li class="panel-menu__item sub">
-                                <a href="<?= Url::to(['admin/vacancy']); ?>">
-                                    Список вакансий<span class="count"><?= Vacancy::find()->count() ?></span>
-                                </a>
-                            </li>
+                    <li>
+                        <div class="dropdownlink"><i class="fa fa-motorcycle" aria-hidden="true"></i> Персонал
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                        </div>
+                        <ul class="submenuItems">
+                            <li><a href="<?= Url::to(['admin/vacancy']) ?>">Список вакансий</a> <span class="count"><?= Vacancy::find()->count() ?></span></li>
                         </ul>
                     </li>
                 </ul>
@@ -185,7 +172,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </nav>
 </aside>
 <div class="main">
-    <?= $content; ?>
+	<?= $content; ?>
 </div>
 <?php $this->endBody() ?>
 </body>

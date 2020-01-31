@@ -10,16 +10,16 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 
 ?>
-<? $this->title = Title::showTitle("Склады"); ?>
+<?php $this->title = Title::showTitle("Склады"); ?>
 <section>
     <h1 class="title">Склады</h1>
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+	<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 	<?= $this->render('_forms/_stocks', [
 		'model' => $model,
 		'form' => $form,
 	]); ?>
 	<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-<?php ActiveForm::end(); ?>
+	<?php ActiveForm::end(); ?>
 </section>
 <h2 class="title">Список статусов</h2>
 <?= GridView::widget([
@@ -27,15 +27,9 @@ use yii\helpers\Url;
 	'filterModel' => $searchModel,
 	'emptyText' => 'Склады отсутствуют',
 	'columns' => [
-		[
-			'attribute' => 'id',
-		],
-		[
-			'attribute' => 'name',
-		],
-		[
-			'attribute' => 'address',
-		],
+		'id',
+		'name',
+		'address',
 		[
 			'class' => 'yii\grid\ActionColumn',
 			'buttons' => [
@@ -43,11 +37,11 @@ use yii\helpers\Url;
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
 				},
 				'update' => function ($url, $model, $key) {
-					return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/stocks/$key"]));
+					return Html::a('<i class="far fa-eye"></i>', Url::to(["stocks", 'id' => $key]));
 				},
 				'delete' => function ($url, $model, $key) {
 					return Html::a('<i class="fas fa-trash-alt"></i>',
-						Url::to(["/admin/stocks/", 'id' => $key, 'action' => 'delete']));
+						Url::to(["stocks", 'id' => $key, 'action' => 'delete']));
 				},
 			]
 		],

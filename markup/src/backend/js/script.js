@@ -1,6 +1,7 @@
 //= lib/init
 
 //= include/catalog-loader
+//= include/left-menu
 
 
 $(document).ready(function () {

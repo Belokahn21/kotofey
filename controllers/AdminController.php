@@ -49,6 +49,7 @@ use app\models\search\PermissionsSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
+use app\models\search\TicketSearchForm;
 use app\models\search\VendorGroupSearchForm;
 use app\models\search\VendorSearchForm;
 use app\models\search\SettingsSearchForm;
@@ -654,10 +655,12 @@ class AdminController extends Controller
 	public function actionSupport($id = null)
 	{
 		$model = new Tickets();
-		$dataProvider = $model->search(\Yii::$app->request->get());
+		$searchModel = new TicketSearchForm();
+		$dataProvider = $searchModel->search(\Yii::$app->request->get());
 
 		return $this->render('support', [
 			'dataProvider' => $dataProvider,
+			'searchModel' => $searchModel,
 		]);
 	}
 
