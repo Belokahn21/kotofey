@@ -74,6 +74,26 @@
   color: #5cb85c;
 }
 
+.search-form-wrap {
+  width: 80%;
+}
+
+.search-form {
+  width: 100%;
+
+  &__item {
+    width: 100%;
+    border-radius: 5px;
+    border: 0;
+    outline: 0;
+    padding: 2% 3%;
+
+    &::placeholder {
+      color: black;
+    }
+  }
+}
+
 .panel-menu-wrap {
   width: 80%;
   color: white;
@@ -137,13 +157,13 @@ a {
 .accordion-menu {
   width: 100%;
   max-width: 350px;
-  margin: 60px auto 20px;
+  margin: 20px auto 20px;
   border-radius: 4px;
   background: transparent;
 
   &__single {
-    padding: 0 0 0 15px;
-    margin: 5% 0;
+    padding: 0 0 0 10px;
+    margin: 2% 0;
 
     a {
       text-decoration: none !important;
@@ -180,8 +200,8 @@ a {
 
   i {
     position: absolute;
-    top: 17px;
-    left: 16px;
+    top: 25px;
+    left: 5px;
   }
 
   .fa-chevron-down {
