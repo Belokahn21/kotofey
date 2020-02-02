@@ -1457,4 +1457,10 @@ class AdminController extends Controller
             'city_list' => $city_list
         ]);
     }
+
+    public function actionCache()
+    {
+        Yii::$app->cache->flush();
+        return $this->redirect('/');
+    }
 }
