@@ -26,6 +26,27 @@ class ConsoleController extends Controller
         }
     }
 
+    public function actionName()
+    {
+        // royal
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 60])->all();
+        $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
+
+        foreach ($products->all() as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->name = str_replace('Брит', 'Brit Premium', $product->name);
+            if ($product->validate()) {
+                if (!$product->update()) {
+                    Debug::p($product->getErrors());
+                } else {
+                    echo $product->name . PHP_EOL;
+                }
+            } else {
+                Debug::p($product->getErrors());
+            }
+        }
+    }
+
     public function actionSeo()
     {
         // royal
