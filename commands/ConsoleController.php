@@ -34,7 +34,7 @@ class ConsoleController extends Controller
 
         foreach ($products->all() as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->feed = $product->feed .= 'роял канин';
+            $product->feed .= 'роял канин';
             $product->update();
         }
     }
