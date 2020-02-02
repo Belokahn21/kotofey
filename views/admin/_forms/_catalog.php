@@ -177,7 +177,7 @@ use app\models\entity\Vendor;
 								$drop_down_params['size'] = 10;
 							}
 							?>
-							<?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_ASC])->all(), 'id', 'name'), $drop_down_params)->label($property->name); ?>
+							<?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name'), $drop_down_params)->label($property->name); ?>
 						<?php else: ?>
 							<?php if ($value = ProductPropertiesValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
 								<?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
