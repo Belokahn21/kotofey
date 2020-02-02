@@ -24,7 +24,9 @@ use app\models\entity\Product;
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
 if ($category) {
-	$this->params['breadcrumbs'][] = ['label' => $category->name, 'url' => ['/catalog/' . $category->slug . "/"]];
+    foreach ($category->undersections() as $parents) {
+        $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+    }
 }
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product->detail]];
 
