@@ -14,19 +14,32 @@ use yii\widgets\Pjax;
 ?>
 <button class="show-catalog-filter filter-mobile switcher">Показать фильтр</button>
 <div class="filter">
-	<?php $form = ActiveForm::begin([
-		'id' => 'filter-form-id',
-		'method' => 'get'
-	]); ?>
-	<?php foreach ($informers as $informer): ?>
-		<?php if ($values = InformersValues::find()->where(['informer_id' => $informer->id, 'active' => true])->all()): ?>
-			<?= $form->field($filterModel, 'informer[' . $informer->id . '][]')->checkboxList(ArrayHelper::map($values, 'id', 'name'), [
-				'id' => 'id_list_company',
-				'class' => 'checkbox_list',
-			])->label($informer->name); ?>
-		<?php endif; ?>
-	<?php endforeach; ?>
-	<?= Html::submitButton('Применить', ['class' => 'btn-main show-catalog-filter run']); ?>
-	<?php ActiveForm::end() ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'filter-form-id',
+        'method' => 'get'
+    ]); ?>
+
+    <div class="accordion-menu">
+        <?php foreach ($informers as $informer): ?>
+            <?php if ($values = InformersValues::find()->where(['informer_id' => $informer->id, 'active' => true])->all()): ?>
+                <div>
+                    <div class="dropdownlink"><?php /*<i class="fa fa-road" aria-hidden="true"></i>*/?> <?= $informer->name; ?>
+                        <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                    </div>
+                    <div class="submenuItems">
+                        <div>
+                            <?= $form->field($filterModel, 'informer[' . $informer->id . '][]')->checkboxList(ArrayHelper::map($values, 'id', 'name'), [
+                                'id' => 'id_list_company',
+                                'class' => 'checkbox_list',
+                            ])->label(false); ?>
+                        </div>
+                    </div>
+                </div>
+
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </div>
+    <?= Html::submitButton('Применить', ['class' => 'btn-main show-catalog-filter run']); ?>
+    <?php ActiveForm::end() ?>
 
 </div>

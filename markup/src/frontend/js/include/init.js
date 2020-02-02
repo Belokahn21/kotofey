@@ -9,5 +9,6 @@
 //= block/catalog-filter
 //= block/select-order-date
 //= block/inspector
+//= block/accordeon
 
 $("#filter-form-id").catalogFilter();
