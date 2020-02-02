@@ -36,6 +36,7 @@
     "gulp": "^4.0.2",
     "gulp-sass": "^4.0.2",
     "js-datepicker": "^5.2.1",
+    "lightbox2": "^2.11.1",
     "magnific-popup": "^1.1.0",
     "maskedinput": "^3.3.11",
     "vinyl-buffer": "^1.0.1",

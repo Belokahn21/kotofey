@@ -41,17 +41,21 @@ echo $this->render('modal/product-modal-payment');
         <div class="row">
             <div class="col col-sm-4">
                 <div class="product-detail-image-wrap">
-					<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
-                        <img class="product-detail-image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-					<?php else: ?>
+                    <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                        <a href="/upload/<?= $product->image; ?>" data-lightbox="roadtrip" class="product-detail-image--link">
+                            <img class="product-detail-image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                        </a>
+                    <?php else: ?>
                         <img class="product-detail-image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-					<?php endif; ?>
+                    <?php endif; ?>
 
-					<?php if (!empty($product->images)): ?>
-						<?php foreach (Json::decode($product->images) as $image_path): ?>
-                            <img class="product-detail-image" src="<?= $image_path; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-						<?php endforeach; ?>
-					<?php endif; ?>
+                    <?php if (!empty($product->images)): ?>
+                        <?php foreach (Json::decode($product->images) as $image_path): ?>
+                            <a href="<?= $image_path; ?>" data-lightbox="roadtrip" class="product-detail-image--link">
+                                <img class="product-detail-image" src="<?= $image_path; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                            </a>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
 
                 </div>
             </div>
@@ -59,13 +63,13 @@ echo $this->render('modal/product-modal-payment');
             <div class="col col-sm-6">
                 <div class="product-title"><?= $product->name; ?></div>
                 <div class="product-control">
-					<?php if ($date = ProductOrder::productIsOrder($product->id)): ?>
+                    <?php if ($date = ProductOrder::productIsOrder($product->id)): ?>
                         <div class="product-available red">Под заказ от <?= $date->start; ?> до <?= $date->end; ?> дней</div>
-					<?php else: ?>
-						<?php if ($product->vitrine == 1 or $product->count > 0): ?>
+                    <?php else: ?>
+                        <?php if ($product->vitrine == 1 or $product->count > 0): ?>
                             <div class="product-available green">В наличии <span><?= ($product->count > 0 ? $product->count . 'шт.' : null); ?></span></div>
-						<?php endif; ?>
-					<?php endif; ?>
+                        <?php endif; ?>
+                    <?php endif; ?>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
@@ -74,16 +78,16 @@ echo $this->render('modal/product-modal-payment');
                         <i class="far fa-star"></i>
                     </div>
                     <div class="product-favorite add-to-favorite" onclick="ym(55089223, 'reachGoal', 'favorite'); return true;" data-product="<?= $product->id; ?>"><i class="<?= ((Favorite::getInstance()->exist($product->id)) ? 'fas' : 'far'); ?> fa-heart"></i>В избранное</div>
-                    <div class="product-favorite add-to-compare" onclick="ym(55089223, 'reachGoal', 'compare'); return true;"  data-product="<?= $product->id; ?>">
+                    <div class="product-favorite add-to-compare" onclick="ym(55089223, 'reachGoal', 'compare'); return true;" data-product="<?= $product->id; ?>">
                         <i class="fas fa-balance-scale"></i>Сравнить
                     </div>
 
                     <!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
                 </div>
                 <div class="product-description">
-					<?php if ($product->description): ?>
-						<?= $product->description; ?>
-					<?php endif; ?>
+                    <?php if ($product->description): ?>
+                        <?= $product->description; ?>
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="col-2">
@@ -118,12 +122,12 @@ echo $this->render('modal/product-modal-payment');
                             </div>
                         </div>
                     </div>
-					<?= FastBuyWidget::widget([
-						'product' => $product
-					]); ?>
+                    <?= FastBuyWidget::widget([
+                        'product' => $product
+                    ]); ?>
 
                     <hr/>
-					<?php /* WeightBuyWidget::widget([
+                    <?php /* WeightBuyWidget::widget([
 						'product_id' => $product->id
 					]); */ ?>
 
@@ -155,41 +159,41 @@ echo $this->render('modal/product-modal-payment');
     <div class="product-attributes-wrap">
         <div class="container">
             <div class="product-attributes__title">Характеристики товара</div>
-			<?php if (!empty($product->article)): ?>
+            <?php if (!empty($product->article)): ?>
                 <div class="row product-attributes__item">
                     <div class="col-4 product-attributes__key"><?= (new Product())->getAttributeLabel('article'); ?></div>
                     <div class="col product-attributes__value"><?= $product->article; ?></div>
                 </div>
-			<?php endif; ?>
-			<?php if ($properties): ?>
-				<?php foreach ($properties as $property): ?>
+            <?php endif; ?>
+            <?php if ($properties): ?>
+                <?php foreach ($properties as $property): ?>
                     <div class="row product-attributes__item">
                         <div class="col-4 product-attributes__key"><?= $property->property->name; ?></div>
                         <div class="col product-attributes__value"><?= $property->finalValue; ?></div>
                     </div>
-				<?php endforeach; ?>
-			<?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
 
         </div>
         <div class="container">
-			<?= ProductReviewsWidget::widget([
-				'product' => $product
-			]); ?>
+            <?= ProductReviewsWidget::widget([
+                'product' => $product
+            ]); ?>
         </div>
     </div>
     <ul class="product-switch">
-		<?php if ($left_product): ?>
+        <?php if ($left_product): ?>
             <li class="product-switch__item left">
                 <a class="product-switch__link" href="<?= $left_product->detail; ?>"><?= $left_product->name; ?></a>
             </li>
-		<?php endif; ?>
+        <?php endif; ?>
 
 
-		<?php if ($right_product): ?>
+        <?php if ($right_product): ?>
             <li class="product-switch__item right">
                 <a class="product-switch__link" href="<?= $right_product->detail; ?>"><?= $right_product->name; ?></a>
             </li>
-		<?php endif; ?>
+        <?php endif; ?>
     </ul>
 
 

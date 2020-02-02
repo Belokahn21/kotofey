@@ -49,6 +49,10 @@
 
 .product-detail-image-wrap {
   width: 100%;
+
+  a {
+    display: inline-block;
+  }
 }
 
 .product-button {
@@ -68,20 +72,32 @@
   }
 }
 
-.product-detail-image:first-child {
+.product-detail-image--link:first-child {
   width: 80%;
   margin: 0 auto;
   height: 280px;
-  object-fit: contain;
   display: block;
 }
 
-.product-detail-image {
+.product-detail-image--link {
   width: 50px;
   height: 50px;
-  object-fit: contain;
   margin: 2px;
   cursor: pointer;
+  display: block;
+}
+
+.product-detail-image:first-child {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+}
+
+.product-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .product-pluses {
