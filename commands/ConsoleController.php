@@ -29,12 +29,12 @@ class ConsoleController extends Controller
     public function actionSeo()
     {
         // royal
-        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 139])->all();
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 57])->all();
         $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
 
         foreach ($products->all() as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->feed .= 'Trener трейнер тренер трайнер trainer trener';
+            $product->feed .= 'Pi pi bent';
             if ($product->validate()) {
                 if (!$product->update()) {
                     Debug::p($product->getErrors());
