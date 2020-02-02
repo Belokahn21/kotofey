@@ -4,6 +4,7 @@ namespace app\models\tool\parser;
 
 
 use app\models\tool\parser\providers\Lukas;
+use app\models\tool\parser\providers\Purina;
 use app\models\tool\parser\providers\SibagroTrade;
 
 class ProviderFactory
@@ -20,6 +21,9 @@ class ProviderFactory
         }
         if ($this->compare('lukasn.ru', $url)) {
             return new Lukas();
+        }
+        if ($this->compare('shop.purina.ru', $url)) {
+            return new Purina();
         }
 
         return false;

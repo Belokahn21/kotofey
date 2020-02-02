@@ -15,75 +15,45 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
 <section class="detail-order">
     <div class="detail-order-info-wrap">
         <h1 class="detail-order-info__title"><?= "Заказ №" . $order->id; ?></h1>
-        <table class="detail-order-info">
-            <tr>
-                <td>
-                    Дата покупки
-                </td>
-                <td>
-					<?= date("d.m.Y", $order->created_at); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Сумма заказа
-                </td>
-                <td>
-					<?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= (new Currency())->show(); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Статус
-                </td>
-                <td>
-					<?= OrderHelper::getStatus($order); ?>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Оплачен
-                </td>
-                <td>
-					<?php if ($order->is_paid): ?>
-                        <span class="green">Оплачен</span>
-					<?php else: ?>
-                        <span class="red">Не оплачен</span>
-					<?php endif; ?>
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div class="detail-order-info-items-wrap">
-		<?php if ($items): ?>
-            <h1 class="detail-order-info-items__title">Товары в заказе</h1>
-			<?php /* @var $item \app\models\entity\OrdersItems */ ?>
-            <ul class="detail-order-info-items-list">
-				<?php foreach ($items as $item): ?>
-					<?php if ($item->product instanceof \app\models\entity\Product): ?>
-                        <li class="detail-order-info-items-list-item">
-                            <a href="<?= $item->product->detail; ?>" class="detail-order-info-items-list-item__link">
-                                <img class="detail-order-info-items-list-item__image" src="/web/upload/<?= $item->product->image ?>">
-                                <div class="detail-order-info-items-list-item__title">
-                                    <h3><?= $item->name; ?></h3>
-                                </div>
-                            </a>
+        <div class="detail-order">
+            <div class="detail-order__sidebar">
+                <ul class="detail-info">
+                    <li class="detail-info__item">
+                        <div class="detail-info__title">Дата заказа</div>
+                        <div class="detail-info__value"><?= date('d.m.Y h:i:s', $order->created_at); ?></div>
+                    </li>
+                    <li class="detail-info__item">
+                        <div class="detail-info__title">Сумма заказа</div>
+                        <div class="detail-info__value"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></div>
+                    </li>
+                    <li class="detail-info__item">
+                        <div class="detail-info__title">Статус</div>
+                        <div class="detail-info__value"><?= OrderHelper::getStatus($order); ?></div>
+                    </li>
+                    <li class="detail-info__item">
+                        <div class="detail-info__title">Оплата</div>
+                        <div class="detail-info__value"><?= ($order->is_paid ? '<span class="green">Оплачено</span>' : '<span class="red">Не оплачено</span>'); ?></div>
+                    </li>
+                    <?php if ($order->is_cancel): ?>
+                        <li class="detail-info__item">
+                            <div class="detail-info__title">Отмена</div>
+                            <div class="detail-info__value">Заказ отменён</div>
                         </li>
-					<?php else: ?>
-                        <li class="detail-order-info-items-list-item">
-                            <a href="javascript:void(0);" class="detail-order-info-items-list-item__link">
-                                <img class="detail-order-info-items-list-item__image" src="/web/upload/images/not-image.png">
-                                <div class="detail-order-info-items-list-item__title">
-                                    <h3><?= $item->name; ?></h3>
-                                </div>
-                            </a>
+                    <?php endif; ?>
+                </ul>
+            </div>
+            <div class="detail-order__main">
+                <ul class="product-order-detail">
+                    <?php foreach ($items as $item): ?>
+                        <li class="product-order-detail__item">
+                            <img class="product-order-detail__image" src="/upload/<?= $item->product->image; ?>">
+                            <div class="product-order-detail__title"><a class="product-order-detail__link" href="javascript:void(0);"><?= $item->name; ?></a></div>
+                            <div class="product-order-detail__price">Цена за ед.: <?= $item->price; ?> <?= Currency::getInstance()->show(); ?></div>
+                            <div class="product-order-detail__count">Кол-во: <?= $item->count; ?></div>
+                            <div class="product-order-detail__summary">Итого: <?= $item->count * $item->price; ?> <?= Currency::getInstance()->show(); ?></div>
                         </li>
-					<?php endif; ?>
-
-				<?php endforeach; ?>
-            </ul>
-		<?php else: ?>
-            К сожалению вы ничего не купили
-		<?php endif; ?>
-    </div>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        </div>
 </section>
