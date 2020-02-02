@@ -21,7 +21,7 @@ use yii\widgets\Pjax;
 
     <div class="accordion-menu">
         <?php foreach ($informers as $informer): ?>
-            <?php if ($values = InformersValues::find()->where(['informer_id' => $informer->id, 'active' => true])->orderBy(['name' => SORT_DESC])->all()): ?>
+            <?php if ($values = InformersValues::find()->where(['informer_id' => $informer->id, 'active' => true])->orderBy(['name' => SORT_ASC])->all()): ?>
                 <div>
                     <div class="dropdownlink"><?php /*<i class="fa fa-road" aria-hidden="true"></i>*/ ?> <?= $informer->name; ?>
                         <i class="fa fa-chevron-down" aria-hidden="true"></i>
