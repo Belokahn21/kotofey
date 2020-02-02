@@ -17,6 +17,7 @@ use app\models\entity\Payment;
 use app\models\entity\ProductMarket;
 use app\models\entity\ProductOrder;
 use app\models\entity\ProductProperties;
+use app\models\entity\ProductPropertiesValues;
 use app\models\entity\Promo;
 use app\models\entity\Providers;
 use app\models\entity\SearchQuery;
@@ -33,6 +34,7 @@ use app\models\entity\User;
 use app\models\entity\Vacancy;
 use app\models\entity\Vendor;
 use app\models\entity\VendorGroup;
+use app\models\forms\FeedmakerForm;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
@@ -66,6 +68,7 @@ use app\models\tool\export\YMLExport;
 use app\widgets\notification\Alert;
 use Codeception\Lib\Di;
 use yii\filters\AccessControl;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\entity\Product;
@@ -1347,9 +1350,37 @@ class AdminController extends Controller
         ]);
     }
 
-    public function actionSeo()
+    public function actionFeed()
     {
-        return $this->render('seo');
+        $model = new FeedmakerForm();
+        $property_values = InformersValues::find()->where(['informer_id' => 1])->orderBy(['name' => SORT_ASC])->all();
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate()) {
+                    $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => $model->attribute])->all();
+                    $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
+                    foreach ($products as $product) {
+                        $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+                        $product->feed .= $model->feed;
+                        if ($product->validate()) {
+                            if (!$product->update()) {
+                                Alert::setErrorNotify('Ошибка при обновлении товара');
+                                return $this->refresh();
+                            }
+                        }
+                    }
+
+                    Alert::setSuccessNotify('Операция успешно выполнена');
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('feed', [
+            'model' => $model,
+            'property_values' => $property_values,
+        ]);
     }
 
     public function actionShortly($id = null)
