@@ -26,6 +26,19 @@ class ConsoleController extends Controller
         }
     }
 
+    public function actionSeo()
+    {
+        // royal
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
+        $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
+
+        foreach ($products->all() as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->feed = $product->feed .= 'роял канин';
+            $product->update();
+        }
+    }
+
     public function actionPrice()
     {
         // purina
