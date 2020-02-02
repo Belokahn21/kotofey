@@ -47,7 +47,13 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     <?php foreach ($items as $item): ?>
                         <li class="product-order-detail__item">
                             <img class="product-order-detail__image" src="/upload/<?= $item->product->image; ?>">
-                            <div class="product-order-detail__title"><a class="product-order-detail__link" href="javascript:void(0);"><?= $item->name; ?></a></div>
+                            <div class="product-order-detail__title">
+                                <?php if ($item->product instanceof \app\models\entity\Product): ?>
+                                    <a class="product-order-detail__link" href="<?= $item->product->detail; ?>"><?= $item->name; ?></a>
+                                <?php else: ?>
+                                    <a class="product-order-detail__link" href="javascript:void(0);"><?= $item->name; ?></a>
+                                <?php endif; ?>
+                            </div>
                             <div class="product-order-detail__price">Цена за ед.: <?= $item->price; ?> <?= Currency::getInstance()->show(); ?></div>
                             <div class="product-order-detail__count">Кол-во: <?= $item->count; ?></div>
                             <div class="product-order-detail__summary">Итого: <?= $item->count * $item->price; ?> <?= Currency::getInstance()->show(); ?></div>
