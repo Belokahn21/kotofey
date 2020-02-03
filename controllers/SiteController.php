@@ -232,6 +232,7 @@ class SiteController extends Controller
 	public function actionSearch()
 	{
 		$model = new Search();
+		$model->save_history = true;
 
 		if ($model->load(\Yii::$app->request->get())) {
 			$products = $model->search();
