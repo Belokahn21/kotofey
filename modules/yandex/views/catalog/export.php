@@ -28,7 +28,7 @@ use app\models\helpers\ProductHelper;
         <offers>
 			<?php foreach ($offers as $offer): ?>
                 <offer id="<?= $offer->id ?>" available="true">
-                    <url><?= $offer->detail; ?></url>
+                    <url>https://kotofey.store/<?= $offer->detail; ?></url>
                     <price><?= ProductHelper::getResultPrice($offer); ?></price>
                     <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
