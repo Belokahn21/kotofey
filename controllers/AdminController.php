@@ -1380,7 +1380,7 @@ class AdminController extends Controller
 
 							if ($product->validate()) {
 								if (!$product->update()) {
-									Alert::setErrorNotify('Ошибка при обновлении товара');
+									Alert::setErrorNotify(Debug::modelErrors($model));
 									return $this->refresh();
 								}
 							}
