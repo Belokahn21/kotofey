@@ -5,7 +5,6 @@ use app\models\helpers\ProductHelper;
 /* @var $offers \app\models\entity\Product[] */
 /* @var $categories \app\models\entity\Category[] */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name>Зоомагазин Котофей</name>
