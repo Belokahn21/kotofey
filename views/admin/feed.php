@@ -13,15 +13,15 @@ $this->title = Title::showTitle("Поисковой контент по прои
 ?>
 <h1>Поисковой контент по производителям</h1>
 <?php $form = ActiveForm::begin(); ?>
+<?= $form->field($model, 'update')->checkbox(); ?>
 <?= $form->field($model, 'name')->textInput(); ?>
-<?= $form->field($model, 'attribute')->dropDownList(ArrayHelper::map($property_values, 'id', 'name')); ?>
 <?= $form->field($model, 'feed')->textarea(); ?>
 <?= Html::submitButton('Выполнить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end(); ?>
 <?php if ($products): ?>
     <ul class="">
 		<?php foreach ($products as $product): ?>
-            <li><?= $product->name; ?></li>
+            <li><?= $product->name; ?>: <?= $product->feed; ?></li>
 		<?php endforeach; ?>
     </ul>
 <?php endif; ?>

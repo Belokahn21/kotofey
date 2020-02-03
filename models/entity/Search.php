@@ -15,11 +15,14 @@ class Search extends Model
 	public $category;
 	public $pricefrom;
 	public $priceto;
+	public $save_history = false;
 
 	public function rules()
 	{
 		return [
-			[['search', 'category', 'pricefrom', 'priceto'], 'string']
+			[['search', 'category', 'pricefrom', 'priceto'], 'string'],
+
+			[['save_history'], 'boolean'],
 		];
 	}
 
@@ -65,24 +68,14 @@ class Search extends Model
 				}
 			}
 
-//			if (count($words) > 1) {
-//
-//				foreach ($words as $word) {
-//					$products->andWhere(['like', 'name', $word]);
-//					$products->orWhere(['like', 'feed', $word]);
-//				}
-//
-//			} else {
-//				$products->where(['like', 'name', $this->search]);
-//				$products->orWhere(['like', 'feed', $this->search]);
-//			}
-
 		}
 
 		$SearchQuery->count_find = $products->count();
 
-		if ($SearchQuery->validate()) {
-			$SearchQuery->save();
+		if ($this->save_history == true) {
+			if ($SearchQuery->validate()) {
+				$SearchQuery->save();
+			}
 		}
 
 		return $products;

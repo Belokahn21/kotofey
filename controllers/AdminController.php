@@ -1361,31 +1361,34 @@ class AdminController extends Controller
 			if ($model->load(Yii::$app->request->post())) {
 				if ($model->validate()) {
 
-					if (empty($model->feed)) {
-                		$search = new Search();
-                		$search->search = $model->name;
-						$products = $model->search();
-					}
+					$search = new Search();
+					$search->search = $model->name;
+					$products = $search->search();
 
 //                    $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => $model->attribute])->all();
 //                    $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
-//                    foreach ($products as $product) {
-//                        $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-//                        $product->feed .= $model->feed;
-//                        if ($product->validate()) {
-//                            if (!$product->update()) {
-//                                Alert::setErrorNotify('Ошибка при обновлении товара');
-//                                return $this->refresh();
-//                            }
-//                        }
-//                    }
 
-					Alert::setSuccessNotify('Операция успешно выполнена');
-					return $this->refresh();
+					if ($products && !empty($model->feed)) {
+						foreach ($products as $product) {
+							$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+
+							if ($model->update) {
+								$product->feed = $model->feed;
+							} else {
+								$product->feed .= $model->feed;
+							}
+
+							if ($product->validate()) {
+								if (!$product->update()) {
+									Alert::setErrorNotify('Ошибка при обновлении товара');
+									return $this->refresh();
+								}
+							}
+						}
+					}
 				}
 			}
 		}
-
 		return $this->render('feed', [
 			'model' => $model,
 			'property_values' => $property_values,

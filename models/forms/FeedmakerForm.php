@@ -10,15 +10,16 @@ class FeedmakerForm extends Model
 	public $attribute;
 	public $feed;
 	public $name;
+	public $update;
 
 	public function rules()
 	{
 		return [
-			[['feed', 'attribute'], 'required'],
-
 			[['feed', 'name'], 'string'],
 
 			[['attribute'], 'integer'],
+
+			[['update'], 'boolean'],
 		];
 	}
 
@@ -27,6 +28,7 @@ class FeedmakerForm extends Model
 		return [
 			'attribute' => 'Производитель',
 			'feed' => 'Контент поиска',
+			'update' => 'Новый контент',
 		];
 	}
 }
