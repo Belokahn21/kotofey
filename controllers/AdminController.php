@@ -1379,8 +1379,9 @@ class AdminController extends Controller
 							}
 
 							if ($product->validate()) {
-								if (!$product->update()) {
-									Alert::setErrorNotify(Debug::modelErrors($model));
+								if ($product->update() == false) {
+									Debug::p($model->getErrors());
+//									Alert::setErrorNotify(Debug::modelErrors($model));
 									return $this->refresh();
 								}
 							}
