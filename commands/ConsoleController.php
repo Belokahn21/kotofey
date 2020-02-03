@@ -68,12 +68,12 @@ class ConsoleController extends Controller
 
 	public function actionPriced()
 	{
-		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
+		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 139])->all();
 		$products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
 
 		foreach ($products as $product) {
 			$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-			$product->price += ceil($product->purchase * 0.16);
+			$product->price = ceil(($product->purchase * 0.16) + $product->purchase);
 			if ($product->validate()) {
 				if ($product->update()) {
 
