@@ -40,7 +40,7 @@ class ProductSearchForm extends Product
 			return $dataProvider;
 		}
 
-		$query->andFilterWhere(['like', 'id', $this->id])
+		$query->andWhere(['id' => $this->id])
 			->andFilterWhere(['like', 'category_id', $this->category_id])
 			->andFilterWhere(['like', 'article', $this->article])
 			->andFilterWhere(['like', 'code', $this->code])
