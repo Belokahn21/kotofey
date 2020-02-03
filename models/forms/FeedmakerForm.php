@@ -7,25 +7,26 @@ use yii\base\Model;
 
 class FeedmakerForm extends Model
 {
-    public $attribute;
-    public $feed;
+	public $attribute;
+	public $feed;
+	public $name;
 
-    public function rules()
-    {
-        return [
-            [['feed', 'attribute'], 'required'],
+	public function rules()
+	{
+		return [
+			[['feed', 'attribute'], 'required'],
 
-            [['feed'], 'string'],
+			[['feed', 'name'], 'string'],
 
-            [['attribute'], 'integer'],
-        ];
-    }
+			[['attribute'], 'integer'],
+		];
+	}
 
-    public function attributeLabels()
-    {
-        return [
-            'attribute' => 'Производитель',
-            'feed' => 'Контент поиска',
-        ];
-    }
+	public function attributeLabels()
+	{
+		return [
+			'attribute' => 'Производитель',
+			'feed' => 'Контент поиска',
+		];
+	}
 }
