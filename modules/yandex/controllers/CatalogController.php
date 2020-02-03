@@ -23,8 +23,6 @@ class CatalogController extends Controller
 			'categories' => $categories
 		]);
 
-		Debug::printFile($response, true, true);
-
 		return $response;
 	}
 
