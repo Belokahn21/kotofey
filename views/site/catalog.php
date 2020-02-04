@@ -68,7 +68,7 @@ if ($category) {
                     <?php if ($product->discount_price): ?>
                         <div id="burst-12">
                             <div class='dis'>
-                                -<?= floor((($product->price - $product->discount_price) / $product->discount_price) * 100); ?>%
+                                <?= floor((($product->discount_price - $product->price) / $product->price) * 100); ?>%
                             </div>
                         </div>
                     <?php endif; ?>
