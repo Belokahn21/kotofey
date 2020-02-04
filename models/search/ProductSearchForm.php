@@ -40,29 +40,29 @@ class ProductSearchForm extends Product
 			return $dataProvider;
 		}
 
-		$query->orWhere(['id' => $this->id])
-			->orWhere(['category_id' => $this->category_id])
-			->orWhere(['article' => $this->article])
-			->orWhere(['code' => $this->code])
-			->orWhere(['count' => $this->count])
-			->orWhere(['price' => $this->price])
-			->orWhere(['purchase' => $this->purchase]);
+		$query->andWhere(['id' => $this->id])
+			->andFilterWhere(['like', 'category_id', $this->category_id])
+			->andFilterWhere(['like', 'article', $this->article])
+			->andFilterWhere(['like', 'code', $this->code])
+			->andFilterWhere(['like', 'count', $this->count])
+			->andFilterWhere(['like', 'price', $this->price])
+			->andFilterWhere(['like', 'purchase', $this->purchase]);
 
 
-//		if (!empty($this->name)) {
-//			$query->where(['like', 'name', $this->name]);
-//			$query->orWhere(['like', 'feed', $this->name]);
-//
-//			if ($query->count() == 0) {
-//				$words = explode(" ", $this->name);
-//				if (count($words) > 1) {
-//					foreach ($words as $word) {
-//						$query->andWhere(['like', 'name', $word]);
-//						$query->orWhere(['like', 'feed', $word]);
-//					}
-//				}
-//			}
-//		}
+		if (!empty($this->name)) {
+			$query->where(['like', 'name', $this->name]);
+			$query->orWhere(['like', 'feed', $this->name]);
+
+			if ($query->count() == 0) {
+				$words = explode(" ", $this->name);
+				if (count($words) > 1) {
+					foreach ($words as $word) {
+						$query->andWhere(['like', 'name', $word]);
+						$query->orWhere(['like', 'feed', $word]);
+					}
+				}
+			}
+		}
 
 		return $dataProvider;
 	}
