@@ -68,7 +68,7 @@ if ($category) {
                     <?php if ($product->discount_price): ?>
                         <div id="burst-12">
                             <div class='dis'>
-                                -<?= ceil(($product->price - $product->discount_price) / $product->discount_price); ?>%
+                                -<?= ceil((($product->price - $product->discount_price) / $product->discount_price) * 100); ?>%
                             </div>
                         </div>
                     <?php endif; ?>
