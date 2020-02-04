@@ -40,13 +40,13 @@ class ProductSearchForm extends Product
 			return $dataProvider;
 		}
 
-		$query->andWhere(['id' => $this->id])
-			->andWhere(['category_id' => $this->category_id])
-			->andWhere(['article' => $this->article])
-			->andWhere(['code' => $this->code])
-			->andWhere(['count' => $this->count])
-			->andWhere(['price' => $this->price])
-			->andWhere(['purchase' => $this->purchase]);
+		$query->orWhere(['id' => $this->id])
+			->orWhere(['category_id' => $this->category_id])
+			->orWhere(['article' => $this->article])
+			->orWhere(['code' => $this->code])
+			->orWhere(['count' => $this->count])
+			->orWhere(['price' => $this->price])
+			->orWhere(['purchase' => $this->purchase]);
 
 
 //		if (!empty($this->name)) {
