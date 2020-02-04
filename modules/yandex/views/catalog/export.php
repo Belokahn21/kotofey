@@ -24,6 +24,9 @@ use app\models\helpers\ProductHelper;
                 <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
 			<?php endforeach; ?>
         </categories>
+        <delivery-options>
+            <option cost="500" days="1" order-before="16"/>
+        </delivery-options>
         <cpa>1</cpa>
         <offers>
 			<?php foreach ($offers as $offer): ?>
@@ -35,6 +38,7 @@ use app\models\helpers\ProductHelper;
                     <picture><?= $offer->image; ?></picture>
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                     <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
+                    <pickup>false</pickup>
                 </offer>
 			<?php endforeach; ?>
         </offers>

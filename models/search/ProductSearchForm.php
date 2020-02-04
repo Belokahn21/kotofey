@@ -41,12 +41,12 @@ class ProductSearchForm extends Product
 		}
 
 		$query->andWhere(['id' => $this->id])
-			->andFilterWhere(['like', 'category_id', $this->category_id])
-			->andFilterWhere(['like', 'article', $this->article])
-			->andFilterWhere(['like', 'code', $this->code])
-			->andFilterWhere(['like', 'count', $this->count])
-			->andFilterWhere(['like', 'price', $this->price])
-			->andFilterWhere(['like', 'purchase', $this->purchase]);
+			->andWhere(['category_id' => $this->category_id])
+			->andWhere(['article' => $this->article])
+			->andWhere(['code' => $this->code])
+			->andWhere(['count' => $this->count])
+			->andWhere(['price' => $this->price])
+			->andWhere(['purchase' => $this->purchase]);
 
 
 		if (!empty($this->name)) {
