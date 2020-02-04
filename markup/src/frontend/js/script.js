@@ -150,20 +150,6 @@ $(document).ready(function () {
 		});
 		return false;
 	});
-
-	// $('.ajax-login').submit(function (e) {
-	// 	e.preventDefault();
-	//
-	// 	$.ajax({
-	// 		url: '/ajax/ajax-login/',
-	// 		method: 'POST',
-	// 		success: function (data) {
-	// 			if (data == 1) {
-	// 			    console.log('asdsdasd');
-	// 			}
-	// 		}
-	// 	});
-	// });
 });
 
 function copyClipboard(id) {

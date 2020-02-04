@@ -84,14 +84,14 @@ var config = {
             src_frontend: './src/frontend/js/ecmascript6/core.js',
             watch_frontend: './src/frontend/js/ecmascript6/**/*.js',
             build_frontend: './build/frontend/assets/js/',
-            application_frontend: '../web/js/',
+            application_frontend: '../web/js/'
 
         },
     }
 };
 gulp.task('ecmascript6', function () {
     return new Promise(function (resolve, reject) {
-        browserify({
+        es.concat(browserify({
             entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_frontend],
             debug: true
         }).transform('babelify', {
@@ -103,7 +103,21 @@ gulp.task('ecmascript6', function () {
             .pipe(plumber.stop())
             .pipe(ugli())
             .pipe(gulp.dest(config.paths.ecmascript6.build_frontend))
-            .pipe(gulp.dest(config.paths.ecmascript6.application_frontend));
+            .pipe(gulp.dest(config.paths.ecmascript6.application_frontend)),
+
+            browserify({
+                entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_backend],
+                debug: true
+            }).transform('babelify', {
+                presets: ['@babel/env'],
+            }).bundle()
+                .pipe(source('backend-core.min.js'))
+                .pipe(buffer())
+                .pipe(plumber())
+                .pipe(plumber.stop())
+                .pipe(ugli())
+                .pipe(gulp.dest(config.paths.ecmascript6.build_backend))
+                .pipe(gulp.dest(config.paths.ecmascript6.application_backend)));
         resolve();
     });
 });

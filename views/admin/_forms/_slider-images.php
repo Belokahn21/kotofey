@@ -2,7 +2,7 @@
 
 use app\models\entity\Sliders;
 use yii\helpers\ArrayHelper;
-
+/* @var $model \app\models\entity\SlidersImages */
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -15,10 +15,18 @@ use yii\helpers\ArrayHelper;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 		<?= $form->field($model, 'active')->radioList(['Нет', 'Да']); ?>
 		<?= $form->field($model, 'slider_id')->dropDownList(ArrayHelper::map(Sliders::find()->all(), 'id', 'name'), ['prompt' => 'Слайдер']); ?>
+        <div class="row">
+            <div class="col-sm-6">
+				<?= $form->field($model, 'start_at')->textInput(['class' => 'form-control js-datepicker']); ?>
+            </div>
+            <div class="col-sm-6">
+				<?= $form->field($model, 'end_at')->textInput(['class' => 'form-control js-datepicker']); ?>
+            </div>
+        </div>
 		<?= $form->field($model, 'text')->textInput(); ?>
-		<?= $form->field($model, 'link')->textInput(); ?>
 		<?= $form->field($model, 'description')->textInput(); ?>
 		<?= $form->field($model, 'sort')->textInput(); ?>
+		<?= $form->field($model, 'link')->textInput(); ?>
 		<?= $form->field($model, 'image')->fileInput(); ?>
     </div>
     <!--	<div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">-->
