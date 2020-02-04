@@ -49,20 +49,20 @@ class ProductSearchForm extends Product
 			->andWhere(['purchase' => $this->purchase]);
 
 
-		if (!empty($this->name)) {
-			$query->where(['like', 'name', $this->name]);
-			$query->orWhere(['like', 'feed', $this->name]);
-
-			if ($query->count() == 0) {
-				$words = explode(" ", $this->name);
-				if (count($words) > 1) {
-					foreach ($words as $word) {
-						$query->andWhere(['like', 'name', $word]);
-						$query->orWhere(['like', 'feed', $word]);
-					}
-				}
-			}
-		}
+//		if (!empty($this->name)) {
+//			$query->where(['like', 'name', $this->name]);
+//			$query->orWhere(['like', 'feed', $this->name]);
+//
+//			if ($query->count() == 0) {
+//				$words = explode(" ", $this->name);
+//				if (count($words) > 1) {
+//					foreach ($words as $word) {
+//						$query->andWhere(['like', 'name', $word]);
+//						$query->orWhere(['like', 'feed', $word]);
+//					}
+//				}
+//			}
+//		}
 
 		return $dataProvider;
 	}
