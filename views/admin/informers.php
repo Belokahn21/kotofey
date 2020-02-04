@@ -43,7 +43,7 @@ $this->title = Title::showTitle("Справочники"); ?>
 			'filter' => ['Не показывать', 'Показывать'],
 			'format' => 'raw',
 			'value' => function ($model) {
-				if ($model->is_active) {
+				if ($model->is_show_filter) {
 					return Html::tag('span', 'Показывать', ['class' => 'green']);
 				} else {
 					return Html::tag('span', 'Не показывать', ['class' => 'red']);
