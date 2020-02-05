@@ -38,11 +38,11 @@ $this->title = Title::showTitle("Главная страница");
                             </li>
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Выручка</div>
-                                <div class="statistic__item-value"><?= OrderStatistic::income(); ?></div>
+                                <div class="statistic__item-value"><?= Price::format(OrderStatistic::income()); ?></div>
                             </li>
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Маржинальность</div>
-                                <div class="statistic__item-value"><?= OrderStatistic::marginality(); ?></div>
+                                <div class="statistic__item-value"><?= Price::format(OrderStatistic::marginality()); ?></div>
                             </li>
                         </ul>
                     </div>
