@@ -24,6 +24,7 @@
 .green {
   color: green;
 }
+
 .red {
   color: red;
 }
@@ -96,6 +97,12 @@ input[type='text'], input[type='password'], select, textarea {
     padding: 0 5px;
     text-align: left;
   }
+}
+
+.orders-items-item {
+  margin: 0 0 20px 0;
+  padding: 25px 0;
+  border-bottom: 1px deepskyblue solid;
 }
 
 

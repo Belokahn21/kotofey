@@ -23,10 +23,12 @@ use app\models\entity\Geo;
     <div class="tab-pane fade" id="nav-time" role="tabpanel" aria-labelledby="nav-time-tab">
         <div class="row">
             <div class="col-sm-6">
+                <p>Время открытия</p>
 				<?= $form->field($model, 'hour_start')->dropDownList(range(0, 23)); ?>
 				<?= $form->field($model, 'minute_start')->dropDownList(range(0, 59)); ?>
             </div>
             <div class="col-sm-6">
+                <p>Время закрытия</p>
 				<?= $form->field($model, 'hour_end')->dropDownList(range(0, 23)); ?>
 				<?= $form->field($model, 'minute_end')->dropDownList(range(0, 59)); ?>
             </div>

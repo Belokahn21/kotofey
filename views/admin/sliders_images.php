@@ -34,6 +34,7 @@ $this->title = Title::showTitle("Изображения слайдеров"); ?>
 		'active',
 		'text',
 		'description',
+		'link',
 		[
 			'attribute' => 'slider_id',
 			'format' => 'raw',

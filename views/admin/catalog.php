@@ -20,11 +20,7 @@ use app\models\entity\SiteSettings;
 $this->title = Title::showTitle("Товары"); ?>
     <section>
         <h1 class="title">Товары</h1>
-
         <div class="catalog-control">
-            <?= Html::a("Экспорт товаров в YML", "?export=yml", ['class' => 'btn-main']); ?>
-            <?= Html::a("Экспорт товаров в Yandex Catalog", "?export=yandex", ['class' => 'btn-main']); ?>
-
             <div class="pre-load-catalog-wrap">
                 <input type="text" name="url" placeholder="Ссылка на подгрузку" class="pre-load-catalog">
                 <svg width="20" height="30" class="backend-preloader hide">

@@ -28,6 +28,18 @@ use yii\helpers\Url;
 	'emptyText' => 'Склады отсутствуют',
 	'columns' => [
 		'id',
+		[
+			'attribute' => 'active',
+			'filter' => ['Не активен', 'Активен'],
+			'format' => 'raw',
+			'value' => function ($model) {
+				if ($model->active) {
+					return Html::tag('span', 'Активен', ['class' => 'green']);
+				} else {
+					return Html::tag('span', 'Не активен', ['class' => 'red']);
+				}
+			}
+		],
 		'name',
 		'address',
 		[

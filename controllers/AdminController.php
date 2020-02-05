@@ -302,6 +302,7 @@ class AdminController extends Controller
 		if ($id) {
 			$order = Order::findOne($id);
 			$order->scenario = Order::SCENARIO_CUSTOM;
+			$items = OrdersItems::find()->where(['order_id' => $id])->all();
 			if (!$order) {
 				throw new HttpException(404, 'Заказ не найден');
 			}
@@ -309,13 +310,32 @@ class AdminController extends Controller
 			if (Yii::$app->request->isPost) {
 				if ($order->load(Yii::$app->request->post())) {
 					if ($order->update()) {
+
+						if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
+							foreach ($items as $item) {
+								if ($item->need_delete) {
+									$item->delete();
+									continue;
+								}
+
+								if ($item->validate()) {
+									if ($item->update() === false) {
+										Alert::setErrorNotify('Заказ не обновлён. Ошибка при сохранении товаров');
+										return $this->refresh();
+									}
+								}
+							}
+						}
+
+
 						Alert::setSuccessNotify('Заказ успешно обновлён');
 						return $this->refresh();
 					}
 				}
+
+
 			}
 
-			$items = OrdersItems::find()->where(['order_id' => $id])->all();
 			return $this->render('detail/order', [
 				'model' => $order,
 				'items' => $items
@@ -876,6 +896,7 @@ class AdminController extends Controller
 			$model = Stocks::findOne($id);
 			if (Yii::$app->request->isPost) {
 				if ($model->edit()) {
+					Alert::setSuccessNotify('Склад успешно обновлен');
 					return $this->refresh();
 				}
 			}
@@ -890,6 +911,7 @@ class AdminController extends Controller
 
 		if (Yii::$app->request->isPost) {
 			if ($model->create()) {
+				Alert::setSuccessNotify('Склад успешно создан');
 				return $this->refresh();
 			}
 		}
@@ -1380,8 +1402,7 @@ class AdminController extends Controller
 
 							if ($product->validate()) {
 								if ($product->update() == false) {
-									Debug::p($model->getErrors());
-//									Alert::setErrorNotify(Debug::modelErrors($model));
+									Alert::setErrorNotify(Debug::modelErrors($model));
 									return $this->refresh();
 								}
 							}

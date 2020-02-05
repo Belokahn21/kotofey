@@ -26,12 +26,16 @@ class OrdersItems extends ActiveRecord
 {
 	const EVENT_CREATE_ITEMS = 'create_items';
 
+	public $need_delete;
+
 	public function rules()
 	{
 		return [
 			[['name'], 'string'],
 
 			[['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
+
+			[['need_delete'], 'boolean'],
 
 			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
 		];
@@ -46,15 +50,15 @@ class OrdersItems extends ActiveRecord
 
 	public function saveItems()
 	{
-        if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
-            $item = new OrdersItems();
-            $item->price = Delivery::PRICE_DELIVERY;
-            $item->name = 'Доставка';
-            $item->count = 1;
+		if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
+			$item = new OrdersItems();
+			$item->price = Delivery::PRICE_DELIVERY;
+			$item->name = 'Доставка';
+			$item->count = 1;
 
-            $basket = new Basket();
-            $basket->add($item);
-        }
+			$basket = new Basket();
+			$basket->add($item);
+		}
 
 		/* @var $item OrdersItems */
 		foreach (Basket::findAll() as $item) {
@@ -84,5 +88,17 @@ class OrdersItems extends ActiveRecord
 	public function getProduct()
 	{
 		return Product::findOne($this->product_id);
+	}
+
+	public function attributeLabels()
+	{
+		return [
+			'name' => 'Название товара',
+			'count' => 'Количество',
+			'price' => 'Цена',
+			'product_id' => 'ID товара',
+			'order_id' => 'ID заказа',
+			'need_delete' => 'Удалить',
+		];
 	}
 }
