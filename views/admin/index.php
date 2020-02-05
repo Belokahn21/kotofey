@@ -37,11 +37,11 @@ $this->title = Title::showTitle("Главная страница");
                                 <div class="statistic__item-value"><?= Order::find()->count(); ?></div>
                             </li>
                             <li class="statistic__item">
-                                <div class="statistic__item-key">Выручка</div>
+                                <div class="statistic__item-key">Оборот</div>
                                 <div class="statistic__item-value"><?= Price::format(OrderStatistic::income()); ?></div>
                             </li>
                             <li class="statistic__item">
-                                <div class="statistic__item-key">Маржинальность</div>
+                                <div class="statistic__item-key">Выручка</div>
                                 <div class="statistic__item-value"><?= Price::format(OrderStatistic::marginality()); ?></div>
                             </li>
                         </ul>
