@@ -30,9 +30,6 @@ class Search extends Model
 	{
 		return [
 			'search' => 'Название товара',
-			'category' => 'Раздел',
-			'pricefrom' => 'Цена от',
-			'priceto' => 'Цена до',
 		];
 	}
 
@@ -49,11 +46,6 @@ class Search extends Model
 		if (!empty($this->search)) {
 
 			$phrase = $this->search;
-			$SearchQuery = new SearchQuery();
-			$SearchQuery->text = $phrase;
-			if (!\Yii::$app->user->isGuest) {
-				$SearchQuery->user_id = \Yii::$app->user->id;
-			}
 
 			$products->where(['like', 'name', $phrase]);
 			$products->orWhere(['like', 'feed', $phrase]);
@@ -70,9 +62,17 @@ class Search extends Model
 
 		}
 
-		$SearchQuery->count_find = $products->count();
 
 		if ($this->save_history == true) {
+
+			$SearchQuery = new SearchQuery();
+			$SearchQuery->text = $phrase;
+			$SearchQuery->count_find = $products->count();
+
+			if (!\Yii::$app->user->isGuest) {
+				$SearchQuery->user_id = \Yii::$app->user->id;
+			}
+
 			if ($SearchQuery->validate()) {
 				$SearchQuery->save();
 			}
