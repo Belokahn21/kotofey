@@ -19,15 +19,16 @@ use app\models\tool\statistic\ProductStatistic;
 $this->title = Title::showTitle("Главная страница");
 ?>
 <?= $this->render('modal/search', [
-    'last_search' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all()
+	'last_search' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all()
 ]); ?>
+<?= $this->render('modal/order-stat'); ?>
 <section class="desktop">
     <h1 class="title">Рабочий стол</h1>
     <div class="block-info-wrap">
         <ul class="block-info__list">
             <li class="block-info__item">
                 <div class="item-wrap">
-                    <div class="block-info__icon">
+                    <div class="block-info__icon interactive" data-toggle="modal" data-target="#show-order-stat">
                         <i class="fas fa-cash-register"></i>
                     </div>
                     <div class="block-info__content">
@@ -105,15 +106,15 @@ $this->title = Title::showTitle("Главная страница");
                         <i class="fas fa-search"></i>
                     </div>
                     <div class="block-info__content">
-                        <?php if ($last_search): ?>
+						<?php if ($last_search): ?>
                             <ul class="statistic__list">
-                                <?php foreach ($last_search as $phrase): ?>
+								<?php foreach ($last_search as $phrase): ?>
                                     <li class="statistic__item" data-toggle="tooltip" data-placement="bottom" title="<?= $phrase->text; ?>">
-                                        <?= StringHelper::truncate($phrase->text, 15, '...'); ?>
+										<?= StringHelper::truncate($phrase->text, 15, '...'); ?>
                                     </li>
-                                <?php endforeach; ?>
+								<?php endforeach; ?>
                             </ul>
-                        <?php endif; ?>
+						<?php endif; ?>
                     </div>
                 </div>
 
@@ -136,5 +137,5 @@ $this->title = Title::showTitle("Главная страница");
             </li>
         </ul>
     </div>
-    <?= ToDoWidget::widget(); ?>
+	<?= ToDoWidget::widget(); ?>
 </section>

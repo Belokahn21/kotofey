@@ -23,10 +23,15 @@ class OrderStatistic extends Product
 	}
 
 	/*Доход*/
-	public static function income()
+	public static function income($order_id = null)
 	{
 		$out = 0;
-		$items = OrdersItems::find()->where(['order_id' => ArrayHelper::getColumn(Order::find()->where(['is_cancel' => 0])->all(), 'id')])->all();
+
+		if ($order_id == null) {
+			$order_id = ArrayHelper::getColumn(Order::find()->where(['is_cancel' => 0])->all(), 'id');
+		}
+
+		$items = OrdersItems::find()->where(['order_id' => $order_id])->all();
 
 		foreach ($items as $item) {
 			$out += $item->count * $item->price;

@@ -1,0 +1,21 @@
+.month-stat {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  width: 100%;
+  flex-wrap: wrap;
+
+  &__item {
+    width: 31%;
+    border: 1px #007bff solid;
+    border-radius: 5px;
+    margin: 1%;
+    padding: 10px;
+  }
+
+  &__title {
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #007bff;
+  }
+}
