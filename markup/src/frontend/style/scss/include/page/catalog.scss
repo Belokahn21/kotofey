@@ -15,19 +15,26 @@
 
   &__item {
     width: 23.98%;
-    height: 80px;
     margin: 5px;
-    //background-image: url("../../assets/images/category_back.png");
-    background-image: url("/web/upload/images/category_back.png");
+    border: 1px $mainActiveColor solid;
+    overflow: hidden;
+    border-radius: 10px;
   }
 
   &__link {
+    padding: 1%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    color: white !important;
+    color: $mainActiveColor;
+    text-decoration: none !important;
+
+    &:hover {
+      background: $mainActiveColor;
+      color: white;
+    }
   }
 
   &__title {
