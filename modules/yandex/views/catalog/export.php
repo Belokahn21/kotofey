@@ -39,6 +39,8 @@ use app\models\helpers\ProductHelper;
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                     <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
                     <pickup>false</pickup>
+                    <store>false</store>
+                    <delivery>true</delivery>
                 </offer>
 			<?php endforeach; ?>
         </offers>
