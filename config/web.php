@@ -30,6 +30,21 @@ $config = [
 				],
 			],
 		],
+		'socialShare' => [
+			'class' => \ymaker\social\share\configurators\Configurator::class,
+			'enableDefaultIcons' => true,
+			'socialNetworks' => [
+				'vkontakte' => [
+					'class' => \ymaker\social\share\drivers\Vkontakte::class,
+				],
+				'facebook' => [
+					'class' => \ymaker\social\share\drivers\Facebook::class,
+				],
+				'odnoklasniki' => [
+					'class' => \ymaker\social\share\drivers\Odnoklassniki::class,
+				],
+			],
+		],
 		'request' => [
 			// !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
 			'cookieValidationKey' => 'o47rMjhQ6Rk50sxHSuLaEput3lsfchPR',
