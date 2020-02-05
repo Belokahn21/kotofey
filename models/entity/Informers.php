@@ -40,7 +40,9 @@ class Informers extends ActiveRecord
         return [
             [['name'], 'required', 'message' => 'Поле {attribute} обязательно'],
 
-            [['description'], 'string']
+            [['description'], 'string'],
+
+            [['is_active', 'is_show_filter'], 'boolean'],
         ];
     }
 

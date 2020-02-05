@@ -25,31 +25,31 @@ $this->params['breadcrumbs'][] = ['label' => 'Зоотовары', 'url' => ['/c
 
 
 if ($category) {
-	foreach ($category->undersections() as $parents) {
-		$this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
-	}
+    foreach ($category->undersections() as $parents) {
+        $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+    }
 
-	// set title
-	$category_id = $category->id;
-	$this->title = Title::showTitle($category->name);
-	if ($category->seo_title) {
-		$this->title = Title::showTitle($category->seo_title);
-	}
+    // set title
+    $category_id = $category->id;
+    $this->title = Title::showTitle($category->name);
+    if ($category->seo_title) {
+        $this->title = Title::showTitle($category->seo_title);
+    }
 } ?>
 <div class="catalog filtred">
 
-	<?= CatalogFilterWidget::widget(); ?>
+    <?= CatalogFilterWidget::widget(); ?>
 
     <div class="catalog-wrap">
         <div class="sub-categories-wrap">
             <ul class="sub-categories">
-				<?php foreach (Category::find()->where(['parent' => $category_id])->all() as $child): ?>
+                <?php foreach (Category::find()->where(['parent' => $category_id])->all() as $child): ?>
                     <li class="sub-categories__item">
                         <a class="sub-categories__link" href="<?= $child->detail; ?>">
                             <div class="sub-categories__title"><?= $child->name; ?></div>
                         </a>
                     </li>
-				<?php endforeach; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
 
@@ -61,22 +61,30 @@ if ($category) {
             </ul>
         </div>
         <ul class="catalog-list">
-			<?php /* @var $product \app\models\entity\Product */ ?>
-			<?php foreach ($products as $product): ?>
+            <?php /* @var $product \app\models\entity\Product */ ?>
+            <?php foreach ($products as $product): ?>
                 <li class="catalog-list__item">
 
-					<?php if ($weight = ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])): ?>
-                        <div class="catalog-list__weight">
-							<?= $weight->value; ?> КГ
+                    <?php if ($product->discount_price): ?>
+                        <div id="burst-12">
+                            <div class='dis'>
+                                <?= floor((($product->discount_price - $product->price) / $product->price) * 100); ?>%
+                            </div>
                         </div>
-					<?php endif; ?>
+                    <?php endif; ?>
+
+                    <?php if ($weight = ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2'])): ?>
+                        <div class="catalog-list__weight">
+                            <?= $weight->value; ?> КГ
+                        </div>
+                    <?php endif; ?>
 
                     <a href="<?= $product->detail; ?>" class="catalog-list__link">
-						<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                        <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                             <img class="catalog-list__image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-						<?php else: ?>
+                        <?php else: ?>
                             <img class="catalog-list__image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-						<?php endif; ?>
+                        <?php endif; ?>
                     </a>
 
                     <a href="<?= $product->detail; ?>" class="catalog-list__link">
@@ -119,13 +127,13 @@ if ($category) {
                         </div>
                     </div>
                 </li>
-			<?php endforeach; ?>
+            <?php endforeach; ?>
         </ul>
     </div>
 </div>
 <div class="pagination-wrap">
-	<?php echo LinkPager::widget([
-		'pagination' => $pagerItems,
-	]); ?>
+    <?php echo LinkPager::widget([
+        'pagination' => $pagerItems,
+    ]); ?>
 </div>
 
