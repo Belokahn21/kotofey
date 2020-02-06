@@ -23,7 +23,7 @@ use app\models\tool\Price;
                         <li class="month-stat__item">
 							<?php
 							$avail_mont_start = strtotime('01.' . ($i + 1) . '.' . date('Y'));
-							$avail_mont_end = strtotime('28.' . ($i + 1) . '.' . date('Y'));
+							$avail_mont_end = strtotime('31.' . ($i + 1) . '.' . date('Y'));
 							$query = Order::find()->where(['>', 'created_at', $avail_mont_start])->andWhere(['<', 'created_at', $avail_mont_end]);
 							?>
                             <div class="month-stat__title"><?= $month; ?></div>
