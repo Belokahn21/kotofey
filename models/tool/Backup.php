@@ -7,8 +7,8 @@ use app\models\entity\SiteSettings;
 
 class Backup
 {
-	private $db_user = "cd91333_kotofey";
-	private $db_name = "cd91333_kotofey";
+	private $db_user = "kotofey";
+	private $db_name = "kotofey_store";
 	private $db_password = "123qweR%";
 	private $db_host = "localhost";
 
