@@ -5,6 +5,7 @@ use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\grid\GridView;
+use app\models\tool\System;
 
 /* @var $this \yii\web\View */
 /* @var $model \app\models\entity\ShortLinks */
@@ -34,7 +35,7 @@ $this->title = Title::showTitle("Короткие ссылки");
 		'link',
 		[
 			'value' => function ($model) {
-				return Html::a('https://kotofey.store/catalog/' . $model->short_code . '/', 'https://kotofey.store/catalog/' . $model->short_code . '/');
+				return System::protocol() . '://' . System::domain() . '/catalog/' . $model->short_code . '/';
 			}
 		],
 		[
