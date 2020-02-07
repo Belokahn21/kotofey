@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
 		<?php if ($model->image): ?>
-            <img src="/web/upload/<?= $model->image; ?>">
+            <img src="/upload/<?= $model->image; ?>">
 		<?php endif; ?>
 
 		<?= $form->field($model, 'image')->fileInput() ?>

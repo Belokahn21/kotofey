@@ -24,7 +24,7 @@ $this->title = Title::showTitle("Статьи");
         <?php foreach ($news as $new): ?>
             <li class="news__item">
                 <a class="news__link" href="<?= $new->detailurl; ?>">
-                    <img class="news__image" src="/web/upload/<?= $new->preview_image; ?>">
+                    <img class="news__image" src="/upload/<?= $new->preview_image; ?>">
                 </a>
 
                 <a class="news__link" href="<?= $new->detailurl; ?>">

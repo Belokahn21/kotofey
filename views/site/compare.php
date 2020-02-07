@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров'
 <ul class="compare-list">
 	<?php foreach (Compare::findAll() as $item): ?>
         <li class="compare-list__item">
-            <img src="/web/upload/<?= $item->image; ?>" class="compare-list__image">
+            <img src="/upload/<?= $item->image; ?>" class="compare-list__image">
             <div class="compare-list__title"><?= $item->name; ?></div>
 
             <ul class="compare-properties">

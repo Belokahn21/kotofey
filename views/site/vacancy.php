@@ -12,9 +12,9 @@ $this->title = Title::showTitle('Вакансии');
 		<?php foreach ($items as $item): ?>
             <li class="vacancy__item">
 				<?php if ($item->image): ?>
-                    <img class="vacancy__image" src="/web/upload/<?= $item->image; ?>" alt="<?= $item->title; ?>" title="<?= $item->title; ?>">
+                    <img class="vacancy__image" src="/upload/<?= $item->image; ?>" alt="<?= $item->title; ?>" title="<?= $item->title; ?>">
 				<?php else: ?>
-                    <img class="vacancy__image" src="/web/upload/images/search.png" alt="<?= $item->title; ?>" title="<?= $item->title; ?>">
+                    <img class="vacancy__image" src="/upload/images/search.png" alt="<?= $item->title; ?>" title="<?= $item->title; ?>">
 				<?php endif; ?>
                 <div class="vacancy__title"><?= $item->title; ?></div>
                 <div class="vacancy__price"><?= $item->price; ?></div>

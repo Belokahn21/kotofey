@@ -124,7 +124,7 @@ use app\models\entity\Vendor;
             <div class="col-sm-6">
                 <div class="form-image single">
 					<?php if ($model->image): ?>
-                        <img src="/web/upload/<?= $model->image; ?>">
+                        <img src="/upload/<?= $model->image; ?>">
 					<?php endif; ?>
                 </div>
 				<?= $form->field($model, 'image')->fileInput(); ?>

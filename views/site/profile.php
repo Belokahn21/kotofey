@@ -89,9 +89,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                         <li class="favorite-item">
                             <div class="favorite-item__image-wrap">
                                 <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
-                                    <img src="/web/upload/<?= $product->image; ?>" class="favorite-item__image">
+                                    <img src="/upload/<?= $product->image; ?>" class="favorite-item__image">
                                 <?php else: ?>
-                                    <img src="/web/upload/images/not-image.png" class="favorite-item__image">
+                                    <img src="/upload/images/not-image.png" class="favorite-item__image">
                                 <?php endif; ?>
                             </div>
                             <div class="favorite-item__link">
@@ -155,7 +155,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url
                             </div>
                             <div class="profile-edit-modal-element avatar-file">
                                 <div class="profile-edit-modal-avatar-wrap">
-                                    <?= Html::img('/web/upload/' . $profile->avatar); ?>
+                                    <?= Html::img('/upload/' . $profile->avatar); ?>
                                 </div>
                                 <?= $form->field($profile, 'avatar')->fileInput() ?>
                             </div>

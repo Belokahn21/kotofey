@@ -60,7 +60,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url
                                 <li class="orders-items__item">
                                     <div class="orders-items__image-wrap">
                                         <?php if ($item->product): ?>
-                                            <img src="/web/upload/<?= $item->product->image; ?>" class="orders-items__image">
+                                            <img src="/upload/<?= $item->product->image; ?>" class="orders-items__image">
                                         <?php endif; ?>
                                     </div>
                                     <div class="orders-items-info">

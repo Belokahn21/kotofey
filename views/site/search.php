@@ -22,9 +22,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
 
                 <a href="<?= $product->detail; ?>" class="catalog-list__link">
 					<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
-                        <img class="catalog-list__image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                        <img class="catalog-list__image" src="/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
 					<?php else: ?>
-                        <img class="catalog-list__image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                        <img class="catalog-list__image" src="/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
 					<?php endif; ?>
                 </a>
 

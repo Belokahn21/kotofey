@@ -13,17 +13,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Отзывы', 'url' => ['/reviews
 <section class="site-more-reviews">
     <h1 class="site-more-reviews__title">Отзывы
 <?php if (Yii::$app->user->isGuest): ?>
-            <img src="/web/upload/images/good-review.png" class="site-more-reviews__image">
+            <img src="/upload/images/good-review.png" class="site-more-reviews__image">
 <?php else: ?>
             <div class="pulse" data-target='#new-reviews' data-toggle='modal'>
-                <img src="/web/upload/images/good-review.png" class="site-more-reviews__image">
+                <img src="/upload/images/good-review.png" class="site-more-reviews__image">
             </div>
 <?php endif; ?>
     </h1>
 <?php foreach ($reviews as $review): ?>
         <div class="site-more-reviews__item">
             <div class="site-more-reviews__avatar">
-                <img src="<?= (!empty($review->user->avatar)) ? $review->user->avatar : "/web/upload/images/man.png"; ?>">
+                <img src="<?= (!empty($review->user->avatar)) ? $review->user->avatar : "/upload/images/man.png"; ?>">
             </div>
             <div class="site-more-reviews__content">
                 <h4 class="site-more-reviews__name"><?= $review->user->name; ?></h4>

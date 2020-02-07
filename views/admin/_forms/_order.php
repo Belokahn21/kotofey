@@ -70,9 +70,9 @@ use app\models\entity\Product;
 						<?php if ($item->product instanceof Product): ?>
                             <a class="order-items__link" href="">
 								<?php if ($item->product instanceof Product): ?>
-                                    <img class="order-items__image" src="/web/upload/<?= $item->product->image; ?>">
+                                    <img class="order-items__image" src="/upload/<?= $item->product->image; ?>">
 								<?php else: ?>
-                                    <img class="order-items__image" src="/web/upload/images/not-image.png">
+                                    <img class="order-items__image" src="/upload/images/not-image.png">
 								<?php endif; ?>
                             </a>
                             <ul class="product-attrs">

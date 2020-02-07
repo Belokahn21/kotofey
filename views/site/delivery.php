@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Доставка', 'url' => ['/del
 <!--    <li class="list-delivery-comp-item">-->
 <!--        <div class="list-delivery-comp-item__content">-->
 <!--            <a href="https://barnaul.dellin.ru/" target="_blank">-->
-<!--                <img src="/web/upload/images/delline.png" alt="Транспортная компания Деловые линии"-->
+<!--                <img src="/upload/images/delline.png" alt="Транспортная компания Деловые линии"-->
 <!--                     title="Транспортная компания Деловые линии">-->
 <!--            </a>-->
 <!--        </div>-->
@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Доставка', 'url' => ['/del
 <!--    <li class="list-delivery-comp-item">-->
 <!--        <div class="list-delivery-comp-item__content">-->
 <!--            <a href="https://www.cdek.ru/" target="_blank">-->
-<!--                <img src="/web/upload/images/ratek.png" alt="Транспортная компания Деловые линии"-->
+<!--                <img src="/upload/images/ratek.png" alt="Транспортная компания Деловые линии"-->
 <!--                     title="Транспортная компания Деловые линии">-->
 <!--            </a>-->
 <!--        </div>-->
@@ -42,7 +42,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Доставка', 'url' => ['/del
 <!--    <li class="list-delivery-comp-item">-->
 <!--        <div class="list-delivery-comp-item__content">-->
 <!--            <a href="https://new.pecom.ru/" target="_blank">-->
-<!--                <img src="/web/upload/images/pek.jpg">-->
+<!--                <img src="/upload/images/pek.jpg">-->
 <!--            </a>-->
 <!--        </div>-->
 <!--    </li>-->

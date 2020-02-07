@@ -47,7 +47,7 @@ use yii\helpers\Url;
 			'label' => 'Изображение',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return Html::img('/web/upload/' . $model->image, ["width" => 40]);
+				return Html::img('/upload/' . $model->image, ["width" => 40]);
 			},
 		],
 		[

@@ -31,17 +31,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
 						<?php if ($item->product instanceof Product): ?>
                             <a href="<?= $item->product->detail; ?>">
 								<?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
-                                    <img src="/web/upload/<?= $item->product->image; ?>">
+                                    <img src="/upload/<?= $item->product->image; ?>">
 								<?php else: ?>
-                                    <img src="/web/upload/images/not-image.png">
+                                    <img src="/upload/images/not-image.png">
 								<?php endif; ?>
                             </a>
 						<?php else: ?>
                             <a href="javascript:void(0);">
 								<?php if (!empty($item->product->image) and is_file(Yii::getAlias('@webroot/upload/') . $item->product->image)): ?>
-                                    <img src="/web/upload/<?= $item->product->image; ?>">
+                                    <img src="/upload/<?= $item->product->image; ?>">
 								<?php else: ?>
-                                    <img src="/web/upload/images/not-image.png">
+                                    <img src="/upload/images/not-image.png">
 								<?php endif; ?>
                             </a>
 						<?php endif; ?>
