@@ -19,7 +19,7 @@ use yii\helpers\Html;
                 <?php foreach ($images as $image): ?>
                     <div class="carousel-item main-page-slider__item <?= ($iterator == 1 ? 'active' : ''); ?>">
                         <a href="<?= (!empty($image->link) ? $image->link : 'javascript:void(0);'); ?>">
-                            <img class="d-block w-100 h-100" src="/web/upload/<?= $image->image; ?>" alt="<?= $image->text; ?>">
+                            <img class="d-block w-100 h-100" src="/upload/<?= $image->image; ?>" alt="<?= $image->text; ?>">
                         </a>
                     </div>
                     <?php $iterator++; ?>

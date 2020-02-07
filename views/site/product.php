@@ -43,10 +43,10 @@ echo $this->render('modal/product-modal-payment');
                 <div class="product-detail-image-wrap">
                     <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                         <a href="/upload/<?= $product->image; ?>" data-lightbox="roadtrip" class="product-detail-image--link">
-                            <img class="product-detail-image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                            <img class="product-detail-image" src="/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                         </a>
                     <?php else: ?>
-                        <img class="product-detail-image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                        <img class="product-detail-image" src="/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                     <?php endif; ?>
 
                     <?php if (!empty($product->images)): ?>
@@ -65,7 +65,7 @@ echo $this->render('modal/product-modal-payment');
                     'url' => \yii\helpers\Url::to('https://kotofey.store' . $product->detail, true),
                     'title' => $product->name,
                     'description' => $product->description,
-                    'imageUrl' => \yii\helpers\Url::to('https://kotofey.store/web/upload/' . $product->image, true),
+                    'imageUrl' => \yii\helpers\Url::to('https://kotofey.store/upload/' . $product->image, true),
                 ]); ?>
             </div>
             <div class="w-100 hide"></div>

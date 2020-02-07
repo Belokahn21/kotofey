@@ -20,7 +20,6 @@ class SliderWidget extends Widget
 
         return $this->render('default', [
             'images' => $images,
-            'use_carousel' => $this->use_carousel,
         ]);
     }
 }

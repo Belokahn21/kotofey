@@ -59,7 +59,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
 		<?php foreach ($news as $new): ?>
             <li class="index-news__item">
                 <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
-                    <img src="/web/upload/<?= $new->preview_image; ?>" class="index-news__image">
+                    <img src="/upload/<?= $new->preview_image; ?>" class="index-news__image">
                 </a>
                 <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
                     <h3 class="index-news__title"><?= $new->title; ?></h3>
@@ -81,7 +81,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
         <ul class="social">
             <li class="social-item">
                 <div class="social-item__image-wrap">
-                    <img src="/web/upload/images/inst.png">
+                    <img src="/upload/images/inst.png">
                 </div>
                 <div class="social-item__title">Профиль Instagramm</div>
                 <div class="social-item__link">
