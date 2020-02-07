@@ -55,14 +55,16 @@ textarea {
   color: $mainActiveColor;
 }
 
-input[type='text'], input[type='password'], select, textarea {
-  &[aria-invalid="false"] {
-    border: 1px green solid;
-  }
+.form-group {
+  input[type='text'], input[type='password'], select, textarea {
+    &[aria-invalid="false"] {
+      border: 1px green solid;
+    }
 
-  &[aria-invalid="true"] {
-    border: 1px red solid;
-    outline: 0;
+    &[aria-invalid="true"] {
+      border: 1px red solid;
+      outline: 0;
+    }
   }
 }
 
