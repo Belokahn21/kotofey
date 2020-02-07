@@ -56,6 +56,7 @@ textarea {
 }
 
 .form-group {
+
   input[type='text'], input[type='password'], select, textarea {
     &[aria-invalid="false"] {
       border: 1px green solid;
