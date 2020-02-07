@@ -33,6 +33,11 @@ $this->title = Title::showTitle("Короткие ссылки");
 		'name',
 		'link',
 		[
+			'value' => function ($model) {
+				return Html::a('https://kotofey.store/catalog/' . $model->short_code . '/', 'https://kotofey.store/catalog/' . $model->short_code . '/');
+			}
+		],
+		[
 			'attribute' => 'created_at',
 			'format' => ['date', 'dd.MM.YYYY'],
 			'options' => ['width' => '200']
