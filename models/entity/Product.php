@@ -249,16 +249,27 @@ class Product extends \yii\db\ActiveRecord
 
                     if ($this->is_product_order == true) {
 
+                        $is_new_record = false;
+
                         if (!$productOrder = ProductOrder::findOneByProductId($this->id)) {
                             $productOrder = new ProductOrder();
+                            $is_new_record = true;
                         }
 
                         $productOrder->product_id = $this->id;
                         if ($productOrder->load(\Yii::$app->request->post())) {
                             if ($productOrder->validate()) {
-                                if (!$productOrder->update()) {
-                                    $transaction->rollBack();
-                                    return false;
+
+                                if ($is_new_record) {
+                                    if (!$productOrder->save()) {
+                                        $transaction->rollBack();
+                                        return false;
+                                    }
+                                } else {
+                                    if ($productOrder->update() === false) {
+                                        $transaction->rollBack();
+                                        return false;
+                                    }
                                 }
                             }
                         }
