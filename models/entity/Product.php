@@ -246,6 +246,21 @@ class Product extends \yii\db\ActiveRecord
                             }
                         }
                     }
+
+                    if ($this->is_product_order == true) {
+                        $productOrder = new ProductOrder();
+                        $productOrder->product_id = $this->id;
+                        if ($productOrder->load(\Yii::$app->request->post())) {
+                            if ($productOrder->validate()) {
+                                if (!$productOrder->save()) {
+                                    $transaction->rollBack();
+                                    return false;
+                                }
+                            }
+                        }
+                    }
+
+
                     $transaction->commit();
 
                     return true;
