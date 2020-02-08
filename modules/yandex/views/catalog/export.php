@@ -25,7 +25,7 @@ use app\models\helpers\ProductHelper;
 			<?php endforeach; ?>
         </categories>
         <delivery-options>
-            <option cost="500" days="1" order-before="16"/>
+            <option cost="0" days="1" order-before="16"/>
         </delivery-options>
         <cpa>1</cpa>
         <offers>
