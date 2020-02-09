@@ -211,7 +211,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $providers = InformersValues::find()->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC])->all();
         $news = News::find()->limit(3)->orderBy(['created_at' => SORT_DESC])->all();
 
         Attributes::metaDescription("Зоотовары онлайн с доставкой по Барнаулу и по всей России. Всегда свежие товары и по низкой цене!");
@@ -224,7 +223,6 @@ class SiteController extends Controller
         ]);
 
         return $this->render('index', [
-            'providers' => $providers,
             'news' => $news
         ]);
     }
