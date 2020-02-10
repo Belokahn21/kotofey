@@ -45,7 +45,7 @@ class NotifyService
 				- Телефон: %s\n
 				Доставка: %s\n
 				Подробнее: https://kotofey.store/admin/order/%d/",
-					Price::format(OrderStatistic::orderSummary($order_id)), $Order->comment, $OrderDate->date, $OrderDate->time, $Client->email, $Client->phone, substr($delivery_info, 0, -2), $order_id),
+					Price::format(OrderStatistic::income($order_id)), $Order->comment, $OrderDate->date, $OrderDate->time, $Client->email, $Client->phone, substr($delivery_info, 0, -2), $order_id),
 			]);
 
 		}
