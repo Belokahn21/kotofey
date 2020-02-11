@@ -32,9 +32,9 @@ use app\models\tool\Policy;
                 <div class="fast-buy-wrap">
                     <div class="fast-buy-image-wrap">
 						<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
-                            <img class="fast-buy-image" src="/web/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                            <img class="fast-buy-image" src="/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
 						<?php else: ?>
-                            <img class="fast-buy-image" src="/web/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                            <img class="fast-buy-image" src="/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
 						<?php endif; ?>
                     </div>
                     <div class="fast-buy__title"><?= $product->name; ?></div>
