@@ -70,6 +70,7 @@ class CatalogFilterWidget extends Widget
 		return $this->render($this->template, [
 			'filterModel' => $filterModel,
 			'informers' => $informers,
+			'productPropertiesValues' => $productPropertiesValues,
 		]);
 	}
 }
