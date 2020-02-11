@@ -31,7 +31,7 @@
 								'align-self': 'flex-start'
 							}
 						}).html($('<img>', {
-							src: '/web/upload/images/loading.gif'
+							src: '/upload/images/loading.gif'
 						})));
 					},
 					success: function (data) {
