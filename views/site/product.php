@@ -204,20 +204,20 @@ echo $this->render('modal/product-modal-payment');
 
 
                 <div class="product-detail-calc-wrap <?= ((Basket::getInstance()->exist($product->id)) ? '' : 'hide'); ?>">
-                    <form class="product-detail-calc-form">
+                    <div class="product-detail-calc-form calc-form">
 
-                        <div class="product-detail-calc-element">
-                            <div class="product-detail-calc-min" data-product="<?= $product->id; ?>">-</div>
+                        <div class="product-detail-calc-element calc-form__element">
+                            <div class="calc-min calc-form__do-min" data-product="<?= $product->id; ?>">-</div>
                         </div>
 
                         <div class="product-detail-calc-element">
-                            <input type="text" class="product-detail-calc-count" name="count" placeholder="1" value="<?= Basket::findOne($product->id)->count; ?>">
+                            <input type="text" class="calc-count calc-form__count" name="count" placeholder="1" value="<?= Basket::findOne($product->id)->count; ?>">
                         </div>
 
-                        <div class="product-detail-calc-element">
-                            <div class="product-detail-calc-plus" data-product="<?= $product->id; ?>">+</div>
+                        <div class="calc-element calc-form__element">
+                            <div class="calc-plus calc-form__do-plus" data-product="<?= $product->id; ?>">+</div>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>
