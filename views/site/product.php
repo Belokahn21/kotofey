@@ -18,8 +18,6 @@ use app\models\entity\Product;
  * @var \yii\web\View $this
  * @var \app\models\entity\Product $product
  * @var \app\models\entity\Category $category
- * @var \app\models\entity\Product $left_product
- * @var \app\models\entity\Product $right_product
  */
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
@@ -190,21 +188,6 @@ echo $this->render('modal/product-modal-payment');
             ]); ?>
         </div>
     </div>
-    <ul class="product-switch">
-        <?php if ($left_product): ?>
-            <li class="product-switch__item left">
-                <a class="product-switch__link" href="<?= $left_product->detail; ?>"><?= $left_product->name; ?></a>
-            </li>
-        <?php endif; ?>
-
-
-        <?php if ($right_product): ?>
-            <li class="product-switch__item right">
-                <a class="product-switch__link" href="<?= $right_product->detail; ?>"><?= $right_product->name; ?></a>
-            </li>
-        <?php endif; ?>
-    </ul>
-
 
     <div class="lkj d-sm-none">
         <div class="row">

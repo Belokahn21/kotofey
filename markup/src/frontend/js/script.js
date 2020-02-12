@@ -79,6 +79,9 @@ $(document).ready(function () {
 	/* Обновление времени в полоске панели управления в публичке - конец */
 
 	/* принятие согласия о куках, пишем в сессию - начало */
+	// if ($('.cookie').length === 0 && $('.lkj').length === 1) {
+	// 	$('.lkj').css('bottom', '-100px');
+	// }
 	$('.cookie__button').click(function (e) {
 		e.preventDefault();
 		$.ajax({
@@ -86,12 +89,14 @@ $(document).ready(function () {
 			success: function (data) {
 				if (data === '1') {
 					$('.cookie').remove();
+					// if ($('.lkj').length > 0) {
+						// $('.lkj').css('bottom', '-100px');
+					// }
 				}
 			}
 		});
-	}).hover(function () {
-		$(this).find('span').toggleClass('hide'); // небольшая юзабильность- меняем слово с "Понял" на "Закрыть"
 	});
+
 	/* принятие согласия о куках, пишем в сессию - конец */
 
 

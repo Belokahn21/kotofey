@@ -11,8 +11,7 @@ use app\models\tool\System;
     <div class="cookie__group">
         <div class="cookie__button-wrap">
             <button class="cookie__button">
-                <span>Понятно</span>
-                <span class="hide">Закрыть</span>
+                <span>Закрыть</span>
             </button>
         </div>
         <a href="javascript:void(0);" class="cookie__more">Подробнее</a>
