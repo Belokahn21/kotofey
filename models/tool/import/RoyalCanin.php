@@ -4,6 +4,9 @@ namespace app\models\tool\import;
 
 
 use app\models\entity\Product;
+use app\models\entity\Vendor;
+use app\models\helpers\ProductHelper;
+use app\models\helpers\ProductPropertiesHelper;
 use app\models\tool\Debug;
 use yii\helpers\ArrayHelper;
 
@@ -40,6 +43,12 @@ class RoyalCanin
 				}
 
 				$product = Product::find()->where(['code' => $article])->one();
+				$vendor = Vendor::findOne($this->vendor_id);
+
+				if (!$vendor) {
+					return false;
+				}
+
 				if (!$product) {
 					$this->not_found_articles[] = $article;
 					continue;
@@ -47,8 +56,8 @@ class RoyalCanin
 
 				$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 				$product->base_price = intval($purchase);
-				$product->purchase = $product->base_price - ceil($product->base_price * 0.15);
-				$product->price = $product->purchase + ceil($product->purchase * 0.10);
+				$product->purchase = $product->base_price - ceil($product->base_price * ($vendor->discount / 100));
+				$product->price = $product->purchase + ceil($product->purchase * ($this->calcSelfDiscount(ProductPropertiesHelper::getProductWeight($product->id)) / 100));
 
 				// Обновить поставщика
 				if ($this->is_update_vendor === true && !empty($this->vendor_id)) {
@@ -82,5 +91,16 @@ class RoyalCanin
 	private function getPricePath()
 	{
 		return \Yii::getAlias('@app') . "/tmp/royal_2020.csv";
+	}
+
+	private function calcSelfDiscount($weight)
+	{
+		$discount = 30;
+
+		if ($weight > 1) {
+			$discount = 10;
+		}
+
+		return $discount;
 	}
 }

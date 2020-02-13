@@ -7,6 +7,7 @@ use app\models\entity\Product;
 
 class ProductHelper
 {
+	/* цена товара за 1 киллограмм */
 	public static function getPriceByWeight(Product $product, $weight)
 	{
 		$product_weight = ProductPropertiesHelper::getProductWeight($product->id);
