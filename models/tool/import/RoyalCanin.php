@@ -4,54 +4,83 @@ namespace app\models\tool\import;
 
 
 use app\models\entity\Product;
+use app\models\tool\Debug;
 use yii\helpers\ArrayHelper;
 
 class RoyalCanin
 {
-    private $rows;
-    private $csv_file_path;
+	private $not_found_articles = array();
+	private $is_update_vendor = false;
+	private $vendor_id = 3;
 
-    public function __construct()
-    {
-        $this->csv_file_path = \Yii::getAlias('@app') . "/tmp/royal.csv";
+	/**
+	 * @param bool $is_update_vendor
+	 */
+	public function setIsUpdateVendor($is_update_vendor)
+	{
+		$this->is_update_vendor = $is_update_vendor;
+	}
 
-        $this->getCSVDataFromFile();
+	public function __construct()
+	{
+
+	}
+
+	public function import()
+	{
+		if (($handle = fopen($this->getPricePath(), "r")) !== false) {
+			while (($line = fgetcsv($handle, 1000, ";")) !== false) {
+				$article = $line[0];
+				$rus_name = $line[1];
+				$count_in_pack = $line[2];
+				$purchase = $line[3];
+
+				if (empty($article) or empty($rus_name) or empty($count_in_pack) or empty($purchase) or !is_numeric($article)) {
+					continue;
+				}
+
+				$product = Product::find()->where(['code' => $article])->one();
+				if (!$product) {
+					$this->not_found_articles[] = $article;
+					continue;
+				}
+
+				$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+				$product->base_price = intval($purchase);
+				$product->purchase = $product->base_price - ceil($product->base_price * 0.15);
+				$product->price = $product->purchase + ceil($product->purchase * 0.10);
+
+				// Обновить поставщика
+				if ($this->is_update_vendor === true && !empty($this->vendor_id)) {
+					$product->vendor_id = $this->vendor_id;
+				}
+
+				if ($product->validate()) {
+					if ($product->update() === false) {
+						Debug::p($product->getErrors());
+						return false;
+					}
+					echo " Успешно обновлён: " . $product->name . PHP_EOL;
+				} else {
+					Debug::p($product->code);
+					echo PHP_EOL;
+					Debug::p($product->getErrors());
+				}
+			}
+			fclose($handle);
+		}
+
+		if ($this->not_found_articles) {
+			echo sprintf("Не найдены товары со следующими артикулами (%s шт.): ", count($this->not_found_articles));
+			Debug::p($this->not_found_articles);
+		}
+
+		return true;
+	}
 
 
-        $articles = array();
-        foreach ($this->rows as $row) {
-
-            if (count($row) == 1) {
-                $row = iconv('cp1251', 'utf-8', $row[0]);
-                $row_elements = explode(';', $row);
-
-                if (is_numeric($row_elements[0])) {
-                    $articles[$row_elements[0]] = $row_elements[3];
-                }
-
-
-            }
-            echo "\n";
-        }
-
-        $product_id_list = array();
-        $query = Product::find()->select(['id'])->where(['code' => array_keys($articles)])->all();
-//        $product_id_list = ArrayHelper::getColumn($query, 'id');
-
-
-        foreach ($query as $product) {
-            var_dump($articles[$product->code] == $product->purchase);
-            echo "\n";
-        }
-
-
-//        print_r($product_id_list);
-//        print_r($product_id_list);
-
-    }
-
-    private function getCSVDataFromFile()
-    {
-        $this->rows = array_map('str_getcsv', file($this->csv_file_path));
-    }
+	private function getPricePath()
+	{
+		return \Yii::getAlias('@app') . "/tmp/royal_2020.csv";
+	}
 }

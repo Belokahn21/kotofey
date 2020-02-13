@@ -7,25 +7,11 @@ use app\models\entity\ProductPropertiesValues;
 use app\models\entity\User;
 use app\models\entity\UsersReferal;
 use app\models\tool\Debug;
-use app\models\tool\import\RoyalCanin;
-use Yii;
 use yii\console\Controller;
-use yii\console\ExitCode;
 use yii\helpers\ArrayHelper;
 
 class ConsoleController extends Controller
 {
-
-	public function actionImport($type)
-	{
-		switch ($type) {
-			case"rk":
-				echo 'run = ' . $type . '\n';
-				$rk = new RoyalCanin();
-				break;
-		}
-	}
-
 	public function actionName()
 	{
 		// royal
