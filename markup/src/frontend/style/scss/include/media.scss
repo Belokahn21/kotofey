@@ -42,6 +42,7 @@
     &__input, &__submit {
       width: 100%;
     }
+
     &__submit {
       margin: 3% 0;
     }
@@ -142,6 +143,9 @@
   }
   .catalog {
     flex-direction: column;
+  }
+  .filter-mobile {
+    display: block;
   }
   .filter {
     width: 100%;
