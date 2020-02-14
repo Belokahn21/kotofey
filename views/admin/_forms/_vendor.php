@@ -28,8 +28,27 @@ use app\models\entity\VendorGroup;
                 </div>
             </div>
         </div>
-        <div class="form-element">
-			<?= $form->field($model, 'address')->textInput(); ?>
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="form-element">
+					<?= $form->field($model, 'address')->textInput(); ?>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-element">
+					<?= $form->field($model, 'delivery_days')->dropDownList(['Понедельник', 'Вторник', 'Среда'], ['prompt' => 'Дни доставки', 'multiple' => true]); ?>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-element">
+					<?= $form->field($model, 'email')->textInput(); ?>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <div class="form-element">
+					<?= $form->field($model, 'phone')->textInput(); ?>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-sm-4">

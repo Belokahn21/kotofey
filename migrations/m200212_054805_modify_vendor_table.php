@@ -2,41 +2,19 @@
 
 use yii\db\Migration;
 
-/**
- * Class m200212_054805_modify_vendor_table
- */
 class m200212_054805_modify_vendor_table extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function safeUp()
-    {
+	public function safeUp()
+	{
+		$this->addColumn('{{%vendor}}', 'delivery_days', $this->string()->after('address'));
+		$this->addColumn('{{%vendor}}', 'email', $this->string()->after('delivery_days'));
+		$this->addColumn('{{%vendor}}', 'phone', $this->string()->after('email'));
+	}
 
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function safeDown()
-    {
-        echo "m200212_054805_modify_vendor_table cannot be reverted.\n";
-
-        return false;
-    }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m200212_054805_modify_vendor_table cannot be reverted.\n";
-
-        return false;
-    }
-    */
+	public function safeDown()
+	{
+		$this->dropColumn('{{%vendor}}', 'delivery_days');
+		$this->dropColumn('{{%vendor}}', 'email');
+		$this->dropColumn('{{%vendor}}', 'phone');
+	}
 }

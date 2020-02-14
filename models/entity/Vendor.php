@@ -15,6 +15,9 @@ use yii\behaviors\TimestampBehavior;
  * @property string $name
  * @property string $slug
  * @property string $address
+ * @property string $delivery_days
+ * @property string $email
+ * @property string $phone
  * @property int $group_id
  * @property int $discount
  * @property int $min_summary_sale
@@ -52,9 +55,11 @@ class Vendor extends \yii\db\ActiveRecord
 	public function rules()
 	{
 		return [
-			[['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale'], 'integer'],
+			[['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale', 'phone'], 'integer'],
 			[['name'], 'required'],
 			[['name', 'slug', 'address', 'legal_name'], 'string', 'max' => 255],
+			[['email', 'delivery_days'], 'string'],
+			[['email'], 'email'],
 		];
 	}
 
@@ -68,6 +73,9 @@ class Vendor extends \yii\db\ActiveRecord
 			'is_active' => 'Активность',
 			'sort' => 'Сортировка',
 			'name' => 'Название',
+			'email' => 'Контактный E-Mail',
+			'phone' => 'Контактный телефон',
+			'delivery_days' => 'В какие дни отгрузка',
 			'legal_name' => 'Юридическое название',
 			'slug' => 'Символьный код',
 			'address' => 'Адрес',
