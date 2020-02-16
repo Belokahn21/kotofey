@@ -114,9 +114,6 @@ $config = [
         ],
     ],
     'modules' => [
-        'vaccination' => [
-            'class' => 'app\modules\vaccination\Module',
-        ],
         'yandex' => [
             'class' => 'app\modules\yandex\Module',
         ],

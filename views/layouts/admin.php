@@ -154,10 +154,11 @@ $user = User::findOne(Yii::$app->user->identity->id);
                     </li>
                     <li>
                         <div class="dropdownlink"><i class="fa fa-motorcycle" aria-hidden="true"></i> Персонал
-                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                            <i class="fas fa-briefcase" aria-hidden="true"></i>
                         </div>
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['admin/vacancy']) ?>">Список вакансий</a> <span class="count"><?= Vacancy::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['admin/personal']) ?>">Сотрудники</a> </li>
                         </ul>
                     </li>
                 </ul>
