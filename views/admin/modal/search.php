@@ -29,7 +29,7 @@
                             </div>
                             <div class="search-info__item-query"><?= $item->text; ?></div>
                             <div class="search-info__item-count"><?= $item->count_find; ?></div>
-                            <div class="search-info__item-ip">-</div>
+                            <div class="search-info__item-ip"><?= $item->ip; ?></div>
                         </li>
 					<?php endforeach; ?>
                 </ul>
