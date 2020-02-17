@@ -5,6 +5,7 @@ namespace app\models\entity;
 
 use app\models\entity\user\Billing;
 use app\models\helpers\DiscountHelper;
+use app\models\helpers\ManagerHelper;
 use app\models\helpers\OrderHelper;
 use app\models\services\ReferalService;
 use app\models\tool\Debug;
@@ -118,12 +119,6 @@ class Order extends ActiveRecord
 			}
 
 			if ($this->is_paid == 1 && $this->is_cancel == 0 && !empty($this->user_id)) {
-
-				// начислим менеджеру процент с продажи
-//				$client = User::findOne($this->user_id);
-//				$manager = $client->
-
-
 //				$referal = UsersReferal::findOneByUserId($this->user_id);
 //				Debug::p($referal);
 //				if ($referal && $referal->has_rewarded == false) {
