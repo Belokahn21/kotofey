@@ -15,36 +15,41 @@ use Yii;
  */
 class UserManager extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'user_manager';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public static function tableName()
+	{
+		return 'user_manager';
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['user_id', 'manager_id', 'created_at', 'updated_at'], 'integer'],
-            [['user_id'], 'unique'],
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['user_id', 'manager_id', 'created_at', 'updated_at'], 'integer'],
+			[['user_id'], 'unique'],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'user_id' => 'User ID',
-            'manager_id' => 'Manager ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'user_id' => 'User ID',
+			'manager_id' => 'Manager ID',
+			'created_at' => 'Created At',
+			'updated_at' => 'Updated At',
+		];
+	}
+
+	public static function findOneByUserId($user_id)
+	{
+		return static::findOne(['user_id' => $user_id]);
+	}
 }

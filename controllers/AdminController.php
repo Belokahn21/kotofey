@@ -380,7 +380,7 @@ class AdminController extends Controller
 		$groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
 		$personalManagerModel = new UserManager();
 
-		// удалить юзера
+		// авторизоваться
 		if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'auth') {
 			$user = User::findOne(Yii::$app->request->get('id'));
 			if ($user) {
@@ -389,6 +389,7 @@ class AdminController extends Controller
 				}
 			}
 		}
+		// удалить юзера
 		if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'delete') {
 			$user = User::findOne($id);
 
@@ -401,6 +402,11 @@ class AdminController extends Controller
 		if ($id) {
 			$model = User::findOne($id);
 			$model->scenario = User::SCENARIO_UPDATE;
+			$is_new_manager = false;
+			if (!$personalManagerModel = UserManager::findOneByUserId($model->id)) {
+				$personalManagerModel = new UserManager();
+				$is_new_manager = true;
+			}
 
 			// обновить юзера
 			if (\Yii::$app->request->isPost) {
@@ -419,24 +425,32 @@ class AdminController extends Controller
 							$authAssigment->addUserRole($model->groups, $model);
 						}
 
+						if ($personalManagerModel->load(Yii::$app->request->post())) {
+							$personalManagerModel->user_id = $model->id;
+							if ($personalManagerModel->validate()) {
+
+								if ($is_new_manager) {
+									if ($personalManagerModel->save()) {
+									}
+								} else {
+									if ($personalManagerModel->update() === false) {
+									}
+								}
+							}
+						}
+
 						if ($model->update() !== false) {
 							Alert::setSuccessNotify("Информация о пользователе успешно обновлена");
 							return $this->refresh();
-						} else {
-							Alert::setWarningNotify(Debug::modelErrors($model));
-							return $this->refresh();
 						}
-					} else {
-						Alert::setWarningNotify("Ошибка валидации");
 					}
-				} else {
-					Alert::setWarningNotify("Ошибка получения данных из формы");
 				}
 			}
 
 			return $this->render('detail/user', [
 				'model' => $model,
-				'groups' => $groups
+				'groups' => $groups,
+				'personalManagerModel' => $personalManagerModel,
 			]);
 		}
 
@@ -445,10 +459,13 @@ class AdminController extends Controller
 
 			if ($model->load(\Yii::$app->request->post())) {
 
+
 				if ($model->validate()) {
 
 					$model->setPassword($model->password);
 					$model->generateAuthKey();
+					$transaction = Yii::$app->db->transaction;
+					$transaction->begin();
 
 					if ($model->save()) {
 
@@ -456,14 +473,19 @@ class AdminController extends Controller
 							$authAssigment->addUserRole(AuthItem::findOne(['name' => $model->group]), $model);
 						}
 
-						return $this->refresh();
-					} else {
-						Alert::setErrorNotify(Debug::modelErrors($model));
+						if ($personalManagerModel->load(Yii::$app->request->post())) {
+							$personalManagerModel->user_id = $user->id;
+							if ($personalManagerModel->validate()) {
+								if (!$personalManagerModel->save()) {
+									$transaction->rollBack();
+								}
+							}
+						}
+
+						Alert::setSuccessNotify('Пользователь успешно создан');
+						$transaction->commit();
 						return $this->refresh();
 					}
-				} else {
-					Alert::setErrorNotify(Debug::modelErrors($model));
-					return $this->refresh();
 				}
 			}
 			return $this->refresh();

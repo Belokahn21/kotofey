@@ -228,4 +228,13 @@ class ConsoleController extends Controller
 			}
 		}
 	}
+
+	public function actionClearReferal()
+	{
+		foreach (UsersReferal::find()->all() as $referal) {
+			$referal->count_reward = 0;
+			$referal->has_rewarded = 0;
+			$referal->update();
+		}
+	}
 }

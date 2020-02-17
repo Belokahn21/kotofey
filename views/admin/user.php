@@ -11,6 +11,7 @@ use app\models\entity\UsersReferal;
 
 /* @var $model \app\models\entity\User
  * @var $groups \app\models\rbac\AuthItem[]
+ * @var $personalManagerModel \app\models\entity\UserManager
  */
 
 $this->title = Title::showTitle("Пользователи"); ?>
