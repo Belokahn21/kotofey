@@ -1,9 +1,11 @@
 <?php
 
 use app\models\entity\UserSex;
+use app\models\helpers\PersonalHelper;
 use yii\helpers\ArrayHelper;
 
 /* @var $model \app\models\entity\User */
+/* @var $personalManagerModel \app\models\entity\UserManager */
 
 ?>
 
@@ -18,15 +20,27 @@ use yii\helpers\ArrayHelper;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="row">
             <div class="col-sm-6">
-				<?= $form->field($model, 'email'); ?>
-				<?= $form->field($model, 'phone'); ?>
-				<?= $form->field($model, 'new_password')->passwordInput(); ?>
+                <div class="form-element">
+					<?= $form->field($model, 'email'); ?>
+                </div>
+                <div class="form-element">
+					<?= $form->field($model, 'phone'); ?>
+                </div>
+                <div class="form-element">
+					<?= $form->field($model, 'new_password')->passwordInput(); ?>
+                </div>
             </div>
             <div class="col-sm-6">
-				<?php if (is_object($model->group)): ?>
-					<?php $model->groups = $model->group->name; ?>
-				<?php endif ?>
-				<?= $form->field($model, 'groups')->dropDownList(ArrayHelper::map($groups, 'name', 'name'), ['prompt' => 'Выбрать группу']); ?>
+                <div class="form-element">
+					<?php if (is_object($model->group)): ?>
+						<?php $model->groups = $model->group->name; ?>
+					<?php endif ?>
+					<?= $form->field($model, 'groups')->dropDownList(ArrayHelper::map($groups, 'name', 'name'), ['prompt' => 'Выбрать группу']); ?>
+                </div>
+
+                <div class="form-element">
+					<?= $form->field($personalManagerModel, 'manager_id')->dropDownList(ArrayHelper::map(PersonalHelper::findAllManagers(), 'id', 'display'), ['prompt' => 'Персональный менеджер']); ?>
+                </div>
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@ $this->title = Title::showTitle("Пользователи"); ?>
 		<?= $this->render('_forms/_user', [
 			'model' => $model,
 			'form' => $form,
+			'personalManagerModel' => $personalManagerModel,
 			'groups' => $groups
 		]); ?>
 		<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>

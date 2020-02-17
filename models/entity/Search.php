@@ -68,6 +68,7 @@ class Search extends Model
 			$SearchQuery = new SearchQuery();
 			$SearchQuery->text = $phrase;
 			$SearchQuery->count_find = $products->count();
+			$SearchQuery->ip = $_SERVER['REMOTE_ADDR'];
 
 			if (!\Yii::$app->user->isGuest) {
 				$SearchQuery->user_id = \Yii::$app->user->id;

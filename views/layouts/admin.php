@@ -153,8 +153,8 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         </ul>
                     </li>
                     <li>
-                        <div class="dropdownlink"><i class="fa fa-motorcycle" aria-hidden="true"></i> Персонал
-                            <i class="fas fa-briefcase" aria-hidden="true"></i>
+                        <div class="dropdownlink"><i class="fas fa-briefcase" aria-hidden="true"></i> Персонал
+                            <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['admin/vacancy']) ?>">Список вакансий</a> <span class="count"><?= Vacancy::find()->count() ?></span></li>
