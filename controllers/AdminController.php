@@ -316,9 +316,10 @@ class AdminController extends Controller
                 if ($order->load(Yii::$app->request->post())) {
                     if ($order->update()) {
 
-                        $items = [];
-                        foreach (Yii::$app->request->post('OrdersItems', []) as $model) {
-                            $items[] = new OrdersItems();
+                        if (!$items) {
+                            foreach (Yii::$app->request->post('OrdersItems', []) as $model) {
+                                $items[] = new OrdersItems();
+                            }
                         }
 
                         if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
