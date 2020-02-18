@@ -21,7 +21,7 @@
                     </li>
 					<?php $count_find_by_one_ip = array(); ?>
 					<?php foreach ($last_search as $item): ?>
-						<?php $count_find_by_one_ip[$item->ip] = $item->ip; ?>
+						<?php $count_find_by_one_ip[$item->ip][] = $item->ip; ?>
                         <li class="search-info__item">
                             <div class="search-info__item-date"><?= date('d.m.Y', $item->created_at); ?></div>
                             <div class="search-info__item-user">
