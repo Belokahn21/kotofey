@@ -34,6 +34,10 @@ $this->title = Title::showTitle("Поставщики"); ?>
 	'columns' => [
 		'id',
 		'name',
+		'legal_name',
+		'email',
+		'phone',
+		'discount',
 		[
 			'attribute' => 'created_at',
 			'format' => ['date', 'dd.MM.YYYY'],
