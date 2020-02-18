@@ -306,6 +306,7 @@ class AdminController extends Controller
 		if ($id) {
 			$order = Order::findOne($id);
 			$order->scenario = Order::SCENARIO_CUSTOM;
+			$itemModel = new OrdersItems();
 			$items = OrdersItems::find()->where(['order_id' => $id])->all();
 			if (!$order) {
 				throw new HttpException(404, 'Заказ не найден');
@@ -315,15 +316,26 @@ class AdminController extends Controller
 				if ($order->load(Yii::$app->request->post())) {
 					if ($order->update()) {
 
+						if (!$items) {
+							foreach (Yii::$app->request->post('OrdersItems', []) as $model) {
+								$items[] = new OrdersItems();
+							}
+						}
+
 						if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
 							foreach ($items as $item) {
+
+								if (empty($item->product_id)) {
+									continue;
+								}
+
 								if ($item->need_delete) {
 									$item->delete();
 									continue;
 								}
 
 								if ($item->validate()) {
-									if ($item->update() === false) {
+									if ($item->save() !== true) {
 										Alert::setErrorNotify('Заказ не обновлён. Ошибка при сохранении товаров');
 										return $this->refresh();
 									}
@@ -342,7 +354,8 @@ class AdminController extends Controller
 
 			return $this->render('detail/order', [
 				'model' => $order,
-				'items' => $items
+				'items' => $items,
+				'itemModel' => $itemModel
 			]);
 		}
 
@@ -350,6 +363,7 @@ class AdminController extends Controller
 		$model->scenario = Order::SCENARIO_CUSTOM;
 		$searchModel = new OrderSearchForm();
 		$dataProvider = $searchModel->search(\Yii::$app->request->get());
+		$itemModel = new OrdersItems();
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
@@ -368,6 +382,7 @@ class AdminController extends Controller
 			'dataProvider' => $dataProvider,
 			'searchModel' => $searchModel,
 			'model' => $model,
+			'itemModel' => $itemModel,
 		]);
 	}
 
@@ -466,8 +481,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionGroup($id = null)
-	{
+	public
+	function actionGroup(
+		$id = null
+	) {
 		if (Yii::$app->request->get('action') == 'delete' && Yii::$app->request->get('id')) {
 			$db = \Yii::$app->db;
 			$transaction = $db->beginTransaction();
@@ -513,7 +530,8 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionPermission()
+	public
+	function actionPermission()
 	{
 		$model = new AuthItem();
 		$searchModel = new PermissionsSearchForm();
@@ -534,8 +552,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionDelivery($id = null)
-	{
+	public
+	function actionDelivery(
+		$id = null
+	) {
 		if ($id) {
 			$model = Delivery::findOne($id);
 			if (!$model) {
@@ -579,8 +599,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionPayment($id = null)
-	{
+	public
+	function actionPayment(
+		$id = null
+	) {
 
 		if ($id) {
 			$model = Payment::findOne($id);
@@ -625,8 +647,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionStatus($id = null)
-	{
+	public
+	function actionStatus(
+		$id = null
+	) {
 		if ($id) {
 			$model = OrderStatus::findOne($id);
 			if (!$model) {
@@ -667,8 +691,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSupport($id = null)
-	{
+	public
+	function actionSupport(
+		$id = null
+	) {
 		$model = new Tickets();
 		$searchModel = new TicketSearchForm();
 		$dataProvider = $searchModel->search(\Yii::$app->request->get());
@@ -679,8 +705,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSupportCategory($id = null)
-	{
+	public
+	function actionSupportCategory(
+		$id = null
+	) {
 		$model = new SupportCategory();
 
 		if (\Yii::$app->request->isPost) {
@@ -699,8 +727,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSupportstatus($id = null)
-	{
+	public
+	function actionSupportstatus(
+		$id = null
+	) {
 		$model = new SupportStatus();
 
 		if (\Yii::$app->request->isPost) {
@@ -718,8 +748,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSettings($id = null)
-	{
+	public
+	function actionSettings(
+		$id = null
+	) {
 		// Удалить
 		if ($id && !empty($_GET['action']) && $_GET['action'] == "delete") {
 			$element = SiteSettings::findOne($id);
@@ -789,8 +821,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionProperties($id = null)
-	{
+	public
+	function actionProperties(
+		$id = null
+	) {
 
 		if ($id) {
 			$model = ProductProperties::findOne($id);
@@ -831,8 +865,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionNews($id = null)
-	{
+	public
+	function actionNews(
+		$id = null
+	) {
 		// Удалить
 		if ($id && !empty($_GET['action']) && $_GET['action'] == "delete") {
 			$article = News::findOne($id);
@@ -884,8 +920,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionStocks($id = null)
-	{
+	public
+	function actionStocks(
+		$id = null
+	) {
 		if ($id) {
 			$model = Stocks::findOne($id);
 			if (Yii::$app->request->isPost) {
@@ -917,8 +955,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionNewssections($id = null)
-	{
+	public
+	function actionNewssections(
+		$id = null
+	) {
 		if ($id) {
 			$model = NewsCategory::findOne($id);
 			if (!$model) {
@@ -963,8 +1003,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionInformers($id = null)
-	{
+	public
+	function actionInformers(
+		$id = null
+	) {
 		if ($id) {
 			$model = Informers::findOne($id);
 			if (\Yii::$app->request->isPost) {
@@ -1010,8 +1052,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionInformersValues($id = null)
-	{
+	public
+	function actionInformersValues(
+		$id = null
+	) {
 
 		if (Yii::$app->request->get('action') == 'delete') {
 			$obj = InformersValues::findOne($id);
@@ -1064,8 +1108,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSelling($id = null)
-	{
+	public
+	function actionSelling(
+		$id = null
+	) {
 
 		$model = new Selling();
 		return $this->render('selling', [
@@ -1073,8 +1119,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionPromo($id = null)
-	{
+	public
+	function actionPromo(
+		$id = null
+	) {
 
 		if ($id) {
 			$promo = Promo::findOne($id);
@@ -1113,8 +1161,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionVendor($id = null)
-	{
+	public
+	function actionVendor(
+		$id = null
+	) {
 		if (Yii::$app->request->get('action') == 'delete') {
 			if (!Vendor::findOne($id)->delete()) {
 				throw new HttpException(404, 'Запись не найдена');
@@ -1154,8 +1204,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionVendorGroup($id = null)
-	{
+	public
+	function actionVendorGroup(
+		$id = null
+	) {
 		if (Yii::$app->request->get('action') == 'delete') {
 			if (!VendorGroup::findOne($id)->delete()) {
 				throw new HttpException(404, 'Запись не найдена');
@@ -1201,8 +1253,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSliders($id = null)
-	{
+	public
+	function actionSliders(
+		$id = null
+	) {
 		if ($id) {
 			$model = Sliders::findOne($id);
 			$model->scenario = Providers::SCENARIO_UPDATE;
@@ -1237,8 +1291,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSliderimages($id = null)
-	{
+	public
+	function actionSliderimages(
+		$id = null
+	) {
 		if ($id) {
 			$model = SlidersImages::findOne($id);
 			if (Yii::$app->request->isPost) {
@@ -1274,8 +1330,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionGeo($id = null)
-	{
+	public
+	function actionGeo(
+		$id = null
+	) {
 		$time_zones = GeoTimezone::find()->all();
 		if ($id) {
 			$model = Geo::findOne($id);
@@ -1319,8 +1377,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionTimezone($id = null)
-	{
+	public
+	function actionTimezone(
+		$id = null
+	) {
 		if ($id) {
 			$model = GeoTimezone::findOne($id);
 
@@ -1367,7 +1427,8 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionFeed()
+	public
+	function actionFeed()
 	{
 		$products = array();
 		$model = new FeedmakerForm();
@@ -1408,8 +1469,10 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionShortly($id = null)
-	{
+	public
+	function actionShortly(
+		$id = null
+	) {
 		if ($id) {
 			$model = ShortLinks::findOne($id);
 
@@ -1458,13 +1521,16 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionManagement()
+	public
+	function actionManagement()
 	{
 		return $this->render('management');
 	}
 
-	public function actionVacancy($id = null)
-	{
+	public
+	function actionVacancy(
+		$id = null
+	) {
 		$city_list = Geo::find()->where(['type' => Geo::TYPE_OBJECT_CITY])->all();
 
 
@@ -1514,29 +1580,16 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionCache()
+	public
+	function actionCache()
 	{
 		Yii::$app->cache->flush();
 		return $this->redirect('/');
 	}
 
-	public function actionPersonal()
+	public
+	function actionPersonal()
 	{
-		if (Yii::$app->request->get('action') == 'repair') {
-			$score = new UserManagerScore();
-			$score->user_id = Yii::$app->request->get('user_id');
-			$score->score = 0;
-			if ($score->validate()) {
-				if ($score->save()) {
-					Alert::setSuccessNotify('Счёт для пользователя с ID: ' . $score->user_id . ' успешно создан.');
-					return $this->redirect(['admin/personal']);
-				}
-			}
-		}
-
-		$managers = PersonalHelper::findAllManagers();
-		return $this->render('personal', [
-			'managers' => $managers
-		]);
+		return $this->render('personal');
 	}
 }
