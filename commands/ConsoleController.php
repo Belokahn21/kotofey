@@ -68,7 +68,7 @@ class ConsoleController extends Controller
 		}
 	}
 
-	public function actionPrice()
+	public function actionPrice($toggle = false)
 	{
 		// purina
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 6])->all();
@@ -80,11 +80,20 @@ class ConsoleController extends Controller
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
 
 		// acana
-		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 75])->all();
+//		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 75])->all();
 
+
+		if ($toggle == 1) {
+			// sanabelle
+			$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 154])->all();
+		} elseif ($toggle == 2) {
+			// bosch
+			$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 155])->all();
+		} else {
+			exit();
+		}
 
 		$products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
-
 		$sale = [
 //			'1' => '10',
 //			'1.5' => '10',
