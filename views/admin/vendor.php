@@ -35,8 +35,20 @@ $this->title = Title::showTitle("Поставщики"); ?>
 		'id',
 		'name',
 		'legal_name',
-		'email',
-		'phone',
+		[
+			'attribute' => 'email',
+			'format' => 'raw',
+			'value' => function ($model) {
+				return Html::a($model->email, 'mailto:' . $model->email);
+			}
+		],
+		[
+			'attribute' => 'phone',
+			'format' => 'raw',
+			'value' => function ($model) {
+				return Html::a($model->phone, 'tel:' . $model->phone);
+			}
+		],
 		'discount',
 		[
 			'attribute' => 'created_at',
