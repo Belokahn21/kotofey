@@ -11,39 +11,39 @@ use yii\data\ActiveDataProvider;
 class UserSearchForm extends User
 {
 
-    public static function tableName()
-    {
-        return "user";
-    }
+	public static function tableName()
+	{
+		return "user";
+	}
 
-    public function rules()
-    {
-        return [
-            [['email'], 'string'],
-            [['id'], 'integer'],
-        ];
-    }
+	public function rules()
+	{
+		return [
+			[['email'], 'string'],
+			[['id'], 'integer'],
+		];
+	}
 
-    public function scenarios()
-    {
-        return Model::scenarios();
-    }
+	public function scenarios()
+	{
+		return Model::scenarios();
+	}
 
-    public function search($params)
-    {
-        $query = User::find();
+	public function search($params)
+	{
+		$query = User::find()->orderBy(['created_at' => SORT_DESC]);
 
-        $dataProvider = new ActiveDataProvider([
-            'query' => $query,
-        ]);
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
 
-        if (!($this->load($params) && $this->validate())) {
-            return $dataProvider;
-        }
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
 
-        $query->andFilterWhere(['like', 'email', $this->email])
-            ->andWhere(['id' => $this->id]);
+		$query->andFilterWhere(['like', 'email', $this->email])
+			->andWhere(['id' => $this->id]);
 
-        return $dataProvider;
-    }
+		return $dataProvider;
+	}
 }

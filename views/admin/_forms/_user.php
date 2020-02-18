@@ -37,10 +37,6 @@ use yii\helpers\ArrayHelper;
 					<?php endif ?>
 					<?= $form->field($model, 'groups')->dropDownList(ArrayHelper::map($groups, 'name', 'name'), ['prompt' => 'Выбрать группу']); ?>
                 </div>
-
-                <div class="form-element">
-					<?= $form->field($personalManagerModel, 'manager_id')->dropDownList(ArrayHelper::map(PersonalHelper::findAllManagers(), 'id', 'display'), ['prompt' => 'Персональный менеджер']); ?>
-                </div>
             </div>
         </div>
     </div>

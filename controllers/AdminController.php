@@ -378,7 +378,6 @@ class AdminController extends Controller
 		$searchModel = new UserSearchForm();
 		$dataProvider = $searchModel->search(\Yii::$app->request->get());
 		$groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
-		$personalManagerModel = new UserManager();
 
 		// авторизоваться
 		if (!empty($_GET['id']) && !empty($_GET['action']) && $_GET['action'] == 'auth') {
@@ -402,11 +401,6 @@ class AdminController extends Controller
 		if ($id) {
 			$model = User::findOne($id);
 			$model->scenario = User::SCENARIO_UPDATE;
-			$is_new_manager = false;
-			if (!$personalManagerModel = UserManager::findOneByUserId($model->id)) {
-				$personalManagerModel = new UserManager();
-				$is_new_manager = true;
-			}
 
 			// обновить юзера
 			if (\Yii::$app->request->isPost) {
@@ -425,20 +419,6 @@ class AdminController extends Controller
 							$authAssigment->addUserRole($model->groups, $model);
 						}
 
-						if ($personalManagerModel->load(Yii::$app->request->post())) {
-							$personalManagerModel->user_id = $model->id;
-							if ($personalManagerModel->validate()) {
-
-								if ($is_new_manager) {
-									if ($personalManagerModel->save()) {
-									}
-								} else {
-									if ($personalManagerModel->update() === false) {
-									}
-								}
-							}
-						}
-
 						if ($model->update() !== false) {
 							Alert::setSuccessNotify("Информация о пользователе успешно обновлена");
 							return $this->refresh();
@@ -450,7 +430,6 @@ class AdminController extends Controller
 			return $this->render('detail/user', [
 				'model' => $model,
 				'groups' => $groups,
-				'personalManagerModel' => $personalManagerModel,
 			]);
 		}
 
@@ -458,10 +437,7 @@ class AdminController extends Controller
 		if (\Yii::$app->request->isPost) {
 
 			if ($model->load(\Yii::$app->request->post())) {
-
-
 				if ($model->validate()) {
-
 					$model->setPassword($model->password);
 					$model->generateAuthKey();
 					$transaction = Yii::$app->db->transaction;
@@ -471,15 +447,6 @@ class AdminController extends Controller
 
 						if (!empty($model->group)) {
 							$authAssigment->addUserRole(AuthItem::findOne(['name' => $model->group]), $model);
-						}
-
-						if ($personalManagerModel->load(Yii::$app->request->post())) {
-							$personalManagerModel->user_id = $user->id;
-							if ($personalManagerModel->validate()) {
-								if (!$personalManagerModel->save()) {
-									$transaction->rollBack();
-								}
-							}
 						}
 
 						Alert::setSuccessNotify('Пользователь успешно создан');
@@ -496,7 +463,6 @@ class AdminController extends Controller
 			'dataProvider' => $dataProvider,
 			'searchModel' => $searchModel,
 			'groups' => $groups,
-			'personalManagerModel' => $personalManagerModel
 		]);
 	}
 
