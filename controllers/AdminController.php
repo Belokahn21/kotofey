@@ -52,6 +52,7 @@ use app\models\search\InformersValuesSearchForm;
 use app\models\search\NewsSearchForm;
 use app\models\search\NewsCategorySearchForm;
 use app\models\search\OrderSearchForm;
+use app\models\search\OrderStatusSearchForm;
 use app\models\search\PermissionsSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
 use app\models\search\ProductSearchForm;
@@ -481,10 +482,8 @@ class AdminController extends Controller
 		]);
 	}
 
-	public
-	function actionGroup(
-		$id = null
-	) {
+	public function actionGroup($id = null)
+	{
 		if (Yii::$app->request->get('action') == 'delete' && Yii::$app->request->get('id')) {
 			$db = \Yii::$app->db;
 			$transaction = $db->beginTransaction();
@@ -647,10 +646,8 @@ class AdminController extends Controller
 		]);
 	}
 
-	public
-	function actionStatus(
-		$id = null
-	) {
+	public function actionStatus($id = null)
+	{
 		if ($id) {
 			$model = OrderStatus::findOne($id);
 			if (!$model) {
@@ -671,7 +668,8 @@ class AdminController extends Controller
 			]);
 		}
 		$model = new OrderStatus();
-		$dataProvider = $model->search(\Yii::$app->request->get());
+		$searchModel = new OrderStatusSearchForm();
+		$dataProvider = $searchModel->search(\Yii::$app->request->get());
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
@@ -688,6 +686,7 @@ class AdminController extends Controller
 		return $this->render('status', [
 			'model' => $model,
 			'dataProvider' => $dataProvider,
+			'searchModel' => $searchModel,
 		]);
 	}
 

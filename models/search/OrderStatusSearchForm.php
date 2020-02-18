@@ -10,20 +10,37 @@ use yii\data\ActiveDataProvider;
 class OrderStatusSearchForm extends OrderStatus
 {
 
-    public static function tableName()
-    {
-        return "status_order";
-    }
+	public static function tableName()
+	{
+		return "status_order";
+	}
 
-    public function rules()
-    {
-        return [
-            [['name'], 'string'],
-        ];
-    }
+	public function rules()
+	{
+		return [
+			[['name'], 'string'],
+		];
+	}
 
-    public function scenarios()
-    {
-        return Model::scenarios();
-    }
+	public function scenarios()
+	{
+		return Model::scenarios();
+	}
+
+	public function search($params)
+	{
+		$query = OrderStatus::find()->orderBy(['created_at' => SORT_DESC]);
+
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);
+
+		if (!($this->load($params) && $this->validate())) {
+			return $dataProvider;
+		}
+
+		$query->andFilterWhere(['like', 'name', $this->name]);
+
+		return $dataProvider;
+	}
 }

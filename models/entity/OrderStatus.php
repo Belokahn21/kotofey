@@ -3,45 +3,36 @@
 namespace app\models\entity;
 
 
+use yii\behaviors\TimestampBehavior;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 
 class OrderStatus extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "status_order";
-    }
-
-    public function rules()
-    {
-        return [
-            ['name', 'string'],
-            ['name', 'required', 'message' => '{attribute} должно быть заполнено'],
-        ];
-    }
-
-    public function attributeLabels()
-    {
-        return [
-            'name' => "Название"
-        ];
-    }
-
-	public function search($params)
+	public static function tableName()
 	{
-		$query = static::find();
+		return "status_order";
+	}
 
-		$dataProvider = new ActiveDataProvider([
-			'query' => $query,
-		]);
+	public function rules()
+	{
+		return [
+			['name', 'string'],
+			['name', 'required', 'message' => '{attribute} должно быть заполнено'],
+		];
+	}
 
-		if (!($this->load($params) && $this->validate())) {
-			return $dataProvider;
-		}
+	public function behaviors()
+	{
+		return [
+			TimestampBehavior::className()
+		];
+	}
 
-		$query->andFilterWhere(['like', 'name', $this->name]);
-
-		return $dataProvider;
+	public function attributeLabels()
+	{
+		return [
+			'name' => "Название"
+		];
 	}
 }

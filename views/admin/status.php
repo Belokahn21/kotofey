@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /* @var $model \app\models\entity\OrderStatus */
 /* @var $this \yii\web\View */
 ?>
-<? $this->title = Title::showTitle("Статусы заказа"); ?>
+<?php $this->title = Title::showTitle("Статусы заказа"); ?>
 <section>
     <h1 class="title">Статусы заказа</h1>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
@@ -24,7 +24,7 @@ use yii\helpers\Url;
 <h2 class="title">Список статусов</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
-	'filterModel' => $model,
+	'filterModel' => $searchModel,
 	'emptyText' => 'Статусы отсутствуют',
 	'columns' => [
 		'id',
