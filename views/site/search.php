@@ -5,6 +5,7 @@ use app\models\entity\ProductPropertiesValues;
 use app\models\helpers\DiscountHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
+use app\models\entity\SiteSettings;
 
 /* @var $products \app\models\entity\Product[] */
 
@@ -71,5 +72,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
 		<?php endforeach; ?>
     </ul>
 <?php else: ?>
-    К сожаление ничего не нашлось :(
+    <p style="text-align: center; margin: 20px 0;">
+        К сожаление ничего не нашлось :(
+    </p>
+    <p style="text-align: center;margin: 20px 0;">
+        Попробуйте изменить тактику поиска, поменяв язык. К примеру искали <strong>"Проплан"</strong> попробуйте <strong>"Pro plan"</strong>
+    </p>
+    <p style="text-align: center;margin: 20px 0;">
+        Позвоните нам по номеру <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="phone_mask" style="color: #ff1a4a; font-weight: bold;"><?= SiteSettings::getValueByCode('phone_1'); ?></a> и мы быстро найдем ваш товар
+    </p>
+    <p style="text-align: center;margin: 20px 0;">
+        Или воспользуйтесь чатом в правом нижнем углу, мы отвечаем <span style="color: #ff1a4a; font-weight: bold; text-transform: uppercase;">моментально</span>
+    </p>
+    <img src="/upload/images/chat.png"/ style="width: auto; margin: auto auto;">
 <?php endif; ?>
