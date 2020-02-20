@@ -15,7 +15,7 @@ use yii\helpers\Html;
                     <div class="review-item__author-wrap">
                         <div class="review-item__image-wrap">
                             <?php if ($review->user_id): ?>
-                                <img class="review-item__image" src="/upload/avatar/<?= $review->user->avatar; ?>">
+                                <img class="review-item__image" src="/upload/<?= $review->user->avatar; ?>">
                             <?php else: ?>
                                 <img class="review-item__image" src="/upload/images/no-image.png">
                             <?php endif; ?>
