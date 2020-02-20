@@ -39,6 +39,7 @@ use app\models\entity\Vacancy;
 use app\models\entity\Vendor;
 use app\models\entity\VendorGroup;
 use app\models\forms\FeedmakerForm;
+use app\models\helpers\OrderHelper;
 use app\models\helpers\PersonalHelper;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
@@ -71,10 +72,17 @@ use app\models\tool\Backup;
 use app\models\tool\Debug;
 use app\models\tool\export\YandexCatalogExport;
 use app\models\tool\export\YMLExport;
+use app\models\tool\statistic\OrderStatistic;
 use app\widgets\notification\Alert;
 use Codeception\Lib\Di;
+use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Styles;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
+use yii\i18n\MessageFormatter;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\entity\Product;
@@ -1586,9 +1594,113 @@ class AdminController extends Controller
 		return $this->redirect('/');
 	}
 
-	public
-	function actionPersonal()
+	public function actionPersonal()
 	{
 		return $this->render('personal');
+	}
+
+	public function actionOrderReport($id)
+	{
+		$order = Order::findOne($id);
+		if (!$order) {
+			throw new HttpException(404, 'Запись не найдена');
+		}
+
+		$spreadsheet = new Spreadsheet();
+		$sheet = $spreadsheet->getActiveSheet();
+		$file_name = "order_{$order->id}.xlsx";
+
+		// Размеры колонок
+		$sheet->getColumnDimension('A')->setWidth('12');
+		$sheet->getColumnDimension('B')->setAutoSize(true);
+		$sheet->getColumnDimension('C')->setWidth('10');
+		$sheet->getColumnDimension('D')->setWidth('12');
+		$sheet->getColumnDimension('E')->setWidth('6');
+		$sheet->getColumnDimension('F')->setWidth('8');
+		$sheet->getColumnDimension('G')->setWidth('8');
+
+		// Заголовок
+		$sheet->setCellValue('A1', sprintf('Товарная наклданая №%s от %s', $order->id, date('d.m.Y', $order->created_at)));
+		$sheet->mergeCells('A1:G1');
+		$sheet->getStyle('A1')->getFont()->setBold(true);
+		$sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
+		$sheet->getStyle('A1')->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
+		// Кто продал
+		$sheet->setCellValue('A3', 'Продавец');
+		$sheet->setCellValue('B3', 'Интернет-зоомагазин Котофей (ИП Васин К.В.)');
+		$sheet->getStyle('B3')->getFont()->setBold(true);
+		$sheet->setCellValue('B4', sprintf('Адрес г. Барнаул, ул. Весеняя, дом 4. Телефон: %s', SiteSettings::getValueByCode('phone_1')));
+		$sheet->setCellValue('B5', sprintf('ИНН %s, ОГРН %s', SiteSettings::getValueByCode('inn'), SiteSettings::getValueByCode('ogrn')));
+		$sheet->mergeCells('B3:G3');
+		$sheet->mergeCells('B4:G4');
+		$sheet->mergeCells('B5:G5');
+
+
+		// Список товаров
+		$items = OrdersItems::find()->where(['order_id' => $order->id])->all();
+
+		$line = 8;
+		$start_table = $line;
+		$sheet->setCellValue("A{$line}", '№');
+		$sheet->setCellValue("B{$line}", 'Наименование');
+		$sheet->setCellValue("C{$line}", 'Артикул');
+		$sheet->setCellValue("D{$line}", 'Количество');
+		$sheet->setCellValue("E{$line}", 'Ед.');
+		$sheet->setCellValue("F{$line}", 'Цена');
+		$sheet->setCellValue("G{$line}", 'Сумма');
+		foreach ($items as $count => $item) {
+			$line++;
+			$sheet->setCellValue("A{$line}", ++$count);
+			$sheet->setCellValue("B{$line}", $item->name);
+			if ($item->product) {
+				$sheet->setCellValue("C{$line}", $item->product->article);
+			} else {
+				$sheet->setCellValue("C{$line}", '');
+			}
+			$sheet->setCellValue("D{$line}", $item->count);
+			$sheet->setCellValue("E{$line}", 'Шт.');
+			$sheet->setCellValue("F{$line}", $item->price);
+			$sheet->setCellValue("G{$line}", $item->count * $item->price);
+		}
+
+		// Рамка для таблицы
+		$sheet->getStyle("A{$start_table}:G{$line}")->applyFromArray(
+			array(
+				'borders' => array(
+					'allBorders' => array(
+						'borderStyle' => Border::BORDER_THIN
+					)
+				)
+			)
+		);
+
+		$line++;
+
+		$sheet->setCellValue("F{$line}", 'Итого');
+		$sheet->setCellValue("G{$line}", OrderStatistic::orderSummary($order->id));
+
+		$line = $line + 2;
+		$result = (new \MessageFormatter('ru-RU', '{n, spellout}'))->format(['n' => OrderStatistic::orderSummary($order->id)]);
+		$sheet->setCellValue("A{$line}", Yii::$app->i18n->format(sprintf("Всего отпущено на сумму %s {n, plural, =0{Пусто} =1{рубль} one{рубль} few{рублей} many{рублей} other{Ошибка}}", $result), ['n' => OrderStatistic::orderSummary($order->id)], 'ru_RU'));
+		$sheet->mergeCells("A{$line}:B{$line}");
+
+		$line = $line + 2;
+		$sheet->setCellValue("A{$line}", 'Отпустил        ________        Расшифровка       ________');
+		$sheet->mergeCells("A{$line}:B{$line}");
+
+
+		// save file
+		$writer = new Xlsx($spreadsheet);
+//		$writer->save("$file_name");
+
+		header("Expires: Mon, 1 Apr 1974 05:00:00 GMT");
+		header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+		header("Cache-Control: no-cache, must-revalidate");
+		header("Pragma: no-cache");
+		header("Content-type: application/vnd.ms-excel");
+		header("Content-Disposition: attachment; filename={$file_name}");
+
+		$writer->save('php://output');
 	}
 }
