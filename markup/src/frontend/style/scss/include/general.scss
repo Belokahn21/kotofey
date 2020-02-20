@@ -26,6 +26,8 @@ body {
   min-height: 100%;
   font-family: "Raleway-Bold", sans-serif !important;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 textarea {
