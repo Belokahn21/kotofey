@@ -1608,7 +1608,7 @@ class AdminController extends Controller
 
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
-		$file_name = "order_{$order->id}.xlsx";
+		$file_name = "order_{$order->id}.xls";
 
 		// Размеры колонок
 		$sheet->getColumnDimension('A')->setWidth('12');
