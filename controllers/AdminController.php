@@ -1630,7 +1630,7 @@ class AdminController extends Controller
 		$sheet->setCellValue('A3', 'Продавец');
 		$sheet->setCellValue('B3', 'Интернет-зоомагазин Котофей (ИП Васин К.В.)');
 		$sheet->getStyle('B3')->getFont()->setBold(true);
-		$sheet->setCellValue('B4', sprintf('Адрес г. Барнаул, ул. Весеняя, дом 4. Телефон: %s', SiteSettings::getValueByCode('phone_1')));
+		$sheet->setCellValue('B4', sprintf('Адрес г. Барнаул, ул. Весеняя, дом 4. Телефон: %s, Сайт https://kotofey.store/', SiteSettings::getValueByCode('phone_1')));
 		$sheet->setCellValue('B5', sprintf('ИНН %s, ОГРН %s', SiteSettings::getValueByCode('inn'), SiteSettings::getValueByCode('ogrn')));
 		$sheet->mergeCells('B3:G3');
 		$sheet->mergeCells('B4:G4');
