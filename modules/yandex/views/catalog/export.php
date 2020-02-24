@@ -20,17 +20,17 @@ use app\models\helpers\ProductHelper;
             <currency id="EUR" rate="CBRF"/>
         </currencies>
         <categories>
-			<?php foreach ($categories as $category): ?>
+            <?php foreach ($categories as $category): ?>
                 <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
-			<?php endforeach; ?>
+            <?php endforeach; ?>
         </categories>
         <delivery-options>
             <option cost="0" days="1" order-before="16"/>
         </delivery-options>
         <cpa>1</cpa>
         <offers>
-			<?php foreach ($offers as $offer): ?>
-                <offer id="<?= $offer->id ?>" available="true">
+            <?php foreach ($offers as $offer): ?>
+                <offer id="<?= $offer->id ?>" available="<?= ($offer->active == 1 ? 'true' : 'false'); ?>">
                     <url>https://kotofey.store<?= $offer->detail; ?></url>
                     <price><?= ProductHelper::getResultPrice($offer); ?></price>
                     <currencyId>RUB</currencyId>
@@ -42,7 +42,7 @@ use app\models\helpers\ProductHelper;
                     <store>false</store>
                     <delivery>true</delivery>
                 </offer>
-			<?php endforeach; ?>
+            <?php endforeach; ?>
         </offers>
     </shop>
 </yml_catalog>
