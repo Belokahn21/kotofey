@@ -9,7 +9,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	function setCount(res) {
 		const div = document.createElement('div');
-		div.textContent = `${res.count} bears`;
+		let html = "";
+
+		for (var i in res) {
+			html += "Название: " + `${res.element.name}` + "<br>";
+		}
+
+		div.innerHTML = html;
 		document.body.appendChild(div);
+
 	}
 }, false);
