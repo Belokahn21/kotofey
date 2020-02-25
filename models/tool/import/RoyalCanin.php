@@ -29,7 +29,7 @@ class RoyalCanin
 
 	}
 
-	public function import()
+	public function update()
 	{
 		if (($handle = fopen($this->getPricePath(), "r")) !== false) {
 			while (($line = fgetcsv($handle, 1000, ";")) !== false) {

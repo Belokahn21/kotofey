@@ -41,3 +41,5 @@ node_modules
 /application/
 yii
 package-lock.json
+/web/*.xls
+/web/*.xlsx

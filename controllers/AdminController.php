@@ -1608,13 +1608,13 @@ class AdminController extends Controller
 
 		$spreadsheet = new Spreadsheet();
 		$sheet = $spreadsheet->getActiveSheet();
-		$file_name = "order_{$order->id}.xls";
+		$file_name = "order_{$order->id}.xlsx";
 
 		// Размеры колонок
 		$sheet->getColumnDimension('A')->setWidth('12');
-		$sheet->getColumnDimension('B')->setAutoSize(true);
+		$sheet->getColumnDimension('B')->setWidth('70');
 		$sheet->getColumnDimension('C')->setWidth('10');
-		$sheet->getColumnDimension('D')->setWidth('12');
+		$sheet->getColumnDimension('D')->setWidth('8');
 		$sheet->getColumnDimension('E')->setWidth('6');
 		$sheet->getColumnDimension('F')->setWidth('8');
 		$sheet->getColumnDimension('G')->setWidth('8');
@@ -1643,9 +1643,9 @@ class AdminController extends Controller
 		$line = 8;
 		$start_table = $line;
 		$sheet->setCellValue("A{$line}", '№');
-		$sheet->setCellValue("B{$line}", 'Наименование');
+		$sheet->setCellValue("B{$line}", 'Товар');
 		$sheet->setCellValue("C{$line}", 'Артикул');
-		$sheet->setCellValue("D{$line}", 'Количество');
+		$sheet->setCellValue("D{$line}", 'Кол-во');
 		$sheet->setCellValue("E{$line}", 'Ед.');
 		$sheet->setCellValue("F{$line}", 'Цена');
 		$sheet->setCellValue("G{$line}", 'Сумма');
@@ -1692,15 +1692,15 @@ class AdminController extends Controller
 
 		// save file
 		$writer = new Xlsx($spreadsheet);
-//		$writer->save("$file_name");
+		$writer->save("$file_name");
 
-		header("Expires: Mon, 1 Apr 1974 05:00:00 GMT");
-		header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
-		header("Cache-Control: no-cache, must-revalidate");
-		header("Pragma: no-cache");
-		header("Content-type: application/vnd.ms-excel");
-		header("Content-Disposition: attachment; filename={$file_name}");
-
-		$writer->save('php://output');
+//		header("Expires: Mon, 1 Apr 1974 05:00:00 GMT");
+//		header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+//		header("Cache-Control: no-cache, must-revalidate");
+//		header("Pragma: no-cache");
+//		header("Content-type: application/vnd.ms-excel");
+//		header("Content-Disposition: attachment; filename={$file_name}");
+//
+//		$writer->save('php://output');
 	}
 }
