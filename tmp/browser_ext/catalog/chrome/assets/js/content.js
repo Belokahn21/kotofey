@@ -2,5 +2,10 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	const re = new RegExp('bear', 'gi');
 	const matches = document.documentElement.innerHTML.match(re);
 
-	sendResponse({count: 5555});
+	const count = 0;
+	if (matches != null) {
+		count = matches.length;
+	}
+
+	sendResponse({count: count});
 });
