@@ -1,1 +1,10 @@
-import datepicker from 'air-datepicker';
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+console.log("daadsdsa");
+
+ReactDOM.render(
+	<h1>Hello, world!</h1>,
+	document.getElementById('root')
+);
+

@@ -26,8 +26,8 @@ var config = {
 			build_frontend: './build/assets/css/',
 		},
 		html: {
-			src_frontend: './src/html/*.{html,htm}',
-			watch_frontend: './src/html/**/*.{html,htm}',
+			src_frontend: './src/*.{html,htm}',
+			watch_frontend: './src/**/*.{html,htm}',
 			build_frontend: './build/',
 		},
 		js: {
@@ -63,9 +63,9 @@ gulp.task('ecmascript6', function () {
 			entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_frontend],
 			debug: true
 		}).transform('babelify', {
-			presets: ['@babel/env'],
+			presets: ['@babel/env', '@babel/preset-react', '@babel/preset-es2015'],
 		}).bundle()
-			.pipe(source('core.min.js'))
+			.pipe(source('popup.js'))
 			.pipe(buffer())
 			.pipe(plumber())
 			.pipe(plumber.stop())
@@ -136,9 +136,9 @@ gulp.task('browser-sync', function () {
 
 gulp.task('copy', function () {
 	return new Promise(function (resolve, reject) {
-		gulp.src(config.paths.copy.src_backend)
-			.pipe(changed(config.paths.copy.build_backend, {hasChanged: changed.compareLastModifiedTime}))
-			.pipe(gulp.dest(config.paths.copy.build_backend))
+		gulp.src(config.paths.copy.src_frontend)
+			.pipe(changed(config.paths.copy.build_frontend, {hasChanged: changed.compareLastModifiedTime}))
+			.pipe(gulp.dest(config.paths.copy.build_frontend))
 			.pipe(browserSync.reload({
 				stream: true
 			}));
@@ -147,8 +147,8 @@ gulp.task('copy', function () {
 });
 gulp.task('img', function () {
 	return new Promise(function (resolve, reject) {
-		gulp.src(config.paths.image.src_backend)
-			.pipe(changed(config.paths.image.build_backend, {hasChanged: changed.compareLastModifiedTime}))
+		gulp.src(config.paths.image.src_frontend)
+			.pipe(changed(config.paths.image.build_frontend, {hasChanged: changed.compareLastModifiedTime}))
 			.pipe(imagemin([
 				imagemin.gifsicle({interlaced: false}),
 				imagemin.jpegtran({progressive: false}),
@@ -160,7 +160,7 @@ gulp.task('img', function () {
 					]
 				})
 			]))
-			.pipe(gulp.dest(config.paths.image.build_backend))
+			.pipe(gulp.dest(config.paths.image.build_frontend))
 			.pipe(browserSync.reload({stream: true}));
 		resolve();
 	});
