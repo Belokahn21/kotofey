@@ -1,0 +1,131 @@
+<include src="include/head.html"></include>
+<body class="border-me">
+<div class="body-wrap">
+    <include src="include/header.html"></include>
+
+    <div class="catalog-search">
+        <form class="catalog-search-form">
+            <input class="catalog-search-form__input" type="text" placeholder="Искать на КЛМЗ">
+            <div>
+                <i class="fas fa-search"></i>
+            </div>
+        </form>
+    </div>
+
+    <div class="breadcrumbs-wrap">
+        <ul class="breadcrumbs">
+            <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Каталог</a></li>
+            <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Топки</a></li>
+        </ul>
+    </div>
+
+    <div class="page-wrap catalog-wrap product-detail-wrap">
+        <div class="product-detail">
+            <h1 class="product-detail__title">Топка механическая ТЛЗ-2-2,7/4,0</h1>
+            <div class="product-detail__description">Топки механические ТЛЗ-2-2,7/4,0 предназначены для сжигания твердого топлива в паровых и водогрейных котлах: ДКВР-10-13 и КВ-ТС-10.</div>
+
+            <div class="product-detail__get-price">
+                <img src="./assets/images/pdf.png">
+                <div class="label">Прайс-лист на продукцию</div>
+            </div>
+
+            <ul class="production-properties">
+                <li class="production-properties__item">
+                    <div class="production-properties__key">Тип котельной</div>
+                    <div class="production-properties__value">Водогрейный</div>
+                </li>
+                <li class="production-properties__item">
+                    <div class="production-properties__key">Мощность, МВт</div>
+                    <div class="production-properties__value">3.6</div>
+                </li>
+                <li class="production-properties__item">
+                    <div class="production-properties__key">Топливо</div>
+                    <div class="production-properties__value">Природный газ</div>
+                </li>
+                <li class="production-properties__item product-detail__price">
+                    <div class="production-properties__key">Цена Р, от</div>
+                    <div class="production-properties__value production-properties__price">700 000</div>
+                </li>
+            </ul>
+            <div class="d-flex flex-row justify-content-end">
+                <a href="javascript:void(0);" class="link-main mr-5">В корзину</a>
+            </div>
+
+            <ul class="nav nav-tabs" id="productProps" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Описание</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Технические характеристики</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="productPropsContent">
+                <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">Характерной особенностью этих топок является комбинированный процесс горения
+                    в слое и во взвешенном состоянии. Благодаря пневмомеханическому забросу топлива крупные частицы падают и сгорают на решетке, а мелкие отсеиваются и сгорают
+                    в топочном объеме. Подача топлива осуществляется непрерывно малыми порциями
+                    на всю поверхность колосникового полотна и при медленном его движении обеспечивается нижнее зажигание по всей длине слоя. Конструкция топки позволяет автоматизировать процесс горения.</div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <ul class="production-properties">
+                        <li class="production-properties__item">
+                            <div class="production-properties__key">Тип котельной</div>
+                            <div class="production-properties__value">Водогрейный</div>
+                        </li>
+                        <li class="production-properties__item">
+                            <div class="production-properties__key">Мощность, МВт</div>
+                            <div class="production-properties__value">3.6</div>
+                        </li>
+                        <li class="production-properties__item">
+                            <div class="production-properties__key">Топливо</div>
+                            <div class="production-properties__value">Природный газ</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+        <div class="product-detail-feedback">
+
+            <form class="feedback-form">
+                <div class="feedback-form__content">
+
+                    <div class="feedback-form__title">Быстрый заказ</div>
+                    <div class="feedback-form__group">
+                        <input class="feedback-form__input" placeholder="Ваше имя">
+                    </div>
+
+                    <div class="feedback-form__group">
+                        <input class="feedback-form__input" placeholder="Номер телефона">
+                    </div>
+
+                    <div class="feedback-form__group">
+                        <input class="feedback-form__input" placeholder="Эл. почта">
+                    </div>
+
+                    <div class="feedback-form__group">
+                        <textarea class="feedback-form__textarea" placeholder="Ваше обращение"></textarea>
+                    </div>
+
+                    <div class="feedback-form-agree">
+                        <label class="container-custom-checkbox feedback-form-agree-container"><span class="feedback-form-agree__label">Нажимая «отправить» я соглашаюсь с политикой конфиденциальности</span>
+                            <input type="checkbox" checked="checked">
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+
+                </div>
+                <button class="feedback-form__submit">Отправить</button>
+            </form>
+
+        </div>
+        <div class="callback-line">
+            <div class="callback-phone">
+                <a href="javascript:void(0);">
+                    <img src="./assets/images/callback-phone.svg">
+                </a>
+            </div>
+        </div>
+    </div>
+    <include src="include/footer.html"></include>
+</div>
+</body>
+</html>

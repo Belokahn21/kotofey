@@ -1,44 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('button').addEventListener('click', onClick, false);
+	'use strict';
+	import React from 'react';
 
-    function onClick() {
-        chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
-            chrome.tabs.sendMessage(tabs[0].id, 'hi !', setCount);
-        });
-    }
+	const reactElement = React.createElement;
 
-    function setCount(res) {
-        const div = document.createElement('div');
-        let html = "";
+	class ItemForm extends React.Component {
+		render() {
+			return (
+				1
+			);
+		}
+	}
 
-        let form = document.createElement('form');
-        form.setAttribute('class','milenium-form');
+	chrome.tabs.query({currentWindow: true, active: true}, function (tabs) {
+		chrome.tabs.sendMessage(tabs[0].id, 'hi !', render);
+	});
 
-        let nameInput = document.createElement('input');
-        nameInput.setAttribute('name', 'name');
-        nameInput.setAttribute('value', res.element.name);
-
-
-		let priceInput = document.createElement('input');
-		priceInput.setAttribute('name', 'price');
-		priceInput.setAttribute('value', res.element.price);
+	function render(res) {
+		//use react js
+		ReactDOM.render(<ItemForm/>, document.querySelector('#like_button_container'));
+	}
 
 
-		let articleInput = document.createElement('input');
-		articleInput.setAttribute('name', 'price');
-		articleInput.setAttribute('value', res.element.article);
-
-
-		let weightInput = document.createElement('input');
-		weightInput.setAttribute('name', 'price');
-		weightInput.setAttribute('value', res.element.weight);
-
-        form.appendChild(nameInput);
-        form.appendChild(priceInput);
-        form.appendChild(articleInput);
-        form.appendChild(weightInput);
-
-        document.body.appendChild(form);
-
-    }
 }, false);

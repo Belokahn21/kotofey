@@ -51,15 +51,8 @@ class Search extends Model
 			$products->orWhere(['like', 'feed', $phrase]);
 
 			if ($products->count() == 0) {
-				$words = explode(" ", $phrase);
-				if (count($words) > 1) {
-					foreach ($words as $word) {
-						$products->andWhere(['like', 'name', $word]);
-						$products->orWhere(['like', 'feed', $word]);
-					}
-				}
+				$products->orWhere(['like', 'name', explode(" ", $phrase)]);
 			}
-
 		}
 
 

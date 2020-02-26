@@ -1,0 +1,43 @@
+{
+  "name": "browser_ext",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "small_jedi (Vasin K.V.)",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.8.3",
+    "bootstrap": "^4.3.1",
+    "browser-sync": "^2.26.7",
+    "event-stream": "^4.0.1",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-babel": "^8.0.0-beta.2",
+    "gulp-changed": "^4.0.2",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-if": "^3.0.0",
+    "gulp-imagemin": "^6.1.1",
+    "gulp-include-file": "^0.1.1",
+    "gulp-include-tag": "^1.1.2",
+    "gulp-plumber": "^1.2.1",
+    "gulp-rigger": "^0.5.8",
+    "gulp-uglify": "^3.0.2",
+    "pug": "^2.0.4"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "air-datepicker": "^2.2.3",
+    "babelify": "^10.0.0",
+    "browserify": "^16.5.0",
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
+    "js-datepicker": "^5.2.1",
+    "material-ui": "^1.0.0-beta.47",
+    "vinyl-buffer": "^1.0.1",
+    "vinyl-source-stream": "^2.0.0"
+  }
+}

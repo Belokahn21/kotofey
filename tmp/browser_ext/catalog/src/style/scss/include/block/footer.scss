@@ -1,0 +1,142 @@
+.mobile-footer {
+  display: none;
+}
+
+.footer {
+  padding: 0 0 0 10%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  .left-part {
+    width: 70%
+  }
+
+  &__title {
+    position: relative;
+    font-family: 'Montserrat', 'sans-serif';
+    font-size: 2vh;
+    font-weight: 900;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #313030;
+    margin: 5% 0;
+    text-transform: uppercase;
+
+    &:after {
+      content: "";
+      position: absolute;
+      width: 10%;
+      height: 18%;
+      background: $active-color;
+      top: 50%;
+      left: 25%;
+    }
+  }
+}
+
+.left-part {
+  .footer-menu {
+    &__link {
+      &:hover {
+        color: inherit;
+        border-bottom: 1px $active-color solid;
+      }
+    }
+  }
+}
+
+.footer-menu {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  &__item {
+    font-family: 'ClearSans', 'sans-serif';
+    font-size: 2vh;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 3.43;
+    letter-spacing: normal;
+  }
+
+  &__link {
+    color: #313030;
+    text-decoration: none !important;
+  }
+}
+
+.footer-logo-company {
+  margin: 15% 0;
+}
+
+.footer-background-black {
+  background: #313030;
+  width: 30%;
+
+  .footer-menu {
+    margin: 35% 0 0 10%;
+
+    &__link {
+      color: white;
+    }
+  }
+}
+
+.who-dev {
+  font-family: 'ClearSans', 'sans-serif';
+  font-size: 2vh;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.5;
+  letter-spacing: normal;
+  margin: 7% 0 4% 0;
+  color: #848181;
+
+  a {
+    color: $active-color;
+    border-bottom: 1px solid $active-color;
+  }
+}
+
+.footer-feedback {
+  margin: 0 0 5% 0;
+
+  a {
+    font-family: 'ClearSans', 'sans-serif';
+    font-size: 3vh;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1;
+    letter-spacing: normal;
+  }
+
+  &__email {
+    padding: 0;
+    margin: 0;
+    text-decoration: none !important;
+
+    a {
+      color: $active-color;
+      span {
+        border-bottom: 1px $active-color solid;
+      }
+    }
+  }
+
+  &__phone {
+    padding: 0;
+    margin: 0;
+
+    a {
+      color: black;
+    }
+  }
+}
