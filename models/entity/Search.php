@@ -52,6 +52,7 @@ class Search extends Model
 
 			if ($products->count() == 0) {
 				$products->orWhere(['like', 'name', explode(" ", $phrase)]);
+				$products->orWhere(['like', 'feed', explode(" ", $phrase)]);
 			}
 		}
 
