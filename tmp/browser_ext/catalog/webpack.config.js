@@ -25,6 +25,7 @@ module.exports = {
         new CopyPlugin([
             {from: './src/manifest.json', to: './manifest.json'},
             {from: './src/assets/', to: './assets/'},
+            {from: './src/_locales/', to: './_locales/'},
             // { from: 'other', to: 'public' },
         ]),
         new HtmlWebpackPlugin({
