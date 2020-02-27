@@ -20,7 +20,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	const element = {};
 
 	element.name = name;
-	element.price = price;
+	element.price = price[0];
 	element.article = article;
 	element.weight = weight;
 	element.description = description;
