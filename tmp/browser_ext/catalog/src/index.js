@@ -18,10 +18,19 @@ document.addEventListener('DOMContentLoaded', function () {
 			let url = "https://kotofey.store/rest/product/create/";
 			fetch(url, {
 				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Accept': 'application/json'
+				},
 				body: JSON.stringify({
 					element: res.element
 				}),
-			}).then(response => response.json()).then(data => document.querySelector('body').innerHTML = "asdasd");
+			}).then(function (response) {
+				console.log(response);
+				response.json();
+			}).then(function (data) {
+				document.querySelector('body').innerHTML = data;
+			});
 		});
 	}
 
