@@ -1,0 +1,15 @@
+body {
+    width: 640px;
+}
+
+.milenium-form {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+}
+
+.milenium-form input {
+    display: inline-block;
+    width: 100%;
+    padding: 0 10px;
+}

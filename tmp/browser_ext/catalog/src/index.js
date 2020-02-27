@@ -14,7 +14,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		document.querySelector('.form-control-button').addEventListener('click', function (event) {
 			event.preventDefault();
-			document.querySelector('body').innerHTML = "asdasd";
+
+			let url = "https://kotofey.store/rest/product/create/";
+			fetch(url, {
+				method: 'POST',
+				body: JSON.stringify({
+					element: res.element
+				}),
+			}).then(response => response.json()).then(data => document.querySelector('body').innerHTML = "asdasd");
 		});
 	}
 

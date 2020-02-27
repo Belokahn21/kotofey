@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\shop;
+namespace app\modules\rest;
 
 /**
- * shop module definition class
+ * rest module definition class
  */
 class Module extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\shop\controllers';
+    public $controllerNamespace = 'app\modules\rest\controllers';
 
     /**
      * {@inheritdoc}
