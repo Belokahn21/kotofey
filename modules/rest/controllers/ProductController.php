@@ -16,6 +16,7 @@ class ProductController extends Controller
     public function actionCreate()
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        return Json::encode('hello');
+        $requestData = $_POST['element'];
+        return Json::encode($requestData);
     }
 }

@@ -26,8 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					element: res.element
 				}),
 			}).then(function (response) {
-				console.log(response);
-				response.json();
+				return response.json();
 			}).then(function (data) {
 				document.querySelector('body').innerHTML = data;
 			});
