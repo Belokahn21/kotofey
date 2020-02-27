@@ -7,9 +7,14 @@ use yii\web\Controller;
 
 class ProductController extends Controller
 {
-    public function actionCreate()
+    public function beforeAction($action)
     {
         $this->enableCsrfValidation = false;
+        return parent::beforeAction($action);
+    }
+
+    public function actionCreate()
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return Json::encode('hello');
     }
