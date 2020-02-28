@@ -20,10 +20,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
 	const element = {};
 
 	element.name = name;
-	element.price = price[0];
+	element.base_price = price[0];
+	element.purchase = element.base_price;
+	element.price = Math.ceil(element.purchase + element.purchase * 0.30);
 	element.article = article;
 	element.weight = weight;
 	element.description = description;
+	element.count = 0;
 
 	sendResponse({element: element});
 });
