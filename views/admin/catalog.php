@@ -15,6 +15,7 @@ use app\models\entity\SiteSettings;
 /* @var $model \app\models\entity\Product
  * @var $modelDelivery \app\models\entity\ProductOrder
  * @var $properties \app\models\entity\ProductProperties[]
+ * @var $searchModel \app\models\search\ProductSearchForm
  */
 
 $this->title = Title::showTitle("Товары"); ?>
@@ -43,6 +44,10 @@ $this->title = Title::showTitle("Товары"); ?>
         'id',
         'article',
         'code',
+        [
+            'attribute' => 'prop_sales',
+            'filter' => ArrayHelper::map(InformersValues::find()->where(['informer_id' => 10])->all(), 'id', 'name'),
+        ],
         [
             'attribute' => 'active',
             'format' => 'raw',

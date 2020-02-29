@@ -49,6 +49,7 @@ class Product extends \yii\db\ActiveRecord
     public $imagesFiles;
     public $properties;
     public $is_product_order;
+    public $prop_sales;
 
     const SCENARIO_NEW_PRODUCT = 'insert';
     const SCENARIO_UPDATE_PRODUCT = 'update';
