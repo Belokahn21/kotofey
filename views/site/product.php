@@ -70,13 +70,18 @@ echo $this->render('modal/product-modal-payment');
             <div class="col col-sm-6">
                 <div class="product-title"><?= $product->name; ?></div>
                 <div class="product-control">
-                    <?php if ($date = ProductOrder::productIsOrder($product->id)): ?>
-                        <div class="product-available red">Под заказ от <?= $date->start; ?> до <?= $date->end; ?> дней</div>
-                    <?php else: ?>
-                        <?php if ($product->vitrine == 1 or $product->count > 0): ?>
-                            <div class="product-available green">В наличии <span><?= ($product->count > 0 ? $product->count . 'шт.' : null); ?></span></div>
+                    <?php if ($product->active == 1): ?>
+                        <?php if ($date = ProductOrder::productIsOrder($product->id)): ?>
+                            <div class="product-available red">Под заказ от <?= $date->start; ?> до <?= $date->end; ?> дней</div>
+                        <?php else: ?>
+                            <?php if ($product->vitrine == 1 or $product->count > 0): ?>
+                                <div class="product-available green">В наличии <span><?= ($product->count > 0 ? $product->count . 'шт.' : null); ?></span></div>
+                            <?php endif; ?>
                         <?php endif; ?>
+                    <?php else: ?>
+                        <div class="product-available red">Нет в наличии</div>
                     <?php endif; ?>
+
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
