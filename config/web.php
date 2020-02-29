@@ -100,6 +100,7 @@ $config = [
 			'enableStrictParsing' => false,
 			'rules' => [
 				'rest/product/create' => 'rest/product/create',
+				'rest/category/three' => 'rest/category/three',
 				'market' => 'yandex/catalog/export',
 				'gii' => 'gii',
 				'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',

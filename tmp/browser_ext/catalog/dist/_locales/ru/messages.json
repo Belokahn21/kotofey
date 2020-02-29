@@ -3,6 +3,14 @@
     "message": "Название",
     "description": "Name of the extension"
   },
+  "form_input_purchase": {
+    "message": "Закуп",
+    "description": "Name of the extension"
+  },
+  "form_input_category": {
+    "message": "Раздел",
+    "description": "Name of the extension"
+  },
   "form_input_price": {
     "message": "Цена",
     "description": "Name of the extension"

@@ -27,7 +27,7 @@ class ProductController extends Controller
         $data = Json::decode($json);
         $product = Product::findOne(['code' => $data['article']]);
 
-        if (!$product) {
+        if ($product) {
             $status = self::ERROR_CODE;
             $response = new \Exception('Данный товар уже существует');
         }
@@ -44,9 +44,9 @@ class ProductController extends Controller
         $product->active = 1;
         $product->vitrine = 1;
         if ($product->validate()) {
-//            if ($product->save()) {
-            $response = "Товар успешно добавлен";
-//            }
+            if ($product->save()) {
+                $response = "Товар успешно добавлен";
+            }
         } else {
             $status = self::ERROR_CODE;
             $response = Debug::modelErrors($product);
