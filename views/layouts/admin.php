@@ -144,12 +144,13 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         </ul>
                     </li>
                     <li>
-                        <div class="dropdownlink"><i class="fas fa-jedi" aria-hidden="true"></i> Seo
+                        <div class="dropdownlink"><i class="fas fa-jedi" aria-hidden="true"></i> Инструменты
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['admin/shortly']) ?>">Короткие ссылки</a> <span class="count"><?= ShortLinks::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['admin/feed']) ?>">Поисковой контент</a></li>
+                            <li><a href="<?= Url::to(['admin/sale-product']) ?>">Акционные товары</a></li>
                         </ul>
                     </li>
                     <li>

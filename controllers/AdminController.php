@@ -39,6 +39,7 @@ use app\models\entity\Vacancy;
 use app\models\entity\Vendor;
 use app\models\entity\VendorGroup;
 use app\models\forms\FeedmakerForm;
+use app\models\forms\SaleProductForm;
 use app\models\helpers\OrderHelper;
 use app\models\helpers\PersonalHelper;
 use app\models\rbac\AuthAssignment;
@@ -1702,5 +1703,45 @@ class AdminController extends Controller
 //		header("Content-Disposition: attachment; filename={$file_name}");
 //
 //		$writer->save('php://output');
+	}
+
+	public function actionSaleProduct()
+	{
+		$model = new SaleProductForm();
+		$sales = InformersValues::find()->where(['informer_id' => '10', 'active' => 1])->all();
+
+		if (\Yii::$app->request->isPost) {
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					$selectedItems = ProductPropertiesValues::find()->where(['value' => $model->sale_id, 'property_id' => 11])->all();
+
+					$products = Product::find()->where(['id' => ArrayHelper::getColumn($selectedItems, 'product_id')])->all();
+					foreach ($products as $product) {
+						$transaction = Yii::$app->db->beginTransaction();
+						$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+						$product->discount_price = 0;
+						if ($product->validate()) {
+							if ($product->update() === false) {
+								$transaction->rollBack();
+								return false;
+							}
+						}
+						if (!ProductPropertiesValues::findOne(['value' => $model->sale_id, 'product_id' => $product->id, 'property_id' => 11])->delete()) {
+							$transaction->rollBack();
+							return false;
+						}
+
+						$transaction->commit();
+					}
+
+					Alert::setSuccessNotify('Товары сняты с акции');
+				}
+			}
+		}
+
+		return $this->render('sale-product', [
+			'model' => $model,
+			'sales' => $sales
+		]);
 	}
 }
