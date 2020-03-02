@@ -1719,7 +1719,7 @@ class AdminController extends Controller
 					foreach ($products as $product) {
 						$transaction = Yii::$app->db->beginTransaction();
 						$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-						$product->discount_price = 0;
+						$product->discount_price = null;
 						if ($product->validate()) {
 							if ($product->update() === false) {
 								$transaction->rollBack();
