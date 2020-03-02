@@ -53,7 +53,6 @@
 }
 
 @media screen and (min-width: 768px) and (max-width: 1024px) {
-
 }
 
 /* mobile */
@@ -150,6 +149,31 @@
   .filter {
     width: 100%;
     display: none;
+  }
+}
+
+/* custom */
+@media screen and (max-width: 600px) {
+  .menu-wrap {
+    align-items: center;
+  }
+  .menu {
+    flex-direction: row;
+  }
+  .sub-categories {
+    &__item {
+      width: 23%;
+    }
+  }
+  .catalog-wrap {
+    width: 100%;
+  }
+  .catalog-list {
+    width: 100%;
+
+    &__item {
+      width: 48%;
+    }
   }
 }
 
