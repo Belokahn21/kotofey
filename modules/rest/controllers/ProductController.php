@@ -57,4 +57,10 @@ class ProductController extends Controller
             'resultText' => $response
         ]);
     }
+
+    public function actionGet($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        return Json::encode(Product::findOne($id));
+    }
 }

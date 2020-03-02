@@ -117,16 +117,16 @@ use app\models\entity\Product;
             <?php foreach ($items as $i => $item): ?>
                 <div class="row orders-items-item">
                     <div class="col-sm-3">
-                        <?= $form->field($item, '[' . $i . ']name')->textInput(); ?>
+                        <?= $form->field($item, '[' . $i . ']name')->textInput(['class' => 'load-product-info__name form-control']); ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($item, '[' . $i . ']count')->textInput(); ?>
+                        <?= $form->field($item, '[' . $i . ']count')->textInput(['class' => 'load-product-info__count form-control']); ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($item, '[' . $i . ']price')->textInput(); ?>
+                        <?= $form->field($item, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
                     </div>
                     <div class="col-sm-2">
-                        <?= $form->field($item, '[' . $i . ']product_id')->textInput(); ?>
+                        <?= $form->field($item, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
                     </div>
                     <div class="col-sm-1">
                         <?= $form->field($item, '[' . $i . ']need_delete')->checkbox(); ?>
@@ -137,20 +137,16 @@ use app\models\entity\Product;
             <?php for ($i = 0; $i < 1; $i++): ?>
                 <div class="row orders-items-item">
                     <div class="col-sm-3">
-                        <?= $form->field($itemModel, '[' . $i . ']name')->textInput(); ?>
+                        <?= $form->field($itemModel, '[' . $i . ']name')->textInput(['class' => 'load-product-info__name form-control']); ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($itemModel, '[' . $i . ']count')->textInput(); ?>
+                        <?= $form->field($itemModel, '[' . $i . ']count')->textInput(['class' => 'load-product-info__count form-control']); ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($itemModel, '[' . $i . ']price')->textInput(); ?>
+                        <?= $form->field($itemModel, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
                     </div>
                     <div class="col-sm-2">
-                        <?= $form->field($itemModel, '[' . $i . ']product_id')->textInput(); ?>
-                    </div>
-                    <div class="col-sm-1">
-                        <?= $form->field($itemModel, '[' . $i . ']need_delete')->checkbox(); ?>
-                        <?= $form->field($itemModel, '[' . $i . ']order_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                        <?= $form->field($itemModel, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
                     </div>
                 </div>
             <?php endfor; ?>
