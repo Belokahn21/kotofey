@@ -1735,6 +1735,7 @@ class AdminController extends Controller
 					}
 
 					Alert::setSuccessNotify('Товары сняты с акции');
+					return $this->refresh();
 				}
 			}
 		}
