@@ -252,6 +252,7 @@ class ConsoleController extends Controller
 
 		if (($handle = fopen(\Yii::getAlias('@app') . "/tmp/sprl_cats.csv", "r")) !== false) {
 			while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+				echo $data[1] . PHP_EOL;
 				$feed = $this->getFeed($data[1]);
 
 				// hills
@@ -263,9 +264,9 @@ class ConsoleController extends Controller
 					$product->feed = $feed;
 
 					if ($product->validate()) {
-						if ($product->update()) {
-							echo "(" . $product->code . ")" . $product->name . "(" . $product->feed . ")" . PHP_EOL;
-						}
+//						if ($product->update()) {
+						echo "(" . $product->code . ")" . $product->name . "(" . $product->feed . ")" . PHP_EOL;
+//						}
 					}
 				}
 			}
