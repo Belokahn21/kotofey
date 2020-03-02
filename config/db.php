@@ -1,7 +1,7 @@
 <?php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=kotofey',
+    'dsn' => 'mysql:host=localhost;dbname=kotofey_store',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
