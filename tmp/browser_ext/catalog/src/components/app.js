@@ -33,8 +33,7 @@ class App extends Component {
 
                 <label>
                     __MSG_form_input_category__
-                    <select name="category_id">
-                        {this.props.result.category}
+                    <select name="category_id" className="category_three">
                     </select>
                 </label>
 

@@ -4,23 +4,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     let article = document.getElementsByTagName('strong')[2].textContent;
     let weight = document.getElementsByTagName('strong')[3].textContent;
     let description = document.querySelector('.desc').textContent;
-    let category;
-
-    let url = "http://local.kotofey.store/rest/category/three/";
-    // let url = "https://kotofey.store/rest/product/create/";
-    fetch(url, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/html'
-        },
-    }).then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        category = data;
-    });
-
-    console.log("asddasasddas");
 
     weight = weight.split(" ");
 
@@ -43,7 +26,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     element.weight = weight;
     element.description = description;
     element.count = 0;
-    element.category = category;
 
     sendResponse({element: element});
 });

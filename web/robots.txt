@@ -21,6 +21,7 @@ Disallow: /billing/*
 Disallow: /web/
 Disallow: /web/*
 Disallow: /*?*
+Disallow: /rest/*
 
 Sitemap: https://kotofey.store/sitemap.xml
 

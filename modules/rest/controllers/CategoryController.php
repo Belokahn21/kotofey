@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return Json::encode([
-            'html' => (new Category())->categoryTree()
+            (new Category())->categoryTree()
         ]);
     }
 }

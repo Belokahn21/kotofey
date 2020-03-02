@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App.js";
+import CategoryOption from "./components/CategoryOption.js";
 
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -11,6 +12,18 @@ document.addEventListener('DOMContentLoaded', function () {
     function render(res) {
         ReactDOM.render(<App result={res.element}/>, document.getElementById("root"));
         localizeHtmlPage();
+
+        fetch('http://local.kotofey.store/rest/category/three/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            ReactDOM.render(<CategoryOption result={data}/>, document.querySelector('.category_three'));
+        });
 
         document.querySelector('.form-control-button').addEventListener('click', function (event) {
             event.preventDefault();
