@@ -52,6 +52,7 @@ input[type='text'], input[type='password'], select, textarea {
   display: flex;
   flex-direction: row;
   width: 100%;
+  flex-wrap: wrap;
 
   &__item {
     width: 25%;
