@@ -2,8 +2,8 @@
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=kotofey_store',
-    'username' => 'root',
-    'password' => '',
+    'username' => 'kotofey',
+    'password' => '123qweR%',
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
