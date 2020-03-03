@@ -5,10 +5,8 @@ namespace app\models\entity;
 
 use app\models\entity\user\Billing;
 use app\models\helpers\DiscountHelper;
-use app\models\helpers\ManagerHelper;
 use app\models\helpers\OrderHelper;
-use app\models\services\ReferalService;
-use app\models\tool\Debug;
+use app\models\services\BonusByBuyService;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -100,17 +98,20 @@ class Order extends ActiveRecord
 		if ($this->is_update) {
 			// заказ оплачен, не получили бонусов и не отменён
 			if ($this->is_paid == 1 && $this->is_bonus == 0 && $this->promo_code == 0 && $this->is_cancel == 0 && !empty($this->user_id)) {
-				if ($discount = Discount::findByUserId($this->user_id)) {
-					$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
-					if ($discount->validate()) {
-						$discount->update();
-					}
-				} else {
-					$discount = new Discount();
-					$discount->user_id = $this->user_id;
-					$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
-					if ($discount->validate()) {
-						$discount->save();
+
+				if (BonusByBuyService::isActive()) {
+					if ($discount = Discount::findByUserId($this->user_id)) {
+						$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
+						if ($discount->validate()) {
+							$discount->update();
+						}
+					} else {
+						$discount = new Discount();
+						$discount->user_id = $this->user_id;
+						$discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
+						if ($discount->validate()) {
+							$discount->save();
+						}
 					}
 				}
 

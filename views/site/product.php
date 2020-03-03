@@ -13,6 +13,7 @@ use app\models\entity\Favorite;
 use yii\helpers\Json;
 use app\models\entity\ProductOrder;
 use app\models\entity\Product;
+use app\models\services\BonusByBuyService;
 
 /* @var $properties ProductPropertiesValues[]
  * @var \yii\web\View $this
@@ -22,15 +23,17 @@ use app\models\entity\Product;
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
 if ($category) {
-    foreach ($category->undersections() as $parents) {
-        $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
-    }
+	foreach ($category->undersections() as $parents) {
+		$this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+	}
 }
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product->detail]];
 
 $this->title = Title::showTitle($product->name);
 
-echo $this->render('modal/product-modal-bonus');
+if (BonusByBuyService::isActive()):
+	echo $this->render('modal/product-modal-bonus');
+endif;
 echo $this->render('modal/product-modal-delivery');
 echo $this->render('modal/product-modal-payment');
 ?>
@@ -39,48 +42,48 @@ echo $this->render('modal/product-modal-payment');
         <div class="row">
             <div class="col col-sm-4">
                 <div class="product-detail-image-wrap">
-                    <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+					<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                         <a href="/upload/<?= $product->image; ?>" data-lightbox="roadtrip" class="product-detail-image--link">
                             <img class="product-detail-image" src="/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                         </a>
-                    <?php else: ?>
+					<?php else: ?>
                         <img class="product-detail-image" src="/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-                    <?php endif; ?>
+					<?php endif; ?>
 
-                    <?php if (!empty($product->images)): ?>
-                        <?php foreach (Json::decode($product->images) as $image_path): ?>
+					<?php if (!empty($product->images)): ?>
+						<?php foreach (Json::decode($product->images) as $image_path): ?>
                             <a href="<?= $image_path; ?>" data-lightbox="roadtrip" class="product-detail-image--link">
                                 <img class="product-detail-image" src="<?= $image_path; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                             </a>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
+						<?php endforeach; ?>
+					<?php endif; ?>
 
                 </div>
 
                 <div class="social-share-title">Поделиться</div>
-                <?= \ymaker\social\share\widgets\SocialShare::widget([
-                    'configurator' => 'socialShare',
-                    'url' => \yii\helpers\Url::to('https://kotofey.store' . $product->detail, true),
-                    'title' => $product->name,
-                    'description' => $product->description,
-                    'imageUrl' => \yii\helpers\Url::to('https://kotofey.store/upload/' . $product->image, true),
-                ]); ?>
+				<?= \ymaker\social\share\widgets\SocialShare::widget([
+					'configurator' => 'socialShare',
+					'url' => \yii\helpers\Url::to('https://kotofey.store' . $product->detail, true),
+					'title' => $product->name,
+					'description' => $product->description,
+					'imageUrl' => \yii\helpers\Url::to('https://kotofey.store/upload/' . $product->image, true),
+				]); ?>
             </div>
             <div class="w-100 hide"></div>
             <div class="col col-sm-6">
                 <div class="product-title"><?= $product->name; ?></div>
                 <div class="product-control">
-                    <?php if ($product->active == 1): ?>
-                        <?php if ($date = ProductOrder::productIsOrder($product->id)): ?>
+					<?php if ($product->active == 1): ?>
+						<?php if ($date = ProductOrder::productIsOrder($product->id)): ?>
                             <div class="product-available red">Под заказ от <?= $date->start; ?> до <?= $date->end; ?> дней</div>
-                        <?php else: ?>
-                            <?php if ($product->vitrine == 1 or $product->count > 0): ?>
+						<?php else: ?>
+							<?php if ($product->vitrine == 1 or $product->count > 0): ?>
                                 <div class="product-available green">В наличии <span><?= ($product->count > 0 ? $product->count . 'шт.' : null); ?></span></div>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    <?php else: ?>
+							<?php endif; ?>
+						<?php endif; ?>
+					<?php else: ?>
                         <div class="product-available red">Нет в наличии</div>
-                    <?php endif; ?>
+					<?php endif; ?>
 
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
@@ -97,9 +100,9 @@ echo $this->render('modal/product-modal-payment');
                     <!--                            <div class="product-share" data-toggle="tooltip" data-placement="bottom" title="Tooltip on bottom"><i class="fas fa-share-alt"></i>Поделиться</div>-->
                 </div>
                 <div class="product-description">
-                    <?php if ($product->description): ?>
-                        <?= $product->description; ?>
-                    <?php endif; ?>
+					<?php if ($product->description): ?>
+						<?= $product->description; ?>
+					<?php endif; ?>
                 </div>
             </div>
             <div class="col-2">
@@ -109,9 +112,11 @@ echo $this->render('modal/product-modal-payment');
                     </div>
 
 
-                    <div class="product-discount-wrap">
-                        получаете <span class="product-discount__value"><?= DiscountHelper::calcBonus($product->price); ?></span> бонусов
-                    </div>
+					<?php if (BonusByBuyService::isActive()): ?>
+                        <div class="product-discount-wrap">
+                            получаете <span class="product-discount__value"><?= DiscountHelper::calcBonus($product->price); ?></span> бонусов
+                        </div>
+					<?php endif; ?>
 
                     <div onclick="ym(55089223, 'reachGoal', 'basket'); return true;" class="product-button product-add-basket <?= (!Basket::getInstance()->exist($product->id)) ? '' : 'hide'; ?>" data-product="<?= $product->id; ?>">
                         В корзину
@@ -134,12 +139,12 @@ echo $this->render('modal/product-modal-payment');
                             </div>
                         </div>
                     </div>
-                    <?= FastBuyWidget::widget([
-                        'product' => $product
-                    ]); ?>
+					<?= FastBuyWidget::widget([
+						'product' => $product
+					]); ?>
 
                     <hr/>
-                    <?php /* WeightBuyWidget::widget([
+					<?php /* WeightBuyWidget::widget([
 						'product_id' => $product->id
 					]); */ ?>
 
@@ -151,12 +156,14 @@ echo $this->render('modal/product-modal-payment');
                             <div class="product-pluses__title">Бесплатная доставка</div>
                         </li>
 
-                        <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-sale">
-                            <div class="product-pluses__icon">
-                                <i class="fas fa-piggy-bank"></i>
-                            </div>
-                            <div class="product-pluses__title">Скидки на покупки</div>
-                        </li>
+						<?php if (BonusByBuyService::isActive()): ?>
+                            <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-sale">
+                                <div class="product-pluses__icon">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div class="product-pluses__title">Скидки на покупки</div>
+                            </li>
+						<?php endif; ?>
 
                         <li class="product-pluses__item" data-toggle="modal" data-target="#modal-product-detail-payment">
                             <div class="product-pluses__icon"><i class="far fa-credit-card"></i>
@@ -171,26 +178,26 @@ echo $this->render('modal/product-modal-payment');
     <div class="product-attributes-wrap">
         <div class="container">
             <div class="product-attributes__title">Характеристики товара</div>
-            <?php if (!empty($product->article)): ?>
+			<?php if (!empty($product->article)): ?>
                 <div class="row product-attributes__item">
                     <div class="col-4 product-attributes__key"><?= (new Product())->getAttributeLabel('article'); ?></div>
                     <div class="col product-attributes__value"><?= $product->article; ?></div>
                 </div>
-            <?php endif; ?>
-            <?php if ($properties): ?>
-                <?php foreach ($properties as $property): ?>
+			<?php endif; ?>
+			<?php if ($properties): ?>
+				<?php foreach ($properties as $property): ?>
                     <div class="row product-attributes__item">
                         <div class="col-4 product-attributes__key"><?= $property->property->name; ?></div>
                         <div class="col product-attributes__value"><?= $property->finalValue; ?></div>
                     </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
+				<?php endforeach; ?>
+			<?php endif; ?>
 
         </div>
         <div class="container">
-            <?= ProductReviewsWidget::widget([
-                'product' => $product
-            ]); ?>
+			<?= ProductReviewsWidget::widget([
+				'product' => $product
+			]); ?>
         </div>
     </div>
 

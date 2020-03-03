@@ -1,5 +1,6 @@
 <?php
 
+use app\models\services\BonusByBuyService;
 use yii\helpers\ArrayHelper;
 use app\models\entity\user\Billing;
 
@@ -17,10 +18,12 @@ use app\models\entity\user\Billing;
 
 ?>
 
-<?= $this->render('../bonus', [
-	'form' => $form,
-	'DiscountModel' => $discount_model
-]); ?>
+<?php if (BonusByBuyService::isActive()): ?>
+	<?= $this->render('../bonus', [
+		'form' => $form,
+		'DiscountModel' => $discount_model
+	]); ?>
+<?php endif; ?>
 
 <div class="checkout-block">
     <div class="checkout-block__title">

@@ -15,5 +15,6 @@ return [
 	],
 	'files' => [
 		'extensions' => 'png, jpeg, jpg, svg, bmp, webp',
-	]
+	],
+	'bonus_by_buy' => false
 ];

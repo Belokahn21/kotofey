@@ -252,9 +252,7 @@ class ConsoleController extends Controller
 
 		if (($handle = fopen(\Yii::getAlias('@app') . "/tmp/sprl_cats.csv", "r")) !== false) {
 			while (($data = fgetcsv($handle, 1000, ",")) !== false) {
-				echo $data[1] . PHP_EOL;
 				$feed = $this->getFeed($data[1]);
-
 				// hills
 				$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
 				$products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id'), 'code' => $data[0]])->andWhere(['like', 'feed', 'роял'])->all();
@@ -275,7 +273,7 @@ class ConsoleController extends Controller
 
 	public function getFeed($related_key)
 	{
-		if (($handle = fopen(\Yii::getAlias('@app') . "/tmp/sprl_cats.csv", "r")) !== false) {
+		if (($handle = fopen(\Yii::getAlias('@app') . "/tmp/common_hills.csv", "r")) !== false) {
 			while (($data = fgetcsv($handle, 1000, ",")) !== false) {
 				if ($data[0] == $related_key) {
 					return implode([$data[6], $data[8], $data[9], $data[10], $data[11], $data[12], $data[13], $data[14], $data[15], $data[16], $data[17], $data[18], $data[19], $data[20], $data[21], $data[22], $data[23], $data[24]], ' ');

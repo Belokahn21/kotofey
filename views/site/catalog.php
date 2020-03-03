@@ -17,6 +17,7 @@ use app\models\entity\ProductPropertiesValues;
 use app\models\helpers\DiscountHelper;
 use app\models\helpers\ProductHelper;
 use app\models\tool\Price;
+use app\models\services\BonusByBuyService;
 
 
 $this->title = Title::showTitle("Зоотовары");
@@ -95,7 +96,9 @@ if ($category) {
                     <div class="catalog-list__group-price">
                         <div class="catalog-list__price">
                             <div class="value"><?= Price::format(ProductHelper::getResultPrice($product)); ?> <?= Currency::getInstance()->show(); ?></div>
-                            <div class="bonus"><?= DiscountHelper::calcBonus($product->price); ?> бонуса</div>
+							<?php if (BonusByBuyService::isActive()): ?>
+                                <div class="bonus"><?= DiscountHelper::calcBonus($product->price); ?> бонуса</div>
+							<?php endif; ?>
                         </div>
 
                         <div class="catalog-list__group-cart">

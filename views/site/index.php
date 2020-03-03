@@ -9,13 +9,14 @@ use app\models\tool\seo\Title;
 use yii\helpers\Url;
 use app\widgets\slider\SliderWidget;
 use app\widgets\informers_slider\InformerSliderWidget;
+use app\models\services\BonusByBuyService;
 
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>
 
 <?= SliderWidget::widget([
-    'slider_id' => 1,
-    'use_carousel' => true
+	'slider_id' => 1,
+	'use_carousel' => true
 ]) ?>
 <?= InformerSliderWidget::widget(); ?>
 
@@ -33,7 +34,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     </li>
     <li class="advantages-item">
         <div class="advantage-title">Получаете заказ</div>
-        <div class="advantage-description">Получаете бонусы</div>
+        <div class="advantage-description"><?= (BonusByBuyService::isActive() ? "Бонусы за покупку": "И удовольствие"); ?></div>
         <i class="fas fa-gifts"></i>
     </li>
 </ul>
@@ -41,7 +42,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
 <div class="index-news__wrap">
     <h2 class="homepage-providers__title">Интересные новости</h2>
     <ul class="index-news">
-        <?php foreach ($news as $new): ?>
+		<?php foreach ($news as $new): ?>
             <li class="index-news__item">
                 <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
                     <img src="/upload/<?= $new->preview_image; ?>" class="index-news__image">
@@ -50,10 +51,10 @@ $this->title = Title::showTitle("Зоотовары для животных в �
                     <h3 class="index-news__title"><?= $new->title; ?></h3>
                 </a>
                 <div class="index-news__preview">
-                    <?= $new->preview; ?>
+					<?= $new->preview; ?>
                 </div>
             </li>
-        <?php endforeach; ?>
+		<?php endforeach; ?>
     </ul>
     <div class="index-news__control">
         <a class="index-news__control-link" href="<?= Url::to(['site/news']); ?>">Читать больше</a>
