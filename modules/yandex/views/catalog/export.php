@@ -35,7 +35,7 @@ use app\models\helpers\ProductHelper;
                     <price><?= ProductHelper::getResultPrice($offer); ?></price>
                     <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
-                    <picture><?= $offer->image; ?></picture>
+                    <picture>https://kotofey.store/upload/<?= $offer->image; ?></picture>
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                     <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
                     <pickup>false</pickup>
