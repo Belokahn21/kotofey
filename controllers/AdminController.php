@@ -343,7 +343,7 @@ class AdminController extends Controller
 									$item->delete();
 									continue;
 								}
-
+								$item->order_id = $order->id;
 								if ($item->validate()) {
 									if ($item->save() !== true) {
 										Alert::setErrorNotify('Заказ не обновлён. Ошибка при сохранении товаров');
