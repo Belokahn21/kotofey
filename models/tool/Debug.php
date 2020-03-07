@@ -24,7 +24,7 @@ class Debug
 	public static function printFile($target = null, $clear = false, $no_wrap = false)
 	{
 
-		$filePath = $_SERVER['DOCUMENT_ROOT'] . "/web/debug.html";
+		$filePath = $_SERVER['DOCUMENT_ROOT'] . "/web/debug.txt";
 
 		if (!empty($target)) {
 			$info = null;

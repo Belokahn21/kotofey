@@ -32,6 +32,7 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 *dump.html
+*dump.txt
 /debug.php
 /web/index.php
 /backup
