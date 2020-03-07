@@ -12,7 +12,8 @@ class VkController extends Controller
     public function actionIndex()
     {
         try {
-            $request = json_decode(file_get_contents('php://input'), true);
+//            $request = json_decode(file_get_contents('php://input'), true);
+            $request = $_REQUEST;
             Debug::printFile($request);
         } catch (\Exception $exception) {
         }
