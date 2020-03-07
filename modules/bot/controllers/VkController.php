@@ -13,7 +13,7 @@ class VkController extends Controller
     {
         try {
 //            $request = json_decode(file_get_contents('php://input'), true);
-            $request = $_REQUEST;
+            $request = $_POST;
             Debug::printFile($request);
         } catch (\Exception $exception) {
         }
