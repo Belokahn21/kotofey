@@ -12,7 +12,7 @@ class VkController extends Controller
     public function actionIndex()
     {
         $request = file_get_contents('php://input');
-        Debug::printFile($request, true, true);
+        Debug::printFile($request);
         return "1f688e0f";
     }
 }
