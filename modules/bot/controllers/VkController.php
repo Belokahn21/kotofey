@@ -12,7 +12,7 @@ class VkController extends Controller
     public function actionIndex()
     {
         try {
-            $request = file_get_contents('php://input');
+            $request = json_decode(file_get_contents('php://input'), true);
             Debug::printFile($request);
         } catch (\Exception $exception) {
         }
