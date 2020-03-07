@@ -8,6 +8,6 @@ class VkController extends Controller
 {
     public function actionIndex()
     {
-        echo "1f688e0f";
+        return "1f688e0f";
     }
 }
