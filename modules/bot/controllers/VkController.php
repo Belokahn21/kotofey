@@ -18,6 +18,7 @@ class VkController extends Controller
         } catch (\Exception $exception) {
         }
 
+        Debug::printFile("1f688e0f");
         return "1f688e0f";
     }
 }
