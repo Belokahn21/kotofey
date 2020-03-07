@@ -99,6 +99,7 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                'bot/vk/index' => 'bot/vk/index',
                 'rest/product/create' => 'rest/product/create',
                 'rest/product/get/<id:(\d+)>' => 'rest/product/get',
                 'rest/category/three' => 'rest/category/three',
@@ -122,6 +123,9 @@ $config = [
         ],
         'rest' => [
             'class' => 'app\modules\rest\Module',
+        ],
+        'bot' => [
+            'class' => 'app\modules\bot\Module',
         ],
     ],
     'params' => $params,
