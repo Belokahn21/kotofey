@@ -7,10 +7,9 @@ use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
-use yii\web\UploadedFile;
 
 /**
- * Pages model
+ * News model
  *
  * @property integer $id
  * @property string $title
@@ -32,11 +31,6 @@ class News extends ActiveRecord
 {
     const SCENARIO_INSERT = 'insert';
     const SCENARIO_UPDATE = 'update';
-
-    public static function tableName()
-    {
-        return "pages";
-    }
 
     public function behaviors()
     {
@@ -86,6 +80,7 @@ class News extends ActiveRecord
     public function attributeLabels()
     {
         return [
+            "is_active" => 'Активность',
             "title" => 'Заголовок',
             "preview" => 'Краткое описание',
             "detail" => 'Текст страницы',

@@ -18,46 +18,49 @@ use mihaildev\ckeditor\CKEditor;
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="form-element">
-			<?= $form->field($model, 'title'); ?>
+            <?= $form->field($model, 'is_active')->checkbox(); ?>
         </div>
         <div class="form-element">
-			<?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?>
+            <?= $form->field($model, 'title'); ?>
+        </div>
+        <div class="form-element">
+            <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
         <div class="form-element">
-			<?= $form->field($model, 'seo_keywords')->textInput(); ?>
+            <?= $form->field($model, 'seo_keywords')->textInput(); ?>
         </div>
         <div class="form-element">
-			<?= $form->field($model, 'seo_description')->textarea(); ?>
+            <?= $form->field($model, 'seo_description')->textarea(); ?>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-preview" role="tabpanel" aria-labelledby="nav-preview-tab">
-		<?php if (!empty($model->preview_image)): ?>
+        <?php if (!empty($model->preview_image)): ?>
             <div>
                 <img src="/upload/<?= $model->preview_image; ?>">
             </div>
-		<?php endif; ?>
-		<?= $form->field($model, 'preview_image')->fileInput(); ?>
-		<?= $form->field($model, 'preview')->widget(CKEditor::className(), [
-			'editorOptions' => [
-				'preset' => 'full',
-				'inline' => false,
-			],
-		]); ?>
+        <?php endif; ?>
+        <?= $form->field($model, 'preview_image')->fileInput(); ?>
+        <?= $form->field($model, 'preview')->widget(CKEditor::className(), [
+            'editorOptions' => [
+                'preset' => 'full',
+                'inline' => false,
+            ],
+        ]); ?>
     </div>
     <div class="tab-pane fade" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">
-		<?php if (!empty($model->detail_image)): ?>
+        <?php if (!empty($model->detail_image)): ?>
             <div>
                 <img src="/upload/<?= $model->detail_image; ?>">
             </div>
-		<?php endif; ?>
-		<?= $form->field($model, 'detail_image')->fileInput(); ?>
-		<?= $form->field($model, 'detail')->widget(CKEditor::className(), [
-			'editorOptions' => [
-				'preset' => 'full',
-				'inline' => false,
-			],
-		]); ?>
+        <?php endif; ?>
+        <?= $form->field($model, 'detail_image')->fileInput(); ?>
+        <?= $form->field($model, 'detail')->widget(CKEditor::className(), [
+            'editorOptions' => [
+                'preset' => 'full',
+                'inline' => false,
+            ],
+        ]); ?>
     </div>
 </div>

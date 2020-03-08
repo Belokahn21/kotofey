@@ -11,7 +11,7 @@ class NewsSearchForm extends News
 
     public static function tableName()
     {
-        return "pages";
+        return "news";
     }
 
     public function rules()

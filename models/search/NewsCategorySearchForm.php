@@ -11,7 +11,7 @@ class NewsCategorySearchForm extends NewsCategory
 
     public static function tableName()
     {
-        return "pages_category";
+        return "news_category";
     }
 
     public function rules()

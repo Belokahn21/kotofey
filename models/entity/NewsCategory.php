@@ -7,7 +7,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
 /**
- * PagesCategory model
+ * NewsCategory model
  *
  * @property integer $id
  * @property string $name
@@ -38,11 +38,6 @@ class NewsCategory extends ActiveRecord
 
             [['parent'], 'integer'],
         ];
-    }
-
-    public static function tableName()
-    {
-        return "pages_category";
     }
 
     public function attributeLabels()
