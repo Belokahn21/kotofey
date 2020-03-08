@@ -24,9 +24,9 @@ class VkController extends Controller
 
         if ($request->isMessage()) {
             $message = new Message();
-            $message->send("hello world", [
-                'user_id' => \Yii::$app->params['vk']['adminVkontakteId']
-            ]);
+//            $message->send("hello world", [
+//                'user_id' => \Yii::$app->params['vk']['adminVkontakteId']
+//            ]);
         }
 
         return false;
