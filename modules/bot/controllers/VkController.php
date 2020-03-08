@@ -15,7 +15,6 @@ class VkController extends Controller
     public function actionIndex()
     {
         $request = Json::decode(file_get_contents('php://input'));
-        Debug::printFile($request, true, true);
 
         $request = new BotRequestService($request);
 

@@ -3,6 +3,8 @@
 namespace app\modules\bot\models\service;
 
 
+use app\models\tool\Debug;
+
 class BotRequestService
 {
     private $_request;
@@ -12,7 +14,7 @@ class BotRequestService
 
     public function __construct($request)
     {
-        if (!is_object($request)) {
+        if (!is_array($request)) {
             throw new \Exception('Переменная запроса должна быть объектом');
         }
         $this->_request = $request;
@@ -20,11 +22,11 @@ class BotRequestService
 
     public function isConfirm()
     {
-        return $this->_request->type === self::TYPE_CONFIRM;
+        return $this->_request['type'] === self::TYPE_CONFIRM;
     }
 
     public function isMessage()
     {
-        return $this->_request->type === self::TYPE_MESSAGE_NEW;
+        return $this->_request['type'] === self::TYPE_MESSAGE_NEW;
     }
 }
