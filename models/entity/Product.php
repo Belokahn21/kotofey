@@ -389,4 +389,9 @@ class Product extends \yii\db\ActiveRecord
 
         return $category;
     }
+
+    public static function findOneByCode($code)
+    {
+        return static::findOne(['code' => $code]);
+    }
 }
