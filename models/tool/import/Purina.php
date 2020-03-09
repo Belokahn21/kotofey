@@ -97,7 +97,7 @@ class Purina
             $product->active = 1;
             $product->base_price = $price;
             $product->purchase = $product->base_price;
-            $product->price = $product->purchase + (ceil($product->purchase * 0.25));
+            $product->price = $product->purchase + (ceil($product->purchase * 0.15));
 
             if ($product->validate()) {
                 if ($product->update()) {
