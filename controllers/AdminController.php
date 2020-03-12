@@ -333,6 +333,7 @@ class AdminController extends Controller
 						}
 
 						if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
+
 							foreach ($items as $item) {
 
 								if (empty($item->product_id)) {
