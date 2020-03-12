@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
         document.querySelector('.form-control-button').addEventListener('click', function (event) {
             event.preventDefault();
 
+            res.element.category_id = document.querySelector('.category_three').value;
+
             let url = "http://local.kotofey.store/rest/product/create/";
             // let url = "https://kotofey.store/rest/product/create/";
             fetch(url, {
@@ -40,6 +42,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }).then(function (response) {
                 return response.json();
             }).then(function (data) {
+                console.log(data);
                 document.querySelector('body').innerHTML = data;
             });
         });

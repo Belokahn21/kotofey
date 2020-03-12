@@ -22,6 +22,8 @@ class ProductController extends Controller
     {
         $status = self::SUCCESS_CODE;
         $response = null;
+        $tempImageName = null;
+        $tempPathInfo = null;
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $json = file_get_contents('php://input');
         $data = Json::decode($json);
@@ -32,9 +34,18 @@ class ProductController extends Controller
             $response = new \Exception('Данный товар уже существует');
         }
 
+        if (!empty($data['imageUrl'])) {
+            $tempPathInfo = pathinfo($data['imageUrl']);
+            if ($tempPathInfo) {
+                $tempImageName = substr(md5(rand()), 0, 10);
+                copy($data['imageUrl'], \Yii::getAlias('@app/web/upload/' . $tempImageName . '.' . $tempPathInfo['extension']));
+            }
+        }
 
-        $product = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
+
+        $product = new Product(['scenario' => Product::SCENARIO_CREATE_EXT_PRODUCT]);
         $product->name = $data['name'];
+        $product->category_id = $data['category_id'];
         $product->description = $data['description'];
         $product->base_price = $data['base_price'];
         $product->purchase = $data['purchase'];
@@ -44,10 +55,19 @@ class ProductController extends Controller
         $product->active = 1;
         $product->vitrine = 1;
         if ($product->validate()) {
-            if ($product->save()) {
+
+            if ($tempImageName) {
+                $product->image = $tempImageName . '.' . $tempPathInfo['extension'];
+            }
+
+            if ($product->save(false)) {
                 $response = "Товар успешно добавлен";
             }
         } else {
+            try {
+                unlink(\Yii::getAlias('@app/web/upload/' . $tempImageName . '.' . $tempPathInfo['extension']));
+            } catch (\Exception $exception) {
+            }
             $status = self::ERROR_CODE;
             $response = Debug::modelErrors($product);
         }

@@ -4,6 +4,12 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     let article = document.getElementsByTagName('strong')[2].textContent;
     let weight = document.getElementsByTagName('strong')[3].textContent;
     let description = document.querySelector('.desc').textContent;
+    let imageUrl = document.querySelector('.img-polaroid').getAttribute('src');
+    let fullImageUrl = null;
+
+    if (imageUrl !== undefined) {
+        fullImageUrl = location.protocol + '//' + location.host + imageUrl;
+    }
 
     weight = weight.split(" ");
 
@@ -26,6 +32,8 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     element.weight = weight;
     element.description = description;
     element.count = 0;
+    element.imageUrl = fullImageUrl;
+    console.log(fullImageUrl);
 
     sendResponse({element: element});
 });
