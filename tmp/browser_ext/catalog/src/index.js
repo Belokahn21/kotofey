@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ReactDOM.render(<App result={res.element}/>, document.getElementById("root"));
         localizeHtmlPage();
 
-        fetch('http://local.kotofey.store/rest/category/three/', {
+        fetch('http://kotofey.store/rest/category/three/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
             res.element.category_id = document.querySelector('.category_three').value;
 
-            let url = "http://local.kotofey.store/rest/product/create/";
-            // let url = "https://kotofey.store/rest/product/create/";
+            // let url = "http://local.kotofey.store/rest/product/create/";
+            let url = "https://kotofey.store/rest/product/create/";
             fetch(url, {
                 method: 'POST',
                 headers: {

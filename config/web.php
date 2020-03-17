@@ -127,6 +127,9 @@ $config = [
         'bot' => [
             'class' => 'app\modules\bot\Module',
         ],
+		'catalog' => [
+			'class' => 'app\modules\catalog\Module',
+		],
     ],
     'params' => $params,
 ];
