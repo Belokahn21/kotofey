@@ -288,7 +288,7 @@ $this->beginPage() ?>
     </ul>
 </div>
 
-<?= CookieWidget::widget(); ?>
+<?php //CookieWidget::widget(); ?>
 
 <?php $this->endBody(); ?>
 </body>
