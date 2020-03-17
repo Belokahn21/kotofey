@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         ReactDOM.render(<App result={res.element}/>, document.getElementById("root"));
         localizeHtmlPage();
 
-        fetch('http://kotofey.store/rest/category/three/', {
+        fetch('https://kotofey.store/rest/category/three/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
