@@ -19,9 +19,7 @@
                         <div class="search-info__item-count">Количество</div>
                         <div class="search-info__item-ip">IP</div>
                     </li>
-					<?php $count_find_by_one_ip = array(); ?>
 					<?php foreach ($last_search as $item): ?>
-						<?php $count_find_by_one_ip[$item->ip][] = $item->ip; ?>
                         <li class="search-info__item">
                             <div class="search-info__item-date"><?= date('d.m.Y', $item->created_at); ?></div>
                             <div class="search-info__item-user">
@@ -31,7 +29,7 @@
                             </div>
                             <div class="search-info__item-query"><?= $item->text; ?></div>
                             <div class="search-info__item-count"><?= $item->count_find; ?></div>
-                            <div class="search-info__item-ip"><?= $item->ip; ?> (<?= count($count_find_by_one_ip[$item->ip]); ?>)</div>
+                            <div class="search-info__item-ip"><?= $item->ip; ?></div>
                         </li>
 					<?php endforeach; ?>
                 </ul>
