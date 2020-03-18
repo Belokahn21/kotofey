@@ -341,7 +341,7 @@ class ConsoleController extends Controller
 		$products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
 		foreach ($products as $product) {
 			$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-			$product->active = 0;
+			$product->active = 1;
 			if ($product->validate()) {
 				if ($product->update()) {
 
