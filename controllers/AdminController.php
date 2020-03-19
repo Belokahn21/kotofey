@@ -1305,7 +1305,7 @@ class AdminController extends Controller
 		if (Yii::$app->request->get('action') == 'delete') {
 			if (SlidersImages::findOne(Yii::$app->request->get('id'))->delete()) {
 				Alert::setSuccessNotify('Изображение удалено');
-				return $this->redirect('admin/sliderimages');
+				return $this->redirect(['admin/sliderimages']);
 			}
 		}
 
