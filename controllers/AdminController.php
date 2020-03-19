@@ -1300,10 +1300,15 @@ class AdminController extends Controller
 		]);
 	}
 
-	public
-	function actionSliderimages(
-		$id = null
-	) {
+	public function actionSliderimages($id = null) {
+
+		if (Yii::$app->request->get('action') == 'delete') {
+			if (SlidersImages::findOne(Yii::$app->request->get('id'))->delete()) {
+				Alert::setSuccessNotify('Изображение удалено');
+				return $this->redirect('admin/sliderimages');
+			}
+		}
+
 		if ($id) {
 			$model = SlidersImages::findOne($id);
 			if (Yii::$app->request->isPost) {
@@ -1694,16 +1699,16 @@ class AdminController extends Controller
 
 		// save file
 		$writer = new Xlsx($spreadsheet);
-		$writer->save("$file_name");
+//		$writer->save("$file_name");
 
-//		header("Expires: Mon, 1 Apr 1974 05:00:00 GMT");
-//		header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
-//		header("Cache-Control: no-cache, must-revalidate");
-//		header("Pragma: no-cache");
-//		header("Content-type: application/vnd.ms-excel");
-//		header("Content-Disposition: attachment; filename={$file_name}");
+		header("Expires: Mon, 1 Apr 1974 05:00:00 GMT");
+		header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+		header("Cache-Control: no-cache, must-revalidate");
+		header("Pragma: no-cache");
+		header("Content-type: application/vnd.ms-excel");
+		header("Content-Disposition: attachment; filename={$file_name}");
 //
-//		$writer->save('php://output');
+		$writer->save('php://output');
 	}
 
 	public function actionSaleProduct()
