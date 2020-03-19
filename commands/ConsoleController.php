@@ -337,6 +337,19 @@ class ConsoleController extends Controller
 		}
 
 
+		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 21])->all();
+		$products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
+		foreach ($products as $product) {
+			$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+			$product->active = 0;
+			if ($product->validate()) {
+				if ($product->update()) {
+
+				}
+			}
+		}
+
+
 		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 2])->all();
 		$products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')])->all();
 		foreach ($products as $product) {
