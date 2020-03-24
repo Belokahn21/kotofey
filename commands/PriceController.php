@@ -15,7 +15,7 @@ class PriceController extends Controller
         switch ($vendor) {
             case 1:
                 $royal = new RoyalCanin();
-                $royal->setIsUpdateVendor(true);
+//                $royal->setIsUpdateVendor(true);
                 $royal->update();
                 break;
             case 2:

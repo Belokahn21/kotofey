@@ -90,7 +90,7 @@ class RoyalCanin
 
 	private function getPricePath()
 	{
-		return \Yii::getAlias('@app') . "/tmp/royal_2020.csv";
+		return \Yii::getAlias('@app') . "/tmp/royal_23_03_2020.csv";
 	}
 
 	private function calcSelfDiscount($weight)
