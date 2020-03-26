@@ -31,14 +31,9 @@ class PasswordRestore extends Model
 		$model->user_id = $user->id;
 		$model->setKey();
 
-		if (\Yii::$app->request->isPost) {
-			if ($model->load(\Yii::$app->request->post())) {
-				if ($model->validate()) {
-					if ($model->save()) {
-						exit();
-						return $model->sendNotifyMessage();
-					}
-				}
+		if ($model->validate()) {
+			if ($model->save()) {
+				return $model->sendNotifyMessage();
 			}
 		}
 

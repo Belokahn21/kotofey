@@ -1135,7 +1135,6 @@ class SiteController extends Controller
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->submit()) {
-						exit();
 						Alert::setSuccessNotify("На ваш Email {$model->email} отправлены указания для восстановления.");
 						return $this->redirect('/');
 					}
