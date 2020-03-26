@@ -10,11 +10,27 @@ use yii\base\Model;
 class PasswordRestoreForm extends Model
 {
 	public $email;
+	public $password;
+
+	const SCENARIO_SEND_MAIL = 1;
+	const SCENARIO_UPDATE_PASSWORD = 2;
 
 	public function rules()
 	{
 		return [
+			[['email'], 'required', 'on' => self::SCENARIO_SEND_MAIL, 'message' => 'Укажите почту'],
 			[['email'], 'email'],
+
+			[['password'], 'string'],
+			[['password'], 'required', 'on' => self::SCENARIO_UPDATE_PASSWORD, 'message' => 'Пароль не должен быть пустым'],
+		];
+	}
+
+	public function scenarios()
+	{
+		return [
+			self::SCENARIO_SEND_MAIL => ['email'],
+			self::SCENARIO_UPDATE_PASSWORD => ['password'],
 		];
 	}
 
@@ -26,7 +42,6 @@ class PasswordRestoreForm extends Model
 			return false;
 		}
 
-
 		$model = new UserResetPassword();
 		$model->user_id = $user->id;
 		$model->setKey();
@@ -34,6 +49,25 @@ class PasswordRestoreForm extends Model
 		if ($model->validate()) {
 			if ($model->save()) {
 				return $model->sendNotifyMessage();
+			}
+		}
+
+		return false;
+	}
+
+	public function updatePassword($user_id)
+	{
+		$user = User::findOne($user_id);
+		$user->scenario = User::SCENARIO_UPDATE;
+		$user->setPassword($this->password);
+
+		if ($user->validate()) {
+			if ($user->update()) {
+
+				\Yii::$app->user->login($user);
+				UserResetPassword::deleteAll(['user_id' => $user]);
+				return true;
+
 			}
 		}
 

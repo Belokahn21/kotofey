@@ -55,11 +55,11 @@ class UserResetPassword extends ActiveRecord
 
 	public function generateRestoreLink()
 	{
-		return System::domain() . '/restore/' . $this->key;
+		return System::domain() . '/restore/' . $this->key . '/';
 	}
 
 	public function isAlive()
 	{
-		return $this->created_at + self::ALIVE_TIME < time();
+		return $this->created_at + self::ALIVE_TIME > time();
 	}
 }

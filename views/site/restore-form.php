@@ -26,7 +26,7 @@ $this->title = Title::showTitle("Новый пароль"); ?>
 			'template' => '
             <div class="input-group auth-input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text auth-input-group-text"><i class="fas fa-at"></i></span>
+                    <span class="input-group-text auth-input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 {input}
             </div>{error}'

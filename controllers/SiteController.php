@@ -1132,14 +1132,27 @@ class SiteController extends Controller
 	{
 		if ($id) {
 			$userResetPasswordModel = UserResetPassword::findOne(['key' => $id]);
+			$userResetPasswordForm = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_UPDATE_PASSWORD]);
 
 			if ($userResetPasswordModel && $userResetPasswordModel->isAlive()) {
-				return $this->render('restore-form');
+				if (\Yii::$app->request->isPost) {
+					if ($userResetPasswordForm->load(\Yii::$app->request->post())) {
+						if ($userResetPasswordForm->validate()) {
+							if ($userResetPasswordForm->updatePassword($userResetPasswordModel->user_id)) {
+								Alert::setSuccessNotify('Вы успешно сменили пароль и вошли в систему.');
+								return $this->redirect('/');
+							}
+						}
+					}
+				}
+
+				return $this->render('restore-form', [
+					'model' => $userResetPasswordForm
+				]);
 			}
 		}
 
-		$model = new PasswordRestoreForm();
-
+		$model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
