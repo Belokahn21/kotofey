@@ -42,6 +42,8 @@ class PasswordRestoreForm extends Model
 			return false;
 		}
 
+		UserResetPassword::deleteAll(['user_id' => $user->id]);
+
 		$model = new UserResetPassword();
 		$model->user_id = $user->id;
 		$model->setKey();
@@ -65,7 +67,7 @@ class PasswordRestoreForm extends Model
 			if ($user->update()) {
 
 				\Yii::$app->user->login($user);
-				UserResetPassword::deleteAll(['user_id' => $user]);
+				UserResetPassword::deleteAll(['user_id' => $user_id]);
 				return true;
 
 			}
