@@ -114,6 +114,7 @@ $config = [
                 '<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
                 '<action>' => 'site/<action>',
                 '<action>/<id[a-z-\/\d_]+>' => 'site/<action>',
+                '<action>/<id:.+>' => 'site/restore>',
             ]
         ],
     ],
