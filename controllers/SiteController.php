@@ -26,11 +26,12 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportMessage;
 use app\models\entity\support\Tickets;
 use app\models\entity\user\Billing;
+use app\models\entity\UserResetPassword;
 use app\models\entity\UsersReferal;
 use app\models\entity\Vacancy;
 use app\models\forms\CatalogFilter;
 use app\models\forms\DiscountForm;
-use app\models\forms\PasswordRestore;
+use app\models\forms\PasswordRestoreForm;
 use app\models\helpers\OrderHelper;
 use app\models\services\DeliveryTimeService;
 use app\models\services\ReferalService;
@@ -1127,9 +1128,17 @@ class SiteController extends Controller
 		return $this->render('referal');
 	}
 
-	public function actionRestore()
+	public function actionRestore($id = null)
 	{
-		$model = new PasswordRestore();
+		if ($id) {
+			$userResetPasswordModel = UserResetPassword::findOne(['key' => $id]);
+
+			if ($userResetPasswordModel && $userResetPasswordModel->isAlive()) {
+				return $this->render('restore-form');
+			}
+		}
+
+		$model = new PasswordRestoreForm();
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {

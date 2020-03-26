@@ -7,7 +7,7 @@ use app\models\entity\User;
 use app\models\entity\UserResetPassword;
 use yii\base\Model;
 
-class PasswordRestore extends Model
+class PasswordRestoreForm extends Model
 {
 	public $email;
 
