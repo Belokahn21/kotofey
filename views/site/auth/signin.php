@@ -49,5 +49,6 @@ $this->title = Title::showTitle("Войти на сайт"); ?>
 
 	<?= Html::submitButton('Войти', ['class' => 'btn-main']); ?>
 	<?= Html::a('Регистрация', Url::to(['site/signup']), ['class' => 'link-main']); ?>
+	<?= Html::a('Забыл пароль', Url::to(['site/restore']), ['class' => 'link-main ml-5']); ?>
 	<?php ActiveForm::end(); ?>
 </div>
