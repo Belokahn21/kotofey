@@ -371,13 +371,38 @@ class AjaxController extends Controller
 						$response['code'] = 400;
 						$response['message'] = 'Пароль не верный';
 					}
-				}else{
+				} else {
 					$response['code'] = 400;
 					$response['message'] = 'Логин или пароль не верные';
 				}
 
 			}
 		}
+		return Json::encode($response);
+	}
+
+	public function actionProductAvail()
+	{
+		$data = \Yii::$app->request->post();
+		$code = $data['code'];
+		$response = false;
+
+		if ($data['vendorId'] == 4) {
+			$opts = array(
+				'http' => array(
+					'method' => "GET",
+					'header' => "Accept-language: en\r\n" .
+						"Cookie: beget=begetok\r\n"
+				)
+			);
+
+			$context = stream_context_create($opts);
+			$url = "http://www.sat-altai.ru/catalog/?c=shop&a=item&number={$code}&category=";
+			$file = file_get_contents($url, false, $context);
+
+			$response = stristr($file, '<span class=sklad>В наличии</span>') !== false;
+		}
+
 		return Json::encode($response);
 	}
 }
