@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models\entity;
 
 
@@ -47,10 +48,15 @@ class ProductPropertiesValues extends ActiveRecord
     public function getFinalValue()
     {
         if ($this->property->type == 1) {
-            return InformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one()->name;
+            $element = InformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one();
+            if ($element) {
+                return $element->name;
+            }
         } else {
             return $this->value;
         }
+
+        return false;
     }
 
 }
