@@ -62,6 +62,7 @@ class OrdersItems extends ActiveRecord
 		}
 
 		$discount = null;
+		$promo = null;
 		if ($this->promo_code) {
 			$promo = Promo::findOne(['code' => $this->promo_code]);
 
@@ -83,9 +84,10 @@ class OrdersItems extends ActiveRecord
 				if ($item->save() === false) {
 					return false;
 				}
-				if ($promo) {
-					$promo->delete();
+				if ($promo instanceof Promo) {
+					Promo::minusCode($promo->code);
 				}
+
 			} else {
 				return false;
 			}
@@ -110,7 +112,6 @@ class OrdersItems extends ActiveRecord
 
 	public function usePromoCode($code)
 	{
-
 		if ($promo = Promo::findByCode($code)) {
 			if ($promo->count > 0) {
 				$this->promo_code = $code;

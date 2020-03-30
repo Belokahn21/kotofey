@@ -2,6 +2,7 @@
 
 use yii\helpers\ArrayHelper;
 use app\models\services\BonusByBuyService;
+use app\models\services\PromoCodeService;
 
 /* @var $this \yii\web\View
  * @var $discount_model \app\models\forms\DiscountForm
@@ -40,7 +41,7 @@ use app\models\services\BonusByBuyService;
     </div>
 </div>
 
-<?php if (BonusByBuyService::isActive()): ?>
+<?php if (PromoCodeService::isActive()): ?>
 	<?= $this->render('../promo_code', [
 		'order' => $order,
 		'form' => $form,

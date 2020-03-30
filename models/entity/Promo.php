@@ -49,8 +49,6 @@ class Promo extends ActiveRecord
     {
         $promo = static::findByCode($code);
         if ($promo) {
-
-
             if ($promo->count - 1 > 0) {
                 $promo->count = $promo->count - 1;
             }
