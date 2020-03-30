@@ -40,6 +40,13 @@ use app\models\services\BonusByBuyService;
     </div>
 </div>
 
+<?php if (BonusByBuyService::isActive()): ?>
+	<?= $this->render('../promo_code', [
+		'order' => $order,
+		'form' => $form,
+	]); ?>
+<?php endif; ?>
+
 
 <div class="checkout-block">
     <div class="checkout-block__title">

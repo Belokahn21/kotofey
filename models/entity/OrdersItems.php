@@ -27,11 +27,12 @@ class OrdersItems extends ActiveRecord
 	const EVENT_CREATE_ITEMS = 'create_items';
 
 	public $need_delete;
+	public $promo_code;
 
 	public function rules()
 	{
 		return [
-			[['name'], 'string'],
+			[['name', 'promo_code'], 'string'],
 
 			[['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
 
@@ -60,13 +61,30 @@ class OrdersItems extends ActiveRecord
 			$basket->add($item);
 		}
 
+		$discount = null;
+		if ($this->promo_code) {
+			$promo = Promo::findOne(['code' => $this->promo_code]);
+
+			if ($promo) {
+				$discount = $promo->discount / 100;
+			}
+		}
+
 		/* @var $item OrdersItems */
 		foreach (Basket::findAll() as $item) {
 			$item->order_id = $this->order_id;
 
+			// применяется промокод
+			if ($discount !== null) {
+				$item->price = $item->price - ceil($item->price * $discount);
+			}
+
 			if ($item->validate()) {
 				if ($item->save() === false) {
 					return false;
+				}
+				if ($promo) {
+					$promo->delete();
 				}
 			} else {
 				return false;
@@ -88,6 +106,17 @@ class OrdersItems extends ActiveRecord
 	public function getProduct()
 	{
 		return Product::findOne($this->product_id);
+	}
+
+	public function usePromoCode($code)
+	{
+
+		if ($promo = Promo::findByCode($code)) {
+			if ($promo->count > 0) {
+				$this->promo_code = $code;
+			}
+		}
+
 	}
 
 	public function attributeLabels()

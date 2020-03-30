@@ -86,11 +86,6 @@ $this->title = Title::showTitle("Список заказов"); ?>
 			'format' => 'raw',
 			'value' => function ($model) {
 				$out_summ = OrderHelper::orderSummary($model->id);
-
-				if ($model->promo_code) {
-					$out_summ = strval($out_summ) - strval($model->promo_code);
-				}
-
 				return $out_summ;
 			}
 		],

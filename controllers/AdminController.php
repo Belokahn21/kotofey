@@ -1128,10 +1128,8 @@ class AdminController extends Controller
 		]);
 	}
 
-	public
-	function actionPromo(
-		$id = null
-	) {
+	public function actionPromo($id = null)
+	{
 
 		if ($id) {
 			$promo = Promo::findOne($id);
@@ -1158,6 +1156,7 @@ class AdminController extends Controller
 			if ($model->load(Yii::$app->request->post())) {
 				if ($model->validate()) {
 					if ($model->save()) {
+						Alert::setSuccessNotify('Промокод успешно создан');
 						return $this->refresh();
 					}
 				}
@@ -1170,10 +1169,8 @@ class AdminController extends Controller
 		]);
 	}
 
-	public
-	function actionVendor(
-		$id = null
-	) {
+	public function actionVendor($id = null)
+	{
 		if (Yii::$app->request->get('action') == 'delete') {
 			if (!Vendor::findOne($id)->delete()) {
 				throw new HttpException(404, 'Запись не найдена');
@@ -1300,7 +1297,8 @@ class AdminController extends Controller
 		]);
 	}
 
-	public function actionSliderimages($id = null) {
+	public function actionSliderimages($id = null)
+	{
 
 		if (Yii::$app->request->get('action') == 'delete') {
 			if (SlidersImages::findOne(Yii::$app->request->get('id'))->delete()) {

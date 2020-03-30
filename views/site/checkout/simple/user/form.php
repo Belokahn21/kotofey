@@ -3,6 +3,7 @@
 use app\models\services\BonusByBuyService;
 use yii\helpers\ArrayHelper;
 use app\models\entity\user\Billing;
+use app\models\services\PromoCodeService;
 
 /* @var $this \yii\web\View
  * @var $discount_model \app\models\forms\DiscountForm
@@ -40,6 +41,13 @@ use app\models\entity\user\Billing;
         </li>
     </ul>
 </div>
+
+<?php if (PromoCodeService::isActive()): ?>
+	<?= $this->render('../promo_code', [
+		'order' => $order,
+		'form' => $form,
+	]); ?>
+<?php endif; ?>
 
 <div class="checkout-block">
     <div class="checkout-block__title">

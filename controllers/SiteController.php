@@ -64,7 +64,7 @@ class SiteController extends Controller
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				'only' => ['logout', 'profile', 'support', 'test', 'order','restore'],
+				'only' => ['logout', 'profile', 'support', 'test', 'order', 'restore'],
 				'rules' => [
 					[
 						'actions' => ['restore'],
@@ -479,6 +479,7 @@ class SiteController extends Controller
 				}
 
 				$items->order_id = $order->id;
+				$items->usePromoCode($order->promo_code);
 				if ($items->saveItems() === false) {
 					$transaction->rollBack();
 					Alert::setErrorNotify(Debug::modelErrors($items));
@@ -501,6 +502,7 @@ class SiteController extends Controller
 				'payment' => $payment,
 				'delivery_time' => $delivery_time,
 				'order_date' => $order_date,
+				'billing_list' => []
 			]);
 		} else {
 			$order = new Order();
@@ -548,7 +550,7 @@ class SiteController extends Controller
 					if ($order_billing->validate()) {
 						if (!$order_billing->save()) {
 							$transaction->rollBack();
-							Alert::setErrorNotify('Ошибка при создаии заказа #2');
+							Alert::setErrorNotify('Ошибка #2 при создаии заказа');
 							return $this->refresh();
 						}
 					}
@@ -579,6 +581,7 @@ class SiteController extends Controller
 				}
 
 				$items->order_id = $order->id;
+				$items->usePromoCode($order->promo_code);
 				if ($items->saveItems() === false) {
 					$transaction->rollBack();
 					Alert::setErrorNotify(Debug::modelErrors($items));
@@ -606,10 +609,8 @@ class SiteController extends Controller
 		}
 	}
 
-	public
-	function actionProfile(
-		$id = null
-	) {
+	public function actionProfile($id = null)
+	{
 		if ($id) {
 			$user = User::findOne($id);
 			return $this->render('detail/profile', [
