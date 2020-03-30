@@ -17,5 +17,5 @@ return [
 		'extensions' => 'png, jpeg, jpg, svg, bmp, webp',
 	],
 	'bonus_by_buy' => false,
-	'use_promocode' => true,
+	'use_promocode' => false,
 ];
