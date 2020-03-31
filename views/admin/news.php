@@ -30,9 +30,7 @@ $this->title = Title::showTitle("Новости");
     'filterModel' => $searchModel,
     'emptyText' => 'Новости отсутствуют',
     'columns' => [
-        [
-            'attribute' => 'id',
-        ],
+        'id',
         [
             'attribute' => 'title',
             'format' => 'raw',
