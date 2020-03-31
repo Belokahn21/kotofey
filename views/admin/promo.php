@@ -21,7 +21,6 @@ use yii\helpers\Html;
         <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
         <?php ActiveForm:: end(); ?>
     </section>
-<?php ActiveForm::end(); ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
