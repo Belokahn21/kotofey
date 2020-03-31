@@ -24,111 +24,110 @@ use yii\db\ActiveRecord;
  */
 class OrdersItems extends ActiveRecord
 {
-	const EVENT_CREATE_ITEMS = 'create_items';
+    const EVENT_CREATE_ITEMS = 'create_items';
 
-	public $need_delete;
-	public $promo_code;
+    public $need_delete;
+    public $promo_code;
 
-	public function rules()
-	{
-		return [
-			[['name', 'promo_code'], 'string'],
+    public function rules()
+    {
+        return [
+            [['name', 'promo_code'], 'string'],
 
-			[['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
+            [['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
 
-			[['need_delete'], 'boolean'],
+            [['need_delete'], 'boolean'],
 
-			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
-		];
-	}
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
+        ];
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className()
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
 
-	public function saveItems()
-	{
-		if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
-			$item = new OrdersItems();
-			$item->price = Delivery::PRICE_DELIVERY;
-			$item->name = 'Доставка';
-			$item->count = 1;
+    public function saveItems()
+    {
+        if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
+            $item = new OrdersItems();
+            $item->price = Delivery::PRICE_DELIVERY;
+            $item->name = 'Доставка';
+            $item->count = 1;
 
-			$basket = new Basket();
-			$basket->add($item);
-		}
+            $basket = new Basket();
+            $basket->add($item);
+        }
 
-		$discount = null;
-		$promo = null;
-		if ($this->promo_code) {
-			$promo = Promo::findOne(['code' => $this->promo_code]);
+        $discount = null;
+        $promo = null;
+        if ($this->promo_code) {
+            $promo = Promo::findOne(['code' => $this->promo_code]);
 
-			if ($promo) {
-				$discount = $promo->discount / 100;
-			}
-		}
+            if ($promo) {
+                $discount = $promo->discount / 100;
+            }
+        }
 
-		/* @var $item OrdersItems */
-		foreach (Basket::findAll() as $item) {
-			$item->order_id = $this->order_id;
+        /* @var $item OrdersItems */
+        foreach (Basket::findAll() as $item) {
+            $item->order_id = $this->order_id;
 
-			// применяется промокод
-			if ($discount !== null) {
-				$item->price = $item->price - ceil($item->price * $discount);
-			}
+            // применяется промокод
+            if ($discount !== null) {
+                $item->price = $item->price - ceil($item->price * $discount);
+            }
 
-			if ($item->validate()) {
-				if ($item->save() === false) {
-					return false;
-				}
-				if ($promo instanceof Promo) {
-					Promo::minusCode($promo->code);
-				}
+            if ($item->validate()) {
+                if ($item->save() === false) {
+                    return false;
+                }
+                if ($promo instanceof Promo) {
+                    Promo::minusCode($promo->code);
+                }
 
-			} else {
-				return false;
-			}
+            } else {
+                return false;
+            }
 
-		}
-
-
-		$this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
-				'order_id' => $this->order_id
-			]
-		);
-		$this->trigger(OrdersItems::EVENT_CREATE_ITEMS);
+        }
 
 
-		return true;
-	}
+        $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
+                'order_id' => $this->order_id
+            ]
+        );
+        $this->trigger(OrdersItems::EVENT_CREATE_ITEMS);
 
-	public function getProduct()
-	{
-		return Product::findOne($this->product_id);
-	}
 
-	public function usePromoCode($code)
-	{
-		if ($promo = Promo::findByCode($code)) {
-			if ($promo->count > 0) {
-				$this->promo_code = $code;
-			}
-		}
+        return true;
+    }
 
-	}
+    public function getProduct()
+    {
+        return Product::findOne($this->product_id);
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			'name' => 'Название товара',
-			'count' => 'Количество',
-			'price' => 'Цена',
-			'product_id' => 'ID товара',
-			'order_id' => 'ID заказа',
-			'need_delete' => 'Удалить',
-		];
-	}
+    public function usePromoCode($code)
+    {
+        if ($promo = Promo::findByCode($code)) {
+            if ($promo->count > 0) {
+                $this->promo_code = $code;
+            }
+        }
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Название товара',
+            'count' => 'Количество',
+            'price' => 'Цена',
+            'product_id' => 'ID товара',
+            'order_id' => 'ID заказа',
+            'need_delete' => 'Удалить',
+        ];
+    }
 }

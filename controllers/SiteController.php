@@ -402,7 +402,6 @@ class SiteController extends Controller
             return $this->redirect("/");
         }
 
-
         if (\Yii::$app->user->isGuest) {
             $order = new Order();
             $user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
@@ -521,9 +520,14 @@ class SiteController extends Controller
             $billing_list = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
 
             if (\Yii::$app->request->isPost) {
+
+                // validate for ajax request
+                if (Yii::$app->request->isAjax && $order->load(Yii::$app->request->post())) {
+                    Yii::$app->response->format = Response::FORMAT_JSON;
+                    return ActiveForm::validate($order);
+                }
+
                 $transaction = $db->beginTransaction();
-
-
                 if ($billing->load(Yii::$app->request->post())) {
                     $billing->user_id = $user->id;
                     if ($billing->validate()) {
