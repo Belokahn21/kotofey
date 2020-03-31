@@ -6,6 +6,7 @@ use app\models\helpers\DiscountHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\models\entity\SiteSettings;
+use yii\widgets\LinkPager;
 
 /* @var $products \app\models\entity\Product[] */
 
@@ -13,20 +14,20 @@ $this->title = Title::showTitle("Поиск по сайту");
 $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url' => ['/search/']]; ?>
 <?php if ($products): ?>
     <ul class="catalog-list w-100">
-		<?php foreach ($products as $product): ?>
+        <?php foreach ($products as $product): ?>
             <li class="catalog-list__item">
 
-				<?php $weight = ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2']); ?>
-				<?php if ($weight): ?>
+                <?php $weight = ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => '2']); ?>
+                <?php if ($weight): ?>
                     <div class="catalog-list__weight"><?= $weight->value; ?> КГ</div>
-				<?php endif; ?>
+                <?php endif; ?>
 
                 <a href="<?= $product->detail; ?>" class="catalog-list__link">
-					<?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
+                    <?php if (!empty($product->image) and is_file(Yii::getAlias('@webroot/upload/') . $product->image)): ?>
                         <img class="catalog-list__image" src="/upload/<?= $product->image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-					<?php else: ?>
+                    <?php else: ?>
                         <img class="catalog-list__image" src="/upload/images/not-image.png" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-					<?php endif; ?>
+                    <?php endif; ?>
                 </a>
 
                 <a href="<?= $product->detail; ?>" class="catalog-list__link">
@@ -69,8 +70,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
                     </div>
                 </div>
             </li>
-		<?php endforeach; ?>
+        <?php endforeach; ?>
     </ul>
+
+    <div class="pagination-wrap">
+        <?php echo LinkPager::widget([
+            'pagination' => $pagerItems,
+        ]); ?>
+    </div>
+
 <?php else: ?>
     <p style="text-align: center; margin: 20px 0; padding: 0 10px;">
         К сожаление ничего не нашлось :(

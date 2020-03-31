@@ -38,7 +38,7 @@ class Search extends Model
 		$products = Product::find();
 		$products = $this->setFilter($products);
 
-		return $products->all();
+		return $products;
 	}
 
 	public function setFilter(ActiveQuery $products)
@@ -73,7 +73,7 @@ class Search extends Model
 			}
 		}
 
-		$products->where(['active' => 1]);
+		$products->andWhere(['active' => 1]);
 
 		return $products;
 
