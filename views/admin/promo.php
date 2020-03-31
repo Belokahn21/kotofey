@@ -28,6 +28,7 @@ use yii\helpers\Html;
     'columns' => [
         'id',
         'code',
+        'is_active',
         'discount',
         'count',
         [
