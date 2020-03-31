@@ -75,7 +75,7 @@ class ConsoleController extends Controller
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 6])->all();
 
         // hills
-        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
+//        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
 
         // royal
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
@@ -83,6 +83,8 @@ class ConsoleController extends Controller
         // acana
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 75])->all();
 
+        // mix: royal && hills
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => [108, 1]])->all();
 
 
         $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
@@ -108,7 +110,7 @@ class ConsoleController extends Controller
 
             $product_weight = ProductPropertiesValues::find()->where(['property_id' => 2, 'product_id' => $product->id])->one();
 
-            $percent = 30;
+            $percent = 10;
 //            if (array_key_exists($product_weight->value, $sale) && $product_weight->value >= 1) {
 //                $percent = $sale[$product_weight->value];
 //            }
