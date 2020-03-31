@@ -78,21 +78,12 @@ class ConsoleController extends Controller
 //        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
 
         // royal
-//		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
+		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
 
         // acana
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 75])->all();
 
 
-        if ($toggle == 1) {
-            // sanabelle
-            $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 154])->all();
-        } elseif ($toggle == 2) {
-            // bosch
-            $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 155])->all();
-        } else {
-            exit();
-        }
 
         $products = Product::find()->where(['id' => ArrayHelper::getColumn($product_values, 'product_id')]);
         $sale = [
@@ -117,10 +108,10 @@ class ConsoleController extends Controller
 
             $product_weight = ProductPropertiesValues::find()->where(['property_id' => 2, 'product_id' => $product->id])->one();
 
-            $percent = 50;
-            if (array_key_exists($product_weight->value, $sale) && $product_weight->value >= 1) {
-                $percent = $sale[$product_weight->value];
-            }
+            $percent = 30;
+//            if (array_key_exists($product_weight->value, $sale) && $product_weight->value >= 1) {
+//                $percent = $sale[$product_weight->value];
+//            }
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->price = ceil($product->purchase + ($product->purchase * ($percent / 100)));
             if ($product->validate()) {
