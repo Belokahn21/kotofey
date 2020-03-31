@@ -19,7 +19,7 @@ use yii\helpers\Html;
             'model' => $model,
         ]); ?>
         <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-        <?php ActiveForm:: end(); ?>
+        <?php ActiveForm::end(); ?>
     </section>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
