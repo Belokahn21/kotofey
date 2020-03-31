@@ -10,7 +10,7 @@ use yii\helpers\Html;
 /* @var $model \app\models\entity\Promo */
 
 ?>
-<? $this->title = Title::showTitle("Промокод: " . $model->code); ?>
+<?php $this->title = Title::showTitle("Промокод: " . $model->code); ?>
 <section>
     <h1 class="title">Промокод: <?= $model->code; ?></h1>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
