@@ -10,6 +10,7 @@ use yii\db\ActiveRecord;
  * Promo model
  *
  * @property integer $id
+ * @property integer $is_active
  * @property string $code
  * @property integer $discount
  * @property integer $count
@@ -33,6 +34,8 @@ class Promo extends ActiveRecord
             [['code'], 'string'],
 
             [['discount', 'count'], 'integer'],
+
+            [['is_active'], 'boolean'],
         ];
     }
 
@@ -42,6 +45,7 @@ class Promo extends ActiveRecord
             'code' => "Символьный код",
             'discount' => "Скидка",
             'count' => "Количество",
+            'is_active' => "Активность",
         ];
     }
 
@@ -51,6 +55,8 @@ class Promo extends ActiveRecord
         if ($promo) {
             if ($promo->count - 1 > 0) {
                 $promo->count = $promo->count - 1;
+            } else {
+                $promo->is_active = false;
             }
 
             return $promo->update();
@@ -65,6 +71,6 @@ class Promo extends ActiveRecord
 
     public static function findByCode($code)
     {
-        return static::findOne(['code' => $code]);
+        return static::findOne(['code' => $code, 'is_active' => true]);
     }
 }

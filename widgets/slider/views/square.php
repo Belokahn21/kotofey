@@ -7,8 +7,8 @@ use yii\helpers\Html;
 
 ?>
 <?php if ($images): ?>
-    <?php if ($this->beginCache('index-slider', ['duration' => 3600 * 24 * 7])): ?>
-        <div id="main-page-slider-id" class="carousel slide main-page-slider" data-ride="carousel">
+    <?php if ($this->beginCache('square-slider', ['duration' => 3600 * 24 * 7])): ?>
+        <div id="square-slider-id" class="carousel slide main-page-slider" data-ride="carousel">
             <div class="carousel-inner">
                 <?php $iterator = 1; ?>
                 <?php foreach ($images as $image): ?>
@@ -20,14 +20,16 @@ use yii\helpers\Html;
                     <?php $iterator++; ?>
                 <?php endforeach; ?>
             </div>
-            <a class="carousel-control-prev" href="#main-page-slider-id" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#main-page-slider-id" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+            <?php if ($iterator > 2): ?>
+                <a class="carousel-control-prev" href="#square-slider-id" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#square-slider-id" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            <?php endif; ?>
         </div>
         <?php $this->endCache(); endif; ?>
 <?php endif; ?>
