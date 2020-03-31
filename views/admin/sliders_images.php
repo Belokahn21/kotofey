@@ -47,7 +47,7 @@ $this->title = Title::showTitle("Изображения слайдеров"); ?>
             'attribute' => 'image',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::img($model->image, ['width' => 200]);
+                return Html::img("/upload/$model->image", ['width' => 200]);
             }
         ],
         [
