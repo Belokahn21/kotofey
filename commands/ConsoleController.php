@@ -75,10 +75,10 @@ class ConsoleController extends Controller
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 6])->all();
 
         // hills
-//        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
+        $product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 108])->all();
 
         // royal
-		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
+//		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 1])->all();
 
         // acana
 //		$product_values = ProductPropertiesValues::find()->where(['property_id' => 1, 'value' => 75])->all();
