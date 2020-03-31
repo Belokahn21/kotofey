@@ -46,7 +46,7 @@ use yii\widgets\Pjax;
 			<?php endif; ?>
 		<?php endforeach; ?>
     </div>
-	<?= Html::submitButton('Применить', ['class' => 'btn - main show - catalog - filter run']); ?>
+	<?= Html::submitButton('Применить', ['class' => 'btn-main show-catalog-filter run']); ?>
 	<?php ActiveForm::end() ?>
 
 </div>
