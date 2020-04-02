@@ -23,6 +23,17 @@ class FeedController extends Controller
                     $products = $searchProductModel->search();
                 }
             }
+
+            if ($modifyProductModel->load(\Yii::$app->request->post())) {
+                if ($modifyProductModel->validate()) {
+                    if (!$modifyProductModel->modify($products)) {
+                        Alert::setErrorNotify('Ошибка при обновлении товаров');
+                        return $this->refresh();
+                    }
+
+                    $modifyProductModel->clearModel();
+                }
+            }
         }
 
         return $this->render('index', [

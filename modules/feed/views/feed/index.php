@@ -16,7 +16,7 @@ $this->title = Title::showTitle("Поисковой контент");
 
 <div class="d-flex flex-row">
     <div class="w-50 px-1">
-        <?php $searchProductForm = ActiveForm::begin() ?>
+        <?php $form = ActiveForm::begin() ?>
         <?= Html::submitButton('Найти', ['class' => 'btn-main']) ?>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -27,23 +27,23 @@ $this->title = Title::showTitle("Поисковой контент");
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
 
                 <div class="form-element">
-                    <?= $searchProductForm->field($searchProductModel, 'name')->textInput(['value' => $searchProductModel->name]); ?>
+                    <?= $form->field($searchProductModel, 'name')->textInput(['value' => $searchProductModel->name]); ?>
                 </div>
 
                 <div class="form-element">
-                    <?= $searchProductForm->field($searchProductModel, 'feed')->textInput(['value' => $searchProductModel->feed]); ?>
+                    <?= $form->field($searchProductModel, 'feed')->textInput(['value' => $searchProductModel->feed]); ?>
                 </div>
 
-                <div>
-                    <p>Найдено товаров: <?= $products->count(); ?></p>
-                </div>
+                <?php if ($products instanceof \yii\db\ActiveQuery): ?>
+                    <div>
+                        <p>Найдено товаров: <?= $products->count(); ?></p>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
-        <?php ActiveForm::end() ?>
     </div>
 
     <div class="w-50 px-1">
-        <?php $modifyProductForm = ActiveForm::begin() ?>
         <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
         <nav>
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -53,7 +53,10 @@ $this->title = Title::showTitle("Поисковой контент");
         <div class="tab-content" id="nav-tab-content-form">
             <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                 <div class="form-element">
-                    <?= $modifyProductForm->field($modifyProductModel, 'feed')->textInput(['value' => $modifyProductModel->feed]); ?>
+                    <?= $form->field($modifyProductModel, 'clear')->checkbox(); ?>
+                </div>
+                <div class="form-element">
+                    <?= $form->field($modifyProductModel, 'feed')->textInput(['value' => $modifyProductModel->feed]); ?>
                 </div>
             </div>
         </div>
