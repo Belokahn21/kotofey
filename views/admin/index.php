@@ -130,7 +130,7 @@ $this->title = Title::showTitle("Главная страница");
                     </div>
                     <div class="block-info__content">
                         Копия базы данных
-                        <input type="checkbox" name="out_file" class="out-file-handler"> Скачать
+                        <input type="checkbox" name="out_file" class="out-file-handler">Скачать
                     </div>
                 </div>
 

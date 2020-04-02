@@ -1,4 +1,7 @@
 <?php
+
+use yii\helpers\Html;
+
 /* @var $last_search \app\models\entity\SearchQuery[] */
 ?>
 <div class="modal fade" id="show-search-stat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -19,19 +22,19 @@
                         <div class="search-info__item-count">Количество</div>
                         <div class="search-info__item-ip">IP</div>
                     </li>
-					<?php foreach ($last_search as $item): ?>
+                    <?php foreach ($last_search as $item): ?>
                         <li class="search-info__item">
                             <div class="search-info__item-date"><?= date('d.m.Y', $item->created_at); ?></div>
                             <div class="search-info__item-user">
-								<?php if ($item->user): ?>
-									<?= $item->user->email; ?>
-								<?php endif; ?>
+                                <?php if ($item->user): ?>
+                                    <?= $item->user->email; ?>
+                                <?php endif; ?>
                             </div>
-                            <div class="search-info__item-query"><?= $item->text; ?></div>
+                            <div class="search-info__item-query"><?= Html::a($item->text, '/search/?Search[search]=' . $item->text, ['target' => '_blank']); ?></div>
                             <div class="search-info__item-count"><?= $item->count_find; ?></div>
                             <div class="search-info__item-ip"><?= $item->ip; ?></div>
                         </li>
-					<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="modal-footer">
