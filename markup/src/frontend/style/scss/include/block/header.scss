@@ -9,6 +9,10 @@
   & * {
     box-sizing: border-box;
   }
+
+  @media (max-width: 420px) {
+    display: none;
+  }
 }
 
 @import "include/header-logo";
@@ -16,3 +20,5 @@
 @import "include/header-contacts";
 @import "include/header-basket";
 @import "include/header-compare";
+
+@import "mobile-header";

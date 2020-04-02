@@ -143,10 +143,68 @@ $this->beginPage() ?>
             </a>
         </div>
     </header>
+    <header class="mobile-header">
+        <div class="mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
 
+        <div class="mobile-logo">
+            <img class="mobile-logo__image" src="/upload/images/_logo.png">
+            <div class="mobile-logo__title-wrap">
+                <div class="mobile-logo__title">kotofey.store</div>
+                <div class="mobile-logo__second-title">интернет магазин зоотоваров</div>
+            </div>
+        </div>
+
+        <a href="javascript:void(0);" class="mobile-cart">
+            <?php if (Basket::count() > 0): ?>
+                <div class="mobile-cart__count">
+                    <span><?= Basket::count(); ?></span>
+                </div>
+            <?php endif; ?>
+            <i class="fas fa-shopping-cart"></i>
+        </a>
+
+
+        <div class="mobile-menu-background">
+            <div>
+                <form class="mobile-search-form">
+                    <div class="mobile-search-form__group">
+                        <input type="text" placeholder="Поиск товаров" class="mobile-search-form__input">
+                        <button class="mobile-search-form__submit" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+            <ul class="mobile-menu">
+                <?php foreach (Category::find()->where(['parent' => '0'])->all() as $category): ?>
+                    <li class="mobile-menu__item"><a class="mobile-menu__link" href="<?= $category->detail; ?>"><?= $category->name; ?></a></li>
+                <?php endforeach; ?>
+            </ul>
+            <div class="mobile-site-info">
+                <ul class="mobile-address">
+                    <li class="mobile-address__item"><a class="mobile-address__link phone_mask" href="tel:89967026637"><?= SiteSettings::getValueByCode('phone_1'); ?></a></li>
+                    <li class="mobile-address__item"><a class="mobile-address__link" href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a></li>
+                </ul>
+            </div>
+            <ul class="mobile-social">
+                <li class="mobile-social__item"><a class="mobile-social__link" href="<?= SiteSettings::getValueByCode('vk_link'); ?>">
+                        <i class="fab fa-vk"></i>
+                    </a></li>
+                <li class="mobile-social__item"><a class="mobile-social__link" href="<?= SiteSettings::getValueByCode('ok_ru'); ?>">
+                        <i class="fab fa-odnoklassniki-square"></i>
+                    </a></li>
+                <li class="mobile-social__item"><a class="mobile-social__link" href="<?= SiteSettings::getValueByCode('insta_link'); ?>">
+                        <i class="fab fa-instagram"></i>
+                    </a></li>
+                <li class="mobile-social__item"><a class="mobile-social__link" href="<?= SiteSettings::getValueByCode('twit'); ?>">
+                        <i class="fab fa-twitter-square"></i>
+                    </a></li>
+            </ul>
+        </div>
+    </header>
     <div class="menu-wrap">
         <div class="menu-controller" onclick="ym(55089223, 'reachGoal', 'full-catalog');">
-            <i class="fas fa-bars  show-drop"></i>
+            <i class="fas fa-bars show-drop"></i>
         </div>
 
         <ul class="menu">
