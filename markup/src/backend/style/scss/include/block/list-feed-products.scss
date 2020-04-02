@@ -1,0 +1,28 @@
+.feed-list {
+  &__item {
+    margin: 5px 0;
+    border-bottom: 1px silver solid;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__name {
+    border-bottom: 1px #f0f0f0 solid;
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+  }
+
+  &__id {
+    width: 5%;
+    text-align: center;
+  }
+
+  &__feed {
+  }
+}

@@ -27,7 +27,7 @@ class TimeDeliveryHelper
 		return abs(date('d', strtotime(date('d.m.Y'))) - date('d', strtotime($date))) == 1;
 	}
 
-	public static function isDayToDay($date)
+	public static function isNowToday($date)
 	{
 		return strtotime($date) == strtotime(date('d.m.Y'));
 	}

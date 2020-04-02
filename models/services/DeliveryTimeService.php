@@ -54,20 +54,26 @@ class DeliveryTimeService
 	{
 		$time_list = array();
 
+		// вчера и ранее
 		if (TimeDeliveryHelper::isOldDay($date)) {
 			return $time_list;
 		}
 
+		// выходной
 		if (TimeDeliveryHelper::isWeekend($date)) {
 			return $time_list;
 		}
 
-		if (TimeDeliveryHelper::isDayToDay($date)) {
+		// сегодня
+		if (TimeDeliveryHelper::isNowToday($date)) {
+
+		    // если утро прошло, но не наступил вечер
 			if (TimeDeliveryHelper::isAfterMorningTime() && TimeDeliveryHelper::isBeforeNightTime()) {
 				return $time_list = TimeDeliveryHelper::getNightTimes() + $time_list;
 			}
 		}
 
+		// если это слеюущий день
 		if (TimeDeliveryHelper::isNextDay($date)) {
 			return $time_list = TimeDeliveryHelper::getNightTimes() + $time_list;
 		} else {

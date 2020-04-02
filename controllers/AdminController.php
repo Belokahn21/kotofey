@@ -32,16 +32,11 @@ use app\models\entity\support\SupportCategory;
 use app\models\entity\support\SupportStatus;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
-use app\models\entity\UserManager;
-use app\models\entity\UserSeller;
-use app\models\entity\UserManagerScore;
 use app\models\entity\Vacancy;
 use app\models\entity\Vendor;
 use app\models\entity\VendorGroup;
 use app\models\forms\FeedmakerForm;
 use app\models\forms\SaleProductForm;
-use app\models\helpers\OrderHelper;
-use app\models\helpers\PersonalHelper;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\models\search\AuthItemSearchForm;
@@ -75,21 +70,17 @@ use app\models\tool\export\YandexCatalogExport;
 use app\models\tool\export\YMLExport;
 use app\models\tool\statistic\OrderStatistic;
 use app\widgets\notification\Alert;
-use Codeception\Lib\Di;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx\Styles;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
-use yii\i18n\MessageFormatter;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\entity\Product;
 use Yii;
 use yii\web\HttpException;
-use yii\web\Response;
 use yii\web\UploadedFile;
 use yii\widgets\ActiveForm;
 
@@ -1450,52 +1441,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public
-    function actionFeed()
-    {
-        $products = array();
-        $model = new FeedmakerForm();
-        $property_values = InformersValues::find()->where(['informer_id' => 1])->orderBy(['name' => SORT_ASC])->all();
-
-        if (Yii::$app->request->isPost) {
-            if ($model->load(Yii::$app->request->post())) {
-                if ($model->validate()) {
-
-                    $search = new Search();
-                    $search->search = $model->name;
-                    $products = $search->search();
-
-                    if ($products && !empty($model->feed)) {
-                        foreach ($products as $product) {
-                            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-
-                            if ($model->update) {
-                                $product->feed = $model->feed;
-                            } else {
-                                $product->feed .= $model->feed;
-                            }
-
-                            if ($product->validate()) {
-                                if ($product->update() == false) {
-                                    Alert::setErrorNotify(Debug::modelErrors($model));
-                                    return $this->refresh();
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return $this->render('feed', [
-            'model' => $model,
-            'products' => $products,
-        ]);
-    }
-
-    public
-    function actionShortly(
-        $id = null
-    ) {
+    public function actionShortly($id = null) {
         if ($id) {
             $model = ShortLinks::findOne($id);
 

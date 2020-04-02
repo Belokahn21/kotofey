@@ -47,13 +47,14 @@ class Search extends Model
 
 			$phrase = $this->search;
 
-			$products->where(['like', 'name', $phrase]);
-			$products->orWhere(['like', 'feed', $phrase]);
+            foreach (explode(' ', $phrase) as $text_line) {
+                $products->andFilterWhere(['or',
+                    ['like', 'name', $text_line],
+                    ['like', 'feed', $text_line]
+                ]);
+            }
 
-			if ($products->count() == 0) {
-				$products->orWhere(['like', 'name', explode(" ", $phrase)]);
-				$products->orWhere(['like', 'feed', explode(" ", $phrase)]);
-			}
+
 		}
 
 

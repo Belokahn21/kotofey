@@ -99,6 +99,8 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                'admin/<module>/<controller>/' => '<module>/<controller>/index',
+                'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
                 'bot/vk/index' => 'bot/vk/index',
                 'rest/product/create' => 'rest/product/create',
                 'rest/product/get/<id:(\d+)>' => 'rest/product/get',
@@ -127,9 +129,12 @@ $config = [
         'bot' => [
             'class' => 'app\modules\bot\Module',
         ],
-		'catalog' => [
-			'class' => 'app\modules\catalog\Module',
-		],
+        'catalog' => [
+            'class' => 'app\modules\catalog\Module',
+        ],
+        'feed' => [
+            'class' => 'app\modules\feed\Module',
+        ],
     ],
     'params' => $params,
 ];
