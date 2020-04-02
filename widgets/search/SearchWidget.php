@@ -7,10 +7,12 @@ use yii\base\Widget;
 
 class SearchWidget extends Widget
 {
+    public $view = 'default';
+
     public function run()
     {
         $model = new Search();
-        return $this->render('default', [
+        return $this->render($this->view, [
             'model' => $model,
         ]);
     }

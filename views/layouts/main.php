@@ -168,12 +168,9 @@ $this->beginPage() ?>
 
         <div class="mobile-menu-background">
             <div>
-                <form class="mobile-search-form">
-                    <div class="mobile-search-form__group">
-                        <input type="text" placeholder="Поиск товаров" class="mobile-search-form__input">
-                        <button class="mobile-search-form__submit" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
+                <?= SearchWidget::widget([
+                    'view' => 'mobile'
+                ]) ?>
             </div>
             <ul class="mobile-menu">
                 <?php foreach (Category::find()->where(['parent' => '0'])->all() as $category): ?>
