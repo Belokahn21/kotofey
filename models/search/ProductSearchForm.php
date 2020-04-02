@@ -22,7 +22,7 @@ class ProductSearchForm extends Product
     public function rules()
     {
         return [
-            [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales'], 'integer'],
+            [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'active'], 'integer'],
             [['name', 'article', 'code'], 'string'],
         ];
     }
@@ -52,6 +52,7 @@ class ProductSearchForm extends Product
         $query->andFilterWhere([
             'id' => $product_properties_values,
             'category_id' => $this->category_id,
+            'active' => $this->active,
             'article' => $this->article,
             'code' => $this->code,
             'count' => $this->count,
@@ -60,15 +61,15 @@ class ProductSearchForm extends Product
         ]);
 
         if (!empty($this->name)) {
-            $query->where(['like', 'name', $this->name]);
-            $query->orWhere(['like', 'feed', $this->name]);
+            $query->andFilterWhere(['like', 'name', $this->name]);
+            $query->orFilterWhere(['like', 'feed', $this->name]);
 
             if ($query->count() == 0) {
                 $words = explode(" ", $this->name);
                 if (count($words) > 1) {
                     foreach ($words as $word) {
-                        $query->andWhere(['like', 'name', $word]);
-                        $query->orWhere(['like', 'feed', $word]);
+                        $query->andFilterWhere(['like', 'name', $word]);
+                        $query->orFilterWhere(['like', 'feed', $word]);
                     }
                 }
             }

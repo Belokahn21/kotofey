@@ -96,7 +96,7 @@ class Product extends \yii\db\ActiveRecord
             'name' => 'Название',
             'description' => 'Описание',
             'sort' => 'Сортировка',
-            'category_id' => 'ID Раздела',
+            'category_id' => 'Раздел',
             'category' => 'Раздел',
             'price' => 'Цена',
             'purchase' => 'Закупочная цена',
