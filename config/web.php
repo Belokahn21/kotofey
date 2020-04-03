@@ -99,8 +99,6 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-                'admin/<module>/<controller>/' => '<module>/<controller>/index',
-                'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
                 'bot/vk/index' => 'bot/vk/index',
                 'rest/product/create' => 'rest/product/create',
                 'rest/product/get/<id:(\d+)>' => 'rest/product/get',
@@ -116,6 +114,8 @@ $config = [
                 '<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
                 '<action>' => 'site/<action>',
                 '<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
+                'admin/<module>/<controller>/' => '<module>/<controller>/index',
+                'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
             ]
         ],
     ],
