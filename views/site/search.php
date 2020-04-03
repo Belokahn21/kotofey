@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
                 <div class="catalog-list__group-price">
                     <div class="catalog-list__price">
                         <div class="value"><?= $product->price; ?> <?= Currency::getInstance()->show(); ?></div>
-                        <div class="bonus"><?= DiscountHelper::calcBonus($product->price); ?> бонуса</div>
+                        <?php /* <div class="bonus"><?= DiscountHelper::calcBonus($product->price); ?> бонуса</div> */ ?>
                     </div>
 
                     <div class="catalog-list__group-cart">
