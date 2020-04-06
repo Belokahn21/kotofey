@@ -58,7 +58,7 @@ class Search extends Model
 		}
 
 
-		if ($this->save_history == true and (!\Yii::$app->user->isGuest and \Yii::$app->user->id != 1)) {
+		if ($this->save_history == true) {
 
 			$SearchQuery = new SearchQuery();
 			$SearchQuery->text = $phrase;
