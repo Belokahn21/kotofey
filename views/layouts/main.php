@@ -156,7 +156,7 @@ $this->beginPage() ?>
             </div>
         </div>
 
-        <a href="/cart/" class="mobile-cart">
+        <a href="/basket/" class="mobile-cart">
             <?php if (Basket::count() > 0): ?>
                 <div class="mobile-cart__count">
                     <span><?= Basket::count(); ?></span>
