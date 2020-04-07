@@ -62,7 +62,7 @@ class ProductSearchForm extends Product
 
         if (!empty($this->name)) {
 			foreach (explode(' ', $this->name) as $text_line) {
-				$products->andFilterWhere(['or',
+				$query->andFilterWhere(['or',
 					['like', 'name', $text_line],
 					['like', 'feed', $text_line]
 				]);
