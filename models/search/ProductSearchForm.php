@@ -61,18 +61,12 @@ class ProductSearchForm extends Product
         ]);
 
         if (!empty($this->name)) {
-            $query->andFilterWhere(['like', 'name', $this->name]);
-            $query->orFilterWhere(['like', 'feed', $this->name]);
-
-            if ($query->count() == 0) {
-                $words = explode(" ", $this->name);
-                if (count($words) > 1) {
-                    foreach ($words as $word) {
-                        $query->andFilterWhere(['like', 'name', $word]);
-                        $query->orFilterWhere(['like', 'feed', $word]);
-                    }
-                }
-            }
+			foreach (explode(' ', $this->name) as $text_line) {
+				$products->andFilterWhere(['or',
+					['like', 'name', $text_line],
+					['like', 'feed', $text_line]
+				]);
+			}
         }
 
         return $dataProvider;
