@@ -102,7 +102,7 @@ $this->title = Title::showTitle("Список заказов"); ?>
                     return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["/admin/order-report", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-eye"></i>', Url::to(["admin/order", 'id' => $key]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/order", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
 //                    if ($key) {
