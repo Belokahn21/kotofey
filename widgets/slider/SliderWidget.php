@@ -19,12 +19,12 @@ class SliderWidget extends Widget
 			$unix_now = time();
 			$images = SlidersImages::find()
 				->where(['slider_id' => $this->slider_id, 'active' => true])
-				->andWhere([
-					'and',
-					['<', 'start_at', $unix_now],
-					['>', 'end_at', $unix_now],
-				])
-				->orWhere(['start_at' => 0, 'end_at' => 0])
+//				->andWhere([
+//					'and',
+//					['<', 'start_at', $unix_now],
+//					['>', 'end_at', $unix_now],
+//				])
+//				->orWhere(['start_at' => 0, 'end_at' => 0])
 				->orderBy(['created_at' => SORT_DESC]);
 
 			$images = $images->all();
