@@ -76,7 +76,7 @@ $this->title = Title::showTitle("Товары"); ?>
             'attribute' => 'name',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::a($model->name, '/admin/catalog/' . $model->id . '/');
+                return Html::a($model->name, Url::to(["/admin/catalog", 'id' => $model->id]));
             }
         ],
         'base_price',
