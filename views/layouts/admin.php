@@ -151,6 +151,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <li><a href="<?= Url::to(['/admin/shortly']) ?>">Короткие ссылки</a> <span class="count"><?= ShortLinks::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/feed/feed/index']) ?>">Поисковой контент</a></li>
                             <li><a href="<?= Url::to(['/admin/sale-product']) ?>">Акционные товары</a></li>
+                            <li><a href="<?= Url::to(['/admin/promo/promo/index']) ?>">Запустить акцию</a></li>
                         </ul>
                     </li>
                     <li>

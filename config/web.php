@@ -120,6 +120,9 @@ $config = [
         ],
     ],
     'modules' => [
+        'promo' => [
+            'class' => 'app\modules\promo\Module',
+        ],
         'yandex' => [
             'class' => 'app\modules\yandex\Module',
         ],

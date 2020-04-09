@@ -30,7 +30,7 @@ class SlidersImagesSearchForm extends SlidersImages
 
     public function search($params)
     {
-        $query = SlidersImages::find();
+        $query = SlidersImages::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
