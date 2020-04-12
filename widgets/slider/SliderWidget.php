@@ -5,6 +5,7 @@ namespace app\widgets\slider;
 
 use app\models\entity\SlidersImages;
 use yii\base\Widget;
+use yii\db\Query;
 
 class SliderWidget extends Widget
 {
@@ -17,27 +18,22 @@ class SliderWidget extends Widget
         $images = [];
         if (!empty($this->slider_id)) {
             $unix_now = time();
-            $images = SlidersImages::find()
-                ->where(['slider_id' => $this->slider_id, 'active' => true])
-                ->andWhere([
-                    'and',
-                    ['<', 'start_at', $unix_now],
-                    ['>', 'end_at', $unix_now],
-                ])
-                ->orWhere([
-                    'and',
-                    ['start_at' => 0],
-                    ['end_at' => 0],
-                ])
-                ->orWhere([
-                    'and',
-                    ['start_at' => null],
-                    ['end_at' => null],
-                ])
-                ->orderBy(['created_at' => SORT_DESC]);
 
-//            echo $images->createCommand()->getRawSql();
+            $images = SlidersImages::find()->where(['active' => 1, 'slider_id' => $this->slider_id])->andWhere([
+                'or',
+                'start_at = :default and end_at = :default',
+                'start_at is null and end_at is null',
+                'start_at < :now and end_at > :now'
+            ])
+                ->addParams([
+                    ":is_active" => 1,
+                    ":slider_id" => $this->slider_id,
+                    ":now" => $unix_now,
+                    ":default" => 0,
+                ]);
+
             $images = $images->all();
+
         }
 
         return $this->render($this->view, [
