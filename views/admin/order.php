@@ -60,6 +60,7 @@ $this->title = Title::showTitle("Список заказов"); ?>
 		],
 		[
 			'attribute' => 'is_paid',
+            'format' => 'raw',
 			'value' => function ($model) {
 				return ($model->is_paid == true) ? Html::tag('span', 'Оплачено', ['class' => 'success']) : Html::tag('span', 'Не оплачено', ['class' => 'error']);
 			}
