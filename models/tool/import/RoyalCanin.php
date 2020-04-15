@@ -75,7 +75,7 @@ class RoyalCanin
                 $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                 $product->base_price = intval($purchase);
                 $product->purchase = $product->base_price - ceil($product->base_price * ($vendor->discount / 100));
-                $product->price = $product->purchase + ceil($product->purchase * (10 / 100));
+                $product->price = $product->purchase + ceil($product->purchase * (13 / 100));
 //                $product->price = $product->purchase + ceil($product->purchase * ($this->calcSelfDiscount(ProductPropertiesHelper::getProductWeight($product->id)) / 100));
 
                 // Обновить поставщика
@@ -84,10 +84,10 @@ class RoyalCanin
                 }
 
                 if ($product->validate()) {
-//                    if ($product->update() === false) {
-//                        Debug::p($product->getErrors());
-//                        return false;
-//                    }
+                    if ($product->update() === false) {
+                        Debug::p($product->getErrors());
+                        return false;
+                    }
                     echo " Успешно обновлён: " . $product->name . PHP_EOL;
                 } else {
                     Debug::p($product->code);
