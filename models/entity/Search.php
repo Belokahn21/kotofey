@@ -44,6 +44,7 @@ class Search extends Model
 	public function setFilter(ActiveQuery $products)
 	{
 		if (!empty($this->search)) {
+            $products->andWhere(['active' => 1]);
 
 			$phrase = $this->search;
 
@@ -73,8 +74,6 @@ class Search extends Model
 				$SearchQuery->save();
 			}
 		}
-
-		$products->andWhere(['active' => 1]);
 
 		return $products;
 
