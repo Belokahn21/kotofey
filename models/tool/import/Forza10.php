@@ -35,13 +35,6 @@ class Forza10
                 }
 
 
-                if ($article == '109021') {
-                    print_r($line);
-                } else {
-                    continue;
-                }
-
-
                 if ($article) {
                     $product = Product::findOneByCode($article);
                     if ($product instanceof Product) {
