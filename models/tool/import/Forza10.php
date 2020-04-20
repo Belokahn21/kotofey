@@ -15,14 +15,13 @@ class Forza10
 
     public function update()
     {
-
+        $empty_ids = [];
         if (($handle = fopen($this->getPricePath(), "r")) !== false) {
             while (($line = fgetcsv($handle, 1000, ";")) !== false) {
 
                 if (empty($line)) {
                     continue;
                 }
-
 
                 if (array_key_exists('2', $line)) {
                     $name = $line[2];
@@ -50,13 +49,19 @@ class Forza10
                         if ($product->purchase !== $price) {
                             $current_price = ceil((($product->price - $product->purchase) / $product->purchase) * 100);
 
-                            $product->purchase = $price;
-                            $product->price = $price + ceil($price * ($current_price / 100));
-                            echo $article . '=' . $product->price . '=' . $current_price . '=' . $price . PHP_EOL;
+                            if ($price == 0) {
+                                $empty_ids[] = $product->id;
+                            } else {
+                                $product->purchase = $price;
+                                $product->price = $price + ceil($price * ($current_price / 100));
+                                echo $article . '=' . $product->price . '=' . $current_price . '=' . $price . PHP_EOL;
+                            }
                         }
                     }
                 }
             }
         }
+
+        print_r($empty_ids);
     }
 }
