@@ -138,6 +138,9 @@ $config = [
         'feed' => [
             'class' => 'app\modules\feed\Module',
         ],
+		'order' => [
+			'class' => 'app\modules\order\Module',
+		],
     ],
     'params' => $params,
 ];
