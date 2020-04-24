@@ -6,7 +6,7 @@ use app\models\entity\BasketItem;
 use app\models\entity\Promo;
 use Yii;
 use app\models\entity\Basket;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\entity\OrdersItems;
 use app\models\entity\User;
 use app\models\tool\Debug;

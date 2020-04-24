@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\tool\statistic\OrderStatistic;
 use yii\helpers\ArrayHelper;
 use app\models\tool\Currency;

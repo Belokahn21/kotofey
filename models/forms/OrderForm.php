@@ -8,7 +8,7 @@
 namespace app\models\forms;
 
 
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use yii\base\Model;
 
 class OrderForm extends Model

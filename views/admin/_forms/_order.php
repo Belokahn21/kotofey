@@ -8,7 +8,7 @@ use app\models\entity\Delivery;
 use yii\helpers\Url;
 use app\models\entity\Product;
 
-/* @var $model \app\models\entity\Order */
+/* @var $model \app\modules\order\models\entity\Order */
 /* @var $items \app\models\entity\OrdersItems[] */
 
 ?>

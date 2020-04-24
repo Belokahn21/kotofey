@@ -8,7 +8,7 @@ use yii\helpers\Url;
 use app\models\entity\UserSex;
 use app\models\entity\Discount;
 use app\models\entity\UsersReferal;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 
 /* @var $model \app\models\entity\User
  * @var $groups \app\models\rbac\AuthItem[]

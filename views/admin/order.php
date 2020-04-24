@@ -11,7 +11,7 @@ use yii\helpers\Url;
 use app\models\helpers\OrderHelper;
 use app\models\tool\statistic\OrderStatistic;
 
-/* @var $model \app\models\entity\Order */
+/* @var $model \app\modules\order\models\entity\Order */
 
 $this->title = Title::showTitle("Список заказов"); ?>
     <section class="new-order-block">

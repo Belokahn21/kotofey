@@ -2,7 +2,7 @@
 
 namespace app\widgets;
 
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\entity\OrdersItems;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;

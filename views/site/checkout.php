@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View
- * @var $order \app\models\entity\Order
+ * @var $order \app\modules\order\models\entity\Order
  * @var $billing \app\models\entity\user\Billing
  * @var $user \app\models\entity\User
  * @var $discount_model \app\models\forms\DiscountForm

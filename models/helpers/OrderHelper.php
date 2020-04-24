@@ -4,7 +4,7 @@ namespace app\models\helpers;
 
 
 use app\models\entity\Delivery;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\entity\OrdersItems;
 use app\models\entity\OrderStatus;
 use app\models\entity\Payment;

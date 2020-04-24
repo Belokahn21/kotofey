@@ -7,7 +7,7 @@ use app\models\entity\UserSex;
 use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Price;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\tool\Currency;
 use app\models\helpers\OrderHelper;
 use yii\helpers\Url;

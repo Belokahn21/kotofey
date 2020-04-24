@@ -5,7 +5,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /* @var $users \app\models\entity\User[]
- * @var $model \app\models\entity\Order
+ * @var $model \app\modules\order\models\entity\Order
  * @var $deliveries \app\models\entity\Delivery[]
  * @var $payments \app\models\entity\Payment[]
  * @var $status \app\models\entity\OrderStatus[]
@@ -96,4 +96,5 @@ $this->title = "Заказы";
         </div>
     </div>
 
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end() ?>

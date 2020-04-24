@@ -6,7 +6,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use app\models\tool\Policy;
 
-/* @var $order \app\models\entity\Order */
+/* @var $order \app\modules\order\models\entity\Order */
 /* @var $billing \app\models\entity\user\Billing */
 /* @var $delivery array */
 /* @var $payments array */

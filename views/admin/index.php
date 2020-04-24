@@ -5,7 +5,7 @@ use app\models\tool\Backup;
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\widgets\todo\ToDoWidget;
 use app\models\entity\User;
 use app\models\entity\SearchQuery;

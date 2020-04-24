@@ -3,7 +3,7 @@
 namespace app\models\services;
 
 
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\entity\OrderDate;
 use app\models\entity\OrdersItems;
 use app\models\entity\User;

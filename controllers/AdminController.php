@@ -9,7 +9,7 @@ use app\models\entity\GeoTimezone;
 use app\models\entity\Informers;
 use app\models\entity\InformersValues;
 use app\models\entity\News;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\entity\OrdersItems;
 use app\models\entity\OrderStatus;
 use app\models\entity\NewsCategory;

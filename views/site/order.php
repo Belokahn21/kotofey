@@ -9,7 +9,7 @@ use app\models\helpers\OrderHelper;
 
 $currency = new Currency();
 
-/* @var $orders \app\models\entity\Order[] */
+/* @var $orders \app\modules\order\models\entity\Order[] */
 /* @var $items \app\models\entity\OrdersItems[] */
 /* @var $item \app\models\entity\OrdersItems */
 ?>

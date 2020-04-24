@@ -4,7 +4,7 @@ namespace app\models\forms;
 
 
 use app\models\entity\Discount;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\models\tool\Debug;
 use phpDocumentor\Reflection\Types\Integer;
 use yii\base\Model;

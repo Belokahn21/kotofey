@@ -13,7 +13,7 @@ use app\models\tool\Price;
 use app\models\tool\Currency;
 use app\models\helpers\OrderHelper;
 
-/* @var $model \app\models\entity\Order */
+/* @var $model \app\modules\order\models\entity\Order */
 
 $this->title = Title::showTitle("Заказ №" . $model->id); ?>
 <section class="new-order-block">

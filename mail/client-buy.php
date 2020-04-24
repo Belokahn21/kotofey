@@ -5,7 +5,7 @@ use app\models\entity\Payment;
 use app\models\helpers\OrderHelper;
 
 /* @var $order_items \app\models\entity\OrdersItems[]
- * @var $order \app\models\entity\Order
+ * @var $order \app\modules\order\models\entity\Order
  */
 ?>
 <div style="width: 100%; height: 500px;">

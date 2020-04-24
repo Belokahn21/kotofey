@@ -6,7 +6,7 @@ use app\models\tool\Price;
 use yii\helpers\Html;
 use app\models\helpers\OrderHelper;
 
-/* @var $order \app\models\entity\Order */
+/* @var $order \app\modules\order\models\entity\Order */
 
 $this->title = Title::showTitle("Заказ №" . $order->id);
 $this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url' => ['/order/']];

@@ -9,7 +9,7 @@ use app\models\services\PromoCodeService;
  * @var $user \app\models\entity\User
  * @var $delivery \app\models\entity\Delivery[]
  * @var $payment \app\models\entity\Payment[]
- * @var $order \app\models\entity\Order
+ * @var $order \app\modules\order\models\entity\Order
  * @var $billing \app\models\entity\user\Billing
  * @var $order_date \app\models\entity\OrderDate
  * @var $delivery_time \app\models\services\DeliveryTimeService

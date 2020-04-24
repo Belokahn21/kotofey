@@ -1,7 +1,7 @@
 <?php
 
 use app\models\tool\seo\Title;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use yii\helpers\Url;
 
 /* @var $models \app\models\entity\user\Billing[] */

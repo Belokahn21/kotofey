@@ -10,7 +10,7 @@ use yii\helpers\Url;
 use app\models\entity\News;
 use yii\helpers\Html;
 use app\models\entity\Product;
-use app\models\entity\Order;
+use app\modules\order\models\entity\Order;
 use app\assets\AdminAsset;
 use app\models\entity\support\Tickets;
 use app\models\entity\User;
