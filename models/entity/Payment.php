@@ -1,4 +1,5 @@
 <?php
+
 namespace app\models\entity;
 
 
@@ -34,6 +35,11 @@ class Payment extends ActiveRecord
 			'description' => "Описаниие",
 			'active' => "Активность",
 		];
+	}
+
+	public function getNameF()
+	{
+		return $this->name . " (" . ($this->active == 1 ? 'Активен' : 'Не активен') . ")";
 	}
 
 	public function search($params)

@@ -103,6 +103,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         </div>
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['/admin/order']); ?>">Заказы</a> <span class="count"><?= Order::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/order/order-backend/index']); ?>">Заказы</a> <span class="count"><?= Order::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/stocks']); ?>">Склады</a> <span class="count"><?= Stocks::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/status']); ?>">Статус заказа</a> <span class="count"><?= OrderStatus::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/delivery']); ?>">Доставки</a> <span class="count"><?= Delivery::find()->count() ?></span></li>

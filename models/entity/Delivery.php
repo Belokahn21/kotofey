@@ -39,4 +39,9 @@ class Delivery extends ActiveRecord
 			'active' => "Активность",
 		];
 	}
+
+	public function getNameF()
+	{
+		return $this->name . " (" . ($this->active == 1 ? 'Активен' : 'Не активен') . ")";
+	}
 }

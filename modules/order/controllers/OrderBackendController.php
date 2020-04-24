@@ -2,7 +2,11 @@
 
 namespace app\modules\order\controllers;
 
+use app\models\entity\Delivery;
 use app\models\entity\Order;
+use app\models\entity\OrderStatus;
+use app\models\entity\Payment;
+use app\models\entity\User;
 use yii\web\Controller;
 
 class OrderBackendController extends Controller
@@ -12,6 +16,11 @@ class OrderBackendController extends Controller
 	public function actionIndex()
 	{
 		$model = new Order();
+		$users = User::find()->all();
+		$deliveries = Delivery::find()->all();
+		$payments = Payment::find()->all();
+		$status = OrderStatus::find()->all();
+
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {
@@ -21,6 +30,12 @@ class OrderBackendController extends Controller
 				}
 			}
 		}
-		return $this->render('index', []);
+		return $this->render('index', [
+			'users' => $users,
+			'model' => $model,
+			'deliveries' => $deliveries,
+			'payments' => $payments,
+			'status' => $status,
+		]);
 	}
 }
