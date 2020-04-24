@@ -139,9 +139,9 @@ echo $this->render('modal/product-modal-payment');
                             </div>
                         </div>
                     </div>
-					<?= FastBuyWidget::widget([
+					<?php /* FastBuyWidget::widget([
 						'product' => $product
-					]); ?>
+					]); */ ?>
 
                     <hr/>
 					<?php /* WeightBuyWidget::widget([

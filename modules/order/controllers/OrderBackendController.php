@@ -4,6 +4,7 @@ namespace app\modules\order\controllers;
 
 use app\models\entity\Delivery;
 use app\models\entity\Order;
+use app\models\entity\OrdersItems;
 use app\models\entity\OrderStatus;
 use app\models\entity\Payment;
 use app\models\entity\User;
@@ -16,6 +17,7 @@ class OrderBackendController extends Controller
 	public function actionIndex()
 	{
 		$model = new Order();
+		$itemsModel = new OrdersItems();
 		$users = User::find()->all();
 		$deliveries = Delivery::find()->all();
 		$payments = Payment::find()->all();
@@ -31,6 +33,7 @@ class OrderBackendController extends Controller
 			}
 		}
 		return $this->render('index', [
+			'itemsModel' => $itemsModel,
 			'users' => $users,
 			'model' => $model,
 			'deliveries' => $deliveries,

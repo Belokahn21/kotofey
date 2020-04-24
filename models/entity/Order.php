@@ -155,7 +155,7 @@ class Order extends ActiveRecord
             'payment_id' => 'Способ оплаты',
             'delivery_id' => 'Способ доставки',
             'is_paid' => 'Оплачено',
-            'is_cancel' => 'Закакз отменён',
+            'is_cancel' => 'Заказ отменён',
             'user_id' => 'Покупатель',
             'cash' => 'Сумма заказа',
             'created_at' => 'Дата создания',
