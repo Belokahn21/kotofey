@@ -96,7 +96,7 @@ class OrderBackendController extends Controller
             throw new HttpException(404, 'Заказ не существует');
         }
 
-        $itemsModel = new OrdersItems();
+        $itemsModel = OrdersItems::find()->where(['order_id' => $model->id])->all();
         $users = User::find()->all();
         $deliveries = Delivery::find()->all();
         $payments = Payment::find()->all();
@@ -108,11 +108,13 @@ class OrderBackendController extends Controller
             if ($model->load(\Yii::$app->request->post())) {
 
                 if ($model->validate()) {
-                    if (!$model->save()) {
+                    if (!$model->update()) {
                         $transaction->rollBack();
                         return $this->refresh();
                     }
                 }
+
+                OrdersItems::deleteAll(['order_id' => $model->id]);
 
                 $count = count(Yii::$app->request->post('OrdersItems', []));
 

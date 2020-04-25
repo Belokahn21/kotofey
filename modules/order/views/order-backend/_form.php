@@ -66,24 +66,17 @@ use yii\helpers\ArrayHelper;
     </div>
 
     <div class="tab-pane fade" id="nav-items-edit" role="tabpanel" aria-labelledby="nav-items-edit-tab">
-        <?php for ($i = 0; $i < 6; $i++): ?>
-            <div class="row orders-items-item">
-                <div class="col-sm-3">
-                    <?= $form->field($itemsModel, '[' . $i . ']name')->textInput(['class' => 'load-product-info__name form-control']); ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($itemsModel, '[' . $i . ']count')->textInput(['class' => 'load-product-info__count form-control']); ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($itemsModel, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
-                </div>
-                <div class="col-sm-2">
-                    <?= $form->field($itemsModel, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
-                </div>
-                <div class="col-sm-1">
-                    <?= $form->field($itemsModel, '[' . $i . ']need_delete')->checkbox(); ?>
-                </div>
-            </div>
-        <?php endfor; ?>
+        <?php if ($model->isNewRecord): ?>
+            <?= $this->render('include/new_items', [
+                'itemsModel' => $itemsModel,
+                'form' => $form
+            ]); ?>
+        <?php else: ?>
+            <?= $this->render('include/update_items', [
+                'itemsModel' => $itemsModel,
+                'form' => $form
+            ]); ?>
+        <?php endif; ?>
+
     </div>
 </div>
