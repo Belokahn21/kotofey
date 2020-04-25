@@ -5,8 +5,8 @@ namespace app\models\helpers;
 
 use app\models\entity\Delivery;
 use app\modules\order\models\entity\Order;
-use app\models\entity\OrdersItems;
-use app\models\entity\OrderStatus;
+use app\modules\order\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrderStatus;
 use app\models\entity\Payment;
 use app\models\tool\Debug;
 

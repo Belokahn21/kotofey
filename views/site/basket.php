@@ -23,7 +23,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
 	<?php endif; ?>
 	<?php if (!empty(Yii::$app->session->get('basket'))): ?>
         <ul class="basket-page-list">
-			<?php /* @var $item \app\models\entity\OrdersItems */ ?>
+			<?php /* @var $item \app\modules\order\models\entity\OrdersItems */ ?>
 			<?php foreach (Basket::findAll() as $item): ?>
                 <li class="basket-page-item">
                     <div class="basket-page-item__image-wrap">

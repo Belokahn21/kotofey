@@ -2,7 +2,7 @@
 
 namespace app\models\search;
 
-use app\models\entity\OrderStatus;
+use app\modules\order\models\entity\OrderStatus;
 use app\models\entity\Product;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

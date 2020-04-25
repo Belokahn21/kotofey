@@ -4,7 +4,7 @@ namespace app\models\forms;
 
 
 use app\models\entity\Basket;
-use app\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrdersItems;
 use app\models\entity\Product;
 use app\models\helpers\PackProductHelper;
 use app\models\helpers\ProductHelper;

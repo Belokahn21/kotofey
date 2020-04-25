@@ -7,7 +7,7 @@ use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
-/* @var $model \app\models\entity\OrderStatus */
+/* @var $model \app\modules\order\models\entity\OrderStatus */
 /* @var $this \yii\web\View */
 ?>
 <? $this->title = Title::showTitle("Статус: " . $model->name); ?>

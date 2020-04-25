@@ -3,7 +3,7 @@
 namespace app\models\helpers;
 
 
-use app\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrdersItems;
 
 class BasketHelper
 {

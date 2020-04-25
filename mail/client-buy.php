@@ -4,7 +4,7 @@ use app\models\entity\Delivery;
 use app\models\entity\Payment;
 use app\models\helpers\OrderHelper;
 
-/* @var $order_items \app\models\entity\OrdersItems[]
+/* @var $order_items \app\modules\order\models\entity\OrdersItems[]
  * @var $order \app\modules\order\models\entity\Order
  */
 ?>

@@ -4,7 +4,7 @@ namespace app\models\tool\statistic;
 
 
 use app\modules\order\models\entity\Order;
-use app\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrdersItems;
 use app\models\entity\Product;
 use yii\helpers\ArrayHelper;
 

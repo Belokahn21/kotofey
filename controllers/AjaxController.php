@@ -8,7 +8,7 @@ use app\models\entity\Compare;
 use app\models\entity\Delivery;
 use app\models\entity\Favorite;
 use app\models\entity\Geo;
-use app\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrdersItems;
 use app\models\entity\ProductProperties;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;

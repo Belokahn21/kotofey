@@ -5,6 +5,7 @@ namespace app\models\entity;
 
 use app\models\helpers\BasketHelper;
 use app\models\tool\Debug;
+use app\modules\order\models\entity\OrdersItems;
 use yii\base\Model;
 
 /**

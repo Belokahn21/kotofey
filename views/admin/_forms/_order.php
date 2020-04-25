@@ -2,14 +2,14 @@
 
 use yii\helpers\ArrayHelper;
 use app\models\entity\User;
-use app\models\entity\OrderStatus;
+use app\modules\order\models\entity\OrderStatus;
 use app\models\entity\Payment;
 use app\models\entity\Delivery;
 use yii\helpers\Url;
 use app\models\entity\Product;
 
 /* @var $model \app\modules\order\models\entity\Order */
-/* @var $items \app\models\entity\OrdersItems[] */
+/* @var $items \app\modules\order\models\entity\OrdersItems[] */
 
 ?>
 <nav>

@@ -16,7 +16,7 @@ use app\models\entity\support\Tickets;
 use app\models\entity\User;
 use app\widgets\notification\Alert;
 use app\models\entity\Stocks;
-use app\models\entity\OrderStatus;
+use app\modules\order\models\entity\OrderStatus;
 use app\models\entity\Delivery;
 use app\models\entity\Payment;
 use app\models\entity\Promo;
@@ -102,7 +102,6 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <ul class="submenuItems">
-                            <li><a href="<?= Url::to(['/admin/order']); ?>">Заказы</a> <span class="count"><?= Order::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/order/order-backend/index']); ?>">Заказы</a> <span class="count"><?= Order::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/stocks']); ?>">Склады</a> <span class="count"><?= Stocks::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/status']); ?>">Статус заказа</a> <span class="count"><?= OrderStatus::find()->count() ?></span></li>

@@ -12,7 +12,7 @@ use app\models\entity\InformersValues;
 use app\modules\order\models\entity\Order;
 use app\models\entity\OrderBilling;
 use app\models\entity\OrderDate;
-use app\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrdersItems;
 use app\models\entity\News;
 use app\models\entity\NewsCategory;
 use app\models\entity\Payment;

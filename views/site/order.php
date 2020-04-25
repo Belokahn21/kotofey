@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrdersItems;
 use yii\helpers\Html;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
@@ -10,8 +10,8 @@ use app\models\helpers\OrderHelper;
 $currency = new Currency();
 
 /* @var $orders \app\modules\order\models\entity\Order[] */
-/* @var $items \app\models\entity\OrdersItems[] */
-/* @var $item \app\models\entity\OrdersItems */
+/* @var $items \app\modules\order\models\entity\OrdersItems[] */
+/* @var $item \app\modules\order\models\entity\OrdersItems */
 ?>
 <?php $this->title = Title::showTitle("Список заказов");
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => ['/profile/']];

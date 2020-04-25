@@ -1,100 +1,126 @@
 <?php
 
 use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use app\models\tool\seo\Title;
+use yii\grid\GridView;
+use app\models\entity\Delivery;
+use app\models\entity\Payment;
+use app\models\entity\User;
+use yii\helpers\Url;
+use app\models\helpers\OrderHelper;
+use app\models\tool\statistic\OrderStatistic;
 
 /* @var $users \app\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
  * @var $deliveries \app\models\entity\Delivery[]
  * @var $payments \app\models\entity\Payment[]
- * @var $status \app\models\entity\OrderStatus[]
- * @var $itemsModel \app\models\entity\OrdersItems
+ * @var $status \app\modules\order\models\entity\OrderStatus[]
+ * @var $itemsModel \app\modules\order\models\entity\OrdersItems
  */
 
-$this->title = "Заказы";
+$this->title = Title::showTitle("Заказы");
 ?>
     <h1>Заказы</h1>
 <?php $form = ActiveForm::begin() ?>
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
-            <a class="nav-item nav-link" id="nav-items-edit-tab" data-toggle="tab" href="#nav-items-edit" role="tab" aria-controls="nav-items-edit" aria-selected="false">Товары в заказе</a>
-        </div>
-    </nav>
-
-
-    <div class="tab-content" id="nav-tab-content-form">
-        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-
-
-            <div class="d-flex flex-row">
-                <div class="w-25 p-1"><?= $form->field($model, 'is_paid')->checkbox(); ?></div>
-                <div class="w-25 p-1"><?= $form->field($model, 'is_cancel')->checkbox(); ?></div>
-                <div class="w-25 p-1"><?= $form->field($model, 'is_close')->checkbox(); ?></div>
-            </div>
-            <div class="form-element">
-                <div class="d-flex flex-row">
-                    <div class="w-25 p-1">
-						<?= $form->field($model, 'delivery_id')->dropDownList(ArrayHelper::map($deliveries, 'id', 'nameF'), [
-							'prompt' => 'Доставка'
-						])->label(false); ?>
-                    </div>
-
-                    <div class="w-25 p-1">
-						<?= $form->field($model, 'delivery_id')->dropDownList(ArrayHelper::map($payments, 'id', 'nameF'), [
-							'prompt' => 'Оплата'
-						])->label(false); ?>
-                    </div>
-
-                    <div class="w-25 p-1">
-						<?= $form->field($model, 'status')->dropDownList(ArrayHelper::map($status, 'id', 'name'), [
-							'prompt' => 'Статус'
-						])->label(false); ?>
-                    </div>
-
-                    <div class="w-25 p-1">
-						<?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map($users, 'id', 'email'), [
-							'prompt' => 'Покупатель'
-						])->label(false); ?>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-element">
-                <div class="d-flex flex-row">
-                    <div class="w-50 p-1">
-						<?= $form->field($model, 'notes')->textarea(); ?>
-                    </div>
-                    <div class="w-50 p-1">
-						<?= $form->field($model, 'comment')->textarea(); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tab-pane fade" id="nav-items-edit" role="tabpanel" aria-labelledby="nav-items-edit-tab">
-			<?php for ($i = 0; $i < 6; $i++): ?>
-                <div class="row orders-items-item">
-                    <div class="col-sm-3">
-						<?= $form->field($itemsModel, '[' . $i . ']name')->textInput(['class' => 'load-product-info__name form-control']); ?>
-                    </div>
-                    <div class="col-sm-3">
-						<?= $form->field($itemsModel, '[' . $i . ']count')->textInput(['class' => 'load-product-info__count form-control']); ?>
-                    </div>
-                    <div class="col-sm-3">
-						<?= $form->field($itemsModel, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
-                    </div>
-                    <div class="col-sm-2">
-						<?= $form->field($itemsModel, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
-                    </div>
-                    <div class="col-sm-1">
-						<?= $form->field($itemsModel, '[' . $i . ']need_delete')->checkbox(); ?>
-                    </div>
-                </div>
-			<?php endfor; ?>
-        </div>
-    </div>
-
+<?= $this->render('_form', [
+    'itemsModel' => $itemsModel,
+    'users' => $users,
+    'model' => $model,
+    'deliveries' => $deliveries,
+    'payments' => $payments,
+    'status' => $status,
+    'form' => $form,
+]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end() ?>
+    <h2 class="title">Список заказов</h2>
+<?php echo GridView::widget([
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
+    'emptyText' => 'Закзаы отсутствуют',
+    'columns' => [
+        'id',
+        [
+            'attribute' => 'status',
+            'value' => function ($model) {
+                return $model->getStatus();
+            }
+        ],
+        [
+            'attribute' => 'delivery_id',
+            'value' => function ($model) {
+                if ($model->delivery_id > 0) {
+                    return Delivery::findOne($model->delivery_id)->name;
+                } else {
+                    return "Не указано";
+                }
+            }
+        ],
+        [
+            'attribute' => 'payment_id',
+            'value' => function ($model) {
+                if ($model->payment_id > 0) {
+                    return Payment::findOne($model->payment_id)->name;
+                } else {
+                    return "Не указано";
+                }
+            }
+        ],
+        [
+            'attribute' => 'is_paid',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return ($model->is_paid == true) ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red']);
+            }
+        ],
+        [
+            'attribute' => 'user_id',
+            "format" => 'raw',
+            'value' => function ($model) {
+                if ($model->user_id) {
+                    return Html::a(User::findOne($model->user_id)->display, Url::to(['admin/user', 'id' => $model->user_id]));
+                }
+            }
+        ],
+        [
+            'attribute' => 'cash',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return OrderHelper::orderSummary($model->id) . ' (<span class="green">+' . OrderStatistic::marginality($model->id) . '</span>)';
+            }
+        ],
+        'promo_code',
+        [
+            'label' => 'Итого к оплате',
+            'format' => 'raw',
+            'value' => function ($model) {
+                $out_summ = OrderHelper::orderSummary($model->id);
+                return $out_summ;
+            }
+        ],
+        [
+            'attribute' => 'created_at',
+            'value' => function ($model) {
+                return date("d.m.Y", $model->created_at);
+            }
+        ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'buttons' => [
+                'view' => function ($url, $model, $key) {
+                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["order-report", 'id' => $key]));
+                },
+                'update' => function ($url, $model, $key) {
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
+                },
+                'delete' => function ($url, $model, $key) {
+//                    if ($key) {
+//                        return Html::a('<i class="fas fa-trash-alt"></i>',
+//                            Url::to(["admin/order", 'id' => $key, 'action' => 'delete']));
+//                    }
+                }
+            ]
+        ],
+    ],
+]);

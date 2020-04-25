@@ -6,8 +6,8 @@ namespace app\modules\order\models\entity;
 use app\models\entity\Discount;
 use app\models\entity\OrderBilling;
 use app\models\entity\OrderDate;
-use app\models\entity\OrdersItems;
-use app\models\entity\OrderStatus;
+use app\modules\order\models\entity\OrdersItems;
+use app\modules\order\models\entity\OrderStatus;
 use app\models\entity\Promo;
 use app\models\entity\user\Billing;
 use app\models\helpers\DiscountHelper;
@@ -162,6 +162,7 @@ class Order extends ActiveRecord
             'delivery_id' => 'Способ доставки',
             'is_paid' => 'Оплачено',
             'is_cancel' => 'Заказ отменён',
+            'is_close' => 'Заказ закрыт',
             'user_id' => 'Покупатель',
             'cash' => 'Сумма заказа',
             'created_at' => 'Дата создания',
