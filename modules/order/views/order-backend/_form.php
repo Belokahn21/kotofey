@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
                 </div>
 
                 <div class="w-25 p-1">
-                    <?= $form->field($model, 'delivery_id')->dropDownList(ArrayHelper::map($payments, 'id', 'nameF'), [
+                    <?= $form->field($model, 'payment_id')->dropDownList(ArrayHelper::map($payments, 'id', 'nameF'), [
                         'prompt' => 'Оплата'
                     ])->label(false); ?>
                 </div>
