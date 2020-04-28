@@ -33,7 +33,7 @@ class ProductBackendController extends Controller
 		}
 
 		return $this->render('index', [
-
+			'model' => $model
 		]);
 	}
 
