@@ -19,6 +19,22 @@ class ProductBackendController extends Controller
 
 	public function actionIndex()
 	{
+		$model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
+
+		if (\Yii::$app->request->isPost) {
+			if ($model->load(\Yii::$app->request->post())) {
+				if ($model->validate()) {
+					if ($model->save()) {
+						Alert::setSuccessNotify('Товар усешно добавлен');
+						return $this->refresh();
+					}
+				}
+			}
+		}
+
+		return $this->render('index', [
+
+		]);
 	}
 
 	public function actionUpdate()
