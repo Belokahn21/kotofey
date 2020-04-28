@@ -91,6 +91,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         </div>
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['/admin/catalog']); ?>">Товары <span class="count"><?= Product::find()->count() ?></span></a></li>
+                            <li><a href="<?= Url::to(['/admin/catalog/product-backend/index']); ?>">Товары <span class="count"><?= Product::find()->count() ?></span></a></li>
                             <li><a href="<?= Url::to(['/admin/category']); ?>">Разделы <span class="count"><?= Category::find()->count() ?></span></a></li>
                             <li><a href="<?= Url::to(['/admin/properties']); ?>">Свойства <span class="count"><?= ProductProperties::find()->count() ?></span></a></li>
                             <li><a href="<?= Url::to(['/admin/informers']); ?>">Справочники <span class="count"><?= Informers::find()->count() ?></span></a></li>
