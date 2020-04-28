@@ -12,7 +12,8 @@ $this->title = Title::showTitle('Товары');
 <?php $form = ActiveForm::begin(); ?>
 <?= $this->render('_form', [
 	'model' => $model,
-	'form' => $form
+	'form' => $form,
+	'modelDelivery' => $modelDelivery
 ]) ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>

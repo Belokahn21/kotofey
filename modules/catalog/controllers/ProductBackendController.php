@@ -20,6 +20,7 @@ class ProductBackendController extends Controller
 	public function actionIndex()
 	{
 		$model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
+		$modelDelivery = new ProductOrder();
 
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
@@ -33,7 +34,8 @@ class ProductBackendController extends Controller
 		}
 
 		return $this->render('index', [
-			'model' => $model
+			'model' => $model,
+			'modelDelivery' => $modelDelivery
 		]);
 	}
 
