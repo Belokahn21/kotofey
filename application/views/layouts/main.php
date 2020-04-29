@@ -34,10 +34,10 @@ $this->beginPage() ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <?php if (YII_ENV == 'prod'): ?>
-        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
-        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
-        <?php echo $this->render('include/head/google/google_metrika.php'); ?>
-        <?php echo $this->render('include/head/jivo.php'); ?>
+        <?php echo $this->renderFile('include/head/yandex/metrika.php'); ?>
+        <?php echo $this->renderFile('include/head/yandex/webmaster.php'); ?>
+        <?php echo $this->renderFile('include/head/google/google_metrika.php'); ?>
+        <?php echo $this->renderFile('include/head/jivo.php'); ?>
     <?php endif; ?>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
