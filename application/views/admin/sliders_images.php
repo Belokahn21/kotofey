@@ -55,6 +55,8 @@ $this->title = Title::showTitle("Изображения слайдеров"); ?>
             'format' => ['date', 'dd.MM.YYYY'],
             'options' => ['width' => '200']
         ],
+        'start_at',
+        'end_at',
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
