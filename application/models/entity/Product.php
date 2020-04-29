@@ -320,7 +320,7 @@ class Product extends \yii\db\ActiveRecord
     {
         if (!empty($this->images)) {
             foreach (Json::decode($this->images) as $image) {
-                unlink(\Yii::getAlias('@app') . $image);
+                @unlink(\Yii::getAlias('@app') . $image);
             }
         }
     }
