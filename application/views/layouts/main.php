@@ -62,7 +62,7 @@ $this->beginPage() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?php // NotifyWidget::widget(); ?>
+<?php // \app\widgets\notification\NotifyWidget::widget(); ?>
 <?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
 <?php // InspectorWidget::widget(); ?>
