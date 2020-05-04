@@ -29,7 +29,7 @@ var config = {
             src_frontend: './src/frontend/style/scss/*.{sass,scss}',
             watch_frontend: './src/frontend/style/scss/**/*.{sass,scss}',
             build_frontend: './build/frontend/assets/css/',
-            application_frontend: '../web/css/',
+             application_frontend: '../application/web/css/',
         },
         html: {
             src_backend: './src/backend/html/*.{html,htm}',
@@ -50,7 +50,7 @@ var config = {
             src_frontend: './src/frontend/js/*.js',
             watch_frontend: './src/frontend/js/**/*.js',
             build_frontend: './build/frontend/assets/js/',
-            application_frontend: '../web/js/',
+             application_frontend: '../application/web/js/',
 
         },
         image: {
@@ -62,7 +62,7 @@ var config = {
             src_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
             watch_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
             build_frontend: './build/frontend/assets/images/',
-            application_frontend: '../web/upload/images/',
+             application_frontend: '../application/web/upload/images/',
         },
         copy: {
             src_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
@@ -73,7 +73,7 @@ var config = {
             src_frontend: './src/frontend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_frontend: './src/frontend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             build_frontend: './build/frontend/assets/images/',
-            application_frontend: '../web/upload/images/',
+             application_frontend: '../application/web/upload/images/',
         },
         ecmascript6: {
             src_backend: './src/backend/js/ecmascript6/core.js',
@@ -84,7 +84,7 @@ var config = {
             src_frontend: './src/frontend/js/ecmascript6/core.js',
             watch_frontend: './src/frontend/js/ecmascript6/**/*.js',
             build_frontend: './build/frontend/assets/js/',
-            application_frontend: '../web/js/'
+             application_frontend: '../application/web/js/'
 
         },
     }
