@@ -12,6 +12,11 @@
     align-items: flex-start;
     width: 100%;
     margin: 20px 0;
+
+
+    @media (max-width: 414px) {
+      align-items: center;
+    }
   }
 
   &__item {
@@ -56,6 +61,11 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+
+    @media(max-width: 414px) {
+      align-items: center;
+      justify-content: center;
+    }
   }
 
   &__control-link {

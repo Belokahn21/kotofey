@@ -8,11 +8,11 @@ use yii\helpers\Html;
 ?>
 <?php if ($images): ?>
 	<?php if ($this->beginCache('square-slider' . date("d.m.y"), ['duration' => 3600 * 24 * 7])): ?>
-        <div id="square-slider-id" class="carousel slide main-page-slider" data-ride="carousel">
+        <div id="square-slider-id" class="carousel slide square-slider" data-ride="carousel">
             <div class="carousel-inner">
 				<?php $iterator = 1; ?>
 				<?php foreach ($images as $image): ?>
-                    <div class="carousel-item main-page-slider__item <?= ($iterator == 1 ? 'active' : ''); ?>">
+                    <div class="carousel-item square-slider__item <?= ($iterator == 1 ? 'active' : ''); ?>">
                         <a href="<?= (!empty($image->link) ? $image->link : 'javascript:void(0);'); ?>">
                             <img class="d-block w-100 h-100" src="/upload/<?= $image->image; ?>" alt="<?= $image->text; ?>">
                         </a>

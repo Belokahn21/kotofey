@@ -1,5 +1,11 @@
 .social-wrap {
   width: 33%;
+
+  .block-title {
+    @media (max-width: 414px) {
+      text-align: center;
+    }
+  }
 }
 
 .social {

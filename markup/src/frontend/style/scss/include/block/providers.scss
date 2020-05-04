@@ -18,6 +18,11 @@
     padding: 5px 0;
     font-size: 18px;
     width: auto;
+
+
+    @media (max-width: 414px) {
+      text-align: center;
+    }
   }
 
   &__link {
@@ -64,7 +69,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-decoration: none!important;
+    text-decoration: none !important;
 
     &:first-child {
       top: 30%;

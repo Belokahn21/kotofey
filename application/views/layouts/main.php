@@ -344,7 +344,7 @@ $this->beginPage() ?>
                         <i class="fab fa-twitter-square"></i>
                     </a>
                 </li>
-                <li class="footer-socials__item">
+                <li class="footer-socials__item copyright">
                     <div class="copyring"><?= SiteSettings::getValueByCode('site_logo') ?> - <?= date("Y"); ?> ©</div>
                 </li>
             </ul>
