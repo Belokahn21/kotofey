@@ -24,7 +24,7 @@ var config = {
             src_backend: './src/backend/style/scss/*.{sass,scss}',
             watch_backend: './src/backend/style/scss/**/*.{sass,scss}',
             build_backend: './build/backend/assets/css/',
-            application_backend: '../web/css/',
+            application_backend: '../application/web/css/',
 
             src_frontend: './src/frontend/style/scss/*.{sass,scss}',
             watch_frontend: './src/frontend/style/scss/**/*.{sass,scss}',
@@ -45,7 +45,7 @@ var config = {
             src_backend: './src/backend/js/*.js',
             watch_backend: './src/backend/js/**/*.js',
             build_backend: './build/backend/assets/js/',
-            application_backend: '../web/js/',
+            application_backend: '../application/web/js/',
 
             src_frontend: './src/frontend/js/*.js',
             watch_frontend: './src/frontend/js/**/*.js',
@@ -57,7 +57,7 @@ var config = {
             src_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             build_backend: './build/backend/assets/images/',
-            application_backend: '../web/upload/images/',
+            application_backend: '../application/web/upload/images/',
 
             src_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
             watch_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
@@ -68,7 +68,7 @@ var config = {
             src_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             build_backend: './build/backend/assets/images/',
-            application_backend: '../web/upload/images/',
+            application_backend: '../application/web/upload/images/',
 
             src_frontend: './src/frontend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_frontend: './src/frontend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
@@ -79,7 +79,7 @@ var config = {
             src_backend: './src/backend/js/ecmascript6/core.js',
             watch_backend: './src/backend/js/ecmascript6/**/*.js',
             build_backend: './build/backend/assets/js/',
-            application_backend: '../web/js/',
+            application_backend: '../application/web/js/',
 
             src_frontend: './src/frontend/js/ecmascript6/core.js',
             watch_frontend: './src/frontend/js/ecmascript6/**/*.js',
