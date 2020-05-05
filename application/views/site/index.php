@@ -4,6 +4,7 @@
 
 /* @var $news \app\models\entity\News[] */
 
+use app\modules\order\widgets\ManyPurchasedGoods;
 use app\models\entity\SiteSettings;
 use app\models\tool\seo\Title;
 use yii\helpers\Url;
@@ -19,8 +20,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     'use_carousel' => true
 ]) ?>
 <?= InformerSliderWidget::widget(); ?>
-
-
+<?= ManyPurchasedGoods::widget(); ?>
 <ul class="advantages">
     <li class="advantages-item">
         <div class="advantage-title">Делаете заказ</div>
