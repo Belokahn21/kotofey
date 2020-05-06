@@ -119,4 +119,34 @@ class TimeDeliveryHelper
 
 		return $times;
 	}
+
+	public static function isHappy($date)
+	{
+		$unix = strtotime($date);
+
+		$ranges = [
+			[
+				'01.05',
+				'05.05'
+			],
+			[
+				'09.05',
+				'11.05'
+			],
+			[
+				'25.12',
+				'31.12',
+			],
+			[
+				'01.01',
+				'09.01',
+			],
+		];
+
+		foreach ($ranges as $block => $dates) {
+		}
+
+
+		return false;
+	}
 }

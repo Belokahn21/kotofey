@@ -54,6 +54,10 @@ class DeliveryTimeService
 	{
 		$time_list = array();
 
+//		if (TimeDeliveryHelper::isHappy($date)) {
+//			return $time_list;
+//		}
+
 		// вчера и ранее
 		if (TimeDeliveryHelper::isOldDay($date)) {
 			return $time_list;
@@ -67,7 +71,7 @@ class DeliveryTimeService
 		// сегодня
 		if (TimeDeliveryHelper::isNowToday($date)) {
 
-		    // если утро прошло, но не наступил вечер
+			// если утро прошло, но не наступил вечер
 			if (TimeDeliveryHelper::isAfterMorningTime() && TimeDeliveryHelper::isBeforeNightTime()) {
 				return $time_list = TimeDeliveryHelper::getNightTimes() + $time_list;
 			}
