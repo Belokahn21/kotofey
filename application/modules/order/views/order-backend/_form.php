@@ -34,24 +34,34 @@ use yii\helpers\ArrayHelper;
 					<?php } ?>
 
                     <h4>Адрес доставки</h4>
-                    <ul>
-                        <li><?= $model->user->billing->city; ?></li>
-                        <li><?= $model->user->billing->street; ?></li>
-                        <li><?= $model->user->billing->home; ?></li>
-                        <li><?= $model->user->billing->house; ?></li>
-                    </ul>
+					<?php try { ?>
+                        <ul>
+                            <li><?= $model->billing->city; ?></li>
+                            <li><?= $model->billing->street; ?></li>
+                            <li><?= $model->billing->home; ?></li>
+                            <li><?= $model->billing->house; ?></li>
+                        </ul>
+					<?php } catch (ErrorException $exception) { ?>
+                        <p>Отстуствуют</p>
+					<?php } ?>
                 </div>
 
                 <div class="w-50">
                     <ul>
 						<?php foreach ($itemsModel as $item): ?>
                             <li class="d-flex flex-row justify-content-between align-items-center">
-                                <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
+								<?php if ($item->product): ?>
+                                    <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
+								<?php endif; ?>
 
                                 <div class="w-75">
                                     <p><?= $item->name; ?></p>
-                                    <p>Внешний код: <?= $item->product->code; ?></p>
-                                    <p>Зкупочная: <?= $item->product->purchase; ?></p>
+									<?php if ($item->product): ?>
+                                        <p>Внешний код: <?= $item->product->code; ?></p>
+									<?php endif; ?>
+									<?php if ($item->product): ?>
+                                        <p>Зкупочная: <?= $item->product->purchase; ?></p>
+									<?php endif; ?>
                                     <p>К продаже: <?= $item->price; ?></p>
                                     <p>Кол-во: <?= $item->count; ?></p>
                                 </div>
