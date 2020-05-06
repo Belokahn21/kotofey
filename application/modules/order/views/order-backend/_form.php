@@ -34,7 +34,7 @@ use yii\helpers\ArrayHelper;
                     <ul>
 						<?php foreach ($itemsModel as $item): ?>
                             <li class="d-flex flex-row justify-content-between align-items-center">
-                                <img class="w-25 m-5" src="/upload/<?= $item->image; ?>">
+                                <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
 
                                 <div class="w-75">
                                     <p><?= $item->name; ?></p>
