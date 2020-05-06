@@ -23,33 +23,45 @@ use yii\helpers\ArrayHelper;
 
 <div class="tab-content" id="nav-tab-content-form">
 	<?php if (!$model->isNewRecord): ?>
-        <div class="tab-pane fade" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
-            <div class="d-flex flex-row">
-                <div class="w-50">
-                    <h4>Время и дата доставки</h4>
+    <div class="tab-pane fade" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
+        <div class="d-flex flex-row">
+            <div class="w-50">
+                <h4>Время и дата доставки</h4>
+				<?php try { ?>
                     <p><?= $model->dateDelivery->date; ?> - <?= $model->dateDelivery->time; ?></p>
-                </div>
+				<?php } catch (ErrorException $exception) { ?>
+                <p>Отстуствуют</p>
+                } ?>
 
-                <div class="w-50">
-                    <ul>
-						<?php foreach ($itemsModel as $item): ?>
-                            <li class="d-flex flex-row justify-content-between align-items-center">
-                                <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
+                <h4>Адрес доставки</h4>
+                <ul>
+                    <li><?= $model->user->billing->city; ?></li>
+                    <li><?= $model->user->billing->street; ?></li>
+                    <li><?= $model->user->billing->home; ?></li>
+                    <li><?= $model->user->billing->house; ?></li>
+                </ul>
+            </div>
 
-                                <div class="w-75">
-                                    <p><?= $item->name; ?></p>
-                                    <p>Внешний код: <?= $item->product->code; ?></p>
-                                    <p>Зкупочная: <?= $item->product->purchase; ?></p>
-                                    <p>К продаже: <?= $item->price; ?></p>
-                                    <p>Кол-во: <?= $item->count; ?></p>
-                                </div>
-                            </li>
-						<?php endforeach; ?>
-                    </ul>
-                </div>
+            <div class="w-50">
+                <ul>
+					<?php foreach ($itemsModel as $item): ?>
+                        <li class="d-flex flex-row justify-content-between align-items-center">
+                            <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
+
+                            <div class="w-75">
+                                <p><?= $item->name; ?></p>
+                                <p>Внешний код: <?= $item->product->code; ?></p>
+                                <p>Зкупочная: <?= $item->product->purchase; ?></p>
+                                <p>К продаже: <?= $item->price; ?></p>
+                                <p>Кол-во: <?= $item->count; ?></p>
+                            </div>
+                        </li>
+					<?php endforeach; ?>
+                </ul>
             </div>
         </div>
-	<?php endif; ?>
+    </div>
+    <?php endif; ?>
 
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="d-flex flex-row">
