@@ -36,10 +36,10 @@ use yii\helpers\ArrayHelper;
                     <h4>Адрес доставки</h4>
 					<?php try { ?>
                         <ul>
-                            <li><?= $model->billing->city; ?></li>
-                            <li><?= $model->billing->street; ?></li>
-                            <li><?= $model->billing->home; ?></li>
-                            <li><?= $model->billing->house; ?></li>
+                            <li><?= $model->owner->billing->city; ?></li>
+                            <li><?= $model->owner->billing->street; ?></li>
+                            <li><?= $model->owner->billing->home; ?></li>
+                            <li><?= $model->owner->billing->house; ?></li>
                         </ul>
 					<?php } catch (ErrorException $exception) { ?>
                         <p>Отстуствуют</p>

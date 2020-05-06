@@ -6,6 +6,7 @@ namespace app\modules\order\models\entity;
 use app\models\entity\Discount;
 use app\models\entity\OrderBilling;
 use app\models\entity\OrderDate;
+use app\models\entity\User;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
 use app\models\entity\Promo;
@@ -53,8 +54,8 @@ class Order extends ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_DEFAULT => ['is_close','type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CUSTOM => ['is_close','type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_DEFAULT => ['is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_CUSTOM => ['is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
 		];
 	}
 
@@ -190,5 +191,10 @@ class Order extends ActiveRecord
 	public function getDateDelivery()
 	{
 		return OrderDate::findOne(['order_id' => $this->id]);
+	}
+
+	public function getOwner()
+	{
+		return $this->hasOne(User::className(), ['id' => 'user_id']);
 	}
 }
