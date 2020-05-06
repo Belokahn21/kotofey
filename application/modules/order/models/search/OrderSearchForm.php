@@ -20,7 +20,7 @@ class OrderSearchForm extends Order
 	{
 		return [
 			[['delivery_id', 'payment_id'], 'string'],
-			[['paid', 'user_id'], 'integer'],
+			[['user_id'], 'integer'],
 		];
 	}
 
