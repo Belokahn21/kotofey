@@ -39,7 +39,8 @@ use yii\helpers\ArrayHelper;
                                 <div class="w-75">
                                     <p><?= $item->name; ?></p>
                                     <p>Внешний код: <?= $item->product->code; ?></p>
-                                    <p>Закуп: <?= $item->price; ?></p>
+                                    <p>Зкупочная: <?= $item->product->purchase; ?></p>
+                                    <p>К продаже: <?= $item->price; ?></p>
                                     <p>Кол-во: <?= $item->count; ?></p>
                                 </div>
                             </li>
