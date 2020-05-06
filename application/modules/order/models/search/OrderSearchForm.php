@@ -19,7 +19,7 @@ class OrderSearchForm extends Order
 	public function rules()
 	{
 		return [
-			[['delivery', 'payment'], 'string'],
+			[['delivery_id', 'payment_id'], 'string'],
 			[['paid', 'user_id'], 'integer'],
 		];
 	}
