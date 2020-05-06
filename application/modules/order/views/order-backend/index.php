@@ -10,6 +10,7 @@ use app\models\entity\User;
 use yii\helpers\Url;
 use app\models\helpers\OrderHelper;
 use app\models\tool\statistic\OrderStatistic;
+use yii\helpers\ArrayHelper;
 
 /* @var $users \app\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -49,6 +50,7 @@ $this->title = Title::showTitle("Заказы");
 		],
 		[
 			'attribute' => 'delivery_id',
+			'filter' => ArrayHelper::map(Delivery::find()->all(), 'id', 'name_f'),
 			'value' => function ($model) {
 				if ($model->delivery_id > 0) {
 					return Delivery::findOne($model->delivery_id)->name;
@@ -59,6 +61,7 @@ $this->title = Title::showTitle("Заказы");
 		],
 		[
 			'attribute' => 'payment_id',
+			'filter' => ArrayHelper::map(Payment::find()->all(), 'id', 'name_f'),
 			'value' => function ($model) {
 				if ($model->payment_id > 0) {
 					return Payment::findOne($model->payment_id)->name;
@@ -77,7 +80,7 @@ $this->title = Title::showTitle("Заказы");
 		[
 			'attribute' => 'user_id',
 			"format" => 'raw',
-			'filter' => \yii\helpers\ArrayHelper::map(User::find()->all(), 'id', 'email'),
+			'filter' => ArrayHelper::map(User::find()->all(), 'id', 'email'),
 			'value' => function ($model) {
 				if ($model->user_id) {
 					return Html::a(User::findOne($model->user_id)->display, Url::to(['admin/user', 'id' => $model->user_id]));
