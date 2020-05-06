@@ -12,16 +12,44 @@ use yii\helpers\ArrayHelper;
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
-        <a class="nav-item nav-link" id="nav-items-edit-tab" data-toggle="tab" href="#nav-items-edit" role="tab" aria-controls="nav-items-edit" aria-selected="false">Товары в заказе</a>
 		<?php if (!$model->isNewRecord): ?>
             <a class="nav-item nav-link" id="nav-detail-info-edit-tab" data-toggle="tab" href="#nav-detail-info-edit" role="tab" aria-controls="nav-detail-info-edit" aria-selected="false">Общая инофрмация</a>
 		<?php endif; ?>
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
+        <a class="nav-item nav-link" id="nav-items-edit-tab" data-toggle="tab" href="#nav-items-edit" role="tab" aria-controls="nav-items-edit" aria-selected="false">Товары в заказе</a>
     </div>
 </nav>
 
 
 <div class="tab-content" id="nav-tab-content-form">
+	<?php if (!$model->isNewRecord): ?>
+        <div class="tab-pane fade" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
+            <div class="d-flex flex-row">
+                <div class="w-50">
+                    <h4>Время и дата доставки</h4>
+                    <p><?= $model->dateDelivery->date; ?> - <?= $model->dateDelivery->time; ?></p>
+                </div>
+
+                <div class="w-50">
+                    <ul>
+						<?php foreach ($itemsModel as $item): ?>
+                            <li class="d-flex flex-row justify-content-between align-items-center">
+                                <img class="w-25 m-5" src="/upload/<?= $item->image; ?>">
+
+                                <div class="w-75">
+                                    <p><?= $item->name; ?></p>
+                                    <p>Внешний код: <?= $item->product->code; ?></p>
+                                    <p>Закуп: <?= $item->price; ?></p>
+                                    <p>Кол-во: <?= $item->count; ?></p>
+                                </div>
+                            </li>
+						<?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+	<?php endif; ?>
+
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="d-flex flex-row">
             <div class="w-25 p-1"><?= $form->field($model, 'is_paid')->checkbox(); ?></div>
@@ -81,9 +109,4 @@ use yii\helpers\ArrayHelper;
 		<?php endif; ?>
 
     </div>
-	<?php if (!$model->isNewRecord): ?>
-        <div class="tab-pane fade" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
-            1
-        </div>
-	<?php endif; ?>
 </div>
