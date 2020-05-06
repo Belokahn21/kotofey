@@ -30,16 +30,16 @@ tests/_output/*
 tests/_support/_generated
 
 #vagrant folder
-/.vagrant
+.vagrant
 *dump.html
 *dump.txt
-/debug.php
-/web/index.php
-/backup
+debug.php
+backup
 composer.lock
 markup/build/
 node_modules
 yii
 package-lock.json
-/web/*.xls
-/web/*.xlsx
+/application/web/*.xls
+/application/web/*.xlsx
+/application/web/index.php
