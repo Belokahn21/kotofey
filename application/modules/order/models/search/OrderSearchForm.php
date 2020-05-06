@@ -20,7 +20,7 @@ class OrderSearchForm extends Order
 	{
 		return [
 			[['delivery', 'payment'], 'string'],
-			[['paid', 'user'], 'integer'],
+			[['paid', 'user_id'], 'integer'],
 		];
 	}
 
@@ -43,6 +43,7 @@ class OrderSearchForm extends Order
 		}
 
 		$query->andFilterWhere(['like', 'delivery_id', $this->delivery_id])
+			->andFilterWhere(['user_id' => $this->user_id])
 			->andFilterWhere(['like', 'payment_id', $this->payment_id]);
 
 		return $dataProvider;
