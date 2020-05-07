@@ -39,6 +39,8 @@
     "lightbox2": "^2.11.1",
     "magnific-popup": "^1.1.0",
     "maskedinput": "^3.3.11",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "swiper": "^5.3.8",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
