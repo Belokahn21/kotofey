@@ -14,10 +14,10 @@ var gulp = require('gulp'),
     ugli = require('gulp-uglify'),
     plumber = require('gulp-plumber'),
     sass = require('gulp-sass'),
-	browserify = require('browserify'),
+    browserify = require('browserify'),
     buffer = require('vinyl-buffer');
-    source = require('vinyl-source-stream');
-	babelify = require('babelify');
+source = require('vinyl-source-stream');
+babelify = require('babelify');
 var config = {
     paths: {
         css: {
@@ -29,7 +29,7 @@ var config = {
             src_frontend: './src/frontend/style/scss/*.{sass,scss}',
             watch_frontend: './src/frontend/style/scss/**/*.{sass,scss}',
             build_frontend: './build/frontend/assets/css/',
-             application_frontend: '../application/web/css/',
+            application_frontend: '../application/web/css/',
         },
         html: {
             src_backend: './src/backend/html/*.{html,htm}',
@@ -50,7 +50,7 @@ var config = {
             src_frontend: './src/frontend/js/*.js',
             watch_frontend: './src/frontend/js/**/*.js',
             build_frontend: './build/frontend/assets/js/',
-             application_frontend: '../application/web/js/',
+            application_frontend: '../application/web/js/',
 
         },
         image: {
@@ -62,7 +62,7 @@ var config = {
             src_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
             watch_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
             build_frontend: './build/frontend/assets/images/',
-             application_frontend: '../application/web/upload/images/',
+            application_frontend: '../application/web/upload/images/',
         },
         copy: {
             src_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
@@ -73,7 +73,7 @@ var config = {
             src_frontend: './src/frontend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_frontend: './src/frontend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             build_frontend: './build/frontend/assets/images/',
-             application_frontend: '../application/web/upload/images/',
+            application_frontend: '../application/web/upload/images/',
         },
         ecmascript6: {
             src_backend: './src/backend/js/ecmascript6/core.js',
@@ -84,7 +84,7 @@ var config = {
             src_frontend: './src/frontend/js/ecmascript6/core.js',
             watch_frontend: './src/frontend/js/ecmascript6/**/*.js',
             build_frontend: './build/frontend/assets/js/',
-             application_frontend: '../application/web/js/'
+            application_frontend: '../application/web/js/'
 
         },
     }
@@ -92,18 +92,18 @@ var config = {
 gulp.task('ecmascript6', function () {
     return new Promise(function (resolve, reject) {
         es.concat(browserify({
-            entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_frontend],
-            debug: true
-        }).transform('babelify', {
-            presets: ['@babel/env'],
-        }).bundle()
-            .pipe(source('core.min.js'))
-            .pipe(buffer())
-            .pipe(plumber())
-            .pipe(plumber.stop())
-            .pipe(ugli())
-            .pipe(gulp.dest(config.paths.ecmascript6.build_frontend))
-            .pipe(gulp.dest(config.paths.ecmascript6.application_frontend)),
+                entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_frontend],
+                debug: true
+            }).transform('babelify', {
+                presets: ['@babel/env'],
+            }).bundle()
+                .pipe(source('core.min.js'))
+                .pipe(buffer())
+                .pipe(plumber())
+                .pipe(plumber.stop())
+                .pipe(ugli())
+                .pipe(gulp.dest(config.paths.ecmascript6.build_frontend))
+                .pipe(gulp.dest(config.paths.ecmascript6.application_frontend)),
 
             browserify({
                 entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_backend],
@@ -124,26 +124,15 @@ gulp.task('ecmascript6', function () {
 
 gulp.task('js', function () {
     return new Promise(function (resolve, reject) {
-        es.concat(
-            gulp.src(config.paths.js.src_frontend)
-                .pipe(plumber())
-                .pipe(rigger())
-                .pipe(babel())
-                .pipe(concat('script.min.js'))
-                .pipe(ugli())
-                .pipe(plumber.stop())
-                .pipe(gulp.dest(config.paths.js.build_frontend))
-                .pipe(gulp.dest(config.paths.js.application_frontend)),
-            gulp.src(config.paths.js.src_backend)
-                .pipe(plumber())
-                .pipe(rigger())
-                .pipe(babel())
-                .pipe(concat('backend.min.js'))
-                .pipe(ugli())
-                .pipe(plumber.stop())
-                .pipe(gulp.dest(config.paths.js.build_backend))
-                .pipe(gulp.dest(config.paths.js.application_backend))
-        );
+        gulp.src(config.paths.js.src_frontend)
+            .pipe(plumber())
+            .pipe(rigger())
+            .pipe(babel())
+            .pipe(concat('script.min.js'))
+            .pipe(ugli())
+            .pipe(plumber.stop())
+            .pipe(gulp.dest(config.paths.js.build_frontend))
+            .pipe(gulp.dest(config.paths.js.application_frontend));
         resolve();
     });
 });
