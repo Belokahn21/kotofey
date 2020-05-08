@@ -1,0 +1,17 @@
+.search-admin {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  border-top: 1px grey solid;
+  border-bottom: 1px grey solid;
+}
+
+.search-form {
+  padding: 10px 0;
+
+  &__input {
+    padding: 2.5px 5px;
+  }
+}
