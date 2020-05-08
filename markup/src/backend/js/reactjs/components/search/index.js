@@ -5,8 +5,8 @@ import Result from '../search_result/index';
 
 class Search extends React.Component {
 
-	handleClick() {
-		console.log('значение this:', this.value);
+	handleClick(e) {
+		console.log('значение this:', e.target.value);
 	}
 
 	render() {
