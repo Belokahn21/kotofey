@@ -99,12 +99,10 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-				'admin/<module>/<controller>/' => '<module>/<controller>/index',
-				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+                'GET rest/product/get' => 'rest/product/get',
+                'admin/<module>/<controller>/' => '<module>/<controller>/index',
+                'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
                 'bot/vk/index' => 'bot/vk/index',
-                'rest/product/create' => 'rest/product/create',
-                'rest/product/get/<id:(\d+)>' => 'rest/product/get',
-                'rest/category/three' => 'rest/category/three',
                 'market' => 'yandex/catalog/export',
                 'gii' => 'gii',
                 'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
@@ -116,6 +114,11 @@ $config = [
                 '<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
                 '<action>' => 'site/<action>',
                 '<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
+//                [
+//                    'class' => 'yii\rest\UrlRule',
+//                    'controller' => 'rest/product'
+//                ]
+
             ]
         ],
     ],
@@ -127,6 +130,7 @@ $config = [
             'class' => 'app\modules\yandex\Module',
         ],
         'rest' => [
+            'basePath' => '@app/modules/rest',
             'class' => 'app\modules\rest\Module',
         ],
         'bot' => [
@@ -138,9 +142,9 @@ $config = [
         'feed' => [
             'class' => 'app\modules\feed\Module',
         ],
-		'order' => [
-			'class' => 'app\modules\order\Module',
-		],
+        'order' => [
+            'class' => 'app\modules\order\Module',
+        ],
     ],
     'params' => $params,
 ];
