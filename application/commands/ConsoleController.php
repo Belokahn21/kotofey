@@ -4,6 +4,7 @@ namespace app\commands;
 
 use app\models\entity\Product;
 use app\models\entity\ProductPropertiesValues;
+use app\models\entity\ProductSync;
 use app\models\entity\Promo;
 use app\models\entity\User;
 use app\models\entity\UsersReferal;
@@ -385,19 +386,29 @@ class ConsoleController extends Controller
     public function actionSyncSibagro()
     {
         $who_not_available = [];
-        $products = Product::find()->where(['vendor_id' => self::VENDOR_ID_SIBAGRO_TRADE])->limit(20)->all();
+        $products = Product::find()->where(['vendor_id' => self::VENDOR_ID_SIBAGRO_TRADE])->andWhere(['not in', 'id', ArrayHelper::getColumn(ProductSync::find()->all(), 'product_id')])->limit(5)->all();
         foreach ($products as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             if (!$this->isSibagrotrade($product)) {
                 continue;
             }
 
-            if (!$this->checkExist($product)) {
-                $product->active = false;
-                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            echo $product->name . PHP_EOL;
 
-                if ($product->validate()) {
-                    if ($product->save()) {
-                        $who_not_available[] = $product->id;
+            if (!$this->checkExist($product)) {
+                $product->active = 0;
+                $who_not_available[] = $product->id;
+            } else {
+                $product->active = 1;
+            }
+
+            if ($product->validate()) {
+                if ($product->update() !== false) {
+                    if ($syncHistory = ProductSync::findOne(['product_id' => $product->id])) {
+                        $syncHistory->reUpdate();
+                    } else {
+                        $syncHistory = new ProductSync();
+                        $syncHistory->push($product->id);
                     }
                 }
             }
