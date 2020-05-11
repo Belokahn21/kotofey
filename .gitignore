@@ -38,7 +38,6 @@ backup
 composer.lock
 markup/build/
 node_modules
-yii
 package-lock.json
 /application/web/*.xls
 /application/web/*.xlsx
