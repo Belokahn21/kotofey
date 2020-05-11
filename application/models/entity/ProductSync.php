@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "product_sync".
@@ -37,9 +38,13 @@ class ProductSync extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
@@ -51,11 +56,31 @@ class ProductSync extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
+    }
+
+    public function push($product_id)
+    {
+        $this->product_id = $product_id;
+        $this->last_run_at = time();
+
+        if (!$this->validate()) {
+            return false;
+        }
+
+        return $this->save();
+    }
+
+    public function reUpdate()
+    {
+        $this->last_run_at = time();
+
+        if (!$this->validate()) {
+            return false;
+        }
+
+        return $this->update();
     }
 }
