@@ -1441,7 +1441,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function actionShortly($id = null) {
+    public function actionShortly($id = null)
+    {
         if ($id) {
             $model = ShortLinks::findOne($id);
 
@@ -1560,7 +1561,6 @@ class AdminController extends Controller
     {
         return $this->render('personal');
     }
-
 
 
     public function actionSaleProduct()

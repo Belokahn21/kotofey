@@ -425,6 +425,10 @@ class ConsoleController extends Controller
             return true;
         }
 
+        if (strlen($product->code) == 9 && (substr($product->code, 0, 4)) == '0000') {
+            return true;
+        }
+
 
         return false;
     }
