@@ -415,7 +415,7 @@ class ConsoleController extends Controller
         }
 
         if (count($who_not_available) > 0) {
-            file_put_contents(\Yii::getAlias('@app/tmp/not_available_goods.txt'), implode(';', $who_not_available), LOCK_EX);
+            file_put_contents(\Yii::getAlias('@app/tmp/not_available_goods.txt'), implode(';', $who_not_available), LOCK_EX | FILE_APPEND);
         }
     }
 
