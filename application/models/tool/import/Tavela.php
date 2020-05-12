@@ -16,24 +16,40 @@ class Tavela
     public function update()
     {
         $empty_ids = [];
-        $not_found = [];
         if (($handle = fopen($this->getPricePath(), "r")) !== false) {
             while (($line = fgetcsv($handle, 1000, ";")) !== false) {
+
+
                 $code = $line[12];
-                if (!is_numeric($code)) {
+                $price = (int)$line[6];
+
+                if (!is_numeric($code) or !is_numeric($price)) {
                     continue;
                 }
 
                 if ($product = Product::findOneByCode($code)) {
-                    echo $code . ' - ' . $product->name . PHP_EOL;
+                    $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+                    $product->purchase = $price;
+                    $product->price = $product->purchase + (ceil($product->purchase * 0.3));
+                    $product->active = 1;
+
+                    if (!$product->validate()) {
+                        return false;
+                    }
+
+                    if (!$product->save()) {
+                        return false;
+                    }
                 } else {
-                    $not_found[] = $code;
+                    $empty_ids[] = $code;
                 }
+
             }
         }
 
-        print_r($empty_ids);
+
         echo "Не найдено товаров" . PHP_EOL;
-        print_r($not_found);
+        print_r($empty_ids);
+        return true;
     }
 }

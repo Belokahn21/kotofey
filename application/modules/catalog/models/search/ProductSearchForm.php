@@ -49,7 +49,9 @@ class ProductSearchForm extends Product
             $product_properties_values = ArrayHelper::getColumn(ProductPropertiesValues::find()->select(['product_id'])->where(['value' => $this->prop_sales, 'property_id' => 11])->all(), 'product_id');
         }
 
-//		$product_properties_values = array_merge($product_properties_values, [$this->id]);
+        if ($this->id) {
+            array_push($product_properties_values, $this->id);
+        }
 
         $query->andFilterWhere([
             'category_id' => $this->category_id,
