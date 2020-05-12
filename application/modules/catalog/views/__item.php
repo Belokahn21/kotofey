@@ -11,7 +11,7 @@ use app\models\services\BonusByBuyService;
 /* @var $product \app\models\entity\Product */
 ?>
 
-<li class="catalog-list__item swiper-slide">
+<li class="catalog-list__item">
     <?php if ($product->discount_price): ?>
         <div id="burst-12">
             <div class='dis'>
