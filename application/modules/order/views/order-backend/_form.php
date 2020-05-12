@@ -44,6 +44,10 @@ use yii\helpers\ArrayHelper;
                     <?php } catch (ErrorException $exception) { ?>
                         <p>Отстуствуют</p>
                     <?php } ?>
+
+                    <h4>Финансы</h4>
+                    <p>Закуп: <?= \app\models\helpers\OrderHelper::orderPurchase($model->id); ?></p>
+                    <p>Сумма заказа: <?= \app\models\helpers\OrderHelper::orderSummary($model->id); ?></p>
                 </div>
 
                 <div class="w-50">

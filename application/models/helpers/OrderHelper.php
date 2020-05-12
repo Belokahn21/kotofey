@@ -13,6 +13,20 @@ use yii\helpers\ArrayHelper;
 
 class OrderHelper
 {
+    public static function orderPurchase($order_id)
+    {
+        $out = 0;
+
+        $items = OrdersItems::find()->where(['order_id' => $order_id])->all();
+
+        foreach ($items as $item) {
+            $out += $item->count * $item->product->purchase;
+        }
+
+
+        return $out;
+    }
+
     public static function orderSummary($order_id)
     {
         $summ = 0;
