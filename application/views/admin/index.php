@@ -11,6 +11,7 @@ use app\models\entity\User;
 use app\models\entity\SearchQuery;
 use app\models\tool\statistic\OrderStatistic;
 use app\models\tool\statistic\ProductStatistic;
+use app\models\entity\ProductSync;
 
 /* @var $this yii\web\View
  * @var $last_search \app\models\entity\SearchQuery[]
@@ -19,7 +20,7 @@ use app\models\tool\statistic\ProductStatistic;
 $this->title = Title::showTitle("Главная страница");
 ?>
 <?= $this->render('modal/search', [
-    'last_search' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all()
+	'last_search' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all()
 ]); ?>
 <?= $this->render('modal/order-stat'); ?>
 <section class="desktop">
@@ -75,7 +76,7 @@ $this->title = Title::showTitle("Главная страница");
                     </div>
                 </div>
 
-                <div class="block-info__summary">900/+9000</div>
+                <div class="block-info__summary"><?= ProductSync::find()->count(); ?>/+9000</div>
             </li>
 
             <li class="block-info__item">
@@ -106,15 +107,15 @@ $this->title = Title::showTitle("Главная страница");
                         <i class="fas fa-search"></i>
                     </div>
                     <div class="block-info__content">
-                        <?php if ($last_search): ?>
+						<?php if ($last_search): ?>
                             <ul class="statistic__list">
-                                <?php foreach ($last_search as $phrase): ?>
+								<?php foreach ($last_search as $phrase): ?>
                                     <li class="statistic__item" data-toggle="tooltip" data-placement="bottom" title="<?= $phrase->text; ?>">
-                                        <?= StringHelper::truncate($phrase->text, 15, '...'); ?>
+										<?= StringHelper::truncate($phrase->text, 15, '...'); ?>
                                     </li>
-                                <?php endforeach; ?>
+								<?php endforeach; ?>
                             </ul>
-                        <?php endif; ?>
+						<?php endif; ?>
                     </div>
                 </div>
 
@@ -138,20 +139,20 @@ $this->title = Title::showTitle("Главная страница");
             </li>
         </ul>
     </div>
-    <?= ToDoWidget::widget(); ?>
+	<?= ToDoWidget::widget(); ?>
 </section>
 
 <script type="text/javascript">
-    var element = document.querySelector('.out-file-handler');
-    var link = document.querySelector('.link-dump');
+	var element = document.querySelector('.out-file-handler');
+	var link = document.querySelector('.link-dump');
 
-    element.addEventListener('click', function () {
+	element.addEventListener('click', function () {
 
-        if (element.checked) {
-            link.setAttribute('href', '/admin/?save_dump=Y&out=Y');
-        } else {
-            link.setAttribute('href', '/admin/?save_dump=Y');
-        }
+		if (element.checked) {
+			link.setAttribute('href', '/admin/?save_dump=Y&out=Y');
+		} else {
+			link.setAttribute('href', '/admin/?save_dump=Y');
+		}
 
-    });
+	});
 </script>
