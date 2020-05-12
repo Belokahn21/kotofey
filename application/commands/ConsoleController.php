@@ -386,7 +386,7 @@ class ConsoleController extends Controller
     public function actionSyncSibagro()
     {
         $who_not_available = [];
-        $products = Product::find()->where(['vendor_id' => self::VENDOR_ID_SIBAGRO_TRADE])->andWhere(['not in', 'id', ArrayHelper::getColumn(ProductSync::find()->all(), 'product_id')])->limit(5)->all();
+        $products = Product::find()->where(['vendor_id' => self::VENDOR_ID_SIBAGRO_TRADE])->andWhere(['not in', 'id', ArrayHelper::getColumn(ProductSync::find()->all(), 'product_id')])->limit(50)->all();
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             if (!$this->isSibagrotrade($product)) {
