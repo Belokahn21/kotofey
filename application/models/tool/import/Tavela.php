@@ -7,7 +7,7 @@ use app\models\entity\Product;
 
 class Tavela
 {
-
+    const VENDOR_ID = 12;
     public function getPricePath()
     {
         return \Yii::getAlias('@app/tmp/price/tavela/tavela.csv');
@@ -32,6 +32,7 @@ class Tavela
                     $product->purchase = $price;
                     $product->price = $product->purchase + (ceil($product->purchase * 0.3));
                     $product->active = 1;
+                    $product->vendor_id = self::VENDOR_ID;
 
                     if (!$product->validate()) {
                         return false;
