@@ -1,5 +1,6 @@
 <?php
 
+use app\models\helpers\OrderHelper;
 use yii\helpers\StringHelper;
 use app\models\tool\Backup;
 use app\models\tool\Currency;
@@ -40,11 +41,11 @@ $this->title = Title::showTitle("Главная страница");
                             </li>
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Оборот</div>
-                                <div class="statistic__item-value"><?= Price::format(OrderStatistic::income()); ?></div>
+                                <div class="statistic__item-value"><?= Price::format(OrderHelper::income()); ?></div>
                             </li>
                             <li class="statistic__item">
                                 <div class="statistic__item-key">Выручка</div>
-                                <div class="statistic__item-value"><?= Price::format(OrderStatistic::marginality()); ?></div>
+                                <div class="statistic__item-value"><?= Price::format(OrderHelper::marginality()); ?></div>
                             </li>
                         </ul>
                     </div>

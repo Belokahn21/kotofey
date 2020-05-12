@@ -3,6 +3,7 @@
 namespace app\models\services;
 
 
+use app\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
 use app\models\entity\OrderDate;
 use app\modules\order\models\entity\OrdersItems;
@@ -47,7 +48,7 @@ class NotifyService
 				- Телефон: %s\n
 				Доставка: %s\n
 				Подробнее: https://kotofey.store/admin/order/order-backend/update?id=%d",
-                        Price::format(OrderStatistic::income($order_id)), $Order->comment, $OrderDate->date, $OrderDate->time, $Client->email, $Client->phone, substr($delivery_info, 0, -2), $order_id),
+                        Price::format(OrderHelper::income($order_id)), $Order->comment, $OrderDate->date, $OrderDate->time, $Client->email, $Client->phone, substr($delivery_info, 0, -2), $order_id),
                 ]);
 
             }

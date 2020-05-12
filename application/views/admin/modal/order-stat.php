@@ -1,7 +1,7 @@
 <?php
 
+use app\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
-use app\models\tool\statistic\OrderStatistic;
 use yii\helpers\ArrayHelper;
 use app\models\tool\Currency;
 use app\models\tool\Price;
@@ -31,7 +31,7 @@ use app\models\tool\Price;
                             <div class="month-stat__rotate">Оборот: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
 									$out = 0;
 									foreach ($models as $model) {
-										$out += OrderStatistic::income($model->id);
+										$out += OrderHelper::income($model->id);
 									}
 									return Price::format($out) . Currency::getInstance()->show();
 								}) ?>
@@ -39,7 +39,7 @@ use app\models\tool\Price;
                             <div class="month-stat__summary">Доход: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
 									$out = 0;
 									foreach ($models as $model) {
-										$out += OrderStatistic::marginality($model->id);
+										$out += OrderHelper::marginality($model->id);
 									}
 									return Price::format($out) . Currency::getInstance()->show();
 								}) ?>
