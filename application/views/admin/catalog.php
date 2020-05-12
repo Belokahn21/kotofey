@@ -16,7 +16,7 @@ use app\models\entity\SiteSettings;
 /* @var $model \app\models\entity\Product
  * @var $modelDelivery \app\models\entity\ProductOrder
  * @var $properties \app\models\entity\ProductProperties[]
- * @var $searchModel \app\models\search\ProductSearchForm
+ * @var $searchModel \app\modules\catalog\models\search\ProductSearchForm
  */
 
 $this->title = Title::showTitle("Товары"); ?>
