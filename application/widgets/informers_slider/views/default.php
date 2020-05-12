@@ -21,4 +21,5 @@ use app\models\entity\ProductPropertiesValues;
             <div class="swiper-pagination"></div>
         </div>
     </div>
-	<?php $this->endCache(); endif; ?>
+	<?php $this->endCache(); ?>
+<?php endif; ?>
