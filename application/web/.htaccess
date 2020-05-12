@@ -1,4 +1,3 @@
-Deny from 109.171.61.86
 RewriteEngine on
 RewriteRule ^index\.html /index.php [R=301,L]
 

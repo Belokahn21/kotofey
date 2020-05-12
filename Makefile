@@ -6,3 +6,6 @@ gulp-build:
 
 push:
 	git add . && git commit -m "update" && git push
+
+migrate:
+	cd application && php yii migrate
