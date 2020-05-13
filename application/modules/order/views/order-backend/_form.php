@@ -59,7 +59,11 @@ use yii\helpers\ArrayHelper;
                                 <?php endif; ?>
 
                                 <div class="w-75">
-                                    <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
+                                    <?php if ($item->product): ?>
+                                        <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
+                                    <?php else: ?>
+                                        <p><?= $item->name; ?></p>
+                                    <?php endif; ?>
                                     <?php if ($item->product): ?>
                                         <p>Внешний код: <?= $item->product->code; ?></p>
                                     <?php endif; ?>
