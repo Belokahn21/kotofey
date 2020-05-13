@@ -40,14 +40,15 @@ $user = User::findOne(Yii::$app->user->identity->id);
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<?= Html::csrfMetaTags() ?>
+    <script src="https://api-maps.yandex.ru/2.1/?apikey=<?= Yii::$app->params['yandex']['geocode']; ?>&lang=ru_RU" type="text/javascript"></script>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-	<?php $this->head() ?>
+    <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 <?= Alert::widget([
-	'template' => 'backend'
+    'template' => 'backend'
 ]); ?>
 <aside class="left-sidebar">
     <button class="switch-menu">Меню</button>
@@ -161,7 +162,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         </div>
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['/admin/vacancy']) ?>">Список вакансий</a> <span class="count"><?= Vacancy::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/personal']) ?>">Сотрудники</a> </li>
+                            <li><a href="<?= Url::to(['/admin/personal']) ?>">Сотрудники</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -177,7 +178,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
     </nav>
 </aside>
 <div class="main">
-	<?= $content; ?>
+    <?= $content; ?>
 </div>
 <?php $this->endBody() ?>
 </body>
