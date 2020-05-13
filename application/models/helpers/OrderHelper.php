@@ -13,6 +13,11 @@ use yii\helpers\ArrayHelper;
 
 class OrderHelper
 {
+    public static function isEmptyItem(OrdersItems $item)
+    {
+        return empty($item->name) && empty($item->price) && empty($item->count);
+    }
+
     public static function orderPurchase($order_id)
     {
         $out = 0;
@@ -20,6 +25,11 @@ class OrderHelper
         $items = OrdersItems::find()->where(['order_id' => $order_id])->all();
 
         foreach ($items as $item) {
+
+            if (static::isEmptyItem($item)) {
+                continue;
+            }
+
             $out += $item->count * $item->product->purchase;
         }
 
