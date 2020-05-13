@@ -387,8 +387,7 @@ class ConsoleController extends Controller
 	{
 		$who_not_available = [];
 		$alreadySync = ProductSync::find()->all();
-//		$alreadySync = ProductSync::find()->where(['<=', 'last_run_at', 'last_run_at + 432000'])->all();
-		$products = Product::find()->where(['vendor_id' => self::VENDOR_ID_SIBAGRO_TRADE])->andWhere(['not in', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')])->limit(50)->all();
+		$products = Product::find()->andWhere(['not in', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')])->limit(50)->all();
 		foreach ($products as $product) {
 			$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 			if (!$this->isSibagrotrade($product)) {
