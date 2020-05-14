@@ -12,21 +12,18 @@ class Provider implements ProviderInterface
 {
     public function info($url)
     {
-//		$page = new Page('http://www.sat-altai.ru/', [
-//			'login' => 'popugau@gmail.com',
-//			'password' => '123qweR%',
-//		]);
-//		$html = $page->content($url);
+		$page = new Page('http://www.sat-altai.ru/', [
+			'login' => 'popugau@gmail.com',
+			'password' => '123qweR%',
+		]);
+		$html = $page->content($url);
 
-//        $html = "";
-//        if ($curl = curl_init()) {
-//            curl_setopt($curl, CURLOPT_URL, $url);
-//            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-//            $html = curl_exec($curl);
-//            curl_close($curl);
-//        }
-
-        Debug::p(file_get_contents($url));
+        if ($curl = curl_init()) {
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            $html = curl_exec($curl);
+            curl_close($curl);
+        }
 
         $dom = new \DOMDocument();
         $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
