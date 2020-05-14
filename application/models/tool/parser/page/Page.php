@@ -70,7 +70,12 @@ class Page
 
 		//Where our cookie details are saved. This is typically required
 		//for authentication, as the session ID is usually saved in the cookie file.
-		curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);
+//		curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);
+//		Cookie: beget=begetok
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+			'Cookie: beget=begetok',
+		));
+		curl_setopt($curl, CURLOPT_COOKIE, "Cookie: beget=begetok");
 
 		//Sets the user agent. Some websites will attempt to block bot user agents.
 		//Hence the reason I gave it a Chrome user agent.
@@ -102,7 +107,8 @@ class Page
 		}
 
 		//Execute the login request.
-		curl_exec($curl);
+		print_r(curl_exec($curl));
+//		curl_exec($curl);
 
 
 		//Check for errors!
@@ -115,6 +121,10 @@ class Page
 
 		//Use the same cookie file.
 		curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);
+		curl_setopt($curl, CURLOPT_COOKIE, "beget=begetok;expires=99999999999");
+		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+			'Cookie: beget=begetok',
+		));
 
 		//Use the same user agent, just in case it is used by the server for session validation.
 		curl_setopt($curl, CURLOPT_USERAGENT, USER_AGENT);

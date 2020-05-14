@@ -10,4 +10,6 @@ $parser = new ParseProvider($url);
 $parser->contract();
 $response = Json::encode($parser->getInfo());
 
+echo "<pre>";
 print_r($url);
+echo "</pre>";
