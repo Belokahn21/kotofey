@@ -20,7 +20,7 @@ class Tavela
 		if (($handle = fopen($this->getPricePath(), "r")) !== false) {
 			while (($line = fgetcsv($handle, 1000, ";")) !== false) {
 
-				$name = $line[3];
+				$name = $line[2];
 				$code = $line[12];
 				$price = (int)$line[6];
 
