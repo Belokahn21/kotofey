@@ -102,8 +102,8 @@ class Page
 		}
 
 		//Execute the login request.
-		//curl_exec($curl);
 		curl_exec($curl);
+
 
 		//Check for errors!
 		if (curl_errno($curl)) {

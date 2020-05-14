@@ -28,6 +28,10 @@ class Provider implements ProviderInterface
         $dom = new \DOMDocument();
         $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
 
+        print_r($dom);
+
+        return;
+
         $xpath = new \DOMXPath($dom);
 //		$price = $xpath->query('//div[@class="lead"]')->item(0)->nodeValue;
         $price = $xpath->query('//div[@class="lead"]');
