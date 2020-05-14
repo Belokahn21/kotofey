@@ -140,31 +140,33 @@ use yii\helpers\ArrayHelper;
                 </div>
 
                 <div class="w-50">
-                    <ul>
-						<?php foreach ($itemsModel as $item): ?>
-                            <li class="d-flex flex-row justify-content-between align-items-center">
-								<?php if ($item->product): ?>
-                                    <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
-								<?php endif; ?>
+					<?php if (is_array($itemsModel)): ?>
+                        <ul>
+							<?php foreach ($itemsModel as $item): ?>
+                                <li class="d-flex flex-row justify-content-between align-items-center">
+									<?php if ($item->product): ?>
+                                        <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
+									<?php endif; ?>
 
-                                <div class="w-75">
-									<?php if ($item->product): ?>
-                                        <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
-									<?php else: ?>
-                                        <p><?= $item->name; ?></p>
-									<?php endif; ?>
-									<?php if ($item->product): ?>
-                                        <p>Внешний код: <?= $item->product->code; ?></p>
-									<?php endif; ?>
-									<?php if ($item->product): ?>
-                                        <p>Зкупочная: <?= $item->product->purchase; ?></p>
-									<?php endif; ?>
-                                    <p>К продаже: <?= $item->price; ?></p>
-                                    <p>Кол-во: <?= $item->count; ?></p>
-                                </div>
-                            </li>
-						<?php endforeach; ?>
-                    </ul>
+                                    <div class="w-75">
+										<?php if ($item->product): ?>
+                                            <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
+										<?php else: ?>
+                                            <p><?= $item->name; ?></p>
+										<?php endif; ?>
+										<?php if ($item->product): ?>
+                                            <p>Внешний код: <?= $item->product->code; ?></p>
+										<?php endif; ?>
+										<?php if ($item->product): ?>
+                                            <p>Зкупочная: <?= $item->product->purchase; ?></p>
+										<?php endif; ?>
+                                        <p>К продаже: <?= $item->price; ?></p>
+                                        <p>Кол-во: <?= $item->count; ?></p>
+                                    </div>
+                                </li>
+							<?php endforeach; ?>
+                        </ul>
+					<?php endif; ?>
                 </div>
             </div>
         </div>
@@ -216,7 +218,7 @@ use yii\helpers\ArrayHelper;
         </div>
     </div>
     <div class="tab-pane fade" id="nav-items-edit" role="tabpanel" aria-labelledby="nav-items-edit-tab">
-		<?php if ($model->isNewRecord && count($itemsModel) == 0): ?>
+		<?php if ($model->isNewRecord or !is_array($itemsModel)): ?>
 			<?= $this->render('include/new_items', [
 				'itemsModel' => $itemsModel,
 				'form' => $form

@@ -102,7 +102,9 @@ class OrderBackendController extends Controller
 		}
 
 		$model->scenario = Order::SCENARIO_CUSTOM;
-		$itemsModel = OrdersItems::find()->where(['order_id' => $model->id])->all();
+		if (!$itemsModel = OrdersItems::find()->where(['order_id' => $model->id])->all()) {
+			$itemsModel = new OrdersItems();
+		}
 		$users = User::find()->all();
 		$deliveries = Delivery::find()->all();
 		$payments = Payment::find()->all();
