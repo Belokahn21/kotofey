@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\delivery;
 use app\models\entity\Payment;
 use app\models\helpers\OrderHelper;
 

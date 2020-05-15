@@ -1,8 +1,8 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\delivery\models\search;
 
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\delivery;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

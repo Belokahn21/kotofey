@@ -3,7 +3,7 @@
 namespace app\controllers;
 
 use app\models\entity\Category;
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\delivery;
 use app\models\entity\Geo;
 use app\models\entity\GeoTimezone;
 use app\models\entity\Informers;

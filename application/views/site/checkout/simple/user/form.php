@@ -8,7 +8,7 @@ use app\models\services\PromoCodeService;
 /* @var $this \yii\web\View
  * @var $discount_model \app\models\forms\DiscountForm
  * @var $user \app\models\entity\User
- * @var $delivery \app\models\entity\Delivery[]
+ * @var $delivery app\modules\delivery\models\entity\Delivery[]
  * @var $payment \app\models\entity\Payment[]
  * @var $order \app\modules\order\models\entity\Order
  * @var $billing \app\models\entity\user\Billing

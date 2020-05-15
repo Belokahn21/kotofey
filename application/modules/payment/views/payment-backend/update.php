@@ -1,7 +1,8 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $model \app\models\entity\Delivery */
+
+/* @var $model \app\models\entity\Payment */
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -11,13 +12,14 @@ use yii\helpers\Url;
 
 $this->title = Title::showTitle($model->name);
 ?>
-<section class="delivery">
-    <h1 class="title">Доставка: <?= $model->name; ?></h1>
-<?php $form = ActiveForm::begin(); ?>
-	<?= $this->render('../_forms/_delivery', [
+<section class="payment">
+    <h1 class="title">Оплата: <?= $model->name; ?></h1>
+	<?= Html::a("Назад", '/admin/payment/', ['class' => 'btn-back']) ?>
+	<?php $form = ActiveForm::begin(); ?>
+	<?= $this->render('_form', [
 		'model' => $model,
 		'form' => $form,
 	]) ?>
 	<?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
-<?php ActiveForm::end(); ?>
+	<?php ActiveForm::end(); ?>
 </section>

@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\models\entity\Basket;
 use app\models\entity\BasketItem;
 use app\models\entity\Compare;
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\delivery;
 use app\models\entity\Favorite;
 use app\models\entity\Geo;
 use app\modules\order\models\entity\OrdersItems;

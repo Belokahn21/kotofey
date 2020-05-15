@@ -17,7 +17,7 @@ use app\models\entity\User;
 use app\widgets\notification\Alert;
 use app\models\entity\Stocks;
 use app\modules\order\models\entity\OrderStatus;
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\delivery;
 use app\models\entity\Payment;
 use app\models\entity\Promo;
 use app\models\entity\VendorGroup;
@@ -107,7 +107,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <li><a href="<?= Url::to(['/admin/order/order-backend/index']); ?>">Заказы</a> <span class="count"><?= Order::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/stocks']); ?>">Склады</a> <span class="count"><?= Stocks::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/status']); ?>">Статус заказа</a> <span class="count"><?= OrderStatus::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/delivery']); ?>">Доставки</a> <span class="count"><?= Delivery::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/delivery/delivery-backend/index']); ?>">Доставки</a> <span class="count"><?= Delivery::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/payment']); ?>">Оплаты</a> <span class="count"><?= Payment::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/promo']); ?>">Промокоды</a> <span class="count"><?= Promo::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/vendor']); ?>">Поставщики</a> <span class="count"><?= Vendor::find()->count() ?></span></li>

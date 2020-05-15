@@ -12,26 +12,22 @@ $this->title = Title::showTitle("Управление оплатами");
 ?>
 <section class="payment">
     <h1 class="title">Оплаты</h1>
-<?php $form = ActiveForm::begin(); ?>
-	<?= $this->render('_forms/_payment', [
+	<?php $form = ActiveForm::begin(); ?>
+	<?= $this->render('_form', [
 		'model' => $model,
 		'form' => $form,
 	]) ?>
 	<?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
-<?php ActiveForm::end(); ?>
+	<?php ActiveForm::end(); ?>
 </section>
 <h2 class="title">Список оплат</h2>
 <?= GridView::widget([
 	'dataProvider' => $dataProvider,
-	'filterModel' => $model,
+	'filterModel' => $searchModel,
 	'emptyText' => 'Оплаты отсутствуют',
 	'columns' => [
-		[
-			'attribute' => 'id',
-		],
-		[
-			'attribute' => 'name',
-		],
+		'id',
+		'name',
 		[
 			'class' => 'yii\grid\ActionColumn',
 			'buttons' => [
@@ -39,10 +35,10 @@ $this->title = Title::showTitle("Управление оплатами");
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
 				},
 				'update' => function ($url, $model, $key) {
-					return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/payment/$key"]));
+					return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
 				},
 				'delete' => function ($url, $model, $key) {
-					return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["/admin/payment/", 'id' => $key, 'action' => 'delete']));
+					return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
 				},
 			]
 		],

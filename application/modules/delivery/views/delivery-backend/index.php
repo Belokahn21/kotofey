@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\entity\Delivery */
+/* @var $model \app\modules\delivery\models\entity\Delivery */
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
