@@ -141,8 +141,8 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['/admin/news']) ?>">Новости</a> <span class="count"><?= News::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/newssections']) ?>">Рубрики</a></li>
-                            <li><a href="<?= Url::to(['/admin/sliders']) ?>">Слайдеры</a></li>
-                            <li><a href="<?= Url::to(['/admin/sliderimages']) ?>">Изображения слайдеров</a></li>
+                            <li><a href="<?= Url::to(['/admin/content/slider-backend/index']) ?>">Слайдеры</a></li>
+                            <li><a href="<?= Url::to(['/admin/content/slider-images-backend/index']) ?>">Изображения слайдеров</a></li>
                         </ul>
                     </li>
                     <li>

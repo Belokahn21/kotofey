@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\content\models\entity;
 
 
 use mohorev\file\UploadBehavior;
