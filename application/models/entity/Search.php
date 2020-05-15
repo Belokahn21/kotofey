@@ -11,71 +11,72 @@ use yii\db\ActiveRecord;
 
 class Search extends Model
 {
-	public $search;
-	public $category;
-	public $pricefrom;
-	public $priceto;
-	public $save_history = false;
+    public $search;
+    public $category;
+    public $pricefrom;
+    public $priceto;
+    public $save_history = false;
 
-	public function rules()
-	{
-		return [
-			[['search', 'category', 'pricefrom', 'priceto'], 'string'],
+    public function rules()
+    {
+        return [
+            [['search', 'category', 'pricefrom', 'priceto'], 'string'],
 
-			[['save_history'], 'boolean'],
-		];
-	}
+            [['save_history'], 'boolean'],
+        ];
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			'search' => 'Название товара',
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            'search' => 'Название товара',
+        ];
+    }
 
-	public function search()
-	{
-		$products = Product::find();
-		$products = $this->setFilter($products);
+    public function search()
+    {
+        $products = Product::find();
+        $products = $this->setFilter($products);
 
-		return $products;
-	}
+        return $products;
+    }
 
-	public function setFilter(ActiveQuery $products)
-	{
-		if (!empty($this->search)) {
+    public function setFilter(ActiveQuery $products)
+    {
+        if (!empty($this->search)) {
             $products->andWhere(['active' => 1]);
 
-			$phrase = $this->search;
+            $phrase = $this->search;
 
             foreach (explode(' ', $phrase) as $text_line) {
-                $products->andFilterWhere(['or',
+                $products->andFilterWhere([
+                    'or',
                     ['like', 'name', $text_line],
                     ['like', 'feed', $text_line]
                 ]);
             }
 
 
-		}
+        }
 
 
-		if ($this->save_history == true) {
+        if ($this->save_history == true && \Yii::$app->user->id !== 1) {
 
-			$SearchQuery = new SearchQuery();
-			$SearchQuery->text = $phrase;
-			$SearchQuery->count_find = $products->count();
-			$SearchQuery->ip = $_SERVER['REMOTE_ADDR'];
+            $SearchQuery = new SearchQuery();
+            $SearchQuery->text = $phrase;
+            $SearchQuery->count_find = $products->count();
+            $SearchQuery->ip = $_SERVER['REMOTE_ADDR'];
 
-			if (!\Yii::$app->user->isGuest) {
-				$SearchQuery->user_id = \Yii::$app->user->id;
-			}
+            if (!\Yii::$app->user->isGuest) {
+                $SearchQuery->user_id = \Yii::$app->user->id;
+            }
 
-			if ($SearchQuery->validate()) {
-				$SearchQuery->save();
-			}
-		}
+            if ($SearchQuery->validate()) {
+                $SearchQuery->save();
+            }
+        }
 
-		return $products;
+        return $products;
 
-	}
+    }
 }

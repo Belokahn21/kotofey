@@ -59,6 +59,11 @@ class OrderBackendController extends Controller
 				if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
 
 					foreach ($items as $item) {
+
+						if (empty($item->product_id) and empty($item->count) and empty($item->name)) {
+							continue;
+						}
+
 						$item->order_id = $model->id;
 						if ($item->validate()) {
 							if (!$item->save()) {
@@ -97,7 +102,9 @@ class OrderBackendController extends Controller
 		}
 
 		$model->scenario = Order::SCENARIO_CUSTOM;
-		$itemsModel = OrdersItems::find()->where(['order_id' => $model->id])->all();
+		if (!$itemsModel = OrdersItems::find()->where(['order_id' => $model->id])->all()) {
+			$itemsModel = new OrdersItems();
+		}
 		$users = User::find()->all();
 		$deliveries = Delivery::find()->all();
 		$payments = Payment::find()->all();
@@ -128,6 +135,15 @@ class OrderBackendController extends Controller
 				if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
 
 					foreach ($items as $item) {
+
+						if (!empty($item->need_delete)) {
+							continue;
+						}
+
+						if (empty($item->product_id) and empty($item->count) and empty($item->name)) {
+							continue;
+						}
+
 						$item->order_id = $model->id;
 						if ($item->validate()) {
 							if (!$item->save()) {
@@ -145,6 +161,7 @@ class OrderBackendController extends Controller
 				return $this->refresh();
 			}
 		}
+
 		return $this->render('update', [
 			'itemsModel' => $itemsModel,
 			'users' => $users,

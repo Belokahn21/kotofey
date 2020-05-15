@@ -91,7 +91,7 @@ $this->title = Title::showTitle("Заказы");
 			'attribute' => 'cash',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return OrderHelper::orderSummary($model->id) . ' (<span class="green">+' . OrderStatistic::marginality($model->id) . '</span>)';
+				return OrderHelper::orderSummary($model->id) . ' (<span class="green">+' . OrderHelper::marginality($model->id) . '</span>)';
 			}
 		],
 		'promo_code',

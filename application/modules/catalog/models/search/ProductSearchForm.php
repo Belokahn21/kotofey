@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\catalog\models\search;
 
 
 use app\models\entity\Product;
@@ -44,13 +44,16 @@ class ProductSearchForm extends Product
             return $dataProvider;
         }
 
-        $product_properties_values = null;
+        $product_properties_values = [];
         if ($this->prop_sales) {
             $product_properties_values = ArrayHelper::getColumn(ProductPropertiesValues::find()->select(['product_id'])->where(['value' => $this->prop_sales, 'property_id' => 11])->all(), 'product_id');
         }
 
+        if ($this->id) {
+            array_push($product_properties_values, $this->id);
+        }
+
         $query->andFilterWhere([
-            'id' => $product_properties_values,
             'category_id' => $this->category_id,
             'active' => $this->active,
             'article' => $this->article,
@@ -60,13 +63,20 @@ class ProductSearchForm extends Product
             'purchase' => $this->purchase,
         ]);
 
+        if ($product_properties_values) {
+            $query->andFilterWhere([
+                'id' => $product_properties_values,
+            ]);
+        }
+
         if (!empty($this->name)) {
-			foreach (explode(' ', $this->name) as $text_line) {
-				$query->andFilterWhere(['or',
-					['like', 'name', $text_line],
-					['like', 'feed', $text_line]
-				]);
-			}
+            foreach (explode(' ', $this->name) as $text_line) {
+                $query->andFilterWhere([
+                    'or',
+                    ['like', 'name', $text_line],
+                    ['like', 'feed', $text_line]
+                ]);
+            }
         }
 
         return $dataProvider;

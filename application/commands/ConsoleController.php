@@ -383,17 +383,63 @@ class ConsoleController extends Controller
         }
     }
 
+    public function pushSkip($product_id)
+    {
+        return file_put_contents(\Yii::getAlias('@app/tmp/skip.txt'), $product_id . ";", FILE_APPEND | LOCK_EX);
+    }
+
+    public function fillSkip(&$array)
+    {
+        if (($handle = fopen(\Yii::getAlias('@app/tmp/skip.txt'), "r")) !== false) {
+            while (($line = fgetcsv($handle, 1000, ";")) !== false) {
+                foreach ($line as $key => $value) {
+                    if (empty($value)) {
+                        unset($line[$key]);
+                    }
+                }
+
+                $array = array_merge($array, $line);
+            }
+        }
+    }
+
+    public function unKeys(&$array)
+    {
+        foreach ($array as $key => $value) {
+            $array[$value] = $value;
+        }
+    }
+
     public function actionSyncSibagro()
     {
+        $limit = 50;
         $who_not_available = [];
-        $products = Product::find()->where(['vendor_id' => self::VENDOR_ID_SIBAGRO_TRADE])->andWhere(['not in', 'id', ArrayHelper::getColumn(ProductSync::find()->all(), 'product_id')])->limit(5)->all();
+        $skip = [];
+        $this->fillSkip($skip);
+
+        $alreadySync = ProductSync::find()->all();
+        $alreadySync = ArrayHelper::getColumn($alreadySync, 'product_id');
+
+        $this->unKeys($alreadySync);
+        $this->unKeys($skip);
+
+
+        $alreadySync = array_merge($alreadySync, $skip);
+
+
+        $products = Product::find()->where(['not in', 'id', $alreadySync])->limit($limit);
+
+        $products = $products->all();
         foreach ($products as $product) {
+
+            echo $product->name . PHP_EOL;
+
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             if (!$this->isSibagrotrade($product)) {
+                $this->pushSkip($product->id);
                 continue;
             }
 
-            echo $product->name . PHP_EOL;
 
             if (!$this->checkExist($product)) {
                 $product->active = 0;
@@ -415,13 +461,17 @@ class ConsoleController extends Controller
         }
 
         if (count($who_not_available) > 0) {
-            file_put_contents(\Yii::getAlias('@app/tmp/not_available_goods.txt'), implode(';', $who_not_available), LOCK_EX);
+            file_put_contents(\Yii::getAlias('@app/tmp/not_available_goods.txt'), implode(';', $who_not_available), LOCK_EX | FILE_APPEND);
         }
     }
 
     public function isSibagrotrade(Product $product)
     {
         if ($product->vendor_id == self::VENDOR_ID_SIBAGRO_TRADE) {
+            return true;
+        }
+
+        if ((substr($product->code, 0, 4)) == '0000') {
             return true;
         }
 

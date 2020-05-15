@@ -12,7 +12,6 @@ class InformerSliderWidget extends Widget
 
     public function run()
     {
-//        $providers = InformersValues::find()->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC])->all();
         $providers = InformersValues::find()->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC]);
         return $this->render($this->template, [
             'providers' => $providers

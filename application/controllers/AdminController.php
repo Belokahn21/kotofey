@@ -52,7 +52,7 @@ use app\modules\order\models\search\OrderSearchForm;
 use app\models\search\OrderStatusSearchForm;
 use app\models\search\PermissionsSearchForm;
 use app\models\search\ProductPropertiesSearchForm;
-use app\models\search\ProductSearchForm;
+use app\modules\catalog\models\search\ProductSearchForm;
 use app\models\search\PromocodeSearchForm;
 use app\models\search\TicketSearchForm;
 use app\models\search\VendorGroupSearchForm;
@@ -1441,7 +1441,8 @@ class AdminController extends Controller
         ]);
     }
 
-    public function actionShortly($id = null) {
+    public function actionShortly($id = null)
+    {
         if ($id) {
             $model = ShortLinks::findOne($id);
 
@@ -1560,7 +1561,6 @@ class AdminController extends Controller
     {
         return $this->render('personal');
     }
-
 
 
     public function actionSaleProduct()

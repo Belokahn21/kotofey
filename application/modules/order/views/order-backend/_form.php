@@ -1,21 +1,24 @@
 <?php
 
 use yii\helpers\ArrayHelper;
+use app\modules\order\widgets\map\MapWidget;
+use app\models\helpers\OrderHelper;
 
 /* @var $users \app\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
  * @var $deliveries \app\models\entity\Delivery[]
  * @var $payments \app\models\entity\Payment[]
  * @var $status \app\modules\order\models\entity\OrderStatus[]
- * @var $itemsModel \app\modules\order\models\entity\OrdersItems
+ * @var $itemsModel \app\modules\order\models\entity\OrdersItems[]
  */
+
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
 		<?php if (!$model->isNewRecord): ?>
-            <a class="nav-item nav-link" id="nav-detail-info-edit-tab" data-toggle="tab" href="#nav-detail-info-edit" role="tab" aria-controls="nav-detail-info-edit" aria-selected="false">Общая инофрмация</a>
+            <a class="nav-item nav-link<?= (!$model->isNewRecord ? ' active' : ''); ?>" id="nav-detail-info-edit-tab" data-toggle="tab" href="#nav-detail-info-edit" role="tab" aria-controls="nav-detail-info-edit" aria-selected="false">Общая инофрмация</a>
 		<?php endif; ?>
-        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
+        <a class="nav-item nav-link<?= ($model->isNewRecord ? ' active' : ''); ?>" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
         <a class="nav-item nav-link" id="nav-items-edit-tab" data-toggle="tab" href="#nav-items-edit" role="tab" aria-controls="nav-items-edit" aria-selected="false">Товары в заказе</a>
     </div>
 </nav>
@@ -23,7 +26,7 @@ use yii\helpers\ArrayHelper;
 
 <div class="tab-content" id="nav-tab-content-form">
 	<?php if (!$model->isNewRecord): ?>
-        <div class="tab-pane fade" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
+        <div class="tab-pane fade<?= ($model->isNewRecord ? '' : ' show active'); ?>" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
             <div class="d-flex flex-row">
                 <div class="w-50">
                     <h4>Время и дата доставки</h4>
@@ -35,45 +38,60 @@ use yii\helpers\ArrayHelper;
 
                     <h4>Адрес доставки</h4>
 					<?php try { ?>
-                        <ul>
-                            <li><?= $model->owner->billing->city; ?></li>
-                            <li><?= $model->owner->billing->street; ?></li>
-                            <li><?= $model->owner->billing->home; ?></li>
-                            <li><?= $model->owner->billing->house; ?></li>
+                        <ul style="display: flex; flex-direction: row;">
+                            <li style="margin: 0 5px;">Город <?= $model->owner->billing->city; ?></li>
+                            <li style="margin: 0 5px;">Улица <?= $model->owner->billing->street; ?></li>
+                            <li style="margin: 0 5px;">Дом <?= $model->owner->billing->home; ?></li>
+                            <li style="margin: 0 5px;">Квртира <?= $model->owner->billing->house; ?></li>
                         </ul>
 					<?php } catch (ErrorException $exception) { ?>
                         <p>Отстуствуют</p>
 					<?php } ?>
+
+                    <h4>Финансы</h4>
+                    <p>Закуп: <?= OrderHelper::orderPurchase($model->id); ?></p>
+                    <p>Сумма заказа: <?= OrderHelper::orderSummary($model->id); ?></p>
+
+
+					<?= MapWidget::widget([
+						'model' => $model
+					]); ?>
                 </div>
 
                 <div class="w-50">
-                    <ul>
-						<?php foreach ($itemsModel as $item): ?>
-                            <li class="d-flex flex-row justify-content-between align-items-center">
-								<?php if ($item->product): ?>
-                                    <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
-								<?php endif; ?>
+					<?php if (is_array($itemsModel)): ?>
+                        <ul>
+							<?php foreach ($itemsModel as $item): ?>
+                                <li class="d-flex flex-row justify-content-between align-items-center">
+									<?php if ($item->product): ?>
+                                        <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
+									<?php endif; ?>
 
-                                <div class="w-75">
-                                    <p><?= $item->name; ?></p>
-									<?php if ($item->product): ?>
-                                        <p>Внешний код: <?= $item->product->code; ?></p>
-									<?php endif; ?>
-									<?php if ($item->product): ?>
-                                        <p>Зкупочная: <?= $item->product->purchase; ?></p>
-									<?php endif; ?>
-                                    <p>К продаже: <?= $item->price; ?></p>
-                                    <p>Кол-во: <?= $item->count; ?></p>
-                                </div>
-                            </li>
-						<?php endforeach; ?>
-                    </ul>
+                                    <div class="w-75">
+										<?php if ($item->product): ?>
+                                            <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
+										<?php else: ?>
+                                            <p><?= $item->name; ?></p>
+										<?php endif; ?>
+										<?php if ($item->product): ?>
+                                            <p>Внешний код: <?= $item->product->code; ?></p>
+										<?php endif; ?>
+										<?php if ($item->product): ?>
+                                            <p>Зкупочная: <?= $item->product->purchase; ?></p>
+										<?php endif; ?>
+                                        <p>К продаже: <?= $item->price; ?></p>
+                                        <p>Кол-во: <?= $item->count; ?></p>
+                                    </div>
+                                </li>
+							<?php endforeach; ?>
+                        </ul>
+					<?php endif; ?>
                 </div>
             </div>
         </div>
 	<?php endif; ?>
 
-    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+    <div class="tab-pane fade<?= ($model->isNewRecord ? ' show active' : ''); ?>" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="d-flex flex-row">
             <div class="w-25 p-1"><?= $form->field($model, 'is_paid')->checkbox(); ?></div>
             <div class="w-25 p-1"><?= $form->field($model, 'is_cancel')->checkbox(); ?></div>
@@ -119,7 +137,7 @@ use yii\helpers\ArrayHelper;
         </div>
     </div>
     <div class="tab-pane fade" id="nav-items-edit" role="tabpanel" aria-labelledby="nav-items-edit-tab">
-		<?php if ($model->isNewRecord): ?>
+		<?php if ($model->isNewRecord or !is_array($itemsModel)): ?>
 			<?= $this->render('include/new_items', [
 				'itemsModel' => $itemsModel,
 				'form' => $form

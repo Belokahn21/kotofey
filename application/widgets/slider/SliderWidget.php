@@ -19,7 +19,7 @@ class SliderWidget extends Widget
         if (!empty($this->slider_id)) {
             $unix_now = time();
 
-            $images = SlidersImages::find()->where(['active' => 1, 'slider_id' => $this->slider_id])->andWhere([
+            $images = SlidersImages::find()->orderBy(['created_at' => SORT_DESC])->where(['active' => 1, 'slider_id' => $this->slider_id])->andWhere([
                 'or',
                 'start_at = :default and end_at = :default',
                 'start_at is null and end_at is null',
