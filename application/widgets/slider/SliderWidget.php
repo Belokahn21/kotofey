@@ -5,7 +5,6 @@ namespace app\widgets\slider;
 
 use app\modules\content\models\entity\SlidersImages;
 use yii\base\Widget;
-use yii\db\Query;
 
 class SliderWidget extends Widget
 {
