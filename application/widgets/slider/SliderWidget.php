@@ -3,7 +3,7 @@
 namespace app\widgets\slider;
 
 
-use app\models\entity\SlidersImages;
+use app\modules\content\models\entity\SlidersImages;
 use yii\base\Widget;
 use yii\db\Query;
 
