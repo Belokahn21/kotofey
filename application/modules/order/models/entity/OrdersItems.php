@@ -3,7 +3,7 @@
 namespace app\modules\order\models\entity;
 
 use app\models\entity\Basket;
-use app\modules\delivery\models\entity\delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\entity\Product;
 use app\models\entity\Promo;
 use yii\behaviors\TimestampBehavior;

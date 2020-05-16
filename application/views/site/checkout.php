@@ -18,7 +18,7 @@ use app\models\entity\Basket;
 use app\models\tool\Currency;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\modules\delivery\models\entity\delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\tool\Policy;
 
 $this->title = Title::showTitle("Оформление заказа");

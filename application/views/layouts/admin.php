@@ -17,7 +17,7 @@ use app\models\entity\User;
 use app\widgets\notification\Alert;
 use app\models\entity\Stocks;
 use app\modules\order\models\entity\OrderStatus;
-use app\modules\delivery\models\entity\delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\entity\Payment;
 use app\models\entity\Promo;
 use app\models\entity\VendorGroup;

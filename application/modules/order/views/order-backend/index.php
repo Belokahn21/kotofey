@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\seo\Title;
 use yii\grid\GridView;
-use app\modules\delivery\models\entity\delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\entity\Payment;
 use app\models\entity\User;
 use yii\helpers\Url;

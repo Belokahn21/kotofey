@@ -3,7 +3,7 @@
 namespace app\models\helpers;
 
 
-use app\modules\delivery\models\entity\delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\tool\Debug;
 use phpDocumentor\Reflection\Types\Integer;
 use phpDocumentor\Reflection\Types\String_;

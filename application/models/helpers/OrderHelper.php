@@ -2,7 +2,7 @@
 
 namespace app\models\helpers;
 
-use app\modules\delivery\models\entity\delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
