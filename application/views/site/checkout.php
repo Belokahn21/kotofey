@@ -5,7 +5,7 @@
  * @var $billing \app\models\entity\user\Billing
  * @var $user \app\models\entity\User
  * @var $discount_model \app\models\forms\DiscountForm
- * @var $delivery \app\models\entity\Delivery[]
+ * @var $delivery app\modules\delivery\models\entity\Delivery[]
  * @var $payment \app\models\entity\Payment[]
  * @var $order_date \app\models\entity\OrderDate
  * @var $delivery_time \app\models\services\DeliveryTimeService
@@ -18,7 +18,7 @@ use app\models\entity\Basket;
 use app\models\tool\Currency;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\tool\Policy;
 
 $this->title = Title::showTitle("Оформление заказа");

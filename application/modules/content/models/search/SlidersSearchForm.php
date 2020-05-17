@@ -1,9 +1,9 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\content\models\search;
 
 
-use app\models\entity\Sliders;
+use app\modules\content\models\entity\Sliders;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

@@ -2,7 +2,7 @@
 
 namespace app\models\search;
 
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\entity\Payment;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\content\models\entity;
 
 
 use yii\behaviors\TimestampBehavior;
@@ -21,6 +21,8 @@ class Sliders extends ActiveRecord
             [['name'], 'required'],
 
             [['name'], 'string'],
+
+            [['active'], 'boolean'],
         ];
     }
 

@@ -1,22 +1,23 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\content\models\search;
 
-use app\models\entity\Delivery;
+use app\modules\content\models\entity\SlidersImages;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class DeliverySearchForm extends Delivery
+class SlidersImagesSearchForm extends SlidersImages
 {
 	public static function tableName()
 	{
-		return "delivery";
+		return "sliders_images";
 	}
 
 	public function rules()
 	{
 		return [
-			[['name'], 'string'],
+			[['text'], 'string'],
+			[['description'], 'string'],
 		];
 	}
 
@@ -25,10 +26,9 @@ class DeliverySearchForm extends Delivery
 		return Model::scenarios();
 	}
 
-
 	public function search($params)
 	{
-		$query = Delivery::find()->orderBy(['created_at' => SORT_DESC]);
+		$query = SlidersImages::find()->orderBy(['created_at' => SORT_DESC]);
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,
@@ -38,7 +38,8 @@ class DeliverySearchForm extends Delivery
 			return $dataProvider;
 		}
 
-		$query->andFilterWhere(['like', 'name', $this->name]);
+		$query->andFilterWhere(['like', 'text', $this->text])
+			->andFilterWhere(['like', 'description', $this->description]);
 
 		return $dataProvider;
 	}

@@ -16,7 +16,7 @@ $this->title = Title::showTitle($model->name);
     <h1 class="title">Оплата: <?= $model->name; ?></h1>
 	<?= Html::a("Назад", '/admin/payment/', ['class' => 'btn-back']) ?>
 	<?php $form = ActiveForm::begin(); ?>
-	<?= $this->render('../_forms/_payment', [
+	<?= $this->render('_form', [
 		'model' => $model,
 		'form' => $form,
 	]) ?>

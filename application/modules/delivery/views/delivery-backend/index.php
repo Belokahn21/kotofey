@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\entity\Delivery */
+/* @var $model \app\modules\delivery\models\entity\Delivery */
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -15,7 +15,7 @@ $this->title = Title::showTitle("Управление доставками");
 <section class="delivery">
     <h1 class="title">Доставки</h1>
 	<?php $form = ActiveForm::begin(); ?>
-	<?= $this->render('_forms/_delivery', [
+	<?= $this->render('_form', [
 		'model' => $model,
 		'form' => $form,
 	]) ?>
@@ -28,13 +28,8 @@ $this->title = Title::showTitle("Управление доставками");
 	'filterModel' => $searchModel,
 	'emptyText' => 'Доставки отсутствуют',
 	'columns' => [
-		[
-			'attribute' => 'id',
-		],
-		[
-			'attribute' => 'name',
-		],
-
+		'id',
+		'name',
 		[
 			'class' => 'yii\grid\ActionColumn',
 			'buttons' => [
@@ -42,10 +37,10 @@ $this->title = Title::showTitle("Управление доставками");
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
 				},
 				'update' => function ($url, $model, $key) {
-					return Html::a('<i class="far fa-eye"></i>', Url::to(["/admin/delivery/$key"]));
+					return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
 				},
 				'delete' => function ($url, $model, $key) {
-					return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["/admin/delivery/", 'id' => $key, 'action' => 'delete']));
+					return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
 				},
 			]
 		],

@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\seo\Title;
 use yii\grid\GridView;
-use app\models\entity\Delivery;
+use app\modules\delivery\models\entity\Delivery;
 use app\models\entity\Payment;
 use app\models\entity\User;
 use yii\helpers\Url;
@@ -14,7 +14,7 @@ use yii\helpers\ArrayHelper;
 
 /* @var $users \app\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
- * @var $deliveries \app\models\entity\Delivery[]
+ * @var $deliveries app\modules\delivery\models\entity\Delivery[]
  * @var $payments \app\models\entity\Payment[]
  * @var $status \app\modules\order\models\entity\OrderStatus[]
  * @var $itemsModel \app\modules\order\models\entity\OrdersItems
