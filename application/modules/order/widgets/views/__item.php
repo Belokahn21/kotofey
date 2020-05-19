@@ -6,13 +6,13 @@ use app\models\entity\Basket;
 /* @var $model \app\models\entity\Product */
 ?>
 <div class="mini-catalog__item swiper-slide">
-    <?php if (!empty($model->image) and is_file(Yii::getAlias('@webroot/upload/') . $model->image)): ?>
+	<?php if (!empty($model->image) and is_file(Yii::getAlias('@webroot/upload/') . $model->image)): ?>
         <img class="mini-catalog__image catalog-list__image" src="/upload/<?= $model->image; ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
-    <?php else: ?>
+	<?php else: ?>
         <img class="mini-catalog__image catalog-list__image" src="/upload/images/not-image.png" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
-    <?php endif; ?>
+	<?php endif; ?>
 
-    <a href="javascript:void(0);" class="catalog-list__link">
+    <a href="<?= $model->detail; ?>" class="catalog-list__link">
         <div class="mini-catalog__title catalog-list__title"><?= $model->name; ?></div>
     </a>
 
