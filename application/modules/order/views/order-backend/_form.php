@@ -124,6 +124,13 @@ use app\models\helpers\OrderHelper;
                 </div>
             </div>
         </div>
+        <div class="form-element">
+            <div class="d-flex flex-row">
+                <div class="w-25 p-1">
+					<?= $form->field($model, 'phone')->textInput(['placeholder' => 'Телефон'])->label(false); ?>
+                </div>
+            </div>
+        </div>
 
         <div class="form-element">
             <div class="d-flex flex-row">

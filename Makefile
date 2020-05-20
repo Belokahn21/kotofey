@@ -13,5 +13,7 @@ init-dev:
 init-prod:
 	cp application/web/index.prod.php application/web/index.php
 
+
 migrate:
-	cd application && php yii migrate
+	cd application && php yii migrate --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/order/init --interactive=0

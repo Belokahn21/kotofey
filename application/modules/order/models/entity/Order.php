@@ -54,8 +54,8 @@ class Order extends ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_DEFAULT => ['is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CUSTOM => ['is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_DEFAULT => ['phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_CUSTOM => ['phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
 		];
 	}
 
@@ -64,7 +64,7 @@ class Order extends ActiveRecord
 		return [
 			['type', 'default', 'value' => '3'],
 
-			[['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing'], 'integer'],
+			[['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'phone'], 'integer'],
 
 			[['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
 
@@ -158,6 +158,7 @@ class Order extends ActiveRecord
 			'product_id' => 'Товар',
 			'promo_code' => 'Промо код',
 			'select_billing' => 'Адрес доставки',
+			'phone' => 'Телефон',
 		];
 	}
 

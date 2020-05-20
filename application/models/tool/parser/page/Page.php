@@ -61,8 +61,6 @@ class Page
 		//Tell cURL that we want to carry out a POST request.
 		curl_setopt($curl, CURLOPT_POST, true);
 
-		//Set our post fields / date (from the array above).
-		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($this->auth_data));
 
 		//We don't want any HTTPS errors.
 		curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
@@ -70,12 +68,26 @@ class Page
 
 		//Where our cookie details are saved. This is typically required
 		//for authentication, as the session ID is usually saved in the cookie file.
-//		curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);
-//		Cookie: beget=begetok
+		curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);
+
 		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-			'Cookie: beget=begetok',
+			'Host: www.sat-altai.ru',
+			'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:76.0) Gecko/20100101 Firefox/76.0',
+			'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+			'Accept-Language: ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
+			'Accept-Encoding: gzip, deflate',
+			'Content-Type: application/x-www-form-urlencoded',
+			'Content-Length: 45',
+			'Origin: http://www.sat-altai.ru',
+			'Connection: keep-alive',
+			'Referer: http://www.sat-altai.ru/',
+			'Cookie: beget=begetok; 5cb57b4bc74b3f10cb5443577b2a72b2=d0615c8e0e67c51b88abb7d7d89a9331; 4c2a708a161855a77150c97cad9c3b16=4d8bbe3d4fc4404993fd82fc8769b242',
+			'Upgrade-Insecure-Requests: 1',
+			'Pragma: no-cache',
+			'Cache-Control: no-cache',
 		));
-		curl_setopt($curl, CURLOPT_COOKIE, "Cookie: beget=begetok");
+
+//		curl_setopt($curl, CURLOPT_COOKIE, "Cookie: beget=begetok");
 
 		//Sets the user agent. Some websites will attempt to block bot user agents.
 		//Hence the reason I gave it a Chrome user agent.
@@ -91,25 +103,14 @@ class Page
 		//Do we want to follow any redirects?
 		curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
 
+		//Set our post fields / date (from the array above).
+		curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($this->auth_data));
 
-		//Custorm settings
-		if ($this->use_ajax === true) {
-			curl_setopt($curl, CURLOPT_HTTPHEADER, [
-//				'Content-Type: application/x-www-form-urlencoded; charset=UTF-8',
-				'X-Requested-With: XMLHttpRequest',
-			]);
-
-
-//			curl_setopt($curl, CURLOPT_HTTPHEADER, [
-//				'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8',
-//				'X-Requested-With' => 'XMLHttpRequest',
-//			]);
-		}
 
 		//Execute the login request.
 		print_r(curl_exec($curl));
-//		curl_exec($curl);
 
+		exit();
 
 		//Check for errors!
 		if (curl_errno($curl)) {
@@ -121,7 +122,7 @@ class Page
 
 		//Use the same cookie file.
 		curl_setopt($curl, CURLOPT_COOKIEJAR, COOKIE_FILE);
-		curl_setopt($curl, CURLOPT_COOKIE, "beget=begetok;expires=99999999999");
+		curl_setopt($curl, CURLOPT_COOKIE, "beget=begetok;");
 		curl_setopt($curl, CURLOPT_HTTPHEADER, array(
 			'Cookie: beget=begetok',
 		));
@@ -135,6 +136,7 @@ class Page
 		//curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 
 		//Execute the GET request and print out the result.
+//		print_r(curl_exec($curl));
 		return curl_exec($curl);
 	}
 }
