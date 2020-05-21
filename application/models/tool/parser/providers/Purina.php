@@ -3,7 +3,10 @@
 namespace app\models\tool\parser\providers;
 
 
+use app\models\entity\SiteSettings;
+use app\models\entity\Vendor;
 use app\models\tool\Debug;
+use app\models\tool\parser\CatalogInfo;
 use app\models\tool\parser\page\Page;
 use app\models\tool\parser\page\SimplePage;
 
@@ -11,51 +14,56 @@ class Purina extends Provider
 {
     public function info($url)
     {
-        $page = new SimplePage();
-        $html = $page->content($url);
+        $parts = explode('	', $url);
+        if ($curl = curl_init()) {
 
-        $dom = new \DOMDocument();
-        $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
+            $name = null;
+            $price = null;
+            $desciption = null;
+            $weight = null;
 
-        $xpath = new \DOMXPath($dom);
+            $url = 'https://shop.purina.ru/catalogsearch/result/?q=' . $parts[0];
 
-        Debug::p($xpath);
-        exit();
-        $price = $xpath->query('//div[@class="lead"]')->item(0)->nodeValue;
+            curl_setopt($curl, CURLOPT_URL, $url);
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
+            $html = curl_exec($curl);
+            curl_close($curl);
 
-//		Debug::printFile($html);
+            $dom = new \DOMDocument();
+            $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
+            $xpath = new \DOMXPath($dom);
 
-//		$price = explode(' ', $price);
-//		if (is_array($price)) {
-//			preg_match('/(\d+)р./', $price[1], $price);
-//			$price = $price[1];
-//		}
-//
-//		$weight = $dom->getElementsByTagName('strong')->item(2)->nodeValue;
-//		$weight = explode(" ", $weight);
-//
-//		switch ($weight[1]) {
-//			case "гр.":
-//				$weight = $weight[0] / 1000;
-//				break;
-//			default:
-//				$weight = $weight[0];
-//				break;
-//		}
-//
-//
-//		$product = new CatalogInfo();
-//		$product->name = $dom->getElementsByTagName('h2')->item(0)->nodeValue;
-//		$product->purchase = $price;
-//		$product->price = $product->purchase + ceil(($product->purchase * (SiteSettings::findByCode('saleup')->value / 100)));
-//		$product->count = 1;
-//		$product->description = $xpath->query('//div[@class="desc"]')->item(0)->nodeValue;
-//		$product->vitrine = 1;
-//		$product->active = 1;
-//		$product->code = $dom->getElementsByTagName('strong')->item(1)->nodeValue;
-//		$product->weight = $weight;
+            $price = ceil($parts[2]);
+            $name = $xpath->query('//h1[@class="page-title hidden-xs hidden-sm js-name"]')->item(0)->nodeValue;
+            $desciption = $xpath->query('//div[@class="short-descr"]')->item(0)->nodeValue;
+            $code = $parts[0];
+
+            $nameParts = explode(', ', $name);
+
+            $weight = $nameParts[count($nameParts) - 1];
+            $weight = str_replace(',', '.', $weight);
+            $weight = str_replace('кг', '', $weight);
+            $weight = str_replace(' ', '', $weight);
 
 
-        return $product;
+            $product = new CatalogInfo();
+            $product->name = $name;
+            $product->purchase = $price;
+            $product->price = $price;
+//            $product->price = $product->purchase + ceil(($product->purchase * (SiteSettings::findByCode('saleup')->value / 100)));
+            $product->count = 0;
+            $product->description = $desciption;
+            $product->vitrine = 1;
+            $product->active = 1;
+            $product->code = $code;
+            $product->vendor_id = 1;
+            $product->weight = $weight;
+            $product->country = 51;
+            $product->model = 6;
+
+            return $product;
+
+        }
     }
 }

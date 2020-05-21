@@ -14,4 +14,7 @@ class CatalogInfo
 	public $vitrine;
 	public $code;
 	public $weight;
+	public $vendor_id;
+	public $country;
+	public $model;
 }

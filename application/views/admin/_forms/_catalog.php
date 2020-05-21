@@ -180,7 +180,7 @@ use app\models\entity\Vendor;
 			<?= $form->field($model, 'code')->textInput(); ?>
 		</div>
 		<div class="form-element">
-			<?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
+			<?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"], ['id'=>'product-vitrine-id']); ?>
 		</div>
 		<div class="form-element">
 			<?= $form->field($model, 'active')->radioList(["Не активен", "Активен"]); ?>

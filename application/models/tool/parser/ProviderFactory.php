@@ -22,7 +22,8 @@ class ProviderFactory
         if ($this->compare('lukasn.ru', $url)) {
             return new Lukas();
         }
-        if ($this->compare('shop.purina.ru', $url)) {
+
+        if ($this->compare('shop.purina.ru', $url) or count(explode('	', $url)) == 3) {
             return new Purina();
         }
 
