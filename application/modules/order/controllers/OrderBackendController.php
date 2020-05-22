@@ -3,6 +3,7 @@
 namespace app\modules\order\controllers;
 
 use app\models\entity\SiteSettings;
+use app\models\helpers\OrderHelper;
 use app\models\tool\statistic\OrderStatistic;
 use app\modules\order\models\search\OrderSearchForm;
 use app\widgets\notification\Alert;
@@ -60,7 +61,7 @@ class OrderBackendController extends Controller
 
 					foreach ($items as $item) {
 
-						if (empty($item->product_id) and empty($item->count) and empty($item->name)) {
+						if (OrderHelper::isEmptyItem($item)) {
 							continue;
 						}
 
@@ -140,7 +141,7 @@ class OrderBackendController extends Controller
 							continue;
 						}
 
-						if (empty($item->product_id) and empty($item->count) and empty($item->name)) {
+						if (OrderHelper::isEmptyItem($item)) {
 							continue;
 						}
 
