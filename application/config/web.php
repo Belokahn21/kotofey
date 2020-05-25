@@ -99,6 +99,7 @@ $config = [
 			'showScriptName' => false,
 			'enableStrictParsing' => false,
 			'rules' => [
+				'order' => 'order/order/index',
 				'admin/<module>/<controller>/' => '<module>/<controller>/index',
 				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 				'bot/vk/index' => 'bot/vk/index',
