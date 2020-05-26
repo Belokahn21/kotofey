@@ -130,7 +130,7 @@ $this->beginPage() ?>
         </div>
 
         <div class="basket-wrap">
-            <a href="/basket/">
+            <a href="<?= Url::to(['order']); ?>">
                 <div class="basket-icon">
                     <i class="fas fa-shopping-cart"></i>
                 </div>

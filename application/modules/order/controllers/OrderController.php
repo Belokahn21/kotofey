@@ -17,90 +17,94 @@ use yii\web\ForbiddenHttpException;
 
 class OrderController extends Controller
 {
-	public function behaviors()
-	{
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'rules' => [
-					[
-						'actions' => ['index'],
-						'allow' => true,
-						'matchCallback' => function ($rule, $action) {
-							if (Basket::count() != 0) {
-								throw new ForbiddenHttpException('Доступ запрещён. У вас пустая корзина.');
-							}
-						}
-					]
-				],
-			]
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'matchCallback' => function ($rule, $action) {
+                            return Basket::count() > 0;
+                        }
+                    ]
+                ],
+            ]
+        ];
+    }
 
-	public function actionIndex()
-	{
-		$order = new Order();
-		$payment = Payment::findAll(['active' => true]);
-		$delivery = Delivery::findAll(['active' => true]);
-		$order_date = new OrderDate();
-		$delivery_time = new DeliveryTimeService();
+    public function actionIndex()
+    {
+        $order = new Order();
+        $payment = Payment::findAll(['active' => true]);
+        $delivery = Delivery::findAll(['active' => true]);
+        $order_date = new OrderDate();
+        $delivery_time = new DeliveryTimeService();
 
-		if (\Yii::$app->request->isPost) {
-			$transaction = \Yii::$app->db->beginTransaction();
+        if (\Yii::$app->request->isPost) {
+            $transaction = \Yii::$app->db->beginTransaction();
 
-			if ($order->load(\Yii::$app->request->post())) {
-				if (!$order->validate()) {
+            if ($order->load(\Yii::$app->request->post())) {
 
-					$transaction->rollBack();
-					return false;
+                if (!\Yii::$app->user->isGuest) {
+                    $order->user_id = \Yii::$app->user->id;
+                }
 
-				}
-				if (!$order->save()) {
+                if (!$order->validate()) {
 
-					Alert::setErrorNotify("Ошибка при создании заказа.");
-					$transaction->rollBack();
-					return false;
+                    $transaction->rollBack();
+                    return false;
 
-				}
+                }
+                if (!$order->save()) {
 
-				// save order date delivery
-				if ($order_date->load(\Yii::$app->request->post())) {
-					if (!$order_date->validate()) {
-						$transaction->rollBack();
-						Alert::setErrorNotify('Ошибка при создании заказа. Не корректная дата заказа.');
-						return false;
-					}
+                    Alert::setErrorNotify("Ошибка при создании заказа.");
+                    $transaction->rollBack();
+                    return false;
 
-					if (!$order_date->save()) {
-						$transaction->rollBack();
-						Alert::setErrorNotify('Ошибка при создании заказа. Дата доставки заказа не сохранена.');
-						return false;
-					}
-				}
+                }
 
-				// save products
-				$items = new OrdersItems();
-				$items->order_id = $order->id;
+                // save order date delivery
+                if ($order_date->load(\Yii::$app->request->post())) {
+                    $order_date->order_id = $order->id;
+                    if (!$order_date->validate()) {
+                        $transaction->rollBack();
+                        Alert::setErrorNotify('Ошибка при создании заказа. Не корректная дата заказа.');
+                        return false;
+                    }
 
-				if (!$items->saveItems()) {
-					Alert::setErrorNotify("Товары не были сохранены. Заказ не создан.");
-					$transaction->rollBack();
-					return false;
-				}
-			}
+                    if (!$order_date->save()) {
+                        $transaction->rollBack();
+                        Alert::setErrorNotify('Ошибка при создании заказа. Дата доставки заказа не сохранена.');
+                        return false;
+                    }
+                }
+
+                // save products
+                $items = new OrdersItems();
+                $items->order_id = $order->id;
+
+                if (!$items->saveItems()) {
+                    Alert::setErrorNotify("Товары не были сохранены. Заказ не создан.");
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
 
 
-			$transaction->commit();
-			Alert::setSuccessNotify('Заказ успешно создан.');
-			return $this->redirect('/');
-		}
+            $transaction->commit();
+            Alert::setSuccessNotify('Заказ успешно создан.');
+            return $this->redirect('/');
+        }
 
-		return $this->render('index', [
-			'delivery' => $delivery,
-			'delivery_time' => $delivery_time,
-			'order' => $order,
-			'order_date' => $order_date,
-			'payment' => $payment,
-		]);
-	}
+        return $this->render('index', [
+            'delivery' => $delivery,
+            'delivery_time' => $delivery_time,
+            'order' => $order,
+            'order_date' => $order_date,
+            'payment' => $payment,
+        ]);
+    }
 }
