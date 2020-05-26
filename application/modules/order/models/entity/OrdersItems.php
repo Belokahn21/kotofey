@@ -97,6 +97,7 @@ class OrdersItems extends ActiveRecord
 
         }
 
+        Basket::clear();
 
         $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
                 'order_id' => $this->order_id

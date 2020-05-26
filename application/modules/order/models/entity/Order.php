@@ -61,8 +61,8 @@ class Order extends ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_DEFAULT => ['postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CUSTOM => ['postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_DEFAULT => ['email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_CUSTOM => ['email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'is_bonus', 'promo_code', 'created_at', 'updated_at'],
 		];
 	}
 
@@ -79,10 +79,11 @@ class Order extends ActiveRecord
 
 			[['is_bonus', 'is_cancel', 'is_close'], 'boolean'],
 
+			['email', 'email'],
 
 			[['user_id'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_DEFAULT],
 
-			[['comment', 'promo_code', 'notes', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament'], 'string'],
+			[['comment', 'promo_code', 'notes', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'email'], 'string'],
 
 			['promo_code', 'exist', 'targetClass' => Promo::className(), 'targetAttribute' => ['promo_code' => 'code'], 'message' => 'Такого промокода не существует'],
 

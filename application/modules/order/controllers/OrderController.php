@@ -40,6 +40,20 @@ class OrderController extends Controller
 
 				}
 
+				// save order date delivery
+				if ($order_date->load(\Yii::$app->request->post())) {
+					if (!$order_date->validate()) {
+						$transaction->rollBack();
+						Alert::setErrorNotify('Ошибка при создании заказа. Не корректная дата заказа.');
+						return false;
+					}
+
+					if (!$order_date->save()) {
+						$transaction->rollBack();
+						Alert::setErrorNotify('Ошибка при создании заказа. Дата доставки заказа не сохранена.');
+						return false;
+					}
+				}
 
 				// save products
 				$items = new OrdersItems();
@@ -55,7 +69,7 @@ class OrderController extends Controller
 
 			$transaction->commit();
 			Alert::setSuccessNotify('Заказ успешно создан.');
-			return $this->refresh();
+			return $this->redirect('/');
 		}
 
 		return $this->render('index', [
