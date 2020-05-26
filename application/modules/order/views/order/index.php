@@ -92,7 +92,25 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                         Доставка
                     </div>
                     <div class="row">
+						<?= $form->field($order, 'country')->hiddenInput(['value' => 'Россия'])->label(false); ?>
+                        <div class="col-sm-6">
+							<?= $form->field($order, 'region')->textInput(['placeholder' => 'Регион'])->label(false); ?>
+                        </div>
+                        <div class="col-sm-6">
+							<?= $form->field($order, 'city')->textInput(['placeholder' => 'Город'])->label(false); ?>
+                        </div>
+                    </div>
 
+                    <div class="row">
+                        <div class="col-sm-4">
+							<?= $form->field($order, 'street')->textInput(['placeholder' => 'Улица'])->label(false); ?>
+                        </div>
+                        <div class="col-sm-4">
+							<?= $form->field($order, 'number_home')->textInput(['placeholder' => 'Номер дома'])->label(false); ?>
+                        </div>
+                        <div class="col-sm-4">
+							<?= $form->field($order, 'number_appartament')->textInput(['placeholder' => 'Кватира'])->label(false); ?>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
