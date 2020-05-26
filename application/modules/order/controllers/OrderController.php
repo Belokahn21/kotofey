@@ -22,14 +22,17 @@ class OrderController extends Controller
 		return [
 			'access' => [
 				'class' => AccessControl::className(),
-				[
-					'actions' => ['index'],
-					'denyCallback' => function ($rule, $action) {
-						if (Basket::count() == 0) {
-							throw new ForbiddenHttpException('Доступ запрещён. У вас пустая корзина.');
+				'rules' => [
+					[
+						'actions' => ['index'],
+						'allow' => true,
+						'matchCallback' => function ($rule, $action) {
+							if (Basket::count() != 0) {
+								throw new ForbiddenHttpException('Доступ запрещён. У вас пустая корзина.');
+							}
 						}
-					}
-				]
+					]
+				],
 			]
 		];
 	}
