@@ -3,6 +3,7 @@
 namespace app\modules\order\controllers;
 
 
+use app\models\entity\Basket;
 use app\models\entity\OrderDate;
 use app\models\entity\Payment;
 use app\models\services\DeliveryTimeService;
@@ -10,10 +11,29 @@ use app\modules\delivery\models\entity\Delivery;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\widgets\notification\Alert;
+use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\ForbiddenHttpException;
 
 class OrderController extends Controller
 {
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				[
+					'actions' => ['index'],
+					'denyCallback' => function ($rule, $action) {
+						if (Basket::count() == 0) {
+							throw new ForbiddenHttpException('Доступ запрещён. У вас пустая корзина.');
+						}
+					}
+				]
+			]
+		];
+	}
+
 	public function actionIndex()
 	{
 		$order = new Order();
