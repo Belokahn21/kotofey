@@ -3,6 +3,7 @@
 namespace app\models\services;
 
 
+use app\models\entity\SiteSettings;
 use app\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
 use app\models\entity\OrderDate;
@@ -17,11 +18,13 @@ use yii\helpers\Url;
 
 class NotifyService
 {
+	public $accessToken;
+
 	public function sendMessageToVkontakte($order_id, $access_token = null)
 	{
 		try {
-
-			$access_token = '9b20f6f75e3d6afce2cfa6b16024dad5fadfbdc83cf92e57c7897a3310b4a5f17b7e0ce4ccd708fec1674';
+			$this->getAccessToken();
+			$access_token = $this->accessToken;
 			$vk = new VKApiClient();
 			if ($access_token) {
 				$order = Order::findOne($order_id);
@@ -38,7 +41,7 @@ class NotifyService
 
 				$message .= "Клиент:\n";
 				if (!empty($order->phone)) {
-					$message .= "Телефон: {$order->phone}";
+					$message .= "Телефон: {$order->phone}\n";
 				}
 
 				if (!empty($order->email)) {
@@ -73,10 +76,8 @@ class NotifyService
 		}
 	}
 
-	public
-	function sendEmailClient(
-		$order_id = 1
-	) {
+	public function sendEmailClient($order_id)
+	{
 		if (YII_ENV == 'dev') {
 			return false;
 		}
@@ -97,5 +98,16 @@ class NotifyService
 			->send();
 
 		return $result;
+	}
+
+	public function getAccessToken()
+	{
+		$token = Yii::$app->params['vk']['access_token'];
+
+		if ($tokenFromSettings = SiteSettings::findByCode('vk_access_token')) {
+			$token = $token->value;
+		}
+
+		$this->accessToken = $token;
 	}
 }
