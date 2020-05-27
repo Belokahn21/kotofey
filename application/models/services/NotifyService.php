@@ -29,6 +29,7 @@ class NotifyService
 			if ($access_token) {
 				$order = Order::findOne($order_id);
 				$orderSumm = OrderHelper::orderSummary($order->id);
+				$orderSumm = Price::format($orderSumm);
 				$orderDateDelivery = OrderDate::findOne(['order_id' => $order->id]);
 				$detailUrlPage = Url::to(['/admin/order/order-backend/update', 'id' => $order->id], true);
 
