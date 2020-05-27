@@ -39,6 +39,8 @@ use yii\db\ActiveRecord;
  * @property string $number_home
  * @property string $number_appartament
  * @property string $promo_code
+ * @property string $email
+ * @property string $phone
  * @property integer $created_at
  * @property integer $updated_at
  *
