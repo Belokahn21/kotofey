@@ -13,6 +13,8 @@ init-dev:
 init-prod:
 	cp application/web/index.prod.php application/web/index.php
 
+composer-install:
+	cd application && composer install
 
 migrate:
 	cd application && php yii migrate --interactive=0

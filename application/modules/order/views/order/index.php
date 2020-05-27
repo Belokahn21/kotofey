@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                             <?= $form->field($order, 'email')->textInput(['class' => 'checkout__input', 'placeholder' => 'Email'])->label(false); ?>
                         </div>
                         <div class="col-sm-6">
-                            <?= $form->field($order, 'phone')->textInput(['class' => 'checkout__input', 'placeholder' => 'Телефон'])->label(false); ?>
+                            <?= $form->field($order, 'phone')->textInput(['class' => 'checkout__input maskedinput-js', 'placeholder' => 'Телефон'])->label(false); ?>
                         </div>
                     </div>
 
