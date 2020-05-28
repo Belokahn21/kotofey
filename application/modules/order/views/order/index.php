@@ -28,9 +28,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 ?>
 <h1>Оформление заказа</h1>
 <?php $form = ActiveForm::begin([
-    'options' => [
-        'id' => 'checkout-form-id'
-    ]
+	'options' => [
+		'id' => 'checkout-form-id'
+	]
 ]); ?>
 <div class="row">
     <div class="col-sm-6">
@@ -42,16 +42,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <?= $form->field($order, 'email')->textInput(['class' => 'checkout__input', 'placeholder' => 'Email'])->label(false); ?>
+							<?= $form->field($order, 'email')->textInput(['class' => 'checkout__input', 'placeholder' => 'Email'])->label(false); ?>
                         </div>
                         <div class="col-sm-6">
-                            <?= $form->field($order, 'phone')->textInput(['class' => 'checkout__input maskedinput-js', 'placeholder' => 'Телефон'])->label(false); ?>
+
+							<?= $form->field($order, 'phone')->textInput(['class' => 'checkout__input maskedinput-js', 'placeholder' => 'Телефон'])->label(false); ?>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-sm-12">
-                            <?= $form->field($order, 'comment')->textarea(['class' => 'checkout__textarea', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
+							<?= $form->field($order, 'comment')->textarea(['class' => 'checkout__textarea', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
                         </div>
                     </div>
                 </div>
@@ -62,37 +63,36 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     </div>
                     <div class="row">
                         <div class="col-sm-3">
-                            <?= $form->field($order, 'city')->textInput(['placeholder' => 'Город'])->label(false); ?>
+							<?= $form->field($order, 'city')->textInput(['placeholder' => 'Город'])->label(false); ?>
                         </div>
                         <div class="col-sm-3">
-                            <?= $form->field($order, 'street')->textInput(['placeholder' => 'Улица'])->label(false); ?>
+							<?= $form->field($order, 'street')->textInput(['placeholder' => 'Улица'])->label(false); ?>
                         </div>
                         <div class="col-sm-3">
-                            <?= $form->field($order, 'number_home')->textInput(['placeholder' => 'Номер дома'])->label(false); ?>
+							<?= $form->field($order, 'number_home')->textInput(['placeholder' => 'Номер дома'])->label(false); ?>
                         </div>
                         <div class="col-sm-3">
-                            <?= $form->field($order, 'number_appartament')->textInput(['placeholder' => 'Кватира'])->label(false); ?>
+							<?= $form->field($order, 'number_appartament')->textInput(['placeholder' => 'Кватира'])->label(false); ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12 select-day">
-                            <?= $form->field($order_date, 'date')->textInput(['class' => 'js-datepicker checkout__input', 'value' => $delivery_time->getAvailableDate(), 'placeholder' => 'Указать день доставки'])->label(false); ?>
+							<?= $form->field($order_date, 'date')->textInput(['class' => 'js-datepicker checkout__input', 'value' => $delivery_time->getAvailableDate(), 'placeholder' => 'Указать день доставки'])->label(false); ?>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="order-time-wrap">
                                 <ul class="order-time">
-                                    <?php foreach ($delivery_time->getTimeList() as $key => $time): ?>
+									<?php foreach ($delivery_time->getTimeList() as $key => $time): ?>
                                         <li data-value="с <?= $key; ?>.00 до <?= $time; ?>.00" class="order-time__item">с <?= $key; ?>.00 до <?= $time; ?>.00</li>
-                                    <?php endforeach; ?>
+									<?php endforeach; ?>
                                 </ul>
                             </div>
-                            <?= $form->field($order_date, 'time')->hiddenInput(['class' => 'order-time-input'])->label(false); ?>
+							<?= $form->field($order_date, 'time')->hiddenInput(['class' => 'order-time-input'])->label(false); ?>
                         </div>
                     </div>
                 </div>
-
 
 
                 <div class="checkout-block">
@@ -101,10 +101,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
-                            <?= $form->field($order, 'delivery_id')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'), ['prompt' => 'Вариант доставки'])->label(false); ?>
+							<?= $form->field($order, 'delivery_id')->dropDownList(ArrayHelper::map($delivery, 'id', 'name'), ['prompt' => 'Вариант доставки'])->label(false); ?>
                         </div>
                         <div class="col-sm-6">
-                            <?= $form->field($order, 'payment_id')->dropDownList(ArrayHelper::map($payment, 'id', 'name'), ['prompt' => 'Вариант оплаты'])->label(false); ?>
+							<?= $form->field($order, 'payment_id')->dropDownList(ArrayHelper::map($payment, 'id', 'name'), ['prompt' => 'Вариант оплаты'])->label(false); ?>
                         </div>
                     </div>
                 </div>
@@ -116,17 +116,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
             <div class="checkout__title">Сумма заказа:</div>
             <div class="checkout__control-wrap">
                 <div class="checkout__price"><span><?= Price::format(Basket::getInstance()->cash()); ?></span> <?= Currency::getInstance()->show(); ?></div>
-                <?= Html::submitButton('Оформить', ['class' => 'checkout__submit']) ?>
+				<?= Html::submitButton('Оформить', ['class' => 'checkout__submit']) ?>
             </div>
-            <?= Html::a('Политика конфиденциальности', Policy::getInstance()->getPath(), ['class' => 'link-main']) ?>
-            <?php if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE): ?>
+			<?= Html::a('Политика конфиденциальности', Policy::getInstance()->getPath(), ['class' => 'link-main']) ?>
+			<?php if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE): ?>
                 <div class="delivery-alert"><span class="font-weight-bold">Внимание: </span>У вас доставка <?= Delivery::PRICE_DELIVERY; ?><?= Currency::getInstance()->show(); ?>. Сумма заказа меньше <?= Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE; ?><?= Currency::getInstance()->show(); ?></div>
-            <?php endif; ?>
+			<?php endif; ?>
         </div>
         <div class="checkout__title">Корзина:</div>
-        <?php if ($basket = Basket::findAll()): ?>
+		<?php if ($basket = Basket::findAll()): ?>
             <ul class="checkout__cart">
-                <?php foreach ($basket as $item): ?>
+				<?php foreach ($basket as $item): ?>
                     <li class="checkout__cart-item">
                         <div class="checkout__cart-item__title">
                             <a href="" class="checkout__cart-item__link"><?= $item->name; ?></a>
@@ -140,19 +140,19 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                         </div>
                         <div class="checkout__cart-item__summary"><?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                     </li>
-                <?php endforeach; ?>
+				<?php endforeach; ?>
             </ul>
-        <?php endif; ?>
+		<?php endif; ?>
     </div>
 </div>
 <?php ActiveForm::end(); ?>
 
 <script type="text/javascript">
-    var cartSumm = parseInt('<?= str_replace(' ', '', Price::format(Basket::getInstance()->cash())) ?>');
+	var cartSumm = parseInt('<?= str_replace(' ', '', Price::format(Basket::getInstance()->cash())) ?>');
 
-    function numberWithCommas(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    }
+	function numberWithCommas(x) {
+		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+	}
 </script>
 
 <?php

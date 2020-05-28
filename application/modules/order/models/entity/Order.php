@@ -73,16 +73,9 @@ class Order extends ActiveRecord
 		return [
 			['type', 'default', 'value' => '3'],
 
-			[
-				'phone',
-				'filter',
-				'filter' => function ($value) {
-					$value = str_replace(['-', '(', ')', '+', ' '], '', $value);
-					return $value;
-				}
-			],
+			[['phone'], 'udokmeci\yii2PhoneValidator\PhoneValidator', 'country' => 'RU'],
 
-			[['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'phone'], 'integer'],
+			[['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing'], 'integer'],
 
 
 			[['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],

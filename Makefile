@@ -16,6 +16,9 @@ init-prod:
 composer-install:
 	cd application && composer install
 
+composer-update:
+	cd application && composer update
+
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/order/init/migrations --interactive=0

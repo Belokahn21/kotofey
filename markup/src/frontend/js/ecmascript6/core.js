@@ -3,7 +3,9 @@ import Inputmask from "maskedinput";
 import lightbox from "lightbox2";
 import Swiper from 'swiper';
 
-var mask = new Inputmask('+7 (999) 999 99-99')
+var counter = 0;
+var mask = new Inputmask('+7 (999) 999 99-99', {
+})
 mask.mask(document.querySelector('.maskedinput-js'));
 
 var swiper = new Swiper('.swiper-container', {
