@@ -37,7 +37,7 @@ class OrderController extends Controller
 
     public function actionIndex()
     {
-        $order = new Order();
+        $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $payment = Payment::findAll(['active' => true]);
         $delivery = Delivery::findAll(['active' => true]);
         $order_date = new OrderDate();
