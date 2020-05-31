@@ -48,7 +48,7 @@ $this->title = Title::showTitle("Регистрация"); ?>
                 </div>
                 {input}
             </div>{error}'
-		])->textInput(['class' => 'form-control', 'id' => 'phone-auth-id', 'placeholder' => 'Телефон', 'autocomplete' => 'h87h58g7h8hd'])->label(false); ?>
+		])->textInput(['class' => 'form-control maskedinput-js', 'id' => 'phone-auth-id', 'placeholder' => 'Телефон', 'autocomplete' => 'h87h58g7h8hd'])->label(false); ?>
     </div>
 
     <div class="input-group auth-input-group">
