@@ -9,7 +9,8 @@ class Search extends React.Component {
         super();
         this.timerId = null;
         this.state = {
-            result: []
+            result: [],
+            isShowResult: false
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -34,23 +35,32 @@ class Search extends React.Component {
 
     renderResult(elements) {
         this.setState({
-            result: elements
+            result: elements,
+            isShowResult: true
         });
     }
 
     render() {
+
         return (
-            <form className="search-form">
-                <input className="search-form__input" name="search" placeholder="Поиск по сайту..." onChange={this.handleClick}/>
-                <div className="search-result-wrap">Результаты:
+            <div className="search-form-container">
+
+                <form className="search-form">
+                    <input className="search-form__input" name="search" placeholder="Поиск по сайту..." onChange={this.handleClick}/>
+                </form>
+
+                <div className="search-result-wrap">
+                    <p className="search-result__label">Результаты:</p>
                     <ul className="search-result">
                         {this.state.result.map((product, index) => {
                             return <li className="search-result__item" key={index}><a href="" className="search-result__link">{product.name}</a></li>
                         })}
                     </ul>
                 </div>
-            </form>
+
+            </div>
         )
+
     }
 }
 
