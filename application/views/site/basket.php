@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'u
     <h1>Корзина товаров</h1>
 	<?php if (Basket::count() > 0): ?>
 		<?= Html::a('Очистить корзину', "/clear/", ['class' => 'btn-cancel']); ?>
-		<?= Html::a('Оформить заказ', "/checkout/", ['class' => 'btn-main']); ?>
+		<?= Html::a('Оформить заказ', "/order/", ['class' => 'btn-main']); ?>
 	<?php endif; ?>
 	<?php if (!empty(Yii::$app->session->get('basket'))): ?>
         <ul class="basket-page-list">
