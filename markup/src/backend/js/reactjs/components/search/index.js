@@ -42,10 +42,10 @@ class Search extends React.Component {
         return (
             <form className="search-form">
                 <input className="search-form__input" name="search" placeholder="Поиск по сайту..." onChange={this.handleClick}/>
-                <div style={{color: 'white'}}>Результаты:
-                    <ul style={{color: 'white'}}>
+                <div className="search-result-wrap">Результаты:
+                    <ul className="search-result">
                         {this.state.result.map((product, index) => {
-                            return <li key={index}>{product.name}</li>
+                            return <li className="search-result__item" key={index}><a href="" className="search-result__link">{product.name}</a></li>
                         })}
                     </ul>
                 </div>
