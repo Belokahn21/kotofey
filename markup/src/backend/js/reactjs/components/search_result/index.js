@@ -2,19 +2,22 @@ import React from 'react';
 
 class SearchResult extends React.Component {
 
-    renderAjaxItems(items) {
-    	console.log('start render items in result component');
-    	console.log(items);
-    	console.log('end render items in result component');
-    }
-
-    render() {
-        return (
-            <div className="search-result">
-                Результат поиска
-            </div>
-        )
-    }
+	render() {
+		if (this.props.isNeedShow) {
+			return (
+				<div className="search-result-wrap">
+					<p className="search-result__label">Результаты:</p>
+					<ul className="search-result">
+						{this.props.result.map((product, index) => {
+							return <li className="search-result__item" key={index}><a href="" className="search-result__link">{product.name}</a></li>
+						})}
+					</ul>
+				</div>
+			);
+		} else {
+			return ('');
+		}
+	}
 }
 
 module.exports = SearchResult;
