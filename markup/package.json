@@ -34,7 +34,7 @@
     "air-datepicker": "^2.2.3",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
-    "gulp": "^4.0.2",
+    "gulp-pug": "^4.0.1",
     "gulp-sass": "^4.0.2",
     "js-datepicker": "^5.2.1",
     "lightbox2": "^2.11.1",
