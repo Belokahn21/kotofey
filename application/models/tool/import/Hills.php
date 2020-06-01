@@ -34,7 +34,7 @@ class Hills
                 if ($product = Product::findOneByCode($code)) {
 
                     $percent = ($product->price - $product->purchase) / $product->price;
-                    $percent = $percent + 1;
+                    $percent = $percent + 0.1;
 
                     $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                     $product->base_price = $base;
