@@ -4,6 +4,7 @@ namespace app\commands;
 
 
 use app\models\tool\import\Forza10;
+use app\models\tool\import\Hills;
 use app\models\tool\import\RoyalCanin;
 use app\models\tool\import\Tavela;
 use app\models\tool\import\Valta;
@@ -32,8 +33,12 @@ class PriceController extends Controller
                 $tavela = new Tavela();
                 $tavela->update();
                 break;
+            case 5:
+                $hills = new Hills();
+                $hills->update();
+                break;
             default:
-                echo "Выберите прайс для обновления.\n1 - Royal Canin\n2 - Purina\n3 - Forza10\n4 - Tavela\n\nphp yii price/update n";
+                echo "Выберите прайс для обновления.\n1 - Royal Canin\n2 - Purina\n3 - Forza10\n4 - Tavela\n5 - Hills\n\nphp yii price/update n";
                 break;
         }
     }
