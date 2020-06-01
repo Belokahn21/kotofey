@@ -35,7 +35,7 @@ class PriceController extends Controller
                 break;
             case 5:
                 $hills = new Hills();
-                $hills->update();
+                $hills->update(true);
                 break;
             default:
                 echo "Выберите прайс для обновления.\n1 - Royal Canin\n2 - Purina\n3 - Forza10\n4 - Tavela\n5 - Hills\n\nphp yii price/update n";

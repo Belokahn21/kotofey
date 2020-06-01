@@ -15,7 +15,7 @@ class Hills
         return \Yii::getAlias('@app/tmp/price/hills/hills2020.csv');
     }
 
-    public function update()
+    public function update($reCount = false)
     {
         $empty_ids = [];
         $counter = 0;
@@ -33,8 +33,11 @@ class Hills
 
                 if ($product = Product::findOneByCode($code)) {
 
-                    $percent = ($product->price - $product->purchase) / $product->price;
-                    $percent = $percent;
+                    if ($reCount == false) {
+                        $percent = ($product->price - $product->purchase) / $product->price;
+                    } else {
+                        $percent = 0.13;
+                    }
 
                     $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                     $product->base_price = $base;
