@@ -79,22 +79,19 @@ class NotifyService
 
 	public function sendEmailClient($order_id)
 	{
-		if (YII_ENV == 'dev') {
-			return false;
-		}
 		$order = Order::findOne($order_id);
+
 		if (!$order) {
 			return false;
 		}
 
-		$client = User::findOne($order->user_id);
 
 		$result = Yii::$app->mailer->compose('client-buy', [
 			'order' => $order,
 			'order_items' => OrdersItems::find()->where(['order_id' => $order_id])->all()
 		])
 			->setFrom([Yii::$app->params['email']['sale'] => 'kotofey.store'])
-			->setTo($client->email)
+			->setTo($order->email)
 			->setSubject('Квитанция о покупке - спасибо, что вы с нами!')
 			->send();
 

@@ -1,3 +1,3 @@
 <?php
 
-(new \app\models\services\NotifyService())->sendMessageToVkontakte(98);
+(new \app\models\services\NotifyService())->sendEmailClient(98);
