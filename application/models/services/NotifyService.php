@@ -81,7 +81,7 @@ class NotifyService
 	{
 		$order = Order::findOne($order_id);
 
-		if (!$order) {
+		if (!$order or empty($order->email)) {
 			return false;
 		}
 
