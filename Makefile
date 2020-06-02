@@ -9,9 +9,11 @@ push:
 
 init-dev:
 	cp application/web/index.dev.php application/web/index.php
+	cp application/config/web.php.dev application/config/web.php
 
 init-prod:
 	cp application/web/index.prod.php application/web/index.php
+	cp application/config/web.php.prod application/config/web.php
 
 composer-install:
 	cd application && composer install
