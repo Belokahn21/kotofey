@@ -152,7 +152,9 @@ gulp.task('js', function () {
 gulp.task('pug', function () {
     return new Promise(function (resolve, reject) {
         gulp.src(config.paths.pug.src_backend)
+            .pipe(plumber())
             .pipe(pug())
+            .pipe(plumber.stop())
             .pipe(gulp.dest(config.paths.pug.build_backend))
             .pipe(reload({stream: true}));
 
