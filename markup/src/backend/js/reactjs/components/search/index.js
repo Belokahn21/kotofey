@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDom from 'react-dom';
 
-import Result from '../search_result/index';
+import Result from './result';
 
 class Search extends React.Component {
+
 
 	constructor() {
 		super();
@@ -26,11 +27,21 @@ class Search extends React.Component {
 			clearTimeout(this.timerId);
 		}
 
+		this.loadProcessOn();
 		this.timerId = setTimeout(() => {
 			fetch(url)
 				.then(response => response.json())
-				.then(commits => this.renderResult(JSON.parse(commits)));
+				.then(commits => {
+					this.loadProcessOff();
+					this.renderResult(JSON.parse(commits))
+				});
 		}, timerTime);
+	}
+
+	loadProcessOn() {
+	}
+
+	loadProcessOff() {
 	}
 
 	renderResult(elements) {
@@ -48,7 +59,7 @@ class Search extends React.Component {
 					<input className="search-form__input" name="search" placeholder="Поиск по сайту..." onChange={this.handleClick}/>
 				</form>
 
-				<Result isNeedShow={this.state.isShowResult} result={this.state.result} />
+				<Result isNeedShow={this.state.isShowResult} result={this.state.result}/>
 
 			</div>
 		)

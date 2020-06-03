@@ -21,6 +21,11 @@
     padding: 2px 5px;
     border-radius: 10px;
     border: 0;
+    transition: width 2s;
+
+    &.with-loader {
+      width: 90%;
+    }
   }
 }
 
