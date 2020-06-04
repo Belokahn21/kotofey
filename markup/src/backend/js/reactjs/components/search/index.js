@@ -4,8 +4,6 @@ import ReactDom from 'react-dom';
 import Result from './result';
 
 class Search extends React.Component {
-
-
 	constructor() {
 		super();
 		this.timerId = null;
