@@ -1,0 +1,45 @@
+.group-buy-toggle {
+  display: inline-block;
+  padding: 5px 10px;
+  margin: 10px 0;
+  border: 1px silver solid;
+  border-radius: 10px;
+  color: black;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.group-buy {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: flex-start;
+  flex-wrap: wrap;
+
+  &__item {
+    width: 23.5%;
+    min-height: 100px;
+    //height: 100px;
+    margin: 5px;
+    padding: 5px;
+    border: 1px silver solid;
+    border-radius: 15px;
+  }
+
+  &__link {
+    color: black;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}
+
+.group-buy-list {
+  &__item {
+    font-size: 0.8rem;
+    border-bottom: 1px solid silver;
+    margin: 3px 0;
+  }
+}

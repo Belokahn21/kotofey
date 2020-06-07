@@ -28,7 +28,7 @@ class OrderBackendController extends Controller
 
 	public function actionIndex()
 	{
-		$model = new Order(['scenario' => Order::SCENARIO_CUSTOM]);
+		$model = new Order();
 		$itemsModel = new OrdersItems();
 		$users = User::find()->all();
 		$deliveries = Delivery::find()->all();

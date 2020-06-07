@@ -116,8 +116,12 @@ $(document).ready(function () {
 			}
 		});
 	});
-
 	/* проверить есть ли в наличии товар? -- конец */
+
+	/* Маска телефона X (XXX) XXX XX-XX */
+	$('.phone-mask').text(function (i, text) {
+		return text.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3 $4-$5');
+	});
 });
 
 var myDatepicker = $('.js-datepicker').datepicker({
