@@ -35,6 +35,7 @@ tests/_support/_generated
 *dump.txt
 debug.php
 backup
+build
 composer.lock
 markup/build/
 node_modules

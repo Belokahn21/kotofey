@@ -166,6 +166,18 @@ $config = [
         'support' => [
             'class' => 'app\modules\support\Module',
         ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
+        ],
+        'settings' => [
+            'class' => 'app\modules\settings\Module',
+        ],
+        'short_link' => [
+            'class' => 'app\modules\short_link\Module',
+        ],
+        'vacancy' => [
+            'class' => 'app\modules\vacancy\Module',
+        ],
     ],
     'params' => $params,
 ];
