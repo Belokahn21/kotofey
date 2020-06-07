@@ -1,69 +1,63 @@
 <?php
 
-namespace app\modules\payment\controllers;
+namespace app\modules\catalog\controllers;
 
-use app\models\entity\Payment;
-use app\models\search\PaymentSearchForm;
+
+use app\models\entity\ProductProperties;
+use app\models\search\ProductPropertiesSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
-use yii\web\HttpException;
 
-class PaymentBackendController extends Controller
+class ProductPropertiesBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
 
     public function actionIndex()
     {
-        $model = new Payment();
-        $searchModel = new PaymentSearchForm();
+        $model = new ProductProperties();
+        $searchModel = new ProductPropertiesSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->save()) {
-                        Alert::setSuccessNotify('Способ оплаты создан');
                         return $this->refresh();
                     }
                 }
             }
         }
 
-        return $this->render('index', [
+        return $this->render("index", [
             'model' => $model,
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     public function actionUpdate($id)
     {
-        $model = Payment::findOne($id);
-
-        if (!$model) {
-            throw new HttpException(404, 'Оплата не сущесвует');
-        }
+        $model = ProductProperties::findOne($id);
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->update()) {
-                        Alert::setSuccessNotify('Способ оплаты обновлен');
                         return $this->refresh();
                     }
                 }
             }
         }
 
-        return $this->render('update', [
+        return $this->render("update", [
             'model' => $model,
         ]);
     }
 
     public function actionDelete($id)
     {
-        if (Payment::findOne($id)->delete()) {
-            Alert::setSuccessNotify('Оплата успешно удален');
+        if (ProductProperties::findOne($id)->delete()) {
+            Alert::setSuccessNotify('Свойство товара удалено');
         }
 
         return $this->redirect(['index']);

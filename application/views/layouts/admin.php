@@ -82,8 +82,8 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <ul class="submenuItems">
-                            <li><a href="<?= Url::to(['/admin/geo']); ?>">Города</a><span class="count"><?= Geo::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/timezone']); ?>">Временные зоны</a><span class="count"><?= GeoTimezone::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/geo/geo-backend/index']); ?>">Города</a><span class="count"><?= Geo::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/geo/timezone-backend/index']); ?>">Временные зоны</a><span class="count"><?= GeoTimezone::find()->count() ?></span></li>
                         </ul>
                     </li>
                     <li>
@@ -91,10 +91,9 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <ul class="submenuItems">
-                            <li><a href="<?= Url::to(['/admin/catalog']); ?>">Товары <span class="count"><?= Product::find()->count() ?></span></a></li>
                             <li><a href="<?= Url::to(['/admin/catalog/product-backend/index']); ?>">Товары <span class="count"><?= Product::find()->count() ?></span></a></li>
-                            <li><a href="<?= Url::to(['/admin/category']); ?>">Разделы <span class="count"><?= Category::find()->count() ?></span></a></li>
-                            <li><a href="<?= Url::to(['/admin/properties']); ?>">Свойства <span class="count"><?= ProductProperties::find()->count() ?></span></a></li>
+                            <li><a href="<?= Url::to(['/admin/catalog/product-category-backend/index']); ?>">Разделы <span class="count"><?= Category::find()->count() ?></span></a></li>
+                            <li><a href="<?= Url::to(['/admin/catalog/product-properties-backend/index']); ?>">Свойства <span class="count"><?= ProductProperties::find()->count() ?></span></a></li>
                             <li><a href="<?= Url::to(['/admin/informers']); ?>">Справочники <span class="count"><?= Informers::find()->count() ?></span></a></li>
                             <li><a href="<?= Url::to(['/admin/informers-values']); ?>">Значения справочников <span class="count"><?= InformersValues::find()->count() ?></span></a></li>
                         </ul>
@@ -105,13 +104,13 @@ $user = User::findOne(Yii::$app->user->identity->id);
                         </div>
                         <ul class="submenuItems">
                             <li><a href="<?= Url::to(['/admin/order/order-backend/index']); ?>">Заказы</a> <span class="count"><?= Order::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/stocks']); ?>">Склады</a> <span class="count"><?= Stocks::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/status']); ?>">Статус заказа</a> <span class="count"><?= OrderStatus::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/stock/stock-backend/index']); ?>">Склады</a> <span class="count"><?= Stocks::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/order/order-status-backend/index']); ?>">Статус заказа</a> <span class="count"><?= OrderStatus::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/delivery/delivery-backend/index']); ?>">Доставки</a> <span class="count"><?= Delivery::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/payment']); ?>">Оплаты</a> <span class="count"><?= Payment::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/payment/payment-backend/index']); ?>">Оплаты</a> <span class="count"><?= Payment::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/promo']); ?>">Промокоды</a> <span class="count"><?= Promo::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/vendor']); ?>">Поставщики</a> <span class="count"><?= Vendor::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/vendor-group']); ?>">Группы поставщиков</a> <span class="count"><?= VendorGroup::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/vendors/vendors-backend/index']); ?>">Поставщики</a> <span class="count"><?= Vendor::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/vendors/vendors-group-backend/index']); ?>">Группы поставщиков</a> <span class="count"><?= VendorGroup::find()->count() ?></span></li>
                         </ul>
                     </li>
                     <li>
@@ -139,8 +138,8 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <i class="fa fa-chevron-down" aria-hidden="true"></i>
                         </div>
                         <ul class="submenuItems">
-                            <li><a href="<?= Url::to(['/admin/news']) ?>">Новости</a> <span class="count"><?= News::find()->count() ?></span></li>
-                            <li><a href="<?= Url::to(['/admin/newssections']) ?>">Рубрики</a></li>
+                            <li><a href="<?= Url::to(['/admin/news/news-backend/index']) ?>">Новости</a> <span class="count"><?= News::find()->count() ?></span></li>
+                            <li><a href="<?= Url::to(['/admin/news/news-category-backend/index']) ?>">Рубрики</a></li>
                             <li><a href="<?= Url::to(['/admin/content/slider-backend/index']) ?>">Слайдеры</a></li>
                             <li><a href="<?= Url::to(['/admin/content/slider-images-backend/index']) ?>">Изображения слайдеров</a></li>
                         </ul>
@@ -153,7 +152,6 @@ $user = User::findOne(Yii::$app->user->identity->id);
                             <li><a href="<?= Url::to(['/admin/shortly']) ?>">Короткие ссылки</a> <span class="count"><?= ShortLinks::find()->count() ?></span></li>
                             <li><a href="<?= Url::to(['/admin/feed/feed/index']) ?>">Поисковой контент</a></li>
                             <li><a href="<?= Url::to(['/admin/sale-product']) ?>">Акционные товары</a></li>
-                            <li><a href="<?= Url::to(['/admin/promo/promo/index']) ?>">Запустить акцию</a></li>
                         </ul>
                     </li>
                     <li>

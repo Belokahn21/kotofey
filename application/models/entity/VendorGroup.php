@@ -59,12 +59,12 @@ class VendorGroup extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'is_active' => 'Is Active',
-            'sort' => 'Sort',
-            'name' => 'Name',
-            'slug' => 'Slug',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'is_active' => 'Активность',
+            'sort' => 'Сортировка',
+            'name' => 'Название',
+            'slug' => 'Символьный код',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

@@ -1,28 +1,30 @@
 <?php
 
-namespace app\modules\payment\controllers;
+namespace app\modules\order\controllers;
 
-use app\models\entity\Payment;
-use app\models\search\PaymentSearchForm;
+
+use app\models\search\OrderStatusSearchForm;
+use app\modules\order\models\entity\OrderStatus;
 use app\widgets\notification\Alert;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\HttpException;
 
-class PaymentBackendController extends Controller
+class OrderStatusBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
 
     public function actionIndex()
     {
-        $model = new Payment();
-        $searchModel = new PaymentSearchForm();
+        $model = new OrderStatus();
+        $searchModel = new OrderStatusSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->save()) {
-                        Alert::setSuccessNotify('Способ оплаты создан');
+                        Alert::setSuccessNotify('Статус добавлен');
                         return $this->refresh();
                     }
                 }
@@ -31,24 +33,23 @@ class PaymentBackendController extends Controller
 
         return $this->render('index', [
             'model' => $model,
+            'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
         ]);
     }
 
     public function actionUpdate($id)
     {
-        $model = Payment::findOne($id);
-
+        $model = OrderStatus::findOne($id);
         if (!$model) {
-            throw new HttpException(404, 'Оплата не сущесвует');
+            throw new HttpException(404, 'Статус не существует');
         }
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->update()) {
-                        Alert::setSuccessNotify('Способ оплаты обновлен');
+                        Alert::setSuccessNotify('Статус обновлен');
                         return $this->refresh();
                     }
                 }
@@ -56,16 +57,17 @@ class PaymentBackendController extends Controller
         }
 
         return $this->render('update', [
-            'model' => $model,
+            'model' => $model
         ]);
     }
 
     public function actionDelete($id)
     {
-        if (Payment::findOne($id)->delete()) {
-            Alert::setSuccessNotify('Оплата успешно удален');
+        if (OrderStatus::findOne($id)->delete()) {
+            Alert::setSuccessNotify('Статус заказа удалён');
         }
 
-        return $this->redirect(['index']);
+
+        return $this->redirect(Url::to(['index']));
     }
 }

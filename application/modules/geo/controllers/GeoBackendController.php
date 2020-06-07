@@ -1,36 +1,38 @@
 <?php
 
-namespace app\modules\payment\controllers;
+namespace app\modules\geo\controllers;
 
-use app\models\entity\Payment;
-use app\models\search\PaymentSearchForm;
+use Yii;
+use app\models\entity\Geo;
+use app\models\entity\GeoTimezone;
+use app\models\search\GeoSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;
 
-class PaymentBackendController extends Controller
+class GeoBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
 
     public function actionIndex()
     {
-        $model = new Payment();
-        $searchModel = new PaymentSearchForm();
-        $dataProvider = $searchModel->search(\Yii::$app->request->get());
-
+        $model = new Geo();
+        $time_zones = GeoTimezone::find()->all();
+        $searchModel = new GeoSearchForm();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->save()) {
-                        Alert::setSuccessNotify('Способ оплаты создан');
+                        Alert::setSuccessNotify('Гео объект добавлен');
                         return $this->refresh();
                     }
                 }
             }
         }
-
         return $this->render('index', [
             'model' => $model,
+            'time_zones' => $time_zones,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider
         ]);
@@ -38,32 +40,31 @@ class PaymentBackendController extends Controller
 
     public function actionUpdate($id)
     {
-        $model = Payment::findOne($id);
-
+        $model = Geo::findOne($id);
+        $time_zones = GeoTimezone::find()->all();
         if (!$model) {
-            throw new HttpException(404, 'Оплата не сущесвует');
+            throw new HttpException(404, 'Гео объект не найден');
         }
-
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->update()) {
-                        Alert::setSuccessNotify('Способ оплаты обновлен');
+                        Alert::setSuccessNotify('Гео объект обновлен');
                         return $this->refresh();
                     }
                 }
             }
         }
-
         return $this->render('update', [
             'model' => $model,
+            'time_zones' => $time_zones,
         ]);
     }
 
     public function actionDelete($id)
     {
-        if (Payment::findOne($id)->delete()) {
-            Alert::setSuccessNotify('Оплата успешно удален');
+        if (Geo::findOne($id)->delete()) {
+            Alert::setSuccessNotify('Гео объект удалён');
         }
 
         return $this->redirect(['index']);

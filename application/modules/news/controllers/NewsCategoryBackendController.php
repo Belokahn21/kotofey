@@ -1,28 +1,34 @@
 <?php
+/**
+ * Developer: Konstantin Vasin by PhpStorm
+ * Company: Altasib
+ * Time: 10:42
+ */
 
-namespace app\modules\payment\controllers;
+namespace app\modules\news\controllers;
 
-use app\models\entity\Payment;
-use app\models\search\PaymentSearchForm;
+
+use app\models\entity\NewsCategory;
+use app\models\search\NewsCategorySearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;
 
-class PaymentBackendController extends Controller
+class NewsCategoryBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
 
     public function actionIndex()
     {
-        $model = new Payment();
-        $searchModel = new PaymentSearchForm();
+        $model = new NewsCategory();
+        $searchModel = new NewsCategorySearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->save()) {
-                        Alert::setSuccessNotify('Способ оплаты создан');
+                        Alert::setSuccessNotify('Рубрика создана');
                         return $this->refresh();
                     }
                 }
@@ -32,23 +38,22 @@ class PaymentBackendController extends Controller
         return $this->render('index', [
             'model' => $model,
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     public function actionUpdate($id)
     {
-        $model = Payment::findOne($id);
-
+        $model = NewsCategory::findOne($id);
         if (!$model) {
-            throw new HttpException(404, 'Оплата не сущесвует');
+            throw new HttpException(404, 'Запись не найдена');
         }
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->update()) {
-                        Alert::setSuccessNotify('Способ оплаты обновлен');
+                        Alert::setSuccessNotify('Рубрика обновлена');
                         return $this->refresh();
                     }
                 }
@@ -62,8 +67,8 @@ class PaymentBackendController extends Controller
 
     public function actionDelete($id)
     {
-        if (Payment::findOne($id)->delete()) {
-            Alert::setSuccessNotify('Оплата успешно удален');
+        if (NewsCategory::findOne($id)->delete()) {
+            Alert::setSuccessNotify('Категория новости удалена');
         }
 
         return $this->redirect(['index']);
