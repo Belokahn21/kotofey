@@ -39,11 +39,13 @@ use app\models\helpers\OrderHelper;
 
                     <h4>Адрес доставки</h4>
 					<?php try { ?>
-                        <ul style="display: flex; flex-direction: row;">
-                            <li style="margin: 0 5px;">Город <?= $model->owner->billing->city; ?></li>
-                            <li style="margin: 0 5px;">Улица <?= $model->owner->billing->street; ?></li>
-                            <li style="margin: 0 5px;">Дом <?= $model->owner->billing->home; ?></li>
-                            <li style="margin: 0 5px;">Квртира <?= $model->owner->billing->house; ?></li>
+                        <ul style="display: flex; flex-direction: column;">
+                            <li style="margin: 0 5px;">Город <?= $model->city; ?></li>
+                            <li style="margin: 0 5px;">Страна <?= $model->country; ?></li>
+                            <li style="margin: 0 5px;">Нас. пункт <?= $model->city; ?></li>
+                            <li style="margin: 0 5px;">Улица <?= $model->street; ?></li>
+                            <li style="margin: 0 5px;">Дом <?= $model->number_home; ?></li>
+                            <li style="margin: 0 5px;">Квртира <?= $model->number_home; ?></li>
                         </ul>
 					<?php } catch (ErrorException $exception) { ?>
                         <p>Отстуствуют</p>
