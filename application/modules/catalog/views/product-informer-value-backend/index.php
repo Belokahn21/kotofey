@@ -13,7 +13,7 @@ use app\models\entity\Informers;
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $searchModel \app\models\search\InformersValuesSearchForm */
 
-$this->title = Title::showTitle("Справочники"); ?>
+$this->title = Title::showTitle("Значения справочников"); ?>
     <section>
         <h1 class="title">Значения справочников</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

@@ -25,6 +25,7 @@ class ProductInformerBackendController extends Controller
                 if ($model->validate()) {
 
                     if ($model->save()) {
+                        Alert::setSuccessNotify('Справочник добавлен');
                         return $this->refresh();
                     }
                 }

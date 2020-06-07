@@ -45,7 +45,6 @@ use app\models\helpers\OrderHelper;
                                 <li style="margin: 0 5px;">Страна <?= $model->country; ?></li>
                             <?php endif; ?>
 
-
                             <?php if ($model->city): ?>
                                 <li style="margin: 0 5px;">Нас. пункт <?= $model->city; ?></li>
                             <?php endif; ?>
@@ -88,7 +87,7 @@ use app\models\helpers\OrderHelper;
 
                                     <div class="w-75">
                                         <?php if ($item->product): ?>
-                                            <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
+                                            <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
                                         <?php else: ?>
                                             <p><?= $item->name; ?></p>
                                         <?php endif; ?>
