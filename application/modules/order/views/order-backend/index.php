@@ -20,7 +20,7 @@ use yii\helpers\ArrayHelper;
 
 $this->title = Title::showTitle("Заказы");
 ?>
-<h1 class="title">Заказы</h1>
+    <h1 class="title">Заказы</h1>
 <?= GroupBuyWidget::widget(); ?>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [

@@ -12,6 +12,9 @@ $model = new \app\modules\order\models\entity\OrdersItems();
             <?= $form->field($item, '[' . $i . ']count')->textInput(['class' => 'load-product-info__count form-control']); ?>
         </div>
         <div class="col-sm-3">
+            <?= $form->field($item, '[' . $i . ']purchase')->textInput(['class' => 'load-product-info__purchase form-control']); ?>
+        </div>
+        <div class="col-sm-3">
             <?= $form->field($item, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
         </div>
         <div class="col-sm-2">
