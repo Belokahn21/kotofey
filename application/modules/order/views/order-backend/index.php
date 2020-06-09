@@ -47,7 +47,15 @@ $this->title = Title::showTitle("Заказы");
                 return $model->getStatus();
             }
         ],
-        'phone',
+        [
+            'attribute' => 'phone',
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->phone) {
+                    return Html::a($model->phone, 'tel:' . $model->phone);
+                }
+            }
+        ],
 //		[
 //			'attribute' => 'delivery_id',
 //			'filter' => ArrayHelper::map(Delivery::find()->all(), 'id', 'nameF'),
