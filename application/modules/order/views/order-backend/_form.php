@@ -30,6 +30,9 @@ use app\models\helpers\OrderHelper;
         <div class="tab-pane fade<?= ($model->isNewRecord ? '' : ' show active'); ?>" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
             <div class="d-flex flex-row">
                 <div class="w-50">
+                    <h4></h4>
+                    <p>Телефон <a href="tel:<?= $model->phone; ?>"><?= $model->phone; ?></a></p>
+                    <p>Почта <a href="mailto:<?= $model->email; ?>"><?= $model->email; ?></a></p>
                     <h4>Время и дата доставки</h4>
                     <?php try { ?>
                         <p><?= $model->dateDelivery->date; ?> - <?= $model->dateDelivery->time; ?></p>
