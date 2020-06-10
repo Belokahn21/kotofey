@@ -84,13 +84,11 @@ $(document).ready(function () {
 	function updateFields($parent, product) {
 		var $name = $parent.find('.load-product-info__name');
 		var $price = $parent.find('.load-product-info__price');
-		var $count = $parent.find('.load-product-info__count');
 		var $purchase = $parent.find('.load-product-info__purchase');
 
 		$name.val(product.name);
 		$price.val(product.price);
 		$purchase.val(product.purchase);
-		$count.val(1);
 	}
 
 

@@ -14,7 +14,7 @@ $this->title = Title::showTitle('Товары');
 <?= Html::a("Посмотреть на сайте", $model->detail, ['target' => '_blank', 'class' => 'btn-main']); ?>
     <h1 class="title"><?= $model->name; ?></h1>
 <?php $form = ActiveForm::begin([
-    'enableAjaxValidation' => true,
+//    'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
 <?= $this->render('_form', [
