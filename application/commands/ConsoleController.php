@@ -299,7 +299,7 @@ class ConsoleController extends Controller
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             if (!empty($product->purchase)) {
-                $product->price = $product->purchase;
+                $product->price = $product->purchase + ceil($product->purchase * 0.15);
             }
 
             if ($product->validate()) {
