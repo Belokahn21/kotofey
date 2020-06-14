@@ -4,65 +4,72 @@ import ReactDom from 'react-dom';
 import Result from './result';
 
 class Search extends React.Component {
-	constructor() {
-		super();
-		this.timerId = null;
-		this.state = {
-			result: [],
-			isShowResult: false
-		};
+    constructor() {
+        super();
+        this.timerId = null;
+        this.state = {
+            result: [],
+            isShowResult: false,
+            isNeedShowLoader: ""
+        };
 
-		this.handleClick = this.handleClick.bind(this);
-	}
+        this.handleClick = this.handleClick.bind(this);
+    }
 
-	handleClick(e) {
-		let elements = [];
-		let value = e.target.value;
-		let timerTime = 3000;
-		const url = "http://local.kotofey.store/rest/product/get/?text=" + value;
+    handleClick(e) {
+        let elements = [];
+        let value = e.target.value;
+        let timerTime = 3000;
+        const url = "http://local.kotofey.store/rest/product/get/?text=" + value;
 
-		if (this.timerId) {
-			clearTimeout(this.timerId);
-		}
+        if (this.timerId) {
+            clearTimeout(this.timerId);
+        }
 
-		this.loadProcessOn();
-		this.timerId = setTimeout(() => {
-			fetch(url)
-				.then(response => response.json())
-				.then(commits => {
-					this.loadProcessOff();
-					this.renderResult(JSON.parse(commits))
-				});
-		}, timerTime);
-	}
+        this.timerId = setTimeout(() => {
+            this.loadProcessOn();
+            fetch(url)
+                .then(response => response.json())
+                .then(commits => {
+                    this.loadProcessOff();
+                    this.renderResult(JSON.parse(commits))
+                });
+        }, timerTime);
+    }
 
-	loadProcessOn() {
-	}
+    loadProcessOn() {
+        this.setState({
+            isNeedShowLoader: "with-loader",
+        });
+    }
 
-	loadProcessOff() {
-	}
+    loadProcessOff() {
+        this.setState({
+            isNeedShowLoader: "",
+        });
+    }
 
-	renderResult(elements) {
-		this.setState({
-			result: elements,
-			isShowResult: true
-		});
-	}
+    renderResult(elements) {
+        this.setState({
+            result: elements,
+            isShowResult: true
+        });
+    }
 
-	render() {
-		return (
-			<div className="search-form-container">
+    render() {
+        return (
+            <div className="search-form-container">
 
-				<form className="search-form">
-					<input className="search-form__input" name="search" placeholder="Поиск по сайту..." onChange={this.handleClick}/>
-				</form>
+                <form className="search-form">
+                    <input className={this.state.isNeedShowLoader + " search-form__input"} name="search" placeholder="Поиск по сайту..." onChange={this.handleClick}/>
+                </form>
 
-				<Result isNeedShow={this.state.isShowResult} result={this.state.result}/>
+                <Result isNeedShow={this.state.isShowResult} result={this.state.result}/>
 
-			</div>
-		)
+            </div>
+        )
 
-	}
+    }
 }
 
 ReactDom.render(<Search/>, document.querySelector('.search-admin'));

@@ -19,12 +19,12 @@
   &__input {
     width: 100%;
     padding: 2px 5px;
-    border-radius: 10px;
+    border-radius: 5px;
     border: 0;
-    transition: width 2s;
+    transition: width 1ms ease-in-out;
 
     &.with-loader {
-      width: 90%;
+      width: 85%;
     }
   }
 }
