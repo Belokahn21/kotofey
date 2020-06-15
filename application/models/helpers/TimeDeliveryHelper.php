@@ -120,6 +120,10 @@ class TimeDeliveryHelper
     {
         if (BasketHelper::containVendor(1)) {
             $numberDay = date('N', strtotime($date));
+            $days = [1, 3, 5];
+
+
+
             if ($numberDay > 1 or $numberDay > 3 or $numberDay > 5) {
                 return true;
             }
