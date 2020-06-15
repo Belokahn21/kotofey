@@ -5,16 +5,19 @@ $model = new \app\modules\order\models\entity\OrdersItems();
 ?>
 <?php foreach ($itemsModel as $i => $item): ?>
     <div class="row orders-items-item">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <?= $form->field($item, '[' . $i . ']name')->textInput(['class' => 'load-product-info__name form-control']); ?>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-1">
             <?= $form->field($item, '[' . $i . ']count')->textInput(['class' => 'load-product-info__count form-control']); ?>
         </div>
-        <div class="col-sm-3">
-            <?= $form->field($item, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
+        <div class="col-sm-2">
+            <?= $form->field($item, '[' . $i . ']purchase')->textInput(['class' => 'load-product-info__purchase form-control']); ?>
         </div>
         <div class="col-sm-2">
+            <?= $form->field($item, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
+        </div>
+        <div class="col-sm-1">
             <?= $form->field($item, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
         </div>
         <div class="col-sm-1">
@@ -25,16 +28,19 @@ $model = new \app\modules\order\models\entity\OrdersItems();
 <?php endforeach; ?>
 <?php for ($j = $iter; $j < $iter + 3; $j++): ?>
     <div class="row orders-items-item">
-        <div class="col-sm-3">
+        <div class="col-sm-4">
             <?= $form->field($model, '[' . $j . ']name')->textInput(['class' => 'load-product-info__name form-control']); ?>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-1">
             <?= $form->field($model, '[' . $j . ']count')->textInput(['class' => 'load-product-info__count form-control']); ?>
         </div>
-        <div class="col-sm-3">
-            <?= $form->field($model, '[' . $j . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
+        <div class="col-sm-2">
+            <?= $form->field($model, '[' . $j . ']purchase')->textInput(['class' => 'load-product-info__purchase form-control']); ?>
         </div>
         <div class="col-sm-2">
+            <?= $form->field($model, '[' . $j . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
+        </div>
+        <div class="col-sm-1">
             <?= $form->field($model, '[' . $j . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
         </div>
         <div class="col-sm-1">

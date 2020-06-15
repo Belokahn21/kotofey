@@ -16,21 +16,22 @@ use yii\helpers\Url;
 $this->title = Title::showTitle("Обновить заказ: " . $model->id);
 ?>
 <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']) ?>
+<?= Html::a('Удалить', Url::to(['delete', 'id' => $model->id]), ['class' => 'btn-main']) ?>
     <h1>Обновить заказ: <?= $model->id; ?></h1>
 
 <?php if (!$model->isNewRecord): ?>
-	<?php //todo: лень вывести данные цифровые ?>
+    <?php //todo: лень вывести данные цифровые ?>
 <?php endif; ?>
 
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
-	'itemsModel' => $itemsModel,
-	'users' => $users,
-	'model' => $model,
-	'deliveries' => $deliveries,
-	'payments' => $payments,
-	'status' => $status,
-	'form' => $form,
+    'itemsModel' => $itemsModel,
+    'users' => $users,
+    'model' => $model,
+    'deliveries' => $deliveries,
+    'payments' => $payments,
+    'status' => $status,
+    'form' => $form,
 ]); ?>
 <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end() ?>

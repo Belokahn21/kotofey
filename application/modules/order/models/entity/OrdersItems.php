@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property integer $order_id
  * @property integer $product_id
  * @property integer $count
+ * @property integer $purchase
  * @property integer $price
  * @property integer $weight
  * @property string $image
@@ -37,7 +38,7 @@ class OrdersItems extends ActiveRecord
         return [
             [['name', 'promo_code'], 'string'],
 
-            [['price', 'count', 'product_id', 'order_id', 'weight'], 'integer'],
+            [['price', 'count', 'product_id', 'order_id', 'weight', 'purchase'], 'integer'],
 
             [['need_delete'], 'boolean'],
 
@@ -129,6 +130,7 @@ class OrdersItems extends ActiveRecord
             'name' => 'Название товара',
             'count' => 'Количество',
             'price' => 'Цена',
+            'purchase' => 'Закупочная цена',
             'product_id' => 'ID товара',
             'order_id' => 'ID заказа',
             'need_delete' => 'Удалить',

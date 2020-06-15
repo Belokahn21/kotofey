@@ -84,11 +84,11 @@ $(document).ready(function () {
 	function updateFields($parent, product) {
 		var $name = $parent.find('.load-product-info__name');
 		var $price = $parent.find('.load-product-info__price');
-		var $count = $parent.find('.load-product-info__count');
+		var $purchase = $parent.find('.load-product-info__purchase');
 
 		$name.val(product.name);
 		$price.val(product.price);
-		$count.val(1);
+		$purchase.val(product.purchase);
 	}
 
 
@@ -116,8 +116,12 @@ $(document).ready(function () {
 			}
 		});
 	});
-
 	/* проверить есть ли в наличии товар? -- конец */
+
+	/* Маска телефона X (XXX) XXX XX-XX */
+	$('.phone-mask').text(function (i, text) {
+		return text.replace(/(\d{1})(\d{3})(\d{3})(\d{2})(\d{2})/, '$1 ($2) $3 $4-$5');
+	});
 });
 
 var myDatepicker = $('.js-datepicker').datepicker({

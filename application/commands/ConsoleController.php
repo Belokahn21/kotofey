@@ -9,12 +9,32 @@ use app\models\entity\Promo;
 use app\models\entity\User;
 use app\models\entity\UsersReferal;
 use app\models\tool\Debug;
+use app\modules\order\models\entity\Order;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
 
 class ConsoleController extends Controller
 {
     const VENDOR_ID_SIBAGRO_TRADE = 4;
+
+    public function actionOrderUpdate()
+    {
+        $orders = Order::find()->all();
+        foreach ($orders as $order) {
+            if (empty($order->phone)) {
+                $order->phone = $order->owner->phone;
+
+                if (!$order->validate()) {
+                    print_r($order->getErrors());
+                    return false;
+                }
+                if (!$order->save()) {
+                    echo "Заказ {$order->id} не обновлён";
+                    return false;
+                }
+            }
+        }
+    }
 
     public function actionName()
     {
@@ -279,7 +299,7 @@ class ConsoleController extends Controller
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             if (!empty($product->purchase)) {
-                $product->price = $product->purchase;
+                $product->price = $product->purchase + ceil($product->purchase * 0.15);
             }
 
             if ($product->validate()) {
