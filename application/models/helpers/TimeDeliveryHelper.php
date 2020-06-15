@@ -3,6 +3,7 @@
 namespace app\models\helpers;
 
 
+use app\models\entity\Basket;
 use app\modules\delivery\models\entity\Delivery;
 use app\models\tool\Debug;
 use phpDocumentor\Reflection\Types\Integer;
@@ -149,4 +150,25 @@ class TimeDeliveryHelper
 
 		return false;
 	}
+
+	public static function isCanBuyVendor($date)
+	{
+		$now = time();
+		$vendors = array();
+
+		foreach (Basket::findAll() as $item) {
+			if ($item->product) {
+				$vendors[] = $item->product->vendor_id;
+			}
+		}
+
+		if ($vendors) {
+			foreach ($vendors as $vendor_id) {
+				if ($vendor_id == 1) {
+
+				}
+			}
+		}
+	}
+
 }

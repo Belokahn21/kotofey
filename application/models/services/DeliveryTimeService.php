@@ -54,6 +54,8 @@ class DeliveryTimeService
 	{
 		$time_list = array();
 
+		TimeDeliveryHelper::isCanBuyVendor($date);
+
 //		if (TimeDeliveryHelper::isHappy($date)) {
 //			return $time_list;
 //		}
