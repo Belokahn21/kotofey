@@ -178,6 +178,9 @@ $config = [
         'vacancy' => [
             'class' => 'app\modules\vacancy\Module',
         ],
+        'basket' => [
+            'class' => 'app\modules\basket\Module',
+        ],
     ],
     'params' => $params,
 ];
