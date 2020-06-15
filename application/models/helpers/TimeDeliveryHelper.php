@@ -119,7 +119,8 @@ class TimeDeliveryHelper
     public static function isDeliveryRange($date)
     {
         if (BasketHelper::containVendor(1)) {
-            if (date('N', strtotime($date)) > 1 or date('N', strtotime($date)) > 3 or date('N', strtotime($date)) > 5) {
+            $numberDay = date('N', strtotime($date));
+            if ($numberDay > 1 or $numberDay > 3 or $numberDay > 5) {
                 return true;
             }
         }
