@@ -60,16 +60,6 @@ $(document).ready(function () {
     });
     /* Выбор города в попапе - конец */
 
-    /* Скрытие placeholder элемента */
-    var placeholder = "";
-    $("input[type=text], textarea").click(function () {
-        placeholder = $(this).attr('placeholder');
-        $(this).attr('placeholder', "");
-    }).blur(function () {
-        $(this).attr('placeholder', placeholder);
-        placeholder = "";
-    });
-
     /* Обновление времени в полоске панели управления в публичке - начало */
     if ($('.admin-panel-list__item-ts').length > 0) {
         setInterval(function () {
