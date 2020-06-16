@@ -36,7 +36,15 @@ use app\models\entity\VendorGroup;
             </div>
             <div class="col-sm-3">
                 <div class="form-element">
-                    <?= $form->field($model, 'delivery_days')->dropDownList(['Понедельник', 'Вторник', 'Среда'], ['prompt' => 'Дни доставки', 'multiple' => true]); ?>
+                    <?= $form->field($model, 'delivery_days')->dropDownList([
+                        '1' => 'Понедельник',
+                        '2' => 'Вторник',
+                        '3' => 'Среда',
+                        '4' => 'Четверг',
+                        '5' => 'Пятница',
+                        '6' => 'Суббота',
+                        '7' => 'Воскресение',
+                    ], ['prompt' => 'Дни доставки', 'multiple' => true, 'size' => 8]); ?>
                 </div>
             </div>
             <div class="col-sm-3">
