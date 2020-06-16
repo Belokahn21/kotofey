@@ -62,8 +62,6 @@ class DeliveryTimeService
         }
 
 
-		TimeDeliveryHelper::isCanBuyVendor($date);
-
 //		if (TimeDeliveryHelper::isHappy($date)) {
 //			return $time_list;
 //		}
