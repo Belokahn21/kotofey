@@ -110,21 +110,23 @@ class OrderHelper
 			$orders->where(['id' => $order_id]);
 		}
 
-		$orders->andWhere(['is_cancel' => 0]);
+		$orders->andWhere(['is_cancel' => 0, 'is_paid' => 1]);
+//		$orders->andWhere(['is_cancel' => 0]);
 
 		$orders = $orders->all();
 
 		foreach ($orders as $order) {
 			$items = OrdersItems::find()->where(['order_id' => $order->id])->all();
 			foreach ($items as $item) {
-				$product = Product::findOne($item->product_id);
-				if ($product) {
-					$out_summ += ($product->price - $product->purchase) * $item->count;
-				}
+//				$product = Product::findOne($item->product_id);
+//				if ($product) {
+//					$out_summ += ($product->price - $product->purchase) * $item->count;
+//				}
 
-				if (empty($item->product_id)) {
-					$out_summ += $item->price * $item->count;
-				}
+//				if (empty($item->product_id)) {
+//					$out_summ += $item->price * $item->count;
+				$out_summ += ($item->price - $item->purchase) * $item->count;
+//				}
 			}
 		}
 

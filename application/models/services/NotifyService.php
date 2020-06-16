@@ -50,6 +50,10 @@ class NotifyService
 				}
 
 				$message .= "\n\n";
+				if (!empty($order->comment)) {
+					$message .= "Комментарий: " . $order->comment;
+					$message .= "\n\n";
+				}
 
 				if ($orderDateDelivery) {
 					$message .= "Дата доставки {$orderDateDelivery->date}, время: {$orderDateDelivery->time}\n\n";
@@ -90,8 +94,10 @@ class NotifyService
 			'order' => $order,
 			'order_items' => OrdersItems::find()->where(['order_id' => $order_id])->all()
 		])
-			->setFrom([Yii::$app->params['email']['sale'] => 'kotofey.store'])
-			->setTo($order->email)
+			->setFrom([Yii::$app->params['email']['main'] => 'kotofey.store'])
+			->setTo('popugau@gmail.com')
+//			->setTo($order->email)
+
 			->setSubject('Квитанция о покупке - спасибо, что вы с нами!')
 			->send();
 

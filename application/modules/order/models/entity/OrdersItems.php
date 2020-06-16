@@ -58,6 +58,7 @@ class OrdersItems extends ActiveRecord
         if (Basket::getInstance()->cash() < Delivery::LIMIT_ORDER_SUMM_TO_ACTIVATE) {
             $item = new OrdersItems();
             $item->price = Delivery::PRICE_DELIVERY;
+            $item->purchase = Delivery::PRICE_DELIVERY;
             $item->name = 'Доставка';
             $item->count = 1;
 
