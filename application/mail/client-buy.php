@@ -66,7 +66,7 @@ use app\models\helpers\OrderHelper;
 				<?php foreach ($order_items as $item): ?>
 					<?php if ($item->product_id > 0): ?>
                         <li style="width: 25%; margin: 5px;">
-                            <img src="https://kotofey.store/web/upload/<?= $item->product->image; ?>" style="width: 100%;">
+                            <img src="https://kotofey.store/upload/<?= $item->product->image; ?>" style="width: 100%;">
                             <div style="text-align: center;">
 								<?= $item->name; ?>
                             </div>

@@ -8,7 +8,7 @@ return [
 		'support' => 'support@kotofey.store',
 		'info' => 'info@kotofey.store',
 		'sale' => 'sale@kotofey.store',
-		'main' => 'popugau@gmail.com',
+		'main' => 'web-plast@yandex.ru',
 		'job' => 'info@kotofey.store',
 	],
 	'users' => [

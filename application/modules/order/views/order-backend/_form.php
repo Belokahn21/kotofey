@@ -150,6 +150,9 @@ use app\models\helpers\OrderHelper;
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'phone')->textInput(['placeholder' => 'Телефон'])->label(false); ?>
                 </div>
+                <div class="w-25 p-1">
+                    <?= $form->field($model, 'email')->textInput(['placeholder' => 'Email'])->label(false); ?>
+                </div>
             </div>
         </div>
 
