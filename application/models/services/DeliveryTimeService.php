@@ -55,7 +55,7 @@ class DeliveryTimeService
 	{
 		$time_list = array();
 
-		if (strtotime($date) < time()) {
+		if (strtotime($date . " 19:00:00") < time()) {
 			return $time_list;
 		}
 
