@@ -181,6 +181,9 @@ $config = [
         'basket' => [
             'class' => 'app\modules\basket\Module',
         ],
+		'search' => [
+			'class' => 'app\modules\search\Module',
+		],
     ],
     'params' => $params,
 ];
