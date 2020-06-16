@@ -107,6 +107,7 @@ class AjaxController extends Controller
             $basketItem->count = $count;
             $basketItem->name = $product->name;
             $basketItem->price = $product->price;
+            $basketItem->purchase = $product->purchase;
 
             $basket = new Basket();
             if ($basket->exist($basketItem->product_id)) {
