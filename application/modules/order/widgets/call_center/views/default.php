@@ -32,7 +32,7 @@ use yii\helpers\Html;
 							<?php endforeach; ?>
                         </ul>
                         <p>- Всё верно?</p>
-                        <p>- Хорошо, тогда доставим <?= $order->dateDelivery->date ?> с <?= $order->dateDelivery->time; ?></p>
+                        <p>- Хорошо, тогда доставим <?= $order->dateDelivery->date ?> <?= $order->dateDelivery->time; ?></p>
                     </div>
                 </div>
             </div>
