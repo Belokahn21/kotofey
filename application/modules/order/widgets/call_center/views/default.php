@@ -27,12 +27,14 @@ use yii\helpers\Html;
                         <p>- Заказ делали?</p>
                         <p>- Тогда давайте сверим позиции в заказе. У вас в заказе:</p>
                         <ul>
-							<?php foreach ($order->items as $item): ?>
+                            <?php foreach ($order->items as $item): ?>
                                 <li><?= $item->count; ?> шт <?= $item->name; ?></li>
-							<?php endforeach; ?>
+                            <?php endforeach; ?>
                         </ul>
                         <p>- Всё верно?</p>
-                        <p>- Хорошо, тогда доставим <?= $order->dateDelivery->date ?> <?= $order->dateDelivery->time; ?></p>
+                        <?php if ($order->dateDelivery): ?>
+                            <p>- Хорошо, тогда доставим <?= $order->dateDelivery->date ?> <?= $order->dateDelivery->time; ?></p>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
