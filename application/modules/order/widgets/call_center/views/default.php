@@ -28,7 +28,7 @@ use yii\helpers\Html;
                         <p>- Тогда давайте сверим позиции в заказе. У вас в заказе:</p>
                         <ul>
 							<?php foreach ($order->items as $item): ?>
-                                <li><?= $item->count; ?> * <?= $item->price; ?> = <?= $item->count * $item->price; ?><?= $item->name; ?></li>
+                                <li><?= $item->count; ?> шт <?= $item->name; ?></li>
 							<?php endforeach; ?>
                         </ul>
                         <p>- Всё верно?</p>
