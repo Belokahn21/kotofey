@@ -10,7 +10,7 @@ use yii\helpers\ArrayHelper;
 $this->title = Title::showTitle($model->name); ?>
 <section>
     <h1 class="title">Значение справочника: <?= $model->name; ?></h1>
-    <?= Html::a("Назад", '/admin/informers-values/', ['class' => 'btn-main']) ?>
+    <?= Html::a("Назад", \yii\helpers\Url::to(['index']), ['class' => 'btn-main']) ?>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $this->render('_form', [
         'form' => $form,
