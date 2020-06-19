@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-/* @var $searchModel \app\models\search\InformersSearchForm */
+/* @var $searchModel \app\modules\catalog\models\search\InformersSearchForm */
 
 $this->title = Title::showTitle("Справочники"); ?>
     <section>

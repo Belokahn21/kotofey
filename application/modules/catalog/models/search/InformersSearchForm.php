@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\catalog\models\search;
 
 use app\models\entity\Category;
 use app\models\entity\Informers;

@@ -11,7 +11,7 @@ use app\models\entity\Informers;
 /* @var $model \app\models\entity\InformersValues */
 /* @var $this \yii\web\View */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
-/* @var $searchModel \app\models\search\InformersValuesSearchForm */
+/* @var $searchModel \app\modules\catalog\models\search\InformersValuesSearchForm */
 
 $this->title = Title::showTitle("Значения справочников"); ?>
     <section>

@@ -4,7 +4,7 @@ namespace app\modules\catalog\controllers;
 
 
 use app\models\entity\Informers;
-use app\models\search\InformersSearchForm;
+use app\modules\catalog\models\search\InformersSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 

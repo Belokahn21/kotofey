@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\catalog\models\search;
 
 use app\models\entity\InformersValues;
 use app\models\rbac\AuthItem;
@@ -47,9 +47,9 @@ class InformersValuesSearchForm extends InformersValues
 		$query->andFilterWhere(['like', 'name', $this->name])
 			->andFilterWhere(['id' => $this->id])
 			->andFilterWhere(['like', 'description', $this->description])
-			->andFilterWhere(['like', 'sort', $this->sort])
-			->andFilterWhere(['like', 'active', $this->active])
-			->andFilterWhere(['like', 'informer_id', $this->informer_id]);
+			->andFilterWhere(['active' => $this->active])
+			->andFilterWhere(['informer_id' => $this->informer_id])
+			->andFilterWhere(['sort' => $this->sort]);
 
 		return $dataProvider;
 	}
