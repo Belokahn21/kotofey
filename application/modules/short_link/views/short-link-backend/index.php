@@ -14,7 +14,7 @@ $this->title = Title::showTitle("Короткие ссылки");
 ?>
 <h1>Короткие ссылки</h1>
 <?php $form = ActiveForm::begin(); ?>
-<?= $this->render('_forms/_shortly', [
+<?= $this->render('_form', [
     'form' => $form,
     'model' => $model
 ]); ?>
