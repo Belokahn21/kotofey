@@ -50,11 +50,10 @@ $this->title = Title::showTitle("Короткие ссылки");
 //					return Html::a('<i class="fas fa-copy"></i>', Url::to(['admin/shortly', 'action' => 'copy', 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-eye"></i>', Url::to(["admin/shortly", 'id' => $key]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-trash-alt"></i>',
-                        Url::to(["admin/shortly", 'id' => $key, 'action' => 'delete']));
+                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
                 },
             ]
         ],
