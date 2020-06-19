@@ -12,7 +12,7 @@ $this->title = Title::showTitle($model->name); ?>
     <h1 class="title">Значение справочника: <?= $model->name; ?></h1>
     <?= Html::a("Назад", '/admin/informers-values/', ['class' => 'btn-main']) ?>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $this->render('../_forms/_informers-values', [
+    <?= $this->render('_form', [
         'form' => $form,
         'model' => $model,
     ]) ?>
