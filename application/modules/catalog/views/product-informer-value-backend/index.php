@@ -47,7 +47,7 @@ $this->title = Title::showTitle("Значения справочников"); ?>
 			'attribute' => 'name',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return Html::a($model->name, '/admin/informers-values/' . $model->id . '/');
+				return Html::a($model->name, Url::to(["update", 'id' => $key]));
 			}
 		],
 		'sort',
