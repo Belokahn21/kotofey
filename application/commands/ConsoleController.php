@@ -26,7 +26,7 @@ class ConsoleController extends Controller
 			$value->active = 1;
 
 			if (!$value->validate()) {
-				print_r($value->name);
+				print_r($value->getErrors());
 				return false;
 			}
 
