@@ -1,23 +1,24 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\news\models\search;
 
-use app\modules\delivery\models\entity\Delivery;
-use app\models\entity\Payment;
+use app\models\entity\News;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class PaymentSearchForm extends Payment
+class NewsSearchForm extends News
 {
+
     public static function tableName()
     {
-        return "payment";
+        return "news";
     }
 
     public function rules()
     {
         return [
-            [['name'], 'string'],
+            [['title'], 'string'],
+            [['description'], 'string'],
         ];
     }
 
@@ -28,7 +29,7 @@ class PaymentSearchForm extends Payment
 
     public function search($params)
     {
-        $query = Payment::find();
+        $query = News::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -38,7 +39,8 @@ class PaymentSearchForm extends Payment
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

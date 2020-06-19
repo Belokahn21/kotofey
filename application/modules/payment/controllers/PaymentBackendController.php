@@ -3,7 +3,7 @@
 namespace app\modules\payment\controllers;
 
 use app\models\entity\Payment;
-use app\models\search\PaymentSearchForm;
+use app\modules\payment\models\search\PaymentSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

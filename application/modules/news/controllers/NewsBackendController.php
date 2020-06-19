@@ -3,7 +3,7 @@
 namespace app\modules\news\controllers;
 
 use app\models\entity\News;
-use app\models\search\NewsSearchForm;
+use app\modules\news\models\search\NewsSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

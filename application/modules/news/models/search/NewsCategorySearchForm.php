@@ -1,24 +1,24 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\news\models\search;
 
-use app\models\entity\News;
+use app\models\entity\NewsCategory;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class NewsSearchForm extends News
+class NewsCategorySearchForm extends NewsCategory
 {
 
     public static function tableName()
     {
-        return "news";
+        return "news_category";
     }
 
     public function rules()
     {
         return [
-            [['title'], 'string'],
-            [['description'], 'string'],
+            [['name'], 'string'],
+            [['category'], 'string'],
         ];
     }
 
@@ -29,7 +29,7 @@ class NewsSearchForm extends News
 
     public function search($params)
     {
-        $query = News::find();
+        $query = NewsCategory::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -39,8 +39,8 @@ class NewsSearchForm extends News
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'category', $this->category]);
 
         return $dataProvider;
     }

@@ -9,7 +9,7 @@ namespace app\modules\news\controllers;
 
 
 use app\models\entity\NewsCategory;
-use app\models\search\NewsCategorySearchForm;
+use app\modules\news\models\search\NewsCategorySearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;
