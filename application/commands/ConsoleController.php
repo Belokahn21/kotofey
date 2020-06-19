@@ -2,6 +2,7 @@
 
 namespace app\commands;
 
+use app\models\entity\InformersValues;
 use app\models\entity\Product;
 use app\models\entity\ProductPropertiesValues;
 use app\models\entity\ProductSync;
@@ -16,6 +17,24 @@ use yii\helpers\ArrayHelper;
 class ConsoleController extends Controller
 {
 	const VENDOR_ID_SIBAGRO_TRADE = 4;
+
+	public function actionProps()
+	{
+		$values = InformersValues::find()->all();
+
+		foreach ($values as $value) {
+			$value->active = 1;
+
+			if (!$value->validate()) {
+				print_r($value->name);
+				return false;
+			}
+
+			if (!$value->save()) {
+				return false;
+			}
+		}
+	}
 
 	public function actionOrderUpdate()
 	{

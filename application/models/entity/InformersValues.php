@@ -34,7 +34,7 @@ class InformersValues extends ActiveRecord
 			[['sort'], 'default', 'value' => 500],
 
 			[['active'], 'boolean'],
-			[['active'], 'default', 'value' => true],
+			[['active'], 'default', 'value' => 1],
 
 			[['name', 'description', 'link'], 'string'],
 
