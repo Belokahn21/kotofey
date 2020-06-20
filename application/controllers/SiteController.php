@@ -210,8 +210,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $news = News::find()->limit(3)->orderBy(['created_at' => SORT_DESC])->all();
-
         Attributes::metaDescription("Зоотовары онлайн с доставкой по Барнаулу и по всей России. Всегда свежие товары и по низкой цене!");
         Attributes::metaKeywords([
             "интернет магазин зоотоваров",
@@ -220,9 +218,7 @@ class SiteController extends Controller
             "сибагро барнаул зоотовары прайс",
         ]);
 
-        return $this->render('index', [
-            'news' => $news
-        ]);
+        return $this->render('index');
     }
 
     public function actionSearch()
