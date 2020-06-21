@@ -15,6 +15,7 @@ use app\models\entity\Category;
 $this->title = Title::showTitle('Товары');
 ?>
     <h1 class="title">Товары</h1>
+<?= Html::a('Обновить сибагро', Url::to(['/admin/catalog/update-sibagro/upload'])); ?>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
