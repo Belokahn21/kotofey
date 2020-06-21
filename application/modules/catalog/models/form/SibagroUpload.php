@@ -3,6 +3,8 @@
 namespace app\modules\catalog\models\form;
 
 
+use app\models\entity\Product;
+use Sunra\PhpSimple\HtmlDomParser;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
@@ -19,8 +21,54 @@ class SibagroUpload extends Model
 
     public function parse()
     {
+        $fileName = 'file.html';
         $file = UploadedFile::getInstance($this, 'file');
 
-        print_r($file);
+        $file->saveAs(\Yii::getAlias('@app/tmp/' . $fileName));
+
+        $content = file_get_contents(\Yii::getAlias('@app/tmp/' . $fileName));
+
+
+        $dom = HtmlDomParser::str_get_html($content);
+
+        $items = $dom->find('.popoverp');
+
+        foreach ($items as $item) {
+
+            $code = $item->find('.product_ps div', 0)->innertext();
+            preg_match('/\d+/', $code, $code);
+            $code = $code[0];
+
+            $price = $item->find('.lead span', 0)->innertext();
+            preg_match('/\d+р./', $price, $price);
+            $price = $price[0];
+            preg_match('/\d+/', $price, $price);
+            $price = $price[0];
+
+            $product = Product::findOne(['code' => $code]);
+
+            if (!$product) {
+                continue;
+            }
+
+            $oldPercent = ceil((($product->price - $product->purchase) / $product->purchase) * 100);
+            $oldPercent = $oldPercent / 100;
+
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->purchase = $price;
+            $product->price = $product->purchase + ceil($product->purchase * $oldPercent);
+
+            if (!$product->validate()) {
+                echo $product->name . "<br/>";
+                print_r($product->getErrors());
+                return false;
+            }
+
+            if ($product->save()) {
+                echo $product->name . ' = ' . $product->price . "<br/>";
+            }
+
+        }
+
     }
 }

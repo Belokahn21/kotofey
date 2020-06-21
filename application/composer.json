@@ -36,7 +36,8 @@
     "ext-libxml": "*",
     "phpoffice/phpspreadsheet": "^1.10",
     "yiimaker/yii2-social-share": "^2.3",
-    "ext-json": "*"
+    "ext-json": "*",
+    "sunra/php-simple-html-dom-parser": "1.5.2"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.0.0",
