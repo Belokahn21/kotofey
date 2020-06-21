@@ -51,6 +51,7 @@ class SibagroUpload extends Model
                 continue;
             }
 
+            $oldPrice = $product->price;
             $oldPercent = ceil((($product->price - $product->purchase) / $product->purchase) * 100);
             $oldPercent = $oldPercent / 100;
 
@@ -65,7 +66,7 @@ class SibagroUpload extends Model
             }
 
             if ($product->save()) {
-                echo $product->name . ' = ' . $product->price . "<br/>";
+                echo $product->name . ' = ' . " (oldPrice: $oldPrice) " . $product->price . "<br/>";
             }
 
         }
