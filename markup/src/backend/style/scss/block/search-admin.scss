@@ -37,6 +37,7 @@
   padding: 0 20px;
   overflow: scroll;
   overflow-x: hidden;
+  z-index: 99;
 
   &__label {
     padding: 0 20px;
