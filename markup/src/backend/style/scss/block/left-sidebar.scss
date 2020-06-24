@@ -4,4 +4,28 @@
   height: 100%;
   min-height: 100%;
   background: $main-dark-color;
+
+  @media(max-width: 414px) {
+    width: 100%;
+    display: none;
+
+    &.is-active {
+      display: block;
+    }
+  }
+}
+
+.button-toggle-sidebar {
+  display: none;
+  padding: 10px 0;
+  outline: none !important;
+  background: black;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 0;
+
+  @media(max-width: 414px) {
+    display: block;
+  }
 }

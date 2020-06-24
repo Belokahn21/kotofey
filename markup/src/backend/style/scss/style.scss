@@ -15,4 +15,8 @@
 .content {
   float: left;
   width: 85%;
+
+  @media(max-width: 414px) {
+    width: 100%;
+  }
 }
