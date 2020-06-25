@@ -77,7 +77,7 @@ $this->title = Title::showTitle("Главная страница");
                     </div>
                 </div>
 
-                <div class="block-info__summary"><?= ProductSync::find()->count(); ?>/+9000</div>
+                <div class="block-info__summary"><span title="Сколько синхранизировано товаров"><?= ProductSync::find()->count(); ?></span>/<span title="Реальная-возможная выручка">+<?= ProductStatistic::realProfit(); ?></span></div>
             </li>
 
             <li class="block-info__item">

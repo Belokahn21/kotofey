@@ -28,4 +28,16 @@ class ProductStatistic extends Product
 	{
 		return static::find()->sum('price') - static::find()->sum('purchase');
 	}
+
+	public static function realProfit()
+	{
+		$out = 0;
+		$items = Product::find()->where(['>', 'count', 0])->all();
+
+		foreach ($items as $item) {
+			$out += $item->count * ($item->price - $item->purchase);
+		}
+
+		return $out;
+	}
 }
