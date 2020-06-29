@@ -4,7 +4,7 @@ namespace app\models\tool\import;
 
 
 use app\modules\catalog\models\entity\Product;
-use app\models\entity\Vendor;
+use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesHelper;
 use app\models\tool\Debug;

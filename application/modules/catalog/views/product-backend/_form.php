@@ -8,7 +8,7 @@ use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use yii\helpers\Json;
-use app\models\entity\Vendor;
+use app\modules\vendors\models\entity\Vendor;
 use app\modules\settings\models\helpers\MarkupHelpers;
 
 /* @var $model \app\modules\catalog\models\entity\Product */

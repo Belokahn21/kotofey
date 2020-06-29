@@ -5,7 +5,7 @@ namespace app\modules\vendors\controllers;
 use app\modules\vendors\models\search\VendorSearchForm;
 use app\widgets\notification\Alert;
 use Yii;
-use app\models\entity\Vendor;
+use app\modules\vendors\models\entity\Vendor;
 use yii\web\Controller;
 use yii\web\HttpException;
 

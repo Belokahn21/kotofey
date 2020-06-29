@@ -4,7 +4,7 @@ namespace app\models\tool\parser\providers;
 
 
 use app\models\entity\SiteSettings;
-use app\models\entity\Vendor;
+use app\modules\vendors\models\entity\Vendor;
 use app\models\tool\Debug;
 use app\models\tool\parser\CatalogInfo;
 use app\models\tool\parser\page\Page;

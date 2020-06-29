@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\vendors\models\entity;
 
 use Yii;
 use yii\behaviors\SluggableBehavior;

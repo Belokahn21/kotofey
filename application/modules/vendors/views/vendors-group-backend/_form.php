@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\models\entity\VendorGroup;
+use app\modules\vendors\models\entity\VendorGroup;
 
 ?>
 <nav>

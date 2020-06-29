@@ -3,7 +3,7 @@
 namespace app\modules\vendors\models\search;
 
 use app\models\entity\Providers;
-use app\models\entity\Vendor;
+use app\modules\vendors\models\entity\Vendor;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
