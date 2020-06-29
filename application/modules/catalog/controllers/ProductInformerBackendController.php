@@ -3,7 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\models\entity\Informers;
+use app\modules\catalog\models\entity\Informers;
 use app\modules\catalog\models\search\InformersSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;

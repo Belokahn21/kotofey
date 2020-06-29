@@ -4,7 +4,7 @@ namespace app\widgets\geo;
 
 use app\models\tool\geo\CityDefine;
 use yii\base\Widget;
-use app\models\entity\Geo;
+use app\modules\geo\models\entity\Geo;
 
 class GeoWidget extends Widget
 {

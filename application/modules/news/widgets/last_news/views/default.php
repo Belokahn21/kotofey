@@ -2,7 +2,7 @@
 
 use yii\helpers\Url;
 
-/* @var $news \app\models\entity\News[] */
+/* @var $news \app\modules\news\models\entity\News[] */
 ?>
 <div class="index-news__wrap">
     <h2 class="homepage-providers__title">Интересные новости</h2>

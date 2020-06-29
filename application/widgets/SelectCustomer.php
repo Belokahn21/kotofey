@@ -9,7 +9,7 @@ namespace app\widgets;
 
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 
 class SelectCustomer extends \yii\base\Widget
 {

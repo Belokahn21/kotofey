@@ -3,8 +3,8 @@
 namespace app\modules\geo\controllers;
 
 use Yii;
-use app\models\entity\GeoTimezone;
-use app\models\search\GeoTimezoneSearch;
+use app\modules\geo\models\entity\GeoTimezone;
+use app\modules\geo\models\search\GeoTimezoneSearch;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

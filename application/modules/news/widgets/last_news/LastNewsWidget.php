@@ -3,7 +3,7 @@
 namespace app\modules\news\widgets\last_news;
 
 
-use app\models\entity\News;
+use app\modules\news\models\entity\News;
 use yii\base\Widget;
 
 class LastNewsWidget extends Widget

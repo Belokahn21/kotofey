@@ -1,16 +1,16 @@
 <?php
 /* @var $this yii\web\View */
-/* @var $products \app\models\entity\Product */
+/* @var $products \app\modules\catalog\models\entity\Product */
 
 /* @var $currency Currency */
 
-use app\models\helpers\BasketHelper;
+use app\modules\basket\models\helpers\BasketHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Price;
 use app\models\tool\Currency;
 use yii\helpers\Html;
-use app\models\entity\Basket;
-use app\models\entity\Product;
+use app\modules\basket\models\entity\Basket;
+use app\modules\catalog\models\entity\Product;
 
 $this->title = Title::showTitle("Корзина товаров");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина товаров', 'url' => ['/basket/']];

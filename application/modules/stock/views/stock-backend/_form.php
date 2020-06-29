@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\models\entity\Geo;
+use app\modules\geo\models\entity\Geo;
 
 ?>
 <nav>

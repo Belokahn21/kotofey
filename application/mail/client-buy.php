@@ -1,8 +1,8 @@
 <?php
 
 use app\modules\delivery\models\entity\Delivery;
-use app\models\entity\Payment;
-use app\models\helpers\OrderHelper;
+use app\modules\payment\models\entity\Payment;
+use app\modules\order\models\helpers\OrderHelper;
 
 /* @var $order_items \app\modules\order\models\entity\OrdersItems[]
  * @var $order \app\modules\order\models\entity\Order

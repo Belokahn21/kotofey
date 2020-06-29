@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use yii\helpers\Html;
-use app\models\helpers\OrderHelper;
+use app\modules\order\models\helpers\OrderHelper;
 
 /* @var $order \app\modules\order\models\entity\Order */
 
@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                         <li class="product-order-detail__item">
                             <img class="product-order-detail__image" src="<?= ($item->product ? "/upload/{$item->product->image}" : "/upload/images/not-image.png"); ?>">
                             <div class="product-order-detail__title">
-                                <?php if ($item->product instanceof \app\models\entity\Product): ?>
+                                <?php if ($item->product instanceof \app\modules\catalog\models\entity\Product): ?>
                                     <a class="product-order-detail__link" href="<?= $item->product->detail; ?>"><?= $item->name; ?></a>
                                 <?php else: ?>
                                     <a class="product-order-detail__link" href="javascript:void(0);"><?= $item->name; ?></a>

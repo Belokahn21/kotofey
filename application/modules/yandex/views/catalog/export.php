@@ -1,9 +1,9 @@
 <?php
 
-use app\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\ProductHelper;
 
-/* @var $offers \app\models\entity\Product[] */
-/* @var $categories \app\models\entity\Category[] */
+/* @var $offers \app\modules\catalog\models\entity\Product[] */
+/* @var $categories \app\modules\catalog\models\entity\Category[] */
 ?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>

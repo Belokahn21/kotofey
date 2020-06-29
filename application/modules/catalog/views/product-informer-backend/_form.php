@@ -1,6 +1,6 @@
 <?php
 
-/* @var $model \app\models\entity\Informers */
+/* @var $model \app\modules\catalog\models\entity\Informers */
 
 ?>
 <nav>

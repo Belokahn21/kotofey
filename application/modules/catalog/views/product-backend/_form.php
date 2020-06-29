@@ -4,16 +4,16 @@ use app\models\entity\ProductOrder;
 use app\models\entity\SiteSettings;
 use app\models\entity\Stocks;
 use yii\helpers\ArrayHelper;
-use app\models\entity\Category;
-use app\models\entity\InformersValues;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use yii\helpers\Json;
 use app\models\entity\Vendor;
 use app\modules\settings\models\helpers\MarkupHelpers;
 
-/* @var $model \app\models\entity\Product */
+/* @var $model \app\modules\catalog\models\entity\Product */
 /* @var $modelDelivery \app\models\entity\ProductOrder */
-/* @var $properties \app\models\entity\ProductProperties[] */
+/* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
 
 ?>
 

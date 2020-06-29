@@ -1,14 +1,14 @@
 <?php
 
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\models\tool\Currency;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\helpers\DiscountHelper;
-use app\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\models\tool\Price;
 use app\models\services\BonusByBuyService;
 
-/* @var $product \app\models\entity\Product */
+/* @var $product \app\modules\catalog\models\entity\Product */
 ?>
 
 <li class="catalog-list__item">

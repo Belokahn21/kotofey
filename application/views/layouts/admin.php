@@ -4,30 +4,30 @@
 
 /* @var $content string */
 
-use app\models\entity\GeoTimezone;
+use app\modules\geo\models\entity\GeoTimezone;
 use app\models\entity\Vacancy;
 use yii\helpers\Url;
-use app\models\entity\News;
+use app\modules\news\models\entity\News;
 use yii\helpers\Html;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use app\assets\AdminAsset;
 use app\models\entity\support\Tickets;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\widgets\notification\Alert;
 use app\models\entity\Stocks;
 use app\modules\order\models\entity\OrderStatus;
 use app\modules\delivery\models\entity\Delivery;
-use app\models\entity\Payment;
+use app\modules\payment\models\entity\Payment;
 use app\models\entity\Promo;
 use app\models\entity\VendorGroup;
 use app\models\entity\Vendor;
-use app\models\entity\Geo;
+use app\modules\geo\models\entity\Geo;
 use app\models\entity\ShortLinks;
-use app\models\entity\Category;
-use app\models\entity\ProductProperties;
-use app\models\entity\Informers;
-use app\models\entity\InformersValues;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\InformersValues;
 
 AdminAsset::register($this);
 $this->beginPage();

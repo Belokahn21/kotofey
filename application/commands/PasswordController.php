@@ -3,7 +3,7 @@
 namespace app\commands;
 
 
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use yii\console\Controller;
 
 class PasswordController extends Controller

@@ -3,8 +3,8 @@
 namespace app\models\forms;
 
 
-use app\models\entity\ProductProperties;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\tool\Debug;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use yii\base\Model;

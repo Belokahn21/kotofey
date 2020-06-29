@@ -2,9 +2,9 @@
 
 namespace app\modules\order\models\entity;
 
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\modules\delivery\models\entity\Delivery;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\entity\Promo;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -62,7 +62,7 @@ class OrdersItems extends ActiveRecord
             $item->name = 'Доставка';
             $item->count = 1;
 
-            $basket = new Basket();
+            $basket = new \app\modules\basket\models\entity\Basket();
             $basket->add($item);
         }
 
@@ -99,7 +99,7 @@ class OrdersItems extends ActiveRecord
 
         }
 
-        Basket::clear();
+        \app\modules\basket\models\entity\Basket::clear();
 
         $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
                 'order_id' => $this->order_id

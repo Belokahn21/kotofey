@@ -1,9 +1,9 @@
 <?php
 /* @var $this yii\web\View */
 
-/* @var $categories \app\models\entity\NewsCategory[] */
+/* @var $categories \app\modules\news\models\entity\NewsCategory[] */
 
-/* @var $news \app\models\entity\News[] */
+/* @var $news \app\modules\news\models\entity\News[] */
 
 use app\models\tool\seo\Title;
 

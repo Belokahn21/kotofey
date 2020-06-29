@@ -3,7 +3,7 @@
 namespace app\widgets\admin_panel;
 
 use app\modules\order\models\entity\Order;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\modules\news\widgets\last_news\LastNewsWidget;
 
 class AdminPanel extends \yii\base\Widget

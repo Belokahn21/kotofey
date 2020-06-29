@@ -5,12 +5,12 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-use app\models\entity\UserSex;
+use app\modules\user\models\entity\UserSex;
 use app\models\entity\Discount;
-use app\models\entity\UsersReferal;
+use app\modules\user\models\entity\UsersReferal;
 use app\modules\order\models\entity\Order;
 
-/* @var $model \app\models\entity\User
+/* @var $model \app\modules\user\models\entity\User
  * @var $groups \app\models\rbac\AuthItem[]
  * @var $personalManagerModel \app\models\entity\UserManager
  */

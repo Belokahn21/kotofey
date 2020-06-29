@@ -3,7 +3,7 @@
 namespace app\models\forms;
 
 
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\models\entity\UserResetPassword;
 use yii\base\Model;
 

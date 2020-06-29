@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\entity\Payment */
+/* @var $model \app\modules\payment\models\entity\Payment */
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;

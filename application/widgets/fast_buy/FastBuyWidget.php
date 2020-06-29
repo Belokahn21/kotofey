@@ -2,13 +2,13 @@
 
 namespace app\widgets\fast_buy;
 
-use app\models\entity\BasketItem;
+use app\modules\basket\models\entity\BasketItem;
 use app\models\entity\Promo;
 use Yii;
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\models\tool\Debug;
 use app\widgets\notification\Alert;
 

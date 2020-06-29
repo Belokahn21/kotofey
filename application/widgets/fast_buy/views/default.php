@@ -10,7 +10,7 @@ use app\models\tool\Policy;
 /* @var $billing \app\models\entity\user\Billing */
 /* @var $delivery array */
 /* @var $payments array */
-/* @var $product \app\models\entity\Product */
+/* @var $product \app\modules\catalog\models\entity\Product */
 /* @var $this \yii\web\View */
 ?>
 <div class="product-button product-fast-buy" onclick="ym(55089223, 'reachGoal', 'fast_buy');" data-toggle="modal" data-target="#modal-product-detail-buy-click">

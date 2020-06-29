@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\entity\News */
+/* @var $model \app\modules\news\models\entity\News */
 
 use app\models\tool\seo\Title;
 
@@ -16,7 +16,7 @@ $this->title = Title::showTitle($model->title);
             <div class="news-detail__date">Дата публикации: <?= date('d.m.Y', $model->created_at); ?></div>
         </div>
         <div class="col-sm-7">
-            <div class="news-detail__section">Рубрика: <?= \app\models\entity\NewsCategory::findOne($model->category)->name; ?></div>
+            <div class="news-detail__section">Рубрика: <?= \app\modules\news\models\entity\NewsCategory::findOne($model->category)->name; ?></div>
         </div>
     </div>
 </div>

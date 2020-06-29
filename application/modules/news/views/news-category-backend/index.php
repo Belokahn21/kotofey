@@ -6,9 +6,9 @@ use app\models\tool\seo\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
-use app\models\entity\NewsCategory;
+use app\modules\news\models\entity\NewsCategory;
 
-/* @var $model \app\models\entity\NewsCategory */
+/* @var $model \app\modules\news\models\entity\NewsCategory */
 /* @var $this \yii\web\View */
 
 $this->title = Title::showTitle("Рубрики");

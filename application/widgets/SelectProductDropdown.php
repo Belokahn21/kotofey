@@ -6,7 +6,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use yii\helpers\Json;
 
 class SelectProductDropdown extends \yii\base\Widget
@@ -19,7 +19,7 @@ class SelectProductDropdown extends \yii\base\Widget
         $products = Product::find()->all();
 
         $items = [];
-        /* @var $product Product */
+        /* @var $product \app\modules\catalog\models\entity\Product */
         foreach ($products as $product) {
             $items[$product->id] = $product;
         }

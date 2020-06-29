@@ -3,7 +3,7 @@
 namespace app\modules\order\widgets;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;

@@ -3,7 +3,7 @@
 namespace app\models\tool;
 
 
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use yii\db\ActiveRecord;
 
 class Debug

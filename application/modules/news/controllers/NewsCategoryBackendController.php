@@ -8,7 +8,7 @@
 namespace app\modules\news\controllers;
 
 
-use app\models\entity\NewsCategory;
+use app\modules\news\models\entity\NewsCategory;
 use app\modules\news\models\search\NewsCategorySearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;

@@ -3,7 +3,7 @@
 namespace app\widgets\informers_slider;
 
 
-use app\models\entity\InformersValues;
+use app\modules\catalog\models\entity\InformersValues;
 use yii\base\Widget;
 
 class InformerSliderWidget extends Widget

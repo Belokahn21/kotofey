@@ -6,9 +6,9 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
-/* @var $model \app\models\entity\Geo */
+/* @var $model \app\modules\geo\models\entity\Geo */
 /* @var $this \yii\web\View */
-/* @var $time_zones \app\models\entity\GeoTimezone[] */
+/* @var $time_zones \app\modules\geo\models\entity\GeoTimezone[] */
 
 $this->title = Title::showTitle("Гео объекты"); ?>
 <section>

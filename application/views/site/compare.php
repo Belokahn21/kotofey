@@ -1,7 +1,7 @@
 <?php
 
-use app\models\entity\ProductPropertiesValues;
-use app\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\ProductProperties;
 use app\models\entity\Compare;
 use app\models\tool\seo\Title;
 

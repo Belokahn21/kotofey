@@ -3,8 +3,8 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\models\entity\Category;
-use app\models\search\CategorySearchForm;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\search\CategorySearchForm;
 use app\widgets\notification\Alert;
 use yii\helpers\Url;
 use yii\web\Controller;

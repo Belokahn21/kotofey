@@ -3,10 +3,10 @@
 namespace app\modules\catalog\controllers;
 
 use app\models\entity\ProductMarket;
-use app\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
 use Yii;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\entity\ProductOrder;
 use app\widgets\notification\Alert;
 use yii\helpers\Url;

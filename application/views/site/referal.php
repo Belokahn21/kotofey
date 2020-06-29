@@ -1,8 +1,8 @@
 <?php
 
 use app\models\tool\seo\Title;
-use app\models\helpers\UserReferalHelper;
-use app\models\entity\UsersReferal;
+use app\modules\user\models\helpers\UserReferalHelper;
+use app\modules\user\models\entity\UsersReferal;
 use app\models\tool\System;
 
 /* @var $this \yii\web\View */

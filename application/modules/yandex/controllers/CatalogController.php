@@ -2,8 +2,8 @@
 
 namespace app\modules\yandex\controllers;
 
-use app\models\entity\Category;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\Product;
 use app\models\tool\Debug;
 use yii\web\Controller;
 

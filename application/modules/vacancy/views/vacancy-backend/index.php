@@ -9,7 +9,7 @@ use app\models\tool\seo\Title;
 
 /* @var $this \yii\web\View */
 /* @var $model \app\models\entity\Vacancy */
-/* @var $city_list \app\models\entity\Geo[] */
+/* @var $city_list \app\modules\geo\models\entity\Geo[] */
 
 $this->title = Title::showTitle("Вакансии");;
 

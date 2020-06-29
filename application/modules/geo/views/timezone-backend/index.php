@@ -6,13 +6,13 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
-use app\models\entity\Category;
-use app\models\entity\InformersValues;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\InformersValues;
 use app\models\entity\Stocks;
 use app\models\entity\SiteSettings;
 
 
-/* @var $model \app\models\entity\Product
+/* @var $model \app\modules\catalog\models\entity\Product
  */
 
 $this->title = Title::showTitle("Временные зоны"); ?>

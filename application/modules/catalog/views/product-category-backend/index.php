@@ -1,15 +1,15 @@
 <?php
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\seo\Title;
-use app\models\entity\Category;
+use app\modules\catalog\models\entity\Category;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
-/* @var $model \app\models\entity\Category */
+/* @var $model \app\modules\catalog\models\entity\Category */
 ?>
 <?php $this->title = Title::showTitle("Разделы"); ?>
     <h1 class="title">Разделы</h1>

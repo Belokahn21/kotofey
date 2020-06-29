@@ -3,7 +3,7 @@
 namespace app\modules\order\models\search;
 
 use app\modules\order\models\entity\Order;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\rbac\AuthItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

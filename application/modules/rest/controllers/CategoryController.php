@@ -8,7 +8,7 @@
 namespace app\modules\rest\controllers;
 
 
-use app\models\entity\Category;
+use app\modules\catalog\models\entity\Category;
 use yii\helpers\Json;
 use yii\web\Controller;
 

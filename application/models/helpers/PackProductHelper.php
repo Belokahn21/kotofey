@@ -3,7 +3,7 @@
 namespace app\models\helpers;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 
 class PackProductHelper
 {

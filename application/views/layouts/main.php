@@ -5,10 +5,10 @@
 /* @var $content string */
 
 use app\widgets\admin_panel\AdminPanel;
-use app\models\entity\Category;
+use app\modules\catalog\models\entity\Category;
 use yii\helpers\Html;
 use app\assets\AppAsset;
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\widgets\notification\Alert;
 use app\widgets\Breadcrumbs;
 use app\models\entity\SiteSettings;

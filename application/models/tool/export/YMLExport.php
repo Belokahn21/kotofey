@@ -3,7 +3,7 @@
 namespace app\models\tool\export;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use yii\helpers\Json;
 
 class YMLExport

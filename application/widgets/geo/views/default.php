@@ -1,8 +1,8 @@
 <?php
 
-use app\models\entity\Geo;
+use app\modules\geo\models\entity\Geo;
 
-/* @var $cities \app\models\entity\Geo[] */
+/* @var $cities \app\modules\geo\models\entity\Geo[] */
 ?>
 <div class="current-city">
     Ваш город: <span class="select-city">

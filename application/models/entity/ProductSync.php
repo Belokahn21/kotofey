@@ -2,6 +2,7 @@
 
 namespace app\models\entity;
 
+use app\modules\catalog\models\entity\Product;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 

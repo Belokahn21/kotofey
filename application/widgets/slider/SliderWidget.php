@@ -3,7 +3,7 @@
 namespace app\widgets\slider;
 
 
-use app\models\entity\Geo;
+use app\modules\geo\models\entity\Geo;
 use app\modules\content\models\entity\SlidersImages;
 use app\widgets\geo\GeoWidget;
 use yii\base\Widget;

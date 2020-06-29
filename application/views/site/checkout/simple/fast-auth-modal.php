@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$model = new \app\models\entity\User(['scenario' => \app\models\entity\User::SCENARIO_LOGIN]);
+$model = new \app\modules\user\models\entity\User(['scenario' => \app\modules\user\models\entity\User::SCENARIO_LOGIN]);
 ?>
 <div class="modal fade" id="fast-auth-id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">

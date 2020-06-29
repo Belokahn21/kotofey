@@ -4,14 +4,14 @@ namespace app\controllers;
 
 use app\modules\settings\models\helpers\MarkupHelpers;
 use Yii;
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\models\entity\Compare;
 use app\models\entity\Favorite;
-use app\models\entity\Geo;
+use app\modules\geo\models\entity\Geo;
 use app\modules\order\models\entity\OrdersItems;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\entity\TodoList;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\models\entity\user\Billing;
 use app\models\services\CompareService;
 use app\models\services\DeliveryTimeService;
@@ -23,7 +23,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use yii\web\HttpException;
 
 class AjaxController extends Controller

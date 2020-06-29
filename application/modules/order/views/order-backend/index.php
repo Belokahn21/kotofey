@@ -4,16 +4,16 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\seo\Title;
 use yii\grid\GridView;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use yii\helpers\Url;
-use app\models\helpers\OrderHelper;
+use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\group_buy\GroupBuyWidget;
 use yii\helpers\ArrayHelper;
 
-/* @var $users \app\models\entity\User[]
+/* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
  * @var $deliveries app\modules\delivery\models\entity\Delivery[]
- * @var $payments \app\models\entity\Payment[]
+ * @var $payments \app\modules\payment\models\entity\Payment[]
  * @var $status \app\modules\order\models\entity\OrderStatus[]
  * @var $itemsModel \app\modules\order\models\entity\OrdersItems
  */

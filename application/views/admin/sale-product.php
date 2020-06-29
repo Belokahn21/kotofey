@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
-/* @var $sales \app\models\entity\InformersValues[] */
+/* @var $sales \app\modules\catalog\models\entity\InformersValues[] */
 /* @var $model \app\models\forms\SaleProductForm */
 
 $this->title = Title::showTitle("Упрвление акционными товарами");

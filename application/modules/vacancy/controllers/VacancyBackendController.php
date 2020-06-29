@@ -3,9 +3,9 @@
 namespace app\modules\vacancy\controllers;
 
 use Yii;
-use app\models\entity\Geo;
+use app\modules\geo\models\entity\Geo;
 use app\models\entity\Vacancy;
-use app\models\search\VacancySearchForm;
+use app\modules\vacancy\models\search\VacancySearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

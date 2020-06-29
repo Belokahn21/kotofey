@@ -1,7 +1,7 @@
 <?php
 
 use yii\widgets\ActiveForm;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;

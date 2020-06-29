@@ -1,6 +1,6 @@
 <?php
 
-use app\models\helpers\OrderHelper;
+use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
 use yii\helpers\ArrayHelper;
 use app\models\tool\Currency;

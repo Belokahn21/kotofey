@@ -3,6 +3,7 @@
 namespace app\models\entity;
 
 use app\models\tool\System;
+use app\modules\user\models\entity\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;

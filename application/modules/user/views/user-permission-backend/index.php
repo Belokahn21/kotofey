@@ -1,9 +1,9 @@
 <?php
 
 use app\modules\delivery\models\entity\Delivery;
-use app\models\entity\Payment;
+use app\modules\payment\models\entity\Payment;
 use app\models\entity\Promo;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\models\tool\Currency;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;

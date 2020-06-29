@@ -1,9 +1,9 @@
 <?php
 
-use app\models\entity\Informers;
+use app\modules\catalog\models\entity\Informers;
 use yii\helpers\ArrayHelper;
 
-/* @var $model \app\models\entity\InformersValues */
+/* @var $model \app\modules\catalog\models\entity\InformersValues */
 
 ?>
 <nav>

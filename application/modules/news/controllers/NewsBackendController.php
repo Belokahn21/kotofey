@@ -2,7 +2,7 @@
 
 namespace app\modules\news\controllers;
 
-use app\models\entity\News;
+use app\modules\news\models\entity\News;
 use app\modules\news\models\search\NewsSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;

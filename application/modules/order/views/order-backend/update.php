@@ -6,10 +6,10 @@ use yii\helpers\Html;
 use app\models\tool\seo\Title;
 use yii\helpers\Url;
 
-/* @var $users \app\models\entity\User[]
+/* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
  * @var $deliveries app\modules\delivery\models\entity\Delivery[]
- * @var $payments \app\models\entity\Payment[]
+ * @var $payments \app\modules\payment\models\entity\Payment[]
  * @var $status \app\modules\order\models\entity\OrderStatus[]
  * @var $itemsModel \app\modules\order\models\entity\OrdersItems
  */

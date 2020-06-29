@@ -1,6 +1,6 @@
 <?php
 
-/* @var $models \app\models\entity\Product[] */
+/* @var $models \app\modules\catalog\models\entity\Product[] */
 
 ?>
 <div class="mini-catalog-wrap">
@@ -8,7 +8,7 @@
     <div class="swiper-container">
         <div class="mini-catalog swiper-wrapper">
             <?php foreach ($models as $model): ?>
-                <?= $this->render('__item', [
+                <?= $this->render('_item', [
                     'model' => $model
                 ]); ?>
             <?php endforeach; ?>

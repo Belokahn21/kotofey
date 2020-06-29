@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use yii\helpers\Url;
 
 /* @var $model \app\models\entity\Stocks */

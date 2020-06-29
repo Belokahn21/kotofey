@@ -2,9 +2,9 @@
 
 namespace app\modules\user\controllers;
 
-use app\models\search\UserSearchForm;
+use app\modules\user\models\search\UserSearchForm;
 use Yii;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
 use app\widgets\notification\Alert;

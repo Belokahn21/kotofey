@@ -3,7 +3,7 @@
 namespace app\modules\basket\models\tools;
 
 
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 
 class BasketHelper
 {

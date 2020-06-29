@@ -3,16 +3,16 @@
 use app\models\entity\Favorite;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\entity\UserSex;
+use app\modules\user\models\entity\UserSex;
 use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Price;
 use app\modules\order\models\entity\Order;
 use app\models\tool\Currency;
-use app\models\helpers\OrderHelper;
+use app\modules\order\models\helpers\OrderHelper;
 use yii\helpers\Url;
 
-/* @var \app\models\entity\User $profile */
+/* @var \app\modules\user\models\entity\User $profile */
 /* @var $orders Order[] */
 /* @var $support_categories \app\models\entity\support\SupportCategory[] */
 

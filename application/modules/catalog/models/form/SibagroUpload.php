@@ -3,7 +3,7 @@
 namespace app\modules\catalog\models\form;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use Sunra\PhpSimple\HtmlDomParser;
 use yii\base\Model;
 use yii\web\UploadedFile;

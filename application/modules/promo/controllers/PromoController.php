@@ -2,7 +2,7 @@
 
 namespace app\modules\promo\controllers;
 
-use app\models\entity\InformersValues;
+use app\modules\catalog\models\entity\InformersValues;
 use app\models\entity\SlidersImages;
 use app\modules\promo\models\form\PromoForm;
 use app\widgets\notification\Alert;

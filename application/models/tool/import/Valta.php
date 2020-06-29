@@ -3,9 +3,9 @@
 namespace app\models\tool\import;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\entity\Vendor;
-use app\models\helpers\ProductPropertiesHelper;
+use app\modules\catalog\models\helpers\ProductPropertiesHelper;
 use app\models\tool\Debug;
 
 class Valta

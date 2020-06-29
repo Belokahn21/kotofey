@@ -1,10 +1,10 @@
 <?php
 
-use app\models\entity\UserSex;
+use app\modules\user\models\entity\UserSex;
 use app\models\helpers\PersonalHelper;
 use yii\helpers\ArrayHelper;
 
-/* @var $model \app\models\entity\User */
+/* @var $model \app\modules\user\models\entity\User */
 /* @var $personalManagerModel \app\models\entity\UserManager */
 
 ?>

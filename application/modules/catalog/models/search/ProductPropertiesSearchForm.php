@@ -2,8 +2,8 @@
 
 namespace app\modules\catalog\models\search;
 
-use app\models\entity\Category;
-use app\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductProperties;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

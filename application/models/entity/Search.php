@@ -5,6 +5,7 @@ namespace app\models\entity;
 
 use app\models\tool\Debug;
 use app\models\tool\Text;
+use app\modules\catalog\models\entity\Product;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 use yii\db\ActiveRecord;

@@ -3,7 +3,7 @@
 namespace app\models\events;
 
 use app\modules\order\models\entity\Order;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use app\models\entity\user\Billing;
 use app\models\services\NotifyService;
 use app\models\tool\Price;

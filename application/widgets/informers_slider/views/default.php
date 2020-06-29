@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 
 /* @var $providers \yii\db\ActiveQuery */
 

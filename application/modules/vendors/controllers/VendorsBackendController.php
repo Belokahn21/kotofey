@@ -2,7 +2,7 @@
 
 namespace app\modules\vendors\controllers;
 
-use app\models\search\VendorSearchForm;
+use app\modules\vendors\models\search\VendorSearchForm;
 use app\widgets\notification\Alert;
 use Yii;
 use app\models\entity\Vendor;

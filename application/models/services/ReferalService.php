@@ -3,7 +3,7 @@
 namespace app\models\services;
 
 
-use app\models\entity\UsersReferal;
+use app\modules\user\models\entity\UsersReferal;
 
 class ReferalService
 {

@@ -2,8 +2,8 @@
 
 /* @var $count_orders integer */
 
-use app\models\entity\Product;
-use app\models\entity\User;
+use app\modules\catalog\models\entity\Product;
+use app\modules\user\models\entity\User;
 use yii\helpers\Url;
 
 ?>

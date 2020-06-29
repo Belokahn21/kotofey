@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\entity\InformersValues;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\entity\SearchQuery;
 use app\models\forms\SaleProductForm;
 use app\models\tool\Backup;
@@ -13,7 +13,7 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 
 class AdminController extends Controller
 {

@@ -3,9 +3,9 @@
 namespace app\models\tool\export;
 
 
-use app\models\entity\InformersValues;
-use app\models\entity\Product;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 

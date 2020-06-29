@@ -3,11 +3,11 @@
 namespace app\models\forms;
 
 
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\modules\order\models\entity\OrdersItems;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\helpers\PackProductHelper;
-use app\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\ProductHelper;
 use yii\base\Model;
 
 class WeightBuyForm extends Model

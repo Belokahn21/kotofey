@@ -3,7 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\models\entity\InformersValues;
+use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\search\InformersValuesSearchForm;
 use app\models\tool\Debug;
 use app\widgets\notification\Alert;

@@ -3,7 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\search\ProductPropertiesSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;

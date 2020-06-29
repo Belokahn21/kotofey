@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\InformersValues;
+use app\modules\catalog\models\entity\InformersValues;
 use app\models\forms\CatalogFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 use yii\widgets\Pjax;
 
 /* @var $filterModel CatalogFilter
- * @var $informers InformersValues[]
+ * @var $informers \app\modules\catalog\models\entity\InformersValues[]
  */
 
 ?>

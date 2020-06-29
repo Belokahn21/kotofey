@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\models\entity\Informers;
+use app\modules\catalog\models\entity\Informers;
 use app\models\entity\TypeProductProperties;
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-/* @var $model \app\models\entity\ProductProperties */
+/* @var $model \app\modules\catalog\models\entity\ProductProperties */
 
 $this->title = Title::showTitle("Свойства товаров"); ?>
     <section>

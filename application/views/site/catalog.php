@@ -1,16 +1,16 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $products \app\models\entity\Product */
+/* @var $products \app\modules\catalog\models\entity\Product */
 /* @var $filterModel CatalogFilter */
 
-/* @var $category \app\models\entity\Category */
+/* @var $category \app\modules\catalog\models\entity\Category */
 
 use app\models\tool\seo\Title;
 use app\widgets\catalog_filter\CatalogFilterWidget;
 use app\models\forms\CatalogFilter;
 use yii\widgets\LinkPager;
-use app\models\entity\Category;
+use app\modules\catalog\models\entity\Category;
 
 
 $this->title = Title::showTitle("Зоотовары");
@@ -57,7 +57,7 @@ if ($category) {
             </ul>
         </div>
         <ul class="catalog-list">
-            <?php /* @var $product \app\models\entity\Product */ ?>
+            <?php /* @var $product \app\modules\catalog\models\entity\Product */ ?>
             <?php foreach ($products as $product): ?>
 
                 <?= $this->render('@app/modules/catalog/views/__item', [

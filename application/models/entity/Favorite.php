@@ -3,6 +3,8 @@
 namespace app\models\entity;
 
 
+use app\modules\catalog\models\entity\Product;
+
 class Favorite
 {
 	const NAME_KEY_SESSION_FAVORITE = 'favorite';

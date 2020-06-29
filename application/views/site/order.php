@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
-use app\models\helpers\OrderHelper;
+use app\modules\order\models\helpers\OrderHelper;
 
 $currency = new Currency();
 

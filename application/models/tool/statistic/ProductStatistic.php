@@ -3,7 +3,7 @@
 namespace app\models\tool\statistic;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 
 class ProductStatistic extends Product
 {

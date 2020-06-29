@@ -1,14 +1,14 @@
 <?php
 
-use app\models\entity\Basket;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\basket\models\entity\Basket;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\helpers\DiscountHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\models\entity\SiteSettings;
 use yii\widgets\LinkPager;
 
-/* @var $products \app\models\entity\Product[] */
+/* @var $products \app\modules\catalog\models\entity\Product[] */
 
 $this->title = Title::showTitle("Поиск по сайту");
 $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url' => ['/search/']]; ?>

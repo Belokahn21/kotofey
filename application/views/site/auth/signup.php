@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\seo\Title;
 
-/* @var $model \app\models\entity\User */
+/* @var $model \app\modules\user\models\entity\User */
 
 $this->params['breadcrumbs'][] = ['label' => 'Авторизация', 'url' => ['/signin/']];
 $this->params['breadcrumbs'][] = ['label' => 'Регистрация', 'url' => ['/signup/']];

@@ -3,7 +3,7 @@
 namespace app\modules\order\controllers;
 
 use app\models\entity\SiteSettings;
-use app\models\helpers\OrderHelper;
+use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\statistic\OrderStatistic;
 use app\modules\order\models\search\OrderSearchForm;
 use app\widgets\notification\Alert;
@@ -16,8 +16,8 @@ use app\modules\delivery\models\entity\Delivery;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
-use app\models\entity\Payment;
-use app\models\entity\User;
+use app\modules\payment\models\entity\Payment;
+use app\modules\user\models\entity\User;
 use yii\db\Exception;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;

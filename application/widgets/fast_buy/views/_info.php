@@ -1,5 +1,5 @@
 <?php
-/* @var $user \app\models\entity\User */
+/* @var $user \app\modules\user\models\entity\User */
 $user = Yii::$app->user->identity;
 ?>
 <?php $tooltip_html = ''; ?>

@@ -3,11 +3,11 @@
 namespace app\widgets\catalog_filter;
 
 
-use app\models\entity\Category;
-use app\models\entity\Informers;
-use app\models\entity\Product;
-use app\models\entity\ProductProperties;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\forms\CatalogFilter;
 use app\models\tool\Debug;
 use yii\base\Widget;

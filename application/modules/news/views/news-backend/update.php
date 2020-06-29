@@ -1,13 +1,13 @@
 <?php
 
-use app\models\entity\NewsCategory;
+use app\modules\news\models\entity\NewsCategory;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\tool\seo\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
-/* @var $model \app\models\entity\News */
+/* @var $model \app\modules\news\models\entity\News */
 
 $this->title = Title::showTitle("Новости");
 ?>

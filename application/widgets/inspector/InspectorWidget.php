@@ -3,7 +3,7 @@
 namespace app\widgets\inspector;
 
 
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use yii\base\Widget;
 use app\widgets\inspector\InspectorAssets;
 

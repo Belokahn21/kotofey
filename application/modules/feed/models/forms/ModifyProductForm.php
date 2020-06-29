@@ -3,7 +3,7 @@
 namespace app\modules\feed\models\forms;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 

@@ -4,9 +4,9 @@ use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use app\models\entity\UserSex;
+use app\modules\user\models\entity\UserSex;
 
-/* @var $model \app\models\entity\User */
+/* @var $model \app\modules\user\models\entity\User */
 
 $this->title = Title::showTitle("Пользователи"); ?>
 <section>

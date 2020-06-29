@@ -2,7 +2,7 @@
 
 use app\models\entity\Discount;
 use app\models\helpers\DiscountHelper;
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 
 /* @var $DiscountModel \app\models\forms\DiscountForm */
 ?>

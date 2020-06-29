@@ -2,7 +2,7 @@
 
 use app\models\tool\seo\Title;
 
-/* @var $user \app\models\entity\User */
+/* @var $user \app\modules\user\models\entity\User */
 
 $this->title = Title::showTitle("Профиль пользователя " . $user->name); ?>
 <section>

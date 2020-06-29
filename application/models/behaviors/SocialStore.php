@@ -3,7 +3,7 @@
 namespace app\models\behaviors;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\entity\ProductMarket;
 use VK\Client\VKApiClient;
 use yii\base\Behavior;
@@ -28,7 +28,7 @@ class SocialStore extends Behavior
 
     public function afterSave()
     {
-        /** @var Product $model */
+        /** @var \app\modules\catalog\models\entity\Product $model */
         $model = $this->owner;
         $group_id = 185683081;
         if ((boolean)$model->{$this->has_store} === true) {

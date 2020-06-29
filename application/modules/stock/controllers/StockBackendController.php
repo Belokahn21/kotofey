@@ -3,7 +3,7 @@
 namespace app\modules\stock\controllers;
 
 use app\models\entity\Stocks;
-use app\models\search\StockSearchForm;
+use app\modules\stock\models\search\StockSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

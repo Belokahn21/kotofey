@@ -3,7 +3,7 @@
 namespace app\models\services;
 
 
-use app\models\helpers\TimeDeliveryHelper;
+use app\modules\order\models\helpers\TimeDeliveryHelper;
 use app\models\tool\Debug;
 use app\modules\basket\models\tools\BasketHelper;
 

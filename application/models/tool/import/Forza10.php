@@ -3,7 +3,7 @@
 namespace app\models\tool\import;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use yii\helpers\ArrayHelper;
 
 class Forza10

@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\entity\InformersValues */
+/* @var $model \app\modules\catalog\models\entity\InformersValues */
 
 use app\models\tool\seo\Title;
 

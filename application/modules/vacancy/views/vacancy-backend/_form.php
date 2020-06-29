@@ -3,7 +3,7 @@
 use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
-/* @var $city_list \app\models\entity\Geo[] */
+/* @var $city_list \app\modules\geo\models\entity\Geo[] */
 
 ?>
 <?= $form->field($model, 'city_id')->dropDownList(ArrayHelper::map($city_list, 'id', 'name'), ['prompt' => 'Выбрать город']); ?>

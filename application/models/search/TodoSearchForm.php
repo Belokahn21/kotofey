@@ -3,9 +3,9 @@
 namespace app\models\search;
 
 
-use app\models\entity\News;
+use app\modules\news\models\entity\News;
 use app\models\entity\TodoList;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

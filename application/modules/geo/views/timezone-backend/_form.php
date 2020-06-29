@@ -2,7 +2,7 @@
 
 use yii\helpers\ArrayHelper;
 
-/* @var $model \app\models\entity\GeoTimezone */
+/* @var $model \app\modules\geo\models\entity\GeoTimezone */
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">

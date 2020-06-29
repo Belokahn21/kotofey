@@ -3,9 +3,9 @@
 namespace app\modules\geo\controllers;
 
 use Yii;
-use app\models\entity\Geo;
-use app\models\entity\GeoTimezone;
-use app\models\search\GeoSearchForm;
+use app\modules\geo\models\entity\Geo;
+use app\modules\geo\models\entity\GeoTimezone;
+use app\modules\geo\models\search\GeoSearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

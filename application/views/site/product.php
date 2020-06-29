@@ -2,23 +2,23 @@
 
 use app\models\helpers\DiscountHelper;
 use app\widgets\product_reviews\ProductReviewsWidget;
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\widgets\fast_buy\FastBuyWidget;
-use app\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\models\entity\Favorite;
 use yii\helpers\Json;
 use app\models\entity\ProductOrder;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\services\BonusByBuyService;
 
-/* @var $properties ProductPropertiesValues[]
+/* @var $properties \app\modules\catalog\models\entity\ProductPropertiesValues[]
  * @var \yii\web\View $this
- * @var \app\models\entity\Product $product
- * @var \app\models\entity\Category $category
+ * @var \app\modules\catalog\models\entity\Product $product
+ * @var \app\modules\catalog\models\entity\Category $category
  */
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];

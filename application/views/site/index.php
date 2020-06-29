@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View
- * @var $providers \app\models\entity\InformersValues[]
- * @var $news \app\models\entity\News[]
+ * @var $providers \app\modules\catalog\models\entity\InformersValues[]
+ * @var $news \app\modules\news\models\entity\News[]
  */
 
 use app\modules\order\widgets\ManyPurchasedGoods;
@@ -16,8 +16,8 @@ $this->title = Title::showTitle("Зоотовары для животных в �
 ?>
 
 <?= SliderWidget::widget([
-    'slider_id' => 1,
-    'use_carousel' => true
+	'slider_id' => 1,
+	'use_carousel' => true
 ]) ?>
 <?= InformerSliderWidget::widget(); ?>
 <?= ManyPurchasedGoods::widget(); ?>
@@ -40,11 +40,11 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     </ul>
 
     <div class="three-line">
-        <?= SliderWidget::widget([
-            'slider_id' => 2,
-            'use_carousel' => true,
-            'view' => 'square'
-        ]) ?>
+		<?= SliderWidget::widget([
+			'slider_id' => 2,
+			'use_carousel' => true,
+			'view' => 'square'
+		]) ?>
 
         <div class="social-wrap">
             <div class="block-title">Мы в социальных сетях</div>

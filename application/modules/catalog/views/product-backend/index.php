@@ -6,10 +6,10 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
-use app\models\entity\Category;
+use app\modules\catalog\models\entity\Category;
 
 /* @var $this \yii\web\View */
-/* @var $properties \app\models\entity\ProductProperties[] */
+/* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
 /* @var $modelDelivery \app\models\entity\ProductOrder */
 
 $this->title = Title::showTitle('Товары');

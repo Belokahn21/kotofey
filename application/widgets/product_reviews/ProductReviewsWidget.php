@@ -3,7 +3,7 @@
 namespace app\widgets\product_reviews;
 
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\entity\ProductReviews;
 use app\models\tool\Debug;
 use app\widgets\notification\Alert;

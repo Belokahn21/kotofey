@@ -3,10 +3,10 @@
 /* @var $this yii\web\View
  * @var $order \app\modules\order\models\entity\Order
  * @var $billing \app\models\entity\user\Billing
- * @var $user \app\models\entity\User
+ * @var $user \app\modules\user\models\entity\User
  * @var $discount_model \app\models\forms\DiscountForm
  * @var $delivery app\modules\delivery\models\entity\Delivery[]
- * @var $payment \app\models\entity\Payment[]
+ * @var $payment \app\modules\payment\models\entity\Payment[]
  * @var $order_date \app\models\entity\OrderDate
  * @var $delivery_time \app\models\services\DeliveryTimeService
  * @var $billing_list \app\models\entity\user\Billing[]
@@ -14,7 +14,7 @@
 
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
-use app\models\entity\Basket;
+use app\modules\basket\models\entity\Basket;
 use app\models\tool\Currency;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;

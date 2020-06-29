@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 
 ?>
 <div class="task-element-form">

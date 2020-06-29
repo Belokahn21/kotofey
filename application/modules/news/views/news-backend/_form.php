@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\models\entity\NewsCategory;
+use app\modules\news\models\entity\NewsCategory;
 use mihaildev\ckeditor\CKEditor;
 
-/* @var $model \app\models\entity\News */
+/* @var $model \app\modules\news\models\entity\News */
 
 ?>
 <nav>

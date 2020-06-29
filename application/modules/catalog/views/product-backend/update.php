@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
-/* @var $properties \app\models\entity\ProductProperties[] */
+/* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
 /* @var $modelDelivery \app\models\entity\ProductOrder */
 
 $this->title = Title::showTitle('Товары');

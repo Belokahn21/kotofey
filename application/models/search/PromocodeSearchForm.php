@@ -2,8 +2,8 @@
 
 namespace app\models\search;
 
-use app\models\entity\Category;
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\Product;
 use app\models\entity\Promo;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

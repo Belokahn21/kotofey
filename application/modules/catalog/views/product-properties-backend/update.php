@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\Informers;
+use app\modules\catalog\models\entity\Informers;
 use app\models\entity\TypeProductProperties;
 use app\models\tool\seo\Title;
 use yii\helpers\ArrayHelper;

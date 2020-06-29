@@ -3,8 +3,8 @@
 namespace app\modules\promo\models\form;
 
 
-use app\models\entity\Product;
-use app\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use phpDocumentor\Reflection\Types\Integer;
 use yii\base\Model;
 
@@ -46,7 +46,7 @@ class PromoForm extends Model
         }
 
 
-        /* @var $product Product */
+        /* @var $product \app\modules\catalog\models\entity\Product */
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->discount_price = $product->price - ceil($product->price * ($this->discount / 100));

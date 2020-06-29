@@ -8,7 +8,7 @@
 namespace app\models\entity\support;
 
 
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 

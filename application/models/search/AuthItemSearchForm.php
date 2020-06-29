@@ -2,7 +2,7 @@
 
 namespace app\models\search;
 
-use app\models\entity\Product;
+use app\modules\catalog\models\entity\Product;
 use app\models\rbac\AuthItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

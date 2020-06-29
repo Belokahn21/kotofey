@@ -1,7 +1,7 @@
 <?php
 
 use app\models\tool\seo\Title;
-use app\models\entity\User;
+use app\modules\user\models\entity\User;
 
 $this->title = Title::showTitle("О зоомагазине");
 $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' => ['/about/']]; ?>

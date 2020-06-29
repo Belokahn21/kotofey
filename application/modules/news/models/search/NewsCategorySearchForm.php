@@ -2,7 +2,7 @@
 
 namespace app\modules\news\models\search;
 
-use app\models\entity\NewsCategory;
+use app\modules\news\models\entity\NewsCategory;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

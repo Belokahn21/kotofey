@@ -6,9 +6,9 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use app\models\entity\Informers;
+use app\modules\catalog\models\entity\Informers;
 
-/* @var $model \app\models\entity\InformersValues */
+/* @var $model \app\modules\catalog\models\entity\InformersValues */
 /* @var $this \yii\web\View */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
 /* @var $searchModel \app\modules\catalog\models\search\InformersValuesSearchForm */

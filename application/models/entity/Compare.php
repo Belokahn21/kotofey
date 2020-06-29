@@ -3,6 +3,8 @@
 namespace app\models\entity;
 
 
+use app\modules\catalog\models\entity\Product;
+
 class Compare
 {
 	const COMPARE_SESSION_KEY = 'compare';

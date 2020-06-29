@@ -3,7 +3,7 @@
 namespace app\modules\order\controllers;
 
 
-use app\models\search\OrderStatusSearchForm;
+use app\modules\order\models\search\OrderStatusSearchForm;
 use app\modules\order\models\entity\OrderStatus;
 use app\widgets\notification\Alert;
 use yii\helpers\Url;

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use app\models\tool\seo\Title;
 use yii\helpers\Url;
 
-/* @var $categories \app\models\entity\Category[] */
+/* @var $categories \app\modules\catalog\models\entity\Category[] */
 
 $this->title = Title::showTitle("Раздел: " . $model->name); ?>
 <section>
