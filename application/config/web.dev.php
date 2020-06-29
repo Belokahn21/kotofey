@@ -184,6 +184,12 @@ $config = [
 		'search' => [
 			'class' => 'app\modules\search\Module',
 		],
+		'pet' => [
+			'class' => 'app\modules\pet\Module',
+		],
+		'subscribe' => [
+			'class' => 'app\modules\subscribe\Module',
+		],
     ],
     'params' => $params,
 ];
