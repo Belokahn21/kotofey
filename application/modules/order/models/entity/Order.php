@@ -128,30 +128,8 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-
         if ($this->is_update) {
-            // заказ оплачен, не получили бонусов и не отменён
-            if ($this->is_paid == 1 && $this->is_bonus == 0 && $this->promo_code == 0 && $this->is_cancel == 0 && !empty($this->user_id)) {
-
-                if (BonusByBuyService::isActive()) {
-                    if ($discount = Discount::findByUserId($this->user_id)) {
-                        $discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
-                        if ($discount->validate()) {
-                            $discount->update();
-                        }
-                    } else {
-                        $discount = new Discount();
-                        $discount->user_id = $this->user_id;
-                        $discount->count += DiscountHelper::calcBonus(OrderHelper::orderSummary($this->id));
-                        if ($discount->validate()) {
-                            $discount->save();
-                        }
-                    }
-                }
-
-                $this->is_bonus = true;
-                $this->update();
-            }
+            $this->update();
         }
 
         parent::afterSave($insert, $changedAttributes);
