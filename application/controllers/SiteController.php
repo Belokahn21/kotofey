@@ -45,7 +45,7 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\models\entity\Search;
+use app\modules\search\models\entity\Search;
 use Yii;
 use yii\web\HttpException;
 use yii\web\Response;

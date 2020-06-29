@@ -9,13 +9,13 @@ use app\models\tool\seo\Title;
 use app\modules\order\models\entity\Order;
 use app\widgets\todo\ToDoWidget;
 use app\modules\user\models\entity\User;
-use app\models\entity\SearchQuery;
+use app\modules\search\models\entity\SearchQuery;
 use app\models\tool\statistic\OrderStatistic;
 use app\models\tool\statistic\ProductStatistic;
 use app\models\entity\ProductSync;
 
 /* @var $this yii\web\View
- * @var $last_search \app\models\entity\SearchQuery[]
+ * @var $last_search \app\modules\search\models\entity\SearchQuery[]
  */
 
 $this->title = Title::showTitle("Главная страница");

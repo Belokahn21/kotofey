@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $model \app\models\entity\Stocks */
+/* @var $model \app\modules\stock\models\entity\Stocks */
 
 ?>
 <?php $this->title = Title::showTitle("Склады"); ?>

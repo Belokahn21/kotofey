@@ -2,7 +2,7 @@
 
 namespace app\widgets\search;
 
-use app\models\entity\Search;
+use app\modules\search\models\entity\Search;
 use yii\base\Widget;
 
 class SearchWidget extends Widget

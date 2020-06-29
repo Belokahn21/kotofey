@@ -8,7 +8,7 @@ use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\InformersValues;
-use app\models\entity\Stocks;
+use app\modules\stock\models\entity\Stocks;
 use app\models\entity\SiteSettings;
 
 /* @var \app\models\entity\Providers $model */

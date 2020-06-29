@@ -7,7 +7,7 @@ use yii\grid\GridView;
 use app\modules\catalog\models\entity\Product;
 use yii\helpers\Url;
 
-/* @var $model \app\models\entity\Stocks */
+/* @var $model \app\modules\stock\models\entity\Stocks */
 /* @var $this \yii\web\View */
 
 ?>

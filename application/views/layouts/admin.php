@@ -15,7 +15,7 @@ use app\assets\AdminAsset;
 use app\models\entity\support\Tickets;
 use app\modules\user\models\entity\User;
 use app\widgets\notification\Alert;
-use app\models\entity\Stocks;
+use app\modules\stock\models\entity\Stocks;
 use app\modules\order\models\entity\OrderStatus;
 use app\modules\delivery\models\entity\Delivery;
 use app\modules\payment\models\entity\Payment;

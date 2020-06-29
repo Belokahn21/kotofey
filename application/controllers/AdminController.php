@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\models\entity\SearchQuery;
+use app\modules\search\models\entity\SearchQuery;
 use app\models\forms\SaleProductForm;
 use app\models\tool\Backup;
 use app\widgets\notification\Alert;

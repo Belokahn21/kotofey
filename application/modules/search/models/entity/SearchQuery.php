@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\search\models\entity;
 
 use app\modules\user\models\entity\User;
 use Yii;

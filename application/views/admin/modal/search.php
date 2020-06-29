@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 
-/* @var $last_search \app\models\entity\SearchQuery[] */
+/* @var $last_search \app\modules\search\models\entity\SearchQuery[] */
 ?>
 <div class="modal fade" id="show-search-stat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">

@@ -1,14 +1,12 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\search\models\entity;
 
 
-use app\models\tool\Debug;
-use app\models\tool\Text;
+use app\modules\search\models\entity\SearchQuery;
 use app\modules\catalog\models\entity\Product;
 use yii\base\Model;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
 
 class Search extends Model
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\stock\models\entity;
 
 
 use app\models\tool\Debug;

@@ -2,7 +2,7 @@
 
 use app\models\entity\ProductOrder;
 use app\models\entity\SiteSettings;
-use app\models\entity\Stocks;
+use app\modules\stock\models\entity\Stocks;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\InformersValues;

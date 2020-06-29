@@ -3,7 +3,7 @@
 namespace app\modules\stock\models\search;
 
 
-use app\models\entity\Stocks;
+use app\modules\stock\models\entity\Stocks;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
