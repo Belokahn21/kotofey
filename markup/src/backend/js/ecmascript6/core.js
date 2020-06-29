@@ -1,4 +1,4 @@
-import search from '../reactjs/components/search';
+import search from '../reactjs/components/sidebar';
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {

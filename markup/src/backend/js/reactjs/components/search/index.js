@@ -1,6 +1,4 @@
 import React from 'react';
-import ReactDom from 'react-dom';
-
 import Result from './result';
 
 class Search extends React.Component {
@@ -71,5 +69,3 @@ class Search extends React.Component {
 
     }
 }
-
-ReactDom.render(<Search/>, document.querySelector('.search-admin'));
