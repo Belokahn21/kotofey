@@ -119,18 +119,21 @@ class Order extends ActiveRecord
 
     public function beforeSave($insert)
     {
-        if (!$this->isNewRecord) {
-            $this->is_update = true;
-        }
+//        if (!$this->isNewRecord) {
+//            $this->is_update = true;
+//        }
 
         return parent::beforeSave($insert);
     }
 
     public function afterSave($insert, $changedAttributes)
     {
-        if ($this->is_update) {
-            $this->update();
-        }
+//        if ($this->is_update) {
+//
+////            OrderHelper::stockControl($this);
+//
+//            $this->update();
+//        }
 
         parent::afterSave($insert, $changedAttributes);
     }
