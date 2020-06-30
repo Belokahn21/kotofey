@@ -73,7 +73,7 @@ class News extends ActiveRecord
 
             [['category'], 'integer'],
 
-            [['preview_image', 'detail_image'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
+            [['preview_image', 'detail_image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
     }
 
