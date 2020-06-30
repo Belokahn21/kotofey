@@ -19,7 +19,7 @@ use app\modules\payment\models\entity\Payment;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use app\modules\short_link\models\entity\ShortLinks;
 use app\models\entity\SiteReviews;
 use app\modules\user\models\entity\Billing;

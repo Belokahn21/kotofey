@@ -2,7 +2,7 @@
 
 use app\modules\delivery\models\entity\Delivery;
 use app\modules\payment\models\entity\Payment;
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use app\modules\user\models\entity\User;
 use app\models\tool\Currency;
 use app\models\tool\Price;

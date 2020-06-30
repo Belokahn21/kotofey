@@ -3,7 +3,7 @@
 namespace app\modules\basket\models\entity;
 
 
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use app\modules\basket\models\helpers\BasketHelper;
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;

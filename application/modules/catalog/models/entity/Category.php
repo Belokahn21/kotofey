@@ -95,7 +95,7 @@ class Category extends ActiveRecord
 
     public function categoryTree($parent_id = 0, $delim = "")
     {
-        $categories = \app\models\entity\Category::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
+        $categories = Category::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
 
         if ($categories) {
 

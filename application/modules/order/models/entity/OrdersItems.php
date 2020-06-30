@@ -5,7 +5,7 @@ namespace app\modules\order\models\entity;
 use app\modules\basket\models\entity\Basket;
 use app\modules\delivery\models\entity\Delivery;
 use app\modules\catalog\models\entity\Product;
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -89,8 +89,8 @@ class OrdersItems extends ActiveRecord
                 if ($item->save() === false) {
                     return false;
                 }
-                if ($promo instanceof Promo) {
-                    Promo::minusCode($promo->code);
+                if ($promo instanceof \app\modules\promo\models\entity\Promo) {
+                    \app\modules\promo\models\entity\Promo::minusCode($promo->code);
                 }
 
             } else {

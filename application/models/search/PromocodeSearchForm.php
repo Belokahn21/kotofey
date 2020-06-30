@@ -4,7 +4,7 @@ namespace app\models\search;
 
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

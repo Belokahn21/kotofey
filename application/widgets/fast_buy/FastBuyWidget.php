@@ -3,7 +3,7 @@
 namespace app\widgets\fast_buy;
 
 use app\modules\basket\models\entity\BasketItem;
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use Yii;
 use app\modules\basket\models\entity\Basket;
 use app\modules\order\models\entity\Order;

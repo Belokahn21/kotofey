@@ -19,7 +19,7 @@ use app\modules\stock\models\entity\Stocks;
 use app\modules\order\models\entity\OrderStatus;
 use app\modules\delivery\models\entity\Delivery;
 use app\modules\payment\models\entity\Payment;
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use app\modules\vendors\models\entity\VendorGroup;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\geo\models\entity\Geo;

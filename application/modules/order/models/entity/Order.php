@@ -9,7 +9,7 @@ use app\modules\order\models\entity\OrderDate;
 use app\modules\user\models\entity\User;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
-use app\models\entity\Promo;
+use app\modules\promo\models\entity\Promo;
 use app\modules\user\models\entity\Billing;
 use app\modules\bonus\models\helper\DiscountHelper;
 use app\modules\order\models\helpers\OrderHelper;
@@ -101,7 +101,7 @@ class Order extends ActiveRecord
 
             [['comment', 'promo_code', 'notes', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'email'], 'string'],
 
-            ['promo_code', 'exist', 'targetClass' => Promo::className(), 'targetAttribute' => ['promo_code' => 'code'], 'message' => 'Такого промокода не существует'],
+            ['promo_code', 'exist', 'targetClass' => \app\modules\promo\models\entity\Promo::className(), 'targetAttribute' => ['promo_code' => 'code'], 'message' => 'Такого промокода не существует'],
 
 
             [['product_id'], 'safe'],
