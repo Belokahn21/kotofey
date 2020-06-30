@@ -1,7 +1,8 @@
 <?php
 
-namespace app\models\rbac;
+namespace app\modules\rbac\models\entity;
 
+use app\modules\rbac\models\entity\AuthItemChild;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;

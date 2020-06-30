@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\catalog\models\entity;
 
 
 class TypeProductProperties

@@ -3,7 +3,7 @@
 namespace app\modules\catalog\models\search;
 
 use app\modules\catalog\models\entity\InformersValues;
-use app\models\rbac\AuthItem;
+use app\modules\rbac\models\entity\AuthItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

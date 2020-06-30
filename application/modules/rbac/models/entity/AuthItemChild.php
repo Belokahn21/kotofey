@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\rbac;
+namespace app\modules\rbac\models\entity;
 
 
 use yii\db\ActiveRecord;

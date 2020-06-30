@@ -11,7 +11,7 @@ use app\modules\user\models\entity\UsersReferal;
 use app\modules\order\models\entity\Order;
 
 /* @var $model \app\modules\user\models\entity\User
- * @var $groups \app\models\rbac\AuthItem[]
+ * @var $groups \app\modules\rbac\models\entity\AuthItem[]
  * @var $personalManagerModel \app\models\entity\UserManager
  */
 

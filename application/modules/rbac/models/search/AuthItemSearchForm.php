@@ -1,25 +1,25 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\rbac\models\search;
 
-use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
-use app\modules\promo\models\entity\Promo;
+use app\modules\rbac\models\entity\AuthItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class PromocodeSearchForm extends Promo
+class AuthItemSearchForm extends AuthItem
 {
+
     public static function tableName()
     {
-        return "promo";
+        return "auth_item";
     }
 
     public function rules()
     {
         return [
-            [['id'], 'integer'],
-            [['code'], 'string'],
+            [['name'], 'string'],
+            [['description'], 'string'],
         ];
     }
 
@@ -30,7 +30,7 @@ class PromocodeSearchForm extends Promo
 
     public function search($params)
     {
-        $query = Promo::find();
+        $query = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -40,8 +40,8 @@ class PromocodeSearchForm extends Promo
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'code', $this->code]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;
     }

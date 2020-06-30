@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\ProductOrder;
+use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\stock\models\entity\Stocks;
 use yii\helpers\ArrayHelper;
@@ -12,7 +12,7 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\settings\models\helpers\MarkupHelpers;
 
 /* @var $model \app\modules\catalog\models\entity\Product */
-/* @var $modelDelivery \app\models\entity\ProductOrder */
+/* @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder */
 /* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
 
 ?>

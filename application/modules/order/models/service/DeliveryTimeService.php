@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\services;
+namespace app\modules\order\models\service;
 
 
 use app\modules\order\models\helpers\TimeDeliveryHelper;

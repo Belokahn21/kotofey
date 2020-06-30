@@ -4,7 +4,7 @@ namespace app\modules\user\models\form;
 
 
 use app\modules\user\models\entity\User;
-use app\models\entity\UserResetPassword;
+use app\modules\user\models\entity\UserResetPassword;
 use yii\base\Model;
 
 class PasswordRestoreForm extends Model

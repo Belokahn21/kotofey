@@ -4,7 +4,7 @@ namespace app\widgets\product_reviews;
 
 
 use app\modules\catalog\models\entity\Product;
-use app\models\entity\ProductReviews;
+use app\modules\catalog\models\entity\ProductReviews;
 use app\models\tool\Debug;
 use app\widgets\notification\Alert;
 use yii\base\Widget;

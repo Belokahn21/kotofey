@@ -2,28 +2,23 @@
 
 namespace app\controllers;
 
-use app\models\entity\Auth;
+use app\modules\user\models\entity\Auth;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
-use app\modules\delivery\models\entity\Delivery;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\geo\models\entity\Geo;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\order\models\entity\Order;
-use app\modules\order\models\entity\OrderBilling;
-use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\news\models\entity\News;
 use app\modules\news\models\entity\NewsCategory;
-use app\modules\payment\models\entity\Payment;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\modules\promo\models\entity\Promo;
 use app\modules\short_link\models\entity\ShortLinks;
-use app\models\entity\SiteReviews;
 use app\modules\user\models\entity\Billing;
-use app\models\entity\UserResetPassword;
+use app\modules\user\models\entity\UserResetPassword;
 use app\modules\vacancy\models\entity\Vacancy;
 use app\models\forms\CatalogFilter;
 use app\modules\user\models\form\PasswordRestoreForm;
@@ -702,51 +697,7 @@ class SiteController extends Controller
         ]);
     }
 
-    public
-    function actionReviews()
-    {
-        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-        Attributes::metaDescription("Узнайте, что думают о нас клиенты и простые пользователи сайта. Мы рады новым отзывам о нашей работе. Для клиентов оставивших отзыв за покупку мы дарим скидку на последующие покупки");
-        Attributes::metaKeywords([
-            "зоотовары каталог",
-            "каталог магазина зоотоваров",
-            "валта зоотовары каталог",
-            "магазин зоотоваров",
-            "интернет магазин зоотоваров",
-            "купить зоотовары в интернет магазине",
-            "магазин зоотоваров барнаул",
-            "зоотовары интернет магазин барнаул",
-            "альф барнаул зоотовары",
-        ]);
-        $reviews = SiteReviews::find()->all();
-        $model = new SiteReviews();
-        if ($user = User::findOne(\Yii::$app->user->identity->id)) {
-            $user->scenario = User::SCENARIO_NEW_REVIEW;
-        } else {
-            $user = new User(['scenario' => User::SCENARIO_NEW_REVIEW]);
-        }
-
-        if (\Yii::$app->request->isPost) {
-            if ($user->load(\Yii::$app->request->post())) {
-                if ($user->validate()) {
-                    if ($user->update() !== false) {
-                        if ($model->create()) {
-                            Alert::setSuccessNotify("Отзыв успешно добавлен!");
-                            return $this->refresh();
-                        }
-                    }
-                }
-            }
-        }
-        return $this->render('reviews', [
-            'reviews' => $reviews,
-            'model' => $model,
-            'user' => $user,
-        ]);
-    }
-
-    public
-    function actionFaq()
+    public function actionFaq()
     {
         Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
         Attributes::metaDescription("Система быстрой помощи по сайту, в которой можно найти ответы на вопросы, которые возникил в ходе посещения вами нашего сайта. Если вы не найдете ответ на вопрос, то оставьте заявку и мы вам перезвоним");

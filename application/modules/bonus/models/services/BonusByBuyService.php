@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\services;
+namespace app\modules\bonus\models\services;
 
 
 class BonusByBuyService

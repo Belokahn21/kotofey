@@ -10,7 +10,7 @@ use app\modules\catalog\models\entity\Category;
 
 /* @var $this \yii\web\View */
 /* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
-/* @var $modelDelivery \app\models\entity\ProductOrder */
+/* @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder */
 
 $this->title = Title::showTitle('Товары');
 ?>

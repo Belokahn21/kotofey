@@ -2,15 +2,15 @@
 
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\rbac\AuthItem */
+/* @var $model \app\modules\rbac\models\entity\AuthItem */
 
-use app\models\rbac\AuthItemChild;
+use app\modules\rbac\models\entity\AuthItemChild;
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-use app\models\rbac\AuthItem;
+use app\modules\rbac\models\entity\AuthItem;
 use yii\helpers\ArrayHelper;
 
 $this->title = Title::showTitle("Управление группами");

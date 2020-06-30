@@ -1,10 +1,10 @@
 <?php
 
-namespace app\models\search;
+namespace app\modules\rbac\models\search;
 
 
 use app\modules\payment\models\entity\Payment;
-use app\models\rbac\AuthItem;
+use app\modules\rbac\models\entity\AuthItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

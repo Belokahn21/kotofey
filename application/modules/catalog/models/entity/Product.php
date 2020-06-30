@@ -5,7 +5,7 @@ namespace app\modules\catalog\models\entity;
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\entity\Category;
-use app\models\entity\ProductOrder;
+use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\tool\Debug;
 use mohorev\file\UploadBehavior;

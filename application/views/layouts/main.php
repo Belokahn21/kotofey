@@ -17,7 +17,7 @@ use app\modules\subscibe\models\entity\Subscribe;
 use app\widgets\search\SearchWidget;
 use app\widgets\cookie\CookieWidget;
 use yii\helpers\Url;
-use app\models\services\CompareService;
+use app\modules\compare\models\service\CompareService;
 use app\widgets\geo\GeoWidget;
 use app\widgets\inspector\InspectorWidget;
 

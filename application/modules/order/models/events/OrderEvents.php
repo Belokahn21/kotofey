@@ -5,7 +5,7 @@ namespace app\modules\order\models\events;
 use app\modules\order\models\entity\Order;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\Billing;
-use app\models\services\NotifyService;
+use app\modules\order\models\service\NotifyService;
 use app\models\tool\Price;
 use app\models\tool\statistic\OrderStatistic;
 use Yii;

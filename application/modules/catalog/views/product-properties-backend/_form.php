@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\TypeProductProperties;
+use app\modules\catalog\models\entity\TypeProductProperties;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Informers;
 

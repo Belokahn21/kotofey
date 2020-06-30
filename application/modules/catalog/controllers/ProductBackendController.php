@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
 use Yii;
 use app\modules\catalog\models\entity\Product;
-use app\models\entity\ProductOrder;
+use app\modules\catalog\models\entity\ProductOrder;
 use app\widgets\notification\Alert;
 use yii\helpers\Url;
 use yii\web\Controller;

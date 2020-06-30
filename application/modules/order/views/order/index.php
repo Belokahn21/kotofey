@@ -7,7 +7,7 @@
  * @var $delivery app\modules\delivery\models\entity\Delivery[]
  * @var $payment \app\modules\payment\models\entity\Payment[]
  * @var $order_date \app\modules\order\models\entity\OrderDate
- * @var $delivery_time \app\models\services\DeliveryTimeService
+ * @var $delivery_time \app\modules\order\models\service\DeliveryTimeService
  * @var $billing_list \app\modules\user\models\entity\Billing[]
  */
 

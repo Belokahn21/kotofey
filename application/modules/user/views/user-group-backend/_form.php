@@ -1,6 +1,6 @@
 <?php
 
-use app\models\rbac\AuthItem;
+use app\modules\rbac\models\entity\AuthItem;
 use yii\helpers\ArrayHelper;
 
 ?>

@@ -13,7 +13,7 @@ use app\modules\promo\models\entity\Promo;
 use app\modules\user\models\entity\Billing;
 use app\modules\bonus\models\helper\DiscountHelper;
 use app\modules\order\models\helpers\OrderHelper;
-use app\models\services\BonusByBuyService;
+use app\modules\bonus\models\services\BonusByBuyService;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 

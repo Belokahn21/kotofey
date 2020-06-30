@@ -3,8 +3,8 @@
 namespace app\modules\user\controllers;
 
 use Yii;
-use app\models\rbac\AuthItem;
-use app\models\search\PermissionsSearchForm;
+use app\modules\rbac\models\entity\AuthItem;
+use app\modules\rbac\models\search\PermissionsSearchForm;
 use yii\web\Controller;
 
 class UserPermissionBackendController extends Controller

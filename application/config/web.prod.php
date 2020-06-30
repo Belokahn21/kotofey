@@ -205,6 +205,9 @@ $config = [
 		'favorite' => [
 			'class' => 'app\modules\favorite\Module',
 		],
+		'rbac' => [
+			'class' => 'app\modules\rbac\Module',
+		],
     ],
     'params' => $params,
 ];

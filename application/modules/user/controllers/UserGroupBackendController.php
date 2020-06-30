@@ -2,8 +2,8 @@
 
 namespace app\modules\user\controllers;
 
-use app\models\rbac\AuthItem;
-use app\models\search\AuthItemSearchForm;
+use app\modules\rbac\models\entity\AuthItem;
+use app\modules\rbac\models\search\AuthItemSearchForm;
 use Yii;
 use app\widgets\notification\Alert;
 use yii\web\Controller;

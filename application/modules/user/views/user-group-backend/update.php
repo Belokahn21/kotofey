@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View */
 
-/* @var $model \app\models\rbac\AuthItem */
+/* @var $model \app\modules\rbac\models\entity\AuthItem */
 
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;

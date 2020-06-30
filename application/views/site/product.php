@@ -11,9 +11,9 @@ use app\widgets\fast_buy\FastBuyWidget;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\favorite\models\entity\Favorite;
 use yii\helpers\Json;
-use app\models\entity\ProductOrder;
+use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\Product;
-use app\models\services\BonusByBuyService;
+use app\modules\bonus\models\services\BonusByBuyService;
 
 /* @var $properties \app\modules\catalog\models\entity\ProductPropertiesValues[]
  * @var \yii\web\View $this

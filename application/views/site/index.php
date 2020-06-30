@@ -10,7 +10,7 @@ use app\models\tool\seo\Title;
 use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\widgets\slider\SliderWidget;
 use app\widgets\informers_slider\InformerSliderWidget;
-use app\models\services\BonusByBuyService;
+use app\modules\bonus\models\services\BonusByBuyService;
 
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>

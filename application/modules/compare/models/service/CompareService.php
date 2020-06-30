@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\services;
+namespace app\modules\compare\models\service;
 
 
 use app\modules\compare\models\entity\Compare;

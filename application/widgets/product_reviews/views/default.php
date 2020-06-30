@@ -3,8 +3,8 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $reviews \app\models\entity\ProductReviews[] */
-/* @var $model \app\models\entity\ProductReviews */
+/* @var $reviews \app\modules\catalog\models\entity\ProductReviews[] */
+/* @var $model \app\modules\catalog\models\entity\ProductReviews */
 ?>
 <div class="product-attributes__title">Отзывы покупателей</div>
 <div class="product-review-wrap">

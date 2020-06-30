@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\entity;
+namespace app\modules\user\models\entity;
 
 use app\models\tool\System;
 use app\modules\user\models\entity\User;
