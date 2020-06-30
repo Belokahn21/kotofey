@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $ticket \app\models\entity\support\Tickets */
+/* @var $ticket \app\modules\support\models\entity\Tickets */
 
 $this->title = Title::showTitle($ticket->title); ?>
 <?= Html::a("&laquo; Назад", '/support/' . $ticket->category_id . '/', ['class' => 'btn-main']) ?>

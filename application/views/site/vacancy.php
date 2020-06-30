@@ -2,7 +2,7 @@
 
 use app\models\tool\seo\Title;
 
-/* @var $items \app\models\entity\Vacancy[] */
+/* @var $items \app\modules\vacancy\models\entity\Vacancy[] */
 
 $this->title = Title::showTitle('Вакансии');
 ?>

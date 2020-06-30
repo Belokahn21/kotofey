@@ -3,8 +3,8 @@
 namespace app\modules\short_link\controllers;
 
 use Yii;
-use app\models\entity\ShortLinks;
-use app\models\search\ShortLinksSearchModel;
+use app\modules\short_link\models\entity\ShortLinks;
+use app\modules\short_link\models\search\ShortLinksSearchModel;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

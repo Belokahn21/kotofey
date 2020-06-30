@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\Favorite;
+use app\modules\favorite\models\entity\Favorite;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\modules\user\models\entity\UserSex;

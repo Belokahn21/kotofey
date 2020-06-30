@@ -1,6 +1,6 @@
 <?php
 
-/* @var $model \app\models\entity\TodoList */
+/* @var $model \app\modules\todo\models\entity\TodoList */
 
 /* @var $this \yii\web\View */
 

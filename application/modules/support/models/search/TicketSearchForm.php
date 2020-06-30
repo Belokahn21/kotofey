@@ -3,7 +3,7 @@
 namespace app\modules\support\models\search;
 
 
-use app\models\entity\support\Tickets;
+use app\modules\support\models\entity\Tickets;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

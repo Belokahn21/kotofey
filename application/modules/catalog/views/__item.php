@@ -3,7 +3,7 @@
 use app\modules\basket\models\entity\Basket;
 use app\models\tool\Currency;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\models\helpers\DiscountHelper;
+use app\modules\bonus\models\helper\DiscountHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\models\tool\Price;
 use app\models\services\BonusByBuyService;

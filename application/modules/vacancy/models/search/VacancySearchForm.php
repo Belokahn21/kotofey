@@ -3,7 +3,7 @@
 namespace app\modules\vacancy\models\search;
 
 
-use app\models\entity\Vacancy;
+use app\modules\vacancy\models\entity\Vacancy;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

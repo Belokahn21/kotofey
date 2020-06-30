@@ -2,7 +2,7 @@
 
 use app\models\tool\seo\Title;
 use app\models\entity\support\SupportCategory;
-use app\models\entity\support\Tickets;
+use app\modules\support\models\entity\Tickets;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;

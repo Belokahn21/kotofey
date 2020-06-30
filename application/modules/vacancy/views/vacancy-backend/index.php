@@ -8,7 +8,7 @@ use yii\grid\GridView;
 use app\models\tool\seo\Title;
 
 /* @var $this \yii\web\View */
-/* @var $model \app\models\entity\Vacancy */
+/* @var $model \app\modules\vacancy\models\entity\Vacancy */
 /* @var $city_list \app\modules\geo\models\entity\Geo[] */
 
 $this->title = Title::showTitle("Вакансии");;

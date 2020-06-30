@@ -7,7 +7,7 @@ use yii\helpers\Html;
 use app\models\tool\Policy;
 
 /* @var $order \app\modules\order\models\entity\Order */
-/* @var $billing \app\models\entity\user\Billing */
+/* @var $billing \app\modules\user\models\entity\Billing */
 /* @var $delivery array */
 /* @var $payments array */
 /* @var $product \app\modules\catalog\models\entity\Product */

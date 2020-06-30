@@ -4,13 +4,13 @@ use app\models\tool\seo\Title;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\entity\SiteTypeSettings;
+use app\modules\site_settings\models\entity\SiteTypeSettings;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
 $this->title = Title::showTitle("Настройки сайта");
 
-/* @var $model \app\models\entity\SiteSettings */
+/* @var $model \app\modules\site_settings\models\entity\SiteSettings */
 
 ?>
     <section class="site-settings">

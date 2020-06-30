@@ -3,13 +3,13 @@
 namespace app\models\services;
 
 
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
-use app\models\entity\OrderDate;
+use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\user\models\entity\User;
-use app\models\entity\user\Billing;
+use app\modules\user\models\entity\Billing;
 use app\models\tool\Price;
 use app\models\tool\statistic\OrderStatistic;
 use VK\Client\VKApiClient;

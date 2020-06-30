@@ -101,7 +101,7 @@ class OrdersItems extends ActiveRecord
 
         \app\modules\basket\models\entity\Basket::clear();
 
-        $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
+        $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\modules\order\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
                 'order_id' => $this->order_id
             ]
         );

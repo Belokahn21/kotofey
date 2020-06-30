@@ -2,9 +2,9 @@
 
 namespace app\modules\user\models\entity;
 
-use app\models\entity\Discount;
+use app\modules\bonus\models\entity\Discount;
 use app\models\entity\NotSupportedException;
-use app\models\entity\user\Billing;
+use app\modules\user\models\entity\Billing;
 use app\modules\user\models\entity\UsersReferal;
 use app\models\rbac\AuthAssignment;
 use app\models\rbac\AuthItem;
@@ -36,7 +36,7 @@ use yii\web\IdentityInterface;
  *
  * @property AuthItem $group
  * @property Billing $billing
- * @property Discount $discount
+ * @property \app\modules\bonus\models\entity\Discount $discount
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -127,7 +127,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             $referal = new UsersReferal();
             $referal->createRefreal($this->id);
 
-            if (!Discount::findByUserId($this->id)) {
+            if (!\app\modules\bonus\models\entity\Discount::findByUserId($this->id)) {
                 $discount = new Discount();
                 $discount->user_id = $this->id;
                 $discount->count = 0;
@@ -145,7 +145,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function getDiscount()
     {
-        return Discount::findByUserId($this->id);
+        return \app\modules\bonus\models\entity\Discount::findByUserId($this->id);
     }
 
     public static function isRole($roleName)

@@ -4,7 +4,7 @@ namespace app\modules\vacancy\controllers;
 
 use Yii;
 use app\modules\geo\models\entity\Geo;
-use app\models\entity\Vacancy;
+use app\modules\vacancy\models\entity\Vacancy;
 use app\modules\vacancy\models\search\VacancySearchForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;

@@ -5,7 +5,7 @@
  */
 
 use app\modules\order\widgets\ManyPurchasedGoods;
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use app\models\tool\seo\Title;
 use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\widgets\slider\SliderWidget;

@@ -4,7 +4,7 @@
 use app\models\tool\seo\Title;
 use app\models\tool\Price;
 use app\models\tool\Currency;
-use app\models\entity\Favorite;
+use app\modules\favorite\models\entity\Favorite;
 
 $this->title = Title::showTitle("Избранные товары");
 $this->params['breadcrumbs'][] = ['label' => 'Избранные товары', 'url' => ['/favorite/']];?>

@@ -2,8 +2,8 @@
 
 namespace app\modules\catalog\models\entity;
 
-use app\models\behaviors\ArticleBehavior;
-use app\models\behaviors\SocialStore;
+use app\modules\catalog\models\behaviors\ArticleBehavior;
+use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\entity\Category;
 use app\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductPropertiesValues;

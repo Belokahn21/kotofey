@@ -1,6 +1,6 @@
 <?php
 
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 
 ?>
 <!-- Modal -->

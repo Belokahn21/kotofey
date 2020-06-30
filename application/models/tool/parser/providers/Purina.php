@@ -3,7 +3,7 @@
 namespace app\models\tool\parser\providers;
 
 
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\vendors\models\entity\Vendor;
 use app\models\tool\Debug;
 use app\models\tool\parser\CatalogInfo;

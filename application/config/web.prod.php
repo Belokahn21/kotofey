@@ -190,6 +190,21 @@ $config = [
 		'subscribe' => [
 			'class' => 'app\modules\subscribe\Module',
 		],
+		'site_settings' => [
+			'class' => 'app\modules\site_settings\Module',
+		],
+		'todo' => [
+			'class' => 'app\modules\todo\Module',
+		],
+		'bonus' => [
+			'class' => 'app\modules\bonus\Module',
+		],
+		'compare' => [
+			'class' => 'app\modules\compare\Module',
+		],
+		'favorite' => [
+			'class' => 'app\modules\favorite\Module',
+		],
     ],
     'params' => $params,
 ];

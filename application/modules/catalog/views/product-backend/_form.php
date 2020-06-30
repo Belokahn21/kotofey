@@ -1,7 +1,7 @@
 <?php
 
 use app\models\entity\ProductOrder;
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\stock\models\entity\Stocks;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Category;

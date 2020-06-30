@@ -2,9 +2,9 @@
 
 namespace app\widgets\todo;
 
-use app\models\search\TodoSearchForm;
+use app\modules\todo\models\entity\TodoSearchForm;
 use app\models\tool\System;
-use app\models\entity\TodoList;
+use app\modules\todo\models\entity\TodoList;
 use app\widgets\notification\Alert;
 use yii\helpers\Url;
 use yii\web\HttpException;

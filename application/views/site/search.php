@@ -2,10 +2,10 @@
 
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\models\helpers\DiscountHelper;
+use app\modules\bonus\models\helper\DiscountHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use yii\widgets\LinkPager;
 
 /* @var $products \app\modules\catalog\models\entity\Product[] */

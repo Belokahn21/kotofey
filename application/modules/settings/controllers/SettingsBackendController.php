@@ -3,8 +3,8 @@
 namespace app\modules\settings\controllers;
 
 use Yii;
-use app\models\entity\SiteSettings;
-use app\models\search\SettingsSearchForm;
+use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\site_settings\models\search\SettingsSearchForm;
 use app\widgets\notification\Alert;
 use yii\helpers\Url;
 use yii\web\Controller;

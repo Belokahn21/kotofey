@@ -9,9 +9,8 @@ use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\stock\models\entity\Stocks;
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 
-/* @var \app\models\entity\Providers $model */
 /* @var \yii\web\View $this */
 
 $this->title = Title::showTitle("Группа поставщиков"); ?>

@@ -3,15 +3,15 @@
 namespace app\modules\order\models\entity;
 
 
-use app\models\entity\Discount;
-use app\models\entity\OrderBilling;
-use app\models\entity\OrderDate;
+use app\modules\bonus\models\entity\Discount;
+use app\modules\order\models\entity\OrderBilling;
+use app\modules\order\models\entity\OrderDate;
 use app\modules\user\models\entity\User;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
 use app\models\entity\Promo;
-use app\models\entity\user\Billing;
-use app\models\helpers\DiscountHelper;
+use app\modules\user\models\entity\Billing;
+use app\modules\bonus\models\helper\DiscountHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\services\BonusByBuyService;
 use yii\behaviors\TimestampBehavior;

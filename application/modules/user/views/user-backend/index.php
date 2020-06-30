@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use app\modules\user\models\entity\UserSex;
-use app\models\entity\Discount;
+use app\modules\bonus\models\entity\Discount;
 use app\modules\user\models\entity\UsersReferal;
 use app\modules\order\models\entity\Order;
 

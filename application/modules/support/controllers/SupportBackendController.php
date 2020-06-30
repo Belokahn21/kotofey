@@ -2,7 +2,7 @@
 
 namespace app\modules\support\controllers;
 
-use app\models\entity\support\Tickets;
+use app\modules\support\models\entity\Tickets;
 use app\modules\support\models\search\TicketSearchForm;
 use yii\web\Controller;
 

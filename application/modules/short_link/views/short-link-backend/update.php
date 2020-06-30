@@ -5,7 +5,7 @@ use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 
 /* @var $this \yii\web\View */
-/* @var $model \app\models\entity\ShortLinks */
+/* @var $model \app\modules\short_link\models\entity\ShortLinks */
 
 $this->title = Title::showTitle("Короткие ссылки");
 ?>

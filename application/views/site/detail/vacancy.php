@@ -3,7 +3,7 @@
 use app\models\tool\seo\Title;
 use yii\helpers\Url;
 
-/* @var $model \app\models\entity\Vacancy */
+/* @var $model \app\modules\vacancy\models\entity\Vacancy */
 
 $this->title = Title::showTitle($model->title);
 

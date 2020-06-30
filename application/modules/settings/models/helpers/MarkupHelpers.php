@@ -2,7 +2,7 @@
 
 namespace app\modules\settings\models\helpers;
 
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use Yii;
 
 class MarkupHelpers

@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\models\entity\SiteTypeSettings;
+use app\modules\site_settings\models\entity\SiteTypeSettings;
 
 ?>
 <?php if (!empty($_GET['type'])) {

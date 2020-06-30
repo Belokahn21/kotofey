@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\controllers;
 
-use app\models\entity\ProductMarket;
+use app\modules\catalog\models\entity\ProductMarket;
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
 use Yii;

@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use app\modules\order\models\entity\Order;
 use yii\helpers\Url;
 
-/* @var $models \app\models\entity\user\Billing[] */
+/* @var $models \app\modules\user\models\entity\Billing[] */
 
 $this->title = Title::showTitle("Личный кабинет");
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => '/profile/'];

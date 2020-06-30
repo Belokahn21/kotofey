@@ -2,14 +2,13 @@
 
 /* @var $this yii\web\View
  * @var $order \app\modules\order\models\entity\Order
- * @var $billing \app\models\entity\user\Billing
+ * @var $billing \app\modules\user\models\entity\Billing
  * @var $user \app\modules\user\models\entity\User
- * @var $discount_model \app\models\forms\DiscountForm
  * @var $delivery app\modules\delivery\models\entity\Delivery[]
  * @var $payment \app\modules\payment\models\entity\Payment[]
- * @var $order_date \app\models\entity\OrderDate
+ * @var $order_date \app\modules\order\models\entity\OrderDate
  * @var $delivery_time \app\models\services\DeliveryTimeService
- * @var $billing_list \app\models\entity\user\Billing[]
+ * @var $billing_list \app\modules\user\models\entity\Billing[]
  */
 
 use app\models\tool\Price;
@@ -146,31 +145,3 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
     </div>
 </div>
 <?php ActiveForm::end(); ?>
-
-<script type="text/javascript">
-	var cartSumm = parseInt('<?= str_replace(' ', '', Price::format(Basket::getInstance()->cash())) ?>');
-
-	function numberWithCommas(x) {
-		return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-	}
-</script>
-
-<?php
-
-$JS = <<<JS
-$('#checkout-form-id').on('afterValidateAttribute', function (event, attribute, messages) {
-    if(messages.length==0 && attribute.name=='promo_code' && attribute.value.length > 0){
-        $('.how-promocode').html('Ваш промокод: <strong>'+attribute.value+'</strong>. Скидка -20%');
-        var result = cartSumm - Math.ceil(cartSumm*0.2);
-        result = numberWithCommas(result);
-        $('.checkout__price span').html('<s style="font-size:16px">'+numberWithCommas(cartSumm)+'</s>'+' <span>'+result+'</span>');
-    }else{
-        $('.how-promocode').html('');
-        $('.checkout__price span').html(numberWithCommas(cartSumm));
-    }
-});
-JS;
-
-
-Yii::$app->view->registerJs($JS, \yii\web\View::POS_END);
-?>

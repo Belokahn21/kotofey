@@ -5,14 +5,14 @@
 /* @var $content string */
 
 use app\modules\geo\models\entity\GeoTimezone;
-use app\models\entity\Vacancy;
+use app\modules\vacancy\models\entity\Vacancy;
 use yii\helpers\Url;
 use app\modules\news\models\entity\News;
 use yii\helpers\Html;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use app\assets\AdminAsset;
-use app\models\entity\support\Tickets;
+use app\modules\support\models\entity\Tickets;
 use app\modules\user\models\entity\User;
 use app\widgets\notification\Alert;
 use app\modules\stock\models\entity\Stocks;
@@ -23,7 +23,7 @@ use app\models\entity\Promo;
 use app\modules\vendors\models\entity\VendorGroup;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\geo\models\entity\Geo;
-use app\models\entity\ShortLinks;
+use app\modules\short_link\models\entity\ShortLinks;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\entity\Informers;

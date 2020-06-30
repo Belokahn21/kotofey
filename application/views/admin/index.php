@@ -12,7 +12,7 @@ use app\modules\user\models\entity\User;
 use app\modules\search\models\entity\SearchQuery;
 use app\models\tool\statistic\OrderStatistic;
 use app\models\tool\statistic\ProductStatistic;
-use app\models\entity\ProductSync;
+use app\modules\catalog\models\entity\ProductSync;
 
 /* @var $this yii\web\View
  * @var $last_search \app\modules\search\models\entity\SearchQuery[]

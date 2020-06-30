@@ -1,8 +1,5 @@
 <?php
 
-use yii\helpers\ArrayHelper;
-use app\modules\vendors\models\entity\VendorGroup;
-
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">

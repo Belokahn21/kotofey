@@ -6,12 +6,12 @@ use app\models\entity\Auth;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
 use app\modules\delivery\models\entity\Delivery;
-use app\models\entity\Favorite;
+use app\modules\favorite\models\entity\Favorite;
 use app\modules\geo\models\entity\Geo;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\order\models\entity\Order;
-use app\models\entity\OrderBilling;
-use app\models\entity\OrderDate;
+use app\modules\order\models\entity\OrderBilling;
+use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\news\models\entity\News;
 use app\modules\news\models\entity\NewsCategory;
@@ -20,18 +20,13 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\models\entity\Promo;
-use app\models\entity\ShortLinks;
+use app\modules\short_link\models\entity\ShortLinks;
 use app\models\entity\SiteReviews;
-use app\models\entity\support\SupportCategory;
-use app\models\entity\support\SupportMessage;
-use app\models\entity\support\Tickets;
-use app\models\entity\user\Billing;
+use app\modules\user\models\entity\Billing;
 use app\models\entity\UserResetPassword;
-use app\models\entity\Vacancy;
+use app\modules\vacancy\models\entity\Vacancy;
 use app\models\forms\CatalogFilter;
-use app\models\forms\DiscountForm;
-use app\models\forms\PasswordRestoreForm;
-use app\models\services\DeliveryTimeService;
+use app\modules\user\models\form\PasswordRestoreForm;
 use app\models\services\ReferalService;
 use app\models\tool\Debug;
 use app\models\tool\seo\Attributes;
@@ -374,238 +369,6 @@ class SiteController extends Controller
         Attributes::metaDescription('Корзина товаров в интернет магазине Котофей');
         Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
         return $this->render('basket');
-    }
-
-    public function actionCheckout()
-    {
-        $delivery = Delivery::find()->where(['active' => 1])->all();
-        $payment = Payment::find()->where(['active' => 1])->all();
-        $basket = new Basket();
-        $discount_model = new DiscountForm();
-        $order_date = new OrderDate();
-        $db = Yii::$app->db;
-        $delivery_time = new DeliveryTimeService();
-
-        if ($basket->isEmpty()) {
-            return $this->redirect("/");
-        }
-
-        if (\Yii::$app->user->isGuest) {
-            $order = new Order();
-            $user = new User(['scenario' => User::SCENARIO_CHECKOUT]);
-            $billing = new Billing();
-            $items = new OrdersItems();
-
-            // форма отправлена
-            if (\Yii::$app->request->isPost) {
-
-                // validate for ajax request
-                if (Yii::$app->request->isAjax && $user->load(Yii::$app->request->post())) {
-                    Yii::$app->response->format = Response::FORMAT_JSON;
-                    return ActiveForm::validate($user);
-                }
-
-
-                $transaction = $db->beginTransaction();
-                if ($user->load(Yii::$app->request->post()) && $user->validate()) {
-                    $user->setPassword($user->password);
-                    if ($user->save() === false) {
-                        $transaction->rollBack();
-                        Alert::setErrorNotify(print_r($user->getErrors(), true));
-                        return $this->refresh();
-                    }
-                } else {
-                    Alert::setErrorNotify(Debug::modelErrors($user));
-                    return $this->refresh();
-                }
-
-                if ($billing->load(Yii::$app->request->post())) {
-                    $billing->user_id = $user->id;
-                    if ($billing->validate()) {
-                        if ($billing->save() === false) {
-                            $transaction->rollBack();
-                            Alert::setErrorNotify(Debug::modelErrors($billing));
-                            return $this->refresh();
-                        }
-                    }
-                } else {
-                    Alert::setErrorNotify(Debug::modelErrors($billing));
-                    return $this->refresh();
-                }
-
-                Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration']);
-
-
-                $order->user_id = $user->id;
-                if ($order->load(Yii::$app->request->post()) or $order->validate()) {
-                    if ($order->save() === false) {
-                        $transaction->rollBack();
-                        Alert::setErrorNotify(Debug::modelErrors($order));
-                        return $this->refresh();
-                    }
-                } else {
-                    Alert::setErrorNotify(Debug::modelErrors($order));
-                    return $this->refresh();
-                }
-
-                $order_date->order_id = $order->id;
-                if ($order_date->load(Yii::$app->request->post())) {
-                    if ($order_date->validate()) {
-                        if (!$order_date->save()) {
-                            $transaction->rollBack();
-                            return $this->refresh();
-                        }
-                    }
-                }
-
-                $order_billing = new OrderBilling();
-                $order_billing->user_billing_id = $billing->id;
-                $order_billing->order_id = $order->id;
-                if ($order_billing->validate()) {
-                    if (!$order_billing->save()) {
-                        $transaction->rollBack();
-                        return $this->refresh();
-                    }
-                } else {
-                    Alert::setErrorNotify('Ошибка создания заказа');
-                    $transaction->rollBack();
-                    return $this->refresh();
-                }
-
-                $items->order_id = $order->id;
-                $items->usePromoCode($order->promo_code);
-                if ($items->saveItems() === false) {
-                    $transaction->rollBack();
-                    Alert::setErrorNotify(Debug::modelErrors($items));
-                    return $this->refresh();
-                }
-
-                Basket::clear();
-                unset($_COOKIE['order']);
-                Alert::setSuccessNotify("Заказ успешно создан");
-                $transaction->commit();
-                return $this->redirect('/');
-            }
-
-            return $this->render('checkout', [
-                'discount_model' => $discount_model,
-                'user' => $user,
-                'billing' => $billing,
-                'order' => $order,
-                'delivery' => $delivery,
-                'payment' => $payment,
-                'delivery_time' => $delivery_time,
-                'order_date' => $order_date,
-                'billing_list' => []
-            ]);
-        } else {
-            $order = new Order();
-            $items = new OrdersItems();
-            $order_billing = new OrderBilling();
-            $user = User::findOne(Yii::$app->user->id);
-            $user->scenario = User::SCENARIO_UPDATE;
-            $billing = new Billing();
-            $billing_list = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
-
-            if (\Yii::$app->request->isPost) {
-
-                // validate for ajax request
-                if (Yii::$app->request->isAjax && $order->load(Yii::$app->request->post())) {
-                    Yii::$app->response->format = Response::FORMAT_JSON;
-                    return ActiveForm::validate($order);
-                }
-
-                $transaction = $db->beginTransaction();
-                if ($billing->load(Yii::$app->request->post())) {
-                    $billing->user_id = $user->id;
-                    if ($billing->validate()) {
-                        if ($billing->save()) {
-                            $order_billing->user_billing_id = $billing->id;
-                        } else {
-                            $transaction->rollBack();
-                            Alert::setErrorNotify('Ошибка создания заказа #1');
-                            return $this->refresh();
-                        }
-                    }
-                }
-
-                if ($discount_model->load(Yii::$app->request->post())) {
-                    if ($discount_model->validate()) {
-                        if ($discount_model->calc($order, 'promo_code') === false) {
-                            $transaction->rollBack();
-                        }
-                    }
-                }
-
-                $order->user_id = $user->id;
-                if ($order->load(Yii::$app->request->post()) or $order->validate()) {
-                    if ($order->save() === false) {
-                        $transaction->rollBack();
-                        Alert::setErrorNotify(Debug::modelErrors($order));
-                        return $this->refresh();
-                    }
-
-                    $order_billing->order_id = $order->id;
-                    if ($order_billing->validate()) {
-                        if (!$order_billing->save()) {
-                            $transaction->rollBack();
-                            Alert::setErrorNotify('Ошибка #2 при создаии заказа');
-                            return $this->refresh();
-                        }
-                    }
-                } else {
-                    Alert::setErrorNotify(Debug::modelErrors($order));
-                    return $this->refresh();
-                }
-
-                $order_date->order_id = $order->id;
-                if ($order_date->load(Yii::$app->request->post())) {
-                    if ($order_date->validate()) {
-                        if (!$order_date->save()) {
-                            $transaction->rollBack();
-                            return $this->refresh();
-                        }
-                    }
-                }
-
-                if ($order->select_billing) {
-                    $order_billing = new OrderBilling();
-                    $order_billing->user_billing_id = $order->select_billing;
-                    $order_billing->order_id = $order->id;
-                    if ($order_billing->validate()) {
-                        if (!$order_billing->save()) {
-                            $transaction->rollBack();
-                        }
-                    }
-                }
-
-                $items->order_id = $order->id;
-                $items->usePromoCode($order->promo_code);
-                if ($items->saveItems() === false) {
-                    $transaction->rollBack();
-                    Alert::setErrorNotify(Debug::modelErrors($items));
-                    return $this->refresh();
-                }
-
-                Basket::clear();
-                unset($_COOKIE['order']);
-                Alert::setSuccessNotify("Заказ успешно создан создан");
-                $transaction->commit();
-                return $this->redirect('/');
-            }
-
-            return $this->render('checkout', [
-                'discount_model' => $discount_model,
-                'user' => $user,
-                'billing' => $billing,
-                'order' => $order,
-                'delivery' => $delivery,
-                'payment' => $payment,
-                'delivery_time' => $delivery_time,
-                'order_date' => $order_date,
-                'billing_list' => $billing_list
-            ]);
-        }
     }
 
     public function actionProfile($id = null)

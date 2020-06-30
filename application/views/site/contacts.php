@@ -2,7 +2,7 @@
 /* @var $this yii\web\View */
 
 use app\models\tool\seo\Title;
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use yii\helpers\Url;
 
 $this->title = Title::showTitle("Контакты");

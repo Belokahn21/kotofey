@@ -2,7 +2,7 @@
 
 namespace app\modules\order\controllers;
 
-use app\models\entity\SiteSettings;
+use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\statistic\OrderStatistic;
 use app\modules\order\models\search\OrderSearchForm;

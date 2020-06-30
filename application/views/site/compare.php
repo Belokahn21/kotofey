@@ -2,7 +2,7 @@
 
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\modules\catalog\models\entity\ProductProperties;
-use app\models\entity\Compare;
+use app\modules\compare\models\entity\Compare;
 use app\models\tool\seo\Title;
 
 /* @var $this \yii\web\View */

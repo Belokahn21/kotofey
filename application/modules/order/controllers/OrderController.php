@@ -4,7 +4,7 @@ namespace app\modules\order\controllers;
 
 
 use app\modules\basket\models\entity\Basket;
-use app\models\entity\OrderDate;
+use app\modules\order\models\entity\OrderDate;
 use app\modules\payment\models\entity\Payment;
 use app\models\services\DeliveryTimeService;
 use app\modules\delivery\models\entity\Delivery;

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\helpers\DiscountHelper;
+use app\modules\bonus\models\helper\DiscountHelper;
 use app\widgets\product_reviews\ProductReviewsWidget;
 use app\modules\basket\models\entity\Basket;
 use app\models\tool\Price;
@@ -9,7 +9,7 @@ use app\models\tool\Currency;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\widgets\fast_buy\FastBuyWidget;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\models\entity\Favorite;
+use app\modules\favorite\models\entity\Favorite;
 use yii\helpers\Json;
 use app\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\Product;

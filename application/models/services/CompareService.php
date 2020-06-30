@@ -3,7 +3,7 @@
 namespace app\models\services;
 
 
-use app\models\entity\Compare;
+use app\modules\compare\models\entity\Compare;
 
 class CompareService
 {
