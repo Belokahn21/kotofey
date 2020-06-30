@@ -5,10 +5,6 @@ use app\modules\basket\models\entity\Basket;
 
 /* @var $model \app\modules\catalog\models\entity\Product */
 ?>
-<?php
-echo $model->name . "<br>";
-?>
-<?php /*
  <div class="mini-catalog__item swiper-slide">
 	<?php if (!empty($model->image) and is_file(Yii::getAlias('@webroot/upload/') . $model->image)): ?>
         <img class="mini-catalog__image catalog-list__image" src="/upload/<?= $model->image; ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
@@ -57,4 +53,3 @@ echo $model->name . "<br>";
         </div>
     </div>
 </div>
- */ ?>
