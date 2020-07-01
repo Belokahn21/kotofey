@@ -50,6 +50,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 <?= Alert::widget([
     'template' => 'backend'
 ]); ?>
+<div class=".left-side-react"></div>
 <aside class="left-sidebar">
     <button class="switch-menu">Меню</button>
     <nav class="dashboard-left-sidebar" data-show="false">
@@ -177,9 +178,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
         </div>
     </nav>
 </aside>
-<div class="main">
     <?= $content; ?>
-</div>
 <?php $this->endBody() ?>
 </body>
 </html>
