@@ -133,7 +133,7 @@ class OrderHelper
 		return $out_summ;
 	}
 
-	public static function stockControl(Order $model)
+	public static function minusStockCount(Order $model, $isMinus = true)
 	{
 		$items = OrdersItems::find()->where(['order_id' => $model->id])->all();
 
@@ -144,19 +144,27 @@ class OrderHelper
 		/* @var $item OrdersItems */
 		foreach ($items as $item) {
 
-			if (!$item->product) {
+			$product = Product::findOne($item->product->id);
+
+			if (!$product) {
 				continue;
 			}
 
-			$item->product->scenario = 'update';
+			$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-			$item->product->count -= $item->count;
-
-			if (!$item->product->validate()) {
-				print_r($item->product->getErrors());
+			if ($isMinus) {
+				if ($product->count > 0 && $product->count - $item->count >= 0) {
+					$product->count -= $item->count;
+				}
+			} else {
+				$product->count += $item->count;
 			}
 
-			return $item->product->update();
+			if (!$product->validate()) {
+				print_r($product->getErrors());
+			}
+
+			return $product->update();
 		}
 
 		return true;

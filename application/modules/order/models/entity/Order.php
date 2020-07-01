@@ -55,6 +55,8 @@ class Order extends ActiveRecord
 	public $product_id;
 	public $is_update;
 	public $select_billing;
+	public $minusStock;
+	public $plusStock;
 
 	public static function tableName()
 	{
@@ -64,9 +66,9 @@ class Order extends ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_DEFAULT => ['email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CUSTOM => ['email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CLIENT_BUY => ['email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_DEFAULT => ['minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_CUSTOM => ['minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_CLIENT_BUY => ['minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
 		];
 	}
 
@@ -93,7 +95,7 @@ class Order extends ActiveRecord
 
 			[['is_paid', 'is_cancel'], 'default', 'value' => false],
 
-			[['is_cancel', 'is_close'], 'boolean'],
+			[['is_cancel', 'is_close', 'minusStock', 'plusStock'], 'boolean'],
 
 			['email', 'email'],
 			[['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
@@ -128,16 +130,13 @@ class Order extends ActiveRecord
 
 	public function afterSave($insert, $changedAttributes)
 	{
-		if ($this->is_update) {
-
-			if ($this->is_paid && $this->is_close) {
-			}
-
-			OrderHelper::stockControl($this);
-
-			$this->update();
+		if ($this->minusStock) {
+			OrderHelper::minusStockCount($this);
 		}
 
+		if ($this->plusStock) {
+			OrderHelper::minusStockCount($this, false);
+		}
 
 		return parent::afterSave($insert, $changedAttributes);
 	}
@@ -175,6 +174,8 @@ class Order extends ActiveRecord
 			'street' => 'Улица',
 			'number_home' => 'Дом',
 			'number_appartament' => 'Квартира',
+			'minusStock' => 'Списать товары',
+			'plusStock' => 'Вернуть товары',
 		];
 	}
 
