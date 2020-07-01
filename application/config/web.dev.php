@@ -72,144 +72,81 @@ $config = [
 			'viewPath' => '@app/mail',
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
-				'host' => 'smtp.yandex.ru',
-				'username' => 'web-plast@yandex.ru',
+				'host' => 'smtp.timeweb.ru',
+				'username' => 'sale@kotofey.store',
 				'password' => '123qweR%',
-				'port' => '465',
-				'encryption' => 'SSL',
-			],
-			// send all mails to a file by default. You have to set
-			// 'useFileTransport' to false and configure a transport
-			// for the mailer to send real emails.
-		],
-		'log' => [
-			'traceLevel' => YII_DEBUG ? 3 : 0,
-			'targets' => [
-				[
-					'class' => 'yii\log\FileTarget',
-					'levels' => ['error', 'warning'],
-					'categories' => ['yii\swiftmailer\Logger::add'],
-				],
-			],
-		],
-		'db' => $db,
-		'urlManager' => [
-			'suffix' => '/',
-			'enablePrettyUrl' => true,
-			'showScriptName' => false,
-			'enableStrictParsing' => false,
-			'rules' => [
-				'order' => 'order/order/index',
-				'admin/<module>/<controller>/' => '<module>/<controller>/index',
-				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
-				'bot/vk/index' => 'bot/vk/index',
-				'rest/product/create' => 'rest/product/create',
-				'rest/product/get/<id:(\d+)>' => 'rest/product/get',
-				'rest/category/three' => 'rest/category/three',
-				'market' => 'yandex/catalog/export',
-				'gii' => 'gii',
-				'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
-				'<controller:(admin|ajax)>/' => '<controller>/index',
-				'<controller:(admin|ajax)>' => '<controller>/<action>',
-				'<controller:ajax>/<action>/<product_id:\d+>' => '<controller>/<action>',
-				'<controller:ajax>/<action>/<product_id:\d+>/<count:\d+>' => '<controller>/<action>',
-				'<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
-				'<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
-				'<action>' => 'site/<action>',
-				'<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
-			]
-		],
-	],
-	'modules' => [
-		'promo' => [
-			'class' => 'app\modules\promo\Module',
-		],
-		'yandex' => [
-			'class' => 'app\modules\yandex\Module',
-		],
-		'rest' => [
-			'class' => 'app\modules\rest\Module',
-		],
-		'bot' => [
-			'class' => 'app\modules\bot\Module',
-		],
-		'catalog' => [
-			'class' => 'app\modules\catalog\Module',
-		],
-		'feed' => [
-			'class' => 'app\modules\feed\Module',
-		],
-		'order' => [
-			'class' => 'app\modules\order\Module',
-		],
-		'content' => [
-			'class' => 'app\modules\content\Module',
-		],
-		'delivery' => [
-			'class' => 'app\modules\delivery\Module',
-		],
-		'payment' => [
-			'class' => 'app\modules\payment\Module',
-		],
-		'news' => [
-			'class' => 'app\modules\news\Module',
-		],
-		'stock' => [
-			'class' => 'app\modules\stock\Module',
-		],
-		'vendors' => [
-			'class' => 'app\modules\vendors\Module',
-		],
-		'geo' => [
-			'class' => 'app\modules\geo\Module',
-		],
-		'support' => [
-			'class' => 'app\modules\support\Module',
-		],
-		'user' => [
-			'class' => 'app\modules\user\Module',
-		],
-		'settings' => [
-			'class' => 'app\modules\settings\Module',
-		],
-		'short_link' => [
-			'class' => 'app\modules\short_link\Module',
-		],
-		'vacancy' => [
-			'class' => 'app\modules\vacancy\Module',
-		],
-		'basket' => [
-			'class' => 'app\modules\basket\Module',
-		],
-		'search' => [
-			'class' => 'app\modules\search\Module',
-		],
-		'pet' => [
-			'class' => 'app\modules\pet\Module',
-		],
-		'subscribe' => [
-			'class' => 'app\modules\subscribe\Module',
-		],
-		'site_settings' => [
-			'class' => 'app\modules\site_settings\Module',
-		],
-		'todo' => [
-			'class' => 'app\modules\todo\Module',
-		],
-		'bonus' => [
-			'class' => 'app\modules\bonus\Module',
-		],
-		'compare' => [
-			'class' => 'app\modules\compare\Module',
-		],
-		'favorite' => [
-			'class' => 'app\modules\favorite\Module',
-		],
-		'rbac' => [
-			'class' => 'app\modules\rbac\Module',
-		],
-	],
-	'params' => $params,
+//				'port' => '465',
+//				'encryption' => 'tls',
+            ],
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+        ],
+        'log' => [
+            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'targets' => [
+                [
+                    'class' => 'yii\log\FileTarget',
+                    'levels' => ['error', 'warning'],
+                    'categories' => ['yii\swiftmailer\Logger::add'],
+                ],
+            ],
+        ],
+        'db' => $db,
+        'urlManager' => [
+            'suffix' => '/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => false,
+            'rules' => [
+                'GET rest/product/get' => 'rest/product/get',
+                'admin/<module>/<controller>/' => '<module>/<controller>/index',
+                'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+                'bot/vk/index' => 'bot/vk/index',
+                'market' => 'yandex/catalog/export',
+                'gii' => 'gii',
+                'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
+                '<controller:(admin|ajax)>/' => '<controller>/index',
+                '<controller:(admin|ajax)>' => '<controller>/<action>',
+                '<controller:ajax>/<action>/<product_id:\d+>' => '<controller>/<action>',
+                '<controller:ajax>/<action>/<product_id:\d+>/<count:\d+>' => '<controller>/<action>',
+                '<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
+                '<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
+                '<action>' => 'site/<action>',
+                '<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
+//                [
+//                    'class' => 'yii\rest\UrlRule',
+//                    'controller' => 'rest/product'
+//                ]
+
+            ]
+        ],
+    ],
+    'modules' => [
+        'promo' => [
+            'class' => 'app\modules\promo\Module',
+        ],
+        'yandex' => [
+            'class' => 'app\modules\yandex\Module',
+        ],
+        'rest' => [
+            'basePath' => '@app/modules/rest',
+            'class' => 'app\modules\rest\Module',
+        ],
+        'bot' => [
+            'class' => 'app\modules\bot\Module',
+        ],
+        'catalog' => [
+            'class' => 'app\modules\catalog\Module',
+        ],
+        'feed' => [
+            'class' => 'app\modules\feed\Module',
+        ],
+        'order' => [
+            'class' => 'app\modules\order\Module',
+        ],
+    ],
+    'params' => $params,
 ];
 
 if (YII_ENV_DEV) {

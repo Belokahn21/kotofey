@@ -1,0 +1,40 @@
+.left-side-react {
+  float: left;
+  width: 20%;
+  height: 100%;
+  min-height: 100%;
+  background: $main-dark-color;
+}
+
+.left-side {
+  width: 100%;
+
+  &-container {
+    width: 100%;
+    @media (max-width: 414px) {
+      &.is-active {
+        display: block;
+      }
+    }
+  }
+
+  @media(max-width: 414px) {
+    width: 100%;
+    display: none;
+  }
+}
+
+.button-toggle-sidebar {
+  display: none;
+  padding: 10px 0;
+  outline: none !important;
+  background: black;
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 0;
+
+  @media(max-width: 414px) {
+    display: block;
+  }
+}

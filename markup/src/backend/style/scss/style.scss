@@ -1,115 +1,23 @@
 @import "modules/init";
-@import "include/general";
-@import "include/form";
-@import "include/buttons";
-@import "include/notify";
-@import "include/colors";
-@import "include/block/month-stat";
-@import "include/block/pagination";
-@import "include/block/set-price";
-@import "include/block/list-feed-products";
-@import "include/block/group-buy";
 
-.show-dashboard {
-  display: none;
-  background: #0b0b0b;
-  color: white;
-  padding: 0.25em 0.5em;
-  border-radius: 0.3em;
-}
+@import "include/variables";
+@import "include/common";
+@import "include/custom";
 
+@import "block/left-sidebar";
+@import "block/search-admin";
+@import "block/menu";
+@import "block/statistic";
+@import "block/statistic-info";
+@import "block/fast-links";
 
-@import "include/left_sidebar";
-@import "include/main";
+/*-----------------------------------------------------------*/
 
+.content {
+  float: left;
+  width: 85%;
 
-@import "include/page/index";
-@import "include/page/catalog";
-
-.green {
-  color: green;
-}
-
-.red {
-  color: red;
-}
-
-.help-block {
-  color: red;
-}
-
-input[type='text'], input[type='password'], select, textarea {
-  &[aria-invalid="false"] {
-    border: 1px green solid;
-  }
-
-  &[aria-invalid="true"] {
-    border: 1px red solid;
-    outline: 0;
-  }
-}
-
-.order-items {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  flex-wrap: wrap;
-
-  &__item {
-    width: 25%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  &__image {
+  @media(max-width: 414px) {
     width: 100%;
-    height: 300px;
-    object-fit: contain;
-  }
-
-  &__title {
-    text-align: center;
-    font-weight: bold;
-    margin: 5px 0;
-    height: 40px;
   }
 }
-
-.product-attrs {
-  list-style: none;
-  margin: 5px 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-
-  &__item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-  }
-
-  &__item-key {
-    width: 50%;
-    padding: 0 5px;
-    text-align: right;
-  }
-
-  &__item-value {
-    width: 50%;
-    padding: 0 5px;
-    text-align: left;
-  }
-}
-
-.orders-items-item {
-  margin: 0 0 20px 0;
-  padding: 25px 0;
-  border-bottom: 1px deepskyblue solid;
-}
-
-
-@import "include/media";

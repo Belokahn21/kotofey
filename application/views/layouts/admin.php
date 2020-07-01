@@ -47,10 +47,13 @@ $user = User::findOne(Yii::$app->user->identity->id);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= Alert::widget([
-    'template' => 'backend'
-]); ?>
-<aside class="left-sidebar">
+<div class="page-container">
+    <?= Alert::widget([
+        'template' => 'backend'
+    ]); ?>
+    <div class="left-side-react"></div>
+    <?php /*
+ <aside class="left-sidebar">
     <button class="switch-menu">Меню</button>
     <nav class="dashboard-left-sidebar" data-show="false">
         <div class="dashboard-left-sidebar__content">
@@ -173,8 +176,11 @@ $user = User::findOne(Yii::$app->user->identity->id);
         </div>
     </nav>
 </aside>
-<div class="main">
-    <?= $content; ?>
+*/ ?>
+
+    <div class="content">
+        <?= $content; ?>
+    </div>
 </div>
 <?php $this->endBody() ?>
 </body>

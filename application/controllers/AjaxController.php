@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-use app\modules\settings\models\helpers\MarkupHelpers;
-use Yii;
 use app\modules\basket\models\entity\Basket;
 use app\modules\compare\models\entity\Compare;
 use app\modules\favorite\models\entity\Favorite;
@@ -404,22 +402,5 @@ class AjaxController extends Controller
         }
 
         return Json::encode($response);
-    }
-
-    public function actionSaveCookieDiscount()
-    {
-        $data = file_get_contents('php://input');
-        $data = Json::decode($data);
-
-        if (!$data) {
-            return false;
-        }
-
-        $cookies = Yii::$app->response->cookies;
-        $cookies->add(new \yii\web\Cookie([
-            'name' => MarkupHelpers::MARKUP_KEY,
-            'value' => $data['amount'],
-        ]));
-
     }
 }
