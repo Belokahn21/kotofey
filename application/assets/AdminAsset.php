@@ -25,7 +25,7 @@ class AdminAsset extends AssetBundle
     ];
     public $js = [
 		'js/backend-core.min.js',
-        'js/backend.min.js',
+//        'js/backend.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
