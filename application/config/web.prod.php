@@ -208,6 +208,9 @@ $config = [
 		'rbac' => [
 			'class' => 'app\modules\rbac\Module',
 		],
+		'menu' => [
+			'class' => 'app\modules\menu\Module',
+		],
     ],
     'params' => $params,
 ];

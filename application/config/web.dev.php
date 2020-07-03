@@ -145,6 +145,9 @@ $config = [
         'order' => [
             'class' => 'app\modules\order\Module',
         ],
+		'menu' => [
+			'class' => 'app\modules\menu\Module',
+		],
     ],
     'params' => $params,
 ];
