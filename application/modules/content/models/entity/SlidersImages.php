@@ -3,6 +3,7 @@
 namespace app\modules\content\models\entity;
 
 
+use app\modules\content\models\behaviors\DateToIntBehaviors;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -33,6 +34,7 @@ class SlidersImages extends ActiveRecord
     public function behaviors()
     {
         return [
+            DateToIntBehaviors::className(),
             TimestampBehavior::class,
             [
                 'class' => UploadBehavior::class,
@@ -75,34 +77,5 @@ class SlidersImages extends ActiveRecord
             'start_at' => 'Начало показа',
             'end_at' => 'Конец показа',
         ];
-    }
-
-
-    public function afterFind()
-    {
-        if ($this->start_at) {
-            $this->start_at = date('d.m.Y', $this->start_at);
-        }
-
-        if ($this->end_at) {
-            $this->end_at = date('d.m.Y', $this->end_at);
-        }
-        parent::afterFind();
-    }
-
-
-    /**
-     * @return bool
-     */
-    public function beforeValidate()
-    {
-        if ($this->start_at) {
-            $this->start_at = strtotime($this->start_at);
-        }
-
-        if ($this->end_at) {
-            $this->end_at = strtotime($this->end_at);
-        }
-        return parent::beforeValidate();
     }
 }
