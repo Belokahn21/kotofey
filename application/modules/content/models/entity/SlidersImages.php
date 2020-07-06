@@ -59,7 +59,7 @@ class SlidersImages extends ActiveRecord
 
 			[['link', 'text', 'description'], 'string'],
 
-			[['end_at', 'start_at'], 'required'],
+			[['end_at', 'start_at'], 'safe'],
 
 			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
 		];
