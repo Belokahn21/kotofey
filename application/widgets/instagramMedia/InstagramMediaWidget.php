@@ -3,6 +3,7 @@
 namespace app\widgets\instagramMedia;
 
 
+use app\models\tool\Debug;
 use yii\base\Widget;
 
 class InstagramMediaWidget extends Widget
