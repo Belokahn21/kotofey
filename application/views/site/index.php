@@ -11,6 +11,7 @@ use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\widgets\slider\SliderWidget;
 use app\widgets\informers_slider\InformerSliderWidget;
 use app\modules\bonus\models\services\BonusByBuyService;
+use app\widgets\instagramMedia\InstagramMediaWidget;
 
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>
@@ -45,21 +46,6 @@ $this->title = Title::showTitle("Зоотовары для животных в �
 			'use_carousel' => true,
 			'view' => 'square'
 		]) ?>
-
-        <div class="social-wrap">
-            <div class="block-title">Мы в социальных сетях</div>
-            <ul class="social">
-                <li class="social-item">
-                    <div class="social-item__image-wrap">
-                        <img src="/upload/images/inst.png">
-                    </div>
-                    <div class="social-item__title">Профиль Instagramm</div>
-                    <div class="social-item__link">
-                        <a class="social-item__link-a" href="<?= SiteSettings::getValueByCode('insta_link'); ?>" target="_blank">Перейти</a>
-                    </div>
-                </li>
-            </ul>
-        </div>
     </div>
-
+<?= InstagramMediaWidget::widget(); ?>
 <?= LastNewsWidget::widget(); ?>

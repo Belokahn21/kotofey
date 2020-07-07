@@ -280,7 +280,7 @@ gulp.task('img', function () {
 gulp.task('build', gulp.parallel(
     'sass',
     'html',
-    'js',
+    // 'js',
     'img',
     'copy',
     'ecmascript6'
@@ -289,7 +289,7 @@ gulp.task('build', gulp.parallel(
 gulp.task('watch', function () {
     gulp.watch([config.paths.css.watch_backend, config.paths.css.watch_frontend], gulp.series('sass'));
     gulp.watch([config.paths.html.watch_backend, config.paths.html.watch_frontend], gulp.series('html'));
-    gulp.watch([config.paths.js.watch_backend, config.paths.js.watch_frontend], gulp.series('js'));
+    // gulp.watch([config.paths.js.watch_backend, config.paths.js.watch_frontend], gulp.series('js'));
     gulp.watch([config.paths.ecmascript6.watch_backend, config.paths.ecmascript6.watch_frontend], gulp.series('ecmascript6'));
     gulp.watch([config.paths.image.watch_backend, config.paths.image.watch_frontend], gulp.series('img'));
     gulp.watch([config.paths.copy.watch_backend, config.paths.copy.watch_frontend], gulp.series('copy'));

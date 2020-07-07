@@ -8,7 +8,7 @@ use app\modules\catalog\models\entity\ProductPropertiesValues;
 <?php if ($this->beginCache('providers-cache', ['duration' => 3600 * 24 * 7])): ?>
     <div class="companies-wrap">
         <h2 class="homepage-providers__title">В продаже корма для животных известных производителей зоотоваров</h2>
-        <div class="swiper-container">
+        <div class="swiper-container companies-container">
             <ul class="companies swiper-wrapper">
 				<?php foreach ($providers->all() as $provider): ?>
                     <li class="companies__item swiper-slide">
@@ -18,7 +18,7 @@ use app\modules\catalog\models\entity\ProductPropertiesValues;
 				<?php endforeach; ?>
             </ul>
             <!-- Add Pagination -->
-            <div class="swiper-pagination"></div>
+<!--            <div class="companies-swiper-pagination"></div>-->
         </div>
     </div>
 	<?php $this->endCache(); ?>
