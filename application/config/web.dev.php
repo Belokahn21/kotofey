@@ -102,6 +102,7 @@ $config = [
 				'GET rest/product/get' => 'rest/product/get',
 				'GET menu/rest-backend/get' => 'menu/rest-backend/get',
 				'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
+				'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
 				'admin/<module>/<controller>/' => '<module>/<controller>/index',
 				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 				'bot/vk/index' => 'bot/vk/index',
@@ -125,6 +126,9 @@ $config = [
 		],
 	],
 	'modules' => [
+        'statistic' => [
+            'class' => 'app\modules\statistic\Module',
+        ],
 		'promo' => [
 			'class' => 'app\modules\promo\Module',
 		],

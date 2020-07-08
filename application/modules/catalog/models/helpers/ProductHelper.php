@@ -38,4 +38,15 @@ class ProductHelper
 
 		return $out;
 	}
+
+	public static function profitVirtual(array $products)
+	{
+		$out = 0;
+		/* @var $product Product */
+		foreach ($products as $product) {
+			$out += $product->count * $product->price;
+		}
+
+		return $out;
+	}
 }
