@@ -125,4 +125,6 @@ class Statistic extends React.Component {
     }
 }
 
-ReactDom.render(<Statistic/>, document.querySelector('.statistic-wrap'));
+if(document.querySelector('.statistic-wrap')){
+    ReactDom.render(<Statistic/>, document.querySelector('.statistic-wrap'));
+}
