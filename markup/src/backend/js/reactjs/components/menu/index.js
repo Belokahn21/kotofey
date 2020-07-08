@@ -1,15 +1,42 @@
 import React from 'react';
+import config from '../../config';
 
 class Menu extends React.Component {
+	constructor() {
+		super();
+		const url = config.restMenuGet;
+
+		this.state = {
+			items: []
+		}
+
+		fetch(url)
+			.then(response => response.json())
+			.then(json => {
+				this.setState({
+					items: JSON.parse(json),
+				});
+			});
+	}
+
 	render() {
-		return (
-			<ul className="menu">
-				<li className="menu__item"><a className="menu__link" href="/"><span>Сайт</span><span className="menu__icon"><i className="fas fa-globe-americas"></i></span></a></li>
-				<li className="menu__item"><a className="menu__link" href="/"><span>Рабочий стол</span><span className="menu__icon"><i className="fas fas fa-tachometer-alt"></i></span></a></li>
-				<li className="menu__item"><a className="menu__link" href="/"><span>Магазин</span><span className="menu__icon"><i className="fas fa-store"></i></span></a></li>
-			</ul>
-		)
+		if (this.state.items) {
+			return (
+				<ul className="menu">
+					{this.state.items.map((item) => {
+						return <li className="menu__item">
+							<a className="menu__link" href={item.href}>
+								<span>{item.title}</span><span className="menu__icon"><i className="fas fa-globe-americas"></i></span>
+							</a>
+						</li>
+					})}
+				</ul>
+			);
+		} else {
+			return null;
+		}
 	}
 }
 
-module.exports = Menu;
+module
+	.exports = Menu;

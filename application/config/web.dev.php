@@ -100,6 +100,7 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 'GET rest/product/get' => 'rest/product/get',
+                'GET menu/rest-backend/get' => 'menu/rest-backend/get',
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
                 'bot/vk/index' => 'bot/vk/index',

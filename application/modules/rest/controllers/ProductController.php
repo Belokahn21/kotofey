@@ -2,7 +2,7 @@
 
 namespace app\modules\rest\controllers;
 
-use app\models\tool\Debug;
+use app\modules\catalog\models\entity\Product;
 use yii\helpers\Json;
 use yii\rest\Controller;
 
