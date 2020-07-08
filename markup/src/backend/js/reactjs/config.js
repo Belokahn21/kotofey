@@ -1,5 +1,13 @@
-module.exports = {
-	restMenuGet: 'http://local.kotofey.store/menu/rest-backend/get/',
-	restMenuFastGet: 'http://local.kotofey.store/menu_fast/rest-backend/get/',
-	restSearchGet: "http://local.kotofey.store/rest/product/get/"
-};
+// if (location.hostname === "localhost" || location.hostname === "127.0.0.1") {
+// 	module.exports = {
+// 		restMenuGet: 'http://local.kotofey.store/menu/rest-backend/get/',
+// 		restMenuFastGet: 'http://local.kotofey.store/menu_fast/rest-backend/get/',
+// 		restSearchGet: "http://local.kotofey.store/rest/product/get/"
+// 	};
+// } else {
+	module.exports = {
+		restMenuGet: '/menu/rest-backend/get/',
+		restMenuFastGet: '/menu_fast/rest-backend/get/',
+		restSearchGet: "/rest/product/get/"
+	};
+// }

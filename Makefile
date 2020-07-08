@@ -26,6 +26,3 @@ composer-update:
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/order/init/migrations --interactive=0
-
-deploy:
-	git pull && rm -rf application/runtime/cache
