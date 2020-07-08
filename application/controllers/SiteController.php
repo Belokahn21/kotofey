@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\modules\support\models\entity\SupportCategory;
 use app\modules\user\models\entity\Auth;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;

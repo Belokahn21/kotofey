@@ -3,16 +3,11 @@
 namespace app\modules\user\models\entity;
 
 use app\modules\bonus\models\entity\Discount;
-use app\models\entity\NotSupportedException;
-use app\modules\user\models\entity\Billing;
-use app\modules\user\models\entity\UsersReferal;
 use app\modules\rbac\models\entity\AuthAssignment;
 use app\modules\rbac\models\entity\AuthItem;
-use app\models\tool\Debug;
 use mohorev\file\UploadBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
-use yii\data\ActiveDataProvider;
 use yii\web\IdentityInterface;
 
 /**
