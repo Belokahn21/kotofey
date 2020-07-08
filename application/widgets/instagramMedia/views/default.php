@@ -8,9 +8,12 @@
     <div class="swiper-container swiper-instagram-container">
         <div class="swiper-wrapper">
 			<?php foreach ($media->data as $mediaItem): ?>
+				<?php $title = @($mediaItem->caption ? \yii\helpers\StringHelper::truncate($mediaItem->caption, 40, '...') : "Без названия"); ?>
                 <div class="swiper-slide swiper-instagram__slide">
                     <img class="swiper-instagram__image" src="<?= $mediaItem->media_url; ?>">
-                    <a class="swiper-instagram__link" href="<?= $mediaItem->permalink; ?>" target="_blank"><?= @($mediaItem->caption ? $mediaItem->caption : "Без названия"); ?></a>
+                    <a title="<?= $title; ?>" class="swiper-instagram__link" href="<?= $mediaItem->permalink; ?>" target="_blank">
+						<?= $title; ?>
+                    </a>
                 </div>
 			<?php endforeach; ?>
         </div>
