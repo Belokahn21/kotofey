@@ -56,7 +56,7 @@ class RestBackendController extends Controller
                 ]
             ],
             [
-                'icon'=>'fa-clipboard',
+                'icon'=>'fa-cubes',
                 'data'=>[
                     [
                         'title'=>'Товаров',
