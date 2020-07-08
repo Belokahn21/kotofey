@@ -1,4 +1,5 @@
 #stockOutTitle {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -47,11 +48,9 @@
 
   &__key {
     flex: 3 1 0;
-    padding: 5px;
   }
 
   &__value {
     flex: 1 1 0;
-    padding: 5px;
   }
 }
