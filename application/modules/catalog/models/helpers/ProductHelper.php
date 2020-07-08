@@ -27,4 +27,15 @@ class ProductHelper
 	{
 		return ($model->discount_price ? $model->discount_price : $model->price);
 	}
+
+	public static function purchaseVirtual(array $products)
+	{
+		$out = 0;
+		/* @var $product Product */
+		foreach ($products as $product) {
+			$out += $product->count * $product->purchase;
+		}
+
+		return $out;
+	}
 }
