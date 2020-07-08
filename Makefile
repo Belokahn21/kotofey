@@ -10,10 +10,12 @@ push:
 init-dev:
 	cp application/web/index.dev.php application/web/index.php
 	cp application/config/web.dev.php application/config/web.php
+	cp markup/src/backend/js/reactjs/config.js.dev markup/src/backend/js/reactjs/config.js
 
 init-prod:
 	cp application/web/index.prod.php application/web/index.php
 	cp application/config/web.prod.php application/config/web.php
+	cp markup/src/backend/js/reactjs/config.js.prod markup/src/backend/js/reactjs/config.js
 
 composer-install:
 	cd application && composer install
