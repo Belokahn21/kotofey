@@ -23,10 +23,13 @@ class Menu extends React.Component {
 		if (this.state.items) {
 			return (
 				<ul className="menu">
-					{this.state.items.map((item) => {
-						return <li className="menu__item">
-							<a className="menu__link" href={item.href}>
-								<span>{item.title}</span><span className="menu__icon"><i className="fas fa-globe-americas"></i></span>
+					{this.state.items.map((element, index) => {
+						return <li className="menu__item" key={index}>
+							<a className="menu__link" href={element.href}>
+								<span>{element.title}</span>
+								<span className="menu__icon">
+									<i className="fas fa-globe-americas"></i>
+								</span>
 							</a>
 						</li>
 					})}

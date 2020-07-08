@@ -1,5 +1,6 @@
 import React from 'react';
 import Result from './result';
+import config from '../../config';
 
 class Search extends React.Component {
 	constructor() {
@@ -18,7 +19,7 @@ class Search extends React.Component {
 		let elements = [];
 		let value = e.target.value;
 		let timerTime = 3000;
-		const url = "http://local.kotofey.store/rest/product/get/?text=" + value;
+		const url = config.restSearchGet + "?text=" + value;
 
 		if (this.timerId) {
 			clearTimeout(this.timerId);
