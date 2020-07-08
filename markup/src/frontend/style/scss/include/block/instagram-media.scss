@@ -6,9 +6,14 @@
   &-container {
   }
 
-  &__image {
+  &__image-wrap {
     width: 100%;
     height: 70%;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 
