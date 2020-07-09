@@ -103,6 +103,7 @@ $config = [
 				'GET menu/rest-backend/get' => 'menu/rest-backend/get',
 				'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
 				'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
+				'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
 				'admin/<module>/<controller>/' => '<module>/<controller>/index',
 				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 				'bot/vk/index' => 'bot/vk/index',

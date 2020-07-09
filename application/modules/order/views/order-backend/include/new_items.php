@@ -16,7 +16,7 @@
             <?= $form->field($itemsModel, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
         </div>
         <div class="col-sm-1">
-            <?= $form->field($itemsModel, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
+            <?= $form->field($itemsModel, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info__pid form-control']); ?>
         </div>
         <div class="col-sm-1">
             <?= $form->field($itemsModel, '[' . $i . ']need_delete')->checkbox(); ?>

@@ -1,8 +1,10 @@
 import '../reactjs/components/sidebar';
 import '../reactjs/components/statistic';
 
-import popper from 'popper.js';
-import bootstrap from 'bootstrap';
+import 'popper.js';
+import 'bootstrap';
+
+import './block/order-load-product';
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {

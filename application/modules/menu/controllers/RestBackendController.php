@@ -4,7 +4,7 @@ namespace app\modules\menu\controllers;
 
 use yii\helpers\Json;
 use yii\helpers\Url;
-use yii\web\Controller;
+use yii\rest\Controller;
 
 class RestBackendController extends Controller
 {
