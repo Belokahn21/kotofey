@@ -74,15 +74,15 @@ class RestBackendController extends Controller
 					],
 				]
 			],
-			[
-				'icon' => 'fa-loop',
-				'data' => [
-					[
-						'title' => 'Запросы',
-						'value' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->all(),
-					],
-				]
-			],
+//			[
+//				'icon' => 'fa-loop',
+//				'data' => [
+//					[
+//						'title' => 'Запросы',
+//						'value' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->all(),
+//					],
+//				]
+//			],
 		];
 		return Json::encode($elements);
 	}
