@@ -5,6 +5,7 @@ import 'popper.js';
 import 'bootstrap';
 
 import './block/order-load-product';
+import './block/notify';
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {

@@ -11,12 +11,14 @@
 @import "block/statistic";
 @import "block/statistic-info";
 @import "block/fast-links";
+@import "block/notify";
 
 /*-----------------------------------------------------------*/
 
 .content {
   float: left;
   width: 85%;
+  padding: 10px;
 
   @media(max-width: 414px) {
     width: 100%;

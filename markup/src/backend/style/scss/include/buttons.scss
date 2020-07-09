@@ -1,12 +1,19 @@
 .btn-main {
   background: deepskyblue;
   color: white;
-  font-size: 18px;
+  font-size: 15px;
   text-transform: uppercase;
   border: 0;
   font-weight: bold;
   padding: 5px 7px;
   margin: 5px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+    color: white;
+    background: rgba(0, 191, 255, 0.7);
+  }
 }
 
 .btn-back {

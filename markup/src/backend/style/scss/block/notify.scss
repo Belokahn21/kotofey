@@ -1,0 +1,22 @@
+.notify {
+  position: fixed;
+  top: 0;
+  right: 0;
+  font-weight: bold;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  padding: 10px;
+  margin: 10px;
+
+  &__text {
+    margin: 0 10px;
+  }
+
+  &.success {
+    background: #00b000;
+    color: white;
+  }
+}
