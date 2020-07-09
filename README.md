@@ -7,8 +7,8 @@
 </p>
 
 Здравствуй. Это репозиторий <a href="https://kotofey.store/" target="_blank">интернет-магазина Котофей</a>. <br>
-Начинка сайта: <br>
+Что под капотом?: <br>
 Фрейм: Yii2 Basic
-React JS
-Node: Gulp+Babel+Sass+Pug
+React JS, около 5% сайта
+Вёрстка: Gulp+Babel+Sass+Pug
 MySQL
