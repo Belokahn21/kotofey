@@ -6,47 +6,32 @@ const parentElements = document.querySelectorAll('.orders-items-item');
 
 
 if (parentElements) {
-	parentElements.forEach((parentElement) => {
-		let handleElement = parentElement.querySelector('.load-product-info__pid');
-		handleElement.addEventListener('keyup', handleInput);
-	});
+    parentElements.forEach((parentElement) => {
+        let handleElement = parentElement.querySelector('.load-product-info__pid');
+        handleElement.addEventListener('keyup', handleInput);
+    });
 }
 
-
 function handleInput(event) {
-	let element = event.target;
-	let parent = event.parentNode;
-	let product;
+    let element = event.target;
+    let parent = element.closest('.orders-items-item');
+    let product_id = element.value;
 
+    getProduct(product_id).then((data) => {
+        let product = JSON.parse(data);
 
-	new Promise((resolve, reject) => {
-		setTimeout(() => {
-			product = getProduct(element.value);
-		}, timeout);
-	});
+        for (const [key, value] of Object.entries(product)) {
 
-	if (typeof product == 'undefined') {
-		return false;
-	}
+            let input = parent.querySelector('.load-product-info__' + key);
 
-	Object.keys(product).forEach((key) => {
-		let input = parent.querySelector('.load-product-info__' + key);
-
-		if (input) {
-			input.value = product[key];
-		}
-	});
+            if (input) {
+                input.value = value;
+            }
+        }
+    });
 }
 
 async function getProduct(product_id) {
-	let promise = new Promise((resolve, reject) => {
-		fetch(config.restCatalogGet + product_id + '/')
-			.then(response => response.json())
-			.then(json => {
-				return JSON.parse(json);
-			});
-	});
-
-	return await promise;
+    const response = await fetch(config.restCatalogGet + product_id + '/');
+    return await response.json();
 }
-

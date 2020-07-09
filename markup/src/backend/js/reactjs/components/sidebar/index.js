@@ -22,6 +22,7 @@ class Sidebar extends React.Component {
 	}
 }
 
-if(document.querySelector('.left-side-react')){
-	ReactDom.render(<Sidebar/>, document.querySelector('.left-side-react'));
+const sidebar = document.querySelector('.left-sidebar-react');
+if(sidebar){
+	ReactDom.render(<Sidebar/>, sidebar);
 }

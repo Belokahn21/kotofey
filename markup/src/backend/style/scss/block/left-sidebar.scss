@@ -1,24 +1,29 @@
-.left-side-react {
-  float: left;
-  width: 20%;
-  background: $main-dark-color;
-}
-
-.left-side {
+.left-sidebar {
   width: 100%;
 
   &-container {
     width: 100%;
+
+    //@media (max-width: 414px) {
+    //
+    //}
     @media (max-width: 414px) {
+      display: none;
+
       &.is-active {
         display: block;
       }
     }
   }
 
-  @media(max-width: 414px) {
-    width: 100%;
-    display: none;
+  &-react {
+    float: left;
+    width: 20%;
+    background: $main-dark-color;
+
+    @media (max-width: 414px) {
+      width: 100%;
+    }
   }
 }
 
