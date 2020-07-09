@@ -25,7 +25,7 @@ function handleInput(event) {
 		}, timeout);
 	});
 
-	if (product instanceof undefined) {
+	if (typeof product == 'undefined') {
 		return false;
 	}
 
