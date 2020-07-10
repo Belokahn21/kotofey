@@ -1,5 +1,5 @@
 <?php
 
-echo \app\widgets\instagramMedia\InstagramMediaWidget::widget();
+echo \app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget::widget();
 
 ?>

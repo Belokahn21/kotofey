@@ -1,0 +1,30 @@
+.instagram {
+  position: relative;
+
+  &-pagination {
+    position: absolute;
+    height: 10px;
+  }
+
+  &__slide {
+    width: 300px;
+    height: 400px;
+    padding: 5px;
+  }
+
+  &__image {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+  &__title {
+    height: 50px;
+    overflow: hidden;
+    color: $main-color;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+}

@@ -115,3 +115,27 @@ var swiperSertificate = new Swiper('.sertificate-container', {
 		prevEl: '.sertificate-button-prev',
 	},
 });
+
+let swiperInstagramContainer = new Swiper('.instagram-container', {
+	slidesPerView: 5,
+	spaceBetween: 25,
+	loop: true,
+	autoplay: {
+		delay: 5000,
+	},
+	pagination: {
+		el: '.instagram-pagination',
+		dynamicBullets: true,
+		clickable: true,
+	},
+	navigation: {
+		nextEl: '.instagram-button-next',
+		prevEl: '.instagram-button-prev',
+	},
+
+	breakpoints: {
+		480: { // when window width is >= 480px
+			slidesPerView: 1,
+		}
+	},
+});

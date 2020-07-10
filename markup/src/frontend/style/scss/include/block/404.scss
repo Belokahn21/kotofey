@@ -13,7 +13,7 @@
     //border: 1px blue solid;
     top: 0;
     position: absolute;
-    color: $main-yellow-color;
+    color: $main-color;
     font-size: 280px;
     line-height: 300px;
   }
@@ -25,7 +25,7 @@
   }
 
   &__link {
-    background: $main-yellow-color;
+    background: $main-color;
     margin: 20px 0;
     color: black;
     border-radius: 15px;

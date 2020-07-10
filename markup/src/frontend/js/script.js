@@ -1,2 +1,0 @@
-//= lib/init
-//= include/init

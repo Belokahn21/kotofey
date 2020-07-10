@@ -4,7 +4,8 @@
   flex-wrap: wrap;
 
   &__discount {
-    background: $main-yellow-color;
+    background: $active-color;
+    color: $text-color;
     border-radius: 50%;
     padding: 30px;
     width: 70px;

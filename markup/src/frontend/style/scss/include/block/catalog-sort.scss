@@ -72,9 +72,10 @@
 }
 
 .catalog-sort__input:checked + .catalog-sort__item {
-  background: $main-yellow-color;
-  border-color: $main-yellow-color;
+  background: $main-color;
+  border-color: $main-color;
   padding-right: 40px;
+  color: $text-color;
 
   & ::after {
     content: "X";

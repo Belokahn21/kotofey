@@ -1,4 +1,6 @@
 .footer {
+  color: $text-color;
+
   &__title {
     font-size: 24px;
     font-weight: 700;
@@ -13,7 +15,7 @@
   }
 
   &-layer-1 {
-    background-color: $main-yellow-color;
+    background-color: $main-color;
     border-radius: 25px;
     padding: 20px 30px;
     display: flex;

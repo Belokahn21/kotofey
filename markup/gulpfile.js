@@ -91,8 +91,8 @@ const config = {
 			build_backend: './build/backend/assets/js/',
 			application_backend: '../application/web/js/',
 
-			src_frontend: './src/frontend/js/ecmascript6/core.js',
-			watch_frontend: './src/frontend/js/ecmascript6/**/*.js',
+			src_frontend: './src/frontend/js/core.js',
+			watch_frontend: './src/frontend/js/**/*.js',
 			build_frontend: './build/frontend/assets/js/',
 			application_frontend: '../application/web/js/'
 

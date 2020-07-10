@@ -11,7 +11,7 @@ use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\widgets\slider\SliderWidget;
 use app\widgets\informers_slider\InformerSliderWidget;
 use app\modules\bonus\models\services\BonusByBuyService;
-use app\widgets\instagramMedia\InstagramMediaWidget;
+use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
 
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>

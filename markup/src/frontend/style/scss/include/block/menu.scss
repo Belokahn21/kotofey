@@ -6,7 +6,7 @@
   padding-left: 155px;
 
   &-wrapper {
-    background: $main-yellow-color;
+    background: $main-color;
     height: 80px;
     margin-top: -20px;
     display: flex;
@@ -25,9 +25,6 @@
     font-size: 18px;
     line-height: 24px;
 
-    &.hamburger {
-      cursor: pointer;
-    }
 
     &:not(:last-child) {
       margin-right: 10px;
@@ -35,17 +32,25 @@
   }
 
   &__link {
-    color: #000000;
+    color: $text-color;
 
     &:hover {
-      color: inherit;
+      color: $text-color;
     }
+  }
+}
+
+.hamburger {
+  cursor: pointer;
+
+  &__icon {
+    filter: invert(99%) sepia(1%) saturate(2499%) hue-rotate(303deg) brightness(113%) contrast(100%);
   }
 }
 
 .menu-full {
   position: absolute;
-  background: $main-yellow-color;
+  background: $main-color;
   width: 100%;
   max-height: 0;
   top: 100%;
@@ -72,16 +77,17 @@
       font-weight: 700;
       font-size: 18px;
       line-height: 36px;
+      color: $text-color;
     }
   }
 }
 
 .block-menu-list {
   &__link {
-    color: black;
+    color: $text-color;
 
     &:hover {
-      color: black;
+      color: $text-color;
     }
   }
 

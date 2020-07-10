@@ -30,8 +30,13 @@
 }
 
 .checkbox-budget:checked + .checkout-form-variants__item {
-  border: 1px $main-yellow-color solid;
-  background-color: $main-yellow-color;
+  border: 1px $active-color solid;
+  background-color: $active-color;
+  color: $text-color;
+
+  img {
+    filter: invert(99%) sepia(1%) saturate(2499%) hue-rotate(303deg) brightness(113%) contrast(100%);
+  }
 }
 
 .checkbox-budget:not(:checked) + .checkout-form-variants__item:hover {
@@ -59,7 +64,7 @@
 }
 
 .checkbox-budget:checked + .checkout-form-variants__item .checkout-form-variants__card::before, .checkbox-budget:not(:checked) + .checkout-form-variants__item .checkout-form-variants__card::before {
-  border: 1px $main-yellow-color solid;
+  border: 1px $main-color solid;
 }
 
 .checkbox-budget:not(:checked) + .checkout-form-variants__item .checkout-form-variants__card::before {

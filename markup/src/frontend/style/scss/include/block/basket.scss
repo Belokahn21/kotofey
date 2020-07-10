@@ -2,6 +2,7 @@
   position: relative;
 
   &__icon {
+    filter: invert(99%) sepia(1%) saturate(2499%) hue-rotate(303deg) brightness(113%) contrast(100%);
   }
 
   &__counter {
@@ -16,11 +17,12 @@
     position: absolute;
     top: -20%;
     right: -60%;
-    background: white;
     text-align: center;
     width: 22px;
     height: 17px;
     border-radius: 50%;
+    background: #fff;
+    color: $main-color;
   }
 }
 

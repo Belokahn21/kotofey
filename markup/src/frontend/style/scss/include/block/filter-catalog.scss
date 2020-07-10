@@ -84,11 +84,11 @@
 
     .irs-bar {
       top: 20px;
-      background: $main-yellow-color;
+      background: $main-color;
     }
 
     .irs-handle {
-      background: $main-yellow-color;
+      background: $main-color;
       border: 0;
       top: 10px
     }
@@ -108,13 +108,13 @@
   }
 
   .noUi-connect {
-    background: $main-yellow-color;
+    background: $main-color;
   }
 
   .noUi-handle {
     border-radius: 50%;
     box-shadow: none;
-    background: $main-yellow-color;
+    background: $main-color;
     border: 0;
     width: 15px;
     height: 15px;
@@ -135,7 +135,8 @@
   }
 
   &__submit {
-    background: $main-yellow-color;
+    background: $main-color;
+    color: $text-color;
     font-weight: 700;
     font-size: 12px;
     padding: 7px 15px;

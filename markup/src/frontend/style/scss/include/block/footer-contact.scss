@@ -2,12 +2,15 @@
   margin-top: 20px;
 
   &__item {
+    img {
+      filter: invert(99%) sepia(1%) saturate(2499%) hue-rotate(303deg) brightness(113%) contrast(100%);
+    }
   }
 
   &__link {
     font-size: 14px;
     line-height: 24px;
-    color: black;
+    color: $text-color;
     font-weight: 400;
 
     &:hover {
@@ -15,7 +18,7 @@
     }
 
     &.address {
-      border-bottom: 1px black solid;
+      border-bottom: 1px $text-color solid;
       text-decoration: none !important;
     }
 

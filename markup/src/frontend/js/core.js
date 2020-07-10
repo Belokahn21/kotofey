@@ -3,6 +3,9 @@ import lightbox from "lightbox2";
 import popover from 'popper.js';
 import bootstrap from 'bootstrap';
 
+// add react js
+// import './react/instagram-media';
+
 import './block/product-calc';
 import './block/mobile-menu';
 import './block/basket';
@@ -16,3 +19,5 @@ import './block/init-range-sliders';
 import './block/init-maskedinput';
 import './block/catalog';
 // import './block/width-debug';
+
+
