@@ -1,0 +1,136 @@
+.vitrine {
+  &-container {
+    margin: 20px 0 40px 0;
+
+    @media (min-width: 414px) {
+      .swiper-pagination {
+        display: none;
+      }
+    }
+
+    .swiper-pagination-bullet-active {
+      background: black;
+    }
+  }
+
+  &-wrapper {
+    @media (max-width: 790px) {
+      padding-bottom: 40px;
+    }
+  }
+
+  &__slide {
+    border: 1px $no-active-color solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    position: relative;
+    padding-bottom: 30px;
+
+    .discount {
+      position: absolute;
+      left: 0;
+      top: 7px;
+      color: black;
+      background: $main-yellow-color;
+      padding: 7%;
+      clip-path: circle(40% at 50% 50%);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .add-basket {
+      &.is-white {
+        background: white;
+        border: 1px black solid;
+      }
+    }
+
+
+
+    &.active, &:hover {
+      border: 1px $main-yellow-color solid;
+
+      .add-basket {
+        background-color: $main-yellow-color;
+        border-color: $main-yellow-color;
+      }
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    text-align: left;
+    color: black;
+    width: 80%;
+  }
+
+  &__properties {
+  }
+
+  &__price {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-content: center;
+    margin: 15px 0;
+
+    .amount {
+      font-size: 36px;
+      line-height: 24px;
+      font-weight: 700;
+    }
+
+    .amount-old {
+      font-size: 24px;
+      line-height: 16px;
+      font-weight: 700;
+      position: relative;
+      margin-top: 5px;
+      margin-right: 10px;
+
+      &:before {
+        position: absolute;
+        content: '';
+        top: 35%;
+        left: 0;
+        background: red;
+        width: 107%;
+        height: 2px;
+      }
+    }
+
+    .rate {
+      font-size: 18px;
+      line-height: 24px;
+      font-weight: 700;
+      margin-left: 10px;
+    }
+  }
+
+  &__button {
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 700;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    border-radius: 25px;
+    border: 1px $no-active-color solid;
+    padding: 5px 20px;
+    margin: 20px 0;
+    cursor: pointer;
+  }
+
+  &__icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 10px;
+  }
+}

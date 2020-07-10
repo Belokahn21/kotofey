@@ -1,0 +1,67 @@
+aside.left-siderbar
+    form.filter-catalog
+        .filter-catalog__title
+            span Подобрать товар
+            span.filter-catalog__arrow.is-active
+                img(src="./assets/images/arrow-left-black.svg")
+        .filter-catalog-container.is-active
+            .filter-catalog__item
+                label.filter-catalog__label(for="js-filter-from") Цена
+                .filter-catalog__input-group
+                    input.filter-catalog__input#js-filter-from(placeholder="100", type="text")
+                    input.filter-catalog__input#js-filter-to(placeholder="999", type="text")
+            .filter-catalog__item
+                input(type="range").filter-catalog__range
+
+            .filter-catalog__item
+                label.filter-catalog__label(for="js-filter-from") Бренд
+                ul.filter-catalog-checkboxes
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Bergauf
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Ceresit
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Dauer
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Holcim
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Unis
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Волма
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Стройбриг
+                    li.filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        | Русеан
+        .filter-catalog__button-group
+            button.filter-catalog__submit(type="submit") Показать
+            button.filter-catalog__reset(type="reset")
+                span.filter-catalog__reset-icon
+                    img(src="./assets/images/reset.png")
+                span Сбросить
+    ul.aside-sub-categories
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Блоки
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Кирпичи
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Утеплитель
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Изоляция
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Сухие смеси
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Фасады
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Водостоки
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Сухие смеси
+        li.aside-sub-categories__item
+            a.aside-sub-categories__link(href="javascript:void(0);") Кирпичи

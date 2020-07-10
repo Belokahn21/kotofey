@@ -1,0 +1,71 @@
+.checkout-form-variants {
+  [type="checkbox"]:checked,
+  [type="checkbox"]:not(:checked),
+  [type="radio"]:checked,
+  [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  @media (max-width: 790px) {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+.checkbox-budget:checked + .checkout-form-variants__item, .checkbox-budget:not(:checked) + .checkout-form-variants__item {
+  position: relative;
+  display: inline-block;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 300ms linear;
+  width: 48%;
+}
+
+.checkbox-budget:not(:checked) + .checkout-form-variants__item {
+}
+
+.checkbox-budget:checked + .checkout-form-variants__item {
+  border: 1px $main-yellow-color solid;
+  background-color: $main-yellow-color;
+}
+
+.checkbox-budget:not(:checked) + .checkout-form-variants__item:hover {
+
+}
+
+.checkbox-budget:checked + .checkout-form-variants__item::before, .checkbox-budget:not(:checked) + .checkout-form-variants__item::before {
+  position: absolute;
+  content: '';
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 4px;
+  background-color: white;
+  z-index: -1;
+}
+
+.checkbox-budget:checked + .checkout-form-variants__item .checkout-form-variants__card, .checkbox-budget:not(:checked) + .checkout-form-variants__item .checkout-form-variants__card {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkbox-budget:checked + .checkout-form-variants__item .checkout-form-variants__card::before, .checkbox-budget:not(:checked) + .checkout-form-variants__item .checkout-form-variants__card::before {
+  border: 1px $main-yellow-color solid;
+}
+
+.checkbox-budget:not(:checked) + .checkout-form-variants__item .checkout-form-variants__card::before {
+  max-height: 0;
+}
+
+.checkbox-budget:checked + .checkout-form-variants__item .checkout-form-variants__card::before {
+  max-height: 100%;
+}

@@ -19,7 +19,8 @@ var gulp = require('gulp'),
 	pug = require('gulp-pug'),
 	notify = require('gulp-notify'),
 	babelify = require('babelify');
-var config = {
+
+const config = {
 	paths: {
 		css: {
 			src_backend: './src/backend/style/scss/*.{sass,scss}',
@@ -61,7 +62,6 @@ var config = {
 			watch_frontend: './src/frontend/js/**/*.js',
 			build_frontend: './build/frontend/assets/js/',
 			application_frontend: '../application/web/js/',
-
 		},
 		image: {
 			src_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
@@ -101,7 +101,7 @@ var config = {
 };
 gulp.task('ecmascript6', function () {
 	return new Promise(function (resolve, reject) {
-		browserify({
+		es.concat(browserify({
 			entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_backend],
 			debug: true
 		})
@@ -127,7 +127,35 @@ gulp.task('ecmascript6', function () {
 			.pipe(gulp.dest(config.paths.ecmascript6.application_backend))
 			.pipe(browserSync.reload({
 				stream: true
-			}))
+			})),
+			browserify({
+				entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_frontend],
+				debug: true
+			})
+				.transform('babelify', {
+					presets: ['@babel/env'],
+					global: true,
+					ignore: [/\/node_modules\/(?!bootstrap\/)/]
+				}).bundle()
+				.pipe(source('frontend-core.min.js'))
+				.pipe(buffer())
+				.pipe(plumber({
+					errorHandler: notify.onError(function (err) {
+						return {
+							title: 'scripts',
+							message: err.message
+						}
+					})
+				}))
+				.pipe(ugli())
+				// .pipe(gulpif(!!config.ecmascript6.sourcemapsPath, sourcemaps.write('.')))
+				.pipe(plumber.stop())
+				.pipe(gulp.dest(config.paths.ecmascript6.build_frontend))
+				.pipe(gulp.dest(config.paths.ecmascript6.application_frontend))
+				.pipe(browserSync.reload({
+					stream: true
+				}))
+		);
 		resolve();
 	});
 });
@@ -191,11 +219,10 @@ gulp.task('pug', function () {
 			.pipe(gulp.dest(config.paths.pug.build_backend))
 			.pipe(reload({stream: true}));
 
-		// gulp.src(config.paths.pug.src_frontend)
-		//     .pipe(pug())
-		//     .pipe(reload({stream: true}))
-		//     .pipe(gulp.dest(config.paths.pug.build_frontend))
-		//     .pipe(gulp.dest(config.paths.pug.application_frontend));
+		gulp.src(config.paths.pug.src_frontend)
+			.pipe(pug())
+			.pipe(gulp.dest(config.paths.pug.build_frontend))
+			.pipe(reload({stream: true}));
 		resolve();
 	});
 });
@@ -333,7 +360,7 @@ gulp.task('build', gulp.parallel(
 	'sass',
 	'pug',
 	// 'html',
-	'js',
+	// 'js',
 	'img',
 	'copy',
 	'ecmascript6'
@@ -342,7 +369,7 @@ gulp.task('build', gulp.parallel(
 gulp.task('watch', function () {
 	gulp.watch([config.paths.css.watch_backend, config.paths.css.watch_frontend], gulp.series('sass'));
 	// gulp.watch([config.paths.html.watch_backend, config.paths.html.watch_frontend], gulp.series('html'));
-	gulp.watch([config.paths.js.watch_frontend], gulp.series('js'));
+	// gulp.watch([config.paths.js.watch_frontend], gulp.series('js'));
 	gulp.watch([config.paths.ecmascript6.watch_backend, config.paths.ecmascript6.watch_frontend], gulp.series('ecmascript6'));
 	gulp.watch([config.paths.image.watch_backend, config.paths.image.watch_frontend], gulp.series('img'));
 	gulp.watch([config.paths.copy.watch_backend, config.paths.copy.watch_frontend], gulp.series('copy'));

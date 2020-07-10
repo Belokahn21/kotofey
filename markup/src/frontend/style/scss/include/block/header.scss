@@ -3,22 +3,51 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 1% 0;
-  width: 100%;
+  margin-top: 15px;
 
-  & * {
-    box-sizing: border-box;
+  @media (max-width: 1155px) {
+    justify-content: stretch;
   }
 
-  @media (max-width: 420px) {
+  @media (max-width: 790px) {
     display: none;
   }
 }
 
-@import "include/header-logo";
-@import "include/header-search";
-@import "include/header-contacts";
-@import "include/header-basket";
-@import "include/header-compare";
+.header-mobile {
+  display: block;
+  background: $main-yellow-color;
 
-@import "mobile-header";
+  &-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px 15px;
+  }
+
+  &__hamburger {
+    cursor: pointer;
+  }
+
+  &__logo {
+    font-size: 19.2px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  &__link {
+    color: black;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
+  @media (min-width: 414px) {
+    display: none;
+  }
+
+  @media (max-width: 790px) {
+    display: block;
+  }
+}

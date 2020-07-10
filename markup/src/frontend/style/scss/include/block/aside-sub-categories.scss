@@ -1,0 +1,25 @@
+.aside-sub-categories {
+  width: 100%;
+  background: $main-yellow-color;
+  padding: 20px 20px;
+  border-radius: 10px;
+
+  @media (max-width: 790px) {
+    display: none;
+  }
+
+  &__item {
+    color: black;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  &__link {
+    color: inherit;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}

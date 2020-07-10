@@ -1,0 +1,14 @@
+.about-slider-pagination {
+  position: absolute;
+  z-index: 99;
+
+  .swiper-pagination-bullet, .swiper-pagination-bullet-active {
+    background: white;
+  }
+}
+
+.about-slider-button-next, .about-slider-button-prev {
+  &::after {
+    color: white;
+  }
+}

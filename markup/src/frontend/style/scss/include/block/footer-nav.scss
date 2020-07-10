@@ -1,0 +1,19 @@
+.footer-nav {
+  @media (max-width: 790px) {
+    display: none;
+  }
+
+  &__item {
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  &__link {
+    color: black;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+}

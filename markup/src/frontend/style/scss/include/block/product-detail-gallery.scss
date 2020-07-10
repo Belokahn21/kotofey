@@ -1,0 +1,34 @@
+.product-detail-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+  &__group {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    a {
+      width: 20%;
+      margin: 10px;
+      border: 0;
+    }
+  }
+
+  &__link {
+    width: 70%;
+    border-radius: 15px;
+    border: 1px $no-active-color solid;
+
+    &.active {
+      border: 1px $main-yellow-color solid;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    border-radius: inherit;
+  }
+}

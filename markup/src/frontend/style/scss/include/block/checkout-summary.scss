@@ -1,0 +1,33 @@
+.checkout-summary {
+  background-color: rgba(198, 198, 198, 0.1);
+  padding: 25px 40px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  &__title {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+
+  &__show-items {
+    color: black;
+    text-decoration: none;
+    border-bottom: 1px black solid;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+
+    &:hover {
+      color: inherit;
+      text-decoration: inherit;
+    }
+  }
+
+  &__amount {
+    font-size: 36px;
+    line-height: 48px;
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,67 @@
+extends include/layer
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Корзина
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Оформление заказа
+            h1.page__title Оформление заказа
+            .page__group-row
+                .page__left
+                    form.checkout-form
+                        .checkout-form__title Укажите способ доставки
+                        .checkout-form-variants
+                            input#budget-1.checkbox-budget(type='radio', name='delivery_id', checked='')
+                            label.for-checkbox-budget.checkout-form-variants__item(for='budget-1')
+                                span.checkout-form-variants__card
+                                    .checkout-form-variants__label Доставка
+                                    img.checkout-form-variants__icon(src="./assets/images/truck.png")
+                            input#budget-2.checkbox-budget(type='radio', name='delivery_id')
+                            label.for-checkbox-budget.checkout-form-variants__item(for='budget-2')
+                                span.checkout-form-variants__card
+                                    .checkout-form-variants__label Самовывоз
+                                    img.checkout-form-variants__icon(src="./assets/images/box.png")
+                        .checkout-form__title Укажите ваши данные
+                            .checkout-form__group-row
+                                label.checkout-form__label(for="checkout-family")
+                                    div Как вас зовут?*
+                                    input.checkout-form__input#checkout-family(name="family", type="text", placeholder="Ваша фамилия")
+                                label.checkout-form__label(for="checkout-name")
+                                    input.checkout-form__input#checkout-name(name="name", type="text", placeholder="Ваше имя")
+                            .checkout-form__group-row
+                                label.checkout-form__label(for="checkout-phone")
+                                    div Контактный телефон*
+                                    input.checkout-form__input.js-mask-ru#checkout-phone(name="phone", type="text", placeholder="+7 (___) ___ __-__")
+                                label.checkout-form__label(for="checkout-email")
+                                    div Электронная почта*
+                                    input.checkout-form__input#checkout-email(name="email", type="text", placeholder="Адрес вашей электронной почты")
+                        .checkout-form__title Укажите способ оплаты
+                        .checkout-form-variants
+                            input#budget-3.checkbox-budget(type='radio', name='payment_id')
+                            label.for-checkbox-budget.checkout-form-variants__item(for='budget-3')
+                                span.checkout-form-variants__card
+                                    .checkout-form-variants__label По терминалу
+                                    img.checkout-form-variants__icon(src="./assets/images/debit.png")
+                            input#budget-4.checkbox-budget(type='radio', name='payment_id')
+                            label.for-checkbox-budget.checkout-form-variants__item(for='budget-4')
+                                span.checkout-form-variants__card
+                                    .checkout-form-variants__label Наличные
+                                    img.checkout-form-variants__icon(src="./assets/images/wallet.png")
+                        button.add-basket.checkout-form__submit(type="button") Подтвердить заказ
+                .page__right
+                    .checkout-summary
+                        .checkout-summary__info
+                            .checkout-summary__title Ваш заказ на сумму:
+                            a(href="/basket.html").checkout-summary__show-items Состав заказа
+                        .checkout-summary__amount 85 840,35 ₽
+                    .checkout-reglament
+                        .checkout-reglament__title Обратите внимание!
+                        .checkout-reglament__text
+                            p После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 день). 
+                            p Доставка платная. Рассчитайте стоимость в нашем онлайн-калькуляторе. Введите расстояние (в км) от нас — г. Барнаул, ул. Взлетная 1 до того места, куда требуется доставить товар.
+                            p Остались вопросы — <a href="mailto:help@izbastroev.com">help@izbastroev.com</a>

@@ -1,31 +1,49 @@
-.btn-main, .btn-cancel {
-  font-size: 14px;
-  font-weight: bold;
-  text-transform: uppercase;
+.add-basket {
+  padding: 5px 14px;
+  margin: 0 30px;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: 700;
+  border-radius: 20px;
+  background: $main-yellow-color;
+  color: black;
+  text-align: center;
   border: 0;
-  outline: 0;
-  padding: .375rem .75rem;
-  cursor: pointer;
-  display: inline-block;
-  text-decoration: none !important;
-  -webkit-border-radius: 0.3em;
-  -moz-border-radius: 0.3em;
-  border-radius: 0.3em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  outline: none !important;
 
   &:hover {
-    opacity: 0.9;
-    color: white;
+    color: inherit;
+  }
+
+  &__icon {
+    width: 15px;
+    height: 14px;
+    margin-right: 10px;
   }
 }
 
-.btn-main {
-  background: $mainActiveColor;
-  border-bottom: 5px solid #c21e0a;
-  color: white;
-}
+.one-click-buy {
+  margin: 0 30px;
+  padding: 5px 14px;
+  background: white;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: 700;
+  border: 1px $no-active-color solid;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-decoration: none;
 
-.btn-cancel {
-  background: silver;
-  border-bottom: 5px solid grey;
-  color: white;
+  &:hover {
+    color: inherit;
+    //text-decoration: inherit;
+  }
 }

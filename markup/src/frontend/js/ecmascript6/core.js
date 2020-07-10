@@ -1,12 +1,18 @@
-import datepicker from 'air-datepicker';
-import Inputmask from "maskedinput";
+import $ from 'jquery';
 import lightbox from "lightbox2";
-import uiplaceholder from './block/ui-placeholder';
+import popover from 'popper.js';
+import bootstrap from 'bootstrap';
 
-var counter = 0;
-var mask = new Inputmask('+7 (999) 999 99-99');
-if (document.querySelector('.maskedinput-js')) {
-	mask.mask(document.querySelector('.maskedinput-js'));
-}
+import './block/product-calc';
+import './block/mobile-menu';
+import './block/basket';
+import './block/menu';
+import './block/add-basket';
+import './block/ui-placeholder';
 
-import './include/init-swiper';
+import './block/other-jquery';
+import './block/init-sliders';
+import './block/init-range-sliders';
+import './block/init-maskedinput';
+import './block/catalog';
+// import './block/width-debug';

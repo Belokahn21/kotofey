@@ -1,0 +1,18 @@
+include ../../mixin/addBasket
+include ../../mixin/oneBuy
+
+form.product-calc.js-product-calc
+    .product-calc__price-group
+        .product-calc__price-group-price.js-product-calc-price(data-js-product-calc-price="12005") 12 005
+        .product-calc__price-group-char-val шт
+        .product-calc__price-group-char-equal =
+        .product-calc__price-group-summary.js-product-calc-summary
+            .count 85 834
+        .product-calc__price-group-currency ₽
+    .product-calc__control-group
+        .div
+            button(type="button").product-calc__control.product-calc__minus.js-product-calc-minus -
+            input.product-calc__count.js-product-calc-amount(value="1")
+            button(type="button").product-calc__control.product-calc__plus.js-product-calc-plus +
+        +addBasket()
+        +oneClickBuy()

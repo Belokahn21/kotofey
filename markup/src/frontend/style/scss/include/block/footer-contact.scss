@@ -1,0 +1,26 @@
+.footer-contact {
+  margin-top: 20px;
+
+  &__item {
+  }
+
+  &__link {
+    font-size: 14px;
+    line-height: 24px;
+    color: black;
+    font-weight: 400;
+
+    &:hover {
+      color: inherit;
+    }
+
+    &.address {
+      border-bottom: 1px black solid;
+      text-decoration: none !important;
+    }
+
+    &.phone {
+      font-size: 18px;
+    }
+  }
+}
