@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\informers_slider;
+namespace app\modules\content\widgets\informers_slider;
 
 
 use app\modules\catalog\models\entity\InformersValues;

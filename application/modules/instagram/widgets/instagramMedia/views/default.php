@@ -3,6 +3,7 @@
 use yii\helpers\StringHelper;
 
 /* @var $media StdClass */
+
 ?>
 <?php if ($media->date): ?>
     <div class="swiper-container instagram-container">

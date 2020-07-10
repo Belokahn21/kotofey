@@ -15,9 +15,10 @@ import './block/ui-placeholder';
 
 import './block/other-jquery';
 import './block/init-sliders';
-import './block/init-range-sliders';
-import './block/init-maskedinput';
 import './block/catalog';
+import './include/init-range-sliders';
+import './include/init-maskedinput';
+import './include/phone-mask';
 // import './block/width-debug';
 
 

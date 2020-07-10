@@ -92,5 +92,16 @@
   }
 
   &__icon {
+    width: 70px;
+    height: 70px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
   }
 }

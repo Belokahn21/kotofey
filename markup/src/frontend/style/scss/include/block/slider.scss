@@ -88,8 +88,8 @@
   &__slide {
     position: relative;
     overflow: hidden;
-    background: $main-color;
     border-radius: 15px;
+    height: 415px;
 
     @media (max-width: 790px) {
       display: flex;
@@ -104,7 +104,8 @@
   }
 
   &__image {
-    float: right;
+    width: 100%;
+    height: 100%;
 
     @media (max-width: 790px) {
       float: none;

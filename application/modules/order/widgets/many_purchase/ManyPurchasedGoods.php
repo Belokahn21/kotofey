@@ -1,7 +1,6 @@
 <?php
 
-namespace app\modules\order\widgets;
-
+namespace app\modules\order\widgets\many_purchase;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;

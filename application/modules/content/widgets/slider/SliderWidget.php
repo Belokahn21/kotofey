@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\slider;
+namespace app\modules\content\widgets\slider;
 
 
 use app\modules\geo\models\entity\Geo;
@@ -11,7 +11,6 @@ use yii\base\Widget;
 class SliderWidget extends Widget
 {
 	public $slider_id;
-	public $use_carousel;
 	public $view = 'default';
 	public $time_cache;
 

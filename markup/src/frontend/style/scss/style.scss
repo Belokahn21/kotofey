@@ -16,11 +16,12 @@
 @import "include/block/search-form";
 
 // custom
+@import "include/block/admin-panel";
 @import "include/block/page-title";
 @import "include/block/404";
 
 // главная страница
-@import "include/block/auth-modal-toggle";
+@import "include/block/auth";
 @import "include/block/slider";
 @import "include/block/slider-category";
 @import "include/block/vitrine";
