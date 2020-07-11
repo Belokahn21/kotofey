@@ -45,6 +45,7 @@ use yii\web\UploadedFile;
  * @property integer $updated_at
  *
  * @property Category $category
+ * @property string $detail
  */
 class Product extends \yii\db\ActiveRecord
 {

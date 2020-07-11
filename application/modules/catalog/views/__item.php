@@ -19,7 +19,9 @@ $isDiscount = $product->discount_price > 0;
         <div class="catalog__discount"><span>-15%</span></div>
     <?php endif; ?>
     <img class="catalog__image" src="<?= ProductHelper::getImageUrl($product); ?>">
-    <div class="catalog__title"><?= $product->name; ?></div>
+    <div class="catalog__title">
+        <a class="catalog__link" href="<?= $product->detail; ?>"><?= $product->name; ?></a>
+    </div>
     <ul class="light-properties">
         <li class="light-properties__item">
             <div class="light-properties__label">Размер</div>

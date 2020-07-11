@@ -64,7 +64,7 @@ class ProductHelper
             $url = $noImage;
         }
 
-        if (!is_file(\Yii::getAlias('@web/upload/' . $model->image))) {
+        if (!is_file(\Yii::getAlias('@webroot/upload/' . $model->image))) {
             $url = $noImage;
         }
 

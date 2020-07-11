@@ -2,11 +2,12 @@
 
 use app\models\tool\Price;
 use app\models\tool\Currency;
+use app\modules\catalog\models\helpers\ProductHelper;
 
 /* @var $model \app\modules\catalog\models\entity\Product */
 ?>
 <div class="swiper-slide vitrine__slide">
-    <img class="vitrine__image" src="/upload/<?= $model->image; ?>">
+    <img class="vitrine__image" src="<?= ProductHelper::getImageUrl($model) ?>">
     <div class="vitrine__title">
         <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
     </div>
