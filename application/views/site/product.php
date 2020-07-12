@@ -39,11 +39,10 @@ $this->title = Title::showTitle($product->name);
                 <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
             </a>
             <div class="product-detail-gallery__group">
-                <?php \app\models\tool\Debug::p($product->images); ?>
                 <?php if ($product->images): ?>
-                    <?php foreach ($product->images as $image): ?>
-                        <a class="product-detail-gallery__link active" href="/upload/images/product.png" data-lightbox="roadtrip">
-                            <img class="product-detail-gallery__image" src="/upload/images/product.png">
+                    <?php foreach (Json::decode($product->images) as $image): ?>
+                        <a class="product-detail-gallery__link active" href="<?= $image; ?>" data-lightbox="roadtrip">
+                            <img class="product-detail-gallery__image" src="<?= $image; ?>">
                         </a>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -72,7 +71,7 @@ $this->title = Title::showTitle($product->name);
                     <input class="product-calc__count js-product-calc-amount" value="1">
                     <button class="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
                 </div>
-                <button class="undefined add-basket js-add-basket" type="button">
+                <button class="undefined add-basket js-add-basket" data-product-id="<?= $product->id; ?>" data-product-count="1" type="button">
                     <img class="add-basket__icon" src="/upload/images/basket.png"><span class="add-basket__label">В корзину</span>
                 </button>
                 <a class="one-click-buy" href="javascript:void(0);"><span>В один клик</span></a></div>
