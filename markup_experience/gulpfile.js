@@ -123,7 +123,7 @@ gulp.task('pug', function () {
     return new Promise(function (resolve, reject) {
         gulp.src(config.paths.pug.src_frontend)
             .pipe(plumber())
-            .pipe(pug({}))
+            .pipe(pug({pretty: true}))
             .pipe(plumber.stop())
             .pipe(reload({stream: true}))
             .pipe(gulp.dest(config.paths.pug.build_frontend));
