@@ -14,8 +14,8 @@ import './block/add-basket';
 import './block/ui-placeholder';
 
 import './block/other-jquery';
-import './block/init-sliders';
 import './block/catalog';
+import './include/init-sliders';
 import './include/init-range-sliders';
 import './include/init-maskedinput';
 import './include/phone-mask';

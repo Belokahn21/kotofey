@@ -117,7 +117,7 @@ var swiperSertificate = new Swiper('.sertificate-container', {
 });
 
 let swiperInstagramContainer = new Swiper('.instagram-container', {
-	slidesPerView: 5,
+	slidesPerView: 1,
 	spaceBetween: 25,
 	loop: true,
 	autoplay: {
@@ -135,7 +135,8 @@ let swiperInstagramContainer = new Swiper('.instagram-container', {
 
 	breakpoints: {
 		480: { // when window width is >= 480px
-			slidesPerView: 1,
+			slidesPerView: 5,
+			spaceBetween: 25,
 		}
 	},
 });
