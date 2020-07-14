@@ -37,6 +37,7 @@ $this->beginPage() ?>
         <?php echo $this->render('include/head/yandex/metrika.php'); ?>
         <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
         <?php echo $this->render('include/head/google/google_metrika.php'); ?>
+        <?php echo $this->render('include/head/fb/pixel.php'); ?>
         <?php echo $this->render('include/head/jivo.php'); ?>
     <?php endif; ?>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
