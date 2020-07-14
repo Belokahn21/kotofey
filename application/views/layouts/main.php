@@ -8,18 +8,9 @@ use app\widgets\admin_panel\AdminPanel;
 use app\modules\catalog\models\entity\Category;
 use yii\helpers\Html;
 use app\assets\AppAsset;
-use app\modules\basket\models\entity\Basket;
 use app\widgets\notification\Alert;
-use app\widgets\Breadcrumbs;
 use app\modules\site_settings\models\entity\SiteSettings;
-use yii\widgets\ActiveForm;
-use app\modules\subscibe\models\entity\Subscribe;
-use app\widgets\search\SearchWidget;
-use app\widgets\cookie\CookieWidget;
 use yii\helpers\Url;
-use app\modules\compare\models\service\CompareService;
-use app\widgets\geo\GeoWidget;
-use app\widgets\inspector\InspectorWidget;
 
 AppAsset::register($this);
 
