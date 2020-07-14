@@ -69,6 +69,7 @@ class RestController extends Controller
 
         return Json::encode([
             'status' => 200,
+            'count' => Basket::count()
         ]);
     }
 }

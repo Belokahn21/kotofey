@@ -1,5 +1,6 @@
 import '../reactjs/components/sidebar';
 import '../reactjs/components/statistic';
+import '../reactjs/components/todo';
 
 import 'popper.js';
 import 'bootstrap';

@@ -41,6 +41,7 @@ $isDiscount = $product->discount_price > 0;
         <?php endif; ?>
         <div class="catalog__rate"><?= Currency::getInstance()->show(); ?> / шт</div>
     </div>
-    <button class="undefined add-basket js-add-basket" type="button">
-        <img class="add-basket__icon" src="/upload/images/basket.png"/><span class="add-basket__label">В корзину</span></button>
+    <button class="add-basket js-add-basket" type="button" data-product-id="<?= $product->id; ?>" data-product-count="1">
+        <img class="add-basket__icon" src="/upload/images/basket.png"/><span class="add-basket__label">В корзину</span>
+    </button>
 </li>

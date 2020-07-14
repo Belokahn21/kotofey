@@ -4,13 +4,14 @@
  * @var $content string
  */
 
-use app\widgets\admin_panel\AdminPanel;
-use app\modules\catalog\models\entity\Category;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use app\assets\AppAsset;
 use app\widgets\notification\Alert;
+use app\widgets\admin_panel\AdminPanel;
+use app\modules\basket\models\entity\Basket;
+use app\modules\catalog\models\entity\Category;
 use app\modules\site_settings\models\entity\SiteSettings;
-use yii\helpers\Url;
 
 AppAsset::register($this);
 
@@ -147,9 +148,9 @@ $this->beginPage() ?>
             </a>
         </div>
 
-        <div class="menu__item"><a class="menu__link basket" href="javascript:void(0);">
+        <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/order/']) ?>">
                 <img class="basket__icon" src="/upload/images/basket.png">
-                <div class="basket__counter"><span>3</span></div>
+                <div class="basket__counter"><span><?= Basket::count(); ?></span></div>
             </a>
         </div>
     </div>

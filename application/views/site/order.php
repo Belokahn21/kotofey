@@ -1,84 +1,95 @@
 <?php
 
-use app\modules\order\models\entity\OrdersItems;
-use yii\helpers\Html;
+/* @var $this yii\web\View
+ * @var $order \app\modules\order\models\entity\Order
+ * @var $billing \app\modules\user\models\entity\Billing
+ * @var $user \app\modules\user\models\entity\User
+ * @var $delivery app\modules\delivery\models\entity\Delivery[]
+ * @var $payment \app\modules\payment\models\entity\Payment[]
+ * @var $order_date \app\modules\order\models\entity\OrderDate
+ * @var $delivery_time \app\modules\order\models\service\DeliveryTimeService
+ * @var $billing_list \app\modules\user\models\entity\Billing[]
+ */
+
 use app\models\tool\Price;
-use app\models\tool\seo\Title;
 use app\models\tool\Currency;
-use app\modules\order\models\helpers\OrderHelper;
+use app\models\tool\seo\Title;
+use app\modules\basket\models\entity\Basket;
+use app\modules\site_settings\models\entity\SiteSettings;
 
-$currency = new Currency();
-
-/* @var $orders \app\modules\order\models\entity\Order[] */
-/* @var $items \app\modules\order\models\entity\OrdersItems[] */
-/* @var $item \app\modules\order\models\entity\OrdersItems */
+$this->title = Title::showTitle("Оформление заказа");
+$this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
+$this->params['breadcrumbs'][] = ['label' => 'Оформление заказа', 'url' => ['/order/']];
 ?>
-<?php $this->title = Title::showTitle("Список заказов");
-$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => ['/profile/']];
-$this->params['breadcrumbs'][] = ['label' => 'Список заказов', 'url' => ['/order/']]; ?>
-<section class="list-orders">
-    <h1>Список заказов</h1>
-    <?php if ($orders): ?>
-        <ul class="orders">
-            <?php foreach ($orders as $order): ?>
-                <li class="orders__item">
-                    <div class="orders__header">
-                        <div class="orders__number">
-                            <span>Заказ №<?= $order->id; ?></span>
-                        </div>
-                        <div class="order-info-wrap">
-                            <ul class="order-info">
-                                <li class="order-info__item">
-                                    <div class="order-info__item-key">Дата покупки</div>
-                                    <div class="order-info__item-value"><?= date('d.m.Y', $order->created_at); ?></div>
-                                </li>
-                                <li class="order-info__item">
-                                    <div class="order-info__item-key">Статус</div>
-                                    <div class="order-info__item-value"><?= OrderHelper::getStatus($order); ?></div>
-                                </li>
-                                <li class="order-info__item">
-                                    <div class="order-info__item-key">Оплата</div>
-                                    <div class="order-info__item-value">
-                                        <?php if ($order->is_paid): ?>
-                                            <span class="green">Оплачено</span>
-                                        <?php else: ?>
-                                            Не оплачено
-                                        <?php endif; ?>
-                                    </div>
-                                </li>
-                                <li class="order-info__item">
-                                    <div class="order-info__item-key">Сумма заказа</div>
-                                    <div class="order-info__item-value"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></div>
-                                </li>
-                            </ul>
-                        </div>
+<div class="page">
+    <ul class="breadcrumbs">
+        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Главная</a></li>
+        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Корзина</a></li>
+        <li class="breadcrumbs__item active"><a class="breadcrumbs__link" href="javascript:void(0);">Оформление заказа</a></li>
+    </ul>
+    <h1 class="page__title">Оформление заказа</h1>
+    <div class="page__group-row">
+        <div class="page__left">
+            <form class="checkout-form">
+                <div class="checkout-form__title">Укажите способ доставки</div>
+                <div class="checkout-form-variants">
+                    <input class="checkbox-budget" id="budget-1" type="radio" name="delivery_id" checked="">
+                    <label class="for-checkbox-budget checkout-form-variants__item" for="budget-1"><span class="checkout-form-variants__card">
+                    <div class="checkout-form-variants__label">Доставка</div><img class="checkout-form-variants__icon" src="/upload/images/truck.png"></span></label>
+                    <input class="checkbox-budget" id="budget-2" type="radio" name="delivery_id">
+                    <label class="for-checkbox-budget checkout-form-variants__item" for="budget-2"><span class="checkout-form-variants__card">
+                    <div class="checkout-form-variants__label">Самовывоз</div><img class="checkout-form-variants__icon" src="/upload/images/box.png"></span></label>
+                </div>
+                <div class="checkout-form__title">Укажите ваши данные
+                    <div class="checkout-form__group-row">
+                        <label class="checkout-form__label" for="checkout-family">
+                            <div>Как вас зовут?*</div>
+                            <input class="checkout-form__input" id="checkout-family" name="family" type="text" placeholder="Ваша фамилия">
+                        </label>
+                        <label class="checkout-form__label" for="checkout-name">
+                            <input class="checkout-form__input" id="checkout-name" name="name" type="text" placeholder="Ваше имя">
+                        </label>
                     </div>
-
-                    <div class="orders__content">
-                        <ul class="orders-items">
-                            <?php foreach (OrdersItems::findAll(['order_id' => $order->id]) as $item): ?>
-                                <li class="orders-items__item">
-                                    <div class="orders-items__image-wrap">
-                                        <?php if ($item->product): ?>
-                                            <img src="/upload/<?= $item->product->image; ?>" class="orders-items__image">
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="orders-items-info">
-                                        <div class="orders-items-info__title"><?= $item->name; ?></div>
-                                        <div class="row d-flex justify-content-between">
-                                            <div class="col-sm-4"><?= $item->count; ?> шт</div>
-                                            <div class="col-sm-4"><?= Price::format($item->price); ?> р</div>
-                                            <div class="col-sm-4"><?= Price::format($item->count * $item->price); ?> р</div>
-                                        </div>
-                                    </div>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                    <div class="checkout-form__group-row">
+                        <label class="checkout-form__label" for="checkout-phone">
+                            <div>Контактный телефон*</div>
+                            <input class="checkout-form__input js-mask-ru" id="checkout-phone" name="phone" type="text" placeholder="+7 (___) ___ __-__">
+                        </label>
+                        <label class="checkout-form__label" for="checkout-email">
+                            <div>Электронная почта*</div>
+                            <input class="checkout-form__input" id="checkout-email" name="email" type="text" placeholder="Адрес вашей электронной почты">
+                        </label>
                     </div>
-                </li>
-            <?php endforeach; ?>
-        </ul>
-    <?php else: ?>
-        Вы ничего не покупали
-    <?php endif; ?>
-</section>
+                </div>
+                <div class="checkout-form__title">Укажите способ оплаты</div>
+                <div class="checkout-form-variants">
+                    <input class="checkbox-budget" id="budget-3" type="radio" name="payment_id">
+                    <label class="for-checkbox-budget checkout-form-variants__item" for="budget-3"><span class="checkout-form-variants__card">
+                    <div class="checkout-form-variants__label">По терминалу</div><img class="checkout-form-variants__icon" src="/upload/images/debit.png"></span></label>
+                    <input class="checkbox-budget" id="budget-4" type="radio" name="payment_id">
+                    <label class="for-checkbox-budget checkout-form-variants__item" for="budget-4"><span class="checkout-form-variants__card">
+                    <div class="checkout-form-variants__label">Наличные</div><img class="checkout-form-variants__icon" src="/upload/images/wallet.png"></span></label>
+                </div>
+                <button class="add-basket checkout-form__submit" type="button">Подтвердить заказ</button>
+            </form>
+        </div>
+        <div class="page__right">
+            <div class="checkout-summary">
+                <div class="checkout-summary__info">
+                    <div class="checkout-summary__title">Ваш заказ на сумму:</div>
+                    <a class="checkout-summary__show-items" href="/basket.html">Состав заказа</a>
+                </div>
+                <div class="checkout-summary__amount"><?= Price::format(Basket::getInstance()->cash()) ?> <?= Currency::getInstance()->show(); ?></div>
+            </div>
+            <div class="checkout-reglament">
+                <div class="checkout-reglament__title">Обратите внимание!</div>
+                <div class="checkout-reglament__text">
+                    <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 час). </p>
+                    <!--                    <p>Доставка платная. Рассчитайте стоимость в нашем онлайн-калькуляторе. Введите расстояние (в км) от нас — г. Барнаул, ул. Взлетная 1 до того места, куда требуется доставить товар.</p>-->
+                    <p>Доставка бесплатная. Если ваш адрес дальше Барнаула советуем вас воспользоваться калькулятором доставки.</p>
+                    <p>Остались вопросы — <a href="mailto:<?= SiteSettings::findByCode('email')->value; ?>"><?= SiteSettings::findByCode('email')->value; ?></a> или <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>" class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
