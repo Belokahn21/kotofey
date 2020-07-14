@@ -26,7 +26,6 @@ const config = {
             src_frontend: './src/style/scss/*.{sass,scss}',
             watch_frontend: './src/style/scss/**/*.{sass,scss}',
             build_frontend: './build/assets/css/',
-            application_frontend: '../application/web/css/',
         },
         html: {
             src_frontend: './src/html/*.{html,htm}',
@@ -43,26 +42,21 @@ const config = {
             src_frontend: './src/js/*.js',
             watch_frontend: './src/js/**/*.js',
             build_frontend: './build/assets/js/',
-            application_frontend: '../application/web/js/',
         },
         image: {
             src_frontend: './src/images/**/*.{png,jpg,jpeg,svg,gif}',
             watch_frontend: './src/images/**/*.{png,jpg,jpeg,svg,gif}',
             build_frontend: './build/assets/images/',
-            application_frontend: '../application/web/upload/images/',
         },
         copy: {
             src_frontend: './src/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_frontend: './src/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             build_frontend: './build/assets/images/',
-            application_frontend: '../application/web/upload/images/',
         },
         ecmascript6: {
             src_frontend: './src/js/core.js',
             watch_frontend: './src/js/**/*.js',
             build_frontend: './build/assets/js/',
-            application_frontend: '../application/web/js/'
-
         },
     }
 };
@@ -92,7 +86,6 @@ gulp.task('ecmascript6', function () {
             // .pipe(gulpif(!!config.ecmascript6.sourcemapsPath, sourcemaps.write('.')))
             .pipe(plumber.stop())
             .pipe(gulp.dest(config.paths.ecmascript6.build_frontend))
-            .pipe(gulp.dest(config.paths.ecmascript6.application_frontend))
             .pipe(browserSync.reload({
                 stream: true
             }));
@@ -109,8 +102,7 @@ gulp.task('js', function () {
             .pipe(concat('script.min.js'))
             .pipe(ugli())
             .pipe(plumber.stop())
-            .pipe(gulp.dest(config.paths.js.build_frontend))
-            .pipe(gulp.dest(config.paths.js.application_frontend));
+            .pipe(gulp.dest(config.paths.js.build_frontend));
         resolve();
     });
 });
@@ -138,8 +130,7 @@ gulp.task('sass', function () {
             .pipe(concat('style.min.css'))
             .pipe(reload({stream: true}))
             .pipe(plumber.stop())
-            .pipe(gulp.dest(config.paths.css.build_frontend))
-            .pipe(gulp.dest(config.paths.css.application_frontend));
+            .pipe(gulp.dest(config.paths.css.build_frontend));
         resolve();
     });
 });
@@ -174,7 +165,6 @@ gulp.task('copy', function () {
         gulp.src(config.paths.copy.src_frontend)
             .pipe(changed(config.paths.copy.build_frontend, {hasChanged: changed.compareLastModifiedTime}))
             .pipe(gulp.dest(config.paths.copy.build_frontend))
-            .pipe(gulp.dest(config.paths.copy.application_frontend))
             .pipe(browserSync.reload({
                 stream: true
             }));
@@ -197,7 +187,6 @@ gulp.task('img', function () {
                 })
             ]))
             .pipe(gulp.dest(config.paths.image.build_frontend))
-            .pipe(gulp.dest(config.paths.image.application_frontend))
             .pipe(browserSync.reload({stream: true}));
 
         resolve();
