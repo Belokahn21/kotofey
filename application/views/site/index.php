@@ -14,7 +14,7 @@ use app\models\tool\seo\Title;
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>
 <?= SliderWidget::widget([
-    'slider_id' => 1,
+	'slider_id' => 1,
 ]) ?>
 <?= InformerSliderWidget::widget(); ?>
 <?= ManyPurchasedGoods::widget(); ?>

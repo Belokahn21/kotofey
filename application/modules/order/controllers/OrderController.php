@@ -17,25 +17,25 @@ use yii\web\ForbiddenHttpException;
 
 class OrderController extends Controller
 {
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'actions' => ['index'],
-                        'allow' => true,
-                        'matchCallback' => function ($rule, $action) {
-                            return Basket::count() > 0;
-                        }
-                    ]
-                ],
-            ]
-        ];
-    }
+//    public function behaviors()
+//    {
+//        return [
+//            'access' => [
+//                'class' => AccessControl::className(),
+//                'rules' => [
+//                    [
+//                        'actions' => ['checkout'],
+//                        'allow' => true,
+//                        'matchCallback' => function ($rule, $action) {
+//                            return Basket::count() > 0;
+//                        }
+//                    ]
+//                ],
+//            ]
+//        ];
+//    }
 
-    public function actionIndex()
+    public function actionCreate()
     {
         $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $payment = Payment::findAll(['active' => true]);
@@ -99,7 +99,7 @@ class OrderController extends Controller
             return $this->redirect('/');
         }
 
-        return $this->render('index', [
+        return $this->render('create', [
             'delivery' => $delivery,
             'delivery_time' => $delivery_time,
             'order' => $order,

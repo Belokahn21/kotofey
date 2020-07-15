@@ -1,6 +1,10 @@
 .instagram {
   position: relative;
 
+  &-container {
+    margin-bottom: 50px;
+  }
+
   &-pagination {
     position: absolute;
     height: 10px;
@@ -8,7 +12,7 @@
 
   &__slide {
     width: 300px;
-    height: 400px;
+    height: 200px;
     padding: 5px;
   }
 
@@ -22,6 +26,7 @@
     height: 50px;
     overflow: hidden;
     color: $main-color;
+    display: block;
 
     &:hover {
       color: $main-color;

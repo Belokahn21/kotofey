@@ -212,26 +212,26 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionSearch()
-    {
-        $products = array();
-        $model = new Search();
-        $model->save_history = true;
-
-        if ($model->load(\Yii::$app->request->get())) {
-
-            $query = $model->search();
-            $countQuery = clone $query;
-            $pagerItems = new Pagination(['totalCount' => $countQuery->count()]);
-            $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
-
-        }
-
-        return $this->render('search', [
-            'products' => $products,
-            'pagerItems' => $pagerItems,
-        ]);
-    }
+//    public function actionSearch()
+//    {
+//        $products = array();
+//        $model = new Search();
+//        $model->save_history = true;
+//
+//        if ($model->load(\Yii::$app->request->get())) {
+//
+//            $query = $model->search();
+//            $countQuery = clone $query;
+//            $pagerItems = new Pagination(['totalCount' => $countQuery->count()]);
+//            $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
+//
+//        }
+//
+//        return $this->render('search', [
+//            'products' => $products,
+//            'pagerItems' => $pagerItems,
+//        ]);
+//    }
 
     public function actionCatalog($id = null)
     {
@@ -550,35 +550,6 @@ class SiteController extends Controller
     {
         \Yii::$app->user->logout();
         return $this->redirect('/');
-    }
-
-    public function actionOrder($id = null)
-    {
-
-        if ($id) {
-            $order = Order::findOne($id);
-
-            if (empty($order)) {
-                throw new \Exception("Такого заказа не существует");
-            }
-
-            if (!$order->hasAccess()) {
-                throw new \Exception("Доступ к чужому заказу запрещён");
-            }
-
-            $items = OrdersItems::findAll(['order_id' => $order->id]);
-
-            return $this->render('detail/order', [
-                'order' => $order,
-                'items' => $items,
-            ]);
-        }
-
-
-        $orders = Order::findAll(['user_id' => \Yii::$app->user->id]);
-        return $this->render('order', [
-            'orders' => $orders
-        ]);
     }
 
     public function actionSupport($category = null, $id = null)

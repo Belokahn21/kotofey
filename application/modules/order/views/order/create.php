@@ -15,7 +15,9 @@ use app\models\tool\Price;
 use app\models\tool\Currency;
 use app\models\tool\seo\Title;
 use app\modules\basket\models\entity\Basket;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\basket\widgets\productControl\ProductControlWidget;
 
 $this->title = Title::showTitle("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
@@ -77,10 +79,30 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
             <div class="checkout-summary">
                 <div class="checkout-summary__info">
                     <div class="checkout-summary__title">Ваш заказ на сумму:</div>
-                    <a class="checkout-summary__show-items" href="/basket.html">Состав заказа</a>
+                    <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
                 </div>
                 <div class="checkout-summary__amount"><?= Price::format(Basket::getInstance()->cash()) ?> <?= Currency::getInstance()->show(); ?></div>
             </div>
+			<?php if ($basket = Basket::findAll()): ?>
+                <div class="collapse" id="collapseSummary">
+                    <ul class="light-checkout-list">
+						<?php foreach ($basket as $item): ?>
+                            <li class="light-checkout-list__item">
+                                <img alt="<?= $item->product->name; ?>" title="<?= $item->product->name; ?>" class="light-checkout-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>">
+                                <div class="light-checkout-list__info">
+                                    <div class="light-checkout-list__title"><a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a></div>
+                                    <div class="light-checkout-list__article">Артикул: <?= $item->product->article; ?></div>
+                                </div>
+                                <div class="light-checkout-list__calc">
+									<?= ProductControlWidget::widget([
+										'product_id' => $item->product->id
+									]); ?>
+                                </div>
+                            </li>
+						<?php endforeach; ?>
+                    </ul>
+                </div>
+			<?php endif; ?>
             <div class="checkout-reglament">
                 <div class="checkout-reglament__title">Обратите внимание!</div>
                 <div class="checkout-reglament__text">

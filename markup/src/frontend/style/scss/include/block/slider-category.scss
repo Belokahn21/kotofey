@@ -84,6 +84,16 @@
     font-weight: 700;
   }
 
+  &__link {
+    color: inherit;
+    text-decoration: none !important;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
+
   &__label {
     color: $no-active-color;
     font-size: 12px;

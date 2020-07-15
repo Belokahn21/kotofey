@@ -1,12 +1,9 @@
 <?php
 
-use app\modules\basket\models\entity\Basket;
-use app\models\tool\Currency;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\modules\bonus\models\helper\DiscountHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
 use app\models\tool\Price;
-use app\modules\bonus\models\services\BonusByBuyService;
+use app\models\tool\Currency;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\basket\widgets\addBasket\AddBasketWidget;
 
 /* @var $product \app\modules\catalog\models\entity\Product */
 
@@ -15,9 +12,9 @@ $isDiscount = $product->discount_price > 0;
 
 
 <li class="catalog__item">
-    <?php if ($isDiscount): ?>
+	<?php if ($isDiscount): ?>
         <div class="catalog__discount"><span>-15%</span></div>
-    <?php endif; ?>
+	<?php endif; ?>
     <img class="catalog__image" src="<?= ProductHelper::getImageUrl($product); ?>">
     <div class="catalog__title">
         <a class="catalog__link" href="<?= $product->detail; ?>"><?= $product->name; ?></a>
@@ -33,15 +30,16 @@ $isDiscount = $product->discount_price > 0;
         </li>
     </ul>
     <div class="catalog__price-group">
-        <?php if ($isDiscount): ?>
+		<?php if ($isDiscount): ?>
             <div class="catalog__old-price"><?= Price::format($product->price); ?></div>
             <div class="catalog__new-price"><?= Price::format($product->discount_price); ?></div>
-        <?php else: ?>
+		<?php else: ?>
             <div class="catalog__price"><?= Price::format($product->price); ?></div>
-        <?php endif; ?>
+		<?php endif; ?>
         <div class="catalog__rate"><?= Currency::getInstance()->show(); ?> / шт</div>
     </div>
-    <button class="add-basket js-add-basket" type="button" data-product-id="<?= $product->id; ?>" data-product-count="1">
-        <img class="add-basket__icon" src="/upload/images/basket.png"/><span class="add-basket__label">В корзину</span>
-    </button>
+	<?= AddBasketWidget::widget([
+		'product_id' => $product->id,
+		'count' => 1
+	]); ?>
 </li>

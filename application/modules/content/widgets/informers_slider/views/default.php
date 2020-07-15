@@ -17,7 +17,9 @@ use app\modules\catalog\models\entity\ProductPropertiesValues;
 			<?php foreach ($providers->all() as $provider): ?>
                 <div class="swiper-slide category-slider__slide">
                     <div class="category-slider__info">
-                        <div class="category-slider__title"><?= $provider->name; ?></div>
+                        <div class="category-slider__title">
+                            <a class="category-slider__link" href="<?= $provider->link; ?>"><?= $provider->name; ?></a>
+                        </div>
                         <div class="category-slider__label"><?= ProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id'); ?> позиций</div>
                     </div>
                     <div class="category-slider__icon">
