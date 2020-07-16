@@ -1,4 +1,3 @@
-include ../../mixin/addBasket
 .page-title__group.is-column
     h2.page-title Выгодные предложения
     a.page-title__link(href="javascript:void(0);") Все предложения
@@ -20,7 +19,7 @@ include ../../mixin/addBasket
                 span.amount-old 10.90
                 span.amount 6.90
                 span.rate Р / шт
-            +addBasket()(class="is-white")
+            include ../block/product-calc
         .swiper-slide.vitrine__slide
             .discount - 15%
             img(src="./assets/images/brick2.png")
@@ -37,7 +36,7 @@ include ../../mixin/addBasket
                 span.amount-old 10.90
                 span.amount 6.90
                 span.rate Р / шт
-            +addBasket()(class="is-white")
+            include ../block/product-calc
         .swiper-slide.vitrine__slide.active
             .discount - 15%
             img(src="./assets/images/brick3.png")
@@ -54,7 +53,7 @@ include ../../mixin/addBasket
                 span.amount-old 10.90
                 span.amount 6.90
                 span.rate Р / шт
-            +addBasket()(class="is-white")
+            include ../block/product-calc
         .swiper-slide.vitrine__slide
             .discount - 15%
             img(src="./assets/images/brick4.png")
@@ -71,5 +70,5 @@ include ../../mixin/addBasket
                 span.amount-old 10.90
                 span.amount 6.90
                 span.rate Р / шт
-            +addBasket()(class="is-white")
+            include ../block/product-calc
     .swiper-pagination

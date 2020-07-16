@@ -1,7 +1,5 @@
 extends include/layer
 
-include mixin/addBasket
-
 block contents
     .page-container
         .page
@@ -32,38 +30,4 @@ block contents
                                 .catalog__old-price 9.00
                                 .catalog__new-price 2.25
                                 .catalog__rate ₽/шт
-                            +addBasket()
-                        li.catalog__item
-                            .catalog__discount
-                                span -15%
-                            img.catalog__image(src="./assets/images/product.jpg")
-                            .catalog__title Кирпич М-150 (Стройкерамика) красный 0,7НФ /616
-                            ul.light-properties
-                                li.light-properties__item
-                                    .light-properties__label Размер
-                                    .light-properties__value 250*120*65мм
-                                li.light-properties__item
-                                    .light-properties__label Артикул
-                                    .light-properties__value 0525052
-                            .catalog__price-group
-                                .catalog__old-price 9.00
-                                .catalog__new-price 2.25
-                                .catalog__rate ₽/шт
-                            +addBasket()
-                        li.catalog__item
-                            .catalog__discount
-                                span -15%
-                            img.catalog__image(src="./assets/images/product.jpg")
-                            .catalog__title Кирпич М-150 (Стройкерамика) красный 0,7НФ /616
-                            ul.light-properties
-                                li.light-properties__item
-                                    .light-properties__label Размер
-                                    .light-properties__value 250*120*65мм
-                                li.light-properties__item
-                                    .light-properties__label Артикул
-                                    .light-properties__value 0525052
-                            .catalog__price-group
-                                .catalog__old-price 9.00
-                                .catalog__new-price 2.25
-                                .catalog__rate ₽/шт
-                            +addBasket()
+                            include include/block/product-calc
