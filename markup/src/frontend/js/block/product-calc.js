@@ -8,16 +8,11 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
         console.log("форма ушла");
 
         fetch(config.restAddBasket, {
-            method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-            // mode: 'no-cors', // no-cors, *cors, same-origin
-            // headers: {
-            //     'Content-Type': 'text/plain'
-            // },
-            // body: JSON.stringify({
-            //     product_id: 11,
-            //     count: 1,
-            // })
-            body: new FormData(formCalc)
+            method: 'PUT',
+            body: new FormData(formCalc),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
         }).then(response => response.json()).then((data) => {
             const jsonResponse = JSON.parse(data);
         });
