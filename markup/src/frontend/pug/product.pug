@@ -1,5 +1,4 @@
 extends include/layer
-include mixin/oneBuy
 
 block contents
 	.page-container
@@ -23,7 +22,6 @@ block contents
 						a(href="javascript:void(0);").breadcrumbs__link Каталог товаров
 				h1.product-detail__title Кирпич строительный красный черновой пустотелый
 				include include/block/product-calc
-				+oneClickBuy()
 				ul.product-properties
 					li.product-properties__line
 						.product-properties__key Артикул товара
