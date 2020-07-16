@@ -10,7 +10,7 @@ import './block/product-calc';
 import './block/mobile-menu';
 import './block/basket';
 import './block/menu';
-import './block/add-basket';
+// import './block/add-basket';
 import './block/ui-placeholder';
 
 import './block/other-jquery';

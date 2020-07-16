@@ -38,8 +38,11 @@ $isDiscount = $product->discount_price > 0;
 		<?php endif; ?>
         <div class="catalog__rate"><?= Currency::getInstance()->show(); ?> / шт</div>
     </div>
-	<?= AddBasketWidget::widget([
-		'product_id' => $product->id,
-		'count' => 1
-	]); ?>
+    <?= AddBasketWidget::widget([
+        'product_id' => $product->id,
+        'showInfo' => false,
+        'showOneClick' => false,
+        'showControl' => false,
+        'showButton' => true,
+    ]) ?>
 </li>

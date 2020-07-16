@@ -3,6 +3,7 @@
 use app\models\tool\Price;
 use app\models\tool\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\basket\widgets\addBasket\AddBasketWidget;
 
 /* @var $models \app\modules\catalog\models\entity\Product[] */
 ?>
@@ -38,10 +39,13 @@ use app\modules\catalog\models\helpers\ProductHelper;
                         <span class="amount"><?= Price::format($model->discount_price); ?></span>
                         <span class="rate"><?= Currency::getInstance()->show(); ?> / шт</span>
                     </div>
-                    <button class="is-white add-basket js-add-basket" type="button">
-                        <img class="add-basket__icon" src="/upload/images/basket.png">
-                        <span class="add-basket__label">В корзину</span>
-                    </button>
+                    <?= AddBasketWidget::widget([
+                        'product_id' => $model->id,
+                        'showInfo' => false,
+                        'showOneClick' => false,
+                        'showControl' => false,
+                        'showButton' => true,
+                    ]) ?>
                 </div>
             <?php endforeach; ?>
         </div>

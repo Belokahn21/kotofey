@@ -27,7 +27,11 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
     <div class="vitrine__price">
         <span class="amount"><?= Price::format($model->price); ?></span>
         <span class="rate"><?= Currency::getInstance()->show(); ?> / шт </span></div>
-	<?= AddBasketWidget::widget([
-		'product_id' => $model->id
-	]) ?>
+    <?= AddBasketWidget::widget([
+        'product_id' => $model->id,
+        'showInfo' => false,
+        'showOneClick' => false,
+        'showControl' => false,
+        'showButton' => true,
+    ]) ?>
 </div>

@@ -7,19 +7,28 @@ use yii\base\Widget;
 
 class AddBasketWidget extends Widget
 {
-	public $product_id;
-	public $count = 1;
-	public $view = 'default';
+    public $product_id;
+    public $count = 1;
+    public $view = 'default';
 
-	public function run()
-	{
-		if (empty($this->product_id)) {
-			return false;
-		}
+    public $showButton = true;
+    public $showInfo = true;
+    public $showControl = true;
+    public $showOneClick = true;
 
-		return $this->render($this->view, [
-			'product_id' => $this->product_id,
-			'count' => $this->count,
-		]);
-	}
+    public function run()
+    {
+        if (empty($this->product_id)) {
+            return false;
+        }
+
+        return $this->render($this->view, [
+            'product_id' => $this->product_id,
+            'count' => $this->count,
+            'showButton' => $this->showButton,
+            'showInfo' => $this->showInfo,
+            'showControl' => $this->showControl,
+            'showOneClick' => $this->showOneClick,
+        ]);
+    }
 }
