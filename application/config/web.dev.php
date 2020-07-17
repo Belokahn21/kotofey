@@ -105,7 +105,7 @@ $config = [
 				'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
 				'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
 				'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
-				'PUT basket/rest/add' => 'basket/rest/add',
+				'POST basket/rest/add' => 'basket/rest/add',
 
 				'admin/<module>/<controller>/' => '<module>/<controller>/index',
 				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',

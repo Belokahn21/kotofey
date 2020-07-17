@@ -1,115 +1,67 @@
 import config from "../config";
 
 document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
-    let formCalc = callbackElement;
+	let formCalc = callbackElement;
 
-    formCalc.addEventListener('submit', (event) => {
-        event.preventDefault();
-        console.log("форма ушла");
+	formCalc.addEventListener('submit', (event) => {
+		event.preventDefault();
 
-        fetch(config.restAddBasket, {
-            method: 'PUT',
-            body: new FormData(formCalc),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        }).then(response => response.json()).then((data) => {
-            const jsonResponse = JSON.parse(data);
-        });
+		fetch(config.restAddBasket, {
+			method: 'POST',
+			body: new FormData(formCalc)
+		}).then(response => response.json()).then((data) => {
+			const jsonResponse = JSON.parse(data);
+			if (jsonResponse.status === 200) {
+				// обновить кол-во позиций в иконке корзины
+				updateCountBasket(jsonResponse.count);
+				changeButtonLabel(formCalc);
+			}
+		});
+	});
 
-    });
+	let plus = formCalc.querySelector('.js-product-calc-plus');
+	if (plus) {
+		plus.addEventListener('click', () => {
+			updateAmount(formCalc, +1);
+		});
+	}
+	let minus = formCalc.querySelector('.js-product-calc-minus');
+	if (minus) {
+		minus.addEventListener('click', () => {
+			updateAmount(formCalc, -1);
+		});
+	}
+
+	let updateAmount = (form, count) => {
+		let input = form.querySelector('.js-product-calc-amount');
+		if (input && parseInt(input.value) + count > 0) {
+			input.value = parseInt(input.value) + parseInt(count);
+		}
+	}
+
+	let updateCountBasket = (count) => {
+		let element = document.querySelector('.basket__counter').querySelector('span');
+		if (element) {
+			element.textContent = count;
+		}
+	}
+
+	let changeButtonLabel = (form) => {
+		let button = form.querySelector('.js-add-basket');
+		if (button) {
+			toggleText(button, 'Добавлено');
+			toggleIcon(button);
+		}
+	};
 
 
-    // let minusButton = null;
-    // let plusButton = null;
-    // let amountInput = null;
-    // let summaryElement = null;
-    // let summaryElement__count = null;
-    // let elProductPrice = null;
-    // let productPrice = null;
-    // let elFullSummary = null;
-    //
-    // if (!formCalc) {
-    //     return false;
-    // }
-    //
-    // minusButton = formCalc.querySelector('.js-product-calc-minus');
-    // plusButton = formCalc.querySelector('.js-product-calc-plus');
-    // amountInput = formCalc.querySelector('.js-product-calc-amount');
-    // summaryElement = formCalc.querySelector('.js-product-calc-summary');
-    // summaryElement__count = summaryElement.querySelector('.count');
-    // elProductPrice = formCalc.querySelector('.js-product-calc-price');
-    // productPrice = elProductPrice.getAttribute('data-js-product-calc-price');
-    //
-    //
-    // if (minusButton) {
-    //     minusButton.addEventListener('click', function (event) {
-    //         addAmount(-1);
-    //         updateSummary();
-    //         updateFullSummary();
-    //     });
-    // }
-    //
-    // if (plusButton) {
-    //     plusButton.addEventListener('click', function (event) {
-    //         addAmount(1);
-    //         updateSummary();
-    //         updateFullSummary();
-    //     });
-    // }
-    //
-    //
-    // function addAmount(int) {
-    //     if (parseInt(getAmount()) + parseInt(int) > 0) {
-    //         setAmount(new Intl.NumberFormat('ru-RU').format(parseInt(getAmount()) + parseInt(int)));
-    //     }
-    // }
-    //
-    // function updateSummary() {
-    //     summaryElement__count.innerHTML = new Intl.NumberFormat('ru-RU').format(parseInt(getAmount()) * parseInt(productPrice));
-    // }
-    //
-    // function updateFullSummary() {
-    //     let summary = 0;
-    //     elFullSummary = document.querySelector('.basket-summary__count');
-    //
-    //     document.querySelectorAll('.js-product-calc').forEach((el) => {
-    //         formCalc = el;
-    //
-    //         let amountInput = formCalc.querySelector('.js-product-calc-amount');
-    //         let elProductPrice = formCalc.querySelector('.js-product-calc-price');
-    //         let productPrice = elProductPrice.getAttribute('data-js-product-calc-price');
-    //
-    //         summary += parseInt(getAmount() * productPrice);
-    //     });
-    //
-    //     if (elFullSummary) {
-    //         elFullSummary.innerHTML = new Intl.NumberFormat('ru-RU').format(parseInt(summary))
-    //     }
-    // }
-    //
-    // function getAmount() {
-    //     if (!amountInput) {
-    //         return false;
-    //     }
-    //
-    //     let out = 0;
-    //     let matches = amountInput.value.match(/\d+/g);
-    //     let matchesStr = "";
-    //
-    //
-    //     matches.forEach((el) => {
-    //         matchesStr += el;
-    //     });
-    //
-    //     out = parseInt(matchesStr);
-    //
-    //     return out;
-    // }
-    //
-    // function setAmount(value) {
-    //     if (amountInput) {
-    //         amountInput.value = value;
-    //     }
-    // }
+	let toggleIcon = (element) => {
+		let image = element.querySelector('.add-basket__icon');
+		image.setAttribute('src', './assets/images/arrow-success.png');
+		// image.setAttribute('src', '/upload/images/arrow-success.png');
+	}
+
+	function toggleText(element, text) {
+		element.querySelector('.add-basket__label').textContent = text;
+	}
 });

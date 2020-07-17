@@ -11,7 +11,8 @@ form.product-calc.js-product-calc
     .product-calc__control-group
         .div
             button(type="button").product-calc__control.product-calc__minus.js-product-calc-minus -
-            input.product-calc__count.js-product-calc-amount(value="1")
+            input(value="1" name="product_id" type="hidden")
+            input.product-calc__count.js-product-calc-amount(value="1" name="count")
             button(type="button").product-calc__control.product-calc__plus.js-product-calc-plus +
         button(type="submit" class="add-basket js-add-basket")
             img.add-basket__icon(src="./assets/images/basket.png")
