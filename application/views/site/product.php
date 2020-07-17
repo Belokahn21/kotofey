@@ -1,19 +1,9 @@
 <?php
 
-use app\modules\bonus\models\helper\DiscountHelper;
-use app\widgets\product_reviews\ProductReviewsWidget;
-use app\modules\basket\models\entity\Basket;
-use app\models\tool\Price;
-use app\models\tool\seo\Title;
-use app\models\tool\Currency;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\widgets\fast_buy\FastBuyWidget;
-use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\favorite\models\entity\Favorite;
 use yii\helpers\Json;
-use app\modules\catalog\models\entity\ProductOrder;
-use app\modules\catalog\models\entity\Product;
-use app\modules\bonus\models\services\BonusByBuyService;
+use app\models\tool\seo\Title;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\basket\widgets\addBasket\AddBasketWidget;
 
 /* @var $properties \app\modules\catalog\models\entity\ProductPropertiesValues[]
  * @var \yii\web\View $this
@@ -23,9 +13,9 @@ use app\modules\bonus\models\services\BonusByBuyService;
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
 if ($category) {
-    foreach ($category->undersections() as $parents) {
-        $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
-    }
+	foreach ($category->undersections() as $parents) {
+		$this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+	}
 }
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product->detail]];
 
@@ -39,13 +29,13 @@ $this->title = Title::showTitle($product->name);
                 <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
             </a>
             <div class="product-detail-gallery__group">
-                <?php if ($product->images): ?>
-                    <?php foreach (Json::decode($product->images) as $image): ?>
+				<?php if ($product->images): ?>
+					<?php foreach (Json::decode($product->images) as $image): ?>
                         <a class="product-detail-gallery__link active" href="<?= $image; ?>" data-lightbox="roadtrip">
                             <img class="product-detail-gallery__image" src="<?= $image; ?>">
                         </a>
-                    <?php endforeach; ?>
-                <?php endif; ?>
+					<?php endforeach; ?>
+				<?php endif; ?>
             </div>
         </div>
     </div>
@@ -55,39 +45,21 @@ $this->title = Title::showTitle($product->name);
             <li class="breadcrumbs__item active"><a class="breadcrumbs__link" href="javascript:void(0);">Каталог товаров</a></li>
         </ul>
         <h1 class="product-detail__title"><?= $product->name; ?></h1>
-        <form class="product-calc js-product-calc">
-            <div class="product-calc__price-group">
-                <div class="product-calc__price-group-price js-product-calc-price" data-js-product-calc-price="<?= $product->price; ?>"><?= Price::format($product->price); ?></div>
-                <div class="product-calc__price-group-char-val">шт</div>
-                <div class="product-calc__price-group-char-equal">=</div>
-                <div class="product-calc__price-group-summary js-product-calc-summary">
-                    <div class="count"><?= Price::format($product->price); ?></div>
-                </div>
-                <div class="product-calc__price-group-currency">₽</div>
-            </div>
-            <div class="product-calc__control-group">
-                <div class="div">
-                    <button class="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                    <input class="product-calc__count js-product-calc-amount" value="1">
-                    <button class="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
-                </div>
-                <button class="undefined add-basket js-add-basket" data-product-id="<?= $product->id; ?>" data-product-count="1" type="button">
-                    <img class="add-basket__icon" src="/upload/images/basket.png"><span class="add-basket__label">В корзину</span>
-                </button>
-                <a class="one-click-buy" href="javascript:void(0);"><span>В один клик</span></a></div>
-        </form>
-        <?php if ($properties): ?>
+		<?= AddBasketWidget::widget([
+			'product_id' => $product->id
+		]); ?>
+		<?php if ($properties): ?>
             <ul class="product-properties">
-                <?php foreach ($properties as $property): ?>
+				<?php foreach ($properties as $property): ?>
                     <li class="product-properties__line">
                         <div class="product-properties__key"><?= $property->property->name; ?></div>
                         <div class="product-properties__value"><?= $property->finalValue; ?></div>
                     </li>
-                <?php endforeach; ?>
+				<?php endforeach; ?>
             </ul>
-        <?php endif; ?>
+		<?php endif; ?>
 
-        <?php /*
+		<?php /*
         <ul class="collapse product-properties" id="collapseExample">
             <li class="product-properties__line">
                 <div class="product-properties__key">Артикул товара</div>
@@ -102,7 +74,7 @@ $this->title = Title::showTitle($product->name);
         </nav>
         <div class="tab-content product-tab-content" id="nav-tabContent">
             <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
-                <?= $product->description; ?>
+				<?= $product->description; ?>
             </div>
             <div class="tab-pane fade" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">
                 Отсутсвует

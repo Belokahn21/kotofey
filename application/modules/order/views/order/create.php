@@ -17,6 +17,7 @@ use app\models\tool\seo\Title;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\basket\widgets\addBasket\AddBasketWidget;
 
 $this->title = Title::showTitle("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
@@ -92,9 +93,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                                     <div class="light-checkout-list__title"><a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a></div>
                                     <div class="light-checkout-list__article">Артикул: <?= $item->product->article; ?></div>
                                 </div>
-                                <div class="light-checkout-list__calc">
-
-                                </div>
+								<?= AddBasketWidget::widget([
+									'product_id' => $item->product->id,
+									'showButton' => false,
+									'showInfo' => false,
+									'showOneClick' => false,
+								]); ?>
                             </li>
 						<?php endforeach; ?>
                     </ul>

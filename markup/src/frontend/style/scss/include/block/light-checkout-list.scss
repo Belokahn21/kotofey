@@ -17,6 +17,15 @@
       margin-bottom: 20px;
       border-bottom: 1px #c6c6c6 solid;
     }
+
+    // fix
+    .js-product-calc-amount {
+      width: 30%;
+    }
+  }
+
+  &__info {
+    width: 50%;
   }
 
   &__image {
