@@ -11,7 +11,6 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
 		saveInfo().then((data) => {
 			const jsonResponse = JSON.parse(data);
 			if (jsonResponse.status === 200) {
-				// обновить кол-во позиций в иконке корзины
 				updateCountBasket(jsonResponse.count);
 				changeButtonLabel(formCalc);
 			}
@@ -25,6 +24,7 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
 			updateSummary(formCalc);
 		});
 	}
+
 	let minus = formCalc.querySelector('.js-product-calc-minus');
 	if (minus) {
 		minus.addEventListener('click', () => {
@@ -32,6 +32,30 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
 			updateSummary(formCalc);
 		});
 	}
+
+	let summary = formCalc.querySelectorAll('.js-product-calc-plus[data-js-lazy-update=true], .js-product-calc-minus[data-js-lazy-update=true]');
+	if (summary) {
+		summary.forEach((element) => {
+			element.addEventListener('change', () => {
+
+				if (timerEx) {
+					clearTimeout(timerEx);
+				}
+
+				timerEx = setTimeout(() => {
+
+					saveInfo().then((data) => {
+						const jsonResponse = JSON.parse(data);
+						if (jsonResponse.status === 200) {
+							updateCountBasket(jsonResponse.count);
+						}
+					});
+
+				}, 100)
+			});
+		});
+	}
+
 
 	let updateAmount = (form, count) => {
 		let input = form.querySelector('.js-product-calc-amount');
