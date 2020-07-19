@@ -52,11 +52,10 @@
   right: 0;
   top: 0;
   background: $active-color;
-  padding: 5px;
+  padding: 7px;
   color: $text-color;
-  width: 25px;
-  height: 25px;
-  line-height: 5px;
+  line-height: 1px;
+  border-radius: 0 0 0 50%;
 
   &:hover {
     color: $text-color;
