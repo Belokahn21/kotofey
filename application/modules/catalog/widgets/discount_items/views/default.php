@@ -41,6 +41,7 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
                     </div>
                     <?= AddBasketWidget::widget([
                         'product_id' => $model->id,
+                        'price' => $model->price,
                         'showInfo' => false,
                         'showOneClick' => false,
                         'showControl' => false,

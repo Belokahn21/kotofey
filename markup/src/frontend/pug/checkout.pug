@@ -59,7 +59,9 @@ block contents
 							.checkout-summary__title Ваш заказ на сумму:
 							a.checkout-summary__show-items(data-toggle='collapse', href='#collapseSummary', role='button', aria-expanded='false', aria-controls='collapseSummary')
 								| Посмотреть состав заказа
-						.checkout-summary__amount 85 840,35 ₽
+						.checkout-summary__amount.d-flex.flex-row.align-items-end
+							.js-product-calc-full-summary 85 840,35
+							.checkout-summary__currency ₽
 					#collapseSummary.collapse
 						include include/block/light-checkout-list
 					.checkout-reglament

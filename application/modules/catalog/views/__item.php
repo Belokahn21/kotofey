@@ -40,6 +40,7 @@ $isDiscount = $product->discount_price > 0;
     </div>
     <?= AddBasketWidget::widget([
         'product_id' => $product->id,
+        'price' => $product->price,
         'showInfo' => false,
         'showOneClick' => false,
         'showControl' => false,

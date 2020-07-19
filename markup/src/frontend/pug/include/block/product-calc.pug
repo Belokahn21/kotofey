@@ -1,20 +1,21 @@
 include ../../mixin/oneBuy
 
 form.product-calc.js-product-calc
-    .product-calc__price-group
-        .product-calc__price-group-price.js-product-calc-price(data-js-product-calc-price="12005") 12 005
-        .product-calc__price-group-char-val шт
-        .product-calc__price-group-char-equal =
-        .product-calc__price-group-summary.js-product-calc-summary
-            .count 85 834
-        .product-calc__price-group-currency ₽
+    //.product-calc__price-group
+    //    .product-calc__price-group-price 12 005
+    //    .product-calc__price-group-char-val шт
+    //    .product-calc__price-group-char-equal =
+    //    .product-calc__price-group-summary.js-product-calc-summary
+    //        .count 85 834
+    //    .product-calc__price-group-currency ₽
     .product-calc__control-group
         .div
             button(type="button" data-js-lazy-update="true").product-calc__control.product-calc__minus.js-product-calc-minus -
             input(value="1" name="product_id" type="hidden")
+            input(value="12005" name="price" type="hidden").js-product-calc-price
             input.product-calc__count.js-product-calc-amount(value="1" name="count")
             button(type="button" data-js-lazy-update="true").product-calc__control.product-calc__plus.js-product-calc-plus +
-        button(type="submit" class="add-basket js-add-basket")
-            img.add-basket__icon(src="./assets/images/basket.png")
-            span.add-basket__label В корзину
-        +oneClickBuy()
+        //button(type="submit" class="add-basket js-add-basket")
+        //    img.add-basket__icon(src="./assets/images/basket.png")
+        //    span.add-basket__label В корзину
+        //+oneClickBuy()

@@ -46,7 +46,8 @@ $this->title = Title::showTitle($product->name);
         </ul>
         <h1 class="product-detail__title"><?= $product->name; ?></h1>
 		<?= AddBasketWidget::widget([
-			'product_id' => $product->id
+			'product_id' => $product->id,
+            'price' => $product->price,
 		]); ?>
 		<?php if ($properties): ?>
             <ul class="product-properties">
