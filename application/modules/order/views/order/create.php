@@ -11,6 +11,7 @@
  * @var $billing_list \app\modules\user\models\entity\Billing[]
  */
 
+use yii\helpers\Url;
 use app\models\tool\Price;
 use app\models\tool\Currency;
 use app\models\tool\seo\Title;
@@ -77,6 +78,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
         </div>
         <div class="page__right">
             <div class="checkout-summary">
+                <a class="clear-basket" href="<?= Url::to(['/clear/']); ?>"><i class="fas fa-trash-alt"></i></a>
                 <div class="checkout-summary__info">
                     <div class="checkout-summary__title">Ваш заказ на сумму:</div>
                     <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>

@@ -55,6 +55,8 @@ block contents
 						button.add-basket.checkout-form__submit(type="button") Подтвердить заказ
 				.page__right
 					.checkout-summary
+						a(href="#").clear-basket
+							i.fas.fa-trash-alt
 						.checkout-summary__info
 							.checkout-summary__title Ваш заказ на сумму:
 							a.checkout-summary__show-items(data-toggle='collapse', href='#collapseSummary', role='button', aria-expanded='false', aria-controls='collapseSummary')

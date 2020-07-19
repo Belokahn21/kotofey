@@ -36,7 +36,6 @@ use yii\filters\AccessControl;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\modules\search\models\entity\Search;
 use Yii;
 use yii\web\HttpException;
 use yii\web\Response;
@@ -211,27 +210,6 @@ class SiteController extends Controller
 
         return $this->render('index');
     }
-
-//    public function actionSearch()
-//    {
-//        $products = array();
-//        $model = new Search();
-//        $model->save_history = true;
-//
-//        if ($model->load(\Yii::$app->request->get())) {
-//
-//            $query = $model->search();
-//            $countQuery = clone $query;
-//            $pagerItems = new Pagination(['totalCount' => $countQuery->count()]);
-//            $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
-//
-//        }
-//
-//        return $this->render('search', [
-//            'products' => $products,
-//            'pagerItems' => $pagerItems,
-//        ]);
-//    }
 
     public function actionCatalog($id = null)
     {
@@ -648,15 +626,6 @@ class SiteController extends Controller
     public function actionTest()
     {
         return $this->render('test');
-    }
-
-    public
-    function actionClear()
-    {
-        Basket::getInstance()->clear();
-        Promo::clear();
-        Alert::setSuccessNotify("Корзина очищена!");
-        return $this->redirect('/');
     }
 
     public

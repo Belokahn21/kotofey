@@ -113,6 +113,7 @@ $config = [
 				'market' => 'yandex/catalog/export',
 				'search' => 'search/search/index',
 				'checkout' => 'order/order/create',
+				'clear' => 'basket/basket/clear',
 				'gii' => 'gii',
 				'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
 				'<controller:(admin|ajax)>/' => '<controller>/index',
