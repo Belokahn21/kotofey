@@ -13,9 +13,13 @@
     flex-direction: row;
     justify-content: space-between;
     margin: 10px 0;
+
+    .checkout-form__label {
+      width: 49%;
+    }
   }
 
-  &__input {
+  &__input, &__textarea {
     border: 1px silver solid;
     font-size: 12px;
     line-height: 24px;
@@ -30,7 +34,7 @@
   }
 
   &__label {
-    width: 49%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

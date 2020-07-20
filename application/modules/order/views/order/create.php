@@ -15,9 +15,11 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\tool\Price;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 use app\models\tool\Currency;
 use app\models\tool\seo\Title;
 use app\modules\basket\models\entity\Basket;
+use app\modules\payment\models\entity\Payment;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
@@ -43,43 +45,79 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
             <div class="checkout-form__title">Укажите способ доставки</div>
             <div class="checkout-form-variants">
                 <input class="checkbox-budget" id="budget-1" type="radio" name="delivery_id" checked="">
-                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-1"><span class="checkout-form-variants__card">
-                    <div class="checkout-form-variants__label">Доставка</div><img class="checkout-form-variants__icon" src="/upload/images/truck.png"></span></label>
+                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-1">
+                    <span class="checkout-form-variants__card">
+                    <div class="checkout-form-variants__label">Доставка</div>
+                        <img class="checkout-form-variants__icon" src="/upload/images/truck.png">
+                    </span>
+                </label>
                 <input class="checkbox-budget" id="budget-2" type="radio" name="delivery_id">
-                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-2"><span class="checkout-form-variants__card">
-                    <div class="checkout-form-variants__label">Самовывоз</div><img class="checkout-form-variants__icon" src="/upload/images/box.png"></span></label>
+                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-2">
+                    <span class="checkout-form-variants__card">
+                    <div class="checkout-form-variants__label">Самовывоз</div>
+                        <img class="checkout-form-variants__icon" src="/upload/images/box.png"></span>
+                </label>
             </div>
             <div class="checkout-form__title">Укажите ваши данные
                 <div class="checkout-form__group-row">
-                    <label class="checkout-form__label" for="checkout-family">
-						<?= $form->field($order, 'phone')->textInput()->label(false) ?>
-                        <div>Как вас зовут?*</div>
-                        <input class="checkout-form__input" id="checkout-family" name="family" type="text" placeholder="Ваша фамилия">
+                    <label class="checkout-form__label" for="checkout-phone">
+                        <div>Ваш номер телефона*</div>
+						<?= $form->field($order, 'phone')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона'])->label(false) ?>
                     </label>
-                    <label class="checkout-form__label" for="checkout-name">
-                        <input class="checkout-form__input" id="checkout-name" name="name" type="text" placeholder="Ваше имя">
+                    <label class="checkout-form__label" for="checkout-email">
+                        <div>Ваш электронный адрес*</div>
+						<?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш электронный адрес'])->label(false) ?>
                     </label>
                 </div>
                 <div class="checkout-form__group-row">
-                    <label class="checkout-form__label" for="checkout-phone">
-                        <div>Контактный телефон*</div>
-                        <input class="checkout-form__input js-mask-ru" id="checkout-phone" name="phone" type="text" placeholder="+7 (___) ___ __-__">
+                    <label class="checkout-form__label" for="checkout-city">
+                        <div>Город*</div>
+						<?= $form->field($order, 'city')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-city', 'value' => 'Барнаул', 'placeholder' => 'Город'])->label(false); ?>
                     </label>
-                    <label class="checkout-form__label" for="checkout-email">
-                        <div>Электронная почта*</div>
-                        <input class="checkout-form__input" id="checkout-email" name="email" type="text" placeholder="Адрес вашей электронной почты">
+                    <label class="checkout-form__label" for="checkout-street">
+                        <div>Улица*</div>
+						<?= $form->field($order, 'street')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-street', 'placeholder' => 'Улица'])->label(false); ?>
                     </label>
                 </div>
+                <div class="checkout-form__group-row">
+                    <label class="checkout-form__label" for="checkout-number_home">
+                        <div>Дом*</div>
+						<?= $form->field($order, 'number_home')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-number_home', 'placeholder' => 'Номер дома'])->label(false); ?>
+                    </label>
+                    <label class="checkout-form__label" for="checkout-number_appartament">
+                        <div>Квартира*</div>
+						<?= $form->field($order, 'number_appartament')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-number_appartament', 'placeholder' => 'Номер квартиры'])->label(false); ?>
+                    </label>
+                </div>
+                <label class="checkout-form__label" for="checkout-comment">
+                    <div>Ваши пожелания*</div>
+					<?= $form->field($order, 'comment')->textarea(['class' => 'checkout-form__textarea', 'id' => 'checkout-comment', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
+                </label>
             </div>
-            <div class="checkout-form__title">Укажите способ оплаты</div>
-            <div class="checkout-form-variants">
-                <input class="checkbox-budget" id="budget-3" type="radio" name="payment_id">
-                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-3"><span class="checkout-form-variants__card">
-                    <div class="checkout-form-variants__label">По терминалу</div><img class="checkout-form-variants__icon" src="/upload/images/debit.png"></span></label>
-                <input class="checkbox-budget" id="budget-4" type="radio" name="payment_id">
-                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-4"><span class="checkout-form-variants__card">
-                    <div class="checkout-form-variants__label">Наличные</div><img class="checkout-form-variants__icon" src="/upload/images/wallet.png"></span></label>
-            </div>
+			<?php if ($payment): ?>
+                <div class="checkout-form__title">Укажите способ оплаты</div>
+
+                <div class="checkout-form-variants">
+					<?= $form->field($order, 'payment_id')->radioList(ArrayHelper::map($payment, 'id', 'name'), [
+						'item' => function ($index, $label, $name, $checked, $value) {
+							$element = Payment::findOne($value);
+
+							$html = <<<RADIO
+                            <input class="checkbox-budget" id="budget-$index" type="radio" name="$name">
+                            <label class="for-checkbox-budget checkout-form-variants__item" for="budget-$index">
+                            <span class="checkout-form-variants__card">
+                            <div class="checkout-form-variants__label">$label</div>
+                                <img class="checkout-form-variants__icon" src="/upload/$element->image">
+                            </span>
+                            </label>
+RADIO;
+							return $html;
+						}
+					]) ?>
+
+
+                </div>
+			<?php endif; ?>
 			<?= Html::submitButton('Подтвердить заказ', ['class' => 'add-basket checkout-form__submit']); ?>
 			<?php ActiveForm::end(); ?>
         </div>

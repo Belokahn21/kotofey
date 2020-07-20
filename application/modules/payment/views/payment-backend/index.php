@@ -12,7 +12,9 @@ $this->title = Title::showTitle("Управление оплатами");
 ?>
 <section class="payment">
     <h1 class="title">Оплаты</h1>
-	<?php $form = ActiveForm::begin(); ?>
+	<?php $form = ActiveForm::begin([
+		'options' => ['enctype' => 'multipart/form-data']
+	]); ?>
 	<?= $this->render('_form', [
 		'model' => $model,
 		'form' => $form,

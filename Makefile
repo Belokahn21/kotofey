@@ -24,3 +24,5 @@ composer-update:
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/order/init/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/delivery/init/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/payment/init/migrations --interactive=0

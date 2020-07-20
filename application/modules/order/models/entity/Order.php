@@ -54,7 +54,6 @@ class Order extends ActiveRecord
 
 	public $product_id;
 	public $is_update;
-	public $select_billing;
 	public $minusStock;
 	public $plusStock;
 
@@ -88,7 +87,7 @@ class Order extends ActiveRecord
 				}
 			],
 
-			[['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing'], 'integer'],
+			[['payment_id', 'delivery_id', 'user_id', 'type'], 'integer'],
 
 
 			[['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
@@ -107,15 +106,6 @@ class Order extends ActiveRecord
 
 
 			[['product_id'], 'safe'],
-
-			[
-				['select_billing'],
-				'required',
-				'message' => 'Укажите {attribute}',
-				'when' => function () {
-					return \Yii::$app->user->isGuest === true;
-				}
-			],
 		];
 	}
 
@@ -165,7 +155,6 @@ class Order extends ActiveRecord
 			'notes' => 'Заметки(Для админов)',
 			'product_id' => 'Товар',
 			'promo_code' => 'Промо код',
-			'select_billing' => 'Адрес доставки',
 			'phone' => 'Телефон',
 			'postalcode' => 'Почтовый индекс',
 			'country' => 'Страна',
