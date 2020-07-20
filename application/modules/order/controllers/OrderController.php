@@ -38,8 +38,8 @@ class OrderController extends Controller
     public function actionCreate()
     {
         $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
-        $payment = Payment::findAll(['active' => true]);
-        $delivery = Delivery::findAll(['active' => true]);
+        $payments = Payment::findAll(['active' => true]);
+        $deliveries = Delivery::findAll(['active' => true]);
         $order_date = new OrderDate();
         $delivery_time = new DeliveryTimeService();
 
@@ -53,13 +53,12 @@ class OrderController extends Controller
                 }
 
                 if (!$order->validate()) {
-
+                	print_r($order->getErrors());
                     $transaction->rollBack();
                     return false;
 
                 }
                 if (!$order->save()) {
-
                     Alert::setErrorNotify("Ошибка при создании заказа.");
                     $transaction->rollBack();
                     return false;
@@ -67,20 +66,20 @@ class OrderController extends Controller
                 }
 
                 // save order date delivery
-                if ($order_date->load(\Yii::$app->request->post())) {
-                    $order_date->order_id = $order->id;
-                    if (!$order_date->validate()) {
-                        $transaction->rollBack();
-                        Alert::setErrorNotify('Ошибка при создании заказа. Не корректная дата заказа.');
-                        return false;
-                    }
-
-                    if (!$order_date->save()) {
-                        $transaction->rollBack();
-                        Alert::setErrorNotify('Ошибка при создании заказа. Дата доставки заказа не сохранена.');
-                        return false;
-                    }
-                }
+//                if ($order_date->load(\Yii::$app->request->post())) {
+//                    $order_date->order_id = $order->id;
+//                    if (!$order_date->validate()) {
+//                        $transaction->rollBack();
+//                        Alert::setErrorNotify('Ошибка при создании заказа. Не корректная дата заказа.');
+//                        return false;
+//                    }
+//
+//                    if (!$order_date->save()) {
+//                        $transaction->rollBack();
+//                        Alert::setErrorNotify('Ошибка при создании заказа. Дата доставки заказа не сохранена.');
+//                        return false;
+//                    }
+//                }
 
                 // save products
                 $items = new OrdersItems();
@@ -100,11 +99,11 @@ class OrderController extends Controller
         }
 
         return $this->render('create', [
-            'delivery' => $delivery,
-            'delivery_time' => $delivery_time,
             'order' => $order,
-            'order_date' => $order_date,
-            'payment' => $payment,
+            'deliveries' => $deliveries,
+            'payments' => $payments,
+//            'delivery_time' => $delivery_time,
+//            'order_date' => $order_date,
         ]);
     }
 }

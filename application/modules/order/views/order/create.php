@@ -1,11 +1,11 @@
 <?php
 
 /* @var $this yii\web\View
- * @var $order \app\modules\order\models\entity\Order
+ * @var $order Order
  * @var $billing \app\modules\user\models\entity\Billing
  * @var $user \app\modules\user\models\entity\User
- * @var $delivery app\modules\delivery\models\entity\Delivery[]
- * @var $payment \app\modules\payment\models\entity\Payment[]
+ * @var $deliveries app\modules\delivery\models\entity\Delivery[]
+ * @var $payments \app\modules\payment\models\entity\Payment[]
  * @var $order_date \app\modules\order\models\entity\OrderDate
  * @var $delivery_time \app\modules\order\models\service\DeliveryTimeService
  * @var $billing_list \app\modules\user\models\entity\Billing[]
@@ -14,12 +14,11 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\tool\Price;
-use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
+use yii\bootstrap\ActiveForm;
 use app\models\tool\Currency;
 use app\models\tool\seo\Title;
+use app\modules\order\models\entity\Order;
 use app\modules\basket\models\entity\Basket;
-use app\modules\payment\models\entity\Payment;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
@@ -42,22 +41,21 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 					'class' => 'checkout-form'
 				]
 			]); ?>
-            <div class="checkout-form__title">Укажите способ доставки</div>
-            <div class="checkout-form-variants">
-                <input class="checkbox-budget" id="budget-1" type="radio" name="delivery_id" checked="">
-                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-1">
-                    <span class="checkout-form-variants__card">
-                    <div class="checkout-form-variants__label">Доставка</div>
-                        <img class="checkout-form-variants__icon" src="/upload/images/truck.png">
-                    </span>
-                </label>
-                <input class="checkbox-budget" id="budget-2" type="radio" name="delivery_id">
-                <label class="for-checkbox-budget checkout-form-variants__item" for="budget-2">
-                    <span class="checkout-form-variants__card">
-                    <div class="checkout-form-variants__label">Самовывоз</div>
-                        <img class="checkout-form-variants__icon" src="/upload/images/box.png"></span>
-                </label>
-            </div>
+			<?php if ($deliveries): ?>
+                <div class="checkout-form__title">Укажите способ доставки</div>
+                <div class="checkout-form-variants">
+					<?php foreach ($deliveries as $delivery): ?>
+                        <input class="checkbox-budget" id="budget-9090<?= $delivery->id; ?>" value="<?= $delivery->id; ?>" type="radio" name="Order[delivery_id]">
+                        <label class="for-checkbox-budget checkout-form-variants__item" for="budget-9090<?= $delivery->id; ?>">
+                            <span class="checkout-form-variants__card">
+
+                            <div class="checkout-form-variants__label"><?= $delivery->name; ?></div>
+                                <img class="checkout-form-variants__icon" src="/upload/images/truck.png">
+                            </span>
+                        </label>
+					<?php endforeach; ?>
+                </div>
+			<?php endif; ?>
             <div class="checkout-form__title">Укажите ваши данные
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-phone">
@@ -94,28 +92,19 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
 					<?= $form->field($order, 'comment')->textarea(['class' => 'checkout-form__textarea', 'id' => 'checkout-comment', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
                 </label>
             </div>
-			<?php if ($payment): ?>
+			<?php if ($payments): ?>
                 <div class="checkout-form__title">Укажите способ оплаты</div>
 
                 <div class="checkout-form-variants">
-					<?= $form->field($order, 'payment_id')->radioList(ArrayHelper::map($payment, 'id', 'name'), [
-						'item' => function ($index, $label, $name, $checked, $value) {
-							$element = Payment::findOne($value);
-
-							$html = <<<RADIO
-                            <input class="checkbox-budget" id="budget-$index" type="radio" name="$name">
-                            <label class="for-checkbox-budget checkout-form-variants__item" for="budget-$index">
+					<?php foreach ($payments as $payment): ?>
+                        <input class="checkbox-budget" id="budget-11<?= $payment->id; ?>" value="<?= $payment->id; ?>" type="radio" name="Order[payment_id]">
+                        <label class="for-checkbox-budget checkout-form-variants__item" for="budget-11<?= $payment->id; ?>">
                             <span class="checkout-form-variants__card">
-                            <div class="checkout-form-variants__label">$label</div>
-                                <img class="checkout-form-variants__icon" src="/upload/$element->image">
+                            <div class="checkout-form-variants__label"><?= $payment->name; ?></div>
+                                <img class="checkout-form-variants__icon" src="/upload/<?= $payment->image; ?>">
                             </span>
-                            </label>
-RADIO;
-							return $html;
-						}
-					]) ?>
-
-
+                        </label>
+					<?php endforeach; ?>
                 </div>
 			<?php endif; ?>
 			<?= Html::submitButton('Подтвердить заказ', ['class' => 'add-basket checkout-form__submit']); ?>
