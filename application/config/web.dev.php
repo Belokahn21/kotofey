@@ -108,6 +108,7 @@ $config = [
 				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 				'bot/vk/index' => 'bot/vk/index',
 				'market' => 'yandex/catalog/export',
+				'order' => 'order/order/index',
 				'gii' => 'gii',
 				'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
 				'<controller:(admin|ajax)>/' => '<controller>/index',
