@@ -64,7 +64,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     </label>
                     <label class="checkout-form__label" for="checkout-email">
                         <div>Ваш электронный адрес*</div>
-						<?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш электронный адрес'])->label(false) ?>
+						<?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес'])->label(false) ?>
                     </label>
                 </div>
                 <div class="checkout-form__group-row">
