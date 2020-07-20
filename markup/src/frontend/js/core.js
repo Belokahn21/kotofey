@@ -1,7 +1,7 @@
 import $ from 'jquery';
-import lightbox from "lightbox2";
-import popover from 'popper.js';
-import bootstrap from 'bootstrap';
+import 'lightbox2';
+import 'popper.js';
+import 'bootstrap';
 
 // add react js
 // import './react/instagram-media';
