@@ -1,5 +1,26 @@
 .checkout-form-variants {
   display: flex;
+  justify-content: space-between;
+
+  div[aria-invalid="false"] {
+    border: 0 !important;
+
+    .checkout-form-variants__item {
+      border: 1px green solid;
+    }
+  }
+
+  div[aria-invalid="true"] {
+    border: 0 !important;
+
+    .checkout-form-variants__item {
+      border: 1px red solid;
+    }
+  }
+
+  .form-group {
+    width: 100%;
+  }
 
   &__item {
     padding: 30px 30px;

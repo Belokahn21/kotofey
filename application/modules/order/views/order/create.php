@@ -14,11 +14,14 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use app\models\tool\Price;
+use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use app\models\tool\Currency;
 use app\models\tool\seo\Title;
 use app\modules\order\models\entity\Order;
 use app\modules\basket\models\entity\Basket;
+use app\modules\payment\models\entity\Payment;
+use app\modules\delivery\models\entity\Delivery;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
@@ -36,79 +39,87 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
     <h1 class="page__title">Оформление заказа</h1>
     <div class="page__group-row">
         <div class="page__left">
-			<?php $form = ActiveForm::begin([
-				'options' => [
-					'class' => 'checkout-form'
-				]
-			]); ?>
-			<?php if ($deliveries): ?>
+            <?php $form = ActiveForm::begin([
+                'options' => [
+                    'class' => 'checkout-form'
+                ]
+            ]); ?>
+            <?php if ($deliveries): ?>
                 <div class="checkout-form__title">Укажите способ доставки</div>
                 <div class="checkout-form-variants">
-					<?php foreach ($deliveries as $delivery): ?>
-                        <input class="checkbox-budget" id="budget-9090<?= $delivery->id; ?>" value="<?= $delivery->id; ?>" type="radio" name="Order[delivery_id]">
-                        <label class="for-checkbox-budget checkout-form-variants__item" for="budget-9090<?= $delivery->id; ?>">
-                            <span class="checkout-form-variants__card">
+                    <?= $form->field($order, 'delivery_id')->radioList(ArrayHelper::map($deliveries, 'id', 'name'), [
+                        'item' => function ($index, $label, $name, $checked, $value) {
+                            $payment = Delivery::findOne($value);
 
-                            <div class="checkout-form-variants__label"><?= $delivery->name; ?></div>
-                                <img class="checkout-form-variants__icon" src="/upload/images/truck.png">
+                            return <<<LIST
+                        <input class="checkbox-budget" id="budget-9090$index" value="$value" type="radio" name="$name">
+                        <label class="for-checkbox-budget checkout-form-variants__item" for="budget-9090$index">
+                            <span class="checkout-form-variants__card">
+                            <div class="checkout-form-variants__label">$label</div>
+                                <img class="checkout-form-variants__icon" src="/upload/<?= $payment->image; ?>">
                             </span>
                         </label>
-					<?php endforeach; ?>
+LIST;
+                        }]) ?>
                 </div>
-			<?php endif; ?>
+            <?php endif; ?>
             <div class="checkout-form__title">Укажите ваши данные
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-phone">
                         <div>Ваш номер телефона*</div>
-						<?= $form->field($order, 'phone')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона'])->label(false) ?>
+                        <?= $form->field($order, 'phone')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона'])->label(false) ?>
                     </label>
                     <label class="checkout-form__label" for="checkout-email">
                         <div>Ваш электронный адрес*</div>
-						<?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес'])->label(false) ?>
+                        <?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес'])->label(false) ?>
                     </label>
                 </div>
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-city">
                         <div>Город*</div>
-						<?= $form->field($order, 'city')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-city', 'value' => 'Барнаул', 'placeholder' => 'Город'])->label(false); ?>
+                        <?= $form->field($order, 'city')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-city', 'value' => 'Барнаул', 'placeholder' => 'Город'])->label(false); ?>
                     </label>
                     <label class="checkout-form__label" for="checkout-street">
                         <div>Улица*</div>
-						<?= $form->field($order, 'street')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-street', 'placeholder' => 'Улица'])->label(false); ?>
+                        <?= $form->field($order, 'street')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-street', 'placeholder' => 'Улица'])->label(false); ?>
                     </label>
                 </div>
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-number_home">
                         <div>Дом*</div>
-						<?= $form->field($order, 'number_home')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-number_home', 'placeholder' => 'Номер дома'])->label(false); ?>
+                        <?= $form->field($order, 'number_home')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-number_home', 'placeholder' => 'Номер дома'])->label(false); ?>
                     </label>
                     <label class="checkout-form__label" for="checkout-number_appartament">
                         <div>Квартира*</div>
-						<?= $form->field($order, 'number_appartament')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-number_appartament', 'placeholder' => 'Номер квартиры'])->label(false); ?>
+                        <?= $form->field($order, 'number_appartament')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-number_appartament', 'placeholder' => 'Номер квартиры'])->label(false); ?>
                     </label>
                 </div>
                 <label class="checkout-form__label" for="checkout-comment">
                     <div>Ваши пожелания*</div>
-					<?= $form->field($order, 'comment')->textarea(['class' => 'checkout-form__textarea', 'id' => 'checkout-comment', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
+                    <?= $form->field($order, 'comment')->textarea(['class' => 'checkout-form__textarea', 'id' => 'checkout-comment', 'placeholder' => 'Комментарий к заказу'])->label(false); ?>
                 </label>
             </div>
-			<?php if ($payments): ?>
-                <div class="checkout-form__title">Укажите способ оплаты</div>
 
-                <div class="checkout-form-variants">
-					<?php foreach ($payments as $payment): ?>
-                        <input class="checkbox-budget" id="budget-11<?= $payment->id; ?>" value="<?= $payment->id; ?>" type="radio" name="Order[payment_id]">
-                        <label class="for-checkbox-budget checkout-form-variants__item" for="budget-11<?= $payment->id; ?>">
+
+            <div class="checkout-form-variants">
+                <?= $form->field($order, 'payment_id')->radioList(ArrayHelper::map($payments, 'id', 'name'), [
+                    'item' => function ($index, $label, $name, $checked, $value) {
+                        $payment = Payment::findOne($value);
+
+                        return <<<LIST
+                        <input class="checkbox-budget" id="budget-31$index" value="$value" type="radio" name="$name">
+                        <label class="for-checkbox-budget checkout-form-variants__item" for="budget-31$index">
                             <span class="checkout-form-variants__card">
-                            <div class="checkout-form-variants__label"><?= $payment->name; ?></div>
+                            <div class="checkout-form-variants__label">$label</div>
                                 <img class="checkout-form-variants__icon" src="/upload/<?= $payment->image; ?>">
                             </span>
                         </label>
-					<?php endforeach; ?>
-                </div>
-			<?php endif; ?>
-			<?= Html::submitButton('Подтвердить заказ', ['class' => 'add-basket checkout-form__submit']); ?>
-			<?php ActiveForm::end(); ?>
+LIST;
+                    }]) ?>
+            </div>
+
+            <?= Html::submitButton('Подтвердить заказ', ['class' => 'add-basket checkout-form__submit']); ?>
+            <?php ActiveForm::end(); ?>
         </div>
         <div class="page__right">
             <div class="checkout-summary">
@@ -122,28 +133,28 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                     <div class="checkout-summary__currency"><?= Currency::getInstance()->show(); ?></div>
                 </div>
             </div>
-			<?php if ($basket = Basket::findAll()): ?>
+            <?php if ($basket = Basket::findAll()): ?>
                 <div class="collapse" id="collapseSummary">
                     <ul class="light-checkout-list">
-						<?php foreach ($basket as $item): ?>
+                        <?php foreach ($basket as $item): ?>
                             <li class="light-checkout-list__item">
                                 <img alt="<?= $item->product->name; ?>" title="<?= $item->product->name; ?>" class="light-checkout-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>">
                                 <div class="light-checkout-list__info">
                                     <div class="light-checkout-list__title"><a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a></div>
                                     <div class="light-checkout-list__article">Артикул: <?= $item->product->article; ?></div>
                                 </div>
-								<?= AddBasketWidget::widget([
-									'product_id' => $item->product->id,
-									'price' => $item->product->price,
-									'showButton' => false,
-									'showInfo' => false,
-									'showOneClick' => false,
-								]); ?>
+                                <?= AddBasketWidget::widget([
+                                    'product_id' => $item->product->id,
+                                    'price' => $item->product->price,
+                                    'showButton' => false,
+                                    'showInfo' => false,
+                                    'showOneClick' => false,
+                                ]); ?>
                             </li>
-						<?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
                 </div>
-			<?php endif; ?>
+            <?php endif; ?>
             <div class="checkout-reglament">
                 <div class="checkout-reglament__title">Обратите внимание!</div>
                 <div class="checkout-reglament__text">
