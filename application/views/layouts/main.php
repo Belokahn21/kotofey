@@ -225,6 +225,7 @@ $this->beginPage() ?>
     </ul>
 </div>
  */ ?>
+<script src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>
 </body>
 </html>
