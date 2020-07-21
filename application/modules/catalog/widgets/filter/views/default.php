@@ -53,26 +53,24 @@ use yii\widgets\Pjax;
             ?>
             <?php if ($values): ?>
                 <div class="filter-catalog__item"><label class="filter-catalog__label" for="js-filter-from"><?= $informer->name; ?></label>
-                    <ul class="filter-catalog-checkboxes">
-                        <?= $form->field($filterModel, 'informer[' . $informer->id . '][]')->checkboxList(ArrayHelper::map($values, 'id', 'name'), [
-                            'id' => 'id_list_company',
-                            'class' => 'filter-catalog-checkboxes__item',
-                            'item' => function ($index, $label, $name, $checked, $value) {
+                    <?= $form->field($filterModel, 'informer[' . $informer->id . '][]')->checkboxList(ArrayHelper::map($values, 'id', 'name'), [
+                        'id' => 'id_list_company',
+                        'class' => 'filter-catalog-checkboxes__item',
+                        'item' => function ($index, $label, $name, $checked, $value) {
 
-                                return <<<LIST
+                            return <<<LIST
 <li class="filter-catalog-checkboxes__item"><input type="checkbox" value="$value" name="$name">$label</li>
 LIST;
-                            }
-                        ])->label(false); ?>
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Bergauf</li>-->
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Ceresit</li>-->
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Dauer</li>-->
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Holcim</li>-->
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Unis</li>-->
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Волма</li>-->
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Стройбриг</li>-->
-                        <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Русеан</li>-->
-                    </ul>
+                        }
+                    ])->label(false); ?>
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Bergauf</li>-->
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Ceresit</li>-->
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Dauer</li>-->
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Holcim</li>-->
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Unis</li>-->
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Волма</li>-->
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Стройбриг</li>-->
+                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Русеан</li>-->
                 </div>
 
             <?php endif; ?>
