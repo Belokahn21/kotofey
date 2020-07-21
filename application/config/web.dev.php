@@ -72,11 +72,11 @@ $config = [
 			'viewPath' => '@app/mail',
 			'transport' => [
 				'class' => 'Swift_SmtpTransport',
-				'host' => 'smtp.timeweb.ru',
-				'username' => 'sale@kotofey.store',
+				'host' => 'smtp.gmail.com',
+				'username' => 'info.kotofey.store@gmail.com',
 				'password' => '123qweR%',
-//				'port' => '465',
-//				'encryption' => 'tls',
+				'port' => '587',
+				'encryption' => 'tls',
 			],
 			// send all mails to a file by default. You have to set
 			// 'useFileTransport' to false and configure a transport
