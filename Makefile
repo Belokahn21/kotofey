@@ -7,6 +7,9 @@ gulp-build:
 push:
 	git add . && git commit -m "update" && git push
 
+pull:
+	git pull
+
 init-dev:
 	cp application/web/index.dev.php application/web/index.php
 	cp application/config/web.dev.php application/config/web.php
@@ -26,3 +29,5 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/order/init/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/delivery/init/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/payment/init/migrations --interactive=0
+
+deploy: pull init-dev
