@@ -41,6 +41,7 @@ use yii\db\ActiveRecord;
  * @property string $promo_code
  * @property string $email
  * @property string $phone
+ * @property string $ip
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -65,9 +66,9 @@ class Order extends ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_DEFAULT => ['minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CUSTOM => ['minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CLIENT_BUY => ['minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_DEFAULT => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_CUSTOM => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_CLIENT_BUY => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
 		];
 	}
 
@@ -106,7 +107,17 @@ class Order extends ActiveRecord
 
 
 			[['product_id'], 'safe'],
+
+			[['ip'], 'string'],
 		];
+	}
+
+	public function beforeValidate()
+	{
+		if (empty($this->ip)) {
+			$this->ip = $_SERVER['REMOTE_ADDR'];
+		}
+		return parent::beforeValidate();
 	}
 
 	public function beforeSave($insert)
