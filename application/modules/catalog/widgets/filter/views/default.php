@@ -30,19 +30,6 @@ use yii\widgets\Pjax;
             <div class="filter-catalog__input-group"><input class="filter-catalog__input" id="js-filter-from" placeholder="100" type="text"><input class="filter-catalog__input" id="js-filter-to" placeholder="999" type="text"></div>
         </div>
         <div class="filter-catalog__item"><input class="filter-catalog__range" type="range"></div>
-        <!--        <div class="filter-catalog__item"><label class="filter-catalog__label" for="js-filter-from">Бренд</label>-->
-        <!--            <ul class="filter-catalog-checkboxes">-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Bergauf</li>-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Ceresit</li>-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Dauer</li>-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Holcim</li>-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Unis</li>-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Волма</li>-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Стройбриг</li>-->
-        <!--                <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Русеан</li>-->
-        <!--            </ul>-->
-        <!--        </div>-->
-
         <?php foreach ($informers as $informer): ?>
             <?php
             $values = InformersValues::find()->where(['informer_id' => $informer->id, 'active' => true])->orderBy(['name' => SORT_ASC]);
@@ -55,22 +42,17 @@ use yii\widgets\Pjax;
                 <div class="filter-catalog__item"><label class="filter-catalog__label" for="js-filter-from"><?= $informer->name; ?></label>
                     <?= $form->field($filterModel, 'informer[' . $informer->id . '][]')->checkboxList(ArrayHelper::map($values, 'id', 'name'), [
                         'id' => 'id_list_company',
-                        'class' => 'filter-catalog-checkboxes__item',
+                        'class' => 'filter-catalog-checkboxes',
                         'item' => function ($index, $label, $name, $checked, $value) {
+                            $isNeedBreak = (strlen($label) > 25 ? "break" : "");
 
                             return <<<LIST
-<li class="filter-catalog-checkboxes__item"><input type="checkbox" value="$value" name="$name">$label</li>
+<div class="filter-catalog-checkboxes__item $isNeedBreak">
+    <input type="checkbox" value="$value" name="$name">$label
+</div>
 LIST;
                         }
                     ])->label(false); ?>
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Bergauf</li>-->
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Ceresit</li>-->
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Dauer</li>-->
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Holcim</li>-->
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Unis</li>-->
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Волма</li>-->
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Стройбриг</li>-->
-                    <!--                        <li class="filter-catalog-checkboxes__item"><input type="checkbox" name="brand">Русеан</li>-->
                 </div>
 
             <?php endif; ?>

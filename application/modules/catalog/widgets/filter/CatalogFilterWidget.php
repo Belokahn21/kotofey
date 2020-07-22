@@ -22,6 +22,9 @@ class CatalogFilterWidget extends Widget
 
     public function run()
     {
+        if ($this->category->parent == 0) {
+            return false;
+        }
         $filterModel = new CatalogFilter();
         if (\Yii::$app->request->isGet) {
             $filterModel->load(\Yii::$app->request->get());

@@ -14,6 +14,7 @@ import './block/menu';
 import './block/ui-placeholder';
 
 import './block/other-jquery';
+import './block/catalog-filter';
 import './block/catalog';
 import './include/init-sliders';
 import './include/init-range-sliders';
