@@ -100,6 +100,7 @@ $config = [
 			'enableStrictParsing' => false,
 			'rules' => [
 				'GET rest/product/get' => 'rest/product/get',
+				'GET rest/catalog/get' => 'rest/catalog/get',
 				'GET menu/rest-backend/get' => 'menu/rest-backend/get',
 				'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
 				'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
