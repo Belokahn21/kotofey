@@ -98,35 +98,41 @@ $config = [
 			'enablePrettyUrl' => true,
 			'showScriptName' => false,
 			'enableStrictParsing' => false,
-			'rules' => [
-				'GET rest/product/get' => 'rest/product/get',
-				'GET rest/catalog/get' => 'rest/catalog/get',
-				'GET menu/rest-backend/get' => 'menu/rest-backend/get',
-				'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
-				'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
-				'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
-				'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
+            'rules' => [
+                'GET rest/product/get' => 'rest/product/get',
 
-				'admin/<module>/<controller>/' => '<module>/<controller>/index',
-				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
-				'bot/vk/index' => 'bot/vk/index',
-				'market' => 'yandex/catalog/export',
-				'gii' => 'gii',
-				'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
-				'<controller:(admin|ajax)>/' => '<controller>/index',
-				'<controller:(admin|ajax)>' => '<controller>/<action>',
-				'<controller:ajax>/<action>/<product_id:\d+>' => '<controller>/<action>',
-				'<controller:ajax>/<action>/<product_id:\d+>/<count:\d+>' => '<controller>/<action>',
-				'<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
-				'<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
-				'<action>' => 'site/<action>',
-				'<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
+                'GET menu/rest-backend/get' => 'menu/rest-backend/get',
+                'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
+                'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
+                'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
+                'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
+
+                'POST basket/rest/add' => 'basket/rest/add',
+                'POST catalog/rest/get' => 'catalog/rest/get',
+
+                'admin/<module>/<controller>/' => '<module>/<controller>/index',
+                'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+                'bot/vk/index' => 'bot/vk/index',
+                'market' => 'yandex/catalog/export',
+                'search' => 'search/search/index',
+                'checkout' => 'order/order/create',
+                'clear' => 'basket/basket/clear',
+                'gii' => 'gii',
+                'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
+                '<controller:(admin|ajax)>/' => '<controller>/index',
+                '<controller:(admin|ajax)>' => '<controller>/<action>',
+                '<controller:ajax>/<action>/<product_id:\d+>' => '<controller>/<action>',
+                '<controller:ajax>/<action>/<product_id:\d+>/<count:\d+>' => '<controller>/<action>',
+                '<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
+                '<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
+                '<action>' => 'site/<action>',
+                '<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
 //                [
 //                    'class' => 'yii\rest\UrlRule',
 //                    'controller' => 'rest/product'
 //                ]
 
-			]
+            ]
 		],
 	],
 	'modules' => [
