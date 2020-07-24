@@ -3,12 +3,10 @@
 namespace app\modules\catalog\controllers;
 
 
+use yii\rest\ActiveController;
+use yii\data\ActiveDataProvider;
 use app\models\forms\CatalogFilter;
 use app\modules\catalog\models\entity\Product;
-use yii\data\ActiveDataProvider;
-use yii\helpers\Json;
-use yii\rest\ActiveController;
-use yii\rest\Controller;
 
 class RestController extends ActiveController
 {
@@ -31,7 +29,6 @@ class RestController extends ActiveController
 		$catalogFilter = new CatalogFilter();
 		$query = Product::find();
 		$catalogFilter->applyFilter($query, \Yii::$app->request->post());
-//		$products = $query->all();
 		return new ActiveDataProvider([
 			'query' => $query,
 			'pagination' => [
@@ -39,6 +36,5 @@ class RestController extends ActiveController
 //				'pageSizeLimit' => [0, 5],
 			]
 		]);
-//		return Json::encode($products);
 	}
 }
