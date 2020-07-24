@@ -43,43 +43,41 @@ class CatalogFilter extends Model
 	/**
 	 * @param ActiveQuery $query
 	 */
-	public function applyFilter(&$query)
+	public function applyFilter(&$query, $requsetParams)
 	{
-		if (\Yii::$app->request->isGet) {
-			if ($this->load(\Yii::$app->request->get())) {
+		if ($this->load($requsetParams)) {
 
-				$ar_product_id = array();
+			$ar_product_id = array();
 
-				// properties
-				$values = ProductPropertiesValues::find()->select('product_id');
-				$properties_ids = array();
-				$value_list = array();
-				$iter = 0;
+			// properties
+			$values = ProductPropertiesValues::find()->select('product_id');
+			$properties_ids = array();
+			$value_list = array();
+			$iter = 0;
 
-				foreach ($this->informer as $informer_id => $arValues) {
-					if (is_array($arValues)) {
-						$properties_ids[] = ProductProperties::find()->where(['informer_id' => $informer_id])->one()->id;
-						$value_list = array_merge($value_list, $arValues);
-						$iter++;
-					}
+			foreach ($this->informer as $informer_id => $arValues) {
+				if (is_array($arValues)) {
+					$properties_ids[] = ProductProperties::find()->where(['informer_id' => $informer_id])->one()->id;
+					$value_list = array_merge($value_list, $arValues);
+					$iter++;
 				}
+			}
 
-				$values->orWhere([
-					'property_id' => $properties_ids,
-					'value' => $value_list
+			$values->orWhere([
+				'property_id' => $properties_ids,
+				'value' => $value_list
+			]);
+
+			$values->groupBy('product_id');
+			$values->having("count(*) = " . $iter);
+
+			$values = $values->all();
+			$ar_product_id = array_merge($ar_product_id, ArrayHelper::getColumn($values, 'product_id'));
+
+			if (is_array($ar_product_id)) {
+				$query->andWhere([
+					'id' => $ar_product_id
 				]);
-
-				$values->groupBy('product_id');
-				$values->having("count(*) = " . $iter);
-
-				$values = $values->all();
-				$ar_product_id = array_merge($ar_product_id, ArrayHelper::getColumn($values, 'product_id'));
-
-				if (is_array($ar_product_id)) {
-					$query->andWhere([
-						'id' => $ar_product_id
-					]);
-				}
 			}
 		}
 	}

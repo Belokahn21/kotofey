@@ -20,15 +20,13 @@ if (form) {
 				}
 
 				timerex = setTimeout(() => {
-					fetch(config.restGetCatalog, {
+					fetch(location.href, {
 						method: 'POST',
 						body: new FormData(form)
-					}).then(response => response.json()).then((data) => {
-						const products = JSON.parse(data);
+					}).then(response => response.text()).then((data) => {
+						console.log(data);
 
-						if (products) {
-							console.log(products);
-						}
+						console.log(data.querySelector('.pagination'));
 					})
 				}, timeout);
 			});
