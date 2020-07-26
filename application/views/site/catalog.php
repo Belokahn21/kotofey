@@ -6,6 +6,7 @@
  * @var $category \app\modules\catalog\models\entity\Category
  */
 
+use yii\widgets\Pjax;
 use yii\widgets\LinkPager;
 use app\models\tool\seo\Title;
 use app\models\forms\CatalogFilter;
@@ -75,16 +76,20 @@ if ($category) {
                         <option>Сначала дорогие</option>
                     </select></div>
             </form>
-            <ul class="catalog">
-                <?php foreach ($products as $product): ?>
-                    <?= $this->render('@app/modules/catalog/views/__item', [
-                        'product' => $product
-                    ]); ?>
-                <?php endforeach; ?>
-            </ul>
-            <?= LinkPager::widget([
-                'pagination' => $pagerItems,
-            ]); ?>
+            <?php if ($products): ?>
+                <ul class="catalog">
+                    <?php foreach ($products as $product): ?>
+                        <?= $this->render('@app/modules/catalog/views/__item', [
+                            'product' => $product
+                        ]); ?>
+                    <?php endforeach; ?>
+                </ul>
+                <?= LinkPager::widget([
+                    'pagination' => $pagerItems,
+                ]); ?>
+            <?php else: ?>
+                <img src="/upload/images/not-found.png">
+            <?php endif; ?>
         </div>
     </div>
 </div>

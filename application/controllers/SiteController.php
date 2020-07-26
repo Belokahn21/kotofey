@@ -625,7 +625,14 @@ class SiteController extends Controller
 
 	public function actionTest()
 	{
-		return $this->render('test');
+        $string = Yii::$app->request->post('string');
+        $stringHash = '';
+        if (!is_null($string)) {
+            $stringHash = rand();
+        }
+        return $this->render('test', [
+            'stringHash' => $stringHash,
+        ]);
 	}
 
 	public
