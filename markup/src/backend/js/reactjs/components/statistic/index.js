@@ -4,34 +4,34 @@ import config from '../../config';
 import Item from './item';
 
 class Statistic extends React.Component {
-	constructor() {
-		super();
+    constructor() {
+        super();
 
-		this.state = {
-			items: []
-		}
+        this.state = {
+            items: []
+        }
 
-		fetch(config.restStatisticGet)
-			.then(response => response.json())
-			.then(json => {
-				this.setState({
-					items: JSON.parse(json),
-				});
-			});
-	}
+        fetch(config.restStatisticGet)
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    items: JSON.parse(json),
+                });
+            });
+    }
 
-	render() {
-		return (
-			<ul className="statistic">
-				{this.state.items.map((element, index) => {
-					return <Item element={element} index={index}/>
-				})}
-			</ul>
-		)
-	}
+    render() {
+        return (
+            <ul className="statistic">
+                {this.state.items.map((element, index) => {
+                    return <Item element={element} index={index}/>
+                })}
+            </ul>
+        )
+    }
 }
 
 const statistic = document.querySelector('.statistic-wrap');
 if (statistic) {
-	ReactDom.render(<Statistic/>, statistic);
+    ReactDom.render(<Statistic/>, statistic);
 }
