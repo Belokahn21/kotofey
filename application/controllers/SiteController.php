@@ -240,7 +240,7 @@ class SiteController extends Controller
 			$query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['active' => 1]);
 		}
 
-		$filterModel->applyFilter($query, Yii::$app->request->post());
+		$filterModel->applyFilter($query, Yii::$app->request->get());
 		$countQuery = clone $query;
 		$pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 12]);
 		$pagerItems->pageSizeParam = false;

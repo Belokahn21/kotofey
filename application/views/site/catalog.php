@@ -19,16 +19,16 @@ $this->params['breadcrumbs'][] = ['label' => 'Зоотовары', 'url' => ['/c
 
 
 if ($category) {
-    foreach ($category->undersections() as $parents) {
-        $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
-    }
+	foreach ($category->undersections() as $parents) {
+		$this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+	}
 
-    // set title
-    $category_id = $category->id;
-    $this->title = Title::showTitle($category->name);
-    if ($category->seo_title) {
-        $this->title = Title::showTitle($category->seo_title);
-    }
+	// set title
+	$category_id = $category->id;
+	$this->title = Title::showTitle($category->name);
+	if ($category->seo_title) {
+		$this->title = Title::showTitle($category->seo_title);
+	}
 } ?>
 <div class="page">
     <ul class="breadcrumbs">
@@ -39,27 +39,27 @@ if ($category) {
     <div class="catalog-container">
         <aside class="left-siderbar">
 
-            <?= CatalogFilterWidget::widget([
-                'category' => $category
-            ]); ?>
+			<?= CatalogFilterWidget::widget([
+				'category' => $category
+			]); ?>
 
-            <?php if ($category): ?>
-                <?php $id = $category->id; ?>
-            <?php else: ?>
-                <?php $id = 0; ?>
-            <?php endif; ?>
+			<?php if ($category): ?>
+				<?php $id = $category->id; ?>
+			<?php else: ?>
+				<?php $id = 0; ?>
+			<?php endif; ?>
 
-            <?php $subCategories = Category::find()->where(['parent' => $id])->all(); ?>
+			<?php $subCategories = Category::find()->where(['parent' => $id])->all(); ?>
 
-            <?php if ($subCategories): ?>
+			<?php if ($subCategories): ?>
                 <ul class="aside-sub-categories">
-                    <?php foreach ($subCategories as $category): ?>
+					<?php foreach ($subCategories as $category): ?>
                         <li class="aside-sub-categories__item">
                             <a class="aside-sub-categories__link" href="<?= $category->detail; ?>"><?= $category->name; ?></a>
                         </li>
-                    <?php endforeach; ?>
+					<?php endforeach; ?>
                 </ul>
-            <?php endif; ?>
+			<?php endif; ?>
         </aside>
         <div class="catalog-wrap">
             <form class="catalog-sort"><input class="catalog-sort__input" id="catalog-sort-variant-1" type="checkbox" name="sort-checkbox"><label class="catalog-sort__item checkbox-type" for="catalog-sort-variant-1">
@@ -76,20 +76,22 @@ if ($category) {
                         <option>Сначала дорогие</option>
                     </select></div>
             </form>
-            <?php if ($products): ?>
+			<?php if ($products): ?>
                 <ul class="catalog">
-                    <?php foreach ($products as $product): ?>
-                        <?= $this->render('@app/modules/catalog/views/__item', [
-                            'product' => $product
-                        ]); ?>
-                    <?php endforeach; ?>
+					<?php foreach ($products as $product): ?>
+						<?= $this->render('@app/modules/catalog/views/__item', [
+							'product' => $product
+						]); ?>
+					<?php endforeach; ?>
                 </ul>
-                <?= LinkPager::widget([
-                    'pagination' => $pagerItems,
-                ]); ?>
-            <?php else: ?>
+                <div class="pagination-wrap">
+					<?= LinkPager::widget([
+						'pagination' => $pagerItems,
+					]); ?>
+                </div>
+			<?php else: ?>
                 <img src="/upload/images/not-found.png">
-            <?php endif; ?>
+			<?php endif; ?>
         </div>
     </div>
 </div>

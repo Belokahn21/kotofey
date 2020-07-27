@@ -184,4 +184,8 @@
   input {
     margin-right: 10px;
   }
+
+  &[aria-invalid="true"], &[aria-invalid="false"] {
+    border: 0 !important;
+  }
 }

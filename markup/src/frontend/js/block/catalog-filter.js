@@ -1,36 +1,116 @@
-import config from '../config';
+import $ from 'jquery';
 
-let form = document.querySelector('#filter-form-id');
-let timerex = null;
-const timeout = 200;
-if (form) {
-	form.addEventListener('submit', () => {
-	});
+var $form = $('#filter-form-id');
+var $catalog = $('.catalog');
+var $paginationWrap = $('.pagination-wrap');
+const timeout = 2500;
 
+if ($form) {
 
-	let inputs = form.querySelectorAll('input, select');
+	$form.find('input,select').each(function () {
+		let element = $(this);
 
-	if (inputs) {
-		inputs.forEach((element) => {
-			element.addEventListener('change', () => {
-				console.log('element changed');
+		element.change(function () {
+			$.ajax({
+				'url': location.href + '?' + $form.serialize(),
+				data: $form.serialize(),
+				method: 'POST',
+				beforeSend: function () {
+					$paginationWrap.html("");
 
-				if (timerex) {
-					clearTimeout(timerex);
+					$catalog.html($('<li>').html($('<img>', {
+						src: '/upload/images/loading.gif'
+					})));
+				},
+				success: function (data) {
+
+					setTimeout(function () {
+						var $page = $(data);
+
+						$catalog.html("");
+
+						$page.find('.catalog').find('.catalog__item').each(function () {
+							$catalog.append($(this));
+						});
+
+						$paginationWrap.html($page.find('.pagination'));
+
+					}, timeout);
+
 				}
-
-				timerex = setTimeout(() => {
-					// fetch(location.href, {
-					fetch(config.restGetCatalog, {
-						method: 'POST',
-						body: new FormData(form)
-					}).then(response => response.text()).then((data) => {
-						data = JSON.parse(data);
-						console.log(data);
-						console.log(data._links);
-					})
-				}, timeout);
 			});
-		})
-	}
+		});
+
+	});
 }
+
+
+// (function ($) {
+// 	var methods = {
+// 		init: function (options) {
+// 		},
+// 		show: function () {
+// 			// ПОДХОД
+// 		},
+// 		hide: function () {
+// 			// ПРАВИЛЬНЫЙ
+// 		},
+// 		update: function (content) {
+// 			// !!!
+// 		}
+// 	};
+// 	$.fn.catalogFilter = function (method) {
+// 		var $this = this;
+//
+// 		this.find("input, select").each(function () {
+//
+// 			$(this).change(function () {
+//
+// 				 $.ajax({
+// 				 	'url': location.href + '?' + $this.serialize(),
+// 				 	'method': 'get',
+// 				 	beforeSend: function () {
+// 				 		$('.pagination-wrap').html("");
+//
+//
+// 				 		$('.catalog-list').addClass('flex-position-center').html($('<li>', {
+// 				 			css: {
+// 				 				'align-self': 'flex-start'
+// 				 			}
+// 				 		}).html($('<img>', {
+// 				 			src: '/upload/images/loading.gif'
+// 				 		})));
+// 				 	},
+// 				 	success: function (data) {
+//
+// 				 		setTimeout(function () {
+//
+// 				 			var $page = $(data);
+//
+// 				 			$('.catalog-list').removeClass('flex-position-center').html("");
+//
+// 				 			$page.find('.catalog-list').find('.catalog-list__item').each(function () {
+// 				 				$('.catalog-list').append($(this));
+// 				 			});
+// 				 			$('.pagination-wrap').html($page.find('.pagination'));
+//
+// 				 		}, 2500);
+//
+// 				 	}
+// 				 });
+// 			});
+// 		});
+//
+// 		// логика вызова метода
+// 		if (methods[method]) {
+// 			return methods[method].apply(this, Array.prototype.slice.call(arguments, 1));
+// 		} else if (typeof method === 'object' || !method) {
+// 			return methods.init.apply(this, arguments);
+// 		} else {
+// 			$.error('Метод с именем ' + method + ' не существует для catalog filter');
+// 		}
+// 	};
+// })(jQuery);
+//
+//
+// $("#filter-form-id").catalogFilter();
