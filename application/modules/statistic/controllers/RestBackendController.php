@@ -55,7 +55,7 @@ class RestBackendController extends Controller
 						'title' => 'Доход',
 						'value' => Price::format(OrderHelper::marginality()),
 					]
-				]
+				],
 			],
 			[
 				'icon' => 'fa-cubes',
@@ -72,17 +72,20 @@ class RestBackendController extends Controller
 						'title' => 'Доход',
 						'value' => Price::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
 					],
+				],
+			],
+			[
+				'icon' => 'fa-loop',
+				'data' => [
+					[
+						'title' => 'Последний запрос',
+						'value' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->one()->text,
+					],
+				],
+				'modal' => [
+					'title' => 'Список запросов сайта'
 				]
 			],
-//			[
-//				'icon' => 'fa-loop',
-//				'data' => [
-//					[
-//						'title' => 'Запросы',
-//						'value' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->all(),
-//					],
-//				]
-//			],
 		];
 		return Json::encode($elements);
 	}
