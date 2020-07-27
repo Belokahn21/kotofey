@@ -83,7 +83,10 @@ class RestBackendController extends Controller
 					],
 				],
 				'modal' => [
-					'title' => 'Список запросов сайта'
+					'title' => 'Список запросов сайта',
+					'data' => [
+						'Запрос' => 'Ответ'
+					]
 				]
 			],
 		];

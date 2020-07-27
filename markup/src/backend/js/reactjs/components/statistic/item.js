@@ -19,35 +19,40 @@ class StatisticItem extends React.Component {
 				</div>
 				<div className="statistic__content">
 					<ul className="statistic-info">
-						{this.props.element.data.map((element, index) => {
+						{Object.keys(this.props.element.data).map((element, index) => {
 							return <li className="statistic-info__row" key={index}>
-								<div className="statistic-info__key">{element.title}</div>
-								<div className="statistic-info__value">{element.value}</div>
+								<div className="statistic-info__key">{element}</div>
+								<div className="statistic-info__value">{this.props.element.data[element]}</div>
 							</li>
 						})}
 					</ul>
 				</div>
 
-
+				{this.props.element.modal !== undefined &&
 				<div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div className="modal-dialog" role="document">
 						<div className="modal-content">
 							<div className="modal-header">
-								<h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+								<h5 className="modal-title" id="exampleModalLabel">{this.props.element.modal.title}</h5>
 								<button type="button" className="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
 							<div className="modal-body">
-								...
+								{Object.keys(this.props.element.modal.data).map((element, index) => {
+									return <div>
+										<span>{element}</span>
+										<span>{this.props.element.modal.data[element]}</span>
+									</div>
+								})}
 							</div>
 							<div className="modal-footer">
-								<button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
-								<button type="button" className="btn btn-primary">Save changes</button>
+								<button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
 							</div>
 						</div>
 					</div>
 				</div>
+				}}
 			</li>
 		);
 	}
