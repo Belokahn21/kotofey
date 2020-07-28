@@ -33,7 +33,7 @@ class StatisticItem extends React.Component {
 				</div>
 
 				{statisticModal !== undefined &&
-				<div className="modal fade" id={statisticModal.modalId} tabIndex="-1" role="dialog" aria-labelledby={statisticModal.id + 'Label'} aria-hidden="true">
+				<div key={this.props.index} className="modal fade" id={statisticModal.modalId} tabIndex="-1" role="dialog" aria-labelledby={statisticModal.id + 'Label'} aria-hidden="true">
 					<div className="modal-dialog" role="document">
 						<div className="modal-content">
 							<div className="modal-header">
@@ -43,12 +43,17 @@ class StatisticItem extends React.Component {
 								</button>
 							</div>
 							<div className="modal-body">
-								{Object.keys(statisticModal.data).map((element, index) => {
-									const value = statisticModal.data[element];
-									return <div className="d-flex flex-row align-items-center " key={index}>
-										<span className="w-50">{element}</span>
-										<span className="w-50">{value}</span>
-									</div>
+								{Object.keys(statisticModal.data).map((rowCounter, rowIndex) => {
+									const row = statisticModal.data[rowCounter];
+
+									return Object.keys(row).map((key, index) => {
+										const value = row[key];
+										return <div key={index} className="d-flex flex-row align-items-center">
+											<span className="w-25">{key}</span>
+											<span className="w-25">{value}</span>
+										</div>
+									});
+
 								})}
 							</div>
 							<div className="modal-footer">

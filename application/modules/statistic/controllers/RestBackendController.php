@@ -40,10 +40,14 @@ class RestBackendController extends Controller
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		$products = Product::find();
 		$queryData = array();
-		$queries = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
+		$queries = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
 		/* @var $query SearchQuery */
 		foreach ($queries as $query) {
-			$queryData[$query->text] = date('d.m.Y H:i', $query->created_at);
+			$queryData[] = [
+				'Запрос' => $query->text,
+				'IP' => $query->ip,
+				'Дата' => date('d.m.Y H:i', $query->created_at)
+			];
 		}
 
 
@@ -71,7 +75,7 @@ class RestBackendController extends Controller
 				],
 				'modal' => [
 					'modalId' => 'search-modal-id',
-					'title' => 'Список запросов сайта',
+					'title' => 'Поиск сайта',
 					'data' => $queryData
 				]
 			],
