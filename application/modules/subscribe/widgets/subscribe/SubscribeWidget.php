@@ -1,9 +1,9 @@
 <?php
 
-namespace app\modules\subscibe\widgets\subscribe;
+namespace app\modules\subscribe\widgets\subscribe;
 
 
-use app\modules\subscibe\models\entity\Subscribe;
+use app\modules\subscribe\models\entity\Subscribe;
 use yii\base\Widget;
 
 class SubscribeWidget extends Widget

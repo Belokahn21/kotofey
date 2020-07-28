@@ -13,7 +13,7 @@ use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
-use app\modules\subscibe\widgets\subscribe\SubscribeWidget;
+use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
 
 AppAsset::register($this);
 

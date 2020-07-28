@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\subscibe;
+namespace app\modules\subscribe;
 
 /**
- * subscibe module definition class
+ * subscribe module definition class
  */
 class Module extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\subscibe\controllers';
+    public $controllerNamespace = 'app\modules\subscribe\controllers';
 
     /**
      * {@inheritdoc}

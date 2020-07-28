@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\subscibe\models\entity;
+namespace app\modules\subscribe\models\entity;
 
 
 use yii\behaviors\TimestampBehavior;

@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\subscibe\controllers;
+namespace app\modules\subscribe\controllers;
 
-use app\modules\subscibe\models\entity\Subscribe;
+use app\modules\subscribe\models\entity\Subscribe;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 
