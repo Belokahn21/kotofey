@@ -9,6 +9,7 @@ use yii\helpers\Html;
 use app\assets\AppAsset;
 use app\widgets\notification\Alert;
 use app\widgets\admin_panel\AdminPanel;
+use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
 use app\modules\search\widges\search\SearchWidget;
@@ -30,12 +31,12 @@ $this->beginPage() ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<?php if (YII_ENV == 'prod'): ?>
-		<?php echo $this->render('include/head/yandex/metrika.php'); ?>
-		<?php echo $this->render('include/head/yandex/webmaster.php'); ?>
-		<?php echo $this->render('include/head/google/google_metrika.php'); ?>
-		<?php echo $this->render('include/head/jivo.php'); ?>
-	<?php endif; ?>
+    <?php if (YII_ENV == 'prod'): ?>
+        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
+        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
+        <?php echo $this->render('include/head/google/google_metrika.php'); ?>
+        <?php echo $this->render('include/head/jivo.php'); ?>
+    <?php endif; ?>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -53,9 +54,9 @@ $this->beginPage() ?>
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-	<?= Html::csrfMetaTags() ?>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-	<?php $this->head() ?>
+    <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -99,9 +100,9 @@ $this->beginPage() ?>
             <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg"></div>
         </div>
         <ul class="full-mobile-menu">
-			<?php foreach ($parentCategories as $category): ?>
+            <?php foreach ($parentCategories as $category): ?>
                 <li class="full-mobile-menu__item"><a class="full-mobile-menu__link" href="<?= $category->detail; ?>"><?= $category->name; ?></a></li>
-			<?php endforeach; ?>
+            <?php endforeach; ?>
         </ul>
         <ul class="full-mobile-nav">
             <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О компании</a>
@@ -117,7 +118,8 @@ $this->beginPage() ?>
                     <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);">
                         <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
                         <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
-                    </a></li>
+                    </a>
+                </li>
                 <li class="header-mobile-full-footer-menu__item">
                     <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);">
                         <div class="header-mobile-full-footer-menu__icon">
@@ -137,12 +139,18 @@ $this->beginPage() ?>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/']); ?>">Скидки и акции</a></div>
         <div class="menu__item">
-			<?= SearchWidget::widget(); ?>
+            <?= SearchWidget::widget(); ?>
         </div>
         <div class="menu__item">
-            <a class="menu__link profile" href="javascript:void(0);" data-toggle="modal" data-target="#signinModal">
-                <img class="profile__icon" src="/upload/images/lock.png"><span>Личный кабинет</span>
-            </a>
+            <?php if (Yii::$app->user->isGuest): ?>
+                <a class="menu__link profile" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">
+                    <img class="profile__icon" src="/upload/images/lock.png"><span>Регистрация</span>
+                </a>
+            <?php else: ?>
+                <a class="menu__link profile" href="<?= Url::to(['/user/profile/index']); ?>">
+                    <img class="profile__icon" src="/upload/images/lock.png"><span>Личный кабинет</span>
+                </a>
+            <?php endif; ?>
         </div>
 
         <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
@@ -152,24 +160,24 @@ $this->beginPage() ?>
         </div>
     </div>
     <div class="menu-full js-show-with-hamburger">
-		<?php foreach ($parentCategories as $parentCategory) : ?>
+        <?php foreach ($parentCategories as $parentCategory) : ?>
             <div class="block-menu">
                 <div class="block-menu__title"><?= $parentCategory->name; ?></div>
-				<?php if ($subsection = $parentCategory->subsections()): ?>
+                <?php if ($subsection = $parentCategory->subsections()): ?>
                     <ul class="block-menu-list">
-						<?php foreach ($subsection as $item): ?>
+                        <?php foreach ($subsection as $item): ?>
                             <li class="block-menu-list__item">
                                 <a class="block-menu-list__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
                             </li>
-						<?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
-				<?php endif; ?>
+                <?php endif; ?>
             </div>
-		<?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>
 <div class="page-container">
-	<?= $content; ?>
+    <?= $content; ?>
 </div>
 <footer class="footer page-container">
     <div class="footer-layer-1">
@@ -186,7 +194,7 @@ $this->beginPage() ?>
                 </li>
                 <li class="footer-contact__item">
                     <a class="phone footer-contact__link js-phone-mask" href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>">
-						<?= SiteSettings::findByCode('phone_1')->value; ?>
+                        <?= SiteSettings::findByCode('phone_1')->value; ?>
                     </a>
                 </li>
             </ul>
@@ -201,14 +209,14 @@ $this->beginPage() ?>
             <div class="footer-categories-container">
                 <div class="footer__title">Каталог зоотоваров</div>
                 <ul class="footer-categories">
-					<?php foreach ($parentCategories as $item): ?>
+                    <?php foreach ($parentCategories as $item): ?>
                         <li class="footer-categories__item">
                             <a class="footer-categories__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
                         </li>
-					<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-			<?= SubscribeWidget::widget(); ?>
+            <?= SubscribeWidget::widget(); ?>
         </div>
     </div>
     <div class="footer-layer-2">
@@ -218,7 +226,14 @@ $this->beginPage() ?>
         </div>
     </div>
 </footer>
-<?= $this->render('include/auth'); ?>
+<?php
+$signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
+$signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
+?>
+<?= $this->render('include/auth', [
+    'signin' => $signinModel,
+    'signup' => $signupModel,
+]); ?>
 <?php /*
 <div class="requisites-wrap">
     <ul class="requisites">
