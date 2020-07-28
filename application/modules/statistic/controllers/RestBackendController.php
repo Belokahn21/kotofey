@@ -71,7 +71,7 @@ class RestBackendController extends Controller
 			[
 				'icon' => 'fa-search',
 				'data' => [
-					'Последний запрос' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->one()->text,
+					'Последний запрос' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->one()->text,
 				],
 				'modal' => [
 					'modalId' => 'search-modal-id',

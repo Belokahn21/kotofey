@@ -43,16 +43,20 @@ class StatisticItem extends React.Component {
 								</button>
 							</div>
 							<div className="modal-body">
+								<div className="d-flex flex-row align-items-center">
+									<span className="w-25">Запрос</span>
+									<span className="w-25">IP</span>
+									<span className="w-25">Дата</span>
+								</div>
 								{Object.keys(statisticModal.data).map((rowCounter, rowIndex) => {
 									const row = statisticModal.data[rowCounter];
 
-									return Object.keys(row).map((key, index) => {
-										const value = row[key];
-										return <div key={index} className="d-flex flex-row align-items-center">
-											<span className="w-25">{key}</span>
-											<span className="w-25">{value}</span>
-										</div>
-									});
+									return <div className="d-flex flex-row align-items-center">
+										{Object.keys(row).map((rowKey, index) => {
+											const value = row[rowKey];
+											return <div className="w-25">{value}</div>
+										})}
+									</div>
 
 								})}
 							</div>
