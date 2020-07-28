@@ -40,7 +40,7 @@ class RestBackendController extends Controller
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		$products = Product::find();
 		$queryData = array();
-		$queries = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
+		$queries = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
 		/* @var $query SearchQuery */
 		foreach ($queries as $query) {
 			$queryData[] = [
