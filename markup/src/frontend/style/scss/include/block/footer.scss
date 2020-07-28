@@ -27,6 +27,10 @@
 
     &-right {
       flex: 2 1 auto;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
 
       @media (max-width: 790px) {
         display: none;

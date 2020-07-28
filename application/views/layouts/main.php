@@ -13,6 +13,7 @@ use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\subscibe\widgets\subscribe\SubscribeWidget;
 
 AppAsset::register($this);
 
@@ -197,14 +198,17 @@ $this->beginPage() ?>
             </ul>
         </div>
         <div class="footer-layer-1-right">
-            <div class="footer__title">Каталог зоотоваров</div>
-            <ul class="footer-categories">
-				<?php foreach ($parentCategories as $item): ?>
-                    <li class="footer-categories__item">
-                        <a class="footer-categories__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
-                    </li>
-				<?php endforeach; ?>
-            </ul>
+            <div class="footer-categories-container">
+                <div class="footer__title">Каталог зоотоваров</div>
+                <ul class="footer-categories">
+					<?php foreach ($parentCategories as $item): ?>
+                        <li class="footer-categories__item">
+                            <a class="footer-categories__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
+                        </li>
+					<?php endforeach; ?>
+                </ul>
+            </div>
+			<?= SubscribeWidget::widget(); ?>
         </div>
     </div>
     <div class="footer-layer-2">
