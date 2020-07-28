@@ -13,63 +13,69 @@ use app\modules\order\models\helpers\OrderHelper;
 
 class RestBackendController extends Controller
 {
-    protected function verbs()
-    {
-        return [
-            'get' => ['GET']
-        ];
-    }
+	protected function verbs()
+	{
+		return [
+			'get' => ['GET']
+		];
+	}
 
-    public function beforeAction($action)
-    {
-        $this->enableCsrfValidation = false;
-        return parent::beforeAction($action);
-    }
+	public function beforeAction($action)
+	{
+		$this->enableCsrfValidation = false;
+		return parent::beforeAction($action);
+	}
 
-    public function behaviors()
-    {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
-        ];
-    }
+	public function behaviors()
+	{
+		return [
+			'corsFilter' => [
+				'class' => \yii\filters\Cors::className(),
+			],
+		];
+	}
 
-    public function actionGet()
-    {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $products = Product::find();
-        $elements = [
-            [
-                'icon' => 'fa-clipboard',
-                'data' => [
-                    'Заказов' => Order::find()->count(),
-                    'Оборот' => Price::format(OrderHelper::income()),
-                    'Доход' => Price::format(OrderHelper::marginality()),
-                ],
-            ],
-            [
-                'icon' => 'fa-cubes',
-                'data' => [
-                    'Товаров' => $products->where(['>', 'count', 0])->count(),
-                    'Закуп' => Price::format(ProductHelper::purchaseVirtual($products->where(['>', 'count', 0])->all())),
-                    'Доход' => Price::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
-                ],
-            ],
-            [
-                'icon' => 'fa-loop',
-                'data' => [
-                    'Последний запрос' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->one()->text,
-                ],
-                'modal' => [
-                    'modalId' => 'search-modal-id',
-                    'title' => 'Список запросов сайта',
-                    'data' => [
-                        'Запрос' => 'Ответ'
-                    ]
-                ]
-            ],
-        ];
-        return Json::encode($elements);
-    }
+	public function actionGet()
+	{
+		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+		$products = Product::find();
+		$queryData = array();
+		$queries = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
+		/* @var $query SearchQuery */
+		foreach ($queries as $query) {
+			$queryData[$query->text] = date('d.m.Y H:i', $query->created_at);
+		}
+
+
+		$elements = [
+			[
+				'icon' => 'fa-clipboard',
+				'data' => [
+					'Заказов' => Order::find()->count(),
+					'Оборот' => Price::format(OrderHelper::income()),
+					'Доход' => Price::format(OrderHelper::marginality()),
+				],
+			],
+			[
+				'icon' => 'fa-cubes',
+				'data' => [
+					'Товаров' => $products->where(['>', 'count', 0])->count(),
+					'Закуп' => Price::format(ProductHelper::purchaseVirtual($products->where(['>', 'count', 0])->all())),
+					'Доход' => Price::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
+				],
+			],
+			[
+				'icon' => 'fa-search',
+				'data' => [
+					'Последний запрос' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->one()->text,
+				],
+				'modal' => [
+					'modalId' => 'search-modal-id',
+					'title' => 'Список запросов сайта',
+					'data' => $queryData
+				]
+			],
+		];
+		return Json::encode($elements);
+	}
 }

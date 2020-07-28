@@ -23,9 +23,10 @@ class StatisticItem extends React.Component {
 				<div className="statistic__content">
 					<ul className="statistic-info">
 						{Object.keys(statisticItem.data).map((element, index) => {
+							const value = statisticItem.data[element];
 							return <li className="statistic-info__row" key={index}>
 								<div className="statistic-info__key">{element}</div>
-								<div className="statistic-info__value">{statisticItem.data[element]}</div>
+								<div className="statistic-info__value">{value}</div>
 							</li>
 						})}
 					</ul>
@@ -43,9 +44,10 @@ class StatisticItem extends React.Component {
 							</div>
 							<div className="modal-body">
 								{Object.keys(statisticModal.data).map((element, index) => {
-									return <div>
-										<span>{element}</span>
-										<span>{statisticModal.data[element]}</span>
+									const value = statisticModal.data[element];
+									return <div className="d-flex flex-row align-items-center " key={index}>
+										<span className="w-50">{element}</span>
+										<span className="w-50">{value}</span>
 									</div>
 								})}
 							</div>
@@ -55,7 +57,7 @@ class StatisticItem extends React.Component {
 						</div>
 					</div>
 				</div>
-				}}
+				}
 			</li>
 		);
 	}
