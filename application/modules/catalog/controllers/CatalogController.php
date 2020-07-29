@@ -15,7 +15,7 @@ use yii\web\Controller;
 
 class CatalogController extends Controller
 {
-	public function actionIndex($id)
+	public function actionIndex($id = null)
 	{
 
 		// need reidrect?

@@ -18,23 +18,23 @@ use yii\web\HttpException;
 
 class OrderController extends Controller
 {
-//    public function behaviors()
-//    {
-//        return [
-//            'access' => [
-//                'class' => AccessControl::className(),
-//                'rules' => [
-//                    [
-//                        'actions' => ['checkout'],
-//                        'allow' => true,
-//                        'matchCallback' => function ($rule, $action) {
-//                            return Basket::count() > 0;
-//                        }
-//                    ]
-//                ],
-//            ]
-//        ];
-//    }
+	public function behaviors()
+	{
+		return [
+			'access' => [
+				'class' => AccessControl::className(),
+				'rules' => [
+					[
+						'actions' => ['create'],
+						'allow' => true,
+						'matchCallback' => function ($rule, $action) {
+							return Basket::count() > 0;
+						}
+					]
+				],
+			]
+		];
+	}
 
 	public function actionCreate()
 	{

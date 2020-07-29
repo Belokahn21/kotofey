@@ -10,9 +10,7 @@ import './block/product-calc';
 import './block/mobile-menu';
 import './block/basket';
 import './block/menu';
-// import './block/add-basket';
 import './block/ui-placeholder';
-
 import './block/other-jquery';
 import './block/catalog-filter';
 import './block/catalog';
@@ -20,6 +18,5 @@ import './include/init-sliders';
 import './include/init-range-sliders';
 import './include/init-maskedinput';
 import './include/phone-mask';
-// import './block/width-debug';
 
 
