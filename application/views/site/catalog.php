@@ -6,8 +6,9 @@
  * @var $category \app\modules\catalog\models\entity\Category
  */
 
-use yii\widgets\Pjax;
+use yii\helpers\Url;
 use yii\widgets\LinkPager;
+use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
 use app\models\forms\CatalogFilter;
 use app\modules\catalog\models\entity\Category;
@@ -31,10 +32,14 @@ if ($category) {
 	}
 } ?>
 <div class="page">
-    <ul class="breadcrumbs">
-        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Главная</a></li>
-        <li class="breadcrumbs__item active"><a class="breadcrumbs__link" href="javascript:void(0);">Кирпичи</a></li>
-    </ul>
+	<?= Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => 'Главная ',
+			'url' => Yii::$app->homeUrl,
+			'title' => 'Первая страница сайта зоомагазина Котофей',
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]); ?>
     <h1 class="page__title"><?= ($category ? $category->name : "Каталог товаров"); ?></h1>
     <div class="catalog-container">
         <aside class="left-siderbar">

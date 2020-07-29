@@ -111,7 +111,9 @@ $config = [
 				'POST catalog/rest/get' => 'catalog/rest/get',
 
 				'news' => 'news/news/index',
+//				'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
 
+				'<module>/<controller>/<action>/<id[A-Za-z-\/\d_]+>' => '<module>/<controller>/<action>',
 				'<module>/<controller>/' => '<module>/<controller>/index',
 				'<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 				'admin/<module>/<controller>/' => '<module>/<controller>/index',
