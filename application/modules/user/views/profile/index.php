@@ -12,14 +12,22 @@ use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\modules\order\models\helpers\OrderHelper;
+use app\widgets\Breadcrumbs;
 
 $this->title = Title::showTitle('Личный кабинет');
 ?>
 <div class="page">
-    <ul class="breadcrumbs">
-        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Главная</a></li>
-        <li class="breadcrumbs__item active"><a class="breadcrumbs__link" href="javascript:void(0);">Доставка и оплата</a></li>
-    </ul>
+	<?php
+	$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
+	?>
+	<?= Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => 'Главная ',
+			'url' => Yii::$app->homeUrl,
+			'title' => 'Первая страница сайта зоомагазина Котофей',
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]); ?>
     <h1 class="page__title">Личный кабинет</h1>
     <a href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
     <nav class="product-tabs in-profile">
