@@ -199,7 +199,7 @@ $this->beginPage() ?>
                 </li>
             </ul>
             <ul class="footer-nav">
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a></li>
                 <li class="footer-nav__item"><a class="footer-nav__link" href="javascript:void(0);">Акции</a></li>
                 <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
                 <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>

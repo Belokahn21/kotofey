@@ -110,6 +110,8 @@ $config = [
                 'POST basket/rest/add' => 'basket/rest/add',
                 'POST catalog/rest/get' => 'catalog/rest/get',
 
+				'news' => 'news/news/index',
+
                 '<module>/<controller>/' => '<module>/<controller>/index',
                 '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',

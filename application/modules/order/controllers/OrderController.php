@@ -14,6 +14,7 @@ use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
+use yii\web\HttpException;
 
 class OrderController extends Controller
 {
@@ -35,37 +36,37 @@ class OrderController extends Controller
 //        ];
 //    }
 
-    public function actionCreate()
-    {
-        $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
-        $payments = Payment::findAll(['active' => true]);
-        $deliveries = Delivery::findAll(['active' => true]);
-        $order_date = new OrderDate();
-        $delivery_time = new DeliveryTimeService();
+	public function actionCreate()
+	{
+		$order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
+		$payments = Payment::findAll(['active' => true]);
+		$deliveries = Delivery::findAll(['active' => true]);
+		$order_date = new OrderDate();
+		$delivery_time = new DeliveryTimeService();
 
-        if (\Yii::$app->request->isPost) {
-            $transaction = \Yii::$app->db->beginTransaction();
+		if (\Yii::$app->request->isPost) {
+			$transaction = \Yii::$app->db->beginTransaction();
 
-            if ($order->load(\Yii::$app->request->post())) {
+			if ($order->load(\Yii::$app->request->post())) {
 
-                if (!\Yii::$app->user->isGuest) {
-                    $order->user_id = \Yii::$app->user->id;
-                }
+				if (!\Yii::$app->user->isGuest) {
+					$order->user_id = \Yii::$app->user->id;
+				}
 
-                if (!$order->validate()) {
-                	print_r($order->getErrors());
-                    $transaction->rollBack();
-                    return false;
+				if (!$order->validate()) {
+					print_r($order->getErrors());
+					$transaction->rollBack();
+					return false;
 
-                }
-                if (!$order->save()) {
-                    Alert::setErrorNotify("Ошибка при создании заказа.");
-                    $transaction->rollBack();
-                    return false;
+				}
+				if (!$order->save()) {
+					Alert::setErrorNotify("Ошибка при создании заказа.");
+					$transaction->rollBack();
+					return false;
 
-                }
+				}
 
-                // save order date delivery
+				// save order date delivery
 //                if ($order_date->load(\Yii::$app->request->post())) {
 //                    $order_date->order_id = $order->id;
 //                    if (!$order_date->validate()) {
@@ -81,29 +82,48 @@ class OrderController extends Controller
 //                    }
 //                }
 
-                // save products
-                $items = new OrdersItems();
-                $items->order_id = $order->id;
+				// save products
+				$items = new OrdersItems();
+				$items->order_id = $order->id;
 
-                if (!$items->saveItems()) {
-                    Alert::setErrorNotify("Товары не были сохранены. Заказ не создан.");
-                    $transaction->rollBack();
-                    return false;
-                }
-            }
+				if (!$items->saveItems()) {
+					Alert::setErrorNotify("Товары не были сохранены. Заказ не создан.");
+					$transaction->rollBack();
+					return false;
+				}
+			}
 
 
-            $transaction->commit();
-            Alert::setSuccessNotify('Заказ успешно создан.');
-            return $this->redirect('/');
-        }
+			$transaction->commit();
+			Alert::setSuccessNotify('Заказ успешно создан.');
+			return $this->redirect('/');
+		}
 
-        return $this->render('create', [
-            'order' => $order,
-            'deliveries' => $deliveries,
-            'payments' => $payments,
+		return $this->render('create', [
+			'order' => $order,
+			'deliveries' => $deliveries,
+			'payments' => $payments,
 //            'delivery_time' => $delivery_time,
 //            'order_date' => $order_date,
-        ]);
-    }
+		]);
+	}
+
+	public function actionView($id)
+	{
+		$order = Order::findOne($id);
+		if (!$order) {
+			throw new HttpException(404, 'Такого заказа не существует');
+		}
+
+		if (!$order->hasAccess()) {
+			throw new ForbiddenHttpException('Доступ к заказу запрещён');
+		}
+
+		$items = OrdersItems::find()->where(['order_id' => $order->id])->all();
+
+		return $this->render('view', [
+			'order' => $order,
+			'items' => $items,
+		]);
+	}
 }

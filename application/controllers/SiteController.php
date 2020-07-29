@@ -523,96 +523,7 @@ class SiteController extends Controller
 		return $this->render('delivery');
 	}
 
-	public
-	function actionLogout()
-	{
-		\Yii::$app->user->logout();
-		return $this->redirect('/');
-	}
 
-	public function actionSupport($category = null, $id = null)
-	{
-		if (empty($category) && empty($id)) {   // list categories
-			$categories = SupportCategory::find()->all();
-			$tickets = Tickets::find()->where(['user_id' => \Yii::$app->user->identity->id])->all();
-			$model = new Tickets();
-			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-
-			if (\Yii::$app->request->isPost) {
-				if ($model->load(\Yii::$app->request->post())) {
-					if ($model->validate()) {
-						if ($model->save()) {
-							Alert::setSuccessNotify("Обращение создано!");
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('support/categories', [
-				'categories' => $categories,
-				'tickets' => $tickets,
-				'model' => $model,
-			]);
-		}
-
-		if (empty($category) && !empty($id)) {  // list tickets
-
-			$model = new Tickets();
-			$category = SupportCategory::findOne($id);
-			if (User::isRole('Support')) {
-				$tickets = Tickets::findAll(['category_id' => $id]);
-			} else {
-				$tickets = Tickets::findAll(['user_id' => \Yii::$app->user->identity->id, 'category_id' => $id]);
-			}
-
-			if (\Yii::$app->request->isPost) {
-				if ($model->load(\Yii::$app->request->post())) {
-
-					$model->category_id = $id;
-
-					if ($model->validate()) {
-						if ($model->save()) {
-							Alert::setSuccessNotify("Обращение создано!");
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('support/new_ticket', [
-				'model' => $model,
-				'tickets' => $tickets,
-				'category' => $category
-			]);
-		}
-
-		if (!empty($category) && !empty($id)) { //detail
-			$ticket = Tickets::findOne($id);
-			$model = new SupportMessage();
-			$messages = SupportMessage::find()->where(['ticket_id' => $id])->orderBy(['created_at' => SORT_ASC])->all();
-
-			if (\Yii::$app->request->isPost) {
-				if ($model->load(\Yii::$app->request->post())) {
-
-					$model->ticket_id = $id;
-
-					if ($model->validate()) {
-						if ($model->save()) {
-							Alert::setSuccessNotify("Сообщение отправлено!");
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('support/detail', [
-				'ticket' => $ticket,
-				'model' => $model,
-				'messages' => $messages,
-			]);
-		}
-	}
 
 	public
 	function actionError()
@@ -661,25 +572,6 @@ class SiteController extends Controller
 			"альф барнаул зоотовары",
 		]);
 		return $this->render('faq');
-	}
-
-	public
-	function actionBuy()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		Attributes::metaDescription("Система быстрой помощи по сайту, в которой можно найти ответы на вопросы, которые возникил в ходе посещения вами нашего сайта. Если вы не найдете ответ на вопрос, то оставьте заявку и мы вам перезвоним");
-		Attributes::metaKeywords([
-			"зоотовары каталог",
-			"каталог магазина зоотоваров",
-			"валта зоотовары каталог",
-			"магазин зоотоваров",
-			"интернет магазин зоотоваров",
-			"купить зоотовары в интернет магазине",
-			"магазин зоотоваров барнаул",
-			"зоотовары интернет магазин барнаул",
-			"альф барнаул зоотовары",
-		]);
-		return $this->render('buy');
 	}
 
 	public
