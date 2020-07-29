@@ -21,6 +21,7 @@ $this->title = Title::showTitle('Личный кабинет');
         <li class="breadcrumbs__item active"><a class="breadcrumbs__link" href="javascript:void(0);">Доставка и оплата</a></li>
     </ul>
     <h1 class="page__title">Личный кабинет</h1>
+    <a href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
     <nav class="product-tabs in-profile">
         <div class="nav nav-tabs" id="nav-tab" role="tablist"><a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Мои заказы</a><a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab" aria-controls="nav-characteristics" aria-selected="false">Личные данные</a><a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations" role="tab" aria-controls="nav-recommendations" aria-selected="false">Адрес доставки</a></div>
     </nav>
