@@ -9,6 +9,7 @@ import 'bootstrap';
 import './block/product-calc';
 import './block/mobile-menu';
 import './block/basket';
+import './block/search';
 import './block/menu';
 import './block/ui-placeholder';
 import './block/other-jquery';

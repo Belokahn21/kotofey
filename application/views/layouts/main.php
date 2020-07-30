@@ -86,11 +86,14 @@ $this->beginPage() ?>
     </div>
 </header>
 <header class="header-mobile">
+	<?= SearchWidget::widget([
+		'view' => 'mobile'
+	]) ?>
     <div class="header-mobile-container">
         <div class="header-mobile__hamburger"><img src="/upload/images/hamburger.svg"></div>
         <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
         </div>
-        <div class="header-mobile__search"><img src="/upload/images/search.png"></div>
+        <div class="header-mobile__search js-search-toggle"><img src="./assets/images/search.png"></div>
         <div class="header-mobile__basket">
             <a href="<?= Url::to(['/checkout/']); ?>">
                 <div class="counter"><?= Basket::count(); ?></div>

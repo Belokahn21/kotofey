@@ -17,6 +17,7 @@
 .header-mobile {
   display: block;
   background: $main-color;
+  position: relative;
 
   &-container {
     display: flex;
@@ -33,6 +34,10 @@
     font-size: 19.2px;
     font-weight: 900;
     text-transform: uppercase;
+  }
+
+  &__search {
+    cursor: pointer;
   }
 
   &__basket {

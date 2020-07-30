@@ -19,12 +19,18 @@ header.header.page-container
 			li.header-menu__item
 				a(href="javascript:void(0);").header-menu__link Контакты
 header.header-mobile
+	form.mobile-search.js-search-form
+		input.mobile-search__input(type="text" placeholder="Найти товар")
+		button(type="submit").mobile-search__submit.mobile-search__control
+			i.fas.fa-search
+		button(type="button").mobile-search__close.mobile-search__control.js-search-toggle
+			i.fas.fa-times
 	.header-mobile-container
 		div.header-mobile__hamburger
 			img(src="./assets/images/hamburger.svg")
 		div.header-mobile__logoheader-menu
 			a(href="javascript:void(0);").header-mobile__link kotofey.store
-		.header-mobile__search
+		.header-mobile__search.js-search-toggle
 			img(src="./assets/images/search.png")
 		.header-mobile__basket
 			.counter 3
