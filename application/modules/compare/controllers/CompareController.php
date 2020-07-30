@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\favorite\controllers;
+namespace app\modules\compare\controllers;
 
 use yii\web\Controller;
 
 /**
- * Default controller for the `favorite` module
+ * Default controller for the `compare` module
  */
-class DefaultController extends Controller
+class CompareController extends Controller
 {
     /**
      * Renders the index view for the module

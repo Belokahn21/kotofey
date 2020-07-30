@@ -7,11 +7,11 @@ use app\models\tool\Currency;
 use app\modules\favorite\models\entity\Favorite;
 
 $this->title = Title::showTitle("Избранные товары");
-$this->params['breadcrumbs'][] = ['label' => 'Избранные товары', 'url' => ['/favorite/']];?>
+$this->params['breadcrumbs'][] = ['label' => 'Избранные товары', 'url' => ['/favorite/']]; ?>
 <h1 class="favorite__title">Избранные товары</h1>
 <? if (!empty($products)): ?>
     <div class="catalog">
-<?php foreach ($products as $product): ?>
+		<?php foreach ($products as $product): ?>
             <div class="item">
                 <div class="item-bookmark" data-id="<?= $product->id; ?>">
                     <i class="<?= (Favorite::isProductInFavorite($product->id)) ? "fas" : "far"; ?> fa-bookmark"></i>
@@ -29,12 +29,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Избранные товары', 
                 </div>
                 <div class="catalog-element__content">
                     <div class="catalog-element__content-price">
-                        <?= Price::format($product->price); ?> <?= (new Currency())->show(); ?>
+						<?= Price::format($product->price); ?> <?= (new Currency())->show(); ?>
                     </div>
                 </div>
                 <div class="clearfix"></div>
             </div>
-<?php endforeach; ?>
+		<?php endforeach; ?>
         <div class="clearfix"></div>
     </div>
     <div class="clearfix"></div>

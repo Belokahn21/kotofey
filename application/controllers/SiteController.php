@@ -211,181 +211,7 @@ class SiteController extends Controller
 		return $this->render('index');
 	}
 
-	public function actionCatalog($id = null)
-	{
-	}
-
-	public function actionProduct($id = null)
-	{
-	}
-
-	public function actionBasket()
-	{
-		Attributes::metaDescription('Корзина товаров в интернет магазине Котофей');
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		return $this->render('basket');
-	}
-
-	public function actionProfile($id = null)
-	{
-		if ($id) {
-			$user = User::findOne($id);
-			return $this->render('detail/profile', [
-				'user' => $user
-			]);
-		} else {
-			$userId = \Yii::$app->user->id;
-			$profile = User::findOne($userId);
-			$profile->scenario = User::SCENARIO_UPDATE;
-			$orders = Order::find()->where(['user_id' => $profile->id])->orderBy(['created_at' => SORT_DESC])->all();
-			$support_categories = SupportCategory::find()->all();
-			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-
-			if (\Yii::$app->request->isPost) {
-				if ($profile->load(\Yii::$app->request->post())) {
-					if ($profile->validate()) {
-						$profile->update();
-					}
-				}
-				if ($profile->billing->load(\Yii::$app->request->post())) {
-					if ($profile->billing->validate()) {
-						if ($profile->billing->update()) {
-							$profile->billing->update();
-						}
-					}
-				}
-
-				Alert::setSuccessNotify('Данные успешно обновлены');
-				return $this->refresh();
-			}
-
-			return $this->render('profile', [
-				'profile' => $profile,
-				'orders' => $orders,
-				'support_categories' => $support_categories
-			]);
-		}
-	}
-
-	public
-	function actionBilling(
-		$id = null
-	) {
-		if ($id) {
-			$model = Billing::find()->where(['user_id' => Yii::$app->user->id, 'id' => $id])->one();
-
-			if (!$model) {
-				throw new HttpException(404, 'Адрес не найден');
-			}
-
-			if (Yii::$app->request->isPost) {
-				if ($model->load(Yii::$app->request->post())) {
-					if ($model->validate()) {
-						if ($model->update()) {
-							Alert::setSuccessNotify('Адрес доставки успешно обновлён');
-							return $this->refresh();
-						}
-					}
-				}
-			}
-
-			return $this->render('detail/billing', [
-				'model' => $model
-			]);
-		}
-		$models = Billing::find()->where(['user_id' => Yii::$app->user->id])->all();
-		return $this->render('billing', [
-			'models' => $models
-		]);
-	}
-
-	public
-	function actionSignin()
-	{
-		$model = new User(['scenario' => User::SCENARIO_LOGIN]);
-		if (\Yii::$app->request->isPost) {
-			if ($model->load(\Yii::$app->request->post())) {
-				if ($model->validate()) {
-
-					$user = User::findByEmail($model->email);
-					if ($user instanceof User && $user->validatePassword($model->password)) {
-						if (Yii::$app->user->login($user, Yii::$app->params['users']['rememberMeDuration'])) {
-							Alert::setSuccessNotify('Успешная авторизация');
-							return $this->redirect('/');
-						}
-					}
-
-				}
-			}
-		}
-
-		Attributes::metaDescription('Вход на сайт интернет магазина Котофей');
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-
-		return $this->render('auth/signin', [
-			'model' => $model,
-		]);
-	}
-
-	public
-	function actionSignup()
-	{
-		$model = new User(['scenario' => User::SCENARIO_INSERT]);
-
-		// validate for ajax request
-		if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-			Yii::$app->response->format = Response::FORMAT_JSON;
-			return ActiveForm::validate($model);
-		}
-
-		if (\Yii::$app->request->isPost) {
-			if ($model->load(\Yii::$app->request->post())) {
-				if ($model->validate()) {
-					$model->setPassword($model->password);
-					if ($model->save()) {
-						if (Yii::$app->user->login($model, Yii::$app->params['users']['rememberMeDuration'])) {
-							Alert::setSuccessNotify("Успешная регистрация!");
-							return $this->redirect("/");
-						}
-					} else {
-						Alert::setErrorNotify(Debug::modelErrors($model));
-						return $this->refresh();
-					}
-				} else {
-					Alert::setErrorNotify(Debug::modelErrors($model));
-					return $this->refresh();
-
-				}
-			}
-		}
-
-
-		return $this->render('auth/signup', [
-			'model' => $model,
-		]);
-	}
-
-	public
-	function actionPayment()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		Attributes::metaDescription("Условия оплаты заказов на нашем сайте");
-		Attributes::metaKeywords([
-			"зоотовары каталог",
-			"каталог магазина зоотоваров",
-			"валта зоотовары каталог",
-			"магазин зоотоваров",
-			"интернет магазин зоотоваров",
-			"купить зоотовары в интернет магазине",
-			"магазин зоотоваров барнаул",
-			"зоотовары интернет магазин барнаул",
-			"альф барнаул зоотовары",
-		]);
-		return $this->render('payment');
-	}
-
-	public
-	function actionDelivery()
+	public function actionDelivery()
 	{
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 		Attributes::metaDescription("Условия доставки заказов на нашем сайте");
@@ -405,9 +231,7 @@ class SiteController extends Controller
 	}
 
 
-
-	public
-	function actionError()
+	public function actionError()
 	{
 		$exception = Yii::$app->errorHandler->exception;
 		if ($exception !== null) {
@@ -417,23 +241,13 @@ class SiteController extends Controller
 
 	public function actionTest()
 	{
-        $string = Yii::$app->request->post('string');
-        $stringHash = '';
-        if (!is_null($string)) {
-            $stringHash = rand();
-        }
-        return $this->render('test', [
-            'stringHash' => $stringHash,
-        ]);
-	}
-
-	public
-	function actionFavorite()
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		$products = Favorite::listProducts();
-		return $this->render('favorite', [
-			'products' => $products
+		$string = Yii::$app->request->post('string');
+		$stringHash = '';
+		if (!is_null($string)) {
+			$stringHash = rand();
+		}
+		return $this->render('test', [
+			'stringHash' => $stringHash,
 		]);
 	}
 
@@ -455,111 +269,19 @@ class SiteController extends Controller
 		return $this->render('faq');
 	}
 
-	public
-	function actionAbout()
+	public function actionAbout()
 	{
 		Attributes::metaDescription("Небольшой рассказ о нашей компании, наших целях и планах на будущее");
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 		return $this->render('about');
 	}
 
-	public function actionNews($id = null)
-	{
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
-		if ($id) {
-
-			$new = News::findBySlug($id);
-			if ($new->slug) {
-				Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
-			}
-
-			if ($new->seo_description) {
-				Attributes::metaDescription($new->seo_description);
-			}
-
-			if ($new->seo_keywords) {
-				Attributes::metaKeywords($new->seo_keywords);
-			}
-
-			OpenGraph::title($new->title);
-			OpenGraph::description(((!empty($new->preview)) ? $new->preview : $new->detail));
-			OpenGraph::type("new");
-			OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
-
-			if (!empty($new->preview_image)) {
-				OpenGraph::image(sprintf('%s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
-			}
-
-			return $this->render('detail/news', [
-				'model' => $new
-			]);
-		}
-
-		$categories = NewsCategory::find()->all();
-		$news = News::find()->orderBy(['created_at' => SORT_DESC])->all();
-
-//        Attributes::metaKeywords("уход за натуральной кожей, уход за сумкой из натуральной кожи,");
-		Attributes::metaDescription("Самые полезные и актуальные статьи о том как ухаживать за кожей, как выбрать правильно продукт и другие новости компани!");
-
-		return $this->render('news', [
-			'news' => $news,
-			'categories' => $categories
-		]);
-	}
-
-	public
-	function actionVacancy(
-		$id = null
-	) {
-		Attributes::metaDescription("Здесь вы можете узнать о вакансиях нашей компании. Бывают момент, когда мы ищем новых людей в нашу команду");
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-
-		if ($id) {
-
-			$model = Vacancy::findOne(['slug' => $id, 'city_id' => Yii::$app->session->get('city_id')]);
-
-			if (!$model) {
-				throw new HttpException(404, 'Вакансия не найдена.');
-			}
-
-			return $this->render('detail/vacancy', [
-				'model' => $model
-			]);
-		}
-
-		$items = Vacancy::find()->where(['city_id' => Yii::$app->session->get('city_id')])->all();
-		return $this->render('vacancy', [
-			'items' => $items
-		]);
-	}
-
-	public
-	function actionContacts()
+	public function actionContacts()
 	{
 		Attributes::metaDescription("Контакты нашего интернет магазина");
 		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 		return $this->render('contacts');
-	}
-
-	public
-	function actionBrands(
-		$id = null
-	) {
-		if ($id) {
-			$model = InformersValues::findOne($id);
-			return $this->render('detail/brands', [
-				'model' => $model
-			]);
-		}
-		return $this->render('brands');
-	}
-
-	public function actionCompare()
-	{
-		Attributes::metaDescription('Сравнение товаров в интернет магазине Котофей');
-		Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-		return $this->render('compare');
 	}
 
 	public function actionReferal()
