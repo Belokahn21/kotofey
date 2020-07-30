@@ -91,6 +91,12 @@ $this->beginPage() ?>
         <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
         </div>
         <div class="header-mobile__search"><img src="/upload/images/search.png"></div>
+        <div class="header-mobile__basket">
+            <a href="<?= Url::to(['/checkout/']); ?>">
+                <div class="counter"><?= Basket::count(); ?></div>
+                <img src="/upload/images/basket.png">
+            </a>
+        </div>
         <div class="header-mobile__call">
             <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><img src="/upload/images/phone.png"></a>
         </div>
@@ -116,15 +122,22 @@ $this->beginPage() ?>
         <div class="header-mobile-full__footer">
             <ul class="header-mobile-full-footer-menu">
                 <li class="header-mobile-full-footer-menu__item">
-                    <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);">
-                        <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
-                        <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
-                    </a>
+					<?php if (Yii::$app->user->isGuest): ?>
+                        <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);" data-target="#signupModal" data-toggle="modal">
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                            <div class="header-mobile-full-footer-menu__label">Регистрация/Войти на сайт</div>
+                        </a>
+					<?php else: ?>
+                        <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/user/profile/index']) ?>">
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                            <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
+                        </a>
+					<?php endif; ?>
                 </li>
                 <li class="header-mobile-full-footer-menu__item">
-                    <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);">
+                    <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/checkout/']) ?>">
                         <div class="header-mobile-full-footer-menu__icon">
-                            <div class="counter">3</div>
+                            <div class="counter"><?= Basket::count(); ?></div>
                             <img src="/upload/images/basket-white.svg"></div>
                         <div class="header-mobile-full-footer-menu__label">Корзина заказа</div>
                     </a>

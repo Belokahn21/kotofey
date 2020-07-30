@@ -35,6 +35,30 @@
     text-transform: uppercase;
   }
 
+  &__basket {
+    position: relative;
+
+    .counter {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      position: absolute;
+      top: -20%;
+      right: -60%;
+      text-align: center;
+      width: 22px;
+      height: 17px;
+      border-radius: 50%;
+      background: #fff;
+      color: $main-color;
+    }
+  }
+
   &__link {
     color: $text-color;
     text-transform: uppercase;
