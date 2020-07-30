@@ -60,7 +60,6 @@ $this->beginPage() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= Alert::widget(); ?>
 <?= AdminPanel::widget(); ?>
 <header class="header page-container">
     <div class="logo">
@@ -107,7 +106,7 @@ $this->beginPage() ?>
         <ul class="full-mobile-nav">
             <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О компании</a>
             </li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/']); ?>">Акции</a></li>
+            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/news/']); ?>">Новости</a></li>
             <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
             <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a>
             </li>
@@ -137,7 +136,7 @@ $this->beginPage() ?>
         <div class="menu__item hamburger js-hamburger"><img class="hamburger__icon" src="/upload/images/hamburger.svg">
         </div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
-        <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/']); ?>">Скидки и акции</a></div>
+        <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/news/']); ?>">Новости</a></div>
         <div class="menu__item">
 			<?= SearchWidget::widget(); ?>
         </div>
@@ -200,7 +199,7 @@ $this->beginPage() ?>
             </ul>
             <ul class="footer-nav">
                 <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="javascript:void(0);">Акции</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a></li>
                 <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
                 <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
             </ul>
@@ -245,6 +244,7 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
 </div>
  */ ?>
 <script src="/js/frontend-core.min.js"></script>
+<?= Alert::widget(); ?>
 <?php $this->endBody(); ?>
 </body>
 </html>

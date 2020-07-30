@@ -21,6 +21,7 @@
 @import "include/block/admin-panel";
 @import "include/block/page-title";
 @import "include/block/404";
+@import "include/block/notify";
 
 // главная страница
 @import "include/block/auth";
@@ -93,3 +94,4 @@
 // Каталог
 @import "include/block/catalog";
 @import "include/block/catalog-sort";
+

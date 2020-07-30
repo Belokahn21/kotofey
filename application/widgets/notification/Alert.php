@@ -21,14 +21,17 @@ class Alert extends Widget
 			$message = \Yii::$app->session->getFlash('notify-text');
 		}
 
-		if (!empty($flag) && !empty($message)) {
-			$this->clearNotify();
+//		if (!empty($flag) && !empty($message)) {
+//			$this->clearNotify();
 
-			return $this->render($this->template, [
-				'message' => $message,
-				'flag' => $flag
-			]);
-		}
+
+		$message = "Вы успешно стали молодцом. Продолжайте в том же направлении и добъётесь успехов!";
+		$flag = "success";
+		return $this->render($this->template, [
+			'message' => $message,
+			'flag' => $flag
+		]);
+//		}
 	}
 
 	public static function clearNotify()
