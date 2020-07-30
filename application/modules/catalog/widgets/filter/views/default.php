@@ -23,8 +23,8 @@ use app\modules\catalog\models\entity\InformersValues;
 	]
 ]); ?>
     <input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->getCsrfToken(); ?>"/>
-    <div class="filter-catalog__title"><span>Подобрать товар</span><span class="filter-catalog__arrow is-active"><img src="/upload/images/arrow-left-black.svg"></span></div>
-    <div class="filter-catalog-container is-active">
+    <div class="filter-catalog__title"><span>Подобрать товар</span><span class="filter-catalog__arrow"><img src="/upload/images/arrow-left-black.svg"></span></div>
+    <div class="filter-catalog-container">
         <div class="filter-catalog__item"><label class="filter-catalog__label" for="js-filter-from">Цена</label>
             <div class="filter-catalog__input-group"><input class="filter-catalog__input" id="js-filter-from" placeholder="100" type="text"><input class="filter-catalog__input" id="js-filter-to" placeholder="999" type="text"></div>
         </div>
@@ -58,9 +58,9 @@ LIST;
 
 			<?php endif; ?>
 		<?php endforeach; ?>
-    </div>
-    <div class="filter-catalog__button-group">
-        <button class="filter-catalog__submit" type="submit">Показать</button>
-        <button class="filter-catalog__reset" type="reset"><span class="filter-catalog__reset-icon"><img src="/upload/images/reset.png"></span><span>Сбросить</span></button>
+        <div class="filter-catalog__button-group">
+            <button class="filter-catalog__submit" type="submit">Показать</button>
+            <button class="filter-catalog__reset" type="reset"><span class="filter-catalog__reset-icon"><img src="/upload/images/reset.png"></span><span>Сбросить</span></button>
+        </div>
     </div>
 <?php ActiveForm::end(); ?>

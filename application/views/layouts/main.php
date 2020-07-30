@@ -71,11 +71,11 @@ $this->beginPage() ?>
     </div>
     <div class="phone">
         <img class="phone__icon" src="/upload/images/phone.png">
-        <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>" class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a></div>
+        <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a></div>
     <div class="header-menu-mobile">
         <div class="phone">
             <img class="phone__icon" src="/upload/images/phone.png">
-            <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>" class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a>
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
         </div>
         <ul class="header-menu">
             <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
@@ -91,7 +91,9 @@ $this->beginPage() ?>
         <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
         </div>
         <div class="header-mobile__search"><img src="/upload/images/search.png"></div>
-        <div class="header-mobile__call"><img src="/upload/images/phone.png"></div>
+        <div class="header-mobile__call">
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><img src="/upload/images/phone.png"></a>
+        </div>
     </div>
     <div class="header-mobile-full active">
         <div class="header-mobile-full__group">
@@ -189,11 +191,11 @@ $this->beginPage() ?>
                     </a>
                 </li>
                 <li class="footer-contact__item">
-                    <a class="footer-contact__link" href="mailto:<?= SiteSettings::findByCode('email')->value; ?>"><?= SiteSettings::findByCode('email')->value; ?></a>
+                    <a class="footer-contact__link" href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
                 </li>
                 <li class="footer-contact__item">
-                    <a class="phone footer-contact__link js-phone-mask" href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>">
-						<?= SiteSettings::findByCode('phone_1')->value; ?>
+                    <a class="phone footer-contact__link js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
+						<?= SiteSettings::getValueByCode('phone_1'); ?>
                     </a>
                 </li>
             </ul>
@@ -233,16 +235,6 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
 	'signin' => $signinModel,
 	'signup' => $signupModel,
 ]); ?>
-<?php /*
-<div class="requisites-wrap">
-    <ul class="requisites">
-        <li class="requisites___item">ИП Васин К.В.</li>
-        <li class="requisites___item">ОГРН: 319222500105168</li>
-        <li class="requisites___item">ИНН: 222261129226</li>
-        <li class="requisites___item"><a rel="nofollow" href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></li>
-    </ul>
-</div>
- */ ?>
 <script src="/js/frontend-core.min.js"></script>
 <?= Alert::widget(); ?>
 <?php $this->endBody(); ?>

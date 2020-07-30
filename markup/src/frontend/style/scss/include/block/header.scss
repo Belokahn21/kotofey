@@ -36,10 +36,13 @@
   }
 
   &__link {
-    color: black;
+    color: $text-color;
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 14px;
 
     &:hover {
-      color: inherit;
+      color: $text-color;
     }
   }
 

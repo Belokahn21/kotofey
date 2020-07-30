@@ -22,6 +22,7 @@
     font-size: 24px;
     line-height: 56px;
     font-weight: 700;
+    color: $text-color;
   }
 
   &__switch {
@@ -43,10 +44,10 @@
   padding-right: 20px;
 
   &__link {
-    color: black;
+    color: $text-color;
 
     &:hover {
-      color: inherit;
+      color: $text-color;
     }
   }
 }
@@ -56,21 +57,20 @@
   font-size: 14px;
   font-weight: 700;
 
-
-  //padding-top: 20px;
-  //padding-left: 20px;
-  //padding-right: 20px;
-
   &__item {
     margin: 10px 0;
   }
 
   &__link {
-    color: white;
+    color: $text-color;
     display: flex;
     flex-direction: row;
     justify-content: stretch;
     align-items: center;
+
+    &:hover {
+      color: $text-color;
+    }
   }
 
   &__label {
@@ -108,10 +108,10 @@
   }
 
   &__link {
-    color: black;
+    color: $text-color;
 
     &:hover {
-      color: inherit;
+      color: $text-color;
     }
   }
 }

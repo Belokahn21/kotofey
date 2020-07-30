@@ -4,7 +4,7 @@
   padding: 20px 20px;
   border-radius: 10px;
 
-  @media (max-width: 790px) {
+  @media (min-width: 790px) {
     display: none;
   }
 
