@@ -13,6 +13,8 @@ class SearchWidget extends Widget
 	public function run()
 	{
 		$model = new Search();
+		$model->load(\Yii::$app->request->get());
+
 		return $this->render($this->view, [
 			'model' => $model
 		]);

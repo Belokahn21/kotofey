@@ -13,7 +13,7 @@ use app\modules\basket\models\entity\Basket;
 ?>
 <form class="product-calc js-product-calc">
     <input type="hidden" readonly name="product_id" value="<?= $product_id; ?>">
-    <?php if ($showInfo): ?>
+	<?php if ($showInfo): ?>
         <div class="product-calc__price-group">
             <div class="product-calc__price-group-price"><?= $price; ?></div>
             <div class="product-calc__price-group-char-val">шт</div>
@@ -23,28 +23,28 @@ use app\modules\basket\models\entity\Basket;
             </div>
             <div class="product-calc__price-group-currency">₽</div>
         </div>
-    <?php endif; ?>
+	<?php endif; ?>
     <div class="product-calc__control-group">
         <input type="hidden" name="count" class="product-calc__count js-product-calc-price" value="<?= $price; ?>">
-        <?php if ($showControl): ?>
+		<?php if ($showControl): ?>
             <div class="div">
                 <button class="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
                 <input name="count" type="text" class="product-calc__count js-product-calc-amount" value="<?= (Basket::findOne($product_id)->count ?: 1) ?>" placeholder="1">
                 <button class="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
             </div>
-        <?php else: ?>
+		<?php else: ?>
             <input type="hidden" name="count" class="product-calc__count js-product-calc-amount" value="1">
-        <?php endif; ?>
+		<?php endif; ?>
 
-        <?php if ($showButton): ?>
-            <button class="add-basket js-add-basket" type="submit">
+		<?php if ($showButton): ?>
+            <button class="add-basket js-add-basket" type="submit" onclick="ym(55089223, 'reachGoal', 'basket'); return true;">
                 <img class="add-basket__icon" src="/upload/images/basket.png">
                 <span class="add-basket__label">В корзину</span>
             </button>
-        <?php endif; ?>
-        <?php if ($showOneClick): ?>
+		<?php endif; ?>
+		<?php if ($showOneClick): ?>
             <a class="one-click-buy" href="javascript:void(0);"><span>В один клик</span></a>
-        <?php endif; ?>
+		<?php endif; ?>
 
     </div>
 </form>
