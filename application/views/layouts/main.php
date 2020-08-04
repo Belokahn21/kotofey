@@ -10,6 +10,7 @@ use app\assets\AppAsset;
 use app\widgets\notification\Alert;
 use app\widgets\admin_panel\AdminPanel;
 use app\modules\user\models\entity\User;
+use app\modules\geo\widgets\geo\GeoWidget;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
 use app\modules\search\widges\search\SearchWidget;
@@ -202,9 +203,7 @@ $this->beginPage() ?>
             <div class="footer__logo">kotofey.store</div>
             <ul class="footer-contact">
                 <li class="footer-contact__item">
-                    <a class="footer-contact__link address" href="javascript:void(0);">
-                        Баранул ул.Северо-Западная, 6Б <img src="/upload/images/gps.png">
-                    </a>
+					<?= GeoWidget::widget(['view' => 'footer']); ?>
                 </li>
                 <li class="footer-contact__item">
                     <a class="footer-contact__link" href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>

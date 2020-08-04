@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\geo;
+namespace app\modules\geo\widgets\geo;
 
 use app\models\tool\geo\CityDefine;
 use yii\base\Widget;
@@ -8,7 +8,7 @@ use app\modules\geo\models\entity\Geo;
 
 class GeoWidget extends Widget
 {
-    public $template = 'default';
+    public $view = 'default';
     public $time_cache;
 
     public function run()
@@ -21,7 +21,7 @@ class GeoWidget extends Widget
             return Geo::find()->where(['type' => Geo::TYPE_OBJECT_CITY])->andWhere(['active' => 1])->all();
         }, $this->time_cache);
 
-        return $this->render($this->template, [
+        return $this->render($this->view, [
             'cities' => $cities
         ]);
     }
