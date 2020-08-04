@@ -110,16 +110,17 @@ $config = [
 				'POST basket/rest/add' => 'basket/rest/add',
 				'POST catalog/rest/get' => 'catalog/rest/get',
 
-				'news' => 'news/news/index',
-				'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
-				'catalog' => 'catalog/catalog/index',
-				'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',
+				'admin/<module>/<controller>/' => '<module>/<controller>/index',
+				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 
 				'<module>/<controller>/<action>/<id[A-Za-z-\/\d_]+>' => '<module>/<controller>/<action>',
 				'<module>/<controller>/' => '<module>/<controller>/index',
 				'<module>/<controller>/<action>' => '<module>/<controller>/<action>',
-				'admin/<module>/<controller>/' => '<module>/<controller>/index',
-				'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+
+				'news' => 'news/news/index',
+				'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
+				'catalog' => 'catalog/catalog/index',
+				'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',
 
 				'bot/vk/index' => 'bot/vk/index',
 				'market' => 'yandex/catalog/export',
