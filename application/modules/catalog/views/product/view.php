@@ -24,23 +24,23 @@ $this->title = Title::showTitle($product->name);
 
 ?>
 <div class="product-detail">
-	<div class="product-detail-left">
-		<div class="product-detail-gallery">
-			<a class="product-detail-gallery__link" href="<?= ProductHelper::getImageUrl($product); ?>" data-lightbox="roadtrip">
-				<img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
-			</a>
-			<div class="product-detail-gallery__group">
+    <div class="product-detail-left">
+        <div class="product-detail-gallery">
+            <a class="product-detail-gallery__link" href="<?= ProductHelper::getImageUrl($product); ?>" data-lightbox="roadtrip">
+                <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
+            </a>
+            <div class="product-detail-gallery__group">
 				<?php if ($product->images): ?>
 					<?php foreach (Json::decode($product->images) as $image): ?>
-						<a class="product-detail-gallery__link active" href="<?= $image; ?>" data-lightbox="roadtrip">
-							<img class="product-detail-gallery__image" src="<?= $image; ?>">
-						</a>
+                        <a class="product-detail-gallery__link active" href="<?= $image; ?>" data-lightbox="roadtrip">
+                            <img class="product-detail-gallery__image" src="<?= $image; ?>">
+                        </a>
 					<?php endforeach; ?>
 				<?php endif; ?>
-			</div>
-		</div>
-	</div>
-	<div class="product-detail-right">
+            </div>
+        </div>
+    </div>
+    <div class="product-detail-right">
 		<?= Breadcrumbs::widget([
 			'homeLink' => [
 				'label' => 'Главная ',
@@ -49,20 +49,20 @@ $this->title = Title::showTitle($product->name);
 			],
 			'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
 		]); ?>
-		<h1 class="product-detail__title"><?= $product->name; ?></h1>
+        <h1 class="product-detail__title"><?= $product->name; ?></h1>
 		<?= AddBasketWidget::widget([
 			'product_id' => $product->id,
 			'price' => $product->price,
 		]); ?>
 		<?php if ($properties): ?>
-			<ul class="product-properties">
+            <ul class="product-properties">
 				<?php foreach ($properties as $property): ?>
-					<li class="product-properties__line">
-						<div class="product-properties__key"><?= $property->property->name; ?></div>
-						<div class="product-properties__value"><?= $property->finalValue; ?></div>
-					</li>
+                    <li class="product-properties__line">
+                        <div class="product-properties__key"><?= $property->property->name; ?></div>
+                        <div class="product-properties__value"><?= $property->finalValue; ?></div>
+                    </li>
 				<?php endforeach; ?>
-			</ul>
+            </ul>
 		<?php endif; ?>
 
 		<?php /*
@@ -75,21 +75,41 @@ $this->title = Title::showTitle($product->name);
         <a class="product-properties__more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Все характеристики</a>
  */ ?>
 
-		<nav class="product-tabs in-product">
-			<div class="nav nav-tabs" id="nav-tab" role="tablist"><a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a><a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab" aria-controls="nav-characteristics" aria-selected="false">Характеристики</a><a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations" role="tab" aria-controls="nav-recommendations" aria-selected="false">Рекомендации</a></div>
-		</nav>
-		<div class="tab-content product-tab-content" id="nav-tabContent">
-			<div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
+        <nav class="product-tabs in-product">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
+                <a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab" aria-controls="nav-characteristics" aria-selected="false">Характеристики</a>
+                <a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations" role="tab" aria-controls="nav-recommendations" aria-selected="false">Рекомендации</a>
+                <a class="nav-item nav-link" id="nav-delivery-tab" data-toggle="tab" href="#nav-delivery" role="tab" aria-controls="nav-delivery" aria-selected="false">Доставка</a>
+                <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
+                <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Как купить?</a>
+                <a class="nav-item nav-link" id="nav-available-tab" data-toggle="tab" href="#nav-available" role="tab" aria-controls="nav-available" aria-selected="false">Наличие в магазинах</a>
+            </div>
+        </nav>
+        <div class="tab-content product-tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
 				<?= $product->description; ?>
-			</div>
-			<div class="tab-pane fade" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">
-				Отсутсвует
-			</div>
-			<div class="tab-pane fade" id="nav-recommendations" role="tabpanel" aria-labelledby="nav-recommendations-tab">
-				Отсутсвует
-			</div>
-		</div>
-	</div>
+            </div>
+            <div class="tab-pane fade" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">
+                Отсутсвует
+            </div>
+            <div class="tab-pane fade" id="nav-recommendations" role="tabpanel" aria-labelledby="nav-recommendations-tab">
+                Отсутсвует
+            </div>
+            <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
+                Отсутсвует
+            </div>
+            <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
+                Отсутсвует
+            </div>
+            <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
+                Отсутсвует
+            </div>
+            <div class="tab-pane fade" id="nav-available" role="tabpanel" aria-labelledby="nav-available-tab">
+                Отсутсвует
+            </div>
+        </div>
+    </div>
 </div>
 
 <?php /*
