@@ -4,10 +4,10 @@ namespace app\widgets;
 
 class Breadcrumbs extends \yii\widgets\Breadcrumbs
 {
-    public $tag = 'div';
-    public $options = ['class' => 'breadcrumb', "itemscope itemtype" => "http://schema.org/BreadcrumbList"];
-    public $itemTemplate = "<div class='breadcrumb__step' itemprop=\"itemListElement\" itemscope itemtype=\"http://schema.org/ListItem\">{link}</div>";
-    public $activeItemTemplate = "<div itemprop=\"itemListElement\" itemscope itemtype=\"http://schema.org/ListItem\" class=\"breadcrumb__step breadcrumb__step--active\">{link}</div>";
+    public $tag = 'ul';
+    public $options = ['class' => 'breadcrumbs', "itemscope itemtype" => "http://schema.org/BreadcrumbList"];
+    public $itemTemplate = "<li class='breadcrumbs__item' itemprop=\"itemListElement\" itemscope itemtype=\"http://schema.org/ListItem\">{link}</li>";
+    public $activeItemTemplate = "<div itemprop=\"itemListElement\" itemscope itemtype=\"http://schema.org/ListItem\" class=\"breadcrumbs__item breadcrumbs__item active\">{link}</div>";
     public $encodeLabels = false;
 
     protected function renderItem($link, $template)

@@ -14,15 +14,30 @@ use yii\helpers\ArrayHelper;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($model, 'active')->checkbox(); ?>
+				<?= $form->field($model, 'active')->checkbox(); ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'is_default')->checkbox(); ?>
+				<?= $form->field($model, 'is_default')->checkbox(); ?>
             </div>
         </div>
-        <?= $form->field($model, 'name'); ?>
-        <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
-        <?= $form->field($model, 'type')->dropDownList($model->getTypes(), ['prompt' => 'Тип гео объекта']); ?>
-        <?= $form->field($model, 'time_zone_id')->dropDownList(ArrayHelper::map($time_zones, 'id', 'name'), ['prompt' => 'Временная зона']); ?>
+        <div class="row">
+            <div class="col-6">
+				<?= $form->field($model, 'name'); ?>
+            </div>
+            <div class="col-6">
+				<?= $form->field($model, 'address'); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+				<?= $form->field($model, 'start_at')->textInput(['class' => 'form-control js-datepicker']); ?>
+            </div>
+            <div class="col-6">
+				<?= $form->field($model, 'end_at')->textInput(['class' => 'form-control js-datepicker']); ?>
+            </div>
+        </div>
+		<?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
+		<?= $form->field($model, 'type')->dropDownList($model->getTypes(), ['prompt' => 'Тип гео объекта']); ?>
+		<?= $form->field($model, 'time_zone_id')->dropDownList(ArrayHelper::map($time_zones, 'id', 'name'), ['prompt' => 'Временная зона']); ?>
     </div>
 </div>

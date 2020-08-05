@@ -38,6 +38,7 @@ backup
 build
 composer.lock
 markup/build/
+markup_experience/build/
 node_modules
 package-lock.json
 application/web/*.xls

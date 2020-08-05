@@ -1,0 +1,36 @@
+// Modal
+#signupModal.modal.fade.authModal(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            form.auth-form(method="post" action="/")
+                .modal-header
+                    .div
+                        h5#signupModalLabel.modal-title Регистрация
+                        ul.auth-modal-toggle
+                            li.auth-modal-toggle__item.active
+                                a.auth-modal-toggle__link(href="javascript:void(0);" data-toggle="modal" data-target="#signupModal") Регистрация
+                            li.auth-modal-toggle__item
+                                a.auth-modal-toggle__link(href="javascript:void(0);" data-toggle="modal" data-target="#signinModal") Вход
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .auth-form__item
+                        label.auth-form__label(for="auth-form-fio") ФИО
+                        input.auth-form__input#auth-form-fio(type="text" placeholder="Ваша фамилия")
+                    .auth-form__group-row
+                        .auth-form__item
+                            label.auth-form__label(for="auth-form-phone") Контактный телефон
+                            input.auth-form__input.js-mask-ru#auth-form-phone(type="text", placeholder="+7 (___) ___ __-__")
+                        .auth-form__item
+                            label.auth-form__label(for="auth-form-email") Адрес вашей электронной почты
+                            input.auth-form__input#auth-form-email(type="text" placeholder="Адрес вашей электронной почты")
+                .auth-fill
+                    .auth-form__group-row
+                        .auth-form__item
+                            label.auth-form__label(for="auth-form-password") Придумайте пароль
+                            input.auth-form__input#auth-form-password(type="password" placeholder="Пароль")
+                        .auth-form__item
+                            label.auth-form__label(for="auth-form-password-confirm") Повторить пароль
+                            input.auth-form__input#auth-form-password-confirm(type="password" placeholder="Пароль")
+                    .modal-footer
+                        button.auth-form__button(type='submit') Регистрация

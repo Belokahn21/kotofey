@@ -1,0 +1,81 @@
+.form-calc-delivery {
+  background: rgba(198, 198, 198, 0.1);
+  padding: 25px 35px;
+  margin-top: 10%;
+
+  &__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__group-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 15px;
+
+    &.amount-control {
+      margin: 40px 0;
+    }
+
+    &.is-column {
+      @media (max-width: 790px) {
+        flex-direction: column;
+      }
+    }
+  }
+
+  &__description {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    flex: 1 1 auto;
+    width: 50%;
+  }
+
+  &__sub-description {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+    color: grey;
+    flex: 2 1 auto;
+    width: 50%;
+    padding-left: 35px;
+  }
+
+  &__amount {
+    color: grey;
+    border: 1px grey solid;
+    width: 50%;
+    padding: 5px 5px;
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 400;
+  }
+
+  &__summary {
+    font-size: 56px;
+    line-height: 24px;
+    font-weight: 700;
+    color: grey;
+    padding-left: 35px;
+    width: 50%;
+
+    @media (max-width: 790px) {
+      width: 100%;
+      padding-left: 0;
+      line-height: normal;
+    }
+  }
+
+  &__submit {
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 700;
+    background-color: inherit;
+    padding: 4px 15px;
+    border-radius: 25px;
+    border: 1px black solid;
+  }
+}

@@ -1,0 +1,23 @@
+extends include/layer
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Доставка и оплата
+            h1.page__title Доставка и оплата
+            .page__group-row
+                .page__left
+                    h2.page__sub-title Как мы работаем?
+                    .page__text После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 день). <br>Доставка платная. Рассчитайте стоимость в нашем онлайн-калькуляторе. Введите расстояние (в км) от нас — г. Барнаул, ул. Взлетная 1 до того места, куда требуется доставить товар.
+                    h2.page__sub-title Как оплатить?
+                    .page__text Наличными или по терминалу в магазине
+                    img(src="./assets/images/payments.png").payments-image
+                    .page__title Куда доставляем товар?
+                    .page__text Москва и  ближайшее подмосковье
+                .page__right
+                    include include/block/form-calc-delivery
+        img(src="./assets/images/yandex_map.png").map-delivery

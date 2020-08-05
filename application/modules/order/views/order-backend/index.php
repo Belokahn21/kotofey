@@ -56,28 +56,6 @@ $this->title = Title::showTitle("Заказы");
                 }
             }
         ],
-//		[
-//			'attribute' => 'delivery_id',
-//			'filter' => ArrayHelper::map(Delivery::find()->all(), 'id', 'nameF'),
-//			'value' => function ($model) {
-//				if ($model->delivery_id > 0) {
-//					return Delivery::findOne($model->delivery_id)->name;
-//				} else {
-//					return "Не указано";
-//				}
-//			}
-//		],
-//		[
-//			'attribute' => 'payment_id',
-//			'filter' => ArrayHelper::map(Payment::find()->all(), 'id', 'nameF'),
-//			'value' => function ($model) {
-//				if ($model->payment_id > 0) {
-//					return Payment::findOne($model->payment_id)->name;
-//				} else {
-//					return "Не указано";
-//				}
-//			}
-//		],
         [
             'attribute' => 'is_paid',
             'format' => 'raw',
@@ -102,9 +80,8 @@ $this->title = Title::showTitle("Заказы");
                 return OrderHelper::orderSummary($model->id) . ' (<span class="green">+' . OrderHelper::marginality($model->id) . '</span>)';
             }
         ],
-        'promo_code',
         [
-            'label' => 'Итого к оплате',
+            'label' => 'К оплате',
             'format' => 'raw',
             'value' => function ($model) {
                 $out_summ = OrderHelper::orderSummary($model->id);

@@ -78,14 +78,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
             [['phone'], 'string', 'max' => 25],
             ['phone', 'default', 'value' => null],
-            ['phone', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Номер телефона {value} уже занят'],
-//            [['phone'], 'required', 'message' => '{attribute} необходимо указать', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CLIENT_BUY]],
+            ['phone', 'uniquePhoneLogin', 'on' => self::SCENARIO_INSERT],
             [
                 ['phone'],
                 'filter',
                 'filter' => function ($value) {
                     $value = str_replace('+7', '8', $value);
-                    return str_replace([' ', '(', ')', '-'], '', $value);
+                    $value = str_replace([' ', '(', ')', '-'], '', $value);
+                    return $value;
                 }
             ],
 
@@ -94,6 +94,18 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
         ];
     }
+
+    public function uniquePhoneLogin($attribute, $params)
+    {
+        $value = str_replace('+7', '8', $this->phone);
+        $value = str_replace([' ', '(', ')', '-'], '', $value);
+
+        if (self::findOne(['phone' => $value])) {
+            $this->addError($attribute, 'Указанный телефон уже занят.');
+        }
+
+    }
+
 
     public function attributeLabels()
     {

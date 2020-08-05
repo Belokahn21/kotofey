@@ -1,0 +1,69 @@
+extends include/layer
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Доставка и оплата
+            h1.page__title Личный кабинет
+            nav.product-tabs.in-profile
+                #nav-tab.nav.nav-tabs(role='tablist')
+                    a#nav-description-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-description', role='tab', aria-controls='nav-description', aria-selected='true') Мои заказы
+                    a#nav-characteristics-tab.nav-item.nav-link(data-toggle='tab', href='#nav-characteristics', role='tab', aria-controls='nav-characteristics', aria-selected='false') Личные данные
+                    a#nav-recommendations-tab.nav-item.nav-link(data-toggle='tab', href='#nav-recommendations', role='tab', aria-controls='nav-recommendations', aria-selected='false') Адрес доставки
+            #nav-tabContent.tab-content
+                #nav-description.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-description-tab')
+                    ul.order-list
+                        li.order-list__item.order-list-header
+                            .order-list__row.order-list__date Дата
+                            .order-list__row.order-list__number Номер
+                            .order-list__row.order-list__count Кол-во
+                            .order-list__row.order-list__summary Сумма, Р
+                            .order-list__row.order-list__status Статус
+                        li.order-list__item.order-list-body
+                            .order-list__row.order-list__date 10.06.2020
+                            .order-list__row.order-list__number Заказ №1212
+                            .order-list__row.order-list__count 5
+                            .order-list__row.order-list__summary 12 500
+                            .order-list__row.order-list__status Выполнен
+                        li.order-list__item.order-list-body
+                            .order-list__row.order-list__date 10.06.2020
+                            .order-list__row.order-list__number Заказ №1212
+                            .order-list__row.order-list__count 5
+                            .order-list__row.order-list__summary 12 500
+                            .order-list__row.order-list__status Выполнен
+                        li.order-list__item.order-list-body
+                            .order-list__row.order-list__date 10.06.2020
+                            .order-list__row.order-list__number Заказ №1212
+                            .order-list__row.order-list__count 5
+                            .order-list__row.order-list__summary 12 500
+                            .order-list__row.order-list__status Выполнен
+                        li.order-list__item.order-list-body
+                            .order-list__row.order-list__date 10.06.2020
+                            .order-list__row.order-list__number Заказ №1212
+                            .order-list__row.order-list__count 5
+                            .order-list__row.order-list__summary 12 500
+                            .order-list__row.order-list__status Выполнен
+                        li.order-list__item.order-list-body
+                            .order-list__row.order-list__date 10.06.2020
+                            .order-list__row.order-list__number Заказ №1212
+                            .order-list__row.order-list__count 5
+                            .order-list__row.order-list__summary 12 500
+                            .order-list__row.order-list__status Выполнен
+                        li.order-list__item.order-list-body
+                            .order-list__row.order-list__date 10.06.2020
+                            .order-list__row.order-list__number Заказ №1212
+                            .order-list__row.order-list__count 5
+                            .order-list__row.order-list__summary 12 500
+                            .order-list__row.order-list__status Выполнен
+                        li.order-list__item.order-list-body
+                            .order-list__row.order-list__date 10.06.2020
+                            .order-list__row.order-list__number Заказ №1212
+                            .order-list__row.order-list__count 5
+                            .order-list__row.order-list__summary 12 500
+                            .order-list__row.order-list__status Выполнен
+                #nav-characteristics.tab-pane.fade(role='tabpanel', aria-labelledby='nav-characteristics-tab') ...
+                #nav-recommendations.tab-pane.fade(role='tabpanel', aria-labelledby='nav-recommendations-tab') ...

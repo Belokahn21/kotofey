@@ -100,15 +100,28 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 'GET rest/product/get' => 'rest/product/get',
+
                 'GET menu/rest-backend/get' => 'menu/rest-backend/get',
                 'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
                 'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
                 'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
+                'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
+
+                'POST basket/rest/add' => 'basket/rest/add',
+                'POST catalog/rest/get' => 'catalog/rest/get',
+
+				'news' => 'news/news/index',
+
+                '<module>/<controller>/' => '<module>/<controller>/index',
+                '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+
                 'bot/vk/index' => 'bot/vk/index',
                 'market' => 'yandex/catalog/export',
-                'order' => 'order/order/index',
+                'search' => 'search/search/index',
+                'checkout' => 'order/order/create',
+                'clear' => 'basket/basket/clear',
                 'gii' => 'gii',
                 'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
                 '<controller:(admin|ajax)>/' => '<controller>/index',
@@ -128,6 +141,9 @@ $config = [
         ],
     ],
     'modules' => [
+        'instagram' => [
+            'class' => 'app\modules\instagram\Module',
+        ],
         'statistic' => [
             'class' => 'app\modules\statistic\Module',
         ],
