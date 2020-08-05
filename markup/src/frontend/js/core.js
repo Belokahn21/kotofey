@@ -18,6 +18,7 @@ import './block/catalog';
 import './include/init-sliders';
 import './include/init-range-sliders';
 import './include/init-maskedinput';
+import './include/init-datepicker';
 import './include/phone-mask';
 
 

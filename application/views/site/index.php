@@ -14,7 +14,7 @@ use app\models\tool\seo\Title;
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>
 <?= SliderWidget::widget([
-	'slider_id' => 1,
+    'slider_id' => 1,
 ]) ?>
 <?= InformerSliderWidget::widget(); ?>
 <?= ManyPurchasedGoods::widget(); ?>
@@ -28,6 +28,8 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     </div>
  */ ?>
 <?= DiscountItemsWidget::widget(); ?>
+<?php
+/*
     <div class="page-title__group is-column"><h2 class="page-title">Популярные бренды</h2>
         <a class="page-title__link" href="javascript:void(0);">Все бренды</a></div>
     <div class="brand-slider">
@@ -52,4 +54,5 @@ $this->title = Title::showTitle("Зоотовары для животных в �
         <div class="brand-slider-button-prev brand-slider-control"><img src="/upload/images/arrow-left-black.svg">
         </div>
     </div>
+*/ ?>
 <?= InstagramMediaWidget::widget(); ?>

@@ -238,7 +238,7 @@ $this->beginPage() ?>
     <div class="footer-layer-2">
         <div class="requesites">
             <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
-            <div class="requesites__item">Разработка сайта — <a href="javascript:void(0);">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
+            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
         </div>
     </div>
 </footer>
