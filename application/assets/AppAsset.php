@@ -1,7 +1,9 @@
 <?php
+
 namespace app\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 
 class AppAsset extends AssetBundle
@@ -12,8 +14,6 @@ class AppAsset extends AssetBundle
         'css/style.min.css',
     ];
     public $js = [
-    	'js/core.min.js',
-    	'js/script.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',

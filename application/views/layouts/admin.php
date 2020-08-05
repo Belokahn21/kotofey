@@ -182,6 +182,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <?= $content; ?>
     </div>
 </div>
+<!--<script src="/js/backend-core.min.js"></script>-->
 <?php $this->endBody() ?>
 </body>
 </html>

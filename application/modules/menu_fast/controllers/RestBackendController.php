@@ -35,7 +35,6 @@ class RestBackendController extends Controller
 	public function actionGet()
 	{
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-		$menu = array();
 		$start = new \DateTime();
 		$start->setTime(0, 0, 0);
 		$end = new \DateTime();

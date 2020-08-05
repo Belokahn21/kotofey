@@ -1,0 +1,155 @@
+.action-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  @media (max-width: 790px) {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  &__layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    z-index: 99;
+    color: inherit;
+  }
+
+  &__do-action {
+    margin-top: auto;
+  }
+
+  &__link {
+    border: 1px black solid;
+    border-radius: 25px;
+    padding: 10px 25px;
+    font-size: 12px;
+    line-height: 24px;
+    font-weight: 700;
+    color: black;
+
+    &:hover {
+      color: inherit;
+    }
+  }
+
+  &__top-title {
+    font-size: 24px;
+    font-weight: 200;
+    margin-bottom: 20px;
+
+    @media (max-width: 790px) {
+      margin: 0;
+    }
+  }
+
+  &__title {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 48px;
+
+    @media (max-width: 790px) {
+      font-size: 24px;
+      line-height: 36px;
+    }
+  }
+
+  &__price {
+    font-weight: 700;
+    font-size: 60px;
+    line-height: 90px;
+    display: flex;
+    flex-direction: row;
+    justify-self: stretch;
+    align-items: flex-end;
+  }
+
+  &__value {
+    margin-left: 10px;
+    font-weight: 300;
+  }
+
+  &__from {
+    line-height: 80px;
+    font-size: 28px;
+    margin-right: 10px;
+  }
+
+  &__item {
+    position: relative;
+    margin: 10px 0;
+    border-radius: 20px;
+    overflow: hidden;
+
+    &.is-rectangle {
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      background: $main-color;
+      border-radius: 15px;
+      margin-top: 20px;
+
+      @media (max-width: 790px) {
+        &:after {
+          content: none;
+        }
+      }
+
+      @media (min-width: 415px) {
+        &:after {
+          content: "";
+          width: 80%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          background: radial-gradient(
+                          circle at right center,
+                          transparent 40%,
+                          #ffeb68 40%,
+                          #ffeb68 50%,
+                          #ffde02 50%
+          );
+        }
+      }
+
+      .action-list__image {
+        float: right;
+      }
+
+
+      .action-list__layer {
+        padding-top: 70px;
+      }
+
+      .action-list__do-action {
+        margin-top: 0;
+      }
+    }
+
+    &.is-square {
+      width: 49%;
+
+      @media (max-width: 790px) {
+        width: 100%;
+        min-height: 300px;
+        height: 300px;
+
+        .action-list__image {
+          height: 100% !important;
+          object-fit: cover;
+        }
+      }
+
+      .action-list__image {
+        width: 100%;
+      }
+    }
+  }
+}

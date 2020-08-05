@@ -1,0 +1,71 @@
+extends include/layer
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Каталог товаров
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Корзина
+            h1.page__title Корзина
+            ul.basket-list
+                li.basket-list__item
+                    img(src="./assets/images/brick1.png").basket-list__image
+                    .basket-list__group-info
+                        .basket-list__info
+                            .basket-list__title Кирпич М-150 (Стройкерамика)<br>красный 0,7НФ /616
+                        ul.basket-properties
+                            li.basket-properties__item
+                                .basket-properties__key Размер
+                                .basket-properties__value 250*120*65мм
+                            li.basket-properties__item
+                                .basket-properties__key Артикул
+                                .basket-properties__value 0525052
+                    form.product-calc.js-product-calc
+                        .product-calc__price-group
+                            .product-calc__price-group-hidden.js-product-calc-price(data-js-product-calc-price="12005")
+                            .product-calc__price-group-summary.js-product-calc-summary
+                                .count 12 005
+                            .product-calc__price-group-currency ₽
+                        .product-calc__control-group
+                            button(type="button").product-calc__control.product-calc__minus.js-product-calc-minus -
+                            input.product-calc__count(value="1").js-product-calc-amount
+                            button(type="button").product-calc__control.product-calc__plus.js-product-calc-plus +
+                    .basket-list__remove.js-basket-remove(data-product-id="99")
+                        img(src="./assets/images/trash.png").basket-list__remove-icon
+                li.basket-list__item
+                    img(src="./assets/images/brick1.png").basket-list__image
+                    .basket-list__group-info
+                        .basket-list__info
+                            .basket-list__title Кирпич М-150 (Стройкерамика)<br>красный 0,7НФ /616
+                        ul.basket-properties
+                            li.basket-properties__item
+                                .basket-properties__key Размер
+                                .basket-properties__value 250*120*65мм
+                            li.basket-properties__item
+                                .basket-properties__key Артикул
+                                .basket-properties__value 0525052
+                    form.product-calc.js-product-calc
+                        .product-calc__price-group
+                            .product-calc__price-group-hidden.js-product-calc-price(data-js-product-calc-price="12005")
+                            .product-calc__price-group-summary.js-product-calc-summary
+                                .count 12 005
+                            .product-calc__price-group-currency ₽
+                        .product-calc__control-group
+                            button(type="button").product-calc__control.product-calc__minus.js-product-calc-minus -
+                            input.product-calc__count(value="1").js-product-calc-amount
+                            button(type="button").product-calc__control.product-calc__plus.js-product-calc-plus +
+                    .basket-list__remove.js-basket-remove(data-product-id="99")
+                        img(src="./assets/images/trash.png").basket-list__remove-icon
+            .basket-summary
+                .basket-summary__left
+                    a(href="javascript:void(0);").basket-summary__link.one-click-buy В личный кабинет
+                    a(href="javascript:void(0);").basket-summary__link.one-click-buy Продолжить покупки
+                .basket-summary__right
+                    .basket-summary__amount
+                        .basket-summary__count 85 840,35
+                        .basket-summary__value ₽
+                    a(href="javascript:void(0);").basket-summary__link.add-basket Оформить заказ

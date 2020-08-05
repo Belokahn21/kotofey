@@ -1,0 +1,64 @@
+.basket-list {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-radius: 25px;
+    border: 1px silver solid;
+    overflow: hidden;
+    margin-bottom: 20px;
+
+    .product-calc {
+      margin-top: 30px;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 790px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+
+  &__image {
+    padding: 10px 0 10px 20px;
+
+    @media (max-width: 790px) {
+      width: 80%;
+    }
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 24px;
+    padding-top: 30px;
+  }
+
+  &__remove {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(198, 198, 198, 0.4);
+
+    &:hover {
+      background: $main-color;
+      cursor: pointer;
+    }
+
+    @media (max-width: 790px) {
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 0;
+    }
+  }
+
+  &__remove-icon {
+    padding: 0 20px;
+  }
+}

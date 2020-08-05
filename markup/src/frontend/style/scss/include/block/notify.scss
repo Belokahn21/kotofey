@@ -1,0 +1,35 @@
+.alert-notify {
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 100px;
+  transition: all 1s ease-in-out;
+  overflow: hidden;
+
+  &-wrap {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+
+  &__text {
+    padding: 5px;
+  }
+
+  &__type {
+    margin: 10px;
+  }
+
+  &__close {
+    margin: 5px 10px;
+    font-weight: bold;
+    font-size: 25px;
+    cursor: pointer;
+  }
+}
+
+.success-notify {
+  background: #00aa00;
+  color: white;
+}

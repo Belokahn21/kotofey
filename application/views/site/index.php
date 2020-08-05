@@ -4,48 +4,55 @@
  * @var $news \app\modules\news\models\entity\News[]
  */
 
-use app\modules\order\widgets\ManyPurchasedGoods;
-use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\content\widgets\informers_slider\InformerSliderWidget;
+use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
+use app\modules\catalog\widgets\discount_items\DiscountItemsWidget;
+use app\modules\order\widgets\many_purchase\ManyPurchasedGoods;
+use app\modules\content\widgets\slider\SliderWidget;
 use app\models\tool\seo\Title;
-use app\modules\news\widgets\last_news\LastNewsWidget;
-use app\widgets\slider\SliderWidget;
-use app\widgets\informers_slider\InformerSliderWidget;
-use app\modules\bonus\models\services\BonusByBuyService;
-use app\widgets\instagramMedia\InstagramMediaWidget;
 
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>
-
 <?= SliderWidget::widget([
-	'slider_id' => 1,
-	'use_carousel' => true
+    'slider_id' => 1,
 ]) ?>
 <?= InformerSliderWidget::widget(); ?>
 <?= ManyPurchasedGoods::widget(); ?>
-    <ul class="advantages">
-        <li class="advantages-item">
-            <div class="advantage-title">Делаете заказ</div>
-            <div class="advantage-description">Большой выбор товаров и низкие цены</div>
-            <i class="fas fa-shopping-cart"></i>
-        </li>
-        <li class="advantages-item">
-            <div class="advantage-title">Мы доставляем заказ</div>
-            <div class="advantage-description">Доставка в течении дня</div>
-            <i class="fas fa-truck"></i>
-        </li>
-        <li class="advantages-item">
-            <div class="advantage-title">Получаете заказ</div>
-            <div class="advantage-description"><?= (BonusByBuyService::isActive() ? "Бонусы за покупку" : "И удовольствие"); ?></div>
-            <i class="fas fa-gifts"></i>
-        </li>
-    </ul>
-
-    <div class="three-line">
-		<?= SliderWidget::widget([
-			'slider_id' => 2,
-			'use_carousel' => true,
-			'view' => 'square'
-		]) ?>
+<?php /*
+    <div class="page-title__group"><h2 class="page-title">Не пропустите выгоду</h2></div>
+    <div class="profit">
+        <div class="profit__item"><img class="profit__image" src="/upload/images/profit1.png"></div>
+        <div class="profit__item"><img class="profit__image" src="/upload/images/profit2.png">
+            <a class="profit__link" href="javascript:void(0);">Подробнее</a>
+        </div>
     </div>
+ */ ?>
+<?= DiscountItemsWidget::widget(); ?>
+<?php
+/*
+    <div class="page-title__group is-column"><h2 class="page-title">Популярные бренды</h2>
+        <a class="page-title__link" href="javascript:void(0);">Все бренды</a></div>
+    <div class="brand-slider">
+        <div class="brand-slider-container swiper-container">
+            <div class="brand-slider-wrapper swiper-wrapper">
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/knauf.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/tytan.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/tikkurila.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/belinka.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/bosch.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/kleo.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/quelyd.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/sheetrock.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/vetonit.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/unis.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/moment.png"></div>
+                <div class="brand-slider-slide swiper-slide"><img src="/upload/images/bergauf.png"></div>
+            </div>
+        </div>
+        <div class="brand-slider-button-next brand-slider-control"><img src="/upload/images/arrow-right-black.svg">
+        </div>
+        <div class="brand-slider-button-prev brand-slider-control"><img src="/upload/images/arrow-left-black.svg">
+        </div>
+    </div>
+*/ ?>
 <?= InstagramMediaWidget::widget(); ?>
-<?= LastNewsWidget::widget(); ?>

@@ -39,50 +39,46 @@ class RestBackendController extends Controller
 	{
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 		$products = Product::find();
+		$queryData = array();
+		$queries = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
+		/* @var $query SearchQuery */
+		foreach ($queries as $query) {
+			$queryData[] = [
+				'Запрос' => $query->text,
+				'IP' => $query->ip,
+				'Дата' => date('d.m.Y H:i', $query->created_at)
+			];
+		}
+
+
 		$elements = [
 			[
 				'icon' => 'fa-clipboard',
 				'data' => [
-					[
-						'title' => 'Заказов',
-						'value' => Order::find()->count(),
-					],
-					[
-						'title' => 'Оборот',
-						'value' => Price::format(OrderHelper::income())
-					],
-					[
-						'title' => 'Доход',
-						'value' => Price::format(OrderHelper::marginality()),
-					]
-				]
+					'Заказов' => Order::find()->count(),
+					'Оборот' => Price::format(OrderHelper::income()),
+					'Доход' => Price::format(OrderHelper::marginality()),
+				],
 			],
 			[
 				'icon' => 'fa-cubes',
 				'data' => [
-					[
-						'title' => 'Товаров',
-						'value' => $products->where(['>', 'count', 0])->count(),
-					],
-					[
-						'title' => 'Закуп',
-						'value' => Price::format(ProductHelper::purchaseVirtual($products->where(['>', 'count', 0])->all()))
-					],
-					[
-						'title' => 'Доход',
-						'value' => Price::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
-					],
+					'Товаров' => $products->where(['>', 'count', 0])->count(),
+					'Закуп' => Price::format(ProductHelper::purchaseVirtual($products->where(['>', 'count', 0])->all())),
+					'Доход' => Price::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
+				],
+			],
+			[
+				'icon' => 'fa-search',
+				'data' => [
+					'Последний запрос' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->one()->text,
+				],
+				'modal' => [
+					'modalId' => 'search-modal-id',
+					'title' => 'Поиск сайта',
+					'data' => $queryData
 				]
 			],
-//			[
-//				'icon' => 'fa-loop',
-//				'data' => [
-//					[
-//						'title' => 'Запросы',
-//						'value' => SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(10)->all(),
-//					],
-//				]
-//			],
 		];
 		return Json::encode($elements);
 	}

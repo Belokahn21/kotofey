@@ -3,10 +3,21 @@
 namespace app\modules\delivery\models\entity;
 
 
-use yii\behaviors\TimestampBehavior;
-use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
+use mohorev\file\UploadBehavior;
+use yii\behaviors\TimestampBehavior;
 
+/**
+ * Delivery model
+ *
+ * @property integer $id
+ * @property string $name
+ * @property string $image
+ * @property string $description
+ * @property boolean $active
+ * @property integer $created_at
+ * @property integer $updated_at
+ */
 class Delivery extends ActiveRecord
 {
 	const LIMIT_ORDER_SUMM_TO_ACTIVATE = 500;
@@ -26,7 +37,14 @@ class Delivery extends ActiveRecord
 	public function behaviors()
 	{
 		return [
-			TimestampBehavior::className()
+			TimestampBehavior::className(),
+			[
+				'class' => UploadBehavior::class,
+				'attribute' => 'image',
+				'scenarios' => ['default'],
+				'path' => '@webroot/upload/',
+				'url' => '@web/upload/',
+			],
 		];
 	}
 
@@ -34,6 +52,7 @@ class Delivery extends ActiveRecord
 	{
 		return [
 			'id' => "ID",
+			'image' => "Картинка",
 			'name' => "Нвазвание",
 			'description' => "Описаниие",
 			'active' => "Активность",
