@@ -110,6 +110,7 @@ $config = [
                 'POST basket/rest/add' => 'basket/rest/add',
                 'POST catalog/rest/get' => 'catalog/rest/get',
 
+                'cache' => 'site/cache',
                 'news' => 'news/news/index',
                 'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
                 'catalog' => 'catalog/catalog/index',

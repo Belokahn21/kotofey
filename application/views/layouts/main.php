@@ -10,9 +10,9 @@ use app\assets\AppAsset;
 use app\widgets\notification\Alert;
 use app\widgets\admin_panel\AdminPanel;
 use app\modules\user\models\entity\User;
-use app\modules\geo\widgets\geo\GeoWidget;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
+use app\modules\stock\widgets\store\StoreWidget;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
@@ -30,16 +30,7 @@ $this->beginPage() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <?php if (YII_ENV == 'prod'): ?>
-        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
-        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
-        <?php echo $this->render('include/head/google/google_metrika.php'); ?>
-        <?php echo $this->render('include/head/jivo.php'); ?>
-    <?php endif; ?>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <?php if (YII_ENV == 'prod'): ?>
         <?php echo $this->render('include/head/yandex/metrika.php'); ?>
         <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
@@ -226,7 +217,7 @@ $this->beginPage() ?>
             <div class="footer__logo">kotofey.store</div>
             <ul class="footer-contact">
                 <li class="footer-contact__item">
-                    <?= GeoWidget::widget(['view' => 'footer']); ?>
+                    <?= StoreWidget::widget(); ?>
                 </li>
                 <li class="footer-contact__item">
                     <a class="footer-contact__link"
@@ -240,14 +231,10 @@ $this->beginPage() ?>
                 </li>
             </ul>
             <ul class="footer-nav">
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a>
-                </li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a>
-                </li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка
-                        и оплата</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link"
-                                                href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
             </ul>
         </div>
         <div class="footer-layer-1-right">
@@ -266,11 +253,8 @@ $this->beginPage() ?>
     </div>
     <div class="footer-layer-2">
         <div class="requesites">
-            <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a
-                        href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
-            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/"
-                                                                target="_blank">Adelfo</a> <img
-                        src="/upload/images/who_dev.png"></div>
+            <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
+            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
         </div>
     </div>
 </footer>
