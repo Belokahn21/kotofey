@@ -32,13 +32,14 @@ $this->beginPage() ?>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
           integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-	<?php if (YII_ENV == 'prod'): ?>
-		<?php echo $this->render('include/head/yandex/metrika.php'); ?>
-		<?php echo $this->render('include/head/yandex/webmaster.php'); ?>
-		<?php echo $this->render('include/head/google/google_metrika.php'); ?>
-		<?php echo $this->render('include/head/jivo.php'); ?>
-	<?php endif; ?>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <?php if (YII_ENV == 'prod'): ?>
+        <?php echo $this->render('include/head/yandex/metrika.php'); ?>
+        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
+        <?php echo $this->render('include/head/google/google_metrika.php'); ?>
+        <?php echo $this->render('include/head/jivo.php'); ?>
+    <?php endif; ?>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+          integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
     <?php if (YII_ENV == 'prod'): ?>
         <?php echo $this->render('include/head/yandex/metrika.php'); ?>
         <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
@@ -63,16 +64,17 @@ $this->beginPage() ?>
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
-	<?= Html::csrfMetaTags() ?>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-	<?php $this->head() ?>
+    <?php $this->head() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
 <?= AdminPanel::widget(); ?>
 <header class="header page-container">
     <div class="logo">
-        <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo.png">
+        <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle"
+             src="/upload/images/logo.png">
         <a class="logo__link" href="/">
             <div class="logo__title">kotofey.store</div>
             <div class="logo__sub-title">интернет-зоомагазин</div>
@@ -80,24 +82,29 @@ $this->beginPage() ?>
     </div>
     <div class="phone">
         <img class="phone__icon" src="/upload/images/phone.png">
-        <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a></div>
+        <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
+           class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a></div>
     <div class="header-menu-mobile">
         <div class="phone">
             <img class="phone__icon" src="/upload/images/phone.png">
-            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
+               class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
         </div>
         <ul class="header-menu">
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a>
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О
+                    компании</a></li>
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и
+                    оплата</a>
             </li>
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
+            <li class="header-menu__item"><a class="header-menu__link"
+                                             href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
         </ul>
     </div>
 </header>
 <header class="header-mobile">
-	<?= SearchWidget::widget([
-		'view' => 'mobile'
-	]) ?>
+    <?= SearchWidget::widget([
+        'view' => 'mobile'
+    ]) ?>
     <div class="header-mobile-container">
         <div class="header-mobile__hamburger"><img src="/upload/images/hamburger.svg"></div>
         <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
@@ -119,32 +126,39 @@ $this->beginPage() ?>
             <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg"></div>
         </div>
         <ul class="full-mobile-menu">
-			<?php foreach ($parentCategories as $category): ?>
-                <li class="full-mobile-menu__item"><a class="full-mobile-menu__link" href="<?= $category->detail; ?>"><?= $category->name; ?></a></li>
-			<?php endforeach; ?>
+            <?php foreach ($parentCategories as $category): ?>
+                <li class="full-mobile-menu__item"><a class="full-mobile-menu__link"
+                                                      href="<?= $category->detail; ?>"><?= $category->name; ?></a></li>
+            <?php endforeach; ?>
         </ul>
         <ul class="full-mobile-nav">
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О компании</a>
+            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О
+                    компании</a>
             </li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/news/']); ?>">Новости</a></li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
+            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/news/']); ?>">Новости</a>
+            </li>
+            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка
+                    и оплата</a></li>
             <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a>
             </li>
         </ul>
         <div class="header-mobile-full__footer">
             <ul class="header-mobile-full-footer-menu">
                 <li class="header-mobile-full-footer-menu__item">
-					<?php if (Yii::$app->user->isGuest): ?>
-                        <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);" data-target="#signupModal" data-toggle="modal">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                    <?php if (Yii::$app->user->isGuest): ?>
+                        <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);"
+                           data-target="#signupModal" data-toggle="modal">
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png">
+                            </div>
                             <div class="header-mobile-full-footer-menu__label">Регистрация/Войти на сайт</div>
                         </a>
-					<?php else: ?>
+                    <?php else: ?>
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/user/profile/index']) ?>">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png">
+                            </div>
                             <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
                         </a>
-					<?php endif; ?>
+                    <?php endif; ?>
                 </li>
                 <li class="header-mobile-full-footer-menu__item">
                     <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/checkout/']) ?>">
@@ -165,45 +179,46 @@ $this->beginPage() ?>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/news/']); ?>">Новости</a></div>
         <div class="menu__item">
-			<?= SearchWidget::widget(); ?>
+            <?= SearchWidget::widget(); ?>
         </div>
         <div class="menu__item">
-			<?php if (Yii::$app->user->isGuest): ?>
+            <?php if (Yii::$app->user->isGuest): ?>
                 <a class="menu__link profile" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">
                     <img class="profile__icon" src="/upload/images/lock.png"><span>Регистрация</span>
                 </a>
-			<?php else: ?>
+            <?php else: ?>
                 <a class="menu__link profile" href="<?= Url::to(['/user/profile/index']); ?>">
                     <img class="profile__icon" src="/upload/images/lock.png"><span>Личный кабинет</span>
                 </a>
-			<?php endif; ?>
+            <?php endif; ?>
         </div>
 
         <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
                 <img class="basket__icon" src="/upload/images/basket.png">
-                <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>"><span><?= Basket::count(); ?></span></div>
+                <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>">
+                    <span><?= Basket::count(); ?></span></div>
             </a>
         </div>
     </div>
     <div class="menu-full js-show-with-hamburger">
-		<?php foreach ($parentCategories as $parentCategory) : ?>
+        <?php foreach ($parentCategories as $parentCategory) : ?>
             <div class="block-menu">
                 <div class="block-menu__title"><?= $parentCategory->name; ?></div>
-				<?php if ($subsection = $parentCategory->subsections()): ?>
+                <?php if ($subsection = $parentCategory->subsections()): ?>
                     <ul class="block-menu-list">
-						<?php foreach ($subsection as $item): ?>
+                        <?php foreach ($subsection as $item): ?>
                             <li class="block-menu-list__item">
                                 <a class="block-menu-list__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
                             </li>
-						<?php endforeach; ?>
+                        <?php endforeach; ?>
                     </ul>
-				<?php endif; ?>
+                <?php endif; ?>
             </div>
-		<?php endforeach; ?>
+        <?php endforeach; ?>
     </div>
 </div>
 <div class="page-container">
-	<?= $content; ?>
+    <?= $content; ?>
 </div>
 <footer class="footer page-container">
     <div class="footer-layer-1">
@@ -211,42 +226,51 @@ $this->beginPage() ?>
             <div class="footer__logo">kotofey.store</div>
             <ul class="footer-contact">
                 <li class="footer-contact__item">
-					<?= GeoWidget::widget(['view' => 'footer']); ?>
+                    <?= GeoWidget::widget(['view' => 'footer']); ?>
                 </li>
                 <li class="footer-contact__item">
-                    <a class="footer-contact__link" href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
+                    <a class="footer-contact__link"
+                       href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
                 </li>
                 <li class="footer-contact__item">
-                    <a class="phone footer-contact__link js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
-						<?= SiteSettings::getValueByCode('phone_1'); ?>
+                    <a class="phone footer-contact__link js-phone-mask"
+                       href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
+                        <?= SiteSettings::getValueByCode('phone_1'); ?>
                     </a>
                 </li>
             </ul>
             <ul class="footer-nav">
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a>
+                </li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a>
+                </li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка
+                        и оплата</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link"
+                                                href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
             </ul>
         </div>
         <div class="footer-layer-1-right">
             <div class="footer-categories-container">
                 <div class="footer__title">Каталог зоотоваров</div>
                 <ul class="footer-categories">
-					<?php foreach ($parentCategories as $item): ?>
+                    <?php foreach ($parentCategories as $item): ?>
                         <li class="footer-categories__item">
                             <a class="footer-categories__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
                         </li>
-					<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
-			<?= SubscribeWidget::widget(); ?>
+            <?= SubscribeWidget::widget(); ?>
         </div>
     </div>
     <div class="footer-layer-2">
         <div class="requesites">
-            <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
-            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
+            <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a
+                        href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
+            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/"
+                                                                target="_blank">Adelfo</a> <img
+                        src="/upload/images/who_dev.png"></div>
         </div>
     </div>
 </footer>
@@ -255,9 +279,10 @@ $signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
 $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
 ?>
 <?= $this->render('include/auth', [
-	'signin' => $signinModel,
-	'signup' => $signupModel,
+    'signin' => $signinModel,
+    'signup' => $signupModel,
 ]); ?>
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>-->
 <script src="/js/frontend-core.min.js"></script>
 <?= Alert::widget(); ?>
 <?php $this->endBody(); ?>
