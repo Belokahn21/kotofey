@@ -13,7 +13,7 @@ class StoreWidget extends Widget
 
 	public function run()
 	{
-		if (!$city_id = $_SESSION['city_id']) {
+		if (!$city_id = \Yii::$app->session->get('city_id')) {
 			$city_id = Geo::findOne(['is_default' => true])->id;
 		}
 
