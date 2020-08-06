@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
                         <label class="for-checkbox-budget checkout-form-variants__item" for="budget-9090$index">
                             <span class="checkout-form-variants__card">
                             <div class="checkout-form-variants__label">$label</div>
-                                <img class="checkout-form-variants__icon" src="/upload/<?= $payment->image; ?>">
+                                <img class="checkout-form-variants__icon" src="/upload/$payment->image">
                             </span>
                         </label>
 LIST;
