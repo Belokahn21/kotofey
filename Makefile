@@ -29,6 +29,6 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/geo/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/order/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/delivery/install/migrations --interactive=0
-	cd application && php yii migrate --migrationPath=@app/modules/payment/installmigrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/payment/install/migrations --interactive=0
 
 deploy: pull init-dev
