@@ -23,7 +23,7 @@ $phrase = @Yii::$app->request->get()['Search']['search'];
 ]);
 ?>
 <div class="search-form__input-group">
-	<?= Html::submitButton(Html::img('/upload/images/search.png', ['class' => 'search-form__icon']), ['class' => 'search-form__button']) ?>
+	<?= Html::submitButton(Html::img('/upload/images/search.svg', ['class' => 'search-form__icon']), ['class' => 'search-form__button']) ?>
 	<?= $form->field($model, 'search')->textInput(['placeholder' => 'Найти товар...', 'class' => 'search-form__input', 'value' => $phrase])->label(false) ?>
 </div>
 <?php ActiveForm::end(); ?>

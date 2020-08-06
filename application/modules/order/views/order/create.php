@@ -17,6 +17,7 @@ use app\models\tool\Price;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use app\models\tool\Currency;
+use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
 use app\modules\order\models\entity\Order;
 use app\modules\basket\models\entity\Basket;
@@ -31,11 +32,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/baske
 $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа', 'url' => ['/order/']];
 ?>
 <div class="page">
-    <ul class="breadcrumbs">
-        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Главная</a></li>
-        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Корзина</a></li>
-        <li class="breadcrumbs__item active"><a class="breadcrumbs__link" href="javascript:void(0);">Оформление заказа</a></li>
-    </ul>
+	<?= Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => 'Главная ',
+			'url' => Yii::$app->homeUrl,
+			'title' => 'Первая страница сайта зоомагазина Котофей',
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]); ?>
     <h1 class="page__title">Оформление заказа</h1>
     <div class="page__group-row">
         <div class="page__left">

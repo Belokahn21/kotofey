@@ -1,22 +1,23 @@
 <?php
 
-use app\modules\basket\models\entity\Basket;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\modules\bonus\models\helper\DiscountHelper;
 use app\models\tool\seo\Title;
-use app\models\tool\Currency;
 use app\modules\site_settings\models\entity\SiteSettings;
 use yii\widgets\LinkPager;
+use app\widgets\Breadcrumbs;
 
 /* @var $products \app\modules\catalog\models\entity\Product[] */
 
 $this->title = Title::showTitle("Поиск по сайту");
 $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url' => ['/search/']]; ?>
 <div class="page">
-    <ul class="breadcrumbs">
-        <li class="breadcrumbs__item"><a class="breadcrumbs__link" href="javascript:void(0);">Главная</a></li>
-        <li class="breadcrumbs__item active"><a class="breadcrumbs__link" href="javascript:void(0);">Поиск по сайту</a></li>
-    </ul>
+	<?= Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => 'Главная ',
+			'url' => Yii::$app->homeUrl,
+			'title' => 'Первая страница сайта зоомагазина Котофей',
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]); ?>
     <h1 class="page__title">Результат поиска:</h1>
 	<?php if ($products): ?>
         <ul class="catalog">
