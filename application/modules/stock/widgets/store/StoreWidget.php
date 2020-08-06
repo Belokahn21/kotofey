@@ -9,14 +9,18 @@ use yii\base\Widget;
 
 class StoreWidget extends Widget
 {
-    public $view = 'default';
+	public $view = 'default';
 
-    public function run()
-    {
-        $stock = Stocks::find()->where(['city_id' => $_SESSION['city_id']])->one();
+	public function run()
+	{
+		if (!$city_id = $_SESSION['city_id']) {
+			$city_id = Geo::findOne(['is_default' => true])->id;
+		}
 
-        return $this->render($this->view, [
-            'stock' => $stock
-        ]);
-    }
+		$stock = Stocks::find()->where(['city_id' => $city_id])->one();
+
+		return $this->render($this->view, [
+			'stock' => $stock
+		]);
+	}
 }
