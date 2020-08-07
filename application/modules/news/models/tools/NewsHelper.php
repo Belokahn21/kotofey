@@ -10,7 +10,7 @@ class NewsHelper
 {
 	public static function getDetailUrl(News $model)
 	{
-		return Url::to(['news/news/view', 'id' => $model->slug]);
+		return Url::to(['/news/news/view', 'id' => $model->slug]);
 	}
 
 	public static function getPreviewImageUrl(News $model)
