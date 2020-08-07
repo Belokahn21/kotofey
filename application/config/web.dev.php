@@ -112,6 +112,7 @@ $config = [
 
                 'cache' => 'site/cache',
                 'news' => 'news/news/index',
+				'news/<id[A-Za-z-\/\d_]+>' => 'news/news/view',
                 'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
                 'catalog' => 'catalog/catalog/index',
                 'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',

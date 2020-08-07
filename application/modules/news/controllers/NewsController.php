@@ -2,6 +2,7 @@
 
 namespace app\modules\news\controllers;
 
+use app\modules\news\models\entity\NewsCategory;
 use Yii;
 use app\models\tool\seo\Attributes;
 use app\models\tool\seo\og\OpenGraph;
@@ -14,9 +15,11 @@ class NewsController extends Controller
 	public function actionIndex()
 	{
 		$models = News::find()->all();
+		$categories = NewsCategory::find()->all();
 
 		return $this->render('index', [
-			'models' => $models
+			'models' => $models,
+			'categories' => $categories,
 		]);
 	}
 
