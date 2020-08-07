@@ -37,6 +37,11 @@
     width: 100%;
     text-align: justify;
     padding: 5px 10px;
+    color: $main-color;
+
+    &:hover {
+      color: $active-color;
+    }
   }
 
   &__image {
