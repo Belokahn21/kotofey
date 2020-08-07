@@ -21,6 +21,18 @@
     .aside-sub-categories {
       width: 20%;
     }
+
+
+
+    @media (max-width: 414px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .aside-sub-categories {
+        width: 100%;
+      }
+    }
   }
 
   &__item {
@@ -30,6 +42,10 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+
+    @media (max-width: 414px) {
+      width: 100%;
+    }
   }
 
   &__link {
