@@ -1,0 +1,39 @@
+.profile-sections {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    width: 100px;
+    height: 100px;
+    border: $main-color 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    cursor: pointer;
+    margin: 10px 0;
+    color: $main-color;
+    text-decoration: none;
+
+    i {
+      font-size: 40px;
+    }
+
+    &:hover {
+      border-color: $active-color;
+      text-decoration: none;
+
+      i {
+        color: $active-color;
+      }
+    }
+  }
+
+  &__title {
+    margin: 15px 0 5px 0;
+    font-size: 8px;
+    color: #c6c6c6;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+}

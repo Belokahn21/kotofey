@@ -9,61 +9,40 @@ block contents
                 li.breadcrumbs__item.active
                     a(href="javascript:void(0);").breadcrumbs__link Доставка и оплата
             h1.page__title Личный кабинет
-            nav.product-tabs.in-profile
-                #nav-tab.nav.nav-tabs(role='tablist')
-                    a#nav-description-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-description', role='tab', aria-controls='nav-description', aria-selected='true') Мои заказы
-                    a#nav-characteristics-tab.nav-item.nav-link(data-toggle='tab', href='#nav-characteristics', role='tab', aria-controls='nav-characteristics', aria-selected='false') Личные данные
-                    a#nav-recommendations-tab.nav-item.nav-link(data-toggle='tab', href='#nav-recommendations', role='tab', aria-controls='nav-recommendations', aria-selected='false') Адрес доставки
-            #nav-tabContent.tab-content
-                #nav-description.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-description-tab')
-                    ul.order-list
-                        li.order-list__item.order-list-header
-                            .order-list__row.order-list__date Дата
-                            .order-list__row.order-list__number Номер
-                            .order-list__row.order-list__count Кол-во
-                            .order-list__row.order-list__summary Сумма, Р
-                            .order-list__row.order-list__status Статус
-                        li.order-list__item.order-list-body
-                            .order-list__row.order-list__date 10.06.2020
-                            .order-list__row.order-list__number Заказ №1212
-                            .order-list__row.order-list__count 5
-                            .order-list__row.order-list__summary 12 500
-                            .order-list__row.order-list__status Выполнен
-                        li.order-list__item.order-list-body
-                            .order-list__row.order-list__date 10.06.2020
-                            .order-list__row.order-list__number Заказ №1212
-                            .order-list__row.order-list__count 5
-                            .order-list__row.order-list__summary 12 500
-                            .order-list__row.order-list__status Выполнен
-                        li.order-list__item.order-list-body
-                            .order-list__row.order-list__date 10.06.2020
-                            .order-list__row.order-list__number Заказ №1212
-                            .order-list__row.order-list__count 5
-                            .order-list__row.order-list__summary 12 500
-                            .order-list__row.order-list__status Выполнен
-                        li.order-list__item.order-list-body
-                            .order-list__row.order-list__date 10.06.2020
-                            .order-list__row.order-list__number Заказ №1212
-                            .order-list__row.order-list__count 5
-                            .order-list__row.order-list__summary 12 500
-                            .order-list__row.order-list__status Выполнен
-                        li.order-list__item.order-list-body
-                            .order-list__row.order-list__date 10.06.2020
-                            .order-list__row.order-list__number Заказ №1212
-                            .order-list__row.order-list__count 5
-                            .order-list__row.order-list__summary 12 500
-                            .order-list__row.order-list__status Выполнен
-                        li.order-list__item.order-list-body
-                            .order-list__row.order-list__date 10.06.2020
-                            .order-list__row.order-list__number Заказ №1212
-                            .order-list__row.order-list__count 5
-                            .order-list__row.order-list__summary 12 500
-                            .order-list__row.order-list__status Выполнен
-                        li.order-list__item.order-list-body
-                            .order-list__row.order-list__date 10.06.2020
-                            .order-list__row.order-list__number Заказ №1212
-                            .order-list__row.order-list__count 5
-                            .order-list__row.order-list__summary 12 500
-                            .order-list__row.order-list__status Выполнен
-                #nav-characteristics.tab-pane.fade(role='tabpanel', aria-labelledby='nav-characteristics-tab') ...
-                #nav-recommendations.tab-pane.fade(role='tabpanel', aria-labelledby='nav-recommendations-tab') ...
+
+            .page__group-row
+                .page__left
+
+
+                    .profile-sections#myTab(role='tablist')
+                        a.profile-sections__item.active#home-tab(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true')
+                            i.fas.fa-user
+                            .profile-sections__title Настройки
+                        a.profile-sections__item#profile-tab(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false')
+                            i.fas.fa-hand-holding-usd
+                            .profile-sections__title Заказы
+
+                    //ul#myTab.nav.nav-tabs(role='tablist')
+                    //    li.nav-item
+                    //        a#home-tab.nav-link.active(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true') Home
+                    //    li.nav-item
+                    //        a#profile-tab.nav-link(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false') Profile
+
+                .page__right
+                    #myTabContent.tab-content
+                        #home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='home-tab')
+                            | Raw denim you
+                            | probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
+                            | cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
+                            | keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
+                            | placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
+                            | qui.
+                        #profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-tab')
+                            | Food truck fixie
+                            | locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
+                            | blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
+                            | Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
+                            | PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
+                            | salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
+                            | sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
+                            | stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
