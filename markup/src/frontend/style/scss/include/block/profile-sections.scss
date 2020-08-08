@@ -14,8 +14,10 @@
     margin: 10px 0;
     color: $main-color;
     text-decoration: none;
+    border-radius: 10px;
 
     i {
+      transition: all 0.2s ease-in-out;
       font-size: 40px;
     }
 

@@ -1,0 +1,40 @@
+.profile-orders {
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0;
+    border-bottom: 1px #c6c6c6 solid;
+  }
+
+  &__link {
+    color: $main-color;
+
+    &:hover {
+      color: $main-color;
+    }
+  }
+
+  &__number {
+    width: 10%;
+  }
+
+  &__date {
+    width: 20%;
+  }
+
+  &__status {
+    width: 30%;
+
+  }
+
+  &__summary {
+    width: 20%;
+
+  }
+
+  &__action {
+    width: 20%;
+  }
+}

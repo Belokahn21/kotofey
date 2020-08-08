@@ -11,7 +11,7 @@ block contents
             h1.page__title Личный кабинет
 
             .page__group-row
-                .page__left
+                .page__left.w-25
                     .profile-sections.nav.nav-tabs#myTab(role='tablist')
                         a.profile-sections__item.active#home-tab(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true')
                             i.fas.fa-user
@@ -19,9 +19,36 @@ block contents
                         a.profile-sections__item#profile-tab(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false')
                             i.fas.fa-hand-holding-usd
                             .profile-sections__title Заказы
-                .page__right
+                .page__right.w-75
                     .tab-content
                         #home.tab-pane.fade.show.active
                             | Описание товара...
                         #profile.tab-pane.fade
-                            | Характеристики товара...
+                            .profile-orders
+                                .profile-orders__row.profile-orders__header
+                                    .profile-orders__number №
+                                    .profile-orders__date Дата покупки
+                                    .profile-orders__status Статус заказа
+                                    .profile-orders__summary Сумма заказа
+                                    .profile-orders__action
+                                .profile-orders__row
+                                    .profile-orders__number 1
+                                    .profile-orders__date 01.01.2020
+                                    .profile-orders__status Заказ формируется
+                                    .profile-orders__summary 2 700 Р
+                                    .profile-orders__action
+                                        a.profile-orders__link(href="#") Подробнее
+                                .profile-orders__row
+                                    .profile-orders__number 2
+                                    .profile-orders__date 01.01.2020
+                                    .profile-orders__status Заказ формируется
+                                    .profile-orders__summary 3 100 Р
+                                    .profile-orders__action
+                                        a.profile-orders__link(href="#") Подробнее
+                                .profile-orders__row
+                                    .profile-orders__number 3
+                                    .profile-orders__date 01.01.2020
+                                    .profile-orders__status Заказ формируется
+                                    .profile-orders__summary 15 700 Р
+                                    .profile-orders__action
+                                        a.profile-orders__link(href="#") Подробнее
