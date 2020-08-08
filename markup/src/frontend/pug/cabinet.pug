@@ -12,37 +12,16 @@ block contents
 
             .page__group-row
                 .page__left
-
-
-                    .profile-sections#myTab(role='tablist')
+                    .profile-sections.nav.nav-tabs#myTab(role='tablist')
                         a.profile-sections__item.active#home-tab(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true')
                             i.fas.fa-user
                             .profile-sections__title Настройки
                         a.profile-sections__item#profile-tab(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false')
                             i.fas.fa-hand-holding-usd
                             .profile-sections__title Заказы
-
-                    //ul#myTab.nav.nav-tabs(role='tablist')
-                    //    li.nav-item
-                    //        a#home-tab.nav-link.active(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true') Home
-                    //    li.nav-item
-                    //        a#profile-tab.nav-link(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false') Profile
-
                 .page__right
-                    #myTabContent.tab-content
-                        #home.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='home-tab')
-                            | Raw denim you
-                            | probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master
-                            | cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro
-                            | keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip
-                            | placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi
-                            | qui.
-                        #profile.tab-pane.fade(role='tabpanel', aria-labelledby='profile-tab')
-                            | Food truck fixie
-                            | locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit,
-                            | blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee.
-                            | Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum
-                            | PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit. Keytar helvetica VHS
-                            | salvia yr, vero magna velit sapiente labore stumptown. Vegan fanny pack odio cillum wes anderson 8-bit,
-                            | sustainable jean shorts beard ut DIY ethical culpa terry richardson biodiesel. Art party scenester
-                            | stumptown, tumblr butcher vero sint qui sapiente accusamus tattooed echo park.
+                    .tab-content
+                        #home.tab-pane.fade.show.active
+                            | Описание товара...
+                        #profile.tab-pane.fade
+                            | Характеристики товара...
