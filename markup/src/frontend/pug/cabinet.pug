@@ -19,6 +19,9 @@ block contents
                         a.profile-sections__item#profile-tab(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false')
                             i.fas.fa-hand-holding-usd
                             .profile-sections__title Заказы
+                        a.profile-sections__item#favorite-tab(data-toggle='tab', href='#favorite', role='tab', aria-controls='profile', aria-selected='false')
+                            i.fas.fa-heart
+                            .profile-sections__title Избранное
                 .page__right.w-75
                     .tab-content
                         #home.tab-pane.fade.show.active
@@ -64,3 +67,4 @@ block contents
                                     .profile-orders__summary 15 700 Р
                                     .profile-orders__action
                                         a.profile-orders__link(href="#") Подробнее
+                        #favorite.tab-pane.fade Избранное
