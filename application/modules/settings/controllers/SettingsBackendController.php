@@ -6,6 +6,8 @@ use Yii;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\site_settings\models\search\SettingsSearchForm;
 use app\widgets\notification\Alert;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -14,6 +16,31 @@ use yii\web\UploadedFile;
 class SettingsBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['Administrator', 'Developer'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     public function actionIndex()
     {

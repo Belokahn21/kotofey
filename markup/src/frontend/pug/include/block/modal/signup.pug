@@ -2,7 +2,7 @@
 #signupModal.modal.fade.authModal(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel', aria-hidden='true')
     .modal-dialog(role='document')
         .modal-content
-            form.auth-form(method="post" action="/")
+            form.site-form(method="post" action="/")
                 .modal-header
                     .div
                         h5#signupModalLabel.modal-title Регистрация
@@ -14,23 +14,23 @@
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    .auth-form__item
-                        label.auth-form__label(for="auth-form-fio") ФИО
-                        input.auth-form__input#auth-form-fio(type="text" placeholder="Ваша фамилия")
-                    .auth-form__group-row
-                        .auth-form__item
-                            label.auth-form__label(for="auth-form-phone") Контактный телефон
-                            input.auth-form__input.js-mask-ru#auth-form-phone(type="text", placeholder="+7 (___) ___ __-__")
-                        .auth-form__item
-                            label.auth-form__label(for="auth-form-email") Адрес вашей электронной почты
-                            input.auth-form__input#auth-form-email(type="text" placeholder="Адрес вашей электронной почты")
+                    .site-form__item
+                        label.site-form__label(for="site-form-fio") ФИО
+                        input.site-form__input#site-form-fio(type="text" placeholder="Ваша фамилия")
+                    .site-form__group-row
+                        .site-form__item
+                            label.site-form__label(for="site-form-phone") Контактный телефон
+                            input.site-form__input.js-mask-ru#site-form-phone(type="text", placeholder="+7 (___) ___ __-__")
+                        .site-form__item
+                            label.site-form__label(for="site-form-email") Адрес вашей электронной почты
+                            input.site-form__input#site-form-email(type="text" placeholder="Адрес вашей электронной почты")
                 .auth-fill
-                    .auth-form__group-row
-                        .auth-form__item
-                            label.auth-form__label(for="auth-form-password") Придумайте пароль
-                            input.auth-form__input#auth-form-password(type="password" placeholder="Пароль")
-                        .auth-form__item
-                            label.auth-form__label(for="auth-form-password-confirm") Повторить пароль
-                            input.auth-form__input#auth-form-password-confirm(type="password" placeholder="Пароль")
+                    .site-form__group-row
+                        .site-form__item
+                            label.site-form__label(for="site-form-password") Придумайте пароль
+                            input.site-form__input#site-form-password(type="password" placeholder="Пароль")
+                        .site-form__item
+                            label.site-form__label(for="site-form-password-confirm") Повторить пароль
+                            input.site-form__input#site-form-password-confirm(type="password" placeholder="Пароль")
                     .modal-footer
-                        button.auth-form__button(type='submit') Регистрация
+                        button.site-form__button(type='submit') Регистрация

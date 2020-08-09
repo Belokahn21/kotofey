@@ -1,6 +1,10 @@
+#proflieTabs {
+  border: 0;
+}
+
 .profile-sections {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 
   &__item {
     width: 100px;
@@ -11,7 +15,7 @@
     justify-content: flex-end;
     align-items: center;
     cursor: pointer;
-    margin: 10px 0;
+    margin: 10px;
     color: $main-color;
     text-decoration: none;
     border-radius: 10px;

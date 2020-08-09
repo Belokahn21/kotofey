@@ -1,4 +1,5 @@
 <?php
+
 /* @var $this \yii\web\View
  * @var $model \app\modules\user\models\entity\User
  * @var $orders \app\modules\order\models\entity\Order[]
@@ -6,9 +7,7 @@
  */
 
 use yii\helpers\Url;
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
-use yii\helpers\ArrayHelper;
+use app\models\tool\Price;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
 use app\modules\order\models\helpers\OrderHelper;
@@ -17,72 +16,83 @@ use app\widgets\Breadcrumbs;
 $this->title = Title::showTitle('Личный кабинет');
 ?>
 <div class="page">
-	<?php
-	$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
-	?>
-	<?= Breadcrumbs::widget([
-		'homeLink' => [
-			'label' => 'Главная ',
-			'url' => Yii::$app->homeUrl,
-			'title' => 'Первая страница сайта зоомагазина Котофей',
-		],
-		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-	]); ?>
+    <?php
+    $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
+    ?>
+    <?= Breadcrumbs::widget([
+        'homeLink' => [
+            'label' => 'Главная ',
+            'url' => Yii::$app->homeUrl,
+            'title' => 'Первая страница сайта зоомагазина Котофей',
+        ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
     <h1 class="page__title">Личный кабинет</h1>
     <a href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
-    <nav class="product-tabs in-profile">
-        <div class="nav nav-tabs" id="nav-tab" role="tablist"><a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Мои заказы</a><a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab" aria-controls="nav-characteristics" aria-selected="false">Личные данные</a><a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations" role="tab" aria-controls="nav-recommendations" aria-selected="false">Адрес доставки</a></div>
-    </nav>
-    <div class="tab-content" id="nav-tab-profile">
-        <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
-			<?php if ($orders): ?>
-                <ul class="order-list">
-                    <li class="order-list__item order-list-header">
-                        <div class="order-list__row order-list__date">Дата</div>
-                        <div class="order-list__row order-list__number">Номер</div>
-                        <div class="order-list__row order-list__summary">Сумма, <?= Currency::getInstance()->show(); ?></div>
-                        <div class="order-list__row order-list__status">Статус</div>
-                        <div class="order-list__row order-list__detail"></div>
-                    </li>
-					<?php foreach ($orders as $order): ?>
-                        <li class="order-list__item order-list-body">
-                            <div class="order-list__row order-list__date"><?= date('d.m.Y', $order->created_at); ?></div>
-                            <div class="order-list__row order-list__number">Заказ №<?= $order->id; ?></div>
-                            <div class="order-list__row order-list__summary"><?= OrderHelper::orderSummary($order->id); ?> <?= Currency::getInstance()->show(); ?></div>
-                            <div class="order-list__row order-list__status"><?= OrderHelper::getStatus($order); ?></div>
-                            <div class="order-list__row order-list__detail"><a href="<?= Url::to(['/order/order/view', 'id' => $order->id]); ?>">Подробнее</a></div>
-                        </li>
-					<?php endforeach; ?>
-                </ul>
-			<?php else: ?>
-                У вас нет заказов. Следует исправить это!
-			<?php endif ?>
+    <div class="page__group-row">
+        <div class="page__left w-25">
+            <div class="profile-sections nav nav-tabs" id="proflieTabs" role="tablist"><a
+                        class="profile-sections__item active" id="home-tab" data-toggle="tab" href="#home" role="tab"
+                        aria-controls="home" aria-selected="true"><i class="fas fa-user"></i>
+                    <div class="profile-sections__title">Настройки</div>
+                </a><a class="profile-sections__item" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                       aria-controls="profile" aria-selected="false"><i class="fas fa-hand-holding-usd"></i>
+                    <div class="profile-sections__title">Заказы</div>
+                </a></div>
         </div>
-        <div class="tab-pane fade" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">
-			<?php $profile = ActiveForm::begin(); ?>
-            <div class="row">
-                <div class="col-6">
-					<?= $profile->field($model, 'email')->textInput(); ?>
-                    <div class=row>
-                        <div class="col-4"><?= $profile->field($model, 'first_name')->textInput(); ?></div>
-                        <div class="col-4"><?= $profile->field($model, 'name')->textInput(); ?></div>
-                        <div class="col-4"><?= $profile->field($model, 'last_name')->textInput(); ?></div>
-                    </div>
-					<?= $profile->field($model, 'sex')->dropDownList(ArrayHelper::map($sexList, 'id', 'name'), ['prompt' => 'Выбрать']); ?>
+        <div class="page__right w-75">
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="home">
+                    <h2 class="page__title">Настройки пользователя</h2>
+                    <form class="site-form profile-form">
+                        <div class="page__left">
+                            <div class="site-form__item">
+                                <label class="site-form__label" for="site-form-email">Адрес вашей электронной
+                                    почты</label>
+                                <input class="site-form__input" id="site-form-email" type="text"
+                                       placeholder="Адрес вашей электронной почты">
+                            </div>
+                            <div class="site-form__item">
+                                <label class="site-form__label" for="site-form-password">Новый пароль</label>
+                                <input class="site-form__input" id="site-form-password" type="password"
+                                       placeholder="Пароль">
+                            </div>
+                        </div>
+                        <div class="page__right">
+                            <div class="site-form__item">
+                                <label class="site-form__label" for="site-form-avatar">Аватарка</label>
+                                <input class="site-form__input" id="site-form-avatar" type="file">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <div class="col-6">
-					<?php if ($model->avatar): ?>
-                        <img src="/upload/<?= $model->avatar; ?>" style=" width: 200px; object-fit: contain; margin: 10px auto; display: block;">
-					<?php endif; ?>
-					<?= $profile->field($model, 'avatar')->fileInput(); ?>
+                <div class="tab-pane fade" id="profile">
+                    <?php if ($orders): ?>
+                        <div class="profile-orders">
+                            <div class="profile-orders__row profile-orders__header">
+                                <div class="profile-orders__number">№</div>
+                                <div class="profile-orders__date">Дата покупки</div>
+                                <div class="profile-orders__status">Статус заказа</div>
+                                <div class="profile-orders__summary">Сумма заказа</div>
+                                <div class="profile-orders__action"></div>
+                            </div>
+                            <?php foreach ($orders as $order): ?>
+                                <div class="profile-orders__row">
+                                    <div class="profile-orders__number">#<?= $order->id; ?></div>
+                                    <div class="profile-orders__date"><?= date('d.m.Y', $order->created_at) ?></div>
+                                    <div class="profile-orders__status"><?= OrderHelper::getStatus($order); ?></div>
+                                    <div class="profile-orders__summary"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></div>
+                                    <div class="profile-orders__action">
+                                        <a class="profile-orders__link" href="#">Подробнее</a>
+                                    </div>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        Заказы отсутсвуют, нужно срочно это исправить!!!
+                    <?php endif; ?>
                 </div>
             </div>
-
-			<?= Html::submitButton('Обновить', [
-				'class' => 'btn-main'
-			]); ?>
-			<?php ActiveForm::end(); ?>
         </div>
-        <div class="tab-pane fade" id="nav-recommendations" role="tabpanel" aria-labelledby="nav-recommendations-tab">...</div>
     </div>
 </div>

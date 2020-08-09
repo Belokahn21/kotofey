@@ -2,7 +2,7 @@
 #signinModal.authModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='signinModalLabel', aria-hidden='true')
     .modal-dialog(role='document')
         .modal-content
-            .auth-form
+            .site-form
                 .modal-header
                     .div
                         h5#signinModalLabel.modal-title Войти в личный кабинет
@@ -14,11 +14,11 @@
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
-                    .auth-form__item
-                        label.auth-form__label(for="auth-form-email") Адрес вашей электронной почты
-                        input.auth-form__input#auth-form-email(type="text" placeholder="Адрес вашей электронной почты")
-                    .auth-form__item
-                        label.auth-form__label(for="auth-form-password") Пароль
-                        input.auth-form__input#auth-form-password(type="password" placeholder="Пароль")
+                    .site-form__item
+                        label.site-form__label(for="site-form-email") Адрес вашей электронной почты
+                        input.site-form__input#site-form-email(type="text" placeholder="Адрес вашей электронной почты")
+                    .site-form__item
+                        label.site-form__label(for="site-form-password") Пароль
+                        input.site-form__input#site-form-password(type="password" placeholder="Пароль")
                     .modal-footer
-                        button.auth-form__button(type='button') Авторизоваться
+                        button.site-form__button(type='button') Авторизоваться

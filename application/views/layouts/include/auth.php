@@ -17,7 +17,7 @@ use yii\helpers\Html;
                 'enableAjaxValidation' => true,
                 'action' => Url::to(['/user/auth/signup']),
                 'options' => [
-                    'class' => 'auth-form'
+                    'class' => 'site-form'
                 ]
             ]); ?>
             <div class="modal-header">
@@ -36,34 +36,34 @@ use yii\helpers\Html;
                 </button>
             </div>
             <div class="modal-body">
-                <div class="auth-form__item">
-                    <label class="auth-form__label" for="auth-form-email">Адрес вашей электронной почты</label>
+                <div class="site-form__item">
+                    <label class="site-form__label" for="site-form-email">Адрес вашей электронной почты</label>
                     <?= $signupForm->field($signup, 'email')->textInput([
-                        'class' => 'auth-form__input',
-                        'id' => 'auth-form-email',
+                        'class' => 'site-form__input',
+                        'id' => 'site-form-email',
                         'placeholder' => 'Адрес вашей электронной почты',
                     ])->label(false); ?>
                 </div>
-                <div class="auth-form__item">
-                    <label class="auth-form__label" for="auth-form-phone">Контактный телефон</label>
+                <div class="site-form__item">
+                    <label class="site-form__label" for="site-form-phone">Контактный телефон</label>
                     <?= $signupForm->field($signup, 'phone')->textInput([
-                        'class' => 'auth-form__input js-mask-ru',
-                        'id' => 'auth-form-phone',
+                        'class' => 'site-form__input js-mask-ru',
+                        'id' => 'site-form-phone',
                         'placeholder' => '+7 (___) ___ __-__',
                     ])->label(false); ?>
                 </div>
-                <div class="auth-form__item">
-                    <label class="auth-form__label" for="auth-form-password">Пароль</label>
+                <div class="site-form__item">
+                    <label class="site-form__label" for="site-form-password">Пароль</label>
                     <?= $signupForm->field($signup, 'password')->passwordInput([
-                        'class' => 'auth-form__input',
-                        'id' => 'auth-form-password',
+                        'class' => 'site-form__input',
+                        'id' => 'site-form-password',
                         'placeholder' => 'Пароль',
                     ])->label(false); ?>
                 </div>
             </div>
             <div class="modal-footer">
                 <?= Html::submitButton('Регистрация', [
-                    'class' => 'auth-form__button'
+                    'class' => 'site-form__button'
                 ]); ?>
             </div>
             <?php ActiveForm::end(); ?>
@@ -77,7 +77,7 @@ use yii\helpers\Html;
             <?php $signinForm = ActiveForm::begin([
                 'action' => Url::to(['/user/auth/signin']),
                 'options' => [
-                    'class' => 'auth-form'
+                    'class' => 'site-form'
                 ]
             ]); ?>
             <div class="modal-header">
@@ -96,25 +96,25 @@ use yii\helpers\Html;
                 </button>
             </div>
             <div class="modal-body">
-                <div class="auth-form__item">
-                    <label class="auth-form__label" for="auth-form-email">Адрес вашей электронной почты</label>
+                <div class="site-form__item">
+                    <label class="site-form__label" for="site-form-email">Адрес вашей электронной почты</label>
                     <?= $signinForm->field($signin, 'email')->textInput([
-                        'class' => 'auth-form__input',
-                        'id' => 'auth-form-email',
+                        'class' => 'site-form__input',
+                        'id' => 'site-form-email',
                         'placeholder' => 'Адрес вашей электронной почты',
                     ])->label(false); ?>
                 </div>
-                <div class="auth-form__item">
-                    <label class="auth-form__label" for="auth-form-password">Пароль</label>
+                <div class="site-form__item">
+                    <label class="site-form__label" for="site-form-password">Пароль</label>
                     <?= $signinForm->field($signin, 'password')->passwordInput([
-                        'class' => 'auth-form__input',
-                        'id' => 'auth-form-password',
+                        'class' => 'site-form__input',
+                        'id' => 'site-form-password',
                         'placeholder' => 'Пароль',
                     ])->label(false); ?>
                 </div>
                 <div class="modal-footer">
                     <?= Html::submitButton('Авторизоваться', [
-                        'class' => 'auth-form__button'
+                        'class' => 'site-form__button'
                     ]); ?>
                 </div>
             </div>

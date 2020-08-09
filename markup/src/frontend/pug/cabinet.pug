@@ -12,7 +12,7 @@ block contents
 
             .page__group-row
                 .page__left.w-25
-                    .profile-sections.nav.nav-tabs#myTab(role='tablist')
+                    .profile-sections.nav.nav-tabs#proflieTabs(role='tablist')
                         a.profile-sections__item.active#home-tab(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true')
                             i.fas.fa-user
                             .profile-sections__title Настройки
@@ -22,7 +22,19 @@ block contents
                 .page__right.w-75
                     .tab-content
                         #home.tab-pane.fade.show.active
-                            | Описание товара...
+                            h2.page__title Настройки пользователя
+                            form.site-form.profile-form
+                                .page__left
+                                    .site-form__item
+                                        label.site-form__label(for="site-form-email") Адрес вашей электронной почты
+                                        input.site-form__input#site-form-email(type="text" placeholder="Адрес вашей электронной почты")
+                                    .site-form__item
+                                        label.site-form__label(for="site-form-password") Новый пароль
+                                        input.site-form__input#site-form-password(type="password" placeholder="Пароль")
+                                .page__right
+                                    .site-form__item
+                                        label.site-form__label(for="site-form-avatar") Аватарка
+                                        input.site-form__input#site-form-avatar(type="file")
                         #profile.tab-pane.fade
                             .profile-orders
                                 .profile-orders__row.profile-orders__header

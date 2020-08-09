@@ -9,6 +9,8 @@ use Yii;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\widgets\notification\Alert;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -18,6 +20,31 @@ use yii\widgets\ActiveForm;
 class ProductBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'allow' => true,
+                        'roles' => ['Administrator', 'Developer'],
+                    ],
+                    [
+                        'allow' => false,
+                        'roles' => ['?'],
+                    ],
+                ],
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'logout' => ['post'],
+                ],
+            ],
+        ];
+    }
 
     public function actionIndex()
     {
@@ -50,7 +77,7 @@ class ProductBackendController extends Controller
     {
         $model = Product::findOne($id);
 
-        if (!$model)  throw new HttpException(404, 'Товар такой не существует');
+        if (!$model) throw new HttpException(404, 'Товар такой не существует');
 
         $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
         if (ProductMarket::hasStored($model->id)) {
