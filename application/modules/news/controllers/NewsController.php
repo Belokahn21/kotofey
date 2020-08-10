@@ -12,44 +12,44 @@ use yii\web\Controller;
 
 class NewsController extends Controller
 {
-	public function actionIndex()
-	{
-		$models = News::find()->all();
-		$categories = NewsCategory::find()->all();
+    public function actionIndex()
+    {
+        $models = News::find()->orderBy(['created_at' => 'DESC'])->all();
+        $categories = NewsCategory::find()->orderBy(['sort' => 'ASC'])->all();
 
-		return $this->render('index', [
-			'models' => $models,
-			'categories' => $categories,
-		]);
-	}
+        return $this->render('index', [
+            'models' => $models,
+            'categories' => $categories,
+        ]);
+    }
 
-	public function actionView($id)
-	{
-		$new = News::findBySlug($id);
-		if ($new->slug) {
-			Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
-		}
+    public function actionView($id)
+    {
+        $new = News::findBySlug($id);
+        if ($new->slug) {
+            Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
+        }
 
-		if ($new->seo_description) {
-			Attributes::metaDescription($new->seo_description);
-		}
+        if ($new->seo_description) {
+            Attributes::metaDescription($new->seo_description);
+        }
 
-		if ($new->seo_keywords) {
-			Attributes::metaKeywords($new->seo_keywords);
-		}
+        if ($new->seo_keywords) {
+            Attributes::metaKeywords($new->seo_keywords);
+        }
 
-		OpenGraph::title($new->title);
-		OpenGraph::description(((!empty($new->preview)) ? $new->preview : $new->detail));
-		OpenGraph::type("new");
-		OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
+        OpenGraph::title($new->title);
+        OpenGraph::description(((!empty($new->preview)) ? $new->preview : $new->detail));
+        OpenGraph::type("new");
+        OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
 
-		if (!empty($new->preview_image)) {
-			OpenGraph::image(sprintf('%s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
-		}
+        if (!empty($new->preview_image)) {
+            OpenGraph::image(sprintf('%s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
+        }
 
-		return $this->render('view', [
-			'model' => $new
-		]);
+        return $this->render('view', [
+            'model' => $new
+        ]);
 
-	}
+    }
 }
