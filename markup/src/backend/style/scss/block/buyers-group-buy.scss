@@ -1,0 +1,28 @@
+.group-buy {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    width: 33%;
+    padding: 5px;
+  }
+}
+
+.group-buy-list {
+  &__item {
+    font-size: 12px;
+    padding: 5px 0;
+    border-bottom: 1px #C6C6C6 solid;
+  }
+
+  &__link {
+    color: black;
+
+    &:hover {
+      color: #C6C6C6;
+    }
+  }
+}
