@@ -54,7 +54,7 @@
 @import "include/block/order-list";
 @import "include/block/profile-sections";
 @import "include/block/profile-orders";
-@import "include/block/profile-favorit-list";
+@import "include/block/profile-favorite-list";
 
 // Контактная информация
 @import "include/block/contacts-map";
@@ -99,6 +99,7 @@
 // Каталог
 @import "include/block/catalog";
 @import "include/block/catalog-sort";
+@import "include/block/catalog-actions";
 
 // список новостей
 @import "include/block/news-list";
