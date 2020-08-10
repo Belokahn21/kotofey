@@ -113,6 +113,7 @@ $config = [
                 'cache' => 'site/cache',
                 'news' => 'news/news/index',
                 'profile' => 'user/profile/index',
+                'logout' => 'user/profile/logout',
                 'news/<id[A-Za-z-\/\d_]+>' => 'news/news/view',
                 'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
                 'catalog' => 'catalog/catalog/index',
