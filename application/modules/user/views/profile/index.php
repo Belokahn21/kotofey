@@ -4,12 +4,14 @@
  * @var $model \app\modules\user\models\entity\User
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $sexList \app\modules\user\models\entity\UserSex[]
+ * @var $favorite \app\modules\catalog\models\entity\Product[]
  */
 
 use yii\helpers\Url;
 use app\models\tool\Price;
 use app\models\tool\seo\Title;
 use app\models\tool\Currency;
+use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
 use app\widgets\Breadcrumbs;
 
@@ -98,21 +100,27 @@ $this->title = Title::showTitle('Личный кабинет');
 					<?php endif; ?>
                 </div>
                 <div class="tab-pane fade" id="favorite">
-                    <div class="profile-favorite-list">
-                        <div class="profile-favorite-list__item">
-                            <div class="profile-favorite-list__image"><img src="./assets/images/product.png"></div>
-                            <div class="profile-favorite-list__info">
-                                <div class="profile-favorite-list__title">Royal Canin Maxi Puppy 12кг, корм для щенков крупной породы</div>
-                                <div class="profile-favorite-list__group-row">
-                                    <div class="profile-favorite-list__article">KKOLEQ</div>
-                                    <div class="profile-favorite-list__price">1 500 P</div>
+					<?php if ($favorite = Favorite::findAll()): ?>
+                        <div class="profile-favorite-list">
+							<?php foreach ($favorite as $item): ?>
+                                <div class="profile-favorite-list__item">
+                                    <div class="profile-favorite-list__image"><img src="./assets/images/product.png"></div>
+                                    <div class="profile-favorite-list__info">
+                                        <div class="profile-favorite-list__title"><?= $item->name; ?></div>
+                                        <div class="profile-favorite-list__group-row">
+                                            <div class="profile-favorite-list__article"><?= $item->article; ?></div>
+                                            <div class="profile-favorite-list__price"><?= Price::format($item->price) ?> <?= Currency::getInstance()->show(); ?></div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-favorite-list__action">
+                                        <div class="profile-favorite-list__remove js-remove-favorite" data-product-id="<?= $item->id; ?>">
+                                            <i class="fas fa-heart-broken"></i>
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="profile-favorite-list__action">
-                                <div class="profile-favorite-list__remove js-remove-favorite" data-product-id="11"><i class="fas fa-heart-broken"></i></div>
-                            </div>
+							<?php endforeach; ?>
                         </div>
-                    </div>
+					<?php endif; ?>
                 </div>
             </div>
         </div>

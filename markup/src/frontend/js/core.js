@@ -16,6 +16,7 @@ import './block/other-jquery';
 import './block/catalog-filter';
 import './block/catalog';
 import './block/favorite';
+import './block/toggleClass';
 import './include/init-sliders';
 import './include/init-range-sliders';
 import './include/init-maskedinput';

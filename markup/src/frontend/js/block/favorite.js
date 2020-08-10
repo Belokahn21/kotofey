@@ -1,9 +1,12 @@
 class Favorite {
-	addCompareButton = document.querySelector('.js-add-favorite');
 
 	constructor() {
-		console.log("hello");
+		this.initVariables();
 		this.initHandleAddCompare();
+	}
+
+	initVariables() {
+		this.addCompareButton = document.querySelector('.js-add-favorite');
 	}
 
 	initHandleAddCompare() {
@@ -15,4 +18,4 @@ class Favorite {
 	}
 }
 
-$favorite = new Favorite();
+let favorite = new Favorite();
