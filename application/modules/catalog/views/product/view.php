@@ -122,7 +122,7 @@ $this->title = Title::showTitle($product->name);
     <div class="tab-pane fade" id="nav-available" role="tabpanel" aria-labelledby="nav-available-tab">
         <ul class="in-stock-detail-product">
             <?php foreach (\app\modules\stock\models\entity\Stocks::find()->where(['active' => 1])->all() as $item) : ?>
-                <li class="in-stock-detail-product__item"><?= $item->name; ?>(<?= $item->address; ?>) - <span class="green">В НАЛИЧИИ</span></li>
+                <li class="in-stock-detail-product__item"><?= $item->name; ?> (<?= $item->address; ?>) - <span class="green">В НАЛИЧИИ</span></li>
             <?php endforeach; ?>
 
 
