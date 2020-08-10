@@ -110,12 +110,12 @@ $config = [
                 'POST basket/rest/add' => 'basket/rest/add',
                 'POST catalog/rest/get' => 'catalog/rest/get',
 
-				'cache' => 'site/cache',
-				'news' => 'news/news/index',
-				'news/<id[A-Za-z-\/\d_]+>' => 'news/news/view',
-				'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
-				'catalog' => 'catalog/catalog/index',
-				'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',
+                'cache' => 'site/cache',
+                'news' => 'news/news/index',
+                'news/<id[A-Za-z-\/\d_]+>' => 'news/news/view',
+                'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
+                'catalog' => 'catalog/catalog/index',
+                'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',
 
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
