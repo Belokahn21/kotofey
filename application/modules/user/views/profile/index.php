@@ -16,17 +16,17 @@ use app\widgets\Breadcrumbs;
 $this->title = Title::showTitle('Личный кабинет');
 ?>
 <div class="page">
-    <?php
-    $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
-    ?>
-    <?= Breadcrumbs::widget([
-        'homeLink' => [
-            'label' => 'Главная ',
-            'url' => Yii::$app->homeUrl,
-            'title' => 'Первая страница сайта зоомагазина Котофей',
-        ],
-        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-    ]); ?>
+	<?php
+	$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
+	?>
+	<?= Breadcrumbs::widget([
+		'homeLink' => [
+			'label' => 'Главная ',
+			'url' => Yii::$app->homeUrl,
+			'title' => 'Первая страница сайта зоомагазина Котофей',
+		],
+		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+	]); ?>
     <h1 class="page__title">Личный кабинет</h1>
     <a href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
     <div class="page__group-row">
@@ -35,10 +35,15 @@ $this->title = Title::showTitle('Личный кабинет');
                         class="profile-sections__item active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                         aria-controls="home" aria-selected="true"><i class="fas fa-user"></i>
                     <div class="profile-sections__title">Настройки</div>
-                </a><a class="profile-sections__item" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                       aria-controls="profile" aria-selected="false"><i class="fas fa-hand-holding-usd"></i>
+                </a>
+                <a class="profile-sections__item" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                   aria-controls="profile" aria-selected="false"><i class="fas fa-hand-holding-usd"></i>
                     <div class="profile-sections__title">Заказы</div>
-                </a></div>
+                </a>
+                <a class="profile-sections__item" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-heart"></i>
+                    <div class="profile-sections__title">Избранное</div>
+                </a>
+            </div>
         </div>
         <div class="page__right w-75">
             <div class="tab-content">
@@ -67,7 +72,7 @@ $this->title = Title::showTitle('Личный кабинет');
                     </form>
                 </div>
                 <div class="tab-pane fade" id="profile">
-                    <?php if ($orders): ?>
+					<?php if ($orders): ?>
                         <div class="profile-orders">
                             <div class="profile-orders__row profile-orders__header">
                                 <div class="profile-orders__number">№</div>
@@ -76,7 +81,7 @@ $this->title = Title::showTitle('Личный кабинет');
                                 <div class="profile-orders__summary">Сумма заказа</div>
                                 <div class="profile-orders__action"></div>
                             </div>
-                            <?php foreach ($orders as $order): ?>
+							<?php foreach ($orders as $order): ?>
                                 <div class="profile-orders__row">
                                     <div class="profile-orders__number">#<?= $order->id; ?></div>
                                     <div class="profile-orders__date"><?= date('d.m.Y', $order->created_at) ?></div>
@@ -86,12 +91,13 @@ $this->title = Title::showTitle('Личный кабинет');
                                         <a class="profile-orders__link" href="#">Подробнее</a>
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+							<?php endforeach; ?>
                         </div>
-                    <?php else: ?>
+					<?php else: ?>
                         Заказы отсутсвуют, нужно срочно это исправить!!!
-                    <?php endif; ?>
+					<?php endif; ?>
                 </div>
+                <div class="tab-pane fade" id="favorite">Избранное</div>
             </div>
         </div>
     </div>
