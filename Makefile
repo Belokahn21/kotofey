@@ -32,3 +32,4 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/payment/install/migrations --interactive=0
 
 deploy: pull init-dev
+deploy-prod: pull init-dev
