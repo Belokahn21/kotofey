@@ -27,6 +27,10 @@ use yii\helpers\Url;
                 <ul class="stock-out">
                     <?php foreach ($products as $product): ?>
                         <li class="stock-out__item">
+                            <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>">
+                                <img class="stock-out__image" src="/upload/<?= $product->image; ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
+                            </a>
+
                             <ul class="stock-out-info">
                                 <li class="stock-out-info__row">
                                     <div class="stock-out-info__key">Количество</div>
@@ -41,10 +45,6 @@ use yii\helpers\Url;
                                     <div class="stock-out-info__value"><?= $product->count * ($product->price - $product->purchase); ?></div>
                                 </li>
                             </ul>
-                            <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>">
-                                <img class="stock-out__image" src="/upload/<?= $product->image; ?>"
-                                     title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
-                            </a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
