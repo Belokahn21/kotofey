@@ -5,6 +5,7 @@
 use yii\helpers\Html;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\models\tool\Price;
+use yii\helpers\Url;
 
 ///admin/catalog/product-backend/update
 ?>
@@ -23,26 +24,29 @@ use app\models\tool\Price;
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="stack-out">
-					<?php foreach ($products as $product): ?>
-                        <li class="stack-out__item">
-                            <ul class="stack-out-info">
-                                <li class="stack-out-info__row">
-                                    <div class="stack-out-info__key">Количество</div>
-                                    <div class="stack-out-info__value"><?= $product->count; ?></div>
+                <ul class="stock-out">
+                    <?php foreach ($products as $product): ?>
+                        <li class="stock-out__item">
+                            <ul class="stock-out-info">
+                                <li class="stock-out-info__row">
+                                    <div class="stock-out-info__key">Количество</div>
+                                    <div class="stock-out-info__value"><?= $product->count; ?></div>
                                 </li>
-                                <li class="stack-out-info__row">
-                                    <div class="stack-out-info__key">Закуплено на сумму</div>
-                                    <div class="stack-out-info__value"><?= $product->count * $product->purchase; ?></div>
+                                <li class="stock-out-info__row">
+                                    <div class="stock-out-info__key">Закуплено на сумму</div>
+                                    <div class="stock-out-info__value"><?= $product->count * $product->purchase; ?></div>
                                 </li>
-                                <li class="stack-out-info__row">
-                                    <div class="stack-out-info__key">Доход</div>
-                                    <div class="stack-out-info__value"><?= $product->count * ($product->price - $product->purchase); ?></div>
+                                <li class="stock-out-info__row">
+                                    <div class="stock-out-info__key">Доход</div>
+                                    <div class="stock-out-info__value"><?= $product->count * ($product->price - $product->purchase); ?></div>
                                 </li>
                             </ul>
-                            <img class="stack-out__image" src="/upload/<?= $product->image; ?>">
+                            <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>">
+                                <img class="stock-out__image" src="/upload/<?= $product->image; ?>"
+                                     title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
+                            </a>
                         </li>
-					<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="modal-footer">
