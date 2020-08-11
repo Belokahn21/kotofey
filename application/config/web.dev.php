@@ -99,7 +99,9 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
-                'GET rest/product/get' => 'rest/product/get',
+                'GET rest/product/get' => 'rest/product/get', // old
+                'POST compare/rest/add' => 'compare/rest/add',
+                'POST favorite/rest/add' => 'favorite/rest/add',
 
                 'GET menu/rest-backend/get' => 'menu/rest-backend/get',
                 'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
