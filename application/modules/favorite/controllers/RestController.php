@@ -5,6 +5,7 @@ namespace app\modules\favorite\controllers;
 
 use app\modules\compare\models\entity\Compare;
 use app\modules\favorite\models\entity\Favorite;
+use yii\helpers\Json;
 use yii\rest\Controller;
 
 class RestController extends Controller
@@ -18,10 +19,7 @@ class RestController extends Controller
 
     public function actionAdd()
     {
-        $data = file_get_contents('php://input');
-        print_r($data);
-
-        exit();
+        $data = Json::decode(file_get_contents('php://input'));
         $favorite = new Favorite();
         $favorite->add($data['product_id']);
         return true;
