@@ -14,21 +14,22 @@ use app\models\tool\Currency;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
 use app\widgets\Breadcrumbs;
+use app\modules\catalog\models\helpers\ProductHelper;
 
 $this->title = Title::showTitle('Личный кабинет');
 ?>
 <div class="page">
-	<?php
-	$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
-	?>
-	<?= Breadcrumbs::widget([
-		'homeLink' => [
-			'label' => 'Главная ',
-			'url' => Yii::$app->homeUrl,
-			'title' => 'Первая страница сайта зоомагазина Котофей',
-		],
-		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-	]); ?>
+    <?php
+    $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
+    ?>
+    <?= Breadcrumbs::widget([
+        'homeLink' => [
+            'label' => 'Главная ',
+            'url' => Yii::$app->homeUrl,
+            'title' => 'Первая страница сайта зоомагазина Котофей',
+        ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
     <h1 class="page__title">Личный кабинет</h1>
     <a href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
     <div class="page__group-row">
@@ -74,7 +75,7 @@ $this->title = Title::showTitle('Личный кабинет');
                     </form>
                 </div>
                 <div class="tab-pane fade" id="profile">
-					<?php if ($orders): ?>
+                    <?php if ($orders): ?>
                         <div class="profile-orders">
                             <div class="profile-orders__row profile-orders__header">
                                 <div class="profile-orders__number">№</div>
@@ -83,7 +84,7 @@ $this->title = Title::showTitle('Личный кабинет');
                                 <div class="profile-orders__summary">Сумма заказа</div>
                                 <div class="profile-orders__action"></div>
                             </div>
-							<?php foreach ($orders as $order): ?>
+                            <?php foreach ($orders as $order): ?>
                                 <div class="profile-orders__row">
                                     <div class="profile-orders__number">#<?= $order->id; ?></div>
                                     <div class="profile-orders__date"><?= date('d.m.Y', $order->created_at) ?></div>
@@ -93,18 +94,18 @@ $this->title = Title::showTitle('Личный кабинет');
                                         <a class="profile-orders__link" href="#">Подробнее</a>
                                     </div>
                                 </div>
-							<?php endforeach; ?>
+                            <?php endforeach; ?>
                         </div>
-					<?php else: ?>
+                    <?php else: ?>
                         Заказы отсутсвуют, нужно срочно это исправить!!!
-					<?php endif; ?>
+                    <?php endif; ?>
                 </div>
                 <div class="tab-pane fade" id="favorite">
-					<?php if ($favorite = Favorite::findAll()): ?>
+                    <?php if ($favorite = Favorite::findAll()): ?>
                         <div class="profile-favorite-list">
-							<?php foreach ($favorite as $item): ?>
+                            <?php foreach ($favorite as $item): ?>
                                 <div class="profile-favorite-list__item">
-                                    <div class="profile-favorite-list__image"><img src="./assets/images/product.png"></div>
+                                    <div class="profile-favorite-list__image"><img src="<?= ProductHelper::getImageUrl($item) ?>"></div>
                                     <div class="profile-favorite-list__info">
                                         <div class="profile-favorite-list__title"><?= $item->name; ?></div>
                                         <div class="profile-favorite-list__group-row">
@@ -118,9 +119,9 @@ $this->title = Title::showTitle('Личный кабинет');
                                         </div>
                                     </div>
                                 </div>
-							<?php endforeach; ?>
+                            <?php endforeach; ?>
                         </div>
-					<?php endif; ?>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
