@@ -13,6 +13,10 @@ $isDiscount = $product->discount_price > 0;
 
 
 <li class="catalog__item">
+    <div class="catalog-actions">
+        <div class="catalog-favorite js-toggle-class js-add-favorite" data-class-target="fas fa-heart" data-product-id="<?= $product->id; ?>"><i class="far fa-heart"></i></div>
+        <div class="catalog-compaare js-toggle-class js-add-compare" data-class-target="fas fa-balance-scale-right"><i class="fas fa-balance-scale-right"></i></div>
+    </div>
     <?php if ($isDiscount): ?>
         <div class="catalog__discount"><span>-15%</span></div>
     <?php endif; ?>
