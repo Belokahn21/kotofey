@@ -28,4 +28,14 @@ class RestController extends Controller
             'status' => 200
         ]);
     }
+
+    public function actionDelete()
+    {
+        $data = Json::decode(file_get_contents('php://input'));
+        $favorite = new Favorite();
+        $favorite->delete($data['product_id']);
+        return Json::encode([
+            'status' => 200
+        ]);
+    }
 }
