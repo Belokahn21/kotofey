@@ -19,6 +19,9 @@ class RestController extends Controller
 	public function actionAdd()
 	{
 		$data = \Yii::$app->request->post();
+		print_r($data);
+
+		exit();
 		$favorite = new Favorite();
 		$favorite->add($data['product_id']);
 		return true;

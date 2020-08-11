@@ -131,7 +131,6 @@ $config = [
 
 				'bot/vk/index' => 'bot/vk/index',
 				'market' => 'yandex/catalog/export',
-				'search' => 'search/search/index',
 				'checkout' => 'order/order/create',
 				'clear' => 'basket/basket/clear',
 				'gii' => 'gii',
