@@ -13,7 +13,7 @@ $phrase = @Yii::$app->request->get()['Search']['search'];
 	'options' => [
 		'class' => 'search-form',
 	],
-	'action' => \yii\helpers\Url::to(['search']),
+	'action' => \yii\helpers\Url::to(['/search/']),
 	'method' => 'get',
 	'fieldConfig' => [
 		'options' => [

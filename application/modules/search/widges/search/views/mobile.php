@@ -8,7 +8,7 @@ use yii\helpers\Html;
 	'options' => [
 		'class' => 'mobile-search js-search-form',
 	],
-	'action' => \yii\helpers\Url::to(['search']),
+	'action' => \yii\helpers\Url::to(['/search/']),
 	'method' => 'get',
 	'fieldConfig' => [
 		'options' => [

@@ -112,6 +112,7 @@ $config = [
                 'POST basket/rest/add' => 'basket/rest/add',
                 'POST catalog/rest/get' => 'catalog/rest/get',
 
+                'search' => 'search/search/index',
                 'cache' => 'site/cache',
                 'news' => 'news/news/index',
                 'profile' => 'user/profile/index',
