@@ -100,7 +100,7 @@ $this->beginPage() ?>
         <div class="header-mobile__hamburger"><img src="/upload/images/hamburger.svg"></div>
         <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
         </div>
-        <div class="header-mobile__search js-search-toggle"><img src="./assets/images/search.png"></div>
+        <div class="header-mobile__search js-search-toggle"><img src="/upload/images/search.png"></div>
         <div class="header-mobile__basket">
             <a href="<?= Url::to(['/checkout/']); ?>">
                 <div class="counter"><?= Basket::count(); ?></div>
