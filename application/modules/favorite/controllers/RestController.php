@@ -18,7 +18,7 @@ class RestController extends Controller
 
     public function actionAdd()
     {
-        $data = file_get_contents('input://php');
+        $data = file_get_contents('php://input');
         print_r($data);
 
         exit();
