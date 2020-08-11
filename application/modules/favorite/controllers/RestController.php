@@ -22,6 +22,8 @@ class RestController extends Controller
         $data = Json::decode(file_get_contents('php://input'));
         $favorite = new Favorite();
         $favorite->add($data['product_id']);
-        return true;
+        return Json::encode([
+            'status' => 200
+        ]);
     }
 }
