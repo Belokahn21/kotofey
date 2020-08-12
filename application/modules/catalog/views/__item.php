@@ -25,9 +25,10 @@ $isDiscount = $product->discount_price > 0;
             </div>
 		<?php endif; ?>
 
+		<?php /*
         <div class="catalog-compaare js-toggle-class js-add-compare" data-class-target="fas fa-balance-scale-right">
             <i class="fas fa-balance-scale"></i>
-        </div>
+        </div>*/ ?>
     </div>
 	<?php if ($isDiscount): ?>
         <div class="catalog__discount"><span>-15%</span></div>
