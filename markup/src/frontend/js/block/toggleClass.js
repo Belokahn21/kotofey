@@ -26,8 +26,12 @@ class ToggleClass {
 
 					if (Array.isArray(newClass)) {
 						console.log("abra toggle cadabra");
+						console.log(element);
 						let i = element.querySelector('i');
-						i.classList.toggle(newClass);
+						i.classList.map((el) => {
+							i.classList.remove(i.classList[el]);
+						});
+						i.classList.add(newClass);
 					}
 				});
 			});
