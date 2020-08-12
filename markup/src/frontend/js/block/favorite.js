@@ -18,6 +18,7 @@ class Favorite {
             this.deleteCompareButtons.forEach((elementForeach) => {
                 elementForeach.addEventListener('click', (event) => {
                     let element = event.target;
+                    let parent = element.parentElement.parentElement;
 
                     if (elementForeach !== element) {
                         element = element.parentElement;
@@ -30,7 +31,7 @@ class Favorite {
                             product_id: product_id
                         })
                     }).then(response => response.json()).then(date => {
-                        console.log(date);
+                        parent.classList.add('hidden');
                     });
                 });
             });
