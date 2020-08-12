@@ -5,6 +5,7 @@ class Favorite {
     constructor() {
         this.initVariables();
         this.initHandleAddCompare();
+        this.iniHandleDeleteCompare();
     }
 
     initVariables() {
