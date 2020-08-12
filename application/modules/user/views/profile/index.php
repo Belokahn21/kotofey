@@ -114,7 +114,7 @@ $this->title = Title::showTitle('Личный кабинет');
                                         </div>
                                     </div>
                                     <div class="profile-favorite-list__action">
-                                        <div class="profile-favorite-list__remove js-remove-favorite" data-product-id="<?= $item->id; ?>">
+                                        <div class="profile-favorite-list__remove js-delete-favorite" data-product-id="<?= $item->id; ?>">
                                             <i class="fas fa-heart-broken"></i>
                                         </div>
                                     </div>
