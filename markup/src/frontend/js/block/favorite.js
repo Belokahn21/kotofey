@@ -18,10 +18,11 @@ class Favorite {
             this.deleteCompareButtons.forEach((elementForeach) => {
                 elementForeach.addEventListener('click', (event) => {
                     let element = event.target;
-                    let parent = element.parentElement.parentElement;
+                    let parent = element.parentElement.parentElement.parentElement;
 
                     if (elementForeach !== element) {
                         element = element.parentElement;
+                        let parent = element.parentElement.parentElement;
                     }
 
                     let product_id = element.getAttribute('data-product-id');
