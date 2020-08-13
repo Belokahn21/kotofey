@@ -22,7 +22,7 @@ class Favorite {
 
                     if (elementForeach !== element) {
                         element = element.parentElement;
-                        let parent = element.parentElement.parentElement;
+                        parent = element.parentElement.parentElement;
                     }
 
                     let product_id = element.getAttribute('data-product-id');
