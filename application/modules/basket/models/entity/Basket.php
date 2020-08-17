@@ -3,8 +3,6 @@
 namespace app\modules\basket\models\entity;
 
 
-use app\modules\promo\models\entity\Promo;
-use app\modules\basket\models\helpers\BasketHelper;
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
@@ -15,124 +13,124 @@ use yii\base\Model;
  *
  * @property Product $product
  * @property integer $count
- * @property Promo $promo
  */
 class Basket extends Model
 {
-	const EVENT_AFTER_ADD_ITEM = 'item_add';
+    const EVENT_AFTER_ADD_ITEM = 'item_add';
+    const BASKET_KEY = 'basket';
 
-	public static function getInstance()
-	{
-		return new Basket();
-	}
+    public static function getInstance()
+    {
+        return new Basket();
+    }
 
-	public function __construct($config = [])
-	{
-		parent::__construct($config);
+    public function __construct($config = [])
+    {
+        parent::__construct($config);
 
-		\Yii::$app->session->open();
-	}
+        \Yii::$app->session->open();
+    }
 
-	public function add(OrdersItems $item)
-	{
-		$_SESSION['basket'][$item->product_id] = $item;
-	}
+    public function add(OrdersItems $item)
+    {
+        $_SESSION[self::BASKET_KEY][$item->product_id] = $item;
+    }
 
-	public function delete($product_id)
-	{
-		unset($_SESSION['basket'][$product_id]);
-		return true;
-	}
+    public function delete($product_id)
+    {
+        unset($_SESSION[self::BASKET_KEY][$product_id]);
+        return true;
+    }
 
-	/**
-	 * @param $product_id
-	 * @return OrdersItems
-	 */
-	public static function findOne($product_id)
-	{
-		$basket = \Yii::$app->session->get('basket');
-		if ($basket !== null) {
-			if (array_key_exists($product_id, $basket)) {
-				return $basket[$product_id];
-			}
-		}
+    /**
+     * @param $product_id
+     * @return OrdersItems
+     */
+    public static function findOne($product_id)
+    {
+        $basket = \Yii::$app->session->get(self::BASKET_KEY);
+        if ($basket !== null) {
+            if (array_key_exists($product_id, $basket)) {
+                return $basket[$product_id];
+            }
+        }
 
-		return new OrdersItems();
-	}
+        return new OrdersItems();
+    }
 
-	public function update(OrdersItems $item, $count)
-	{
-		/* @var $item OrdersItems */
-		if ($item = $_SESSION['basket'][$item->product_id]) {
-			$item->count = $count;
-		}
+    public function update(OrdersItems $item, $count)
+    {
+        /* @var $item OrdersItems */
+        if ($item = $_SESSION[self::BASKET_KEY][$item->product_id]) {
+            $item->count = $count;
+        }
 
-		$_SESSION['basket'][$item->product_id] = $item;
-	}
+        $_SESSION[self::BASKET_KEY][$item->product_id] = $item;
+    }
 
-	public function exist($product_id)
-	{
-		\Yii::$app->session->open();
-		$basket = \Yii::$app->session->get('basket');
-		if ($basket !== null) {
-			if (array_key_exists($product_id, $basket)) {
-				return true;
-			}
-		}
-		return false;
-	}
+    public function exist($product_id)
+    {
+        \Yii::$app->session->open();
+        $basket = \Yii::$app->session->get(self::BASKET_KEY);
+        if ($basket !== null) {
+            if (array_key_exists($product_id, $basket)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
-	public static function findAll()
-	{
-		$items = false;
-		if ($basket = \Yii::$app->session->get('basket')) {
-			$items = array();
-			foreach ($basket as $product_id => $item) {
-				$items[$product_id] = $item;
-			}
-		}
+    public static function findAll()
+    {
+        $items = false;
+        if ($basket = \Yii::$app->session->get(self::BASKET_KEY)) {
+            $items = array();
+            foreach ($basket as $product_id => $item) {
+                $items[$product_id] = $item;
+            }
+        }
 
-		return $items;
-	}
+        return $items;
+    }
 
-	public static function clear()
-	{
-		unset($_SESSION['basket']);
-	}
+    public static function clear()
+    {
+        unset($_SESSION[self::BASKET_KEY]);
+    }
 
-	public static function count()
-	{
-		if (\Yii::$app->session->get('basket')) {
-			return count(\Yii::$app->session->get('basket'));
-		}
-		return false;
-	}
+    public static function count()
+    {
+        if (\Yii::$app->session->get(self::BASKET_KEY)) {
+            return count(\Yii::$app->session->get(self::BASKET_KEY));
+        }
+        return false;
+    }
 
-	public function isEmpty()
-	{
-		$basket = \Yii::$app->session->get('basket');
-		if ($basket) {
-			if (count($basket) > 0) {
-				return false;
-			}
-		}
+    public function isEmpty()
+    {
+        $basket = \Yii::$app->session->get(self::BASKET_KEY);
+        if ($basket) {
+            if (count($basket) > 0) {
+                return false;
+            }
+        }
 
-		return true;
-	}
+        return true;
+    }
 
 
-	public function cash()
-	{
-		$cash = 0;
+    public function cash()
+    {
+        $cash = 0;
 
-		/* @var $promo Promo */
-		if (!empty($_SESSION['basket'])) {
-			/* @var $item OrdersItems */
-			foreach ($_SESSION['basket'] as $id => $item) {
-				$cash += $item->price * $item->count;
-			}
-		}
+        /* @var $promo Promo */
+        if (!empty($_SESSION[self::BASKET_KEY])) {
+            /* @var $item OrdersItems */
+            foreach ($_SESSION[self::BASKET_KEY] as $id => $item) {
+                $cash += $item->price * $item->count;
+            }
+        }
 
-		return $cash;
-	}
+        return $cash;
+    }
 }

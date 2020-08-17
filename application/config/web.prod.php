@@ -160,7 +160,7 @@ $config = [
             'class' => 'app\modules\statistic\Module',
         ],
         'promo' => [
-            'class' => 'app\modules\promo\Module',
+            'class' => 'app\modules\promocode\Module',
         ],
         'yandex' => [
             'class' => 'app\modules\yandex\Module',

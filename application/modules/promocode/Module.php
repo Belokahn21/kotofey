@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\promo;
+namespace app\modules\promocode;
 
 /**
- * promo module definition class
+ * promocode module definition class
  */
 class Module extends \yii\base\Module
 {
     /**
      * {@inheritdoc}
      */
-    public $controllerNamespace = 'app\modules\promo\controllers';
+    public $controllerNamespace = 'app\modules\promocode\controllers';
 
     /**
      * {@inheritdoc}

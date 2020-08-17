@@ -1,6 +1,7 @@
+const url = location.protocol + '//' + location.hostname;
 module.exports = {
-    restAddBasket: 'https://kotofey.store/basket/rest/add/',
-    restGetCatalog: 'https://kotofey.store/catalog/rest/get/',
-    restAddFavorite: 'https://kotofey.store/favorite/rest/add/',
-    restDeleteFavorite: 'https://kotofey.store/favorite/rest/delete/',
+    restAddBasket: url + '/basket/rest/add/',
+    restGetCatalog: url + '/catalog/rest/get/',
+    restAddFavorite: url + '/favorite/rest/add/',
+    restDeleteFavorite: url + '/favorite/rest/delete/',
 }
