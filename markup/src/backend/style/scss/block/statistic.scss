@@ -79,3 +79,26 @@
     width: 20%;
   }
 }
+
+.statistic-action {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: center;
+
+  &__item {
+    margin: 0 5px;
+    background: deepskyblue;
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+
+    &:hover {
+      text-decoration: none;
+      color: white;
+    }
+  }
+}

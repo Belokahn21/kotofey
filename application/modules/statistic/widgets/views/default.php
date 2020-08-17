@@ -16,14 +16,12 @@ use yii\helpers\StringHelper;
                 <div class="statistic-info">
                     <div class="statistic-info__item">
                         <div class="statistic-info__key">Последний бэкап</div>
-                        <div class="statistic-info__value">17.08.2020</div>
+                        <div class="statistic-info__value">-----</div>
                     </div>
-                    <div class="statistic-info__item">
-                        <div class="statistic-info__key">Сделать бэкап</div>
-                        <div class="statistic-info__value">
-                            <button class="statistic-action" type="button">Начать</button>
-                        </div>
-                    </div>
+                </div>
+                <div class="statistic-action">
+                    <a class="statistic-action__item" href="?save_dump=Y"><i class="fas fa-sync"></i></a>
+                    <a class="statistic-action__item" href="?save_dump=Y&out=Y"><i class="fas fa-download"></i></a>
                 </div>
             </div>
         </div>
