@@ -34,7 +34,7 @@
 					.statistic-info__key Прибыль
 					.statistic-info__value 3 569 Р
 	.statistic__item
-		.statistic__icon
+		.statistic__icon(data-toggle="modal" data-target="#search-list")
 			i.fas.fa-search
 		.statistic__content
 			.last-search
@@ -42,3 +42,55 @@
 				.last-search__item Милпразон
 				.last-search__item Когтецид
 				.last-search__item pipi бент
+
+#search-list.modal.fade(tabindex='-1', role='dialog', aria-labelledby='search-listLabel', aria-hidden='true')
+	.modal-dialog.modal-lg(role='document')
+		.modal-content
+			.modal-header
+				h5#search-listLabel.modal-title Что ищут люди?
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+			.modal-body
+				.search-history
+					.search-history__item.header-item
+						.search-history__ip IP
+						.search-history__phrase Запрос
+						.search-history__count Найдено
+						.search-history__date Дата
+					.search-history__item
+						.search-history__ip 109.171.61.86
+						.search-history__phrase Royal canin gastro 12кг
+						.search-history__count 150
+						.search-history__date 23.06.2020
+					.search-history__item
+						.search-history__ip 109.171.61.86
+						.search-history__phrase Royal canin gastro 12кг
+						.search-history__count 150
+						.search-history__date 23.06.2020
+					.search-history__item
+						.search-history__ip 109.171.61.86
+						.search-history__phrase Royal canin gastro 12кг
+						.search-history__count 150
+						.search-history__date 23.06.2020
+					.search-history__item
+						.search-history__ip 109.171.61.86
+						.search-history__phrase Royal canin gastro 12кг
+						.search-history__count 150
+						.search-history__date 23.06.2020
+					.search-history__item
+						.search-history__ip 109.171.61.86
+						.search-history__phrase Royal canin gastro 12кг
+						.search-history__count 150
+						.search-history__date 23.06.2020
+					.search-history__item
+						.search-history__ip 109.171.61.86
+						.search-history__phrase Royal canin gastro 12кг
+						.search-history__count 150
+						.search-history__date 23.06.2020
+					.search-history__item
+						.search-history__ip 109.171.61.86
+						.search-history__phrase Royal canin gastro 12кг
+						.search-history__count 150
+						.search-history__date 23.06.2020
+			.modal-footer
+				button.btn.btn-secondary(type='button', data-dismiss='modal') Закрыть

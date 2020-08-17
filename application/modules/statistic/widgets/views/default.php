@@ -62,7 +62,7 @@ use app\modules\order\models\entity\Order;
 				<?php if ($lastSearch): ?>
                     <div class="last-search">
 						<?php foreach ($lastSearch as $search): ?>
-                            <div class="last-search__item"><?= $search->text; ?></div>
+                            <div class="last-search__item" title="<?= $search->text; ?>"><?= \yii\helpers\StringHelper::truncate($search->text, 50, '...'); ?></div>
 						<?php endforeach; ?>
                     </div>
 				<?php endif; ?>

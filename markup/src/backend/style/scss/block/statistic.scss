@@ -51,3 +51,31 @@
     align-items: center;
   }
 }
+
+.search-history {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__ip {
+    width: 25%;
+  }
+
+  &__phrase {
+    width: 40%;
+  }
+
+  &__count {
+    width: 15%;
+  }
+
+  &__date {
+    width: 20%;
+  }
+}
