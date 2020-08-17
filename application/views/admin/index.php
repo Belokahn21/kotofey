@@ -9,5 +9,4 @@ use app\modules\statistic\widgets\StatisticWidget;
 
 $this->title = Title::showTitle("Главная страница");
 ?>
-    <div class="statistic-wrap"></div>
 <?= StatisticWidget::widget(); ?>
