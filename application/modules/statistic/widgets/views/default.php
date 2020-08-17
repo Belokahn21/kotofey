@@ -26,7 +26,7 @@ use yii\helpers\StringHelper;
             </div>
         </div>
         <div class="statistic__item">
-            <div class="statistic__icon"><i class="fas fa-cookie"></i></div>
+            <div class="statistic__icon" data-toggle="modal" data-target="#order-list"><i class="fas fa-cookie"></i></div>
             <div class="statistic__content">
                 <div class="statistic-info">
                     <div class="statistic-info__item">
@@ -72,3 +72,4 @@ use yii\helpers\StringHelper;
 <?= $this->render('include/modal-last-search', [
 	'searches' => $searches
 ]); ?>
+<?= $this->render('include/modal-last-order'); ?>
