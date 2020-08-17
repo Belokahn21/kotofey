@@ -3,6 +3,10 @@
  * @var $searches \app\modules\search\models\entity\SearchQuery[]
  * @var $this \yii\web\View
  */
+
+use app\modules\catalog\models\entity\Product;
+use app\modules\order\models\entity\Order;
+
 ?>
     <div class="statistic">
         <div class="statistic__item">
@@ -28,7 +32,7 @@
                 <div class="statistic-info">
                     <div class="statistic-info__item">
                         <div class="statistic-info__key">Заказов</div>
-                        <div class="statistic-info__value">150</div>
+                        <div class="statistic-info__value"><?= Order::find()->count(); ?></div>
                     </div>
                     <div class="statistic-info__item">
                         <div class="statistic-info__key">Прибыль</div>
@@ -43,7 +47,7 @@
                 <div class="statistic-info">
                     <div class="statistic-info__item">
                         <div class="statistic-info__key">Товаров</div>
-                        <div class="statistic-info__value">2500</div>
+                        <div class="statistic-info__value"><?= Product::find()->count(); ?></div>
                     </div>
                     <div class="statistic-info__item">
                         <div class="statistic-info__key">Прибыль</div>
