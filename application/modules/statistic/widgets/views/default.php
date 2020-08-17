@@ -6,6 +6,7 @@
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
+use yii\helpers\StringHelper;
 
 ?>
     <div class="statistic">
@@ -62,7 +63,7 @@ use app\modules\order\models\entity\Order;
 				<?php if ($lastSearch): ?>
                     <div class="last-search">
 						<?php foreach ($lastSearch as $search): ?>
-                            <div class="last-search__item" title="<?= $search->text; ?>"><?= \yii\helpers\StringHelper::truncate($search->text, 50, '...'); ?></div>
+                            <div class="last-search__item" title="<?= $search->text; ?>"><?= StringHelper::truncate($search->text, 10, '...'); ?></div>
 						<?php endforeach; ?>
                     </div>
 				<?php endif; ?>
