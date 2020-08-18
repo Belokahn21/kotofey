@@ -17,11 +17,12 @@ use yii\behaviors\TimestampBehavior;
  */
 class Promocode extends \yii\db\ActiveRecord
 {
-    public static function tableName()
-    {
-        return 'promocode';
-    }
-    public function behaviors()
+	public static function tableName()
+	{
+		return 'promocode';
+	}
+
+	public function behaviors()
 	{
 		return [
 			TimestampBehavior::className(),
@@ -29,26 +30,28 @@ class Promocode extends \yii\db\ActiveRecord
 	}
 
 	public function rules()
-    {
-        return [
-            [['count', 'discount', 'created_at', 'updated_at'], 'integer'],
-            [['code'], 'string', 'max' => 255],
-            [['code'], 'unique'],
-        ];
-    }
+	{
+		return [
+			[['count', 'discount', 'created_at', 'updated_at'], 'integer'],
+			[['code'], 'string', 'max' => 255],
+			[['code'], 'unique'],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'code' => 'Code',
-            'count' => 'Count',
-            'discount' => 'Discount',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
-        ];
-    }
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'code' => 'Code',
+			'count' => 'Count',
+			'discount' => 'Discount',
+			'created_at' => 'Created At',
+			'updated_at' => 'Updated At',
+		];
+	}
+
+	public static function findOneByCode($code)
+	{
+		return static::findOne(['code' => $code]);
+	}
 }

@@ -47,7 +47,9 @@ class handlePromocodeInput {
 			return false;
 		}
 
-		let price = parseInt(this.elementFullPrice.textContent);
+		let price = this.elementFullPrice.textContent;
+		price = price.replace(/ /g, '');
+		price = parseInt(price);
 
 		discount = parseInt(discount);
 		discount = discount / 100;
@@ -62,13 +64,18 @@ class handlePromocodeInput {
 				clearInterval(intervalId);
 			}
 
-			this.elementFullPrice.textContent = --price;
+			this.elementFullPrice.textContent = this.price(--price);
 
 		}, 5);
 	}
 
 	saveSessionPromocode(code) {
 
+	}
+
+	price(value) {
+		let formater = new Intl.NumberFormat('ru-RU', {});
+		return formater.format(value);
 	}
 }
 

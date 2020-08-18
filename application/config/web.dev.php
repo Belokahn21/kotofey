@@ -74,7 +74,7 @@ $config = [
                 'class' => 'Swift_SmtpTransport',
                 'host' => 'smtp.gmail.com',
                 'username' => 'info.kotofey.store@gmail.com',
-                'password' => '123qweR%',
+                'password' => '123qweR%cc',
                 'port' => '587',
                 'encryption' => 'tls',
             ],
