@@ -62,7 +62,7 @@ class handlePromocodeInput {
 				clearInterval(intervalId);
 			}
 
-			elementFullPrice.textContent = --price;
+			this.elementFullPrice.textContent = --price;
 
 		}, 5);
 	}
