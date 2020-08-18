@@ -78,6 +78,11 @@ use app\modules\order\models\helpers\OrderHelper;
                     <p>Закуп: <?= OrderHelper::orderPurchase($model->id); ?></p>
                     <p>Сумма заказа: <?= OrderHelper::orderSummary($model->id); ?></p>
 
+					<?php if ($model->promocodeEntity): ?>
+                        <h4>Промокод</h4>
+                        <p class="red"><?= $model->promocodeEntity->code; ?>, -<?= $model->promocodeEntity->discount; ?>%</p>
+					<?php endif; ?>
+
 
 					<?= MapWidget::widget([
 						'model' => $model

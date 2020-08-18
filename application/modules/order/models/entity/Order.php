@@ -3,18 +3,10 @@
 namespace app\modules\order\models\entity;
 
 
-use app\modules\bonus\models\entity\Discount;
-use app\modules\order\models\entity\OrderBilling;
-use app\modules\order\models\entity\OrderDate;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\user\models\entity\User;
-use app\modules\order\models\entity\OrdersItems;
-use app\modules\order\models\entity\OrderStatus;
-use app\modules\promo\models\entity\Promo;
 use app\modules\user\models\entity\Billing;
-use app\modules\bonus\models\helper\DiscountHelper;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\bonus\models\services\BonusByBuyService;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -39,7 +31,7 @@ use yii\db\ActiveRecord;
  * @property string $street
  * @property string $number_home
  * @property string $number_appartament
- * @property string $promo_code
+ * @property string $promocode
  * @property string $email
  * @property string $phone
  * @property string $ip
@@ -47,6 +39,7 @@ use yii\db\ActiveRecord;
  * @property integer $updated_at
  *
  * @property OrdersItems[] $items
+ * @property Promocode $promocodeEntity
  */
 class Order extends ActiveRecord
 {
@@ -67,9 +60,9 @@ class Order extends ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_DEFAULT => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CUSTOM => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
-			self::SCENARIO_CLIENT_BUY => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promo_code', 'created_at', 'updated_at'],
+			self::SCENARIO_DEFAULT => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+			self::SCENARIO_CUSTOM => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+			self::SCENARIO_CLIENT_BUY => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
 		];
 	}
 
@@ -102,9 +95,9 @@ class Order extends ActiveRecord
 			[['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
 
 
-			[['comment', 'promo_code', 'notes', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'email'], 'string'],
+			[['comment', 'notes', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'email'], 'string'],
 
-			['promo_code', 'string'],
+			['promocode', 'string'],
 
 			[['product_id'], 'safe'],
 
@@ -118,8 +111,8 @@ class Order extends ActiveRecord
 			$this->is_update = true;
 		}
 
-		if (!Promocode::findOneByCode($this->promo_code)) {
-			$this->promo_code = null;
+		if (!Promocode::findOneByCode($this->promocode)) {
+			$this->promocode = null;
 		}
 
 		return parent::beforeSave($insert);
@@ -174,7 +167,7 @@ class Order extends ActiveRecord
 			'comment' => 'Комментарий к заказу',
 			'notes' => 'Заметки(Для админов)',
 			'product_id' => 'Товар',
-			'promo_code' => 'Промо код',
+			'promocode' => 'Промо код',
 			'phone' => 'Телефон',
 			'postalcode' => 'Почтовый индекс',
 			'country' => 'Страна',
@@ -228,5 +221,10 @@ class Order extends ActiveRecord
 	public function getItems()
 	{
 		return $this->hasMany(OrdersItems::className(), ['order_id' => 'id']);
+	}
+
+	public function getPromocodeEntity()
+	{
+		return $this->hasOne(Promocode::className(), ['code' => 'promocode']);
 	}
 }
