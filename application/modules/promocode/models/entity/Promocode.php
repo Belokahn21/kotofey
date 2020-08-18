@@ -12,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $code
  * @property int $count
  * @property int $discount
+ * @property boolean $infinity
  * @property int $created_at
  * @property int $updated_at
  */
@@ -35,6 +36,7 @@ class Promocode extends \yii\db\ActiveRecord
 			[['count', 'discount', 'created_at', 'updated_at'], 'integer'],
 			[['code'], 'string', 'max' => 255],
 			[['code'], 'unique'],
+			[['infinity'], 'boolean'],
 		];
 	}
 
@@ -42,11 +44,12 @@ class Promocode extends \yii\db\ActiveRecord
 	{
 		return [
 			'id' => 'ID',
-			'code' => 'Code',
-			'count' => 'Count',
-			'discount' => 'Discount',
-			'created_at' => 'Created At',
-			'updated_at' => 'Updated At',
+			'code' => 'Код',
+			'count' => 'Кол-во использований',
+			'discount' => 'Скидка (%)',
+			'infinity' => 'Бесконечный',
+			'created_at' => 'Дата создания',
+			'updated_at' => 'Дата обновления',
 		];
 	}
 

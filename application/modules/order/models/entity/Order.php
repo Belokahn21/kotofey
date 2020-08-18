@@ -4,6 +4,7 @@ namespace app\modules\order\models\entity;
 
 
 use app\modules\promocode\models\entity\Promocode;
+use app\modules\promocode\models\entity\PromocodeUser;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\Billing;
 use app\modules\order\models\helpers\OrderHelper;
@@ -111,7 +112,10 @@ class Order extends ActiveRecord
 			$this->is_update = true;
 		}
 
-		if (!Promocode::findOneByCode($this->promocode)) {
+		$promo = Promocode::findOneByCode($this->promocode);
+		$used = PromocodeUser::findOne(['code' => $promo->code, 'phone' => $this->phone]);
+
+		if (!$promo || $used) {
 			$this->promocode = null;
 		}
 
@@ -126,6 +130,14 @@ class Order extends ActiveRecord
 
 		if ($this->plusStock) {
 			OrderHelper::minusStockCount($this, false);
+		}
+
+		// used promocode
+		$usedPromo = new PromocodeUser();
+		$usedPromo->code = $this->promocode;
+		$usedPromo->phone = $this->phone;
+		if ($usedPromo->validate()) {
+			$usedPromo->save();
 		}
 
 		return parent::afterSave($insert, $changedAttributes);

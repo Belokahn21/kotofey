@@ -24,6 +24,9 @@ use app\modules\settings\models\helpers\MarkupHelpers;
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="form-element">
+			<?= $form->field($model, 'infinity')->checkbox(); ?>
+        </div>
+        <div class="form-element">
 			<?= $form->field($model, 'code')->textInput(['placeholder' => 'Промокод'])->label(false); ?>
         </div>
         <div class="form-element">
