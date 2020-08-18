@@ -66,6 +66,10 @@
     display: flex;
     flex-direction: row;
   }
+
+  @media(max-width: 414px) {
+    flex-direction: column;
+  }
 }
 
 .checkbox-budget:checked + .checkout-form-variants__item, .checkbox-budget:not(:checked) + .checkout-form-variants__item {
@@ -76,10 +80,13 @@
   cursor: pointer;
   transition: all 300ms linear;
   width: 47.5%;
-  flex: 1 1 0;
 
   @media (max-width: 520px) {
     width: 46%;
+  }
+
+  @media(max-width: 414px) {
+    width: 100%;
   }
 }
 
