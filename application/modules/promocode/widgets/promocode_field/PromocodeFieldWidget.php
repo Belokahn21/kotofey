@@ -8,23 +8,28 @@ use yii\helpers\Html;
 
 class PromocodeFieldWidget extends Widget
 {
-    public $model;
-    public $attribute;
+	public $model;
+	public $attribute;
 
-    public function init()
-    {
-        parent::init();
-    }
+	public function init()
+	{
+		parent::init();
+	}
 
-    public function run()
-    {
-        parent::run();
+	public function run()
+	{
+		parent::run();
 
-        PromocodeFieldAssets::register($this->getView());
+		PromocodeFieldAssets::register($this->getView());
 
-        return Html::activeInput('text', $this->model, $this->attribute, [
-            'class' => 'checkout-form__input js-validate-promocode',
-            'placeholder'=>'Воспользоваться промокодом'
-        ]);
-    }
+		echo Html::activeInput('text', $this->model, $this->attribute, [
+			'class' => 'checkout-form__input js-validate-promocode',
+			'placeholder' => 'Воспользоваться промокодом'
+		]);
+
+		echo Html::tag('div', "Ваш промокод: " . Html::tag('span', '', ['class' => 'checkout-form-promocode__code']) . Html::tag('span', '', ['class' => 'checkout-form-promocode__discount']), [
+			'class' => 'checkout-form-promocode'
+		]);
+
+	}
 }

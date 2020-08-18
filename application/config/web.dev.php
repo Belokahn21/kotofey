@@ -112,6 +112,8 @@ $config = [
 
                 'POST basket/rest/add' => 'basket/rest/add',
                 'POST catalog/rest/get' => 'catalog/rest/get',
+				'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
+                'GET promocode/rest/get' => 'promocode/rest/get',
 
                 'search' => 'search/search/index',
                 'cache' => 'site/cache',
@@ -159,7 +161,7 @@ $config = [
         'statistic' => [
             'class' => 'app\modules\statistic\Module',
         ],
-        'promo' => [
+        'promocode' => [
             'class' => 'app\modules\promocode\Module',
         ],
         'yandex' => [
