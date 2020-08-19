@@ -7,6 +7,7 @@ import '../reactjs/components/todo';
 import 'popper.js';
 import 'bootstrap';
 
+import './block/check-exist-product';
 import './block/order-load-product';
 import './block/phone-mask';
 import './block/notify';

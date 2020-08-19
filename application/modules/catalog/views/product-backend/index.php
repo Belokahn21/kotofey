@@ -45,7 +45,7 @@ $this->title = Title::showTitle('Товары');
 				$checkExistButton = "";
 
 				if ($model->vendor_id == 4) {
-					$checkExistButton = Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]);
+					$checkExistButton = Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]);
 				}
 
 				return $model->code . $checkExistButton;
