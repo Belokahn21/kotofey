@@ -23,6 +23,7 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
 			updateAmount(formCalc, +1);
 			updateSummary(formCalc);
 			updateFullSummary();
+			saveInfo();
 		});
 	}
 
@@ -32,6 +33,7 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
 			updateAmount(formCalc, -1);
 			updateSummary(formCalc);
 			updateFullSummary();
+			saveInfo();
 		});
 	}
 
@@ -125,7 +127,6 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
 			toggleIcon(button);
 		}
 	};
-
 
 	let toggleIcon = (element) => {
 		let image = element.querySelector('.add-basket__icon');
