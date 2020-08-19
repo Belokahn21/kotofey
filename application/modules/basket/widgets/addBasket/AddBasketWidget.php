@@ -4,6 +4,7 @@ namespace app\modules\basket\widgets\addBasket;
 
 
 use yii\base\Widget;
+use app\modules\basket\models\entity\Basket;
 
 class AddBasketWidget extends Widget
 {
@@ -23,7 +24,10 @@ class AddBasketWidget extends Widget
             return false;
         }
 
+        $basket = Basket::findOne($this->product_id);
+
         return $this->render($this->view, [
+            'basket' => $basket,
             'product_id' => $this->product_id,
             'count' => $this->count,
             'price' => $this->price,

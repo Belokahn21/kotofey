@@ -25,13 +25,13 @@ $this->title = Title::showTitle("Заказы");
 <?= GroupBuyWidget::widget(); ?>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
-	'itemsModel' => $itemsModel,
-	'users' => $users,
-	'model' => $model,
-	'deliveries' => $deliveries,
-	'payments' => $payments,
-	'status' => $status,
-	'form' => $form,
+    'itemsModel' => $itemsModel,
+    'users' => $users,
+    'model' => $model,
+    'deliveries' => $deliveries,
+    'payments' => $payments,
+    'status' => $status,
+    'form' => $form,
 ]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end() ?>
@@ -78,7 +78,14 @@ $this->title = Title::showTitle("Заказы");
             'attribute' => 'cash',
             'format' => 'raw',
             'value' => function ($model) {
-                return OrderHelper::orderSummary($model->id) . ' (<span class="green">+' . OrderHelper::marginality($model->id) . '</span>)';
+                $sum = OrderHelper::orderSummary($model->id);
+                $marge = OrderHelper::marginality($model->id);
+
+                if ($marge > 0) {
+                    return $sum . ' (<span class="green">+' . $marge . '</span>)';
+                }
+
+                return $sum . ' (<span class="red">' . $marge . '</span>)';
             }
         ],
         [
@@ -109,8 +116,8 @@ $this->title = Title::showTitle("Заказы");
 //                        return Html::a('<i class="fas fa-trash-alt"></i>',
 //                            Url::to(["admin/order", 'id' => $key, 'action' => 'delete']));
 //                    }
-				}
-			]
-		],
-	],
+                }
+            ]
+        ],
+    ],
 ]);
