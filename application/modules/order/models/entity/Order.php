@@ -8,6 +8,7 @@ use app\modules\promocode\models\entity\PromocodeUser;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\Billing;
 use app\modules\order\models\helpers\OrderHelper;
+use phpDocumentor\Reflection\Types\Self_;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -112,11 +113,13 @@ class Order extends ActiveRecord
 			$this->is_update = true;
 		}
 
-		$promo = Promocode::findOneByCode($this->promocode);
-		$used = PromocodeUser::findOne(['code' => $promo->code, 'phone' => $this->phone]);
+		if (!empty($this->promocode) && $this->scenario == self::SCENARIO_CLIENT_BUY) {
+			$promo = Promocode::findOneByCode($this->promocode);
+			$used = PromocodeUser::findOne(['code' => $promo->code, 'phone' => $this->phone]);
 
-		if (!$promo || $used) {
-			$this->promocode = null;
+			if (!$promo || $used) {
+				$this->promocode = null;
+			}
 		}
 
 		return parent::beforeSave($insert);
@@ -132,12 +135,14 @@ class Order extends ActiveRecord
 			OrderHelper::minusStockCount($this, false);
 		}
 
-		// used promocode
-		$usedPromo = new PromocodeUser();
-		$usedPromo->code = $this->promocode;
-		$usedPromo->phone = $this->phone;
-		if ($usedPromo->validate()) {
-			$usedPromo->save();
+		if ($this->scenario == self::SCENARIO_CLIENT_BUY && !empty($this->promocode)) {
+			// used promocode
+			$usedPromo = new PromocodeUser();
+			$usedPromo->code = $this->promocode;
+			$usedPromo->phone = $this->phone;
+			if ($usedPromo->validate()) {
+				$usedPromo->save();
+			}
 		}
 
 		return parent::afterSave($insert, $changedAttributes);
