@@ -18,6 +18,13 @@
     justify-content: space-between;
     align-items: center;
 
+    &[data-target] {
+      cursor: pointer;
+
+      &:hover {
+        border-color: #0c5460;
+      }
+    }
 
     @media (max-width: 414px) {
       width: 100%;

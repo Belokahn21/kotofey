@@ -1,0 +1,45 @@
+extends include/layer
+
+block contents
+	.page-container
+		.page
+			ul.breadcrumbs
+				li.breadcrumbs__item
+					a(href="javascript:void(0);").breadcrumbs__link Главная
+				li.breadcrumbs__item.active
+					a(href="javascript:void(0);").breadcrumbs__link Личный кабинет
+				li.breadcrumbs__item.active
+					a(href="javascript:void(0);").breadcrumbs__link Просмотр заказа
+			h1.page__title Личный кабинет
+			.row
+				.col-6
+					table(width='100%')
+						tbody
+							tr
+								td Дата создания
+								td 20.08.2020
+							tr
+								td Сумма заказа
+								td 65 210 ₽
+							tr
+								td Статус
+								td Обрабатывается
+							tr
+								td Оплачено
+								td
+									span.red Не оплачено
+					include include/block/gifts
+				.col-6
+					ul
+						li.row.d-flex.flex-row.align-items-center
+							.col-3
+								img(src='./assets/images/product.png', width='100')
+							.col-4
+								a(href='/product/royal-canin-maine-coon-adult-10kg-korm-dla-kosek-porody-mejn-kun-starse-15-mesacev/')
+									| Royal Canin MAINE COON ADULT 10кг, Корм для кошек породы мейн-кун старше 15 месяцев
+							.col-2
+								| 6 521
+							.col-1
+								| 10
+							.col-2
+								| 65 210

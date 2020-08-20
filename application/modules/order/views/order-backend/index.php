@@ -90,14 +90,6 @@ $this->title = Title::showTitle("Заказы");
 			}
 		],
 		[
-			'label' => 'К оплате',
-			'format' => 'raw',
-			'value' => function ($model) {
-				$out_summ = OrderHelper::orderSummary($model->id);
-				return $out_summ;
-			}
-		],
-		[
 			'attribute' => 'created_at',
 			'value' => function ($model) {
 				return date("d.m.Y", $model->created_at);

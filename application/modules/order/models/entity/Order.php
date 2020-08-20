@@ -8,7 +8,6 @@ use app\modules\promocode\models\entity\PromocodeUser;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\Billing;
 use app\modules\order\models\helpers\OrderHelper;
-use phpDocumentor\Reflection\Types\Self_;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 

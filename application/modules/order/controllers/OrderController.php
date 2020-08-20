@@ -25,12 +25,16 @@ class OrderController extends Controller
 				'class' => AccessControl::className(),
 				'rules' => [
 					[
+						'actions' => ['view'],
+						'allow' => true,
+					],
+					[
 						'actions' => ['create'],
 						'allow' => true,
 						'matchCallback' => function ($rule, $action) {
 							return Basket::count() > 0;
 						}
-					]
+					],
 				],
 			]
 		];

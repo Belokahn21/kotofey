@@ -1,0 +1,19 @@
+.gifts {
+  &-road {
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    border: 1px #c6c6c6 solid;
+    position: relative;
+
+    &__image {
+      width: 120px;
+      height: 100%;
+      object-fit: contain;
+      position: absolute;
+      left: 0;
+      transition: left 2s ease-out;
+    }
+  }
+}

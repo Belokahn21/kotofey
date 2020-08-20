@@ -18,6 +18,7 @@ import './block/catalog';
 import './block/favorite';
 import './block/compare';
 import './block/toggleClass';
+import './block/gifts';
 import './include/init-sliders';
 import './include/init-range-sliders';
 import './include/init-maskedinput';
