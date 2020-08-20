@@ -14,6 +14,9 @@ class StatisticWidget extends Widget
 	{
 		$searches = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
 		$lastSearch = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
+
+
+
 		return $this->render($this->view, [
 			'searches' => $searches,
 			'lastSearch' => $lastSearch

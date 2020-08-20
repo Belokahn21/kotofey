@@ -42,6 +42,7 @@ use yii\web\UploadedFile;
  * @property boolean $vitrine
  * @property boolean $stock_id
  * @property string $code
+ * @property string $threeDCode
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -63,9 +64,9 @@ class Product extends \yii\db\ActiveRecord
 	public function scenarios()
 	{
 		return [
-			self::SCENARIO_NEW_PRODUCT => ['vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-			self::SCENARIO_UPDATE_PRODUCT => ['vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-			self::SCENARIO_CREATE_EXT_PRODUCT => ['vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+			self::SCENARIO_NEW_PRODUCT => ['threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+			self::SCENARIO_UPDATE_PRODUCT => ['threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+			self::SCENARIO_CREATE_EXT_PRODUCT => ['threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
 		];
 	}
 
@@ -76,7 +77,7 @@ class Product extends \yii\db\ActiveRecord
 
 			[['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active', 'base_price', 'vendor_id', 'discount_price'], 'integer'],
 
-			[['images', 'code', 'description', 'feed'], 'string'],
+			[['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
 
 			['description', 'string', 'min' => 10],
 
@@ -122,6 +123,7 @@ class Product extends \yii\db\ActiveRecord
 			'created_at' => 'Дата создания',
 			'is_product_order' => 'Товар под заказ',
 			'feed' => 'Поисковой контент',
+			'threeDCode' => '3D представление',
 		];
 	}
 

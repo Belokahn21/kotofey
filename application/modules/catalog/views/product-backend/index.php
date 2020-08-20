@@ -8,6 +8,7 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\helpers\ProductHelper;
 
 /* @var $this \yii\web\View */
 /* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
@@ -103,7 +104,7 @@ $this->title = Title::showTitle('Товары');
 			'attribute' => 'image',
 			'format' => 'raw',
 			'value' => function ($model) {
-				return Html::img('/upload/' . $model->image, ['width' => 70]);
+				return Html::img(ProductHelper::getImageUrl($model), ['width' => 70]);
 			}
 		],
 		[

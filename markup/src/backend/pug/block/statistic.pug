@@ -13,7 +13,7 @@
 				a(href="?out=Y").statistic-action__item
 					i.fas.fa-download
 	.statistic__item
-		.statistic__icon
+		.statistic__icon(data-toggle="modal" data-target="#order-list")
 			i.fas.fa-cookie
 		.statistic__content
 			.statistic-info
@@ -93,5 +93,77 @@
 						.search-history__phrase Royal canin gastro 12кг
 						.search-history__count 150
 						.search-history__date 23.06.2020
+			.modal-footer
+				button.btn.btn-secondary(type='button', data-dismiss='modal') Закрыть
+
+#order-list.modal.fade(tabindex='-1', role='dialog', aria-labelledby='search-listLabel', aria-hidden='true')
+	.modal-dialog(role='document')
+		.modal-content
+			.modal-header
+				h5#order-listLabel.modal-title Отчет по продажам
+				button.close(type='button', data-dismiss='modal', aria-label='Close')
+					span(aria-hidden='true') ×
+			.modal-body.p-0
+				ul.month-stat
+					li.month-stat__item
+						.month-stat__title Январь
+						.month-stat__count Заказов: 5
+						.month-stat__rotate Оборот: 10 665₽
+						.month-stat__summary Доход: 3 869₽
+					li.month-stat__item
+						.month-stat__title Февраль
+						.month-stat__count Заказов: 11
+						.month-stat__rotate Оборот: 38 315₽
+						.month-stat__summary Доход: 12 737₽
+					li.month-stat__item
+						.month-stat__title Март
+						.month-stat__count Заказов: 21
+						.month-stat__rotate Оборот: 43 314₽
+						.month-stat__summary Доход: 5 639₽
+					li.month-stat__item
+						.month-stat__title Апрель
+						.month-stat__count Заказов: 22
+						.month-stat__rotate Оборот: 30 284₽
+						.month-stat__summary Доход: 4 198₽
+					li.month-stat__item
+						.month-stat__title Май
+						.month-stat__count Заказов: 25
+						.month-stat__rotate Оборот: 43 062₽
+						.month-stat__summary Доход: 4 712₽
+					li.month-stat__item
+						.month-stat__title Июнь
+						.month-stat__count Заказов: 28
+						.month-stat__rotate Оборот: 49 964₽
+						.month-stat__summary Доход: 7 484₽
+					li.month-stat__item
+						.month-stat__title Июль
+						.month-stat__count Заказов: 10
+						.month-stat__rotate Оборот: 24 088₽
+						.month-stat__summary Доход: 1 684₽
+					li.month-stat__item
+						.month-stat__title Август
+						.month-stat__count Заказов: 6
+						.month-stat__rotate Оборот: 82 302₽
+						.month-stat__summary Доход: 0₽
+					li.month-stat__item
+						.month-stat__title Сентябрь
+						.month-stat__count Заказов: 0
+						.month-stat__rotate Оборот: 0₽
+						.month-stat__summary Доход: 0₽
+					li.month-stat__item
+						.month-stat__title Ноябрь
+						.month-stat__count Заказов: 0
+						.month-stat__rotate Оборот: 0₽
+						.month-stat__summary Доход: 0₽
+					li.month-stat__item
+						.month-stat__title Октябрь
+						.month-stat__count Заказов: 0
+						.month-stat__rotate Оборот: 0₽
+						.month-stat__summary Доход: 0₽
+					li.month-stat__item
+						.month-stat__title Декабрь
+						.month-stat__count Заказов: 0
+						.month-stat__rotate Оборот: 0₽
+						.month-stat__summary Доход: 0₽
 			.modal-footer
 				button.btn.btn-secondary(type='button', data-dismiss='modal') Закрыть
