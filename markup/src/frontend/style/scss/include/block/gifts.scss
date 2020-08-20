@@ -1,4 +1,8 @@
 .gifts {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+
   &-road {
     height: 100px;
     display: flex;
@@ -8,12 +12,21 @@
     position: relative;
 
     &__image {
-      width: 120px;
+      width: auto;
       height: 100%;
       object-fit: contain;
       position: absolute;
-      left: 0;
-      transition: left 2s ease-out;
+      transition: all 2s ease-out;
+    }
+  }
+
+  &-action {
+    button {
+      width: 100%;
+      border: 1px #c6c6c6 solid;
+      border-top: 0;
+      background: transparent;
+      padding: 10px;
     }
   }
 }

@@ -1,33 +1,42 @@
 class Gifts {
-	constructor() {
-		this.lastWidth = 0;
-		this.button = document.querySelector('.js-run-road-gift');
-		this.images = document.querySelectorAll('.gifts-road__image');
-		this.addEvents();
-		this.stayImages();
-	}
+    constructor() {
+        this.lastWidth = 0;
+        this.step = 120;
+        this.fullWidth = 0;
+        this.intervelId = null;
+        this.button = document.querySelector('.js-run-road-gift');
+        this.images = document.querySelectorAll('.gifts-road__image');
 
-	addEvents() {
-		if (!this.button) {
-			return false;
-		}
+        this.getFullWidth();
 
-		this.button.addEventListener('click', () => {
-			setInterval(() => {
-				this.stayImages();
-			}, 1000);
-		});
-		// this.button.addEventListener('click', this.runAnimation());
+        this.addEvents();
+        this.stayImages();
+    }
 
-	}
+    addEvents() {
+        if (!this.button) {
+            return false;
+        }
 
-	stayImages() {
-		this.images.forEach((image) => {
-			let width = image.offsetWidth;
-			this.lastWidth += parseInt(width);
-			image.style.left = this.lastWidth + 'px';
-		});
-	}
+        const speed = this.button.getAttribute('data-speed') ? this.button.getAttribute('data-speed') : 1000;
+
+        this.button.addEventListener('click', () => {
+            setInterval(() => {
+                this.stayImages();
+            }, speed);
+        });
+    }
+
+    stayImages() {
+        this.images.forEach((image) => {
+            image.style.left = this.lastWidth + 'px';
+            this.lastWidth += this.step;
+        });
+    }
+
+    getFullWidth() {
+        this.fullWidth = this.images.length * this.step;
+    }
 }
 
 new Gifts();
