@@ -7,6 +7,7 @@
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use yii\helpers\StringHelper;
+use app\models\tool\Backup;
 
 ?>
     <div class="statistic">
@@ -16,7 +17,7 @@ use yii\helpers\StringHelper;
                 <div class="statistic-info">
                     <div class="statistic-info__item">
                         <div class="statistic-info__key">Последний бэкап</div>
-                        <div class="statistic-info__value">-----</div>
+                        <div class="statistic-info__value"><?= date('d.m.Y', Backup::getInstance()->getFileDate()); ?></div>
                     </div>
                 </div>
                 <div class="statistic-action">
