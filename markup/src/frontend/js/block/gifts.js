@@ -41,7 +41,7 @@ function LetsGo() {
 				}
 				if (a.scr > (oneHeight * numImage))
 					a.scr -= oneHeight * numImage;
-				a.a.scrollTop = Math.floor(a.scr);
+				a.a.scrollLeft = Math.floor(a.scr);
 			}
 			if (complete) clearInterval(LetsGo.interval)
 		}, 20)
