@@ -96,7 +96,9 @@ class Order extends ActiveRecord
 			[['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
 
 
-			[['comment', 'notes', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'email'], 'string'],
+			[['comment', 'notes', 'postalcode', 'email'], 'string'],
+			[['number_appartament', 'number_home'], 'string', 'max' => 10, 'tooLong' => '{attribute} не должен содержать больше 10 символов'],
+			[['country', 'region', 'city', 'street'], 'string', 'max' => 100, 'tooLong' => '{attribute} не должен содержать больше 100 символов'],
 
 			['promocode', 'string'],
 
@@ -114,7 +116,10 @@ class Order extends ActiveRecord
 
 		if (!empty($this->promocode) && $this->scenario == self::SCENARIO_CLIENT_BUY) {
 			$promo = Promocode::findOneByCode($this->promocode);
-			$used = PromocodeUser::findOne(['code' => $promo->code, 'phone' => $this->phone]);
+			$used = false;
+			if ($promo) {
+				$used = PromocodeUser::findOne(['code' => $promo->code, 'phone' => $this->phone]);
+			}
 
 			if (!$promo || $used) {
 				$this->promocode = null;
