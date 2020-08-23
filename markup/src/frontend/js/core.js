@@ -18,11 +18,12 @@ import './block/catalog';
 import './block/favorite';
 import './block/compare';
 import './block/toggleClass';
-import './block/gifts';
+import './block/promocode';
 import './include/init-sliders';
 import './include/init-range-sliders';
 import './include/init-maskedinput';
-// import './include/init-datepicker';
 import './include/phone-mask';
+// import './block/gifts';
+// import './include/init-datepicker';
 
 

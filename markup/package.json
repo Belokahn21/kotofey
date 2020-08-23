@@ -34,6 +34,7 @@
     "air-datepicker": "^2.2.3",
     "babelify": "^10.0.0",
     "browserify": "^16.5.0",
+    "es-cookie": "^1.3.2",
     "gulp": "^4.0.2",
     "gulp-notify": "^3.2.0",
     "gulp-pug": "^4.0.1",
