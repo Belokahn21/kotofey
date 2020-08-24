@@ -91,7 +91,8 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
                 updateDiscount();
 
                 if (discount !== null) {
-                    summary = Math.floor(summary - (summary / 100));
+                    summary = summary - Math.round(summary * (discount / 100));
+                    console.log('apply discount 2');
                 }
 
                 element.textContent = priceFormat(summary);
@@ -118,7 +119,7 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
             }
 
             if (discount !== null) {
-                summary = Math.floor(summary - (summary * (discount / 100)));
+                summary = Math.round(summary - (summary * (discount / 100)));
                 console.log('apply discount');
             }
             element.textContent = priceFormat(summary);
