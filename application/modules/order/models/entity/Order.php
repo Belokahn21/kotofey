@@ -5,6 +5,7 @@ namespace app\modules\order\models\entity;
 
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\entity\PromocodeUser;
+use app\modules\promocode\models\events\Manegment;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\Billing;
 use app\modules\order\models\helpers\OrderHelper;
@@ -127,6 +128,8 @@ class Order extends ActiveRecord
         if ($this->plusStock) {
             OrderHelper::minusStockCount($this, false);
         }
+
+        Manegment::applyCodeToUser($this);
 
         return parent::afterSave($insert, $changedAttributes);
     }
