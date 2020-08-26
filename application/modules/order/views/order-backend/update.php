@@ -29,6 +29,7 @@ $this->title = Title::showTitle("Обновить заказ: " . $model->id);
 
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
+    'dateDelivery' => $dateDelivery,
 	'itemsModel' => $itemsModel,
 	'users' => $users,
 	'model' => $model,

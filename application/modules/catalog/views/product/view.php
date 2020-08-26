@@ -5,6 +5,7 @@ use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
+use app\modules\site_settings\models\entity\SiteSettings;
 
 /* @var $properties \app\modules\catalog\models\entity\ProductPropertiesValues[]
  * @var \yii\web\View $this
@@ -102,7 +103,7 @@ $this->title = Title::showTitle($product->name);
 </nav>
 <div class="tab-content product-tab-content" id="nav-tabContent">
     <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
-        <?= $product->description; ?>
+        <?= $product->description ?: 'Отсутсвует'; ?>
     </div>
     <div class="tab-pane fade" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">
         Отсутсвует
@@ -111,13 +112,21 @@ $this->title = Title::showTitle($product->name);
         Отсутсвует
     </div>
     <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
-        Отсутсвует
+        <strong>Бесплатная доставка при заказе от 500 рублей</strong><br>
+        Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br>
+        Для доставки в другие точки уточняйте по телефону <strong><a style="color: black;" class="js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><?= SiteSettings::getValueByCode('phone_1'); ?></a></strong>
     </div>
     <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
-        Отсутсвует
+        <strong>Оплатить можно:</strong>
+        <ul>
+            <li>Наличными;</li>
+            <li>Переводом на карту банка (Сбербанк онлайн).</li>
+        </ul>
+        <i>*Оплата заказа сразу после получения лично в руки.</i>
     </div>
     <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
-        Отсутсвует
+        Для покупки товаров на нашем сайте вам нужно добавить интересующий вас товар в корзину и пройти к оформлению заказа.<br>
+        После того как заказ был оформлен с вами свяжется оператор (через 15 минут) для уточнения деталей заказа и согласования времени доставки.
     </div>
     <div class="tab-pane fade" id="nav-available" role="tabpanel" aria-labelledby="nav-available-tab">
         <ul class="in-stock-detail-product">

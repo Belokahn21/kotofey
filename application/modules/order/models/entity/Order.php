@@ -8,6 +8,7 @@ use app\modules\promocode\models\entity\PromocodeUser;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\Billing;
 use app\modules\order\models\helpers\OrderHelper;
+use yii\base\Event;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -44,208 +45,181 @@ use yii\db\ActiveRecord;
  */
 class Order extends ActiveRecord
 {
-	const SCENARIO_DEFAULT = 'default';
-	const SCENARIO_CUSTOM = 'custom';
-	const SCENARIO_CLIENT_BUY = 'client_buy';
+    const SCENARIO_DEFAULT = 'default';
+    const SCENARIO_CUSTOM = 'custom';
+    const SCENARIO_CLIENT_BUY = 'client_buy';
 
-	public $product_id;
-	public $is_update;
-	public $minusStock;
-	public $plusStock;
+    public $product_id;
+    public $is_update;
+    public $minusStock;
+    public $plusStock;
 
-	public static function tableName()
-	{
-		return "orders";
-	}
+    public static function tableName()
+    {
+        return "orders";
+    }
 
-	public function scenarios()
-	{
-		return [
-			self::SCENARIO_DEFAULT => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-			self::SCENARIO_CUSTOM => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-			self::SCENARIO_CLIENT_BUY => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-		];
-	}
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_DEFAULT => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+        ];
+    }
 
-	public function rules()
-	{
-		return [
-			['type', 'default', 'value' => '3'],
+    public function rules()
+    {
+        return [
+            ['type', 'default', 'value' => '3'],
 
-			[['phone'], 'string', 'max' => 25],
-			[['phone'], 'required', 'message' => '{attribute} необходимо указать', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CLIENT_BUY]],
-			[
-				['phone'],
-				'filter',
-				'filter' => function ($value) {
-					$value = str_replace('+7', '8', $value);
-					return str_replace([' ', '(', ')', '-'], '', $value);
-				}
-			],
+            [['phone'], 'string', 'max' => 25],
+            [['phone'], 'required', 'message' => '{attribute} необходимо указать', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CLIENT_BUY]],
+            [
+                ['phone'],
+                'filter',
+                'filter' => function ($value) {
+                    $value = str_replace('+7', '8', $value);
+                    return str_replace([' ', '(', ')', '-'], '', $value);
+                }
+            ],
 
-			[['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing'], 'integer'],
-
-
-			[['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
-
-			[['is_paid', 'is_cancel'], 'default', 'value' => false],
-
-			[['is_cancel', 'is_close', 'minusStock', 'plusStock'], 'boolean'],
-
-			['email', 'email'],
-			[['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
+            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing'], 'integer'],
 
 
-			[['comment', 'notes', 'postalcode', 'email'], 'string'],
-			[['number_appartament', 'number_home'], 'string', 'max' => 10, 'tooLong' => '{attribute} не должен содержать больше 10 символов'],
-			[['country', 'region', 'city', 'street'], 'string', 'max' => 100, 'tooLong' => '{attribute} не должен содержать больше 100 символов'],
+            [['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
 
-			['promocode', 'string'],
+            [['is_paid', 'is_cancel'], 'default', 'value' => false],
 
-			[['product_id'], 'safe'],
+            [['is_cancel', 'is_close', 'minusStock', 'plusStock'], 'boolean'],
 
-			[['ip'], 'string'],
-		];
-	}
-
-	public function beforeSave($insert)
-	{
-		if (!$this->isNewRecord) {
-			$this->is_update = true;
-		}
-
-		if (!empty($this->promocode) && $this->scenario == self::SCENARIO_CLIENT_BUY) {
-			$promo = Promocode::findOneByCode($this->promocode);
-			$used = false;
-			if ($promo) {
-				$used = PromocodeUser::findOne(['code' => $promo->code, 'phone' => $this->phone]);
-			}
-
-			if (!$promo || $used) {
-				$this->promocode = null;
-			}
-		}
-
-		return parent::beforeSave($insert);
-	}
-
-	public function afterSave($insert, $changedAttributes)
-	{
-		if ($this->minusStock) {
-			OrderHelper::minusStockCount($this);
-		}
-
-		if ($this->plusStock) {
-			OrderHelper::minusStockCount($this, false);
-		}
-
-		if ($this->scenario == self::SCENARIO_CLIENT_BUY && !empty($this->promocode)) {
-			// used promocode
-			$usedPromo = new PromocodeUser();
-			$usedPromo->code = $this->promocode;
-			$usedPromo->phone = $this->phone;
-			if ($usedPromo->validate()) {
-				$usedPromo->save();
-			}
-		}
-
-		return parent::afterSave($insert, $changedAttributes);
-	}
-
-	public function beforeValidate()
-	{
-		if (empty($this->ip)) {
-			$this->ip = $_SERVER['REMOTE_ADDR'];
-		}
-		return parent::beforeValidate();
-	}
-
-	public function afterValidate()
-	{
-		return parent::afterValidate();
-	}
-
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className()
-		];
-	}
-
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'status' => 'Статус',
-			'payment_id' => 'Способ оплаты',
-			'delivery_id' => 'Способ доставки',
-			'is_paid' => 'Оплачено',
-			'is_cancel' => 'Заказ отменён',
-			'is_close' => 'Заказ закрыт',
-			'user_id' => 'Покупатель',
-			'cash' => 'Сумма заказа',
-			'created_at' => 'Дата создания',
-			'comment' => 'Комментарий к заказу',
-			'notes' => 'Заметки(Для админов)',
-			'product_id' => 'Товар',
-			'promocode' => 'Промо код',
-			'phone' => 'Телефон',
-			'postalcode' => 'Почтовый индекс',
-			'country' => 'Страна',
-			'region' => 'Регион',
-			'city' => 'Город',
-			'street' => 'Улица',
-			'number_home' => 'Дом',
-			'number_appartament' => 'Квартира',
-			'minusStock' => 'Списать товары',
-			'plusStock' => 'Вернуть товары',
-		];
-	}
-
-	public function getStatus()
-	{
-		$status = null;
-		if ($this->status == 0) {
-			$status = new OrderStatus();
-			$status->name = 'В обработке';
-		} else {
-			$status = OrderStatus::findOne($this->status);
-		}
-
-		return $status->name;
-	}
+            ['email', 'email'],
+            [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
 
 
-	public function hasAccess()
-	{
-		return $this->phone == \Yii::$app->user->identity->phone;
-	}
+            [['comment', 'notes', 'postalcode', 'email'], 'string'],
+            [['number_appartament', 'number_home'], 'string', 'max' => 10, 'tooLong' => '{attribute} не должен содержать больше 10 символов'],
+            [['country', 'region', 'city', 'street'], 'string', 'max' => 100, 'tooLong' => '{attribute} не должен содержать больше 100 символов'],
 
-	public function getBilling()
-	{
-		$order_billing = OrderBilling::findOne(['order_id' => $this->id]);
-		if ($order_billing) {
-			return Billing::findOne($order_billing->user_billing_id);
-		}
-	}
+            ['promocode', 'string'],
 
-	public function getDateDelivery()
-	{
-		return OrderDate::findOne(['order_id' => $this->id]);
-	}
+            [['product_id'], 'safe'],
 
-	public function getOwner()
-	{
-		return $this->hasOne(User::className(), ['id' => 'user_id']);
-	}
+            [['ip'], 'string'],
+        ];
+    }
 
-	public function getItems()
-	{
-		return $this->hasMany(OrdersItems::className(), ['order_id' => 'id']);
-	}
+    public function beforeSave($insert)
+    {
+        if (!$this->isNewRecord) {
+            $this->is_update = true;
+        }
 
-	public function getPromocodeEntity()
-	{
-		return $this->hasOne(Promocode::className(), ['code' => 'promocode']);
-	}
+        return parent::beforeSave($insert);
+    }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        if ($this->minusStock) {
+            OrderHelper::minusStockCount($this);
+        }
+
+        if ($this->plusStock) {
+            OrderHelper::minusStockCount($this, false);
+        }
+
+        return parent::afterSave($insert, $changedAttributes);
+    }
+
+    public function beforeValidate()
+    {
+        if (empty($this->ip)) {
+            $this->ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return parent::beforeValidate();
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'status' => 'Статус',
+            'payment_id' => 'Способ оплаты',
+            'delivery_id' => 'Способ доставки',
+            'is_paid' => 'Оплачено',
+            'is_cancel' => 'Заказ отменён',
+            'is_close' => 'Заказ закрыт',
+            'user_id' => 'Покупатель',
+            'cash' => 'Сумма заказа',
+            'created_at' => 'Дата создания',
+            'comment' => 'Комментарий к заказу',
+            'notes' => 'Заметки(Для админов)',
+            'product_id' => 'Товар',
+            'promocode' => 'Промо код',
+            'phone' => 'Телефон',
+            'postalcode' => 'Почтовый индекс',
+            'country' => 'Страна',
+            'region' => 'Регион',
+            'city' => 'Город',
+            'street' => 'Улица',
+            'number_home' => 'Дом',
+            'number_appartament' => 'Квартира',
+            'minusStock' => 'Списать товары',
+            'plusStock' => 'Вернуть товары',
+        ];
+    }
+
+    public function getStatus()
+    {
+        $status = null;
+        if ($this->status == 0) {
+            $status = new OrderStatus();
+            $status->name = 'В обработке';
+        } else {
+            $status = OrderStatus::findOne($this->status);
+        }
+
+        return $status->name;
+    }
+
+
+    public function hasAccess()
+    {
+        return $this->phone == \Yii::$app->user->identity->phone;
+    }
+
+    public function getBilling()
+    {
+        $order_billing = OrderBilling::findOne(['order_id' => $this->id]);
+        if ($order_billing) {
+            return Billing::findOne($order_billing->user_billing_id);
+        }
+    }
+
+    public function getDateDelivery()
+    {
+        return OrderDate::findOne(['order_id' => $this->id]);
+    }
+
+    public function getOwner()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function getItems()
+    {
+        return $this->hasMany(OrdersItems::className(), ['order_id' => 'id']);
+    }
+
+    public function getPromocodeEntity()
+    {
+        return $this->hasOne(Promocode::className(), ['code' => 'promocode']);
+    }
 }

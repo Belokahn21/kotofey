@@ -17,48 +17,55 @@ use yii\behaviors\TimestampBehavior;
  */
 class OrderDate extends \yii\db\ActiveRecord
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function tableName()
-	{
-		return 'order_date';
-	}
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'order_date';
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className(),
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function rules()
-	{
-		return [
-			[['date'], 'required', 'message' => 'Пожалуйста укажите день доставки'],
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['date'], 'required', 'message' => 'Пожалуйста укажите день доставки'],
 
-			[['time'], 'required', 'message' => 'Пожалуйста выберите время доставки'],
+            [['time'], 'required', 'message' => 'Пожалуйста выберите время доставки'],
 
-			[['order_id', 'created_at', 'updated_at'], 'integer'],
-			[['date', 'time'], 'string', 'max' => 255],
-		];
-	}
+            [['order_id'], 'required'],
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'order_id' => 'ID заказа',
-			'date' => 'День',
-			'time' => 'Время',
-			'created_at' => 'Время создания',
-			'updated_at' => 'Время обновления',
-		];
-	}
+            [['order_id', 'created_at', 'updated_at'], 'integer'],
+            [['date', 'time'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'order_id' => 'ID заказа',
+            'date' => 'День',
+            'time' => 'Время',
+            'created_at' => 'Время создания',
+            'updated_at' => 'Время обновления',
+        ];
+    }
+
+    public static function findOneByOrderId($order_id)
+    {
+        return static::findOne(['order_id' => $order_id]);
+    }
 }

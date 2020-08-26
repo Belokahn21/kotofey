@@ -32,11 +32,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Наши контакты', 'url' 
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Телефон: <span class="phone_mask"><?= SiteSettings::getValueByCode('phone_1'); ?></span>
+                Телефон: <span class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></span>
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Телефон: <span class="phone_mask"><?= SiteSettings::getValueByCode('phone_2'); ?></span>
+                Телефон: <span class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_2'); ?></span>
             </li>
         </ul>
         <ul class="fa-ul w-50">

@@ -2,6 +2,7 @@
 
 namespace app\modules\order\controllers;
 
+use app\modules\order\models\entity\OrderDate;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\statistic\OrderStatistic;
@@ -58,6 +59,7 @@ class OrderBackendController extends Controller
     {
         $model = new Order();
         $itemsModel = new OrdersItems();
+        $dateDelivery = new OrderDate();
         $users = User::find()->all();
         $deliveries = Delivery::find()->all();
         $payments = Payment::find()->all();
@@ -105,6 +107,13 @@ class OrderBackendController extends Controller
                 }
 
 
+                if ($dateDelivery->load(Yii::$app->request->post())) {
+                    $dateDelivery->order_id = $model->id;
+                    if ($dateDelivery->validate()) {
+                        $dateDelivery->save();
+                    }
+                }
+
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно создан');
                 return $this->refresh();
@@ -112,6 +121,7 @@ class OrderBackendController extends Controller
         }
         return $this->render('index', [
             'itemsModel' => $itemsModel,
+            'dateDelivery' => $dateDelivery,
             'users' => $users,
             'model' => $model,
             'deliveries' => $deliveries,
@@ -138,6 +148,9 @@ class OrderBackendController extends Controller
         $deliveries = Delivery::find()->all();
         $payments = Payment::find()->all();
         $status = OrderStatus::find()->all();
+        if (!$dateDelivery = OrderDate::findOneByOrderId($model->id)) {
+            $dateDelivery = new OrderDate();
+        }
 
         if (\Yii::$app->request->isPost) {
             $transaction = \Yii::$app->db->beginTransaction();
@@ -184,6 +197,21 @@ class OrderBackendController extends Controller
 
                 }
 
+                if ($dateDelivery->isNewRecord) {
+                    if ($dateDelivery->load(Yii::$app->request->post())) {
+                        $dateDelivery->order_id = $model->id;
+                        if ($dateDelivery->validate()) {
+                            $dateDelivery->save();
+                        }
+
+                    }
+                } else {
+                    if ($dateDelivery->load(Yii::$app->request->post())) {
+                        if ($dateDelivery->validate()) {
+                            $dateDelivery->update();
+                        }
+                    }
+                }
 
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно обновлён');
@@ -193,6 +221,7 @@ class OrderBackendController extends Controller
 
         return $this->render('update', [
             'itemsModel' => $itemsModel,
+            'dateDelivery' => $dateDelivery,
             'users' => $users,
             'model' => $model,
             'deliveries' => $deliveries,

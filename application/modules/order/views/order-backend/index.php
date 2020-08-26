@@ -25,6 +25,7 @@ $this->title = Title::showTitle("Заказы");
 <?= GroupBuyWidget::widget(); ?>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
+    'dateDelivery' => $dateDelivery,
 	'itemsModel' => $itemsModel,
 	'users' => $users,
 	'model' => $model,
