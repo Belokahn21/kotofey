@@ -8,6 +8,7 @@ class handlePromocodeInput {
         this.codeElement = document.querySelector('.checkout-form-promocode__code');
         this.discountElement = document.querySelector('.checkout-form-promocode__discount');
         this.elementFullPrice = document.querySelector('.js-product-calc-full-summary');
+        this.elementPromocodeAmount = document.querySelector('.js-promocode-amount');
 
         this.cookieStorage = new CookiePromocodeClass();
 
@@ -33,6 +34,7 @@ class handlePromocodeInput {
 
             this.showPromocodeInfo(data.code, '-' + data.discount + '%');
             this.updateCheckoutPrice(data.discount);
+            this.changeAmountInput(data.discount);
             this.saveSessionPromocode(data.code);
         });
     }
@@ -78,15 +80,21 @@ class handlePromocodeInput {
 
     saveSessionPromocode(code, discount) {
         this.cookieStorage.save(code, discount);
-        console.log(this.cookieStorage.getPromocode(code));
     }
 
     price(value) {
         let formater = new Intl.NumberFormat('ru-RU', {});
         return formater.format(value);
     }
-}
 
+    changeAmountInput(discount) {
+        if (!this.elementPromocodeAmount) {
+            return false;
+        }
+
+        this.elementPromocodeAmount.value = discount;
+    }
+}
 
 
 new handlePromocodeInput();
