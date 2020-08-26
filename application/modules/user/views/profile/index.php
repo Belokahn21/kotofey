@@ -91,7 +91,6 @@ $this->title = Title::showTitle('Личный кабинет');
                                     <div class="profile-orders__summary"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></div>
                                     <div class="profile-orders__action">
                                         <?= Html::a('Подробнее', '/profile/order/' . $order->id . '/', ['class' => 'profile-orders__link']); ?>
-                                        <!--                                        --><? //= Html::a('Подробнее', Url::to(['/profile/order', 'id' => $order->id]), ['class' => 'profile-orders__link']); ?>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
