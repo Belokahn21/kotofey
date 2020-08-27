@@ -2,6 +2,7 @@
 
 namespace app\modules\promocode\models\entity;
 
+use app\models\tool\Debug;
 use app\modules\content\models\behaviors\DateToIntBehaviors;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -37,10 +38,11 @@ class Promocode extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['count', 'discount', 'start_at', 'end_at'], 'integer'],
+            [['count', 'discount'], 'integer'],
             [['code'], 'string', 'max' => 255],
             [['code'], 'unique'],
             [['infinity'], 'boolean'],
+            [['start_at', 'end_at'], 'safe'],
         ];
     }
 
@@ -62,5 +64,28 @@ class Promocode extends \yii\db\ActiveRecord
     public static function findOneByCode($code)
     {
         return static::findOne(['code' => $code]);
+    }
+
+    public function isLimit()
+    {
+        $usedCount = PromocodeUser::find()->where(['code' => $this->code])->count();
+
+        if ($this->infinity) {
+            return false;
+        }
+
+        return $usedCount >= $this->count;
+    }
+
+    public function isAvailable()
+    {
+        $start = strtotime($this->start_at);
+        $end = strtotime($this->end_at);
+
+        if ($start > 0 && $end > 0) {
+            return ($start < time()) && ($end > time());
+        }
+
+        return true;
     }
 }

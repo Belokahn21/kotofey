@@ -81,11 +81,11 @@ LIST;
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-phone">
                         <div>Ваш номер телефона*</div>
-                        <?= $form->field($order, 'phone')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона'])->label(false) ?>
+                        <?= $form->field($order, 'phone')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона', 'value' => substr(Yii::$app->user->identity->phone, 1, strlen(Yii::$app->user->identity->phone))])->label(false) ?>
                     </label>
                     <label class="checkout-form__label" for="checkout-email">
                         <div>Ваш электронный адрес*</div>
-                        <?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес'])->label(false) ?>
+                        <?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес', 'value' => Yii::$app->user->identity->email])->label(false) ?>
                     </label>
                 </div>
                 <div class="checkout-form__group-row">

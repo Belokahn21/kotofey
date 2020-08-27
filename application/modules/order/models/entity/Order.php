@@ -129,7 +129,7 @@ class Order extends ActiveRecord
             OrderHelper::minusStockCount($this, false);
         }
 
-        Manegment::applyCodeToUser($this);
+        (new Manegment())->applyCodeToUser($this);
 
         return parent::afterSave($insert, $changedAttributes);
     }

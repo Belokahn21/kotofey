@@ -8,7 +8,7 @@ use app\modules\promocode\models\entity\PromocodeUser;
 
 class Manegment
 {
-    public static function applyCodeToUser(Order $order)
+    public function applyCodeToUser(Order $order)
     {
         if (!$order->promocode) {
             return false;
@@ -17,6 +17,22 @@ class Manegment
         $promocode = Promocode::findOneByCode($order->promocode);
 
         if (!$promocode) {
+            $this->unsetPromocode($order);
+            return false;
+        }
+
+        if ($promocode->isLimit()) {
+            $this->unsetPromocode($order);
+            return false;
+        }
+
+        if (!$promocode->isAvailable()) {
+            $this->unsetPromocode($order);
+            return false;
+        }
+
+        if (PromocodeUser::findOneByPhone($order->phone)) {
+            $this->unsetPromocode($order);
             return false;
         }
 
@@ -29,5 +45,14 @@ class Manegment
         }
 
         return false;
+    }
+
+    public function unsetPromocode(Order $order)
+    {
+        $order->scenario = Order::SCENARIO_DEFAULT;
+        $order->promocode = null;
+        if ($order->validate()) {
+            return $order->update();
+        }
     }
 }

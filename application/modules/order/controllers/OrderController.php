@@ -99,7 +99,7 @@ class OrderController extends Controller
 
 
 			$transaction->commit();
-			Alert::setSuccessNotify('Заказ успешно создан.');
+			Alert::setSuccessNotify('Заказ успешно создан. В ближайшее время с вами свяжется оператор.');
 			return $this->redirect('/');
 		}
 
