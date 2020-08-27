@@ -81,11 +81,11 @@ LIST;
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-phone">
                         <div>Ваш номер телефона*</div>
-                        <?= $form->field($order, 'phone')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона', 'value' => substr(Yii::$app->user->identity->phone, 1, strlen(Yii::$app->user->identity->phone))])->label(false) ?>
+                        <?= $form->field($order, 'phone')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона', 'value' => Yii::$app->user->isGuest ? null : substr(Yii::$app->user->identity->phone, 1, strlen(Yii::$app->user->identity->phone))])->label(false) ?>
                     </label>
                     <label class="checkout-form__label" for="checkout-email">
                         <div>Ваш электронный адрес*</div>
-                        <?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес', 'value' => Yii::$app->user->identity->email])->label(false) ?>
+                        <?= $form->field($order, 'email')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес', 'value' => Yii::$app->user->isGuest ? null : Yii::$app->user->identity->email])->label(false) ?>
                     </label>
                 </div>
                 <div class="checkout-form__group-row">
@@ -138,10 +138,12 @@ LIST;
         </div>
         <div class="page__right">
             <div class="checkout-summary">
-                <a class="clear-basket" href="<?= Url::to(['/clear/']); ?>" data-toggle="tooltip" data-placement="top" title="Очистить корзину"><i class="fas fa-trash-alt"></i></a>
+                <a class="clear-basket" href="<?= Url::to(['/clear/']); ?>" data-toggle="tooltip" data-placement="top"
+                   title="Очистить корзину"><i class="fas fa-trash-alt"></i></a>
                 <div class="checkout-summary__info">
                     <div class="checkout-summary__title">Ваш заказ на сумму:</div>
-                    <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
+                    <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button"
+                       aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
                 </div>
                 <div class="checkout-summary__amount">
                     <div class="js-product-calc-full-summary"><?= Price::format(Basket::getInstance()->cash()) ?></div>
@@ -153,10 +155,15 @@ LIST;
                     <ul class="light-checkout-list">
                         <?php foreach ($basket as $item): ?>
                             <li class="light-checkout-list__item">
-                                <img alt="<?= $item->product->name; ?>" title="<?= $item->product->name; ?>" class="light-checkout-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>">
+                                <img alt="<?= $item->product->name; ?>" title="<?= $item->product->name; ?>"
+                                     class="light-checkout-list__image"
+                                     src="<?= ProductHelper::getImageUrl($item->product) ?>">
                                 <div class="light-checkout-list__info">
-                                    <div class="light-checkout-list__title"><a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a></div>
-                                    <div class="light-checkout-list__article">Артикул: <?= $item->product->article; ?></div>
+                                    <div class="light-checkout-list__title"><a class="light-checkout-list__link"
+                                                                               href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
+                                    </div>
+                                    <div class="light-checkout-list__article">
+                                        Артикул: <?= $item->product->article; ?></div>
                                 </div>
                                 <?= AddBasketWidget::widget([
                                     'product_id' => $item->product->id,
@@ -173,10 +180,15 @@ LIST;
             <div class="checkout-reglament">
                 <div class="checkout-reglament__title">Обратите внимание!</div>
                 <div class="checkout-reglament__text">
-                    <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 час). </p>
+                    <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки
+                        доставки (Обычно 1 час). </p>
                     <!--                    <p>Доставка платная. Рассчитайте стоимость в нашем онлайн-калькуляторе. Введите расстояние (в км) от нас — г. Барнаул, ул. Взлетная 1 до того места, куда требуется доставить товар.</p>-->
-                    <p>Доставка бесплатная. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у наших операторов.</p>
-                    <p>Остались вопросы — <a href="mailto:<?= SiteSettings::findByCode('email')->value; ?>"><?= SiteSettings::findByCode('email')->value; ?></a> или <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>" class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a></p>
+                    <p>Доставка бесплатная. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у
+                        наших операторов.</p>
+                    <p>Остались вопросы — <a
+                                href="mailto:<?= SiteSettings::findByCode('email')->value; ?>"><?= SiteSettings::findByCode('email')->value; ?></a>
+                        или <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>"
+                               class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a></p>
                 </div>
             </div>
         </div>
