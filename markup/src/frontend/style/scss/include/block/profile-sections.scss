@@ -5,6 +5,7 @@
 .profile-sections {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 
   &__item {
     width: 100px;
@@ -41,5 +42,13 @@
     color: #c6c6c6;
     text-transform: uppercase;
     font-weight: bold;
+  }
+
+  &-wrap {
+    width: 25%;
+    @media (max-width: 450px) {
+      width: 100%;
+      flex-direction: row;
+    }
   }
 }

@@ -11,7 +11,7 @@ block contents
             h1.page__title Личный кабинет
 
             .page__group-row
-                .page__left.w-25
+                .page__left.profile-sections-wrap
                     .profile-sections.nav.nav-tabs#proflieTabs(role='tablist')
                         a.profile-sections__item.active#home-tab(data-toggle='tab', href='#home', role='tab', aria-controls='home', aria-selected='true')
                             i.fas.fa-user
@@ -22,7 +22,7 @@ block contents
                         a.profile-sections__item#favorite-tab(data-toggle='tab', href='#favorite', role='tab', aria-controls='profile', aria-selected='false')
                             i.fas.fa-heart
                             .profile-sections__title Избранное
-                .page__right.w-75
+                .page__right.profile-content
                     .tab-content
                         #home.tab-pane.fade.show.active
                             h2.page__title Настройки пользователя
@@ -68,15 +68,15 @@ block contents
                                     .profile-orders__action
                                         a.profile-orders__link(href="#") Подробнее
                         #favorite.tab-pane.fade
-                            .profile-favorit-list
-                                .profile-favorit-list__item
-                                    .profile-favorit-list__image
+                            .profile-favorite-list
+                                .profile-favorite-list__item
+                                    .profile-favorite-list__image
                                         img(src="./assets/images/product.png")
-                                    .profile-favorit-list__info
-                                        .profile-favorit-list__title Royal Canin Maxi Puppy 12кг, корм для щенков крупной породы
-                                        .profile-favorit-list__group-row
-                                            .profile-favorit-list__article KKOLEQ
-                                            .profile-favorit-list__price 1 500 P
-                                    .profile-favorit-list__action
-                                        .profile-favorit-list__remove.js-remove-favorit(data-product-id="11")
+                                    .profile-favorite-list__info
+                                        .profile-favorite-list__title Royal Canin Maxi Puppy 12кг, корм для щенков крупной породы
+                                        .profile-favorite-list__group-row
+                                            .profile-favorite-list__article KKOLEQ
+                                            .profile-favorite-list__price 1 500 P
+                                    .profile-favorite-list__action
+                                        .profile-favorite-list__remove.js-remove-favorit(data-product-id="11")
                                             i.fas.fa-heart-broken

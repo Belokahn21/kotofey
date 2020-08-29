@@ -38,7 +38,7 @@ use mihaildev\ckeditor\CKEditor;
     <div class="tab-pane fade" id="nav-preview" role="tabpanel" aria-labelledby="nav-preview-tab">
         <?php if (!empty($model->preview_image)): ?>
             <div>
-                <img src="/upload/<?= $model->preview_image; ?>">
+                <img src="/upload/<?= $model->preview_image; ?>" width="200">
             </div>
         <?php endif; ?>
         <?= $form->field($model, 'preview_image')->fileInput(); ?>
@@ -52,7 +52,7 @@ use mihaildev\ckeditor\CKEditor;
     <div class="tab-pane fade" id="nav-detail" role="tabpanel" aria-labelledby="nav-detail-tab">
         <?php if (!empty($model->detail_image)): ?>
             <div>
-                <img src="/upload/<?= $model->detail_image; ?>">
+                <img src="/upload/<?= $model->detail_image; ?>" width="200">
             </div>
         <?php endif; ?>
         <?= $form->field($model, 'detail_image')->fileInput(); ?>

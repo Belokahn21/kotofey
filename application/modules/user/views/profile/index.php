@@ -34,7 +34,7 @@ $this->title = Title::showTitle('Личный кабинет');
     <h1 class="page__title">Личный кабинет</h1>
     <a href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
     <div class="page__group-row">
-        <div class="page__left w-25">
+        <div class="page__left profile-sections-wrap">
             <div class="profile-sections nav nav-tabs" id="proflieTabs" role="tablist"><a
                         class="profile-sections__item active" id="home-tab" data-toggle="tab" href="#home" role="tab"
                         aria-controls="home" aria-selected="true"><i class="fas fa-user"></i>
@@ -49,7 +49,7 @@ $this->title = Title::showTitle('Личный кабинет');
                 </a>
             </div>
         </div>
-        <div class="page__right w-75">
+        <div class="page__right profile-content">
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="home">
                     <h2 class="page__title">Настройки пользователя</h2>
