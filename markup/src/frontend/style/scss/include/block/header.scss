@@ -3,7 +3,8 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 15px;
+  padding-top: 15px;
+  background: white;
 
   @media (max-width: 1155px) {
     justify-content: stretch;
