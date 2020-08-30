@@ -1,0 +1,10 @@
+.order-delivery-info {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &__item {
+    width: 25%;
+    padding: 5px;
+  }
+}

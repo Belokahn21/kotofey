@@ -20,3 +20,19 @@ html, body {
     flex-direction: column;
   }
 }
+
+[aria-invalid="true"] {
+  border: 1px solid red;
+}
+
+[aria-invalid="false"] {
+  border: 1px solid green;
+}
+
+.form-group {
+  &.has-error {
+    .help-block {
+      color: red;
+    }
+  }
+}

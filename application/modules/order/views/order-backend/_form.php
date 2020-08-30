@@ -1,8 +1,10 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
 use app\modules\order\widgets\map\MapWidget;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\catalog\models\helpers\ProductHelper;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -15,7 +17,7 @@ use app\modules\order\models\helpers\OrderHelper;
 
 ?>
 <nav>
-    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <div class="nav nav-tabs" id="backendForms" role="tablist">
         <?php if (!$model->isNewRecord): ?>
             <a class="nav-item nav-link<?= (!$model->isNewRecord ? ' active' : ''); ?>" id="nav-detail-info-edit-tab" data-toggle="tab" href="#nav-detail-info-edit" role="tab" aria-controls="nav-detail-info-edit" aria-selected="false">Общая инофрмация</a>
         <?php endif; ?>
@@ -26,11 +28,11 @@ use app\modules\order\models\helpers\OrderHelper;
 </nav>
 
 
-<div class="tab-content" id="nav-tab-content-form">
+<div class="tab-content" id="backendFormsContent">
     <?php if (!$model->isNewRecord): ?>
         <div class="tab-pane fade<?= ($model->isNewRecord ? '' : ' show active'); ?>" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
-            <div class="d-flex flex-row">
-                <div class="w-50">
+            <div class="backendFormsPanel">
+                <div class="backendFormsPanel__form-side">
                     <h4></h4>
                     <p>Телефон <a href="tel:<?= $model->phone; ?>"><?= $model->phone; ?></a></p>
                     <p>Почта <a href="mailto:<?= $model->email; ?>"><?= $model->email; ?></a></p>
@@ -49,7 +51,6 @@ use app\modules\order\models\helpers\OrderHelper;
                     <h4>Адрес доставки</h4>
                     <?php try { ?>
                         <ul style="display: flex; flex-direction: column;">
-
                             <?php if ($model->country): ?>
                                 <li style="margin: 0 5px;">Страна <?= $model->country; ?></li>
                             <?php endif; ?>
@@ -84,24 +85,25 @@ use app\modules\order\models\helpers\OrderHelper;
                         <p class="red"><?= $model->promocodeEntity->code; ?>, -<?= $model->promocodeEntity->discount; ?>%</p>
                     <?php endif; ?>
 
-
                     <?= MapWidget::widget([
                         'model' => $model
                     ]); ?>
                 </div>
-
-                <div class="w-50">
+                <div class="backendFormsPanel__form-side">
                     <?php if (is_array($itemsModel)): ?>
-                        <ul>
+                        <h2>Товары в заказе</h2>
+                        <ul class="order-items-list">
                             <?php foreach ($itemsModel as $item): ?>
-                                <li class="d-flex flex-row justify-content-between align-items-center">
+                                <li class="order-items-list__item">
                                     <?php if ($item->product): ?>
-                                        <img class="w-25 m-5" src="/upload/<?= $item->product->image; ?>">
+                                        <img class="order-items-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
+                                    <?php else: ?>
+                                        <img class="order-items-list__image" src="/upload/images/not-image.png" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
                                     <?php endif; ?>
 
-                                    <div class="w-75">
+                                    <div class="order-items-list-info">
                                         <?php if ($item->product): ?>
-                                            <p><a href="<?= \yii\helpers\Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
+                                            <p><a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
                                         <?php else: ?>
                                             <p><?= $item->name; ?></p>
                                         <?php endif; ?>
@@ -198,40 +200,49 @@ use app\modules\order\models\helpers\OrderHelper;
     </div>
 
     <div class="tab-pane fade" id="nav-delivery-edit" role="tabpanel" aria-labelledby="nav-delivery-edit">
-        <div class="d-flex flex-row">
-            <div class="w-50">
-                <div class="form-element d-flex flex-row">
-                    <div class="w-25 p-2">
+        <div class="backendFormsPanel">
+            <div class="backendFormsPanel__form-side">
+                <h3>Адрес доставки</h3>
+                <div class="order-delivery-info">
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'postalcode')->textInput(); ?>
                     </div>
-                    <div class="w-25 p-2">
+
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'country')->textInput(); ?>
                     </div>
-                    <div class="w-25 p-2">
+
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'region')->textInput(); ?>
                     </div>
-                    <div class="w-25 p-2">
+
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'city')->textInput(); ?>
                     </div>
-                </div>
-                <div class="form-element d-flex flex-row">
-                    <div class="w-25 p-2">
+
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'street')->textInput(); ?>
                     </div>
-                    <div class="w-25 p-2">
+
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'number_home')->textInput(); ?>
                     </div>
-                    <div class="w-25 p-2">
+
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'number_appartament')->textInput(); ?>
                     </div>
+
                 </div>
             </div>
-            <div class="w-50">
-                <div class="form-element">
-                    <?= $form->field($dateDelivery, 'date')->textInput(['class' => 'js-datepicker form-control']); ?>
-                </div>
-                <div class="form-element">
-                    <?= $form->field($dateDelivery, 'time')->textInput(); ?>
+            <div class="backendFormsPanel__form-side">
+                <h3>Дата и время доставки</h3>
+                <div class="order-delivery-info">
+                    <div class="form-element order-delivery-info__item">
+                        <?= $form->field($dateDelivery, 'date')->textInput(['class' => 'js-datepicker form-control']); ?>
+                    </div>
+                    <div class="form-element order-delivery-info__item">
+                        <?= $form->field($dateDelivery, 'time')->textInput(); ?>
+                    </div>
                 </div>
             </div>
         </div>

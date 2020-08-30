@@ -23,6 +23,7 @@ Disallow: /web/*
 Disallow: /*?*
 Disallow: /rest/*
 Disallow: /resotre/
+Disallow: /referal/
 Disallow: /resotre/*
 
 Sitemap: https://kotofey.store/sitemap.xml

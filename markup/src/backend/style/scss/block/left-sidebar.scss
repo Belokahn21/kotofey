@@ -29,13 +29,16 @@
 
 .button-toggle-sidebar {
   display: none;
-  padding: 10px 0;
+  padding: 15px 0;
   outline: none !important;
   background: black;
   color: white;
   font-weight: 700;
   text-transform: uppercase;
   border: 0;
+  text-align: center;
+  width: 100%;
+  height: 100%;
 
   @media(max-width: 414px) {
     display: block;

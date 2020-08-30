@@ -18,7 +18,7 @@ $model = new \app\modules\order\models\entity\OrdersItems();
             <?= $form->field($item, '[' . $i . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
         </div>
         <div class="col-sm-1">
-            <?= $form->field($item, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
+            <?= $form->field($item, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info__pid form-control']); ?>
         </div>
         <div class="col-sm-1">
             <?= $form->field($item, '[' . $i . ']need_delete')->checkbox(); ?>
@@ -41,7 +41,7 @@ $model = new \app\modules\order\models\entity\OrdersItems();
             <?= $form->field($model, '[' . $j . ']price')->textInput(['class' => 'load-product-info__price form-control']); ?>
         </div>
         <div class="col-sm-1">
-            <?= $form->field($model, '[' . $j . ']product_id')->textInput(['class' => 'load-product-info form-control']); ?>
+            <?= $form->field($model, '[' . $j . ']product_id')->textInput(['class' => 'load-product-info__pid form-control']); ?>
         </div>
         <div class="col-sm-1">
             <?= $form->field($model, '[' . $j . ']need_delete')->checkbox(); ?>
