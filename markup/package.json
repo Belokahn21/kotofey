@@ -42,6 +42,7 @@
     "ion-rangeslider": "2.2.0",
     "jquery": "^3.5.1",
     "js-datepicker": "^5.2.1",
+    "lazyload": "^2.0.0-rc.2",
     "lightbox2": "^2.11.1",
     "magnific-popup": "^1.1.0",
     "maskedinput": "^3.3.11",

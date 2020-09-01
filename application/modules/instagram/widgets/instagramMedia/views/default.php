@@ -14,7 +14,8 @@ use yii\helpers\StringHelper;
         <div class="swiper-wrapper instagram-wrapper">
 			<?php foreach ($media->data as $item): ?>
                 <div class="instagram__slide swiper-slide">
-                    <img class="instagram__image" src="<?= @$item->media_url; ?>" alt="<?= @$item->caption; ?>" title="<?= @$item->caption; ?>"/>
+                    <img class="instagram__image swiper-lazy" src="<?= @$item->media_url; ?>" alt="<?= @$item->caption; ?>" title="<?= @$item->caption; ?>"/>
+                    <div class="swiper-lazy-preloader"></div>
                     <a class="instagram__title" href="<?= @$item->permalink; ?>" target="_blank"><?= @StringHelper::truncate($item->caption, 70, '...'); ?></a>
                 </div>
 			<?php endforeach; ?>
