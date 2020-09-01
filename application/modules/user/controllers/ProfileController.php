@@ -10,22 +10,22 @@ use yii\web\Controller;
 
 class ProfileController extends Controller
 {
-	public function actionIndex()
-	{
-		$orders = Order::find()->where(['phone' => \Yii::$app->user->identity->phone])->all();
-		$model = User::findOne(\Yii::$app->user->id);
-		$sexList = UserSex::find()->all();
+    public function actionIndex()
+    {
+        $orders = Order::find()->where(['phone' => \Yii::$app->user->identity->phone])->andWhere(['user_id' => \Yii::$app->user->identity->id])->all();
+        $model = User::findOne(\Yii::$app->user->id);
+        $sexList = UserSex::find()->all();
 
-		return $this->render('index', [
-			'orders' => $orders,
-			'model' => $model,
-			'sexList' => $sexList
-		]);
-	}
+        return $this->render('index', [
+            'orders' => $orders,
+            'model' => $model,
+            'sexList' => $sexList
+        ]);
+    }
 
-	public function actionLogout()
-	{
-		\Yii::$app->user->logout();
-		return $this->redirect(['/']);
-	}
+    public function actionLogout()
+    {
+        \Yii::$app->user->logout();
+        return $this->redirect(['/']);
+    }
 }
