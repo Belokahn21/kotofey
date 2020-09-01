@@ -195,7 +195,7 @@ class Order extends ActiveRecord
 
     public function hasAccess()
     {
-        return $this->phone == \Yii::$app->user->identity->phone or $this->id == \Yii::$app->user->identity->id;
+        return $this->phone == \Yii::$app->user->identity->phone or $this->user_id == \Yii::$app->user->identity->id;
     }
 
     public function getBilling()
