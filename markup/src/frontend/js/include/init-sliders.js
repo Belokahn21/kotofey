@@ -119,6 +119,7 @@ var swiperSertificate = new Swiper('.sertificate-container', {
 let swiperInstagramContainer = new Swiper('.instagram-container', {
 	slidesPerView: 1,
 	spaceBetween: 25,
+	lazy:true,
 	loop: true,
 	autoplay: {
 		delay: 5000,
