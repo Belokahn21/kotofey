@@ -12,7 +12,7 @@ class ProfileController extends Controller
 {
     public function actionIndex()
     {
-        $orders = Order::find()->where(['phone' => \Yii::$app->user->identity->phone])->andWhere(['user_id' => \Yii::$app->user->identity->id])->all();
+        $orders = Order::find()->where(['phone' => \Yii::$app->user->identity->phone])->orWhere(['user_id' => \Yii::$app->user->identity->id])->all();
         $model = User::findOne(\Yii::$app->user->id);
         $sexList = UserSex::find()->all();
 
