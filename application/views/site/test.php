@@ -1,18 +1,21 @@
 <?php
-//$promo = \app\modules\promocode\models\entity\Promocode::findOneByCode('qwerty');
-//$promo = \app\modules\promocode\models\entity\Promocode::findOneByCode('котофей');
-//var_dump($promo->isAvailable());
-//var_dump($promo->isLimit());
 
-$order = new \app\modules\order\models\entity\Order();
-$order->scenario = \app\modules\order\models\entity\Order::SCENARIO_CLIENT_BUY;
-//$order->promocode = 'qwerty';
-$order->promocode = 'котофей';
-$order->phone = '89059858726';
-$order->email = 'popugau@gmail.com';
+use app\modules\order\models\entity\Order;
+use app\models\tool\Debug;
+
+$orders = array();
+$phoneCustomer = Order::find()->select('phone')->all();
+
+foreach ($phoneCustomer as $phone) {
+    $orders[$phone->phone] = Order::find()->orderBy(['created_at' => SORT_ASC])->where(['phone' => $phone->phone])->all();
+}
 
 
-var_dump($order->validate());
-var_dump($order->getErrors());
-var_dump($order->save());
-?>
+foreach ($orders as $phone => $customerOrders) {
+    echo $phone;
+    echo "<br>";
+    foreach ($customerOrders as $customerOrder) {
+        echo date('d.m.y', $customerOrder->created_at)."&nbsp;&nbsp;&nbsp;&nbsp;";
+    }
+    echo "<hr>";
+}
