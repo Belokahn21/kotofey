@@ -55,4 +55,4 @@ $this->title = Title::showTitle("Зоотовары для животных в �
         </div>
     </div>
 */ ?>
-<?php //= InstagramMediaWidget::widget(); ?>
+<?= InstagramMediaWidget::widget(); ?>

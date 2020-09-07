@@ -1,7 +1,6 @@
 <?php
 
 use app\modules\order\models\entity\Order;
-use app\models\tool\Debug;
 
 $orders = array();
 $phoneCustomer = Order::find()->select('phone')->all();
