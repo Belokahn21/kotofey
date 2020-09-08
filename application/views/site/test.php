@@ -13,8 +13,31 @@ foreach ($phoneCustomer as $phone) {
 foreach ($orders as $phone => $customerOrders) {
     echo $phone;
     echo "<br>";
+
+    $oldDate = null;
+    $currentDate = null;
+    $countOrders = 0;
+    $countDays = 0;
+
     foreach ($customerOrders as $customerOrder) {
-        echo date('d.m.y', $customerOrder->created_at)."&nbsp;&nbsp;&nbsp;&nbsp;";
+
+        $currentDate = new DateTime();
+        $currentDate->setTimestamp($customerOrder->created_at);
+
+        if ($oldDate instanceof DateTime) {
+            $diff = $oldDate->diff($currentDate);
+
+            $countDays += (int)$diff->d;
+
+            echo $currentDate->format('d.m.Y') . '(' . $diff->d . ')' . "&nbsp;&nbsp;&nbsp;&nbsp;";
+        } else {
+            echo $currentDate->format('d.m.Y') . "&nbsp;&nbsp;&nbsp;&nbsp;";
+        }
+
+        $countOrders++;
+        $oldDate = $currentDate;
     }
+
+    echo "Среднее кол-во дней между заказами: " . floor($countDays / $countOrders);
     echo "<hr>";
 }
