@@ -10,3 +10,4 @@ use app\modules\statistic\widgets\StatisticWidget;
 $this->title = Title::showTitle("Главная страница");
 ?>
 <?= StatisticWidget::widget(); ?>
+<div id="todo-react"></div>
