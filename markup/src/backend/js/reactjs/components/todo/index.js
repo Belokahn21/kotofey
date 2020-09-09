@@ -20,20 +20,18 @@ function Todo() {
             </div>
             <List/>
             <Modal show={show} onHide={handleClose}>
-                <Modal.Dialog closeButton>
-                    <Modal.Header>
-                        <Modal.Title>Добавить новую задачу</Modal.Title>
-                    </Modal.Header>
+                <Modal.Header closeButton>
+                    <Modal.Title>Добавить новую задачу</Modal.Title>
+                </Modal.Header>
 
-                    <Modal.Body>
-                        <p>Новая задача</p>
-                    </Modal.Body>
+                <Modal.Body>
+                    <p>Новая задача</p>
+                </Modal.Body>
 
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={handleClose}>Закрыть</Button>
-                        <Button variant="primary" onClick={handleClose}>Сохранить</Button>
-                    </Modal.Footer>
-                </Modal.Dialog>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>Закрыть</Button>
+                    <Button variant="primary" onClick={handleClose}>Сохранить</Button>
+                </Modal.Footer>
             </Modal>
         </div>
     );
