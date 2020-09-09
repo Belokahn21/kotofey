@@ -5,7 +5,7 @@ import '../reactjs/components/statistic';
 import '../reactjs/components/todo';
 
 import 'popper.js';
-import 'bootstrap';
+// import 'bootstrap';
 
 import './block/check-exist-product';
 import './block/order-load-product';

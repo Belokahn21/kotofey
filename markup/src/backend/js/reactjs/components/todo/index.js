@@ -1,19 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import ReactDom from 'react-dom';
 import List from './list';
 import {Modal, Button} from 'react-bootstrap';
+import $ from 'jquery';
 
-class Todo extends React.Component {
-    render() {
-        const [show, setShow] = useState(false);
+window.$ = $;
 
-        const handleClose = () => setShow(false);
-        const handleShow = () => setShow(true);
+function Todo() {
+    const [show, setShow] = useState(false);
 
-        return <div className="todo">
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    return (
+        <div className="todo">
             <div className="todo-header">
                 <div className="todo-header__title">Список задач</div>
-                <button className="todo-header__new-task" data-toggle="modal" data-target="#new-todo-row">Добавить</button>
+                <button className="todo-header__new-task" onClick={handleShow}>Добавить</button>
             </div>
             <List/>
             <Modal show={show} onHide={handleClose}>
@@ -32,8 +35,8 @@ class Todo extends React.Component {
                     </Modal.Footer>
                 </Modal.Dialog>
             </Modal>
-        </div>;
-    }
+        </div>
+    );
 }
 
 const todoContainer = document.querySelector('#todo-react');
