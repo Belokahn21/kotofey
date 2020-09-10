@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import ReactDom from 'react-dom';
 import List from './list';
+import TodoForm from './form';
 import {Modal, Button} from 'react-bootstrap';
 import $ from 'jquery';
 
@@ -25,12 +26,10 @@ function Todo() {
                 </Modal.Header>
 
                 <Modal.Body>
-                    <p>Новая задача</p>
+                    <TodoForm/>
                 </Modal.Body>
 
                 <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>Закрыть</Button>
-                    <Button variant="primary" onClick={handleClose}>Сохранить</Button>
                 </Modal.Footer>
             </Modal>
         </div>

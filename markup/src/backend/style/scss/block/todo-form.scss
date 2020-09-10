@@ -1,0 +1,27 @@
+.todo-form {
+  &__element {
+    max-width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__input, &__select, &__textarea {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    border: 1px silver solid;
+    padding: 3px 7px;
+  }
+
+  &__input {
+  }
+
+  &__select {
+  }
+
+  &__textarea {
+    resize: vertical;
+  }
+}

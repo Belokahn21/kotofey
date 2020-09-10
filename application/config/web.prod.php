@@ -108,7 +108,9 @@ $config = [
                 'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
                 'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
                 'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
-                'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
+                'GET user/rest-backend/get' => 'user/rest-backend/get',
+                'POST todo/rest-backend/add' => 'todo/rest-backend/add',
+                'GET todo/rest-backend/get' => 'todo/rest-backend/get',
 
                 'POST basket/rest/add' => 'basket/rest/add',
                 'POST catalog/rest/get' => 'catalog/rest/get',
