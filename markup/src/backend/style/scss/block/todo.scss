@@ -1,9 +1,11 @@
 .todo {
+  margin-top: 40px;
+
   &-header {
     display: flex;
     flex-direction: row;
     justify-content: stretch;
-    align-content: center;
+    align-items: center;
 
     &__title {
       font-size: 25px;
@@ -11,43 +13,66 @@
     }
 
     &__new-task {
+      margin-left: 10px;
       background: deepskyblue;
       color: white;
       font-weight: bold;
-      font-size: 14px;
       text-transform: uppercase;
-      padding: 1px 7px;
       border: 0;
-      margin-left: 20px;
+      padding: 10px;
     }
   }
-}
 
-.todo-list {
-  display: flex;
-  flex-direction: column;
-
-  &__item {
-    border-bottom: 1px #C6C6C6 solid;
-  }
-
-  &-header {
+  &-list {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-  }
+    flex-direction: column;
 
-  &-body {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-content: center;
-  }
+    &__row {
+      display: flex;
+      flex-direction: row;
+      border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+      padding: 10px 5px;
 
+      &:nth-child(2n) {
+        background: rgba(0, 0, 0, 0.1);
+      }
+    }
 
-  &-col-25 {
-    width: 25%;
-    flex: 1 1 auto;
+    &-col {
+      &:nth-child(1) {
+        width: 20%;
+      }
+
+      &:nth-child(2) {
+        width: 10%;
+      }
+
+      &:nth-child(3) {
+        width: 55%;
+      }
+
+      &:nth-child(4) {
+        width: 10%;
+      }
+
+      &:nth-child(5) {
+        width: 5%;
+      }
+    }
+
+    &-icons {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+
+      i {
+        &:not(:last-child) {
+          margin-right: 10px;
+        }
+      }
+    }
   }
 }

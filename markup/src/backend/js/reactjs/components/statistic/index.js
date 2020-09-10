@@ -22,11 +22,13 @@ class Statistic extends React.Component {
 
     render() {
         return (
-            <ul className="statistic">
-                {this.state.items.map((element, index) => {
-                    return <Item element={element} index={index}/>
-                })}
-            </ul>
+            <div className="statistic-wrap">
+                <ul className="statistic">
+                    {this.state.items.map((element, index) => {
+                        return <Item element={element} index={index}/>
+                    })}
+                </ul>
+            </div>
         )
     }
 }
