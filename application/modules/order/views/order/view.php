@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
 			<?php if ($items): ?>
                 <ul>
 					<?php foreach ($items as $item): ?>
-                        <li class="row d-flex flex-row align-items-center">
+                        <li class="row d-flex flex-row align-items-center m-2">
 
                             <div class="col-3">
                                 <img width="100" src="<?= ProductHelper::getImageUrl($item->product) ?>">
