@@ -143,10 +143,7 @@ class Product extends \yii\db\ActiveRecord
                 'attribute' => 'image',
                 'scenarios' => ['insert', 'update'],
                 'path' => '@webroot/upload/',
-                'url' => '@web/upload/',
-                'thumbs' => [
-                    'thumb' => ['width' => 340, 'quality' => 90],
-                ],
+                'url' => '@web/upload/'
             ],
             [
                 'class' => SocialStore::class,
