@@ -144,6 +144,9 @@ class Product extends \yii\db\ActiveRecord
                 'scenarios' => ['insert', 'update'],
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/',
+                'thumbs' => [
+                    'thumb' => ['width' => 340, 'quality' => 90],
+                ],
             ],
             [
                 'class' => SocialStore::class,
