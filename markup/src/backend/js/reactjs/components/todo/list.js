@@ -1,10 +1,13 @@
 import React from 'react';
 import config from '../../config';
+import ConvertDate from '../../../ecmascript6/block/ConvertDate';
 
 class TodoList extends React.Component {
 
     constructor(props) {
         super(props);
+
+        this.ConverDate = new ConvertDate;
 
         this.state = {
             items: []
@@ -25,7 +28,7 @@ class TodoList extends React.Component {
             {this.state.items.map((item, index) => {
                 return <li className="todo-list__row todo-list-body" key={index}>
                     <div className="todo-list-col">{item.name}</div>
-                    <div className="todo-list-col">{item.created_at}</div>
+                    <div className="todo-list-col">{this.ConverDate.format(item.created_at)}</div>
                     <div className="todo-list-col">{item.description}</div>
                     <div className="todo-list-col">{item.user_id}</div>
                     <div className="todo-list-col">

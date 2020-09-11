@@ -2,7 +2,7 @@
 
 var targetElement = $('.js-datepicker');
 
-if (targetElement.length > 0) {
+if (targetElement) {
     var myDatepicker = targetElement.datepicker({
         range: false,
         showEvent: 'click',
