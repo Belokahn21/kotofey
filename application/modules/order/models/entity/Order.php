@@ -96,13 +96,15 @@ class Order extends ActiveRecord
 
             ['email', 'email'],
             [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
+            ['email', 'string', 'string', 'max' => 255, 'tooLong' => '{attribute} не должен содержать больше 255 символов'],
 
+            ['postalcode', 'string', 'string', 'max' => 15, 'tooLong' => '{attribute} не должен содержать больше 15 символов'],
 
-            [['comment', 'notes', 'postalcode', 'email'], 'string'],
+            [['comment', 'notes'], 'string'],
             [['number_appartament', 'number_home'], 'string', 'max' => 10, 'tooLong' => '{attribute} не должен содержать больше 10 символов'],
             [['country', 'region', 'city', 'street'], 'string', 'max' => 100, 'tooLong' => '{attribute} не должен содержать больше 100 символов'],
 
-            ['promocode', 'string'],
+            ['promocode', 'string', 'string', 'max' => 255, 'tooLong' => '{attribute} не должен содержать больше 255 символов'],
 
             [['product_id'], 'safe'],
 
