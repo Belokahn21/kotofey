@@ -25,7 +25,6 @@ class AdminAsset extends AssetBundle
         'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/css/datepicker.min.css',
     ];
     public $js = [
-        'https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js',
         'js/backend-core.min.js',
     ];
     public $depends = [
