@@ -17,7 +17,7 @@ use app\modules\basket\models\entity\Basket;
     <input type="hidden" readonly name="product_id" value="<?= $product_id; ?>">
     <?php if ($showInfo): ?>
         <div class="product-calc__price-group">
-            <div class="product-calc__price-group-price"><?= $price; ?></div>
+            <div class="product-calc__price-group-price"><?= Price::format($price); ?></div>
             <div class="product-calc__price-group-char-val">шт</div>
             <div class="product-calc__price-group-char-equal">=</div>
             <div class="product-calc__price-group-summary js-product-calc-summary">
