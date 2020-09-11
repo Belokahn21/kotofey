@@ -9,10 +9,13 @@
   }
 
   &-wrap {
-    background: #C6C6C6;
+    padding: 20px 10px;
+    background: $light-grey-background;
   }
 
   &__item {
+    box-shadow: $theme-box-shadow;
+    background: white;
     border: 1px #c6c6c6 solid;
     padding: 5px;
     margin: 5px;
@@ -45,7 +48,7 @@
     flex: 1 1 0;
 
     i {
-      background: deepskyblue;
+      background: $theme-color;
       color: white;
       width: 60px;
       height: 60px;

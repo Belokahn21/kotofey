@@ -1,6 +1,11 @@
 .todo {
   margin-top: 40px;
 
+  &-wrap {
+    background: $light-grey-background;
+    padding: 10px;
+  }
+
   &-header {
     display: flex;
     flex-direction: row;
@@ -14,7 +19,7 @@
 
     &__new-task {
       margin-left: 10px;
-      background: deepskyblue;
+      background: $theme-color;
       color: white;
       font-weight: bold;
       text-transform: uppercase;
@@ -32,9 +37,11 @@
       flex-direction: row;
       border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
       padding: 10px 5px;
+      margin: 5px 0;
+      box-shadow: $theme-box-shadow;
 
       &:nth-child(2n) {
-        background: rgba(0, 0, 0, 0.1);
+        background: $light-grey-background;
       }
     }
 

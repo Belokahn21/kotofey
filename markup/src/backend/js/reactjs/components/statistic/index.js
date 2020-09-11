@@ -33,7 +33,7 @@ class Statistic extends React.Component {
     }
 }
 
-const statistic = document.querySelector('.statistic-wrap');
+const statistic = document.querySelector('.react-statistic');
 if (statistic) {
     ReactDom.render(<Statistic/>, statistic);
 }

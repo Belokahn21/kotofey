@@ -1,48 +1,49 @@
-.statistic
-	.statistic__item
-		.statistic__icon
-			i.fas.fa-cookie
-		.statistic__content
-			.statistic-info
-				.statistic-info__item
-					.statistic-info__key Последний бэкап
-					.statistic-info__value 17.08.2020
-			.statistic-action
-				a(href="?out=Y").statistic-action__item
-					i.fas.fa-sync
-				a(href="?out=Y").statistic-action__item
-					i.fas.fa-download
-	.statistic__item
-		.statistic__icon(data-toggle="modal" data-target="#order-list")
-			i.fas.fa-cookie
-		.statistic__content
-			.statistic-info
-				.statistic-info__item
-					.statistic-info__key Заказов
-					.statistic-info__value 150
-				.statistic-info__item
-					.statistic-info__key Прибыль
-					.statistic-info__value 39 569 Р
-	.statistic__item
-		.statistic__icon
-			i.fas.fa-cookie
-		.statistic__content
-			.statistic-info
-				.statistic-info__item
-					.statistic-info__key Товаров
-					.statistic-info__value 2500
-				.statistic-info__item
-					.statistic-info__key Прибыль
-					.statistic-info__value 3 569 Р
-	.statistic__item
-		.statistic__icon(data-toggle="modal" data-target="#search-list")
-			i.fas.fa-search
-		.statistic__content
-			.last-search
-				.last-search__item Royal Canin Gastro
-				.last-search__item Милпразон
-				.last-search__item Когтецид
-				.last-search__item pipi бент
+.statistic-wrap
+	.statistic
+		.statistic__item
+			.statistic__icon
+				i.fas.fa-cookie
+			.statistic__content
+				.statistic-info
+					.statistic-info__item
+						.statistic-info__key Последний бэкап
+						.statistic-info__value 17.08.2020
+				.statistic-action
+					a(href="?out=Y").statistic-action__item
+						i.fas.fa-sync
+					a(href="?out=Y").statistic-action__item
+						i.fas.fa-download
+		.statistic__item
+			.statistic__icon(data-toggle="modal" data-target="#order-list")
+				i.fas.fa-cookie
+			.statistic__content
+				.statistic-info
+					.statistic-info__item
+						.statistic-info__key Заказов
+						.statistic-info__value 150
+					.statistic-info__item
+						.statistic-info__key Прибыль
+						.statistic-info__value 39 569 Р
+		.statistic__item
+			.statistic__icon
+				i.fas.fa-cookie
+			.statistic__content
+				.statistic-info
+					.statistic-info__item
+						.statistic-info__key Товаров
+						.statistic-info__value 2500
+					.statistic-info__item
+						.statistic-info__key Прибыль
+						.statistic-info__value 3 569 Р
+		.statistic__item
+			.statistic__icon(data-toggle="modal" data-target="#search-list")
+				i.fas.fa-search
+			.statistic__content
+				.last-search
+					.last-search__item Royal Canin Gastro
+					.last-search__item Милпразон
+					.last-search__item Когтецид
+					.last-search__item pipi бент
 
 #search-list.modal.fade(tabindex='-1', role='dialog', aria-labelledby='search-listLabel', aria-hidden='true')
 	.modal-dialog.modal-lg(role='document')

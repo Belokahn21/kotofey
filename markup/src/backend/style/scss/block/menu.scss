@@ -20,7 +20,7 @@
 
     font-weight: bold;
     text-transform: uppercase;
-    color: $link-color;
+    color: $theme-color;
     text-decoration: none;
 
     &:hover {
@@ -59,7 +59,7 @@
 
       font-weight: bold;
       text-transform: uppercase;
-      color: $link-color;
+      color: $theme-color;
       text-decoration: none;
 
       &:hover {
