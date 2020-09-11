@@ -29,14 +29,13 @@ $this->title = Title::showTitle($product->name);
         <div class="product-detail-gallery">
             <a class="product-detail-gallery__link" href="<?= ProductHelper::getImageUrl($product); ?>"
                data-lightbox="roadtrip">
-                <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product); ?>"
-                     title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
+                <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
             </a>
             <div class="product-detail-gallery__group">
                 <?php if ($product->images): ?>
                     <?php foreach (Json::decode($product->images) as $image): ?>
                         <a class="product-detail-gallery__link active" href="<?= $image; ?>" data-lightbox="roadtrip">
-                            <img class="product-detail-gallery__image" src="<?= $image; ?>">
+                            <img class="product-detail-gallery__image" src="<?= $image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                         </a>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -59,6 +58,10 @@ $this->title = Title::showTitle($product->name);
         ]); ?>
         <?php if ($properties): ?>
             <ul class="product-properties">
+                <li class="product-properties__line">
+                    <div class="product-properties__key">Артикул</div>
+                    <div class="product-properties__value"><?= $product->article; ?></div>
+                </li>
                 <?php foreach ($properties as $property): ?>
                     <li class="product-properties__line">
                         <div class="product-properties__key"><?= $property->property->name; ?></div>

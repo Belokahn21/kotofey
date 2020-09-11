@@ -21,7 +21,7 @@ use app\modules\basket\models\entity\Basket;
             <div class="product-calc__price-group-char-val">шт</div>
             <div class="product-calc__price-group-char-equal">=</div>
             <div class="product-calc__price-group-summary js-product-calc-summary">
-                <div class="count"><?= Price::format($price * $basket->count); ?></div>
+                <div class="count"><?= Price::format($price * ($basket->count ? $basket->count : 1)); ?></div>
             </div>
             <div class="product-calc__price-group-currency">₽</div>
         </div>
@@ -31,7 +31,7 @@ use app\modules\basket\models\entity\Basket;
         <?php if ($showControl): ?>
             <div class="div">
                 <button class="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                <input name="count" type="text" class="product-calc__count js-product-calc-amount" value="<?= ($basket->count ?: 1) ?>" placeholder="1">
+                <input name="count" type="text" class="product-calc__count js-product-calc-amount" value="<?= ($basket->count ? $basket->count : 1) ?>" placeholder="1">
                 <button class="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
             </div>
         <?php else: ?>
