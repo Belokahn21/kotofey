@@ -1,8 +1,8 @@
 class ConvertDate {
 
     format(unix) {
-        var date = new Date(unix);
-        return date.getDate() + ":" + (date.getMonth() + 1) + ":" + date.getFullYear();
+        var date = new Date(unix * 1000);
+        return date.toLocaleDateString();
     }
 }
 

@@ -24,10 +24,10 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
                     </div>
                     <div class="vitrine__properties">
                         <ul class="light-properties">
-                            <li class="light-properties__item">
-                                <div class="light-properties__label">Размер</div>
-                                <div class="light-properties__value">250*120*65мм</div>
-                            </li>
+<!--                            <li class="light-properties__item">-->
+<!--                                <div class="light-properties__label">Размер</div>-->
+<!--                                <div class="light-properties__value">250*120*65мм</div>-->
+<!--                            </li>-->
                             <li class="light-properties__item">
                                 <div class="light-properties__label">Артикул</div>
                                 <div class="light-properties__value"><?= $model->article;?></div>

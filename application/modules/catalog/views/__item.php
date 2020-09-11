@@ -24,14 +24,9 @@ $isDiscount = $product->discount_price > 0;
                 <i class="far fa-heart"></i>
             </div>
 		<?php endif; ?>
-
-		<?php /*
-        <div class="catalog-compaare js-toggle-class js-add-compare" data-class-target="fas fa-balance-scale-right">
-            <i class="fas fa-balance-scale"></i>
-        </div>*/ ?>
     </div>
 	<?php if ($isDiscount): ?>
-        <div class="catalog__discount"><span>-15%</span></div>
+        <div class="catalog__discount"><span>-<?= ProductHelper::getPercent($product); ?>%</span></div>
 	<?php endif; ?>
     <img class="catalog__image" src="<?= ProductHelper::getImageUrl($product); ?>">
     <div class="catalog__title">

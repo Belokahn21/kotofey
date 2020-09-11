@@ -1,14 +1,10 @@
 // he include from app with script tag before include backend.min.js
 document.addEventListener('load', () => {
-    var targetElement = $('.js-datepicker');
-    if (targetElement) {
-
-        var myDatepicker = targetElement.datepicker({
-            range: false,
-            showEvent: 'click',
-            onSelect: function onSelect(formattedDate, date, inst) {
-                inst.hide();
-            }
-        });
-    }
+    var myDatepicker = $('.js-datepicker').datepicker({
+        range: false,
+        showEvent: 'click',
+        onSelect: function onSelect(formattedDate, date, inst) {
+            inst.hide();
+        }
+    });
 });

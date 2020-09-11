@@ -35,7 +35,7 @@
     &__row {
       display: flex;
       flex-direction: row;
-      border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
+      border: 1px rgba(0, 0, 0, 0.1) solid;
       padding: 10px 5px;
       margin: 5px 0;
       box-shadow: $theme-box-shadow;
