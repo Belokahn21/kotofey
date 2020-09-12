@@ -21,7 +21,7 @@ class ManyPurchasedGoods extends Widget
             if (!$products_in_orders) {
                 return false;
             }
-            return Product::find()->where(['active' => true])->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])->all();
+            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])->all();
         });
 
         if (!$models) {

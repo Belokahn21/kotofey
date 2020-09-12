@@ -4,15 +4,9 @@ namespace app\modules\catalog\models\entity;
 
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
-use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\entity\ProductOrder;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\models\tool\Debug;
 use mohorev\file\UploadBehavior;
-use yii\base\ErrorException;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
-use yii\data\ActiveDataProvider;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
@@ -22,7 +16,6 @@ use yii\web\UploadedFile;
  *
  * @property integer $id
  * @property integer $article
- * @property integer $active
  * @property string $name
  * @property string $description
  * @property string $feed
@@ -62,12 +55,15 @@ class Product extends \yii\db\ActiveRecord
     const SCENARIO_UPDATE_PRODUCT = 'update';
     const SCENARIO_CREATE_EXT_PRODUCT = 'external';
 
+    const STATUS_DRAFT = 0;
+    const STATUS_ACTIVE = 1;
+
     public function scenarios()
     {
         return [
-            self::SCENARIO_NEW_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-            self::SCENARIO_UPDATE_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
-            self::SCENARIO_CREATE_EXT_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'active', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_NEW_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_UPDATE_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_CREATE_EXT_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
         ];
     }
 
@@ -76,14 +72,13 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'active', 'base_price', 'vendor_id', 'discount_price', 'status_id'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'base_price', 'vendor_id', 'discount_price', 'status_id'], 'integer'],
 
             [['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
 
             ['description', 'string', 'min' => 10],
 
             [['vitrine'], 'default', 'value' => 0],
-            [['active'], 'default', 'value' => 1],
 
             [['has_store', 'is_product_order'], 'boolean'],
 
@@ -98,7 +93,6 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'active' => 'Активность',
             'article' => 'Артикул',
             'name' => 'Название',
             'description' => 'Описание',
@@ -405,5 +399,13 @@ class Product extends \yii\db\ActiveRecord
     public static function findOneByCode($code)
     {
         return static::findOne(['code' => $code]);
+    }
+
+    public function getStatusList()
+    {
+        return [
+            self::STATUS_DRAFT => "Черновик",
+            self::STATUS_ACTIVE => "Активен",
+        ];
     }
 }

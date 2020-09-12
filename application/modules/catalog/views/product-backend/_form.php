@@ -11,9 +11,10 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\settings\models\helpers\MarkupHelpers;
 use app\modules\catalog\models\helpers\ProductHelper;
 
-/* @var $model \app\modules\catalog\models\entity\Product */
-/* @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder */
-/* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
+/* @var $model \app\modules\catalog\models\entity\Product
+ * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
+ * @var $properties \app\modules\catalog\models\entity\ProductProperties[]
+ */
 
 ?>
 <?php //= FillFromVendorWidget::widget(); ?>
@@ -30,6 +31,9 @@ use app\modules\catalog\models\helpers\ProductHelper;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="row">
             <div class="col-sm-6">
+                <div class="form-element">
+                    <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара'])->label(false); ?>
+                </div>
                 <div class="form-element">
                     <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
                 </div>
@@ -153,9 +157,6 @@ use app\modules\catalog\models\helpers\ProductHelper;
         </div>
         <div class="form-element">
             <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
-        </div>
-        <div class="form-element">
-            <?= $form->field($model, 'active')->radioList(["Не активен", "Активен"]); ?>
         </div>
         <div class="form-element">
             <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>

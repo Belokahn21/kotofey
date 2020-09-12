@@ -43,9 +43,9 @@ class CatalogController extends Controller
                 $query->where(['category_id' => ArrayHelper::getColumn($sb, 'id')]);
             }
 
-            $query->andWhere(['active' => 1]);
+            $query->andWhere(['status_id' => Product::STATUS_ACTIVE]);
         } else {
-            $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['active' => 1]);
+            $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['status_id' => Product::STATUS_ACTIVE]);
         }
 
         $filterModel->applyFilter($query, Yii::$app->request->get());
