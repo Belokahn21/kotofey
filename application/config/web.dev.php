@@ -259,6 +259,9 @@ $config = [
         'menu_fast' => [
             'class' => 'app\modules\menu_fast\Module',
         ],
+        'pets' => [
+            'class' => 'app\modules\pets\Module',
+        ],
     ],
     'params' => $params,
 ];

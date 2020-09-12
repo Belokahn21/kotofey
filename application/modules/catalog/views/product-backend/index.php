@@ -57,14 +57,14 @@ $this->title = Title::showTitle('Товары');
 //            'filter' => ArrayHelper::map(InformersValues::find()->where(['informer_id' => 10])->all(), 'id', 'name'),
 //        ],
 		[
-			'attribute' => 'active',
-			'filter' => ['Не активен', 'Активен'],
+			'attribute' => 'status_id',
+			'filter' => ['Черновик', 'Активен'],
 			'format' => 'raw',
 			'value' => function ($model) {
-				if ($model->active == 1) {
+				if ($model->status_id == 1) {
 					return Html::tag('div', 'Активен', ['style' => 'color: green;']);
 				} else {
-					return Html::tag('div', 'Неактивен', ['style' => 'color: red;']);
+					return Html::tag('div', 'Черновик', ['style' => 'color: grey;']);
 				}
 			}
 		],

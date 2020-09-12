@@ -47,6 +47,9 @@ $this->title = Title::showTitle('Личный кабинет');
                 <a class="profile-sections__item" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-heart"></i>
                     <div class="profile-sections__title">Избранное</div>
                 </a>
+                <a class="profile-sections__item" id="pet-tab" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-selected="false"><i class="fas fa-paw"></i>
+                    <div class="profile-sections__title">Питомец</div>
+                </a>
             </div>
         </div>
         <div class="page__right profile-content">
@@ -121,6 +124,9 @@ $this->title = Title::showTitle('Личный кабинет');
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
+                </div>
+                <div class="tab-pane fade" id="pet">
+                    <h2>Карточка питомца</h2>
                 </div>
             </div>
         </div>
