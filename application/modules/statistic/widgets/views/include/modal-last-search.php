@@ -14,7 +14,7 @@ use yii\helpers\Html;
                 </button>
             </div>
             <div class="modal-body">
-				<?php if ($searches): ?>
+                <?php if ($searches): ?>
                     <div class="search-history">
                         <div class="search-history__item header-item">
                             <div class="search-history__ip">IP</div>
@@ -22,16 +22,16 @@ use yii\helpers\Html;
                             <div class="search-history__count">Найдено</div>
                             <div class="search-history__date">Дата</div>
                         </div>
-						<?php foreach ($searches as $search): ?>
+                        <?php foreach ($searches as $search): ?>
                             <div class="search-history__item">
                                 <div class="search-history__ip"><?= $search->ip; ?></div>
-                                <div class="search-history__phrase"><?= Html::a($search->text, '#') ?></div>
+                                <div class="search-history__phrase"><?= Html::a($search->text, '/search/?Search[search]=' . $search->text, ['target' => '_blank']) ?></div>
                                 <div class="search-history__count"><?= $search->count_find; ?></div>
                                 <div class="search-history__date"><?= date('d.m.Y', $search->created_at) ?></div>
                             </div>
-						<?php endforeach; ?>
+                        <?php endforeach; ?>
                     </div>
-				<?php endif; ?>
+                <?php endif; ?>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
