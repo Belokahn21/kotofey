@@ -8,12 +8,12 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use app\assets\AppAsset;
 use app\widgets\notification\Alert;
-use app\widgets\admin_panel\AdminPanel;
 use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
 use app\modules\stock\widgets\store\StoreWidget;
 use app\modules\search\widges\search\SearchWidget;
+use app\modules\site\widgets\AdminPanel\AdminPanel;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
 

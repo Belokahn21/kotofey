@@ -2,6 +2,7 @@
 
 /* @var $count_orders integer */
 
+use app\modules\catalog\widgets\AdminEdit\AdminEditWidget;
 use app\modules\catalog\models\entity\Product;
 use app\modules\user\models\entity\User;
 use yii\helpers\Url;
@@ -17,6 +18,7 @@ use yii\helpers\Url;
         <li class="admin-panel-list__item"><a href="#"><span>TS: <span class="admin-panel-list__item-ts"><?= time(); ?></span></span></a></li>
         <li class="admin-panel-list__item"><a href="#">Сегодня: <?= date('d.m.Y'); ?></a></li>
         <li class="admin-panel-list__item"><a href="<?= Url::to(['cache']) ?>">Сбросить кеш</a></li>
+        <?= AdminEditWidget::widget(); ?>
     </ul>
     <div class="clearfix"></div>
 </div>

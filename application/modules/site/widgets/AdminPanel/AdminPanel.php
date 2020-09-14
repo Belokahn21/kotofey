@@ -1,6 +1,6 @@
 <?php
 
-namespace app\widgets\admin_panel;
+namespace app\modules\site\widgets\AdminPanel;
 
 use app\modules\order\models\entity\Order;
 use app\modules\user\models\entity\User;

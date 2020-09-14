@@ -1,0 +1,1 @@
+<li class="admin-panel-list__item link"><a href="#">Редактировать</a></li>

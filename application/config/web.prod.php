@@ -159,6 +159,9 @@ $config = [
 		],
     ],
     'modules' => [
+        'site' => [
+            'class' => 'app\modules\site\Module',
+        ],
         'instagram' => [
             'class' => 'app\modules\instagram\Module',
         ],
