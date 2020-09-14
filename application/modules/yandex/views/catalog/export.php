@@ -1,9 +1,11 @@
 <?php
 
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\entity\Product;
 
-/* @var $offers \app\modules\catalog\models\entity\Product[] */
-/* @var $categories \app\modules\catalog\models\entity\Category[] */
+/* @var $offers \app\modules\catalog\models\entity\Product[]
+ * @var $categories \app\modules\catalog\models\entity\Category[]
+ */
 ?>
 <?xml version="1.0" encoding="UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
@@ -31,7 +33,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
         <cpa>1</cpa>
         <offers>
             <?php foreach ($offers as $offer): ?>
-                <offer id="<?= $offer->id ?>" available="<?= ($offer->active == 1 ? 'true' : 'false'); ?>">
+                <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
                     <url>https://kotofey.store<?= $offer->detail; ?></url>
                     <price><?= ProductHelper::getResultPrice($offer); ?></price>
                     <currencyId>RUB</currencyId>
