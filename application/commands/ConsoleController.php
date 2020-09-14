@@ -10,13 +10,14 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $products = Product::find()->where(['name' => 'Мurkel'])->all();
+        $products = Product::find()->where(['like', 'name', 'Мurkel'])->all();
         /* @var $product Product */
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->name = 'Murkel';
 
             if ($product->validate()) {
+                echo $product->name;
                 $product->update();
             } else {
                 Debug::p($product->name);
