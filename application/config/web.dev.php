@@ -63,7 +63,7 @@ $config = [
             'class' => 'yii\rbac\DbManager',
         ],
         'errorHandler' => [
-            'errorAction' => 'site/error',
+            'errorAction' => 'site/site/error',
         ],
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
@@ -118,15 +118,18 @@ $config = [
                 'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
                 'GET promocode/rest/get' => 'promocode/rest/get',
 
-                '<controller:(admin|ajax)>/' => '<controller>/index',
-                '<controller:(admin|ajax)>' => '<controller>/<action>',
-                '<controller:ajax>/<action>/<product_id:\d+>' => '<controller>/<action>',
-                '<controller:ajax>/<action>/<product_id:\d+>/<count:\d+>' => '<controller>/<action>',
-                '<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
-                '<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
+                '/' => 'site/site/index',
+                '/delivery' => 'site/site/delivery',
+                '/contacts' => 'site/site/contacts',
+                '/about' => 'site/site/about',
+
+                'market' => 'yandex/catalog/export',
+                'checkout' => 'order/order/create',
+                'clear' => 'basket/basket/clear',
+                'gii' => 'gii',
 
                 'search' => 'search/search/index',
-                'cache' => 'site/cache',
+                'cache' => 'site/site/cache',
                 'news' => 'news/news/index',
                 'profile' => 'user/profile/index',
                 'profile/order/<id:[\d]+>' => 'order/order/view',
@@ -142,20 +145,6 @@ $config = [
                 '<module>/<controller>/<action>/<id[A-Za-z-\/\d_]+>' => '<module>/<controller>/<action>',
                 '<module>/<controller>/' => '<module>/<controller>/index',
                 '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
-
-                'bot/vk/index' => 'bot/vk/index',
-                'market' => 'yandex/catalog/export',
-                'checkout' => 'order/order/create',
-                'clear' => 'basket/basket/clear',
-                'gii' => 'gii',
-                'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
-                '<action>' => 'site/<action>',
-                '<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
-//                [
-//                    'class' => 'yii\rest\UrlRule',
-//                    'controller' => 'rest/product'
-//                ]
-
             ]
         ],
     ],

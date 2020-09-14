@@ -108,6 +108,7 @@ $config = [
                 'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
                 'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
                 'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
+                'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
                 'GET user/rest-backend/get' => 'user/rest-backend/get',
                 'POST todo/rest-backend/add' => 'todo/rest-backend/add',
                 'GET todo/rest-backend/get' => 'todo/rest-backend/get',
@@ -117,15 +118,18 @@ $config = [
                 'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
                 'GET promocode/rest/get' => 'promocode/rest/get',
 
-                '<controller:(admin|ajax)>/' => '<controller>/index',
-                '<controller:(admin|ajax)>' => '<controller>/<action>',
-                '<controller:ajax>/<action>/<product_id:\d+>' => '<controller>/<action>',
-                '<controller:ajax>/<action>/<product_id:\d+>/<count:\d+>' => '<controller>/<action>',
-                '<controller:(admin|ajax)>/<action>' => '<controller>/<action>',
-                '<controller:(admin|ajax)>/<action>/<id[0-9a-zA-Z-]+>' => '<controller>/<action>',
+                '/' => 'site/site/index',
+                '/delivery' => 'site/site/delivery',
+                '/contacts' => 'site/site/contacts',
+                '/about' => 'site/site/about',
+
+                'market' => 'yandex/catalog/export',
+                'checkout' => 'order/order/create',
+                'clear' => 'basket/basket/clear',
+                'gii' => 'gii',
 
                 'search' => 'search/search/index',
-                'cache' => 'site/cache',
+                'cache' => 'site/site/cache',
                 'news' => 'news/news/index',
                 'profile' => 'user/profile/index',
                 'profile/order/<id:[\d]+>' => 'order/order/view',
@@ -141,22 +145,8 @@ $config = [
                 '<module>/<controller>/<action>/<id[A-Za-z-\/\d_]+>' => '<module>/<controller>/<action>',
                 '<module>/<controller>/' => '<module>/<controller>/index',
                 '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
-
-                'bot/vk/index' => 'bot/vk/index',
-                'market' => 'yandex/catalog/export',
-                'checkout' => 'order/order/create',
-                'clear' => 'basket/basket/clear',
-                'gii' => 'gii',
-                'support/<category[a-z-\/\d]+>/<id[a-z-\/\d]+>' => 'site/support',
-                '<action>' => 'site/<action>',
-                '<action>/<id[A-Za-z-\/\d_]+>' => 'site/<action>',
-//                [
-//                    'class' => 'yii\rest\UrlRule',
-//                    'controller' => 'rest/product'
-//                ]
-
             ]
-		],
+        ],
     ],
     'modules' => [
         'site' => [

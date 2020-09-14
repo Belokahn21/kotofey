@@ -198,142 +198,14 @@ class SiteController extends Controller
         return parent::beforeAction($action);
     }
 
-    public function actionIndex()
-    {
-        Attributes::metaDescription("Зоотовары онлайн с доставкой по Барнаулу и по всей России. Всегда свежие товары и по низкой цене!");
-        Attributes::metaKeywords([
-            "интернет магазин зоотоваров",
-            "магазин зоотоваров барнаул",
-            "интернет магазин зоотоваров барнаул",
-            "сибагро барнаул зоотовары прайс",
-        ]);
-
-        return $this->render('index');
-    }
-
-    public function actionDelivery()
-    {
-        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-        Attributes::metaDescription("Условия доставки заказов на нашем сайте");
-        Attributes::metaKeywords([
-            "зоотовары каталог",
-            "каталог магазина зоотоваров",
-            "валта зоотовары каталог",
-            "магазин зоотоваров",
-            "интернет магазин зоотоваров",
-            "купить зоотовары в интернет магазине",
-            "магазин зоотоваров барнаул",
-            "зоотовары интернет магазин барнаул",
-            "альф барнаул зоотовары",
-        ]);
-
-        return $this->render('delivery');
-    }
 
 
-    public function actionError()
-    {
-        $exception = Yii::$app->errorHandler->exception;
-        if ($exception !== null) {
-            return $this->render('error', ['exception' => $exception]);
-        }
-    }
 
-    public function actionTest()
-    {
-        $string = Yii::$app->request->post('string');
-        $stringHash = '';
-        if (!is_null($string)) {
-            $stringHash = rand();
-        }
-        return $this->render('test', [
-            'stringHash' => $stringHash,
-        ]);
-    }
-
-    public function actionFaq()
-    {
-        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-        Attributes::metaDescription("Система быстрой помощи по сайту, в которой можно найти ответы на вопросы, которые возникил в ходе посещения вами нашего сайта. Если вы не найдете ответ на вопрос, то оставьте заявку и мы вам перезвоним");
-        Attributes::metaKeywords([
-            "зоотовары каталог",
-            "каталог магазина зоотоваров",
-            "валта зоотовары каталог",
-            "магазин зоотоваров",
-            "интернет магазин зоотоваров",
-            "купить зоотовары в интернет магазине",
-            "магазин зоотоваров барнаул",
-            "зоотовары интернет магазин барнаул",
-            "альф барнаул зоотовары",
-        ]);
-        return $this->render('faq');
-    }
-
-    public function actionAbout()
-    {
-        Attributes::metaDescription("Небольшой рассказ о нашей компании, наших целях и планах на будущее");
-        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-        return $this->render('about');
-    }
-
-
-    public function actionContacts()
-    {
-        Attributes::metaDescription("Контакты нашего интернет магазина");
-        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
-        return $this->render('contacts');
-    }
 
     public function actionReferal()
     {
         return $this->render('referal');
     }
 
-    public function actionRestore($id = null)
-    {
-        if ($id) {
-            $userResetPasswordModel = UserResetPassword::findOne(['key' => $id]);
-            $userResetPasswordForm = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_UPDATE_PASSWORD]);
 
-            if ($userResetPasswordModel && $userResetPasswordModel->isAlive()) {
-                if (\Yii::$app->request->isPost) {
-                    if ($userResetPasswordForm->load(\Yii::$app->request->post())) {
-                        if ($userResetPasswordForm->validate()) {
-                            if ($userResetPasswordForm->updatePassword($userResetPasswordModel->user_id)) {
-                                Alert::setSuccessNotify('Вы успешно сменили пароль и вошли в систему.');
-                                return $this->redirect('/');
-                            }
-                        }
-                    }
-                }
-
-                return $this->render('restore-form', [
-                    'model' => $userResetPasswordForm
-                ]);
-            }
-        }
-
-        $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
-        if (\Yii::$app->request->isPost) {
-            if ($model->load(\Yii::$app->request->post())) {
-                if ($model->validate()) {
-                    if ($model->submit()) {
-                        Alert::setSuccessNotify("На ваш Email {$model->email} отправлены указания для восстановления.");
-                        return $this->redirect('/');
-                    }
-                }
-            }
-        }
-
-        return $this->render('restore', [
-            'model' => $model
-        ]);
-    }
-
-    public function actionCache()
-    {
-        Yii::$app->cache->flush();
-        Alert::setSuccessNotify('Кэш сброшен');
-        return $this->redirect(['/']);
-    }
 }
