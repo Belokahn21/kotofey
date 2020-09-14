@@ -12,7 +12,7 @@ class CatalogController extends Controller
 	public function actionExport()
 	{
 		$categories = Category::find()->all();
-		$offers = Product::find()->where(['active' => 1])->all();
+		$offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
 
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
 		\Yii::$app->response->headers->add('Content-Type', 'text/xml');
