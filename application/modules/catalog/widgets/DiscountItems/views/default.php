@@ -5,14 +5,16 @@ use app\models\tool\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 
-/* @var $models \app\modules\catalog\models\entity\Product[] */
+/* @var $models \app\modules\catalog\models\entity\Product[]
+ * @var $informersValues \app\modules\catalog\models\entity\InformersValues[]
+ */
 ?>
 
 <?php if ($models): ?>
     <div class="page-title__group is-column">
         <h2 class="page-title">Выгодные предложения</h2>
         <?php foreach ($informersValues as $item): ?>
-<!--            <a class="page-title__link" href="javascript:void(0);">--><?//= $item->name; ?><!--</a>-->
+            <a class="page-title__link" href="/catalog/?CatalogFilter[informer][<?= $item->informer_id; ?>][]=<?= $item->id; ?>"><?= $item->name; ?></a>
         <?php endforeach; ?>
         <a class="page-title__link" href="javascript:void(0);">Все предложения</a>
     </div>

@@ -99,7 +99,7 @@ if ($category) {
                     ]); ?>
                 </div>
             <?php else: ?>
-                <img src="/upload/images/not-found.png">
+                <img style="width: 100%;" src="/upload/images/not-found.png">
             <?php endif; ?>
         </div>
     </div>
