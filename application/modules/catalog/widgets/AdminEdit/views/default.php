@@ -5,6 +5,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Category;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
+use yii\helpers\Html;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $categories \app\modules\catalog\models\entity\Product
@@ -100,7 +101,7 @@ use yii\helpers\Url;
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <button type="button" class="btn btn-primary">Сохранить</button>
+                <?= Html::submitButton('Сохрарить', ['class' => 'btn btn-primary']); ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>

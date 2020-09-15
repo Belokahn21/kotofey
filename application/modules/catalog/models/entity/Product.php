@@ -221,35 +221,39 @@ class Product extends \yii\db\ActiveRecord
                     if (!$this->update()) {
                         return false;
                     }
-                    ProductPropertiesValues::deleteAll(['product_id' => $this->id]);
 
-                    foreach ($this->properties as $propertyId => $value) {
-                        if (empty($value)) {
-                            continue;
-                        }
+                    if ($this->properties) {
 
-                        //save multiple property
-                        if (is_array($value) && count($value) > 0) {
-                            foreach ($value as $select_variant) {
+                        ProductPropertiesValues::deleteAll(['product_id' => $this->id]);
+
+                        foreach ($this->properties as $propertyId => $value) {
+                            if (empty($value)) {
+                                continue;
+                            }
+
+                            //save multiple property
+                            if (is_array($value) && count($value) > 0) {
+                                foreach ($value as $select_variant) {
+                                    $propertyValues = new ProductPropertiesValues();
+                                    $propertyValues->product_id = $this->id;
+                                    $propertyValues->property_id = $propertyId;
+                                    $propertyValues->value = $select_variant;
+                                    if ($propertyValues->save() === false) {
+                                        $transaction->rollBack();
+                                        return false;
+                                    }
+                                }
+                            } else {
+
+
                                 $propertyValues = new ProductPropertiesValues();
                                 $propertyValues->product_id = $this->id;
                                 $propertyValues->property_id = $propertyId;
-                                $propertyValues->value = $select_variant;
+                                $propertyValues->value = $value;
                                 if ($propertyValues->save() === false) {
                                     $transaction->rollBack();
                                     return false;
                                 }
-                            }
-                        } else {
-
-
-                            $propertyValues = new ProductPropertiesValues();
-                            $propertyValues->product_id = $this->id;
-                            $propertyValues->property_id = $propertyId;
-                            $propertyValues->value = $value;
-                            if ($propertyValues->save() === false) {
-                                $transaction->rollBack();
-                                return false;
                             }
                         }
                     }
