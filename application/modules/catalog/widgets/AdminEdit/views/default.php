@@ -38,10 +38,16 @@ use yii\helpers\Url;
 
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
-                                <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList()); ?>
                                 <?= $form->field($model, 'name'); ?>
                                 <?= $form->field($model, 'description'); ?>
-                                <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name')); ?>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList()); ?>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name')); ?>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <?= $form->field($model, 'discount_price'); ?>
