@@ -107,8 +107,9 @@ use yii\helpers\Html;
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-                <?= Html::submitButton('Сохрарить', ['class' => 'btn btn-primary']); ?>
+                <?= Html::a('Открыть в панели администратора', Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->id])); ?>
+                <?= Html::button('Закрыть', ['class' => 'btn btn-secondary', 'data-dismiss' => 'modal']); ?>
+                <?= Html::submitButton('Сохранить', ['class' => 'btn btn-primary']); ?>
             </div>
         </div>
         <?php ActiveForm::end() ?>
