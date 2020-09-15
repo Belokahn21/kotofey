@@ -3,6 +3,7 @@
 namespace app\modules\catalog\widgets\DiscountItems;
 
 
+use app\models\tool\Debug;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
@@ -31,10 +32,15 @@ class DiscountItemsWidget extends Widget
                 $tmpId = $value->id;
 
                 $formatArray['brands'][$tmpId][] = $value;
+//                $formatArray['brands'][$tmpId][] = rand();
             } else {
                 $formatArray['actions'][$tmpId] = $value;
+//                $formatArray['actions'][$tmpId][] = rand();
             }
         }
+
+//        Debug::p($formatArray);
+//        exit();
 
         return $this->render($this->view, [
             'models' => $models,

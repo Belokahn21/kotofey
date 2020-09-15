@@ -15,9 +15,13 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
     <div class="page-title__group is-column">
         <h2 class="page-title">Выгодные предложения</h2>
         <?php if (array_key_exists('brands', $formatArray) && array_key_exists('actions', $formatArray)): ?>
-            <?php foreach ($formatArray['brands'] as $id => $brands): ?>
+            <?php foreach ($formatArray['brands'] as $key => $brands): ?>
                 <?php foreach ($brands as $brand): ?>
-                    <a class="page-title__link" href="/catalog/?CatalogFilter[informer][<?= $formatArray['actions']->informer_id; ?>][]=<?= $formatArray['actions']->id; ?>"><?= $brand->name; ?></a>
+                    <?php if (array_key_exists($key, $formatArray['actions'])): ?>
+                        <a class="page-title__link" href="/catalog/?CatalogFilter[informer][<?= $formatArray['actions'][$key]->informer_id; ?>][]=<?= $formatArray['actions'][$key]->id; ?>"><?= $brand->name; ?></a>
+                    <?php else: ?>
+                        <a class="page-title__link" href="#"><?= $brand->name; ?></a>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endif; ?>
