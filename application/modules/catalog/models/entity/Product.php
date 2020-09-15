@@ -401,6 +401,11 @@ class Product extends \yii\db\ActiveRecord
         return static::findOne(['code' => $code]);
     }
 
+    public static function findOneBySlug($slug)
+    {
+        return static::findOne(['slug' => $slug]);
+    }
+
     public function getStatusList()
     {
         return [

@@ -1,7 +1,23 @@
+<?php
+
+use yii\widgets\ActiveForm;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\entity\Category;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
+
+/* @var $model \app\modules\catalog\models\entity\Product
+ * @var $categories \app\modules\catalog\models\entity\Product
+ */
+?>
 <li class="admin-panel-list__item link"><a data-toggle="modal" data-target="#adminEditProductModal" href="#">Редактировать</a></li>
 
 <div class="modal fade" id="adminEditProductModal" tabindex="-1" role="dialog" aria-labelledby="adminEditProductModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
+        <?php $form = ActiveForm::begin([
+            'method' => 'POST',
+            'action' => Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->id])
+        ]); ?>
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="adminEditProductModalLabel">Редактировать товар</h5>
@@ -22,7 +38,24 @@
 
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <!--                                --><? //= $form->field($model, 'status_id')->dropDownList(ProductHelper::getS); ?>
+                                <?= $form->field($model, 'name'); ?>
+                                <?= $form->field($model, 'description'); ?>
+                                <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name')); ?>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <?= $form->field($model, 'discount_price'); ?>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <?= $form->field($model, 'count'); ?></div>
+                                    <div class="col-sm-3">
+                                        <?= $form->field($model, 'purchase'); ?></div>
+                                    <div class="col-sm-3">
+                                        <?= $form->field($model, 'price'); ?>
+
+                                    </div>
+                                </div>
+                                <?= $form->field($model, 'code'); ?>
                             </div>
                         </div>
                     </div>
@@ -36,7 +69,10 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body">
-                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                                <?php if ($model->image): ?>
+                                    <img width="150" alt="<?= $model->name; ?>" title="<?= $model->name; ?>" src="<?= ProductHelper::getImageUrl($model) ?>">
+                                <?php endif; ?>
+                                <?= $form->field($model, 'image')->fileInput(); ?>
                             </div>
                         </div>
                     </div>
@@ -61,5 +97,6 @@
                 <button type="button" class="btn btn-primary">Сохранить</button>
             </div>
         </div>
+        <?php ActiveForm::end() ?>
     </div>
 </div>
