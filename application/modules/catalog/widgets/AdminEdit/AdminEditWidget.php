@@ -6,7 +6,9 @@ namespace app\modules\catalog\widgets\AdminEdit;
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
+use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\entity\User;
+use app\modules\vendors\models\entity\Vendor;
 use yii\bootstrap\Widget;
 
 class AdminEditWidget extends Widget
@@ -29,9 +31,13 @@ class AdminEditWidget extends Widget
             return false;
         }
 
+        $vendors = Vendor::find()->all();
+        $stocks = Stocks::find()->all();
 
         return $this->render($this->view, [
             'model' => $model,
+            'vendors' => $vendors,
+            'stocks' => $stocks,
         ]);
     }
 

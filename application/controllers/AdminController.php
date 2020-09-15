@@ -78,8 +78,9 @@ class AdminController extends Controller
                 exit;
             }
 
+            Alert::setSuccessNotify('Бэкап успешно создан');
 
-            return $this->redirect(['admin/index']);
+            return $this->redirect(['/admin/']);
         }
 
         return $this->render('index', [

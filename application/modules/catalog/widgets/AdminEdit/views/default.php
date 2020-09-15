@@ -8,7 +8,9 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 
 /* @var $model \app\modules\catalog\models\entity\Product
- * @var $categories \app\modules\catalog\models\entity\Product
+ * @var $categories Category[]
+ * @var $vendors \app\modules\vendors\models\entity\Vendor[]
+ * @var $stocks \app\modules\stock\models\entity\Stocks[]
  */
 ?>
 <li class="admin-panel-list__item link"><a data-toggle="modal" data-target="#adminEditProductModal" href="#">Редактировать</a></li>
@@ -42,11 +44,14 @@ use yii\helpers\Html;
                                 <?= $form->field($model, 'name'); ?>
                                 <?= $form->field($model, 'description'); ?>
                                 <div class="row">
-                                    <div class="col-sm-6">
-                                        <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList()); ?>
+                                    <div class="col-sm-4">
+                                        <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара']); ?>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name')); ?>
+                                    <div class="col-sm-4">
+                                        <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара']); ?>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map($vendors, 'id', 'name'), ['prompt' => 'Поставщик']); ?>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -63,6 +68,8 @@ use yii\helpers\Html;
                                     </div>
                                 </div>
                                 <?= $form->field($model, 'code'); ?>
+                                <?= $form->field($model, 'vitrine')->radioList(['Нет', 'Да']); ?>
+                                <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map($stocks, 'id', 'name')); ?>
                             </div>
                         </div>
                     </div>
