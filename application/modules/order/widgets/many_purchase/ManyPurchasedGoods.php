@@ -31,7 +31,7 @@ class ManyPurchasedGoods extends Widget
         }
 
         $arProductIds = ArrayHelper::getColumn($models, 'id');
-        $productPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $arProductIds, 'property_id' => 1])->groupBy('value')->all();
+        $productPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $arProductIds, 'property_id' => 1])->select(['value'])->groupBy('value')->all();
         $values = ArrayHelper::getColumn($productPropertiesValues, 'value');
         $informersValues = InformersValues::find()->where(['id' => $values])->all();
 
