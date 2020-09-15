@@ -11,6 +11,9 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
 <?php if ($models): ?>
     <div class="page-title__group is-column">
         <h2 class="page-title">Выгодные предложения</h2>
+        <?php foreach ($informersValues as $item): ?>
+<!--            <a class="page-title__link" href="javascript:void(0);">--><?//= $item->name; ?><!--</a>-->
+        <?php endforeach; ?>
         <a class="page-title__link" href="javascript:void(0);">Все предложения</a>
     </div>
     <div class="swiper-container vitrine-container">
@@ -18,19 +21,15 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
             <?php foreach ($models as $model): ?>
                 <div class="swiper-slide vitrine__slide">
                     <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
-                    <img class="vitrine__image" src="/upload/<?= $model->image; ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
+                    <img class="vitrine__image" src="<?= ProductHelper::getImageUrl($model); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
                     <div class="vitrine__title">
                         <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
                     </div>
                     <div class="vitrine__properties">
                         <ul class="light-properties">
-<!--                            <li class="light-properties__item">-->
-<!--                                <div class="light-properties__label">Размер</div>-->
-<!--                                <div class="light-properties__value">250*120*65мм</div>-->
-<!--                            </li>-->
                             <li class="light-properties__item">
                                 <div class="light-properties__label">Артикул</div>
-                                <div class="light-properties__value"><?= $model->article;?></div>
+                                <div class="light-properties__value"><?= $model->article; ?></div>
                             </li>
                         </ul>
                     </div>

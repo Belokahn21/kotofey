@@ -1,35 +1,21 @@
 <?php
 
-namespace app\modules\order\widgets\many_purchase;
+namespace app\modules\catalog\widgets\DiscountItems;
+
 
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\modules\order\models\entity\OrdersItems;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
-class ManyPurchasedGoods extends Widget
+class DiscountItemsWidget extends Widget
 {
     public $view = 'default';
 
     public function run()
     {
-        $cache = \Yii::$app->cache;
-        $key = ManyPurchasedGoods::className();
-
-        $models = $cache->getOrSet($key, function () {
-            $products_in_orders = OrdersItems::find()->select(['product_id'])->all();
-            if (!$products_in_orders) {
-                return false;
-            }
-            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])->all();
-        });
-
-        if (!$models) {
-            return false;
-        }
-
+        $models = Product::find()->where(['>', 'discount_price', 0])->andWhere(['status_id' => Product::STATUS_ACTIVE])->all();
         $arProductIds = ArrayHelper::getColumn($models, 'id');
         $productPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $arProductIds, 'property_id' => 1])->groupBy('value')->all();
         $values = ArrayHelper::getColumn($productPropertiesValues, 'value');
@@ -37,7 +23,7 @@ class ManyPurchasedGoods extends Widget
 
         return $this->render($this->view, [
             'models' => $models,
-            'informersValues' => $informersValues,
+            'informersValues' => $informersValues
         ]);
     }
 }
