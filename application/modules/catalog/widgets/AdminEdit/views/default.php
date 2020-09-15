@@ -42,7 +42,7 @@ use yii\helpers\Html;
                         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                             <div class="card-body">
                                 <?= $form->field($model, 'name'); ?>
-                                <?= $form->field($model, 'description'); ?>
+                                <?= $form->field($model, 'description')->textarea(); ?>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара']); ?>
