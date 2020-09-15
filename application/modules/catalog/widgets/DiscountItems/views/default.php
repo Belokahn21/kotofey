@@ -17,7 +17,7 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
         <?php if (array_key_exists('brands', $formatArray) && array_key_exists('actions', $formatArray)): ?>
             <?php foreach ($formatArray['brands'] as $id => $brands): ?>
                 <?php foreach ($brands as $brand): ?>
-                    <a class="page-title__link" href="/catalog/?CatalogFilter[informer][<?= $formatArray['actions'][$id]->informer_id; ?>][]=<?= $formatArray['actions'][$id]->id; ?>"><?= $brand->name; ?></a>
+<!--                    <a class="page-title__link" href="/catalog/?CatalogFilter[informer][--><?php //= $formatArray['actions'][$id]->informer_id; ?><!--][]=--><?php //= $formatArray['actions'][$id]->id; ?><!--">--><?php //= $brand->name; ?><!--</a>-->
                 <?php endforeach; ?>
             <?php endforeach; ?>
         <?php endif; ?>
