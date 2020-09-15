@@ -15,15 +15,30 @@ class DiscountItemsWidget extends Widget
 
     public function run()
     {
+        $formatArray = array();
+
         $models = Product::find()->where(['>', 'discount_price', 0])->andWhere(['status_id' => Product::STATUS_ACTIVE])->all();
         $arProductIds = ArrayHelper::getColumn($models, 'id');
-        $productPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $arProductIds, 'property_id' => 1])->select(['value'])->groupBy('value')->all();
+        $productPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $arProductIds, 'property_id' => [1, 11]])->select(['value'])->groupBy('value')->all();
         $values = ArrayHelper::getColumn($productPropertiesValues, 'value');
         $informersValues = InformersValues::find()->where(['id' => $values])->all();
 
+
+        $tmpId = null;
+        foreach ($informersValues as $value) {
+            if ($value->informer_id == 1) {
+
+                $tmpId = $value->id;
+
+                $formatArray['brands'][$tmpId][] = $value;
+            } else {
+                $formatArray['actions'][$tmpId] = $value;
+            }
+        }
+
         return $this->render($this->view, [
             'models' => $models,
-            'informersValues' => $informersValues
+            'formatArray' => $formatArray
         ]);
     }
 }

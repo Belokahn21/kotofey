@@ -322,7 +322,7 @@ class OrderBackendController extends Controller
         $line++;
 
         $sheet->setCellValue("F{$line}", 'Итого');
-        $sheet->setCellValue("G{$line}", OrderStatistic::orderSummary($order->id));
+        $sheet->setCellValue("G{$line}", OrderHelper::orderSummary($order->id));
 
         $line = $line + 2;
         $result = (new \MessageFormatter('ru-RU', '{n, spellout}'))->format(['n' => OrderStatistic::orderSummary($order->id)]);

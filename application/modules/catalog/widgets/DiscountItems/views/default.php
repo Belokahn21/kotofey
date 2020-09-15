@@ -7,15 +7,20 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
 
 /* @var $models \app\modules\catalog\models\entity\Product[]
  * @var $informersValues \app\modules\catalog\models\entity\InformersValues[]
+ * @var $formatArray array
  */
 ?>
 
 <?php if ($models): ?>
     <div class="page-title__group is-column">
         <h2 class="page-title">Выгодные предложения</h2>
-        <?php foreach ($informersValues as $item): ?>
-            <a class="page-title__link" href="/catalog/?CatalogFilter[informer][<?= $item->informer_id; ?>][]=<?= $item->id; ?>"><?= $item->name; ?></a>
-        <?php endforeach; ?>
+        <?php if (array_key_exists('brands', $formatArray) && array_key_exists('actions', $formatArray)): ?>
+            <?php foreach ($formatArray['brands'] as $id => $brands): ?>
+                <?php foreach ($brands as $brand): ?>
+                    <a class="page-title__link" href="/catalog/?CatalogFilter[informer][<?= $formatArray['actions'][$id]->informer_id; ?>][]=<?= $formatArray['actions'][$id]->id; ?>"><?= $brand->name; ?></a>
+                <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
         <a class="page-title__link" href="javascript:void(0);">Все предложения</a>
     </div>
     <div class="swiper-container vitrine-container">
