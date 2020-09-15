@@ -34,7 +34,7 @@ class DiscountItemsWidget extends Widget
                 $formatArray['brands'][$tmpId][] = $value;
 //                $formatArray['brands'][$tmpId][] = rand();
             } else {
-                $formatArray['actions'][$tmpId] = $value;
+                $formatArray['actions'][$tmpId][] = $value;
 //                $formatArray['actions'][$tmpId][] = rand();
             }
         }

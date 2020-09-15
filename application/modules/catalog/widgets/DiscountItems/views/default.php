@@ -17,8 +17,13 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
         <?php if (array_key_exists('brands', $formatArray) && array_key_exists('actions', $formatArray)): ?>
             <?php foreach ($formatArray['brands'] as $key => $brands): ?>
                 <?php foreach ($brands as $brand): ?>
-                    <?php if (array_key_exists($key, $formatArray['actions'])): ?>
-                        <a class="page-title__link" href="/catalog/?CatalogFilter[informer][<?= $formatArray['actions'][$key]->informer_id; ?>][]=<?= $formatArray['actions'][$key]->id; ?>"><?= $brand->name; ?></a>
+                    <?php if (array_key_exists($key, $formatArray['actions']) && is_array($formatArray['actions'][$key])): ?>
+                        <?php $url = array(); ?>
+                        <?php foreach ($formatArray['actions'][$key] as $action) : ?>
+                            <?php $url += ['CatalogFilter[informer][' . $action->informer_id . '][]' => $action->id]; ?>
+                            <!--                            --><?php //$url = array_merge($url, ['CatalogFilter[informer][' . $action->informer_id . '][]' => $action->id]); ?>
+                        <?php endforeach; ?>
+                        <a class="page-title__link" href="/catalog/?<?= http_build_query($url); ?>"><?= $brand->name; ?></a>
                     <?php else: ?>
                         <a class="page-title__link" href="#"><?= $brand->name; ?></a>
                     <?php endif; ?>
