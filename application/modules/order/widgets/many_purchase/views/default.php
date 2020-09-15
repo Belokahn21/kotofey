@@ -7,7 +7,7 @@
 <div class="page-title__group">
     <h2 class="page-title">Покупатели выбирают</h2>
     <?php foreach ($informersValues as $item): ?>
-<!--        <a class="page-title__link" href="javascript:void(0);">--><?//= $item->name; ?><!--</a>-->
+<!--        <a class="page-title__link" href="javascript:void(0);">--><?php //= $item->name; ?><!--</a>-->
     <?php endforeach; ?>
 </div>
 <div class="swiper-container vitrine-container">
