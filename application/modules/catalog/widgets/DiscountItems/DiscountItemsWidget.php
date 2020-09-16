@@ -19,32 +19,41 @@ class DiscountItemsWidget extends Widget
         $formatArray = array();
 
         $models = Product::find()->where(['>', 'discount_price', 0])->andWhere(['status_id' => Product::STATUS_ACTIVE])->all();
-        $arProductIds = ArrayHelper::getColumn($models, 'id');
-        $productPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $arProductIds, 'property_id' => [1, 11]])->select(['value'])->groupBy('value')->all();
-        $values = ArrayHelper::getColumn($productPropertiesValues, 'value');
-        $informersValues = InformersValues::find()->where(['id' => $values])->all();
 
 
-        $tmpId = null;
-        foreach ($informersValues as $value) {
-            if ($value->informer_id == 1) {
+//        foreach ($models as $model) {
+//            $brand = $this->getBrandProperty($model->id);
+//            $actions = $this->getDiscountProperty($model->id);
+//
+//
+//            if ($brand) {
+//                $formatArray['brands1'][$brand->id] = $brand->name;
+//            }
+//
+//            if ($actions) {
+//                $formatArray['actions1'][$brand->id] = $actions;
+//            }
+//
+//        }
 
-                $tmpId = $value->id;
-
-                $formatArray['brands'][$tmpId][] = $value;
-//                $formatArray['brands'][$tmpId][] = rand();
-            } else {
-                $formatArray['actions'][$tmpId][] = $value;
-//                $formatArray['actions'][$tmpId][] = rand();
-            }
-        }
-
-//        Debug::p($formatArray);
-//        exit();
 
         return $this->render($this->view, [
             'models' => $models,
             'formatArray' => $formatArray
         ]);
+    }
+
+    public function getBrandProperty($product_id)
+    {
+        $ProductPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $product_id, 'property_id' => 1])->all();
+        $InformerValues = InformersValues::find()->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->one();
+        return $InformerValues;
+    }
+
+    public function getDiscountProperty($product_id)
+    {
+        $ProductPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => $product_id, 'property_id' => 11])->all();
+        $InformerValues = InformersValues::find()->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->all();
+        return $InformerValues;
     }
 }
