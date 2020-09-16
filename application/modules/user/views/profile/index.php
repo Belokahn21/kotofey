@@ -127,6 +127,7 @@ $this->title = Title::showTitle('Личный кабинет');
                 </div>
                 <div class="tab-pane fade" id="pet">
                     <h2>Карточка питомца</h2>
+                    <p>Мы ещё делаем этот блок. Скоро здесь появится крутой функционал!</p>
                 </div>
             </div>
         </div>
