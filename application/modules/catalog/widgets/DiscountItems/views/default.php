@@ -4,30 +4,22 @@ use app\models\tool\Price;
 use app\models\tool\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
+use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
 
 /* @var $models \app\modules\catalog\models\entity\Product[]
  * @var $informersValues \app\modules\catalog\models\entity\InformersValues[]
  * @var $formatArray array
+ * @var $this \yii\web\View
  */
+
 ?>
 
 <?php if ($models): ?>
     <div class="page-title__group is-column">
         <h2 class="page-title">Выгодные предложения</h2>
         <?php if (array_key_exists('brands', $formatArray) && array_key_exists('actions', $formatArray)): ?>
-            <?php foreach ($formatArray['brands'] as $key => $brands): ?>
-                <?php foreach ($brands as $brand): ?>
-                    <?php if (array_key_exists($key, $formatArray['actions']) && is_array($formatArray['actions'][$key])): ?>
-                        <?php $url = array(); ?>
-                        <?php foreach ($formatArray['actions'][$key] as $action) : ?>
-                            <?php $url += ['CatalogFilter[informer][' . $action->informer_id . '][]' => $action->id]; ?>
-                            <!--                            --><?php //$url = array_merge($url, ['CatalogFilter[informer][' . $action->informer_id . '][]' => $action->id]); ?>
-                        <?php endforeach; ?>
-                        <a class="page-title__link" href="/catalog/?<?= http_build_query($url); ?>"><?= $brand->name; ?></a>
-                    <?php else: ?>
-                        <a class="page-title__link" href="#"><?= $brand->name; ?></a>
-                    <?php endif; ?>
-                <?php endforeach; ?>
+            <?php foreach ($formatArray['brands'] as $key => $brand): ?>
+                <a class="page-title__link" href="<?= DiscountItemsWidgetHelper::getUrl($formatArray['actions'], $key); ?>"><?= $brand['name']; ?></a>
             <?php endforeach; ?>
         <?php endif; ?>
         <a class="page-title__link" href="javascript:void(0);">Все предложения</a>
