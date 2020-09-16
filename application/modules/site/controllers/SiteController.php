@@ -167,4 +167,9 @@ class SiteController extends Controller
         Alert::setSuccessNotify('Кэш сброшен');
         return $this->redirect(['/']);
     }
+
+    public function actionConsole()
+    {
+        return $this->render('console');
+    }
 }
