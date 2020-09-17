@@ -7,6 +7,9 @@ gulp-build:
 push:
 	git add . && git commit -m "update" && git push
 
+console:
+	cd application && php yii console run
+
 pull:
 	git pull
 
