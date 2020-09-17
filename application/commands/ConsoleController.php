@@ -4,28 +4,27 @@ namespace app\commands;
 
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $products = Product::find()->where(['like', 'name', 'Мurkel'])->all();
-        /* @var $product Product */
-        foreach ($products as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->name = 'Murkel';
+        $products = Product::find()->where(['vendor_id' => 3])->orWhere(['like', 'name', 'royal canin'])->andWhere(['>', 'discount_price', 0])->select(['id', 'name'])->all();
 
-            if ($product->validate()) {
-                echo $product->name;
-                $product->update();
+        foreach ($products as $product) {
+            $row = new ProductPropertiesValues();
+            $row->product_id = $product->id;
+            $row->property_id = 11;
+            $row->value = '211';
+
+            if ($row->validate()) {
+                if ($row->save()) {
+                    Debug::p("Успешно вставлено");
+                }
             } else {
-                Debug::p($product->name);
-                echo PHP_EOL;
-                Debug::p($product->code);
-                echo PHP_EOL;
-                Debug::p($product->getErrors());
-                return;
+                Debug::p($row->getErrors());
             }
         }
     }
