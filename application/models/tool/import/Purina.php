@@ -94,7 +94,7 @@ class Purina
         $product = Product::findOneByCode($code);
         if ($product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->active = 1;
+            $product->status_id = Product::STATUS_ACTIVE;
             $product->base_price = $price;
             $product->purchase = $product->base_price;
             $product->price = $product->purchase + (ceil($product->purchase * 0.15));

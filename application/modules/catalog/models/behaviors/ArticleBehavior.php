@@ -32,6 +32,6 @@ class ArticleBehavior extends AttributeBehavior
 
     public function generateUniqueValue()
     {
-        return rand(0, 99999);
+        return rand(100000, 999999);
     }
 }

@@ -11,20 +11,18 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $products = Product::find()->where(['vendor_id' => 1])->orWhere(['like', 'name', 'purina'])->andWhere(['>', 'discount_price', 0])->select(['id', 'name'])->all();
+        $products = Product::find()->all();
 
         foreach ($products as $product) {
-            $row = new ProductPropertiesValues();
-            $row->product_id = $product->id;
-            $row->property_id = 11;
-            $row->value = '210';
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->article = rand(100000, 999999);
 
-            if ($row->validate()) {
-                if ($row->save()) {
-                    Debug::p("Успешно вставлено " . $product->name . PHP_EOL);
+            if ($product->validate()) {
+                if ($product->update()) {
+                    echo "good" . PHP_EOL;
                 }
             } else {
-                Debug::p($row->getErrors());
+                print_r($product->getErrors());
             }
         }
     }
