@@ -10,8 +10,6 @@ use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
 use app\modules\short_link\models\entity\ShortLinks;
 use yii\data\Pagination;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 
@@ -20,7 +18,6 @@ class CatalogController extends Controller
 
     public function actionIndex($id = null)
     {
-
         // need reidrect?
         $link = ShortLinks::findOne(['short_code' => $id]);
         if ($link) {
@@ -46,6 +43,10 @@ class CatalogController extends Controller
             $query->andWhere(['status_id' => Product::STATUS_ACTIVE]);
         } else {
             $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['status_id' => Product::STATUS_ACTIVE]);
+        }
+
+        if ($sortValue = Yii::$app->request->get('sort')) {
+            $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
         }
 
         $filterModel->applyFilter($query, Yii::$app->request->get());

@@ -12,6 +12,7 @@ use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
 use app\models\forms\CatalogFilter;
 use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\modules\catalog\widgets\filter\CatalogFilterWidget;
 
 $this->title = Title::showTitle("Зоотовары");
@@ -68,23 +69,7 @@ if ($category) {
             <?php endif; ?>
         </aside>
         <div class="catalog-wrap">
-            <?php /*
-			<form class="catalog-sort">
-                <input class="catalog-sort__input" id="catalog-sort-variant-1" type="checkbox" name="sort-checkbox"><label class="catalog-sort__item checkbox-type" for="catalog-sort-variant-1">
-					<div class="catalog-sort__title">Строительный</div>
-				</label><input class="catalog-sort__input" id="catalog-sort-variant-2" type="checkbox" name="sort-checkbox"><label class="catalog-sort__item checkbox-type" for="catalog-sort-variant-2">
-					<div class="catalog-sort__title">Ручной</div>
-				</label><input class="catalog-sort__input" id="catalog-sort-variant-3" type="checkbox" name="sort-checkbox"><label class="catalog-sort__item checkbox-type" for="catalog-sort-variant-3">
-					<div class="catalog-sort__title">Печной</div>
-				</label><input class="catalog-sort__input" id="catalog-sort-variant-4" type="checkbox" name="sort-checkbox"><label class="catalog-sort__item checkbox-type" for="catalog-sort-variant-4">
-					<div class="catalog-sort__title">Силикатный</div>
-				</label>
-				<div class="catalog-sort-select"><label class="catalog-sort-select__label" for="catalog-sort-selector">Сортировать</label><select class="catalog-sort-select__select js-selectize" id="catalog-sort-selector">
-						<option>Сначала дешевые</option>
-						<option>Сначала дорогие</option>
-					</select></div>
-			</form>
- */ ?>
+            <?= ProductSortWidget::widget(); ?>
             <?php if ($products): ?>
                 <ul class="catalog">
                     <?php foreach ($products as $product): ?>
