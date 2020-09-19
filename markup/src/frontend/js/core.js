@@ -3,9 +3,6 @@ import 'lightbox2';
 import 'popper.js';
 import 'bootstrap';
 
-// add react js
-// import './react/instagram-media';
-
 import './block/product-calc';
 import './block/mobile-menu';
 import './block/basket';
@@ -14,8 +11,7 @@ import './block/menu';
 import './block/ui-placeholder';
 import './block/other-jquery';
 import './block/catalog-filter';
-import './block/catalog';
-import './block/favorite';
+import  './block/favorite';
 import './block/compare';
 import './block/toggleClass';
 import './block/promocode';
@@ -23,7 +19,8 @@ import './include/init-sliders';
 import './include/init-range-sliders';
 import './include/init-maskedinput';
 import './include/phone-mask';
-// import './block/gifts';
-// import './include/init-datepicker';
+import Catalog from './block/catalog';
+import StickFilter from './block/StickFilter';
 
-
+const catalog = new Catalog();
+new StickFilter(catalog);

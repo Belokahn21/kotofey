@@ -1,0 +1,23 @@
+mixin catalogItem(item)
+    li.catalog__item
+        .catalog-actions
+            .catalog-favorite.js-toggle-class.js-add-favorite(data-class-target="fas fa-heart" data-product-id="1")
+                i.far.fa-heart
+            .catalog-compaare.js-toggle-class.js-add-compare(data-class-target="fas fa-balance-scale-right")
+                i.fas.fa-balance-scale
+        .catalog__discount
+            span -15%
+        img(src= item.image class="catalog__image")
+        .catalog__title= item.name
+        ul.light-properties
+            li.light-properties__item
+                .light-properties__label Размер
+                .light-properties__value 250*120*65мм
+            li.light-properties__item
+                .light-properties__label Артикул
+                .light-properties__value 0525052
+        .catalog__price-group
+            .catalog__old-price= item.price
+            .catalog__new-price= item.newPrice
+            .catalog__rate ₽/шт
+        include ../include/block/product-calc

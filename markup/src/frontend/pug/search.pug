@@ -10,12 +10,11 @@ block contents
                     a(href="javascript:void(0);").breadcrumbs__link Главная
                 li.breadcrumbs__item.active
                     a(href="javascript:void(0);").breadcrumbs__link Кирпичи
-            h1.page__title Кирпичи
+            h1.page__title Результат поиска
             .catalog-container
-                include include/block/catalog-filter
                 .catalog-wrap
-                    include include/block/catalog-sort
                     include include/block/stick-filter
+                    include include/block/catalog-sort
                     ul.catalog
                         -
                             var items = [
