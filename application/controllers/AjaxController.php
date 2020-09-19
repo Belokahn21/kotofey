@@ -2,27 +2,10 @@
 
 namespace app\controllers;
 
-use app\modules\basket\models\entity\Basket;
-use app\modules\compare\models\entity\Compare;
-use app\modules\favorite\models\entity\Favorite;
-use app\modules\geo\models\entity\Geo;
-use app\modules\order\models\entity\OrdersItems;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\modules\todo\models\entity\TodoList;
-use app\modules\user\models\entity\User;
-use app\modules\user\models\entity\Billing;
-use app\modules\compare\models\service\CompareService;
-use app\modules\order\models\service\DeliveryTimeService;
-use app\models\tool\parser\ParseProvider;
-use app\widgets\cookie\CookieWidget;
-use app\widgets\notification\NotifyWidget;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\modules\catalog\models\entity\Product;
-use yii\web\HttpException;
 
 class AjaxController extends Controller
 {

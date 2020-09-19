@@ -139,6 +139,8 @@ $config = [
                 'catalog' => 'catalog/catalog/index',
                 'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',
 
+                'ajax/exist'=>'ajax/exist',
+
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 
