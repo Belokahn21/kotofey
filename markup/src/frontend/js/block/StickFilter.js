@@ -35,6 +35,15 @@ class StickFilter {
             });
         });
 
+        // window.addEventListener('scroll', () => {
+        //     if (this.element) {
+        //         this.element.forEach((foreachElement) => {
+        //             if (foreachElement.offsetTop) {
+        //                 console.log(foreachElement.offsetTop);
+        //             }
+        //         });
+        //     }
+        // });
     }
 }
 

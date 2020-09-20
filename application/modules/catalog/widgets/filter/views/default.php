@@ -64,6 +64,4 @@ LIST;
     </div>
 </div>
 <?php ActiveForm::end(); ?>
-<?php /*
 <div class="stick-filter js-stick-filter"><span><i class="fas fa-filter"></i></span></div>
- */ ?>
