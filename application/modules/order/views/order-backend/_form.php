@@ -107,7 +107,7 @@ use yii\helpers\Html;
                             <ul>
                                 <?php foreach ($vendros as $vendorId => $product): ?>
                                     <?php $vendor = Vendor::findOne($vendorId); ?>
-                                    <li>Поставщк: <?= $vendor->name; ?>(<?= count($vendros[$vendorId]); ?>) <?= Html::a('Написать менеджеру', 'https://api.whatsapp.com/send?phone=89059858726&text=hello'); ?></li>
+                                    <li>Поставщк: <?= $vendor->name; ?>(<?= count($vendros[$vendorId]); ?>) <?= Html::a('Написать менеджеру', 'https://api.whatsapp.com/send?phone=+79059858726&text=hello'); ?></li>
                                 <?php endforeach; ?>
                             </ul>
                         <?php endif; ?>
