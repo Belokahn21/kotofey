@@ -4,6 +4,9 @@
  * @var $this \yii\web\View
  */
 
+use app\models\tool\Currency;
+use app\models\tool\Price;
+use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use yii\helpers\StringHelper;
@@ -37,7 +40,7 @@ use app\models\tool\Backup;
                         </div>
                         <div class="statistic-info__item">
                             <div class="statistic-info__key">Прибыль</div>
-                            <div class="statistic-info__value">39 569 Р</div>
+                            <div class="statistic-info__value"><?= Price::format(OrderHelper::marginality()); ?><?= Currency::getInstance()->show(); ?></div>
                         </div>
                     </div>
                 </div>
@@ -52,7 +55,7 @@ use app\models\tool\Backup;
                         </div>
                         <div class="statistic-info__item">
                             <div class="statistic-info__key">Прибыль</div>
-                            <div class="statistic-info__value">3 569 Р</div>
+                            <div class="statistic-info__value">---</div>
                         </div>
                     </div>
                 </div>

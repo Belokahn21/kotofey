@@ -1,0 +1,12 @@
+.profile-pet {
+  &__add {
+    margin-left: 15px;
+    padding: 2px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: transparent;
+    border: 1px rgba(0, 0, 0, 0.21) solid;
+    outline: none !important;
+  }
+}

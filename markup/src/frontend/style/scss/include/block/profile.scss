@@ -23,4 +23,23 @@
       width: 100%;
     }
   }
+
+  &__logout {
+    color: $main-color;
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 400;
+    border-bottom: 1px solid #c6c6c6;
+    text-decoration: none;
+
+    &:hover {
+      color: $main-color;
+      text-decoration: none;
+    }
+  }
+
+  &__inline-group {
+    display: flex;
+    flex-direction: row;
+  }
 }

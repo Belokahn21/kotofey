@@ -9,7 +9,7 @@ block contents
                 li.breadcrumbs__item.active
                     a(href="javascript:void(0);").breadcrumbs__link Доставка и оплата
             h1.page__title Личный кабинет
-
+            a(href="#").profile__logout Выйти
             .page__group-row
                 .page__left.profile-sections-wrap
                     .profile-sections.nav.nav-tabs#proflieTabs(role='tablist')
@@ -19,9 +19,12 @@ block contents
                         a.profile-sections__item#profile-tab(data-toggle='tab', href='#profile', role='tab', aria-controls='profile', aria-selected='false')
                             i.fas.fa-hand-holding-usd
                             .profile-sections__title Заказы
-                        a.profile-sections__item#favorite-tab(data-toggle='tab', href='#favorite', role='tab', aria-controls='profile', aria-selected='false')
+                        a.profile-sections__item#favorite-tab(data-toggle='tab', href='#favorite', role='tab', aria-controls='favorite', aria-selected='false')
                             i.fas.fa-heart
                             .profile-sections__title Избранное
+                        a.profile-sections__item#pets-tab(data-toggle='tab', href='#pets', role='tab', aria-controls='pets', aria-selected='false')
+                            i.fas.fa-paw
+                            .profile-sections__title Питомец
                 .page__right.profile-content
                     .tab-content
                         #home.tab-pane.fade.show.active
@@ -39,6 +42,7 @@ block contents
                                         label.site-form__label(for="site-form-avatar") Аватарка
                                         input.site-form__input#site-form-avatar(type="file")
                         #profile.tab-pane.fade
+                            h2.page__title Спиисок покупок
                             .profile-orders
                                 .profile-orders__row.profile-orders__header
                                     .profile-orders__number №
@@ -68,6 +72,7 @@ block contents
                                     .profile-orders__action
                                         a.profile-orders__link(href="#") Подробнее
                         #favorite.tab-pane.fade
+                            h2.page__title Избранные товары
                             .profile-favorite-list
                                 .profile-favorite-list__item
                                     .profile-favorite-list__image
@@ -80,3 +85,8 @@ block contents
                                     .profile-favorite-list__action
                                         .profile-favorite-list__remove.js-remove-favorit(data-product-id="11")
                                             i.fas.fa-heart-broken
+                        #pets.tab-pane.fade
+                            include include/block/modal/new-pet
+                            .profile__inline-group
+                                h2.page__title Ваши питомцы
+                                button(type="button" data-toggle="modal" data-target="#newPetModal").profile-pet__add Добавить

@@ -1,5 +1,6 @@
 #proflieTabs {
   border: 0;
+  margin-left: -10px;
 }
 
 .profile-sections {
@@ -20,6 +21,11 @@
     color: $main-color;
     text-decoration: none;
     border-radius: 10px;
+
+    &.active{
+      border: 1px $active-color solid;
+      color: $active-color;
+    }
 
     i {
       transition: all 0.2s ease-in-out;

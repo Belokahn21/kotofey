@@ -67,16 +67,6 @@ $this->title = Title::showTitle("Заказы");
 			}
 		],
 		[
-			'attribute' => 'user_id',
-			"format" => 'raw',
-			'filter' => ArrayHelper::map(User::find()->all(), 'id', 'email'),
-			'value' => function ($model) {
-				if ($model->user_id) {
-					return Html::a(User::findOne($model->user_id)->display, Url::to(['admin/user', 'id' => $model->user_id]));
-				}
-			}
-		],
-		[
 			'attribute' => 'cash',
 			'format' => 'raw',
 			'value' => function ($model) {

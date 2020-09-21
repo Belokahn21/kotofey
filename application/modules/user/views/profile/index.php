@@ -32,7 +32,7 @@ $this->title = Title::showTitle('Личный кабинет');
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
     <h1 class="page__title">Личный кабинет</h1>
-    <a href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
+    <a class="profile__logout" href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
     <div class="page__group-row">
         <div class="page__left profile-sections-wrap">
             <div class="profile-sections nav nav-tabs" id="proflieTabs" role="tablist"><a
