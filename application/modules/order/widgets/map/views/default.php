@@ -35,7 +35,7 @@ if (!is_null($address)) {
     );
 
     $context = stream_context_create($options);
-    $response = file_get_contents($url . http_build_query($params), false, $context);
+    $response = @file_get_contents($url . http_build_query($params), false, $context);
 
     if ($response) {
         $response = \yii\helpers\Json::decode($response);
