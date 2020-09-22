@@ -78,5 +78,8 @@ use app\modules\vendors\models\entity\VendorGroup;
         <div class="form-element">
             <?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map(VendorGroup::find()->all(), 'id', 'name'), ['prompt' => 'Группа поставщиков']) ?>
         </div>
+        <div class="form-element">
+            <?= $form->field($model, 'how_send_order')->dropDownList($model->getSendOrderVariants(), ['prompt' => 'Заявка отправляется через']) ?>
+        </div>
     </div>
 </div>

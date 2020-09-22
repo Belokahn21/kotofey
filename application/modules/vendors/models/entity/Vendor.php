@@ -24,6 +24,7 @@ use yii\helpers\Json;
  * @property int $min_summary_sale
  * @property int $time_open
  * @property int $time_close
+ * @property int $how_send_order
  * @property int $created_at
  * @property int $updated_at
  */
@@ -56,7 +57,7 @@ class Vendor extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale', 'phone'], 'integer'],
+            [['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale', 'phone', 'how_send_order'], 'integer'],
             [['name'], 'required'],
             [['name', 'slug', 'address', 'legal_name'], 'string', 'max' => 255],
             [['email'], 'string'],
@@ -88,6 +89,7 @@ class Vendor extends \yii\db\ActiveRecord
             'time_close' => 'Время закрытия',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата опоздания',
+            'how_send_order' => 'Заявку на покупку через:',
         ];
     }
 
@@ -101,5 +103,16 @@ class Vendor extends \yii\db\ActiveRecord
     {
         $this->delivery_days = Json::encode($this->delivery_days);
         return parent::beforeValidate();
+    }
+
+    const SEND_ORDER_VARIANT_WA = 1;
+    const SEND_ORDER_VARIANT_EMAIL = 2;
+
+    public function getSendOrderVariants()
+    {
+        return [
+            self::SEND_ORDER_VARIANT_WA => 'Whatsapp',
+            self::SEND_ORDER_VARIANT_EMAIL => 'E-Mail',
+        ];
     }
 }
