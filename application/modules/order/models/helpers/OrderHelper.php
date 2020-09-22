@@ -170,12 +170,15 @@ class OrderHelper
         return true;
     }
 
+    /**
+     * @var $items OrdersItems[]
+     */
     public static function getWhatsappMessage($items)
     {
         $out = "";
 
         foreach ($items as $item) {
-            $out .= $item->product->name . "%0a";
+            $out .= $item->count . "шт. " . $item->product->name . "%0a";
         }
 
         return $out;
