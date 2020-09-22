@@ -173,8 +173,9 @@ class OrderHelper
     public static function getWhatsappMessage($items)
     {
         $out = "";
+
         foreach ($items as $item) {
-            $out .= $item->product->name . PHP_EOL;
+            $out .= $item->product->name . "%0a";
         }
 
         return $out;
