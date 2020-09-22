@@ -63,6 +63,7 @@ class Vendor extends \yii\db\ActiveRecord
             [['email'], 'string'],
             [['delivery_days'], 'safe'],
             [['email'], 'email'],
+            ['how_send_order', 'default', 'value' => 0],
         ];
     }
 
