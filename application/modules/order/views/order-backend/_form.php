@@ -1,12 +1,13 @@
 <?php
 
-use yii\helpers\Url;
-use yii\helpers\ArrayHelper;
-use app\modules\order\widgets\map\MapWidget;
-use app\modules\order\models\helpers\OrderHelper;
+use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\order\models\helpers\OrderHelper;
+use app\modules\order\widgets\map\MapWidget;
 use app\modules\vendors\models\entity\Vendor;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -94,23 +95,10 @@ use yii\helpers\Html;
                 <div class="backendFormsPanel__form-side">
                     <?php if (is_array($itemsModel)): ?>
                         <h2>Товары в заказе</h2>
-                        <?php
-                        $vendros = array();
-                        ?>
-                        <?php foreach ($itemsModel as $item):
-                            if ($item->product->vendor_id):
-                                $vendros[$item->product->vendor_id][] = $item;
-                            endif;
-                        endforeach; ?>
+                        <?= FastManagerMessage::widget([
+                            'items' => $itemsModel
+                        ]); ?>
 
-                        <?php if ($vendros): ?>
-                            <ul>
-                                <?php foreach ($vendros as $vendorId => $product): ?>
-                                    <?php $vendor = Vendor::findOne($vendorId); ?>
-                                    <li>Поставщк: <?= $vendor->name; ?>(<?= count($vendros[$vendorId]); ?>) <?= Html::a('Написать менеджеру', 'https://api.whatsapp.com/send?phone=+79059858726&text=' . OrderHelper::getWhatsappMessage($vendros[$vendorId])); ?></li>
-                                <?php endforeach; ?>
-                            </ul>
-                        <?php endif; ?>
                         <ul class="order-items-list">
                             <?php foreach ($itemsModel as $item): ?>
                                 <li class="order-items-list__item">
