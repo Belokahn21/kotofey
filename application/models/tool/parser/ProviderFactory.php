@@ -19,6 +19,7 @@ class ProviderFactory
         if ($this->compare('sat-altai.ru', $url)) {
             return new SibagroTrade();
         }
+
         if ($this->compare('lukasn.ru', $url)) {
             return new Lukas();
         }

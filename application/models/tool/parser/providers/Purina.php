@@ -3,14 +3,10 @@
 namespace app\models\tool\parser\providers;
 
 
-use app\modules\site_settings\models\entity\SiteSettings;
-use app\modules\vendors\models\entity\Vendor;
-use app\models\tool\Debug;
+use app\modules\catalog\models\entity\Product;
 use app\models\tool\parser\CatalogInfo;
-use app\models\tool\parser\page\Page;
-use app\models\tool\parser\page\SimplePage;
 
-class Purina extends Provider
+class Purina implements ProviderInterface
 {
     public function info($url)
     {
@@ -50,12 +46,11 @@ class Purina extends Provider
             $product = new CatalogInfo();
             $product->name = $name;
             $product->purchase = $price;
-            $product->price = $price;
-//            $product->price = $product->purchase + ceil(($product->purchase * (SiteSettings::findByCode('saleup')->value / 100)));
+            $product->price = $product->purchase + ceil(($product->purchase * (15 / 100)));
             $product->count = 0;
             $product->description = $desciption;
             $product->vitrine = 1;
-            $product->active = 1;
+            $product->status_id = Product::STATUS_ACTIVE;
             $product->code = $code;
             $product->vendor_id = 1;
             $product->weight = $weight;
@@ -63,7 +58,6 @@ class Purina extends Provider
             $product->model = 6;
 
             return $product;
-
         }
     }
 }

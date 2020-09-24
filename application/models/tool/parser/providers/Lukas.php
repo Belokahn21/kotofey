@@ -8,7 +8,7 @@ use app\models\tool\Debug;
 use app\models\tool\parser\CatalogInfo;
 use app\models\tool\parser\page\Page;
 
-class Lukas extends Provider
+class Lukas implements ProviderInterface
 {
 
 	public function info($url)

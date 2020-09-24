@@ -3,18 +3,9 @@
 namespace app\models\tool\parser;
 
 
-class CatalogInfo
+use app\modules\catalog\models\entity\Product;
+
+class CatalogInfo extends Product
 {
-	public $name;
-	public $description;
-	public $price;
-	public $purchase;
-	public $count;
-	public $active;
-	public $vitrine;
-	public $code;
-	public $weight;
-	public $vendor_id;
-	public $country;
-	public $model;
+
 }
