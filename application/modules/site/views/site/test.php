@@ -1,7 +1,13 @@
 <?php
+//2273р. 27коп.
+$parser = new \app\models\tool\parser\ParseProvider('http://www.sat-altai.ru/catalog/?c=shop&a=item&number=000016871&category=00000226');
+$parser->contract();
+\app\models\tool\Debug::p($parser->getInfo());
 
+?>
+<?php
+/*
 use app\modules\order\models\entity\Order;
-
 $orders = array();
 $phoneCustomer = Order::find()->select('phone')->all();
 
@@ -41,3 +47,4 @@ foreach ($orders as $phone => $customerOrders) {
     echo "Среднее кол-во дней между заказами: " . floor($countDays / $countOrders);
     echo "<hr>";
 }
+*/ ?>

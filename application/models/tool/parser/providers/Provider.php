@@ -19,23 +19,13 @@ class Provider implements ProviderInterface
 		$page->use_ajax = true;
 		$html = $page->content($url);
 
-		if ($curl = curl_init()) {
-			curl_setopt($curl, CURLOPT_URL, $url);
-			curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-				'Cookie: beget=begetok',
-			));
-			curl_setopt($curl, CURLOPT_COOKIE, "Cookie: beget=begetok");
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			$html = curl_exec($curl);
-			curl_close($curl);
-		}
-
+        exit();
 		$dom = new \DOMDocument();
 		$dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
 
 		print_r($dom);
 
-		return;
+		exit();
 
 		$xpath = new \DOMXPath($dom);
 //		$price = $xpath->query('//div[@class="lead"]')->item(0)->nodeValue;
