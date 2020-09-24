@@ -1,7 +1,6 @@
-
-<div class="catalog-control">
-	<div class="pre-load-catalog-wrap">
-		<input type="text" name="url" placeholder="Ссылка на подгрузку" class="pre-load-catalog">
+<div class="catalog-fill-vendor">
+	<div class="catalog-fill-vendor-pre-load-wrap">
+		<input type="text" name="url" placeholder="Ссылка на подгрузку" class="catalog-fill-vendor__input">
 		<svg width="20" height="30" class="backend-preloader hide">
 			<rect width="10%" x="5%" rx="5%">
 				<animate attributeName="height" values="20%; 70%; 20%" dur="0.7s" repeatCount="indefinite"></animate>

@@ -141,6 +141,7 @@ $config = [
 
                 'ajax/exist'=>'ajax/exist',
                 'test'=>'site/site/test',
+                'admin/catalog-fill' => 'catalog/ajax/catalog-fill-from-vendor',
 
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',

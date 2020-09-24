@@ -18,6 +18,10 @@
 @import "block/buyers-group-buy";
 @import "block/pagination";
 @import "block/month-stat";
+@import "block/backend-preloader";
+
+// каталог
+@import "block/catalog-fill-vendor";
 
 //заказы
 @import "block/order-items-list";

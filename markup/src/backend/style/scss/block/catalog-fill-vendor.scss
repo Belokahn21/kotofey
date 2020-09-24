@@ -1,0 +1,9 @@
+.catalog-fill-vendor {
+  margin: 10px 5px;
+
+  &__input {
+    padding: 2px 5px;
+    border: 1px $theme-color solid;
+    width: 300px;
+  }
+}
