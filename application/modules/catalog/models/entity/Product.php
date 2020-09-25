@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\models\tool\Debug;
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use mohorev\file\UploadBehavior;
@@ -312,6 +313,8 @@ class Product extends \yii\db\ActiveRecord
                     $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
                     if ($file->saveAs($path)) {
                         $items[] = "/upload/" . $fileName;
+                    } else {
+                        Debug::p($file->error);
                     }
                 }
 
