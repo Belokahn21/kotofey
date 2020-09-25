@@ -118,6 +118,7 @@ $this->title = Title::showTitle($product->name);
         <strong>Бесплатная доставка при заказе от 500 рублей</strong><br>
         Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br>
         Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа<br>
+        Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа<br>
         Для доставки в другие точки уточняйте по телефону <strong><a style="color: black;" class="js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><?= SiteSettings::getValueByCode('phone_1'); ?></a></strong>
     </div>
     <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
