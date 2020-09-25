@@ -49,6 +49,7 @@ class Valta
                 $product->status_id = Product::STATUS_DRAFT;
                 $product->stock_id = 1;
                 $product->stock_id = 1;
+                $product->feed = "монж";
 
 
                 if (!$product->validate()) {
