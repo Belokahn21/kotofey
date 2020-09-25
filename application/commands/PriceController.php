@@ -15,6 +15,14 @@ class PriceController extends Controller
 {
     public function actionUpdate($vendor = null, $external_type = null)
     {
+        $message = [
+            "Royal Canin",
+            "Purina",
+            "Forza10",
+            "Tavela",
+            "Hills",
+        ];
+
         switch ($vendor) {
             case 1:
                 $royal = new RoyalCanin();
@@ -38,28 +46,35 @@ class PriceController extends Controller
                 $hills->update(true);
                 break;
             default:
-                echo "Выберите прайс для обновления.\n1 - Royal Canin\n2 - Purina\n3 - Forza10\n4 - Tavela\n5 - Hills\n\nphp yii price/update n";
+                echo "Выберите прайс для обновления.\n" . $this->getMessage($message) . "\nphp yii price/update n";
                 break;
         }
     }
 
-
     public function actionLoad($vendor = null)
     {
+        $message = [
+            "Valta",
+        ];
         switch ($vendor) {
             case 1:
-//				$royal = new RoyalCanin();
-//				$royal->setIsUpdateVendor(true);
-//				$royal->import();
-                break;
-
-            case 2:
                 $valta = new Valta();
                 $valta->import();
                 break;
             default:
-                echo "Выберите прайс для обновления.\n\n1 - Royal Canin\n\nphp yii price/load n";
+                echo "Выберите прайс для добавления.\n" . $this->getMessage($message) . "\nphp yii price/load n";
                 break;
         }
+    }
+
+    public function getMessage($message)
+    {
+        $out = "";
+        $i = 1;
+        foreach ($message as $item) {
+            $out .= $i . " - " . $item . "\n";
+            $i++;
+        }
+        return $out;
     }
 }

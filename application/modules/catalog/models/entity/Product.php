@@ -37,6 +37,7 @@ use yii\web\UploadedFile;
  * @property boolean $vitrine
  * @property boolean $stock_id
  * @property string $code
+ * @property string $barcode
  * @property string $threeDCode
  * @property integer $created_at
  * @property integer $updated_at
@@ -62,9 +63,9 @@ class Product extends \yii\db\ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_NEW_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
-            self::SCENARIO_UPDATE_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
-            self::SCENARIO_CREATE_EXT_PRODUCT => ['status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_NEW_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_UPDATE_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
+            self::SCENARIO_CREATE_EXT_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
         ];
     }
 
@@ -76,6 +77,8 @@ class Product extends \yii\db\ActiveRecord
             [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'base_price', 'vendor_id', 'discount_price', 'status_id'], 'integer'],
 
             [['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
+
+            ['barcode', 'string', 'max' => 255],
 
             ['description', 'string', 'min' => 10],
 
