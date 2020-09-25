@@ -310,8 +310,9 @@ class Product extends \yii\db\ActiveRecord
                 foreach ($this->imagesFiles as $file) {
                     $fileName = substr(md5($file->baseName), 0, 32) . '.' . $file->extension;
                     $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
-                    $items[] = "/upload/" . $fileName;
-                    $file->saveAs($path);
+                    if ($file->saveAs($path)) {
+                        $items[] = "/upload/" . $fileName;
+                    }
                 }
 
                 $this->images = Json::encode($items);
