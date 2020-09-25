@@ -4,6 +4,7 @@ namespace app\models\tool\import;
 
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\vendors\models\entity\Vendor;
@@ -27,7 +28,12 @@ class Valta
                     continue;
                 }
 
-                $purchase = floor($purchase);
+                $purchase = str_replace(',', '.', $purchase);
+                $purchase = str_replace(' ', '', $purchase);
+                $weight = str_replace(',', '.', $weight);
+
+                $purchase = round($purchase);
+
 
                 $product = new Product();
                 $product->scenario = Product::SCENARIO_NEW_PRODUCT;
@@ -36,10 +42,13 @@ class Valta
                 $product->purchase = $product->base_price;
                 $product->price = ceil($product->purchase + $product->purchase * 0.20);
                 $product->count = 0;
+                $product->vitrine = 1;
                 $product->vendor_id = 10;
-                $product->article = $article;
+                $product->code = $article;
                 $product->barcode = $barcode;
                 $product->status_id = Product::STATUS_DRAFT;
+                $product->stock_id = 1;
+                $product->stock_id = 1;
 
 
                 if (!$product->validate()) {
@@ -54,6 +63,29 @@ class Valta
                 ProductPropertiesValuesHelper::savePropertyValue($product->id, 1, '213'); // Monge производитель
                 ProductPropertiesValuesHelper::savePropertyValue($product->id, 2, $weight); // Вес
                 ProductPropertiesValuesHelper::savePropertyValue($product->id, 6, '46'); // Страна проиволитель
+                ProductPropertiesValuesHelper::savePropertyValue($product->id, 9, '111'); // назначение: повседневное питание
+
+                if (strpos($rus_name, 'корм') !== false) {
+                    ProductPropertiesValuesHelper::savePropertyValue($product->id, 3, '4'); // тип корма: сухой
+                }
+                if (strpos($rus_name, 'консервы') !== false) {
+                    ProductPropertiesValuesHelper::savePropertyValue($product->id, 3, '14'); // тип корма: консерва
+                }
+
+                $orderProduct = new ProductOrder();
+                $orderProduct->product_id = $product->id;
+                $orderProduct->start = 3;
+                $orderProduct->end = 7;
+
+                if (!$orderProduct->validate()) {
+                    Debug::p("Заказ продукта не прошел валидацию");
+                    Debug::p($orderProduct->getErrors());
+                }
+
+                if (!$orderProduct->save()) {
+                    Debug::p("Заказ продукта не сохранился");
+                    Debug::p($orderProduct->getErrors());
+                }
             }
             fclose($handle);
         }

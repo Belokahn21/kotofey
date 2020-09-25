@@ -156,6 +156,9 @@ use app\modules\catalog\models\helpers\ProductHelper;
             <?= $form->field($model, 'code')->textInput(); ?>
         </div>
         <div class="form-element">
+            <?= $form->field($model, 'barcode')->textInput(); ?>
+        </div>
+        <div class="form-element">
             <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
         </div>
         <div class="form-element">

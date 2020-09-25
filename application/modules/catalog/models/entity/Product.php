@@ -124,6 +124,7 @@ class Product extends \yii\db\ActiveRecord
             'feed' => 'Поисковой контент',
             'threeDCode' => '3D представление',
             'status_id' => 'Статус товара',
+            'barcode' => 'Штрих-код',
         ];
     }
 
