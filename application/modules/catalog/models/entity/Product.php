@@ -313,9 +313,6 @@ class Product extends \yii\db\ActiveRecord
                     $path = \Yii::getAlias('@app') . '/web/upload/' . $fileName;
                     if ($file->saveAs($path)) {
                         $items[] = "/upload/" . $fileName;
-                    } else {
-                        Debug::p($file->error);
-                        exit();
                     }
                 }
 
