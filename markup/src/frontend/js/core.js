@@ -24,3 +24,8 @@ import StickFilter from './block/StickFilter';
 
 const catalog = new Catalog();
 new StickFilter(catalog);
+
+
+$(function () {
+    $("[rel='tooltip']").tooltip();
+});

@@ -125,4 +125,20 @@
     line-height: 24px;
     font-weight: 700;
   }
+
+  &-order {
+    animation: color-change 1.5s infinite;
+
+    @keyframes color-change {
+      0% {
+        color: black;
+      }
+      50% {
+        color: $active-color;
+      }
+      100% {
+        color: black;
+      }
+    }
+  }
 }

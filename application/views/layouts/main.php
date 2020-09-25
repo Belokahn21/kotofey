@@ -29,8 +29,7 @@ $this->beginPage() ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/33cf5fcfbe.js" crossorigin="anonymous"></script>
     <?php if (YII_ENV == 'prod'): ?>
         <?php echo $this->render('include/head/yandex/metrika.php'); ?>
         <?php echo $this->render('include/head/yandex/webmaster.php'); ?>

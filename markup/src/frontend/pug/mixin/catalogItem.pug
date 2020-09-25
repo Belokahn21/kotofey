@@ -5,6 +5,8 @@ mixin catalogItem(item)
                 i.far.fa-heart
             .catalog-compaare.js-toggle-class.js-add-compare(data-class-target="fas fa-balance-scale-right")
                 i.fas.fa-balance-scale
+            .catalog-order(data-toggle="tooltip" data-placement="top" title="Это товар доставляется по заказу" rel="tooltip")
+                i.far.fa-calendar-alt
         .catalog__discount
             span -15%
         img(src= item.image class="catalog__image")
