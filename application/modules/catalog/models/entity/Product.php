@@ -315,6 +315,7 @@ class Product extends \yii\db\ActiveRecord
                         $items[] = "/upload/" . $fileName;
                     } else {
                         Debug::p($file->error);
+                        exit();
                     }
                 }
 
