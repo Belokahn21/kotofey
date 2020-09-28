@@ -16,13 +16,13 @@ use yii\helpers\Url;
 
 $this->title = Title::showTitle("Обновить заказ: " . $model->id);
 ?>
-<?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']) ?>
-<?= Html::a('Удалить', Url::to(['delete', 'id' => $model->id]), ['class' => 'btn-main']) ?>
-<?= CallCenterWidget::widget([
-    'order_id' => $model->id
-]); ?>
     <div class="title-group">
         <h1>Обновить заказ: #<?= $model->id; ?></h1>
+        <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']) ?>
+        <?= Html::a('Удалить', Url::to(['delete', 'id' => $model->id]), ['class' => 'btn-main']) ?>
+        <?= CallCenterWidget::widget([
+            'order_id' => $model->id
+        ]); ?>
     </div>
 <?php if (!$model->isNewRecord): ?>
     <?php //todo: лень вывести данные цифровые ?>
