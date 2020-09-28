@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\Product;
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<? xml version = "1.0" encoding = "UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name>Зоомагазин Котофей</name>
@@ -28,7 +28,7 @@ use app\modules\catalog\models\entity\Product;
             <?php endforeach; ?>
         </categories>
         <delivery-options>
-            <option cost="0" days="0" />
+            <option cost="0" days="0"/>
         </delivery-options>
         <cpa>1</cpa>
         <offers>
@@ -40,7 +40,9 @@ use app\modules\catalog\models\entity\Product;
                     <categoryId><?= $offer->category_id; ?></categoryId>
                     <picture>https://kotofey.store/upload/<?= $offer->image; ?></picture>
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
-                    <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
+                    <?php if (!empty($offer->description)): ?>
+                        <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
+                    <?php endif; ?>
                     <pickup>false</pickup>
                     <store>false</store>
                     <delivery>true</delivery>
