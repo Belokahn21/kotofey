@@ -10,11 +10,12 @@ use yii\helpers\Html;
 
 $this->title = Title::showTitle('Товары');
 ?>
-<?= Html::a('Назад', \yii\helpers\Url::to(['index']), ['class' => 'btn-main']); ?>
-<?= Html::a("Посмотреть на сайте", $model->detail, ['target' => '_blank', 'class' => 'btn-main']); ?>
-    <h1 class="title"><?= $model->name; ?></h1>
+    <div class="title-group">
+        <h1><?= $model->name; ?></h1>
+        <?= Html::a('Назад', \yii\helpers\Url::to(['index']), ['class' => 'btn-main']); ?>
+        <?= Html::a("Посмотреть на сайте", $model->detail, ['target' => '_blank', 'class' => 'btn-main']); ?>
+    </div>
 <?php $form = ActiveForm::begin([
-//    'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
 <?= $this->render('_form', [

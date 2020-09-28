@@ -18,9 +18,11 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 $this->title = Title::showTitle('Товары');
 ?>
-    <h1 class="title">Товары</h1>
-<?= Html::a('Обновить сибагро', Url::to(['/admin/catalog/update-sibagro/upload']), ['class' => 'btn-main']); ?>
-<?= StockOutWidget::widget(); ?>
+    <div class="title-group">
+        <h1>Товары</h1>
+        <?= Html::a('Обновить сибагро', Url::to(['/admin/catalog/update-sibagro/upload']), ['class' => 'btn-main']); ?>
+        <?= StockOutWidget::widget(); ?>
+    </div>
 <?= FillFromVendorWidget::widget(); ?>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,
