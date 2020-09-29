@@ -258,6 +258,9 @@ $config = [
         'pets' => [
             'class' => 'app\modules\pets\Module',
         ],
+        'logger' => [
+            'class' => 'app\modules\logger\Module',
+        ],
     ],
     'params' => $params,
 ];

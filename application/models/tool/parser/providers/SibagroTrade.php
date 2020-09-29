@@ -3,8 +3,10 @@
 namespace app\models\tool\parser\providers;
 
 
+use app\models\tool\Debug;
 use app\models\tool\parser\CatalogInfo;
 use app\models\tool\parser\page\Page;
+use app\modules\catalog\models\entity\Product;
 use app\modules\site_settings\models\entity\SiteSettings;
 
 class SibagroTrade implements ProviderInterface
@@ -43,6 +45,15 @@ class SibagroTrade implements ProviderInterface
         }
 
 
+        $available = Product::STATUS_DRAFT;
+        $availableElement = $dom->getElementsByTagName('strong')->item(5)->nodeValue;
+
+        if (strpos($availableElement, 'В наличии') !== false) {
+            $available = Product::STATUS_ACTIVE;
+        } elseif (empty($availableElement)) {
+            $available = Product::STATUS_DRAFT;
+        }
+
         $product = new CatalogInfo();
         $product->name = $dom->getElementsByTagName('h2')->item(0)->nodeValue;
         $product->purchase = $price;
@@ -50,11 +61,15 @@ class SibagroTrade implements ProviderInterface
         $product->count = 0;
         $product->description = $xpath->query('//div[@class="desc"]')->item(0)->nodeValue;
         $product->vitrine = 1;
-        $product->status_id = 1;
+        $product->status_id = $available;
         $product->vendor_id = 4;
         $product->code = $dom->getElementsByTagName('strong')->item(2)->nodeValue;
-        $product->weight = $weight;
 
         return $product;
+    }
+
+    public static function getProductDetailByCode($code)
+    {
+        return "http://www.sat-altai.ru/catalog/?c=shop&a=item&number={$code}&category=";
     }
 }

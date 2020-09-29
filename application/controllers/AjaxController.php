@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\tool\parser\providers\SibagroTrade;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -70,7 +71,7 @@ class AjaxController extends Controller
             );
 
             $context = stream_context_create($opts);
-            $url = "http://www.sat-altai.ru/catalog/?c=shop&a=item&number={$code}&category=";
+            $url = SibagroTrade::getProductDetailByCode($code);
             $file = file_get_contents($url, false, $context);
 
             $response = stristr($file, '<span class=sklad>В наличии</span>') !== false;

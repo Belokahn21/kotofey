@@ -10,7 +10,7 @@ $config = [
     'controllerNamespace' => 'app\commands',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
         'cache' => [
@@ -37,6 +37,9 @@ $config = [
 //        ],
         'migration' => [
             'class' => 'bizley\migration\controllers\MigrationController',
+        ],
+        'sibagro' => [
+            'class' => 'app\modules\catalog\console\SibagroController'
         ]
     ],
 

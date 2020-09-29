@@ -7,5 +7,8 @@ use app\modules\catalog\models\entity\Product;
 
 class CatalogInfo extends Product
 {
-
+    public static function tableName()
+    {
+        return "product";
+    }
 }
