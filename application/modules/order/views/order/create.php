@@ -142,11 +142,10 @@ LIST;
                    title="Очистить корзину"><i class="fas fa-trash-alt"></i></a>
                 <div class="checkout-summary__info">
                     <div class="checkout-summary__title">Ваш заказ на сумму:</div>
-                    <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button"
-                       aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
+                    <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
                 </div>
                 <div class="checkout-summary__amount">
-                    <div class="js-product-calc-full-summary"><?= Price::format(Basket::getInstance()->cash()) ?></div>
+                    <div class="js-product-calc-full-summary"><?= Price::format(Basket::getInstance()->cash(true)) ?></div>
                     <div class="checkout-summary__currency"><?= Currency::getInstance()->show(); ?></div>
                 </div>
             </div>
@@ -159,8 +158,8 @@ LIST;
                                      class="light-checkout-list__image"
                                      src="<?= ProductHelper::getImageUrl($item->product) ?>">
                                 <div class="light-checkout-list__info">
-                                    <div class="light-checkout-list__title"><a class="light-checkout-list__link"
-                                                                               href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
+                                    <div class="light-checkout-list__title">
+                                        <a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
                                     </div>
                                     <div class="light-checkout-list__article">
                                         Артикул: <?= $item->product->article; ?></div>

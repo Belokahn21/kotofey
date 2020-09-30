@@ -119,15 +119,18 @@ class Basket extends Model
     }
 
 
-    public function cash()
+    public function cash($withDiscount = false)
     {
         $cash = 0;
 
-        /* @var $promo Promo */
         if (!empty($_SESSION[self::BASKET_KEY])) {
             /* @var $item OrdersItems */
             foreach ($_SESSION[self::BASKET_KEY] as $id => $item) {
-                $cash += $item->price * $item->count;
+                if ($withDiscount) {
+                    $cash += $item->discount_price ? $item->discount_price : $item->price * $item->count;
+                } else {
+                    $cash += $item->price * $item->count;
+                }
             }
         }
 

@@ -37,6 +37,7 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/catalog/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/vendors/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/logger/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/basket/install/migrations --interactive=0
 
 deploy: pull init-dev migrate
 deploy-prod: pull init-prod migrate
