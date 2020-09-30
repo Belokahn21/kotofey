@@ -40,7 +40,10 @@ $config = [
         ],
         'sibagro' => [
             'class' => 'app\modules\catalog\console\SibagroController'
-        ]
+        ],
+        'backup' => [
+            'class' => 'app\modules\site\console\BackupController'
+        ],
     ],
 
 ];
