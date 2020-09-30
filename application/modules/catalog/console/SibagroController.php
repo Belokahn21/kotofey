@@ -20,7 +20,7 @@ class SibagroController extends Controller
     public function actionUpdate()
     {
         $log = new Logger();
-        $products = Product::find()->where(['vendor_id' => self::VENDOR_SIBAGRO_ID])->limit(5);
+        $products = Product::find()->where(['vendor_id' => self::VENDOR_SIBAGRO_ID])->limit(500);
 
         if ($alreadySync = ProductSync::find()->all()) {
             $products->andWhere(['<>', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')]);
