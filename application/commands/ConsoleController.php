@@ -4,12 +4,16 @@ namespace app\commands;
 
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductSync;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
 {
     public function actionRun()
     {
+
+        ProductSync::deleteAll();
+
         $products = Product::find()->where(['>', 'discount_price', 0])->all();
 
         foreach ($products as $product) {
