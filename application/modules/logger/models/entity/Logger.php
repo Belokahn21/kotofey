@@ -3,6 +3,7 @@
 namespace app\modules\logger\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "logger".
@@ -20,12 +21,18 @@ class Logger extends \yii\db\ActiveRecord
         return 'logger';
     }
 
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function rules()
     {
         return [
             [['message', 'uniqCode'], 'required'],
-            [['message'], 'string'],
-            [['uniqCode', 'created_at', 'updated_at'], 'integer'],
+            [['message', 'uniqCode'], 'string'],
         ];
     }
 
@@ -38,5 +45,20 @@ class Logger extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function saveMessage($message, $code)
+    {
+        $this->message = $message;
+        $this->uniqCode = $code;
+
+        if (!$this->validate()) {
+            return false;
+        }
+        if (!$this->save()) {
+            return false;
+        }
+
+        return true;
     }
 }
