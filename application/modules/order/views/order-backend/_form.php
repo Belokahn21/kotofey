@@ -82,7 +82,7 @@ use yii\helpers\Url;
                     <h4>Финансы</h4>
                     <p>Закуп: <?= OrderHelper::orderPurchase($model->id); ?></p>
                     <p>Сумма заказа: <?= OrderHelper::orderSummary($model->id); ?></p>
-                    <p>Сумма со скидкой: <?= OrderHelper::orderSummary($model->id); ?></p>
+                    <p>Сумма со скидкой: <?= OrderHelper::orderSummary($model->id, true); ?></p>
 
                     <?php if ($model->promocodeEntity): ?>
                         <h4>Промокод</h4>
