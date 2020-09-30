@@ -5,7 +5,7 @@ namespace app\modules\instagram\models\tools;
 
 class Instagram
 {
-	const TOKEN = "IGQVJVS1FXVXVESnRHaXdwV1UzQlRnN3IxRk9XUDAyT0cybUxnX24wdUNtSlFXR25OY2U3eEZAiOTR6REh6dmJKc1JhR1dwdk05SVFxRk5md3pFUGc0ZAlNmMmpqS2s3b29QUTFBRjZAQOVhyRWtzRTl2TQZDZD";
+	const TOKEN = "IGQVJXZAGNxZA1ZAYOWVscDJHdzZAxLWlSeHhJeWNwX2ZAfMXdnTUtXYm9aWjdEWUJtMUl6bEM0dFlOWEZAUeDEyVjVDdUtOYkVneUtFWXlTQXhReDZAZAajYwNTZASRzhvN21sdDdDQ1JWSmV3U0xPT3FjV3NMRAZDZD";
 
 	public static function getData()
 	{
