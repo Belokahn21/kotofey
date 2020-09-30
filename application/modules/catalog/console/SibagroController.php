@@ -2,10 +2,14 @@
 
 namespace app\modules\catalog\console;
 
+use app\models\tool\parser\ParseProvider;
+use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductSync;
 use app\modules\logger\models\entity\Logger;
+use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
+use yii\helpers\ArrayHelper;
 
 class SibagroController extends Controller
 {
@@ -32,12 +36,16 @@ class SibagroController extends Controller
             $logger = new Logger();
 
             $productUrl = SibagroTrade::getProductDetailByCode($product->code);
-            $oldPercent = floor(($product->price - $product->purchase) / $product->purchase);
+            $oldPercent = floor((($product->price - $product->purchase) / $product->purchase) * 100);
 
             $provider = new ParseProvider($productUrl);
             $provider->contract();
 
-            $virProduct = $provider->getInfo();
+            try {
+                $virProduct = $provider->getInfo();
+            } catch (\Exception $exception) {
+                $logger->saveMessage("Ошибка получения данных у товара с кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE);
+            }
 
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->status_id = $virProduct->status_id;

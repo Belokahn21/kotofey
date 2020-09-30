@@ -76,9 +76,9 @@ use app\models\tool\Backup;
             <div class="statistic__item">
                 <div class="statistic__icon" data-toggle="modal" data-target="#log-list"><i class="fas fa-history"></i></div>
                 <div class="statistic__content">
-                    <?php if ($logs): ?>
+                    <?php if ($lastlogs): ?>
                         <div class="last-search">
-                            <?php foreach ($logs as $log): ?>
+                            <?php foreach ($lastlogs as $log): ?>
                                 <div class="last-search__item" title="<?= $log->message; ?>"><?= StringHelper::truncate($log->message, 25, '...'); ?></div>
                             <?php endforeach; ?>
                         </div>
