@@ -35,6 +35,6 @@ class RestBackendController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        return Json::encode(Product::find()->select(['name', 'price', 'purchase'])->where(['id' => $product_id])->one());
+        return Json::encode(Product::find()->select(['name', 'price', 'purchase', 'discount_price'])->where(['id' => $product_id])->one());
     }
 }
