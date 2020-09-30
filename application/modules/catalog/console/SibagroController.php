@@ -32,7 +32,7 @@ class SibagroController extends Controller
         }
 
         foreach ($products as $product) {
-            $oldProduct = $product;
+            $oldProduct = clone $product;
             $logger = new Logger();
 
             $productUrl = SibagroTrade::getProductDetailByCode($product->code);
