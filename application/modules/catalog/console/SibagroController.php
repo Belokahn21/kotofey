@@ -2,15 +2,10 @@
 
 namespace app\modules\catalog\console;
 
-use app\models\tool\Debug;
-use app\models\tool\parser\ParseProvider;
-use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductSync;
 use app\modules\logger\models\entity\Logger;
-use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
-use yii\helpers\ArrayHelper;
 
 class SibagroController extends Controller
 {

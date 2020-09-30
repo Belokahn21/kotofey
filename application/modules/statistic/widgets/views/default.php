@@ -1,6 +1,7 @@
 <?php
 /* @var $lastSearch \app\modules\search\models\entity\SearchQuery[]
  * @var $searches \app\modules\search\models\entity\SearchQuery[]
+ * @var $logs \app\modules\logger\models\entity\Logger[]
  * @var $this \yii\web\View
  */
 
@@ -72,10 +73,25 @@ use app\models\tool\Backup;
                     <?php endif; ?>
                 </div>
             </div>
+            <div class="statistic__item">
+                <div class="statistic__icon" data-toggle="modal" data-target="#log-list"><i class="fas fa-history"></i></div>
+                <div class="statistic__content">
+                    <?php if ($logs): ?>
+                        <div class="last-search">
+                            <?php foreach ($logs as $log): ?>
+                                <div class="last-search__item" title="<?= $log->message; ?>"><?= StringHelper::truncate($log->message, 25, '...'); ?></div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 
 <?= $this->render('include/modal-last-search', [
     'searches' => $searches
+]); ?>
+<?= $this->render('include/modal-loglist', [
+    'logs' => $logs
 ]); ?>
 <?= $this->render('include/modal-last-order'); ?>
