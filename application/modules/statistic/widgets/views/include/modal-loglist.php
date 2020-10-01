@@ -25,7 +25,7 @@ use yii\helpers\Html;
                             <div class="search-history__item">
                                 <div class="search-history__ip"><?= $log->uniqCode; ?></div>
                                 <div class="search-history__phrase"><?= $log->message ?></div>
-                                <div class="search-history__date"><?= date('d.m.Y', $log->created_at) ?></div>
+                                <div class="search-history__date"><?= date('d.m.Y H:i:s', $log->created_at) ?></div>
                             </div>
                         <?php endforeach; ?>
                     </div>

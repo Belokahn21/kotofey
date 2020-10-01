@@ -22,7 +22,7 @@ use app\models\tool\Backup;
                     <div class="statistic-info">
                         <div class="statistic-info__item">
                             <div class="statistic-info__key">Последний бэкап</div>
-                            <div class="statistic-info__value"><?= date('d.m.Y', Backup::getInstance()->getFileDate()); ?></div>
+                            <div class="statistic-info__value"><?= date('d.m.Y H:i:s', Backup::getInstance()->getFileDate()); ?></div>
                         </div>
                     </div>
                     <div class="statistic-action">
