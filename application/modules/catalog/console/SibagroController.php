@@ -16,6 +16,7 @@ class SibagroController extends Controller
 {
     const VENDOR_SIBAGRO_ID = 4;
     const UNIQ_LOG_CODE = 'sibagro_upload';
+    const UNIQ_LOG_CLEAN = 'clean_sibagro_sync';
 
     public function actionUpdate()
     {
@@ -82,5 +83,22 @@ class SibagroController extends Controller
         }
 
         return true;
+    }
+
+    // TODO:  реализовать метод очистки таблицы productsync
+    public function actionCleanProductSync()
+    {
+        $log = new Logger();
+        $history = ProductSync::find()->where('from_unixtime(`created_at`) > date_sub(now(), interval 5 day)');
+
+        if ($history->count() > 0) {
+            $log->saveMessage("Очищено {$history->count()} записей из таблицы ProductSync", self::UNIQ_LOG_CLEAN);
+        }
+
+        $history = $history->all();
+
+        foreach ($history as $item) {
+            $item->delete();
+        }
     }
 }
