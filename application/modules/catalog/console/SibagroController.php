@@ -89,7 +89,7 @@ class SibagroController extends Controller
     public function actionCleanProductSync()
     {
         $log = new Logger();
-        $history = ProductSync::find()->where('from_unixtime(`created_at`) > date_sub(now(), interval 5 day)');
+        $history = ProductSync::find()->where('created_at < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 5 day))');
 
         if ($history->count() > 0) {
             $log->saveMessage("Очищено {$history->count()} записей из таблицы ProductSync", self::UNIQ_LOG_CLEAN);
