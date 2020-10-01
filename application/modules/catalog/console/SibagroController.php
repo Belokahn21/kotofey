@@ -65,7 +65,7 @@ class SibagroController extends Controller
                 $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка обновления товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
             }
 
-            $logger->saveMessage("Товар ID: {$product->id} - {$product->name} обновлён.\n\rСтатус: {$oldProduct->status_id}=>{$product->status_id}\n\rСтарая цена:{$oldProduct->price}=>{$product->price}", self::UNIQ_LOG_CODE);
+            $logger->saveMessage("Товар ID: {$product->id} - {$product->name} обновлён.\nСтатус: {$oldProduct->status_id}=>{$product->status_id}\nЦена:{$oldProduct->price}=>{$product->price}", self::UNIQ_LOG_CODE);
 
 
             // сохраним товар чтобы повторно не проверять последние 7 дней
