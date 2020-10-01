@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\console;
 
+use app\models\tool\Debug;
 use app\models\tool\parser\ParseProvider;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\entity\Product;
@@ -28,7 +29,7 @@ class SibagroController extends Controller
         $products = $products->all();
 
         if (!$products) {
-            $log->saveMessage("При синхронизации товаров с поставщиком " . Vendor::findOne(self::VENDOR_SIBAGRO_ID)->name . " возникла ошибка. Найдено товаров: 0", self::UNIQ_LOG_CODE);
+            $log->saveMessage("При синхронизации товаров с поставщиком " . Vendor::findOne(self::VENDOR_SIBAGRO_ID)->name . " возникла ошибка. Найдено товаров: 0", self::UNIQ_LOG_CODE, Logger::STATUS_WARNING);
         }
 
         foreach ($products as $product) {
@@ -44,22 +45,24 @@ class SibagroController extends Controller
             try {
                 $virProduct = $provider->getInfo();
             } catch (\Exception $exception) {
-                $logger->saveMessage("Ошибка получения данных у товара с кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE);
+                $logger->saveMessage("Ошибка получения данных у товара с кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
             }
 
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->status_id = $virProduct->status_id;
-            $product->purchase = $virProduct->purchase;
-            $product->price = $product->purchase + floor($product->purchase * $oldPercent / 100);
+
+
+            if ($virProduct->purchase > $product->purchase) {
+                $product->purchase = $virProduct->purchase;
+                $product->price = $product->purchase + floor($product->purchase * $oldPercent / 100);
+            }
 
             if (!$product->validate()) {
-                $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка валидации товара. Товар не обновлён.", self::UNIQ_LOG_CODE);
-                return false;
+                $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка валидации товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
             }
 
             if (!$product->update()) {
-                $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка обновления товара. Товар не обновлён.", self::UNIQ_LOG_CODE);
-                return false;
+                $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка обновления товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
             }
 
             $logger->saveMessage("Товар ID: {$product->id} - {$product->name} обновлён.\n\rСтатус: {$oldProduct->status_id}=>{$product->status_id}\n\rСтарая цена:{$oldProduct->price}=>{$product->price}", self::UNIQ_LOG_CODE);
@@ -71,10 +74,10 @@ class SibagroController extends Controller
             $obj->last_run_at = time();
 
             if (!$obj->validate()) {
-                $logger->saveMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка валидации.", self::UNIQ_LOG_CODE);
+                $logger->saveMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка валидации.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
             }
             if (!$obj->save()) {
-                $logger->saveMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка сохранения.", self::UNIQ_LOG_CODE);
+                $logger->saveMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка сохранения.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
             }
         }
 

@@ -10,12 +10,17 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property string $message
+ * @property int $status
  * @property int $uniqCode
  * @property int $created_at
  * @property int $updated_at
  */
 class Logger extends \yii\db\ActiveRecord
 {
+    const STATUS_SUCCESS = 200;
+    const STATUS_ERROR = 500;
+    const STATUS_WARNING = 400;
+
     public static function tableName()
     {
         return 'logger';
@@ -33,6 +38,7 @@ class Logger extends \yii\db\ActiveRecord
         return [
             [['message', 'uniqCode'], 'required'],
             [['message', 'uniqCode'], 'string'],
+            [['status'], 'integer'],
         ];
     }
 
@@ -44,13 +50,15 @@ class Logger extends \yii\db\ActiveRecord
             'uniqCode' => 'Уникальный код',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
+            'status' => 'Статус',
         ];
     }
 
-    public function saveMessage($message, $code)
+    public function saveMessage($message, $code, $status = self::STATUS_SUCCESS)
     {
         $this->message = $message;
         $this->uniqCode = $code;
+        $this->status = $status;
 
         if (!$this->validate()) {
             return false;
