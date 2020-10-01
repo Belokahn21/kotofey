@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\Product;
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version = "1.0" encoding = "UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name>Зоомагазин Котофей</name>
