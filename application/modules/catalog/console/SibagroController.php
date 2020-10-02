@@ -24,7 +24,7 @@ class SibagroController extends Controller
         $products = Product::find()->where(['vendor_id' => self::VENDOR_SIBAGRO_ID])->limit(500);
 
         if ($alreadySync = ProductSync::find()->all()) {
-            $products->andWhere(['<>', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')]);
+            $products->andWhere(['not in', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')]);
         }
 
         $products = $products->all();
