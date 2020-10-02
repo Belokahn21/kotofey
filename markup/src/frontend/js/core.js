@@ -21,10 +21,11 @@ import './include/init-maskedinput';
 import './include/phone-mask';
 import Catalog from './block/catalog';
 import StickFilter from './block/StickFilter';
+import RemoveBasketItem from './block/RemoveBasketItem';
 
 const catalog = new Catalog();
 new StickFilter(catalog);
-
+new RemoveBasketItem();
 
 $(function () {
     $("[rel='tooltip']").tooltip();

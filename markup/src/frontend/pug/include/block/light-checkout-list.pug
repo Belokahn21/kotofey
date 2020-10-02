@@ -1,34 +1,33 @@
+include ../../mixin/checkoutProductItem
 
 ul.light-checkout-list
-	li.light-checkout-list__item
-		img.light-checkout-list__image(src="./assets/images/product.png")
-		.light-checkout-list__info
-			.light-checkout-list__title
-				a(href="/").light-checkout-list__link Бентонитовый наполнитель для кошек с ароматом яблока, 10л
-			.light-checkout-list__article Артикул: 656992
-		.light-checkout-list__calc
-			include ../block/product-calc
-	li.light-checkout-list__item
-		img.light-checkout-list__image(src="./assets/images/product.png")
-		.light-checkout-list__info
-			.light-checkout-list__title
-				a(href="/").light-checkout-list__link Бентонитовый наполнитель для кошек с ароматом яблока, 10л
-			.light-checkout-list__article Артикул: 656992
-		.light-checkout-list__calc
-			include ../block/product-calc
-	li.light-checkout-list__item
-		img.light-checkout-list__image(src="./assets/images/product.png")
-		.light-checkout-list__info
-			.light-checkout-list__title
-				a(href="/").light-checkout-list__link Бентонитовый наполнитель для кошек с ароматом яблока, 10л
-			.light-checkout-list__article Артикул: 656992
-		.light-checkout-list__calc
-			include ../block/product-calc
-	li.light-checkout-list__item
-		img.light-checkout-list__image(src="./assets/images/product.png")
-		.light-checkout-list__info
-			.light-checkout-list__title
-				a(href="/").light-checkout-list__link Бентонитовый наполнитель для кошек с ароматом яблока, 10л
-			.light-checkout-list__article Артикул: 656992
-		.light-checkout-list__calc
-			include ../block/product-calc
+    -
+        var items = [
+            {
+                name: 'Бентонитовый наполнитель для кошек с ароматом яблока, 10л',
+                image: './assets/images/product.png',
+                article: '656992',
+            },
+            {
+                name: 'Бентонитовый наполнитель для кошек с ароматом яблока, 10л',
+                image: './assets/images/product.png',
+                article: '656992',
+            },
+            {
+                name: 'Бентонитовый наполнитель для кошек с ароматом яблока, 10л',
+                image: './assets/images/product.png',
+                article: '656992',
+            },
+            {
+                name: 'Бентонитовый наполнитель для кошек с ароматом яблока, 10л',
+                image: './assets/images/product.png',
+                article: '656992',
+            },
+            {
+                name: 'Бентонитовый наполнитель для кошек с ароматом яблока, 10л',
+                image: './assets/images/product.png',
+                article: '656992',
+            },
+        ]
+    each item,index in items
+        +checkoutProductItem(item)

@@ -1,5 +1,5 @@
 #collapseSummary {
-  padding: 0 40px;
+  padding: 0;
 }
 
 .light-checkout-list {
@@ -7,11 +7,13 @@
   flex-direction: column;
 
   &__item {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 0;
+    padding: 20px 0 20px 40px;
+    margin-top: 10px;
 
     &:not(:last-child) {
       margin-bottom: 20px;
@@ -27,6 +29,11 @@
     @media(max-width: 414px) {
       flex-wrap: wrap;
       justify-content: center;
+    }
+
+    &.is-removed {
+      background: rgba(0, 0, 0, 0.02);
+      opacity: 0.3;
     }
   }
 

@@ -2,7 +2,6 @@
 
 namespace app\modules\basket\controllers;
 
-use app\models\tool\Debug;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
@@ -15,7 +14,8 @@ class RestController extends Controller
     protected function verbs()
     {
         return [
-            'add' => ['POST']
+            'add' => ['POST'],
+            'delete' => ['DELETE'],
         ];
     }
 
@@ -70,6 +70,18 @@ class RestController extends Controller
         } else {
             $basket->add($basketItem);
         }
+
+        return Json::encode([
+            'status' => 200,
+            'count' => Basket::count()
+        ]);
+    }
+
+    public function actionDelete($id)
+    {
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+        $basket = new Basket();
+        $basket->delete($id);
 
         return Json::encode([
             'status' => 200,

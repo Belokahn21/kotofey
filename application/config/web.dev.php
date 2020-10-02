@@ -117,6 +117,7 @@ $config = [
                 'POST catalog/rest/get' => 'catalog/rest/get',
                 'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
                 'GET promocode/rest/get' => 'promocode/rest/get',
+                'DELETE basket/rest/delete' => 'basket/rest/delete',
 
                 '/' => 'site/site/index',
                 '/delivery' => 'site/site/delivery',

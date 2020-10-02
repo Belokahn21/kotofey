@@ -90,9 +90,9 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
 
                 updateDiscount();
 
-                if (discount !== null) {
+
+                if (discount !== null && !isNaN(discount)) {
                     summary = summary - Math.round(summary * (discount / 100));
-                    console.log('apply discount 2');
                 }
 
                 element.textContent = priceFormat(summary);

@@ -154,9 +154,10 @@ LIST;
                     <ul class="light-checkout-list">
                         <?php foreach ($basket as $item): ?>
                             <li class="light-checkout-list__item">
-                                <img alt="<?= $item->product->name; ?>" title="<?= $item->product->name; ?>"
-                                     class="light-checkout-list__image"
-                                     src="<?= ProductHelper::getImageUrl($item->product) ?>">
+                                <a class="clear-basket js-remove-basket-item" href="#" data-toggle="tooltip" rel="tooltip" data-product-id="<?= $item->product->id; ?>" data-placement="right" title="Удалить товар из корзины">
+                                    <i class="fas fa-trash-alt"></i>
+                                </a>
+                                <img alt="<?= $item->product->name; ?>" title="<?= $item->product->name; ?>" class="light-checkout-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>">
                                 <div class="light-checkout-list__info">
                                     <div class="light-checkout-list__title">
                                         <a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
