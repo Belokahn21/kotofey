@@ -38,8 +38,10 @@ class RemoveBasketItem {
             data = JSON.parse(data);
             if (data.status === 200) {
                 element.parentNode.classList.add('is-removed');
-
+                this.skipProductCalcForm(element);
                 this.toggleText(element, 'Вернуть товар в корзину');
+
+
             }
         });
     }
@@ -50,6 +52,16 @@ class RemoveBasketItem {
 
     toggleText(element, newText) {
         element.setAttribute('data-original-title', newText);
+    }
+
+    skipProductCalcForm(element) {
+        let form = element.querySelector('.js-product-calc');
+
+        if (!form) {
+            return false;
+        }
+
+        form.classList.add('is-removed');
     }
 }
 

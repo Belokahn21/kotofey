@@ -11,12 +11,14 @@ class AddBasketWidget extends Widget
     public $product_id;
     public $count = 1;
     public $price;
+    public $discount = false;
     public $view = 'default';
 
     public $showButton = true;
     public $showInfo = true;
     public $showControl = true;
     public $showOneClick = true;
+    public $showPrice = false;
 
     public function run()
     {
@@ -35,6 +37,8 @@ class AddBasketWidget extends Widget
             'showInfo' => $this->showInfo,
             'showControl' => $this->showControl,
             'showOneClick' => $this->showOneClick,
+            'showPrice' => $this->showPrice,
+            'discount' => $this->discount,
         ]);
     }
 }

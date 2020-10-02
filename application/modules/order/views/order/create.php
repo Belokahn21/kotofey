@@ -167,10 +167,12 @@ LIST;
                                 </div>
                                 <?= AddBasketWidget::widget([
                                     'product_id' => $item->product->id,
-                                    'price' => $item->product->price,
+                                    'price' => $item->price,
+                                    'discount' => $item->discount_price,
                                     'showButton' => false,
                                     'showInfo' => false,
                                     'showOneClick' => false,
+                                    'showPrice' => true
                                 ]); ?>
                             </li>
                         <?php endforeach; ?>

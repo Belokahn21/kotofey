@@ -2,13 +2,16 @@
 
 use app\models\tool\Price;
 use app\modules\basket\models\entity\Basket;
+use app\models\tool\Currency;
 
 /* @var $product_id integer
  * @var $showButton boolean
  * @var $price integer
+ * @var $discount integer
  * @var $showInfo boolean
  * @var $showControl boolean
  * @var $showOneClick boolean
+ * @var $showPrice boolean
  * @var $basket Basket
  */
 
@@ -28,15 +31,28 @@ use app\modules\basket\models\entity\Basket;
     <?php endif; ?>
     <div class="product-calc__control-group">
         <input type="hidden" name="count" class="product-calc__count js-product-calc-price" value="<?= $price; ?>">
-        <?php if ($showControl): ?>
+        <?php if ($showControl or $showPrice): ?>
             <div class="div">
-                <button class="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                <input name="count" type="text" class="product-calc__count js-product-calc-amount" value="<?= ($basket->count ? $basket->count : 1) ?>" placeholder="1">
-                <button class="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
+                <?php if ($showControl): ?>
+                    <button class="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
+                    <input name="count" type="text" class="product-calc__count js-product-calc-amount" value="<?= ($basket->count ? $basket->count : 1) ?>" placeholder="1">
+                    <button class="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
+                <?php endif; ?>
+
+                <?php if ($showPrice): ?>
+                    <div class="product-calc__price-info">
+                        <div class="product-calc__price-info-normal">Цена за товар: <?= Price::format($price); ?><?= Currency::getInstance()->show(); ?></div>
+                        <?php if ($discount): ?>
+                            <div class="product-calc__price-info-discount">Со скдикой: <?= Price::format($discount); ?><?= Currency::getInstance()->show(); ?></div>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
         <?php else: ?>
             <input type="hidden" name="count" class="product-calc__count js-product-calc-amount" value="1">
         <?php endif; ?>
+
+
 
         <?php if ($showButton): ?>
             <button class="add-basket js-add-basket" type="submit" onclick="ym(55089223, 'reachGoal', 'basket'); return true;">
