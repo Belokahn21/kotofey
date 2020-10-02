@@ -18,59 +18,68 @@ use yii\web\HttpException;
 
 class OrderController extends Controller
 {
-	public function behaviors()
-	{
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-				'rules' => [
-					[
-						'actions' => ['view'],
-						'allow' => true,
-					],
-					[
-						'actions' => ['create'],
-						'allow' => true,
-						'matchCallback' => function ($rule, $action) {
-							return Basket::count() > 0;
-						}
-					],
-				],
-			]
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    [
+                        'actions' => ['view'],
+                        'allow' => true,
+                    ],
+                    [
+                        'actions' => ['create'],
+                        'allow' => true,
+//						'matchCallback' => function ($rule, $action) {
+//							return Basket::count() > 0;
+//						}
+                    ],
+                ],
+            ]
+        ];
+    }
 
-	public function actionCreate()
-	{
-		$order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
-		$payments = Payment::findAll(['active' => true]);
-		$deliveries = Delivery::findAll(['active' => true]);
-		$order_date = new OrderDate();
-		$delivery_time = new DeliveryTimeService();
+    public function beforeAction($action)
+    {
+        if (!Basket::count()) {
+            return $this->redirect(['/']);
+        }
 
-		if (\Yii::$app->request->isPost) {
-			$transaction = \Yii::$app->db->beginTransaction();
+        return parent::beforeAction($action);
+    }
 
-			if ($order->load(\Yii::$app->request->post())) {
+    public function actionCreate()
+    {
+        $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
+        $payments = Payment::findAll(['active' => true]);
+        $deliveries = Delivery::findAll(['active' => true]);
+//        $order_date = new OrderDate();
+//        $delivery_time = new DeliveryTimeService();
 
-				if (!\Yii::$app->user->isGuest) {
-					$order->user_id = \Yii::$app->user->id;
-				}
+        if (\Yii::$app->request->isPost) {
+            $transaction = \Yii::$app->db->beginTransaction();
 
-				if (!$order->validate()) {
-					print_r($order->getErrors());
-					$transaction->rollBack();
-					return false;
+            if ($order->load(\Yii::$app->request->post())) {
 
-				}
-				if (!$order->save()) {
-					Alert::setErrorNotify("Ошибка при создании заказа.");
-					$transaction->rollBack();
-					return false;
+                if (!\Yii::$app->user->isGuest) {
+                    $order->user_id = \Yii::$app->user->id;
+                }
 
-				}
+                if (!$order->validate()) {
+                    print_r($order->getErrors());
+                    $transaction->rollBack();
+                    return false;
 
-				// save order date delivery
+                }
+                if (!$order->save()) {
+                    Alert::setErrorNotify("Ошибка при создании заказа.");
+                    $transaction->rollBack();
+                    return false;
+
+                }
+
+                // save order date delivery
 //                if ($order_date->load(\Yii::$app->request->post())) {
 //                    $order_date->order_id = $order->id;
 //                    if (!$order_date->validate()) {
@@ -86,48 +95,48 @@ class OrderController extends Controller
 //                    }
 //                }
 
-				// save products
-				$items = new OrdersItems();
-				$items->order_id = $order->id;
+                // save products
+                $items = new OrdersItems();
+                $items->order_id = $order->id;
 
-				if (!$items->saveItems()) {
-					Alert::setErrorNotify("Товары не были сохранены. Заказ не создан.");
-					$transaction->rollBack();
-					return false;
-				}
-			}
+                if (!$items->saveItems()) {
+                    Alert::setErrorNotify("Товары не были сохранены. Заказ не создан.");
+                    $transaction->rollBack();
+                    return false;
+                }
+            }
 
 
-			$transaction->commit();
-			Alert::setSuccessNotify('Заказ успешно создан. В ближайшее время с вами свяжется оператор.');
-			return $this->redirect('/');
-		}
+            $transaction->commit();
+            Alert::setSuccessNotify('Заказ успешно создан. В ближайшее время с вами свяжется оператор.');
+            return $this->redirect('/');
+        }
 
-		return $this->render('create', [
-			'order' => $order,
-			'deliveries' => $deliveries,
-			'payments' => $payments,
+        return $this->render('create', [
+            'order' => $order,
+            'deliveries' => $deliveries,
+            'payments' => $payments,
 //            'delivery_time' => $delivery_time,
 //            'order_date' => $order_date,
-		]);
-	}
+        ]);
+    }
 
-	public function actionView($id)
-	{
-		$order = Order::findOne($id);
-		if (!$order) {
-			throw new HttpException(404, 'Такого заказа не существует');
-		}
+    public function actionView($id)
+    {
+        $order = Order::findOne($id);
+        if (!$order) {
+            throw new HttpException(404, 'Такого заказа не существует');
+        }
 
-		if (!$order->hasAccess()) {
-			throw new ForbiddenHttpException('Доступ к заказу запрещён');
-		}
+        if (!$order->hasAccess()) {
+            throw new ForbiddenHttpException('Доступ к заказу запрещён');
+        }
 
-		$items = OrdersItems::find()->where(['order_id' => $order->id])->all();
+        $items = OrdersItems::find()->where(['order_id' => $order->id])->all();
 
-		return $this->render('view', [
-			'order' => $order,
-			'items' => $items,
-		]);
-	}
+        return $this->render('view', [
+            'order' => $order,
+            'items' => $items,
+        ]);
+    }
 }
