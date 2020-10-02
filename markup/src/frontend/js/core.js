@@ -4,6 +4,9 @@ import 'popper.js';
 import 'bootstrap';
 
 import './block/product-calc';
+
+import ProductCalc from './block/ProductCalc';
+
 import './block/mobile-menu';
 import './block/basket';
 import './block/search';
@@ -26,6 +29,7 @@ import RemoveBasketItem from './block/RemoveBasketItem';
 const catalog = new Catalog();
 new StickFilter(catalog);
 new RemoveBasketItem();
+new ProductCalc();
 
 $(function () {
     $("[rel='tooltip']").tooltip();
