@@ -15,8 +15,10 @@ import './include/datepicker';
 import './include/other-jquery';
 import './include/maskedinput';
 import ProductVendorFill from './block/ProductVendorFill';
+import SetPrice from './block/SetPrice';
 
 new ProductVendorFill();
+new SetPrice('.set-price');
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {

@@ -1,4 +1,5 @@
 import config from "../config";
+import Price from '../tools/Price';
 // import promoCookie from './CookiePoromocodeClass';
 
 let timerEx = null;
@@ -17,6 +18,8 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
                     changeButtonLabel(formCalc);
                 }
             });
+
+            return false;
         });
 
         let plus = formCalc.querySelector('.js-product-calc-plus');
@@ -156,7 +159,7 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
         };
 
         let priceFormat = (price) => {
-            return new Intl.NumberFormat('ru-RU').format(price);
+            return Price.format(price);
         };
 
         let saveInfo = () => {

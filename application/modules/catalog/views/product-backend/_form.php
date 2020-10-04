@@ -66,14 +66,16 @@ use app\modules\catalog\models\helpers\ProductHelper;
                         </div>
                     </div>
 
-                    <div class="col-sm-3">
+                    <div class="col-sm-3 set-price-container">
                         <div class="form-element">
                             <?= $form->field($model, 'price')->textInput(['id' => 'id-price', 'placeholder' => 'Цена продажи'])->label(false); ?>
                         </div>
 
                         <div class="set-price">
                             <input class="set-price__input" placeholder="<?= MarkupHelpers::getCurrentMarkupProduct(); ?>" value="<?= MarkupHelpers::getCurrentMarkupProduct(); ?>">
-                            <a href="javascript:void(0);" class="set-price__action">% наценка</a>
+                            <a href="javascript:void(0);" class="set-price__action">
+                                <img src="/upload/images/percentage.png">
+                            </a>
                         </div>
                     </div>
 
