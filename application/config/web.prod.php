@@ -262,6 +262,9 @@ $config = [
         'logger' => [
             'class' => 'app\modules\logger\Module',
         ],
+        'promotion' => [
+            'class' => 'app\modules\promotion\Module',
+        ],
     ],
     'params' => $params,
 ];
