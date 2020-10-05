@@ -1,5 +1,8 @@
+// this now 05.10.2020 is worked!
+import 'air-datepicker';
+
 // he include from app with script tag before include backend.min.js
-document.addEventListener('load', () => {
+// document.addEventListener('load', () => {
     var myDatepicker = $('.js-datepicker').datepicker({
         range: false,
         showEvent: 'click',
@@ -7,4 +10,4 @@ document.addEventListener('load', () => {
             inst.hide();
         }
     });
-});
+// });

@@ -2,6 +2,7 @@
 
 namespace app\modules\promotion\controllers;
 
+use app\modules\promotion\models\entity\Promotion;
 use yii\web\Controller;
 
 class PromotionBackendController extends Controller
@@ -10,6 +11,9 @@ class PromotionBackendController extends Controller
 
     public function actionIndex()
     {
-        return $this->render('index');
+        $model = new Promotion();
+        return $this->render('index', [
+            'model' => $model
+        ]);
     }
 }
