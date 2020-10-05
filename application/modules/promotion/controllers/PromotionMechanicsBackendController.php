@@ -2,24 +2,23 @@
 
 namespace app\modules\promotion\controllers;
 
-use app\modules\content\models\entity\SlidersImages;
 use app\modules\promotion\models\entity\Promotion;
-use app\modules\promotion\models\search\PromotionSearch;
+use app\modules\promotion\models\entity\PromotionMechanics;
+use app\modules\promotion\models\search\PromotionMechanicsSearch;
 use yii\web\Controller;
 
-class PromotionBackendController extends Controller
+class PromotionMechanicsBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
 
     public function actionIndex()
     {
-        $model = new Promotion();
-        $sliderImagesModel = new SlidersImages();
-        $searchModel = new PromotionSearch();
+        $model = new PromotionMechanics();
+        $searchModel = new PromotionMechanicsSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
         return $this->render('index', [
             'model' => $model,
-            'sliderImagesModel' => $sliderImagesModel,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

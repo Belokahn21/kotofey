@@ -1,33 +1,33 @@
 <?php
 
-use app\models\tool\seo\Title;
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+use app\models\tool\seo\Title;
+use yii\grid\GridView;
 
 /* @var $this \yii\web\View
- * @var $model \app\modules\promotion\models\entity\Promotion
- * @var $sliderImagesModel \app\modules\content\models\entity\SlidersImages
+ * @var $model \app\modules\promotion\models\entity\PromotionMechanics
+ * @var $searchModel \app\modules\promotion\models\search\PromotionMechanicsSearch
+ * @var $dataProvider \yii\data\ActiveDataProvider
  */
 
-$this->title = Title::showTitle('Акции магазина');
+$this->title = Title::showTitle('Механики акций магазина');
 ?>
     <div class="title-group">
-        <h1>Акции магазина</h1>
+        <h1>Механики акций магазина</h1>
     </div>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
     'form' => $form,
     'model' => $model,
-    'sliderImagesModel' => $sliderImagesModel,
 ]); ?>
 <?php ActiveForm::end() ?>
-    <h2>Список акций</h2>
+<h2>Список механик</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Акции отсутствуют',
+    'emptyText' => 'Акционные механики отсутствуют',
     'columns' => [
         'id',
         'name',

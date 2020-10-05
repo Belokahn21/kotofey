@@ -10,6 +10,7 @@ use yii\helpers\Url;
 ?>
 <div class="admin-panel-wrap">
     <ul class="admin-panel-list">
+        <li class="admin-panel-list__item link"><a href="instagram.kotofey.store" target="_blank">Instagram</a></li>
         <li class="admin-panel-list__item link"><a href="/">Сайт</a></li>
         <li class="admin-panel-list__item link"><a href="/admin/">Панель управления</a></li>
         <li class="admin-panel-list__item link"><a href="<?= Url::to(['/admin/order/order-backend/index']); ?>">Заказы <span class="actual-count"><?= $count_orders; ?></span></a></li>

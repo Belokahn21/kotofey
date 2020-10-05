@@ -16,6 +16,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class PromotionMechanics extends \yii\db\ActiveRecord
 {
+
+    const PROMOTION_SIMPLE_DISCOUNT = 'simple';
+    const PROMOTION_ADD_PRODUCT = 'p2p';
+
     public function behaviors()
     {
         return [
@@ -23,17 +27,11 @@ class PromotionMechanics extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'promotion_mechanics';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -43,9 +41,6 @@ class PromotionMechanics extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -54,6 +49,14 @@ class PromotionMechanics extends \yii\db\ActiveRecord
             'type' => 'Type',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+        ];
+    }
+
+    public function listPromotionMechanics()
+    {
+        return [
+            self::PROMOTION_SIMPLE_DISCOUNT => 'Скидка на товар',
+            self::PROMOTION_ADD_PRODUCT => '+ товар за покупку основного',
         ];
     }
 }
