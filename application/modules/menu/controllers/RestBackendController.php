@@ -75,6 +75,9 @@ class RestBackendController extends Controller
 			['title' => 'Вакансии', 'href' => Url::to(['/admin/vacancy/vacancy-backend/index'])],
 
 			['title' => 'Промокоды', 'href' => Url::to(['/admin/promocode/promocode-backend/index'])],
+
+			['title' => 'Акции', 'href' => Url::to(['/admin/promotion/promotion-backend/index'])],
+			['title' => 'Механики акций', 'href' => Url::to(['/admin/promotion/promotion-mechanics-backend/index'])],
 		];
 
 		return Json::encode($menu);

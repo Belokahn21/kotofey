@@ -55,8 +55,8 @@ class PromotionMechanics extends \yii\db\ActiveRecord
     public function listPromotionMechanics()
     {
         return [
-            self::PROMOTION_SIMPLE_DISCOUNT => 'Скидка на товар',
-            self::PROMOTION_ADD_PRODUCT => '+ товар за покупку основного',
+            self::PROMOTION_SIMPLE_DISCOUNT => 'Одиночная скидка на товар',
+            self::PROMOTION_ADD_PRODUCT => 'Подарить товар за покупку основного',
         ];
     }
 }
