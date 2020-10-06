@@ -10,7 +10,7 @@ class Forza10 extends Importer
 {
     public function getPricePath()
     {
-        return \Yii::getAlias('@app/tmp/price/forza/forza.csv');
+        return \Yii::getAlias('@app/tmp/forza.csv');
     }
 
     public function update()
@@ -23,17 +23,19 @@ class Forza10 extends Importer
                     continue;
                 }
 
+                $name = null;
+                if (array_key_exists('0', $line)) {
+                    $name = $line[0];
+                }
+
+                $article = null;
                 if (array_key_exists('2', $line)) {
-                    $name = $line[2];
+                    $article = substr($line[2], 1, strlen($line[2]));
                 }
-                if (array_key_exists('3', $line)) {
-                    $article = $line[3];
-
+                $price = null;
+                if (array_key_exists('1', $line)) {
+                    $price = $line[1];
                 }
-                if (array_key_exists('9', $line)) {
-                    $price = $line[9];
-                }
-
 
                 if (!$article) {
                     continue;
@@ -41,13 +43,17 @@ class Forza10 extends Importer
 
                 if (!$product = Product::findOneByCode($article)) {
                     $this->addEmptyCode($article);
-                    continue;
                 }
 
-                echo $this->getOldPercent($price, $purc);
+                if ($product instanceof Product) {
+                    echo $this->getOldPercent($product->price, $product->purchase);
+                    echo PHP_EOL;
+                }
             }
         }
 
-        print_r($empty_ids);
+        print_r($this->getBankNotFoundCodes());
+
+//        print_r($empty_ids);
     }
 }

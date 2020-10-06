@@ -18,4 +18,9 @@ abstract class Importer implements Import
     {
         $this->bankNotFoundCodes[] = $code;
     }
+
+    public function getBankNotFoundCodes(): array
+    {
+        return $this->bankNotFoundCodes;
+    }
 }
