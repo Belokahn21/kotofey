@@ -5,6 +5,7 @@ namespace app\commands;
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductSync;
+use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 use yii\helpers\Json;
 
@@ -12,36 +13,22 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $products = Product::find()->all();
-
+        $products = Product::find();
+        $products->where(['vendor_id'=> Vendor::VENDOR_ID_PURINA]);
+//        $products->where(['<>', 'vendor_id', Vendor::VENDOR_ID_PURINA]);
+//        $products->where(['like', 'name', 'purina']);
+//        $products->orWhere(['like', 'name', 'cat chow']);
+//        $products->orWhere(['like', 'name', 'dog chow']);
+        echo "Найдено: " . $products->count();
+        $products = $products->all();
         foreach ($products as $product) {
-            $outImages = [];
-            @$images = Json::decode($product->images);
-            if (!$images) {
-                continue;
-            }
-
-            $product->images = null;
-
-            foreach ($images as $image) {
-                $image = str_replace('/web/', '/', $image);
-
-
-                if (@is_file(\Yii::getAlias('@app/web' . $image))) {
-                    $outImages[] = $image;
-                }
-            }
-
-            if ($outImages) {
-                $product->image = $outImages;
-            }
 
 
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             if ($product->validate()) {
-                if ($product->update()) {
-                    echo $product->name . " - good" . PHP_EOL;
-                }
+//                if ($product->update()) {
+//                echo $product->name . " - good" . PHP_EOL;
+//                }
             } else {
                 print_r($product->getErrors());
             }

@@ -22,7 +22,7 @@ class ProductSearchForm extends Product
     public function rules()
     {
         return [
-            [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id'], 'integer'],
+            [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
             [['name', 'article', 'code'], 'string'],
         ];
     }
@@ -61,6 +61,7 @@ class ProductSearchForm extends Product
             'count' => $this->count,
             'price' => $this->price,
             'purchase' => $this->purchase,
+            'vendor_id' => $this->vendor_id,
         ]);
 
         if ($product_properties_values) {

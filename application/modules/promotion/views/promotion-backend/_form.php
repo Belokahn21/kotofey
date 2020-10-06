@@ -9,7 +9,8 @@
 <nav>
     <div class="nav nav-tabs" id="backendForms" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
-        <a class="nav-item nav-link" id="nav-slider-tab" data-toggle="tab" href="#nav-slider" role="tab" aria-controls="nav-home" aria-selected="true">Слайдер</a>
+        <a class="nav-item nav-link" id="nav-slider-tab" data-toggle="tab" href="#nav-slider" role="tab" aria-controls="nav-slider" aria-selected="true">Слайдер</a>
+        <a class="nav-item nav-link" id="nav-products-tab" data-toggle="tab" href="#nav-products" role="tab" aria-controls="nav-products" aria-selected="true">Товары в акции</a>
     </div>
 </nav>
 <div class="tab-content" id="backendFormsContent">
@@ -32,5 +33,8 @@
             'form' => $form,
             'model' => $sliderImagesModel
         ]); ?>
+    </div>
+    <div class="tab-pane" id="nav-products" role="tabpanel" aria-labelledby="nav-products-tab">
+        Товары в акции
     </div>
 </div>

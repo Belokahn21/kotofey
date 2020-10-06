@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
+use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\widgets\stockOut\StockOutWidget;
@@ -80,16 +81,28 @@ $this->title = Title::showTitle('Товары');
                 return Html::a($model->name, Url::to(["update", 'id' => $model->id]));
             }
         ],
-        'base_price',
-        'purchase',
         [
-            'attribute' => 'price',
-            'format' => 'raw',
+            'attribute' => 'vendor_id',
+            'filter' => ArrayHelper::map(Vendor::find()->all(), 'id', 'name'),
             'value' => function ($model) {
-                if (!empty($model->purchase) && !empty($model->price)) {
-                    return sprintf("%s (%s%%)", $model->price, ceil(($model->price - $model->purchase) / $model->purchase * 100));
+                return @Vendor::findOne($model->vendor_id)->name;
+            }
+        ],
+        [
+            'label' => 'Цены',
+            'format' => 'raw',
+            'options' => [
+                'width' => '200px'
+            ],
+            'value' => function ($model) {
+                $out = "";
+
+                $out .= "Цена: " . $model->price . sprintf(" (%s%%)", ceil(($model->price - $model->purchase) / $model->purchase * 100)) . "<br>";
+                if ($model->discount_price) {
+                    $out .= "Со скидкой: " . $model->discount_price . "<br>";
                 }
-                return $model->price;
+                $out .= "Закупочная: " . $model->purchase . "<br>";
+                return $out;
             }
         ],
         [

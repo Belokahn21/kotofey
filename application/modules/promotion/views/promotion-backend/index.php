@@ -22,6 +22,7 @@ $this->title = Title::showTitle('Акции магазина');
     'model' => $model,
     'sliderImagesModel' => $sliderImagesModel,
 ]); ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end() ?>
     <h2>Список акций</h2>
 <?= GridView::widget([
