@@ -18,6 +18,7 @@ $this->title = Title::showTitle('Товары');
 <?php $form = ActiveForm::begin([
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
+    Наценка: <?= round((($model->price - $model->purchase) / $model->purchase) * 100); ?>
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
