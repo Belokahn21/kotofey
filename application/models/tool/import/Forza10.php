@@ -6,7 +6,7 @@ namespace app\models\tool\import;
 use app\modules\catalog\models\entity\Product;
 use yii\helpers\ArrayHelper;
 
-class Forza10
+class Forza10 extends Importer
 {
     public function getPricePath()
     {
@@ -35,23 +35,16 @@ class Forza10
                 }
 
 
-                if ($article) {
-                    $product = Product::findOneByCode($article);
-                    if ($product instanceof Product) {
-                        $price = ceil($price);
-                        if ($product->purchase !== $price) {
-                            $current_price = ceil((($product->price - $product->purchase) / $product->purchase) * 100);
-
-                            if ($price == 0) {
-                                $empty_ids[] = $product->id;
-                            } else {
-                                $product->purchase = $price;
-                                $product->price = $price + ceil($price * ($current_price / 100));
-                                echo $article . '=' . $product->price . '=' . $current_price . '=' . $price . PHP_EOL;
-                            }
-                        }
-                    }
+                if (!$article) {
+                    continue;
                 }
+
+                if (!$product = Product::findOneByCode($article)) {
+                    $this->addEmptyCode($article);
+                    continue;
+                }
+
+                echo $this->getOldPercent($price, $purc);
             }
         }
 

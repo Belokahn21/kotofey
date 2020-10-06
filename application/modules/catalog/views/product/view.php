@@ -3,6 +3,8 @@
 use yii\helpers\Json;
 use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
+use app\modules\stock\models\entity\Stocks;
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
@@ -80,28 +82,17 @@ $this->title = Title::showTitle($product->name);
         </ul>
         <a class="product-properties__more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Все характеристики</a>
  */ ?>
-
-
     </div>
-
-
 </div>
 <nav class="product-tabs in-product">
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description"
-           role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
-        <a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics"
-           role="tab" aria-controls="nav-characteristics" aria-selected="false">Характеристики</a>
-        <a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations"
-           role="tab" aria-controls="nav-recommendations" aria-selected="false">Рекомендации</a>
-        <a class="nav-item nav-link" id="nav-delivery-tab" data-toggle="tab" href="#nav-delivery" role="tab"
-           aria-controls="nav-delivery" aria-selected="false">Доставка</a>
-        <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab"
-           aria-controls="nav-payment" aria-selected="false">Оплата</a>
-        <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab"
-           aria-controls="nav-buy" aria-selected="false">Как купить?</a>
-        <a class="nav-item nav-link" id="nav-available-tab" data-toggle="tab" href="#nav-available" role="tab"
-           aria-controls="nav-available" aria-selected="false">Наличие в магазинах</a>
+        <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
+        <a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab" aria-controls="nav-characteristics" aria-selected="false">Характеристики</a>
+        <a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations" role="tab" aria-controls="nav-recommendations" aria-selected="false">Рекомендации</a>
+        <a class="nav-item nav-link" id="nav-delivery-tab" data-toggle="tab" href="#nav-delivery" role="tab" aria-controls="nav-delivery" aria-selected="false">Доставка</a>
+        <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
+        <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Как купить?</a>
+        <a class="nav-item nav-link" id="nav-available-tab" data-toggle="tab" href="#nav-available" role="tab" aria-controls="nav-available" aria-selected="false">Наличие в магазинах</a>
     </div>
 </nav>
 <div class="tab-content product-tab-content" id="nav-tabContent">
@@ -134,13 +125,15 @@ $this->title = Title::showTitle($product->name);
         После того как заказ был оформлен с вами свяжется оператор (через 15 минут) для уточнения деталей заказа и согласования времени доставки.
     </div>
     <div class="tab-pane fade" id="nav-available" role="tabpanel" aria-labelledby="nav-available-tab">
-        <ul class="in-stock-detail-product">
-            <?php foreach (\app\modules\stock\models\entity\Stocks::find()->where(['active' => 1])->all() as $item) : ?>
-                <li class="in-stock-detail-product__item"><?= $item->name; ?> (<?= $item->address; ?>) - <span class="green">В НАЛИЧИИ, Возможна доставка сегодня</span></li>
-            <?php endforeach; ?>
-
-
-        </ul>
+        <?php if ($product->status_id == Product::STATUS_ACTIVE): ?>
+            <ul class="in-stock-detail-product">
+                <?php foreach (Stocks::find()->where(['active' => 1])->all() as $stock) : ?>
+                    <li class="in-stock-detail-product__item"><?= $stock->name; ?> (<?= $stock->address; ?>) - <span class="green">В НАЛИЧИИ, Возможна доставка сегодня</span></li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <span class="red">Нет в наличии</span>
+        <?php endif; ?>
     </div>
 </div>
 <?php /*
