@@ -16,6 +16,8 @@ class ConsoleController extends Controller
         $products = Product::find();
 //        $products->where(['vendor_id' => Vendor::VENDOR_ID_PURINA]);
         $products->where(['like', 'name', 'сибирская кошка']);
+        $products->orWhere(['like', 'name', 'brit premium']);
+        $products->orWhere(['like', 'name', 'brit premium']);
         echo "Найдено: " . $products->count();
         $products = $products->all();
 
