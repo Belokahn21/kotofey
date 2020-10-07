@@ -33,6 +33,7 @@ class Vendor extends \yii\db\ActiveRecord
     const VENDOR_ID_PURINA = 1;
     const VENDOR_ID_MARS = 2;
     const VENDOR_ID_ROYAL = 3;
+    const VENDOR_ID_SIBAGRO = 4;
 
     public function behaviors()
     {

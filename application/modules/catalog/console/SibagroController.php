@@ -52,6 +52,10 @@ class SibagroController extends Controller
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             $product->status_id = $virProduct->status_id;
 
+            if ($product->count > 0) {
+                $product->status_id = Product::STATUS_ACTIVE;
+            }
+
 
             if ($virProduct->purchase > $product->purchase) {
                 $product->purchase = $virProduct->purchase;

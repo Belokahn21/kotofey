@@ -14,13 +14,14 @@ class ConsoleController extends Controller
     public function actionRun()
     {
         $products = Product::find();
-        $products->where(['vendor_id' => Vendor::VENDOR_ID_PURINA]);
+//        $products->where(['vendor_id' => Vendor::VENDOR_ID_PURINA]);
+        $products->where(['like', 'name', 'сибирская кошка']);
         echo "Найдено: " . $products->count();
         $products = $products->all();
 
         foreach ($products as $product) {
 
-            $product->status_id = Product::STATUS_DRAFT;
+            $product->vendor_id = Vendor::VENDOR_ID_SIBAGRO;
 
 
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
