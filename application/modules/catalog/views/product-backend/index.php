@@ -70,7 +70,7 @@ $this->title = Title::showTitle('Товары');
                 if ($model->status_id == 1) {
                     return Html::tag('div', 'Активен', ['style' => 'color: green;']);
                 } else {
-                    return Html::tag('div', 'Черновик', ['style' => 'color: grey;']);
+                    return Html::tag('div', 'Черновик', ['style' => 'color: red;']);
                 }
             }
         ],
