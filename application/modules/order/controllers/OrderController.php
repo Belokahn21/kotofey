@@ -42,15 +42,15 @@ class OrderController extends Controller
 
     public function beforeAction($action)
     {
-        if (!Basket::count()) {
-            return $this->redirect(['/']);
-        }
-
         return parent::beforeAction($action);
     }
 
     public function actionCreate()
     {
+        if (!Basket::count()) {
+            return $this->redirect(['/']);
+        }
+
         $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $payments = Payment::findAll(['active' => true]);
         $deliveries = Delivery::findAll(['active' => true]);
