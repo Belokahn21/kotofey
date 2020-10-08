@@ -70,4 +70,9 @@ class ProductHelper
 
         return $url;
     }
+
+    public static function getDetailUrl(Product $model)
+    {
+        return Url::to(['/catalog/product/view', 'id' => $model->slug]);
+    }
 }
