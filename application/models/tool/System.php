@@ -33,6 +33,11 @@ class System
         return $_SERVER['HTTP_HOST'];
     }
 
+    public static function fullDomain()
+    {
+        return self::protocol() . '://' . $_SERVER['HTTP_HOST'];
+    }
+
     public function getCurrentUrl()
     {
         return $this->protocol() . "://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];

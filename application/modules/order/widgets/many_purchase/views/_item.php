@@ -8,11 +8,11 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
 
 /* @var $model \app\modules\catalog\models\entity\Product */
 ?>
-<div class="swiper-slide vitrine__slide" >
-    <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model) ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
+<div class="swiper-slide vitrine__slide">
+    <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, true) ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
     <div class="swiper-lazy-preloader"></div>
     <div class="vitrine__title">
-        <a class="vitrine__link" href="https://kotofey.store<?= $model->detail; ?>"><?= $model->name; ?></a>
+        <a class="vitrine__link" href="<?= ProductHelper::getDetailUrl($model); ?>"><?= $model->name; ?></a>
     </div>
     <div class="vitrine__properties">
         <?= PreviewPropertiesWidget::widget([

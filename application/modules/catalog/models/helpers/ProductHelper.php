@@ -2,7 +2,8 @@
 
 namespace app\modules\catalog\models\helpers;
 
-
+use app\models\tool\System;
+use yii\helpers\Url;
 use app\modules\catalog\models\helpers\ProductPropertiesHelper;
 use app\modules\catalog\models\entity\Product;
 
@@ -55,7 +56,7 @@ class ProductHelper
         return $out;
     }
 
-    public static function getImageUrl(Product $model)
+    public static function getImageUrl(Product $model, $isFull = false)
     {
         $url = "/upload/" . $model->image;
         $noImage = "/upload/images/not-image.png";
@@ -66,6 +67,11 @@ class ProductHelper
 
         if (!is_file(\Yii::getAlias('@webroot/upload/' . $model->image))) {
             $url = $noImage;
+        }
+
+
+        if ($isFull) {
+            return System::fullDomain() . $url;
         }
 
         return $url;
