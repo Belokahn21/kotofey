@@ -4,25 +4,20 @@ use app\models\tool\Price;
 use app\models\tool\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
+use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
 
 /* @var $model \app\modules\catalog\models\entity\Product */
 ?>
-<div class="swiper-slide vitrine__slide">
-    <img class="vitrine__image" src="<?= ProductHelper::getImageUrl($model) ?>">
+<div class="swiper-slide vitrine__slide" >
+    <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model) ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
+    <div class="swiper-lazy-preloader"></div>
     <div class="vitrine__title">
         <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
     </div>
     <div class="vitrine__properties">
-        <ul class="light-properties">
-            <li class="light-properties__item">
-                <div class="light-properties__label">Размер</div>
-                <div class="light-properties__value">250*120*65мм</div>
-            </li>
-            <li class="light-properties__item">
-                <div class="light-properties__label">Артикул</div>
-                <div class="light-properties__value"><?= $model->article; ?></div>
-            </li>
-        </ul>
+        <?= PreviewPropertiesWidget::widget([
+            'product' => $model
+        ]); ?>
     </div>
     <div class="vitrine__price">
         <span class="amount"><?= Price::format($model->price); ?></span>
