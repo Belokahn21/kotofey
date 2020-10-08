@@ -5,6 +5,7 @@ use app\models\tool\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
+use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
 
 /* @var $models \app\modules\catalog\models\entity\Product[]
  * @var $informersValues \app\modules\catalog\models\entity\InformersValues[]
@@ -29,17 +30,15 @@ use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
             <?php foreach ($models as $model): ?>
                 <div class="swiper-slide vitrine__slide">
                     <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
-                    <img class="vitrine__image" src="<?= ProductHelper::getImageUrl($model); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
+                    <img class="vitrine__image swiper-lazy" src="<?= ProductHelper::getImageUrl($model); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
+                    <div class="swiper-lazy-preloader"></div>
                     <div class="vitrine__title">
                         <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
                     </div>
                     <div class="vitrine__properties">
-                        <ul class="light-properties">
-                            <li class="light-properties__item">
-                                <div class="light-properties__label">Артикул</div>
-                                <div class="light-properties__value"><?= $model->article; ?></div>
-                            </li>
-                        </ul>
+                        <?= PreviewPropertiesWidget::widget([
+                            'product' => $model
+                        ]); ?>
                     </div>
                     <div class="vitrine__price">
                         <span class="amount-old"><?= Price::format($model->price); ?></span>
