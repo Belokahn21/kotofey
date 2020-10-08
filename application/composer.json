@@ -1,12 +1,7 @@
 {
   "name": "yiisoft/yii2-app-basic",
   "description": "Yii 2 Basic Project Template",
-  "keywords": [
-    "yii2",
-    "framework",
-    "basic",
-    "project template"
-  ],
+  "keywords": ["yii2", "framework", "basic", "project template"],
   "homepage": "http://www.yiiframework.com/",
   "type": "project",
   "license": "BSD-3-Clause",
@@ -19,33 +14,22 @@
   },
   "minimum-stability": "stable",
   "require": {
-    "udokmeci/yii2-phone-validator": "~1.0.3",
-    "php": ">=5.4.0",
+    "php": ">=5.6.0",
     "yiisoft/yii2": "~2.0.14",
     "yiisoft/yii2-bootstrap": "~2.0.0",
-    "yiisoft/yii2-swiftmailer": "~2.0.0",
-    "mihaildev/yii2-ckeditor": "*",
-    "bizley/migration": "^3.6",
-    "gietos/dadata": "^1.1",
-    "ext-curl": "*",
-    "ext-dom": "*",
-    "mohorev/yii2-upload-behavior": "*",
-    "ext-iconv": "*",
-    "yiisoft/yii2-authclient": "*",
-    "vkcom/vk-php-sdk": "^5.101",
-    "ext-libxml": "*",
-    "phpoffice/phpspreadsheet": "^1.10",
-    "yiimaker/yii2-social-share": "^2.3",
-    "ext-json": "*",
-    "sunra/php-simple-html-dom-parser": "1.5.2"
+    "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0"
   },
   "require-dev": {
-    "yiisoft/yii2-debug": "~2.0.0",
-    "yiisoft/yii2-gii": "~2.0.0",
+    "yiisoft/yii2-debug": "~2.1.0",
+    "yiisoft/yii2-gii": "~2.1.0",
     "yiisoft/yii2-faker": "~2.0.0",
-    "codeception/base": "^2.2.3",
-    "codeception/verify": "~0.3.1",
-    "codeception/specify": "~0.4.3"
+    "codeception/codeception": "^4.0",
+    "codeception/verify": "~0.5.0 || ~1.1.0",
+    "codeception/specify": "~0.4.6",
+    "symfony/browser-kit": ">=2.7 <=4.2.4",
+    "codeception/module-filesystem": "^1.0.0",
+    "codeception/module-yii2": "^1.0.0",
+    "codeception/module-asserts": "^1.0.0"
   },
   "config": {
     "process-timeout": 1800,
