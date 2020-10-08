@@ -30,7 +30,7 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
             <?php foreach ($models as $model): ?>
                 <div class="swiper-slide vitrine__slide">
                     <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
-                    <img class="vitrine__image swiper-lazy" src="<?= ProductHelper::getImageUrl($model); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
+                    <img class="vitrine__image swiper-lazy" src="<?= ProductHelper::getImageUrl($model, true); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
                     <div class="swiper-lazy-preloader"></div>
                     <div class="vitrine__title">
                         <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
