@@ -7,14 +7,9 @@ namespace app\modules\user;
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\user\controllers';
+    public $avatarPath = "/upload/avatar/";
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();

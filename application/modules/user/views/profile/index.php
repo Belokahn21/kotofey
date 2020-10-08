@@ -7,14 +7,17 @@
  * @var $favorite \app\modules\catalog\models\entity\Product[]
  */
 
-use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\Html;
 use app\models\tool\Price;
-use app\models\tool\seo\Title;
+use yii\widgets\ActiveForm;
+use app\widgets\Breadcrumbs;
+use yii\helpers\ArrayHelper;
 use app\models\tool\Currency;
+use app\models\tool\seo\Title;
+use app\modules\user\models\helpers\UserHelper;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
-use app\widgets\Breadcrumbs;
 use app\modules\catalog\models\helpers\ProductHelper;
 
 $this->title = Title::showTitle('Личный кабинет');
@@ -56,27 +59,40 @@ $this->title = Title::showTitle('Личный кабинет');
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="home">
                     <h2 class="page__title">Настройки пользователя</h2>
-                    <form class="site-form profile-form">
-                        <div class="page__left">
-                            <div class="site-form__item">
-                                <label class="site-form__label" for="site-form-email">Адрес вашей электронной
-                                    почты</label>
-                                <input class="site-form__input" id="site-form-email" type="text" placeholder="Адрес вашей электронной почты">
-                            </div>
-                            <div class="site-form__item">
-                                <label class="site-form__label" for="site-form-password">Новый пароль</label>
-                                <input class="site-form__input" id="site-form-password" type="password" placeholder="Пароль">
-                            </div>
+                    <?php $form = ActiveForm::begin([
+                        'options' => [
+                            'class' => 'site-form profile-form'
+                        ]
+                    ]); ?>
+                    <div class="page__left">
+                        <div class="site-form__item">
+                            <?= Html::label('Адрес вашей электронной почты', 'site-form-email', ['class' => 'site-form__label']) ?>
+                            <?= $form->field($model, 'email')->textInput(['id' => 'site-form-email', 'class' => 'site-form__input'])->label(false); ?>
                         </div>
-                        <div class="page__right">
-                            <div class="site-form__item">
-                                <label class="site-form__label" for="site-form-avatar">Аватарка</label>
-                                <input class="site-form__input" id="site-form-avatar" type="file">
-                            </div>
+                        <div class="site-form__item">
+                            <?= Html::label('Ваш пол', 'site-form-sex', ['class' => 'site-form__label']) ?>
+                            <?= $form->field($model, 'sex')->dropDownList(ArrayHelper::map($sexList, 'id', 'name'), ['prompt' => 'Указать пол'])->label(false); ?>
                         </div>
-                    </form>
+                        <?php /*
+                        <div class="site-form__item">
+                            <label class="site-form__label" for="site-form-password">Новый пароль</label>
+                            <input class="site-form__input" id="site-form-password" type="password" placeholder="Пароль">
+                        </div>*/ ?>
+                        <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
+                    </div>
+                    <div class="page__right">
+                        <?php if ($model->avatar): ?>
+                            <img style="width: 100px; object-fit: contain; margin: 0 auto; display: block;" src="<?= UserHelper::getAvatar($model); ?>" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
+                        <?php endif; ?>
+                        <div class="site-form__item">
+                            <?= Html::label('Аватарка', 'site-form-avatar', ['class' => 'site-form__label']) ?>
+                            <?= $form->field($model, 'avatar')->fileInput(['id' => 'site-form-avatar', 'class' => 'site-form__input'])->label(false); ?>
+                        </div>
+                    </div>
+                    <?php ActiveForm::end(); ?>
                 </div>
                 <div class="tab-pane fade" id="profile">
+                    <h2 class="page__title">Список покупок</h2>
                     <?php if ($orders): ?>
                         <div class="profile-orders">
                             <div class="profile-orders__row profile-orders__header">
@@ -103,6 +119,7 @@ $this->title = Title::showTitle('Личный кабинет');
                     <?php endif; ?>
                 </div>
                 <div class="tab-pane fade" id="favorite">
+                    <h2 class="page__title">Список избранных товаров</h2>
                     <?php if ($favorite = Favorite::findAll()): ?>
                         <div class="profile-favorite-list">
                             <?php foreach ($favorite as $item): ?>
@@ -126,7 +143,7 @@ $this->title = Title::showTitle('Личный кабинет');
                     <?php endif; ?>
                 </div>
                 <div class="tab-pane fade" id="pet">
-                    <h2>Карточка питомца</h2>
+                    <h2 class="page__title">Карточка питомца</h2>
                     <p>Мы ещё делаем этот блок. Скоро здесь появится крутой функционал!</p>
                 </div>
             </div>

@@ -39,6 +39,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     const SCENARIO_UPDATE = 'update';
     const SCENARIO_LOGIN = 'login';
     const SCENARIO_CHECKOUT = 'checkout';
+    const SCENARIO_PROFILE_UPDATE = 'profile';
 
     public $groups;
     public $new_password;
@@ -50,19 +51,23 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
             self::SCENARIO_UPDATE => ['phone', 'email', 'password', 'groups', 'new_password'],
             self::SCENARIO_LOGIN => ['phone', 'email', 'password'],
             self::SCENARIO_CHECKOUT => ['phone', 'email', 'password'],
+            self::SCENARIO_PROFILE_UPDATE => ['email', 'sex', 'avatar'],
         ];
     }
 
     public function behaviors()
     {
+
+        $module = \Yii::$app->getModule('user');
+
         return [
             TimestampBehavior::className(),
             [
                 'class' => UploadBehavior::className(),
                 'attribute' => 'avatar',
-                'scenarios' => ['insert', 'update'],
-                'path' => '@webroot/upload/avatar/',
-                'url' => '@web/upload/avatar/',
+                'scenarios' => ['profile'],
+                'path' => '@webroot' . $module->avatarPath,
+                'url' => '@web' . $module->avatarPath,
             ],
         ];
     }
@@ -125,26 +130,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function afterSave($insert, $changedAttributes)
-    {
-        parent::afterSave($insert, $changedAttributes);
-
-        if ($insert) {
-
-            $referal = new UsersReferal();
-            $referal->createRefreal($this->id);
-
-            if (!\app\modules\bonus\models\entity\Discount::findByUserId($this->id)) {
-                $discount = new Discount();
-                $discount->user_id = $this->id;
-                $discount->count = 0;
-                if ($discount->validate()) {
-                    $discount->save();
-                }
-            }
-        }
-    }
-
     public static function findByEmail($email)
     {
         return static::findOne(['email' => $email]);
@@ -152,7 +137,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function getDiscount()
     {
-        return \app\modules\bonus\models\entity\Discount::findByUserId($this->id);
+        return Discount::findByUserId($this->id);
     }
 
     public static function isRole($roleName)

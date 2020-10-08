@@ -2,12 +2,8 @@
 
 namespace app\commands;
 
-use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductSync;
-use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
-use yii\helpers\Json;
 
 class ConsoleController extends Controller
 {
