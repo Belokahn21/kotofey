@@ -168,7 +168,7 @@ class OrderHelper
                 print_r($product->getErrors());
             }
 
-            return $product->update();
+            $product->update();
         }
 
         return true;
