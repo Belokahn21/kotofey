@@ -1,44 +1,54 @@
 .stock-out {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
 
   &__item {
-    margin: 10px;
-    width: 23%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: stretch;
     align-items: center;
-    border-bottom: 1px #C6C6C6 solid;
-    padding: 5px;
+    flex-wrap: wrap;
+    border: 1px silver solid;
+    padding-bottom: 10px;
+    box-shadow: 0 1px 4px 0 rgba(50, 50, 50, 0.75);
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+  }
+
+  &__name {
+    width: 100%;
+    margin-bottom: 20px;
+    background: $light-grey-background;
+    padding: 10px;
+    font-weight: bold;
+
+    a {
+      color: inherit;
+    }
   }
 
   &__image {
-    height: 100px;
-    object-fit: contain;
-    margin: 10px 0;
-  }
-}
-
-.stock-out-info {
-  display: flex;
-  flex-direction: column;
-
-  &__row {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 12px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 40px;
   }
 
-  &__key {
-    flex: 2 1 0;
+  &__price, &__price, &__count, &__purchase, &__summary {
+    flex: 1;
   }
 
-  &__value {
-    flex: 1 1 0;
+  &__price {
+  }
+
+  &__count {
+  }
+
+  &__purchase {
+  }
+
+  &__summary {
   }
 }

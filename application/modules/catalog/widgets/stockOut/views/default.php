@@ -27,24 +27,16 @@ use yii\helpers\Url;
                 <ul class="stock-out">
                     <?php foreach ($products as $product): ?>
                         <li class="stock-out__item">
+                            <div class="stock-out__name">
+                                <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>"><?= $product->name; ?></a>
+                            </div>
                             <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>">
                                 <img class="stock-out__image" src="/upload/<?= $product->image; ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
                             </a>
-
-                            <ul class="stock-out-info">
-                                <li class="stock-out-info__row">
-                                    <div class="stock-out-info__key">Количество</div>
-                                    <div class="stock-out-info__value"><?= $product->count; ?></div>
-                                </li>
-                                <li class="stock-out-info__row">
-                                    <div class="stock-out-info__key">Закуплено на сумму</div>
-                                    <div class="stock-out-info__value"><?= $product->count * $product->purchase; ?></div>
-                                </li>
-                                <li class="stock-out-info__row">
-                                    <div class="stock-out-info__key">Доход</div>
-                                    <div class="stock-out-info__value"><?= $product->count * ($product->price - $product->purchase); ?></div>
-                                </li>
-                            </ul>
+                            <div class="stock-out__price">Цена: <?= $product->price; ?></div>
+                            <div class="stock-out__count">Количество: <?= $product->count; ?></div>
+                            <div class="stock-out__purchase">Закупочная:<?= $product->purchase; ?></div>
+                            <div class="stock-out__summary">Доход:<?= ($product->price - $product->purchase) * $product->count; ?></div>
                         </li>
                     <?php endforeach; ?>
                 </ul>

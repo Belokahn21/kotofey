@@ -8,9 +8,10 @@ class SetPrice {
             return false;
         }
 
-        this.setPriceinput = self.querySelector('.set-price__input');
-        this.priceInput = self.querySelector("#id-price");
-        this.purchaseInput = self.querySelector("#id-purchase");
+        this.applyDiscount = self.querySelector('.set-price__action');
+        this.discountInput = self.querySelector('.set-price__input');
+        this.priceInput = document.querySelector("#id-price");
+        this.purchaseInput = document.querySelector("#id-purchase");
 
 
         this.initEvents();
@@ -23,10 +24,21 @@ class SetPrice {
         if (!this.priceInput || !this.purchaseInput) {
             return false;
         }
-        this.priceInput.onchange = this.onChangeSetPriceInput.bind(this);
+
+        this.purchaseInput.onchange = this.handlePurchase.bind(this);
+        this.discountInput.onchange = this.handleDiscount.bind(this);
+        this.applyDiscount.onclick = this.handleApply.bind(this);
     }
 
-    onChangeSetPriceInput() {
+    handlePurchase() {
+        this.priceInput.value = parseInt(this.purchaseInput.value) + parseInt(Math.round(this.purchaseInput.value * (this.discountInput.value / 100)));
+    }
+
+    handleDiscount() {
+        this.priceInput.value = parseInt(this.purchaseInput.value) + parseInt(Math.round(this.purchaseInput.value * (this.discountInput.value / 100)));
+    }
+
+    handleApply() {
 
     }
 }
