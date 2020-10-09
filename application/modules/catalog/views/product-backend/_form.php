@@ -134,6 +134,8 @@ use app\modules\catalog\models\helpers\ProductHelper;
                         <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
                             <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                         </a>
+                        <br>
+                        Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
                     <?php endif; ?>
                 </div>
                 <?= $form->field($model, 'image')->fileInput(); ?>

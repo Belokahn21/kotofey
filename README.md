@@ -8,7 +8,9 @@
 
 Здравствуй. Это репозиторий <a href="https://kotofey.store/" target="_blank">интернет-магазина Котофей</a>. <br>
 Что под капотом?: <br>
-Фрейм: Yii2 Basic
+Фреймворк: Yii2 (Basic template)<br>
 React JS, около 5% сайта
 Вёрстка: Gulp+Babel+Sass+Pug
-MySQL
+MySQL<br><br>
+Используется:
+ - TinyPNG API (free 500/mounth)
