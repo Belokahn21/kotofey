@@ -12,6 +12,11 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
+        'imageCompress' => [
+            'class' => 'app\modules\site\components\ImageCompress',
+            'apiKey' => 'wc16fxnnQFozTU03gQQWEjbmXZRQwUvf',
+            'maxCompressCount' => 500
+        ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
             'clients' => [

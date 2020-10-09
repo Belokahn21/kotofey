@@ -33,7 +33,6 @@ tests/_support/_generated
 .vagrant
 *dump.html
 *dump.txt
-debug.php
 backup
 build
 composer.lock

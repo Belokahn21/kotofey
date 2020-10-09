@@ -1,8 +1,29 @@
 <?php
-//2273р. 27коп.
-$parser = new \app\models\tool\parser\ParseProvider('http://www.sat-altai.ru/catalog/?c=shop&a=item&number=000016871&category=00000226');
-$parser->contract();
-\app\models\tool\Debug::p($parser->getInfo());
+
+use yii\widgets\ActiveForm;
+
+//\app\models\tool\Debug::p(Yii::$app->imageCompress);
+
+$model = new \app\modules\catalog\models\entity\Product();
+$model->scenario = \app\modules\catalog\models\entity\Product::SCENARIO_NEW_PRODUCT;
+
+$form = ActiveForm::begin();
+
+echo $form->field($model, 'name')->textInput(['value' => rand(1, 10)]);
+echo $form->field($model, 'price')->textInput(['value' => rand(1, 10)]);
+echo $form->field($model, 'count')->textInput(['value' => rand(1, 10)]);
+echo $form->field($model, 'image')->fileInput();
+echo \yii\helpers\Html::submitButton('Добавить');
+ActiveForm::end();
+
+
+if ($model->load(Yii::$app->request->post())) {
+    if ($model->validate()) {
+        if ($model->save()) {
+            \app\widgets\notification\Alert::setSuccessNotify('Товар добавлен');
+        }
+    }
+}
 
 ?>
 <?php

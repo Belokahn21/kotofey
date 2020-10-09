@@ -2,9 +2,9 @@
 
 namespace app\modules\catalog\models\entity;
 
-use app\models\tool\Debug;
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
+use app\modules\site\components\behaviors\ImageUploadMinify;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
@@ -55,7 +55,7 @@ class Product extends \yii\db\ActiveRecord
 
     const SCENARIO_NEW_PRODUCT = 'insert';
     const SCENARIO_UPDATE_PRODUCT = 'update';
-    const SCENARIO_CREATE_EXT_PRODUCT = 'external';
+//    const SCENARIO_CREATE_EXT_PRODUCT = 'external';
 
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
@@ -65,7 +65,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_NEW_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
             self::SCENARIO_UPDATE_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
-            self::SCENARIO_CREATE_EXT_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
+//            self::SCENARIO_CREATE_EXT_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
         ];
     }
 
@@ -138,7 +138,7 @@ class Product extends \yii\db\ActiveRecord
                 'ensureUnique' => true,
             ],
             [
-                'class' => UploadBehavior::class,
+                'class' => ImageUploadMinify::class,
                 'attribute' => 'image',
                 'scenarios' => ['insert', 'update'],
                 'path' => '@webroot/upload/',
@@ -340,7 +340,6 @@ class Product extends \yii\db\ActiveRecord
 
     public function getDetail()
     {
-//        return "/product/" . (!empty($this->slug) ? $this->slug : $this->id) . "/";
         return Url::to(['/catalog/product/view', 'id' => $this->slug]);
     }
 
@@ -353,46 +352,6 @@ class Product extends \yii\db\ActiveRecord
     {
         return self::findOne(['slug' => $slug]);
     }
-
-    // todo: json edit
-//	public function afterFind()
-//	{
-//		$settings = json_decode($this->settings);
-//		$this->brands = $settings->brands;
-//		$this->categories = $settings->categories;
-//		$this->shop_name = $settings->shop_name;
-//		$this->shop_company = $settings->shop_company;
-//		$this->shop_url = $settings->shop_url;
-//		$this->shop_platform = $settings->shop_platform;
-//		$this->shop_version = $settings->shop_version;
-//		$this->shop_agency = $settings->shop_agency;
-//		$this->shop_email = $settings->shop_email;
-//		$this->shop_cpa = $settings->shop_cpa;
-//		parent::afterFind();
-//	}
-//
-//
-//	/**
-//	 * @return bool
-//	 */
-//	public function beforeValidate()
-//	{
-//		$settings = [
-//			'brands' => $this->brands,
-//			'categories' => $this->categories,
-//			'shop_name' => $this->shop_name,
-//			'shop_company' => $this->shop_company,
-//			'shop_url' => $this->shop_url,
-//			'shop_platform' => $this->shop_platform,
-//			'shop_version' => $this->shop_version,
-//			'shop_agency' => $this->shop_agency,
-//			'shop_email' => $this->shop_email,
-//			'shop_cpa' => $this->shop_cpa,
-//		];
-//		$this->settings = json_encode($settings);
-//
-//		return parent::beforeValidate();
-//	}
 
     public function getCategory()
     {
