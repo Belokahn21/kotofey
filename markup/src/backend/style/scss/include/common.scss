@@ -23,10 +23,20 @@ html, body {
 
 [aria-invalid="true"] {
   border: 1px solid red;
+
+  &[role="radiogroup"] {
+    border: 0;
+    color: red;
+  }
 }
 
 [aria-invalid="false"] {
   border: 1px solid green;
+
+  &[role="radiogroup"] {
+    border: 0;
+    color: green;
+  }
 }
 
 .form-group {
