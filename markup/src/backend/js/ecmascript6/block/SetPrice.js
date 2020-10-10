@@ -62,4 +62,5 @@ class SetPrice {
     }
 }
 
+
 module.exports = SetPrice;
