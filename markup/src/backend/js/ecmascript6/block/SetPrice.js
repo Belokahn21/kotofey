@@ -4,6 +4,9 @@ class SetPrice {
     constructor(element) {
         let inst = this;
 
+        this.timerEx;
+        this.timeoutSave = 200;
+
         let self = document.querySelector(element);
 
         if (!self) {
@@ -42,7 +45,7 @@ class SetPrice {
 
     handleDiscount() {
 
-        if(!this.discountInput.value){
+        if (!this.discountInput.value) {
             return false;
         }
 
@@ -56,9 +59,16 @@ class SetPrice {
     }
 
     handleApply(event) {
-        fetch(config.ajaxSaveProductMark + this.discountInput.value + '/').then(response => response.json()).then(data => {
-            console.log(data);
-        });
+
+        if (this.timerEx) {
+            clearTimeout(this.timerEx)
+        }
+
+        this.timerEx = setTimeout(() => {
+            fetch(config.ajaxSaveProductMark + this.discountInput.value + '/').then(response => response.json()).then(data => {
+                console.log(data);
+            });
+        }, this.timeoutSave);
     }
 }
 
