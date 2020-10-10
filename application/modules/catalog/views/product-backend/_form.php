@@ -23,7 +23,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
         <a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo" aria-selected="false">SEO</a>
         <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-gallery" aria-selected="false">Изображения</a>
-        <a class="nav-item nav-link" id="nav-additional-tab" data-toggle="tab" href="#nav-additional" role="tab" aria-controls="nav-additional" aria-selected="false">Дополнительно</a>
+        <a class="nav-item nav-link" id="nav-additional-tab" data-toggle="tab" href="#nav-additional" role="tab" aria-controls="nav-additional" aria-selected="false">Условия доставки</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
     </div>
 </nav>
@@ -91,25 +91,21 @@ use app\modules\catalog\models\helpers\ProductHelper;
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="form-title">
-                    Условия доставки заказа
-                </div>
-                <div class="form-element">
-                    <?= $form->field($model, 'is_product_order')->checkbox()->label(false); ?>
-                </div>
 
                 <div class="form-element">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>
-                        </div>
-                        <div class="col-sm-6">
-                            <?= $form->field($modelDelivery, 'end')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать максимальное значение']); ?>
-                        </div>
-                    </div>
+                    <?= $form->field($model, 'code')->textInput(['placeholder' => 'Внешний код'])->label(false); ?>
                 </div>
-
                 <div class="form-element">
+                    <?= $form->field($model, 'barcode')->textInput(['placeholder' => 'Штрих-код'])->label(false); ?>
+                </div>
+                <div class="form-element">
+                    <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
+                </div>
+                <div class="form-element">
+                    <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
+                </div>
+                <div class="form-element">
+                    <?= $form->field($model, 'threeDCode')->textarea(['rows' => 5]) ?>
                 </div>
             </div>
         </div>
@@ -156,21 +152,24 @@ use app\modules\catalog\models\helpers\ProductHelper;
         </div>
     </div>
     <div class="tab-pane fade" id="nav-additional" role="tabpanel" aria-labelledby="nav-additional-tab">
-        <div class="form-element">
-            <?= $form->field($model, 'code')->textInput(); ?>
+        <div class="form-title">
+            Условия доставки заказа
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'barcode')->textInput(); ?>
+            <?= $form->field($model, 'is_product_order')->checkbox()->label(false); ?>
         </div>
+
         <div class="form-element">
-            <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>
+                </div>
+                <div class="col-sm-6">
+                    <?= $form->field($modelDelivery, 'end')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать максимальное значение']); ?>
+                </div>
+            </div>
         </div>
-        <div class="form-element">
-            <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
-        </div>
-        <div class="form-element">
-            <?= $form->field($model, 'threeDCode')->textarea(['rows' => 5]) ?>
-        </div>
+
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
         <ul style="list-style: none; margin: 0; padding: 0;">
