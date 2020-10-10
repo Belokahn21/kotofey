@@ -1,3 +1,5 @@
+import config from '../../reactjs/config';
+
 class SetPrice {
     constructor(element) {
         let inst = this;
@@ -26,7 +28,11 @@ class SetPrice {
         }
 
         this.purchaseInput.onchange = this.handlePurchase.bind(this);
+        this.purchaseInput.onkeyup = this.handlePurchase.bind(this);
+
         this.discountInput.onchange = this.handleDiscount.bind(this);
+        this.discountInput.onkeyup = this.handleDiscount.bind(this);
+
         this.applyDiscount.onclick = this.handleApply.bind(this);
     }
 
@@ -38,8 +44,10 @@ class SetPrice {
         this.priceInput.value = parseInt(this.purchaseInput.value) + parseInt(Math.round(this.purchaseInput.value * (this.discountInput.value / 100)));
     }
 
-    handleApply() {
-
+    handleApply(event) {
+        fetch(config.ajaxSaveProductMark + this.discountInput.value + '/').then(response => response.json()).then(data => {
+            console.log(data);
+        });
     }
 }
 

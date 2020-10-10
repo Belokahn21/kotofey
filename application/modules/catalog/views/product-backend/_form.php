@@ -8,7 +8,7 @@ use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use yii\helpers\Json;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\settings\models\helpers\MarkupHelpers;
+use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 
 /* @var $model \app\modules\catalog\models\entity\Product
@@ -72,7 +72,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
                         </div>
 
                         <div class="set-price">
-                            <input class="set-price__input" placeholder="<?= MarkupHelpers::getCurrentMarkupProduct(); ?>" value="<?= MarkupHelpers::getCurrentMarkupProduct(); ?>">
+                            <input class="set-price__input" placeholder="<?= ProductMarkupHelper::getProductMarkupFromCookie() ?>" value="<?= ProductMarkupHelper::getProductMarkupFromCookie(); ?>">
                             <a href="javascript:void(0);" class="set-price__action">
                                 <img src="/upload/images/percentage.png">
                             </a>

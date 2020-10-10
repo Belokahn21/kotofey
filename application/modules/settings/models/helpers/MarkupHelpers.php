@@ -8,6 +8,7 @@ use Yii;
 class MarkupHelpers
 {
     const MARKUP_KEY = 'markup_price';
+
     public static function getCurrentMarkupProduct()
     {
         $cookies = Yii::$app->request->cookies;

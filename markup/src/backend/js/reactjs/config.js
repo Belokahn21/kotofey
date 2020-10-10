@@ -11,5 +11,6 @@ module.exports = {
     restSearchGet: url + '/rest/product/get/',
     restUserGet: url + '/user/rest-backend/get/',
     restTodoAdd: url + '/todo/rest-backend/add/',
-    restTodoGet: url + '/todo/rest-backend/get/'
+    restTodoGet: url + '/todo/rest-backend/get/',
+    ajaxSaveProductMark: url + '/ajax/mark/'
 };
