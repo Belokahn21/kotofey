@@ -20,7 +20,7 @@ use yii\helpers\Html;
 
 
 <?= $form->field($model, 'search')->textInput([
-	'class' => 'mobile-search__input',
+	'class' => 'mobile-search__input js-live-search',
 	'placeholder' => 'Найти товар',
 	'value' => $model->search
 ])->label(false) ?>

@@ -13,6 +13,7 @@ use app\modules\catalog\widgets\stockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
+ * @var $model \app\modules\catalog\models\entity\Product
  * @var $properties \app\modules\catalog\models\entity\ProductProperties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  */

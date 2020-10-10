@@ -25,11 +25,13 @@ import './include/phone-mask';
 import Catalog from './block/catalog';
 import StickFilter from './block/StickFilter';
 import RemoveBasketItem from './block/RemoveBasketItem';
+import LiveSearch from './block/LiveSearch';
 
 const catalog = new Catalog();
 new StickFilter(catalog);
 new RemoveBasketItem();
 new ProductCalc();
+new LiveSearch('.js-live-search');
 
 $(function () {
     $("[rel='tooltip']").tooltip();

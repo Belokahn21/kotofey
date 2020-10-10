@@ -120,6 +120,7 @@ class Product extends \yii\db\ActiveRecord
             'code' => 'Внешний код',
             'has_store' => 'Сохранить в маркете Вконтакте',
             'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
             'is_product_order' => 'Товар под заказ',
             'feed' => 'Поисковой контент',
             'threeDCode' => '3D представление',
