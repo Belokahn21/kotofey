@@ -41,6 +41,17 @@ class SetPrice {
     }
 
     handleDiscount() {
+
+        if(!this.discountInput.value){
+            return false;
+        }
+
+        this.handleApply();
+
+        if (!this.discountInput.value || !this.purchaseInput.value) {
+            return false;
+        }
+
         this.priceInput.value = parseInt(this.purchaseInput.value) + parseInt(Math.round(this.purchaseInput.value * (this.discountInput.value / 100)));
     }
 
