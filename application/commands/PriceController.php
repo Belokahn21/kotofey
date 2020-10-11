@@ -31,7 +31,7 @@ class PriceController extends Controller
                 break;
             case 2:
                 $purina = new Purina();
-                $purina->update($external_type);
+                $purina->update();
                 break;
             case 3:
                 $forza = new Forza10();

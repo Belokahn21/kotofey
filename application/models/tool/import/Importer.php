@@ -14,6 +14,11 @@ abstract class Importer implements Import
         return ceil((($big - $small) / $small) * 100);
     }
 
+    public function getNewPrice($price, $mark)
+    {
+        return $price + round($price * ($mark / 100));
+    }
+
     public function addEmptyCode($code)
     {
         $this->bankNotFoundCodes[] = $code;
