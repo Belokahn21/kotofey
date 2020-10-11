@@ -18,19 +18,17 @@ class Purina extends Importer
         if (($handle = fopen($this->getPricePath(), "r")) !== false) {
             while (($line = fgetcsv($handle, 1000, ";")) !== false) {
 
-                $code = $this->getActualCode($line);
-
-                if (!is_numeric($code)) {
+                if (!$line[0] or !$line[1]) {
                     continue;
                 }
 
 
                 $price = round($line[3]);
 
-                $product = Product::findOneByCode($code);
+                $product = $this->getActualProduct($line);
 
                 if (!$product) {
-                    $this->addEmptyCode($code);
+                    $this->addEmptyCode($line[0]);
                     continue;
                 }
 
@@ -53,16 +51,15 @@ class Purina extends Importer
         }
     }
 
-    public function getActualCode($line)
+    public function getActualProduct($line)
     {
-        if ($line[0] && $line[1]) {
-            return $line[0] > $line[1] ? $line[0] : $line[1];
+        if ($p1 = Product::findOneByCode($line[0])) {
+            return $p1;
+        }
+        if ($p2 = Product::findOneByCode($line[1])) {
+            return $p2;
         }
 
-        if (!$line[0] && $line[1]) {
-            return $line[1];
-        }
-
-        return $line[1];
+        return null;
     }
 }
