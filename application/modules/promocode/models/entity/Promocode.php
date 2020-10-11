@@ -2,9 +2,7 @@
 
 namespace app\modules\promocode\models\entity;
 
-use app\models\tool\Debug;
 use app\modules\content\models\behaviors\DateToIntBehaviors;
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -38,6 +36,7 @@ class Promocode extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['count'], 'default', 'value' => 0],
             [['count', 'discount'], 'integer'],
             [['code'], 'string', 'max' => 255],
             [['code'], 'unique'],

@@ -18,14 +18,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
 ?>
 
 <div class="page">
-	<?= Breadcrumbs::widget([
-		'homeLink' => [
-			'label' => 'Главная ',
-			'url' => Yii::$app->homeUrl,
-			'title' => 'Первая страница сайта зоомагазина Котофей',
-		],
-		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-	]); ?>
+    <?= Breadcrumbs::widget([
+        'homeLink' => [
+            'label' => 'Главная ',
+            'url' => Yii::$app->homeUrl,
+            'title' => 'Первая страница сайта зоомагазина Котофей',
+        ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
     <h1 class="page__title">Просмотр заказа: #<?= $order->id; ?></h1>
     <div class="row">
         <div class="col-6">
@@ -49,34 +49,20 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
             </table>
         </div>
         <div class="col-6">
-			<?php if ($items): ?>
-                <ul>
-					<?php foreach ($items as $item): ?>
-                        <li class="row d-flex flex-row align-items-center m-2">
-
-                            <div class="col-3">
-                                <img width="100" src="<?= ProductHelper::getImageUrl($item->product) ?>">
-                            </div>
-
-                            <div class="col-4">
-								<?= Html::a($item->name, $item->product->detail); ?>
-                            </div>
-
-                            <div class="col-2">
-								<?= Price::format($item->price); ?>
-                            </div>
-
-                            <div class="col-1">
-								<?= $item->count; ?>
-                            </div>
-
-                            <div class="col-2">
-								<?= Price::format($item->count * $item->price); ?>
-                            </div>
+            <?php if ($items): ?>
+                <ul class="profile-order-products">
+                    <?php foreach ($items as $item): ?>
+                        <li class="profile-order-products__item">
+                            <?= Html::a($item->name, $item->product->detail, ['class' => 'profile-order-products__link']); ?>
+                            <img class="profile-order-products__image" src="<?= ProductHelper::getImageUrl($item->product) ?>">
+                            <div class="profile-order-products__price"><?= Price::format($item->price); ?></div>
+                            <div class="profile-order-products__char">X</div>
+                            <div class="profile-order-products__count"><?= $item->count; ?></div>
+                            <div class="profile-order-products__summary"><?= Price::format($item->count * $item->price); ?></div>
                         </li>
-					<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
-			<?php endif; ?>
+            <?php endif; ?>
         </div>
     </div>
 </div>

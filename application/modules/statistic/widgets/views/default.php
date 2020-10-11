@@ -65,9 +65,9 @@ use app\models\tool\Backup;
                 <div class="statistic__icon" data-toggle="modal" data-target="#search-list"><i class="fas fa-search"></i></div>
                 <div class="statistic__content">
                     <?php if ($lastSearch): ?>
-                        <div class="last-search">
+                        <div class="statistic-summary">
                             <?php foreach ($lastSearch as $search): ?>
-                                <div class="last-search__item" title="<?= $search->text; ?>"><?= StringHelper::truncate($search->text, 10, '...'); ?></div>
+                                <div class="statistic-summary__item" title="<?= $search->text; ?>"><?= StringHelper::truncate($search->text, 25, '...'); ?></div>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
@@ -77,9 +77,9 @@ use app\models\tool\Backup;
                 <div class="statistic__icon" data-toggle="modal" data-target="#log-list"><i class="fas fa-history"></i></div>
                 <div class="statistic__content">
                     <?php if ($lastlogs): ?>
-                        <div class="last-search">
+                        <div class="statistic-summary">
                             <?php foreach ($lastlogs as $log): ?>
-                                <div class="last-search__item" title="<?= $log->message; ?>"><?= StringHelper::truncate($log->message, 25, '...'); ?></div>
+                                <div class="statistic-summary__item" title="<?= $log->message; ?>"><?= StringHelper::truncate($log->message, 25, '...'); ?></div>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>

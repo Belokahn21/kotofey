@@ -1,0 +1,12 @@
+.statistic-summary {
+  padding: 5px 0;
+  &__item {
+    font-size: 12px;
+    color: silver;
+    text-transform: uppercase;
+
+    &:not(:first-child) {
+      margin-top: 5px;
+    }
+  }
+}

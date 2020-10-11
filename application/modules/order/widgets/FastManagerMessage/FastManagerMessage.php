@@ -3,6 +3,7 @@
 namespace app\modules\order\widgets\FastManagerMessage;
 
 
+use app\models\tool\Debug;
 use yii\base\Widget;
 
 class FastManagerMessage extends Widget
@@ -17,7 +18,14 @@ class FastManagerMessage extends Widget
         }
 
         $vendros = array();
+
+//        print_r($this->items);
+//        exit();
+
         foreach ($this->items as $item):
+            if (!property_exists($item, 'vendor_id')) {
+                continue;
+            }
             if ($item->product->vendor_id):
                 $vendros[$item->product->vendor_id][] = $item;
             endif;

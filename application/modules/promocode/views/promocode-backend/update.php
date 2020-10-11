@@ -12,7 +12,6 @@ $this->title = Title::showTitle("Промокоды");
     <h1 class="title">Промокод: <?= $model->code; ?></h1>
 <?= Html::a('Назад', ['index'], ['class' => 'btn-main']); ?>
 <?php $form = ActiveForm::begin([
-	'enableAjaxValidation' => true,
 	'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
 <?= $this->render('_form', [

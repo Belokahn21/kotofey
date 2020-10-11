@@ -1,0 +1,29 @@
+.profile-order-products {
+  &__item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-bottom: 20px;
+    justify-content: space-between;
+  }
+
+  &__link {
+    color: $main-color;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.03);
+    width: 100%;
+    padding: 10px;
+    font-size: 12px;
+
+  }
+
+  &__image {
+    width: 70px;
+    margin-top: 10px;
+  }
+
+  &__summary{
+    margin-right: 10px;
+  }
+}

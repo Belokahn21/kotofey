@@ -16,8 +16,6 @@ class LiveSearch {
 
     init() {
         this.elements.forEach((element) => {
-            console.log(element);
-
             element.setAttribute('placeholder', "");
             document.addEventListener('DOMContentLoaded', () => {
                 this.typing(element, this.bankPhrases[Number.getRandom(0, this.bankPhrases.length)]);

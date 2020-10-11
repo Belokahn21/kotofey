@@ -13,7 +13,6 @@ $this->title = Title::showTitle("Промокоды");
 ?>
     <h1 class="title">Промокоды</h1>
 <?php $form = ActiveForm::begin([
-	'enableAjaxValidation' => true,
 	'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
 <?= $this->render('_form', [
