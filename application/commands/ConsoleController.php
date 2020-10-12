@@ -15,13 +15,21 @@ class ConsoleController extends Controller
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-            $product->vendor_id = Vendor::VENDOR_ID_ROYAL;
+            if (!is_numeric($product->code)) {
+                continue;
+            }
+
+            if (substr($product->code, 0, 4) != '0000' and substr($product->code, 0, 5) != '00000') {
+                continue;
+            }
+
+            $product->vendor_id = Vendor::VENDOR_ID_SIBAGRO;
 
             if ($product->validate()) {
-//                if ($product->update()) {
+                if ($product->update()) {
                     echo $product->code . "=" . $product->name;
                     echo PHP_EOL;
-//                }
+                }
             }
         }
     }
