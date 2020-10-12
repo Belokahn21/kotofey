@@ -38,19 +38,21 @@ $this->title = Title::showTitle('Личный кабинет');
     <a class="profile__logout" href="<?= Url::to(['/user/profile/logout']) ?>">Выйти</a>
     <div class="page__group-row">
         <div class="page__left profile-sections-wrap">
-            <div class="profile-sections nav nav-tabs" id="proflieTabs" role="tablist"><a
-                        class="profile-sections__item active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                        aria-controls="home" aria-selected="true"><i class="fas fa-user"></i>
+            <div class="profile-sections nav nav-tabs" id="proflieTabs" role="tablist">
+                <a class="profile-sections__item active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <i class="fas fa-user"></i>
                     <div class="profile-sections__title">Настройки</div>
                 </a>
-                <a class="profile-sections__item" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                   aria-controls="profile" aria-selected="false"><i class="fas fa-hand-holding-usd"></i>
+                <a class="profile-sections__item" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                    <i class="fas fa-hand-holding-usd"></i>
                     <div class="profile-sections__title">Заказы</div>
                 </a>
-                <a class="profile-sections__item" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-heart"></i>
+                <a class="profile-sections__item" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="profile" aria-selected="false">
+                    <i class="fas fa-heart"></i>
                     <div class="profile-sections__title">Избранное</div>
                 </a>
-                <a class="profile-sections__item" id="pet-tab" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-selected="false"><i class="fas fa-paw"></i>
+                <a class="profile-sections__item" id="pet-tab" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-selected="false">
+                    <i class="fas fa-paw"></i>
                     <div class="profile-sections__title">Питомец</div>
                 </a>
             </div>
@@ -73,6 +75,18 @@ $this->title = Title::showTitle('Личный кабинет');
                             <?= Html::label('Ваш пол', 'site-form-sex', ['class' => 'site-form__label']) ?>
                             <?= $form->field($model, 'sex')->dropDownList(ArrayHelper::map($sexList, 'id', 'name'), ['prompt' => 'Указать пол'])->label(false); ?>
                         </div>
+                        <div class="site-form__item">
+                            <?= Html::label('Фамилия', 'site-form-first_name', ['class' => 'site-form__label']) ?>
+                            <?= $form->field($model, 'first_name')->textInput(['value' => Yii::$app->user->identity->first_name, 'class' => 'site-form__input'])->label(false); ?>
+                        </div>
+                        <div class="site-form__item">
+                            <?= Html::label('Имя', 'site-form-name', ['id' => 'site-form-name', 'class' => 'site-form__label']) ?>
+                            <?= $form->field($model, 'sex')->textInput(['id' => 'site-form-name', 'value' => Yii::$app->user->identity->name, 'class' => 'site-form__input'])->label(false); ?>
+                        </div>
+                        <div class="site-form__item">
+                            <?= Html::label('Отчество', 'site-form-surname', ['class' => 'site-form__label']) ?>
+                            <?= $form->field($model, 'sex')->textInput(['id' => 'site-form-surname', 'value' => Yii::$app->user->identity->last_name, 'class' => 'site-form__input'])->label(false); ?>
+                        </div>
                         <?php /*
                         <div class="site-form__item">
                             <label class="site-form__label" for="site-form-password">Новый пароль</label>
@@ -81,11 +95,14 @@ $this->title = Title::showTitle('Личный кабинет');
                         <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
                     </div>
                     <div class="page__right">
-                        <?php if ($model->avatar): ?>
-                            <img style="width: 100px; object-fit: contain; margin: 0 auto; display: block;" src="<?= UserHelper::getAvatar($model); ?>" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
-                        <?php endif; ?>
-                        <div class="site-form__item">
-                            <?= Html::label('Аватарка', 'site-form-avatar', ['class' => 'site-form__label']) ?>
+                        <div class="profile-avatar">
+                            <label for="site-form-avatar">
+                                <?php if ($model->avatar): ?>
+                                    <img class="profile-avatar__image" src="<?= UserHelper::getAvatar($model); ?>" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
+                                <?php else: ?>
+                                    <img class="profile-avatar__image" src="/upload/images/not-image.png" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
+                                <?php endif; ?>
+                            </label>
                             <?= $form->field($model, 'avatar')->fileInput(['id' => 'site-form-avatar', 'class' => 'site-form__input'])->label(false); ?>
                         </div>
                     </div>
