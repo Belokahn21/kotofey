@@ -11,17 +11,23 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-//        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_HILLS])->all();
+//        $products = Product::find()->where(['vendor_id' => null])->all();
         $products = Product::find()->where(['like', 'name', "hill's"])->all();
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-            $product->price = $product->purchase + round($product->purchase * 15 / 100);
+
+//            if (!is_numeric($product->code)) {
+//                continue;
+//            }
+
+            $product->vendor_id = Vendor::VENDOR_ID_HILLS;
+
 
             if ($product->validate()) {
                 if ($product->update()) {
-                    echo $product->name;
-                    echo PHP_EOL;
+                echo $product->name;
+                echo PHP_EOL;
                 }
             }
         }
