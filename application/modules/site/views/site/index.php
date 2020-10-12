@@ -6,6 +6,7 @@
 
 use app\modules\content\widgets\informers_slider\InformerSliderWidget;
 use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
+use app\modules\catalog\widgets\LastWeekProducts\LastWeekProducts;
 use app\modules\catalog\widgets\DiscountItems\DiscountItemsWidget;
 use app\modules\order\widgets\many_purchase\ManyPurchasedGoods;
 use app\modules\content\widgets\slider\SliderWidget;
@@ -56,3 +57,4 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     </div>
 */ ?>
 <?= InstagramMediaWidget::widget(); ?>
+<?= LastWeekProducts::widget(); ?>

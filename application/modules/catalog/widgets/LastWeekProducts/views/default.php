@@ -1,0 +1,56 @@
+<?php
+
+use app\models\tool\Price;
+use app\models\tool\Currency;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\basket\widgets\addBasket\AddBasketWidget;
+use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
+use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
+
+/* @var $models \app\modules\catalog\models\entity\Product[]
+ * @var $informersValues \app\modules\catalog\models\entity\InformersValues[]
+ * @var $formatArray array
+ * @var $this \yii\web\View
+ */
+
+?>
+
+<?php if ($models): ?>
+    <div class="page-title__group is-column">
+        <h2 class="page-title">Новинки недели</h2>
+        <a class="page-title__link" href="/catalog/">Все предложения</a>
+    </div>
+    <div class="swiper-container vitrine-container">
+        <div class="swiper-wrapper vitrine-wrapper">
+            <?php foreach ($models as $model): ?>
+                <div class="swiper-slide vitrine__slide">
+                    <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
+                    <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, true); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
+                    <div class="swiper-lazy-preloader"></div>
+                    <div class="vitrine__title">
+                        <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
+                    </div>
+                    <div class="vitrine__properties">
+                        <?= PreviewPropertiesWidget::widget([
+                            'product' => $model
+                        ]); ?>
+                    </div>
+                    <div class="vitrine__price">
+                        <span class="amount-old"><?= Price::format($model->price); ?></span>
+                        <span class="amount"><?= Price::format($model->discount_price); ?></span>
+                        <span class="rate"><?= Currency::getInstance()->show(); ?> / шт</span>
+                    </div>
+                    <?= AddBasketWidget::widget([
+                        'product_id' => $model->id,
+                        'price' => $model->price,
+                        'showInfo' => false,
+                        'showOneClick' => false,
+                        'showControl' => false,
+                        'showButton' => true,
+                    ]) ?>
+                </div>
+            <?php endforeach; ?>
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+<?php endif; ?>
