@@ -3,6 +3,7 @@
 namespace app\commands;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 
@@ -15,6 +16,13 @@ class ConsoleController extends Controller
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
             $product->discount_price = $product->price - round(($product->price * 10) / 100);
+
+
+            $obj = new ProductPropertiesValues();
+            $obj->product_id = $product->id;
+            $obj->property_id = 11;
+            $obj->value = '230';
+            $obj->save();
 
 
 
