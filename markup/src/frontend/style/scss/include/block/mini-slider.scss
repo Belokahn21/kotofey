@@ -1,0 +1,14 @@
+.mini-slider {
+
+  &-container {
+    width: 480px;
+  }
+
+  &-slide {
+
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+}

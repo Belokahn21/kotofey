@@ -13,6 +13,7 @@ use app\modules\order\models\entity\Order;
 use yii\helpers\StringHelper;
 use app\models\tool\Backup;
 
+$product = Product::find();
 ?>
     <div class="statistic-wrap">
         <div class="statistic">
@@ -32,7 +33,8 @@ use app\models\tool\Backup;
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon" data-toggle="modal" data-target="#order-list"><i class="fas fa-cookie"></i></div>
+                <div class="statistic__icon" data-toggle="modal" data-target="#order-list"><i class="fas fa-cookie"></i>
+                </div>
                 <div class="statistic__content">
                     <div class="statistic-info">
                         <div class="statistic-info__item">
@@ -52,34 +54,38 @@ use app\models\tool\Backup;
                     <div class="statistic-info">
                         <div class="statistic-info__item">
                             <div class="statistic-info__key">Товаров</div>
-                            <div class="statistic-info__value"><?= Product::find()->count(); ?></div>
+                            <div class="statistic-info__value"><?= $product->count(); ?></div>
                         </div>
                         <div class="statistic-info__item">
-                            <div class="statistic-info__key">Прибыль</div>
-                            <div class="statistic-info__value">---</div>
+                            <div class="statistic-info__key">А/Ч/БП</div>
+                            <div class="statistic-info__value"><?= $product->where(['status_id' => Product::STATUS_ACTIVE])->count(); ?>/<?= $product->where(['status_id' => Product::STATUS_DRAFT])->count(); ?>/<?= $product->where(['vendor_id' => null])->count(); ?></div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon" data-toggle="modal" data-target="#search-list"><i class="fas fa-search"></i></div>
+                <div class="statistic__icon" data-toggle="modal" data-target="#search-list"><i
+                            class="fas fa-search"></i></div>
                 <div class="statistic__content">
                     <?php if ($lastSearch): ?>
                         <div class="statistic-summary">
                             <?php foreach ($lastSearch as $search): ?>
-                                <div class="statistic-summary__item" title="<?= $search->text; ?>"><?= StringHelper::truncate($search->text, 25, '...'); ?></div>
+                                <div class="statistic-summary__item"
+                                     title="<?= $search->text; ?>"><?= StringHelper::truncate($search->text, 25, '...'); ?></div>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon" data-toggle="modal" data-target="#log-list"><i class="fas fa-history"></i></div>
+                <div class="statistic__icon" data-toggle="modal" data-target="#log-list"><i class="fas fa-history"></i>
+                </div>
                 <div class="statistic__content">
                     <?php if ($lastlogs): ?>
                         <div class="statistic-summary">
                             <?php foreach ($lastlogs as $log): ?>
-                                <div class="statistic-summary__item" title="<?= $log->message; ?>"><?= StringHelper::truncate($log->message, 25, '...'); ?></div>
+                                <div class="statistic-summary__item"
+                                     title="<?= $log->message; ?>"><?= StringHelper::truncate($log->message, 25, '...'); ?></div>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>

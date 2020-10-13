@@ -24,7 +24,9 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
         <div class="swiper-wrapper vitrine-wrapper">
             <?php foreach ($models as $model): ?>
                 <div class="swiper-slide vitrine__slide">
-                    <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
+                    <?php if ($model->discount_price): ?>
+                        <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
+                    <?php endif; ?>
                     <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, true); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
                     <div class="swiper-lazy-preloader"></div>
                     <div class="vitrine__title">
@@ -36,8 +38,12 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
                         ]); ?>
                     </div>
                     <div class="vitrine__price">
-                        <span class="amount-old"><?= Price::format($model->price); ?></span>
-                        <span class="amount"><?= Price::format($model->discount_price); ?></span>
+                        <?php if ($model->discount_price): ?>
+                            <span class="amount-old"><?= Price::format($model->price); ?></span>
+                            <span class="amount"><?= Price::format($model->discount_price); ?></span>
+                        <?php else: ?>
+                            <span class="amount"><?= Price::format($model->price); ?></span>
+                        <?php endif; ?>
                         <span class="rate"><?= Currency::getInstance()->show(); ?> / шт</span>
                     </div>
                     <?= AddBasketWidget::widget([

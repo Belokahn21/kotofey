@@ -144,3 +144,13 @@ let swiperInstagramContainer = new Swiper('.instagram-container', {
         }
     },
 });
+
+let swiperMiniSliderContainer = new Swiper('.mini-slider-container', {
+    slidesPerView: 1,
+    spaceBetween: 0,
+    lazy: true,
+    loop: true,
+    autoplay: {
+        delay: 5000,
+    },
+});
