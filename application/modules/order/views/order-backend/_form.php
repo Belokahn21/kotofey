@@ -178,6 +178,9 @@ use yii\helpers\Url;
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'email')->textInput(['placeholder' => 'Email'])->label(false); ?>
                 </div>
+                <div class="w-25 p-1">
+                    <?= $form->field($model, 'promocode')->textInput(['placeholder' => 'Промокод'])->label(false); ?>
+                </div>
             </div>
         </div>
 
