@@ -19,8 +19,8 @@ class OrderSearchForm extends Order
     public function rules()
     {
         return [
-            [['delivery_id', 'payment_id'], 'string'],
-            [['user_id', 'phone'], 'integer'],
+            [['delivery_id', 'payment_id', 'ip'], 'string'],
+            [['user_id', 'phone', 'status', 'is_paid'], 'integer'],
         ];
     }
 
@@ -45,6 +45,9 @@ class OrderSearchForm extends Order
         $query->andFilterWhere(['like', 'delivery_id', $this->delivery_id])
             ->andFilterWhere(['user_id' => $this->user_id])
             ->andFilterWhere(['phone' => $this->phone])
+            ->andFilterWhere(['is_paid' => $this->is_paid])
+            ->andFilterWhere(['ip' => $this->ip])
+            ->andFilterWhere(['status' => $this->status])
             ->andFilterWhere(['like', 'payment_id', $this->payment_id]);
 
         return $dataProvider;

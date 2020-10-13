@@ -7,6 +7,8 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\group_buy\GroupBuyWidget;
+use yii\helpers\ArrayHelper;
+use app\modules\order\models\entity\OrderStatus;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -43,7 +45,14 @@ $this->title = Title::showTitle("Заказы");
     'columns' => [
         'id',
         [
+            'attribute' => 'ip',
+            'value' => function ($model) {
+                return $model->ip;
+            }
+        ],
+        [
             'attribute' => 'status',
+            'filter' => ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'),
             'value' => function ($model) {
                 return $model->getStatus();
             }
@@ -60,6 +69,7 @@ $this->title = Title::showTitle("Заказы");
         ],
         [
             'attribute' => 'is_paid',
+            'filter' => ['Не оплачено', 'Оплачено'],
             'format' => 'raw',
             'value' => function ($model) {
                 return ($model->is_paid == true) ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red']);

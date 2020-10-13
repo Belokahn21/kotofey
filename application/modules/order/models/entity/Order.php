@@ -154,6 +154,7 @@ class Order extends ActiveRecord
     {
         return [
             'id' => 'ID',
+            'ip' => 'IP',
             'status' => 'Статус',
             'payment_id' => 'Способ оплаты',
             'delivery_id' => 'Способ доставки',
