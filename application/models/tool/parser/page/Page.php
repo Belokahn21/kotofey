@@ -27,7 +27,8 @@ class Page
     public function content($url_content)
     {
         $this->userAgent = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2309.372 Safari/537.36';
-        $this->cookieFile = 'D:\OpenServer\domains\local.kotofey.store\application\web\cookie.txt';
+//        $this->cookieFile = 'D:\OpenServer\domains\local.kotofey.store\application\web\cookie.txt';
+        $this->cookieFile = 'cookie.txt';
         $this->loginFormUrl = 'http://www.sat-altai.ru/';
         $this->loginActionUrl = 'http://www.sat-altai.ru/';
 
