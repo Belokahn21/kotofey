@@ -98,11 +98,11 @@ $this->title = Title::showTitle('Товары');
             'value' => function ($model) {
                 $out = "";
 
-                $out .= "Цена: " . $model->price . sprintf(" (%s%%)", ceil(($model->price - $model->purchase) / $model->purchase * 100)) . "<br>";
+                @$out .= "Цена: " . $model->price . sprintf(" (%s%%)", ceil(($model->price - $model->purchase) / $model->purchase * 100)) . "<br>";
                 if ($model->discount_price) {
-                    $out .= "Со скидкой: " . $model->discount_price . "<br>";
+                    @$out .= "Со скидкой: " . $model->discount_price . "<br>";
                 }
-                $out .= "Закупочная: " . $model->purchase . "<br>";
+                @$out .= "Закупочная: " . $model->purchase . "<br>";
                 return $out;
             }
         ],

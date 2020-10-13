@@ -10,20 +10,13 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $products = Product::find()->where(['vendor_id' => null])->all();
-//        $products = Product::find()->where(['like', 'name', "hill's"])->all();
+        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_FORZA])->all();
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-            if (!is_numeric($product->code)) {
-                continue;
-            }
+            $product->discount_price = $product->price - round(($product->price * 10) / 100);
 
-            if (substr($product->code, 0, 4) != '0000' and substr($product->code, 0, 5) != '00000') {
-                continue;
-            }
 
-            $product->vendor_id = Vendor::VENDOR_ID_SIBAGRO;
 
             if ($product->validate()) {
                 if ($product->update()) {
