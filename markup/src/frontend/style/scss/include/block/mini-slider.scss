@@ -2,13 +2,24 @@
 
   &-container {
     width: 480px;
+    height: 320px;
+    float: right;
+    margin-left: 40px;
+
+    @media (max-width: 450px) {
+      float: none;
+      margin: 0;
+      width: 100%;
+      margin-bottom: 40px;
+    }
   }
 
   &-slide {
 
     img {
       width: 100%;
-      object-fit: contain;
+      object-fit: cover;
+      height: 100%;
     }
   }
 }

@@ -2,10 +2,7 @@
 
 namespace app\modules\content\widgets\slider;
 
-
-use app\modules\geo\models\entity\Geo;
 use app\modules\content\models\entity\SlidersImages;
-use app\widgets\geo\GeoWidget;
 use yii\base\Widget;
 
 class SliderWidget extends Widget
