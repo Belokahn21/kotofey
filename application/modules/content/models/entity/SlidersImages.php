@@ -2,9 +2,8 @@
 
 namespace app\modules\content\models\entity;
 
-
-use app\models\tool\Debug;
 use app\modules\content\models\behaviors\DateToIntBehaviors;
+use app\modules\site\components\behaviors\ImageUploadMinify;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -38,7 +37,7 @@ class SlidersImages extends ActiveRecord
 			DateToIntBehaviors::className(),
 			TimestampBehavior::class,
 			[
-				'class' => UploadBehavior::class,
+				'class' => ImageUploadMinify::class,
 				'attribute' => 'image',
 				'scenarios' => ['default'],
 				'path' => '@webroot/upload/',
