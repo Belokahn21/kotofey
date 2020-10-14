@@ -3,6 +3,7 @@
 namespace app\modules\order\models\entity;
 
 
+use app\models\tool\Debug;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\user\models\entity\User;
@@ -117,6 +118,8 @@ class Order extends ActiveRecord
             $this->is_update = true;
         }
 
+//        Debug::p($this->promocode);
+//        exit();
         return parent::beforeSave($insert);
     }
 
@@ -130,7 +133,10 @@ class Order extends ActiveRecord
             OrderHelper::minusStockCount($this, false);
         }
 
-        (new Manegment())->applyCodeToUser($this);
+        // todo: херня выходит с пересохранением заказа, надо поправить
+        if (!$this->is_update) {
+            (new Manegment())->applyCodeToUser($this);
+        }
 
         return parent::afterSave($insert, $changedAttributes);
     }
@@ -193,7 +199,6 @@ class Order extends ActiveRecord
 
         return $status->name;
     }
-
 
     public function hasAccess()
     {
