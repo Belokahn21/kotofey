@@ -97,15 +97,19 @@ $product = Product::find();
                 <div class="statistic__icon"><i class="fas fa-truck"></i>
                 </div>
                 <div class="statistic__content">
-                    <ul class="now-order-delivery ">
-                        <?php foreach ($ordersNow as $order): ?>
-                            <li class="now-order-delivery__item<?= $order->status == 8 ? ' finish' : null ?>">
-                                <a href="<?= Url::to(['/admin/order/order-backend/update', 'id' => $order->id]); ?>">
-                                    <?= $order->dateDelivery->date; ?>/<?= $order->dateDelivery->time; ?><br><?= $order->phone; ?><br><?= $order->street ? $order->street : null; ?><?= $order->number_home ? ',дом. ' . $order->number_home : null; ?><?= $order->number_appartament ? ',кв. ' . $order->number_appartament : null; ?>
-                                </a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <?php if ($ordersNow): ?>
+                        <ul class="now-order-delivery ">
+                            <?php foreach ($ordersNow as $order): ?>
+                                <li class="now-order-delivery__item<?= $order->status == 8 ? ' finish' : null ?>">
+                                    <a href="<?= Url::to(['/admin/order/order-backend/update', 'id' => $order->id]); ?>">
+                                        <?= $order->dateDelivery->date; ?>/<?= $order->dateDelivery->time; ?><br><?= $order->phone; ?><br><?= $order->street ? $order->street : null; ?><?= $order->number_home ? ',дом. ' . $order->number_home : null; ?><?= $order->number_appartament ? ',кв. ' . $order->number_appartament : null; ?>
+                                    </a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php else: ?>
+                        На сегодня нет доставок!
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
