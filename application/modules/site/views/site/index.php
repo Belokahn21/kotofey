@@ -19,7 +19,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     <?= SliderWidget::widget([
         'slider_id' => 1,
     ]) ?>
-    <?= InformerSliderWidget::widget(); ?>
+<!--    --><?//= InformerSliderWidget::widget(); ?>
     <?= ManyPurchasedGoods::widget(); ?>
     <?php /*
     <div class="page-title__group"><h2 class="page-title">Не пропустите выгоду</h2></div>
@@ -84,7 +84,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
         </div>
     */ ?>
 </div>
-<?php //= GrumingWidget::widget(); ?>
+<?= GrumingWidget::widget(); ?>
 <div class="page-container">
     <?= InstagramMediaWidget::widget(); ?>
     <?= LastWeekProducts::widget(); ?>
