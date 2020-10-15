@@ -3,7 +3,7 @@
   &-wrap {
     margin: 100px 0;
     width: 100%;
-    height: 500px;
+    height: 600px;
     overflow: hidden;
   }
 
@@ -13,6 +13,7 @@
 
   &-video {
     width: 100%;
+    margin-top: -50%;
   }
 
   &-form {
@@ -22,7 +23,8 @@
     left: 15%;
     top: -10%;
     bottom: -10%;
-    box-shadow: 4px 3px 3px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 4px 3px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px rgba(0, 0, 0, 0.1) solid;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -50,6 +52,8 @@
     .site-form__button {
       margin-top: auto;
       margin-bottom: 25px;
+
+      padding: 10px 20px;
     }
   }
 }

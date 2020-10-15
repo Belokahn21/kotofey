@@ -1,0 +1,24 @@
+.now-order-delivery {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    color: silver;
+    font-weight: bold;
+    font-size: 12px;
+    border-bottom: 1px silver solid;
+    padding: 5px 0;
+
+    &.finish {
+      color: green;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 20px;
+    }
+
+    a {
+      color: inherit;
+    }
+  }
+}

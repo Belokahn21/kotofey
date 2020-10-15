@@ -1,5 +1,6 @@
 <?php
-/* @var $lastSearch \app\modules\search\models\entity\SearchQuery[]
+/* @var $ordersNow Order[]
+ * /* @var $lastSearch \app\modules\search\models\entity\SearchQuery[]
  * @var $searches \app\modules\search\models\entity\SearchQuery[]
  * @var $logs \app\modules\logger\models\entity\Logger[]
  * @var $this \yii\web\View
@@ -12,6 +13,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use yii\helpers\StringHelper;
 use app\models\tool\Backup;
+use yii\helpers\Url;
 
 $product = Product::find();
 ?>
@@ -89,6 +91,21 @@ $product = Product::find();
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
+                </div>
+            </div>
+            <div class="statistic__item">
+                <div class="statistic__icon"><i class="fas fa-truck"></i>
+                </div>
+                <div class="statistic__content">
+                    <ul class="now-order-delivery ">
+                        <?php foreach ($ordersNow as $order): ?>
+                            <li class="now-order-delivery__item<?= $order->status == 8 ? ' finish' : null ?>">
+                                <a href="<?= Url::to(['/admin/order/order-backend/update', 'id' => $order->id]); ?>">
+                                    <?= $order->dateDelivery->date; ?>/<?= $order->dateDelivery->time; ?><br><?= $order->phone; ?><br><?= $order->street ? $order->street : null; ?><?= $order->number_home ? ',дом. ' . $order->number_home : null; ?><?= $order->number_appartament ? ',кв. ' . $order->number_appartament : null; ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             </div>
         </div>

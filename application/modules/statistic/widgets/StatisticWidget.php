@@ -4,6 +4,7 @@ namespace app\modules\statistic\widgets;
 
 
 use app\modules\logger\models\entity\Logger;
+use app\modules\order\models\entity\Order;
 use app\modules\search\models\entity\SearchQuery;
 use yii\base\Widget;
 
@@ -17,6 +18,7 @@ class StatisticWidget extends Widget
         $lastSearch = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
         $lastlogs = Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
         $logs = Logger::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $ordersNow = Order::find()->leftJoin('order_date', 'orders.id=order_date.order_id')->where(['order_date.date' => date('d.m.Y')])->all();
 
 
         return $this->render($this->view, [
@@ -24,6 +26,7 @@ class StatisticWidget extends Widget
             'lastSearch' => $lastSearch,
             'logs' => $logs,
             'lastlogs' => $lastlogs,
+            'ordersNow' => $ordersNow,
         ]);
     }
 }
