@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\Product;
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<? xml version = "1.0" encoding = "UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name>Зоомагазин Котофей</name>
@@ -35,7 +35,12 @@ use app\modules\catalog\models\entity\Product;
             <?php foreach ($offers as $offer): ?>
                 <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
                     <url>https://kotofey.store<?= $offer->detail; ?></url>
-                    <price><?= ProductHelper::getResultPrice($offer); ?></price>
+                    <?php if ($offer->discount_price): ?>
+                        <price><?= $offer->discount_price; ?></price>
+                        <oldPrice><?= $offer->price; ?></oldPrice>
+                    <?php else: ?>
+                        <price><?= $offer->price; ?></price>
+                    <?php endif; ?>
                     <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
                     <picture>https://kotofey.store/upload/<?= $offer->image; ?></picture>
