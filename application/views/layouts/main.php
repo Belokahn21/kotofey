@@ -63,8 +63,7 @@ $this->beginPage() ?>
 <?= AdminPanel::widget(); ?>
 <header class="header page-container">
     <div class="logo">
-        <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle"
-             src="/upload/images/logo.png">
+        <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo.png">
         <a class="logo__link" href="/">
             <div class="logo__title">kotofey.store</div>
             <div class="logo__sub-title">интернет-зоомагазин</div>
@@ -81,13 +80,9 @@ $this->beginPage() ?>
                class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
         </div>
         <ul class="header-menu">
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О
-                    компании</a></li>
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и
-                    оплата</a>
-            </li>
-            <li class="header-menu__item"><a class="header-menu__link"
-                                             href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
         </ul>
     </div>
 </header>
@@ -122,13 +117,9 @@ $this->beginPage() ?>
             <?php endforeach; ?>
         </ul>
         <ul class="full-mobile-nav">
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О
-                    компании</a>
-            </li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/news/']); ?>">Новости</a>
-            </li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка
-                    и оплата</a></li>
+            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
+            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/news/']); ?>">Новости</a></li>
+            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
             <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a>
             </li>
         </ul>
@@ -138,14 +129,12 @@ $this->beginPage() ?>
                     <?php if (Yii::$app->user->isGuest): ?>
                         <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);"
                            data-target="#signupModal" data-toggle="modal">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png">
-                            </div>
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
                             <div class="header-mobile-full-footer-menu__label">Регистрация/Войти на сайт</div>
                         </a>
                     <?php else: ?>
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/user/profile/index']) ?>">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png">
-                            </div>
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
                             <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
                         </a>
                     <?php endif; ?>
@@ -207,9 +196,13 @@ $this->beginPage() ?>
         <?php endforeach; ?>
     </div>
 </div>
-<div class="page-container">
+<?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'): ?>
     <?= $content; ?>
-</div>
+<?php else: ?>
+    <div class="page-container">
+        <?= $content; ?>
+    </div>
+<?php endif ?>
 <footer class="footer page-container">
     <div class="footer-layer-1">
         <div class="footer-layer-1-left">
