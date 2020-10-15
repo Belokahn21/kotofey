@@ -29,10 +29,8 @@ use app\modules\catalog\models\entity\ProductPropertiesValues;
                 <?php endforeach; ?>
 
             </div>
-            <div class="slider-swiper-button-next category-slider-control"><img src="/upload/images/arrow-right-black.svg">
-            </div>
-            <div class="slider-swiper-button-prev category-slider-control"><img src="/upload/images/arrow-left-black.svg">
-            </div>
+            <div class="slider-swiper-button-next category-slider-control"><img src="/upload/images/arrow-right-black.svg"></div>
+            <div class="slider-swiper-button-prev category-slider-control"><img src="/upload/images/arrow-left-black.svg"></div>
         </div>
     </div>
     <?php $this->endCache(); ?>

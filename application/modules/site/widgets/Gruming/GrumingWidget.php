@@ -3,6 +3,7 @@
 namespace app\modules\site\widgets\Gruming;
 
 
+use app\modules\site\models\forms\GrumingForm;
 use yii\bootstrap\Widget;
 
 class GrumingWidget extends Widget
@@ -11,6 +12,10 @@ class GrumingWidget extends Widget
 
     public function run()
     {
-        return $this->render($this->view, []);
+        $model = new GrumingForm();
+
+        return $this->render($this->view, [
+            'model' => $model
+        ]);
     }
 }

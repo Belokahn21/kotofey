@@ -118,8 +118,6 @@ class Order extends ActiveRecord
             $this->is_update = true;
         }
 
-//        Debug::p($this->promocode);
-//        exit();
         return parent::beforeSave($insert);
     }
 

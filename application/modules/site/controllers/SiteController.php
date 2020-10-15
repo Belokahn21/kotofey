@@ -4,6 +4,8 @@ namespace app\modules\site\controllers;
 
 use app\models\tool\seo\Attributes;
 use app\models\tool\System;
+use app\modules\order\models\service\NotifyService;
+use app\modules\site\models\forms\GrumingForm;
 use app\modules\user\models\entity\UserResetPassword;
 use app\modules\user\models\form\PasswordRestoreForm;
 use app\widgets\notification\Alert;
@@ -61,6 +63,18 @@ class SiteController extends Controller
             "интернет магазин зоотоваров барнаул",
             "сибагро барнаул зоотовары прайс",
         ]);
+
+
+        $GrumingForm = new GrumingForm();
+
+        if ($GrumingForm->load(Yii::$app->request->post())) {
+            if ($GrumingForm->validate()) {
+                $notify = new NotifyService();
+                $notify->sendVKAboutGruming($GrumingForm);
+                Alert::setSuccessNotify("Вы отправили заявку на услуги зоосалона. В течении часа с вами свяжется оператор и согласует детали!");
+                return $this->refresh('#gruming');
+            }
+        }
 
         return $this->render('index');
     }
