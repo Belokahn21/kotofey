@@ -70,9 +70,10 @@ class SiteController extends Controller
         if ($GrumingForm->load(Yii::$app->request->post())) {
             if ($GrumingForm->validate()) {
                 $notify = new NotifyService();
-                $notify->sendVKAboutGruming($GrumingForm);
-                Alert::setSuccessNotify("Вы отправили заявку на услуги зоосалона. В течении часа с вами свяжется оператор и согласует детали!");
-                return $this->refresh('#gruming');
+                if ($notify->sendVKAboutGruming($GrumingForm)) {
+                    Alert::setSuccessNotify("Вы отправили заявку на услуги зоосалона. В течении часа с вами свяжется оператор и согласует детали!");
+                    return $this->refresh('#gruming');
+                }
             }
         }
 

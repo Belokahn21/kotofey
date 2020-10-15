@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 ?>
+<a name="gruming"></a>
 <div class="page-container">
     <div class="page-title__group is-column">
         <h2 class="page-title">Услуги</h2>

@@ -3,6 +3,7 @@
 namespace app\modules\order\models\service;
 
 
+use app\models\tool\Debug;
 use app\modules\site\models\forms\GrumingForm;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
@@ -85,8 +86,7 @@ class NotifyService
     public function sendVKAboutGruming(GrumingForm $data)
     {
         try {
-            $this->getAccessToken();
-            $access_token = $this->accessToken;
+            $access_token = "73f1b177f3682882ca6cf3ea633232c236eda2dd1a05bf1f0af9072479aded9e53643c1f8f7856cb21863";
             $vk = new VKApiClient();
             if ($access_token) {
 
@@ -105,9 +105,22 @@ class NotifyService
                     'message' => $message,
                 ]);
 
+                $this->getAccessToken();
+
+                $message_response2 = $vk->messages()->send($this->accessToken, [
+                    'user_id' => Yii::$app->params['vk']['adminVkontakteId'],
+                    'random_id' => rand(1, 999999),
+                    'peer_id' => Yii::$app->params['vk']['adminVkontakteId'],
+                    'message' => $message,
+                ]);
+
+                return true;
             }
         } catch (\Exception $exception) {
+            return false;
         }
+
+        return false;
     }
 
     public function sendEmailClient($order_id)
