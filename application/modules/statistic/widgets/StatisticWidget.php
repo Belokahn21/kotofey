@@ -18,7 +18,7 @@ class StatisticWidget extends Widget
         $lastSearch = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
         $lastlogs = Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
         $logs = Logger::find()->orderBy(['created_at' => SORT_DESC])->all();
-        $ordersNow = Order::find()->leftJoin('order_date', 'orders.id=order_date.order_id')->where(['order_date.date' => date('d.m.Y')])->all();
+        $ordersNow = Order::find()->leftJoin('order_date', 'orders.id=order_date.order_id')->where(['order_date.date' => date('d.m.Y')])->andWhere(['is_close' => false])->all();
 
 
         return $this->render($this->view, [
