@@ -16,7 +16,7 @@ use app\models\tool\Currency;
  */
 
 ?>
-<form class="product-calc js-product-calc" itemprop="offers" itemtype="http://schema.org/Offer">
+<form class="product-calc js-product-calc" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
     <input type="hidden" readonly name="product_id" value="<?= $product_id; ?>">
     <?php if ($showInfo): ?>
         <div class="product-calc__price-group">
