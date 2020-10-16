@@ -20,7 +20,8 @@
     "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
     "mohorev/yii2-upload-behavior": "*",
     "tinify/tinify": "^1.5",
-    "vkcom/vk-php-sdk": "^5.101"
+    "vkcom/vk-php-sdk": "^5.101",
+    "cloudinary/cloudinary_php": "^1.18"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

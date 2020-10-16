@@ -37,7 +37,7 @@ use app\modules\catalog\models\entity\Product;
                     <url>https://kotofey.store<?= $offer->detail; ?></url>
                     <?php if ($offer->discount_price): ?>
                         <price><?= $offer->discount_price; ?></price>
-                        <oldPrice><?= $offer->price; ?></oldPrice>
+                        <oldprice><?= $offer->price; ?></oldprice>
                     <?php else: ?>
                         <price><?= $offer->price; ?></price>
                     <?php endif; ?>
