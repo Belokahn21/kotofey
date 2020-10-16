@@ -5,7 +5,7 @@
     <h1 align="center">Зоомагазин Котофей</h1>
     <br>
 </p>
-
+<!-- https://www.figma.com/file/ML5jkKLLnes1BHC11dZwVj/izbastroev -->
 Здравствуй. Это репозиторий <a href="https://kotofey.store/" target="_blank">интернет-магазина Котофей</a>. <br>
 Что под капотом?: <br>
 Фреймворк: Yii2 (Basic template)<br>
