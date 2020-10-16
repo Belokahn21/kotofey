@@ -26,11 +26,10 @@ $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product-
 $this->title = Title::showTitle($product->name);
 
 ?>
-<div class="product-detail">
+<div class="product-detail" itemscope itemtype="http://schema.org/Product">
     <div class="product-detail-left">
         <div class="product-detail-gallery">
-            <a class="product-detail-gallery__link" href="<?= ProductHelper::getImageUrl($product); ?>"
-               data-lightbox="roadtrip">
+            <a itemprop="image" class="product-detail-gallery__link" href="<?= ProductHelper::getImageUrl($product); ?>" data-lightbox="roadtrip">
                 <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
             </a>
             <div class="product-detail-gallery__group">
@@ -53,7 +52,7 @@ $this->title = Title::showTitle($product->name);
             ],
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]); ?>
-        <h1 class="product-detail__title"><?= $product->name; ?></h1>
+        <h1 itemprop="name" class="product-detail__title"><?= $product->name; ?></h1>
         <?= AddBasketWidget::widget([
             'product_id' => $product->id,
             'price' => $product->price,
@@ -96,7 +95,7 @@ $this->title = Title::showTitle($product->name);
     </div>
 </nav>
 <div class="tab-content product-tab-content" id="nav-tabContent">
-    <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
+    <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" itemprop="description">
         <?= $product->description ?: 'Отсутсвует'; ?>
     </div>
     <div class="tab-pane fade" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">

@@ -16,10 +16,12 @@ use app\models\tool\Currency;
  */
 
 ?>
-<form class="product-calc js-product-calc">
+<form class="product-calc js-product-calc" itemprop="offers" itemtype="http://schema.org/Offer">
     <input type="hidden" readonly name="product_id" value="<?= $product_id; ?>">
     <?php if ($showInfo): ?>
         <div class="product-calc__price-group">
+            <meta itemprop="price" content="<?= $price ?>">
+            <meta itemprop="priceCurrency" content="RUB">
             <div class="product-calc__price-group-price"><?= Price::format($price); ?></div>
             <div class="product-calc__price-group-char-val">шт</div>
             <div class="product-calc__price-group-char-equal">=</div>
