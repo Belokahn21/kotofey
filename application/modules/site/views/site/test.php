@@ -4,9 +4,9 @@
 $url = 'http://api.cdek.ru/calculator/calculate_tarifflist.php';
 
 $params = [
-//    'authLogin'=>'ИМ-РФ-НЦП-53',
-//    'secure'=>'pMJHlT',
-//    'dateExecute'=>'2020.10.22',
+    'authLogin'=>'Z4Y3nJnT1HlpPHyXFiqrYr4c4jk9EJuo',
+    'secure'=>'M1UffVhH2XmnMa63qR2UXNGOoSnJ5t4y',
+    'dateExecute'=>'2020-10-19',
 
     'version' => '1.0',
     'senderCityId' => 274,    //Барнаул

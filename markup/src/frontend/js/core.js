@@ -7,6 +7,7 @@ import './block/product-calc';
 
 import ProductCalc from './block/ProductCalc';
 
+import './block/gifts';
 import './block/mobile-menu';
 import './block/basket';
 import './block/search';
