@@ -122,6 +122,7 @@ $config = [
                 'POST catalog/rest/get' => 'catalog/rest/get',
                 'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
                 'GET promocode/rest/get' => 'promocode/rest/get',
+                'GET cdek/rest-calculate/get' => 'cdek/rest-calculate/get',
                 'DELETE basket/rest/delete' => 'basket/rest/delete',
 
                 '/' => 'site/site/index',
@@ -270,6 +271,9 @@ $config = [
         ],
         'promotion' => [
             'class' => 'app\modules\promotion\Module',
+        ],
+        'cdek' => [
+            'class' => 'app\modules\cdek\Module',
         ],
     ],
     'params' => $params,

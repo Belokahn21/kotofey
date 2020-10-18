@@ -1,7 +1,7 @@
 let url = location.protocol + '//' + location.hostname;
 
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-    url = 'http://local.kotofey.store'
+    url = 'http://local.kotofey.store';
 
 module.exports = {
     restCatalogGet: url + '/catalog/rest-backend/get/',
@@ -12,5 +12,6 @@ module.exports = {
     restUserGet: url + '/user/rest-backend/get/',
     restTodoAdd: url + '/todo/rest-backend/add/',
     restTodoGet: url + '/todo/rest-backend/get/',
-    ajaxSaveProductMark: url + '/ajax/mark/'
+    restCdekDeliveryPrice: url + '/cdek/rest-calculator/get/',
+    ajaxSaveProductMark: url + '/ajax/mark/',
 };

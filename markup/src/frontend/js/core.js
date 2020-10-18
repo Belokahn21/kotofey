@@ -37,3 +37,9 @@ new LiveSearch('.js-live-search');
 $(function () {
     $("[rel='tooltip']").tooltip();
 });
+
+
+//react js
+
+import calculator from './react/cdek-calculator/CdekCalculator';
+
