@@ -259,7 +259,7 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
     'signup' => $signupModel,
 ]); ?>
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>-->
-<script src="/js/frontend-core.min.js"></script>
+<!--<script src="/js/frontend-core.min.js"></script>-->
 <?= Alert::widget(); ?>
 <?php $this->endBody(); ?>
 </body>
