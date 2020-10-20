@@ -14,9 +14,13 @@ class AppAsset extends AssetBundle
         'css/style.min.css',
     ];
     public $js = [
+        'js/backend-core.min.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
 //        'yii\bootstrap\BootstrapAsset',
+    ];
+    public $jsOptions = [
+        'position' => View::POS_END
     ];
 }
