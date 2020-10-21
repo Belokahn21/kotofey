@@ -4,7 +4,7 @@ namespace app\modules\catalog\models\entity;
 
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
-use app\modules\media\components\behaviors\ImageUploadMinify;
+use app\modules\site\components\behaviors\ImageUploadMinify;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\helpers\Json;

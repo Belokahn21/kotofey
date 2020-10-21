@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\media\components\behaviors;
+namespace app\modules\site\components\behaviors;
 
 
 use mohorev\file\UploadBehavior;

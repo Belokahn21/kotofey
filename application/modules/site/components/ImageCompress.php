@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\media\components;
+namespace app\modules\site\components;
 
 use Tinify\Tinify;
 use yii\base\Component;
