@@ -42,3 +42,4 @@ migrate:
 
 deploy: pull init-dev migrate
 deploy-prod: pull init-prod migrate
+
