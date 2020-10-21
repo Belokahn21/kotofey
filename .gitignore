@@ -44,5 +44,4 @@ application/web/*.xls
 application/web/*.xlsx
 application/web/index.php
 application/web/cookie.txt
-application/config/web.php
 bash.exe.stackdump
