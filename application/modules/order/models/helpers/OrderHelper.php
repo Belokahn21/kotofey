@@ -148,6 +148,10 @@ class OrderHelper
         /* @var $item OrdersItems */
         foreach ($items as $item) {
 
+            if (!$item->product) {
+                continue;
+            }
+
             $product = Product::findOne($item->product->id);
 
             if (!$product) {
