@@ -10,7 +10,6 @@ use yii\helpers\Json;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\media\widgets\UploadWidget\UploadWidget;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -135,7 +134,7 @@ use app\modules\media\widgets\UploadWidget\UploadWidget;
                         Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
                     <?php endif; ?>
                 </div>
-                <?= $form->field($model, 'image')->widget(UploadWidget::className()); ?>
+                <?= $form->field($model, 'image')->fileInput(); ?>
             </div>
             <div class="col-sm-6">
                 <div class="form-image more">
