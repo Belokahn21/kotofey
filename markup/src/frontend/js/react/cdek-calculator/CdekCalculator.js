@@ -20,6 +20,8 @@ class CdekCalculator extends React.Component {
         fetch(config.restCdekDeliveryPrice).then(response => response.json()).then(data => {
             data = JSON.parse(data);
 
+            console.log(data);
+
             if (data.result.price) {
                 this.setState({
                     summary: data.result.price
@@ -35,7 +37,7 @@ class CdekCalculator extends React.Component {
                     <div className="title">Приблизительная стоимость доставки</div>
                     <div className="sub-title">Доставка осуществляется транспортной компанией до двери либо до склада</div>
                     <div className="form-delivery-calc__element">
-                        <input className="form-delivery-calc__input" type="text" placeholder="Куда доставить?"/>
+                        <input className="form-delivery-calc__input" type="text" required placeholder="Куда доставить?"/>
                     </div>
                     <div className="form-delivery-calc__element">
                         <select className="form-delivery-calc__select">

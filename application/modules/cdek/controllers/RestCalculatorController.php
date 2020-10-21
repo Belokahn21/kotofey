@@ -2,6 +2,7 @@
 
 namespace app\modules\cdek\controllers;
 
+use app\models\tool\Debug;
 use yii\helpers\Json;
 use yii\rest\Controller;
 
@@ -24,13 +25,17 @@ class RestCalculatorController extends Controller
         $url = 'http://api.cdek.ru/calculator/calculate_tarifflist.php';
 
         $params = [
+            'authLogin' => 'Z4Y3nJnT1HlpPHyXFiqrYr4c4jk9EJuo',
+            'secure' => 'M1UffVhH2XmnMa63qR2UXNGOoSnJ5t4y',
+//            'dateExecute'=>'2020-10-19',
+            'dateExecute' => date('Y-m-d'),
+
             'version' => '1.0',
             'senderCityId' => 274,    //Барнаул
             'senderCityPostCode' => 656961,    //Барнаул
             'receiverCityId' => 275,    //Бийск
             'receiverCityPostCode' => 659312,    //Бийск
-            'tariffId' => 234,
-//            'tariffId' => 62,
+            'tariffId' => 139,
             'goods' => [
                 [
                     'weight' => 5,
@@ -53,7 +58,6 @@ class RestCalculatorController extends Controller
         );
         $result = curl_exec($curl);
         curl_close($curl);
-
 
         return Json::encode($result);
     }
