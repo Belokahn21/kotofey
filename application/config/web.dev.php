@@ -13,7 +13,7 @@ $config = [
     ],
     'components' => [
         'imageCompress' => [
-            'class' => 'app\modules\site\components\ImageCompress',
+            'class' => 'app\modules\media\components\ImageCompress',
             'apiKey' => 'wc16fxnnQFozTU03gQQWEjbmXZRQwUvf',
             'maxCompressCount' => 500
         ],

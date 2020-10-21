@@ -1,12 +1,9 @@
 <?php
 
-namespace app\modules\site\components\behaviors;
+namespace app\modules\media\components\behaviors;
 
 
-use app\models\tool\Debug;
-use GuzzleHttp\Psr7\CachingStream;
 use mohorev\file\UploadBehavior;
-use Tinify\Tinify;
 use yii\base\InvalidArgumentException;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;

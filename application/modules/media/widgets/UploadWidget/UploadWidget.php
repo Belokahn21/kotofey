@@ -3,7 +3,6 @@
 namespace app\modules\media\widgets\UploadWidget;
 
 
-use Bitrix\Main\UI\FileInput;
 use yii\base\Widget;
 use yii\helpers\Html;
 
