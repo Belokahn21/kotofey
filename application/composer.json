@@ -23,7 +23,8 @@
     "vkcom/vk-php-sdk": "^5.101",
     "cloudinary/cloudinary_php": "^1.18",
     "ext-curl": "*",
-    "ext-json": "*"
+    "ext-json": "*",
+    "yiisoft/yii2-imagine": "^2.2"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",
