@@ -275,6 +275,9 @@ $config = [
         'cdek' => [
             'class' => 'app\modules\cdek\Module',
         ],
+        'media' => [
+            'class' => 'app\modules\media\Module',
+        ],
     ],
     'params' => $params,
 ];
