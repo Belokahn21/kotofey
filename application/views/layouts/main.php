@@ -261,24 +261,6 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
 <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>-->
 <script src="/js/frontend-core.min.js"></script>
 <?= Alert::widget(); ?>
-<style>
-
-    .lb-nav a.lb-prev {
-        background: url(<?=$this->mainAssets;?>/images/prev.png) left 48% no-repeat;
-    }
-
-    .lb-data .lb-close {
-        background: url(<?=$this->mainAssets;?>/images/close.png) top right no-repeat;
-    }
-
-    .lb-cancel {
-        background: url(<?=$this->mainAssets;?>/images/loading.gif) no-repeat
-    }
-
-    .lb-nav a.lb-next {
-        background: url(<?=$this->mainAssets;?>/images/next.png) right 48% no-repeat;
-    }
-</style>
 <?php $this->endBody(); ?>
 </body>
 </html>
