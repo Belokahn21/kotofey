@@ -11,7 +11,7 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        \Yii::$app->db->createCommand('truncate table `migration`')->execute();
+//        \Yii::$app->db->createCommand('truncate table `migration`')->execute();
         \Yii::$app->db->createCommand("-- --------------------------------------------------------
 -- Хост:                         127.0.0.1
 -- Версия сервера:               5.7.29 - MySQL Community Server (GPL)
