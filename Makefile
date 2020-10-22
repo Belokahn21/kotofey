@@ -27,6 +27,7 @@ composer-update:
 
 migrate:
 	cd application && php yii migrate --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/user/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/geo/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/order/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/delivery/install/migrations --interactive=0
@@ -39,6 +40,14 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/promotion/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/media/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/cdek/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/news/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/support/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/stock/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/todo/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/vacancy/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/content/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/subscribe/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/bonus/install/migrations --interactive=0
 
 deploy: pull init-dev migrate
 deploy-prod: pull init-prod migrate
