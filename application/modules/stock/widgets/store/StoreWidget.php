@@ -17,6 +17,10 @@ class StoreWidget extends Widget
 			$city_id = Geo::findOne(['is_default' => true])->id;
 		}
 
+		if(!$city_id){
+		    return false;
+        }
+
 		$stock = Stocks::find()->where(['city_id' => $city_id])->one();
 
 		return $this->render($this->view, [
