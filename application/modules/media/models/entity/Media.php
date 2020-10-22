@@ -16,13 +16,10 @@ use Yii;
  */
 class Media extends \yii\db\ActiveRecord
 {
-
     const LOCATION_SERVER = 'server';
     const LOCATION_CDN = 'cdn';
+    const POST_KEY_LOCATION = 'locationStore';
 
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'media';
@@ -35,8 +32,12 @@ class Media extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'location'], 'required'],
+
             [['created_at', 'updated_at'], 'integer'],
+
             [['name', 'path', 'location'], 'string', 'max' => 255],
+
+            ['location', 'in', 'range' => $this->getLocations()],
         ];
     }
 
