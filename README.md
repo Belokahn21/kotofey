@@ -14,3 +14,4 @@ React JS, около 5% сайта
 MySQL<br><br>
 Используется:
  - TinyPNG API (free 500/mounth)
+ - Cloudinary (CDN)
