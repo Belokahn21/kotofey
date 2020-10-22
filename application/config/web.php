@@ -70,6 +70,23 @@ $config = [
         'errorHandler' => [
             'errorAction' => 'site/site/error',
         ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'enableSwiftMailerLogging' => true,
+            'viewPath' => '@app/mail',
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.gmail.com',
+                'username' => 'info.kotofey.store@gmail.com',
+                'password' => '123qweR%cc',
+                'port' => '587',
+                'encryption' => 'tls',
+            ],
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+        ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
@@ -264,45 +281,6 @@ $config = [
     ],
     'params' => $params,
 ];
-
-
-if (YII_ENV == 'dev') {
-    $config['components']['mailer'] = [
-        'class' => 'yii\swiftmailer\Mailer',
-        'useFileTransport' => false,
-        'enableSwiftMailerLogging' => true,
-        'viewPath' => '@app/mail',
-        'transport' => [
-            'class' => 'Swift_SmtpTransport',
-            'host' => 'smtp.gmail.com',
-            'username' => 'info.kotofey.store@gmail.com',
-            'password' => '123qweR%cc',
-            'port' => '587',
-            'encryption' => 'tls',
-        ],
-        // send all mails to a file by default. You have to set
-        // 'useFileTransport' to false and configure a transport
-        // for the mailer to send real emails.
-    ];
-} else {
-    $config['components']['mailer'] = [
-        'class' => 'yii\swiftmailer\Mailer',
-        'useFileTransport' => false,
-        'enableSwiftMailerLogging' => true,
-        'viewPath' => '@app/mail',
-        'transport' => [
-            'class' => 'Swift_SmtpTransport',
-            'host' => 'smtp.timeweb.ru',
-            'username' => 'sale@kotofey.store',
-            'password' => '123qweR%',
-//				'port' => '465',
-//				'encryption' => 'tls',
-        ],
-        // send all mails to a file by default. You have to set
-        // 'useFileTransport' to false and configure a transport
-        // for the mailer to send real emails.
-    ];
-}
 
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
