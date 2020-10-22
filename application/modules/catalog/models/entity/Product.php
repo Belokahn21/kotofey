@@ -81,7 +81,7 @@ class Product extends \yii\db\ActiveRecord
 
             ['description', 'string', 'min' => 10],
 
-            [['vitrine'], 'default', 'value' => 0],
+            [['vitrine', 'is_ali'], 'default', 'value' => 0],
 
             [['has_store', 'is_product_order'], 'boolean'],
 

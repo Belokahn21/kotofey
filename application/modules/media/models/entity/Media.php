@@ -3,6 +3,7 @@
 namespace app\modules\media\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "media".
@@ -25,9 +26,6 @@ class Media extends \yii\db\ActiveRecord
         return 'media';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -37,13 +35,17 @@ class Media extends \yii\db\ActiveRecord
 
             [['name', 'path', 'location'], 'string', 'max' => 255],
 
-            ['location', 'in', 'range' => $this->getLocations()],
+//            ['location', 'in', 'range' => $this->getLocations()],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::class
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
