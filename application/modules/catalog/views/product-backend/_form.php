@@ -102,6 +102,9 @@ use app\modules\catalog\models\helpers\ProductHelper;
                     <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
                 </div>
                 <div class="form-element">
+                    <?= $form->field($model, 'is_ali')->radioList(["Нет", "Да"]); ?>
+                </div>
+                <div class="form-element">
                     <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
                 </div>
                 <div class="form-element">
