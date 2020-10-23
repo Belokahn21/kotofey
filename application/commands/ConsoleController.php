@@ -15,36 +15,36 @@ class ConsoleController extends Controller
     public function actionRun()
     {
 
-        $products = Product::find()->all();
+//        $products = Product::find()->all();
 
-        foreach ($products as $product) {
-            $path = \Yii::getAlias("@webroot/upload/$product->image");
-            if (is_file($path)) {
-                $cdnResponse = \Yii::$app->CDN->uploadImage($path);
-
-                if (is_array($cdnResponse)) {
-                    echo rand();
-                    $media = new Media();
-                    $media->json_cdn_data = Json::encode($cdnResponse);
-                    $media->location = Media::LOCATION_CDN;
-                    $media->name = $product->image;
-
-                    if ($media->validate()) {
-                        Debug::p($media->getErrors());
-                        return false;
-                    }
-
-                    if (!$media->save()) {
-                        return false;
-                    }
-                    echo $product->image;
-                    echo PHP_EOL;
-                }
-
-
-                echo "finish!!!";
-            }
-        }
+//        foreach ($products as $product) {
+//            $path = \Yii::getAlias("@webroot/upload/$product->image");
+//            if (is_file($path)) {
+//                $cdnResponse = \Yii::$app->CDN->uploadImage($path);
+//
+//                if (is_array($cdnResponse)) {
+//                    $media = new Media();
+//                    $media->json_cdn_data = Json::encode($cdnResponse);
+//                    $media->location = Media::LOCATION_CDN;
+//                    $media->name = $product->image;
+//
+//                    if (!$media->validate()) {
+//                        Debug::p($media->getErrors());
+//                        return false;
+//                    }
+//
+//                    if (!$media->save()) {
+//                        return false;
+//                    }
+//                    echo $product->image;
+//                    echo PHP_EOL;
+//                }
+//
+//
+//            }
+//        }
+//
+//        echo "finish!!!";
 
 //        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_FORZA])->all();
 //        foreach ($products as $product) {
