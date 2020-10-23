@@ -131,14 +131,16 @@ use app\modules\media\models\entity\Media;
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-image single">
-                    <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
-                        <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
+                    <?php if ($model->media or $model->image): ?>
+                        <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
+                            <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
+                                <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+                            </a>
+                            <br>
+                            Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
+                        <?php else: ?>
                             <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
-                        </a>
-                        <br>
-                        Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
-                    <?php else: ?>
-                        <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+                        <?php endif; ?>
                     <?php endif; ?>
                 </div>
                 <?= $form->field($model, 'image')->widget(InputUploadWidget::className()); ?>
