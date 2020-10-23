@@ -16,51 +16,66 @@ class ConsoleController extends Controller
     public function actionRun()
     {
 
-        $images = SlidersImages::find()->where(['media_id' => null])->andWhere(['is not', 'image', null])->all();
+        \Yii::$app->db->createCommand('DELETE FROM `kotofey_store`.`migration` WHERE  `version`=\'m201021_163727_create_cdek_geo_table\';')->execute();
 
-        foreach ($images as $image) {
-            $path = \Yii::getAlias("@webroot/upload/$image->image");
+//        if (($handle = fopen(\Yii::getAlias('@app/tmp/cdek.csv'), "r")) !== false) {
+//            while (($line = fgetcsv($handle, 1000, ";")) !== false) {
+//                if (!is_numeric($line[1])) {
+//                    continue;
+//                }
+//
+//                $cdek = new geo
+//
+//                Debug::p($line);
+//
+//            }
+//        }
 
-            if (is_file($path)) {
-                $cdnResponse = \Yii::$app->CDN->uploadImage($path);
-
-                if (is_array($cdnResponse)) {
-                    $media = new Media();
-                    $media->json_cdn_data = Json::encode($cdnResponse);
-                    $media->location = Media::LOCATION_CDN;
-                    $media->name = $image->image;
-                    $media->type = Media::MEDIA_TYPE_IMAGE;
-
-                    if (!$media->validate()) {
-                        Debug::p($media->getErrors());
-                        return false;
-                    }
-
-                    if (!$media->save()) {
-                        return false;
-                    }
-
-                    $image->media_id = $media->id;
-
-                    if (!$image->validate()) {
-                        Debug::p($image->getErrors());
-                        return false;
-                    }
-
-                    if (!$image->update()) {
-                        Debug::p($image->getErrors());
-                        return false;
-                    }
-                    echo 'ID: ' . $image->id . $image->text . "($path)";
-                    echo PHP_EOL;
-                }
-
-
-            }
-        }
-
-        echo "finish!!!";
-        echo PHP_EOL;
+//        $images = SlidersImages::find()->where(['media_id' => null])->andWhere(['is not', 'image', null])->all();
+//
+//        foreach ($images as $image) {
+//            $path = \Yii::getAlias("@webroot/upload/$image->image");
+//
+//            if (is_file($path)) {
+//                $cdnResponse = \Yii::$app->CDN->uploadImage($path);
+//
+//                if (is_array($cdnResponse)) {
+//                    $media = new Media();
+//                    $media->json_cdn_data = Json::encode($cdnResponse);
+//                    $media->location = Media::LOCATION_CDN;
+//                    $media->name = $image->image;
+//                    $media->type = Media::MEDIA_TYPE_IMAGE;
+//
+//                    if (!$media->validate()) {
+//                        Debug::p($media->getErrors());
+//                        return false;
+//                    }
+//
+//                    if (!$media->save()) {
+//                        return false;
+//                    }
+//
+//                    $image->media_id = $media->id;
+//
+//                    if (!$image->validate()) {
+//                        Debug::p($image->getErrors());
+//                        return false;
+//                    }
+//
+//                    if (!$image->update()) {
+//                        Debug::p($image->getErrors());
+//                        return false;
+//                    }
+//                    echo 'ID: ' . $image->id . $image->text . "($path)";
+//                    echo PHP_EOL;
+//                }
+//
+//
+//            }
+//        }
+//
+//        echo "finish!!!";
+//        echo PHP_EOL;
 
 //        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_FORZA])->all();
 //        foreach ($products as $product) {
