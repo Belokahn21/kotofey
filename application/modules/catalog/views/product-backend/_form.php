@@ -11,6 +11,7 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
+use app\modules\media\models\entity\Media;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -130,12 +131,14 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-image single">
-                    <?php if ($model->image): ?>
+                    <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
                         <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
                             <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                         </a>
                         <br>
                         Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
+                    <?php else: ?>
+                        <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                     <?php endif; ?>
                 </div>
                 <?= $form->field($model, 'image')->widget(InputUploadWidget::className()); ?>
