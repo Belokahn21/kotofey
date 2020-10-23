@@ -27,7 +27,7 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
                     <?php if ($model->discount_price): ?>
                         <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
                     <?php endif; ?>
-                    <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, true); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
+                    <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, false, ['width' => 256, 'height' => 300, 'crop' => 'fit']); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
                     <div class="swiper-lazy-preloader"></div>
                     <div class="vitrine__title">
                         <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
