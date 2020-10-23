@@ -30,8 +30,8 @@ $this->title = Title::showTitle($product->name);
     <div class="product-detail" itemscope itemtype="http://schema.org/Product">
         <div class="product-detail-left">
             <div class="product-detail-gallery">
-                <a itemprop="image" class="product-detail-gallery__link" href="<?= $product->media->path; ?>" data-lightbox="roadtrip">
-                    <img class="product-detail-gallery__image" src="<?= Yii::$app->CDN->resizeImage($product->media->cdnData['public_id'], array("width" => 300, "height" => 400, "crop" => "scale")); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
+                <a itemprop="image" class="product-detail-gallery__link" href="<?= ProductHelper::getImageUrl($product); ?>" data-lightbox="roadtrip">
+                    <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "scale")); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
                 </a>
                 <div class="product-detail-gallery__group">
                     <?php if ($product->images): ?>
