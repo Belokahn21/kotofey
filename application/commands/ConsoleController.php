@@ -15,36 +15,52 @@ class ConsoleController extends Controller
     public function actionRun()
     {
 
-//        $products = Product::find()->all();
+        $products = Product::find()->where(['media_id' => null])->andWhere(['is not', 'image', null])->all();
 
-//        foreach ($products as $product) {
-//            $path = \Yii::getAlias("@webroot/upload/$product->image");
-//            if (is_file($path)) {
-//                $cdnResponse = \Yii::$app->CDN->uploadImage($path);
-//
-//                if (is_array($cdnResponse)) {
-//                    $media = new Media();
-//                    $media->json_cdn_data = Json::encode($cdnResponse);
-//                    $media->location = Media::LOCATION_CDN;
-//                    $media->name = $product->image;
-//
-//                    if (!$media->validate()) {
-//                        Debug::p($media->getErrors());
-//                        return false;
-//                    }
-//
-//                    if (!$media->save()) {
-//                        return false;
-//                    }
-//                    echo $product->image;
-//                    echo PHP_EOL;
-//                }
-//
-//
-//            }
-//        }
-//
-//        echo "finish!!!";
+        foreach ($products as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $path = \Yii::getAlias("@webroot/upload/$product->image");
+
+            if (is_file($path)) {
+                $cdnResponse = \Yii::$app->CDN->uploadImage($path);
+
+                if (is_array($cdnResponse)) {
+                    $media = new Media();
+                    $media->json_cdn_data = Json::encode($cdnResponse);
+                    $media->location = Media::LOCATION_CDN;
+                    $media->name = $product->image;
+                    $media->type = Media::MEDIA_TYPE_IMAGE;
+
+                    if (!$media->validate()) {
+                        Debug::p($media->getErrors());
+                        return false;
+                    }
+
+                    if (!$media->save()) {
+                        return false;
+                    }
+
+                    $product->media_id = $media->id;
+
+                    if (!$product->validate()) {
+                        Debug::p($product->getErrors());
+                        return false;
+                    }
+
+                    if (!$product->update()) {
+                        Debug::p($product->getErrors());
+                        return false;
+                    }
+                    echo 'ID: ' . $product->id . $product->name . "($path)";
+                    echo PHP_EOL;
+                }
+
+
+            }
+        }
+
+        echo "finish!!!";
+        echo PHP_EOL;
 
 //        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_FORZA])->all();
 //        foreach ($products as $product) {

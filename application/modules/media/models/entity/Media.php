@@ -2,7 +2,6 @@
 
 namespace app\modules\media\models\entity;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Json;
 
@@ -15,6 +14,7 @@ use yii\helpers\Json;
  * @property string|null $json_cdn_data full path media
  * @property object $cdnData
  * @property string $location cdn/server
+ * @property string $type cdn/server
  * @property int|null $created_at
  * @property int|null $updated_at
  */
@@ -23,6 +23,10 @@ class Media extends \yii\db\ActiveRecord
     const LOCATION_SERVER = 'server';
     const LOCATION_CDN = 'cdn';
     const POST_KEY_LOCATION = 'locationStore';
+
+    const MEDIA_TYPE_IMAGE = 'image';
+    const MEDIA_TYPE_VIDEO = 'video';
+    const MEDIA_TYPE_MUSIC = 'music';
 
     public static function tableName()
     {
@@ -36,7 +40,7 @@ class Media extends \yii\db\ActiveRecord
 
             [['created_at', 'updated_at'], 'integer'],
 
-            [['name', 'path', 'location'], 'string', 'max' => 255],
+            [['name', 'path', 'location', 'type'], 'string', 'max' => 255],
         ];
     }
 
