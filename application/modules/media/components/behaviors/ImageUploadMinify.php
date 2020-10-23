@@ -50,6 +50,9 @@ class ImageUploadMinify extends UploadBehavior
                                 'media_id' => $media->id,
                             ], 'id = ' . $this->owner->id);
 
+                            // no store server
+                            $this->delete('image');
+
                             return true;
                         }
                     } else {
