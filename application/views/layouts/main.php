@@ -16,6 +16,7 @@ use app\modules\search\widges\search\SearchWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
 use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\site\widgets\AdminPanel\AdminPanel;
 
 AppAsset::register($this);
 
