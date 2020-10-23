@@ -1,44 +1,58 @@
-<?= $this->getXmlHead(); ?>
+<?php
+
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\entity\Product;
+
+/* @var $offers \app\modules\catalog\models\entity\Product[]
+ * @var $categories \app\modules\catalog\models\entity\Category[]
+ */
+?>
+<?xml version="1.0" encoding="UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
-        <name>Алтайский источник</name>
-        <company>Алтайский источник</company>
-        <url>https://alt-ist.ru/</url>
-        <platform>Алтайский источник</platform>
-        <version>1.2</version>
+        <name>Зоомагазин Котофей</name>
+        <company>ИП Васин К.В.</company>
+        <url>https://kotofey.store/</url>
+        <platform>Зоомагазин Котофей</platform>
+        <version>1.0</version>
         <agency></agency>
         <email></email>
         <currencies>
-			<?php foreach ($currencies as $currency): ?>
-                <currency id="<?= $currency; ?>" <?= $currency === 'RUB' ? 'rate="1"' : 'rate="CBRF"'; ?>/>
-			<?php endforeach; ?>
+            <currency id="USD" rate="CBRF"/>
+            <currency id="RUB" rate="1"/>
+            <currency id="EUR" rate="CBRF"/>
         </currencies>
         <categories>
-			<?php foreach ($categories as $category): ?>
-                <category id="<?= $category->id ?>" <?= $category->parent_id ? sprintf('parentId="%s"', $category->parent_id) : ''; ?>><?= $category->name; ?></category>
-			<?php endforeach; ?>
+            <?php foreach ($categories as $category): ?>
+                <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
+            <?php endforeach; ?>
         </categories>
+        <delivery-options>
+            <option cost="0" days="0"/>
+        </delivery-options>
         <cpa>1</cpa>
         <offers>
-			<?php foreach ($offers as $offer): ?>
-                <offer id="<?= $offer->id ?>" available="<?= $offer->isInStock() ? 'true' : 'false'; ?>">
-                    <url><?= CHtml::normalizeUrl(Yii::app()->getBaseUrl(true) . ProductHelper::getItemUrl($offer)); ?></url>
-                    <price><?= $offer->getResultPrice(); ?></price>
-					<?php if ($offer->getBasePrice() != $offer->getResultPrice()): ?>
-                        <oldprice><?= $offer->getBasePrice(); ?></oldprice>
-					<?php endif; ?>
-                    <currencyId><?= Yii::app()->getModule('store')->currency; ?></currencyId>
+            <?php foreach ($offers as $offer): ?>
+                <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
+                    <url>https://kotofey.store<?= $offer->detail; ?></url>
+                    <?php if ($offer->discount_price): ?>
+                        <price><?= $offer->discount_price; ?></price>
+                        <oldprice><?= $offer->price; ?></oldprice>
+                    <?php else: ?>
+                        <price><?= $offer->price; ?></price>
+                    <?php endif; ?>
+                    <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
-                    <picture><?= StoreImage::product($offer); ?></picture>
-                    <name><?= htmlspecialchars(strip_tags($offer->getNameWithRequiredAttributes())); ?></name>
-                    <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
-					<?php foreach ($offer->attributes() as $attr): ?>
-                        <param name="<?= $attr->attribute->title; ?>" <?php if ($attr->attribute->unit): ?> unit="<?= strip_tags($attr->attribute->unit); ?>" <?php endif; ?>>
-							<?= htmlspecialchars(strip_tags($attr->value())); ?>
-                        </param>
-					<?php endforeach; ?>
+                    <picture>https://kotofey.store/upload/<?= $offer->image; ?></picture>
+                    <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
+                    <?php if (!empty($offer->description)): ?>
+                        <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
+                    <?php endif; ?>
+                    <pickup>false</pickup>
+                    <store>false</store>
+                    <delivery>true</delivery>
                 </offer>
-			<?php endforeach; ?>
+            <?php endforeach; ?>
         </offers>
     </shop>
 </yml_catalog>

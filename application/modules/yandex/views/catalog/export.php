@@ -43,7 +43,7 @@ use app\modules\catalog\models\entity\Product;
                     <?php endif; ?>
                     <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
-                    <picture>https://kotofey.store/upload/<?= $offer->image; ?></picture>
+                    <picture><?= ProductHelper::getImageUrl($offer); ?></picture>
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                     <?php if (!empty($offer->description)): ?>
                         <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
