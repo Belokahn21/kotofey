@@ -8,8 +8,8 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        \Yii::$app->db->createCommand('truncate table `migration`')->execute();
-        \Yii::$app->db->createCommand("")->execute();
+//        \Yii::$app->db->createCommand('truncate table `migration`')->execute();
+//        \Yii::$app->db->createCommand("")->execute();
 
 
 
