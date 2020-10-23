@@ -16,6 +16,7 @@ class ManyPurchasedGoods extends Widget
 
     public function run()
     {
+        $informersValues = [];
         $cache = \Yii::$app->cache;
         $key = ManyPurchasedGoods::className();
 
@@ -48,7 +49,7 @@ class ManyPurchasedGoods extends Widget
 
         return $this->render($this->view, [
             'models' => $models,
-//            'informersValues' => $informersValues,
+            'informersValues' => $informersValues,
         ]);
     }
 }
