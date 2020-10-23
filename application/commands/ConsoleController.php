@@ -5,6 +5,7 @@ namespace app\commands;
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\content\models\entity\SlidersImages;
 use app\modules\media\models\entity\Media;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
@@ -15,11 +16,10 @@ class ConsoleController extends Controller
     public function actionRun()
     {
 
-        $products = Product::find()->where(['media_id' => null])->andWhere(['is not', 'image', null])->all();
+        $images = SlidersImages::find()->where(['media_id' => null])->andWhere(['is not', 'image', null])->all();
 
-        foreach ($products as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $path = \Yii::getAlias("@webroot/upload/$product->image");
+        foreach ($images as $image) {
+            $path = \Yii::getAlias("@webroot/upload/$image->image");
 
             if (is_file($path)) {
                 $cdnResponse = \Yii::$app->CDN->uploadImage($path);
@@ -28,7 +28,7 @@ class ConsoleController extends Controller
                     $media = new Media();
                     $media->json_cdn_data = Json::encode($cdnResponse);
                     $media->location = Media::LOCATION_CDN;
-                    $media->name = $product->image;
+                    $media->name = $image->image;
                     $media->type = Media::MEDIA_TYPE_IMAGE;
 
                     if (!$media->validate()) {
@@ -40,18 +40,18 @@ class ConsoleController extends Controller
                         return false;
                     }
 
-                    $product->media_id = $media->id;
+                    $image->media_id = $media->id;
 
-                    if (!$product->validate()) {
-                        Debug::p($product->getErrors());
+                    if (!$image->validate()) {
+                        Debug::p($image->getErrors());
                         return false;
                     }
 
-                    if (!$product->update()) {
-                        Debug::p($product->getErrors());
+                    if (!$image->update()) {
+                        Debug::p($image->getErrors());
                         return false;
                     }
-                    echo 'ID: ' . $product->id . $product->name . "($path)";
+                    echo 'ID: ' . $image->id . $image->text . "($path)";
                     echo PHP_EOL;
                 }
 
