@@ -3,8 +3,7 @@
 namespace app\modules\content\models\entity;
 
 use app\modules\content\models\behaviors\DateToIntBehaviors;
-use app\modules\site\components\behaviors\ImageUploadMinify;
-use mohorev\file\UploadBehavior;
+use app\modules\media\components\behaviors\ImageUploadMinify;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
