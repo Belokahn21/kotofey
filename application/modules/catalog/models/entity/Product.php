@@ -5,6 +5,7 @@ namespace app\modules\catalog\models\entity;
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\media\components\behaviors\ImageUploadMinify;
+use app\modules\media\models\entity\Media;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\helpers\Json;
@@ -22,6 +23,7 @@ use yii\web\UploadedFile;
  * @property string $seo_description
  * @property string $seo_keywords
  * @property string $image
+ * @property integer $media_id
  * @property string $images
  * @property string $slug
  * @property integer $sort
@@ -43,6 +45,7 @@ use yii\web\UploadedFile;
  *
  * @property Category $category
  * @property string $detail
+ * @property Media $media
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -374,6 +377,11 @@ class Product extends \yii\db\ActiveRecord
     public static function findOneBySlug($slug)
     {
         return static::findOne(['slug' => $slug]);
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
     }
 
     public function getStatusList()
