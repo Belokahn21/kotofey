@@ -13,9 +13,16 @@ $config = [
     ],
     'components' => [
         'imageCompress' => [
-            'class' => 'app\modules\site\components\ImageCompress',
+            'class' => 'app\modules\media\components\ImageCompress',
             'apiKey' => 'wc16fxnnQFozTU03gQQWEjbmXZRQwUvf',
             'maxCompressCount' => 500
+        ],
+        'CDN' => [
+            'class' => 'app\modules\media\components\CDN',
+            "cloud_name" => "kotofey-store",
+            "api_key" => "313768283447262",
+            "api_secret" => "Wm28QI4nQIolSV1J7Hd0hArxuzM",
+            "secure" => true
         ],
         'authClientCollection' => [
             'class' => 'yii\authclient\Collection',
