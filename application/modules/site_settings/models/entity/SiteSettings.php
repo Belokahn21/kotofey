@@ -34,23 +34,8 @@ class SiteSettings extends ActiveRecord
         return [
             [['name', 'value', 'code', 'type'], 'required'],
             [['name', 'value', 'code'], 'string'],
-
-//            [['file'], 'file', 'skipOnEmpty' => true, 'extensions' => 'png, jpg'],
         ];
     }
-
-//    public function behaviors()
-//    {
-//        return [
-//            [
-//                'class' => UploadBehavior::class,
-//                'attribute' => 'preview_image',
-//                'scenarios' => ['default'],
-//                'path' => '@webroot/upload/',
-//                'url' => '@web/upload/',
-//            ],
-//        ];
-//    }
 
     public function attributeLabels()
     {
@@ -66,7 +51,10 @@ class SiteSettings extends ActiveRecord
     public static function getValueByCode($code)
     {
         try {
-            return self::findByCode($code)->value;
+            $cache = \Yii::$app->cache;
+            return $cache->getOrSet($code, function () use ($code) {
+                return self::findByCode($code)->value;
+            }, 3600 * 7 * 24);
         } catch (\Exception $exception) {
             return "Свойство не создано";
         }

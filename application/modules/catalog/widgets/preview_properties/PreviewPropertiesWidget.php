@@ -20,8 +20,11 @@ class PreviewPropertiesWidget extends Widget
 
         $properties = array();
         $properties['Артикул'] = $this->product->article;
-        $properties['Вес'] = ProductPropertiesHelper::getProductWeight($this->product->id) ? ProductPropertiesHelper::getProductWeight($this->product->id) . "кг" : 'Не указан';
+        $properties['Вес'] = 'Не указан';
 
+        if ($weight = ProductPropertiesHelper::getProductWeight($this->product->id)) {
+            $properties['Вес'] = $weight . "кг";
+        }
 
         return $this->render($this->view, [
             'properties' => $properties

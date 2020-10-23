@@ -13,13 +13,13 @@ use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
 use app\modules\stock\widgets\store\StoreWidget;
 use app\modules\search\widges\search\SearchWidget;
-use app\modules\site\widgets\AdminPanel\AdminPanel;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
+use app\modules\catalog\models\helpers\CategoryHelper;
 
 AppAsset::register($this);
 
-$parentCategories = Category::find()->where(['parent' => 0])->all();
+$parentCategories = Category::find()->select(['id', 'name'])->where(['parent' => 0])->all();
 
 $this->beginPage() ?>
 <!DOCTYPE html>
@@ -60,7 +60,7 @@ $this->beginPage() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?= AdminPanel::widget(); ?>
+<? //= AdminPanel::widget(); ?>
 <header class="header page-container">
     <div class="logo">
         <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo.png">
@@ -112,8 +112,7 @@ $this->beginPage() ?>
         </div>
         <ul class="full-mobile-menu">
             <?php foreach ($parentCategories as $category): ?>
-                <li class="full-mobile-menu__item"><a class="full-mobile-menu__link"
-                                                      href="<?= $category->detail; ?>"><?= $category->name; ?></a></li>
+                <li class="full-mobile-menu__item"><a class="full-mobile-menu__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a></li>
             <?php endforeach; ?>
         </ul>
         <ul class="full-mobile-nav">
@@ -187,7 +186,7 @@ $this->beginPage() ?>
                     <ul class="block-menu-list">
                         <?php foreach ($subsection as $item): ?>
                             <li class="block-menu-list__item">
-                                <a class="block-menu-list__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
+                                <a class="block-menu-list__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
@@ -235,7 +234,7 @@ $this->beginPage() ?>
                 <ul class="footer-categories">
                     <?php foreach ($parentCategories as $item): ?>
                         <li class="footer-categories__item">
-                            <a class="footer-categories__link" href="<?= $item->detail; ?>"><?= $item->name; ?></a>
+                            <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>

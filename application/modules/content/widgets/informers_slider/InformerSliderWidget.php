@@ -9,10 +9,17 @@ use yii\base\Widget;
 class InformerSliderWidget extends Widget
 {
     public $template = 'default';
+    public $cacheTime = 3600 * 24 * 7;
+    public $cacheKey = 'informersSlider';
 
     public function run()
     {
-        $providers = InformersValues::find()->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC]);
+        $cache = \Yii::$app->cache;
+
+        $providers = $cache->getOrSet($this->cacheKey, function () {
+            return InformersValues::find()->select(['id', 'name'])->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC]);
+        }, $this->cacheTime);
+
         return $this->render($this->template, [
             'providers' => $providers
         ]);

@@ -81,11 +81,6 @@ class Category extends ActiveRecord
         ];
     }
 
-    public function getDetail()
-    {
-        return "/catalog/" . $this->slug . "/";
-    }
-
     public static function findBySlug($slug)
     {
         return static::findOne(['slug' => $slug]);
