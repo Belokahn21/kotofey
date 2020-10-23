@@ -6,7 +6,8 @@ class m201023_044950_create_modify_media extends Migration
 {
     public function safeUp()
     {
-        $this->addColumn('{{%media}}', 'json_cdn_data', $this->text()->after('path'));
+        $this->addColumn('{{%media}}', 'type', $this->string(10)->comment('image/file/video/music')->after('path'));
+        $this->addColumn('{{%media}}', 'json_cdn_data', $this->text()->after('type'));
     }
 
     public function safeDown()
