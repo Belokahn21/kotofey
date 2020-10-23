@@ -1,0 +1,806 @@
+a:2:{i:0;a:2:{i:0;s:69945:"    <div class="page-title__group">
+        <h2 class="page-title">Категории</h2>
+        <a class="page-title__link" href="/catalog/">Весь каталог</a>
+    </div>
+    <div class="category-slider-outter">
+        <div class="swiper-container category-slider-container">
+            <div class="swiper-wrapper category-slider-wrapper">
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=1&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Royal Canin</a>
+                            </div>
+                            <div class="category-slider__label">492 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc5912188b98.png" alt="Royal Canin" title="Royal Canin">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=2&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Мнямс</a>
+                            </div>
+                            <div class="category-slider__label">166 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc59144a4095.jpg" alt="Мнямс" title="Мнямс">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=5&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Хрумка</a>
+                            </div>
+                            <div class="category-slider__label">101 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e36995084770.jpg" alt="Хрумка" title="Хрумка">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=6&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Purina</a>
+                            </div>
+                            <div class="category-slider__label">573 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc5940197e6d.png" alt="Purina" title="Purina">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=21&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Мясоешки</a>
+                            </div>
+                            <div class="category-slider__label">71 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc5941b9682f.jpg" alt="Мясоешки" title="Мясоешки">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=26&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">LiveRa</a>
+                            </div>
+                            <div class="category-slider__label">55 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc5943a20172.jpg" alt="LiveRa" title="LiveRa">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=27&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Cesar</a>
+                            </div>
+                            <div class="category-slider__label">11 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e3699b8149b7.jpg" alt="Cesar" title="Cesar">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=29&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Dreamies</a>
+                            </div>
+                            <div class="category-slider__label">20 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc59491329a3.jpg" alt="Dreamies" title="Dreamies">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=27&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=&CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=27&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=32&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Perfect fit</a>
+                            </div>
+                            <div class="category-slider__label">33 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc594d92267c.jpg" alt="Perfect fit" title="Perfect fit">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Whiskas</a>
+                            </div>
+                            <div class="category-slider__label">46 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc5952abd70c.jpeg" alt="Whiskas" title="Whiskas">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Kitekat</a>
+                            </div>
+                            <div class="category-slider__label">27 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc595626c479.jpg" alt="Kitekat" title="Kitekat">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=39&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Pedigree</a>
+                            </div>
+                            <div class="category-slider__label">27 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc5959810852.png" alt="Pedigree" title="Pedigree">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=41&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Chappi</a>
+                            </div>
+                            <div class="category-slider__label">7 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc595c218cb7.png" alt="Chappi" title="Chappi">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=42&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Prolife</a>
+                            </div>
+                            <div class="category-slider__label">52 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dc5a0712f4ea.jpg" alt="Prolife" title="Prolife">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=50&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Dr.Elsey</a>
+                            </div>
+                            <div class="category-slider__label">12 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dbcc82543.png" alt="Dr.Elsey" title="Dr.Elsey">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=52&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Catzone</a>
+                            </div>
+                            <div class="category-slider__label">12 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dc1d65bcf.jpeg" alt="Catzone" title="Catzone">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=54&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Golosi</a>
+                            </div>
+                            <div class="category-slider__label">23 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dc7a59786.jpg" alt="Golosi" title="Golosi">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=55&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Beaphar</a>
+                            </div>
+                            <div class="category-slider__label">49 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dd784128db42.png" alt="Beaphar" title="Beaphar">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=57&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Pi-Pi Bent</a>
+                            </div>
+                            <div class="category-slider__label">8 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dcce34841.jpg" alt="Pi-Pi Bent" title="Pi-Pi Bent">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=58&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Сибирская кошка</a>
+                            </div>
+                            <div class="category-slider__label">51 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dce0bc667.png" alt="Сибирская кошка" title="Сибирская кошка">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=59&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Дарэлл</a>
+                            </div>
+                            <div class="category-slider__label">13 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dd42e9e17.png" alt="Дарэлл" title="Дарэлл">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=60&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Brit Premium</a>
+                            </div>
+                            <div class="category-slider__label">75 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dd614ccb5.jpg" alt="Brit Premium" title="Brit Premium">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=61&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Flexi</a>
+                            </div>
+                            <div class="category-slider__label">12 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dd8a7fc42.png" alt="Flexi" title="Flexi">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=72&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Padovan</a>
+                            </div>
+                            <div class="category-slider__label">6 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4ddab9cdfc.jpg" alt="Padovan" title="Padovan">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=75&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Акана</a>
+                            </div>
+                            <div class="category-slider__label">55 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4ddbf66c5d.png" alt="Акана" title="Акана">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=77&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Orijen</a>
+                            </div>
+                            <div class="category-slider__label">8 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5efb0d706402b.webp" alt="Orijen" title="Orijen">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=79&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Little One</a>
+                            </div>
+                            <div class="category-slider__label">37 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4de530961d.png" alt="Little One" title="Little One">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=80&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Триол</a>
+                            </div>
+                            <div class="category-slider__label">4 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4de75e8fdb.png" alt="Триол" title="Триол">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=81&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Rio</a>
+                            </div>
+                            <div class="category-slider__label">24 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4ddf64a4ed.jpg" alt="Rio" title="Rio">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=82&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Догман</a>
+                            </div>
+                            <div class="category-slider__label">32 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5df4dee117d1a.png" alt="Догман" title="Догман">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=83&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Schesir</a>
+                            </div>
+                            <div class="category-slider__label">17 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dfcee603a56f.jpg" alt="Schesir" title="Schesir">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=85&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">All Cats</a>
+                            </div>
+                            <div class="category-slider__label">7 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dfe2efa820f2.jpg" alt="All Cats" title="All Cats">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=86&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Tasty</a>
+                            </div>
+                            <div class="category-slider__label">10 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5dfe369faf0a4.jpg" alt="Tasty" title="Tasty">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=87&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Sera</a>
+                            </div>
+                            <div class="category-slider__label">44 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5efb0dcb8ebbf.webp" alt="Sera" title="Sera">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=89&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Ме-О</a>
+                            </div>
+                            <div class="category-slider__label">12 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e044c2d2d0cf.jpg" alt="Ме-О" title="Ме-О">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=89&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Tetra</a>
+                            </div>
+                            <div class="category-slider__label">25 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e038d03e9692.png" alt="Tetra" title="Tetra">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=94&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Cliny</a>
+                            </div>
+                            <div class="category-slider__label">9 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e0617df540cb.jpg" alt="Cliny" title="Cliny">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=95&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Luxan</a>
+                            </div>
+                            <div class="category-slider__label">3 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e062bc86209f.jpg" alt="Luxan" title="Luxan">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=96&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Доброзверики</a>
+                            </div>
+                            <div class="category-slider__label">5 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e06336ab0938.jpg" alt="Доброзверики" title="Доброзверики">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=97&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">БиоВакс</a>
+                            </div>
+                            <div class="category-slider__label">16 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f03453d860b9.jpg" alt="БиоВакс" title="БиоВакс">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=98&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Gamma</a>
+                            </div>
+                            <div class="category-slider__label">9 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f03460049fe3.jpg" alt="Gamma" title="Gamma">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=99&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Доктор ZOO</a>
+                            </div>
+                            <div class="category-slider__label">15 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f03463e9b5de.jpg" alt="Доктор ZOO" title="Доктор ZOO">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=100&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Гудмэн</a>
+                            </div>
+                            <div class="category-slider__label">10 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f0346d860d81.png" alt="Гудмэн" title="Гудмэн">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=101&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Mr.Bruno</a>
+                            </div>
+                            <div class="category-slider__label">9 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f0346fe0c557.jpg" alt="Mr.Bruno" title="Mr.Bruno">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=102&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">TropiClean</a>
+                            </div>
+                            <div class="category-slider__label">10 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f0347416c062.jpg" alt="TropiClean" title="TropiClean">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=103&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">ANIMAL PLAY</a>
+                            </div>
+                            <div class="category-slider__label">13 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f03478f52690.jpg" alt="ANIMAL PLAY" title="ANIMAL PLAY">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=133&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Bozita</a>
+                            </div>
+                            <div class="category-slider__label">9 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e1dd750c6caf.png" alt="Bozita" title="Bozita">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=1&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=&CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=108&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Hill's</a>
+                            </div>
+                            <div class="category-slider__label">242 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e206cb632291.webp" alt="Hill's" title="Hill's">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Терра Пёс</a>
+                            </div>
+                            <div class="category-slider__label">10 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e2dc79e43d62.png" alt="Терра Пёс" title="Терра Пёс">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Fresh Step</a>
+                            </div>
+                            <div class="category-slider__label">7 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e3cfa543eee5.webp" alt="Fresh Step" title="Fresh Step">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Matisse</a>
+                            </div>
+                            <div class="category-slider__label">17 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e36d3e6caf08.jpg" alt="Matisse" title="Matisse">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="https://kotofey.store/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=139&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Trainer</a>
+                            </div>
+                            <div class="category-slider__label">11 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e36db1311487.jpg" alt="Trainer" title="Trainer">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">SIRIUS</a>
+                            </div>
+                            <div class="category-slider__label">42 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/" alt="SIRIUS" title="SIRIUS">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Наш Рацион</a>
+                            </div>
+                            <div class="category-slider__label">17 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/" alt="Наш Рацион" title="Наш Рацион">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Дилли</a>
+                            </div>
+                            <div class="category-slider__label">19 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/" alt="Дилли" title="Дилли">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Forza</a>
+                            </div>
+                            <div class="category-slider__label">56 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e3db4b73ddda.jpg" alt="Forza" title="Forza">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Зоотренд</a>
+                            </div>
+                            <div class="category-slider__label">4 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5e3ec2e29abad.jpg" alt="Зоотренд" title="Зоотренд">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=152&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Ziver</a>
+                            </div>
+                            <div class="category-slider__label">7 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f034a6306738.png" alt="Ziver" title="Ziver">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=153&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=">8 в 1</a>
+                            </div>
+                            <div class="category-slider__label">5 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f034a98d07a6.jpg" alt="8 в 1" title="8 в 1">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=154&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Sanabelle</a>
+                            </div>
+                            <div class="category-slider__label">27 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f034ac98866a.jpg" alt="Sanabelle" title="Sanabelle">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=155&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Bosch</a>
+                            </div>
+                            <div class="category-slider__label">16 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f0347e866dc7.png" alt="Bosch" title="Bosch">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=156&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Dr.Alex</a>
+                            </div>
+                            <div class="category-slider__label">5 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f03486351192.jpg" alt="Dr.Alex" title="Dr.Alex">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter%5Binformer%5D%5B1%5D=&CatalogFilter%5Binformer%5D%5B1%5D%5B%5D=161&CatalogFilter%5Binformer%5D%5B2%5D=&CatalogFilter%5Binformer%5D%5B3%5D=&CatalogFilter%5Binformer%5D%5B4%5D=&CatalogFilter%5Binformer%5D%5B5%5D=&CatalogFilter%5Binformer%5D%5B8%5D=&CatalogFilter%5Binformer%5D%5B9%5D=">Farmina</a>
+                            </div>
+                            <div class="category-slider__label">99 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f034a3229215.jpg" alt="Farmina" title="Farmina">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Хочу ещё</a>
+                            </div>
+                            <div class="category-slider__label">11 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/" alt="Хочу ещё" title="Хочу ещё">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Питомец</a>
+                            </div>
+                            <div class="category-slider__label">19 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/" alt="Питомец" title="Питомец">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=179&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Betty Cat</a>
+                            </div>
+                            <div class="category-slider__label">13 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f034941700b4.png" alt="Betty Cat" title="Betty Cat">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=180&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Happy Cat</a>
+                            </div>
+                            <div class="category-slider__label">12 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f0348d6d2080.jpg" alt="Happy Cat" title="Happy Cat">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=181&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Murkel</a>
+                            </div>
+                            <div class="category-slider__label">42 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f034894cc074.png" alt="Murkel" title="Murkel">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=182&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Чистые пушистые</a>
+                            </div>
+                            <div class="category-slider__label">9 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f0349125bf63.jpg" alt="Чистые пушистые" title="Чистые пушистые">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="/catalog/?CatalogFilter[informer][1]=&CatalogFilter[informer][1][]=203&CatalogFilter[informer][2]=&CatalogFilter[informer][3]=&CatalogFilter[informer][4]=&CatalogFilter[informer][5]=&CatalogFilter[informer][6]=&CatalogFilter[informer][7]=&CatalogFilter[informer][8]=&CatalogFilter[informer][9]=&CatalogFilter[informer][11]=&CatalogFilter[informer][12]=&CatalogFilter[informer][13]=">Eukanuba</a>
+                            </div>
+                            <div class="category-slider__label">58 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f1010f951aec.jpg" alt="Eukanuba" title="Eukanuba">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">SKUDO</a>
+                            </div>
+                            <div class="category-slider__label">4 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/" alt="SKUDO" title="SKUDO">
+                        </div>
+                    </div>
+                                    <div class="swiper-slide category-slider__slide">
+                        <div class="category-slider__info">
+                            <div class="category-slider__title">
+                                <a class="category-slider__link" href="">Monge</a>
+                            </div>
+                            <div class="category-slider__label">224 позиций</div>
+                        </div>
+                        <div class="category-slider__icon">
+                            <img src="/upload/5f6d89521d39b.webp" alt="Monge" title="Monge">
+                        </div>
+                    </div>
+                
+            </div>
+            <div class="slider-swiper-button-next category-slider-control"><img src="/upload/images/arrow-right-black.svg"></div>
+            <div class="slider-swiper-button-prev category-slider-control"><img src="/upload/images/arrow-left-black.svg"></div>
+        </div>
+    </div>
+    ";i:1;N;}i:1;N;}
