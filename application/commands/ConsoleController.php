@@ -23,6 +23,7 @@ class ConsoleController extends Controller
                 $cdnResponse = \Yii::$app->CDN->uploadImage($path);
 
                 if (is_array($cdnResponse)) {
+                    echo rand();
                     $media = new Media();
                     $media->json_cdn_data = Json::encode($cdnResponse);
                     $media->location = Media::LOCATION_CDN;
