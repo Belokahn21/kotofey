@@ -137,7 +137,6 @@ class NotifyService
             'order_items' => OrdersItems::find()->where(['order_id' => $order_id])->all()
         ])
             ->setFrom([Yii::$app->params['email']['sale'] => 'kotofey.store'])
-//			->setTo('popugau@gmail.com')
             ->setTo($order->email)
             ->setSubject('Квитанция о покупке - спасибо, что вы с нами!')
             ->send();

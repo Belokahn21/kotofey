@@ -1,10 +1,21 @@
 <?php
+
 use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+use app\modules\order\models\entity\Order;
+use app\modules\order\models\entity\OrdersItems;
 
-\app\models\tool\Debug::p(ProductPropertiesHelper::getAllProperties(1211));
+//\app\models\tool\Debug::p(ProductPropertiesHelper::getAllProperties(1211));
 
-
-
+$order_id = 55;
+$order = Order::findOne($order_id);
+$result = Yii::$app->mailer->compose('client-buy', [
+    'order' => $order,
+    'order_items' => OrdersItems::find()->where(['order_id' => $order_id])->all()
+])
+    ->setFrom([Yii::$app->params['email']['sale'] => 'kotofey.store'])
+    ->setTo('popugau@gmail.com')
+    ->setSubject('Квитанция о покупке - спасибо, что вы с нами!')
+    ->send();
 
 //$url = 'http://api.cdek.ru/calculator/calculate_tarifflist.php';
 //
