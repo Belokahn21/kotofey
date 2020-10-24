@@ -1,15 +1,14 @@
 <?php
 
-namespace app\modules\yandex\controllers;
+namespace app\modules\export\controllers;
 
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
-use app\models\tool\Debug;
 use yii\web\Controller;
 
-class CatalogController extends Controller
+class YmlController extends Controller
 {
-	public function actionExport()
+	public function actionIndex()
 	{
 		$categories = Category::find()->all();
 		$offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
@@ -18,7 +17,7 @@ class CatalogController extends Controller
 		\Yii::$app->response->headers->add('Content-Type', 'text/xml');
 
 
-		$response = $this->renderPartial('export', [
+		$response = $this->renderPartial('index', [
 			'offers' => $offers,
 			'categories' => $categories
 		]);

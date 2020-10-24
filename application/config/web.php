@@ -137,7 +137,8 @@ $config = [
                 '/contacts' => 'site/site/contacts',
                 '/about' => 'site/site/about',
 
-                'market' => 'yandex/catalog/export',
+                'market' => 'export/yml/index',
+                'aliexpress' => 'export/aliexpress/index',
                 'checkout' => 'order/order/create',
                 'clear' => 'basket/basket/clear',
                 'gii' => 'gii',
@@ -180,8 +181,8 @@ $config = [
         'promocode' => [
             'class' => 'app\modules\promocode\Module',
         ],
-        'yandex' => [
-            'class' => 'app\modules\yandex\Module',
+        'export' => [
+            'class' => 'app\modules\export\Module',
         ],
         'rest' => [
             'class' => 'app\modules\rest\Module',
