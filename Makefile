@@ -25,6 +25,9 @@ composer-install:
 composer-update:
 	cd application && composer update
 
+cache:
+	rm -rf application/runtime/cache/
+
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/user/install/migrations --interactive=0
@@ -50,6 +53,6 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/bonus/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/short_link/install/migrations --interactive=0
 
-deploy: pull init-dev migrate
-deploy-prod: pull init-prod migrate
+deploy: pull init-dev cache migrate
+deploy-prod: pull init-prod cache migrate
 
