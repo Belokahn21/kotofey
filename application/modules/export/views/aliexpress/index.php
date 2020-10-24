@@ -69,7 +69,7 @@ $module = Yii::$app->getModule('export');
                         <lenght><?= $properties[18]; ?>; ?></lenght>
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(2, $properties)): ?>
-                        <weight><?= $properties[2]; ?>; ?></weight>
+                        <weight><?= $properties[2]; ?></weight>
                     <?php endif; ?>
                 </offer>
             <?php endforeach; ?>
