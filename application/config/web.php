@@ -303,7 +303,7 @@ if (YII_ENV_DEV) {
             'username' => 'sale@kotofey.store',
             'password' => '123qweR%',
             'port' => '465',
-            'encryption' => 'tls',
+            'encryption' => 'SSL',
         ],
         // send all mails to a file by default. You have to set
         // 'useFileTransport' to false and configure a transport
