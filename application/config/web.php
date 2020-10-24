@@ -274,7 +274,7 @@ $config = [
 ];
 
 if (YII_ENV_DEV) {
-    $params['components']['mailer'] = [
+    $config['components']['mailer'] = [
         'class' => 'yii\swiftmailer\Mailer',
         'useFileTransport' => false,
         'enableSwiftMailerLogging' => true,
@@ -292,7 +292,7 @@ if (YII_ENV_DEV) {
         // for the mailer to send real emails.
     ];
 } else {
-    $params['components']['mailer'] = [
+    $config['components']['mailer'] = [
         'class' => 'yii\swiftmailer\Mailer',
         'useFileTransport' => false,
         'enableSwiftMailerLogging' => true,
