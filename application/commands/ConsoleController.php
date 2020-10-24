@@ -17,6 +17,8 @@ class ConsoleController extends Controller
     public function actionRun()
     {
 
+        \Yii::$app->db->createCommand("ALTER TABLE `cdek_geo` COLLATE='utf8mb4_general_ci';")->execute();
+
         if (($handle = fopen(\Yii::getAlias('@app/tmp/cdek.csv'), "r")) !== false) {
             while (($line = fgetcsv($handle, 1000, ";")) !== false) {
                 if (!is_numeric($line[0])) {
