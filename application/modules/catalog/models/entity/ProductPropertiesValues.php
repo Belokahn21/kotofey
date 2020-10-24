@@ -50,8 +50,12 @@ class ProductPropertiesValues extends ActiveRecord
 
     public function getFinalValue()
     {
+        $cache = \Yii::$app->cache;
         if ($this->property->type == 1) {
-            $element = InformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one();
+            $element = $cache->getOrSet(sprintf('gfvinformer:%s:%s', $this->informer->id, $this->value), function () {
+                return InformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one();
+            });
+
             if ($element) {
                 return $element->name;
             }

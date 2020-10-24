@@ -1,7 +1,11 @@
 <?php
 
+use app\models\tool\System;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+
+$module = Yii::$app->getModule('export');
 
 /* @var $offers \app\modules\catalog\models\entity\Product[]
  * @var $categories \app\modules\catalog\models\entity\Category[]
@@ -10,11 +14,11 @@ use app\modules\catalog\models\entity\Product;
 <?xml version="1.0" encoding="UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
-        <name>Зоомагазин Котофей</name>
-        <company>ИП Васин К.В.</company>
-        <url>https://kotofey.store/</url>
-        <platform>Зоомагазин Котофей</platform>
-        <version>1.0</version>
+        <name><?= $module->exportOrganizationName; ?></name>
+        <company><?= $module->exportCompany; ?></company>
+        <url><?= System::fullDomain(); ?></url>
+        <platform><?= $module->exportPlatform; ?></platform>
+        <version><?= $module->exportVersion; ?></version>
         <agency></agency>
         <email></email>
         <currencies>
@@ -33,8 +37,9 @@ use app\modules\catalog\models\entity\Product;
         <cpa>1</cpa>
         <offers>
             <?php foreach ($offers as $offer): ?>
+                <?php $properties = ProductPropertiesHelper::getAllProperties($offer->id); ?>
                 <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
-                    <url>https://kotofey.store<?= $offer->detail; ?></url>
+                    <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
                     <?php if ($offer->discount_price): ?>
                         <price><?= $offer->discount_price; ?></price>
                         <oldprice><?= $offer->price; ?></oldprice>
@@ -51,6 +56,9 @@ use app\modules\catalog\models\entity\Product;
                     <pickup>false</pickup>
                     <store>false</store>
                     <delivery>true</delivery>
+                    <?php if ($properties && array_key_exists(16, $properties) && array_key_exists(17, $properties) && array_key_exists(18, $properties)): ?>
+                        <dimensions><?= $properties[16]; ?>/<?= $properties[17]; ?>/<?= $properties[18]; ?></dimensions>
+                    <?php endif; ?>
                 </offer>
             <?php endforeach; ?>
         </offers>

@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\helpers;
 
 
+use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use yii\web\HttpException;
@@ -18,7 +19,7 @@ class ProductPropertiesHelper
             throw new HttpException(404, 'Элемент не найден');
         }
 
-        $weight = $cache->getOrSet('ppv-w', function () use ($product) {
+        $weight = $cache->getOrSet(sprintf('gpw:%s', $product), function () use ($product) {
             return ProductPropertiesValues::findOne(['property_id' => 2, 'product_id' => $product->id]);
         }, 3600 * 7 * 24);
 
@@ -27,5 +28,25 @@ class ProductPropertiesHelper
         }
 
         return false;
+    }
+
+    public static function getAllProperties($product_id)
+    {
+        $out = [];
+        $cache = \Yii::$app->cache;
+
+        $values = $cache->getOrSet(sprintf('gap:%s', $product_id), function () use ($product_id) {
+            return ProductPropertiesValues::find()->where(['product_id' => $product_id])->all();
+        });
+
+        if(!$values){
+            return false;
+        }
+
+        foreach ($values as $value) {
+            $out[$value->property->id] = $value->getFinalValue();
+        }
+
+        return $out;
     }
 }

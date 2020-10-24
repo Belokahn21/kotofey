@@ -108,8 +108,11 @@ class ProductHelper
         return $url;
     }
 
-    public static function getDetailUrl(Product $model)
+    public static function getDetailUrl(Product $model, $isFull = false)
     {
+        if ($isFull)
+            return System::fullDomain() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
+
         return Url::to(['/catalog/product/view', 'id' => $model->slug]);
     }
 }
