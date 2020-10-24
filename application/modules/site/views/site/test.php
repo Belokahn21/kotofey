@@ -6,7 +6,7 @@ use app\modules\order\models\entity\OrdersItems;
 
 //\app\models\tool\Debug::p(ProductPropertiesHelper::getAllProperties(1211));
 
-$order_id = 55;
+$order_id = 11;
 $order = Order::findOne($order_id);
 $result = Yii::$app->mailer->compose('client-buy', [
     'order' => $order,
