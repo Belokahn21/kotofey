@@ -302,8 +302,8 @@ if (YII_ENV_DEV) {
             'host' => 'smtp.timeweb.ru',
             'username' => 'sale@kotofey.store',
             'password' => '123qweR%',
-            'port' => '465',
-            'encryption' => 'SSL',
+            'port' => '587',
+            'encryption' => 'tls',
         ],
         // send all mails to a file by default. You have to set
         // 'useFileTransport' to false and configure a transport
