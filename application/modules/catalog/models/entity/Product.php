@@ -28,6 +28,7 @@ use yii\web\UploadedFile;
  * @property string $slug
  * @property integer $sort
  * @property integer $status_id
+ * @property integer $is_ali
  * @property integer $category_id
  * @property integer $vendor_id
  * @property integer $discount_price
