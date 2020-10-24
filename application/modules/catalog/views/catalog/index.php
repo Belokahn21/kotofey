@@ -14,6 +14,7 @@ use app\models\forms\CatalogFilter;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\modules\catalog\widgets\filter\CatalogFilterWidget;
+use app\modules\catalog\models\helpers\CategoryHelper;
 
 $this->title = Title::showTitle("Зоотовары");
 $category_id = 0;
@@ -61,8 +62,7 @@ if ($category) {
                 <ul class="aside-sub-categories">
                     <?php foreach ($subCategories as $category): ?>
                         <li class="aside-sub-categories__item">
-                            <a class="aside-sub-categories__link"
-                               href="<?= $category->detail; ?>"><?= $category->name; ?></a>
+                            <a class="aside-sub-categories__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
