@@ -19,7 +19,7 @@ class ProductPropertiesHelper
             throw new HttpException(404, 'Элемент не найден');
         }
 
-        $weight = $cache->getOrSet(sprintf('gpw:%s', $product), function () use ($product) {
+        $weight = $cache->getOrSet(sprintf('gpw:%s', $product_id), function () use ($product) {
             return ProductPropertiesValues::findOne(['property_id' => 2, 'product_id' => $product->id]);
         }, 3600 * 7 * 24);
 
