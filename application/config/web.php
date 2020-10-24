@@ -273,7 +273,7 @@ $config = [
     'params' => $params,
 ];
 
-if (YII_ENV == 'dev') {
+if (YII_ENV_DEV) {
     $params['components']['mailer'] = [
         'class' => 'yii\swiftmailer\Mailer',
         'useFileTransport' => false,
@@ -311,7 +311,7 @@ if (YII_ENV == 'dev') {
     ];
 }
 
-if (YII_ENV_DEV or $_SERVER['REMOTE_ADDR'] == '109.171.61.86') {
+if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
