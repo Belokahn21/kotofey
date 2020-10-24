@@ -60,13 +60,13 @@ $module = Yii::$app->getModule('export');
                         <dimensions><?= $properties[16]; ?>/<?= $properties[17]; ?>/<?= $properties[18]; ?></dimensions>
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(16, $properties)): ?>
-                        <Width><?= $properties[16]; ?>;</Width>
+                        <width><?= $properties[16]; ?>;</width>
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(17, $properties)): ?>
-                        <Height><?= $properties[17]; ?>;</Height>
+                        <height><?= $properties[17]; ?>;</height>
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(18, $properties)): ?>
-                        <Length><?= $properties[18]; ?>;</Length>
+                        <lenght><?= $properties[18]; ?>;</lenght>
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(2, $properties)): ?>
                         <weight><?= $properties[2]; ?></weight>
