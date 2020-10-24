@@ -11,7 +11,7 @@ $module = Yii::$app->getModule('export');
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<? xml version = "1.0" encoding = "UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>
@@ -58,6 +58,15 @@ $module = Yii::$app->getModule('export');
                     <delivery>true</delivery>
                     <?php if ($properties && array_key_exists(16, $properties) && array_key_exists(17, $properties) && array_key_exists(18, $properties)): ?>
                         <dimensions><?= $properties[16]; ?>/<?= $properties[17]; ?>/<?= $properties[18]; ?></dimensions>
+                    <?php endif; ?>
+                    <?php if ($properties && array_key_exists(16, $properties)): ?>
+                        <width><?= $properties[16]; ?>; ?></width>
+                    <?php endif; ?>
+                    <?php if ($properties && array_key_exists(17, $properties)): ?>
+                        <height><?= $properties[17]; ?>; ?></height>
+                    <?php endif; ?>
+                    <?php if ($properties && array_key_exists(18, $properties)): ?>
+                        <lenght><?= $properties[18]; ?>; ?></lenght>
                     <?php endif; ?>
                 </offer>
             <?php endforeach; ?>
