@@ -5,6 +5,7 @@ namespace app\commands;
 use app\models\tool\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\cdek\models\entity\CdekGeo;
 use app\modules\content\models\entity\SlidersImages;
 use app\modules\media\models\entity\Media;
 use app\modules\vendors\models\entity\Vendor;
@@ -16,20 +17,32 @@ class ConsoleController extends Controller
     public function actionRun()
     {
 
-        \Yii::$app->db->createCommand('DELETE FROM `kotofey_store`.`migration` WHERE  `version`=\'m201021_163727_create_cdek_geo_table\';')->execute();
+        if (($handle = fopen(\Yii::getAlias('@app/tmp/cdek.csv'), "r")) !== false) {
+            while (($line = fgetcsv($handle, 1000, ";")) !== false) {
+                if (!is_numeric($line[0])) {
+                    continue;
+                }
 
-//        if (($handle = fopen(\Yii::getAlias('@app/tmp/cdek.csv'), "r")) !== false) {
-//            while (($line = fgetcsv($handle, 1000, ";")) !== false) {
-//                if (!is_numeric($line[1])) {
-//                    continue;
-//                }
-//
-//                $cdek = new geo
-//
-//                Debug::p($line);
-//
-//            }
-//        }
+                $cdek = new CdekGeo();
+                $cdek->FullName = $line[1];
+                $cdek->CityName = $line[2];
+                $cdek->FIAS = $line[14];
+                $cdek->KLADR = $line[15];
+
+                if (!$cdek->validate()) {
+                    Debug::p($cdek->getErrors());
+                    return false;
+                }
+
+                if (!$cdek->save()) {
+                    Debug::p($cdek->getErrors());
+                    return false;
+                }
+
+                echo $line[1] . " - добавлен";
+                echo PHP_EOL;
+            }
+        }
 
 //        $images = SlidersImages::find()->where(['media_id' => null])->andWhere(['is not', 'image', null])->all();
 //
