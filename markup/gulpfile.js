@@ -18,6 +18,8 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     pug = require('gulp-pug'),
     notify = require('gulp-notify'),
+    eslint = require('gulp-eslint'),
+    sourcemaps = require('gulp-sourcemaps'),
     babelify = require('babelify');
 
 const config = {
@@ -127,7 +129,6 @@ gulp.task('ecmascript6', function () {
             .pipe(browserSync.reload({
                 stream: true
             }));
-
 
         browserify({
             entries: ['node_modules/@babel/polyfill/dist/polyfill.min.js', config.paths.ecmascript6.src_frontend],

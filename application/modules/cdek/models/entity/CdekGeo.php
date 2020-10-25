@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int|null $city_id
+ * @property int|null $postcode
  * @property string|null $FullName
  * @property string|null $CityName
  * @property string|null $FIAS
@@ -17,39 +18,31 @@ use Yii;
  */
 class CdekGeo extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'cdek_geo';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
             [['city_id'], 'integer'],
-            [['FIAS', 'KLADR'], 'string'],
+            [['FIAS', 'KLADR', 'postcode'], 'string'],
             [['FullName', 'CityName', 'pvzCode'], 'string', 'max' => 255],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'city_id' => 'City ID',
-            'FullName' => 'Full Name',
-            'CityName' => 'City Name',
-            'FIAS' => 'Fias',
-            'KLADR' => 'Kladr',
-            'pvzCode' => 'Pvz Code',
+            'city_id' => 'ID города(сдек)',
+            'postcode' => 'Почтовый индекс',
+            'FullName' => 'Полное наименование',
+            'CityName' => 'Город',
+            'FIAS' => 'ФИАС',
+            'KLADR' => 'КЛАДР',
+            'pvzCode' => 'ПВЗ код',
         ];
     }
 }

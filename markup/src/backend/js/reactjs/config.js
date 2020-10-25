@@ -14,5 +14,6 @@ module.exports = {
     restTodoGet: url + '/todo/rest-backend/get/',
     restCdekDeliveryPrice: url + '/cdek/rest-calculator/get/',
     restCdekCity: url + '/cdek/rest-city/get/',
+    restCdekSize: url + '/cdek/rest-size/get/',
     ajaxSaveProductMark: url + '/ajax/mark/',
 };

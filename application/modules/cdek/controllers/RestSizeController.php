@@ -4,13 +4,12 @@ namespace app\modules\cdek\controllers;
 
 
 use app\modules\cdek\models\entity\CdekGeo;
+use app\modules\cdek\models\helpers\CdekDeliveryHelper;
 use yii\helpers\Json;
 use yii\rest\Controller;
 
-class RestCityController extends Controller
+class RestSizeController extends Controller
 {
-    public $modelClass = 'app\modules\cdek\models\entity\CdekGeo';
-
     public function behaviors()
     {
         return [
@@ -22,6 +21,6 @@ class RestCityController extends Controller
 
     public function actionGet()
     {
-        return Json::encode(CdekGeo::find()->where(['like', 'FullName', \Yii::$app->request->get('name')])->andWhere(['is not', 'postcode', null])->all());
+        return Json::encode(CdekDeliveryHelper::getBoxSizes());
     }
 }
