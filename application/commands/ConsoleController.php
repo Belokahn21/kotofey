@@ -17,11 +17,26 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $products = Product::find()->where(['like', 'name', '11.4'])->all();
+        $phrases = [
+            'royal canin',
+            '1.5',
+        ];
 
+        $products = Product::find();
+
+        foreach ($phrases as $phrase) {
+            $products->andWhere(['like', 'name', $phrase]);
+        }
+
+        $products = $products->all();
         foreach ($products as $product) {
+//            echo $product->name;
+//            echo PHP_EOL;
+//            continue;
+
+
             // ШхВхД
-            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, '16', '66') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '17', '16') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '18', '46')) {
+            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, '16', '36') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '17', '13') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '18', '21')) {
 
                 $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                 $product->is_ali = 1;
