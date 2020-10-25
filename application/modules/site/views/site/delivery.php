@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Доставка и оплата',
             <div class="page__text">При доставке в удалённые точки города или за город сумма доставки может быть выше обычной. Уточнить сумму доставки можно у опретаторов при подтверждении заказа.</div>
             <h2 class="page__title">Как оплатить?</h2>
             <div class="page__text">При получении заказа наличными или банковским переводом. Так же можно оплатить заказ в личном кабинете. <a href="#">Подробнее об оплате на сайте</a></div>
-            <img class="payments-image" src="./assets/images/payments.png">
+            <img class="payments-image" src="/upload/images/payments.png">
             <div class="page__title">Куда доставляем товар?</div>
             <div class="page__text">По городу Барнаул и всей России</div>
             <h2 class="page__title">Время доставки</h2>
