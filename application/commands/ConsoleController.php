@@ -18,8 +18,8 @@ class ConsoleController extends Controller
     public function actionRun()
     {
         $phrases = [
-            'royal canin',
-            '1.5',
+            'дилли',
+            '16',
         ];
 
         $products = Product::find();
@@ -30,9 +30,9 @@ class ConsoleController extends Controller
 
         $products = $products->all();
         foreach ($products as $product) {
-//            echo $product->name;
-//            echo PHP_EOL;
-//            continue;
+            echo $product->name;
+            echo PHP_EOL;
+            continue;
 
 
             // ШхВхД
