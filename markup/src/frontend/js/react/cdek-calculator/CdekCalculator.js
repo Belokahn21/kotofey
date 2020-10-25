@@ -8,8 +8,11 @@ class CdekCalculator extends React.Component {
     constructor() {
         super();
 
+        this.handleInputCityTimerId = null;
+
         this.state = {
-            summary: 0
+            summary: 0,
+            cities: []
         };
     }
 
@@ -19,15 +22,30 @@ class CdekCalculator extends React.Component {
 
         fetch(config.restCdekDeliveryPrice).then(response => response.json()).then(data => {
             data = JSON.parse(data);
-
-            console.log(data);
-
             if (data.result.price) {
                 this.setState({
                     summary: data.result.price
                 });
             }
         });
+    }
+
+    handleInputCity(event) {
+        let element = event.target;
+
+        if (this.handleInputCityTimerId) {
+            clearTimeout(this.handleInputCityTimerId)
+        }
+
+        this.handleInputCityTimerId = setTimeout(() => {
+            fetch(config.restCdekCity + '?name=' + element.value).then(response => response.json()).then(data => {
+                this.setState({
+                    cities: data
+                });
+            });
+
+            console.log(this.state.cities);
+        }, 1000);
     }
 
     render() {
@@ -37,7 +55,15 @@ class CdekCalculator extends React.Component {
                     <div className="title">Приблизительная стоимость доставки</div>
                     <div className="sub-title">Доставка осуществляется транспортной компанией до двери либо до склада</div>
                     <div className="form-delivery-calc__element">
-                        <input className="form-delivery-calc__input" type="text" required placeholder="Куда доставить?"/>
+                        <div className="form-delivery-calc-dropdown-wrap">
+                            <input className="form-delivery-calc__input" onKeyUp={this.handleInputCity.bind(this)} type="text" required placeholder="Куда доставить?"/>
+                            <div className="form-delivery-calc-dropdown">
+                                {this.state.cities.map(city => {
+                                    return <div className="form-delivery-calc-dropdown__item">{city.FullName}</div>
+                                })}
+                            </div>
+                        </div>
+                        <input type="hidden" name="city_id"/>
                     </div>
                     <div className="form-delivery-calc__element">
                         <select className="form-delivery-calc__select">
