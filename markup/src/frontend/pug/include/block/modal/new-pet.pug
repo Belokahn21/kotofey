@@ -1,11 +1,18 @@
-#newPetModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='newPetModalLabel', aria-hidden='true')
-    .modal-dialog.modal-lg(role='document')
+#newPetModal.authModal.modal.fade(tabindex='-1', role='dialog', aria-labelledby='newPetModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
         .modal-content
-            .modal-header
-                h5#newPetModalLabel.modal-title Новая карточка питомца
-                button.close(type='button', data-dismiss='modal', aria-label='Close')
-                    span(aria-hidden='true') ×
-            .modal-body
-            .modal-footer
-                button.btn.btn-secondary(type='button', data-dismiss='modal') Закрыть
-                button.btn.btn-primary(type='button') Отправить форму
+            .site-form
+                .modal-header
+                    .div
+                        h5#newPetModalLabel.modal-title Добавить нового питомца
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .site-form__item
+                        label.site-form__label(for="site-form-email") Адрес вашей электронной почты
+                        input.site-form__input#site-form-email(type="text" placeholder="Адрес вашей электронной почты")
+                    .site-form__item
+                        label.site-form__label(for="site-form-password") Пароль
+                        input.site-form__input#site-form-password(type="password" placeholder="Пароль")
+                    .modal-footer
+                        button.site-form__button(type='button') Добавить

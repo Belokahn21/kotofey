@@ -10,6 +10,7 @@ class m201025_154322_create_pets_table extends Migration
             'id' => $this->primaryKey(),
             'user_id' => $this->integer()->notNull(),
             'name' => $this->string(255)->notNull(),
+            'animal_id' => $this->integer()->notNull(),
             'birthday' => $this->string(255),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),
