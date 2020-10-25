@@ -30,13 +30,13 @@ class ConsoleController extends Controller
 
         $products = $products->all();
         foreach ($products as $product) {
-            echo $product->name;
-            echo PHP_EOL;
-            continue;
+//            echo $product->name;
+//            echo PHP_EOL;
+//            continue;
 
 
             // ШхВхД
-            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, '16', '36') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '17', '13') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '18', '21')) {
+            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, '16', '71') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '17', '17') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '18', '41')) {
 
                 $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                 $product->is_ali = 1;
