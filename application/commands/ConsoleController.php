@@ -17,42 +17,42 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $phrases = [
-            'дилли',
-            '16',
-        ];
-
-        $products = Product::find();
-
-        foreach ($phrases as $phrase) {
-            $products->andWhere(['like', 'name', $phrase]);
-        }
-
-        $products = $products->all();
-        foreach ($products as $product) {
-//            echo $product->name;
-//            echo PHP_EOL;
-//            continue;
-
-
-            // ШхВхД
-            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, '16', '71') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '17', '17') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '18', '41')) {
-
-                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-                $product->is_ali = 1;
-
-                if (!$product->validate()) {
-                    return false;
-                }
-
-                if (!$product->update()) {
-                    return false;
-                }
-
-                echo $product->name;
-                echo PHP_EOL;
-            }
-        }
+//        $phrases = [
+//            'дилли',
+//            '16',
+//        ];
+//
+//        $products = Product::find();
+//
+//        foreach ($phrases as $phrase) {
+//            $products->andWhere(['like', 'name', $phrase]);
+//        }
+//
+//        $products = $products->all();
+//        foreach ($products as $product) {
+////            echo $product->name;
+////            echo PHP_EOL;
+////            continue;
+//
+//
+//            // ШхВхД
+//            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, '16', '71') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '17', '17') && ProductPropertiesValuesHelper::savePropertyValue($product->id, '18', '41')) {
+//
+//                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+//                $product->is_ali = 1;
+//
+//                if (!$product->validate()) {
+//                    return false;
+//                }
+//
+//                if (!$product->update()) {
+//                    return false;
+//                }
+//
+//                echo $product->name;
+//                echo PHP_EOL;
+//            }
+//        }
 
 
 //        \Yii::$app->db->createCommand('TRUNCATE `cdek_geo`')->execute();
