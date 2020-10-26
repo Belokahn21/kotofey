@@ -20,7 +20,7 @@ use app\modules\site\widgets\AdminPanel\AdminPanel;
 
 AppAsset::register($this);
 
-$parentCategories = Category::find()->select(['id', 'name'])->where(['parent' => 0])->all();
+$parentCategories = Category::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
 
 $this->beginPage() ?>
 <!DOCTYPE html>
