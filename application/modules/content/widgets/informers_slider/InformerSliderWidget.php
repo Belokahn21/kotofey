@@ -17,7 +17,7 @@ class InformerSliderWidget extends Widget
         $cache = \Yii::$app->cache;
 
         $providers = $cache->getOrSet($this->cacheKey, function () {
-            return InformersValues::find()->select(['id', 'name', 'image'])->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC]);
+            return InformersValues::find()->select(['id', 'name', 'image','media_id'])->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC]);
         }, $this->cacheTime);
 
         return $this->render($this->template, [

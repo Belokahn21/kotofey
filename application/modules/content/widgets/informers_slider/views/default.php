@@ -21,10 +21,14 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
                             <div class="category-slider__title">
                                 <a class="category-slider__link" href="<?= $provider->link; ?>"><?= $provider->name; ?></a>
                             </div>
-                            <div class="category-slider__label"><?= ProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id'); ?> позиций</div>
+                            <div class="category-slider__label">
+                                <?= Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
+                                    return ProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
+                                }); ?> позиций
+                            </div>
                         </div>
                         <div class="category-slider__icon">
-                            <img src="<?= ProductPropertiesValuesHelper::getImageUrl($provider, ['width' => 70, 'height' => 70, 'scale' => 'fit']); ?>" alt="<?= $provider->name; ?>" title="<?= $provider->name; ?>">
+                            <img src="<?= ProductPropertiesValuesHelper::getImageUrl($provider, ['width' => 70, 'height' => 70, 'crop' => 'fit']); ?>" alt="<?= $provider->name; ?>" title="<?= $provider->name; ?>">
                         </div>
                     </div>
                 <?php endforeach; ?>
