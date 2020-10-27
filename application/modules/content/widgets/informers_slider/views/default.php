@@ -2,6 +2,7 @@
 
 use yii\helpers\Url;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 
 /* @var $providers \yii\db\ActiveQuery */
 
@@ -23,7 +24,7 @@ use app\modules\catalog\models\entity\ProductPropertiesValues;
                             <div class="category-slider__label"><?= ProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id'); ?> позиций</div>
                         </div>
                         <div class="category-slider__icon">
-                            <img src="/upload/<?= $provider->image; ?>" alt="<?= $provider->name; ?>" title="<?= $provider->name; ?>">
+                            <img src="<?= ProductPropertiesValuesHelper::getImageUrl($provider); ?>" alt="<?= $provider->name; ?>" title="<?= $provider->name; ?>">
                         </div>
                     </div>
                 <?php endforeach; ?>
