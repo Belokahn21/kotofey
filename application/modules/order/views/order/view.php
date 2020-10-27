@@ -36,7 +36,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                 </tr>
                 <tr>
                     <td>Сумма заказа</td>
-                    <td><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></td>
+                    <td>
+                        <?php if (OrderHelper::orderSummary($order->id) == OrderHelper::orderSummary($order->id, true)): ?>
+                            <span><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></span>
+                        <?php else: ?>
+                            <span style="text-decoration: line-through;"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></span>
+                            <span><?= Price::format(OrderHelper::orderSummary($order->id, true)); ?> <?= Currency::getInstance()->show(); ?></span>
+                        <?php endif; ?>
+                    </td>
                 </tr>
                 <tr>
                     <td>Статус</td>

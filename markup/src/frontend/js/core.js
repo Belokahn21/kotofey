@@ -15,7 +15,7 @@ import './block/menu';
 import './block/ui-placeholder';
 import './block/other-jquery';
 import './block/catalog-filter';
-import  './block/favorite';
+import './block/favorite';
 import './block/compare';
 import './block/toggleClass';
 import './block/promocode';
@@ -41,6 +41,5 @@ $(function () {
 
 
 //react js
-
-import calculator from './react/cdek-calculator/CdekCalculator';
+import './react/cdek-calculator/CdekCalculator';
 

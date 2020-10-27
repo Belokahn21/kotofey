@@ -2,7 +2,6 @@ var gulp = require('gulp'),
     browserSync = require('browser-sync').create(),
     reload = browserSync.reload,
     autoprefixer = require('gulp-autoprefixer'),
-    includeHtml = require('gulp-include-tag'),
     es = require('event-stream'),
     concat = require('gulp-concat'),
     rigger = require('gulp-rigger'),
@@ -18,8 +17,6 @@ var gulp = require('gulp'),
     source = require('vinyl-source-stream'),
     pug = require('gulp-pug'),
     notify = require('gulp-notify'),
-    eslint = require('gulp-eslint'),
-    sourcemaps = require('gulp-sourcemaps'),
     babelify = require('babelify');
 
 const config = {
@@ -225,26 +222,6 @@ gulp.task('sass', function () {
     });
 });
 
-gulp.task('html', function () {
-    return new Promise(function (resolve, reject) {
-        es.concat(gulp.src(config.paths.html.src_backend)
-                .pipe(plumber())
-                .pipe(includeHtml())
-                .pipe(plumber.stop())
-                .pipe(reload({stream: true}))
-                .pipe(gulp.dest(config.paths.html.build_backend)),
-
-            gulp.src(config.paths.html.src_frontend)
-                .pipe(plumber())
-                .pipe(includeHtml())
-                .pipe(plumber.stop())
-                .pipe(reload({stream: true}))
-                .pipe(gulp.dest(config.paths.html.build_frontend))
-        );
-        resolve();
-    });
-});
-
 gulp.task('browser-sync', function () {
     browserSync.init({
         disable: false,
@@ -323,7 +300,6 @@ gulp.task('img', function () {
 gulp.task('build', gulp.parallel(
     'sass',
     'pug',
-    // 'html',
     // 'js',
     'img',
     'copy',
@@ -332,7 +308,6 @@ gulp.task('build', gulp.parallel(
 
 gulp.task('watch', function () {
     gulp.watch([config.paths.css.watch_backend, config.paths.css.watch_frontend], gulp.series('sass'));
-    // gulp.watch([config.paths.html.watch_backend, config.paths.html.watch_frontend], gulp.series('html'));
     // gulp.watch([config.paths.js.watch_frontend], gulp.series('js'));
     gulp.watch([config.paths.ecmascript6.watch_backend, config.paths.ecmascript6.watch_frontend], gulp.series('ecmascript6'));
     gulp.watch([config.paths.image.watch_backend, config.paths.image.watch_frontend], gulp.series('img'));

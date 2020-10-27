@@ -3,15 +3,16 @@ import Price from '../tools/Price';
 
 class RemoveBasketItem {
     constructor() {
-        this.elements = document.querySelectorAll('.js-remove-basket-item')
+        this.elements = document.querySelectorAll('.js-remove-basket-item');
+
+        if (!this.elements) {
+            return false;
+        }
 
         this.initEvents();
     }
 
     initEvents() {
-        if (!this.elements) {
-            return false;
-        }
 
         this.elements.forEach((element) => {
             element.onclick = this.remove.bind(this);
