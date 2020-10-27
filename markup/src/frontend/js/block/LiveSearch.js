@@ -29,14 +29,13 @@ class LiveSearch {
         }
         timer = setTimeout(() => {
             let placeholder = element.getAttribute('placeholder');
-            placeholder="";
+            placeholder = "";
             let letter = phrase[placeholder.length];
 
 
-            console.log(placeholder);
-            console.log(placeholder.length);
-            console.log(element);
-            console.log(letter);
+            // console.log(placeholder);
+            // console.log(letter);
+            // console.log(placeholder + letter);
 
             element.setAttribute('placeholder', placeholder + letter);
 

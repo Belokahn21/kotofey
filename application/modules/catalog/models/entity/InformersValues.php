@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 
+use app\modules\media\components\behaviors\ImageUploadMinify;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -20,17 +21,18 @@ use yii\db\ActiveRecord;
  * @property string $link
  * @property string $description
  * @property string $image
+ * @property integer $media_id
  * @property integer $created_at
  * @property integer $updated_at
  */
 class InformersValues extends ActiveRecord
 {
-	public function rules()
-	{
-		return [
-			[['informer_id', 'name'], 'required', 'message' => 'Поле {attribute} обязательно'],
+    public function rules()
+    {
+        return [
+            [['informer_id', 'name'], 'required', 'message' => 'Поле {attribute} обязательно'],
 
-			[['informer_id', 'sort'], 'integer'],
+            [['informer_id', 'sort', 'media_id'], 'integer'],
 			[['sort'], 'default', 'value' => 500],
 
 			[['active'], 'boolean'],
@@ -51,13 +53,13 @@ class InformersValues extends ActiveRecord
 				'attribute' => 'name',
 				'ensureUnique' => true,
 			],
-			[
-				'class' => UploadBehavior::class,
-				'attribute' => 'image',
-				'scenarios' => ['default'],
-				'path' => '@webroot/upload/',
-				'url' => '@web/upload/',
-			],
+            [
+                'class' => ImageUploadMinify::class,
+                'attribute' => 'image',
+                'scenarios' => ['default'],
+                'path' => '@webroot / upload / ',
+                'url' => '@web / upload / '
+            ],
 		];
 	}
 
@@ -72,6 +74,7 @@ class InformersValues extends ActiveRecord
 			'active' => 'Активность',
 			'sort' => 'Сортировка',
 			'image' => 'Картинка',
+			'media_id' => 'ID media',
 			'created_at' => 'Дата создания',
 			'updated_at' => 'Дата обновления',
 		];

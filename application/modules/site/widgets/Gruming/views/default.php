@@ -15,7 +15,7 @@ use yii\helpers\Html;
     </div>
     <div class="gruming-container">
         <div class="gruming-wrap">
-            <video class="gruming-video" autoplay="" loop="">
+            <video class="gruming-video" muted="muted" autoplay="" loop="">
                 <source src="/video/video3.mp4" type="video/mp4">
             </video>
         </div>

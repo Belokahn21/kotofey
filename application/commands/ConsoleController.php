@@ -3,6 +3,7 @@
 namespace app\commands;
 
 use app\models\tool\Debug;
+use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
@@ -17,6 +18,52 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
+        $infValues = InformersValues::find()->where(['media_id' => null])->all();
+
+        foreach ($infValues as $item) {
+            $path = \Yii::getAlias("@webroot/upload/$item->image");
+
+            if (is_file($path)) {
+                $cdnResponse = \Yii::$app->CDN->uploadImage($path);
+
+                if (is_array($cdnResponse)) {
+                    $media = new Media();
+                    $media->json_cdn_data = Json::encode($cdnResponse);
+                    $media->location = Media::LOCATION_CDN;
+                    $media->name = $item->image;
+                    $media->type = Media::MEDIA_TYPE_IMAGE;
+
+                    if (!$media->validate()) {
+                        Debug::p($media->getErrors());
+                        return false;
+                    }
+
+                    if (!$media->save()) {
+                        return false;
+                    }
+
+                    $item->media_id = $media->id;
+
+                    if (!$item->validate()) {
+                        Debug::p($item->getErrors());
+                        return false;
+                    }
+
+                    if (!$item->update()) {
+                        Debug::p($item->getErrors());
+                        return false;
+                    }
+                    echo 'ID: ' . $item->id . $item->name . "($path)";
+                    echo PHP_EOL;
+                }
+
+
+            }
+        }
+
+        echo "finish!!!";
+        echo PHP_EOL;
+
 //        $phrases = [
 //            'дилли',
 //            '16',
