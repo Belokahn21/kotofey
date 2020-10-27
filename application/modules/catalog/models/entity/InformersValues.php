@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\entity;
 
 
 use app\modules\media\components\behaviors\ImageUploadMinify;
+use app\modules\media\models\entity\Media;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -33,26 +34,26 @@ class InformersValues extends ActiveRecord
             [['informer_id', 'name'], 'required', 'message' => 'Поле {attribute} обязательно'],
 
             [['informer_id', 'sort', 'media_id'], 'integer'],
-			[['sort'], 'default', 'value' => 500],
+            [['sort'], 'default', 'value' => 500],
 
-			[['active'], 'boolean'],
-			[['active'], 'default', 'value' => 1],
+            [['active'], 'boolean'],
+            [['active'], 'default', 'value' => 1],
 
-			[['name', 'description', 'link'], 'string'],
+            [['name', 'description', 'link'], 'string'],
 
-			[['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
-		];
-	}
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
+        ];
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className(),
-			[
-				'class' => SluggableBehavior::className(),
-				'attribute' => 'name',
-				'ensureUnique' => true,
-			],
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'ensureUnique' => true,
+            ],
             [
                 'class' => ImageUploadMinify::class,
                 'attribute' => 'image',
@@ -60,23 +61,28 @@ class InformersValues extends ActiveRecord
                 'path' => '@webroot / upload / ',
                 'url' => '@web / upload / '
             ],
-		];
-	}
+        ];
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'informer_id' => 'Справочник',
-			'name' => 'Название',
-			'link' => 'Ссылка',
-			'description' => 'Описание',
-			'active' => 'Активность',
-			'sort' => 'Сортировка',
-			'image' => 'Картинка',
-			'media_id' => 'ID media',
-			'created_at' => 'Дата создания',
-			'updated_at' => 'Дата обновления',
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'informer_id' => 'Справочник',
+            'name' => 'Название',
+            'link' => 'Ссылка',
+            'description' => 'Описание',
+            'active' => 'Активность',
+            'sort' => 'Сортировка',
+            'image' => 'Картинка',
+            'media_id' => 'ID media',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
+        ];
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
+    }
 }
