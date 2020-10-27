@@ -25,6 +25,8 @@ use yii\db\ActiveRecord;
  * @property integer $media_id
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property Media $media
  */
 class InformersValues extends ActiveRecord
 {
