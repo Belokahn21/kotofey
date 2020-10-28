@@ -311,13 +311,13 @@ if (YII_ENV_DEV) {
     ];
 }
 
-if (YII_ENV_DEV or $_SERVER['REMOTE_ADDR'] == '109.171.61.86') {
+if ($_SERVER['REMOTE_ADDR'] == '109.171.61.86' or $_SERVER['REMOTE_ADDR'] == '176.212.127.47') {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['127.0.0.1', '::1', '109.171.61.86', '109.195.36.227', '5.166.94.197'],
+        'allowedIPs' => ['127.0.0.1', '::1', '109.171.61.86', '109.195.36.227', '5.166.94.197', '176.212.127.47'],
     ];
 
     $config['bootstrap'][] = 'gii';
