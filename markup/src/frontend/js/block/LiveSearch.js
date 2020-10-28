@@ -36,8 +36,9 @@ class LiveSearch {
             // console.log(placeholder);
             // console.log(letter);
             // console.log(placeholder + letter);
+            // console.log(element);
 
-            element.setAttribute('placeholder', placeholder + letter);
+            // element.setAttribute('placeholder', placeholder + letter);
 
             // if (placeholder.length + 1 < phrase.length) {
             //     this.typing(element, phrase, timer);

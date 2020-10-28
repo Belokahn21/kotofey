@@ -12,7 +12,7 @@ use app\modules\content\models\helpers\SlidersImagesHelper;
             <div class="mini-slider-wrapper swiper-wrapper">
                 <?php foreach ($images as $image): ?>
                     <div class="swiper-slide mini-slider-slide">
-                        <img src="<?= SlidersImagesHelper::getImageUrl($image); ?>" alt="<?= $image->text; ?>">
+                        <img src="<?= SlidersImagesHelper::getImageUrl($image, ['width' => 400, 'height' => 400, 'crop' => 'fit']); ?>" alt="<?= $image->text; ?>">
                     </div>
                 <?php endforeach; ?>
             </div>
