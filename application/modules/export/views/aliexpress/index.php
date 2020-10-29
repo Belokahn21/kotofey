@@ -49,7 +49,9 @@ $module = Yii::$app->getModule('export');
                     <?php endif; ?>
                     <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
-                    <picture><?= ProductHelper::getImageUrl($offer); ?></picture>
+                    <picture><?= ProductHelper::getImageUrl($offer,[
+                            'crop'=>'fit'
+                        ]); ?></picture>
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                     <?php if (!empty($offer->description)): ?>
                         <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
