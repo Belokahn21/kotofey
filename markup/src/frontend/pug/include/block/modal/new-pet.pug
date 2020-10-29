@@ -4,15 +4,33 @@
             .site-form
                 .modal-header
                     .div
-                        h5#newPetModalLabel.modal-title Добавить нового питомца
+                        h5#newPetModalLabel.modal-title Карточка нового питомца
                     button.close(type='button', data-dismiss='modal', aria-label='Close')
                         span(aria-hidden='true') ×
                 .modal-body
                     .site-form__item
-                        label.site-form__label(for="site-form-email") Адрес вашей электронной почты
-                        input.site-form__input#site-form-email(type="text" placeholder="Адрес вашей электронной почты")
+                        .select-pet
+                            .select-pet__item
+                                input(type="radio" name="type" value="dog")#select-pet-dog
+                                label(for="select-pet-dog").select-pet__icon
+                                    i.fas.fa-dog
+                            .select-pet__item
+                                input(type="radio" name="type" value="cat")#select-pet-cat
+                                label(for="select-pet-cat").select-pet__icon
+                                    i.fas.fa-cat
+                            .select-pet__item
+                                input(type="radio" name="type" value="fish")#select-pet-fish
+                                label(for="select-pet-fish").select-pet__icon
+                                    i.fas.fa-fish
+                            .select-pet__item
+                                input(type="radio" name="type" value="bird")#select-pet-bird
+                                label(for="select-pet-bird").select-pet__icon
+                                    i.fas.fa-crow
                     .site-form__item
-                        label.site-form__label(for="site-form-password") Пароль
-                        input.site-form__input#site-form-password(type="password" placeholder="Пароль")
+                        label.site-form__label(for="site-form-namepet") Кличка питомца
+                        input.site-form__input#site-form-namepet(type="text" placeholder="Кличка питомца")
+                    .site-form__item
+                        label.site-form__label(for="site-form-birthday") День рождения питомца
+                        input.site-form__input#site-form-birthday(type="text" placeholder="День рождения питомца")
                     .modal-footer
                         button.site-form__button(type='button') Добавить

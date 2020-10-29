@@ -10,3 +10,39 @@
     outline: none !important;
   }
 }
+
+.select-pet {
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  flex-wrap: wrap;
+
+  &__item {
+    margin: 5px;
+
+    input {
+      display: none;
+    }
+
+    input:checked ~ &__icon {
+      border-color: $active-color;
+    }
+  }
+
+  &__icon {
+    cursor: pointer;
+    width: 100px;
+    height: 100px;
+    border: 1px rgba(0, 0, 0, 0.06) solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 35px;
+    transition: all 0.22s ease;
+
+    &:hover {
+      border-color: $active-color;
+    }
+  }
+}
