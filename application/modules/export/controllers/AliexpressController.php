@@ -13,11 +13,7 @@ class AliexpressController extends Controller
     public function actionIndex()
     {
         $categories = Category::find()->all();
-        $offers = Product::find()
-            ->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['is_ali' => true])
-            ->leftJoin('product_properties_values as ppv', ['product_id=id'])
-            ->andWhere(['ppv.property_id' => ''])
-            ->all();
+        $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['is_ali' => true])->all();
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         \Yii::$app->response->headers->add('Content-Type', 'text/xml');
