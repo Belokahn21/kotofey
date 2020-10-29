@@ -43,6 +43,7 @@ use yii\helpers\Html;
                             <div class="card-body">
                                 <?= $form->field($model, 'name'); ?>
                                 <?= $form->field($model, 'description')->textarea(); ?>
+                                <?= $form->field($model, 'feed')->textarea(); ?>
                                 <div class="row">
                                     <div class="col-sm-4">
                                         <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара']); ?>
