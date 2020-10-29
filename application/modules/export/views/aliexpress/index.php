@@ -4,6 +4,7 @@ use app\models\tool\System;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+use app\modules\export\models\tools\AliexpressHelper;
 
 $module = Yii::$app->getModule('export');
 
@@ -66,10 +67,14 @@ $module = Yii::$app->getModule('export');
                         <height><?= $properties[17]; ?></height>
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(18, $properties)): ?>
-                        <lenght><?= $properties[18]; ?></lenght>
+                        <length><?= $properties[18]; ?></length>
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(2, $properties)): ?>
-                        <weight><?= $properties[2]; ?></weight>
+                        <weight><?= AliexpressHelper::getRealWeight($properties[2], [
+                                'width' => $properties[16],
+                                'height' => $properties[17],
+                                'length' => $properties[18],
+                            ]); ?></weight>
                     <?php endif; ?>
                     <count><?= rand(20, 40); ?></count>
                 </offer>
