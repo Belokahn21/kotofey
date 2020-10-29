@@ -121,7 +121,13 @@ class ProductBackendController extends Controller
 
     public function actionDelete($id)
     {
-        if (Product::findOne($id)->delete()) {
+        $product = Product::findOne($id);
+
+        if (!$product) {
+            throw new HttpException(404, 'Товара не существует');
+        }
+
+        if ($product->delete()) {
             Alert::setSuccessNotify('Продукт удалён');
         }
 

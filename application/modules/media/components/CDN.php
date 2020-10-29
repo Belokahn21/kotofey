@@ -3,6 +3,7 @@
 namespace app\modules\media\components;
 
 
+use Cloudinary\Uploader;
 use yii\base\Component;
 
 class CDN extends Component
@@ -37,5 +38,10 @@ class CDN extends Component
     public function resizeImage($public_id, $options = [])
     {
         return \Cloudinary::cloudinary_url($public_id, $options);
+    }
+
+    public function remove($public_id, $options = [])
+    {
+        return Uploader::destroy($public_id, $options);
     }
 }
