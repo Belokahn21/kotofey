@@ -2,24 +2,23 @@ import Number from '../tools/Number';
 
 class LiveSearch {
     constructor(selector) {
-        this.elements = document.querySelectorAll(selector);
-        this.oldPlaceholder = "";
-        this.bankPhrases = ["Роял канин для котят", "Acana Wild Prarie", "Влажный корм", "Лакомства"];
+        window.addEventListener('DOMContentLoaded', () => {
+            this.elements = document.querySelectorAll(selector);
+            this.oldPlaceholder = "";
+            this.bankPhrases = ["Роял канин для котят", "Acana Wild Prarie", "Влажный корм", "Лакомства"];
 
-        if (!this.elements) {
-            return false;
-        }
+            if (!this.elements) {
+                return false;
+            }
 
-        this.init();
-
+            this.init();
+        });
     }
 
     init() {
-        document.addEventListener('DOMContentLoaded', () => {
-            this.elements.forEach((element) => {
-                element.setAttribute('placeholder', "");
-                this.typing(element, this.bankPhrases[Number.getRandom(0, this.bankPhrases.length)]);
-            });
+        this.elements.forEach((element) => {
+            element.setAttribute('placeholder', "");
+            this.typing(element, this.bankPhrases[Number.getRandom(0, this.bankPhrases.length - 1)]);
         });
     }
 
@@ -29,20 +28,13 @@ class LiveSearch {
         }
         timer = setTimeout(() => {
             let placeholder = element.getAttribute('placeholder');
-            placeholder = "";
             let letter = phrase[placeholder.length];
 
+            element.setAttribute('placeholder', placeholder + letter);
 
-            // console.log(placeholder);
-            // console.log(letter);
-            // console.log(placeholder + letter);
-            // console.log(element);
-
-            // element.setAttribute('placeholder', placeholder + letter);
-
-            // if (placeholder.length + 1 < phrase.length) {
-            //     this.typing(element, phrase, timer);
-            // }
+            if (placeholder.length + 1 < phrase.length) {
+                this.typing(element, phrase, timer);
+            }
 
             clearTimeout(timer);
         }, this.getRandomInt(250 * 2.5))
@@ -52,5 +44,6 @@ class LiveSearch {
         return Math.floor(Math.random() * Math.floor(max));
     }
 }
+
 
 module.exports = LiveSearch;
