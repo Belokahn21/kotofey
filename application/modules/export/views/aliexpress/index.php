@@ -71,9 +71,9 @@ $module = Yii::$app->getModule('export');
                     <?php endif; ?>
                     <?php if ($properties && array_key_exists(2, $properties)): ?>
                         <weight><?= AliexpressHelper::getRealWeight($properties[2], [
-                                'width' => $properties[16],
-                                'height' => $properties[17],
-                                'length' => $properties[18],
+                                'width' => @$properties[16],
+                                'height' => @$properties[17],
+                                'length' => @$properties[18],
                             ]); ?></weight>
                     <?php endif; ?>
                     <count><?= rand(20, 40); ?></count>

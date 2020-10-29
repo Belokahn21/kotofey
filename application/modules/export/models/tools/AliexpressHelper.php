@@ -8,7 +8,7 @@ class AliexpressHelper
     public static function getRealWeight($weight, $gabarit = [])
     {
         if (!array_key_exists('width', $gabarit) or !array_key_exists('height', $gabarit) or !array_key_exists('length', $gabarit)) {
-            return false;
+            return $weight;
         }
 
         $width = floor($gabarit['width']);
