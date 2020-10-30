@@ -8,55 +8,60 @@ use yii\db\ActiveRecord;
 
 class Debug
 {
-	public static function p($target)
-	{
-		if (!empty($target)) {
-			$debugInfo = debug_backtrace()[0];
+    public static function p($target)
+    {
+        if (!empty($target)) {
+            $debugInfo = debug_backtrace()[0];
 
-			echo "<pre>";
-			echo "info: line: " . $debugInfo['line'] . " in file: " . $debugInfo['file'];
-			echo "\n";
-			print_r($target);
-			echo "</pre>";
-		}
-	}
+            echo "<pre>";
+            echo "info: line: " . $debugInfo['line'] . " in file: " . $debugInfo['file'];
+            echo "\n";
+            print_r($target);
+            echo "</pre>";
+        }
+    }
 
-	public static function printFile($target = null, $clear = false, $no_wrap = false)
-	{
+    public static function isPageSpeed()
+    {
+        return \Yii::$app->request->get('pagespeed') === 'Y';
+    }
 
-		$filePath = $_SERVER['DOCUMENT_ROOT'] . "/debug.txt";
+    public static function printFile($target = null, $clear = false, $no_wrap = false)
+    {
 
-		if (!empty($target)) {
-			$info = null;
-			if (!$no_wrap) {
-				$info = '<pre>';
-				$info .= print_r($target, true);
-				$info .= '</pre>';
-				$info .= PHP_EOL;
-				$info .= "\n";
-			} else {
-				$info = print_r($target, true);
-			}
+        $filePath = $_SERVER['DOCUMENT_ROOT'] . "/debug.txt";
 
-			if ($clear === true) {
-				if (is_file($filePath)) {
-					unlink($filePath);
-				}
-			}
+        if (!empty($target)) {
+            $info = null;
+            if (!$no_wrap) {
+                $info = '<pre>';
+                $info .= print_r($target, true);
+                $info .= '</pre>';
+                $info .= PHP_EOL;
+                $info .= "\n";
+            } else {
+                $info = print_r($target, true);
+            }
 
-			file_put_contents($filePath, $info, FILE_APPEND | LOCK_EX);
-		}
-	}
+            if ($clear === true) {
+                if (is_file($filePath)) {
+                    unlink($filePath);
+                }
+            }
 
-	public static function modelErrors($model)
-	{
-		$strError = '';
-		if ($model instanceof ActiveRecord) {
-			foreach ($model->getErrors() as $key => $errors) {
-				$strError .= '<br/>' . implode(';', $errors);
-			}
-		}
+            file_put_contents($filePath, $info, FILE_APPEND | LOCK_EX);
+        }
+    }
 
-		return $strError;
-	}
+    public static function modelErrors($model)
+    {
+        $strError = '';
+        if ($model instanceof ActiveRecord) {
+            foreach ($model->getErrors() as $key => $errors) {
+                $strError .= '<br/>' . implode(';', $errors);
+            }
+        }
+
+        return $strError;
+    }
 }

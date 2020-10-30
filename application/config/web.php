@@ -311,7 +311,7 @@ if (YII_ENV_DEV) {
     ];
 }
 
-if ($_SERVER['REMOTE_ADDR'] == '109.171.61.86' or $_SERVER['REMOTE_ADDR'] == '176.212.127.47') {
+if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [

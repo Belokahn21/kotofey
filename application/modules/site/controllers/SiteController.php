@@ -6,6 +6,7 @@ use app\models\tool\seo\Attributes;
 use app\models\tool\System;
 use app\modules\order\models\service\NotifyService;
 use app\modules\site\models\forms\GrumingForm;
+use app\modules\site\models\tools\Debug;
 use app\modules\user\models\entity\UserResetPassword;
 use app\modules\user\models\form\PasswordRestoreForm;
 use app\widgets\notification\Alert;
@@ -37,20 +38,22 @@ class SiteController extends Controller
 
     public function beforeAction($action)
     {
-        if (!Yii::$app->session->get('city_id')) {
-            $CityDefault = Geo::find()->where(['is_default' => true])->one();
-            if ($CityDefault) {
-                Yii::$app->session->set('city_id', $CityDefault->id);
+        if (!Debug::isPageSpeed()) {
+            if (!Yii::$app->session->get('city_id')) {
+                $CityDefault = Geo::find()->where(['is_default' => true])->one();
+                if ($CityDefault) {
+                    Yii::$app->session->set('city_id', $CityDefault->id);
+                }
             }
-        }
 
-        $geo = CurrentGeo::find()->one();
-        if ($geo) {
-            if ($geo->timeZone) {
-                date_default_timezone_set($geo->timeZone->value);
+            $geo = CurrentGeo::find()->one();
+            if ($geo) {
+                if ($geo->timeZone) {
+                    date_default_timezone_set($geo->timeZone->value);
+                }
             }
-        }
 
+        }
         return parent::beforeAction($action);
     }
 

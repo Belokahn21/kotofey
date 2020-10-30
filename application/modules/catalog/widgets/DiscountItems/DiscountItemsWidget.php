@@ -17,33 +17,36 @@ class DiscountItemsWidget extends Widget
 
     public function run()
     {
-        $cache = \Yii::$app->cache;
-        $formatArray = array();
+        if (!Debug::isPageSpeed()) {
+            $cache = \Yii::$app->cache;
+            $formatArray = array();
 
-        $models = $cache->getOrSet('discountProducts', function () {
-            return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price'])->where(['>', 'discount_price', 0])->andWhere(['status_id' => Product::STATUS_ACTIVE])->all();
-        }, $this->cacheTime);
-
-
-        foreach ($models as $model) {
-            $brand = $this->getBrandProperty($model->id);
-            $action = $this->getDiscountProperty($model->id);
+            $models = $cache->getOrSet('discountProducts', function () {
+                return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price'])->where(['>', 'discount_price', 0])->andWhere(['status_id' => Product::STATUS_ACTIVE])->all();
+            }, $this->cacheTime);
 
 
-            if ($brand) {
-                $formatArray['brands'][$brand['id']] = $brand;
+            foreach ($models as $model) {
+                $brand = $this->getBrandProperty($model->id);
+                $action = $this->getDiscountProperty($model->id);
+
+
+                if ($brand) {
+                    $formatArray['brands'][$brand['id']] = $brand;
+                }
+
+                if ($action) {
+                    $formatArray['actions'][$brand['id']][$action['id']] = $action;
+                }
+
             }
 
-            if ($action) {
-                $formatArray['actions'][$brand['id']][$action['id']] = $action;
-            }
+            return $this->render($this->view, [
+                'models' => $models,
+                'formatArray' => $formatArray
+            ]);
 
         }
-
-        return $this->render($this->view, [
-            'models' => $models,
-            'formatArray' => $formatArray
-        ]);
     }
 
     public function getBrandProperty($product_id)
