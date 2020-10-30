@@ -23,7 +23,7 @@ class Debug
 
     public static function isPageSpeed()
     {
-        return \Yii::$app->request->get('pagespeed') === 'Y';
+        return array_key_exists('pagespeed', $_GET) && $_GET['pagespeed'] === 'Y';
     }
 
     public static function printFile($target = null, $clear = false, $no_wrap = false)
