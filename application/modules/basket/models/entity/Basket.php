@@ -3,7 +3,7 @@
 namespace app\modules\basket\models\entity;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
 use yii\base\Model;

@@ -3,7 +3,7 @@
 namespace app\modules\stock\models\entity;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 

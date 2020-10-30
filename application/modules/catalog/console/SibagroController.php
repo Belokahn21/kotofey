@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\console;
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\models\tool\parser\ParseProvider;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\entity\Product;

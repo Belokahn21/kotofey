@@ -3,17 +3,12 @@
 namespace app\controllers;
 
 use Yii;
-use app\modules\catalog\models\entity\InformersValues;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\modules\search\models\entity\SearchQuery;
-use app\models\forms\SaleProductForm;
 use app\models\tool\Backup;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
-use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\filters\VerbFilter;
-use app\modules\catalog\models\entity\Product;
 
 class AdminController extends Controller
 {
@@ -93,47 +88,5 @@ class AdminController extends Controller
     {
         Yii::$app->cache->flush();
         return $this->redirect('/');
-    }
-
-
-    public function actionSaleProduct()
-    {
-        $model = new SaleProductForm();
-        $sales = InformersValues::find()->where(['informer_id' => '10', 'active' => 1])->all();
-
-        if (\Yii::$app->request->isPost) {
-            if ($model->load(\Yii::$app->request->post())) {
-                if ($model->validate()) {
-                    $selectedItems = ProductPropertiesValues::find()->where(['value' => $model->sale_id, 'property_id' => 11])->all();
-
-                    $products = Product::find()->where(['id' => ArrayHelper::getColumn($selectedItems, 'product_id')])->all();
-                    foreach ($products as $product) {
-                        $transaction = Yii::$app->db->beginTransaction();
-                        $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-                        $product->discount_price = null;
-                        if ($product->validate()) {
-                            if ($product->update() === false) {
-                                $transaction->rollBack();
-                                return false;
-                            }
-                        }
-                        if (!ProductPropertiesValues::findOne(['value' => $model->sale_id, 'product_id' => $product->id, 'property_id' => 11])->delete()) {
-                            $transaction->rollBack();
-                            return false;
-                        }
-
-                        $transaction->commit();
-                    }
-
-                    Alert::setSuccessNotify('Товары сняты с акции');
-                    return $this->refresh();
-                }
-            }
-        }
-
-        return $this->render('sale-product', [
-            'model' => $model,
-            'sales' => $sales
-        ]);
     }
 }

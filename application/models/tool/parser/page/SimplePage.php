@@ -3,7 +3,7 @@
 namespace app\models\tool\parser\page;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 
 class SimplePage
 {

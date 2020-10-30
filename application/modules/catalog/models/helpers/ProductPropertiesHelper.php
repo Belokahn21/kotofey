@@ -3,7 +3,7 @@
 namespace app\modules\catalog\models\helpers;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
 use yii\web\HttpException;

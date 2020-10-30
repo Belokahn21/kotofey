@@ -2,7 +2,7 @@
 
 namespace app\modules\instagram\controllers;
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\instagram\models\tools\Instagram;
 use yii\helpers\Json;
 use yii\rest\Controller;

@@ -3,7 +3,7 @@
 namespace app\modules\instagram\widgets\instagramMedia;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\instagram\models\tools\Instagram;
 use yii\base\Widget;
 

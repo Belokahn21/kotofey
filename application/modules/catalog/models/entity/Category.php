@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\models\entity;
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;

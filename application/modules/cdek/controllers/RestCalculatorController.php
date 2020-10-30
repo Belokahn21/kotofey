@@ -2,7 +2,7 @@
 
 namespace app\modules\cdek\controllers;
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\cdek\models\helpers\CdekDeliveryHelper;
 use yii\db\Exception;
 use yii\helpers\Json;

@@ -5,7 +5,7 @@ namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\search\InformersValuesSearchForm;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;

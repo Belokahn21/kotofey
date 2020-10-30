@@ -9,7 +9,7 @@ use app\modules\catalog\models\entity\ProductPropertiesValues;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductPropertiesHelper;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 
 class Valta
 {

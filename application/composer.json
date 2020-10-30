@@ -25,7 +25,8 @@
     "ext-curl": "*",
     "ext-json": "*",
     "yiisoft/yii2-imagine": "^2.2",
-    "bizley/migration": "^3.6"
+    "bizley/migration": "^3.6",
+    "phpoffice/phpspreadsheet": "^1.12"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

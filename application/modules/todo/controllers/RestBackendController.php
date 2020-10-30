@@ -3,7 +3,7 @@
 namespace app\modules\todo\controllers;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\todo\models\entity\TodoList;
 use yii\helpers\Json;
 use yii\rest\Controller;

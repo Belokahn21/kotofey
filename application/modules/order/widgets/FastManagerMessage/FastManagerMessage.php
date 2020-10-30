@@ -3,7 +3,7 @@
 namespace app\modules\order\widgets\FastManagerMessage;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
 
 class FastManagerMessage extends Widget

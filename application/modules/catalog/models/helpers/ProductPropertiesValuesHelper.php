@@ -3,7 +3,7 @@
 namespace app\modules\catalog\models\helpers;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\models\tool\System;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\ProductPropertiesValues;

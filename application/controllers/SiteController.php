@@ -24,7 +24,7 @@ use app\modules\vacancy\models\entity\Vacancy;
 use app\models\forms\CatalogFilter;
 use app\modules\user\models\form\PasswordRestoreForm;
 use app\models\services\ReferalService;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\models\tool\seo\Attributes;
 use app\modules\user\models\entity\User;
 use app\models\tool\seo\og\OpenGraph;

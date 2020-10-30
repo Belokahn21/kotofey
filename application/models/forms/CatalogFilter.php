@@ -5,7 +5,7 @@ namespace app\models\forms;
 
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use yii\base\Model;
 use yii\db\ActiveQuery;

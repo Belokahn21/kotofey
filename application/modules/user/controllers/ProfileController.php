@@ -3,7 +3,7 @@
 namespace app\modules\user\controllers;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
 use Yii;
 use yii\web\Controller;

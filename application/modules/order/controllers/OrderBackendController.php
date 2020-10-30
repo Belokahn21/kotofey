@@ -5,7 +5,6 @@ namespace app\modules\order\controllers;
 use app\modules\order\models\entity\OrderDate;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
-use app\models\tool\statistic\OrderStatistic;
 use app\modules\order\models\search\OrderSearchForm;
 use app\widgets\notification\Alert;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -325,8 +324,8 @@ class OrderBackendController extends Controller
         $sheet->setCellValue("G{$line}", OrderHelper::orderSummary($order->id));
 
         $line = $line + 2;
-        $result = (new \MessageFormatter('ru-RU', '{n, spellout}'))->format(['n' => OrderStatistic::orderSummary($order->id)]);
-        $sheet->setCellValue("A{$line}", Yii::$app->i18n->format(sprintf("Всего отпущено на сумму %s {n, plural, =0{Пусто} =1{рубль} one{рубль} few{рублей} many{рублей} other{Ошибка}}", $result), ['n' => OrderStatistic::orderSummary($order->id)], 'ru_RU'));
+        $result = (new \MessageFormatter('ru-RU', '{n, spellout}'))->format(['n' => OrderHelper::orderSummary($order->id)]);
+        $sheet->setCellValue("A{$line}", Yii::$app->i18n->format(sprintf("Всего отпущено на сумму %s {n, plural, =0{Пусто} =1{рубль} one{рубль} few{рублей} many{рублей} other{Ошибка}}", $result), ['n' => OrderHelper::orderSummary($order->id)], 'ru_RU'));
         $sheet->mergeCells("A{$line}:B{$line}");
 
         $line = $line + 2;

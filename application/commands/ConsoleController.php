@@ -2,7 +2,7 @@
 
 namespace app\commands;
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\InformersValues;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPropertiesValues;

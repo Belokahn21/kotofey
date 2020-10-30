@@ -4,7 +4,7 @@ namespace app\modules\order\models\service;
 
 
 use app\modules\order\models\helpers\TimeDeliveryHelper;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\basket\models\tools\BasketHelper;
 
 class DeliveryTimeService

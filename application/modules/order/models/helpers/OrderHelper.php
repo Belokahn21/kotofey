@@ -8,7 +8,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
 use app\modules\payment\models\entity\Payment;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 
 class OrderHelper

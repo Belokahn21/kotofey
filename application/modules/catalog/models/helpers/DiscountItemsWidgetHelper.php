@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\models\helpers;
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 
 class DiscountItemsWidgetHelper
 {

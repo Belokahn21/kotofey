@@ -3,7 +3,7 @@
 namespace app\modules\order\models\entity;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\user\models\entity\User;

@@ -6,7 +6,7 @@ namespace app\modules\catalog\models\search;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\helpers\ArrayHelper;

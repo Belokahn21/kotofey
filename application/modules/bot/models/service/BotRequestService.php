@@ -3,7 +3,7 @@
 namespace app\modules\bot\models\service;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 
 class BotRequestService
 {

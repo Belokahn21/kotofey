@@ -3,7 +3,7 @@
 namespace app\modules\catalog\widgets\AdminEdit;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
 use app\modules\stock\models\entity\Stocks;

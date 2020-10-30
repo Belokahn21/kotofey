@@ -4,7 +4,7 @@ namespace app\models\tool\import;
 
 
 use app\modules\catalog\models\entity\Product;
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 
 class Purina extends Importer
 {

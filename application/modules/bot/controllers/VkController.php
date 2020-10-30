@@ -2,7 +2,7 @@
 
 namespace app\modules\bot\controllers;
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\bot\models\methods\Message;
 use app\modules\bot\models\service\BotRequestService;
 use yii\helpers\Json;

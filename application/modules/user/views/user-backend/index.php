@@ -12,7 +12,6 @@ use app\modules\order\models\entity\Order;
 
 /* @var $model \app\modules\user\models\entity\User
  * @var $groups \app\modules\rbac\models\entity\AuthItem[]
- * @var $personalManagerModel \app\models\entity\UserManager
  */
 
 $this->title = Title::showTitle("Пользователи"); ?>

@@ -3,7 +3,7 @@
 namespace app\modules\media\components\behaviors;
 
 
-use app\models\tool\Debug;
+use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\media\models\entity\Media;
 use Cloudinary\Uploader;
