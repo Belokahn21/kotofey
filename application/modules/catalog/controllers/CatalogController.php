@@ -78,9 +78,9 @@ class CatalogController extends Controller
         }
 
         if ($category) {
-            $canonical = System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $category->slug . "/";
+            $canonical = System::protocol() . "://" . System::domain() . "/catalog/" . $category->slug . "/";
         } else {
-            $canonical = System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/";
+            $canonical = System::protocol() . "://" . System::domain() . "/catalog/";
         }
         Attributes::metaDescription($description);
         Attributes::metaKeywords($keywords);
