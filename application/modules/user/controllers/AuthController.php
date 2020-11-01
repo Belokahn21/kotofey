@@ -10,67 +10,71 @@ use app\modules\user\models\entity\User;
 
 class AuthController extends Controller
 {
-	public function actionSignin()
-	{
-		$model = new User(['scenario' => User::SCENARIO_LOGIN]);
+    public function actionSignin()
+    {
+        $model = new User(['scenario' => User::SCENARIO_LOGIN]);
 
-		if ($model->load(\Yii::$app->request->post())) {
-			if (!$model->validate()) {
-				Alert::setErrorNotify('Введены некоректные данные.');
-				return $this->redirect(['/']);
-			}
+        if ($model->load(\Yii::$app->request->post())) {
+            if (!$model->validate()) {
+                Alert::setErrorNotify('Введены некоректные данные.');
+                return $this->redirect(['/']);
+            }
 
-			$user = User::findByEmail($model->email);
-			if (!$user) {
+            $user = User::findByEmail($model->email);
+            if (!$user) {
 
-				Alert::setErrorNotify('Пользователя с таким Email не существует.');
-				return $this->redirect(['/']);
-			}
+                Alert::setErrorNotify('Пользователя с таким Email не существует.');
+                return $this->redirect(['/']);
+            }
 
-			if (!$user->validatePassword($model->password)) {
-				Alert::setErrorNotify('Пароль не верный.');
-				return $this->redirect(['/']);
-			}
+            if (!$user->validatePassword($model->password)) {
+                Alert::setErrorNotify('Пароль не верный.');
+                return $this->redirect(['/']);
+            }
 
-			if (\Yii::$app->user->login($user, 3600000)) {
-				Alert::setSuccessNotify('Вы успешно авторизовались.');
-			} else {
-				Alert::setErrorNotify('Авторизация не получилась.');
-				return $this->redirect(['/']);
-			}
-		}
+            if (\Yii::$app->user->login($user, 3600000)) {
+                Alert::setSuccessNotify('Вы успешно авторизовались.');
+            } else {
+                Alert::setErrorNotify('Авторизация не получилась.');
+                return $this->redirect(['/']);
+            }
+        }
 
-		return $this->redirect(['/']);
-	}
+        return $this->redirect(['/']);
+    }
 
-	public function actionSignup()
-	{
-		$model = new User(['scenario' => User::SCENARIO_INSERT]);
+    public function actionSignup()
+    {
+        $model = new User(['scenario' => User::SCENARIO_INSERT]);
 
-		if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-			return ActiveForm::validate($model);
-		}
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
-		if ($model->load(\Yii::$app->request->post())) {
-			if (!$model->validate()) {
-				Alert::setErrorNotify('Данные некоректные.');
-				return $this->redirect(['/']);
-			}
+        if ($model->load(\Yii::$app->request->post())) {
 
-			if (!$model->save()) {
-				Alert::setErrorNotify('Ошибка при создании пользователя.');
-				return $this->redirect(['/']);
-			}
+            $model->setPassword($model->password);
+            $model->generateAuthKey();
 
-			if (!\Yii::$app->user->login($model, 3600000)) {
-				Alert::setErrorNotify('Ошибка при авторизации нового пользователя.');
-				return $this->redirect(['/']);
-			}
+            if (!$model->validate()) {
+                Alert::setErrorNotify('Данные некоректные.');
+                return $this->redirect(['/']);
+            }
 
-			Alert::setSuccessNotify('Вы успешно зарегестрировались и вошли на сайт.');
-		}
+            if (!$model->save()) {
+                Alert::setErrorNotify('Ошибка при создании пользователя.');
+                return $this->redirect(['/']);
+            }
 
-		return $this->redirect(['/']);
-	}
+            if (!\Yii::$app->user->login($model, 3600000)) {
+                Alert::setErrorNotify('Ошибка при авторизации нового пользователя.');
+                return $this->redirect(['/']);
+            }
+
+            Alert::setSuccessNotify('Вы успешно зарегестрировались и вошли на сайт.');
+        }
+
+        return $this->redirect(['/']);
+    }
 }
