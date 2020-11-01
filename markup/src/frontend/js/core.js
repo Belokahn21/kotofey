@@ -42,4 +42,5 @@ $(function () {
 
 //react js
 import './react/cdek-calculator/CdekCalculator';
+import './react/search/Search';
 
