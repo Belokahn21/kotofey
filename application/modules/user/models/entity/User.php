@@ -24,6 +24,7 @@ use yii\web\IdentityInterface;
  * @property integer $sex
  * @property string $first_name
  * @property string $name
+ * @property string $phone
  * @property string $last_name
  * @property string $vk_link
  * @property integer $created_at

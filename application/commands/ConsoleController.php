@@ -27,6 +27,7 @@ class ConsoleController extends Controller
         $users[88] = '25071958';
         $users[89] = 'cfa123321';
         $users[90] = 'korverart2012';
+        $users[91] = 'ypfr2017';
         $users[92] = '1907';
         $users[93] = '423246';
 
@@ -34,9 +35,12 @@ class ConsoleController extends Controller
             $user = User::findOne($userId);
             $user->setPassword($pass);
             $user->scenario = User::SCENARIO_UPDATE;
+            $user->phone = (string)$user->phone;
             if ($user->validate() && $user->update()) {
                 echo "success update " . $user->email;
                 echo PHP_EOL;
+            }else{
+                Debug::p($user->getErrors());
             }
         }
 
