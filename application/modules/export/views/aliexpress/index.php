@@ -1,6 +1,7 @@
 <?php
 
 use app\models\tool\System;
+use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductPropertiesHelper;
@@ -12,7 +13,7 @@ $module = Yii::$app->getModule('export');
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<? xml version = "1.0" encoding = "UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>
@@ -38,6 +39,7 @@ $module = Yii::$app->getModule('export');
         <cpa>1</cpa>
         <offers>
             <?php foreach ($offers as $offer): ?>
+                <?php if ($offer->vendor_id == Vendor::VENDOR_ID_LUKAS and $offer->purchase < 5000) continue; ?>
                 <?php $properties = ProductPropertiesHelper::getAllProperties($offer->id); ?>
                 <?php if (!array_key_exists(16, $properties) or !array_key_exists(17, $properties) or !array_key_exists(18, $properties)) continue; ?>
                 <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
