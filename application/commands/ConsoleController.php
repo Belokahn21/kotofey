@@ -10,28 +10,49 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\cdek\models\entity\CdekGeo;
 use app\modules\content\models\entity\SlidersImages;
 use app\modules\media\models\entity\Media;
+use app\modules\user\models\entity\User;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 use yii\helpers\Json;
 
 class ConsoleController extends Controller
 {
-    public function actionRun()
+    public function actionRun($arg = null)
     {
+        $users[83] = 'Alex9059295224';
+        $users[84] = 'Shanhay';
+        $users[85] = '2012292209';
+        $users[86] = 'grom2017';
+        $users[87] = 'Barnayl13';
+        $users[88] = '25071958';
+        $users[89] = 'cfa123321';
+        $users[90] = 'korverart2012';
+        $users[92] = '1907';
+        $users[93] = '423246';
 
-        foreach (Product::find()->all() as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->discount_price = null;
-
-            if (!$product->validate()) {
-                return false;
-            }
-
-            if ($product->update()) {
-                echo $product->name;
+        foreach ($users as $userId => $pass) {
+            $user = User::findOne($userId);
+            $user->setPassword($pass);
+            $user->scenario = User::SCENARIO_UPDATE;
+            if ($user->validate() && $user->update()) {
+                echo "success update " . $user->email;
                 echo PHP_EOL;
             }
         }
+
+//        foreach (Product::find()->all() as $product) {
+//            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+//            $product->discount_price = null;
+//
+//            if (!$product->validate()) {
+//                return false;
+//            }
+//
+//            if ($product->update()) {
+//                echo $product->name;
+//                echo PHP_EOL;
+//            }
+//        }
 
 
 //        $infValues = InformersValues::find()->where(['media_id' => null])->all();
