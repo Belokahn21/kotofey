@@ -18,7 +18,6 @@ class AliexpressController extends Controller
             ->select(['product.id', 'product.name', 'product.price', 'product.purchase', 'product.media_id', 'product.status_id', 'product.is_ali'])
             ->rightJoin('product_properties_values as ppv', 'ppv.product_id = product.id')
             ->where(['product.status_id' => Product::STATUS_ACTIVE])
-            ->where(['product.id' => 423])
             ->andWhere(['product.is_ali' => 1])
             ->andWhere(['in', 'ppv.property_id', [16, 17, 18]])
             ->andWhere(['is not', 'ppv.value', null]);
