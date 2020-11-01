@@ -27,6 +27,6 @@ class AliexpressHelper
 
     public static function getVendorName($properties)
     {
-        return $properties[1];
+        return array_key_exists(1, $properties) ? $properties[1] : false;
     }
 }
