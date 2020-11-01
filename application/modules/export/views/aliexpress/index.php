@@ -12,7 +12,7 @@ $module = Yii::$app->getModule('export');
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<? //xml version="1.0" encoding="UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>
@@ -39,6 +39,7 @@ $module = Yii::$app->getModule('export');
         <offers>
             <?php foreach ($offers as $offer): ?>
                 <?php $properties = ProductPropertiesHelper::getAllProperties($offer->id); ?>
+                <?php if (!array_key_exists(16, $properties) or !array_key_exists(17, $properties) or !array_key_exists(18, $properties)) continue; ?>
                 <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
                     <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
                     <?php if ($offer->discount_price): ?>
@@ -49,8 +50,8 @@ $module = Yii::$app->getModule('export');
                     <?php endif; ?>
                     <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
-                    <picture><?= ProductHelper::getImageUrl($offer,[
-                            'crop'=>'fit'
+                    <picture><?= ProductHelper::getImageUrl($offer, [
+                            'crop' => 'fit'
                         ]); ?></picture>
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                     <?php if (!empty($offer->description)): ?>
@@ -71,13 +72,11 @@ $module = Yii::$app->getModule('export');
                     <?php if ($properties && array_key_exists(18, $properties)): ?>
                         <length><?= $properties[18]; ?></length>
                     <?php endif; ?>
-                    <?php if ($properties && array_key_exists(2, $properties)): ?>
-                        <weight><?= AliexpressHelper::getRealWeight($properties[2], [
-                                'width' => @$properties[16],
-                                'height' => @$properties[17],
-                                'length' => @$properties[18],
-                            ]); ?></weight>
-                    <?php endif; ?>
+                    <weight><?= AliexpressHelper::getRealWeight(@$properties[2], [
+                            'width' => @$properties[16],
+                            'height' => @$properties[17],
+                            'length' => @$properties[18],
+                        ]); ?></weight>
                     <count><?= rand(20, 40); ?></count>
                 </offer>
             <?php endforeach; ?>
