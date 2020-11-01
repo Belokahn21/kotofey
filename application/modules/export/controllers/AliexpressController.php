@@ -15,7 +15,6 @@ class AliexpressController extends Controller
     {
         $categories = Category::find()->all();
         $offers = Product::find()
-            ->select(['product.id', 'product.name', 'product.price', 'product.purchase', 'product.media_id', 'product.status_id', 'product.is_ali'])
             ->rightJoin('product_properties_values as ppv', 'ppv.product_id = product.id')
             ->where(['product.status_id' => Product::STATUS_ACTIVE])
             ->andWhere(['product.is_ali' => 1])
