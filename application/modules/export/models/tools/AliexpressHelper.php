@@ -27,6 +27,6 @@ class AliexpressHelper
 
     public static function getVendorName($properties)
     {
-        return $properties[2];
+        return $properties[1];
     }
 }
