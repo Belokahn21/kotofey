@@ -23,7 +23,7 @@ class AliexpressController extends Controller
             ->andWhere(['is not', 'ppv.value', null]);
 
         $offers = $offers->all();
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_XML;
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         \Yii::$app->response->headers->add('Content-Type', 'text/xml');
 
 
