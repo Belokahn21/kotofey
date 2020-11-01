@@ -12,7 +12,7 @@ $module = Yii::$app->getModule('export');
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<? xml version = "1.0" encoding = "UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>
@@ -42,6 +42,12 @@ $module = Yii::$app->getModule('export');
                 <?php if (!array_key_exists(16, $properties) or !array_key_exists(17, $properties) or !array_key_exists(18, $properties)) continue; ?>
                 <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
                     <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
+                    <?php if ($vendor = AliexpressHelper::getVendorName($properties)): ?>
+                        <vendor><?= $vendor; ?></vendor>
+                    <?php endif; ?>
+                    <?php if ($offer->barcode): ?>
+                        <vendorCode><?= $offer->barcode ?></vendorCode>
+                    <?php endif; ?>
                     <?php if ($offer->discount_price): ?>
                         <price><?= $offer->discount_price; ?></price>
                         <oldprice><?= $offer->price; ?></oldprice>

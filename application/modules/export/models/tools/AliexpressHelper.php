@@ -24,4 +24,9 @@ class AliexpressHelper
 
         return $realWeight;
     }
+
+    public static function getVendorName($properties)
+    {
+        return $properties[2];
+    }
 }
