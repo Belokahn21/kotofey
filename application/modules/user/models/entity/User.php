@@ -58,17 +58,14 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function behaviors()
     {
-
-        $module = \Yii::$app->getModule('user');
-
         return [
             TimestampBehavior::className(),
             [
                 'class' => UploadBehavior::className(),
                 'attribute' => 'avatar',
                 'scenarios' => ['profile'],
-                'path' => '@webroot' . $module->avatarPath,
-                'url' => '@web' . $module->avatarPath,
+                'path' => '@webroot/upload/avatar/',
+                'url' => '@web/upload/avatar/',
             ],
         ];
     }
