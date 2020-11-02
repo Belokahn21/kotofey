@@ -1,4 +1,5 @@
-// import $ from 'jquery';
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
 import '../reactjs/components/sidebar';
 import '../reactjs/components/statistic';
