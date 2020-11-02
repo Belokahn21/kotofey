@@ -1,9 +1,8 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 
 var slider = require('ion-rangeslider');
 
-window.$ = window.jQuery = $.noConflict();
-// window.ionRangeSlider = ionRangeSlider;
+// window.$ = window.jQuery = $.noConflict();
 
 let inputs = [
 	document.querySelector('#js-filter-from'),
