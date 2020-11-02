@@ -12,6 +12,20 @@ $config = [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'yii\web\JqueryAsset' => [
+                    'js' => []
+                ],
+//                'yii\bootstrap\BootstrapPluginAsset' => [
+//                    'js' => []
+//                ],
+//                'yii\bootstrap\BootstrapAsset' => [
+//                    'css' => [],
+//                ],
+
+            ],
+        ],
         'imageCompress' => [
             'class' => 'app\modules\media\components\ImageCompress',
             'apiKey' => 'wc16fxnnQFozTU03gQQWEjbmXZRQwUvf',
