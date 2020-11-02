@@ -193,13 +193,13 @@ $this->beginPage() ?>
     </div>
 
 
-<?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'): ?>
-    <?= $content; ?>
-<?php else: ?>
-    <div class="page-container">
+    <?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'): ?>
         <?= $content; ?>
-    </div>
-<?php endif ?>
+    <?php else: ?>
+        <div class="page-container">
+            <?= $content; ?>
+        </div>
+    <?php endif ?>
 
     <footer class="footer page-container">
         <div class="footer-layer-1">
@@ -249,16 +249,14 @@ $this->beginPage() ?>
         </div>
     </footer>
 
-<?php
-$signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
-$signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
-?>
-<?= $this->render('include/auth', [
-    'signin' => $signinModel,
-    'signup' => $signupModel,
-]); ?>
-    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/air-datepicker/2.2.3/js/datepicker.min.js"></script>-->
-    <script src="/js/frontend-core.min.js"></script>
+    <?php
+    $signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
+    $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
+    ?>
+    <?= $this->render('include/auth', [
+        'signin' => $signinModel,
+        'signup' => $signupModel,
+    ]); ?>
     <?= Alert::widget(); ?>
 <?php endif; ?>
 <?php $this->endBody(); ?>
