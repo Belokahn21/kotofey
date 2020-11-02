@@ -53,6 +53,7 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/bonus/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/short_link/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/pets/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/site/install/migrations --interactive=0
 
 deploy: pull init-dev cache migrate
 deploy-prod: pull init-prod cache migrate

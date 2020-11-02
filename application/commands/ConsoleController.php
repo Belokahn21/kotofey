@@ -11,6 +11,7 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
+        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_030_create_table_search_query', 1604333606);")->execute();
 //        \Yii::$app->db->createCommand("
 //        SET @DATABASE_NAME = 'kotofey_store';
 //
