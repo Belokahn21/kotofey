@@ -1,4 +1,4 @@
-import 'jquery';
+// import $ from 'jquery';
 
 import '../reactjs/components/sidebar';
 import '../reactjs/components/statistic';

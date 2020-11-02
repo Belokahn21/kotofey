@@ -1,4 +1,4 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 import 'lightbox2';
 import 'popper.js';
 import 'bootstrap';
