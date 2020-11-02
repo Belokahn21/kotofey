@@ -11,7 +11,10 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_030_create_table_search_query', 1604333606);")->execute();
+//        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_030_create_table_search_query', 1604333606);")->execute();
+        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_032_create_table_site_reviews', 1604333607);")->execute();
+        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_033_create_table_site_settings', 1604333608);")->execute();
+        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_034_create_table_site_type_settings', 1604333609);")->execute();
 //        \Yii::$app->db->createCommand("
 //        SET @DATABASE_NAME = 'kotofey_store';
 //
