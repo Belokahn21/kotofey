@@ -30,7 +30,7 @@ $this->beginPage() ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
-    <script src="https://kit.fontawesome.com/33cf5fcfbe.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/33cf5fcfbe.js" crossorigin="anonymous" async></script>
 
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
