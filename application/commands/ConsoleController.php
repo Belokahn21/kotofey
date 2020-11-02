@@ -2,47 +2,55 @@
 
 namespace app\commands;
 
-use app\modules\site\models\tools\Debug;
-use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
-use app\modules\cdek\models\entity\CdekGeo;
-use app\modules\content\models\entity\SlidersImages;
-use app\modules\media\models\entity\Media;
-use app\modules\user\models\entity\User;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
-use yii\helpers\Json;
 
 class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $users[83] = 'Alex9059295224';
-        $users[84] = 'Shanhay';
-        $users[85] = '2012292209';
-        $users[86] = 'grom2017';
-        $users[87] = 'Barnayl13';
-        $users[88] = '25071958';
-        $users[89] = 'cfa123321';
-        $users[90] = 'korverart2012';
-        $users[91] = 'ypfr2017';
-        $users[92] = '1907';
-        $users[93] = '423246';
+        \Yii::$app->db->createCommand("
+        SET @DATABASE_NAME = 'kotofey_store';
 
-        foreach ($users as $userId => $pass) {
-            $user = User::findOne($userId);
-            $user->setPassword($pass);
-            $user->scenario = User::SCENARIO_UPDATE;
-            $user->phone = (string)$user->phone;
-            if ($user->validate() && $user->update()) {
-                echo "success update " . $user->email;
-                echo PHP_EOL;
-            }else{
-                Debug::p($user->getErrors());
-            }
-        }
+SELECT  CONCAT('ALTER TABLE `', table_name, '` ENGINE=InnoDB;') AS sql_statements
+FROM    information_schema.tables AS tb
+WHERE   table_schema = @DATABASE_NAME
+AND     `ENGINE` = 'MyISAM'
+AND     `TABLE_TYPE` = 'BASE TABLE'
+ORDER BY table_name DESC;
+        ")->execute();
+
+//        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_VALTA])->andWhere(['like', 'name', 'monge'])->all();
+//        foreach ($products as $product) {
+//            echo ProductHelper::getMarkup($product) . ' = ' . $product->name;
+//            echo PHP_EOL;
+//        }
+//        $users[83] = 'Alex9059295224';
+//        $users[84] = 'Shanhay';
+//        $users[85] = '2012292209';
+//        $users[86] = 'grom2017';
+//        $users[87] = 'Barnayl13';
+//        $users[88] = '25071958';
+//        $users[89] = 'cfa123321';
+//        $users[90] = 'korverart2012';
+//        $users[91] = 'ypfr2017';
+//        $users[92] = '1907';
+//        $users[93] = '423246';
+//
+//        foreach ($users as $userId => $pass) {
+//            $user = User::findOne($userId);
+//            $user->setPassword($pass);
+//            $user->scenario = User::SCENARIO_UPDATE;
+//            $user->phone = (string)$user->phone;
+//            if ($user->validate() && $user->update()) {
+//                echo "success update " . $user->email;
+//                echo PHP_EOL;
+//            }else{
+//                Debug::p($user->getErrors());
+//            }
+//        }
 
 //        foreach (Product::find()->all() as $product) {
 //            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;

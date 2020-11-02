@@ -18,7 +18,7 @@ use app\models\tool\Price;
             </div>
             <div class="modal-body p-0">
                 <ul class="month-stat">
-					<?php foreach (['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Ноябрь', 'Октябрь', 'Декабрь'] as $i => $month): ?>
+					<?php foreach (['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] as $i => $month): ?>
                         <li class="month-stat__item">
 							<?php
 							$avail_mont_start = strtotime('01.' . ($i + 1) . '.' . date('Y'));

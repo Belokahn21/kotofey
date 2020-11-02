@@ -29,7 +29,7 @@ class CdekCalculator extends React.Component {
     handleSumbmitForm(event) {
         event.preventDefault();
 
-        fetch(config.restCdekDeliveryPrice + '?' + BuildQuery.format(event.target)).then(response => response.json()).then(data => {
+        fetch(config.restCdekDeliveryPrice + '?' + BuildQuery.formatFormData(event.target)).then(response => response.json()).then(data => {
             if (data.result !== undefined) {
                 this.setState({
                     summary: data.result.price,

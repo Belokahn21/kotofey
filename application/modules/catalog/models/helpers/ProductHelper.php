@@ -35,6 +35,11 @@ class ProductHelper
         return floor((($model->price - $model->discount_price) / $model->price) * 100);
     }
 
+    public static function getMarkup(Product $model)
+    {
+        return floor((($model->price - $model->purchase) / $model->price) * 100);
+    }
+
     public static function purchaseVirtual(array $products)
     {
         $out = 0;
