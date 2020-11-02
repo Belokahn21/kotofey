@@ -1,7 +1,5 @@
 import Swiper from "swiper";
-
-
-var swiper = new Swiper('.slider-container', {
+let swiper = new Swiper('.slider-container', {
     slidesPerView: 1,
     loop: true,
     autoplay: {
@@ -17,7 +15,7 @@ var swiper = new Swiper('.slider-container', {
         prevEl: '.swiper-button-prev',
     }
 });
-var swiperCategory = new Swiper('.category-slider-container', {
+let swiperCategory = new Swiper('.category-slider-container', {
     slidesPerView: 1,
     loop: true,
     autoplay: {
@@ -38,7 +36,7 @@ var swiperCategory = new Swiper('.category-slider-container', {
         prevEl: '.slider-swiper-button-prev',
     }
 });
-var swiperChoose = new Swiper('.vitrine-container', {
+let swiperChoose = new Swiper('.vitrine-container', {
     slidesPerView: 1,
     loop: true,
     lazy: true,
@@ -59,7 +57,7 @@ var swiperChoose = new Swiper('.vitrine-container', {
         clickable: true,
     },
 });
-var swiperBrands = new Swiper('.brand-slider-container', {
+let swiperBrands = new Swiper('.brand-slider-container', {
     slidesPerView: 2,
     slidesPerColumn: 2,
     spaceBetween: 30,
@@ -79,7 +77,7 @@ var swiperBrands = new Swiper('.brand-slider-container', {
         }
     },
 });
-var swiperAbout = new Swiper('.about-slider-container', {
+let swiperAbout = new Swiper('.about-slider-container', {
     slidesPerView: 1,
     loop: true,
     autoplay: {
@@ -95,7 +93,7 @@ var swiperAbout = new Swiper('.about-slider-container', {
         prevEl: '.about-slider-button-prev',
     },
 });
-var swiperSertificate = new Swiper('.sertificate-container', {
+let swiperSertificate = new Swiper('.sertificate-container', {
     slidesPerView: 1,
     loop: true,
     spaceBetween: 30,
@@ -118,7 +116,6 @@ var swiperSertificate = new Swiper('.sertificate-container', {
         prevEl: '.sertificate-button-prev',
     },
 });
-
 let swiperInstagramContainer = new Swiper('.instagram-container', {
     slidesPerView: 1,
     spaceBetween: 25,
@@ -144,7 +141,6 @@ let swiperInstagramContainer = new Swiper('.instagram-container', {
         }
     },
 });
-
 let swiperMiniSliderContainer = new Swiper('.mini-slider-container', {
     slidesPerView: 1,
     spaceBetween: 0,

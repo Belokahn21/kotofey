@@ -1,4 +1,5 @@
-// import $ from "jquery";
+import $ from 'jquery';
+window.$ = window.jQuery = $;
 
 let Selectize = require('selectize');
 

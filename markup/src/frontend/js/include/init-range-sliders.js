@@ -1,8 +1,10 @@
-// import $ from 'jquery';
+import $ from 'jquery';
+// window.$ = window.jQuery = $.noConflict();
+window.$ = window.jQuery = $;
 
 var slider = require('ion-rangeslider');
 
-// window.$ = window.jQuery = $.noConflict();
+window.$ = window.jQuery = $.noConflict();
 
 let inputs = [
 	document.querySelector('#js-filter-from'),

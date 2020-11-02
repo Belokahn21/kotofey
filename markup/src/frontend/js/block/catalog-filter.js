@@ -1,4 +1,6 @@
-// import $ from 'jquery';
+import $ from 'jquery';
+// window.$ = window.jQuery = $.noConflict();
+window.$ = window.jQuery = $;
 
 var $form = $('#filter-form-id');
 var $catalog = $('.catalog');
