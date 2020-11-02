@@ -11,16 +11,16 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        \Yii::$app->db->createCommand("
-        SET @DATABASE_NAME = 'kotofey_store';
-
-SELECT  CONCAT('ALTER TABLE `', table_name, '` ENGINE=InnoDB;') AS sql_statements
-FROM    information_schema.tables AS tb
-WHERE   table_schema = @DATABASE_NAME
-AND     `ENGINE` = 'MyISAM'
-AND     `TABLE_TYPE` = 'BASE TABLE'
-ORDER BY table_name DESC;
-        ")->execute();
+//        \Yii::$app->db->createCommand("
+//        SET @DATABASE_NAME = 'kotofey_store';
+//
+//SELECT  CONCAT('ALTER TABLE `', table_name, '` ENGINE=InnoDB;') AS sql_statements
+//FROM    information_schema.tables AS tb
+//WHERE   table_schema = @DATABASE_NAME
+//AND     `ENGINE` = 'MyISAM'
+//AND     `TABLE_TYPE` = 'BASE TABLE'
+//ORDER BY table_name DESC;
+//        ")->execute();
 
 //        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_VALTA])->andWhere(['like', 'name', 'monge'])->all();
 //        foreach ($products as $product) {

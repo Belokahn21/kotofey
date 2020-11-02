@@ -31,7 +31,10 @@ $this->beginPage() ?>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
     <script src="https://kit.fontawesome.com/33cf5fcfbe.js" crossorigin="anonymous" async></script>
-
+    <?php if (YII_ENV == 'prod'): ?>
+        <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
+        <?php echo $this->render('include/head/google/google_metrika.php'); ?>
+    <?php endif; ?>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
     <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
@@ -259,13 +262,11 @@ $this->beginPage() ?>
     ]); ?>
     <?= Alert::widget(); ?>
 <?php endif; ?>
-<script async src="/js/frontend-core.min.js"></script>
+<script defer src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>
 <?php if (YII_ENV == 'prod'): ?>
     <?php echo $this->render('include/head/yandex/metrika.php'); ?>
-    <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
-    <?php echo $this->render('include/head/google/google_metrika.php'); ?>
-    <?php echo $this->render('include/head/fb/pixel.php'); ?>
+    <!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
     <?php echo $this->render('include/head/jivo.php'); ?>
 <?php endif; ?>
 </body>
