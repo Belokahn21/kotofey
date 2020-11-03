@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\entity;
 
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
 use yii\behaviors\TimestampBehavior;
@@ -392,4 +393,9 @@ class Product extends \yii\db\ActiveRecord
             self::STATUS_ACTIVE => "Активен",
         ];
     }
+
+//    public function getDetailUrl()
+//    {
+//        return ProductHelper::getDetailUrl($this);
+//    }
 }

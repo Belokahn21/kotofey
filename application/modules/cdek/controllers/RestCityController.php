@@ -9,8 +9,6 @@ use yii\rest\Controller;
 
 class RestCityController extends Controller
 {
-    public $modelClass = 'app\modules\cdek\models\entity\CdekGeo';
-
     public function behaviors()
     {
         return [

@@ -16,4 +16,5 @@ module.exports = {
     restCdekCity: url + '/cdek/rest-city/get/',
     restCdekSize: url + '/cdek/rest-size/get/',
     ajaxSaveProductMark: url + '/ajax/mark/',
+    restCatalogFrontGet: url + '/catalog/rest/get/',
 };

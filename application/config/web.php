@@ -123,7 +123,7 @@ $config = [
                 'GET todo/rest-backend/get' => 'todo/rest-backend/get',
 
                 'POST basket/rest/add' => 'basket/rest/add',
-                'POST catalog/rest/get' => 'catalog/rest/get',
+                'GET catalog/rest/get' => 'catalog/rest/get',
                 'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
                 'GET promocode/rest/get' => 'promocode/rest/get',
                 'GET cdek/rest-calculate/get' => 'cdek/rest-calculate/get',

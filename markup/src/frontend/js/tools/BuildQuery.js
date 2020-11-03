@@ -7,7 +7,7 @@ class BuildQuery {
     }
 
     static formatObject(data) {
-        const asString = Object.keys(data).map(x => `${encodeURIComponent(x[0])}=${encodeURIComponent(x[1])}`).join('&');
+        const asString = Object.keys(data).map(x => `${encodeURIComponent(x)}=${encodeURIComponent(data[x])}`).join('&');
         return asString;
     }
 }

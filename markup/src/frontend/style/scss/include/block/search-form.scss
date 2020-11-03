@@ -6,6 +6,14 @@
   max-width: 424px;
   width: 424px;
   position: relative;
+  transition: all 3s ease;
+
+  &.filled {
+    .search-form__input-group {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+  }
 
   @media(max-width: 1155px) {
     max-width: 200px;
