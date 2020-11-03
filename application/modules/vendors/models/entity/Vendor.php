@@ -38,6 +38,7 @@ class Vendor extends \yii\db\ActiveRecord
     const VENDOR_ID_ZOO_ALFA = 6;
     const VENDOR_ID_FORZA = 7;
     const VENDOR_ID_VALTA = 10;
+    const VENDOR_ID_MURKEL = 15;
     const VENDOR_ID_LUKAS = 16;
 
     public function behaviors()

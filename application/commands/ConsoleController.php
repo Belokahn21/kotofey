@@ -4,6 +4,7 @@ namespace app\commands;
 
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
+use app\modules\site\models\tools\Debug;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 
@@ -11,17 +12,30 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
+        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_MURKEL])->all();
 
-        \Yii::$app->db->createCommand("
-         SET @DATABASE_NAME = 'kotofey_store';
+        foreach ($products as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->is_ali = 1;
+            if ($product->validate() && $product->update()) {
+                echo $product->name;
+                echo PHP_EOL;
+            } else {
+                Debug::p($product->getErrors());
+            }
+        }
 
-SELECT  CONCAT('ALTER TABLE `', table_name, '` ENGINE=InnoDB;') AS sql_statements
-FROM    information_schema.tables AS tb
-WHERE   table_schema = @DATABASE_NAME
-AND     `ENGINE` = 'MyISAM'
-AND     `TABLE_TYPE` = 'BASE TABLE'
-ORDER BY table_name DESC;
-        ")->execute();
+
+//        \Yii::$app->db->createCommand("
+//         SET @DATABASE_NAME = 'kotofey_store';
+//
+//SELECT  CONCAT('ALTER TABLE `', table_name, '` ENGINE=InnoDB;') AS sql_statements
+//FROM    information_schema.tables AS tb
+//WHERE   table_schema = @DATABASE_NAME
+//AND     `ENGINE` = 'MyISAM'
+//AND     `TABLE_TYPE` = 'BASE TABLE'
+//ORDER BY table_name DESC;
+//        ")->execute();
 
 //        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_030_create_table_search_query', 1604333606);")->execute();
 //        \Yii::$app->db->createCommand("INSERT INTO `migration` (`version`, `apply_time`) VALUES ('m201022_035519_032_create_table_site_reviews', 1604333607);")->execute();
