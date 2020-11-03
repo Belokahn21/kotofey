@@ -36,8 +36,8 @@ $user = User::findOne(Yii::$app->user->identity->id);
         <?= $content; ?>
     </div>
 </div>
-<?php $this->endBody() ?>
 <script src="/js/backend-core.min.js"></script>
+<?php $this->endBody() ?>
 </body>
 </html>
 <?php $this->endPage() ?>
