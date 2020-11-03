@@ -41,9 +41,9 @@ $module = Yii::$app->getModule('export');
                 <?php $properties = ProductPropertiesHelper::getAllProperties($offer->id); ?>
                 <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
                     <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
-                    <?php if ($vendor = AliexpressHelper::getVendorName($properties)): ?>
+                    <?php /* if ($vendor = AliexpressHelper::getVendorName($properties)): ?>
                         <vendor><?= $vendor; ?></vendor>
-                    <?php endif; ?>
+                    <?php endif; */ ?>
                     <?php if ($offer->barcode): ?>
                         <vendorCode><?= $offer->barcode ?></vendorCode>
                     <?php endif; ?>
