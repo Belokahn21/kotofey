@@ -262,7 +262,7 @@ $this->beginPage() ?>
     ]); ?>
     <?= Alert::widget(); ?>
 <?php endif; ?>
-<script async src="/js/frontend-core.min.js"></script>
+<script src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>
 <?php if (YII_ENV == 'prod' or !\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
     <?php echo $this->render('include/head/yandex/metrika.php'); ?>
