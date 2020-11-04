@@ -1,7 +1,9 @@
 import Swiper from "swiper";
+
 let swiper = new Swiper('.slider-container', {
     slidesPerView: 1,
     loop: true,
+    effect: 'fade',
     autoplay: {
         delay: 5000,
     },

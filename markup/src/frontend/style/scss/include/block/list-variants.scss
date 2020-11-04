@@ -11,8 +11,19 @@
   border-top: 0;
   z-index: 99999;
   padding-left: 40px;
+  padding-right: 15px;
   overflow-y: scroll;
   transition: max-height 1s ease-in-out;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
+
+  -ms-overflow-style: none; /* IE 10+ */
+  scrollbar-width: none; /* Firefox */
+
+  &::-webkit-scrollbar { /* chrome based */
+    width: 0; /* ширина scrollbar'a */
+    background: transparent; /* опционально */
+  }
 
   &.filled {
     max-height: 200px;
