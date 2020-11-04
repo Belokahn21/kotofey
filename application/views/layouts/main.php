@@ -30,7 +30,7 @@ $this->beginPage() ?>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="google-site-verification" content="2lxEu3cepZijbEYmJ7zv4H8lhUKvX89GhMA_ujLklmk"/>
-    <script src="https://kit.fontawesome.com/33cf5fcfbe.js" crossorigin="anonymous" async></script>
+    <script src="https://kit.fontawesome.com/33cf5fcfbe.js" crossorigin="anonymous" defer></script>
     <?php if (YII_ENV == 'prod'): ?>
         <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
         <?php echo $this->render('include/head/google/google_metrika.php'); ?>
@@ -264,7 +264,7 @@ $this->beginPage() ?>
 <?php endif; ?>
 <script  src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>
-<?php if (YII_ENV == 'prod'): ?>
+<?php if (YII_ENV == 'prod' or !\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
     <?php echo $this->render('include/head/yandex/metrika.php'); ?>
     <!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
     <?php echo $this->render('include/head/jivo.php'); ?>
