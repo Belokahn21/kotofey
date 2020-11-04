@@ -4,6 +4,7 @@ namespace app\commands;
 
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
+use app\modules\settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
@@ -12,11 +13,14 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_MURKEL])->all();
+        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_VALTA])->all();
 
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->is_ali = 1;
+
+            MarkupHelpers::applyMarkup($product, 17);
+
+
             if ($product->validate() && $product->update()) {
                 echo $product->name;
                 echo PHP_EOL;
