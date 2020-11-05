@@ -10,7 +10,7 @@ use app\modules\catalog\models\helpers\ProductPropertiesHelper;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 
-class RoyalCanin
+class RoyalCanin extends Importer
 {
     private $not_found_articles = array();
     private $is_update_vendor = false;
@@ -74,8 +74,9 @@ class RoyalCanin
 
                 $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                 $product->base_price = intval($purchase);
+                $oldMarkup = $this->getOldPercent($product->price,$product->purchase);
                 $product->purchase = $product->base_price - ceil($product->base_price * ($vendor->discount / 100));
-                $product->price = $product->purchase + ceil($product->purchase * (13 / 100));
+                $product->price = $product->purchase + ceil($product->purchase * ($oldMarkup / 100));
 //                $product->price = $product->purchase + ceil($product->purchase * ($this->calcSelfDiscount(ProductPropertiesHelper::getProductWeight($product->id)) / 100));
 
                 // Обновить поставщика
