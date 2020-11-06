@@ -14,30 +14,34 @@ $this->title = Title::showTitle($model->title);
 ?>
 <div class="page">
 
-	<?= Breadcrumbs::widget([
-		'homeLink' => [
-			'label' => 'Главная ',
-			'url' => Yii::$app->homeUrl,
-			'title' => 'Первая страница сайта зоомагазина Котофей',
-		],
-		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-	]); ?>
+    <?= Breadcrumbs::widget([
+        'homeLink' => [
+            'label' => 'Главная ',
+            'url' => Yii::$app->homeUrl,
+            'title' => 'Первая страница сайта зоомагазина Котофей',
+        ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
     <h1><?= $model->title; ?></h1>
-    <div class="news-detail__info">
-        <div class="row justify-content-center align-items-center">
-            <div class="col-sm-5">
-                <div class="news-detail__date">Дата публикации: <?= date('d.m.Y', $model->created_at); ?></div>
-            </div>
-            <div class="col-sm-7">
-                <div class="news-detail__section">Рубрика: <?= NewsCategory::findOne($model->category)->name; ?></div>
-            </div>
+
+
+    <div class="news-summary">
+        <div class="news-summary__item">
+            <div class="news-summary__key">Дата публикации</div>
+            <div class="news-summary__value"><?= date('d.m.Y', $model->created_at); ?></div>
+        </div>
+        <div class="news-summary__item">
+            <div class="news-summary__key">Рубрика</div>
+            <div class="news-summary__value"><?= NewsCategory::findOne($model->category)->name; ?></div>
+        </div>
+        <div class="news-summary__item">
+            <div class="news-summary__key">Автор</div>
+            <div class="news-summary__value">Редактор</div>
         </div>
     </div>
-	<?php if ($url = $model->detail_image ? $model->detail_image : $model->preview_image): ?>
-        <img src="/upload/<?= $url; ?>" class="news-detail__image">
-	<?php endif; ?>
-    <div class="news-detail__content">
-		<?= ($model->detail ? $model->detail : $model->preview); ?>
+
+    <div class="news-detail">
+        <img alt="<?= $model->title; ?>" class="news-detail__detail-img" src="<?= NewsHelper::getDetailImage($model); ?>">
+        <?= ($model->detail ? $model->detail : $model->preview); ?>
     </div>
-    <div class="clearfix"></div>
 </div>

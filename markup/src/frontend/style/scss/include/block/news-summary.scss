@@ -1,8 +1,9 @@
-.mews-summary {
+.news-summary {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0 40px;
+  width: 100%;
 
   &__item {
     display: flex;

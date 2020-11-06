@@ -8,13 +8,18 @@ use yii\helpers\Url;
 
 class NewsHelper
 {
-	public static function getDetailUrl(News $model)
-	{
-		return Url::to(['/news/news/view', 'id' => $model->slug]);
-	}
+    public static function getDetailImage(News $model)
+    {
+        return '/upload/' . $model->detail_image;
+    }
 
-	public static function getPreviewImageUrl(News $model)
-	{
-		return "/upload/" . $model->preview_image;
-	}
+    public static function getDetailUrl(News $model)
+    {
+        return Url::to(['/news/news/view', 'id' => $model->slug]);
+    }
+
+    public static function getPreviewImageUrl(News $model)
+    {
+        return "/upload/" . $model->preview_image;
+    }
 }
