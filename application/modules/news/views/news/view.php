@@ -41,7 +41,7 @@ $this->title = Title::showTitle($model->title);
     </div>
 
     <div class="news-detail">
-        <img alt="<?= $model->title; ?>" class="news-detail__detail-img" src="<?= NewsHelper::getDetailImage($model); ?>">
+        <img alt="<?= $model->title; ?>" class="news-detail__detail-img" src="<?= NewsHelper::getDetailImage($model, true); ?>">
         <?= ($model->detail ? $model->detail : $model->preview); ?>
     </div>
 </div>
