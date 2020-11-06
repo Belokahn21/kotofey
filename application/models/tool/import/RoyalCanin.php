@@ -76,7 +76,7 @@ class RoyalCanin extends Importer
                 $product->base_price = intval($purchase);
                 $oldMarkup = $this->getOldPercent($product->price,$product->purchase);
                 $product->purchase = $product->base_price - ceil($product->base_price * ($vendor->discount / 100));
-                $product->price = $product->purchase + ceil($product->purchase * ($oldMarkup / 100));
+                $product->price = $product->purchase + round($product->purchase * (20 / 100));
 //                $product->price = $product->purchase + ceil($product->purchase * ($this->calcSelfDiscount(ProductPropertiesHelper::getProductWeight($product->id)) / 100));
 
                 // Обновить поставщика
