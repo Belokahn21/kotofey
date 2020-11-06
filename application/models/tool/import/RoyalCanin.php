@@ -108,7 +108,7 @@ class RoyalCanin extends Importer
     }
 
 
-    private function getPricePath()
+    public function getPricePath()
     {
         return \Yii::getAlias('@app') . "/tmp/price/royal_canin/" . $this->getActualPriceFile();
     }
@@ -142,16 +142,5 @@ class RoyalCanin extends Importer
         unset($dir[0]);
         unset($dir[1]);
         return $dir;
-    }
-
-    private function calcSelfDiscount($weight)
-    {
-        $discount = 30;
-
-        if ($weight > 1) {
-            $discount = 10;
-        }
-
-        return $discount;
     }
 }

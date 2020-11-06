@@ -40,7 +40,7 @@ class Search extends React.Component {
         return <form className={this.state.variants.length > 0 ? "search-form filled" : "search-form"} action='/search/'>
             <div className="search-form__input-group">
                 <button className="search-form__button">
-                    <img className="search-form__icon" src="/upload/images/search.svg"/>
+                    <img alt="Поиск" className="search-form__icon" src="/upload/images/search.svg"/>
                 </button>
                 <input className="search-form__input js-live-search" onKeyUp={this.handleSearchInput.bind(this)} name="Search[name]"/>
             </div>
