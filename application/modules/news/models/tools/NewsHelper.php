@@ -8,8 +8,13 @@ use yii\helpers\Url;
 
 class NewsHelper
 {
-    public static function getDetailImage(News $model)
+    public static function getDetailImage(News $model, $usePrev = false)
     {
+        if ($usePrev) {
+            if (!empty($model->detail_image)) return '/upload/' . $model->detail_image;
+            return '/upload/' . $model->preview_image;
+        }
+
         return '/upload/' . $model->detail_image;
     }
 
