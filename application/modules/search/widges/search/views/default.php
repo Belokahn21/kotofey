@@ -9,7 +9,9 @@ $phrase = @Yii::$app->request->get()['Search']['search'];
 ?>
 
 <?php if (Yii::$app->request->get('search') == 'Y'): ?>
-    <div class="search-react"></div>
+    <div class="search-react" data-options="<?= \yii\helpers\Json::encode([
+        'searchText' => Yii::$app->request->get('Search')['search']
+    ]) ?>"></div>
 <?php else: ?>
     <?php $form = ActiveForm::begin([
         'options' => [

@@ -19,6 +19,9 @@ init-dev:
 init-prod:
 	cp application/web/index.prod.php application/web/index.php
 
+init-test:
+	cp application/web/index.test.php application/web/index.php
+
 composer-install:
 	cd application && composer install
 
@@ -57,4 +60,5 @@ migrate:
 
 deploy: pull init-dev cache migrate
 deploy-prod: pull init-prod cache migrate
+deploy-test: pull init-test cache migrate
 

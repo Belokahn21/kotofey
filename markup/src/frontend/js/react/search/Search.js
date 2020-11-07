@@ -11,6 +11,9 @@ class Search extends React.Component {
         this.timeoutExt = null;
         this.timeout = 300;
 
+        this.searchText = null;
+        if (props.options.searchText) this.searchText = props.options.searchText;
+
         this.state = {
             variants: []
         };
@@ -42,7 +45,7 @@ class Search extends React.Component {
                 <button className="search-form__button">
                     <img alt="Поиск" className="search-form__icon" src="/upload/images/search.svg"/>
                 </button>
-                <input className="search-form__input js-live-search" onKeyUp={this.handleSearchInput.bind(this)} name="Search[name]"/>
+                <input {this.searchText ? 'value="' + this.searchText + '"' : ''} className="search-form__input js-live-search" onKeyUp={this.handleSearchInput.bind(this)} name="Search[name]"/>
             </div>
             <ResultSearch items={this.state.variants}/>
         </form>
