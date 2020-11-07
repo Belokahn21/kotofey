@@ -10,5 +10,10 @@
     box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.75);
     float: left;
     margin: 0 20px 20px 0;
+
+    @media (max-width: 450px) {
+      float: none;
+      width: 100%;
+    }
   }
 }
