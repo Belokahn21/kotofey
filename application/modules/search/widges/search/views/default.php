@@ -5,13 +5,13 @@ use yii\helpers\Html;
 
 /* @var $model \app\modules\search\models\entity\Search */
 
-$phrase = @Yii::$app->request->get()['Search']['search'];
+$phrase = @Yii::$app->request->get()['Search']['name'];
 ?>
 
-<?php if (Yii::$app->request->get('search') == 'Y'): ?>
-    <div class="search-react" data-options="<?= \yii\helpers\Json::encode([
-        'searchText' => Yii::$app->request->get('Search')['name']
-    ]) ?>"></div>
+<?php if (Yii::$app->request->get('search') != 'Y'): ?>
+    <div class="search-react" data-options='<?= \yii\helpers\Json::encode([
+        'searchText' => $phrase
+    ]) ?>'></div>
 <?php else: ?>
     <?php $form = ActiveForm::begin([
         'options' => [
