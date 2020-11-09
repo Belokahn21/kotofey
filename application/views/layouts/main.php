@@ -62,19 +62,19 @@ $this->beginPage() ?>
     <?= AdminPanel::widget(); ?>
     <header class="header page-container">
         <div class="logo">
-            <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
+            <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/images/logo150_150.png">
             <a class="logo__link" href="/">
                 <div class="logo__title">kotofey.store</div>
                 <div class="logo__sub-title">интернет-зоомагазин</div>
             </a>
         </div>
         <div class="phone">
-            <img class="phone__icon" src="/upload/images/phone.png">
+            <img class="phone__icon" src="/images/phone.png">
             <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
                class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a></div>
         <div class="header-menu-mobile">
             <div class="phone">
-                <img class="phone__icon" src="/upload/images/phone.png">
+                <img class="phone__icon" src="/images/phone.png">
                 <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
                    class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
             </div>
@@ -90,24 +90,24 @@ $this->beginPage() ?>
             'view' => 'mobile'
         ]) ?>
         <div class="header-mobile-container">
-            <div class="header-mobile__hamburger"><img src="/upload/images/hamburger.svg"></div>
+            <div class="header-mobile__hamburger"><img src="/images/hamburger.svg"></div>
             <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
             </div>
-            <div class="header-mobile__search js-search-toggle"><img src="/upload/images/search.png"></div>
+            <div class="header-mobile__search js-search-toggle"><img src="/images/search.png"></div>
             <div class="header-mobile__basket">
                 <a href="<?= Url::to(['/checkout/']); ?>">
                     <div class="counter"><?= Basket::count(); ?></div>
-                    <img src="/upload/images/basket.png">
+                    <img src="/images/basket.png">
                 </a>
             </div>
             <div class="header-mobile__call">
-                <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><img src="/upload/images/phone.png"></a>
+                <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><img src="/images/phone.png"></a>
             </div>
         </div>
         <div class="header-mobile-full active">
             <div class="header-mobile-full__group">
                 <div class="header-mobile-full__title">Каталог</div>
-                <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg"></div>
+                <div class="header-mobile-full__switch"><img src="/images/arrow-top.svg"></div>
             </div>
             <ul class="full-mobile-menu">
                 <?php foreach ($parentCategories as $category): ?>
@@ -127,12 +127,12 @@ $this->beginPage() ?>
                         <?php if (Yii::$app->user->isGuest): ?>
                             <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);"
                                data-target="#signupModal" data-toggle="modal">
-                                <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                                <div class="header-mobile-full-footer-menu__icon"><img src="/images/lock-white.png"></div>
                                 <div class="header-mobile-full-footer-menu__label">Регистрация/Войти на сайт</div>
                             </a>
                         <?php else: ?>
                             <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/user/profile/index']) ?>">
-                                <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                                <div class="header-mobile-full-footer-menu__icon"><img src="/images/lock-white.png"></div>
                                 <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
                             </a>
                         <?php endif; ?>
@@ -141,7 +141,7 @@ $this->beginPage() ?>
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/checkout/']) ?>">
                             <div class="header-mobile-full-footer-menu__icon">
                                 <div class="counter"><?= Basket::count(); ?></div>
-                                <img src="/upload/images/basket-white.svg"></div>
+                                <img src="/images/basket-white.svg"></div>
                             <div class="header-mobile-full-footer-menu__label">Корзина заказа</div>
                         </a>
                     </li>
@@ -151,7 +151,7 @@ $this->beginPage() ?>
     </header>
     <div class="menu-wrapper">
         <div class="menu page-container">
-            <div class="menu__item hamburger js-hamburger"><img class="hamburger__icon" src="/upload/images/hamburger.svg">
+            <div class="menu__item hamburger js-hamburger"><img class="hamburger__icon" src="/images/hamburger.svg">
             </div>
             <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
             <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/news/']); ?>">Новости</a></div>
@@ -161,17 +161,17 @@ $this->beginPage() ?>
             <div class="menu__item">
                 <?php if (Yii::$app->user->isGuest): ?>
                     <a class="menu__link profile" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">
-                        <img class="profile__icon" src="/upload/images/lock.png"><span>Регистрация</span>
+                        <img class="profile__icon" src="/images/lock.png"><span>Регистрация</span>
                     </a>
                 <?php else: ?>
                     <a class="menu__link profile" href="<?= Url::to(['/user/profile/index']); ?>">
-                        <img class="profile__icon" src="/upload/images/lock.png"><span>Личный кабинет</span>
+                        <img class="profile__icon" src="/images/lock.png"><span>Личный кабинет</span>
                     </a>
                 <?php endif; ?>
             </div>
 
             <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
-                    <img class="basket__icon" src="/upload/images/basket.png">
+                    <img class="basket__icon" src="/images/basket.png">
                     <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>">
                         <span><?= Basket::count(); ?></span></div>
                 </a>
@@ -247,7 +247,7 @@ $this->beginPage() ?>
         <div class="footer-layer-2">
             <div class="requesites">
                 <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
-                <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
+                <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/images/who_dev.png"></div>
             </div>
         </div>
     </footer>

@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                 <ul class="product-order-detail">
                     <?php foreach ($items as $item): ?>
                         <li class="product-order-detail__item">
-                            <img class="product-order-detail__image" src="<?= ($item->product ? "/upload/{$item->product->image}" : "/upload/images/not-image.png"); ?>">
+                            <img class="product-order-detail__image" src="<?= ($item->product ? "/upload/{$item->product->image}" : "/images/not-image.png"); ?>">
                             <div class="product-order-detail__title">
                                 <?php if ($item->product instanceof \app\modules\catalog\models\entity\Product): ?>
                                     <a class="product-order-detail__link" href="<?= $item->product->detail; ?>"><?= $item->name; ?></a>
