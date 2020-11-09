@@ -58,36 +58,34 @@ $this->beginPage() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
-<?php if(\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
-<img src="/images/banner_1.jpg">
-<?php endif; ?>
-<?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
-    <?= AdminPanel::widget(); ?>
-    <header class="header page-container">
-        <div class="logo">
-            <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
-            <a class="logo__link" href="/">
-                <div class="logo__title">kotofey.store</div>
-                <div class="logo__sub-title">интернет-зоомагазин</div>
-            </a>
-        </div>
+
+<?= AdminPanel::widget(); ?>
+<header class="header page-container">
+    <div class="logo">
+        <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
+        <a class="logo__link" href="/">
+            <div class="logo__title">kotofey.store</div>
+            <div class="logo__sub-title">интернет-зоомагазин</div>
+        </a>
+    </div>
+    <div class="phone">
+        <img class="phone__icon" src="/upload/images/phone.png">
+        <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
+           class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a></div>
+    <div class="header-menu-mobile">
         <div class="phone">
             <img class="phone__icon" src="/upload/images/phone.png">
             <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
-               class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a></div>
-        <div class="header-menu-mobile">
-            <div class="phone">
-                <img class="phone__icon" src="/upload/images/phone.png">
-                <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
-                   class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
-            </div>
-            <ul class="header-menu">
-                <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
-                <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
-                <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
-            </ul>
+               class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
         </div>
-    </header>
+        <ul class="header-menu">
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
+            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
+        </ul>
+    </div>
+</header>
+<?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
     <header class="header-mobile">
         <?= SearchWidget::widget([
             'view' => 'mobile'
