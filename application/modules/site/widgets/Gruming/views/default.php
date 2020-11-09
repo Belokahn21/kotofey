@@ -15,9 +15,7 @@ use yii\helpers\Html;
     </div>
     <div class="gruming-container">
         <div class="gruming-wrap">
-            <video class="gruming-video" muted="muted" autoplay="" loop="">
-                <source src="/video/video3.mp4" type="video/mp4">
-            </video>
+            <img src="/images/ketty_grum.jpg">
         </div>
         <?php $form = ActiveForm::begin([
             'options' => [
