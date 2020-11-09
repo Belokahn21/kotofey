@@ -141,7 +141,8 @@ $this->beginPage() ?>
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/checkout/']) ?>">
                             <div class="header-mobile-full-footer-menu__icon">
                                 <div class="counter"><?= Basket::count(); ?></div>
-                                <img src="/images/basket.png"></div>
+                                <img src="/images/basket.png" alt="Корзина">
+                            </div>
                             <div class="header-mobile-full-footer-menu__label">Корзина заказа</div>
                         </a>
                     </li>

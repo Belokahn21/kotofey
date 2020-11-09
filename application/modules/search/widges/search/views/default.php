@@ -5,7 +5,7 @@ use yii\helpers\Html;
 
 /* @var $model \app\modules\search\models\entity\Search */
 
-$phrase = @Yii::$app->request->get()['Search']['name'];
+$phrase = @Yii::$app->request->get()['Search']['search'];
 ?>
 
 <?php if (Yii::$app->request->get('search') != 'Y'): ?>
