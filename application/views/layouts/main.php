@@ -242,7 +242,17 @@ $this->beginPage() ?>
                         <?php endforeach; ?>
                     </ul>
                 </div>
-                <?= SubscribeWidget::widget(); ?>
+                <div style="margin: auto auto;">
+                    <?= SubscribeWidget::widget(); ?>
+                    <div class="social-me-container">
+                        <div class="social-me__title">Следите за нами в сетях!</div>
+                        <ul class="social-me">
+                            <li class="social-me__item"><a href="https://www.instagram.com/kotofey_store/" target="_blank" class="social-me__link"><img class="social-me__image" src="/images/instagram.png"></a></li>
+                            <li class="social-me__item"><a href="https://vk.com/kotofey.store" target="_blank" class="social-me__link"><img class="social-me__image" src="/images/vk.png"></a></li>
+                            <li class="social-me__item"><a href="https://twitter.com/ALwcOSwoyYMJ12c" target="_blank" class="social-me__link"><img class="social-me__image" src="/images/twitter.png"></a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="footer-layer-2">
