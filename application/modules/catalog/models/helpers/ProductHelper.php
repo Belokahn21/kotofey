@@ -32,7 +32,7 @@ class ProductHelper
 
     public static function getPercent(Product $model)
     {
-        return floor((($model->price - $model->discount_price) / $model->discount_price) * 100);
+        return @floor((($model->price - $model->discount_price) / $model->discount_price) * 100);
     }
 
     public static function getMarkup(Product $model)

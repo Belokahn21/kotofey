@@ -90,18 +90,18 @@ $this->beginPage() ?>
             'view' => 'mobile'
         ]) ?>
         <div class="header-mobile-container">
-            <div class="header-mobile__hamburger"><img src="/images/hamburger.svg"></div>
+            <div class="header-mobile__hamburger"><img src="/images/hamburger.png" alt="Показать меню"></div>
             <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
             </div>
-            <div class="header-mobile__search js-search-toggle"><img src="/images/search.png"></div>
+            <div class="header-mobile__search js-search-toggle"><img src="/images/search.png" alt="Найти"></div>
             <div class="header-mobile__basket">
                 <a href="<?= Url::to(['/checkout/']); ?>">
                     <div class="counter"><?= Basket::count(); ?></div>
-                    <img src="/images/basket.png">
+                    <img src="/images/basket.png" alt="Корзина">
                 </a>
             </div>
             <div class="header-mobile__call">
-                <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><img src="/images/phone.png"></a>
+                <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><img src="/images/phone.png" alt="Телефон"></a>
             </div>
         </div>
         <div class="header-mobile-full active">
@@ -141,7 +141,7 @@ $this->beginPage() ?>
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/checkout/']) ?>">
                             <div class="header-mobile-full-footer-menu__icon">
                                 <div class="counter"><?= Basket::count(); ?></div>
-                                <img src="/images/basket-white.svg"></div>
+                                <img src="/images/basket.png"></div>
                             <div class="header-mobile-full-footer-menu__label">Корзина заказа</div>
                         </a>
                     </li>
@@ -151,7 +151,7 @@ $this->beginPage() ?>
     </header>
     <div class="menu-wrapper">
         <div class="menu page-container">
-            <div class="menu__item hamburger js-hamburger"><img class="hamburger__icon" src="/images/hamburger.svg">
+            <div class="menu__item hamburger js-hamburger"><img class="hamburger__icon" src="/images/hamburger.png" alt="Показать меню">
             </div>
             <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
             <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/news/']); ?>">Новости</a></div>

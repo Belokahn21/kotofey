@@ -9,6 +9,7 @@ use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
 use app\modules\catalog\widgets\LastWeekProducts\LastWeekProducts;
 use app\modules\catalog\widgets\DiscountItems\DiscountItemsWidget;
 use app\modules\order\widgets\many_purchase\ManyPurchasedGoods;
+use app\modules\catalog\widgets\CanNowBuy\CanNowBuyWidget;
 use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site\widgets\Gruming\GrumingWidget;
 use app\models\tool\seo\Title;
@@ -19,6 +20,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     <?= SliderWidget::widget([
         'slider_id' => 1,
     ]) ?>
+    <?= CanNowBuyWidget::widget() ?>
     <?= InformerSliderWidget::widget(); ?>
     <?= ManyPurchasedGoods::widget(); ?>
     <?php /*
@@ -31,7 +33,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     </div>
  */ ?>
     <?= DiscountItemsWidget::widget(); ?>
-    <div class="page-title__group is-column">
+    <div class="page-title__group">
         <h2 class="page-title">О нас</h2><a class="page-title__link" href="/about/">Читать дальше</a>
     </div>
     <div class="index-about-container">
