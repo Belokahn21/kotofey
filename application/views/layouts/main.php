@@ -96,7 +96,9 @@ $this->beginPage() ?>
             <div class="header-mobile__search js-search-toggle"><img src="/upload/images/search.png"></div>
             <div class="header-mobile__basket">
                 <a href="<?= Url::to(['/checkout/']); ?>">
-                    <div class="counter"><?= Basket::count(); ?></div>
+                    <?php if ($count = Basket::count()): ?>
+                        <div class="counter"><?= $count; ?></div>
+                    <?php endif; ?>
                     <img src="/upload/images/basket.png">
                 </a>
             </div>
@@ -140,7 +142,7 @@ $this->beginPage() ?>
                     <li class="header-mobile-full-footer-menu__item">
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/checkout/']) ?>">
                             <div class="header-mobile-full-footer-menu__icon">
-                                <?php if ($count = Basket::count()): ?>
+                                <?php if ($count = Basket::count() > 0): ?>
                                     <div class="counter"><?= $count; ?></div>
                                 <?php endif; ?>
                                 <img src="/upload/images/basket-white.svg" alt="Корзина"></div>
