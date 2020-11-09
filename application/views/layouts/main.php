@@ -58,6 +58,9 @@ $this->beginPage() ?>
 </head>
 <body>
 <?php $this->beginBody() ?>
+<?php if(\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
+<img src="/images/banner_1.jpg">
+<?php endif; ?>
 <?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
     <?= AdminPanel::widget(); ?>
     <header class="header page-container">
