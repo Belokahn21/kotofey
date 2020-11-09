@@ -140,8 +140,10 @@ $this->beginPage() ?>
                     <li class="header-mobile-full-footer-menu__item">
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/checkout/']) ?>">
                             <div class="header-mobile-full-footer-menu__icon">
-                                <div class="counter"><?= Basket::count(); ?></div>
-                                <img src="/upload/images/basket-white.svg"></div>
+                                <?php if ($count = Basket::count()): ?>
+                                    <div class="counter"><?= $count; ?></div>
+                                <?php endif; ?>
+                                <img src="/upload/images/basket-white.svg" alt="Корзина"></div>
                             <div class="header-mobile-full-footer-menu__label">Корзина заказа</div>
                         </a>
                     </li>

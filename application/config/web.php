@@ -82,7 +82,8 @@ $config = [
         ],
         'user' => [
             'identityClass' => 'app\modules\user\models\entity\User',
-            'loginUrl' => ['site/signin'],
+            'loginUrl' => ['/'],
+//            'loginUrl' => ['site/signin'],
             'enableAutoLogin' => true,
         ],
         'authManager' => [
