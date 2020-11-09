@@ -28,7 +28,7 @@ let swiperCategory = new Swiper('.category-slider-container', {
         type: 'progressbar',
     },
     breakpoints: {
-        480: { // when window width is >= 480px
+        550: { // when window width is >= 480px
             slidesPerView: 3,
             spaceBetween: 28,
         }
@@ -48,7 +48,7 @@ let swiperChoose = new Swiper('.vitrine-container', {
         delay: 5000,
     },
     breakpoints: {
-        480: { // when window width is >= 480px
+        550: { // when window width is >= 480px
             slidesPerView: 4,
             spaceBetween: 25,
         }
@@ -72,7 +72,7 @@ let swiperBrands = new Swiper('.brand-slider-container', {
         prevEl: '.brand-slider-button-prev',
     },
     breakpoints: {
-        480: { // when window width is >= 480px
+        550: { // when window width is >= 480px
             slidesPerView: 6,
             slidesPerColumn: 2,
             spaceBetween: 30,
@@ -93,29 +93,6 @@ let swiperAbout = new Swiper('.about-slider-container', {
     navigation: {
         nextEl: '.about-slider-button-next',
         prevEl: '.about-slider-button-prev',
-    },
-});
-let swiperSertificate = new Swiper('.sertificate-container', {
-    slidesPerView: 1,
-    loop: true,
-    spaceBetween: 30,
-    autoplay: {
-        delay: 5000,
-    },
-    breakpoints: {
-        480: { // when window width is >= 480px
-            slidesPerView: 4,
-            spaceBetween: 30,
-        }
-    },
-    // pagination: {
-    // 	el: '.about-slider-pagination',
-    // 	dynamicBullets: true,
-    // 	clickable: true,
-    // },
-    navigation: {
-        nextEl: '.sertificate-button-next',
-        prevEl: '.sertificate-button-prev',
     },
 });
 let swiperInstagramContainer = new Swiper('.instagram-container', {
