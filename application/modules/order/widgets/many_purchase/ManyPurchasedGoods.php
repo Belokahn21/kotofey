@@ -39,16 +39,6 @@ class ManyPurchasedGoods extends Widget
                 return false;
             }
 
-//        $arProductIds = ArrayHelper::getColumn($models, 'id');
-//        $productPropertiesValues = ProductPropertiesValues::getDb()->cache(function () use ($arProductIds) {
-//            return ProductPropertiesValues::find()->where(['product_id' => $arProductIds, 'property_id' => 1])->select(['value'])->groupBy('value')->all();
-//        }, $this->cacheTime);
-//
-//        $values = ArrayHelper::getColumn($productPropertiesValues, 'value');
-//        $informersValues = InformersValues::getDb()->cache(function () use ($values) {
-//            return InformersValues::find()->where(['id' => $values])->all();
-//        }, $this->cacheTime);
-
             return $this->render($this->view, [
                 'models' => $models,
                 'informersValues' => $informersValues,

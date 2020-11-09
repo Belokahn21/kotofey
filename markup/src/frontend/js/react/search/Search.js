@@ -46,8 +46,8 @@ class Search extends React.Component {
                     <img alt="Поиск" className="search-form__icon" src="/upload/images/search.svg"/>
                 </button>
                 {this.searchText
-                    ? <input defaultValue={this.searchText} className="search-form__input js-live-search" onKeyUp={this.handleSearchInput.bind(this)} name="Search[name]"/>
-                    : <input className="search-form__input js-live-search" onKeyUp={this.handleSearchInput.bind(this)} name="Search[name]"/>}
+                    ? <input defaultValue={this.searchText} className="search-form__input js-live-search" onKeyUp={this.handleSearchInput.bind(this)} name="Search[search]"/>
+                    : <input className="search-form__input js-live-search" onKeyUp={this.handleSearchInput.bind(this)} name="Search[search]"/>}
 
             </div>
             <ResultSearch items={this.state.variants}/>

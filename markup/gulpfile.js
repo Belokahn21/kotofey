@@ -66,12 +66,12 @@ const config = {
             src_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             build_backend: './build/backend/assets/images/',
-            application_backend: '../application/web/upload/images/',
+            application_backend: '../application/web/images/',
 
             src_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
             watch_frontend: './src/frontend/images/**/*.{png,jpg,jpeg,svg,gif}',
             build_frontend: './build/frontend/assets/images/',
-            application_frontend: '../application/web/upload/images/',
+            application_frontend: '../application/web/images/',
         },
         copy: {
             src_backend: './src/backend/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
