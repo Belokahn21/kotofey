@@ -20,7 +20,9 @@ use app\modules\site\widgets\AdminPanel\AdminPanel;
 
 AppAsset::register($this);
 
-$parentCategories = Category::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
+$parentCategories = Yii::$app->cache->getOrSet('parent-cats', function () {
+    return Category::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
+}, 3600 * 7 * 24);
 
 $this->beginPage() ?>
 <!DOCTYPE html>
@@ -109,7 +111,7 @@ $this->beginPage() ?>
     <div class="header-mobile-full active">
         <div class="header-mobile-full__group">
             <div class="header-mobile-full__title">Каталог</div>
-            <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg"></div>
+            <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg" alt="Стрелка"></div>
         </div>
         <ul class="full-mobile-menu">
             <?php foreach ($parentCategories as $category): ?>
@@ -129,12 +131,12 @@ $this->beginPage() ?>
                     <?php if (Yii::$app->user->isGuest): ?>
                         <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);"
                            data-target="#signupModal" data-toggle="modal">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png" alt="lock"></div>
                             <div class="header-mobile-full-footer-menu__label">Регистрация/Войти на сайт</div>
                         </a>
                     <?php else: ?>
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/user/profile/index']) ?>">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png"></div>
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png" alt="lock"></div>
                             <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
                         </a>
                     <?php endif; ?>
@@ -154,53 +156,53 @@ $this->beginPage() ?>
     </div>
 </header>
 
-<?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
-    <div class="menu-wrapper">
-        <div class="menu page-container">
-            <div class="menu__item hamburger js-hamburger"><img alt="Показать меню" class="hamburger__icon" src="/upload/images/hamburger.svg">
-            </div>
-            <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
-            <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/news/']); ?>">Новости</a></div>
-            <div class="menu__item">
-                <?= SearchWidget::widget(); ?>
-            </div>
-            <div class="menu__item">
-                <?php if (Yii::$app->user->isGuest): ?>
-                    <a class="menu__link profile" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">
-                        <img class="profile__icon" src="/upload/images/lock.png" alt="Регистрация"><span>Регистрация</span>
-                    </a>
-                <?php else: ?>
-                    <a class="menu__link profile" href="<?= Url::to(['/user/profile/index']); ?>">
-                        <img class="profile__icon" src="/upload/images/lock.png" alt="Личный кабинет"><span>Личный кабинет</span>
-                    </a>
-                <?php endif; ?>
-            </div>
-
-            <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
-                    <img class="basket__icon" src="/upload/images/basket.png" alt="Корзина">
-                    <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>">
-                        <span><?= Basket::count(); ?></span></div>
-                </a>
-            </div>
+<div class="menu-wrapper">
+    <div class="menu page-container">
+        <div class="menu__item hamburger js-hamburger"><img alt="Показать меню" class="hamburger__icon" src="/upload/images/hamburger.svg">
         </div>
-        <div class="menu-full js-show-with-hamburger">
-            <?php foreach ($parentCategories as $parentCategory) : ?>
-                <div class="block-menu">
-                    <div class="block-menu__title"><?= $parentCategory->name; ?></div>
-                    <?php if ($subsection = $parentCategory->subsections()): ?>
-                        <ul class="block-menu-list">
-                            <?php foreach ($subsection as $item): ?>
-                                <li class="block-menu-list__item">
-                                    <a class="block-menu-list__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
-                    <?php endif; ?>
-                </div>
-            <?php endforeach; ?>
+        <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
+        <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/news/']); ?>">Новости</a></div>
+        <div class="menu__item">
+            <?= SearchWidget::widget(); ?>
+        </div>
+        <div class="menu__item">
+            <?php if (Yii::$app->user->isGuest): ?>
+                <a class="menu__link profile" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">
+                    <img class="profile__icon" src="/upload/images/lock.png" alt="Регистрация"><span>Регистрация</span>
+                </a>
+            <?php else: ?>
+                <a class="menu__link profile" href="<?= Url::to(['/user/profile/index']); ?>">
+                    <img class="profile__icon" src="/upload/images/lock.png" alt="Личный кабинет"><span>Личный кабинет</span>
+                </a>
+            <?php endif; ?>
+        </div>
+
+        <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
+                <img class="basket__icon" src="/upload/images/basket.png" alt="Корзина">
+                <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>">
+                    <span><?= Basket::count(); ?></span></div>
+            </a>
         </div>
     </div>
+    <div class="menu-full js-show-with-hamburger">
+        <?php foreach ($parentCategories as $parentCategory) : ?>
+            <div class="block-menu">
+                <div class="block-menu__title"><?= $parentCategory->name; ?></div>
+                <?php if ($subsection = $parentCategory->subsections()): ?>
+                    <ul class="block-menu-list">
+                        <?php foreach ($subsection as $item): ?>
+                            <li class="block-menu-list__item">
+                                <a class="block-menu-list__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php endif; ?>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
 
+<?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
 
     <?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'): ?>
         <?= $content; ?>
