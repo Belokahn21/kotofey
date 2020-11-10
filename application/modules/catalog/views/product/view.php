@@ -155,7 +155,7 @@ $this->title = Title::showTitle($product->name);
                         </li>
                         <li>
                             <span class="fa-li"><i class="fas fa-paw"></i></span>
-                            Для доставки в другие точки уточняйте по телефону<strong><a class="js-phone-mask" style="color: black;" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><?= SiteSettings::getValueByCode('phone_1'); ?></a></strong>
+                            Для доставки в другие точки уточняйте по телефону<strong> <a class="js-phone-mask" style="color: black;" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><?= SiteSettings::getValueByCode('phone_1'); ?></a></strong>
                         </li>
                     </ul>
                     <div class="product-info__title">Время доставки</div>
