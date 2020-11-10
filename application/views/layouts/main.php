@@ -212,64 +212,66 @@ $this->beginPage() ?>
         </div>
     <?php endif ?>
 
-    <footer class="footer page-container">
-        <div class="footer-layer-1">
-            <div class="footer-layer-1-left">
-                <div class="footer__logo">kotofey.store</div>
-                <ul class="footer-contact">
-                    <li class="footer-contact__item">
-                        <?= StoreWidget::widget(); ?>
-                    </li>
-                    <li class="footer-contact__item">
-                        <a class="footer-contact__link"
-                           href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
-                    </li>
-                    <li class="footer-contact__item">
-                        <a class="phone footer-contact__link js-phone-mask"
-                           href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
-                            <?= SiteSettings::getValueByCode('phone_1'); ?>
-                        </a>
-                    </li>
-                </ul>
-                <ul class="footer-nav">
-                    <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a></li>
-                    <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a></li>
-                    <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
-                    <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
-                </ul>
-            </div>
-            <div class="footer-layer-1-right">
-                <div class="footer-categories-container">
-                    <div class="footer__title">Каталог зоотоваров</div>
-                    <ul class="footer-categories">
-                        <?php foreach ($parentCategories as $item): ?>
-                            <li class="footer-categories__item">
-                                <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-                <?= SubscribeWidget::widget(); ?>
-            </div>
-        </div>
-        <div class="footer-layer-2">
-            <div class="requesites">
-                <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
-                <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
-            </div>
-        </div>
-    </footer>
 
-    <?php
-    $signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
-    $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
-    ?>
-    <?= $this->render('include/auth', [
-        'signin' => $signinModel,
-        'signup' => $signupModel,
-    ]); ?>
-    <?= Alert::widget(); ?>
 <?php endif; ?>
+
+<footer class="footer page-container">
+    <div class="footer-layer-1">
+        <div class="footer-layer-1-left">
+            <div class="footer__logo">kotofey.store</div>
+            <ul class="footer-contact">
+                <li class="footer-contact__item">
+                    <?= StoreWidget::widget(); ?>
+                </li>
+                <li class="footer-contact__item">
+                    <a class="footer-contact__link"
+                       href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
+                </li>
+                <li class="footer-contact__item">
+                    <a class="phone footer-contact__link js-phone-mask"
+                       href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
+                        <?= SiteSettings::getValueByCode('phone_1'); ?>
+                    </a>
+                </li>
+            </ul>
+            <ul class="footer-nav">
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
+                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
+            </ul>
+        </div>
+        <div class="footer-layer-1-right">
+            <div class="footer-categories-container">
+                <div class="footer__title">Каталог зоотоваров</div>
+                <ul class="footer-categories">
+                    <?php foreach ($parentCategories as $item): ?>
+                        <li class="footer-categories__item">
+                            <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?= SubscribeWidget::widget(); ?>
+        </div>
+    </div>
+    <div class="footer-layer-2">
+        <div class="requesites">
+            <div class="requesites__item">ИП Васин К.В., ОГРН: 319222500105168 ИНН: 222261129226 <a href="https://www.rusprofile.ru/ip/319222500105168" target="_blank">(Проверить)</a></div>
+            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
+        </div>
+    </div>
+</footer>
+
+<?php
+$signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
+$signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
+?>
+<?= $this->render('include/auth', [
+    'signin' => $signinModel,
+    'signup' => $signupModel,
+]); ?>
+<?= Alert::widget(); ?>
 <script src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>
 <?php if (YII_ENV == 'prod' or !\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
