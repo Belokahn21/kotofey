@@ -14,11 +14,7 @@ use app\modules\content\models\helpers\SlidersImagesHelper;
             <div class="swiper-wrapper slider-wrapper">
                 <?php foreach ($images as $image): ?>
                     <div class="swiper-slide slider__slide">
-                        <?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
-                            <?= Html::img(SlidersImagesHelper::getImageUrl($image), ['class' => 'slider__image', 'alt' => $image->text, 'title' => $image->text]) ?>
-                        <?php else: ?>
-                            <?= Html::img('/images/not-image.png', ['class' => 'slider__image', 'alt' => $image->text, 'title' => $image->text]) ?>
-                        <?php endif; ?>
+                        <?= Html::img(SlidersImagesHelper::getImageUrl($image), ['class' => 'slider__image', 'alt' => $image->text, 'title' => $image->text]) ?>
                     </div>
                 <?php endforeach; ?>
             </div>
