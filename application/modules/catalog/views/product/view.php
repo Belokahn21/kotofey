@@ -62,6 +62,7 @@ $this->title = Title::showTitle($product->name);
             <div class="product-info">
                 <?php if ($product->count > 0): ?>
                     <div class="green"><strong>В налиии <?= $product->count; ?> шт.</strong></div>
+                    <div class="green"><strong>Доставим сегодня после 19.00</strong></div>
                 <?php else:
                     $nDay = date('w');
 
@@ -136,12 +137,31 @@ $this->title = Title::showTitle($product->name);
 
                 endif;
                 ?>
-
                 <div class="product-info__title">При заказе на сумму от 500 рублей бесплатная доставка по городу Барнаул</div>
-                <div class="product-info__note">Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br/>Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа<br/>Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа<br/>Для доставки в другие точки уточняйте по телефону<strong><a class="js-phone-mask" style="color: black;" href="tel:1"></a></strong></div>
-                <br/>
-                <div class="product-info__title">Время доставки</div>
-                <div class="product-info__note">Заказы доставляются каждый день после 19.00. Доставка в выходные только при заказе с понедельника по пятницу!</div>
+                <div class="product-info__note">
+                    <br>
+                    <ul class="fa-ul">
+                        <li>
+                            <span class="fa-li"><i class="fas fa-paw"></i></span>
+                            Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-paw"></i></span>
+                            Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-paw"></i></span>
+                            Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа
+                        </li>
+                        <li>
+                            <span class="fa-li"><i class="fas fa-paw"></i></span>
+                            Для доставки в другие точки уточняйте по телефону<strong><a class="js-phone-mask" style="color: black;" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"></a></strong>
+                        </li>
+                    </ul>
+                    <div class="product-info__title">Время доставки</div>
+                    <div class="product-info__note">Заказы доставляются каждый день после 19.00. Доставка в выходные только при заказе с понедельника по пятницу!</div>
+                    <br/>
+                </div>
             </div>
             <?php if ($properties): ?>
                 <ul class="product-properties">
