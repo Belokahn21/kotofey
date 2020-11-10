@@ -52,6 +52,9 @@ $config = [
         'backup' => [
             'class' => 'app\modules\site\console\BackupController'
         ],
+        'content' => [
+            'class' => 'app\modules\content\console\ContentController'
+        ],
     ],
 
 ];
