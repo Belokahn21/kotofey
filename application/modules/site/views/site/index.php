@@ -16,11 +16,11 @@ use app\models\tool\seo\Title;
 
 $this->title = Title::showTitle("Зоотовары для животных в Барнауле");
 ?>
-<?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
-    <div class="page-container">
-        <?= SliderWidget::widget([
-            'slider_id' => 1,
-        ]) ?>
+<div class="page-container">
+    <?= SliderWidget::widget([
+        'slider_id' => 1,
+    ]) ?>
+    <?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
         <?= CanNowBuyWidget::widget() ?>
         <?= InformerSliderWidget::widget(); ?>
         <?= ManyPurchasedGoods::widget(); ?>
@@ -50,7 +50,9 @@ $this->title = Title::showTitle("Зоотовары для животных в �
                 <p>Во время пандемии нужно сокращать походы в общественные места. Наш магазин вам поможет и в этом. Курьеры службы доставки используют средства защиты для предотвращения распространения вируса COVID-19. Если вас интересует бесконтактная доставка, то вы можете попросить оператора предоставить эту возможность при получении заказа.</p>
             </div>
         </div>
-    </div>
+    <?php endif; ?>
+</div>
+<?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
     <?= GrumingWidget::widget(); ?>
 <?php endif; ?>
 <div class="page-container">
