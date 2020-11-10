@@ -16,7 +16,7 @@ use yii\helpers\Url;
         <li class="admin-panel-list__item link"><a href="<?= Url::to(['/admin/catalog/product-backend/index']); ?>">Товары <span class="actual-count"><?= Product::find()->count(); ?></span></a></li>
         <li class="admin-panel-list__item link"><a href="<?= Url::to(['/admin/user/user-backend/index']); ?>">Пользователи <span class="actual-count"><?= User::find()->count(); ?></span></a></li>
         <li class="admin-panel-list__item"><a href="#"><span>TS: <span class="admin-panel-list__item-ts"><?= time(); ?></span></span></a></li>
-        <li class="admin-panel-list__item"><a href="#">Сегодня: <?= date('d.m.Y'); ?></a></li>
+        <li class="admin-panel-list__item"><a href="#">Сегодня: <?= date('d.m.Y H:i:s'); ?></a></li>
         <li class="admin-panel-list__item"><a href="<?= Url::to(['cache']) ?>">Сбросить кеш</a></li>
         <?= AdminEditWidget::widget(); ?>
     </ul>
