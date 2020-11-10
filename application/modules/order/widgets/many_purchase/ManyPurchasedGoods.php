@@ -20,7 +20,6 @@ class ManyPurchasedGoods extends Widget
         if (!Debug::isPageSpeed()) {
             $informersValues = [];
             $cache = \Yii::$app->cache;
-            $key = ManyPurchasedGoods::className();
 
 
             $products_in_orders = $cache->getOrSet('ManyPurchasedGoods-products_in_orders', function () {
