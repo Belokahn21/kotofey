@@ -62,9 +62,7 @@ $this->title = Title::showTitle($product->name);
             <div class="product-info">
                 <?php if ($product->count > 0): ?>
                     <div class="green"><strong>В налиии <?= $product->count; ?> шт.</strong></div>
-                <?php else: ?>
-
-                    <?php
+                <?php else:
                     $nDay = date('w');
 
                     // условия роял канин
@@ -87,7 +85,7 @@ $this->title = Title::showTitle($product->name);
 
                     // условия валты
                     if ($product->vendor_id == Vendor::VENDOR_ID_VALTA):
-                        if ($nDay <= 2 and date('H') <= 11):
+                        if ($nDay <= 2 and date('H') < 11):
                             echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду после 19.00. ' . \Yii::t(
                                     'app',
                                     'Через {n, plural, =0{# дней} =1{# день} one{# день} few{# дней} many{# дней} other{# дней}}',
