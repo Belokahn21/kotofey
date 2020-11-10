@@ -16,7 +16,7 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
 ?>
 
 <?php if ($models): ?>
-    <div class="page-title__group is-column">
+    <div class="page-title__group">
         <h2 class="page-title">Выгодные предложения</h2>
         <?php if (array_key_exists('brands', $formatArray) && array_key_exists('actions', $formatArray)): ?>
             <?php foreach ($formatArray['brands'] as $key => $brand): ?>
