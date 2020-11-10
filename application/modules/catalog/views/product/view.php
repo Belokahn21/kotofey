@@ -192,26 +192,14 @@ $this->title = Title::showTitle($product->name);
     <nav class="product-tabs in-product">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
-            <!--            <a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab" aria-controls="nav-characteristics" aria-selected="false">Характеристики</a>-->
-            <!--            <a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations" role="tab" aria-controls="nav-recommendations" aria-selected="false">Рекомендации</a>-->
-            <!--            <a class="nav-item nav-link" id="nav-delivery-tab" data-toggle="tab" href="#nav-delivery" role="tab" aria-controls="nav-delivery" aria-selected="false">Доставка</a>-->
             <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
             <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Как купить?</a>
-            <a class="nav-item nav-link" id="nav-available-tab" data-toggle="tab" href="#nav-available" role="tab" aria-controls="nav-available" aria-selected="false">Наличие в магазинах</a>
         </div>
     </nav>
     <div class="tab-content product-tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" itemprop="description">
             <?= $product->description ?: 'Отсутсвует'; ?>
         </div>
-        <!--        <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">-->
-        <!--            <strong>Бесплатная доставка при заказе от 500 рублей</strong><br>-->
-        <!--            Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br>-->
-        <!--            Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа<br>-->
-        <!--            Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа<br>-->
-        <!--            Для доставки в другие точки уточняйте по телефону <strong><a style="color: black;" class="js-phone-mask" href="tel:--><? //= SiteSettings::getValueByCode('phone_1'); ?><!--">--><? //= SiteSettings::getValueByCode('phone_1'); ?><!--</a></strong>-->
-        <!--            <br/><br/><strong>Время доставки: следующий день после 19.00 - заказывайте заранеее!</strong>-->
-        <!--        </div>-->
         <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
             <strong>Оплатить можно:</strong>
             <ul>
@@ -223,37 +211,6 @@ $this->title = Title::showTitle($product->name);
         <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
             Для покупки товаров на нашем сайте вам нужно добавить интересующий вас товар в корзину и пройти к оформлению заказа.<br>
             После того как заказ был оформлен с вами свяжется оператор (через 15 минут) для уточнения деталей заказа и согласования времени доставки.
-        </div>
-        <div class="tab-pane fade" id="nav-available" role="tabpanel" aria-labelledby="nav-available-tab">
-            <?php if ($product->status_id == Product::STATUS_ACTIVE && $product->count > 0): ?>
-                <ul class="in-stock-detail-product">
-                    <?php foreach (Stocks::find()->where(['active' => 1])->all() as $stock) : ?>
-                        <li class="in-stock-detail-product__item"><?= $stock->name; ?> (<?= $stock->address; ?>) - <span class="green">Товар в наличии. Возможна доставка сегодня/самовывоз</span></li>
-                    <?php endforeach; ?>
-                </ul>
-            <?php else: ?>
-                <?php if ($product->status_id == Product::STATUS_ACTIVE):
-
-                    if ($product->vendor_id == Vendor::VENDOR_ID_ROYAL):
-                        if (date('H') < 16 || date('i') < 30):
-                            echo '<span class="green"><strong>Товар можно заказать. Доставка будет сегодня после 19.00</strong></span>';
-                        else:
-                            echo '<span class="green"><strong>Товар можно заказать. Доставка на следующий день.</strong></span>';
-                        endif;
-                    endif;
-
-                    if ($product->vendor_id == Vendor::VENDOR_ID_HILLS):
-                        if (date('H') < 16 || date('i') < 50):
-                            echo '<span class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00</strong></span>';
-                        else:
-                            echo '<span class="green"><strong>Товар можно заказать. Доставка на следующий день.</strong></span>';
-                        endif;
-                    endif;
-
-                else: ?>
-                    <span class="red"><strong>Товара нет в наличии</strong></span>
-                <?php endif ?>
-            <?php endif; ?>
         </div>
     </div>
 </div>
