@@ -31,6 +31,9 @@ composer-update:
 cache:
 	rm -rf application/runtime/cache/
 
+chmod-cache:
+	chmod 777 -R application/runtime/cache/
+
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/user/install/migrations --interactive=0
@@ -59,6 +62,6 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/site/install/migrations --interactive=0
 
 deploy: pull init-dev cache migrate
-deploy-prod: pull init-prod cache migrate
-deploy-test: pull init-test cache migrate
+deploy-prod: pull init-prod cache chmod-cache migrate
+deploy-test: pull init-test cache chmod-cache migrate
 
