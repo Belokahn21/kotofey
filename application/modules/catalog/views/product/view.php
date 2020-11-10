@@ -77,7 +77,7 @@ $this->title = Title::showTitle($product->name);
 
                     // условия хилса
                     if ($product->vendor_id == Vendor::VENDOR_ID_HILLS):
-                        if (date('H') < 16 || date('i') < 50):
+                        if (date('H') < 16):
                             echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00</strong></div><br/>';
                         else:
                             echo '<div class="green"><strong>Товар можно заказать. Доставка на после-завтра после 19.00.</strong></div><br/>';
