@@ -4,9 +4,11 @@ use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $this \yii\web\View */
-/* @var $properties \app\modules\catalog\models\entity\ProductProperties[] */
-/* @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder */
+/* @var $this \yii\web\View
+ * @var $model \app\modules\catalog\models\entity\Product
+ * @var $properties \app\modules\catalog\models\entity\ProductProperties[]
+ * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
+ */
 
 $this->title = Title::showTitle('Товары');
 ?>
@@ -18,7 +20,6 @@ $this->title = Title::showTitle('Товары');
 <?php $form = ActiveForm::begin([
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
-    Наценка: <?= floor((($model->price - $model->purchase) / $model->purchase) * 100); ?>
     Наценка: <?= \app\modules\catalog\models\helpers\ProductHelper::getMarkup($model); ?>
 <?= $this->render('_form', [
     'model' => $model,
