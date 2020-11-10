@@ -62,71 +62,72 @@ $this->title = Title::showTitle($product->name);
             <div class="product-info">
                 <?php if ($product->count > 0): ?>
                     <div class="green"><strong>В налиии <?= $product->count; ?> шт.</strong></div>
-                <?php endif; ?>
+                <?php else: ?>
 
-                <?php
-
-                // условия роял канин
-                if ($product->vendor_id == Vendor::VENDOR_ID_ROYAL):
-                    if (date('H') < 16 || date('i') < 30):
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка будет сегодня после 19.00</strong></div><br/>';
-                    else:
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
-                    endif;
-                endif;
-
-                // условия хилса
-                if ($product->vendor_id == Vendor::VENDOR_ID_HILLS):
-                    if (date('H') < 16 || date('i') < 50):
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00</strong></div><br/>';
-                    else:
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
-                    endif;
-                endif;
-
-                // условия валты
-                if ($product->vendor_id == Vendor::VENDOR_ID_VALTA):
-                    if (date('w') >= 3):
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка в следующую среду после 19.00.</strong></div><br/>';
-                    else:
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду после 19.00. ' . \Yii::t(
-                                'app',
-                                'Через {n, plural, =0{# дней} =1{# день} one{# день} few{# дней} many{# дней} other{# дней}}',
-                                ['n' => 3 - date('w')]
-                            ) . '.</strong></div><br/>';
-                    endif;
-                endif;
-
-                // условия форзы
-                if ($product->vendor_id == Vendor::VENDOR_ID_FORZA):
-                    if (date('w') >= 2):
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую пятницу.</strong></div><br/>';
-                    elseif (date('w') >= 5):
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайший вторник.</strong></div><br/>';
-                    endif;
-                endif;
-
-                // условия Пурины
-                if ($product->vendor_id == Vendor::VENDOR_ID_PURINA):
+                    <?php
                     $nDay = date('w');
-                    if ($nDay == 0 || $nDay == 6):
-                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
-                    else:
-                        if ($nDay >= 5):
-                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
-                        elseif ($nDay >= 2 && date('H') > 17):
-                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую пятницу.</strong></div><br/>';
+
+                    // условия роял канин
+                    if ($product->vendor_id == Vendor::VENDOR_ID_ROYAL):
+                        if (date('H') < 16 || date('i') < 30):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка будет сегодня после 19.00</strong></div><br/>';
                         else:
-                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
                         endif;
                     endif;
-                endif;
 
-                // для всех остальных (мясоешки, сибагро)
-                if (in_array($product->vendor_id, [Vendor::VENDOR_ID_SIBAGRO, Vendor::VENDOR_ID_TAVELA])):
-                    echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
-                endif;
+                    // условия хилса
+                    if ($product->vendor_id == Vendor::VENDOR_ID_HILLS):
+                        if (date('H') < 16 || date('i') < 50):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00</strong></div><br/>';
+                        else:
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
+                        endif;
+                    endif;
 
+                    // условия валты
+                    if ($product->vendor_id == Vendor::VENDOR_ID_VALTA):
+                        if ($nDay <= 2 and date('H') <= 11):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду после 19.00. ' . \Yii::t(
+                                    'app',
+                                    'Через {n, plural, =0{# дней} =1{# день} one{# день} few{# дней} many{# дней} other{# дней}}',
+                                    ['n' => 3 - date('w')]
+                                ) . '.</strong></div><br/>';
+                        else:
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в следующую среду после 19.00.</strong></div><br/>';
+                        endif;
+                    endif;
+
+                    // условия форзы
+                    if ($product->vendor_id == Vendor::VENDOR_ID_FORZA):
+                        if (date('w') >= 2):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую пятницу.</strong></div><br/>';
+                        elseif (date('w') >= 5):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайший вторник.</strong></div><br/>';
+                        endif;
+                    endif;
+
+                    // условия Пурины
+                    if ($product->vendor_id == Vendor::VENDOR_ID_PURINA):
+                        if ($nDay == 0 || $nDay == 6):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
+                        else:
+                            if ($nDay >= 5):
+                                echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
+                            elseif ($nDay >= 2 && date('H') > 17):
+                                echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую пятницу.</strong></div><br/>';
+                            else:
+                                echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
+                            endif;
+                        endif;
+                    endif;
+
+                    // для всех остальных (мясоешки, сибагро)
+                    if (in_array($product->vendor_id, [Vendor::VENDOR_ID_SIBAGRO, Vendor::VENDOR_ID_TAVELA])):
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
+                    endif;
+
+                endif;
                 ?>
 
                 <div class="product-info__title">При заказе на сумму от 500 рублей бесплатная доставка по городу Барнаул</div>
