@@ -1,13 +1,13 @@
 include ../../mixin/oneBuy
 
 form.product-calc.js-product-calc
-    //.product-calc__price-group
-    //    .product-calc__price-group-price 12 005
-    //    .product-calc__price-group-char-val шт
-    //    .product-calc__price-group-char-equal =
-    //    .product-calc__price-group-summary.js-product-calc-summary
-    //        .count 85 834
-    //    .product-calc__price-group-currency ₽
+    .product-calc__price-group
+        .product-calc__price-group-price 12 005
+        .product-calc__price-group-char-val шт
+        .product-calc__price-group-char-equal =
+        .product-calc__price-group-summary.js-product-calc-summary
+            .count 85 834
+        .product-calc__price-group-currency ₽
     .product-calc__control-group
         .div
             button(type="button" data-js-lazy-update="true").product-calc__control.product-calc__minus.js-product-calc-minus -
@@ -18,7 +18,7 @@ form.product-calc.js-product-calc
             //.product-calc__price-info
             //    .product-calc__price-info-normal Цена за единицу: 14 500р
             //    .product-calc__price-info-discount Со скдикой: 10 500р
-        //button(type="submit" class="add-basket js-add-basket")
-        //    img.add-basket__icon(src="./assets/images/basket.png")
-        //    span.add-basket__label В корзину
+        button(type="submit" class="add-basket js-add-basket")
+            img.add-basket__icon(src="./assets/images/basket.png")
+            span.add-basket__label В корзину
         //+oneClickBuy()

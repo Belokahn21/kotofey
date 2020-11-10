@@ -8,6 +8,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\vendors\models\entity\Vendor;
 
 /* @var $properties \app\modules\catalog\models\entity\ProductPropertiesValues[]
  * @var \yii\web\View $this
@@ -58,6 +59,82 @@ $this->title = Title::showTitle($product->name);
                 'product_id' => $product->id,
                 'price' => $product->price,
             ]); ?>
+            <div class="product-info">
+                <?php if ($product->count > 0): ?>
+                    <div class="green"><strong>В налиии <?= $product->count; ?> шт.</strong></div>
+                <?php endif; ?>
+
+                <?php
+
+                // условия роял канин
+                if ($product->vendor_id == Vendor::VENDOR_ID_ROYAL):
+                    if (date('H') < 16 || date('i') < 30):
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка будет сегодня после 19.00</strong></div><br/>';
+                    else:
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
+                    endif;
+                endif;
+
+                // условия хилса
+                if ($product->vendor_id == Vendor::VENDOR_ID_HILLS):
+                    if (date('H') < 16 || date('i') < 50):
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00</strong></div><br/>';
+                    else:
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
+                    endif;
+                endif;
+
+                // условия валты
+                if ($product->vendor_id == Vendor::VENDOR_ID_VALTA):
+                    if (date('w') >= 3):
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка в следующую среду после 19.00.</strong></div><br/>';
+                    else:
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду после 19.00. ' . \Yii::t(
+                                'app',
+                                'Через {n, plural, =0{# дней} =1{# день} one{# день} few{# дней} many{# дней} other{# дней}}',
+                                ['n' => 3 - date('w')]
+                            ) . '.</strong></div><br/>';
+                    endif;
+                endif;
+
+                // условия форзы
+                if ($product->vendor_id == Vendor::VENDOR_ID_FORZA):
+                    if (date('w') >= 2):
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую пятницу.</strong></div><br/>';
+                    elseif (date('w') >= 5):
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайший вторник.</strong></div><br/>';
+                    endif;
+                endif;
+
+                // условия Пурины
+                if ($product->vendor_id == Vendor::VENDOR_ID_PURINA):
+                    $nDay = date('w');
+                    if ($nDay == 0 || $nDay == 6):
+                        echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
+                    else:
+                        if ($nDay >= 5):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
+                        elseif ($nDay >= 2 && date('H') > 17):
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую пятницу.</strong></div><br/>';
+                        else:
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка в ближайшую среду.</strong></div><br/>';
+                        endif;
+                    endif;
+                endif;
+
+                // для всех остальных (мясоешки, сибагро)
+                if (in_array($product->vendor_id, [Vendor::VENDOR_ID_SIBAGRO, Vendor::VENDOR_ID_TAVELA])):
+                    echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
+                endif;
+
+                ?>
+
+                <div class="product-info__title">При заказе на сумму от 500 рублей бесплатная доставка по городу Барнаул</div>
+                <div class="product-info__note">Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br/>Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа<br/>Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа<br/>Для доставки в другие точки уточняйте по телефону<strong><a class="js-phone-mask" style="color: black;" href="tel:1"></a></strong></div>
+                <br/>
+                <div class="product-info__title">Время доставки</div>
+                <div class="product-info__note">Заказы доставляются каждый день после 19.00. Доставка в выходные только при заказе с понедельника по пятницу!</div>
+            </div>
             <?php if ($properties): ?>
                 <ul class="product-properties">
                     <li class="product-properties__line">
@@ -99,18 +176,13 @@ $this->title = Title::showTitle($product->name);
         <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" itemprop="description">
             <?= $product->description ?: 'Отсутсвует'; ?>
         </div>
-        <!--        <div class="tab-pane fade" id="nav-characteristics" role="tabpanel" aria-labelledby="nav-characteristics-tab">-->
-        <!--            Отсутсвует-->
-        <!--        </div>-->
-        <!--        <div class="tab-pane fade" id="nav-recommendations" role="tabpanel" aria-labelledby="nav-recommendations-tab">-->
-        <!--            Отсутсвует-->
-        <!--        </div>-->
         <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
             <strong>Бесплатная доставка при заказе от 500 рублей</strong><br>
             Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br>
             Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа<br>
             Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа<br>
             Для доставки в другие точки уточняйте по телефону <strong><a style="color: black;" class="js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><?= SiteSettings::getValueByCode('phone_1'); ?></a></strong>
+            <br/><br/><strong>Время доставки: следующий день после 19.00 - заказывайте заранеее!</strong>
         </div>
         <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
             <strong>Оплатить можно:</strong>
@@ -118,21 +190,41 @@ $this->title = Title::showTitle($product->name);
                 <li>Наличными;</li>
                 <li>Переводом на карту банка (Сбербанк онлайн).</li>
             </ul>
-            <i>*Оплата заказа сразу после получения лично в руки.</i>
+            <i>*Оплата только при получении заказа</i>
         </div>
         <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
             Для покупки товаров на нашем сайте вам нужно добавить интересующий вас товар в корзину и пройти к оформлению заказа.<br>
             После того как заказ был оформлен с вами свяжется оператор (через 15 минут) для уточнения деталей заказа и согласования времени доставки.
         </div>
         <div class="tab-pane fade" id="nav-available" role="tabpanel" aria-labelledby="nav-available-tab">
-            <?php if ($product->status_id == Product::STATUS_ACTIVE): ?>
+            <?php if ($product->status_id == Product::STATUS_ACTIVE && $product->count > 0): ?>
                 <ul class="in-stock-detail-product">
                     <?php foreach (Stocks::find()->where(['active' => 1])->all() as $stock) : ?>
-                        <li class="in-stock-detail-product__item"><?= $stock->name; ?> (<?= $stock->address; ?>) - <span class="green">В НАЛИЧИИ, Возможна доставка сегодня</span></li>
+                        <li class="in-stock-detail-product__item"><?= $stock->name; ?> (<?= $stock->address; ?>) - <span class="green">Товар в наличии. Возможна доставка сегодня/самовывоз</span></li>
                     <?php endforeach; ?>
                 </ul>
             <?php else: ?>
-                <span class="red">Нет в наличии</span>
+                <?php if ($product->status_id == Product::STATUS_ACTIVE):
+
+                    if ($product->vendor_id == Vendor::VENDOR_ID_ROYAL):
+                        if (date('H') < 16 || date('i') < 30):
+                            echo '<span class="green"><strong>Товар можно заказать. Доставка будет сегодня после 19.00</strong></span>';
+                        else:
+                            echo '<span class="green"><strong>Товар можно заказать. Доставка на следующий день.</strong></span>';
+                        endif;
+                    endif;
+
+                    if ($product->vendor_id == Vendor::VENDOR_ID_HILLS):
+                        if (date('H') < 16 || date('i') < 50):
+                            echo '<span class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00</strong></span>';
+                        else:
+                            echo '<span class="green"><strong>Товар можно заказать. Доставка на следующий день.</strong></span>';
+                        endif;
+                    endif;
+
+                else: ?>
+                    <span class="red"><strong>Товара нет в наличии</strong></span>
+                <?php endif ?>
             <?php endif; ?>
         </div>
     </div>

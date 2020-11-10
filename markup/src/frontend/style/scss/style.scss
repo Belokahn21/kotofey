@@ -48,6 +48,18 @@
 @import "include/block/product-tabs";
 @import "include/block/in-stock-detail-product";
 
+.product-info {
+  border: 1px rgba(0, 0, 0, 0.03) solid;
+  box-shadow: 4px 4px 11px -2px rgba(34, 60, 80, 0.19);
+  padding: 10px;
+  margin: 30px 0;
+  border-radius: 7px;
+
+  &__title {
+    font-weight: bold;
+  }
+}
+
 // футер
 @import "include/block/footer";
 @import "include/block/footer-contact";

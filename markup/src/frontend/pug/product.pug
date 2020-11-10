@@ -1,94 +1,114 @@
 extends include/layer
 
 block contents
-	.page-container
-		.product-detail
-			.product-detail-left
-				.product-detail-gallery
-					a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
-						img(src="./assets/images/product.png").product-detail-gallery__image
-					.product-detail-gallery__group
-						a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link.active
-							img(src="./assets/images/product.png").product-detail-gallery__image
-						a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
-							img(src="./assets/images/product.png").product-detail-gallery__image
-						a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
-							img(src="./assets/images/product.png").product-detail-gallery__image
-			.product-detail-right
-				ul.breadcrumbs
-					li.breadcrumbs__item
-						a(href="javascript:void(0);").breadcrumbs__link Главная
-					li.breadcrumbs__item.active
-						a(href="javascript:void(0);").breadcrumbs__link Каталог товаров
-				h1.product-detail__title Кирпич строительный красный черновой пустотелый
-				include include/block/product-calc
-				ul.product-properties
-					li.product-properties__line
-						.product-properties__key Артикул товара
-						.product-properties__value 0525052
-					li.product-properties__line
-						.product-properties__key Размер
-						.product-properties__value 250*120*65мм
-					li.product-properties__line
-						.product-properties__key Пустотность
-						.product-properties__value пустотелый
-					li.product-properties__line
-						.product-properties__key Марка прочности
-						.product-properties__value М-150
-					li.product-properties__line
-						.product-properties__key Формат
-						.product-properties__value одинарный 1НФ
-					li.product-properties__line
-						.product-properties__key Вес 1 шт, кг
-						.product-properties__value 2.50
-					li.product-properties__line
-						.product-properties__key Прочность
-						.product-properties__value М-150
-					li.product-properties__line
-						.product-properties__key Производитель
-						.product-properties__value Выротынский кирпич
-				ul#collapseExample.collapse.product-properties
-					li.product-properties__line
-						.product-properties__key Артикул товара
-						.product-properties__value 0525052
-					li.product-properties__line
-						.product-properties__key Размер
-						.product-properties__value 250*120*65мм
-					li.product-properties__line
-						.product-properties__key Пустотность
-						.product-properties__value пустотелый
-					li.product-properties__line
-						.product-properties__key Марка прочности
-						.product-properties__value М-150
-					li.product-properties__line
-						.product-properties__key Формат
-						.product-properties__value одинарный 1НФ
-					li.product-properties__line
-						.product-properties__key Вес 1 шт, кг
-						.product-properties__value 2.50
-					li.product-properties__line
-						.product-properties__key Прочность
-						.product-properties__value М-150
-					li.product-properties__line
-						.product-properties__key Производитель
-						.product-properties__value Выротынский кирпич
-				a(data-toggle='collapse', href='#collapseExample', role='button', aria-expanded='false', aria-controls='collapseExample').product-properties__more Все характеристики
-				nav.product-tabs.in-product
-					#nav-tab.nav.nav-tabs(role='tablist')
-						a#nav-description-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-description', role='tab', aria-controls='nav-description', aria-selected='true') Описание
-						a#nav-characteristics-tab.nav-item.nav-link(data-toggle='tab', href='#nav-characteristics', role='tab', aria-controls='nav-characteristics', aria-selected='false') Характеристики
-						a#nav-recommendations-tab.nav-item.nav-link(data-toggle='tab', href='#nav-recommendations', role='tab', aria-controls='nav-recommendations', aria-selected='false') Рекомендации
-				#nav-tabContent.tab-content.product-tab-content
-					#nav-description.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-description-tab')
-						p Легкий, небольшой и удобный строительный кирпич может стать отличным помощником для садовода-огородника. Предназначен для обработки почвы и осуществления других агротехнических работ. Глубину вспашки можно отрегулировать с помощью сошника.
-						p.mt-3.mb-2 Строительный кирпич прямоугольной формы торговой марки Mstera, пустотелый внутри и имеющий гладкую поверхность, применяемый для ремонтно – строительных работ, как в помещении, так и снаружи его. Основным сырьем для производства кирпича является глина. Цвет – красный.
-						p.mt-3.mb-2 Назначение:
-						ul
-							li Сооружение внутренних не несущих стен;
-							li Возведение различных перегородок и конструкций;
-							li Используется в малоэтажном строительстве.
-						p Производство лицевого кирпича регламентируется ГОСТом 530-2007. Облицовочный кирпич морозостоек (не менее 50 циклов) и долго не разрушается под воздействием влаги.
-					#nav-characteristics.tab-pane.fade(role='tabpanel', aria-labelledby='nav-characteristics-tab') ...
-					#nav-recommendations.tab-pane.fade(role='tabpanel', aria-labelledby='nav-recommendations-tab') ...
+    .page-container
+        .product-detail
+            .product-detail-left
+                .product-detail-gallery
+                    a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
+                        img(src="./assets/images/product.png").product-detail-gallery__image
+                    .product-detail-gallery__group
+                        a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link.active
+                            img(src="./assets/images/product.png").product-detail-gallery__image
+                        a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
+                            img(src="./assets/images/product.png").product-detail-gallery__image
+                        a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
+                            img(src="./assets/images/product.png").product-detail-gallery__image
+            .product-detail-right
+                ul.breadcrumbs
+                    li.breadcrumbs__item
+                        a(href="javascript:void(0);").breadcrumbs__link Главная
+                    li.breadcrumbs__item.active
+                        a(href="javascript:void(0);").breadcrumbs__link Каталог товаров
+                h1.product-detail__title Кирпич строительный красный черновой пустотелый
+                include include/block/product-calc
+                .product-info
+                    .green
+                        strong В налиии 4 шт.
+                    .green
+                        strong Товар можно заказать. Доставка будет сегодня после 19.00
+                    br
+                    .product-info__title При заказе на сумму от 500 рублей бесплатная доставка по городу Барнаул
+                    .product-info__note
+                        | Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.
+                        br
+                        | Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа
+                        br
+                        | Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа
+                        br
+                        | Для доставки в другие точки уточняйте по телефону
+                        strong
+                            a.js-phone-mask(style='color: black;' href="tel:1")
+                    br
+                    .product-info__title Время доставки
+                    .product-info__note Заказы доставляются каждый день после 19.00. Доставка в выходные только при заказе с понедельника по пятницу!
+                ul.product-properties
+                    li.product-properties__line
+                        .product-properties__key Артикул товара
+                        .product-properties__value 0525052
+                    li.product-properties__line
+                        .product-properties__key Размер
+                        .product-properties__value 250*120*65мм
+                    li.product-properties__line
+                        .product-properties__key Пустотность
+                        .product-properties__value пустотелый
+                    li.product-properties__line
+                        .product-properties__key Марка прочности
+                        .product-properties__value М-150
+                    li.product-properties__line
+                        .product-properties__key Формат
+                        .product-properties__value одинарный 1НФ
+                    li.product-properties__line
+                        .product-properties__key Вес 1 шт, кг
+                        .product-properties__value 2.50
+                    li.product-properties__line
+                        .product-properties__key Прочность
+                        .product-properties__value М-150
+                    li.product-properties__line
+                        .product-properties__key Производитель
+                        .product-properties__value Выротынский кирпич
+                ul#collapseExample.collapse.product-properties
+                    li.product-properties__line
+                        .product-properties__key Артикул товара
+                        .product-properties__value 0525052
+                    li.product-properties__line
+                        .product-properties__key Размер
+                        .product-properties__value 250*120*65мм
+                    li.product-properties__line
+                        .product-properties__key Пустотность
+                        .product-properties__value пустотелый
+                    li.product-properties__line
+                        .product-properties__key Марка прочности
+                        .product-properties__value М-150
+                    li.product-properties__line
+                        .product-properties__key Формат
+                        .product-properties__value одинарный 1НФ
+                    li.product-properties__line
+                        .product-properties__key Вес 1 шт, кг
+                        .product-properties__value 2.50
+                    li.product-properties__line
+                        .product-properties__key Прочность
+                        .product-properties__value М-150
+                    li.product-properties__line
+                        .product-properties__key Производитель
+                        .product-properties__value Выротынский кирпич
+                a(data-toggle='collapse', href='#collapseExample', role='button', aria-expanded='false', aria-controls='collapseExample').product-properties__more Все характеристики
+        nav.product-tabs.in-product
+            #nav-tab.nav.nav-tabs(role='tablist')
+                a#nav-description-tab.nav-item.nav-link.active(data-toggle='tab', href='#nav-description', role='tab', aria-controls='nav-description', aria-selected='true') Описание
+                a#nav-characteristics-tab.nav-item.nav-link(data-toggle='tab', href='#nav-characteristics', role='tab', aria-controls='nav-characteristics', aria-selected='false') Характеристики
+                a#nav-recommendations-tab.nav-item.nav-link(data-toggle='tab', href='#nav-recommendations', role='tab', aria-controls='nav-recommendations', aria-selected='false') Рекомендации
+        #nav-tabContent.tab-content.product-tab-content
+            #nav-description.tab-pane.fade.show.active(role='tabpanel', aria-labelledby='nav-description-tab')
+                p Легкий, небольшой и удобный строительный кирпич может стать отличным помощником для садовода-огородника. Предназначен для обработки почвы и осуществления других агротехнических работ. Глубину вспашки можно отрегулировать с помощью сошника.
+                p.mt-3.mb-2 Строительный кирпич прямоугольной формы торговой марки Mstera, пустотелый внутри и имеющий гладкую поверхность, применяемый для ремонтно – строительных работ, как в помещении, так и снаружи его. Основным сырьем для производства кирпича является глина. Цвет – красный.
+                p.mt-3.mb-2 Назначение:
+                ul
+                    li Сооружение внутренних не несущих стен;
+                    li Возведение различных перегородок и конструкций;
+                    li Используется в малоэтажном строительстве.
+                p Производство лицевого кирпича регламентируется ГОСТом 530-2007. Облицовочный кирпич морозостоек (не менее 50 циклов) и долго не разрушается под воздействием влаги.
+            #nav-characteristics.tab-pane.fade(role='tabpanel', aria-labelledby='nav-characteristics-tab') ...
+            #nav-recommendations.tab-pane.fade(role='tabpanel', aria-labelledby='nav-recommendations-tab') ...
 
-		include include/block/offers
+        include include/block/offers
