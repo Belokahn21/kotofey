@@ -32,6 +32,7 @@ cache:
 	rm -rf application/runtime/cache/
 
 chmod-cache:
+	mkdir application/runtime/cache/
 	chmod 777 -R application/runtime/cache/
 
 migrate:
