@@ -51,8 +51,7 @@ class SiteSettings extends ActiveRecord
     public static function getValueByCode($code)
     {
         try {
-            $cache = \Yii::$app->cache;
-            return $cache->getOrSet($code, function () use ($code) {
+            return \Yii::$app->cache->getOrSet($code, function () use ($code) {
                 return self::findByCode($code)->value;
             }, 3600 * 7 * 24);
         } catch (\Exception $exception) {

@@ -202,18 +202,15 @@ $this->beginPage() ?>
     </div>
 </div>
 
-<?php if (!\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
 
-    <?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'): ?>
+<?php if (Yii::$app->controller->id == 'site' && Yii::$app->controller->action->id == 'index'): ?>
+    <?= $content; ?>
+<?php else: ?>
+    <div class="page-container">
         <?= $content; ?>
-    <?php else: ?>
-        <div class="page-container">
-            <?= $content; ?>
-        </div>
-    <?php endif ?>
+    </div>
+<?php endif ?>
 
-
-<?php endif; ?>
 
 <footer class="footer page-container">
     <div class="footer-layer-1">
