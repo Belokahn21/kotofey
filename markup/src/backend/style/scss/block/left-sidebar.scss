@@ -18,12 +18,12 @@
     width: 20%;
     background: $main-dark-color;
 
-    @media (max-width: 414px) {
-      width: 100%;
+    @media (max-width: 1600px) {
+      width: 30%;
     }
 
-    @media (max-width: 1280px) {
-      width: 30%;
+    @media (max-width: 414px) {
+      width: 100%;
     }
   }
 }
