@@ -80,7 +80,7 @@ $this->title = Title::showTitle($product->name);
                         if (date('H') < 16 || date('i') < 50):
                             echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00</strong></div><br/>';
                         else:
-                            echo '<div class="green"><strong>Товар можно заказать. Доставка на завтра после 19.00.</strong></div><br/>';
+                            echo '<div class="green"><strong>Товар можно заказать. Доставка на после-завтра после 19.00.</strong></div><br/>';
                         endif;
                     endif;
 
