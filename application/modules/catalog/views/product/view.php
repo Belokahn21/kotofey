@@ -165,7 +165,7 @@ $this->title = Title::showTitle($product->name);
             <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
             <!--            <a class="nav-item nav-link" id="nav-characteristics-tab" data-toggle="tab" href="#nav-characteristics" role="tab" aria-controls="nav-characteristics" aria-selected="false">Характеристики</a>-->
             <!--            <a class="nav-item nav-link" id="nav-recommendations-tab" data-toggle="tab" href="#nav-recommendations" role="tab" aria-controls="nav-recommendations" aria-selected="false">Рекомендации</a>-->
-            <a class="nav-item nav-link" id="nav-delivery-tab" data-toggle="tab" href="#nav-delivery" role="tab" aria-controls="nav-delivery" aria-selected="false">Доставка</a>
+<!--            <a class="nav-item nav-link" id="nav-delivery-tab" data-toggle="tab" href="#nav-delivery" role="tab" aria-controls="nav-delivery" aria-selected="false">Доставка</a>-->
             <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
             <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Как купить?</a>
             <a class="nav-item nav-link" id="nav-available-tab" data-toggle="tab" href="#nav-available" role="tab" aria-controls="nav-available" aria-selected="false">Наличие в магазинах</a>
@@ -175,14 +175,14 @@ $this->title = Title::showTitle($product->name);
         <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" itemprop="description">
             <?= $product->description ?: 'Отсутсвует'; ?>
         </div>
-        <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">
-            <strong>Бесплатная доставка при заказе от 500 рублей</strong><br>
-            Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br>
-            Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа<br>
-            Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа<br>
-            Для доставки в другие точки уточняйте по телефону <strong><a style="color: black;" class="js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><?= SiteSettings::getValueByCode('phone_1'); ?></a></strong>
-            <br/><br/><strong>Время доставки: следующий день после 19.00 - заказывайте заранеее!</strong>
-        </div>
+<!--        <div class="tab-pane fade" id="nav-delivery" role="tabpanel" aria-labelledby="nav-delivery-tab">-->
+<!--            <strong>Бесплатная доставка при заказе от 500 рублей</strong><br>-->
+<!--            Доставляем по городу Барнаулу, поселки: Власиха, Лесной, Центральный, Южный, Авиатор, Спутник.<br>-->
+<!--            Доставка в Новоалтайск, Казеную заимку, Гоньбу, Научный городок +150 рублей к любой сумме заказа<br>-->
+<!--            Доставка в ЗАТО Сибирский +300 рублей к любой сумме заказа<br>-->
+<!--            Для доставки в другие точки уточняйте по телефону <strong><a style="color: black;" class="js-phone-mask" href="tel:--><?//= SiteSettings::getValueByCode('phone_1'); ?><!--">--><?//= SiteSettings::getValueByCode('phone_1'); ?><!--</a></strong>-->
+<!--            <br/><br/><strong>Время доставки: следующий день после 19.00 - заказывайте заранеее!</strong>-->
+<!--        </div>-->
         <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
             <strong>Оплатить можно:</strong>
             <ul>
