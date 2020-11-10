@@ -39,6 +39,8 @@ class Search extends React.Component {
         }
     }
 
+    renderToNodeStream(){}
+
     render() {
         return <form className={this.state.variants.length > 0 ? "search-form filled" : "search-form"} action='/search/'>
             <div className="search-form__input-group">
