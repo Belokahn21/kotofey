@@ -13,12 +13,12 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_VALTA])->all();
+        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_HILLS])->andWhere(['like', 'name', 'sirius'])->all();
 
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-            MarkupHelpers::applyMarkup($product, 17);
+            MarkupHelpers::applyMarkup($product, 45);
 
 
             if ($product->validate() && $product->update()) {
