@@ -99,6 +99,14 @@
 @import "include/block/checkout-reglament";
 @import "include/block/light-checkout-list";
 
+.checkout-summary__show-items[aria-expanded=false] .text-expanded {
+  display: none;
+}
+
+.checkout-summary__show-items[aria-expanded=true] .text-collapsed {
+  display: none;
+}
+
 // Акции
 @import "include/block/action-list";
 @import "include/block/detail-action";
