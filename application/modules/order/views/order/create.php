@@ -169,7 +169,7 @@ LIST;
                                 </div>
                                 <?= AddBasketWidget::widget([
                                     'product_id' => $item->product->id,
-                                    'price' => $item->product ? ProductHelper::getResultPrice($item->product->price) : $item->price,
+                                    'price' => $item->product ? ProductHelper::getResultPrice($item->product) : $item->price,
                                     'discount' => $item->discount_price,
                                     'showButton' => false,
                                     'showInfo' => false,
