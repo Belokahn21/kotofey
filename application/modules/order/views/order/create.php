@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View
  * @var $order Order
+ * @var $basket \app\modules\order\models\entity\OrdersItems[]
  * @var $billing \app\modules\user\models\entity\Billing
  * @var $user \app\modules\user\models\entity\User
  * @var $deliveries app\modules\delivery\models\entity\Delivery[]
