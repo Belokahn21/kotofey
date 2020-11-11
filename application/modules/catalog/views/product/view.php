@@ -57,7 +57,7 @@ $this->title = Title::showTitle($product->name);
             <h1 itemprop="name" class="product-detail__title"><?= $product->name; ?></h1>
             <?= AddBasketWidget::widget([
                 'product_id' => $product->id,
-                'price' => $product->price,
+                'price' => ProductHelper::getResultPrice($product),
             ]); ?>
             <div class="product-info">
                 <?php if ($product->count > 0): ?>
