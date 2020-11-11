@@ -34,6 +34,18 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <td>Дата создания</td>
                     <td><?= date('d.m.Y', $order->created_at) ?></td>
                 </tr>
+                <?php if (!empty($order->email)): ?>
+                    <tr>
+                        <td>Почта</td>
+                        <td><?= $order->email; ?></td>
+                    </tr>
+                <?php endif; ?>
+                <?php if (!empty($order->phone)): ?>
+                    <tr>
+                        <td>Телефон</td>
+                        <td class="js-phone-mask"><?= $order->phone; ?></td>
+                    </tr>
+                <?php endif; ?>
                 <tr>
                     <td>Сумма заказа</td>
                     <td>
