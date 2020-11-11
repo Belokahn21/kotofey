@@ -31,10 +31,13 @@ class Hills
                     continue;
                 }
 
+                $oldPercent = null;
 
                 if ($product = Product::findOneByCode($code)) {
 
                     $percent = round(ProductHelper::getMarkup($product) / 100);
+
+                    if ($product->discount_price) $oldPercent = ProductHelper::getPercent($product);
 
                     if (!$percent) $percent = 0.15;
 
@@ -42,6 +45,8 @@ class Hills
                     $product->base_price = $base;
                     $product->purchase = $purchase;
                     $product->price = $product->purchase + ceil($product->purchase * $percent);
+
+                    ProductHelper::setDiscount($product, $oldPercent);
 
                     if (!$product->validate()) {
                         return false;

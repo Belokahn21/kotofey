@@ -41,6 +41,11 @@ class ProductHelper
         return round((($model->price - $model->purchase) / $model->price) * 100);
     }
 
+    public static function setDiscount(Product &$model, $prcent)
+    {
+        $model->discount_price = $model->price - round($model->price * ($prcent / 100));
+    }
+
     public static function purchaseVirtual(array $products)
     {
         $out = 0;
