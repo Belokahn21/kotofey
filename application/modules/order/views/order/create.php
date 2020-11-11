@@ -142,7 +142,7 @@ LIST;
                    title="Очистить корзину"><i class="fas fa-trash-alt"></i></a>
                 <div class="checkout-summary__info">
                     <div class="checkout-summary__title">Ваш заказ на сумму:</div>
-                    <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
+                    <a class="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Скрыть состав заказа</a>
                 </div>
                 <div class="checkout-summary__amount">
                     <div class="js-product-calc-full-summary"><?= Price::format(Basket::getInstance()->cash(true)) ?></div>
@@ -150,7 +150,7 @@ LIST;
                 </div>
             </div>
             <?php if ($basket = Basket::findAll()): ?>
-                <div class="collapse" id="collapseSummary">
+                <div class="collapse show" id="collapseSummary">
                     <ul class="light-checkout-list">
                         <?php foreach ($basket as $item): ?>
                             <li class="light-checkout-list__item">
