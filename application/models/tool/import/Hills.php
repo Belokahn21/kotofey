@@ -24,11 +24,9 @@ class Hills
 
                 $code = $line[2];
                 $base = ceil(str_replace(' ', '', $line[6]));
-                $purchase = ceil($base - ceil($base * 0.13));
+                $purchase = ceil($base - ceil($base * 0.17));
 
-                if (empty($code) or empty($purchase)) {
-                    continue;
-                }
+                if (empty($code) or empty($purchase)) continue;
 
 
                 if ($product = Product::findOneByCode($code)) {
