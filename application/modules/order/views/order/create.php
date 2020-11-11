@@ -165,12 +165,11 @@ LIST;
                                     <div class="light-checkout-list__title">
                                         <a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
                                     </div>
-                                    <div class="light-checkout-list__article">
-                                        Артикул: <?= $item->product->article; ?></div>
+                                    <div class="light-checkout-list__article">Артикул: <?= $item->product->article; ?></div>
                                 </div>
                                 <?= AddBasketWidget::widget([
                                     'product_id' => $item->product->id,
-                                    'price' => $item->price,
+                                    'price' => $item->product ? ProductHelper::getResultPrice($item->product->price) : $item->price,
                                     'discount' => $item->discount_price,
                                     'showButton' => false,
                                     'showInfo' => false,
