@@ -13,11 +13,11 @@ class SliderWidget extends Widget
 
     public function run()
     {
-        if (empty($this->slider_id)) return;
+        if (empty($this->slider_id)) return false;
 
         $unix_now = time();
         $cache = \Yii::$app->cache;
-        $key = 'index-slider';
+        $key = 'index-slider->uniq-' . $this->slider_id;
         $this->time_cache = 3600 * 60 * 24;
 
         $images = $cache->getOrSet($key, function () use ($unix_now) {
