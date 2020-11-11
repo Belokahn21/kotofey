@@ -11,6 +11,7 @@ use app\widgets\notification\Alert;
 use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Category;
+use app\modules\site\widgets\SocialMe\SocialMe;
 use app\modules\stock\widgets\store\StoreWidget;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
@@ -249,7 +250,10 @@ $this->beginPage() ?>
                     <?php endforeach; ?>
                 </ul>
             </div>
-            <?= SubscribeWidget::widget(); ?>
+            <div style="margin: auto auto;">
+                <?= SubscribeWidget::widget(); ?>
+                <?= SocialMe::widget(); ?>
+            </div>
         </div>
     </div>
     <div class="footer-layer-2">
