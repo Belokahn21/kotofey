@@ -33,12 +33,13 @@ class ProductHelper
 
     public static function getPercent(Product $model)
     {
-        return @round(($model->price / $model->discount_price) * 100) - 100;
+        return @round(($model->price - $model->discount_price) / $model->price) * 100;
     }
 
     public static function getMarkup(Product $model)
     {
-        return @round(($model->price / $model->purchase) * 100) - 100;
+        return @round(($model->price - $model->purchase) / $model->price) * 100;
+
     }
 
     public static function setDiscount(Product &$model, $prcent)
