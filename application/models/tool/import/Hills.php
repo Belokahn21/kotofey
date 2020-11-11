@@ -46,7 +46,7 @@ class Hills
                     $product->purchase = $purchase;
                     $product->price = $product->purchase + ceil($product->purchase * $percent);
 
-                    ProductHelper::setDiscount($product, $oldPercent);
+                    if ($oldPercent) ProductHelper::setDiscount($product, $oldPercent);
 
                     if (!$product->validate()) {
                         return false;
