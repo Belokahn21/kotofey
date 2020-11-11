@@ -82,7 +82,6 @@ use yii\helpers\Url;
                     <h4>Финансы</h4>
                     <p>Закуп: <?= OrderHelper::orderPurchase($model->id); ?></p>
                     <p>Сумма заказа: <?= OrderHelper::orderSummary($model->id); ?></p>
-                    <p>Сумма со скидкой: <?= OrderHelper::orderSummary($model->id, true); ?></p>
 
                     <?php if ($model->promocodeEntity): ?>
                         <h4>Промокод</h4>
@@ -121,7 +120,7 @@ use yii\helpers\Url;
                                         <?php if ($item->product): ?>
                                             <p>Зкупочная: <?= $item->product->purchase; ?></p>
                                         <?php endif; ?>
-                                        <p>К продаже: <?= $item->price; ?></p>
+                                        <p>К продаже: <?= $item->price; ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price : null; ?></p>
                                         <p>Кол-во: <?= $item->count; ?></p>
                                     </div>
                                 </li>

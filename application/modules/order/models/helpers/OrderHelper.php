@@ -41,16 +41,10 @@ class OrderHelper
         return $out;
     }
 
-    public static function orderSummary($order_id, $withDiscount = false)
+    public static function orderSummary($order_id)
     {
         $summ = 0;
-        foreach (OrdersItems::find()->where(['order_id' => $order_id])->all() as $item) {
-            if ($withDiscount) {
-                $summ += $item->count * ($item->discount_price ? $item->discount_price : $item->price);
-            } else {
-                $summ += $item->count * $item->price;
-            }
-        }
+        foreach (OrdersItems::find()->where(['order_id' => $order_id])->all() as $item) $summ += $item->count * ($item->discount_price ? $item->discount_price : $item->price);
         return $summ;
     }
 
