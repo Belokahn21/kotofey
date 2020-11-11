@@ -33,21 +33,30 @@ class ProductHelper
 
     public static function getPercent(Product $model)
     {
-        return @round((($model->price - $model->discount_price) / $model->price) * 100);
+//        return @round((($model->price - $model->discount_price) / $model->price) * 100);
+        return self::getPercentTwoNums($model->price, $model->discount_price);
     }
 
     public static function getMarkup(Product $model)
     {
-        return @round((($model->price - $model->purchase) / $model->price) * 100);
+//        return @round((($model->price - $model->purchase) / $model->price) * 100);
+        return self::getPercentTwoNums($model->price, $model->purchase);
 
     }
 
-    public static function setDiscount(Product &$model, $prcent)
+    private static function getPercentTwoNums($big, $small)
+    {
+        return round($big / $small * 100 - 100);
+    }
+
+    public
+    static function setDiscount(Product &$model, $prcent)
     {
         $model->discount_price = $model->price - round($model->price * ($prcent / 100));
     }
 
-    public static function purchaseVirtual(array $products)
+    public
+    static function purchaseVirtual(array $products)
     {
         $out = 0;
         /* @var $product Product */
@@ -58,7 +67,8 @@ class ProductHelper
         return $out;
     }
 
-    public static function profitVirtual(array $products)
+    public
+    static function profitVirtual(array $products)
     {
         $out = 0;
         /* @var $product Product */
@@ -69,7 +79,8 @@ class ProductHelper
         return $out;
     }
 
-    public static function getImageUrl(Product $model, $isFull = false, $options = [])
+    public
+    static function getImageUrl(Product $model, $isFull = false, $options = [])
     {
 
         if (Debug::isPageSpeed()) {
@@ -124,7 +135,8 @@ class ProductHelper
         return $url;
     }
 
-    public static function getDetailUrl(Product $model, $isFull = false)
+    public
+    static function getDetailUrl(Product $model, $isFull = false)
     {
         if ($isFull)
             return System::fullDomain() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
