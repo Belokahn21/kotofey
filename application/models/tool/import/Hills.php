@@ -4,6 +4,7 @@ namespace app\models\tool\import;
 
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\helpers\ProductHelper;
 
 class Hills
 {
@@ -12,7 +13,7 @@ class Hills
 
     public function getPricePath()
     {
-        return \Yii::getAlias('@app/tmp/price/hills/hills2020.csv');
+        return \Yii::getAlias('@app/tmp/price/hills/hills.csv');
     }
 
     public function update($reCount = false)
@@ -23,19 +24,19 @@ class Hills
             while (($line = fgetcsv($handle, 1000, ";")) !== false) {
 
                 $code = $line[2];
-                $base = ceil(str_replace(' ', '', $line[6]));
-                $purchase = ceil($base - ceil($base * 0.17));
+                $base = ceil(str_replace(' ', '', $line[5]));
+                $purchase = ceil($base - ceil($base * 0.13));
 
-                if (empty($code) or empty($purchase)) continue;
+                if (empty($code) or empty($purchase)) {
+                    continue;
+                }
 
 
                 if ($product = Product::findOneByCode($code)) {
 
-                    if ($reCount == false) {
-                        $percent = ($product->price - $product->purchase) / $product->price;
-                    } else {
-                        $percent = 0.13;
-                    }
+                    $percent = round(ProductHelper::getMarkup($product) / 100);
+
+                    if (!$percent) $percent = 0.15;
 
                     $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
                     $product->base_price = $base;
