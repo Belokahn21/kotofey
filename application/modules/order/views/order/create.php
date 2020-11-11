@@ -182,15 +182,9 @@ LIST;
             <div class="checkout-reglament">
                 <div class="checkout-reglament__title">Обратите внимание!</div>
                 <div class="checkout-reglament__text">
-                    <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки
-                        доставки (Обычно 1 час). </p>
-                    <!--                    <p>Доставка платная. Рассчитайте стоимость в нашем онлайн-калькуляторе. Введите расстояние (в км) от нас — г. Барнаул, ул. Взлетная 1 до того места, куда требуется доставить товар.</p>-->
-                    <p>Доставка бесплатная. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у
-                        наших операторов.</p>
-                    <p>Остались вопросы — <a
-                                href="mailto:<?= SiteSettings::findByCode('email')->value; ?>"><?= SiteSettings::findByCode('email')->value; ?></a>
-                        или <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>"
-                               class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a></p>
+                    <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 час).</p>
+                    <p>Доставка бесплатная. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у наших операторов.</p>
+                    <p>Остались вопросы — <a href="mailto:<?= SiteSettings::findByCode('email')->value; ?>"><?= SiteSettings::findByCode('email')->value; ?></a> или <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>" class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a></p>
                 </div>
             </div>
         </div>

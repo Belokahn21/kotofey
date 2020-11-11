@@ -127,7 +127,7 @@ class Basket extends Model
             /* @var $item OrdersItems */
             foreach ($_SESSION[self::BASKET_KEY] as $id => $item) {
                 if ($withDiscount) {
-                    $cash += $item->discount_price ? $item->discount_price : $item->price * $item->count;
+                    $cash += ($item->discount_price ? $item->discount_price : $item->price) * $item->count;
                 } else {
                     $cash += $item->price * $item->count;
                 }
