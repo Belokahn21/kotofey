@@ -60,8 +60,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                 <ul class="profile-order-products">
                     <?php foreach ($items as $item): ?>
                         <li class="profile-order-products__item">
-                            <?= Html::a($item->name, $item->product->detail, ['class' => 'profile-order-products__link']); ?>
-                            <img class="profile-order-products__image" src="<?= ProductHelper::getImageUrl($item->product) ?>">
+                            <?= Html::a($item->name, $item->product ? $item->product->detail : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
+                            <?php if ($item->product): ?>
+                                <img class="profile-order-products__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" alt="<?= $item->image; ?>">
+                            <?php else: ?>
+                                <img class="profile-order-products__image" src="/images/not-image.png" alt="<?= $item->image; ?>">
+                            <?php endif; ?>
                             <div class="profile-order-products__price"><?= Price::format($item->price); ?></div>
                             <div class="profile-order-products__char">X</div>
                             <div class="profile-order-products__count"><?= $item->count; ?></div>
