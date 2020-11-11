@@ -45,9 +45,11 @@ use app\models\tool\Currency;
 
                     <?php if ($showPrice): ?>
                         <div class="product-calc__price-info">
-                            <div class="product-calc__price-info-normal">Цена за товар: <?= Price::format($price); ?><?= Currency::getInstance()->show(); ?></div>
                             <?php if ($discount): ?>
-                                <div class="product-calc__price-info-discount">Со скдикой: <?= Price::format($discount); ?><?= Currency::getInstance()->show(); ?></div>
+                                <div class="product-calc__price-info-normal">Цена за товар: <?= Price::format($price); ?><?= Currency::getInstance()->show(); ?></div>
+<!--                                <div class="product-calc__price-info-discount">Со скдикой: --><?//= Price::format($discount); ?><!----><?//= Currency::getInstance()->show(); ?><!--</div>-->
+                            <?php else: ?>
+                                <div class="product-calc__price-info-normal">Цена за товар: <?= Price::format($price); ?><?= Currency::getInstance()->show(); ?></div>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>
