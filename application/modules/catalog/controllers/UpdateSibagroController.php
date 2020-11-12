@@ -13,17 +13,17 @@ class UpdateSibagroController extends Controller
     public function actionUpload()
     {
         $model = new SibagroUpload();
+        $items = [];
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
-                if($model->parse()){
-
-                }
+                $items = $model->parse();
             }
         }
 
         return $this->render('upload', [
-            'model' => $model
+            'model' => $model,
+            'items' => $items,
         ]);
     }
 }

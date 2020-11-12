@@ -12,6 +12,7 @@ class InputUploadWidget extends Widget
 {
     public $model;
     public $attribute;
+    public $dopAttr;
 
     public function init()
     {
@@ -26,5 +27,11 @@ class InputUploadWidget extends Widget
         $media = new Media();
         echo Html::radioList(Media::POST_KEY_LOCATION, null, $media->getLocations());
         echo Html::activeFileInput($this->model, $this->attribute);
+
+        if ($this->dopAttr) {
+            echo Html::tag('hr');
+            echo Html::activeHiddenInput($this->model, $this->dopAttr);
+            echo Html::button('Выбрать', ['class' => 'btn-main']);
+        }
     }
 }

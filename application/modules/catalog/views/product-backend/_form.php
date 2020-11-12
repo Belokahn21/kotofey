@@ -143,7 +143,9 @@ use app\modules\media\models\entity\Media;
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <?= $form->field($model, 'image')->widget(InputUploadWidget::className()); ?>
+                <?= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
+                    'dopAttr' => 'media_id'
+                ]); ?>
             </div>
             <div class="col-sm-6">
                 <div class="form-image more">
