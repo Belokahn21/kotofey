@@ -29,16 +29,8 @@ class SibagroUpload extends Model
 
         $content = file_get_contents(\Yii::getAlias('@app/tmp/' . $fileName));
 
-//        $content = mb_convert_encoding($content, 'HTML-ENTITIES', 'UTF-8');
-//        $fileContent = mb_convert_encoding($content, 'HTML-ENTITIES', 'iso-8859-1');
-//        $content = mb_convert_encoding($content, 'iso-8859-1', 'utf8');
-//        $content = mb_convert_encoding($content, 'utf8', 'windows-1251');
-//        $content = mb_convert_encoding($content, 'CP1252', 'ISO-8859-5');
-//        $content = mb_convert_encoding($content, 'iso-8859-1', 'CP1252');
-//        $content = mb_convert_encoding($content, 'CP1252', 'utf8');
-//        $content = mb_convert_encoding($content, 'ISO-8859-5', 'utf8');
-
         $dom = new \DOMDocument();
+//        $content = mb_convert_encoding($content, "ISO-8859-1", "utf-8");
         @$dom->loadHTML($content);
         $xpath = new \DOMXPath($dom);
         $items = $xpath->query("//tr[@class='popoverp']");
@@ -49,12 +41,15 @@ class SibagroUpload extends Model
             $code = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//td[@class='product_code']");
             $price = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//td[@class='lead']");
 
+            $price = $this->getPrice($this->getValue($price->item(0)));
+
             $sibEl = new SibagroElement();
-            $sibEl->name = $name->item(0)->textContent;
-            $sibEl->code = $code->item(0)->nodeValue;
+            $sibEl->name = $this->getValue($name->item(0));
+            $sibEl->code = $this->getValue($code->item(0));
+            $sibEl->price = $price;
 
-            Debug::p($name->item(0)->textContent);
 
+            Debug::p($price);
             exit();
 
             $items[] = $sibEl;
@@ -68,5 +63,28 @@ class SibagroUpload extends Model
         $dom = new \DOMDocument();
         $dom->loadHtml($html);
         return new \DOMXPath($dom);
+    }
+
+    public function getValue($domItem)
+    {
+        return mb_convert_encoding($domItem->nodeValue, "ISO-8859-1", "utf-8");
+    }
+
+    public function getPrice($price)
+    {
+        $priceMatch = null;
+        $rub = 0;
+        $kop = 0;
+        preg_match('/(\d+р\.) (\d+коп\.)/i', $price, $priceMatch);
+
+        // нашел цену
+        if (count($priceMatch) > 1)
+            preg_match('/\d+/i', $priceMatch[1], $rub);
+
+        // есть рубли и копейки
+        if (count($priceMatch) == 3)
+            preg_match('/\d+/i', $priceMatch[2], $kop);
+
+        return round($rub[0] . '.' . $kop[0]);
     }
 }
