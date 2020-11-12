@@ -41,7 +41,7 @@ class SibagroUpload extends Model
             $name = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//a[@class='product_name']");
             $code = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//td[@class='product_code']");
             $price = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//td[@class='lead']");
-
+            $image = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//div[@class='outer']//a");
             $price = $this->getPrice($this->getValue($price->item(0)));
 
             $sibEl = new SibagroElement();
@@ -49,10 +49,8 @@ class SibagroUpload extends Model
             $sibEl->code = $this->getValue($code->item(0));
             $sibEl->price = $price;
             $sibEl->vendorId = Vendor::VENDOR_ID_SIBAGRO;
+            $sibEl->imagePath = $image->item(0)->attributes->getNamedItem('href')->value;
 
-
-//            Debug::p($price);
-//            exit();
 
             $items[] = $sibEl;
         }

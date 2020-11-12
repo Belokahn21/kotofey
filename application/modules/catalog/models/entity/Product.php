@@ -59,7 +59,6 @@ class Product extends \yii\db\ActiveRecord
 
     const SCENARIO_NEW_PRODUCT = 'insert';
     const SCENARIO_UPDATE_PRODUCT = 'update';
-//    const SCENARIO_CREATE_EXT_PRODUCT = 'external';
 
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
@@ -69,7 +68,6 @@ class Product extends \yii\db\ActiveRecord
         return [
             self::SCENARIO_NEW_PRODUCT => ['is_ali', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
             self::SCENARIO_UPDATE_PRODUCT => ['is_ali', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
-//            self::SCENARIO_CREATE_EXT_PRODUCT => ['barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'],
         ];
     }
 

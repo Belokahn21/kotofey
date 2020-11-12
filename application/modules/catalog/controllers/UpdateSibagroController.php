@@ -12,8 +12,10 @@ class UpdateSibagroController extends Controller
 
     public function actionUpload()
     {
+        $productModel = new \app\modules\catalog\models\form\ProductFromSibagoForm();
         $model = new SibagroUpload();
         $items = [];
+
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -24,6 +26,7 @@ class UpdateSibagroController extends Controller
         return $this->render('upload', [
             'model' => $model,
             'items' => $items,
+            'productModel' => $productModel
         ]);
     }
 }

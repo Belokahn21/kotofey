@@ -5,8 +5,11 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\vendors\models\entity\Vendor;
 
-/* @var $items \app\modules\catalog\models\entity\virtual\SibagroElement[] */
-$productModel = new \app\modules\catalog\models\entity\Product();
+/* @var $items \app\modules\catalog\models\entity\virtual\SibagroElement[]
+ * @var $this \yii\web\View
+ */
+
+$this->title = 'Обновить прайсы по HTML';
 ?>
 <h1>Обновить прайсы по HTML</h1>
 
@@ -16,7 +19,7 @@ $productModel = new \app\modules\catalog\models\entity\Product();
 <?= Html::submitButton('Начать', ['class' => 'btn-main ']) ?>
 
 <?php ActiveForm::end(); ?>
-
+<hr/>
 <?php if ($items): ?>
     <div class="sync-html-price">
         <?php $form = ActiveForm::begin() ?>
@@ -29,6 +32,9 @@ $productModel = new \app\modules\catalog\models\entity\Product();
                 <div class="col-2"><?= $form->field($productModel, 'vendor_id')->dropDownList(ArrayHelper::map(Vendor::find()->all(), 'id', 'name')); ?></div>
                 <div class="col-1"><?= $form->field($productModel, 'price')->textInput(['value' => $item->price]); ?></div>
                 <div class="col-1"><?= $form->field($productModel, 'price')->textInput(['value' => $item->price + round($item->price * 0.3)]); ?></div>
+                <?php if ($item->imagePath): ?>
+                    <?= $form->field($productModel, 'lazyImageUrl')->hiddenInput(['value' => $item->imagePath])->label(false); ?>
+                <?php endif; ?>
                 <?php if ($product = \app\modules\catalog\models\entity\Product::findOneByCode($item->code)) $product->name . ' Уже существует'; ?>
             </div>
         <?php endforeach; ?>
