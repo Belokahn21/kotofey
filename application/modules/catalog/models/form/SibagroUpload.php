@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\form;
 
 use app\modules\catalog\models\entity\virtual\SibagroElement;
 use app\modules\site\models\tools\Debug;
+use app\modules\vendors\models\entity\Vendor;
 use Sunra\PhpSimple\HtmlDomParser;
 use yii\base\Model;
 use yii\web\UploadedFile;
@@ -33,10 +34,10 @@ class SibagroUpload extends Model
 //        $content = mb_convert_encoding($content, "ISO-8859-1", "utf-8");
         @$dom->loadHTML($content);
         $xpath = new \DOMXPath($dom);
-        $items = $xpath->query("//tr[@class='popoverp']");
+        $sibagroElements = $xpath->query("//tr[@class='popoverp']");
 
 
-        foreach ($items as $item) {
+        foreach ($sibagroElements as $item) {
             $name = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//a[@class='product_name']");
             $code = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//td[@class='product_code']");
             $price = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//td[@class='lead']");
@@ -47,10 +48,11 @@ class SibagroUpload extends Model
             $sibEl->name = $this->getValue($name->item(0));
             $sibEl->code = $this->getValue($code->item(0));
             $sibEl->price = $price;
+            $sibEl->vendorId = Vendor::VENDOR_ID_SIBAGRO;
 
 
-            Debug::p($price);
-            exit();
+//            Debug::p($price);
+//            exit();
 
             $items[] = $sibEl;
         }

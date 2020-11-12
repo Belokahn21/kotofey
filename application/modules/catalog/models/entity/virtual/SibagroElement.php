@@ -11,12 +11,14 @@ class SibagroElement extends Model
     public $price;
     public $code;
     public $imagePath;
+    public $vendorId;
     public $weight;
 
     public function rules()
     {
         return [
-            [['name', 'price', 'code', 'imagePath', 'weight'], 'string']
+            [['name', 'price', 'code', 'imagePath', 'weight'], 'string'],
+            [['vendorId'], 'integer']
         ];
     }
 }
