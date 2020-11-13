@@ -27,9 +27,16 @@ class UpdateSibagroController extends Controller
                     $obj = new ProductFromSibagoForm();
                     $obj->scenario = ProductFromSibagoForm::SCENATIO_SIBAGRO_SAVE;
                     $obj->setAttributes($datum);
-                    if (!$obj->validate() || !$obj->save()) {
-                        Debug::p($obj->getErrors());
+                    if (Product::findOneByCode($this->code)) {
+                        if (!$obj->validate() || !$obj->update()) {
+                            Debug::p($obj->getErrors());
+                        }
+                    } else {
+                        if (!$obj->validate() || !$obj->save()) {
+                            Debug::p($obj->getErrors());
+                        }
                     }
+
                 }
             }
 
