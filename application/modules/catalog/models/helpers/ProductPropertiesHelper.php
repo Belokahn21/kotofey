@@ -30,7 +30,7 @@ class ProductPropertiesHelper
         return false;
     }
 
-    public static function getAllProperties($product_id)
+    public static function getAllProperties($product_id, $properties = array())
     {
         $out = [];
         $cache = \Yii::$app->cache;
@@ -39,7 +39,11 @@ class ProductPropertiesHelper
 //            return ProductPropertiesValues::find()->where(['product_id' => $product_id])->all();
 //        });
 
-        $values = ProductPropertiesValues::find()->where(['product_id' => $product_id])->all();
+        $values = ProductPropertiesValues::find()->where(['product_id' => $product_id]);
+
+        if ($properties) $values->andWhere(['property_id' => $properties]);
+
+        $values = $values->all();
 
         if (!$values) return false;
 

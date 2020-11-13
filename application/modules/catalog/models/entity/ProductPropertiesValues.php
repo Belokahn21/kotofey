@@ -56,9 +56,8 @@ class ProductPropertiesValues extends ActiveRecord
                 return InformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one();
             });
 
-            if ($element) {
-                return $element->name;
-            }
+            if ($element) return $element->name;
+
         } else {
             return $this->value;
         }
