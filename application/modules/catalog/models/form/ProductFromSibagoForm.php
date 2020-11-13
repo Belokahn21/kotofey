@@ -71,6 +71,8 @@ class ProductFromSibagoForm extends Product
             if (!$media->validate() or !$media->save())
                 Debug::p($media->getErrors());
 
+            $this->media_id = $media->id;
+
         }
 
         return Product::beforeSave($insert);
