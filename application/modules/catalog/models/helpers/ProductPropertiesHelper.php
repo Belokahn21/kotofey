@@ -35,13 +35,13 @@ class ProductPropertiesHelper
         $out = [];
         $cache = \Yii::$app->cache;
 
-        $values = $cache->getOrSet(sprintf('gap:%s', $product_id), function () use ($product_id) {
-            return ProductPropertiesValues::find()->where(['product_id' => $product_id])->all();
-        });
+//        $values = $cache->getOrSet(sprintf('gap:%s', $product_id), function () use ($product_id) {
+//            return ProductPropertiesValues::find()->where(['product_id' => $product_id])->all();
+//        });
 
-        if(!$values){
-            return false;
-        }
+        $values = ProductPropertiesValues::find()->where(['product_id' => $product_id])->all();
+
+        if (!$values) return false;
 
         foreach ($values as $value) {
             $out[$value->property->id] = $value->getFinalValue();
