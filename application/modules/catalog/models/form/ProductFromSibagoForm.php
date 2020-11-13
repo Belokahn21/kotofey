@@ -37,7 +37,8 @@ class ProductFromSibagoForm extends Product
 
     public function beforeSave($insert)
     {
-        if (!empty($this->lazyImageUrl) && !empty($this->methodSave)) {
+        $product = Product::findOneByCode($this->code);
+        if (!empty($this->lazyImageUrl) && !empty($this->methodSave) && empty($product->media_id)) {
             $file = file_get_contents($this->lazyImageUrl);
 
             $path = parse_url($this->lazyImageUrl, PHP_URL_PATH);
@@ -68,8 +69,13 @@ class ProductFromSibagoForm extends Product
             if ($this->methodSave == Media::LOCATION_CDN) $media->json_cdn_data = Json::encode($cdnData);
 
 
-            if (!$media->validate() or !$media->save())
-                Debug::p($media->getErrors());
+            if (Product::findOneByCode($this->code)) {
+                if (!$media->validate() or !$media->save())
+                    Debug::p($media->getErrors());
+            } else {
+                if (!$media->validate() or !$media->update())
+                    Debug::p($media->getErrors());
+            }
 
             $this->media_id = $media->id;
 
