@@ -16,7 +16,7 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
 ?>
 
 <?php if ($models): ?>
-    <div class="page-title__group is-column">
+    <div class="page-title__group">
         <h2 class="page-title">Новинки недели</h2>
         <a class="page-title__link" href="/catalog/">Все предложения</a>
     </div>
