@@ -50,7 +50,11 @@ class ProductFromSibagoForm extends Product
 
             file_put_contents($pathToTmpImage, $file);
 
-            @chmod($pathToTmpImage, '0777');
+
+            if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            } else {
+                @chmod($pathToTmpImage, '777');
+            }
 
 
             if ($this->methodSave == Media::LOCATION_CDN) $cdnData = \Yii::$app->CDN->uploadImage($pathToTmpImage);
