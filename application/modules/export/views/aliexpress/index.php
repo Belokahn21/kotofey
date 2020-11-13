@@ -41,6 +41,7 @@ $module = Yii::$app->getModule('export');
             <?php foreach ($offers as $offer): ?>
                 <?php if ($offer->vendor_id == Vendor::VENDOR_ID_LUKAS and $offer->purchase < 5000) continue; ?>
                 <?php $properties = ProductPropertiesHelper::getAllProperties($offer->id, [2, 16, 17, 18]); ?>
+                <?php if (!array_key_exists(2, $properties)) continue; ?>
                 <?php if (!array_key_exists(16, $properties) or !array_key_exists(17, $properties) or !array_key_exists(18, $properties)) continue; ?>
                 <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
                     <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>

@@ -45,10 +45,11 @@ class ProductPropertiesHelper
 
         $values = $values->all();
 
-        if (!$values) return false;
 
-        foreach ($values as $value) {
-            $out[$value->property->id] = $value->getFinalValue();
+        if ($values) {
+            foreach ($values as $value) {
+                $out[$value->property->id] = $value->getFinalValue();
+            }
         }
 
         return $out;
