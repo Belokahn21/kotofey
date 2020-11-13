@@ -25,7 +25,7 @@ class UpdateSibagroController extends Controller
             if ($data = \Yii::$app->request->post('ProductFromSibagoForm')) {
                 foreach ($data as $datum) {
                     $obj = new ProductFromSibagoForm();
-                    $obj->scenario = ProductFromSibagoForm::SCENARIO_NEW_PRODUCT;
+                    $obj->scenario = ProductFromSibagoForm::SCENATIO_SIBAGRO_SAVE;
                     $obj->setAttributes($datum);
                     if (!$obj->validate() || !$obj->save()) {
                         Debug::p($obj->getErrors());

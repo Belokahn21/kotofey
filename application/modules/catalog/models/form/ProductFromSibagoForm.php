@@ -5,22 +5,29 @@ namespace app\modules\catalog\models\form;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\media\models\entity\Media;
+use app\modules\site\models\tools\Debug;
+use yii\helpers\Json;
 
 class ProductFromSibagoForm extends Product
 {
     public $lazyImageUrl;
     public $methodSave;
 
+    const SCENATIO_SIBAGRO_SAVE = 'sibagro';
+
     public function rules()
     {
-        return array_merge(Product::rules(), [
-            ['methodSave', 'safe']
-        ]);
+        return [
+            [['name', 'code', 'lazyImageUrl', 'methodSave'], 'string'],
+            [['price', 'discount_price', 'count', 'media_id'], 'integer']
+        ];
     }
 
     public function scenarios()
     {
-        return array_merge(Product::scenarios(), Product::scenarios()[Product::SCENARIO_NEW_PRODUCT] + ['methodSave']);
+        return [
+            self::SCENATIO_SIBAGRO_SAVE => ['name', 'code', 'lazyImageUrl', 'methodSave', 'price', 'discount_price', 'count', 'media_id']
+        ];
     }
 
     public static function tableName()
@@ -31,7 +38,6 @@ class ProductFromSibagoForm extends Product
     public function beforeSave($insert)
     {
         if (!empty($this->lazyImageUrl) && !empty($this->methodSave)) {
-            exit();
             $file = file_get_contents($this->lazyImageUrl);
 
             $path = parse_url($this->lazyImageUrl, PHP_URL_PATH);
@@ -44,23 +50,20 @@ class ProductFromSibagoForm extends Product
 
             file_put_contents($pathToTmpImage, $file);
 
+
+            if ($this->methodSave == Media::LOCATION_CDN) $cdnData = \Yii::$app->CDN->uploadImage($pathToTmpImage);
+            if ($this->methodSave == Media::LOCATION_SERVER) move_uploaded_file($pathToTmpImage, \Yii::getAlias("@web/upload/$image"));
+
             $media = new Media();
             $media->path = $pathToTmpImage;
             $media->name = $image;
             $media->type = $this->methodSave;
-
-            if ($media->validate() && $media->save()) {
-                if ($this->methodSave == Media::LOCATION_CDN) {
-                    \Yii::$app->CDN->uploadImage($pathToTmpImage);
-                    unlink($pathToTmpImage);
-                    return true;
-                }
+            $media->location = $this->methodSave;
+            if ($this->methodSave == Media::LOCATION_CDN) $media->json_cdn_data = Json::encode($cdnData);
 
 
-                if ($this->methodSave == Media::LOCATION_SERVER) {
-                    return move_uploaded_file($pathToTmpImage, \Yii::getAlias("@web/upload/$image"));
-                }
-            }
+            if (!$media->validate() or !$media->save())
+                Debug::p($media->getErrors());
 
         }
 
