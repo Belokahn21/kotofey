@@ -19,14 +19,14 @@ class ProductFromSibagoForm extends Product
     {
         return [
             [['name', 'code', 'lazyImageUrl', 'methodSave'], 'string'],
-            [['price', 'discount_price', 'count', 'media_id'], 'integer']
+            [['price', 'discount_price', 'count', 'media_id', 'vitrine', 'vendor_id'], 'integer']
         ];
     }
 
     public function scenarios()
     {
         return [
-            self::SCENATIO_SIBAGRO_SAVE => ['name', 'code', 'lazyImageUrl', 'methodSave', 'price', 'purchase', 'count', 'media_id']
+            self::SCENATIO_SIBAGRO_SAVE => ['name', 'code', 'lazyImageUrl', 'methodSave', 'price', 'purchase', 'count', 'media_id', 'vitrine', 'vendor_id']
         ];
     }
 
