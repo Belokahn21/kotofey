@@ -15,11 +15,11 @@ class AliexpressController extends Controller
     {
         $categories = Category::find()->all();
         $offers = Product::find()
-            ->rightJoin('product_properties_values as ppv', 'ppv.product_id = product.id')
+//            ->rightJoin('product_properties_values as ppv', 'ppv.product_id = product.id')
             ->where(['product.status_id' => Product::STATUS_ACTIVE])
 //            ->andWhere(['product.is_ali' => 1])
-            ->andWhere(['in', 'ppv.property_id', [2]])
-            ->andWhere(['is not', 'ppv.value', null]);
+//            ->andWhere(['in', 'ppv.property_id', [2]])
+//            ->andWhere(['is not', 'ppv.value', null]);
 
         $offers = $offers->all();
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
