@@ -37,7 +37,7 @@ $this->title = 'Обновить прайсы по HTML';
                 <div class="col-2"><?= $form->field($productModel, '[' . $i . ']vendor_id')->dropDownList(ArrayHelper::map(Vendor::find()->all(), 'id', 'name')); ?></div>
                 <div class="col-2"><?= $form->field($productModel, '[' . $i . ']purchase')->textInput(['value' => $item->price]); ?></div>
                 <div class="col-1"><?= $form->field($productModel, '[' . $i . ']price')->textInput(['value' => $item->price + round($item->price * 0.3)]); ?></div>
-                <div class="col-2"><?= $form->field($productModel, '[' . $i . ']methodSave')->checkboxList([
+                <div class="col-2"><?= $form->field($productModel, '[' . $i . ']methodSave')->dropDownList([
                         Media::LOCATION_SERVER => Media::LOCATION_SERVER,
                         Media::LOCATION_CDN => Media::LOCATION_CDN
                     ], ['value' => Media::LOCATION_CDN]); ?></div>

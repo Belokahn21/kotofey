@@ -5,7 +5,6 @@ namespace app\modules\catalog\models\form;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\media\models\entity\Media;
-use app\modules\site\models\tools\Debug;
 
 class ProductFromSibagoForm extends Product
 {
@@ -17,6 +16,11 @@ class ProductFromSibagoForm extends Product
         return array_merge(Product::rules(), [
             ['methodSave', 'safe']
         ]);
+    }
+
+    public function scenarios()
+    {
+        return array_merge(Product::scenarios(), Product::scenarios()[Product::SCENARIO_NEW_PRODUCT] + ['methodSave']);
     }
 
     public static function tableName()
