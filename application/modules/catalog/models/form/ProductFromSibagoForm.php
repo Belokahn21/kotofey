@@ -26,7 +26,7 @@ class ProductFromSibagoForm extends Product
     public function scenarios()
     {
         return [
-            self::SCENATIO_SIBAGRO_SAVE => ['name', 'code', 'lazyImageUrl', 'methodSave', 'price', 'discount_price', 'count', 'media_id']
+            self::SCENATIO_SIBAGRO_SAVE => ['name', 'code', 'lazyImageUrl', 'methodSave', 'price', 'purchase', 'count', 'media_id']
         ];
     }
 
@@ -49,6 +49,8 @@ class ProductFromSibagoForm extends Product
             $pathToTmpImage = \Yii::getAlias("@app/tmp/$image");
 
             file_put_contents($pathToTmpImage, $file);
+
+            @chmod($pathToTmpImage, '0777');
 
 
             if ($this->methodSave == Media::LOCATION_CDN) $cdnData = \Yii::$app->CDN->uploadImage($pathToTmpImage);
