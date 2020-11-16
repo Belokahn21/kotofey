@@ -17,8 +17,8 @@ class AliexpressController extends Controller
         $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE]);
 
 
-//        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-//        \Yii::$app->response->headers->add('Content-Type', 'text/xml');
+        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+        \Yii::$app->response->headers->add('Content-Type', 'text/xml');
 
 
         $response = $this->renderPartial('index', [
