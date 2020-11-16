@@ -27,7 +27,8 @@
     "yiisoft/yii2-imagine": "^2.2",
     "bizley/migration": "^3.6",
     "sunra/php-simple-html-dom-parser": "1.5.2",
-    "phpoffice/phpspreadsheet": "^1.12"
+    "phpoffice/phpspreadsheet": "^1.12",
+    "mihaildev/yii2-ckeditor": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

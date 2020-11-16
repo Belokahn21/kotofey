@@ -113,7 +113,7 @@ $this->title = Title::showTitle('Товары');
             'value' => function ($model) {
                 $category = Category::findOne($model->category_id);
                 if ($category) {
-                    return Html::a($category->name, '/admin/category/' . $model->category_id . '/', ['target' => '_blank']);
+                    return Html::a($category->name, Url::to(['/admin/catalog/product-category-backend/index', 'id' => $model->category_id]), ['target' => '_blank']);
                 }
                 return "Без категории";
             }
