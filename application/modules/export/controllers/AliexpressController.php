@@ -14,15 +14,15 @@ class AliexpressController extends Controller
     public function actionIndex()
     {
         $categories = Category::find()->all();
-        $offers = Product::find()->where(['product.status_id' => Product::STATUS_ACTIVE]);
+        $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE]);
 
-        $offers = $offers->all();
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-        \Yii::$app->response->headers->add('Content-Type', 'text/xml');
+
+//        \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
+//        \Yii::$app->response->headers->add('Content-Type', 'text/xml');
 
 
         $response = $this->renderPartial('index', [
-            'offers' => $offers,
+            'offersBatch' => $offers,
             'categories' => $categories
         ]);
 
