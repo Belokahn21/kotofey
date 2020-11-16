@@ -82,6 +82,8 @@ class Product extends \yii\db\ActiveRecord
 
             ['barcode', 'string', 'max' => 255],
 
+            ['name', 'string', 'max' => 128],
+
             ['description', 'string', 'min' => 10],
 
             [['vitrine', 'is_ali'], 'default', 'value' => 0],
