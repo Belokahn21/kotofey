@@ -14,7 +14,7 @@ $module = Yii::$app->getModule('export');
  * @var $categories \app\modules\catalog\models\entity\Category[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<? xml version = "1.0" encoding = "UTF-8"?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>
@@ -63,7 +63,7 @@ $module = Yii::$app->getModule('export');
                         <picture><?= ProductHelper::getImageUrl($offer); ?></picture>
                         <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                         <?php if (!empty($offer->description)): ?>
-                            <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
+                            <description><?= htmlspecialchars(strip_tags(\yii\helpers\StringHelper::truncate($offer->description, 128))); ?></description>
                         <?php endif; ?>
                         <pickup>false</pickup>
                         <store>false</store>
