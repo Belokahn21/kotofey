@@ -33,20 +33,8 @@ $this->title = Title::showTitle("Пользователи"); ?>
     'emptyText' => 'Пользователи отсутствуют',
     'columns' => [
         'id',
+        'phone',
         'email',
-        [
-            'attribute' => 'sex',
-            'value' => function ($model) {
-                if (!$sex = UserSex::findOne($model->sex)) {
-                    $sex = new UserSex();
-                    $sex->name = 'не указан';
-                }
-                return $sex->name;
-            }
-        ],
-        'first_name',
-        'name',
-        'last_name',
         [
             'label' => 'Бонусы',
             'format' => 'raw',
