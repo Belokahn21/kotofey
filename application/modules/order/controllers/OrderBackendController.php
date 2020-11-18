@@ -321,11 +321,11 @@ class OrderBackendController extends Controller
         $line++;
 
         $sheet->setCellValue("F{$line}", 'Итого');
-        $sheet->setCellValue("G{$line}", OrderHelper::orderSummary($order->id));
+        $sheet->setCellValue("G{$line}", OrderHelper::orderSummary($order));
 
         $line = $line + 2;
-        $result = (new \MessageFormatter('ru-RU', '{n, spellout}'))->format(['n' => OrderHelper::orderSummary($order->id)]);
-        $sheet->setCellValue("A{$line}", Yii::$app->i18n->format(sprintf("Всего отпущено на сумму %s {n, plural, =0{Пусто} =1{рубль} one{рубль} few{рублей} many{рублей} other{Ошибка}}", $result), ['n' => OrderHelper::orderSummary($order->id)], 'ru_RU'));
+        $result = (new \MessageFormatter('ru-RU', '{n, spellout}'))->format(['n' => OrderHelper::orderSummary($order)]);
+        $sheet->setCellValue("A{$line}", Yii::$app->i18n->format(sprintf("Всего отпущено на сумму %s {n, plural, =0{Пусто} =1{рубль} one{рубль} few{рублей} many{рублей} other{Ошибка}}", $result), ['n' => OrderHelper::orderSummary($order)], 'ru_RU'));
         $sheet->mergeCells("A{$line}:B{$line}");
 
         $line = $line + 2;

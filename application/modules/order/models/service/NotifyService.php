@@ -27,7 +27,7 @@ class NotifyService
             $vk = new VKApiClient();
             if ($access_token) {
                 $order = Order::findOne($order_id);
-                $orderSumm = OrderHelper::orderSummary($order->id);
+                $orderSumm = OrderHelper::orderSummary($order);
                 $orderSumm = Price::format($orderSumm);
                 $orderDateDelivery = OrderDate::findOne(['order_id' => $order->id]);
                 $detailUrlPage = Url::to(['/admin/order/order-backend/update', 'id' => $order->id], true);

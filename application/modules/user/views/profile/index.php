@@ -124,7 +124,7 @@ $this->title = Title::showTitle('Личный кабинет');
                                     <div class="profile-orders__number">#<?= $order->id; ?></div>
                                     <div class="profile-orders__date"><?= date('d.m.Y', $order->created_at) ?></div>
                                     <div class="profile-orders__status"><?= OrderHelper::getStatus($order); ?></div>
-                                    <div class="profile-orders__summary"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></div>
+                                    <div class="profile-orders__summary"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
                                     <div class="profile-orders__action">
                                         <?= Html::a('Подробнее', '/profile/order/' . $order->id . '/', ['class' => 'profile-orders__link']); ?>
                                     </div>

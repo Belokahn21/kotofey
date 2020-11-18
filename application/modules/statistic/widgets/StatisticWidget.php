@@ -20,7 +20,7 @@ class StatisticWidget extends Widget
         $logs = Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(500)->all();
 
 
-        $ordersNow = Order::find()->leftJoin('order_date', 'orders.id=order_date.order_id')
+        $ordersNow = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')
             ->where(['order_date.date' => \Yii::$app->request->get('deliveryDate') ? \Yii::$app->request->get('deliveryDate') : date('d.m.Y')])
             ->andWhere(['is_close' => false])
             ->andWhere(['is_cancel' => false]);

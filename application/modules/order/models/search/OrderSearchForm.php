@@ -13,7 +13,7 @@ class OrderSearchForm extends Order
 
     public static function tableName()
     {
-        return "orders";
+        return Order::tableName();
     }
 
     public function rules()

@@ -79,7 +79,7 @@ $this->title = Title::showTitle("Заказы");
             'attribute' => 'cash',
             'format' => 'raw',
             'value' => function ($model) {
-                $sum = OrderHelper::orderSummary($model->id);
+                $sum = OrderHelper::orderSummary($model);
                 $marge = OrderHelper::marginality($model->id);
 
                 if ($marge > 0) {

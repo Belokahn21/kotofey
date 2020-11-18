@@ -81,7 +81,7 @@ use yii\helpers\Url;
 
                     <h4>Финансы</h4>
                     <p>Закуп: <?= OrderHelper::orderPurchase($model->id); ?></p>
-                    <p>Сумма заказа: <?= OrderHelper::orderSummary($model->id); ?></p>
+                    <p>Сумма заказа: <?= OrderHelper::orderSummary($model); ?></p>
 
                     <?php if ($model->promocodeEntity): ?>
                         <h4>Промокод</h4>
@@ -179,6 +179,9 @@ use yii\helpers\Url;
                 </div>
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'promocode')->textInput(['placeholder' => 'Промокод'])->label(false); ?>
+                </div>
+                <div class="w-25 p-1">
+                    <?= $form->field($model, 'discount')->textInput(['placeholder' => 'Скидка'])->label(false); ?>
                 </div>
             </div>
         </div>

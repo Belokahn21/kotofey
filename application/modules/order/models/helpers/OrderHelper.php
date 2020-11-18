@@ -41,11 +41,30 @@ class OrderHelper
         return $out;
     }
 
-    public static function orderSummary($order_id)
+    public static function orderSummary(Order $order)
     {
         $summ = 0;
-        foreach (OrdersItems::find()->where(['order_id' => $order_id])->all() as $item) $summ += $item->count * ($item->discount_price ? $item->discount_price : $item->price);
+        foreach ($order->items as $item) $summ += $item->count * ($item->discount_price ? $item->discount_price : $item->price);
+
+        $summ = self::applyDiscount($order, $summ);
+
         return $summ;
+    }
+
+    public static function applyDiscount(Order $order, $summ)
+    {
+        if (!$order->discount) return $summ;
+
+        if (is_numeric($order->discount)) return $summ += $order->discount;
+
+
+        if (explode('%', $order->discount)) {
+            $tmpDiscount = str_replace('%', '', $order->discount);
+
+            return $summ + round($summ * ($tmpDiscount / 100));
+        }
+
+
     }
 
     public static function getStatus(Order $order)
@@ -75,11 +94,6 @@ class OrderHelper
     public static function isFirstOrder($user_id)
     {
         return Order::find()->where(['user_id' => $user_id])->count() == 1;
-    }
-
-    public static function tableName()
-    {
-        return "order";
     }
 
     public static function income($order_id = null)

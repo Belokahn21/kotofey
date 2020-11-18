@@ -38,6 +38,7 @@ use yii\db\ActiveRecord;
  * @property string $email
  * @property string $phone
  * @property string $ip
+ * @property string $discount
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -55,17 +56,12 @@ class Order extends ActiveRecord
     public $minusStock;
     public $plusStock;
 
-    public static function tableName()
-    {
-        return "orders";
-    }
-
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_DEFAULT => ['discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
         ];
     }
 
@@ -98,7 +94,7 @@ class Order extends ActiveRecord
             [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
             ['email', 'string', 'max' => 255, 'tooLong' => '{attribute} не должен содержать больше 255 символов'],
 
-            ['postalcode', 'string', 'max' => 15, 'tooLong' => '{attribute} не должен содержать больше 15 символов'],
+            [['discount', 'postalcode'], 'string', 'max' => 15, 'tooLong' => '{attribute} не должен содержать больше 15 символов'],
 
             [['comment', 'notes'], 'string'],
             [['number_appartament', 'number_home'], 'string', 'max' => 10, 'tooLong' => '{attribute} не должен содержать больше 10 символов'],
@@ -182,6 +178,7 @@ class Order extends ActiveRecord
             'number_appartament' => 'Квартира',
             'minusStock' => 'Списать товары',
             'plusStock' => 'Вернуть товары',
+            'discount' => 'Скидка',
         ];
     }
 
@@ -200,7 +197,7 @@ class Order extends ActiveRecord
 
     public function hasAccess()
     {
-        return $this->phone == \Yii::$app->user->identity->phone or $this->user_id == \Yii::$app->user->identity->id;
+        return $this->phone == \Yii::$app->user->identity->phone || $this->user_id == \Yii::$app->user->identity->id || \Yii::$app->user->identity->id == 1;
     }
 
     public function getBilling()

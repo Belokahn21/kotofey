@@ -24,7 +24,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Заказ №' . $order->id, 'url
                     </li>
                     <li class="detail-info__item">
                         <div class="detail-info__title">Сумма заказа</div>
-                        <div class="detail-info__value"><?= Price::format(OrderHelper::orderSummary($order->id)); ?> <?= Currency::getInstance()->show(); ?></div>
+                        <div class="detail-info__value"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
                     </li>
                     <li class="detail-info__item">
                         <div class="detail-info__title">Статус</div>
