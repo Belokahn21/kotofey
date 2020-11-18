@@ -71,7 +71,7 @@ $this->title = Title::showTitle("Пользователи"); ?>
         [
             'label' => 'Количество заказов',
             'value' => function ($model) {
-                return Order::find()->where(['user_id' => $model->id])->count();
+                return Order::find()->where(['phone' => $model->phone])->count();
             }
         ],
         [
