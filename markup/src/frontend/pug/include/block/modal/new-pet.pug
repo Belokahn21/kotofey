@@ -26,11 +26,23 @@
                                 input(type="radio" name="type" value="bird")#select-pet-bird
                                 label(for="select-pet-bird").select-pet__icon
                                     i.fas.fa-crow
-                    .site-form__item
-                        label.site-form__label(for="site-form-namepet") Кличка питомца
-                        input.site-form__input#site-form-namepet(type="text" placeholder="Кличка питомца")
-                    .site-form__item
-                        label.site-form__label(for="site-form-birthday") День рождения питомца
-                        input.site-form__input#site-form-birthday(type="text" placeholder="День рождения питомца")
+                    .site-form__group-row
+                        .site-form__side
+                            .site-form__item
+                                label.site-form__label(for="site-form-namepet") Кличка питомца
+                                input.site-form__input#site-form-namepet(type="text" placeholder="Кличка питомца")
+                            .site-form__item
+                                label.site-form__label(for="site-form-birthday") День рождения питомца
+                                input.site-form__input.js-datepicker#site-form-birthday(type="text" placeholder="День рождения питомца")
+                            .site-form__item
+                                label.site-form__label(for="site-form-sex") Пол питомца
+                                select.site-form__select#site-form-sex
+                                    option Мальчик
+                                    option Девочка
+                        .site-form__side
+                            label.site-form__label.noUpload(for="site-form-pet-avatar")
+                            .site-form__item
+                                input(type='file' name='avatar').site-form__item#site-form-pet-avatar
+                            p.select-pet__note Загрузить фото питомца
                     .modal-footer
                         button.site-form__button(type='button') Добавить
