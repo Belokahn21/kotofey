@@ -14,8 +14,8 @@ class NewsController extends Controller
 {
     public function actionIndex()
     {
-        $models = News::find()->orderBy(['created_at' => 'DESC'])->all();
-        $categories = NewsCategory::find()->orderBy(['sort' => 'ASC'])->all();
+        $models = News::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $categories = NewsCategory::find()->orderBy(['sort' => SORT_ASC])->all();
 
         return $this->render('index', [
             'models' => $models,
@@ -44,12 +44,10 @@ class NewsController extends Controller
         OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
 
         if (!empty($new->preview_image)) {
-            OpenGraph::image(sprintf('%s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
+            OpenGraph::image(sprintf(' % s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
         }
 
-        return $this->render('view', [
-            'model' => $new
-        ]);
+        return $this->render('view', ['model' => $new]);
 
     }
 }

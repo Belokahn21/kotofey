@@ -10,6 +10,7 @@ use app\modules\catalog\widgets\LastWeekProducts\LastWeekProducts;
 use app\modules\catalog\widgets\DiscountItems\DiscountItemsWidget;
 use app\modules\order\widgets\many_purchase\ManyPurchasedGoods;
 use app\modules\catalog\widgets\CanNowBuy\CanNowBuyWidget;
+use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site\widgets\Gruming\GrumingWidget;
 use app\models\tool\seo\Title;
@@ -56,6 +57,9 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     <?= GrumingWidget::widget(); ?>
 <?php endif; ?>
 <div class="page-container">
+    <?php /*= LastNewsWidget::widget([
+        'limit' => 3
+    ]) */?>
     <?= InstagramMediaWidget::widget(); ?>
     <?= LastWeekProducts::widget(); ?>
 </div>
