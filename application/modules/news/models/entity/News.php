@@ -106,6 +106,11 @@ class News extends ActiveRecord
         return "/news/" . $this->slug . "/";
     }
 
+    public function getCategoryModel()
+    {
+        return $this->hasOne(NewsCategory::className(), ['id' => 'category']);
+    }
+
     public static function findBySlug($slug)
     {
         return static::findOne(['slug' => $slug]);

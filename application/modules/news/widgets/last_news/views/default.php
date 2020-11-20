@@ -1,27 +1,21 @@
 <?php
 
 use yii\helpers\Url;
+use app\modules\news\models\tools\NewsHelper;
 
 /* @var $news \app\modules\news\models\entity\News[] */
 ?>
-<div class="index-news__wrap">
-    <h2 class="homepage-providers__title">Интересные новости</h2>
-    <ul class="index-news">
-        <?php foreach ($news as $new): ?>
-            <li class="index-news__item">
-                <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
-                    <img src="/upload/<?= $new->preview_image; ?>" class="index-news__image">
-                </a>
-                <a href="<?= Url::to(['/news/' . $new->slug . '/']); ?>" class="index-news__link">
-                    <h3 class="index-news__title"><?= $new->title; ?></h3>
-                </a>
-                <div class="index-news__preview">
-                    <?= $new->preview; ?>
-                </div>
-            </li>
-        <?php endforeach; ?>
-    </ul>
-    <div class="index-news__control">
-        <a class="index-news__control-link" href="<?= Url::to(['site/news']); ?>">Читать больше</a>
-    </div>
+<div class="page-title__group">
+    <h2 class="page-title">Последние новости</h2><a class="page-title__link" href="<?= Url::to(['/news/']) ?>">Все новости</a>
+</div>
+<div class="last-news">
+    <?php foreach ($news as $model): ?>
+        <div class="last-news__item">
+            <div class="label"><?= $model->categoryModel->name; ?></div>
+            <img alt="<?= $model->title; ?>" class="last-news__image" src="<?= NewsHelper::getPreviewImageUrl($model); ?>"/>
+            <div class="last-news__title"><?= $model->title; ?></div>
+            <div class="last-news__preview"><?= $model->preview; ?></div>
+            <a class="last-news__go-detail" href="<?= NewsHelper::getDetailUrl($model); ?>">Подробнее</a>
+        </div>
+    <?php endforeach; ?>
 </div>

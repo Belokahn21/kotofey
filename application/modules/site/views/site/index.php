@@ -57,9 +57,9 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     <?= GrumingWidget::widget(); ?>
 <?php endif; ?>
 <div class="page-container">
-    <?php /*= LastNewsWidget::widget([
+    <?= LastNewsWidget::widget([
         'limit' => 3
-    ]) */?>
+    ]) ?>
     <?= InstagramMediaWidget::widget(); ?>
     <?= LastWeekProducts::widget(); ?>
 </div>
