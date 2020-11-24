@@ -25,6 +25,7 @@ $config = [
 //                ],
 
             ],
+            'dirMode' => 0755
         ],
         'imageCompress' => [
             'class' => 'app\modules\media\components\ImageCompress',
