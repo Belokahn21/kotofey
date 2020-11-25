@@ -56,9 +56,9 @@ if ($category) {
 
             <?php if ($subCategories): ?>
                 <ul class="aside-sub-categories">
-                    <?php foreach ($subCategories as $category): ?>
+                    <?php foreach ($subCategories as $subCategory): ?>
                         <li class="aside-sub-categories__item">
-                            <a class="aside-sub-categories__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a>
+                            <a class="aside-sub-categories__link" href="<?= CategoryHelper::getDetailUrl($subCategory); ?>"><?= $subCategory->name; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
