@@ -46,10 +46,6 @@ if ($category) {
     <div class="catalog-container">
         <aside class="left-siderbar">
 
-            <?= CatalogFilterWidget::widget([
-                'category' => $category
-            ]); ?>
-
             <?php if ($category): ?>
                 <?php $id = $category->id; ?>
             <?php else: ?>
@@ -67,6 +63,10 @@ if ($category) {
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
+
+            <?= CatalogFilterWidget::widget([
+                'category' => $category
+            ]); ?>
         </aside>
         <div class="catalog-wrap">
             <?= ProductSortWidget::widget(); ?>
