@@ -103,8 +103,8 @@ $product = Product::find();
                         <?php $now->add(new DateInterval('P1D')); ?>
                         <?php $tomorowDate = $now->format('d.m.Y') ?>
                         <div class="now-order-delivery-dates">
-                            <div class="now-order-delivery"><a href="?deliveryDate=<?= $nowDate; ?>"><?= $nowDate; ?></a></div>
-                            <div class="now-order-delivery"><a href="?deliveryDate=<?= $tomorowDate; ?>"><?= $tomorowDate; ?></a></div>
+                            <div class="now-order-delivery-dates__item"><a href="?deliveryDate=<?= $nowDate; ?>"><?= $nowDate; ?></a></div>
+                            <div class="now-order-delivery-dates__item"><a href="?deliveryDate=<?= $tomorowDate; ?>"><?= $tomorowDate; ?></a></div>
                         </div>
                         <?php if ($ordersNow): ?>
                             <ul class="now-order-delivery ">
