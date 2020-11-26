@@ -2,23 +2,39 @@
 
 namespace app\modules\content;
 
+use yii\helpers\Url;
+
 /**
  * content module definition class
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\content\controllers';
+    public $name = 'Контент';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
-
-        // custom initialization code goes here
     }
+
+
+    public function menuIndex()
+    {
+        return [
+            [
+                'name' => 'Слайдеры',
+                'url' => Url::to(),
+            ],
+            [
+                'name' => 'Изображения',
+                'url' => Url::to(),
+            ],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
 }

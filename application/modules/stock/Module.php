@@ -2,23 +2,33 @@
 
 namespace app\modules\stock;
 
+use yii\helpers\Url;
+
 /**
  * stock module definition class
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\stock\controllers';
+    private $name = 'Склады';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            [
+                'name' => 'Список складов',
+                'url' => Url::to(),
+            ],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

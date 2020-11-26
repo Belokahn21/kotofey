@@ -2,23 +2,35 @@
 
 namespace app\modules\news;
 
-/**
- * news module definition class
- */
+
+use yii\helpers\Url;
+
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\news\controllers';
+    private $name = 'Новости';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            [
+                'name' => 'Новости',
+                'url' => Url::to(),
+            ],
+            [
+                'name' => 'Разделы',
+                'url' => Url::to(),
+            ],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

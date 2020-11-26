@@ -2,23 +2,37 @@
 
 namespace app\modules\geo;
 
+use yii\helpers\Url;
+
 /**
  * geo module definition class
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\geo\controllers';
+    private $name = 'Гео-данные';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
 
         // custom initialization code goes here
+    }
+
+
+
+    public function menuIndex()
+    {
+        return [
+            [
+                'name' => 'Города',
+                'url' => Url::to(),
+            ],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
