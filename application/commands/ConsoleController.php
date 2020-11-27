@@ -4,6 +4,7 @@ namespace app\commands;
 
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
+use app\modules\order\models\entity\Order;
 use app\modules\settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
 use app\modules\vendors\models\entity\Vendor;
@@ -13,21 +14,35 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_HILLS])->andWhere(['like', 'name', 'sirius'])->all();
 
-        foreach ($products as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+        $out = 0;
+        $orders = Order::find()->where(['is_paid' => true, 'is_close' => true])->all();
 
-            MarkupHelpers::applyMarkup($product, 35);
-
-
-            if ($product->validate() && $product->update()) {
-                echo $product->name;
-                echo PHP_EOL;
-            } else {
-                Debug::p($product->getErrors());
+        foreach ($orders as $order) {
+            foreach ($order->items as $item) {
+                $out += $item->count * $item->purchase;
             }
         }
+
+        echo PHP_EOL;
+        echo $out;
+        echo PHP_EOL;
+
+//        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_HILLS])->andWhere(['like', 'name', 'sirius'])->all();
+//
+//        foreach ($products as $product) {
+//            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+//
+//            MarkupHelpers::applyMarkup($product, 35);
+//
+//
+//            if ($product->validate() && $product->update()) {
+//                echo $product->name;
+//                echo PHP_EOL;
+//            } else {
+//                Debug::p($product->getErrors());
+//            }
+//        }
 
 
 //        \Yii::$app->db->createCommand("
