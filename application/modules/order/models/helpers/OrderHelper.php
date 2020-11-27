@@ -21,7 +21,7 @@ class OrderHelper
     public static function rotate()
     {
         $out = 0;
-        $orders = Order::find()->all();
+        $orders = Order::find()->where(['is_paid' => true, 'is_close' => true])->all();
 
         foreach ($orders as $order) {
             $items = $order->items;
