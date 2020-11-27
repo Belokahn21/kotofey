@@ -15,34 +15,21 @@ class ConsoleController extends Controller
     public function actionRun($arg = null)
     {
 
-        $out = 0;
-        $orders = Order::find()->where(['is_paid' => true, 'is_close' => true])->all();
+        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_HILLS])->andWhere(['like', 'name', 'sirius'])->all();
 
-        foreach ($orders as $order) {
-            foreach ($order->items as $item) {
-                $out += $item->count * $item->purchase;
+        foreach ($products as $product) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+
+            MarkupHelpers::applyMarkup($product, 35);
+
+
+            if ($product->validate() && $product->update()) {
+                echo $product->name;
+                echo PHP_EOL;
+            } else {
+                Debug::p($product->getErrors());
             }
         }
-
-        echo PHP_EOL;
-        echo $out;
-        echo PHP_EOL;
-
-//        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_HILLS])->andWhere(['like', 'name', 'sirius'])->all();
-//
-//        foreach ($products as $product) {
-//            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-//
-//            MarkupHelpers::applyMarkup($product, 35);
-//
-//
-//            if ($product->validate() && $product->update()) {
-//                echo $product->name;
-//                echo PHP_EOL;
-//            } else {
-//                Debug::p($product->getErrors());
-//            }
-//        }
 
 
 //        \Yii::$app->db->createCommand("
