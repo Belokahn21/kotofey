@@ -18,6 +18,22 @@ class OrderHelper
         return empty($item->name) && empty($item->price) && empty($item->count);
     }
 
+    public static function rotate()
+    {
+        $out = 0;
+        $orders = Order::find()->all();
+
+        foreach ($orders as $order) {
+            $items = $order->items;
+
+            foreach ($items as $item) {
+                $out += $item->price * $item->count;
+            }
+        }
+
+        return $out;
+    }
+
     public static function orderPurchase($order_id)
     {
         $out = 0;

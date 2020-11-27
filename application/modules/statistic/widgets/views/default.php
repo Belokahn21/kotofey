@@ -47,6 +47,10 @@ $product = Product::find();
                             <div class="statistic-info__key">Прибыль</div>
                             <div class="statistic-info__value"><?= Price::format(OrderHelper::marginality()); ?><?= Currency::getInstance()->show(); ?></div>
                         </div>
+                        <div class="statistic-info__item">
+                            <div class="statistic-info__key">Оборот</div>
+                            <div class="statistic-info__value"><?= Price::format(OrderHelper::rotate()); ?><?= Currency::getInstance()->show(); ?></div>
+                        </div>
                     </div>
                 </div>
             </div>
