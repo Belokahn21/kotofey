@@ -28,7 +28,8 @@
     "bizley/migration": "^3.6",
     "sunra/php-simple-html-dom-parser": "1.5.2",
     "phpoffice/phpspreadsheet": "^1.12",
-    "mihaildev/yii2-ckeditor": "*"
+    "mihaildev/yii2-ckeditor": "*",
+    "ext-dom": "*"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",
