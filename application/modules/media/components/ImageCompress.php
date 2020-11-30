@@ -8,6 +8,7 @@ use yii\web\UploadedFile;
 
 class ImageCompress extends Component
 {
+    public $enable = false;
     public $apiKey;
     public $maxCompressCount;
     public $maxFileSize = 5000000;
@@ -19,8 +20,8 @@ class ImageCompress extends Component
 
     public function applyImage(UploadedFile $image)
     {
-        // Если по тарифу мы использовали все сжатия
-        if (\Tinify\compressionCount() >= $this->maxCompressCount) {
+        // Если по тарифу мы использовали все сжатия или вообще всё выключено
+        if (\Tinify\compressionCount() >= $this->maxCompressCount or !$this->enable) {
             return false;
         }
 
