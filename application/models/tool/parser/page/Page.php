@@ -5,6 +5,7 @@ namespace app\models\tool\parser\page;
 
 use app\modules\site\models\tools\Debug;
 use Exception;
+use yii\helpers\FileHelper;
 
 class Page
 {
@@ -27,10 +28,17 @@ class Page
     public function content($url_content)
     {
         $this->userAgent = 'Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/35.0.2309.372 Safari/537.36';
-//        $this->cookieFile = 'D:\OpenServer\domains\local.kotofey.store\application\web\cookie.txt';
-        $this->cookieFile = \Yii::getAlias("@webroot/cookie.txt");
-        chmod($this->cookieFile, 0777);
-        chown($this->cookieFile, 'www-data');
+        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+            $this->cookieFile = 'D:\OpenServer\domains\local.kotofey.store\application\web\cookie.txt';
+        } else {
+            $this->cookieFile = \Yii::getAlias("@webroot/cookie.txt");
+        }
+
+        if (file_exists($this->cookieFile)) {
+            chmod($this->cookieFile, 0777);
+            chown($this->cookieFile, 'www-data');
+        }
+
         $this->loginFormUrl = 'http://www.sat-altai.ru/';
         $this->loginActionUrl = 'http://www.sat-altai.ru/';
 

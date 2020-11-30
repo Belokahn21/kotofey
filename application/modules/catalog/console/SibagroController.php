@@ -36,6 +36,7 @@ class SibagroController extends Controller
         foreach ($products as $product) {
             $oldProduct = clone $product;
             $logger = new Logger();
+            $virProduct = null;
 
             $productUrl = SibagroTrade::getProductDetailByCode($product->code);
             $oldPercent = floor((($product->price - $product->purchase) / $product->purchase) * 100);
@@ -47,6 +48,11 @@ class SibagroController extends Controller
                 $virProduct = $provider->getInfo();
             } catch (\Exception $exception) {
                 $logger->saveMessage("Ошибка получения данных у товара с кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+            }
+
+            if ($virProduct === null) {
+                $logger->saveMessage("Ошибка получения данных у товара с кодом {$product->code} . Ошибка: товар не был получен от Поствщика. Экстренный выход.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                return false;
             }
 
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
