@@ -47,11 +47,11 @@ class SibagroController extends Controller
             try {
                 $virProduct = $provider->getInfo();
             } catch (\Exception $exception) {
-                $logger->saveMessage("Ошибка получения данных у товара с кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                $logger->saveMessage("Ошибка получения данных у товара с id {$product->id} кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
             }
 
             if ($virProduct === null) {
-                $logger->saveMessage("Ошибка получения данных у товара с кодом {$product->code} . Ошибка: товар не был получен от Поствщика. Экстренный выход.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                $logger->saveMessage("Ошибка получения данных у товара с id {$product->id} кодом {$product->code} . Ошибка: товар не был получен от Поствщика. Экстренный выход.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
                 return false;
             }
 
