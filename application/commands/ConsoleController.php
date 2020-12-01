@@ -15,12 +15,15 @@ class ConsoleController extends Controller
     public function actionRun($arg = null)
     {
 
-        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_SANABELLE])->all();
+        $products = Product::find()->where(['>','discount_price',0])->all();
+//        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_SANABELLE])->all();
 
         foreach ($products as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-            MarkupHelpers::applyMarkup($product, 25);
+//            MarkupHelpers::applyMarkup($product, 25);
+
+            $product->discount_price = 0;
 
 
             if ($product->validate() && $product->update()) {
