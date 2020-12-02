@@ -52,6 +52,7 @@ class SibagroController extends Controller
 
             if ($virProduct === null) {
                 $logger->saveMessage("Ошибка получения данных у товара с id {$product->id} кодом {$product->code} . Ошибка: товар не был получен от Поствщика. Экстренный выход.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                continue;
             }
 
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
