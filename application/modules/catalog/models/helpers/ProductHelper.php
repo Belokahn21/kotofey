@@ -46,18 +46,16 @@ class ProductHelper
 
     private static function getPercentTwoNums($a, $b)
     {
-        return round((($a - $b) / ($a + $b) / 2) * 100);
+        return round((($a - $b) / (($a + $b) / 2)) * 100);
 //        return round($big / $small * 100 - 100);
     }
 
-    public
-    static function setDiscount(Product &$model, $prcent)
+    public static function setDiscount(Product &$model, $prcent)
     {
         $model->discount_price = $model->price - round($model->price * ($prcent / 100));
     }
 
-    public
-    static function purchaseVirtual(array $products)
+    public static function purchaseVirtual(array $products)
     {
         $out = 0;
         /* @var $product Product */
@@ -68,8 +66,7 @@ class ProductHelper
         return $out;
     }
 
-    public
-    static function profitVirtual(array $products)
+    public static function profitVirtual(array $products)
     {
         $out = 0;
         /* @var $product Product */
@@ -80,8 +77,7 @@ class ProductHelper
         return $out;
     }
 
-    public
-    static function getImageUrl(Product $model, $isFull = false, $options = [])
+    public static function getImageUrl(Product $model, $isFull = false, $options = [])
     {
 
         if (Debug::isPageSpeed()) {
@@ -136,8 +132,7 @@ class ProductHelper
         return $url;
     }
 
-    public
-    static function getDetailUrl(Product $model, $isFull = false)
+    public static function getDetailUrl(Product $model, $isFull = false)
     {
         if ($isFull)
             return System::fullDomain() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
