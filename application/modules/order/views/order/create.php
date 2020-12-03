@@ -186,7 +186,7 @@ LIST;
                 <div class="checkout-reglament__title">Обратите внимание!</div>
                 <div class="checkout-reglament__text">
                     <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 час).</p>
-                    <p>Доставка бесплатная. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у наших операторов.</p>
+                    <p>Доставка бесплатная при заказе на сумму от 500 рублей. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у наших операторов.</p>
                     <p>Остались вопросы — <a href="mailto:<?= SiteSettings::findByCode('email')->value; ?>"><?= SiteSettings::findByCode('email')->value; ?></a> или <a href="tel:<?= SiteSettings::findByCode('phone_1')->value; ?>" class="js-phone-mask"><?= SiteSettings::findByCode('phone_1')->value; ?></a></p>
                 </div>
             </div>
