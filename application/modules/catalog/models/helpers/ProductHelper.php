@@ -46,7 +46,7 @@ class ProductHelper
 
     private static function getPercentTwoNums($a, $b)
     {
-        return round((($a - $b) / (($a + $b) / 2)) * 100);
+        return round(100 - ($b / 100) / $a);
 //        return round($big / $small * 100 - 100);
     }
 
