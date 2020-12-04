@@ -53,11 +53,9 @@ $module = Yii::$app->getModule('export');
                             <vendorCode><?= $offer->barcode ?></vendorCode>
                         <?php endif; ?>
                         <?php if ($offer->discount_price): ?>
-                            <price><?= $offer->discount_price; ?></price>
-                            <oldprice><?= $offer->price; ?></oldprice>
-                        <?php else: ?>
-                            <price><?= $offer->price; ?></price>
+                            <discountprice><?= $offer->discount_price; ?></discountprice>
                         <?php endif; ?>
+                        <price><?= $offer->price; ?></price>
                         <currencyId>RUB</currencyId>
                         <categoryId><?= $offer->category_id; ?></categoryId>
                         <picture><?= ProductHelper::getImageUrl($offer, false, ['width' => 800, 'height' => 800, 'crop' => 'fit']); ?></picture>
