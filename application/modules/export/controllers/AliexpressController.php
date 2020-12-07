@@ -13,6 +13,7 @@ class AliexpressController extends Controller
 {
     public function actionIndex()
     {
+        set_time_limit(0);
         $categories = Category::find()->all();
         $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE]);
 
