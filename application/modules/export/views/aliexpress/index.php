@@ -39,7 +39,7 @@ $module = Yii::$app->getModule('export');
         </delivery-options>
         <cpa>1</cpa>
         <offers>
-            <?php foreach ($offersBatch->batch(500) as $offers): ?>
+            <?php foreach ($offersBatch->batch(250) as $offers): ?>
                 <?php foreach ($offers as $offer): ?>
                     <?php if ($offer->vendor_id == Vendor::VENDOR_ID_LUKAS and $offer->purchase < 5000) continue; ?>
                     <?php $properties = ProductPropertiesHelper::getAllProperties($offer->id, [2, 16, 17, 18]); ?>
