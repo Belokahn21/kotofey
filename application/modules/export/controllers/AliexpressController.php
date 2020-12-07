@@ -19,7 +19,7 @@ class AliexpressController extends Controller
 
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
-        \Yii::$app->response->headers->add('Content-Type', 'text/xml');
+        \Yii::$app->response->headers->add('Content-Type', 'application/xml');
 
 
         $response = $this->renderPartial('index', [
