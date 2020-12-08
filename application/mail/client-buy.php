@@ -1,7 +1,6 @@
 <?php
 
-use app\modules\delivery\models\entity\Delivery;
-use app\modules\payment\models\entity\Payment;
+use app\models\tool\Price;
 use app\modules\order\models\helpers\OrderHelper;
 
 /* @var $order_items \app\modules\order\models\entity\OrdersItems[]
@@ -55,7 +54,7 @@ use app\modules\order\models\helpers\OrderHelper;
                         Итого:
                     </div>
                     <div style="text-align: center;width: 15%; padding: 5px;">
-						<?= $out_summ; ?> р.
+						<?= Price::format(OrderHelper::orderSummary($order)); ?> р.
                     </div>
                 </li>
             </ul>
