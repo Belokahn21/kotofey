@@ -2,6 +2,7 @@
 
 use app\models\tool\Price;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\catalog\models\helpers\ProductHelper;
 
 /* @var $order_items \app\modules\order\models\entity\OrdersItems[]
  * @var $order \app\modules\order\models\entity\Order
@@ -34,27 +35,27 @@ use app\modules\order\models\helpers\OrderHelper;
             </ul>
             <h2>Чек</h2>
             <ul style="list-style: none; width: 100%; display: block;">
-				<?php $out_summ = 0; ?>
-				<?php foreach ($order_items as $item): ?>
+                <?php $out_summ = 0; ?>
+                <?php foreach ($order_items as $item): ?>
                     <li style="width: 100%; margin: 5px; display: flex; flex-direction: row;">
                         <div style="text-align: center;width: 75%; padding: 5px;">
-							<?= $item->name; ?>
+                            <?= $item->name; ?>
                         </div>
                         <div style="text-align: center;width: 12.5%; padding: 5px;">
-							<?= $item->count; ?> шт
+                            <?= $item->count; ?> шт
                         </div>
                         <div style="text-align: center;width: 12.5%; padding: 5px;">
-							<?= $item->price; ?> р.
+                            <?= $item->price; ?> р.
                         </div>
                     </li>
-					<?php $out_summ += $item->count * $item->price; ?>
-				<?php endforeach; ?>
+                    <?php $out_summ += $item->count * $item->price; ?>
+                <?php endforeach; ?>
                 <li style="width: 100%; margin: 5px; display: flex; flex-direction: row; border-top: 1px solid #e3e3e3;">
                     <div style="width: 85%; text-align:right;padding: 5px;">
                         Итого:
                     </div>
                     <div style="text-align: center;width: 15%; padding: 5px;">
-						<?= Price::format(OrderHelper::orderSummary($order)); ?> р.
+                        <?= Price::format(OrderHelper::orderSummary($order)); ?> р.
                     </div>
                 </li>
             </ul>
@@ -62,16 +63,16 @@ use app\modules\order\models\helpers\OrderHelper;
         <div style="width: 50%; text-align: center;">
             <h2>Товары в заказе</h2>
             <ul style="list-style: none; display: flex; flex-direction: row;">
-				<?php foreach ($order_items as $item): ?>
-					<?php if ($item->product_id > 0): ?>
+                <?php foreach ($order_items as $item): ?>
+                    <?php if ($item->product_id > 0): ?>
                         <li style="width: 25%; margin: 5px;">
-                            <img src="https://kotofey.store/upload/<?= $item->product->image; ?>" style="width: 100%;">
+                            <img src="<?= ProductHelper::getImageUrl($item->product, true) ?>" style="width: 100%;">
                             <div style="text-align: center;">
-								<?= $item->name; ?>
+                                <?= $item->name; ?>
                             </div>
                         </li>
-					<?php endif; ?>
-				<?php endforeach; ?>
+                    <?php endif; ?>
+                <?php endforeach; ?>
             </ul>
         </div>
     </div>
