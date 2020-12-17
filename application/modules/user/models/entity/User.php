@@ -49,7 +49,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return [
             self::SCENARIO_INSERT => ['phone', 'email', 'password', 'groups', 'new_password'],
-            self::SCENARIO_UPDATE => ['phone', 'email', 'password', 'groups', 'new_password'],
+            self::SCENARIO_UPDATE => ['phone', 'email', 'password', 'groups', 'new_password', 'name', 'first_name', 'last_name', 'sex'],
             self::SCENARIO_LOGIN => ['phone', 'email', 'password'],
             self::SCENARIO_CHECKOUT => ['phone', 'email', 'password'],
             self::SCENARIO_PROFILE_UPDATE => ['email', 'sex', 'avatar'],

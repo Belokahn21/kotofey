@@ -103,7 +103,10 @@ class AuthItem extends \yii\db\ActiveRecord
 
         foreach ($permissions as $permission) {
             $permissionObject = $authManager->getPermission($permission);
-            $authManager->addChild($roleObject,$permissionObject);
+
+            if ($authManager->canAddChild($roleObject, $permissionObject)) {
+                $authManager->addChild($roleObject, $permissionObject);
+            }
         }
 
         return true;
