@@ -6,7 +6,7 @@ use app\modules\site\models\forms\ConsoleForm;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 
-class SiteBackendController extends Controller
+class SiteBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
 

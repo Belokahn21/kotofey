@@ -20,12 +20,14 @@ use yii\helpers\Url;
                         <?php foreach ($groupedData as $phone => $data): ?>
                             <li class="group-buy__item">
                                 <a href="tel:<?= $phone; ?>" class="group-buy__link phone-mask"><?= $phone; ?></a>
-                                <?php if ($data['group_items']): ?>
+                                <?php if (array_key_exists('group_items', $data)): ?>
                                     <ul class="group-buy-list">
                                         <?php foreach ($data['group_items']['item'] as $item): ?>
                                             <li class="group-buy-list__item">
                                                 <?php if ($item->product): ?>
                                                     (<?= count($data['group_items']['count'][$item->product->id]); ?>) <?= Html::a($item->product->name, Url::to(['/']), ['class' => 'group-buy-list__link']); ?>
+                                                <?php else: ?>
+                                                    <?= Html::tag('div', "(" . count($data['group_items']['count'][$item->product_id]) . ") " . $item->name, ['class' => 'group-buy-list__link']); ?>
                                                 <?php endif; ?>
                                             </li>
                                         <?php endforeach; ?>

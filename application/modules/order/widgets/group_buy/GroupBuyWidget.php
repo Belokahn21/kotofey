@@ -54,10 +54,10 @@ class GroupBuyWidget extends Widget
         foreach ($data as $phone => &$userData) {
             if (array_key_exists('items', $userData)) {
                 foreach ($userData['items'] as $item) {
-                    if ($item->product) {
-                        $userData['group_items']['item'][$item->product->id] = $item;
-                        $userData['group_items']['count'][$item->product->id][] = $item;
-                    }
+//                    if ($item->product) {
+                        $userData['group_items']['item'][$item->product_id] = $item;
+                        $userData['group_items']['count'][$item->product_id][] = $item;
+//                    }
                 }
             }
         }

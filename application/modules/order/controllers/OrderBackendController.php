@@ -3,6 +3,7 @@
 namespace app\modules\order\controllers;
 
 use app\modules\order\models\entity\OrderDate;
+use app\modules\site\controllers\MainBackendController;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\search\OrderSearchForm;
@@ -25,34 +26,9 @@ use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\HttpException;
 
-class OrderBackendController extends Controller
+class OrderBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['Administrator', 'Developer'],
-                    ],
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     public function actionIndex()
     {
@@ -231,13 +207,9 @@ class OrderBackendController extends Controller
 
     public function actionDelete($id)
     {
-        if (!Yii::$app->user->can('removeOrder') and Yii::$app->user->id != 1) {
-            throw new ForbiddenHttpException('У вас нет разрешения на эту операцию');
-        }
+        if (!Yii::$app->user->can('removeOrder')) throw new ForbiddenHttpException('У вас нет разрешения на эту операцию');
 
-        if (Order::findOne($id)->delete()) {
-            Alert::setSuccessNotify('Заказ успешно удалён');
-        }
+        if (Order::findOne($id)->delete()) Alert::setSuccessNotify('Заказ успешно удалён');
 
         return $this->redirect(['index']);
     }

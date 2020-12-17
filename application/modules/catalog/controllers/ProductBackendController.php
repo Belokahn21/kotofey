@@ -5,6 +5,7 @@ namespace app\modules\catalog\controllers;
 use app\modules\catalog\models\entity\ProductMarket;
 use app\modules\catalog\models\entity\ProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
+use app\modules\site\controllers\MainBackendController;
 use Yii;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductOrder;
@@ -17,34 +18,9 @@ use yii\web\HttpException;
 use yii\widgets\ActiveForm;
 
 
-class ProductBackendController extends Controller
+class ProductBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['Administrator', 'Developer'],
-                    ],
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     public function actionIndex()
     {

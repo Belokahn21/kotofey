@@ -5,14 +5,14 @@ namespace app\modules\order\controllers;
 
 use app\modules\order\models\search\OrderStatusSearchForm;
 use app\modules\order\models\entity\OrderStatus;
+use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
 use yii\helpers\Url;
-use yii\web\Controller;
 use yii\web\HttpException;
 
-class OrderStatusBackendController extends Controller
+class OrderStatusBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
 

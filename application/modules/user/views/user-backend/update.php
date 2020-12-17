@@ -11,7 +11,7 @@ use app\modules\user\models\entity\UserSex;
 $this->title = Title::showTitle("Пользователи"); ?>
 <section>
     <h1 class="title">Пользователь: <?= $model->email; ?></h1>
-    <?= Html::a("Назад", '/admin/user/', ['class' => 'btn-main']) ?>
+    <?= Html::a("Назад", ['index'], ['class' => 'btn-main']) ?>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $this->render('_form', [
         'model' => $model,
