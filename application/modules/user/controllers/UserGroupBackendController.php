@@ -16,6 +16,22 @@ class UserGroupBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
 
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['access'] = [
+            'class' => AccessControl::className(),
+            'rules' => [
+                ['allow' => true, 'actions' => ['index', 'update', 'delete'], 'roles' => ['Administrator']],
+                ['allow' => false],
+            ],
+        ];
+
+        return $behaviors;
+    }
+
     public function actionIndex()
     {
         $model = new AuthItem();

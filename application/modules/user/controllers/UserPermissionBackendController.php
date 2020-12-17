@@ -6,10 +6,27 @@ use app\modules\site\controllers\MainBackendController;
 use Yii;
 use app\modules\rbac\models\entity\AuthItem;
 use app\modules\rbac\models\search\PermissionsSearchForm;
+use yii\filters\AccessControl;
 
 class UserPermissionBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
+
+
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['access'] = [
+            'class' => AccessControl::className(),
+            'rules' => [
+                ['allow' => true, 'actions' => ['index', 'update', 'delete'], 'roles' => ['Administrator']],
+                ['allow' => false],
+            ],
+        ];
+
+        return $behaviors;
+    }
 
     public function actionIndex()
     {
