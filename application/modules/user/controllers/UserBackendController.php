@@ -11,6 +11,7 @@ use app\modules\rbac\models\entity\AuthAssignment;
 use app\modules\rbac\models\entity\AuthItem;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
+use yii\web\ForbiddenHttpException;
 use yii\web\HttpException;
 
 class UserBackendController extends MainBackendController
@@ -24,7 +25,7 @@ class UserBackendController extends MainBackendController
         $behaviors['access'] = [
             'class' => AccessControl::className(),
             'rules' => [
-                ['allow' => true, 'actions' => ['index', 'update', 'delete'], 'roles' => ['Administrator']],
+                ['allow' => true, 'actions' => ['index', 'update', 'delete', 'auth'], 'roles' => ['Administrator']],
                 ['allow' => false],
             ],
         ];
@@ -112,15 +113,17 @@ class UserBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (User::findOne($id)->delete()) {
-            throw new HttpException(404, 'Пользователь удалён');
-        }
+        if (!Yii::$app->user->can('removeUser')) throw new ForbiddenHttpException('Доступ запрещён');
+
+        if (User::findOne($id)->delete()) throw new HttpException(404, 'Пользователь удалён');
 
         return $this->redirect(['index']);
     }
 
     public function actionAuth($id)
     {
+        if (!Yii::$app->user->can('adminSigninUser')) throw new ForbiddenHttpException('Доступ запрещён');
+
         $user = User::findOne($id);
         if ($user) {
             if (Yii::$app->user->login($user)) {

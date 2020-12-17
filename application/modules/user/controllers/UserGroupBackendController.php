@@ -35,10 +35,16 @@ class UserGroupBackendController extends MainBackendController
     public function actionIndex()
     {
         $model = new AuthItem();
+        $permissions = Yii::$app->authManager->getPermissions();
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->createRole()) {
+
+                        if ($model->parent) {
+                            $model->applyParentGroup($model->name, $model->parent);
+                        }
+
                         return $this->refresh();
                     }
                 }
@@ -50,21 +56,40 @@ class UserGroupBackendController extends MainBackendController
             'model' => $model,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'permissions' => $permissions,
 
         ]);
     }
 
     public function actionUpdate($id)
     {
-        $model = AuthItem::findOne(['name' => $id]);
+        if (!$model = AuthItem::findOne(['name' => $id])) throw new HttpException(404, 'Группа не найдена');
+        if ($model->parents) $model->parent = $model->parents->parent;
+        $permissions = Yii::$app->authManager->getPermissions();
 
-        if (!$model) {
-            throw new HttpException(404, 'Группа не найдена');
+        if (\Yii::$app->request->isPost) {
+            if ($model->load(\Yii::$app->request->post())) {
+                if ($model->validate()) {
+
+                    if ($model->parent) {
+                        $model->applyParentGroup($model->name, $model->parent);
+                    }
+
+                    if ($model->permissionsGroup) {
+                        $model->applyPermissions($model->name, $model->permissionsGroup);
+                    }
+
+
+                    Alert::setSuccessNotify('Группа успешно обновлена.');
+                    return $this->refresh();
+
+                }
+            }
         }
 
-
         return $this->render('update', [
-            'model' => $model
+            'model' => $model,
+            'permissions' => $permissions,
         ]);
     }
 

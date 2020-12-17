@@ -2,42 +2,15 @@
 
 namespace app\controllers;
 
+use app\modules\site\controllers\MainBackendController;
 use Yii;
 use app\modules\search\models\entity\SearchQuery;
 use app\models\tool\Backup;
 use app\widgets\notification\Alert;
-use yii\filters\AccessControl;
-use yii\web\Controller;
-use yii\filters\VerbFilter;
 
-class AdminController extends Controller
+class AdminController extends MainBackendController
 {
     public $layout = "admin";
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['Administrator', 'Developer'],
-                    ],
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
 
     public function actions()
     {

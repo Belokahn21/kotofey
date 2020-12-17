@@ -3,6 +3,7 @@
 namespace app\modules\rbac\models\entity;
 
 use app\modules\rbac\models\entity\AuthItemChild;
+use app\modules\site\models\tools\Debug;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\ArrayHelper;
@@ -25,6 +26,7 @@ class AuthItem extends \yii\db\ActiveRecord
 
     public $format_name;
     public $parent;
+    public $permissionsGroup;
 
     public function attributeLabels()
     {
@@ -51,6 +53,8 @@ class AuthItem extends \yii\db\ActiveRecord
             ['description', 'string'],
 
             ['parent', 'string'],
+
+            ['permissionsGroup', 'safe'],
         ];
     }
 
@@ -70,16 +74,40 @@ class AuthItem extends \yii\db\ActiveRecord
         $role = $auth->createRole($this->name);
         $role->description = $this->description;
         $auth->add($role);
+        return true;
+    }
 
-        if (!empty($this->parent)) {
+    public function updateRole()
+    {
+        $auth = \Yii::$app->authManager;
 
-            $parentRole = $auth->getRole($this->parent);
-            $auth->addChild($parentRole, $role);
-
-        }
+        $role = $auth->getRole($this->name);
 
 
         return true;
+    }
+
+    public function applyParentGroup($role, $parentRole)
+    {
+        $authManager = Yii::$app->authManager;
+        $roleGroup = $authManager->getRole($role);
+        $parentRoleGroup = $authManager->getRole($parentRole);
+        return $authManager->addChild($parentRoleGroup, $roleGroup);
+    }
+
+    public function applyPermissions($role, $permissions)
+    {
+
+        $authManager = Yii::$app->authManager;
+        $roleObject = $authManager->getRole($role);
+
+        foreach ($permissions as $permission) {
+            $permissionObject = $authManager->getPermission($permission);
+            $authManager->addChild($roleObject,$permissionObject);
+        }
+
+        return true;
+
     }
 
     public function getChilds()
@@ -114,5 +142,10 @@ class AuthItem extends \yii\db\ActiveRecord
         }
 
         return $this->items;
+    }
+
+    public function getParents()
+    {
+        return $this->hasOne(AuthItemChild::className(), ['child' => 'name']);
     }
 }

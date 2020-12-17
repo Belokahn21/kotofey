@@ -16,6 +16,7 @@ $this->title = Title::showTitle("Управление группами");
 <?php $form = ActiveForm::begin(); ?>
 <?= $this->render('_form', [
     'model' => $model,
+    'permissions' => $permissions,
     'form' => $form
 ]); ?>
 <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
