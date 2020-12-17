@@ -12,4 +12,6 @@ $this->title = Title::showTitle("Главная страница");
 ?>
 <?= StatisticWidget::widget(); ?>
 <?= ModuleMenuWidget::widget(); ?>
-<div id="todo-react"></div>
+<?php if (Yii::$app->user->id == 1): ?>
+    <div id="todo-react"></div>
+<?php endif; ?>
