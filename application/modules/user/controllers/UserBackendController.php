@@ -24,7 +24,7 @@ class UserBackendController extends MainBackendController
         $behaviors['access'] = [
             'class' => AccessControl::className(),
             'rules' => [
-                ['allow' => true, 'actions' => ['index', 'update', 'delete'], 'roles' => ['Administrator']],
+                ['allow' => true, 'actions' => ['index', 'update', 'delete'], 'roles' => ['Administrator','Developer']],
                 ['allow' => false],
             ],
         ];
