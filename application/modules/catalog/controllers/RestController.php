@@ -66,6 +66,6 @@ class RestController extends Controller
 
     public function actionCategory()
     {
-        return Json::encode(Category::find()->all());
+        return Json::encode(Category::find()->orderBy(['created_at' => SORT_ASC])->all());
     }
 }
