@@ -3,6 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
+use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\search\models\entity\Search;
 use yii\helpers\ArrayHelper;
@@ -29,6 +30,8 @@ class RestController extends Controller
     {
         return [
             'get' => ['GET'],
+            'run' => ['GET'],
+            'category' => ['GET'],
         ];
     }
 
@@ -54,5 +57,15 @@ class RestController extends Controller
             $product['href'] = ProductHelper::getDetailUrl(Product::findOne($product['id']));
         }
         return Json::encode($products);
+    }
+
+    public function actionRun()
+    {
+
+    }
+
+    public function actionCategory()
+    {
+        return Json::encode(Category::find()->all());
     }
 }
