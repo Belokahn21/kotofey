@@ -22,17 +22,6 @@ use Yii;
  */
 class Properties extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'properties';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -42,30 +31,22 @@ class Properties extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'is_active' => 'Is Active',
-            'is_multiple' => 'Is Multiple',
-            'is_offer_catalog' => 'Is Offer Catalog',
-            'is_show_site' => 'Is Show Site',
-            'name' => 'Name',
-            'sort' => 'Sort',
-            'type' => 'Type',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'is_active' => 'Активность',
+            'is_multiple' => 'Множественный выбор',
+            'is_offer_catalog' => 'Свойство торгового каталога',
+            'is_show_site' => 'Показать на сайте',
+            'name' => 'Название',
+            'sort' => 'Сортировка',
+            'type' => 'Тип свойства',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 
-    /**
-     * Gets query for [[PropertiesVariants]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getPropertiesVariants()
     {
         return $this->hasMany(PropertiesVariants::className(), ['property_id' => 'id']);

@@ -43,9 +43,9 @@ class RestBackendController extends Controller
 
 			['title' => 'Товары', 'href' => Url::to(['/admin/catalog/product-backend/index'])],
 			['title' => 'Разделы', 'href' => Url::to(['/admin/catalog/product-category-backend/index'])],
-			['title' => 'Свойства', 'href' => Url::to(['/admin/catalog/product-properties-backend/index'])],
-			['title' => 'Справочники', 'href' => Url::to(['/admin/catalog/product-informer-backend/index'])],
-			['title' => 'Значения справочников', 'href' => Url::to(['/admin/catalog/product-informer-value-backend/index'])],
+//			['title' => 'Свойства', 'href' => Url::to(['/admin/catalog/product-properties-backend/index'])],
+//			['title' => 'Справочники', 'href' => Url::to(['/admin/catalog/product-informer-backend/index'])],
+//			['title' => 'Значения справочников', 'href' => Url::to(['/admin/catalog/product-informer-value-backend/index'])],
 
 			['title' => 'Заказы', 'href' => Url::to(['/admin/order/order-backend/index'])],
 			['title' => 'Статусы заказа', 'href' => Url::to(['/admin/order/order-status-backend/index'])],

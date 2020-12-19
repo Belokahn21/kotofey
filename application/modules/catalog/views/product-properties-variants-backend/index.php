@@ -1,43 +1,54 @@
 <?php
 
 use app\models\tool\seo\Title;
+use yii\grid\GridView;
+use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use yii\helpers\Url;
-use yii\grid\GridView;
+use yii\helpers\ArrayHelper;
+use app\modules\catalog\models\entity\SaveInformers;
 
-/* @var $model \app\modules\catalog\models\entity\Properties */
+/* @var $model \app\modules\catalog\models\entity\SaveInformersValues
+ * @var $this \yii\web\View
+ * @var $dataProvider \yii\data\ActiveDataProvider
+ * @var $searchModel \app\modules\catalog\models\search\PropertiesVariantsSearchForm
+ */
 
-$this->title = Title::showTitle("Свойства товаров"); ?>
+$this->title = Title::showTitle("Значения свойств"); ?>
     <section>
-        <h1 class="title">Свойства товаров</h1>
+        <h1 class="title">Значения справочников</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?= $this->render('_form', [
             'model' => $model,
             'form' => $form,
-        ]); ?>
+        ]) ?>
         <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
         <?php ActiveForm::end(); ?>
     </section>
+    <h2>Список значений</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Свойства отсутствуют',
+    'emptyText' => 'Значения отсутствуют',
     'columns' => [
         'id',
         [
             'attribute' => 'is_active',
-            'filter' => ['Неактивные', 'Активные'],
             'format' => 'raw',
+            'filter' => ['Не активен', 'Активен'],
             'value' => function ($model) {
-                return ($model->is_active == 1 ? "Да" : "Нет");
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
             }
         ],
         [
             'attribute' => 'name',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::a($model->name, Url::to(['update', 'id' => $model->id]));
+                return Html::a($model->name, Url::to(["update", 'id' => $model->id]));
             }
         ],
         [
@@ -50,8 +61,7 @@ $this->title = Title::showTitle("Свойства товаров"); ?>
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-trash-alt"></i>',
-                        Url::to(["delete", 'id' => $key]));
+                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
                 },
             ]
         ],

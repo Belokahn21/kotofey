@@ -3,31 +3,29 @@
 namespace app\modules\catalog\controllers;
 
 
+use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\SaveInformersValues;
-use app\modules\catalog\models\search\SaveInformersValuesSearchForm;
+use app\modules\catalog\models\search\PropertiesVariantsSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
 use yii\web\HttpException;
 
-class ProductInformerValueBackendController extends MainBackendController
+class ProductPropertiesVariantsBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
 
     public function actionIndex()
     {
-        $model = new SaveInformersValues();
-        $searchModel = new SaveInformersValuesSearchForm();
+        $model = new PropertiesVariants();
+        $searchModel = new PropertiesVariantsSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->save()) {
-                        Alert::setSuccessNotify('Значение справочника добавлено');
+                        Alert::setSuccessNotify('Значение свойства добавлено');
                         return $this->refresh();
                     }
                 } else {
@@ -53,7 +51,7 @@ class ProductInformerValueBackendController extends MainBackendController
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->update()) {
-                        Alert::setSuccessNotify('Значение справочника обновлено');
+                        Alert::setSuccessNotify('Значение свойства обновлено');
                         return $this->refresh();
                     }
                 }
@@ -69,7 +67,7 @@ class ProductInformerValueBackendController extends MainBackendController
     public function actionDelete($id)
     {
         if (SaveInformersValues::findOne($id)->delete()) {
-            Alert::setSuccessNotify('Значение справочника удалено');
+            Alert::setSuccessNotify('Значение свойства удалено');
         }
         return $this->redirect(['index']);
     }

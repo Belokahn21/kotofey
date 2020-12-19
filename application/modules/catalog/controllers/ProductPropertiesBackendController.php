@@ -3,6 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
+use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductPropertiesSearchForm;
 use app\modules\site\controllers\MainBackendController;
@@ -17,7 +18,7 @@ class ProductPropertiesBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new SaveProductProperties();
+        $model = new Properties();
         $searchModel = new ProductPropertiesSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 

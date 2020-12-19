@@ -2,23 +2,21 @@
 
 namespace app\modules\catalog\models\search;
 
-use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\entity\Properties;
-use app\modules\catalog\models\entity\SaveProductProperties;
+use app\modules\catalog\models\entity\PropertiesVariants;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class ProductPropertiesSearchForm extends Properties
+class PropertiesVariantsSearchForm extends PropertiesVariants
 {
     public static function tableName()
     {
-        return Properties::tableName();
+        return PropertiesVariants::tableName();
     }
 
     public function rules()
     {
         return [
-            [['id', 'is_active'], 'integer'],
+            [['id'], 'integer'],
             [['name'], 'string'],
         ];
     }
@@ -28,9 +26,10 @@ class ProductPropertiesSearchForm extends Properties
         return Model::scenarios();
     }
 
+
     public function search($params)
     {
-        $query = Properties::find();
+        $query = PropertiesVariants::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -40,10 +39,10 @@ class ProductPropertiesSearchForm extends Properties
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['id' => $this->id])
-            ->andFilterWhere(['is_active' => $this->is_active])
-            ->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['id' => $this->id]);
 
         return $dataProvider;
     }
+
 }

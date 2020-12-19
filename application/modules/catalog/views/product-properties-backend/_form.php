@@ -16,13 +16,13 @@ use app\modules\catalog\models\entity\SaveInformers;
 
         <div class="row">
             <div class="col-sm-4">
-                <?= $form->field($model, 'active')->radioList(['Нет', 'Да']) ?>
+                <?= $form->field($model, 'is_active')->radioList(['Нет', 'Да']) ?>
             </div>
             <div class="col-sm-4">
-                <?= $form->field($model, 'need_show')->radioList(['Нет', 'Да']) ?>
+                <?= $form->field($model, 'is_show_site')->radioList(['Нет', 'Да']) ?>
             </div>
             <div class="col-sm-4">
-                <?= $form->field($model, 'multiple')->radioList(['Нет', 'Да']) ?>
+                <?= $form->field($model, 'is_multiple')->radioList(['Нет', 'Да']) ?>
             </div>
         </div>
         <div class="row">
