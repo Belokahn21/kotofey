@@ -22,9 +22,9 @@ use app\modules\site\widgets\AdminPanel\AdminPanel;
 AppAsset::register($this);
 
 $parentCategories = null;
-$parentCategories = Yii::$app->cache->getOrSet('parent-cats', function () {
-    return Category::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
-}, 3600 * 7 * 24);
+//$parentCategories = Yii::$app->cache->getOrSet('parent-cats', function () {
+//    return Category::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
+//}, 3600 * 7 * 24);
 
 $this->beginPage() ?>
 <!DOCTYPE html>
