@@ -3,6 +3,7 @@
 namespace app\modules\content\widgets\informers_slider;
 
 
+use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\SaveInformersValues;
 use yii\base\Widget;
 
@@ -17,7 +18,7 @@ class InformerSliderWidget extends Widget
         $cache = \Yii::$app->cache;
 
         $providers = $cache->getOrSet($this->cacheKey, function () {
-            return SaveInformersValues::find()->select(['id', 'name', 'image','media_id'])->where(['active' => true, 'informer_id' => 1])->orderBy(['sort' => SORT_DESC]);
+            return PropertiesVariants::find()->select(['id', 'name', 'media_id'])->where(['is_active' => true, 'property_id' => 1])->all();
         }, $this->cacheTime);
 
         return $this->render($this->template, [

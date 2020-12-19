@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\modules\media\models\entity\Media;
 use Yii;
 
 /**
@@ -10,7 +11,9 @@ use Yii;
  * @property int $id
  * @property int $property_id
  * @property int $is_active
+ * @property int $media_id
  * @property string $name
+ * @property string $link
  * @property int $sort
  * @property int|null $created_at
  * @property int|null $updated_at
@@ -64,5 +67,10 @@ class PropertiesVariants extends \yii\db\ActiveRecord
     public function getProperty()
     {
         return $this->hasOne(Properties::className(), ['id' => 'property_id']);
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
     }
 }

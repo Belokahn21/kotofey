@@ -35,6 +35,8 @@ class m201202_104153_transfer_props_table extends Migration
             'id' => $this->primaryKey(),
             'property_id' => $this->integer()->notNull(),
             'is_active' => $this->boolean()->defaultValue(1)->notNull(),
+            'media_id' => $this->integer(),
+            'link' => $this->text(),
             'name' => $this->string(128)->notNull(),
             'sort' => $this->integer()->defaultValue(500)->notNull(),
             'created_at' => $this->integer(),

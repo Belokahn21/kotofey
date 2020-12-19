@@ -12,7 +12,7 @@ class SaveInformersSearchForm extends SaveInformers
 {
 	public static function tableName()
 	{
-		return "informers";
+		return SaveInformers::tableName();
 	}
 
 	public function rules()

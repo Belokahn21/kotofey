@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\helpers;
 
 
+use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\System;
 use app\modules\catalog\models\entity\SaveInformersValues;
@@ -11,7 +12,7 @@ use app\modules\media\models\entity\Media;
 
 class ProductPropertiesValuesHelper
 {
-    public static function getImageUrl(SaveInformersValues $model, $options = [])
+    public static function getImageUrl(PropertiesVariants $model, $options = [])
     {
         if ($media = $model->media) {
             if ($media->location == Media::LOCATION_CDN) {

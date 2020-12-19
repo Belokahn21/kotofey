@@ -24,11 +24,6 @@ use yii\db\ActiveRecord;
  */
 class SaveProductProperties extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "product_properties";
-    }
-
     public function behaviors()
     {
         return [

@@ -23,10 +23,6 @@ use yii\db\ActiveRecord;
  */
 class SaveProductPropertiesValues extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "product_properties_values";
-    }
 
     public function rules()
     {

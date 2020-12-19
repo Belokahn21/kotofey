@@ -15,16 +15,16 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
     <div class="category-slider-outter">
         <div class="swiper-container category-slider-container">
             <div class="swiper-wrapper category-slider-wrapper">
-                <?php foreach ($providers->all() as $provider): ?>
+                <?php foreach ($providers as $provider): ?>
                     <div class="swiper-slide category-slider__slide">
                         <div class="category-slider__info">
                             <div class="category-slider__title">
                                 <a class="category-slider__link" href="<?= $provider->link; ?>"><?= $provider->name; ?></a>
                             </div>
                             <div class="category-slider__label">
-                                <?= Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
-                                    return SaveProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
-                                }); ?> позиций
+                                <!--                                --><? //= Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
+                                //                                    return SaveProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
+                                //                                }); ?><!-- позиций-->
                             </div>
                         </div>
                         <div class="category-slider__icon">

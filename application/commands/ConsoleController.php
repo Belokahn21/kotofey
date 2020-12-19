@@ -2,6 +2,13 @@
 
 namespace app\commands;
 
+use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\PropertiesProductValues;
+use app\modules\catalog\models\entity\PropertiesVariants;
+use app\modules\catalog\models\entity\SaveInformersValues;
+use app\modules\catalog\models\entity\SaveProductProperties;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
+use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
@@ -15,22 +22,70 @@ class ConsoleController extends Controller
     public function actionRun($arg = null)
     {
 
-        $products = Product::find()->where(['>','discount_price',0])->all();
-//        $products = Product::find()->where(['vendor_id' => Vendor::VENDOR_ID_SANABELLE])->all();
+        Properties::deleteAll();
+        PropertiesVariants::deleteAll();
+        PropertiesProductValues::deleteAll();
 
-        foreach ($products as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+        foreach (SaveProductProperties::find()->all() as $property) {
+            $obj = new Properties();
+            $obj->name = $property->name;
+            $obj->type = $property->type == null ? TypeProductProperties::TYPE_TEXT : $property->type;
+            $obj->is_active = 1;
+            $obj->sort = 500;
 
-//            MarkupHelpers::applyMarkup($product, 25);
+            if (!$obj->validate() or !$obj->save()) {
+                Debug::p($obj->getErrors());
+            }
 
-            $product->discount_price = 0;
+
+            // сохраним варианты для свойства
+            if ($property->type == TypeProductProperties::TYPE_INFORMER) {
+                $variants = SaveInformersValues::find()->where(['informer_id' => $property->informer_id])->all();
+
+                foreach ($variants as $variant) {
+                    $objVariant = new PropertiesVariants();
+                    $objVariant->property_id = $obj->id;
+                    $objVariant->name = $variant->name;
+                    $objVariant->media_id = $variant->media_id;
+                    $objVariant->link = $variant->link;
+                    $objVariant->sort = 500;
+                    $objVariant->is_active = 1;
+
+                    if (!$objVariant->validate() or !$objVariant->save()) {
+                        Debug::p($objVariant->getErrors());
+                    } else {
+                        $oldPropToProd = SaveProductPropertiesValues::find()->where(['property_id' => $property->id, 'value' => $variant->id])->all();
+
+                        foreach ($oldPropToProd as $item) {
+                            $objPropToProduct = new PropertiesProductValues();
+                            $objPropToProduct->property_id = $obj->id;
+                            $objPropToProduct->value = (string)$objVariant->id;
+                            $objPropToProduct->product_id = $item->product_id;
+                            if (!$objPropToProduct->validate() or !$objPropToProduct->save()) {
+                                Debug::p($objPropToProduct->getErrors());
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            if ($property->type == TypeProductProperties::TYPE_TEXT) {
+
+                $oldTextValue = SaveProductPropertiesValues::find()->where(['property_id' => $property->id])->all();
+                if (!$oldTextValue) continue;
+
+                foreach ($oldTextValue as $itemValue) {
+                    $objPropToProduct = new PropertiesProductValues();
+                    $objPropToProduct->property_id = $obj->id;
+                    $objPropToProduct->value = $itemValue->value;
+                    $objPropToProduct->product_id = $itemValue->product_id;
 
 
-            if ($product->validate() && $product->update()) {
-                echo $product->name;
-                echo PHP_EOL;
-            } else {
-                Debug::p($product->getErrors());
+                    if (!$objPropToProduct->validate() or !$objPropToProduct->save()) {
+                        Debug::p($objPropToProduct->getErrors());
+                    }
+                }
             }
         }
 
