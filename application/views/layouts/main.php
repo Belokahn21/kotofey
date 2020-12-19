@@ -21,6 +21,7 @@ use app\modules\site\widgets\AdminPanel\AdminPanel;
 
 AppAsset::register($this);
 
+$parentCategories = null;
 $parentCategories = Yii::$app->cache->getOrSet('parent-cats', function () {
     return Category::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
 }, 3600 * 7 * 24);
@@ -62,7 +63,7 @@ $this->beginPage() ?>
 <body>
 <?php $this->beginBody() ?>
 
-<?= AdminPanel::widget(); ?>
+<?php // AdminPanel::widget(); ?>
 <header class="header page-container">
     <div class="logo">
         <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
@@ -115,9 +116,11 @@ $this->beginPage() ?>
             <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg" alt="Стрелка"></div>
         </div>
         <ul class="full-mobile-menu">
-            <?php foreach ($parentCategories as $category): ?>
-                <li class="full-mobile-menu__item"><a class="full-mobile-menu__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a></li>
-            <?php endforeach; ?>
+            <?php if ($parentCategories): ?>
+                <?php foreach ($parentCategories as $category): ?>
+                    <li class="full-mobile-menu__item"><a class="full-mobile-menu__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a></li>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </ul>
         <ul class="full-mobile-nav">
             <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
@@ -186,20 +189,22 @@ $this->beginPage() ?>
         </div>
     </div>
     <div class="menu-full js-show-with-hamburger">
-        <?php foreach ($parentCategories as $parentCategory) : ?>
-            <div class="block-menu">
-                <div class="block-menu__title"><?= $parentCategory->name; ?></div>
-                <?php if ($subsection = $parentCategory->subsections()): ?>
-                    <ul class="block-menu-list">
-                        <?php foreach ($subsection as $item): ?>
-                            <li class="block-menu-list__item">
-                                <a class="block-menu-list__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
-                            </li>
-                        <?php endforeach; ?>
-                    </ul>
-                <?php endif; ?>
-            </div>
-        <?php endforeach; ?>
+        <?php if ($parentCategories): ?>
+            <?php foreach ($parentCategories as $parentCategory) : ?>
+                <div class="block-menu">
+                    <div class="block-menu__title"><?= $parentCategory->name; ?></div>
+                    <?php if ($subsection = $parentCategory->subsections()): ?>
+                        <ul class="block-menu-list">
+                            <?php foreach ($subsection as $item): ?>
+                                <li class="block-menu-list__item">
+                                    <a class="block-menu-list__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </div>
 
@@ -222,12 +227,10 @@ $this->beginPage() ?>
                     <?= StoreWidget::widget(); ?>
                 </li>
                 <li class="footer-contact__item">
-                    <a class="footer-contact__link"
-                       href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
+                    <a class="footer-contact__link" href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
                 </li>
                 <li class="footer-contact__item">
-                    <a class="phone footer-contact__link js-phone-mask"
-                       href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
+                    <a class="phone footer-contact__link js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
                         <?= SiteSettings::getValueByCode('phone_1'); ?>
                     </a>
                 </li>
@@ -243,11 +246,13 @@ $this->beginPage() ?>
             <div class="footer-categories-container">
                 <div class="footer__title">Каталог зоотоваров</div>
                 <ul class="footer-categories">
-                    <?php foreach ($parentCategories as $item): ?>
-                        <li class="footer-categories__item">
-                            <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
-                        </li>
-                    <?php endforeach; ?>
+                    <?php if ($parentCategories): ?>
+                        <?php foreach ($parentCategories as $item): ?>
+                            <li class="footer-categories__item">
+                                <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
                 </ul>
             </div>
             <div style="margin: auto auto;">
@@ -275,11 +280,9 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
 <?= Alert::widget(); ?>
 <script src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>
-<?php if (YII_ENV == 'prod' or !\app\modules\site\models\tools\Debug::isPageSpeed()): ?>
-    <?php echo $this->render('include/head/yandex/metrika.php'); ?>
-    <!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
-    <?php echo $this->render('include/head/jivo.php'); ?>
-<?php endif; ?>
+<?php echo $this->render('include/head/yandex/metrika.php'); ?>
+<!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
+<?php echo $this->render('include/head/jivo.php'); ?>
 </body>
 </html>
 <?php $this->endPage(); ?>

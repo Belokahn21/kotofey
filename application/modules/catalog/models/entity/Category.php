@@ -109,13 +109,20 @@ class Category extends ActiveRecord
 
     public function subsections($parent_id = null)
     {
+        $cache = \Yii::$app->cache;
         $current_category_id = $this->id;
         if ($parent_id) {
             $current_category_id = $parent_id;
         } else {
-            $this->subsections[] = Category::findOne($current_category_id);
+
+            $this->subsections[] = $cache->getOrSet('subsection-' . $current_category_id, function () use ($current_category_id) {
+                return Category::findOne($current_category_id);
+            });
         }
 
+//        $categories = $cache->getOrSet('subsections', function () use ($current_category_id) {
+//            return Category::find()->where(['parent' => $current_category_id])->all();
+//        });
         $categories = Category::find()->where(['parent' => $current_category_id])->all();
 
         if ($categories) {

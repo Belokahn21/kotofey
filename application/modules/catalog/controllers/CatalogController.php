@@ -31,7 +31,7 @@ class CatalogController extends Controller
         $filterModel = new CatalogFilter();
         $category = Category::findBySlug($id);
         if ($category) {
-            $sb = $category->subsections();
+//            $sb = $category->subsections();
         }
         if ($id) {
             $query = Product::find()->orderBy(['created_at' => SORT_DESC]);

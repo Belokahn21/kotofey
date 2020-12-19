@@ -38,22 +38,23 @@ class SiteController extends Controller
 
     public function beforeAction($action)
     {
-        if (!Debug::isPageSpeed()) {
-            if (!Yii::$app->session->get('city_id')) {
-                $CityDefault = Geo::find()->where(['is_default' => true])->one();
-                if ($CityDefault) {
-                    Yii::$app->session->set('city_id', $CityDefault->id);
-                }
-            }
+        $cache = Yii::$app->cache;
+        if (!Yii::$app->session->get('city_id')) {
+            $CityDefault = $cache->getOrSet('default-site-geo', function () {
+                return Geo::find()->where(['is_default' => true])->one();
+            });
 
-            $geo = CurrentGeo::find()->one();
-            if ($geo) {
-                if ($geo->timeZone) {
-                    date_default_timezone_set($geo->timeZone->value);
-                }
-            }
+            if ($CityDefault) Yii::$app->session->set('city_id', $CityDefault->id);
 
         }
+
+        $geo = $cache->getOrSet('site-geo', function () {
+            return CurrentGeo::find()->one();
+        });
+
+
+        if ($geo) if ($geo->timeZone) date_default_timezone_set($geo->timeZone->value);
+
         return parent::beforeAction($action);
     }
 

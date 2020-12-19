@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\helpers;
 
 use app\models\tool\System;
 use app\modules\media\models\entity\Media;
+use app\modules\site\models\helpers\ImageHelper;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Url;
 use app\modules\catalog\models\helpers\ProductPropertiesHelper;
@@ -78,11 +79,6 @@ class ProductHelper
 
     public static function getImageUrl(Product $model, $isFull = false, $options = [])
     {
-
-        if (Debug::isPageSpeed()) {
-            return '/images/not-image.png';
-        }
-
         if ($media = $model->media) {
             if ($media->location == Media::LOCATION_CDN) {
 
