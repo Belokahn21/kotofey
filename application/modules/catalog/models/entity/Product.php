@@ -393,9 +393,4 @@ class Product extends \yii\db\ActiveRecord
             self::STATUS_ACTIVE => "Активен",
         ];
     }
-
-//    public function getDetailUrl()
-//    {
-//        return ProductHelper::getDetailUrl($this);
-//    }
 }

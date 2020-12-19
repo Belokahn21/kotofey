@@ -120,10 +120,10 @@ class Category extends ActiveRecord
             });
         }
 
-//        $categories = $cache->getOrSet('subsections', function () use ($current_category_id) {
-//            return Category::find()->where(['parent' => $current_category_id])->all();
-//        });
-        $categories = Category::find()->where(['parent' => $current_category_id])->all();
+        $categories = $cache->getOrSet('subsections-' . $current_category_id, function () use ($current_category_id) {
+            return Category::find()->where(['parent' => $current_category_id])->all();
+        });
+//        $categories = Category::find()->where(['parent' => $current_category_id])->all();
 
         if ($categories) {
             foreach ($categories as $category) {
