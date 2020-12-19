@@ -14,10 +14,11 @@ use yii\web\HttpException;
 class ProductPropertiesVariantsBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
+    public $modelClass = 'app\modules\catalog\models\entity\PropertiesVariants';
 
     public function actionIndex()
     {
-        $model = new PropertiesVariants();
+        $model = new $this->modelClass();
         $searchModel = new PropertiesVariantsSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
@@ -43,7 +44,7 @@ class ProductPropertiesVariantsBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = SaveInformersValues::findOne($id);
+        $model = $this->modelClass::findOne($id);
         if (!$model) {
             throw new HttpException(404, 'Запись не существует');
         }
@@ -66,7 +67,7 @@ class ProductPropertiesVariantsBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (SaveInformersValues::findOne($id)->delete()) {
+        if ($this->modelClass::findOne($id)->delete()) {
             Alert::setSuccessNotify('Значение свойства удалено');
         }
         return $this->redirect(['index']);

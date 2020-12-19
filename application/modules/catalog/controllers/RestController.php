@@ -4,6 +4,8 @@ namespace app\modules\catalog\controllers;
 
 
 use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\PropertiesProductValues;
+use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\search\models\entity\Search;
 use yii\helpers\ArrayHelper;
@@ -61,7 +63,32 @@ class RestController extends Controller
 
     public function actionRun()
     {
+        $out = [];
+        $products = Product::find()->all();
 
+        foreach ($products as $product) {
+            $out[] = [
+                'name' => $product->name,
+                'category_id' => $product->category_id,
+                'description' => $product->description,
+                'price' => $product->price,
+                'discount_price' => $product->discount_price,
+                'purchase' => $product->purchase,
+                'count' => $product->count,
+                'code' => $product->code,
+                'barcode' => $product->barcode,
+                'vitrine' => $product->vitrine,
+                'feed' => $product->feed,
+                'image' => @\Yii::$app->CDN->resizeImage($product->media->cdnData['public_id']),
+            ];
+        }
+
+        return Json::encode($out);
+    }
+
+    public function actionProps()
+    {
+        return Json::encode(PropertiesVariants::find()->all());
     }
 
     public function actionCategory()
