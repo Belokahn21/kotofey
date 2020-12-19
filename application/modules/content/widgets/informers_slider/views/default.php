@@ -22,9 +22,10 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
                                 <a class="category-slider__link" href="<?= $provider->link; ?>"><?= $provider->name; ?></a>
                             </div>
                             <div class="category-slider__label">
-                                <!--                                --><? //= Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
-                                //                                    return SaveProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
-                                //                                }); ?><!-- позиций-->
+                                <?php /* Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
+                                                                    return SaveProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
+                                                                }); */ ?>
+                                <!--                                позиций-->
                             </div>
                         </div>
                         <div class="category-slider__icon">
