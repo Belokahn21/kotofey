@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\helpers;
 
 
 use app\modules\catalog\models\entity\PropertiesVariants;
+use app\modules\site\models\helpers\ImageHelper;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\System;
 use app\modules\catalog\models\entity\SaveInformersValues;
@@ -24,7 +25,7 @@ class ProductPropertiesValuesHelper
                 return $media->cdnData['secure_url'];
             }
         }
-        return '/upload/' . $model->image;
+        return ImageHelper::notFoundImage();
     }
 
     public static function savePropertyValue($product_id, $property_id, $value)
