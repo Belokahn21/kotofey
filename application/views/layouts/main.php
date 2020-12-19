@@ -63,7 +63,7 @@ $this->beginPage() ?>
 <body>
 <?php $this->beginBody() ?>
 
-<?php // AdminPanel::widget(); ?>
+<?= AdminPanel::widget(); ?>
 <header class="header page-container">
     <div class="logo">
         <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
