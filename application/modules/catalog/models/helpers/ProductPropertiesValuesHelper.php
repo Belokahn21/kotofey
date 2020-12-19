@@ -5,13 +5,13 @@ namespace app\modules\catalog\models\helpers;
 
 use app\modules\site\models\tools\Debug;
 use app\models\tool\System;
-use app\modules\catalog\models\entity\InformersValues;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveInformersValues;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\media\models\entity\Media;
 
 class ProductPropertiesValuesHelper
 {
-    public static function getImageUrl(InformersValues $model, $options = [])
+    public static function getImageUrl(SaveInformersValues $model, $options = [])
     {
         if ($media = $model->media) {
             if ($media->location == Media::LOCATION_CDN) {
@@ -29,7 +29,7 @@ class ProductPropertiesValuesHelper
     public static function savePropertyValue($product_id, $property_id, $value)
     {
         // save weight
-        $obj = new ProductPropertiesValues();
+        $obj = new SaveProductPropertiesValues();
         $obj->property_id = $property_id;
         $obj->product_id = $product_id;
         $obj->value = $value;

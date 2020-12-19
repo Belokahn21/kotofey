@@ -3,9 +3,9 @@
 namespace app\models\tool\export;
 
 
-use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -46,7 +46,7 @@ class YandexCatalogExport implements Export
                     $sheet->setCellValue('J' . $row, 'https://kotofey.store/upload/' . $product->image);
                 }
 
-                $country = InformersValues::findOne(['id' => ProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => 6])]);
+                $country = SaveInformersValues::findOne(['id' => SaveProductPropertiesValues::findOne(['product_id' => $product->id, 'property_id' => 6])]);
                 if ($country) {
                     $sheet->setCellValue('K' . $row, $country->name);
                 }

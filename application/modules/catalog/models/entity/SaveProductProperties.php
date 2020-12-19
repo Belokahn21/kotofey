@@ -22,7 +22,7 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class ProductProperties extends ActiveRecord
+class SaveProductProperties extends ActiveRecord
 {
     public static function tableName()
     {

@@ -2,12 +2,12 @@
 
 namespace app\modules\catalog\models\search;
 
-use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\rbac\models\entity\AuthItem;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class InformersValuesSearchForm extends InformersValues
+class SaveInformersValuesSearchForm extends SaveInformersValues
 {
 
 	public static function tableName()

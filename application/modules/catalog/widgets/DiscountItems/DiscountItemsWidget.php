@@ -4,9 +4,9 @@ namespace app\modules\catalog\widgets\DiscountItems;
 
 
 use app\modules\site\models\tools\Debug;
-use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
@@ -53,11 +53,11 @@ class DiscountItemsWidget extends Widget
     {
         $cache = \Yii::$app->cache;
         $ProductPropertiesValues = $cache->getOrSet('brands-props-ProductPropertiesValues', function () use ($product_id) {
-            return ProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 1])->all();
+            return SaveProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 1])->all();
         }, $this->cacheTime);
 
         $InformerValues = $cache->getOrSet('brands-inf-ProductPropertiesValues', function () use ($ProductPropertiesValues) {
-            return InformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
+            return SaveInformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
         }, $this->cacheTime);
 
         return $InformerValues;
@@ -67,11 +67,11 @@ class DiscountItemsWidget extends Widget
     {
         $cache = \Yii::$app->cache;
         $ProductPropertiesValues = $cache->getOrSet('discount-props-ProductPropertiesValues', function () use ($product_id) {
-            return ProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 11])->all();
+            return SaveProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 11])->all();
         }, $this->cacheTime);
 
         $InformerValues = $cache->getOrSet('discount-inf-ProductPropertiesValues', function () use ($ProductPropertiesValues) {
-            return InformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
+            return SaveInformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
         }, $this->cacheTime);
 
         return $InformerValues;

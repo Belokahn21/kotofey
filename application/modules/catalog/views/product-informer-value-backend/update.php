@@ -3,7 +3,7 @@
 use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\SaveInformers;
 use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */

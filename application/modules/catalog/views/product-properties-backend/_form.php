@@ -2,7 +2,7 @@
 
 use app\modules\catalog\models\entity\TypeProductProperties;
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\SaveInformers;
 
 ?>
 
@@ -40,7 +40,7 @@ use app\modules\catalog\models\entity\Informers;
 
         <?= $form->field($model, 'type')->dropDownList((new TypeProductProperties())->listType(), ['prompt' => "Тип свойства", 'id' => 'select-type-prop']) ?>
         <?php if (Yii::$app->request->get('type') == "1"): ?>
-            <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(Informers::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
+            <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(SaveInformers::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
         <?php endif; ?>
     </div>
 </div>

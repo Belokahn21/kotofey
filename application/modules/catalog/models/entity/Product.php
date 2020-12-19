@@ -178,7 +178,7 @@ class Product extends \yii\db\ActiveRecord
                         //save multiple property
                         if (is_array($value) && count($value) > 0) {
                             foreach ($value as $select_variant) {
-                                $propertyValues = new ProductPropertiesValues();
+                                $propertyValues = new SaveProductPropertiesValues();
                                 $propertyValues->product_id = $this->id;
                                 $propertyValues->property_id = $propertyId;
                                 $propertyValues->value = $select_variant;
@@ -187,7 +187,7 @@ class Product extends \yii\db\ActiveRecord
                                 }
                             }
                         } else {
-                            $propertyValues = new ProductPropertiesValues();
+                            $propertyValues = new SaveProductPropertiesValues();
                             $propertyValues->product_id = $this->id;
                             $propertyValues->property_id = $propertyId;
                             $propertyValues->value = $value;
@@ -235,7 +235,7 @@ class Product extends \yii\db\ActiveRecord
 
                     if ($this->properties) {
 
-                        ProductPropertiesValues::deleteAll(['product_id' => $this->id]);
+                        SaveProductPropertiesValues::deleteAll(['product_id' => $this->id]);
 
                         foreach ($this->properties as $propertyId => $value) {
                             if (empty($value)) {
@@ -245,7 +245,7 @@ class Product extends \yii\db\ActiveRecord
                             //save multiple property
                             if (is_array($value) && count($value) > 0) {
                                 foreach ($value as $select_variant) {
-                                    $propertyValues = new ProductPropertiesValues();
+                                    $propertyValues = new SaveProductPropertiesValues();
                                     $propertyValues->product_id = $this->id;
                                     $propertyValues->property_id = $propertyId;
                                     $propertyValues->value = $select_variant;
@@ -257,7 +257,7 @@ class Product extends \yii\db\ActiveRecord
                             } else {
 
 
-                                $propertyValues = new ProductPropertiesValues();
+                                $propertyValues = new SaveProductPropertiesValues();
                                 $propertyValues->product_id = $this->id;
                                 $propertyValues->property_id = $propertyId;
                                 $propertyValues->value = $value;

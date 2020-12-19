@@ -2,9 +2,9 @@
 
 namespace app\modules\order\widgets\many_purchase;
 
-use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\site\models\tools\Debug;
 use yii\base\Widget;

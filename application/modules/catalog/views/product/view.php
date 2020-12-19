@@ -10,7 +10,7 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\vendors\models\entity\Vendor;
 
-/* @var $properties \app\modules\catalog\models\entity\ProductPropertiesValues[]
+/* @var $properties \app\modules\catalog\models\entity\SaveProductPropertiesValues[]
  * @var \yii\web\View $this
  * @var \app\modules\catalog\models\entity\Product $product
  * @var \app\modules\catalog\models\entity\Category $category

@@ -3,12 +3,12 @@
 namespace app\modules\catalog\models\search;
 
 use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\SaveInformers;
 use app\modules\catalog\models\entity\Product;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class InformersSearchForm extends Informers
+class SaveInformersSearchForm extends SaveInformers
 {
 	public static function tableName()
 	{
@@ -30,7 +30,7 @@ class InformersSearchForm extends Informers
 
 	public function search($params)
 	{
-		$query = Informers::find();
+		$query = SaveInformers::find();
 
 		$dataProvider = new ActiveDataProvider([
 			'query' => $query,

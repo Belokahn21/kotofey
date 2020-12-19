@@ -5,7 +5,7 @@ namespace app\modules\export\controllers;
 
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\site\models\tools\Debug;
 use yii\web\Controller;
 

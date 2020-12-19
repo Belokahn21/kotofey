@@ -3,8 +3,8 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\InformersValues;
-use app\modules\catalog\models\search\InformersValuesSearchForm;
+use app\modules\catalog\models\entity\SaveInformersValues;
+use app\modules\catalog\models\search\SaveInformersValuesSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
@@ -19,8 +19,8 @@ class ProductInformerValueBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new InformersValues();
-        $searchModel = new InformersValuesSearchForm();
+        $model = new SaveInformersValues();
+        $searchModel = new SaveInformersValuesSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
@@ -45,7 +45,7 @@ class ProductInformerValueBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = InformersValues::findOne($id);
+        $model = SaveInformersValues::findOne($id);
         if (!$model) {
             throw new HttpException(404, 'Запись не существует');
         }
@@ -68,7 +68,7 @@ class ProductInformerValueBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (InformersValues::findOne($id)->delete()) {
+        if (SaveInformersValues::findOne($id)->delete()) {
             Alert::setSuccessNotify('Значение справочника удалено');
         }
         return $this->redirect(['index']);

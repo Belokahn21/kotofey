@@ -4,8 +4,8 @@ use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\stock\models\entity\Stocks;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\entity\InformersValues;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveInformersValues;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use yii\helpers\Json;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\site\models\helpers\ProductMarkupHelper;
@@ -15,7 +15,7 @@ use app\modules\media\models\entity\Media;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
- * @var $properties \app\modules\catalog\models\entity\ProductProperties[]
+ * @var $properties \app\modules\catalog\models\entity\SaveProductProperties[]
  */
 
 ?>
@@ -188,7 +188,7 @@ use app\modules\media\models\entity\Media;
                 <ul style="list-style: none; margin: 0; padding: 0;">
                     <?php foreach ($properties as $property): ?>
                         <?php if ($property->type == 1): ?>
-                            <?php $value = ProductPropertiesValues::findAll([
+                            <?php $value = SaveProductPropertiesValues::findAll([
                                 'product_id' => $model->id,
                                 'property_id' => $property->id
                             ]);
@@ -201,9 +201,9 @@ use app\modules\media\models\entity\Media;
                                 $drop_down_params['size'] = 10;
                             }
                             ?>
-                            <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(InformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name'), $drop_down_params)->label($property->name); ?>
+                            <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(SaveInformersValues::find()->where(['informer_id' => $property->informer_id])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name'), $drop_down_params)->label($property->name); ?>
                         <?php else: ?>
-                            <?php if ($value = ProductPropertiesValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
+                            <?php if ($value = SaveProductPropertiesValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
                                 <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
                             <?php else: ?>
                                 <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>

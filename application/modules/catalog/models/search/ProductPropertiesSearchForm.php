@@ -3,7 +3,7 @@
 namespace app\modules\catalog\models\search;
 
 use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\SaveProductProperties;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
@@ -29,7 +29,7 @@ class ProductPropertiesSearchForm extends Category
 
     public function search($params)
     {
-        $query = ProductProperties::find();
+        $query = SaveProductProperties::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

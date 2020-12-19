@@ -10,8 +10,8 @@ use app\models\tool\seo\og\OpenGraph;
 use app\models\tool\seo\og\OpenGraphProduct;
 use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductProperties;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductProperties;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 
 class ProductController extends Controller
 {
@@ -59,7 +59,7 @@ class ProductController extends Controller
 			OpenGraphProduct::image(System::protocol() . "://" . System::domain() . '/web/upload/' . $product->image);
 		}
 
-		$properties = ProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', ProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
+		$properties = SaveProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', SaveProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
 
 
 		return $this->render('view', [

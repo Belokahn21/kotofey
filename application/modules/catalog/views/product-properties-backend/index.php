@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-/* @var $model \app\modules\catalog\models\entity\ProductProperties */
+/* @var $model \app\modules\catalog\models\entity\SaveProductProperties */
 
 $this->title = Title::showTitle("Свойства товаров"); ?>
     <section>

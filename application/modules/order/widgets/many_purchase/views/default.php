@@ -1,7 +1,7 @@
 <?php
 
 /* @var $models \app\modules\catalog\models\entity\Product[]
- * @var $informersValues \app\modules\catalog\models\entity\InformersValues[]
+ * @var $informersValues \app\modules\catalog\models\entity\SaveInformersValues[]
  */
 
 ?>

@@ -4,10 +4,10 @@ namespace app\modules\catalog\widgets\filter;
 
 use app\models\forms\CatalogFilter;
 use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\SaveInformers;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductProperties;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductProperties;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
@@ -42,7 +42,7 @@ class CatalogFilterWidget extends Widget
             $products = Product::find()->where(['category_id' => $arSubCategories])->all();
 
             if ($products) {
-                $productPropertiesValues = ProductPropertiesValues::find()->where(['product_id' => ArrayHelper::getColumn($products, 'id')])->all();
+                $productPropertiesValues = SaveProductPropertiesValues::find()->where(['product_id' => ArrayHelper::getColumn($products, 'id')])->all();
             }
 
             if ($productPropertiesValues) {
@@ -51,7 +51,7 @@ class CatalogFilterWidget extends Widget
 
 
             if ($currentProperties) {
-                $properties = ProductProperties::find()->where(['id' => $currentProperties, 'type' => 1])->all();
+                $properties = SaveProductProperties::find()->where(['id' => $currentProperties, 'type' => 1])->all();
             }
 
             if ($properties) {
@@ -61,7 +61,7 @@ class CatalogFilterWidget extends Widget
         }
 
 
-        $informers = Informers::find()->where(['is_active' => 1, 'is_show_filter' => 1]);
+        $informers = SaveInformers::find()->where(['is_active' => 1, 'is_show_filter' => 1]);
 
         if ($currentInformers) {
             $informers->andWhere(['id' => $currentInformers]);

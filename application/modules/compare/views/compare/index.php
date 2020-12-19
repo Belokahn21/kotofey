@@ -1,7 +1,7 @@
 <?php
 
-use app\modules\catalog\models\entity\ProductPropertiesValues;
-use app\modules\catalog\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\compare\models\entity\Compare;
 use app\models\tool\seo\Title;
 
@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров'
             <div class="compare-list__title"><?= $item->name; ?></div>
 
             <ul class="compare-properties">
-				<?php foreach (ProductPropertiesValues::find()->where(['product_id' => $item->id])->all() as $property_value): ?>
+				<?php foreach (SaveProductPropertiesValues::find()->where(['product_id' => $item->id])->all() as $property_value): ?>
                     <li class="compare-properties__item <?php // identity ?>">
                         <div class="compare-properties__key"><?= $property_value->property->name; ?></div>
                         <div class="compare-properties__value"><?= $property_value->finalValue; ?></div>

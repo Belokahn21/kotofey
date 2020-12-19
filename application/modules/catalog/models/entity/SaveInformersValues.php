@@ -28,7 +28,7 @@ use yii\db\ActiveRecord;
  *
  * @property Media $media
  */
-class InformersValues extends ActiveRecord
+class SaveInformersValues extends ActiveRecord
 {
     public function rules()
     {

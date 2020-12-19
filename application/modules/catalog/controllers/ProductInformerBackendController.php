@@ -3,8 +3,8 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\Informers;
-use app\modules\catalog\models\search\InformersSearchForm;
+use app\modules\catalog\models\entity\SaveInformers;
+use app\modules\catalog\models\search\SaveInformersSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
@@ -17,8 +17,8 @@ class ProductInformerBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new Informers();
-        $searchModel = new InformersSearchForm();
+        $model = new SaveInformers();
+        $searchModel = new SaveInformersSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
@@ -44,7 +44,7 @@ class ProductInformerBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = Informers::findOne($id);
+        $model = SaveInformers::findOne($id);
         if (\Yii::$app->request->isPost) {
 
             if ($model->load(\Yii::$app->request->post())) {
@@ -67,7 +67,7 @@ class ProductInformerBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (Informers::findOne($id)->delete()) {
+        if (SaveInformers::findOne($id)->delete()) {
             Alert::setSuccessNotify('Справочник удалён');
         }
 

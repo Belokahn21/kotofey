@@ -21,7 +21,7 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Informers extends ActiveRecord
+class SaveInformers extends ActiveRecord
 {
     public function behaviors()
     {

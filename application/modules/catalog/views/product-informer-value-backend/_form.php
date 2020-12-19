@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\SaveInformers;
 use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
-/* @var $model \app\modules\catalog\models\entity\InformersValues */
+/* @var $model \app\modules\catalog\models\entity\SaveInformersValues */
 
 ?>
 <nav>
@@ -16,7 +16,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <?= $form->field($model, 'name')->textInput() ?>
         <?= $form->field($model, 'active')->checkbox() ?>
-        <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(Informers::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
+        <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(SaveInformers::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
         <?= $form->field($model, 'sort')->textInput(['value' => 500]) ?>
         <?= $form->field($model, 'link')->textInput() ?>
         <?= $form->field($model, 'description')->textarea() ?>

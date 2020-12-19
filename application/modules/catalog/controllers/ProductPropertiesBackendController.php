@@ -3,7 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductPropertiesSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
@@ -17,7 +17,7 @@ class ProductPropertiesBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new ProductProperties();
+        $model = new SaveProductProperties();
         $searchModel = new ProductPropertiesSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
@@ -40,7 +40,7 @@ class ProductPropertiesBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = ProductProperties::findOne($id);
+        $model = SaveProductProperties::findOne($id);
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -59,7 +59,7 @@ class ProductPropertiesBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (ProductProperties::findOne($id)->delete()) {
+        if (SaveProductProperties::findOne($id)->delete()) {
             Alert::setSuccessNotify('Свойство товара удалено');
         }
 

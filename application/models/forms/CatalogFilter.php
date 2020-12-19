@@ -3,8 +3,8 @@
 namespace app\models\forms;
 
 
-use app\modules\catalog\models\entity\ProductProperties;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductProperties;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\site\models\tools\Debug;
 use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use yii\base\Model;
@@ -50,14 +50,14 @@ class CatalogFilter extends Model
 			$ar_product_id = array();
 
 			// properties
-			$values = ProductPropertiesValues::find()->select('product_id');
+			$values = SaveProductPropertiesValues::find()->select('product_id');
 			$properties_ids = array();
 			$value_list = array();
 			$iter = 0;
 
 			foreach ($this->informer as $informer_id => $arValues) {
 				if (is_array($arValues)) {
-					$properties_ids[] = ProductProperties::find()->where(['informer_id' => $informer_id])->one()->id;
+					$properties_ids[] = SaveProductProperties::find()->where(['informer_id' => $informer_id])->one()->id;
 					$value_list = array_merge($value_list, $arValues);
 					$iter++;
 				}

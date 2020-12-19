@@ -6,12 +6,12 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\Informers;
+use app\modules\catalog\models\entity\SaveInformers;
 
-/* @var $model \app\modules\catalog\models\entity\InformersValues */
+/* @var $model \app\modules\catalog\models\entity\SaveInformersValues */
 /* @var $this \yii\web\View */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
-/* @var $searchModel \app\modules\catalog\models\search\InformersValuesSearchForm */
+/* @var $searchModel \app\modules\catalog\models\search\SaveInformersValuesSearchForm */
 
 $this->title = Title::showTitle("Значения справочников"); ?>
     <section>
@@ -55,9 +55,9 @@ $this->title = Title::showTitle("Значения справочников"); ?>
 		[
 			'attribute' => 'informer_id',
 			'format' => 'raw',
-			'filter' => ArrayHelper::map(Informers::find()->asArray(true)->all(), 'id', 'name'),
+			'filter' => ArrayHelper::map(SaveInformers::find()->asArray(true)->all(), 'id', 'name'),
 			'value' => function ($model) {
-				return Informers::findOne($model->informer_id)->name;
+				return SaveInformers::findOne($model->informer_id)->name;
 			}
 		],
 		[

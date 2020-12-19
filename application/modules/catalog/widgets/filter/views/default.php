@@ -3,10 +3,10 @@
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\forms\CatalogFilter;
-use app\modules\catalog\models\entity\InformersValues;
+use app\modules\catalog\models\entity\SaveInformersValues;
 
 /* @var $filterModel CatalogFilter
- * @var $informers \app\modules\catalog\models\entity\InformersValues[]
+ * @var $informers \app\modules\catalog\models\entity\SaveInformersValues[]
  */
 
 ?>
@@ -31,7 +31,7 @@ use app\modules\catalog\models\entity\InformersValues;
     <div class="filter-catalog__item"><input class="filter-catalog__range" type="range"></div>
     <?php foreach ($informers as $informer): ?>
         <?php
-        $values = InformersValues::find()->where(['informer_id' => $informer->id, 'active' => true])->orderBy(['name' => SORT_ASC]);
+        $values = SaveInformersValues::find()->where(['informer_id' => $informer->id, 'active' => true])->orderBy(['name' => SORT_ASC]);
         if ($productPropertiesValues) {
             $values->andWhere(['id' => ArrayHelper::getColumn($productPropertiesValues, 'value')]);
         }

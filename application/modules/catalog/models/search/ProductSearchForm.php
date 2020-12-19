@@ -4,8 +4,8 @@ namespace app\modules\catalog\models\search;
 
 
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductProperties;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductProperties;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -46,7 +46,7 @@ class ProductSearchForm extends Product
 
         $product_properties_values = [];
         if ($this->prop_sales) {
-            $product_properties_values = ArrayHelper::getColumn(ProductPropertiesValues::find()->select(['product_id'])->where(['value' => $this->prop_sales, 'property_id' => 11])->all(), 'product_id');
+            $product_properties_values = ArrayHelper::getColumn(SaveProductPropertiesValues::find()->select(['product_id'])->where(['value' => $this->prop_sales, 'property_id' => 11])->all(), 'product_id');
         }
 
         if ($this->id) {

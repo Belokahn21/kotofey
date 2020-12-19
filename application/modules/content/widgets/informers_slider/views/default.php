@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Url;
-use app\modules\catalog\models\entity\ProductPropertiesValues;
+use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 
 /* @var $providers \yii\db\ActiveQuery */
@@ -23,7 +23,7 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
                             </div>
                             <div class="category-slider__label">
                                 <?= Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
-                                    return ProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
+                                    return SaveProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
                                 }); ?> позиций
                             </div>
                         </div>

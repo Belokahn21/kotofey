@@ -3,9 +3,9 @@
 namespace app\modules\catalog\models\entity;
 
 
-use app\modules\catalog\models\entity\Informers;
-use app\modules\catalog\models\entity\InformersValues;
-use app\modules\catalog\models\entity\ProductProperties;
+use app\modules\catalog\models\entity\SaveInformers;
+use app\modules\catalog\models\entity\SaveInformersValues;
+use app\modules\catalog\models\entity\SaveProductProperties;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -17,11 +17,11 @@ use yii\db\ActiveRecord;
  * @property string $property_id
  * @property string $product_id
  * @property string $value
- * @property ProductProperties $property
- * @property Informers $informer
+ * @property SaveProductProperties $property
+ * @property SaveInformers $informer
  * @property string $finalValue
  */
-class ProductPropertiesValues extends ActiveRecord
+class SaveProductPropertiesValues extends ActiveRecord
 {
     public static function tableName()
     {
@@ -39,13 +39,13 @@ class ProductPropertiesValues extends ActiveRecord
 
     public function getProperty()
     {
-        return ProductProperties::findOne($this->property_id);
+        return SaveProductProperties::findOne($this->property_id);
     }
 
     public function getInformer()
     {
         $property = $this->getProperty();
-        return (($property->type == 0) ?: Informers::findOne($property->informer_id));
+        return (($property->type == 0) ?: SaveInformers::findOne($property->informer_id));
     }
 
     public function getFinalValue()
@@ -53,7 +53,7 @@ class ProductPropertiesValues extends ActiveRecord
         $cache = \Yii::$app->cache;
         if ($this->property->type == 1) {
             $element = $cache->getOrSet(sprintf('gfvinformer:%s:%s', $this->informer->id, $this->value), function () {
-                return InformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one();
+                return SaveInformersValues::find()->where(['informer_id' => $this->informer->id, 'id' => $this->value])->one();
             });
 
             if ($element) return $element->name;
