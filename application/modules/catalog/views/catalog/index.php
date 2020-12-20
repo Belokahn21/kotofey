@@ -3,6 +3,7 @@
 /* @var $this yii\web\View
  * @var $products \app\modules\catalog\models\entity\Product
  * @var $filterModel CatalogFilter
+ * @var $display string
  * @var $category \app\modules\catalog\models\entity\Category
  */
 
@@ -71,13 +72,17 @@ if ($category) {
         <div class="catalog-wrap">
             <?= ProductSortWidget::widget(); ?>
             <?php if ($products): ?>
-                <ul class="catalog">
-                    <?php foreach ($products as $product): ?>
-                        <?= $this->render('@app/modules/catalog/views/__item', [
-                            'product' => $product
-                        ]); ?>
-                    <?php endforeach; ?>
-                </ul>
+
+                <?php if ($display == 'block'): ?>
+                    <?= $this->render('type-display/block', [
+                        'products' => $products
+                    ]); ?>
+                <?php else: ?>
+                    <?= $this->render('type-display/list', [
+                        'products' => $products
+                    ]); ?>
+                <?php endif; ?>
+
                 <div class="pagination-wrap">
                     <?= LinkPager::widget([
                         'pagination' => $pagerItems,

@@ -23,8 +23,15 @@ class ProductSortWidget extends Widget
                 'value' => 'desc',
             ],
         ];
+
+        $display = [
+            'list' => 'fas fa-th-list',
+            'block' => 'fas fa-th'
+        ];
+
         return $this->render($this->view, [
-            'sort' => $sort
+            'sort' => $sort,
+            'display' => $display,
         ]);
     }
 }

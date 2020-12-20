@@ -1,0 +1,21 @@
+.type-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  &__item {
+    font-size: 35px;
+    margin-right: 40px;
+    transition: 0.2s color ease-in-out;
+    color: $main-color;
+
+    &.active {
+      color: $active-color;
+    }
+
+    &:hover {
+      color: $active-color;
+
+    }
+  }
+}

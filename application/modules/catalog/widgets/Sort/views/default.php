@@ -1,5 +1,10 @@
 <?php
-/* @var $sort array */
+
+use yii\helpers\Url;
+
+/* @var $sort array
+ * @var $display array
+ */
 ?>
 <form class="catalog-sort">
     <?php /*
@@ -13,6 +18,15 @@
         <div class="catalog-sort__title">Силикатный</div>
     </label>
  */ ?>
+
+    <div class="type-display">
+        <?php foreach ($display as $value => $class): ?>
+            <a class="type-display__item<?= $value == Yii::$app->request->get('display', 'block') ? ' active' : ''; ?> " href="<?= Url::to(['', 'display' => $value]); ?>">
+                <i class="<?= $class; ?>"></i>
+            </a>
+        <?php endforeach; ?>
+    </div>
+
 
     <?php if ($sort): ?>
         <div class="catalog-sort-select">

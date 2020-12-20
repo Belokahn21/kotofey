@@ -57,14 +57,12 @@ class ProductController extends Controller
 
         // todo: отсюда переделать на новые свойства
         $properties = SaveProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', SaveProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
-
-
         ProductHelper::addVisitedItem($product->id);
 
         return $this->render('view', [
             'product' => $product,
             'category' => $category,
-            'properties' => $properties
+            'properties' => $properties,
         ]);
     }
 }

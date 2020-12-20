@@ -47,12 +47,16 @@ class Search extends Model
 
             $phrase = $this->search;
 
-            foreach (explode(' ', $phrase) as $text_line) {
-                $products->andFilterWhere([
-                    'or',
-                    ['like', 'name', $text_line],
-                    ['like', 'feed', $text_line]
-                ]);
+            if (is_numeric($phrase)) {
+                $products->where(['article' => $phrase]);
+            } else {
+                foreach (explode(' ', $phrase) as $text_line) {
+                    $products->andFilterWhere([
+                        'or',
+                        ['like', 'name', $text_line],
+                        ['like', 'feed', $text_line]
+                    ]);
+                }
             }
 
 
