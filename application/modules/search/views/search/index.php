@@ -1,10 +1,11 @@
 <?php
 
-use app\models\tool\seo\Title;
+use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
-use yii\widgets\LinkPager;
+use app\models\tool\seo\Title;
 use app\widgets\Breadcrumbs;
+use yii\widgets\LinkPager;
 
 /* @var $products \app\modules\catalog\models\entity\Product[] */
 
@@ -51,4 +52,5 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
         </p>
         <img src="/upload/images/chat.png" style="width: auto; margin: 0 auto 50px auto; display: block;">
     <?php endif; ?>
+    <?= VisitedProductsWidget::widget(); ?>
 </div>

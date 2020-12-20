@@ -39,6 +39,7 @@ block contents
                             ]
                         each item,index in items
                             +catalogItem(item)
+                    include include/block/visitedItems
                     ul.pagination
                         li.prev.disabled
                             span «

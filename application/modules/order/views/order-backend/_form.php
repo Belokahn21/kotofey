@@ -218,31 +218,31 @@ use yii\helpers\Url;
                 <h3>Адрес доставки</h3>
                 <div class="order-delivery-info">
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'postalcode')->textInput(); ?>
+                        <?= $form->field($model, 'postalcode')->textInput(['placeholder' => 'Почтовый индекс'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'country')->textInput(); ?>
+                        <?= $form->field($model, 'country')->textInput(['placeholder' => 'Почтовый индекс'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'region')->textInput(); ?>
+                        <?= $form->field($model, 'region')->textInput(['placeholder' => 'Регион'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'city')->textInput(); ?>
+                        <?= $form->field($model, 'city')->textInput(['placeholder' => 'Город'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'street')->textInput(); ?>
+                        <?= $form->field($model, 'street')->textInput(['placeholder' => 'Улица'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'number_home')->textInput(); ?>
+                        <?= $form->field($model, 'number_home')->textInput(['placeholder' => 'Номер дома'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'number_appartament')->textInput(); ?>
+                        <?= $form->field($model, 'number_appartament')->textInput(['placeholder' => 'Номер квартиры'])->label(false); ?>
                     </div>
 
                 </div>
@@ -251,10 +251,10 @@ use yii\helpers\Url;
                 <h3>Дата и время доставки</h3>
                 <div class="order-delivery-info">
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($dateDelivery, 'date')->textInput(['class' => 'js-datepicker form-control']); ?>
+                        <?= $form->field($dateDelivery, 'date')->textInput(['class' => 'js-datepicker form-control', 'placeholder' => 'День доставки'])->label(false); ?>
                     </div>
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($dateDelivery, 'time')->textInput(); ?>
+                        <?= $form->field($dateDelivery, 'time')->textInput(['placeholder' => 'Время доставки'])->label(false); ?>
                     </div>
                 </div>
             </div>

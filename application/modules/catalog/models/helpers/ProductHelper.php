@@ -2,16 +2,36 @@
 
 namespace app\modules\catalog\models\helpers;
 
+use Yii;
+use yii\helpers\Url;
 use app\models\tool\System;
 use app\modules\media\models\entity\Media;
-use app\modules\site\models\helpers\ImageHelper;
-use app\modules\site\models\tools\Debug;
-use yii\helpers\Url;
-use app\modules\catalog\models\helpers\ProductPropertiesHelper;
 use app\modules\catalog\models\entity\Product;
 
 class ProductHelper
 {
+    const COOKIE_VISITED_KEY = 'user_visited';
+
+    public static function addVisitedItem($product_id)
+    {
+        $cookies = Yii::$app->response->cookies;
+
+        $old = self::getAllVisitedItems();
+
+        array_push($old, $product_id);
+
+        $cookies->add(new \yii\web\Cookie([
+            'name' => self::COOKIE_VISITED_KEY,
+            'value' => $old,
+        ]));
+    }
+
+    public static function getAllVisitedItems()
+    {
+        $cookies = Yii::$app->request->cookies;
+        return array_unique($cookies->getValue(self::COOKIE_VISITED_KEY, array()));
+    }
+
     /* цена товара за 1 киллограмм */
     public static function getPriceByWeight(Product $product, $weight)
     {
