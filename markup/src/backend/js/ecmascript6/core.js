@@ -1,11 +1,12 @@
 import $ from 'jquery';
+window.$ = window.jQuery = $;
 import 'popper.js';
 import 'bootstrap';
-window.$ = window.jQuery = $;
 
 import '../reactjs/components/sidebar';
 import '../reactjs/components/statistic';
 import '../reactjs/components/todo';
+import '../reactjs/components/FindProduct';
 
 
 import './block/CheckExistProduct';

@@ -8,7 +8,9 @@ const parentElements = document.querySelectorAll('.orders-items-item');
 if (parentElements) {
     parentElements.forEach((parentElement) => {
         let handleElement = parentElement.querySelector('.load-product-info__pid');
-        handleElement.addEventListener('keyup', handleInput);
+        if (handleElement) {
+            handleElement.addEventListener('keyup', handleInput);
+        }
     });
 }
 
