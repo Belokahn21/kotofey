@@ -9,6 +9,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\vendors\models\entity\Vendor;
+use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 
 /* @var $properties \app\modules\catalog\models\entity\SaveProductPropertiesValues[]
  * @var \yii\web\View $this
@@ -214,6 +215,7 @@ $this->title = Title::showTitle($product->name);
         </div>
     </div>
 </div>
+<?= VisitedProductsWidget::widget(); ?>
 <?php /*
 <div class="page-title__group is-column"><h2 class="page-title">Выгодные предложения</h2><a class="page-title__link" href="javascript:void(0);">Все предложения</a></div>
 <div class="swiper-container vitrine-container">
