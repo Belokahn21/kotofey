@@ -79,7 +79,7 @@ class RestController extends Controller
                 'barcode' => $product->barcode,
                 'vitrine' => $product->vitrine,
                 'feed' => $product->feed,
-                'image' => @\Yii::$app->CDN->resizeImage($product->media->cdnData['public_id']),
+                'image' => @$product->media->cdnData,
             ];
         }
 

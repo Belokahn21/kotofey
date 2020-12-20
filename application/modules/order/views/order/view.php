@@ -14,7 +14,7 @@ use yii\helpers\Html;
 
 $this->title = "Просмотр заказа: #" . $order->id;
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
-$this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'url' => Url::to(['/profile/order', 'id' => $order->id])];
+$this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'url' => Url::to(['/order/order/view', 'id' => $order->id])];
 ?>
 
 <div class="page">
@@ -27,9 +27,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
     <h1 class="page__title">Просмотр заказа: #<?= $order->id; ?></h1>
-    <div class="row">
+    <div class="row" style="width: 100%;">
         <div class="col-6">
-            <table width="100%">
+            <table style="width:100%">
+                <tr>
+                    <td colspan="2" align="center">Информация о заказе</td>
+                </tr>
                 <tr>
                     <td>Дата создания</td>
                     <td><?= date('d.m.Y', $order->created_at) ?></td>
@@ -65,6 +68,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <td>Оплачено</td>
                     <td><?= ($order->is_paid ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red'])); ?></td>
                 </tr>
+                <tr>
+                    <td colspan="2" align="center">Адрес доставки</td>
+                </tr>
+                <tr>
+                    <td>
+                        <?= $order->city ? "г. " . $order->city : null; ?>
+                        <?= $order->street ? ", ул. " . $order->street : null; ?>
+                        <?= $order->number_home ? ", дом. " . $order->number_home : null; ?>
+                        <?= $order->number_appartament ? ", кв. " . $order->number_appartament : null; ?>
+                    </td>
+                </tr>
             </table>
         </div>
         <div class="col-6">
@@ -72,18 +86,16 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                 <ul class="profile-order-products">
                     <?php foreach ($items as $item): ?>
                         <li class="profile-order-products__item">
-                            <?= Html::a($item->name, $item->product ? $item->product->detail : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
-
                             <?php if ($item->product): ?>
                                 <img class="profile-order-products__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" alt="<?= $item->image; ?>">
                             <?php else: ?>
                                 <img class="profile-order-products__image" src="/images/not-image.png" alt="<?= $item->image; ?>">
                             <?php endif; ?>
-
-                            <div class="profile-order-products__price"><?= Price::format($item->price); ?></div>
+                            <?= Html::a($item->name, $item->product ? $item->product->detail : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
+                            <div class="profile-order-products__price"><?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                             <div class="profile-order-products__char">X</div>
-                            <div class="profile-order-products__count"><?= $item->count; ?></div>
-                            <div class="profile-order-products__summary"><?= Price::format($item->count * $item->price); ?></div>
+                            <div class="profile-order-products__count"><?= $item->count; ?> шт.</div>
+                            <div class="profile-order-products__summary"><?= Price::format($item->count * $item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                         </li>
                     <?php endforeach; ?>
                 </ul>
