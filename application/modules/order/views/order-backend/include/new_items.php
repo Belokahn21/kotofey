@@ -23,7 +23,7 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
         </div>
         <div class="col-sm-1">
             <?= $form->field($itemsModel, '[' . $i . ']product_id')->widget(FindProducstWidgets::className())->label(false); ?>
-            <!--            --><? //= $form->field($itemsModel, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info__pid form-control', 'placeholder' => "PID"])->label(false); ?>
+            <!--            --><?php //= $form->field($itemsModel, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info__pid form-control', 'placeholder' => "PID"])->label(false); ?>
         </div>
         <div class="col-sm-1 order-item-skip">
             <?= $form->field($itemsModel, '[' . $i . ']need_delete')->checkbox(); ?>
