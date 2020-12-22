@@ -4,6 +4,7 @@ namespace app\modules\order\controllers;
 
 use app\modules\order\models\entity\OrderDate;
 use app\modules\site\controllers\MainBackendController;
+use app\modules\site\models\tools\Debug;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\search\OrderSearchForm;
@@ -29,6 +30,18 @@ use yii\web\HttpException;
 class OrderBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+        $oldRules = $parentAccess['access']['rules'];
+        $newRules = [['allow' => true, 'actions' => ['report'], 'roles' => ['Administrator']]];
+
+
+        $parentAccess['access']['rules'] = array_merge($newRules, $oldRules);
+
+        return $parentAccess;
+    }
 
     public function actionIndex()
     {
@@ -214,12 +227,9 @@ class OrderBackendController extends MainBackendController
         return $this->redirect(['index']);
     }
 
-    public function actionOrderReport($id)
+    public function actionReport($id)
     {
-        $order = Order::findOne($id);
-        if (!$order) {
-            throw new HttpException(404, 'Запись не найдена');
-        }
+        if (!$order = Order::findOne($id)) throw new HttpException(404, 'Запись не найдена');
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();
