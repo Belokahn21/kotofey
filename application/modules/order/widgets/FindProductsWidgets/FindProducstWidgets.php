@@ -5,6 +5,7 @@ namespace app\modules\order\widgets\FindProductsWidgets;
 
 use yii\base\Widget;
 use yii\helpers\Html;
+use yii\helpers\Json;
 
 class FindProducstWidgets extends Widget
 {
@@ -31,7 +32,10 @@ class FindProducstWidgets extends Widget
         ]);
 
         echo Html::tag('div', '', [
-            'class' => 'find-product'
+            'class' => 'find-product',
+            'data-options' => Json::encode([
+                'modalId' => md5($this->attribute)
+            ])
         ]);
 
     }
