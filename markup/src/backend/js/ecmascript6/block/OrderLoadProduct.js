@@ -9,8 +9,10 @@ if (parentElements) {
     parentElements.forEach((parentElement) => {
         let handleElement = parentElement.querySelector('.load-product-info__pid');
         if (handleElement) {
-            handleElement.onkeyup = handleInput.bind(this);
-            handleElement.onchange = handleInput.bind(this);
+            // handleElement.onkeyup = handleInput.bind(this);
+            // handleElement.onchange = handleInput.bind(this);
+            handleElement.addEventListener('change', handleInput);
+            handleElement.addEventListener('keyup', handleInput);
         }
     });
 }
@@ -23,11 +25,16 @@ function handleInput(event) {
     getProduct(product_id).then((data) => {
         let product = JSON.parse(data);
 
+        console.log(product);
+
         for (const [key, value] of Object.entries(product)) {
 
             let input = parent.querySelector('.load-product-info__' + key);
 
+            console.log(key);
+
             if (input) {
+                console.log(input);
                 input.value = value;
             }
         }
