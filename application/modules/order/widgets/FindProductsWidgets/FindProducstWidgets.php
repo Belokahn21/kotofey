@@ -29,7 +29,7 @@ class FindProducstWidgets extends Widget
             'id' => 'uniq-' . $modalId,
             'placeholder' => 'PID',
             'data-target' => '#' . $modalId,
-            'data-toggle' => '1modal'
+            'data-toggle' => 'modal'
         ]);
 
         echo Html::tag('div', '', [

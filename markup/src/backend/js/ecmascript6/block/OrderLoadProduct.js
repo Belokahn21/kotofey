@@ -25,18 +25,11 @@ function handleInput(event) {
     getProduct(product_id).then((data) => {
         let product = JSON.parse(data);
 
-        console.log(product);
+        if (key === 'count') return false;
 
-        for (const [key, value] of Object.entries(product)) {
-
+        for (const [key, value] of Object.entries(product[0])) {
             let input = parent.querySelector('.load-product-info__' + key);
-
-            console.log(key);
-
-            if (input) {
-                console.log(input);
-                input.value = value;
-            }
+            if (input) input.value = value;
         }
     });
 }
