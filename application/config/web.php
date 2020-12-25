@@ -118,6 +118,7 @@ $config = [
                 'GET menu/rest-backend/get' => 'menu/rest-backend/get',
                 'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
                 'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
+                'GET catalog/rest-backend/get' => 'catalog/rest-backend/get',
                 'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
                 'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
                 'GET user/rest-backend/get' => 'user/rest-backend/get',

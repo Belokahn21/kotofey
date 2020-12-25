@@ -22,10 +22,11 @@ class FindProducstWidgets extends Widget
         parent::run();
 
         $modalId = 'modal_' . $this->attribute;
-        $modalId = md5($modalId);
+        $modalId = md5(rand());
 
         echo Html::activeInput('text', $this->model, $this->attribute, [
             'class' => 'form-control load-product-info__pid',
+            'id' => 'uniq-' . $modalId,
             'placeholder' => 'PID',
             'data-target' => '#' . $modalId,
             'data-toggle' => 'modal'
@@ -34,7 +35,7 @@ class FindProducstWidgets extends Widget
         echo Html::tag('div', '', [
             'class' => 'find-product',
             'data-options' => Json::encode([
-                'modalId' => md5($this->attribute)
+                'modalId' => $modalId
             ])
         ]);
 

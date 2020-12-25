@@ -8,7 +8,7 @@ class Index extends React.Component {
 
         let options = JSON.parse(props.options);
 
-        this.modalId = options.modal;
+        this.modalId = options.modalId;
     }
 
 
@@ -24,7 +24,7 @@ class Index extends React.Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <FindProductForm/>
+                            <FindProductForm inputId={this.props.modalId}/>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
@@ -41,7 +41,7 @@ const findProduct = document.querySelectorAll('.find-product');
 
 if (findProduct) {
     findProduct.forEach(el => {
-        let options = findProduct.attribute('data-options');
+        let options = el.getAttribute('data-options');
         ReactDom.render(<Index options={options}/>, el);
     });
 }

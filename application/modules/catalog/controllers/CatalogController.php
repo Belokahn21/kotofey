@@ -30,6 +30,7 @@ class CatalogController extends Controller
 
         $filterModel = new CatalogFilter();
         $category = Category::findBySlug($id);
+        $sb = [];
         if ($category) {
             $sb = $category->subsections();
         }

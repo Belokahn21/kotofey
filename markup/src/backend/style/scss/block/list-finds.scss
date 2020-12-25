@@ -1,0 +1,25 @@
+.list-finds {
+  margin-top: 10px;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  &__link {
+    max-width: 70%;
+    width: 100%;
+    font-size: 12px;
+    color: black;
+  }
+
+  &__setup {
+    background: transparent;
+    border: 1px rgba(0, 0, 0, 0.02) solid;
+    padding: 5px;
+    margin-left: auto;
+  }
+}

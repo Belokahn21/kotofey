@@ -31,10 +31,24 @@ class RestBackendController extends Controller
         ];
     }
 
-    public function actionGet($product_id)
+    public function actionGet($product_id = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        return Json::encode(Product::find()->select(['name', 'price', 'purchase', 'discount_price'])->where(['id' => $product_id])->one());
+        $query = Product::find()->select(['name', 'price', 'purchase', 'discount_price']);
+
+        if ($product_id) $query->where(['id' => $product_id]);
+
+        if ($phrase = \Yii::$app->request->get('name')) {
+            foreach (explode(' ', $phrase) as $text_line) {
+                $query->andFilterWhere([
+                    'or',
+                    ['like', 'name', $text_line],
+                    ['like', 'feed', $text_line]
+                ]);
+            }
+        }
+
+        return Json::encode($query->all());
     }
 }
