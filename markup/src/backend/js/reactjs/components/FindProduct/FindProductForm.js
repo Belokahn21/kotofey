@@ -30,8 +30,8 @@ class FindProductForm extends React.Component {
     }
 
     render() {
-        return <form>
-            <input onKeyUp={this.handleInput.bind(this)}/>
+        return <form className="form-finds">
+            <input className="form-finds__input" onKeyUp={this.handleInput.bind(this)} placeholder="Название для поиска" />
 
             <div className="list-finds">
                 {this.state.items.map((el, index) => {
