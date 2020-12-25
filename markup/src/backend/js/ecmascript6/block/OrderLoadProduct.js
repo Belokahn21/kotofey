@@ -9,7 +9,8 @@ if (parentElements) {
     parentElements.forEach((parentElement) => {
         let handleElement = parentElement.querySelector('.load-product-info__pid');
         if (handleElement) {
-            handleElement.addEventListener('keyup', handleInput);
+            handleElement.onkeyup = handleInput.bind(this);
+            handleElement.onchange = handleInput.bind(this);
         }
     });
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import config from '../../config';
+import Button from './Button';
 
 class FindProductForm extends React.Component {
     constructor(props) {
@@ -28,19 +29,6 @@ class FindProductForm extends React.Component {
         }, this.timeTimer);
     }
 
-    handleSetup(e) {
-        let input = document.querySelector('#uniq-' + this.inputId);
-        let button = e.target;
-
-        console.log(input);
-        console.log(this.inputId);
-
-        if (!input) return false;
-
-        input.value = button.getAttribute('data-product-id');
-    }
-
-
     render() {
         return <form>
             <input onKeyUp={this.handleInput.bind(this)}/>
@@ -49,7 +37,7 @@ class FindProductForm extends React.Component {
                 {this.state.items.map((el, index) => {
                     return <div className="list-finds__item" key={index}>
                         <a href="#" className="list-finds__link">{el.name}</a>
-                        <button type="button" className="list-finds__setup" onClick={this.handleSetup.bind(this)} data-product-id={el.id}>Выбрать</button>
+                        <Button productId={el.id} inputId={this.inputId} />
                     </div>
                 })}
             </div>

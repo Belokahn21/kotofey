@@ -24,7 +24,7 @@ class Index extends React.Component {
                             </button>
                         </div>
                         <div className="modal-body">
-                            <FindProductForm inputId={this.props.modalId}/>
+                            <FindProductForm inputId={this.modalId}/>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
