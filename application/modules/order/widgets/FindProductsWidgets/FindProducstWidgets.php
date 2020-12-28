@@ -27,9 +27,13 @@ class FindProducstWidgets extends Widget
         echo Html::activeInput('text', $this->model, $this->attribute, [
             'class' => 'form-control load-product-info__pid',
             'id' => 'uniq-' . $modalId,
-            'placeholder' => 'PID',
+            'style' => 'width:40px; display:inline-block;'
+        ]);
+
+        echo Html::tag('div', '+', [
             'data-target' => '#' . $modalId,
-            'data-toggle' => 'modal'
+            'data-toggle' => 'modal',
+            'style' => 'border:1px solid grey; display:inline-block; width:20px; height:30px; text-align:center; cursor:pointer;'
         ]);
 
         echo Html::tag('div', '', [
