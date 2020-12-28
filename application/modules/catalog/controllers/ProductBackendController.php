@@ -2,25 +2,25 @@
 
 namespace app\modules\catalog\controllers;
 
-use app\modules\catalog\models\entity\ProductMarket;
+use Yii;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
 use app\modules\site\controllers\MainBackendController;
-use Yii;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductMarket;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
-use yii\helpers\Url;
-use yii\web\Controller;
-use yii\web\HttpException;
 use yii\widgets\ActiveForm;
+use yii\web\HttpException;
+use yii\web\Controller;
+use yii\helpers\Url;
 
 
 class ProductBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
+    public $modelClass = 'app\modules\catalog\models\entity\Product';
 
 
     public function behaviors()
@@ -37,7 +37,7 @@ class ProductBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
+        $model = new $this->modelClass(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
         $modelDelivery = new ProductOrder();
         $properties = SaveProductProperties::find()->all();
         $searchModel = new ProductSearchForm();
@@ -64,9 +64,7 @@ class ProductBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = Product::findOne($id);
-
-        if (!$model) throw new HttpException(404, 'Товар такой не существует');
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Товар такой не существует');
 
         $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
         if (ProductMarket::hasStored($model->id)) {
@@ -110,7 +108,7 @@ class ProductBackendController extends MainBackendController
 
     public function actionDiscountClean()
     {
-        $products = Product::find()->where(['>', 'discount_price', 0]);
+        $products = $this->modelClass::find()->where(['>', 'discount_price', 0]);
         $hasItems = $products->count() > 0;
 
         foreach ($products->all() as $product) {
@@ -131,15 +129,13 @@ class ProductBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        $product = Product::findOne($id);
+        $product = $this->modelClass::findOne($id);
 
-        if (!$product) {
-            throw new HttpException(404, 'Товара не существует');
-        }
+        if (!$product) throw new HttpException(404, 'Товара не существует');
 
-        if ($product->delete()) {
-            Alert::setSuccessNotify('Продукт удалён');
-        }
+
+        if ($product->delete()) Alert::setSuccessNotify('Продукт удалён');
+
 
         return $this->redirect(Url::to(['index']));
     }
