@@ -12,6 +12,17 @@ let swiper = new Swiper('.slider-container', {
         dynamicBullets: true,
         clickable: true,
     },
+    on: {
+        init() {
+            this.el.addEventListener('mouseenter', () => {
+                this.autoplay.stop();
+            });
+
+            this.el.addEventListener('mouseleave', () => {
+                this.autoplay.start();
+            });
+        }
+    },
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -22,6 +33,18 @@ let swiperCategory = new Swiper('.category-slider-container', {
     loop: true,
     autoplay: {
         delay: 5000,
+    },
+
+    on: {
+        init() {
+            this.el.addEventListener('mouseenter', () => {
+                this.autoplay.stop();
+            });
+
+            this.el.addEventListener('mouseleave', () => {
+                this.autoplay.start();
+            });
+        }
     },
     pagination: {
         el: '.swiper-pagination',
@@ -47,6 +70,17 @@ let swiperChoose = new Swiper('.vitrine-container', {
     autoplay: {
         delay: 5000,
     },
+    on: {
+        init() {
+            this.el.addEventListener('mouseenter', () => {
+                this.autoplay.stop();
+            });
+
+            this.el.addEventListener('mouseleave', () => {
+                this.autoplay.start();
+            });
+        }
+    },
     breakpoints: {
         550: { // when window width is >= 480px
             slidesPerView: 4,
@@ -67,6 +101,17 @@ let swiperBrands = new Swiper('.brand-slider-container', {
         el: '.swiper-pagination',
         clickable: true,
     },
+    on: {
+        init() {
+            this.el.addEventListener('mouseenter', () => {
+                this.autoplay.stop();
+            });
+
+            this.el.addEventListener('mouseleave', () => {
+                this.autoplay.start();
+            });
+        }
+    },
     navigation: {
         nextEl: '.brand-slider-button-next',
         prevEl: '.brand-slider-button-prev',
@@ -85,6 +130,17 @@ let swiperAbout = new Swiper('.about-slider-container', {
     autoplay: {
         delay: 5000,
     },
+    on: {
+        init() {
+            this.el.addEventListener('mouseenter', () => {
+                this.autoplay.stop();
+            });
+
+            this.el.addEventListener('mouseleave', () => {
+                this.autoplay.start();
+            });
+        }
+    },
     pagination: {
         el: '.about-slider-pagination',
         dynamicBullets: true,
@@ -102,6 +158,17 @@ let swiperInstagramContainer = new Swiper('.instagram-container', {
     loop: true,
     autoplay: {
         delay: 5000,
+    },
+    on: {
+        init() {
+            this.el.addEventListener('mouseenter', () => {
+                this.autoplay.stop();
+            });
+
+            this.el.addEventListener('mouseleave', () => {
+                this.autoplay.start();
+            });
+        }
     },
     pagination: {
         el: '.instagram-pagination',
@@ -125,6 +192,17 @@ let swiperMiniSliderContainer = new Swiper('.mini-slider-container', {
     spaceBetween: 0,
     lazy: true,
     loop: true,
+    on: {
+        init() {
+            this.el.addEventListener('mouseenter', () => {
+                this.autoplay.stop();
+            });
+
+            this.el.addEventListener('mouseleave', () => {
+                this.autoplay.start();
+            });
+        }
+    },
     autoplay: {
         delay: 5000,
     },
