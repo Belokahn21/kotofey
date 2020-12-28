@@ -22,6 +22,19 @@ class ProductBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
 
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+        $oldRules = $parentAccess['access']['rules'];
+        $newRules = [['allow' => true, 'actions' => ['discount-clean'], 'roles' => ['Administrator']]];
+
+
+        $parentAccess['access']['rules'] = array_merge($newRules, $oldRules);
+
+        return $parentAccess;
+    }
+
     public function actionIndex()
     {
         $model = new Product(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
@@ -93,6 +106,27 @@ class ProductBackendController extends MainBackendController
     public function actionCopy()
     {
 
+    }
+
+    public function actionDiscountClean()
+    {
+        $products = Product::find()->where(['>', 'discount_price', 0]);
+        $hasItems = $products->count() > 0;
+
+        foreach ($products->all() as $product) {
+            $product->discount_price = null;
+
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+
+            if (!$product->validate() or !$product->update()) {
+                $hasItems = false;
+                break;
+            }
+        }
+
+        if ($hasItems) Alert::setSuccessNotify('Товары со скидкой очищены успешно');
+
+        return $this->redirect(['index']);
     }
 
     public function actionDelete($id)
