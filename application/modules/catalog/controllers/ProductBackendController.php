@@ -66,7 +66,7 @@ class ProductBackendController extends MainBackendController
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Товар такой не существует');
 
-        $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+        $model->scenario = $this->modelClass::SCENARIO_UPDATE_PRODUCT;
         if (ProductMarket::hasStored($model->id)) {
             $model->has_store = true;
         }
