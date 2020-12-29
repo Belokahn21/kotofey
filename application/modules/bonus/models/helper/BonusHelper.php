@@ -10,6 +10,6 @@ class BonusHelper
 {
     public static function applyUserBonus(Order $order)
     {
-
+        
     }
 }

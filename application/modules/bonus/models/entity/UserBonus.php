@@ -6,7 +6,7 @@ namespace app\modules\bonus\models\entity;
 use yii\db\ActiveRecord;
 
 /**
- * Discount model
+ * UserBonus model
  *
  * @property integer $id
  * @property integer $user_id
