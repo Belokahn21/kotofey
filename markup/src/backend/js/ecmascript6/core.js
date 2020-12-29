@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 window.$ = window.jQuery = $;
 import 'popper.js';
 import 'bootstrap';
@@ -13,6 +14,7 @@ import './block/CheckExistProduct';
 import './block/OrderLoadProduct';
 import './block/PhoneMask';
 import './block/notify';
+import CleanOrderPhone from './block/CleanOrderPhone';
 import './include/datepicker';
 import './include/other-jquery';
 import './include/maskedinput';
@@ -21,6 +23,7 @@ import SetPrice from './block/SetPrice';
 
 new ProductVendorFill();
 new SetPrice('.set-price');
+new CleanOrderPhone();
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {
