@@ -2,23 +2,22 @@
 
 namespace app\modules\payment;
 
-/**
- * payment module definition class
- */
+use yii\helpers\Url;
+
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\payment\controllers';
+    public $name = 'Оплаты';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Оплаты', 'url' => Url::to(['/admin/payment/payment-backend/index'])],
+        ];
     }
 }

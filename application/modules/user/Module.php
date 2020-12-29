@@ -18,22 +18,12 @@ class Module extends \yii\base\Module
         parent::init();
     }
 
-
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Пользователи',
-                'url' => Url::to(),
-            ],
-            [
-                'name' => 'Разрешения',
-                'url' => Url::to(),
-            ],
-            [
-                'name' => 'Группы',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Пользователи', 'url' => Url::to(['/admin/user/user-backend/index'])],
+            ['name' => 'Группы', 'url' => Url::to(['/admin/user/user-group-backend/index'])],
+            ['name' => 'Разрешения', 'url' => Url::to(['/admin/user/user-permission-backend/index'])],
         ];
     }
 

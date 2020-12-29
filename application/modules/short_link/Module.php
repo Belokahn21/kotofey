@@ -2,23 +2,23 @@
 
 namespace app\modules\short_link;
 
-/**
- * short_link module definition class
- */
+use yii\helpers\Url;
+
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\short_link\controllers';
+    public $name = 'Короткие ссылки';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
 
-        // custom initialization code goes here
+    }
+
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Короткие ссылки', 'url' => Url::to(['/admin/short_link/short-link-backend/index'])],
+        ];
     }
 }

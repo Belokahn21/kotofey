@@ -4,9 +4,6 @@ namespace app\modules\vendors;
 
 use yii\helpers\Url;
 
-/**
- * vendor module definition class
- */
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\vendors\controllers';
@@ -20,10 +17,8 @@ class Module extends \yii\base\Module
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Поставщики',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Поставщики', 'url' => Url::to(['/admin/vendors/vendors-backend/index'])],
+            ['name' => 'Группы поставщиков', 'url' => Url::to(['/admin/vendors/vendors-group-backend/index'])],
         ];
     }
 

@@ -2,23 +2,22 @@
 
 namespace app\modules\feed;
 
-/**
- * feed module definition class
- */
+use yii\helpers\Url;
+
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\feed\controllers';
+    public $name = 'Промокоды';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Поисковой контент', 'url' => Url::to(['/admin/feed/feed/index'])],
+        ];
     }
 }

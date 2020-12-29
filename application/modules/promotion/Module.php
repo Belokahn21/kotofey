@@ -2,23 +2,23 @@
 
 namespace app\modules\promotion;
 
-/**
- * promotion module definition class
- */
+use yii\helpers\Url;
+
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\promotion\controllers';
+    public $name = 'Акции';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Акции', 'url' => Url::to(['/admin/promotion/promotion-backend/index'])],
+            ['name' => 'Механики акций', 'url' => Url::to(['/admin/promotion/promotion-mechanics-backend/index'])],
+        ];
     }
 }

@@ -17,14 +17,8 @@ class Module extends \yii\base\Module
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Заказы',
-                'url' => Url::to(),
-            ],
-            [
-                'name' => 'Статусы',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Заказы', 'url' => Url::to(['/admin/order/order-backend/index'])],
+            ['name' => 'Статусы заказа', 'url' => Url::to(['/admin/order/order-status-backend/index'])],
         ];
     }
 

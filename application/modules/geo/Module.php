@@ -15,19 +15,13 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
-        // custom initialization code goes here
     }
-
-
 
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Города',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Города', 'url' => Url::to(['/admin/geo/geo-backend/index'])],
+            ['name' => 'Временные зоны', 'url' => Url::to(['/admin/geo/timezone-backend/index'])],
         ];
     }
 

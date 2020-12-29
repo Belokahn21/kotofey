@@ -20,10 +20,7 @@ class Module extends \yii\base\Module
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Список складов',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Склады', 'url' => Url::to(['/admin/stock/stock-backend/index'])],
         ];
     }
 

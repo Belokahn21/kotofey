@@ -18,14 +18,8 @@ class Module extends \yii\base\Module
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Новости',
-                'url' => Url::to(),
-            ],
-            [
-                'name' => 'Разделы',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Новости', 'url' => Url::to(['/admin/news/news-backend/index'])],
+            ['name' => 'Рубрики', 'url' => Url::to(['/admin/news/news-category-backend/index'])],
         ];
     }
 

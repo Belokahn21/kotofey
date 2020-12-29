@@ -5,7 +5,14 @@
         <?php if ($module): ?>
             <?php if (method_exists($module, 'menuIndex')): ?>
                 <div class="modules__item">
-                    <div class="modules__name"><?= $module->name; ?></div>
+                    <div class="modules__name">
+                        <?php
+                        try {
+                            echo $module->name;
+                        } catch (\yii\base\UnknownPropertyException $exception) {
+                            echo "Без названия";
+                        } ?>
+                    </div>
                     <ul class="module-menu">
                         <?php if ($items = $module->menuIndex()): ?>
                             <?php foreach ($items as $item): ?>

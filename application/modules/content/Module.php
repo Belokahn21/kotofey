@@ -21,14 +21,8 @@ class Module extends \yii\base\Module
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Слайдеры',
-                'url' => Url::to(),
-            ],
-            [
-                'name' => 'Изображения',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Слайдеры', 'url' => Url::to(['/admin/content/slider-backend/index'])],
+            ['name' => 'Изображения слайдера', 'url' => Url::to(['/admin/content/slider-images-backend/index'])],
         ];
     }
 
