@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use app\modules\user\models\entity\UserSex;
-use app\modules\bonus\models\entity\Discount;
+use app\modules\bonus\models\entity\UserBonus;
 use app\modules\user\models\entity\UsersReferal;
 use app\modules\order\models\entity\Order;
 
@@ -35,18 +35,6 @@ $this->title = Title::showTitle("Пользователи"); ?>
         'id',
         'phone',
         'email',
-        [
-            'label' => 'Бонусы',
-            'format' => 'raw',
-            'value' => function ($model) {
-                $discount = Discount::findByUserId($model->id);
-                if ($discount) {
-                    return $discount->count;
-                } else {
-                    return 0;
-                }
-            }
-        ],
         [
             'label' => 'Реферальный код',
             'format' => 'raw',

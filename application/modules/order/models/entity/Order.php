@@ -3,6 +3,7 @@
 namespace app\modules\order\models\entity;
 
 
+use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\site\models\tools\Debug;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
@@ -130,7 +131,11 @@ class Order extends ActiveRecord
         // todo: херня выходит с пересохранением заказа, надо поправить
         if (!$this->is_update) {
             (new Manegment())->applyCodeToUser($this);
+
         }
+
+        // Добавляем пользователю бонусы
+        BonusHelper::applyUserBonus($this);
 
         return parent::afterSave($insert, $changedAttributes);
     }

@@ -2,7 +2,7 @@
 
 namespace app\modules\user\models\entity;
 
-use app\modules\bonus\models\entity\Discount;
+use app\modules\bonus\models\entity\UserBonus;
 use app\modules\rbac\models\entity\AuthAssignment;
 use app\modules\rbac\models\entity\AuthItem;
 use mohorev\file\UploadBehavior;
@@ -32,7 +32,7 @@ use yii\web\IdentityInterface;
  *
  * @property AuthItem $group
  * @property Billing $billing
- * @property \app\modules\bonus\models\entity\Discount $discount
+ * @property \app\modules\bonus\models\entity\UserBonus $discount
  */
 class User extends \yii\db\ActiveRecord implements IdentityInterface
 {
@@ -135,7 +135,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public function getDiscount()
     {
-        return Discount::findByUserId($this->id);
+        return UserBonus::findByUserId($this->id);
     }
 
     public static function isRole($roleName)

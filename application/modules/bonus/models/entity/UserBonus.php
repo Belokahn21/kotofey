@@ -12,7 +12,7 @@ use yii\db\ActiveRecord;
  * @property integer $user_id
  * @property float $count
  */
-class Discount extends ActiveRecord
+class UserBonus extends ActiveRecord
 {
 	const PERCENT_AFTER_SALE = 5;
 	const REFERAL_COUNT_REWARD_MONEY = 200;
