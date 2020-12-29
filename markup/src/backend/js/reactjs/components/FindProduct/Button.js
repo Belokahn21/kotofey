@@ -3,15 +3,12 @@ import React from "react";
 class Button extends React.Component {
     constructor(props) {
         super(props);
-
-        this.productId = props.productId;
-        this.inputId = props.inputId;
     }
 
     handleSetup(e) {
-        let input = document.querySelector('#uniq-' + this.inputId);
+        let input = document.querySelector('#uniq-' + this.props.inputId);
         if (!input) return false;
-        input.value = this.productId;
+        input.value = this.props.productId;
         input.dispatchEvent(new Event('change'));
     }
 
