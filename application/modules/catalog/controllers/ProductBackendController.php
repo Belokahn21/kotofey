@@ -37,7 +37,7 @@ class ProductBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new $this->modelClass(['scenario' => Product::SCENARIO_NEW_PRODUCT]);
+        $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_NEW_PRODUCT]);
         $modelDelivery = new ProductOrder();
         $properties = SaveProductProperties::find()->all();
         $searchModel = new ProductSearchForm();
