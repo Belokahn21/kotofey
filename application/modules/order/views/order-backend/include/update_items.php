@@ -1,4 +1,7 @@
 <?php
+
+use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
+
 /* @var $itemsModel \app\modules\order\models\entity\OrdersItems */
 $iter = 0;
 $model = new \app\modules\order\models\entity\OrdersItems();
@@ -21,7 +24,7 @@ $model = new \app\modules\order\models\entity\OrdersItems();
             <?= $form->field($item, '[' . $i . ']discount_price')->textInput(['class' => 'load-product-info__discount_price form-control', 'placeholder' => "Со скидкой"])->label(false); ?>
         </div>
         <div class="col-sm-1">
-            <?= $form->field($item, '[' . $i . ']product_id')->textInput(['class' => 'load-product-info__pid form-control', 'placeholder' => "PID"])->label(false); ?>
+            <?= $form->field($item, '[' . $i . ']product_id')->widget(FindProducstWidgets::className())->label(false); ?>
         </div>
         <div class="col-sm-1">
             <?= $form->field($item, '[' . $i . ']need_delete')->checkbox(); ?>
@@ -47,7 +50,7 @@ $model = new \app\modules\order\models\entity\OrdersItems();
             <?= $form->field($model, '[' . $j . ']discount_price')->textInput(['class' => 'load-product-info__discount_price form-control', 'placeholder' => "Со скидкой"])->label(false); ?>
         </div>
         <div class="col-sm-1">
-            <?= $form->field($model, '[' . $j . ']product_id')->textInput(['class' => 'load-product-info__pid form-control', 'placeholder' => "PID"])->label(false); ?>
+            <?= $form->field($model, '[' . $j . ']product_id')->widget(FindProducstWidgets::className())->label(false); ?>
         </div>
         <div class="col-sm-1">
             <?= $form->field($model, '[' . $j . ']need_delete')->checkbox(); ?>
