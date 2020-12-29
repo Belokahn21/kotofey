@@ -37,7 +37,7 @@ class Index extends React.Component {
 }
 
 
-const findProduct = document.querySelectorAll('.find-product');
+const findProduct = document.querySelectorAll('.find-product-react');
 
 if (findProduct) {
     findProduct.forEach(el => {

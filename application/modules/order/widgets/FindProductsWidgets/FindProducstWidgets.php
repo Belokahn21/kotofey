@@ -31,13 +31,13 @@ class FindProducstWidgets extends Widget
         ]);
 
         echo Html::tag('div', '+', [
+            'class' => 'form-finds__setup',
             'data-target' => '#' . $modalId,
             'data-toggle' => 'modal',
-            'style' => 'border:1px solid grey; display:inline-block; width:20px; height:30px; text-align:center; cursor:pointer;'
         ]);
 
         echo Html::tag('div', '', [
-            'class' => 'find-product',
+            'class' => 'find-product-react',
             'data-options' => Json::encode([
                 'modalId' => $modalId
             ])
