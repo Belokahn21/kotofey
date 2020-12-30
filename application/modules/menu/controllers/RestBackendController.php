@@ -70,7 +70,6 @@ class RestBackendController extends Controller
 
 //            ['title' => 'Короткие ссылки', 'href' => Url::to(['/admin/short_link/short-link-backend/index'])],
 //			['title' => 'Поисковой контент', 'href' => Url::to(['/admin/feed/feed/index'])],
-            ['title' => 'Акционные товары', 'href' => Url::to(['/admin/sale-product'])],
 
 //			['title' => 'Вакансии', 'href' => Url::to(['/admin/vacancy/vacancy-backend/index'])],
 
