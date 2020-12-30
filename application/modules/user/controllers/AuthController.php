@@ -2,6 +2,7 @@
 
 namespace app\modules\user\controllers;
 
+use app\modules\bonus\models\helper\BonusHelper;
 use Yii;
 use yii\web\Controller;
 use yii\widgets\ActiveForm;
@@ -66,6 +67,8 @@ class AuthController extends Controller
                 Alert::setErrorNotify('Ошибка при создании пользователя.');
                 return $this->redirect(['/']);
             }
+
+            BonusHelper::createBonusAccount($model->phone);
 
             if (!\Yii::$app->user->login($model, 3600000)) {
                 Alert::setErrorNotify('Ошибка при авторизации нового пользователя.');
