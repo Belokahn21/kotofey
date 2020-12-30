@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 
+use app\modules\bonus\models\entity\UserBonus;
 use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
 use Yii;
@@ -35,6 +36,7 @@ class ProfileController extends Controller
             'orders' => $orders,
             'model' => $model,
             'sexList' => $sexList,
+            'bonus' => UserBonus::findByPhone($model->phone)
         ]);
     }
 

@@ -5,6 +5,7 @@
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $sexList \app\modules\user\models\entity\UserSex[]
  * @var $favorite \app\modules\catalog\models\entity\Product[]
+ * @var $bonus \app\modules\bonus\models\entity\UserBonus
  */
 
 use yii\helpers\Url;
@@ -54,6 +55,10 @@ $this->title = Title::showTitle('Личный кабинет');
                 <a class="profile-sections__item" id="pet-tab" data-toggle="tab" href="#pet" role="tab" aria-controls="pet" aria-selected="false">
                     <i class="fas fa-paw"></i>
                     <div class="profile-sections__title">Питомец</div>
+                </a>
+                <a class="profile-sections__item" id="pet-tab" data-toggle="tab" href="#bonus" role="tab" aria-controls="bonus" aria-selected="false">
+                    <i class="fas fa-coins"></i>
+                    <div class="profile-sections__title">Бонусы</div>
                 </a>
             </div>
         </div>
@@ -162,6 +167,11 @@ $this->title = Title::showTitle('Личный кабинет');
                 <div class="tab-pane fade" id="pet">
                     <h2 class="page__title">Карточка питомца</h2>
                     <p>Мы ещё делаем этот блок. Скоро здесь появится крутой функционал!</p>
+                </div>
+                <div class="tab-pane fade" id="bonus">
+                    <h2 class="page__title">Ваши бонусы</h2>
+                    <?= $bonus->count; ?>
+                    <div>История поступлений бонусов</div>
                 </div>
             </div>
         </div>
