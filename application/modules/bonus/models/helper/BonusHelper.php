@@ -13,5 +13,21 @@ class BonusHelper
     {
         $orderSumm = OrderHelper::orderSummary($order);
         $bonuses = round($orderSumm * (UserBonus::PERCENT_AFTER_SALE / 100));
+
+        self::addBonusUser($order->phone, $bonuses);
+    }
+
+    public static function addBonusUser($phone, $bonus)
+    {
+        $UserBonusEntity = UserBonus::findByPhone($phone);
+
+        if (!$UserBonusEntity) return false;
+
+        $UserBonusEntity->count += $bonus;
+
+        if ($UserBonusEntity->validate() && $UserBonusEntity->update()) return true;
+
+        return false;
+
     }
 }
