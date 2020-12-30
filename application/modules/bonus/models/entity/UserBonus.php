@@ -14,7 +14,7 @@ use yii\db\ActiveRecord;
  */
 class UserBonus extends ActiveRecord
 {
-	const PERCENT_AFTER_SALE = 5;
+	const PERCENT_AFTER_SALE = 3;
 	const REFERAL_COUNT_REWARD_MONEY = 200;
 
 	public function rules()

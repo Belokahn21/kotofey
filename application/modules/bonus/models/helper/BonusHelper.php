@@ -6,7 +6,6 @@ namespace app\modules\bonus\models\helper;
 use app\modules\bonus\models\entity\UserBonus;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
-use phpDocumentor\Reflection\Types\Integer;
 
 class BonusHelper
 {
