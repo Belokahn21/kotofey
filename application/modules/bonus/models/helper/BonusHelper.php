@@ -11,11 +11,7 @@ class BonusHelper
 {
     public static function applyUserBonus(Order $order)
     {
-
         $orderSumm = OrderHelper::orderSummary($order);
-        $bonuses = $orderSumm - UserBonus::PERCENT_AFTER_SALE;
-
-
-
+        $bonuses = round($orderSumm * (UserBonus::PERCENT_AFTER_SALE / 100));
     }
 }
