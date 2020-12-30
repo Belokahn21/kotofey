@@ -13,12 +13,12 @@ class BonusHelper
     public static function applyUserBonus(Order $order)
     {
         $orderSumm = OrderHelper::orderSummary($order);
-        $bonuses = round($orderSumm * (UserBonus::PERCENT_AFTER_SALE / 100));
+        $bonus = round($orderSumm * (UserBonus::PERCENT_AFTER_SALE / 100));
 
-        $object = self::addBonusUser($order->phone, $bonuses);
+        $object = self::addBonusUser($order->phone, $bonus);
 
         if ($object instanceof UserBonus) {
-            self::addHistory($object, $bonuses, "Зачисление за заказ #" . $order->id);
+            self::addHistory($object, $bonus, "Зачисление за заказ #" . $order->id);
         }
 
     }
