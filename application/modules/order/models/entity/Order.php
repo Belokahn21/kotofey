@@ -135,7 +135,9 @@ class Order extends ActiveRecord
         }
 
         // Добавляем пользователю бонусы
-        BonusHelper::applyUserBonus($this);
+        if (\Yii::$app->request->get('bonus') == 'Y') {
+            BonusHelper::applyUserBonus($this);
+        }
 
         return parent::afterSave($insert, $changedAttributes);
     }
