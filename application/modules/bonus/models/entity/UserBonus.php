@@ -9,7 +9,7 @@ use yii\db\ActiveRecord;
  * UserBonus model
  *
  * @property integer $id
- * @property integer $user_id
+ * @property integer $phone
  * @property float $count
  */
 class UserBonus extends ActiveRecord
