@@ -24,11 +24,6 @@ class UserBonus extends ActiveRecord
 		];
 	}
 
-//	public static function findByUserId($userId)
-//	{
-//		return static::findOne(['user_id' => $userId]);
-//	}
-
 	public static function findByPhone($phone)
 	{
 		return static::findOne(['phone' => $phone]);

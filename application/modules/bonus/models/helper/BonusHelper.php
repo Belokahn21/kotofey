@@ -4,6 +4,7 @@ namespace app\modules\bonus\models\helper;
 
 
 use app\modules\bonus\models\entity\UserBonus;
+use app\modules\bonus\models\entity\UserBonusHistory;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 
@@ -14,7 +15,12 @@ class BonusHelper
         $orderSumm = OrderHelper::orderSummary($order);
         $bonuses = round($orderSumm * (UserBonus::PERCENT_AFTER_SALE / 100));
 
-        self::addBonusUser($order->phone, $bonuses);
+        $object = self::addBonusUser($order->phone, $bonuses);
+
+        if ($object instanceof UserBonus) {
+            self::addHistory($object, $bonuses, "Зачисление за заказ #" . $order->id);
+        }
+
     }
 
     public static function addBonusUser($phone, $bonus)
@@ -25,10 +31,20 @@ class BonusHelper
 
         $UserBonusEntity->count += $bonus;
 
-        if ($UserBonusEntity->validate() && $UserBonusEntity->update()) return true;
+        if (!$UserBonusEntity->validate() || !$UserBonusEntity->update()) return false;
 
-        return false;
+        return $UserBonusEntity;
 
+    }
+
+    public static function addHistory(UserBonus $model, $count, $reason)
+    {
+        $obj = new UserBonusHistory();
+        $obj->reason = $reason;
+        $obj->count = $count;
+        $obj->bonus_account_id = $model->id;
+
+        return $obj->validate() && $obj->save();
     }
 
     public static function createBonusAccount($phone)
