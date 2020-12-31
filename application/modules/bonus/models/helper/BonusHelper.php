@@ -18,30 +18,29 @@ class BonusHelper
         $object = self::addBonusUser($order->phone, $bonus);
 
         if ($object instanceof UserBonus) {
-            self::addHistory($object, $bonus, "Зачисление за заказ #" . $order->id);
+            self::addHistory($object, $order, $bonus, "Зачисление за заказ #" . $order->id);
         }
-
     }
 
     public static function addBonusUser($phone, $bonus)
     {
-        $UserBonusEntity = UserBonus::findByPhone($phone);
-
-        if (!$UserBonusEntity) return false;
+        if (!$UserBonusEntity = UserBonus::findByPhone($phone)) return false;
 
         $UserBonusEntity->count += $bonus;
 
-        if (!$UserBonusEntity->validate() || !$UserBonusEntity->update()) return false;
+        if (!$UserBonusEntity->validate() || $UserBonusEntity->update() === false) return false;
+
 
         return $UserBonusEntity;
 
     }
 
-    public static function addHistory(UserBonus $model, $count, $reason)
+    public static function addHistory(UserBonus $model, Order $order, $count, $reason)
     {
         $obj = new UserBonusHistory();
         $obj->reason = $reason;
         $obj->count = $count;
+        $obj->order_id = $order->id;
         $obj->bonus_account_id = $model->id;
 
         return $obj->validate() && $obj->save();

@@ -124,10 +124,7 @@ class NotifyService
     {
         $order = Order::findOne($order_id);
 
-        if (!$order or empty($order->email)) {
-            return false;
-        }
-
+        if (!$order or empty($order->email)) return false;
 
         $result = Yii::$app->mailer->compose('client-buy', [
             'order' => $order,

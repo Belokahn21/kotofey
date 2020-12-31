@@ -131,13 +131,10 @@ class Order extends ActiveRecord
         // todo: херня выходит с пересохранением заказа, надо поправить
         if (!$this->is_update) {
             (new Manegment())->applyCodeToUser($this);
-
         }
 
         // Добавляем пользователю бонусы
-        if (\Yii::$app->request->get('bonus') == 'Y') {
-            BonusHelper::applyUserBonus($this);
-        }
+        BonusHelper::applyUserBonus($this);
 
         return parent::afterSave($insert, $changedAttributes);
     }
