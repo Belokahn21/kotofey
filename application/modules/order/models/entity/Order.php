@@ -133,9 +133,6 @@ class Order extends ActiveRecord
             (new Manegment())->applyCodeToUser($this);
         }
 
-        // Добавляем пользователю бонусы
-        BonusHelper::applyUserBonus($this);
-
         return parent::afterSave($insert, $changedAttributes);
     }
 

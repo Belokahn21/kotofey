@@ -2,6 +2,7 @@
 
 namespace app\modules\order\controllers;
 
+use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\order\models\entity\OrderDate;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
@@ -20,16 +21,13 @@ use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
 use app\modules\payment\models\entity\Payment;
 use app\modules\user\models\entity\User;
-use yii\db\Exception;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
 use yii\web\ForbiddenHttpException;
 use yii\web\HttpException;
 
 class OrderBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
+    public $modelClass = 'app\modules\order\models\entity\Order';
 
     public function behaviors()
     {
@@ -45,7 +43,7 @@ class OrderBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new Order();
+        $model = new $this->modelClass();
         $itemsModel = new OrdersItems();
         $dateDelivery = new OrderDate();
         $users = User::find()->all();
@@ -79,9 +77,7 @@ class OrderBackendController extends MainBackendController
 
                     foreach ($items as $item) {
 
-                        if (OrderHelper::isEmptyItem($item)) {
-                            continue;
-                        }
+                        if (OrderHelper::isEmptyItem($item)) continue;
 
                         $item->order_id = $model->id;
                         if ($item->validate()) {
@@ -122,13 +118,9 @@ class OrderBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = Order::findOne($id);
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Заказ не существует');
 
-        if (!$model) {
-            throw new HttpException(404, 'Заказ не существует');
-        }
-
-        $model->scenario = Order::SCENARIO_CUSTOM;
+        $model->scenario = $this->modelClass::SCENARIO_CUSTOM;
         if (!$itemsModel = OrdersItems::find()->where(['order_id' => $model->id])->all()) {
             $itemsModel = new OrdersItems();
         }
@@ -166,13 +158,9 @@ class OrderBackendController extends MainBackendController
 
                     foreach ($items as $item) {
 
-                        if (!empty($item->need_delete)) {
-                            continue;
-                        }
+                        if (!empty($item->need_delete)) continue;
 
-                        if (OrderHelper::isEmptyItem($item)) {
-                            continue;
-                        }
+                        if (OrderHelper::isEmptyItem($item)) continue;
 
                         $item->order_id = $model->id;
                         if ($item->validate()) {
@@ -201,6 +189,9 @@ class OrderBackendController extends MainBackendController
                     }
                 }
 
+                // Добавляем пользователю бонусы
+                BonusHelper::applyUserBonus($model);
+
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно обновлён');
                 return $this->refresh();
@@ -222,14 +213,14 @@ class OrderBackendController extends MainBackendController
     {
         if (!Yii::$app->user->can('removeOrder')) throw new ForbiddenHttpException('У вас нет разрешения на эту операцию');
 
-        if (Order::findOne($id)->delete()) Alert::setSuccessNotify('Заказ успешно удалён');
+        if ($this->modelClass::findOne($id)->delete()) Alert::setSuccessNotify('Заказ успешно удалён');
 
         return $this->redirect(['index']);
     }
 
     public function actionReport($id)
     {
-        if (!$order = Order::findOne($id)) throw new HttpException(404, 'Запись не найдена');
+        if (!$order = $this->modelClass::findOne($id)) throw new HttpException(404, 'Запись не найдена');
 
         $spreadsheet = new Spreadsheet();
         $sheet = $spreadsheet->getActiveSheet();

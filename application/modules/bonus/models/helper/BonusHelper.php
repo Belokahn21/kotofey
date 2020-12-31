@@ -12,14 +12,21 @@ class BonusHelper
 {
     public static function applyUserBonus(Order $order)
     {
+        if (self::isBonused($order)) return false;
+
         $orderSumm = OrderHelper::orderSummary($order);
         $bonus = round($orderSumm * (UserBonus::PERCENT_AFTER_SALE / 100));
 
         $object = self::addBonusUser($order->phone, $bonus);
 
-        if ($object instanceof UserBonus) {
-            self::addHistory($object, $order, $bonus, "Зачисление за заказ #" . $order->id);
-        }
+        if ($object instanceof UserBonus) self::addHistory($object, $order, $bonus, "Зачисление за заказ #" . $order->id);
+
+        return true;
+    }
+
+    public static function isBonused(Order $order)
+    {
+        return UserBonusHistory::findOne(['order_id' => $order->id]) instanceof UserBonusHistory;
     }
 
     public static function addBonusUser($phone, $bonus)
