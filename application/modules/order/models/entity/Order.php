@@ -45,6 +45,7 @@ use yii\db\ActiveRecord;
  *
  * @property OrdersItems[] $items
  * @property Promocode $promocodeEntity
+ * @property boolean $chargeBonus
  */
 class Order extends ActiveRecord
 {
@@ -56,13 +57,14 @@ class Order extends ActiveRecord
     public $is_update;
     public $minusStock;
     public $plusStock;
+    public $chargeBonus;
 
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_DEFAULT => ['chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
         ];
     }
 
@@ -89,7 +91,7 @@ class Order extends ActiveRecord
 
             [['is_paid', 'is_cancel'], 'default', 'value' => false],
 
-            [['is_cancel', 'is_close', 'minusStock', 'plusStock'], 'boolean'],
+            [['is_cancel', 'is_close', 'minusStock', 'plusStock', 'chargeBonus'], 'boolean'],
 
             ['email', 'email'],
             [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
@@ -180,6 +182,7 @@ class Order extends ActiveRecord
             'minusStock' => 'Списать товары',
             'plusStock' => 'Вернуть товары',
             'discount' => 'Скидка',
+            'chargeBonus' => 'Начислить бонусы',
         ];
     }
 

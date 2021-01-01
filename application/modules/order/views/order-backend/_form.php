@@ -1,5 +1,6 @@
 <?php
 
+use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
@@ -36,57 +37,61 @@ use yii\helpers\Url;
         <div class="tab-pane fade<?= ($model->isNewRecord ? '' : ' show active'); ?>" id="nav-detail-info-edit" role="tabpanel" aria-labelledby="nav-detail-info-edit-tab">
             <div class="backendFormsPanel">
                 <div class="backendFormsPanel__form-side">
-                    <h4></h4>
-                    <p>Телефон <a href="tel:<?= $model->phone; ?>"><?= $model->phone; ?></a></p>
-                    <p>Почта <a href="mailto:<?= $model->email; ?>"><?= $model->email; ?></a></p>
+                    <div class="info-card-wrapper">
 
-                    <?php if ($model->ip): ?>
-                        <p>IP адрес <?= $model->ip; ?></p>
-                    <?php endif; ?>
-
-                    <h4>Время и дата доставки</h4>
-                    <?php try { ?>
-                        <p><?= $model->dateDelivery->date; ?> - <?= $model->dateDelivery->time; ?></p>
-                    <?php } catch (ErrorException $exception) { ?>
-                        <p>Отстуствуют</p>
-                    <?php } ?>
-
-                    <h4>Адрес доставки</h4>
-                    <?php try { ?>
-                        <ul style="display: flex; flex-direction: column;">
-                            <?php if ($model->country): ?>
-                                <li style="margin: 0 5px;">Страна <?= $model->country; ?></li>
+                        <div class="info-card">
+                            <div class="text">Телефон <a href="tel:<?= $model->phone; ?>"><?= $model->phone; ?></a></div>
+                            <div class="text">Почта <a href="mailto:<?= $model->email; ?>"><?= $model->email; ?></a></div>
+                            <?php if ($model->ip): ?>
+                                <div class="text">IP адрес <?= $model->ip; ?></div>
                             <?php endif; ?>
+                        </div>
 
-                            <?php if ($model->city): ?>
-                                <li style="margin: 0 5px;">Нас. пункт <?= $model->city; ?></li>
-                            <?php endif; ?>
+                        <div class="info-card">
+                            <div class="title">Дата и адрес доставки</div>
+                            <?php try { ?>
+                                <div class="text"><?= $model->dateDelivery->date; ?> - <?= $model->dateDelivery->time; ?></div>
+                            <?php } catch (ErrorException $exception) { ?>
+                                <div class="text">Отстуствуют</div>
+                            <?php } ?>
+                            <?php try { ?>
+                                <?php if ($model->country): ?>
+                                    <div class="text">Страна <?= $model->country; ?></div>
+                                <?php endif; ?>
 
-                            <?php if ($model->street): ?>
-                                <li style="margin: 0 5px;">Улица <?= $model->street; ?></li>
-                            <?php endif; ?>
+                                <?php if ($model->city): ?>
+                                    <div class="text">Нас. пункт <?= $model->city; ?></div>
+                                <?php endif; ?>
 
-                            <?php if ($model->number_home): ?>
-                                <li style="margin: 0 5px;">Дом <?= $model->number_home; ?></li>
-                            <?php endif; ?>
+                                <?php if ($model->street): ?>
+                                    <div class="text">Улица <?= $model->street; ?></div>
+                                <?php endif; ?>
 
-                            <?php if ($model->number_appartament): ?>
-                                <li style="margin: 0 5px;">Квртира <?= $model->number_appartament; ?></li>
-                            <?php endif; ?>
+                                <?php if ($model->number_home): ?>
+                                    <div class="text">Дом <?= $model->number_home; ?></div>
+                                <?php endif; ?>
 
-                        </ul>
-                    <?php } catch (ErrorException $exception) { ?>
-                        <p>Отстуствуют</p>
-                    <?php } ?>
+                                <?php if ($model->number_appartament): ?>
+                                    <div class="text">Квртира <?= $model->number_appartament; ?></div>
+                                <?php endif; ?>
 
-                    <h4>Финансы</h4>
-                    <p>Закуп: <?= OrderHelper::orderPurchase($model->id); ?></p>
-                    <p>Сумма заказа: <?= OrderHelper::orderSummary($model); ?></p>
+                            <?php } catch (ErrorException $exception) { ?>
+                                <p>Отстуствуют</p>
+                            <?php } ?>
+                        </div>
+                        <div class="info-card">
+                            <div class="title">Финансы</div>
+                            <div class="text">Закуп: <?= OrderHelper::orderPurchase($model->id); ?></div>
+                            <div class="text">Сумма заказа: <?= OrderHelper::orderSummary($model); ?></div>
+                        </div>
+                        <?php if ($model->promocodeEntity): ?>
+                            <div class="info-card">
+                                <div class="title">Промокод</div>
+                                <div class="red text"><?= $model->promocodeEntity->code; ?>, -<?= $model->promocodeEntity->discount; ?>%</div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
 
-                    <?php if ($model->promocodeEntity): ?>
-                        <h4>Промокод</h4>
-                        <p class="red"><?= $model->promocodeEntity->code; ?>, -<?= $model->promocodeEntity->discount; ?>%</p>
-                    <?php endif; ?>
 
                     <?= MapWidget::widget([
                         'model' => $model
@@ -99,9 +104,9 @@ use yii\helpers\Url;
                             'items' => $itemsModel
                         ]); ?>
 
-                        <ul class="order-items-list">
+                        <div class="order-items-list">
                             <?php foreach ($itemsModel as $item): ?>
-                                <li class="order-items-list__item">
+                                <div class="order-items-list__item<?= ($item->product && ($item->product->count >= $item->count)) ? ' isFull' : ''; ?>">
                                     <?php if ($item->product): ?>
                                         <img class="order-items-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
                                     <?php else: ?>
@@ -110,22 +115,22 @@ use yii\helpers\Url;
 
                                     <div class="order-items-list-info">
                                         <?php if ($item->product): ?>
-                                            <p><a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></p>
+                                            <div class="order-items-list-info__name"><a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></div>
                                         <?php else: ?>
-                                            <p><?= $item->name; ?></p>
+                                            <div><?= $item->name; ?></div>
                                         <?php endif; ?>
                                         <?php if ($item->product): ?>
-                                            <p>Внешний код: <?= $item->product->code; ?></p>
+                                            <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
                                         <?php endif; ?>
                                         <?php if ($item->product): ?>
-                                            <p>Зкупочная: <?= $item->product->purchase; ?></p>
+                                            <div>Зкупочная: <?= $item->product->purchase; ?></div>
                                         <?php endif; ?>
-                                        <p>К продаже: <?= $item->price; ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price : null; ?></p>
-                                        <p>Кол-во: <?= $item->count; ?></p>
+                                        <div>К продаже: <?= $item->price; ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price : null; ?></div>
+                                        <div>Кол-во: <?= $item->count; ?></div>
                                     </div>
-                                </li>
+                                </div>
                             <?php endforeach; ?>
-                        </ul>
+                        </div>
                     <?php endif; ?>
                 </div>
             </div>
@@ -141,6 +146,7 @@ use yii\helpers\Url;
         <div class="d-flex flex-row">
             <div class="w-25 p-1"><?= $form->field($model, 'minusStock')->checkbox(); ?></div>
             <div class="w-25 p-1"><?= $form->field($model, 'plusStock')->checkbox(); ?></div>
+            <div class="w-25 p-1"><?= $form->field($model, 'chargeBonus')->checkbox(); ?></div>
         </div>
         <div class="form-element">
             <div class="d-flex flex-row">
