@@ -169,9 +169,25 @@ $this->title = Title::showTitle('Личный кабинет');
                     <p>Мы ещё делаем этот блок. Скоро здесь появится крутой функционал!</p>
                 </div>
                 <div class="tab-pane fade" id="bonus">
-                    <h2 class="page__title">Ваши бонусы</h2>
-                    <?= $bonus->count; ?>
-                    <div>История поступлений бонусов</div>
+                    <div class="d-flex flex-row align-items-center">
+                        <h2 class="page__title">Ваши бонусы</h2>
+                        <div class="profile-bonus-count"><?= $bonus->count; ?></div>
+                    </div>
+                    <h3>История поступлений бонусов</h3>
+                    <div class="bonus-history-table">
+                        <div class="bonus-history-table-header">
+                            <div class="bonus-history-table__reason">Причина</div>
+                            <div class="bonus-history-table__count">Кол-во</div>
+                            <div class="bonus-history-table__date">Дата начисления</div>
+                        </div>
+                        <?php foreach ($history as $item): ?>
+                            <div class="bonus-history-table-body">
+                                <div class="bonus-history-table__reason"><?= $item->reason; ?></div>
+                                <div class="bonus-history-table__count"><?= $item->count; ?></div>
+                                <div class="bonus-history-table__date"><?= date('d.m.Y', $item->created_at); ?></div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             </div>
         </div>

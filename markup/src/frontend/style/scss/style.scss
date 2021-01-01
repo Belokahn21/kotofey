@@ -77,6 +77,21 @@
 @import "include/block/profile-favorite-list";
 @import "include/block/gifts";
 @import "include/block/profile-pet";
+@import "include/block/bonus-history-table";
+.profile-bonus-count {
+  background: $active-color;
+  color: white;
+  display: inline-block;
+  padding: 5px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 25px;
+  margin: 0 0 0 20px;
+  font-weight: bold;
+}
 
 // Контактная информация
 @import "include/block/contacts-map";

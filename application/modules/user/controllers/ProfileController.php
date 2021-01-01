@@ -4,6 +4,7 @@ namespace app\modules\user\controllers;
 
 
 use app\modules\bonus\models\entity\UserBonus;
+use app\modules\bonus\models\entity\UserBonusHistory;
 use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
 use Yii;
@@ -20,6 +21,8 @@ class ProfileController extends Controller
         $model = User::findOne(\Yii::$app->user->id);
         $model->scenario = User::SCENARIO_PROFILE_UPDATE;
         $sexList = UserSex::find()->all();
+        $bonusAccount = UserBonus::findByPhone($model->phone);
+        $history = UserBonusHistory::find()->where(['bonus_account_id' => $bonusAccount->id])->all();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -36,7 +39,8 @@ class ProfileController extends Controller
             'orders' => $orders,
             'model' => $model,
             'sexList' => $sexList,
-            'bonus' => UserBonus::findByPhone($model->phone)
+            'bonus' => $bonusAccount,
+            'history' => $history
         ]);
     }
 

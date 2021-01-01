@@ -1,0 +1,21 @@
+.bonus-history-table {
+  display: flex;
+  flex-direction: column;
+
+  &-header {
+    display: flex;
+    flex-direction: row;
+    background: rgba(0, 0, 0, 0.02);
+    font-weight: bold;
+  }
+
+  &__reason, &__count, &__date {
+    flex: 1;
+    padding: 5px;
+  }
+
+  &-body {
+    display: flex;
+    flex-direction: row;
+  }
+}
