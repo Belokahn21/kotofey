@@ -133,6 +133,11 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return static::findOne(['email' => $email]);
     }
 
+    public static function findByPhone($phone)
+    {
+        return static::findOne(['phone' => $phone]);
+    }
+
     public function getDiscount()
     {
         return UserBonus::findByUserId($this->id);

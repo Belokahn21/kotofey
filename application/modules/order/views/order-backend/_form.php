@@ -5,10 +5,11 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\map\MapWidget;
-use app\modules\vendors\models\entity\Vendor;
 use yii\helpers\ArrayHelper;
+use app\models\tool\Price;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -39,18 +40,14 @@ use yii\helpers\Url;
                 <div class="backendFormsPanel__form-side">
                     <div class="info-card-wrapper">
 
-                        <div class="info-card">
-                            <div class="text">Телефон <a href="tel:<?= $model->phone; ?>"><?= $model->phone; ?></a></div>
-                            <div class="text">Почта <a href="mailto:<?= $model->email; ?>"><?= $model->email; ?></a></div>
-                            <?php if ($model->ip): ?>
-                                <div class="text">IP адрес <?= $model->ip; ?></div>
-                            <?php endif; ?>
-                        </div>
+                        <?= BuyerInfoWidget::widget([
+                            'order' => $model
+                        ]); ?>
 
                         <div class="info-card">
                             <div class="title">Финансы</div>
-                            <div class="text">Закуп: <?= OrderHelper::orderPurchase($model->id); ?></div>
-                            <div class="text">Сумма заказа: <?= OrderHelper::orderSummary($model); ?></div>
+                            <div class="text">Закуп: <?= Price::format(OrderHelper::orderPurchase($model->id)); ?></div>
+                            <div class="text">Сумма заказа: <?= Price::format(OrderHelper::orderSummary($model)); ?></div>
                         </div>
 
                         <div class="info-card">
