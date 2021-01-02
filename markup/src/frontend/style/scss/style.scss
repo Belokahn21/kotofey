@@ -115,6 +115,25 @@
 @import "include/block/checkout-reglament";
 @import "include/block/light-checkout-list";
 
+.bonus-no-authorize {
+  width: 100%;
+  padding: 10px 10px 10px 0;
+  color: red !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.checkout-button-auth {
+  @extend .btn-main;
+  margin: 5px 0;
+}
+
 .checkout-summary__show-items[aria-expanded=false] .text-expanded {
   display: none;
 }

@@ -27,6 +27,7 @@ use app\modules\delivery\models\entity\Delivery;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
+use app\modules\bonus\widgets\BonusFiled\BonusFieldWidget;
 use app\modules\promocode\widgets\promocode_field\PromocodeFieldWidget;
 
 $this->title = Title::showTitle("Оформление заказа");
@@ -70,11 +71,16 @@ LIST;
                     ]) ?>
                 </div>
             <?php endif; ?>
-            <div class="checkout-form__title">Промокод
+            <div class="checkout-form__title">Промокод и бонусы
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-phone">
                         <div>Промокод</div>
                         <?= $form->field($order, 'promocode')->widget(PromocodeFieldWidget::className())->label(false) ?>
+                    </label>
+
+                    <label class="checkout-form__label" for="checkout-phone">
+                        <div>Бонусы</div>
+                        <?= $form->field($order, 'bonus')->widget(BonusFieldWidget::className())->label(false) ?>
                     </label>
                 </div>
             </div>

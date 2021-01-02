@@ -58,6 +58,7 @@ class Order extends ActiveRecord
     public $minusStock;
     public $plusStock;
     public $chargeBonus;
+    public $bonus;
 
     public function scenarios()
     {
