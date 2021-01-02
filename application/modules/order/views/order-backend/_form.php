@@ -48,51 +48,51 @@ use yii\helpers\Url;
                         </div>
 
                         <div class="info-card">
-                            <div class="title">Дата и адрес доставки</div>
-                            <?php try { ?>
-                                <div class="text"><?= $model->dateDelivery->date; ?> - <?= $model->dateDelivery->time; ?></div>
-                            <?php } catch (ErrorException $exception) { ?>
-                                <div class="text">Отстуствуют</div>
-                            <?php } ?>
-                            <?php try { ?>
-                                <?php if ($model->country): ?>
-                                    <div class="text">Страна <?= $model->country; ?></div>
-                                <?php endif; ?>
-
-                                <?php if ($model->city): ?>
-                                    <div class="text">Нас. пункт <?= $model->city; ?></div>
-                                <?php endif; ?>
-
-                                <?php if ($model->street): ?>
-                                    <div class="text">Улица <?= $model->street; ?></div>
-                                <?php endif; ?>
-
-                                <?php if ($model->number_home): ?>
-                                    <div class="text">Дом <?= $model->number_home; ?></div>
-                                <?php endif; ?>
-
-                                <?php if ($model->number_appartament): ?>
-                                    <div class="text">Квртира <?= $model->number_appartament; ?></div>
-                                <?php endif; ?>
-
-                            <?php } catch (ErrorException $exception) { ?>
-                                <p>Отстуствуют</p>
-                            <?php } ?>
-                        </div>
-                        <div class="info-card">
                             <div class="title">Финансы</div>
                             <div class="text">Закуп: <?= OrderHelper::orderPurchase($model->id); ?></div>
                             <div class="text">Сумма заказа: <?= OrderHelper::orderSummary($model); ?></div>
                         </div>
+
+                        <div class="info-card">
+                            <div class="title">Дата и адрес доставки</div>
+                            <div class="text">
+                                <?php try { ?>
+                                    <?= $model->dateDelivery->date; ?> - <?= $model->dateDelivery->time; ?>
+                                <?php } catch (ErrorException $exception) { ?>
+                                    Отстуствуют
+                                <?php } ?>
+                            </div>
+
+                            <?php if ($model->country): ?>
+                                <div class="text">Страна <?= $model->country; ?></div>
+                            <?php endif; ?>
+
+                            <?php if ($model->city): ?>
+                                <div class="text">Нас. пункт <?= $model->city; ?></div>
+                            <?php endif; ?>
+
+                            <?php if ($model->street): ?>
+                                <div class="text">Улица <?= $model->street; ?></div>
+                            <?php endif; ?>
+
+                            <?php if ($model->number_home): ?>
+                                <div class="text">Дом <?= $model->number_home; ?></div>
+                            <?php endif; ?>
+
+                            <?php if ($model->number_appartament): ?>
+                                <div class="text">Квртира <?= $model->number_appartament; ?></div>
+                            <?php endif; ?>
+
+                        </div>
+
                         <?php if ($model->promocodeEntity): ?>
                             <div class="info-card">
                                 <div class="title">Промокод</div>
                                 <div class="red text"><?= $model->promocodeEntity->code; ?>, -<?= $model->promocodeEntity->discount; ?>%</div>
                             </div>
                         <?php endif; ?>
+
                     </div>
-
-
                     <?= MapWidget::widget([
                         'model' => $model
                     ]); ?>
