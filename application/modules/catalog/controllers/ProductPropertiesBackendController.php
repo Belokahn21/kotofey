@@ -7,6 +7,7 @@ use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductPropertiesSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
+use yii\web\HttpException;
 
 class ProductPropertiesBackendController extends MainBackendController
 {
@@ -23,6 +24,7 @@ class ProductPropertiesBackendController extends MainBackendController
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->save()) {
+                        Alert::setSuccessNotify('Свойство успешно добавлено');
                         return $this->refresh();
                     }
                 }
@@ -38,12 +40,13 @@ class ProductPropertiesBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = $this->modelClass::findOne($id);
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {
                     if ($model->update()) {
+                        Alert::setSuccessNotify('Свойство успешно обновлено');
                         return $this->refresh();
                     }
                 }
