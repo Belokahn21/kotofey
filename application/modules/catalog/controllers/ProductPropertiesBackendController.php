@@ -3,6 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
+use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductPropertiesSearchForm;
 use app\modules\site\controllers\MainBackendController;
@@ -19,6 +20,7 @@ class ProductPropertiesBackendController extends MainBackendController
         $model = new $this->modelClass();
         $searchModel = new ProductPropertiesSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
+        $propertyGroup = PropertyGroup::find()->all();
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -35,6 +37,7 @@ class ProductPropertiesBackendController extends MainBackendController
             'model' => $model,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'propertyGroup' => $propertyGroup
         ]);
     }
 

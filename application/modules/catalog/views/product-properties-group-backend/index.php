@@ -6,17 +6,15 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-/* @var $model \app\modules\catalog\models\entity\Properties */
-/* @var $propertyGroup \app\modules\catalog\models\entity\PropertyGroup[] */
+/* @var $model \app\modules\catalog\models\entity\PropertyGroup */
 
-$this->title = Title::showTitle("Свойства товаров"); ?>
+$this->title = Title::showTitle("Группы свойств"); ?>
     <section>
-        <h1 class="title">Свойства товаров</h1>
+        <h1 class="title">Группы свойств</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?= $this->render('_form', [
             'model' => $model,
             'form' => $form,
-            'propertyGroup' => $propertyGroup,
         ]); ?>
         <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
         <?php ActiveForm::end(); ?>
@@ -24,7 +22,7 @@ $this->title = Title::showTitle("Свойства товаров"); ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Свойства отсутствуют',
+    'emptyText' => 'Группы свойств отсутствуют',
     'columns' => [
         'id',
         [

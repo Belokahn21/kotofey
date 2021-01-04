@@ -16,7 +16,7 @@ class ProductSearchForm extends Product
 
     public static function tableName()
     {
-        return "product";
+        return Product::tableName();
     }
 
     public function rules()

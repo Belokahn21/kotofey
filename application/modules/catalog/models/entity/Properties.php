@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "properties".
  *
  * @property int $id
+ * @property int $group_id
  * @property int $is_active
  * @property int $is_multiple
  * @property int $is_offer_catalog
@@ -25,7 +26,7 @@ class Properties extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_active', 'is_multiple', 'is_offer_catalog', 'is_show_site', 'sort', 'type', 'created_at', 'updated_at'], 'integer'],
+            [['is_active', 'is_multiple', 'is_offer_catalog', 'is_show_site', 'sort', 'type', 'group_id'], 'integer'],
             [['name'], 'required'],
             [['name'], 'string', 'max' => 128],
         ];
@@ -35,6 +36,7 @@ class Properties extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'group_id' => 'Группа',
             'is_active' => 'Активность',
             'is_multiple' => 'Множественный выбор',
             'is_offer_catalog' => 'Свойство торгового каталога',

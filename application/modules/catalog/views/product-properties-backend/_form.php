@@ -4,6 +4,8 @@ use app\modules\catalog\models\entity\TypeProductProperties;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\SaveInformers;
 
+/* @var $model \app\modules\catalog\models\entity\Properties */
+
 ?>
 
 <nav>
@@ -26,11 +28,14 @@ use app\modules\catalog\models\entity\SaveInformers;
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <?= $form->field($model, 'name') ?>
             </div>
-            <div class="col-sm-6">
-                <?= $form->field($model, 'sort')->textInput() ?>
+            <div class="col-sm-4">
+                <?= $form->field($model, 'sort')->textInput(); ?>
+            </div>
+            <div class="col-sm-4">
+                <?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map($propertyGroup, 'id', 'name'), ['prompt' => 'Группа свойства']); ?>
             </div>
         </div>
 

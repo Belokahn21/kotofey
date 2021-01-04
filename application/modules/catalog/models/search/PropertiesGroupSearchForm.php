@@ -2,16 +2,18 @@
 
 namespace app\modules\catalog\models\search;
 
+
 use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\PropertyGroup;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class CategorySearchForm extends Category
+class PropertiesGroupSearchForm extends PropertyGroup
 {
+
     public static function tableName()
     {
-        return Category::tableName();
+        return PropertyGroup::tableName();
     }
 
     public function rules()
@@ -29,7 +31,7 @@ class CategorySearchForm extends Category
 
     public function search($params)
     {
-        $query = Category::find();
+        $query = PropertyGroup::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
