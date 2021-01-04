@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\entity\Properties;
 use Yii;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
@@ -39,7 +40,7 @@ class ProductBackendController extends MainBackendController
     {
         $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_NEW_PRODUCT]);
         $modelDelivery = new ProductOrder();
-        $properties = SaveProductProperties::find()->all();
+        $properties = Properties::find()->all();
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -70,7 +71,7 @@ class ProductBackendController extends MainBackendController
         if (ProductMarket::hasStored($model->id)) {
             $model->has_store = true;
         }
-        $properties = SaveProductProperties::find()->all();
+        $properties = Properties::find()->all();
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) {
             $modelDelivery = new ProductOrder();
         }
