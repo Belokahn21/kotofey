@@ -12,6 +12,7 @@ $this->title = Title::showTitle('Товары');
         <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin([
+    'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
 <?= $this->render('_form', [

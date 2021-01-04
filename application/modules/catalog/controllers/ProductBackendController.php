@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use Yii;
 use app\modules\catalog\models\entity\SaveProductProperties;
@@ -29,6 +30,7 @@ class ProductBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
         $oldRules = $parentAccess['access']['rules'];
         $newRules = [['allow' => true, 'actions' => ['discount-clean'], 'roles' => ['Administrator']]];
+        $newRules = [['allow' => true, 'actions' => ['copy'], 'roles' => ['Administrator']]];
 
 
         $parentAccess['access']['rules'] = array_merge($newRules, $oldRules);
@@ -68,27 +70,9 @@ class ProductBackendController extends MainBackendController
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Товар такой не существует');
 
         $model->scenario = $this->modelClass::SCENARIO_UPDATE_PRODUCT;
-        if (ProductMarket::hasStored($model->id)) {
-            $model->has_store = true;
-        }
         $properties = Properties::find()->all();
-        if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) {
-            $modelDelivery = new ProductOrder();
-        }
-
-        if (Yii::$app->request->get('action') == 'copy') {
-            if (Yii::$app->request->post('action') == 'Копировать') {
-                $model->id = null;
-                $model->article = null;
-                $model->isNewRecord = true;
-                $model->scenario = Product::SCENARIO_NEW_PRODUCT;
-                if ($model->createProduct()) {
-                    Alert::setSuccessNotify('Продукт скопирован');
-                    return $this->redirect('/admin/catalog/');
-                }
-            }
-
-        }
+        if (ProductMarket::hasStored($model->id)) $model->has_store = true;
+        if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
         if ($model->updateProduct()) {
             Alert::setSuccessNotify('Продукт обновлен');
@@ -102,9 +86,38 @@ class ProductBackendController extends MainBackendController
         ]);
     }
 
-    public function actionCopy()
+    public function actionCopy($id)
     {
+        if (!$oldProduct = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не неайден');
+        $oldProduct->scenario = $this->modelClass::SCENARIO_NEW_PRODUCT;
+        $properties = Properties::find()->all();
+        if (!$modelDelivery = ProductOrder::findOneByProductId($oldProduct->id)) $modelDelivery = new ProductOrder();
 
+        $model = clone $oldProduct;
+        $model->scenario = $this->modelClass::SCENARIO_NEW_PRODUCT;
+        $model->id = null;
+        $model->article = null;
+        $model->isNewRecord = true;
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->createProduct()) {
+                    Alert::setSuccessNotify('Элемент успешно склонирован');
+                    return $this->redirect(['index']);
+                }
+            }
+        }
+
+        return $this->render('copy', [
+            'model' => $oldProduct,
+            'modelDelivery' => $modelDelivery,
+            'properties' => $properties,
+        ]);
     }
 
     public function actionDiscountClean()

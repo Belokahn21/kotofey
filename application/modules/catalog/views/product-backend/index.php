@@ -141,7 +141,7 @@ $this->title = Title::showTitle('Товары');
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-//                    return Html::a('<i class="fas fa-copy"></i>', "/admin/catalog/$key/?action=copy");
+                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
