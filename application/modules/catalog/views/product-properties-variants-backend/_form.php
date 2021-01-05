@@ -1,10 +1,11 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\SaveInformers;
-use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
+use app\modules\catalog\models\entity\Properties;
 
-/* @var $model \app\modules\catalog\models\entity\SaveInformersValues */
+/* @var $model \app\modules\catalog\models\entity\PropertiesVariants
+ * @var $form \yii\widgets\ActiveForm
+ */
 
 ?>
 <nav>
@@ -16,7 +17,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <?= $form->field($model, 'name')->textInput() ?>
         <?= $form->field($model, 'is_active')->checkbox() ?>
-        <?= $form->field($model, 'property_id')->dropDownList(ArrayHelper::map(SaveInformers::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
+        <?= $form->field($model, 'property_id')->dropDownList(ArrayHelper::map(Properties::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
         <?= $form->field($model, 'sort')->textInput(['value' => 500]) ?>
         <?= $form->field($model, 'link')->textInput() ?>
 
