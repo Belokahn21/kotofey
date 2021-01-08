@@ -33,25 +33,26 @@ use app\modules\promotion\models\entity\PromotionProductMechanics;
             </div>
         </div>
 
-        <div class="row">
+
+        <?php for ($i = 0; $i < 6; $i++): ?>
+            <div class="row">
+                <div class="col-sm-3">
+                    <?= $form->field($subModel, '[' . $i . ']promotion_mechanic_id')->dropDownList($subModel->getMechanics(), ['onchange' => '$(".btn-main").click();', 'prompt' => 'Выбрать механику']); ?>
+                </div>
 
 
-            <div class="col-sm-3">
-                <?= $form->field($subModel, 'promotion_mechanic_id')->dropDownList($subModel->getMechanics(), ['onchange' => '$(".btn-main").click();', 'prompt' => 'Выбрать механику']); ?>
+                <?php if ($subModel->promotion_mechanic_id == PromotionProductMechanics::MECH_PRODUCT_DISCOUNT): ?>
+                    <div class="col-sm-3">
+                        <?= $form->field($subModel, '[' . $i . ']product_id')->textInput() ?>
+                    </div>
+                    <div class="col-sm-3">
+                        <?= $form->field($subModel, '[' . $i . ']discountRule')->dropDownList(['Процент', 'Новая цена']); ?>
+                    </div>
+                    <div class="col-sm-3">
+                        <?= $form->field($subModel, '[' . $i . ']amount')->textInput(); ?>
+                    </div>
+                <?php endif; ?>
             </div>
-
-
-            <?php if ($subModel->promotion_mechanic_id == PromotionProductMechanics::MECH_PRODUCT_DISCOUNT): ?>
-                <div class="col-sm-3">
-                    <?= $form->field($subModel, 'product_id')->textInput() ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($subModel, 'discountRule')->dropDownList(['Процент', 'Новая цена']); ?>
-                </div>
-                <div class="col-sm-3">
-                    <?= $form->field($subModel, 'amount')->textInput(); ?>
-                </div>
-            <?php endif; ?>
-        </div>
+        <?php endfor; ?>
     </div>
 </div>

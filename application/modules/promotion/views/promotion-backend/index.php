@@ -9,6 +9,9 @@ use yii\widgets\Pjax;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\promotion\models\entity\Promotion
+ * @var $xstring string
+ * @var $subModel \app\modules\promotion\models\entity\PromotionProductMechanics
+ * @var $subModels \app\modules\promotion\models\entity\PromotionProductMechanics[]
  * @var $sliderImagesModel \app\modules\content\models\entity\SlidersImages
  */
 

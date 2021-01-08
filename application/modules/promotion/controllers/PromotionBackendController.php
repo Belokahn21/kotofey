@@ -2,7 +2,8 @@
 
 namespace app\modules\promotion\controllers;
 
-use app\modules\promotion\models\entity\Promotion;
+use app\modules\order\models\entity\OrdersItems;
+use app\modules\order\models\helpers\OrderHelper;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\promotion\models\search\PromotionSearch;
 use app\modules\site\models\tools\Debug;
@@ -20,7 +21,7 @@ class PromotionBackendController extends Controller
         $model = new $this->modelClass();
         $searchModel = new PromotionSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
-        $subModel = new \app\modules\promotion\models\entity\PromotionProductMechanics();
+        $subModel = new PromotionProductMechanics();
         $xstring = null;
 
         if (\Yii::$app->request->isPjax) {
@@ -34,12 +35,19 @@ class PromotionBackendController extends Controller
                     return $this->refresh();
                 }
 
-                $subModel->promotion_id = $model->id;
-                if (!$subModel->validate() or !$subModel->save()) {
-                    Alert::setErrorNotify('Ошибка №2');
-                    return $this->refresh();
-                }
+                $count = count(\Yii::$app->request->post('PromotionProductMechanics', []));
+                $items = [new PromotionProductMechanics()];
+                for ($i = 1; $i < $count; $i++) $items[] = new PromotionProductMechanics();
 
+                if (PromotionProductMechanics::loadMultiple($items, \Yii::$app->request->post())) {
+                    foreach ($items as $item) {
+                        $item->promotion_id = $model->id;
+                        if (!$item->validate() or !$item->save()) {
+                            Alert::setErrorNotify('Ошибка №2');
+                            return $this->refresh();
+                        }
+                    }
+                }
 
                 Alert::setSuccessNotify('Акция успешно сохранена');
                 return $this->refresh();
