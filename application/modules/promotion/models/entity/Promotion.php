@@ -19,8 +19,7 @@ use yii\behaviors\TimestampBehavior;
  */
 class Promotion extends \yii\db\ActiveRecord
 {
-
-
+    public $save;
     public function behaviors()
     {
         return [
@@ -29,29 +28,16 @@ class Promotion extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'promotion';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
             [['name'], 'required'],
-            [['is_active', 'start_at', 'end_at', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['is_active'], 'integer'],
+            [['save'], 'boolean'],
+            [['name', 'start_at', 'end_at'], 'string', 'max' => 255],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\widgets\Pjax;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\promotion\models\entity\Promotion
@@ -16,14 +17,24 @@ $this->title = Title::showTitle('Акции магазина');
     <div class="title-group">
         <h1>Акции магазина</h1>
     </div>
-<?php $form = ActiveForm::begin() ?>
+
+<?php Pjax::begin(); ?>
+
+
+<?php $form = ActiveForm::begin([
+    'options' => ['data-pjax' => '']
+]) ?>
 <?= $this->render('_form', [
     'form' => $form,
     'model' => $model,
-    'sliderImagesModel' => $sliderImagesModel,
+    'subModel' => $subModel,
+    'xstring' => $xstring,
 ]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end() ?>
+
+
+<?php Pjax::end(); ?>
     <h2>Список акций</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
