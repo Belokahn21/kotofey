@@ -3,6 +3,8 @@
 namespace app\modules\catalog\models\helpers;
 
 
+use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\site\models\helpers\ImageHelper;
 use app\modules\site\models\tools\Debug;
@@ -26,6 +28,11 @@ class ProductPropertiesValuesHelper
             }
         }
         return ImageHelper::notFoundImage();
+    }
+
+    public static function getFinalValue(PropertiesProductValues $variant)
+    {
+        return $variant->property->type != 1 ? $variant->value : PropertiesVariants::findOne(['property_id' => $variant->property_id])->name;
     }
 
     public static function savePropertyValue($product_id, $property_id, $value)

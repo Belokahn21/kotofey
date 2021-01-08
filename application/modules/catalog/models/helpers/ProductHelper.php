@@ -36,7 +36,6 @@ class ProductHelper
     public static function getPriceByWeight(Product $product, $weight)
     {
         $product_weight = ProductPropertiesHelper::getProductWeight($product->id);
-        $summary_price = 0;
         if (!$product_weight) {
             return false;
         }
@@ -49,18 +48,16 @@ class ProductHelper
 
     public static function getResultPrice(Product $model)
     {
-        return ($model->discount_price ? $model->discount_price : $model->price);
+        return ($model->getDiscountPrice() ? $model->getDiscountPrice() : $model->getPrice());
     }
 
     public static function getPercent(Product $model)
     {
-//        return @round((($model->price - $model->discount_price) / $model->price) * 100);
         return self::getPercentTwoNums($model->price, $model->discount_price);
     }
 
     public static function getMarkup(Product $model)
     {
-//        return @round((($model->price - $model->purchase) / $model->price) * 100);
         return self::getPercentTwoNums($model->price, $model->purchase);
 
     }

@@ -10,7 +10,7 @@ use app\modules\catalog\models\helpers\ProductOrderHelper;
 
 /* @var $product \app\modules\catalog\models\entity\Product */
 
-$isDiscount = $product->discount_price > 0;
+$isDiscount = $product->getDiscountPrice() > 0;
 ?>
 
 
@@ -35,15 +35,15 @@ $isDiscount = $product->discount_price > 0;
     <?php endif; ?>
     <img class="catalog__image" src="<?= ProductHelper::getImageUrl($product, false, array("width" => 246, "height" => 300, "crop" => "fit")); ?>">
     <div class="catalog__title">
-        <a class="catalog__link" href="<?= $product->detail; ?>"><?= $product->name; ?></a>
+        <a class="catalog__link" href="<?= ProductHelper::getDetailUrl($product); ?>"><?= $product->name; ?></a>
     </div>
     <?= PreviewPropertiesWidget::widget([
         'product' => $product
     ]); ?>
     <div class="catalog__price-group">
         <?php if ($isDiscount): ?>
-            <div class="catalog__old-price"><?= Price::format($product->price); ?></div>
-            <div class="catalog__new-price"><?= Price::format($product->discount_price); ?></div>
+            <div class="catalog__old-price"><?= Price::format($product->getPrice()); ?></div>
+            <div class="catalog__new-price"><?= Price::format($product->getDiscountPrice()); ?></div>
         <?php else: ?>
             <div class="catalog__price"><?= Price::format($product->price); ?></div>
         <?php endif; ?>

@@ -11,13 +11,13 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
 <div class="catalog-line__item">
     <div class="catalog-line__image"><img src="<?= ProductHelper::getImageUrl($product); ?>" alt="<?= $product->name; ?>" name="<?= $product->name; ?>"></div>
     <div class="catalog-line__name">
-        <a href="<?= Url::to(['/catalog/product/view', 'id' => $product->slug]); ?>"><?= $product->name; ?></a>
+        <a href="<?= ProductHelper::getDetailUrl($product); ?>"><?= $product->name; ?></a>
     </div>
     <div class="catalog-line__price"><?= Price::format($product->price); ?><?= Currency::getInstance()->show(); ?></div>
     <div class="catalog-line__to-cart">
         <?= AddBasketWidget::widget([
             'product_id' => $product->id,
-            'price' => $product->price,
+            'price' => $product->getPrice(),
             'showInfo' => false,
             'showOneClick' => false,
             'showControl' => true,

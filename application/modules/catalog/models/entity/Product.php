@@ -7,6 +7,7 @@ use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
+use app\modules\promotion\models\entity\PromotionProductMechanics;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\helpers\Json;
@@ -382,6 +383,23 @@ class Product extends \yii\db\ActiveRecord
     public function getMedia()
     {
         return $this->hasOne(Media::className(), ['id' => 'media_id']);
+    }
+
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    public function getDiscountPrice()
+    {
+
+        $action = PromotionProductMechanics::findOne(['product_id' => $this->id]);
+
+        if ($action) {
+            $this->discount_price = $this->price - round($this->price * ($action->amount / 100));
+        }
+
+        return $this->discount_price;
     }
 
     public function getStatusList()

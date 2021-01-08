@@ -13,20 +13,11 @@ use Yii;
  * @property string $value
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property Properties $property
  */
 class PropertiesProductValues extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'properties_product_values';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -36,9 +27,11 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function getProperty()
+    {
+        return $this->hasOne(Properties::className(), ['id' => 'property_id']);
+    }
+
     public function attributeLabels()
     {
         return [

@@ -2,6 +2,8 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\helpers\ProductHelper;
 use Yii;
 use yii\web\Controller;
@@ -56,7 +58,7 @@ class ProductController extends Controller
         if ($product->media) OpenGraphProduct::image(ProductHelper::getImageUrl($product, true));
 
         // todo: отсюда переделать на новые свойства
-        $properties = SaveProductPropertiesValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', SaveProductProperties::find()->select('id')->where(['need_show' => 0])])->all();
+        $properties = PropertiesProductValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', Properties::find()->select('id')->where(['is_show_site' => 0])])->all();
         ProductHelper::addVisitedItem($product->id);
 
         return $this->render('view', [
