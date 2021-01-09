@@ -2,16 +2,12 @@
 /* @var $form \yii\widgets\ActiveForm
  * @var $model \app\modules\promotion\models\entity\Promotion
  * @var $sliderImagesModel \app\modules\content\models\entity\SlidersImages
- * @var $subModel \app\modules\promotion\models\entity\PromotionProductMechanics
+ * @var $subModel \app\modules\promotion\models\forms\PromotionProductMechanicsForm[]
  */
 
-use yii\helpers\Html;
-use app\modules\promotion\models\entity\PromotionProductMechanics;
-
+use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 
 ?>
-
-<?= $xstring; ?>
 
 <nav>
     <div class="nav nav-tabs" id="backendForms" role="tablist">
@@ -20,7 +16,6 @@ use app\modules\promotion\models\entity\PromotionProductMechanics;
 </nav>
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <?= $form->field($model, 'save')->checkbox(); ?>
         <div class="form-element">
             <?= $form->field($model, 'name') ?>
         </div>
@@ -33,26 +28,35 @@ use app\modules\promotion\models\entity\PromotionProductMechanics;
             </div>
         </div>
 
+        <!--        --><?php //\app\modules\site\models\tools\Debug::p($subModel); ?>
 
-        <?php for ($i = 0; $i < 6; $i++): ?>
+
+        <?php foreach ($subModel as $iter => $item): ?>
             <div class="row">
                 <div class="col-sm-3">
-                    <?= $form->field($subModel, '[' . $i . ']promotion_mechanic_id')->dropDownList($subModel->getMechanics(), ['onchange' => '$(".btn-main").click();', 'prompt' => 'Выбрать механику']); ?>
+                    <?= $form->field($item, '[' . $iter . ']promotion_mechanic_id')->dropDownList($item->getMechanics(), ['onchange' => 'showRelatedFileds(this, ' . $iter . ');', 'prompt' => 'Выбрать механику']); ?>
                 </div>
 
 
-                <?php if ($subModel->promotion_mechanic_id == PromotionProductMechanics::MECH_PRODUCT_DISCOUNT): ?>
+                <div class="<?= $item->promotion_mechanic_id ? '' : 'hidden'; ?> row col-sm-9" id="inputs-mechanic-<?= PromotionProductMechanicsForm::MECH_PRODUCT_DISCOUNT ?>-<?= $iter; ?>">
                     <div class="col-sm-3">
-                        <?= $form->field($subModel, '[' . $i . ']product_id')->textInput() ?>
+                        <?= $form->field($item, '[' . $iter . ']product_id')->textInput() ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($subModel, '[' . $i . ']discountRule')->dropDownList(['Процент', 'Новая цена']); ?>
+                        <?= $form->field($item, '[' . $iter . ']discountRule')->dropDownList($item->getDiscountRules(), ['prompt' => 'Правило цены']); ?>
                     </div>
                     <div class="col-sm-3">
-                        <?= $form->field($subModel, '[' . $i . ']amount')->textInput(); ?>
+                        <?= $form->field($item, '[' . $iter . ']amount')->textInput(); ?>
                     </div>
-                <?php endif; ?>
+                </div>
             </div>
-        <?php endfor; ?>
+        <?php endforeach; ?>
     </div>
 </div>
+
+<script type="text/javascript">
+    function showRelatedFileds(e, iter) {
+        let groupEl = document.querySelector('#inputs-mechanic-' + e.value + '-' + iter);
+        if (groupEl) groupEl.classList.remove('hidden');
+    }
+</script>

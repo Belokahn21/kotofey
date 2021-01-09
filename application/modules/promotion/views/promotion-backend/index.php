@@ -10,8 +10,8 @@ use yii\widgets\Pjax;
 /* @var $this \yii\web\View
  * @var $model \app\modules\promotion\models\entity\Promotion
  * @var $xstring string
- * @var $subModel \app\modules\promotion\models\entity\PromotionProductMechanics
- * @var $subModels \app\modules\promotion\models\entity\PromotionProductMechanics[]
+ * @var $subModel \app\modules\promotion\models\forms\PromotionProductMechanicsForm
+ * @var $subModels \app\modules\promotion\models\forms\PromotionProductMechanicsForm[]
  * @var $sliderImagesModel \app\modules\content\models\entity\SlidersImages
  */
 
@@ -21,23 +21,15 @@ $this->title = Title::showTitle('Акции магазина');
         <h1>Акции магазина</h1>
     </div>
 
-<?php Pjax::begin(); ?>
-
-
-<?php $form = ActiveForm::begin([
-    'options' => ['data-pjax' => '']
-]) ?>
+<?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
     'form' => $form,
     'model' => $model,
     'subModel' => $subModel,
-    'xstring' => $xstring,
 ]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end() ?>
 
-
-<?php Pjax::end(); ?>
     <h2>Список акций</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

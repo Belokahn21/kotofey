@@ -19,7 +19,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class Promotion extends \yii\db\ActiveRecord
 {
-    public $save;
     public function behaviors()
     {
         return [
@@ -33,7 +32,6 @@ class Promotion extends \yii\db\ActiveRecord
         return [
             [['name'], 'required'],
             [['is_active'], 'integer'],
-            [['save'], 'boolean'],
             [['name', 'start_at', 'end_at'], 'string', 'max' => 255],
         ];
     }
