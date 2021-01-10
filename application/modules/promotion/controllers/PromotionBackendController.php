@@ -19,7 +19,7 @@ class PromotionBackendController extends Controller
 
     public function actionIndex()
     {
-        $model = new $this->modelClass();
+        $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_DEFAULT]);
         $searchModel = new PromotionSearch();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
         $count = count(\Yii::$app->request->post('PromotionProductMechanicsForm', [[], [], [], [], [], []]));

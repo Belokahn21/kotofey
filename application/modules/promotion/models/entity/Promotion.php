@@ -23,6 +23,15 @@ use yii\behaviors\TimestampBehavior;
  */
 class Promotion extends \yii\db\ActiveRecord
 {
+    const SCENARIO_DEFAULT = 'default';
+
+    public function scenarios()
+    {
+        return [
+            self::SCENARIO_DEFAULT => ['name', 'is_active', 'start_at', 'end_at', 'image', 'created_at', 'updated_at']
+        ];
+    }
+
     public function behaviors()
     {
         return [
@@ -31,7 +40,7 @@ class Promotion extends \yii\db\ActiveRecord
             [
                 'class' => ImageUploadMinify::class,
                 'attribute' => 'image',
-//                'scenarios' => ['default'],
+                'scenarios' => ['default'],
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/'
             ],
