@@ -6,6 +6,7 @@
  */
 
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
+use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
 ?>
 
@@ -19,6 +20,9 @@ use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="form-element">
             <?= $form->field($model, 'name') ?>
+        </div>
+        <div class="form-element">
+            <?= $form->field($model, 'image')->widget(InputUploadWidget::className()); ?>
         </div>
         <div class="row">
             <div class="form-element col-sm-6">

@@ -3,6 +3,7 @@
 namespace app\modules\promotion\models\entity;
 
 use app\modules\content\models\behaviors\DateToIntBehaviors;
+use app\modules\media\components\behaviors\ImageUploadMinify;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -11,11 +12,14 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property string $name
- * @property int $is_active
- * @property int $start_at
- * @property int $end_at
- * @property int $created_at
- * @property int $updated_at
+ * @property int|null $is_active
+ * @property int|null $media_id
+ * @property int|null $start_at
+ * @property int|null $end_at
+ * @property int|null $created_at
+ * @property int|null $updated_at
+ *
+ * @property PromotionProductMechanics[] $promotionProductMechanics
  */
 class Promotion extends \yii\db\ActiveRecord
 {
@@ -23,7 +27,14 @@ class Promotion extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
-            DateToIntBehaviors::className()
+            DateToIntBehaviors::className(),
+            [
+                'class' => ImageUploadMinify::class,
+                'attribute' => 'image',
+//                'scenarios' => ['default'],
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/'
+            ],
         ];
     }
 
@@ -31,8 +42,10 @@ class Promotion extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['is_active'], 'integer'],
-            [['name', 'start_at', 'end_at'], 'string', 'max' => 255],
+            [['is_active', 'created_at', 'updated_at', 'media_id'], 'integer'],
+            [['name'], 'string', 'max' => 255],
+            [['start_at', 'end_at'], 'safe'],
+            [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
     }
 
@@ -40,12 +53,19 @@ class Promotion extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Название акции',
+            'name' => 'Название',
             'is_active' => 'Активность',
-            'start_at' => 'Начало акции',
-            'end_at' => 'Конец акции',
+            'media_id' => 'Изображение',
+            'image' => 'Изображение',
+            'start_at' => 'Начало',
+            'end_at' => 'Конец',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function getPromotionProductMechanics()
+    {
+        return $this->hasMany(PromotionProductMechanics::className(), ['promotion_id' => 'id']);
     }
 }

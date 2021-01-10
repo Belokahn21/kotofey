@@ -29,11 +29,6 @@ use yii\db\ActiveRecord;
  */
 class SlidersImages extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "sliders_images";
-    }
-
     public function behaviors()
     {
         return [
