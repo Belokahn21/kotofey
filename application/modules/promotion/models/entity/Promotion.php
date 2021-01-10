@@ -52,7 +52,7 @@ class Promotion extends \yii\db\ActiveRecord
     {
         return [
             [['name'], 'required'],
-            [['is_active', 'created_at', 'updated_at', 'media_id'], 'integer'],
+            [['is_active', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['start_at', 'end_at'], 'safe'],
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
