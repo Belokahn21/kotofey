@@ -393,8 +393,8 @@ class Product extends \yii\db\ActiveRecord
     public function getDiscountPrice()
     {
         if ($action = PromotionProductMechanics::findOne(['product_id' => $this->id])) {
-            $this->discount_price = $this->purchase - ($this->purchase * ($action->amount / 100));
-            $this->discount_price += $this->discount_price * (ProductHelper::getMarkup($this) / 100);
+            $this->discount_price = $this->price - ($this->price * ($action->amount / 100));
+//            $this->discount_price += $this->discount_price * (ProductHelper::getMarkup($this) / 100);
         }
 
         return $this->discount_price;

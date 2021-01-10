@@ -4,6 +4,7 @@ namespace app\modules\promotion\controllers;
 
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
+use app\modules\promotion\models\helpers\PromotionProductMechanicHelper;
 use app\modules\promotion\models\search\PromotionSearch;
 use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
@@ -29,7 +30,6 @@ class PromotionBackendController extends Controller
             $model->load(\Yii::$app->request->post());
 
             if (!$model->validate() or !$model->save()) {
-                Debug::p($model->getErrors());
                 Alert::setErrorNotify('Ошибка №1');
                 return $this->refresh();
             }
@@ -38,7 +38,7 @@ class PromotionBackendController extends Controller
             if ($this->modelClassPromoMechanis::loadMultiple($PromotionProductMechanicsForm, \Yii::$app->request->post())) {
                 foreach ($PromotionProductMechanicsForm as $item) {
 
-                    if (empty($item->promotion_mechanic_id)) continue;
+                    if (PromotionProductMechanicHelper::isSkip($item)) continue;
 
                     $item->promotion_id = $model->id;
                     if (!$item->validate() or !$item->save()) {
@@ -69,23 +69,21 @@ class PromotionBackendController extends Controller
 
         if (\Yii::$app->request->isPost) {
             $model->load(\Yii::$app->request->post());
-            $subModel->load(\Yii::$app->request->post());
 
             if (!$model->validate() or !$model->update()) {
-                Debug::p($model->getErrors());
                 Alert::setErrorNotify('Ошибка №1');
                 return $this->refresh();
             }
 
-            $this->modelClassPromoMechanis::deleteAll(['order_id' => $model->id]);
+            $this->modelClassPromoMechanis::deleteAll(['promotion_id' => $model->id]);
             $count = count(\Yii::$app->request->post('PromotionProductMechanicsForm', []));
             $items = [new $this->modelClassPromoMechanis()];
-            for ($i = 1; $i < $count; $i++) $items[] = new $this->modelClassPromoMechanis();
+            for ($i = 1; $i < $count + 3; $i++) $items[] = new $this->modelClassPromoMechanis();
 
             if ($this->modelClassPromoMechanis::loadMultiple($items, \Yii::$app->request->post())) {
                 foreach ($items as $item) {
 
-                    if (empty($item->promotion_mechanic_id)) continue;
+                    if (PromotionProductMechanicHelper::isSkip($item)) continue;
 
                     $item->promotion_id = $model->id;
                     if (!$item->validate() or !$item->save()) {

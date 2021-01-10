@@ -51,13 +51,13 @@ class PromotionProductMechanicsForm extends PromotionProductMechanics
     {
         return [
             'id' => 'ID',
-            'product_id' => 'Product ID',
-            'promotion_id' => 'Promotion ID',
-            'amount' => 'Amount',
-            'discountRule' => 'Discount Rule',
-            'promotion_mechanic_id' => 'Promotion Mechanic ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'product_id' => 'ID товара',
+            'promotion_id' => 'ID акции',
+            'amount' => 'Количество',
+            'discountRule' => 'Правило наценки',
+            'promotion_mechanic_id' => 'Механика акции',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

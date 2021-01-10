@@ -12,6 +12,7 @@ use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 <nav>
     <div class="nav nav-tabs" id="backendForms" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
+        <a class="nav-item nav-link" id="nav-items-tab" data-toggle="tab" href="#nav-items" role="tab" aria-controls="nav-items" aria-selected="true">Товары</a>
     </div>
 </nav>
 <div class="tab-content" id="backendFormsContent">
@@ -27,30 +28,53 @@ use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
                 <?= $form->field($model, 'end_at')->textInput(['class' => 'form-control js-datepicker']); ?>
             </div>
         </div>
-
-        <!--        --><?php //\app\modules\site\models\tools\Debug::p($subModel); ?>
-
-
-        <?php foreach ($subModel as $iter => $item): ?>
-            <div class="row">
-                <div class="col-sm-3">
-                    <?= $form->field($item, '[' . $iter . ']promotion_mechanic_id')->dropDownList($item->getMechanics(), ['onchange' => 'showRelatedFileds(this, ' . $iter . ');', 'prompt' => 'Выбрать механику']); ?>
+    </div>
+    <div class="tab-pane fade" id="nav-items" role="tabpanel" aria-labelledby="nav-items-tab">
+        <?php $subIter = 0; ?>
+        <?php if (is_array($subModel) && count($subModel) > 0): ?>
+            <?php foreach ($subModel as $iter => $item): ?>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <?= $form->field($item, '[' . $iter . ']promotion_mechanic_id')->dropDownList($item->getMechanics(), ['onchange' => 'showRelatedFileds(this, ' . $iter . ');', 'prompt' => 'Выбрать механику']); ?>
+                    </div>
+                    <div class="<?= $item->promotion_mechanic_id ? '' : 'hidden'; ?> row col-sm-9" id="inputs-mechanic-<?= PromotionProductMechanicsForm::MECH_PRODUCT_DISCOUNT ?>-<?= $iter; ?>">
+                        <div class="col-sm-3">
+                            <?= $form->field($item, '[' . $iter . ']product_id')->textInput() ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?= $form->field($item, '[' . $iter . ']discountRule')->dropDownList($item->getDiscountRules(), ['prompt' => 'Правило цены']); ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?= $form->field($item, '[' . $iter . ']amount')->textInput(); ?>
+                        </div>
+                    </div>
                 </div>
+                <?php $subIter = $iter; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
 
-
-                <div class="<?= $item->promotion_mechanic_id ? '' : 'hidden'; ?> row col-sm-9" id="inputs-mechanic-<?= PromotionProductMechanicsForm::MECH_PRODUCT_DISCOUNT ?>-<?= $iter; ?>">
+        <?php if (!$model->isNewRecord): ?>
+            <?php $md = new PromotionProductMechanicsForm(); ?>
+            <?php for ($i = $subIter; $i < $subIter + 3; $i++): ?>
+                <div class="row">
                     <div class="col-sm-3">
-                        <?= $form->field($item, '[' . $iter . ']product_id')->textInput() ?>
+                        <?= $form->field($md, '[' . $i . ']promotion_mechanic_id')->dropDownList($md->getMechanics(), ['onchange' => 'showRelatedFileds(this, ' . $i . ');', 'prompt' => 'Выбрать механику']); ?>
                     </div>
-                    <div class="col-sm-3">
-                        <?= $form->field($item, '[' . $iter . ']discountRule')->dropDownList($item->getDiscountRules(), ['prompt' => 'Правило цены']); ?>
-                    </div>
-                    <div class="col-sm-3">
-                        <?= $form->field($item, '[' . $iter . ']amount')->textInput(); ?>
+                    <div class="hidden row col-sm-9" id="inputs-mechanic-<?= PromotionProductMechanicsForm::MECH_PRODUCT_DISCOUNT ?>-<?= $i; ?>">
+                        <div class="col-sm-3">
+                            <?= $form->field($md, '[' . $i . ']product_id')->textInput() ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?= $form->field($md, '[' . $i . ']discountRule')->dropDownList($md->getDiscountRules(), ['prompt' => 'Правило цены']); ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?= $form->field($md, '[' . $i . ']amount')->textInput(); ?>
+                        </div>
                     </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endfor; ?>
+        <?php endif; ?>
+
     </div>
 </div>
 
