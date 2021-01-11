@@ -48,7 +48,7 @@ use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
                             <div class="title">Финансы</div>
                             <div class="text">Закуп: <?= Price::format(OrderHelper::orderPurchase($model->id)); ?></div>
                             <div class="text">Сумма заказа: <?= Price::format(OrderHelper::orderSummary($model)); ?></div>
-                            <div class="text"><?= OrderHelper::marginality($model->id, false); ?></div>
+                            <div class="text">Прибыль: +<?= OrderHelper::marginality($model->id, false); ?></div>
                         </div>
 
                         <div class="info-card">
