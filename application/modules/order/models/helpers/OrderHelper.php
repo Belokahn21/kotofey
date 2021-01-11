@@ -129,7 +129,7 @@ class OrderHelper
         return $out;
     }
 
-    public static function marginality($order_id = null)
+    public static function marginality($order_id = null, $noForce = true)
     {
         $out_summ = 0;
         $orders = Order::find();
@@ -138,7 +138,7 @@ class OrderHelper
             $orders->where(['id' => $order_id]);
         }
 
-        $orders->andWhere(['is_cancel' => 0, 'is_paid' => 1]);
+        $orders->andWhere(['is_cancel' => 0, 'is_paid' => $noForce]);
 
         $orders = $orders->all();
 
