@@ -193,6 +193,7 @@ use app\modules\catalog\models\entity\PropertyGroup;
                                 <?php
                                 $group = PropertyGroup::findOne($group_id);
                                 if ($group) echo $group->name;
+                                else echo "Без категории";
                                 ?>
                             </legend>
                             <?php foreach ($props as $property): ?>
