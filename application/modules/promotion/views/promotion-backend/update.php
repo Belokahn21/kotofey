@@ -19,7 +19,9 @@ $this->title = Title::showTitle('Акция: ' . $model->name);
         <h1>Акция: <?= $model->name; ?></h1>
         <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']); ?>
     </div>
-<?php $form = ActiveForm::begin() ?>
+<?php $form = ActiveForm::begin([
+    'options' => ['enctype' => 'multipart/form-data']
+]); ?>
 <?= $this->render('_form', [
     'form' => $form,
     'model' => $model,

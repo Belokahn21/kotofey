@@ -21,7 +21,9 @@ $this->title = Title::showTitle('Акции магазина');
         <h1>Акции магазина</h1>
     </div>
 
-<?php $form = ActiveForm::begin() ?>
+<?php $form = ActiveForm::begin([
+    'options' => ['enctype' => 'multipart/form-data']
+]) ?>
 <?= $this->render('_form', [
     'form' => $form,
     'model' => $model,
