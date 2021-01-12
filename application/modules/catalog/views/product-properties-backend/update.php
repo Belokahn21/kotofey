@@ -1,13 +1,13 @@
 <?php
 
-use app\modules\catalog\models\entity\SaveInformers;
-use app\modules\catalog\models\entity\TypeProductProperties;
 use app\models\tool\seo\Title;
-use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
-use yii\grid\GridView;
+
+/* @var $propertyGroup \app\modules\catalog\models\entity\PropertyGroup[]
+ * @var $model \app\modules\catalog\models\entity\Properties
+ */
 
 $this->title = Title::showTitle("Свойства товаров"); ?>
 <section>
@@ -17,6 +17,7 @@ $this->title = Title::showTitle("Свойства товаров"); ?>
     <?= $this->render('_form', [
         'model' => $model,
         'form' => $form,
+        'propertyGroup' => $propertyGroup,
     ]); ?>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
     <?php ActiveForm::end(); ?>

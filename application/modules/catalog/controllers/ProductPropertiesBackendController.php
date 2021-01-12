@@ -44,6 +44,7 @@ class ProductPropertiesBackendController extends MainBackendController
     public function actionUpdate($id)
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
+        $propertyGroup = PropertyGroup::find()->all();
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -58,6 +59,7 @@ class ProductPropertiesBackendController extends MainBackendController
 
         return $this->render("update", [
             'model' => $model,
+            'propertyGroup' => $propertyGroup,
         ]);
     }
 
