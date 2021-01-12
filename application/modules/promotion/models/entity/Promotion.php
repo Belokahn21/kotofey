@@ -4,7 +4,9 @@ namespace app\modules\promotion\models\entity;
 
 use app\modules\content\models\behaviors\DateToIntBehaviors;
 use app\modules\media\components\behaviors\ImageUploadMinify;
+use app\modules\media\models\entity\Media;
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -12,6 +14,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property string $name
+ * @property string $slug
  * @property int|null $is_active
  * @property int|null $media_id
  * @property int|null $start_at
@@ -23,25 +26,20 @@ use yii\behaviors\TimestampBehavior;
  */
 class Promotion extends \yii\db\ActiveRecord
 {
-    const SCENARIO_INSERT = 'insert';
-    const SCENARIO_UPDATE = 'update';
-
-    public function scenarios()
-    {
-        return [
-            self::SCENARIO_INSERT => ['name', 'is_active', 'start_at', 'end_at', 'image', 'created_at', 'updated_at']
-        ];
-    }
-
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
             DateToIntBehaviors::className(),
             [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'ensureUnique' => true,
+            ],
+            [
                 'class' => ImageUploadMinify::class,
                 'attribute' => 'image',
-                'scenarios' => ['insert', 'update'],
+                'scenarios' => ['default'],
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/'
             ],
@@ -55,6 +53,7 @@ class Promotion extends \yii\db\ActiveRecord
             [['is_active', 'created_at', 'updated_at'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['start_at', 'end_at'], 'safe'],
+            [['is_active'], 'default', 'value' => 1],
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
     }
@@ -77,5 +76,15 @@ class Promotion extends \yii\db\ActiveRecord
     public function getPromotionProductMechanics()
     {
         return $this->hasMany(PromotionProductMechanics::className(), ['promotion_id' => 'id']);
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
+    }
+
+    public static function findOneBySlug($slug)
+    {
+        return static::findOne(['slug' => $slug]);
     }
 }

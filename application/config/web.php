@@ -136,6 +136,8 @@ $config = [
                 '/delivery' => 'site/site/delivery',
                 '/contacts' => 'site/site/contacts',
                 '/about' => 'site/site/about',
+                'promotion' => 'promotion/promotion/index',
+                'promotion/<id[A-Za-z-\/\d_]+>' => 'promotion/promotion/view',
 
                 'market' => 'export/yml/index',
                 'aliexpress' => 'export/aliexpress/index',

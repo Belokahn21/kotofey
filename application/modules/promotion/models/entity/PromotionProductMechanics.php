@@ -2,6 +2,7 @@
 
 namespace app\modules\promotion\models\entity;
 
+use app\modules\catalog\models\entity\Product;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -24,5 +25,10 @@ class PromotionProductMechanics extends \yii\db\ActiveRecord
         return [
             TimestampBehavior::className()
         ];
+    }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 }
