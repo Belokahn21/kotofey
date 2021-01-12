@@ -22,9 +22,11 @@ class PreviewPropertiesWidget extends Widget
         $properties['Артикул'] = $this->product->article;
         $properties['Вес'] = 'Не указан';
 
-        foreach ($this->product->properties as $property) {
-            if ($property->id == 2) {
-                $properties['Вес'] = $property->value . 'кг';
+        if ($this->product->propsValues) {
+            foreach ($this->product->propsValues as $property) {
+                if ($property->property->id == 2) {
+                    $properties['Вес'] = $property->value . 'кг';
+                }
             }
         }
 

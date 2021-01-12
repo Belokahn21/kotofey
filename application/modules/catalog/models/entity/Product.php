@@ -407,4 +407,9 @@ class Product extends \yii\db\ActiveRecord
             self::STATUS_ACTIVE => "Активен",
         ];
     }
+
+    public function getPropsValues()
+    {
+        return $this->hasMany(PropertiesProductValues::className(), ['product_id' => 'id']);
+    }
 }
