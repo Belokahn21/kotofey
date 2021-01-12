@@ -54,4 +54,9 @@ class Properties extends \yii\db\ActiveRecord
     {
         return $this->hasMany(PropertiesVariants::className(), ['property_id' => 'id']);
     }
+
+    public function getGroup()
+    {
+        return $this->hasOne(PropertyGroup::className(), ['id' => 'group_id']);
+    }
 }

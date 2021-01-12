@@ -43,6 +43,12 @@ class ProductBackendController extends MainBackendController
         $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_NEW_PRODUCT]);
         $modelDelivery = new ProductOrder();
         $properties = Properties::find()->all();
+
+        $outProps = [];
+        foreach ($properties as $prop) {
+            $outProps[$prop->group_id][] = $prop;
+        }
+
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -58,7 +64,8 @@ class ProductBackendController extends MainBackendController
 
         return $this->render('index', [
             'model' => $model,
-            'properties' => $properties,
+            'properties' => $outProps,
+//            'properties' => $properties,
             'modelDelivery' => $modelDelivery,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
