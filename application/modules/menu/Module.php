@@ -22,14 +22,8 @@ class Module extends \yii\base\Module
     public function menuIndex()
     {
         return [
-            [
-                'name' => 'Меню',
-                'url' => Url::to(),
-            ],
-            [
-                'name' => 'Пункты меню',
-                'url' => Url::to(),
-            ],
+            ['name' => 'Списки меню', 'url' => Url::to(['/admin/menu/menu-backend/index'])],
+            ['name' => 'Пункты меню', 'url' => Url::to(['/admin/menu/menu-items-backend/index'])],
         ];
     }
 
