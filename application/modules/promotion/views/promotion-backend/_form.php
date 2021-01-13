@@ -59,7 +59,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
         <?php if (!$model->isNewRecord): ?>
             <?php $md = new PromotionProductMechanicsForm(); ?>
-            <?php for ($i = $subIter; $i < $subIter + 3; $i++): ?>
+            <?php for ($i = $subIter + 1; $i < $subIter+1 + 3; $i++): ?>
                 <div class="row">
                     <div class="col-sm-3">
                         <?= $form->field($md, '[' . $i . ']promotion_mechanic_id')->dropDownList($md->getMechanics(), ['onchange' => 'showRelatedFileds(this, ' . $i . ');', 'prompt' => 'Выбрать механику']); ?>
