@@ -11,50 +11,46 @@ $this->title = Title::showTitle("Наши контакты");
 $this->params['breadcrumbs'][] = ['label' => 'Наши контакты', 'url' => Url::to(['site/contacts'])];
 ?>
 <div class="page">
-	<?= Breadcrumbs::widget([
-		'homeLink' => [
-			'label' => 'Главная ',
-			'url' => Yii::$app->homeUrl,
-			'title' => 'Первая страница сайта зоомагазина Котофей',
-		],
-		'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-	]); ?>
+    <?= Breadcrumbs::widget([
+        'homeLink' => [
+            'label' => 'Главная ',
+            'url' => Yii::$app->homeUrl,
+            'title' => 'Первая страница сайта зоомагазина Котофей',
+        ],
+        'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+    ]); ?>
     <h1 class="page__title">Наши контакты</h1>
     <div class="d-flex flex-row justify-content-start w-100">
         <ul class="fa-ul w-50">
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Email: <span><?= SiteSettings::getValueByCode('email'); ?></span>
+                Email: <a href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Email поддержки сайта: <span>support@kotofey.store</span>
+                Email поддержки сайта: <a href="mailto:support@kotofey.store">support@kotofey.store</a>
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Телефон: <span class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></span>
-            </li>
-            <li>
-                <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Телефон: <span class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_2'); ?></span>
+                Телефон: <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
             </li>
         </ul>
         <ul class="fa-ul w-50">
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                ИП Васин К.В.
+                ООО "Интернет-Зоомагазин Котофей"
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                ИНН <span>222261129226</span>
+                ИНН <span>2222889641</span>
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                ОГРН <span>319222500105168</span>
+                ОГРН <span>1212200000022</span>
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Юридический адрес <span>г.Барнаул, ул. Весенняя, д. 4.</span>
+                Юридический адрес <span>656922, Алтайский край, г. Барнаул, Весенняя ул., д. 4, кв. 55</span>
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
