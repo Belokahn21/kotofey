@@ -49,6 +49,9 @@ $config = [
         'sibagro' => [
             'class' => 'app\modules\catalog\console\SibagroController'
         ],
+        'valta' => [
+            'class' => 'app\modules\catalog\console\ValtaController'
+        ],
         'backup' => [
             'class' => 'app\modules\site\console\BackupController'
         ],
