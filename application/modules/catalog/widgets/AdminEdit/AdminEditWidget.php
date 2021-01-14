@@ -17,13 +17,10 @@ class AdminEditWidget extends Widget
 
     public function run()
     {
-        if (!$this->isProductAction() or !$this->hasRoleAccess()) {
-            return false;
-        }
+        if (!$this->isProductAction() or !$this->hasRoleAccess()) return false;
 
-        if (!$slug = $this->getProductSlug()) {
-            return false;
-        }
+        if (!$slug = $this->getProductSlug()) return false;
+
 
         $model = Product::findOneBySlug($slug);
 
@@ -48,7 +45,7 @@ class AdminEditWidget extends Widget
 
     public function hasRoleAccess()
     {
-        return User::isRole('Developer');
+        return User::isRole('Developer') || User::isRole('Administrator');
     }
 
     public function getProductSlug()
