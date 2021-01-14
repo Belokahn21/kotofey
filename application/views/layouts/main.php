@@ -11,6 +11,7 @@ use app\assets\AppAsset;
 use app\widgets\notification\Alert;
 use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
+use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\catalog\models\entity\Category;
 use app\modules\site\widgets\SocialMe\SocialMe;
 use app\modules\stock\widgets\store\StoreWidget;
@@ -82,7 +83,7 @@ $this->beginPage() ?>
             <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
                class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
         </div>
-        <?php \app\modules\menu\widgets\Menu\MenuWidget::widget([
+        <?php MenuWidget::widget([
             'menu_id' => 1
         ]) ?>
     </div>
