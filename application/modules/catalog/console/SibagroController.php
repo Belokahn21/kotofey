@@ -64,10 +64,11 @@ class SibagroController extends Controller
             }
 
 
-            if ($virProduct->purchase > $product->purchase) {
+            // todo: может работать
+//            if ($virProduct->purchase > $product->purchase) {
                 $product->purchase = $virProduct->purchase;
                 $product->price = $product->purchase + floor($product->purchase * $oldPercent / 100);
-            }
+//            }
 
             if (!$product->validate()) {
                 $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка валидации товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
