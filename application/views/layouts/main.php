@@ -83,7 +83,7 @@ $this->beginPage() ?>
             <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
                class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
         </div>
-        <?php MenuWidget::widget([
+        <?= MenuWidget::widget([
             'menu_id' => 1
         ]) ?>
     </div>

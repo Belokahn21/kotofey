@@ -4,7 +4,6 @@
 namespace app\modules\menu\widgets\Menu;
 
 
-use app\modules\menu\models\entity\Menu;
 use app\modules\menu\models\entity\MenuItem;
 use yii\base\Widget;
 
@@ -18,8 +17,8 @@ class MenuWidget extends Widget
     {
         $menu_id = $this->menu_id;
 
-        $models = \Yii::$app->cache->getOrSet('menu-widget', function () use ($menu_id) {
-            return MenuItem::find()->where(['menu.id' => $menu_id])->joinWith('menu')->all();
+        $models = \Yii::$app->cache->getOrSet('menu-widget:id' . $menu_id, function () use ($menu_id) {
+            return MenuItem::find()->where(['menu_id' => '1'])->all();
         });
 
         return $this->render($this->view, [
