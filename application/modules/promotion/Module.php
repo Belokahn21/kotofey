@@ -18,7 +18,6 @@ class Module extends \yii\base\Module
     {
         return [
             ['name' => 'Акции', 'url' => Url::to(['/admin/promotion/promotion-backend/index'])],
-            ['name' => 'Механики акций', 'url' => Url::to(['/admin/promotion/promotion-mechanics-backend/index'])],
         ];
     }
 }
