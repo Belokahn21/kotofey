@@ -32,7 +32,7 @@ class ProductPropertiesValuesHelper
 
     public static function getFinalValue(PropertiesProductValues $variant)
     {
-        return $variant->property->type != 1 ? $variant->value : PropertiesVariants::findOne(['property_id' => $variant->property_id])->name;
+        return $variant->property->type != 1 ? $variant->value : PropertiesVariants::findOne(['property_id' => $variant->property_id, 'id' => $variant->value])->name;
     }
 
     public static function savePropertyValue($product_id, $property_id, $value)
