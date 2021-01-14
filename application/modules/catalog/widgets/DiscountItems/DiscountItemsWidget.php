@@ -22,7 +22,10 @@ class DiscountItemsWidget extends Widget
             $formatArray = array();
 
             $models = $cache->getOrSet('discountProducts', function () {
-                return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article'])->where(['>', 'discount_price', 0])->andWhere(['status_id' => Product::STATUS_ACTIVE])->all();
+                return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article'])
+                    ->where(['>', 'discount_price', 0])
+                    ->andWhere(['status_id' => Product::STATUS_ACTIVE])
+                    ->all();
             }, $this->cacheTime);
 
 
