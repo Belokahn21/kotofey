@@ -30,6 +30,7 @@ class Menu extends \yii\db\ActiveRecord
         return [
             [['name', 'is_active'], 'required'],
             [['sort'], 'default', 'value' => 500],
+            [['is_active'], 'default', 'value' => 1],
             [['name', 'is_active', 'sort'], 'string', 'max' => 255],
         ];
     }

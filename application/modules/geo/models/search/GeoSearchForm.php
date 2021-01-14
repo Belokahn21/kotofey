@@ -12,7 +12,7 @@ class GeoSearchForm extends Geo
 {
 	public static function tableName()
 	{
-		return "geo";
+		return Geo::tableName();
 	}
 
 	public function rules()

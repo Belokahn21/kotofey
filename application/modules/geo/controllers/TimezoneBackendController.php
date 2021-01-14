@@ -2,6 +2,7 @@
 
 namespace app\modules\geo\controllers;
 
+use app\modules\site\controllers\MainBackendController;
 use Yii;
 use app\modules\geo\models\entity\GeoTimezone;
 use app\modules\geo\models\search\GeoTimezoneSearch;
@@ -11,35 +12,8 @@ use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\HttpException;
 
-class TimezoneBackendController extends Controller
+class TimezoneBackendController extends MainBackendController
 {
-    public $layout = '@app/views/layouts/admin';
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['Administrator', 'Developer'],
-                    ],
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
-    }
-
     public function actionIndex()
     {
         $model = new GeoTimezone();
