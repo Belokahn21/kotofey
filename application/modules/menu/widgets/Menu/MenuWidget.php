@@ -19,7 +19,7 @@ class MenuWidget extends Widget
         $menu_id = $this->menu_id;
 
         $models = \Yii::$app->cache->getOrSet('menu-widget', function () use ($menu_id) {
-            return MenuItem::find()->where(['menu.id' => $menu_id])->with('menu')->all();
+            return MenuItem::find()->where(['menu.id' => $menu_id])->joinWith('menu')->all();
         });
 
         return $this->render($this->view, [
