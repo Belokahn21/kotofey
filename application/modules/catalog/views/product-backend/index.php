@@ -11,6 +11,7 @@ use app\modules\catalog\models\entity\Category;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\widgets\stockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
+use app\models\tool\parser\providers\SibagroTrade;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
@@ -51,19 +52,12 @@ $this->title = Title::showTitle('Товары');
             'attribute' => 'code',
             'format' => 'raw',
             'value' => function ($model) {
-                $checkExistButton = "";
+                if ($model->vendor_id == 4) return Html::a($model->code, SibagroTrade::getProductDetailByCode($model->code), ['target' => '_blank']) . Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]);
 
-                if ($model->vendor_id == 4) {
-                    $checkExistButton = Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]);
-                }
 
-                return $model->code . $checkExistButton;
+                return $model->code;
             }
         ],
-//        [
-//            'attribute' => 'prop_sales',
-//            'filter' => ArrayHelper::map(InformersValues::find()->where(['informer_id' => 10])->all(), 'id', 'name'),
-//        ],
         [
             'attribute' => 'status_id',
             'filter' => ['Черновик', 'Активен'],
