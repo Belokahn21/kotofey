@@ -82,11 +82,9 @@ $this->beginPage() ?>
             <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
                class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
         </div>
-        <ul class="header-menu">
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
-            <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
-        </ul>
+        <?php \app\modules\menu\widgets\Menu\MenuWidget::widget([
+            'menu_id' => 1
+        ]) ?>
     </div>
 </header>
 <header class="header-mobile">
