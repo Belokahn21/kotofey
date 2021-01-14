@@ -58,10 +58,8 @@ class RestController extends Controller
         $basketItem->product_id = $product->id;
         $basketItem->count = $count;
         $basketItem->name = $product->name;
-        $basketItem->price = $product->price;
-        if ($product->discount_price) {
-            $basketItem->discount_price = $product->discount_price;
-        }
+        $basketItem->price = $product->getPrice();
+        if ($discount = $product->getDiscountPrice()) $basketItem->discount_price = $discount;
         $basketItem->purchase = $product->purchase;
 
         $basket = new Basket();

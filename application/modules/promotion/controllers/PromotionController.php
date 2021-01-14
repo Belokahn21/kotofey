@@ -13,7 +13,6 @@ class PromotionController extends Controller
 {
     public function actionIndex()
     {
-        $unix_now = time();
         $models = Promotion::find()->where(['is_active' => true])->andWhere([
             'or',
             'start_at = :default and end_at = :default',
@@ -21,7 +20,7 @@ class PromotionController extends Controller
             'start_at < :now and end_at > :now'
         ])
             ->addParams([
-                ":now" => $unix_now,
+                ":now" => time(),
                 ":default" => 0,
             ])->all();
         return $this->render('index', [
