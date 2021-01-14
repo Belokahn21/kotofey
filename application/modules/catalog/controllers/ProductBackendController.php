@@ -81,6 +81,11 @@ class ProductBackendController extends MainBackendController
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
+        $outProps = [];
+        foreach ($properties as $prop) {
+            $outProps[$prop->group_id][] = $prop;
+        }
+
         if ($model->updateProduct()) {
             Alert::setSuccessNotify('Продукт обновлен');
             return $this->refresh();
@@ -89,7 +94,7 @@ class ProductBackendController extends MainBackendController
         return $this->render('update', [
             'model' => $model,
             'modelDelivery' => $modelDelivery,
-            'properties' => $properties,
+            'properties' => $outProps,
         ]);
     }
 
