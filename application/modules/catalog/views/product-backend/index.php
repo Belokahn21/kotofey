@@ -54,7 +54,6 @@ $this->title = Title::showTitle('Товары');
             'value' => function ($model) {
                 if ($model->vendor_id == 4) return Html::a($model->code, SibagroTrade::getProductDetailByCode($model->code), ['target' => '_blank']) . Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]);
 
-
                 return $model->code;
             }
         ],

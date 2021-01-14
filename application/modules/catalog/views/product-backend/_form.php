@@ -202,14 +202,12 @@ use app\modules\catalog\models\entity\PropertyGroup;
                                         'product_id' => $model->id,
                                         'property_id' => $property->id
                                     ]);
-                                    if ($value):
-                                        $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
-                                    endif; ?>
-                                    <?php
+
+                                    if ($value) $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
+
                                     $drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->is_multiple];
-                                    if ((boolean)$property->is_multiple == true) {
-                                        $drop_down_params['size'] = 10;
-                                    }
+
+                                    if ((boolean)$property->is_multiple == true) $drop_down_params['size'] = 10;
                                     ?>
                                     <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), $drop_down_params)->label($property->name); ?>
                                 <?php else: ?>
