@@ -18,6 +18,7 @@ use app\modules\menu\models\entity\MenuItem;
     <div class="tab-pane fade show active" id="nav-main-edit" role="tabpanel" aria-labelledby="nav-main-edit">
         <?= $form->field($model, 'is_active')->checkbox(); ?>
         <?= $form->field($model, 'name'); ?>
+        <?= $form->field($model, 'link'); ?>
         <?= $form->field($model, 'parent_id')->dropDownList(ArrayHelper::map(MenuItem::find()->all(), 'id', 'name'), ['prompt' => 'Родительский пункт менню']); ?>
         <?= $form->field($model, 'menu_id')->dropDownList(ArrayHelper::map($listMenu, 'id', 'name'), ['prompt' => 'Меню']); ?>
         <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>

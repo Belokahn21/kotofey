@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property string|null $name
+ * @property string $link
  * @property int|null $parent_id
  * @property int|null $is_active
  * @property int $menu_id
@@ -32,7 +33,7 @@ class MenuItem extends \yii\db\ActiveRecord
     {
         return [
             [['parent_id', 'is_active', 'menu_id', 'sort',], 'integer'],
-            [['menu_id'], 'required'],
+            [['menu_id', 'link'], 'required'],
             [['sort'], 'default', 'value' => 500],
             [['name'], 'string', 'max' => 255],
             [['menu_id'], 'exist', 'skipOnError' => true, 'targetClass' => Menu::className(), 'targetAttribute' => ['menu_id' => 'id']],
@@ -44,6 +45,7 @@ class MenuItem extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Название',
+            'link' => 'Ссылка',
             'parent_id' => 'ID родителя',
             'is_active' => 'Активность',
             'menu_id' => 'ID меню',
