@@ -14,6 +14,7 @@ use app\modules\media\models\entity\Media;
 $this->title = 'Обновить прайсы по HTML';
 ?>
 <h1>Обновить прайсы по HTML</h1>
+<p>Сохранять HTML страницу в расширении *ВСЕ файлы*</p>
 
 <?php $form = ActiveForm::begin(); ?>
 
