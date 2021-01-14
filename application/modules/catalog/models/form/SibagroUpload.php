@@ -49,7 +49,7 @@ class SibagroUpload extends Model
             $sibEl->code = $this->getValue($code->item(0));
             $sibEl->price = $price;
             $sibEl->vendorId = Vendor::VENDOR_ID_SIBAGRO;
-            $sibEl->imagePath = $image->item(0)->attributes->getNamedItem('href')->value;
+            $sibEl->imagePath = 'http://www.sat-altai.ru' . $image->item(0)->attributes->getNamedItem('href')->value;
 
 
             $items[] = $sibEl;
