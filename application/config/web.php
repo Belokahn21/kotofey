@@ -171,6 +171,15 @@ $config = [
         ],
     ],
     'modules' => [
+        'catalog' => [
+            'class' => 'app\modules\catalog\Module',
+        ],
+        'order' => [
+            'class' => 'app\modules\order\Module',
+        ],
+        'logistic' => [
+            'class' => 'app\modules\logistic\Module',
+        ],
         'site' => [
             'class' => 'app\modules\site\Module',
         ],
@@ -192,14 +201,8 @@ $config = [
         'bot' => [
             'class' => 'app\modules\bot\Module',
         ],
-        'catalog' => [
-            'class' => 'app\modules\catalog\Module',
-        ],
         'feed' => [
             'class' => 'app\modules\feed\Module',
-        ],
-        'order' => [
-            'class' => 'app\modules\order\Module',
         ],
         'content' => [
             'class' => 'app\modules\content\Module',
