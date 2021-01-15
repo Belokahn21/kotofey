@@ -4,6 +4,10 @@
 
   div[role="radiogroup"] {
     display: flex;
+
+    @media (max-width: 450px) {
+      flex-direction: column;
+    }
   }
 
   div[aria-invalid="false"] {
