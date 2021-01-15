@@ -38,6 +38,7 @@ $this->title = Title::showTitle("Меню");
         'id',
         'name',
         'is_active',
+        'menu_id',
         [
             'attribute' => 'created_at',
             'value' => function ($model) {

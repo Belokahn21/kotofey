@@ -121,13 +121,10 @@ $this->beginPage() ?>
                 <?php endforeach; ?>
             <?php endif; ?>
         </ul>
-        <ul class="full-mobile-nav">
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/about/']); ?>">О компании</a></li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/news/']); ?>">Новости</a></li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
-            <li class="full-mobile-nav__item"><a class="full-mobile-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a>
-            </li>
-        </ul>
+        <?= MenuWidget::widget([
+            'menu_id' => 2,
+            'view' => 'mobile-full'
+        ]); ?>
         <div class="header-mobile-full__footer">
             <ul class="header-mobile-full-footer-menu">
                 <li class="header-mobile-full-footer-menu__item">
