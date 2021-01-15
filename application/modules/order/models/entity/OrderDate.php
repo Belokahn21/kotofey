@@ -17,14 +17,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class OrderDate extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'order_date';
-    }
-
     public function behaviors()
     {
         return [
@@ -32,9 +24,6 @@ class OrderDate extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -49,9 +38,6 @@ class OrderDate extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [

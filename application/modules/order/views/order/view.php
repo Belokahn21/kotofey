@@ -69,14 +69,21 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <td><?= ($order->is_paid ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red'])); ?></td>
                 </tr>
                 <tr>
-                    <td colspan="2" align="center">Адрес доставки</td>
+                    <td colspan="2" align="center">Адрес и время доставки</td>
                 </tr>
                 <tr>
                     <td>
                         <?= $order->city ? "г. " . $order->city : null; ?>
                         <?= $order->street ? ", ул. " . $order->street : null; ?>
                         <?= $order->number_home ? ", дом. " . $order->number_home : null; ?>
+                        <?= $order->entrance ? ", подъезд. " . $order->entrance : null; ?>
+                        <?= $order->floor_house ? ", этаж. " . $order->floor_house : null; ?>
                         <?= $order->number_appartament ? ", кв. " . $order->number_appartament : null; ?>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Дата <?= $order->dateDelivery->date; ?>, время: <?= $order->dateDelivery->time; ?>
                     </td>
                 </tr>
             </table>

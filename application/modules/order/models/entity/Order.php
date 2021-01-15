@@ -48,6 +48,7 @@ use yii\db\ActiveRecord;
  * @property OrdersItems[] $items
  * @property Promocode $promocodeEntity
  * @property boolean $chargeBonus
+ * @property OrderDate $dateDelivery
  */
 class Order extends ActiveRecord
 {
