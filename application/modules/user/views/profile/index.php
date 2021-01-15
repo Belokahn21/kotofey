@@ -189,7 +189,7 @@ $this->title = Title::showTitle('Личный кабинет');
                                                         return <<<LIST
                                         <div class="select-pet__item">
                                             <input type="radio" name="$name" value="$value" id="select-pet-dog">
-                                            <label class="select-pet__icon" for="select-pet-dog"><i class="$animal->icon;"></i></label>
+                                            <label class="select-pet__icon" for="select-pet-dog"><i class="$animal->icon"></i></label>
                                         </div>
 LIST;
                                                     }
