@@ -187,7 +187,6 @@ $this->title = Title::showTitle('Личный кабинет');
                                                     'item' => function ($index, $label, $name, $checked, $value) {
                                                         $animal = Animal::findOne($value);
                                                         return <<<LIST
-
                                         <div class="select-pet__item">
                                             <input type="radio" name="$name" value="$value" id="select-pet-dog">
                                             <label class="select-pet__icon" for="select-pet-dog"><i class="$animal->icon;"></i></label>
@@ -195,22 +194,6 @@ $this->title = Title::showTitle('Личный кабинет');
 LIST;
                                                     }
                                                 ]) ?>
-                                                <div class="select-pet__item">
-                                                    <input type="radio" name="type" value="dog" id="select-pet-dog">
-                                                    <label class="select-pet__icon" for="select-pet-dog"><i class="fas fa-dog"></i></label>
-                                                </div>
-                                                <div class="select-pet__item">
-                                                    <input type="radio" name="type" value="cat" id="select-pet-cat">
-                                                    <label class="select-pet__icon" for="select-pet-cat"><i class="fas fa-cat"></i></label>
-                                                </div>
-                                                <div class="select-pet__item">
-                                                    <input type="radio" name="type" value="fish" id="select-pet-fish">
-                                                    <label class="select-pet__icon" for="select-pet-fish"><i class="fas fa-fish"></i></label>
-                                                </div>
-                                                <div class="select-pet__item">
-                                                    <input type="radio" name="type" value="bird" id="select-pet-bird">
-                                                    <label class="select-pet__icon" for="select-pet-bird"><i class="fas fa-crow"></i></label>
-                                                </div>
                                             </div>
                                         </div>
                                         <div class="site-form__group-row">
