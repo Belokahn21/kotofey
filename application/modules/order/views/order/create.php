@@ -107,8 +107,18 @@ LIST;
                 </div>
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-number_home">
-                        <div>Дом*</div>
+                        <div>Номер дома*</div>
                         <?= $form->field($order, 'number_home')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-number_home', 'placeholder' => 'Номер дома'])->label(false); ?>
+                    </label>
+                    <label class="checkout-form__label" for="checkout-entrance">
+                        <div>Подьезд*</div>
+                        <?= $form->field($order, 'entrance')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-entrance', 'placeholder' => 'Подьезд'])->label(false); ?>
+                    </label>
+                </div>
+                <div class="checkout-form__group-row">
+                    <label class="checkout-form__label" for="checkout-floor_house">
+                        <div>Этаж*</div>
+                        <?= $form->field($order, 'floor_house')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-floor_house', 'placeholder' => 'Этаж'])->label(false); ?>
                     </label>
                     <label class="checkout-form__label" for="checkout-number_appartament">
                         <div>Квартира*</div>

@@ -34,6 +34,8 @@ use yii\db\ActiveRecord;
  * @property string $city
  * @property string $street
  * @property string $number_home
+ * @property string $entrance
+ * @property string $floor_house
  * @property string $number_appartament
  * @property string $promocode
  * @property string $email
@@ -63,9 +65,9 @@ class Order extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_DEFAULT => ['entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
         ];
     }
 
@@ -85,7 +87,7 @@ class Order extends ActiveRecord
                 }
             ],
 
-            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing'], 'integer'],
+            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house'], 'integer'],
 
 
             [['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
@@ -179,6 +181,8 @@ class Order extends ActiveRecord
             'city' => 'Город',
             'street' => 'Улица',
             'number_home' => 'Дом',
+            'entrance' => 'Подъезд',
+            'floor_house' => 'Этаж',
             'number_appartament' => 'Квартира',
             'minusStock' => 'Списать товары',
             'plusStock' => 'Вернуть товары',

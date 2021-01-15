@@ -392,11 +392,11 @@ class Product extends \yii\db\ActiveRecord
 
     public function getDiscountPrice()
     {
-        if ($action = PromotionProductMechanics::find()->where(['product_id' => $this->id])->andWhere([
+        if ($action = PromotionProductMechanics::find()->where(['product_id' => $this->id])->joinWith('promotion')->andWhere([
             'or',
-            'start_at = :default and end_at = :default',
-            'start_at is null and end_at is null',
-            'start_at < :now and end_at > :now'
+            'promotion.start_at = :default and promotion.end_at = :default',
+            'promotion.start_at is null and promotion.end_at is null',
+            'promotion.start_at < :now and promotion.end_at > :now'
         ])
             ->addParams([
                 ":now" => time(),

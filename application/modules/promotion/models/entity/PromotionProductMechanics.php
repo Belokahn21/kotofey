@@ -31,4 +31,9 @@ class PromotionProductMechanics extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
+
+    public function getPromotion()
+    {
+        return $this->hasOne(Promotion::className(), ['id' => 'promotion_id']);
+    }
 }
