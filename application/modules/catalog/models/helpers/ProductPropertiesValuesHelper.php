@@ -3,9 +3,11 @@
 namespace app\modules\catalog\models\helpers;
 
 
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\entity\PropertiesVariants;
+use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\site\models\helpers\ImageHelper;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\System;
@@ -32,7 +34,21 @@ class ProductPropertiesValuesHelper
 
     public static function getFinalValue(PropertiesProductValues $variant)
     {
-        return $variant->property->type != 1 ? $variant->value : PropertiesVariants::findOne(['property_id' => $variant->property_id, 'id' => $variant->value])->name;
+        $value = null;
+
+        switch ($variant->property->type) {
+            case TypeProductProperties::TYPE_TEXT:
+                $value = $variant->value;
+                break;
+            case TypeProductProperties::TYPE_INFORMER:
+                $value = PropertiesVariants::findOne(['property_id' => $variant->property_id, 'id' => $variant->value])->name;
+                break;
+            case TypeProductProperties::TYPE_CATALOG:
+                $value = Product::findOne($variant->value);
+                break;
+        }
+
+        return $value;
     }
 
     public static function savePropertyValue($product_id, $property_id, $value)

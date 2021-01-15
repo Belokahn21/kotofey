@@ -16,6 +16,10 @@ class TypeProductProperties
 
     public function listType()
     {
-        return [self::TYPE_TEXT => "Текст", self::TYPE_INFORMER => "Справочник", self::TYPE_CATALOG => "Товары"];
+        return [
+            self::TYPE_TEXT => "Текст",
+            self::TYPE_INFORMER => "Справочник",
+            self::TYPE_CATALOG => "Товары"
+        ];
     }
 }

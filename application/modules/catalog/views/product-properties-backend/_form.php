@@ -38,14 +38,6 @@ use app\modules\catalog\models\entity\SaveInformers;
                 <?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map($propertyGroup, 'id', 'name'), ['prompt' => 'Группа свойства']); ?>
             </div>
         </div>
-
-        <?php if (Yii::$app->request->get('type')) {
-            $model->type = Yii::$app->request->get('type');
-        } ?>
-
         <?= $form->field($model, 'type')->dropDownList((new TypeProductProperties())->listType(), ['prompt' => "Тип свойства", 'id' => 'select-type-prop']) ?>
-        <?php if (Yii::$app->request->get('type') == "1"): ?>
-            <?= $form->field($model, 'informer_id')->dropDownList(ArrayHelper::map(SaveInformers::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
-        <?php endif; ?>
     </div>
 </div>

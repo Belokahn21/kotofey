@@ -36,11 +36,11 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'property_id' => 'Property ID',
-            'product_id' => 'Product ID',
-            'value' => 'Value',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'property_id' => 'ID свойства',
+            'product_id' => 'ID товара',
+            'value' => 'Значение',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }
