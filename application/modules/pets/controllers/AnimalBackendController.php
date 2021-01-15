@@ -44,7 +44,7 @@ class AnimalBackendController extends MainBackendController
                 }
             }
         }
-        return $this->render('index', [
+        return $this->render('update', [
             'model' => $model
         ]);
     }
