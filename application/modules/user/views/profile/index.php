@@ -165,8 +165,77 @@ $this->title = Title::showTitle('Личный кабинет');
                     <?php endif; ?>
                 </div>
                 <div class="tab-pane fade" id="pet">
-                    <h2 class="page__title">Карточка питомца</h2>
-                    <p>Мы ещё делаем этот блок. Скоро здесь появится крутой функционал!</p>
+                    <div class="authModal modal fade" id="newPetModal" tabindex="-1" role="dialog" aria-labelledby="newPetModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="site-form">
+                                    <div class="modal-header">
+                                        <div class="div">
+                                            <h5 class="modal-title" id="newPetModalLabel">Карточка нового питомца</h5>
+                                        </div>
+                                        <?php if (Yii::$app->user->identity->id == 1): ?>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="site-form__item">
+                                            <div class="select-pet">
+                                                <div class="select-pet__item">
+                                                    <input type="radio" name="type" value="dog" id="select-pet-dog">
+                                                    <label class="select-pet__icon" for="select-pet-dog"><i class="fas fa-dog"></i></label>
+                                                </div>
+                                                <div class="select-pet__item">
+                                                    <input type="radio" name="type" value="cat" id="select-pet-cat">
+                                                    <label class="select-pet__icon" for="select-pet-cat"><i class="fas fa-cat"></i></label>
+                                                </div>
+                                                <div class="select-pet__item">
+                                                    <input type="radio" name="type" value="fish" id="select-pet-fish">
+                                                    <label class="select-pet__icon" for="select-pet-fish"><i class="fas fa-fish"></i></label>
+                                                </div>
+                                                <div class="select-pet__item">
+                                                    <input type="radio" name="type" value="bird" id="select-pet-bird">
+                                                    <label class="select-pet__icon" for="select-pet-bird"><i class="fas fa-crow"></i></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="site-form__group-row">
+                                            <div class="site-form__side">
+                                                <div class="site-form__item">
+                                                    <label class="site-form__label" for="site-form-namepet">Кличка питомца</label>
+                                                    <input class="site-form__input" id="site-form-namepet" type="text" placeholder="Кличка питомца">
+                                                </div>
+                                                <div class="site-form__item">
+                                                    <label class="site-form__label" for="site-form-birthday">День рождения питомца</label>
+                                                    <input class="site-form__input js-datepicker" id="site-form-birthday" type="text" placeholder="День рождения питомца">
+                                                </div>
+                                                <div class="site-form__item">
+                                                    <label class="site-form__label" for="site-form-sex">Пол питомца</label>
+                                                    <select class="site-form__select" id="site-form-sex">
+                                                        <option>Мальчик</option>
+                                                        <option>Девочка</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="site-form__side">
+                                                <label class="site-form__label noUpload" for="site-form-pet-avatar"></label>
+                                                <div class="site-form__item">
+                                                    <input class="site-form__item" type="file" name="avatar" id="site-form-pet-avatar">
+                                                </div>
+                                                <p class="select-pet__note">Загрузить фото питомца</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button class="site-form__button" type="button">Добавить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="profile__inline-group">
+                        <h2 class="page__title">Ваши питомцы</h2>
+                        <button class="profile-pet__add" type="button" data-toggle="modal" data-target="#newPetModal">Добавить</button>
+                    </div>
                 </div>
                 <div class="tab-pane fade" id="bonus">
                     <div class="d-flex flex-row align-items-center">

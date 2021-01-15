@@ -3,6 +3,7 @@
 namespace app\modules\pets\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "pets".
@@ -17,17 +18,13 @@ use Yii;
  */
 class Pets extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
+    public function behaviors()
     {
-        return 'pets';
+        return [
+            TimestampBehavior::className()
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -37,19 +34,16 @@ class Pets extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'name' => 'Name',
-            'animal_id' => 'Animal ID',
-            'birthday' => 'Birthday',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'user_id' => 'ID владельца',
+            'name' => 'Имя',
+            'animal_id' => 'ID Вида животного',
+            'birthday' => 'День рождения',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }
