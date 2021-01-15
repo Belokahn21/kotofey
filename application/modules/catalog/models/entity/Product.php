@@ -404,7 +404,7 @@ class Product extends \yii\db\ActiveRecord
             ])->one()) {
 
 
-            $this->discount_price = $this->price - ($this->price * ($action->amount / 100));
+            $this->discount_price = round($this->price - ($this->price * ($action->amount / 100)));
         }
 
         return $this->discount_price;

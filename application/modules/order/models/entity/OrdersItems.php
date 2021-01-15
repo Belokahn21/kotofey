@@ -5,6 +5,7 @@ namespace app\modules\order\models\entity;
 use app\modules\basket\models\entity\Basket;
 use app\modules\delivery\models\entity\Delivery;
 use app\modules\catalog\models\entity\Product;
+use app\modules\site\models\tools\Debug;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -65,14 +66,17 @@ class OrdersItems extends ActiveRecord
             $basket->add($item);
         }
 
+
         /* @var $item OrdersItems */
         foreach (Basket::findAll() as $item) {
             $item->order_id = $this->order_id;
             if ($item->validate()) {
                 if ($item->save() === false) {
+                    Debug::p($item->getErrors());
                     return false;
                 }
             } else {
+                Debug::p($item->getErrors());
                 return false;
             }
         }

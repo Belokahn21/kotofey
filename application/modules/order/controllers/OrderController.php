@@ -66,13 +66,17 @@ class OrderController extends Controller
                     $order->user_id = \Yii::$app->user->id;
                 }
 
+
                 if (!$order->validate()) {
                     print_r($order->getErrors());
                     $transaction->rollBack();
                     return false;
 
                 }
+
+
                 if (!$order->save()) {
+                    print_r($order->getErrors());
                     Alert::setErrorNotify("Ошибка при создании заказа.");
                     $transaction->rollBack();
                     return false;
