@@ -18,6 +18,7 @@ use app\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
 use app\models\tool\Currency;
 use app\models\tool\seo\Title;
+use app\modules\pets\models\entity\Animal;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
@@ -184,10 +185,12 @@ $this->title = Title::showTitle('Личный кабинет');
                                             <div class="select-pet">
                                                 <?= $form->field($petModel, 'animal_id')->radioList(ArrayHelper::map($animals, 'id', 'name'), [
                                                     'item' => function ($index, $label, $name, $checked, $value) {
+                                                        $animal = Animal::findOne($value);
                                                         return <<<LIST
+
                                         <div class="select-pet__item">
                                             <input type="radio" name="$name" value="$value" id="select-pet-dog">
-                                            <label class="select-pet__icon" for="select-pet-dog"><i class="fas fa-dog"></i></label>
+                                            <label class="select-pet__icon" for="select-pet-dog"><i class="$animal->icon;"></i></label>
                                         </div>
 LIST;
                                                     }
