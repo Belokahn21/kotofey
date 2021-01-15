@@ -19,11 +19,11 @@ class Module extends \yii\base\Module
         return [
             [
                 'name' => 'Карточки питомцев',
-                'url' => Url::to(['/admin/pet/pet-backend/index']),
+                'url' => Url::to(['/admin/pets/pet-backend/index']),
             ],
             [
                 'name' => 'Животные',
-                'url' => Url::to(['/admin/pet/animal-backend/index']),
+                'url' => Url::to(['/admin/pets/animal-backend/index']),
             ],
         ];
     }

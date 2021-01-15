@@ -1,15 +1,20 @@
 <?php
-namespace app\modules\promotion\models\search;
 
+
+namespace app\modules\pets\models\search;
+
+
+use app\modules\pets\models\entity\Animal;
 use app\modules\promotion\models\entity\Promotion;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class PromotionSearch extends Promotion
+class AnimalSearchForm extends Animal
 {
+
     public static function tableName()
     {
-        return Promotion::tableName();
+        return Animal::tableName();
     }
 
     public function rules()
@@ -27,7 +32,7 @@ class PromotionSearch extends Promotion
 
     public function search($params)
     {
-        $query = Promotion::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = Animal::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

@@ -2,17 +2,21 @@
 
 namespace app\modules\pets\controllers;
 
+use app\modules\pets\models\search\AnimalSearchForm;
+use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
-use yii\web\Controller;
 use yii\web\HttpException;
 
-class AnimalBackendController extends Controller
+class AnimalBackendController extends MainBackendController
 {
     public $modelClass = 'app\modules\pets\models\entity\Animal';
 
     public function actionIndex()
     {
         $model = new $this->modelClass();
+        $searchModel = new AnimalSearchForm();
+        $dataProvider = $searchModel->search(\Yii::$app->request->post());
+
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate() && $model->save()) {
@@ -22,7 +26,9 @@ class AnimalBackendController extends Controller
             }
         }
         return $this->render('index', [
-            'model' => $model
+            'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
