@@ -18,7 +18,7 @@ class MenuWidget extends Widget
         $menu_id = $this->menu_id;
 
         $models = \Yii::$app->cache->getOrSet('menu-widget:id' . $menu_id, function () use ($menu_id) {
-            return MenuItem::find()->where(['menu_id' => '1'])->orderBy(['sort' => SORT_DESC])->all();
+            return MenuItem::find()->where(['menu_id' => $menu_id, 'is_active' => 1])->orderBy(['sort' => SORT_DESC])->all();
         });
 
         return $this->render($this->view, [
