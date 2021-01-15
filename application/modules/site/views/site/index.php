@@ -24,7 +24,7 @@ $this->title = Title::showTitle("Зоотовары для животных в �
     <?= ManyPurchasedGoods::widget(); ?>
     <?= DiscountItemsWidget::widget(); ?>
     <div class="page-title__group">
-        <h2 class="page-title">О нас</h2><a class="page-title__link" href="/about/">Читать дальше</a>
+        <h2 class="page-title">Интернет магазин для животных</h2><a class="page-title__link" href="/about/">Читать дальше</a>
     </div>
     <div class="index-about-container">
         <div class="index-about">

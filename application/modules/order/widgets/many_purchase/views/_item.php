@@ -24,7 +24,7 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
         <span class="rate"><?= Currency::getInstance()->show(); ?> / шт </span></div>
     <?= AddBasketWidget::widget([
         'product_id' => $model->id,
-        'price' => $model->price,
+        'price' => $model->getPrice(),
         'showInfo' => false,
         'showOneClick' => false,
         'showControl' => false,

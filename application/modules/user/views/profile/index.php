@@ -6,6 +6,8 @@
  * @var $sexList \app\modules\user\models\entity\UserSex[]
  * @var $favorite \app\modules\catalog\models\entity\Product[]
  * @var $bonus \app\modules\bonus\models\entity\UserBonus
+ * @var $petModel \app\modules\pets\models\entity\Pets
+ * @var $animals \app\modules\pets\models\entity\Animal[]
  */
 
 use yii\helpers\Url;
@@ -180,6 +182,16 @@ $this->title = Title::showTitle('Личный кабинет');
                                     <div class="modal-body">
                                         <div class="site-form__item">
                                             <div class="select-pet">
+                                                <?= $form->field($petModel, 'animal_id')->radioList(ArrayHelper::map($animals, 'id', 'name'), [
+                                                    'item' => function ($index, $label, $name, $checked, $value) {
+                                                        return <<<LIST
+                                        <div class="select-pet__item">
+                                            <input type="radio" name="$name" value="$value" id="select-pet-dog">
+                                            <label class="select-pet__icon" for="select-pet-dog"><i class="fas fa-dog"></i></label>
+                                        </div>
+LIST;
+                                                    }
+                                                ]) ?>
                                                 <div class="select-pet__item">
                                                     <input type="radio" name="type" value="dog" id="select-pet-dog">
                                                     <label class="select-pet__icon" for="select-pet-dog"><i class="fas fa-dog"></i></label>

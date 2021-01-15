@@ -5,6 +5,8 @@ namespace app\modules\user\controllers;
 
 use app\modules\bonus\models\entity\UserBonus;
 use app\modules\bonus\models\entity\UserBonusHistory;
+use app\modules\pets\models\entity\Animal;
+use app\modules\pets\models\entity\Pets;
 use app\modules\site\models\tools\Debug;
 use app\widgets\notification\Alert;
 use Yii;
@@ -23,6 +25,8 @@ class ProfileController extends Controller
         $sexList = UserSex::find()->all();
         $bonusAccount = UserBonus::findByPhone($model->phone);
         $history = UserBonusHistory::find()->where(['bonus_account_id' => $bonusAccount->id])->all();
+        $petModel = new Pets();
+        $animals = Animal::find()->all();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -40,7 +44,9 @@ class ProfileController extends Controller
             'model' => $model,
             'sexList' => $sexList,
             'bonus' => $bonusAccount,
-            'history' => $history
+            'history' => $history,
+            'petModel' => $petModel,
+            'animals' => $animals,
         ]);
     }
 

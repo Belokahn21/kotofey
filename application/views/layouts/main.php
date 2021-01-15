@@ -180,7 +180,8 @@ $this->beginPage() ?>
         <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
                 <img class="basket__icon" src="/upload/images/basket.png" alt="Корзина">
                 <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>">
-                    <span><?= Basket::count(); ?></span></div>
+                    <span><?= Basket::count(); ?></span>
+                </div>
             </a>
         </div>
     </div>
