@@ -274,9 +274,11 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
 <?= Alert::widget(); ?>
 <script src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>
-<?php echo $this->render('include/head/yandex/metrika.php'); ?>
-<!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
-<?php echo $this->render('include/head/jivo.php'); ?>
+<?php if (YII_ENV == 'prod'): ?>
+    <?php echo $this->render('include/head/yandex/metrika.php'); ?>
+    <!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
+    <?php echo $this->render('include/head/jivo.php'); ?>
+<?php endif; ?>
 </body>
 </html>
 <?php $this->endPage(); ?>
