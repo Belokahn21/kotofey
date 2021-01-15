@@ -78,6 +78,14 @@ use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
                                 <div class="text">Дом <?= $model->number_home; ?></div>
                             <?php endif; ?>
 
+                            <?php if ($model->entrance): ?>
+                                <div class="text">Подьезд <?= $model->entrance; ?></div>
+                            <?php endif; ?>
+
+                            <?php if ($model->floor_house): ?>
+                                <div class="text">Этаж <?= $model->floor_house; ?></div>
+                            <?php endif; ?>
+
                             <?php if ($model->number_appartament): ?>
                                 <div class="text">Квртира <?= $model->number_appartament; ?></div>
                             <?php endif; ?>
@@ -240,6 +248,14 @@ use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
 
                     <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'street')->textInput(['placeholder' => 'Улица'])->label(false); ?>
+                    </div>
+
+                    <div class="form-element order-delivery-info__item">
+                        <?= $form->field($model, 'entrance')->textInput(['placeholder' => 'Подъезд'])->label(false); ?>
+                    </div>
+
+                    <div class="form-element order-delivery-info__item">
+                        <?= $form->field($model, 'floor_house')->textInput(['placeholder' => 'Этаж'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
