@@ -12,6 +12,8 @@
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-main-edit" role="tabpanel" aria-labelledby="nav-main-edit">
         <?= $form->field($model, 'name'); ?>
+        <?= $form->field($model, 'is_active')->checkbox(); ?>
         <?= $form->field($model, 'icon'); ?>
+        <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
     </div>
 </div>
