@@ -231,12 +231,10 @@ $this->beginPage() ?>
                     </a>
                 </li>
             </ul>
-            <ul class="footer-nav">
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/news']); ?>">Новости</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/about/']) ?>">О нас</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/delivery/']); ?>">Доставка и оплата</a></li>
-                <li class="footer-nav__item"><a class="footer-nav__link" href="<?= Url::to(['/contacts/']); ?>">Контакты</a></li>
-            </ul>
+            <?= MenuWidget::widget([
+                'menu_id' => 3,
+                'view' => 'footer-menu'
+            ]); ?>
         </div>
         <div class="footer-layer-1-right">
             <div class="footer-categories-container">
