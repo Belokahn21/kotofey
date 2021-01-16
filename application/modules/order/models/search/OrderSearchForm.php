@@ -10,7 +10,6 @@ use yii\data\ActiveDataProvider;
 
 class OrderSearchForm extends Order
 {
-
     public static function tableName()
     {
         return Order::tableName();

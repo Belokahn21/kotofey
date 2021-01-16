@@ -18,7 +18,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class UserBonusHistory extends \yii\db\ActiveRecord
 {
-
     public function behaviors()
     {
         return [
@@ -29,7 +28,7 @@ class UserBonusHistory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['bonus_account_id'], 'required'],
+            [['bonus_account_id', 'count'], 'required'],
             [['bonus_account_id', 'count', 'order_id', 'created_at', 'updated_at'], 'integer'],
             [['reason'], 'string'],
         ];
@@ -39,12 +38,12 @@ class UserBonusHistory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'bonus_account_id' => 'Bonus Account ID',
-            'count' => 'Count',
-            'order_id' => 'Order ID',
-            'reason' => 'Reason',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'bonus_account_id' => 'ID бонус - аккаунта',
+            'count' => 'Количество',
+            'order_id' => 'ID заказа',
+            'reason' => 'Причина',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

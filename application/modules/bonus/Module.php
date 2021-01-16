@@ -2,23 +2,32 @@
 
 namespace app\modules\bonus;
 
+use yii\helpers\Url;
+
 /**
  * bonus module definition class
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\bonus\controllers';
+    private $name = 'Бонусы';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Аккаунты', 'url' => Url::to(['/admin/bonus/bonus-backend/index'])],
+            ['name' => 'История начислений', 'url' => Url::to(['/admin/bonus/bonus-history-backend/index'])],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

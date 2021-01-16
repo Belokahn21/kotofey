@@ -31,7 +31,7 @@ class BonusHelper
 
     public static function addBonusUser($phone, $bonus)
     {
-        if (!$UserBonusEntity = UserBonus::findByPhone($phone)) return false;
+        if (!$UserBonusEntity = UserBonus::findOneByPhone($phone)) return false;
 
         $UserBonusEntity->count += $bonus;
 

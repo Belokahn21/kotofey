@@ -20,7 +20,7 @@ class BuyerInfoWidget extends Widget
 
         $orderHistory = Order::find()->where(['phone' => $this->order->phone])->andWhere(['<>', 'id', $this->order->id])->orderBy(['created_at' => SORT_DESC])->all();
         $profile = User::findByPhone($this->order->phone);
-        $userBonus = UserBonus::findByPhone($this->order->phone);
+        $userBonus = UserBonus::findOneByPhone($this->order->phone);
 
         return $this->render($this->view, [
             'model' => $this->order,

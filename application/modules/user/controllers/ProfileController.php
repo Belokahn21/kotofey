@@ -23,7 +23,7 @@ class ProfileController extends Controller
         $model = User::findOne(\Yii::$app->user->id);
         $model->scenario = User::SCENARIO_PROFILE_UPDATE;
         $sexList = UserSex::find()->all();
-        $bonusAccount = UserBonus::findByPhone($model->phone);
+        $bonusAccount = UserBonus::findOneByPhone($model->phone);
         $history = UserBonusHistory::find()->where(['bonus_account_id' => $bonusAccount->id])->all();
         $petModel = new Pets();
         $animals = Animal::find()->all();

@@ -18,7 +18,7 @@ class BonusFieldWidget extends Widget
     public function init()
     {
         if (!\Yii::$app->user->isGuest) {
-            $this->bonusAccount = UserBonus::findByPhone(\Yii::$app->user->identity->phone);
+            $this->bonusAccount = UserBonus::findOneByPhone(\Yii::$app->user->identity->phone);
         }
     }
 

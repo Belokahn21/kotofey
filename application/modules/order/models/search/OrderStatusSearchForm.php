@@ -12,7 +12,7 @@ class OrderStatusSearchForm extends OrderStatus
 
 	public static function tableName()
 	{
-		return "status_order";
+		return OrderStatus::tableName();
 	}
 
 	public function rules()

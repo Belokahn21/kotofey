@@ -50,6 +50,8 @@ use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
                             <div class="text">Сумма заказа: <?= Price::format(OrderHelper::orderSummary($model)); ?></div>
                             <?php $marge = OrderHelper::marginality($model->id, false); ?>
                             <div class="text">Прибыль: <?= $marge > 0 ? '<span class="green">+' . $marge . '</span>' : '<span class="red">-' . $marge . '</span>'; ?></div>
+                            <hr/>
+                            <div class="text">Бонусы: <?= $model->bonus; ?></div>
                         </div>
 
                         <div class="info-card">
