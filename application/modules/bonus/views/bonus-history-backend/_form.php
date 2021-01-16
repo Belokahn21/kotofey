@@ -16,6 +16,8 @@ use yii\helpers\ArrayHelper;
 </nav>
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-main-edit" role="tabpanel" aria-labelledby="nav-main-edit">
+        <?= $form->field($model, 'is_active')->checkbox(); ?>
+        <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
         <?= $form->field($model, 'reason'); ?>
         <?= $form->field($model, 'count'); ?>
         <?= $form->field($model, 'order_id')->dropDownList(ArrayHelper::map($orders, 'id', 'id'), [
