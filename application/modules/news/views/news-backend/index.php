@@ -94,8 +94,7 @@ $this->title = Title::showTitle("Новости");
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-trash-alt"></i>',
-                        Url::to(["delete", 'id' => $key]));
+                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
                 },
             ]
         ],

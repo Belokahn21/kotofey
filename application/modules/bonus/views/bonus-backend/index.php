@@ -12,8 +12,7 @@ use app\modules\order\models\entity\OrderStatus;
 
 /* @var $model \app\modules\bonus\models\entity\UserBonusHistory
  * @var $this \yii\web\View
- * @var $orders \app\modules\order\models\entity\Order[]
- * @var $bonusAccount \app\modules\bonus\models\entity\UserBonus[]
+ * @var $availablePhones array
  */
 
 $this->title = Title::showTitle("Бонус аккаунты");
@@ -24,6 +23,7 @@ $this->title = Title::showTitle("Бонус аккаунты");
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
     'model' => $model,
+    'availablePhones' => $availablePhones,
     'form' => $form,
 ]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
@@ -47,16 +47,13 @@ $this->title = Title::showTitle("Бонус аккаунты");
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["order-report", 'id' => $key]));
+//                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["order-report", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
-//                    if ($key) {
-//                        return Html::a('<i class="fas fa-trash-alt"></i>',
-//                            Url::to(["admin/order", 'id' => $key, 'action' => 'delete']));
-//                    }
+                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
                 }
             ]
         ],

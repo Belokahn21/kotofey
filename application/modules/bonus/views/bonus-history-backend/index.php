@@ -51,16 +51,14 @@ $this->title = Title::showTitle("История операций с бонуса
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["order-report", 'id' => $key]));
+//                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["order-report", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
-//                    if ($key) {
-//                        return Html::a('<i class="fas fa-trash-alt"></i>',
-//                            Url::to(["admin/order", 'id' => $key, 'action' => 'delete']));
-//                    }
+                    return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
+
                 }
             ]
         ],

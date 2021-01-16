@@ -12,8 +12,7 @@ use app\modules\order\models\entity\OrderStatus;
 
 /* @var $model \app\modules\bonus\models\entity\UserBonusHistory
  * @var $this \yii\web\View
- * @var $orders \app\modules\order\models\entity\Order[]
- * @var $bonusAccount \app\modules\bonus\models\entity\UserBonus[]
+ * @var $availablePhones array
  */
 
 $this->title = Title::showTitle("Меню: " . $model->name);
@@ -25,6 +24,7 @@ $this->title = Title::showTitle("Меню: " . $model->name);
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
     'model' => $model,
+    'availablePhones' => $availablePhones,
     'form' => $form,
 ]); ?>
 <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>

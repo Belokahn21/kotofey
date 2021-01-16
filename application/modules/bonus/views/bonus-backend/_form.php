@@ -1,8 +1,11 @@
 <?php
 /* @var $form \yii\widgets\ActiveForm
  * @var $model \app\modules\bonus\models\entity\UserBonus
+ * @var $availablePhones array
  */
 
+use app\modules\bonus\models\entity\UserBonus;
+use app\modules\user\models\entity\User;
 use yii\helpers\ArrayHelper;
 
 ?>
@@ -14,7 +17,7 @@ use yii\helpers\ArrayHelper;
 </nav>
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-main-edit" role="tabpanel" aria-labelledby="nav-main-edit">
-        <?= $form->field($model, 'phone') ?>
-        <?= $form->field($model, 'count') ?>
+        <?= $form->field($model, 'phone')->dropDownList($availablePhones, ['prompt' => 'Не созданные аккаунты']) ?>
+        <?= $form->field($model, 'count')->textInput(['value' => 0]) ?>
     </div>
 </div>
