@@ -16,10 +16,10 @@ use app\modules\order\models\entity\OrderStatus;
  * @var $bonusAccount \app\modules\bonus\models\entity\UserBonus[]
  */
 
-$this->title = Title::showTitle("Меню: " . $model->name);
+$this->title = Title::showTitle("Начислено за: " . $model->reason);
 ?>
     <div class="title-group">
-        <h1>Меню: <?= $model->name; ?></h1>
+        <h1>Начислено за: <?= $model->reason; ?></h1>
         <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin() ?>

@@ -18,7 +18,7 @@ class UserBonusHistorySearch extends UserBonusHistory
     {
         return [
             [['reason'], 'string'],
-            [['count', 'bonus_account_id', 'order_id'], 'integer'],
+            [['count', 'bonus_account_id', 'order_id', 'is_active'], 'integer'],
         ];
     }
 
@@ -42,6 +42,7 @@ class UserBonusHistorySearch extends UserBonusHistory
         $query->andFilterWhere(['count' => $this->count])
             ->andFilterWhere(['like', 'reason', $this->reason])
             ->andFilterWhere(['order_id' => $this->order_id])
+            ->andFilterWhere(['is_active' => $this->is_active])
             ->andFilterWhere(['bonus_account_id' => $this->bonus_account_id]);
 
         return $dataProvider;

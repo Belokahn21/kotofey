@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $model->scenario = User::SCENARIO_PROFILE_UPDATE;
         $sexList = UserSex::find()->all();
         $bonusAccount = UserBonus::findOneByPhone($model->phone);
-        $history = UserBonusHistory::find()->where(['bonus_account_id' => $bonusAccount->id])->all();
+        $history = UserBonusHistory::find()->where(['bonus_account_id' => $bonusAccount->phone])->orderBy(['created_at' => SORT_DESC]);
         $petModel = new Pets();
         $animals = Animal::find()->all();
 
@@ -43,7 +43,6 @@ class ProfileController extends Controller
             'orders' => $orders,
             'model' => $model,
             'sexList' => $sexList,
-            'bonus' => $bonusAccount,
             'history' => $history,
             'petModel' => $petModel,
             'animals' => $animals,

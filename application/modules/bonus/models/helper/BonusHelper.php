@@ -55,10 +55,11 @@ class BonusHelper
 
     public static function createBonusAccount($phone)
     {
-        $obj = new UserBonus();
-        $obj->phone = $phone;
+        $obj = new UserBonusHistory();
         $obj->count = 0;
-
+        $obj->is_active = 1;
+        $obj->bonus_account_id = $phone;
+        $obj->reason = "Аккаунт создан";
         return $obj->validate() && $obj->save();
     }
 }

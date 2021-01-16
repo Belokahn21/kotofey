@@ -5,7 +5,7 @@
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $sexList \app\modules\user\models\entity\UserSex[]
  * @var $favorite \app\modules\catalog\models\entity\Product[]
- * @var $bonus \app\modules\bonus\models\entity\UserBonus
+ * @var $history \yii\db\ActiveQuery
  * @var $petModel \app\modules\pets\models\entity\Pets
  * @var $animals \app\modules\pets\models\entity\Animal[]
  */
@@ -238,7 +238,7 @@ LIST;
                 <div class="tab-pane fade" id="bonus">
                     <div class="d-flex flex-row align-items-center">
                         <h2 class="page__title">Ваши бонусы</h2>
-                        <div class="profile-bonus-count"><?= $bonus->count; ?></div>
+                        <div class="profile-bonus-count"><?= $history->sum('count'); ?></div>
                     </div>
                     <h3>История поступлений бонусов</h3>
                     <div class="bonus-history-table">
@@ -247,7 +247,7 @@ LIST;
                             <div class="bonus-history-table__count">Кол-во</div>
                             <div class="bonus-history-table__date">Дата начисления</div>
                         </div>
-                        <?php foreach ($history as $item): ?>
+                        <?php foreach ($history->all() as $item): ?>
                             <div class="bonus-history-table-body">
                                 <div class="bonus-history-table__reason"><?= $item->reason; ?></div>
                                 <div class="bonus-history-table__count"><?= $item->count; ?></div>

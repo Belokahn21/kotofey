@@ -37,6 +37,7 @@ $this->title = Title::showTitle("История операций с бонуса
     'emptyText' => 'История операций пуста',
     'columns' => [
         'id',
+        'is_active',
         'count',
         'bonus_account_id',
         'order_id',
