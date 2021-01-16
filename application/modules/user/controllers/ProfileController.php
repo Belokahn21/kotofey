@@ -23,8 +23,7 @@ class ProfileController extends Controller
         $model = User::findOne(\Yii::$app->user->id);
         $model->scenario = User::SCENARIO_PROFILE_UPDATE;
         $sexList = UserSex::find()->all();
-        $bonusAccount = UserBonus::findOneByPhone($model->phone);
-        $history = UserBonusHistory::find()->where(['bonus_account_id' => $bonusAccount->phone])->orderBy(['created_at' => SORT_DESC]);
+        $history = UserBonusHistory::find()->where(['bonus_account_id' => Yii::$app->user->identity->phone])->orderBy(['created_at' => SORT_DESC]);
         $petModel = new Pets();
         $animals = Animal::find()->all();
 
