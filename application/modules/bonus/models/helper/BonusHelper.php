@@ -32,6 +32,7 @@ class BonusHelper
         $obj->count = $count;
         $obj->order_id = $order->id;
         $obj->bonus_account_id = $order->phone;
+        $obj->is_active = true;
 
         return $obj->validate() && $obj->save();
     }
