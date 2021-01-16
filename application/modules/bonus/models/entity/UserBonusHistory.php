@@ -9,6 +9,8 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "user_bonus_history".
  *
  * @property int $id
+ * @property boolean $is_active
+ * @property int $sort
  * @property int $bonus_account_id
  * @property int|null $count
  * @property int|null $order_id
@@ -29,7 +31,7 @@ class UserBonusHistory extends \yii\db\ActiveRecord
     {
         return [
             [['bonus_account_id', 'count'], 'required'],
-            [['bonus_account_id', 'count', 'order_id', 'created_at', 'updated_at'], 'integer'],
+            [['bonus_account_id', 'count', 'order_id', 'created_at', 'updated_at', 'is_active', 'sort'], 'integer'],
             [['reason'], 'string'],
         ];
     }
@@ -42,6 +44,8 @@ class UserBonusHistory extends \yii\db\ActiveRecord
             'count' => 'Количество',
             'order_id' => 'ID заказа',
             'reason' => 'Причина',
+            'is_active' => 'Активность',
+            'sort' => 'Сортировка',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
