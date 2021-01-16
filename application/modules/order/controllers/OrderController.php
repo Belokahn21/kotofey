@@ -54,50 +54,25 @@ class OrderController extends Controller
         $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $payments = Payment::findAll(['active' => true]);
         $deliveries = Delivery::findAll(['active' => true]);
-//        $order_date = new OrderDate();
-//        $delivery_time = new DeliveryTimeService();
 
         if (\Yii::$app->request->isPost) {
             $transaction = \Yii::$app->db->beginTransaction();
 
             if ($order->load(\Yii::$app->request->post())) {
 
-                if (!\Yii::$app->user->isGuest) {
-                    $order->user_id = \Yii::$app->user->id;
-                }
-
+                if (!\Yii::$app->user->isGuest) $order->user_id = \Yii::$app->user->id;
 
                 if (!$order->validate()) {
-                    print_r($order->getErrors());
                     $transaction->rollBack();
                     return false;
-
                 }
 
 
                 if (!$order->save()) {
-                    print_r($order->getErrors());
                     Alert::setErrorNotify("Ошибка при создании заказа.");
                     $transaction->rollBack();
                     return false;
-
                 }
-
-                // save order date delivery
-//                if ($order_date->load(\Yii::$app->request->post())) {
-//                    $order_date->order_id = $order->id;
-//                    if (!$order_date->validate()) {
-//                        $transaction->rollBack();
-//                        Alert::setErrorNotify('Ошибка при создании заказа. Не корректная дата заказа.');
-//                        return false;
-//                    }
-//
-//                    if (!$order_date->save()) {
-//                        $transaction->rollBack();
-//                        Alert::setErrorNotify('Ошибка при создании заказа. Дата доставки заказа не сохранена.');
-//                        return false;
-//                    }
-//                }
 
                 // save products
                 $items = new OrdersItems();
@@ -120,8 +95,6 @@ class OrderController extends Controller
             'order' => $order,
             'deliveries' => $deliveries,
             'payments' => $payments,
-//            'delivery_time' => $delivery_time,
-//            'order_date' => $order_date,
         ]);
     }
 

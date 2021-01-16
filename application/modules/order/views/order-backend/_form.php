@@ -10,6 +10,7 @@ use app\models\tool\Price;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
+use app\modules\bonus\models\helper\BonusHelper;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -155,7 +156,8 @@ use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
         <div class="d-flex flex-row">
             <div class="w-25 p-1"><?= $form->field($model, 'minusStock')->checkbox(); ?></div>
             <div class="w-25 p-1"><?= $form->field($model, 'plusStock')->checkbox(); ?></div>
-            <div class="w-25 p-1"><?= $form->field($model, 'chargeBonus')->checkbox(); ?></div>
+            <?php $model->chargeBonus = BonusHelper::isBonused($model); ?>
+            <div class="w-25 p-1"><?= $form->field($model, 'chargeBonus')->radio(); ?></div>
         </div>
         <div class="form-element">
             <div class="d-flex flex-row">
