@@ -7,10 +7,9 @@ use app\modules\catalog\models\entity\Product;
 use yii\base\Widget;
 use app\modules\basket\models\entity\Basket;
 
-/* *
+/**
  * @property $product Product
  **/
-
 class AddBasketWidget extends Widget
 {
     public $product;

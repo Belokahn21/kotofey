@@ -31,7 +31,7 @@ class ManyPurchasedGoods extends Widget
             }
 
             $models = $cache->getOrSet('ManyPurchasedGoods-key', function () use ($products_in_orders) {
-                return Product::find()->select(['id', 'name', 'price', 'discount_price', 'image', 'media_id', 'article', 'slug'])->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])->all();
+                return Product::find()->select(['id', 'name', 'price', 'discount_price', 'image', 'media_id', 'article', 'slug', 'status_id'])->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])->all();
             }, $this->cacheTime);
 
             if (!$models) {
