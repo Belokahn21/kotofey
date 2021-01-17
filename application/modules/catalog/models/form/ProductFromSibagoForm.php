@@ -39,6 +39,7 @@ class ProductFromSibagoForm extends Product
     {
         $product = Product::findOneByCode($this->code);
         if (!empty($this->lazyImageUrl) && !empty($this->methodSave) && empty($product->media_id)) {
+
             $file = file_get_contents($this->lazyImageUrl);
 
             $path = parse_url($this->lazyImageUrl, PHP_URL_PATH);

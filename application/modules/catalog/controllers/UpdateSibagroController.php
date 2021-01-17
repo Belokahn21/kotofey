@@ -6,13 +6,25 @@ namespace app\modules\catalog\controllers;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\ProductFromSibagoForm;
 use app\modules\catalog\models\form\SibagroUpload;
+use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
 use yii\web\Controller;
 
-class UpdateSibagroController extends Controller
+class UpdateSibagroController extends MainBackendController
 {
-    public $layout = '@app/views/layouts/admin';
 
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+        $oldRules = $parentAccess['access']['rules'];
+        $newRules = [['allow' => true, 'actions' => ['upload'], 'roles' => ['Administrator']]];
+
+
+        $parentAccess['access']['rules'] = array_merge($newRules, $oldRules);
+
+        return $parentAccess;
+    }
     public function actionUpload()
     {
         $model = new SibagroUpload();

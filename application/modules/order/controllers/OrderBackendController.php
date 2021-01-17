@@ -26,7 +26,6 @@ use yii\web\HttpException;
 
 class OrderBackendController extends MainBackendController
 {
-    public $layout = '@app/views/layouts/admin';
     public $modelClass = 'app\modules\order\models\entity\Order';
 
     public function behaviors()
