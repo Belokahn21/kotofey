@@ -18,6 +18,7 @@ class AddBasketWidget extends Widget
     public $price;
     public $discount = false;
     public $view = 'default';
+    public $showOrderButton = false;
 
     public $showButton = true;
     public $showInfo = true;
@@ -28,6 +29,10 @@ class AddBasketWidget extends Widget
     public function run()
     {
         if (!$this->product instanceof Product) return false;
+
+        if ($this->product->status_id == Product::STATUS_WAIT) return $this->render('wait', ['product' => $this->product, 'showOrderButton' => $this->showOrderButton]);
+
+        if ($this->product->status_id == Product::STATUS_DRAFT) return $this->render('draft');
 
         $basket = Basket::findOne($this->product->id);
 

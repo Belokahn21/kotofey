@@ -39,7 +39,7 @@ class RestController extends Controller
 
     public function actionGet()
     {
-        $query = Product::find()->where(['status_id' => Product::STATUS_ACTIVE]);
+        $query = Product::find();
         $query->asArray(true);
         $data = \Yii::$app->request;
         $products = null;

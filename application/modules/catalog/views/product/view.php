@@ -56,6 +56,7 @@ $this->title = Title::showTitle($product->name);
             <h1 itemprop="name" class="product-detail__title"><?= $product->name; ?></h1>
             <?= AddBasketWidget::widget([
                 'product' => $product,
+                'showOrderButton' => true,
                 'price' => ProductHelper::getResultPrice($product),
             ]); ?>
             <?= WhenCanBuyWidget::widget([

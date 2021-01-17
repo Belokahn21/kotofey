@@ -14,7 +14,7 @@ class VisitedProductsWidget extends Widget
 
     public function run()
     {
-        $products = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['id' => ProductHelper::getAllVisitedItems()])->all();
+        $products = Product::find()->andWhere(['id' => ProductHelper::getAllVisitedItems()])->all();
 
         return $this->render($this->view, [
             'products' => $products

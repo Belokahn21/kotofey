@@ -14,18 +14,12 @@ class LastWeekProducts extends Widget
 
     public function run()
     {
-        if (!Debug::isPageSpeed()) {
+        $models = \Yii::$app->cache->getOrSet('last-week-products', function () {
+            return Product::find()->select(['id', 'name', 'price', 'media_id', 'media_id', 'image', 'slug', 'article', 'status_id'])->where(['between', 'created_at', time() - 604800, time()])->all();
+        }, $this->cacheTime);
 
-            $cache = \Yii::$app->cache;
-
-            $models = $cache->getOrSet('last-week-products', function () {
-                return Product::find()->select(['id', 'name', 'price', 'media_id', 'media_id', 'image', 'slug', 'article'])->where(['between', 'created_at', time() - 604800, time()])->all();
-            }, $this->cacheTime);
-
-
-            return $this->render($this->view, [
-                'models' => $models
-            ]);
-        }
+        return $this->render($this->view, [
+            'models' => $models
+        ]);
     }
 }

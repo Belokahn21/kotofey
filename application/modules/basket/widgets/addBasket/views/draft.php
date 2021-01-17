@@ -1,0 +1,1 @@
+<div class="product-status draft">Нет в наличии</div>

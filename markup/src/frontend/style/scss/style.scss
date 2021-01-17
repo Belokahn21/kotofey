@@ -1,11 +1,9 @@
 @import "modules/init";
-
 @import "include/variables";
 @import "include/fonts";
 @import "include/buttons";
 @import "include/common";
 @import "include/forms";
-
 @import "include/block/logo";
 @import "include/block/header";
 @import "include/block/header-mobile-full";
@@ -19,13 +17,11 @@
 @import "include/block/product-control";
 @import "include/block/subscribe";
 @import "include/block/mobile-search";
-
 // custom
 @import "include/block/admin-panel";
 @import "include/block/page-title";
 @import "include/block/404";
 @import "include/block/notify";
-
 // главная страница
 @import "include/block/auth";
 @import "include/block/slider";
@@ -39,7 +35,6 @@
 @import "include/block/mini-slider";
 @import "include/block/gruming";
 @import "include/block/last-news";
-
 // детальная карточка товара
 @import "include/block/product-detail";
 @import "include/block/product-detail-gallery";
@@ -58,6 +53,45 @@
 
   &__title {
     font-weight: bold;
+  }
+}
+
+.product-status {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  outline: none !important;
+
+  &__notify {
+    background: transparent;
+    border: 1px $active-color solid;
+    padding: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: $active-color;
+    transition: background-color 0.5s ease-out;
+    outline: none !important;
+
+    &:hover {
+      transition: background-color 0.3s ease-in;
+      background: $active-color;
+      color: white;
+    }
+  }
+
+  &.draft {
+    color: $active-color;
+    font-weight: bold;
+    margin: 20px 0;
+  }
+
+  &.wait {
+    color: orange;
+    font-weight: bold;
+    margin: 20px 0;
   }
 }
 

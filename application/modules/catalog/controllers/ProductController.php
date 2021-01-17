@@ -20,10 +20,8 @@ class ProductController extends Controller
 {
     public function actionView($id)
     {
-
         $product = Product::findBySlug($id);
         if (!$product instanceof Product) throw new \yii\web\NotFoundHttpException("Товар не найден.");
-
 
         $category = Category::findOne($product->category_id);
 
