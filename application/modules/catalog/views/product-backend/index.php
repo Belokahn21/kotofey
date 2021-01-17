@@ -7,11 +7,12 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
 use app\modules\vendors\models\entity\Vendor;
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Category;
+use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\widgets\stockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
-use app\models\tool\parser\providers\SibagroTrade;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
@@ -62,8 +63,10 @@ $this->title = Title::showTitle('Товары');
             'filter' => ['Черновик', 'Активен'],
             'format' => 'raw',
             'value' => function ($model) {
-                if ($model->status_id == 1) {
+                if ($model->status_id == Product::STATUS_ACTIVE) {
                     return Html::tag('div', 'Активен', ['style' => 'color: green;']);
+                } elseif ($model->status_id == Product::STATUS_WAIT) {
+                    return Html::tag('div', 'Ожидается', ['style' => 'color: orange;']);
                 } else {
                     return Html::tag('div', 'Черновик', ['style' => 'color: red;']);
                 }
