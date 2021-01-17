@@ -63,6 +63,7 @@ class Product extends \yii\db\ActiveRecord
 
     const STATUS_DRAFT = 0;
     const STATUS_ACTIVE = 1;
+    const STATUS_WAIT = 2;
 
     public function scenarios()
     {
@@ -415,6 +416,7 @@ class Product extends \yii\db\ActiveRecord
     {
         return [
             self::STATUS_DRAFT => "Черновик",
+            self::STATUS_WAIT => "Ожидается",
             self::STATUS_ACTIVE => "Активен",
         ];
     }
