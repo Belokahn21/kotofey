@@ -11,12 +11,12 @@ class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\bonus\controllers';
     private $name = 'Бонусы';
+    private $enable = true;
 
     public function init()
     {
         parent::init();
     }
-
 
     public function menuIndex()
     {
@@ -29,5 +29,10 @@ class Module extends \yii\base\Module
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getEnable()
+    {
+        return $this->enable;
     }
 }

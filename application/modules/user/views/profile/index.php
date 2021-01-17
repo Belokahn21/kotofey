@@ -20,6 +20,7 @@ use app\models\tool\Currency;
 use app\models\tool\seo\Title;
 use app\modules\pets\models\entity\Animal;
 use app\modules\user\models\helpers\UserHelper;
+use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -238,7 +239,7 @@ LIST;
                 <div class="tab-pane fade" id="bonus">
                     <div class="d-flex flex-row align-items-center">
                         <h2 class="page__title">Ваши бонусы</h2>
-                        <div class="profile-bonus-count"><?= $history->sum('count'); ?></div>
+                        <div class="profile-bonus-count"><?= BonusHelper::getUserBonus(Yii::$app->user->identity->phone); ?></div>
                     </div>
                     <h3>История поступлений бонусов</h3>
                     <div class="bonus-history-table">
@@ -246,12 +247,20 @@ LIST;
                             <div class="bonus-history-table__reason">Причина</div>
                             <div class="bonus-history-table__count">Кол-во</div>
                             <div class="bonus-history-table__date">Дата начисления</div>
+                            <div class="bonus-history-table__available">Статус</div>
                         </div>
                         <?php foreach ($history->all() as $item): ?>
                             <div class="bonus-history-table-body">
                                 <div class="bonus-history-table__reason"><?= $item->reason; ?></div>
                                 <div class="bonus-history-table__count"><?= $item->count; ?></div>
                                 <div class="bonus-history-table__date"><?= date('d.m.Y', $item->created_at); ?></div>
+                                <div class="bonus-history-table__available">
+                                    <?= $item->is_active ? Html::tag('i', '', [
+                                        'class' => 'green far fa-check-circle'
+                                    ]) : Html::tag('i', '', [
+                                        'class' => 'red far fa-clock'
+                                    ]); ?>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>

@@ -29,6 +29,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\bonus\widgets\BonusFiled\BonusFieldWidget;
 use app\modules\promocode\widgets\promocode_field\PromocodeFieldWidget;
+use app\modules\bonus\models\helper\BonusHelper;
 
 $this->title = Title::showTitle("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
@@ -79,7 +80,6 @@ LIST;
                     </label>
 
                     <label class="checkout-form__label" for="checkout-phone">
-                        <div>Бонусы</div>
                         <?= $form->field($order, 'bonus')->widget(BonusFieldWidget::className())->label(false) ?>
                     </label>
                 </div>

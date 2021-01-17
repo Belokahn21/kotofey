@@ -35,7 +35,8 @@ $(".filter-catalog__range").ionRangeSlider({
 });
 
 
-let bonusInput = document.querySelector('#js-bonus-input');
+let bonusInput = document.querySelector('#order-bonus');
+// let bonusInput = document.querySelector('#js-bonus-input');
 let object = $(".js-select-user-bonus");
 if (object && bonusInput) {
     object.ionRangeSlider({

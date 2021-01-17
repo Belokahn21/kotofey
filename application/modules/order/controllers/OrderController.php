@@ -4,6 +4,7 @@ namespace app\modules\order\controllers;
 
 
 use app\modules\basket\models\entity\Basket;
+use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\order\models\entity\OrderDate;
 use app\modules\payment\models\entity\Payment;
 use app\modules\order\models\service\DeliveryTimeService;
@@ -47,9 +48,8 @@ class OrderController extends Controller
 
     public function actionCreate()
     {
-        if (!Basket::count()) {
-            return $this->redirect(['/']);
-        }
+        if (!Basket::count()) return $this->redirect(['/']);
+
 
         $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $payments = Payment::findAll(['active' => true]);
@@ -67,7 +67,16 @@ class OrderController extends Controller
                     return false;
                 }
 
-
+                if ($module = \Yii::$app->getModule('bonus')) {
+                    if ($module->getEnable()) {
+                        if ($order->bonus && $order->bonus > 0) {
+                            BonusHelper::addHistory($order, $order->bonus * -1, 'Списание за заказ #' . $order->id, true);
+                            $order->discount = $order->bonus * -1;
+                        } else {
+                            BonusHelper::applyUserBonus($order, false);
+                        }
+                    }
+                }
                 if (!$order->save()) {
                     Alert::setErrorNotify("Ошибка при создании заказа.");
                     $transaction->rollBack();

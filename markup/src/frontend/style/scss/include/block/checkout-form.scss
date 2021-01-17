@@ -57,4 +57,11 @@
   .form-group {
     margin: 0;
   }
+
+  &-label-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }

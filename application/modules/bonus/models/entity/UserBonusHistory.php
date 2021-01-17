@@ -31,7 +31,8 @@ class UserBonusHistory extends \yii\db\ActiveRecord
     {
         return [
             [['bonus_account_id', 'count'], 'required'],
-            [['bonus_account_id', 'count', 'order_id', 'created_at', 'updated_at', 'is_active', 'sort'], 'integer'],
+            [['is_active'], 'boolean'],
+            [['bonus_account_id', 'count', 'order_id', 'created_at', 'updated_at', 'sort'], 'integer'],
             [['reason'], 'string'],
         ];
     }
