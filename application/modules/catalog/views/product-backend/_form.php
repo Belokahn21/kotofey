@@ -41,6 +41,9 @@ use app\modules\catalog\models\entity\PropertyGroup;
                     <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
                 </div>
                 <div class="form-element">
+                    <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Символьный код'])->label(false); ?>
+                </div>
+                <div class="form-element">
                     <?= $form->field($model, 'description')->textarea(['placeholder' => 'Описание'])->label(false); ?>
                 </div>
 

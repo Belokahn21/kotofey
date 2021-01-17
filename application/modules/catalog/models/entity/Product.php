@@ -143,6 +143,7 @@ class Product extends \yii\db\ActiveRecord
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'name',
                 'ensureUnique' => true,
+                'immutable' => true
             ],
             [
                 'class' => ImageUploadMinify::class,
