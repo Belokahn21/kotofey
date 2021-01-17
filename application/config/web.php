@@ -160,6 +160,7 @@ $config = [
                 'ajax/mark/<mark:\d+>' => 'site/ajax/save-product-mark',
                 'test' => 'site/site/test',
                 'admin/catalog-fill' => 'catalog/ajax/catalog-fill-from-vendor',
+                'save-notify-admission' => 'catalog/ajax/save-notify-admission',
 
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',

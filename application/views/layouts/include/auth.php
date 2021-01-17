@@ -21,7 +21,8 @@ use yii\helpers\Html;
                 ]
             ]); ?>
             <div class="modal-header">
-                <div class="div"><h5 class="modal-title" id="signupModalLabel">Регистрация</h5>
+                <div class="div">
+                    <h5 class="modal-title" id="signupModalLabel">Регистрация</h5>
                     <ul class="auth-modal-toggle">
                         <li class="auth-modal-toggle__item active">
                             <a class="auth-modal-toggle__link" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">Регистрация</a>
