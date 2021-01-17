@@ -79,16 +79,14 @@
 @import "include/block/profile-pet";
 @import "include/block/bonus-history-table";
 .profile-bonus-count {
-  background: $active-color;
-  color: white;
+  background: white;
+  color: $active-color;
+  border: 1px double $active-color;
   display: inline-block;
-  padding: 5px;
+  padding: 2px 15px;
   font-size: 12px;
   line-height: 20px;
   text-align: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 25px;
   margin: 0 0 0 20px;
   font-weight: bold;
 }

@@ -2,6 +2,7 @@
 
 namespace app\modules\bonus\models\entity;
 
+use app\modules\order\models\entity\Order;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -50,5 +51,10 @@ class UserBonusHistory extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public static function findOneByOrder(Order $order)
+    {
+        return static::findOne(['bonus_account_id' => $order->phone, 'order_id' => $order->id, 'is_active' => false]);
     }
 }

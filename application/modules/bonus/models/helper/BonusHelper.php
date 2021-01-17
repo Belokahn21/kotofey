@@ -11,10 +11,21 @@ use app\modules\site\models\tools\Debug;
 
 class BonusHelper
 {
-    public static function applyUserBonus(Order $order, $active = true)
+    public static function addOrderBonus(Order $order, $active = true)
     {
         if (self::isBonused($order)) return false;
         return self::addHistory($order, self::calcResultBonus($order), "Зачисление за заказ #" . $order->id, $active);
+    }
+
+    public static function applyOrderBonus(Order $order)
+    {
+        $elementHistory = UserBonusHistory::findOneByOrder($order);
+        if ($elementHistory) {
+            $elementHistory->is_active = true;
+            return $elementHistory->validate() && $elementHistory->update();
+        }
+
+        return self::addOrderBonus($order);
     }
 
     public static function calcResultBonus(Order $order)
@@ -24,7 +35,7 @@ class BonusHelper
 
     public static function isBonused(Order $order)
     {
-        return UserBonusHistory::findOne(['order_id' => $order->id]) instanceof UserBonusHistory;
+        return UserBonusHistory::findOne(['order_id' => $order->id, 'bonus_account_id' => $order->phone, 'is_active' => true]) instanceof UserBonusHistory;
     }
 
     public static function getUserBonus($phone)
