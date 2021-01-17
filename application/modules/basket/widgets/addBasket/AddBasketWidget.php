@@ -3,12 +3,17 @@
 namespace app\modules\basket\widgets\addBasket;
 
 
+use app\modules\catalog\models\entity\Product;
 use yii\base\Widget;
 use app\modules\basket\models\entity\Basket;
 
+/* *
+ * @property $product Product
+ **/
+
 class AddBasketWidget extends Widget
 {
-    public $product_id;
+    public $product;
     public $count = 1;
     public $price;
     public $discount = false;
@@ -22,15 +27,13 @@ class AddBasketWidget extends Widget
 
     public function run()
     {
-        if (empty($this->product_id) or empty($this->price)) {
-            return false;
-        }
+        if (!$this->product instanceof Product) return false;
 
-        $basket = Basket::findOne($this->product_id);
+        $basket = Basket::findOne($this->product->id);
 
         return $this->render($this->view, [
             'basket' => $basket,
-            'product_id' => $this->product_id,
+            'product_id' => $this->product->id,
             'count' => $this->count,
             'price' => $this->price,
             'showButton' => $this->showButton,

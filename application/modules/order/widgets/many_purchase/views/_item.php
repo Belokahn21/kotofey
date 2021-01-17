@@ -20,10 +20,10 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
         ]); ?>
     </div>
     <div class="vitrine__price">
-        <span class="amount"><?= Price::format($model->price); ?></span>
+        <span class="amount"><?= Price::format($model->getPrice()); ?></span>
         <span class="rate"><?= Currency::getInstance()->show(); ?> / шт </span></div>
     <?= AddBasketWidget::widget([
-        'product_id' => $model->id,
+        'product' => $model,
         'price' => $model->getPrice(),
         'showInfo' => false,
         'showOneClick' => false,

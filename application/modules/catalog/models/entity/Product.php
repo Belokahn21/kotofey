@@ -345,10 +345,10 @@ class Product extends \yii\db\ActiveRecord
         }
     }
 
-    public function getDetail()
-    {
-        return Url::to(['/catalog/product/view', 'id' => $this->slug]);
-    }
+//    public function getDetail()
+//    {
+//        return Url::to(['/catalog/product/view', 'id' => $this->slug]);
+//    }
 
     public function getDisplay()
     {

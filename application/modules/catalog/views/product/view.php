@@ -21,7 +21,7 @@ if ($category) {
         $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
     }
 }
-$this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [$product->detail]];
+$this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [ProductHelper::getDetailUrl($product)]];
 
 $this->title = Title::showTitle($product->name);
 
@@ -55,7 +55,7 @@ $this->title = Title::showTitle($product->name);
             ]); ?>
             <h1 itemprop="name" class="product-detail__title"><?= $product->name; ?></h1>
             <?= AddBasketWidget::widget([
-                'product_id' => $product->id,
+                'product' => $product,
                 'price' => ProductHelper::getResultPrice($product),
             ]); ?>
             <?= WhenCanBuyWidget::widget([

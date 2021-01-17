@@ -45,12 +45,12 @@ $isDiscount = $product->getDiscountPrice() > 0;
             <div class="catalog__old-price"><?= Price::format($product->getPrice()); ?></div>
             <div class="catalog__new-price"><?= Price::format($product->getDiscountPrice()); ?></div>
         <?php else: ?>
-            <div class="catalog__price"><?= Price::format($product->price); ?></div>
+            <div class="catalog__price"><?= Price::format($product->getPrice()); ?></div>
         <?php endif; ?>
         <div class="catalog__rate"><?= Currency::getInstance()->show(); ?> / шт</div>
     </div>
     <?= AddBasketWidget::widget([
-        'product_id' => $product->id,
+        'product' => $product,
         'price' => ProductHelper::getResultPrice($product),
         'showInfo' => false,
         'showOneClick' => false,

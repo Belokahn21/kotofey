@@ -16,15 +16,15 @@ use yii\helpers\Url;
 <div class="catalog-line">
     <?php foreach ($products as $product): ?>
         <div class="catalog-line__item">
-            <div class="catalog-line__image"><img src="<?= ProductHelper::getImageUrl($product); ?>" alt="<?= $product->name; ?>" name="<?= $product->name; ?>"></div>
+            <div class="catalog-line__image"><img src="<?= ProductHelper::getImageUrl($product); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
             <div class="catalog-line__name">
-                <a href="<?= Url::to(['/catalog/product/view', 'id' => $product->slug]); ?>"><?= $product->name; ?></a>
+                <a href="<?= ProductHelper::getDetailUrl($product); ?>"><?= $product->name; ?></a>
             </div>
-            <div class="catalog-line__price"><?= Price::format($product->price); ?><?= Currency::getInstance()->show(); ?></div>
+            <div class="catalog-line__price"><?= Price::format($product->getPrice()); ?><?= Currency::getInstance()->show(); ?></div>
             <div class="catalog-line__to-cart">
                 <?= AddBasketWidget::widget([
-                    'product_id' => $product->id,
-                    'price' => $product->price,
+                    'product' => $product,
+                    'price' => $product->getPrice(),
                     'showInfo' => false,
                     'showOneClick' => false,
                     'showControl' => true,

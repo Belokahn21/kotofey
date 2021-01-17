@@ -34,7 +34,7 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
                         <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, false, ['width' => 256, 'height' => 300, 'crop' => 'fit']); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
                         <div class="swiper-lazy-preloader"></div>
                         <div class="vitrine__title">
-                            <a class="vitrine__link" href="<?= $model->detail; ?>"><?= $model->name; ?></a>
+                            <a class="vitrine__link" href="<?= ProductHelper::getDetailUrl($model); ?>"><?= $model->name; ?></a>
                         </div>
                         <div class="vitrine__properties">
                             <?= PreviewPropertiesWidget::widget([
@@ -42,13 +42,13 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
                             ]); ?>
                         </div>
                         <div class="vitrine__price">
-                            <span class="amount-old"><?= Price::format($model->price); ?></span>
-                            <span class="amount"><?= Price::format($model->discount_price); ?></span>
+                            <span class="amount-old"><?= Price::format($model->getPrice()); ?></span>
+                            <span class="amount"><?= Price::format($model->getDiscountPrice()); ?></span>
                             <span class="rate"><?= Currency::getInstance()->show(); ?> / шт</span>
                         </div>
                         <?= AddBasketWidget::widget([
-                            'product_id' => $model->id,
-                            'price' => $model->price,
+                            'product' => $model,
+                            'price' => $model->getPrice(),
                             'showInfo' => false,
                             'showOneClick' => false,
                             'showControl' => false,
