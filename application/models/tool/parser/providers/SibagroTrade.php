@@ -50,6 +50,8 @@ class SibagroTrade implements ProviderInterface
 
         if (strpos($availableElement, 'В наличии') !== false) {
             $available = Product::STATUS_ACTIVE;
+        } elseif (strpos($availableElement, 'Ожидается') !== false) {
+            $available = Product::STATUS_WAIT;
         } elseif (empty($availableElement)) {
             $available = Product::STATUS_DRAFT;
         }

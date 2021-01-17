@@ -24,15 +24,11 @@ class SibagroController extends Controller
         $log = new Logger();
         $products = Product::find()->where(['vendor_id' => self::VENDOR_SIBAGRO_ID])->limit(500);
 
-        if ($alreadySync = ProductSync::find()->all()) {
-            $products->andWhere(['not in', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')]);
-        }
+        if ($alreadySync = ProductSync::find()->all()) $products->andWhere(['not in', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')]);
 
         $products = $products->all();
 
-        if (!$products) {
-            $log->saveMessage("При синхронизации товаров с поставщиком " . Vendor::findOne(self::VENDOR_SIBAGRO_ID)->name . " возникла ошибка. Найдено товаров: 0", self::UNIQ_LOG_CODE, Logger::STATUS_WARNING);
-        }
+        if (!$products) $log->saveMessage("При синхронизации товаров с поставщиком " . Vendor::findOne(self::VENDOR_SIBAGRO_ID)->name . " возникла ошибка. Найдено товаров: 0", self::UNIQ_LOG_CODE, Logger::STATUS_WARNING);
 
         foreach ($products as $product) {
             $oldProduct = clone $product;
@@ -66,8 +62,8 @@ class SibagroController extends Controller
 
             // todo: может работать
 //            if ($virProduct->purchase > $product->purchase) {
-                $product->purchase = $virProduct->purchase;
-                $product->price = $product->purchase + floor($product->purchase * $oldPercent / 100);
+            $product->purchase = $virProduct->purchase;
+            $product->price = $product->purchase + floor($product->purchase * $oldPercent / 100);
 //            }
 
             if (!$product->validate()) {
