@@ -2,8 +2,11 @@
 
 use yii\helpers\Url;
 use app\widgets\Breadcrumbs;
+use app\models\tool\seo\Title;
 
 /* @var $model \app\modules\vacancy\models\entity\Vacancy */
+
+$this->title = Title::showTitle($model->title);
 ?>
 <div class="page">
     <?php
