@@ -28,6 +28,7 @@ class Properties extends \yii\db\ActiveRecord
         return [
             [['is_active', 'is_multiple', 'is_offer_catalog', 'is_show_site', 'sort', 'type', 'group_id'], 'integer'],
             ['sort', 'default', 'value' => 500],
+            ['is_show_site', 'default', 'value' => 1],
             [['name'], 'required'],
             [['name'], 'string', 'max' => 128],
         ];

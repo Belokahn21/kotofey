@@ -1,18 +1,20 @@
 <?php
 
-use app\modules\catalog\models\entity\ProductOrder;
-use app\modules\stock\models\entity\Stocks;
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\Category;
 use yii\helpers\Json;
-use app\modules\vendors\models\entity\Vendor;
-use app\modules\site\models\helpers\ProductMarkupHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 use app\modules\media\models\entity\Media;
-use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\modules\catalog\models\entity\PropertiesVariants;
+use app\modules\stock\models\entity\Stocks;
+use app\modules\vendors\models\entity\Vendor;
+use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\PropertyGroup;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\site\models\helpers\ProductMarkupHelper;
+use app\modules\catalog\models\entity\PropertiesVariants;
+use app\modules\catalog\models\entity\TypeProductProperties;
+use app\modules\catalog\models\entity\PropertiesProductValues;
+use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -200,7 +202,7 @@ use app\modules\catalog\models\entity\PropertyGroup;
                                 ?>
                             </legend>
                             <?php foreach ($props as $property): ?>
-                                <?php if ($property->type == 1): ?>
+                                <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
                                     <?php $value = PropertiesProductValues::findAll([
                                         'product_id' => $model->id,
                                         'property_id' => $property->id
@@ -211,8 +213,14 @@ use app\modules\catalog\models\entity\PropertyGroup;
                                     $drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->is_multiple];
 
                                     if ((boolean)$property->is_multiple == true) $drop_down_params['size'] = 10;
+
+                                    $variants = [];
+
+                                    if ($property->type == TypeProductProperties::TYPE_CATALOG) $variants = ArrayHelper::map(Product::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
+                                    else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+
                                     ?>
-                                    <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList(ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'), $drop_down_params)->label($property->name); ?>
+                                    <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?>
                                 <?php else: ?>
                                     <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
                                         <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
