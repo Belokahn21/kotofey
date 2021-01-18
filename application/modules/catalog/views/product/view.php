@@ -62,20 +62,20 @@ $this->title = Title::showTitle($product->name);
             <?= WhenCanBuyWidget::widget([
                 'product' => $product
             ]); ?>
-            <?php if ($properties): ?>
-                <ul class="product-properties">
-                    <li class="product-properties__line">
-                        <div class="product-properties__key">Артикул</div>
-                        <div class="product-properties__value"><?= $product->article; ?></div>
-                    </li>
+            <ul class="product-properties">
+                <li class="product-properties__line">
+                    <div class="product-properties__key">Артикул</div>
+                    <div class="product-properties__value"><?= $product->article; ?></div>
+                </li>
+                <?php if ($properties): ?>
                     <?php foreach ($properties as $property): ?>
                         <li class="product-properties__line">
                             <div class="product-properties__key"><?= $property->property->name; ?></div>
                             <div class="product-properties__value"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></div>
                         </li>
                     <?php endforeach; ?>
-                </ul>
-            <?php endif; ?>
+                <?php endif; ?>
+            </ul>
 
             <?php /*
         <ul class="collapse product-properties" id="collapseExample">

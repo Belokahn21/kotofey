@@ -5,7 +5,9 @@ namespace app\modules\catalog\controllers;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\site\models\tools\Debug;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use app\models\tool\System;
 use app\models\tool\seo\Attributes;
@@ -56,7 +58,10 @@ class ProductController extends Controller
         if ($product->media) OpenGraphProduct::image(ProductHelper::getImageUrl($product, true));
 
         // todo: отсюда переделать на новые свойства
-        $properties = PropertiesProductValues::find()->where(['product_id' => $product->id])->andWhere(['not in', 'property_id', Properties::find()->select('id')->where(['is_show_site' => 0])])->all();
+        $properties = PropertiesProductValues::find()
+            ->where(['product_id' => $product->id])
+            ->andWhere(['not in', 'property_id', ArrayHelper::getColumn(Properties::find()->select('id')->where(['is_show_site' => false])->all(), 'id')])
+            ->all();
         ProductHelper::addVisitedItem($product->id);
 
         return $this->render('view', [
