@@ -103,6 +103,10 @@ class ProductBackendController extends MainBackendController
         if (!$oldProduct = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не неайден');
         $oldProduct->scenario = $this->modelClass::SCENARIO_NEW_PRODUCT;
         $properties = Properties::find()->all();
+        $outProps = [];
+        foreach ($properties as $prop) {
+            $outProps[$prop->group_id][] = $prop;
+        }
         if (!$modelDelivery = ProductOrder::findOneByProductId($oldProduct->id)) $modelDelivery = new ProductOrder();
 
         $model = clone $oldProduct;
@@ -128,7 +132,7 @@ class ProductBackendController extends MainBackendController
         return $this->render('copy', [
             'model' => $oldProduct,
             'modelDelivery' => $modelDelivery,
-            'properties' => $properties,
+            'properties' => $outProps,
         ]);
     }
 
