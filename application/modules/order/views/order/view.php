@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                             <?php else: ?>
                                 <img class="profile-order-products__image" src="/images/not-image.png" alt="<?= $item->image; ?>">
                             <?php endif; ?>
-                            <?= Html::a($item->name, $item->product ? $item->product->detail : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
+                            <?= Html::a($item->name, $item->product ? ProductHelper::getDetailUrl($item->product) : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
                             <div class="profile-order-products__price"><?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                             <div class="profile-order-products__char">X</div>
                             <div class="profile-order-products__count"><?= $item->count; ?> шт.</div>
