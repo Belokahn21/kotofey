@@ -1,0 +1,23 @@
+extends include/layer
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Вакансии
+            h1.page__title Вакансии
+            .vacancy-list
+                .vacancy-list__item
+                    img.vacancy-list__image(src="./assets/images/vacancy.jpg")
+                    .vacancy-list__title Программист-товаровед
+                    .vacancy-list__price от 30 0000р
+                    .vacancy-list__description
+                        ul
+                            li Ваши навыки
+                            li Знания HTML, CSS, PHP, JQUERY, GIT
+                            li Реальная оценка времени выполнения проекта
+                            li Результативность
+                    .vacancy-list__callback.btn-main Откликнутся

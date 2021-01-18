@@ -146,7 +146,7 @@ $config = [
                 'gii' => 'gii',
 
                 'vacancy' => 'vacancy/vacancy/index',
-                'vacancy/<slug>' => 'vacancy/vacancy/view',
+                'vacancy/<id>' => 'vacancy/vacancy/view',
                 'search' => 'search/search/index',
                 'cache' => 'site/site/cache',
                 'news' => 'news/news/index',
