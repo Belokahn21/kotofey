@@ -66,7 +66,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <div class="profile-order-info__value"><?= ($order->is_paid ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red'])); ?></div>
                 </div>
                 <div class="profile-order-info__row">
-                    <div class="profile-order-info__key">Адрес и время доставки</div>
+                    <div class="profile-order-info__key">Адрес доставки</div>
                     <div class="profile-order-info__value">
                         <?= $order->city ? "г. " . $order->city : null; ?>
                         <?= $order->street ? ", ул. " . $order->street : null; ?>
@@ -77,10 +77,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     </div>
                 </div>
                 <div class="profile-order-info__row">
-                    <div class="profile-order-info__key"></div>
-                    <div class="profile-order-info__value">
-                        Дата <?= $order->dateDelivery->date; ?>, время: <?= $order->dateDelivery->time; ?>
-                    </div>
+                    <div class="profile-order-info__key">Дата и время доставки</div>
+                    <div class="profile-order-info__value"><?= $order->dateDelivery->date; ?>, <?= $order->dateDelivery->time; ?></div>
                 </div>
             </div>
         </div>
