@@ -1,17 +1,16 @@
 <?php
 
-use yii\widgets\ActiveForm;
-use yii\helpers\Html;
-use app\models\tool\seo\Title;
-use yii\grid\GridView;
 use yii\helpers\Url;
-use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\widgets\group_buy\GroupBuyWidget;
+use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\modules\order\models\entity\OrderStatus;
+use app\models\tool\seo\Title;
+use app\modules\menu\models\entity\Menu;
 
 /* @var $model \app\modules\menu\models\entity\MenuItem
  * @var $this \yii\web\View
+ * @var $searchModel \app\modules\menu\models\search\MenuSearchForm
  * @var $listMenu \app\modules\menu\models\entity\Menu[]
  */
 
@@ -38,7 +37,10 @@ $this->title = Title::showTitle("Меню");
         'id',
         'name',
         'is_active',
-        'menu_id',
+        [
+            'attribute' => 'menu_id',
+            'filter' => ArrayHelper::map(Menu::find()->all(), 'id', 'name')
+        ],
         [
             'attribute' => 'created_at',
             'value' => function ($model) {

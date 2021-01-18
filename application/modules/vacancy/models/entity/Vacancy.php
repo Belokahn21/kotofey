@@ -24,17 +24,6 @@ use yii\behaviors\TimestampBehavior;
  */
 class Vacancy extends \yii\db\ActiveRecord
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function tableName()
-	{
-		return 'vacancy';
-	}
-
-	/**
-	 * {@inheritdoc}
-	 */
 	public function rules()
 	{
 		return [
@@ -53,9 +42,6 @@ class Vacancy extends \yii\db\ActiveRecord
 		];
 	}
 
-	/**
-	 * {@inheritdoc}
-	 */
 	public function attributeLabels()
 	{
 		return [

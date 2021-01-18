@@ -20,6 +20,7 @@ class MenuSearchForm extends Menu
     {
         return [
             [['name'], 'string'],
+            [['is_active'], 'boolean'],
         ];
     }
 
@@ -40,7 +41,8 @@ class MenuSearchForm extends Menu
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['is_active' => $this->is_active]);
 
         return $dataProvider;
     }

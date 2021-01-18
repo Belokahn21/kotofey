@@ -2,14 +2,14 @@
 
 use app\models\tool\seo\Title;
 
-/* @var $items \app\modules\vacancy\models\entity\Vacancy[] */
+/* @var $models \app\modules\vacancy\models\entity\Vacancy[] */
 
 $this->title = Title::showTitle('Вакансии');
 ?>
 <h1>Вакансии</h1>
-<?php if ($items): ?>
+<?php if ($models): ?>
     <ul class="vacancy">
-		<?php foreach ($items as $item): ?>
+		<?php foreach ($models as $item): ?>
             <li class="vacancy__item">
 				<?php if ($item->image): ?>
                     <img class="vacancy__image" src="/upload/<?= $item->image; ?>" alt="<?= $item->title; ?>" title="<?= $item->title; ?>">

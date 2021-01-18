@@ -171,41 +171,20 @@ class SiteController extends Controller
 
     public function beforeAction($action)
     {
-        if (in_array($action->id, ['success', 'fail', 'test'])) {
-            $this->enableCsrfValidation = false;
-        }
+        if (in_array($action->id, ['success', 'fail', 'test'])) $this->enableCsrfValidation = false;
+
 
         if (!Yii::$app->session->get('city_id')) {
             $CityDefault = Geo::find()->where(['is_default' => true])->one();
-            if ($CityDefault) {
-                Yii::$app->session->set('city_id', $CityDefault->id);
-            }
+            if ($CityDefault) Yii::$app->session->set('city_id', $CityDefault->id);
         }
 
 
         $geo = CurrentGeo::find()->one();
-        if ($geo) {
-            if ($geo->timeZone) {
-                date_default_timezone_set($geo->timeZone->value);
-            }
-        }
-
-
-        $referal = new ReferalService();
-        $referal->saveKeyToGuest();
+        if ($geo)
+            if ($geo->timeZone) date_default_timezone_set($geo->timeZone->value);
 
 
         return parent::beforeAction($action);
     }
-
-
-
-
-
-    public function actionReferal()
-    {
-        return $this->render('referal');
-    }
-
-
 }

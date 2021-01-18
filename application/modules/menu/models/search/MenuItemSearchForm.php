@@ -21,6 +21,7 @@ class MenuItemSearchForm extends MenuItem
     {
         return [
             [['name'], 'string'],
+            [['menu_id'], 'integer'],
         ];
     }
 
@@ -41,7 +42,8 @@ class MenuItemSearchForm extends MenuItem
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['menu_id' => $this->menu_id]);
 
         return $dataProvider;
     }
