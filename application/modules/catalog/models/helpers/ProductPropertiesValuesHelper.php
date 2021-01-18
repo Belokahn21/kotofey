@@ -44,7 +44,7 @@ class ProductPropertiesValuesHelper
                 $value = PropertiesVariants::findOne(['property_id' => $variant->property_id, 'id' => $variant->value])->name;
                 break;
             case TypeProductProperties::TYPE_CATALOG:
-                $value = Product::findOne($variant->value);
+                $value = Product::findOne($variant->value)->name;
                 break;
         }
 
