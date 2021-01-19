@@ -29,7 +29,7 @@ composer-update:
 	cd application && composer update
 
 cache:
-	rm -rf application/runtime/cache/
+	rm -rf application/runtime/cache/ && mkdir application/runtime/cache && chmod -R 0777 application/runtime/cache
 
 create-cache-folder:
 	mkdir application/runtime/cache/
