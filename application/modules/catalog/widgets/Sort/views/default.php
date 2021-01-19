@@ -5,6 +5,7 @@ use yii\helpers\Url;
 /* @var $sort array
  * @var $display array
  */
+
 ?>
 <form class="catalog-sort">
     <?php /*
@@ -21,7 +22,7 @@ use yii\helpers\Url;
 
     <div class="type-display">
         <?php foreach ($display as $value => $class): ?>
-            <a class="type-display__item<?= $value == Yii::$app->request->get('display', 'block') ? ' active' : ''; ?> " href="<?= Url::to(['', 'display' => $value]); ?>">
+            <a class="type-display__item<?= $value == Yii::$app->request->get('display', 'block') ? ' active' : ''; ?> " href="<?= Url::current(['display' => $value]); ?>">
                 <i class="<?= $class; ?>"></i>
             </a>
         <?php endforeach; ?>
