@@ -180,14 +180,15 @@ LIST;
                                 <img alt="<?= $item->product->name; ?>" title="<?= $item->product->name; ?>" class="light-checkout-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>">
                                 <div class="light-checkout-list__info">
                                     <div class="light-checkout-list__title">
-                                        <a class="light-checkout-list__link" href="<?= $item->product->detail; ?>"><?= $item->product->name; ?></a>
+                                        <a class="light-checkout-list__link" href="<?= ProductHelper::getDetailUrl($item->product); ?>"><?= $item->product->name; ?></a>
                                     </div>
                                     <div class="light-checkout-list__article">Артикул: <?= $item->product->article; ?></div>
                                 </div>
                                 <?= AddBasketWidget::widget([
-                                    'product_id' => $item->product->id,
-                                    'price' => $item->product ? ProductHelper::getResultPrice($item->product) : $item->price,
-                                    'discount' => $item->discount_price,
+                                    'product' => $item->product,
+                                    'price' => $item->product ? $item->product->getPrice() : $item->price,
+//                                    'price' => $item->product ? ProductHelper::getResultPrice($item->product) : $item->price,
+                                    'discount' => $item->product->getDiscountPrice(),
                                     'showButton' => false,
                                     'showInfo' => false,
                                     'showOneClick' => false,
