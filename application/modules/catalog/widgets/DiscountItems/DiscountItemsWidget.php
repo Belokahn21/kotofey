@@ -3,6 +3,7 @@
 namespace app\modules\catalog\widgets\DiscountItems;
 
 
+use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
@@ -22,12 +23,20 @@ class DiscountItemsWidget extends Widget
             $formatArray = array();
 
             $models = $cache->getOrSet('discountProducts', function () {
-                return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article'])
-                    ->where(['>', 'discount_price', 0])
-                    ->andWhere(['status_id' => Product::STATUS_ACTIVE])
+                return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article', 'status_id'])
+                    ->andWhere(['in', 'id', ArrayHelper::getColumn(PromotionProductMechanics::find()->joinWith('promotion')->andWhere([
+                        'or',
+                        'promotion.start_at = :default and promotion.end_at = :default',
+                        'promotion.start_at is null and promotion.end_at is null',
+                        'promotion.start_at < :now and promotion.end_at > :now'
+                    ])
+                        ->addParams([
+                            ":now" => time(),
+                            ":default" => 0,
+                        ])
+                        ->all(), 'product_id')])
                     ->all();
             }, $this->cacheTime);
-
 
             foreach ($models as $model) {
                 $brand = $this->getBrandProperty($model->id);

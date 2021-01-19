@@ -403,7 +403,8 @@ class Product extends \yii\db\ActiveRecord
             ->addParams([
                 ":now" => time(),
                 ":default" => 0,
-            ])->one()) {
+            ])
+            ->one()) {
 
 
             $this->discount_price = round($this->price - ($this->price * ($action->amount / 100)));
