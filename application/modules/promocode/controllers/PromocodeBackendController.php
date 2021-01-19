@@ -24,6 +24,7 @@ class PromocodeBackendController extends MainBackendController
 
         return $parentAccess;
     }
+
     public function actionIndex()
     {
         $model = new Promocode();
@@ -50,11 +51,8 @@ class PromocodeBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = Promocode::findOne($id);
+        if (!$model = Promocode::findOne($id)) throw new HttpException(404, 'Такого промокода не существует.');
 
-        if (!$model) {
-            throw new HttpException(404, 'Такого промокода не существует.');
-        }
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -70,6 +68,15 @@ class PromocodeBackendController extends MainBackendController
         return $this->render('update', [
             'model' => $model,
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        if (!$model = Promocode::findOne($id)) throw new HttpException(404, 'Такого промокода не существует.');
+
+        if ($model->delete()) Alert::setSuccessNotify('Промокод удален');
+
+        return $this->redirect(['index']);
     }
 
     public function actionClean()
