@@ -2,13 +2,13 @@
 
 use yii\widgets\ActiveForm;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
 /* @var $model \app\modules\catalog\models\entity\Product
- * @var $categories Category[]
+ * @var $categories ProductCategory[]
  * @var $vendors \app\modules\vendors\models\entity\Vendor[]
  * @var $stocks \app\modules\stock\models\entity\Stocks[]
  */
@@ -49,7 +49,7 @@ use yii\helpers\Html;
                                         <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара']); ?>
                                     </div>
                                     <div class="col-sm-4">
-                                        <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара']); ?>
+                                        <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new ProductCategory())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара']); ?>
                                     </div>
                                     <div class="col-sm-4">
                                         <?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map($vendors, 'id', 'name'), ['prompt' => 'Поставщик']); ?>

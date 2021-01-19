@@ -2,7 +2,7 @@
 
 /* @var $this \yii\web\View
  * @var $content string
- * @var $parentCategories Category[]
+ * @var $parentCategories ProductCategory[]
  */
 
 use yii\helpers\Url;
@@ -12,7 +12,7 @@ use app\widgets\notification\Alert;
 use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
 use app\modules\menu\widgets\Menu\MenuWidget;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\site\widgets\SocialMe\SocialMe;
 use app\modules\stock\widgets\store\StoreWidget;
 use app\modules\search\widges\search\SearchWidget;
@@ -24,7 +24,7 @@ use app\modules\site\widgets\AdminPanel\AdminPanel;
 AppAsset::register($this);
 
 $parentCategories = Yii::$app->cache->getOrSet('parent-cats', function () {
-    return Category::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
+    return ProductCategory::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
 }, 3600 * 7 * 24);
 
 $this->beginPage() ?>

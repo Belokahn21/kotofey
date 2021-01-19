@@ -26,13 +26,8 @@ use yii\web\UploadedFile;
  * @property integer $created_at
  * @property integer $updated_at
  */
-class Category extends ActiveRecord
+class ProductCategory extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "product_category";
-    }
-
     public function behaviors()
     {
         return [
@@ -48,6 +43,7 @@ class Category extends ActiveRecord
                 'class' => SluggableBehavior::className(),
                 'attribute' => 'name',
                 'ensureUnique' => true,
+                'immutable' => true
             ],
         ];
     }
@@ -90,7 +86,7 @@ class Category extends ActiveRecord
 
     public function categoryTree($parent_id = 0, $delim = "")
     {
-        $categories = Category::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
+        $categories = ProductCategory::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
 
         if ($categories) {
 
@@ -116,12 +112,12 @@ class Category extends ActiveRecord
         } else {
 
             $this->subsections[] = $cache->getOrSet('subsection-' . $current_category_id, function () use ($current_category_id) {
-                return Category::findOne($current_category_id);
+                return ProductCategory::findOne($current_category_id);
             });
         }
 
         $categories = $cache->getOrSet('subsections-' . $current_category_id, function () use ($current_category_id) {
-            return Category::find()->where(['parent' => $current_category_id])->all();
+            return ProductCategory::find()->where(['parent' => $current_category_id])->all();
         });
 //        $categories = Category::find()->where(['parent' => $current_category_id])->all();
 
@@ -142,7 +138,7 @@ class Category extends ActiveRecord
         if ($parent_id === null) {
             $parent_id = $this->id;
         }
-        $category = Category::findOne($parent_id);
+        $category = ProductCategory::findOne($parent_id);
 
         if ($category) {
             $this->under_sections[] = $category;

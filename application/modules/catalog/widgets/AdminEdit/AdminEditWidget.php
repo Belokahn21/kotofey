@@ -4,7 +4,7 @@ namespace app\modules\catalog\widgets\AdminEdit;
 
 
 use app\modules\site\models\tools\Debug;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\entity\User;

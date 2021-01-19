@@ -3,8 +3,8 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\Category;
-use app\modules\catalog\models\search\CategorySearchForm;
+use app\modules\catalog\models\entity\ProductCategory;
+use app\modules\catalog\models\search\ProductCategorySearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
@@ -19,8 +19,8 @@ class ProductCategoryBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new Category();
-        $searchForm = new CategorySearchForm();
+        $model = new ProductCategory();
+        $searchForm = new ProductCategorySearchForm();
         $dataProvider = $searchForm->search(\Yii::$app->request->get());
 
         if (\Yii::$app->request->isPost) {
@@ -44,7 +44,7 @@ class ProductCategoryBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = Category::findOne($id);
+        $model = ProductCategory::findOne($id);
         if (!$model) {
             throw new HttpException(404, 'Раздел товара не существует');
         }
@@ -68,7 +68,7 @@ class ProductCategoryBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (Category::findOne($id)->delete()) {
+        if (ProductCategory::findOne($id)->delete()) {
             Alert::setSuccessNotify('Категория удалена');
         }
 

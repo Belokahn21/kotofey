@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\modules\support\models\entity\SupportCategory;
 use app\modules\user\models\entity\Auth;
 use app\modules\basket\models\entity\Basket;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\geo\models\entity\Geo;
 use app\modules\catalog\models\entity\SaveInformersValues;

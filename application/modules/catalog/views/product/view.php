@@ -13,7 +13,7 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 /* @var $properties \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
  * @var \app\modules\catalog\models\entity\Product $product
- * @var \app\modules\catalog\models\entity\Category $category
+ * @var \app\modules\catalog\models\entity\ProductCategory $category
  */
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];

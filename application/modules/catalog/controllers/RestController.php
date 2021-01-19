@@ -3,7 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -93,6 +93,6 @@ class RestController extends Controller
 
     public function actionCategory()
     {
-        return Json::encode(Category::find()->orderBy(['parent' => SORT_ASC])->all());
+        return Json::encode(ProductCategory::find()->orderBy(['parent' => SORT_ASC])->all());
     }
 }

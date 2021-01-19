@@ -3,7 +3,7 @@
 namespace app\modules\export\controllers;
 
 
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\site\models\tools\Debug;
@@ -14,7 +14,7 @@ class AliexpressController extends Controller
     public function actionIndex()
     {
         set_time_limit(0);
-        $categories = Category::find()->all();
+        $categories = ProductCategory::find()->all();
         $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE]);
 
 

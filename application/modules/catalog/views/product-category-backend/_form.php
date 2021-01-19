@@ -4,8 +4,8 @@ use mihaildev\ckeditor\CKEditor;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 
-/* @var $categories \app\modules\catalog\models\entity\Category[] */
-/* @var $model \app\modules\catalog\models\entity\Category */
+/* @var $categories \app\modules\catalog\models\entity\ProductCategory[] */
+/* @var $model \app\modules\catalog\models\entity\ProductCategory */
 
 ?>
 <nav>

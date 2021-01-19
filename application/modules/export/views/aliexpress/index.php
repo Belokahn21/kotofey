@@ -11,7 +11,7 @@ $module = Yii::$app->getModule('export');
 
 /* @var $offersBatch
  * @var $offers \app\modules\catalog\models\entity\Product[]
- * @var $categories \app\modules\catalog\models\entity\Category[]
+ * @var $categories \app\modules\catalog\models\entity\ProductCategory[]
  */
 ?>
 <?= '<?xml version="1.0" encoding="UTF-8"?>'; ?>

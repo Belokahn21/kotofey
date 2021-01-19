@@ -13,7 +13,7 @@ use app\models\tool\System;
 use app\models\tool\seo\Attributes;
 use app\models\tool\seo\og\OpenGraph;
 use app\models\tool\seo\og\OpenGraphProduct;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
@@ -25,7 +25,7 @@ class ProductController extends Controller
         $product = Product::findBySlug($id);
         if (!$product instanceof Product) throw new \yii\web\NotFoundHttpException("Товар не найден.");
 
-        $category = Category::findOne($product->category_id);
+        $category = ProductCategory::findOne($product->category_id);
 
         if (!empty($product->seo_description)) {
             Attributes::metaDescription($product->seo_description);

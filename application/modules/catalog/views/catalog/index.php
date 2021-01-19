@@ -4,7 +4,7 @@
  * @var $products \app\modules\catalog\models\entity\Product
  * @var $filterModel CatalogFilter
  * @var $display string
- * @var $category \app\modules\catalog\models\entity\Category
+ * @var $category \app\modules\catalog\models\entity\ProductCategory
  */
 
 use yii\helpers\Url;
@@ -12,7 +12,7 @@ use yii\widgets\LinkPager;
 use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
 use app\models\forms\CatalogFilter;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\modules\catalog\widgets\filter\CatalogFilterWidget;
 use app\modules\catalog\models\helpers\CategoryHelper;
@@ -53,7 +53,7 @@ if ($category) {
                 <?php $id = 0; ?>
             <?php endif; ?>
 
-            <?php $subCategories = Category::find()->where(['parent' => $id])->all(); ?>
+            <?php $subCategories = ProductCategory::find()->where(['parent' => $id])->all(); ?>
 
             <?php if ($subCategories): ?>
                 <ul class="aside-sub-categories">

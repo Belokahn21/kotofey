@@ -2,7 +2,7 @@
 
 namespace app\modules\export\controllers;
 
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use yii\web\Controller;
 
@@ -10,7 +10,7 @@ class YmlController extends Controller
 {
 	public function actionIndex()
 	{
-		$categories = Category::find()->all();
+		$categories = ProductCategory::find()->all();
 		$offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
 
 //		\Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;

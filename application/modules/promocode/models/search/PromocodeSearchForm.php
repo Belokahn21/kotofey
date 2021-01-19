@@ -3,7 +3,7 @@
 namespace app\modules\promocode\models\search;
 
 
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\promocode\models\entity\Promocode;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

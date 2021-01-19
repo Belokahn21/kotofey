@@ -4,12 +4,12 @@ use app\modules\catalog\models\entity\Product;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\models\tool\seo\Title;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
-/* @var $model \app\modules\catalog\models\entity\Category */
+/* @var $model \app\modules\catalog\models\entity\ProductCategory */
 ?>
 <?php $this->title = Title::showTitle("Разделы"); ?>
     <h1 class="title">Разделы</h1>
@@ -54,7 +54,7 @@ use yii\helpers\Url;
             'attribute' => 'parent',
             'format' => 'raw',
             'value' => function ($model) {
-                $category = Category::findOne($model->parent);
+                $category = ProductCategory::findOne($model->parent);
                 if ($category) {
                     return Html::a($category->name, Url::to(['update', 'id' => $model->parent]));
                 } else {

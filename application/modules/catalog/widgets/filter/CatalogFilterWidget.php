@@ -3,7 +3,7 @@
 namespace app\modules\catalog\widgets\filter;
 
 use app\models\forms\CatalogFilter;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\SaveInformers;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\SaveProductProperties;
@@ -13,7 +13,7 @@ use yii\helpers\ArrayHelper;
 
 /**
  * CatalogFilterWidget class
- * @property Category $category
+ * @property ProductCategory $category
  */
 class CatalogFilterWidget extends Widget
 {

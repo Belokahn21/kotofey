@@ -2,11 +2,11 @@
 
 namespace app\modules\catalog\models\helpers;
 
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 
 class CategoryHelper
 {
-    public static function getDetailUrl(Category $model)
+    public static function getDetailUrl(ProductCategory $model)
     {
         return "/catalog/" . $model->slug . "/";
     }

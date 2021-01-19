@@ -46,7 +46,7 @@ use yii\web\UploadedFile;
  * @property integer $created_at
  * @property integer $updated_at
  *
- * @property Category $category
+ * @property ProductCategory $category
  * @property string $detail
  * @property Media $media
  */
@@ -363,10 +363,10 @@ class Product extends \yii\db\ActiveRecord
     public function getCategory()
     {
         if ($this->category_id) {
-            return Category::findOne($this->category_id);
+            return ProductCategory::findOne($this->category_id);
         }
 
-        $category = new Category();
+        $category = new ProductCategory();
         $category->name = 'Без категории';
 
         return $category;

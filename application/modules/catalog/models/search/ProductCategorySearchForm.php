@@ -2,16 +2,16 @@
 
 namespace app\modules\catalog\models\search;
 
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class CategorySearchForm extends Category
+class ProductCategorySearchForm extends ProductCategory
 {
     public static function tableName()
     {
-        return Category::tableName();
+        return ProductCategory::tableName();
     }
 
     public function rules()
@@ -29,7 +29,7 @@ class CategorySearchForm extends Category
 
     public function search($params)
     {
-        $query = Category::find();
+        $query = ProductCategory::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

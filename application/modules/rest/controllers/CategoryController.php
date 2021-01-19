@@ -8,7 +8,7 @@
 namespace app\modules\rest\controllers;
 
 
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use yii\helpers\Json;
 use yii\web\Controller;
 
@@ -27,7 +27,7 @@ class CategoryController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         return Json::encode([
-            (new Category())->categoryTree()
+            (new ProductCategory())->categoryTree()
         ]);
     }
 }

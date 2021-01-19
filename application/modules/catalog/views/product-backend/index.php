@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\widgets\stockOut\StockOutWidget;
@@ -106,9 +106,9 @@ $this->title = Title::showTitle('Товары');
         [
             'attribute' => 'category_id',
             'format' => 'raw',
-            'filter' => ArrayHelper::map((new Category())->categoryTree(), 'id', 'name'),
+            'filter' => ArrayHelper::map((new ProductCategory())->categoryTree(), 'id', 'name'),
             'value' => function ($model) {
-                $category = Category::findOne($model->category_id);
+                $category = ProductCategory::findOne($model->category_id);
                 if ($category) {
                     return Html::a($category->name, Url::to(['/admin/catalog/product-category-backend/index', 'id' => $model->category_id]), ['target' => '_blank']);
                 }

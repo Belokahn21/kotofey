@@ -6,7 +6,7 @@ use Yii;
 use app\models\forms\CatalogFilter;
 use app\models\tool\seo\Attributes;
 use app\models\tool\System;
-use app\modules\catalog\models\entity\Category;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use app\modules\short_link\models\entity\ShortLinks;
 use yii\data\Pagination;
@@ -29,7 +29,7 @@ class CatalogController extends Controller
         }
 
         $filterModel = new CatalogFilter();
-        $category = Category::findBySlug($id);
+        $category = ProductCategory::findBySlug($id);
         $sb = [];
         if ($category) {
             $sb = $category->subsections();
