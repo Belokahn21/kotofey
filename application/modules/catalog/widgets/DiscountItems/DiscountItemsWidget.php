@@ -38,20 +38,22 @@ class DiscountItemsWidget extends Widget
                     ->all();
             }, $this->cacheTime);
 
-            foreach ($models as $model) {
-                $brand = $this->getBrandProperty($model->id);
-                $action = $this->getDiscountProperty($model->id);
 
-
-                if ($brand) {
-                    $formatArray['brands'][$brand['id']] = $brand;
-                }
-
-                if ($action) {
-                    $formatArray['actions'][$brand['id']][$action['id']] = $action;
-                }
-
-            }
+            $formatArray = [];
+//            foreach ($models as $model) {
+//                $brand = $this->getBrandProperty($model->id);
+//                $action = $this->getDiscountProperty($model->id);
+//
+//
+//                if ($brand) {
+//                    $formatArray['brands'][$brand['id']] = $brand;
+//                }
+//
+//                if ($action) {
+//                    $formatArray['actions'][$brand['id']][$action['id']] = $action;
+//                }
+//
+//            }
 
             return $this->render($this->view, [
                 'models' => $models,
