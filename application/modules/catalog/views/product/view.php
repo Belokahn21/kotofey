@@ -6,6 +6,7 @@ use app\models\tool\seo\Title;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
+use app\modules\catalog\widgets\Recomended\RecomendedWidget;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 
@@ -113,6 +114,10 @@ $this->title = Title::showTitle($product->name);
         </div>
     </div>
 </div>
+<?= RecomendedWidget::widget([
+    'property_id' => 19,
+    'product' => $product
+]) ?>
 <?= VisitedProductsWidget::widget(); ?>
 <?php /*
 <div class="page-title__group is-column"><h2 class="page-title">Выгодные предложения</h2><a class="page-title__link" href="javascript:void(0);">Все предложения</a></div>

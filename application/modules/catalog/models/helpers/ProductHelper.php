@@ -99,27 +99,19 @@ class ProductHelper
         if ($media = $model->media) {
             if ($media->location == Media::LOCATION_CDN) {
 
-                if ($options) {
-                    return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
-                }
+                if ($options) return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
 
                 return $media->cdnData['secure_url'];
             }
             $url = "/upload/" . $media->name;
             $noImage = "/upload/images/not-image.png";
 
-            if (empty($model->image)) {
-                $url = $noImage;
-            }
-
-            if (!is_file(\Yii::getAlias('@webroot/upload/' . $media->name))) {
-                $url = $noImage;
-            }
+            if (empty($model->image)) $url = $noImage;
 
 
-            if ($isFull) {
-                return System::fullDomain() . $url;
-            }
+            if (!is_file(\Yii::getAlias('@webroot/upload/' . $media->name))) $url = $noImage;
+
+            if ($isFull) return System::fullDomain() . $url;
 
             return $url;
         }
@@ -132,22 +124,17 @@ class ProductHelper
             $url = $noImage;
         }
 
-        if (!is_file(\Yii::getAlias('@webroot/upload/' . $model->image))) {
-            $url = $noImage;
-        }
+        if (!is_file(\Yii::getAlias('@webroot/upload/' . $model->image))) $url = $noImage;
 
 
-        if ($isFull) {
-            return System::fullDomain() . $url;
-        }
+        if ($isFull) return System::fullDomain() . $url;
 
         return $url;
     }
 
     public static function getDetailUrl(Product $model, $isFull = false)
     {
-        if ($isFull)
-            return System::fullDomain() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
+        if ($isFull) return System::fullDomain() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
 
         return Url::to(['/catalog/product/view', 'id' => $model->slug]);
     }
