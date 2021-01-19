@@ -13,7 +13,7 @@ $this->title = Title::showTitle("Промокоды");
 ?>
     <div class="title-group">
         <h1>Промокоды</h1>
-        <?= Html::a('Список меню', Url::to(['/promocode/promocode-backend/clean']), ['class' => 'btn-main']); ?>
+        <?= Html::a('Очистить истоию промокодов', Url::to(['/promocode/promocode-backend/clean']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin([
     'options' => ['enctype' => 'multipart/form-data']
