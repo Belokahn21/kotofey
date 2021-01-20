@@ -64,18 +64,18 @@ class PropertiesVariants extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'property_id' => 'Property ID',
-            'is_active' => 'Is Active',
-            'media_id' => 'Media ID',
-            'image' => 'Image',
-            'view' => 'View',
-            'link' => 'Link',
-            'name' => 'Name',
-            'slug' => 'Slug',
-            'text' => 'Text',
-            'sort' => 'Sort',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'property_id' => 'ID свойства',
+            'is_active' => 'Активность',
+            'media_id' => 'Картинка',
+            'image' => 'Картинка',
+            'view' => 'Шаблон',
+            'link' => 'Ссылка',
+            'name' => 'Значение',
+            'slug' => 'Символьный код',
+            'text' => 'Контент',
+            'sort' => 'Сортировка',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

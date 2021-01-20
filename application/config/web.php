@@ -147,6 +147,8 @@ $config = [
 
                 'vacancy' => 'vacancy/vacancy/index',
                 'vacancy/<id>' => 'vacancy/vacancy/view',
+                'brand' => 'catalog/brand/index',
+                'brand/<id>' => 'catalog/brand/view',
                 'search' => 'search/search/index',
                 'cache' => 'site/site/cache',
                 'news' => 'news/news/index',
