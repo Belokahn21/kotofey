@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 use app\modules\media\components\behaviors\ImageUploadMinify;
+use app\modules\media\models\entity\Media;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -87,5 +88,10 @@ class PropertiesVariants extends \yii\db\ActiveRecord
     public function getProperty()
     {
         return $this->hasOne(Properties::className(), ['id' => 'property_id']);
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
     }
 }
