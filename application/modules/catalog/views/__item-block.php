@@ -33,7 +33,9 @@ $isDiscount = $product->getDiscountPrice() > 0;
     <?php if ($isDiscount): ?>
         <div class="catalog__discount"><span>-<?= ProductHelper::getPercent($product); ?>%</span></div>
     <?php endif; ?>
-    <img class="catalog__image" src="<?= ProductHelper::getImageUrl($product, false, array("width" => 246, "height" => 300, "crop" => "fit")); ?>">
+    <a href="<?= ProductHelper::getDetailUrl($product); ?>">
+        <img title="<?= $product->name; ?>" alt="<?= $product->name; ?>" class="catalog__image" src="<?= ProductHelper::getImageUrl($product, false, array("width" => 246, "height" => 300, "crop" => "fit")); ?>">
+    </a>
     <div class="catalog__title">
         <a class="catalog__link" href="<?= ProductHelper::getDetailUrl($product); ?>"><?= $product->name; ?></a>
     </div>
