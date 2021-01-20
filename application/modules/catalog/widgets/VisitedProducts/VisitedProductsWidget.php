@@ -11,7 +11,7 @@ use yii\base\Widget;
 class VisitedProductsWidget extends Widget
 {
     public $view = 'default';
-    public $limit = 10;
+    public $limit = 5;
 
     public function run()
     {
