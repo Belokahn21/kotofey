@@ -67,7 +67,13 @@ $this->beginPage() ?>
 <?= AdminPanel::widget(); ?>
 <header class="header page-container">
     <div class="logo">
-        <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
+        <?php if (empty(Yii::$app->request->getPathInfo())): ?>
+            <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
+        <?php else: ?>
+            <a href="/">
+                <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
+            </a>
+        <?php endif; ?>
         <a class="logo__link" href="/">
             <div class="logo__title">kotofey.store</div>
             <div class="logo__sub-title">интернет-зоомагазин</div>

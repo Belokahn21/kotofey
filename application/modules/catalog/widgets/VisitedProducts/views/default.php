@@ -13,7 +13,7 @@ use yii\helpers\Url;
 
 <h2>Ранее просмотренные товары</h2>
 
-<div class="catalog-line">
+<div class="catalog-line recommended-products">
     <?php foreach ($products as $product): ?>
         <div class="catalog-line__item">
             <div class="catalog-line__image"><img src="<?= ProductHelper::getImageUrl($product); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
