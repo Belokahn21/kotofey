@@ -11,7 +11,7 @@ use app\modules\catalog\models\entity\Properties;
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
-        <a class="nav-item nav-link active" id="nav-content-tab" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">Контент</a>
+        <a class="nav-item nav-link " id="nav-content-tab" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">Контент</a>
     </div>
 </nav>
 <div class="tab-content" id="nav-tab-content-form">
