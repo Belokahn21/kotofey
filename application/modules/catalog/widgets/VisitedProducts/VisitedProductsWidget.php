@@ -11,11 +11,17 @@ use yii\base\Widget;
 class VisitedProductsWidget extends Widget
 {
     public $view = 'default';
+    public $limit = 10;
 
     public function run()
     {
-        $products = Product::find()->andWhere(['id' => ProductHelper::getAllVisitedItems()])->limit(10)->all();
+        $products = Product::find()->andWhere(['id' => ProductHelper::getAllVisitedItems()]);
 
+
+        if ($this->limit) $products->limit($this->limit);
+
+
+        $products = $products->all();
         return $this->render($this->view, [
             'products' => $products
         ]);
