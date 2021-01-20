@@ -16,13 +16,12 @@ class ProductHelper
     {
         $cookies = Yii::$app->response->cookies;
 
-        $old = self::getAllVisitedItems();
-
-        array_push($old, $product_id);
+        $items = self::getAllVisitedItems();
+        array_push($items, $product_id);
 
         $cookies->add(new \yii\web\Cookie([
             'name' => self::COOKIE_VISITED_KEY,
-            'value' => $old,
+            'value' => array_reverse($items),
         ]));
     }
 
