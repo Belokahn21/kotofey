@@ -58,6 +58,7 @@ $this->title = Title::showTitle($product->name);
             <?= AddBasketWidget::widget([
                 'product' => $product,
                 'showOrderButton' => true,
+                'showOneClick' => false,
                 'price' => ProductHelper::getResultPrice($product),
             ]); ?>
             <?= WhenCanBuyWidget::widget([
