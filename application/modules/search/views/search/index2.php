@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
         <?= ProductSortWidget::widget(); ?>
         <ul class="catalog">
             <?php foreach ($products as $product): ?>
-                <?= $this->render('@app/modules/catalog/views/__item-block', [
+                <?php $this->render('@app/modules/catalog/views/__item-block', [
                     'product' => $product
                 ]); ?>
             <?php endforeach; ?>
@@ -38,7 +38,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
                 'pagination' => $pagerItems,
             ]); ?>
         </div>
-
 
         <div class="catalog-container">
             <aside class="left-siderbar">

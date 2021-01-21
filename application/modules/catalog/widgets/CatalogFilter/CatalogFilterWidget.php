@@ -15,14 +15,13 @@ class CatalogFilterWidget extends Widget
     public function run()
     {
         $models = PropertiesVariants::find()->all();
-        $values = PropertiesProductValues::find();
+        $values = PropertiesProductValues::find()->distinct();
         if ($this->product_id) {
-            if (is_array($this->product_id)) $values->where(['in', 'product_id', $this->product_id])
-                else $values->where(['product_id' => $this->product_id]);
+            if (is_array($this->product_id)) $values->where(['in', 'product_id', $this->product_id]);
+            else $values->where(['product_id' => $this->product_id]);
         }
 
         $values = $values->all();
-
 
         return $this->render($this->view, [
             'models' => $models,
