@@ -24,21 +24,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
     ]); ?>
     <h1 class="page__title">Результат поиска:</h1>
     <?php if ($products): ?>
-        <?= ProductSortWidget::widget(); ?>
-        <ul class="catalog">
-            <?php foreach ($products as $product): ?>
-                <?php $this->render('@app/modules/catalog/views/__item-block', [
-                    'product' => $product
-                ]); ?>
-            <?php endforeach; ?>
-        </ul>
-
-        <div class="pagination-wrap">
-            <?php echo LinkPager::widget([
-                'pagination' => $pagerItems,
-            ]); ?>
-        </div>
-
         <div class="catalog-container">
             <aside class="left-siderbar">
                 <?= CatalogFilterWidget::widget([
@@ -48,12 +33,13 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
             <div class="catalog-wrap">
                 <?= ProductSortWidget::widget(); ?>
                 <?php if ($products): ?>
-
-                    <?php foreach ($products as $product): ?>
-                        <?= $this->render('@app/modules/catalog/views/__item-block', [
-                            'product' => $product
-                        ]); ?>
-                    <?php endforeach; ?>
+                    <ul class="catalog">
+                        <?php foreach ($products as $product): ?>
+                            <?= $this->render('@app/modules/catalog/views/__item-block', [
+                                'product' => $product
+                            ]); ?>
+                        <?php endforeach; ?>
+                    </ul>
 
                     <div class="pagination-wrap">
                         <?= LinkPager::widget([
