@@ -82,7 +82,7 @@ class ProductController extends Controller
         Yii::$app->response->format = Response::FORMAT_JSON;
         $model = new NotifyAdmission();
 
-        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             if ($model->validate() && $model->save()) {
                 return Json::encode([
                     'success' => 1,

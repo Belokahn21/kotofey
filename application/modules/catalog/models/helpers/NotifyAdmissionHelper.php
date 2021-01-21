@@ -10,6 +10,6 @@ class NotifyAdmissionHelper
 {
     public static function isAlreadyObserver($product_id, $email)
     {
-        return NotifyAdmission::findOne(['product_id' => $product_id, 'email' => $email]) instanceof NotifyAdmission;
+        return NotifyAdmission::findOne(['product_id' => $product_id, 'email' => $email]);
     }
 }

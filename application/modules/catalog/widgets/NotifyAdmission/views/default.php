@@ -4,6 +4,7 @@ use yii\web\View;
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\modules\catalog\models\helpers\NotifyAdmissionHelper;
 
 /* @var $model \app\modules\catalog\models\entity\NotifyAdmission
  * @var $product \app\modules\catalog\models\entity\Product
@@ -11,27 +12,36 @@ use yii\widgets\ActiveForm;
  */
 
 //todo остается кнопка отправить, отправляем аякс, в успехе меняем кнопку на надпись - вы уже отслеживаете товар(отписаться)
+
+$hideAlready = ' hidden';
+$hideForm = ' hidden';
+
+if (NotifyAdmissionHelper::isAlreadyObserver($product->id, Yii::$app->user->identity->email)) {
+    $hideAlready = "";
+    $hideForm = " hidden";
+} else {
+    $hideAlready = '';
+    $hideForm = ' hidden';
+}
 ?>
 
-<?php if (\app\modules\catalog\models\helpers\NotifyAdmissionHelper::isAlreadyObserver($model->id, Yii::$app->user->identity->email)): ?>
-    <div class="product-status__already">Вы уже отслеживаете этот товар (<?= Html::a('Отписаться', 'javascript:void(0);'); ?>)</div>
-<?php else: ?>
-    <?php $form = ActiveForm::begin([
-        'options' => [
-            'class' => 'site-form',
-            'enctype' => 'multipart/form-data'
-        ],
-        'id' => 'form-admission-id',
-        'action' => Url::to(['/save-notify-admission']),
-        'enableAjaxValidation' => true
-    ]); ?>
-    <?php $form->field($model, 'email')->hiddenInput(['value' => Yii::$app->user->identity->email, 'readonly' => true])->label(false); ?>
-    <?php $form->field($model, 'product_id')->hiddenInput(['value' => $model->id, 'readonly' => true])->label(false); ?>
-    <?= Html::submitButton('Уведомить о поступлении', [
-        'class' => 'product-status__notify'
-    ]); ?>
-    <?php ActiveForm::end(); ?>
-<?php endif; ?>
+
+<div class="product-status__already<?= $hideAlready ?>">Вы уже отслеживаете этот товар (<?= Html::a('Отписаться', 'javascript:void(0);'); ?>)</div>
+<?php $form = ActiveForm::begin([
+    'options' => [
+        'class' => 'site-form' . $hideForm,
+        'enctype' => 'multipart/form-data'
+    ],
+    'id' => 'form-admission-id',
+    'action' => Url::to(['/save-notify-admission']),
+]); ?>
+<?= $form->field($model, 'email')->hiddenInput(['value' => Yii::$app->user->identity->email, 'readonly' => true])->label(false); ?>
+<?= $form->field($model, 'product_id')->hiddenInput(['value' => $product->id, 'readonly' => true])->label(false); ?>
+<?= Html::submitButton('Уведомить о поступлении', [
+    'class' => 'product-status__notify'
+]); ?>
+<?php ActiveForm::end(); ?>
+
 <?php /*
  <div class="modal fade authModal " id="notifyPickup<?= $product->id; ?>" tabindex="-1" role="dialog" aria-labelledby="notifyPickup<?= $product->id; ?>Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
