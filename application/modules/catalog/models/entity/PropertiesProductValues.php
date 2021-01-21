@@ -32,6 +32,11 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
         return $this->hasOne(Properties::className(), ['id' => 'property_id']);
     }
 
+    function getVariant()
+    {
+        return $this->hasOne(PropertiesVariants::className(), ['property_id' => 'property_id', 'id'=>'value']);
+    }
+
     public function attributeLabels()
     {
         return [
