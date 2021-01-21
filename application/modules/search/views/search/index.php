@@ -1,7 +1,7 @@
 <?php
 
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
-use app\modules\catalog\widgets\CatalogFilter\CatalogFilterWidget;
+use app\modules\catalog\widgets\filter\CatalogFilterWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\models\tool\seo\Title;

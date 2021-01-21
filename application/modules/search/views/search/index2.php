@@ -5,6 +5,7 @@ use app\modules\catalog\widgets\CatalogFilter\CatalogFilterWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\models\tool\seo\Title;
+use yii\helpers\ArrayHelper;
 use app\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
@@ -41,7 +42,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
 
         <div class="catalog-container">
             <aside class="left-siderbar">
-                <?= CatalogFilterWidget::widget(); ?>
+                <?= CatalogFilterWidget::widget([
+                    'product_id' => ArrayHelper::getColumn($products, 'id'),
+                ]); ?>
             </aside>
             <div class="catalog-wrap">
                 <?= ProductSortWidget::widget(); ?>
