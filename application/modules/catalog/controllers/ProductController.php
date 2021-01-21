@@ -95,4 +95,15 @@ class ProductController extends Controller
             }
         }
     }
+
+
+    public function actionRemoveNotifyAdmission()
+    {
+        Yii::$app->response->format = Response::FORMAT_JSON;
+        $data = Yii::$app->request->post();
+
+        if (NotifyAdmission::findOne(['email' => $data['email'], 'product_id' => $data['product_id']])->delete()) return Json::encode([
+            'success' => 1,
+        ]);
+    }
 }

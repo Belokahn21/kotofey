@@ -20,13 +20,13 @@ if (NotifyAdmissionHelper::isAlreadyObserver($product->id, Yii::$app->user->iden
     $hideAlready = "";
     $hideForm = " hidden";
 } else {
-    $hideAlready = '';
-    $hideForm = ' hidden';
+    $hideAlready = ' hidden';
+    $hideForm = '';
 }
 ?>
 
 
-<div class="product-status__already<?= $hideAlready ?>">Вы уже отслеживаете этот товар (<?= Html::a('Отписаться', 'javascript:void(0);'); ?>)</div>
+<div class="product-status__already<?= $hideAlready ?>">Вы уже отслеживаете этот товар (<?= Html::a('Отмена', 'javascript:void(0);', ['class' => 'remove-notify-admission', 'data-product-id' => $product->id]); ?>)</div>
 <?php $form = ActiveForm::begin([
     'options' => [
         'class' => 'site-form' . $hideForm,
@@ -80,18 +80,47 @@ if (NotifyAdmissionHelper::isAlreadyObserver($product->id, Yii::$app->user->iden
 
  */ ?>
 <?php
+$email = Yii::$app->user->identity->email;
 $jscode = <<<JS
+    let form = $("#form-admission-id");
+    let alreadyElement = $(".product-status__already");
+    
     $(document).on('submit', 'form.site-form', function (e) {
         e.preventDefault();
-        let form = $(this);
+        let thisEl = $(this);
         
         $.ajax({
-            url:form.attr('action'),
+            url:thisEl.attr('action'),
             method:'POST',
-            data:form.serialize(),
+            data:thisEl.serialize(),
             success:function(data){
                 data = JSON.parse(data);
-                console.log(data);
+                
+                if(data.success == 1){
+                    form.toggleClass('hidden');
+                    alreadyElement.toggleClass('hidden');
+                }
+            }
+        });
+        
+    });
+    $('.remove-notify-admission').click(function (e) {
+        e.preventDefault();
+        let thisEl = $(this);
+        
+        $.ajax({
+            url:'/remove-notify-admission/',
+            method:'POST',
+            data:{
+                'product_id':thisEl.data('product-id'),
+                'email':'$email'
+            },
+            success:function(data){
+                data = JSON.parse(data);
+                if(data.success == 1){
+                    form.toggleClass('hidden');
+                    alreadyElement.toggleClass('hidden');
+                }
             }
         });
         

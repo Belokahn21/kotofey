@@ -165,6 +165,7 @@ $config = [
                 'test' => 'site/site/test',
                 'admin/catalog-fill' => 'catalog/ajax/catalog-fill-from-vendor',
                 'save-notify-admission' => 'catalog/product/save-notify-admission',
+                'remove-notify-admission' => 'catalog/product/remove-notify-admission',
 
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',

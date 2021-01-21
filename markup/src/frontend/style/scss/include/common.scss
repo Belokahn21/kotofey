@@ -105,6 +105,8 @@ p {
 
 .hidden {
   display: none !important;
+  position: absolute;
+  left: -999999px;
 }
 
 .green {
