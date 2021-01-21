@@ -14,6 +14,8 @@ class NotifyAdmissionWidget extends Widget
 
     public function run()
     {
+        if (\Yii::$app->user->isGuest) return $this->render('nologin');
+
         $model = new NotifyAdmission();
         return $this->render($this->view, [
             'product' => $this->product,

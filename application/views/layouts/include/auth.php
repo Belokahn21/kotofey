@@ -25,7 +25,7 @@ use yii\helpers\Html;
                     <h5 class="modal-title" id="signupModalLabel">Регистрация</h5>
                     <ul class="auth-modal-toggle">
                         <li class="auth-modal-toggle__item active">
-                            <a class="auth-modal-toggle__link" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">Регистрация</a>
+                            <a class="auth-modal-toggle__link" href="javascript:void(0);">Регистрация</a>
                         </li>
                         <li class="auth-modal-toggle__item">
                             <a class="auth-modal-toggle__link" href="javascript:void(0);" data-toggle="modal" data-target="#signinModal">Вход</a>
@@ -88,7 +88,7 @@ use yii\helpers\Html;
                             <a class="auth-modal-toggle__link" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">Регистрация</a>
                         </li>
                         <li class="auth-modal-toggle__item active">
-                            <a class="auth-modal-toggle__link" href="javascript:void(0);" data-toggle="modal" data-target="#signinModal">Вход</a>
+                            <a class="auth-modal-toggle__link" href="javascript:void(0);">Вход</a>
                         </li>
                     </ul>
                 </div>
