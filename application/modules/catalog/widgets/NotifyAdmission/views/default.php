@@ -9,9 +9,27 @@ use yii\widgets\ActiveForm;
  * @var $product \app\modules\catalog\models\entity\Product
  * @var $this \yii\web\View
  */
+
+//todo остается кнопка отправить, отправляем аякс, в успехе меняем кнопку на надпись - вы уже отслеживаете товар(отписаться)
 ?>
-<button type="button" class="product-status__notify" data-target="#notifyPickup<?= $product->id; ?>" data-toggle="modal">Уведомить о поступлении</button>
-<div class="modal fade authModal " id="notifyPickup<?= $product->id; ?>" tabindex="-1" role="dialog" aria-labelledby="notifyPickup<?= $product->id; ?>Label" aria-hidden="true">
+
+<?php $form = ActiveForm::begin([
+    'options' => [
+        'class' => 'site-form',
+        'enctype' => 'multipart/form-data'
+    ],
+    'id' => 'form-admission-id',
+    'action' => Url::to(['/save-notify-admission']),
+    'enableAjaxValidation' => true
+]); ?>
+<?php $form->field($model, 'email')->hiddenInput(['value' => Yii::$app->user->identity->email, 'readonly' => true])->label(false); ?>
+<?php $form->field($model, 'product_id')->hiddenInput(['value' => $model->id, 'readonly' => true])->label(false); ?>
+<?= Html::submitButton('Уведомить о поступлении', [
+    'class' => 'product-status__notify'
+]); ?>
+<?php ActiveForm::end(); ?>
+<?php /*
+ <div class="modal fade authModal " id="notifyPickup<?= $product->id; ?>" tabindex="-1" role="dialog" aria-labelledby="notifyPickup<?= $product->id; ?>Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php $form = ActiveForm::begin([
@@ -19,8 +37,9 @@ use yii\widgets\ActiveForm;
                     'class' => 'site-form',
                     'enctype' => 'multipart/form-data'
                 ],
+                'id' => 'form-admission-id',
                 'action' => Url::to(['/save-notify-admission']),
-                'enableAjaxValidation' => true,
+                'enableAjaxValidation' => true
             ]); ?>
             <div class="modal-header">
                 <h5 class="modal-title" id="notifyPickup<?= $product->id; ?>Label">Уведомить о поступлении товара</h5>
@@ -45,6 +64,7 @@ use yii\widgets\ActiveForm;
     </div>
 </div>
 
+ */ ?>
 <?php
 $jscode = <<<JS
     $(document).on('submit', 'form.site-form', function (e) {
@@ -56,6 +76,7 @@ $jscode = <<<JS
             method:'POST',
             data:form.serialize(),
             success:function(data){
+                data = JSON.parse(data);
                 console.log(data);
             }
         });

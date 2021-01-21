@@ -2,12 +2,15 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\models\tools\Debug;
+use app\widgets\notification\Alert;
 use Yii;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use app\models\tool\System;
 use app\models\tool\seo\Attributes;
@@ -17,6 +20,7 @@ use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
+use yii\widgets\ActiveForm;
 
 class ProductController extends Controller
 {
@@ -69,5 +73,18 @@ class ProductController extends Controller
             'category' => $category,
             'properties' => $properties,
         ]);
+    }
+
+
+    public function actionSaveNotifyAdmission()
+    {
+        $model = new NotifyAdmission();
+
+        if (Yii::$app->request->isPost && $model->load(Yii::$app->request->post())) {
+            if ($model->validate() && $model->save()) {
+                Alert::setSuccessNotify('При поступлении товара вы получите уведомление на почту: ' . $model->email);
+                return $this->refresh();
+            }
+        }
     }
 }

@@ -21,17 +21,4 @@ class AjaxController extends Controller
 
         return Json::encode($factory->getInfo());
     }
-
-    public function actionSaveNotifyAdmission()
-    {
-        $model = new NotifyAdmission();
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            if (!$model->validate()) return ActiveForm::validate($model);
-            if ($model->save()) return [
-                'success' => 'Вы успешно подписались на товар'
-            ];
-        }
-    }
 }
