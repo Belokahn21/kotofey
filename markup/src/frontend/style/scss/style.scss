@@ -81,6 +81,14 @@
       background: $active-color;
       color: white;
     }
+
+    &__already {
+      color: green;
+      padding: 5px;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
   }
 
   &.draft {

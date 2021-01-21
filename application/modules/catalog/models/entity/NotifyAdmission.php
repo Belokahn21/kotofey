@@ -36,6 +36,7 @@ class NotifyAdmission extends \yii\db\ActiveRecord
         ];
     }
 
+
     public function attributeLabels()
     {
         return [

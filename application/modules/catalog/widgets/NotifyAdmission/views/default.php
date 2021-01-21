@@ -13,21 +13,25 @@ use yii\widgets\ActiveForm;
 //todo остается кнопка отправить, отправляем аякс, в успехе меняем кнопку на надпись - вы уже отслеживаете товар(отписаться)
 ?>
 
-<?php $form = ActiveForm::begin([
-    'options' => [
-        'class' => 'site-form',
-        'enctype' => 'multipart/form-data'
-    ],
-    'id' => 'form-admission-id',
-    'action' => Url::to(['/save-notify-admission']),
-    'enableAjaxValidation' => true
-]); ?>
-<?php $form->field($model, 'email')->hiddenInput(['value' => Yii::$app->user->identity->email, 'readonly' => true])->label(false); ?>
-<?php $form->field($model, 'product_id')->hiddenInput(['value' => $model->id, 'readonly' => true])->label(false); ?>
-<?= Html::submitButton('Уведомить о поступлении', [
-    'class' => 'product-status__notify'
-]); ?>
-<?php ActiveForm::end(); ?>
+<?php if (\app\modules\catalog\models\helpers\NotifyAdmissionHelper::isAlreadyObserver($model->id, Yii::$app->user->identity->email)): ?>
+    <div class="product-status__already">Вы уже отслеживаете этот товар (<?= Html::a('Отписаться', 'javascript:void(0);'); ?>)</div>
+<?php else: ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'class' => 'site-form',
+            'enctype' => 'multipart/form-data'
+        ],
+        'id' => 'form-admission-id',
+        'action' => Url::to(['/save-notify-admission']),
+        'enableAjaxValidation' => true
+    ]); ?>
+    <?php $form->field($model, 'email')->hiddenInput(['value' => Yii::$app->user->identity->email, 'readonly' => true])->label(false); ?>
+    <?php $form->field($model, 'product_id')->hiddenInput(['value' => $model->id, 'readonly' => true])->label(false); ?>
+    <?= Html::submitButton('Уведомить о поступлении', [
+        'class' => 'product-status__notify'
+    ]); ?>
+    <?php ActiveForm::end(); ?>
+<?php endif; ?>
 <?php /*
  <div class="modal fade authModal " id="notifyPickup<?= $product->id; ?>" tabindex="-1" role="dialog" aria-labelledby="notifyPickup<?= $product->id; ?>Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
