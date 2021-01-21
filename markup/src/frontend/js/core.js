@@ -37,8 +37,8 @@ new ProductCalc();
 new LiveSearch('.js-live-search');
 
 $(function () {
-    $('[data-toggle="tooltip"]').tooltip()
-})
+    $("[rel='tooltip']").tooltip();
+});
 
 
 //react js
