@@ -29,7 +29,7 @@ class SearchController extends Controller
 
         }
 
-        return $this->render('index', [
+        return $this->render(\Yii::$app->request->get('searc') == 'Y' ? 'index2' : 'index', [
             'products' => $products,
             'pagerItems' => $pagerItems,
         ]);

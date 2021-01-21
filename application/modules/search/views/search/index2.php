@@ -38,6 +38,30 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
             ]); ?>
         </div>
 
+
+        <div class="catalog-container">
+            <aside class="left-siderbar">
+                <?= CatalogFilterWidget::widget(); ?>
+            </aside>
+            <div class="catalog-wrap">
+                <?= ProductSortWidget::widget(); ?>
+                <?php if ($products): ?>
+
+                    <?php foreach ($products as $product): ?>
+                        <?= $this->render('@app/modules/catalog/views/__item-block', [
+                            'product' => $product
+                        ]); ?>
+                    <?php endforeach; ?>
+
+                    <div class="pagination-wrap">
+                        <?= LinkPager::widget([
+                            'pagination' => $pagerItems,
+                        ]); ?>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </div>
+
     <?php else: ?>
         <p style="text-align: center; margin: 20px 0; padding: 0 10px;">
             К сожаление ничего не нашлось :(
