@@ -26,7 +26,7 @@ class SearchController extends Controller
                 $query->orderBy(['price' => $sortValue == 'asc' ? SORT_ASC : SORT_DESC]);
             }
 
-            $searchFilter->applyFilter($query, \Yii::$app->request->get());
+//            $searchFilter->applyFilter($query, \Yii::$app->request->get());
 
             $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 21]);
             $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
