@@ -50,7 +50,7 @@ class CatalogController extends Controller
             $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
         }
 
-        $filterModel->applyFilter($query, Yii::$app->request->get());
+        $filterModel->applyFilter($query);
         $countQuery = clone $query;
         $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 12]);
         $pagerItems->pageSizeParam = false;

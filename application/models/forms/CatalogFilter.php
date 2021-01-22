@@ -46,18 +46,24 @@ class CatalogFilter extends Model
     /**
      * @param ActiveQuery $query
      */
-    public function applyFilter(&$query, $requsetParams)
+    public function applyFilter(&$query)
     {
-        if ($this->load($requsetParams)) {
+        if ($this->load(\Yii::$app->request->get())) {
 
             $valuesQuery = PropertiesProductValues::find();
 
             if ($this->params) {
                 foreach ($this->params as $propId => $values) {
-                    $valuesQuery->orFilterWhere(['in', 'value', $values]);
-                    $valuesQuery->orFilterWhere(['in', 'property_id', $propId]);
+                    $valuesQuery->andFilterWhere(['in', 'value', $values]);
+                    $valuesQuery->andFilterWhere(['in', 'property_id', $propId]);
                 }
             }
+
+            echo $valuesQuery->count();
+
+            var_dump(ArrayHelper::getColumn($valuesQuery->all(), 'product_id'));
+
+            exit();
 
             $query->andFilterWhere(['in', 'id', ArrayHelper::getColumn($valuesQuery->all(), 'product_id')]);
 
