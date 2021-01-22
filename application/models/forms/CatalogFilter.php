@@ -54,18 +54,14 @@ class CatalogFilter extends Model
 
             if ($this->params) {
                 foreach ($this->params as $propId => $values) {
-                    $valuesQuery->andFilterWhere(['in', 'value', $values]);
-                    $valuesQuery->andFilterWhere(['in', 'property_id', $propId]);
+                    if ($values) {
+                        $valuesQuery->andFilterWhere(['in', 'value', $values]);
+                        $valuesQuery->andFilterWhere(['in', 'property_id', $propId]);
+                    }
                 }
             }
 
-            echo $valuesQuery->count();
-
-            var_dump(ArrayHelper::getColumn($valuesQuery->all(), 'product_id'));
-
-            exit();
-
-            $query->andFilterWhere(['in', 'id', ArrayHelper::getColumn($valuesQuery->all(), 'product_id')]);
+            $query->innerJoin(['sq' => $valuesQuery], 'sq.product_id = product.id');
 
             if ($this->price_from and $this->price_to) $query->andFilterWhere(['between', 'price', $this->price_from, $this->price_to]);
         }
