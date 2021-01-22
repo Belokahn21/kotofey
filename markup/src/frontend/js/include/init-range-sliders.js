@@ -16,8 +16,6 @@ $(".filter-catalog__range").ionRangeSlider({
     type: "double",
     min: 0,
     max: 10000,
-    from: 5000,
-    to: 8000,
     hide_min_max: true,
     hide_from_to: true,
     onStart: function (data) {

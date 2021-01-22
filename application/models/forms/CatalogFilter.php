@@ -3,6 +3,7 @@
 namespace app\models\forms;
 
 
+use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\site\models\tools\Debug;
@@ -19,19 +20,21 @@ class CatalogFilter extends Model
     public $price_to;
     public $weight_from;
     public $weight_to;
-    public $informer;
+    public $params;
 
     public function rules()
     {
         return [
-            [['price_from', 'price_to', 'weight_from', 'weight_to', 'informer'], 'integer'],
+//            [['price_from', 'price_to', 'weight_from', 'weight_to', 'params'], 'integer'],
+            [['price_from', 'price_to', 'weight_from', 'weight_to'], 'integer'],
+            ['params', 'safe']
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'informer' => 'Справочник',
+            'params' => 'Справочник',
             'price_from' => 'Цена от',
             'price_to' => 'Цена до',
             'weight_from' => 'Вес от',
@@ -47,38 +50,17 @@ class CatalogFilter extends Model
     {
         if ($this->load($requsetParams)) {
 
-            $ar_product_id = array();
+            $valuesQuery = PropertiesProductValues::find();
 
-            // properties
-            $values = SaveProductPropertiesValues::find()->select('product_id');
-            $properties_ids = array();
-            $value_list = array();
-            $iter = 0;
-
-            foreach ($this->informer as $informer_id => $arValues) {
-                if (is_array($arValues)) {
-                    $properties_ids[] = SaveProductProperties::find()->where(['informer_id' => $informer_id])->one()->id;
-                    $value_list = array_merge($value_list, $arValues);
-                    $iter++;
+            if ($this->params) {
+                foreach ($this->params as $propId => $values) {
+                    $valuesQuery->orFilterWhere(['in', 'value', $values]);
+                    $valuesQuery->orFilterWhere(['in', 'property_id', $propId]);
                 }
             }
 
-            $values->orWhere([
-                'property_id' => $properties_ids,
-                'value' => $value_list
-            ]);
+            $query->andFilterWhere(['in', 'id', ArrayHelper::getColumn($valuesQuery->all(), 'product_id')]);
 
-            $values->groupBy('product_id');
-            $values->having("count(*) = " . $iter);
-
-            $values = $values->all();
-            $ar_product_id = array_merge($ar_product_id, ArrayHelper::getColumn($values, 'product_id'));
-
-            if (is_array($ar_product_id)) {
-                $query->andWhere([
-                    'id' => $ar_product_id
-                ]);
-            }
             if ($this->price_from and $this->price_to) $query->andFilterWhere(['between', 'price', $this->price_from, $this->price_to]);
         }
     }
