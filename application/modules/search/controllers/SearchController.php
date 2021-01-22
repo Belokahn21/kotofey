@@ -2,6 +2,7 @@
 
 namespace app\modules\search\controllers;
 
+use app\models\forms\CatalogFilter;
 use yii\web\Controller;
 use yii\data\Pagination;
 use app\modules\search\models\entity\Search;
@@ -13,6 +14,7 @@ class SearchController extends Controller
         $pagerItems = array();
         $products = array();
         $model = new Search();
+        $searchFilter = new CatalogFilter();
         $model->save_history = true;
 
         if ($model->load(\Yii::$app->request->get())) {
@@ -23,6 +25,8 @@ class SearchController extends Controller
             if ($sortValue = \Yii::$app->request->get('sort')) {
                 $query->orderBy(['price' => $sortValue == 'asc' ? SORT_ASC : SORT_DESC]);
             }
+
+            $searchFilter->applyFilter($query, \Yii::$app->request->get());
 
             $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 21]);
             $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();

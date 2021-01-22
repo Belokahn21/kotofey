@@ -2,9 +2,8 @@
 
 namespace app\modules\catalog\widgets\CatalogFilter;
 
-
 use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\modules\catalog\models\entity\PropertiesVariants;
+use app\models\forms\CatalogFilter;
 use yii\base\Widget;
 
 class CatalogFilterWidget extends Widget
@@ -14,17 +13,24 @@ class CatalogFilterWidget extends Widget
 
     public function run()
     {
-        $models = PropertiesVariants::find()->all();
-        $values = PropertiesProductValues::find()->distinct();
+        $filterModel = new CatalogFilter();
+        $values = PropertiesProductValues::find();
+
         if ($this->product_id) {
             if (is_array($this->product_id)) $values->where(['in', 'product_id', $this->product_id]);
             else $values->where(['product_id' => $this->product_id]);
         }
 
+        $values->joinWith('property p');
+        $values->where(['p.is_active' => true, 'p.is_show_site' => true]);
+
         $values = $values->all();
 
+
+        $filterModel->load(\Yii::$app->request->get());
+
         return $this->render($this->view, [
-            'models' => $models,
+            'filterModel' => $filterModel,
             'values' => $values,
         ]);
     }
