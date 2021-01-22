@@ -6,9 +6,9 @@
 
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
-use app\models\tool\Currency;
+use app\modules\site\models\tools\Currency;
 use app\widgets\Breadcrumbs;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use yii\helpers\Url;
 use yii\helpers\Html;
 

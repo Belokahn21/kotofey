@@ -2,7 +2,7 @@
 
 use yii\helpers\Json;
 use app\widgets\Breadcrumbs;
-use app\models\tool\seo\Title;
+use app\models\tool\seo\ProductTitle;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
@@ -24,7 +24,7 @@ if ($category) {
 }
 $this->params['breadcrumbs'][] = ['label' => $product->name, 'url' => [ProductHelper::getDetailUrl($product)]];
 
-$this->title = Title::showTitle($product->name);
+$this->title = ProductTitle::show($product->name);
 
 ?>
 <div itemscope itemtype="http://schema.org/Product">

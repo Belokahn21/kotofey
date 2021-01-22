@@ -10,7 +10,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
-$this->title = Title::showTitle($model->name);
+$this->title = Title::show($model->name);
 ?>
 <section class="payment">
     <h1 class="title">Оплата: <?= $model->name; ?></h1>

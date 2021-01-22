@@ -11,7 +11,7 @@ use app\modules\news\models\entity\NewsCategory;
 /* @var $model \app\modules\news\models\entity\NewsCategory */
 /* @var $this \yii\web\View */
 
-$this->title = Title::showTitle("Рубрики");
+$this->title = Title::show("Рубрики");
 ?>
 <section>
     <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']) ?>

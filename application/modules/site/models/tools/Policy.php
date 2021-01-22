@@ -5,7 +5,7 @@
  * Time: 10:48
  */
 
-namespace app\models\tool;
+namespace app\modules\site\models\tools;
 
 
 class Policy

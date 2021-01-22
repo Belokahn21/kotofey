@@ -14,7 +14,7 @@ use app\modules\order\models\entity\OrderStatus;
  * @var $this \yii\web\View
  */
 
-$this->title = Title::showTitle("Меню");
+$this->title = Title::show("Меню");
 ?>
     <div class="title-group">
         <h1>Меню</h1>

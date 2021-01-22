@@ -17,7 +17,7 @@ use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\modules\catalog\widgets\filter\CatalogFilterWidget;
 use app\modules\catalog\models\helpers\CategoryHelper;
 
-$this->title = Title::showTitle("Зоотовары");
+$this->title = Title::show("Зоотовары");
 $category_id = 0;
 $this->params['breadcrumbs'][] = ['label' => 'Зоотовары', 'url' => ['/catalog/']];
 
@@ -29,9 +29,9 @@ if ($category) {
 
     // set title
     $category_id = $category->id;
-    $this->title = Title::showTitle($category->name);
+    $this->title = Title::show($category->name);
     if ($category->seo_title) {
-        $this->title = Title::showTitle($category->seo_title);
+        $this->title = Title::show($category->seo_title);
     }
 } ?>
 <div class="page">

@@ -6,7 +6,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
 use yii\helpers\Url;
 use app\widgets\Breadcrumbs;
 
-$this->title = Title::showTitle("Наши контакты");
+$this->title = Title::show("Наши контакты");
 
 $this->params['breadcrumbs'][] = ['label' => 'Наши контакты', 'url' => Url::to(['site/contacts'])];
 ?>

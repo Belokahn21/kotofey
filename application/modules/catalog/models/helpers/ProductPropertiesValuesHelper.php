@@ -10,7 +10,7 @@ use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\site\models\helpers\ImageHelper;
 use app\modules\site\models\tools\Debug;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\media\models\entity\Media;

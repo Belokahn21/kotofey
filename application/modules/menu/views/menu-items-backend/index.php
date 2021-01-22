@@ -14,7 +14,7 @@ use app\modules\menu\models\entity\Menu;
  * @var $listMenu \app\modules\menu\models\entity\Menu[]
  */
 
-$this->title = Title::showTitle("Меню");
+$this->title = Title::show("Меню");
 ?>
     <div class="title-group">
         <h1>Пункты меню</h1>

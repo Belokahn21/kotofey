@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\short_link\models\entity\ShortLinks */
 
-$this->title = Title::showTitle("Короткие ссылки");
+$this->title = Title::show("Короткие ссылки");
 ?>
     <h1>Короткая ссылка: <?= $model->short_code; ?></h1>
 <?php $form = ActiveForm::begin(); ?>

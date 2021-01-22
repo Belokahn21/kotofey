@@ -4,15 +4,15 @@ use app\modules\delivery\models\entity\Delivery;
 use app\modules\payment\models\entity\Payment;
 use app\modules\promo\models\entity\Promo;
 use app\modules\user\models\entity\User;
-use app\models\tool\Currency;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Price;
 use app\models\tool\seo\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-$this->title = Title::showTitle("Разрешения"); ?>
+$this->title = Title::show("Разрешения"); ?>
     <h1 class="title">Разрешения</h1>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $this->render('_form', [

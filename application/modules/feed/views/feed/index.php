@@ -10,7 +10,7 @@ use yii\helpers\Html;
  * @var $products \yii\db\ActiveQuery
  */
 
-$this->title = Title::showTitle("Поисковой контент");
+$this->title = Title::show("Поисковой контент");
 ?>
 <h1>Поисковой контент</h1>
 

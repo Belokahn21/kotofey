@@ -3,7 +3,7 @@
 namespace app\modules\site\console;
 
 
-use app\models\tool\Backup;
+use app\modules\site\models\tools\Backup;
 use yii\console\Controller;
 
 class BackupController extends Controller

@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = Title::showTitle('Товары');
+$this->title = Title::show('Товары');
 ?>
     <div class="title-group">
         <h1>Скопировать: <?= $model->name; ?></h1>

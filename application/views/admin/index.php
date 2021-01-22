@@ -8,7 +8,7 @@ use app\modules\site\widgets\ModuleMenu\ModuleMenuWidget;
  * @var $last_search \app\modules\search\models\entity\SearchQuery[]
  */
 
-$this->title = Title::showTitle("Главная страница");
+$this->title = Title::show("Главная страница");
 ?>
 <?= StatisticWidget::widget(); ?>
 <?= ModuleMenuWidget::widget(); ?>

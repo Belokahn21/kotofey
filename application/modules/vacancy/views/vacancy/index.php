@@ -5,7 +5,7 @@ use app\modules\vacancy\models\helpers\VacancyHelper;
 
 /* @var $models \app\modules\vacancy\models\entity\Vacancy[] */
 
-$this->title = Title::showTitle('Вакансии');
+$this->title = Title::show('Вакансии');
 ?>
 <h1>Вакансии</h1>
 <?php if ($models): ?>

@@ -14,7 +14,7 @@ use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site\widgets\Gruming\GrumingWidget;
 use app\models\tool\seo\Title;
 
-$this->title = Title::showTitle("Зоотовары для животных в Барнауле");
+$this->title = Title::show("Зоотовары для животных в Барнауле");
 ?>
 <div class="page-container">
     <?= SliderWidget::widget([

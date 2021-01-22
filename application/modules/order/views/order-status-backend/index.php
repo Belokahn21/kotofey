@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /* @var $model \app\modules\order\models\entity\OrderStatus */
 /* @var $this \yii\web\View */
 ?>
-<?php $this->title = Title::showTitle("Статусы заказа"); ?>
+<?php $this->title = Title::show("Статусы заказа"); ?>
 <section>
     <h1 class="title">Статусы заказа</h1>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

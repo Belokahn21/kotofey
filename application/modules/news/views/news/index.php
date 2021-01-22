@@ -8,7 +8,7 @@ use app\models\tool\seo\Title;
 use app\widgets\Breadcrumbs;
 use app\modules\news\models\tools\NewsHelper;
 
-$this->title = Title::showTitle('Новости');
+$this->title = Title::show('Новости');
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/']];
 ?>
 <div class="page">

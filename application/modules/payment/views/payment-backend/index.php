@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
-$this->title = Title::showTitle("Управление оплатами");
+$this->title = Title::show("Управление оплатами");
 ?>
 <section class="payment">
     <h1 class="title">Оплаты</h1>

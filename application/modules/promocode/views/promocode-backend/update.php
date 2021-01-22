@@ -7,7 +7,7 @@ use app\models\tool\seo\Title;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = Title::showTitle("Промокоды");
+$this->title = Title::show("Промокоды");
 ?>
     <h1 class="title">Промокод: <?= $model->code; ?></h1>
 <?= Html::a('Назад', ['index'], ['class' => 'btn-main']); ?>

@@ -3,8 +3,8 @@
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
 use yii\helpers\ArrayHelper;
-use app\models\tool\Currency;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Price;
 
 ?>
 <div class="modal fade" id="show-order-stat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">

@@ -12,11 +12,11 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use yii\widgets\ActiveForm;
 use app\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
-use app\models\tool\Currency;
+use app\modules\site\models\tools\Currency;
 use app\models\tool\seo\Title;
 use app\modules\pets\models\entity\Animal;
 use app\modules\user\models\helpers\UserHelper;
@@ -25,7 +25,7 @@ use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 
-$this->title = Title::showTitle('Личный кабинет');
+$this->title = Title::show('Личный кабинет');
 ?>
 <div class="page">
     <?php

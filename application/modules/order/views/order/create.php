@@ -14,10 +14,10 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
-use app\models\tool\Currency;
+use app\modules\site\models\tools\Currency;
 use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
 use app\modules\order\models\entity\Order;
@@ -31,7 +31,7 @@ use app\modules\bonus\widgets\BonusFiled\BonusFieldWidget;
 use app\modules\promocode\widgets\promocode_field\PromocodeFieldWidget;
 use app\modules\bonus\models\helper\BonusHelper;
 
-$this->title = Title::showTitle("Оформление заказа");
+$this->title = Title::show("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
 $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа', 'url' => ['/order/']];
 ?>

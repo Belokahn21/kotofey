@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use app\widgets\Breadcrumbs;
 
 ?>
-<?php $this->title = Title::showTitle("Доставка заказов");
+<?php $this->title = Title::show("Доставка заказов");
 $this->params['breadcrumbs'][] = ['label' => 'Доставка и оплата', 'url' => ['/delivery/']];
 ?>
 

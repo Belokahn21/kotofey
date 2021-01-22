@@ -6,13 +6,13 @@
  * @var $this \yii\web\View
  */
 
-use app\models\tool\Currency;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Price;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use yii\helpers\StringHelper;
-use app\models\tool\Backup;
+use app\modules\site\models\tools\Backup;
 use yii\helpers\Url;
 
 $product = Product::find();

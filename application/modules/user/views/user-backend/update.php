@@ -8,7 +8,7 @@ use app\modules\user\models\entity\UserSex;
 
 /* @var $model \app\modules\user\models\entity\User */
 
-$this->title = Title::showTitle("Пользователи"); ?>
+$this->title = Title::show("Пользователи"); ?>
 <section>
     <h1 class="title">Пользователь: <?= $model->email; ?></h1>
     <?= Html::a("Назад", ['index'], ['class' => 'btn-main']) ?>

@@ -13,7 +13,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
 
 /* @var \yii\web\View $this */
 
-$this->title = Title::showTitle("Поставщик:" . $model->name); ?>
+$this->title = Title::show("Поставщик:" . $model->name); ?>
 <section>
     <h1 class="title">Поставщик: <?php echo $model->name; ?></h1>
     <?= Html::a('Назад', ['index'], ['class' => 'btn-main']) ?>

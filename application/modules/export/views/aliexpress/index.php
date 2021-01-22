@@ -1,6 +1,6 @@
 <?php
 
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;

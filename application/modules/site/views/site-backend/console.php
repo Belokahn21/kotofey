@@ -11,7 +11,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\Pjax;
 
-$this->title = Title::showTitle("Консоль");
+$this->title = Title::show("Консоль");
 ?>
 <section class="payment">
     <h1 class="title">Консоль</h1>

@@ -15,7 +15,7 @@ use app\modules\order\models\entity\OrderStatus;
  * @var $availablePhones array
  */
 
-$this->title = Title::showTitle("Бонус аккаунты");
+$this->title = Title::show("Бонус аккаунты");
 ?>
     <div class="title-group">
         <h1>Бонус аккаунты</h1>

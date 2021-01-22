@@ -8,7 +8,7 @@ use app\modules\site_settings\models\entity\SiteTypeSettings;
 use yii\grid\GridView;
 use yii\helpers\Url;
 
-$this->title = Title::showTitle("Настройки сайта");
+$this->title = Title::show("Настройки сайта");
 
 /* @var $model \app\modules\site_settings\models\entity\SiteSettings */
 

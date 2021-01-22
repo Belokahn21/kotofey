@@ -16,7 +16,7 @@ use app\modules\order\models\entity\OrderStatus;
  * @var $bonusAccount \app\modules\bonus\models\entity\UserBonus[]
  */
 
-$this->title = Title::showTitle("Начислено за: " . $model->reason);
+$this->title = Title::show("Начислено за: " . $model->reason);
 ?>
     <div class="title-group">
         <h1>Начислено за: <?= $model->reason; ?></h1>

@@ -7,7 +7,7 @@ use app\models\tool\seo\Title;
 
 /* @var $this \yii\web\View */
 
-$this->title = Title::showTitle("Сравните выбранные товары");
+$this->title = Title::show("Сравните выбранные товары");
 
 $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров', 'url' => ['site/compare']];
 ?>

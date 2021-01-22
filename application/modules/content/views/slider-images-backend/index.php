@@ -9,7 +9,7 @@ use app\modules\content\models\entity\Sliders;
 /* @var \app\models\entity\SlidersImages $model */
 /* @var \yii\web\View $this */
 
-$this->title = Title::showTitle("Изображения слайдеров"); ?>
+$this->title = Title::show("Изображения слайдеров"); ?>
     <section>
         <h1 class="title">Изображения слайдеров</h1>
         <div class="product-form">

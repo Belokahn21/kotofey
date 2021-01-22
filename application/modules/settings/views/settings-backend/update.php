@@ -6,7 +6,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\site_settings\models\entity\SiteTypeSettings;
 
-$this->title = Title::showTitle("Настройки сайта");
+$this->title = Title::show("Настройки сайта");
 
 /* @var $paramsList \app\modules\site_settings\models\entity\SiteSettings */
 /* @var $model \app\modules\site_settings\models\entity\SiteSettings */

@@ -18,7 +18,7 @@ use app\modules\order\models\entity\OrderStatus;
  * @var $itemsModel \app\modules\order\models\entity\OrdersItems
  */
 
-$this->title = Title::showTitle("Заказы");
+$this->title = Title::show("Заказы");
 ?>
     <div class="title-group">
         <h1>Заказы</h1>

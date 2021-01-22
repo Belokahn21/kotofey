@@ -14,7 +14,7 @@ use app\modules\order\models\entity\Order;
  * @var $groups \app\modules\rbac\models\entity\AuthItem[]
  */
 
-$this->title = Title::showTitle("Пользователи"); ?>
+$this->title = Title::show("Пользователи"); ?>
     <section>
         <h1 class="title">Пользователи</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

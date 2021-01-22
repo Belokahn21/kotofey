@@ -15,7 +15,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
 /* @var $model \app\modules\catalog\models\entity\Product
  */
 
-$this->title = Title::showTitle("Временные зоны"); ?>
+$this->title = Title::show("Временные зоны"); ?>
     <section>
         <h1 class="title">Временные зоны</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

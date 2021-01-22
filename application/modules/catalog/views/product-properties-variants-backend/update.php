@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\SaveInformers;
 use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
-$this->title = Title::showTitle($model->name); ?>
+$this->title = Title::show($model->name); ?>
 <section>
     <h1 class="title">Значение справочника: <?= $model->name; ?></h1>
     <?= Html::a("Назад", \yii\helpers\Url::to(['index']), ['class' => 'btn-main']) ?>

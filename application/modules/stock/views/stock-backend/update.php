@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var $model \app\modules\stock\models\entity\Stocks */
 
 ?>
-<?php $this->title = Title::showTitle("Склады"); ?>
+<?php $this->title = Title::show("Склады"); ?>
 <section>
     <h1 class="title">Склад: <?= $model->name; ?></h1>
 	<?= Html::a("Назад", ['index'], ['class' => 'btn-main']) ?>

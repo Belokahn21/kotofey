@@ -8,7 +8,7 @@ use yii\helpers\Url;
 /* @var \app\modules\content\models\entity\SlidersImages $model */
 /* @var \yii\web\View $this */
 
-$this->title = Title::showTitle($model->text); ?>
+$this->title = Title::show($model->text); ?>
 <section>
     <h1 class="title"><?php echo $model->text; ?></h1>
 	<?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>

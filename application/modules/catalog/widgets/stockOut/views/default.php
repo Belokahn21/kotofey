@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use yii\helpers\Url;
 
 ///admin/catalog/product-backend/update

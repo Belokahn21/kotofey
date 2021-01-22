@@ -6,7 +6,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\map\MapWidget;
 use yii\helpers\ArrayHelper;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;

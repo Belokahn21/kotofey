@@ -6,22 +6,17 @@ use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\site\models\tools\Debug;
-use app\widgets\notification\Alert;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\Controller;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\models\tool\seo\Attributes;
 use app\models\tool\seo\og\OpenGraph;
 use app\models\tool\seo\og\OpenGraphProduct;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\SaveProductProperties;
-use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use yii\web\Response;
-use yii\widgets\ActiveForm;
 
 class ProductController extends Controller
 {

@@ -9,7 +9,7 @@ use yii\grid\GridView;
 /* @var $model \app\modules\catalog\models\entity\Properties */
 /* @var $propertyGroup \app\modules\catalog\models\entity\PropertyGroup[] */
 
-$this->title = Title::showTitle("Свойства товаров"); ?>
+$this->title = Title::show("Свойства товаров"); ?>
     <section>
         <h1 class="title">Свойства товаров</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

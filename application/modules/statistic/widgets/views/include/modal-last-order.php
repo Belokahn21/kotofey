@@ -2,9 +2,9 @@
 
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
-use app\models\tool\Currency;
+use app\modules\site\models\tools\Currency;
 use yii\helpers\ArrayHelper;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 
 ?>
 <div class="modal fade" id="order-list" tabindex="-1" role="dialog" aria-labelledby="order-listLabel" aria-hidden="true">

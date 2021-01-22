@@ -5,7 +5,7 @@ namespace app\modules\catalog\controllers;
 use Yii;
 use app\models\forms\CatalogFilter;
 use app\models\tool\seo\Attributes;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
 use app\modules\short_link\models\entity\ShortLinks;

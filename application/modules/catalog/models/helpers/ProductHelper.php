@@ -4,7 +4,7 @@ namespace app\modules\catalog\models\helpers;
 
 use Yii;
 use yii\helpers\Url;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\modules\media\models\entity\Media;
 use app\modules\catalog\models\entity\Product;
 

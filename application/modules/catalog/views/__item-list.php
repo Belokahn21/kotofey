@@ -1,8 +1,8 @@
 <?php
 
 use yii\helpers\Url;
-use app\models\tool\Price;
-use app\models\tool\Currency;
+use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 

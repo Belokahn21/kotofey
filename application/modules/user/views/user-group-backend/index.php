@@ -13,7 +13,7 @@ use yii\helpers\Url;
 use app\modules\rbac\models\entity\AuthItem;
 use yii\helpers\ArrayHelper;
 
-$this->title = Title::showTitle("Управление группами");
+$this->title = Title::show("Управление группами");
 ?>
     <section class="group-form">
         <div class="group-form-wrap">

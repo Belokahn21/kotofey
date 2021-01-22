@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-$this->title = Title::showTitle("Свойства товаров"); ?>
+$this->title = Title::show("Свойства товаров"); ?>
 <section>
     <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>
     <h1 class="title">Свойство: <?= $model->name; ?></h1>

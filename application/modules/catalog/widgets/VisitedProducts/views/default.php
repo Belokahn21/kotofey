@@ -2,8 +2,8 @@
 
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\models\tool\Currency;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Price;
 use yii\helpers\Url;
 
 /* @var $products \app\modules\catalog\models\entity\Product[] */

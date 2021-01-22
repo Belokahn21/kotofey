@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = Title::showTitle("Управление группами");
+$this->title = Title::show("Управление группами");
 ?>
 <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']); ?>
 <h1 class="title">Группа: <?= $model->name; ?></h1>

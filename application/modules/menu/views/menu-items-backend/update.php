@@ -15,7 +15,7 @@ use app\modules\order\models\entity\OrderStatus;
  * @var $listMenu \app\modules\menu\models\entity\Menu[]
  */
 
-$this->title = Title::showTitle("Меню: " . $model->name);
+$this->title = Title::show("Меню: " . $model->name);
 ?>
     <div class="title-group">
         <h1>Меню: <?= $model->name; ?></h1>

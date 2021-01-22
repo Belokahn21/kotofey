@@ -10,7 +10,7 @@ use app\widgets\Breadcrumbs;
 
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/']];
 $this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => [NewsHelper::getDetailUrl($model)]];
-$this->title = Title::showTitle($model->title);
+$this->title = Title::show($model->title);
 ?>
 <div class="page">
 

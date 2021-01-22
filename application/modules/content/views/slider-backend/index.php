@@ -9,7 +9,7 @@ use yii\helpers\Url;
 /* @var \app\modules\content\models\entity\Sliders $model */
 /* @var \yii\web\View $this */
 
-$this->title = Title::showTitle("Слайдеры"); ?>
+$this->title = Title::show("Слайдеры"); ?>
     <section>
         <h1 class="title">Слайдер</h1>
         <div class="product-form">

@@ -9,7 +9,7 @@ namespace app\models\tool\geo;
 
 
 use app\models\tool\geo\entity\GeoInfo;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use yii\base\ErrorException;
 
 class CityDefine

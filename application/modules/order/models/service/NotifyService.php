@@ -10,7 +10,7 @@ use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\OrdersItems;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use VK\Client\VKApiClient;
 use Yii;
 use yii\helpers\Url;

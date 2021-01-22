@@ -7,7 +7,7 @@ use app\models\tool\seo\Title;
 
 $this->params['breadcrumbs'][] = ['label' => 'Авторизация', 'url' => ['/signin/']];
 /* @var $model \app\modules\user\models\entity\User */
-$this->title = Title::showTitle("Новый пароль"); ?>
+$this->title = Title::show("Новый пароль"); ?>
 <div class="auth-wrap">
 	<img class="auth-image" src="/upload/images/_logo.png">
 	<h1 class="title">Введите новый пароль</h1>

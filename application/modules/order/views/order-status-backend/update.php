@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /* @var $model \app\modules\order\models\entity\OrderStatus */
 /* @var $this \yii\web\View */
 ?>
-<?php $this->title = Title::showTitle("Статус: " . $model->name); ?>
+<?php $this->title = Title::show("Статус: " . $model->name); ?>
 <section>
     <h1 class="title">Статус: <?= $model->name; ?></h1>
     <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>

@@ -11,7 +11,7 @@ use app\models\tool\seo\Title;
 /* @var $model \app\modules\vacancy\models\entity\Vacancy */
 /* @var $city_list \app\modules\geo\models\entity\Geo[] */
 
-$this->title = Title::showTitle("Вакансии");;
+$this->title = Title::show("Вакансии");;
 
 ?>
     <h1 class="title">Вакансии</h1>

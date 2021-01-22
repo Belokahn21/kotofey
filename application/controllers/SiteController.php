@@ -29,7 +29,7 @@ use app\models\tool\seo\Attributes;
 use app\modules\user\models\entity\User;
 use app\models\tool\seo\og\OpenGraph;
 use app\models\tool\seo\og\OpenGraphProduct;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\widgets\notification\Alert;
 use yii\data\Pagination;
 use yii\filters\AccessControl;

@@ -15,7 +15,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
 /* @var $model \app\modules\geo\models\entity\GeoTimezone
  */
 
-$this->title = Title::showTitle("Временные зоны"); ?>
+$this->title = Title::show("Временные зоны"); ?>
 <section>
     <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']) ?>
     <h1 class="title">Временная зона: <?= $model->name; ?></h1>

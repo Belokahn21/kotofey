@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$this->title = Title::showTitle($model->name);
+$this->title = Title::show($model->name);
 ?>
 <section class="delivery">
     <h1 class="title">Доставка: <?= $model->name; ?></h1>

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\Product;
 use app\modules\export\models\tools\AliexpressHelper;
 use app\modules\catalog\models\helpers\ProductHelper;

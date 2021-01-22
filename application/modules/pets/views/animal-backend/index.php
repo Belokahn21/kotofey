@@ -14,7 +14,7 @@ use app\modules\order\models\entity\OrderStatus;
  * @var $this \yii\web\View
  */
 
-$this->title = Title::showTitle("Животные");
+$this->title = Title::show("Животные");
 ?>
     <div class="title-group">
         <h1>Животные</h1>

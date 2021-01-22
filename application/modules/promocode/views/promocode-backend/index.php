@@ -9,7 +9,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\grid\GridView;
 
-$this->title = Title::showTitle("Промокоды");
+$this->title = Title::show("Промокоды");
 ?>
     <div class="title-group">
         <h1>Промокоды</h1>

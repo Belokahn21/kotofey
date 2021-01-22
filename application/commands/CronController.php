@@ -2,7 +2,7 @@
 
 namespace app\commands;
 
-use app\models\tool\Backup;
+use app\modules\site\models\tools\Backup;
 use yii\console\Controller;
 use yii\console\ExitCode;
 

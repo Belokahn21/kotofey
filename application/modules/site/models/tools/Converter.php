@@ -5,7 +5,7 @@
  * Time: 22:24
  */
 
-namespace app\models\tool;
+namespace app\modules\site\models\tools;
 
 
 class Converter

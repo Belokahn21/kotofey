@@ -6,7 +6,7 @@ use app\modules\news\models\entity\NewsCategory;
 use Yii;
 use app\models\tool\seo\Attributes;
 use app\models\tool\seo\og\OpenGraph;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\modules\news\models\entity\News;
 use yii\web\Controller;
 

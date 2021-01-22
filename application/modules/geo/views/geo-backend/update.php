@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $time_zones \app\modules\geo\models\entity\GeoTimezone[] */
 
-$this->title = Title::showTitle("Гео объекты"); ?>
+$this->title = Title::show("Гео объекты"); ?>
 <section>
     <h1 class="title">Гео объекты</h1>
     <div class="celearfix"></div>

@@ -4,7 +4,7 @@ use app\models\tool\seo\Title;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$this->title = Title::showTitle("Разделы технической поддержки"); ?>
+$this->title = Title::show("Разделы технической поддержки"); ?>
 <section>
     <h1 class="title">Разделы</h1>
     <?php $form = ActiveForm::begin(); ?>

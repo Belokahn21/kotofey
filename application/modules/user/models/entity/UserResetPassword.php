@@ -2,7 +2,7 @@
 
 namespace app\modules\user\models\entity;
 
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 use app\modules\user\models\entity\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;

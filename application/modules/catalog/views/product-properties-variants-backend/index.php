@@ -14,7 +14,7 @@ use app\modules\catalog\models\entity\SaveInformers;
  * @var $searchModel \app\modules\catalog\models\search\PropertiesVariantsSearchForm
  */
 
-$this->title = Title::showTitle("Значения свойств"); ?>
+$this->title = Title::show("Значения свойств"); ?>
     <section>
         <h1 class="title">Значения справочников</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

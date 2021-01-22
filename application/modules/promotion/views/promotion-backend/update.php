@@ -13,7 +13,7 @@ use yii\widgets\Pjax;
  * @var $sliderImagesModel \app\modules\content\models\entity\SlidersImages
  */
 
-$this->title = Title::showTitle('Акция: ' . $model->name);
+$this->title = Title::show('Акция: ' . $model->name);
 ?>
     <div class="title-group">
         <h1>Акция: <?= $model->name; ?></h1>

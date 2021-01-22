@@ -20,7 +20,7 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  */
 
-$this->title = Title::showTitle('Товары');
+$this->title = Title::show('Товары');
 ?>
     <div class="title-group">
         <h1>Товары</h1>

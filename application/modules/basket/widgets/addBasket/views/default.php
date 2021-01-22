@@ -1,8 +1,8 @@
 <?php
 
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use app\modules\basket\models\entity\Basket;
-use app\models\tool\Currency;
+use app\modules\site\models\tools\Currency;
 
 /* @var $product_id integer
  * @var $showButton boolean

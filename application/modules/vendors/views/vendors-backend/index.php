@@ -13,7 +13,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
 
 /* @var \yii\web\View $this */
 
-$this->title = Title::showTitle("Поставщики"); ?>
+$this->title = Title::show("Поставщики"); ?>
     <section>
         <h1 class="title">Поставщики</h1>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

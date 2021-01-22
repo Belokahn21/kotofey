@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 
 ?>
-<?php $this->title = Title::showTitle("Склады"); ?>
+<?php $this->title = Title::show("Склады"); ?>
 <section>
     <h1 class="title">Склады</h1>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 

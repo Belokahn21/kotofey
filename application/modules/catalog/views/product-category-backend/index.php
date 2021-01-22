@@ -11,7 +11,7 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\catalog\models\entity\ProductCategory */
 ?>
-<?php $this->title = Title::showTitle("Разделы"); ?>
+<?php $this->title = Title::show("Разделы"); ?>
     <h1 class="title">Разделы</h1>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $this->render('_form', [

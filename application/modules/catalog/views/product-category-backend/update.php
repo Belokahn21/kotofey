@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 /* @var $categories \app\modules\catalog\models\entity\ProductCategory[] */
 
-$this->title = Title::showTitle("Раздел: " . $model->name); ?>
+$this->title = Title::show("Раздел: " . $model->name); ?>
 <section>
     <h1 class="title">Раздел: <?= $model->name; ?></h1>
     <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>

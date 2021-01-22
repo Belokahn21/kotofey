@@ -10,7 +10,7 @@ use yii\helpers\Url;
 /* @var $this \yii\web\View */
 /* @var $time_zones \app\modules\geo\models\entity\GeoTimezone[] */
 
-$this->title = Title::showTitle("Гео объекты"); ?>
+$this->title = Title::show("Гео объекты"); ?>
 <h1 class="title">Гео объекты</h1>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $this->render('_form', [

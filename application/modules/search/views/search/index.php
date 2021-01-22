@@ -10,7 +10,7 @@ use yii\widgets\LinkPager;
 
 /* @var $products \app\modules\catalog\models\entity\Product[] */
 
-$this->title = Title::showTitle("Поиск по сайту");
+$this->title = Title::show("Поиск по сайту");
 $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url' => ['/search/']]; ?>
 <div class="page">
     <?= Breadcrumbs::widget([

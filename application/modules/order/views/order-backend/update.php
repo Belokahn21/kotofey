@@ -14,7 +14,7 @@ use yii\helpers\Url;
  * @var $itemsModel \app\modules\order\models\entity\OrdersItems
  */
 
-$this->title = Title::showTitle("Обновить заказ: " . $model->id);
+$this->title = Title::show("Обновить заказ: " . $model->id);
 ?>
     <div class="title-group">
         <h1>Обновить заказ: #<?= $model->id; ?></h1>

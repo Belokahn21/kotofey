@@ -5,7 +5,7 @@ namespace app\controllers;
 use app\modules\site\controllers\MainBackendController;
 use Yii;
 use app\modules\search\models\entity\SearchQuery;
-use app\models\tool\Backup;
+use app\modules\site\models\tools\Backup;
 use app\widgets\notification\Alert;
 
 class AdminController extends MainBackendController

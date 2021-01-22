@@ -8,7 +8,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\search\models\entity\SearchQuery;
 use yii\helpers\Json;
 use yii\web\Controller;
-use app\models\tool\Price;
+use app\modules\site\models\tools\Price;
 use app\modules\order\models\helpers\OrderHelper;
 
 class RestBackendController extends Controller

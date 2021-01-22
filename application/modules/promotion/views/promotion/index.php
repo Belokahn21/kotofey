@@ -7,7 +7,7 @@ use app\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use app\modules\promotion\models\helpers\PromotionHelper;
 
-$this->title = Title::showTitle('Скидки и акции');
+$this->title = Title::show('Скидки и акции');
 $this->params['breadcrumbs'][] = ['label' => 'Скидки и акции', 'url' => ['/promotion/']];
 ?>
 <div class="page">

@@ -5,12 +5,12 @@ use app\models\tool\seo\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use app\models\tool\System;
+use app\modules\site\models\tools\System;
 
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\short_link\models\entity\ShortLinks */
 
-$this->title = Title::showTitle("Короткие ссылки");
+$this->title = Title::show("Короткие ссылки");
 ?>
 <h1>Короткие ссылки</h1>
 <?php $form = ActiveForm::begin(); ?>

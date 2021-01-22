@@ -9,7 +9,7 @@ use yii\helpers\Url;
 
 /* @var $model \app\modules\news\models\entity\News */
 
-$this->title = Title::showTitle("Новости");
+$this->title = Title::show("Новости");
 ?>
 
 
