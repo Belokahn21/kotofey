@@ -100,6 +100,7 @@ $this->title = Title::showTitle('Товары');
                     @$out .= "Со скидкой: " . $model->discount_price . "<br>";
                 }
                 @$out .= "Закупочная: " . $model->purchase . "<br>";
+                @$out .= "+: " . $model->price - $model->purchase . "<br>";
                 return $out;
             }
         ],
