@@ -46,7 +46,7 @@ use app\modules\catalog\models\entity\SaveInformersValues;
 
         <?php if ($values): ?>
             <div class="filter-catalog__item"><label class="filter-catalog__label" for="js-filter-from"><?= $informer->name; ?></label>
-                <?= $form->field($filterModel, 'informer[' . $informer->id . '][]')->checkboxList(ArrayHelper::map($values, 'id', 'name'), [
+                <?= $form->field($filterModel, 'params[' . $informer->id . '][]')->checkboxList(ArrayHelper::map($values, 'id', 'name'), [
                     'id' => 'id_list_company',
                     'class' => 'filter-catalog-checkboxes',
                     'item' => function ($index, $label, $name, $checked, $value) {

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 window.$ = window.jQuery = $;
 import 'lightbox2';
 import 'popper.js';
@@ -35,6 +36,14 @@ new StickFilter(catalog);
 new RemoveBasketItem();
 new ProductCalc();
 new LiveSearch('.js-live-search');
+
+
+// import AddBasketClass from './block/AddBasketClass';
+// import MiniCart from './block/FastCart';
+
+// document.addEventListener('DOMContentLoaded', () => {
+//     let basket = new AddBasketClass(new MiniCart());
+// });
 
 $(function () {
     $("[rel='tooltip']").tooltip();
