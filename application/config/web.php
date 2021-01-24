@@ -166,6 +166,8 @@ $config = [
                 'admin/catalog-fill' => 'catalog/ajax/catalog-fill-from-vendor',
                 'save-notify-admission' => 'catalog/product/save-notify-admission',
                 'remove-notify-admission' => 'catalog/product/remove-notify-admission',
+                'get-mini-cart-amount' => 'catalog/ajax/get-mini-cart-amount',
+                'get-mini-cart-count' => 'catalog/ajax/get-mini-cart-count',
 
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',

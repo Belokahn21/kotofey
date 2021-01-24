@@ -2,13 +2,12 @@
 
 namespace app\modules\catalog\controllers;
 
-use app\modules\site\models\tools\Debug;
-use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
-use yii\widgets\ActiveForm;
 use app\models\tool\parser\ParseProvider;
-use app\modules\catalog\models\entity\NotifyAdmission;
+use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Price;
+use app\modules\basket\models\entity\Basket;
 
 class AjaxController extends Controller
 {
@@ -20,5 +19,19 @@ class AjaxController extends Controller
         $factory->contract();
 
         return Json::encode($factory->getInfo());
+    }
+
+    public function actionGetMiniCartAmount()
+    {
+        return Json::encode([
+            'text' => Price::format(Basket::getInstance()->cash()) . Currency::getInstance()->show()
+        ]);
+    }
+
+    public function actionGetMiniCartCount()
+    {
+        return Json::encode([
+            'text' => \Yii::t('app', '{n, plural, =0{позиций} =1{позиций} one{# позиций} few{# позиций} many{# позиций} other{# позиции}}', ['n' => Basket::count()])
+        ]);
     }
 }

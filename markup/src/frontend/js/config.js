@@ -9,4 +9,6 @@ module.exports = {
     restAddFavorite: url + '/favorite/rest/add/',
     restDeleteFavorite: url + '/favorite/rest/delete/',
     restDeleteBasket: url + '/basket/rest/delete/',
+    ajaxActionGetMiniCartAmount: url + '/get-mini-cart-amount/',
+    ajaxActionGetMiniCartCount: url + '/get-mini-cart-count/',
 }

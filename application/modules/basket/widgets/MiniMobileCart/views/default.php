@@ -9,7 +9,7 @@ use app\modules\site\models\tools\Currency;
 <div class="fast-cart active">
     <div class="fast-cart__total">
         <div class="fast-cart__count">
-            <?= \Yii::t('app', '{n, plural, =0{позиций} =1{позиций} one{# позиций} few{# позиций} many{# позиций} other{# позиции}}', ['n' => \app\modules\basket\models\entity\Basket::count()]); ?>
+            <?= \Yii::t('app', '{n, plural, =0{позиций} =1{позиций} one{# позиций} few{# позиций} many{# позиций} other{# позиции}}', ['n' => Basket::count()]); ?>
         </div>
         <div class="fast-cart__summary"><?= Price::format(Basket::getInstance()->cash()) ?> <?= Currency::getInstance()->show(); ?></div>
     </div>
