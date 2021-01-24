@@ -13,5 +13,6 @@ use app\modules\site\models\tools\Currency;
         </div>
         <div class="fast-cart__summary"><?= Price::format(Basket::getInstance()->cash()) ?> <?= Currency::getInstance()->show(); ?></div>
     </div>
-    <a class="fast-cart__buy" href="<?= Url::to(['/checkout/']) ?>">Оплатить</a><a class="fast-cart__icon" href="#"><i class="fas fa-trash-alt"></i></a>
+    <a class="fast-cart__buy" href="<?= Url::to(['/checkout/']) ?>">Оплатить</a>
+    <a class="fast-cart__icon" href="<?= Url::to(['/clear/']) ?>"><i class="fas fa-trash-alt"></i></a>
 </div>
