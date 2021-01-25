@@ -1,19 +1,21 @@
 .fast-cart {
   position: fixed;
   width: 98%;
-  bottom: 0;
+  bottom: -9999px;
   margin: 5px;
   border-radius: 7px;
   background: $active-color;
   padding: 10px;
-  display: none;
+  display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   z-index: 99999999999999999999999999999;
+  transition: bottom 0.3s ease-out;
 
   &.active {
-    display: flex;
+    transition: bottom 0.3s ease-out;
+    bottom: 0;
   }
 
   @media (min-width: 450px) {
