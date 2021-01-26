@@ -16,7 +16,7 @@ class PropertiesVariantsSearchForm extends PropertiesVariants
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'property_id'], 'integer'],
             [['name'], 'string'],
         ];
     }
@@ -40,6 +40,7 @@ class PropertiesVariantsSearchForm extends PropertiesVariants
         }
 
         $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['property_id' => $this->property_id])
             ->andFilterWhere(['id' => $this->id]);
 
         return $dataProvider;

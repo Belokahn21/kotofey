@@ -6,7 +6,7 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\SaveInformers;
+use app\modules\catalog\models\entity\Properties;
 
 /* @var $model \app\modules\catalog\models\entity\SaveInformersValues
  * @var $this \yii\web\View
@@ -42,6 +42,14 @@ $this->title = Title::show("Значения свойств"); ?>
                 } else {
                     return Html::tag('span', 'Не активен', ['class' => 'red']);
                 }
+            }
+        ],
+        [
+            'attribute' => 'property_id',
+            'format' => 'raw',
+            'filter' => ArrayHelper::map(Properties::find()->all(), 'id', 'name'),
+            'value' => function ($model) {
+                return Html::a($model->name, Url::to(["update", 'id' => $model->id]));
             }
         ],
         [
