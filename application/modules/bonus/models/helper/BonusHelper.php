@@ -68,6 +68,6 @@ class BonusHelper
 
     public static function calcProductBonus(Product $model)
     {
-        return round($model->getPrice() / UserBonus::PERCENT_AFTER_SALE);
+        return round(($model->getPrice() * UserBonus::PERCENT_AFTER_SALE) / 100);
     }
 }
