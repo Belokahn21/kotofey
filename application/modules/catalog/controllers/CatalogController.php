@@ -87,13 +87,11 @@ class CatalogController extends Controller
         Attributes::metaKeywords($keywords);
         Attributes::canonical($canonical);
 
-        $display = Yii::$app->request->get('display') ? Yii::$app->request->get('display') : 'block';
-
         return $this->render('index', [
             'pagerItems' => $pagerItems,
             'products' => $products,
             'category' => $category,
-            'display' => $display,
+            'display' => \Yii::$app->request->get('display','list'),
         ]);
     }
 }
