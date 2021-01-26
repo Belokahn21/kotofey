@@ -78,6 +78,7 @@ $this->beginPage() ?>
         <a class="logo__link" href="/">
             <div class="logo__title">kotofey.store</div>
             <div class="logo__sub-title">интернет-зоомагазин</div>
+            <div class="logo__city">В Барнауле</div>
         </a>
     </div>
     <div class="phone">
