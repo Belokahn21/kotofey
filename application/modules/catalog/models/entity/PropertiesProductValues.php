@@ -15,6 +15,7 @@ use Yii;
  * @property int|null $updated_at
  *
  * @property Properties $property
+ * @property PropertiesVariants $variant
  */
 class PropertiesProductValues extends \yii\db\ActiveRecord
 {
@@ -34,7 +35,7 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
 
     function getVariant()
     {
-        return $this->hasOne(PropertiesVariants::className(), ['property_id' => 'property_id', 'id'=>'value']);
+        return $this->hasOne(PropertiesVariants::className(), ['property_id' => 'property_id', 'id' => 'value']);
     }
 
     public function attributeLabels()

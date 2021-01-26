@@ -57,8 +57,7 @@ class ProductController extends Controller
 
         if ($product->media) OpenGraphProduct::image(ProductHelper::getImageUrl($product, true));
 
-        // todo: отсюда переделать на новые свойства
-        $properties = PropertiesProductValues::find()
+        $propertiesValues = PropertiesProductValues::find()
             ->where(['product_id' => $product->id])
             ->andWhere(['not in', 'property_id', ArrayHelper::getColumn(Properties::find()->select('id')->where(['is_show_site' => false])->all(), 'id')])
             ->all();
@@ -67,7 +66,7 @@ class ProductController extends Controller
         return $this->render('view', [
             'product' => $product,
             'category' => $category,
-            'properties' => $properties,
+            'propertiesValues' => $propertiesValues,
         ]);
     }
 

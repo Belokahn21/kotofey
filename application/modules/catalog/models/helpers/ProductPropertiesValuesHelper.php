@@ -14,6 +14,7 @@ use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\media\models\entity\Media;
+use yii\helpers\Url;
 
 class ProductPropertiesValuesHelper
 {
@@ -30,6 +31,11 @@ class ProductPropertiesValuesHelper
             }
         }
         return ImageHelper::notFoundImage();
+    }
+
+    public static function getBrandDetailUrl(PropertiesVariants $variant)
+    {
+        return Url::to(['/catalog/brand/view', 'id' => $variant->slug]);
     }
 
     public static function getFinalValue(PropertiesProductValues $variant)

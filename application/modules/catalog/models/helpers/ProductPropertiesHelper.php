@@ -3,9 +3,11 @@
 namespace app\modules\catalog\models\helpers;
 
 
+use app\modules\catalog\models\entity\Properties;
 use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
+use yii\helpers\Url;
 use yii\web\HttpException;
 
 class ProductPropertiesHelper

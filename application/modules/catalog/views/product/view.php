@@ -8,10 +8,10 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
 use app\modules\catalog\widgets\Recomended\RecomendedWidget;
-use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
+use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 
-/* @var $properties \app\modules\catalog\models\entity\PropertiesProductValues[]
+/* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
  * @var \app\modules\catalog\models\entity\Product $product
  * @var \app\modules\catalog\models\entity\ProductCategory $category
@@ -65,6 +65,17 @@ $this->title = ProductTitle::show($product->name);
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]); ?>
             <h1 itemprop="name" class="product-detail__title"><?= $product->name; ?></h1>
+
+            <?php if ($propertiesValues): ?>
+                <?php foreach ($propertiesValues as $property): ?>
+                    <?php if ($property->property->id == 1): ?>
+                        <div class="product-detail__brand">
+                            <div>Бренд</div>
+                            <a href="<?= ProductPropertiesValuesHelper::getBrandDetailUrl($property->variant); ?>"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></a>
+                        </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif; ?>
             <?= AddBasketWidget::widget([
                 'product' => $product,
                 'showOrderButton' => true,
@@ -79,8 +90,8 @@ $this->title = ProductTitle::show($product->name);
                     <div class="product-properties__key">Артикул</div>
                     <div class="product-properties__value"><?= $product->article; ?></div>
                 </li>
-                <?php if ($properties): ?>
-                    <?php foreach ($properties as $property): ?>
+                <?php if ($propertiesValues): ?>
+                    <?php foreach ($propertiesValues as $property): ?>
                         <li class="product-properties__line">
                             <div class="product-properties__key"><?= $property->property->name; ?></div>
                             <div class="product-properties__value"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></div>
