@@ -19,11 +19,23 @@ use app\modules\site\models\tools\Debug;
 use app\modules\user\models\entity\User;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
+use yii\helpers\Inflector;
 
 class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
+        $models = PropertiesVariants::find()->where(['property_id' => 1])->all();
+
+        foreach ($models as $model) {
+            $model->slug = Inflector::slug($model->name);
+
+            if ($model->validate() && $model->update()) {
+                echo "success: ok";
+                echo PHP_EOL;
+            }
+        }
+
     }
 
     public function actionClearCache()
