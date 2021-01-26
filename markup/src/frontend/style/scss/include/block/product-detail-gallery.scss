@@ -37,7 +37,7 @@
     border: 1px $no-active-color solid;
 
     &.active {
-      border: 1px $main-color solid;
+      border: 1px $no-active-color solid;
     }
   }
 }

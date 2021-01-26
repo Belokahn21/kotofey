@@ -3,6 +3,7 @@
 use yii\helpers\Json;
 use app\widgets\Breadcrumbs;
 use app\models\tool\seo\ProductTitle;
+use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
@@ -44,6 +45,15 @@ $this->title = ProductTitle::show($product->name);
                     <?php endif; ?>
                 </div>
             </div>
+
+            <div class="product-blocks">
+                <div class="product-blocks__item product-bonus">
+                    <?php $bouns = BonusHelper::calcProductBonus($product); ?>
+                    <div class="product-bonus__count">+<?= $bouns; ?></div>
+                    <div class="product-bonus__title"><?= \Yii::t('app', '{n, plural, =0{бонусов} =1{бонус} one{бонус} few{бонусов} many{бонусов} other{бонуса}} на счёт', ['n' => $bouns]); ?></div>
+                </div>
+            </div>
+
         </div>
         <div class="product-detail-right">
             <?= Breadcrumbs::widget([
