@@ -34,6 +34,8 @@ class BrandController extends Controller
 
         if ($model->view) $view = $model->view;
 
-        return $this->render($view);
+        return $this->render($view, [
+            'model' => $model
+        ]);
     }
 }
