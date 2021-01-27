@@ -1,14 +1,16 @@
 <?php
 
+use app\modules\search\widges\SearchMessage\SearchMessageWidget;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
-use app\modules\catalog\widgets\filter\CatalogFilterWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\models\tool\seo\Title;
 use app\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
-/* @var $products \app\modules\catalog\models\entity\Product[] */
+/* @var $products \app\modules\catalog\models\entity\Product[]
+ * @var $model \app\modules\search\models\entity\Search
+ */
 
 $this->title = Title::show("Поиск по сайту");
 $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url' => ['/search/']]; ?>
@@ -22,6 +24,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
     <h1 class="page__title">Результат поиска:</h1>
+    <?= SearchMessageWidget::widget(['q' => $model->search]) ?>
     <?php if ($products): ?>
         <?= ProductSortWidget::widget(); ?>
         <ul class="catalog">
