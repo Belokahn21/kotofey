@@ -14,10 +14,16 @@ class StatisticWidget extends Widget
 
     public function run()
     {
-        $searches = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
         $lastSearch = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
         $lastlogs = Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
-        $logs = Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(500)->all();
+
+        $searches = \Yii::$app->cache->getOrSet('admin-searches-full', function () {
+            return SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
+        });
+
+        $logs = \Yii::$app->cache->getOrSet('admin-logs-full', function () {
+            return Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(500)->all();
+        });
 
 
         $ordersNow = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')

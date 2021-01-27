@@ -27,8 +27,6 @@ class AdminController extends MainBackendController
 
     public function actionIndex()
     {
-        $last_search = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
-
         if (Yii::$app->request->get('save_dump') == 'Y') {
             $backup = new Backup();
             if ($backup->isOverSize()) {
@@ -51,9 +49,7 @@ class AdminController extends MainBackendController
             return $this->redirect(['/admin/']);
         }
 
-        return $this->render('index', [
-            'last_search' => $last_search
-        ]);
+        return $this->render('index');
     }
 
 
