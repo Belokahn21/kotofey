@@ -10,4 +10,9 @@ class CategoryHelper
     {
         return "/catalog/" . $model->slug . "/";
     }
+
+    public static function getImageUrl(ProductCategory $model)
+    {
+        return "/upload/" . $model->image;
+    }
 }

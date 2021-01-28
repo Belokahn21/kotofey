@@ -30,6 +30,9 @@ use yii\web\UploadedFile;
  */
 class ProductCategory extends ActiveRecord
 {
+    public $items;
+    public $subsections;
+
     public function behaviors()
     {
         return [
@@ -84,8 +87,6 @@ class ProductCategory extends ActiveRecord
         return static::findOne(['slug' => $slug]);
     }
 
-    public $items;
-
     public function categoryTree($parent_id = 0, $delim = "")
     {
         $categories = ProductCategory::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
@@ -103,8 +104,6 @@ class ProductCategory extends ActiveRecord
         return $this->items;
     }
 
-    public $subsections;
-
     public function subsections($parent_id = null)
     {
         $cache = \Yii::$app->cache;
@@ -121,7 +120,6 @@ class ProductCategory extends ActiveRecord
         $categories = $cache->getOrSet('subsections-' . $current_category_id, function () use ($current_category_id) {
             return ProductCategory::find()->where(['parent' => $current_category_id])->all();
         });
-//        $categories = Category::find()->where(['parent' => $current_category_id])->all();
 
         if ($categories) {
             foreach ($categories as $category) {
