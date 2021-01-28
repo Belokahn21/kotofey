@@ -12,10 +12,11 @@ use yii\widgets\LinkPager;
 use app\widgets\Breadcrumbs;
 use app\models\tool\seo\Title;
 use app\models\forms\CatalogFilter;
+use app\modules\catalog\models\helpers\CategoryHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\modules\catalog\widgets\filter\CatalogFilterWidget;
-use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
 
 $this->title = Title::show("Зоотовары");
 $category_id = 0;
@@ -70,7 +71,13 @@ if ($category) {
             ]); ?>
         </aside>
         <div class="catalog-wrap">
+
             <?= ProductSortWidget::widget(); ?>
+
+            <?= CatalogCategoriesWidget::widget([
+                'category' => $category
+            ]); ?>
+
             <?php if ($products): ?>
 
                 <?php if ($display == 'block'): ?>
