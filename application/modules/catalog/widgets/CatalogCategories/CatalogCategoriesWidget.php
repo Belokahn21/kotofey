@@ -16,7 +16,7 @@ class CatalogCategoriesWidget extends Widget
         $parent_id = $this->parent_id;
 
         $categories = \Yii::$app->cache->getOrSet('catalog-categories:' . $parent_id, function () use ($parent_id) {
-            return ProductCategory::find()->where(['parent' => $parent_id])->all();
+            return ProductCategory::find()->where(['parent' => $parent_id])->orderBy(['sort' => SORT_DESC])->all();
         });
 
         return $this->render($this->view, [
