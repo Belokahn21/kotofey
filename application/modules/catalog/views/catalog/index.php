@@ -102,10 +102,9 @@ if ($category) {
             <?php endif; ?>
         </div>
     </div>
+
+    <?php if ($category instanceof ProductCategory): ?>
+        <?= $category->description; ?>
+    <?php endif; ?>
 </div>
-
-
-<?php /* $this->render('@app/modules/catalog/views/__item', [
-    'product' => $product
-]); */ ?>
 
