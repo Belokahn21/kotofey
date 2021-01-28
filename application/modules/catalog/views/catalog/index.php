@@ -76,7 +76,7 @@ if ($category) {
 
             <?php if (!Yii::$app->user->isGuest and Yii::$app->user->id == 1): ?>
                 <?= CatalogCategoriesWidget::widget([
-//                'parent_id' => @$category->id
+                    'parent_id' => !$category instanceof ProductCategory ? 0 : $category->id
                 ]); ?>
             <?php endif; ?>
 
