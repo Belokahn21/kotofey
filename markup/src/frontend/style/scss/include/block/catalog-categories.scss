@@ -21,11 +21,15 @@
   }
 
   &__item {
-    width: 31.5%;
-    margin: 0 8px 15px 8px;
+    width: 32.7%;
     border-radius: 15px;
     overflow: hidden;
     border: 1px $main-color solid;
+    margin: 0 8px 15px 0;
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
 
     @media (max-width: 790px) {
       width: 100%;
@@ -67,9 +71,11 @@
 
   &__link {
     color: black;
+    transition: color 0.3s ease-out;
 
     &:hover {
-      color: inherit;
+    transition: color 0.2s ease-out;
+      color: $active-color;
     }
   }
 }
