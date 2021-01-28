@@ -1,22 +1,26 @@
 <?php
-/* @var $category \app\modules\catalog\models\entity\ProductCategory */
+
+use app\modules\catalog\models\helpers\CategoryHelper;
+
+/* @var $categories \app\modules\catalog\models\entity\ProductCategory[] */
 ?>
-<?php if ($category): ?>
+<?php if ($categories): ?>
     <ul class="catalog-categories">
-        <?php foreach ($category->childs as $child): ?>
+        <?php foreach ($categories as $category): ?>
             <li class="catalog-categories__item">
                 <div class="catalog-categories__header">
-                    <div class="catalog-categories__icon"><img src="./assets/images/icon-block.png"></div>
-                    <div class="catalog-categories__name"><?= $category->name; ?>/div>
-                    </div>
-                    <div class="catalog-categories-list">
-                        <div class="catalog-categories-list__item"><a class="catalog-categories-list__link" href="javascript:void(0);">Газобетонные</a></div>
-                        <div class="catalog-categories-list__item"><a class="catalog-categories-list__link" href="javascript:void(0);">Керамические</a></div>
-                        <div class="catalog-categories-list__item"><a class="catalog-categories-list__link" href="javascript:void(0);">Керамзитобетонные</a></div>
-                        <div class="catalog-categories-list__item"><a class="catalog-categories-list__link" href="javascript:void(0);">Бетонные</a></div>
-                        <div class="catalog-categories-list__item"><a class="catalog-categories-list__link" href="javascript:void(0);">Фундаментные</a></div>
-                        <div class="catalog-categories-list__item"><a class="catalog-categories-list__link" href="javascript:void(0);">Сетки для кладки</a></div>
-                    </div>
+                    <?php /* <div class="catalog-categories__icon"><img src="<?= $category->image; ?>" alt="<?= $category->name; ?>" title="<?= $category->name; ?>"></div> */ ?>
+                    <div class="catalog-categories__icon"><img src="/images/icon-block.png" alt="<?= $category->name; ?>" title="<?= $category->name; ?>"></div>
+                    <div class="catalog-categories__name"><?= $category->name; ?></div>
+                </div>
+
+                <div class="catalog-categories-list">
+                    <?php foreach ($category->childs as $child): ?>
+                        <div class="catalog-categories-list__item">
+                            <a class="catalog-categories-list__link" href="<?= CategoryHelper::getDetailUrl($child); ?>"><?= $child->name; ?></a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </li>
         <?php endforeach; ?>
     </ul>

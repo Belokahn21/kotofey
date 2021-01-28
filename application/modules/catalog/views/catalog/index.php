@@ -74,9 +74,11 @@ if ($category) {
 
             <?= ProductSortWidget::widget(); ?>
 
-            <?= CatalogCategoriesWidget::widget([
-                'category' => $category
-            ]); ?>
+            <?php if (!Yii::$app->user->isGuest and Yii::$app->user->id == 1): ?>
+                <?= CatalogCategoriesWidget::widget([
+//                'parent_id' => @$category->id
+                ]); ?>
+            <?php endif; ?>
 
             <?php if ($products): ?>
 

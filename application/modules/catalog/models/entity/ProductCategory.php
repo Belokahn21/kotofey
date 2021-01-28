@@ -25,6 +25,8 @@ use yii\web\UploadedFile;
  * @property integer $parent
  * @property integer $created_at
  * @property integer $updated_at
+ *
+ * @property ProductCategory $childs
  */
 class ProductCategory extends ActiveRecord
 {
@@ -146,5 +148,10 @@ class ProductCategory extends ActiveRecord
         }
 
         return array_reverse($this->under_sections);
+    }
+
+    public function getChilds()
+    {
+        return $this->hasMany(ProductCategory::className(), ['parent' => 'id']);
     }
 }
