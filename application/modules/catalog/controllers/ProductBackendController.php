@@ -30,7 +30,9 @@ class ProductBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
         $oldRules = $parentAccess['access']['rules'];
         $newRules = [['allow' => true, 'actions' => ['discount-clean'], 'roles' => ['Administrator']]];
-        $newRules = [['allow' => true, 'actions' => ['copy'], 'roles' => ['Administrator']]];
+        $newRules = [['allow' => true, 'actions' => ['copy'], 'roles' => ['Administrator', 'Content']]];
+        $newRules = [['allow' => true, 'actions' => ['index'], 'roles' => ['Administrator']]];
+        $newRules = [['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]];
 
 
         $parentAccess['access']['rules'] = array_merge($newRules, $oldRules);

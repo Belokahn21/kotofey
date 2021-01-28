@@ -72,17 +72,12 @@ class CatalogController extends Controller
             ];
         }
 
-        if (!empty($category->seo_description)) {
-            $description = $category->seo_description;
-        } else {
-            $description = "Большой выбор товара в наличии корма для домашних животных. Бесплатная доставка по городу Баранул при заказе от 500 рублей.";
-        }
+        if (!empty($category->seo_description)) $description = $category->seo_description;
+        else  $description = "Большой выбор товара в наличии корма для домашних животных. Бесплатная доставка по городу Баранул при заказе от 500 рублей.";
 
-        if ($category) {
-            $canonical = System::protocol() . "://" . System::domain() . "/catalog/" . $category->slug . "/";
-        } else {
-            $canonical = System::protocol() . "://" . System::domain() . "/catalog/";
-        }
+        if ($category) $canonical = System::protocol() . "://" . System::domain() . "/catalog/" . $category->slug . "/";
+        else $canonical = System::protocol() . "://" . System::domain() . "/catalog/";
+
         Attributes::metaDescription($description);
         Attributes::metaKeywords($keywords);
         Attributes::canonical($canonical);
@@ -91,7 +86,7 @@ class CatalogController extends Controller
             'pagerItems' => $pagerItems,
             'products' => $products,
             'category' => $category,
-            'display' => \Yii::$app->request->get('display','block'),
+            'display' => \Yii::$app->request->get('display', 'block'),
         ]);
     }
 }

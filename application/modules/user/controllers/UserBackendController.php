@@ -122,7 +122,8 @@ class UserBackendController extends MainBackendController
 
     public function actionAuth($id)
     {
-        if (!Yii::$app->user->can('adminSigninUser')) throw new ForbiddenHttpException('Доступ запрещён');
+        //todo: настроить права
+//        if (!Yii::$app->user->can('adminSigninUser')) throw new ForbiddenHttpException('Доступ запрещён');
 
         $user = User::findOne($id);
         if ($user) {
