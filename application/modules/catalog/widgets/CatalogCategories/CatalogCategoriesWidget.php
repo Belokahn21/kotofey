@@ -13,7 +13,11 @@ class CatalogCategoriesWidget extends Widget
 
     public function run()
     {
-        $categories = ProductCategory::find()->where(['parent' => $this->parent_id])->all();
+        $parent_id = $this->parent_id;
+
+        $categories = \Yii::$app->cache->getOrSet('catalog-categories:' . $parent_id, function () use ($parent_id) {
+            return ProductCategory::find()->where(['parent' => $parent_id])->all();
+        });
 
         return $this->render($this->view, [
             'categories' => $categories
