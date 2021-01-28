@@ -159,15 +159,18 @@ class ProductBackendController extends MainBackendController
         return $this->redirect(['index']);
     }
 
+    public function actionTransfer()
+    {
+        return $this->render('transfer');
+    }
+
     public function actionDelete($id)
     {
         $product = $this->modelClass::findOne($id);
 
         if (!$product) throw new HttpException(404, 'Товара не существует');
 
-
         if ($product->delete()) Alert::setSuccessNotify('Продукт удалён');
-
 
         return $this->redirect(Url::to(['index']));
     }
