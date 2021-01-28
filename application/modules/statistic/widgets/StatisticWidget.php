@@ -7,10 +7,12 @@ use app\modules\logger\models\entity\Logger;
 use app\modules\order\models\entity\Order;
 use app\modules\search\models\entity\SearchQuery;
 use yii\base\Widget;
+use yii\caching\DbDependency;
 
 class StatisticWidget extends Widget
 {
     public $view = 'default';
+    public $cacheTime = 3600 * 27 * 1;
 
     public function run()
     {
@@ -19,11 +21,15 @@ class StatisticWidget extends Widget
 
         $searches = \Yii::$app->cache->getOrSet('admin-searches-full', function () {
             return SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
-        });
+        }, $this->cacheTime, new DbDependency([
+            'sql' => 'select count(`id`) from `search_query`'
+        ]));
 
         $logs = \Yii::$app->cache->getOrSet('admin-logs-full', function () {
             return Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(500)->all();
-        });
+        }, $this->cacheTime, new DbDependency([
+            'sql' => 'select count(`id`) from `logger`'
+        ]));
 
 
         $ordersNow = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')

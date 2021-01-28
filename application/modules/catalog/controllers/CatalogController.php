@@ -91,7 +91,7 @@ class CatalogController extends Controller
             'pagerItems' => $pagerItems,
             'products' => $products,
             'category' => $category,
-            'display' => \Yii::$app->request->get('display','list'),
+            'display' => \Yii::$app->request->get('display','block'),
         ]);
     }
 }

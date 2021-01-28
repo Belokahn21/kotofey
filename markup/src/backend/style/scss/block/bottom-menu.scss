@@ -1,0 +1,26 @@
+.bottom-menu {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 100%;
+  padding: 10px;
+
+  &__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 25%;
+    padding: 5px;
+    font-size: 25px;
+    text-decoration: none !important;
+
+    &:not(:last-child) {
+      border-right: 1px grey solid;
+    }
+  }
+}
