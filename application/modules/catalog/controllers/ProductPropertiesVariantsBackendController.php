@@ -8,6 +8,7 @@ use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\search\PropertiesVariantsSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\widgets\notification\Alert;
 use yii\web\HttpException;
 
@@ -15,6 +16,17 @@ class ProductPropertiesVariantsBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
     public $modelClass = 'app\modules\catalog\models\entity\PropertiesVariants';
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]
+        ]);
+
+        return $parentAccess;
+    }
 
     public function actionIndex()
     {

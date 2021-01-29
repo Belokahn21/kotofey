@@ -6,6 +6,7 @@ namespace app\modules\catalog\controllers;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\search\ProductCategorySearchForm;
 use app\modules\site\controllers\MainBackendController;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\widgets\notification\Alert;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -16,6 +17,18 @@ use yii\web\HttpException;
 class ProductCategoryBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
+
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]
+        ]);
+
+        return $parentAccess;
+    }
 
     public function actionIndex()
     {

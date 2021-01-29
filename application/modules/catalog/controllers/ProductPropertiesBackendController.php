@@ -7,6 +7,7 @@ use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductPropertiesSearchForm;
 use app\modules\site\controllers\MainBackendController;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\widgets\notification\Alert;
 use yii\web\HttpException;
 
@@ -14,6 +15,17 @@ class ProductPropertiesBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
     public $modelClass = 'app\modules\catalog\models\entity\Properties';
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]
+        ]);
+
+        return $parentAccess;
+    }
 
     public function actionIndex()
     {

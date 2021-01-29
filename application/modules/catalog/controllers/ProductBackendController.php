@@ -30,7 +30,6 @@ class ProductBackendController extends MainBackendController
     public $layout = '@app/views/layouts/admin';
     public $modelClass = 'app\modules\catalog\models\entity\Product';
 
-
     public function behaviors()
     {
         $parentAccess = parent::behaviors();
