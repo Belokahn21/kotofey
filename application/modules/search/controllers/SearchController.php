@@ -33,7 +33,7 @@ class SearchController extends Controller
 
         }
 
-        return $this->render(\Yii::$app->request->get('search') == 'Y' ? 'index2' : 'index', [
+        return $this->render(\Yii::$app->request->get('searchView') == 'Y' ? 'index2' : 'index', [
 //        return $this->render('index2', [
             'products' => $products,
             'pagerItems' => $pagerItems,
