@@ -30,7 +30,7 @@ class ProductTransferHistorySearch extends ProductTransferHistory
 
     public function search($params)
     {
-        $query = ProductTransferHistory::find();
+        $query = ProductTransferHistory::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

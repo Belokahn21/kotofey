@@ -6,13 +6,8 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
-use app\modules\vendors\models\entity\Vendor;
+use app\modules\order\models\entity\Order;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductCategory;
-use app\models\tool\parser\providers\SibagroTrade;
-use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\widgets\stockOut\StockOutWidget;
-use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\form\ProductTransferHistoryForm
@@ -46,13 +41,24 @@ $this->title = Title::show('Поступления товаров');
     'emptyText' => 'История поступления товаров отсуствует',
     'columns' => [
         'id',
+        'count',
         [
             'attribute' => 'order_id',
-            'filter' => ArrayHelper::map($orders, 'id', 'id')
+            'filter' => ArrayHelper::map($orders, 'id', 'id'),
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->order_id) {
+                    return Html::a('Заказ №' . Order::findOne($model->order_id)->id, Url::to(['/admin/order/order-backend/update', 'id' => $model->order_id]));
+                }
+            }
         ],
         [
             'attribute' => 'product_id',
-            'filter' => ArrayHelper::map($products, 'id', 'name')
+            'filter' => ArrayHelper::map($products, 'id', 'name'),
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::a(Product::findOne($model->product_id)->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $model->product_id]));
+            }
         ],
         [
             'attribute' => 'created_at',
