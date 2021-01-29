@@ -38,6 +38,13 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
         return $this->hasOne(PropertiesVariants::className(), ['property_id' => 'property_id', 'id' => 'value']);
     }
 
+    function getName()
+    {
+        if ($this->property->type == TypeProductProperties::TYPE_INFORMER) return PropertiesVariants::findOne(['property_id' => $this->property_id, 'id' => $this->value])->name;
+
+        if ($this->property->type == TypeProductProperties::TYPE_TEXT) return $this->value;
+    }
+
     public function attributeLabels()
     {
         return [

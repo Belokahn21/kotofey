@@ -13,7 +13,6 @@ $resultArray = [];
 <?php foreach ($values as $value): ?>
     <?php $resultArray[$value->property->id]['property'] = $value->property; ?>
     <?php $resultArray[$value->property->id]['values'][$value->value] = $value; ?>
-    <!--    --><?php //$resultArray[$value->property->id]['values'][$value->value] = $value; ?>
 <?php endforeach; ?>
 
 
@@ -35,8 +34,8 @@ $resultArray = [];
     <div class="filter-catalog__item">
         <label class="filter-catalog__label" for="js-filter-from">Цена</label>
         <div class="filter-catalog__input-group">
-            <?= $form->field($filterModel, 'price_from')->textInput(['id' => 'js-filter-from', 'class' => 'filter-catalog__input', 'placeholder' => '100','value'=>$filterModel->price_from])->label(false); ?>
-            <?= $form->field($filterModel, 'price_to')->textInput(['id' => 'js-filter-to', 'class' => 'filter-catalog__input', 'placeholder' => '1000','value'=>$filterModel->price_to])->label(false); ?>
+            <?= $form->field($filterModel, 'price_from')->textInput(['id' => 'js-filter-from', 'class' => 'filter-catalog__input', 'placeholder' => '100', 'value' => $filterModel->price_from])->label(false); ?>
+            <?= $form->field($filterModel, 'price_to')->textInput(['id' => 'js-filter-to', 'class' => 'filter-catalog__input', 'placeholder' => '1000', 'value' => $filterModel->price_to])->label(false); ?>
         </div>
     </div>
     <div class="filter-catalog__item">
@@ -45,7 +44,7 @@ $resultArray = [];
 
     <?php foreach ($resultArray as $item): ?>
         <div class="filter-catalog__item"><label class="filter-catalog__label" for="js-filter-from"><?= $item['property']->name; ?></label>
-            <?= $form->field($filterModel, 'params[' . $item['property']->id . '][]')->checkboxList(ArrayHelper::map($item['values'], 'value', 'variant.name'), [
+            <?= $form->field($filterModel, 'params[' . $item['property']->id . '][]')->checkboxList(ArrayHelper::map($item['values'], 'value', 'name'), [
                 'id' => 'id_list_company',
                 'class' => 'filter-catalog-checkboxes',
                 'item' => function ($index, $label, $name, $checked, $value) {

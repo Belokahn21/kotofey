@@ -18,11 +18,8 @@ class CatalogFilterWidget extends Widget
         $values = PropertiesProductValues::find();
 
         if ($this->product_id) {
-            if (is_array($this->product_id)) {
-                $values->andFilterWhere(['in', 'properties_product_values.product_id', $this->product_id]);
-            } else {
-                $values->andFilterWhere(['properties_product_values.product_id' => $this->product_id]);
-            }
+            if (is_array($this->product_id)) $values->andFilterWhere(['in', 'properties_product_values.product_id', $this->product_id]);
+            else $values->andFilterWhere(['properties_product_values.product_id' => $this->product_id]);
         }
 
         $values->joinWith('property pr');
