@@ -164,32 +164,6 @@ class ProductBackendController extends MainBackendController
         return $this->redirect(['index']);
     }
 
-    public function actionTransfer()
-    {
-        $model = new ProductTransferHistoryForm();
-        $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
-        $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
-        $searchModel = new ProductTransferHistorySearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->get());
-
-        if (Yii::$app->request->isPost) {
-            if ($model->load(Yii::$app->request->post())) {
-                if ($model->validate() && $model->save()) {
-                    Alert::setSuccessNotify('Элемент успешно добавлен.');
-                    return $this->refresh();
-                }
-            }
-        }
-
-        return $this->render('transfer', [
-            'model' => $model,
-            'orders' => $orders,
-            'products' => $products,
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-
     public function actionDelete($id)
     {
         $product = $this->modelClass::findOne($id);

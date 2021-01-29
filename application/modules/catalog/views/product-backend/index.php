@@ -24,7 +24,7 @@ $this->title = Title::show('Товары');
 ?>
     <div class="title-group">
         <h1>Товары</h1>
-        <?= Html::a('Приход товара', Url::to(['/admin/catalog/product-backend/transfer']), ['class' => 'btn-main']); ?>
+        <?= Html::a('Приход товара', Url::to(['/admin/catalog/transfer-backend/index']), ['class' => 'btn-main']); ?>
         <?= Html::a('Убрать акционные товары', Url::to(['/admin/catalog/product-backend/discount-clean']), ['class' => 'btn-main']); ?>
         <?= Html::a('Обновить сибагро', Url::to(['/admin/catalog/update-sibagro/upload']), ['class' => 'btn-main']); ?>
         <?= StockOutWidget::widget(); ?>

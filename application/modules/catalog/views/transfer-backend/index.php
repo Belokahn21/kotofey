@@ -31,7 +31,7 @@ $this->title = Title::show('Поступления товаров');
     'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
-<?= $this->render('_form-transfer', [
+<?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
     'orders' => $orders,

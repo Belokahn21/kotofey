@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "product_transfer_history".
@@ -17,4 +18,10 @@ use Yii;
  */
 class ProductTransferHistory extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
 }
