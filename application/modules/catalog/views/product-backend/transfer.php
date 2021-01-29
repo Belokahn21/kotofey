@@ -15,12 +15,14 @@ use app\modules\catalog\widgets\stockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
- * @var $model \app\modules\catalog\models\entity\Product
+ * @var $model \app\modules\catalog\models\form\ProductTransferHistoryForm
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $products Product[]
+ * @var $dataProvider \yii\data\ActiveDataProvider
+ * @var $searchModel \app\modules\catalog\models\search\ProductTransferHistorySearch
  */
 
-$this->title = Title::show('Товары');
+$this->title = Title::show('Поступления товаров');
 ?>
     <div class="title-group">
         <h1>Поступления товаров</h1>

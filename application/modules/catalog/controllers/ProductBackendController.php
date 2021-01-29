@@ -6,6 +6,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductTransferHistory;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\ProductTransferHistoryForm;
+use app\modules\catalog\models\search\ProductTransferHistorySearch;
 use app\modules\order\models\entity\Order;
 use app\modules\site\models\tools\Debug;
 use app\modules\user\models\tool\BehaviorsRoleManager;
@@ -168,6 +169,8 @@ class ProductBackendController extends MainBackendController
         $model = new ProductTransferHistoryForm();
         $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
         $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $searchModel = new ProductTransferHistorySearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -182,6 +185,8 @@ class ProductBackendController extends MainBackendController
             'model' => $model,
             'orders' => $orders,
             'products' => $products,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 

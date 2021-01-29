@@ -17,7 +17,7 @@ class ProductTransferHistoryForm extends ProductTransferHistory
     {
         return [
             [['product_id', 'reason', 'count'], 'required'],
-            [['count'], 'default' => 0],
+            [['count'], 'default', 'value' => 0],
             [['product_id', 'order_id', 'created_at', 'updated_at', 'count'], 'integer'],
             [['reason'], 'string', 'max' => 255],
         ];

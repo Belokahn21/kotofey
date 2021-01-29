@@ -1,25 +1,25 @@
 <?php
 
+
 namespace app\modules\catalog\models\search;
 
 
-use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\PropertyGroup;
+use app\modules\catalog\models\entity\ProductTransferHistory;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class PropertiesGroupSearchForm extends PropertyGroup
+class ProductTransferHistorySearch extends ProductTransferHistory
 {
     public static function tableName()
     {
-        return PropertyGroup::tableName();
+        return ProductTransferHistory::tableName();
     }
 
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'string'],
+            [['reason'], 'string'],
         ];
     }
 
@@ -30,7 +30,7 @@ class PropertiesGroupSearchForm extends PropertyGroup
 
     public function search($params)
     {
-        $query = PropertyGroup::find();
+        $query = ProductTransferHistory::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -41,7 +41,7 @@ class PropertiesGroupSearchForm extends PropertyGroup
         }
 
         $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name]);
+            ->andFilterWhere(['like', 'reason', $this->reason]);
 
         return $dataProvider;
     }
