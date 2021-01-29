@@ -3,12 +3,11 @@
 namespace app\modules\catalog\models\form;
 
 
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductTransferHistory;
 
 class ProductTransferHistoryForm extends ProductTransferHistory
 {
-    public $controlTransfer;
-
     public static function tableName()
     {
         return ProductTransferHistory::tableName();
@@ -19,9 +18,20 @@ class ProductTransferHistoryForm extends ProductTransferHistory
         return [
             [['product_id', 'reason', 'count'], 'required'],
             [['count'], 'default' => 0],
-            [['product_id', 'order_id', 'created_at', 'updated_at', 'count', 'controlTransfer'], 'integer'],
+            [['product_id', 'order_id', 'created_at', 'updated_at', 'count'], 'integer'],
             [['reason'], 'string', 'max' => 255],
         ];
+    }
+
+    public function beforeSave($insert)
+    {
+        if ($product = Product::findOne($this->product_id)) {
+            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->count += $this->count;
+            if (!$product->validate() or !$product->update()) return false;
+        }
+
+        return parent::beforeSave($insert);
     }
 
     public function attributeLabels()
