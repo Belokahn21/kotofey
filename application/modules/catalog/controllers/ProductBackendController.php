@@ -7,6 +7,8 @@ use app\modules\catalog\models\entity\ProductTransferHistory;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\ProductTransferHistoryForm;
 use app\modules\order\models\entity\Order;
+use app\modules\site\models\tools\Debug;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use Yii;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
@@ -31,14 +33,13 @@ class ProductBackendController extends MainBackendController
     public function behaviors()
     {
         $parentAccess = parent::behaviors();
-        $oldRules = $parentAccess['access']['rules'];
-        $newRules = [['allow' => true, 'actions' => ['discount-clean'], 'roles' => ['Administrator']]];
-        $newRules = [['allow' => true, 'actions' => ['copy'], 'roles' => ['Administrator', 'Content']]];
-        $newRules = [['allow' => true, 'actions' => ['index'], 'roles' => ['Administrator']]];
-        $newRules = [['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]];
 
-
-        $parentAccess['access']['rules'] = array_merge($newRules, $oldRules);
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['discount-clean'], 'roles' => ['Administrator']],
+            ['allow' => true, 'actions' => ['copy'], 'roles' => ['Administrator', 'Content']],
+            ['allow' => true, 'actions' => ['transfer'], 'roles' => ['Administrator']],
+            ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]
+        ]);
 
         return $parentAccess;
     }

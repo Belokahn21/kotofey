@@ -18,27 +18,7 @@ class OrderStatusBackendController extends MainBackendController
 
     public function behaviors()
     {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    [
-                        'allow' => true,
-                        'roles' => ['Administrator', 'Developer'],
-                    ],
-                    [
-                        'allow' => false,
-                        'roles' => ['?'],
-                    ],
-                ],
-            ],
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'logout' => ['post'],
-                ],
-            ],
-        ];
+        return parent::behaviors();
     }
 
     public function actionIndex()

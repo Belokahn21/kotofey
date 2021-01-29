@@ -9,6 +9,7 @@ use app\modules\site\models\tools\Debug;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\search\OrderSearchForm;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\widgets\notification\Alert;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -31,11 +32,10 @@ class OrderBackendController extends MainBackendController
     public function behaviors()
     {
         $parentAccess = parent::behaviors();
-        $oldRules = $parentAccess['access']['rules'];
-        $newRules = [['allow' => true, 'actions' => ['report'], 'roles' => ['Administrator']]];
 
-
-        $parentAccess['access']['rules'] = array_merge($newRules, $oldRules);
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['report'], 'roles' => ['Administrator']]
+        ]);
 
         return $parentAccess;
     }
