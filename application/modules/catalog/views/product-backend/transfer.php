@@ -52,7 +52,7 @@ $this->title = Title::show('Поступления товаров');
         ],
         [
             'attribute' => 'product_id',
-            'filter' => ArrayHelper::map($orders, 'id', 'name')
+            'filter' => ArrayHelper::map($products, 'id', 'name')
         ],
         [
             'attribute' => 'created_at',
