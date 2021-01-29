@@ -18,7 +18,7 @@ class ProductTransferHistorySearch extends ProductTransferHistory
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'order_id', 'product_id'], 'integer'],
             [['reason'], 'string'],
         ];
     }
@@ -40,7 +40,9 @@ class ProductTransferHistorySearch extends ProductTransferHistory
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'id', $this->id])
+        $query->andFilterWhere(['id' => $this->id])
+            ->andFilterWhere(['order_id' => $this->order_id])
+            ->andFilterWhere(['product_id' => $this->product_id])
             ->andFilterWhere(['like', 'reason', $this->reason]);
 
         return $dataProvider;

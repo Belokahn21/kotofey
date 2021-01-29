@@ -47,6 +47,14 @@ $this->title = Title::show('Поступления товаров');
     'columns' => [
         'id',
         [
+            'attribute' => 'order_id',
+            'filter' => ArrayHelper::map($orders, 'id', 'id')
+        ],
+        [
+            'attribute' => 'product_id',
+            'filter' => ArrayHelper::map($orders, 'id', 'name')
+        ],
+        [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
             'options' => ['width' => '200']
