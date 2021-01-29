@@ -50,16 +50,20 @@ class CatalogFilter extends Model
     {
         if ($this->load(\Yii::$app->request->get())) {
 
-            $valuesQuery = PropertiesProductValues::find();
+            $valuesQuery = PropertiesProductValues::find()->select(['product_id']);
+            $iter = 0;
 
             if ($this->params) {
                 foreach ($this->params as $propId => $values) {
                     if ($values) {
-                        $valuesQuery->andFilterWhere(['in', 'value', $values]);
-                        $valuesQuery->andFilterWhere(['in', 'property_id', $propId]);
+                        $valuesQuery->orWhere(['value' => $values, 'property_id' => $propId]);
+                        $iter++;
                     }
                 }
             }
+
+            $valuesQuery->groupBy('product_id');
+            $valuesQuery->having("count(*) = " . $iter);
 
             $query->innerJoin(['sq' => $valuesQuery], 'sq.product_id = product.id');
 
