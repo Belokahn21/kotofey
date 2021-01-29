@@ -54,7 +54,8 @@ $resultArray = [];
 
                     return <<<LIST
 <div class="filter-catalog-checkboxes__item $isNeedBreak">
-    <input type="checkbox" $checked value="$value" name="$name">$label
+    <input type="checkbox" $checked value="$value" name="$name" id="filter-chb-$value">
+    <label for="filter-chb-$value"><i class="fas fa-paw" aria-hidden="true"></i>$label</label>
 </div>
 LIST;
                 }
