@@ -16,8 +16,8 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
- * @var $properties \app\modules\catalog\models\entity\SaveProductProperties[]
- * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
+ * @var $orders \app\modules\order\models\entity\Order[]
+ * @var $products Product[]
  */
 
 $this->title = Title::show('Товары');
@@ -29,11 +29,11 @@ $this->title = Title::show('Товары');
     'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
-<?= $this->render('_form', [
+<?= $this->render('_form-transfer', [
     'model' => $model,
     'form' => $form,
-    'properties' => $properties,
-    'modelDelivery' => $modelDelivery,
+    'orders' => $orders,
+    'products' => $products,
 ]) ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>

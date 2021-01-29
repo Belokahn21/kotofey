@@ -3,7 +3,10 @@
 namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\ProductTransferHistory;
 use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\form\ProductTransferHistoryForm;
+use app\modules\order\models\entity\Order;
 use Yii;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
@@ -161,7 +164,24 @@ class ProductBackendController extends MainBackendController
 
     public function actionTransfer()
     {
-        return $this->render('transfer');
+        $model = new ProductTransferHistoryForm();
+        $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate() && $model->save()) {
+                    Alert::setSuccessNotify('Элемент успешно добавлен.');
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('transfer', [
+            'model' => $model,
+            'orders' => $orders,
+            'products' => $products,
+        ]);
     }
 
     public function actionDelete($id)
