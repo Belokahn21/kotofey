@@ -32,7 +32,7 @@ if ($category) {
     $category_id = $category->id;
     $this->title = Title::show($category->name);
     if ($category->seo_title) {
-        $this->title = Title::show($category->seo_title);
+        $this->title = $category->seo_title;
     }
 } ?>
 <div class="page">
