@@ -45,6 +45,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 $(function () {
     $("[rel='tooltip']").tooltip();
+
+
+    $('.filter-catalog-checkboxes').on('hidden.bs.collapse', function (e) {
+        $('a[href="#' + $(this).attr('id') + '"]').text("Показать");
+    }).on('shown.bs.collapse', function (e) {
+        $('a[href="#' + $(this).attr('id') + '"]').text("Скрыть");
+    });
 });
 
 

@@ -57,7 +57,8 @@
   }
 
   &__label {
-    color: #c6c6c6;
+    //color: #c6c6c6;
+    color: $main-color;
     font-size: 12px;
     line-height: 24px;
     font-weight: 400;
@@ -161,6 +162,18 @@
 
   &__reset-icon {
     margin-right: 10px;
+  }
+
+  &__switch {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  &__action {
+    @extend .filter-catalog__label;
+    color: #c6c6c6;
+    //color: $main-color;
   }
 }
 

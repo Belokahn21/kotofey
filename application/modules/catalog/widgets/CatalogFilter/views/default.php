@@ -28,7 +28,6 @@ $resultArray = [];
         ],
     ]
 ]); ?>
-<input type="hidden" name="<?= Yii::$app->request->csrfParam; ?>" value="<?= Yii::$app->request->getCsrfToken(); ?>"/>
 <div class="filter-catalog__title"><span>Подобрать товар</span><span class="filter-catalog__arrow"><img src="/upload/images/arrow-left-black.svg"></span></div>
 <div class="filter-catalog-container">
     <div class="filter-catalog__item">
@@ -43,10 +42,19 @@ $resultArray = [];
     </div>
 
     <?php foreach ($resultArray as $item): ?>
-        <div class="filter-catalog__item"><label class="filter-catalog__label" for="js-filter-from"><?= $item['property']->name; ?></label>
+
+        <?php $uniqKey = substr(md5($item['property']->name), 0, 5); ?>
+
+        <div class="filter-catalog__item">
+
+            <div class="filter-catalog__switch">
+                <label class="filter-catalog__label" for="js-filter-from"><?= $item['property']->name; ?></label>
+                <a class="filter-catalog__action" data-toggle="collapse" href="#collapseCatalog-<?= $uniqKey; ?>" role="button" aria-expanded="false" aria-controls="collapseCatalog-<?= $uniqKey; ?>">Показать</a>
+            </div>
+
             <?= $form->field($filterModel, 'params[' . $item['property']->id . '][]')->checkboxList(ArrayHelper::map($item['values'], 'value', 'name'), [
-                'id' => 'id_list_company',
-                'class' => 'filter-catalog-checkboxes',
+                'id' => 'collapseCatalog-' . $uniqKey,
+                'class' => 'filter-catalog-checkboxes collapse',
                 'item' => function ($index, $label, $name, $checked, $value) {
                     $isNeedBreak = (strlen($label) > 25 ? "break" : "");
                     $uniq = substr(md5(rand()), 0, 5);

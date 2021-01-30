@@ -14,8 +14,10 @@ aside.left-siderbar
                 input(type="range").filter-catalog__range
 
             .filter-catalog__item
-                label.filter-catalog__label(for="js-filter-from") Бренд
-                .filter-catalog-checkboxes
+                .filter-catalog__switch
+                    label.filter-catalog__label(for="js-filter-from") Бренд
+                    a.filter-catalog__action(data-toggle="collapse" href="#collapseCatalog" role="button" aria-expanded="false" aria-controls="collapseCatalog") Показать
+                .filter-catalog-checkboxes.collapse(id="collapseCatalog")
                     .filter-catalog-checkboxes__item
                         input(type="checkbox" name="brand" id="filter-chb-1")
                         label(for="filter-chb-1")
