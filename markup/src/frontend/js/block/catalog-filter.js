@@ -9,41 +9,41 @@ const timeout = 2500;
 
 if ($form) {
 
-	$form.find('input,select').each(function () {
-		let element = $(this);
+    $form.find('input,select').each(function () {
+        let element = $(this);
 
-		element.change(function () {
-			$.ajax({
-				'url': location.href + '?' + $form.serialize(),
-				data: $form.serialize(),
-				method: 'POST',
-				beforeSend: function () {
-					$paginationWrap.html("");
+        element.change(function () {
+            $.ajax({
+                'url': location.search ? location.href + '&' + $form.serialize() : location.href + '?' + $form.serialize(),
+                data: $form.serialize(),
+                method: 'POST',
+                beforeSend: function () {
+                    $paginationWrap.html("");
 
-					$catalog.html($('<li>').html($('<img>', {
-						src: '/upload/images/loading.gif'
-					})));
-				},
-				success: function (data) {
+                    $catalog.html($('<li>').html($('<img>', {
+                        src: '/upload/images/loading.gif'
+                    })));
+                },
+                success: function (data) {
 
-					setTimeout(function () {
-						var $page = $(data);
+                    setTimeout(function () {
+                        var $page = $(data);
 
-						$catalog.html("");
+                        $catalog.html("");
 
-						$page.find('.catalog').find('.catalog__item').each(function () {
-							$catalog.append($(this));
-						});
+                        $page.find('.catalog').find('.catalog__item').each(function () {
+                            $catalog.append($(this));
+                        });
 
-						$paginationWrap.html($page.find('.pagination'));
+                        $paginationWrap.html($page.find('.pagination'));
 
-					}, timeout);
+                    }, timeout);
 
-				}
-			});
-		});
+                }
+            });
+        });
 
-	});
+    });
 }
 
 
