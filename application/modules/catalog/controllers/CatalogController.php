@@ -44,9 +44,11 @@ class CatalogController extends Controller
 
         if ($sortValue = Yii::$app->request->get('sort')) $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
 
+        $duplicateQueryProducts = clone $query;
         $filterModel->applyFilter($query);
-        $countQuery = clone $query;
-        $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 12]);
+
+
+        $pagerItems = new Pagination(['totalCount' => $duplicateQueryProducts->count(), 'pageSize' => 12]);
         $pagerItems->pageSizeParam = false;
         $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
 
@@ -79,6 +81,7 @@ class CatalogController extends Controller
         return $this->render('index', [
             'pagerItems' => $pagerItems,
             'products' => $products,
+            'duplicateQueryProducts' => $duplicateQueryProducts,
             'category' => $category,
             'display' => \Yii::$app->request->get('display', 'block'),
         ]);

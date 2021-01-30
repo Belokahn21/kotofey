@@ -49,13 +49,14 @@ $resultArray = [];
                 'class' => 'filter-catalog-checkboxes',
                 'item' => function ($index, $label, $name, $checked, $value) {
                     $isNeedBreak = (strlen($label) > 25 ? "break" : "");
+                    $uniq = substr(md5(rand()), 0, 5);
 
                     $checked = ($checked ? 'checked="checked"' : "");
 
                     return <<<LIST
 <div class="filter-catalog-checkboxes__item $isNeedBreak">
-    <input type="checkbox" $checked value="$value" name="$name" id="filter-chb-$value">
-    <label for="filter-chb-$value"><i class="fas fa-paw" aria-hidden="true"></i>$label</label>
+    <input type="checkbox" $checked value="$value" name="$name" id="filter-chb-$uniq">
+    <label for="filter-chb-$uniq"><i class="fas fa-paw" aria-hidden="true"></i>$label</label>
 </div>
 LIST;
                 }

@@ -1,21 +1,21 @@
 <?php
 
 /* @var $this yii\web\View
- * @var $products \app\modules\catalog\models\entity\Product
+ * @var $products \app\modules\catalog\models\entity\Product[]
  * @var $filterModel CatalogFilter
  * @var $display string
  * @var $category \app\modules\catalog\models\entity\ProductCategory
  */
 
-use yii\helpers\Url;
 use yii\widgets\LinkPager;
 use app\widgets\Breadcrumbs;
+use yii\helpers\ArrayHelper;
 use app\models\tool\seo\Title;
 use app\models\forms\CatalogFilter;
 use app\modules\catalog\models\helpers\CategoryHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
-use app\modules\catalog\widgets\filter\CatalogFilterWidget;
+use app\modules\catalog\widgets\CatalogFilter\CatalogFilterWidget;
 use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
 
 $this->title = Title::show("Зоотовары");
@@ -65,9 +65,8 @@ if ($category) {
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-
             <?= CatalogFilterWidget::widget([
-                'category' => $category
+                'product_id' => ArrayHelper::getColumn($duplicateQueryProducts->all(), 'id'),
             ]); ?>
         </aside>
         <div class="catalog-wrap">
