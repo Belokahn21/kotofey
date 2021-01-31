@@ -101,9 +101,8 @@ if ($category) {
             <?php endif; ?>
         </div>
     </div>
-
     <?php if ($category instanceof ProductCategory): ?>
-        <?= $category->description; ?>
+        <div class="catalog-categories-description"><?= $category->description; ?></div>
     <?php endif; ?>
 </div>
 
