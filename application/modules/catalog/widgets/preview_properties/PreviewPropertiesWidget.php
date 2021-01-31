@@ -25,7 +25,7 @@ class PreviewPropertiesWidget extends Widget
 
         if ($this->product->propsValues) {
             foreach ($this->product->propsValues as $property) {
-                if ($property->property->id == 2) {
+                if ($property->property && $property->property->id == 2) {
                     $properties['Вес'] = $property->value . 'кг';
                 }
             }
