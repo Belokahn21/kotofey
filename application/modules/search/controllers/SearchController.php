@@ -32,6 +32,7 @@ class SearchController extends Controller
         return $this->render('index', [
             'products' => $products,
             'pagerItems' => $pagerItems,
+            'display' => \Yii::$app->request->get('display', 'block'),
             'duplicateQueryProducts' => $duplicateQueryProducts,
         ]);
 

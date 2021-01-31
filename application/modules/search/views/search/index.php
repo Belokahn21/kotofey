@@ -36,11 +36,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
                 <?= ProductSortWidget::widget(); ?>
                 <ul class="catalog">
                     <?php foreach ($products as $product): ?>
-                        <?php if (\Yii::$app->request->get('display') == 'block'): ?>
+                        <?php if ($display == 'block'): ?>
                             <?= $this->render('@app/modules/catalog/views/__item-block', [
                                 'product' => $product
                             ]); ?>
-                        <?php elseif (\Yii::$app->request->get('display') == 'list'): ?>
+                        <?php elseif ($display == 'list'): ?>
                             <?= $this->render('@app/modules/catalog/views/__item-list', [
                                 'product' => $product
                             ]); ?>
