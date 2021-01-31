@@ -30,6 +30,7 @@ class SearchController extends Controller
         }
 
         return $this->render('index', [
+            'model' => $model,
             'products' => $products,
             'pagerItems' => $pagerItems,
             'display' => \Yii::$app->request->get('display', 'block'),
