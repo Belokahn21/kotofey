@@ -43,7 +43,7 @@ class Search extends Model
     public function setFilter(ActiveQuery $products)
     {
         if (!empty($this->search)) {
-            $products->andWhere(['status_id' => Product::STATUS_ACTIVE]);
+//            $products->andWhere(['status_id' => Product::STATUS_ACTIVE]);
 
             $phrase = $this->search;
 

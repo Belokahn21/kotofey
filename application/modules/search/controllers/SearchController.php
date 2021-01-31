@@ -20,23 +20,19 @@ class SearchController extends Controller
         if ($model->load(\Yii::$app->request->get())) {
 
             $query = $model->search();
-            $countQuery = clone $query;
+            $duplicateQueryProducts = clone $query;
 
-            if ($sortValue = \Yii::$app->request->get('sort')) {
-                $query->orderBy(['price' => $sortValue == 'asc' ? SORT_ASC : SORT_DESC]);
-            }
-
+            if ($sortValue = \Yii::$app->request->get('sort')) $query->orderBy(['price' => $sortValue == 'asc' ? SORT_ASC : SORT_DESC]);
             $searchFilter->applyFilter($query);
 
-            $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 21]);
+            $pagerItems = new Pagination(['totalCount' => $query->count(), 'pageSize' => 21]);
             $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
-
         }
 
-        return $this->render('index2', [
+        return $this->render('index', [
             'products' => $products,
             'pagerItems' => $pagerItems,
-            'model' => $model,
+            'duplicateQueryProducts' => $duplicateQueryProducts,
         ]);
 
     }
