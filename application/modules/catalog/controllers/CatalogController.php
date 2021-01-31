@@ -30,18 +30,19 @@ class CatalogController extends Controller
 
         $filterModel = new CatalogFilter();
         $category = ProductCategory::findBySlug($id);
-        $sb = [];
-        if ($category) $sb = $category->subsections();
+        $subSectionsArray = [];
+        if ($category) $subSectionsArray = $category->subsections();
 
 
         if ($id) {
             $query = Product::find()->orderBy(['created_at' => SORT_DESC]);
 
-            if ($sb) $query->where(['category_id' => ArrayHelper::getColumn($sb, 'id')]);
+            if ($subSectionsArray) $query->where(['category_id' => ArrayHelper::getColumn($subSectionsArray, 'id')]);
 
-            $query->andWhere(['status_id' => Product::STATUS_ACTIVE]);
         } else  $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['status_id' => Product::STATUS_ACTIVE]);
 
+
+        $query->andWhere(['status_id' => Product::STATUS_ACTIVE]);
         if ($sortValue = Yii::$app->request->get('sort')) $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
 
         $duplicateQueryProducts = clone $query;

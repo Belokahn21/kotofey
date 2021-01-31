@@ -63,7 +63,7 @@ class CatalogFilter extends Model
             }
 
             $valuesQuery->groupBy('product_id');
-            $valuesQuery->having("count(*) = " . $iter);
+//            $valuesQuery->having("count(*) = " . $iter);
 
             $query->innerJoin(['sq' => $valuesQuery], 'sq.product_id = product.id');
 
