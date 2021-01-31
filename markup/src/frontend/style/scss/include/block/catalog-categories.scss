@@ -56,6 +56,14 @@
     font-weight: 700;
     color: $text-color;
   }
+
+  &__link {
+    color: inherit;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
 }
 
 .catalog-categories-list {
@@ -74,7 +82,7 @@
     transition: color 0.3s ease-out;
 
     &:hover {
-    transition: color 0.2s ease-out;
+      transition: color 0.2s ease-out;
       color: $active-color;
     }
   }

@@ -10,7 +10,9 @@ use app\modules\catalog\models\helpers\CategoryHelper;
             <li class="catalog-categories__item">
                 <div class="catalog-categories__header">
                     <div class="catalog-categories__icon"><img src="<?= CategoryHelper::getImageUrl($category); ?>" alt="<?= $category->name; ?>" title="<?= $category->name; ?>"></div>
-                    <div class="catalog-categories__name"><?= $category->name; ?></div>
+                    <div class="catalog-categories__name">
+                        <a class="catalog-categories__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a>
+                    </div>
                 </div>
 
                 <div class="catalog-categories-list">
