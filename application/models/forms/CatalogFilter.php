@@ -56,7 +56,7 @@ class CatalogFilter extends Model
             if ($this->params) {
                 foreach ($this->params as $propId => $values) {
                     if ($values) {
-                        $valuesQuery->orWhere(['value' => $values, 'property_id' => $propId]);
+                        $valuesQuery->orFilterWhere(['value' => $values, 'property_id' => $propId]);
                         $iter++;
                     }
                 }

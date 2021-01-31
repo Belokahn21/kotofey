@@ -65,9 +65,11 @@ if ($category) {
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-            <?= CatalogFilterWidget::widget([
-                'product_id' => ArrayHelper::getColumn($duplicateQueryProducts->all(), 'id'),
-            ]); ?>
+            <?php if ($category && $category->parent > 0): ?>
+                <?= CatalogFilterWidget::widget([
+                    'product_id' => ArrayHelper::getColumn($duplicateQueryProducts->all(), 'id'),
+                ]); ?>
+            <?php endif; ?>
         </aside>
         <div class="catalog-wrap">
 
