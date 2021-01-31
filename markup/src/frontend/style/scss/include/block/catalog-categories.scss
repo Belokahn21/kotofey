@@ -106,20 +106,22 @@
       margin: 0 0 15px 0;
     }
 
-    .ul {
+    ul {
       display: block !important;
       margin: 0 0 15px 25px !important;
       padding: 0 !important;
     }
 
-    .ul ul {
+    ul ul {
       margin-top: 15px !important;
     }
 
-    .ul li {
+    ul li {
       list-style: outside disc !important;
       margin: 0 0 10px 0 !important;
     }
+
+
   }
 }
 
