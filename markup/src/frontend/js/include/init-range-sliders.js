@@ -19,8 +19,8 @@ $(".filter-catalog__range").ionRangeSlider({
     hide_min_max: true,
     hide_from_to: true,
     onStart: function (data) {
-        inputs[0].value = data.from;
-        inputs[1].value = data.to;
+        // inputs[0].value = data.from;
+        // inputs[1].value = data.to;
     },
     onChange: function (data) {
         inputs[0].value = data.from;
