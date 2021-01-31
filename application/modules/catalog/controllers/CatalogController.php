@@ -49,7 +49,7 @@ class CatalogController extends Controller
         $filterModel->applyFilter($query);
 
 
-        $pagerItems = new Pagination(['totalCount' => $duplicateQueryProducts->count(), 'pageSize' => 12]);
+        $pagerItems = new Pagination(['totalCount' => $query->count(), 'pageSize' => 12]);
         $pagerItems->pageSizeParam = false;
         $products = $query->offset($pagerItems->offset)->limit($pagerItems->limit)->all();
 
