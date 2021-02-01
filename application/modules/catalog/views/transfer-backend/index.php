@@ -23,7 +23,6 @@ $this->title = Title::show('Поступления товаров');
         <h1>Поступления товаров</h1>
     </div>
 <?php $form = ActiveForm::begin([
-    'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
 <?= $this->render('_form', [
