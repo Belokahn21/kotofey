@@ -16,9 +16,9 @@ class ProductTransferHistoryForm extends ProductTransferHistory
     public function rules()
     {
         return [
-            [['product_id', 'reason', 'count', 'user_id'], 'required'],
+            [['product_id', 'reason', 'count'], 'required'],
             [['count'], 'default', 'value' => 0],
-            [['user_id'], 'default', 'value' => \Yii::$app->user->id],
+            [['user_id'], 'default', 'value' => \Yii::$app->user->identity->id],
             [['product_id', 'order_id', 'created_at', 'updated_at', 'count', 'user_id'], 'integer'],
             [['reason'], 'string', 'max' => 255],
         ];

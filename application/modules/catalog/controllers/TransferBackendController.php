@@ -3,6 +3,7 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\site\models\tools\Debug;
 use Yii;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\ProductTransferHistoryForm;
@@ -27,6 +28,9 @@ class TransferBackendController extends MainBackendController
                 if ($model->validate() && $model->save()) {
                     Alert::setSuccessNotify('Элемент успешно добавлен.');
                     return $this->refresh();
+                }else{
+                    Debug::p($model->getErrors());
+                    exit();
                 }
             }
         }
