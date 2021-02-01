@@ -18,7 +18,7 @@ use yii\helpers\ArrayHelper;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <?= $form->field($model, 'count'); ?>
         <?= $form->field($model, 'reason'); ?>
-        <?= $form->field($model, 'order_id')->dropDownList(ArrayHelper::map($orders, 'id', 'id'), ['prompt' => 'По заказу']); ?>
-        <?= $form->field($model, 'product_id')->dropDownList(ArrayHelper::map($products, 'id', 'name'), ['prompt' => 'Товар']); ?>
+        <?= $form->field($model, 'order_id')->textInput(); ?>
+        <?= $form->field($model, 'product_id')->textInput(); ?>
     </div>
 </div>
