@@ -3,7 +3,7 @@
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\compare\models\entity\Compare;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 
 /* @var $this \yii\web\View */
 

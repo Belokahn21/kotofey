@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\tool\seo\og;
+namespace app\modules\seo\models\tools\og;
 
 
 class OpenGraphProduct

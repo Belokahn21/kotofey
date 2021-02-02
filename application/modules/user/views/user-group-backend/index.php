@@ -5,7 +5,7 @@
 /* @var $model \app\modules\rbac\models\entity\AuthItem */
 
 use app\modules\rbac\models\entity\AuthItemChild;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;

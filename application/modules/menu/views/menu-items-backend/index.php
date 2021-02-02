@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\menu\models\entity\Menu;
 
 /* @var $model \app\modules\menu\models\entity\MenuItem

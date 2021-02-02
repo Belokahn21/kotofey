@@ -7,7 +7,7 @@
 
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 

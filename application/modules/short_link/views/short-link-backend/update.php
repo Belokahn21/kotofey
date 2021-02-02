@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 
 /* @var $this \yii\web\View */

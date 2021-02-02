@@ -3,8 +3,8 @@
 namespace app\modules\catalog\controllers;
 
 use Yii;
-use app\models\forms\CatalogFilter;
-use app\models\tool\seo\Attributes;
+use app\modules\catalog\models\form\CatalogFilter;
+use app\modules\seo\models\tools\Attributes;
 use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;

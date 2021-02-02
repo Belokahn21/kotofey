@@ -2,7 +2,7 @@
 
 namespace app\modules\site\controllers;
 
-use app\models\tool\seo\Attributes;
+use app\modules\seo\models\tools\Attributes;
 use app\modules\site\models\tools\System;
 use app\modules\order\models\service\NotifyService;
 use app\modules\site\models\forms\GrumingForm;

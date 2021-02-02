@@ -2,7 +2,7 @@
 
 use yii\helpers\Url;
 use app\widgets\Breadcrumbs;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 
 /* @var $model \app\modules\vacancy\models\entity\Vacancy */
 

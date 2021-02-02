@@ -4,7 +4,7 @@
 
 /* @var $model \app\modules\rbac\models\entity\AuthItem */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;

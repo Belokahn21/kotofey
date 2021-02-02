@@ -2,7 +2,7 @@
 
 /* @var $models \app\modules\promotion\models\entity\Promotion[] */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use app\modules\promotion\models\helpers\PromotionHelper;

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\vacancy\models\helpers\VacancyHelper;
 
 /* @var $models \app\modules\vacancy\models\entity\Vacancy[] */

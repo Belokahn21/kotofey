@@ -2,7 +2,7 @@
 
 /* @var $this yii\web\View
  * @var $products \app\modules\catalog\models\entity\Product[]
- * @var $filterModel CatalogFilter
+ * @var $filterModel \app\modules\catalog\models\form\CatalogFilter
  * @var $display string
  * @var $category \app\modules\catalog\models\entity\ProductCategory
  */
@@ -10,8 +10,8 @@
 use yii\widgets\LinkPager;
 use app\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
-use app\models\tool\seo\Title;
-use app\models\forms\CatalogFilter;
+use app\modules\seo\models\tools\Title;
+use app\modules\catalog\models\form\CatalogFilter;
 use app\modules\catalog\models\helpers\CategoryHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;

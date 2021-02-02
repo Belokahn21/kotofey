@@ -2,7 +2,7 @@
 
 use app\modules\catalog\models\entity\SaveInformers;
 use app\modules\catalog\models\entity\TypeProductProperties;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;

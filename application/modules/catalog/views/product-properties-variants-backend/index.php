@@ -1,6 +1,6 @@
 <?php
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;

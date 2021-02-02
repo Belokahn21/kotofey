@@ -3,7 +3,7 @@
  * @var $model \app\modules\promocode\models\entity\Promocode
  */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 

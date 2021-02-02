@@ -3,7 +3,7 @@
 namespace app\modules\catalog\widgets\CatalogFilter;
 
 use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\models\forms\CatalogFilter;
+use app\modules\catalog\models\form\CatalogFilter;
 use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
 

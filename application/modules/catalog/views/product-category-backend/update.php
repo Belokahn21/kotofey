@@ -2,7 +2,7 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\helpers\Url;
 
 /* @var $categories \app\modules\catalog\models\entity\ProductCategory[] */

@@ -3,7 +3,7 @@
 use app\modules\order\widgets\call_center\CallCenterWidget;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\helpers\Url;
 
 /* @var $users \app\modules\user\models\entity\User[]

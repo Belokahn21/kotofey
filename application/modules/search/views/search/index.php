@@ -5,7 +5,7 @@ use app\modules\catalog\widgets\CatalogFilter\CatalogFilterWidget;
 use app\modules\search\widges\SearchMessage\SearchMessageWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\helpers\ArrayHelper;
 use app\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;

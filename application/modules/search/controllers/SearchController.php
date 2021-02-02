@@ -2,7 +2,7 @@
 
 namespace app\modules\search\controllers;
 
-use app\models\forms\CatalogFilter;
+use app\modules\catalog\models\form\CatalogFilter;
 use yii\web\Controller;
 use yii\data\Pagination;
 use app\modules\search\models\entity\Search;

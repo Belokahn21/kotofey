@@ -4,7 +4,7 @@
  */
 
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
 
 $this->params['breadcrumbs'][] = ['label' => 'Бренды', 'url' => ['/catalog/brand/index']];

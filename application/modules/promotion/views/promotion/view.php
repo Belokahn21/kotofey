@@ -5,7 +5,7 @@
  * @var $this \yii\web\View
  */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\helpers\Html;
 use app\widgets\Breadcrumbs;
 use app\modules\promotion\models\helpers\PromotionHelper;

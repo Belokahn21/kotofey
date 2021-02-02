@@ -19,7 +19,7 @@ use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use app\modules\site\models\tools\Currency;
 use app\widgets\Breadcrumbs;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\order\models\entity\Order;
 use app\modules\basket\models\entity\Basket;
 use app\modules\payment\models\entity\Payment;

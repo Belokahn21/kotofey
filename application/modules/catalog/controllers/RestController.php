@@ -12,7 +12,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\rest\ActiveController;
 use yii\data\ActiveDataProvider;
-use app\models\forms\CatalogFilter;
+use app\modules\catalog\models\form\CatalogFilter;
 use app\modules\catalog\models\entity\Product;
 use yii\rest\Controller;
 

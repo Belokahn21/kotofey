@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 
 $this->params['breadcrumbs'][] = ['label' => 'Авторизация', 'url' => ['/signin/']];
 /* @var $model \app\modules\user\models\entity\User */

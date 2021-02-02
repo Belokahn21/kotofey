@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\forms;
+namespace app\modules\catalog\models\form;
 
 
 use app\modules\catalog\models\entity\PropertiesProductValues;

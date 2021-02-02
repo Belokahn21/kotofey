@@ -4,7 +4,7 @@
  * @var $console \app\modules\site\models\forms\ConsoleForm
  */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;

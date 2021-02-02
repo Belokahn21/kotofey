@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\site_settings\models\entity\SiteSettings;
 use yii\helpers\Url;
 use app\widgets\Breadcrumbs;

@@ -1,6 +1,6 @@
 <?php
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\statistic\widgets\StatisticWidget;
 use app\modules\site\widgets\ModuleMenu\ModuleMenuWidget;
 

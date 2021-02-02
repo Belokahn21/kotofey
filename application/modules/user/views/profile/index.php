@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 use app\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
 use app\modules\site\models\tools\Currency;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\pets\models\entity\Animal;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\bonus\models\helper\BonusHelper;

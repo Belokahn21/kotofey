@@ -3,7 +3,7 @@
 use app\modules\news\models\entity\NewsCategory;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 

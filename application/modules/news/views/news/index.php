@@ -4,7 +4,7 @@
  * @var $categories \app\modules\news\models\entity\NewsCategory[]
  */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
 use app\modules\news\models\tools\NewsHelper;
 

@@ -5,7 +5,7 @@
  * Time: 23:14
  */
 
-namespace app\models\tool\seo;
+namespace app\modules\seo\models\tools;
 
 
 class Attributes

@@ -1,7 +1,7 @@
 <?php
 /* @var $this yii\web\View */
 
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\site\models\tools\Price;
 use app\modules\site\models\tools\Currency;
 use app\modules\favorite\models\entity\Favorite;

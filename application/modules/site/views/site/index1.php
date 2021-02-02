@@ -12,7 +12,7 @@ use app\modules\order\widgets\many_purchase\ManyPurchasedGoods;
 use app\modules\catalog\widgets\CanNowBuy\CanNowBuyWidget;
 use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site\widgets\Gruming\GrumingWidget;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 
 $this->title = Title::show("Зоотовары для животных в Барнауле");
 ?>

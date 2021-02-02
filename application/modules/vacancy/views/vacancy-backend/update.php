@@ -5,7 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\vacancy\models\entity\Vacancy */

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /* @var $values \app\modules\catalog\models\entity\PropertiesProductValues[] */
-/* @var $filterModel \app\models\forms\CatalogFilter */
+/* @var $filterModel \app\modules\catalog\models\form\CatalogFilter */
 
 $resultArray = [];
 ?>

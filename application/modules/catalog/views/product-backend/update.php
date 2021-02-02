@@ -1,7 +1,7 @@
 <?php
 
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 

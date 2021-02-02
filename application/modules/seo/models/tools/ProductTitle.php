@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\models\tool\seo;
+namespace app\modules\seo\models\tools;
 
 
 class ProductTitle extends Title

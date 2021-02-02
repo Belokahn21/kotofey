@@ -2,7 +2,7 @@
 
 use yii\helpers\Json;
 use app\widgets\Breadcrumbs;
-use app\models\tool\seo\ProductTitle;
+use app\modules\seo\models\tools\ProductTitle;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;

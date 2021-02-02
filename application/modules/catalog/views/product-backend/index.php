@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductCategory;

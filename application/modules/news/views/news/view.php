@@ -5,7 +5,7 @@
 
 use app\modules\news\models\tools\NewsHelper;
 use app\modules\news\models\entity\NewsCategory;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
 
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/']];

@@ -6,7 +6,7 @@ use app\modules\promo\models\entity\Promo;
 use app\modules\user\models\entity\User;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Price;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;

@@ -3,7 +3,7 @@
 use app\modules\catalog\models\entity\Product;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use app\modules\catalog\models\entity\ProductCategory;
 use yii\grid\GridView;
 use yii\helpers\Url;

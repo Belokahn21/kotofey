@@ -2,7 +2,7 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\models\tool\seo\Title;
+use app\modules\seo\models\tools\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use app\modules\order\models\helpers\OrderHelper;
