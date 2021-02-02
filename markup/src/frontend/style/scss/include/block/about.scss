@@ -12,3 +12,24 @@
     color: white;
   }
 }
+
+.about {
+  &-text {
+    text-align: justify;
+
+    p {
+      margin-bottom: 10px;
+      float: left;
+
+    }
+
+    .slider {
+      width: 30%;
+      float: right;
+
+      img {
+        width: 100%;
+      }
+    }
+  }
+}

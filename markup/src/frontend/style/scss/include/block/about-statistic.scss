@@ -1,0 +1,33 @@
+.about-statistic {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+
+  &__item {
+    width: 30%;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+    margin: 10px;
+    padding: 40px;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+  }
+
+  &__title {
+    font-size: 19.2px;
+    font-weight: 900;
+    text-transform: uppercase;
+  }
+
+  &__sub-title {
+    font-size: 14px;
+    line-height: 40px;
+    font-weight: 700;
+  }
+}
