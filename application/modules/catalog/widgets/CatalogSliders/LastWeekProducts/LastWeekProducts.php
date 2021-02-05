@@ -13,7 +13,7 @@ class LastWeekProducts extends Widget
 {
     public $view = 'default';
     public $cacheTime = 3600 * 7 * 24;
-    public $limit = 10;
+    public $limit = 20;
 
     public function run()
     {
