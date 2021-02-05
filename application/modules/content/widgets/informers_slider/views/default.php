@@ -9,7 +9,7 @@ use app\modules\content\widgets\informers_slider\model\helper\FilterBuildHelper;
 ?>
 <?php if ($this->beginCache('providers-cache', ['duration' => 3600 * 24 * 7])): ?>
     <div class="page-title__group">
-        <h2 class="page-title">Категории</h2>
+        <h2 class="page-title">Бренды товаров</h2>
         <a class="page-title__link" href="<?= Url::to(['/catalog/']) ?>">Весь каталог</a>
     </div>
     <div class="category-slider-outter">
