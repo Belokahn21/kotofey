@@ -17,7 +17,7 @@ class InformerSliderWidget extends Widget
         $cache = \Yii::$app->cache;
 
         $providers = $cache->getOrSet($this->cacheKey, function () {
-            return PropertiesVariants::find()->select(['id', 'name', 'media_id','link'])->where(['is_active' => true, 'property_id' => 1])->all();
+            return PropertiesVariants::find()->select(['id', 'name', 'media_id', 'link', 'property_id'])->where(['is_active' => true, 'property_id' => 1])->all();
         }, $this->cacheTime);
 
         return $this->render($this->template, [

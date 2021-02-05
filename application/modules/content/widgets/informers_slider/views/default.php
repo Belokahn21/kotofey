@@ -1,10 +1,10 @@
 <?php
 
 use yii\helpers\Url;
-use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
+use app\modules\content\widgets\informers_slider\model\helper\FilterBuildHelper;
 
-/* @var $providers \yii\db\ActiveQuery */
+/* @var $providers \app\modules\catalog\models\entity\PropertiesVariants[] */
 
 ?>
 <?php if ($this->beginCache('providers-cache', ['duration' => 3600 * 24 * 7])): ?>
@@ -19,7 +19,7 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
                     <div class="swiper-slide category-slider__slide">
                         <div class="category-slider__info">
                             <div class="category-slider__title">
-                                <a class="category-slider__link" href="<?= $provider->link; ?>"><?= $provider->name; ?></a>
+                                <a class="category-slider__link" href="/catalog/?<?= FilterBuildHelper::buildSearchQuery($provider); ?>"><?= $provider->name; ?></a>
                             </div>
                             <div class="category-slider__label">
                                 <?php /* Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
