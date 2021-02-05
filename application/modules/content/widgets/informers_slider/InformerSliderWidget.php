@@ -11,6 +11,7 @@ class InformerSliderWidget extends Widget
     public $template = 'default';
     public $cacheTime = 3600 * 24 * 7;
     public $cacheKey = 'informersSlider';
+    public $title = 'Бренды товаров';
 
     public function run()
     {
@@ -21,7 +22,8 @@ class InformerSliderWidget extends Widget
         }, $this->cacheTime);
 
         return $this->render($this->template, [
-            'providers' => $providers
+            'providers' => $providers,
+            'title' => $this->title
         ]);
     }
 }

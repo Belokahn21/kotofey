@@ -4,12 +4,14 @@ use yii\helpers\Url;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\content\widgets\informers_slider\model\helper\FilterBuildHelper;
 
-/* @var $providers \app\modules\catalog\models\entity\PropertiesVariants[] */
+/* @var $providers \app\modules\catalog\models\entity\PropertiesVariants[]
+ * @var $title string
+ */
 
 ?>
 <?php if ($this->beginCache('providers-cache', ['duration' => 3600 * 24 * 7])): ?>
     <div class="page-title__group">
-        <h2 class="page-title">Бренды товаров</h2>
+        <h2 class="page-title"><?= $title; ?></h2>
         <a class="page-title__link" href="<?= Url::to(['/catalog/']) ?>">Весь каталог</a>
     </div>
     <div class="category-slider-outter">
