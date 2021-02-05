@@ -81,12 +81,7 @@ class SiteController extends Controller
             }
         }
 
-
-        if (Debug::isPageSpeed()) {
-            return $this->render('index1');
-        } else {
-            return $this->render('index');
-        }
+        return $this->render('index');
     }
 
     public function actionError()

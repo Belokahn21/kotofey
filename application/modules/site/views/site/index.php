@@ -20,8 +20,8 @@ $this->title = Title::show("Зоотовары для животных в Бар
 <div class="page-container">
     <?= SliderWidget::widget(['slider_id' => 1]) ?>
     <?php //= CanNowBuyWidget::widget() ?>
-    <?= InformerSliderWidget::widget(); ?>
     <?= ManyPurchasedGoods::widget(); ?>
+    <?= InformerSliderWidget::widget(); ?>
     <?= DiscountItemsWidget::widget(); ?>
     <div class="page-title__group">
         <h2 class="page-title">Интернет магазин для животных</h2><a class="page-title__link" href="/about/">Читать дальше</a>
