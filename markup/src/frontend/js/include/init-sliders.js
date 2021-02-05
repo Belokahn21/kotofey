@@ -207,3 +207,11 @@ let swiperMiniSliderContainer = new Swiper('.mini-slider-container', {
         delay: 5000,
     },
 });
+
+
+let aboutSliderContainer = new Swiper('.about-swiper-container', {
+    pagination: {
+        el: '.about-swiper-pagination',
+        dynamicBullets: true,
+    },
+});

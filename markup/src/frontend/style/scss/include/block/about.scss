@@ -30,5 +30,19 @@
     img {
       width: 100%;
     }
+
+    .about-swiper-pagination {
+      width: 100% !important;
+      position: relative;
+      padding: 10px 0;
+
+      .swiper-pagination-bullet {
+        margin: 0 5px;
+
+        &-active {
+          background: $active-color;
+        }
+      }
+    }
   }
 }
