@@ -5,7 +5,7 @@ use app\modules\site\models\tools\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
-use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
+use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 
 /* @var $models \app\modules\catalog\models\entity\Product[]
  * @var $informersValues \app\modules\catalog\models\entity\SaveInformersValues[]

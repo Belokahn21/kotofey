@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\catalog\widgets\preview_properties;
+namespace app\modules\catalog\widgets\PreviewProperties;
 
 
 use app\modules\catalog\models\entity\Product;
