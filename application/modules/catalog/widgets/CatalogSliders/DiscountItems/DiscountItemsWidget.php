@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\catalog\widgets\DiscountItems;
+namespace app\modules\catalog\widgets\CatalogSliders\DiscountItems;
 
 
+use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
-use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
@@ -15,52 +15,33 @@ class DiscountItemsWidget extends Widget
 {
     public $view = 'default';
     public $cacheTime = 3600 * 24 * 7;
+    public $limit = 20;
 
     public function run()
     {
-        if (!Debug::isPageSpeed()) {
-            $cache = \Yii::$app->cache;
-            $formatArray = array();
+        $limit = $this->limit;
 
-            $models = $cache->getOrSet('discountProducts', function () {
-                return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article', 'status_id'])
-                    ->andWhere(['in', 'id', ArrayHelper::getColumn(PromotionProductMechanics::find()->joinWith('promotion')->andWhere([
-                        'or',
-                        'promotion.start_at = :default and promotion.end_at = :default',
-                        'promotion.start_at is null and promotion.end_at is null',
-                        'promotion.start_at < :now and promotion.end_at > :now'
+        $models = \Yii::$app->cache->getOrSet('discountProducts', function () use ($limit) {
+            return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article', 'status_id'])
+                ->andWhere(['in', 'id', ArrayHelper::getColumn(PromotionProductMechanics::find()->joinWith('promotion')->andWhere([
+                    'or',
+                    'promotion.start_at = :default and promotion.end_at = :default',
+                    'promotion.start_at is null and promotion.end_at is null',
+                    'promotion.start_at < :now and promotion.end_at > :now'
+                ])
+                    ->addParams([
+                        ":now" => time(),
+                        ":default" => 0,
                     ])
-                        ->addParams([
-                            ":now" => time(),
-                            ":default" => 0,
-                        ])
-                        ->all(), 'product_id')])
-                    ->all();
-            }, $this->cacheTime);
+                    ->all(), 'product_id')])
+                ->limit($limit)
+                ->all();
+        }, $this->cacheTime);
 
-
-            $formatArray = [];
-//            foreach ($models as $model) {
-//                $brand = $this->getBrandProperty($model->id);
-//                $action = $this->getDiscountProperty($model->id);
-//
-//
-//                if ($brand) {
-//                    $formatArray['brands'][$brand['id']] = $brand;
-//                }
-//
-//                if ($action) {
-//                    $formatArray['actions'][$brand['id']][$action['id']] = $action;
-//                }
-//
-//            }
-
-            return $this->render($this->view, [
-                'models' => $models,
-                'formatArray' => $formatArray
-            ]);
-
-        }
+        return RenderSliderWidget::widget([
+            'models' => $models,
+            'title' => 'Выгодные предложения',
+        ]);
     }
 
     public function getBrandProperty($product_id)

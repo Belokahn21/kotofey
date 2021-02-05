@@ -7,7 +7,7 @@ use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
-use app\modules\catalog\widgets\Recomended\RecomendedWidget;
+use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 

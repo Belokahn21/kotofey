@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\catalog\widgets\CanNowBuy;
+namespace app\modules\catalog\widgets\CatalogSliders\CanNowBuy;
 
 
 use app\modules\catalog\models\entity\Product;

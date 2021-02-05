@@ -10,20 +10,34 @@ use app\modules\catalog\widgets\preview_properties\PreviewPropertiesWidget;
  * @var $this \yii\web\View
  * @var $title string
  * @var $subTitle string
+ * @var $link string
+ * @var $linkTitle string
  */
 
 ?>
 <?php if ($models): ?>
-    <?php if ($this->beginCache('delivery-now', ['duration' => 3600 * 24 * 7])): ?>
-        <div class="page-title__group is-column">
+    <?php if ($this->beginCache(md5($title), ['duration' => 3600 * 24 * 7])): ?>
+        <div class="page-title__group">
             <h2 class="page-title"><?= $title; ?></h2>
-            <div class="page-title__note"><?= $subTitle; ?></div>
+
+            <?php if (!empty($subTitle)): ?>
+                <div class="page-title__note"><?= $subTitle; ?></div>
+            <?php endif; ?>
+
+            <?php if (!empty($link) && !empty($linkTitle)): ?>
+                <a class="page-title__link" href="<?= $link; ?>"><?= $linkTitle; ?></a>
+            <?php endif; ?>
         </div>
         <div class="swiper-container vitrine-container">
             <div class="swiper-wrapper vitrine-wrapper">
 
                 <?php foreach ($models as $model): ?>
                     <div class="swiper-slide vitrine__slide">
+
+                        <?php if ($percent = ProductHelper::getPercent($model)): ?>
+                            <div class="discount">- <?= $percent; ?>%</div>
+                        <?php endif; ?>
+
                         <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, false, ['width' => 250, 'height' => 300, 'crop' => 'fit']); ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
                         <div class="swiper-lazy-preloader"></div>
                         <div class="vitrine__title">

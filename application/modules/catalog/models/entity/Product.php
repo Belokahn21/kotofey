@@ -13,6 +13,7 @@ use yii\behaviors\SluggableBehavior;
 use yii\helpers\Json;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
+use function foo\func;
 
 /**
  * Product model
@@ -394,21 +395,23 @@ class Product extends \yii\db\ActiveRecord
 
     public function getDiscountPrice()
     {
-        if ($action = PromotionProductMechanics::find()->where(['product_id' => $this->id])->joinWith('promotion')->andWhere([
-            'or',
-            'promotion.start_at = :default and promotion.end_at = :default',
-            'promotion.start_at is null and promotion.end_at is null',
-            'promotion.start_at < :now and promotion.end_at > :now'
-        ])
-            ->addParams([
-                ":now" => time(),
-                ":default" => 0,
+
+        $action = \Yii::$app->cache->getOrSet('PromotionProductMechanics-' . $this->id, function () {
+            return PromotionProductMechanics::find()->where(['product_id' => $this->id])->joinWith('promotion')->andWhere([
+                'or',
+                'promotion.start_at = :default and promotion.end_at = :default',
+                'promotion.start_at is null and promotion.end_at is null',
+                'promotion.start_at < :now and promotion.end_at > :now'
             ])
-            ->one()) {
+                ->addParams([
+                    ":now" => time(),
+                    ":default" => 0,
+                ])
+                ->one();
+        });
 
 
-            $this->discount_price = round($this->price - ($this->price * ($action->amount / 100)));
-        }
+        if ($action) $this->discount_price = round($this->price - ($this->price * ($action->amount / 100)));
 
         return $this->discount_price;
     }

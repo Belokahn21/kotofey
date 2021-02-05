@@ -6,10 +6,10 @@
 
 use app\modules\content\widgets\informers_slider\InformerSliderWidget;
 use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
-use app\modules\catalog\widgets\LastWeekProducts\LastWeekProducts;
-use app\modules\catalog\widgets\DiscountItems\DiscountItemsWidget;
+use app\modules\catalog\widgets\CatalogSliders\LastWeekProducts\LastWeekProducts;
+use app\modules\catalog\widgets\CatalogSliders\DiscountItems\DiscountItemsWidget;
 use app\modules\order\widgets\many_purchase\ManyPurchasedGoods;
-use app\modules\catalog\widgets\CanNowBuy\CanNowBuyWidget;
+use app\modules\catalog\widgets\CatalogSliders\CanNowBuy\CanNowBuyWidget;
 use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site\widgets\Gruming\GrumingWidget;

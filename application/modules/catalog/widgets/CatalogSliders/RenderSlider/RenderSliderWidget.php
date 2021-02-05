@@ -9,8 +9,10 @@ class RenderSliderWidget extends Widget
 {
     public $view = 'default';
     public $models = [];
-    public $title = "";
+    public $title;
     public $subTitle = "";
+    public $link = "";
+    public $linkTitle = "";
 
     public function run()
     {
@@ -18,6 +20,8 @@ class RenderSliderWidget extends Widget
             'models' => $this->models,
             'title' => $this->title,
             'subTitle' => $this->subTitle,
+            'link' => $this->link,
+            'linkTitle' => $this->linkTitle,
         ]);
     }
 }

@@ -1,9 +1,10 @@
 <?php
 
 
-namespace app\modules\catalog\widgets\LastWeekProducts;
+namespace app\modules\catalog\widgets\CatalogSliders\LastWeekProducts;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use app\modules\site\models\tools\Debug;
 use yii\bootstrap\Widget;
 use yii\caching\DbDependency;
@@ -25,8 +26,11 @@ class LastWeekProducts extends Widget
             'sql' => 'select count(*) from `product` where created_at BETWEEN ' . (time() - 604800) . ' AND ' . time() . ' limit ' . $limit . ';'
         ]));
 
-        return $this->render($this->view, [
-            'models' => $models
+        return RenderSliderWidget::widget([
+            'models' => $models,
+            'title' => 'Новинки недели',
+            'link' => '/catalog/',
+            'linkTitle' => 'Все предложения',
         ]);
     }
 }
