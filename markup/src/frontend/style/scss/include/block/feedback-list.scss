@@ -1,0 +1,15 @@
+.feedback-list {
+
+  &-list {
+    padding: 10px;
+    margin: 5px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+
+    &__input {
+      width: 100%;
+      margin: 10px 0;
+      border: 1px silver solid;
+      padding: 5px;
+    }
+  }
+}

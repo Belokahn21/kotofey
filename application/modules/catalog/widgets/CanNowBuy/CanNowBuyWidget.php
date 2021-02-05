@@ -4,6 +4,7 @@ namespace app\modules\catalog\widgets\CanNowBuy;
 
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use yii\base\Widget;
 
 class CanNowBuyWidget extends Widget
@@ -11,15 +12,25 @@ class CanNowBuyWidget extends Widget
     public $view = 'default';
     public $cacheTime = 3600 * 24 * 7;
     public $cacheKey = 'cannowbuywidget';
+    public $limit = 20;
 
     public function run()
     {
-        $models = \Yii::$app->cache->getOrSet($this->cacheKey, function () {
-            return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'article', 'count', 'slug', 'status_id'])->where(['>', 'count', 0])->andWhere(['status_id' => Product::STATUS_ACTIVE])->all();
+        $limit = $this->limit;
+
+        $models = \Yii::$app->cache->getOrSet($this->cacheKey, function () use ($limit) {
+            return Product::find()
+                ->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'article', 'count', 'slug', 'status_id'])
+                ->where(['>', 'count', 0])
+                ->limit($limit)
+                ->andWhere(['status_id' => Product::STATUS_ACTIVE])
+                ->all();
         }, $this->cacheTime);
 
-        return $this->render($this->view, [
-            'models' => $models
+        return RenderSliderWidget::widget([
+            'models' => $models,
+            'title' => 'Доставим сегодня!',
+            'subTitle' => 'Товары ниже — сейчас в наличии!',
         ]);
     }
 }
