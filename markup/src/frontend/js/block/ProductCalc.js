@@ -26,7 +26,9 @@ class ProductCalcForm {
         if (this.form) this.form.onsubmit = this.submitForm.bind(this);
         if (this.plusElement) this.plusElement.onclick = this.plus.bind(this);
         if (this.minusElement) this.minusElement.onclick = this.minus.bind(this);
+        if (this.amountElement) this.amountElement.onchange = this.submitForm.bind(this);
     }
+
 
     plus(e) {
         this.updateAmount(1);

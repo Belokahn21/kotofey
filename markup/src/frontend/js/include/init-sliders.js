@@ -88,7 +88,7 @@ let swiperChoose = new Swiper('.vitrine-container', {
         }
     },
     pagination: {
-        el: '.swiper-pagination',
+        el: '.vitrine-swiper-pagination',
         dynamicBullets: true,
         clickable: true,
     },
@@ -207,8 +207,6 @@ let swiperMiniSliderContainer = new Swiper('.mini-slider-container', {
         delay: 5000,
     },
 });
-
-
 let aboutSliderContainer = new Swiper('.about-swiper-container', {
     pagination: {
         el: '.about-swiper-pagination',

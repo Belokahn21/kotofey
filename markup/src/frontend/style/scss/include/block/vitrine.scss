@@ -2,14 +2,21 @@
   &-container {
     margin: 20px 0 40px 0;
 
-    @media (min-width: 414px) {
-      .swiper-pagination {
-        display: none;
-      }
-    }
+    .vitrine-swiper-pagination {
+      margin-top: 30px;
+      position: relative;
+      width: 100%;
 
-    .swiper-pagination-bullet-active {
-      background: black;
+      @media (max-width: 450px) {
+        margin-top: 0;
+      }
+
+      .swiper-pagination-bullet {
+        background: $active-color;
+
+        &-active {
+        }
+      }
     }
   }
 

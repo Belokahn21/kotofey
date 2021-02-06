@@ -63,7 +63,7 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
                 <?php endforeach; ?>
 
             </div>
-            <div class="swiper-pagination"></div>
+            <div class="vitrine-swiper-pagination"></div>
         </div>
         <?php $this->endCache(); endif; ?>
 <?php endif; ?>
