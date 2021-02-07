@@ -35,16 +35,16 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' 
             <div class="about-statistic__title">более <?= Order::find()->select('phone')->groupBy(['phone'])->count(); ?> счастливых клиентов</div>
         </div>
         <div class="about-statistic__item">
-            <div class="about-statistic__title">Самая быстрая доставка</div>
+            <div class="about-statistic__title">доставка в удобное время</div>
             <div class="about-statistic__sub-title">доставляем за 1 час</div>
         </div>
         <div class="about-statistic__item">
-            <div class="about-statistic__title">1 год на рынке</div>
-            <div class="about-statistic__sub-title">работаем с 31.12.2020</div>
+            <div class="about-statistic__title">1 склад</div>
+            <div class="about-statistic__sub-title">возможен самовывоз</div>
         </div>
         <div class="about-statistic__item">
-            <div class="about-statistic__title">1 год на рынке</div>
-            <div class="about-statistic__sub-title">работаем с 31.12.2020</div>
+            <div class="about-statistic__title">бонусы за покупку</div>
+            <div class="about-statistic__sub-title">система лояльности с повышением уровня</div>
         </div>
     </div>
     <div class="container">
