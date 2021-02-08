@@ -9,8 +9,10 @@ use yii\helpers\Url;
 
 $this->title = Title::show("Раздел: " . $model->name); ?>
 <section>
-    <h1 class="title">Раздел: <?= $model->name; ?></h1>
-    <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>
+    <div class="title-group">
+        <h1 class="title">Раздел: <?= $model->name; ?></h1>
+        <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>
+    </div>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $this->render('_form', [
         'form' => $form,
