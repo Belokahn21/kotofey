@@ -9,19 +9,16 @@ use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
 use app\modules\catalog\widgets\CatalogSliders\LastWeekProducts\LastWeekProducts;
 use app\modules\catalog\widgets\CatalogSliders\DiscountItems\DiscountItemsWidget;
 use app\modules\catalog\widgets\CatalogSliders\many_purchase\ManyPurchasedGoods;
-use app\modules\catalog\widgets\CatalogSliders\CanNowBuy\CanNowBuyWidget;
 use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site\widgets\Gruming\GrumingWidget;
 use app\modules\seo\models\tools\Title;
+use app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget;
 
 $this->title = Title::show("Зоотовары для животных в Барнауле");
 ?>
 <div class="page-container">
-    <?= SliderWidget::widget(['slider_id' => 1]) ?>
-    <?php if (Yii::$app->user->identity->id == 1): ?>
-        <?= \app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget::widget(['sliderId' => 1]) ?>
-    <?php endif; ?>
+    <?= CombineSliderWidget::widget(['sliderId' => 1]) ?>
     <?php //= CanNowBuyWidget::widget() ?>
     <?= ManyPurchasedGoods::widget(); ?>
     <?= InformerSliderWidget::widget(); ?>
