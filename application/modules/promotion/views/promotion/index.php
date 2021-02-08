@@ -26,7 +26,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Скидки и акции', 'url'
             <?php foreach ($models as $model): ?>
                 <a href="<?= PromotionHelper::getDetailUrl($model); ?>" class="promotion-list__item">
                     <?php if ($model->media): ?>
-                        <?= Html::img(\Yii::$app->CDN->resizeImage($model->media->cdnData['public_id']), [
+                        <?= Html::img(PromotionHelper::getImageUrl($model), [
                             'class' => 'promotion-list__image'
                         ]) ?>
                     <?php else: ?>

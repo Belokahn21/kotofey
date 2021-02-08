@@ -19,6 +19,9 @@ $this->title = Title::show("Зоотовары для животных в Бар
 ?>
 <div class="page-container">
     <?= SliderWidget::widget(['slider_id' => 1]) ?>
+    <?php if (Yii::$app->user->identity->id == 1): ?>
+        <?= \app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget::widget(['sliderId' => 1]) ?>
+    <?php endif; ?>
     <?php //= CanNowBuyWidget::widget() ?>
     <?= ManyPurchasedGoods::widget(); ?>
     <?= InformerSliderWidget::widget(); ?>

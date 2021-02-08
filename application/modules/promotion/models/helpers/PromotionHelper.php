@@ -13,4 +13,9 @@ class PromotionHelper
     {
         return Url::to(['/promotion/promotion/view', 'id' => $model->slug]);
     }
+
+    public static function getImageUrl(Promotion $model, $options = [])
+    {
+        return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
+    }
 }
