@@ -18,7 +18,16 @@ class CombineSliderWidget extends Widget
     {
         $data = [];
 
-        $promotions = Promotion::find()->where(['is_active' => true])->all();
+        $promotions = Promotion::find()->where(['is_active' => true])->andWhere([
+            'or',
+            'start_at = :default and end_at = :default',
+            'start_at is null and end_at is null',
+            'start_at < :now and end_at > :now'
+        ])
+            ->addParams([
+                ":now" => time(),
+                ":default" => 0,
+            ])->all();
         foreach ($promotions as $promotion) {
             $this->extendDataArrayFromPromotion($promotion, $data);
         }
