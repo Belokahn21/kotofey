@@ -18,16 +18,15 @@ class CombineSliderWidget extends Widget
     {
         $data = [];
 
+        $promotions = Promotion::find()->where(['is_active' => true])->all();
+        foreach ($promotions as $promotion) {
+            $this->extendDataArrayFromPromotion($promotion, $data);
+        }
+
 
         $sliders = SlidersImages::find()->where(['active' => true, 'slider_id' => $this->sliderId])->all();
         foreach ($sliders as $slider) {
             $this->extendDataArrayFromSliderImage($slider, $data);
-        }
-
-
-        $promotions = Promotion::find()->where(['is_active' => true])->all();
-        foreach ($promotions as $promotion) {
-            $this->extendDataArrayFromPromotion($promotion, $data);
         }
 
         return $this->render($this->view, [
