@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => [PromotionHe
     ]); ?>
     <h1 class="page__title"><?= $model->name; ?></h1>
     <?php if ($model->media): ?>
-        <?= Html::img(\Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'])) ?>
+        <?= Html::img(PromotionHelper::getImageUrl($model), ['width' => '100%']); ?>
     <?php endif; ?>
     <?php if ($products): ?>
         <h2 class="mt-5">Товары участвующие в акции</h2>

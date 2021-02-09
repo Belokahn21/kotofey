@@ -47,4 +47,5 @@ application/web/cookie.txt
 bash.exe.stackdump
 upload
 *.zip
+!123.csv
 tmp
