@@ -34,9 +34,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Доставка и оплата',
             <div class="page__text">Заказы доставляются в будние дни с понедельника по пятницу в утреннее время с 9.00 до 11.00 и в вечернее время с 19.00 до 23.00</div>
             <div class="page__text">Доставка в выходные дни возможна при заказе до 17.00 пятницы.</div>
         </div>
+        <?php /*
         <div class="page__right">
             <div class="form-delivery-calc-react"></div>
         </div>
+ */ ?>
     </div>
     <script type="text/javascript" charset="utf-8" async="" src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75a2c08cf453a0309392fdcb243329f2301db73bdb97f18c8bc32cb9e14c1f93&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
 
