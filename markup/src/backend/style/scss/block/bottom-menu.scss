@@ -1,8 +1,6 @@
 .bottom-menu {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  position: relative;
+  margin-top: auto;
 
   display: flex;
   flex-direction: row;

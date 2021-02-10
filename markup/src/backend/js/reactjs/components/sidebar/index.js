@@ -16,12 +16,12 @@ class Sidebar extends React.Component {
                     <MenuFast/>
                     <div className="sidebar-title">Меню</div>
                     <Menu/>
-                </div>
 
-                <div className="bottom-menu">
-                    <a className="bottom-menu__item" href="/logout/"><i className="fas fa-sign-out-alt"></i></a>
-                    <a className="bottom-menu__item" href="/cache/"><i className="fas fa-sync-alt"></i></a>
-                    <a className="bottom-menu__item" href="/profile/"><i className="fas fa-user-cog"></i></a>
+                    <div className="bottom-menu">
+                        <a className="bottom-menu__item" href="/logout/"><i className="fas fa-sign-out-alt"></i></a>
+                        <a className="bottom-menu__item" href="/cache/"><i className="fas fa-sync-alt"></i></a>
+                        <a className="bottom-menu__item" href="/profile/"><i className="fas fa-user-cog"></i></a>
+                    </div>
                 </div>
             </aside>
         )
