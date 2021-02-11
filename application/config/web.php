@@ -141,6 +141,7 @@ $config = [
                 'signin' => 'user/auth/signin',
                 'signup' => 'user/auth/signup',
                 'restore' => 'user/auth/restore',
+                'restore/<id[A-Za-z-\/\d_]+>' => 'user/auth/restoring',
 
                 'market' => 'export/yml/index',
                 'aliexpress' => 'export/aliexpress/index',

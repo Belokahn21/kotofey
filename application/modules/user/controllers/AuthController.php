@@ -100,4 +100,23 @@ class AuthController extends Controller
             'model' => $model
         ]);
     }
+
+    public function actionRestoring($id)
+    {
+//        $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
+//
+//        if (Yii::$app->request->isPost) {
+//            if ($model->load(Yii::$app->request->post())) {
+//                if ($model->validate() && $model->submit()) {
+//                    Alert::setSuccessNotify('На ваш электронный адрес ' . $model->email . ' отправлено письмо с инструкциями по восстановлению.');
+//                    return $this->refresh();
+//                }
+//            }
+//        }
+//
+//        if (Yii::$app->request->isAjax) return $this->redirect(['/']);
+//        else return $this->render('restore', [
+//            'model' => $model
+//        ]);
+    }
 }
