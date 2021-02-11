@@ -34,7 +34,7 @@ class ProductHelper
     /* цена товара за 1 киллограмм */
     public static function getPriceByWeight(Product $product, $weight)
     {
-        $product_weight = ProductPropertiesHelper::getProductWeight($product->id);
+        $product_weight = PropertiesHelper::getProductWeight($product->id);
         if (!$product_weight) {
             return false;
         }

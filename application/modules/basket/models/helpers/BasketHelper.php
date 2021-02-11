@@ -3,7 +3,7 @@
 namespace app\modules\basket\models\helpers;
 
 
-use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\models\entity\OrdersItems;
 
 class BasketHelper
@@ -12,7 +12,7 @@ class BasketHelper
     {
         $summary_price = $item->price;
         if ($item->weight) {
-            $product_weight = ProductPropertiesHelper::getProductWeight($item->product_id);
+            $product_weight = PropertiesHelper::getProductWeight($item->product_id);
             $price_by_one_position_weight = round($item->price / $product_weight);
             $summary_price = round($price_by_one_position_weight * ($item->weight / 1000));
         }

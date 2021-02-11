@@ -4,7 +4,7 @@ use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\Product;
 use app\modules\export\models\tools\AliexpressHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 
 $module = Yii::$app->getModule('export');
 
@@ -12,7 +12,7 @@ $module = Yii::$app->getModule('export');
  * @var $categories \app\modules\catalog\models\entity\ProductCategory[]
  */
 ?>
-<?xml version="1.0" encoding="UTF-8"?>
+<?= '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <yml_catalog date="<?= date('Y-m-d H:i'); ?>">
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>

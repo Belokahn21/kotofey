@@ -4,7 +4,7 @@ namespace app\modules\catalog\widgets\PreviewProperties;
 
 
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use yii\base\Widget;
 
 class PreviewPropertiesWidget extends Widget

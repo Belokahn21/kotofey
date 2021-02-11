@@ -6,7 +6,7 @@ namespace app\models\tool\import;
 use app\modules\catalog\models\entity\Product;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 

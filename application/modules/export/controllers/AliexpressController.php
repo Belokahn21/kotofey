@@ -15,7 +15,10 @@ class AliexpressController extends Controller
     {
         set_time_limit(0);
         $categories = ProductCategory::find()->all();
-        $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['>', 'count', 0]);
+
+        $offers = \Yii::$app->cache->getOrSet('ali:export', function () {
+            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['>', 'count', 0]);
+        });
 
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;

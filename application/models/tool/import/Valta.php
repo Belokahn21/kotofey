@@ -8,7 +8,7 @@ use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\helpers\ProductPropertiesHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\site\models\tools\Debug;
 
 class Valta

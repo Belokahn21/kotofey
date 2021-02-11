@@ -4,13 +4,14 @@ namespace app\modules\catalog\models\helpers;
 
 
 use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use yii\helpers\Url;
 use yii\web\HttpException;
 
-class ProductPropertiesHelper
+class PropertiesHelper
 {
     public static function getProductWeight($product_id)
     {
@@ -55,5 +56,17 @@ class ProductPropertiesHelper
         }
 
         return $out;
+    }
+
+    /**
+     * @param Product $model
+     * @param $property_id
+     * @return false|PropertiesProductValues
+     */
+    public static function extractPropertyById(Product $model, $property_id)
+    {
+        foreach ($model->propsValues as $value) if ($value->property_id === $property_id) return $value;
+
+        return false;
     }
 }

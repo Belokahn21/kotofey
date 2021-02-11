@@ -50,6 +50,7 @@ use function foo\func;
  * @property ProductCategory $category
  * @property string $detail
  * @property Media $media
+ * @property PropertiesProductValues $propsValues
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -344,16 +345,6 @@ class Product extends \yii\db\ActiveRecord
                 @unlink(\Yii::getAlias('@app') . $image);
             }
         }
-    }
-
-//    public function getDetail()
-//    {
-//        return Url::to(['/catalog/product/view', 'id' => $this->slug]);
-//    }
-
-    public function getDisplay()
-    {
-        return $this->name;
     }
 
     public static function findBySlug($slug)
