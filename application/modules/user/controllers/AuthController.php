@@ -84,7 +84,7 @@ class AuthController extends Controller
 
     public function actionRestore()
     {
-        $model = new PasswordRestoreForm();
+        $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -96,6 +96,8 @@ class AuthController extends Controller
         }
 
         if (Yii::$app->request->isAjax) return $this->redirect(['/']);
-        else return $this->render('restore');
+        else return $this->render('restore', [
+            'model' => $model
+        ]);
     }
 }
