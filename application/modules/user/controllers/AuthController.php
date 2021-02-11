@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\user\models\form\PasswordRestoreForm;
 use Yii;
 use yii\web\Controller;
 use yii\widgets\ActiveForm;
@@ -83,36 +84,15 @@ class AuthController extends Controller
 
     public function actionRestore()
     {
-        $model = new User(['scenario' => User::SCENARIO_INSERT]);
+        $model = new PasswordRestoreForm();
 
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
-            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
-        }
-
-        if ($model->load(\Yii::$app->request->post())) {
-
-            $model->setPassword($model->password);
-            $model->generateAuthKey();
-
-            if (!$model->validate()) {
-                Alert::setErrorNotify('Данные некоректные.');
-                return $this->redirect(['/']);
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate() && $model->submit()) {
+                    Alert::setSuccessNotify('На ваш электронный адрес ' . $model->email . ' отправлено письмо с инструкциями по восстановлению.');
+                    return $this->refresh();
+                }
             }
-
-            if (!$model->save()) {
-                Alert::setErrorNotify('Ошибка при создании пользователя.');
-                return $this->redirect(['/']);
-            }
-
-            BonusHelper::createBonusAccount($model->phone);
-
-            if (!\Yii::$app->user->login($model, 3600000)) {
-                Alert::setErrorNotify('Ошибка при авторизации нового пользователя.');
-                return $this->redirect(['/']);
-            }
-
-            Alert::setSuccessNotify('Вы успешно зарегестрировались и вошли на сайт.');
         }
 
         if (Yii::$app->request->isAjax) return $this->redirect(['/']);
