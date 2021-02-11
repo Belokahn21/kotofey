@@ -45,7 +45,7 @@ class ProductController extends Controller
 
         Attributes::canonical(System::protocol() . "://" . System::domain() . "/product/" . $product->slug . "/");
 
-        OpenGraphProduct::title($product->display);
+        OpenGraphProduct::title($product->name);
         if (!empty($product->description)) {
             OpenGraph::description($product->description);
             Attributes::metaDescription($product->description);
