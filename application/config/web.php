@@ -133,11 +133,14 @@ $config = [
                 'DELETE basket/rest/delete' => 'basket/rest/delete',
 
                 '/' => 'site/site/index',
-                '/delivery' => 'site/site/delivery',
-                '/contacts' => 'site/site/contacts',
-                '/about' => 'site/site/about',
+                'delivery' => 'site/site/delivery',
+                'contacts' => 'site/site/contacts',
+                'about' => 'site/site/about',
                 'promotion' => 'promotion/promotion/index',
                 'promotion/<id[A-Za-z-\/\d_]+>' => 'promotion/promotion/view',
+                'signin' => 'user/auth/signin',
+                'signup' => 'user/auth/signup',
+                'restore' => 'user/auth/restore',
 
                 'market' => 'export/yml/index',
                 'aliexpress' => 'export/aliexpress/index',

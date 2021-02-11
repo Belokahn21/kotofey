@@ -21,9 +21,7 @@ class AuthController extends Controller
                 return $this->redirect(['/']);
             }
 
-            $user = User::findByEmail($model->email);
-            if (!$user) {
-
+            if (!$user = User::findByEmail($model->email)) {
                 Alert::setErrorNotify('Пользователя с таким Email не существует.');
                 return $this->redirect(['/']);
             }
@@ -41,7 +39,8 @@ class AuthController extends Controller
             }
         }
 
-        return $this->redirect(['/']);
+        if (Yii::$app->request->isAjax) return $this->redirect(['/']);
+        else return $this->render('signin');
     }
 
     public function actionSignup()
@@ -78,6 +77,45 @@ class AuthController extends Controller
             Alert::setSuccessNotify('Вы успешно зарегестрировались и вошли на сайт.');
         }
 
-        return $this->redirect(['/']);
+        if (Yii::$app->request->isAjax) return $this->redirect(['/']);
+        else return $this->render('signup');
+    }
+
+    public function actionRestore()
+    {
+        $model = new User(['scenario' => User::SCENARIO_INSERT]);
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
+        if ($model->load(\Yii::$app->request->post())) {
+
+            $model->setPassword($model->password);
+            $model->generateAuthKey();
+
+            if (!$model->validate()) {
+                Alert::setErrorNotify('Данные некоректные.');
+                return $this->redirect(['/']);
+            }
+
+            if (!$model->save()) {
+                Alert::setErrorNotify('Ошибка при создании пользователя.');
+                return $this->redirect(['/']);
+            }
+
+            BonusHelper::createBonusAccount($model->phone);
+
+            if (!\Yii::$app->user->login($model, 3600000)) {
+                Alert::setErrorNotify('Ошибка при авторизации нового пользователя.');
+                return $this->redirect(['/']);
+            }
+
+            Alert::setSuccessNotify('Вы успешно зарегестрировались и вошли на сайт.');
+        }
+
+        if (Yii::$app->request->isAjax) return $this->redirect(['/']);
+        else return $this->render('restore');
     }
 }
