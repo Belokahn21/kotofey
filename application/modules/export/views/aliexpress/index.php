@@ -81,7 +81,7 @@ $module = Yii::$app->getModule('export');
                         <?php if (array_key_exists(2, $properties)): ?>
                             <weight><?= $properties[2]; ?></weight>
                         <?php endif; ?>
-                        <count><?= rand(20, 40); ?></count>
+                        <count><?= $offer->count > 0 ? $offer->count : rand(20, 40); ?></count>
                     </offer>
                 <?php endforeach; ?>
             <?php endforeach; ?>
