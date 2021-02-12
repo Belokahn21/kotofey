@@ -54,7 +54,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Регистрация', 'url' => 
         <div class="auth-form-social-title">Войти через:</div>
         <div class="auth-form-social">
             <?= yii\authclient\widgets\AuthChoice::widget([
-                'baseAuthUrl' => ['auth/signin'],
+                'baseAuthUrl' => ['vk'],
                 'popupMode' => false,
             ]) ?>
             <?php /*

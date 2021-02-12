@@ -18,9 +18,22 @@ class AuthController extends Controller
     public function actions()
     {
         return [
-            'auth' => [
+            'vk' => [
                 'class' => 'yii\authclient\AuthAction',
                 'successCallback' => [$this, 'onAuthSuccess'],
+            ],
+        ];
+    }
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    ['allow' => false, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['@']],
+                    ['allow' => true, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['?']],
+                ],
             ],
         ];
     }
@@ -80,19 +93,6 @@ class AuthController extends Controller
                 $auth->save();
             }
         }
-    }
-
-    public function behaviors()
-    {
-        return [
-            'access' => [
-                'class' => AccessControl::className(),
-                'rules' => [
-                    ['allow' => false, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['@']],
-                    ['allow' => true, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['?']],
-                ],
-            ],
-        ];
     }
 
     public function actionSignin()
