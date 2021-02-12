@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\user\models\entity\UserResetPassword;
 use app\modules\user\models\form\PasswordRestoreForm;
 use Yii;
 use yii\web\Controller;
@@ -97,26 +98,28 @@ class AuthController extends Controller
 
         if (Yii::$app->request->isAjax) return $this->redirect(['/']);
         else return $this->render('restore', [
-            'model' => $model
+            'model' => $model,
+            'message' => null
         ]);
     }
 
     public function actionRestoring($id)
     {
-//        $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
-//
-//        if (Yii::$app->request->isPost) {
-//            if ($model->load(Yii::$app->request->post())) {
-//                if ($model->validate() && $model->submit()) {
-//                    Alert::setSuccessNotify('На ваш электронный адрес ' . $model->email . ' отправлено письмо с инструкциями по восстановлению.');
-//                    return $this->refresh();
-//                }
-//            }
-//        }
-//
-//        if (Yii::$app->request->isAjax) return $this->redirect(['/']);
-//        else return $this->render('restore', [
-//            'model' => $model
-//        ]);
+        $modelRestoreKey = UserResetPassword::findOneByCode($id);
+
+        if (!$modelRestoreKey->isAlive()) {
+            $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
+
+            return $this->render('restore', [
+                'model' => $model,
+                'message' => 'Срок ссылки восстановления пароля закончился'
+            ]);
+        }
+
+        $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
+
+        return $this->render('change', [
+            'model' => $model
+        ]);
     }
 }

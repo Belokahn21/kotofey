@@ -6,7 +6,9 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
-/* @var $model \app\modules\user\models\form\PasswordRestoreForm */
+/* @var $model \app\modules\user\models\form\PasswordRestoreForm
+ * @var $message string
+ */
 
 $this->title = Title::show("Восстановить пароль");
 $this->params['breadcrumbs'][] = ['label' => 'Войти на сайт', 'url' => ['/signin/']];
@@ -23,12 +25,17 @@ $this->params['breadcrumbs'][] = ['label' => 'Регистрация', 'url' => 
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
 
+    <?php if ($message): ?>
+        <div class="restore-message"><?= $message ?></div>
+    <?php endif; ?>
+
     <?php $form = ActiveForm::begin([
         'options' => [
             'class' => 'site-form auth-form'
-        ]
+        ],
+        'action' => Url::to(['auth/restore'])
     ]); ?>
-    <?= Html::tag('h1', 'Восстановить пароль') ?>
+    <?= Html::tag('h1', 'Восстановить пароль', ['class' => 'page__title']); ?>
 
     <?= $form->field($model, 'email')->textInput([
         'class' => 'site-form__input',

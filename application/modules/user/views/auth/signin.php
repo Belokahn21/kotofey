@@ -3,6 +3,8 @@
 use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
 use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use yii\helpers\Html;
 
 $this->title = Title::show("Авторизация");
 $this->params['breadcrumbs'][] = ['label' => 'Восстановить пароль', 'url' => ['/restore/']];
@@ -18,32 +20,44 @@ $this->params['breadcrumbs'][] = ['label' => 'Регистрация', 'url' => 
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
 
-    <form class="site-form auth-form">
-        <h1 class="page__title">Авторизация</h1>
-        <div class="site-form__item">
-            <label class="site-form__label">
-                <input class="site-form__input" type="text" name="email" placeholder="E-Mail">
-            </label>
-        </div>
-        <div class="site-form__item">
-            <label class="site-form__label">
-                <input class="site-form__input" type="password" name="password" placeholder="Пароль">
-            </label>
-        </div>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'class' => 'site-form auth-form'
+        ],
+    ]); ?>
+    <?= Html::tag('h1', 'Авторизация', ['class' => 'page__title']) ?>
 
-        <div class="auth-form__controls">
-            <button class="btn-main" type="submit">Войти на сайт</button>
-            <a class="auth-form__restore-link" href="<?= Url::to(['auth/restore']); ?>">Восстановить пароль</a>
-            <a class="auth-form__restore-link" href="<?= Url::to(['auth/signup']); ?>">Зарегестрироваться</a>
-        </div>
 
-        <div class="auth-form-social-container">
-            <div class="auth-form-social-title">Войти через:</div>
-            <div class="auth-form-social">
-                <a class="auth-form-social__item" href="#">
-                    <img class="auth-form-social__image" src="/images/vk.png">
-                </a>
-            </div>
+    <div class="site-form__item">
+        <?= $form->field($model, 'email')->textInput([
+            'class' => 'site-form__input',
+            'id' => 'site-form-email',
+            'placeholder' => 'E-Mail',
+        ])->label(false); ?>
+    </div>
+
+    <div class="site-form__item">
+        <?= $form->field($model, 'password')->passwordInput([
+            'class' => 'site-form__input',
+            'id' => 'site-form-password',
+            'placeholder' => 'Пароль',
+        ])->label(false); ?>
+    </div>
+
+    <div class="auth-form__controls">
+        <?= Html::submitButton('Восстановить', ['class' => 'btn-main']); ?>
+        <?= Html::a('Восстановить пароль', Url::to(['auth/restore']), ['class' => 'auth-form__restore-link']); ?>
+        <?= Html::a('Зарегестрироваться', Url::to(['auth/signup']), ['class' => 'auth-form__restore-link']); ?>
+    </div>
+
+    <div class="auth-form-social-container">
+        <div class="auth-form-social-title">Войти через:</div>
+        <div class="auth-form-social">
+            <a class="auth-form-social__item" href="#">
+                <img class="auth-form-social__image" src="/images/vk.png">
+            </a>
         </div>
-    </form>
+    </div>
+
+    <?php ActiveForm::end(); ?>
 </div>

@@ -58,4 +58,9 @@ class UserResetPassword extends ActiveRecord
     {
         return $this->created_at + self::ALIVE_TIME > time();
     }
+
+    public static function findOneByCode($code)
+    {
+        return static::findOne(['key' => $code]);
+    }
 }
