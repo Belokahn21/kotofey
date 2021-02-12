@@ -32,7 +32,9 @@
     "mihaildev/yii2-ckeditor": "*",
     "ext-dom": "*",
     "ext-libxml": "*",
-    "ext-soap": "*"
+    "ext-soap": "*",
+    "yiisoft/yii2-authclient": "~2.1.0",
+    "yiimaker/yii2-social-share": "^2.3"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",
