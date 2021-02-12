@@ -39,7 +39,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Войти на сайт', 'url' =
 
     <div class="site-form__item">
         <?= $form->field($model, 'phone')->textInput([
-            'class' => 'site-form__input',
+            'class' => 'site-form__input js-mask-ru',
             'id' => 'site-form-phone',
             'placeholder' => 'Телефон',
         ])->label(false); ?>

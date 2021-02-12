@@ -6,6 +6,7 @@ use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\user\models\entity\UserResetPassword;
 use app\modules\user\models\form\PasswordRestoreForm;
 use Yii;
+use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\widgets\ActiveForm;
 use app\widgets\notification\Alert;
@@ -13,6 +14,20 @@ use app\modules\user\models\entity\User;
 
 class AuthController extends Controller
 {
+
+    public function behaviors()
+    {
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+                'rules' => [
+                    ['allow' => false, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['@']],
+                    ['allow' => true, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['?']],
+                ],
+            ],
+        ];
+    }
+
     public function actionSignin()
     {
         $model = new User(['scenario' => User::SCENARIO_LOGIN]);
@@ -35,6 +50,7 @@ class AuthController extends Controller
 
             if (\Yii::$app->user->login($user, 3600000)) {
                 Alert::setSuccessNotify('Вы успешно авторизовались.');
+                return $this->redirect(['/']);
             } else {
                 Alert::setErrorNotify('Авторизация не получилась.');
                 return $this->redirect(['/']);
@@ -42,7 +58,9 @@ class AuthController extends Controller
         }
 
         if (Yii::$app->request->isAjax) return $this->redirect(['/']);
-        else return $this->render('signin');
+        else return $this->render('signin', [
+            'model' => $model
+        ]);
     }
 
     public function actionSignup()
@@ -80,7 +98,9 @@ class AuthController extends Controller
         }
 
         if (Yii::$app->request->isAjax) return $this->redirect(['/']);
-        else return $this->render('signup');
+        else return $this->render('signup', [
+            'model' => $model
+        ]);
     }
 
     public function actionRestore()

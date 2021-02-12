@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Регистрация', 'url' => 
     </div>
 
     <div class="auth-form__controls">
-        <?= Html::submitButton('Восстановить', ['class' => 'btn-main']); ?>
+        <?= Html::submitButton('Войти на сайт', ['class' => 'btn-main']); ?>
         <?= Html::a('Восстановить пароль', Url::to(['auth/restore']), ['class' => 'auth-form__restore-link']); ?>
         <?= Html::a('Зарегестрироваться', Url::to(['auth/signup']), ['class' => 'auth-form__restore-link']); ?>
     </div>
