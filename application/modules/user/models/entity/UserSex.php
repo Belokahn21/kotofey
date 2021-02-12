@@ -10,13 +10,15 @@ namespace app\modules\user\models\entity;
 
 use yii\db\ActiveRecord;
 
+/**
+ * UserSex model
+ *
+ * @property integer $id
+ * @property string $name
+ *
+ */
 class UserSex extends ActiveRecord
 {
-    public static function tableName()
-    {
-        return "user_sex";
-    }
-
     public function rules()
     {
         return [

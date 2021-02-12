@@ -7,6 +7,16 @@ use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use app\modules\site\models\tools\System;
 
+/**
+ * UserResetPassword model
+ *
+ * @property integer $id
+ * @property integer $user_id
+ * @property string $key
+ * @property integer $created_at
+ * @property integer $updated_at
+ *
+ */
 class UserResetPassword extends ActiveRecord
 {
     const ALIVE_TIME = 1800;

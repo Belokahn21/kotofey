@@ -107,6 +107,8 @@ class AuthController extends Controller
     {
         $modelRestoreKey = UserResetPassword::findOneByCode($id);
 
+        if (!$modelRestoreKey) return $this->redirect(['/']);
+
         if (!$modelRestoreKey->isAlive()) {
             $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
 
@@ -116,7 +118,16 @@ class AuthController extends Controller
             ]);
         }
 
-        $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_SEND_MAIL]);
+        $model = new PasswordRestoreForm(['scenario' => PasswordRestoreForm::SCENARIO_UPDATE_PASSWORD]);
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->updatePassword($modelRestoreKey->user_id)) {
+                    Alert::setSuccessNotify('Пароль успешно сменен.');
+                    return $this->redirect(['/']);
+                }
+            }
+        }
 
         return $this->render('change', [
             'model' => $model
