@@ -5,7 +5,7 @@ namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\ProductFromSibagoForm;
-use app\modules\catalog\models\form\SibagroUpload;
+use app\modules\catalog\models\form\SibagroUploadForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
 use yii\web\Controller;
@@ -25,9 +25,10 @@ class UpdateSibagroController extends MainBackendController
 
         return $parentAccess;
     }
+
     public function actionUpload()
     {
-        $model = new SibagroUpload();
+        $model = new SibagroUploadForm();
         $items = [];
         $productModelList = [];
 
@@ -36,6 +37,9 @@ class UpdateSibagroController extends MainBackendController
 
             if ($data = \Yii::$app->request->post('ProductFromSibagoForm')) {
                 foreach ($data as $datum) {
+
+                    if ($datum['skip'] == 1) continue;
+
                     $obj = new ProductFromSibagoForm();
                     $obj->scenario = ProductFromSibagoForm::SCENATIO_SIBAGRO_SAVE;
                     $obj->setAttributes($datum);

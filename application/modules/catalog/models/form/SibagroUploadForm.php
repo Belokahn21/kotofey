@@ -3,15 +3,21 @@
 namespace app\modules\catalog\models\form;
 
 use app\modules\catalog\models\entity\virtual\SibagroElement;
-use app\modules\site\models\tools\Debug;
 use app\modules\vendors\models\entity\Vendor;
-use Sunra\PhpSimple\HtmlDomParser;
 use yii\base\Model;
 use yii\web\UploadedFile;
 
-class SibagroUpload extends Model
+class SibagroUploadForm extends Model
 {
     public $file;
+    public $dirPath;
+
+    public function __construct($config = [])
+    {
+        parent::__construct($config);
+
+        $this->dirPath = \Yii::getAlias('@app/tmp/');
+    }
 
     public function rules()
     {
@@ -20,13 +26,32 @@ class SibagroUpload extends Model
         ];
     }
 
+    public function prepareDir()
+    {
+        if (!$this->existDir()) return $this->createDir();
+
+        return true;
+    }
+
+    public function existDir()
+    {
+        return is_dir($this->dirPath);
+    }
+
+    public function createDir()
+    {
+        return mkdir($this->dirPath);
+    }
+
     public function parse()
     {
         $items = [];
         $fileName = 'file.html';
         $file = UploadedFile::getInstance($this, 'file');
 
-        $file->saveAs(\Yii::getAlias('@app/tmp/' . $fileName));
+        if(!$this->prepareDir()) throw new \Exception('Директория для хранения HTML файлов не создана или не существует.');
+
+        $file->saveAs($this->dirPath . $fileName);
 
         $content = file_get_contents(\Yii::getAlias('@app/tmp/' . $fileName));
 
