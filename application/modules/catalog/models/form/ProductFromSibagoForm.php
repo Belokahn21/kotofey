@@ -13,7 +13,7 @@ class ProductFromSibagoForm extends Product
     public $lazyImageUrl;
     public $methodSave;
     public $skip;
-//    public $remove;
+    public $markup;
 
     const SCENATIO_SIBAGRO_SAVE = 'sibagro';
 
@@ -21,8 +21,7 @@ class ProductFromSibagoForm extends Product
     {
         return [
             [['name', 'code', 'lazyImageUrl', 'methodSave'], 'string'],
-            [['price', 'discount_price', 'count', 'media_id', 'vitrine', 'vendor_id', 'skip'], 'integer']
-//            [['price', 'discount_price', 'count', 'media_id', 'vitrine', 'vendor_id', 'skip', 'remove'], 'integer']
+            [['price', 'discount_price', 'count', 'media_id', 'vitrine', 'vendor_id', 'skip', 'markup'], 'integer']
         ];
     }
 
@@ -32,14 +31,14 @@ class ProductFromSibagoForm extends Product
         $labels['code'] = "Код";
         $labels['purchase'] = "Закуп";
         $labels['skip'] = "Пропустить";
-//        $labels['remove'] = "Удалить";
+        $labels['markup'] = "Наценка";
         return $labels;
     }
 
     public function scenarios()
     {
         return [
-            self::SCENATIO_SIBAGRO_SAVE => ['name', 'code', 'lazyImageUrl', 'methodSave', 'price', 'purchase', 'count', 'media_id', 'vitrine', 'vendor_id']
+            self::SCENATIO_SIBAGRO_SAVE => ['name', 'code', 'lazyImageUrl', 'methodSave', 'price', 'purchase', 'count', 'media_id', 'vitrine', 'vendor_id', 'skip', 'markup']
         ];
     }
 

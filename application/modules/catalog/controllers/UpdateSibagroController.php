@@ -6,6 +6,8 @@ namespace app\modules\catalog\controllers;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\ProductFromSibagoForm;
 use app\modules\catalog\models\form\SibagroUploadForm;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\settings\models\helpers\MarkupHelpers;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
 use yii\web\Controller;
@@ -43,6 +45,10 @@ class UpdateSibagroController extends MainBackendController
                     $obj = new ProductFromSibagoForm();
                     $obj->scenario = ProductFromSibagoForm::SCENATIO_SIBAGRO_SAVE;
                     $obj->setAttributes($datum);
+
+                    MarkupHelpers::applyMarkup($obj, $data['markup']);
+
+
                     if (Product::findOneByCode($datum['code'])) {
                         if (!$obj->validate() || !$obj->update()) {
                             Debug::p($obj->getErrors());

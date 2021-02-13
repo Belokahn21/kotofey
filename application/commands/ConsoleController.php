@@ -25,13 +25,13 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $models = PropertiesVariants::find()->where(['property_id' => 1])->all();
-
+        $models = Product::find()->where(['like', 'name', 'дилли'])->all();
         foreach ($models as $model) {
-            $model->slug = Inflector::slug($model->name);
+            $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            MarkupHelpers::applyMarkup($model, 15);
 
             if ($model->validate() && $model->update()) {
-                echo "success: ok";
+                echo $model->name;
                 echo PHP_EOL;
             }
         }

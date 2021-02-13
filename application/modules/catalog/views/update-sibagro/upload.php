@@ -7,6 +7,7 @@ use app\modules\media\models\entity\Media;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\form\ProductFromSibagoForm;
 
 /* @var $items \app\modules\catalog\models\entity\virtual\SibagroElement[]
  * @var $this \yii\web\View
@@ -29,10 +30,10 @@ $this->title = 'Обновить прайсы по HTML';
     <div class="sync-html-price">
         <?php $form = ActiveForm::begin() ?>
         <?= Html::submitButton('Выполнить', ['class' => 'btn-main']) ?>
+        <?= $form->field(new ProductFromSibagoForm(), 'markup')->textInput(); ?>
         <?php $i = 0; ?>
         <?php foreach ($items as $item): ?>
             <?php
-
             $productModel = $productModelList[$i];
             $product = Product::findOneByCode($item->code);
             ?>
@@ -69,7 +70,7 @@ $this->title = 'Обновить прайсы по HTML';
                 <?= $form->field($productModel, '[' . $i . ']count')->hiddenInput(['value' => 0])->label(false); ?>
                 <?= $form->field($productModel, '[' . $i . ']vitrine')->hiddenInput(['value' => 1])->label(false); ?>
                 <?php if ($product): ?>
-                    <div class="green px-3"><strong><?= $product->name . ' Уже существует'; ?></strong></div>
+                    <div class="green px-3"><strong><?= $product->name . ' Уже существует'; ?> (+ <?= ProductHelper::getMarkup($product) ?>%)</strong></div>
                 <?php endif; ?>
                 <?php $i++; ?>
             </div>
