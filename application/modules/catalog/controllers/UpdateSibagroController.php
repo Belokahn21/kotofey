@@ -14,8 +14,6 @@ use yii\web\Controller;
 
 class UpdateSibagroController extends MainBackendController
 {
-
-
     public function behaviors()
     {
         $parentAccess = parent::behaviors();
@@ -38,15 +36,20 @@ class UpdateSibagroController extends MainBackendController
         if (\Yii::$app->request->isPost) {
 
             if ($data = \Yii::$app->request->post('ProductFromSibagoForm')) {
-                foreach ($data as $datum) {
 
+                $markup = \Yii::$app->request->post('markup');
+                $category_id = \Yii::$app->request->post('category_id');
+
+                foreach ($data as $datum) {
                     if ($datum['skip'] == 1) continue;
 
                     $obj = new ProductFromSibagoForm();
                     $obj->scenario = ProductFromSibagoForm::SCENATIO_SIBAGRO_SAVE;
                     $obj->setAttributes($datum);
 
-                    MarkupHelpers::applyMarkup($obj, $data['markup']);
+
+                    if ($markup) MarkupHelpers::applyMarkup($obj, $markup);
+                    if ($category_id) $obj->category_id = $category_id;
 
 
                     if (Product::findOneByCode($datum['code'])) {

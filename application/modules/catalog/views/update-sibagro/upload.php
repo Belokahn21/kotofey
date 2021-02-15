@@ -30,7 +30,14 @@ $this->title = 'Обновить прайсы по HTML';
     <div class="sync-html-price">
         <?php $form = ActiveForm::begin() ?>
         <?= Html::submitButton('Выполнить', ['class' => 'btn-main']) ?>
-        <?= $form->field(new ProductFromSibagoForm(), 'markup')->textInput(); ?>
+        <div class="row">
+            <div class="col-6">
+                <?= Html::input('text', 'markup'); ?>
+            </div>
+            <div class="col-6">
+                <?= Html::dropDownList('category_id', false, ArrayHelper::map((new \app\modules\catalog\models\entity\ProductCategory())->categoryTree(), 'id', 'name'), ['prompt' => 'Категория']); ?>
+            </div>
+        </div>
         <?php $i = 0; ?>
         <?php foreach ($items as $item): ?>
             <?php

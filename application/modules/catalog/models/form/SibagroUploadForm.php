@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\form;
 
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\virtual\SibagroElement;
 use app\modules\vendors\models\entity\Vendor;
 use yii\base\Model;
@@ -49,7 +50,7 @@ class SibagroUploadForm extends Model
         $fileName = 'file.html';
         $file = UploadedFile::getInstance($this, 'file');
 
-        if(!$this->prepareDir()) throw new \Exception('Директория для хранения HTML файлов не создана или не существует.');
+        if (!$this->prepareDir()) throw new \Exception('Директория для хранения HTML файлов не создана или не существует.');
 
         $file->saveAs($this->dirPath . $fileName);
 
@@ -69,6 +70,10 @@ class SibagroUploadForm extends Model
             $image = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//div[@class='outer']//a");
             $price = $this->getPrice($this->getValue($price->item(0)));
 
+            $statusAvail = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//span[@class='sklad']");
+            $statusWait = $this->getXpathObject($item->ownerDocument->saveHTML($item))->query("//span[@class='vputi']");
+
+
             $sibEl = new SibagroElement();
             $sibEl->name = $this->getValue($name->item(0));
             $sibEl->code = $this->getValue($code->item(0));
@@ -76,6 +81,9 @@ class SibagroUploadForm extends Model
             $sibEl->vendorId = Vendor::VENDOR_ID_SIBAGRO;
             $sibEl->imagePath = 'http://www.sat-altai.ru' . $image->item(0)->attributes->getNamedItem('href')->value;
 
+            $sibEl->status = Product::STATUS_ACTIVE;
+            if ($statusAvail) $sibEl->status = Product::STATUS_ACTIVE;
+            if ($statusWait) $sibEl->status = Product::STATUS_WAIT;
 
             $items[] = $sibEl;
         }
