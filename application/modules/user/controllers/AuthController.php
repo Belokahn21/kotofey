@@ -31,8 +31,8 @@ class AuthController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    ['allow' => false, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['@']],
-                    ['allow' => true, 'actions' => ['signin', 'signup', 'restore', 'restoring'], 'roles' => ['?']],
+                    ['allow' => false, 'actions' => ['signin', 'signup', 'restore', 'restoring', 'vk'], 'roles' => ['@']],
+                    ['allow' => true, 'actions' => ['signin', 'signup', 'restore', 'restoring', 'vk'], 'roles' => ['?']],
                 ],
             ],
         ];
