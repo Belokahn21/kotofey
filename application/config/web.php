@@ -52,9 +52,11 @@ $config = [
 //					],
                 'vkontakte' => [
                     'class' => 'yii\authclient\clients\VKontakte',
-                    'clientId' => '185683081',
 //                    'clientId' => '7209302',
-                    'clientSecret' => 'd0efc7af2c0521e1276f3eab2e277d4431f93265257e27b99a41af74ecc349eecec67f6cd1be394f40677',
+//                    'clientSecret' => 'd0efc7af2c0521e1276f3eab2e277d4431f93265257e27b99a41af74ecc349eecec67f6cd1be394f40677',
+
+                    'clientId' => '7209302',
+                    'clientSecret' => 'FxeKQQ5slF3iXqhanR4c',
                 ],
             ],
         ],
