@@ -68,7 +68,7 @@ $this->title = ProductTitle::show($product->name);
 
             <?php if ($propertiesValues): ?>
                 <?php foreach ($propertiesValues as $property): ?>
-                    <?php if ($property->property->id == 1): ?>
+                    <?php if ($property->property && $property->property->id == 1): ?>
                         <div class="product-detail__brand">
                             <div>Бренд</div>
                             <a href="<?= ProductPropertiesValuesHelper::getBrandDetailUrl($property->variant); ?>"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></a>
@@ -92,6 +92,7 @@ $this->title = ProductTitle::show($product->name);
                 </li>
                 <?php if ($propertiesValues): ?>
                     <?php foreach ($propertiesValues as $property): ?>
+                        <?php if (!$property->property) continue; ?>
                         <li class="product-properties__line">
                             <div class="product-properties__key"><?= $property->property->name; ?></div>
                             <div class="product-properties__value"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></div>
