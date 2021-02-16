@@ -3,6 +3,7 @@
 namespace app\modules\user\controllers;
 
 use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\site\models\tools\Debug;
 use app\modules\user\models\entity\Auth;
 use app\modules\user\models\entity\UserResetPassword;
 use app\modules\user\models\form\PasswordRestoreForm;
