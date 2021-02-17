@@ -54,7 +54,9 @@ $config = [
                     'class' => 'yii\authclient\clients\VKontakte',
                     'clientId' => '7209302',    //id приложения вк
                     'clientSecret' => 'FxeKQQ5slF3iXqhanR4c', // secret key приложения
-                    'apiVersion' => '5.130'
+                    'apiVersion' => '5.130',
+                    'scope' => ['email'],
+                    'returnUrl' => 'http://local.kotofey.store/vk/'
                 ],
             ],
         ],

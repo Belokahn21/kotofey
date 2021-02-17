@@ -53,11 +53,23 @@ $this->params['breadcrumbs'][] = ['label' => 'Войти на сайт', 'url' =
         ])->label(false); ?>
     </div>
 
+
     <div class="auth-form__controls">
         <?= Html::submitButton('Зарегестрироваться', ['class' => 'btn-main']); ?>
         <?= Html::a('Восстановить пароль', Url::to(['auth/restore']), ['class' => 'auth-form__restore-link']); ?>
         <?= Html::a('Войти на сайт', Url::to(['auth/signin']), ['class' => 'auth-form__restore-link']); ?>
     </div>
+
+    <?php /*
+    <div class="auth-form-social-container">
+        <div class="auth-form-social-title">Войти через:</div>
+        <div class="auth-form-social">
+            <?= yii\authclient\widgets\AuthChoice::widget([
+                'baseAuthUrl' => ['vk'],
+                'popupMode' => false,
+            ]) ?>
+        </div>
+    </div>*/ ?>
 
     <?php ActiveForm::end(); ?>
 </div>

@@ -41,6 +41,7 @@ class AuthController extends Controller
 
     public function onAuthSuccess($client)
     {
+        exit();
         $attributes = $client->getUserAttributes();
 
         /* @var $auth Auth */
@@ -59,6 +60,11 @@ class AuthController extends Controller
                         Yii::t('app', "Пользователь с такой электронной почтой как в {client} уже существует, но с ним не связан. Для начала войдите на сайт использую электронную почту, для того, что бы связать её.", ['client' => $client->getTitle()]),
                     ]);
                 } else {
+
+                    Debug::p($attributes);
+                    exit();
+
+
                     $password = Yii::$app->security->generateRandomString(6);
                     $user = new User([
                         'email' => $attributes['email'],
@@ -66,7 +72,11 @@ class AuthController extends Controller
                     ]);
                     $user->generateAuthKey();
                     $user->generatePasswordResetToken();
+
+
                     $transaction = $user->getDb()->beginTransaction();
+
+
                     if ($user->save()) {
                         $auth = new Auth([
                             'user_id' => $user->id,

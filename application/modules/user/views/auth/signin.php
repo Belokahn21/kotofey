@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Регистрация', 'url' => 
         <?= Html::a('Зарегестрироваться', Url::to(['auth/signup']), ['class' => 'auth-form__restore-link']); ?>
     </div>
 
+    <?php /*
     <div class="auth-form-social-container">
         <div class="auth-form-social-title">Войти через:</div>
         <div class="auth-form-social">
@@ -57,12 +58,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Регистрация', 'url' => 
                 'baseAuthUrl' => ['vk'],
                 'popupMode' => false,
             ]) ?>
-            <?php /*
-            <a class="auth-form-social__item" href="#">
-                <img class="auth-form-social__image" src="/images/vk.png">
-            </a>*/ ?>
         </div>
-    </div>
+    </div>*/ ?>
 
     <?php ActiveForm::end(); ?>
 </div>
