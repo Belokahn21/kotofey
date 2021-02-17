@@ -50,10 +50,10 @@ class OrderController extends Controller
     {
         if (!Basket::count()) return $this->redirect(['/']);
 
-
         $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $payments = Payment::findAll(['active' => true]);
         $deliveries = Delivery::findAll(['active' => true]);
+        $orderDate = new OrderDate();
 
         if (\Yii::$app->request->isPost) {
             $transaction = \Yii::$app->db->beginTransaction();
@@ -83,6 +83,15 @@ class OrderController extends Controller
                     return false;
                 }
 
+                $orderDate->order_id = $order->id;
+                if ($orderDate->load(\Yii::$app->request->post())) {
+                    if (!$orderDate->validate() && !$orderDate->save()) {
+                        Alert::setErrorNotify("Время или дата заказа не сохранена. Заказ не создан.");
+                        $transaction->rollBack();
+                        return false;
+                    }
+                }
+
                 // save products
                 $items = new OrdersItems();
                 $items->order_id = $order->id;
@@ -102,6 +111,7 @@ class OrderController extends Controller
 
         return $this->render('create', [
             'order' => $order,
+            'orderDate' => $orderDate,
             'deliveries' => $deliveries,
             'payments' => $payments,
         ]);

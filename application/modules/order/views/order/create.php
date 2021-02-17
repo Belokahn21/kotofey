@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View
  * @var $order Order
+ * @var $orderDate \app\modules\order\models\entity\OrderDate
  * @var $basket \app\modules\order\models\entity\OrdersItems[]
  * @var $billing \app\modules\user\models\entity\Billing
  * @var $user \app\modules\user\models\entity\User
@@ -84,6 +85,21 @@ LIST;
                     </label>
                 </div>
             </div>
+
+            <div class="checkout-form__title">Время и дата доставки
+                <div class="checkout-form__group-row">
+                    <label class="checkout-form__label" for="checkout-phone">
+                        <div>Дата доставки*</div>
+                        <?= $form->field($orderDate, 'date')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона', 'value' => Yii::$app->user->isGuest ? null : substr(Yii::$app->user->identity->phone, 1, strlen(Yii::$app->user->identity->phone))])->label(false) ?>
+                    </label>
+                    <label class="checkout-form__label" for="checkout-email">
+                        <div>Время доставки*</div>
+                        <?= $form->field($orderDate, 'time')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес', 'value' => Yii::$app->user->isGuest ? null : Yii::$app->user->identity->email])->label(false) ?>
+                    </label>
+                </div>
+            </div>
+
+
             <div class="checkout-form__title">Укажите ваши данные
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-phone">
