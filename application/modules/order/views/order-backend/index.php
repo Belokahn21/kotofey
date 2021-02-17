@@ -45,12 +45,8 @@ $this->title = Title::show("Заказы");
     'emptyText' => 'Закзаы отсутствуют',
     'columns' => [
         'id',
-        [
-            'attribute' => 'ip',
-            'value' => function ($model) {
-                return $model->ip;
-            }
-        ],
+        'email',
+        'ip',
         [
             'attribute' => 'status',
             'filter' => ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'),

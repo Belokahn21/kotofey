@@ -144,7 +144,7 @@ class Order extends ActiveRecord
 
     public function beforeValidate()
     {
-        if (empty($this->ip)) $this->ip = $_SERVER['REMOTE_ADDR'];
+//        if (empty($this->ip)) $this->ip = $_SERVER['REMOTE_ADDR'];
 
         return parent::beforeValidate();
     }
