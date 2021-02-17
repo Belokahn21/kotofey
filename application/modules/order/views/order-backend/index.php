@@ -23,6 +23,7 @@ $this->title = Title::show("Заказы");
     <div class="title-group">
         <h1>Заказы</h1>
         <?= GroupBuyWidget::widget(); ?>
+        <?= Html::a('Выгрузка Email', Url::to(['order-backend/export']), ['class' => 'btn-main', 'target' => '_blank']); ?>
     </div>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [

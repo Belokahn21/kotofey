@@ -34,7 +34,7 @@ class OrderBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
 
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['report'], 'roles' => ['Administrator']]
+            ['allow' => true, 'actions' => ['report', 'export'], 'roles' => ['Administrator']]
         ]);
 
         return $parentAccess;
@@ -317,5 +317,29 @@ class OrderBackendController extends MainBackendController
         header("Content-Disposition: attachment; filename={$file_name}");
 //
         $writer->save('php://output');
+    }
+
+    public function actionExport()
+    {
+        $delimiter = ";";
+        $f = fopen('php://memory', 'w');
+        $filename = date('dmYhis') . " - email-export.csv";
+
+        $orders = Order::find()
+            ->select(['email', 'MAX(created_at)', 'created_at', 'phone'])
+            ->where(['<', 'created_at', strtotime('-1 month')])
+            ->andWhere(['<>', 'email', ''])
+            ->groupBy(['email', 'created_at', 'phone'])
+            ->all();
+
+
+        foreach ($orders as $line) {
+            fputcsv($f, [$line->email], $delimiter);
+        }
+
+        fseek($f, 0);
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+        fpassthru($f);
     }
 }
