@@ -88,13 +88,15 @@ LIST;
 
             <div class="checkout-form__title">Время и дата доставки
                 <div class="checkout-form__group-row">
-                    <label class="checkout-form__label" for="checkout-phone">
+                    <label class="checkout-form__label" for="checkout-date-delivery">
                         <div>Дата доставки*</div>
-                        <?= $form->field($orderDate, 'date')->textInput(['class' => 'js-mask-ru checkout-form__input', 'id' => 'checkout-phone', 'placeholder' => 'Ваш номер телефона', 'value' => Yii::$app->user->isGuest ? null : substr(Yii::$app->user->identity->phone, 1, strlen(Yii::$app->user->identity->phone))])->label(false) ?>
+                        <?= $form->field($orderDate, 'date')->textInput(['class' => 'js-datepicker checkout-form__input', 'id' => 'checkout-date-delivery', 'placeholder' => 'Дата доставки'])->label(false) ?>
                     </label>
-                    <label class="checkout-form__label" for="checkout-email">
+                    <label class="checkout-form__label" for="checkout-time-delivery">
                         <div>Время доставки*</div>
-                        <?= $form->field($orderDate, 'time')->textInput(['class' => 'checkout-form__input', 'id' => 'checkout-email', 'placeholder' => 'Ваш электронный адрес', 'value' => Yii::$app->user->isGuest ? null : Yii::$app->user->identity->email])->label(false) ?>
+                        <?= $form->field($orderDate, 'time')->dropDownList([
+                            '19.00-20.00'
+                        ], ['class' => 'checkout-form__select', 'id' => 'checkout-time-delivery', 'prompt' => 'Время доставки'])->label(false) ?>
                     </label>
                 </div>
             </div>
