@@ -188,9 +188,6 @@ class OrderBackendController extends MainBackendController
                     }
                 }
 
-                // Добавляем пользователю бонусы
-                if ($model->chargeBonus) BonusHelper::applyOrderBonus($model);
-
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно обновлён');
                 return $this->refresh();

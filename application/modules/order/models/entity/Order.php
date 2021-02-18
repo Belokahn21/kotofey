@@ -3,6 +3,7 @@
 namespace app\modules\order\models\entity;
 
 
+use app\modules\bonus\models\entity\UserBonusHistory;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\entity\ProductTransferHistory;
 use app\modules\catalog\models\helpers\ProductTransferHistoryHelper;
@@ -129,7 +130,10 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        if ($this->is_paid) OrderHelper::minusStockCount($this);
+        if ($this->is_paid) {
+            OrderHelper::minusStockCount($this);
+            BonusHelper::applyOrderBonus($this);
+        }
 
         // todo: херня выходит с пересохранением заказа, надо поправить
         if (!$this->is_update) {
