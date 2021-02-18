@@ -61,17 +61,14 @@ class Order extends ActiveRecord
 
     public $product_id;
     public $is_update;
-    public $minusStock;
-    public $plusStock;
-    public $chargeBonus;
     public $bonus;
 
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['bonus', 'entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['bonus', 'entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['bonus', 'entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_DEFAULT => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
         ];
     }
 
@@ -98,7 +95,7 @@ class Order extends ActiveRecord
 
             [['is_paid', 'is_cancel'], 'default', 'value' => false],
 
-            [['is_cancel', 'is_close', 'minusStock', 'plusStock', 'chargeBonus'], 'boolean'],
+            [['is_cancel', 'is_close'], 'boolean'],
 
             ['email', 'email'],
             [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
