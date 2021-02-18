@@ -112,6 +112,7 @@ class Order extends ActiveRecord
             [['product_id'], 'safe'],
 
             [['ip'], 'string'],
+            [['ip'], 'default', 'value' => \Yii::$app->request->userIP],
         ];
     }
 
@@ -144,8 +145,6 @@ class Order extends ActiveRecord
 
     public function beforeValidate()
     {
-//        if (empty($this->ip)) $this->ip = $_SERVER['REMOTE_ADDR'];
-
         return parent::beforeValidate();
     }
 
