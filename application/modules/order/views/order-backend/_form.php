@@ -154,8 +154,6 @@ use app\modules\bonus\models\helper\BonusHelper;
             <div class="w-25 p-1"><?= $form->field($model, 'is_close')->checkbox(); ?></div>
         </div>
         <div class="d-flex flex-row">
-            <div class="w-25 p-1"><?= $form->field($model, 'minusStock')->checkbox(); ?></div>
-            <div class="w-25 p-1"><?= $form->field($model, 'plusStock')->checkbox(); ?></div>
             <?php $model->chargeBonus = BonusHelper::isBonused($model); ?>
             <div class="w-25 p-1"><?= $form->field($model, 'chargeBonus')->radio(); ?></div>
         </div>
