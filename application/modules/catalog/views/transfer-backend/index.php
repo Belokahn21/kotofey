@@ -10,7 +10,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\catalog\models\entity\Product;
 
 /* @var $this \yii\web\View
- * @var $model \app\modules\catalog\models\form\ProductTransferHistoryForm
+ * @var $model \app\modules\catalog\models\entity\ProductTransferHistory
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $products Product[]
  * @var $dataProvider \yii\data\ActiveDataProvider

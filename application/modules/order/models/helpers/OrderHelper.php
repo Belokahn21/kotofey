@@ -2,6 +2,8 @@
 
 namespace app\modules\order\models\helpers;
 
+use app\modules\catalog\models\entity\ProductTransferHistory;
+use app\modules\catalog\models\helpers\ProductTransferHistoryHelper;
 use app\modules\delivery\models\entity\Delivery;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
@@ -151,42 +153,43 @@ class OrderHelper
         return $out_summ;
     }
 
-    public static function minusStockCount(Order $model, $isMinus = true)
+    public static function minusStockCount(Order $model)
     {
         $items = OrdersItems::find()->where(['order_id' => $model->id])->all();
 
-        if (!$items) {
-            return false;
-        }
+        if (!$items) return false;
 
         /* @var $item OrdersItems */
         foreach ($items as $item) {
 
-            if (!$item->product) {
-                continue;
-            }
+            if (!$item->product or ProductTransferHistoryHelper::isStockApplyTransfer($model, $item->product)) continue;
 
             $product = Product::findOne($item->product->id);
 
-            if (!$product) {
-                continue;
-            }
+            if (!$product) continue;
 
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
 
-            if ($isMinus) {
-                if ($product->count > 0 && $product->count - $item->count >= 0) {
-                    $product->count -= $item->count;
-                }
-            } else {
-                $product->count += $item->count;
-            }
+            if ($product->count > 0 && $product->count - $item->count >= 0) $product->count -= $item->count;
+
 
             if (!$product->validate()) {
                 print_r($product->getErrors());
+                exit();
             }
 
-            $product->update();
+            if ($product->update()) {
+                $obj = new ProductTransferHistory();
+                $obj->order_id = $model->id;
+                $obj->count = $item->count;
+                $obj->product_id = $item->product->id;
+                $obj->reason = "Списание {$item->name} в количестве {$item->count}шт. за заказ №{$model->id} от " . date('d.m.Y');
+
+                if (!$obj->validate() || !$obj->save()) {
+                    Debug::p($obj->getErrors());
+                    exit();
+                }
+            }
         }
 
         return true;

@@ -15,7 +15,7 @@ use app\modules\catalog\widgets\stockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
- * @var $model \app\modules\catalog\models\form\ProductTransferHistoryForm
+ * @var $model \app\modules\catalog\models\entity\ProductTransferHistory
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $products Product[]
  * @var $dataProvider \yii\data\ActiveDataProvider
