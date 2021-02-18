@@ -129,7 +129,7 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        OrderHelper::minusStockCount($this);
+        if ($this->is_paid) OrderHelper::minusStockCount($this);
 
         // todo: херня выходит с пересохранением заказа, надо поправить
         if (!$this->is_update) {
