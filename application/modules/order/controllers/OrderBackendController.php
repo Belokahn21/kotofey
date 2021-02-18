@@ -326,10 +326,10 @@ class OrderBackendController extends MainBackendController
         $filename = date('dmYhis') . " - email-export.csv";
 
         $orders = Order::find()
-            ->select(['email', 'MAX(`created_at`) as buy'])
-            ->where(['<>', 'email', ''])
-            ->andWhere(['<', 'created_at', date(strtotime('-3 month'))])
-            ->groupBy(['email'])
+            ->select(['id', 'email', 'created_at'])
+            ->where(['!=', 'email', ''])
+            ->andWhere(['in', 'created_at', Order::find()->select('MAX(created_at)')->groupBy('email')])
+            ->andWhere(['<', 'created_at', strtotime('-2 month')])
             ->asArray(true);
 
 
@@ -337,7 +337,7 @@ class OrderBackendController extends MainBackendController
 
 
         foreach ($orders as $order) {
-//            echo $order['email'] . " - " . date('d.m.Y', $order['buy']);
+//            echo $order['email'] . " - " . date('d.m.Y', $order['created_at']);
 //            echo "<br>";
             fputcsv($f, [$order['email']], $delimiter);
         }
@@ -346,7 +346,5 @@ class OrderBackendController extends MainBackendController
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="' . $filename . '";');
         fpassthru($f);
-
-        exit();
     }
 }
