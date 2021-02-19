@@ -25,10 +25,10 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $models = Product::find()->where(['like', 'name', 'дилли'])->all();
+        $models = Product::find()->where(['like', 'name', 'farmina'])->all();
         foreach ($models as $model) {
             $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            MarkupHelpers::applyMarkup($model, 15);
+            MarkupHelpers::applyMarkup($model, 20);
 
             if ($model->validate() && $model->update()) {
                 echo $model->name;
