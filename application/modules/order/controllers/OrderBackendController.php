@@ -34,7 +34,7 @@ class OrderBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
 
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['report'], 'roles' => ['Administrator']]
+            ['allow' => true, 'actions' => ['report', 'export'], 'roles' => ['Administrator']]
         ]);
 
         return $parentAccess;
@@ -188,9 +188,6 @@ class OrderBackendController extends MainBackendController
                     }
                 }
 
-                // Добавляем пользователю бонусы
-                if ($model->chargeBonus) BonusHelper::applyOrderBonus($model);
-
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно обновлён');
                 return $this->refresh();
@@ -317,5 +314,34 @@ class OrderBackendController extends MainBackendController
         header("Content-Disposition: attachment; filename={$file_name}");
 //
         $writer->save('php://output');
+    }
+
+    public function actionExport()
+    {
+        $delimiter = ";";
+        $f = fopen('php://memory', 'w');
+        $filename = date('dmYhis') . " - email-export.csv";
+
+        $orders = Order::find()
+            ->select(['id', 'email', 'created_at'])
+            ->where(['!=', 'email', ''])
+            ->andWhere(['in', 'created_at', Order::find()->select('MAX(created_at)')->groupBy('email')])
+            ->andWhere(['<', 'created_at', strtotime('-2 month')])
+            ->asArray(true);
+
+
+        $orders = $orders->all();
+
+
+        foreach ($orders as $order) {
+//            echo $order['email'] . " - " . date('d.m.Y', $order['created_at']);
+//            echo "<br>";
+            fputcsv($f, [$order['email']], $delimiter);
+        }
+
+        fseek($f, 0);
+        header('Content-Type: application/csv');
+        header('Content-Disposition: attachment; filename="' . $filename . '";');
+        fpassthru($f);
     }
 }

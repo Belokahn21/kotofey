@@ -24,4 +24,30 @@ class ProductTransferHistory extends \yii\db\ActiveRecord
             TimestampBehavior::className()
         ];
     }
+
+    public function rules()
+    {
+        return [
+            [['product_id', 'reason', 'count'], 'required'],
+            [['count'], 'default', 'value' => 0],
+            [['user_id'], 'default', 'value' => \Yii::$app->user->identity->id],
+            [['product_id', 'order_id', 'created_at', 'updated_at', 'count', 'user_id'], 'integer'],
+            [['reason'], 'string', 'max' => 255],
+        ];
+    }
+
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'product_id' => 'Product ID',
+            'user_id' => 'User ID',
+            'count' => 'Count',
+            'controlTransfer' => 'Control transfer',
+            'order_id' => 'Order ID',
+            'reason' => 'Reason',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
+        ];
+    }
 }

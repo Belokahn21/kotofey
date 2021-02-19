@@ -23,6 +23,7 @@ $this->title = Title::show("Заказы");
     <div class="title-group">
         <h1>Заказы</h1>
         <?= GroupBuyWidget::widget(); ?>
+        <?= Html::a('Выгрузка Email', Url::to(['order-backend/export']), ['class' => 'btn-main', 'target' => '_blank']); ?>
     </div>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
@@ -44,12 +45,8 @@ $this->title = Title::show("Заказы");
     'emptyText' => 'Закзаы отсутствуют',
     'columns' => [
         'id',
-        [
-            'attribute' => 'ip',
-            'value' => function ($model) {
-                return $model->ip;
-            }
-        ],
+        'email',
+        'ip',
         [
             'attribute' => 'status',
             'filter' => ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'),

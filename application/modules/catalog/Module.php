@@ -23,6 +23,7 @@ class Module extends \yii\base\Module
             ['name' => 'Свойства', 'url' => Url::to(['/admin/catalog/product-properties-backend/index'])],
             ['name' => 'Варианты свойств', 'url' => Url::to(['/admin/catalog/product-properties-variants-backend/index'])],
             ['name' => 'Группы свойств', 'url' => Url::to(['/admin/catalog/product-properties-group-backend/index'])],
+            ['name' => 'Движение товара', 'url' => Url::to(['/admin/catalog/transfer-backend/index'])],
         ];
     }
 

@@ -3,7 +3,10 @@
 namespace app\modules\order\models\entity;
 
 
+use app\modules\bonus\models\entity\UserBonusHistory;
 use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\catalog\models\entity\ProductTransferHistory;
+use app\modules\catalog\models\helpers\ProductTransferHistoryHelper;
 use app\modules\site\models\tools\Debug;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
@@ -58,17 +61,14 @@ class Order extends ActiveRecord
 
     public $product_id;
     public $is_update;
-    public $minusStock;
-    public $plusStock;
-    public $chargeBonus;
     public $bonus;
 
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['bonus', 'entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['bonus', 'entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['bonus', 'entrance', 'floor_house', 'chargeBonus', 'discount', 'ip', 'minusStock', 'plusStock', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_DEFAULT => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
         ];
     }
 
@@ -95,7 +95,7 @@ class Order extends ActiveRecord
 
             [['is_paid', 'is_cancel'], 'default', 'value' => false],
 
-            [['is_cancel', 'is_close', 'minusStock', 'plusStock', 'chargeBonus'], 'boolean'],
+            [['is_cancel', 'is_close'], 'boolean'],
 
             ['email', 'email'],
             [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
@@ -112,6 +112,7 @@ class Order extends ActiveRecord
             [['product_id'], 'safe'],
 
             [['ip'], 'string'],
+            [['ip'], 'default', 'value' => \Yii::$app->request->userIP],
         ];
     }
 
@@ -126,12 +127,9 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        if ($this->minusStock) {
+        if ($this->is_paid) {
             OrderHelper::minusStockCount($this);
-        }
-
-        if ($this->plusStock) {
-            OrderHelper::minusStockCount($this, false);
+            BonusHelper::applyOrderBonus($this);
         }
 
         // todo: херня выходит с пересохранением заказа, надо поправить
@@ -144,8 +142,6 @@ class Order extends ActiveRecord
 
     public function beforeValidate()
     {
-        if (empty($this->ip)) $this->ip = $_SERVER['REMOTE_ADDR'];
-
         return parent::beforeValidate();
     }
 

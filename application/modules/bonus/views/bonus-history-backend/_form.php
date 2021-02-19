@@ -23,8 +23,9 @@ use yii\helpers\ArrayHelper;
         <?= $form->field($model, 'order_id')->dropDownList(ArrayHelper::map($orders, 'id', 'id'), [
             'prompt' => 'Заказ'
         ]); ?>
-        <?= $form->field($model, 'bonus_account_id')->dropDownList(ArrayHelper::map($bonusAccount, 'phone', 'phone'), [
+        <?= $form->field($model, 'bonus_account_id')->textInput(); ?>
+        <?php /* $form->field($model, 'bonus_account_id')->dropDownList(ArrayHelper::map($bonusAccount, 'phone', 'phone'), [
             'prompt' => 'Аккаунт для начисления'
-        ]); ?>
+        ]); */ ?>
     </div>
 </div>

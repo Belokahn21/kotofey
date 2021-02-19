@@ -3,25 +3,16 @@
 namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductTransferHistory;
 use app\modules\catalog\models\entity\Properties;
-use app\modules\catalog\models\form\ProductTransferHistoryForm;
-use app\modules\catalog\models\search\ProductTransferHistorySearch;
-use app\modules\order\models\entity\Order;
-use app\modules\site\models\tools\Debug;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use Yii;
-use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\catalog\models\entity\ProductMarket;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\widgets\notification\Alert;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
 use yii\widgets\ActiveForm;
 use yii\web\HttpException;
-use yii\web\Controller;
 use yii\helpers\Url;
 
 

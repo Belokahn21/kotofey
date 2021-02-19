@@ -6,7 +6,6 @@ namespace app\modules\catalog\controllers;
 use app\modules\site\models\tools\Debug;
 use Yii;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\form\ProductTransferHistoryForm;
 use app\modules\catalog\models\search\ProductTransferHistorySearch;
 use app\modules\order\models\entity\Order;
 use app\modules\site\controllers\MainBackendController;
@@ -15,9 +14,11 @@ use yii\web\HttpException;
 
 class TransferBackendController extends MainBackendController
 {
+    public $modelClass = 'app\modules\catalog\models\entity\ProductTransferHistory';
+
     public function actionIndex()
     {
-        $model = new ProductTransferHistoryForm();
+        $model = new $this->modelClass();
         $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
         $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
         $searchModel = new ProductTransferHistorySearch();
@@ -28,7 +29,7 @@ class TransferBackendController extends MainBackendController
                 if ($model->validate() && $model->save()) {
                     Alert::setSuccessNotify('Элемент успешно добавлен.');
                     return $this->refresh();
-                }else{
+                } else {
                     Debug::p($model->getErrors());
                     exit();
                 }
@@ -46,7 +47,7 @@ class TransferBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        if (!$model = ProductTransferHistoryForm::findOne($id)) throw new HttpException(404, 'Элемент не найден.');
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден.');
 
         $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
         $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
@@ -69,7 +70,7 @@ class TransferBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (!$model = ProductTransferHistoryForm::findOne($id)) throw new HttpException(404, 'Элемент не найден.');
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден.');
 
         if ($model->delete()) Alert::setSuccessNotify('Элемент успешно удален.');
 
