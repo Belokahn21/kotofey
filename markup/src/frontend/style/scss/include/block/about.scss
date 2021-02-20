@@ -1,15 +1,42 @@
-.about-slider-pagination {
-  position: absolute;
-  z-index: 99;
+//.about-slider-pagination {
+//  position: absolute;
+//  z-index: 99;
+//
+//  .swiper-pagination-bullet, .swiper-pagination-bullet-active {
+//    background: white;
+//  }
+//}
+//
+//.about-slider-button-next, .about-slider-button-prev {
+//  &::after {
+//    color: white;
+//  }
+//}
 
-  .swiper-pagination-bullet, .swiper-pagination-bullet-active {
-    background: white;
+.about-swiper {
+  &-container {
+    width: 470px !important;
   }
-}
 
-.about-slider-button-next, .about-slider-button-prev {
-  &::after {
-    color: white;
+  &-wrapper {
+    .swiper-slide {
+      height: 600px;
+    }
+  }
+
+  &-pagination {
+    background: transparent;
+    width: 100% !important;
+    position: relative;
+    padding: 10px 0;
+
+    .swiper-pagination-bullet {
+      margin: 0 5px;
+
+      &-active {
+        background: $active-color;
+      }
+    }
   }
 }
 
@@ -22,31 +49,9 @@
   }
 
   .slider {
-    width: 600px;
     position: absolute;
     right: 0;
     top: 0;
 
-    .swiper-slide {
-      height: 600px;
-    }
-
-    img {
-      width: 100%;
-    }
-
-    .about-swiper-pagination {
-      width: 100% !important;
-      position: relative;
-      padding: 10px 0;
-
-      .swiper-pagination-bullet {
-        margin: 0 5px;
-
-        &-active {
-          background: $active-color;
-        }
-      }
-    }
   }
 }
