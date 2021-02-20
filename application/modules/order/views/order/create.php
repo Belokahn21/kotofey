@@ -30,7 +30,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\bonus\widgets\BonusFiled\BonusFieldWidget;
 use app\modules\promocode\widgets\promocode_field\PromocodeFieldWidget;
-use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\order\models\helpers\OrderDateHelper;
 
 $this->title = Title::show("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
@@ -94,9 +94,7 @@ LIST;
                     </label>
                     <label class="checkout-form__label" for="checkout-time-delivery">
                         <div>Время доставки*</div>
-                        <?= $form->field($orderDate, 'time')->dropDownList([
-                            '19.00-20.00'
-                        ], ['class' => 'checkout-form__select', 'id' => 'checkout-time-delivery', 'prompt' => 'Время доставки'])->label(false) ?>
+                        <?= $form->field($orderDate, 'time')->dropDownList(OrderDateHelper::getAvailableDates(), ['class' => 'checkout-form__select', 'id' => 'checkout-time-delivery', 'prompt' => 'Время доставки'])->label(false) ?>
                     </label>
                 </div>
             </div>
