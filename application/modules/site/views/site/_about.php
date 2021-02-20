@@ -1,9 +1,10 @@
 <?php
 
-use app\modules\order\models\entity\Order;
-use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
+use app\modules\seo\models\tools\Title;
+use app\modules\order\models\entity\Order;
 use app\modules\catalog\models\entity\Product;
+use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\content\widgets\informers_slider\InformerSliderWidget;
 
 $this->title = Title::show("О зоомагазине");
@@ -52,20 +53,11 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' 
     </div>
     <h1 class="title">О нашем интернет-зоомагазине</h1>
     <div class="about-text">
-        <div class="slider">
-            <div class="swiper-container about-swiper-container">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="/images/eq1.jpg"></div>
-                    <div class="swiper-slide"><img src="/images/eq2.jpg"></div>
-                    <div class="swiper-slide"><img src="/images/eq3.jpg"></div>
-                    <div class="swiper-slide"><img src="/images/eq5.jpg"></div>
-                </div>
-            </div>
-            <div class="swiper-pagination about-swiper-pagination"></div>
-        </div>
+        <?= SliderWidget::widget(['slider_id' => 3, 'view' => 'about']) ?>
+
         <p>Барнаульский интернет-зоомагазин Котофей!</p>
         <p>Занимаемся продажей зоотоваров для домашних питомцев и<br>доставкой зоотоваров в городе Барнаул и по России.</p>
-        <p>Мы продаём сухие и влажные корма, товары для груминга, предметы<br>интерьра такие как домики, когтеточки для кошек, лежанки<br></p>аксесуары в том числе одежда для животных, игрушки.<br><br>
+        <p>Мы продаём сухие и влажные корма, товары для груминга, предметы<br>интерьра такие как домики, когтеточки для кошек, лежанки<br></p>аксессуары в том числе одежда для животных, игрушки.<br><br>
         <p>Каждый месяц в нашем интернет-магазине появляются интересные<br>акции от торговых марок <strong>Royal Canin</strong>, <strong>Hiil's</strong>, <strong>Purina</strong>. Акции содержат<br>скидки на товары, выгодные предложения 1+1 и другие приятные<br>условия!</p><br>
         <p>Наши клиенты имеют возможность:</p>
         <ul>
