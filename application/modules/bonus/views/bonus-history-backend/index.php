@@ -43,7 +43,12 @@ $this->title = Title::show("История операций с бонусами"
         ],
         'count',
         'bonus_account_id',
-        'order_id',
+        [
+            'attribute' => 'order_id',
+            'value' => function ($model) {
+                return Html::a('Заказ №' . $model->order_id, Url::to(['order-backend/update', 'id' => $model->order_id]));
+            }
+        ],
         'reason',
         [
             'attribute' => 'created_at',
