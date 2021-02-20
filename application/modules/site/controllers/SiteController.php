@@ -129,11 +129,11 @@ class SiteController extends Controller
         Attributes::metaDescription("Небольшой рассказ о нашей компании, наших целях и планах на будущее");
         Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
-        if (Yii::$app->user->identity->id == 1) {
+//        if (!Yii::$app->user->isGuest && Yii::$app->user->identity->id == 1) {
+//            return $this->render('_about');
+//        } else {
             return $this->render('_about');
-        } else {
-            return $this->render('about');
-        }
+//        }
 
     }
 
