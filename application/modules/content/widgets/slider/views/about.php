@@ -9,7 +9,7 @@ use app\modules\content\models\helpers\SlidersImagesHelper;
 
 ?>
 <?php if ($images): ?>
-    <?php if ($this->beginCache('index-slider-html', ['duration' => 3600 * 24 * 7])): ?>
+    <?php if ($this->beginCache('about-slider', ['duration' => 3600 * 24 * 7])): ?>
         <div class="slider">
             <div class="swiper-container about-swiper-container">
                 <div class="swiper-wrapper">
