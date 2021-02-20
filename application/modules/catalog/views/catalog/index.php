@@ -44,7 +44,7 @@ if ($category) {
         ],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
-    <h1 class="page__title"><?= ($category ? $category->name : "Каталог товаров"); ?></h1>
+    <h1 class="page__title"><?= ($category ? $category->name : "Зоотовары"); ?></h1>
     <div class="catalog-container">
         <aside class="left-siderbar">
 
@@ -73,11 +73,13 @@ if ($category) {
         </aside>
         <div class="catalog-wrap">
 
-            <?= ProductSortWidget::widget(); ?>
 
             <?= CatalogCategoriesWidget::widget([
                 'parent_id' => !$category instanceof ProductCategory ? 0 : $category->id
             ]); ?>
+
+
+            <?= ProductSortWidget::widget(); ?>
 
             <?php if ($products): ?>
 

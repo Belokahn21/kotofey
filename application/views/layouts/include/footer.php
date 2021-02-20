@@ -46,6 +46,7 @@ use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
                 </ul>
             </div>
             <div style="margin: auto auto;">
+                <a class="footer-is-shop" href="/">Интернет-зоомагазин Котофей</a>
                 <?= SubscribeWidget::widget(); ?>
                 <?= SocialMe::widget(); ?>
             </div>

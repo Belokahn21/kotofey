@@ -119,7 +119,7 @@ $this->beginPage() ?>
     </div>
     <div class="header-mobile-full active">
         <div class="header-mobile-full__group">
-            <div class="header-mobile-full__title">Каталог</div>
+            <div class="header-mobile-full__title">Зоотовары</div>
             <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg" alt="Стрелка"></div>
         </div>
         <ul class="full-mobile-menu">
@@ -168,7 +168,7 @@ $this->beginPage() ?>
     <div class="menu page-container">
         <div class="menu__item hamburger js-hamburger"><img alt="Показать меню" class="hamburger__icon" src="/upload/images/hamburger.svg">
         </div>
-        <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Каталог</a></div>
+        <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Зоотовары</a></div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/promotion/']); ?>">Акции и скидки</a></div>
         <div class="menu__item">
             <?= SearchWidget::widget(); ?>
