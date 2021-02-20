@@ -14,7 +14,7 @@ use app\modules\content\models\helpers\SlidersImagesHelper;
             <div class="swiper-container about-swiper-container">
                 <div class="swiper-wrapper">
                     <?php foreach ($images as $image): ?>
-                        <?= Html::img(SlidersImagesHelper::getImageUrl($image), ['class' => 'swiper-slide', 'alt' => $image->text, 'title' => $image->text]) ?>
+                        <?= Html::img(SlidersImagesHelper::getImageUrl($image, ['width' => 600, 'height' => 600, 'crop' => 'fit']), ['class' => 'swiper-slide', 'alt' => $image->text, 'title' => $image->text]) ?>
                     <?php endforeach; ?>
                 </div>
             </div>
