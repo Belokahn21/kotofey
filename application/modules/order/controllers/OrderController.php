@@ -114,6 +114,7 @@ class OrderController extends Controller
             'orderDate' => $orderDate,
             'deliveries' => $deliveries,
             'payments' => $payments,
+            'basket' => Basket::findAll()
         ]);
     }
 
