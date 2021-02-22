@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /* @var $orderHistory Order[]
  * @var $profile \app\modules\user\models\entity\User
  * @var $model Order
- * @var $userBonus \app\modules\bonus\models\entity\UserBonus
+ * @var $userBonus integer
  */
 
 ?>
@@ -39,7 +39,7 @@ use yii\helpers\Url;
 
                     <h4>Бонусы</h4>
                     <?php if ($userBonus): ?>
-                        <div>Кол-во бонусов: <?= $userBonus->count; ?></div>
+                        <div>Кол-во бонусов: <?= $userBonus; ?></div>
                     <?php else: ?>
                         <div>Аккаунт с бонусами не найден</div>
                     <?php endif; ?>
