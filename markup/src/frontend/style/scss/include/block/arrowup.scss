@@ -17,4 +17,9 @@
   -webkit-box-shadow: 0 2px 4px #999;
   box-shadow: 0 2px 4px #999;
   cursor: pointer;
+
+  @media (max-width: 450px) {
+    bottom: 100px;
+    left: 10px;
+  }
 }
