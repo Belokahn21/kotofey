@@ -79,10 +79,21 @@ $this->beginPage() ?>
             <div class="logo__city">В Барнауле</div>
         </a>
     </div>
+
+    <div class="phone"><img class="phone__icon" src="./assets/images/phone.png">
+    </div>
+
     <div class="phone">
         <img class="phone__icon" src="/upload/images/phone.png" alt="Телефон">
-        <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
-           class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a></div>
+        <div class="wh-group">
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask">
+                <?= SiteSettings::getValueByCode('phone_1'); ?>
+            </a>
+            <a class="wh-group-link" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
+                <img class="wh-group-icon" src="/images/whatsapp32x32.png" width="24px">
+            </a>
+        </div>
+    </div>
     <div class="header-menu-mobile">
         <div class="phone">
             <img class="phone__icon" src="/upload/images/phone.png" alt="Телефон">
