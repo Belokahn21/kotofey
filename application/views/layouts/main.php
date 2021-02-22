@@ -80,9 +80,6 @@ $this->beginPage() ?>
         </a>
     </div>
 
-    <div class="phone"><img class="phone__icon" src="./assets/images/phone.png">
-    </div>
-
     <div class="phone">
         <img class="phone__icon" src="/upload/images/phone.png" alt="Телефон">
         <div class="wh-group">
