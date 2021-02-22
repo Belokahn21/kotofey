@@ -38,10 +38,16 @@
         display: none;
       }
     }
+  }
 
-    &-is-shop {
-      margin-bottom: 70px;
-      display: block;
+  &-is-shop {
+    @extend .footer__title;
+    margin-bottom: 116px;
+    display: block;
+    color: white;
+
+    &:hover {
+      color: white;
     }
   }
 }

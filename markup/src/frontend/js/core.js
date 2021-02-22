@@ -13,12 +13,12 @@ import './block/gifts';
 import './block/mobile-menu';
 import './block/basket';
 import './block/search';
-import './block/menu';
+import Menu from './block/Menu';
 import './block/ui-placeholder';
 import './block/other-jquery';
 import './block/catalog-filter';
-import './block/favorite';
-import './block/compare';
+import Favorite from './block/favorite';
+import Compare from './block/compare';
 import './block/toggleClass';
 import './block/promocode';
 import './include/init-sliders';
@@ -30,30 +30,19 @@ import Catalog from './block/catalog';
 import StickFilter from './block/StickFilter';
 import RemoveBasketItem from './block/RemoveBasketItem';
 import LiveSearch from './block/LiveSearch';
+import MiniCart from './block/FastCart';
 
-const catalog = new Catalog();
-new StickFilter(catalog);
+new StickFilter(new Catalog());
 new RemoveBasketItem();
 new LiveSearch('.js-live-search');
+new Compare();
+new Favorite();
+new Menu();
 
-
-import MiniCart from './block/FastCart';
 
 document.addEventListener('DOMContentLoaded', () => {
     new ProductCalc(new MiniCart());
 });
-
-$(function () {
-    $("[rel='tooltip']").tooltip();
-
-
-    $('.filter-catalog-checkboxes').on('hidden.bs.collapse', function (e) {
-        $('a[href="#' + $(this).attr('id') + '"]').text("Показать");
-    }).on('shown.bs.collapse', function (e) {
-        $('a[href="#' + $(this).attr('id') + '"]').text("Скрыть");
-    });
-});
-
 
 //react js
 import './react/cdek-calculator/CdekCalculator';

@@ -72,6 +72,9 @@
 // Быстрая корзина
 @import "include/block/fast-cart";
 
+// Стрелка вверх
+@import "include/block/arrowup";
+
 // личный кабинет
 @import "include/block/order-list";
 @import "include/block/profile-order-info";
@@ -188,3 +191,6 @@
 
 //Вакансии
 @import "include/block/vacancy-list";
+
+// Карта в футере
+@import "include/block/footer-map";

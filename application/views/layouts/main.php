@@ -12,14 +12,12 @@ use app\widgets\notification\Alert;
 use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
 use app\modules\menu\widgets\Menu\MenuWidget;
-use app\modules\site\widgets\SocialMe\SocialMe;
-use app\modules\stock\widgets\store\StoreWidget;
+use app\modules\site\widgets\PageUp\PageUpWidget;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site\widgets\AdminPanel\AdminPanel;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\helpers\CategoryHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
-use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
 use app\modules\basket\widgets\MiniMobileCart\MiniMobileCartWidget;
 
 AppAsset::register($this);
@@ -225,8 +223,7 @@ $this->beginPage() ?>
 <?= $this->render('include/footer', [
     'parentCategories' => $parentCategories
 ]); ?>
-
-
+<?= PageUpWidget::widget(); ?>
 <?php
 $signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
 $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
@@ -235,6 +232,7 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
     'signin' => $signinModel,
     'signup' => $signupModel,
 ]); ?>
+<?= $this->render('include/yandex-map') ?>
 <?= Alert::widget(); ?>
 <script src="/js/frontend-core.min.js"></script>
 <?php $this->endBody(); ?>

@@ -1,4 +1,5 @@
 import $ from 'jquery';
+
 window.$ = window.jQuery = $;
 
 let Selectize = require('selectize');
@@ -23,7 +24,28 @@ $('.modal').on('show.bs.modal', function () {
 
 $(document).ready(function () {
     let $toast = $('.toast');
-    if ($toast) {
-        $toast.toast('show');
-    }
+    if ($toast) $toast.toast('show');
+
+    $("[rel='tooltip']").tooltip();
+
+    $('.filter-catalog-checkboxes').on('hidden.bs.collapse', function (e) {
+        $('a[href="#' + $(this).attr('id') + '"]').text("Показать");
+    }).on('shown.bs.collapse', function (e) {
+        $('a[href="#' + $(this).attr('id') + '"]').text("Скрыть");
+    });
+
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('#button-up').fadeIn();
+        } else {
+            $('#button-up').fadeOut();
+        }
+    });
+
+    $('#button-up').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 500);
+        return false;
+    });
 });

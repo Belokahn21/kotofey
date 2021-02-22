@@ -216,8 +216,12 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
                                     $variants = [];
 
-                                    if ($property->type == TypeProductProperties::TYPE_CATALOG) $variants = ArrayHelper::map(Product::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
-                                    else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
+                                    if ($property->type == TypeProductProperties::TYPE_CATALOG) {
+                                        $variants = ArrayHelper::map(Product::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
+                                        array_walk($variants, function (&$value, $key) {
+                                            $value = $key . ' - ' . $value;
+                                        });
+                                    } else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
 
                                     ?>
                                     <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?>

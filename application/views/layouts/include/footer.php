@@ -46,7 +46,12 @@ use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
                 </ul>
             </div>
             <div style="margin: auto auto;">
-                <a class="footer-is-shop" href="/">Интернет-зоомагазин Котофей</a>
+                <?php if (empty(Yii::$app->request->getPathInfo())): ?>
+                    <div class="footer-is-shop" href="/">Интернет-зоомагазин Котофей</div>
+                <?php else: ?>
+                    <a class="footer-is-shop" href="/">Интернет-зоомагазин Котофей</a>
+                <?php endif; ?>
+
                 <?= SubscribeWidget::widget(); ?>
                 <?= SocialMe::widget(); ?>
             </div>

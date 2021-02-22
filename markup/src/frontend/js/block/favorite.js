@@ -64,4 +64,4 @@ class Favorite {
     }
 }
 
-let favorite = new Favorite();
+module.exports = Favorite;
