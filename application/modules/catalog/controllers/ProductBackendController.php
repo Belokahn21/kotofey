@@ -135,9 +135,10 @@ class ProductBackendController extends MainBackendController
     public function actionPriceRepair()
     {
         $products = $this->modelClass::find()
-            ->leftJoin(['sub' => Product::find()], 'sub.id=product.id')
-            ->where(['sub.price' => 'product.purchase_price'])
-            ->all();
+            ->where("`price`=`purchase`");
+
+        $products = $products->all();
+
 
         return $this->render('price-repair', [
             'models' => $products

@@ -1,13 +1,19 @@
 <?php
 /* @var $this \yii\web\View */
+
 /* @var $models \app\modules\catalog\models\entity\Product[] */
 
-var_dump($models);
-exit();
+use yii\helpers\Html;
+use yii\helpers\Url;
+
 ?>
 
 <ul>
     <?php foreach ($models as $model): ?>
-        <li><?= \yii\helpers\Html::a($model->name, \yii\helpers\Url::to(['product-backend/update', 'id' => $model->id]), ['target' => '_blank']); ?></li>
+        <li>
+            Цена: <?= $model->price; ?>
+            Закупочная: <?= $model->purchase; ?>
+            <?= Html::a($model->name, Url::to(['product-backend/update', 'id' => $model->id]), ['target' => '_blank']); ?>
+        </li>
     <?php endforeach; ?>
 </ul>
