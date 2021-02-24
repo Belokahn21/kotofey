@@ -26,9 +26,8 @@ class ProductBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
 
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['discount-clean'], 'roles' => ['Administrator']],
             ['allow' => true, 'actions' => ['copy'], 'roles' => ['Administrator', 'Content']],
-            ['allow' => true, 'actions' => ['transfer'], 'roles' => ['Administrator']],
+            ['allow' => true, 'actions' => ['transfer', 'price-repair'], 'roles' => ['Administrator']],
             ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]
         ]);
 
@@ -133,25 +132,16 @@ class ProductBackendController extends MainBackendController
         ]);
     }
 
-    public function actionDiscountClean()
+    public function actionPriceRepair()
     {
-        $products = $this->modelClass::find()->where(['>', 'discount_price', 0]);
-        $hasItems = $products->count() > 0;
+        $products = $this->modelClass::find()
+            ->leftJoin(['sub' => Product::find()], 'sub.id=product.id')
+            ->where(['sub.price' => 'product.purchase_price'])
+            ->all();
 
-        foreach ($products->all() as $product) {
-            $product->discount_price = null;
-
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-
-            if (!$product->validate() or !$product->update()) {
-                $hasItems = false;
-                break;
-            }
-        }
-
-        if ($hasItems) Alert::setSuccessNotify('Товары со скидкой очищены успешно');
-
-        return $this->redirect(['index']);
+        return $this->render('price-repair', [
+            'models' => $products
+        ]);
     }
 
     public function actionDelete($id)
