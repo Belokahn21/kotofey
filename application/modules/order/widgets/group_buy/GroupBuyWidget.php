@@ -24,7 +24,6 @@ class GroupBuyWidget extends Widget
 
         $this->loadOrderItems($groupedData);
         $this->groupItems($groupedData);
-//        $this->sortGroupItems($groupedData);
 
         return $this->render($this->view, [
             'groupedData' => $groupedData

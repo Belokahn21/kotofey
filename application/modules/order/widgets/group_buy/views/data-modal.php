@@ -25,7 +25,7 @@ use yii\helpers\Url;
                                         <?php foreach ($data['group_items']['item'] as $item): ?>
                                             <li class="group-buy-list__item">
                                                 <?php if ($item->product): ?>
-                                                    (<?= count($data['group_items']['count'][$item->product->id]); ?>) <?= Html::a($item->product->name, Url::to(['/']), ['class' => 'group-buy-list__link']); ?>
+                                                    (<?= count($data['group_items']['count'][$item->product->id]); ?>) <?= Html::a($item->product->name, Url::to(['product-backend/update', 'id' => $item->product->id]), ['class' => 'group-buy-list__link']); ?>
                                                 <?php else: ?>
                                                     <?= Html::tag('div', "(" . count($data['group_items']['count'][$item->product_id]) . ") " . $item->name, ['class' => 'group-buy-list__link']); ?>
                                                 <?php endif; ?>
