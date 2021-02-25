@@ -45,8 +45,9 @@ $this->title = Title::show("История операций с бонусами"
         'bonus_account_id',
         [
             'attribute' => 'order_id',
+            'format' => 'raw',
             'value' => function ($model) {
-                return Html::a('Заказ №' . $model->order_id, Url::to(['order-backend/update', 'id' => $model->order_id]));
+                if ($model->order_id) return Html::a('Заказ №' . $model->order_id, Url::to(['/admin/order/order-backend/update', 'id' => $model->order_id]));
             }
         ],
         'reason',
