@@ -10,7 +10,7 @@ use app\modules\order\widgets\group_buy\GroupBuyWidget;
 use yii\helpers\ArrayHelper;
 use app\modules\order\models\entity\OrderStatus;
 
-/* @var $models array
+/* @var $models \app\modules\order\models\entity\Order[]
  */
 
 $this->title = Title::show("Заказы");
@@ -23,7 +23,8 @@ $this->title = Title::show("Заказы");
     <div class="logistic-list">
         <?php foreach ($models as $model): ?>
             <div class="logistic-list__item">
-                <?= $model->id; ?>
+                Заказ #<?= $model->id; ?>
+                Адрес доставки: <?= $model->city; ?>, <?= $model->street; ?>, д. <?= $model->number_home; ?>, кв. <?= $model->number_appartament; ?>
             </div>
         <?php endforeach; ?>
     </div>
