@@ -17,7 +17,7 @@ class Module extends \yii\base\Module
     public function menuIndex()
     {
         return [
-//            ['name' => 'Маршруты', 'url' => Url::to(['/admin/'])],
+            ['name' => 'Маршруты', 'url' => Url::to(['/admin/logistic/route-backend/index'])],
         ];
     }
 
