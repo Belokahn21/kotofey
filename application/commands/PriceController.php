@@ -2,13 +2,14 @@
 
 namespace app\commands;
 
-
 use app\models\tool\import\Forza10;
 use app\models\tool\import\Hills;
 use app\models\tool\import\RoyalCanin;
 use app\models\tool\import\Tavela;
 use app\models\tool\import\Valta;
 use app\models\tool\import\Purina;
+use app\modules\catalog\models\entity\Product;
+use app\modules\settings\models\helpers\MarkupHelpers;
 use yii\console\Controller;
 
 class PriceController extends Controller
@@ -65,6 +66,33 @@ class PriceController extends Controller
                 echo "Выберите прайс для добавления.\n" . $this->getMessage($message) . "\nphp yii price/load n";
                 break;
         }
+    }
+
+    public function actionFast($phrase, $markup)
+    {
+        $phrase = 'эдель кэт';
+        $models = Product::find();
+
+        foreach (explode(' ', $phrase) as $text_line) {
+            $models->andFilterWhere([
+                'or',
+                ['like', 'name', $text_line],
+                ['like', 'feed', $text_line]
+            ]);
+        }
+
+        $models = $models->all();
+
+        foreach ($models as $model) {
+            $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            MarkupHelpers::applyMarkup($model, $markup);
+
+            if ($model->validate() && $model->update()) {
+                echo $model->name;
+                echo PHP_EOL;
+            }
+        }
+
     }
 
     public function getMessage($message)
