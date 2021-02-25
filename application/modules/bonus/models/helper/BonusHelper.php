@@ -14,19 +14,23 @@ class BonusHelper
 {
     public static function addOrderBonus(Order $order, $active = true)
     {
-        if (self::isBonused($order)) return false;
+        if (self::isBonused($order) or !empty($order->promocode)) return false;
         return self::addHistory($order, self::calcResultBonus($order), "Зачисление за заказ #" . $order->id, $active);
     }
 
     public static function applyOrderBonus(Order $order)
     {
-        $elementHistory = UserBonusHistory::findOneByOrder($order);
-        if ($elementHistory) {
-            $elementHistory->is_active = true;
-            return $elementHistory->validate() && $elementHistory->update();
-        }
+        if ($module = \Yii::$app->getModule('bonus')) {
+            if ($module->getEnable()) {
+                $elementHistory = UserBonusHistory::findOneByOrder($order);
+                if ($elementHistory) {
+                    $elementHistory->is_active = true;
+                    return $elementHistory->validate() && $elementHistory->update();
+                }
 
-        return self::addOrderBonus($order);
+                return self::addOrderBonus($order);
+            }
+        }
     }
 
     public static function calcResultBonus(Order $order)
