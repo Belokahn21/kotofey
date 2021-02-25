@@ -17,7 +17,7 @@ class AliexpressController extends Controller
         $categories = ProductCategory::find()->all();
 
         $offers = \Yii::$app->cache->getOrSet('ali:export', function () {
-            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->andWhere(['>', 'count', 0]);
+            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE]);
         });
 
 
