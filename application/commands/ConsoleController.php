@@ -25,7 +25,19 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $models = Product::find()->where(['like', 'name', 'Лакомства Деревенские'])->all();
+        $phrase = 'Лакомства Деревенские';
+        $models = Product::find()->where(['like', 'name',]);
+
+        foreach (explode(' ', $phrase) as $text_line) {
+            $models->andFilterWhere([
+                'or',
+                ['like', 'name', $text_line],
+                ['like', 'feed', $text_line]
+            ]);
+        }
+
+        $models = $models->all();
+
         foreach ($models as $model) {
             $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             MarkupHelpers::applyMarkup($model, 20);
