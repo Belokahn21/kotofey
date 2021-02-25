@@ -10,7 +10,9 @@ class RouteBackendController extends MainBackendController
 {
     public function actionIndex()
     {
-        $models = Order::find()->where(['is_close' => false, 'status' => 8]);
+        $models = Order::find()
+            ->where(['is_close' => false, 'is_cancel' => false, 'status' => 8])
+            ->orderBy(['id' => SORT_DESC]);
         $models = $models->all();
 
 

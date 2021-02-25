@@ -59,6 +59,11 @@ class RestBackendController extends Controller
 						['<', 'created_at', $end->getTimestamp()],
 					])->count()) > 0
 			],
+			[
+				'icon' => 'fas fa-truck',
+				'href' => Url::to(['/admin/logistic/route-backend/index']),
+				'isNewData' => false
+			],
 		];
 
 		return Json::encode($menu);
