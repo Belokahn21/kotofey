@@ -26,7 +26,7 @@ class ConsoleController extends Controller
     public function actionRun($arg = null)
     {
         $phrase = 'Лакомства Деревенские';
-        $models = Product::find()->where(['like', 'name',]);
+        $models = Product::find();
 
         foreach (explode(' ', $phrase) as $text_line) {
             $models->andFilterWhere([
