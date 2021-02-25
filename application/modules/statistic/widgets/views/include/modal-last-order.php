@@ -18,33 +18,36 @@ use app\modules\site\models\tools\Price;
             </div>
             <div class="modal-body p-0">
                 <ul class="month-stat">
-					<?php foreach (['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] as $i => $month): ?>
+                    <?php foreach (['Январь', 'Февраль', 'Март', 'Апрель', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'] as $i => $month): ?>
                         <li class="month-stat__item">
-							<?php
-							$avail_mont_start = strtotime('01.' . ($i + 1) . '.' . date('Y'));
-							$avail_mont_end = strtotime('31.' . ($i + 1) . '.' . date('Y'));
-							$query = Order::find()->where(['>', 'created_at', $avail_mont_start])->andWhere(['<', 'created_at', $avail_mont_end]);
-							?>
+                            <?php
+                            $avail_mont_start = strtotime('01.' . ($i + 1) . '.' . date('Y'));
+                            $avail_mont_end = strtotime('31.' . ($i + 1) . '.' . date('Y'));
+                            $query = Order::find()
+                                ->where(['>', 'created_at', $avail_mont_start])
+                                ->andWhere(['<', 'created_at', $avail_mont_end])
+                                ->andWhere(['is_close' => true, 'is_paid' => true]);
+                            ?>
                             <div class="month-stat__title"><?= $month; ?></div>
                             <div class="month-stat__count">Заказов: <?= $query->count(); ?></div>
                             <div class="month-stat__rotate">Оборот: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
-									$out = 0;
-									foreach ($models as $model) {
-										$out += OrderHelper::income($model->id);
-									}
-									return Price::format($out) . Currency::getInstance()->show();
-								}) ?>
+                                    $out = 0;
+                                    foreach ($models as $model) {
+                                        $out += OrderHelper::income($model);
+                                    }
+                                    return Price::format($out) . Currency::getInstance()->show();
+                                }) ?>
                             </div>
                             <div class="month-stat__summary">Доход: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
-									$out = 0;
-									foreach ($models as $model) {
-										$out += OrderHelper::marginality($model->id);
-									}
-									return Price::format($out) . Currency::getInstance()->show();
-								}) ?>
+                                    $out = 0;
+                                    foreach ($models as $model) {
+                                        $out += OrderHelper::marginality($model);
+                                    }
+                                    return Price::format($out) . Currency::getInstance()->show();
+                                }) ?>
                             </div>
                         </li>
-					<?php endforeach; ?>
+                    <?php endforeach; ?>
                 </ul>
             </div>
             <div class="modal-footer">

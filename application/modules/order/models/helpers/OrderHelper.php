@@ -10,6 +10,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
 use app\modules\payment\models\entity\Payment;
+use app\modules\promocode\models\entity\Promocode;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 
@@ -64,12 +65,12 @@ class OrderHelper
         $summ = 0;
         foreach ($order->items as $item) $summ += $item->count * ($item->discount_price ? $item->discount_price : $item->price);
 
-        $summ = self::applyDiscount($order, $summ);
+        $summ = self::applyDiscountToAmount($order, $summ);
 
         return $summ;
     }
 
-    public static function applyDiscount(Order $order, $summ)
+    public static function applyDiscountToAmount(Order $order, $summ)
     {
         if (!$order->discount) return $summ;
 
@@ -90,7 +91,7 @@ class OrderHelper
         if ($order->status) {
             return OrderStatus::findOne($order->status)->name;
         }
-        return 'Обрабатывается';
+        return 'В обработке';
     }
 
     public static function getPayment(Order $order)
@@ -109,49 +110,50 @@ class OrderHelper
         return 'Не указано';
     }
 
-    public static function isFirstOrder($user_id)
-    {
-        return Order::find()->where(['user_id' => $user_id])->count() == 1;
-    }
-
-    public static function income($order_id = null)
+    /* оборот заказа */
+    public static function income(Order $order)
     {
         $out = 0;
 
-        if ($order_id == null) {
-            $order_id = ArrayHelper::getColumn(Order::find()->where(['is_cancel' => 0])->all(), 'id');
-        }
-
-        $items = OrdersItems::find()->where(['order_id' => $order_id])->all();
-
-        foreach ($items as $item) {
+        foreach ($order->items as $item) {
             $out += $item->count * $item->price;
         }
 
         return $out;
     }
 
-    public static function marginality($order_id = null, $noForce = true)
+    public static function marginalityAllOrder()
     {
-        $out_summ = 0;
-        $orders = Order::find();
-
-        if ($order_id) {
-            $orders->where(['id' => $order_id]);
+        $outAmount = 0;
+        $orders = Order::find()
+            ->where(['is_paid' => true, 'is_close' => true])
+            ->all();
+        foreach ($orders as $order) {
+            $outAmount += self::marginality($order);
         }
 
-        $orders->andWhere(['is_cancel' => 0, 'is_paid' => $noForce]);
+        return $outAmount;
+    }
 
-        $orders = $orders->all();
+    /* прибыль заказа */
+    public static function marginality(Order $order)
+    {
+        $out_summ = 0;
 
-        foreach ($orders as $order) {
-            foreach ($order->items as $item) $out_summ += ($item->price - $item->purchase) * $item->count;
+        foreach ($order->items as $item) {
+            $out_summ += ($item->price - $item->purchase) * $item->count;
+        }
 
-            if ($order->discount) $out_summ = self::applyDiscount($order, $out_summ);
+        if ($order->discount) $out_summ = self::applyDiscountToAmount($order, $out_summ);
+        if ($order->promocode) {
+            if ($promo = Promocode::findOneByCode($order->promocode)) {
+                $out_summ = self::applyDiscountToAmount($order, $promo->discount);
+            }
         }
 
         return $out_summ;
     }
+
 
     public static function minusStockCount(Order $model)
     {

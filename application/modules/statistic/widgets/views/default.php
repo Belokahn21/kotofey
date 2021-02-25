@@ -45,7 +45,7 @@ $product = Product::find();
                         </div>
                         <div class="statistic-info__item">
                             <div class="statistic-info__key">Прибыль</div>
-                            <div class="statistic-info__value"><?= Price::format(OrderHelper::marginality()); ?><?= Currency::getInstance()->show(); ?></div>
+                            <div class="statistic-info__value"><?= Price::format(OrderHelper::marginalityAllOrder()); ?><?= Currency::getInstance()->show(); ?></div>
                         </div>
                         <div class="statistic-info__item">
                             <div class="statistic-info__key">Оборот</div>
@@ -70,8 +70,7 @@ $product = Product::find();
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon" data-toggle="modal" data-target="#search-list"><i
-                            class="fas fa-search"></i></div>
+                <div class="statistic__icon" data-toggle="modal" data-target="#search-list"><i class="fas fa-search"></i></div>
                 <div class="statistic__content">
                     <?php if ($lastSearch): ?>
                         <div class="statistic-summary">

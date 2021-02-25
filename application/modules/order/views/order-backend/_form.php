@@ -49,8 +49,8 @@ use app\modules\bonus\models\helper\BonusHelper;
                             <div class="title">Финансы</div>
                             <div class="text">Закуп: <?= Price::format(OrderHelper::orderPurchase($model->id)); ?></div>
                             <div class="text">Сумма заказа: <?= Price::format(OrderHelper::orderSummary($model)); ?></div>
-                            <?php $marge = OrderHelper::marginality($model->id, false); ?>
-                            <div class="text">Прибыль: <?= $marge > 0 ? '<span class="green">+' . $marge . '</span>' : '<span class="red">-' . $marge . '</span>'; ?></div>
+                            <?php $marge = OrderHelper::marginality($model); ?>
+                            <div class="text">Прибыль: <?= $marge > 1 ? '<span class="green">+' . $marge . '</span>' : '<span class="red">-' . $marge . '</span>'; ?></div>
                             <hr/>
                             <div class="text">Бонусы: <?= $model->bonus; ?></div>
                         </div>
