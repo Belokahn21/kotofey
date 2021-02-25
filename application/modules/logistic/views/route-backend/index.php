@@ -13,7 +13,7 @@ use app\modules\order\models\entity\OrderStatus;
 /* @var $models \app\modules\order\models\entity\Order[]
  */
 
-$this->title = Title::show("Заказы");
+$this->title = Title::show("Список доставок");
 ?>
     <div class="title-group">
         <h1>Список доставок</h1>
@@ -23,8 +23,15 @@ $this->title = Title::show("Заказы");
     <div class="logistic-list">
         <?php foreach ($models as $model): ?>
             <div class="logistic-list__item">
-                Заказ #<?= $model->id; ?>
-                Адрес доставки: <?= $model->city; ?>, <?= $model->street; ?>, д. <?= $model->number_home; ?>, кв. <?= $model->number_appartament; ?>
+                <div class="logistic-list__data">
+                    Заказ #<?= $model->id; ?>
+                    Адрес доставки: <?= $model->city; ?>, <?= $model->street; ?>, д. <?= $model->number_home; ?>, кв. <?= $model->number_appartament; ?>
+                </div>
+                <div class="logistic-list__controls">
+                    <?= Html::a(Html::tag('i', '', ['class' => 'fas fa-receipt']), Url::to(['/admin/order/order-backend/update', 'id' => $model->id])); ?>
+                    <?= Html::a(Html::tag('i', '', ['class' => 'fas fa-phone']), 'tel:' . $model->phone); ?>
+                    <?= Html::a(Html::tag('i', '', ['class' => 'fas fa-map-marker-alt']), 'javascript:void(0);'); ?>
+                </div>
             </div>
         <?php endforeach; ?>
     </div>
