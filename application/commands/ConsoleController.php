@@ -25,7 +25,7 @@ class ConsoleController extends Controller
 {
     public function actionRun($arg = null)
     {
-        $models = Product::find()->where(['like', 'name', 'деревенские лакомства'])->all();
+        $models = Product::find()->where(['like', 'name', 'Лакомства Деревенские'])->all();
         foreach ($models as $model) {
             $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
             MarkupHelpers::applyMarkup($model, 20);
