@@ -43,7 +43,7 @@ class CatalogController extends Controller
 
 
         $query->andWhere(['status_id' => Product::STATUS_ACTIVE]);
-        if ($sortValue = Yii::$app->request->get('sort')) $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
+        if ($sortValue = Yii::$app->request->get('sort','asc')) $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
 
         $duplicateQueryProducts = clone $query;
         $filterModel->applyFilter($query);
