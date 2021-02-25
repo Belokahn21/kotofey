@@ -70,7 +70,6 @@ class PriceController extends Controller
 
     public function actionFast($phrase, $markup)
     {
-        $phrase = 'эдель кэт';
         $models = Product::find();
 
         foreach (explode(' ', $phrase) as $text_line) {
