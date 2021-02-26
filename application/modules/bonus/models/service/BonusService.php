@@ -21,7 +21,7 @@ class BonusService
         }
 
         // Проверить что нет промокода. Запрещено начислять бонусы при наличии промокода
-        if ($order->promocode) return false;
+        if ($order->promocode || !$order->is_paid) return false;
 
 
         // Проверить что нет предыдущих записей о начислениях

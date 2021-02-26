@@ -128,8 +128,12 @@ class Order extends ActiveRecord
             BonusHelper::applyOrderBonus($this);
 
             // refactoring
-//            new BonusService($this);
         }
+
+        if (YII_ENV == 'dev') {
+            new BonusService($this);
+        }
+
 
         // todo: херня выходит с пересохранением заказа, надо поправить
         if (!$this->is_update) {
