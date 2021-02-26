@@ -35,6 +35,25 @@ $this->title = Title::show("Список доставок");
                     </div>
 
                     <div class="logistic-list-data__row">
+                        <div class="logistic-list-data__key">Телефон/Email:</div>
+                        <div class="logistic-list-data__value">
+
+                            <?php if ($model->phone): ?>
+                                <span class="js-mask-phone"><?= $model->phone; ?></span>
+                            <?php endif; ?>
+
+                            <?php if ($model->email): ?>
+                                <span><a href="mailto:<?= $model->email; ?>"><?= $model->email; ?></a></span>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <div class="logistic-list-data__row">
+                        <div class="logistic-list-data__key">Телефон:</div>
+                        <div class="logistic-list-data__value js-mask-phone"><?= $model->phone; ?></div>
+                    </div>
+
+                    <div class="logistic-list-data__row">
                         <div class="logistic-list-data__key">Адрес доставки:</div>
                         <div class="logistic-list-data__value"><?= !$model->city ?: 'г.' . $model->city; ?><?= !$model->street ?: ', ул.' . $model->street; ?><?= !$model->number_home ?: ', д.' . $model->number_home; ?><?= !$model->number_appartament ?: ', кв.' . $model->number_appartament; ?></div>
                     </div>
