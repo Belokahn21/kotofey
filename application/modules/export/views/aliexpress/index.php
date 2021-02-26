@@ -105,7 +105,7 @@ $module = Yii::$app->getModule('export');
                             <weight><?= $weight->value; ?></weight>
                         <?php endif; ?>
 
-                        <count><?= $offer->count > 0 ? $offer->count : rand(20, 40); ?></count>
+                        <count><?= $offer->count > 0 ? $offer->count : 500; ?></count>
                     </offer>
                 <?php endforeach; ?>
             <?php endforeach; ?>
