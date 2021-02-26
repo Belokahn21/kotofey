@@ -15,7 +15,7 @@ class BonusHelper
     public static function addOrderBonus(Order $order, $active = true)
     {
         if (self::isBonused($order) or !empty($order->promocode)) return false;
-        return self::addHistory($order, self::calcResultBonus($order), "Зачисление за заказ #" . $order->id, $active);
+        return self::addHistory($order, self::calcFinalResultBonus($order), "Зачисление за заказ #" . $order->id, $active);
     }
 
     public static function applyOrderBonus(Order $order)
@@ -33,7 +33,7 @@ class BonusHelper
         }
     }
 
-    public static function calcResultBonus(Order $order)
+    public static function calcFinalResultBonus(Order $order)
     {
         return round(OrderHelper::orderSummary($order) * (UserBonus::PERCENT_AFTER_SALE / 100));
     }

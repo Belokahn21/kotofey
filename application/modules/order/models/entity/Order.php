@@ -128,7 +128,7 @@ class Order extends ActiveRecord
             BonusHelper::applyOrderBonus($this);
 
             // refactoring
-//            BonusService::addBonusToUserForOrder($this);
+//            new BonusService($this);
         }
 
         // todo: херня выходит с пересохранением заказа, надо поправить

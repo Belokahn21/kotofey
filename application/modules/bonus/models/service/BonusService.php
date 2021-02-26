@@ -5,12 +5,13 @@ namespace app\modules\bonus\models\service;
 
 
 use app\modules\bonus\models\entity\UserBonusHistory;
+use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\helper\UserBonusHistoryHelper;
 use app\modules\order\models\entity\Order;
 
 class BonusService
 {
-    public static function addBonusToUserForOrder(Order $order)
+    public function __construct(Order $order)
     {
         // Проверить что модуль включен
         if ($module = \Yii::$app->getModule('bonus')) {
@@ -29,9 +30,6 @@ class BonusService
         if ($oldHistoryElement->is_active) return false;
 
         // Добавить запись в историю бонусов для клиента
-    }
-
-    public static function activate()
-    {
+        BonusHelper::addHistory($order, BonusHelper::calcFinalResultBonus($order), "Зачисление за заказ #" . $order->id, true);
     }
 }
