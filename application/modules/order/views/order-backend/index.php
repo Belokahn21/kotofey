@@ -77,7 +77,7 @@ $this->title = Title::show("Заказы");
             'format' => 'raw',
             'value' => function ($model) {
                 $sum = OrderHelper::orderSummary($model);
-                $marge = OrderHelper::marginality($model->id);
+                $marge = OrderHelper::marginality($model);
 
                 if ($marge > 0) {
                     return $sum . ' (<span class="green">+' . $marge . '</span>)';

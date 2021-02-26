@@ -3,17 +3,13 @@
 namespace app\modules\order\models\entity;
 
 
-use app\modules\bonus\models\entity\UserBonusHistory;
 use app\modules\bonus\models\helper\BonusHelper;
-use app\modules\catalog\models\entity\ProductTransferHistory;
-use app\modules\catalog\models\helpers\ProductTransferHistoryHelper;
-use app\modules\site\models\tools\Debug;
+use app\modules\bonus\models\service\BonusService;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\Billing;
 use app\modules\order\models\helpers\OrderHelper;
-use yii\base\Event;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -130,6 +126,9 @@ class Order extends ActiveRecord
         if ($this->is_paid) {
             OrderHelper::minusStockCount($this);
             BonusHelper::applyOrderBonus($this);
+
+            // refactoring
+//            BonusService::addBonusToUserForOrder($this);
         }
 
         // todo: херня выходит с пересохранением заказа, надо поправить
