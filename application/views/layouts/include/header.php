@@ -5,6 +5,7 @@ use app\modules\search\widges\search\SearchWidget;
 use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\basket\models\entity\Basket;
 use yii\helpers\Url;
+use app\modules\catalog\models\helpers\CategoryHelper;
 
 ?>
 <header class="header page-container">
