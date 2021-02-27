@@ -122,14 +122,9 @@ class Order extends ActiveRecord
     {
         if ($this->is_paid) {
             OrderHelper::minusStockCount($this);
-//            BonusHelper::applyOrderBonus($this);
-
-            // refactoring
         }
 
-        if (YII_ENV == 'dev') {
-            new BonusService($this);
-        }
+        new BonusService($this);
 
 
         // todo: херня выходит с пересохранением заказа, надо поправить
