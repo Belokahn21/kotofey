@@ -11,7 +11,7 @@ class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\bonus\controllers';
     private $name = 'Бонусы';
-    private $enable = false;
+    private $enable = true;
 
     public function init()
     {

@@ -55,7 +55,6 @@ class Order extends ActiveRecord
     const SCENARIO_CUSTOM = 'custom';
     const SCENARIO_CLIENT_BUY = 'client_buy';
 
-    public $product_id;
     public $is_update;
     public $bonus;
 
@@ -105,8 +104,6 @@ class Order extends ActiveRecord
 
             ['promocode', 'string', 'max' => 255, 'tooLong' => '{attribute} не должен содержать больше 255 символов'],
 
-            [['product_id'], 'safe'],
-
             [['ip'], 'string'],
             [['ip'], 'default', 'value' => \Yii::$app->request->userIP],
         ];
@@ -125,7 +122,7 @@ class Order extends ActiveRecord
     {
         if ($this->is_paid) {
             OrderHelper::minusStockCount($this);
-            BonusHelper::applyOrderBonus($this);
+//            BonusHelper::applyOrderBonus($this);
 
             // refactoring
         }
@@ -171,7 +168,6 @@ class Order extends ActiveRecord
             'created_at' => 'Дата создания',
             'comment' => 'Комментарий к заказу',
             'notes' => 'Заметки(Для админов)',
-            'product_id' => 'Товар',
             'promocode' => 'Промо код',
             'phone' => 'Телефон',
             'postalcode' => 'Почтовый индекс',

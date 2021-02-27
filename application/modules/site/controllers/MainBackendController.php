@@ -10,6 +10,7 @@ use yii\web\Controller;
 class MainBackendController extends Controller
 {
     public $layout = '@app/views/layouts/admin';
+    public $modelClass;
 
     public function behaviors()
     {

@@ -2,28 +2,22 @@
 
 namespace app\modules\order\controllers;
 
-use app\modules\bonus\models\helper\BonusHelper;
+use Yii;
+use yii\web\HttpException;
+use yii\web\ForbiddenHttpException;
+use app\widgets\notification\Alert;
+use app\modules\user\models\entity\User;
+use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrderDate;
-use app\modules\site\controllers\MainBackendController;
-use app\modules\site\models\tools\Debug;
-use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\payment\models\entity\Payment;
+use app\modules\order\models\entity\OrderStatus;
+use app\modules\delivery\models\entity\Delivery;
+use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\search\OrderSearchForm;
 use app\modules\user\models\tool\BehaviorsRoleManager;
-use app\widgets\notification\Alert;
-use PhpOffice\PhpSpreadsheet\Spreadsheet;
-use PhpOffice\PhpSpreadsheet\Style\Alignment;
-use PhpOffice\PhpSpreadsheet\Style\Border;
-use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
-use Yii;
-use app\modules\delivery\models\entity\Delivery;
-use app\modules\order\models\entity\Order;
-use app\modules\order\models\entity\OrdersItems;
-use app\modules\order\models\entity\OrderStatus;
-use app\modules\payment\models\entity\Payment;
-use app\modules\user\models\entity\User;
-use yii\web\ForbiddenHttpException;
-use yii\web\HttpException;
+use app\modules\site\controllers\MainBackendController;
+use app\modules\site_settings\models\entity\SiteSettings;
 
 class OrderBackendController extends MainBackendController
 {

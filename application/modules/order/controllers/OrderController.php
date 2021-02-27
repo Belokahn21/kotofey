@@ -72,8 +72,6 @@ class OrderController extends Controller
                         if ($order->bonus && $order->bonus > 0) {
                             BonusHelper::addHistory($order, $order->bonus * -1, 'Списание за заказ #' . $order->id, true);
                             $order->discount = $order->bonus * -1;
-                        } else {
-                            BonusHelper::addOrderBonus($order, false);
                         }
                     }
                 }

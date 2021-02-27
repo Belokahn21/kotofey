@@ -65,7 +65,7 @@
   &__action {
     width: 100%;
 
-    a {
+    a, button {
       background: $whatsapp-green;
       color: white;
       font-weight: bold;
@@ -74,6 +74,8 @@
       display: block;
       padding: 5px;
       text-decoration: none !important;
+      outline: none;
+      border: 0;
     }
   }
 }

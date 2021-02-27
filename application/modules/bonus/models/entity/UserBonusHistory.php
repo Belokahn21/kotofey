@@ -55,6 +55,6 @@ class UserBonusHistory extends \yii\db\ActiveRecord
 
     public static function findOneByOrder(Order $order)
     {
-        return static::findOne(['bonus_account_id' => $order->phone, 'order_id' => $order->id, 'is_active' => false]);
+        return static::findOne(['bonus_account_id' => $order->phone, 'order_id' => $order->id]);
     }
 }
