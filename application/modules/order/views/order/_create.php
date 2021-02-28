@@ -45,9 +45,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
     <h1 class="page__title">Оформление заказа</h1>
-
-    <div id="checkout-root"></div>
-
     <div class="page__group-row">
         <div class="page__left">
             <?php $form = ActiveForm::begin([

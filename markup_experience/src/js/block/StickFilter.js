@@ -1,5 +1,5 @@
 class StickFilter {
-    constructor(catalog = null) {
+    constructor(catalog) {
 
         this.element = document.querySelectorAll('.js-stick-filter');
         this.filter = document.querySelector('.filter-catalog');

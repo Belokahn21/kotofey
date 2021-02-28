@@ -5,7 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require("copy-webpack-plugin");
 
 const PATHS = {
-    src: path.join(__dirname, '../markup/src/frontend'),
+    src: path.join(__dirname, './src'),
+    // src: path.join(__dirname, '../markup/src/frontend'),
     build: path.join(__dirname, './build')
 };
 const PAGES_DIR = `${PATHS.src}/pug`;

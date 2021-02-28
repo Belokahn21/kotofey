@@ -7,17 +7,17 @@ import 'bootstrap';
 
 console.log("asdasd");
 
-import * as ProductCalc from './block/PoductCalc/ProductCalc';
+import ProductCalc from './block/PoductCalc/ProductCalc';
 import './block/gifts';
 import './block/mobile-menu';
 import './block/basket';
 import './block/search';
-import * as Menu from './block/Menu';
+import Menu from './block/Menu';
 import './block/ui-placeholder';
 import './block/other-jquery';
 import './block/catalog-filter';
-import * as Favorite from './block/favorite';
-import * as Compare from './block/compare';
+import Favorite from './block/favorite';
+import Compare from './block/compare';
 import './block/toggleClass';
 import './block/promocode';
 import './include/init-sliders';
@@ -25,10 +25,10 @@ import './include/init-range-sliders';
 import './include/init-maskedinput';
 import './include/init-datepicker';
 import './include/phone-mask';
-import * as Catalog from './block/catalog';
-import * as StickFilter from './block/StickFilter';
-import * as RemoveBasketItemfrom from './block/RemoveBasketItem';
-import * as MiniCart from './block/FastCart';
+import Catalog from './block/Catalog';
+import StickFilter from './block/StickFilter';
+import RemoveBasketItem from './block/RemoveBasketItem';
+import FastCart from './block/FastCart';
 
 new StickFilter(new Catalog());
 new RemoveBasketItem();
@@ -38,10 +38,9 @@ new Menu();
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    new ProductCalc(new MiniCart());
+    new ProductCalc(new FastCart());
 });
 
 //react js
-import './react/cdek-calculator/CdekCalculator';
-import './react/search/Search';
-
+// import './react/cdek-calculator/CdekCalculator';
+// import './react/search/Search';

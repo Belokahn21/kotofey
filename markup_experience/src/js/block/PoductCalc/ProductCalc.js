@@ -1,4 +1,4 @@
-import * as ProductCalcForm from './ProductCalcForm';
+import ProductCalcForm from './ProductCalcForm';
 
 class ProductCalc {
     constructor(miniCart) {
