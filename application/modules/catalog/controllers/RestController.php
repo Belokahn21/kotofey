@@ -18,7 +18,6 @@ use yii\rest\Controller;
 
 class RestController extends Controller
 {
-
     public function behaviors()
     {
         return [

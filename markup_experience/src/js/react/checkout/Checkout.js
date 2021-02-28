@@ -1,43 +1,101 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import config from "../../config";
+import Price from '../../tools/Price';
 
 class Checkout extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            delivery: [],
+            payment: [],
+            basket: [],
+            total: 0,
+        };
+
+        this.loadDelivery();
+        this.loadPayment();
+        this.loadBasket();
+    }
+
+    submitForm(e) {
+        console.log(e);
+        e.preventDefault();
+    }
+
+    loadDelivery() {
+        fetch(config.restDeliveryGetCheckout).then(response => response.json()).then(data => {
+            this.setState({
+                delivery: data
+            });
+        });
+    }
+
+    loadPayment() {
+        fetch(config.restPaymentGetCheckout).then(response => response.json()).then(data => {
+            this.setState({
+                payment: data
+            });
+        });
+    }
+
+    loadBasket() {
+        fetch(config.restBasketGetCheckout).then(response => response.json()).then(data => {
+            this.setState({
+                basket: data
+            });
+
+            this.calcTotal();
+        });
+    }
+
+    calcTotal() {
+        let total = 0;
+        this.state.basket.map((element, key) => {
+            total += parseInt(element.price);
+        });
+
+        this.setState({
+            total: total
+        });
+    }
+
     render() {
         return (
             <>
                 <div className="page__left">
-                    <form className="checkout-form">
+                    <form className="checkout-form" onSubmit={this.submitForm.bind(this)}>
                         <div className="checkout-form__title">Укажите способ доставки</div>
                         <div className="checkout-form-variants">
                             <div className="form-group field-order-delivery_id">
                                 <label className="control-label">Способ доставки</label>
                                 <input type="hidden" name="Order[delivery_id]" value=""/>
-                                <div id="order-delivery_id" role="radiogroup"><input className="checkbox-budget" id="budget-90900" value="2" type="radio" name="Order[delivery_id]"/>
-                                    <label className="for-checkbox-budget checkout-form-variants__item" htmlFor="budget-90900">
-                                        <span className="checkout-form-variants__card">
-                                            <div className="checkout-form-variants__label">Доставка по городу</div>
-                                            <img className="checkout-form-variants__icon" src="/upload/5f2b814d7e64b.png"/>
-                                        </span>
-                                    </label>
-                                    <input className="checkbox-budget" id="budget-90901" value="3" type="radio" name="Order[delivery_id]"/>
+                                <div id="order-delivery_id" role="radiogroup">
 
-                                    <label className="for-checkbox-budget checkout-form-variants__item" htmlFor="budget-90901">
-                                        <span className="checkout-form-variants__card">
-                                        <div className="checkout-form-variants__label">Самовывоз</div>
-                                            <img className="checkout-form-variants__icon" src="/upload/5fae08027e203.png"/>
-                                        </span>
-                                    </label>
+                                    {this.state.delivery.map((element, key) => {
+                                        return <>
+                                            <input key={"i1" + key} className="checkbox-budget" id={"budget-" + element.id} value="2" type="radio" name="Order[delivery_id]"/>
+                                            <label key={"l1" + key} className="for-checkbox-budget checkout-form-variants__item" htmlFor={"budget-" + element.id}>
+                                                <span className="checkout-form-variants__card">
+                                                    <div className="checkout-form-variants__label">{element.name}</div>
+                                                    <img className="checkout-form-variants__icon" src={element.imageUrl}/>
+                                                </span>
+                                            </label>
+                                        </>
+                                    })}
+
                                 </div>
                                 <p className="help-block help-block-error"/>
                             </div>
                         </div>
-
                         <div className="checkout-form__title">Промокод и бонусы
                             <div className="checkout-form__group-row">
                                 <label className="checkout-form__label" htmlFor="checkout-phone">
                                     <div>Промокод</div>
                                     <div className="form-group field-order-promocode has-success">
-                                        <input type="text" id="order-promocode" className="checkout-form__input js-validate-promocode" name="Order[promocode]" placeholder="" aria-invalid="false"/>
+                                        <input type="text" id="order-promocode" className="checkout-form__input js-validate-promocode" name="Order[promocode]" placeholder=""/>
                                         <input type="hidden" className="js-promocode-amount" name="promocode-discount" value=""/>
                                         <div className="checkout-form-promocode">Ваш промокод: <span className="checkout-form-promocode__code"/>
                                             <span className="checkout-form-promocode__discount">
@@ -49,7 +107,6 @@ class Checkout extends Component {
 
                                 <label className="checkout-form__label" htmlFor="checkout-phone">
                                     <div className="form-group field-order-bonus">
-
                                         <div className="checkout-form-label-group">
                                             <div>Бонусы</div>
                                             <div>Доступно: 0 бонуса</div>
@@ -61,15 +118,12 @@ class Checkout extends Component {
                                 </label>
                             </div>
                         </div>
-
                         <div className="checkout-form__title">Время и дата доставки
                             <div className="checkout-form__group-row">
                                 <label className="checkout-form__label" htmlFor="checkout-date-delivery">
                                     <div>Дата доставки*</div>
                                     <div className="form-group field-checkout-date-delivery required">
-
                                         <input type="text" id="checkout-date-delivery" className="js-datepicker checkout-form__input" name="OrderDate[date]" placeholder="Дата доставки" data-min="1614546000" aria-required="true"/>
-
                                         <p className="help-block help-block-error"/>
                                     </div>
                                 </label>
@@ -105,16 +159,12 @@ class Checkout extends Component {
                                 </label>
                             </div>
                         </div>
-
-
                         <div className="checkout-form__title">Укажите ваши данные
                             <div className="checkout-form__group-row">
                                 <label className="checkout-form__label" htmlFor="checkout-phone">
                                     <div>Ваш номер телефона*</div>
                                     <div className="form-group field-checkout-phone required">
-
                                         <input type="text" id="checkout-phone" className="js-mask-ru checkout-form__input" name="Order[phone]" value="9059858726" placeholder="Ваш номер телефона" aria-required="true"/>
-
                                         <p className="help-block help-block-error"/>
                                     </div>
                                 </label>
@@ -190,24 +240,22 @@ class Checkout extends Component {
                             <div className="form-group field-order-payment_id">
                                 <label className="control-label">Способ оплаты</label>
                                 <input type="hidden" name="Order[payment_id]" value=""/>
-                                <div id="order-payment_id" role="radiogroup"><input className="checkbox-budget" id="budget-310" value="2" type="radio" name="Order[payment_id]"/>
-                                    <label className="for-checkbox-budget checkout-form-variants__item" htmlFor="budget-310">
-                                        <span className="checkout-form-variants__card">
-                                        <div className="checkout-form-variants__label">Оплата наличными</div>
-                                            <img className="checkout-form-variants__icon" src="/upload/5f2b813942b51.png"/>
-                                        </span>
-                                    </label>
-                                    <input className="checkbox-budget" id="budget-311" value="3" type="radio" name="Order[payment_id]"/>
-                                    <label className="for-checkbox-budget checkout-form-variants__item" htmlFor="budget-311">
-                                        <span className="checkout-form-variants__card">
-                                        <div className="checkout-form-variants__label">Перевод на карту банка</div>
-                                            <img className="checkout-form-variants__icon" src="/upload/5f2b812e75b34.png"/>
-                                        </span>
-                                    </label></div>
+                                <div id="order-payment_id" role="radiogroup">
+                                    {this.state.payment.map((element, key) => {
+                                        return <>
+                                            <input key={"i2" + key} className="checkbox-budget" id={"budgetpayment-" + element.id} value="2" type="radio" name="Order[payment_id]"/>
+                                            <label key={"l2" + key} className="for-checkbox-budget checkout-form-variants__item" htmlFor={"budgetpayment-" + element.id}>
+                                                <span className="checkout-form-variants__card">
+                                                <div className="checkout-form-variants__label">{element.name}</div>
+                                                    <img className="checkout-form-variants__icon" src={element.imageUrl}/>
+                                                </span>
+                                            </label>
+                                        </>
+                                    })}
+                                </div>
                                 <p className="help-block help-block-error"/>
                             </div>
                         </div>
-
                         <button type="submit" className="add-basket checkout-form__submit">Подтвердить заказ</button>
                     </form>
                 </div>
@@ -219,98 +267,45 @@ class Checkout extends Component {
                             <a className="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
                         </div>
                         <div className="checkout-summary__amount d-flex flex-row align-items-end">
-                            <div className="js-product-calc-full-summary">85 840,35</div>
+                            <div className="js-product-calc-full-summary">{Price.format(this.state.total)}</div>
                             <div className="checkout-summary__currency">₽</div>
                         </div>
                     </div>
                     <div className="collapse show" id="collapseSummary">
                         <ul className="light-checkout-list">
-                            <li className="light-checkout-list__item">
-                                <a className="clear-basket js-remove-basket-item" href="#" data-toggle="tooltip" rel="tooltip" data-product-id="3777" data-placement="right" title="" data-original-title="Удалить товар из корзины">
-                                    <i className="fas fa-trash-alt" aria-hidden="true"/>
-                                </a>
-                                <img alt="Симпарика 20мг для собак от 5.1кг до 10.0кг тбл №3" title="Симпарика 20мг для собак от 5.1кг до 10.0кг тбл №3" className="light-checkout-list__image" src="https://res.cloudinary.com/kotofey-store/image/upload/v1612687136/kffys2oov8yj4chmu8z2.jpg"/>
-                                <div className="light-checkout-list__info">
-                                    <div className="light-checkout-list__title">
-                                        <a className="light-checkout-list__link" href="/product/simparika-20mg-dla-sobak-ot-51kg-do-100kg-tbl-no3/">Симпарика 20мг для собак от 5.1кг до 10.0кг тбл №3</a>
-                                    </div>
-                                    <div className="light-checkout-list__article">Артикул: 209908</div>
-                                </div>
-                                <div itemProp="offers" itemScope="" itemType="http://schema.org/Offer">
-                                    <form className="product-calc js-product-calc">
-                                        <input type="hidden" readOnly="" name="product_id" value="3777"/>
-                                        <div className="product-calc__control-group">
-                                            <input type="hidden" name="count" className="product-calc__count js-product-calc-price" value="1335"/>
-                                            <div className="div">
-                                                <button className="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                                                <input name="count" type="text" className="product-calc__count js-product-calc-amount" value="1" placeholder="1"/>
-                                                <button className="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
+                            {this.state.basket.map((element, key) => {
+                                return <>
+                                    <li className="light-checkout-list__item" key={key}>
+                                        <a className="clear-basket js-remove-basket-item" href="#" data-toggle="tooltip" rel="tooltip" data-product-id={element.id} data-placement="right" title="" data-original-title="Удалить товар из корзины">
+                                            <i className="fas fa-trash-alt" aria-hidden="true"/>
+                                        </a>
+                                        <img alt={element.name} title={element.name} className="light-checkout-list__image" src={element.imageUrl}/>
+                                        <div className="light-checkout-list__info">
+                                            <div className="light-checkout-list__title">
+                                                <a className="light-checkout-list__link" href={element.detailUrl}>{element.name}</a>
+                                            </div>
+                                            <div className="light-checkout-list__article">Артикул: {element.article}</div>
+                                        </div>
+                                        <div itemProp="offers" itemScope="" itemType="http://schema.org/Offer">
+                                            <form className="product-calc js-product-calc">
+                                                <input type="hidden" readOnly="" name="product_id" value={element.id}/>
+                                                <div className="product-calc__control-group">
+                                                    <input type="hidden" name="count" className="product-calc__count js-product-calc-price" value={element.id}/>
+                                                    <div className="div">
+                                                        <button className="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
+                                                        <input name="count" type="text" className="product-calc__count js-product-calc-amount" value="1" placeholder="1"/>
+                                                        <button className="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
 
-                                                <div className="product-calc__price-info">
-                                                    <div className="product-calc__price-info-normal">Цена за товар: 1 335₽</div>
+                                                        <div className="product-calc__price-info">
+                                                            <div className="product-calc__price-info-normal">Цена за товар: {element.price}₽</div>
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li className="light-checkout-list__item">
-                                <a className="clear-basket js-remove-basket-item" href="#" data-toggle="tooltip" rel="tooltip" data-product-id="3775" data-placement="right" title="" data-original-title="Удалить товар из корзины">
-                                    <i className="fas fa-trash-alt" aria-hidden="true"/>
-                                </a>
-                                <img alt="АСД-2 Армавир, 100мл " title="АСД-2 Армавир, 100мл " className="light-checkout-list__image" src="https://res.cloudinary.com/kotofey-store/image/upload/v1612623516/s9nkn8ww8xrt09uohv76.jpg"/>
-                                <div className="light-checkout-list__info">
-                                    <div className="light-checkout-list__title">
-                                        <a className="light-checkout-list__link" href="/product/asd-2-armavir-100ml/">АСД-2 Армавир, 100мл </a>
-                                    </div>
-                                    <div className="light-checkout-list__article">Артикул: 646178</div>
-                                </div>
-                                <div itemProp="offers" itemScope="" itemType="http://schema.org/Offer">
-                                    <form className="product-calc js-product-calc">
-                                        <input type="hidden" readOnly="" name="product_id" value="3775"/>
-                                        <div className="product-calc__control-group">
-                                            <input type="hidden" name="count" className="product-calc__count js-product-calc-price" value="280"/>
-                                            <div className="div">
-                                                <button className="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                                                <input name="count" type="text" className="product-calc__count js-product-calc-amount" value="1" placeholder="1"/>
-                                                <button className="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
-
-                                                <div className="product-calc__price-info">
-                                                    <div className="product-calc__price-info-normal">Цена за товар: 280₽</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li className="light-checkout-list__item">
-                                <a className="clear-basket js-remove-basket-item" href="#" data-toggle="tooltip" rel="tooltip" data-product-id="3776" data-placement="right" title="" data-original-title="Удалить товар из корзины">
-                                    <i className="fas fa-trash-alt" aria-hidden="true"/>
-                                </a>
-                                <img alt="Клини паста для выведения шерсти лосось, 30мл" title="Клини паста для выведения шерсти лосось, 30мл" className="light-checkout-list__image" src="https://res.cloudinary.com/kotofey-store/image/upload/v1612624889/glpcmd3k9ntbsqctyuhh.jpg"/>
-                                <div className="light-checkout-list__info">
-                                    <div className="light-checkout-list__title">
-                                        <a className="light-checkout-list__link" href="/product/klini-pasta-dla-vyvedenia-sersti-30-ml/">Клини паста для выведения шерсти лосось, 30мл</a>
-                                    </div>
-                                    <div className="light-checkout-list__article">Артикул: 518414</div>
-                                </div>
-                                <div itemProp="offers" itemScope="" itemType="http://schema.org/Offer">
-                                    <form className="product-calc js-product-calc">
-                                        <input type="hidden" readOnly="" name="product_id" value="3776"/>
-                                        <div className="product-calc__control-group">
-                                            <input type="hidden" name="count" className="product-calc__count js-product-calc-price" value="176"/>
-                                            <div className="div">
-                                                <button className="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                                                <input name="count" type="text" className="product-calc__count js-product-calc-amount" value="1" placeholder="1"/>
-                                                <button className="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
-                                                <div className="product-calc__price-info">
-                                                    <div className="product-calc__price-info-normal">Цена за товар: 176₽</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
+                                    </li>
+                                </>
+                            })}
                         </ul>
                     </div>
                     <div className="checkout-reglament">
@@ -329,6 +324,4 @@ class Checkout extends Component {
 
 
 const checkout = document.querySelector('.page__group-row');
-if (checkout) ReactDOM.render(
-    <Checkout/>
-    , checkout);
+if (checkout) ReactDOM.render(<Checkout/>, checkout);

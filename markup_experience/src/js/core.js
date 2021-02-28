@@ -5,8 +5,6 @@ import 'lightbox2';
 import 'popper.js';
 import 'bootstrap';
 
-console.log("asdasd");
-
 import ProductCalc from './block/PoductCalc/ProductCalc';
 import './block/gifts';
 import './block/mobile-menu';

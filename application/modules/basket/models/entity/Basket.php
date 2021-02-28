@@ -82,9 +82,8 @@ class Basket extends Model
 
     public static function findAll()
     {
-        $items = false;
+        $items = [];
         if ($basket = \Yii::$app->session->get(self::BASKET_KEY)) {
-            $items = array();
             foreach ($basket as $product_id => $item) {
                 $items[$product_id] = $item;
             }

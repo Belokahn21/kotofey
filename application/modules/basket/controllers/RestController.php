@@ -4,6 +4,7 @@ namespace app\modules\basket\controllers;
 
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrdersItems;
 use yii\helpers\Json;
 use yii\rest\Controller;
@@ -73,6 +74,25 @@ class RestController extends Controller
             'status' => 200,
             'count' => Basket::count()
         ]);
+    }
+
+    public function actionGetCheckout()
+    {
+        $data = [];
+
+//        foreach (Basket::findAll() as $value) {
+        foreach (Product::find()->limit(5)->all() as $product) {
+            $data[] = [
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->price,
+                'article' => $product->article,
+                'detailUrl' => ProductHelper::getDetailUrl($product),
+                'imageUrl' => ProductHelper::getImageUrl($product),
+            ];
+        }
+
+        return Json::encode($data);
     }
 
     public function actionDelete($id)
