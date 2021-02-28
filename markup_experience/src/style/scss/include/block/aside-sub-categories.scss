@@ -1,0 +1,25 @@
+.aside-sub-categories {
+  width: 100%;
+  background: $main-color;
+  padding: 20px 20px;
+  border-radius: 10px;
+
+  //@media (min-width: 790px) {
+  //  display: none;
+  //}
+
+  &__item {
+    color: $text-color;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 40px;
+  }
+
+  &__link {
+    color: $text-color;
+
+    &:hover {
+      color: $text-color;
+    }
+  }
+}

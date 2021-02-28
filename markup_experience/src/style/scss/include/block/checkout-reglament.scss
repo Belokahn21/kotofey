@@ -1,0 +1,29 @@
+.checkout-reglament {
+  padding: 0 40px;
+
+  &__title {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+    margin: 20px 0;
+  }
+
+  &__text {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+
+    @media (max-width: 450px) {
+      margin-bottom: 20px;
+    }
+
+    a {
+      font-weight: 700;
+      color: black;
+
+      &:hover {
+        color: inherit;
+      }
+    }
+  }
+}

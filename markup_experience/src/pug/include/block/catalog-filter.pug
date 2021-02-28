@@ -1,0 +1,67 @@
+aside.left-siderbar
+    form.filter-catalog
+        .filter-catalog__title
+            span Подобрать товар
+            span.filter-catalog__arrow.is-active
+                img(src="./assets/images/arrow-left-black.svg")
+        .filter-catalog-container.is-active
+            .filter-catalog__item
+                label.filter-catalog__label(for="js-filter-from") Цена
+                .filter-catalog__input-group
+                    input.filter-catalog__input#js-filter-from(placeholder="100", type="text")
+                    input.filter-catalog__input#js-filter-to(placeholder="999", type="text")
+            .filter-catalog__item
+                input(type="range").filter-catalog__range
+
+            .filter-catalog__item
+                .filter-catalog__switch
+                    label.filter-catalog__label(for="js-filter-from") Бренд
+                    a.filter-catalog__action(data-toggle="collapse" href="#collapseCatalog" role="button" aria-expanded="false" aria-controls="collapseCatalog") Показать
+                .filter-catalog-checkboxes.collapse(id="collapseCatalog")
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand" id="filter-chb-1")
+                        label(for="filter-chb-1")
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Bergauf
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand" id="filter-chb-2")
+                        label(for="filter-chb-2")
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Ceresit
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand" id="filter-chb-3")
+                        label(for="filter-chb-3")
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Dauer
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        label
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Holcim
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        label
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Unis
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        label
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Волма
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        label
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Стройбриг
+                    .filter-catalog-checkboxes__item
+                        input(type="checkbox" name="brand")
+                        label
+                            i.fas.fa-paw(aria-hidden='true')
+                            | Русеан
+            .filter-catalog__button-group
+                button.filter-catalog__submit(type="submit") Показать
+                button.filter-catalog__reset(type="reset")
+                    span.filter-catalog__reset-icon
+                        img(src="./assets/images/reset.png")
+                    span Сбросить
+    include aside-categories

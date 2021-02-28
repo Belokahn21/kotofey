@@ -1,0 +1,65 @@
+.sertificate {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+
+  &-container {
+    margin-top: 30px;
+    width: 100%;
+  }
+
+  &-button-next {
+    right: -30px;
+  }
+
+  &-button-prev {
+    left: -30px;
+  }
+
+  &-button-next, &-button-prev {
+    color: black;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    overflow: hidden;
+    z-index: 9999;
+    position: absolute;
+    top: 50%;
+    border: 1px $no-active-color solid;
+    background: white;
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    @media (max-width: 790px) {
+      display: none;
+    }
+  }
+
+  &-slide {
+    border: 1px transparent solid;
+    position: relative;
+
+    img {
+      width: 100%;
+    }
+
+    &:hover {
+      cursor: pointer;
+      border: 1px $main-color solid;
+      border-radius: 25px;
+      overflow: hidden;
+
+      &:before {
+        content: url("../images/sert-zoom.png");
+        position: absolute;
+        top: 45%;
+        left: 40%;
+        z-index: 999;
+      }
+    }
+  }
+
+}

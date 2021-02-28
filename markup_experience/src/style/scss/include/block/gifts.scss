@@ -1,0 +1,14 @@
+.gifts {
+  border: 1px red solid;
+  display: flex;
+  justify-content: stretch;
+  flex-direction: row;
+  overflow: hidden;
+
+  &__image {
+    border: 1px blue solid;
+    width: 160px !important;
+    object-fit: contain;
+  }
+
+}

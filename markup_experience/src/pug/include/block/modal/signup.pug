@@ -1,0 +1,36 @@
+// Modal
+#signupModal.modal.fade.authModal(tabindex='-1', role='dialog', aria-labelledby='signupModalLabel', aria-hidden='true')
+    .modal-dialog(role='document')
+        .modal-content
+            form.site-form(method="post" action="/")
+                .modal-header
+                    .div
+                        h5#signupModalLabel.modal-title Регистрация
+                        ul.auth-modal-toggle
+                            li.auth-modal-toggle__item.active
+                                a.auth-modal-toggle__link(href="javascript:void(0);" data-toggle="modal" data-target="#signupModal") Регистрация
+                            li.auth-modal-toggle__item
+                                a.auth-modal-toggle__link(href="javascript:void(0);" data-toggle="modal" data-target="#signinModal") Вход
+                    button.close(type='button', data-dismiss='modal', aria-label='Close')
+                        span(aria-hidden='true') ×
+                .modal-body
+                    .site-form__item
+                        label.site-form__label(for="site-form-fio") ФИО
+                        input.site-form__input#site-form-fio(type="text" placeholder="Ваша фамилия")
+                    .site-form__group-row
+                        .site-form__item
+                            label.site-form__label(for="site-form-phone") Контактный телефон
+                            input.site-form__input.js-mask-ru#site-form-phone(type="text", placeholder="+7 (___) ___ __-__")
+                        .site-form__item
+                            label.site-form__label(for="site-form-email") Адрес вашей электронной почты
+                            input.site-form__input#site-form-email(type="text" placeholder="Адрес вашей электронной почты")
+                .auth-fill
+                    .site-form__group-row
+                        .site-form__item
+                            label.site-form__label(for="site-form-password") Придумайте пароль
+                            input.site-form__input#site-form-password(type="password" placeholder="Пароль")
+                        .site-form__item
+                            label.site-form__label(for="site-form-password-confirm") Повторить пароль
+                            input.site-form__input#site-form-password-confirm(type="password" placeholder="Пароль")
+                    .modal-footer
+                        button.site-form__button(type='submit') Регистрация

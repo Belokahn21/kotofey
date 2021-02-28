@@ -1,0 +1,68 @@
+.authModal {
+  .modal-dialog {
+    max-width: 600px;
+  }
+
+  .modal-title {
+    color: black;
+  }
+
+  .modal-content {
+    border-radius: 20px;
+  }
+
+  .modal-header, .modal-footer {
+    border: 0;
+  }
+
+  .modal-header {
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .modal-body {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .modal-footer {
+    justify-content: flex-start;
+    padding-left: 0;
+  }
+}
+
+.authModalLabel {
+  font-size: 24px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+.auth-modal-toggle {
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
+
+  &__item {
+    &:not(:last-child) {
+      margin-right: 10px;
+    }
+
+    border-bottom: 1px dashed black;
+    color: black;
+    font-weight: 700;
+
+    &.active {
+      border: 0;
+    }
+  }
+
+  &__link {
+    color: black;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: inherit;
+      color: inherit;
+    }
+  }
+}

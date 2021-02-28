@@ -1,0 +1,90 @@
+.catalog-sort {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  margin-bottom: 20px;
+  width: 100%;
+
+  @media (max-width: 790px) {
+    flex-wrap: wrap;
+  }
+
+  &__input {
+    position: absolute;
+    left: -9999px;
+    width: 0;
+    height: 0;
+    visibility: hidden;
+  }
+
+  &__item {
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease-out;
+
+    &.checkbox-type {
+      display: block;
+      margin-right: 20px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      background: rgba(198, 198, 198, 0.2);
+      border: 1px silver solid;
+      font-size: 14px;
+      line-height: 22px;
+      min-width: 100px;
+      text-align: center;
+
+    }
+  }
+
+  &__title {
+    width: 100%;
+  }
+
+  &-select {
+    margin-left: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    @media (max-width: 790px) {
+      margin: 0;
+    }
+
+    &__label {
+      font-size: 12px;
+      line-height: 24px;
+      font-weight: 400;
+      color: #C6C6C6;
+      margin-right: 10px;
+    }
+
+    &__select {
+      width: 170px;
+
+      .selectize-input {
+        line-height: 25px;
+        border-radius: 0;
+      }
+    }
+  }
+}
+
+.catalog-sort__input:checked + .catalog-sort__item {
+  background: $main-color;
+  border-color: $main-color;
+  padding-right: 40px;
+  color: $text-color;
+
+  & ::after {
+    content: "X";
+    position: absolute;
+    right: 10px;
+    top: 25%;
+    width: 20px;
+    height: 20px;
+    font-weight: 700;
+  }
+}

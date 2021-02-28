@@ -1,0 +1,23 @@
+extends include/layer
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Авторизация
+            form.site-form.auth-form
+                h1.page__title Восстановление пароля
+                .site-form__item
+                    label.site-form__label
+                        input.js-mask-ru.site-form__input(type="text" name="phone" placeholder="Телефон")
+                .auth-form__or или
+                .site-form__item
+                    label.site-form__label
+                        input.site-form__input(type="text" name="email" placeholder="E-Mail")
+                .auth-form__controls
+                    button(type="submit").btn-main Восстановить
+                    a.auth-form__restore-link(href="/frontend/signin.html") Авторизоваться
+                    a.auth-form__restore-link(href="/frontend/signup.html") Зарегестрироваться

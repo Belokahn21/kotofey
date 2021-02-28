@@ -1,0 +1,16 @@
+.gifts-container
+    .gifts
+        img.gifts__image(src="./assets/images/product.png")
+        img.gifts__image(src="./assets/images/product.png")
+        img.gifts__image(src="./assets/images/product.png")
+        img.gifts__image(src="./assets/images/product.png")
+        img.gifts__image(src="./assets/images/product.png")
+    .gifts-action
+        button.js-run-road-gift(data-speed=1000) Попытать удачу
+
+script.
+    document.querySelector('.js-run-road-gift').addEventListener('click', () => {
+        document.querySelector('.gifts > img').forEach(()=>{
+            console.log("asdad");
+    });
+    });

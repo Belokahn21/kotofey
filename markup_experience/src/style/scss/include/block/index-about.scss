@@ -1,0 +1,17 @@
+.index-about {
+
+  ul {
+    li {
+      padding-left: 10px;
+
+      &:before {
+        content: "—";
+        padding-right: 10px;
+      }
+    }
+  }
+
+  &-container {
+    margin: 40px 0;
+  }
+}

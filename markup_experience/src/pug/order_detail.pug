@@ -1,0 +1,84 @@
+extends include/layer
+
+include mixin/profileOrderDetailProductItem
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Личный кабинет
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Просмотр заказа
+            h1.page__title Личный кабинет
+            .row
+                .col-6
+                    .profile-order-info
+                        .profile-order-info__row
+                            .profile-order-info__key Дата создания
+                            .profile-order-info__value 20.08.2020
+                        .profile-order-info__row
+                            .profile-order-info__key Телефон
+                            .profile-order-info__value 8-905-985-87-26
+                        .profile-order-info__row
+                            .profile-order-info__key Email
+                            .profile-order-info__value info@kotofey.store
+                        .profile-order-info__row
+                            .profile-order-info__key Оплачено
+                            .profile-order-info__value.red Не оплачено
+                        .profile-order-info__row
+                            .profile-order-info__key Статус заказа
+                            .profile-order-info__value В обработке
+                        .profile-order-info__row
+                            .profile-order-info__key Сумма заказа
+                            .profile-order-info__value 23 664р.
+                    //include include/block/gifts
+                .col-6
+                    ul.profile-order-products
+                        -
+                            var items = [
+                                {
+                                    image: 'https://kotofey.store/upload/21b87006c979f927387dbb9674dddd9e.jpg',
+                                    name: 'Royal Canin INDOOR APPETITE CONTROL 0.4кг, Корм для кошек, склонных к перееданию от 1 до 7 лет'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/21b87006c979f927387dbb9674dddd9e.jpg',
+                                    name: 'Royal Canin INDOOR APPETITE CONTROL 0.4кг, Корм для кошек, склонных к перееданию от 1 до 7 лет'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/5f5e322e97814.png',
+                                    name: 'Royal Canin STERILISED (В ПАШТЕТЕ) 0.085кг, Влажный корм для стерилизованных кошек'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/5f5e326190f26.webp',
+                                    name: 'Royal Canin STERILISED (В СОУСЕ) 0.085кг, Влажный корм для стерилизованных кошек'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/5f5b922f355a4.png',
+                                    name: 'Royal Canin STERILISED (В ЖЕЛЕ) 0.085кг, Влажный корм для стерилизованных кошек'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/images/not-image.png',
+                                    name: 'Влажный корм Hill\'s Science Plan для молодых стерилизованных кошек и кастрированных котов, пауч с индейкой в соусе, 0.085кг'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/5efcb572a52a2.webp',
+                                    name: 'Влажный корм Hill\'s Science Plan для молодых стерилизованных кошек и кастрированных котов с курицей в соусе, 0.085кг'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/images/not-image.png',
+                                    name: 'Влажный корм Hill\'s Science Plan для молодых стерилизованных кошек и кастрированных котов пауч с форелью в соусе, 0.085кг'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/images/not-image.png',
+                                    name: 'Влажный корм Hill\'s Science Plan для молодых стерилизованных кошек и кастрированных котов пауч с лососем в соусе, 0.085кг'
+                                },
+                                {
+                                    image: 'https://kotofey.store/upload/5efcb66c18e20.webp',
+                                    name: 'Сухой корм Hill\'s Science Plan для молодых стерилизованных кошек и кастрированных котов с курицей, 0.3кг'
+                                },
+                            ]
+                        each item,index in items
+                            +profileOrderDetailProductItem(item)

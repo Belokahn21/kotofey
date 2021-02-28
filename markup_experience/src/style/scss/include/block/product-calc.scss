@@ -1,0 +1,109 @@
+.product-calc {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 30px;
+
+  &__price-group {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+    &-price {
+      font-size: 48px;
+      line-height: 24px;
+      font-weight: 700;
+      margin: 20px 0;
+
+      @media (max-width: 790px) {
+        font-size: 24px;
+      }
+    }
+
+    &-char-val {
+      font-size: 24px;
+      line-height: 15px;
+      font-weight: 700;
+      margin: 20px 0 20px 10px;
+    }
+
+    &-char-equal {
+      font-size: 32px;
+      line-height: 24px;
+      font-weight: 700;
+      margin: 20px 10px;
+    }
+
+    &-summary {
+      font-size: 56px;
+      line-height: 24px;
+      font-weight: 700;
+      margin: 20px 0;
+
+      @media (max-width: 790px) {
+        font-size: 36px;
+      }
+    }
+
+    &-currency {
+      font-size: 24px;
+      line-height: 10px;
+      font-weight: 700;
+      margin: 20px 0 20px 15px;
+    }
+  }
+
+  &__control-group {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+
+    @media (max-width: 790px) {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      .add-basket {
+        margin: 10px 0;
+      }
+    }
+  }
+
+  &__control {
+    border-radius: 10px;
+    background: white;
+    border: 1px silver solid;
+    width: 40px;
+    height: 40px;
+    font-weight: 700;
+    font-size: 120%;
+    outline: none !important;
+
+    &:hover {
+      border-color: $main-color;
+      color: $main-color;
+    }
+  }
+
+  &__count {
+    max-width: 121px;
+    width: 100%;
+    height: 40px;
+    margin: 0 10px;
+    border: 1px silver solid;
+    text-align: center;
+    font-weight: 700;
+  }
+
+  &__price-info {
+    padding-top: 10px;
+    font-size: 12px;
+    font-weight: bold;
+
+    &-normal {
+    }
+
+    &-discount {
+    }
+  }
+}

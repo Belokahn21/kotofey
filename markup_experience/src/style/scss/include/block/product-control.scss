@@ -1,0 +1,39 @@
+.product-control {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+
+  &__button {
+    width: 25px;
+    height: 25px;
+    margin: 0 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: white;
+    font-size: 20px;
+    background: $active-color;
+    border: 0;
+  }
+
+  &__count {
+    color: $main-color;
+    width: 50px;
+    flex: 1 1 auto;
+    text-align: center;
+    border: 1px solid #c6c6c6;
+    padding: 2px;
+  }
+}
+
+.add-basket ~ .product-control {
+  display: none;
+}
+
+.add-basket ~ .product-control.active {
+  display: flex;
+}

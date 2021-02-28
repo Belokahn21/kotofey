@@ -1,0 +1,67 @@
+extends include/layer
+
+include mixin/catalogItem
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Кирпичи
+            h1.page__title Кирпичи
+            .catalog-container
+                include include/block/catalog-filter
+                .catalog-wrap
+                    include include/block/catalog-sort
+                    include include/block/stick-filter
+                    ul.catalog
+                        -
+                            var items = [
+                                {
+                                    name: 'Кирпич М-150 (Стройкерамика) красный 0,7НФ /616',
+                                    price: '9.00',
+                                    newPrice: '2.00',
+                                    image: "./assets/images/product.jpg"
+                                },
+                                {
+                                    name: 'Кирпич М-150 (Стройкерамика) красный 0,7НФ /616',
+                                    price: '9.00',
+                                    newPrice: '2.00',
+                                    image: "./assets/images/product.jpg"
+                                },
+                                {
+                                    name: 'Кирпич М-150 (Стройкерамика) красный 0,7НФ /616',
+                                    price: '9.00',
+                                    newPrice: '2.00',
+                                    image: "./assets/images/product.jpg"
+                                },
+                            ]
+                        each item,index in items
+                            +catalogItem(item)
+                    ul.pagination
+                        li.prev.disabled
+                            span «
+                        li.active
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=1', data-page='0') 1
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=2', data-page='1') 2
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=3', data-page='2') 3
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=4', data-page='3') 4
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=5', data-page='4') 5
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=6', data-page='5') 6
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=7', data-page='6') 7
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=8', data-page='7') 8
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=9', data-page='8') 9
+                        li
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=10', data-page='9') 10
+                        li.next
+                            a(href='/catalog/?id=dla-vzroslyh-ot-goda-2&page=2', data-page='1') »

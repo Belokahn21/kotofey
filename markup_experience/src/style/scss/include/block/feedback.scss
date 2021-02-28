@@ -1,0 +1,34 @@
+.feedback {
+  &-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-top: 10px;
+  }
+
+  &-form {
+    padding: 10px;
+    margin: 5px;
+    border: 1px rgba(0, 0, 0, 0.1) solid;
+
+    &__input {
+      width: 100%;
+      margin: 10px 0;
+      border: 1px silver solid;
+      padding: 5px;
+    }
+
+    &__title {
+      text-align: center;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 23px;
+      margin: 5px 0;
+    }
+
+    .btn-main{
+      font-size: 14px;
+    }
+  }
+}

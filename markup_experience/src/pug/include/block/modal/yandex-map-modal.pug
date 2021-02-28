@@ -1,0 +1,11 @@
+#yandex-map-modal.modal.fade(tabindex='-1' role='dialog' aria-labelledby='yandex-map-modalLabel' aria-hidden='true')
+    .modal-dialog.modal-lg(role='document')
+        .modal-content
+            .modal-header
+                h5#yandex-map-modalLabel.modal-title Мы находимся здесь
+                button.close(type='button' data-dismiss='modal' aria-label='Close')
+                    span(aria-hidden='true') ×
+            .modal-body
+                script(type='text/javascript' charset='utf-8' async='' src='https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75a2c08cf453a0309392fdcb243329f2301db73bdb97f18c8bc32cb9e14c1f93&width=100%25&height=400&lang=ru_RU&scroll=true')
+            .modal-footer
+                button.btn-main(type='button' data-dismiss='modal') Закрыть
