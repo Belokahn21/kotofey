@@ -1,7 +1,6 @@
 import Swiper from "swiper";
 
-document.addEventListener('DOMContentLoad', () => {
-
+document.addEventListener('DOMContentLoaded', () => {
     let swiper = new Swiper('.slider-container', {
         slidesPerView: 1,
         loop: true,
