@@ -156,7 +156,7 @@ class Checkout extends Component {
                                         <input type="text" id="checkout-entrance" className="checkout-form__input" name="Order[entrance]" placeholder="Подьезд"/>
                                         <p className="help-block help-block-error"/>
                                     </div>
-                                </label>1
+                                </label>
                             </div>
                             <div className="checkout-form__group-row">
                                 <label className="checkout-form__label" htmlFor="checkout-floor_house">
