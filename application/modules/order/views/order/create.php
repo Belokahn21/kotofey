@@ -2,6 +2,7 @@
 
 /* @var $this yii\web\View
  * @var $order Order
+ * @var $orderDate \app\modules\order\models\entity\OrderDate
  * @var $basket \app\modules\order\models\entity\OrdersItems[]
  * @var $billing \app\modules\user\models\entity\Billing
  * @var $user \app\modules\user\models\entity\User
@@ -29,11 +30,12 @@ use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\bonus\widgets\BonusFiled\BonusFieldWidget;
 use app\modules\promocode\widgets\promocode_field\PromocodeFieldWidget;
-use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\order\models\helpers\OrderDateHelper;
 
 $this->title = Title::show("Оформление заказа");
 $this->params['breadcrumbs'][] = ['label' => 'Корзина', 'url' => ['/basket/']];
 $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа', 'url' => ['/order/']];
+
 ?>
 <div class="page">
     <?= Breadcrumbs::widget([
@@ -87,6 +89,30 @@ LIST;
                     </label>
                 </div>
             </div>
+
+            <?php
+            $availableDates = OrderDateHelper::getAvailableDates($basket);
+            $minDate = array_shift($availableDates);
+            ?>
+            <div class="checkout-form__title">Время и дата доставки
+                <div class="checkout-form__group-row">
+                    <label class="checkout-form__label" for="checkout-date-delivery">
+                        <div>Дата доставки*</div>
+                        <?= $form->field($orderDate, 'date')->textInput([
+                            'class' => 'js-datepicker checkout-form__input',
+                            'id' => 'checkout-date-delivery',
+                            'placeholder' => 'Дата доставки',
+                            'data-min' => strtotime($minDate)
+                        ])->label(false) ?>
+                    </label>
+                    <label class="checkout-form__label" for="checkout-time-delivery">
+                        <div>Время доставки*</div>
+                        <?= $form->field($orderDate, 'time')->dropDownList(OrderDateHelper::getAvailableTimes(), ['class' => 'checkout-form__select', 'id' => 'checkout-time-delivery', 'prompt' => 'Время доставки'])->label(false) ?>
+                    </label>
+                </div>
+            </div>
+
+
             <div class="checkout-form__title">Укажите ваши данные
                 <div class="checkout-form__group-row">
                     <label class="checkout-form__label" for="checkout-phone">
@@ -172,7 +198,7 @@ LIST;
                     <div class="checkout-summary__currency"><?= Currency::getInstance()->show(); ?></div>
                 </div>
             </div>
-            <?php if ($basket = Basket::findAll()): ?>
+            <?php if ($basket): ?>
                 <div class="collapse show" id="collapseSummary">
                     <ul class="light-checkout-list">
                         <?php foreach ($basket as $item): ?>
