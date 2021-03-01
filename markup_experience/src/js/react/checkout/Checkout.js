@@ -1,13 +1,10 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import config from "../../config";
-import Price from '../../tools/Price';
 
 import AvailableDates from "./AvailableDates";
 import CheckoutSummary from "./CheckoutSummary";
-import Html from "./html/Html";
 import HtmlHelper from "./html/HtmlHelper";
-import Input from "./html/Input";
 
 class Checkout extends Component {
 
