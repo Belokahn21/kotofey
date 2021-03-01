@@ -4,6 +4,7 @@ import config from "../../config";
 import Price from '../../tools/Price';
 
 import CheckoutBasket from "./CheckoutBasket";
+import AvailableDates from "./AvailableDates";
 
 class Checkout extends Component {
 
@@ -133,28 +134,7 @@ class Checkout extends Component {
                                     <div>Время доставки*</div>
                                     <div className="form-group field-checkout-time-delivery required">
 
-                                        <select id="checkout-time-delivery" className="checkout-form__select" name="OrderDate[time]" aria-required="true">
-                                            <option value="">Время доставки</option>
-                                            <option value="0">1.02.2020</option>
-                                            <option value="1">2.02.2020</option>
-                                            <option value="2">3.02.2020</option>
-                                            <option value="3">4.02.2020</option>
-                                            <option value="4">5.02.2020</option>
-                                            <option value="5">6.02.2020</option>
-                                            <option value="6">7.02.2020</option>
-                                            <option value="7">8.02.2020</option>
-                                            <option value="8">9.02.2020</option>
-                                            <option value="9">10.02.2020</option>
-                                            <option value="10">11.02.2020</option>
-                                            <option value="11">12.02.2020</option>
-                                            <option value="12">13.02.2020</option>
-                                            <option value="13">14.02.2020</option>
-                                            <option value="14">15.02.2020</option>
-                                            <option value="15">16.02.2020</option>
-                                            <option value="16">17.02.2020</option>
-                                            <option value="17">18.02.2020</option>
-                                            <option value="18">19.02.2020</option>
-                                        </select>
+                                        <AvailableDates/>
 
                                         <p className="help-block help-block-error"/>
                                     </div>
@@ -231,9 +211,7 @@ class Checkout extends Component {
                             <label className="checkout-form__label" htmlFor="checkout-comment">
                                 <div>Ваши пожелания*</div>
                                 <div className="form-group field-checkout-comment">
-
                                     <textarea id="checkout-comment" className="checkout-form__textarea" name="Order[comment]" placeholder="Комментарий к заказу"/>
-
                                     <p className="help-block help-block-error"/>
                                 </div>
                             </label>
@@ -274,7 +252,7 @@ class Checkout extends Component {
                         </div>
                     </div>
                     <div className="collapse show" id="collapseSummary">
-                        <CheckoutBasket basket={this.state.basket} />
+                        <CheckoutBasket basket={this.state.basket}/>
                     </div>
                     <div className="checkout-reglament">
                         <div className="checkout-reglament__title">Обратите внимание!</div>

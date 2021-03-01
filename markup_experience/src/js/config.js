@@ -7,6 +7,7 @@ const config = {
     restBasketGetCheckout: url + '/basket/rest/get-checkout/',
     restDeliveryGetCheckout: url + '/delivery/rest/get-checkout/',
     restPaymentGetCheckout: url + '/payment/rest/get-checkout/',
+    restGetDates: url + '/order/rest/get-dates/',
     restGetCatalog: url + '/catalog/rest/get/',
     restAddFavorite: url + '/favorite/rest/add/',
     restDeleteFavorite: url + '/favorite/rest/delete/',

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 class CheckoutBasket extends Component {
-    constructor(pros) {
+    constructor(props) {
         super(props);
     }
 
