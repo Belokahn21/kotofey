@@ -68,21 +68,18 @@ class Checkout extends Component {
 
     refreshBasket(product_id) {
         let out = this.state.basket;
-        console.log(product_id);
-        console.log(out);
 
         out.map((product, key) => {
-            if (product.id == product_id) {
-                console.log('good ident');
+            if (parseInt(product.id) === parseInt(product_id)) {
                 delete out[key];
             }
         });
 
-        console.log(out);
-
         this.setState({
             basket: out
         });
+
+        this.calcTotal();
     }
 
     render() {
