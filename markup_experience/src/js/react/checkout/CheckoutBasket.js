@@ -1,8 +1,23 @@
 import React, {Component} from 'react';
+import config from "../../config";
 
 class CheckoutBasket extends Component {
     constructor(props) {
         super(props);
+    }
+
+    delete(event) {
+        const element = event.target;
+        const product_id = element.getAttribute('data-product-id');
+
+        if (!product_id) return false;
+
+        fetch(config.restDeleteBasket + product_id + '/', {
+            method: 'DELETE'
+        }).then(response => response.json()).then(data => {
+            console.log(data);
+            this.props.refreshBasket();
+        });
     }
 
     render() {
@@ -11,7 +26,7 @@ class CheckoutBasket extends Component {
                 {this.props.basket.map((element, key) => {
                     return <>
                         <li className="light-checkout-list__item" key={key}>
-                            <a className="clear-basket js-remove-basket-item" href="#" data-toggle="tooltip" rel="tooltip" data-product-id={element.id} data-placement="right" title="" data-original-title="Удалить товар из корзины">
+                            <a className="clear-basket" href="javascript:void(0);" onClick={this.delete.bind(this)} data-toggle="tooltip" rel="tooltip" data-product-id={element.id} data-placement="right" title="" data-original-title="Удалить товар из корзины">
                                 <i className="fas fa-trash-alt" aria-hidden="true"/>
                             </a>
                             <img alt={element.name} title={element.name} className="light-checkout-list__image" src={element.imageUrl}/>

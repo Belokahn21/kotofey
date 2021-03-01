@@ -17,12 +17,12 @@ class CheckoutSummary extends Component {
                         <a className="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
                     </div>
                     <div className="checkout-summary__amount d-flex flex-row align-items-end">
-                        <div className="js-product-calc-full-summary">{Price.format(this.state.total)}</div>
+                        <div className="js-product-calc-full-summary">{Price.format(this.props.total)}</div>
                         <div className="checkout-summary__currency">₽</div>
                     </div>
                 </div>
                 <div className="collapse show" id="collapseSummary">
-                    <CheckoutBasket basket={this.props.basket}/>
+                    <CheckoutBasket refreshBasket={this.props.refreshBasket()} basket={this.props.basket}/>
                 </div>
                 <div className="checkout-reglament">
                     <div className="checkout-reglament__title">Обратите внимание!</div>
