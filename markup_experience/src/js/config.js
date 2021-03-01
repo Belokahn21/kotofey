@@ -10,6 +10,7 @@ const config = {
     restGetDates: url + '/order/rest/get-dates/',
     restGetCatalog: url + '/catalog/rest/get/',
     restAddFavorite: url + '/favorite/rest/add/',
+    restAddOrder: url + '/order/rest/add/',
     restDeleteFavorite: url + '/favorite/rest/delete/',
     restDeleteBasket: url + '/basket/rest/delete/',
     ajaxActionGetMiniCartAmount: url + '/get-mini-cart-amount/',
