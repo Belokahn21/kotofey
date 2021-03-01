@@ -1,30 +1,20 @@
 import React, {Component} from "react";
-import config from "../../config";
 
 class AvailableDates extends Component {
     constructor() {
         super();
 
-        this.state = {
-            items: [],
-        };
-    }
-
-    load() {
-        // fetch(config.restGetDates).then(response => response.json()).then(data => {
-        //     console.log(data);
-        // })
-
         let dates = [];
         for (let i = 1; i <= 15; i++) {
             let dateRow = new Date(2021, 1, i);
-            dates[i] = dateRow;
+            dates[i] = dateRow.toLocaleDateString();
         }
 
-        this.setState({
-            items: dates
-        });
+        this.state = {
+            items: dates,
+        };
     }
+
 
     render() {
         return (

@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom';
 import config from "../../config";
 import Price from '../../tools/Price';
 
-import CheckoutBasket from "./CheckoutBasket";
 import AvailableDates from "./AvailableDates";
+import CheckoutSummary from "./CheckoutSummary";
 
 class Checkout extends Component {
 
@@ -146,14 +146,14 @@ class Checkout extends Component {
                                 <label className="checkout-form__label" htmlFor="checkout-phone">
                                     <div>Ваш номер телефона*</div>
                                     <div className="form-group field-checkout-phone required">
-                                        <input type="text" id="checkout-phone" className="js-mask-ru checkout-form__input" name="Order[phone]" value="9059858726" placeholder="Ваш номер телефона" aria-required="true"/>
+                                        <input type="text" id="checkout-phone" className="js-mask-ru checkout-form__input" name="Order[phone]" placeholder="Ваш номер телефона" aria-required="true"/>
                                         <p className="help-block help-block-error"/>
                                     </div>
                                 </label>
                                 <label className="checkout-form__label" htmlFor="checkout-email">
                                     <div>Ваш электронный адрес*</div>
                                     <div className="form-group field-checkout-email required">
-                                        <input type="text" id="checkout-email" className="checkout-form__input" name="Order[email]" value="popugau@gmail.com" placeholder="Ваш электронный адрес" aria-required="true"/>
+                                        <input type="text" id="checkout-email" className="checkout-form__input" name="Order[email]" placeholder="Ваш электронный адрес" aria-required="true"/>
                                         <p className="help-block help-block-error"/>
                                     </div>
                                 </label>
@@ -240,28 +240,7 @@ class Checkout extends Component {
                     </form>
                 </div>
                 <div className="page__right">
-                    <div className="checkout-summary">
-                        <a className="clear-basket" href="#" data-toggle="tooltip" data-placement="top" rel="tooltip" title="Очистить корзину"><i className="fas fa-trash-alt"/></a>
-                        <div className="checkout-summary__info">
-                            <div className="checkout-summary__title">Ваш заказ на сумму:</div>
-                            <a className="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
-                        </div>
-                        <div className="checkout-summary__amount d-flex flex-row align-items-end">
-                            <div className="js-product-calc-full-summary">{Price.format(this.state.total)}</div>
-                            <div className="checkout-summary__currency">₽</div>
-                        </div>
-                    </div>
-                    <div className="collapse show" id="collapseSummary">
-                        <CheckoutBasket basket={this.state.basket}/>
-                    </div>
-                    <div className="checkout-reglament">
-                        <div className="checkout-reglament__title">Обратите внимание!</div>
-                        <div className="checkout-reglament__text">
-                            <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 час).</p>
-                            <p>Доставка бесплатная при заказе на сумму от 500 рублей. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у наших операторов.</p>
-                            <p>Остались вопросы — <a href="mailto:info@kotofey.store">info@kotofey.store</a> или <a href="tel:89967026637" className="js-phone-mask">8 (996) 702 66-37</a></p>
-                        </div>
-                    </div>
+                    <CheckoutSummary basket={this.state.basket}/>
                 </div>
             </>
         );
