@@ -5,6 +5,9 @@ import Price from '../../tools/Price';
 
 import AvailableDates from "./AvailableDates";
 import CheckoutSummary from "./CheckoutSummary";
+import Html from "./html/Html";
+import HtmlHelper from "./html/HtmlHelper";
+import Input from "./html/Input";
 
 class Checkout extends Component {
 
@@ -160,6 +163,11 @@ class Checkout extends Component {
                         </div>
                         <div className="checkout-form__title">Укажите ваши данные
                             <div className="checkout-form__group-row">
+
+
+                                <HtmlHelper name="phone" title="Ваш номер телефона*" placeholder="Ваш номер телефона"/>
+
+
                                 <label className="checkout-form__label" htmlFor="checkout-phone">
                                     <div>Ваш номер телефона*</div>
                                     <div className="form-group field-checkout-phone required">
