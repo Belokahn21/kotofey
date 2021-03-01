@@ -8,7 +8,7 @@ class HtmlHelper extends Component {
     }
 
     renderInput() {
-        return <Input name={this.props.name} title={this.props.title} placeholder={this.props.placeholder}/>;
+        return <Input options={this.props.options}/>;
     }
 
     render() {

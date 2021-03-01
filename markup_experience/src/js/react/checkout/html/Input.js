@@ -7,14 +7,14 @@ class Input extends Component {
     }
 
     buildElementName() {
-        return `Order[${this.props.name}]`;
+        return `Order[${this.props.options.name}]`;
     }
 
     render() {
         return (
-            <label className="checkout-form__label" htmlFor={"checkout-" + this.props.name}>
-                <div>{this.props.title}</div>
-                <input className="checkout-form__input" id={"checkout-" + this.props.name} name={this.props.name} type="text" placeholder={this.props.placeholder}/>
+            <label className="checkout-form__label" htmlFor={"checkout-" + this.props.options.name}>
+                <div>{this.props.options.title}</div>
+                <input className="checkout-form__input" id={"checkout-" + this.props.options.name} name={this.props.options.name} type="text" placeholder={this.props.options.placeholder}/>
             </label>
         );
     }
