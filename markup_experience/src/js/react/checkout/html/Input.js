@@ -7,7 +7,7 @@ class Input extends Component {
     }
 
     buildElementName() {
-        return `Order[${this.props.options.name}]`;
+        return `${this.props.modelName}[${this.props.options.name}]`;
     }
 
     render() {

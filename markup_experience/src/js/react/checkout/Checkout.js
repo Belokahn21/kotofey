@@ -162,8 +162,8 @@ class Checkout extends Component {
                             <div className="checkout-form__group-row">
 
 
-                                <HtmlHelper element="input" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*"}}/>
-                                <HtmlHelper element="input" options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
+                                <HtmlHelper element="input" modelName="Order" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*"}}/>
+                                <HtmlHelper element="input" modelName="Order" options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
 
 
                                 <label className="checkout-form__label" htmlFor="checkout-phone">
