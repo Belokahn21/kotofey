@@ -8,19 +8,17 @@ class CheckoutBasket extends Component {
 
     delete(event) {
         const element = event.target;
-        // const product_id = element.getAttribute('data-product-id');
+        const product_id = element.getAttribute('data-product-id');
 
-        console.log("debug");
-        this.props.refreshBasket();
+        if (!product_id) return false;
 
 
-        // if (!product_id) return false;
+        this.props.refreshBasket(product_id);
 
         // fetch(config.restDeleteBasket + product_id + '/', {
         //     method: 'DELETE'
         // }).then(response => response.json()).then(data => {
         //     console.log(data);
-        //     this.props.refreshBasket();
         // });
     }
 

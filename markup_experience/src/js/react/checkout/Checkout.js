@@ -65,6 +65,25 @@ class Checkout extends Component {
         });
     }
 
+
+    refreshBasket(product_id) {
+        let out = this.state.basket;
+        console.log(out);
+
+        out.map((el, key) => {
+            if (el.id === product_id) {
+                console.log('good ident');
+                delete out[key];
+            }
+        });
+
+        console.log(out);
+
+        this.setState({
+            basket: out
+        });
+    }
+
     render() {
         return (
             <>
@@ -244,10 +263,6 @@ class Checkout extends Component {
                 </div>
             </>
         );
-    }
-
-    refreshBasket() {
-        console.log('parent refresh');
     }
 }
 
