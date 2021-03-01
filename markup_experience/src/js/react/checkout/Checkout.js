@@ -240,10 +240,14 @@ class Checkout extends Component {
                     </form>
                 </div>
                 <div className="page__right">
-                    <CheckoutSummary total={this.state.total} basket={this.state.basket}/>
+                    <CheckoutSummary refreshBasket={this.refreshBasket.bind(this)} total={this.state.total} basket={this.state.basket}/>
                 </div>
             </>
         );
+    }
+
+    refreshBasket() {
+        console.log('parent refresh');
     }
 }
 

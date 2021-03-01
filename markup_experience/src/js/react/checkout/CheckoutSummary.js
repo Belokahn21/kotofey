@@ -7,10 +7,6 @@ class CheckoutSummary extends Component {
         super(props);
     }
 
-    refreshBasket() {
-        console.log('props sprint');
-    }
-
     render() {
         return (
             <>
@@ -26,7 +22,7 @@ class CheckoutSummary extends Component {
                     </div>
                 </div>
                 <div className="collapse show" id="collapseSummary">
-                    <CheckoutBasket refreshBasket={this.refreshBasket.bind(this)} basket={this.props.basket}/>
+                    <CheckoutBasket refreshBasket={this.props.refreshBasket()} basket={this.props.basket}/>
                 </div>
                 <div className="checkout-reglament">
                     <div className="checkout-reglament__title">Обратите внимание!</div>
