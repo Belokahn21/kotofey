@@ -65,10 +65,6 @@ class Checkout extends Component {
         });
     }
 
-    refreshBasket() {
-        console.log("refreshBasket function owner");
-    }
-
     render() {
         return (
             <>
@@ -244,7 +240,7 @@ class Checkout extends Component {
                     </form>
                 </div>
                 <div className="page__right">
-                    <CheckoutSummary refreshBasket={this.refreshBasket.bind(this)} total={this.state.total} basket={this.state.basket}/>
+                    <CheckoutSummary total={this.state.total} basket={this.state.basket}/>
                 </div>
             </>
         );
