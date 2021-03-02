@@ -45,5 +45,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //react js
 // import './react/cdek-calculator/CdekCalculator';
-// import './react/search/Search';
+import './react/search/Search';
 import './react/checkout/Checkout';

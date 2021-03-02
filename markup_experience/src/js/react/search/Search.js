@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDom from "react-dom";
 import config from "../../config";
 import BuildQuery from "../../tools/BuildQuery";
-import * as ResultSearch from './ResultSearch';
+import ResultSearch from './ResultSearch';
 
 class Search extends Component {
     constructor(props) {

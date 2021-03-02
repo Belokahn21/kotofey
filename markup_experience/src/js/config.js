@@ -15,6 +15,7 @@ const config = {
     restDeleteBasket: url + '/basket/rest/delete/',
     ajaxActionGetMiniCartAmount: url + '/get-mini-cart-amount/',
     ajaxActionGetMiniCartCount: url + '/get-mini-cart-count/',
+    restCatalogFrontGet: url + '/catalog/rest/get/',
 };
 
 
