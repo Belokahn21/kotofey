@@ -1,6 +1,11 @@
 build:
 	rm -rf tmp/browser_ext/catalog/dist && cd tmp/browser_ext/catalog && npm run-script build
 
+webpack-copy:
+	cp -R markup_experience/build/js application/web
+	cp -R markup_experience/build/css application/web
+	cp -R markup_experience/build/assets/images application/web
+
 gulp-build:
 	rm -rf markup/build/ && rm -rf application/web/css/ && rm -rf application/web/js/ && rm -rf application/web/images/ && cd markup && gulp build
 
