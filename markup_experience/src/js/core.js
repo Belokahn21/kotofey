@@ -14,6 +14,7 @@ import Catalog from './block/Catalog';
 import StickFilter from './block/StickFilter';
 import RemoveBasketItem from './block/RemoveBasketItem';
 import FastCart from './block/FastCart';
+import LiveSearch from "./block/LiveSearch";
 
 // no class block
 import './block/gifts';
@@ -38,6 +39,8 @@ new RemoveBasketItem();
 new Compare();
 new Favorite();
 new Menu();
+new LiveSearch('.js-live-search');
+
 
 document.addEventListener('DOMContentLoaded', () => {
     new ProductCalc(new FastCart());

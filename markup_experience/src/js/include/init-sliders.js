@@ -71,17 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         autoplay: {
             delay: 5000,
         },
-        on: {
-            init() {
-                this.el.addEventListener('mouseenter', () => {
-                    // this.autoplay.stop();
-                });
-
-                this.el.addEventListener('mouseleave', () => {
-                    // this.autoplay.start();
-                });
-            }
-        },
         breakpoints: {
             550: { // when window width is >= 480px
                 slidesPerView: 4,
