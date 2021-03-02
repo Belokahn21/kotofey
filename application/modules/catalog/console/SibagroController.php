@@ -3,6 +3,7 @@
 namespace app\modules\catalog\console;
 
 use app\modules\catalog\models\form\ProductFromSibagoForm;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\parser\ParseProvider;
 use app\models\tool\parser\providers\SibagroTrade;
@@ -36,7 +37,7 @@ class SibagroController extends Controller
             $virProduct = null;
 
             $productUrl = SibagroTrade::getProductDetailByCode($product->code);
-            $oldPercent = floor((($product->price - $product->purchase) / $product->purchase) * 100);
+            $oldPercent = ProductHelper::getMarkup($product);
 
             $provider = new ParseProvider($productUrl);
             $provider->contract();
