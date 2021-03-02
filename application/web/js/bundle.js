@@ -3735,13 +3735,9 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     on: {
       init: function init() {
-        var _this = this;
-
-        this.el.addEventListener('mouseenter', function () {
-          _this.autoplay.stop();
+        this.el.addEventListener('mouseenter', function () {// this.autoplay.stop();
         });
-        this.el.addEventListener('mouseleave', function () {
-          _this.autoplay.start();
+        this.el.addEventListener('mouseleave', function () {// this.autoplay.start();
         });
       }
     },
@@ -3758,13 +3754,9 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     on: {
       init: function init() {
-        var _this2 = this;
-
-        this.el.addEventListener('mouseenter', function () {
-          _this2.autoplay.stop();
+        this.el.addEventListener('mouseenter', function () {// this.autoplay.stop();
         });
-        this.el.addEventListener('mouseleave', function () {
-          _this2.autoplay.start();
+        this.el.addEventListener('mouseleave', function () {// this.autoplay.start();
         });
       }
     },
@@ -3795,13 +3787,9 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     on: {
       init: function init() {
-        var _this3 = this;
-
-        this.el.addEventListener('mouseenter', function () {
-          _this3.autoplay.stop();
+        this.el.addEventListener('mouseenter', function () {// this.autoplay.stop();
         });
-        this.el.addEventListener('mouseleave', function () {
-          _this3.autoplay.start();
+        this.el.addEventListener('mouseleave', function () {// this.autoplay.start();
         });
       }
     },
@@ -3828,13 +3816,9 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     on: {
       init: function init() {
-        var _this4 = this;
-
-        this.el.addEventListener('mouseenter', function () {
-          _this4.autoplay.stop();
+        this.el.addEventListener('mouseenter', function () {// this.autoplay.stop();
         });
-        this.el.addEventListener('mouseleave', function () {
-          _this4.autoplay.start();
+        this.el.addEventListener('mouseleave', function () {// this.autoplay.start();
         });
       }
     },
@@ -3859,13 +3843,9 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     on: {
       init: function init() {
-        var _this5 = this;
-
-        this.el.addEventListener('mouseenter', function () {
-          _this5.autoplay.stop();
+        this.el.addEventListener('mouseenter', function () {// this.autoplay.stop();
         });
-        this.el.addEventListener('mouseleave', function () {
-          _this5.autoplay.start();
+        this.el.addEventListener('mouseleave', function () {// this.autoplay.start();
         });
       }
     },
@@ -3889,13 +3869,9 @@ document.addEventListener('DOMContentLoaded', function () {
     },
     on: {
       init: function init() {
-        var _this6 = this;
-
-        this.el.addEventListener('mouseenter', function () {
-          _this6.autoplay.stop();
+        this.el.addEventListener('mouseenter', function () {// this.autoplay.stop();
         });
-        this.el.addEventListener('mouseleave', function () {
-          _this6.autoplay.start();
+        this.el.addEventListener('mouseleave', function () {// this.autoplay.start();
         });
       }
     },
@@ -3923,13 +3899,9 @@ document.addEventListener('DOMContentLoaded', function () {
     loop: true,
     on: {
       init: function init() {
-        var _this7 = this;
-
-        this.el.addEventListener('mouseenter', function () {
-          _this7.autoplay.stop();
+        this.el.addEventListener('mouseenter', function () {// this.autoplay.stop();
         });
-        this.el.addEventListener('mouseleave', function () {
-          _this7.autoplay.start();
+        this.el.addEventListener('mouseleave', function () {// this.autoplay.start();
         });
       }
     },
