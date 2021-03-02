@@ -4,6 +4,7 @@ namespace app\modules\catalog\console;
 
 use app\modules\catalog\models\form\ProductFromSibagoForm;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\parser\ParseProvider;
 use app\models\tool\parser\providers\SibagroTrade;
@@ -64,7 +65,7 @@ class SibagroController extends Controller
             // todo: может работать
 //            if ($virProduct->purchase > $product->purchase) {
             $product->purchase = $virProduct->purchase;
-            $product->price = $product->purchase + floor($product->purchase * $oldPercent / 100);
+            MarkupHelpers::applyMarkup($product, $oldPercent);
 //            }
 
             if (!$product->validate()) {
