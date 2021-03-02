@@ -128,6 +128,12 @@ $config = [
                 'GET todo/rest-backend/get' => 'todo/rest-backend/get',
 
                 'POST basket/rest/add' => 'basket/rest/add',
+
+                // new variant rest request
+                'POST order/rest/add' => 'order/rest/add',
+                'GET order/rest/get' => 'order/rest/get',
+
+
                 'GET catalog/rest/<action>' => 'catalog/rest/<action>',
                 'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
                 'GET promocode/rest/get' => 'promocode/rest/get',
