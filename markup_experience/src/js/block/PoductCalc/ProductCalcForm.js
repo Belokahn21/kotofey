@@ -48,7 +48,8 @@ class ProductCalcForm {
         e.preventDefault();
 
         this.saveInfo().then((data) => {
-            const jsonResponse = JSON.parse(data);
+            // const jsonResponse = JSON.parse(data);
+            const jsonResponse = data;
             if (jsonResponse.status === 200) {
                 this.updateCountBasket(jsonResponse.count);
                 this.changeButtonLabel();

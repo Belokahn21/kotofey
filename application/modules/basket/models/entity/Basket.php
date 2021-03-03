@@ -80,6 +80,9 @@ class Basket extends Model
         return false;
     }
 
+    /**
+     * @return OrdersItems[]
+     * */
     public static function findAll()
     {
         $items = [];

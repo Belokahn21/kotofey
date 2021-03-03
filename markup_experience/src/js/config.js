@@ -4,7 +4,7 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url 
 
 const config = {
     restAddBasket: url + '/basket/rest/add/',
-    restBasketGetCheckout: url + '/basket/rest/get-checkout/',
+    restBasketGet: url + '/basket/rest/get/',
     restDeliveryGetCheckout: url + '/delivery/rest/get-checkout/',
     restPaymentGetCheckout: url + '/payment/rest/get-checkout/',
     restGetDates: url + '/order/rest/get-dates/',

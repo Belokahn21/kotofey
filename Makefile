@@ -33,7 +33,7 @@ init-test:
 	cp application/web/index.test.php application/web/index.php
 
 composer-install:
-	cd application && composer install
+	rm application/composer.lock && cd application && composer install
 
 composer-update:
 	cd application && composer update

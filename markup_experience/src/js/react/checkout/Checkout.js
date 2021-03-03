@@ -30,7 +30,8 @@ class Checkout extends Component {
         console.log(form);
 
         fetch(config.restAddOrder, {
-            data: new FormData(form)
+            method: 'POST',
+            body: new FormData(form)
         }).then(response => response.json()).then(data => {
             console.log(data);
         });
@@ -53,12 +54,17 @@ class Checkout extends Component {
     }
 
     loadBasket() {
-        fetch(config.restBasketGetCheckout).then(response => response.json()).then(data => {
-            this.setState({
-                basket: data
-            });
+        fetch(config.restBasketGet).then(response => response.json()).then(data => {
 
-            this.calcTotal();
+            console.log(data);
+
+            if (data.status == 200 && data.items.length > 0) {
+                this.setState({
+                    basket: data.items
+                });
+
+                this.calcTotal();
+            }
         });
     }
 
@@ -162,7 +168,7 @@ class Checkout extends Component {
                         </div>
                         <div className="checkout-form__title">Укажите ваши данные
                             <div className="checkout-form__group-row">
-                                <HtmlHelper element="input" modelName="Order" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*"}}/>
+                                <HtmlHelper element="input" modelName="Order" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
                                 <HtmlHelper element="input" modelName="Order" options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
                             </div>
                             <div className="checkout-form__group-row">
