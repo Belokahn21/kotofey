@@ -14,16 +14,18 @@ use app\modules\site_settings\models\entity\SiteSettings;
 /* @var \yii\web\View $this */
 
 $this->title = Title::show("Поставщики"); ?>
-    <section>
+    <div class="title-group">
         <h1 class="title">Поставщики</h1>
-        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-        <?= $this->render('_form', [
-            'model' => $model,
-            'form' => $form
-        ]); ?>
-        <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-        <?php ActiveForm::end(); ?>
-    </section>
+        <?= Html::a('Группы поставщиков', Url::to(['/admin/vendors/vendors-group-backend/index']), ['class' => 'btn-main']); ?>
+    </div>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?= $this->render('_form', [
+    'model' => $model,
+    'form' => $form
+]); ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?php ActiveForm::end(); ?>
+
     <div class="clearfix"></div>
     <h2>Список поставщиков</h2>
 <?= GridView::widget([
