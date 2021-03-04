@@ -36,7 +36,7 @@ class AnalogWidget extends Widget
 
         return RenderSliderWidget::widget([
             'models' => $models,
-            'title' => 'Рекомендуемые товары'
+            'title' => 'Аналогичные товары'
         ]);
     }
 }
