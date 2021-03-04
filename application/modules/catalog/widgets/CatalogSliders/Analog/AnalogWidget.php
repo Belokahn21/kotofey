@@ -25,9 +25,9 @@ class AnalogWidget extends Widget
         foreach ($this->product->propsValues as $propsValue) {
             if ($propsValue->property_id == $this->property_id) $listIdRelatedItems[] = (int)$propsValue->value;
         }
-
-        $models = Product::find()->where(['in', 'id', $listIdRelatedItems])->all();
-
+        $models = \Yii::$app->cache->getOrSet('analog:' . $this->product->id, function () use ($listIdRelatedItems) {
+            return Product::find()->where(['in', 'id', $listIdRelatedItems])->all();
+        });
 
         return RenderSliderWidget::widget([
             'models' => $models,
