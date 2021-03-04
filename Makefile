@@ -1,6 +1,16 @@
 build:
 	rm -rf tmp/browser_ext/catalog/dist && cd tmp/browser_ext/catalog && npm run-script build
 
+webpack: webpack-build webpack-copy
+
+webpack-copy:
+	cp -R markup_experience/build/js application/web
+	cp -R markup_experience/build/css application/web
+	cp -R markup_experience/build/assets/images application/web
+
+webpack-build:
+	cd markup_experience && npm run build
+
 gulp-build:
 	rm -rf markup/build/ && rm -rf application/web/css/ && rm -rf application/web/js/ && rm -rf application/web/images/ && cd markup && gulp build
 
@@ -23,7 +33,7 @@ init-test:
 	cp application/web/index.test.php application/web/index.php
 
 composer-install:
-	cd application && composer install
+	rm application/composer.lock && cd application && composer install
 
 composer-update:
 	cd application && composer update

@@ -10,20 +10,18 @@ use yii\helpers\Json;
 use yii\rest\Controller;
 use yii\web\HttpException;
 
+
 class RestController extends Controller
 {
+    public $modelClass = 'app\modules\basket\models\entity\Basket';
+
     protected function verbs()
     {
         return [
             'add' => ['POST'],
+            'get' => ['GET'],
             'delete' => ['DELETE'],
         ];
-    }
-
-    public function beforeAction($action)
-    {
-        $this->enableCsrfValidation = false;
-        return parent::beforeAction($action);
     }
 
     public function behaviors()
@@ -37,17 +35,14 @@ class RestController extends Controller
 
     public function actionAdd()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-//        $data = Json::decode(file_get_contents('php://input'));
         $data = \Yii::$app->request->post();
 
         $product_id = $data['product_id'];
         $count = $data['count'];
 
         $product = Product::find()->where(['id' => $product_id, 'status_id' => Product::STATUS_ACTIVE])->one();
-        if (!$product) {
-            throw new HttpException(404, 'Товар не найден');
-        }
+        if (!$product) throw new HttpException(404, 'Товар не найден');
+
 
         if (!$product->vitrine) {
             if ($product->count - $count <= 0) {
@@ -63,7 +58,7 @@ class RestController extends Controller
         if ($discount = $product->getDiscountPrice()) $basketItem->discount_price = $discount;
         $basketItem->purchase = $product->purchase;
 
-        $basket = new Basket();
+        $basket = new $this->modelClass();
         if ($basket->exist($basketItem->product_id)) {
             $basket->update($basketItem, $count);
         } else {
@@ -76,34 +71,51 @@ class RestController extends Controller
         ]);
     }
 
-    public function actionGetCheckout()
+    public function actionGet()
     {
         $data = [];
 
-//        foreach (Basket::findAll() as $value) {
-        foreach (Product::find()->limit(5)->all() as $product) {
+//        foreach (Product::find()->limit(5)->all() as $product) {
+//            $data[] = [
+//                'id' => $product->id,
+//                'name' => $product->name,
+//                'price' => $product->price,
+//                'article' => $product->article,
+//                'detailUrl' => ProductHelper::getDetailUrl($product),
+//                'imageUrl' => ProductHelper::getImageUrl($product),
+//            ];
+//        }
+
+        foreach ($this->modelClass::findAll() as $basketItem) {
             $data[] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'article' => $product->article,
-                'detailUrl' => ProductHelper::getDetailUrl($product),
-                'imageUrl' => ProductHelper::getImageUrl($product),
+                'id' => $basketItem->product->id,
+                'name' => $basketItem->product->name,
+                'price' => $basketItem->product->price,
+                'article' => $basketItem->product->article,
+                'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
+                'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
             ];
         }
 
-        return Json::encode($data);
+        $response = [
+            'status' => 200,
+            'items' => $data
+        ];
+
+
+        return Json::encode($response);
     }
 
     public function actionDelete($id)
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $basket = new Basket();
+        $basket = new $this->modelClass();
         $basket->delete($id);
 
-        return Json::encode([
+        $response = [
             'status' => 200,
             'count' => Basket::count()
-        ]);
+        ];
+
+        return Json::encode($response);
     }
 }

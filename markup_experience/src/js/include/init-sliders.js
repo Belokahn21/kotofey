@@ -16,11 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
         on: {
             init() {
                 this.el.addEventListener('mouseenter', () => {
-                    this.autoplay.stop();
+                    // this.autoplay.stop();
                 });
 
                 this.el.addEventListener('mouseleave', () => {
-                    this.autoplay.start();
+                    // this.autoplay.start();
                 });
             }
         },
@@ -39,11 +39,11 @@ document.addEventListener('DOMContentLoaded', () => {
         on: {
             init() {
                 this.el.addEventListener('mouseenter', () => {
-                    this.autoplay.stop();
+                    // this.autoplay.stop();
                 });
 
                 this.el.addEventListener('mouseleave', () => {
-                    this.autoplay.start();
+                    // this.autoplay.start();
                 });
             }
         },
@@ -71,17 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
         autoplay: {
             delay: 5000,
         },
-        on: {
-            init() {
-                this.el.addEventListener('mouseenter', () => {
-                    this.autoplay.stop();
-                });
-
-                this.el.addEventListener('mouseleave', () => {
-                    this.autoplay.start();
-                });
-            }
-        },
         breakpoints: {
             550: { // when window width is >= 480px
                 slidesPerView: 4,
@@ -105,11 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
         on: {
             init() {
                 this.el.addEventListener('mouseenter', () => {
-                    this.autoplay.stop();
+                    // this.autoplay.stop();
                 });
 
                 this.el.addEventListener('mouseleave', () => {
-                    this.autoplay.start();
+                    // this.autoplay.start();
                 });
             }
         },
@@ -134,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
         on: {
             init() {
                 this.el.addEventListener('mouseenter', () => {
-                    this.autoplay.stop();
+                    // this.autoplay.stop();
                 });
 
                 this.el.addEventListener('mouseleave', () => {
-                    this.autoplay.start();
+                    // this.autoplay.start();
                 });
             }
         },
@@ -163,11 +152,11 @@ document.addEventListener('DOMContentLoaded', () => {
         on: {
             init() {
                 this.el.addEventListener('mouseenter', () => {
-                    this.autoplay.stop();
+                    // this.autoplay.stop();
                 });
 
                 this.el.addEventListener('mouseleave', () => {
-                    this.autoplay.start();
+                    // this.autoplay.start();
                 });
             }
         },
@@ -196,11 +185,11 @@ document.addEventListener('DOMContentLoaded', () => {
         on: {
             init() {
                 this.el.addEventListener('mouseenter', () => {
-                    this.autoplay.stop();
+                    // this.autoplay.stop();
                 });
 
                 this.el.addEventListener('mouseleave', () => {
-                    this.autoplay.start();
+                    // this.autoplay.start();
                 });
             }
         },

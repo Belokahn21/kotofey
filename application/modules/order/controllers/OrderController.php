@@ -107,7 +107,7 @@ class OrderController extends Controller
             return $this->redirect('/');
         }
 
-        return $this->render('create', [
+        return $this->render(\Yii::$app->request->get('react') != 'Y' ? 'create' : '_create', [
             'order' => $order,
             'orderDate' => $orderDate,
             'deliveries' => $deliveries,

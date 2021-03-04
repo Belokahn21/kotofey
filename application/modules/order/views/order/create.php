@@ -48,8 +48,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
     ]); ?>
     <h1 class="page__title">Оформление заказа</h1>
 
-    <div id="checkout-root"></div>
-
     <div class="page__group-row">
         <div class="page__left">
             <?php $form = ActiveForm::begin([
@@ -90,7 +88,7 @@ LIST;
                 </div>
             </div>
 
-            <?php
+            <?php /*
             $availableDates = OrderDateHelper::getAvailableDates($basket);
             $minDate = array_shift($availableDates);
             ?>
@@ -111,7 +109,7 @@ LIST;
                     </label>
                 </div>
             </div>
-
+*/ ?>
 
             <div class="checkout-form__title">Укажите ваши данные
                 <div class="checkout-form__group-row">

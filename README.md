@@ -6,12 +6,15 @@
     <br>
 </p>
 <!-- https://www.figma.com/file/ML5jkKLLnes1BHC11dZwVj/izbastroev -->
-Здравствуй. Это репозиторий <a href="https://kotofey.store/" target="_blank">интернет-магазина Котофей</a>. <br>
-Что под капотом?: <br>
-Фреймворк: Yii2 (Basic template)<br>
-React JS, около 5% сайта
-Вёрстка: Gulp+Babel+Sass+Pug
+Репозиторий проекта <a href="https://kotofey.store/" target="_blank">интернет-магазина Котофей</a>. <br>
+Что под внутри?: <br>
+Yii2 (Basic)<br>
+Node v<br>
+Npm v<br>
+React<br>
+v1: Gulp, Babel, Sass, Pug<br>
+v2: webpack, pug, react
 MySQL<br><br>
-Используется:
- - TinyPNG API (free 500/mounth)
+Используется:<br>
+ - TinyPNG API (free 500/mounth)<br>
  - Cloudinary (CDN)

@@ -14,13 +14,12 @@ class CheckoutBasket extends Component {
         if (!product_id) return false;
 
 
-        this.props.refreshBasket(product_id);
-
-        // fetch(config.restDeleteBasket + product_id + '/', {
-        //     method: 'DELETE'
-        // }).then(response => response.json()).then(data => {
-        //     console.log(data);
-        // });
+        fetch(config.restDeleteBasket + product_id + '/', {
+            method: 'DELETE'
+        }).then(response => response.json()).then(data => {
+            console.log(data);
+            this.props.refreshBasket(product_id);
+        });
     }
 
     render() {
@@ -28,9 +27,9 @@ class CheckoutBasket extends Component {
             <ul className="light-checkout-list">
                 {this.props.basket.map((element, key) => {
                     return <li className="light-checkout-list__item" key={key}>
-                        <a href="javascript:void(0);" className="clear-basket" onClick={this.delete.bind(this)} data-toggle="tooltip" rel="tooltip" data-product-id={element.id} data-placement="right" title="" data-original-title="Удалить товар из корзины">
+                        <div className="clear-basket" onClick={this.delete.bind(this)} data-toggle="tooltip" rel="tooltip" data-product-id={element.id} data-placement="right" title="" data-original-title="Удалить товар из корзины">
                             <i className="fas fa-trash-alt" aria-hidden="true"/>
-                        </a>
+                        </div>
                         <img alt={element.name} title={element.name} className="light-checkout-list__image" src={element.imageUrl}/>
                         <div className="light-checkout-list__info">
                             <div className="light-checkout-list__title">
