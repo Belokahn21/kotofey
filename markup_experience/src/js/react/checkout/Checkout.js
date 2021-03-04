@@ -2,9 +2,12 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import config from "../../config";
 
-import AvailableDates from "./AvailableDates";
 import CheckoutSummary from "./CheckoutSummary";
 import HtmlHelper from "./html/HtmlHelper";
+import TimeDeliveryField from "./field/TimeDeliveryField";
+import PromocodeField from "./field/PromocodeField";
+import UserBonusField from "./field/UserBonusField";
+import DateDeliveryField from "./field/DateDeliveryField";
 
 class Checkout extends Component {
 
@@ -55,9 +58,6 @@ class Checkout extends Component {
 
     loadBasket() {
         fetch(config.restBasketGet).then(response => response.json()).then(data => {
-
-            console.log(data);
-
             if (data.status == 200 && data.items.length > 0) {
                 this.setState({
                     basket: data.items
@@ -122,48 +122,14 @@ class Checkout extends Component {
                         </div>
                         <div className="checkout-form__title">Промокод и бонусы
                             <div className="checkout-form__group-row">
-                                <label className="checkout-form__label" htmlFor="checkout-phone">
-                                    <div>Промокод</div>
-                                    <div className="form-group field-order-promocode has-success">
-                                        <input type="text" id="order-promocode" className="checkout-form__input js-validate-promocode" name="Order[promocode]" placeholder=""/>
-                                        <input type="hidden" className="js-promocode-amount" name="promocode-discount"/>
-                                        <div className="checkout-form-promocode">Ваш промокод: <span className="checkout-form-promocode__code"/>
-                                            <span className="checkout-form-promocode__discount">
-                                            </span>
-                                        </div>
-                                        <p className="help-block help-block-error"/>
-                                    </div>
-                                </label>
-
-                                <label className="checkout-form__label" htmlFor="checkout-phone">
-                                    <div className="form-group field-order-bonus">
-                                        <div className="checkout-form-label-group">
-                                            <div>Бонусы</div>
-                                            <div>Доступно: 0 бонуса</div>
-                                        </div>
-                                        <input type="text" id="order-bonus" className="checkout-form__input js-validate-promocode" name="Order[bonus]" placeholder="Списать бонусы"/>
-                                        <input type="range" id="js-bonus-input" className="js-select-user-bonus " name="bonus" data-min="0" data-from="0" data-max="0" tabIndex="-1" readOnly=""/>
-                                        <p className="help-block help-block-error"/>
-                                    </div>
-                                </label>
+                                <PromocodeField />
+                                <UserBonusField/>
                             </div>
                         </div>
                         <div className="checkout-form__title">Время и дата доставки
                             <div className="checkout-form__group-row">
-                                <label className="checkout-form__label" htmlFor="checkout-date-delivery">
-                                    <div>Дата доставки*</div>
-                                    <div className="form-group field-checkout-date-delivery required">
-                                        <input type="text" id="checkout-date-delivery" className="js-datepicker checkout-form__input" name="OrderDate[date]" placeholder="Дата доставки" data-min="1614546000" aria-required="true"/>
-                                        <p className="help-block help-block-error"/>
-                                    </div>
-                                </label>
-                                <label className="checkout-form__label" htmlFor="checkout-time-delivery">
-                                    <div>Время доставки*</div>
-                                    <div className="form-group field-checkout-time-delivery required">
-                                        <AvailableDates/>
-                                        <p className="help-block help-block-error"/>
-                                    </div>
-                                </label>
+                                <DateDeliveryField />
+                                <TimeDeliveryField/>
                             </div>
                         </div>
                         <div className="checkout-form__title">Укажите ваши данные
