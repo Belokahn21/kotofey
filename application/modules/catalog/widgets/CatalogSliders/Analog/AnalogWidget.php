@@ -29,7 +29,7 @@ class AnalogWidget extends Widget
         if (!$property instanceof Properties or $property->type != TypeProductProperties::TYPE_CATALOG) return false;
 
 
-        $models = \Yii::$app->cache->getOrSet('recomended:' . $this->product->id, function () use ($property_id) {
+        $models = \Yii::$app->cache->getOrSet('analog:' . $this->product->id, function () use ($property_id) {
             return Product::find()->joinWith('propsValues')->where(['properties_product_values.property_id' => $property_id])->all();
         });
 
