@@ -16,6 +16,7 @@ const config = {
     ajaxActionGetMiniCartCount: url + '/get-mini-cart-count/',
     restCatalogFrontGet: url + '/catalog/rest/get/',
     restBonusGet: url + '/bonus/rest/get/',
+    restPromocodeGet: url + '/promocode/rest/get/',
 
 
     restDeleteFavorite: url + '/favorite/rest/delete/',

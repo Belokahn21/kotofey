@@ -1,6 +1,6 @@
-import $ from 'jquery';
+// import $ from 'jquery';
 
-window.$ = window.jQuery = $;
+// window.$ = window.jQuery = $;
 import 'lightbox2';
 import 'popper.js';
 import 'bootstrap';

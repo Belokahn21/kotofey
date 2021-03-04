@@ -185,5 +185,5 @@ class Checkout extends Component {
 }
 
 
-const checkout = document.querySelector('.page__group-row');
+const checkout = document.querySelector('.checkout-react');
 if (checkout) ReactDOM.render(<Checkout/>, checkout);

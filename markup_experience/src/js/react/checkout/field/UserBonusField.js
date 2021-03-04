@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import HtmlHelper from "../html/HtmlHelper";
+import config from "../../../config";
 
 class UserBonusField extends Component {
     constructor(props) {

@@ -142,6 +142,7 @@ $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
 <?= $this->render('include/yandex-map') ?>
 <?= Alert::widget(); ?>
 <?php /* <script src="/js/frontend-core.min.js"></script> */ ?>
+<script src="/js/bundle.js"></script>
 <?php $this->endBody(); ?>
 <?php if (YII_ENV == 'prod'): ?>
     <?php echo $this->render('include/head/yandex/metrika.php'); ?>

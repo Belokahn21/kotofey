@@ -15,7 +15,7 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
 //        'js/frontend-core.min.js',
-        'js/bundle.js',
+//        'js/bundle.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
