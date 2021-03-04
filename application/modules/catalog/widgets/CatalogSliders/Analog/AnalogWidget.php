@@ -26,13 +26,12 @@ class AnalogWidget extends Widget
             if ($propsValue->property_id == $this->property_id) $listIdRelatedItems[] = (int)$propsValue->value;
         }
 
-//        $models = \Yii::$app->cache->getOrSet('analog:' . $this->product->id, function () use ($listIdRelatedItems) {
         $models = Product::find()->where(['in', 'id', $listIdRelatedItems])->all();
-//        });
 
 
         return RenderSliderWidget::widget([
             'models' => $models,
+            'uniqKey' => $this->property_id . $this->product->id,
             'title' => 'Аналогичные товары'
         ]);
     }

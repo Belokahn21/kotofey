@@ -13,6 +13,7 @@ class RenderSliderWidget extends Widget
     public $subTitle = "";
     public $link = "";
     public $linkTitle = "";
+    public $uniqKey = "";
 
     public function run()
     {
@@ -22,6 +23,7 @@ class RenderSliderWidget extends Widget
             'subTitle' => $this->subTitle,
             'link' => $this->link,
             'linkTitle' => $this->linkTitle,
+            'uniqKey' => $this->uniqKey,
         ]);
     }
 }

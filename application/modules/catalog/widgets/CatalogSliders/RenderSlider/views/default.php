@@ -12,11 +12,12 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
  * @var $subTitle string
  * @var $link string
  * @var $linkTitle string
+ * @var $uniqKey string
  */
 
 ?>
 <?php if ($models): ?>
-    <?php if ($this->beginCache(md5($title), ['duration' => 3600 * 24 * 7])): ?>
+    <?php if ($this->beginCache(md5($title . $uniqKey), ['duration' => 3600 * 24 * 7])): ?>
         <div class="page-title__group">
             <h2 class="page-title"><?= $title; ?></h2>
 

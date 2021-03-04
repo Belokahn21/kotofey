@@ -37,6 +37,7 @@ class RecomendedWidget extends Widget
 
         return RenderSliderWidget::widget([
             'models' => $models,
+            'uniqKey' => $this->property_id . $this->product->id,
             'title' => 'Рекомендуемые товары'
         ]);
     }
