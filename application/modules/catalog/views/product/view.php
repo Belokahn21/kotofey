@@ -9,6 +9,7 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
 use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
+use app\modules\catalog\widgets\CatalogSliders\Analog\AnalogWidget;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
@@ -140,7 +141,12 @@ $this->title = ProductTitle::show($product->name);
 <?= RecomendedWidget::widget([
     'property_id' => 19,
     'product' => $product
-]) ?>
+]); ?>
+
+<?= AnalogWidget::widget([
+    'property_id' => 21,
+    'product' => $product
+]); ?>
 <?= VisitedProductsWidget::widget(); ?>
 <?php /*
 <div class="page-title__group is-column"><h2 class="page-title">Выгодные предложения</h2><a class="page-title__link" href="javascript:void(0);">Все предложения</a></div>
