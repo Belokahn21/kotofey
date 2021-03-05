@@ -11,6 +11,15 @@ class RestController extends ActiveController
 {
     public $modelClass = 'app\modules\bonus\models\entity\UserBonusHistory';
 
+    public function behaviors()
+    {
+        return [
+            'corsFilter' => [
+                'class' => \yii\filters\Cors::className(),
+            ],
+        ];
+    }
+
     protected function verbs()
     {
         return [

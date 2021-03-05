@@ -3,11 +3,21 @@
 
 namespace app\modules\user\controllers;
 
+use yii\helpers\Json;
 use yii\rest\ActiveController;
 
 class RestController extends ActiveController
 {
     public $modelClass = 'app\modules\user\models\entity\User';
+
+    public function behaviors()
+    {
+        return [
+            'corsFilter' => [
+                'class' => \yii\filters\Cors::className(),
+            ],
+        ];
+    }
 
     protected function verbs()
     {
@@ -29,9 +39,9 @@ class RestController extends ActiveController
         }
 
 
-        return [
+        return Json::encode([
             'status' => 200,
             'items' => $data
-        ];
+        ]);
     }
 }

@@ -34,20 +34,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    let bonusInput = document.querySelector('#order-bonus');
-// let bonusInput = document.querySelector('#js-bonus-input');
-    let object = $(".js-select-user-bonus");
-    if (object && bonusInput) {
-        object.ionRangeSlider({
-            min: object.data('min'),
-            max: object.data('max'),
-            from: object.data('from'),
-            onStart: function (data) {
-                bonusInput.value = data.from;
-            },
-            onChange: function (data) {
-                bonusInput.value = data.from;
-            },
-        });
-    }
+//     let bonusInput = document.querySelector('#order-bonus');
+// // let bonusInput = document.querySelector('#js-bonus-input');
+//     let object = $(".js-select-user-bonus");
+//     if (object && bonusInput) {
+//         object.ionRangeSlider({
+//             min: object.data('min'),
+//             max: object.data('max'),
+//             from: object.data('from'),
+//             onStart: function (data) {
+//                 bonusInput.value = data.from;
+//             },
+//             onChange: function (data) {
+//                 bonusInput.value = data.from;
+//             },
+//         });
+//     }
 });

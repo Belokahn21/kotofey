@@ -33,10 +33,7 @@ class Checkout extends Component {
         if (!Number.isInteger(parseInt(this.props.userId))) return false;
 
         fetch(config.restUserGet + this.props.userId + '/').then(response => response.json()).then(data => {
-            console.log(data);
-            console.log("asdadsadss");
-            if (data.status == 200) {
-                console.log(data.items);
+            if (data.status === 200) {
                 this.setState({
                     user: data.items
                 });
@@ -47,15 +44,12 @@ class Checkout extends Component {
 
     submitForm(e) {
         e.preventDefault();
-
         const form = e.target;
-        console.log(form);
 
         fetch(config.restAddOrder, {
             method: 'POST',
             body: new FormData(form)
         }).then(response => response.json()).then(data => {
-            console.log(data);
         });
     }
 
@@ -115,7 +109,7 @@ class Checkout extends Component {
 
     render() {
         return (
-            <>
+            <div className="page__group-row">
                 <div className="page__left">
                     <form className="checkout-form" onSubmit={this.submitForm.bind(this)}>
                         <div className="checkout-form__title">Укажите способ доставки</div>
@@ -198,7 +192,7 @@ class Checkout extends Component {
                 <div className="page__right">
                     <CheckoutSummary refreshBasket={this.refreshBasket.bind(this)} total={this.state.total} basket={this.state.basket}/>
                 </div>
-            </>
+            </div>
         );
     }
 }

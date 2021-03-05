@@ -15,7 +15,6 @@ class PromocodeField extends Component {
 
         this.timerEx = setTimeout(() => {
             fetch(config.restPromocodeGet + '/' + promocode + '/').then(response => response.json()).then(data => {
-                console.log(data);
             })
         }, this.timeToStart)
     }

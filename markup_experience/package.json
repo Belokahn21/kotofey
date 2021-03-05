@@ -40,6 +40,7 @@
     "lightbox2": "^2.11.3",
     "maskedinput": "^3.3.11",
     "popper.js": "^1.16.1",
+    "prop-types": "^15.7.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "selectize": "^0.12.6",
