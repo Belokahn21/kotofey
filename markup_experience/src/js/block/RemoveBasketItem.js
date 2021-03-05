@@ -74,7 +74,6 @@ class RemoveBasketItem {
         fetch(config.restDeleteBasket + product_id + '/', {
             method: 'DELETE'
         }).then(response => response.json()).then(data => {
-            data = JSON.parse(data);
             if (data.status === 200) {
                 element.parentNode.classList.add('is-removed');
                 element.classList.add('is-removed');

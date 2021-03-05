@@ -24,9 +24,9 @@ class RestController extends ActiveController
 
         if ($id) {
             array_push($data, $this->modelClass::findOne($id));
+        } else {
+            $data = $this->modelClass::find()->all();
         }
-
-        $data = $this->modelClass::find()->all();
 
 
         return [

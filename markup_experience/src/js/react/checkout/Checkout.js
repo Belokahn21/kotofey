@@ -12,8 +12,8 @@ import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
 
 class Checkout extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
             delivery: [],
@@ -32,8 +32,11 @@ class Checkout extends Component {
     loadUser() {
         if (!Number.isInteger(parseInt(this.props.userId))) return false;
 
-        fetch(config.restUserGet + '/' + this.props.userId + '/').then(response => response.json()).then(data => {
+        fetch(config.restUserGet + this.props.userId + '/').then(response => response.json()).then(data => {
+            console.log(data);
+            console.log("asdadsadss");
             if (data.status == 200) {
+                console.log(data.items);
                 this.setState({
                     user: data.items
                 });

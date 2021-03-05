@@ -2963,8 +2963,6 @@ var RemoveBasketItem = /*#__PURE__*/function () {
       }).then(function (response) {
         return response.json();
       }).then(function (data) {
-        data = JSON.parse(data);
-
         if (data.status === 200) {
           element.parentNode.classList.add('is-removed');
           element.classList.add('is-removed');
@@ -3689,6 +3687,7 @@ var config = {
   restCatalogFrontGet: url + '/catalog/rest/get/',
   restBonusGet: url + '/bonus/rest/get/',
   restPromocodeGet: url + '/promocode/rest/get/',
+  restUserGet: url + '/user/rest/get/',
   restDeleteFavorite: url + '/favorite/rest/delete/',
   restDeleteBasket: url + '/basket/rest/delete/'
 };
@@ -4035,6 +4034,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _field_PromocodeField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./field/PromocodeField */ "./src/js/react/checkout/field/PromocodeField.js");
 /* harmony import */ var _field_UserBonusField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./field/UserBonusField */ "./src/js/react/checkout/field/UserBonusField.js");
 /* harmony import */ var _field_DateDeliveryField__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./field/DateDeliveryField */ "./src/js/react/checkout/field/DateDeliveryField.js");
+/* harmony import */ var _CheckoutUserBonusAuth__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./CheckoutUserBonusAuth */ "./src/js/react/checkout/CheckoutUserBonusAuth.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4067,22 +4067,24 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Checkout = /*#__PURE__*/function (_Component) {
   _inherits(Checkout, _Component);
 
   var _super = _createSuper(Checkout);
 
-  function Checkout() {
+  function Checkout(props) {
     var _this;
 
     _classCallCheck(this, Checkout);
 
-    _this = _super.call(this);
+    _this = _super.call(this, props);
     _this.state = {
       delivery: [],
       payment: [],
       basket: [],
-      total: 0
+      total: 0,
+      user: null
     };
 
     _this.loadDelivery();
@@ -4091,10 +4093,33 @@ var Checkout = /*#__PURE__*/function (_Component) {
 
     _this.loadBasket();
 
+    _this.loadUser();
+
     return _this;
   }
 
   _createClass(Checkout, [{
+    key: "loadUser",
+    value: function loadUser() {
+      var _this2 = this;
+
+      if (!Number.isInteger(parseInt(this.props.userId))) return false;
+      fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restUserGet + this.props.userId + '/').then(function (response) {
+        return response.json();
+      }).then(function (data) {
+        console.log(data);
+        console.log("asdadsadss");
+
+        if (data.status == 200) {
+          console.log(data.items);
+
+          _this2.setState({
+            user: data.items
+          });
+        }
+      });
+    }
+  }, {
     key: "submitForm",
     value: function submitForm(e) {
       e.preventDefault();
@@ -4112,12 +4137,12 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "loadDelivery",
     value: function loadDelivery() {
-      var _this2 = this;
+      var _this3 = this;
 
       fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryGetCheckout).then(function (response) {
         return response.json();
       }).then(function (data) {
-        _this2.setState({
+        _this3.setState({
           delivery: data
         });
       });
@@ -4125,12 +4150,12 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "loadPayment",
     value: function loadPayment() {
-      var _this3 = this;
+      var _this4 = this;
 
       fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restPaymentGetCheckout).then(function (response) {
         return response.json();
       }).then(function (data) {
-        _this3.setState({
+        _this4.setState({
           payment: data
         });
       });
@@ -4138,17 +4163,17 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "loadBasket",
     value: function loadBasket() {
-      var _this4 = this;
+      var _this5 = this;
 
       fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBasketGet).then(function (response) {
         return response.json();
       }).then(function (data) {
         if (data.status == 200 && data.items.length > 0) {
-          _this4.setState({
+          _this5.setState({
             basket: data.items
           });
 
-          _this4.calcTotal();
+          _this5.calcTotal();
         }
       });
     }
@@ -4222,7 +4247,9 @@ var Checkout = /*#__PURE__*/function (_Component) {
         className: "checkout-form__title"
       }, "\u041F\u0440\u043E\u043C\u043E\u043A\u043E\u0434 \u0438 \u0431\u043E\u043D\u0443\u0441\u044B", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_PromocodeField__WEBPACK_IMPORTED_MODULE_6__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_UserBonusField__WEBPACK_IMPORTED_MODULE_7__.default, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_PromocodeField__WEBPACK_IMPORTED_MODULE_6__.default, null), this.state.user !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_UserBonusField__WEBPACK_IMPORTED_MODULE_7__.default, {
+        accountId: this.state.user.phone
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutUserBonusAuth__WEBPACK_IMPORTED_MODULE_9__.default, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
       }, "\u0412\u0440\u0435\u043C\u044F \u0438 \u0434\u0430\u0442\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
@@ -4362,7 +4389,13 @@ var Checkout = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 var checkout = document.querySelector('.checkout-react');
-if (checkout) react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Checkout, null), checkout);
+
+if (checkout) {
+  var userId = checkout.getAttribute('data-user');
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Checkout, {
+    userId: userId
+  }), checkout);
+}
 
 /***/ }),
 
@@ -4627,6 +4660,74 @@ var CheckoutSummary = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CheckoutSummary);
+
+/***/ }),
+
+/***/ "./src/js/react/checkout/CheckoutUserBonusAuth.js":
+/*!********************************************************!*\
+  !*** ./src/js/react/checkout/CheckoutUserBonusAuth.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var CheckoutUserBonusAuth = /*#__PURE__*/function (_Component) {
+  _inherits(CheckoutUserBonusAuth, _Component);
+
+  var _super = _createSuper(CheckoutUserBonusAuth);
+
+  function CheckoutUserBonusAuth(props) {
+    _classCallCheck(this, CheckoutUserBonusAuth);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(CheckoutUserBonusAuth, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "bonus-no-authorize"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u0427\u0442\u043E\u0431\u044B \u0432\u043E\u0441\u043F\u043E\u043B\u044C\u0437\u043E\u0432\u0430\u0442\u044C\u0441\u044F \u0431\u043E\u043D\u0443\u0441\u0430\u043C\u0438 \u0430\u0432\u0442\u043E\u0440\u0438\u0437\u0443\u0439\u0442\u0435\u0441\u044C \u043D\u0430 \u0441\u0430\u0439\u0442\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "checkout-button-auth",
+        "data-toggle": "modal",
+        "data-target": "#signinModal"
+      }, "\u0412\u043E\u0439\u0442\u0438 \u043D\u0430 \u0441\u0430\u0439\u0442"));
+    }
+  }]);
+
+  return CheckoutUserBonusAuth;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CheckoutUserBonusAuth);
 
 /***/ }),
 
@@ -4952,6 +5053,7 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, UserBonusField);
 
     _this = _super.call(this, props);
+    _this.accountId = _this.props.accountId;
     _this.state = {
       bonus: 0
     };
@@ -4966,7 +5068,7 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
     value: function loadBonus() {
       var _this2 = this;
 
-      fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBonusGet + '/' + this.props.account_id + '/').then(function (response) {
+      fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBonusGet + '/' + this.accountId + '/').then(function (response) {
         return response.json();
       }).then(function (data) {
         if (data.status == 200) {
