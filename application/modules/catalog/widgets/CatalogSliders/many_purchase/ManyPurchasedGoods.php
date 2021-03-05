@@ -32,12 +32,13 @@ class ManyPurchasedGoods extends Widget
                 ->select(['id', 'name', 'price', 'discount_price', 'image', 'media_id', 'article', 'slug', 'status_id'])
                 ->where(['status_id' => Product::STATUS_ACTIVE])
                 ->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])
+                ->orderBy(['created_at' => SORT_DESC])
                 ->limit($limit)
                 ->all();
         }, $this->cacheTime);
 
         if (!$models) return false;
 
-        return RenderSliderWidget::widget(['models' => $models,'title' => 'Выбор покупателей']);
+        return RenderSliderWidget::widget(['models' => $models, 'title' => 'Выбор покупателей']);
     }
 }
