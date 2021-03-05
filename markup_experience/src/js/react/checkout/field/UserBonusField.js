@@ -6,6 +6,8 @@ class UserBonusField extends Component {
     constructor(props) {
         super(props);
 
+        this.accountId = this.props.accountId;
+
         this.state = {
             bonus: 0
         };
@@ -14,7 +16,7 @@ class UserBonusField extends Component {
     }
 
     loadBonus() {
-        fetch(config.restBonusGet + '/' + this.props.account_id + '/').then(response => response.json()).then(data => {
+        fetch(config.restBonusGet + '/' + this.accountId + '/').then(response => response.json()).then(data => {
             if (data.status == 200) {
                 this.setState({
                     bonus: data.count

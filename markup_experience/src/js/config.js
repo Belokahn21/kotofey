@@ -17,6 +17,7 @@ const config = {
     restCatalogFrontGet: url + '/catalog/rest/get/',
     restBonusGet: url + '/bonus/rest/get/',
     restPromocodeGet: url + '/promocode/rest/get/',
+    restUserGet: url + '/user/rest/get/',
 
 
     restDeleteFavorite: url + '/favorite/rest/delete/',

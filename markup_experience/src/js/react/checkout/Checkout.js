@@ -8,6 +8,7 @@ import TimeDeliveryField from "./field/TimeDeliveryField";
 import PromocodeField from "./field/PromocodeField";
 import UserBonusField from "./field/UserBonusField";
 import DateDeliveryField from "./field/DateDeliveryField";
+import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
 
 class Checkout extends Component {
 
@@ -19,11 +20,26 @@ class Checkout extends Component {
             payment: [],
             basket: [],
             total: 0,
+            user: null
         };
 
         this.loadDelivery();
         this.loadPayment();
         this.loadBasket();
+        this.loadUser();
+    }
+
+    loadUser() {
+        if (!Number.isInteger(parseInt(this.props.userId))) return false;
+
+        fetch(config.restUserGet + '/' + this.props.userId + '/').then(response => response.json()).then(data => {
+            if (data.status == 200) {
+                this.setState({
+                    user: data.items
+                });
+            }
+        });
+
     }
 
     submitForm(e) {
@@ -122,13 +138,13 @@ class Checkout extends Component {
                         </div>
                         <div className="checkout-form__title">Промокод и бонусы
                             <div className="checkout-form__group-row">
-                                <PromocodeField />
-                                <UserBonusField/>
+                                <PromocodeField/>
+                                {this.state.user !== null ? <UserBonusField accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}
                             </div>
                         </div>
                         <div className="checkout-form__title">Время и дата доставки
                             <div className="checkout-form__group-row">
-                                <DateDeliveryField />
+                                <DateDeliveryField/>
                                 <TimeDeliveryField/>
                             </div>
                         </div>
@@ -186,4 +202,10 @@ class Checkout extends Component {
 
 
 const checkout = document.querySelector('.checkout-react');
-if (checkout) ReactDOM.render(<Checkout/>, checkout);
+
+if (checkout) {
+
+    const userId = checkout.getAttribute('data-user');
+
+    ReactDOM.render(<Checkout userId={userId}/>, checkout);
+}
