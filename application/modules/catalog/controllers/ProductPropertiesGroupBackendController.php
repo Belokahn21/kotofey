@@ -5,6 +5,7 @@ namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\search\PropertiesGroupSearchForm;
 use app\modules\site\controllers\MainBackendController;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\widgets\notification\Alert;
 use yii\web\HttpException;
 
@@ -12,6 +13,17 @@ class ProductPropertiesGroupBackendController extends MainBackendController
 {
     public $classModel = 'app\modules\catalog\models\entity\PropertyGroup';
     public $layout = '@app/views/layouts/admin';
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]
+        ]);
+
+        return $parentAccess;
+    }
 
     public function actionIndex()
     {
