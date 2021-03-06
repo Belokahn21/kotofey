@@ -5,9 +5,12 @@ html
         meta(name="viewport", content="width=device-width, initial-scale=1")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
         script(src="https://kit.fontawesome.com/33cf5fcfbe.js" crossorigin="anonymous")
+        link(rel="stylesheet" href="./assets/css/style.min.css")
 
         title Вёрстка
     body
-        ul
-            li
-                a(target="_blank" href="home.html") Главная страница
+        .wrapper
+            include header
+            block contents
+            include footer
+        script(src="./assets/js/frontend-core.min.js")
