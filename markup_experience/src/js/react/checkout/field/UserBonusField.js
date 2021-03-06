@@ -1,7 +1,5 @@
 import React, {Component} from "react";
 import config from "../../../config";
-import Slider from 'react-rangeslider';
-import 'react-rangeslider/lib/index.css'
 import $ from "jquery";
 
 class UserBonusField extends Component {
