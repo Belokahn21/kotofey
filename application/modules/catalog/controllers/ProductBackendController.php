@@ -4,6 +4,7 @@ namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\form\PriceRepairForm;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use Yii;
 use app\modules\catalog\models\search\ProductSearchForm;
@@ -134,14 +135,26 @@ class ProductBackendController extends MainBackendController
 
     public function actionPriceRepair()
     {
-        $products = $this->modelClass::find()
+        $model = new PriceRepairForm();
+
+        if (\Yii::$app->request->isPost) {
+            if ($model->load(\Yii::$app->request->post())) {
+                if ($model->validate() && $model->run()) {
+                    Alert::setSuccessNotify('Товарам успешно сменили цену');
+                    return $this->refresh();
+                }
+            }
+        }
+
+        $models = $this->modelClass::find()
             ->where("`price`=`purchase`");
 
-        $products = $products->all();
+        $models = $models->all();
 
 
         return $this->render('price-repair', [
-            'models' => $products
+            'models' => $models,
+            'model' => $model,
         ]);
     }
 

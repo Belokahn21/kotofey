@@ -49,3 +49,4 @@ upload
 *.zip
 !123.csv
 tmp
+inc

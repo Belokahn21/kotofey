@@ -1,1 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap');
+@import "include/variables";
+
+* {
+  box-sizing: border-box;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.wrapper {
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+
+  &.__loaded {
+  }
+}
+
+._container {
+  margin: 0 auto;
+  max-width: $max-container-width+px;
+
+  //@media (max-width: $md1+px) {
+  //  max-width: 970px;
+  //}
+  @media (max-width: $md1+px) {
+    max-width: 750px;
+  }
+  @media (max-width: $md2+px) {
+    max-width: none;
+    padding: 0 10px;
+  }
+}
+
+@import "include/block/header";
+@import "include/block/hello";
