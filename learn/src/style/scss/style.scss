@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;900&display=swap');
 @import "include/variables";
+@import "include/ui";
 
 * {
   box-sizing: border-box;
@@ -35,5 +36,16 @@
   }
 }
 
+.page {
+  padding: 90px 0 0 0;
+  flex: 1 1 auto;
+
+  @media (max-width: $md1+px) {
+    padding: 30px 0 0 0;
+
+  }
+}
+
 @import "include/block/header";
 @import "include/block/hello";
+@import "include/block/recent-post";
