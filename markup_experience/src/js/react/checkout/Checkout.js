@@ -50,6 +50,13 @@ class Checkout extends Component {
             method: 'POST',
             body: new FormData(form)
         }).then(response => response.json()).then(data => {
+            if (data.erros.length > 0) {
+                data.errors.map(error => {
+                    // let formElement = document.querySelector('#form' + error.id);
+                    // if (formElement) formElement.classList.toggle('error');
+                    console.log(error);
+                });
+            }
         });
     }
 

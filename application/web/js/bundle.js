@@ -4122,7 +4122,15 @@ var Checkout = /*#__PURE__*/function (_Component) {
         body: new FormData(form)
       }).then(function (response) {
         return response.json();
-      }).then(function (data) {});
+      }).then(function (data) {
+        if (data.erros.length > 0) {
+          data.errors.map(function (error) {
+            // let formElement = document.querySelector('#form' + error.id);
+            // if (formElement) formElement.classList.toggle('error');
+            console.log(error);
+          });
+        }
+      });
     }
   }, {
     key: "loadDelivery",
