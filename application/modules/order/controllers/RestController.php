@@ -29,20 +29,24 @@ class RestController extends ActiveController
     {
         $order = new Order();
         $orderDate = new OrderDate();
+        $response = [
+            'status' => 200
+        ];
 
-        $status = 200;
-
-//        if (!$order->load(\Yii::$app->request->post()) || !$order->validate()) return false;
+        if (!$order->load(\Yii::$app->request->post()) || !$order->validate()) return false;
 
         $transaction = \Yii::$app->db->beginTransaction();
 
         if ($order->load(\Yii::$app->request->post())) {
 
-            if (!\Yii::$app->user->isGuest) $order->user_id = \Yii::$app->user->id;
 
             if (!$order->validate()) {
                 $transaction->rollBack();
-                return false;
+
+                $response['status'] = 500;
+                $response['errors'] = $order->getErrors();
+
+                return Json::encode($response);
             }
 
             if ($module = \Yii::$app->getModule('bonus')) {
@@ -54,16 +58,22 @@ class RestController extends ActiveController
                 }
             }
             if (!$order->save()) {
-                $status = 500;
                 $transaction->rollBack();
+
+                $response['status'] = 500;
+                $response['errors'] = $order->getErrors();
+                return Json::encode($response);
             }
 
 
 //            $orderDate->order_id = $order->id;
 //            if ($orderDate->load(\Yii::$app->request->post())) {
 //                if (!$orderDate->validate() && !$orderDate->save()) {
-//                    $status = 500;
 //                    $transaction->rollBack();
+//
+//                    $response['status'] = 500;
+//                    $response['errors'] = $orderDate->getErrors();
+//                    return Json::encode($response);
 //                }
 //            }
 
@@ -72,18 +82,17 @@ class RestController extends ActiveController
             $items->order_id = $order->id;
 
             if (!$items->saveItems()) {
-                var_dump($items->getErrors());
-                $status = 500;
                 $transaction->rollBack();
+
+                $response['status'] = 500;
+                $response['errors'] = $items->getErrors();
+                return Json::encode($response);
             }
         }
 
-
         $transaction->commit();
 
-        return [
-            'status' => $status
-        ];
+        return Json::encode($response);
     }
 
     public function actionGet()
