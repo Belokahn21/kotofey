@@ -11,6 +11,7 @@ use app\modules\order\models\entity\OrdersItems;
 use app\widgets\notification\Alert;
 use yii\helpers\Json;
 use yii\rest\ActiveController;
+use yii\web\HttpException;
 
 class RestController extends ActiveController
 {
@@ -25,72 +26,63 @@ class RestController extends ActiveController
         ];
     }
 
+    public function behaviors()
+    {
+        return [
+            'corsFilter' => [
+                'class' => \yii\filters\Cors::className(),
+            ],
+        ];
+    }
+
     public function actionAdd()
     {
         $order = new Order();
         $orderDate = new OrderDate();
+        $items = new OrdersItems();
         $response = [
-            'status' => 200
+            'status' => 200,
+//            'message' => 'Заказ успешно создан. Менеджер свяжется с вами в ближайшее время для уточнения деталей заказа.'
         ];
 
-        if (!$order->load(\Yii::$app->request->post()) || !$order->validate()) return false;
-
-        $transaction = \Yii::$app->db->beginTransaction();
-
-        if ($order->load(\Yii::$app->request->post())) {
-
-
-            if (!$order->validate()) {
-                $transaction->rollBack();
-
-                $response['status'] = 500;
-                $response['errors'] = $order->getErrors();
-
-                return Json::encode($response);
-            }
-
-            if ($module = \Yii::$app->getModule('bonus')) {
-                if ($module->getEnable()) {
-                    if ($order->bonus && $order->bonus > 0) {
-                        BonusHelper::addHistory($order, $order->bonus * -1, 'Списание за заказ #' . $order->id, true);
-                        $order->discount = $order->bonus * -1;
-                    }
-                }
-            }
-            if (!$order->save()) {
-                $transaction->rollBack();
-
-                $response['status'] = 500;
-                $response['errors'] = $order->getErrors();
-                return Json::encode($response);
-            }
-
-
-//            $orderDate->order_id = $order->id;
-//            if ($orderDate->load(\Yii::$app->request->post())) {
-//                if (!$orderDate->validate() && !$orderDate->save()) {
-//                    $transaction->rollBack();
-//
-//                    $response['status'] = 500;
-//                    $response['errors'] = $orderDate->getErrors();
-//                    return Json::encode($response);
-//                }
-//            }
-
-            // save products
-            $items = new OrdersItems();
-            $items->order_id = $order->id;
-
-            if (!$items->saveItems()) {
-                $transaction->rollBack();
-
-                $response['status'] = 500;
-                $response['errors'] = $items->getErrors();
-                return Json::encode($response);
-            }
+        if (!\Yii::$app->request->isPost) {
+            $response['status'] = 500;
+            $response['error'] = 'Запрос не является POST';
+            return Json::encode($response);
         }
 
-        $transaction->commit();
+
+        if (!$order->load(\Yii::$app->request->post())) {
+            $response['status'] = 500;
+            $response['error'] = 'Данные в модель Order не были загружены';
+            return Json::encode($response);
+        }
+
+        if (!$order->validate() || !$order->save()) {
+            $response['status'] = 510;
+            $response['errors'] = $order->getErrors();
+            return Json::encode($response);
+        }
+
+        if (!$items->load(\Yii::$app->request->post())) {
+            $response['status'] = 510;
+            $response['errors'] = $items->getErrors();
+            return Json::encode($response);
+        }
+
+        if (!$items->load(\Yii::$app->request->post())) {
+            $response['status'] = 510;
+            $response['errors'] = $items->getErrors();
+            return Json::encode($response);
+        }
+
+        $items->order_id = $order->id;
+        if (!$items->saveItems()) {
+            $response['status'] = 510;
+            $response['errors'] = $items->getErrors();
+            return Json::encode($response);
+        }
+
 
         return Json::encode($response);
     }

@@ -41,11 +41,15 @@
     flex-direction: column;
     justify-content: flex-end;
 
-    div {
+    div, p {
       font-size: 12px;
       line-height: 24px;
       font-weight: 400;
       color: #c6c6c6;
+    }
+
+    .help-block-error {
+      color: red;
     }
   }
 

@@ -92,7 +92,7 @@ class Order extends ActiveRecord
 
             [['is_cancel', 'is_close'], 'boolean'],
 
-            ['email', 'email'],
+            ['email', 'email', 'message' => 'Не верный формат Email адреса'],
             [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
             ['email', 'string', 'max' => 255, 'tooLong' => '{attribute} не должен содержать больше 255 символов'],
 
