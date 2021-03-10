@@ -4081,6 +4081,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       delivery: [],
       payment: [],
       basket: [],
+      errors: [],
       total: 0,
       user: null
     };
@@ -4115,6 +4116,8 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "submitForm",
     value: function submitForm(e) {
+      var _this3 = this;
+
       e.preventDefault();
       var form = e.target;
       fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restAddOrder, {
@@ -4124,26 +4127,29 @@ var Checkout = /*#__PURE__*/function (_Component) {
         return response.json();
       }).then(function (data) {
         if (data.errors) {
-          Object.keys(data.errors).map(function (objKey) {
-            var errorBlock = document.querySelector('#checkout-' + objKey + ' ~ p.help-block-error');
-            if (errorBlock) errorBlock.textContent = data.errors[objKey][0];
+          _this3.setState({
+            errors: data.errors
           });
         }
 
         if (data.status === 200) {
           form.reset();
+
+          _this3.setState({
+            errors: []
+          });
         }
       });
     }
   }, {
     key: "loadDelivery",
     value: function loadDelivery() {
-      var _this3 = this;
+      var _this4 = this;
 
       fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryGetCheckout).then(function (response) {
         return response.json();
       }).then(function (data) {
-        _this3.setState({
+        _this4.setState({
           delivery: data
         });
       });
@@ -4151,12 +4157,12 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "loadPayment",
     value: function loadPayment() {
-      var _this4 = this;
+      var _this5 = this;
 
       fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restPaymentGetCheckout).then(function (response) {
         return response.json();
       }).then(function (data) {
-        _this4.setState({
+        _this5.setState({
           payment: data
         });
       });
@@ -4164,17 +4170,17 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "loadBasket",
     value: function loadBasket() {
-      var _this5 = this;
+      var _this6 = this;
 
       fetch(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBasketGet).then(function (response) {
         return response.json();
       }).then(function (data) {
-        if (data.status == 200 && data.items.length > 0) {
-          _this5.setState({
+        if (data.status === 200 && data.items.length > 0) {
+          _this6.setState({
             basket: data.items
           });
 
-          _this5.calcTotal();
+          _this6.calcTotal();
         }
       });
     }
@@ -4261,6 +4267,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
         element: "input",
         modelName: "Order",
         options: {
@@ -4270,6 +4277,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           "class": 'js-mask-ru'
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
         element: "input",
         modelName: "Order",
         options: {
@@ -4280,6 +4288,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
         element: "input",
         modelName: "Order",
         options: {
@@ -4288,6 +4297,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           placeholder: "Город"
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
         element: "input",
         modelName: "Order",
         options: {
@@ -4316,6 +4326,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
         element: "input",
         modelName: "Order",
         options: {
@@ -4324,6 +4335,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           placeholder: "Этаж"
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
         element: "input",
         modelName: "Order",
         options: {
@@ -4335,6 +4347,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         className: "checkout-form__label",
         htmlFor: "checkout-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
         element: "textarea",
         modelName: "Order",
         options: {
@@ -5136,6 +5149,69 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
 
 /***/ }),
 
+/***/ "./src/js/react/checkout/html/Error.js":
+/*!*********************************************!*\
+  !*** ./src/js/react/checkout/html/Error.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var Error = /*#__PURE__*/function (_Component) {
+  _inherits(Error, _Component);
+
+  var _super = _createSuper(Error);
+
+  function Error(props) {
+    _classCallCheck(this, Error);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Error, [{
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "help-block help-block-error"
+      }, this.props.errors);
+    }
+  }]);
+
+  return Error;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Error);
+
+/***/ }),
+
 /***/ "./src/js/react/checkout/html/HtmlHelper.js":
 /*!**************************************************!*\
   !*** ./src/js/react/checkout/html/HtmlHelper.js ***!
@@ -5196,6 +5272,7 @@ var HtmlHelper = /*#__PURE__*/function (_Component) {
     key: "renderInput",
     value: function renderInput() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Input__WEBPACK_IMPORTED_MODULE_1__.default, {
+        errors: this.props.errors,
         options: this.props.options,
         buildElementName: this.buildElementName.bind(this)
       });
@@ -5204,6 +5281,7 @@ var HtmlHelper = /*#__PURE__*/function (_Component) {
     key: "renderTextarea",
     value: function renderTextarea() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Textarea__WEBPACK_IMPORTED_MODULE_2__.default, {
+        errors: this.props.errors,
         options: this.props.options,
         buildElementName: this.buildElementName.bind(this)
       });
@@ -5240,6 +5318,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _Error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Error */ "./src/js/react/checkout/html/Error.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5264,6 +5343,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Input = /*#__PURE__*/function (_Component) {
   _inherits(Input, _Component);
 
@@ -5279,6 +5359,10 @@ var Input = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var options = this.props.options;
+      var error;
+      if (this.props.errors) error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
+        errors: this.props.errors[options.name]
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-" + options.name
@@ -5288,9 +5372,7 @@ var Input = /*#__PURE__*/function (_Component) {
         name: this.props.buildElementName(),
         type: "text",
         placeholder: options.placeholder
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-        className: "help-block help-block-error"
-      }));
+      }), error);
     }
   }]);
 

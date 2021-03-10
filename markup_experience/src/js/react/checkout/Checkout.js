@@ -19,6 +19,7 @@ class Checkout extends Component {
             delivery: [],
             payment: [],
             basket: [],
+            errors: [],
             total: 0,
             user: null
         };
@@ -51,16 +52,17 @@ class Checkout extends Component {
             body: new FormData(form)
         }).then(response => response.json()).then(data => {
             if (data.errors) {
-                Object.keys(data.errors).map(objKey => {
-
-                    let errorBlock = document.querySelector('#checkout-' + objKey + ' ~ p.help-block-error');
-                    if (errorBlock) errorBlock.textContent = data.errors[objKey][0];
-
+                this.setState({
+                    errors: data.errors
                 });
             }
 
             if (data.status === 200) {
                 form.reset();
+
+                this.setState({
+                    errors: []
+                });
             }
         });
     }
@@ -83,7 +85,7 @@ class Checkout extends Component {
 
     loadBasket() {
         fetch(config.restBasketGet).then(response => response.json()).then(data => {
-            if (data.status == 200 && data.items.length > 0) {
+            if (data.status === 200 && data.items.length > 0) {
                 this.setState({
                     basket: data.items
                 });
@@ -159,23 +161,23 @@ class Checkout extends Component {
                         </div>
                         <div className="checkout-form__title">Укажите ваши данные
                             <div className="checkout-form__group-row">
-                                <HtmlHelper element="input" modelName="Order" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
-                                <HtmlHelper element="input" modelName="Order" options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
                             </div>
                             <div className="checkout-form__group-row">
-                                <HtmlHelper element="input" modelName="Order" options={{name: "city", title: "Город", placeholder: "Город"}}/>
-                                <HtmlHelper element="input" modelName="Order" options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "city", title: "Город", placeholder: "Город"}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
                             </div>
                             <div className="checkout-form__group-row">
                                 <HtmlHelper element="input" modelName="Order" options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
                                 <HtmlHelper element="input" modelName="Order" options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
                             </div>
                             <div className="checkout-form__group-row">
-                                <HtmlHelper element="input" modelName="Order" options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
-                                <HtmlHelper element="input" modelName="Order" options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
                             </div>
                             <label className="checkout-form__label" htmlFor="checkout-comment">
-                                <HtmlHelper element="textarea" modelName="Order" options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
+                                <HtmlHelper errors={this.state.errors} element="textarea" modelName="Order" options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
                             </label>
                         </div>
                         <div className="checkout-form-variants">

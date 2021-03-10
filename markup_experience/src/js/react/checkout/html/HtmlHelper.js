@@ -13,11 +13,11 @@ class HtmlHelper extends Component {
     }
 
     renderInput() {
-        return <Input options={this.props.options} buildElementName={this.buildElementName.bind(this)}/>;
+        return <Input errors={this.props.errors} options={this.props.options} buildElementName={this.buildElementName.bind(this)}/>;
     }
 
     renderTextarea() {
-        return <Textarea options={this.props.options} buildElementName={this.buildElementName.bind(this)}/>;
+        return <Textarea errors={this.props.errors} options={this.props.options} buildElementName={this.buildElementName.bind(this)}/>;
     }
 
 
