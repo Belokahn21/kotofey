@@ -6,7 +6,6 @@ class Input extends Component {
 
     }
 
-
     render() {
         const options = this.props.options;
         return (

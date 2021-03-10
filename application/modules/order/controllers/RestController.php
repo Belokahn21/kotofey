@@ -37,12 +37,11 @@ class RestController extends ActiveController
 
     public function actionAdd()
     {
-        $order = new Order();
+        $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $orderDate = new OrderDate();
         $items = new OrdersItems();
         $response = [
             'status' => 200,
-//            'message' => 'Заказ успешно создан. Менеджер свяжется с вами в ближайшее время для уточнения деталей заказа.'
         ];
 
         if (!\Yii::$app->request->isPost) {
@@ -50,7 +49,6 @@ class RestController extends ActiveController
             $response['error'] = 'Запрос не является POST';
             return Json::encode($response);
         }
-
 
         if (!$order->load(\Yii::$app->request->post())) {
             $response['status'] = 500;
@@ -64,21 +62,9 @@ class RestController extends ActiveController
             return Json::encode($response);
         }
 
-        if (!$items->load(\Yii::$app->request->post())) {
-            $response['status'] = 510;
-            $response['errors'] = $items->getErrors();
-            return Json::encode($response);
-        }
-
-        if (!$items->load(\Yii::$app->request->post())) {
-            $response['status'] = 510;
-            $response['errors'] = $items->getErrors();
-            return Json::encode($response);
-        }
-
         $items->order_id = $order->id;
         if (!$items->saveItems()) {
-            $response['status'] = 510;
+            $response['status'] = 530;
             $response['errors'] = $items->getErrors();
             return Json::encode($response);
         }

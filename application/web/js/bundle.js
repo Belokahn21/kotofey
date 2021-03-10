@@ -4123,12 +4123,15 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }).then(function (response) {
         return response.json();
       }).then(function (data) {
-        if (data.erros.length > 0) {
-          data.errors.map(function (error) {
-            // let formElement = document.querySelector('#form' + error.id);
-            // if (formElement) formElement.classList.toggle('error');
-            console.log(error);
+        if (data.errors) {
+          Object.keys(data.errors).map(function (objKey) {
+            var errorBlock = document.querySelector('#checkout-' + objKey + ' ~ p.help-block-error');
+            if (errorBlock) errorBlock.textContent = data.errors[objKey][0];
           });
+        }
+
+        if (data.status === 200) {
+          form.reset();
         }
       });
     }
@@ -5285,6 +5288,8 @@ var Input = /*#__PURE__*/function (_Component) {
         name: this.props.buildElementName(),
         type: "text",
         placeholder: options.placeholder
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+        className: "help-block help-block-error"
       }));
     }
   }]);
