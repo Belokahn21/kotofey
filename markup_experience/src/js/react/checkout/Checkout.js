@@ -169,8 +169,8 @@ class Checkout extends Component {
                                 <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
                             </div>
                             <div className="checkout-form__group-row">
-                                <HtmlHelper element="input" modelName="Order" options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
-                                <HtmlHelper element="input" modelName="Order" options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
+                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
                             </div>
                             <div className="checkout-form__group-row">
                                 <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
