@@ -204,6 +204,7 @@ class Checkout extends Component {
                             </div>
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">Подтвердить заказ</button>
+                        <button type="button" className="checkout-form__pay">Оплатить заказ</button>
                     </form>
                 </div>
                 <div className="page__right">
