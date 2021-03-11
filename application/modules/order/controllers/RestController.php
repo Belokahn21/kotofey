@@ -44,15 +44,9 @@ class RestController extends ActiveController
             'status' => 200,
         ];
 
-        if (!\Yii::$app->request->isPost) {
-            $response['status'] = 500;
-            $response['error'] = 'Запрос не является POST';
-            return Json::encode($response);
-        }
-
         if (!$order->load(\Yii::$app->request->post())) {
             $response['status'] = 500;
-            $response['error'] = 'Данные в модель Order не были загружены';
+            $response['errors'] = 'Данные в модель Order не были загружены';
             return Json::encode($response);
         }
 
