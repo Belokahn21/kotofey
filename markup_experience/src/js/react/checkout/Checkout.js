@@ -130,7 +130,6 @@ class Checkout extends Component {
                         <div className="checkout-form-variants">
                             <div className="form-group field-order-delivery_id">
                                 <label className="control-label">Способ доставки</label>
-                                <input type="hidden" name="Order[delivery_id]"/>
                                 <div id="order-delivery_id" role="radiogroup">
                                     {this.state.delivery.map((element, key) => {
                                         return <div key={key}>
@@ -147,43 +146,47 @@ class Checkout extends Component {
                                 <p className="help-block help-block-error"/>
                             </div>
                         </div>
-                        <div className="checkout-form__title">Промокод и бонусы
-                            <div className="checkout-form__group-row">
-                                <PromocodeField/>
-                                {this.state.user !== null ? <UserBonusField accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}
-                            </div>
+
+
+                        <div className="checkout-form__title">Промокод и бонусы</div>
+                        <div className="checkout-form__group-row">
+                            <PromocodeField/>
+                            {this.state.user !== null ? <UserBonusField accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}
                         </div>
-                        <div className="checkout-form__title">Время и дата доставки
-                            <div className="checkout-form__group-row">
-                                <DateDeliveryField/>
-                                <TimeDeliveryField/>
-                            </div>
+
+
+                        <div className="checkout-form__title">Время и дата доставки</div>
+                        <div className="checkout-form__group-row">
+                            <DateDeliveryField/>
+                            <TimeDeliveryField/>
                         </div>
-                        <div className="checkout-form__title">Укажите ваши данные
-                            <div className="checkout-form__group-row">
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
-                            </div>
-                            <div className="checkout-form__group-row">
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "city", title: "Город", placeholder: "Город"}}/>
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
-                            </div>
-                            <div className="checkout-form__group-row">
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
-                            </div>
-                            <div className="checkout-form__group-row">
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
-                                <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
-                            </div>
-                            <label className="checkout-form__label" htmlFor="checkout-comment">
-                                <HtmlHelper errors={this.state.errors} element="textarea" modelName="Order" options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
-                            </label>
+
+
+                        <div className="checkout-form__title">Укажите ваши данные</div>
+                        <div className="checkout-form__group-row">
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
                         </div>
+                        <div className="checkout-form__group-row">
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "city", title: "Город", placeholder: "Город"}}/>
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
+                        </div>
+                        <div className="checkout-form__group-row">
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
+                        </div>
+                        <div className="checkout-form__group-row">
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
+                            <HtmlHelper errors={this.state.errors} element="input" modelName="Order" options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
+                        </div>
+                        <label className="checkout-form__label" htmlFor="checkout-comment">
+                            <HtmlHelper errors={this.state.errors} element="textarea" modelName="Order" options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
+                        </label>
+
+
                         <div className="checkout-form-variants">
                             <div className="form-group field-order-payment_id">
                                 <label className="control-label">Способ оплаты</label>
-                                <input type="hidden" name="Order[payment_id]"/>
                                 <div id="order-payment_id" role="radiogroup">
                                     {this.state.payment.map((element, key) => {
                                         return <div key={key}>
