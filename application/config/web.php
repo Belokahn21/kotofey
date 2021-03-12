@@ -153,6 +153,7 @@ $config = [
                 'restore' => 'user/auth/restore',
                 'vk' => 'user/auth/vk',
                 'restore/<id[A-Za-z-\/\d_]+>' => 'user/auth/restoring',
+                'payment/return-url' => 'payment/payment/return-url',
 
                 'market' => 'export/yml/index',
                 'aliexpress' => 'export/aliexpress/index',

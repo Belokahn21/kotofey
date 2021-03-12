@@ -9,6 +9,7 @@ import PromocodeField from "./field/PromocodeField";
 import UserBonusField from "./field/UserBonusField";
 import DateDeliveryField from "./field/DateDeliveryField";
 import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
+import Terminal from "../../tools/payment/terminal";
 
 class Checkout extends Component {
 
@@ -121,6 +122,16 @@ class Checkout extends Component {
         this.calcTotal();
     }
 
+
+    handlePayment() {
+        const terminal = new Terminal('T2222889641-api', 'T2222889641');
+
+        terminal.registerOrder('testorder-' + Math.random(), {
+            amount: 1800,
+            returnUrl: 'https://kotofey.store/payment/return-url/'
+        });
+    }
+
     render() {
         return (
             <div className="page__group-row">
@@ -204,7 +215,7 @@ class Checkout extends Component {
                             </div>
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">Подтвердить заказ</button>
-                        <button type="button" className="checkout-form__pay">Оплатить заказ</button>
+                        <button type="button" onClick={this.handlePayment.bind(this)} className="checkout-form__pay">Оплатить заказ</button>
                     </form>
                 </div>
                 <div className="page__right">
@@ -213,6 +224,7 @@ class Checkout extends Component {
             </div>
         );
     }
+
 }
 
 
