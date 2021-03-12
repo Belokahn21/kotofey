@@ -5824,6 +5824,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _BuildQuery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../BuildQuery */ "./src/js/tools/BuildQuery.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
@@ -5835,6 +5836,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 var Terminal = /*#__PURE__*/function () {
   function Terminal(login, password) {
@@ -5856,6 +5859,7 @@ var Terminal = /*#__PURE__*/function () {
         orderNumber: order_id
       }, options);
 
+      console.log(_BuildQuery__WEBPACK_IMPORTED_MODULE_0__.default.formatObject(fetchOptions));
       console.log(JSON.stringify(fetchOptions));
       fetch(this.url.registerDo, {
         method: 'POST',
@@ -5863,7 +5867,8 @@ var Terminal = /*#__PURE__*/function () {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(fetchOptions)
+        body: _BuildQuery__WEBPACK_IMPORTED_MODULE_0__.default.formatObject(fetchOptions) // body: JSON.stringify(fetchOptions)
+
       }).then(function (response) {
         return response.json();
       }).then(function (data) {

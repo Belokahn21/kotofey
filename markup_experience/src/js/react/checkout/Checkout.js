@@ -124,12 +124,8 @@ class Checkout extends Component {
 
 
     handlePayment() {
-        const terminal = new Terminal('T2222889641-api', 'T2222889641');
-
-        terminal.registerOrder('testorder-' + Math.random(), {
-            amount: 1800,
-            returnUrl: 'https://kotofey.store/payment/return-url/'
-        });
+        const terminal = new Terminal();
+        terminal.registerOrder('testorder-' + Math.random());
     }
 
     render() {

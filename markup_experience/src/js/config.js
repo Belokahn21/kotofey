@@ -22,6 +22,9 @@ const config = {
 
     restDeleteFavorite: url + '/favorite/rest/delete/',
     restDeleteBasket: url + '/basket/rest/delete/',
+
+    // sberbank payments
+    restAddAcquiring: url + '/acquiring/rest/add/',
 };
 
 

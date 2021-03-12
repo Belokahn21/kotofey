@@ -312,6 +312,9 @@ $config = [
         'media' => [
             'class' => 'app\modules\media\Module',
         ],
+        'acquiring' => [
+            'class' => 'app\modules\acquiring\Module',
+        ],
     ],
     'params' => $params,
 ];
