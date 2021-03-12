@@ -3,12 +3,12 @@ let url = location.protocol + '//' + location.hostname;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store'
 
 const config = {
-    restFavorite: url + 'api/favorite/rest/add/',
-    restOrder: url + 'api/order/rest/add/',
+    restFavorite: url + 'api/favorite/',
+    restOrder: url + 'api/order/',
     restBasket: url + 'api/basket/',
     restDelivery: url + 'api/delivery/',
     restPayment: url + 'api/payment/',
-    restDates: url + 'api/order/rest/get-dates/',
+    restDates: url + 'api/order/dates/',
     restGetCatalog: url + 'api/catalog/',
     ajaxActionGetMiniCartAmount: url + 'api/get-mini-cart-amount/',
     ajaxActionGetMiniCartCount: url + 'api/get-mini-cart-count/',
