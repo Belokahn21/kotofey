@@ -2,38 +2,51 @@
 
 namespace app\modules\favorite\controllers;
 
-
-use app\modules\compare\models\entity\Compare;
 use app\modules\favorite\models\entity\Favorite;
 use yii\helpers\Json;
-use yii\rest\Controller;
+use yii\rest\ActiveController;
 
-class RestController extends Controller
+class RestController extends ActiveController
 {
-    public $enableCsrfValidation = false;
+    public $modelClass = 'app\modules\favorite\models\entity\Favorite';
 
     protected function verbs()
     {
         return [
-            'add' => ['POST'],
+            'index' => ['GET'],
+            'show' => ['GET'],
+            'create' => ['POST'],
+            'delete' => ['DELETE'],
         ];
     }
 
-    public function actionAdd()
+    public function actionIndex()
     {
-        $data = Json::decode(file_get_contents('php://input'));
+//        return $this->modelClass::find()->all();
+    }
+
+    public function actionShow($id)
+    {
+//        return $this->modelClass::findOne($id);
+    }
+
+    public function actionCreate()
+    {
+        $data = \Yii::$app->request->post();
+
         $favorite = new Favorite();
         $favorite->add($data['product_id']);
+
         return Json::encode([
             'status' => 200
         ]);
     }
 
-    public function actionDelete()
+    public function actionDelete($id)
     {
-        $data = Json::decode(file_get_contents('php://input'));
-        $favorite = new Favorite();
-        $favorite->delete($data['product_id']);
+        $favorite = new $this->modelClass();
+        $favorite->delete($id);
+
         return Json::encode([
             'status' => 200
         ]);

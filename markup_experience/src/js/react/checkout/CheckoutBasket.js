@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import config from "../../config";
 import Price from "../../tools/Price";
+import RestRequest from "../../tools/RestRequest";
 
 class CheckoutBasket extends Component {
     constructor(props) {
@@ -13,10 +14,7 @@ class CheckoutBasket extends Component {
 
         if (!product_id) return false;
 
-
-        fetch(config.restBasket + product_id + '/', {
-            method: 'DELETE'
-        }).then(response => response.json()).then(data => {
+        RestRequest.delete(config.restBasket, product_id).then(data => {
             this.props.refreshBasket(product_id);
         });
     }

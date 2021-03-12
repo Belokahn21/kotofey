@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import config from "../../../config";
+import RestRequest from "../../../tools/RestRequest";
 
 class PromocodeField extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class PromocodeField extends Component {
         if (this.timerEx) clearTimeout(this.timerEx);
 
         this.timerEx = setTimeout(() => {
-            fetch(config.restPromocode + '/' + promocode + '/').then(response => response.json()).then(data => {
+            RestRequest.one(config.restPromocode, promocode).then(data => {
             })
         }, this.timeToStart)
     }

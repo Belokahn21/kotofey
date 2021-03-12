@@ -3,6 +3,7 @@ import ReactDom from "react-dom";
 import config from "../../config";
 import BuildQuery from "../../tools/BuildQuery";
 import ResultSearch from './ResultSearch';
+import RestRequest from "../../tools/RestRequest";
 
 class Search extends Component {
     constructor(props) {
@@ -30,7 +31,8 @@ class Search extends Component {
             });
         } else {
             this.timeoutExt = setTimeout(() => {
-                fetch(config.restCatalog + '?' + BuildQuery.formatObject({name: element.value})).then(response => response.json()).then(data => {
+
+                RestRequest.all(config.restCatalog + '?' + BuildQuery.formatObject({name: element.value})).then(data => {
                     this.setState({
                         variants: data
                     });

@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import config from "../../../config";
 import $ from "jquery";
+import RestRequest from "../../../tools/RestRequest";
 
 class UserBonusField extends Component {
     constructor(props, context) {
@@ -16,7 +17,8 @@ class UserBonusField extends Component {
     }
 
     loadBonus() {
-        fetch(config.restBonus + this.accountId + '/').then(response => response.json()).then(data => {
+
+        RestRequest.one(config.restBonus, this.accountId).then(data => {
             if (data.status === 200) {
                 this.setState({
                     bonus: data.count
@@ -56,8 +58,8 @@ class UserBonusField extends Component {
                         <div>Бонусы</div>
                         <div>Доступно бонусов: {bonus}</div>
                     </div>
-                    <input type="text" id="order-bonus" className="checkout-form__input js-validate-promocode" name="Order[bonus]" placeholder="Списать бонусы" />
-                    <input type="range" id="js-bonus-input" className="js-select-user-bonus" name="bonus" data-min="0" data-from="0" data-max={300} />
+                    <input type="text" id="order-bonus" className="checkout-form__input js-validate-promocode" name="Order[bonus]" placeholder="Списать бонусы"/>
+                    <input type="range" id="js-bonus-input" className="js-select-user-bonus" name="bonus" data-min="0" data-from="0" data-max={300}/>
                 </div>
             </label>
 

@@ -1,5 +1,6 @@
 import config from '../config';
 import Price from '../tools/Price';
+import RestRequest from "../tools/RestRequest";
 
 class RemoveBasketItem {
     constructor() {
@@ -45,14 +46,12 @@ class RemoveBasketItem {
             element = element.parentElement;
         }
 
+
         if (element.classList.contains('is-removed')) {
             let form = this.getNextSibling(element, '.js-product-calc');
-            return fetch(config.restBasket, {
-                method: 'POST',
+            return RestRequest.post(config.restBasket, {
                 body: new FormData(form)
-            }).then(response => response.json()).then(data => {
-                data = JSON.parse(data);
-
+            }).then(data => {
                 if (data.status === 200) {
                     element.parentNode.classList.remove('is-removed');
                     element.classList.remove('is-removed');
@@ -66,14 +65,9 @@ class RemoveBasketItem {
 
         const product_id = element.getAttribute('data-product-id');
 
-        if (!product_id) {
-            return false;
-        }
+        if (!product_id) return false;
 
-
-        fetch(config.restBasket + product_id + '/', {
-            method: 'DELETE'
-        }).then(response => response.json()).then(data => {
+        RestRequest.delete(config.restBasket, product_id).then(data => {
             if (data.status === 200) {
                 element.parentNode.classList.add('is-removed');
                 element.classList.add('is-removed');

@@ -9,7 +9,6 @@ const config = {
     restDelivery: url + 'api/delivery/',
     restPayment: url + 'api/payment/',
     restDates: url + 'api/order/dates/',
-    restGetCatalog: url + 'api/catalog/',
     ajaxActionGetMiniCartAmount: url + 'api/get-mini-cart-amount/',
     ajaxActionGetMiniCartCount: url + 'api/get-mini-cart-count/',
     restCatalog: url + 'api/catalog/',

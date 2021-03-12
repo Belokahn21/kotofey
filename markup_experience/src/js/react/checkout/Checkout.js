@@ -10,6 +10,7 @@ import UserBonusField from "./field/UserBonusField";
 import DateDeliveryField from "./field/DateDeliveryField";
 import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
 import Terminal from "../../tools/payment/terminal";
+import RestRequest from "../../tools/RestRequest";
 
 class Checkout extends Component {
 
@@ -34,7 +35,7 @@ class Checkout extends Component {
     loadUser() {
         if (!Number.isInteger(parseInt(this.props.userId))) return false;
 
-        fetch(config.restUser + this.props.userId + '/').then(response => response.json()).then(data => {
+        RestRequest.one(config.restUser, this.props.userId).then(data => {
             if (data.status === 200) {
                 this.setState({
                     user: data.items
@@ -48,10 +49,9 @@ class Checkout extends Component {
         e.preventDefault();
         const form = e.target;
 
-        fetch(config.restOrder, {
-            method: 'POST',
+        RestRequest.post(config.restOrder, {
             body: new FormData(form)
-        }).then(response => response.json()).then(data => {
+        }).then(data => {
             if (data.errors) {
                 this.setState({
                     errors: data.errors
@@ -69,7 +69,7 @@ class Checkout extends Component {
     }
 
     loadDelivery() {
-        fetch(config.restDelivery).then(response => response.json()).then(data => {
+        RestRequest.all(config.restDelivery).then(data => {
             this.setState({
                 delivery: data
             });
@@ -77,7 +77,7 @@ class Checkout extends Component {
     }
 
     loadPayment() {
-        fetch(config.restPayment).then(response => response.json()).then(data => {
+        RestRequest.all(config.restPayment).then(data => {
             this.setState({
                 payment: data
             });
@@ -85,7 +85,7 @@ class Checkout extends Component {
     }
 
     loadBasket() {
-        fetch(config.restBasket).then(response => response.json()).then(data => {
+        RestRequest.all(config.restBasket).then(data => {
             if (data.status === 200 && data.items.length > 0) {
                 this.setState({
                     basket: data.items

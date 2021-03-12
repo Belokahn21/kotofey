@@ -1,5 +1,6 @@
 import config from "../config";
 import Price from '../tools/Price';
+import RestRequest from "../tools/RestRequest";
 // import promoCookie from './CookiePoromocodeClass';
 
 let timerEx = null;
@@ -163,10 +164,10 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
         };
 
         let saveInfo = () => {
-            return fetch(config.restBasket, {
+            return RestRequest.post(config.restBasket, {
                 method: 'POST',
                 body: new FormData(formCalc)
-            }).then(response => response.json());
+            });
         };
 
         let updateDiscount = () => {

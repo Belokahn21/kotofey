@@ -2,6 +2,7 @@
 
 use app\modules\seo\models\tools\Title;
 use app\modules\user\models\entity\User;
+use app\modules\user\models\helpers\UserHelper;
 use app\widgets\Breadcrumbs;
 
 $this->title = Title::show("О зоомагазине");
@@ -28,7 +29,7 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' 
         <img src="/upload/images/lester.jpg" style="float: right; width: 200px; margin: 1%">
         <p align="justify">А это я, шотладнский прямоухий котик, автор этой статьи и причина появления магазина, кот по
             кличке Лестер и
-            мне <?php echo User::calcCurrentAge("28-04-2018"); ?>. Я активный и жизнерадостный кот и люблю много общения!</p>
+            мне <?php echo UserHelper::calcCurrentAge("28-04-2018"); ?>. Я активный и жизнерадостный кот и люблю много общения!</p>
         <p align="justify">
             Этот замечательный магазин появился благодаря моим хозяевами, которые в один прекрасный момент решили открыть
             свой

@@ -2,13 +2,15 @@
 
 namespace app\modules\user\models\entity;
 
-use app\modules\bonus\models\entity\UserBonus;
-use app\modules\rbac\models\entity\AuthAssignment;
-use app\modules\rbac\models\entity\AuthItem;
-use mohorev\file\UploadBehavior;
 use Yii;
-use yii\behaviors\TimestampBehavior;
+use ErrorException;
+use yii\db\ActiveRecord;
+use InvalidArgumentException;
 use yii\web\IdentityInterface;
+use mohorev\file\UploadBehavior;
+use yii\behaviors\TimestampBehavior;
+use app\modules\rbac\models\entity\AuthItem;
+use app\modules\rbac\models\entity\AuthAssignment;
 
 /**
  * User model
@@ -32,9 +34,8 @@ use yii\web\IdentityInterface;
  *
  * @property AuthItem $group
  * @property Billing $billing
- * @property \app\modules\bonus\models\entity\UserBonus $discount
  */
-class User extends \yii\db\ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     const SCENARIO_INSERT = 'insert';
     const SCENARIO_UPDATE = 'update';
@@ -97,18 +98,6 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         ];
     }
 
-    public function uniquePhoneLogin($attribute, $params)
-    {
-        $value = str_replace('+7', '8', $this->phone);
-        $value = str_replace([' ', '(', ')', '-'], '', $value);
-
-        if (self::findOne(['phone' => $value])) {
-            $this->addError($attribute, 'Указанный телефон уже занят.');
-        }
-
-    }
-
-
     public function attributeLabels()
     {
         return [
@@ -137,15 +126,10 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         return static::findOne(['phone' => $phone]);
     }
 
-    public function getDiscount()
-    {
-        return UserBonus::findByUserId($this->id);
-    }
-
     public static function isRole($roleName)
     {
         if (empty($roleName)) {
-            throw new \InvalidArgumentException("Не указана роль для проверки");
+            throw new InvalidArgumentException("Не указана роль для проверки");
         }
 
         if (Yii::$app->user->isGuest) {
@@ -153,7 +137,7 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         }
 
         $user_id = Yii::$app->user->identity->id;
-        $roles = \Yii::$app->authManager->getRolesByUser($user_id);
+        $roles = Yii::$app->authManager->getRolesByUser($user_id);
 
         if (!empty($roles)) {
             foreach ($roles as $key => $role) {
@@ -177,8 +161,8 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
         // TODO: repair
         try {
             return AuthItem::findOne(['name' => AuthAssignment::findOne(['user_id' => $this->id])->item_name]);
-        } catch (\ErrorException $exception) {
-            return null;
+        } catch (ErrorException $exception) {
+            return $exception->getMessage();
         }
     }
 
@@ -238,19 +222,25 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
 
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        throw new NotSupportedException('"findIdentityByAccessToken" is not implemented.');
+        return static::findOne(['access_token' => $token]);
     }
 
     public static function findByUsername($username)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['username' => $username]);
     }
 
-    public static function calcCurrentAge($birthday = "17-10-1985")
+    public function generateAccessToken($expireInSeconds)
     {
-        $dateOfBirth = $birthday;
-        $today = date("Y-m-d");
-        $diff = date_diff(date_create($dateOfBirth), date_create($today));
-        return $diff->format('%y год и %m месяца');
+        $this->access_token = Yii::$app->security->generateRandomString() . '_' . (time() + $expireInSeconds);
+    }
+
+    public function isAccessTokenValid()
+    {
+        if (!empty($this->access_token)) {
+            $timestamp = (int)substr($this->access_token, strrpos($this->access_token, '_') + 1);
+            return $timestamp > time();
+        }
+        return false;
     }
 }

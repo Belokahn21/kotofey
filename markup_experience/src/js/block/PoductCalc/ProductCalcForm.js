@@ -1,5 +1,6 @@
 import Price from "../../tools/Price";
 import config from "../../config";
+import RestRequest from "../../tools/RestRequest";
 
 class ProductCalcForm {
 
@@ -145,10 +146,9 @@ class ProductCalcForm {
     };
 
     saveInfo() {
-        return fetch(config.restBasket, {
-            method: 'POST',
+        return RestRequest.post(config.restBasket, {
             body: new FormData(this.form)
-        }).then(response => response.json());
+        })
     };
 
     updateDiscount() {

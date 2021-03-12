@@ -1,4 +1,5 @@
 import config from '../config';
+import RestRequest from "../tools/RestRequest";
 
 class Favorite {
 
@@ -26,12 +27,8 @@ class Favorite {
                     }
 
                     let product_id = element.getAttribute('data-product-id');
-                    fetch(config.restFavorite, {
-                        method: 'DELETE',
-                        body: JSON.stringify({
-                            product_id: product_id
-                        })
-                    }).then(response => response.json()).then(date => {
+
+                    RestRequest.delete(config.restFavorite, product_id).then(date => {
                         parent.classList.add('hidden');
                     });
                 });
@@ -50,13 +47,11 @@ class Favorite {
                     }
 
                     let product_id = element.getAttribute('data-product-id');
-                    fetch(config.restFavorite, {
-                        method: 'POST',
-                        body: JSON.stringify({
-                            product_id: product_id
-                        })
-                    }).then(response => response.json()).then(date => {
-                        console.log(date);
+
+                    RestRequest.post(config.restFavorite, {
+                        body: JSON.stringify({product_id: product_id})
+                    }).then(date => {
+                        parent.classList.add('hidden');
                     });
                 });
             });
