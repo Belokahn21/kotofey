@@ -45,7 +45,7 @@ class AdminEditWidget extends Widget
 
     public function hasRoleAccess()
     {
-        return User::isRole('Developer') || User::isRole('Administrator');
+        return User::isRole('Developer') || User::isRole('Administrator') || User::isRole('Content');
     }
 
     public function getProductSlug()
