@@ -113,14 +113,14 @@ $config = [
             'enableStrictParsing' => false,
             'rules' => [
                 //frontend rest
-                'GET api/<module>' => '<module>/rest/all',
-                'GET api/<module>/<id:\d+>' => '<module>/rest/one',
+                'GET api/<module>' => '<module>/rest/index',
+                'GET api/<module>/<id:\d+>' => '<module>/rest/show',
                 'POST api/<module>' => '<module>/rest/create',
                 'DELETE api/<module>/<id:\d+>' => '<module>/rest/delete',
 
                 //backend rest
-                'GET backend/api/<module>' => '<module>/rest-backend/all',
-                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend/one',
+                'GET backend/api/<module>' => '<module>/rest-backend/index',
+                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend/show',
                 'POST backend/api/<module>' => '<module>/rest/create',
                 'DELETE backend/api/<module>/<id:\d+>' => '<module>/rest/delete',
 
