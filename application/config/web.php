@@ -142,6 +142,12 @@ $config = [
                 'GET cdek/rest-calculate/get' => 'cdek/rest-calculate/get',
                 'DELETE basket/rest/delete' => 'basket/rest/delete',
 
+                //sber rest
+                'GET api/acquiring' => 'acquiring/rest/get',
+                'GET api/acquiring/<id:\d+>' => 'acquiring/rest/get',
+                'POST api/acquiring/<id:\d+>' => 'acquiring/rest/create',
+                'DELETE api/acquiring/<id:\d+>' => 'acquiring/rest/delete',
+
                 '/' => 'site/site/index',
                 'delivery' => 'site/site/delivery',
                 'contacts' => 'site/site/contacts',
