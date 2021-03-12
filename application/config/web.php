@@ -112,41 +112,17 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                //frontend rest
+                'GET api/<module>' => '<module>/rest/all',
+                'GET api/<module>/<id:\d+>' => '<module>/rest/one',
+                'POST api/<module>' => '<module>/rest/create',
+                'DELETE api/<module>/<id:\d+>' => '<module>/rest/delete',
 
-
-                'GET rest/product/get' => 'rest/product/get', // old
-                'POST compare/rest/add' => 'compare/rest/add',
-                'POST favorite/rest/add' => 'favorite/rest/add',
-                'DELETE favorite/rest/delete' => 'favorite/rest/delete',
-
-                'GET menu/rest-backend/get' => 'menu/rest-backend/get',
-                'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
-                'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
-                'GET catalog/rest-backend/get' => 'catalog/rest-backend/get',
-                'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
-                'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
-                'GET user/rest-backend/get' => 'user/rest-backend/get',
-                'POST todo/rest-backend/add' => 'todo/rest-backend/add',
-                'GET todo/rest-backend/get' => 'todo/rest-backend/get',
-
-                'POST basket/rest/add' => 'basket/rest/add',
-
-                // new variant rest request
-                'POST order/rest/add' => 'order/rest/add',
-                'GET order/rest/get' => 'order/rest/get',
-
-
-                'GET catalog/rest/<action>' => 'catalog/rest/<action>',
-                'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
-                'GET promocode/rest/get' => 'promocode/rest/get',
-                'GET cdek/rest-calculate/get' => 'cdek/rest-calculate/get',
-                'DELETE basket/rest/delete' => 'basket/rest/delete',
-
-                //sber rest
-                'GET api/acquiring' => 'acquiring/rest/get',
-                'GET api/acquiring/<id:\d+>' => 'acquiring/rest/get',
-                'POST api/acquiring/<id:\d+>' => 'acquiring/rest/create',
-                'DELETE api/acquiring/<id:\d+>' => 'acquiring/rest/delete',
+                //backend rest
+                'GET backend/api/<module>' => '<module>/rest-backend/all',
+                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend/one',
+                'POST backend/api/<module>' => '<module>/rest/create',
+                'DELETE backend/api/<module>/<id:\d+>' => '<module>/rest/delete',
 
                 '/' => 'site/site/index',
                 'delivery' => 'site/site/delivery',

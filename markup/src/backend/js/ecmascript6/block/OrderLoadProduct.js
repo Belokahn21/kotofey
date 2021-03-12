@@ -37,6 +37,6 @@ function handleInput(event) {
 }
 
 async function getProduct(product_id) {
-    const response = await fetch(config.restCatalogGet + product_id + '/');
+    const response = await fetch(config.restCatalog + product_id + '/');
     return await response.json();
 }

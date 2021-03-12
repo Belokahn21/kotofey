@@ -4,17 +4,19 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
     url = 'http://local.kotofey.store';
 
 module.exports = {
-    restCatalogGet: url + '/catalog/rest-backend/get/',
-    restStatisticGet: url + '/statistic/rest-backend/get/',
-    restMenuGet: url + '/menu/rest-backend/get/',
-    restMenuFastGet: url + '/menu_fast/rest-backend/get/',
+    restCatalog: url + '/backend/api/catalog/',
+    restStatistic: url + '/backend/api/statistic/',
+    restMenu: url + '/backend/api/menu/',
+    restMenuFast: url + '/backend/api/menu_fast/',
     restSearchGet: url + '/rest/product/get/',
     restUserGet: url + '/user/rest-backend/get/',
-    restTodoAdd: url + '/todo/rest-backend/add/',
     restTodoGet: url + '/todo/rest-backend/get/',
-    restCdekDeliveryPrice: url + '/cdek/rest-calculator/get/',
     restCdekCity: url + '/cdek/rest-city/get/',
     restCdekSize: url + '/cdek/rest-size/get/',
-    ajaxSaveProductMark: url + '/ajax/mark/',
+    restCdekDeliveryPrice: url + '/cdek/rest-calculator/get/',
     restCatalogFrontGet: url + '/catalog/rest/get/',
+
+    restTodoAdd: url + '/todo/rest-backend/add/',
+
+    ajaxSaveProductMark: url + '/ajax/mark/',
 };

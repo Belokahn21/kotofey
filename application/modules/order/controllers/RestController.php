@@ -20,8 +20,8 @@ class RestController extends ActiveController
     protected function verbs()
     {
         return [
-            'get' => ['GET'],
-            'add' => ['POST'],
+            'all' => ['GET'],
+            'create' => ['POST'],
             'delete' => ['DELETE'],
         ];
     }
@@ -35,9 +35,9 @@ class RestController extends ActiveController
         ];
     }
 
-    public function actionAdd()
+    public function actionCreate()
     {
-        $order = new Order(['scenario' => Order::SCENARIO_CLIENT_BUY]);
+        $order = new $this->modelClass(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $orderDate = new OrderDate();
         $items = new OrdersItems();
         $response = [
@@ -67,8 +67,8 @@ class RestController extends ActiveController
         return Json::encode($response);
     }
 
-    public function actionGet()
+    public function actionAll()
     {
-        return Json::encode(Order::find()->all());
+        return $this->modelClass::find()->all();
     }
 }

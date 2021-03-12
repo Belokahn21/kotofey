@@ -4,7 +4,7 @@ import config from '../../config';
 class Menu extends React.Component {
     constructor() {
         super();
-        const url = config.restMenuGet;
+        const url = config.restMenu;
 
         this.state = {
             items: []

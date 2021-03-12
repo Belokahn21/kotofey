@@ -21,7 +21,7 @@ class FindProductForm extends React.Component {
         let element = e.target;
 
         this.timerEx = setTimeout(() => {
-            fetch(config.restCatalogGet + '?name=' + element.value).then(result => result.json()).then(result => {
+            fetch(config.restCatalog + '?name=' + element.value).then(result => result.json()).then(result => {
                 this.setState({
                     items: JSON.parse(result)
                 });

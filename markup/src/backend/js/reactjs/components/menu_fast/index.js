@@ -4,7 +4,7 @@ import config from "../../config";
 class MenuFast extends React.Component {
     constructor() {
         super();
-        const url = config.restMenuFastGet;
+        const url = config.restMenuFast;
 
         this.state = {
             items: []

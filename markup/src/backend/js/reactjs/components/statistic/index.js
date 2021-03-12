@@ -11,7 +11,7 @@ class Statistic extends React.Component {
             items: []
         }
 
-        fetch(config.restStatisticGet)
+        fetch(config.restStatistic)
             .then(response => response.json())
             .then(json => {
                 this.setState({
