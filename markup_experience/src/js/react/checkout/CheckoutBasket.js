@@ -14,7 +14,7 @@ class CheckoutBasket extends Component {
         if (!product_id) return false;
 
 
-        fetch(config.restDeleteBasket + product_id + '/', {
+        fetch(config.restBasket + product_id + '/', {
             method: 'DELETE'
         }).then(response => response.json()).then(data => {
             this.props.refreshBasket(product_id);

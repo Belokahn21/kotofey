@@ -47,7 +47,7 @@ class RemoveBasketItem {
 
         if (element.classList.contains('is-removed')) {
             let form = this.getNextSibling(element, '.js-product-calc');
-            return fetch(config.restAddBasket, {
+            return fetch(config.restBasket, {
                 method: 'POST',
                 body: new FormData(form)
             }).then(response => response.json()).then(data => {
@@ -71,7 +71,7 @@ class RemoveBasketItem {
         }
 
 
-        fetch(config.restDeleteBasket + product_id + '/', {
+        fetch(config.restBasket + product_id + '/', {
             method: 'DELETE'
         }).then(response => response.json()).then(data => {
             if (data.status === 200) {

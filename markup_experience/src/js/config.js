@@ -3,28 +3,21 @@ let url = location.protocol + '//' + location.hostname;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store'
 
 const config = {
-    restAddBasket: url + '/basket/rest/add/',
-    restAddFavorite: url + '/favorite/rest/add/',
-    restAddOrder: url + '/order/rest/add/',
-
-    restBasketGet: url + '/basket/rest/get/',
-    restDeliveryGetCheckout: url + '/delivery/rest/get-checkout/',
-    restPaymentGetCheckout: url + '/payment/rest/get-checkout/',
-    restGetDates: url + '/order/rest/get-dates/',
-    restGetCatalog: url + '/catalog/rest/get/',
-    ajaxActionGetMiniCartAmount: url + '/get-mini-cart-amount/',
-    ajaxActionGetMiniCartCount: url + '/get-mini-cart-count/',
-    restCatalogFrontGet: url + '/catalog/rest/get/',
-    restBonusGet: url + '/bonus/rest/get/',
-    restPromocodeGet: url + '/promocode/rest/get/',
-    restUserGet: url + '/user/rest/get/',
-
-
-    restDeleteFavorite: url + '/favorite/rest/delete/',
-    restDeleteBasket: url + '/basket/rest/delete/',
-
+    restFavorite: url + 'api/favorite/rest/add/',
+    restOrder: url + 'api/order/rest/add/',
+    restBasket: url + 'api/basket/',
+    restDelivery: url + 'api/delivery/',
+    restPayment: url + 'api/payment/',
+    restDates: url + 'api/order/rest/get-dates/',
+    restGetCatalog: url + 'api/catalog/',
+    ajaxActionGetMiniCartAmount: url + 'api/get-mini-cart-amount/',
+    ajaxActionGetMiniCartCount: url + 'api/get-mini-cart-count/',
+    restCatalog: url + 'api/catalog/',
+    restBonus: url + 'api/bonus/',
+    restPromocode: url + 'api/promocode/',
+    restUser: url + 'api/user/',
     // sberbank payments
-    restAddAcquiring: url + '/acquiring/rest/add/',
+    restAcquiring: url + 'api/acquiring/',
 };
 
 

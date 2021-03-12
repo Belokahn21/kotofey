@@ -26,8 +26,8 @@ class Favorite {
                     }
 
                     let product_id = element.getAttribute('data-product-id');
-                    fetch(config.restDeleteFavorite, {
-                        method: 'POST',
+                    fetch(config.restFavorite, {
+                        method: 'DELETE',
                         body: JSON.stringify({
                             product_id: product_id
                         })
@@ -50,7 +50,7 @@ class Favorite {
                     }
 
                     let product_id = element.getAttribute('data-product-id');
-                    fetch(config.restAddFavorite, {
+                    fetch(config.restFavorite, {
                         method: 'POST',
                         body: JSON.stringify({
                             product_id: product_id

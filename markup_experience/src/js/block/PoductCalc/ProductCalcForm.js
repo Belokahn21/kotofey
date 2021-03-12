@@ -145,7 +145,7 @@ class ProductCalcForm {
     };
 
     saveInfo() {
-        return fetch(config.restAddBasket, {
+        return fetch(config.restBasket, {
             method: 'POST',
             body: new FormData(this.form)
         }).then(response => response.json());

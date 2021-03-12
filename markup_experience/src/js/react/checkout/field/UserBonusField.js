@@ -16,7 +16,7 @@ class UserBonusField extends Component {
     }
 
     loadBonus() {
-        fetch(config.restBonusGet + this.accountId + '/').then(response => response.json()).then(data => {
+        fetch(config.restBonus + this.accountId + '/').then(response => response.json()).then(data => {
             if (data.status === 200) {
                 this.setState({
                     bonus: data.count

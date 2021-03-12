@@ -30,7 +30,7 @@ class Search extends Component {
             });
         } else {
             this.timeoutExt = setTimeout(() => {
-                fetch(config.restCatalogFrontGet + '?' + BuildQuery.formatObject({name: element.value})).then(response => response.json()).then(data => {
+                fetch(config.restCatalog + '?' + BuildQuery.formatObject({name: element.value})).then(response => response.json()).then(data => {
                     this.setState({
                         variants: data
                     });

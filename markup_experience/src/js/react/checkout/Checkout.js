@@ -34,7 +34,7 @@ class Checkout extends Component {
     loadUser() {
         if (!Number.isInteger(parseInt(this.props.userId))) return false;
 
-        fetch(config.restUserGet + this.props.userId + '/').then(response => response.json()).then(data => {
+        fetch(config.restUser + this.props.userId + '/').then(response => response.json()).then(data => {
             if (data.status === 200) {
                 this.setState({
                     user: data.items
@@ -48,7 +48,7 @@ class Checkout extends Component {
         e.preventDefault();
         const form = e.target;
 
-        fetch(config.restAddOrder, {
+        fetch(config.restOrder, {
             method: 'POST',
             body: new FormData(form)
         }).then(response => response.json()).then(data => {
@@ -69,7 +69,7 @@ class Checkout extends Component {
     }
 
     loadDelivery() {
-        fetch(config.restDeliveryGetCheckout).then(response => response.json()).then(data => {
+        fetch(config.restDelivery).then(response => response.json()).then(data => {
             this.setState({
                 delivery: data
             });
@@ -77,7 +77,7 @@ class Checkout extends Component {
     }
 
     loadPayment() {
-        fetch(config.restPaymentGetCheckout).then(response => response.json()).then(data => {
+        fetch(config.restPayment).then(response => response.json()).then(data => {
             this.setState({
                 payment: data
             });
@@ -85,7 +85,7 @@ class Checkout extends Component {
     }
 
     loadBasket() {
-        fetch(config.restBasketGet).then(response => response.json()).then(data => {
+        fetch(config.restBasket).then(response => response.json()).then(data => {
             if (data.status === 200 && data.items.length > 0) {
                 this.setState({
                     basket: data.items
