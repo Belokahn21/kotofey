@@ -11,13 +11,11 @@ use app\assets\AppAsset;
 use app\widgets\notification\Alert;
 use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
-use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\site\widgets\PageUp\PageUpWidget;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site\widgets\AdminPanel\AdminPanel;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\helpers\CategoryHelper;
-use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\MiniMobileCart\MiniMobileCartWidget;
 
 AppAsset::register($this);
