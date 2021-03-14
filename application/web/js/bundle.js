@@ -4111,6 +4111,8 @@ var Checkout = /*#__PURE__*/function (_Component) {
         }
 
         if (data.status === 200) {
+          _this3.handlePayment(data.id + 'test');
+
           form.reset();
 
           _this3.setState({
@@ -4181,9 +4183,16 @@ var Checkout = /*#__PURE__*/function (_Component) {
     }
   }, {
     key: "handlePayment",
-    value: function handlePayment() {
+    value: function handlePayment(order_id) {
       var terminal = new _tools_payment_terminal__WEBPACK_IMPORTED_MODULE_10__.default();
-      terminal.registerOrder(1);
+      terminal.registerOrder(order_id).then(function (data) {
+        console.log(data);
+
+        if (data.formUrl !== undefined) {
+          console.log(data.formUrl);
+          window.open(data.formUrl, '_blank');
+        }
+      });
     }
   }, {
     key: "render",
@@ -4365,11 +4374,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "add-basket checkout-form__submit"
-      }, "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        onClick: this.handlePayment.bind(this),
-        className: "checkout-form__pay"
-      }, "\u041E\u043F\u043B\u0430\u0442\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page__right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutSummary__WEBPACK_IMPORTED_MODULE_3__.default, {
         refreshBasket: this.refreshBasket.bind(this),
@@ -5335,7 +5340,7 @@ var Input = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var options = this.props.options;
-      var error, aria_invalid; // console.log(this.props.errors);
+      var error, aria_invalid;
 
       if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
         error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
@@ -5699,12 +5704,11 @@ var BuildQuery = /*#__PURE__*/function () {
   }, {
     key: "formDataFromObject",
     value: function formDataFromObject(data) {
-      // let formData = new FormData();
+      var formData = new FormData();
       Object.keys(data).map(function (key) {
-        console.log(key);
-      }); // formData.append('name', 'John');
-      // formData.append('password', 'John123');
-      // return formData;
+        formData.append(key, data[key]);
+      });
+      return formData;
     }
   }]);
 
@@ -5889,16 +5893,10 @@ var Terminal = /*#__PURE__*/function () {
   _createClass(Terminal, [{
     key: "registerOrder",
     value: function registerOrder(order_id) {
-      _RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post(_config__WEBPACK_IMPORTED_MODULE_0__.default.restAcquiring, {
-        headers: {
-          'Accept': 'multipart/form-data' // 'Content-Type': 'multipart/form-data'
-
-        },
+      return _RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post(_config__WEBPACK_IMPORTED_MODULE_0__.default.restAcquiring, {
         body: _BuildQuery__WEBPACK_IMPORTED_MODULE_2__.default.formDataFromObject({
           order_id: order_id
         })
-      }).then(function (data) {
-        console.log(data);
       });
     }
   }]);

@@ -57,8 +57,9 @@ class Checkout extends Component {
             }
 
             if (data.status === 200) {
-                form.reset();
+                this.handlePayment(data.id + 'test');
 
+                form.reset();
                 this.setState({
                     errors: []
                 });
@@ -121,9 +122,9 @@ class Checkout extends Component {
     }
 
 
-    handlePayment() {
+    handlePayment(order_id) {
         const terminal = new Terminal();
-        terminal.registerOrder(1).then(data => {
+        terminal.registerOrder(order_id).then(data => {
             console.log(data);
             if (data.formUrl !== undefined) {
                 console.log(data.formUrl);
@@ -215,7 +216,7 @@ class Checkout extends Component {
                             </div>
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">Подтвердить заказ</button>
-                        <button type="button" onClick={this.handlePayment.bind(this)} className="checkout-form__pay checkout-form__submit add-basket">Оплатить заказ</button>
+                        {/*<button type="button" onClick={this.handlePayment.bind(this)} className="checkout-form__pay checkout-form__submit add-basket">Оплатить заказ</button>*/}
                     </form>
                 </div>
                 <div className="page__right">
