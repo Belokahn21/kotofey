@@ -52,7 +52,14 @@ $this->title = Title::show("Список доставок");
 
                     <div class="logistic-list-data__row">
                         <div class="logistic-list-data__key">Адрес доставки:</div>
-                        <div class="logistic-list-data__value"><?= !$order->city ?: 'г.' . $order->city; ?><?= !$order->street ?: ', ул.' . $order->street; ?><?= !$order->number_home ?: ', д.' . $order->number_home; ?><?= !$order->number_appartament ?: ', кв.' . $order->number_appartament; ?></div>
+                        <div class="logistic-list-data__value">
+                            <?= !$order->city ? '' : 'г.' . $order->city; ?>
+                            <?= !$order->street ?'': ', ул.' . $order->street; ?>
+                            <?= !$order->number_home ?'': ', д.' . $order->number_home; ?>
+                            <?= !$order->entrance ?'': ', п.' . $order->entrance; ?>
+                            <?= !$order->number_appartament ?'': ', кв.' . $order->number_appartament; ?>
+                            <?= !$order->floor_house ?'': ', эт.' . $order->floor_house; ?>
+                        </div>
                     </div>
                 </div>
                 <div class="logistic-list__controls">
