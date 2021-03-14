@@ -114,7 +114,7 @@ $config = [
             'rules' => [
                 //frontend rest
                 'GET api/<module>' => '<module>/rest/index',
-                'GET api/<module>/<id:\d+>' => '<module>/rest/show',
+                'GET api/<module>/<id:\d+>' => '<module>/rest/view',
                 'POST api/<module>' => '<module>/rest/create',
                 'DELETE api/<module>/<id:\d+>' => '<module>/rest/delete',
 

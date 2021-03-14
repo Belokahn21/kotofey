@@ -12,36 +12,12 @@ class RestController extends ActiveController
 
     public function behaviors()
     {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
+        $behaviors = parent::behaviors();
+
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
         ];
-    }
 
-    protected function verbs()
-    {
-        return [
-            'get' => ['GET'],
-            'add' => ['POST'],
-            'delete' => ['DELETE'],
-        ];
-    }
-
-    public function actionGet($id = null)
-    {
-        $data = [];
-
-        if ($id) {
-            array_push($data, $this->modelClass::findOne($id));
-        } else {
-            $data = $this->modelClass::find()->all();
-        }
-
-
-        return Json::encode([
-            'status' => 200,
-            'items' => $data
-        ]);
+        return $behaviors;
     }
 }

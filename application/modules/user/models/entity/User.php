@@ -82,14 +82,15 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['phone'], 'string', 'max' => 25],
             ['phone', 'default', 'value' => null],
-            ['phone', 'uniquePhoneLogin', 'on' => self::SCENARIO_INSERT],
+//            ['phone', 'uniquePhoneLogin', 'on' => self::SCENARIO_INSERT],
             [
                 ['phone'],
                 'filter',
                 'filter' => function ($value) {
                     $value = str_replace('+7', '8', $value);
                     return str_replace([' ', '(', ')', '-'], '', $value);
-                }
+                },
+                'on' => self::SCENARIO_INSERT
             ],
 
             ['email', 'email'],

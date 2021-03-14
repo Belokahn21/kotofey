@@ -1,6 +1,6 @@
-let url = location.protocol + '//' + location.hostname;
+let url = location.protocol + '//' + location.hostname + '/';
 
-if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store'
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store/';
 
 const config = {
     restFavorite: url + 'api/favorite/',
@@ -9,8 +9,8 @@ const config = {
     restDelivery: url + 'api/delivery/',
     restPayment: url + 'api/payment/',
     restDates: url + 'api/order/dates/',
-    ajaxActionGetMiniCartAmount: url + 'api/get-mini-cart-amount/',
-    ajaxActionGetMiniCartCount: url + 'api/get-mini-cart-count/',
+    ajaxActionGetMiniCartAmount: url + 'get-mini-cart-amount/',
+    ajaxActionGetMiniCartCount: url + 'get-mini-cart-count/',
     restCatalog: url + 'api/catalog/',
     restBonus: url + 'api/bonus/',
     restPromocode: url + 'api/promocode/',

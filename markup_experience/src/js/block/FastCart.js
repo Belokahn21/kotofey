@@ -7,6 +7,10 @@ class FastCart {
         this.count = document.querySelector('.fast-cart__count');
     }
 
+    updateSummary() {
+
+    }
+
     setSummary(price) {
         if (this.summary) {
             this.showWidget();

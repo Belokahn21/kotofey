@@ -4,7 +4,7 @@ class RestRequest {
     }
 
     static one(url, id) {
-        return fetch(url + '/' + id + '/').then(response => response.json());
+        return fetch(`${url}${id}/`).then(response => response.json());
     }
 
     static post(url, options) {
@@ -15,8 +15,8 @@ class RestRequest {
     }
 
     static delete(url, id) {
-        return fetch(url + '/' + id + '/', {
-            method: 'DELETE'
+        return fetch(`${url}${id}/`, {
+            method: 'DELETE',
         }).then(response => response.json());
     }
 }

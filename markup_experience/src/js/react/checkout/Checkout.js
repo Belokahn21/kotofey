@@ -36,11 +36,9 @@ class Checkout extends Component {
         if (!Number.isInteger(parseInt(this.props.userId))) return false;
 
         RestRequest.one(config.restUser, this.props.userId).then(data => {
-            if (data.status === 200) {
-                this.setState({
-                    user: data.items
-                });
-            }
+            this.setState({
+                user: data
+            });
         });
 
     }
@@ -69,7 +67,7 @@ class Checkout extends Component {
     }
 
     loadDelivery() {
-        RestRequest.all(config.restDelivery).then(data => {
+        RestRequest.all(config.restDelivery + '?filter[active]=1').then(data => {
             this.setState({
                 delivery: data
             });
@@ -77,7 +75,7 @@ class Checkout extends Component {
     }
 
     loadPayment() {
-        RestRequest.all(config.restPayment).then(data => {
+        RestRequest.all(config.restPayment+ '?filter[active]=1').then(data => {
             this.setState({
                 payment: data
             });
