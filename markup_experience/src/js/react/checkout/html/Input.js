@@ -10,7 +10,6 @@ class Input extends Component {
         const options = this.props.options;
         let error, aria_invalid;
 
-        // console.log(this.props.errors);
         if (typeof this.props.errors === 'object' && !Array.isArray(this.props.errors)) {
             error = <Error errors={this.props.errors[options.name]}/>
             aria_invalid = this.props.errors[options.name] !== undefined;

@@ -4183,7 +4183,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
     key: "handlePayment",
     value: function handlePayment() {
       var terminal = new _tools_payment_terminal__WEBPACK_IMPORTED_MODULE_10__.default();
-      terminal.registerOrder('testorder-' + Math.random());
+      terminal.registerOrder(1);
     }
   }, {
     key: "render",
@@ -5696,6 +5696,16 @@ var BuildQuery = /*#__PURE__*/function () {
       }).join('&');
       return asString;
     }
+  }, {
+    key: "formDataFromObject",
+    value: function formDataFromObject(data) {
+      // let formData = new FormData();
+      Object.keys(data).map(function (key) {
+        console.log(key);
+      }); // formData.append('name', 'John');
+      // formData.append('password', 'John123');
+      // return formData;
+    }
   }]);
 
   return BuildQuery;
@@ -5859,11 +5869,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../config */ "./src/js/config.js");
+/* harmony import */ var _RestRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RestRequest */ "./src/js/tools/RestRequest.js");
+/* harmony import */ var _BuildQuery__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../BuildQuery */ "./src/js/tools/BuildQuery.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 
 
@@ -5875,10 +5889,14 @@ var Terminal = /*#__PURE__*/function () {
   _createClass(Terminal, [{
     key: "registerOrder",
     value: function registerOrder(order_id) {
-      fetch(_config__WEBPACK_IMPORTED_MODULE_0__.default.restAcquiring + '/' + order_id + '/', {
-        method: 'POST'
-      }).then(function (response) {
-        return response.json();
+      _RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post(_config__WEBPACK_IMPORTED_MODULE_0__.default.restAcquiring, {
+        headers: {
+          'Accept': 'multipart/form-data' // 'Content-Type': 'multipart/form-data'
+
+        },
+        body: _BuildQuery__WEBPACK_IMPORTED_MODULE_2__.default.formDataFromObject({
+          order_id: order_id
+        })
       }).then(function (data) {
         console.log(data);
       });

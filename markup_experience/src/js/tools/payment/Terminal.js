@@ -1,12 +1,11 @@
 import config from "../../config";
+import RestRequest from "../RestRequest";
+import BuildQuery from "../BuildQuery";
 
 class Terminal {
-
     registerOrder(order_id) {
-        fetch(config.restAcquiring + '/' + order_id + '/', {
-            method: 'POST',
-        }).then(response => response.json()).then(data => {
-            console.log(data);
+        return RestRequest.post(config.restAcquiring, {
+            body: BuildQuery.formDataFromObject({order_id: order_id})
         });
     }
 }

@@ -75,7 +75,7 @@ class Checkout extends Component {
     }
 
     loadPayment() {
-        RestRequest.all(config.restPayment+ '?filter[active]=1').then(data => {
+        RestRequest.all(config.restPayment + '?filter[active]=1').then(data => {
             this.setState({
                 payment: data
             });
@@ -123,7 +123,13 @@ class Checkout extends Component {
 
     handlePayment() {
         const terminal = new Terminal();
-        terminal.registerOrder('testorder-' + Math.random());
+        terminal.registerOrder(1).then(data => {
+            console.log(data);
+            if (data.formUrl !== undefined) {
+                console.log(data.formUrl);
+                window.open(data.formUrl, '_blank');
+            }
+        });
     }
 
     render() {
@@ -209,7 +215,7 @@ class Checkout extends Component {
                             </div>
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">Подтвердить заказ</button>
-                        <button type="button" onClick={this.handlePayment.bind(this)} className="checkout-form__pay">Оплатить заказ</button>
+                        <button type="button" onClick={this.handlePayment.bind(this)} className="checkout-form__pay checkout-form__submit add-basket">Оплатить заказ</button>
                     </form>
                 </div>
                 <div className="page__right">
