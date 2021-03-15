@@ -4112,8 +4112,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         }
 
         if (data.status === 200) {
-          _this3.handlePayment(data.id + 'test');
-
+          if (_this3.state.paymentId === 1) _this3.handlePayment(data.id + 'test');
           form.reset();
 
           _this3.setState({
@@ -4187,11 +4186,10 @@ var Checkout = /*#__PURE__*/function (_Component) {
     value: function handlePayment(order_id) {
       var terminal = new _tools_payment_terminal__WEBPACK_IMPORTED_MODULE_10__.default();
       terminal.registerOrder(order_id).then(function (data) {
-        console.log(data);
-
         if (data.formUrl !== undefined) {
-          console.log(data.formUrl);
-          window.open(data.formUrl, '_blank');
+          window.location.href = data.formUrl; // by click link
+          // window.open(data.formUrl, '_blank'); // new tab
+          // window.location.replace(data.formUrl); // as http redirect
         }
       });
     }
@@ -4208,7 +4206,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
     value: function render() {
       var _this7 = this;
 
-      var buttonLabel = this.state.paymentId === 2 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
+      var buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4370,6 +4368,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           className: "checkbox-budget",
           id: "budgetpayment-" + element.id,
           type: "radio",
+          defaultValue: element.id,
           name: "Order[payment_id]"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
           className: "for-checkbox-budget checkout-form-variants__item",
