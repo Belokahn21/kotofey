@@ -11,34 +11,17 @@ use app\modules\site\models\tools\Curl;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 
-class Sberbank
+class Sberbank implements EquiringBank
 {
-    const REGISTER_ORDER = 'https://3dsec.sberbank.ru/payment/rest/register.do';
-
-    private $options;
-    private $paramRequest;
+    private $auth;
 
     public function __construct(SberbankAuth $auth)
     {
-        $auth->getAuthParams($this->paramRequest);
+        $this->auth = $auth;
     }
 
-    public function getPaymentLink(Order $order)
+    public function getAuthParams(array &$params)
     {
-        $curl = new Curl();
-        $this->extendParams($this->paramRequest, [
-            'orderNumber' => rand(),
-            'currency' => 643,
-//            'orderNumber' => $order->id,
-            'amount' => OrderHelper::orderSummary($order) * 100,
-            'returnUrl' => 'https://kotofey.store/payment/return/',
-        ]);
-
-        return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
-    }
-
-    private function extendParams(&$old, $new)
-    {
-        $old = array_merge($old, $new);
+        $this->auth->getAuthParams($params);
     }
 }

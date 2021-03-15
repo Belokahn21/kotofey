@@ -4,6 +4,7 @@ namespace app\modules\acquiring\controllers;
 
 use app\modules\order\models\entity\Order;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
+use app\modules\payment\models\services\equiring\EquiringTerminal;
 use app\modules\payment\models\services\equiring\SberbankAuthBasic;
 use yii\rest\ActiveController;
 use yii\rest\Controller;
@@ -38,8 +39,9 @@ class RestController extends ActiveController
         $data = \Yii::$app->request->post();
         $order_id = $data['order_id'];
 
-        $payment = new Sberbank(new SberbankAuthBasic('T2222889641-api', 'T2222889641'));
-        return $payment->getPaymentLink(Order::findOne($order_id));
+
+        $terminal = new EquiringTerminal(new Sberbank(new SberbankAuthBasic('T2222889641-api', 'T2222889641')));
+        return $terminal->registerOrder(Order::findOne($order_id));
     }
 
     public function actionView($id)
