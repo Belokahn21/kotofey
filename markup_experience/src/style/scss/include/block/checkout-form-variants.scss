@@ -1,10 +1,16 @@
 .checkout-form-variants {
+
+  display: flex;
+  flex-wrap: wrap;
+
+  &__item {
+    width: 50%;
+  }
+
   &__title {
   }
 
   &__icon {
   }
 
-  &__item {
-  }
 }
