@@ -1,5 +1,7 @@
 extends include/layer
 
+include include/mixin/checkoutVariant
+
 block contents
     .page-container
         .page
@@ -16,6 +18,22 @@ block contents
                 .page__left
                     form.checkout-form
                         .checkout-form__title Укажите способ доставки
+
+                            -
+                                var deliveries = [
+                                    {
+                                        name: 'Доставка по городу'
+                                    },
+                                    {
+                                        name: 'Самовывоз'
+                                    },
+                                    {
+                                        name: 'Курьерская служба'
+                                    },
+                                ];
+                            each item,index in deliveries
+                                +checkoutVariant(item);
+
                             //qq
                         .checkout-form__title Укажите ваши данные
                             .checkout-form__group-row
