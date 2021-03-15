@@ -11,6 +11,7 @@ import DateDeliveryField from "./field/DateDeliveryField";
 import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
 import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
+import Variant from "./field/Variant";
 
 class Checkout extends Component {
 
@@ -150,23 +151,9 @@ class Checkout extends Component {
                     <form className="checkout-form" onSubmit={this.submitForm.bind(this)}>
                         <div className="checkout-form__title">Укажите способ доставки</div>
                         <div className="checkout-form-variants">
-                            <div className="form-group field-order-delivery_id">
-                                <label className="control-label">Способ доставки</label>
-                                <div id="order-delivery_id" role="radiogroup">
-                                    {this.state.delivery.map((element, key) => {
-                                        return <div key={key}>
-                                            <input className="checkbox-budget" id={"budget-" + element.id} type="radio" name="Order[delivery_id]"/>
-                                            <label className="for-checkbox-budget checkout-form-variants__item" htmlFor={"budget-" + element.id}>
-                                                <span className="checkout-form-variants__card">
-                                                    <div className="checkout-form-variants__label">{element.name}</div>
-                                                    <img className="checkout-form-variants__icon" src={element.imageUrl}/>
-                                                </span>
-                                            </label>
-                                        </div>
-                                    })}
-                                </div>
-                                <p className="help-block help-block-error"/>
-                            </div>
+                            {this.state.delivery.map((element, key) => {
+                                return <Variant element={element}/>
+                            })}
                         </div>
 
 
@@ -207,23 +194,9 @@ class Checkout extends Component {
 
 
                         <div className="checkout-form-variants">
-                            <div className="form-group field-order-payment_id">
-                                <label className="control-label">Способ оплаты</label>
-                                <div id="order-payment_id" role="radiogroup">
-                                    {this.state.payment.map((element, key) => {
-                                        return <div key={key}>
-                                            <input onChange={this.handleSelectPayment.bind(this)} className="checkbox-budget" id={"budgetpayment-" + element.id} type="radio" defaultValue={element.id} name="Order[payment_id]"/>
-                                            <label className="for-checkbox-budget checkout-form-variants__item" htmlFor={"budgetpayment-" + element.id}>
-                                                <span className="checkout-form-variants__card">
-                                                <div className="checkout-form-variants__label">{element.name}</div>
-                                                    <img className="checkout-form-variants__icon" src={element.imageUrl}/>
-                                                </span>
-                                            </label>
-                                        </div>
-                                    })}
-                                </div>
-                                <p className="help-block help-block-error"/>
-                            </div>
+                            {this.state.payment.map((element, key) => {
+                                return <Variant element={element} />
+                            })}
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
                     </form>

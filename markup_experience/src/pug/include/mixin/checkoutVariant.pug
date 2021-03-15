@@ -1,6 +1,9 @@
 mixin checkoutVariant(item)
-    .checkout-form-variants__item
-        input(type="hidden" id=item.input + item.id name=item.input value=item.id)
-        label(for="#" + item.input + item.id)
-            .checkout-form-variants__title=item.title
-            img.checkout-form-variants__image(src=item.image)
+    .checkout-form-variants__item-wrap
+        .checkout-form-variants__item
+            input(type="radio" id=item.input + item.id name=item.input value=item.id).checkout-form-variants__input
+            label(for=item.input + item.id).checkout-form-variants__label
+                .checkout-form-variants__text-container
+                    .checkout-form-variants__title=item.title
+                    .checkout-form-variants__description=item.description
+                img.checkout-form-variants__image(src=item.image)
