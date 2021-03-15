@@ -10,7 +10,7 @@ use app\modules\payment\models\services\equiring\banks\EquiringBank;
 use app\modules\site\models\tools\Curl;
 use yii\helpers\Json;
 
-class EquiringTerminal
+class EquiringTerminalService
 {
     private $bank;
     private $paramRequest;

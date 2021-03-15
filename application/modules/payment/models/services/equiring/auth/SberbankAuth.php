@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\modules\payment\models\services\equiring;
+namespace app\modules\payment\models\services\equiring\auth;
 
 
 interface SberbankAuth

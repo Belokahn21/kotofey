@@ -6,7 +6,7 @@ namespace app\modules\payment\models\services\equiring\banks;
 
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\payment\models\services\equiring\SberbankAuth;
+use app\modules\payment\models\services\equiring\auth\SberbankAuth;
 use app\modules\site\models\tools\Curl;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
