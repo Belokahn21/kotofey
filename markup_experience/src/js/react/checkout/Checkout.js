@@ -11,7 +11,8 @@ import DateDeliveryField from "./field/DateDeliveryField";
 import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
 import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
-import Variant from "./field/Variant";
+import VariantDelivery from "./field/VariantDelivery";
+import VariantPayment from "./field/VariantPayment";
 
 class Checkout extends Component {
 
@@ -152,7 +153,7 @@ class Checkout extends Component {
                         <div className="checkout-form__title">Укажите способ доставки</div>
                         <div className="checkout-form-variants">
                             {this.state.delivery.map((element, key) => {
-                                return <Variant element={element}/>
+                                return <VariantDelivery element={element} />
                             })}
                         </div>
 
@@ -195,7 +196,7 @@ class Checkout extends Component {
 
                         <div className="checkout-form-variants">
                             {this.state.payment.map((element, key) => {
-                                return <Variant element={element} />
+                                return <VariantPayment handleChoiseDelivery={this.handleSelectPayment.bind(this)} element={element}/>
                             })}
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>

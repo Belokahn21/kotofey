@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 
-class Variant extends Component {
+class VariantDelivery extends Component {
     constructor(props) {
         super(props);
     }
 
     render() {
-        let element = this.props.element;
-        return <div className="checkout-form-variants__item-wrap" key={element.id}>
+        const element = this.props.element, uniq = Math.random().toString(36).substring(7) + element.id;
+        return <div className="checkout-form-variants__item-wrap" key={uniq}>
             <div className="checkout-form-variants__item">
-                <input className="checkout-form-variants__input" type="radio" id={"delivery" + element.id} name="delivery" defaultValue={element.id}/>
-                <label className="checkout-form-variants__label" htmlFor={"delivery" + element.id}>
+                <input className="checkout-form-variants__input" type="radio" id={uniq} name="delivery" defaultValue={element.id}/>
+                <label className="checkout-form-variants__label" htmlFor={uniq}>
                     <div className="checkout-form-variants__text-container">
                         <div className="checkout-form-variants__title">{element.name}</div>
                         <div className="checkout-form-variants__description">{element.description}</div>
@@ -21,4 +21,4 @@ class Variant extends Component {
     }
 }
 
-export default Variant;
+export default VariantDelivery;
