@@ -19,48 +19,50 @@ block contents
                     form.checkout-form
                         .checkout-form__title Укажите способ доставки
 
-                            -
-                                var deliveries = [
-                                    {
-                                        name: 'Доставка по городу'
-                                    },
-                                    {
-                                        name: 'Самовывоз'
-                                    },
-                                    {
-                                        name: 'Курьерская служба'
-                                    },
-                                ];
-                            each item,index in deliveries
-                                +checkoutVariant(item);
-
-                            //qq
+                        -
+                            var deliveries = [
+                                {
+                                    name: 'Доставка по городу'
+                                },
+                                {
+                                    name: 'Самовывоз'
+                                },
+                                {
+                                    name: 'Курьерская служба'
+                                },
+                            ];
+                        each item,index in deliveries
+                            +checkoutVariant(item)
                         .checkout-form__title Укажите ваши данные
-                            .checkout-form__group-row
-                                label.checkout-form__label(for="checkout-family")
-                                    div Как вас зовут?*
-                                    input.checkout-form__input#checkout-family(name="family", type="text", placeholder="Ваша фамилия")
-                                label.checkout-form__label(for="checkout-name")
-                                    input.checkout-form__input#checkout-name(name="name", type="text", placeholder="Ваше имя")
-                            .checkout-form__group-row
-                                label.checkout-form__label(for="checkout-phone")
-                                    div Контактный телефон*
-                                    input.checkout-form__input.js-mask-ru#checkout-phone(name="phone", type="text", placeholder="+7 (___) ___ __-__")
-                                label.checkout-form__label(for="checkout-email")
-                                    div Электронная почта*
-                                    input.checkout-form__input#checkout-email(name="email", type="text", placeholder="Адрес вашей электронной почты")
+                        .checkout-form__group-row
+                            label.checkout-form__label(for="checkout-family")
+                                div Как вас зовут?*
+                                input.checkout-form__input#checkout-family(name="family", type="text", placeholder="Ваша фамилия")
+                            label.checkout-form__label(for="checkout-name")
+                                input.checkout-form__input#checkout-name(name="name", type="text", placeholder="Ваше имя")
+                        .checkout-form__group-row
+                            label.checkout-form__label(for="checkout-phone")
+                                div Контактный телефон*
+                                input.checkout-form__input.js-mask-ru#checkout-phone(name="phone", type="text", placeholder="+7 (___) ___ __-__")
+                            label.checkout-form__label(for="checkout-email")
+                                div Электронная почта*
+                                input.checkout-form__input#checkout-email(name="email", type="text", placeholder="Адрес вашей электронной почты")
                         .checkout-form__title Укажите способ оплаты
-                        .checkout-form-variants
-                            input#budget-3.checkbox-budget(type='radio', name='payment_id')
-                            label.for-checkbox-budget.checkout-form-variants__item(for='budget-3')
-                                span.checkout-form-variants__card
-                                    .checkout-form-variants__label По терминалу
-                                    img.checkout-form-variants__icon(src="./assets/images/debit.png")
-                            input#budget-4.checkbox-budget(type='radio', name='payment_id')
-                            label.for-checkbox-budget.checkout-form-variants__item(for='budget-4')
-                                span.checkout-form-variants__card
-                                    .checkout-form-variants__label Наличные
-                                    img.checkout-form-variants__icon(src="./assets/images/wallet.png")
+                        -
+                            var deliveries = [
+                                {
+                                    name: 'Доставка по городу'
+                                },
+                                {
+                                    name: 'Самовывоз'
+                                },
+                                {
+                                    name: 'Курьерская служба'
+                                },
+                            ];
+
+                        each item,index in deliveries
+                        + checkoutVariant(item)
                         button.add-basket.checkout-form__submit(type="button") Подтвердить заказ
                 .page__right
                     .checkout-summary
