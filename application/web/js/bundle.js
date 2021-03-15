@@ -4068,6 +4068,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       basket: [],
       errors: [],
       total: 0,
+      paymentId: 0,
       user: null
     };
 
@@ -4195,8 +4196,19 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "handleSelectPayment",
+    value: function handleSelectPayment(event) {
+      var current = event.target;
+      this.setState({
+        paymentId: current.value
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var _this7 = this;
+
+      var buttonLabel = this.state.paymentId === 2 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4354,6 +4366,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           key: key
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          onChange: _this7.handleSelectPayment.bind(_this7),
           className: "checkbox-budget",
           id: "budgetpayment-" + element.id,
           type: "radio",
@@ -4374,7 +4387,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "add-basket checkout-form__submit"
-      }, "\u041F\u043E\u0434\u0442\u0432\u0435\u0440\u0434\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, buttonLabel))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page__right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutSummary__WEBPACK_IMPORTED_MODULE_3__.default, {
         refreshBasket: this.refreshBasket.bind(this),

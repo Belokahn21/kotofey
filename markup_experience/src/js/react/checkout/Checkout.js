@@ -23,6 +23,7 @@ class Checkout extends Component {
             basket: [],
             errors: [],
             total: 0,
+            paymentId: 0,
             user: null
         };
 
@@ -57,7 +58,7 @@ class Checkout extends Component {
             }
 
             if (data.status === 200) {
-                this.handlePayment(data.id + 'test');
+                if (this.state.paymentId === 1) this.handlePayment(data.id + 'test');
 
                 form.reset();
                 this.setState({
@@ -125,15 +126,24 @@ class Checkout extends Component {
     handlePayment(order_id) {
         const terminal = new Terminal();
         terminal.registerOrder(order_id).then(data => {
-            console.log(data);
             if (data.formUrl !== undefined) {
-                console.log(data.formUrl);
-                window.open(data.formUrl, '_blank');
+
+                window.location.href = data.formUrl; // by click link
+                // window.open(data.formUrl, '_blank'); // new tab
+                // window.location.replace(data.formUrl); // as http redirect
             }
         });
     }
 
+    handleSelectPayment(event) {
+        let current = event.target;
+        this.setState({
+            paymentId: current.value
+        });
+    }
+
     render() {
+        let buttonLabel = this.state.paymentId === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
         return (
             <div className="page__group-row">
                 <div className="page__left">
@@ -202,7 +212,7 @@ class Checkout extends Component {
                                 <div id="order-payment_id" role="radiogroup">
                                     {this.state.payment.map((element, key) => {
                                         return <div key={key}>
-                                            <input className="checkbox-budget" id={"budgetpayment-" + element.id} type="radio" name="Order[payment_id]"/>
+                                            <input onChange={this.handleSelectPayment.bind(this)} className="checkbox-budget" id={"budgetpayment-" + element.id} type="radio" name="Order[payment_id]"/>
                                             <label className="for-checkbox-budget checkout-form-variants__item" htmlFor={"budgetpayment-" + element.id}>
                                                 <span className="checkout-form-variants__card">
                                                 <div className="checkout-form-variants__label">{element.name}</div>
@@ -215,8 +225,7 @@ class Checkout extends Component {
                                 <p className="help-block help-block-error"/>
                             </div>
                         </div>
-                        <button type="submit" className="add-basket checkout-form__submit">Подтвердить заказ</button>
-                        {/*<button type="button" onClick={this.handlePayment.bind(this)} className="checkout-form__pay checkout-form__submit add-basket">Оплатить заказ</button>*/}
+                        <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
                     </form>
                 </div>
                 <div className="page__right">
