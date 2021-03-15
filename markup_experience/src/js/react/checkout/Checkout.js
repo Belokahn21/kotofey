@@ -143,7 +143,7 @@ class Checkout extends Component {
     }
 
     render() {
-        let buttonLabel = this.state.paymentId === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
+        let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
         return (
             <div className="page__group-row">
                 <div className="page__left">
@@ -212,7 +212,7 @@ class Checkout extends Component {
                                 <div id="order-payment_id" role="radiogroup">
                                     {this.state.payment.map((element, key) => {
                                         return <div key={key}>
-                                            <input onChange={this.handleSelectPayment.bind(this)} className="checkbox-budget" id={"budgetpayment-" + element.id} type="radio" name="Order[payment_id]"/>
+                                            <input onChange={this.handleSelectPayment.bind(this)} className="checkbox-budget" id={"budgetpayment-" + element.id} type="radio" defaultValue={element.id} name="Order[payment_id]"/>
                                             <label className="for-checkbox-budget checkout-form-variants__item" htmlFor={"budgetpayment-" + element.id}>
                                                 <span className="checkout-form-variants__card">
                                                 <div className="checkout-form-variants__label">{element.name}</div>
