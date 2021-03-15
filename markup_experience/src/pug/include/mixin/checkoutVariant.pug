@@ -1,2 +1,6 @@
 mixin checkoutVariant(item)
-    .checkout__variant
+    .checkout-form-variants__item
+        input(type="hidden" id=item.input + item.id name=item.input value=item.id)
+        label(for="#" + item.input + item.id)
+            .checkout-form-variants__title=item.title
+            img.checkout-form-variants__image(src=item.image)

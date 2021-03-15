@@ -18,17 +18,26 @@ block contents
                 .page__left
                     form.checkout-form
                         .checkout-form__title Укажите способ доставки
-
+                        .checkout-form-variants
                         -
                             var deliveries = [
                                 {
-                                    name: 'Доставка по городу'
+                                    id: 1,
+                                    title: 'Доставка по городу',
+                                    input: 'delivery',
+                                    image: './assets/images/truck.png',
                                 },
                                 {
-                                    name: 'Самовывоз'
+                                    id: 2,
+                                    title: 'Самовывоз',
+                                    input: 'delivery',
+                                    image: './assets/images/truck.png',
                                 },
                                 {
-                                    name: 'Курьерская служба'
+                                    id: 3,
+                                    title: 'Курьерская служба',
+                                    input: 'delivery',
+                                    image: './assets/images/truck.png',
                                 },
                             ];
                         each item,index in deliveries
