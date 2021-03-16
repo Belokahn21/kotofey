@@ -31,7 +31,7 @@ use yii\helpers\Url;
                                 <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>"><?= $product->name; ?></a>
                             </div>
                             <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>">
-                                <img class="stock-out__image" src="/upload/<?= $product->image; ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
+                                <img class="stock-out__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
                             </a>
                             <div class="stock-out__price">Цена: <?= $product->price; ?></div>
                             <div class="stock-out__count">Количество: <?= $product->count; ?></div>
