@@ -17,7 +17,7 @@ class Input extends Component {
 
         return (
             <label className="checkout-form__label" htmlFor={"checkout-" + options.name}>
-                <div>{options.title}</div>
+                <div className="checkout-form__label-text">{options.title}</div>
                 <input
                     className={"checkout-form__input " + options.class}
                     id={"checkout-" + options.name}

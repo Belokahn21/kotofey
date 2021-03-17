@@ -13607,7 +13607,7 @@ label[for="site-form-pet-avatar"] {
     display: flex;
     flex-direction: column;
     justify-content: flex-end; }
-    .checkout-form__label div, .checkout-form__label p {
+    .checkout-form__label .checkout-form__label-text {
       font-size: 12px;
       line-height: 24px;
       font-weight: 400;
@@ -13624,6 +13624,9 @@ label[for="site-form-pet-avatar"] {
     flex-direction: row;
     justify-content: space-between;
     align-items: center; }
+  .checkout-form-promocode {
+    color: #25D366;
+    font-weight: bold; }
 
 .checkout-summary {
   background-color: rgba(198, 198, 198, 0.1);

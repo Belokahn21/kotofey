@@ -41,7 +41,7 @@
     flex-direction: column;
     justify-content: flex-end;
 
-    div, p {
+    .checkout-form__label-text {
       font-size: 12px;
       line-height: 24px;
       font-weight: 400;
@@ -67,5 +67,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+  }
+
+  &-promocode {
+    color: $whatsapp-green;
+    font-weight: bold;
   }
 }

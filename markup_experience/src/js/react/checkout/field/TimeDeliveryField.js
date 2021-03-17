@@ -19,7 +19,7 @@ class TimeDeliveryField extends Component {
     render() {
         return (
             <label className="checkout-form__label" htmlFor="checkout-time-delivery">
-                <div>Время доставки*</div>
+                <div className="checkout-form__label-text">Время доставки*</div>
                 <div className="form-group field-checkout-time-delivery required">
                     <select id="checkout-time-delivery" className="checkout-form__select" name="OrderDate[time]" aria-required="true">
                         {this.state.items.map((element, key) => {

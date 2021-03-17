@@ -4067,6 +4067,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.state = {
+      promocode: null,
       delivery: [],
       payment: [],
       basket: [],
@@ -4169,6 +4170,11 @@ var Checkout = /*#__PURE__*/function (_Component) {
       this.state.basket.map(function (element, key) {
         total += parseInt(element.price);
       });
+
+      if (this.state.promocode !== null) {
+        total = total - Math.round(total * (this.state.promocode.discount / 100));
+      }
+
       this.setState({
         total: total
       });
@@ -4206,6 +4212,13 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "updatePoromocode",
+    value: function updatePoromocode(code) {
+      this.setState({
+        promocode: code
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this7 = this;
@@ -4230,7 +4243,11 @@ var Checkout = /*#__PURE__*/function (_Component) {
         className: "checkout-form__title"
       }, "\u041F\u0440\u043E\u043C\u043E\u043A\u043E\u0434 \u0438 \u0431\u043E\u043D\u0443\u0441\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_PromocodeField__WEBPACK_IMPORTED_MODULE_6__.default, null), this.state.user !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_UserBonusField__WEBPACK_IMPORTED_MODULE_7__.default, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_PromocodeField__WEBPACK_IMPORTED_MODULE_6__.default, {
+        promocode: this.state.promocode,
+        updatePoromocode: this.updatePoromocode.bind(this),
+        refreshBasket: this.refreshBasket.bind(this)
+      }), this.state.user !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_UserBonusField__WEBPACK_IMPORTED_MODULE_7__.default, {
         accountId: this.state.user.phone
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutUserBonusAuth__WEBPACK_IMPORTED_MODULE_9__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
@@ -4746,7 +4763,9 @@ var DateDeliveryField = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-date-delivery"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u0414\u0430\u0442\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438*"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, "\u0414\u0430\u0442\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438*"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-group field-checkout-date-delivery required"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
@@ -4819,32 +4838,59 @@ var PromocodeField = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, PromocodeField);
 
     _this = _super.call(this, props);
-    _this.timerEx = null, _this.timeToStart = 300;
+    _this.timerEx = null, _this.timeToStart = 800;
     return _this;
   }
 
   _createClass(PromocodeField, [{
     key: "handlePromocode",
     value: function handlePromocode(event) {
+      var _this2 = this;
+
       var element = event.target;
       var promocode = element.value;
       if (this.timerEx) clearTimeout(this.timerEx);
       this.timerEx = setTimeout(function () {
-        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_1__.default.restPromocode, promocode).then(function (data) {});
+        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_1__.default.restPromocode, promocode).then(function (data) {
+          if (parseInt(data.status) === 200) {
+            _this2.props.updatePoromocode(data.item);
+
+            _this2.props.refreshBasket();
+
+            _this2.setState({
+              promocode: data.item
+            });
+          }
+        });
       }, this.timeToStart);
     }
   }, {
     key: "render",
     value: function render() {
+      var promocode = this.props.promocode;
+      var promocodeSuccess = "";
+
+      if (promocode !== null) {
+        promocodeSuccess = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-promocode"
+        }, "\u0412\u0430\u0448 \u043F\u0440\u043E\u043C\u043E\u043A\u043E\u0434: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: "checkout-form-promocode__code"
+        }, promocode.code, " -", promocode.discount, "%"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
+          className: "checkout-form-promocode__discount"
+        }));
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-phone"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u041F\u0440\u043E\u043C\u043E\u043A\u043E\u0434"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, "\u041F\u0440\u043E\u043C\u043E\u043A\u043E\u0434"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-group field-order-promocode has-success"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         id: "order-promocode",
-        onKeyDown: this.handlePromocode.bind(this),
+        onKeyUp: this.handlePromocode.bind(this),
         className: "checkout-form__input js-validate-promocode",
         name: "Order[promocode]",
         placeholder: ""
@@ -4852,13 +4898,7 @@ var PromocodeField = /*#__PURE__*/function (_Component) {
         type: "hidden",
         className: "js-promocode-amount",
         name: "promocode-discount"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-promocode"
-      }, "\u0412\u0430\u0448 \u043F\u0440\u043E\u043C\u043E\u043A\u043E\u0434: ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "checkout-form-promocode__code"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        className: "checkout-form-promocode__discount"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
+      }), promocodeSuccess, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         className: "help-block help-block-error"
       })));
     }
@@ -4937,7 +4977,9 @@ var TimeDeliveryField = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-time-delivery"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438*"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438*"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-group field-checkout-time-delivery required"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
         id: "checkout-time-delivery",
@@ -5497,7 +5539,9 @@ var Input = /*#__PURE__*/function (_Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-" + options.name
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, options.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, options.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "checkout-form__input " + options["class"],
         id: "checkout-" + options.name,
         name: this.props.buildElementName(),
@@ -5565,7 +5609,9 @@ var Textarea = /*#__PURE__*/function (_Component) {
   _createClass(Textarea, [{
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, this.props.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, this.props.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-group field-checkout-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         id: "checkout-comment",
@@ -73453,7 +73499,8 @@ window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
 
 
- // no class block
+ // import SmoothChangeNumber from "./classes/SmoothChangeNumber";
+// no class block
 
 
 
@@ -73475,7 +73522,8 @@ new _block_RemoveBasketItem__WEBPACK_IMPORTED_MODULE_9__.default();
 new _block_compare__WEBPACK_IMPORTED_MODULE_6__.default();
 new _block_favorite__WEBPACK_IMPORTED_MODULE_5__.default();
 new _block_Menu__WEBPACK_IMPORTED_MODULE_4__.default();
-new _block_LiveSearch__WEBPACK_IMPORTED_MODULE_11__.default('.js-live-search');
+new _block_LiveSearch__WEBPACK_IMPORTED_MODULE_11__.default('.js-live-search'); // new SmoothChangeNumber('[data-smooth-change]');
+
 document.addEventListener('DOMContentLoaded', function () {
   new _block_PoductCalc_ProductCalc__WEBPACK_IMPORTED_MODULE_3__.default(new _block_FastCart__WEBPACK_IMPORTED_MODULE_10__.default());
 }); //react js

@@ -20,6 +20,7 @@ class Checkout extends Component {
         super(props);
 
         this.state = {
+            promocode: null,
             delivery: [],
             payment: [],
             basket: [],
@@ -104,6 +105,10 @@ class Checkout extends Component {
             total += parseInt(element.price);
         });
 
+        if (this.state.promocode !== null) {
+            total = total - Math.round(total * (this.state.promocode.discount / 100));
+        }
+
         this.setState({
             total: total
         });
@@ -144,6 +149,10 @@ class Checkout extends Component {
         });
     }
 
+    updatePoromocode(code) {
+        this.setState({promocode: code});
+    }
+
     render() {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
         return (
@@ -153,14 +162,14 @@ class Checkout extends Component {
                         <div className="checkout-form__title">Укажите способ доставки</div>
                         <div className="checkout-form-variants">
                             {this.state.delivery.map((element, key) => {
-                                return <VariantDelivery element={element} />
+                                return <VariantDelivery element={element}/>
                             })}
                         </div>
 
 
                         <div className="checkout-form__title">Промокод и бонусы</div>
                         <div className="checkout-form__group-row">
-                            <PromocodeField/>
+                            <PromocodeField promocode={this.state.promocode} updatePoromocode={this.updatePoromocode.bind(this)} refreshBasket={this.refreshBasket.bind(this)}/>
                             {this.state.user !== null ? <UserBonusField accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}
                         </div>
 

@@ -9,7 +9,7 @@ class Textarea extends Component {
     render() {
         return (
             <>
-                <div>{this.props.title}</div>
+                <div className="checkout-form__label-text">{this.props.title}</div>
                 <div className="form-group field-checkout-comment">
                     <textarea id="checkout-comment" className="checkout-form__textarea" name={this.props.buildElementName()} placeholder={this.props.options.placeholder}/>
                     <p className="help-block help-block-error"/>
