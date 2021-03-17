@@ -18,7 +18,6 @@ class Checkout extends Component {
 
     constructor(props) {
         super(props);
-
         this.state = {
             promocode: null,
             delivery: [],
@@ -29,7 +28,9 @@ class Checkout extends Component {
             paymentId: 0,
             user: null
         };
+    }
 
+    componentDidMount() {
         this.loadDelivery();
         this.loadPayment();
         this.loadBasket();
