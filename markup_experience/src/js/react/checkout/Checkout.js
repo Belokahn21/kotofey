@@ -20,13 +20,9 @@ class Checkout extends Component {
     constructor(props) {
         super(props);
 
-        // delivery_id => arr payment_id
-        // this.relatedPayments[1] = [1, 2];
-
-        // let relatedPayments = [[], [1, 2]];
-
         this.state = {
             promocode: null,
+            excludePayments: [],
             delivery: [],
             payment: [],
             basket: [],
@@ -168,11 +164,16 @@ class Checkout extends Component {
 
 
         if (deliveryId === 1) {
-            this.setState({
-                payment: [2, 3]
-            });
+            this.refreshPayment([2, 4]);
+        } else {
+            this.refreshPayment([]);
         }
+    }
 
+    refreshPayment(arListPaymentId) {
+        this.setState({
+            excludePayments: arListPaymentId
+        });
     }
 
     updatePoromocode(code) {
@@ -230,7 +231,7 @@ class Checkout extends Component {
 
 
                         <div className="checkout-form-variants">
-                            {this.state.payment.map((element, key) => {
+                            {this.state.payment.filter(element => !this.state.excludePayments.includes(element.id)).map((element, key) => {
                                 return <VariantPayment handleSelectPayment={this.handleSelectPayment.bind(this)} element={element}/>
                             })}
                         </div>
