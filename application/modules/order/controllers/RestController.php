@@ -44,7 +44,13 @@ class RestController extends ActiveController
             return $response;
         }
 
-        if (!$order->validate() || !$order->save()) {
+//        if (!$order->validate()) {
+//            $response['status'] = 510;
+//            $response['errors'] = $order->getErrors();
+//            return $response;
+//        }
+
+        if (!$order->save()) {
             $response['status'] = 510;
             $response['errors'] = $order->getErrors();
             return $response;

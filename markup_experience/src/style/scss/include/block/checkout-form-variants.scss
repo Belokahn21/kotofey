@@ -68,8 +68,8 @@
   }
 
   &__input {
-    visibility: hidden;
-    display: none;
+    position: absolute;
+    left: -9999999999999px;
 
     &:checked {
       ~ .checkout-form-variants__label {
