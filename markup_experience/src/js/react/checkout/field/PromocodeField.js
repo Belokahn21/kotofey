@@ -39,8 +39,7 @@ class PromocodeField extends Component {
             <label className="checkout-form__label" htmlFor="checkout-phone">
                 <div className="checkout-form__label-text">Промокод</div>
                 <div className="form-group field-order-promocode has-success">
-                    <input type="text" id="order-promocode" onKeyUp={this.handlePromocode.bind(this)} className="checkout-form__input js-validate-promocode" name="Order[promocode]" placeholder=""/>
-                    <input type="hidden" className="js-promocode-amount" name="promocode-discount"/>
+                    <input type="text" id="order-promocode" onKeyUp={this.handlePromocode.bind(this)} className="checkout-form__input js-validate-promocode" name="Order[promocode]" placeholder="Укажите при наличии"/>
                     {promocodeSuccess}
                     <p className="help-block help-block-error"/>
                 </div>

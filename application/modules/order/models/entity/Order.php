@@ -87,6 +87,7 @@ class Order extends ActiveRecord
 
 
             [['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
+            [['payment_id', 'delivery_id'], 'required', 'on' => self::SCENARIO_CLIENT_BUY],
 
             [['is_paid', 'is_cancel'], 'default', 'value' => false],
 

@@ -55,11 +55,11 @@ class UserBonusField extends Component {
                 <div className="form-group field-order-bonus has-success">
 
                     <div className="checkout-form-label-group">
-                        <div>Бонусы</div>
-                        <div>Доступно бонусов: {bonus}</div>
+                        <div className="checkout-form__label-text">Бонусы</div>
+                        <div className="checkout-form__label-text">Доступно бонусов: {bonus}</div>
                     </div>
-                    <input type="text" id="order-bonus" className="checkout-form__input js-validate-promocode" name="Order[bonus]" placeholder="Списать бонусы"/>
-                    <input type="range" id="js-bonus-input" className="js-select-user-bonus" name="bonus" data-min="0" data-from="0" data-max={300}/>
+                    <input type="text" id="order-bonus" className="checkout-form__input" name="Order[bonus]" placeholder="Списать бонусы"/>
+                    <input type="range" id="js-bonus-input" className="js-select-user-bonus" data-min="0" data-from="0" data-max={300}/>
                 </div>
             </label>
 

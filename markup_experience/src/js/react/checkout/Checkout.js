@@ -13,6 +13,7 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import VariantDelivery from "./field/VariantDelivery";
 import VariantPayment from "./field/VariantPayment";
+import Error from "./html/Error";
 
 class Checkout extends Component {
 
@@ -182,6 +183,15 @@ class Checkout extends Component {
 
     render() {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
+        let errorDelivery, errorPayment;
+
+
+        if (typeof this.props.errors === 'object' && !Array.isArray(this.props.errors)) {
+            errorDelivery = <Error errors={this.props.errors['delivery_id']}/>
+            errorPayment = <Error errors={this.props.errors['payment_id']}/>
+        }
+
+
         return (
             <div className="page__group-row">
                 <div className="page__left">
@@ -191,6 +201,7 @@ class Checkout extends Component {
                             {this.state.delivery.map((element, key) => {
                                 return <VariantDelivery handleSelectDelivery={this.handleSelectDelivery.bind(this)} element={element}/>
                             })}
+                            {errorDelivery}
                         </div>
 
 
@@ -234,6 +245,7 @@ class Checkout extends Component {
                             {this.state.payment.filter(element => !this.state.excludePayments.includes(element.id)).map((element, key) => {
                                 return <VariantPayment handleSelectPayment={this.handleSelectPayment.bind(this)} element={element}/>
                             })}
+                            {errorPayment}
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
                     </form>
