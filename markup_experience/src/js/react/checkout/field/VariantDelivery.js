@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Error from "../html/Error";
 
 class VariantDelivery extends Component {
     constructor(props) {
@@ -7,6 +8,12 @@ class VariantDelivery extends Component {
 
     render() {
         const elements = this.props.models;
+        let error, aria_invalid;
+
+        if (typeof this.props.errors === 'object' && !Array.isArray(this.props.errors)) {
+            error = <Error errors={this.props.errors['delivery_id']}/>
+            aria_invalid = this.props.errors['delivery_id'] !== undefined;
+        }
 
         return <div className="checkout-form-variants-wrapper">
             <div className="checkout-form-variants">
@@ -25,6 +32,7 @@ class VariantDelivery extends Component {
                     </div>
                 })}
             </div>
+            {error}
         </div>;
     }
 }

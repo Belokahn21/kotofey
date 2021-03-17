@@ -4018,6 +4018,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
 /* harmony import */ var _field_VariantDelivery__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./field/VariantDelivery */ "./src/js/react/checkout/field/VariantDelivery.js");
 /* harmony import */ var _field_VariantPayment__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./field/VariantPayment */ "./src/js/react/checkout/field/VariantPayment.js");
+/* harmony import */ var _html_Error__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./html/Error */ "./src/js/react/checkout/html/Error.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4055,6 +4056,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Checkout = /*#__PURE__*/function (_Component) {
   _inherits(Checkout, _Component);
 
@@ -4066,29 +4068,32 @@ var Checkout = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, Checkout);
 
     _this = _super.call(this, props);
+    _this.modelName = 'Order';
     _this.state = {
       promocode: null,
+      excludePayments: [],
       delivery: [],
       payment: [],
       basket: [],
       errors: [],
       total: 0,
+      usedBonus: 0,
       paymentId: 0,
+      deliveryId: 0,
       user: null
     };
-
-    _this.loadDelivery();
-
-    _this.loadPayment();
-
-    _this.loadBasket();
-
-    _this.loadUser();
-
     return _this;
   }
 
   _createClass(Checkout, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadDelivery();
+      this.loadPayment();
+      this.loadBasket();
+      this.loadUser();
+    }
+  }, {
     key: "loadUser",
     value: function loadUser() {
       var _this2 = this;
@@ -4117,7 +4122,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         }
 
         if (data.status === 200) {
-          if (_this3.state.paymentId === 1) _this3.handlePayment(data.id + 'test');
+          if (_this3.state.paymentId === 1) _this3.paymentService(data.id + 'test');
           form.reset();
 
           _this3.setState({
@@ -4170,11 +4175,8 @@ var Checkout = /*#__PURE__*/function (_Component) {
       this.state.basket.map(function (element, key) {
         total += parseInt(element.price);
       });
-
-      if (this.state.promocode !== null) {
-        total = total - Math.round(total * (this.state.promocode.discount / 100));
-      }
-
+      if (this.state.usedBonus > 0) total -= parseInt(this.state.usedBonus);
+      if (this.state.promocode !== null) total = total - Math.round(total * (this.state.promocode.discount / 100));
       this.setState({
         total: total
       });
@@ -4182,18 +4184,18 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "refreshBasket",
     value: function refreshBasket(product_id) {
-      var out = this.state.basket;
-      out.map(function (product, key) {
-        if (parseInt(product.id) === parseInt(product_id)) out.splice(key, 1);
+      var basketItems = this.state.basket;
+      basketItems.map(function (product, key) {
+        if (parseInt(product.id) === parseInt(product_id)) basketItems.splice(key, 1);
       });
       this.setState({
-        basket: out
+        basket: basketItems
       });
       this.calcTotal();
     }
   }, {
-    key: "handlePayment",
-    value: function handlePayment(order_id) {
+    key: "paymentService",
+    value: function paymentService(order_id) {
       var terminal = new _tools_payment_terminal__WEBPACK_IMPORTED_MODULE_10__.default();
       terminal.registerOrder(order_id).then(function (data) {
         if (data.formUrl !== undefined) {
@@ -4204,11 +4206,33 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "handleSelectDelivery",
+    value: function handleSelectDelivery(event) {
+      var current = event.target;
+      var deliveryId = parseInt(current.value);
+      this.setState({
+        deliveryId: deliveryId
+      });
+
+      if (deliveryId === 1) {
+        this.refreshPayment([2, 4]);
+      } else {
+        this.refreshPayment([]);
+      }
+    }
+  }, {
     key: "handleSelectPayment",
     value: function handleSelectPayment(event) {
       var current = event.target;
       this.setState({
         paymentId: current.value
+      });
+    }
+  }, {
+    key: "refreshPayment",
+    value: function refreshPayment(arListPaymentId) {
+      this.setState({
+        excludePayments: arListPaymentId
       });
     }
   }, {
@@ -4224,6 +4248,17 @@ var Checkout = /*#__PURE__*/function (_Component) {
       var _this7 = this;
 
       var buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
+      var errorDelivery, errorPayment;
+
+      if (_typeof(this.state.errors) === 'object' && !Array.isArray(this.state.errors)) {
+        errorDelivery = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_Error__WEBPACK_IMPORTED_MODULE_14__.default, {
+          errors: this.state.errors['delivery_id']
+        });
+        errorPayment = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_Error__WEBPACK_IMPORTED_MODULE_14__.default, {
+          errors: this.state.errors['payment_id']
+        });
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4233,13 +4268,12 @@ var Checkout = /*#__PURE__*/function (_Component) {
         onSubmit: this.submitForm.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
-      }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u043F\u043E\u0441\u043E\u0431 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants"
-      }, this.state.delivery.map(function (element, key) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_VariantDelivery__WEBPACK_IMPORTED_MODULE_12__.default, {
-          element: element
-        });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u043F\u043E\u0441\u043E\u0431 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_VariantDelivery__WEBPACK_IMPORTED_MODULE_12__.default, {
+        errors: this.state.errors,
+        modelName: this.modelName,
+        handleSelectDelivery: this.handleSelectDelivery.bind(this),
+        models: this.state.delivery
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
       }, "\u041F\u0440\u043E\u043C\u043E\u043A\u043E\u0434 \u0438 \u0431\u043E\u043D\u0443\u0441\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
@@ -4248,6 +4282,13 @@ var Checkout = /*#__PURE__*/function (_Component) {
         updatePoromocode: this.updatePoromocode.bind(this),
         refreshBasket: this.refreshBasket.bind(this)
       }), this.state.user !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_UserBonusField__WEBPACK_IMPORTED_MODULE_7__.default, {
+        usedBonus: this.state.usedBonus,
+        refreshBasket: this.refreshBasket.bind(this),
+        updateUsedBonus: function updateUsedBonus(value) {
+          return _this7.setState({
+            usedBonus: value
+          });
+        },
         accountId: this.state.user.phone
       }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutUserBonusAuth__WEBPACK_IMPORTED_MODULE_9__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
@@ -4260,7 +4301,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "phone",
           title: "Ваш номер телефона*",
@@ -4270,7 +4311,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "email",
           title: "Ваш электронный адрес*",
@@ -4281,7 +4322,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "city",
           title: "Город",
@@ -4290,7 +4331,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "street",
           title: "Улица",
@@ -4301,7 +4342,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "number_home",
           title: "Номер дома",
@@ -4310,7 +4351,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "entrance",
           title: "Подъезд",
@@ -4321,7 +4362,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "floor_house",
           title: "Этаж",
@@ -4330,7 +4371,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "input",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "number_appartament",
           title: "Квартира",
@@ -4342,20 +4383,21 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
         errors: this.state.errors,
         element: "textarea",
-        modelName: "Order",
+        modelName: this.modelName,
         options: {
           name: "comment",
           title: "Комментарий к заказу",
           placeholder: "Ваши пожелания"
         }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants"
-      }, this.state.payment.map(function (element, key) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_VariantPayment__WEBPACK_IMPORTED_MODULE_13__.default, {
-          handleChoiseDelivery: _this7.handleSelectPayment.bind(_this7),
-          element: element
-        });
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "checkout-form__title"
+      }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_VariantPayment__WEBPACK_IMPORTED_MODULE_13__.default, {
+        errors: this.state.errors,
+        modelName: this.modelName,
+        handleSelectPayment: this.handleSelectPayment.bind(this),
+        models: this.state.payment,
+        exclude: this.state.excludePayments
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "add-basket checkout-form__submit"
       }, buttonLabel))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4893,11 +4935,7 @@ var PromocodeField = /*#__PURE__*/function (_Component) {
         onKeyUp: this.handlePromocode.bind(this),
         className: "checkout-form__input js-validate-promocode",
         name: "Order[promocode]",
-        placeholder: ""
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "hidden",
-        className: "js-promocode-amount",
-        name: "promocode-discount"
+        placeholder: "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u043F\u0440\u0438 \u043D\u0430\u043B\u0438\u0447\u0438\u0438"
       }), promocodeSuccess, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
         className: "help-block help-block-error"
       })));
@@ -5058,7 +5096,7 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, UserBonusField);
 
     _this = _super.call(this, props, context);
-    _this.accountId = _this.props.accountId;
+    _this.accountId = _this.props.accountId, _this.timerEx, _this.timeout = 300;
     _this.state = {
       bonus: 0
     };
@@ -5080,6 +5118,20 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
           });
         }
       });
+    }
+  }, {
+    key: "handleChangeInput",
+    value: function handleChangeInput(e) {
+      var _this3 = this;
+
+      var element = e.target,
+          amount = element.value;
+      if (this.timerEx) clearTimeout(this.timerEx);
+      this.timerEx = setTimeout(function () {
+        _this3.props.updateUsedBonus(amount);
+
+        _this3.props.refreshBasket();
+      }, this.timeout);
     }
   }, {
     key: "componentDidMount",
@@ -5114,17 +5166,21 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
         className: "form-group field-order-bonus has-success"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form-label-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u0411\u043E\u043D\u0443\u0441\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u0431\u043E\u043D\u0443\u0441\u043E\u0432: ", bonus)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, "\u0411\u043E\u043D\u0443\u0441\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u0431\u043E\u043D\u0443\u0441\u043E\u0432: ", bonus)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         id: "order-bonus",
-        className: "checkout-form__input js-validate-promocode",
+        onInput: this.handleChangeInput.bind(this),
+        className: "checkout-form__input",
         name: "Order[bonus]",
         placeholder: "\u0421\u043F\u0438\u0441\u0430\u0442\u044C \u0431\u043E\u043D\u0443\u0441\u044B"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "range",
         id: "js-bonus-input",
         className: "js-select-user-bonus",
-        name: "bonus",
         "data-min": "0",
         "data-from": "0",
         "data-max": 300
@@ -5151,6 +5207,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _html_Error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../html/Error */ "./src/js/react/checkout/html/Error.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5175,6 +5232,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var VariantDelivery = /*#__PURE__*/function (_Component) {
   _inherits(VariantDelivery, _Component);
 
@@ -5189,32 +5247,50 @@ var VariantDelivery = /*#__PURE__*/function (_Component) {
   _createClass(VariantDelivery, [{
     key: "render",
     value: function render() {
-      var element = this.props.element,
-          uniq = Math.random().toString(36).substring(7) + element.id;
+      var _this = this;
+
+      var elements = this.props.models;
+      var error, aria_invalid;
+
+      if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
+        error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
+          errors: this.props.errors[options.name]
+        });
+        aria_invalid = this.props.errors[options.name] !== undefined;
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__item-wrap",
-        key: uniq
+        className: "checkout-form-variants-wrapper"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "checkout-form-variants__input",
-        type: "radio",
-        id: uniq,
-        name: "delivery",
-        defaultValue: element.id
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        className: "checkout-form-variants__label",
-        htmlFor: uniq
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__text-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__title"
-      }, element.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__description"
-      }, element.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        className: "checkout-form-variants__image",
-        src: element.imageUrl
-      }))));
+        className: "checkout-form-variants"
+      }, elements.map(function (element, key) {
+        var uniq = Math.random().toString(36).substring(7) + element.id + 'd';
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__item-wrap",
+          key: key
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          onChange: _this.props.handleSelectDelivery.bind(_this),
+          className: "checkout-form-variants__input",
+          type: "radio",
+          id: uniq,
+          name: _this.props.modelName + '[delivery_id]',
+          defaultValue: element.id
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          className: "checkout-form-variants__label",
+          htmlFor: uniq
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__text-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__title"
+        }, element.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__description"
+        }, element.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          className: "checkout-form-variants__image",
+          src: element.imageUrl
+        }))));
+      })), error);
     }
   }]);
 
@@ -5237,6 +5313,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _html_Error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../html/Error */ "./src/js/react/checkout/html/Error.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5261,6 +5338,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var VariantPayment = /*#__PURE__*/function (_Component) {
   _inherits(VariantPayment, _Component);
 
@@ -5273,40 +5351,55 @@ var VariantPayment = /*#__PURE__*/function (_Component) {
   }
 
   _createClass(VariantPayment, [{
-    key: "handleSelectPayment",
-    value: function handleSelectPayment(event) {
-      this.props.handleChoiseDelivery(event);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var element = this.props.element,
-          uniq = Math.random().toString(36).substring(7) + element.id;
+      var _this = this;
+
+      var elements = this.props.models,
+          exclude = this.props.exclude;
+      var error, aria_invalid;
+
+      if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
+        error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
+          errors: this.props.errors[options.name]
+        });
+        aria_invalid = this.props.errors[options.name] !== undefined;
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__item-wrap",
-        key: uniq
+        className: "checkout-form-variants-wrapper"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        onChange: this.handleSelectPayment.bind(this),
-        className: "checkout-form-variants__input",
-        type: "radio",
-        id: uniq,
-        name: "payment",
-        defaultValue: element.id
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        className: "checkout-form-variants__label",
-        htmlFor: uniq
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__text-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__title"
-      }, element.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form-variants__description"
-      }, element.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        className: "checkout-form-variants__image",
-        src: element.imageUrl
-      }))));
+        className: "checkout-form-variants"
+      }, elements.filter(function (element) {
+        return !exclude.includes(element.id);
+      }).map(function (element, key) {
+        var uniq = Math.random().toString(36).substring(7) + element.id + 'p';
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__item-wrap",
+          key: key
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          onChange: _this.props.handleSelectPayment.bind(_this),
+          className: "checkout-form-variants__input",
+          type: "radio",
+          id: uniq,
+          name: _this.props.modelName + '[payment_id]',
+          defaultValue: element.id
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          className: "checkout-form-variants__label",
+          htmlFor: uniq
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__text-container"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__title"
+        }, element.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form-variants__description"
+        }, element.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          className: "checkout-form-variants__image",
+          src: element.imageUrl
+        }))));
+      })), error);
     }
   }]);
 

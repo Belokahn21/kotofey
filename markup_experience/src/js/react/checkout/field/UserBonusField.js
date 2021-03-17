@@ -28,6 +28,7 @@ class UserBonusField extends Component {
     }
 
     handleChangeInput(e) {
+        console.log("test");
         const element = e.target, amount = element.value;
 
         if (this.timerEx) clearTimeout(this.timerEx);
@@ -53,6 +54,7 @@ class UserBonusField extends Component {
                 },
                 onChange: function (data) {
                     bonusInput.value = data.from;
+
                 },
             });
         }
@@ -69,7 +71,7 @@ class UserBonusField extends Component {
                         <div className="checkout-form__label-text">Бонусы</div>
                         <div className="checkout-form__label-text">Доступно бонусов: {bonus}</div>
                     </div>
-                    <input type="text" id="order-bonus" onInput={this.handleChangeInput.bind(this)}  className="checkout-form__input" name="Order[bonus]" placeholder="Списать бонусы"/>
+                    <input type="text" id="order-bonus" className="checkout-form__input" name="Order[bonus]" placeholder="Списать бонусы"/>
                     <input type="range" id="js-bonus-input" className="js-select-user-bonus" data-min="0" data-from="0" data-max={300}/>
                 </div>
             </label>

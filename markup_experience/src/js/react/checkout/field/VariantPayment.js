@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import Error from "../html/Error";
 
 class VariantPayment extends Component {
     constructor(props) {
@@ -7,7 +8,12 @@ class VariantPayment extends Component {
 
     render() {
         const elements = this.props.models, exclude = this.props.exclude;
+        let error, aria_invalid;
 
+        if (typeof this.props.errors === 'object' && !Array.isArray(this.props.errors)) {
+            error = <Error errors={this.props.errors['payment_id']}/>
+            aria_invalid = this.props.errors['payment_id'] !== undefined;
+        }
         return <div className="checkout-form-variants-wrapper">
             <div className="checkout-form-variants">
                 {elements.filter(element => !exclude.includes(element.id)).map((element, key) => {
@@ -25,6 +31,7 @@ class VariantPayment extends Component {
                     </div>
                 })}
             </div>
+            {error}
         </div>
     }
 }

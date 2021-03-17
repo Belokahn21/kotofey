@@ -13726,8 +13726,8 @@ label[for="site-form-pet-avatar"] {
     line-height: 18px;
     color: grey; }
   .checkout-form-variants__input {
-    visibility: hidden;
-    display: none; }
+    position: absolute;
+    left: -9999999999999px; }
     .checkout-form-variants__input:checked ~ .checkout-form-variants__label {
       background-color: #ff1a4a; }
       .checkout-form-variants__input:checked ~ .checkout-form-variants__label .checkout-form-variants__title, .checkout-form-variants__input:checked ~ .checkout-form-variants__label .checkout-form-variants__description {
