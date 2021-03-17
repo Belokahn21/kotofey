@@ -16,8 +16,15 @@ import VariantPayment from "./field/VariantPayment";
 
 class Checkout extends Component {
 
+
     constructor(props) {
         super(props);
+
+        // delivery_id => arr payment_id
+        // this.relatedPayments[1] = [1, 2];
+
+        // let relatedPayments = [[], [1, 2]];
+
         this.state = {
             promocode: null,
             delivery: [],
@@ -26,6 +33,7 @@ class Checkout extends Component {
             errors: [],
             total: 0,
             paymentId: 0,
+            deliveryId: 0,
             user: null
         };
     }
@@ -62,7 +70,7 @@ class Checkout extends Component {
             }
 
             if (data.status === 200) {
-                if (this.state.paymentId === 1) this.handlePayment(data.id + 'test');
+                if (this.state.paymentId === 1) this.paymentService(data.id + 'test');
 
                 form.reset();
                 this.setState({
@@ -117,21 +125,21 @@ class Checkout extends Component {
 
 
     refreshBasket(product_id) {
-        let out = this.state.basket;
+        let basketItems = this.state.basket;
 
-        out.map((product, key) => {
-            if (parseInt(product.id) === parseInt(product_id)) out.splice(key, 1);
+        basketItems.map((product, key) => {
+            if (parseInt(product.id) === parseInt(product_id)) basketItems.splice(key, 1);
         });
 
         this.setState({
-            basket: out
+            basket: basketItems
         });
 
         this.calcTotal();
     }
 
 
-    handlePayment(order_id) {
+    paymentService(order_id) {
         const terminal = new Terminal();
         terminal.registerOrder(order_id).then(data => {
             if (data.formUrl !== undefined) {
@@ -150,6 +158,23 @@ class Checkout extends Component {
         });
     }
 
+    handleSelectDelivery(event) {
+        let current = event.target;
+        let deliveryId = parseInt(current.value);
+
+        this.setState({
+            deliveryId: deliveryId
+        });
+
+
+        if (deliveryId === 1) {
+            this.setState({
+                payment: [2, 3]
+            });
+        }
+
+    }
+
     updatePoromocode(code) {
         this.setState({promocode: code});
     }
@@ -163,7 +188,7 @@ class Checkout extends Component {
                         <div className="checkout-form__title">Укажите способ доставки</div>
                         <div className="checkout-form-variants">
                             {this.state.delivery.map((element, key) => {
-                                return <VariantDelivery element={element}/>
+                                return <VariantDelivery handleSelectDelivery={this.handleSelectDelivery.bind(this)} element={element}/>
                             })}
                         </div>
 
@@ -206,7 +231,7 @@ class Checkout extends Component {
 
                         <div className="checkout-form-variants">
                             {this.state.payment.map((element, key) => {
-                                return <VariantPayment handleChoiseDelivery={this.handleSelectPayment.bind(this)} element={element}/>
+                                return <VariantPayment handleSelectPayment={this.handleSelectPayment.bind(this)} element={element}/>
                             })}
                         </div>
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>

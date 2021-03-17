@@ -5,15 +5,11 @@ class VariantPayment extends Component {
         super(props);
     }
 
-    handleSelectPayment(event) {
-        this.props.handleChoiseDelivery(event);
-    }
-
     render() {
         const element = this.props.element, uniq = Math.random().toString(36).substring(7) + element.id;
         return <div className="checkout-form-variants__item-wrap" key={uniq}>
             <div className="checkout-form-variants__item">
-                <input onChange={this.handleSelectPayment.bind(this)} className="checkout-form-variants__input" type="radio" id={uniq} name="payment" defaultValue={element.id}/>
+                <input onChange={this.props.handleSelectPayment.bind(this)} className="checkout-form-variants__input" type="radio" id={uniq} name="payment" defaultValue={element.id}/>
                 <label className="checkout-form-variants__label" htmlFor={uniq}>
                     <div className="checkout-form-variants__text-container">
                         <div className="checkout-form-variants__title">{element.name}</div>

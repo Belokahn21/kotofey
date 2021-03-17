@@ -9,7 +9,7 @@ class VariantDelivery extends Component {
         const element = this.props.element, uniq = Math.random().toString(36).substring(7) + element.id;
         return <div className="checkout-form-variants__item-wrap" key={uniq}>
             <div className="checkout-form-variants__item">
-                <input className="checkout-form-variants__input" type="radio" id={uniq} name="delivery" defaultValue={element.id}/>
+                <input onChange={this.props.handleSelectDelivery.bind(this)} className="checkout-form-variants__input" type="radio" id={uniq} name="delivery" defaultValue={element.id}/>
                 <label className="checkout-form-variants__label" htmlFor={uniq}>
                     <div className="checkout-form-variants__text-container">
                         <div className="checkout-form-variants__title">{element.name}</div>
