@@ -147,7 +147,10 @@ class ProductBackendController extends MainBackendController
         }
 
         $models = $this->modelClass::find()
-            ->where("`price`=`purchase`");
+            ->where("`price`=`purchase`")
+            ->orWhere('round((price / purchase) * 100 - 100) < :markup', [
+                ':markup' => Yii::$app->request->get('markup', 15)
+            ]);
 
         $models = $models->all();
 
