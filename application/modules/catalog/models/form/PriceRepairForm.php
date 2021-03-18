@@ -6,6 +6,7 @@ namespace app\modules\catalog\models\form;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\settings\models\helpers\MarkupHelpers;
+use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 
 class PriceRepairForm extends Model
@@ -49,7 +50,7 @@ class PriceRepairForm extends Model
             MarkupHelpers::applyMarkup($model, $this->amount);
 
             if (!$model->validate() || !$model->update()) {
-                return false;
+                continue;
             }
         }
 
