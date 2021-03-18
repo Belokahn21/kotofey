@@ -78,27 +78,27 @@ class RestController extends ActiveController
     {
         $data = [];
 
-        foreach (Product::find()->limit(5)->all() as $product) {
-            $data[] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'article' => $product->article,
-                'detailUrl' => ProductHelper::getDetailUrl($product),
-                'imageUrl' => ProductHelper::getImageUrl($product),
-            ];
-        }
-
-//        foreach ($this->modelClass::findAll() as $basketItem) {
+//        foreach (Product::find()->limit(5)->all() as $product) {
 //            $data[] = [
-//                'id' => $basketItem->product->id,
-//                'name' => $basketItem->product->name,
-//                'price' => $basketItem->product->price,
-//                'article' => $basketItem->product->article,
-//                'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
-//                'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
+//                'id' => $product->id,
+//                'name' => $product->name,
+//                'price' => $product->price,
+//                'article' => $product->article,
+//                'detailUrl' => ProductHelper::getDetailUrl($product),
+//                'imageUrl' => ProductHelper::getImageUrl($product),
 //            ];
 //        }
+
+        foreach ($this->modelClass::findAll() as $basketItem) {
+            $data[] = [
+                'id' => $basketItem->product->id,
+                'name' => $basketItem->product->name,
+                'price' => $basketItem->product->price,
+                'article' => $basketItem->product->article,
+                'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
+                'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
+            ];
+        }
 
         $response = [
             'status' => 200,

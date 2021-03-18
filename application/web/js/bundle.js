@@ -4942,6 +4942,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
       if (this.state.usedBonus > 0) total -= parseInt(this.state.usedBonus);
       if (this.state.promocode !== null) total = total - Math.round(total * (this.state.promocode.discount / 100));
+      if (total < 0) total = 0;
       this.setState({
         total: total
       });
@@ -5887,13 +5888,10 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
     _classCallCheck(this, UserBonusField);
 
     _this = _super.call(this, props, context);
-    _this.accountId = _this.props.accountId, _this.timerEx, _this.timeout = 80, _this.marks = {
-      0: 0,
-      999: 999
-    };
+    _this.accountId = _this.props.accountId;
     _this.state = {
       bonus: 0,
-      selectedBonuses: 0
+      used: 0
     };
 
     _this.loadBonus();
@@ -5919,17 +5917,15 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleChangeInput",
     value: function handleChangeInput(amount) {
-      var _this3 = this;
+      if (amount > this.state.bonus) {
+        amount = this.state.bonus;
+      }
 
-      if (this.timerEx) clearTimeout(this.timerEx);
       this.setState({
-        selectedBonuses: amount
+        used: amount
       });
-      this.timerEx = setTimeout(function () {
-        _this3.props.updateUsedBonus(amount);
-
-        _this3.props.refreshBasket();
-      }, this.timeout);
+      this.props.updateUsedBonus(amount);
+      this.props.refreshBasket();
     }
   }, {
     key: "render",
@@ -5945,18 +5941,17 @@ var UserBonusField = /*#__PURE__*/function (_Component) {
         className: "checkout-form__label-text"
       }, "\u0411\u043E\u043D\u0443\u0441\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__label-text"
-      }, "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u0431\u043E\u043D\u0443\u0441\u043E\u0432: ", this.state.bonus)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      }, "\u0414\u043E\u0441\u0442\u0443\u043F\u043D\u043E \u0431\u043E\u043D\u0443\u0441\u043E\u0432: ", parseInt(this.state.bonus) - parseInt(this.state.used))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
         id: "order-bonus",
         className: "checkout-form__input",
         name: "Order[bonus]",
         readOnly: true,
-        value: this.state.selectedBonuses,
+        value: this.state.used,
         placeholder: "\u0421\u043F\u0438\u0441\u0430\u0442\u044C \u0431\u043E\u043D\u0443\u0441\u044B"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(rc_slider__WEBPACK_IMPORTED_MODULE_3__.default, {
         min: 0,
         max: 999,
-        marks: this.marks,
         onChange: this.handleChangeInput.bind(this)
       })));
     }
