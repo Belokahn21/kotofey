@@ -14,6 +14,7 @@ import RestRequest from "../../tools/RestRequest";
 import VariantDelivery from "./field/VariantDelivery";
 import VariantPayment from "./field/VariantPayment";
 import Error from "./html/Error";
+import Variants from "./html/widget/Variants";
 
 class Checkout extends Component {
     constructor(props) {
@@ -148,6 +149,9 @@ class Checkout extends Component {
     }
 
     handleSelectDelivery(event) {
+
+        console.log("best debug");
+
         let current = event.target;
         let deliveryId = parseInt(current.value);
 
@@ -182,22 +186,13 @@ class Checkout extends Component {
 
     render() {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
-        let errorDelivery, errorPayment;
-
-
-        if (typeof this.state.errors === 'object' && !Array.isArray(this.state.errors)) {
-            errorDelivery = <Error errors={this.state.errors['delivery_id']}/>
-            errorPayment = <Error errors={this.state.errors['payment_id']}/>
-        }
-
-
         return (
             <div className="page__group-row">
                 <div className="page__left">
                     <form className="checkout-form" onSubmit={this.submitForm.bind(this)}>
                         <div className="checkout-form__title">Укажите способ доставки</div>
 
-                        <VariantDelivery errors={this.state.errors} modelName={this.modelName} handleSelectDelivery={this.handleSelectDelivery.bind(this)} models={this.state.delivery}/>
+                        <Variants errors={this.state.errors} modelName={this.modelName} attribute="delivery_id" handlerSelect={this.handleSelectDelivery.bind(this)} models={this.state.delivery}/>
 
                         <div className="checkout-form__title">Промокод и бонусы</div>
                         <div className="checkout-form__group-row">
@@ -236,7 +231,8 @@ class Checkout extends Component {
 
 
                         <div className="checkout-form__title">Укажите способ оплаты</div>
-                        <VariantPayment errors={this.state.errors} modelName={this.modelName} handleSelectPayment={this.handleSelectPayment.bind(this)} models={this.state.payment} exclude={this.state.excludePayments}/>
+
+                        <Variants errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
 
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
                     </form>

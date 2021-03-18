@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import config from "../../../config";
 import RestRequest from "../../../tools/RestRequest";
-import Slider, {Range} from 'rc-slider';
+import Slider from 'rc-slider';
 
 
 class UserBonusField extends Component {
