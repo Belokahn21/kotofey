@@ -5049,7 +5049,11 @@ var Checkout = /*#__PURE__*/function (_Component) {
         className: "checkout-form__title"
       }, "\u0412\u0440\u0435\u043C\u044F \u0438 \u0434\u0430\u0442\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_DateDeliveryField__WEBPACK_IMPORTED_MODULE_8__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_TimeDeliveryField__WEBPACK_IMPORTED_MODULE_5__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_DateDeliveryField__WEBPACK_IMPORTED_MODULE_8__.default, {
+        errors: this.state.errors
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_TimeDeliveryField__WEBPACK_IMPORTED_MODULE_5__.default, {
+        errors: this.state.errors
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
       }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
@@ -5724,6 +5728,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _html_Error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../html/Error */ "./src/js/react/checkout/html/Error.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5745,6 +5750,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -5775,6 +5781,15 @@ var TimeDeliveryField = /*#__PURE__*/function (_Component) {
   _createClass(TimeDeliveryField, [{
     key: "render",
     value: function render() {
+      var error, aria_invalid;
+
+      if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
+        error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
+          errors: this.props.errors['time']
+        });
+        aria_invalid = this.props.errors['time'] !== undefined;
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-time-delivery"
@@ -5782,19 +5797,33 @@ var TimeDeliveryField = /*#__PURE__*/function (_Component) {
         className: "checkout-form__label-text"
       }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438*"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-group field-checkout-time-delivery required"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "select",
+        htmlFor: "checkout-time-delivery",
+        "aria-invalid": aria_invalid
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
         id: "checkout-time-delivery",
         className: "checkout-form__select",
-        name: "OrderDate[time]",
-        "aria-required": "true"
-      }, this.state.items.map(function (element, key) {
+        name: "OrderDate[time]"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "",
+        disabled: "disabled",
+        selected: "selected"
+      }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"), this.state.items.map(function (element, key) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
           key: key,
           value: element
         }, element);
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", {
-        className: "help-block help-block-error"
-      })));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("use", {
+        xlinkHref: "#select-arrow-down"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg", {
+        className: "sprites"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("symbol", {
+        id: "select-arrow-down",
+        viewBox: "0 0 10 6"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("polyline", {
+        points: "1 1 5 5 9 1"
+      }))), error));
     }
   }]);
 

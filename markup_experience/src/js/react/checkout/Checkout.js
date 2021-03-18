@@ -114,6 +114,8 @@ class Checkout extends Component {
 
         if (this.state.promocode !== null) total = total - Math.round(total * (this.state.promocode.discount / 100));
 
+        if (total < 0) total = 0;
+
         this.setState({
             total: total
         });

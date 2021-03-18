@@ -11033,10 +11033,10 @@ body {
       object-fit: contain; } }
 
 [aria-invalid="false"] {
-  border: 1px green solid !important; }
+  border-color: #25D366 !important; }
 
 [aria-invalid="true"] {
-  border: 1px red solid !important; }
+  border-color: #ff1a4a !important; }
 
 p {
   margin: 0;
@@ -11060,7 +11060,11 @@ p {
     color: #ff1a4a; }
 
 .help-block-error {
-  color: red; }
+  color: red;
+  font-weight: bold;
+  text-transform: lowercase; }
+  .help-block-error:first-letter {
+    text-transform: uppercase; }
 
 .site-form {
   border-radius: inherit;
@@ -11859,6 +11863,54 @@ p {
 .success-notify {
   background: #00aa00;
   color: white; }
+
+.select {
+  position: relative;
+  min-width: 200px;
+  width: 100%; }
+  .select svg {
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 3px);
+    width: 10px;
+    height: 6px;
+    stroke-width: 2px;
+    stroke: #9098a9;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none; }
+  .select select {
+    -webkit-appearance: none;
+    padding: 6px 40px 6px 12px;
+    width: 100%;
+    border: 1px solid silver;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 150ms ease; }
+    .select select:required:invalid {
+      color: #c6c6c6; }
+    .select select option {
+      color: #c6c6c6; }
+    .select select option[value=""][disabled] {
+      display: none; }
+    .select select:focus {
+      outline: none;
+      border-color: #07f;
+      box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2); }
+    .select select:hover + svg {
+      stroke: #07f; }
+
+.sprites {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  user-select: none; }
 
 .authModal .modal-dialog {
   max-width: 600px; }
@@ -13594,6 +13646,24 @@ label[for="site-form-pet-avatar"] {
     padding: 4px 15px;
     border-radius: 25px;
     border: 1px black solid; }
+
+.payment-cards {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start; }
+  @media (max-width: 800px) {
+    .payment-cards {
+      justify-content: space-between; } }
+  .payment-cards__item {
+    width: 10%;
+    margin: 0 5px; }
+    @media (max-width: 800px) {
+      .payment-cards__item {
+        width: 25%; } }
+  .payment-cards__image {
+    width: 100%;
+    object-fit: contain; }
 
 .about-swiper-container {
   width: 470px !important; }

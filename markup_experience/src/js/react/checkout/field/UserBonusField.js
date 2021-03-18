@@ -8,11 +8,11 @@ class UserBonusField extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.accountId = this.props.accountId, this.timerEx, this.timeout = 80, this.marks = {0: 0, 999: 999};
+        this.accountId = this.props.accountId;
 
         this.state = {
             bonus: 0,
-            selectedBonuses: 0
+            used: 0
         };
         this.loadBonus();
     }
@@ -30,14 +30,14 @@ class UserBonusField extends Component {
     }
 
     handleChangeInput(amount) {
-        if (this.timerEx) clearTimeout(this.timerEx);
 
-        this.setState({selectedBonuses: amount});
+        if (amount > this.state.bonus) {
+            amount = this.state.bonus;
+        }
 
-        this.timerEx = setTimeout(() => {
-            this.props.updateUsedBonus(amount);
-            this.props.refreshBasket();
-        }, this.timeout);
+        this.setState({used: amount});
+        this.props.updateUsedBonus(amount);
+        this.props.refreshBasket();
     }
 
     render() {
@@ -47,10 +47,10 @@ class UserBonusField extends Component {
 
                     <div className="checkout-form-label-group">
                         <div className="checkout-form__label-text">Бонусы</div>
-                        <div className="checkout-form__label-text">Доступно бонусов: {this.state.bonus}</div>
+                        <div className="checkout-form__label-text">Доступно бонусов: {parseInt(this.state.bonus) - parseInt(this.state.used)}</div>
                     </div>
-                    <input type="text" id="order-bonus" className="checkout-form__input" name="Order[bonus]"  readOnly={true} value={this.state.selectedBonuses} placeholder="Списать бонусы"/>
-                    <Slider min={0} max={999} marks={this.marks} onChange={this.handleChangeInput.bind(this)}/>
+                    <input type="text" id="order-bonus" className="checkout-form__input" name="Order[bonus]" readOnly={true} value={this.state.used} placeholder="Списать бонусы"/>
+                    <Slider min={0} max={999} onChange={this.handleChangeInput.bind(this)}/>
                 </div>
             </label>
 

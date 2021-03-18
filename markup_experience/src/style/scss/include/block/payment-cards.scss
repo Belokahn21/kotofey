@@ -1,0 +1,25 @@
+.payment-cards {
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+
+  @media (max-width: 800px) {
+    justify-content: space-between;
+  }
+
+  &__item {
+    width: 10%;
+    margin: 0 5px;
+
+    @media (max-width: 800px) {
+      width: 25%;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    object-fit: contain;
+  }
+}
