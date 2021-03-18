@@ -10906,17 +10906,23 @@ Build date: 2019-12-19 16:51:02
   line-height: 24px;
   font-weight: 700;
   border-radius: 20px;
-  background: #ff1a4a;
-  color: #fff;
+  background: #fff;
+  border: 1px #ff1a4a solid;
+  color: #ff1a4a;
   text-align: center;
-  border: 0;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  outline: none !important; }
+  outline: none !important;
+  transition: background-color 0.3s ease-in 0s; }
   .add-basket:hover {
-    color: #fff; }
+    color: #fff;
+    background: #ff1a4a; }
+    .add-basket:hover img {
+      filter: unset; }
+  .add-basket img {
+    filter: invert(22%) sepia(45%) saturate(7487%) hue-rotate(338deg) brightness(80%) contrast(200%); }
   .add-basket__icon {
     width: 15px;
     height: 14px;
@@ -10941,11 +10947,11 @@ Build date: 2019-12-19 16:51:02
     color: inherit; }
 
 .btn-main, .site-form__button, .last-news__go-detail, .form-delivery-calc__submit, .checkout-button-auth {
-  background: #ff1a4a;
+  background: #fff;
+  border: 1px #ff1a4a solid;
+  color: #ff1a4a;
   padding: 5px 5px;
   border-radius: 5px;
-  border: 0;
-  color: white;
   font-weight: bold;
   text-transform: uppercase;
   font-size: 10px;
@@ -11052,6 +11058,9 @@ p {
   margin-left: 1.5em !important; }
   .fa-ul .fa-li {
     color: #ff1a4a; }
+
+.help-block-error {
+  color: red; }
 
 .site-form {
   border-radius: inherit;
@@ -13862,8 +13871,6 @@ label[for="site-form-pet-avatar"] {
       line-height: 24px;
       font-weight: 400;
       color: #c6c6c6; }
-    .checkout-form__label .help-block-error {
-      color: red; }
   .checkout-form__submit {
     margin: 0;
     margin-top: 20px; }
