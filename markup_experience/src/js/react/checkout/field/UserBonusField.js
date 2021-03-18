@@ -1,37 +1,38 @@
 import React, {Component} from "react";
 import config from "../../../config";
-import $ from "jquery";
 import RestRequest from "../../../tools/RestRequest";
+import Slider, {Range} from 'rc-slider';
+
 
 class UserBonusField extends Component {
     constructor(props, context) {
         super(props, context);
 
-        this.accountId = this.props.accountId, this.timerEx, this.timeout = 300;
+        this.accountId = this.props.accountId, this.timerEx, this.timeout = 80, this.marks = {0: 0, 999: 999};
 
         this.state = {
-            bonus: 0
+            bonus: 0,
+            selectedBonuses: 0
         };
-
         this.loadBonus();
     }
 
-    loadBonus() {
+    componentDidMount() {
+        // this.loadBonus();
+    }
 
+    loadBonus() {
         RestRequest.one(config.restBonus, this.accountId).then(data => {
-            if (data.status === 200) {
-                this.setState({
-                    bonus: data.count
-                });
-            }
+            this.setState({
+                bonus: 999
+            });
         });
     }
 
-    handleChangeInput(e) {
-        console.log("test");
-        const element = e.target, amount = element.value;
-
+    handleChangeInput(amount) {
         if (this.timerEx) clearTimeout(this.timerEx);
+
+        this.setState({selectedBonuses: amount});
 
         this.timerEx = setTimeout(() => {
             this.props.updateUsedBonus(amount);
@@ -39,40 +40,17 @@ class UserBonusField extends Component {
         }, this.timeout);
     }
 
-    componentDidMount() {
-        var slider = require('ion-rangeslider');
-
-        let bonusInput = document.querySelector('#order-bonus');
-        let object = $(".js-select-user-bonus");
-        if (object && bonusInput) {
-            object.ionRangeSlider({
-                min: object.data('min'),
-                max: object.data('max'),
-                from: object.data('from'),
-                onStart: function (data) {
-                    bonusInput.value = data.from;
-                },
-                onChange: function (data) {
-                    bonusInput.value = data.from;
-
-                },
-            });
-        }
-    }
-
-
     render() {
-        let {bonus} = this.state
         return (
             <label className="checkout-form__label" htmlFor="checkout-phone">
                 <div className="form-group field-order-bonus has-success">
 
                     <div className="checkout-form-label-group">
                         <div className="checkout-form__label-text">Бонусы</div>
-                        <div className="checkout-form__label-text">Доступно бонусов: {bonus}</div>
+                        <div className="checkout-form__label-text">Доступно бонусов: {this.state.bonus}</div>
                     </div>
-                    <input type="text" id="order-bonus" className="checkout-form__input" name="Order[bonus]" placeholder="Списать бонусы"/>
-                    <input type="range" id="js-bonus-input" className="js-select-user-bonus" data-min="0" data-from="0" data-max={300}/>
+                    <input type="text" id="order-bonus" className="checkout-form__input" name="Order[bonus]"  readOnly={true} value={this.state.selectedBonuses} placeholder="Списать бонусы"/>
+                    <Slider min={0} max={999} marks={this.marks} onChange={this.handleChangeInput.bind(this)}/>
                 </div>
             </label>
 
