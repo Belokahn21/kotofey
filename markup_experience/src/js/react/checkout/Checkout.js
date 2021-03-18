@@ -11,9 +11,6 @@ import DateDeliveryField from "./field/DateDeliveryField";
 import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
 import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
-import VariantDelivery from "./field/VariantDelivery";
-import VariantPayment from "./field/VariantPayment";
-import Error from "./html/Error";
 import Variants from "./html/widget/Variants";
 
 class Checkout extends Component {
@@ -149,9 +146,6 @@ class Checkout extends Component {
     }
 
     handleSelectDelivery(event) {
-
-        console.log("best debug");
-
         let current = event.target;
         let deliveryId = parseInt(current.value);
 
