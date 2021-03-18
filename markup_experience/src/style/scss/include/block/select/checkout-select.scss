@@ -1,0 +1,69 @@
+.select {
+  position: relative;
+  min-width: 200px;
+  width: 100%;
+
+  svg {
+    position: absolute;
+    right: 12px;
+    top: calc(50% - 3px);
+    width: 10px;
+    height: 6px;
+    stroke-width: 2px;
+    stroke: #9098a9;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    pointer-events: none;
+  }
+
+  select {
+    -webkit-appearance: none;
+    padding: 6px 40px 6px 12px;
+    width: 100%;
+    border: 1px solid silver;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0 1px 3px -2px #9098a9;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: all 150ms ease;
+
+    &:required {
+      &:invalid {
+        color: #c6c6c6;
+      }
+    }
+
+    option {
+      color: #c6c6c6;
+    }
+
+    option[value=""][disabled] {
+      display: none;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: #07f;
+      box-shadow: 0 0 0 2px rgba(0, 119, 255, 0.2);
+    }
+
+    &:hover {
+      + {
+        svg {
+          stroke: #07f;
+        }
+      }
+    }
+  }
+}
+
+.sprites {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  user-select: none;
+}

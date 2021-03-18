@@ -197,8 +197,8 @@ class Checkout extends Component {
 
                         <div className="checkout-form__title">Время и дата доставки</div>
                         <div className="checkout-form__group-row">
-                            <DateDeliveryField/>
-                            <TimeDeliveryField/>
+                            <DateDeliveryField errors={this.state.errors}/>
+                            <TimeDeliveryField errors={this.state.errors}/>
                         </div>
 
 

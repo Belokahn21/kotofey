@@ -91,11 +91,13 @@ body {
 }
 
 [aria-invalid="false"] {
-  border: 1px green solid !important;
+  border-color: $whatsapp-green !important;
+  //border: 1px green solid !important;
 }
 
 [aria-invalid="true"] {
-  border: 1px red solid !important;
+  border-color: $active-color !important;
+  //border: 1px red solid !important;
 }
 
 p {
@@ -129,4 +131,11 @@ p {
 
 .help-block-error {
   color: red;
+  font-weight: bold;
+  text-transform: lowercase;
+
+  &:first-letter {
+    text-transform: uppercase;
+
+  }
 }
