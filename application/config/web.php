@@ -114,9 +114,16 @@ $config = [
             'rules' => [
                 //frontend rest
                 'GET api/<module>' => '<module>/rest/index',
+                'GET api/<module>/<controller>' => '<module>/<controller>-rest/index',
+
                 'GET api/<module>/<id[\w]+>' => '<module>/rest/view',
+                'GET api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/view',
+
                 'POST api/<module>' => '<module>/rest/create',
+                'POST api/<module>/<controller>' => '<module>/<controller>-rest/create',
+
                 'DELETE api/<module>/<id[\w]+>' => '<module>/rest/delete',
+                'DELETE api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/delete',
 
                 //backend rest
                 'GET backend/api/<module>' => '<module>/rest-backend/index',

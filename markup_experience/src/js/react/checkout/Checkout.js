@@ -141,11 +141,15 @@ class Checkout extends Component {
         terminal.registerOrder(order_id).then(data => {
             if (data.formUrl !== undefined && data.orderId !== undefined) {
 
-                //todo сохранить id заказа нашего сайта и id заказа в сбере в смежную таблицу
 
-                window.location.href = data.formUrl; // by click link
-                // window.open(data.formUrl, '_blank'); // new tab
-                // window.location.replace(data.formUrl); // as http redirect
+                //todo сохранить id заказа нашего сайта и id заказа в сбере в смежную таблицу
+                RestRequest.post(config.restAcquiringOrder, {body: {order_id: order_id, sber_order_id: data.orderId}}).then(data => {
+                    if (parseInt(data.status) === 200) {
+                        window.location.href = data.formUrl; // by click link
+                        // window.open(data.formUrl, '_blank'); // new tab
+                        // window.location.replace(data.formUrl); // as http redirect
+                    }
+                });
             }
         });
     }
