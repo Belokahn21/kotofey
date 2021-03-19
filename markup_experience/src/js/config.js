@@ -17,6 +17,7 @@ const config = {
     restUser: url + 'api/user/',
     // sberbank payments
     restAcquiring: url + 'api/acquiring/',
+    restAcquiringOrder: url + 'api/acquiring/order/',
 };
 
 
