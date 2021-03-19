@@ -4889,7 +4889,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         }
 
         if (data.status === 200) {
-          if (_this3.state.paymentId === 1) _this3.paymentService(data.id + 'test');
+          if (parseInt(_this3.state.paymentId) === 1) _this3.paymentService(data.id + 'test');
           form.reset();
 
           _this3.setState({

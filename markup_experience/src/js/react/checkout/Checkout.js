@@ -67,7 +67,7 @@ class Checkout extends Component {
             }
 
             if (data.status === 200) {
-                if (this.state.paymentId === 1) this.paymentService(data.id + 'test');
+                if (parseInt(this.state.paymentId) === 1) this.paymentService(data.id);
 
                 form.reset();
                 this.setState({
@@ -139,7 +139,9 @@ class Checkout extends Component {
     paymentService(order_id) {
         const terminal = new Terminal();
         terminal.registerOrder(order_id).then(data => {
-            if (data.formUrl !== undefined) {
+            if (data.formUrl !== undefined && data.orderId !== undefined) {
+
+                //todo сохранить id заказа нашего сайта и id заказа в сбере в смежную таблицу
 
                 window.location.href = data.formUrl; // by click link
                 // window.open(data.formUrl, '_blank'); // new tab
