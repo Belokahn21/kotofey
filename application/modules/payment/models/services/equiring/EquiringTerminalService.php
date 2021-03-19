@@ -28,10 +28,12 @@ class EquiringTerminalService
     {
         $result = $this->createOrder($order);
 
-        if (is_array($result) && array_key_exists('orderId', $result) && array_key_exists('formUrl', $result)) return false;
+
+        if (!is_array($result) || !array_key_exists('orderId', $result) || !array_key_exists('formUrl', $result)) return false;
 
         if (!$this->signalOrder($order, $result['orderId'])) return false;
 
+        var_dump($result);
         return $result;
     }
 
