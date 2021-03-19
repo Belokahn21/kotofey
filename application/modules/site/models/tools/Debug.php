@@ -28,8 +28,7 @@ class Debug
 
     public static function printFile($target = null, $clear = false, $no_wrap = false)
     {
-
-        $filePath = $_SERVER['DOCUMENT_ROOT'] . "/debug.txt";
+        $filePath = \Yii::getAlias('@webroot/debug.html');
 
         if (!empty($target)) {
             $info = null;

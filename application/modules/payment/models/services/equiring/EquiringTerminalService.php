@@ -28,11 +28,10 @@ class EquiringTerminalService
 
         $curl = new Curl();
         $this->extendParams($this->paramRequest, [
-            'orderNumber' => rand(),
+            'orderNumber' => $order->id . '-test-2021',
             'currency' => 643,
-//            'orderNumber' => $order->id,
             'amount' => OrderHelper::orderSummary($order) * 100,
-            'returnUrl' => 'https://kotofey.store/payment/return/',
+            'returnUrl' => 'https://kotofey.store/payment/result/',
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));

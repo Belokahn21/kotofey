@@ -4,12 +4,15 @@
 namespace app\modules\payment\controllers;
 
 
+use app\modules\site\models\tools\Debug;
 use yii\web\Controller;
 
 class PaymentController extends Controller
 {
-    public function actionReturnUrl()
+    public function actionResult()
     {
-        return $this->render('return-url');
+        Debug::printFile(\Yii::$app->request->post());
+        Debug::printFile(\Yii::$app->request->get());
+        return $this->render('result');
     }
 }
