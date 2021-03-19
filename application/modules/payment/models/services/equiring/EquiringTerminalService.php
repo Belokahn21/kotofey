@@ -4,6 +4,7 @@
 namespace app\modules\payment\models\services\equiring;
 
 
+use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\payment\models\services\equiring\banks\EquiringBank;
@@ -25,6 +26,17 @@ class EquiringTerminalService
 
     public function registerOrder(Order $order)
     {
+        $result = $this->createOrder($order);
+
+        if (is_array($result) && array_key_exists('orderId', $result) && array_key_exists('formUrl', $result)) return false;
+
+        if (!$this->signalOrder($order, $result['orderId'])) return false;
+
+        return $result;
+    }
+
+    public function createOrder(Order $order)
+    {
         $this->bank->getAuthParams($this->paramRequest);
 
         $curl = new Curl();
@@ -36,6 +48,14 @@ class EquiringTerminalService
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
+    }
+
+    public function signalOrder(Order $order, $identificator)
+    {
+        $model = new AcquiringOrder();
+        $model->order_id = $order->id;
+        $model->identifier_id = $identificator;
+        return $model->validate() && $model->save();
     }
 
     private function extendParams(&$old, $new)

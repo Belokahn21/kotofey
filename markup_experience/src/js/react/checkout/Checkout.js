@@ -13,6 +13,7 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
+import BuildQuery from "../../tools/BuildQuery";
 
 class Checkout extends Component {
     constructor(props) {
@@ -139,17 +140,10 @@ class Checkout extends Component {
     paymentService(order_id) {
         const terminal = new Terminal();
         terminal.registerOrder(order_id).then(data => {
-            if (data.formUrl !== undefined && data.orderId !== undefined) {
-
-
-                //todo сохранить id заказа нашего сайта и id заказа в сбере в смежную таблицу
-                RestRequest.post(config.restAcquiringOrder, {body: {order_id: order_id, sber_order_id: data.orderId}}).then(data => {
-                    if (parseInt(data.status) === 200) {
-                        window.location.href = data.formUrl; // by click link
-                        // window.open(data.formUrl, '_blank'); // new tab
-                        // window.location.replace(data.formUrl); // as http redirect
-                    }
-                });
+            if (data.formUrl !== undefined) {
+                window.location.href = data.formUrl; // by click link
+                // window.open(data.formUrl, '_blank'); // new tab
+                // window.location.replace(data.formUrl); // as http redirect
             }
         });
     }
