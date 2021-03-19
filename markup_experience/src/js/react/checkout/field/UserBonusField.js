@@ -14,18 +14,20 @@ class UserBonusField extends Component {
             bonus: 0,
             used: 0
         };
-        this.loadBonus();
+        // this.loadBonus();
     }
 
     componentDidMount() {
-        // this.loadBonus();
+        this.loadBonus();
     }
 
     loadBonus() {
         RestRequest.one(config.restBonus, this.accountId).then(data => {
-            this.setState({
-                bonus: 999
-            });
+            if (data.count !== undefined) {
+                this.setState({
+                    bonus: parseInt(data.count)
+                });
+            }
         });
     }
 
@@ -50,7 +52,7 @@ class UserBonusField extends Component {
                         <div className="checkout-form__label-text">Доступно бонусов: {parseInt(this.state.bonus) - parseInt(this.state.used)}</div>
                     </div>
                     <input type="text" id="order-bonus" className="checkout-form__input" name="Order[bonus]" readOnly={true} value={this.state.used} placeholder="Списать бонусы"/>
-                    <Slider min={0} max={999} onChange={this.handleChangeInput.bind(this)}/>
+                    <Slider min={0} max={this.state.bonus} onChange={this.handleChangeInput.bind(this)}/>
                 </div>
             </label>
 

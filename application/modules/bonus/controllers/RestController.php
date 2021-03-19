@@ -30,8 +30,8 @@ class RestController extends ActiveController
 
     public function actionView($id)
     {
-        return new \yii\data\ActiveDataProvider([
-            'query' => $this->modelClass::find()->where(['bonus_account_id' => $id]),
+        return $this->asJson([
+            'count' => $this->modelClass::find()->where(['bonus_account_id' => $id])->sum('count')
         ]);
     }
 }
