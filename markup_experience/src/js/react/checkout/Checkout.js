@@ -12,6 +12,7 @@ import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
 import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
+import DeliveryService from "./DeliveryService";
 
 class Checkout extends Component {
     constructor(props) {
@@ -180,15 +181,30 @@ class Checkout extends Component {
         this.setState({promocode: code});
     }
 
+    unsetError(attribute) {
+        let errors = this.state.errors;
+
+        errors[attribute] = null;
+
+        this.setState({errors: errors})
+    }
+
     render() {
-        let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ';
+        let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService;
+
+        if (parseInt(this.state.deliveryId) === 1) {
+            deliveryService = <DeliveryService/>
+        }
+
         return (
             <div className="page__group-row">
                 <div className="page__left">
                     <form className="checkout-form" onSubmit={this.submitForm.bind(this)}>
                         <div className="checkout-form__title">Укажите способ доставки</div>
 
-                        <Variants errors={this.state.errors} modelName={this.modelName} attribute="delivery_id" handlerSelect={this.handleSelectDelivery.bind(this)} models={this.state.delivery}/>
+                        <Variants errors={this.state.errors} unsetError={this.unsetError.bind(this)} modelName={this.modelName} attribute="delivery_id" handlerSelect={this.handleSelectDelivery.bind(this)} models={this.state.delivery}/>
+
+                        {/*{deliveryService}*/}
 
                         <div className="checkout-form__title">Промокод и бонусы</div>
                         <div className="checkout-form__group-row">
@@ -206,20 +222,20 @@ class Checkout extends Component {
 
                         <div className="checkout-form__title">Укажите ваши данные</div>
                         <div className="checkout-form__group-row">
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
                         </div>
                         <div className="checkout-form__group-row">
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "city", title: "Город", placeholder: "Город"}}/>
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "city", title: "Город", placeholder: "Город"}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
                         </div>
                         <div className="checkout-form__group-row">
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
                         </div>
                         <div className="checkout-form__group-row">
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
-                            <HtmlHelper errors={this.state.errors} element="input" modelName={this.modelName} options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
+                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
                         </div>
                         <label className="checkout-form__label" htmlFor="checkout-comment">
                             <HtmlHelper errors={this.state.errors} element="textarea" modelName={this.modelName} options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
@@ -227,7 +243,7 @@ class Checkout extends Component {
 
 
                         <div className="checkout-form__title">Укажите способ оплаты</div>
-                        <Variants errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
+                        <Variants unsetError={this.unsetError.bind(this)} errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
 
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
                     </form>
@@ -238,7 +254,6 @@ class Checkout extends Component {
             </div>
         );
     }
-
 }
 
 
