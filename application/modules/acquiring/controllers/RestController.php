@@ -39,7 +39,7 @@ class RestController extends ActiveController
         $order_id = $data['order_id'];
 
 
-        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic('T2222889641-api', 'T2222889641')));
+        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic(\Yii::$app->params['acquiring']['sberbank']['login'], \Yii::$app->params['acquiring']['sberbank']['password'])));
         return $terminal->registerOrder(Order::findOne($order_id));
     }
 
