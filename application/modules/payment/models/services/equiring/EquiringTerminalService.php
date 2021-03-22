@@ -9,6 +9,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\payment\models\services\equiring\banks\EquiringBank;
 use app\modules\site\models\tools\Curl;
+use app\modules\site\models\tools\System;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
@@ -51,7 +52,8 @@ class EquiringTerminalService
             'email' => $order->email,
             'phone' => $order->phone,
             'amount' => OrderHelper::orderSummary($order) * 100,
-            'returnUrl' => Url::to('/payment/result/'),
+            'returnUrl' => System::fullDomain() . Url::to('/payment/result/'),
+//            'returnUrl' => Url::to('/payment/result/'),
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));

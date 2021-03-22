@@ -4,13 +4,15 @@
  * @var $items \app\modules\order\models\entity\OrdersItems[]
  */
 
+use app\modules\acquiring\models\helpers\AcquiringHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
-use app\widgets\Breadcrumbs;
 use app\modules\site\models\tools\Price;
-use yii\helpers\Url;
+use app\modules\site\models\tools\System;
+use app\widgets\Breadcrumbs;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = "Просмотр заказа: #" . $order->id;
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
@@ -66,19 +68,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <div class="profile-order-info__value">
                         <?= ($order->is_paid ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red'])); ?>
                         <?php if (!$order->is_paid): ?>
-                            <a target="_blank" href="<?= \app\modules\acquiring\models\helpers\AcquiringHelper::getInstance()->paymentLink($order) ?>">Оплатить</a>
+                            <?= Html::a('Оплатить', AcquiringHelper::getInstance()->paymentLink($order), ['target' => '_blank', 'class' => 'btn-main']); ?>
                         <?php endif; ?>
                     </div>
                 </div>
                 <div class="profile-order-info__row">
                     <div class="profile-order-info__key">Адрес доставки</div>
                     <div class="profile-order-info__value">
-                        <?= $order->city ? "г. " . $order->city : null; ?>
-                        <?= $order->street ? ", ул. " . $order->street : null; ?>
-                        <?= $order->number_home ? ", дом. " . $order->number_home : null; ?>
-                        <?= $order->entrance ? ", подъезд. " . $order->entrance : null; ?>
-                        <?= $order->floor_house ? ", этаж. " . $order->floor_house : null; ?>
-                        <?= $order->number_appartament ? ", кв. " . $order->number_appartament : null; ?>
+                        <?= $order->city ? "г. " . $order->city : null; ?><?= $order->street ? ", ул. " . $order->street : null; ?><?= $order->number_home ? ", дом. " . $order->number_home : null; ?><?= $order->entrance ? ", подъезд. " . $order->entrance : null; ?><?= $order->floor_house ? ", этаж. " . $order->floor_house : null; ?><?= $order->number_appartament ? ", кв. " . $order->number_appartament : null; ?>
                     </div>
                 </div>
                 <div class="profile-order-info__row">
