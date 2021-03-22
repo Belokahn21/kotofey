@@ -48,6 +48,8 @@ class EquiringTerminalService
         $this->extendParams($this->paramRequest, [
             'orderNumber' => $order->id . '-test-2021',
             'currency' => 643,
+            'email' => $order->email,
+            'phone' => $order->phone,
             'amount' => OrderHelper::orderSummary($order) * 100,
             'returnUrl' => Url::to('/payment/result/'),
         ]);
