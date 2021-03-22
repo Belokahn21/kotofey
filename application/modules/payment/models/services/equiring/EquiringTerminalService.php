@@ -29,12 +29,15 @@ class EquiringTerminalService
         $result = $this->createOrder($order);
 
 
-        if (!is_array($result) || !array_key_exists('orderId', $result) || !array_key_exists('formUrl', $result)) return false;
+        if (!is_array($result) || !array_key_exists('orderId', $result) || !array_key_exists('formUrl', $result)) return $result;
 
-        if (!$this->signalOrder($order, $result['orderId'])) return false;
+        $successSaveEquiring = $this->saveHistoryPaymentTransaction($order, $result['orderId']);
 
-        var_dump($result);
-        return $result;
+        if ($successSaveEquiring['status'] == 200) {
+            return $result;
+        }
+
+        return $successSaveEquiring;
     }
 
     public function createOrder(Order $order)
@@ -52,12 +55,23 @@ class EquiringTerminalService
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
     }
 
-    public function signalOrder(Order $order, $identificator)
+    public function saveHistoryPaymentTransaction(Order $order, $identificator)
     {
         $model = new AcquiringOrder();
         $model->order_id = $order->id;
         $model->identifier_id = $identificator;
-        return $model->validate() && $model->save();
+
+        if (!$model->validate() || !$model->save()) {
+            return [
+                'status' => 500,
+                'errors' => $model->getErrors()
+            ];
+        }
+
+        return [
+            'status' => 200,
+            'message' => 'Данные о транзакции успешно сохранены'
+        ];
     }
 
     private function extendParams(&$old, $new)

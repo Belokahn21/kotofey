@@ -4441,7 +4441,8 @@ var config = {
   restPromocode: url + 'api/promocode/',
   restUser: url + 'api/user/',
   // sberbank payments
-  restAcquiring: url + 'api/acquiring/'
+  restAcquiring: url + 'api/acquiring/',
+  restAcquiringOrder: url + 'api/acquiring/order/'
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (config);
 
@@ -4787,6 +4788,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
 /* harmony import */ var _html_widget_Variants__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./html/widget/Variants */ "./src/js/react/checkout/html/widget/Variants.js");
 /* harmony import */ var _DeliveryService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DeliveryService */ "./src/js/react/checkout/DeliveryService.js");
+/* harmony import */ var _tools_BuildQuery__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../tools/BuildQuery */ "./src/js/tools/BuildQuery.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4808,6 +4810,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -4889,7 +4892,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         }
 
         if (data.status === 200) {
-          if (parseInt(_this3.state.paymentId) === 1) _this3.paymentService(data.id + 'test');
+          if (parseInt(_this3.state.paymentId) === 1) _this3.paymentService(data.id);
           form.reset();
 
           _this3.setState({
