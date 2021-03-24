@@ -9,8 +9,8 @@
 Репозиторий проекта <a href="https://kotofey.store/" target="_blank">интернет-магазина Котофей</a>. <br>
 Что под внутри?: <br>
 Yii2 (Basic)<br>
-Node v<br>
-Npm v<br>
+Node v12.18.4<br>
+Npm v6.14.6<br>
 React<br>
 v1: Gulp, Babel, Sass, Pug<br>
 v2: webpack, pug, react
