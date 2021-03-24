@@ -45,6 +45,7 @@ class AcquiringForm extends Model
 
     public function doAction()
     {
+        $result = true;
         // сервис выполняющий по банку операции в зависимости от банка ещё
         // бизнес процессы
 
@@ -63,5 +64,6 @@ class AcquiringForm extends Model
                 break;
         }
 
+        return $result;
     }
 }
