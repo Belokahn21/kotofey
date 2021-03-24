@@ -45,10 +45,4 @@ class AcquiringBackendController extends MainBackendController
             'actionForm' => $actionForm
         ]);
     }
-
-    public function doAction()
-    {
-        // сервис выполняющий по банку операции в зависимости от банка ещё
-        // бизнес процессы
-    }
 }

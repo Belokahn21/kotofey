@@ -4,6 +4,10 @@
 namespace app\modules\acquiring\models\forms;
 
 
+use app\modules\acquiring\models\entity\AcquiringOrder;
+use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
+use app\modules\payment\models\services\equiring\banks\Sberbank;
+use app\modules\payment\models\services\equiring\EquiringTerminalService;
 use yii\base\Model;
 
 class AcquiringForm extends Model
@@ -36,5 +40,28 @@ class AcquiringForm extends Model
             self::ACTION_ROLLBACK_MONEY => 'Вернуть деньги',
             self::ACTION_CANCEL_PAY => 'Отменить оплату',
         ];
+    }
+
+
+    public function doAction()
+    {
+        // сервис выполняющий по банку операции в зависимости от банка ещё
+        // бизнес процессы
+
+        $bank = new Sberbank(new SberbankAuthBasic(\Yii::$app->params['sberbank']['login'], \Yii::$app->params['sberbank']['password']));
+
+        $terminal = new EquiringTerminalService($bank);
+        $model = AcquiringOrder::findOne($this->transaction_id);
+
+
+        switch ($this->action) {
+            case self::ACTION_ROLLBACK_MONEY:
+                $terminal->rollbackMoney($model);
+                break;
+            case self::ACTION_CANCEL_PAY:
+                $terminal->cancelPay($model);
+                break;
+        }
+
     }
 }

@@ -19,6 +19,8 @@ class EquiringTerminalService
     private $paramRequest = array();
 
     const REGISTER_ORDER = 'https://3dsec.sberbank.ru/payment/rest/register.do';
+    const ROLLBACK_MONEY = 'https://3dsec.sberbank.ru/payment/rest/refund.do';
+    const CANCEL_PAY = 'https://3dsec.sberbank.ru/payment/rest/reverse.do';
 
     public function __construct(EquiringBank $paymentBank)
     {
@@ -57,6 +59,30 @@ class EquiringTerminalService
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
+    }
+
+    public function cancelPay(AcquiringOrder $order)
+    {
+        $this->bank->getAuthParams($this->paramRequest);
+
+        $curl = new Curl();
+        $this->extendParams($this->paramRequest, [
+            'orderId' => $order->identifier_id,
+        ]);
+
+        return Json::decode($curl->post(self::CANCEL_PAY, $this->paramRequest));
+    }
+
+    public function rollbackMoney(AcquiringOrder $order)
+    {
+        $this->bank->getAuthParams($this->paramRequest);
+
+        $curl = new Curl();
+        $this->extendParams($this->paramRequest, [
+            'orderId' => $order->identifier_id,
+        ]);
+
+        return Json::decode($curl->post(self::ROLLBACK_MONEY, $this->paramRequest));
     }
 
     public function saveHistoryPaymentTransaction(Order $order, $identificator)
