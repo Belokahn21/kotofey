@@ -42,12 +42,12 @@ class AcquiringBackendController extends MainBackendController
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
 
-        $form = new AcquiringForm();
+        $actionForm = new AcquiringForm();
 
 
         return $this->render('update', [
             'model' => $model,
-            'form' => $form
+            'actionForm' => $actionForm
         ]);
     }
 }

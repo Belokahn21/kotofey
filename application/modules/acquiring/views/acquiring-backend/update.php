@@ -1,6 +1,7 @@
 <?php
 /* @var $this \yii\web\View
- * @var $model \app\modules\order\models\entity\Order
+ * @var $actionForm \app\modules\acquiring\models\forms\AcquiringForm
+ * @var $model \app\modules\acquiring\models\entity\AcquiringOrder
  */
 
 use yii\helpers\Html;
@@ -9,5 +10,7 @@ use yii\widgets\ActiveForm;
 $this->title = \app\modules\seo\models\tools\Title::show('Оплата по заказу #' . $model->order_id);
 ?>
 <?php $form = ActiveForm::begin(); ?>
+<?php $form->field($actionForm, 'transaction_id'); ?>
+<?php $form->field($actionForm, 'action')->dropDownList($actionForm->getActions(), ['prompt' => 'Выберите действие']); ?>
 <?= Html::submitButton('Выполнить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end(); ?>

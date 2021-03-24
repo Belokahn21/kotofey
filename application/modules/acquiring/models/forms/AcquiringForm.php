@@ -11,7 +11,7 @@ class AcquiringForm extends Model
     public $transaction_id;
     public $action;
 
-    const ACTION_ROLLBACK_PAY = 1;
+    const ACTION_ROLLBACK_MONEY = 1;
     const ACTION_CANCEL_PAY = 2;
 
     public function rules()
@@ -27,6 +27,14 @@ class AcquiringForm extends Model
         return [
             'action' => 'Выполнить действие',
             'transaction_id' => 'ID транзакции',
+        ];
+    }
+
+    public function getActions()
+    {
+        return [
+            self::ACTION_ROLLBACK_MONEY => 'Вернуть деньги',
+            self::ACTION_CANCEL_PAY => 'Отменить оплату',
         ];
     }
 }
