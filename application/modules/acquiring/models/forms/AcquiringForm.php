@@ -49,7 +49,7 @@ class AcquiringForm extends Model
         // сервис выполняющий по банку операции в зависимости от банка ещё
         // бизнес процессы
 
-        $bank = new Sberbank(new SberbankAuthBasic(\Yii::$app->params['sberbank']['login'], \Yii::$app->params['sberbank']['password']));
+        $bank = new Sberbank(new SberbankAuthBasic(\Yii::$app->params['acquiring']['sberbank']['login'], \Yii::$app->params['acquiring']['sberbank']['password']));
 
         $terminal = new EquiringTerminalService($bank);
         $model = AcquiringOrder::findOne($this->transaction_id);
