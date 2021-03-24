@@ -19,7 +19,6 @@ class AcquiringBackendController extends MainBackendController
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
 
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -33,9 +32,23 @@ class AcquiringBackendController extends MainBackendController
         $actionForm = new AcquiringForm();
 
 
+        if (Yii::$app->request->isPost) {
+            if ($actionForm->load(Yii::$app->request->post())) {
+                if ($actionForm->validate() && $actionForm->doAction()) {
+                }
+            }
+        }
+
+
         return $this->render('update', [
             'model' => $model,
             'actionForm' => $actionForm
         ]);
+    }
+
+    public function doAction()
+    {
+        // сервис выполняющий по банку операции в зависимости от банка ещё
+        // бизнес процессы
     }
 }
