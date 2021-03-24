@@ -2,23 +2,30 @@
 
 namespace app\modules\acquiring;
 
+use yii\helpers\Url;
+
 /**
  * acquiring module definition class
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\acquiring\controllers';
+    private $name = 'Эквайринг';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Оплаты', 'url' => Url::to(['/admin/acquiring/acquiring-backend/index'])],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }
