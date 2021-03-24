@@ -3,6 +3,7 @@
 
 namespace app\modules\acquiring\controllers;
 
+use app\modules\acquiring\models\forms\AcquiringForm;
 use app\modules\acquiring\models\search\AcquiringOrderSearch;
 use Yii;
 use yii\web\Controller;
@@ -41,27 +42,12 @@ class AcquiringBackendController extends MainBackendController
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
 
+        $form = new AcquiringForm();
 
-        if (Yii::$app->request->isPost) {
-            if ($model->load(Yii::$app->request->post())) {
-                if ($model->validate() && $model->save()) {
-                    Alert::setSuccessNotify('Элемент успешно обновлён.');
-                    return $this->refresh();
-                }
-            }
-        }
 
         return $this->render('update', [
-            'model' => $model
+            'model' => $model,
+            'form' => $form
         ]);
-    }
-
-    public function actionDelete($id)
-    {
-//        if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
-//
-//        if ($model->delete()) Alert::setSuccessNotify('Элмент успешно удалён');
-
-        return $this->redirect(['index']);
     }
 }
