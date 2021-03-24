@@ -6,8 +6,9 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\modules\seo\models\tools\Title;
 
-$this->title = \app\modules\seo\models\tools\Title::show('Оплата по заказу #' . $model->order_id);
+$this->title = Title::show('Оплата по заказу #' . $model->order_id);
 ?>
 <?php $form = ActiveForm::begin(); ?>
 <?php $form->field($actionForm, 'transaction_id'); ?>
