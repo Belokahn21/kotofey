@@ -42,4 +42,9 @@ class AcquiringOrder extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public static function findOneByBankId($id)
+    {
+        return static::findOne(['identifier_id' => $id]);
+    }
 }

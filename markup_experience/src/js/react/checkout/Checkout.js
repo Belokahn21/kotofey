@@ -118,6 +118,8 @@ class Checkout extends Component {
 
         if (total < 0) total = 0;
 
+        if (total < 500) total += 100;
+
         this.setState({
             total: total
         });

@@ -13,21 +13,21 @@ class GroupBuyWidget extends Widget
 
     public function run()
     {
-        $groupedData = array();
-        $orders = Order::find()->all();
-
-        foreach ($orders as $order) {
-            if (!empty($order->phone)) {
-                $groupedData[$order->phone] = null;
-            }
-        }
-
-        $this->loadOrderItems($groupedData);
-        $this->groupItems($groupedData);
-
-        return $this->render($this->view, [
-            'groupedData' => $groupedData
-        ]);
+//        $groupedData = array();
+//        $orders = Order::find()->all();
+//
+//        foreach ($orders as $order) {
+//            if (!empty($order->phone)) {
+//                $groupedData[$order->phone] = null;
+//            }
+//        }
+//
+//        $this->loadOrderItems($groupedData);
+//        $this->groupItems($groupedData);
+//
+//        return $this->render($this->view, [
+//            'groupedData' => $groupedData
+//        ]);
     }
 
     public function loadOrderItems(array &$data)

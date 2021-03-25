@@ -23,7 +23,7 @@ echo GridView::widget([
             'attribute' => 'order_id',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::a('Заказ #' . $model->id, Url::to(['/admin/order/order-backend/update', 'id' => $model->id]));
+                return Html::a('Заказ #' . $model->order_id, Url::to(['/admin/order/order-backend/update', 'id' => $model->order_id]));
             }
         ],
         'identifier_id',

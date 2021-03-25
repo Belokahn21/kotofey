@@ -54,7 +54,7 @@ class EquiringTerminalService
 
         $curl = new Curl();
         $this->extendParams($this->paramRequest, [
-            'orderNumber' => $order->id . '-test-2021',
+            'orderNumber' => $order->id . '-test1-2021',
             'currency' => 643,
             'email' => $order->email,
             'phone' => $order->phone,
