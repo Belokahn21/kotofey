@@ -100,7 +100,7 @@ class EquiringTerminalService
         $curl = new Curl();
         $this->extendParams($this->paramRequest, [
             'orderId' => $order->identifier_id,
-            'merchantLogin' => 'T2222889641',
+            'merchantLogin' => "T2222889641",
         ]);
 
         return Json::decode($curl->post(self::DECLINE, $this->paramRequest));
