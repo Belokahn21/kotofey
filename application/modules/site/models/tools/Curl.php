@@ -12,7 +12,6 @@ class Curl
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_POST, true);
-//            var_dump(curl_getinfo($curl, CURLINFO_EFFECTIVE_URL));
             curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
             $out = curl_exec($curl);
             curl_close($curl);

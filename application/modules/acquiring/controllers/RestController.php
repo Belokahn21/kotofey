@@ -37,10 +37,21 @@ class RestController extends ActiveController
     {
         $data = \Yii::$app->request->post();
         $order_id = $data['order_id'];
+        $order = Order::findOne($order_id);
 
 
         $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic(\Yii::$app->params['acquiring']['sberbank']['login'], \Yii::$app->params['acquiring']['sberbank']['password'])));
-        return $terminal->registerOrderToSite(Order::findOne($order_id));
+
+        $result = $terminal->createOrder($order);
+
+
+        if (!is_array($result) || !array_key_exists('orderId', $result) || !array_key_exists('formUrl', $result)) return $result;
+
+        $successSaveEquiring = $terminal->saveHistoryPaymentTransaction($order, $result['orderId']);
+
+        if ($successSaveEquiring['status'] == 200) return $result;
+
+        return $successSaveEquiring;
     }
 
     public function actionView($id)

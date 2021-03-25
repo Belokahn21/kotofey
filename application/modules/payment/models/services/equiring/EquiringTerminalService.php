@@ -28,21 +28,6 @@ class EquiringTerminalService
         $this->bank = $paymentBank;
     }
 
-    public function registerOrderToSite(Order $order)
-    {
-        $result = $this->createOrder($order);
-
-
-        if (!is_array($result) || !array_key_exists('orderId', $result) || !array_key_exists('formUrl', $result)) return $result;
-
-        $successSaveEquiring = $this->saveHistoryPaymentTransaction($order, $result['orderId']);
-
-        if ($successSaveEquiring['status'] == 200) {
-            return $result;
-        }
-
-        return $successSaveEquiring;
-    }
 
     public function createOrderTest()
     {
@@ -75,7 +60,6 @@ class EquiringTerminalService
             'phone' => $order->phone,
             'amount' => OrderHelper::orderSummary($order) * 100,
             'returnUrl' => System::fullDomain() . Url::to('/payment/result/'),
-//            'returnUrl' => Url::to('/payment/result/'),
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
