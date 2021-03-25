@@ -22,6 +22,7 @@ return [
         'sberbank' => [
             'login' => 'T2222889641-api',
             'password' => 'T2222889641',
+            'merchantLogin' => 'T2222889641',
         ]
     ],
     'bonus_by_buy' => false,

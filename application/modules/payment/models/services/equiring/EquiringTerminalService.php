@@ -28,7 +28,7 @@ class EquiringTerminalService
         $this->bank = $paymentBank;
     }
 
-    public function registerOrder(Order $order)
+    public function registerOrderToSite(Order $order)
     {
         $result = $this->createOrder($order);
 
@@ -42,6 +42,25 @@ class EquiringTerminalService
         }
 
         return $successSaveEquiring;
+    }
+
+    public function createOrderTest()
+    {
+
+        $this->bank->getAuthParams($this->paramRequest);
+
+        $curl = new Curl();
+        $this->extendParams($this->paramRequest, [
+            'orderNumber' => '538-test-2021',
+            'currency' => 643,
+            'email' => 'demo@demo.ru',
+            'phone' => '88005553535',
+            'amount' => 1500 * 100,
+            'returnUrl' => System::fullDomain() . Url::to('/payment/result/'),
+//            'returnUrl' => Url::to('/payment/result/'),
+        ]);
+
+        return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
     }
 
     public function createOrder(Order $order)
@@ -81,7 +100,7 @@ class EquiringTerminalService
         $curl = new Curl();
         $this->extendParams($this->paramRequest, [
             'orderId' => $order->identifier_id,
-            'merchantLogin' => '',
+            'merchantLogin' => 'T2222889641',
         ]);
 
         return Json::decode($curl->post(self::DECLINE, $this->paramRequest));

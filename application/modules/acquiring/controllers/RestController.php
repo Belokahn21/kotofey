@@ -40,7 +40,7 @@ class RestController extends ActiveController
 
 
         $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic(\Yii::$app->params['acquiring']['sberbank']['login'], \Yii::$app->params['acquiring']['sberbank']['password'])));
-        return $terminal->registerOrder(Order::findOne($order_id));
+        return $terminal->registerOrderToSite(Order::findOne($order_id));
     }
 
     public function actionView($id)
