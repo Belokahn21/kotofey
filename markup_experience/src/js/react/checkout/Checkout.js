@@ -208,12 +208,6 @@ class Checkout extends Component {
 
                         {/*{deliveryService}*/}
 
-                        <div className="checkout-form__title">Промокод и бонусы</div>
-                        <div className="checkout-form__group-row">
-                            <PromocodeField promocode={this.state.promocode} updatePoromocode={this.updatePoromocode.bind(this)} refreshBasket={this.refreshBasket.bind(this)}/>
-                            {this.state.user !== null ? <UserBonusField usedBonus={this.state.usedBonus} refreshBasket={this.refreshBasket.bind(this)} updateUsedBonus={(value) => this.setState({usedBonus: value})} accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}
-                        </div>
-
 
                         <div className="checkout-form__title">Время и дата доставки</div>
                         <div className="checkout-form__group-row">
@@ -234,8 +228,6 @@ class Checkout extends Component {
                         <div className="checkout-form__group-row">
                             <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
                             <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
-                        </div>
-                        <div className="checkout-form__group-row">
                             <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
                             <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
                         </div>
@@ -247,6 +239,12 @@ class Checkout extends Component {
                         <div className="checkout-form__title">Укажите способ оплаты</div>
                         <Variants unsetError={this.unsetError.bind(this)} errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
 
+
+                        <div className="checkout-form__title">Промокод и бонусы</div>
+                        <div className="checkout-form__group-row">
+                            <PromocodeField promocode={this.state.promocode} updatePoromocode={this.updatePoromocode.bind(this)} refreshBasket={this.refreshBasket.bind(this)}/>
+                            {this.state.user !== null ? <UserBonusField usedBonus={this.state.usedBonus} refreshBasket={this.refreshBasket.bind(this)} updateUsedBonus={(value) => this.setState({usedBonus: value})} accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}
+                        </div>
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
                     </form>
                 </div>
