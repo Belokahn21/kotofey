@@ -59,7 +59,8 @@ class EquiringTerminalService
             'email' => $order->email,
             'phone' => $order->phone,
             'amount' => OrderHelper::orderSummary($order) * 100,
-            'returnUrl' => System::fullDomain() . Url::to('/payment/result/'),
+            'returnUrl' => System::fullDomain() . Url::to('/payment/success/'),
+            'failUrl' => System::fullDomain() . Url::to('/payment/fail/'),
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
