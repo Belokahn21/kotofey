@@ -2,6 +2,7 @@ import React from 'react';
 import Price from "../../tools/Price";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
+import ProductForm from "../ProductForm/ProductForm";
 
 class CheckoutBasketElement extends React.Component {
     constructor(props) {
@@ -38,23 +39,12 @@ class CheckoutBasketElement extends React.Component {
                 </div>
                 {!element.article ? '' : <div className="light-checkout-list__article">Артикул: {element.article}</div>}
             </div>
-            {!element.id ? '' : <div itemProp="offers" itemScope="" itemType="http://schema.org/Offer">
-                <form className="product-calc js-product-calc">
-                    <input type="hidden" readOnly="" name="product_id" value={element.id}/>
-                    <div className="product-calc__control-group">
-                        <input type="hidden" name="count" className="product-calc__count js-product-calc-price" value={element.id}/>
-                        <div className="div">
-                            <button className="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                            <input name="count" type="text" className="product-calc__count js-product-calc-amount" defaultValue="1" placeholder="1"/>
-                            <button className="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
-
-                            <div className="product-calc__price-info">
-                                <div className="product-calc__price-info-normal">Цена за товар: {Price.format(element.price)}₽</div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>}
+            {!element.id ? '' : <ProductForm element={element} options={{
+                'showButton': false,
+                'showInfo': false,
+                'showOneClick': false,
+                'showPrice': true,
+            }}/>}
         </li>
     }
 }
