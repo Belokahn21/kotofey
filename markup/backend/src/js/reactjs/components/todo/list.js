@@ -1,6 +1,6 @@
 import React from 'react';
 import config from '../../config';
-import ConvertDate from '../../../ecmascript6/block/ConvertDate';
+import ConvertDate from '../../../es6/block/ConvertDate'
 
 class TodoList extends React.Component {
 

@@ -6,4 +6,4 @@ class ConvertDate {
     }
 }
 
-module.exports = ConvertDate;
+export default ConvertDate;
