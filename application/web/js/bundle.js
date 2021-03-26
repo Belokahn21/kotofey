@@ -4766,6 +4766,147 @@ if (elements) {
 
 /***/ }),
 
+/***/ "./src/js/react/ProductForm/ProductForm.js":
+/*!*************************************************!*\
+  !*** ./src/js/react/ProductForm/ProductForm.js ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _tools_Price__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/Price */ "./src/js/tools/Price.js");
+/* harmony import */ var _checkout_CheckoutBasket__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../checkout/CheckoutBasket */ "./src/js/react/checkout/CheckoutBasket.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var ProductForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(ProductForm, _React$Component);
+
+  var _super = _createSuper(ProductForm);
+
+  function ProductForm(props) {
+    var _this;
+
+    _classCallCheck(this, ProductForm);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      count: _this.props.element.count
+    };
+    return _this;
+  }
+
+  _createClass(ProductForm, [{
+    key: "handlePlus",
+    value: function handlePlus(e) {
+      var count = this.state.count;
+      count = parseInt(count) + 1;
+      this.setState({
+        count: count
+      });
+      this.props.updateBasketItem(this.props.element.id, count);
+    }
+  }, {
+    key: "handleMinus",
+    value: function handleMinus(e) {
+      var count = this.state.count;
+      count = parseInt(count) - 1;
+      this.setState({
+        count: count
+      });
+      this.props.updateBasketItem(this.props.element.id, count);
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      var count = parseInt(e.target.value);
+      this.setState({
+        count: count
+      });
+      this.props.updateBasketItem(this.props.element.id, count);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var element = this.props.element,
+          options = this.props.options;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        itemProp: "offers",
+        itemScope: "",
+        itemType: "http://schema.org/Offer"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "product-calc"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "hidden",
+        readOnly: "",
+        name: "product_id",
+        value: element.id
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "product-calc__control-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "hidden",
+        name: "count",
+        className: "product-calc__count",
+        value: element.id
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "div"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "product-calc__control product-calc__minus",
+        onClick: this.handleMinus.bind(this),
+        type: "button"
+      }, "-"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        name: "count",
+        type: "text",
+        className: "product-calc__count js-product-calc-amount",
+        onChange: this.handleChange.bind(this),
+        value: this.state.count,
+        placeholder: this.state.count
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "product-calc__control product-calc__plus",
+        onClick: this.handlePlus.bind(this),
+        type: "button"
+      }, "+"), options.showPrice !== true ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "product-calc__price-info"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "product-calc__price-info-normal"
+      }, "\u0426\u0435\u043D\u0430 \u0437\u0430 \u0442\u043E\u0432\u0430\u0440: ", _tools_Price__WEBPACK_IMPORTED_MODULE_1__.default.format(element.price), "\u20BD"))))));
+    }
+  }]);
+
+  return ProductForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductForm);
+
+/***/ }),
+
 /***/ "./src/js/react/checkout/Checkout.js":
 /*!*******************************************!*\
   !*** ./src/js/react/checkout/Checkout.js ***!
@@ -4956,7 +5097,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
     value: function calcTotal() {
       var total = 0;
       this.state.basket.map(function (element, key) {
-        total += parseInt(element.price);
+        total += parseInt(element.price) * parseInt(element.count);
       });
       if (this.state.usedBonus > 0) total -= parseInt(this.state.usedBonus);
       if (this.state.promocode !== null) total = total - Math.round(total * (this.state.promocode.discount / 100));
@@ -4972,6 +5113,20 @@ var Checkout = /*#__PURE__*/function (_Component) {
       var basketItems = this.state.basket;
       basketItems.map(function (product, key) {
         if (parseInt(product.id) === parseInt(product_id)) basketItems.splice(key, 1);
+      });
+      this.setState({
+        basket: basketItems
+      });
+      this.calcTotal();
+    }
+  }, {
+    key: "updateBasketItem",
+    value: function updateBasketItem(product_id, count) {
+      var basketItems = this.state.basket;
+      basketItems.map(function (product, key) {
+        if (parseInt(product.id) === parseInt(product_id)) {
+          basketItems[key].count = count;
+        }
       });
       this.setState({
         basket: basketItems
@@ -5208,6 +5363,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         className: "page__right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutSummary__WEBPACK_IMPORTED_MODULE_3__.default, {
         refreshBasket: this.refreshBasket.bind(this),
+        updateBasketItem: this.updateBasketItem.bind(this),
         total: this.state.total,
         basket: this.state.basket
       })));
@@ -5297,6 +5453,7 @@ var CheckoutBasket = /*#__PURE__*/function (_Component) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutBasketElement__WEBPACK_IMPORTED_MODULE_1__.default, {
           key: key,
           element: element,
+          updateBasketItem: _this.props.updateBasketItem,
           refreshBasket: _this.props.refreshBasket
         });
       }));
@@ -5325,6 +5482,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_Price__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/Price */ "./src/js/tools/Price.js");
 /* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/config.js");
+/* harmony import */ var _ProductForm_ProductForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ProductForm/ProductForm */ "./src/js/react/ProductForm/ProductForm.js");
+/* harmony import */ var _CheckoutBasket__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CheckoutBasket */ "./src/js/react/checkout/CheckoutBasket.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5346,6 +5505,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -5414,43 +5575,17 @@ var CheckoutBasketElement = /*#__PURE__*/function (_React$Component) {
         href: element.detailUrl
       }, element.name)), !element.article ? '' : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "light-checkout-list__article"
-      }, "\u0410\u0440\u0442\u0438\u043A\u0443\u043B: ", element.article)), !element.id ? '' : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        itemProp: "offers",
-        itemScope: "",
-        itemType: "http://schema.org/Offer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
-        className: "product-calc js-product-calc"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "hidden",
-        readOnly: "",
-        name: "product_id",
-        value: element.id
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "product-calc__control-group"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "hidden",
-        name: "count",
-        className: "product-calc__count js-product-calc-price",
-        value: element.id
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "product-calc__control product-calc__minus js-product-calc-minus",
-        type: "button"
-      }, "-"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        name: "count",
-        type: "text",
-        className: "product-calc__count js-product-calc-amount",
-        defaultValue: "1",
-        placeholder: "1"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        className: "product-calc__control product-calc__plus js-product-calc-plus",
-        type: "button"
-      }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "product-calc__price-info"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "product-calc__price-info-normal"
-      }, "\u0426\u0435\u043D\u0430 \u0437\u0430 \u0442\u043E\u0432\u0430\u0440: ", _tools_Price__WEBPACK_IMPORTED_MODULE_1__.default.format(element.price), "\u20BD")))))));
+      }, "\u0410\u0440\u0442\u0438\u043A\u0443\u043B: ", element.article)), !element.id ? '' : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProductForm_ProductForm__WEBPACK_IMPORTED_MODULE_4__.default, {
+        key: element.id,
+        updateBasketItem: this.props.updateBasketItem,
+        element: element,
+        options: {
+          'showButton': false,
+          'showInfo': false,
+          'showOneClick': false,
+          'showPrice': true
+        }
+      }));
     }
   }]);
 
@@ -5547,6 +5682,7 @@ var CheckoutSummary = /*#__PURE__*/function (_Component) {
         className: "collapse show",
         id: "collapseSummary"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutBasket__WEBPACK_IMPORTED_MODULE_2__.default, {
+        updateBasketItem: this.props.updateBasketItem,
         refreshBasket: this.props.refreshBasket,
         basket: this.props.basket,
         total: this.props.total

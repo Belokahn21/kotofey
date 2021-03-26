@@ -121,7 +121,7 @@ class Checkout extends Component {
     calcTotal() {
         let total = 0;
         this.state.basket.map((element, key) => {
-            total += parseInt(element.price);
+            total += parseInt(element.price) * parseInt(element.count);
         });
 
         if (this.state.usedBonus > 0) total -= parseInt(this.state.usedBonus);
@@ -143,6 +143,23 @@ class Checkout extends Component {
         basketItems.map((product, key) => {
             if (parseInt(product.id) === parseInt(product_id)) basketItems.splice(key, 1);
         });
+
+        this.setState({
+            basket: basketItems
+        });
+
+        this.calcTotal();
+    }
+
+    updateBasketItem(product_id, count) {
+        let basketItems = this.state.basket;
+
+        basketItems.map((product, key) => {
+            if (parseInt(product.id) === parseInt(product_id)) {
+                basketItems[key].count = count;
+            }
+        });
+
 
         this.setState({
             basket: basketItems
@@ -261,7 +278,7 @@ class Checkout extends Component {
                     </form>
                 </div>
                 <div className="page__right">
-                    <CheckoutSummary refreshBasket={this.refreshBasket.bind(this)} total={this.state.total} basket={this.state.basket}/>
+                    <CheckoutSummary refreshBasket={this.refreshBasket.bind(this)} updateBasketItem={this.updateBasketItem.bind(this)} total={this.state.total} basket={this.state.basket}/>
                 </div>
             </div>
         );

@@ -1,31 +1,40 @@
 import React from 'react';
 import Price from "../../tools/Price";
+import CheckoutBasket from "../checkout/CheckoutBasket";
 
 class ProductForm extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            count: 1
+            count: this.props.element.count
         };
 
     }
 
     handlePlus(e) {
         let count = this.state.count;
-        count = count + 1;
+        count = parseInt(count) + 1;
+
         this.setState({count: count});
+        this.props.updateBasketItem(this.props.element.id, count);
     }
 
     handleMinus(e) {
         let count = this.state.count;
-        count = count - 1;
+        count = parseInt(count) - 1;
+
         this.setState({count: count});
+        this.props.updateBasketItem(this.props.element.id, count);
     }
 
     handleChange(e) {
-        this.setState({count: e.target.value});
+        const count = parseInt(e.target.value);
+
+        this.setState({count: count});
+        this.props.updateBasketItem(this.props.element.id, count);
     }
+
 
     render() {
         const element = this.props.element, options = this.props.options;

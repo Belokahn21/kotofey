@@ -16,7 +16,7 @@ class CheckoutBasket extends Component {
             <ul className="light-checkout-list">
                 {delivery}
                 {this.props.basket.map((element, key) => {
-                    return <CheckoutBasketElement key={key} element={element} refreshBasket={this.props.refreshBasket}/>
+                    return <CheckoutBasketElement key={key} element={element} updateBasketItem={this.props.updateBasketItem} refreshBasket={this.props.refreshBasket}/>
                 })}
             </ul>
         );

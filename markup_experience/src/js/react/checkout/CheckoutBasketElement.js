@@ -3,6 +3,7 @@ import Price from "../../tools/Price";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
 import ProductForm from "../ProductForm/ProductForm";
+import CheckoutBasket from "./CheckoutBasket";
 
 class CheckoutBasketElement extends React.Component {
     constructor(props) {
@@ -39,7 +40,7 @@ class CheckoutBasketElement extends React.Component {
                 </div>
                 {!element.article ? '' : <div className="light-checkout-list__article">Артикул: {element.article}</div>}
             </div>
-            {!element.id ? '' : <ProductForm element={element} options={{
+            {!element.id ? '' : <ProductForm key={element.id} updateBasketItem={this.props.updateBasketItem} element={element} options={{
                 'showButton': false,
                 'showInfo': false,
                 'showOneClick': false,
