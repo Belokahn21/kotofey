@@ -78,10 +78,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                         <?= $order->city ? "г. " . $order->city : null; ?><?= $order->street ? ", ул. " . $order->street : null; ?><?= $order->number_home ? ", дом. " . $order->number_home : null; ?><?= $order->entrance ? ", подъезд. " . $order->entrance : null; ?><?= $order->floor_house ? ", этаж. " . $order->floor_house : null; ?><?= $order->number_appartament ? ", кв. " . $order->number_appartament : null; ?>
                     </div>
                 </div>
-                <div class="profile-order-info__row">
-                    <div class="profile-order-info__key">Дата и время доставки</div>
-                    <div class="profile-order-info__value"><?= $order->dateDelivery->date; ?>, <?= $order->dateDelivery->time; ?></div>
-                </div>
+                <?php if ($order->dateDelivery): ?>
+                    <div class="profile-order-info__row">
+                        <div class="profile-order-info__key">Дата и время доставки</div>
+                        <div class="profile-order-info__value"><?= $order->dateDelivery->date; ?>, <?= $order->dateDelivery->time; ?></div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         <div class="col-6">
