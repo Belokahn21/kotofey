@@ -63,4 +63,4 @@ class TodoForm extends React.Component {
     }
 }
 
-module.exports = TodoForm;
+export default TodoForm;

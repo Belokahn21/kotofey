@@ -72,4 +72,4 @@ class StatisticItem extends React.Component {
 	}
 }
 
-module.exports = StatisticItem;
+export default StatisticItem;

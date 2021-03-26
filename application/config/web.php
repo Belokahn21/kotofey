@@ -127,8 +127,8 @@ $config = [
                 'DELETE api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/delete',
 
                 //backend rest
-                'GET backend/api/<module>' => '<module>/rest-backend/index',
-                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend/show',
+                'GET backend/api/<module>' => '<module>/rest-backend-<controller>/index',
+                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend-<controller>/view',
                 'POST backend/api/<module>' => '<module>/rest/create',
                 'DELETE backend/api/<module>/<id:\d+>' => '<module>/rest/delete',
 

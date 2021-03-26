@@ -2,14 +2,23 @@ build:
 	rm -rf tmp/browser_ext/catalog/dist && cd tmp/browser_ext/catalog && npm run-script build
 
 webpack: webpack-build webpack-copy
+webpack-backend: webpack-build-backend webpack-copy-backend
 
 webpack-copy:
 	cp -R markup/frontend/build/js application/web
 	cp -R markup/frontend/build/css application/web
 	cp -R markup/frontend/build/assets/images application/web
 
+webpack-copy-backend:
+	cp -R markup/backend/build/js application/web
+	cp -R markup/backend/build/css application/web
+	cp -R markup/backend/build/assets/images application/web
+
 webpack-build:
 	cd markup/frontend && npm run build
+
+webpack-build-backend:
+	cd markup/backend && npm run build
 
 gulp-build:
 	rm -rf markup/build/ && rm -rf application/web/css/ && rm -rf application/web/js/ && rm -rf application/web/images/ && cd markup && gulp build

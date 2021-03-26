@@ -10,9 +10,7 @@ class MenuFast extends React.Component {
             items: []
         }
 
-        fetch(url)
-            .then(response => response.json())
-            .then(json => {
+        fetch(url).then(response => response.json()).then(json => {
                 this.setState({
                     items: JSON.parse(json),
                 });
@@ -43,4 +41,4 @@ class MenuFast extends React.Component {
     }
 }
 
-module.exports = MenuFast;
+export default MenuFast;

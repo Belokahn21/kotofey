@@ -45,4 +45,4 @@ class FindProductForm extends React.Component {
     }
 }
 
-module.exports = FindProductForm;
+export default FindProductForm;

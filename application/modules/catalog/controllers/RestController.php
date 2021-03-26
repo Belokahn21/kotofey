@@ -4,15 +4,9 @@ namespace app\modules\catalog\controllers;
 
 
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\search\models\entity\Search;
-use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
-use yii\rest\ActiveController;
-use yii\data\ActiveDataProvider;
-use app\modules\catalog\models\form\CatalogFilter;
 use app\modules\catalog\models\entity\Product;
 use yii\rest\Controller;
 

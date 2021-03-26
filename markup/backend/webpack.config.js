@@ -16,7 +16,7 @@ module.exports = {
     mode: 'development',
     entry: [
         `${PATHS.src}/js/es6/core.js`,
-        `${PATHS.src}/style/scss/style.scss`,
+        `${PATHS.src}/style/scss/style-backend.scss`,
     ],
     devtool: 'source-map',
     devServer: {
@@ -29,7 +29,7 @@ module.exports = {
     },
     output: {
         path: `${PATHS.build}`,
-        filename: 'js/bundle.js',
+        filename: 'js/backend.js',
     },
     plugins: [
         new CopyPlugin({
@@ -40,7 +40,7 @@ module.exports = {
         }),
         new MiniCssExtractPlugin({
             chunkFilename: "css/chunks/[id].css",
-            filename: "css/[name].css",
+            filename: "css/[name]-backend.css",
         }),
         ...PAGES.map(page => new HtmlWebpackPlugin({
             template: `${PAGES_DIR}/${page}`,
