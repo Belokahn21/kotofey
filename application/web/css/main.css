@@ -13907,6 +13907,16 @@ label[for="site-form-pet-avatar"] {
 
 .checkout-form {
   margin-bottom: 40px; }
+  .checkout-form-attention {
+    background-color: white;
+    border: 1px red solid;
+    padding: 5px;
+    margin: 15px 0;
+    border-radius: 7px;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: black; }
   .checkout-form__title {
     font-size: 18px;
     font-weight: 700;

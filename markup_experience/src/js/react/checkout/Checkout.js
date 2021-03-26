@@ -13,7 +13,6 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
-import BuildQuery from "../../tools/BuildQuery";
 
 class Checkout extends Component {
     constructor(props) {
@@ -70,7 +69,10 @@ class Checkout extends Component {
             }
 
             if (data.status === 200) {
-                if (parseInt(this.state.paymentId) === 1) this.paymentService(data.id);
+                if (parseInt(this.state.paymentId) === 1) {
+                    this.paymentService(data.id);
+                    return true;
+                }
 
                 form.reset();
                 this.setState({
