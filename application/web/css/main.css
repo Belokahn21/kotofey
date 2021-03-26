@@ -13919,7 +13919,7 @@ label[for="site-form-pet-avatar"] {
     align-items: flex-start;
     margin: 10px 0; }
     .checkout-form__group-row .checkout-form__label {
-      width: 49%; }
+      padding: 5px; }
   .checkout-form__input, .checkout-form__textarea {
     color: black;
     border: 1px silver solid;

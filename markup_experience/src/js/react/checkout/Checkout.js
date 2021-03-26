@@ -65,6 +65,8 @@ class Checkout extends Component {
                 this.setState({
                     errors: data.errors
                 });
+
+                this.moveToElement(document.querySelectorAll('[aria-invalid="true"]')[0]);
             }
 
             if (data.status === 200) {
@@ -75,6 +77,14 @@ class Checkout extends Component {
                     errors: []
                 });
             }
+        });
+    }
+
+    moveToElement(el) {
+        if (!el) return false;
+
+        el.scrollIntoView({
+            behavior: 'smooth'
         });
     }
 

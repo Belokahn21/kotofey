@@ -170,7 +170,7 @@ class OrderHelper
 
             if (!$product) continue;
 
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->scenario = Product::SCENARIO_STOCK_COUNT;
 
             if ($product->count > 0 && $product->count - $item->count >= 0) $product->count -= $item->count;
 
