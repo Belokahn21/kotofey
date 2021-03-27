@@ -13,7 +13,6 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
-import BuildQuery from "../../tools/BuildQuery";
 
 class Checkout extends Component {
     constructor(props) {
@@ -23,6 +22,7 @@ class Checkout extends Component {
         this.patchTimerEx;
 
         this.state = {
+            orderInfo: null,
             promocode: null,
             excludePayments: [],
             delivery: [],
@@ -33,7 +33,8 @@ class Checkout extends Component {
             usedBonus: 0,
             paymentId: 0,
             deliveryId: 0,
-            user: null
+            user: null,
+            finish: false,
         };
     }
 
@@ -78,8 +79,11 @@ class Checkout extends Component {
 
                 form.reset();
                 this.setState({
-                    errors: []
+                    errors: [],
+                    finish: true,
+                    orderInfo: data.orderInfo
                 });
+                this.moveToElement(document.querySelector('.checkout-react')[0]);
             }
         });
     }
@@ -233,6 +237,58 @@ class Checkout extends Component {
     }
 
     render() {
+
+        if (this.state.finish === true) {
+            return this.finish();
+        }
+
+        return this.dashboard();
+    }
+
+    finish() {
+        return <div className="checkout-success-container">
+            <div className="checkout-success">
+                <div className="checkout-success-header"><i className="fas fa-check-circle"/>Заказ <b>№9987</b> успешно оформлен.</div>
+                <div className="checkout-success-comment">В оближайшее время мы вам перезвоним</div>
+                <div className="order-info">
+                    <div className="order-info__row">
+                        <div className="order-info__key">Время заказа</div>
+                        <div className="order-info__value">27.03.2021</div>
+                    </div>
+                    <div className="order-info__row">
+                        <div className="order-info__key">Статус</div>
+                        <div className="order-info__value">Обрабатывается</div>
+                    </div>
+                    <div className="order-info__row">
+                        <div className="order-info__key">Сумма</div>
+                        <div className="order-info__value">85 633 Р</div>
+                    </div>
+                    <div className="order-info__row">
+                        <div className="order-info__key">Время заказа</div>
+                        <div className="order-info__value">27.03.2021</div>
+                    </div>
+                    <div className="order-info__row">
+                        <div className="order-info__key">Доставка</div>
+                        <div className="order-info__value">По городу</div>
+                    </div>
+                    <div className="order-info__row">
+                        <div className="order-info__key">Оплата</div>
+                        <div className="order-info__value">Наличный расчёт</div>
+                    </div>
+                    <div className="order-info__row">
+                        <div className="order-info__key">Адрес</div>
+                        <div className="order-info__value">656992, Барнаул, ул. Молодежная, д 35, кв 16</div>
+                    </div>
+                </div>
+            </div>
+            <div className="checkout-success-text">
+                <p>Вы можете следить за заказом из <a href="/profile/"><b>личного кабинета</b></a>. Обратите внимание, что для входа потребуется регистрация на сайте.</p>
+                <p>История заказов отслеживается по номеру телефона поэтому не ошибайтесь при вводе регистрационных данных</p>
+            </div>
+        </div>;
+    }
+
+    dashboard() {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService;
 
         if (parseInt(this.state.deliveryId) === 1) {
@@ -293,7 +349,7 @@ class Checkout extends Component {
                     <CheckoutSummary refreshBasket={this.refreshBasket.bind(this)} updateBasketItem={this.updateBasketItem.bind(this)} total={this.state.total} basket={this.state.basket}/>
                 </div>
             </div>
-        );
+        )
     }
 }
 
