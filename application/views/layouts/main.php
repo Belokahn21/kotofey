@@ -131,14 +131,16 @@ $this->beginPage() ?>
     'parentCategories' => $parentCategories
 ]); ?>
 <?= PageUpWidget::widget(); ?>
-<?php
-$signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
-$signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
-?>
-<?= $this->render('include/auth', [
-    'signin' => $signinModel,
-    'signup' => $signupModel,
-]); ?>
+
+<?php if (Yii::$app->user->isGuest) {
+    $signinModel = new User(['scenario' => User::SCENARIO_LOGIN]);
+    $signupModel = new User(['scenario' => User::SCENARIO_INSERT]);
+    echo $this->render('include/auth', [
+        'signin' => $signinModel,
+        'signup' => $signupModel,
+    ]);
+} ?>
+
 <?= $this->render('include/yandex-map') ?>
 <?= Alert::widget(); ?>
 <?php /* <script src="/js/frontend-core.min.js"></script> */ ?>
