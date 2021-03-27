@@ -21,7 +21,10 @@ class ProductForm extends React.Component {
     }
 
     handleMinus(e) {
-        let count = this.state.count;
+        let count = parseInt(this.state.count);
+
+        if (count - 1 === 0) return false;
+
         count = parseInt(count) - 1;
 
         this.setState({count: count});

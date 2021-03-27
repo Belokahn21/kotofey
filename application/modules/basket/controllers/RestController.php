@@ -6,6 +6,8 @@ use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrdersItems;
+use app\modules\site\models\tools\Debug;
+use yii\helpers\Json;
 use yii\rest\ActiveController;
 use yii\web\HttpException;
 
@@ -76,9 +78,19 @@ class RestController extends ActiveController
 
     public function actionUpdate()
     {
-        $models = file_get_contents('php://input');
+        $models = Json::decode(file_get_contents('php://input'));
 
-        Debug::p($models);
+        foreach ($models as $model) {
+            $orderItemModel = new OrdersItems();
+            $orderItemModel->setAttributes($model);
+
+            $orderItemModel->product_id = $model['id'];
+
+            if ($orderItemModel->validate()) {
+                $basket = new Basket();
+                $basket->update($orderItemModel, $orderItemModel->count);
+            }
+        }
 
         return $models;
     }

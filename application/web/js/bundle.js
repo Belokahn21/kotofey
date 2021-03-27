@@ -4836,7 +4836,8 @@ var ProductForm = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleMinus",
     value: function handleMinus(e) {
-      var count = this.state.count;
+      var count = parseInt(this.state.count);
+      if (count - 1 === 0) return false;
       count = parseInt(count) - 1;
       this.setState({
         count: count
@@ -4980,6 +4981,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.modelName = 'Order';
+    _this.patchTimerEx;
     _this.state = {
       promocode: null,
       excludePayments: [],
@@ -5130,12 +5132,14 @@ var Checkout = /*#__PURE__*/function (_Component) {
           basketItems[key].count = count;
         }
       });
-      console.log(basketItems);
-      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.update(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBasket, {
-        body: JSON.stringify(basketItems)
-      }).then(function (data) {
-        console.log(data);
-      });
+      if (this.patchTimerEx) clearTimeout(this.patchTimerEx);
+      this.patchTimerEx = setTimeout(function () {
+        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.update(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBasket, {
+          body: JSON.stringify(basketItems)
+        }).then(function (data) {
+          console.log(data);
+        });
+      }, 500);
       this.setState({
         basket: basketItems
       });

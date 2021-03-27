@@ -20,6 +20,7 @@ class Checkout extends Component {
         super(props);
 
         this.modelName = 'Order';
+        this.patchTimerEx;
 
         this.state = {
             promocode: null,
@@ -161,12 +162,15 @@ class Checkout extends Component {
             }
         });
 
-        console.log(basketItems);
-        RestRequest.update(config.restBasket, {
-            body: JSON.stringify(basketItems)
-        }).then(data => {
-            console.log(data);
-        });
+
+        if (this.patchTimerEx) clearTimeout(this.patchTimerEx);
+        this.patchTimerEx = setTimeout(() => {
+            RestRequest.update(config.restBasket, {
+                body: JSON.stringify(basketItems)
+            }).then(data => {
+                console.log(data);
+            });
+        }, 500);
 
 
         this.setState({
