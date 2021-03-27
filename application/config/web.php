@@ -112,6 +112,16 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                //backend rest
+                'GET backend/api/<module>' => '<module>/rest-backend/index',
+
+                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend/view',
+
+                'POST backend/api/<module>' => '<module>/rest-backend/create',
+
+                'DELETE backend/api/<module>/<id:\d+>' => '<module>/rest-backend/delete',
+
+
                 //frontend rest
                 'GET api/<module>/<id[\w]+>' => '<module>/rest/view',
                 'GET api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/view',
@@ -123,14 +133,11 @@ $config = [
                 'POST api/<module>' => '<module>/rest/create',
                 'POST api/<module>/<controller>' => '<module>/<controller>-rest/create',
 
+                'PATCH api/<module>' => '<module>/rest/update',
+                'PATCH api/<module>/<controller>' => '<module>/<controller>-rest/update',
+
                 'DELETE api/<module>/<id[\w]+>' => '<module>/rest/delete',
                 'DELETE api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/delete',
-
-                //backend rest
-                'GET backend/api/<module>' => '<module>/rest-backend-<controller>/index',
-                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend-<controller>/view',
-                'POST backend/api/<module>' => '<module>/rest/create',
-                'DELETE backend/api/<module>/<id:\d+>' => '<module>/rest/delete',
 
                 '/' => 'site/site/index',
                 'delivery' => 'site/site/delivery',

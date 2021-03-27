@@ -2,9 +2,7 @@
 
 namespace app\modules\promocode\controllers;
 
-use app\modules\promocode\models\entity\Promocode;
 use yii\filters\Cors;
-use yii\rest\ActiveController;
 use yii\rest\Controller;
 
 class RestController extends Controller

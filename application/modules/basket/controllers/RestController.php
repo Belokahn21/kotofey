@@ -17,7 +17,7 @@ class RestController extends ActiveController
     public function actions()
     {
         $actions = parent::actions();
-        unset($actions['index'], $actions['create'], $actions['delete']);
+        unset($actions['index'], $actions['create'], $actions['delete'], $actions['update']);
 
         return $actions;
     }
@@ -72,6 +72,15 @@ class RestController extends ActiveController
             'status' => 200,
             'count' => Basket::count()
         ];
+    }
+
+    public function actionUpdate()
+    {
+        $models = file_get_contents('php://input');
+
+        Debug::p($models);
+
+        return $models;
     }
 
     public function actionIndex()

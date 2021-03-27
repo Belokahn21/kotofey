@@ -14,6 +14,13 @@ class RestRequest {
         }).then(response => response.json());
     }
 
+    static update(url, options) {
+        return fetch(url, {
+            method: 'PATCH',
+            ...options
+        }).then(response => response.json());
+    }
+
     static delete(url, id) {
         return fetch(`${url}${id}/`, {
             method: 'DELETE',

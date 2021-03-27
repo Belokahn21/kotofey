@@ -2965,13 +2965,15 @@ module.exports = ProductVendorFill;
 /*!**************************************!*\
   !*** ./src/js/es6/block/SetPrice.js ***!
   \**************************************/
-/***/ ((module, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 /* harmony import */ var _reactjs_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../reactjs/config */ "./src/js/reactjs/config.js");
 /* harmony import */ var _reactjs_config__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reactjs_config__WEBPACK_IMPORTED_MODULE_0__);
-/* module decorator */ module = __webpack_require__.hmd(module);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -3056,7 +3058,7 @@ var SetPrice = /*#__PURE__*/function () {
   return SetPrice;
 }();
 
-module.exports = SetPrice;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SetPrice);
 
 /***/ }),
 
@@ -4525,13 +4527,13 @@ module.exports = {
   restMenu: url + '/backend/api/menu/',
   restMenuFast: url + '/backend/api/menu_fast/',
   restSearchGet: url + '/rest/product/get/',
-  restUserGet: url + '/user/rest-backend/get/',
-  restTodoGet: url + '/todo/rest-backend/get/',
+  restUserGet: url + '/backend/api/user/',
+  restTodoGet: url + '/backend/api/todo/',
   restCdekCity: url + '/cdek/rest-city/get/',
   restCdekSize: url + '/cdek/rest-size/get/',
   restCdekDeliveryPrice: url + '/cdek/rest-calculator/get/',
   restCatalogFrontGet: url + '/catalog/rest/get/',
-  restTodoAdd: url + '/todo/rest-backend/add/',
+  restTodoAdd: url + '/backend/api/todo/',
   ajaxSaveProductMark: url + '/ajax/mark/'
 };
 
@@ -59362,16 +59364,13 @@ module.exports = warning;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			loaded: false,
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
@@ -59412,21 +59411,6 @@ module.exports = warning;
 /******/ 				if (typeof window === 'object') return window;
 /******/ 			}
 /******/ 		})();
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/harmony module decorator */
-/******/ 	(() => {
-/******/ 		__webpack_require__.hmd = (module) => {
-/******/ 			module = Object.create(module);
-/******/ 			if (!module.children) module.children = [];
-/******/ 			Object.defineProperty(module, 'exports', {
-/******/ 				enumerable: true,
-/******/ 				set: () => {
-/******/ 					throw new Error('ES Modules may not assign module.exports or exports.*, Use ESM export syntax, instead: ' + module.id);
-/******/ 				}
-/******/ 			});
-/******/ 			return module;
-/******/ 		};
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

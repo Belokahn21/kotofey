@@ -13,6 +13,7 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
+import BuildQuery from "../../tools/BuildQuery";
 
 class Checkout extends Component {
     constructor(props) {
@@ -158,6 +159,13 @@ class Checkout extends Component {
             if (parseInt(product.id) === parseInt(product_id)) {
                 basketItems[key].count = count;
             }
+        });
+
+        console.log(basketItems);
+        RestRequest.update(config.restBasket, {
+            body: JSON.stringify(basketItems)
+        }).then(data => {
+            console.log(data);
         });
 
 

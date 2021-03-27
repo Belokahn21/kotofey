@@ -29,7 +29,7 @@ class RestBackendController extends Controller
     protected function verbs()
     {
         return [
-            'get' => ['GET'],
+            'index' => ['GET'],
             'add' => ['POST'],
         ];
     }
@@ -54,7 +54,7 @@ class RestBackendController extends Controller
         }
     }
 
-    public function actionGet()
+    public function actionIndex()
     {
         return Json::encode($this->modelClass::find()->all());
     }

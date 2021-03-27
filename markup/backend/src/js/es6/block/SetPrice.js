@@ -73,4 +73,4 @@ class SetPrice {
 }
 
 
-module.exports = SetPrice;
+export default SetPrice;
