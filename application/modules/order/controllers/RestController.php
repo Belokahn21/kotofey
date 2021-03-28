@@ -6,6 +6,9 @@ namespace app\modules\order\controllers;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\Order;
+use app\modules\order\models\helpers\OrderHelper;
+use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Price;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -63,7 +66,15 @@ class RestController extends ActiveController
             return $response;
         }
 
-        $response['id'] = $order->id;
+        $response['data']['order'] = [
+            'id' => $order->id,
+            'status' => OrderHelper::getStatus($order),
+            'delivery' => OrderHelper::getDelivery($order),
+            'payment' => OrderHelper::getPayment($order),
+            'created' => date('d.m.Y H:i:s', $order->created_at),
+            'address' => (!$order->city ? '' : 'г. ' . $order->city) . (!$order->street ? '' : ', ул. ' . $order->street) . (!$order->number_home ? '' : ', д. ' . $order->number_home) . (!$order->entrance ? '' : ', п. ' . $order->entrance) . (!$order->floor_house ? '' : ', эт. ' . $order->floor_house) . (!$order->number_appartament ? '' : ', кв. ' . $order->number_appartament),
+            'total' => Price::format(OrderHelper::orderSummary($order)) . ' ' . Currency::getInstance()->show(),
+        ];
         return $response;
     }
 

@@ -22,7 +22,7 @@ class Checkout extends Component {
         this.patchTimerEx;
 
         this.state = {
-            orderInfo: null,
+            order: null,
             promocode: null,
             excludePayments: [],
             delivery: [],
@@ -73,7 +73,7 @@ class Checkout extends Component {
 
             if (data.status === 200) {
                 if (parseInt(this.state.paymentId) === 1) {
-                    this.paymentService(data.id);
+                    this.paymentService(data.data.order.id);
                     return true;
                 }
 
@@ -81,7 +81,7 @@ class Checkout extends Component {
                 this.setState({
                     errors: [],
                     finish: true,
-                    orderInfo: data.orderInfo
+                    order: data.data.order
                 });
                 this.moveToElement(document.querySelector('.checkout-react')[0]);
             }
@@ -246,38 +246,35 @@ class Checkout extends Component {
     }
 
     finish() {
+        const {order} = this.state;
         return <div className="checkout-success-container">
             <div className="checkout-success">
-                <div className="checkout-success-header"><i className="fas fa-check-circle"/>Заказ <b>№9987</b> успешно оформлен.</div>
+                <div className="checkout-success-header"><i className="fas fa-check-circle"/>Заказ <b>№{order.id}</b> успешно оформлен.</div>
                 <div className="checkout-success-comment">В оближайшее время мы вам перезвоним</div>
                 <div className="order-info">
                     <div className="order-info__row">
-                        <div className="order-info__key">Время заказа</div>
-                        <div className="order-info__value">27.03.2021</div>
+                        <div className="order-info__key">Время покупки</div>
+                        <div className="order-info__value">{order.created}</div>
                     </div>
                     <div className="order-info__row">
                         <div className="order-info__key">Статус</div>
-                        <div className="order-info__value">Обрабатывается</div>
+                        <div className="order-info__value">{order.status}</div>
                     </div>
                     <div className="order-info__row">
                         <div className="order-info__key">Сумма</div>
-                        <div className="order-info__value">85 633 Р</div>
-                    </div>
-                    <div className="order-info__row">
-                        <div className="order-info__key">Время заказа</div>
-                        <div className="order-info__value">27.03.2021</div>
+                        <div className="order-info__value">{order.total}</div>
                     </div>
                     <div className="order-info__row">
                         <div className="order-info__key">Доставка</div>
-                        <div className="order-info__value">По городу</div>
+                        <div className="order-info__value">{order.delivery}</div>
                     </div>
                     <div className="order-info__row">
                         <div className="order-info__key">Оплата</div>
-                        <div className="order-info__value">Наличный расчёт</div>
+                        <div className="order-info__value">{order.payment}</div>
                     </div>
                     <div className="order-info__row">
                         <div className="order-info__key">Адрес</div>
-                        <div className="order-info__value">656992, Барнаул, ул. Молодежная, д 35, кв 16</div>
+                        <div className="order-info__value">{order.address}</div>
                     </div>
                 </div>
             </div>
