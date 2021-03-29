@@ -5304,14 +5304,6 @@ var Checkout = /*#__PURE__*/function (_Component) {
         models: this.state.delivery
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
-      }, "\u0412\u0440\u0435\u043C\u044F \u0438 \u0434\u0430\u0442\u0430 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_DateDeliveryField__WEBPACK_IMPORTED_MODULE_8__.default, {
-        errors: this.state.errors
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_TimeDeliveryField__WEBPACK_IMPORTED_MODULE_5__.default, {
-        errors: this.state.errors
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__title"
       }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -5422,24 +5414,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         models: this.state.payment.filter(function (element) {
           return !_this7.state.excludePayments.includes(element.id);
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__title"
-      }, "\u041F\u0440\u043E\u043C\u043E\u043A\u043E\u0434 \u0438 \u0431\u043E\u043D\u0443\u0441\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_PromocodeField__WEBPACK_IMPORTED_MODULE_6__.default, {
-        promocode: this.state.promocode,
-        updatePoromocode: this.updatePoromocode.bind(this),
-        refreshBasket: this.refreshBasket.bind(this)
-      }), this.state.user !== null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_field_UserBonusField__WEBPACK_IMPORTED_MODULE_7__.default, {
-        usedBonus: this.state.usedBonus,
-        refreshBasket: this.refreshBasket.bind(this),
-        updateUsedBonus: function updateUsedBonus(value) {
-          return _this7.setState({
-            usedBonus: value
-          });
-        },
-        accountId: this.state.user.phone
-      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CheckoutUserBonusAuth__WEBPACK_IMPORTED_MODULE_9__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "add-basket checkout-form__submit"
       }, buttonLabel))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

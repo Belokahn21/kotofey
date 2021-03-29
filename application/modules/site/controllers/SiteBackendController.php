@@ -2,13 +2,27 @@
 
 namespace app\modules\site\controllers;
 
+use app\modules\site\models\entity\ModuleSettings;
 use app\modules\site\models\forms\ConsoleForm;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 
 class SiteBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
+
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['console', 'settings'], 'roles' => ['Administrator']],
+        ]);
+
+        return $parentAccess;
+    }
 
     public function actionConsole()
     {
@@ -24,6 +38,15 @@ class SiteBackendController extends MainBackendController
 
         return $this->render('console', [
             'console' => $console
+        ]);
+    }
+
+    public function actionSettings($id)
+    {
+        $moduleParams = ModuleSettings::find()->where(['module_id' => $id])->all();
+
+        return $this->render('settings', [
+            'moduleParams' => $moduleParams
         ]);
     }
 }
