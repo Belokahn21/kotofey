@@ -28,4 +28,24 @@ class Module extends \yii\base\Module
     {
         return $this->name;
     }
+
+    public function getParams()
+    {
+        return [
+            'isEnable' => true,
+            'login' => '',
+            'password' => '',
+            'token' => '',
+        ];
+    }
+
+    public function getParamsLabel()
+    {
+        return [
+            'isEnable' => 'Включен/выключен',
+            'login' => 'Логин',
+            'password' => 'Пароль',
+            'token' => 'Токен',
+        ];
+    }
 }

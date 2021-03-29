@@ -4,6 +4,7 @@ namespace app\modules\site\controllers;
 
 use app\modules\site\models\entity\ModuleSettings;
 use app\modules\site\models\forms\ConsoleForm;
+use app\modules\site\models\tools\Debug;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
@@ -43,10 +44,18 @@ class SiteBackendController extends MainBackendController
 
     public function actionSettings($id)
     {
-        $moduleParams = ModuleSettings::find()->where(['module_id' => $id])->all();
+        if (!$model = ModuleSettings::find()->where(['module_id' => $id])->all()) {
+            $model = new ModuleSettings();
+        }
+
+        if (\Yii::$app->hasModule($id)) {
+            $module = \Yii::$app->getModule($id);
+        }
+
 
         return $this->render('settings', [
-            'moduleParams' => $moduleParams
+            'model' => $model,
+            'module' => $module
         ]);
     }
 }
