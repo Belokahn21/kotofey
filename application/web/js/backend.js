@@ -3925,6 +3925,11 @@ var Sidebar = /*#__PURE__*/function (_React$Component) {
         className: "fas fa-sync-alt"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         className: "bottom-menu__item",
+        href: "/admin/site/settings-backend/"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+        className: "fas fa-sliders-h"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        className: "bottom-menu__item",
         href: "/profile/"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-user-cog"
