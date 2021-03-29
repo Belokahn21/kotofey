@@ -44,14 +44,9 @@ class SiteBackendController extends MainBackendController
 
     public function actionSettings($id)
     {
-        if (!$model = ModuleSettings::find()->where(['module_id' => $id])->all()) {
-            $model = new ModuleSettings();
-        }
+        if (!$model = ModuleSettings::find()->where(['module_id' => $id])->all()) $model = new ModuleSettings();
 
-        if (\Yii::$app->hasModule($id)) {
-            $module = \Yii::$app->getModule($id);
-        }
-
+        if (\Yii::$app->hasModule($id)) $module = \Yii::$app->getModule($id);
 
         return $this->render('settings', [
             'model' => $model,
