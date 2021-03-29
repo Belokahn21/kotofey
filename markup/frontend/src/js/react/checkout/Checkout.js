@@ -303,11 +303,11 @@ class Checkout extends Component {
                         {/*{deliveryService}*/}
 
 
-                        <div className="checkout-form__title">Время и дата доставки</div>
-                        <div className="checkout-form__group-row">
-                            <DateDeliveryField errors={this.state.errors}/>
-                            <TimeDeliveryField errors={this.state.errors}/>
-                        </div>
+                        {/*<div className="checkout-form__title">Время и дата доставки</div>*/}
+                        {/*<div className="checkout-form__group-row">*/}
+                        {/*    <DateDeliveryField errors={this.state.errors}/>*/}
+                        {/*    <TimeDeliveryField errors={this.state.errors}/>*/}
+                        {/*</div>*/}
 
 
                         <div className="checkout-form__title">Укажите ваши данные</div>
@@ -334,11 +334,13 @@ class Checkout extends Component {
                         <Variants unsetError={this.unsetError.bind(this)} errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
 
 
-                        <div className="checkout-form__title">Промокод и бонусы</div>
-                        <div className="checkout-form__group-row">
-                            <PromocodeField promocode={this.state.promocode} updatePoromocode={this.updatePoromocode.bind(this)} refreshBasket={this.refreshBasket.bind(this)}/>
-                            {this.state.user !== null ? <UserBonusField usedBonus={this.state.usedBonus} refreshBasket={this.refreshBasket.bind(this)} updateUsedBonus={(value) => this.setState({usedBonus: value})} accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}
-                        </div>
+
+                        {/*<div className="checkout-form__title">Промокод и бонусы</div>*/}
+                        {/*<div className="checkout-form__group-row">*/}
+                        {/*    <PromocodeField promocode={this.state.promocode} updatePoromocode={this.updatePoromocode.bind(this)} refreshBasket={this.refreshBasket.bind(this)}/>*/}
+                        {/*    {this.state.user !== null ? <UserBonusField usedBonus={this.state.usedBonus} refreshBasket={this.refreshBasket.bind(this)} updateUsedBonus={(value) => this.setState({usedBonus: value})} accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}*/}
+                        {/*</div>*/}
+
                         <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
                     </form>
                 </div>
