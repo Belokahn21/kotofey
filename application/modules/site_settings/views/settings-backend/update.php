@@ -7,10 +7,10 @@ use yii\helpers\Html;
 /* @var $model \app\modules\stock\models\entity\Stocks */
 
 ?>
-<?php $this->title = Title::show($model->name); ?>
+<?php $this->title = Title::show('Редактировать: ' . $model->name); ?>
 <section>
     <div class="title-group">
-        <h1 class="title">Склад: <?= $model->name; ?></h1>
+        <h1 class="title"><?= $model->name; ?></h1>
         <?= Html::a("Назад", ['index'], ['class' => 'btn-main']) ?>
     </div>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>

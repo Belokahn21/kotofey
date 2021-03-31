@@ -6,6 +6,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
 use app\modules\payment\models\services\equiring\EquiringTerminalService;
 use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
+use app\modules\site_settings\models\entity\SiteSettings;
 use yii\rest\ActiveController;
 use yii\rest\Controller;
 
@@ -39,8 +40,27 @@ class RestController extends ActiveController
         $order_id = $data['order_id'];
         $order = Order::findOne($order_id);
 
+        //settings
+        $login = "";
+        $password = "";
+        $modeAcquiring = SiteSettings::getValueByCode('mode_acquiring');
 
-        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic(\Yii::$app->params['acquiring']['sberbank']['login'], \Yii::$app->params['acquiring']['sberbank']['password'])));
+        if ($modeAcquiring == 'demo') {
+            $login = SiteSettings::getValueByCode('acquiring_test_login');
+            $password = SiteSettings::getValueByCode('acquiring_test_password');
+        }
+
+        if ($modeAcquiring == 'enable') {
+            $login = SiteSettings::getValueByCode('acquiring_enable_login');
+            $password = SiteSettings::getValueByCode('acquiring_enable_password');
+        }
+
+        if ($modeAcquiring == 'off') {
+            throw new \Exception('В настройках сайта отключена работа Эквайринга, измените значение mode_acquiring в настройках сайта.');
+        }
+
+
+        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic($login, $password)));
 
         $result = $terminal->createOrder($order);
 
