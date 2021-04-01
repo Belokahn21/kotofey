@@ -1,3 +1,9 @@
+<?php
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+
+?>
 <h2>Управление</h2>
 <div class="modules">
     <?php foreach (Yii::$app->getModules() as $moduleId => $data): ?>
@@ -12,6 +18,7 @@
                         } catch (\yii\base\UnknownPropertyException $exception) {
                             echo "Без названия";
                         } ?>
+                        <?= Html::a(Html::tag('i', '', ['class' => 'fas fa-cogs']), Url::to(['/admin/site/settings-backend/module', 'id' => $moduleId])); ?>
                     </div>
                     <ul class="module-menu">
                         <?php if ($items = $module->menuIndex()): ?>
