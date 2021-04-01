@@ -5109,8 +5109,8 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
       if (this.state.usedBonus > 0) total -= parseInt(this.state.usedBonus);
       if (this.state.promocode !== null) total = total - Math.round(total * (this.state.promocode.discount / 100));
-      if (total < 0) total = 0;
-      if (total < 500) total += 100;
+      if (total < 0) total = 0; // if (total < 500) total += 100;
+
       this.setState({
         total: total
       });
@@ -5734,7 +5734,7 @@ var CheckoutSummary = /*#__PURE__*/function (_Component) {
         className: "checkout-summary__amount d-flex flex-row align-items-end"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "js-product-calc-full-summary"
-      }, _tools_Price__WEBPACK_IMPORTED_MODULE_1__.default.format(this.props.total)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, _tools_Price__WEBPACK_IMPORTED_MODULE_1__.default.format(parseInt(this.props.total) < 500 ? parseInt(this.props.total) + 100 : this.props.total)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-summary__currency"
       }, "\u20BD"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "collapse show",

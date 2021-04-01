@@ -17,7 +17,7 @@ class CheckoutSummary extends Component {
                         <a className="checkout-summary__show-items" data-toggle="collapse" href="#collapseSummary" role="button" aria-expanded="false" aria-controls="collapseSummary">Посмотреть состав заказа</a>
                     </div>
                     <div className="checkout-summary__amount d-flex flex-row align-items-end">
-                        <div className="js-product-calc-full-summary">{Price.format(this.props.total)}</div>
+                        <div className="js-product-calc-full-summary">{Price.format(parseInt(this.props.total) < 500 ? parseInt(this.props.total) + 100 : this.props.total)}</div>
                         <div className="checkout-summary__currency">₽</div>
                     </div>
                 </div>
