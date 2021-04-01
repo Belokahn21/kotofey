@@ -11689,7 +11689,7 @@ p {
   justify-content: space-between;
   align-items: stretch; }
   .subscribe__label {
-    margin: 0;
+    margin: 0 0 5px 0;
     padding: 0;
     display: flex;
     flex: 1 1 0; }
@@ -12212,8 +12212,7 @@ p {
   font-weight: 700;
   text-align: left;
   color: #2d0c03;
-  width: 90%;
-  height: 150px; }
+  width: 90%; }
 
 .vitrine__link {
   color: #2d0c03; }
