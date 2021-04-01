@@ -127,9 +127,7 @@ $this->beginPage() ?>
     </div>
 <?php endif ?>
 
-<?= $this->render('include/footer', [
-    'parentCategories' => $parentCategories
-]); ?>
+<?= $this->render('include/footer'); ?>
 <?= PageUpWidget::widget(); ?>
 
 <?php if (Yii::$app->user->isGuest) {

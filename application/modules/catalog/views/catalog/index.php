@@ -75,7 +75,7 @@ if ($category) {
 
 
             <?= CatalogCategoriesWidget::widget([
-                'parent_id' => !$category instanceof ProductCategory ? 0 : $category->id
+                'where' => !$category instanceof ProductCategory ? [] : ['parent_id' => $category->id]
             ]); ?>
 
 

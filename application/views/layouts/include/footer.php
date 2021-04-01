@@ -6,14 +6,17 @@ use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\site\widgets\SocialMe\SocialMe;
 use app\modules\catalog\models\helpers\CategoryHelper;
 use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
+use app\modules\catalog\models\entity\ProductCategory;
+use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
 
 /* @var $parentCategories \app\modules\catalog\models\entity\ProductCategory[] */
 
 ?>
 <footer class="footer page-container">
     <div class="footer-layer-1">
-        <div class="footer-layer-1-left">
+        <div class="footer-col">
             <div class="footer__logo">kotofey.store</div>
+            <div class="footer__description">Интернет-магазин зоотоваров</div>
             <ul class="footer-contact">
                 <li class="footer-contact__item">
                     <?= StoreWidget::widget(); ?>
@@ -32,35 +35,49 @@ use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
                 'view' => 'footer-menu'
             ]); ?>
         </div>
-        <div class="footer-layer-1-right">
+        <div class="footer-col">
             <div class="footer-categories-container">
                 <div class="footer__title">Каталог зоотоваров</div>
-                <ul class="footer-categories">
-                    <?php if ($parentCategories): ?>
-                        <?php foreach ($parentCategories as $item): ?>
-                            <li class="footer-categories__item">
-                                <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
-                            </li>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </ul>
-            </div>
-            <div style="margin: auto auto;">
-                <?php if (empty(Yii::$app->request->getPathInfo())): ?>
-                    <div class="footer-is-shop" href="/">Интернет-зоомагазин Котофей</div>
-                <?php else: ?>
-                    <a class="footer-is-shop" href="/">Интернет-зоомагазин Котофей</a>
-                <?php endif; ?>
+                <div class="row">
+                    <div class="col-6">
+                        <?= CatalogCategoriesWidget::widget([
+                            'select' => ['id', 'name', 'slug'],
+                            'where' => ['id' => 1],
+                            'view' => 'footer-with-subs'
+                        ]); ?>
+                    </div>
+                    <div class="col-6">
+                        <?= CatalogCategoriesWidget::widget([
+                            'select' => ['id', 'name', 'slug'],
+                            'where' => ['id' => 2],
+                            'view' => 'footer-with-subs'
+                        ]); ?>
+                    </div>
 
-                <?= SubscribeWidget::widget(); ?>
-                <?= SocialMe::widget(); ?>
+                </div>
             </div>
+        </div>
+        <div class="footer-col">
+            <div class="footer-logo">
+                <img src="/images/logo.png" alt="Интернет-магазин зоотоваров">
+            </div>
+            <?php if ($specialCategories = ProductCategory::find()->where(['id' => [3, 4, 11]])->all()): ?>
+                <ul class="footer-categories">
+                    <?php foreach ($specialCategories as $item): ?>
+                        <li class="footer-categories__item is-parent">
+                            <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->seo_title; ?></a>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php endif; ?>
+            <?= SubscribeWidget::widget(); ?>
+            <?= SocialMe::widget(); ?>
         </div>
     </div>
     <div class="footer-layer-2">
         <div class="requesites">
             <div class="requesites__item">ООО "Интернет-Зоомагазин Котофей", ОГРН: 1212200000022 ИНН: 2222889641 <a href="https://www.rusprofile.ru/id/1212200000022" target="_blank">(Проверить)</a></div>
-            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img src="/upload/images/who_dev.png"></div>
+            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img alt="Разработка сайта" src="/upload/images/who_dev.png"></div>
         </div>
     </div>
 </footer>
