@@ -2,13 +2,14 @@
 
 /* @var $items array */
 ?>
-<?php if ($items): ?>
+<?php if ($items): ?><?php /*
     <div class="social-me-container">
-        <?php /*<div class="social-me__title">Следите за нами в сетях!</div>*/ ?>
-        <ul class="social-me">
-            <?php foreach ($items as $item) : ?>
-                <li class="social-me__item"><a target="_blank" href="<?= $item['url']; ?>" class="social-me__link"><img alt="social" class="social-me__image" src="<?= $item['image']; ?>"/></a></li>
-            <?php endforeach; ?>
-        </ul>
-    </div>
+        <div class="social-me__title">Следите за нами в сетях!</div>
+    </div>*/ ?>
+
+    <ul class="social-me">
+        <?php foreach ($items as $item) : ?>
+            <li class="social-me__item"><a target="_blank" href="<?= $item['url']; ?>" class="social-me__link"><img alt="social" class="social-me__image" src="<?= $item['image']; ?>"/></a></li>
+        <?php endforeach; ?>
+    </ul>
 <?php endif; ?>
