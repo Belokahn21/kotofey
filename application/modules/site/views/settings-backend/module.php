@@ -23,9 +23,17 @@ $this->title = Title::show('Настройки модуля: ' . $module->name);
                 <?= $form->field($model, '[' . $moduleParameter . ']param_name')->hiddenInput(['value' => $moduleParameter])->label(false); ?>
             </div>
             <div class="col-2">
+                <?php $value = $defaultValue; ?>
                 <?php $valueModel = ModuleSettings::findOne(['module_id' => $module->id, 'param_name' => $moduleParameter]); ?>
-                <?php if ($valueModel) $defaultValue = $valueModel->param_value; ?>
-                <?= $form->field($model, '[' . $moduleParameter . ']param_value')->textInput(['value' => $defaultValue])->label(false); ?>
+                <?php if ($valueModel) $value = $valueModel->param_value; ?>
+
+
+                <?php if (is_array($defaultValue)): ?>
+                    <?= $form->field($model, '[' . $moduleParameter . ']param_value')->dropDownList($value, ['prompt' => 'Выбрать значение'])->label(false); ?>
+                <?php else: ?>
+                    <?= $form->field($model, '[' . $moduleParameter . ']param_value')->textInput(['value' => $value])->label(false); ?>
+                <?php endif; ?>
+
             </div>
         </div>
     <?php endforeach; ?>

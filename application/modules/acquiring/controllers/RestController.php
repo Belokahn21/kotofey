@@ -6,6 +6,8 @@ use app\modules\order\models\entity\Order;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
 use app\modules\payment\models\services\equiring\EquiringTerminalService;
 use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
+use app\modules\site\models\entity\ModuleSettings;
+use app\modules\site\models\helpers\ModuleSettingsHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
 use yii\rest\ActiveController;
 use yii\rest\Controller;
@@ -43,16 +45,16 @@ class RestController extends ActiveController
         //settings
         $login = "";
         $password = "";
-        $modeAcquiring = SiteSettings::getValueByCode('mode_acquiring');
+        $modeAcquiring = ModuleSettingsHelper::getValue('acquiring', 'mode');
 
-        if ($modeAcquiring == 'demo') {
-            $login = SiteSettings::getValueByCode('acquiring_test_login');
-            $password = SiteSettings::getValueByCode('acquiring_test_password');
+        if ($modeAcquiring == 'test') {
+            $login = ModuleSettingsHelper::getValue('acquiring', 'test_login');
+            $password = ModuleSettingsHelper::getValue('acquiring', 'test_password');
         }
 
-        if ($modeAcquiring == 'enable') {
-            $login = SiteSettings::getValueByCode('acquiring_enable_login');
-            $password = SiteSettings::getValueByCode('acquiring_enable_password');
+        if ($modeAcquiring == 'on') {
+            $login = ModuleSettingsHelper::getValue('acquiring', 'real_login');
+            $password = ModuleSettingsHelper::getValue('acquiring', 'real_password');
         }
 
         if ($modeAcquiring == 'off') {

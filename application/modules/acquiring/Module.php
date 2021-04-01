@@ -33,10 +33,21 @@ class Module extends \yii\base\Module
     {
         return [
             'isEnable' => true,
-            'login' => '',
-            'password' => '',
-            'token' => '',
-            'bank' => 'sberbank',
+            'test_login' => '',
+            'test_password' => '',
+            'test_token' => '',
+            'real_login' => '',
+            'real_password' => '',
+            'real_token' => '',
+            'bank' => [
+                'sberbank' => 'Сбербанк',
+                'alfabank' => 'Альфа-Банк'
+            ],
+            'mode' => [
+                'on' => 'Боевой режим',
+                'off' => 'Отключен',
+                'test' => 'Тестовый режим'
+            ],
         ];
     }
 
