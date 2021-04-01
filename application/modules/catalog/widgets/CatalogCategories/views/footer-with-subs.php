@@ -10,8 +10,8 @@ use app\modules\catalog\models\entity\ProductCategory;
 <?php if ($categories): ?>
     <ul class="footer-categories">
         <?php foreach ($categories as $item): ?>
-            <li class="footer-categories__item">
-                <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->seo_title; ?></a>
+            <li class="footer-categories__item is-parent">
+                <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
             </li>
 
             <?php $subCategories = ProductCategory::find()->where(['parent' => $item->id])->all(); ?>

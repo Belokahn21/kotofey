@@ -41,14 +41,14 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
                 <div class="row">
                     <div class="col-6">
                         <?= CatalogCategoriesWidget::widget([
-                            'select' => ['id', 'name', 'slug'],
+                            'select' => ['id', 'name', 'slug', 'seo_title'],
                             'where' => ['id' => 1],
                             'view' => 'footer-with-subs'
                         ]); ?>
                     </div>
                     <div class="col-6">
                         <?= CatalogCategoriesWidget::widget([
-                            'select' => ['id', 'name', 'slug'],
+                            'select' => ['id', 'name', 'slug', 'seo_title'],
                             'where' => ['id' => 2],
                             'view' => 'footer-with-subs'
                         ]); ?>

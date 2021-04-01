@@ -12920,9 +12920,9 @@ p {
       .footer-layer-1 {
         flex-direction: column; } }
   .footer-col:nth-child(1) {
-    flex: 0 0 25%; }
+    flex: 0 0 30%; }
   .footer-col:nth-child(2) {
-    flex: 0 0 50%; }
+    flex: 0 0 45%; }
   .footer-col:nth-child(3) {
     flex: 0 0 25%; }
   @media (max-width: 768px) {
@@ -12978,8 +12978,7 @@ p {
 .footer-categories {
   flex-wrap: wrap;
   display: flex;
-  flex-direction: column;
-  max-height: 250px; }
+  flex-direction: column; }
   .footer-categories__item {
     font-size: 14px;
     line-height: 40px;
