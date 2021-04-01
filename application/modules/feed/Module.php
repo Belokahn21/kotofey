@@ -7,7 +7,7 @@ use yii\helpers\Url;
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\feed\controllers';
-    public $name = 'Поисковой контент товаров';
+    public $name = 'Поисковой контент';
 
     public function init()
     {
