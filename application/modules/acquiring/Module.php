@@ -55,9 +55,14 @@ class Module extends \yii\base\Module
     {
         return [
             'isEnable' => 'Включен/выключен',
-            'login' => 'Логин',
-            'password' => 'Пароль',
-            'token' => 'Токен',
+
+            'test_login' => 'Логин (Test)',
+            'test_password' => 'Пароль (Test)',
+            'test_token' => 'Токен (Test)',
+
+            'real_login' => 'Логин (Боевой)',
+            'real_password' => 'Пароль (Боевой)',
+            'real_token' => 'Токен (Боевой)',
         ];
     }
 }
