@@ -34,6 +34,12 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
                 'menu_id' => 3,
                 'view' => 'footer-menu'
             ]); ?>
+            <ul class="footer-payment-vairiant">
+                <li class="footer-payment-vairiant__item"><img src="/images/payments/visa.jpg"/></li>
+                <li class="footer-payment-vairiant__item"><img src="/images/payments/mastercard.png"/></li>
+                <li class="footer-payment-vairiant__item"><img src="/images/payments/mir.jpg"/></li>
+                <li class="footer-payment-vairiant__item"><img src="/images/payments/jcb.png"/></li>
+            </ul>
         </div>
         <div class="footer-col">
             <div class="footer-categories-container">

@@ -22,7 +22,7 @@ class CatalogCategoriesWidget extends Widget
             $query = ProductCategory::find()->orderBy(['sort' => SORT_DESC]);
 
             if ($select) $query->select($select);
-            if ($where) $query->andFilterWhere($where);
+            if ($where != null) $query->andWhere($where);
 
             return $query->all();
         });
