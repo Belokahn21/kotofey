@@ -8,9 +8,6 @@ use app\widgets\notification\Alert;
 
 class SiteBackendController extends MainBackendController
 {
-    public $layout = '@app/views/layouts/admin';
-
-
     public function behaviors()
     {
         $parentAccess = parent::behaviors();

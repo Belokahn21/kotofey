@@ -3,6 +3,7 @@
 namespace app\modules\site\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "module_settings".
@@ -16,6 +17,13 @@ use Yii;
  */
 class ModuleSettings extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function rules()
     {
         return [
