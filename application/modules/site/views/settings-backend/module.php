@@ -29,7 +29,15 @@ $this->title = Title::show('Настройки модуля: ' . $module->name);
 
 
                 <?php if (is_array($defaultValue)): ?>
-                    <?= $form->field($model, '[' . $moduleParameter . ']param_value')->dropDownList($defaultValue, ['prompt' => 'Выбрать значение', 'options' => [$value => ["selected" => true]]])->label(false); ?>
+                    <?php
+                    $dropParams = ['prompt' => 'Выбрать значение'];
+
+                    if ($value) {
+                        $dropParams['options'] = [$value => ["selected" => true]];
+                    }
+
+                    ?>
+                    <?= $form->field($model, '[' . $moduleParameter . ']param_value')->dropDownList($defaultValue, $dropParams)->label(false); ?>
                 <?php else: ?>
                     <?= $form->field($model, '[' . $moduleParameter . ']param_value')->textInput(['value' => $value])->label(false); ?>
                 <?php endif; ?>
