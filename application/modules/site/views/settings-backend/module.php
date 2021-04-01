@@ -32,7 +32,7 @@ $this->title = Title::show('Настройки модуля: ' . $module->name);
                     <?php
                     $dropParams = ['prompt' => 'Выбрать значение'];
 
-                    if ($value) {
+                    if (!is_array($value)) {
                         $dropParams['options'] = [$value => ["selected" => true]];
                     }
 
