@@ -36,6 +36,7 @@ class Module extends \yii\base\Module
             'login' => '',
             'password' => '',
             'token' => '',
+            'bank' => 'sberbank',
         ];
     }
 

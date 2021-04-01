@@ -4,8 +4,9 @@
  * @var $model \app\modules\site\models\entity\ModuleSettings
  */
 
-use app\modules\site\models\helpers\ModuleSettingsHelper;
+use app\modules\site\models\entity\ModuleSettings;
 use app\modules\seo\models\tools\Title;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
@@ -18,10 +19,14 @@ $this->title = Title::show('Настройки модуля: ' . $module->name);
         <div class="row">
             <?= $form->field($model, '[' . $moduleParameter . ']module_id')->hiddenInput(['value' => $module->id])->label(false); ?>
             <div class="col-2">
-                <b><?= ModuleSettingsHelper::getLabel($moduleParameter, $module); ?></b>
+                <b><?= ArrayHelper::getValue($module->getParamsLabel(), $moduleParameter, $moduleParameter); ?></b>
                 <?= $form->field($model, '[' . $moduleParameter . ']param_name')->hiddenInput(['value' => $moduleParameter])->label(false); ?>
             </div>
-            <div class="col-2"><?= $form->field($model, '[' . $moduleParameter . ']param_value')->textInput(['value' => $defaultValue])->label(false); ?></div>
+            <div class="col-2">
+                <?php $valueModel = ModuleSettings::findOne(['module_id' => $module->id, 'param_name' => $moduleParameter]); ?>
+                <?php if ($valueModel) $defaultValue = $valueModel->param_value; ?>
+                <?= $form->field($model, '[' . $moduleParameter . ']param_value')->textInput(['value' => $defaultValue])->label(false); ?>
+            </div>
         </div>
     <?php endforeach; ?>
     <?= Html::submitButton('Сохранить', ['class' => 'btn-main']); ?>
