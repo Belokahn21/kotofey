@@ -112,35 +112,32 @@ $config = [
             'showScriptName' => false,
             'enableStrictParsing' => false,
             'rules' => [
+                //backend rest
+                'GET backend/api/<module>' => '<module>/rest-backend/index',
+
+                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend/view',
+
+                'POST backend/api/<module>' => '<module>/rest-backend/create',
+
+                'DELETE backend/api/<module>/<id:\d+>' => '<module>/rest-backend/delete',
 
 
-                'GET rest/product/get' => 'rest/product/get', // old
-                'POST compare/rest/add' => 'compare/rest/add',
-                'POST favorite/rest/add' => 'favorite/rest/add',
-                'DELETE favorite/rest/delete' => 'favorite/rest/delete',
-
-                'GET menu/rest-backend/get' => 'menu/rest-backend/get',
-                'GET menu_fast/rest-backend/get' => 'menu_fast/rest-backend/get',
-                'GET statistic/rest-backend/get' => 'statistic/rest-backend/get',
-                'GET catalog/rest-backend/get' => 'catalog/rest-backend/get',
-                'GET catalog/rest-backend/get/<product_id:\d+>' => 'catalog/rest-backend/get',
-                'GET instagram/rest-backend/get' => 'instagram/rest-backend/get',
-                'GET user/rest-backend/get' => 'user/rest-backend/get',
-                'POST todo/rest-backend/add' => 'todo/rest-backend/add',
-                'GET todo/rest-backend/get' => 'todo/rest-backend/get',
-
-                'POST basket/rest/add' => 'basket/rest/add',
-
-                // new variant rest request
-                'POST order/rest/add' => 'order/rest/add',
-                'GET order/rest/get' => 'order/rest/get',
+                //frontend rest
+                'GET api/<module>/<id[\w]+>' => '<module>/rest/view',
+                'GET api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/view',
 
 
-                'GET catalog/rest/<action>' => 'catalog/rest/<action>',
-                'GET promocode/rest/get/<code:.+>' => 'promocode/rest/get',
-                'GET promocode/rest/get' => 'promocode/rest/get',
-                'GET cdek/rest-calculate/get' => 'cdek/rest-calculate/get',
-                'DELETE basket/rest/delete' => 'basket/rest/delete',
+                'GET api/<module>' => '<module>/rest/index',
+                'GET api/<module>/<controller>' => '<module>/<controller>-rest/index',
+
+                'POST api/<module>' => '<module>/rest/create',
+                'POST api/<module>/<controller>' => '<module>/<controller>-rest/create',
+
+                'PATCH api/<module>' => '<module>/rest/update',
+                'PATCH api/<module>/<controller>' => '<module>/<controller>-rest/update',
+
+                'DELETE api/<module>/<id[\w]+>' => '<module>/rest/delete',
+                'DELETE api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/delete',
 
                 '/' => 'site/site/index',
                 'delivery' => 'site/site/delivery',
@@ -153,6 +150,8 @@ $config = [
                 'restore' => 'user/auth/restore',
                 'vk' => 'user/auth/vk',
                 'restore/<id[A-Za-z-\/\d_]+>' => 'user/auth/restoring',
+                'payment/success' => 'payment/payment/success',
+                'payment/fail' => 'payment/payment/fail',
 
                 'market' => 'export/yml/index',
                 'aliexpress' => 'export/aliexpress/index',
@@ -310,6 +309,9 @@ $config = [
         ],
         'media' => [
             'class' => 'app\modules\media\Module',
+        ],
+        'acquiring' => [
+            'class' => 'app\modules\acquiring\Module',
         ],
     ],
     'params' => $params,

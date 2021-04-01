@@ -70,15 +70,8 @@ class OrdersItems extends ActiveRecord
         /* @var $item OrdersItems */
         foreach (Basket::findAll() as $item) {
             $item->order_id = $this->order_id;
-            if ($item->validate()) {
-                if ($item->save() === false) {
-                    Debug::p($item->getErrors());
-                    return false;
-                }
-            } else {
-                Debug::p($item->getErrors());
-                return false;
-            }
+            if (!$item->validate() or !$item->save()) return false;
+
         }
 
         Basket::clear();

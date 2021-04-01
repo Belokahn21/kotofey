@@ -12,7 +12,7 @@ class RestBackendController extends Controller
     protected function verbs()
     {
         return [
-            'get' => ['GET']
+            'all' => ['GET']
         ];
     }
 
@@ -31,7 +31,7 @@ class RestBackendController extends Controller
         ];
     }
 
-    public function actionGet($product_id = null)
+    public function actionAll($product_id = null)
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 

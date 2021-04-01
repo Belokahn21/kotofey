@@ -45,5 +45,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
     <h1 class="page__title">Оформление заказа</h1>
+    <div class="checkout-form-attention">Уважаемые покупатели, Оформление заказа временно работает в тестовом режиме поэтому просим вас при возникновении проблем с заказом обращаться по телефону <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>. Мы поможем вам с покупокй и сделаем сервис лучше!</div>
     <div class="page__group-row checkout-react" data-user="<?= Yii::$app->user->identity->id; ?>"></div>
 </div>

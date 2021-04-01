@@ -1,0 +1,111 @@
+extends include/layer
+
+include include/mixin/checkoutVariant
+
+block contents
+    .page-container
+        .page
+            ul.breadcrumbs
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Главная
+                li.breadcrumbs__item
+                    a(href="javascript:void(0);").breadcrumbs__link Корзина
+                li.breadcrumbs__item.active
+                    a(href="javascript:void(0);").breadcrumbs__link Оформление заказа
+            h1.page__title Оформление заказа
+            .checkout-react(data-user="1")
+            //.page__group-row
+            //    .page__left
+            //        form.checkout-form
+            //            .checkout-form__title Укажите способ доставки
+            //            .checkout-form-variants
+            //                -
+            //                    var deliveries = [
+            //                        {
+            //                            id: 1,
+            //                            title: 'Доставка по городу',
+            //                            description:'Бесплатно от 500р.',
+            //                            input: 'delivery',
+            //                            image: './assets/images/truck.png',
+            //                        },
+            //                        {
+            //                            id: 2,
+            //                            title: 'Самовывоз',
+            //                            description:'ул. Северо-Западная 6Б',
+            //                            input: 'delivery',
+            //                            image: './assets/images/truck.png',
+            //                        },
+            //                        {
+            //                            id: 3,
+            //                            title: 'Курьерская служба',
+            //                            description:'СДЭК, DPD, Почта России',
+            //                            input: 'delivery',
+            //                            image: './assets/images/truck.png',
+            //                        },
+            //                    ];
+            //                each item,index in deliveries
+            //                    +checkoutVariant(item)
+            //            .checkout-form__title Укажите ваши данные
+            //            .checkout-form__group-row
+            //                label.checkout-form__label(for="checkout-family")
+            //                    div Фамилия?*
+            //                    input.checkout-form__input#checkout-family(name="family", type="text", placeholder="Ваша фамилия")
+            //                label.checkout-form__label(for="checkout-name")
+            //                    div Как вас зовут?*
+            //                    input.checkout-form__input#checkout-name(name="name", type="text", placeholder="Ваше имя")
+            //            .checkout-form__group-row
+            //                label.checkout-form__label(for="checkout-phone")
+            //                    div Контактный телефон*
+            //                    input.checkout-form__input.js-mask-ru#checkout-phone(name="phone", type="text", placeholder="+7 (___) ___ __-__")
+            //                label.checkout-form__label(for="checkout-email")
+            //                    div Электронная почта*
+            //                    input.checkout-form__input#checkout-email(name="email", type="text", placeholder="Адрес вашей электронной почты")
+            //            .checkout-form__title Укажите способ оплаты
+            //            .checkout-form-variants
+            //                -
+            //                    var payments = [
+            //                        {
+            //                            id: 1,
+            //                            title: 'Наличный расчёт',
+            //                            description:'Постарайтесь без сдачи',
+            //                            input: 'payment',
+            //                            image: './assets/images/wallet.png',
+            //                        },
+            //                        {
+            //                            id: 2,
+            //                            title: 'Картой на сайте',
+            //                            description:'Сразу после офомления заказа',
+            //                            input: 'payment',
+            //                            image: './assets/images/wallet.png',
+            //                        },
+            //                        {
+            //                            id: 3,
+            //                            title: 'По терминалу при получении заказа',
+            //                            description:'При получении',
+            //                            input: 'payment',
+            //                            image: './assets/images/wallet.png',
+            //                        },
+            //                    ];
+            //
+            //                each item,index in payments
+            //                    +checkoutVariant(item)
+            //            button.add-basket.checkout-form__submit(type="button") Подтвердить заказ
+            //    .page__right
+            //        .checkout-summary
+            //            a(href="#" data-toggle="tooltip" data-placement="top" rel="tooltip" title="Очистить корзину").clear-basket
+            //                i.fas.fa-trash-alt
+            //            .checkout-summary__info
+            //                .checkout-summary__title Ваш заказ на сумму:
+            //                a.checkout-summary__show-items(data-toggle='collapse', href='#collapseSummary', role='button', aria-expanded='false', aria-controls='collapseSummary')
+            //                    | Посмотреть состав заказа
+            //            .checkout-summary__amount.d-flex.flex-row.align-items-end
+            //                .js-product-calc-full-summary 85 840,35
+            //                .checkout-summary__currency ₽
+            //        #collapseSummary.collapse
+            //            include include/block/light-checkout-list
+            //        .checkout-reglament
+            //            .checkout-reglament__title Обратите внимание!
+            //            .checkout-reglament__text
+            //                p После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 день). 
+            //                p Доставка платная. Рассчитайте стоимость в нашем онлайн-калькуляторе. Введите расстояние (в км) от нас — г. Барнаул, ул. Взлетная 1 до того места, куда требуется доставить товар.
+            //                p Остались вопросы — <a href="mailto:help@kotofey.store">help@kotofey.store</a>

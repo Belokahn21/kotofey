@@ -2,39 +2,31 @@
 
 namespace app\modules\menu\controllers;
 
+use yii\filters\Cors;
 use yii\helpers\Json;
-use yii\helpers\Url;
 use yii\rest\Controller;
 
 class RestBackendController extends Controller
 {
     protected function verbs()
     {
-        return [
-            'get' => ['GET']
-        ];
-    }
-
-    public function beforeAction($action)
-    {
-        $this->enableCsrfValidation = false;
-        return parent::beforeAction($action);
+        $verbs = parent::verbs();
+        $verbs['index'] = ['GET'];
+        $verbs['view'] = ['GET'];
+        return $verbs;
     }
 
     public function behaviors()
     {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
+        $behaviors = parent::behaviors();
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className()
         ];
+        return $behaviors;
     }
 
-    public function actionGet()
+    public function actionIndex()
     {
-        \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-        $menu = array();
-
         $menu = [
             ['title' => 'Главная стрница', 'href' => '/'],
             ['title' => 'Рабочий стол', 'href' => '/admin/'],

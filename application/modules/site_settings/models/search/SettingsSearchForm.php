@@ -12,7 +12,7 @@ class SettingsSearchForm extends SiteSettings
 {
 	public static function tableName()
 	{
-		return "site_settings";
+		return SiteSettings::tableName();
 	}
 
 	public function rules()

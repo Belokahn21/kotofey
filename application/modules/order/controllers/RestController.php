@@ -3,92 +3,101 @@
 
 namespace app\modules\order\controllers;
 
-
-use app\modules\bonus\models\helper\BonusHelper;
-use app\modules\order\models\entity\Order;
-use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\OrdersItems;
-use app\widgets\notification\Alert;
-use yii\helpers\Json;
+use app\modules\order\models\entity\OrderDate;
+use app\modules\order\models\entity\Order;
+use app\modules\order\models\helpers\OrderHelper;
+use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Price;
+use yii\filters\Cors;
 use yii\rest\ActiveController;
-use yii\web\HttpException;
 
 class RestController extends ActiveController
 {
     public $modelClass = 'app\modules\order\models\entity\Order';
 
-    protected function verbs()
+    public function actions()
     {
-        return [
-            'get' => ['GET'],
-            'add' => ['POST'],
-            'delete' => ['DELETE'],
-        ];
+        $actions = parent::actions();
+        unset($actions['create']);
+        return $actions;
     }
 
     public function behaviors()
     {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
+        $behaviors = parent::behaviors();
+        $behaviors['corsFilter'] = [
+            'class' => Cors::className()
         ];
+        return $behaviors;
     }
 
-    public function actionAdd()
+    public function actionCreate()
     {
-        $order = new Order();
+        $order = new $this->modelClass(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $orderDate = new OrderDate();
         $items = new OrdersItems();
         $response = [
             'status' => 200,
-//            'message' => 'Заказ успешно создан. Менеджер свяжется с вами в ближайшее время для уточнения деталей заказа.'
         ];
-
-        if (!\Yii::$app->request->isPost) {
-            $response['status'] = 500;
-            $response['error'] = 'Запрос не является POST';
-            return Json::encode($response);
-        }
-
 
         if (!$order->load(\Yii::$app->request->post())) {
             $response['status'] = 500;
-            $response['error'] = 'Данные в модель Order не были загружены';
-            return Json::encode($response);
+            $response['errors'] = 'Данные в модель Order не были загружены';
+            return $response;
         }
 
-        if (!$order->validate() || !$order->save()) {
+//        if (!$order->validate()) {
+//            $response['status'] = 510;
+//            $response['errors'] = $order->getErrors();
+//            return $response;
+//        }
+
+        if (!$order->save()) {
             $response['status'] = 510;
             $response['errors'] = $order->getErrors();
-            return Json::encode($response);
-        }
-
-        if (!$items->load(\Yii::$app->request->post())) {
-            $response['status'] = 510;
-            $response['errors'] = $items->getErrors();
-            return Json::encode($response);
-        }
-
-        if (!$items->load(\Yii::$app->request->post())) {
-            $response['status'] = 510;
-            $response['errors'] = $items->getErrors();
-            return Json::encode($response);
+            return $response;
         }
 
         $items->order_id = $order->id;
         if (!$items->saveItems()) {
-            $response['status'] = 510;
+            $response['status'] = 530;
             $response['errors'] = $items->getErrors();
-            return Json::encode($response);
+            return $response;
+        }
+
+        $response['data']['order'] = [
+            'id' => $order->id,
+            'status' => OrderHelper::getStatus($order),
+            'delivery' => OrderHelper::getDelivery($order),
+            'payment' => OrderHelper::getPayment($order),
+            'created' => date('d.m.Y H:i:s', $order->created_at),
+            'address' => (!$order->city ? '' : 'г. ' . $order->city) . (!$order->street ? '' : ', ул. ' . $order->street) . (!$order->number_home ? '' : ', д. ' . $order->number_home) . (!$order->entrance ? '' : ', п. ' . $order->entrance) . (!$order->floor_house ? '' : ', эт. ' . $order->floor_house) . (!$order->number_appartament ? '' : ', кв. ' . $order->number_appartament),
+            'total' => Price::format(OrderHelper::orderSummary($order)) . ' ' . Currency::getInstance()->show(),
+        ];
+        return $response;
+    }
+
+    public function actionDelete($id)
+    {
+        $model = $this->modelClass::findOne($id);
+
+        if (!$model) return array(
+            'status' => 500,
+            'error' => 'Элемент не найден'
+        );
+
+        if ($model->delete()) {
+            return [
+                'status' => 500,
+                'error' => 'Ошибка при удалении элемента',
+                'errors' => $model->getErrors()
+            ];
         }
 
 
-        return Json::encode($response);
-    }
-
-    public function actionGet()
-    {
-        return Json::encode(Order::find()->all());
+        return [
+            'status' => 200
+        ];
     }
 }

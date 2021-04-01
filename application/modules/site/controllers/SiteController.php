@@ -126,10 +126,10 @@ class SiteController extends Controller
 
     public function actionAbout()
     {
-        Attributes::metaDescription("О нашем интернет-зоомагазине Котофей");
+        Attributes::metaDescription("О интернет-зоомагазине Котофей");
         Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
-        return $this->render('_about');
+        return $this->render('about');
     }
 
 

@@ -2,14 +2,23 @@ build:
 	rm -rf tmp/browser_ext/catalog/dist && cd tmp/browser_ext/catalog && npm run-script build
 
 webpack: webpack-build webpack-copy
+webpack-backend: webpack-build-backend webpack-copy-backend
 
 webpack-copy:
-	cp -R markup_experience/build/js application/web
-	cp -R markup_experience/build/css application/web
-	cp -R markup_experience/build/assets/images application/web
+	cp -R markup/frontend/build/js application/web
+	cp -R markup/frontend/build/css application/web
+	cp -R markup/frontend/build/assets/images application/web
+
+webpack-copy-backend:
+	cp -R markup/backend/build/js application/web
+	cp -R markup/backend/build/css application/web
+	cp -R markup/backend/build/assets/images application/web
 
 webpack-build:
-	cd markup_experience && npm run build
+	cd markup/frontend && npm run build
+
+webpack-build-backend:
+	cd markup/backend && npm run build
 
 gulp-build:
 	rm -rf markup/build/ && rm -rf application/web/css/ && rm -rf application/web/js/ && rm -rf application/web/images/ && cd markup && gulp build
@@ -74,6 +83,7 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/pets/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/site/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/menu/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/acquiring/install/migrations --interactive=0
 
 deploy-local: pull init-dev cache migrate
 deploy: pull init-prod migrate

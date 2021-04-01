@@ -1,0 +1,82 @@
+.add-basket {
+  padding: 5px 14px;
+  margin: 0 30px;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: 700;
+  border-radius: 20px;
+  background: $text-color;
+  border: 1px $active-color solid;
+  color: $active-color;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  outline: none !important;
+  transition: background-color 0.3s ease-in 0s;
+
+  &:hover {
+    color: $text-color;
+    background: $active-color;
+
+    img {
+      filter: unset;
+    }
+  }
+
+  img {
+    //filter: invert(99%) sepia(1%) saturate(2499%) hue-rotate(303deg) brightness(113%) contrast(100%);
+    filter: invert(22%) sepia(45%) saturate(7487%) hue-rotate(338deg) brightness(80%) contrast(200%);
+  }
+
+  &__icon {
+    width: 15px;
+    height: 14px;
+    margin-right: 10px;
+  }
+}
+
+.one-click-buy {
+  margin: 0 30px;
+  padding: 5px 14px;
+  background: white;
+  font-size: 12px;
+  line-height: 24px;
+  font-weight: 700;
+  border: 1px $no-active-color solid;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  color: black;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+    //text-decoration: inherit;
+  }
+}
+
+.btn-main {
+  //border: 0;
+  //background: $active-color;
+  background: $text-color;
+  border: 1px $active-color solid;
+  color: $active-color;
+  padding: 5px 5px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 10px;
+  transition: background-color 0.2s ease-out;
+  //border-bottom: 3px transparent solid;
+
+  &:hover {
+    color: white;
+    text-decoration: none;
+    //  border-bottom: 3px red solid;
+    background: $active-color-light;
+  }
+}

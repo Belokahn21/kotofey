@@ -6,34 +6,39 @@ use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrdersItems;
+use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
-use yii\rest\Controller;
+use yii\rest\ActiveController;
 use yii\web\HttpException;
 
 
-class RestController extends Controller
+class RestController extends ActiveController
 {
     public $modelClass = 'app\modules\basket\models\entity\Basket';
 
-    protected function verbs()
+    public function actions()
     {
-        return [
-            'add' => ['POST'],
-            'get' => ['GET'],
-            'delete' => ['DELETE'],
-        ];
+        $actions = parent::actions();
+        unset($actions['index'], $actions['create'], $actions['delete'], $actions['update']);
+
+        return $actions;
     }
+
 
     public function behaviors()
     {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
+        $behaviors = parent::behaviors();
+
+        unset($behaviors['authenticator']);
+
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
         ];
+
+        return $behaviors;
     }
 
-    public function actionAdd()
+    public function actionCreate()
     {
         $data = \Yii::$app->request->post();
 
@@ -65,37 +70,58 @@ class RestController extends Controller
             $basket->add($basketItem);
         }
 
-        return Json::encode([
+        return [
             'status' => 200,
             'count' => Basket::count()
-        ]);
+        ];
     }
 
-    public function actionGet()
+    public function actionUpdate()
+    {
+        $models = Json::decode(file_get_contents('php://input'));
+
+        foreach ($models as $model) {
+            $orderItemModel = new OrdersItems();
+            $orderItemModel->setAttributes($model);
+
+            $orderItemModel->product_id = $model['id'];
+
+            if ($orderItemModel->validate()) {
+                $basket = new Basket();
+                $basket->update($orderItemModel, $orderItemModel->count);
+            }
+        }
+
+        return $models;
+    }
+
+    public function actionIndex()
     {
         $data = [];
 
-        foreach (Product::find()->limit(5)->all() as $product) {
-            $data[] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->price,
-                'article' => $product->article,
-                'detailUrl' => ProductHelper::getDetailUrl($product),
-                'imageUrl' => ProductHelper::getImageUrl($product),
-            ];
-        }
-
-//        foreach ($this->modelClass::findAll() as $basketItem) {
+//        foreach (Product::find()->limit(5)->all() as $product) {
 //            $data[] = [
-//                'id' => $basketItem->product->id,
-//                'name' => $basketItem->product->name,
-//                'price' => $basketItem->product->price,
-//                'article' => $basketItem->product->article,
-//                'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
-//                'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
+//                'id' => $product->id,
+//                'name' => $product->name,
+//                'price' => $product->price,
+//                'count' => rand(1, 10),
+//                'article' => $product->article,
+//                'detailUrl' => ProductHelper::getDetailUrl($product),
+//                'imageUrl' => ProductHelper::getImageUrl($product),
 //            ];
 //        }
+
+        foreach ($this->modelClass::findAll() as $basketItem) {
+            $data[] = [
+                'id' => $basketItem->product->id,
+                'name' => $basketItem->product->name,
+                'price' => $basketItem->product->price,
+                'count' => $basketItem->count,
+                'article' => $basketItem->product->article,
+                'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
+                'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
+            ];
+        }
 
         $response = [
             'status' => 200,
@@ -103,19 +129,17 @@ class RestController extends Controller
         ];
 
 
-        return Json::encode($response);
+        return $response;
     }
 
     public function actionDelete($id)
     {
-        $basket = new $this->modelClass();
-        $basket->delete($id);
+        $model = new $this->modelClass();
 
-        $response = [
-            'status' => 200,
-            'count' => Basket::count()
-        ];
+        if ($model->delete($id) === false) {
+            throw new ServerErrorHttpException('Failed to delete the object for unknown reason.');
+        }
 
-        return Json::encode($response);
+        \Yii::$app->getResponse()->setStatusCode(200);
     }
 }

@@ -1,0 +1,203 @@
+@import "modules/init";
+@import "include/variables";
+@import "include/buttons";
+@import "include/common";
+@import "include/fonts";
+@import "include/forms";
+@import "include/block/logo";
+@import "include/block/header";
+@import "include/block/header-mobile-full";
+@import "include/block/header-menu";
+@import "include/block/menu";
+@import "include/block/phone";
+@import "include/block/basket";
+@import "include/block/profile";
+@import "include/block/search-form";
+@import "include/block/list-variants";
+@import "include/block/product-control";
+@import "include/block/subscribe";
+@import "include/block/mobile-search";
+// custom
+@import "include/block/admin-panel";
+@import "include/block/page-title";
+@import "include/block/404";
+@import "include/block/notify";
+@import "include/block/select/checkout-select";
+// главная страница
+@import "include/block/auth";
+@import "include/block/slider";
+@import "include/block/slider-category";
+@import "include/block/vitrine";
+@import "include/block/light-properties";
+@import "include/block/profit";
+@import "include/block/brands";
+@import "include/block/instagram";
+@import "include/block/index-about";
+@import "include/block/mini-slider";
+@import "include/block/gruming";
+@import "include/block/last-news";
+// детальная карточка товара
+@import "include/block/product-detail";
+@import "include/block/product-blocks";
+@import "include/block/product-bonus";
+@import "include/block/product-detail-gallery";
+@import "include/block/product-calc";
+@import "include/block/breadcrumbs";
+@import "include/block/product-properties";
+@import "include/block/product-tabs";
+@import "include/block/in-stock-detail-product";
+@import "include/block/recommended-products";
+@import "include/block/product-status";
+
+.product-info {
+  border: 1px rgba(0, 0, 0, 0.03) solid;
+  box-shadow: 4px 4px 11px -2px rgba(34, 60, 80, 0.19);
+  padding: 10px;
+  margin: 30px 0;
+  border-radius: 7px;
+
+  &__title {
+    font-weight: bold;
+  }
+}
+
+
+// футер
+@import "include/block/footer";
+@import "include/block/footer-payment-vairiant";
+@import "include/block/footer-contact";
+@import "include/block/footer-nav";
+@import "include/block/footer-categories";
+@import "include/block/requesites";
+@import "include/block/social-me";
+
+// Быстрая корзина
+@import "include/block/fast-cart";
+
+// Стрелка вверх
+@import "include/block/arrowup";
+
+@import "include/block/wh-group";
+
+// личный кабинет
+@import "include/block/order-list";
+@import "include/block/profile-order-info";
+@import "include/block/profile-sections";
+@import "include/block/profile-orders";
+@import "include/block/profile-order-products";
+@import "include/block/profile-favorite-list";
+@import "include/block/gifts";
+@import "include/block/profile-pet";
+@import "include/block/bonus-history-table";
+.profile-bonus-count {
+  background: white;
+  color: $active-color;
+  border: 1px double $active-color;
+  display: inline-block;
+  padding: 2px 15px;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: center;
+  margin: 0 0 0 20px;
+  font-weight: bold;
+}
+
+// Контактная информация
+@import "include/block/contacts-map";
+
+// Корзина
+@import "include/block/basket-list";
+@import "include/block/basket-properties";
+
+// Доставка и оплата
+@import "include/block/form-calc-delivery";
+@import "include/block/payment-cards";
+
+// О нас
+@import "include/block/about";
+@import "include/block/light-statistic";
+@import "include/block/sertificate";
+
+// О нас
+@import "include/block/about-statistic";
+@import "include/block/feedback";
+@import "include/block/feedback-list";
+
+// Оформление заказа
+@import "include/block/checkout-form";
+@import "include/block/checkout-success";
+@import "include/block/checkout-summary";
+@import "include/block/checkout-form-variants";
+@import "include/block/checkout-reglament";
+@import "include/block/light-checkout-list";
+
+.bonus-no-authorize {
+  width: 100%;
+  padding: 10px 10px 10px 0;
+  color: red !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.checkout-button-auth {
+  @extend .btn-main;
+  margin: 5px 0;
+}
+
+.checkout-summary__show-items[aria-expanded=false] .text-expanded {
+  display: none;
+}
+
+.checkout-summary__show-items[aria-expanded=true] .text-collapsed {
+  display: none;
+}
+
+// Акции
+@import "include/block/action-list";
+@import "include/block/detail-action";
+
+//Бренд страница
+@import "include/page/brandpage";
+
+// Каталог - Категории
+.left-siderbar {
+  width: 30%;
+
+  @media (max-width: 790px) {
+    width: 100%;
+  }
+}
+
+@import "include/block/pagination";
+@import "include/block/filter-catalog";
+@import "include/block/catalog-categories";
+@import "include/block/aside-sub-categories";
+
+// Каталог
+@import "include/block/catalog";
+@import "include/block/catalog-line";
+@import "include/block/catalog-sort";
+@import "include/block/catalog-actions";
+@import "include/block/stick-filter";
+@import "include/block/type-display";
+
+// список новостей
+@import "include/block/news-list";
+@import "include/block/news-summary";
+@import "include/block/news-detail";
+
+// Акции и скидки
+@import "include/block/promotion-list";
+
+//Вакансии
+@import "include/block/vacancy-list";
+
+// Карта в футере
+@import "include/block/footer-map";
+

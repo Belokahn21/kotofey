@@ -19,7 +19,7 @@ class ProfileController extends Controller
 {
     public function actionIndex()
     {
-        $orders = Order::find()->where(['phone' => \Yii::$app->user->identity->phone])->orWhere(['user_id' => \Yii::$app->user->identity->id])->all();
+        $orders = Order::find()->where(['phone' => \Yii::$app->user->identity->phone])->orWhere(['user_id' => \Yii::$app->user->identity->id])->orderBy(['created_at' => SORT_DESC])->all();
         $model = User::findOne(\Yii::$app->user->id);
         $model->scenario = User::SCENARIO_PROFILE_UPDATE;
         $sexList = UserSex::find()->all();

@@ -9,14 +9,22 @@ use yii\base\Widget;
 class CatalogCategoriesWidget extends Widget
 {
     public $view = 'default';
-    public $parent_id = 0;
+    public $select;
+    public $where;
 
     public function run()
     {
-        $parent_id = $this->parent_id;
+        $select = $this->select;
+        $where = $this->where;
 
-        $categories = \Yii::$app->cache->getOrSet('catalog-categories:' . $parent_id, function () use ($parent_id) {
-            return ProductCategory::find()->where(['parent' => $parent_id])->orderBy(['sort' => SORT_DESC])->all();
+        // todo: ключ кеширования поправить
+        $categories = \Yii::$app->cache->getOrSet('catalog-categories:' . rand(), function () use ($select, $where) {
+            $query = ProductCategory::find()->orderBy(['sort' => SORT_DESC]);
+
+            if ($select) $query->select($select);
+            if ($where != null) $query->andWhere($where);
+
+            return $query->all();
         });
 
         return $this->render($this->view, [

@@ -4,13 +4,15 @@
  * @var $items \app\modules\order\models\entity\OrdersItems[]
  */
 
+use app\modules\acquiring\models\helpers\AcquiringHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
-use app\widgets\Breadcrumbs;
 use app\modules\site\models\tools\Price;
-use yii\helpers\Url;
+use app\modules\site\models\tools\System;
+use app\widgets\Breadcrumbs;
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 $this->title = "Просмотр заказа: #" . $order->id;
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
@@ -63,7 +65,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                 </div>
                 <div class="profile-order-info__row">
                     <div class="profile-order-info__key">Оплачено</div>
-                    <div class="profile-order-info__value"><?= ($order->is_paid ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red'])); ?></div>
+                    <div class="profile-order-info__value">
+                        <?= ($order->is_paid ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red'])); ?>
+                        <?php if (!$order->is_paid): ?>
+                            <?= Html::a('Оплатить', AcquiringHelper::getInstance()->paymentLink($order), ['target' => '_blank', 'class' => 'btn-main']); ?>
+                        <?php endif; ?>
+                    </div>
                 </div>
                 <div class="profile-order-info__row">
                     <div class="profile-order-info__key">Адрес доставки</div>
@@ -76,6 +83,12 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                         <?= $order->number_appartament ? ", кв. " . $order->number_appartament : null; ?>
                     </div>
                 </div>
+                <?php if ($order->dateDelivery): ?>
+                    <div class="profile-order-info__row">
+                        <div class="profile-order-info__key">Дата и время доставки</div>
+                        <div class="profile-order-info__value"><?= $order->dateDelivery->date; ?>, <?= $order->dateDelivery->time; ?></div>
+                    </div>
+                <?php endif; ?>
                 <?php if ($order->dateDelivery): ?>
                     <div class="profile-order-info__row">
                         <div class="profile-order-info__key">Дата и время доставки</div>

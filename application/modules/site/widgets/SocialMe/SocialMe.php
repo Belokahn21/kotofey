@@ -3,6 +3,7 @@
 namespace app\modules\site\widgets\SocialMe;
 
 
+use app\modules\site_settings\models\entity\SiteSettings;
 use yii\bootstrap\Widget;
 
 class SocialMe extends Widget
@@ -23,6 +24,10 @@ class SocialMe extends Widget
             [
                 'image' => '/images/twitter.png',
                 'url' => 'https://twitter.com/ALwcOSwoyYMJ12c',
+            ],
+            [
+                'image' => '/images/whatsapp.png',
+                'url' => 'whatsapp://send?phone=' . SiteSettings::getValueByCode('phone_1'),
             ],
         ];
         return $this->render($this->view, [
