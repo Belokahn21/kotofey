@@ -1,2 +1,2 @@
 <?php
-\app\modules\site\models\tools\Debug::p(new \app\modules\delivery\models\service\DeliveryCalculateService('cdek', 'Барнаул, ул Весеняя, 4'));
+\app\modules\site\models\tools\Debug::p(new \app\modules\delivery\models\service\DeliveryCalculateService('russian_post', 'Барнаул, ул Весеняя, 4'));

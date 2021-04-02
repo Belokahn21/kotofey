@@ -17,6 +17,13 @@ class DeliveryCalculateService
 
     public function __construct(string $service, string $address)
     {
+        $this->getApi($service);
+
+        return $this->getPriceInfo($address);
+    }
+
+    public function getApi($service)
+    {
         switch ($service) {
             case  'cdek':
                 $this->api = new CdekApi();
@@ -30,20 +37,13 @@ class DeliveryCalculateService
             default:
                 throw new \Exception('Не поддерживаемый сервис доставки.');
         }
-
-        return $this->getPriceInfo($address);
     }
 
 
     public function getPriceInfo($address)
     {
         $address = $this->api->getNormalAddress($address);
-
-
         $total = $this->api->getPriceInfo($address);
-
         return $total;
     }
-
-
 }

@@ -16,4 +16,9 @@ class CdekApi implements DeliveryApi
     {
         // TODO: Implement getPriceInfo() method.
     }
+
+    public function sendRequest(string $url, array $data = [], array $headers = [])
+    {
+        // TODO: Implement sendRequest() method.
+    }
 }
