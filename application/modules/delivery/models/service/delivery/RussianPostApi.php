@@ -23,8 +23,8 @@ class RussianPostApi implements DeliveryApi
         $this->_AUTH_HEADERS = [
             "Authorization: AccessToken " . $this->_TOKEN,
             "X-User-Authorization: Basic " . $this->getAuthKey($this->_LOGIN, $this->_PASSWORD),
-            'Content-Type: application/json',
-            'Accept: application/json;charset=UTF-8',
+            'Content-Type: application/json;charset=UTF-8',
+//            'Accept: application/json;charset=UTF-8',
         ];
     }
 
