@@ -53,8 +53,6 @@ class DeliveryCalculateService
             echo "При вычислении стоимости доставки произошла ошибка";
         }
 
-        Debug::p($total);
-
         return $total;
     }
 }
