@@ -6,6 +6,7 @@ use app\modules\delivery\models\service\delivery\CdekApi;
 use app\modules\delivery\models\service\delivery\DeliveryApi;
 use app\modules\delivery\models\service\delivery\DpdApi;
 use app\modules\delivery\models\service\delivery\RussianPostApi;
+use app\modules\site\models\tools\Debug;
 
 
 /**
@@ -43,7 +44,17 @@ class DeliveryCalculateService
     public function getPriceInfo($address)
     {
         $address = $this->api->getNormalAddress($address);
-        $total = $this->api->getPriceInfo($address);
+        $total = false;
+
+
+        try {
+            $total = $this->api->getPriceInfo($address);
+        } catch (\Exception $exception) {
+            echo "При вычислении стоимости доставки произошла ошибка";
+        }
+
+        Debug::p($total);
+
         return $total;
     }
 }
