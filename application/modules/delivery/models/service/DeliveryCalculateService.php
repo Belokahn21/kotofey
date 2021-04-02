@@ -20,7 +20,8 @@ class DeliveryCalculateService
     {
         $this->getApi($service);
 
-        return $this->getPriceInfo($address);
+        return $this->getNormalAddress($address);
+//        return $this->getPriceInfo($address);
     }
 
     public function getApi($service)
@@ -40,15 +41,18 @@ class DeliveryCalculateService
         }
     }
 
-
-    public function getPriceInfo($address)
+    public function getNormalAddress($address)
     {
-        $address = $this->api->getNormalAddress($address);
+        return $this->api->getNormalAddress($address);
+    }
+
+
+    public function getPriceInfo()
+    {
         $total = false;
 
-
         try {
-            $total = $this->api->getPriceInfo($address);
+            $total = $this->api->getPriceInfo();
         } catch (\Exception $exception) {
             echo "При вычислении стоимости доставки произошла ошибка";
         }

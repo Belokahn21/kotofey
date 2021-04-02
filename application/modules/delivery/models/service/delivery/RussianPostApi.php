@@ -13,25 +13,41 @@ class RussianPostApi implements DeliveryApi
     private $_PASSWORD = '123qweR%';
     private $_TOKEN = '0t_jz_hNllKIgH5Z_Rc7z1cHI2RiMmqx';
     private $_URL = 'https://otpravka-api.pochta.ru';
+    private $_AUTH_HEADERS;
 
     const ACTION_TARIF = "/1.0/tariff";
+    const ACTION_NORMAL = "/1.0/clean/address";
+
+    public function __construct()
+    {
+        $this->_AUTH_HEADERS = [
+            "Authorization: AccessToken " . $this->_TOKEN,
+            "X-User-Authorization: Basic " . $this->getAuthKey($this->_LOGIN, $this->_PASSWORD),
+            'Content-Type: application/json',
+            'Accept: application/json;charset=UTF-8',
+        ];
+    }
 
     public function getNormalAddress($address)
     {
-        // TODO: Implement getNormalAddress() method.
+        $result = $this->sendRequest($this->_URL . self::ACTION_NORMAL, [
+            "id" => "adr 1",
+            "original-address" => $address
+        ], $this->_AUTH_HEADERS);
+
+
+//        var_dump($result);
+
+        Debug::p($address);
+        Debug::p($result);
+
+
+        return $result;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getAuthKey($login, $password)
+    public function getPriceInfo()
     {
-        return base64_encode("$login:$password");
-    }
-
-    public function getPriceInfo($address)
-    {
-        return $this->sendRequest($this->_URL . self::ACTION_TARIF, [
+        $result = $this->sendRequest($this->_URL . self::ACTION_TARIF, [
             "index-from" => "656000",
             "index-to" => "644015",
             "mail-category" => "ORDINARY",
@@ -42,12 +58,18 @@ class RussianPostApi implements DeliveryApi
                 "length" => 5,
                 "width" => 197
             ],
-        ], [
-            "Authorization: AccessToken " . $this->_TOKEN,
-            "X-User-Authorization: Basic " . $this->getAuthKey($this->_LOGIN, $this->_PASSWORD),
-            'Content-Type: application/json',
-            'Accept: application/json;charset=UTF-8',
-        ]);
+        ], $this->_AUTH_HEADERS);
+
+        if (!array_key_exists('total-rate', $result)) {
+            throw new \Exception($result['error']);
+        }
+
+        return [
+            'total' => $result['total-rate'],
+            'time' => [
+                'max-days' => $result['delivery-time']['max-days']
+            ]
+        ];
     }
 
     public function sendRequest(string $url, array $data = [], array $headers = [])
@@ -65,17 +87,14 @@ class RussianPostApi implements DeliveryApi
             curl_close($curl);
         }
 
-        $result = Json::decode($response);
+        return Json::decode($response);
+    }
 
-        if (!array_key_exists('total-rate', $result)) {
-            throw new \Exception($result['error']);
-        }
-
-        return [
-            'total' => $result['total-rate'],
-            'time' => [
-                'max-days' => $result['delivery-time']['max-days']
-            ]
-        ];
+    /**
+     * @return mixed
+     */
+    public function getAuthKey($login, $password)
+    {
+        return base64_encode("$login:$password");
     }
 }
