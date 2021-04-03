@@ -17,6 +17,7 @@ class RussianPostApi implements DeliveryApi
 
     const ACTION_TARIF = "/1.0/tariff";
     const ACTION_NORMAL = "/1.0/clean/address";
+    const ACTION_NORMAL_PHONE = "/1.0/clean/phone";
 
     public function __construct()
     {
@@ -24,21 +25,35 @@ class RussianPostApi implements DeliveryApi
             "Authorization: AccessToken " . $this->_TOKEN,
             "X-User-Authorization: Basic " . $this->getAuthKey($this->_LOGIN, $this->_PASSWORD),
             'Content-Type: application/json;charset=UTF-8',
-//            'Accept: application/json;charset=UTF-8',
         ];
     }
 
     public function getNormalAddress($address)
     {
         $result = $this->sendRequest($this->_URL . self::ACTION_NORMAL, [
-            "id" => "adr 1",
-            "original-address" => $address
+            [
+                "id" => "adr 1",
+                "original-address" => $address
+            ]
         ], $this->_AUTH_HEADERS);
 
-
-//        var_dump($result);
-
         Debug::p($address);
+        Debug::p($result);
+
+
+        return $result;
+    }
+
+    public function getNormalPhone($phone)
+    {
+        $result = $this->sendRequest($this->_URL . self::ACTION_NORMAL_PHONE, [
+            [
+                "id" => "tel2",
+                "original-phone" => $phone
+            ]
+        ], $this->_AUTH_HEADERS);
+
+        Debug::p($phone);
         Debug::p($result);
 
 

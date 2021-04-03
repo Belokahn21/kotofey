@@ -21,7 +21,8 @@ class DeliveryCalculateService
         $this->getApi($service);
 
         return $this->getNormalAddress($address);
-//        return $this->getPriceInfo($address);
+//        return $this->getNormalPhone('89967026637');
+//        return $this->getPriceInfo();
     }
 
     public function getApi($service)
@@ -46,6 +47,11 @@ class DeliveryCalculateService
         return $this->api->getNormalAddress($address);
     }
 
+    public function getNormalPhone($phone)
+    {
+        return $this->api->getNormalPhone($phone);
+    }
+
 
     public function getPriceInfo()
     {
@@ -57,6 +63,7 @@ class DeliveryCalculateService
             echo "При вычислении стоимости доставки произошла ошибка";
         }
 
+        Debug::p($total);
         return $total;
     }
 }
