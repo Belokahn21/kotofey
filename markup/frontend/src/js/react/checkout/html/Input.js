@@ -12,12 +12,13 @@ class Input extends Component {
     }
 
     render() {
-        const options = this.props.options;
+        const {options} = this.props;
+        const {errors} = this.props;
         let error, aria_invalid;
 
-        if (typeof this.props.errors === 'object' && !Array.isArray(this.props.errors)) {
-            error = <Error errors={this.props.errors[options.name]}/>
-            aria_invalid = this.props.errors[options.name] !== undefined && this.props.errors[options.name] !== null;
+        if (typeof errors === 'object' && !Array.isArray(errors)) {
+            error = <Error errors={errors[options.name]}/>
+            aria_invalid = errors[options.name] !== undefined && errors[options.name] !== null;
         }
 
         return (

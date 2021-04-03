@@ -5280,7 +5280,76 @@ var Checkout = /*#__PURE__*/function (_Component) {
       var _this7 = this;
 
       var buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ',
-          deliveryService;
+          deliveryService,
+          address;
+
+      if (parseInt(this.state.deliveryId) !== 3) {
+        address = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form__group-row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+          errors: this.state.errors,
+          unsetError: this.unsetError.bind(this),
+          element: "input",
+          modelName: this.modelName,
+          options: {
+            name: "city",
+            title: "Город",
+            placeholder: "Город"
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+          errors: this.state.errors,
+          unsetError: this.unsetError.bind(this),
+          element: "input",
+          modelName: this.modelName,
+          options: {
+            name: "street",
+            title: "Улица",
+            placeholder: "Улица"
+          }
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-form__group-row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+          errors: this.state.errors,
+          unsetError: this.unsetError.bind(this),
+          element: "input",
+          modelName: this.modelName,
+          options: {
+            name: "number_home",
+            title: "Номер дома",
+            placeholder: "Номер дома"
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+          errors: this.state.errors,
+          unsetError: this.unsetError.bind(this),
+          element: "input",
+          modelName: this.modelName,
+          options: {
+            name: "entrance",
+            title: "Подъезд",
+            placeholder: "Подъезд"
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+          errors: this.state.errors,
+          unsetError: this.unsetError.bind(this),
+          element: "input",
+          modelName: this.modelName,
+          options: {
+            name: "floor_house",
+            title: "Этаж",
+            placeholder: "Этаж"
+          }
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+          errors: this.state.errors,
+          unsetError: this.unsetError.bind(this),
+          element: "input",
+          modelName: this.modelName,
+          options: {
+            name: "number_appartament",
+            title: "Квартира",
+            placeholder: "Квартира"
+          }
+        })));
+      }
 
       if (parseInt(this.state.deliveryId) === 1) {
         deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, null);
@@ -5302,6 +5371,17 @@ var Checkout = /*#__PURE__*/function (_Component) {
         attribute: "delivery_id",
         handlerSelect: this.handleSelectDelivery.bind(this),
         models: this.state.delivery
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__title"
+      }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_widget_Variants__WEBPACK_IMPORTED_MODULE_12__.default, {
+        unsetError: this.unsetError.bind(this),
+        errors: this.state.errors,
+        modelName: this.modelName,
+        attribute: "payment_id",
+        handlerSelect: this.handleSelectPayment.bind(this),
+        models: this.state.payment.filter(function (element) {
+          return !_this7.state.excludePayments.includes(element.id);
+        })
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
       }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -5327,71 +5407,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           title: "Ваш электронный адрес*",
           placeholder: "Ваш электронный адрес*"
         }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "city",
-          title: "Город",
-          placeholder: "Город"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "street",
-          title: "Улица",
-          placeholder: "Улица"
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "number_home",
-          title: "Номер дома",
-          placeholder: "Номер дома"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "entrance",
-          title: "Подъезд",
-          placeholder: "Подъезд"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "floor_house",
-          title: "Этаж",
-          placeholder: "Этаж"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "number_appartament",
-          title: "Квартира",
-          placeholder: "Квартира"
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      })), address, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -5403,18 +5419,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           title: "Комментарий к заказу",
           placeholder: "Ваши пожелания"
         }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__title"
-      }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_widget_Variants__WEBPACK_IMPORTED_MODULE_12__.default, {
-        unsetError: this.unsetError.bind(this),
-        errors: this.state.errors,
-        modelName: this.modelName,
-        attribute: "payment_id",
-        handlerSelect: this.handleSelectPayment.bind(this),
-        models: this.state.payment.filter(function (element) {
-          return !_this7.state.excludePayments.includes(element.id);
-        })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "add-basket checkout-form__submit"
       }, buttonLabel))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -6573,13 +6578,14 @@ var Input = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var options = this.props.options;
+      var errors = this.props.errors;
       var error, aria_invalid;
 
-      if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
+      if (_typeof(errors) === 'object' && !Array.isArray(errors)) {
         error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
-          errors: this.props.errors[options.name]
+          errors: errors[options.name]
         });
-        aria_invalid = this.props.errors[options.name] !== undefined && this.props.errors[options.name] !== null;
+        aria_invalid = errors[options.name] !== undefined && errors[options.name] !== null;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -6658,20 +6664,20 @@ var Textarea = /*#__PURE__*/function (_Component) {
   _createClass(Textarea, [{
     key: "render",
     value: function render() {
-      var error,
-          aria_invalid,
-          options = this.props.options;
+      var error, aria_invalid;
+      var options = this.props.options;
+      var errors = this.props.errors;
 
-      if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
+      if (_typeof(errors) === 'object' && !Array.isArray(errors)) {
         error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
-          errors: this.props.errors[options.name]
+          errors: errors[options.name]
         });
-        aria_invalid = this.props.errors[options.name] !== undefined;
+        aria_invalid = errors[options.name] !== undefined;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__label-text"
-      }, this.props.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, options.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-group field-checkout-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         id: "checkout-comment",

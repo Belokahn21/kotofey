@@ -12212,7 +12212,8 @@ p {
   font-weight: 700;
   text-align: left;
   color: #2d0c03;
-  width: 90%; }
+  width: 90%;
+  height: 150px; }
 
 .vitrine__link {
   color: #2d0c03; }
