@@ -20,7 +20,7 @@ class DeliveryCalculateService
     {
         $this->getApi($service);
 
-        return $this->getNormalAddress($address);
+//        return $this->getNormalAddress($address);
 //        return $this->getNormalPhone('89967026637');
 //        return $this->getPriceInfo();
     }

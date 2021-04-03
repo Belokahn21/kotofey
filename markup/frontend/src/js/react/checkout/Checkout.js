@@ -296,9 +296,13 @@ class Checkout extends Component {
             <div className="page__group-row">
                 <div className="page__left">
                     <form className="checkout-form" onSubmit={this.submitForm.bind(this)}>
-                        <div className="checkout-form__title">Укажите способ доставки</div>
 
+                        <div className="checkout-form__title">Укажите способ доставки</div>
                         <Variants errors={this.state.errors} unsetError={this.unsetError.bind(this)} modelName={this.modelName} attribute="delivery_id" handlerSelect={this.handleSelectDelivery.bind(this)} models={this.state.delivery}/>
+
+                        <div className="checkout-form__title">Укажите способ оплаты</div>
+                        <Variants unsetError={this.unsetError.bind(this)} errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
+
 
                         {/*{deliveryService}*/}
 
@@ -328,12 +332,6 @@ class Checkout extends Component {
                         <label className="checkout-form__label" htmlFor="checkout-comment">
                             <HtmlHelper errors={this.state.errors} element="textarea" modelName={this.modelName} options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
                         </label>
-
-
-                        <div className="checkout-form__title">Укажите способ оплаты</div>
-                        <Variants unsetError={this.unsetError.bind(this)} errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
-
-
 
                         {/*<div className="checkout-form__title">Промокод и бонусы</div>*/}
                         {/*<div className="checkout-form__group-row">*/}
