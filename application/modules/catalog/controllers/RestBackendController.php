@@ -7,6 +7,8 @@ use yii\rest\ActiveController;
 
 class RestBackendController extends ActiveController
 {
+    public $modelClass = 'app\modules\catalog\models\entity\Product';
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
