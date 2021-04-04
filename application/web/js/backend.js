@@ -2812,10 +2812,6 @@ var ConvertDate = /*#__PURE__*/function () {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _reactjs_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../reactjs/config */ "./src/js/reactjs/config.js");
 /* harmony import */ var _reactjs_config__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_reactjs_config__WEBPACK_IMPORTED_MODULE_0__);
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2851,9 +2847,9 @@ function handleInput(event) {
   var parent = element.closest('.orders-items-item');
   var product_id = element.value;
   getProduct(product_id).then(function (data) {
-    var product = JSON.parse(data);
+    var product = data;
 
-    for (var _i = 0, _Object$entries = Object.entries(product[0]); _i < _Object$entries.length; _i++) {
+    for (var _i = 0, _Object$entries = Object.entries(product); _i < _Object$entries.length; _i++) {
       var _Object$entries$_i = _slicedToArray(_Object$entries[_i], 2),
           key = _Object$entries$_i[0],
           value = _Object$entries$_i[1];
@@ -2865,36 +2861,10 @@ function handleInput(event) {
   });
 }
 
-function getProduct(_x) {
-  return _getProduct.apply(this, arguments);
-}
-
-function _getProduct() {
-  _getProduct = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(product_id) {
-    var response;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            _context.next = 2;
-            return fetch((_reactjs_config__WEBPACK_IMPORTED_MODULE_0___default().restCatalog) + product_id + '/');
-
-          case 2:
-            response = _context.sent;
-            _context.next = 5;
-            return response.json();
-
-          case 5:
-            return _context.abrupt("return", _context.sent);
-
-          case 6:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return _getProduct.apply(this, arguments);
+function getProduct(product_id) {
+  return fetch((_reactjs_config__WEBPACK_IMPORTED_MODULE_0___default().restCatalog) + product_id + '/').then(function (response) {
+    return response.json();
+  });
 }
 
 /***/ }),

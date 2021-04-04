@@ -23,10 +23,9 @@ function handleInput(event) {
     let product_id = element.value;
 
     getProduct(product_id).then((data) => {
-        let product = JSON.parse(data);
+        let product = data;
 
-
-        for (const [key, value] of Object.entries(product[0])) {
+        for (const [key, value] of Object.entries(product)) {
 
             if (key === 'count') continue;
 
@@ -36,7 +35,6 @@ function handleInput(event) {
     });
 }
 
-async function getProduct(product_id) {
-    const response = await fetch(config.restCatalog + product_id + '/');
-    return await response.json();
+function getProduct(product_id) {
+    return fetch(config.restCatalog + product_id + '/').then(response => response.json());
 }
