@@ -16,13 +16,9 @@ class DeliveryCalculateService
 {
     private $api;
 
-    public function __construct(string $service, string $address)
+    public function __construct(string $service)
     {
         $this->getApi($service);
-
-//        return $this->getNormalAddress($address);
-//        return $this->getNormalPhone('89967026637');
-//        return $this->getPriceInfo();
     }
 
     public function getApi($service)

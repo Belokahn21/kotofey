@@ -13,6 +13,7 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
+import BuildQuery from "../../tools/BuildQuery";
 
 class Checkout extends Component {
     constructor(props) {
@@ -337,6 +338,8 @@ class Checkout extends Component {
 
                         {address}
 
+                        {/*<input type="text" name="demo" placeholder="адрес доставки" onChange={this.handleChangeAddress.bind(this)}/>*/}
+
                         <label className="checkout-form__label" htmlFor="checkout-comment">
                             <HtmlHelper errors={this.state.errors} element="textarea" modelName={this.modelName} options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
                         </label>
@@ -356,6 +359,15 @@ class Checkout extends Component {
             </div>
         )
     }
+
+    handleChangeAddress(e) {
+        let element = e.target;
+
+        RestRequest.all(config.restDeliveryCleanAddress + '?filter[text]=' + element.value).then(data => {
+            console.log(data);
+        });
+    }
+
 }
 
 

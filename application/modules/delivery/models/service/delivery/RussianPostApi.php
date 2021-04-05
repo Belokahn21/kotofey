@@ -37,10 +37,6 @@ class RussianPostApi implements DeliveryApi
             ]
         ], $this->_AUTH_HEADERS);
 
-        Debug::p($address);
-        Debug::p($result);
-
-
         return $result;
     }
 

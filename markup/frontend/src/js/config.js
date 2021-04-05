@@ -7,6 +7,7 @@ const config = {
     restOrder: url + 'api/order/',
     restBasket: url + 'api/basket/',
     restDelivery: url + 'api/delivery/',
+    restDeliveryCleanAddress: url + 'api/delivery/clean-address/',
     restPayment: url + 'api/payment/',
     restDates: url + 'api/order/dates/',
     ajaxActionGetMiniCartAmount: url + 'get-mini-cart-amount/',
