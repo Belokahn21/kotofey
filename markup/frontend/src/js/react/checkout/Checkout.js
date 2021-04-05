@@ -334,14 +334,19 @@ class Checkout extends Component {
                         <Variants unsetError={this.unsetError.bind(this)} errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
 
 
-
                         {/*<div className="checkout-form__title">Промокод и бонусы</div>*/}
                         {/*<div className="checkout-form__group-row">*/}
                         {/*    <PromocodeField promocode={this.state.promocode} updatePoromocode={this.updatePoromocode.bind(this)} refreshBasket={this.refreshBasket.bind(this)}/>*/}
                         {/*    {this.state.user !== null ? <UserBonusField usedBonus={this.state.usedBonus} refreshBasket={this.refreshBasket.bind(this)} updateUsedBonus={(value) => this.setState({usedBonus: value})} accountId={this.state.user.phone}/> : <CheckoutUserBonusAuth/>}*/}
                         {/*</div>*/}
 
-                        <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
+                        <div className="checkout-form__group-row" style={{alignItems: "center"}}>
+                            <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
+                            <p className="checkout-agree-text">
+                                Нажимая на кнопку «Оформить заказ», вы принимаете условия <a href="/about/agree/">Согласия на обработку персональных данных</a>
+                            </p>
+                        </div>
+
                     </form>
                 </div>
                 <div className="page__right">

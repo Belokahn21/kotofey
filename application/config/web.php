@@ -143,6 +143,7 @@ $config = [
                 'delivery' => 'site/site/delivery',
                 'contacts' => 'site/site/contacts',
                 'about' => 'site/site/about',
+                'about/agree' => 'site/site/agree',
                 'promotion' => 'promotion/promotion/index',
                 'promotion/<id[A-Za-z-\/\d_]+>' => 'promotion/promotion/view',
                 'signin' => 'user/auth/signin',

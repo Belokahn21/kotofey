@@ -131,6 +131,17 @@
 @import "include/block/checkout-reglament";
 @import "include/block/light-checkout-list";
 
+.checkout-agree-text {
+  text-align: justify;
+  max-width: 250px;
+  margin: 20px 0;
+  font-size: 12px;
+
+  a {
+    color: $active-color;
+  }
+}
+
 .bonus-no-authorize {
   width: 100%;
   padding: 10px 10px 10px 0;

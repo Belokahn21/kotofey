@@ -25,14 +25,6 @@ class SiteController extends Controller
             'error' => [
                 'class' => 'yii\web\ErrorAction',
             ],
-//            'auth' => [
-//                'class' => 'yii\authclient\AuthAction',
-//                'successCallback' => [$this, 'onAuthSuccess'],
-//            ],
-//            'captcha' => [
-//                'class' => 'yii\captcha\CaptchaAction',
-//                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-//            ],
         ];
     }
 
@@ -130,6 +122,14 @@ class SiteController extends Controller
         Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
 
         return $this->render('about');
+    }
+
+    public function actionAgree()
+    {
+        Attributes::metaDescription("Политика обработки персональных данных");
+        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+
+        return $this->render('agree');
     }
 
 

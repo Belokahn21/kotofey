@@ -12212,7 +12212,8 @@ p {
   font-weight: 700;
   text-align: left;
   color: #2d0c03;
-  width: 90%; }
+  width: 90%;
+  height: 150px; }
 
 .vitrine__link {
   color: #2d0c03; }
@@ -14219,6 +14220,14 @@ label[for="site-form-pet-avatar"] {
     font-size: 14px;
     font-weight: 400;
     line-height: 25px; }
+
+.checkout-agree-text {
+  text-align: justify;
+  max-width: 250px;
+  margin: 20px 0;
+  font-size: 12px; }
+  .checkout-agree-text a {
+    color: #ff1a4a; }
 
 .bonus-no-authorize {
   width: 100%;
