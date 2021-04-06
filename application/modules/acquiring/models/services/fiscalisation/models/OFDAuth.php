@@ -8,7 +8,7 @@ use yii\helpers\Json;
 
 class OFDAuth
 {
-    const URL = '';
+    const URL = 'https://ferma.ofd.ru/api/Authorization/CreateAuthToken';
 
     public function __construct($login, $password)
     {
@@ -17,9 +17,10 @@ class OFDAuth
             'password' => $password
         ]);
 
+        $data = Json::decode($response);
 
         return [
-            'token' => $response['token'],
+            'token' => $data['Data']['AuthToken'],
         ];
     }
 

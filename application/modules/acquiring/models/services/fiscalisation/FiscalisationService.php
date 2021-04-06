@@ -5,6 +5,7 @@ namespace app\modules\acquiring\models\services\fiscalisation;
 
 
 use app\modules\acquiring\models\services\fiscalisation\models\OFDApi;
+use app\modules\order\models\entity\Order;
 
 class FiscalisationService
 {
@@ -15,8 +16,10 @@ class FiscalisationService
         $this->api = new OFDApi();
     }
 
-    public function sendCheckClient($email, $phone = null)
+    public function sendCheckClient(Order $order, $email, $phone = null)
     {
-        $this->api->sendCheck();
+        $this->api->sendCheck($order, [
+            'email' => $email
+        ]);
     }
 }
