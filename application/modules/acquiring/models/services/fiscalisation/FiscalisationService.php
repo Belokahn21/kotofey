@@ -16,10 +16,17 @@ class FiscalisationService
         $this->api = new OFDApi();
     }
 
-    public function sendCheckClient(Order $order, $email, $phone = null)
+    public function sendCheckClientByEmail(Order $order, string $email)
     {
         $this->api->sendCheck($order, [
             'email' => $email
+        ]);
+    }
+
+    public function sendCheckClientByPhone(Order $order, string $phone)
+    {
+        $this->api->sendCheck($order, [
+            'phone' => $phone
         ]);
     }
 }

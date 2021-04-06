@@ -22,9 +22,14 @@ class Module extends MainModule
     public $real_token;
     public $bank;
     public $mode;
-    public $ofd_token;
+    public $ofd_login;
+    public $ofd_password;
     public $inn;
 
+    public function init()
+    {
+        parent::init();
+    }
 
     public function menuIndex()
     {
@@ -57,7 +62,8 @@ class Module extends MainModule
                 'off' => 'Отключен',
                 'test' => 'Тестовый режим'
             ],
-            'ofd_token' => '',
+            'ofd_login' => '',
+            'ofd_password' => '',
             'inn' => '',
         ];
     }
@@ -75,7 +81,8 @@ class Module extends MainModule
             'real_password' => 'Пароль (Боевой)',
             'real_token' => 'Токен (Боевой)',
 
-            'ofd_token' => 'Токен авторизации OFD.RU',
+            'ofd_login' => 'Логин lk.ofd.ru',
+            'ofd_password' => 'Пароль lk.ofd.ru',
             'inn' => 'ИНН организации'
         ];
     }

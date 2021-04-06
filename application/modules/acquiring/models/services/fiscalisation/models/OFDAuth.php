@@ -4,6 +4,7 @@
 namespace app\modules\acquiring\models\services\fiscalisation\models;
 
 
+use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 
 class OFDAuth
@@ -13,11 +14,16 @@ class OFDAuth
     public function __construct($login, $password)
     {
         $response = $this->send(self::URL, [
-            'login' => $login,
-            'password' => $password
+            'Login' => $login,
+            'Password' => $password
         ]);
 
+
         $data = Json::decode($response);
+
+        Debug::p($data);
+        exit();
+
 
         return [
             'token' => $data['Data']['AuthToken'],
