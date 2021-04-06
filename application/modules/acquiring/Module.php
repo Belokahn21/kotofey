@@ -49,6 +49,7 @@ class Module extends \yii\base\Module
                 'test' => 'Тестовый режим'
             ],
             'ofd_token' => '',
+            'inn' => '',
         ];
     }
 
@@ -65,7 +66,8 @@ class Module extends \yii\base\Module
             'real_password' => 'Пароль (Боевой)',
             'real_token' => 'Токен (Боевой)',
 
-            'ofd_token' => 'Токен авторизации OFD.RU'
+            'ofd_token' => 'Токен авторизации OFD.RU',
+            'inn' => 'ИНН организации'
         ];
     }
 }

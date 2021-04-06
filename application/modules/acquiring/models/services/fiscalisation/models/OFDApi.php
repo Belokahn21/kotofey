@@ -3,6 +3,9 @@
 namespace app\modules\acquiring\models\services\fiscalisation\models;
 
 
+use app\modules\site\models\helpers\ModuleSettingsHelper;
+use yii\helpers\Json;
+
 class OFDApi
 {
     const URL = 'https://ferma.ofd.ru/api/kkt/cloud/';
@@ -11,7 +14,10 @@ class OFDApi
 
     public function sendCheck()
     {
-        $params = [];
+        $params = [
+            'Inn' => ModuleSettingsHelper::getValue('acquiring', 'inn'),
+            'Type' => 'income',
+        ];
 
         $this->send(self::ACTION_CREATE_CHECK, $params);
     }
@@ -22,7 +28,10 @@ class OFDApi
             curl_setopt($curl, CURLOPT_URL, self::URL . $action);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_POST, true);
-            curl_setopt($curl, CURLOPT_POSTFIELDS, "a=4&b=7");
+
+            if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, Json::encode($data));
+
+
             $out = curl_exec($curl);
             echo $out;
             curl_close($curl);
