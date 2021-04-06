@@ -4,10 +4,15 @@ namespace app\modules\acquiring\models\services\fiscalisation\models;
 
 use app\modules\acquiring\Module;
 use app\modules\order\models\entity\Order;
+use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\helpers\ModuleSettingsHelper;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 
+/**
+ * @property string $ofd_token
+ * @property Module $module
+ */
 class OFDApi
 {
     private $ofd_token;
@@ -29,23 +34,22 @@ class OFDApi
 
         if (empty($this->module->ofd_login) || empty($this->module->ofd_password)) throw new \Exception('Нет авторизационных данных для получения токена.');
 
-        $this->ofd_token = new OFDAuth($this->module->ofd_login, $this->module->ofd_password);
+        $this->ofd_token = (new OFDAuth($this->module->ofd_login, $this->module->ofd_password))->getToken();
     }
 
     public function sendCheck(Order $order, $userData = [])
     {
-
         $items = $order->items;
 
         $params = [
-            'Inn' => ModuleSettingsHelper::getValue('acquiring', 'inn'),
-            'Type' => 'income',
+            'Inn' => $this->module->inn,
+            'Type' => 'Income',
             'InvoiceId' => $order->id,
-            'LocalDate' => date('d.m.Y H:i:s', $order->created_at),
+            'LocalDate' => date('d.m.YТH:i:s', $order->created_at),
             'CustomerReceipt' => [
-                'TaxationSystem' => 'VatNo',
+                'TaxationSystem' => 'SimpleInOut',
                 'Email' => $userData['email'],
-                'PaymentType' => 'VatNo',
+                'PaymentType' => 1,
                 'KktFA' => true,
                 'CustomUserProperty' => [
 //                    'AutomatNumber' => "123456",
@@ -53,6 +57,15 @@ class OFDApi
                 ],
 
             ],
+
+            'PaymentItems' => [
+                'PaymentType' => in_array($order->payment_id, [1, 3]) ? 0 : 1,
+                'Sum' => OrderHelper::orderSummary($order),
+            ],
+            'Cashier' => [
+                "Name" => "Васин Константин Викторович",
+//                    "Inn" => "991133557"
+            ]
         ];
 
         $paramsItems = [];
@@ -61,7 +74,7 @@ class OFDApi
                 "Label" => $item->name,
                 "Price" => $item->price,
                 "Quantity" => $item->count,
-                "Amount" => $item->price * $item->count,
+                "Amount" => OrderHelper::orderSummary($order),
                 "Vat" => "Vat0",
 //                "MarkingCode" => "000559D39E7F197241424331323334",
 //                "MarkingCodeStructured" => [
@@ -86,14 +99,13 @@ class OFDApi
                     "SupplierName" => "Иван Иванов",
                     "SupplierPhone" => "+79000000004"
                 ],
-                'Cashier' => [
-                    "Name" => "Васин Константин Викторович",
-                    "Inn" => "991133557"
-                ]
             ];
         }
 
         $params['Items'] = $paramsItems;
+
+
+//        Debug::p($params); exit();
 
         $response = $this->send(self::ACTION_CREATE_CHECK, $params);
 
@@ -104,18 +116,21 @@ class OFDApi
     {
         $response = false;
         if ($curl = curl_init()) {
-            curl_setopt($curl, CURLOPT_URL, self::DEMO_URL . $action);
-//            curl_setopt($curl, CURLOPT_URL, self::URL . $action);
+            curl_setopt($curl, CURLOPT_URL, self::DEMO_URL . $action . '?AuthToken=' . $this->getOfdToken());
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_POST, true);
 
 
             $finish_headers = [
-                'Content-Type: application/json;charset=utf-8 ',
+                'Content-Type: application/json;charset=utf-8',
             ];
             if ($headers) $finish_headers = array_merge($finish_headers, $headers);
             curl_setopt($curl, CURLOPT_HTTPHEADER, $finish_headers);
-            if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, Json::encode($data));
+
+
+            if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, Json::encode([
+                'Request' => $data
+            ]));
 
 
             $response = curl_exec($curl);
@@ -130,5 +145,10 @@ class OFDApi
         if (!\Yii::$app->hasModule(self::MODULE_ID)) throw new \Exception('Модуль эквайринга не подключен.');
 
         $this->module = \Yii::$app->getModule(self::MODULE_ID);
+    }
+
+    public function getOfdToken()
+    {
+        return $this->ofd_token;
     }
 }

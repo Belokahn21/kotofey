@@ -12,6 +12,13 @@ class OFDAuth
     const URL = 'https://ferma.ofd.ru/api/Authorization/CreateAuthToken';
     const DEMO_URL = 'https://ferma-test.ofd.ru/api/Authorization/CreateAuthToken';
 
+    private $token;
+
+    /**
+     * OFDAuth constructor.
+     * @param $login
+     * @param $password
+     */
     public function __construct($login, $password)
     {
         $response = $this->send(self::DEMO_URL, [
@@ -23,10 +30,23 @@ class OFDAuth
         $data = Json::decode($response);
 
 
+        $this->setToken($data['Data']['AuthToken']);
+    }
 
-        return [
-            'token' => $data['Data']['AuthToken'],
-        ];
+    /**
+     * @param mixed $token
+     */
+    public function setToken($token)
+    {
+        $this->token = $token;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getToken()
+    {
+        return $this->token;
     }
 
 
@@ -40,7 +60,7 @@ class OFDAuth
 
 
             $finish_headers = [
-                'Content-Type: application/json;charset=utf-8 ',
+                'Content-Type: application/json;charset=utf-8',
             ];
             if ($headers) $finish_headers = array_merge($finish_headers, $headers);
             curl_setopt($curl, CURLOPT_HTTPHEADER, $finish_headers);
