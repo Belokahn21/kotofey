@@ -2,20 +2,29 @@
 
 namespace app\modules\acquiring;
 
+use app\modules\site\MainModule;
 use yii\helpers\Url;
 
 /**
  * acquiring module definition class
  */
-class Module extends \yii\base\Module
+class Module extends MainModule
 {
     public $controllerNamespace = 'app\modules\acquiring\controllers';
     private $name = 'Эквайринг';
 
-    public function init()
-    {
-        parent::init();
-    }
+    public $is_enable;
+    public $test_login;
+    public $test_password;
+    public $test_token;
+    public $real_login;
+    public $real_password;
+    public $real_token;
+    public $bank;
+    public $mode;
+    public $ofd_token;
+    public $inn;
+
 
     public function menuIndex()
     {
@@ -32,7 +41,7 @@ class Module extends \yii\base\Module
     public function getParams()
     {
         return [
-            'isEnable' => true,
+            'is_enable' => true,
             'test_login' => '',
             'test_password' => '',
             'test_token' => '',
