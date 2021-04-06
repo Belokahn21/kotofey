@@ -15,7 +15,6 @@ class MainModule extends \yii\base\Module
 
     public function loadParams()
     {
-
-
+//        $values = Module
     }
 }
