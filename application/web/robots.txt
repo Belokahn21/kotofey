@@ -25,6 +25,7 @@ Disallow: /rest/*
 Disallow: /resotre/
 Disallow: /referal/
 Disallow: /resotre/*
+Disallow: /about/agree/
 
 Sitemap: https://kotofey.store/sitemap.xml
 
