@@ -43,7 +43,9 @@ class OFDApi
             ],
         ];
 
-//        $this->send(self::ACTION_CREATE_CHECK, $params);
+        $response = $this->send(self::ACTION_CREATE_CHECK, $params);
+
+        Debug::p($response);
     }
 
     public function send($action, $data = [], $headers = [])
@@ -54,6 +56,12 @@ class OFDApi
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_POST, true);
 
+
+            $finish_headers = [
+                'Content-Type: application/json;charset=utf-8 ',
+            ];
+            if ($headers) $finish_headers = array_merge($finish_headers, $headers);
+            curl_setopt($curl, CURLOPT_HTTPHEADER, $finish_headers);
             if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, Json::encode($data));
 
 
