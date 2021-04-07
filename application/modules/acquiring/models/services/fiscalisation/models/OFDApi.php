@@ -43,23 +43,14 @@ class OFDApi
         $items = $order->items;
 
         $params = [
-            'Inn' => '2465165753',
+            'Inn' => $this->module->inn,
             'Type' => 'Income',
             'InvoiceId' => rand(),
             'CustomerReceipt' => [
                 'TaxationSystem' => 'Common',
-                'Email' => "popugau@gmail.com",
-                "Phone" => "+79000000000",
-                "InstallmentPlace" => null,
-                "InstallmentAddress" => null,
-                "AutomaticDeviceNumber" => null,
-                "PaymentType" => 1,
-                "PaymentAgentInfo" => null,
-                "CorrectionInfo" => null,
-                "ClientInfo" => [
-                    "Name" => "Иванов Иван Иванович",
-                    "Inn" => "5645645319"
-                ],
+                'Email' => $userData['email'],
+                "InstallmentPlace" => 'https://kotofey.store',
+                "PaymentType" => 1, //товар
             ],
             'PaymentItems' => null,
         ];
@@ -72,11 +63,11 @@ class OFDApi
                 "Quantity" => $item->count,
                 "Amount" => round($item->price * $item->count),
                 "Vat" => "VatNo",
-                "MarkingCodeStructured" => null,
-                "MarkingCode" => null,
-                "PaymentMethod" => 3,
-                "PaymentType" => 4,
-                "OriginCountryCode" => "643",
+//                "MarkingCodeStructured" => null,
+//                "MarkingCode" => null,
+                "PaymentMethod" => 4, //полный расчет
+                "PaymentType" => 1,
+//                "OriginCountryCode" => "643",
                 "CustomsDeclarationNumber" => null,
                 "PaymentAgentInfo" => null
             ];
