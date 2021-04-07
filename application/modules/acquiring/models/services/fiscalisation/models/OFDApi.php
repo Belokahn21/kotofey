@@ -45,7 +45,7 @@ class OFDApi
 
         $params = [
             'Inn' => $this->module->inn,
-            'Type' => 'Income',
+            'Type' => 'Income1',
             'InvoiceId' => rand(),
             'CustomerReceipt' => [
                 'TaxationSystem' => $this->module->ofd_taxation_system,
@@ -74,7 +74,12 @@ class OFDApi
 
         $response = $this->send(self::ACTION_CREATE_CHECK, $params);
 
-        Debug::p($response);
+        $result = Json::decode($response);
+
+        if ($result['Status'] == 'Success' && array_key_exists('Data', $result) && array_key_exists('ReceiptId', $result['Data'])) return $result['Data']['ReceiptId'];
+
+        throw new \Exception($result['Error']['Message']);
+
     }
 
     public function send($action, $data = [], $headers = [])

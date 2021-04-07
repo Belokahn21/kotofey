@@ -1,9 +1,8 @@
 <?php
 
-
 namespace app\modules\acquiring\models\services\fiscalisation;
 
-
+use app\modules\acquiring\models\services\check_history\ServiceCheckHistory;
 use app\modules\acquiring\models\services\fiscalisation\models\OFDApi;
 use app\modules\order\models\entity\Order;
 
@@ -18,9 +17,23 @@ class FiscalisationService
 
     public function sendCheckClientByEmail(Order $order, string $email)
     {
-        $this->api->sendCheck($order, [
-            'email' => $email
-        ]);
+        // Чеки отправляются только оплаченым и закрытым заказам.
+        if (!$order->is_paid || !$order->is_close) return false;
+
+        // Нет ли старых записей
+        if (ServiceCheckHistory::hasCheckHistory($order->id)) return false;
+
+        try {
+            $check_id = $this->api->sendCheck($order, [
+                'email' => $email
+            ]);
+
+            ServiceCheckHistory::saveCheckHistory($order->id, $check_id);
+
+
+        } catch (\Exception $e) {
+            //todo: оповестить Администратора?
+        }
     }
 
     public function sendCheckClientByPhone(Order $order, string $phone)

@@ -3,6 +3,7 @@
 namespace app\modules\order\models\entity;
 
 
+use app\modules\acquiring\models\services\fiscalisation\FiscalisationService;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\service\BonusService;
 use app\modules\promocode\models\entity\Promocode;
@@ -86,7 +87,7 @@ class Order extends ActiveRecord
             [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house', 'bonus'], 'integer'],
 
 
-            [['payment_id', 'delivery_id'], 'required', 'on' => self::SCENARIO_CLIENT_BUY,'message' => 'Укажите {attribute}'],
+            [['payment_id', 'delivery_id'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите {attribute}'],
             [['payment_id', 'delivery_id', 'user_id', 'status'], 'default', 'value' => 0],
 
             [['is_paid', 'is_cancel'], 'default', 'value' => false],
@@ -126,6 +127,7 @@ class Order extends ActiveRecord
         }
 
         new BonusService($this);
+        (new FiscalisationService())->sendCheckClientByEmail($this, $this->email);
 
 
         // todo: херня выходит с пересохранением заказа, надо поправить
