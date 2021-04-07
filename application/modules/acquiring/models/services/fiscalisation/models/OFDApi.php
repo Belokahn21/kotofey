@@ -8,6 +8,7 @@ use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\helpers\ModuleSettingsHelper;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\System;
 use yii\helpers\Json;
 
 /**
@@ -47,9 +48,9 @@ class OFDApi
             'Type' => 'Income',
             'InvoiceId' => rand(),
             'CustomerReceipt' => [
-                'TaxationSystem' => 'Common',
+                'TaxationSystem' => $this->module->ofd_taxation_system,
                 'Email' => $userData['email'],
-                "InstallmentPlace" => 'https://kotofey.store',
+                "InstallmentPlace" => System::fullDomain(),
                 "PaymentType" => 1, //товар
             ],
             'PaymentItems' => null,
@@ -63,13 +64,7 @@ class OFDApi
                 "Quantity" => $item->count,
                 "Amount" => round($item->price * $item->count),
                 "Vat" => "VatNo",
-//                "MarkingCodeStructured" => null,
-//                "MarkingCode" => null,
                 "PaymentMethod" => 4, //полный расчет
-                "PaymentType" => 1,
-//                "OriginCountryCode" => "643",
-                "CustomsDeclarationNumber" => null,
-                "PaymentAgentInfo" => null
             ];
         }
 

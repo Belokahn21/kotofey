@@ -22,9 +22,10 @@ class Module extends MainModule
     public $real_token;
     public $bank;
     public $mode;
+    public $inn;
     public $ofd_login;
     public $ofd_password;
-    public $inn;
+    public $ofd_taxation_system;
 
     public function init()
     {
@@ -62,9 +63,17 @@ class Module extends MainModule
                 'off' => 'Отключен',
                 'test' => 'Тестовый режим'
             ],
+            'inn' => '',
             'ofd_login' => '',
             'ofd_password' => '',
-            'inn' => '',
+            'ofd_taxation_system' => [
+                'Common' => 'общая система налогообложения',
+                'SimpleIn' => 'упрощенная система налогообложения (доход)',
+                'SimpleInOut' => 'упрощенная система налогообложения (доход минус расход)',
+                'Unified' => 'единый налог на вмененный доход',
+                'UnifiedAgricultural' => 'единый сельскохозяйственный налог',
+                'Patent' => 'патентная система налогообложения',
+            ],
         ];
     }
 
@@ -81,9 +90,13 @@ class Module extends MainModule
             'real_password' => 'Пароль (Боевой)',
             'real_token' => 'Токен (Боевой)',
 
+            'bank' => 'Банк эквайринга',
+            'mode' => 'Режим эквайринга',
+
+            'inn' => 'ИНН организации',
             'ofd_login' => 'Логин lk.ofd.ru',
             'ofd_password' => 'Пароль lk.ofd.ru',
-            'inn' => 'ИНН организации'
+            'ofd_taxation_system' => 'Система налогаобложения',
         ];
     }
 }
