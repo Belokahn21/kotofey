@@ -36,7 +36,7 @@ $this->title = Title::show("Список доставок");
                         <div class="logistic-list-data__value"><?= OrderHelper::getStatus($order); ?></div>
                     </div>
 
-                    <div class="logistic-list-data__row">
+                    <div class="logistic-list-data__col">
                         <div class="logistic-list-data__key">Телефон/Email:</div>
                         <div class="logistic-list-data__value">
 
@@ -50,7 +50,7 @@ $this->title = Title::show("Список доставок");
                         </div>
                     </div>
 
-                    <div class="logistic-list-data__row">
+                    <div class="logistic-list-data__col">
                         <div class="logistic-list-data__key">Адрес доставки:</div>
                         <div class="logistic-list-data__value">
                             <?= !$order->city ? '' : 'г.' . $order->city; ?>
