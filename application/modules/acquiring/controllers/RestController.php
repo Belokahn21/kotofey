@@ -41,23 +41,23 @@ class RestController extends ActiveController
         $data = \Yii::$app->request->post();
         $order_id = $data['order_id'];
         $order = Order::findOne($order_id);
+        $module = \Yii::$app->getModule('acquiring');
 
         //settings
         $login = "";
         $password = "";
-        $modeAcquiring = ModuleSettingsHelper::getValue('acquiring', 'mode');
 
-        if ($modeAcquiring == 'test') {
-            $login = ModuleSettingsHelper::getValue('acquiring', 'test_login');
-            $password = ModuleSettingsHelper::getValue('acquiring', 'test_password');
+        if ($module->mode == 'test') {
+            $login = $module->test_login;
+            $password = $module->test_password;
         }
 
-        if ($modeAcquiring == 'on') {
-            $login = ModuleSettingsHelper::getValue('acquiring', 'real_login');
-            $password = ModuleSettingsHelper::getValue('acquiring', 'real_password');
+        if ($module->mode == 'on') {
+            $login = $module->real_login;
+            $password = $module->real_password;
         }
 
-        if ($modeAcquiring == 'off') {
+        if ($module->mode == 'off') {
             throw new \Exception('В настройках сайта отключена работа Эквайринга, измените значение mode_acquiring в настройках сайта.');
         }
 

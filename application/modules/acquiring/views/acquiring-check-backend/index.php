@@ -5,18 +5,20 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 
 /* @var $this \yii\web\View */
+/* @var $searchModel \app\modules\acquiring\models\search\AcquiringOrderSearch */
+/* @var $dataProvider \yii\data\ActiveDataProvider */
 
-$this->title = \app\modules\seo\models\tools\Title::show('Управление оплатамии');
+$this->title = \app\modules\seo\models\tools\Title::show('Управление чеками');
 
 ?>
     <div class="title-group">
-        <h1>Банковские транзакции</h1>
+        <h1>История отправки чеков</h1>
     </div>
 <?php
 echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Оплаты отсутствуют',
+    'emptyText' => 'Чеки отсутствуют',
     'columns' => [
         'id',
         [

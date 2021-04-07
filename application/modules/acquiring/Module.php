@@ -36,6 +36,7 @@ class Module extends MainModule
     {
         return [
             ['name' => 'Оплаты', 'url' => Url::to(['/admin/acquiring/acquiring-backend/index'])],
+            ['name' => 'Чеки', 'url' => Url::to(['/admin/acquiring/acquiring-check-backend/index'])],
         ];
     }
 
