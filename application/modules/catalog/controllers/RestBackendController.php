@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\controllers;
 
+
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -17,4 +18,6 @@ class RestBackendController extends ActiveController
         ];
         return $behaviors;
     }
+
+
 }
