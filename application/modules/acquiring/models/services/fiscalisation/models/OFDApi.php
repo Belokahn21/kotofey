@@ -67,10 +67,10 @@ class OFDApi
         $paramsItems = [];
         foreach ($items as $item) {
             $paramsItems[] = [
-                "Label" => "Апартамент A005 с 21.08 по 25.08",
-                "Price" => 7600.0,
-                "Quantity" => 1.0,
-                "Amount" => 1.0,
+                "Label" => $item->name,
+                "Price" => $item->price,
+                "Quantity" => $item->count,
+                "Amount" => round($item->price * $item->count),
                 "Vat" => "VatNo",
                 "MarkingCodeStructured" => null,
                 "MarkingCode" => null,
