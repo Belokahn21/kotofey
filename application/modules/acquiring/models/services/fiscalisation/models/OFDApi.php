@@ -7,6 +7,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\helpers\ModuleSettingsHelper;
 use app\modules\site\models\tools\Debug;
+use app\modules\site\models\tools\Price;
 use yii\helpers\Json;
 
 /**
@@ -42,68 +43,46 @@ class OFDApi
         $items = $order->items;
 
         $params = [
-            'Inn' => $this->module->inn,
+            'Inn' => '2465165753',
             'Type' => 'Income',
-            'InvoiceId' => $order->id,
-            'LocalDate' => date('d.m.YТH:i:s', $order->created_at),
+            'InvoiceId' => 1,
             'CustomerReceipt' => [
-                'TaxationSystem' => 'SimpleInOut',
-                'Email' => $userData['email'],
-                'PaymentType' => 1,
-                'KktFA' => true,
-                'CustomUserProperty' => [
-//                    'AutomatNumber' => "123456",
-                    'BillAddress' => "Барнаул, ул. Северо-Западная, 6Б",
+                'TaxationSystem' => 'Common',
+                'Email' => "popugau@gmail.com",
+                "Phone" => "+79000000000",
+                "InstallmentPlace" => null,
+                "InstallmentAddress" => null,
+                "AutomaticDeviceNumber" => null,
+                "PaymentType" => 1,
+                "PaymentAgentInfo" => null,
+                "CorrectionInfo" => null,
+                "ClientInfo" => [
+                    "Name" => "Иванов Иван Иванович",
+                    "Inn" => "5645645319"
                 ],
-
             ],
-
-            'PaymentItems' => [
-                'PaymentType' => in_array($order->payment_id, [1, 3]) ? 0 : 1,
-                'Sum' => OrderHelper::orderSummary($order),
-            ],
-            'Cashier' => [
-                "Name" => "Васин Константин Викторович",
-//                    "Inn" => "991133557"
-            ]
+            'PaymentItems' => null,
         ];
 
         $paramsItems = [];
         foreach ($items as $item) {
             $paramsItems[] = [
-                "Label" => $item->name,
-                "Price" => $item->price,
-                "Quantity" => $item->count,
-                "Amount" => OrderHelper::orderSummary($order),
-                "Vat" => "Vat0",
-//                "MarkingCode" => "000559D39E7F197241424331323334",
-//                "MarkingCodeStructured" => [
-//                    "Type" => "MEDICINES",
-//                    "Gtin" => "77777777777777",
-//                    "Serial" => "RXWWWRRRRRRRR"
-//                ],
-                "PaymentMethod" => 4,
-//                "OriginCountryCode" => "398",
-//                "CustomsDeclarationNumber" => "ТаможняДала Добро №1/#15",
-                "PaymentType" => 1,
-                "PaymentAgentInfo" => [
-                    "AgentType" => "BANK_PAYMENT_AGENT",
-                    "TransferAgentPhone" => "+79000000001",
-                    "TransferAgentName" => "наименование оператора перевода",
-                    "TransferAgentAddress" => "адрес оператора перевода",
-                    "TransferAgentINN" => "1234567890",
-                    "PaymentAgentOperation" => "операция платежного агента",
-                    "PaymentAgentPhone" => "+79000000002",
-                    "ReceiverPhone" => "+79000000003",
-                    "SupplierInn" => "012345678901",
-                    "SupplierName" => "Иван Иванов",
-                    "SupplierPhone" => "+79000000004"
-                ],
+                "Label" => "Апартамент A005 с 21.08 по 25.08",
+                "Price" => 7600.0,
+                "Quantity" => 1.0,
+                "Amount" => 1.0,
+                "Vat" => "VatNo",
+                "MarkingCodeStructured" => null,
+                "MarkingCode" => null,
+                "PaymentMethod" => 3,
+                "PaymentType" => 4,
+                "OriginCountryCode" => "643",
+                "CustomsDeclarationNumber" => null,
+                "PaymentAgentInfo" => null
             ];
         }
 
-        $params['Items'] = $paramsItems;
-
+        $params['CustomerReceipt']['Items'] = $paramsItems;
 
 //        Debug::p($params); exit();
 

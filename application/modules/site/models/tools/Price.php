@@ -9,4 +9,10 @@ class Price
     {
         return number_format($price, 0, '.', ' ');
     }
+
+    public static function toFloat(int $summ)
+    {
+        return $summ;
+//        return floor((float) floatval($summ));
+    }
 }
