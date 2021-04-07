@@ -9,9 +9,15 @@ use app\modules\order\models\entity\Order;
 class FiscalisationService
 {
     private $api;
+    private $module;
 
     public function __construct()
     {
+        $this->module = \Yii::$app->getModule('acquiring');
+
+        if ($this->module->ofd_mode != 'on') return false;
+
+
         $this->api = new OFDApi();
     }
 

@@ -40,6 +40,9 @@ class SettingsBackendController extends MainBackendController
                     $obj->setAttributes($arPost);
 
                     if (!$obj->validate() || !$obj->save()) {
+
+                        Yii::$app->cache->delete('settings:' . $id);
+
                         Alert::setErrorNotify('Не удалось сохранить значения');
                         return false;
                     }

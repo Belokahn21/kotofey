@@ -23,6 +23,7 @@ class Module extends MainModule
     public $bank;
     public $mode;
     public $inn;
+    public $ofd_mode;
     public $ofd_login;
     public $ofd_password;
     public $ofd_taxation_system;
@@ -65,6 +66,10 @@ class Module extends MainModule
                 'test' => 'Тестовый режим'
             ],
             'inn' => '',
+            'ofd_mode' => [
+                'on' => 'Работает',
+                'off' => 'Не работает',
+            ],
             'ofd_login' => '',
             'ofd_password' => '',
             'ofd_taxation_system' => [
@@ -95,6 +100,7 @@ class Module extends MainModule
             'mode' => 'Режим эквайринга',
 
             'inn' => 'ИНН организации',
+            'ofd_mode' => 'Отправка чеков',
             'ofd_login' => 'Логин lk.ofd.ru',
             'ofd_password' => 'Пароль lk.ofd.ru',
             'ofd_taxation_system' => 'Система налогаобложения',
