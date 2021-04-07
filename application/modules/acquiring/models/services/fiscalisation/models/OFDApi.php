@@ -45,7 +45,7 @@ class OFDApi
 
         $params = [
             'Inn' => $this->module->inn,
-            'Type' => 'Income1',
+            'Type' => 'Income',
             'InvoiceId' => rand(),
             'CustomerReceipt' => [
                 'TaxationSystem' => $this->module->ofd_taxation_system,
