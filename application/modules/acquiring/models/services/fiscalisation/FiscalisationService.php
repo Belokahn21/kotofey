@@ -18,7 +18,7 @@ class FiscalisationService
     public function sendCheckClientByEmail(Order $order, string $email)
     {
         // Чеки отправляются только оплаченым и закрытым заказам.
-        if (!$order->is_paid || !$order->is_close) return false;
+        if (!$order->is_paid) return false;
 
         // Нет ли старых записей
         if (ServiceCheckHistory::hasCheckHistory($order->id)) return false;
