@@ -4432,6 +4432,7 @@ var config = {
   restOrder: url + 'api/order/',
   restBasket: url + 'api/basket/',
   restDelivery: url + 'api/delivery/',
+  restDeliveryCleanAddress: url + 'api/delivery/clean-address/',
   restPayment: url + 'api/payment/',
   restDates: url + 'api/order/dates/',
   ajaxActionGetMiniCartAmount: url + 'get-mini-cart-amount/',
@@ -6582,13 +6583,14 @@ var Input = /*#__PURE__*/function (_Component) {
     key: "render",
     value: function render() {
       var options = this.props.options;
+      var errors = this.props.errors;
       var error, aria_invalid;
 
-      if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
+      if (_typeof(errors) === 'object' && !Array.isArray(errors)) {
         error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
-          errors: this.props.errors[options.name]
+          errors: errors[options.name]
         });
-        aria_invalid = this.props.errors[options.name] !== undefined && this.props.errors[options.name] !== null;
+        aria_invalid = errors[options.name] !== undefined && errors[options.name] !== null;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -6667,20 +6669,20 @@ var Textarea = /*#__PURE__*/function (_Component) {
   _createClass(Textarea, [{
     key: "render",
     value: function render() {
-      var error,
-          aria_invalid,
-          options = this.props.options;
+      var error, aria_invalid;
+      var options = this.props.options;
+      var errors = this.props.errors;
 
-      if (_typeof(this.props.errors) === 'object' && !Array.isArray(this.props.errors)) {
+      if (_typeof(errors) === 'object' && !Array.isArray(errors)) {
         error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Error__WEBPACK_IMPORTED_MODULE_1__.default, {
-          errors: this.props.errors[options.name]
+          errors: errors[options.name]
         });
-        aria_invalid = this.props.errors[options.name] !== undefined;
+        aria_invalid = errors[options.name] !== undefined;
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__label-text"
-      }, this.props.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, options.title), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-group field-checkout-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         id: "checkout-comment",
