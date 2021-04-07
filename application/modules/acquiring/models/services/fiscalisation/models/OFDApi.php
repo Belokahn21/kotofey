@@ -45,7 +45,7 @@ class OFDApi
         $params = [
             'Inn' => '2465165753',
             'Type' => 'Income',
-            'InvoiceId' => 1,
+            'InvoiceId' => rand(),
             'CustomerReceipt' => [
                 'TaxationSystem' => 'Common',
                 'Email' => "popugau@gmail.com",
