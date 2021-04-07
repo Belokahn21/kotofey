@@ -13102,7 +13102,7 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 20px 25px;
+  padding: 20px 25px 5px 25px;
   font-size: 14px;
   font-weight: 400;
   color: black; }
@@ -13141,6 +13141,25 @@ p {
   .social-me__image {
     width: 40px;
     object-fit: contain; }
+
+.footer-docs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 5px 25px; }
+  .footer-docs__item {
+    flex: 0 0 auto; }
+    .footer-docs__item:not(:last-child) {
+      margin-right: 15px; }
+  .footer-docs__link {
+    text-transform: uppercase;
+    color: #ff1a4a;
+    font-size: 14px;
+    font-weight: bold; }
+    .footer-docs__link:hover {
+      color: #ff1a4a; }
 
 .fast-cart {
   position: fixed;

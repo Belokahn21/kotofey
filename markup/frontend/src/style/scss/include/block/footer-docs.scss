@@ -1,0 +1,27 @@
+.footer-docs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 5px 25px;
+
+  &__item {
+    flex: 0 0 auto;
+
+    &:not(:last-child) {
+      margin-right: 15px;
+    }
+  }
+
+  &__link {
+    text-transform: uppercase;
+    color: $active-color;
+    font-size: 14px;
+    font-weight: bold;
+
+    &:hover {
+      color: $active-color;
+    }
+  }
+}
