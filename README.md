@@ -16,5 +16,7 @@ v1: Gulp, Babel, Sass, Pug<br>
 v2: webpack, pug, react
 MySQL<br><br>
 Используется:<br>
- - TinyPNG API (free 500/mounth)<br>
- - Cloudinary (CDN)
+ - Интеграция с TinyPNG API (free 500/mounth)<br>
+ - Интеграция с Cloudinary (CDN)<br>
+ - Интеграция с OFD.RU (Ferma)<br>
+ - Интеграция с Почта России (API расчётов)
