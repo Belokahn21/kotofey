@@ -12,11 +12,13 @@ use yii\helpers\Url;
 $this->title = Title::show($model->name);
 ?>
 <section class="delivery">
-    <h1 class="title">Доставка: <?= $model->name; ?></h1>
-    <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>
-	<?php $form = ActiveForm::begin([
-		'options' => ['enctype' => 'multipart/form-data']
-	]); ?>
+    <div class="title-group">
+        <h1 class="title">Доставка: <?= $model->name; ?></h1>
+        <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>
+    </div>
+    <?php $form = ActiveForm::begin([
+        'options' => ['enctype' => 'multipart/form-data']
+    ]); ?>
     <?= $this->render('_form', [
         'model' => $model,
         'form' => $form,

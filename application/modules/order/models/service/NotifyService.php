@@ -40,13 +40,11 @@ class NotifyService
 				Сумма заказа: {$orderSumm}\n\n";
 
                 $message .= "Клиент:\n";
-                if (!empty($order->phone)) {
-                    $message .= "Телефон: {$order->phone}\n";
-                }
 
-                if (!empty($order->email)) {
-                    $message .= "Email: {$order->email}";
-                }
+                if (!empty($order->phone)) $message .= "Телефон: {$order->phone}\n";
+                if (!empty($order->email)) $message .= "Email: {$order->email}";
+                $message .= "Оплата: " . OrderHelper::getPayment($order) . "\n";
+                $message .= "Доставка: " . OrderHelper::getDelivery($order) . "\n";
 
                 $message .= "\n\n";
                 if (!empty($order->comment)) {
