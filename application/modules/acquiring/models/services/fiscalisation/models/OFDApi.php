@@ -26,6 +26,7 @@ class OFDApi
     const URL = 'https://ferma.ofd.ru/api/kkt/cloud/';
     const DEMO_URL = 'https://ferma-test.ofd.ru/api/kkt/cloud/';
     const ACTION_CREATE_CHECK = 'receipt';
+    const ACTION_STATUS_CHECK = 'status';
 
     /**
      * @property Module @module
@@ -47,7 +48,7 @@ class OFDApi
         $params = [
             'Inn' => $this->module->inn,
             'Type' => 'Income',
-            'InvoiceId' => rand(),
+            'InvoiceId' => $order->id,
             'CustomerReceipt' => [
                 'TaxationSystem' => $this->module->ofd_taxation_system,
                 'Email' => $userData['email'],
@@ -60,10 +61,10 @@ class OFDApi
                     ]
                 ],
             ],
-            "Cashier" => [
-                "Name" => "Васин Константин Викторович",
-                "Inn" => "222261129226"
-            ]
+//            "Cashier" => [
+//                "Name" => "Васин Константин Викторович",
+//                "Inn" => "222261129226"
+//            ]
         ];
 
         $paramsItems = [];
@@ -90,6 +91,28 @@ class OFDApi
 
         throw new \Exception($result['Error']['Message']);
 
+    }
+
+    public function statusCheckByCheckId(string $check_id)
+    {
+        $response = $this->send(self::ACTION_STATUS_CHECK, [
+            'ReceiptId' => $check_id
+        ]);
+
+        $result = Json::decode($response);
+
+        Debug::p($result);
+    }
+
+    public function statusCheckByOrderId(int $order_id)
+    {
+        $response = $this->send(self::ACTION_STATUS_CHECK, [
+            'InvoiceId' => $order_id
+        ]);
+
+        $result = Json::decode($response);
+
+        Debug::p($result);
     }
 
     public function send($action, $data = [], $headers = [])
