@@ -101,7 +101,8 @@ class OFDApi
 
         $result = Json::decode($response);
 
-        Debug::p($result);
+//        Debug::p($result);
+        return $result;
     }
 
     public function statusCheckByOrderId(int $order_id)
@@ -112,7 +113,8 @@ class OFDApi
 
         $result = Json::decode($response);
 
-        Debug::p($result);
+//        Debug::p($result);
+        return $result;
     }
 
     public function send($action, $data = [], $headers = [])

@@ -52,11 +52,11 @@ class FiscalisationService
 
     public function getCheckStatusByOrderId(int $order_id)
     {
-        $this->api->statusCheckByOrderId($order_id);
+        return $this->api->statusCheckByOrderId($order_id);
     }
 
     public function getCheckStatusByCheckId(string $check_id)
     {
-        $this->api->statusCheckByCheckId($check_id);
+        return $this->api->statusCheckByCheckId($check_id);
     }
 }

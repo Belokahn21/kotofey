@@ -26,6 +26,8 @@ class AcquiringCheckBackendController extends MainBackendController
     public function actionUpdate($id)
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
-        return $this->render('update');
+        return $this->render('update', [
+            'model' => $model
+        ]);
     }
 }
