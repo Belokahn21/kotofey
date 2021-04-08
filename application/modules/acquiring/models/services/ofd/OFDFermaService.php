@@ -4,8 +4,11 @@ namespace app\modules\acquiring\models\services\ofd;
 
 use app\modules\acquiring\models\services\check_history\ServiceCheckHistory;
 use app\modules\acquiring\models\services\ofd\models\OFDApi;
+use app\modules\logger\models\entity\Logger;
+use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\site\models\tools\Debug;
+use Bitrix\Location\Infrastructure\Service\LoggerService;
 
 class OFDFermaService
 {
@@ -43,7 +46,7 @@ class OFDFermaService
 
 
         } catch (\Exception $e) {
-//            echo $e->getMessage();
+            LogService::saveErrorMessage("Ошибка отправки чека покупателю. Заказ: #{$order->id}. Сообщение: " . $e->getMessage(), 'acquiring');
             //todo: оповестить Администратора?
         }
     }
