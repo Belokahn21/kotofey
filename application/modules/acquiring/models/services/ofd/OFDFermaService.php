@@ -21,6 +21,11 @@ class OFDFermaService
         $this->api = new OFDApi();
     }
 
+    public static function getInstance()
+    {
+        return new OFDFermaService();
+    }
+
     public function sendCheckClientByEmail(Order $order, string $email)
     {
         // Чеки отправляются только оплаченым заказам.

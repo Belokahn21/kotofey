@@ -126,8 +126,8 @@ class Order extends ActiveRecord
             OrderHelper::minusStockCount($this);
         }
 
-        new BonusService($this);
-        (new OFDFermaService())->sendCheckClientByEmail($this, $this->email);
+        BonusService::getInstance()->addUserBonus($this);
+        OFDFermaService::getInstance()->sendCheckClientByEmail($this, $this->email);
 
 
         // todo: херня выходит с пересохранением заказа, надо поправить
