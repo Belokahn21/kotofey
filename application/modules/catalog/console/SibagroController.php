@@ -4,6 +4,7 @@ namespace app\modules\catalog\console;
 
 use app\modules\catalog\models\form\ProductFromSibagoForm;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\logger\models\service\LogService;
 use app\modules\settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\parser\ParseProvider;
@@ -34,7 +35,6 @@ class SibagroController extends Controller
 
         foreach ($products as $product) {
             $oldProduct = clone $product;
-            $logger = new Logger();
             $virProduct = null;
 
             $productUrl = SibagroTrade::getProductDetailByCode($product->code);
@@ -46,11 +46,11 @@ class SibagroController extends Controller
             try {
                 $virProduct = $provider->getInfo();
             } catch (\Exception $exception) {
-                $logger->saveMessage("Ошибка получения данных у товара с id {$product->id} кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                LogService::saveErrorMessage("Ошибка получения данных у товара с id {$product->id} кодом {$product->code} . Ошибка: " . $exception->getMessage(), self::UNIQ_LOG_CODE);
             }
 
             if ($virProduct === null) {
-                $logger->saveMessage("Ошибка получения данных у товара с id {$product->id} кодом {$product->code} . Ошибка: товар не был получен от Поствщика. Экстренный выход.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                LogService::saveErrorMessage("Ошибка получения данных у товара с id {$product->id} кодом {$product->code} . Ошибка: товар не был получен от Поствщика. Экстренный выход.", self::UNIQ_LOG_CODE);
                 continue;
             }
 
@@ -69,14 +69,15 @@ class SibagroController extends Controller
 //            }
 
             if (!$product->validate()) {
-                $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка валидации товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                LogService::saveErrorMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка валидации товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE);
+
             }
 
             if (!$product->update()) {
-                $logger->saveMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка обновления товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                LogService::saveErrorMessage("Товар ID: {$product->id} - {$product->name} не обновлён. Ошибка обновления товара. Товар не обновлён. (" . Debug::modelErrors($product) . ")", self::UNIQ_LOG_CODE);
             }
 
-            $logger->saveMessage("Товар ID: {$product->id} - {$product->name} обновлён.\nСтатус: " . $oldProduct->getStatusList()[$oldProduct->status_id] . " => " . $product->getStatusList()[$product->status_id] . "\nЦена:{$oldProduct->price}=>{$product->price}", self::UNIQ_LOG_CODE);
+            LogService::saveSuccessMessage("Товар ID: {$product->id} - {$product->name} обновлён.\nСтатус: " . $oldProduct->getStatusList()[$oldProduct->status_id] . " => " . $product->getStatusList()[$product->status_id] . "\nЦена:{$oldProduct->price}=>{$product->price}", self::UNIQ_LOG_CODE);
 
 
             // сохраним товар чтобы повторно не проверять последние 7 дней
@@ -85,10 +86,10 @@ class SibagroController extends Controller
             $obj->last_run_at = time();
 
             if (!$obj->validate()) {
-                $logger->saveMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка валидации.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                LogService::saveErrorMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка валидации.", self::UNIQ_LOG_CODE);
             }
             if (!$obj->save()) {
-                $logger->saveMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка сохранения.", self::UNIQ_LOG_CODE, Logger::STATUS_ERROR);
+                LogService::saveErrorMessage("У товара ID: {$product->id} - {$product->name} не сохранился учёт проверки. Ошибка сохранения.", self::UNIQ_LOG_CODE);
             }
         }
 

@@ -21,11 +21,6 @@ class Logger extends \yii\db\ActiveRecord
     const STATUS_ERROR = 500;
     const STATUS_WARNING = 400;
 
-    public static function tableName()
-    {
-        return 'logger';
-    }
-
     public function behaviors()
     {
         return [
