@@ -23,7 +23,7 @@ class FiscalisationService
 
     public function sendCheckClientByEmail(Order $order, string $email)
     {
-        // Чеки отправляются только оплаченым и закрытым заказам.
+        // Чеки отправляются только оплаченым заказам.
         if (!$order->is_paid) return false;
 
         // Нет ли старых записей
@@ -38,6 +38,7 @@ class FiscalisationService
 
 
         } catch (\Exception $e) {
+//            echo $e->getMessage();
             //todo: оповестить Администратора?
         }
     }
