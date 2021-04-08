@@ -5,6 +5,7 @@ namespace app\modules\acquiring\models\services\fiscalisation;
 use app\modules\acquiring\models\services\check_history\ServiceCheckHistory;
 use app\modules\acquiring\models\services\fiscalisation\models\OFDApi;
 use app\modules\order\models\entity\Order;
+use app\modules\site\models\tools\Debug;
 
 class FiscalisationService
 {
@@ -16,7 +17,6 @@ class FiscalisationService
         $this->module = \Yii::$app->getModule('acquiring');
 
         if ($this->module->ofd_mode != 'on') return false;
-
 
         $this->api = new OFDApi();
     }
