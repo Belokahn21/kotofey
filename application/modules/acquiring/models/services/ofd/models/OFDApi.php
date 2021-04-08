@@ -1,8 +1,8 @@
 <?php
 
-namespace app\modules\acquiring\models\services\fiscalisation\models;
+namespace app\modules\acquiring\models\services\ofd\models;
 
-use app\modules\acquiring\models\services\fiscalisation\models\helper\OFDApiHelper;
+use app\modules\acquiring\models\services\ofd\models\helper\OFDApiHelper;
 use app\modules\acquiring\Module;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;

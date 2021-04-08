@@ -1,13 +1,13 @@
 <?php
 
-namespace app\modules\acquiring\models\services\fiscalisation;
+namespace app\modules\acquiring\models\services\ofd;
 
 use app\modules\acquiring\models\services\check_history\ServiceCheckHistory;
-use app\modules\acquiring\models\services\fiscalisation\models\OFDApi;
+use app\modules\acquiring\models\services\ofd\models\OFDApi;
 use app\modules\order\models\entity\Order;
 use app\modules\site\models\tools\Debug;
 
-class FiscalisationService
+class OFDFermaService
 {
     private $api;
     private $module;

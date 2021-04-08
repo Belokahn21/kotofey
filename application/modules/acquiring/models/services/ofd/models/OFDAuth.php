@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\modules\acquiring\models\services\fiscalisation\models;
+namespace app\modules\acquiring\models\services\ofd\models;
 
 
 use app\modules\site\models\tools\Debug;

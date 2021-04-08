@@ -3,7 +3,7 @@
 namespace app\modules\order\models\entity;
 
 
-use app\modules\acquiring\models\services\fiscalisation\FiscalisationService;
+use app\modules\acquiring\models\services\ofd\OFDFermaService;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\service\BonusService;
 use app\modules\promocode\models\entity\Promocode;
@@ -127,7 +127,7 @@ class Order extends ActiveRecord
         }
 
         new BonusService($this);
-        (new FiscalisationService())->sendCheckClientByEmail($this, $this->email);
+        (new OFDFermaService())->sendCheckClientByEmail($this, $this->email);
 
 
         // todo: херня выходит с пересохранением заказа, надо поправить

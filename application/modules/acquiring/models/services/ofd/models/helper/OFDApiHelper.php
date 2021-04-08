@@ -1,7 +1,7 @@
 <?php
 
 
-namespace app\modules\acquiring\models\services\fiscalisation\models\helper;
+namespace app\modules\acquiring\models\services\ofd\models\helper;
 
 
 use app\modules\order\models\entity\Order;
