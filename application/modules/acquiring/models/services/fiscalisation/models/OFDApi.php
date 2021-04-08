@@ -53,11 +53,17 @@ class OFDApi
                 'Email' => $userData['email'],
                 "InstallmentPlace" => System::fullDomain(),
                 "PaymentType" => 1, //товар
+                'PaymentItems' => [
+                    [
+                        'PaymentType' => OFDApiHelper::getPaymentType($order),
+                        'Sum' => OrderHelper::orderSummary($order),
+                    ]
+                ],
             ],
-            'PaymentItems' => [
-                'PaymentType' => OFDApiHelper::getPaymentType($order),
-                'Sum' => OrderHelper::orderSummary($order),
-            ],
+            "Cashier" => [
+                "Name" => "Васин Константин Викторович",
+                "Inn" => "222661879"
+            ]
         ];
 
         $paramsItems = [];

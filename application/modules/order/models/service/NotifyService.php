@@ -3,6 +3,7 @@
 namespace app\modules\order\models\service;
 
 
+use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\forms\GrumingForm;
 use app\modules\site_settings\models\entity\SiteSettings;
@@ -28,7 +29,7 @@ class NotifyService
             if ($access_token) {
                 $order = Order::findOne($order_id);
                 $orderSumm = OrderHelper::orderSummary($order);
-                $orderSumm = Price::format($orderSumm);
+                $orderSumm = Price::format($orderSumm) . Currency::getInstance()->show();
                 $orderDateDelivery = OrderDate::findOne(['order_id' => $order->id]);
                 $detailUrlPage = Url::to(['/admin/order/order-backend/update', 'id' => $order->id], true);
 
@@ -42,7 +43,7 @@ class NotifyService
                 $message .= "Клиент:\n";
 
                 if (!empty($order->phone)) $message .= "Телефон: {$order->phone}\n";
-                if (!empty($order->email)) $message .= "Email: {$order->email}";
+                if (!empty($order->email)) $message .= "Email: {$order->email}\n\n";
                 $message .= "Оплата: " . OrderHelper::getPayment($order) . "\n";
                 $message .= "Доставка: " . OrderHelper::getDelivery($order) . "\n";
 
