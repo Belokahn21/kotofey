@@ -2,6 +2,7 @@
 
 namespace app\modules\acquiring\models\services\fiscalisation\models;
 
+use app\modules\acquiring\models\services\fiscalisation\models\helper\OFDApiHelper;
 use app\modules\acquiring\Module;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
@@ -53,7 +54,10 @@ class OFDApi
                 "InstallmentPlace" => System::fullDomain(),
                 "PaymentType" => 1, //товар
             ],
-            'PaymentItems' => null,
+            'PaymentItems' => [
+                'PaymentType' => OFDApiHelper::getPaymentType($order),
+                'Sum' => OrderHelper::orderSummary($order),
+            ],
         ];
 
         $paramsItems = [];
