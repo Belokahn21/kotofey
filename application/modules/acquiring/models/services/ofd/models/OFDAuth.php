@@ -13,14 +13,8 @@ class OFDAuth
     const URL = 'https://ferma.ofd.ru/api/Authorization/CreateAuthToken';
     const DEMO_URL = 'https://ferma-test.ofd.ru/api/Authorization/CreateAuthToken';
 
-    private $token;
 
-    /**
-     * OFDAuth constructor.
-     * @param $login
-     * @param $password
-     */
-    public function __construct($login, $password)
+    public function generateToken($login, $password)
     {
         $authUrl = YII_ENV == 'dev' ? self::DEMO_URL : self::URL;
 
@@ -29,27 +23,15 @@ class OFDAuth
             'Password' => $password
         ]);
 
-
         $data = Json::decode($response);
 
+//        Debug::p($data); exit();
 
-        $this->setToken($data['Data']['AuthToken']);
-    }
-
-    /**
-     * @param mixed $token
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getToken()
-    {
-        return $this->token;
+        if ($data['Status'] == 'Success') {
+            return $data['Data']['AuthToken'];
+        } else {
+            throw new \Exception($data['Error']['Message']);
+        }
     }
 
 

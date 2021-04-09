@@ -4,6 +4,7 @@ namespace app\modules\acquiring\models\services\ofd\models;
 
 use app\modules\acquiring\models\services\ofd\models\helper\OFDApiHelper;
 use app\modules\acquiring\Module;
+use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\helpers\ModuleSettingsHelper;
@@ -33,12 +34,16 @@ class OFDApi
      */
     public function __construct()
     {
-
         $this->getModule();
 
         if (empty($this->module->ofd_login) || empty($this->module->ofd_password)) throw new \Exception('Нет авторизационных данных для получения токена.');
 
-        $this->ofd_token = (new OFDAuth($this->module->ofd_login, $this->module->ofd_password))->getToken();
+        try {
+            $auth = new OFDAuth();
+            $this->ofd_token = $auth->generateToken($this->module->ofd_login, $this->module->ofd_password);
+        } catch (\Exception $exception) {
+            LogService::saveErrorMessage('Ошибка авторизации в системе OFD.RU. Сообщение: ' . $exception->getMessage(), self::MODULE_ID);
+        }
     }
 
     public function sendCheck(Order $order, $userData = [])
