@@ -120,8 +120,10 @@ class OFDApi
     public function send($action, $data = [], $headers = [])
     {
         $response = false;
+        $requestUrl = YII_ENV == 'dev' ? self::DEMO_URL : self::URL;
+
         if ($curl = curl_init()) {
-            curl_setopt($curl, CURLOPT_URL, self::DEMO_URL . $action . '?AuthToken=' . $this->getOfdToken());
+            curl_setopt($curl, CURLOPT_URL, $requestUrl . $action . '?AuthToken=' . $this->getOfdToken());
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_POST, true);
 

@@ -4,6 +4,7 @@
 namespace app\modules\acquiring\models\services\ofd\models;
 
 
+use app\modules\acquiring\Module;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 
@@ -21,7 +22,9 @@ class OFDAuth
      */
     public function __construct($login, $password)
     {
-        $response = $this->send(self::DEMO_URL, [
+        $authUrl = YII_ENV == 'dev' ? self::DEMO_URL : self::URL;
+
+        $response = $this->send($authUrl, [
             'Login' => $login,
             'Password' => $password
         ]);
