@@ -293,7 +293,7 @@ use app\modules\bonus\models\helper\BonusHelper;
 
         <?php if ($check = \app\modules\acquiring\models\entity\AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
             <hr/>
-            Выдан чек: <?= $check->identifier_id; ?>
+            <?= Html::a('Выдан чек:' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
         <?php endif; ?>
     </div>
 </div>
