@@ -21,6 +21,7 @@ $this->title = Title::show("Начислено за: " . $model->reason);
     <div class="title-group">
         <h1>Начислено за: <?= $model->reason; ?></h1>
         <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']); ?>
+        <?= Html::a('Удалить', Url::to(['delete', 'id' => $model->id]), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [

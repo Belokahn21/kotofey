@@ -283,17 +283,16 @@ use app\modules\bonus\models\helper\BonusHelper;
 
     <div class="tab-pane fade" id="nav-history-edit" role="tabpanel" aria-labelledby="nav-history-edit">
         <?php if ($bonus = \app\modules\bonus\models\entity\UserBonusHistory::findOneByOrder($model)): ?>
-            Начислено <?= $bonus->count; ?> бонуса
+            <?= Html::a('Начислено ' . $bonus->count . ' бонуса', Url::to(['/admin/bonus/bonus-history-backend/update', 'id' => $bonus->id])); ?>
         <?php endif; ?>
 
         <?php if ($sberPayment = \app\modules\acquiring\models\entity\AcquiringOrder::findOne(['order_id' => $model->id])): ?>
-            <hr/>
-            Оплачено сбербанком: <?= $sberPayment->identifier_id; ?>
+            <?= Html::a('Оплачено сбербанком: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
         <?php endif; ?>
 
         <?php if ($check = \app\modules\acquiring\models\entity\AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
             <hr/>
-            <?= Html::a('Выдан чек:' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
+            <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
         <?php endif; ?>
     </div>
 </div>

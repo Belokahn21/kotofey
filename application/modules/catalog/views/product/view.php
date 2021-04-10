@@ -101,16 +101,6 @@ $this->title = ProductTitle::show($product->name);
                     <?php endforeach; ?>
                 <?php endif; ?>
             </ul>
-
-            <?php /*
-        <ul class="collapse product-properties" id="collapseExample">
-            <li class="product-properties__line">
-                <div class="product-properties__key">Артикул товара</div>
-                <div class="product-properties__value">0525052</div>
-            </li>
-        </ul>
-        <a class="product-properties__more" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">Все характеристики</a>
- */ ?>
         </div>
     </div>
     <nav class="product-tabs in-product">
@@ -128,7 +118,7 @@ $this->title = ProductTitle::show($product->name);
             <strong>Оплатить можно:</strong>
             <ul>
                 <li>Наличными;</li>
-                <li>Переводом на карту банка (Сбербанк онлайн).</li>
+                <li>Через терминала.</li>
             </ul>
             <i>*Оплата только при получении заказа</i>
         </div>
@@ -148,87 +138,3 @@ $this->title = ProductTitle::show($product->name);
     'product' => $product
 ]); ?>
 <?= VisitedProductsWidget::widget(); ?>
-<?php /*
-<div class="page-title__group is-column"><h2 class="page-title">Выгодные предложения</h2><a class="page-title__link" href="javascript:void(0);">Все предложения</a></div>
-<div class="swiper-container vitrine-container">
-    <div class="swiper-wrapper vitrine-wrapper">
-        <div class="swiper-slide vitrine__slide">
-            <div class="discount">- 15%</div>
-            <img src="/upload/images/brick1.png">
-            <div class="vitrine__title">Кирпич строительный красный (черновой) пустотелый</div>
-            <div class="vitrine__properties">
-                <ul class="light-properties">
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Размер</div>
-                        <div class="light-properties__value">250*120*65мм</div>
-                    </li>
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Артикул</div>
-                        <div class="light-properties__value">0525052</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="vitrine__price"><span class="amount-old">10.90</span><span class="amount">6.90</span><span class="rate">Р / шт</span></div>
-            <button class="is-white add-basket js-add-basket" type="button"><img class="add-basket__icon" src="/upload/images/basket.png"><span class="add-basket__label">В корзину</span></button>
-        </div>
-        <div class="swiper-slide vitrine__slide">
-            <div class="discount">- 15%</div>
-            <img src="/upload/images/brick2.png">
-            <div class="vitrine__title">Кирпич строительный красный (черновой) пустотелый</div>
-            <div class="vitrine__properties">
-                <ul class="light-properties">
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Размер</div>
-                        <div class="light-properties__value">250*120*65мм</div>
-                    </li>
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Артикул</div>
-                        <div class="light-properties__value">0525052</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="vitrine__price"><span class="amount-old">10.90</span><span class="amount">6.90</span><span class="rate">Р / шт</span></div>
-            <button class="is-white add-basket js-add-basket" type="button"><img class="add-basket__icon" src="/upload/images/basket.png"><span class="add-basket__label">В корзину</span></button>
-        </div>
-        <div class="swiper-slide vitrine__slide active">
-            <div class="discount">- 15%</div>
-            <img src="/upload/images/brick3.png">
-            <div class="vitrine__title">Кирпич строительный красный (черновой) пустотелый</div>
-            <div class="vitrine__properties">
-                <ul class="light-properties">
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Размер</div>
-                        <div class="light-properties__value">250*120*65мм</div>
-                    </li>
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Артикул</div>
-                        <div class="light-properties__value">0525052</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="vitrine__price"><span class="amount-old">10.90</span><span class="amount">6.90</span><span class="rate">Р / шт</span></div>
-            <button class="is-white add-basket js-add-basket" type="button"><img class="add-basket__icon" src="/upload/images/basket.png"><span class="add-basket__label">В корзину</span></button>
-        </div>
-        <div class="swiper-slide vitrine__slide">
-            <div class="discount">- 15%</div>
-            <img src="/upload/images/brick4.png">
-            <div class="vitrine__title">Кирпич строительный красный (черновой) пустотелый</div>
-            <div class="vitrine__properties">
-                <ul class="light-properties">
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Размер</div>
-                        <div class="light-properties__value">250*120*65мм</div>
-                    </li>
-                    <li class="light-properties__item">
-                        <div class="light-properties__label">Артикул</div>
-                        <div class="light-properties__value">0525052</div>
-                    </li>
-                </ul>
-            </div>
-            <div class="vitrine__price"><span class="amount-old">10.90</span><span class="amount">6.90</span><span class="rate">Р / шт</span></div>
-            <button class="is-white add-basket js-add-basket" type="button"><img class="add-basket__icon" src="/upload/images/basket.png"><span class="add-basket__label">В корзину</span></button>
-        </div>
-    </div>
-    <div class="swiper-pagination"></div>
-</div>
- */ ?>
