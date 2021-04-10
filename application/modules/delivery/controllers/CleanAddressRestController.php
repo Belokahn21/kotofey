@@ -6,9 +6,20 @@ namespace app\modules\delivery\controllers;
 use yii\rest\Controller;
 use app\modules\delivery\models\service\DeliveryCalculateService;
 
-class RestCleanAddressController extends Controller
+class CleanAddressRestController extends Controller
 {
-    public function get()
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionIndex()
     {
         $filter = \Yii::$app->request->get('filter');
 
