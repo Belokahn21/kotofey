@@ -2,6 +2,8 @@ import React from 'react';
 
 import config from '../../config';
 import Button from './Button';
+import BuildQuery from "../../../../../../frontend/src/js/tools/BuildQuery";
+import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
 
 class FindProductForm extends React.Component {
     constructor(props) {
@@ -16,14 +18,22 @@ class FindProductForm extends React.Component {
         };
     }
 
+    isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+
     handleInput(e) {
         if (this.timerEx) clearTimeout(this.timerEx);
-        let element = e.target;
+        const element = e.target, value = element.value;
+
+        let queyParam = '?ProductSearchForm[name]=';
+
+        if (this.isNumeric(value)) queyParam = '?ProductSearchForm[code]=';
 
         this.timerEx = setTimeout(() => {
-            fetch(config.restCatalog + '?name=' + element.value).then(result => result.json()).then(result => {
+            RestRequest.all(config.restCatalog + queyParam + value).then(result => {
                 this.setState({
-                    items: JSON.parse(result)
+                    items: result
                 });
             });
         }, this.timeTimer);
@@ -31,13 +41,13 @@ class FindProductForm extends React.Component {
 
     render() {
         return <form className="form-finds">
-            <input className="form-finds__input" onKeyUp={this.handleInput.bind(this)} placeholder="Название для поиска" />
+            <input className="form-finds__input" onKeyUp={this.handleInput.bind(this)} placeholder="Название для поиска"/>
 
             <div className="list-finds">
                 {this.state.items.map((el, index) => {
                     return <div className="list-finds__item" key={index}>
                         <a href="#" className="list-finds__link">{el.name}</a>
-                        <Button productId={el.id} inputId={this.inputId} />
+                        <Button productId={el.id} inputId={this.inputId}/>
                     </div>
                 })}
             </div>

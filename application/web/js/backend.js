@@ -3194,6 +3194,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../config */ "./src/js/reactjs/config.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Button */ "./src/js/reactjs/components/FindProduct/Button.js");
+/* harmony import */ var _frontend_src_js_tools_BuildQuery__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/BuildQuery */ "../frontend/src/js/tools/BuildQuery.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3220,6 +3222,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var FindProductForm = /*#__PURE__*/function (_React$Component) {
   _inherits(FindProductForm, _React$Component);
 
@@ -3241,18 +3245,24 @@ var FindProductForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(FindProductForm, [{
+    key: "isNumeric",
+    value: function isNumeric(n) {
+      return !isNaN(parseFloat(n)) && isFinite(n);
+    }
+  }, {
     key: "handleInput",
     value: function handleInput(e) {
       var _this2 = this;
 
       if (this.timerEx) clearTimeout(this.timerEx);
-      var element = e.target;
+      var element = e.target,
+          value = element.value;
+      var queyParam = '?ProductSearchForm[name]=';
+      if (this.isNumeric(value)) queyParam = '?ProductSearchForm[code]=';
       this.timerEx = setTimeout(function () {
-        fetch((_config__WEBPACK_IMPORTED_MODULE_1___default().restCatalog) + '?name=' + element.value).then(function (result) {
-          return result.json();
-        }).then(function (result) {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_4__.default.all((_config__WEBPACK_IMPORTED_MODULE_1___default().restCatalog) + queyParam + value).then(function (result) {
           _this2.setState({
-            items: JSON.parse(result)
+            items: result
           });
         });
       }, this.timeTimer);
@@ -3302,6 +3312,7 @@ var FindProductForm = /*#__PURE__*/function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
 /* harmony import */ var _FindProductForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FindProductForm */ "./src/js/reactjs/components/FindProduct/FindProductForm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -3329,6 +3340,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Index = /*#__PURE__*/function (_React$Component) {
   _inherits(Index, _React$Component);
 
@@ -3341,49 +3353,67 @@ var Index = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     var options = JSON.parse(props.options);
+    _this.state = {
+      show: false
+    };
     _this.modalId = options.modalId;
     return _this;
   }
 
   _createClass(Index, [{
+    key: "setShow",
+    value: function setShow(show) {
+      this.setState({
+        show: show
+      });
+    }
+  }, {
+    key: "handleClose",
+    value: function handleClose() {
+      this.setShow(false);
+    }
+  }, {
+    key: "handleShow",
+    value: function handleShow() {
+      this.setShow(true);
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal fade",
-        id: this.modalId,
-        tabIndex: "-1",
-        role: "dialog",
-        "aria-labelledby": this.modalId + 'Label',
-        "aria-hidden": "true"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-dialog",
-        role: "document"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-content"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-header"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", {
-        className: "modal-title",
-        id: this.modalId + 'Label'
-      }, "\u041D\u0430\u0439\u0442\u0438 \u0442\u043E\u0432\u0430\u0440"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        className: "close",
-        "data-dismiss": "modal",
-        "aria-label": "Close"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", {
-        "aria-hidden": "true"
-      }, "\xD7"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-body"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindProductForm__WEBPACK_IMPORTED_MODULE_2__.default, {
+      var show = this.state.show;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-finds__setup",
+        onClick: this.handleShow.bind(this)
+      }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+        show: show,
+        onHide: this.handleClose.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Header, {
+        closeButton: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Title, null, "\u041D\u0430\u0439\u0442\u0438 ID \u0442\u043E\u0432\u0430\u0440\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindProductForm__WEBPACK_IMPORTED_MODULE_2__.default, {
         inputId: this.modalId
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "modal-footer"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
-        type: "button",
-        className: "btn btn-secondary",
-        "data-dismiss": "modal"
-      }, "\u0417\u0430\u043A\u0440\u044B\u0442\u044C"))))));
-    }
+      }))));
+    } // render() {
+    //     return <div>
+    //         <div className="modal fade" id={this.modalId} tabIndex="-1" role="dialog" aria-labelledby={this.modalId + 'Label'} aria-hidden="true">
+    //             <div className="modal-dialog" role="document">
+    //                 <div className="modal-content">
+    //                     <div className="modal-header">
+    //                         <h5 className="modal-title" id={this.modalId + 'Label'}>Найти товар</h5>
+    //                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+    //                             <span aria-hidden="true">&times;</span>
+    //                         </button>
+    //                     </div>
+    //                     <div className="modal-body">
+    //                     </div>
+    //                     <div className="modal-footer">
+    //                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+    //                     </div>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>;
+    // }
+
   }]);
 
   return Index;
@@ -4511,6 +4541,156 @@ module.exports = {
   restTodoAdd: url + '/backend/api/todo/',
   ajaxSaveProductMark: url + '/ajax/mark/'
 };
+
+/***/ }),
+
+/***/ "../frontend/src/js/tools/BuildQuery.js":
+/*!**********************************************!*\
+  !*** ../frontend/src/js/tools/BuildQuery.js ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var BuildQuery = /*#__PURE__*/function () {
+  function BuildQuery() {
+    _classCallCheck(this, BuildQuery);
+  }
+
+  _createClass(BuildQuery, null, [{
+    key: "formatFormData",
+    value: function formatFormData(form) {
+      var formData = new FormData(form);
+
+      var data = _toConsumableArray(formData.entries());
+
+      var asString = data.map(function (x) {
+        return "".concat(encodeURIComponent(x[0]), "=").concat(encodeURIComponent(x[1]));
+      }).join('&');
+      return asString;
+    }
+  }, {
+    key: "formatObject",
+    value: function formatObject(data) {
+      var asString = Object.keys(data).map(function (x) {
+        return "".concat(encodeURIComponent(x), "=").concat(encodeURIComponent(data[x]));
+      }).join('&');
+      return asString;
+    }
+  }, {
+    key: "formDataFromObject",
+    value: function formDataFromObject(data) {
+      var formData = new FormData();
+      Object.keys(data).map(function (key) {
+        formData.append(key, data[key]);
+      });
+      return formData;
+    }
+  }]);
+
+  return BuildQuery;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BuildQuery);
+
+/***/ }),
+
+/***/ "../frontend/src/js/tools/RestRequest.js":
+/*!***********************************************!*\
+  !*** ../frontend/src/js/tools/RestRequest.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var RestRequest = /*#__PURE__*/function () {
+  function RestRequest() {
+    _classCallCheck(this, RestRequest);
+  }
+
+  _createClass(RestRequest, null, [{
+    key: "all",
+    value: function all(url) {
+      return fetch(url).then(function (response) {
+        return response.json();
+      });
+    }
+  }, {
+    key: "one",
+    value: function one(url, id) {
+      return fetch("".concat(url).concat(id, "/")).then(function (response) {
+        return response.json();
+      });
+    }
+  }, {
+    key: "post",
+    value: function post(url, options) {
+      return fetch(url, _objectSpread({
+        method: 'POST'
+      }, options)).then(function (response) {
+        return response.json();
+      });
+    }
+  }, {
+    key: "update",
+    value: function update(url, options) {
+      return fetch(url, _objectSpread({
+        method: 'PATCH'
+      }, options)).then(function (response) {
+        return response.json();
+      });
+    }
+  }, {
+    key: "delete",
+    value: function _delete(url, id) {
+      return fetch("".concat(url).concat(id, "/"), {
+        method: 'DELETE'
+      }).then(function (response) {
+        return response.json();
+      });
+    }
+  }]);
+
+  return RestRequest;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (RestRequest);
 
 /***/ }),
 

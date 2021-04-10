@@ -44,14 +44,15 @@ class ProductSearchForm extends Product
             return $dataProvider;
         }
 
-        $product_properties_values = [];
-        if ($this->prop_sales) {
-            $product_properties_values = ArrayHelper::getColumn(SaveProductPropertiesValues::find()->select(['product_id'])->where(['value' => $this->prop_sales, 'property_id' => 11])->all(), 'product_id');
-        }
+//        exit();
+//        $product_properties_values = [];
+//        if ($this->prop_sales) {
+//            $product_properties_values = ArrayHelper::getColumn(SaveProductPropertiesValues::find()->select(['product_id'])->where(['value' => $this->prop_sales, 'property_id' => 11])->all(), 'product_id');
+//        }
 
-        if ($this->id) {
-            array_push($product_properties_values, $this->id);
-        }
+//        if ($this->id) {
+//            array_push($product_properties_values, $this->id);
+//        }
 
         $query->andFilterWhere([
             'category_id' => $this->category_id,
@@ -64,11 +65,12 @@ class ProductSearchForm extends Product
             'vendor_id' => $this->vendor_id,
         ]);
 
-        if ($product_properties_values) {
-            $query->andFilterWhere([
-                'id' => $product_properties_values,
-            ]);
-        }
+
+//        if ($product_properties_values) {
+//            $query->andFilterWhere([
+//                'id' => $product_properties_values,
+//            ]);
+//        }
 
         if (!empty($this->name)) {
             foreach (explode(' ', $this->name) as $text_line) {
@@ -79,6 +81,7 @@ class ProductSearchForm extends Product
                 ]);
             }
         }
+
 
         return $dataProvider;
     }

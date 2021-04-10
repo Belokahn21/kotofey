@@ -7,6 +7,7 @@
 
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
+use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 
 ?>
 
@@ -43,7 +44,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                     </div>
                     <div class="<?= $item->promotion_mechanic_id ? '' : 'hidden'; ?> row col-sm-9" id="inputs-mechanic-<?= PromotionProductMechanicsForm::MECH_PRODUCT_DISCOUNT ?>-<?= $iter; ?>">
                         <div class="col-sm-3">
-                            <?= $form->field($item, '[' . $iter . ']product_id')->textInput() ?>
+                            <?= $form->field($item, '[' . $iter . ']product_id')->widget(FindProducstWidgets::className()); ?>
                         </div>
                         <div class="col-sm-3">
                             <?= $form->field($item, '[' . $iter . ']discountRule')->dropDownList($item->getDiscountRules(), ['prompt' => 'Правило цены']); ?>
@@ -66,7 +67,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                     </div>
                     <div class="hidden row col-sm-9" id="inputs-mechanic-<?= PromotionProductMechanicsForm::MECH_PRODUCT_DISCOUNT ?>-<?= $i; ?>">
                         <div class="col-sm-3">
-                            <?= $form->field($md, '[' . $i . ']product_id')->textInput() ?>
+                            <?= $form->field($md, '[' . $i . ']product_id')->widget(FindProducstWidgets::className()); ?>
                         </div>
                         <div class="col-sm-3">
                             <?= $form->field($md, '[' . $i . ']discountRule')->dropDownList($md->getDiscountRules(), ['prompt' => 'Правило цены']); ?>

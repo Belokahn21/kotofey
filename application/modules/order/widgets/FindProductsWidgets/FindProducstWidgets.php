@@ -20,28 +20,23 @@ class FindProducstWidgets extends Widget
     public function run()
     {
         parent::run();
+        $modalId = substr(md5(rand()), 0, 5);
 
-        $modalId = 'modal_' . $this->attribute;
-        $modalId = md5(rand());
-
-        echo Html::activeInput('text', $this->model, $this->attribute, [
-            'class' => 'form-control load-product-info__pid',
-            'id' => 'uniq-' . $modalId,
-            'style' => 'width:40px; display:inline-block;'
+        echo Html::beginTag('div',[
+            'style'=>'display:flex; flex-direction:row; margin:auto;'
         ]);
+            echo Html::activeInput('text', $this->model, $this->attribute, [
+                'class' => 'form-control load-product-info__pid',
+                'id' => 'uniq-' . $modalId,
+            ]);
 
-        echo Html::tag('div', '+', [
-            'class' => 'form-finds__setup',
-            'data-target' => '#' . $modalId,
-            'data-toggle' => 'modal',
-        ]);
-
-        echo Html::tag('div', '', [
-            'class' => 'find-product-react',
-            'data-options' => Json::encode([
-                'modalId' => $modalId
-            ])
-        ]);
+            echo Html::tag('div', '', [
+                'class' => 'find-product-react',
+                'data-options' => Json::encode([
+                    'modalId' => $modalId
+                ])
+            ]);
+        echo Html::endTag('div');
 
     }
 }

@@ -83,12 +83,24 @@ $this->beginPage() ?>
                 </a>
             <?php else: ?>
                 <a class="menu__link profile" href="<?= Url::to(['/user/profile/index']); ?>">
-                    <img class="profile__icon" src="/upload/images/lock.png" alt="Личный кабинет"><span>Личный кабинет</span>
+                    <div>
+                        <img class="profile__icon" src="/upload/images/lock.png" alt="Личный кабинет"><span>Личный кабинет</span>
+                    </div>
+
+                    <?php /* Вжух меню не вышло из-за ссылок
+                    <div class="header-dropdown-menu">
+                        <div class="header-dropdown-menu__item"><a class="header-dropdown-menu__link" href="#">Заказы</a></div>
+                        <div class="header-dropdown-menu__item"><a class="header-dropdown-menu__link" href="#">Настройки</a></div>
+                        <div class="header-dropdown-menu__item"><a class="header-dropdown-menu__link" href="#">Избранное</a></div>
+                        <div class="header-dropdown-menu__item"><a class="header-dropdown-menu__link" href="#">Питомцы</a></div>
+                        <div class="header-dropdown-menu__item"><a class="header-dropdown-menu__link" href="/logout/">Выход</a></div>
+                    </div> */ ?>
                 </a>
             <?php endif; ?>
         </div>
 
-        <div class="menu__item"><a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
+        <div class="menu__item">
+            <a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
                 <img class="basket__icon" src="/upload/images/basket.png" alt="Корзина">
                 <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>">
                     <span><?= Basket::count(); ?></span>

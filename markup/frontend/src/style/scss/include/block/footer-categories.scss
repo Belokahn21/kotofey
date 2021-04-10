@@ -13,6 +13,11 @@
       font-size: 18px;
       font-weight: 900;
       text-transform: uppercase;
+
+      @media (max-width: 450px) {
+        font-size: 15px;
+        line-height: 35px;
+      }
     }
   }
 

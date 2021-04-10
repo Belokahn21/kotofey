@@ -5,6 +5,10 @@
     justify-content: flex-start;
     align-items: flex-start;
     margin-top: 10px;
+
+    @media (max-width: 450px) {
+      flex-direction: column;
+    }
   }
 
   &-form {
@@ -27,7 +31,7 @@
       margin: 5px 0;
     }
 
-    .btn-main{
+    .btn-main {
       font-size: 14px;
     }
   }
