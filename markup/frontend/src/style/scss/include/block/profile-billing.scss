@@ -1,0 +1,22 @@
+.profile-billing {
+
+  &-list {
+    &__item {
+      border: 1px silver solid;
+      margin-bottom: 5px;
+    }
+
+    &__title {
+      border-bottom: 1px silver solid;
+      padding: 10px;
+      color: $active-color;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    &__data {
+      padding: 10px;
+    }
+  }
+
+}

@@ -9,7 +9,7 @@ use app\modules\bonus\models\service\BonusService;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\user\models\entity\User;
-use app\modules\user\models\entity\Billing;
+use app\modules\user\models\entity\UserBilling;
 use app\modules\order\models\helpers\OrderHelper;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -206,7 +206,7 @@ class Order extends ActiveRecord
     {
         $order_billing = OrderBilling::findOne(['order_id' => $this->id]);
         if ($order_billing) {
-            return Billing::findOne($order_billing->user_billing_id);
+            return UserBilling::findOne($order_billing->user_billing_id);
         }
     }
 

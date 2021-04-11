@@ -2,6 +2,7 @@
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\user\models\entity\User
+ * @var $billings \app\modules\user\models\entity\UserBilling
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $sexList \app\modules\user\models\entity\UserSex[]
  * @var $favorite \app\modules\catalog\models\entity\Product[]
@@ -24,6 +25,7 @@ use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\user\models\helpers\UserBillingHelper;
 
 $this->title = Title::show('Личный кабинет');
 ?>
@@ -63,6 +65,10 @@ $this->title = Title::show('Личный кабинет');
                 <a class="profile-sections__item" id="pet-tab" data-toggle="tab" href="#bonus" role="tab" aria-controls="bonus" aria-selected="false">
                     <i class="fas fa-coins"></i>
                     <div class="profile-sections__title">Бонусы</div>
+                </a>
+                <a class="profile-sections__item" id="billing-tab" data-toggle="tab" href="#billing" role="tab" aria-controls="billing" aria-selected="false">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="profile-sections__title">Адреса доставок</div>
                 </a>
             </div>
         </div>
@@ -260,6 +266,19 @@ LIST;
                                     ]) : Html::tag('i', '', [
                                         'class' => 'red far fa-clock'
                                     ]); ?>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="billing">
+                    <h3>Адреса доставок</h3>
+                    <div class="profile-billing-list">
+                        <?php foreach ($billings as $item): ?>
+                            <div class="profile-billing-list__item">
+                                <div class="profile-billing-list__title"><?= $item->name; ?></div>
+                                <div class="profile-billing-list__data">
+                                    <?= UserBillingHelper::getAddress($item); ?>
                                 </div>
                             </div>
                         <?php endforeach; ?>

@@ -13,12 +13,14 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
+import Input from "./html/Input";
 
 class Checkout extends Component {
     constructor(props) {
         super(props);
 
         this.modelName = 'Order';
+        this.billingModelName = 'UserBilling';
         this.patchTimerEx, this.cleanAddressTimerEx;
 
         this.state = {
@@ -36,6 +38,14 @@ class Checkout extends Component {
             deliveryId: 0,
             user: null,
             finish: false,
+            selectedAddress: null,
+            addr_index: "",
+            addr_city: "",
+            addr_street: "",
+            addr_home: "",
+            addr_room: "",
+            addr_pouch: "",
+            addr_floor: "",
         };
     }
 
@@ -242,15 +252,24 @@ class Checkout extends Component {
 
         this.cleanAddressTimerEx = setTimeout(() => {
             RestRequest.all(config.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(result => {
+
                 this.setState({
-                    deliveryAddress: result
+                    deliveryAddress: result,
+                    addr_index: result[0].index,
+                    addr_city: result[0].place,
+                    addr_street: result[0].street,
+                    addr_home: result[0].house,
+                    addr_room: result[0].room,
                 });
             });
         }, 1500);
     }
 
-    handleSelectAddress(e) {
-
+    handleSelectAddress(address, event) {
+        this.setState({
+            selectedAddress: address,
+            deliveryAddress: []
+        });
     }
 
     render() {
@@ -260,6 +279,44 @@ class Checkout extends Component {
         }
 
         return this.dashboard();
+    }
+
+    renderAddress() {
+        return <>
+            <div className="checkout-form__group-row">
+                <label className="checkout-form__label">
+                    <div className="checkout-form__label-text">Адрес доставки</div>
+                    <input onChange={this.handleAddress.bind(this)} type="text" placeholder="Например: Барнаул, ул Попова 4 кв 211" className="checkout-form__input" value={this.state.selectedAddress}/>
+                </label>
+            </div>
+
+
+            <div className="checkout-address-list">
+                {this.state.deliveryAddress.map((e, i) => {
+                    const addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');
+                    return <div className="checkout-address-list__item" key={i}>
+                        <div className="checkout-address-list__address">{addrr}</div>
+                        <button className="checkout-address-list__select" onClick={this.handleSelectAddress.bind(this, addrr)} type="button">Выбрать</button>
+                    </div>
+                })}
+            </div>
+
+
+            <div className="checkout-form__group-row">
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_index != null, name: "postalcode", title: "Индекс", placeholder: "Индекс", value: this.state.addr_index}}/>
+            </div>
+
+            <div className="checkout-form__group-row">
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_city != null, name: "city", title: "Город", placeholder: "Город", value: this.state.addr_city}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_street != null, name: "street", title: "Улица", placeholder: "Улица", value: this.state.addr_street}}/>
+            </div>
+            <div className="checkout-form__group-row">
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_home != null, name: "number_home", title: "Номер дома", placeholder: "Номер дома", value: this.state.addr_home}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_pouch != null, name: "entrance", title: "Подъезд", placeholder: "Подъезд", value: this.state.addr_pouch}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_floor !== null, name: "floor_house", title: "Этаж", placeholder: "Этаж", value: this.state.addr_floor}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_room !== null, name: "number_appartament", title: "Квартира", placeholder: "Квартира", value: this.state.addr_room}}/>
+            </div>
+        </>;
     }
 
     finish() {
@@ -305,9 +362,8 @@ class Checkout extends Component {
     dashboard() {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService;
 
-        if (parseInt(this.state.deliveryId) === 1) {
-            deliveryService = <DeliveryService/>
-        }
+        if (parseInt(this.state.deliveryId) === 1) deliveryService = <DeliveryService/>
+
 
         return (
             <div className="page__group-row">
@@ -333,32 +389,7 @@ class Checkout extends Component {
                             <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
                         </div>
 
-
-                        <div>
-                            <input onChange={this.handleAddress.bind(this)} type="text" placeholder="Адрес доставки" className="w-100"/>
-
-                            <div>
-                                {this.state.deliveryAddress.map((e, i) => {
-                                    const addrr = '' + e.index + e.region ? '' + e.region : '' + e.place ? ', ' + e.place : '' + e.street ? ', ' + e.street : '' + e.house ? ', д. ' + e.house : '' + e.room ? ', кв ' + e.room : '';
-                                    return <div>
-                                        {addrr}
-                                        <button onClick={this.handleSelectAddress.bind(this)} type="button">Выбрать</button>
-                                    </div>
-                                })}
-                            </div>
-                        </div>
-
-
-                        {/*<div className="checkout-form__group-row">*/}
-                        {/*    <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "city", title: "Город", placeholder: "Город"}}/>*/}
-                        {/*    <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "street", title: "Улица", placeholder: "Улица"}}/>*/}
-                        {/*</div>*/}
-                        {/*<div className="checkout-form__group-row">*/}
-                        {/*    <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>*/}
-                        {/*    <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>*/}
-                        {/*    <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>*/}
-                        {/*    <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>*/}
-                        {/*</div>*/}
+                        {parseInt(this.state.deliveryId) === 3 ? '' : this.renderAddress()}
 
 
                         <label className="checkout-form__label" htmlFor="checkout-comment">

@@ -33,7 +33,7 @@ use app\modules\rbac\models\entity\AuthAssignment;
  * @property integer $updated_at
  *
  * @property AuthItem $group
- * @property Billing $billing
+ * @property UserBilling $billing
  */
 class User extends ActiveRecord implements IdentityInterface
 {
@@ -153,7 +153,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getBilling()
     {
-        return Billing::findByUser($this->id);
+        return UserBilling::findByUser($this->id);
     }
 
     public function getGroup()

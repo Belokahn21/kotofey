@@ -8,6 +8,7 @@ use app\modules\bonus\models\entity\UserBonusHistory;
 use app\modules\pets\models\entity\Animal;
 use app\modules\pets\models\entity\Pets;
 use app\modules\site\models\tools\Debug;
+use app\modules\user\models\entity\UserBilling;
 use app\widgets\notification\Alert;
 use Yii;
 use yii\web\Controller;
@@ -26,6 +27,7 @@ class ProfileController extends Controller
         $history = UserBonusHistory::find()->where(['bonus_account_id' => Yii::$app->user->identity->phone])->orderBy(['created_at' => SORT_DESC]);
         $petModel = new Pets();
         $animals = Animal::find()->all();
+        $billings = UserBilling::find()->where(['phone' => Yii::$app->user->identity->phone])->all();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
@@ -45,6 +47,7 @@ class ProfileController extends Controller
             'history' => $history,
             'petModel' => $petModel,
             'animals' => $animals,
+            'billings' => $billings,
         ]);
     }
 
