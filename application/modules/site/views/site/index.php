@@ -4,16 +4,17 @@
  * @var $news \app\modules\news\models\entity\News[]
  */
 
-use app\modules\content\widgets\informers_slider\InformerSliderWidget;
-use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
+use app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget;
 use app\modules\catalog\widgets\CatalogSliders\LastWeekProducts\LastWeekProducts;
 use app\modules\catalog\widgets\CatalogSliders\DiscountItems\DiscountItemsWidget;
 use app\modules\catalog\widgets\CatalogSliders\many_purchase\ManyPurchasedGoods;
+use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
+use app\modules\search\widges\FastButtonSearch\FastButtonSearchWidget;
+use app\modules\content\widgets\informers_slider\InformerSliderWidget;
 use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site\widgets\Gruming\GrumingWidget;
 use app\modules\seo\models\tools\Title;
-use app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget;
 
 $this->title = Title::show("Зоотовары для животных в Барнауле");
 ?>
@@ -51,5 +52,8 @@ $this->title = Title::show("Зоотовары для животных в Бар
     <?= LastNewsWidget::widget(['limit' => 3]) ?>
     <?= InstagramMediaWidget::widget(); ?>
     <?= LastWeekProducts::widget(); ?>
+    <div class="page-title__group">
+        <h2 class="page-title">Быстрый поиск</h2>
+    </div>
+    <?= FastButtonSearchWidget::widget(); ?>
 </div>
-

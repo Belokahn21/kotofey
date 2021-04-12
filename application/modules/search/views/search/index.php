@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
+use app\modules\search\widges\FastButtonSearch\FastButtonSearchWidget;
 use app\modules\catalog\widgets\CatalogFilter\CatalogFilterWidget;
 use app\modules\search\widges\SearchMessage\SearchMessageWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
@@ -74,5 +75,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
             <?php endif; ?>
         </div>
     </div>
+    <?= FastButtonSearchWidget::widget(); ?>
     <?= VisitedProductsWidget::widget(); ?>
 </div>
