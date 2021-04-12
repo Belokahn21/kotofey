@@ -272,6 +272,8 @@ class Checkout extends Component {
             selectedAddress: address,
             deliveryAddress: []
         });
+
+        this.unsetError('address');
     }
 
     render() {

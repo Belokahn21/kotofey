@@ -5249,6 +5249,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         selectedAddress: address,
         deliveryAddress: []
       });
+      this.unsetError('address');
     }
   }, {
     key: "render",
