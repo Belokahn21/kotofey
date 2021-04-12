@@ -5229,6 +5229,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       var _this7 = this;
 
       if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
+      this.unsetError('address');
       this.cleanAddressTimerEx = setTimeout(function () {
         _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(function (result) {
           _this7.setState({
@@ -5295,7 +5296,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         value: this.state.selectedAddress
       }), error)), !isQualityAddress ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form-low-quality-address"
-      }, "\u041D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438, \u0443\u0442\u043E\u0447\u043D\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "\u041D\u0435\u0432\u0435\u0440\u043D\u044B\u0439 \u0430\u0434\u0440\u0435\u0441. \u041F\u0440\u0438\u043C\u0435\u0440: \u0411\u0430\u0440\u043D\u0430\u0443\u043B, \u041F\u043E\u043F\u043E\u0432\u0430 \u0434 4 \u043A\u0432 123") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-address-list"
       }, deliveryAddress.map(function (e, i) {
         var addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');

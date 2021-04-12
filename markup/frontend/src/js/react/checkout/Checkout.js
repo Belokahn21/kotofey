@@ -307,7 +307,7 @@ class Checkout extends Component {
 
 
             </div>
-            {!isQualityAddress ? <div className="checkout-form-low-quality-address">Недостаточно информации, уточните адрес</div> :
+            {!isQualityAddress ? <div className="checkout-form-low-quality-address">Неверный адрес. Пример: Барнаул, Попова д 4 кв 123</div> :
                 <div className="checkout-address-list">
                     {deliveryAddress.map((e, i) => {
                         const addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');
