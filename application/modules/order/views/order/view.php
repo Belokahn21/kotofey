@@ -86,12 +86,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                 <?php if ($order->dateDelivery): ?>
                     <div class="profile-order-info__row">
                         <div class="profile-order-info__key">Дата и время доставки</div>
-                        <div class="profile-order-info__value"><?= $order->dateDelivery->date; ?>, <?= $order->dateDelivery->time; ?></div>
-                    </div>
-                <?php endif; ?>
-                <?php if ($order->dateDelivery): ?>
-                    <div class="profile-order-info__row">
-                        <div class="profile-order-info__key">Дата и время доставки</div>
                         <div class="profile-order-info__value"><?= $order->dateDelivery->date ? $order->dateDelivery->date : ''; ?><?= $order->dateDelivery->time ? ', ' . $order->dateDelivery->time : ''; ?></div>
                     </div>
                 <?php endif; ?>
