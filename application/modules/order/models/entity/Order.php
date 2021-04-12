@@ -85,7 +85,7 @@ class Order extends ActiveRecord
                 }
             ],
 
-            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house', 'bonus'], 'integer'],
+            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house'], 'integer'],
 
 
             [['payment_id', 'delivery_id'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите {attribute}'],
@@ -110,7 +110,9 @@ class Order extends ActiveRecord
             [['ip'], 'string'],
             [['ip'], 'default', 'value' => \Yii::$app->request->userIP],
 
+            // всё ниже нештатные переменные
             [['address'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите адрес доставки'],
+            [['bonus'], 'integer'],
         ];
     }
 
