@@ -4986,6 +4986,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
     _this.modelName = 'Order';
     _this.billingModelName = 'UserBilling';
     _this.patchTimerEx, _this.cleanAddressTimerEx;
+    _this.cleanAddressTimer = 1000;
     _this.state = {
       order: null,
       promocode: null,
@@ -5239,7 +5240,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
             addr_room: result[0].room
           });
         });
-      }, 1500);
+      }, this.cleanAddressTimer);
     }
   }, {
     key: "handleSelectAddress",

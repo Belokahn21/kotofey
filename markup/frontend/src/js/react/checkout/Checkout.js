@@ -23,6 +23,7 @@ class Checkout extends Component {
         this.modelName = 'Order';
         this.billingModelName = 'UserBilling';
         this.patchTimerEx, this.cleanAddressTimerEx;
+        this.cleanAddressTimer = 1000;
 
         this.state = {
             order: null,
@@ -263,7 +264,7 @@ class Checkout extends Component {
                     addr_room: result[0].room,
                 });
             });
-        }, 1500);
+        }, this.cleanAddressTimer);
     }
 
     handleSelectAddress(address, event) {
