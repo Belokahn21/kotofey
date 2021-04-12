@@ -251,6 +251,7 @@ class Checkout extends Component {
 
     handleAddress(event) {
         if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
+        this.unsetError('address');
 
         this.cleanAddressTimerEx = setTimeout(() => {
             RestRequest.all(config.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(result => {
