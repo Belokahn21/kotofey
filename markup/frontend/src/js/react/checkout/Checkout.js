@@ -14,6 +14,7 @@ import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
 import Input from "./html/Input";
+import Error from "./html/Error";
 
 class Checkout extends Component {
     constructor(props) {
@@ -282,11 +283,20 @@ class Checkout extends Component {
     }
 
     renderAddress() {
+        const {errors} = this.state;
+        let error, aria_invalid;
+
+        if (typeof errors === 'object' && !Array.isArray(errors)) {
+            error = <Error errors={errors['address']}/>
+            aria_invalid = errors['address'] !== undefined && errors['address'] !== null;
+        }
+
         return <>
             <div className="checkout-form__group-row">
                 <label className="checkout-form__label">
                     <div className="checkout-form__label-text">Адрес доставки</div>
-                    <input onChange={this.handleAddress.bind(this)} type="text" placeholder="Например: Барнаул, ул Попова 4 кв 211" className="checkout-form__input" value={this.state.selectedAddress}/>
+                    <input aria-invalid={aria_invalid} onChange={this.handleAddress.bind(this)} type="text" name={this.modelName + "[address]"} placeholder="Например: Барнаул, ул Попова 4 кв 211" className="checkout-form__input" value={this.state.selectedAddress}/>
+                    {error}
                 </label>
             </div>
 
