@@ -5264,8 +5264,11 @@ var Checkout = /*#__PURE__*/function (_Component) {
     value: function renderAddress() {
       var _this8 = this;
 
-      var errors = this.state.errors;
-      var error, aria_invalid;
+      var errors = this.state.errors,
+          deliveryAddress = this.state.deliveryAddress;
+      var error,
+          aria_invalid,
+          isQualityAddress = true;
 
       if (_typeof(errors) === 'object' && !Array.isArray(errors)) {
         error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_Error__WEBPACK_IMPORTED_MODULE_15__.default, {
@@ -5274,6 +5277,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         aria_invalid = errors['address'] !== undefined && errors['address'] !== null;
       }
 
+      if (deliveryAddress[0] && deliveryAddress[0]["validation-code"] === 'NOT_VALIDATED_HAS_NO_MAIN_POINTS') isQualityAddress = false;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -5288,9 +5292,11 @@ var Checkout = /*#__PURE__*/function (_Component) {
         placeholder: "\u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440: \u0411\u0430\u0440\u043D\u0430\u0443\u043B, \u0443\u043B \u041F\u043E\u043F\u043E\u0432\u0430 4 \u043A\u0432 211",
         className: "checkout-form__input",
         value: this.state.selectedAddress
-      }), error)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), error)), !isQualityAddress ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form-low-quality-address"
+      }, "\u041D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438, \u0443\u0442\u043E\u0447\u043D\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-address-list"
-      }, this.state.deliveryAddress.map(function (e, i) {
+      }, deliveryAddress.map(function (e, i) {
         var addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "checkout-address-list__item",

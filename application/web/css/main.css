@@ -14084,6 +14084,12 @@ label[for="site-form-pet-avatar"] {
 
 .checkout-form {
   margin-bottom: 40px; }
+  .checkout-form-low-quality-address {
+    color: orange;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 0 5px; }
   .checkout-form-attention {
     background-color: white;
     border: 1px red solid;

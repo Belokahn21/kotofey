@@ -284,13 +284,15 @@ class Checkout extends Component {
     }
 
     renderAddress() {
-        const {errors} = this.state;
-        let error, aria_invalid;
+        const {errors} = this.state, {deliveryAddress} = this.state;
+        let error, aria_invalid, isQualityAddress = true;
 
         if (typeof errors === 'object' && !Array.isArray(errors)) {
             error = <Error errors={errors['address']}/>
             aria_invalid = errors['address'] !== undefined && errors['address'] !== null;
         }
+
+        if (deliveryAddress[0] && deliveryAddress[0]["validation-code"] === 'NOT_VALIDATED_HAS_NO_MAIN_POINTS') isQualityAddress = false;
 
         return <>
             <div className="checkout-form__group-row">
@@ -299,18 +301,19 @@ class Checkout extends Component {
                     <input aria-invalid={aria_invalid} onChange={this.handleAddress.bind(this)} type="text" name={this.modelName + "[address]"} placeholder="Например: Барнаул, ул Попова 4 кв 211" className="checkout-form__input" value={this.state.selectedAddress}/>
                     {error}
                 </label>
-            </div>
 
 
-            <div className="checkout-address-list">
-                {this.state.deliveryAddress.map((e, i) => {
-                    const addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');
-                    return <div className="checkout-address-list__item" key={i}>
-                        <div className="checkout-address-list__address">{addrr}</div>
-                        <button className="checkout-address-list__select" onClick={this.handleSelectAddress.bind(this, addrr)} type="button">Выбрать</button>
-                    </div>
-                })}
             </div>
+            {!isQualityAddress ? <div className="checkout-form-low-quality-address">Недостаточно информации, уточните адрес</div> :
+                <div className="checkout-address-list">
+                    {deliveryAddress.map((e, i) => {
+                        const addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');
+                        return <div className="checkout-address-list__item" key={i}>
+                            <div className="checkout-address-list__address">{addrr}</div>
+                            <button className="checkout-address-list__select" onClick={this.handleSelectAddress.bind(this, addrr)} type="button">Выбрать</button>
+                        </div>
+                    })}
+                </div>}
 
 
             <div className="checkout-form__group-row">
