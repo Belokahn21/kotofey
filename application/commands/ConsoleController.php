@@ -3,6 +3,8 @@
 namespace app\commands;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\settings\models\helpers\MarkupHelpers;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 
@@ -11,20 +13,15 @@ class ConsoleController extends Controller
     public function actionRun()
     {
 
-        $products = Product::find()->orFilterWhere(['vendor_id' => Vendor::VENDOR_ID_MARS])
-            ->orFilterWhere(['like', 'name', 'cesar'])
-            ->orFilterWhere(['like', 'name', 'pedigree'])
-            ->orFilterWhere(['like', 'name', 'dreamies'])
-            ->orFilterWhere(['like', 'name', 'chappi'])
-            ->orFilterWhere(['like', 'name', 'whiskas'])
-            ->orFilterWhere(['like', 'name', 'kitekat'])
-            ->orFilterWhere(['like', 'name', 'perfect fit'])
-            ->all();
-
-        foreach ($products as $product) {
+        $models = Product::find()
+            ->where("`price`=`purchase`")
+            ->orWhere('round((price / purchase) * 100 - 100) < :markup', [
+                ':markup' => 15
+            ])->all();
+        foreach ($models as $product) {
             $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-            $product->status_id = Product::STATUS_DRAFT;
-            $product->vendor_id = Vendor::VENDOR_ID_MARS;
+
+            MarkupHelpers::applyMarkup($product, 30);
 
 
             echo "item: " . $product->name . PHP_EOL;
