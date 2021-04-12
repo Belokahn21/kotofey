@@ -22,14 +22,16 @@ class Input extends Component {
         }
 
         return (
-            <label className="checkout-form__label" htmlFor={"checkout-" + options.name}>
+            <label style={{display: options.isHiden == true ? 'none' : 'block'}} className="checkout-form__label" htmlFor={"checkout-" + options.name}>
                 <div className="checkout-form__label-text">{options.title}</div>
                 <input
                     onChange={this.handleInputChange.bind(this)}
                     className={"checkout-form__input " + options.class}
                     id={"checkout-" + options.name}
+                    value={options.value}
                     name={this.props.buildElementName()}
                     type="text"
+                    style={options.style}
                     aria-invalid={aria_invalid}
                     placeholder={options.placeholder}/>
                 {error}

@@ -4931,6 +4931,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
 /* harmony import */ var _html_widget_Variants__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./html/widget/Variants */ "./src/js/react/checkout/html/widget/Variants.js");
 /* harmony import */ var _DeliveryService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DeliveryService */ "./src/js/react/checkout/DeliveryService.js");
+/* harmony import */ var _html_Input__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./html/Input */ "./src/js/react/checkout/html/Input.js");
+/* harmony import */ var _html_Error__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./html/Error */ "./src/js/react/checkout/html/Error.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4968,6 +4970,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var Checkout = /*#__PURE__*/function (_Component) {
   _inherits(Checkout, _Component);
 
@@ -4980,10 +4984,13 @@ var Checkout = /*#__PURE__*/function (_Component) {
 
     _this = _super.call(this, props);
     _this.modelName = 'Order';
-    _this.patchTimerEx;
+    _this.billingModelName = 'UserBilling';
+    _this.patchTimerEx, _this.cleanAddressTimerEx;
+    _this.cleanAddressTimer = 1000;
     _this.state = {
       order: null,
       promocode: null,
+      deliveryAddress: [],
       excludePayments: [],
       delivery: [],
       payment: [],
@@ -4994,7 +5001,15 @@ var Checkout = /*#__PURE__*/function (_Component) {
       paymentId: 0,
       deliveryId: 0,
       user: null,
-      finish: false
+      finish: false,
+      selectedAddress: null,
+      addr_index: "",
+      addr_city: "",
+      addr_street: "",
+      addr_home: "",
+      addr_room: "",
+      addr_pouch: "",
+      addr_floor: ""
     };
     return _this;
   }
@@ -5209,6 +5224,33 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "handleAddress",
+    value: function handleAddress(event) {
+      var _this7 = this;
+
+      if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
+      this.cleanAddressTimerEx = setTimeout(function () {
+        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(function (result) {
+          _this7.setState({
+            deliveryAddress: result,
+            addr_index: result[0].index,
+            addr_city: result[0].place,
+            addr_street: result[0].street,
+            addr_home: result[0].house,
+            addr_room: result[0].room
+          });
+        });
+      }, this.cleanAddressTimer);
+    }
+  }, {
+    key: "handleSelectAddress",
+    value: function handleSelectAddress(address, event) {
+      this.setState({
+        selectedAddress: address,
+        deliveryAddress: []
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       if (this.state.finish === true) {
@@ -5216,6 +5258,147 @@ var Checkout = /*#__PURE__*/function (_Component) {
       }
 
       return this.dashboard();
+    }
+  }, {
+    key: "renderAddress",
+    value: function renderAddress() {
+      var _this8 = this;
+
+      var errors = this.state.errors,
+          deliveryAddress = this.state.deliveryAddress;
+      var error,
+          aria_invalid,
+          isQualityAddress = true;
+
+      if (_typeof(errors) === 'object' && !Array.isArray(errors)) {
+        error = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_Error__WEBPACK_IMPORTED_MODULE_15__.default, {
+          errors: errors['address']
+        });
+        aria_invalid = errors['address'] !== undefined && errors['address'] !== null;
+      }
+
+      if (deliveryAddress[0] && deliveryAddress[0]["validation-code"] === 'NOT_VALIDATED_HAS_NO_MAIN_POINTS') isQualityAddress = false;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__group-row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "checkout-form__label"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__label-text"
+      }, "\u0410\u0434\u0440\u0435\u0441 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        "aria-invalid": aria_invalid,
+        onChange: this.handleAddress.bind(this),
+        type: "text",
+        name: this.modelName + "[address]",
+        placeholder: "\u041D\u0430\u043F\u0440\u0438\u043C\u0435\u0440: \u0411\u0430\u0440\u043D\u0430\u0443\u043B, \u0443\u043B \u041F\u043E\u043F\u043E\u0432\u0430 4 \u043A\u0432 211",
+        className: "checkout-form__input",
+        value: this.state.selectedAddress
+      }), error)), !isQualityAddress ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form-low-quality-address"
+      }, "\u041D\u0435\u0434\u043E\u0441\u0442\u0430\u0442\u043E\u0447\u043D\u043E \u0438\u043D\u0444\u043E\u0440\u043C\u0430\u0446\u0438\u0438, \u0443\u0442\u043E\u0447\u043D\u0438\u0442\u0435 \u0430\u0434\u0440\u0435\u0441") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-address-list"
+      }, deliveryAddress.map(function (e, i) {
+        var addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-address-list__item",
+          key: i
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-address-list__address"
+        }, addrr), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          className: "checkout-address-list__select",
+          onClick: _this8.handleSelectAddress.bind(_this8, addrr),
+          type: "button"
+        }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__group-row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          isHiden: this.state.addr_index != null,
+          name: "postalcode",
+          title: "Индекс",
+          placeholder: "Индекс",
+          value: this.state.addr_index
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__group-row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          isHiden: this.state.addr_city != null,
+          name: "city",
+          title: "Город",
+          placeholder: "Город",
+          value: this.state.addr_city
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          isHiden: this.state.addr_street != null,
+          name: "street",
+          title: "Улица",
+          placeholder: "Улица",
+          value: this.state.addr_street
+        }
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "checkout-form__group-row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          isHiden: this.state.addr_home != null,
+          name: "number_home",
+          title: "Номер дома",
+          placeholder: "Номер дома",
+          value: this.state.addr_home
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          isHiden: this.state.addr_pouch != null,
+          name: "entrance",
+          title: "Подъезд",
+          placeholder: "Подъезд",
+          value: this.state.addr_pouch
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          isHiden: this.state.addr_floor !== null,
+          name: "floor_house",
+          title: "Этаж",
+          placeholder: "Этаж",
+          value: this.state.addr_floor
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          isHiden: this.state.addr_room !== null,
+          name: "number_appartament",
+          title: "Квартира",
+          placeholder: "Квартира",
+          value: this.state.addr_room
+        }
+      })));
     }
   }, {
     key: "finish",
@@ -5278,15 +5461,11 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "dashboard",
     value: function dashboard() {
-      var _this7 = this;
+      var _this9 = this;
 
       var buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ',
           deliveryService;
-
-      if (parseInt(this.state.deliveryId) === 1) {
-        deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, null);
-      }
-
+      if (parseInt(this.state.deliveryId) === 1) deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, null);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -5328,71 +5507,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           title: "Ваш электронный адрес*",
           placeholder: "Ваш электронный адрес*"
         }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "city",
-          title: "Город",
-          placeholder: "Город"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "street",
-          title: "Улица",
-          placeholder: "Улица"
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "checkout-form__group-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "number_home",
-          title: "Номер дома",
-          placeholder: "Номер дома"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "entrance",
-          title: "Подъезд",
-          placeholder: "Подъезд"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "floor_house",
-          title: "Этаж",
-          placeholder: "Этаж"
-        }
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
-        errors: this.state.errors,
-        unsetError: this.unsetError.bind(this),
-        element: "input",
-        modelName: this.modelName,
-        options: {
-          name: "number_appartament",
-          title: "Квартира",
-          placeholder: "Квартира"
-        }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+      })), parseInt(this.state.deliveryId) === 3 ? '' : this.renderAddress(), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "checkout-form__label",
         htmlFor: "checkout-comment"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -5413,7 +5528,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         attribute: "payment_id",
         handlerSelect: this.handleSelectPayment.bind(this),
         models: this.state.payment.filter(function (element) {
-          return !_this7.state.excludePayments.includes(element.id);
+          return !_this9.state.excludePayments.includes(element.id);
         })
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row",
@@ -6594,6 +6709,9 @@ var Input = /*#__PURE__*/function (_Component) {
       }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        style: {
+          display: options.isHiden == true ? 'none' : 'block'
+        },
         className: "checkout-form__label",
         htmlFor: "checkout-" + options.name
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -6602,8 +6720,10 @@ var Input = /*#__PURE__*/function (_Component) {
         onChange: this.handleInputChange.bind(this),
         className: "checkout-form__input " + options["class"],
         id: "checkout-" + options.name,
+        value: options.value,
         name: this.props.buildElementName(),
         type: "text",
+        style: options.style,
         "aria-invalid": aria_invalid,
         placeholder: options.placeholder
       }), error);
@@ -40854,7 +40974,7 @@ function noteOnce(valid, message) {
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-/** @license React v17.0.2
+/** @license React v17.0.1
  * react-dom.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -52202,7 +52322,7 @@ function flushSyncCallbackQueueImpl() {
 }
 
 // TODO: this is special because it gets imported during build.
-var ReactVersion = '17.0.2';
+var ReactVersion = '17.0.1';
 
 var NoMode = 0;
 var StrictMode = 1; // TODO: Remove BlockingMode and ConcurrentMode by reading from the root
@@ -67374,7 +67494,7 @@ if (false) {} else {
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
-/** @license React v17.0.2
+/** @license React v17.0.1
  * react.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -67392,7 +67512,7 @@ if (true) {
 var _assign = __webpack_require__(/*! object-assign */ "./node_modules/object-assign/index.js");
 
 // TODO: this is special because it gets imported during build.
-var ReactVersion = '17.0.2';
+var ReactVersion = '17.0.1';
 
 // ATTENTION
 // When adding new symbols to this file,
@@ -71435,7 +71555,7 @@ var index = (function () {
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-/** @license React v0.20.2
+/** @license React v0.20.1
  * scheduler-tracing.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -71793,7 +71913,7 @@ exports.unstable_wrap = unstable_wrap;
 /***/ ((__unused_webpack_module, exports) => {
 
 "use strict";
-/** @license React v0.20.2
+/** @license React v0.20.1
  * scheduler.development.js
  *
  * Copyright (c) Facebook, Inc. and its affiliates.
@@ -71809,7 +71929,7 @@ if (true) {
 'use strict';
 
 var enableSchedulerDebugging = false;
-var enableProfiling = false;
+var enableProfiling = true;
 
 var requestHostCallback;
 var requestHostTimeout;
@@ -72079,13 +72199,172 @@ function compare(a, b) {
 }
 
 // TODO: Use symbols?
+var NoPriority = 0;
 var ImmediatePriority = 1;
 var UserBlockingPriority = 2;
 var NormalPriority = 3;
 var LowPriority = 4;
 var IdlePriority = 5;
 
+var runIdCounter = 0;
+var mainThreadIdCounter = 0;
+var profilingStateSize = 4;
+var sharedProfilingBuffer =  // $FlowFixMe Flow doesn't know about SharedArrayBuffer
+typeof SharedArrayBuffer === 'function' ? new SharedArrayBuffer(profilingStateSize * Int32Array.BYTES_PER_ELEMENT) : // $FlowFixMe Flow doesn't know about ArrayBuffer
+typeof ArrayBuffer === 'function' ? new ArrayBuffer(profilingStateSize * Int32Array.BYTES_PER_ELEMENT) : null // Don't crash the init path on IE9
+;
+var profilingState =  sharedProfilingBuffer !== null ? new Int32Array(sharedProfilingBuffer) : []; // We can't read this but it helps save bytes for null checks
+
+var PRIORITY = 0;
+var CURRENT_TASK_ID = 1;
+var CURRENT_RUN_ID = 2;
+var QUEUE_SIZE = 3;
+
+{
+  profilingState[PRIORITY] = NoPriority; // This is maintained with a counter, because the size of the priority queue
+  // array might include canceled tasks.
+
+  profilingState[QUEUE_SIZE] = 0;
+  profilingState[CURRENT_TASK_ID] = 0;
+} // Bytes per element is 4
+
+
+var INITIAL_EVENT_LOG_SIZE = 131072;
+var MAX_EVENT_LOG_SIZE = 524288; // Equivalent to 2 megabytes
+
+var eventLogSize = 0;
+var eventLogBuffer = null;
+var eventLog = null;
+var eventLogIndex = 0;
+var TaskStartEvent = 1;
+var TaskCompleteEvent = 2;
+var TaskErrorEvent = 3;
+var TaskCancelEvent = 4;
+var TaskRunEvent = 5;
+var TaskYieldEvent = 6;
+var SchedulerSuspendEvent = 7;
+var SchedulerResumeEvent = 8;
+
+function logEvent(entries) {
+  if (eventLog !== null) {
+    var offset = eventLogIndex;
+    eventLogIndex += entries.length;
+
+    if (eventLogIndex + 1 > eventLogSize) {
+      eventLogSize *= 2;
+
+      if (eventLogSize > MAX_EVENT_LOG_SIZE) {
+        // Using console['error'] to evade Babel and ESLint
+        console['error']("Scheduler Profiling: Event log exceeded maximum size. Don't " + 'forget to call `stopLoggingProfilingEvents()`.');
+        stopLoggingProfilingEvents();
+        return;
+      }
+
+      var newEventLog = new Int32Array(eventLogSize * 4);
+      newEventLog.set(eventLog);
+      eventLogBuffer = newEventLog.buffer;
+      eventLog = newEventLog;
+    }
+
+    eventLog.set(entries, offset);
+  }
+}
+
+function startLoggingProfilingEvents() {
+  eventLogSize = INITIAL_EVENT_LOG_SIZE;
+  eventLogBuffer = new ArrayBuffer(eventLogSize * 4);
+  eventLog = new Int32Array(eventLogBuffer);
+  eventLogIndex = 0;
+}
+function stopLoggingProfilingEvents() {
+  var buffer = eventLogBuffer;
+  eventLogSize = 0;
+  eventLogBuffer = null;
+  eventLog = null;
+  eventLogIndex = 0;
+  return buffer;
+}
+function markTaskStart(task, ms) {
+  {
+    profilingState[QUEUE_SIZE]++;
+
+    if (eventLog !== null) {
+      // performance.now returns a float, representing milliseconds. When the
+      // event is logged, it's coerced to an int. Convert to microseconds to
+      // maintain extra degrees of precision.
+      logEvent([TaskStartEvent, ms * 1000, task.id, task.priorityLevel]);
+    }
+  }
+}
+function markTaskCompleted(task, ms) {
+  {
+    profilingState[PRIORITY] = NoPriority;
+    profilingState[CURRENT_TASK_ID] = 0;
+    profilingState[QUEUE_SIZE]--;
+
+    if (eventLog !== null) {
+      logEvent([TaskCompleteEvent, ms * 1000, task.id]);
+    }
+  }
+}
+function markTaskCanceled(task, ms) {
+  {
+    profilingState[QUEUE_SIZE]--;
+
+    if (eventLog !== null) {
+      logEvent([TaskCancelEvent, ms * 1000, task.id]);
+    }
+  }
+}
 function markTaskErrored(task, ms) {
+  {
+    profilingState[PRIORITY] = NoPriority;
+    profilingState[CURRENT_TASK_ID] = 0;
+    profilingState[QUEUE_SIZE]--;
+
+    if (eventLog !== null) {
+      logEvent([TaskErrorEvent, ms * 1000, task.id]);
+    }
+  }
+}
+function markTaskRun(task, ms) {
+  {
+    runIdCounter++;
+    profilingState[PRIORITY] = task.priorityLevel;
+    profilingState[CURRENT_TASK_ID] = task.id;
+    profilingState[CURRENT_RUN_ID] = runIdCounter;
+
+    if (eventLog !== null) {
+      logEvent([TaskRunEvent, ms * 1000, task.id, runIdCounter]);
+    }
+  }
+}
+function markTaskYield(task, ms) {
+  {
+    profilingState[PRIORITY] = NoPriority;
+    profilingState[CURRENT_TASK_ID] = 0;
+    profilingState[CURRENT_RUN_ID] = 0;
+
+    if (eventLog !== null) {
+      logEvent([TaskYieldEvent, ms * 1000, task.id, runIdCounter]);
+    }
+  }
+}
+function markSchedulerSuspended(ms) {
+  {
+    mainThreadIdCounter++;
+
+    if (eventLog !== null) {
+      logEvent([SchedulerSuspendEvent, ms * 1000, mainThreadIdCounter]);
+    }
+  }
+}
+function markSchedulerUnsuspended(ms) {
+  {
+    if (eventLog !== null) {
+      logEvent([SchedulerResumeEvent, ms * 1000, mainThreadIdCounter]);
+    }
+  }
 }
 
 /* eslint-disable no-var */
@@ -72126,6 +72405,11 @@ function advanceTimers(currentTime) {
       pop(timerQueue);
       timer.sortIndex = timer.expirationTime;
       push(taskQueue, timer);
+
+      {
+        markTaskStart(timer, currentTime);
+        timer.isQueued = true;
+      }
     } else {
       // Remaining timers are pending.
       return;
@@ -72154,6 +72438,9 @@ function handleTimeout(currentTime) {
 }
 
 function flushWork(hasTimeRemaining, initialTime) {
+  {
+    markSchedulerUnsuspended(initialTime);
+  } // We'll need a host callback the next time work is scheduled.
 
 
   isHostCallbackScheduled = false;
@@ -72188,6 +72475,12 @@ function flushWork(hasTimeRemaining, initialTime) {
     currentTask = null;
     currentPriorityLevel = previousPriorityLevel;
     isPerformingWork = false;
+
+    {
+      var _currentTime = exports.unstable_now();
+
+      markSchedulerSuspended(_currentTime);
+    }
   }
 }
 
@@ -72208,13 +72501,18 @@ function workLoop(hasTimeRemaining, initialTime) {
       currentTask.callback = null;
       currentPriorityLevel = currentTask.priorityLevel;
       var didUserCallbackTimeout = currentTask.expirationTime <= currentTime;
-
+      markTaskRun(currentTask, currentTime);
       var continuationCallback = callback(didUserCallbackTimeout);
       currentTime = exports.unstable_now();
 
       if (typeof continuationCallback === 'function') {
         currentTask.callback = continuationCallback;
+        markTaskYield(currentTask, currentTime);
       } else {
+        {
+          markTaskCompleted(currentTask, currentTime);
+          currentTask.isQueued = false;
+        }
 
         if (currentTask === peek(taskQueue)) {
           pop(taskQueue);
@@ -72359,6 +72657,10 @@ function unstable_scheduleCallback(priorityLevel, callback, options) {
     sortIndex: -1
   };
 
+  {
+    newTask.isQueued = false;
+  }
+
   if (startTime > currentTime) {
     // This is a delayed task.
     newTask.sortIndex = startTime;
@@ -72379,6 +72681,11 @@ function unstable_scheduleCallback(priorityLevel, callback, options) {
   } else {
     newTask.sortIndex = expirationTime;
     push(taskQueue, newTask);
+
+    {
+      markTaskStart(newTask, currentTime);
+      newTask.isQueued = true;
+    } // Schedule a host callback, if needed. If we're already performing work,
     // wait until the next time we yield.
 
 
@@ -72407,6 +72714,13 @@ function unstable_getFirstCallbackNode() {
 }
 
 function unstable_cancelCallback(task) {
+  {
+    if (task.isQueued) {
+      var currentTime = exports.unstable_now();
+      markTaskCanceled(task, currentTime);
+      task.isQueued = false;
+    }
+  } // Null out the callback to indicate the task has been canceled. (Can't
   // remove from the queue because you can't remove arbitrary nodes from an
   // array based heap, only the first one.)
 
@@ -72419,7 +72733,11 @@ function unstable_getCurrentPriorityLevel() {
 }
 
 var unstable_requestPaint = requestPaint;
-var unstable_Profiling =  null;
+var unstable_Profiling =  {
+  startLoggingProfilingEvents: startLoggingProfilingEvents,
+  stopLoggingProfilingEvents: stopLoggingProfilingEvents,
+  sharedProfilingBuffer: sharedProfilingBuffer
+} ;
 
 exports.unstable_IdlePriority = IdlePriority;
 exports.unstable_ImmediatePriority = ImmediatePriority;
@@ -84181,9 +84499,8 @@ Swiper.use(components);
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
-/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 		if (cachedModule !== undefined) {
-/******/ 			return cachedModule.exports;
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {

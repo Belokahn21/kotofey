@@ -6,11 +6,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
 use app\modules\payment\models\services\equiring\EquiringTerminalService;
 use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
-use app\modules\site\models\entity\ModuleSettings;
-use app\modules\site\models\helpers\ModuleSettingsHelper;
-use app\modules\site_settings\models\entity\SiteSettings;
 use yii\rest\ActiveController;
-use yii\rest\Controller;
 
 class RestController extends ActiveController
 {

@@ -1,6 +1,14 @@
 .checkout-form {
   margin-bottom: 40px;
 
+  &-low-quality-address {
+    color: orange;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    padding: 0 5px;
+  }
+
   &-attention {
     background-color: white;
     border: 1px red solid;
@@ -25,7 +33,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    margin: 10px 0;
+    margin: 0;
 
     .checkout-form__label {
       //width: 49%;

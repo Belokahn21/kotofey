@@ -3,13 +3,13 @@
 /* @var $this yii\web\View
  * @var $order Order
  * @var $basket \app\modules\order\models\entity\OrdersItems[]
- * @var $billing \app\modules\user\models\entity\Billing
+ * @var $billing \app\modules\user\models\entity\UserBilling
  * @var $user \app\modules\user\models\entity\User
  * @var $deliveries app\modules\delivery\models\entity\Delivery[]
  * @var $payments \app\modules\payment\models\entity\Payment[]
  * @var $order_date \app\modules\order\models\entity\OrderDate
  * @var $delivery_time \app\modules\order\models\service\DeliveryTimeService
- * @var $billing_list \app\modules\user\models\entity\Billing[]
+ * @var $billing_list \app\modules\user\models\entity\UserBilling[]
  */
 
 use yii\helpers\Url;

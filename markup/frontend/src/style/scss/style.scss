@@ -12,7 +12,6 @@
 @import "include/block/menu";
 @import "include/block/phone";
 @import "include/block/basket";
-@import "include/block/profile";
 @import "include/block/search-form";
 @import "include/block/list-variants";
 @import "include/block/product-control";
@@ -69,6 +68,7 @@
 @import "include/block/wh-group";
 
 // личный кабинет
+@import "include/block/profile";
 @import "include/block/order-list";
 @import "include/block/profile-order-info";
 @import "include/block/profile-sections";
@@ -78,6 +78,7 @@
 @import "include/block/gifts";
 @import "include/block/profile-pet";
 @import "include/block/bonus-history-table";
+@import "include/block/profile-billing";
 
 
 // Контактная информация
@@ -108,6 +109,7 @@
 @import "include/block/checkout-form-variants";
 @import "include/block/checkout-reglament";
 @import "include/block/light-checkout-list";
+@import "include/block/checkout-address";
 
 // Акции
 @import "include/block/action-list";

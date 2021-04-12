@@ -9,6 +9,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Price;
+use app\modules\user\models\entity\UserBilling;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -36,6 +37,7 @@ class RestController extends ActiveController
     {
         $order = new $this->modelClass(['scenario' => Order::SCENARIO_CLIENT_BUY]);
         $orderDate = new OrderDate();
+        $billing = new UserBilling();
         $items = new OrdersItems();
         $response = [
             'status' => 200,
@@ -47,11 +49,11 @@ class RestController extends ActiveController
             return $response;
         }
 
-//        if (!$order->validate()) {
-//            $response['status'] = 510;
-//            $response['errors'] = $order->getErrors();
-//            return $response;
-//        }
+        if (!$order->validate()) {
+            $response['status'] = 510;
+            $response['errors'] = $order->getErrors();
+            return $response;
+        }
 
         if (!$order->save()) {
             $response['status'] = 510;
@@ -65,6 +67,12 @@ class RestController extends ActiveController
             $response['errors'] = $items->getErrors();
             return $response;
         }
+
+//        if (!$billing->load(\Yii::$app->request->post()) || !$billing->validate()) {
+//            $response['status'] = 530;
+//            $response['errors'] = $billing->getErrors();
+//            return $response;
+//        }
 
         $response['data']['order'] = [
             'id' => $order->id,

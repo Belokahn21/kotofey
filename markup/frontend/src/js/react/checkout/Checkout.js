@@ -13,17 +13,22 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
+import Input from "./html/Input";
+import Error from "./html/Error";
 
 class Checkout extends Component {
     constructor(props) {
         super(props);
 
         this.modelName = 'Order';
-        this.patchTimerEx;
+        this.billingModelName = 'UserBilling';
+        this.patchTimerEx, this.cleanAddressTimerEx;
+        this.cleanAddressTimer = 1000;
 
         this.state = {
             order: null,
             promocode: null,
+            deliveryAddress: [],
             excludePayments: [],
             delivery: [],
             payment: [],
@@ -35,6 +40,14 @@ class Checkout extends Component {
             deliveryId: 0,
             user: null,
             finish: false,
+            selectedAddress: null,
+            addr_index: "",
+            addr_city: "",
+            addr_street: "",
+            addr_home: "",
+            addr_room: "",
+            addr_pouch: "",
+            addr_floor: "",
         };
     }
 
@@ -236,6 +249,31 @@ class Checkout extends Component {
         this.setState({errors: errors})
     }
 
+    handleAddress(event) {
+        if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
+
+        this.cleanAddressTimerEx = setTimeout(() => {
+            RestRequest.all(config.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(result => {
+
+                this.setState({
+                    deliveryAddress: result,
+                    addr_index: result[0].index,
+                    addr_city: result[0].place,
+                    addr_street: result[0].street,
+                    addr_home: result[0].house,
+                    addr_room: result[0].room,
+                });
+            });
+        }, this.cleanAddressTimer);
+    }
+
+    handleSelectAddress(address, event) {
+        this.setState({
+            selectedAddress: address,
+            deliveryAddress: []
+        });
+    }
+
     render() {
 
         if (this.state.finish === true) {
@@ -243,6 +281,56 @@ class Checkout extends Component {
         }
 
         return this.dashboard();
+    }
+
+    renderAddress() {
+        const {errors} = this.state, {deliveryAddress} = this.state;
+        let error, aria_invalid, isQualityAddress = true;
+
+        if (typeof errors === 'object' && !Array.isArray(errors)) {
+            error = <Error errors={errors['address']}/>
+            aria_invalid = errors['address'] !== undefined && errors['address'] !== null;
+        }
+
+        if (deliveryAddress[0] && deliveryAddress[0]["validation-code"] === 'NOT_VALIDATED_HAS_NO_MAIN_POINTS') isQualityAddress = false;
+
+        return <>
+            <div className="checkout-form__group-row">
+                <label className="checkout-form__label">
+                    <div className="checkout-form__label-text">Адрес доставки</div>
+                    <input aria-invalid={aria_invalid} onChange={this.handleAddress.bind(this)} type="text" name={this.modelName + "[address]"} placeholder="Например: Барнаул, ул Попова 4 кв 211" className="checkout-form__input" value={this.state.selectedAddress}/>
+                    {error}
+                </label>
+
+
+            </div>
+            {!isQualityAddress ? <div className="checkout-form-low-quality-address">Недостаточно информации, уточните адрес</div> :
+                <div className="checkout-address-list">
+                    {deliveryAddress.map((e, i) => {
+                        const addrr = '' + e.index + (e.region ? ', ' + e.region : '') + (e.place ? ', ' + e.place : '') + (e.street ? ', ' + e.street : '') + (e.house ? ', д. ' + e.house : '') + (e.room ? ', кв ' + e.room : '');
+                        return <div className="checkout-address-list__item" key={i}>
+                            <div className="checkout-address-list__address">{addrr}</div>
+                            <button className="checkout-address-list__select" onClick={this.handleSelectAddress.bind(this, addrr)} type="button">Выбрать</button>
+                        </div>
+                    })}
+                </div>}
+
+
+            <div className="checkout-form__group-row">
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_index != null, name: "postalcode", title: "Индекс", placeholder: "Индекс", value: this.state.addr_index}}/>
+            </div>
+
+            <div className="checkout-form__group-row">
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_city != null, name: "city", title: "Город", placeholder: "Город", value: this.state.addr_city}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_street != null, name: "street", title: "Улица", placeholder: "Улица", value: this.state.addr_street}}/>
+            </div>
+            <div className="checkout-form__group-row">
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_home != null, name: "number_home", title: "Номер дома", placeholder: "Номер дома", value: this.state.addr_home}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_pouch != null, name: "entrance", title: "Подъезд", placeholder: "Подъезд", value: this.state.addr_pouch}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_floor !== null, name: "floor_house", title: "Этаж", placeholder: "Этаж", value: this.state.addr_floor}}/>
+                <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{isHiden: this.state.addr_room !== null, name: "number_appartament", title: "Квартира", placeholder: "Квартира", value: this.state.addr_room}}/>
+            </div>
+        </>;
     }
 
     finish() {
@@ -288,9 +376,8 @@ class Checkout extends Component {
     dashboard() {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService;
 
-        if (parseInt(this.state.deliveryId) === 1) {
-            deliveryService = <DeliveryService/>
-        }
+        if (parseInt(this.state.deliveryId) === 1) deliveryService = <DeliveryService/>
+
 
         return (
             <div className="page__group-row">
@@ -315,16 +402,10 @@ class Checkout extends Component {
                             <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "phone", title: "Ваш номер телефона*", placeholder: "Ваш номер телефона*", class: 'js-mask-ru'}}/>
                             <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "email", title: "Ваш электронный адрес*", placeholder: "Ваш электронный адрес*"}}/>
                         </div>
-                        <div className="checkout-form__group-row">
-                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "city", title: "Город", placeholder: "Город"}}/>
-                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "street", title: "Улица", placeholder: "Улица"}}/>
-                        </div>
-                        <div className="checkout-form__group-row">
-                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_home", title: "Номер дома", placeholder: "Номер дома"}}/>
-                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "entrance", title: "Подъезд", placeholder: "Подъезд"}}/>
-                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "floor_house", title: "Этаж", placeholder: "Этаж"}}/>
-                            <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "number_appartament", title: "Квартира", placeholder: "Квартира"}}/>
-                        </div>
+
+                        {parseInt(this.state.deliveryId) === 3 ? '' : this.renderAddress()}
+
+
                         <label className="checkout-form__label" htmlFor="checkout-comment">
                             <HtmlHelper errors={this.state.errors} element="textarea" modelName={this.modelName} options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
                         </label>

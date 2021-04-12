@@ -234,7 +234,7 @@ use app\modules\bonus\models\helper\BonusHelper;
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'country')->textInput(['placeholder' => 'Почтовый индекс'])->label(false); ?>
+                        <?= $form->field($model, 'country')->textInput(['placeholder' => 'Регион'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">

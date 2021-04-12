@@ -9,7 +9,7 @@ use app\modules\bonus\models\service\BonusService;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\user\models\entity\User;
-use app\modules\user\models\entity\Billing;
+use app\modules\user\models\entity\UserBilling;
 use app\modules\order\models\helpers\OrderHelper;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -58,13 +58,14 @@ class Order extends ActiveRecord
 
     public $is_update;
     public $bonus;
+    public $address;
 
     public function scenarios()
     {
         return [
             self::SCENARIO_DEFAULT => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
             self::SCENARIO_CUSTOM => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
         ];
     }
 
@@ -84,7 +85,7 @@ class Order extends ActiveRecord
                 }
             ],
 
-            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house', 'bonus'], 'integer'],
+            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house'], 'integer'],
 
 
             [['payment_id', 'delivery_id'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите {attribute}'],
@@ -108,6 +109,10 @@ class Order extends ActiveRecord
 
             [['ip'], 'string'],
             [['ip'], 'default', 'value' => \Yii::$app->request->userIP],
+
+            // всё ниже нештатные переменные
+            [['address'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите адрес доставки'],
+            [['bonus'], 'integer'],
         ];
     }
 
@@ -206,7 +211,7 @@ class Order extends ActiveRecord
     {
         $order_billing = OrderBilling::findOne(['order_id' => $this->id]);
         if ($order_billing) {
-            return Billing::findOne($order_billing->user_billing_id);
+            return UserBilling::findOne($order_billing->user_billing_id);
         }
     }
 
