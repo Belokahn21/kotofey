@@ -250,6 +250,10 @@ use app\modules\bonus\models\helper\BonusHelper;
                     </div>
 
                     <div class="form-element order-delivery-info__item">
+                        <?= $form->field($model, 'number_home')->textInput(['placeholder' => 'Номер дома'])->label(false); ?>
+                    </div>
+
+                    <div class="form-element order-delivery-info__item">
                         <?= $form->field($model, 'entrance')->textInput(['placeholder' => 'Подъезд'])->label(false); ?>
                     </div>
 
@@ -258,11 +262,7 @@ use app\modules\bonus\models\helper\BonusHelper;
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'number_home')->textInput(['placeholder' => 'Номер дома'])->label(false); ?>
-                    </div>
-
-                    <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'number_appartament')->textInput(['placeholder' => 'Номер квартиры'])->label(false); ?>
+                        <?= $form->field($model, 'number_appartament')->textInput(['placeholder' => 'Квартира'])->label(false); ?>
                     </div>
 
                 </div>
