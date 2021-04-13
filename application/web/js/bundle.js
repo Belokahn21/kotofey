@@ -4414,6 +4414,113 @@ document.querySelectorAll('input[type=text], textarea').forEach(function (callba
 
 /***/ }),
 
+/***/ "./src/js/classes/HelpDashboard/HelpDashboard.js":
+/*!*******************************************************!*\
+  !*** ./src/js/classes/HelpDashboard/HelpDashboard.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _HelpDashboardButton__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./HelpDashboardButton */ "./src/js/classes/HelpDashboard/HelpDashboardButton.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var HelpDashboard = /*#__PURE__*/function () {
+  function HelpDashboard() {
+    _classCallCheck(this, HelpDashboard);
+
+    var buttonClass = new _HelpDashboardButton__WEBPACK_IMPORTED_MODULE_0__.default('.js-show-panel', {
+      event: {
+        onClick: this.clickByButton.bind(this)
+      }
+    });
+    this.button = buttonClass.getButton();
+    this.panel = document.querySelector('.js-help-panel');
+  }
+
+  _createClass(HelpDashboard, [{
+    key: "clickByButton",
+    value: function clickByButton(e) {
+      console.log("demo event");
+    }
+  }]);
+
+  return HelpDashboard;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HelpDashboard);
+
+/***/ }),
+
+/***/ "./src/js/classes/HelpDashboard/HelpDashboardButton.js":
+/*!*************************************************************!*\
+  !*** ./src/js/classes/HelpDashboard/HelpDashboardButton.js ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var HelpDashboardButton = /*#__PURE__*/function () {
+  function HelpDashboardButton(selector, settings) {
+    _classCallCheck(this, HelpDashboardButton);
+
+    this.settings = settings;
+    this.button = document.querySelector(selector);
+    this.initEvent();
+  }
+
+  _createClass(HelpDashboardButton, [{
+    key: "getButton",
+    value: function getButton() {
+      return this.button;
+    }
+  }, {
+    key: "initEvent",
+    value: function initEvent() {
+      this.button.onclick = this.handleClick.bind(this);
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event) {
+      var _this = this;
+
+      event.preventDefault();
+      Object.keys(this.settings.event).map(function (e, i) {
+        document.addEventListener(e, _this.settings.event[e]);
+        var event = new Event(e, {
+          bubbles: true
+        }); // (2)
+
+        _this.button.dispatchEvent(event);
+      }); // console.log(this.settings.event);
+    }
+  }]);
+
+  return HelpDashboardButton;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (HelpDashboardButton);
+
+/***/ }),
+
 /***/ "./src/js/config.js":
 /*!**************************!*\
   !*** ./src/js/config.js ***!
@@ -84601,34 +84708,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _block_RemoveBasketItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./block/RemoveBasketItem */ "./src/js/block/RemoveBasketItem.js");
 /* harmony import */ var _block_FastCart__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./block/FastCart */ "./src/js/block/FastCart.js");
 /* harmony import */ var _block_LiveSearch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./block/LiveSearch */ "./src/js/block/LiveSearch.js");
-/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./block/gifts */ "./src/js/block/gifts.js");
-/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_block_gifts__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./block/mobile-menu */ "./src/js/block/mobile-menu.js");
-/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_block_mobile_menu__WEBPACK_IMPORTED_MODULE_13__);
-/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./block/basket */ "./src/js/block/basket.js");
-/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_block_basket__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./block/search */ "./src/js/block/search.js");
-/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_block_search__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./block/ui-placeholder */ "./src/js/block/ui-placeholder.js");
-/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_block_ui_placeholder__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _block_other_jquery__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./block/other-jquery */ "./src/js/block/other-jquery.js");
-/* harmony import */ var _block_catalog_filter__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./block/catalog-filter */ "./src/js/block/catalog-filter.js");
-/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./block/toggleClass */ "./src/js/block/toggleClass.js");
-/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_block_toggleClass__WEBPACK_IMPORTED_MODULE_19__);
-/* harmony import */ var _block_promocode__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./block/promocode */ "./src/js/block/promocode.js");
-/* harmony import */ var _include_init_sliders__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./include/init-sliders */ "./src/js/include/init-sliders.js");
-/* harmony import */ var _include_init_range_sliders__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./include/init-range-sliders */ "./src/js/include/init-range-sliders.js");
-/* harmony import */ var _include_init_maskedinput__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./include/init-maskedinput */ "./src/js/include/init-maskedinput.js");
-/* harmony import */ var _include_init_datepicker__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./include/init-datepicker */ "./src/js/include/init-datepicker.js");
-/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./include/phone-mask */ "./src/js/include/phone-mask.js");
-/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_25___default = /*#__PURE__*/__webpack_require__.n(_include_phone_mask__WEBPACK_IMPORTED_MODULE_25__);
-/* harmony import */ var _react_search_Search__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./react/search/Search */ "./src/js/react/search/Search.js");
-/* harmony import */ var _react_checkout_Checkout__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./react/checkout/Checkout */ "./src/js/react/checkout/Checkout.js");
+/* harmony import */ var _classes_HelpDashboard_HelpDashboard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./classes/HelpDashboard/HelpDashboard */ "./src/js/classes/HelpDashboard/HelpDashboard.js");
+/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./block/gifts */ "./src/js/block/gifts.js");
+/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_block_gifts__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./block/mobile-menu */ "./src/js/block/mobile-menu.js");
+/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_block_mobile_menu__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./block/basket */ "./src/js/block/basket.js");
+/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_block_basket__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./block/search */ "./src/js/block/search.js");
+/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_block_search__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./block/ui-placeholder */ "./src/js/block/ui-placeholder.js");
+/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_block_ui_placeholder__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _block_other_jquery__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./block/other-jquery */ "./src/js/block/other-jquery.js");
+/* harmony import */ var _block_catalog_filter__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./block/catalog-filter */ "./src/js/block/catalog-filter.js");
+/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./block/toggleClass */ "./src/js/block/toggleClass.js");
+/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_20___default = /*#__PURE__*/__webpack_require__.n(_block_toggleClass__WEBPACK_IMPORTED_MODULE_20__);
+/* harmony import */ var _block_promocode__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/promocode */ "./src/js/block/promocode.js");
+/* harmony import */ var _include_init_sliders__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./include/init-sliders */ "./src/js/include/init-sliders.js");
+/* harmony import */ var _include_init_range_sliders__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./include/init-range-sliders */ "./src/js/include/init-range-sliders.js");
+/* harmony import */ var _include_init_maskedinput__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./include/init-maskedinput */ "./src/js/include/init-maskedinput.js");
+/* harmony import */ var _include_init_datepicker__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./include/init-datepicker */ "./src/js/include/init-datepicker.js");
+/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./include/phone-mask */ "./src/js/include/phone-mask.js");
+/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_26___default = /*#__PURE__*/__webpack_require__.n(_include_phone_mask__WEBPACK_IMPORTED_MODULE_26__);
+/* harmony import */ var _react_search_Search__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./react/search/Search */ "./src/js/react/search/Search.js");
+/* harmony import */ var _react_checkout_Checkout__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./react/checkout/Checkout */ "./src/js/react/checkout/Checkout.js");
 
 window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
 
  // class block
+
 
 
 
@@ -84663,6 +84772,7 @@ new _block_favorite__WEBPACK_IMPORTED_MODULE_5__.default();
 new _block_Menu__WEBPACK_IMPORTED_MODULE_4__.default();
 new _block_LiveSearch__WEBPACK_IMPORTED_MODULE_11__.default('.js-live-search'); // new SmoothChangeNumber('[data-smooth-change]');
 
+new _classes_HelpDashboard_HelpDashboard__WEBPACK_IMPORTED_MODULE_12__.default();
 document.addEventListener('DOMContentLoaded', function () {
   new _block_PoductCalc_ProductCalc__WEBPACK_IMPORTED_MODULE_3__.default(new _block_FastCart__WEBPACK_IMPORTED_MODULE_10__.default());
 }); //react js

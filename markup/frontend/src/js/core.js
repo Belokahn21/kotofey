@@ -15,6 +15,7 @@ import StickFilter from './block/StickFilter';
 import RemoveBasketItem from './block/RemoveBasketItem';
 import FastCart from './block/FastCart';
 import LiveSearch from "./block/LiveSearch";
+import HelpDashboard from "./classes/HelpDashboard/HelpDashboard";
 // import SmoothChangeNumber from "./classes/SmoothChangeNumber";
 
 // no class block
@@ -42,6 +43,7 @@ new Favorite();
 new Menu();
 new LiveSearch('.js-live-search');
 // new SmoothChangeNumber('[data-smooth-change]');
+new HelpDashboard();
 
 
 document.addEventListener('DOMContentLoaded', () => {

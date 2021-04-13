@@ -69,8 +69,7 @@ $this->beginPage() ?>
 
 <div class="menu-wrapper">
     <div class="menu page-container">
-        <div class="menu__item hamburger js-hamburger"><img alt="Показать меню" class="hamburger__icon" src="/upload/images/hamburger.svg">
-        </div>
+        <div class="menu__item hamburger js-hamburger"><img alt="Показать меню" class="hamburger__icon" src="/upload/images/hamburger.svg"></div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Зоотовары</a></div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/promotion/']); ?>">Акции и скидки</a></div>
         <div class="menu__item">
