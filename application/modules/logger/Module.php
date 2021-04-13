@@ -2,23 +2,31 @@
 
 namespace app\modules\logger;
 
+use app\modules\site\MainModule;
+use yii\helpers\Url;
+
 /**
  * logger module definition class
  */
-class Module extends \yii\base\Module
+class Module extends MainModule
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\logger\controllers';
+    private $name = "Логи";
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Логи', 'url' => Url::to(['/admin/logger/log-backend/index'])],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

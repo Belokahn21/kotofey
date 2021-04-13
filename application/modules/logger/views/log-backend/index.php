@@ -22,6 +22,7 @@ $this->title = Title::show('Логи сайта');
 ?>
     <div class="title-group">
         <h1>Логирование</h1>
+        <?= Html::a('Очистить', Url::to(['clear']), ['class' => 'btn-main']); ?>
     </div>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,

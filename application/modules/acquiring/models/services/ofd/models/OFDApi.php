@@ -7,9 +7,6 @@ use app\modules\acquiring\Module;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\site\models\helpers\ModuleSettingsHelper;
-use app\modules\site\models\tools\Debug;
-use app\modules\site\models\tools\Price;
 use app\modules\site\models\tools\System;
 use yii\helpers\Json;
 
