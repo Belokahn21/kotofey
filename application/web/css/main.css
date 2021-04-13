@@ -15266,30 +15266,42 @@ label[for="site-form-pet-avatar"] {
   right: -9999px;
   bottom: 0;
   top: 0;
-  width: 300px;
+  width: 400px;
   height: 100%;
   background-color: white;
   z-index: 999;
   transition: right 0.3s ease;
   box-shadow: -9px 10px 8px 0px rgba(34, 60, 80, 0.2); }
+  .help-panel-container {
+    padding: 0 20px; }
   .help-panel.is-show {
     right: 0; }
-  .help-panel__header {
+  .help-panel__header .help-panel-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px silver solid;
-    padding: 0 10px; }
-  .help-panel__title {
-    font-size: 14px;
-    font-weight: bold;
-    text-transform: uppercase; }
-  .help-panel__close {
+    border-bottom: 1px rgba(0, 0, 0, 0.05) solid;
     font-size: 28px;
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.01); }
+  .help-panel__title {
+    font-weight: bold; }
+  .help-panel__close {
+    font-size: 22px;
     margin-left: auto;
     color: black; }
     .help-panel__close:hover {
+      color: #ff1a4a; }
+  .help-panel-list {
+    padding: 5px; }
+    .help-panel-list-header a {
+      color: black;
+      font-weight: bold; }
+    .help-panel-list__item {
+      margin-bottom: 15px; }
+    .help-panel-list__icon {
+      margin-right: 10px;
       color: #ff1a4a; }
 
 

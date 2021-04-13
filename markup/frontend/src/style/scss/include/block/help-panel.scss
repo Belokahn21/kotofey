@@ -3,38 +3,64 @@
   right: -9999px;
   bottom: 0;
   top: 0;
-  width: 300px;
+  width: 400px;
   height: 100%;
   background-color: white;
   z-index: 999;
   transition: right 0.3s ease;
   box-shadow: -9px 10px 8px 0px rgba(34, 60, 80, 0.2);
 
+  &-container {
+    padding: 0 20px;
+  }
+
   &.is-show {
     right: 0;
   }
 
   &__header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px silver solid;
-    padding: 0 10px;
+    .help-panel-container {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px  rgba(0, 0, 0, 0.05) solid;
+      font-size: 28px;
+      padding: 10px 20px;
+      background: rgba(0, 0, 0, 0.01);
+    }
   }
 
   &__title {
-    font-size: 14px;
     font-weight: bold;
-    text-transform: uppercase;
   }
 
   &__close {
-    font-size: 28px;
+    font-size: 22px;
     margin-left: auto;
     color: black;
 
     &:hover {
+      color: $active-color;
+    }
+  }
+
+  &-list {
+    padding: 5px;
+
+    &-header {
+      a {
+        color: black;
+        font-weight: bold;
+      }
+    }
+
+    &__item {
+      margin-bottom: 15px;
+    }
+
+    &__icon {
+      margin-right: 10px;
       color: $active-color;
     }
   }
