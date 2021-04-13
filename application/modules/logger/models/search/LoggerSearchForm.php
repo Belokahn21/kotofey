@@ -43,8 +43,8 @@ class LoggerSearchForm extends Logger
         }
 
         $query->andFilterWhere(['id' => $this->id])
-            ->andFilterWhere(['like', 'message', $this->is_active])
-            ->andFilterWhere(['like', 'uniqCode', $this->name]);
+            ->andFilterWhere(['like', 'message', $this->message])
+            ->andFilterWhere(['like', 'uniqCode', $this->uniqCode]);
 
         return $dataProvider;
     }

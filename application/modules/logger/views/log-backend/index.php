@@ -3,16 +3,9 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
-use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
-use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductCategory;
-use app\models\tool\parser\providers\SibagroTrade;
-use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\widgets\stockOut\StockOutWidget;
-use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
+use app\modules\logger\models\entity\Logger;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\logger\models\entity\Logger
@@ -32,7 +25,11 @@ $this->title = Title::show('Логи сайта');
         'id',
         'message',
         'status',
-        'uniqCode',
+        [
+            'attribute' => 'uniqCode',
+            'format' => 'raw',
+            'filter' => ArrayHelper::map(Logger::find()->select('uniqCode')->groupBy(['uniqCode'])->all(), 'uniqCode', 'uniqCode')
+        ],
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
