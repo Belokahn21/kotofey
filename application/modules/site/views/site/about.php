@@ -5,6 +5,7 @@ use app\modules\seo\models\tools\Title;
 use app\modules\order\models\entity\Order;
 use app\modules\catalog\models\entity\Product;
 use app\modules\content\widgets\slider\SliderWidget;
+use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\content\widgets\informers_slider\InformerSliderWidget;
 
 $this->title = Title::show("О зоомагазине");
@@ -90,6 +91,47 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' 
                 <div class="feedback-list__comment">Замечательный магазин. Всегда доставляют в срок, целые упаковки, свежий корм, никаких просрочек. Рекомендую всем тем более есть скидка за друга!</div>
             </div>
         </div>
+    </div>
+
+
+    <h2 class="page__title">Наши контакты</h2>
+    <div class="d-flex flex-row justify-content-start w-100">
+        <ul class="fa-ul w-50">
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                Email: <a href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
+            </li>
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                Email поддержки сайта: <a href="mailto:support@kotofey.store">support@kotofey.store</a>
+            </li>
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                Телефон: <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
+            </li>
+        </ul>
+        <ul class="fa-ul w-50">
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                ООО "Интернет-Зоомагазин Котофей"
+            </li>
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                ИНН <span>2222889641</span>
+            </li>
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                ОГРН <span>1212200000022</span>
+            </li>
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                Юридический адрес <span>656922, Алтайский край, г. Барнаул, Весенняя ул., д. 4, кв. 55</span>
+            </li>
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                Фактический адрес <span>г.Барнаул, ул. Северо-Западная, 6Б</span>
+            </li>
+        </ul>
     </div>
 
     <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A75a2c08cf453a0309392fdcb243329f2301db73bdb97f18c8bc32cb9e14c1f93&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>

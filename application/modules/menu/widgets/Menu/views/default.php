@@ -10,6 +10,6 @@ use yii\helpers\Url;
         <?php foreach ($models as $model): ?>
             <li class="header-menu__item"><a class="header-menu__link" href="<?= Url::to([$model->link]); ?>"><?= $model->name; ?></a></li>
         <?php endforeach; ?>
-        <li class="header-menu__item"><a class="header-menu__link js-show-help" href="#">Помощь</a></li>
+        <li class="header-menu__item"><a class="header-menu__link js-show-panel" href="#">Помощь</a></li>
     </ul>
 <?php endif; ?>
