@@ -35,6 +35,10 @@
     align-items: flex-start;
     margin: 0;
 
+    @media (max-width: 450px) {
+      flex-direction: column;
+    }
+
     .checkout-form__label {
       //width: 49%;
       padding: 5px;

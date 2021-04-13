@@ -14111,6 +14111,9 @@ label[for="site-form-pet-avatar"] {
     justify-content: space-between;
     align-items: flex-start;
     margin: 0; }
+    @media (max-width: 450px) {
+      .checkout-form__group-row {
+        flex-direction: column; } }
     .checkout-form__group-row .checkout-form__label {
       padding: 5px; }
   .checkout-form__input, .checkout-form__textarea {
