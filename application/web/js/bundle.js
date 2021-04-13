@@ -4445,12 +4445,35 @@ var HelpDashboard = /*#__PURE__*/function () {
     });
     this.button = buttonClass.getButton();
     this.panel = document.querySelector('.js-help-panel');
+    this.closePanel = document.querySelector('.js-close-help-panel');
+    this.initEvents();
   }
 
   _createClass(HelpDashboard, [{
+    key: "initEvents",
+    value: function initEvents() {
+      this.closePanel.onclick = this.handleCloseClick.bind(this);
+    }
+  }, {
+    key: "handleCloseClick",
+    value: function handleCloseClick(e) {
+      this.hidePanel();
+    }
+  }, {
     key: "clickByButton",
     value: function clickByButton(e) {
-      console.log("demo event");
+      console.log(e.target);
+      if (!this.panel.classList.contains('is-show')) this.showPanel();else this.hidePanel();
+    }
+  }, {
+    key: "showPanel",
+    value: function showPanel() {
+      this.panel.classList.add('is-show');
+    }
+  }, {
+    key: "hidePanel",
+    value: function hidePanel() {
+      this.panel.classList.remove('is-show');
     }
   }]);
 
