@@ -32,7 +32,7 @@ class LoggerSearchForm extends Logger
 
     public function search($params)
     {
-        $query = Logger::find();
+        $query = Logger::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
