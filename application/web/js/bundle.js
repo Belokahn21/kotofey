@@ -4462,7 +4462,6 @@ var HelpDashboard = /*#__PURE__*/function () {
   }, {
     key: "clickByButton",
     value: function clickByButton(e) {
-      console.log(e.target);
       if (!this.panel.classList.contains('is-show')) this.showPanel();else this.hidePanel();
     }
   }, {

@@ -15267,7 +15267,7 @@ label[for="site-form-pet-avatar"] {
   height: 100%;
   background-color: white;
   z-index: 999;
-  transition: right 1s ease 0s;
+  transition: right 0.3s ease;
   box-shadow: -9px 10px 8px 0px rgba(34, 60, 80, 0.2); }
   .help-panel.is-show {
     right: 0; }
@@ -15276,11 +15276,18 @@ label[for="site-form-pet-avatar"] {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px silver solid; }
+    border-bottom: 1px silver solid;
+    padding: 0 10px; }
+  .help-panel__title {
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase; }
   .help-panel__close {
     font-size: 28px;
     margin-left: auto;
     color: black; }
+    .help-panel__close:hover {
+      color: #ff1a4a; }
 
 
 /*# sourceMappingURL=main.css.map*/

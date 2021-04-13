@@ -22,14 +22,14 @@ $this->title = 'Обновить прайсы по HTML';
 <?php $form = ActiveForm::begin(); ?>
 
 <?= $form->field($model, 'file')->fileInput(); ?>
-<?= Html::submitButton('Начать', ['class' => 'btn-main ']) ?>
+<?= Html::submitButton('Получить товары', ['class' => 'btn-main ']) ?>
 
 <?php ActiveForm::end(); ?>
 <hr/>
 <?php if ($items && $productModelList): ?>
     <div class="sync-html-price">
         <?php $form = ActiveForm::begin() ?>
-        <?= Html::submitButton('Выполнить', ['class' => 'btn-main']) ?>
+        <?= Html::submitButton('Загрузить товары на сайт', ['class' => 'btn-main']) ?>
         <div class="row">
             <div class="col-6">
                 <?= Html::input('text', 'markup'); ?>
@@ -83,7 +83,7 @@ $this->title = 'Обновить прайсы по HTML';
             </div>
 
         <?php endforeach; ?>
-        <?= Html::submitButton('Выполнить', ['class' => 'btn-main']) ?>
+        <?= Html::submitButton('Загрузить товары на сайт', ['class' => 'btn-main']) ?>
         <?php ActiveForm::end() ?>
     </div>
 <?php endif; ?>
