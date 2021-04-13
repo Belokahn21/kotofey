@@ -23,8 +23,6 @@ class HelpDashboard {
     }
 
     clickByButton(e) {
-        console.log(e.target);
-
         if (!this.panel.classList.contains('is-show')) this.showPanel();
         else this.hidePanel();
     }
