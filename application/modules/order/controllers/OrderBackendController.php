@@ -2,6 +2,10 @@
 
 namespace app\modules\order\controllers;
 
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Yii;
 use yii\web\HttpException;
 use yii\web\ForbiddenHttpException;
@@ -298,16 +302,14 @@ class OrderBackendController extends MainBackendController
 
         // save file
         $writer = new Xlsx($spreadsheet);
-//		$writer->save("$file_name");
-
         header("Expires: Mon, 1 Apr 1974 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
         header("Cache-Control: no-cache, must-revalidate");
         header("Pragma: no-cache");
         header("Content-type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename={$file_name}");
-//
         $writer->save('php://output');
+        exit();
     }
 
     public function actionExport()
