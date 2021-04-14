@@ -343,7 +343,7 @@ LIST;
 
                                         <div class="site-form__item">
                                             <label class="site-form__label" for="site-form-home">Номер дома</label>
-                                            <?= $form->field($billingModel, 'street')->textInput([
+                                            <?= $form->field($billingModel, 'home')->textInput([
                                                 'class' => 'site-form__input',
                                                 'id' => 'site-form-home',
                                                 'placeholder' => 'Номер дома',
@@ -370,7 +370,7 @@ LIST;
 
                                         <div class="site-form__item">
                                             <label class="site-form__label" for="site-form-house">Квартира</label>
-                                            <?= $form->field($billingModel, 'poach')->textInput([
+                                            <?= $form->field($billingModel, 'house')->textInput([
                                                 'class' => 'site-form__input',
                                                 'id' => 'site-form-house',
                                                 'placeholder' => 'Квартира',
