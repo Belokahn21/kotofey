@@ -2,23 +2,30 @@
 
 namespace app\modules\site_settings;
 
+use yii\helpers\Url;
+
 /**
  * site_settings module definition class
  */
 class Module extends \yii\base\Module
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\site_settings\controllers';
+    private $name = 'Настройки';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Список настроек', 'url' => Url::to(['/admin/site_settings/settings-backend/index'])],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

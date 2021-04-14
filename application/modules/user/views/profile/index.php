@@ -2,7 +2,8 @@
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\user\models\entity\User
- * @var $billings \app\modules\user\models\entity\UserBilling
+ * @var $billingModel \app\modules\user\models\entity\UserBilling
+ * @var $billings \app\modules\user\models\entity\UserBilling[]
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $sexList \app\modules\user\models\entity\UserSex[]
  * @var $favorite \app\modules\catalog\models\entity\Product[]
@@ -272,7 +273,10 @@ LIST;
                     </div>
                 </div>
                 <div class="tab-pane fade" id="billing">
-                    <h3>Адреса доставок</h3>
+                    <div class="profile__inline-group">
+                        <h2 class="page__title">Адреса доставок</h2>
+                        <button class="profile-pet__add" type="button" data-toggle="modal" data-target="#newBillingForm">Добавить</button>
+                    </div>
                     <div class="profile-billing-list">
                         <?php foreach ($billings as $item): ?>
                             <div class="profile-billing-list__item">
@@ -283,6 +287,107 @@ LIST;
                             </div>
                         <?php endforeach; ?>
                     </div>
+
+
+                    <div class="authModal modal fade" id="newBillingForm" tabindex="-1" role="dialog" aria-labelledby="newBillingFormLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <?php $form = ActiveForm::begin(); ?>
+                                <div class="site-form">
+                                    <div class="modal-header">
+                                        <div class="div">
+                                            <h5 class="modal-title" id="newBillingFormLabel">Адрес доставки</h5>
+                                        </div>
+                                        <?php if (Yii::$app->user->identity->id == 1): ?>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="modal-body">
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-index">Индекс</label>
+                                            <?= $form->field($billingModel, 'index')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-index',
+                                                'placeholder' => 'Индекс',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-region">Регион</label>
+                                            <?= $form->field($billingModel, 'region')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-region',
+                                                'placeholder' => 'Регион',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-city">Город</label>
+                                            <?= $form->field($billingModel, 'city')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-city',
+                                                'placeholder' => 'Город',
+                                            ])->label(false); ?>
+                                        </div>
+
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-street">Улица</label>
+                                            <?= $form->field($billingModel, 'street')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-street',
+                                                'placeholder' => 'Улица',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-home">Номер дома</label>
+                                            <?= $form->field($billingModel, 'street')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-home',
+                                                'placeholder' => 'Номер дома',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-entrance">Подьезд</label>
+                                            <?= $form->field($billingModel, 'entrance')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-entrance',
+                                                'placeholder' => 'Подьезд',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-floor_house">Этаж</label>
+                                            <?= $form->field($billingModel, 'floor_house')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-floor_house',
+                                                'placeholder' => 'Этаж',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-house">Квартира</label>
+                                            <?= $form->field($billingModel, 'poach')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-house',
+                                                'placeholder' => 'Квартира',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button class="site-form__button" type="button">Добавить</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php ActiveForm::end(); ?>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

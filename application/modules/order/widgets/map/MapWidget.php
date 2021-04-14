@@ -2,7 +2,6 @@
 
 namespace app\modules\order\widgets\map;
 
-
 use app\modules\order\models\entity\Order;
 use yii\base\Widget;
 

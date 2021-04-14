@@ -2,6 +2,11 @@
 
 namespace app\modules\order\controllers;
 
+use app\modules\site\models\tools\System;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use Yii;
 use yii\web\HttpException;
 use yii\web\ForbiddenHttpException;
@@ -234,9 +239,9 @@ class OrderBackendController extends MainBackendController
 
         // Кто продал
         $sheet->setCellValue('A3', 'Продавец');
-        $sheet->setCellValue('B3', 'Интернет-зоомагазин Котофей (ИП Васин К.В.)');
+        $sheet->setCellValue('B3', 'ООО Интернет-зоомагазин Котофей');
         $sheet->getStyle('B3')->getFont()->setBold(true);
-        $sheet->setCellValue('B4', sprintf('Адрес г. Барнаул, ул. Весеняя, дом 4. Телефон: %s, Сайт https://kotofey.store/', SiteSettings::getValueByCode('phone_1')));
+        $sheet->setCellValue('B4', sprintf('Адрес г. Барнаул, ул. Весеняя, дом 4. Телефон: %s, Сайт %s', SiteSettings::getValueByCode('phone_1'), System::fullDomain()));
         $sheet->setCellValue('B5', sprintf('ИНН %s, ОГРН %s', SiteSettings::getValueByCode('inn'), SiteSettings::getValueByCode('ogrn')));
         $sheet->mergeCells('B3:G3');
         $sheet->mergeCells('B4:G4');
@@ -298,16 +303,14 @@ class OrderBackendController extends MainBackendController
 
         // save file
         $writer = new Xlsx($spreadsheet);
-//		$writer->save("$file_name");
-
         header("Expires: Mon, 1 Apr 1974 05:00:00 GMT");
         header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
         header("Cache-Control: no-cache, must-revalidate");
         header("Pragma: no-cache");
         header("Content-type: application/vnd.ms-excel");
         header("Content-Disposition: attachment; filename={$file_name}");
-//
         $writer->save('php://output');
+        exit();
     }
 
     public function actionExport()

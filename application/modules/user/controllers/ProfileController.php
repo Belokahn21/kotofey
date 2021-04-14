@@ -27,6 +27,7 @@ class ProfileController extends Controller
         $history = UserBonusHistory::find()->where(['bonus_account_id' => Yii::$app->user->identity->phone])->orderBy(['created_at' => SORT_DESC]);
         $petModel = new Pets();
         $animals = Animal::find()->all();
+        $billingModel = new UserBilling();
         $billings = UserBilling::find()->where(['phone' => Yii::$app->user->identity->phone])->all();
 
         if ($model->load(Yii::$app->request->post())) {
@@ -40,6 +41,19 @@ class ProfileController extends Controller
             }
         }
 
+        if ($billingModel->load(Yii::$app->request->post())) {
+
+
+            if (Yii::$app->request->isPost) {
+                if ($billingModel->load(Yii::$app->request->post())) {
+                    if ($billingModel->validate() && $billingModel->save()) {
+                        Alert::setSuccessNotify('Элемент успешно добавлен.');
+                        return $this->refresh();
+                    }
+                }
+            }
+        }
+
         return $this->render('index', [
             'orders' => $orders,
             'model' => $model,
@@ -48,7 +62,18 @@ class ProfileController extends Controller
             'petModel' => $petModel,
             'animals' => $animals,
             'billings' => $billings,
+            'billingModel' => $billingModel,
         ]);
+    }
+
+    public function actionBilling($id)
+    {
+
+    }
+
+    public function actionBillingDelete($id)
+    {
+
     }
 
     public function actionLogout()

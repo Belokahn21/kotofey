@@ -255,9 +255,6 @@ $config = [
         'user' => [
             'class' => 'app\modules\user\Module',
         ],
-        'settings' => [
-            'class' => 'app\modules\settings\Module',
-        ],
         'short_link' => [
             'class' => 'app\modules\short_link\Module',
         ],

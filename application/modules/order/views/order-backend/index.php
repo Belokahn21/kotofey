@@ -6,7 +6,7 @@ use app\modules\seo\models\tools\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\widgets\group_buy\GroupBuyWidget;
+use app\modules\order\widgets\GroupBuy\GroupBuyWidget;
 use yii\helpers\ArrayHelper;
 use app\modules\order\models\entity\OrderStatus;
 
@@ -96,7 +96,7 @@ $this->title = Title::show("Заказы");
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["order-report", 'id' => $key]));
+                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["report", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\catalog\widgets\stockOut;
+namespace app\modules\catalog\widgets\StockOut;
 
 
 use app\modules\catalog\models\entity\Product;
