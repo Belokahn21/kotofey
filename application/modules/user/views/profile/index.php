@@ -2,7 +2,8 @@
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\user\models\entity\User
- * @var $billings \app\modules\user\models\entity\UserBilling
+ * @var $billingModel \app\modules\user\models\entity\UserBilling
+ * @var $billings \app\modules\user\models\entity\UserBilling[]
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $sexList \app\modules\user\models\entity\UserSex[]
  * @var $favorite \app\modules\catalog\models\entity\Product[]
@@ -291,6 +292,7 @@ LIST;
                     <div class="authModal modal fade" id="newBillingForm" tabindex="-1" role="dialog" aria-labelledby="newBillingFormLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
+                                <?php $form = ActiveForm::begin(); ?>
                                 <div class="site-form">
                                     <div class="modal-header">
                                         <div class="div">
@@ -301,28 +303,78 @@ LIST;
                                         <?php endif; ?>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="site-form__group-row">
-                                            <div class="site-form__item">
-                                                <label class="site-form__label" for="site-form-namepet">Кличка питомца</label>
-                                                <input class="site-form__input" id="site-form-namepet" type="text" placeholder="Кличка питомца">
-                                            </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-index">Индекс</label>
+                                            <?= $form->field($billingModel, 'index')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-index',
+                                                'placeholder' => 'Индекс',
+                                            ])->label(false); ?>
                                         </div>
 
-                                        <div class="site-form__group-row">
-                                            <div class="site-form__item">
-                                                <label class="site-form__label" for="site-form-birthday">День рождения питомца</label>
-                                                <input class="site-form__input js-datepicker" id="site-form-birthday" type="text" placeholder="День рождения питомца">
-                                            </div>
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-region">Регион</label>
+                                            <?= $form->field($billingModel, 'region')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-region',
+                                                'placeholder' => 'Регион',
+                                            ])->label(false); ?>
                                         </div>
 
-                                        <div class="site-form__group-row">
-                                            <div class="site-form__item">
-                                                <label class="site-form__label" for="site-form-sex">Пол питомца</label>
-                                                <select class="site-form__select" id="site-form-sex">
-                                                    <option>Мальчик</option>
-                                                    <option>Девочка</option>
-                                                </select>
-                                            </div>
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-city">Город</label>
+                                            <?= $form->field($billingModel, 'city')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-city',
+                                                'placeholder' => 'Город',
+                                            ])->label(false); ?>
+                                        </div>
+
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-street">Улица</label>
+                                            <?= $form->field($billingModel, 'street')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-street',
+                                                'placeholder' => 'Улица',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-home">Номер дома</label>
+                                            <?= $form->field($billingModel, 'street')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-home',
+                                                'placeholder' => 'Номер дома',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-poach">Подьезд</label>
+                                            <?= $form->field($billingModel, 'poach')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-poach',
+                                                'placeholder' => 'Подьезд',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-poach">Этаж</label>
+                                            <?= $form->field($billingModel, 'poach')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-poach',
+                                                'placeholder' => 'Этаж',
+                                            ])->label(false); ?>
+                                        </div>
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-house">Квартира</label>
+                                            <?= $form->field($billingModel, 'poach')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-house',
+                                                'placeholder' => 'Квартира',
+                                            ])->label(false); ?>
                                         </div>
 
                                         <div class="modal-footer">
@@ -331,6 +383,7 @@ LIST;
                                     </div>
                                 </div>
                             </div>
+                            <?php ActiveForm::end(); ?>
                         </div>
                     </div>
 
