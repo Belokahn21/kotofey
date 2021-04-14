@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\order\widgets\group_buy;
+namespace app\modules\order\widgets\GroupBuy;
 
 
 use app\modules\order\models\entity\Order;

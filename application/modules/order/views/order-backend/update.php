@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\order\widgets\call_center\CallCenterWidget;
+use app\modules\order\widgets\CallCenter\CallCenterWidget;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\modules\seo\models\tools\Title;

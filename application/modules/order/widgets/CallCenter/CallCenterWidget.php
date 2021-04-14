@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\order\widgets\call_center;
+namespace app\modules\order\widgets\CallCenter;
 
 
 use app\modules\order\models\entity\Order;

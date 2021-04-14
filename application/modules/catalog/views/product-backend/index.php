@@ -11,7 +11,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\widgets\stockOut\StockOutWidget;
+use app\modules\catalog\widgets\StockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View

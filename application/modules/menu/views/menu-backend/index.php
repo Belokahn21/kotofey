@@ -6,7 +6,7 @@ use app\modules\seo\models\tools\Title;
 use yii\grid\GridView;
 use yii\helpers\Url;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\widgets\group_buy\GroupBuyWidget;
+use app\modules\order\widgets\GroupBuy\GroupBuyWidget;
 use yii\helpers\ArrayHelper;
 use app\modules\order\models\entity\OrderStatus;
 
