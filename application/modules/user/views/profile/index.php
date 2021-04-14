@@ -280,7 +280,7 @@ LIST;
                     <div class="profile-billing-list">
                         <?php foreach ($billings as $item): ?>
                             <div class="profile-billing-list__item">
-                                <div class="profile-billing-list__title"><?= $item->name; ?></div>
+                                <div class="profile-billing-list__title"><?= UserBillingHelper::getName($item); ?></div>
                                 <div class="profile-billing-list__data">
                                     <?= UserBillingHelper::getAddress($item); ?>
                                 </div>
@@ -303,6 +303,15 @@ LIST;
                                         <?php endif; ?>
                                     </div>
                                     <div class="modal-body">
+
+                                        <div class="site-form__item">
+                                            <label class="site-form__label" for="site-form-billing-name">Название</label>
+                                            <?= $form->field($billingModel, 'name')->textInput([
+                                                'class' => 'site-form__input',
+                                                'id' => 'site-form-billing-name',
+                                                'placeholder' => 'Название',
+                                            ])->label(false); ?>
+                                        </div>
 
                                         <div class="site-form__item">
                                             <label class="site-form__label" for="site-form-index">Индекс</label>
@@ -378,7 +387,7 @@ LIST;
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button class="site-form__button" type="button">Добавить</button>
+                                            <?= Html::submitButton('Добавить', ['class' => 'site-form__button']) ?>
                                         </div>
                                     </div>
                                 </div>

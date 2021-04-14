@@ -46,8 +46,9 @@ class ProfileController extends Controller
 
             if (Yii::$app->request->isPost) {
                 if ($billingModel->load(Yii::$app->request->post())) {
+                    $billingModel->phone = Yii::$app->user->identity->phone;
                     if ($billingModel->validate() && $billingModel->save()) {
-                        Alert::setSuccessNotify('Элемент успешно добавлен.');
+                        Alert::setSuccessNotify('Адрес доставки успешно добавлен.');
                         return $this->refresh();
                     }
                 }
