@@ -351,19 +351,19 @@ LIST;
                                         </div>
 
                                         <div class="site-form__item">
-                                            <label class="site-form__label" for="site-form-poach">Подьезд</label>
-                                            <?= $form->field($billingModel, 'poach')->textInput([
+                                            <label class="site-form__label" for="site-form-entrance">Подьезд</label>
+                                            <?= $form->field($billingModel, 'entrance')->textInput([
                                                 'class' => 'site-form__input',
-                                                'id' => 'site-form-poach',
+                                                'id' => 'site-form-entrance',
                                                 'placeholder' => 'Подьезд',
                                             ])->label(false); ?>
                                         </div>
 
                                         <div class="site-form__item">
-                                            <label class="site-form__label" for="site-form-poach">Этаж</label>
-                                            <?= $form->field($billingModel, 'poach')->textInput([
+                                            <label class="site-form__label" for="site-form-floor_house">Этаж</label>
+                                            <?= $form->field($billingModel, 'floor_house')->textInput([
                                                 'class' => 'site-form__input',
-                                                'id' => 'site-form-poach',
+                                                'id' => 'site-form-floor_house',
                                                 'placeholder' => 'Этаж',
                                             ])->label(false); ?>
                                         </div>
