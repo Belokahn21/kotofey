@@ -86,6 +86,6 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/acquiring/install/migrations --interactive=0
 
 deploy-local: pull init-dev cache migrate
-deploy: pull init-prod migrate
+deploy: pull init-prod migrate cache
 deploy-test: pull init-test migrate
 
