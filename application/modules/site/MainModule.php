@@ -9,6 +9,13 @@ use app\modules\site\models\tools\Debug;
 
 class MainModule extends \yii\base\Module
 {
+    private $name;
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
     public function init()
     {
         parent::init();
@@ -34,5 +41,20 @@ class MainModule extends \yii\base\Module
 
 
         return true;
+    }
+
+    public function menuIndex()
+    {
+        return [];
+    }
+
+    public function getParams()
+    {
+        return [];
+    }
+
+    public function getParamsLabel()
+    {
+        return [];
     }
 }

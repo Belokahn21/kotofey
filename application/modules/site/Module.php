@@ -2,23 +2,18 @@
 
 namespace app\modules\site;
 
+use yii\helpers\Url;
+
 /**
  * site module definition class
  */
-class Module extends \yii\base\Module
+class Module extends MainModule
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\site\controllers';
+    private $name = 'Сайт';
 
-    /**
-     * {@inheritdoc}
-     */
-    public function init()
+    public function getName(): string
     {
-        parent::init();
-
-        // custom initialization code goes here
+        return $this->name;
     }
 }

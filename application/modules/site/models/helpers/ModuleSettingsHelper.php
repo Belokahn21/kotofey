@@ -16,4 +16,16 @@ class ModuleSettingsHelper
 
         return false;
     }
+
+
+    public static function updateByParam($param_name, $param_value)
+    {
+        $param = ModuleSettings::findOne(['module_id' => 'instagram', 'param_name' => $param_name]);
+
+        if (!$param) throw new \Exception('Параметр не существует');
+
+        $param->param_value = $param_value;
+
+        return $param->validate() && $param->update();
+    }
 }

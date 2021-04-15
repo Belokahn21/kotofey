@@ -41,11 +41,6 @@ class Module extends MainModule
         ];
     }
 
-    public function getName()
-    {
-        return $this->name;
-    }
-
     public function getParams()
     {
         return [

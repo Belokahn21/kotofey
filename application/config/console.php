@@ -55,10 +55,18 @@ $config = [
         'backup' => [
             'class' => 'app\modules\site\console\BackupController'
         ],
+        'instagram' => [
+            'class' => 'app\modules\instagram\console\InstagramTokenController'
+        ],
         'content' => [
             'class' => 'app\modules\content\console\ContentController'
         ],
     ],
+    'modules' => [
+        'instagram' => [
+            'class' => 'app\modules\instagram\Module',
+        ],
+    ]
 
 ];
 
