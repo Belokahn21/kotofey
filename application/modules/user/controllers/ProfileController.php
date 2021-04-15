@@ -68,12 +68,23 @@ class ProfileController extends Controller
 
     public function actionBilling($id)
     {
-        $billing = UserBilling::findOne($id);
+        $model = UserBilling::findOne($id);
 
-        if (!$billing) throw new HttpException(404, 'Элемент не найден.');
-        if (!$billing->hasAccess()) throw new \Exception('Доступ запрещён.');
+        if (!$model) throw new HttpException(404, 'Элемент не найден.');
+        if (!$model->hasAccess()) throw new \Exception('Доступ запрещён.');
 
-        return $this->render('billing');
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate() && $model->update()) {
+                    Alert::setSuccessNotify('Элемент успешно обновлён.');
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('billing', [
+            'model' => $model
+        ]);
     }
 
     public function actionBillingDelete($id)
