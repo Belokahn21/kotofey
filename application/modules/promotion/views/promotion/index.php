@@ -2,13 +2,14 @@
 
 /* @var $models \app\modules\promotion\models\entity\Promotion[] */
 
-use app\modules\seo\models\tools\Title;
-use app\widgets\Breadcrumbs;
+use yii\helpers\Url;
 use yii\helpers\Html;
+use app\widgets\Breadcrumbs;
+use app\modules\seo\models\tools\Title;
 use app\modules\promotion\models\helpers\PromotionHelper;
 
 $this->title = Title::show('Скидки и акции');
-$this->params['breadcrumbs'][] = ['label' => 'Скидки и акции', 'url' => ['/promotion/']];
+$this->params['breadcrumbs'][] = ['label' => 'Скидки и акции', 'url' => Url::to(['/promotion/'])];
 ?>
 <div class="page">
     <?= Breadcrumbs::widget([

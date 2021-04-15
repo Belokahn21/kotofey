@@ -12975,6 +12975,8 @@ p {
     font-weight: 700;
     line-height: 32px;
     margin-bottom: 10px; }
+    .footer__title a, .footer-is-shop a {
+      color: inherit; }
   .footer__logo {
     font-size: 19.2px;
     font-weight: 900;

@@ -1,12 +1,13 @@
 <?php
 
+use yii\helpers\Url;
 use app\modules\stock\widgets\store\StoreWidget;
-use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\site\widgets\SocialMe\SocialMe;
-use app\modules\catalog\models\helpers\CategoryHelper;
-use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
 use app\modules\catalog\models\entity\ProductCategory;
+use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
 use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
 
 /* @var $parentCategories \app\modules\catalog\models\entity\ProductCategory[] */
@@ -43,7 +44,9 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
         </div>
         <div class="footer-col">
             <div class="footer-categories-container">
-                <div class="footer__title">Каталог зоотоваров</div>
+                <div class="footer__title">
+                    <a href="<?= Url::to(['/catalog/']) ?>">Каталог зоотоваров</a>
+                </div>
                 <div class="row">
                     <div class="col-6">
                         <?= CatalogCategoriesWidget::widget([
