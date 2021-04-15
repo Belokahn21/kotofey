@@ -5,36 +5,40 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\modules\seo\models\tools\Title;
 
-$this->params['breadcrumbs'][] = ['label' => 'Авторизация', 'url' => ['/signin/']];
 /* @var $model \app\modules\user\models\entity\User */
-$this->title = Title::show("Новый пароль"); ?>
+
+
+$this->title = Title::show("Новый пароль");
+$this->params['breadcrumbs'][] = ['label' => 'Авторизация', 'url' => ['/signin/']];
+
+?>
 <div class="auth-wrap">
-	<img class="auth-image" src="/upload/images/_logo.png">
-	<h1 class="title">Введите новый пароль</h1>
+    <img class="auth-image" src="/upload/images/_logo.png">
+    <h1 class="title">Введите новый пароль</h1>
 
-	<?php $form = ActiveForm::begin([
-		'options' => [
-			'class' => 'auth-form'
-		],
-	]); ?>
+    <?php $form = ActiveForm::begin([
+        'options' => [
+            'class' => 'auth-form'
+        ],
+    ]); ?>
 
-	<input style="display:none" type="text" name="fakeusernameremembered"/>
-	<input style="display:none" type="password" name="fakepasswordremembered"/>
+    <input style="display:none" type="text" name="fakeusernameremembered"/>
+    <input style="display:none" type="password" name="fakepasswordremembered"/>
 
-	<div class="input-group auth-input-group">
-		<?= $form->field($model, 'password', [
-			'template' => '
+    <div class="input-group auth-input-group">
+        <?= $form->field($model, 'password', [
+            'template' => '
             <div class="input-group auth-input-group">
                 <div class="input-group-prepend">
                     <span class="input-group-text auth-input-group-text"><i class="fas fa-key"></i></span>
                 </div>
                 {input}
             </div>{error}'
-		])->passwordInput(['class' => 'form-control', 'id' => 'email-auth-id', 'placeholder' => 'Пароль', 'autocomplete' => 'h87h58g7h8hd'])->label(false); ?>
-	</div>
+        ])->passwordInput(['class' => 'form-control', 'id' => 'email-auth-id', 'placeholder' => 'Пароль', 'autocomplete' => 'h87h58g7h8hd'])->label(false); ?>
+    </div>
 
-	<?= Html::submitButton('Отправить', ['class' => 'btn-main']); ?>
-	<?= Html::a('Регистрация', Url::to(['site/signup']), ['class' => 'link-main']); ?>
-	<?= Html::a('Авторизация', Url::to(['site/signin']), ['class' => 'link-main ml-5']); ?>
-	<?php ActiveForm::end(); ?>
+    <?= Html::submitButton('Отправить', ['class' => 'btn-main']); ?>
+    <?= Html::a('Регистрация', Url::to(['site/signup']), ['class' => 'link-main']); ?>
+    <?= Html::a('Авторизация', Url::to(['site/signin']), ['class' => 'link-main ml-5']); ?>
+    <?php ActiveForm::end(); ?>
 </div>

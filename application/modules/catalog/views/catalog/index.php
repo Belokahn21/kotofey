@@ -20,20 +20,29 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
 
 $this->title = Title::show("Зоотовары");
 $category_id = 0;
-$this->params['breadcrumbs'][] = ['label' => 'Зоотовары', 'url' => ['/catalog/']];
 
 
 if ($category) {
-    foreach ($category->undersections() as $parents) {
-        $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+    $this->params['breadcrumbs'][] = ['label' => 'Зоотовары', 'url' => ['/catalog/']];
+
+    $subsections = $category->undersections();
+    for ($i = 0; $i < count($subsections); $i++) {
+        $parents = $subsections[$i];
+        if ($i + 1 == count($subsections)) {
+            $this->params['breadcrumbs'][] = ['label' => $parents->name];
+        } else {
+            $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
+        }
     }
 
     // set title
     $category_id = $category->id;
     $this->title = Title::show($category->name);
-    if ($category->seo_title) {
-        $this->title = $category->seo_title;
-    }
+    if ($category->seo_title) $this->title = $category->seo_title;
+
+
+} else {
+    $this->params['breadcrumbs'][] = ['label' => 'Зоотовары'];
 } ?>
 <div class="page">
     <?= Breadcrumbs::widget([

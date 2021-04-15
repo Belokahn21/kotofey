@@ -12,7 +12,7 @@ use app\modules\promotion\models\helpers\PromotionHelper;
 
 $this->title = Title::show('Скидки и акции');
 $this->params['breadcrumbs'][] = ['label' => 'Скидки и акции', 'url' => ['/promotion/']];
-$this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => [PromotionHelper::getDetailUrl($model)]];
+$this->params['breadcrumbs'][] = ['label' => $model->name];
 ?>
 <div class="page">
     <?= Breadcrumbs::widget([

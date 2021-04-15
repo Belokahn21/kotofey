@@ -6,7 +6,8 @@ use app\widgets\Breadcrumbs;
 
 ?>
 <?php $this->title = Title::show("Доставка заказов");
-$this->params['breadcrumbs'][] = ['label' => 'Доставка и оплата', 'url' => ['/delivery/']];
+$this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' => ['/about/']];
+$this->params['breadcrumbs'][] = ['label' => 'Доставка и оплата'];
 ?>
 
 

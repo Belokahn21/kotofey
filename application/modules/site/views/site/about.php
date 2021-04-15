@@ -9,7 +9,8 @@ use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\content\widgets\informers_slider\InformerSliderWidget;
 
 $this->title = Title::show("О зоомагазине");
-$this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' => ['/about/']]; ?>
+$this->params['breadcrumbs'][] = ['label' => 'О зоомагазине'];
+?>
 
 
 <div class="page">

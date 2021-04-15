@@ -5,7 +5,7 @@ use app\modules\seo\models\tools\Title;
 
 $this->title = Title::show("Политика обработки персональных данных");
 $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' => ['/about/']];
-$this->params['breadcrumbs'][] = ['label' => 'Политика обработки персональных данных', 'url' => ['/about/agree/']];
+$this->params['breadcrumbs'][] = ['label' => 'Политика обработки персональных данных'];
 ?>
 
 

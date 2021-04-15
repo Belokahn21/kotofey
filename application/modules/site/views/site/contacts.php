@@ -8,7 +8,8 @@ use app\widgets\Breadcrumbs;
 
 $this->title = Title::show("Наши контакты");
 
-$this->params['breadcrumbs'][] = ['label' => 'Наши контакты', 'url' => Url::to(['site/contacts'])];
+$this->params['breadcrumbs'][] = ['label' => 'О зоомагазине', 'url' => ['/about/']];
+$this->params['breadcrumbs'][] = ['label' => 'Наши контакты'];
 ?>
 <div class="page">
     <?= Breadcrumbs::widget([

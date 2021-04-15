@@ -9,7 +9,7 @@ use app\modules\seo\models\tools\Title;
 use app\modules\promotion\models\helpers\PromotionHelper;
 
 $this->title = Title::show('Скидки и акции');
-$this->params['breadcrumbs'][] = ['label' => 'Скидки и акции', 'url' => Url::to(['/promotion/'])];
+$this->params['breadcrumbs'][] = ['label' => 'Скидки и акции'];
 ?>
 <div class="page">
     <?= Breadcrumbs::widget([
