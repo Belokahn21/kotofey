@@ -29,11 +29,10 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\user\models\helpers\UserBillingHelper;
 
 $this->title = Title::show('Личный кабинет');
+$this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
+
 ?>
 <div class="page">
-    <?php
-    $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет', 'url' => Url::to(['/user/profile/index'])];
-    ?>
     <?= Breadcrumbs::widget([
         'homeLink' => [
             'label' => 'Главная ',
