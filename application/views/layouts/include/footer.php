@@ -35,10 +35,11 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
                 'menu_id' => 3,
                 'view' => 'footer-menu'
             ]); ?>
+            <iframe src="https://yandex.ru/sprav/widget/rating-badge/25944183017" width="150" height="50" frameborder="0"></iframe>
             <ul class="footer-payment-vairiant">
-                <li class="footer-payment-vairiant__item"><img src="/images/payments/visa.jpg"/></li>
-                <li class="footer-payment-vairiant__item"><img src="/images/payments/mastercard.png"/></li>
-                <li class="footer-payment-vairiant__item"><img src="/images/payments/mir.jpg"/></li>
+                <li class="footer-payment-vairiant__item"><img src="/images/payments/logo-visa.png"/></li>
+                <li class="footer-payment-vairiant__item"><img src="/images/payments/logo-mastercard.png"/></li>
+                <li class="footer-payment-vairiant__item"><img src="/images/payments/logo-mir.png"/></li>
                 <li class="footer-payment-vairiant__item"><img src="/images/payments/jcb.png"/></li>
             </ul>
         </div>
