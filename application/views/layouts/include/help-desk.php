@@ -1,7 +1,13 @@
+<?php
+
+use app\modules\site\widgets\HelpDesk\HelpDeskWidget;
+
+?>
 <div class="js-help-panel help-panel">
     <div class="help-panel__header">
         <div class="help-panel-container">
-            <div class="help-panel__title">Помощь по сайту</div><a class="js-close-help-panel help-panel__close" href="#"><i class="far fa-times-circle"></i></a>
+            <div class="help-panel__title">Помощь по сайту</div>
+            <a class="js-close-help-panel help-panel__close" href="#"><i class="far fa-times-circle"></i></a>
         </div>
     </div>
     <div class="accordion help-panel-container" id="help-panel-accordion">
@@ -26,4 +32,9 @@
             </div>
         </div>
     </div>
+    <?php if (Yii::$app->user->id == 1): ?>
+        <?php HelpDeskWidget::begin(); ?>
+        demo
+        <?php HelpDeskWidget::end(); ?>
+    <?php endif; ?>
 </div>
