@@ -2,9 +2,8 @@
 
 use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\Product;
-use app\modules\export\models\tools\AliexpressHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\helpers\PropertiesHelper;
+use app\modules\vendors\models\entity\Vendor;
 
 $module = Yii::$app->getModule('export');
 
@@ -32,13 +31,10 @@ $module = Yii::$app->getModule('export');
                 <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
             <?php endforeach; ?>
         </categories>
-        <delivery-options>
-            <option cost="0" days="0"/>
-        </delivery-options>
         <cpa>1</cpa>
         <offers>
             <?php foreach ($offers as $offer): ?>
-                <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
+                <offer id="<?= $offer->id ?>" available="true">
                     <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
                     <?php if ($offer->barcode): ?>
                         <vendorCode><?= $offer->barcode ?></vendorCode>
@@ -56,9 +52,28 @@ $module = Yii::$app->getModule('export');
                     <?php if (!empty($offer->description)): ?>
                         <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
                     <?php endif; ?>
-                    <pickup>false</pickup>
+                    <pickup>true</pickup>
                     <store>false</store>
                     <delivery>true</delivery>
+
+                    <?php if ($offer->vendor_id == Vendor::VENDOR_ID_SIBAGRO): ?>
+                        <delivery-options>
+                            <option cost="0" days="1"/>
+                        </delivery-options>
+                    <?php elseif ($offer->vendor_id == Vendor::VENDOR_ID_VALTA || $offer->vendor_id == Vendor::VENDOR_ID_SANABELLE || $offer->vendor_id == Vendor::VENDOR_ID_FORZA): ?>
+                        <delivery-options>
+                            <option cost="0" days="3-5"/>
+                        </delivery-options>
+                    <?php elseif ($offer->vendor_id == Vendor::VENDOR_ID_ROYAL): ?>
+                        <delivery-options>
+                            <option cost="0" days="0"/>
+                        </delivery-options>
+                    <?php else: ?>
+                        <delivery-options>
+                            <option cost="0" days="1"/>
+                        </delivery-options>
+                    <?php endif; ?>
+
                 </offer>
             <?php endforeach; ?>
         </offers>

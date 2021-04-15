@@ -38,9 +38,9 @@ class HelpDeskWidget extends Widget
 
         $outHtml .= Html::beginTag('div', ['class' => 'help-panel-list__item']);
             $outHtml .= Html::beginTag('div', ['class' => 'help-panel-list-header', 'id' => 'heading' . $uniq]);
-                $outHtml .= Html::beginTag('a', ['class' => 'collapsed', 'data-toggle' => 'collapse', 'data-target' => '#collapse' . $uniq, 'aria-expanded' => 'false', 'aria-controls' => $uniq]);
+                $outHtml .= Html::beginTag('a', ['class' => 'collapsed', 'data-toggle' => 'collapse', 'data-target' => '#collapse' . $uniq, 'aria-expanded' => 'false', 'aria-controls' => '#collapse' . $uniq]);
                     $outHtml .= Html::tag('span', Html::tag('i', false, ['class' => 'fas fa-paw']), ['class' => 'help-panel-list__ico']);
-                    $outHtml .= Html::tag('span', $title, ['class' => 'help-panel-list__ico']);
+                    $outHtml .= Html::tag('span', $title);
                 $outHtml .= Html::endTag('a');
             $outHtml .= Html::endTag('div');
 
