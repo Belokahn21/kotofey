@@ -32,9 +32,15 @@ use app\modules\site\widgets\HelpDesk\HelpDeskWidget;
             </div>
         </div>
     </div>
+
     <?php if (Yii::$app->user->id == 1): ?>
-        <?php HelpDeskWidget::begin(); ?>
-        demo
-        <?php HelpDeskWidget::end(); ?>
+        <div class="accordion help-panel-container" id="help-panel-accordion">
+            <div class="help-panel-list">
+                <?= HelpDeskWidget::addItem('Как сделать заказ?', ''); ?>
+                <?= HelpDeskWidget::addItem('Как посмотреть историю заказов?', ''); ?>
+                <?= HelpDeskWidget::addItem('Как потратить бонусы?', ''); ?>
+                <?= HelpDeskWidget::addItem('Где получить промокод?', ''); ?>
+            </div>
+        </div>
     <?php endif; ?>
 </div>

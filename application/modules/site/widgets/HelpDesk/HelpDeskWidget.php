@@ -5,6 +5,7 @@ namespace app\modules\site\widgets\HelpDesk;
 
 
 use yii\base\Widget;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 class HelpDeskWidget extends Widget
@@ -28,5 +29,26 @@ class HelpDeskWidget extends Widget
         $html .= Html::endTag('div');
         $html .= Html::endTag('div');
         return $html;
+    }
+
+    public static function addItem($title,$text="")
+    {
+        $uniq = uniqid();
+        $outHtml = "";
+
+        $outHtml .= Html::beginTag('div', ['class' => 'help-panel-list__item']);
+            $outHtml .= Html::beginTag('div', ['class' => 'help-panel-list-header','id'=>$uniq]);
+                $outHtml .= Html::beginTag('a', ['class' => 'collapsed','data-toggle'=>'collapse','data-target'=>'#'.$uniq,'aria-expanded'=>'false','aria-controls'=>$uniq]);
+                    $outHtml .= Html::tag('span',Html::tag('i',false,['class'=>'fas fa-paw']),['class'=>'help-panel-list__ico']);
+                    $outHtml .= Html::tag('span',$title,['class'=>'help-panel-list__ico']);
+                $outHtml .= Html::endTag('a');
+            $outHtml .= Html::endTag('div');
+
+            $outHtml .= Html::beginTag('div', ['class' => "collapse", 'id' => $uniq, 'aria-labelledby' => "headingOne", 'data-parent' => "#help-panel-accordion"]);
+                $outHtml.=Html::tag('div',$text,['class'=>'help-panel-list-body']);
+            $outHtml .= Html::endTag('div');
+        $outHtml .= Html::endTag('div');
+
+        return $outHtml;
     }
 }
