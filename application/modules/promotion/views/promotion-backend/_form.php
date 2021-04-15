@@ -60,7 +60,7 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 
         <?php if (!$model->isNewRecord): ?>
             <?php $md = new PromotionProductMechanicsForm(); ?>
-            <?php for ($i = $subIter + 1; $i < $subIter+1 + 3; $i++): ?>
+            <?php for ($i = $subIter + 1; $i < $subIter + 1 + 3; $i++): ?>
                 <div class="row">
                     <div class="col-sm-3">
                         <?= $form->field($md, '[' . $i . ']promotion_mechanic_id')->dropDownList($md->getMechanics(), ['onchange' => 'showRelatedFileds(this, ' . $i . ');', 'prompt' => 'Выбрать механику']); ?>
@@ -82,6 +82,8 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 
     </div>
 </div>
+
+<div class="promotion-form-react"></div>
 
 <script type="text/javascript">
     function showRelatedFileds(e, iter) {
