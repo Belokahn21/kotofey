@@ -279,7 +279,18 @@ LIST;
                     <div class="profile-billing-list">
                         <?php foreach ($billings as $item): ?>
                             <div class="profile-billing-list__item">
-                                <div class="profile-billing-list__title"><?= UserBillingHelper::getName($item); ?></div>
+                                <div class="profile-billing-list__title">
+                                    <div>
+                                        <?= UserBillingHelper::getName($item); ?>
+                                        <?php if ($item->is_main): ?>
+                                            (По умолчанию)
+                                        <?php endif; ?>
+                                    </div>
+                                    <div>
+                                        <?= Html::a('edit', Url::to(['/profile/billing/', 'id' => $item->id])) ?>
+                                        <?= Html::a('del', Url::to(['/profile/billing-delete/', 'id' => $item->id])) ?>
+                                    </div>
+                                </div>
                                 <div class="profile-billing-list__data">
                                     <?= UserBillingHelper::getAddress($item); ?>
                                 </div>

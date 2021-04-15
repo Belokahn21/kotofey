@@ -13574,14 +13574,18 @@ label[for="site-form-pet-avatar"] {
 
 .profile-billing-list__item {
   border: 1px silver solid;
-  margin-bottom: 5px; }
+  margin: 10px 0; }
 
 .profile-billing-list__title {
   border-bottom: 1px silver solid;
   padding: 10px;
   color: #ff1a4a;
   font-weight: bold;
-  text-transform: uppercase; }
+  text-transform: uppercase;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; }
 
 .profile-billing-list__data {
   padding: 10px; }

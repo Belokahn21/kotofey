@@ -63,4 +63,9 @@ class UserBilling extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function hasAccess()
+    {
+        return $this->phone == Yii::$app->user->identity->phone;
+    }
 }

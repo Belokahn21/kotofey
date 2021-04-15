@@ -15,6 +15,7 @@ use yii\web\Controller;
 use app\modules\user\models\entity\User;
 use app\modules\order\models\entity\Order;
 use app\modules\user\models\entity\UserSex;
+use yii\web\HttpException;
 
 class ProfileController extends Controller
 {
@@ -42,8 +43,6 @@ class ProfileController extends Controller
         }
 
         if ($billingModel->load(Yii::$app->request->post())) {
-
-
             if (Yii::$app->request->isPost) {
                 if ($billingModel->load(Yii::$app->request->post())) {
                     $billingModel->phone = Yii::$app->user->identity->phone;
@@ -69,12 +68,26 @@ class ProfileController extends Controller
 
     public function actionBilling($id)
     {
+        $billing = UserBilling::findOne($id);
 
+        if (!$billing) throw new HttpException(404, 'Элемент не найден.');
+        if (!$billing->hasAccess()) throw new \Exception('Доступ запрещён.');
+
+        return $this->render('billing');
     }
 
     public function actionBillingDelete($id)
     {
+        $billing = UserBilling::findOne($id);
 
+        if (!$billing) throw new HttpException(404, 'Элемент не найден.');
+        if (!$billing->hasAccess()) throw new \Exception('Доступ запрещён.');
+        if ($billing->is_main) throw new \Exception('Нельзя удалить основной вариант доставки.');
+
+
+        if ($billing->delete()) Alert::setSuccessNotify('Доставка успешно удалена.');
+
+        return $this->redirect(['index']);
     }
 
     public function actionLogout()
