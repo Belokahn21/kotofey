@@ -8,6 +8,7 @@ import '../reactjs/components/sidebar';
 import '../reactjs/components/statistic';
 import '../reactjs/components/todo';
 import '../reactjs/components/FindProduct';
+import '../reactjs/components/Promotion/Promotion';
 
 
 import './block/CheckExistProduct';

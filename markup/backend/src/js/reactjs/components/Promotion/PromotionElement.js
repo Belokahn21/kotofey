@@ -1,6 +1,6 @@
-import {Component} from 'react';
+import React from 'react';
 
-class PromotionElement extends Component {
+class PromotionElement extends React.Component {
     constructor(props) {
         super(props);
         this.modelName = '';
