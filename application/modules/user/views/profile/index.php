@@ -287,8 +287,8 @@ LIST;
                                         <?php endif; ?>
                                     </div>
                                     <div>
-                                        <?= Html::a('edit', Url::to(['profile/billing', 'id' => $item->id])) ?>
-                                        <?= Html::a('del', Url::to(['profile/billing-delete', 'id' => $item->id])) ?>
+                                        <?= Html::a(Html::tag('i', false, ['class' => 'fas fa-edit']), Url::to(['profile/billing', 'id' => $item->id])) ?>
+                                        <?= Html::a(Html::tag('i', false, ['class' => 'fas fa-trash-alt']), Url::to(['profile/billing-delete', 'id' => $item->id])) ?>
                                     </div>
                                 </div>
                                 <div class="profile-billing-list__data">
