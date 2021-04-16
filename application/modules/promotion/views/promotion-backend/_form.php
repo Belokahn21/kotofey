@@ -83,7 +83,7 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
     </div>
 </div>
 
-<div class="promotion-form-react"></div>
+<!--<div class="promotion-form-react"></div>-->
 
 <script type="text/javascript">
     function showRelatedFileds(e, iter) {
