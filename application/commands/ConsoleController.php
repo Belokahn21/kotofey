@@ -3,30 +3,41 @@
 namespace app\commands;
 
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\settings\models\helpers\MarkupHelpers;
-use app\modules\vendors\models\entity\Vendor;
+use app\modules\promotion\models\entity\PromotionProductMechanics;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
 {
     public function actionRun()
     {
+        $bank_olded = [];
+        foreach (['inspector', 'бравекто', 'ошейник от блох'] as $phrase) {
+            $products = Product::find()->andWhere(['not in', 'id', $bank_olded]);
 
-        $models = Product::find()
-            ->where("`price`=`purchase`")
-            ->orWhere('round((price / purchase) * 100 - 100) < :markup', [
-                ':markup' => 15
-            ])->all();
-        foreach ($models as $product) {
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            foreach (explode(' ', $phrase) as $text_line) {
+                $products->andFilterWhere([
+                    'or',
+                    ['like', 'name', $text_line],
+                    ['like', 'feed', $text_line]
+                ]);
+            }
 
-            MarkupHelpers::applyMarkup($product, 30);
+            $products = $products->all();
 
 
-            echo "item: " . $product->name . PHP_EOL;
-            if ($product->validate() && $product->update()) {
-                echo "Updated: " . $product->name . PHP_EOL;
+            foreach ($products as $product) {
+
+                $mech = new PromotionProductMechanics();
+                $mech->product_id = $product->id;
+                $mech->promotion_mechanic_id = 1;
+                $mech->amount = 15;
+                $mech->discountRule = 2;
+                $mech->promotion_id = 31;
+
+                if ($mech->validate() && $mech->save()) {
+                    $bank_olded[] = $product->id;
+                    echo $product->name . PHP_EOL;
+                }
             }
         }
     }
