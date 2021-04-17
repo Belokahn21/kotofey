@@ -39,7 +39,18 @@ $this->title = Title::show('Акции магазина');
     'emptyText' => 'Акции отсутствуют',
     'columns' => [
         'id',
+        'is_active',
         'name',
+        [
+            'attribute' => 'start_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+            'options' => ['width' => '200']
+        ],
+        [
+            'attribute' => 'end_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+            'options' => ['width' => '200']
+        ],
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
