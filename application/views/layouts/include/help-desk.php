@@ -10,42 +10,10 @@ use app\modules\site\widgets\HelpDesk\HelpDeskWidget;
             <a class="js-close-help-panel help-panel__close" href="#"><i class="far fa-times-circle"></i></a>
         </div>
     </div>
-    <?php /*
- <div class="accordion help-panel-container" id="help-panel-accordion">
-        <div class="help-panel-list">
-            <div class="help-panel-list__item">
-                <div class="help-panel-list-header" id="headingOne"><a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><span class="help-panel-list__icon"><i class="fas fa-paw" aria-hidden="true"></i></span><span>Как посмотреть историю заказов?</span></a></div>
-                <div class="collapse" id="collapseOne" aria-labelledby="headingOne" data-parent="#help-panel-accordion">
-                    <div class="help-panel-list-body">Пункт в разработке</div>
-                </div>
-            </div>
-            <div class="help-panel-list__item">
-                <div class="help-panel-list-header" id="headingTwo"><a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"><span class="help-panel-list__icon"><i class="fas fa-paw" aria-hidden="true"></i></span><span>Сколько стоит доставка?</span></a></div>
-                <div class="collapse" id="collapseTwo" aria-labelledby="headingTwo" data-parent="#help-panel-accordion">
-                    <div class="help-panel-list-body">Пункт в разработке</div>
-                </div>
-            </div>
-            <div class="help-panel-list__item">
-                <div class="help-panel-list-header" id="headingThree">
-                    <a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        <span class="help-panel-list__icon"><i class="fas fa-paw" aria-hidden="true"></i></span>
-                        <span>Collapsible Group Item #3</span>
-                    </a>
-                </div>
-                <div class="collapse" id="collapseThree" aria-labelledby="headingThree" data-parent="#help-panel-accordion">
-                    <div class="help-panel-list-body">Пункт в разработке</div>
-                </div>
-            </div>
-        </div>
-    </div>
- */ ?>
-
-    <?php if (Yii::$app->user->id == 1): ?>
-        <?php HelpDeskWidget::begin(); ?>
-            <?= HelpDeskWidget::addItem('Как сделать заказ?', ''); ?>
-            <?= HelpDeskWidget::addItem('Как посмотреть историю заказов?', ''); ?>
-            <?= HelpDeskWidget::addItem('Как потратить бонусы?', ''); ?>
-            <?= HelpDeskWidget::addItem('Где получить промокод?', ''); ?>
-        <?php HelpDeskWidget::end(); ?>
-    <?php endif; ?>
+    <?php HelpDeskWidget::begin(); ?>
+    <?= HelpDeskWidget::addItem('Сколько стоит доставка?', 'Доставка по городу Барнаул при заказе от 500 рублей - бесплатная. В противном случае, если сумма заказа не набирается, то доставка оплачивается отдельно в размере 100 рублей.'); ?>
+    <?= HelpDeskWidget::addItem('Как посмотреть историю заказов?', ''); ?>
+    <?= HelpDeskWidget::addItem('Как потратить бонусы?', 'Списать бонусы можно при любом заказе, в котором нет акционных товаров. Если заказ производится через сайт, то в форме оформления заказа, есть поле чтобы указать количество списываемх бонусов. Оно доступно только, если вы авторизованы на сайте.'); ?>
+    <?= HelpDeskWidget::addItem('Где получить промокод?', "Промокоды на скидку можно получить случайным образом у наших Instagram-партнеров. Мы проводим случайные раздачи через их страницы. Но не очень часто."); ?>
+    <?php HelpDeskWidget::end(); ?>
 </div>
