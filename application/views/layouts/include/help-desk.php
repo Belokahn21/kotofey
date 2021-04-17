@@ -10,7 +10,8 @@ use app\modules\site\widgets\HelpDesk\HelpDeskWidget;
             <a class="js-close-help-panel help-panel__close" href="#"><i class="far fa-times-circle"></i></a>
         </div>
     </div>
-    <div class="accordion help-panel-container" id="help-panel-accordion">
+    <?php /*
+ <div class="accordion help-panel-container" id="help-panel-accordion">
         <div class="help-panel-list">
             <div class="help-panel-list__item">
                 <div class="help-panel-list-header" id="headingOne"><a class="collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne"><span class="help-panel-list__icon"><i class="fas fa-paw" aria-hidden="true"></i></span><span>Как посмотреть историю заказов?</span></a></div>
@@ -37,15 +38,14 @@ use app\modules\site\widgets\HelpDesk\HelpDeskWidget;
             </div>
         </div>
     </div>
+ */ ?>
 
     <?php if (Yii::$app->user->id == 1): ?>
-        <div class="accordion help-panel-container" id="help-panel-accordion">
-            <div class="help-panel-list">
-                <?= HelpDeskWidget::addItem('Как сделать заказ?', ''); ?>
-                <?= HelpDeskWidget::addItem('Как посмотреть историю заказов?', ''); ?>
-                <?= HelpDeskWidget::addItem('Как потратить бонусы?', ''); ?>
-                <?= HelpDeskWidget::addItem('Где получить промокод?', ''); ?>
-            </div>
-        </div>
+        <?php HelpDeskWidget::begin(); ?>
+            <?= HelpDeskWidget::addItem('Как сделать заказ?', ''); ?>
+            <?= HelpDeskWidget::addItem('Как посмотреть историю заказов?', ''); ?>
+            <?= HelpDeskWidget::addItem('Как потратить бонусы?', ''); ?>
+            <?= HelpDeskWidget::addItem('Где получить промокод?', ''); ?>
+        <?php HelpDeskWidget::end(); ?>
     <?php endif; ?>
 </div>
