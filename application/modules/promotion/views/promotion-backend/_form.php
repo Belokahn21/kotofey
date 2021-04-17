@@ -20,6 +20,9 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="form-element">
+            <?= $form->field($model, 'is_active')->checkbox(); ?>
+        </div>
+        <div class="form-element">
             <?= $form->field($model, 'name') ?>
         </div>
         <div class="form-element">
