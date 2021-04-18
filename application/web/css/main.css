@@ -12966,6 +12966,38 @@ p {
   padding: 0 !important;
   margin: 0 !important; }
 
+.steam-slider-container {
+  border: 1px red solid; }
+
+.steam-slider-slide {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between; }
+  .steam-slider-slide__side {
+    border: 1px red solid;
+    flex: 0 0 50%;
+    width: 50%; }
+
+.steam-slider-thumbs-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  background: wheat; }
+
+.steam-slider-thumbs-slide {
+  width: 50% !important; }
+  .steam-slider-thumbs-slide img {
+    width: 100%;
+    object-fit: contain; }
+
+.steam-slider-thumbs__price-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center; }
+
 .footer {
   color: #fff;
   background: white;
