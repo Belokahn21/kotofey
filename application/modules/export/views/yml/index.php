@@ -26,6 +26,9 @@ $module = Yii::$app->getModule('export');
             <currency id="RUB" rate="1"/>
             <currency id="EUR" rate="CBRF"/>
         </currencies>
+        <delivery-options>
+            <option cost="0" days="1"/>
+        </delivery-options>
         <categories>
             <?php foreach ($categories as $category): ?>
                 <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
