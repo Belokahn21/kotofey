@@ -8,6 +8,7 @@ import './react/components/statistic';
 import './react/components/todo';
 import './react/components/FindProduct';
 import './react/components/Media/Media';
+import './react/components/Cdn/Cdn';
 // import './react/components/Promotion/Promotion';
 
 

@@ -6,10 +6,11 @@ use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\ProductOrder;
+use app\modules\cdn\widgets\CdnInput\CdnInputWidget;
 use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
@@ -150,6 +151,9 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                     <?php endif; ?>
                 </div>
                 <?= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
+                    'dopAttr' => 'media_id'
+                ]); ?>
+                <?= $form->field($model, 'image')->widget(CdnInputWidget::className(), [
                     'dopAttr' => 'media_id'
                 ]); ?>
             </div>
