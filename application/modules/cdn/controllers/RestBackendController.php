@@ -3,9 +3,7 @@
 
 namespace app\modules\cdn\controllers;
 
-
 use app\modules\cdn\models\components\CloudinaryComponent;
-use app\modules\site\models\tools\Debug;
 use yii\rest\Controller;
 
 class RestBackendController extends Controller

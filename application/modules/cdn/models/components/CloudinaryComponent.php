@@ -3,10 +3,7 @@
 
 namespace app\modules\cdn\models\components;
 
-
-use app\modules\site\models\tools\Debug;
 use Cloudinary\Api\Admin\AdminApi;
-use Cloudinary\Cloudinary;
 
 class CloudinaryComponent
 {
