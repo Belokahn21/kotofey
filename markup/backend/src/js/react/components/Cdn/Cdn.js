@@ -1,15 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Modal} from "react-bootstrap";
-import FindProductForm from "../FindProduct/FindProductForm";
+import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
+import config from '../../config';
+import MediaCard from "../Media/MediaCard";
 
 class Cdn extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false
+            show: false,
+            resources: []
         };
         this.modalId = Math.random().toString(36).substring(7);
+        this.loadResources();
+    }
+
+    loadResources() {
+        RestRequest.all(config.restCdn).then(data => {
+            this.setState({
+                resources: data.resources
+            })
+        });
     }
 
     setShow(show) {
@@ -26,6 +38,7 @@ class Cdn extends React.Component {
 
     render() {
         const {show} = this.state;
+        const {resources} = this.state;
         return (
             <div>
                 <button type="button" onClick={this.handleShow.bind(this)} className="btn-main">Выбрать</button>
@@ -35,7 +48,9 @@ class Cdn extends React.Component {
                         <Modal.Title>Выбрать медиа из CDN</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        nsasdd alsd aasn ddas asad dans adals sads nals
+                        {resources.map((el, i) => {
+                            return <MediaCard handleRemove={this.handleRemove} resource={el}/>
+                        })}
                     </Modal.Body>
                 </Modal>
             </div>

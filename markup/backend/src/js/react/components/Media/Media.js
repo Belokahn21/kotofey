@@ -32,7 +32,6 @@ class Media extends React.Component {
     }
 
     render() {
-
         const {resources} = this.state;
 
         return (
