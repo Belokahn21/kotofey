@@ -3441,6 +3441,10 @@ if (findProduct) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3465,21 +3469,50 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Media = /*#__PURE__*/function (_Component) {
-  _inherits(Media, _Component);
+
+
+
+var Media = /*#__PURE__*/function (_React$Component) {
+  _inherits(Media, _React$Component);
 
   var _super = _createSuper(Media);
 
   function Media(props) {
+    var _this;
+
     _classCallCheck(this, Media);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      resources: []
+    };
+
+    _this.loadResources();
+
+    return _this;
   }
 
   _createClass(Media, [{
+    key: "loadResources",
+    value: function loadResources() {
+      var _this2 = this;
+
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all((_config__WEBPACK_IMPORTED_MODULE_3___default().restCdn)).then(function (data) {
+        _this2.setState({
+          resources: data.resources
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, "demo media cdn");
+      var resources = this.state.resources;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, resources.map(function (el, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          width: "200",
+          src: el.secure_url
+        });
+      }));
     }
   }]);
 
@@ -3487,7 +3520,7 @@ var Media = /*#__PURE__*/function (_Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 var element = document.querySelector('.js-cdn-react');
-if (element) ReactDOM.render( /*#__PURE__*/React.createElement(Media, null), element);
+if (element) react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(Media, null), element);
 
 /***/ }),
 
@@ -4583,6 +4616,7 @@ var TodoList = /*#__PURE__*/function (_React$Component) {
 var url = location.protocol + '//' + location.hostname;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store';
 module.exports = {
+  restCdn: url + '/backend/api/cdn/',
   restCatalog: url + '/backend/api/catalog/',
   restStatistic: url + '/backend/api/statistic/',
   restMenu: url + '/backend/api/menu/',
