@@ -13,9 +13,23 @@ const PAGES_DIR = `${PATHS.src}/pug`;
 const PAGES = fs.readdirSync(PAGES_DIR).filter(filename => filename.endsWith('.pug'));
 
 module.exports = {
+    resolve: {
+        fallback: {
+            "fs": false,
+            "tls": false,
+            "net": false,
+            "path": false,
+            "zlib": false,
+            "http": false,
+            "https": false,
+            "stream": false,
+            "crypto": false,
+            'crypto-browserify': require.resolve('crypto-browserify')
+        }
+    },
     mode: 'development',
     entry: [
-        `${PATHS.src}/js/es6/core.js`,
+        `${PATHS.src}/js/core.js`,
         `${PATHS.src}/style/scss/style-backend.scss`,
     ],
     devtool: 'source-map',

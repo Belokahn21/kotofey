@@ -1,4 +1,4 @@
-import config from "../../reactjs/config";
+import config from "../react/config";
 
 let timer = null;
 const timeout = 2000;

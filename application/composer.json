@@ -22,7 +22,7 @@
     "mohorev/yii2-upload-behavior": "*",
     "tinify/tinify": "^1.5",
     "vkcom/vk-php-sdk": "^5.101",
-    "cloudinary/cloudinary_php": "^1.18",
+    "cloudinary/cloudinary_php": "^2",
     "ext-curl": "*",
     "ext-json": "*",
     "yiisoft/yii2-imagine": "^2.2",

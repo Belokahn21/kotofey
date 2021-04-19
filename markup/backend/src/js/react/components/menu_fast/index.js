@@ -29,7 +29,7 @@ class MenuFast extends React.Component {
                         return <li className="fast-links__item" key={index}>
                             {newPointStatus}
                             <a className="fast-links__link" href={element.href}>
-                                <i className={"fas " + element.icon}></i>
+                                <i className={"fas " + element.icon} />
                             </a>
                         </li>
                     })}

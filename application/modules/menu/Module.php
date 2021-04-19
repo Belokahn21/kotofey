@@ -2,12 +2,13 @@
 
 namespace app\modules\menu;
 
+use app\modules\site\MainModule;
 use yii\helpers\Url;
 
 /**
  * menu module definition class
  */
-class Module extends \yii\base\Module
+class Module extends MainModule
 {
     public $name = "Меню";
     public $controllerNamespace = 'app\modules\menu\controllers';
@@ -15,8 +16,6 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-
-        // custom initialization code goes here
     }
 
     public function menuIndex()

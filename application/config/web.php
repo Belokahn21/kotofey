@@ -314,6 +314,9 @@ $config = [
         'acquiring' => [
             'class' => 'app\modules\acquiring\Module',
         ],
+        'cdn' => [
+            'class' => 'app\modules\cdn\Module',
+        ],
     ],
     'params' => $params,
 ];

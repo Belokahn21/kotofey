@@ -1,4 +1,4 @@
-import config from '../../reactjs/config';
+import config from '../react/config';
 
 class SetPrice {
     constructor(element) {

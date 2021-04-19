@@ -4,6 +4,7 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
     url = 'http://local.kotofey.store';
 
 module.exports = {
+    restCdn: url + '/backend/api/cdn/',
     restCatalog: url + '/backend/api/catalog/',
     restStatistic: url + '/backend/api/statistic/',
     restMenu: url + '/backend/api/menu/',

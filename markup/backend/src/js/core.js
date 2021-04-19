@@ -1,14 +1,14 @@
 import $ from 'jquery';
-
 window.$ = window.jQuery = $;
 import 'popper.js';
 import 'bootstrap';
 
-import '../reactjs/components/sidebar';
-import '../reactjs/components/statistic';
-import '../reactjs/components/todo';
-import '../reactjs/components/FindProduct';
-// import '../reactjs/components/Promotion/Promotion';
+import './react/components/sidebar';
+import './react/components/statistic';
+import './react/components/todo';
+import './react/components/FindProduct';
+import './react/components/Media/Media';
+// import './react/components/Promotion/Promotion';
 
 
 import './block/CheckExistProduct';

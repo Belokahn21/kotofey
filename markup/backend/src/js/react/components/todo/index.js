@@ -39,7 +39,4 @@ function Todo() {
 }
 
 const todoContainer = document.querySelector('#todo-react');
-
-if (todoContainer) {
-    ReactDom.render(<Todo/>, todoContainer);
-}
+if (todoContainer) ReactDom.render(<Todo/>, todoContainer);
