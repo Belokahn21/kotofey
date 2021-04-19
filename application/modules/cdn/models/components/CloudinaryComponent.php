@@ -29,4 +29,9 @@ class CloudinaryComponent
     {
         return $this->_cdn->assets($options);
     }
+
+    public function removeResource($public_id)
+    {
+        return $this->_cdn->deleteAssets($public_id);
+    }
 }

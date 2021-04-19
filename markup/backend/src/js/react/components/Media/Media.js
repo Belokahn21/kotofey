@@ -24,9 +24,11 @@ class Media extends React.Component {
         });
     }
 
-    handleRemove() {
-        console.log('demo remove');
-        alert();
+    handleRemove(element, event) {
+        const response = confirm('Удалить' + element.asset_id + ' ?');
+        if (response) RestRequest.delete(config.restCdn, element.asset_id).then(data => {
+            if (data) alert(element.asset_id + ' успешно удален.')
+        });
     }
 
     render() {
@@ -34,7 +36,7 @@ class Media extends React.Component {
         const {resources} = this.state;
 
         return (
-            <div>
+            <div className="cdn-resource-list">
                 {resources.map((el, i) => {
                     return <MediaCard handleRemove={this.handleRemove} resource={el}/>
                 })}

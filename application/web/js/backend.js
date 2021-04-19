@@ -3507,9 +3507,10 @@ var Media = /*#__PURE__*/function (_React$Component) {
     }
   }, {
     key: "handleRemove",
-    value: function handleRemove() {
-      console.log('demo remove');
-      alert();
+    value: function handleRemove(element, event) {
+      console.log(event);
+      console.log(element);
+      prompt('Удалить' + element.secure_url + ' ?');
     }
   }, {
     key: "render",
@@ -3517,7 +3518,9 @@ var Media = /*#__PURE__*/function (_React$Component) {
       var _this3 = this;
 
       var resources = this.state.resources;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, resources.map(function (el, i) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "cdn-resource-list"
+      }, resources.map(function (el, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
           handleRemove: _this3.handleRemove,
           resource: el
@@ -3588,7 +3591,9 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var resource = this.props.resource;
       var handleRemove = this.props.handleRemove;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaRemoveButton__WEBPACK_IMPORTED_MODULE_1__.default, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "cdn-resource-list__item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaRemoveButton__WEBPACK_IMPORTED_MODULE_1__.default, {
         resource: resource,
         handleRemove: handleRemove
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
@@ -3655,9 +3660,11 @@ var MediaRemoveButton = /*#__PURE__*/function (_React$Component) {
   _createClass(MediaRemoveButton, [{
     key: "render",
     value: function render() {
+      var resource = this.props.resource;
       var handleRemove = this.props.handleRemove;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        onClick: handleRemove.bind(this)
+        className: "cdn-resource-list__close",
+        onClick: handleRemove.bind(this, resource)
       }, "X");
     }
   }]);

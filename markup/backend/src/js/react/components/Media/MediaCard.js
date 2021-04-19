@@ -14,7 +14,7 @@ class MediaCard extends React.Component {
         const {handleRemove} = this.props;
 
         return (
-            <div>
+            <div className="cdn-resource-list__item">
                 <MediaRemoveButton resource={resource} handleRemove={handleRemove}/>
                 <img width="150" src={resource.secure_url}/>
             </div>

@@ -8545,6 +8545,29 @@ html, body {
     .bottom-menu__item:not(:last-child) {
       border-right: 1px grey solid; }
 
+.cdn-resource-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap; }
+  .cdn-resource-list__item {
+    width: 14%;
+    margin: 5px;
+    border: 1px rgba(0, 0, 0, 0.07) solid;
+    position: relative; }
+    .cdn-resource-list__item img {
+      width: 100%;
+      object-fit: contain; }
+  .cdn-resource-list__close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 18px; }
+
 .catalog-fill-vendor {
   margin: 10px 5px; }
   .catalog-fill-vendor__input {

@@ -7,9 +7,11 @@ class MediaRemoveButton extends React.Component {
     }
 
     render() {
+        const {resource} = this.props;
         const {handleRemove} = this.props;
+
         return (
-            <div onClick={handleRemove.bind(this)}>
+            <div className="cdn-resource-list__close" onClick={handleRemove.bind(this, resource)}>
                 X
             </div>
         );
