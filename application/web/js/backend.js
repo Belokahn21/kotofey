@@ -3116,8 +3116,11 @@ if (russsianPhone) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
-/* harmony import */ var _FindProduct_FindProductForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FindProduct/FindProductForm */ "./src/js/react/components/FindProduct/FindProductForm.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Media_MediaCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Media/MediaCard */ "./src/js/react/components/Media/MediaCard.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3145,6 +3148,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var Cdn = /*#__PURE__*/function (_React$Component) {
   _inherits(Cdn, _React$Component);
 
@@ -3157,13 +3162,28 @@ var Cdn = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      show: false
+      show: false,
+      resources: []
     };
     _this.modalId = Math.random().toString(36).substring(7);
+
+    _this.loadResources();
+
     return _this;
   }
 
   _createClass(Cdn, [{
+    key: "loadResources",
+    value: function loadResources() {
+      var _this2 = this;
+
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all((_config__WEBPACK_IMPORTED_MODULE_3___default().restCdn)).then(function (data) {
+        _this2.setState({
+          resources: data.resources
+        });
+      });
+    }
+  }, {
     key: "setShow",
     value: function setShow(show) {
       this.setState({
@@ -3183,17 +3203,25 @@ var Cdn = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var show = this.state.show;
+      var resources = this.state.resources;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         onClick: this.handleShow.bind(this),
         className: "btn-main"
-      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
         show: show,
         onHide: this.handleClose.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Header, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Title, null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0434\u0438\u0430 \u0438\u0437 CDN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Body, null, "nsasdd alsd aasn ddas asad dans adals sads nals")));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0434\u0438\u0430 \u0438\u0437 CDN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, resources.map(function (el, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Media_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
+          handleRemove: _this3.handleRemove,
+          resource: el
+        });
+      }))));
     }
   }]);
 
