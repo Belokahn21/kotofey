@@ -16,7 +16,7 @@ class MediaCard extends React.Component {
         return (
             <div className="cdn-resource-list__item">
                 <MediaRemoveButton resource={resource} handleRemove={handleRemove}/>
-                <img width="150" src={resource.secure_url}/>
+                <img src={resource.secure_url}/>
             </div>
         );
     }

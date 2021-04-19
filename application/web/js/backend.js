@@ -3598,7 +3598,6 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
         resource: resource,
         handleRemove: handleRemove
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        width: "150",
         src: resource.secure_url
       }));
     }
