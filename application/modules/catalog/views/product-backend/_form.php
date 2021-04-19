@@ -153,9 +153,6 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                 <?= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
                     'dopAttr' => 'media_id'
                 ]); ?>
-                <?= $form->field($model, 'image')->widget(CdnInputWidget::className(), [
-                    'dopAttr' => 'media_id'
-                ]); ?>
             </div>
             <div class="col-sm-6">
                 <div class="form-image more">

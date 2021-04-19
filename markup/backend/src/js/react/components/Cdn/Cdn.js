@@ -36,6 +36,10 @@ class Cdn extends React.Component {
         this.setShow(true);
     }
 
+    handleRemove() {
+
+    }
+
     render() {
         const {show} = this.state;
         const {resources} = this.state;
@@ -48,9 +52,11 @@ class Cdn extends React.Component {
                         <Modal.Title>Выбрать медиа из CDN</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {resources.map((el, i) => {
-                            return <MediaCard handleRemove={this.handleRemove} resource={el}/>
-                        })}
+                        <div className="cdn-resource-list">
+                            {resources.map((el, i) => {
+                                return <MediaCard handleRemove={this.handleRemove} resource={el}/>
+                            })}
+                        </div>
                     </Modal.Body>
                 </Modal>
             </div>

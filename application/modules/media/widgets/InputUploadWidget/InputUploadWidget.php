@@ -31,7 +31,7 @@ class InputUploadWidget extends Widget
         if ($this->dopAttr) {
             echo Html::tag('hr');
             echo Html::activeHiddenInput($this->model, $this->dopAttr);
-            echo Html::button('Выбрать', ['class' => 'btn-main']);
+            echo Html::tag('div', false, ['class' => 'cdn-modal-react']);
         }
     }
 }

@@ -3201,6 +3201,9 @@ var Cdn = /*#__PURE__*/function (_React$Component) {
       this.setShow(true);
     }
   }, {
+    key: "handleRemove",
+    value: function handleRemove() {}
+  }, {
     key: "render",
     value: function render() {
       var _this3 = this;
@@ -3216,12 +3219,14 @@ var Cdn = /*#__PURE__*/function (_React$Component) {
         onHide: this.handleClose.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0434\u0438\u0430 \u0438\u0437 CDN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, resources.map(function (el, i) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0434\u0438\u0430 \u0438\u0437 CDN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "cdn-resource-list"
+      }, resources.map(function (el, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Media_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
           handleRemove: _this3.handleRemove,
           resource: el
         });
-      }))));
+      })))));
     }
   }]);
 
