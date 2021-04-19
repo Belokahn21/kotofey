@@ -3116,6 +3116,8 @@ if (russsianPhone) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var _FindProduct_FindProductForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FindProduct/FindProductForm */ "./src/js/react/components/FindProduct/FindProductForm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3141,24 +3143,57 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var Cdn = /*#__PURE__*/function (_React$Component) {
   _inherits(Cdn, _React$Component);
 
   var _super = _createSuper(Cdn);
 
   function Cdn(props) {
+    var _this;
+
     _classCallCheck(this, Cdn);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      show: false
+    };
+    _this.modalId = Math.random().toString(36).substring(7);
+    return _this;
   }
 
   _createClass(Cdn, [{
+    key: "setShow",
+    value: function setShow(show) {
+      this.setState({
+        show: show
+      });
+    }
+  }, {
+    key: "handleClose",
+    value: function handleClose() {
+      this.setShow(false);
+    }
+  }, {
+    key: "handleShow",
+    value: function handleShow() {
+      this.setShow(true);
+    }
+  }, {
     key: "render",
     value: function render() {
+      var show = this.state.show;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
+        onClick: this.handleShow.bind(this),
         className: "btn-main"
-      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"));
+      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default, {
+        show: show,
+        onHide: this.handleClose.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Header, {
+        closeButton: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Title, null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0434\u0438\u0430 \u0438\u0437 CDN")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Body, null, "nsasdd alsd aasn ddas asad dans adals sads nals")));
     }
   }]);
 
