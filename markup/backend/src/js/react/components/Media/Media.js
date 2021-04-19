@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
 import config from '../../config';
+import MediaCard from "./MediaCard";
 
 class Media extends React.Component {
 
@@ -23,6 +24,11 @@ class Media extends React.Component {
         });
     }
 
+    handleRemove() {
+        console.log('demo remove');
+        alert();
+    }
+
     render() {
 
         const {resources} = this.state;
@@ -30,7 +36,7 @@ class Media extends React.Component {
         return (
             <div>
                 {resources.map((el, i) => {
-                    return <img width="200" src={el.secure_url}/>;
+                    return <MediaCard handleRemove={this.handleRemove} resource={el}/>
                 })}
             </div>
         );
