@@ -25,9 +25,9 @@ class Media extends React.Component {
     }
 
     handleRemove(element, event) {
-        const response = confirm('Удалить' + element.asset_id + ' ?');
-        if (response) RestRequest.delete(config.restCdn, element.asset_id).then(data => {
-            if (data) alert(element.asset_id + ' успешно удален.')
+        const response = confirm('Удалить ' + element.public_id + ' ?');
+        if (response) RestRequest.delete(config.restCdn, element.public_id).then(data => {
+            if (data) alert(element.public_id + ' успешно удален.')
         });
     }
 

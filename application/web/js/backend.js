@@ -3508,9 +3508,10 @@ var Media = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleRemove",
     value: function handleRemove(element, event) {
-      console.log(event);
-      console.log(element);
-      prompt('Удалить' + element.secure_url + ' ?');
+      var response = confirm('Удалить ' + element.public_id + ' ?');
+      if (response) _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.delete((_config__WEBPACK_IMPORTED_MODULE_3___default().restCdn), element.public_id).then(function (data) {
+        if (data) alert(element.public_id + ' успешно удален.');
+      });
     }
   }, {
     key: "render",

@@ -8552,7 +8552,7 @@ html, body {
   align-items: flex-start;
   flex-wrap: wrap; }
   .cdn-resource-list__item {
-    width: 14%;
+    width: 100px;
     margin: 5px;
     border: 1px rgba(0, 0, 0, 0.07) solid;
     position: relative; }

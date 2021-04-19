@@ -30,6 +30,8 @@ class RestBackendController extends Controller
     public function actionDelete($id)
     {
         $result = CloudinaryComponent::getInstance()->removeResource($id);
-        Debug::p($result);
+        $data = $result->getArrayCopy();
+
+        return isset($data['deleted']) && $data['deleted'][$id] == 'deleted';
     }
 }

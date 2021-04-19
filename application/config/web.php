@@ -119,7 +119,7 @@ $config = [
 
                 'POST backend/api/<module>' => '<module>/rest-backend/create',
 
-                'DELETE backend/api/<module>/<id:\d+>' => '<module>/rest-backend/delete',
+                'DELETE backend/api/<module>/<id[\w]+>' => '<module>/rest-backend/delete',
 
 
                 //frontend rest
