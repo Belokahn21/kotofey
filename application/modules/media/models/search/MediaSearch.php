@@ -1,26 +1,22 @@
 <?php
 
+namespace app\modules\media\models\search;
 
-namespace app\modules\logger\models\search;
-
-
-use app\modules\catalog\models\entity\Properties;
-use app\modules\logger\models\entity\Logger;
+use app\modules\media\models\entity\Media;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class LoggerSearchForm extends Logger
+class MediaSearch extends Media
 {
     public static function tableName()
     {
-        return Logger::tableName();
+        return Media::tableName();
     }
 
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['message', 'uniqCode'], 'string'],
         ];
     }
 
@@ -31,7 +27,7 @@ class LoggerSearchForm extends Logger
 
     public function search($params)
     {
-        $query = Logger::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = Media::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -41,9 +37,7 @@ class LoggerSearchForm extends Logger
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['id' => $this->id])
-            ->andFilterWhere(['like', 'message', $this->message])
-            ->andFilterWhere(['like', 'uniqCode', $this->uniqCode]);
+        $query->andFilterWhere(['id' => $this->id]);
 
         return $dataProvider;
     }

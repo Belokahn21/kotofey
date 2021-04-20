@@ -2,12 +2,37 @@
 
 namespace app\modules\media\controllers;
 
-use yii\web\Controller;
+use app\modules\media\models\search\MediaSearch;
+use app\modules\site\controllers\MainBackendController;
+use app\widgets\notification\Alert;
+use yii\web\HttpException;
 
-class MediaBackendController extends Controller
+class MediaBackendController extends MainBackendController
 {
+    public $modelClass = 'app\modules\media\models\entity\Media';
+
     public function actionIndex()
     {
-        return $this->render('index');
+        $searchModel = new MediaSearch();
+        $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionUpdate($id)
+    {
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException('Элемент не найден');
+    }
+
+    public function actionDelete($id)
+    {
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException('Элемент не найден');
+
+//        if ($model->delete()) Alert::setSuccessNotify('Медиа успешно удалено');
+
+        return $this->redirect(['index']);
     }
 }

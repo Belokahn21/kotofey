@@ -18,7 +18,7 @@ class Module extends MainModule
     public function menuIndex()
     {
         return [
-            ['name' => 'Медиа', 'url' => Url::to(['/admin/cdn/cdn-backend/index'])],
+            ['name' => 'Ресурсы', 'url' => Url::to(['/admin/cdn/cdn-backend/index'])],
         ];
     }
 

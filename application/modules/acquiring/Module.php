@@ -33,6 +33,11 @@ class Module extends MainModule
         parent::init();
     }
 
+    public function getName()
+    {
+        return $this->name;
+    }
+
     public function menuIndex()
     {
         return [
