@@ -17,9 +17,9 @@ class Cdn extends React.Component {
     }
 
     loadResources() {
-        RestRequest.all(config.restCdn).then(data => {
+        RestRequest.all(config.restMeida).then(data => {
             this.setState({
-                resources: data.resources
+                resources: data
             })
         });
     }
