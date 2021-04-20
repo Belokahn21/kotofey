@@ -4,7 +4,6 @@ namespace app\modules\media\controllers;
 
 use app\modules\media\models\search\MediaSearch;
 use app\modules\site\controllers\MainBackendController;
-use app\widgets\notification\Alert;
 use yii\web\HttpException;
 
 class MediaBackendController extends MainBackendController
