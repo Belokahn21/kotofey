@@ -16,6 +16,9 @@ $this->title = \app\modules\seo\models\tools\Title::show('Медиа');
     'emptyText' => 'Медиа отсутствуют',
     'columns' => [
         'id',
+        'name',
+        'path',
+        'location',
         [
             'format' => 'raw',
             'value' => function ($model) {
