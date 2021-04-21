@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\ProductFromSibagoForm;
 use app\modules\catalog\models\form\SibagroUploadForm;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\settings\models\helpers\MarkupHelpers;
+use app\modules\site_settings\models\helpers\MarkupHelpers;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;
 use yii\web\Controller;

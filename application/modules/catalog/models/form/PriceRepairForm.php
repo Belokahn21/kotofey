@@ -5,7 +5,7 @@ namespace app\modules\catalog\models\form;
 
 
 use app\modules\catalog\models\entity\Product;
-use app\modules\settings\models\helpers\MarkupHelpers;
+use app\modules\site_settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 

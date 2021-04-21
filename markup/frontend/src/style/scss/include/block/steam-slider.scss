@@ -1,6 +1,5 @@
 .steam-slider {
   &-container {
-    border: 1px red solid;
   }
 
   &-wrapper {
@@ -17,14 +16,25 @@
     }
 
     &__side {
-      border: 1px red solid;
       flex: 0 0 50%;
       width: 50%;
-      //display: flex;
-      //flex-direction: column;
-      //align-items: flex-start;
-      //justify-content: flex-start;
     }
+  }
+}
+
+.steam-slider-top {
+  &-container {
+    .swiper-slide {
+      width: 100%;
+
+      img {
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &-wrapper {
   }
 }
 
@@ -37,16 +47,31 @@
     align-items: center;
     justify-content: flex-start;
     flex-wrap: wrap;
-    background: wheat;
   }
 
   &-slide {
+    cursor: pointer;
     width: 50% !important;
+    //border: 1px red solid;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    &.swiper-slide-thumb-active {
+      img {
+        border: 1px $active-color solid;
+      }
+    }
 
     img {
-      width: 100%;
+      width: 40%;
       object-fit: contain;
     }
+  }
+
+  &__title {
+    padding: 15px;
   }
 
   &__price-group {
@@ -54,5 +79,25 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    padding: 15px;
+  }
+
+  &__price {
+    font-size: 35px;
+    font-weight: bold;
+  }
+
+  &__description {
+    margin: 25px 0;
+    background: rgba(0, 0, 0, 0.01);
+    padding: 10px;
+  }
+
+  &-reviews {
+    &__item {
+    }
+
+    &__author {
+    }
   }
 }

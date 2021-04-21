@@ -9,7 +9,7 @@ use app\models\tool\import\Tavela;
 use app\models\tool\import\Valta;
 use app\models\tool\import\Purina;
 use app\modules\catalog\models\entity\Product;
-use app\modules\settings\models\helpers\MarkupHelpers;
+use app\modules\site_settings\models\helpers\MarkupHelpers;
 use yii\console\Controller;
 
 class PriceController extends Controller
