@@ -10,7 +10,7 @@ class TodoList extends React.Component {
 
     render() {
 
-        const {items} = this.props;
+        const {items, handleRemove} = this.props;
 
         return <ul className="todo-list">
             <li className="todo-list__row todo-list-header">
@@ -28,8 +28,8 @@ class TodoList extends React.Component {
                     <div className="todo-list-col">{item.user.email}</div>
                     <div className="todo-list-col">
                         <div className="todo-list-icons">
-                            <i className="fas fa-pen"></i>
-                            <i className="fas fa-trash-alt"></i>
+                            <i className="fas fa-pen"/>
+                            <i className="fas fa-trash-alt" onClick={handleRemove.bind(this, item.id)}/>
                         </div>
                     </div>
                 </li>

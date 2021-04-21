@@ -44,9 +44,35 @@ class Todo extends React.Component {
     handleAddElement(event) {
         event.preventDefault();
         const form = event.target;
-        console.log(new FormData(form));
-        RestRequest.post(config.restTodo, {
+
+
+        RestRequest.post(config.restTodo + '?expand=user', {
             body: new FormData(form)
+        }).then(data => {
+            this.addItem(data);
+        });
+    }
+
+    handleRemove(id, event) {
+        RestRequest.delete(config.restTodo, id);
+        this.removeItem(id);
+    }
+
+    addItem(item) {
+        let {items} = this.state;
+        items.push(item);
+        this.setState({items: items})
+    }
+
+    removeItem(id) {
+        let {items} = this.state;
+
+        items.map((item, key) => {
+            if (parseInt(item.id) === parseInt(id)) items.splice(key, 1);
+        });
+
+        this.setState({
+            items: items
         });
     }
 
@@ -58,14 +84,14 @@ class Todo extends React.Component {
                     <div className="todo-header__title">Список задач</div>
                     <button className="todo-header__new-task" onClick={this.handleShow.bind(this)}>Добавить</button>
                 </div>
-                <List items={items}/>
+                <List items={items} handleRemove={this.handleRemove.bind(this)}/>
                 <Modal show={show} onHide={this.handleClose.bind(this)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Добавить новую задачу</Modal.Title>
                     </Modal.Header>
 
                     <Modal.Body>
-                        <TodoForm handleAddElement={this.handleAddElement}/>
+                        <TodoForm handleAddElement={this.handleAddElement.bind(this)}/>
                     </Modal.Body>
                 </Modal>
             </div>

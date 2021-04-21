@@ -4662,11 +4662,40 @@ var Todo = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleAddElement",
     value: function handleAddElement(event) {
+      var _this3 = this;
+
       event.preventDefault();
       var form = event.target;
-      console.log(new FormData(form));
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_6__.default.post((_config__WEBPACK_IMPORTED_MODULE_5___default().restTodo), {
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_6__.default.post((_config__WEBPACK_IMPORTED_MODULE_5___default().restTodo) + '?expand=user', {
         body: new FormData(form)
+      }).then(function (data) {
+        _this3.addItem(data);
+      });
+    }
+  }, {
+    key: "handleRemove",
+    value: function handleRemove(id, event) {
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_6__.default.delete((_config__WEBPACK_IMPORTED_MODULE_5___default().restTodo), id);
+      this.removeItem(id);
+    }
+  }, {
+    key: "addItem",
+    value: function addItem(item) {
+      var items = this.state.items;
+      items.push(item);
+      this.setState({
+        items: items
+      });
+    }
+  }, {
+    key: "removeItem",
+    value: function removeItem(id) {
+      var items = this.state.items;
+      items.map(function (item, key) {
+        if (parseInt(item.id) === parseInt(id)) items.splice(key, 1);
+      });
+      this.setState({
+        items: items
       });
     }
   }, {
@@ -4687,14 +4716,15 @@ var Todo = /*#__PURE__*/function (_React$Component) {
         className: "todo-header__new-task",
         onClick: this.handleShow.bind(this)
       }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_TodoList__WEBPACK_IMPORTED_MODULE_2__.default, {
-        items: items
+        items: items,
+        handleRemove: this.handleRemove.bind(this)
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
         show: show,
         onHide: this.handleClose.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Header, {
         closeButton: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Title, null, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u043D\u043E\u0432\u0443\u044E \u0437\u0430\u0434\u0430\u0447\u0443")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_TodoForm__WEBPACK_IMPORTED_MODULE_3__.default, {
-        handleAddElement: this.handleAddElement
+        handleAddElement: this.handleAddElement.bind(this)
       })))));
     }
   }]);
@@ -4769,7 +4799,6 @@ var TodoForm = /*#__PURE__*/function (_React$Component) {
   _createClass(TodoForm, [{
     key: "render",
     value: function render() {
-      var modelName = 'TodoList';
       var users = this.state.users;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "todo-form",
@@ -4780,13 +4809,13 @@ var TodoForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "todo-form__input",
         type: "text",
-        name: modelName + '[name]',
+        name: "name",
         placeholder: "\u0417\u0430\u0433\u043E\u043B\u043E\u0432\u043E\u043A \u0437\u0430\u0434\u0430\u0447\u0438"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "todo-form__element"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
         className: "todo-form__select",
-        name: modelName + '[user_id]'
+        name: "user_id"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "\u041A\u043E\u043C\u0443 \u043D\u0430\u0437\u043D\u0430\u0447\u0435\u043D\u0430"), users.map(function (user, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
           key: index,
@@ -4796,7 +4825,7 @@ var TodoForm = /*#__PURE__*/function (_React$Component) {
         className: "todo-form__element"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("textarea", {
         className: "todo-form__textarea",
-        name: modelName + '[description]',
+        name: "description",
         rows: "10",
         placeholder: "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435 \u0437\u0430\u0434\u0430\u0447\u0438"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
@@ -4884,7 +4913,9 @@ var TodoList = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
-      var items = this.props.items;
+      var _this$props = this.props,
+          items = _this$props.items,
+          handleRemove = _this$props.handleRemove;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
         className: "todo-list"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
@@ -4918,7 +4949,8 @@ var TodoList = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-pen"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          className: "fas fa-trash-alt"
+          className: "fas fa-trash-alt",
+          onClick: handleRemove.bind(_this2, item.id)
         }))));
       }));
     }
