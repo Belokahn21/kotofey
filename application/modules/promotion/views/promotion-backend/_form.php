@@ -26,6 +26,9 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
             <?= $form->field($model, 'name') ?>
         </div>
         <div class="form-element">
+            <?= $form->field($model, 'sort') ?>
+        </div>
+        <div class="form-element">
             <?= $form->field($model, 'image')->widget(InputUploadWidget::className()); ?>
         </div>
         <div class="row">

@@ -28,7 +28,7 @@ class CombineSliderWidget extends Widget
                 ":now" => time(),
                 ":default" => 0,
             ])
-            ->orderBy(['created_at' => SORT_DESC])
+            ->orderBy(['created_at' => SORT_DESC, 'sort' => SORT_DESC])
             ->all();
         foreach ($promotions as $promotion) {
             $this->extendDataArrayFromPromotion($promotion, $data);

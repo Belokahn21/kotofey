@@ -13,6 +13,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "promotion".
  *
  * @property int $id
+ * @property int $sort
  * @property string $name
  * @property string $slug
  * @property int|null $is_active
@@ -49,11 +50,12 @@ class Promotion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['is_active'], 'default', 'value' => 1],
+            [['sort'], 'default', 'value' => 500],
             [['name'], 'required'],
-            [['is_active', 'created_at', 'updated_at'], 'integer'],
+            [['is_active', 'created_at', 'updated_at', 'sort'], 'integer'],
             [['name'], 'string', 'max' => 255],
             [['start_at', 'end_at'], 'safe'],
-            [['is_active'], 'default', 'value' => 1],
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
     }
@@ -62,6 +64,7 @@ class Promotion extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'sort' => 'Сортировка',
             'name' => 'Название',
             'is_active' => 'Активность',
             'media_id' => 'Изображение',

@@ -22,7 +22,11 @@ class PromotionController extends Controller
             ->addParams([
                 ":now" => time(),
                 ":default" => 0,
-            ])->all();
+            ])
+            ->orderBy(['sort' => SORT_DESC])
+            ->all();
+
+
         return $this->render('index', [
             'models' => $models
         ]);
