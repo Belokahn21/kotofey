@@ -39,11 +39,11 @@ class CatalogController extends Controller
 
             if ($subSectionsArray) $query->where(['category_id' => ArrayHelper::getColumn($subSectionsArray, 'id')]);
 
-        } else  $query = Product::find()->orderBy(['created_at' => SORT_DESC])->andWhere(['status_id' => Product::STATUS_ACTIVE]);
+        } else  $query = Product::find()->orderBy(['created_at' => SORT_DESC]);
 
 
-        $query->andWhere(['status_id' => Product::STATUS_ACTIVE]);
-        if ($sortValue = Yii::$app->request->get('sort','asc')) $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
+        $query->andWhere(['<>', 'status_id', Product::STATUS_DRAFT]);
+        if ($sortValue = Yii::$app->request->get('sort', 'asc')) $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
 
         $duplicateQueryProducts = clone $query;
         $filterModel->applyFilter($query);
