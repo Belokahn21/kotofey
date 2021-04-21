@@ -13,7 +13,6 @@ class TodoForm extends React.Component {
     }
 
     render() {
-        const modelName = 'TodoList';
         const {users} = this.state;
 
         return (
