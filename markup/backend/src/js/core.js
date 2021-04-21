@@ -5,7 +5,7 @@ import 'bootstrap';
 
 import './react/components/sidebar';
 import './react/components/statistic';
-import './react/components/todo';
+import './react/components/todo/Todo';
 import './react/components/FindProduct';
 import './react/components/Media/Media';
 import './react/components/Cdn/Cdn';

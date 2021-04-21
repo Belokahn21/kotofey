@@ -2,7 +2,6 @@
 
 namespace app\modules\todo\models\entity;
 
-
 use app\modules\user\models\entity\User;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -22,66 +21,45 @@ use yii\db\ActiveRecord;
  */
 class TodoList extends ActiveRecord
 {
-	public static function tableName()
-	{
-		return "todo_list";
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className()
-		];
-	}
+    public function rules()
+    {
+        return [
+            [['user_id'], 'default', 'value' => \Yii::$app->user->id],
 
-	public function rules()
-	{
-		return [
-			[['name', 'user_id'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-			[['description'], 'string'],
+            [['name', 'user_id'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-			[['close'], 'boolean'],
-			[['close'], 'default', 'value' => false],
+            [['description'], 'string'],
 
-			[['user_id'], 'default', 'value' => \Yii::$app->user->id],
-		];
-	}
+            [['close'], 'boolean'],
+            [['close'], 'default', 'value' => false],
+        ];
+    }
 
-	public function attributeLabels()
-	{
-		return [
-			'name' => "Название",
-			'description' => "Описание",
-			'close' => "Закрыто",
-			'user_id' => "Пользователь",
-		];
-	}
+    public function attributeLabels()
+    {
+        return [
+            'name' => "Название",
+            'description' => "Описание",
+            'close' => "Закрыто",
+            'user_id' => "Пользователь",
+        ];
+    }
 
-	public function create()
-	{
-		if ($this->load(\Yii::$app->request->post())) {
-			if ($this->validate()) {
-				return $this->save();
-			}
-		}
+    public function extraFields()
+    {
+        return ['user'];
+    }
 
-		return false;
-	}
-
-	public function edit()
-	{
-		if ($this->load(\Yii::$app->request->post())) {
-			if ($this->validate()) {
-				return $this->update();
-			}
-		}
-
-		return false;
-	}
-
-	public function getUser()
-	{
-		return User::findOne($this->user_id);
-	}
+    public function getUser()
+    {
+        return User::findOne($this->user_id);
+    }
 }

@@ -2,13 +2,9 @@
 
 namespace app\modules\todo\controllers;
 
+use yii\rest\ActiveController;
 
-use app\modules\site\models\tools\Debug;
-use app\modules\todo\models\entity\TodoList;
-use yii\helpers\Json;
-use yii\rest\Controller;
-
-class RestBackendController extends Controller
+class RestBackendController extends ActiveController
 {
     public $modelClass = 'app\modules\todo\models\entity\TodoList';
 
@@ -19,43 +15,13 @@ class RestBackendController extends Controller
 
     public function behaviors()
     {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
-        ];
-    }
+        $behaviors = parent::behaviors();
 
-    protected function verbs()
-    {
-        return [
-            'index' => ['GET'],
-            'add' => ['POST'],
-        ];
-    }
-
-    /**
-     * @var $model TodoList
-     */
-    public function actionAdd()
-    {
-        $response = [
-            'status' => 200
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
         ];
 
-        $model = new $this->modelClass;
-
-        if ($model->load(\Yii::$app->request->post())) {
-            if ($model->validate()) {
-                if ($model->save()) {
-                    return Json::encode($response);
-                }
-            }
-        }
+        return $behaviors;
     }
 
-    public function actionIndex()
-    {
-        return Json::encode($this->modelClass::find()->all());
-    }
 }

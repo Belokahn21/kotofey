@@ -2,36 +2,20 @@
 
 namespace app\modules\user\controllers;
 
-use yii\helpers\Json;
-use yii\rest\Controller;
+use yii\rest\ActiveController;
 
-class RestBackendController extends Controller
+class RestBackendController extends ActiveController
 {
     public $modelClass = 'app\modules\user\models\entity\User';
 
-    public $serializer = [
-        'class' => 'yii\rest\Serializer',
-        'collectionEnvelope' => 'items'
-    ];
-
     public function behaviors()
     {
-        return [
-            'corsFilter' => [
-                'class' => \yii\filters\Cors::className(),
-            ],
-        ];
-    }
+        $behaviors = parent::behaviors();
 
-    protected function verbs()
-    {
-        return [
-            'get' => ['GET'],
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
         ];
-    }
 
-    public function actionGet()
-    {
-        return Json::encode($this->modelClass::find()->all());
+        return $behaviors;
     }
 }

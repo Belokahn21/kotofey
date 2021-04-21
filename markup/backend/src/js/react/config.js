@@ -11,14 +11,11 @@ module.exports = {
     restMenu: url + '/backend/api/menu/',
     restMenuFast: url + '/backend/api/menu_fast/',
     restSearchGet: url + '/rest/product/get/',
-    restUserGet: url + '/backend/api/user/',
-    restTodoGet: url + '/backend/api/todo/',
+    restUser: url + '/backend/api/user/',
     restCdekCity: url + '/cdek/rest-city/get/',
     restCdekSize: url + '/cdek/rest-size/get/',
     restCdekDeliveryPrice: url + '/cdek/rest-calculator/get/',
     restCatalogFrontGet: url + '/catalog/rest/get/',
-
-    restTodoAdd: url + '/backend/api/todo/',
-
+    restTodo: url + '/backend/api/todo/',
     ajaxSaveProductMark: url + '/ajax/mark/',
 };
