@@ -19,11 +19,11 @@ class TodoForm extends React.Component {
         return (
             <form className="todo-form" id="todo-new-task" onSubmit={this.props.handleAddElement.bind(this)}>
                 <div className="todo-form__element">
-                    <input className="todo-form__input" type="text" name={modelName + '[name]'} placeholder="Заголовок задачи"/>
+                    <input className="todo-form__input" type="text" name="name" placeholder="Заголовок задачи"/>
                 </div>
 
                 <div className="todo-form__element">
-                    <select className="todo-form__select" name={modelName + '[user_id]'}>
+                    <select className="todo-form__select" name='user_id'>
                         <option>Кому назначена</option>
                         {users.map((user, index) => {
                             return <option key={index} value={user.id}>{user.email}</option>
@@ -32,7 +32,7 @@ class TodoForm extends React.Component {
                 </div>
 
                 <div className="todo-form__element">
-                    <textarea className="todo-form__textarea" name={modelName + '[description]'} rows="10" placeholder="Описание задачи"/>
+                    <textarea className="todo-form__textarea" name="description" rows="10" placeholder="Описание задачи"/>
                 </div>
 
                 <button type="submit" className="btn btn-primary">Добавить</button>
