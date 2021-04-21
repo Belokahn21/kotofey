@@ -8366,8 +8366,10 @@ html, body {
       align-items: center;
       width: 100%;
       height: 100%; }
-      .todo-list-icons i:not(:last-child) {
-        margin-right: 10px; }
+      .todo-list-icons i {
+        cursor: pointer; }
+        .todo-list-icons i:not(:last-child) {
+          margin-right: 10px; }
 
 .todo-form__element {
   max-width: 100%; }
