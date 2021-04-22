@@ -3,6 +3,7 @@
 
 namespace app\modules\reviews\controllers;
 
+use app\modules\catalog\models\entity\Product;
 use Yii;
 use yii\web\Controller;
 use app\widgets\notification\Alert;
@@ -23,6 +24,8 @@ class ReviewsController extends Controller
             }
         }
 
-        return $this->redirect('/catalog/');
+        $product = Product::findOne($model->product_id);
+
+        return $this->redirect(['/catalog/product/view', 'id' => $product->slug]);
     }
 }
