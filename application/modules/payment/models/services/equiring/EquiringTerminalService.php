@@ -22,10 +22,10 @@ class EquiringTerminalService
     const PROD_URL = 'https://securepayments.sberbank.ru/rest/';
     const DEV_URL = 'https://3dsec.sberbank.ru/payment/rest/';
 
-    const REGISTER_ORDER = YII_ENV == 'dev' ? self::DEV_URL : self::PROD_URL . 'register.do';
-    const ROLLBACK_MONEY = YII_ENV == 'dev' ? self::DEV_URL : self::PROD_URL . 'refund.do';
-    const CANCEL_PAY = YII_ENV == 'dev' ? self::DEV_URL : self::PROD_URL . 'reverse.do';
-    const DECLINE = YII_ENV == 'dev' ? self::DEV_URL : self::PROD_URL . 'decline.do';
+    const REGISTER_ORDER = 'https://securepayments.sberbank.ru/rest/register.do';
+    const ROLLBACK_MONEY = 'https://securepayments.sberbank.ru/rest/refund.do';
+    const CANCEL_PAY = 'https://securepayments.sberbank.ru/rest/reverse.do';
+    const DECLINE = 'https://securepayments.sberbank.ru/rest/decline.do';
 
     public function __construct(EquiringBank $paymentBank)
     {
