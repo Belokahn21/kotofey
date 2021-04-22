@@ -21,7 +21,7 @@ class AcquiringHelper
     {
         $history = AcquiringOrder::findOne(['order_id' => $order->id]);
 
-        if ($history) return "https://3dsec.sberbank.ru/payment/merchants/sbersafe_sberid/payment_ru.html?mdOrder=$history->identifier_id";
+        if ($history) return "https://securepayments.sberbank.ru/payment/merchants/sbersafe_sberid/payment_ru.html?mdOrder=$history->identifier_id";
 
         return false;
     }
