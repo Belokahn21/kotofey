@@ -16,6 +16,10 @@ class Curl
             $out = curl_exec($curl);
             curl_close($curl);
         }
+
+        Debug::p($out);
+
+        exit();
         return $out;
     }
 
