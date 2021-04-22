@@ -19,7 +19,7 @@ class EquiringTerminalService
     private $bank;
     private $paramRequest = array();
 
-    const PROD_URL = 'https://securepayments.sberbank.ru/';
+    const PROD_URL = 'https://securepayments.sberbank.ru/rest/';
     const DEV_URL = 'https://3dsec.sberbank.ru/payment/rest/';
 
     const REGISTER_ORDER = YII_ENV == 'dev' ? self::DEV_URL : self::PROD_URL . 'register.do';
