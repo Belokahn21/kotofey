@@ -378,7 +378,7 @@ class OrderBackendController extends MainBackendController
         $result = $terminal->createOrder($order);
 
 
-        Debug::p($result);
+//        Debug::p($result);
 
 //        try {
 //            if (!is_array($result) || !isset($result['orderId']) || !isset($result['formUrl'])) return $result;
