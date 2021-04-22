@@ -7,10 +7,11 @@ use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
-use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
-use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\widgets\CatalogSliders\Analog\AnalogWidget;
+use app\modules\reviews\widgets\ProductReviews\ProductReviewsWidget;
+use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
+use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
@@ -134,7 +135,7 @@ $this->title = ProductTitle::show($product->name);
 
             <?php if (Yii::$app->user->id == 1): ?>
                 <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
-                    Отзывы
+                    <?= ProductReviewsWidget::widget(); ?>
                 </div>
             <?php endif; ?>
         </div>
