@@ -47,6 +47,8 @@ class EquiringTerminalService
             'failUrl' => System::fullDomain() . Url::to('/payment/fail/'),
         ]);
 
+        Debug::p($this->paramRequest);
+        exit();
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
     }
 
@@ -86,8 +88,6 @@ class EquiringTerminalService
         ]);
 
 
-        Debug::p($this->paramRequest);
-        exit();
 
         return Json::decode($curl->post(self::ROLLBACK_MONEY, $this->paramRequest));
     }
