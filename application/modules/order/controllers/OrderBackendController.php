@@ -374,10 +374,10 @@ class OrderBackendController extends MainBackendController
 
         if ($module->mode == 'off') throw new \Exception('В настройках сайта отключена работа Эквайринга, измените значение mode_acquiring в настройках сайта.');
 
-        Debug::p($login);
-        Debug::p($password);
+//        Debug::p($login);
+//        Debug::p($password);
 
-        exit();
+//        exit();
 
 //        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic($login, $password)));
 //        $result = $terminal->createOrder($order);
