@@ -42,6 +42,7 @@ class EquiringTerminalService
             'currency' => 643,
             'email' => $order->email,
             'phone' => $order->phone,
+            'sessionTimeoutSecs' => 604800,
             'amount' => OrderHelper::orderSummary($order) * 100,
             'returnUrl' => System::fullDomain() . Url::to('/payment/success/'),
             'failUrl' => System::fullDomain() . Url::to('/payment/fail/'),
@@ -84,7 +85,6 @@ class EquiringTerminalService
             'orderId' => $order->identifier_id,
             'amount' => $amount,
         ]);
-
 
 
         return Json::decode($curl->post(self::ROLLBACK_MONEY, $this->paramRequest));
