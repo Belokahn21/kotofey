@@ -67,7 +67,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <div class="profile-order-info__key">Оплачено</div>
                     <div class="profile-order-info__value">
                         <?= ($order->is_paid ? Html::tag('span', 'Оплачено', ['class' => 'green']) : Html::tag('span', 'Не оплачено', ['class' => 'red'])); ?>
-                        <?php if (!$order->is_paid): ?>
+                        <?php if (!$order->is_paid && $order->delivery_id == 1): ?>
                             <?= Html::a('Оплатить', AcquiringHelper::getInstance()->paymentLink($order), ['target' => '_blank', 'class' => 'btn-main']); ?>
                         <?php endif; ?>
                     </div>

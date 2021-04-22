@@ -43,12 +43,12 @@ class RestController extends ActiveController
         $login = "";
         $password = "";
 
-        if ($module->mode == 'test' && YII_ENV == 'dev') {
+        if ($module->mode != 'off' && YII_ENV == 'dev') {
             $login = $module->test_login;
             $password = $module->test_password;
         }
 
-        if ($module->mode == 'on' && YII_ENV == 'prod') {
+        if ($module->mode != 'off' && YII_ENV == 'prod') {
             $login = $module->real_login;
             $password = $module->real_password;
         }

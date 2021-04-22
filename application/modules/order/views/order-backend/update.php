@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\order\widgets\CallCenter\CallCenterWidget;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
@@ -23,6 +24,9 @@ $this->title = Title::show("Обновить заказ: " . $model->id);
         <?= CallCenterWidget::widget([
             'order_id' => $model->id
         ]); ?>
+        <?php if (!AcquiringOrder::findOne(['order_id' => $model->id]) && $model->delivery_id == 1): ?>
+            <?= Html::a('Ининцилизировать оплату', Url::to(['payment-link', 'id' => $model->id]), ['class' => 'btn-main']) ?>
+        <?php endif; ?>
     </div>
 <?php if (!$model->isNewRecord): ?>
     <?php //todo: лень вывести данные цифровые ?>

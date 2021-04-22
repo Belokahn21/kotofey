@@ -2,6 +2,10 @@
 
 namespace app\modules\order\controllers;
 
+use app\modules\acquiring\models\entity\AcquiringOrder;
+use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
+use app\modules\payment\models\services\equiring\banks\Sberbank;
+use app\modules\payment\models\services\equiring\EquiringTerminalService;
 use app\modules\site\models\tools\System;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -33,7 +37,7 @@ class OrderBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
 
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['report', 'export'], 'roles' => ['Administrator']]
+            ['allow' => true, 'actions' => ['report', 'export', 'payment-link'], 'roles' => ['Administrator']]
         ]);
 
         return $parentAccess;
@@ -340,5 +344,42 @@ class OrderBackendController extends MainBackendController
         header('Content-Type: application/csv');
         header('Content-Disposition: attachment; filename="' . $filename . '";');
         fpassthru($f);
+    }
+
+    public function actionPaymentLink($id)
+    {
+        $order = Order::findOne($id);
+        $module = \Yii::$app->getModule('acquiring');
+
+        if (AcquiringOrder::findOne(['order_id' => $id])) {
+            Alert::setSuccessNotify('Ссылка на оплату уже существует');
+            return $this->redirect(['update', 'id' => $id]);
+        }
+
+        //settings
+        $login = "";
+        $password = "";
+
+        if ($module->mode != 'off' && YII_ENV == 'dev') {
+            $login = $module->test_login;
+            $password = $module->test_password;
+        }
+
+        if ($module->mode != 'off' && YII_ENV == 'prod') {
+            $login = $module->real_login;
+            $password = $module->real_password;
+        }
+
+        if ($module->mode == 'off') throw new \Exception('В настройках сайта отключена работа Эквайринга, измените значение mode_acquiring в настройках сайта.');
+
+        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic($login, $password)));
+        $result = $terminal->createOrder($order);
+
+
+        if (!is_array($result) || !isset($result['orderId']) || !isset($result['formUrl'])) return $result;
+        $successSaveEquiring = $terminal->saveHistoryPaymentTransaction($order, $result['orderId']);
+        if ($successSaveEquiring['status'] == 200) Alert::setSuccessNotify('Ссылка на оплату создана');
+
+        return $this->redirect(['update', 'id' => $order->id]);
     }
 }
