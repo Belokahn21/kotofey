@@ -380,11 +380,9 @@ class OrderBackendController extends MainBackendController
 
 
         try {
-            Debug::p($result);
-            exit();
-//            if (!is_array($result) || !isset($result['orderId']) || !isset($result['formUrl'])) return $result;
-//            $successSaveEquiring = $terminal->saveHistoryPaymentTransaction($order, $result['orderId']);
-//            if ($successSaveEquiring['status'] == 200) Alert::setSuccessNotify('Ссылка на оплату создана');
+            if (!isset($result['orderId']) || !isset($result['formUrl'])) return $result;
+            $successSaveEquiring = $terminal->saveHistoryPaymentTransaction($order, $result['orderId']);
+            if ($successSaveEquiring['status'] == 200) Alert::setSuccessNotify('Ссылка на оплату создана');
         } catch (\InvalidArgumentException $exception) {
             LogService::saveErrorMessage("Ошибка при создании ссылки оплаты для заказа #{$order->id}. Ответ Банка: " . print_r($result, true), 'payment-link');
             Alert::setErrorNotify('Не удалось создать ссылку. Посмотреть логи');
