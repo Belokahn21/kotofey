@@ -110,7 +110,9 @@ $this->title = ProductTitle::show($product->name);
                 <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
                 <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
                 <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Как купить?</a>
-                <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы</a>
+                <?php if (Yii::$app->user->id == 1): ?>
+                    <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы</a>
+                <?php endif; ?>
             </div>
         </nav>
         <div class="tab-content product-tab-content" id="nav-tabContent">
@@ -129,9 +131,12 @@ $this->title = ProductTitle::show($product->name);
                 Для покупки товаров на нашем сайте вам нужно добавить интересующий вас товар в корзину и пройти к оформлению заказа.<br>
                 После того как заказ был оформлен с вами свяжется оператор (через 15 минут) для уточнения деталей заказа и согласования времени доставки.
             </div>
-            <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
-                Отзывы
-            </div>
+
+            <?php if (Yii::$app->user->id == 1): ?>
+                <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
+                    Отзывы
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 <?= RecomendedWidget::widget([
