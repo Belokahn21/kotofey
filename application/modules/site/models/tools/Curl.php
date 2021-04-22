@@ -17,6 +17,10 @@ class Curl
             curl_close($curl);
         }
 
+        Debug::p($out);
+
+        exit();
+
         return $out;
     }
 
