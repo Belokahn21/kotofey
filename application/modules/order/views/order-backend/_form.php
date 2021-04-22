@@ -287,7 +287,8 @@ use app\modules\bonus\models\helper\BonusHelper;
         <?php endif; ?>
 
         <?php if ($sberPayment = \app\modules\acquiring\models\entity\AcquiringOrder::findOne(['order_id' => $model->id])): ?>
-            <?= Html::a('Оплачено сбербанком: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
+            <hr/>
+            <?= Html::a('Сбербанк транзакция: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
         <?php endif; ?>
 
         <?php if ($check = \app\modules\acquiring\models\entity\AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
