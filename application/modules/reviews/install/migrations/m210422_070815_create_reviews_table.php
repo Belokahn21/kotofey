@@ -11,7 +11,6 @@ class m210422_070815_create_reviews_table extends Migration
 
         $this->execute('DROP TABLE IF EXISTS `product_reviews`');
 
-
         $this->createTable('{{%reviews}}', [
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
