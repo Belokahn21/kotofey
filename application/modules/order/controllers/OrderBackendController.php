@@ -377,6 +377,8 @@ class OrderBackendController extends MainBackendController
         Debug::p($login);
         Debug::p($password);
 
+        exit();
+
 //        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic($login, $password)));
 //        $result = $terminal->createOrder($order);
 //
