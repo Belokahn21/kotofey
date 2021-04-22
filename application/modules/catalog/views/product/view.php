@@ -12,6 +12,7 @@ use app\modules\reviews\widgets\ProductReviews\ProductReviewsWidget;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
+use app\modules\reviews\widgets\ProductReviewsForm\ProductReviewsFormWidget;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
@@ -135,7 +136,13 @@ $this->title = ProductTitle::show($product->name);
 
             <?php if (Yii::$app->user->id == 1): ?>
                 <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
-                    <?= ProductReviewsWidget::widget(); ?>
+                    <?= ProductReviewsWidget::widget([
+                        'product_id' => $product->id
+
+                    ]); ?>
+                    <?= ProductReviewsFormWidget::widget([
+                        'product_id' => $product->id
+                    ]); ?>
                 </div>
             <?php endif; ?>
         </div>

@@ -3,6 +3,7 @@
 namespace app\modules\reviews\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "reviews".
@@ -18,20 +19,17 @@ use Yii;
  */
 class Reviews extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
+    public function behaviors()
     {
-        return 'reviews';
+        return [
+            TimestampBehavior::className()
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
             [['user_id', 'product_id', 'rate', 'created_at', 'updated_at'], 'integer'],
             [['product_id', 'text'], 'required'],
             [['text'], 'string'],
@@ -39,20 +37,17 @@ class Reviews extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
             'user_id' => 'User ID',
             'product_id' => 'Product ID',
-            'text' => 'Text',
-            'image' => 'Image',
-            'rate' => 'Rate',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'text' => 'Ваше сообщение',
+            'image' => 'Картинка',
+            'rate' => 'Оценка',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }
