@@ -30,7 +30,7 @@ class Debug
     {
         $filePath = \Yii::getAlias('@webroot/debug.html');
         if (file_exists($filePath)) {
-            chmod($filePath, '0777');
+            chmod($filePath, 0777);
         }
 
         if (!empty($target)) {
