@@ -47,8 +47,6 @@ class EquiringTerminalService
             'failUrl' => System::fullDomain() . Url::to('/payment/fail/'),
         ]);
 
-        Debug::p(self::REGISTER_ORDER);
-        Debug::p($this->paramRequest);
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
     }
 
