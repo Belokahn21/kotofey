@@ -28,33 +28,13 @@ class EquiringTerminalService
         $this->bank = $paymentBank;
     }
 
-
-    public function createOrderTest()
-    {
-
-        $this->bank->getAuthParams($this->paramRequest);
-
-        $curl = new Curl();
-        $this->extendParams($this->paramRequest, [
-            'orderNumber' => '538-test-2021',
-            'currency' => 643,
-            'email' => 'demo@demo.ru',
-            'phone' => '88005553535',
-            'amount' => 1500 * 100,
-            'returnUrl' => System::fullDomain() . Url::to('/payment/result/'),
-//            'returnUrl' => Url::to('/payment/result/'),
-        ]);
-
-        return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
-    }
-
     public function createOrder(Order $order)
     {
         $this->bank->getAuthParams($this->paramRequest);
 
         $curl = new Curl();
         $this->extendParams($this->paramRequest, [
-            'orderNumber' => $order->id . '-test1-2021',
+            'orderNumber' => $order->id,
             'currency' => 643,
             'email' => $order->email,
             'phone' => $order->phone,

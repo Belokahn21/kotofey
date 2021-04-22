@@ -317,6 +317,9 @@ $config = [
         'cdn' => [
             'class' => 'app\modules\cdn\Module',
         ],
+        'mercury' => [
+            'class' => 'app\modules\mercury\Module',
+        ],
     ],
     'params' => $params,
 ];

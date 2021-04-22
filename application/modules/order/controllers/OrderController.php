@@ -107,13 +107,7 @@ class OrderController extends Controller
             return $this->redirect('/');
         }
 
-        return $this->render('_create', [
-            'order' => $order,
-            'orderDate' => $orderDate,
-            'deliveries' => $deliveries,
-            'payments' => $payments,
-            'basket' => Basket::findAll()
-        ]);
+        return $this->render('create');
     }
 
     public function actionView($id)
