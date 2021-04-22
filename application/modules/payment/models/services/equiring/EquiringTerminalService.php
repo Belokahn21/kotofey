@@ -85,6 +85,10 @@ class EquiringTerminalService
             'amount' => $amount,
         ]);
 
+
+        Debug::p($this->paramRequest);
+        exit();
+
         return Json::decode($curl->post(self::ROLLBACK_MONEY, $this->paramRequest));
     }
 
