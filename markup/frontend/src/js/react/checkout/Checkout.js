@@ -218,7 +218,7 @@ class Checkout extends Component {
 
 
         if (deliveryId === 1) {
-            this.refreshPayment([2, 4]);
+            this.refreshPayment([2, 3]);
         } else {
             this.refreshPayment([]);
         }
