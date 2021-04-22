@@ -7,6 +7,7 @@ use app\modules\logger\models\service\LogService;
 use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
 use app\modules\payment\models\services\equiring\EquiringTerminalService;
+use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\System;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
@@ -377,14 +378,16 @@ class OrderBackendController extends MainBackendController
         $result = $terminal->createOrder($order);
 
 
-        try {
-            if (!is_array($result) || !isset($result['orderId']) || !isset($result['formUrl'])) return $result;
-            $successSaveEquiring = $terminal->saveHistoryPaymentTransaction($order, $result['orderId']);
-            if ($successSaveEquiring['status'] == 200) Alert::setSuccessNotify('Ссылка на оплату создана');
-        } catch (\Exception $exception) {
-            LogService::saveErrorMessage("Ошибка при создании ссылки оплаты для заказа #{$order->id}. Ответ Банка: " . print_r($result, true), 'payment-link');
-            Alert::setErrorNotify('Не удалось создать ссылку. Посмотреть логи');
-        }
+        Debug::p($result);
+
+//        try {
+//            if (!is_array($result) || !isset($result['orderId']) || !isset($result['formUrl'])) return $result;
+//            $successSaveEquiring = $terminal->saveHistoryPaymentTransaction($order, $result['orderId']);
+//            if ($successSaveEquiring['status'] == 200) Alert::setSuccessNotify('Ссылка на оплату создана');
+//        } catch (\Exception $exception) {
+//            LogService::saveErrorMessage("Ошибка при создании ссылки оплаты для заказа #{$order->id}. Ответ Банка: " . print_r($result, true), 'payment-link');
+//            Alert::setErrorNotify('Не удалось создать ссылку. Посмотреть логи');
+//        }
 
         return $this->redirect(['update', 'id' => $order->id]);
     }
