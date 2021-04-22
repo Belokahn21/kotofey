@@ -320,6 +320,9 @@ $config = [
         'mercury' => [
             'class' => 'app\modules\mercury\Module',
         ],
+        'reviews' => [
+            'class' => 'app\modules\reviews\Module',
+        ],
     ],
     'params' => $params,
 ];

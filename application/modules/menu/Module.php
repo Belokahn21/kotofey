@@ -10,8 +10,8 @@ use yii\helpers\Url;
  */
 class Module extends MainModule
 {
-    public $name = "Меню";
     public $controllerNamespace = 'app\modules\menu\controllers';
+    public $name = "Меню";
 
     public function init()
     {
