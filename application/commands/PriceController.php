@@ -5,6 +5,7 @@ namespace app\commands;
 use app\models\tool\import\Forza10;
 use app\models\tool\import\Hills;
 use app\models\tool\import\RoyalCanin;
+use app\models\tool\import\SiriusParfum;
 use app\models\tool\import\Tavela;
 use app\models\tool\import\Valta;
 use app\models\tool\import\Purina;
@@ -22,6 +23,7 @@ class PriceController extends Controller
             "Forza10",
             "Tavela",
             "Hills",
+            "Sirius (Парфюм Алтай)",
         ];
 
         switch ($vendor) {
@@ -45,6 +47,10 @@ class PriceController extends Controller
             case 5:
                 $hills = new Hills();
                 $hills->update(true);
+                break;
+            case 6:
+                $hills = new SiriusParfum();
+                $hills->update();
                 break;
             default:
                 echo "Выберите прайс для обновления.\n" . $this->getMessage($message) . "\nphp yii price/update n";
