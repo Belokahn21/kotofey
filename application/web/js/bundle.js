@@ -5611,8 +5611,36 @@ var Checkout = /*#__PURE__*/function (_Component) {
       var _this9 = this;
 
       var buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ',
-          deliveryService;
-      if (parseInt(this.state.deliveryId) === 1) deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, null);
+          deliveryService,
+          oddInput,
+          clientInput;
+
+      if (parseInt(this.state.deliveryId) === 1) {
+        deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, null);
+        clientInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+          errors: this.state.errors,
+          unsetError: this.unsetError.bind(this),
+          element: "input",
+          modelName: this.modelName,
+          options: {
+            name: "client",
+            title: "Укажите Фамилию Имя Отчество",
+            placeholder: "Введите ваше ФИО"
+          }
+        });
+      }
+
+      if (parseInt(this.state.paymentId) === 2) oddInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
+        errors: this.state.errors,
+        unsetError: this.unsetError.bind(this),
+        element: "input",
+        modelName: this.modelName,
+        options: {
+          name: "odd",
+          title: "С какой суммы приготовить сдачу?",
+          placeholder: "Оставьте пустым, если не нужна сдача"
+        }
+      });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page__group-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -5666,7 +5694,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           title: "Комментарий к заказу",
           placeholder: "Ваши пожелания"
         }
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      })), clientInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
       }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0441\u043F\u043E\u0441\u043E\u0431 \u043E\u043F\u043B\u0430\u0442\u044B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_widget_Variants__WEBPACK_IMPORTED_MODULE_12__.default, {
         unsetError: this.unsetError.bind(this),
@@ -5677,7 +5705,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         models: this.state.payment.filter(function (element) {
           return !_this9.state.excludePayments.includes(element.id);
         })
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), oddInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row",
         style: {
           alignItems: "center"

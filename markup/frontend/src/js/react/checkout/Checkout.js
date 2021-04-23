@@ -377,9 +377,13 @@ class Checkout extends Component {
     }
 
     dashboard() {
-        let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService;
+        let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService, oddInput, clientInput;
 
-        if (parseInt(this.state.deliveryId) === 1) deliveryService = <DeliveryService/>
+        if (parseInt(this.state.deliveryId) === 1) {
+            deliveryService = <DeliveryService/>
+            clientInput = <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "client", title: "Укажите Фамилию Имя Отчество", placeholder: "Введите ваше ФИО"}}/>;
+        }
+        if (parseInt(this.state.paymentId) === 2) oddInput = <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "odd", title: "С какой суммы приготовить сдачу?", placeholder: "Оставьте пустым, если не нужна сдача"}}/>
 
 
         return (
@@ -413,10 +417,13 @@ class Checkout extends Component {
                             <HtmlHelper errors={this.state.errors} element="textarea" modelName={this.modelName} options={{name: "comment", title: "Комментарий к заказу", placeholder: "Ваши пожелания"}}/>
                         </label>
 
+                        {clientInput}
 
                         <div className="checkout-form__title">Укажите способ оплаты</div>
                         <Variants unsetError={this.unsetError.bind(this)} errors={this.state.errors} modelName={this.modelName} attribute="payment_id" handlerSelect={this.handleSelectPayment.bind(this)} models={this.state.payment.filter(element => !this.state.excludePayments.includes(element.id))}/>
 
+                        {/*Здесь поле про наличные*/}
+                        {oddInput}
 
                         {/*<div className="checkout-form__title">Промокод и бонусы</div>*/}
                         {/*<div className="checkout-form__group-row">*/}
