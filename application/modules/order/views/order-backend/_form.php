@@ -205,6 +205,14 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 
         <div class="form-element">
             <div class="d-flex flex-row">
+                <div class="w-25 p-1">
+                    <?= $form->field($model, 'client')->textInput(['placeholder' => 'ФИО клиента', 'class' => 'form-control clean-phone'])->label(false); ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-element">
+            <div class="d-flex flex-row">
                 <div class="w-50 p-1">
                     <?= $form->field($model, 'notes')->textarea(['rows' => 10]); ?>
                 </div>
