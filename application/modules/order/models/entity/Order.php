@@ -189,6 +189,7 @@ class Order extends ActiveRecord
             'discount' => 'Скидка',
             'chargeBonus' => 'Начислить бонусы',
             'odd' => 'С какой суммы сдача?',
+            'client' => 'Ваше ФИО',
         ];
     }
 

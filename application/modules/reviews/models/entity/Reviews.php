@@ -10,6 +10,8 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property int|null $user_id
+ * @property boolean $is_active
+ * @property int $status_id
  * @property int $product_id
  * @property string $text
  * @property string|null $image
@@ -19,6 +21,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Reviews extends \yii\db\ActiveRecord
 {
+    const STATUS_OFF = 0;
+    const STATUS_ENABLE = 1;
+    const STATUS_MODERATE = 2;
+
     public function behaviors()
     {
         return [
@@ -29,10 +35,20 @@ class Reviews extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['status_id'], 'default', 'value' => self::STATUS_MODERATE],
+
+            [['is_active'], 'default', 'value' => true],
+
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
-            [['user_id', 'product_id', 'rate', 'created_at', 'updated_at'], 'integer'],
+
+            [['user_id', 'product_id', 'rate', 'created_at', 'updated_at', 'status_id'], 'integer'],
+
             [['product_id', 'text'], 'required'],
+
             [['text'], 'string'],
+
+            [['is_active'], 'boolean'],
+
             [['image'], 'string', 'max' => 255],
         ];
     }
