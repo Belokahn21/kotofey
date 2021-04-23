@@ -1,16 +1,16 @@
 <?php
 
-use app\models\tool\parser\providers\SibagroTrade;
-use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
-use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\widgets\map\MapWidget;
+use yii\helpers\Url;
+use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\site\models\tools\Price;
-use yii\helpers\Html;
-use yii\helpers\Url;
+use app\modules\site\models\tools\Currency;
+use app\modules\order\widgets\map\MapWidget;
+use app\modules\order\models\helpers\OrderHelper;
+use app\models\tool\parser\providers\SibagroTrade;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
-use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -51,9 +51,14 @@ use app\modules\bonus\models\helper\BonusHelper;
                             <div class="text">Закуп: <?= Price::format(OrderHelper::orderPurchase($model->id)); ?></div>
                             <div class="text">Сумма заказа: <?= Price::format(OrderHelper::orderSummary($model)); ?></div>
                             <?php $marge = OrderHelper::marginality($model); ?>
-                            <div class="text">Прибыль: <?= $marge > 1 ? '<span class="green">+' . $marge . '</span>' : '<span class="red">-' . $marge . '</span>'; ?></div>
+                            <div class="text">Прибыль: <?= $marge > 1 ? '<span class="green">+' . $marge . '</span>' : '<span class="red">' . $marge . '</span>'; ?></div>
                             <hr/>
-                            <div class="text">Бонусы: <?= $model->bonus; ?></div>
+                            <?php if (!empty($model->bonus)): ?>
+                                <div class="text">Бонусы: <?= $model->bonus; ?> <?= Currency::getInstance()->show(); ?></div>
+                            <?php endif; ?>
+                            <?php if (!empty($model->odd)): ?>
+                                <div class="text red">Требуется сдача с: <?= $model->odd; ?> <?= Currency::getInstance()->show(); ?></div>
+                            <?php endif; ?>
                         </div>
 
                         <div class="info-card">

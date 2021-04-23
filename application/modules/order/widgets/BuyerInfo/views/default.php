@@ -13,6 +13,9 @@ use yii\helpers\Url;
 ?>
 <div class="info-card">
     <div class="title" data-target="#buyerInfoModal" data-toggle="modal">Покупатель</div>
+    <?php if ($model->client): ?>
+        <div class="text"><?= $model->client; ?></div>
+    <?php endif; ?>
     <div class="text">Телефон <a href="tel:<?= $model->phone; ?>"><?= $model->phone; ?></a></div>
     <div class="text">Почта <a href="mailto:<?= $model->email; ?>"><?= $model->email; ?></a></div>
     <?php if ($model->ip): ?>
