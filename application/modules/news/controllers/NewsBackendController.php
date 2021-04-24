@@ -13,8 +13,6 @@ use yii\web\HttpException;
 
 class NewsBackendController extends MainBackendController
 {
-    public $layout = '@app/views/layouts/admin';
-
     public function actionIndex()
     {
         $model = new News(['scenario' => News::SCENARIO_INSERT]);

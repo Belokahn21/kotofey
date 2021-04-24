@@ -2,20 +2,16 @@
 
 namespace app\modules\user\controllers;
 
-
-use app\modules\bonus\models\entity\UserBonus;
-use app\modules\bonus\models\entity\UserBonusHistory;
-use app\modules\pets\models\entity\Animal;
-use app\modules\pets\models\entity\Pets;
-use app\modules\site\models\tools\Debug;
-use app\modules\user\models\entity\UserBilling;
-use app\widgets\notification\Alert;
 use Yii;
 use yii\web\Controller;
+use yii\web\HttpException;
+use app\widgets\notification\Alert;
+use app\modules\site\models\tools\Debug;
 use app\modules\user\models\entity\User;
 use app\modules\order\models\entity\Order;
 use app\modules\user\models\entity\UserSex;
-use yii\web\HttpException;
+use app\modules\user\models\entity\UserBilling;
+use app\modules\bonus\models\entity\UserBonusHistory;
 
 class ProfileController extends Controller
 {
@@ -25,9 +21,7 @@ class ProfileController extends Controller
         $model = User::findOne(\Yii::$app->user->id);
         $model->scenario = User::SCENARIO_PROFILE_UPDATE;
         $sexList = UserSex::find()->all();
-        $history = UserBonusHistory::find()->where(['bonus_account_id' => Yii::$app->user->identity->phone])->orderBy(['created_at' => SORT_DESC]);
-        $petModel = new Pets();
-        $animals = Animal::find()->all();
+
         $billingModel = new UserBilling();
         $billings = UserBilling::find()->where(['phone' => Yii::$app->user->identity->phone])->all();
 
@@ -58,9 +52,6 @@ class ProfileController extends Controller
             'orders' => $orders,
             'model' => $model,
             'sexList' => $sexList,
-            'history' => $history,
-            'petModel' => $petModel,
-            'animals' => $animals,
             'billings' => $billings,
             'billingModel' => $billingModel,
         ]);

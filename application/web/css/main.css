@@ -13557,32 +13557,35 @@ p {
   border: 1px rgba(0, 0, 0, 0.21) solid;
   outline: none !important; }
 
-.select-pet {
+.select-pet #pets-animal_id {
   display: flex;
   flex-direction: row;
   justify-content: stretch;
   flex-wrap: wrap; }
-  .select-pet__item {
-    margin: 5px;
-    flex: 1; }
-    .select-pet__item input {
-      display: none; }
-    input:checked ~ .select-pet__item__icon {
-      border-color: #ff1a4a; }
-  .select-pet__icon {
-    cursor: pointer;
-    padding: 40px;
-    border: 1px rgba(0, 0, 0, 0.08) solid;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
-    transition: all 0.22s ease; }
-    .select-pet__icon:hover {
-      border-color: #ff1a4a; }
-  .select-pet__note {
-    text-align: center; }
+
+.select-pet__item {
+  margin: 5px;
+  flex: 1; }
+  .select-pet__item input {
+    display: none; }
+  .select-pet__item input:checked ~ .select-pet__icon {
+    border-color: #ff1a4a; }
+
+.select-pet__icon {
+  cursor: pointer;
+  padding: 40px;
+  border: 1px rgba(0, 0, 0, 0.08) solid;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 35px;
+  transition: all 0.22s ease; }
+  .select-pet__icon:hover {
+    border-color: #ff1a4a; }
+
+.select-pet__note {
+  text-align: center; }
 
 label[for="site-form-pet-avatar"] {
   width: 150px;
@@ -13597,6 +13600,8 @@ label[for="site-form-pet-avatar"] {
     background-repeat: no-repeat;
     border: 1px rgba(0, 0, 0, 0.2) solid;
     cursor: pointer; }
+    label[for="site-form-pet-avatar"].noUpload ~ .form-group {
+      display: none; }
   label[for="site-form-pet-avatar"] ~ .site-form__item input[type='file'] {
     display: none; }
 

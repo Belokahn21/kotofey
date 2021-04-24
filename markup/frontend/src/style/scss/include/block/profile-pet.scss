@@ -12,10 +12,12 @@
 }
 
 .select-pet {
-  display: flex;
-  flex-direction: row;
-  justify-content: stretch;
-  flex-wrap: wrap;
+  #pets-animal_id {
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    flex-wrap: wrap;
+  }
 
   &__item {
     margin: 5px;
@@ -25,7 +27,7 @@
       display: none;
     }
 
-    input:checked ~ &__icon {
+    input:checked ~ .select-pet__icon {
       border-color: $active-color;
     }
   }
@@ -65,6 +67,10 @@ label[for="site-form-pet-avatar"] {
     background-repeat: no-repeat;
     border: 1px rgba(0, 0, 0, 0.2) solid;
     cursor: pointer;
+
+    ~ .form-group {
+      display: none;
+    }
   }
 
   & ~ .site-form__item {

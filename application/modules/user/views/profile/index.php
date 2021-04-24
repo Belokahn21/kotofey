@@ -8,8 +8,6 @@
  * @var $sexList \app\modules\user\models\entity\UserSex[]
  * @var $favorite \app\modules\catalog\models\entity\Product[]
  * @var $history \yii\db\ActiveQuery
- * @var $petModel \app\modules\pets\models\entity\Pets
- * @var $animals \app\modules\pets\models\entity\Animal[]
  */
 
 use yii\helpers\Url;
@@ -20,13 +18,14 @@ use app\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
 use app\modules\site\models\tools\Currency;
 use app\modules\seo\models\tools\Title;
-use app\modules\pets\models\entity\Animal;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\user\models\helpers\UserBillingHelper;
+use app\modules\pets\widgets\AddPetForm\AddPetFormWidget;
+use app\modules\bonus\widgets\UserBonusHistory\UserBonusHistoryWidget;
 
 $this->title = Title::show('Личный кабинет');
 $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
@@ -175,101 +174,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                     <?php endif; ?>
                 </div>
                 <div class="tab-pane fade" id="pet">
-                    <div class="authModal modal fade" id="newPetModal" tabindex="-1" role="dialog" aria-labelledby="newPetModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="site-form">
-                                    <div class="modal-header">
-                                        <div class="div">
-                                            <h5 class="modal-title" id="newPetModalLabel">Карточка нового питомца</h5>
-                                        </div>
-                                        <?php if (Yii::$app->user->identity->id == 1): ?>
-                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        <?php endif; ?>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="site-form__item">
-                                            <div class="select-pet">
-                                                <?= $form->field($petModel, 'animal_id')->radioList(ArrayHelper::map($animals, 'id', 'name'), [
-                                                    'item' => function ($index, $label, $name, $checked, $value) {
-                                                        $animal = Animal::findOne($value);
-                                                        return <<<LIST
-                                        <div class="select-pet__item">
-                                            <input type="radio" name="$name" value="$value" id="select-pet-dog">
-                                            <label class="select-pet__icon" for="select-pet-dog"><i class="$animal->icon"></i></label>
-                                        </div>
-LIST;
-                                                    }
-                                                ]) ?>
-                                            </div>
-                                        </div>
-                                        <div class="site-form__group-row">
-                                            <div class="site-form__side">
-                                                <div class="site-form__item">
-                                                    <label class="site-form__label" for="site-form-namepet">Кличка питомца</label>
-                                                    <input class="site-form__input" id="site-form-namepet" type="text" placeholder="Кличка питомца">
-                                                </div>
-                                                <div class="site-form__item">
-                                                    <label class="site-form__label" for="site-form-birthday">День рождения питомца</label>
-                                                    <input class="site-form__input js-datepicker" id="site-form-birthday" type="text" placeholder="День рождения питомца">
-                                                </div>
-                                                <div class="site-form__item">
-                                                    <label class="site-form__label" for="site-form-sex">Пол питомца</label>
-                                                    <select class="site-form__select" id="site-form-sex">
-                                                        <option>Мальчик</option>
-                                                        <option>Девочка</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="site-form__side">
-                                                <label class="site-form__label noUpload" for="site-form-pet-avatar"></label>
-                                                <div class="site-form__item">
-                                                    <input class="site-form__item" type="file" name="avatar" id="site-form-pet-avatar">
-                                                </div>
-                                                <p class="select-pet__note">Загрузить фото питомца</p>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button class="site-form__button" type="button">Добавить</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="profile__inline-group">
-                        <h2 class="page__title">Ваши питомцы</h2>
-                        <button class="profile-pet__add" type="button" data-toggle="modal" data-target="#newPetModal">Добавить</button>
-                    </div>
+                    <?= AddPetFormWidget::widget(); ?>
                 </div>
                 <div class="tab-pane fade" id="bonus">
                     <div class="d-flex flex-row align-items-center">
                         <h2 class="page__title">Ваши бонусы</h2>
                         <div class="profile-bonus-count"><?= BonusHelper::getUserBonus(Yii::$app->user->identity->phone); ?></div>
                     </div>
-                    <h3>История поступлений бонусов</h3>
-                    <div class="bonus-history-table">
-                        <div class="bonus-history-table-header">
-                            <div class="bonus-history-table__reason">Причина</div>
-                            <div class="bonus-history-table__count">Кол-во</div>
-                            <div class="bonus-history-table__date">Дата начисления</div>
-                            <div class="bonus-history-table__available">Статус</div>
-                        </div>
-                        <?php foreach ($history->all() as $item): ?>
-                            <div class="bonus-history-table-body">
-                                <div class="bonus-history-table__reason"><?= $item->reason; ?></div>
-                                <div class="bonus-history-table__count"><?= $item->count; ?></div>
-                                <div class="bonus-history-table__date"><?= date('d.m.Y', $item->created_at); ?></div>
-                                <div class="bonus-history-table__available">
-                                    <?= $item->is_active ? Html::tag('i', '', [
-                                        'class' => 'green far fa-check-circle'
-                                    ]) : Html::tag('i', '', [
-                                        'class' => 'red far fa-clock'
-                                    ]); ?>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+                    <?= UserBonusHistoryWidget::widget(); ?>
                 </div>
                 <div class="tab-pane fade" id="billing">
                     <div class="profile__inline-group">
