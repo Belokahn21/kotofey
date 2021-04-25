@@ -41,6 +41,9 @@
   &__inline-group {
     display: flex;
     flex-direction: row;
+    @media (max-width: 450px) {
+      flex-direction: column;
+    }
   }
 
   &-avatar {

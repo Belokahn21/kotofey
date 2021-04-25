@@ -13320,6 +13320,9 @@ p {
   .profile__inline-group {
     display: flex;
     flex-direction: row; }
+    @media (max-width: 450px) {
+      .profile__inline-group {
+        flex-direction: column; } }
   .profile-avatar {
     border-radius: 50%;
     overflow: hidden;
@@ -13425,7 +13428,7 @@ p {
     font-weight: bold; }
   .profile-sections-wrap {
     width: 25%; }
-    @media (max-width: 450px) {
+    @media (max-width: 768px) {
       .profile-sections-wrap {
         width: 100%;
         flex-direction: row; } }
@@ -13556,6 +13559,9 @@ p {
   background: transparent;
   border: 1px rgba(0, 0, 0, 0.21) solid;
   outline: none !important; }
+  @media (max-width: 450px) {
+    .profile-pet__add {
+      margin: 10px 0 !important; } }
 
 .select-pet #pets-animal_id {
   display: flex;
@@ -13604,6 +13610,21 @@ label[for="site-form-pet-avatar"] {
       display: none; }
   label[for="site-form-pet-avatar"] ~ .site-form__item input[type='file'] {
     display: none; }
+
+.pet-list {
+  display: flex;
+  flex-direction: column; }
+  .pet-list__item {
+    border: 1px rgba(0, 0, 0, 0.05) solid;
+    padding: 5px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
+  .pet-list__avatar img {
+    width: 70px;
+    object-fit: contain; }
 
 .bonus-history-table {
   display: flex;

@@ -11,7 +11,9 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property int $user_id
+ * @property int $status_id
  * @property string $name
+ * @property string $avatar
  * @property string $sex_id
  * @property int $animal_id
  * @property string|null $birthday
@@ -23,14 +25,17 @@ class Pets extends \yii\db\ActiveRecord
     const SEX_MALE = 1;
     const SEX_FEMALE = 2;
 
+    const STATUS_OFF = 0;
+    const STATUS_ON = 1;
+
     public function behaviors()
     {
         return [
             TimestampBehavior::className(),
             [
                 'class' => UploadBehavior::class,
-                'attribute' => 'image',
-                'scenarios' => ['avatar'],
+                'attribute' => 'avatar',
+                'scenarios' => ['default'],
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/',
             ],
@@ -48,9 +53,16 @@ class Pets extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['user_id'], 'default', 'value' => self::STATUS_ON],
+
+            [['status_id'], 'default', 'value' => Yii::$app->user->identity->id],
+
             [['user_id', 'name', 'animal_id'], 'required'],
+
             [['user_id', 'animal_id', 'created_at', 'updated_at', 'sex_id'], 'integer'],
+
             [['name', 'birthday'], 'string', 'max' => 255],
+
             [['avatar'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
     }
@@ -59,13 +71,20 @@ class Pets extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'status_id' => 'ID статуса',
             'user_id' => 'ID владельца',
             'name' => 'Имя',
             'animal_id' => 'ID Вида животного',
             'birthday' => 'День рождения',
+            'avatar' => 'Фото питомца',
             'sex_id' => 'Пол питомца',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function hasOwner()
+    {
+        return Yii::$app->user->id === $this->user_id;
     }
 }

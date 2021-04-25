@@ -8,6 +8,10 @@
     background: transparent;
     border: 1px rgba(0, 0, 0, 0.21) solid;
     outline: none !important;
+
+    @media (max-width: 450px) {
+      margin: 10px 0 !important;
+    }
   }
 }
 

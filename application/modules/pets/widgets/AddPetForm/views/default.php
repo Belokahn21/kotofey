@@ -4,10 +4,15 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\pets\models\entity\Animal;
+use app\modules\pets\models\helpers\PetsHelper;
 
-/*  @var $petModel \app\modules\pets\models\entity\Pets
+/* @var $petModel \app\modules\pets\models\entity\Pets
  * @var $animals \app\modules\pets\models\entity\Animal[]
+ * @var $this \yii\web\View
+ * @var $action string
  */
+
+
 ?>
 <div class="authModal modal fade" id="newPetModal" tabindex="-1" role="dialog" aria-labelledby="newPetModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -19,7 +24,9 @@ use app\modules\pets\models\entity\Animal;
                     </div>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                 </div>
-                <?php $form = ActiveForm::begin(); ?>
+                <?php $form = ActiveForm::begin([
+                    'action' => $action
+                ]); ?>
                 <div class="modal-body">
                     <div class="site-form__item">
                         <div class="select-pet">
@@ -58,10 +65,10 @@ LIST;
                             </div>
 
                             <div class="site-form__item">
-                                <label class="site-form__label" for="site-form-pet-birthday">День рождения питомца</label>
-                                <?= $form->field($petModel, 'birthday')->dropDownList($petModel->getSexes(), [
+                                <label class="site-form__label" for="site-form-pet-sex">Пол вашег питомца</label>
+                                <?= $form->field($petModel, 'sex_id')->dropDownList($petModel->getSexes(), [
                                     'class' => 'site-form__input',
-                                    'id' => 'site-form-pet-birthday',
+                                    'id' => 'site-form-pet-sex',
                                     'prompt' => 'Пол вашего питомца',
                                 ])->label(false); ?>
                             </div>
@@ -69,10 +76,9 @@ LIST;
                         <div class="site-form__side">
 
 
-
                             <div class="site-form__item">
                                 <label class="site-form__label noUpload" for="site-form-pet-avatar"></label>
-                                <?= $form->field($petModel, 'birthday')->fileInput([
+                                <?= $form->field($petModel, 'avatar')->fileInput([
                                     'class' => 'site-form__input',
                                     'id' => 'site-form-pet-avatar',
                                     'prompt' => 'Пол вашего питомца',
@@ -93,5 +99,7 @@ LIST;
 </div>
 <div class="profile__inline-group">
     <h2 class="page__title">Ваши питомцы</h2>
-    <button class="profile-pet__add" type="button" data-toggle="modal" data-target="#newPetModal">Добавить</button>
+    <?php if (!PetsHelper::isOverLimit(Yii::$app->user->id)): ?>
+        <button class="profile-pet__add" type="button" data-toggle="modal" data-target="#newPetModal">Добавить</button>
+    <?php endif ?>
 </div>

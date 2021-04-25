@@ -22,6 +22,7 @@ use app\modules\user\models\helpers\UserHelper;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\pets\widgets\PetList\PetListWidget;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\user\models\helpers\UserBillingHelper;
 use app\modules\pets\widgets\AddPetForm\AddPetFormWidget;
@@ -77,47 +78,50 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                     <h2 class="page__title">Настройки пользователя</h2>
                     <?php $form = ActiveForm::begin([
                         'options' => [
-                            'class' => 'site-form profile-form'
+                            'class' => 'site-form profile-form',
+                            'style' => 'padding:0;'
                         ]
                     ]); ?>
-                    <div class="page__left">
-                        <div class="site-form__item">
-                            <?= Html::label('Адрес вашей электронной почты', 'site-form-email', ['class' => 'site-form__label']) ?>
-                            <?= $form->field($model, 'email')->textInput(['id' => 'site-form-email', 'class' => 'site-form__input'])->label(false); ?>
-                        </div>
-                        <div class="site-form__item">
-                            <?= Html::label('Ваш пол', 'site-form-sex', ['class' => 'site-form__label']) ?>
-                            <?= $form->field($model, 'sex')->dropDownList(ArrayHelper::map($sexList, 'id', 'name'), ['prompt' => 'Указать пол'])->label(false); ?>
-                        </div>
-                        <div class="site-form__item">
-                            <?= Html::label('Фамилия', 'site-form-first_name', ['class' => 'site-form__label']) ?>
-                            <?= $form->field($model, 'first_name')->textInput(['value' => Yii::$app->user->identity->first_name, 'class' => 'site-form__input'])->label(false); ?>
-                        </div>
-                        <div class="site-form__item">
-                            <?= Html::label('Имя', 'site-form-name', ['id' => 'site-form-name', 'class' => 'site-form__label']) ?>
-                            <?= $form->field($model, 'sex')->textInput(['id' => 'site-form-name', 'value' => Yii::$app->user->identity->name, 'class' => 'site-form__input'])->label(false); ?>
-                        </div>
-                        <div class="site-form__item">
-                            <?= Html::label('Отчество', 'site-form-surname', ['class' => 'site-form__label']) ?>
-                            <?= $form->field($model, 'sex')->textInput(['id' => 'site-form-surname', 'value' => Yii::$app->user->identity->last_name, 'class' => 'site-form__input'])->label(false); ?>
-                        </div>
-                        <?php /*
+                    <div class="page__group-row">
+                        <div class="page__left">
+                            <div class="site-form__item">
+                                <?= Html::label('Адрес вашей электронной почты', 'site-form-email', ['class' => 'site-form__label']) ?>
+                                <?= $form->field($model, 'email')->textInput(['id' => 'site-form-email', 'class' => 'site-form__input'])->label(false); ?>
+                            </div>
+                            <div class="site-form__item">
+                                <?= Html::label('Ваш пол', 'site-form-sex', ['class' => 'site-form__label']) ?>
+                                <?= $form->field($model, 'sex')->dropDownList(ArrayHelper::map($sexList, 'id', 'name'), ['prompt' => 'Указать пол'])->label(false); ?>
+                            </div>
+                            <div class="site-form__item">
+                                <?= Html::label('Фамилия', 'site-form-first_name', ['class' => 'site-form__label']) ?>
+                                <?= $form->field($model, 'first_name')->textInput(['value' => Yii::$app->user->identity->first_name, 'class' => 'site-form__input'])->label(false); ?>
+                            </div>
+                            <div class="site-form__item">
+                                <?= Html::label('Имя', 'site-form-name', ['id' => 'site-form-name', 'class' => 'site-form__label']) ?>
+                                <?= $form->field($model, 'sex')->textInput(['id' => 'site-form-name', 'value' => Yii::$app->user->identity->name, 'class' => 'site-form__input'])->label(false); ?>
+                            </div>
+                            <div class="site-form__item">
+                                <?= Html::label('Отчество', 'site-form-surname', ['class' => 'site-form__label']) ?>
+                                <?= $form->field($model, 'sex')->textInput(['id' => 'site-form-surname', 'value' => Yii::$app->user->identity->last_name, 'class' => 'site-form__input'])->label(false); ?>
+                            </div>
+                            <?php /*
                         <div class="site-form__item">
                             <label class="site-form__label" for="site-form-password">Новый пароль</label>
                             <input class="site-form__input" id="site-form-password" type="password" placeholder="Пароль">
                         </div>*/ ?>
-                        <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
-                    </div>
-                    <div class="page__right">
-                        <div class="profile-avatar">
-                            <label for="site-form-avatar">
-                                <?php if ($model->avatar): ?>
-                                    <img class="profile-avatar__image" src="<?= UserHelper::getAvatar($model); ?>" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
-                                <?php else: ?>
-                                    <img class="profile-avatar__image" src="/upload/images/not-image.png" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
-                                <?php endif; ?>
-                            </label>
-                            <?= $form->field($model, 'avatar')->fileInput(['id' => 'site-form-avatar', 'class' => 'site-form__input'])->label(false); ?>
+                            <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
+                        </div>
+                        <div class="page__right">
+                            <div class="profile-avatar">
+                                <label for="site-form-avatar">
+                                    <?php if ($model->avatar): ?>
+                                        <img class="profile-avatar__image" src="<?= UserHelper::getAvatar($model); ?>" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
+                                    <?php else: ?>
+                                        <img class="profile-avatar__image" src="/upload/images/not-image.png" alt="Аватар пользователя <?= $model->name; ?>" title="Аватар пользователя <?= $model->name; ?>">
+                                    <?php endif; ?>
+                                </label>
+                                <?= $form->field($model, 'avatar')->fileInput(['id' => 'site-form-avatar', 'class' => 'site-form__input'])->label(false); ?>
+                            </div>
                         </div>
                     </div>
                     <?php ActiveForm::end(); ?>
@@ -175,6 +179,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                 </div>
                 <div class="tab-pane fade" id="pet">
                     <?= AddPetFormWidget::widget(); ?>
+                    <?= PetListWidget::widget(); ?>
                 </div>
                 <div class="tab-pane fade" id="bonus">
                     <div class="d-flex flex-row align-items-center">

@@ -1,0 +1,21 @@
+.pet-list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    border: 1px rgba(0, 0, 0, 0.05) solid;
+    padding: 5px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__avatar {
+    img {
+      width: 70px;
+      object-fit: contain;
+    }
+  }
+}
