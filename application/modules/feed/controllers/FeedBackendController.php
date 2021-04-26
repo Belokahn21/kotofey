@@ -4,13 +4,11 @@ namespace app\modules\feed\controllers;
 
 use app\modules\feed\models\forms\ModifyProductForm;
 use app\modules\feed\models\forms\SearchProductForm;
+use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
-use yii\web\Controller;
 
-class FeedController extends Controller
+class FeedBackendController extends MainBackendController
 {
-    public $layout = '@app/views/layouts/admin';
-
     public function actionIndex()
     {
         $products = array();

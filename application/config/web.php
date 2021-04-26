@@ -325,6 +325,9 @@ $config = [
         'reviews' => [
             'class' => 'app\modules\reviews\Module',
         ],
+        'mailer' => [
+            'class' => 'app\modules\mailer\Module',
+        ],
     ],
     'params' => $params,
 ];
