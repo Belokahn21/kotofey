@@ -1,25 +1,22 @@
 <?php
 
+namespace app\modules\mailer\models\search;
 
-namespace app\modules\menu\models\search;
-
-
-use app\modules\menu\models\entity\Menu;
+use app\modules\mailer\models\entity\MailTemplates;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class MenuSearchForm extends Menu
+class MailTemplatesSearch extends MailTemplates
 {
     public static function tableName()
     {
-        return Menu::tableName();
+        return MailTemplates::tableName();
     }
 
     public function rules()
     {
         return [
             [['name'], 'string'],
-            [['is_active'], 'boolean'],
         ];
     }
 
@@ -30,7 +27,7 @@ class MenuSearchForm extends Menu
 
     public function search($params)
     {
-        $query = Menu::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = MailTemplates::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -40,8 +37,7 @@ class MenuSearchForm extends Menu
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['is_active' => $this->is_active]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
 
         return $dataProvider;
     }
