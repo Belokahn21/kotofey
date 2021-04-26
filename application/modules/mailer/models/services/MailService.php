@@ -10,7 +10,7 @@ use app\modules\order\models\entity\OrdersItems;
 
 class MailService
 {
-    public function sendEvent(int $event_id)
+    public function sendEvent(int $event_id, $params = [])
     {
         if (!$event = MailEvents::findOne($event_id)) throw new \Exception("События с ID = $event_id не существует");
 
