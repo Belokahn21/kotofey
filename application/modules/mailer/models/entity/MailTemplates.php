@@ -11,6 +11,8 @@ use Yii;
  * @property int|null $is_active
  * @property int|null $sort
  * @property string $name
+ * @property string|null $to
+ * @property string|null $from
  * @property string $code
  * @property string|null $text
  * @property string|null $event_id
@@ -19,31 +21,17 @@ use Yii;
  */
 class MailTemplates extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'mail_templates';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
             [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
             [['name', 'code'], 'required'],
             [['text', 'event_id'], 'string'],
-            [['name'], 'string', 'max' => 128],
+            [['name', 'to', 'from'], 'string', 'max' => 128],
             [['code'], 'string', 'max' => 255],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -51,6 +39,8 @@ class MailTemplates extends \yii\db\ActiveRecord
             'is_active' => 'Is Active',
             'sort' => 'Sort',
             'name' => 'Name',
+            'to' => 'To',
+            'from' => 'From',
             'code' => 'Code',
             'text' => 'Text',
             'event_id' => 'Event ID',
