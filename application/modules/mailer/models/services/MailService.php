@@ -3,6 +3,7 @@
 
 namespace app\modules\mailer\models\services;
 
+use app\modules\site\models\tools\System;
 use Yii;
 use app\modules\mailer\models\entity\MailEvents;
 use app\modules\mailer\models\entity\MailTemplates;
@@ -19,6 +20,10 @@ class MailService
         foreach ($messages as $message) {
             $result = Yii::$app->mailer->compose();
             $result->setHtmlBody($message->text);
+            $result->setFrom([$message->from => System::domain()]);
+            $result->setTo($message->to);
+            $result->setSubject($message->name);
+            $result->send();
 
 //                ->setFrom([Yii::$app->params['email']['sale'] => 'kotofey.store'])
 //                ->setTo($order->email)
