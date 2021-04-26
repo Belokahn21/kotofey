@@ -3,9 +3,9 @@
 namespace app\modules\acquiring\controllers;
 
 use app\modules\order\models\entity\Order;
-use app\modules\payment\models\services\equiring\banks\Sberbank;
-use app\modules\payment\models\services\equiring\AcquiringTerminalService;
-use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
+use app\modules\payment\models\services\acquiring\banks\Sberbank;
+use app\modules\payment\models\services\acquiring\AcquiringTerminalService;
+use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
 use yii\rest\ActiveController;
 
 class RestController extends ActiveController

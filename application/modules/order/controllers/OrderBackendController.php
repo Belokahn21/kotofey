@@ -4,9 +4,9 @@ namespace app\modules\order\controllers;
 
 use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\logger\models\service\LogService;
-use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
-use app\modules\payment\models\services\equiring\banks\Sberbank;
-use app\modules\payment\models\services\equiring\AcquiringTerminalService;
+use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
+use app\modules\payment\models\services\acquiring\banks\Sberbank;
+use app\modules\payment\models\services\acquiring\AcquiringTerminalService;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\System;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;

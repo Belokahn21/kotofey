@@ -5,9 +5,9 @@ namespace app\modules\acquiring\models\forms;
 
 
 use app\modules\acquiring\models\entity\AcquiringOrder;
-use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
-use app\modules\payment\models\services\equiring\banks\Sberbank;
-use app\modules\payment\models\services\equiring\AcquiringTerminalService;
+use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
+use app\modules\payment\models\services\acquiring\banks\Sberbank;
+use app\modules\payment\models\services\acquiring\AcquiringTerminalService;
 use yii\base\Model;
 
 class AcquiringForm extends Model

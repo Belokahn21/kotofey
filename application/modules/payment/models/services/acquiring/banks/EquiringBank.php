@@ -1,10 +1,10 @@
 <?php
 
 
-namespace app\modules\payment\models\services\equiring\banks;
+namespace app\modules\payment\models\services\acquiring\banks;
 
 
-use app\modules\payment\models\services\equiring\auth\SberbankAuth;
+use app\modules\payment\models\services\acquiring\auth\SberbankAuth;
 
 interface EquiringBank
 {

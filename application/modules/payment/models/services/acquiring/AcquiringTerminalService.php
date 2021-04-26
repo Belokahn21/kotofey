@@ -1,13 +1,13 @@
 <?php
 
 
-namespace app\modules\payment\models\services\equiring;
+namespace app\modules\payment\models\services\acquiring;
 
 
 use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\payment\models\services\equiring\banks\EquiringBank;
+use app\modules\payment\models\services\acquiring\banks\EquiringBank;
 use app\modules\site\models\tools\Curl;
 use app\modules\site\models\tools\System;
 use yii\helpers\Json;

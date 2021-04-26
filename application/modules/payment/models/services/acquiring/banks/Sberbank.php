@@ -1,12 +1,12 @@
 <?php
 
 
-namespace app\modules\payment\models\services\equiring\banks;
+namespace app\modules\payment\models\services\acquiring\banks;
 
 
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\payment\models\services\equiring\auth\SberbankAuth;
+use app\modules\payment\models\services\acquiring\auth\SberbankAuth;
 use app\modules\site\models\tools\Curl;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;

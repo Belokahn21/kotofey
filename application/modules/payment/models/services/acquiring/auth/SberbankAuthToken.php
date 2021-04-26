@@ -1,10 +1,10 @@
 <?php
 
 
-namespace app\modules\payment\models\services\equiring\auth;
+namespace app\modules\payment\models\services\acquiring\auth;
 
 
-use app\modules\payment\models\services\equiring\auth\SberbankAuth;
+use app\modules\payment\models\services\acquiring\auth\SberbankAuth;
 
 class SberbankAuthToken implements SberbankAuth
 {
