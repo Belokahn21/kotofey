@@ -1,24 +1,26 @@
 <?php
 
-namespace app\modules\stock\models\search;
+
+namespace app\modules\subscribe\models\search;
 
 
 use app\modules\stock\models\entity\Stocks;
+use app\modules\subscribe\models\entity\Subscribes;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class StockSearchForm extends Stocks
+class SubscribesSearch extends Subscribes
 {
     public static function tableName()
     {
-        return Stocks::tableName();
+        return Subscribes::tableName();
     }
 
     public function rules()
     {
         return [
             [['id'], 'integer'],
-            [['name'], 'string'],
+            [['email'], 'string'],
         ];
     }
 
@@ -29,7 +31,7 @@ class StockSearchForm extends Stocks
 
     public function search($params)
     {
-        $query = Stocks::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = Subscribes::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -40,7 +42,7 @@ class StockSearchForm extends Stocks
         }
 
         $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name]);
+            ->andFilterWhere(['like', 'email', $this->email]);
 
         return $dataProvider;
     }

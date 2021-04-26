@@ -2,23 +2,28 @@
 
 namespace app\modules\subscribe;
 
-/**
- * subscribe module definition class
- */
-class Module extends \yii\base\Module
-{
-    /**
-     * {@inheritdoc}
-     */
-    public $controllerNamespace = 'app\modules\subscribe\controllers';
+use app\modules\site\MainModule;
+use yii\helpers\Url;
 
-    /**
-     * {@inheritdoc}
-     */
+class Module extends MainModule
+{
+    public $controllerNamespace = 'app\modules\subscribe\controllers';
+    private $name = 'Подписки';
+
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Подписки', 'url' => Url::to(['/admin/subscribe/subscribe-backend/index']),],
+        ];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

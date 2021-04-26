@@ -4,7 +4,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-/* @var $model \app\modules\subscribe\models\entity\Subscribe */
+/* @var $model \app\modules\subscribe\models\entity\Subscribes */
 
 ?>
 <?php $form = ActiveForm::begin([

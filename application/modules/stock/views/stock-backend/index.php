@@ -50,6 +50,16 @@ use yii\helpers\Url;
             },
         ],
         [
+            'attribute' => 'created_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+            'options' => ['width' => '200']
+        ],
+        [
+            'attribute' => 'updated_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+            'options' => ['width' => '200']
+        ],
+        [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {

@@ -2,7 +2,7 @@
 
 namespace app\modules\subscribe\controllers;
 
-use app\modules\subscribe\models\entity\Subscribe;
+use app\modules\subscribe\models\entity\Subscribes;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 
@@ -10,7 +10,7 @@ class SubscribeController extends Controller
 {
 	public function actionCreate()
 	{
-		$model = new Subscribe();
+		$model = new Subscribes();
 		if (\Yii::$app->request->isPost) {
 			if ($model->load(\Yii::$app->request->post())) {
 				if ($model->validate()) {

@@ -3,7 +3,7 @@
 namespace app\modules\subscribe\widgets\subscribe;
 
 
-use app\modules\subscribe\models\entity\Subscribe;
+use app\modules\subscribe\models\entity\Subscribes;
 use yii\base\Widget;
 
 class SubscribeWidget extends Widget
@@ -12,7 +12,7 @@ class SubscribeWidget extends Widget
 
 	public function run()
 	{
-		$model = new Subscribe();
+		$model = new Subscribes();
 
 		return $this->render($this->view, [
 			'model' => $model
