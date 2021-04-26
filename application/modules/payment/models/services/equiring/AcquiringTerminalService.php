@@ -9,12 +9,11 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\payment\models\services\equiring\banks\EquiringBank;
 use app\modules\site\models\tools\Curl;
-use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\System;
 use yii\helpers\Json;
 use yii\helpers\Url;
 
-class EquiringTerminalService
+class AcquiringTerminalService
 {
     private $bank;
     private $paramRequest = array();

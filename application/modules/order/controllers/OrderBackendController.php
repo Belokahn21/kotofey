@@ -6,7 +6,7 @@ use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\logger\models\service\LogService;
 use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
-use app\modules\payment\models\services\equiring\EquiringTerminalService;
+use app\modules\payment\models\services\equiring\AcquiringTerminalService;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\System;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
@@ -374,7 +374,7 @@ class OrderBackendController extends MainBackendController
 
         if ($module->mode == 'off') throw new \Exception('В настройках сайта отключена работа Эквайринга, измените значение mode_acquiring в настройках сайта.');
 
-        $terminal = new EquiringTerminalService(new Sberbank(new SberbankAuthBasic($login, $password)));
+        $terminal = new AcquiringTerminalService(new Sberbank(new SberbankAuthBasic($login, $password)));
         $result = $terminal->createOrder($order);
 
         try {

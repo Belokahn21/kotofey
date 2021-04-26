@@ -7,7 +7,7 @@ use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\order\models\entity\Order;
 use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
-use app\modules\payment\models\services\equiring\EquiringTerminalService;
+use app\modules\payment\models\services\equiring\AcquiringTerminalService;
 
 class AcquiringHelper
 {

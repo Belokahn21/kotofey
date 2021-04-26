@@ -7,7 +7,7 @@ namespace app\modules\acquiring\models\forms;
 use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\payment\models\services\equiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\equiring\banks\Sberbank;
-use app\modules\payment\models\services\equiring\EquiringTerminalService;
+use app\modules\payment\models\services\equiring\AcquiringTerminalService;
 use yii\base\Model;
 
 class AcquiringForm extends Model
@@ -51,7 +51,7 @@ class AcquiringForm extends Model
 
         $bank = new Sberbank(new SberbankAuthBasic(\Yii::$app->params['acquiring']['sberbank']['login'], \Yii::$app->params['acquiring']['sberbank']['password']));
 
-        $terminal = new EquiringTerminalService($bank);
+        $terminal = new AcquiringTerminalService($bank);
         $model = AcquiringOrder::findOne($this->transaction_id);
 
 
