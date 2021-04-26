@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\catalog\widgets\CatalogSliders\many_purchase;
+namespace app\modules\catalog\widgets\CatalogSliders\ManyPurchase;
 
 use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
@@ -39,6 +39,6 @@ class ManyPurchasedGoods extends Widget
 
         if (!$models) return false;
 
-        return RenderSliderWidget::widget(['models' => $models, 'title' => 'Выбор покупателей']);
+        return RenderSliderWidget::widget(['models' => $models, 'title' => 'Выбор покупателей', 'view' => $this->view]);
     }
 }

@@ -7,7 +7,7 @@
 use app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget;
 use app\modules\catalog\widgets\CatalogSliders\LastWeekProducts\LastWeekProducts;
 use app\modules\catalog\widgets\CatalogSliders\DiscountItems\DiscountItemsWidget;
-use app\modules\catalog\widgets\CatalogSliders\many_purchase\ManyPurchasedGoods;
+use app\modules\catalog\widgets\CatalogSliders\ManyPurchase\ManyPurchasedGoods;
 use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
 use app\modules\search\widges\FastButtonSearch\FastButtonSearchWidget;
 use app\modules\content\widgets\informers_slider\InformerSliderWidget;
@@ -24,6 +24,9 @@ $this->title = Title::show("Зоотовары для животных в Бар
     <?= DiscountItemsWidget::widget(); ?>
     <?= InformerSliderWidget::widget(); ?>
     <?= ManyPurchasedGoods::widget(); ?>
+    <?php if (Yii::$app->user->id == 1): ?>
+        <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
+    <?php endif; ?>
     <div class="page-title__group">
         <h2 class="page-title">Интернет магазин для животных</h2><a class="page-title__link" href="/about/">Читать дальше</a>
     </div>

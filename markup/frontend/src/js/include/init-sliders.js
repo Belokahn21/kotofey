@@ -197,6 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
             delay: 5000,
         },
     });
+
     let aboutSliderContainer = new Swiper('.about-swiper-container', {
         pagination: {
             el: '.about-swiper-pagination',
@@ -204,25 +205,23 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     });
 
+    let mainSteamSlider = new Swiper('.steam-slider-container');
 
 
-
-
-
-    var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
-        slidesPerView: 4,
-        freeMode: true,
-        watchSlidesVisibility: true,
-        watchSlidesProgress: true,
-    });
-    var steamGalleryTop = new Swiper('.steam-slider-top-container', {
-        spaceBetween: 10,
-        navigation: {
-            nextEl: '.swiper-button-next',
-            prevEl: '.swiper-button-prev',
-        },
-        thumbs: {
-            swiper: steamGalleryThumbs
-        }
-    });
+    // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
+    //     slidesPerView: 4,
+    //     freeMode: true,
+    //     watchSlidesVisibility: true,
+    //     watchSlidesProgress: true,
+    // });
+    // var steamGalleryTop = new Swiper('.steam-slider-top-container', {
+    //     spaceBetween: 10,
+    //     navigation: {
+    //         nextEl: '.swiper-button-next',
+    //         prevEl: '.swiper-button-prev',
+    //     },
+    //     thumbs: {
+    //         swiper: steamGalleryThumbs
+    //     }
+    // });
 });

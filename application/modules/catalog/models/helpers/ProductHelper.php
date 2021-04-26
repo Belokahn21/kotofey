@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\helpers;
 
 use Yii;
+use yii\helpers\Json;
 use yii\helpers\Url;
 use app\modules\site\models\tools\System;
 use app\modules\media\models\entity\Media;
@@ -70,6 +71,12 @@ class ProductHelper
         $model->discount_price = $model->price - round($model->price * ($prcent / 100));
     }
 
+
+    public static function applyMarkup(Product &$model, $markup)
+    {
+        $model->price = round($model->purchase + $model->purchase / 100 * $markup);
+    }
+
     public static function purchaseVirtual(array $products)
     {
         $out = 0;
@@ -135,5 +142,16 @@ class ProductHelper
         if ($isFull) return System::fullDomain() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
 
         return Url::to(['/catalog/product/view', 'id' => $model->slug]);
+    }
+
+    public static function getGalleryImages(Product $model)
+    {
+        $out = [];
+        if ($model->images) {
+            foreach (Json::decode($model->images) as $image) {
+                $out[] = $image;
+            }
+        }
+        return $out;
     }
 }
