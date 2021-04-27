@@ -130,7 +130,7 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине'];
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Фактический адрес <span>г.Барнаул, ул. Северо-Западная, 6Б</span>
+                Фактический адрес <span><?= SiteSettings::getValueByCode('address_1'); ?></span>
             </li>
         </ul>
     </div>
