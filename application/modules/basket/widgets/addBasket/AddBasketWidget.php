@@ -15,6 +15,7 @@ class AddBasketWidget extends Widget
     public $product;
     public $count = 1;
     public $price;
+    public $discount_price;
     public $discount = false;
     public $view = 'default';
     public $showOrderButton = false;
@@ -40,6 +41,7 @@ class AddBasketWidget extends Widget
             'product_id' => $this->product->id,
             'count' => $this->count,
             'price' => $this->price,
+            'discount_price' => $this->discount_price,
             'showButton' => $this->showButton,
             'showInfo' => $this->showInfo,
             'showControl' => $this->showControl,

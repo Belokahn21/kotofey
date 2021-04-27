@@ -34,6 +34,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+    var steamSliderContainer = new Swiper('.steam-slider-container');
+
+
 //     let bonusInput = document.querySelector('#order-bonus');
 // // let bonusInput = document.querySelector('#js-bonus-input');
 //     let object = $(".js-select-user-bonus");

@@ -55,6 +55,7 @@ class ProductSearchForm extends Product
 //        }
 
         $query->andFilterWhere([
+            'id' => $this->id,
             'category_id' => $this->category_id,
             'status_id' => $this->status_id,
             'article' => $this->article,

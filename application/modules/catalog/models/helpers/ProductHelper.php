@@ -18,11 +18,11 @@ class ProductHelper
         $cookies = Yii::$app->response->cookies;
 
         $items = self::getAllVisitedItems();
-        array_push($items, $product_id);
+        $items[] = $product_id;
 
         $cookies->add(new \yii\web\Cookie([
             'name' => self::COOKIE_VISITED_KEY,
-            'value' => array_reverse($items),
+            'value' => $items,
         ]));
     }
 

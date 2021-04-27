@@ -15,13 +15,17 @@ class VisitedProductsWidget extends Widget
 
     public function run()
     {
-        $products = Product::find()->andWhere(['id' => ProductHelper::getAllVisitedItems()]);
+        $visitedIDs = ProductHelper::getAllVisitedItems();
+        $params = [];
+        foreach ($visitedIDs as $i => $recipeId) $params[':id_' . $i] = $recipeId;
 
+        $products = Product::find()
+            ->where(['in', 'id', $visitedIDs])
+            ->orderBy([new \yii\db\Expression('FIELD (id, ' . implode(',', array_reverse(array_keys($params))) . ')')])
+            ->addParams($params)
+            ->limit($this->limit)
+            ->all();
 
-        if ($this->limit) $products->limit($this->limit);
-
-
-        $products = $products->all();
         return $this->render($this->view, [
             'products' => $products
         ]);

@@ -8,6 +8,7 @@ use app\modules\bonus\models\entity\UserBonusHistory;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\helper\UserBonusHistoryHelper;
 use app\modules\order\models\entity\Order;
+use app\modules\order\models\helpers\OrderHelper;
 
 class BonusService
 {
@@ -18,7 +19,8 @@ class BonusService
         if (!$module->getEnable()) return false;
 
         // Проверить что нет промокода. Запрещено начислять бонусы при наличии промокода
-        if ($order->promocode || !$order->is_paid || !$order->is_close) return false;
+        // Так же запрещено начислять бонусы заказм, в которых есть товары со скидкой
+        if ($order->promocode || !$order->is_paid || !$order->is_close || OrderHelper::containItemsWithDiscountPrice($order)) return false;
 
         // Проверить что нет предыдущих записей о начислениях
         $oldHistoryElement = UserBonusHistory::findOneByOrder($order);

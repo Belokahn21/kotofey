@@ -7,6 +7,7 @@ use app\modules\site\models\tools\Currency;
 /* @var $product_id integer
  * @var $showButton boolean
  * @var $price integer
+ * @var $discount_price integer
  * @var $discount integer
  * @var $showInfo boolean
  * @var $showControl boolean
@@ -24,7 +25,14 @@ use app\modules\site\models\tools\Currency;
                 <meta itemprop="price" content="<?= $price ?>">
                 <meta itemprop="priceCurrency" content="RUB">
                 <link itemprop="availability" href="http://schema.org/InStock">
-                <div class="product-calc__price-group-price"><?= Price::format($price); ?></div>
+                <div class="product-calc__discount-unit">
+                    <?php if ($discount_price): ?>
+                        <div class="product-calc__price-group-price __old"><?= Price::format($price); ?></div>
+                        <div class="product-calc__price-group-price __discount"><?= Price::format($discount_price); ?></div>
+                    <?php else: ?>
+                        <div class="product-calc__price-group-price"><?= Price::format($price); ?></div>
+                    <?php endif; ?>
+                </div>
                 <div class="product-calc__price-group-char-val">шт</div>
                 <div class="product-calc__price-group-char-equal">=</div>
                 <div class="product-calc__price-group-summary js-product-calc-summary">

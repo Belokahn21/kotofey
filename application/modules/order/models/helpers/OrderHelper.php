@@ -16,6 +16,15 @@ use yii\helpers\ArrayHelper;
 
 class OrderHelper
 {
+    public static function containItemsWithDiscountPrice(Order $order)
+    {
+        foreach ($order->items as $item) {
+            if ($item->discount_price) return true;
+        }
+
+        return false;
+    }
+
     public static function isEmptyItem(OrdersItems $item)
     {
         return empty($item->name) && empty($item->price) && empty($item->count);
