@@ -7,7 +7,6 @@ use app\modules\site\models\tools\System;
 use Yii;
 use app\modules\mailer\models\entity\MailEvents;
 use app\modules\mailer\models\entity\MailTemplates;
-use app\modules\order\models\entity\OrdersItems;
 
 class MailService
 {
@@ -24,11 +23,6 @@ class MailService
             $result->setTo($message->to);
             $result->setSubject($message->name);
             $result->send();
-
-//                ->setFrom([Yii::$app->params['email']['sale'] => 'kotofey.store'])
-//                ->setTo($order->email)
-//                ->setSubject('Квитанция о покупке - спасибо, что вы с нами!')
-//                ->send();
         }
     }
 }
