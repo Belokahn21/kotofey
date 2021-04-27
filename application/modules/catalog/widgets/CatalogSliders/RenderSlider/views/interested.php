@@ -19,8 +19,12 @@ use app\modules\catalog\models\helpers\ProductHelper;
                             <div class="steam-slider-card__title"><?= $model->name; ?></div>
                             <div class="steam-slider-images">
                                 <?php if ($model->images): ?>
+                                    <?php $count = 1; ?>
                                     <?php foreach (\yii\helpers\Json::decode($model->images) as $image): ?>
-                                        <div class="steam-slider-images__item"><img src="<?= $image; ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>"/></div>
+                                        <?php if ($count <= 4): ?>
+                                            <div class="steam-slider-images__item"><img src="<?= $image; ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>"/></div>
+                                        <?php endif; ?>
+                                        <?php $count++; ?>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
