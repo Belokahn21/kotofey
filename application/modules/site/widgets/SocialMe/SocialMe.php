@@ -27,7 +27,8 @@ class SocialMe extends Widget
             ],
             [
                 'image' => '/images/whatsapp.png',
-                'url' => 'whatsapp://send?phone=' . SiteSettings::getValueByCode('phone_1'),
+                'url' => 'whatsapp://send?phone=+79967026637',
+//                'url' => 'whatsapp://send?phone=' . SiteSettings::getValueByCode('phone_1'),
             ],
         ];
         return $this->render($this->view, [

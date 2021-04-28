@@ -424,4 +424,11 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(PropertiesProductValues::className(), ['product_id' => 'id']);
     }
+
+    public function extraFields()
+    {
+        return [
+            'href' => ProductHelper::getDetailUrl($this)
+        ];
+    }
 }

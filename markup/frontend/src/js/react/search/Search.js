@@ -31,12 +31,8 @@ class Search extends Component {
             });
         } else {
             this.timeoutExt = setTimeout(() => {
-
-
-
                 let queryParam = '?ProductSearchForm[name]=';
-
-                RestRequest.all(config.restCatalog + queryParam + element.value).then(result => {
+                RestRequest.all(config.restCatalog + queryParam + element.value + '&expand=href').then(result => {
                     this.setState({
                         variants: result
                     });
