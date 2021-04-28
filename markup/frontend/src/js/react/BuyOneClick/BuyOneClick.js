@@ -4,6 +4,7 @@ import {Modal, Button} from 'react-bootstrap';
 import RestRequest from "../../tools/RestRequest";
 import config from '../../config';
 import HtmlHelper from "../checkout/html/HtmlHelper";
+import Inputmask from "maskedinput";
 
 class BuyOneClick extends React.Component {
     constructor(props) {
@@ -18,6 +19,11 @@ class BuyOneClick extends React.Component {
 
     componentDidMount() {
         this.loadProduct();
+        // let russsianPhone = document.querySelector(".js-mask-ru");
+        // if (russsianPhone) {
+        //     let im = new Inputmask("+7 (999) 999 99-99", {placeholder: "+7 (___) ___ __ __"});
+        //     im.mask(russsianPhone);
+        // }
     }
 
     loadProduct() {
@@ -79,12 +85,20 @@ class BuyOneClick extends React.Component {
         </form>;
     }
 
+    modalOnShow() {
+        let russsianPhone = document.querySelector(".js-mask-ru");
+        if (russsianPhone) {
+            let im = new Inputmask("+7 (999) 999 99-99", {placeholder: "+7 (___) ___ __ __"});
+            im.mask(russsianPhone);
+        }
+    }
+
     render() {
         const {show, product, order} = this.state;
         return <>
             <a className="one-click-buy" onClick={this.handleShow.bind(this)}><span>В один клик</span></a>
 
-            <Modal show={show} onHide={this.handleClose.bind(this)}>
+            <Modal show={show} onHide={this.handleClose.bind(this)} onShow={this.modalOnShow.bind(this)}>
                 <Modal.Header closeButton>
                     <Modal.Title>
                         <div>Купить в 1 клик</div>
