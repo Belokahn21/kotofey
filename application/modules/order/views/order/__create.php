@@ -213,9 +213,6 @@ LIST;
                                 </div>
                                 <?= AddBasketWidget::widget([
                                     'product' => $item->product,
-                                    'price' => $item->product ? $item->product->getPrice() : $item->price,
-//                                    'price' => $item->product ? ProductHelper::getResultPrice($item->product) : $item->price,
-                                    'discount' => $item->product->getDiscountPrice(),
                                     'showButton' => false,
                                     'showInfo' => false,
                                     'showOneClick' => false,

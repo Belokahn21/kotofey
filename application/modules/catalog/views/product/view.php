@@ -85,8 +85,6 @@ $this->title = ProductTitle::show($product->name);
                     'product' => $product,
                     'showOrderButton' => true,
                     'showOneClick' => true,
-                    'price' => $product->getPrice(),
-                    'discount_price' => $product->getDiscountPrice(),
                 ]); ?>
                 <?= WhenCanBuyWidget::widget([
                     'product' => $product

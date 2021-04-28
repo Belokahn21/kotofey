@@ -24,7 +24,6 @@ use yii\helpers\Url;
             <div class="catalog-line__to-cart">
                 <?= AddBasketWidget::widget([
                     'product' => $product,
-                    'price' => $product->getPrice(),
                     'showInfo' => false,
                     'showOneClick' => false,
                     'showControl' => true,
