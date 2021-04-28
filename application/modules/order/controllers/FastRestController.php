@@ -26,7 +26,7 @@ class FastRestController extends Controller
             return $response;
         }
 
-        if (!$product = Product::findOne($basketItem->id)) {
+        if (!$product = Product::findOne($basketItem->product_id)) {
             $response['status'] = 500;
             $response['errors'] = 'Такого товара не существует';
             return $response;
