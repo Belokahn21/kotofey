@@ -428,7 +428,9 @@ class Product extends \yii\db\ActiveRecord
     public function extraFields()
     {
         return [
-            'href' => ProductHelper::getDetailUrl($this)
+            'href' => function ($model) {
+                return ProductHelper::getDetailUrl($model);
+            }
         ];
     }
 }
