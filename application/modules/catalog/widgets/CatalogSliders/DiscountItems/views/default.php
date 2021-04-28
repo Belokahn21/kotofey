@@ -48,7 +48,6 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
                         </div>
                         <?= AddBasketWidget::widget([
                             'product' => $model,
-                            'price' => $model->getPrice(),
                             'showInfo' => false,
                             'showOneClick' => false,
                             'showControl' => false,

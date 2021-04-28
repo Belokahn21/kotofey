@@ -17,7 +17,6 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
     <div class="catalog-line__to-cart">
         <?= AddBasketWidget::widget([
             'product' => $product,
-            'price' => $product->getPrice(),
             'showInfo' => false,
             'showOneClick' => false,
             'showControl' => true,
