@@ -5357,18 +5357,20 @@ var BuyOneClick = /*#__PURE__*/function (_React$Component) {
   return BuyOneClick;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-var element = document.querySelector('.buy-one-click-react');
+var elements = document.querySelectorAll('.buy-one-click-react');
 
-if (element) {
-  var product_id = element.getAttribute('data-product-id');
+if (elements) {
+  elements.forEach(function (el) {
+    var product_id = el.getAttribute('data-product-id');
 
-  if (product_id) {
-    react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(BuyOneClick, {
-      product_id: product_id
-    }), element);
-  } else {
-    react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(BuyOneClick, null), element);
-  }
+    if (product_id) {
+      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(BuyOneClick, {
+        product_id: product_id
+      }), el);
+    } else {
+      react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(BuyOneClick, null), el);
+    }
+  });
 }
 
 /***/ }),

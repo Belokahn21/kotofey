@@ -86,13 +86,16 @@ class BuyOneClick extends React.Component {
 }
 
 
-let element = document.querySelector('.buy-one-click-react');
-if (element) {
+let elements = document.querySelectorAll('.buy-one-click-react');
+if (elements) {
 
-    let product_id = element.getAttribute('data-product-id');
-    if (product_id) {
-        ReactDom.render(<BuyOneClick product_id={product_id}/>, element);
-    } else {
-        ReactDom.render(<BuyOneClick/>, element);
-    }
+
+    elements.forEach(el => {
+        let product_id = el.getAttribute('data-product-id');
+        if (product_id) {
+            ReactDom.render(<BuyOneClick product_id={product_id}/>, el);
+        } else {
+            ReactDom.render(<BuyOneClick/>, el);
+        }
+    });
 }
