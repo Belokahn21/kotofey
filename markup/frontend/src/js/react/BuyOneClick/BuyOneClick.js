@@ -11,6 +11,7 @@ class BuyOneClick extends React.Component {
 
         this.state = {
             show: false,
+            order: null,
             product: {},
         };
     }
@@ -43,12 +44,43 @@ class BuyOneClick extends React.Component {
         RestRequest.post(config.restFastOrder, {
             body: new FormData(form)
         }).then(data => {
-            console.log(data);
+            if (parseInt(data.status) === 200) {
+                this.setState({order: data})
+            }
         });
     }
 
+    renderFinish() {
+        return <div className="buy-one-click__success">
+            Заказ успешно оформлен. В ближайшее время с вами свяжется оператор для уточнения деталей заказа. Спасибо за покупку!
+        </div>
+    }
+
+    renderForm() {
+        const {product} = this.state;
+        return <form className="buy-one-click-form" onSubmit={this.handleSubmitForm.bind(this)}>
+            <label className="checkout-form__label" htmlFor="">
+                <div className="checkout-form__label-text">Ваш номер телефона</div>
+                <input className="checkout-form__input js-mask-ru" name="Order[phone]" type="text" placeholder='Ваш номер телефона'/>
+            </label>
+
+            <label className="checkout-form__label" htmlFor="">
+                <div className="checkout-form__label-text">E-mail</div>
+                <input className="checkout-form__input" name="Order[email]" type="text" placeholder='Ваш электронный адрес'/>
+            </label>
+
+            <input className="checkout-form__input" name="OrdersItems[product_id]" type="hidden" value={product.id}/>
+            <input className="checkout-form__input" name="OrdersItems[count]" type="hidden" value="1"/>
+
+            <img alt={product.name} title={product.name} className="buy-one-click__image" src={product.imageUrl}/>
+
+
+            <button type="submit" className="btn-main">Сделать заказ</button>
+        </form>;
+    }
+
     render() {
-        const {show, product} = this.state;
+        const {show, product, order} = this.state;
         return <>
             <a className="one-click-buy" onClick={this.handleShow.bind(this)}><span>В один клик</span></a>
 
@@ -60,25 +92,9 @@ class BuyOneClick extends React.Component {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form className="buy-one-click-form" onSubmit={this.handleSubmitForm.bind(this)}>
-                        <label className="checkout-form__label" htmlFor="">
-                            <div className="checkout-form__label-text">Ваш номер телефона</div>
-                            <input className="checkout-form__input js-mask-ru" name="Order[phone]" type="text" placeholder='Ваш номер телефона'/>
-                        </label>
 
-                        <label className="checkout-form__label" htmlFor="">
-                            <div className="checkout-form__label-text">E-mail</div>
-                            <input className="checkout-form__input" name="Order[email]" type="text" placeholder='Ваш электронный адрес'/>
-                        </label>
+                    {order === null ? this.renderForm() : this.renderFinish()}
 
-                        <input className="checkout-form__input" name="OrderItems[product_id]" type="hidden" value={product.id}/>
-                        <input className="checkout-form__input" name="OrderItems[count]" type="hidden" value="1"/>
-
-                        <img alt={product.name} title={product.name} className="buy-one-click__image" src={product.imageUrl}/>
-
-
-                        <button type="submit" className="btn-main">Сделать заказ</button>
-                    </form>
                 </Modal.Body>
             </Modal>
         </>

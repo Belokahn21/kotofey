@@ -15388,6 +15388,13 @@ label[for="site-form-pet-avatar"] {
   color: grey;
   font-size: 14px; }
 
+.buy-one-click__success {
+  color: #ff1a4a;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase; }
+
 .buy-one-click__image {
   object-fit: contain;
   max-width: 210px;

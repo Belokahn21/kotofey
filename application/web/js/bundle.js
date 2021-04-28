@@ -5244,6 +5244,7 @@ var BuyOneClick = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       show: false,
+      order: null,
       product: {}
     };
     return _this;
@@ -5285,31 +5286,32 @@ var BuyOneClick = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmitForm",
     value: function handleSubmitForm(event) {
+      var _this3 = this;
+
       event.preventDefault();
       var form = event.target;
       _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.post(_config__WEBPACK_IMPORTED_MODULE_3__.default.restFastOrder, {
         body: new FormData(form)
       }).then(function (data) {
-        console.log(data);
+        if (parseInt(data.status) === 200) {
+          _this3.setState({
+            order: data
+          });
+        }
       });
     }
   }, {
-    key: "render",
-    value: function render() {
-      var _this$state = this.state,
-          show = _this$state.show,
-          product = _this$state.product;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        className: "one-click-buy",
-        onClick: this.handleShow.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "\u0412 \u043E\u0434\u0438\u043D \u043A\u043B\u0438\u043A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
-        show: show,
-        onHide: this.handleClose.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Header, {
-        closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u041A\u0443\u043F\u0438\u0442\u044C \u0432 1 \u043A\u043B\u0438\u043A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "buy-one-click__product-title"
-      }, product.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+    key: "renderFinish",
+    value: function renderFinish() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "buy-one-click__success"
+      }, "\u0417\u0430\u043A\u0430\u0437 \u0443\u0441\u043F\u0435\u0448\u043D\u043E \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D. \u0412 \u0431\u043B\u0438\u0436\u0430\u0439\u0448\u0435\u0435 \u0432\u0440\u0435\u043C\u044F \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u0442\u0441\u044F \u043E\u043F\u0435\u0440\u0430\u0442\u043E\u0440 \u0434\u043B\u044F \u0443\u0442\u043E\u0447\u043D\u0435\u043D\u0438\u044F \u0434\u0435\u0442\u0430\u043B\u0435\u0439 \u0437\u0430\u043A\u0430\u0437\u0430. \u0421\u043F\u0430\u0441\u0438\u0431\u043E \u0437\u0430 \u043F\u043E\u043A\u0443\u043F\u043A\u0443!");
+    }
+  }, {
+    key: "renderForm",
+    value: function renderForm() {
+      var product = this.state.product;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "buy-one-click-form",
         onSubmit: this.handleSubmitForm.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
@@ -5334,12 +5336,12 @@ var BuyOneClick = /*#__PURE__*/function (_React$Component) {
         placeholder: "\u0412\u0430\u0448 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0439 \u0430\u0434\u0440\u0435\u0441"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "checkout-form__input",
-        name: "OrderItems[product_id]",
+        name: "OrdersItems[product_id]",
         type: "hidden",
         value: product.id
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "checkout-form__input",
-        name: "OrderItems[count]",
+        name: "OrdersItems[count]",
         type: "hidden",
         value: "1"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
@@ -5350,7 +5352,26 @@ var BuyOneClick = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "btn-main"
-      }, "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0437\u0430\u043A\u0430\u0437")))));
+      }, "\u0421\u0434\u0435\u043B\u0430\u0442\u044C \u0437\u0430\u043A\u0430\u0437"));
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          show = _this$state.show,
+          product = _this$state.product,
+          order = _this$state.order;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        className: "one-click-buy",
+        onClick: this.handleShow.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "\u0412 \u043E\u0434\u0438\u043D \u043A\u043B\u0438\u043A")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
+        show: show,
+        onHide: this.handleClose.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Header, {
+        closeButton: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u041A\u0443\u043F\u0438\u0442\u044C \u0432 1 \u043A\u043B\u0438\u043A"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "buy-one-click__product-title"
+      }, product.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, order === null ? this.renderForm() : this.renderFinish())));
     }
   }]);
 
