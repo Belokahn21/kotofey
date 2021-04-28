@@ -207,7 +207,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let mainSteamSlider = new Swiper('.steam-slider-container');
 
-
     // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
     //     slidesPerView: 4,
     //     freeMode: true,

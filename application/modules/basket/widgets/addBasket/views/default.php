@@ -77,6 +77,9 @@ use app\modules\site\models\tools\Currency;
             <?php if ($showOneClick): ?>
                 <a class="one-click-buy" href="javascript:void(0);"><span>В один клик</span></a>
             <?php endif; ?>
+            <?php if (Yii::$app->user->id == 1): ?>
+                <div class="buy-one-click-react" data-product-id="<?= $product_id; ?>"></div>
+            <?php endif; ?>
 
         </div>
     </form>
