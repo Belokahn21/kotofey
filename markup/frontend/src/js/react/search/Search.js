@@ -32,9 +32,13 @@ class Search extends Component {
         } else {
             this.timeoutExt = setTimeout(() => {
 
-                RestRequest.all(config.restCatalog + '?' + BuildQuery.formatObject({name: element.value})).then(data => {
+
+
+                let queryParam = '?ProductSearchForm[name]=';
+
+                RestRequest.all(config.restCatalog + queryParam + element.value).then(result => {
                     this.setState({
-                        variants: data
+                        variants: result
                     });
                 });
             }, this.timeout)

@@ -7665,11 +7665,10 @@ var Search = /*#__PURE__*/function (_Component) {
         });
       } else {
         this.timeoutExt = setTimeout(function () {
-          _tools_RestRequest__WEBPACK_IMPORTED_MODULE_5__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restCatalog + '?' + _tools_BuildQuery__WEBPACK_IMPORTED_MODULE_3__.default.formatObject({
-            name: element.value
-          })).then(function (data) {
+          var queryParam = '?ProductSearchForm[name]=';
+          _tools_RestRequest__WEBPACK_IMPORTED_MODULE_5__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restCatalog + queryParam + element.value).then(function (result) {
             _this2.setState({
-              variants: data
+              variants: result
             });
           });
         }, this.timeout);

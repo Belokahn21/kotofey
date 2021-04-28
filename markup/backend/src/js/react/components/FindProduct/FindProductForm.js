@@ -26,12 +26,12 @@ class FindProductForm extends React.Component {
         if (this.timerEx) clearTimeout(this.timerEx);
         const element = e.target, value = element.value;
 
-        let queyParam = '?ProductSearchForm[name]=';
+        let queryParam = '?ProductSearchForm[name]=';
 
-        if (this.isNumeric(value)) queyParam = '?ProductSearchForm[code]=';
+        if (this.isNumeric(value)) queryParam = '?ProductSearchForm[code]=';
 
         this.timerEx = setTimeout(() => {
-            RestRequest.all(config.restCatalog + queyParam + value).then(result => {
+            RestRequest.all(config.restCatalog + queryParam + value).then(result => {
                 this.setState({
                     items: result
                 });
