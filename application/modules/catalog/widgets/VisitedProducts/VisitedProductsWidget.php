@@ -16,6 +16,9 @@ class VisitedProductsWidget extends Widget
     public function run()
     {
         $visitedIDs = ProductHelper::getAllVisitedItems();
+
+        if (!$visitedIDs) return false;
+
         $params = [];
         foreach ($visitedIDs as $i => $recipeId) $params[':id_' . $i] = $recipeId;
 
