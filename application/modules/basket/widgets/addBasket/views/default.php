@@ -74,7 +74,7 @@ use app\modules\site\models\tools\Currency;
                     <span class="add-basket__label">В корзину</span>
                 </button>
             <?php endif; ?>
-            <?php if (Yii::$app->user->id == 1 || $showOneClick): ?>
+            <?php if ($showOneClick): ?>
                 <div class="buy-one-click-react" data-product-id="<?= $product_id; ?>"></div>
             <?php endif; ?>
         </div>
