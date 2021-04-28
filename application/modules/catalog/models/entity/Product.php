@@ -430,7 +430,10 @@ class Product extends \yii\db\ActiveRecord
         return [
             'href' => function ($model) {
                 return ProductHelper::getDetailUrl($model);
-            }
+            },
+            'imageUrl' => function ($model) {
+                return ProductHelper::getImageUrl($model);
+            },
         ];
     }
 }

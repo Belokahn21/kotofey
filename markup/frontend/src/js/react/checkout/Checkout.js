@@ -90,6 +90,10 @@ class Checkout extends Component {
                     return true;
                 }
 
+                if (ym !== undefined) {
+                    ym(55089223, 'reachGoal', 'create_order');
+                }
+
                 form.reset();
                 this.setState({
                     errors: [],

@@ -57,6 +57,7 @@ class Order extends ActiveRecord
     const SCENARIO_DEFAULT = 'default';
     const SCENARIO_CUSTOM = 'custom';
     const SCENARIO_CLIENT_BUY = 'client_buy';
+    const SCENARIO_FAST = 'fast';
 
     public $is_update;
     public $bonus;
@@ -68,6 +69,7 @@ class Order extends ActiveRecord
             self::SCENARIO_DEFAULT => ['client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
             self::SCENARIO_CUSTOM => ['client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
             self::SCENARIO_CLIENT_BUY => ['client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
+            self::SCENARIO_FAST => ['email', 'phone'],
         ];
     }
 
@@ -77,7 +79,7 @@ class Order extends ActiveRecord
             ['type', 'default', 'value' => '3'],
 
             [['phone'], 'string', 'max' => 25],
-            [['phone'], 'required', 'message' => '{attribute} необходимо указать', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CLIENT_BUY]],
+            [['phone'], 'required', 'message' => '{attribute} необходимо указать', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CLIENT_BUY, self::SCENARIO_FAST]],
             [
                 ['phone'],
                 'filter',

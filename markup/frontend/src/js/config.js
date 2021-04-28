@@ -5,6 +5,7 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url 
 const config = {
     restFavorite: url + 'api/favorite/',
     restOrder: url + 'api/order/',
+    restFastOrder: url + 'api/order/fast/',
     restBasket: url + 'api/basket/',
     restDelivery: url + 'api/delivery/',
     restDeliveryCleanAddress: url + 'api/delivery/clean-address/',

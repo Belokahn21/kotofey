@@ -3,8 +3,8 @@ class RestRequest {
         return fetch(url).then(response => response.json());
     }
 
-    static one(url, id) {
-        return fetch(`${url}${id}/`).then(response => response.json());
+    static one(url, id, after_url = "") {
+        return fetch(`${url}${id}/${after_url}`).then(response => response.json());
     }
 
     static post(url, options) {

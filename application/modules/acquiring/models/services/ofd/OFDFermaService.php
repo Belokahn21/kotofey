@@ -4,11 +4,9 @@ namespace app\modules\acquiring\models\services\ofd;
 
 use app\modules\acquiring\models\services\check_history\ServiceCheckHistory;
 use app\modules\acquiring\models\services\ofd\models\OFDApi;
-use app\modules\logger\models\entity\Logger;
+use app\modules\acquiring\models\services\ofd\models\OFDApiDemo;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
-use app\modules\site\models\tools\Debug;
-use Bitrix\Location\Infrastructure\Service\LoggerService;
 
 class OFDFermaService
 {
@@ -21,7 +19,13 @@ class OFDFermaService
 
         if ($this->module->ofd_mode != 'on') return false;
 
-        $this->api = new OFDApi();
+        if (YII_ENV == 'dev') {
+            $this->api = new OFDApiDemo();
+        } elseif (YII_ENV == 'prod') {
+            $this->api = new OFDApi();
+        } else {
+            throw new \Exception('API фискализации не найдено.');
+        }
     }
 
     public static function getInstance()

@@ -10942,6 +10942,7 @@ Build date: 2019-12-19 16:51:02
   align-items: center;
   justify-content: center;
   color: black;
+  cursor: pointer;
   text-decoration: none; }
   .one-click-buy:hover {
     color: inherit; }
@@ -15384,7 +15385,19 @@ label[for="site-form-pet-avatar"] {
       color: #ff1a4a; }
 
 .buy-one-click__product-title {
-  color: grey; }
+  color: grey;
+  font-size: 14px; }
+
+.buy-one-click__image {
+  object-fit: contain;
+  max-width: 210px;
+  margin: auto; }
+
+.buy-one-click-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; }
 
 
 /*# sourceMappingURL=main.css.map*/
