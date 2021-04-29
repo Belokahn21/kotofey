@@ -2,11 +2,11 @@
 
 namespace app\modules\pets\controllers;
 
-use app\modules\site\models\tools\Debug;
+use Yii;
 use yii\web\Controller;
-use app\modules\pets\models\entity\Pets;
-use app\widgets\notification\Alert;
 use yii\web\HttpException;
+use app\widgets\notification\Alert;
+use app\modules\pets\models\entity\Pets;
 
 class PetController extends Controller
 {
@@ -25,7 +25,20 @@ class PetController extends Controller
 
     public function actionUpdate($id)
     {
-        return $this->render('update');
+        if (!$model = Pets::findOne($id)) throw new HttpException(404, 'Элемент не найден.');
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate() && $model->save()) {
+                    Alert::setSuccessNotify('Элемент успешно добавлен.');
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model
+        ]);
     }
 
     public function actionDelete($id)
