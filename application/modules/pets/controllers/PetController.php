@@ -30,7 +30,7 @@ class PetController extends Controller
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
                 if ($model->validate() && $model->save()) {
-                    Alert::setSuccessNotify('Элемент успешно добавлен.');
+                    Alert::setSuccessNotify('Информация по питомцу успешно обновлена.');
                     return $this->refresh();
                 }
             }
