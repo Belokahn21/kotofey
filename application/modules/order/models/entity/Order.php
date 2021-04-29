@@ -84,7 +84,7 @@ class Order extends ActiveRecord
                 ['phone'],
                 'filter',
                 'filter' => function ($value) {
-                    $value = str_replace('+7', '8', $value);
+                        $value = str_replace('+7', '8', $value);
                     return str_replace([' ', '(', ')', '-'], '', $value);
                 }
             ],

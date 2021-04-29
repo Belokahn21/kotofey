@@ -4,7 +4,7 @@
 namespace app\modules\acquiring\models\services\ofd\models;
 
 
-class OFDApiDemo extends AbstractOFDApi
+class OFDApiDemo extends OFDApi
 {
-    const URL = 'https://ferma-test.ofd.ru/api/kkt/cloud/';
+    protected $_url = 'https://ferma-test.ofd.ru/api/kkt/cloud/';
 }

@@ -15,7 +15,7 @@ use app\modules\site\models\tools\Currency;
  * @var $showPrice boolean
  * @var $basket Basket
  */
-
+$resultPrice = $discount_price ?: $price;
 ?>
 <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
     <form class="product-calc js-product-calc">
@@ -36,13 +36,13 @@ use app\modules\site\models\tools\Currency;
                 <div class="product-calc__price-group-char-val">шт</div>
                 <div class="product-calc__price-group-char-equal">=</div>
                 <div class="product-calc__price-group-summary js-product-calc-summary">
-                    <div class="count"><?= Price::format($price * ($basket->count ? $basket->count : 1)); ?></div>
+                    <div class="count"><?= Price::format($resultPrice * ($basket->count ? $basket->count : 1)); ?></div>
                 </div>
                 <div class="product-calc__price-group-currency">₽</div>
             </div>
         <?php endif; ?>
         <div class="product-calc__control-group">
-            <input type="hidden" name="count" class="product-calc__count js-product-calc-price" value="<?= $price; ?>">
+            <input type="hidden" name="count" class="product-calc__count js-product-calc-price" value="<?= $resultPrice; ?>">
             <?php if ($showControl or $showPrice): ?>
                 <div class="div">
                     <?php if ($showControl): ?>

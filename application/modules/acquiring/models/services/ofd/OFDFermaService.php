@@ -3,7 +3,7 @@
 namespace app\modules\acquiring\models\services\ofd;
 
 use app\modules\acquiring\models\services\check_history\ServiceCheckHistory;
-use app\modules\acquiring\models\services\ofd\models\OFDApi;
+use app\modules\acquiring\models\services\ofd\models\OFDApiProduction;
 use app\modules\acquiring\models\services\ofd\models\OFDApiDemo;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
@@ -22,7 +22,7 @@ class OFDFermaService
         if (YII_ENV == 'dev') {
             $this->api = new OFDApiDemo();
         } elseif (YII_ENV == 'prod') {
-            $this->api = new OFDApi();
+            $this->api = new OFDApiProduction();
         } else {
             throw new \Exception('API фискализации не найдено.');
         }
@@ -50,7 +50,7 @@ class OFDFermaService
 
 
         } catch (\Exception $e) {
-            LogService::saveErrorMessage("Ошибка отправки чека покупателю. Заказ: #{$order->id}. Сообщение: " . $e->getMessage(), 'acquiring');
+            LogService::saveErrorMessage("Ошибка отправки чека покупателю. Заказ: #{$order->id}. Сообщение: " . $e->getMessage() . ' // ' . $e->getFile() . ' // ' . $e->getLine(), 'acquiring');
             //todo: оповестить Администратора?
         }
     }
