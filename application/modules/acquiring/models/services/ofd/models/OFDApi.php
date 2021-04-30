@@ -120,9 +120,6 @@ class OFDApi
         $response = false;
         $requestUrl = $this->_url;
 
-
-        var_dump($requestUrl);
-
         if ($curl = curl_init()) {
             curl_setopt($curl, CURLOPT_URL, $requestUrl . $action . '?AuthToken=' . $this->getOfdToken());
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
