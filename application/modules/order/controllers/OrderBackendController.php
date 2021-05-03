@@ -212,7 +212,7 @@ class OrderBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (!Yii::$app->user->can('removeOrder') || Yii::$app->user->id != 1) throw new ForbiddenHttpException('У вас нет разрешения на эту операцию');
+        if (!Yii::$app->user->can('removeOrder') and Yii::$app->user->id != 1) throw new ForbiddenHttpException('У вас нет разрешения на эту операцию');
 
         if ($this->modelClass::findOne($id)->delete()) Alert::setSuccessNotify('Заказ успешно удалён');
 
