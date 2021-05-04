@@ -24,6 +24,11 @@ $this->title = Title::show("Список доставок");
             <div class="logistic-list__item">
                 <div class="logistic-list__title">
                     Заказ #<?= $order->id; ?>
+                    <?php if ($order->is_paid): ?>
+                        [<span class="green">Оплачено</span>]
+                    <?php else: ?>
+                        [<span class="red">Не оплачено</span>]
+                    <?php endif; ?>
                 </div>
                 <div class="logistic-list-data">
 
@@ -57,12 +62,12 @@ $this->title = Title::show("Список доставок");
                     <div class="logistic-list-data__col">
                         <div class="logistic-list-data__key">Адрес доставки:</div>
                         <div class="logistic-list-data__value">
-                            <?= !$order->city ? '' : 'г.' . $order->city; ?>
-                            <?= !$order->street ? '' : ', ул.' . $order->street; ?>
-                            <?= !$order->number_home ? '' : ', д.' . $order->number_home; ?>
-                            <?= !$order->entrance ? '' : ', п.' . $order->entrance; ?>
-                            <?= !$order->number_appartament ? '' : ', кв.' . $order->number_appartament; ?>
-                            <?= !$order->floor_house ? '' : ', эт.' . $order->floor_house; ?>
+                            <?= !$order->city ? '' : $order->city; ?>
+                            <?= !$order->street ? '' : $order->street; ?>
+                            <?= !$order->number_home ? '' : $order->number_home; ?>
+                            <?= !$order->entrance ? '' : $order->entrance; ?>
+                            <?= !$order->number_appartament ? '' : ', кв. ' . $order->number_appartament; ?>
+                            <?= !$order->floor_house ? '' : ', эт. ' . $order->floor_house; ?>
                         </div>
                     </div>
                 </div>

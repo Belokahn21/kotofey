@@ -17,6 +17,7 @@ $this->title = Title::show("Отзывы к товарам");
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
     'form' => $form,
+    'model' => $model,
 ]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end() ?>
