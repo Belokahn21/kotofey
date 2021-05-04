@@ -158,9 +158,9 @@ $this->beginPage() ?>
 <?php $this->endBody(); ?>
 <?php if (YII_ENV == 'prod'): ?>
     <?php echo $this->render('include/head/yandex/metrika.php'); ?>
-    <?php echo $this->render('include/head/yandex/chat.php'); ?>
+    <!--    --><?php //echo $this->render('include/head/yandex/chat.php'); ?>
     <!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
-    <!--    --><?php //echo $this->render('include/head/jivo.php'); ?>
+    <?php echo $this->render('include/head/jivo.php'); ?>
 <?php endif; ?>
 </body>
 <?= MiniMobileCartWidget::widget(); ?>
