@@ -23,9 +23,9 @@ $this->title = Title::show("Зоотовары для животных в Бар
     <?php //= CanNowBuyWidget::widget() ?>
     <?= DiscountItemsWidget::widget(); ?>
     <?= InformerSliderWidget::widget(); ?>
-    <?= ManyPurchasedGoods::widget(); ?>
+    <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
     <?php if (Yii::$app->user->id == 1): ?>
-        <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
+        <?= ManyPurchasedGoods::widget(); ?>
     <?php endif; ?>
     <div class="page-title__group">
         <h2 class="page-title">Интернет магазин для животных</h2><a class="page-title__link" href="/about/">Читать дальше</a>
