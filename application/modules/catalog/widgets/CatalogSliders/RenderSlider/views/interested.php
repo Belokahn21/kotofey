@@ -4,13 +4,30 @@ use yii\helpers\StringHelper;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 
-/* @var $models \app\modules\catalog\models\entity\Product[] */
+/* @var $models \app\modules\catalog\models\entity\Product[]
+ * @var $this \yii\web\View
+ * @var $title string
+ * @var $subTitle string
+ * @var $link string
+ * @var $linkTitle string
+ * @var $uniqKey string
+ */
 
 ?>
 
 <?php if ($models): ?>
     <?php if ($this->beginCache('many-purchase-items-widget-interested', ['duration' => 3600 * 24 * 7])): ?>
+        <div class="page-title__group">
+            <h2 class="page-title"><?= $title; ?></h2>
 
+            <?php if (!empty($subTitle)): ?>
+                <div class="page-title__note"><?= $subTitle; ?></div>
+            <?php endif; ?>
+
+            <?php if (!empty($link) && !empty($linkTitle)): ?>
+                <a class="page-title__link" href="<?= $link; ?>"><?= $linkTitle; ?></a>
+            <?php endif; ?>
+        </div>
         <div class="swiper-container steam-slider-container">
             <div class="swiper-wrapper steam-slider-wrapper">
                 <?php foreach ($models as $model): ?>
@@ -41,7 +58,8 @@ use app\modules\catalog\models\helpers\ProductHelper;
                                     <div class="steam-slider-review__avatar"><img class="steam-slider-review__avatar-image" src="<?= UserHelper::getAvatar($commentarie->author); ?>"/></div>
                                     <div class="steam-slider-review__body">
                                         <div class="steam-slider-review__text">
-                                            <div class="steam-slider-review__author"><?= $commentarie->author->email; ?></div><div class="steam-slider-review__message">говорит, <?= $commentarie->text; ?></div>
+                                            <div class="steam-slider-review__author"><?= $commentarie->author->email; ?></div>
+                                            <div class="steam-slider-review__message">говорит, <?= $commentarie->text; ?></div>
                                         </div>
                                     </div>
                                 </div>

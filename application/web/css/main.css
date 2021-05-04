@@ -12981,6 +12981,10 @@ p {
   padding: 0 !important;
   margin: 0 !important; }
 
+.steam-slider-container {
+  box-shadow: 0 0 18px 0 rgba(34, 60, 80, 0.2);
+  padding: 15px 0; }
+
 .steam-slider-slide {
   display: flex;
   flex-direction: row;
@@ -13038,7 +13042,7 @@ p {
     line-height: 18px; }
   .steam-slider-review__author {
     display: inline;
-    margin-right: 5px;
+    margin-right: 3px;
     font-weight: bold;
     text-transform: uppercase;
     font-size: 12px;
