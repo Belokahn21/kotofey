@@ -68,6 +68,8 @@ use app\modules\catalog\models\helpers\ProductHelper;
                     </a>
                 <?php endforeach; ?>
             </div>
+
+            <div class="swiper-pagination steam-slider-pagination"></div>
         </div>
 
         <?php $this->endCache(); endif; ?>

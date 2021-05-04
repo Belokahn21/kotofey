@@ -205,7 +205,11 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     });
 
-    let mainSteamSlider = new Swiper('.steam-slider-container');
+    let mainSteamSlider = new Swiper('.steam-slider-container',{
+        pagination: {
+            el: ".steam-slider-pagination",
+        },
+    });
 
     // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
     //     slidesPerView: 4,
