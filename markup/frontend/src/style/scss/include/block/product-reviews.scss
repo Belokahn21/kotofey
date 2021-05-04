@@ -1,0 +1,26 @@
+.product-reviews {
+  display: flex;
+  flex-direction: column;
+
+  &-card {
+    background: rgba(0, 0, 0, 0.02);
+    margin: 5px 0;
+    padding: 5px;
+
+    &__group {
+      &.__row {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    &__line-text {
+      margin: 15px 0;
+    }
+
+    &__line-title {
+      font-weight: bold;
+    }
+  }
+}

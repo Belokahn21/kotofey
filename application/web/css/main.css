@@ -13071,6 +13071,22 @@ p {
     display: inline;
     font-size: 12px; }
 
+.product-reviews {
+  display: flex;
+  flex-direction: column; }
+  .product-reviews-card {
+    background: rgba(0, 0, 0, 0.02);
+    margin: 5px 0;
+    padding: 5px; }
+    .product-reviews-card__group.__row {
+      display: flex;
+      flex-direction: row;
+      align-items: center; }
+    .product-reviews-card__line-text {
+      margin: 15px 0; }
+    .product-reviews-card__line-title {
+      font-weight: bold; }
+
 .footer {
   color: #fff;
   background: white;

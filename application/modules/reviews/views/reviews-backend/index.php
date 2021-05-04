@@ -38,6 +38,8 @@ $this->title = Title::show("Отзывы к товарам");
         ],
         'rate',
         'text',
+        'pluses',
+        'minuses',
         [
             'attribute' => 'created_at',
             'value' => function ($model) {
