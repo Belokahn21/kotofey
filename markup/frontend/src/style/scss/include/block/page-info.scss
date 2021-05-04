@@ -1,0 +1,23 @@
+.page-info {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+
+  &-list {
+    &__item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    &__key {
+      font-weight: bold;
+    }
+
+    &__value {
+    }
+  }
+}

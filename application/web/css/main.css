@@ -15410,5 +15410,19 @@ label[for="site-form-pet-avatar"] {
     padding: 10px 20px;
     font-size: 14px; }
 
+.page-info {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  background-color: white;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); }
+  .page-info-list__item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
+  .page-info-list__key {
+    font-weight: bold; }
+
 
 /*# sourceMappingURL=main.css.map*/

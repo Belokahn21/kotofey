@@ -14,6 +14,7 @@ use app\modules\basket\models\entity\Basket;
 use app\modules\site\widgets\PageUp\PageUpWidget;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site\widgets\AdminPanel\AdminPanel;
+use app\modules\site\widgets\PageInfo\PageInfoWidget;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\helpers\CategoryHelper;
 use app\modules\basket\widgets\MiniMobileCart\MiniMobileCartWidget;
@@ -151,6 +152,7 @@ $this->beginPage() ?>
 <?= $this->render('include/help-desk') ?>
 <?= $this->render('include/yandex-map') ?>
 <?= Alert::widget(); ?>
+<?= PageInfoWidget::widget(); ?>
 <?php /* <script src="/js/frontend-core.min.js"></script> */ ?>
 <script src="/js/bundle.js"></script>
 <?php $this->endBody(); ?>
@@ -158,7 +160,7 @@ $this->beginPage() ?>
     <?php echo $this->render('include/head/yandex/metrika.php'); ?>
     <?php echo $this->render('include/head/yandex/chat.php'); ?>
     <!--    --><?php //echo $this->render('include/head/fb/pixel.php'); ?>
-<!--    --><?php //echo $this->render('include/head/jivo.php'); ?>
+    <!--    --><?php //echo $this->render('include/head/jivo.php'); ?>
 <?php endif; ?>
 </body>
 <?= MiniMobileCartWidget::widget(); ?>
