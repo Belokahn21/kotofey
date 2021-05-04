@@ -19,6 +19,7 @@ $this->title = Title::show("Обновить отзыв: " . $model->id);
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
     'model' => $model,
+    'form' => $form,
 ]); ?>
 <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end() ?>

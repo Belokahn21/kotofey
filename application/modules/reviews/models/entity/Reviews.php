@@ -60,8 +60,10 @@ class Reviews extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'product_id' => 'Product ID',
+            'is_active' => 'Активность',
+            'user_id' => 'Пользователь ID',
+            'status_id' => 'Статус ID',
+            'product_id' => 'Продукт ID',
             'text' => 'Ваше сообщение',
             'image' => 'Картинка',
             'rate' => 'Оценка',

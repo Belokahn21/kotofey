@@ -19,7 +19,7 @@ use app\modules\user\models\entity\User;
         <?= $form->field($model, 'is_active')->checkbox(); ?>
         <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус']); ?>
         <?= $form->field($model, 'rate')->dropDownList($model->getRates(), ['prompt' => 'Оценка']); ?>
-        <?= $form->field($model, 'rate')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Автор']); ?>
+        <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Автор']); ?>
         <?= $form->field($model, 'text')->textarea(); ?>
     </div>
 </div>
