@@ -8,6 +8,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
+use app\modules\reviews\models\entity\Reviews;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\helpers\Json;
@@ -51,6 +52,7 @@ use function foo\func;
  * @property string $detail
  * @property Media $media
  * @property PropertiesProductValues $propsValues
+ * @property Reviews[] $comments
  */
 class Product extends \yii\db\ActiveRecord
 {
@@ -423,6 +425,11 @@ class Product extends \yii\db\ActiveRecord
     public function getPropsValues()
     {
         return $this->hasMany(PropertiesProductValues::className(), ['product_id' => 'id']);
+    }
+
+    public function getComments()
+    {
+        return $this->hasMany(Reviews::className(), ['product_id' => 'id'])->where(['status_id' => Reviews::STATUS_ENABLE, 'is_active' => true]);
     }
 
     public function extraFields()

@@ -5466,7 +5466,8 @@ var Page = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.title = document.title ? document.title : {};
-    _this.keywords = document.querySelector('meta[name="keywords"]') ? document.querySelector('meta[name="keywords"]').getAttribute('content') : {};
+    _this.keywords = document.querySelector('meta[name="keywords"]') ? document.querySelector('meta[name="keywords"]').getAttribute('content').split(' ') : {};
+    _this.description = document.querySelector('meta[name="description"]') ? document.querySelector('meta[name="description"]').getAttribute('content') : {};
     return _this;
   }
 
@@ -5489,7 +5490,13 @@ var Page = /*#__PURE__*/function (_React$Component) {
         className: "page-info-list__key"
       }, "\u041A\u043B\u044E\u0447\u0438:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "page-info-list__value"
-      }, this.keywords.length))));
+      }, this.keywords.length)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+        className: "page-info-list__item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "page-info-list__key"
+      }, "\u041E\u043F\u0438\u0441\u0430\u043D\u0438\u0435:"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "page-info-list__value"
+      }, this.description.length))));
     }
   }]);
 

@@ -2,6 +2,7 @@
 
 namespace app\modules\reviews\models\entity;
 
+use app\modules\user\models\entity\User;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -18,6 +19,8 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $rate
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property User $author
  */
 class Reviews extends \yii\db\ActiveRecord
 {
@@ -65,5 +68,24 @@ class Reviews extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function getStatusList()
+    {
+        return [
+            self::STATUS_ENABLE => 'Активен',
+            self::STATUS_MODERATE => 'На модерации',
+            self::STATUS_OFF => 'На отклонен',
+        ];
+    }
+
+    public function getRates()
+    {
+        return [1 => 1, 2 => 2, 3 => 3, 4 => 4, 5 => 5];
+    }
+
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
     }
 }

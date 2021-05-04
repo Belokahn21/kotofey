@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\StringHelper;
+use app\modules\user\models\helpers\UserHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 
 /* @var $models \app\modules\catalog\models\entity\Product[] */
@@ -13,7 +14,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
         <div class="swiper-container steam-slider-container">
             <div class="swiper-wrapper steam-slider-wrapper">
                 <?php foreach ($models as $model): ?>
-                    <div class="swiper-slide steam-slider-slide">
+                    <a href="<?= ProductHelper::getDetailUrl($model); ?>" class="swiper-slide steam-slider-slide">
                         <div class="steam-slider-slide__side"><img class="steam-slider-slide__image" alt="<?= $model->name; ?>" title="<?= $model->name; ?>" src="<?= ProductHelper::getImageUrl($model); ?>"/></div>
                         <div class="steam-slider-slide__side steam-slider-card">
                             <div class="steam-slider-card__title"><?= $model->name; ?></div>
@@ -31,8 +32,22 @@ use app\modules\catalog\models\helpers\ProductHelper;
                             <?php if ($model->description): ?>
                                 <div class="steam-slider-card__description"><?= StringHelper::truncate($model->description, 200); ?></div>
                             <?php endif; ?>
+
+                            <?php if ($model->comments): ?>
+
+                                <?php $commentarie = $model->comments[0]; ?>
+
+                                <div class="steam-slider-review">
+                                    <div class="steam-slider-review__avatar"><img class="steam-slider-review__avatar-image" src="<?= UserHelper::getAvatar($commentarie->author); ?>"/></div>
+                                    <div class="steam-slider-review__body">
+                                        <div class="steam-slider-review__text">
+                                            <div class="steam-slider-review__author"><?= $commentarie->author->email; ?></div><div class="steam-slider-review__message">говорит, <?= $commentarie->text; ?></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php endif; ?>
                         </div>
-                    </div>
+                    </a>
                 <?php endforeach; ?>
             </div>
         </div>

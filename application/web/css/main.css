@@ -12983,7 +12983,9 @@ p {
 
 .steam-slider-slide {
   display: flex;
-  flex-direction: row; }
+  flex-direction: row;
+  text-decoration: none !important;
+  color: unset !important; }
   .steam-slider-slide__side {
     flex: 0 0 50%;
     display: flex;
@@ -13007,13 +13009,45 @@ p {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  width: 65%; }
+  width: 100%; }
   .steam-slider-images__item {
     width: 50%;
-    padding: 10px; }
+    padding: 10px;
+    max-height: 130px; }
     .steam-slider-images__item img {
       width: 100%;
-      object-fit: contain; }
+      height: 100%;
+      object-fit: cover; }
+
+.steam-slider-review {
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(0, 0, 0, 0.01);
+  padding: 5px; }
+  .steam-slider-review__avatar-image {
+    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    margin-right: 15px; }
+  .steam-slider-review__body {
+    display: flex;
+    flex-direction: row;
+    align-items: center; }
+  .steam-slider-review__text {
+    line-height: 18px; }
+  .steam-slider-review__author {
+    display: inline;
+    margin-right: 5px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #ff1a4a; }
+    .steam-slider-review__author:hover {
+      color: #ff1a4a; }
+  .steam-slider-review__message {
+    display: inline;
+    font-size: 12px; }
 
 .footer {
   color: #fff;
