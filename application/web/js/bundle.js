@@ -5159,7 +5159,11 @@ document.addEventListener('DOMContentLoaded', function () {
       dynamicBullets: true
     }
   });
-  var mainSteamSlider = new swiper__WEBPACK_IMPORTED_MODULE_0__.default('.steam-slider-container'); // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
+  var mainSteamSlider = new swiper__WEBPACK_IMPORTED_MODULE_0__.default('.steam-slider-container', {
+    pagination: {
+      el: ".steam-slider-pagination"
+    }
+  }); // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
   //     slidesPerView: 4,
   //     freeMode: true,
   //     watchSlidesVisibility: true,

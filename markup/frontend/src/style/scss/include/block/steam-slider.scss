@@ -1,11 +1,33 @@
 .steam-slider {
   &-container {
+    margin-bottom: 45px;
     box-shadow: 0 0 18px 0 rgba(34, 60, 80, 0.2);
     padding: 15px 0;
-    margin-bottom: 45px;
   }
 
   &-wrapper {
+  }
+
+  &-pagination {
+    position: relative;
+    top: auto !important;
+    left: auto !important;
+    bottom: auto !important;
+    right: auto !important;
+    padding: 10px 0;
+    margin-top: 15px;
+    height: auto !important;
+    background: none !important;
+
+    .swiper-pagination-bullet {
+      width: 20px;
+      padding: 6px;
+      border-radius: 2px;
+
+      &-active {
+        background-color: $active-color;
+      }
+    }
   }
 
   &-slide {
