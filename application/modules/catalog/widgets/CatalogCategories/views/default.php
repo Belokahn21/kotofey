@@ -9,7 +9,9 @@ use app\modules\catalog\models\helpers\CategoryHelper;
         <?php foreach ($categories as $category): ?>
             <li class="catalog-categories__item">
                 <div class="catalog-categories__header">
-                    <div class="catalog-categories__icon"><img src="<?= CategoryHelper::getImageUrl($category); ?>" alt="<?= $category->name; ?>" title="<?= $category->name; ?>"></div>
+                    <?php if ($category->image): ?>
+                        <div class="catalog-categories__icon"><img src="<?= CategoryHelper::getImageUrl($category); ?>" alt="<?= $category->name; ?>" title="<?= $category->name; ?>"></div>
+                    <?php endif; ?>
                     <div class="catalog-categories__name">
                         <a class="catalog-categories__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a>
                     </div>

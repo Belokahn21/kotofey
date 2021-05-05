@@ -12,6 +12,8 @@ use Yii;
  * @property string|null $owner_object
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property Media $media
  */
 class MediaToEntity extends \yii\db\ActiveRecord
 {
@@ -32,5 +34,10 @@ class MediaToEntity extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
     }
 }

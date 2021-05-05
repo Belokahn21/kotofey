@@ -3,10 +3,7 @@
 namespace app\modules\media\components\behaviors;
 
 
-use app\modules\site\models\tools\Debug;
-use app\modules\catalog\models\entity\Product;
 use app\modules\media\models\entity\Media;
-use Cloudinary\Uploader;
 use mohorev\file\UploadBehavior;
 use yii\base\InvalidArgumentException;
 use yii\helpers\FileHelper;
@@ -15,7 +12,6 @@ use yii\web\UploadedFile;
 
 class ImageUploadMinify extends UploadBehavior
 {
-
     public function removeMediaImage()
     {
         if ($this->owner->media_id) {
