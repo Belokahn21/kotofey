@@ -22,6 +22,7 @@ class Module extends MainModule
     {
         return [
             ['name' => 'Медиа', 'url' => Url::to(['/admin/media/media-backend/index'])],
+            ['name' => 'Медиа в сущностях', 'url' => Url::to(['/admin/media/media-to-entity-backend/index'])],
         ];
     }
 

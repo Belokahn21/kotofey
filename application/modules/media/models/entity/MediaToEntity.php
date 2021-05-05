@@ -3,6 +3,7 @@
 namespace app\modules\media\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "media_to_entity".
@@ -17,6 +18,13 @@ use Yii;
  */
 class MediaToEntity extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function rules()
     {
         return [

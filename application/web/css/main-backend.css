@@ -8572,6 +8572,24 @@ html, body {
     cursor: pointer;
     font-size: 18px; }
 
+.media-browser {
+  flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: stretch;
+  align-items: flex-start; }
+  .media-browser-card__image {
+    margin: 10px;
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 1px silver solid; }
+    .media-browser-card__image:hover {
+      border: 1px #00BFFF solid; }
+    .media-browser-card__image.active {
+      border: 1px #00BFFF solid; }
+
 .catalog-fill-vendor {
   margin: 10px 5px; }
   .catalog-fill-vendor__input {

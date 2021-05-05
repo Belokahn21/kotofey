@@ -1,10 +1,12 @@
 <?php
 
+use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\SaveInformers;
 
 /* @var $model \app\modules\catalog\models\entity\Properties */
+/* @var $propertyGroup PropertyGroup */
+/* @var $form \yii\widgets\ActiveForm */
 
 ?>
 

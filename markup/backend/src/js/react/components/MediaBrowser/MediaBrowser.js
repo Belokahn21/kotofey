@@ -1,25 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import {Modal} from "react-bootstrap";
+import ReactDom from 'react-dom';
 import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
-import config from '../../config';
-import MediaCard from "../Media/MediaCard";
+import config from "../../config";
+import {Modal} from "react-bootstrap";
+import MediaCard from "./MediaCard";
 
-class Cdn extends React.Component {
+class MediaBrowser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
-            resources: []
+            media: []
         };
         this.modalId = Math.random().toString(36).substring(7);
-        this.loadResources();
+        this.loadMedia();
     }
 
-    loadResources() {
+    loadMedia() {
         RestRequest.all(config.restMeida).then(data => {
             this.setState({
-                resources: data
+                media: data
             })
         });
     }
@@ -36,24 +36,21 @@ class Cdn extends React.Component {
         this.setShow(true);
     }
 
-    handleRemove() {
-
-    }
-
     render() {
-        const {show, resources} = this.state;
+        const {show, media} = this.state;
         return (
             <div>
+                <input type="hidden" placeholder="Media ID"/>
                 <button type="button" onClick={this.handleShow.bind(this)} className="btn-main">Выбрать</button>
 
-                <Modal show={show} onHide={this.handleClose.bind(this)}>
+                <Modal size="lg" show={show} onHide={this.handleClose.bind(this)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Выбрать медиа из CDN</Modal.Title>
+                        <Modal.Title>Выбрать медиа</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <div className="cdn-resource-list">
-                            {resources.map((el, i) => {
-                                return <MediaCard handleRemove={this.handleRemove} resource={el}/>
+                        <div className="media-browser">
+                            {media.map((el, i) => {
+                                return <MediaCard key={i} element={el}/>
                             })}
                         </div>
                     </Modal.Body>
@@ -63,5 +60,9 @@ class Cdn extends React.Component {
     }
 }
 
-const element = document.querySelector('.cdn-modal-react');
-if (element) ReactDOM.render(<Cdn/>, element);
+let elements = document.querySelectorAll('.media-browser-react');
+if (elements) {
+    elements.forEach(el => {
+        ReactDom.render(<MediaBrowser/>, el);
+    })
+}

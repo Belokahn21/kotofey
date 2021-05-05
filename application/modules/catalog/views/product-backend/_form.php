@@ -15,11 +15,13 @@ use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
+use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $properties \app\modules\catalog\models\entity\Properties[]
+ * @var $form \yii\widgets\ActiveForm
  */
 
 ?>
@@ -203,6 +205,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                 ?>
                             </legend>
                             <?php foreach ($props as $property): ?>
+                                <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
                                 <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
                                     <?php $value = PropertiesProductValues::findAll([
                                         'product_id' => $model->id,
@@ -226,6 +229,12 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
                                     ?>
                                     <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?>
+                                <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
+
+
+                                    <?= $form->field($model, 'properties[' . $property->id . ']')->widget(MediaBrowserWidget::className())->label($property->name); ?>
+
+
                                 <?php else: ?>
                                     <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
                                         <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
