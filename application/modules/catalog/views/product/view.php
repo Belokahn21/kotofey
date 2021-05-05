@@ -5,6 +5,7 @@ use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\ProductTitle;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
 use app\modules\catalog\widgets\CatalogSliders\Analog\AnalogWidget;
@@ -45,6 +46,14 @@ $this->title = ProductTitle::show($product->name);
                             <?php foreach (Json::decode($product->images) as $image): ?>
                                 <a class="product-detail-gallery__link active" href="<?= $image; ?>" data-lightbox="roadtrip">
                                     <img class="product-detail-gallery__image" src="<?= $image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                                </a>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+
+                        <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
+                            <?php foreach ($imagesFromProperty as $propertyValue): ?>
+                                <a class="product-detail-gallery__link active" href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip">
+                                    <img class="product-detail-gallery__image" src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                                 </a>
                             <?php endforeach; ?>
                         <?php endif; ?>

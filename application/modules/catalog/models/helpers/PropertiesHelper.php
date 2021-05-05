@@ -69,4 +69,18 @@ class PropertiesHelper
 
         return false;
     }
+
+    public static function extractAllPropertyById(Product $model, $property_id)
+    {
+        $values = [];
+
+        foreach ($model->propsValues as $value) {
+            if ($value->property_id === $property_id) {
+                $values[] = $value;
+            }
+        }
+
+
+        return $values;
+    }
 }

@@ -2,7 +2,9 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\modules\media\models\entity\Media;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "properties_product_values".
@@ -19,6 +21,13 @@ use Yii;
  */
 class PropertiesProductValues extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function rules()
     {
         return [
@@ -36,6 +45,11 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
     function getVariant()
     {
         return $this->hasOne(PropertiesVariants::className(), ['property_id' => 'property_id', 'id' => 'value']);
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'value']);
     }
 
     function getName()
