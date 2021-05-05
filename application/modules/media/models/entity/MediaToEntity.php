@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property int|null $media_id
  * @property string|null $owner_object
+ * @property int|null $owner_id
  * @property int|null $created_at
  * @property int|null $updated_at
  *
@@ -28,7 +29,7 @@ class MediaToEntity extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['media_id', 'created_at', 'updated_at'], 'integer'],
+            [['media_id', 'created_at', 'updated_at','owner_id'], 'integer'],
             [['owner_object'], 'string', 'max' => 255],
         ];
     }
@@ -37,6 +38,7 @@ class MediaToEntity extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'owner_id' => 'Owner ID',
             'media_id' => 'Media ID',
             'owner_object' => 'Owner Object',
             'created_at' => 'Created At',
