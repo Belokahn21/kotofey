@@ -27,11 +27,18 @@ class NotifyAdmission extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_active', 'product_id', 'created_at', 'updated_at'], 'integer'],
+            [['is_active'], 'boolean'],
+            [['is_active'], 'default', 'value' => true],
+
+            [['product_id', 'created_at', 'updated_at'], 'integer'],
+
             [['email', 'product_id'], 'required', 'message' => '{attribute} нужно обязательно заполнить'],
 //            [['email'], 'string', 'max' => 255],
+
             [['email'], 'email'],
+
             [['is_active'], 'default', 'value' => 1],
+
             ['email', 'unique', 'targetAttribute' => ['email', 'product_id'], 'message' => 'Вы уже отслеживаете этот товар']
         ];
     }

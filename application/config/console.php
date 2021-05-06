@@ -46,6 +46,9 @@ $config = [
         'migration' => [
             'class' => 'bizley\migration\controllers\MigrationController',
         ],
+        'admission' => [
+            'class' => 'app\modules\catalog\console\AdmissionController'
+        ],
         'sibagro' => [
             'class' => 'app\modules\catalog\console\SibagroController'
         ],
