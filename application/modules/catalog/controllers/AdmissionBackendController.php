@@ -34,7 +34,20 @@ class AdmissionBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        return $this->render('update');
+        $model = new NotifyAdmission();
+
+        if (Yii::$app->request->isPost) {
+            if ($model->load(Yii::$app->request->post())) {
+                if ($model->validate() && $model->save()) {
+                    Alert::setSuccessNotify('Элемент успешно добавлен.');
+                    return $this->refresh();
+                }
+            }
+        }
+
+        return $this->render('update', [
+            'model' => $model,
+        ]);
     }
 
     public function actionDelete($id)
