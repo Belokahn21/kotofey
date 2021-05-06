@@ -32,6 +32,8 @@ $this->title = Title::show('Запросы на уведомление');
     'emptyText' => 'Запросы отсутствуют',
     'columns' => [
         'id',
+        'product_id',
+        'email',
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
