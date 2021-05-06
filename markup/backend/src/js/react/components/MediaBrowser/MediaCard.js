@@ -11,8 +11,8 @@ class MediaCard extends React.Component {
 
         return <div className="media-browser-card">
             <img className="media-browser-card__image" src={elementCdn.secure_url}/>
-            {handleSelectImage ? <button className="media-browser-card__select" onClick={handleSelectImage.bind(this, element)}>Выбрать</button> : ""}
-            <button className="media-browser-card__select" onClick={handleRemoveImage.bind(this, element)}>Удалить</button>
+            {handleSelectImage ? <button type="button" className="media-browser-card__select" onClick={handleSelectImage.bind(this, element)}>Выбрать</button> : ""}
+            {handleRemoveImage ? <button type="button" className="media-browser-card__select" onClick={handleRemoveImage.bind(this, element)}>Удалить</button> : ""}
         </div>
     }
 }

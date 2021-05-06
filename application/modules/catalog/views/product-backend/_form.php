@@ -234,7 +234,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                         'values' => ArrayHelper::getColumn(PropertiesProductValues::findAll([
                                             'product_id' => $model->id,
                                             'property_id' => $property->id
-                                        ]), 'value')
+                                        ]), 'id')
                                     ])->label($property->name); ?>
                                 <?php else: ?>
                                     <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>

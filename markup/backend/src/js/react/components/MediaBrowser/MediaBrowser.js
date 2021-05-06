@@ -57,11 +57,13 @@ class MediaBrowser extends React.Component {
     }
 
     handleSelectImage(mediaElement, e) {
+        e.preventDefault();
         this.fillInputs(mediaElement);
     }
 
     handleRemoveImage(mediaEl, e) {
-        let {inputs} = this.state;
+        e.preventDefault();
+        let inputs = this.state.inputs;
 
         inputs.map((mediaElement, key) => {
             if (parseInt(mediaElement.id) === parseInt(mediaEl.id)) inputs.splice(key, 1);

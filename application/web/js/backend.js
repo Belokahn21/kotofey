@@ -3667,9 +3667,15 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "loadInputs",
     value: function loadInputs(ids) {
-      console.log(ids); // RestRequest.all(config.restPropertiesProductValues).then(data => {
-      //     console.log(data);
-      // });
+      var _this3 = this;
+
+      for (var id in ids) {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one((_config__WEBPACK_IMPORTED_MODULE_3___default().restPropertiesProductValues), ids[id], '?expand=media').then(function (data) {
+          if (data.media !== undefined) {
+            _this3.fillInputs(data.media);
+          }
+        });
+      }
     }
   }, {
     key: "setShow",
@@ -3691,6 +3697,24 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSelectImage",
     value: function handleSelectImage(mediaElement, e) {
+      e.preventDefault();
+      this.fillInputs(mediaElement);
+    }
+  }, {
+    key: "handleRemoveImage",
+    value: function handleRemoveImage(mediaEl, e) {
+      e.preventDefault();
+      var inputs = this.state.inputs;
+      inputs.map(function (mediaElement, key) {
+        if (parseInt(mediaElement.id) === parseInt(mediaEl.id)) inputs.splice(key, 1);
+      });
+      this.setState({
+        inputs: inputs
+      });
+    }
+  }, {
+    key: "fillInputs",
+    value: function fillInputs(mediaElement) {
       var inputs = this.state.inputs;
       inputs.push(mediaElement);
       inputs = _toConsumableArray(new Set(inputs));
@@ -3701,7 +3725,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
+      var _this4 = this;
 
       var _this$state = this.state,
           show = _this$state.show,
@@ -3712,9 +3736,10 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
       }, inputs.map(function (el, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
           key: i,
-          element: el
+          element: el,
+          handleRemoveImage: _this4.handleRemoveImage.bind(_this4)
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaInput__WEBPACK_IMPORTED_MODULE_5__.default, {
-          name: _this3.config.model + _this3.config.attribute,
+          name: _this4.config.model + _this4.config.attribute,
           element: el,
           key: i
         }));
@@ -3732,7 +3757,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
         className: "media-browser"
       }, media.map(function (el, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
-          handleSelectImage: _this3.handleSelectImage.bind(_this3),
+          handleSelectImage: _this4.handleSelectImage.bind(_this4),
           key: i,
           element: el
         });
@@ -3807,7 +3832,8 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           element = _this$props.element,
-          handleSelectImage = _this$props.handleSelectImage;
+          handleSelectImage = _this$props.handleSelectImage,
+          handleRemoveImage = _this$props.handleRemoveImage;
       var elementCdn = JSON.parse(element.json_cdn_data);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser-card"
@@ -3815,9 +3841,14 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
         className: "media-browser-card__image",
         src: elementCdn.secure_url
       }), handleSelectImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
         className: "media-browser-card__select",
         onClick: handleSelectImage.bind(this, element)
-      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C") : "");
+      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C") : "", handleRemoveImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "media-browser-card__select",
+        onClick: handleRemoveImage.bind(this, element)
+      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C") : "");
     }
   }]);
 
@@ -5307,7 +5338,7 @@ module.exports = {
   restCdn: url + '/backend/api/cdn/',
   restMeida: url + '/backend/api/media/',
   restCatalog: url + '/backend/api/catalog/',
-  restPropertiesProductValues: url + '/backend/api/catalog/properties-product-values',
+  restPropertiesProductValues: url + '/backend/api/catalog/properties-product-values/',
   restStatistic: url + '/backend/api/statistic/',
   restMenu: url + '/backend/api/menu/',
   restMenuFast: url + '/backend/api/menu_fast/',
