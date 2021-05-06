@@ -60,6 +60,18 @@ class MediaBrowser extends React.Component {
         this.fillInputs(mediaElement);
     }
 
+    handleRemoveImage(mediaEl, e) {
+        let {inputs} = this.state;
+
+        inputs.map((mediaElement, key) => {
+            if (parseInt(mediaElement.id) === parseInt(mediaEl.id)) inputs.splice(key, 1);
+        });
+
+        this.setState({
+            inputs: inputs
+        });
+    }
+
     fillInputs(mediaElement) {
         let {inputs} = this.state;
 
@@ -79,7 +91,7 @@ class MediaBrowser extends React.Component {
                 <div className="media-browser">
                     {inputs.map((el, i) => {
                         return <>
-                            <MediaCard key={i} element={el}/>
+                            <MediaCard key={i} element={el} handleRemoveImage={this.handleRemoveImage.bind(this)}/>
                             <MediaInput name={this.config.model + this.config.attribute} element={el} key={i}/>
                         </>
                     })}
