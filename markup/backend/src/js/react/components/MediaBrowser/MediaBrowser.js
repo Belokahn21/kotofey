@@ -19,6 +19,10 @@ class MediaBrowser extends React.Component {
         this.loadMedia();
 
         if (props.config) this.config = JSON.parse(props.config);
+
+        if (this.config.values !== undefined && this.config.values.length > 0) {
+            this.loadInputs(this.config.values);
+        }
     }
 
     loadMedia() {
@@ -27,6 +31,17 @@ class MediaBrowser extends React.Component {
                 media: data
             })
         });
+    }
+
+    loadInputs(ids) {
+        for (let id in ids) {
+            RestRequest.one(config.restPropertiesProductValues, ids[id], '?expand=media').then(data => {
+                if (data.media !== undefined) {
+                    this.fillInputs(data.media);
+                }
+            });
+        }
+
     }
 
     setShow(show) {
@@ -42,6 +57,10 @@ class MediaBrowser extends React.Component {
     }
 
     handleSelectImage(mediaElement, e) {
+        this.fillInputs(mediaElement);
+    }
+
+    fillInputs(mediaElement) {
         let {inputs} = this.state;
 
         inputs.push(mediaElement);

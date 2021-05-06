@@ -3645,6 +3645,11 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
     _this.loadMedia();
 
     if (props.config) _this.config = JSON.parse(props.config);
+
+    if (_this.config.values !== undefined && _this.config.values.length > 0) {
+      _this.loadInputs(_this.config.values);
+    }
+
     return _this;
   }
 
@@ -3658,6 +3663,13 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
           media: data
         });
       });
+    }
+  }, {
+    key: "loadInputs",
+    value: function loadInputs(ids) {
+      console.log(ids); // RestRequest.all(config.restPropertiesProductValues).then(data => {
+      //     console.log(data);
+      // });
     }
   }, {
     key: "setShow",
@@ -5295,6 +5307,7 @@ module.exports = {
   restCdn: url + '/backend/api/cdn/',
   restMeida: url + '/backend/api/media/',
   restCatalog: url + '/backend/api/catalog/',
+  restPropertiesProductValues: url + '/backend/api/catalog/properties-product-values',
   restStatistic: url + '/backend/api/statistic/',
   restMenu: url + '/backend/api/menu/',
   restMenuFast: url + '/backend/api/menu_fast/',

@@ -230,7 +230,12 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     ?>
                                     <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?>
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
-                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className())->label($property->name); ?>
+                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
+                                        'values' => ArrayHelper::getColumn(PropertiesProductValues::findAll([
+                                            'product_id' => $model->id,
+                                            'property_id' => $property->id
+                                        ]), 'value')
+                                    ])->label($property->name); ?>
                                 <?php else: ?>
                                     <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
                                         <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>

@@ -7,6 +7,7 @@ module.exports = {
     restCdn: url + '/backend/api/cdn/',
     restMeida: url + '/backend/api/media/',
     restCatalog: url + '/backend/api/catalog/',
+    restPropertiesProductValues: url + '/backend/api/catalog/properties-product-values/',
     restStatistic: url + '/backend/api/statistic/',
     restMenu: url + '/backend/api/menu/',
     restMenuFast: url + '/backend/api/menu_fast/',

@@ -1,13 +1,14 @@
 <?php
 
-namespace app\modules\media\controllers;
+
+namespace app\modules\catalog\controllers;
 
 
 use yii\rest\ActiveController;
 
-class RestBackendController extends ActiveController
+class PropertiesProductValuesRestBackendController extends ActiveController
 {
-    public $modelClass = 'app\modules\media\models\entity\Media';
+    public $modelClass = 'app\modules\catalog\models\entity\PropertiesProductValues';
 
     public function behaviors()
     {

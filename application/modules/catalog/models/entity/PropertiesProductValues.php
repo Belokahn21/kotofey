@@ -70,4 +70,9 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
             'updated_at' => 'Дата обновления',
         ];
     }
+
+    public function extraFields()
+    {
+        return ['media'];
+    }
 }
