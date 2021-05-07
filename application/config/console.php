@@ -37,6 +37,7 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
+            'baseUrl' => '',
             'suffix' => '/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
