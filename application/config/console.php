@@ -200,45 +200,23 @@ $config = [
 ];
 
 
-if (YII_ENV_DEV) {
-    $config['components']['mailer'] = [
-        'class' => 'yii\swiftmailer\Mailer',
-//        'useFileTransport' => false,
-        'enableSwiftMailerLogging' => true,
-        'useFileTransport' => true,
-        'viewPath' => '@app/mail',
-//        'transport' => [
-//            'class' => 'Swift_SmtpTransport',
-//            'host' => 'smtp.gmail.com',
-//            'username' => 'info.kotofey.store@gmail.com',
-//            'password' => '123qweR%cc',
-//            'port' => '465',
-//            'encryption' => 'ssl',
-//        ],
-        // send all mails to a file by default. You have to set
-        // 'useFileTransport' to false and configure a transport
-        // for the mailer to send real emails.
-    ];
-} else {
-    $config['components']['mailer'] = [
-        'class' => 'yii\swiftmailer\Mailer',
-        'useFileTransport' => false,
-        'enableSwiftMailerLogging' => true,
-        'viewPath' => '@app/mail',
-        'transport' => [
-            'class' => 'Swift_SmtpTransport',
-            'host' => 'smtp.timeweb.ru',
-            'username' => 'sale@kotofey.store',
-            'password' => '123qweR%',
-            'port' => '465',
-            'encryption' => 'ssl',
-        ],
-        // send all mails to a file by default. You have to set
-        // 'useFileTransport' to false and configure a transport
-        // for the mailer to send real emails.
-    ];
-}
-
+$config['components']['mailer'] = [
+    'class' => 'yii\swiftmailer\Mailer',
+    'useFileTransport' => false,
+    'enableSwiftMailerLogging' => true,
+    'viewPath' => '@app/mail',
+    'transport' => [
+        'class' => 'Swift_SmtpTransport',
+        'host' => 'smtp.timeweb.ru',
+        'username' => 'sale@kotofey.store',
+        'password' => '123qweR%',
+        'port' => '465',
+        'encryption' => 'ssl',
+    ],
+    // send all mails to a file by default. You have to set
+    // 'useFileTransport' to false and configure a transport
+    // for the mailer to send real emails.
+];
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'gii';
