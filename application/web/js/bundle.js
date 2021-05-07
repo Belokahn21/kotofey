@@ -5987,7 +5987,9 @@ var Checkout = /*#__PURE__*/function (_Component) {
             addr_city: result[0].place,
             addr_street: result[0].street,
             addr_home: result[0].house,
-            addr_room: result[0].room
+            addr_room: result[0].room,
+            addr_pouch: null,
+            addr_floor: null
           });
         });
       }, this.cleanAddressTimer);
