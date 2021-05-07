@@ -27,7 +27,7 @@ class AdmissionController extends Controller
                 'NAME' => $product->name,
             ]);
 
-//            $member->is_active = false;
+            $member->is_active = false;
             if (!$member->validate() || $member->update() === false) print_r($member->getErrors());
         }
     }
