@@ -1,5 +1,6 @@
 <?php
 
+use mihaildev\ckeditor\CKEditor;
 use yii\helpers\ArrayHelper;
 
 /* @var $events \app\modules\mailer\models\entity\MailEvents[] */
@@ -41,7 +42,12 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
 
-        <?= $form->field($model, 'text')->textarea(['placeholder' => 'Текст сообщения'])->label(false); ?>
+        <?= $form->field($model, 'text')->widget(CKEditor::className(), [
+            'editorOptions' => [
+                'preset' => 'full',
+                'inline' => false
+            ]
+        ]); ?>
 
     </div>
 </div>
