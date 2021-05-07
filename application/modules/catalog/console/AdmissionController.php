@@ -18,10 +18,9 @@ class AdmissionController extends Controller
         foreach ($members as $member) {
             if (!$product = Product::findOne($member->product_id)) continue;
 
-
             $mailer = new MailService();
             $mailer->sendEvent($module->admission_event_id, [
-                'EMAIL_FROM' => 'info@kotofey.store',
+                'EMAIL_FROM' => 'sale@kotofey.store',
                 'EMAIL_TO' => $member->email,
                 'NAME' => $product->name,
             ]);
