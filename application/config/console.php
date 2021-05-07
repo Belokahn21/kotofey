@@ -14,12 +14,8 @@ $config = [
         '@webroot' => dirname(dirname(__FILE__)) . '/web',
     ],
     'components' => [
-
         'request' => [
-            // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
-            'cookieValidationKey' => 'o47rMjhQ6Rk50sxHSuLaEput3lsfchPR',
             'baseUrl' => '',
-//            'baseUrl' => str_replace('/web', '', (new \yii\web\Request)->getBaseUrl()),
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
