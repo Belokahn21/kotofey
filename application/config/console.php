@@ -14,9 +14,6 @@ $config = [
         '@webroot' => dirname(dirname(__FILE__)) . '/web',
     ],
     'components' => [
-        'request' => [
-            'baseUrl' => '',
-        ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
