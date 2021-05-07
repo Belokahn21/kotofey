@@ -36,6 +36,101 @@ $config = [
             ],
         ],
         'db' => $db,
+        'urlManager' => [
+            'suffix' => '/',
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'enableStrictParsing' => false,
+            'rules' => [
+                //backend rest
+                'GET backend/api/<module>/<id:\d+>' => '<module>/rest-backend/view',
+                'GET backend/api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest-backend/view',
+
+                'GET backend/api/<module>' => '<module>/rest-backend/index',
+                'GET backend/api/<module>/<controller>' => '<module>/<controller>-rest-backend/index',
+
+                'POST backend/api/<module>' => '<module>/rest-backend/create',
+                'POST backend/api/<module>/<controller>' => '<module>/<controller>-rest-backend/create',
+
+                'DELETE backend/api/<module>/<id[\w]+>' => '<module>/rest-backend/delete',
+                'DELETE backend/api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest-backend/delete',
+
+
+                //frontend rest
+                'GET api/<module>/<id[\w]+>' => '<module>/rest/view',
+                'GET api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/view',
+
+
+                'GET api/<module>' => '<module>/rest/index',
+                'GET api/<module>/<controller>' => '<module>/<controller>-rest/index',
+
+                'POST api/<module>' => '<module>/rest/create',
+                'POST api/<module>/<controller>' => '<module>/<controller>-rest/create',
+
+                'PATCH api/<module>' => '<module>/rest/update',
+                'PATCH api/<module>/<controller>' => '<module>/<controller>-rest/update',
+
+                'DELETE api/<module>/<id[\w]+>' => '<module>/rest/delete',
+                'DELETE api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/delete',
+
+                '/' => 'site/site/index',
+                'delivery' => 'site/site/delivery',
+                'contacts' => 'site/site/contacts',
+                'about' => 'site/site/about',
+                'about/agree' => 'site/site/agree',
+                'promotion' => 'promotion/promotion/index',
+                'promotion/<id[A-Za-z-\/\d_]+>' => 'promotion/promotion/view',
+                'signin' => 'user/auth/signin',
+                'signup' => 'user/auth/signup',
+                'restore' => 'user/auth/restore',
+                'vk' => 'user/auth/vk',
+                'restore/<id[A-Za-z-\/\d_]+>' => 'user/auth/restoring',
+                'payment/success' => 'payment/payment/success',
+                'payment/fail' => 'payment/payment/fail',
+
+                'market' => 'export/yml/index',
+                'aliexpress' => 'export/aliexpress/index',
+                'checkout' => 'order/order/create',
+                'clear' => 'basket/basket/clear',
+                'gii' => 'gii',
+
+                'vacancy' => 'vacancy/vacancy/index',
+                'vacancy/<id>' => 'vacancy/vacancy/view',
+                'brand' => 'catalog/brand/index',
+                'brand/<id[A-Za-z-\/\d_]+>' => 'catalog/brand/view',
+                'search' => 'search/search/index',
+                'cache' => 'site/site/cache',
+                'news' => 'news/news/index',
+                'pet/update/<id:[\d]+>' => 'pets/pet/update',
+                'pet/delete/<id:[\d]+>' => 'pets/pet/delete',
+                'profile' => 'user/profile/index',
+                'profile/billing/<id:[\d]+>' => 'user/profile/billing',
+                'profile/billing-delete/<id:[\d]+>' => 'user/profile/billing-delete',
+                'profile/order/<id:[\d]+>' => 'order/order/view',
+                'logout' => 'user/profile/logout',
+                'news/<id[A-Za-z-\/\d_]+>' => 'news/news/view',
+                'product/<id[A-Za-z-\/\d_]+>' => 'catalog/product/view',
+                'catalog' => 'catalog/catalog/index',
+                'catalog/<id[A-Za-z-\/\d_]+>/<page>' => 'catalog/catalog/index',
+                'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',
+
+                'ajax/exist' => 'ajax/exist',
+                'ajax/mark/<mark:\d+>' => 'site/ajax/save-product-mark',
+                'test' => 'site/site/test',
+                'admin/catalog-fill' => 'catalog/ajax/catalog-fill-from-vendor',
+                'save-notify-admission' => 'catalog/product/save-notify-admission',
+                'remove-notify-admission' => 'catalog/product/remove-notify-admission',
+                'get-mini-cart-amount' => 'catalog/ajax/get-mini-cart-amount',
+                'get-mini-cart-count' => 'catalog/ajax/get-mini-cart-count',
+
+                'admin/<module>/<controller>/' => '<module>/<controller>/index',
+                'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+
+                '<module>/<controller>/<action>/<id[A-Za-z-\/\d_]+>' => '<module>/<controller>/<action>',
+                '<module>/<controller>/' => '<module>/<controller>/index',
+                '<module>/<controller>/<action>' => '<module>/<controller>/<action>',
+            ]
+        ],
     ],
     'params' => $params,
 
