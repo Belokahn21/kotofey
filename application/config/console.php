@@ -37,7 +37,7 @@ $config = [
         ],
         'db' => $db,
         'urlManager' => [
-            'baseUrl' => '',
+            'baseUrl' => 'https://kotofey.store/',
             'suffix' => '/',
             'enablePrettyUrl' => true,
             'showScriptName' => false,
