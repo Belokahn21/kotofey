@@ -3,6 +3,7 @@
 namespace app\modules\mailer\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "mail_events".
@@ -17,40 +18,41 @@ use Yii;
  */
 class MailEvents extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
+    public function behaviors()
     {
-        return 'mail_events';
+        return [
+            TimestampBehavior::className()
+        ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
-            [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
+            [['sort'], 'default', 'value' => 500],
+
+            [['is_active'], 'default', 'value' => true],
+            [['is_active'], 'boolean'],
+
+            [['sort', 'created_at', 'updated_at'], 'integer'],
+
             [['name', 'code'], 'required'],
+
             [['name'], 'string', 'max' => 128],
+
             [['code'], 'string', 'max' => 255],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'is_active' => 'Is Active',
-            'sort' => 'Sort',
-            'name' => 'Name',
-            'code' => 'Code',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'is_active' => 'Активность',
+            'sort' => 'Сортировка',
+            'name' => 'Название',
+            'code' => 'Символьный код',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

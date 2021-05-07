@@ -18,7 +18,6 @@ $this->title = Title::show('Почтовые шаблоны');
         <?= Html::a('Почтовые события', Url::to(['/admin/mailer/events-backend/index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin([
-    'enableAjaxValidation' => true,
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
 <?= $this->render('_form', [
@@ -35,6 +34,7 @@ $this->title = Title::show('Почтовые шаблоны');
     'emptyText' => 'Почтовые шаблоны отсутствуют',
     'columns' => [
         'id',
+        'is_active',
         'name',
         'code',
         'from',

@@ -12,6 +12,7 @@ $this->title = Title::show('Запросы на уведомление');
 ?>
     <div class="title-group">
         <h1>Запросы на уведомление от <?= $model->email; ?></h1>
+        <?= Html::a('Назад', \yii\helpers\Url::to(['index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,

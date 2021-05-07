@@ -32,6 +32,7 @@ $this->title = Title::show('Запросы на уведомление');
     'emptyText' => 'Запросы отсутствуют',
     'columns' => [
         'id',
+        'is_active',
         'product_id',
         'email',
         [
@@ -48,7 +49,7 @@ $this->title = Title::show('Запросы на уведомление');
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
+//                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));

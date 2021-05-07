@@ -3,6 +3,7 @@
 
 namespace app\modules\mailer\models\services;
 
+use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\System;
 use Yii;
 use app\modules\mailer\models\entity\MailEvents;
@@ -18,11 +19,20 @@ class MailService
 
         foreach ($messages as $message) {
             $result = Yii::$app->mailer->compose();
-            $result->setHtmlBody($message->text);
+            $result->setHtmlBody($this->replaceValues($message->text, $params));
             $result->setFrom([$message->from => System::domain()]);
-            $result->setTo($message->to);
-            $result->setSubject($message->name);
+            $result->setTo($this->replaceValues($message->to, $params));
+            $result->setSubject($this->replaceValues($message->name, $params));
             $result->send();
         }
+    }
+
+    private function replaceValues(string $string, array $values)
+    {
+        foreach ($values as $k => $v) {
+            $string = str_replace("#{$k}#", $values[$k], $string);
+        }
+
+        return $string;
     }
 }

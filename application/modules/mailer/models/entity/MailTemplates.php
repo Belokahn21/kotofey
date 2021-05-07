@@ -3,6 +3,7 @@
 namespace app\modules\mailer\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "mail_templates".
@@ -21,13 +22,29 @@ use Yii;
  */
 class MailTemplates extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function rules()
     {
         return [
-            [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
-            [['name', 'code'], 'required'],
+            [['sort'], 'default', 'value' => 500],
+
+            [['is_active'], 'default', 'value' => true],
+            [['is_active'], 'boolean'],
+
+            [['sort', 'created_at', 'updated_at'], 'integer'],
+
+            [['name', 'code', 'event_id'], 'required'],
+
             [['text', 'event_id'], 'string'],
+
             [['name', 'to', 'from'], 'string', 'max' => 128],
+
             [['code'], 'string', 'max' => 255],
         ];
     }
@@ -36,16 +53,16 @@ class MailTemplates extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'is_active' => 'Is Active',
-            'sort' => 'Sort',
-            'name' => 'Name',
-            'to' => 'To',
-            'from' => 'From',
-            'code' => 'Code',
-            'text' => 'Text',
-            'event_id' => 'Event ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'is_active' => 'Активность',
+            'sort' => 'Сортировка',
+            'name' => 'Название',
+            'to' => 'Получатель',
+            'from' => 'Отправитель',
+            'code' => 'Символьный код',
+            'text' => 'Текст письма',
+            'event_id' => 'ID события',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

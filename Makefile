@@ -29,6 +29,9 @@ push:
 console:
 	cd application && php yii console/run
 
+admission:
+	cd application && php yii admission/send
+
 pull:
 	git pull
 
