@@ -11,20 +11,21 @@ class AdmissionController extends Controller
 {
     public function actionSend()
     {
+        $module = \Yii::$app->getModule('catalog');
         $members = NotifyAdmission::find()->where(['is_active' => true])->all();
+
+        if (empty($module->admission_event_id)) return false;
 
         foreach ($members as $member) {
             if (!$product = Product::findOne($member->product_id)) continue;
 
 
             $mailer = new MailService();
-            $mailer->sendEvent(1, [
+            $mailer->sendEvent($module->admission_event_id, [
                 'EMAIL_FROM' => 'info@kotofey.store',
                 'EMAIL_TO' => $member->email,
                 'NAME' => $product->name,
             ]);
-
-//            echo "send mail - {$product->name}" . PHP_EOL;
 
 //            $member->is_active = false;
             if (!$member->validate() || $member->update() === false) print_r($member->getErrors());

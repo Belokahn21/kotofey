@@ -2,11 +2,18 @@
 
 namespace app\modules\catalog;
 
+use app\modules\mailer\models\entity\MailEvents;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
+/**
+ *
+ * @property-read string[] $paramsLabel
+ */
 class Module extends \yii\base\Module
 {
     public $controllerNamespace = 'app\modules\catalog\controllers';
+    public $admission_event_id;
     private $name = 'Каталог';
 
     public function init()
@@ -31,5 +38,20 @@ class Module extends \yii\base\Module
     public function getName()
     {
         return $this->name;
+    }
+
+
+    public function getParams()
+    {
+        return [
+            'admission_event_id' => ArrayHelper::map(MailEvents::find()->all(), 'id', 'name'),
+        ];
+    }
+
+    public function getParamsLabel()
+    {
+        return [
+            'admission_event_id' => 'Почтовое событие для пользователя (Поступление товара)',
+        ];
     }
 }
