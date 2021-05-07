@@ -19,7 +19,7 @@ class MailService
         foreach ($messages as $message) {
             $result = Yii::$app->mailer->compose();
             $result->setHtmlBody($this->replaceValues($message->text, $params));
-            $result->setFrom([$message->from => System::domain()]);
+            $result->setFrom($this->replaceValues($message->from, $params));
             $result->setTo($this->replaceValues($message->to, $params));
             $result->setSubject($this->replaceValues($message->name, $params));
             $result->send();
