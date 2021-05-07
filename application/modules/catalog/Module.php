@@ -3,6 +3,7 @@
 namespace app\modules\catalog;
 
 use app\modules\mailer\models\entity\MailEvents;
+use app\modules\site\MainModule;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
@@ -10,7 +11,7 @@ use yii\helpers\Url;
  *
  * @property-read string[] $paramsLabel
  */
-class Module extends \yii\base\Module
+class Module extends MainModule
 {
     public $controllerNamespace = 'app\modules\catalog\controllers';
     public $admission_event_id;
@@ -19,7 +20,6 @@ class Module extends \yii\base\Module
     public function init()
     {
         parent::init();
-        // custom initialization code goes here
     }
 
     public function menuIndex()

@@ -13,7 +13,6 @@ class AdmissionController extends Controller
     {
         $module = \Yii::$app->getModule('catalog');
         $members = NotifyAdmission::find()->where(['is_active' => true])->all();
-
         if (empty($module->admission_event_id)) return false;
 
         foreach ($members as $member) {
