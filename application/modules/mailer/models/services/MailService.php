@@ -3,7 +3,6 @@
 
 namespace app\modules\mailer\models\services;
 
-use app\modules\site\models\tools\System;
 use Yii;
 use app\modules\mailer\models\entity\MailEvents;
 use app\modules\mailer\models\entity\MailTemplates;
