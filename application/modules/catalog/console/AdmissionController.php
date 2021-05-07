@@ -21,7 +21,7 @@ class AdmissionController extends Controller
 
             $mailer = new MailService();
             $mailer->sendEvent($module->admission_event_id, [
-                'EMAIL_FROM' => 'info@kotofey.store',
+                'EMAIL_FROM' => 'sale@kotofey.store',
                 'EMAIL_TO' => $member->email,
                 'NAME' => $product->name,
                 'LINK' => ProductHelper::getDetailUrl($product),
