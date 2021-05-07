@@ -19,8 +19,8 @@ use app\modules\catalog\models\entity\Product;
             <div class="col-6">
                 <div class="row">
                     <div class="col-4"><?= $form->field($model, 'is_active')->checkbox(); ?></div>
-                    <div class="col-4"><?= $form->field($model, 'email')->label(false); ?></div>
-                    <div class="col-4"><?= $form->field($model, 'product_id')->label(false); ?></div>
+                    <div class="col-4"><?= $form->field($model, 'email')->textInput(['placeholder' => 'Электронный адрес'])->label(false); ?></div>
+                    <div class="col-4"><?= $form->field($model, 'product_id')->textInput(['placeholder' => 'ID товара'])->label(false); ?></div>
                 </div>
             </div>
             <div class="col-6">
