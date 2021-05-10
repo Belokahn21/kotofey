@@ -19,7 +19,7 @@
   .rating__label {
     cursor: pointer;
     padding: 0 0.1em;
-    font-size: 2rem;
+    font-size: 0.7rem;
   }
 
   /* set default star color */
@@ -86,7 +86,7 @@
     cursor: pointer;
     /* if you change the left/right padding, update the margin-right property of .rating__label--half as well. */
     padding: 0 0.1em;
-    font-size: 2rem;
+    font-size: 0.7rem;
   }
 
   /* add padding and positioning to half star labels */
@@ -166,7 +166,7 @@
   .rating__label {
     cursor: pointer;
     padding: 0 0.1em;
-    font-size: 2rem;
+    font-size: 0.7rem;
   }
 
   /* set default star color */
