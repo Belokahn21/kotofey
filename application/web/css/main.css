@@ -15518,7 +15518,7 @@ label[for="site-form-pet-avatar"] {
   #full-stars-example .rating__label {
     cursor: pointer;
     padding: 0 0.1em;
-    font-size: 2rem; }
+    font-size: 0.7rem; }
   #full-stars-example .rating__icon--star {
     color: orange; }
   #full-stars-example .rating__icon--none {
@@ -15561,7 +15561,7 @@ label[for="site-form-pet-avatar"] {
     cursor: pointer;
     /* if you change the left/right padding, update the margin-right property of .rating__label--half as well. */
     padding: 0 0.1em;
-    font-size: 2rem; }
+    font-size: 0.7rem; }
   #half-stars-example .rating__label--half {
     padding-right: 0;
     margin-right: -1.2em;
@@ -15607,7 +15607,7 @@ label[for="site-form-pet-avatar"] {
   #full-stars-example-two .rating__label {
     cursor: pointer;
     padding: 0 0.1em;
-    font-size: 2rem; }
+    font-size: 0.7rem; }
   #full-stars-example-two .rating__icon--star {
     color: orange; }
   #full-stars-example-two .rating__input:checked ~ .rating__label .rating__icon--star {

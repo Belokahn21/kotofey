@@ -16,17 +16,21 @@
                         <div id="half-stars-example">
                             <div class="rating-group">
                                 <input class="rating__input rating__input--none" checked name="rating2" id="rating2-0" value="0" type="radio">
-                                <label aria-label="0 stars" class="rating__label" for="rating2-0">&nbsp;</label>
+                                <label aria-label="0 stars" class="rating__label" for="rating2-0"></label>
 
                                 <?php if ($model->rate): ?>
                                     <?php for ($i = 1; $i <= 10; $i++): ?>
                                         <?php $realRate = $i / 2; ?>
+                                        <?php $checked = ''; ?>
+                                        <?php if ($realRate == 1 || $realRate == $model->rate): ?>
+                                            <?php $checked = 'checked'; ?>
+                                        <?php endif; ?>
                                         <?php if ($i % 2 == 0): ?>
                                             <label aria-label="<?= $realRate; ?> star" class="rating__label" for="rating2-<?= $realRate; ?>"><i class="rating__icon rating__icon--star fa fa-star"></i></label>
-                                            <input class="rating__input" name="rating2" id="rating2-<?= $realRate; ?>" value="<?= $realRate; ?>" type="radio">
+                                            <input <?= $checked; ?> class="rating__input" name="rating2" id="rating2-<?= $realRate; ?>" value="<?= $realRate; ?>" type="radio">
                                         <?php else: ?>
                                             <label aria-label="<?= $realRate; ?> stars" class="rating__label rating__label--half" for="rating2-<?= $realRate; ?>"><i class="rating__icon rating__icon--star fa fa-star-half"></i></label>
-                                            <input class="rating__input" name="rating2" id="rating2-<?= $realRate; ?>" value="<?= $realRate; ?>" type="radio">
+                                            <input <?= $checked; ?> class="rating__input" name="rating2" id="rating2-<?= $realRate; ?>" value="<?= $realRate; ?>" type="radio">
                                         <?php endif; ?>
                                     <?php endfor; ?>
                                 <?php endif; ?>
