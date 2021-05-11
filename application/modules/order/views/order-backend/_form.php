@@ -62,6 +62,12 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                         </div>
 
                         <div class="info-card">
+                            <div class="title">Статус заказа</div>
+                            <div class="text">[<?= $model->is_paid ? '<span class="green">Оплачено</span>' : '<span class="red">Не оплачено</span>'; ?>]</div>
+                            <div class="text">[<?= $model->is_close ? '<span class="green">Закрыт</span>' : '<span class="red">Не закрыт</span>'; ?>]</div>
+                        </div>
+
+                        <div class="info-card">
                             <div class="title">Дата и адрес доставки</div>
                             <div class="text">
                                 <?php try { ?>
