@@ -5,6 +5,7 @@ namespace app\modules\statistic\widgets;
 
 use app\modules\logger\models\entity\Logger;
 use app\modules\order\models\entity\Order;
+use app\modules\reviews\models\entity\Reviews;
 use app\modules\search\models\entity\SearchQuery;
 use yii\base\Widget;
 use yii\caching\DbDependency;
@@ -38,10 +39,13 @@ class StatisticWidget extends Widget
             ->andWhere(['is_cancel' => false]);
         $ordersNow = $ordersNow->all();
 
+        $noFlashReviews = Reviews::find()->where(['is_active' => 1, 'status_id' => Reviews::STATUS_MODERATE])->all();
+
 
         return $this->render($this->view, [
             'searches' => $searches,
             'lastSearch' => $lastSearch,
+            'noFlashReviews' => $noFlashReviews,
             'logs' => $logs,
             'lastlogs' => $lastlogs,
             'ordersNow' => $ordersNow,

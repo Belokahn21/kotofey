@@ -4,15 +4,17 @@
  * @var $searches \app\modules\search\models\entity\SearchQuery[]
  * @var $logs \app\modules\logger\models\entity\Logger[]
  * @var $this \yii\web\View
+ * @var $noFlashReviews \app\modules\reviews\models\entity\Reviews[]
  */
 
-use app\modules\site\models\tools\Currency;
-use app\modules\site\models\tools\Price;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\entity\Product;
+use app\modules\site\models\tools\Currency;
 use app\modules\order\models\entity\Order;
-use yii\helpers\StringHelper;
 use app\modules\site\models\tools\Backup;
+use app\modules\site\models\tools\Price;
+use yii\helpers\StringHelper;
+use yii\helpers\Html;
 use yii\helpers\Url;
 
 $product = Product::find();
@@ -97,8 +99,7 @@ $product = Product::find();
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon"><i class="fas fa-truck"></i>
-                </div>
+                <div class="statistic__icon"><i class="fas fa-truck"></i></div>
                 <div class="statistic__content">
                     <div class="now-order-delivery-container">
                         <?php $now = new DateTime(); ?>
@@ -122,6 +123,18 @@ $product = Product::find();
                         <?php else: ?>
                             На сегодня нет доставок!
                         <?php endif; ?>
+                    </div>
+                </div>
+            </div>
+            <div class="statistic__item">
+                <div class="statistic__icon"><i class="fas fa-feather-alt"></i></div>
+                <div class="statistic__content">
+                    <div class="statistic-summary">
+                        <?php foreach ($noFlashReviews as $review): ?>
+                            <div class="statistic-summary__item" title="<?= $review->text; ?>">
+                                <?= Html::a($review->text, Url::to(['/admin/reviews/reviews-backend/update', 'id' => $review->id])) ?>
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
