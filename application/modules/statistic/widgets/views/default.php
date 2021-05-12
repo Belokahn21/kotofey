@@ -129,13 +129,17 @@ $product = Product::find();
             <div class="statistic__item">
                 <div class="statistic__icon"><i class="fas fa-feather-alt"></i></div>
                 <div class="statistic__content">
-                    <div class="statistic-summary">
-                        <?php foreach ($noFlashReviews as $review): ?>
-                            <div class="statistic-summary__item" title="<?= $review->text; ?>">
-                                <?= Html::a($review->text, Url::to(['/admin/reviews/reviews-backend/update', 'id' => $review->id])) ?>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
+                    <?php if ($noFlashReviews): ?>
+                        <div class="statistic-summary">
+                            <?php foreach ($noFlashReviews as $review): ?>
+                                <div class="statistic-summary__item" title="<?= $review->text; ?>">
+                                    <?= Html::a($review->text, Url::to(['/admin/reviews/reviews-backend/update', 'id' => $review->id])) ?>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        Отзывов без внимания нет!
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
