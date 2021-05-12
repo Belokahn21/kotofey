@@ -138,7 +138,7 @@ $product = Product::find();
                             <?php endforeach; ?>
                         </div>
                     <?php else: ?>
-                        Отзывов без внимания нет!
+                        <span class="green">Отзывов без внимания нет!</span>
                     <?php endif; ?>
                 </div>
             </div>
