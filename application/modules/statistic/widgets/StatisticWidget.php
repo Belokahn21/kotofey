@@ -39,13 +39,17 @@ class StatisticWidget extends Widget
             ->andWhere(['is_cancel' => false]);
         $ordersNow = $ordersNow->all();
 
-        $noFlashReviews = Reviews::find()->where(['is_active' => 1, 'status_id' => Reviews::STATUS_MODERATE])->all();
+        $no_attention_reviews = \Yii::$app->cache->getOrSet('no_attention_reviews', function () {
+            return Reviews::find()->where(['is_active' => 1, 'status_id' => Reviews::STATUS_MODERATE])->all();
+        }, $this->cacheTime, new DbDependency([
+            'sql' => 'select count(id) from `reviews` where `is_active`=1 and `status_id`=' . Reviews::STATUS_MODERATE
+        ]));
 
 
         return $this->render($this->view, [
             'searches' => $searches,
             'lastSearch' => $lastSearch,
-            'noFlashReviews' => $noFlashReviews,
+            'no_attention_reviews' => $no_attention_reviews,
             'logs' => $logs,
             'lastlogs' => $lastlogs,
             'ordersNow' => $ordersNow,

@@ -4,7 +4,7 @@
  * @var $searches \app\modules\search\models\entity\SearchQuery[]
  * @var $logs \app\modules\logger\models\entity\Logger[]
  * @var $this \yii\web\View
- * @var $noFlashReviews \app\modules\reviews\models\entity\Reviews[]
+ * @var $no_attention_reviews \app\modules\reviews\models\entity\Reviews[]
  */
 
 use app\modules\order\models\helpers\OrderHelper;
@@ -129,9 +129,9 @@ $product = Product::find();
             <div class="statistic__item">
                 <div class="statistic__icon"><i class="fas fa-feather-alt"></i></div>
                 <div class="statistic__content">
-                    <?php if ($noFlashReviews): ?>
+                    <?php if ($no_attention_reviews): ?>
                         <div class="statistic-summary">
-                            <?php foreach ($noFlashReviews as $review): ?>
+                            <?php foreach ($no_attention_reviews as $review): ?>
                                 <div class="statistic-summary__item" title="<?= $review->text; ?>">
                                     <?= Html::a($review->text, Url::to(['/admin/reviews/reviews-backend/update', 'id' => $review->id])) ?>
                                 </div>
