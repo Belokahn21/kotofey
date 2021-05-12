@@ -9,6 +9,7 @@ use app\modules\order\widgets\map\MapWidget;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\order\models\service\TrackingService;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 
@@ -329,6 +330,10 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
             </div>
             <div class="col-6">
                 Ответ от сервера отслеживания
+                <?php
+                $trackServivce = new TrackingService($model);
+                $trackServivce->getStatusDelivery();
+                ?>
             </div>
         </div>
     </div>
