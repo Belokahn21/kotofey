@@ -19,6 +19,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
  * @var $status \app\modules\order\models\entity\OrderStatus[]
  * @var $itemsModel \app\modules\order\models\entity\OrdersItems[]
  * @var $dateDelivery \app\modules\order\models\entity\OrderDate
+ * @var $trackForm \app\modules\order\models\entity\OrderTracking
  */
 
 ?>
@@ -31,6 +32,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
         <a class="nav-item nav-link" id="nav-items-edit-tab" data-toggle="tab" href="#nav-items-edit" role="tab" aria-controls="nav-items-edit" aria-selected="false">Товары в заказе</a>
         <a class="nav-item nav-link" id="nav-delivery-edit-tab" data-toggle="tab" href="#nav-delivery-edit" role="tab" aria-controls="nav-delivery-edit" aria-selected="false">Доставка</a>
         <a class="nav-item nav-link" id="nav-history-edit-tab" data-toggle="tab" href="#nav-history-edit" role="tab" aria-controls="nav-history-edit" aria-selected="false">История заказа</a>
+        <a class="nav-item nav-link" id="nav-tracking-edit-tab" data-toggle="tab" href="#nav-tracking-edit" role="tab" aria-controls="nav-tracking-edit" aria-selected="false">Отслеживание заказа</a>
     </div>
 </nav>
 
@@ -317,5 +319,17 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
             <hr/>
             <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
         <?php endif; ?>
+    </div>
+
+    <div class="tab-pane fade" id="nav-tracking-edit" role="tabpanel" aria-labelledby="nav-tracking-edit">
+        <div class="row">
+            <div class="col-6">
+                <?= $form->field($trackForm, 'ident_key'); ?>
+                <?= $form->field($trackForm, 'service_id')->dropDownList($trackForm->listDeliveryServices()); ?>
+            </div>
+            <div class="col-6">
+                Ответ от сервера отслеживания
+            </div>
+        </div>
     </div>
 </div>

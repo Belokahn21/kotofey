@@ -4,6 +4,7 @@ namespace app\modules\order\controllers;
 
 use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\logger\models\service\LogService;
+use app\modules\order\models\entity\OrderTracking;
 use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\acquiring\banks\Sberbank;
 use app\modules\payment\models\services\acquiring\AcquiringTerminalService;
@@ -56,6 +57,7 @@ class OrderBackendController extends MainBackendController
         $status = OrderStatus::find()->all();
         $searchModel = new OrderSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
+        $trackForm = new OrderTracking();
 
         if (\Yii::$app->request->isPost) {
             $transaction = \Yii::$app->db->beginTransaction();
@@ -117,6 +119,7 @@ class OrderBackendController extends MainBackendController
             'status' => $status,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'trackForm' => $trackForm,
         ]);
     }
 
@@ -135,6 +138,7 @@ class OrderBackendController extends MainBackendController
         if (!$dateDelivery = OrderDate::findOneByOrderId($model->id)) {
             $dateDelivery = new OrderDate();
         }
+        $trackForm = OrderTracking::findByOrderId($model->id);
 
         if (\Yii::$app->request->isPost) {
             $transaction = \Yii::$app->db->beginTransaction();
@@ -207,6 +211,7 @@ class OrderBackendController extends MainBackendController
             'deliveries' => $deliveries,
             'payments' => $payments,
             'status' => $status,
+            'trackForm' => $trackForm,
         ]);
     }
 

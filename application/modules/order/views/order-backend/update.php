@@ -13,6 +13,7 @@ use yii\helpers\Url;
  * @var $payments \app\modules\payment\models\entity\Payment[]
  * @var $status \app\modules\order\models\entity\OrderStatus[]
  * @var $itemsModel \app\modules\order\models\entity\OrdersItems
+ * @var $trackForm \app\modules\order\models\entity\OrderTracking
  */
 
 $this->title = Title::show("Обновить заказ: " . $model->id);
@@ -41,6 +42,7 @@ $this->title = Title::show("Обновить заказ: " . $model->id);
     'payments' => $payments,
     'status' => $status,
     'form' => $form,
+    'trackForm' => $trackForm,
 ]); ?>
 <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end() ?>
