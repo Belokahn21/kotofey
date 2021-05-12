@@ -3,6 +3,7 @@
 use yii\helpers\Json;
 use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\ProductTitle;
+use app\modules\reviews\models\entity\Reviews;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
@@ -120,7 +121,7 @@ $this->title = ProductTitle::show($product->name);
                 <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
                 <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
                 <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Как купить?</a>
-                <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы</a>
+                <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы (<?= Reviews::find()->where(['product_id' => $product->id, 'is_active' => 1, 'status_id' => Reviews::STATUS_ENABLE])->count(); ?>)</a>
             </div>
         </nav>
         <div class="tab-content product-tab-content" id="nav-tabContent">
