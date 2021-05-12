@@ -13,9 +13,10 @@ class RouteBackendController extends MainBackendController
     public function actionIndex()
     {
         $model = new LogisticForm();
-        $models = Order::find()
+        $models = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')
             ->where(['is_close' => false, 'is_cancel' => false])
-            ->orderBy(['id' => SORT_DESC]);
+            ->where(['order_date.date' => date('d.m.Y')])
+            ->orderBy(['id' => SORT_ASC]);
         $models = $models->all();
 
 
