@@ -57,7 +57,10 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                 <div class="text">Бонусы: <?= $model->bonus; ?> <?= Currency::getInstance()->show(); ?></div>
                             <?php endif; ?>
                             <?php if (!empty($model->odd)): ?>
-                                <div class="text red">Требуется сдача с: <?= $model->odd; ?> <?= Currency::getInstance()->show(); ?>(<?= $model->odd - OrderHelper::orderSummary($model); ?>)</div>
+                                <div class="text red">
+                                    Требуется сдача с: <?= $model->odd; ?> <?= Currency::getInstance()->show(); ?>
+                                    <br>
+                                    Сдача <?= $model->odd - OrderHelper::orderSummary($model); ?> <?= Currency::getInstance()->show(); ?></div>
                             <?php endif; ?>
                         </div>
 
