@@ -14,7 +14,7 @@ class RouteBackendController extends MainBackendController
     {
         $model = new LogisticForm();
         $models = Order::find()
-            ->where(['is_close' => false, 'is_cancel' => false, 'status' => 8])
+            ->where(['is_close' => false, 'is_cancel' => false])
             ->orderBy(['id' => SORT_DESC]);
         $models = $models->all();
 
