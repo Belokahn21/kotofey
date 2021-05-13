@@ -135,10 +135,14 @@ class OrderBackendController extends MainBackendController
         $deliveries = Delivery::find()->all();
         $payments = Payment::find()->all();
         $status = OrderStatus::find()->all();
+
         if (!$dateDelivery = OrderDate::findOneByOrderId($model->id)) {
             $dateDelivery = new OrderDate();
         }
-        $trackForm = OrderTracking::findByOrderId($model->id);
+
+        if (!$trackForm = OrderTracking::findByOrderId($model->id)) {
+            $trackForm = new OrderTracking();
+        }
 
         if (\Yii::$app->request->isPost) {
             $transaction = \Yii::$app->db->beginTransaction();
