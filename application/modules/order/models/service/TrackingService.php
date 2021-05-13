@@ -46,6 +46,8 @@ class TrackingService
             case OrderTracking::SERVICE_CDEK:
                 $this->_service = new CdekTracking();
                 break;
+            default:
+                throw new \Exception('Сервис доставки не указан.');
         }
     }
 
@@ -55,6 +57,6 @@ class TrackingService
 
     public function getStatusDelivery()
     {
-//        $this->_service->getStatusDelivery();
+        $this->_service->getStatusDelivery();
     }
 }
