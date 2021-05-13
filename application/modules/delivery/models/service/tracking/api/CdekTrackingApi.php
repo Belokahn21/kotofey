@@ -1,10 +1,8 @@
 <?php
 
-
 namespace app\modules\delivery\models\service\tracking\api;
 
-
-interface TrackingApi
+class CdekTrackingApi implements TrackingApi
 {
-    public function getStatusDelivery();
+
 }

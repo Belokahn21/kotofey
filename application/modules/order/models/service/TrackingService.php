@@ -11,12 +11,11 @@ use app\modules\delivery\models\service\tracking\Tracking;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrderTracking;
 
-
 /**
  * @var $_order Order
  * @var $_track_model OrderTracking
  * @var $_service Tracking
- * */
+ */
 class TrackingService
 {
     private $_order;
