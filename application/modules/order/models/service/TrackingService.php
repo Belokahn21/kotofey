@@ -55,6 +55,6 @@ class TrackingService
 
     public function getStatusDelivery()
     {
-        $this->_service->getStatusDelivery();
+//        $this->_service->getStatusDelivery();
     }
 }
