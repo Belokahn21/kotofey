@@ -220,6 +220,9 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'client')->textInput(['placeholder' => 'ФИО клиента', 'class' => 'form-control clean-phone'])->label(false); ?>
                 </div>
+                <div class="w-25 p-1">
+                    <?= $form->field($model, 'odd')->textInput(['placeholder' => 'Сдача'])->label(false); ?>
+                </div>
             </div>
         </div>
 
