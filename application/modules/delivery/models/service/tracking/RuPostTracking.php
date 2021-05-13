@@ -12,7 +12,7 @@ class RuPostTracking extends ATracking
         $this->_api = new RuPostTrackingApi();
     }
 
-    public function getStatusDelivery()
+    public function getStatusDelivery($track_id)
     {
     }
 }
