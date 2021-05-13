@@ -27,6 +27,10 @@ class TrackingService
         $this->_order = $order;
 
         $this->getTrackModel();
+
+        if (!$this->_track_model instanceof OrderTracking) throw new \Exception('Модель не получена');
+
+        $this->choseService();
     }
 
     public function getTrackModel()
@@ -55,8 +59,8 @@ class TrackingService
     {
     }
 
-    public function getStatusDelivery()
+    public function getOrderInfo()
     {
-        $this->_service->getStatusDelivery();
+        $this->_service->getOrderInfo($this->_track_model->ident_key);
     }
 }

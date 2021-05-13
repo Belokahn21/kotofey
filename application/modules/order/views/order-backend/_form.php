@@ -334,8 +334,12 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
             <div class="col-6">
                 Ответ от сервера отслеживания
                 <?php
-//                $trackServivce = new TrackingService($model);
-//                $trackServivce->getStatusDelivery();
+                try {
+                    $trackServivce = new TrackingService($model);
+                    $trackServivce->getOrderInfo();
+                } catch (Exception $x) {
+                    echo $x->getMessage();
+                }
                 ?>
             </div>
         </div>

@@ -438,6 +438,9 @@ class Product extends \yii\db\ActiveRecord
             'href' => function ($model) {
                 return ProductHelper::getDetailUrl($model);
             },
+            'backendHref' => function ($model) {
+                return Url::to(['/admin/catalog/product-backend/update', 'id' => $model->id]);
+            },
             'imageUrl' => function ($model) {
                 return ProductHelper::getImageUrl($model);
             },

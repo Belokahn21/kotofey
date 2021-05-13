@@ -4420,8 +4420,7 @@ var Search = /*#__PURE__*/function (_React$Component) {
     _this.timerId = null;
     _this.state = {
       result: [],
-      isShowResult: false,
-      isNeedShowLoader: ""
+      isShowResult: false
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_this));
     return _this;
@@ -4434,38 +4433,16 @@ var Search = /*#__PURE__*/function (_React$Component) {
 
       var elements = [];
       var value = e.target.value;
-      var timerTime = 3000;
-      var url = (_config__WEBPACK_IMPORTED_MODULE_2___default().restSearchGet) + "?text=" + value;
-
-      if (this.timerId) {
-        clearTimeout(this.timerId);
-      }
-
+      var timerTime = 1000;
+      var url = (_config__WEBPACK_IMPORTED_MODULE_2___default().restCatalog) + "?ProductSearchForm[name]=" + value + '&expand=backendHref';
+      if (this.timerId) clearTimeout(this.timerId);
       this.timerId = setTimeout(function () {
-        _this2.loadProcessOn();
-
         fetch(url).then(function (response) {
           return response.json();
         }).then(function (commits) {
-          _this2.loadProcessOff();
-
-          _this2.renderResult(JSON.parse(commits));
+          _this2.renderResult(commits);
         });
       }, timerTime);
-    }
-  }, {
-    key: "loadProcessOn",
-    value: function loadProcessOn() {
-      this.setState({
-        isNeedShowLoader: "with-loader"
-      });
-    }
-  }, {
-    key: "loadProcessOff",
-    value: function loadProcessOff() {
-      this.setState({
-        isNeedShowLoader: ""
-      });
     }
   }, {
     key: "renderResult",
@@ -4485,7 +4462,7 @@ var Search = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "search-form"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: this.state.isNeedShowLoader + " search-form__input",
+        className: "search-form__input",
         name: "search",
         placeholder: "\u041F\u043E\u0438\u0441\u043A \u043F\u043E \u0441\u0430\u0439\u0442\u0443...",
         onChange: this.handleClick
@@ -4565,7 +4542,7 @@ var SearchResult = /*#__PURE__*/function (_React$Component) {
             className: "search-result__item",
             key: index
           }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-            href: "",
+            href: product.backendHref,
             className: "search-result__link"
           }, product.name));
         })));

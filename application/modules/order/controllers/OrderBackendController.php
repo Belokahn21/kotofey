@@ -201,6 +201,22 @@ class OrderBackendController extends MainBackendController
                     }
                 }
 
+                if ($trackForm->isNewRecord) {
+                    if ($trackForm->load(Yii::$app->request->post())) {
+                        $trackForm->order_id = $model->id;
+                        if ($trackForm->validate()) {
+                            $trackForm->save();
+                        }
+
+                    }
+                } else {
+                    if ($trackForm->load(Yii::$app->request->post())) {
+                        if ($trackForm->validate()) {
+                            $trackForm->update();
+                        }
+                    }
+                }
+
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно обновлён');
                 return $this->refresh();

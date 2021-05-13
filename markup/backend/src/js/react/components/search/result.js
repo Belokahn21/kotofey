@@ -9,7 +9,7 @@ class SearchResult extends React.Component {
 					<p className="search-result__label">Результаты:</p>
 					<ul className="search-result">
 						{this.props.result.map((product, index) => {
-							return <li className="search-result__item" key={index}><a href="" className="search-result__link">{product.name}</a></li>
+							return <li className="search-result__item" key={index}><a href={product.backendHref} className="search-result__link">{product.name}</a></li>
 						})}
 					</ul>
 				</div>

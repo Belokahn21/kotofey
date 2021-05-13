@@ -17,8 +17,8 @@ class CdekTracking extends ATracking
         $this->_api = new CdekTrackingApi();
     }
 
-    public function getStatusDelivery($track_id)
+    public function getOrderInfo($track_id)
     {
-        $this->_api->getStatusDelivery($track_id);
+        $this->_api->getOrderInfo($track_id);
     }
 }

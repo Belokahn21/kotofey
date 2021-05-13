@@ -6,5 +6,5 @@ namespace app\modules\delivery\models\service\tracking\api;
 
 interface TrackingApi
 {
-    public function getStatusDelivery(string $track_id);
+    public function getOrderInfo(string $track_id);
 }
