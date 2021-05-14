@@ -61,6 +61,6 @@ class TrackingService
 
     public function getOrderInfo()
     {
-        $this->_service->getOrderInfo($this->_track_model->ident_key);
+        return $this->_service->getOrderInfo($this->_track_model->ident_key);
     }
 }

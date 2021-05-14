@@ -6,6 +6,7 @@ use app\modules\delivery\models\service\tracking\auth\cdek\CdekAuth;
 use app\modules\delivery\models\service\tracking\auth\cdek\CdekAuthApiInterface;
 use app\modules\site\models\tools\Curl;
 use app\modules\site\models\tools\Debug;
+use yii\helpers\Json;
 
 /**
  * @property CdekAuthApiInterface $auth
@@ -30,7 +31,7 @@ class CdekTrackingApi implements TrackingApi
 
     public function getOrderInfo(string $track_id)
     {
-        $this->getRequest("orders?cdek_number=$track_id");
+        return $this->getRequest("orders?cdek_number=$track_id");
     }
 
     public function postRequest(string $url, array $params = [], array $headers = [])
@@ -42,7 +43,7 @@ class CdekTrackingApi implements TrackingApi
         $curl = new Curl();
         $response = $curl->post($this->_url . $url, $params, $headers);
 
-        Debug::p($response);
+        return Json::decode($response, false);
     }
 
     public function getRequest(string $url, array $params = [], array $headers = [])
@@ -55,7 +56,7 @@ class CdekTrackingApi implements TrackingApi
         $curl = new Curl();
         $response = $curl->get($this->_url . $url, $params, $headers);
 
-        Debug::p($response);
+        return Json::decode($response, false);
     }
 
 

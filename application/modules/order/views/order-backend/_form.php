@@ -336,7 +336,9 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                 <?php
                 try {
                     $trackServivce = new TrackingService($model);
-                    $trackServivce->getOrderInfo();
+                    $order_info = $trackServivce->getOrderInfo();
+
+                    \app\modules\site\models\tools\Debug::p($order_info);
                 } catch (Exception $x) {
                     echo $x->getMessage();
                 }
