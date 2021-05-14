@@ -19,9 +19,7 @@ class CdekTrackingApi implements TrackingApi
 
     public function getOrderInfo(string $track_id)
     {
-        $this->postRequest("https://integration.cdek.ru/info_report.php", [
-
-        ]);
+        $this->getRequest("https://api.edu.cdek.ru/v2/orders?cdek_number=$track_id");
     }
 
     public function postRequest(string $url, array $params = [], array $headers = [])
@@ -31,13 +29,21 @@ class CdekTrackingApi implements TrackingApi
         }
 
         $curl = new Curl();
-        $response = $curl->get($url, $params, $headers);
+        $response = $curl->post($url, $params, $headers);
 
         Debug::p($response);
     }
 
-    public function getRequest($url, $params)
+    public function getRequest(string $url, array $params = [], array $headers = [])
     {
 
+        if ($this->auth) {
+            $headers[] = 'Authorisation: Bearer ' . $this->auth->access_token;
+        }
+
+        $curl = new Curl();
+        $response = $curl->get($url, $params, $headers);
+
+        Debug::p($response);
     }
 }
