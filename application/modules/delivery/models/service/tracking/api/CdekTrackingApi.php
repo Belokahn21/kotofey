@@ -36,7 +36,7 @@ class CdekTrackingApi implements TrackingApi
     public function postRequest(string $url, array $params = [], array $headers = [])
     {
         if ($this->auth) {
-            $headers[] = 'Authorisation: Bearer ' . $this->auth->access_token;
+            $headers[] = "Authorization: Bearer {$this->auth->access_token}";
         }
 
         $curl = new Curl();
@@ -49,7 +49,7 @@ class CdekTrackingApi implements TrackingApi
     {
 
         if ($this->auth) {
-            $headers[] = 'Authorisation: Bearer ' . $this->auth->access_token;
+            $headers[] = "Authorization: Bearer {$this->auth->access_token}";
         }
 
         $curl = new Curl();
