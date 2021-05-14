@@ -19,12 +19,12 @@ class CdekTrackingApi implements TrackingApi
 
     public function getOrderInfo(string $track_id)
     {
-        $this->postRequest("https://api.edu.cdek.ru/v2/orders?cdek_number=$track_id", [
-            'Content-Type: application/json'
+        $this->postRequest("https://integration.cdek.ru/info_report.php", [
+
         ]);
     }
 
-    public function postRequest(string $url, array $params, array $headers = [])
+    public function postRequest(string $url, array $params = [], array $headers = [])
     {
         if ($this->auth) {
             $headers[] = 'Authorisation: Bearer ' . $this->auth->access_token;
