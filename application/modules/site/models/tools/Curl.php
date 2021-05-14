@@ -21,7 +21,14 @@ class Curl
         return $out;
     }
 
-    public function get()
+    public function get(string $url, array $data = [], array $headers = [])
     {
+        $curl = curl_init($url . '?' . http_build_query($data));
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+//        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+        $response = curl_exec($curl);
+        curl_close($curl);
+        return $response;
     }
 }

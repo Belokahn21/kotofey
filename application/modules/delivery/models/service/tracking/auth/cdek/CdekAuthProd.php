@@ -4,7 +4,7 @@
 namespace app\modules\delivery\models\service\tracking\auth\cdek;
 
 
-class CdekAuthProd extends ACdekAuthApi
+class CdekAuthProd extends AbstractCdekAuthApi
 {
     protected $_url = 'https://api.cdek.ru/v2/oauth/token?parameters';
 

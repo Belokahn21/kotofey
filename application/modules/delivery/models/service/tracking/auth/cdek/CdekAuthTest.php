@@ -1,12 +1,8 @@
 <?php
 
-
 namespace app\modules\delivery\models\service\tracking\auth\cdek;
 
-
-use app\modules\site\models\tools\Curl;
-
-class CdekAuthTest extends ACdekAuthApi
+class CdekAuthTest extends AbstractCdekAuthApi
 {
     protected $_url = 'https://api.edu.cdek.ru/v2/oauth/token?parameters';
 

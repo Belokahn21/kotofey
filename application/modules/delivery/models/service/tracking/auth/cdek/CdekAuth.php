@@ -8,24 +8,35 @@ class CdekAuth
 {
     private $_auth_api;
 
-    public function __construct()
+    public function getAuthData()
     {
 
         $module = \Yii::$app->getModule('delivery');
 
-        $login = $module->cdek_login;
-        $password = $module->cdek_password;
+//        $login = $module->cdek_login;
+//        $password = $module->cdek_password;
+
+        // test
+        $login = 'EMscd6r9JnFiQ3bLoyjJY6eM78JrJceI';
+        $password = 'PjLZkKBHEiLK3YsjtNrt3TGNG0ahs3kG';
+
+
+        // production
+//        $login = 'zwIwSlOu6gzahO9Wfrt7JZ0nuxim2btq';
+//        $password = 'SFrBOZ3xzjjyqi4zfYE0SiaH8yn2bHeV';
+
 
         switch (YII_ENV) {
             case "dev":
-                return $this->_auth_api = new CdekAuthTest($login, $password);
+                $this->_auth_api = new CdekAuthTest($login, $password);
                 break;
             case "prod":
-                return $this->_auth_api = new CdekAuthProd($login, $password);
+                $this->_auth_api = new CdekAuthProd($login, $password);
                 break;
             default:
                 throw new \Exception('YII_ENV не определён. Невозможно авторизоваться.');
-                break;
         }
+
+        return $this->_auth_api->auth();
     }
 }
