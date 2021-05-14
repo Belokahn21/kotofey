@@ -34,7 +34,6 @@ class CdekTrackingApi implements TrackingApi
         $response = $curl->get($url, $params, $headers);
 
         Debug::p($response);
-        exit();
     }
 
     public function getRequest($url, $params)
