@@ -337,8 +337,9 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                 try {
                     $trackServivce = new TrackingService($model);
                     $order_info = $trackServivce->getOrderInfo();
-
-                    \app\modules\site\models\tools\Debug::p($order_info);
+                    if (isset($order_info->entity) && isset($order_info->entity->uuid)) { ?>
+                        <p class="green">Умничка</p>
+                    <?php }
                 } catch (Exception $x) {
                     echo $x->getMessage();
                 }
