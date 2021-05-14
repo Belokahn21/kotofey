@@ -345,7 +345,18 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                     Мааршрут заказа
                                 </div>
                                 <div class="backend-order-tracking-block__title">
-                                    топ топ
+                                    <?php if (isset($order_info->entity->statuses)): ?>
+                                        <div class="backend-order-tracking-statuses">
+                                            <?php foreach ($order_info->entity->statuses as $status): ?>
+                                                <div class="backend-order-tracking-statuses__item">
+                                                    <ul>
+                                                        <li><?= $status->name; ?></li>
+                                                        <li>Дата: <?= explode('T', $status->date_time)[0]; ?></li>
+                                                    </ul>
+                                                </div>
+                                            <?php endforeach; ?>
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>
