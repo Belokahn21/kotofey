@@ -344,7 +344,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                 <div class="backend-order-tracking-block__title">
                                     Мааршрут заказа
                                 </div>
-                                <div class="backend-order-tracking-block__title">
+                                <div class="backend-order-tracking-block__content">
                                     <?php if (isset($order_info->entity->statuses)): ?>
                                         <div class="backend-order-tracking-statuses">
                                             <?php foreach ($order_info->entity->statuses as $status): ?>

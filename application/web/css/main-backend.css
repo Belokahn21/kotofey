@@ -8825,6 +8825,9 @@ html, body {
 .backend-order-tracking-block {
   padding: 10px;
   border: 1px solid rgba(0, 0, 0, 0.3); }
+  .backend-order-tracking-block__title {
+    background: #00BFFF;
+    color: white; }
 
 /*-----------------------------------------------------------*/
 .content {
