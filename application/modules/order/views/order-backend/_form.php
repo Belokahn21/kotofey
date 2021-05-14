@@ -338,7 +338,20 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                     $trackServivce = new TrackingService($model);
                     $order_info = $trackServivce->getOrderInfo();
                     if (isset($order_info->entity) && isset($order_info->entity->uuid)) { ?>
-                        <p class="green">Умничка</p>
+
+                        <div class="backend-order-tracking">
+                            <div class="backend-order-tracking-block">
+                                <div class="backend-order-tracking-block__title">
+                                    Мааршрут заказа
+                                </div>
+                                <div class="backend-order-tracking-block__title">
+                                    топ топ
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php \app\modules\site\models\tools\Debug::p($order_info->entity); ?>
+
                     <?php }
                 } catch (Exception $x) {
                     echo $x->getMessage();
