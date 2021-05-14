@@ -8822,6 +8822,10 @@ html, body {
       outline: none;
       border: 0; }
 
+.backend-order-tracking-block {
+  padding: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.3); }
+
 /*-----------------------------------------------------------*/
 .content {
   float: left;
