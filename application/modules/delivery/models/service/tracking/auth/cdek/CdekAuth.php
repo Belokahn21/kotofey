@@ -10,20 +10,17 @@ class CdekAuth
 
     public function getAuthData()
     {
-
         $module = \Yii::$app->getModule('delivery');
-
 //        $login = $module->cdek_login;
 //        $password = $module->cdek_password;
 
-        // test
-        $login = 'EMscd6r9JnFiQ3bLoyjJY6eM78JrJceI';
-        $password = 'PjLZkKBHEiLK3YsjtNrt3TGNG0ahs3kG';
-
-
-        // production
-//        $login = 'zwIwSlOu6gzahO9Wfrt7JZ0nuxim2btq';
-//        $password = 'SFrBOZ3xzjjyqi4zfYE0SiaH8yn2bHeV';
+        if (YII_ENV == 'dev') {
+            $login = 'EMscd6r9JnFiQ3bLoyjJY6eM78JrJceI';
+            $password = 'PjLZkKBHEiLK3YsjtNrt3TGNG0ahs3kG';
+        } else {
+            $login = 'zwIwSlOu6gzahO9Wfrt7JZ0nuxim2btq';
+            $password = 'SFrBOZ3xzjjyqi4zfYE0SiaH8yn2bHeV';
+        }
 
 
         switch (YII_ENV) {

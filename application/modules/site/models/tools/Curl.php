@@ -25,6 +25,8 @@ class Curl
     {
         $curl = curl_init($url . '?' . http_build_query($data));
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+
+        Debug::p($headers);
         if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 //        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         $response = curl_exec($curl);
