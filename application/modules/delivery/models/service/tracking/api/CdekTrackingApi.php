@@ -12,14 +12,25 @@ use app\modules\site\models\tools\Debug;
  */
 class CdekTrackingApi implements TrackingApi
 {
+    private $_url;
+
     public function __construct()
     {
         $this->auth = (new CdekAuth())->getAuthData();
+
+        switch (YII_ENV) {
+            case 'dev':
+                $this->_url = 'https://api.edu.cdek.ru/v2/';
+                break;
+            case 'prod':
+                $this->_url = 'https://api.cdek.ru/v2/';
+                break;
+        }
     }
 
     public function getOrderInfo(string $track_id)
     {
-        $this->getRequest("https://api.edu.cdek.ru/v2/orders?cdek_number=$track_id");
+        $this->getRequest("orders?cdek_number=$track_id");
     }
 
     public function postRequest(string $url, array $params = [], array $headers = [])
@@ -29,7 +40,7 @@ class CdekTrackingApi implements TrackingApi
         }
 
         $curl = new Curl();
-        $response = $curl->post($url, $params, $headers);
+        $response = $curl->post($this->_url . $url, $params, $headers);
 
         Debug::p($response);
     }
@@ -42,8 +53,10 @@ class CdekTrackingApi implements TrackingApi
         }
 
         $curl = new Curl();
-        $response = $curl->get($url, $params, $headers);
+        $response = $curl->get($this->_url . $url, $params, $headers);
 
         Debug::p($response);
     }
+
+
 }
