@@ -24,13 +24,17 @@ class Curl
     public function get(string $url, array $data = [], array $headers = [])
     {
         $response = false;
-        if ($curl = curl_init($url . '?' . http_build_query($data))) {
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-            $response = curl_exec($curl);
-            curl_close($curl);
-            return $response;
+
+        if ($data) {
+            $curl = curl_init($url . '?' . http_build_query($data));
+        } else {
+            $curl = curl_init($url);
         }
+
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        $response = curl_exec($curl);
+        curl_close($curl);
         return $response;
     }
 }
