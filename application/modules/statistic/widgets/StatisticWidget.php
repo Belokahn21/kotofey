@@ -47,7 +47,7 @@ class StatisticWidget extends Widget
         ]));
 
         $last_admission = \Yii::$app->cache->getOrSet('last_admission', function () {
-            return NotifyAdmission::find()->orderBy(['created_at' => SORT_DESC])->limit(3)->all();
+            return NotifyAdmission::find()->where(['is_active' => true])->orderBy(['created_at' => SORT_DESC])->limit(3)->all();
         }, $this->cacheTime, new DbDependency([
             'sql' => 'select count(id) from `notify_admission`'
         ]));
