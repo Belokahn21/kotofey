@@ -17,12 +17,15 @@ class ProfileTrackingWidget extends Widget
 
     public function run()
     {
+        $tracking_info = null;
         try {
             $trackServivce = new TrackingService($this->order);
             $tracking_info = $trackServivce->getOrderInfo();
         } catch (\Exception $x) {
             echo $x->getMessage();
         }
+
+        if ($tracking_info === null) return false;
 
         return $this->render($this->view, [
             'tracking_info' => $tracking_info
