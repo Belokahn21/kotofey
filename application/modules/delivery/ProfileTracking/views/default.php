@@ -2,7 +2,7 @@
     <?php // \app\modules\site\models\tools\Debug::p($tracking_info->entity); ?>
     <div class="order-tracking">
         <div class="order-tracking-block">
-            <div class="order-tracking-block__title">Информация о доставке</div>
+            <div class="order-tracking-block__title">Информация о посылке</div>
             <div class="order-tracking-block__content">
                 <?php if (isset($tracking_info->entity->sender)): ?>
                     <?php $sender = $tracking_info->entity->sender; ?>
@@ -33,6 +33,23 @@
                         <div class="order-tracking-row__key">Телефон</div>
                         <div class="order-tracking-row__value"><?php foreach ($recipient->phones as $phone) echo $phone->number; ?></div>
                     </div>
+                <?php endif; ?>
+                <?php if (isset($tracking_info->entity->packages)): ?>
+                    <?php $packages = $tracking_info->entity->packages; ?>
+                    <div class="order-tracking-row">
+                        <div class="order-tracking-row__key title">Посылка</div>
+                        <div class="order-tracking-row__value"></div>
+                    </div>
+                    <?php foreach ($packages as $package): ?>
+                        <div class="order-tracking-row">
+                            <div class="order-tracking-row__key">Вес, (грамм)</div>
+                            <div class="order-tracking-row__value"><?= $package->weight; ?></div>
+                        </div>
+                        <div class="order-tracking-row">
+                            <div class="order-tracking-row__key">ШхВхД, (см)</div>
+                            <div class="order-tracking-row__value"><?= $package->width; ?>x<?= $package->height; ?>x<?= $package->length; ?></div>
+                        </div>
+                    <?php endforeach; ?>
                 <?php endif; ?>
             </div>
         </div>
