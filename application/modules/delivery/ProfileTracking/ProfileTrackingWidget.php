@@ -15,20 +15,26 @@ use yii\base\Widget;
  */
 class ProfileTrackingWidget extends Widget
 {
-    public $view = 'default';
     public $order;
 
     public function run()
     {
         $tracking_info = null;
+        $track_model = OrderTracking::findByOrderId($this->order->id);
         try {
             $trackServivce = new TrackingService($this->order);
+            $trackServivce->track_model = $track_model;
             $tracking_info = $trackServivce->getOrderInfo();
         } catch (\Exception $x) {
             LogService::saveWarningMessage($x->getMessage(), 'profile-order-tracking');
         }
 
         if ($tracking_info === null) return false;
+
+
+        if ($track_model->service_id == 'cdek') {
+            $this->view = 'default';
+        }
 
         return $this->render($this->view, [
             'tracking_info' => $tracking_info

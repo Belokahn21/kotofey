@@ -3,7 +3,38 @@
     <div class="order-tracking">
         <div class="order-tracking-block">
             <div class="order-tracking-block__title">Информация о доставке</div>
-            <div class="order-tracking-block__content"></div>
+            <div class="order-tracking-block__content">
+                <?php if (isset($tracking_info->entity->sender)): ?>
+                    <?php $sender = $tracking_info->entity->sender; ?>
+                    <div class="order-tracking-row">
+                        <div class="order-tracking-row__key">Отправитель</div>
+                        <div class="order-tracking-row__value"></div>
+                    </div>
+                    <div class="order-tracking-row">
+                        <div class="order-tracking-row__key">Организация</div>
+                        <div class="order-tracking-row__value"><?= $sender->company; ?></div>
+                    </div>
+                    <div class="order-tracking-row">
+                        <div class="order-tracking-row__key">Имя отправителя</div>
+                        <div class="order-tracking-row__value"><?= $sender->name; ?></div>
+                    </div>
+                <?php endif; ?>
+                <?php if (isset($tracking_info->entity->recipient)): ?>
+                    <?php $recipient = $tracking_info->entity->recipient; ?>
+                    <div class="order-tracking-row">
+                        <div class="order-tracking-row__key">Поулчатель</div>
+                        <div class="order-tracking-row__value"></div>
+                    </div>
+                    <div class="order-tracking-row">
+                        <div class="order-tracking-row__key">Имя получателя</div>
+                        <div class="order-tracking-row__value"><?= $recipient->name; ?></div>
+                    </div>
+                    <div class="order-tracking-row">
+                        <div class="order-tracking-row__key">Телефон</div>
+                        <div class="order-tracking-row__value"><?php foreach ($recipient->phones as $phone) echo $phone->number; ?></div>
+                    </div>
+                <?php endif; ?>
+            </div>
         </div>
         <div class="order-tracking-block">
             <div class="order-tracking-block__title">Статус доставки</div>

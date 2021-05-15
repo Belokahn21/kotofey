@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 800px;
+  max-width: 400px;
   width: 100%;
 
   &-block {
@@ -23,6 +23,24 @@
 
     &__content {
       padding: 10px;
+    }
+  }
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &:nth-child(2n) {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    &__key {
+      font-weight: bold;
+    }
+
+    &__value {
     }
   }
 

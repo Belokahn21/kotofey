@@ -15622,7 +15622,7 @@ label[for="site-form-pet-avatar"] {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 800px;
+  max-width: 400px;
   width: 100%; }
   .order-tracking-block {
     width: 100%;
@@ -15638,6 +15638,15 @@ label[for="site-form-pet-avatar"] {
       font-weight: bold; }
     .order-tracking-block__content {
       padding: 10px; }
+  .order-tracking-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
+    .order-tracking-row:nth-child(2n) {
+      background: rgba(0, 0, 0, 0.04); }
+    .order-tracking-row__key {
+      font-weight: bold; }
   .order-tracking-status__item {
     border-bottom: 1px silver solid; }
     .order-tracking-status__item:not(:last-child) {
