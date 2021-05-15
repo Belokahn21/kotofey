@@ -48,19 +48,24 @@
     }
   }
 
-  &-status {
-    &__item {
+  &-list {
+    &__row {
       border-bottom: 1px silver solid;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
 
       &:not(:last-child) {
         margin-bottom: 10px;
       }
     }
 
-    &__name {
-    }
-
-    &__date {
+    &__item {
+      &.name {
+        width: 100%;
+      }
     }
   }
 }

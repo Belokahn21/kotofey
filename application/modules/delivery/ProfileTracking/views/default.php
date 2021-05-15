@@ -42,11 +42,11 @@
 
 
                 <?php if (isset($tracking_info->entity->statuses)): ?>
-                    <div class="order-tracking-status">
+                    <div class="order-tracking-list">
                         <?php foreach ($tracking_info->entity->statuses as $status): ?>
-                            <div class="order-tracking-status__item">
-                                <div class="order-tracking-status__name"><?= $status->name; ?></div>
-                                <div class="order-tracking-status__date">
+                            <div class="order-tracking-list__row">
+                                <div class="order-tracking-list__item name"><?= $status->name; ?></div>
+                                <div class="order-tracking-list__item">
                                     Дата: <?= explode('T', $status->date_time)[0]; ?>
                                 </div>
                             </div>
@@ -57,9 +57,25 @@
 
             </div>
         </div>
-        <div class="order-tracking-block">
-            <div class="order-tracking-block__title">Товары в заказе</div>
-            <div class="order-tracking-block__content"></div>
-        </div>
+        <?php if (isset($tracking_info->entity->packages)): ?>
+            <?php $packages = $tracking_info->entity->packages; ?>
+            <div class="order-tracking-block">
+                <div class="order-tracking-block__title">Товары в заказе</div>
+                <div class="order-tracking-block__content">
+                    <div class="order-tracking-list">
+                        <?php foreach ($packages as $package): ?>
+                            <?php foreach ($package->items as $item): ?>
+                                <div class="order-tracking-list__row">
+                                    <div class="order-tracking-list__item name"><?= $item->name; ?></div>
+                                    <div class="order-tracking-list__item">Кол-во: <?= $item->amount; ?></div>
+                                </div>
+                            <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    </div>
+
+                </div>
+            </div>
+        <?php endif; ?>
+
     </div>
 <?php } ?>
