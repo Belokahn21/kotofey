@@ -329,7 +329,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
         <div class="row">
             <div class="col-6">
                 <?= $form->field($trackForm, 'ident_key'); ?>
-                <?= $form->field($trackForm, 'service_id')->dropDownList($trackForm->listDeliveryServices()); ?>
+                <?= $form->field($trackForm, 'service_id')->dropDownList($trackForm->listDeliveryServices(), ['prompt' => 'Сервис доставки']); ?>
             </div>
             <div class="col-6">
                 Ответ от сервера отслеживания
