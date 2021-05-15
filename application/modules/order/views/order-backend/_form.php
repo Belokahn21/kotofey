@@ -9,8 +9,8 @@ use app\modules\order\widgets\map\MapWidget;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\order\models\service\TrackingService;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
+use app\modules\delivery\ProfileTracking\ProfileTrackingWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 
 /* @var $users \app\modules\user\models\entity\User[]
@@ -333,41 +333,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
             </div>
             <div class="col-6">
                 Ответ от сервера отслеживания
-                <?php
-                try {
-                    $trackServivce = new TrackingService($model);
-                    $order_info = $trackServivce->getOrderInfo();
-                    if (isset($order_info->entity) && isset($order_info->entity->uuid)) { ?>
-
-                        <div class="backend-order-tracking">
-                            <div class="backend-order-tracking-block">
-                                <div class="backend-order-tracking-block__title">
-                                    Маршрут заказа
-                                </div>
-                                <div class="backend-order-tracking-block__content">
-                                    <?php if (isset($order_info->entity->statuses)): ?>
-                                        <div class="backend-order-tracking-statuses">
-                                            <?php foreach ($order_info->entity->statuses as $status): ?>
-                                                <div class="backend-order-tracking-statuses__item">
-                                                    <ul>
-                                                        <li><?= $status->name; ?></li>
-                                                        <li>Дата: <?= explode('T', $status->date_time)[0]; ?></li>
-                                                    </ul>
-                                                </div>
-                                            <?php endforeach; ?>
-                                        </div>
-                                    <?php endif; ?>
-                                </div>
-                            </div>
-                        </div>
-
-                        <?php \app\modules\site\models\tools\Debug::p($order_info->entity); ?>
-
-                    <?php }
-                } catch (Exception $x) {
-                    echo $x->getMessage();
-                }
-                ?>
+                <?= ProfileTrackingWidget::widget(['order' => $model]); ?>
             </div>
         </div>
     </div>
