@@ -4,6 +4,7 @@
  * @var $items \app\modules\order\models\entity\OrdersItems[]
  */
 
+use app\modules\delivery\ProfileTracking\ProfileTrackingWidget;
 use app\modules\acquiring\models\helpers\AcquiringHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
@@ -112,5 +113,8 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
             <?php endif; ?>
         </div>
     </div>
+    <?= ProfileTrackingWidget::widget([
+        'order' => $order
+    ]); ?>
 </div>
 

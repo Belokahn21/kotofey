@@ -1,0 +1,36 @@
+<?php if (isset($order_info->entity) && isset($order_info->entity->uuid)) { ?>
+    <?php \app\modules\site\models\tools\Debug::p($order_info->entity); ?>
+    <div class="row">
+        <div class="order-tracking">
+            <div class="order-tracking-block">
+                <div class="order-tracking-block__title">Информация о доставке</div>
+                <div class="order-tracking-block__content"></div>
+            </div>
+            <div class="order-tracking-block">
+                <div class="order-tracking-block__title">Статус доставки</div>
+                <div class="order-tracking-block__content">
+
+
+                    <?php if (isset($order_info->entity->statuses)): ?>
+                        <div class="order-tracking-status">
+                            <?php foreach ($order_info->entity->statuses as $status): ?>
+                                <div class="order-tracking-status__item">
+                                    <ul>
+                                        <li><?= $status->name; ?></li>
+                                        <li>Дата: <?= explode('T', $status->date_time)[0]; ?></li>
+                                    </ul>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+
+
+                </div>
+            </div>
+            <div class="order-tracking-block">
+                <div class="order-tracking-block__title">Товары в заказе</div>
+                <div class="order-tracking-block__content"></div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
