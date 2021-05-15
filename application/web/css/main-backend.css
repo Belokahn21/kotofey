@@ -8835,7 +8835,8 @@ html, body {
   justify-content: flex-start;
   align-items: flex-start;
   max-width: 100%;
-  width: 100%; }
+  width: 100%;
+  flex-wrap: wrap; }
   .order-tracking-block {
     width: 50%;
     border: 1px silver solid;
