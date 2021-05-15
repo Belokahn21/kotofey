@@ -3,8 +3,11 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  max-width: 800px;
+  width: 100%;
 
   &-block {
+    width: 100%;
     border: 1px silver solid;
     margin: 10px 0;
     border-radius: 5px;
