@@ -28,7 +28,7 @@ class TrackingService
 
         $this->getTrackModel();
 
-        if (!$this->_track_model instanceof OrderTracking) return false;
+        if (!$this->_track_model instanceof OrderTracking) throw new \Exception('Модель не получена');
 
         $this->choseService();
     }
