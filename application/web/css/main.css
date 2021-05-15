@@ -15622,7 +15622,7 @@ label[for="site-form-pet-avatar"] {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 400px;
+  max-width: 48%;
   width: 100%; }
   .order-tracking-block {
     width: 100%;
@@ -15647,6 +15647,8 @@ label[for="site-form-pet-avatar"] {
       background: rgba(0, 0, 0, 0.04); }
     .order-tracking-row__key {
       font-weight: bold; }
+      .order-tracking-row__key.title {
+        color: #ff1a4a; }
   .order-tracking-status__item {
     border-bottom: 1px silver solid; }
     .order-tracking-status__item:not(:last-child) {

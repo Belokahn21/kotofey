@@ -7,7 +7,7 @@
                 <?php if (isset($tracking_info->entity->sender)): ?>
                     <?php $sender = $tracking_info->entity->sender; ?>
                     <div class="order-tracking-row">
-                        <div class="order-tracking-row__key">Отправитель</div>
+                        <div class="order-tracking-row__key title">Отправитель</div>
                         <div class="order-tracking-row__value"></div>
                     </div>
                     <div class="order-tracking-row">
@@ -22,7 +22,7 @@
                 <?php if (isset($tracking_info->entity->recipient)): ?>
                     <?php $recipient = $tracking_info->entity->recipient; ?>
                     <div class="order-tracking-row">
-                        <div class="order-tracking-row__key">Поулчатель</div>
+                        <div class="order-tracking-row__key title">Поулчатель</div>
                         <div class="order-tracking-row__value"></div>
                     </div>
                     <div class="order-tracking-row">

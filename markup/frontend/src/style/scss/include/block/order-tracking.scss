@@ -38,6 +38,10 @@
 
     &__key {
       font-weight: bold;
+
+      &.title {
+        color: $active-color;
+      }
     }
 
     &__value {
