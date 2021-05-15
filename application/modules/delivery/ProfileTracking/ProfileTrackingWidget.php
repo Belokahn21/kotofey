@@ -32,7 +32,7 @@ class ProfileTrackingWidget extends Widget
         if ($tracking_info === null) return false;
 
 
-        if ($track_model->service_id == 'cdek') {
+        if ($track_model->service_id == OrderTracking::SERVICE_CDEK) {
             $this->view = 'default';
         }
 
