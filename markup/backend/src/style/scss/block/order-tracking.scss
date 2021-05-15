@@ -1,13 +1,13 @@
 .order-tracking {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 48%;
+  max-width: 100%;
   width: 100%;
 
   &-block {
-    width: 100%;
+    width: 50%;
     border: 1px silver solid;
     margin: 10px 0;
     border-radius: 5px;
