@@ -16,6 +16,7 @@ use yii\base\Widget;
 class ProfileTrackingWidget extends Widget
 {
     public $order;
+    public $view = 'default';
 
     public function run()
     {
@@ -32,8 +33,6 @@ class ProfileTrackingWidget extends Widget
         if ($tracking_info === null) return false;
 
 
-        Debug::p($track_model);
-        exit();
         if ($track_model->service_id == OrderTracking::SERVICE_CDEK) {
             $this->view = 'default';
         }
