@@ -8829,6 +8829,50 @@ html, body {
     background: #00BFFF;
     color: white; }
 
+.order-tracking {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 48%;
+  width: 100%; }
+  .order-tracking-block {
+    width: 100%;
+    border: 1px silver solid;
+    margin: 10px 0;
+    border-radius: 5px;
+    overflow: hidden; }
+    .order-tracking-block__title {
+      padding: 10px;
+      background: #00BFFF;
+      color: white;
+      font-size: 14px;
+      font-weight: bold; }
+    .order-tracking-block__content {
+      padding: 10px; }
+  .order-tracking-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between; }
+    .order-tracking-row:nth-child(2n) {
+      background: rgba(0, 0, 0, 0.04); }
+    .order-tracking-row__key {
+      font-weight: bold; }
+      .order-tracking-row__key.title {
+        color: #00BFFF; }
+  .order-tracking-list__row {
+    border-bottom: 1px silver solid;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center; }
+    .order-tracking-list__row:not(:last-child) {
+      margin-bottom: 10px; }
+  .order-tracking-list__item.name {
+    width: 100%; }
+
 /*-----------------------------------------------------------*/
 .content {
   float: left;

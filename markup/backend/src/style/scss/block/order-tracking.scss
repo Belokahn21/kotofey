@@ -1,0 +1,71 @@
+.order-tracking {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 48%;
+  width: 100%;
+
+  &-block {
+    width: 100%;
+    border: 1px silver solid;
+    margin: 10px 0;
+    border-radius: 5px;
+    overflow: hidden;
+
+    &__title {
+      padding: 10px;
+      background: $theme-color;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    &__content {
+      padding: 10px;
+    }
+  }
+
+  &-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    &:nth-child(2n) {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    &__key {
+      font-weight: bold;
+
+      &.title {
+        color: $theme-color;
+      }
+    }
+
+    &__value {
+    }
+  }
+
+  &-list {
+    &__row {
+      border-bottom: 1px silver solid;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: center;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
+
+    &__item {
+      &.name {
+        width: 100%;
+      }
+    }
+  }
+}
