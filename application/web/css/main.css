@@ -15617,5 +15617,26 @@ label[for="site-form-pet-avatar"] {
   #full-stars-example-two .rating__input:hover ~ .rating__label .rating__icon--star {
     color: #ddd; }
 
+.order-tracking {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start; }
+  .order-tracking-block {
+    border: 1px silver solid;
+    margin: 10px 0;
+    border-radius: 5px;
+    overflow: hidden; }
+    .order-tracking-block__title {
+      padding: 10px;
+      background: #ff1a4a;
+      color: white;
+      font-size: 14px;
+      font-weight: bold; }
+    .order-tracking-block__content {
+      padding: 10px; }
+  .order-tracking-status__item ul, .order-tracking-status__item li {
+    margin: 0; }
+
 
 /*# sourceMappingURL=main.css.map*/
