@@ -1,8 +1,6 @@
 <?php
 
-
 namespace app\modules\delivery\models\service\tracking\auth\cdek;
-
 
 class CdekAuth
 {
@@ -10,17 +8,20 @@ class CdekAuth
 
     public function getAuthData()
     {
+        $login = null;
+        $password = null;
         $module = \Yii::$app->getModule('delivery');
-//        $login = $module->cdek_login;
-//        $password = $module->cdek_password;
 
         if (YII_ENV == 'dev') {
-            $login = 'EMscd6r9JnFiQ3bLoyjJY6eM78JrJceI';
-            $password = 'PjLZkKBHEiLK3YsjtNrt3TGNG0ahs3kG';
+            $login = $module->cdek_client_id_dev;
+            $password = $module->cdek_client_secret_dev;
         } else {
-            $login = 'zwIwSlOu6gzahO9Wfrt7JZ0nuxim2btq';
-            $password = 'SFrBOZ3xzjjyqi4zfYE0SiaH8yn2bHeV';
+            $login = $module->cdek_client_id_prod;
+            $password = $module->cdek_client_secret_prod;
         }
+
+        if ($login === null || empty($login)) throw new \Exception('Cdek client_id не указан для авторизации.');
+        if ($password === null || empty($password)) throw new \Exception('Cdek client_secret не указан для авторизации.');
 
 
         switch (YII_ENV) {
