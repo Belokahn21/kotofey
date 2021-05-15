@@ -2,6 +2,8 @@
 
 namespace app\modules\delivery\ProfileTracking;
 
+use app\modules\logger\models\entity\Logger;
+use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrderTracking;
 use app\modules\order\models\service\TrackingService;
@@ -23,9 +25,9 @@ class ProfileTrackingWidget extends Widget
             $trackServivce = new TrackingService($this->order);
             $tracking_info = $trackServivce->getOrderInfo();
         } catch (\Exception $x) {
-            echo $x->getMessage();
+            LogService::saveWarningMessage($x->getMessage(), 'profile-order-tracking');
         }
-        Debug::p($tracking_info);
+
         if ($tracking_info === null) return false;
 
         return $this->render($this->view, [
