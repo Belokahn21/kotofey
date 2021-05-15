@@ -28,7 +28,7 @@ class NotifyAdmissionSearch extends NotifyAdmission
 
     public function search($params)
     {
-        $query = NotifyAdmission::find();
+        $query = NotifyAdmission::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

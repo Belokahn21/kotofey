@@ -3,6 +3,7 @@
 namespace app\modules\statistic\widgets;
 
 
+use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\logger\models\entity\Logger;
 use app\modules\order\models\entity\Order;
 use app\modules\reviews\models\entity\Reviews;
@@ -45,11 +46,18 @@ class StatisticWidget extends Widget
             'sql' => 'select count(id) from `reviews` where `is_active`=1 and `status_id`=' . Reviews::STATUS_MODERATE
         ]));
 
+        $last_admission = \Yii::$app->cache->getOrSet('last_admission', function () {
+            return NotifyAdmission::find()->orderBy(['created_at' => SORT_DESC])->limit(3)->all();
+        }, $this->cacheTime, new DbDependency([
+            'sql' => 'select count(id) from `notify_admission`'
+        ]));
+
 
         return $this->render($this->view, [
             'searches' => $searches,
             'lastSearch' => $lastSearch,
             'no_attention_reviews' => $no_attention_reviews,
+            'last_admission' => $last_admission,
             'logs' => $logs,
             'lastlogs' => $lastlogs,
             'ordersNow' => $ordersNow,

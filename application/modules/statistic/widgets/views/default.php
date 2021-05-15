@@ -1,6 +1,7 @@
 <?php
 /* @var $ordersNow Order[]
- * /* @var $lastSearch \app\modules\search\models\entity\SearchQuery[]
+ * @var $lastSearch \app\modules\search\models\entity\SearchQuery[]
+ * @var $last_admission \app\modules\catalog\models\entity\NotifyAdmission[]
  * @var $searches \app\modules\search\models\entity\SearchQuery[]
  * @var $logs \app\modules\logger\models\entity\Logger[]
  * @var $this \yii\web\View
@@ -139,6 +140,27 @@ $product = Product::find();
                         </div>
                     <?php else: ?>
                         <span class="green">Отзывов без внимания нет!</span>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="statistic__item">
+                <div class="statistic__icon"><i class="far fa-clock"></i></div>
+                <div class="statistic__content">
+                    <?php if ($last_admission): ?>
+                        <div class="statistic-summary">
+                            <?php foreach ($last_admission as $admission): ?>
+                                <div class="statistic-summary__item" title="<?= $admission->email; ?>">
+                                    <?= Html::a($admission->email . ' (' . date('d.m.Y', $admission->created_at) . ')', Url::to(['/admin/catalog/admission-backend/update', 'id' => $admission->id])) ?>
+                                    <p style="font-size: 8px; margin: 0;">
+                                        <?php $product = Product::findOne($admission->product_id); ?>
+
+                                        <?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $admission->product_id])) ?>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <span class="green">Никто не подписан на товар</span>
                     <?php endif; ?>
                 </div>
             </div>
