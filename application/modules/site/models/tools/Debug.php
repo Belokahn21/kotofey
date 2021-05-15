@@ -10,14 +10,16 @@ class Debug
 {
     public static function p($target)
     {
-        if (!empty($target)) {
-            $debugInfo = debug_backtrace()[0];
+        if (\Yii::$app->user->id == 1) {
+            if (!empty($target)) {
+                $debugInfo = debug_backtrace()[0];
 
-            echo "<pre>";
-            echo "info: line: " . $debugInfo['line'] . " in file: " . $debugInfo['file'];
-            echo "\n";
-            print_r($target);
-            echo "</pre>";
+                echo "<pre>";
+                echo "info: line: " . $debugInfo['line'] . " in file: " . $debugInfo['file'];
+                echo "\n";
+                print_r($target);
+                echo "</pre>";
+            }
         }
     }
 

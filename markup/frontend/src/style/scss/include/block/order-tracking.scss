@@ -1,0 +1,33 @@
+.order-tracking {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+
+  &-block {
+    border: 1px silver solid;
+    margin: 10px 0;
+    border-radius: 5px;
+    overflow: hidden;
+
+    &__title {
+      padding: 10px;
+      background: $active-color;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    &__content {
+      padding: 10px;
+    }
+  }
+
+  &-status {
+    &__item {
+      ul, li {
+        margin: 0;
+      }
+    }
+  }
+}
