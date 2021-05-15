@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property int|null $is_active
  * @property string $email
+ * @property integer $phone
  * @property int $product_id
  * @property int|null $created_at
  * @property int|null $updated_at
@@ -39,7 +40,16 @@ class NotifyAdmission extends \yii\db\ActiveRecord
 
             [['is_active'], 'default', 'value' => 1],
 
-            ['email', 'unique', 'targetAttribute' => ['email', 'product_id'], 'message' => 'Вы уже отслеживаете этот товар']
+            ['email', 'unique', 'targetAttribute' => ['email', 'product_id'], 'message' => 'Вы уже отслеживаете этот товар'],
+
+            [
+                ['phone'],
+                'filter',
+                'filter' => function ($value) {
+                    $value = str_replace('+7', '8', $value);
+                    return str_replace([' ', '(', ')', '-'], '', $value);
+                },
+            ],
         ];
     }
 
@@ -48,11 +58,12 @@ class NotifyAdmission extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'is_active' => 'Is Active',
+            'is_active' => 'Активность',
             'email' => 'Email',
-            'product_id' => 'Product ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'phone' => 'Телефон',
+            'product_id' => 'Товар ID',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

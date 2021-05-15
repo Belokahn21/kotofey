@@ -12949,6 +12949,7 @@ p {
   flex-wrap: wrap;
   outline: none !important; }
   .product-status__notify {
+    cursor: pointer;
     background: transparent;
     border: 1px #ff1a4a solid;
     padding: 5px;
@@ -12967,7 +12968,13 @@ p {
     padding: 5px;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 12px; }
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center; }
+    .product-status__already form {
+      margin: 0 5px; }
   .product-status.draft {
     color: #ff1a4a;
     font-weight: bold;
@@ -15649,10 +15656,34 @@ label[for="site-form-pet-avatar"] {
       font-weight: bold; }
       .order-tracking-row__key.title {
         color: #ff1a4a; }
-  .order-tracking-status__item {
-    border-bottom: 1px silver solid; }
-    .order-tracking-status__item:not(:last-child) {
+  .order-tracking-list__row {
+    border-bottom: 1px silver solid;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center; }
+    .order-tracking-list__row:not(:last-child) {
       margin-bottom: 10px; }
+  .order-tracking-list__item.name {
+    width: 100%; }
+
+.form-admission {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center; }
+  .form-admission__input {
+    text-align: center; }
+  .form-admission__logic {
+    margin-bottom: 10px;
+    color: #ff1a4a;
+    font-weight: bold;
+    font-size: 14px; }
+  .form-admission__button {
+    font-size: 16px;
+    margin-top: 10px; }
 
 
 /*# sourceMappingURL=main.css.map*/

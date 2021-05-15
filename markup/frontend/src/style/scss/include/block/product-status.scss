@@ -7,6 +7,7 @@
   outline: none !important;
 
   &__notify {
+    cursor: pointer;
     background: transparent;
     border: 1px $active-color solid;
     padding: 5px;
@@ -31,6 +32,15 @@
     font-weight: bold;
     text-transform: uppercase;
     font-size: 12px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    align-items: center;
+
+    form {
+      margin: 0 5px;
+    }
   }
 
   &.draft {

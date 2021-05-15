@@ -1,0 +1,23 @@
+.form-admission {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  &__input {
+    text-align: center;
+  }
+
+  &__logic {
+    margin-bottom: 10px;
+    color: $active-color;
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  &__button {
+    font-size: 16px;
+    margin-top: 10px;
+  }
+}

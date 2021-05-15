@@ -56,3 +56,4 @@ import './react/search/Search';
 import './react/checkout/Checkout';
 import './react/BuyOneClick/BuyOneClick';
 import './react/Page/Page';
+import './react/ProductAdmission/ProductAdmission';
