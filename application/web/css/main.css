@@ -15638,8 +15638,10 @@ label[for="site-form-pet-avatar"] {
       font-weight: bold; }
     .order-tracking-block__content {
       padding: 10px; }
-  .order-tracking-status__item ul, .order-tracking-status__item li {
-    margin: 0; }
+  .order-tracking-status__item {
+    border-bottom: 1px silver solid; }
+    .order-tracking-status__item:not(:last-child) {
+      margin-bottom: 10px; }
 
 
 /*# sourceMappingURL=main.css.map*/

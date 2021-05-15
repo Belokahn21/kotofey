@@ -28,9 +28,17 @@
 
   &-status {
     &__item {
-      ul, li {
-        margin: 0;
+      border-bottom: 1px silver solid;
+
+      &:not(:last-child) {
+        margin-bottom: 10px;
       }
+    }
+
+    &__name {
+    }
+
+    &__date {
     }
   }
 }

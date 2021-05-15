@@ -14,10 +14,10 @@
                     <div class="order-tracking-status">
                         <?php foreach ($tracking_info->entity->statuses as $status): ?>
                             <div class="order-tracking-status__item">
-                                <ul>
-                                    <li><?= $status->name; ?></li>
-                                    <li>Дата: <?= explode('T', $status->date_time)[0]; ?></li>
-                                </ul>
+                                <div class="order-tracking-status__name"><?= $status->name; ?></div>
+                                <div class="order-tracking-status__date">
+                                    Дата: <?= explode('T', $status->date_time)[0]; ?>
+                                </div>
                             </div>
                         <?php endforeach; ?>
                     </div>
