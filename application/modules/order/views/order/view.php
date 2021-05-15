@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
     ]); ?>
     <h1 class="page__title">Просмотр заказа: #<?= $order->id; ?></h1>
     <div class="row" style="width: 100%;">
-        <div class="col-6">
+        <div class="col-12 col-sm-6">
             <div class="profile-order-info">
                 <div class="profile-order-info__row">
                     <div class="profile-order-info__key">Дата создания</div>
@@ -92,7 +92,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                 <?php endif; ?>
             </div>
         </div>
-        <div class="col-6">
+        <div class="col-12 col-sm-6 mt-5 mt-sm-0">
             <?php if ($items): ?>
                 <ul class="profile-order-products">
                     <?php foreach ($items as $item): ?>
