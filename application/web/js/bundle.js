@@ -5467,15 +5467,9 @@ var ModalNotify = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(ModalNotify);
 
   function ModalNotify(props) {
-    var _this;
-
     _classCallCheck(this, ModalNotify);
 
-    _this = _super.call(this, props);
-    _this.state = {
-      show: true
-    };
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(ModalNotify, [{
@@ -5498,13 +5492,15 @@ var ModalNotify = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var show = this.state.show;
+      var _this$props = this.props,
+          show = _this$props.show,
+          message = _this$props.message;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default, {
         show: show,
         onHide: this.handleClose.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default.Header, {
-        closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default.Title, null, "\u0423\u0432\u0435\u0434\u043E\u043C\u0438\u0442\u044C \u043E \u043F\u043E\u0441\u0442\u0443\u043F\u043B\u0435\u043D\u0438\u0438 \u0442\u043E\u0432\u0430\u0440\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default.Body, null, "12121221"));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_1__.default.Body, {
+        className: "modal-notify-text"
+      }, message));
     }
   }]);
 
@@ -5938,7 +5934,7 @@ var ProductAdmission = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      isAlreadyAdmission: props.isAlreadyAdmission
+      showModal: false
     };
     return _this;
   }
@@ -5958,11 +5954,11 @@ var ProductAdmission = /*#__PURE__*/function (_React$Component) {
         return response.json();
       }).then(function (data) {
         var response = JSON.parse(data);
-        console.log(response);
 
         if (response.success == 1) {
           _this2.setState({
-            isAlreadyAdmission: true
+            showModal: true,
+            message: "Вы успешно подписались на ожидание поступления. Вы получите уведомление на указанный Email либо телефон."
           });
         }
       });
@@ -5970,8 +5966,6 @@ var ProductAdmission = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleRemove",
     value: function handleRemove(event) {
-      var _this3 = this;
-
       event.preventDefault();
       var form = event.target;
       fetch('/remove-notify-admission/', {
@@ -5981,13 +5975,8 @@ var ProductAdmission = /*#__PURE__*/function (_React$Component) {
         return response.json();
       }).then(function (data) {
         var response = JSON.parse(data);
-        console.log(response);
 
-        if (response.success == 1) {
-          _this3.setState({
-            isAlreadyAdmission: false
-          });
-        }
+        if (response.success == 1) {}
       });
     }
   }, {
@@ -5996,13 +5985,17 @@ var ProductAdmission = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           isAlreadyAdmission = _this$props.isAlreadyAdmission,
           product_id = _this$props.product_id;
-      if (isAlreadyAdmission) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_AlreadyAdmission__WEBPACK_IMPORTED_MODULE_2__.default, {
-        product_id: product_id,
-        handleRemove: this.handleRemove.bind(this)
-      });else return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewAdmission__WEBPACK_IMPORTED_MODULE_3__.default, {
+      var _this$state = this.state,
+          showModal = _this$state.showModal,
+          message = _this$state.message;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_NewAdmission__WEBPACK_IMPORTED_MODULE_3__.default, {
         product_id: product_id,
         handleSubmitForm: this.handleSubmitForm.bind(this)
-      });
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ModalNotify__WEBPACK_IMPORTED_MODULE_4__.default, {
+        show: showModal,
+        message: message
+      })); // if (isAlreadyAdmission) return <AlreadyAdmission product_id={product_id} handleRemove={this.handleRemove.bind(this)}/>
+      // else return <NewAdmission product_id={product_id} handleSubmitForm={this.handleSubmitForm.bind(this)}/>;
     }
   }]);
 

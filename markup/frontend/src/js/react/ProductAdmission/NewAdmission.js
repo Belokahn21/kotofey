@@ -31,7 +31,7 @@ class NewAdmission extends React.Component {
 
     render() {
         const {show} = this.state;
-        const {handleSubmitForm,product_id} = this.props;
+        const {handleSubmitForm, product_id} = this.props;
         return <>
             <div className="product-status__notify" onClick={this.handleShow.bind(this)}>Уведомить о поступлении</div>
 

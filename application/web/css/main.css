@@ -11166,6 +11166,11 @@ p {
     .left-siderbar {
       width: 100%; } }
 
+.modal-notify-text {
+  color: #ff1a4a;
+  text-align: center;
+  font-size: 25px; }
+
 .site-form {
   border-radius: inherit;
   padding: 10px; }

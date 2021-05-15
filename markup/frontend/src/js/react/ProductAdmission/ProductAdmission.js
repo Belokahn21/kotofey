@@ -9,7 +9,7 @@ class ProductAdmission extends React.Component {
         super(props);
 
         this.state = {
-            isAlreadyAdmission: props.isAlreadyAdmission
+            showModal: false
         };
     }
 
@@ -24,11 +24,10 @@ class ProductAdmission extends React.Component {
             body: new FormData(form),
         }).then(response => response.json()).then(data => {
             let response = JSON.parse(data);
-            console.log(response);
-
             if (response.success == 1) {
                 this.setState({
-                    isAlreadyAdmission: true
+                    showModal: true,
+                    message: "Вы успешно подписались на ожидание поступления. Вы получите уведомление на указанный Email либо телефон.",
                 })
             }
         });
@@ -42,21 +41,23 @@ class ProductAdmission extends React.Component {
             body: new FormData(form),
         }).then(response => response.json()).then(data => {
             let response = JSON.parse(data);
-            console.log(response);
-
             if (response.success == 1) {
-                this.setState({
-                    isAlreadyAdmission: false
-                })
+
             }
         });
     }
 
     render() {
         const {isAlreadyAdmission, product_id} = this.props;
+        const {showModal, message} = this.state;
 
-        if (isAlreadyAdmission) return <AlreadyAdmission product_id={product_id} handleRemove={this.handleRemove.bind(this)}/>
-        else return <NewAdmission product_id={product_id} handleSubmitForm={this.handleSubmitForm.bind(this)}/>;
+        return <>
+            <NewAdmission product_id={product_id} handleSubmitForm={this.handleSubmitForm.bind(this)}/>
+            <ModalNotify show={showModal} message={message} />
+        </>;
+
+        // if (isAlreadyAdmission) return <AlreadyAdmission product_id={product_id} handleRemove={this.handleRemove.bind(this)}/>
+        // else return <NewAdmission product_id={product_id} handleSubmitForm={this.handleSubmitForm.bind(this)}/>;
 
     }
 }
