@@ -1,5 +1,5 @@
 <?php if (isset($tracking_info->entity) && isset($tracking_info->entity->uuid)) { ?>
-    <?php \app\modules\site\models\tools\Debug::p($tracking_info->entity); ?>
+    <?php // \app\modules\site\models\tools\Debug::p($tracking_info->entity); ?>
     <div class="order-tracking">
         <div class="order-tracking-block">
             <div class="order-tracking-block__title">Информация о доставке</div>
