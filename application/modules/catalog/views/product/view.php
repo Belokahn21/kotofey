@@ -51,7 +51,6 @@ $this->title = ProductTitle::show($product->name);
                             <?php endif; ?>
 
                             <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
-                                <div class="swiper-slide product-gallery-big__slide"><img src="<?= ProductHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
                                 <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                     <div class="swiper-slide product-gallery-big__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
                                 <?php endforeach; ?>
@@ -63,6 +62,9 @@ $this->title = ProductTitle::show($product->name);
                     </div>
                     <div class="swiper-container product-gallery-thumbs" thumbsslider="">
                         <div class="swiper-wrapper">
+
+                            <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>"></div>
+
 
                             <?php if ($product->images): ?>
                                 <?php foreach (Json::decode($product->images) as $image): ?>
