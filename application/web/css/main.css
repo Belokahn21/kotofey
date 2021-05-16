@@ -15719,6 +15719,24 @@ label[for="site-form-pet-avatar"] {
     .user-admission__item:not(:last-child) {
       margin-bottom: 10px; }
 
+.product-promotions {
+  width: 100%;
+  padding-right: 15px; }
+  .product-promotions-title {
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #ff1a4a;
+    margin-bottom: 10px; }
+  .product-promotions__item {
+    width: 100%;
+    display: block; }
+    .product-promotions__item:not(:last-child) {
+      margin-bottom: 10px; }
+    .product-promotions__item img {
+      width: 100%;
+      object-fit: contain; }
+
 .product-gallery-big {
   width: 400px;
   overflow: hidden;
@@ -15733,6 +15751,12 @@ label[for="site-form-pet-avatar"] {
   .product-gallery-thumbs__slide img {
     object-fit: contain;
     height: 100px; }
+
+.product-promotions-slider__name {
+  font-weight: bold;
+  text-transform: uppercase;
+  color: silver;
+  font-size: 12px; }
 
 
 /*# sourceMappingURL=main.css.map*/

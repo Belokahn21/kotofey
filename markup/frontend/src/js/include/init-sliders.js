@@ -205,10 +205,14 @@ document.addEventListener('DOMContentLoaded', () => {
         },
     });
 
-    let mainSteamSlider = new Swiper('.steam-slider-container',{
+    let mainSteamSlider = new Swiper('.steam-slider-container', {
         pagination: {
             el: ".steam-slider-pagination",
         },
+    });
+
+    let productPromotionsSlider = new Swiper('.product-promotions-slider', {
+        slidesPerView: 4,
     });
 
     // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
@@ -229,14 +233,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // });
 
 
-    var productGalleryThumbs = new Swiper(".product-gallery-thumbs", {
+    let productGalleryThumbs = new Swiper(".product-gallery-thumbs", {
         spaceBetween: 10,
         slidesPerView: 3,
         freeMode: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
     });
-    var productGalleryBig = new Swiper(".product-gallery-big", {
+    let productGalleryBig = new Swiper(".product-gallery-big", {
         spaceBetween: 10,
         navigation: {
             nextEl: ".swiper-button-next",

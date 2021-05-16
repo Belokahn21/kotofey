@@ -15,6 +15,7 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
 use app\modules\reviews\widgets\ProductReviewsForm\ProductReviewsFormWidget;
+use app\modules\promotion\widgets\PromotionsForProduct\PromotionsForProductWidget;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
@@ -89,6 +90,10 @@ $this->title = ProductTitle::show($product->name);
                         <div class="product-bonus__title"><?= \Yii::t('app', '{n, plural, =0{бонусов} =1{бонус} one{бонус} few{бонусов} many{бонусов} other{бонуса}} на счёт', ['n' => $bouns]); ?></div>
                     </div>
                 </div>
+
+                <?= PromotionsForProductWidget::widget([
+                    'product_id' => $product->id
+                ]); ?>
 
             </div>
             <div class="product-detail-right">

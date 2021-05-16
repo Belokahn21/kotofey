@@ -5163,6 +5163,9 @@ document.addEventListener('DOMContentLoaded', function () {
     pagination: {
       el: ".steam-slider-pagination"
     }
+  });
+  var productPromotionsSlider = new swiper__WEBPACK_IMPORTED_MODULE_0__.default('.product-promotions-slider', {
+    slidesPerView: 4
   }); // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
   //     slidesPerView: 4,
   //     freeMode: true,

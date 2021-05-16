@@ -17,6 +17,8 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $promotion_mechanic_id
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property Product $product
  */
 class PromotionProductMechanics extends \yii\db\ActiveRecord
 {

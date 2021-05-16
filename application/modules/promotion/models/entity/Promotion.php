@@ -2,6 +2,7 @@
 
 namespace app\modules\promotion\models\entity;
 
+use app\modules\catalog\models\entity\Product;
 use app\modules\content\models\behaviors\DateToIntBehaviors;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
