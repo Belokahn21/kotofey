@@ -1,7 +1,8 @@
 <?php
 
-use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
+use mihaildev\ckeditor\CKEditor;
 use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
@@ -49,7 +50,12 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                     <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Символьный код'])->label(false); ?>
                 </div>
                 <div class="form-element">
-                    <?= $form->field($model, 'description')->textarea(['placeholder' => 'Описание'])->label(false); ?>
+                    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                        'editorOptions' => [
+                            'preset' => 'full',
+                            'inline' => false,
+                        ],
+                    ]); ?>
                 </div>
 
                 <div class="form-element">

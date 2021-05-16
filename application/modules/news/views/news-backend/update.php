@@ -21,6 +21,6 @@ $this->title = Title::show("Новости");
         'form' => $form,
         'model' => $model,
     ]); ?>
-    <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+    <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
     <?php ActiveForm:: end(); ?>
 </section>
