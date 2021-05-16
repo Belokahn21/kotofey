@@ -227,4 +227,23 @@ document.addEventListener('DOMContentLoaded', () => {
     //         swiper: steamGalleryThumbs
     //     }
     // });
+
+
+    var productGalleryThumbs = new Swiper(".product-gallery-thumbs", {
+        spaceBetween: 10,
+        slidesPerView: 3,
+        freeMode: true,
+        watchSlidesVisibility: true,
+        watchSlidesProgress: true,
+    });
+    var productGalleryBig = new Swiper(".product-gallery-big", {
+        spaceBetween: 10,
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+        thumbs: {
+            swiper: productGalleryThumbs,
+        },
+    });
 });

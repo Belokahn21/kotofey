@@ -5,15 +5,53 @@ block contents
         .product-detail
             .product-detail-left
                 .product-detail-gallery
-                    a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
-                        img(src="./assets/images/product.png").product-detail-gallery__image
-                    .product-detail-gallery__group
-                        a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link.active
-                            img(src="./assets/images/product.png").product-detail-gallery__image
-                        a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
-                            img(src="./assets/images/product.png").product-detail-gallery__image
-                        a(href="./assets/images/product.png", data-lightbox="roadtrip").product-detail-gallery__link
-                            img(src="./assets/images/product.png").product-detail-gallery__image
+                    .swiper-container.product-gallery-big(style='--swiper-navigation-color: #fff; --swiper-pagination-color: #fff')
+                        .swiper-wrapper
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-1.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-2.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-3.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-4.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-5.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-6.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-7.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-8.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-9.jpg')
+                            .swiper-slide.product-gallery-big__slide
+                                img(src='https://swiperjs.com/demos/images/nature-10.jpg')
+                        .swiper-button-next
+                        .swiper-button-prev
+                    .swiper-container.product-gallery-thumbs(thumbsslider='')
+                        .swiper-wrapper
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-1.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-2.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-3.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-4.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-5.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-6.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-7.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-8.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-9.jpg')
+                            .swiper-slide.product-gallery-thumbs__slide
+                                img(src='https://swiperjs.com/demos/images/nature-10.jpg')
+
                 .product-blocks
                     .product-blocks__item.product-bonus
                         .product-bonus__count +150

@@ -6,12 +6,17 @@
   flex-wrap: wrap;
   width: 100%;
 
+
   &__item {
     padding: 5px;
     margin: 5px;
     border: 1px silver solid;
     border-radius: 7px;
     flex: 1 1 15%;
+
+    @media (max-width: 450px) {
+      flex: 1 1 100%;
+    }
 
     &:hover {
       border-color: $active-color;

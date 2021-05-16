@@ -5179,6 +5179,24 @@ document.addEventListener('DOMContentLoaded', function () {
   //         swiper: steamGalleryThumbs
   //     }
   // });
+
+  var productGalleryThumbs = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".product-gallery-thumbs", {
+    spaceBetween: 10,
+    slidesPerView: 3,
+    freeMode: true,
+    watchSlidesVisibility: true,
+    watchSlidesProgress: true
+  });
+  var productGalleryBig = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".product-gallery-big", {
+    spaceBetween: 10,
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+    thumbs: {
+      swiper: productGalleryThumbs
+    }
+  });
 });
 
 /***/ }),

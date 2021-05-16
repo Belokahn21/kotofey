@@ -36,7 +36,6 @@
 @import "include/block/mini-slider";
 @import "include/block/gruming";
 @import "include/block/last-news";
-
 // детальная карточка товара
 @import "include/block/product-detail";
 @import "include/block/product-blocks";
@@ -51,7 +50,6 @@
 @import "include/block/product-status";
 @import "include/block/steam-slider";
 @import "include/block/product-reviews";
-
 // футер
 @import "include/block/footer";
 @import "include/block/footer-payment-vairiant";
@@ -61,15 +59,11 @@
 @import "include/block/requesites";
 @import "include/block/social-me";
 @import "include/block/footer-docs";
-
 // Быстрая корзина
 @import "include/block/fast-cart";
-
 // Стрелка вверх
 @import "include/block/arrowup";
-
 @import "include/block/wh-group";
-
 // личный кабинет
 @import "include/block/profile";
 @import "include/block/order-list";
@@ -83,28 +77,22 @@
 @import "include/block/pet-list";
 @import "include/block/bonus-history-table";
 @import "include/block/profile-billing";
-
 // Контактная информация
 @import "include/block/contacts-map";
-
 // Корзина
 @import "include/block/basket-list";
 @import "include/block/basket-properties";
-
 // Доставка и оплата
 @import "include/block/form-calc-delivery";
 @import "include/block/payment-cards";
-
 // О нас
 @import "include/block/about";
 @import "include/block/light-statistic";
 @import "include/block/sertificate";
-
 // О нас
 @import "include/block/about-statistic";
 @import "include/block/feedback";
 @import "include/block/feedback-list";
-
 // Оформление заказа
 @import "include/block/checkout-form";
 @import "include/block/checkout-success";
@@ -113,20 +101,16 @@
 @import "include/block/checkout-reglament";
 @import "include/block/light-checkout-list";
 @import "include/block/checkout-address";
-
 // Акции
 @import "include/block/action-list";
 @import "include/block/detail-action";
-
 //Бренд страница
 @import "include/page/brandpage";
-
 // Каталог - Категории
 @import "include/block/pagination";
 @import "include/block/filter-catalog";
 @import "include/block/catalog-categories";
 @import "include/block/aside-sub-categories";
-
 // Каталог
 @import "include/block/catalog";
 @import "include/block/catalog-line";
@@ -134,41 +118,57 @@
 @import "include/block/catalog-actions";
 @import "include/block/stick-filter";
 @import "include/block/type-display";
-
 // список новостей
 @import "include/block/news-list";
 @import "include/block/news-summary";
 @import "include/block/news-detail";
-
 // Акции и скидки
 @import "include/block/promotion-list";
-
 //Вакансии
 @import "include/block/vacancy-list";
-
 // Карта в футере
 @import "include/block/footer-map";
-
 // облако тегов
 @import "include/block/search-fast-button";
-
 // Панель помощи
 @import "include/block/help-panel";
-
 // купить в 1 клик
 @import "include/block/buy-one-click";
-
 // статистика страницы
 @import "include/block/page-info";
-
 // рейтинг
 @import "include/block/rating-stars";
-
 // отслеживание закзаа
 @import "include/block/order-tracking";
-
 // Уведомить при поступлении
 @import "include/block/form-admission";
-
 // Уведомить при поступлении
 @import "include/block/user-admission";
+
+
+.product-gallery-big {
+  width: 400px;
+  overflow: hidden;
+  margin-bottom: 20px;
+
+  &__slide {
+    img {
+      object-fit: contain;
+      //height: 100px;
+      width: 100%;
+    }
+  }
+}
+
+.product-gallery-thumbs {
+  width: 100%;
+  //height: 150px;
+  overflow: hidden;
+
+  &__slide {
+    img {
+      object-fit: contain;
+      height: 100px;
+    }
+  }
+}

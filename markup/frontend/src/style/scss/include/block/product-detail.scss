@@ -15,11 +15,13 @@
   }
 
   &-left {
-    flex: 1 1 40%;
+    width: 40%;
+    //flex: 1 1 40%;
   }
 
   &-right {
-    flex: 1 1 60%;
+    width: 60%;
+    //flex: 1 1 60%;
   }
 
   &__group-row {

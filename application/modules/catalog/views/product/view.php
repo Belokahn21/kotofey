@@ -39,25 +39,44 @@ $this->title = ProductTitle::show($product->name);
         <div class="product-detail" itemscope itemtype="http://schema.org/Product">
             <div class="product-detail-left">
                 <div class="product-detail-gallery">
-                    <a itemprop="image" class="product-detail-gallery__link" href="<?= ProductHelper::getImageUrl($product); ?>" data-lightbox="roadtrip">
-                        <img class="product-detail-gallery__image" src="<?= ProductHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
-                    </a>
-                    <div class="product-detail-gallery__group">
-                        <?php if ($product->images): ?>
-                            <?php foreach (Json::decode($product->images) as $image): ?>
-                                <a class="product-detail-gallery__link active" href="<?= $image; ?>" data-lightbox="roadtrip">
-                                    <img class="product-detail-gallery__image" src="<?= $image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-                                </a>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
 
-                        <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
-                            <?php foreach ($imagesFromProperty as $propertyValue): ?>
-                                <a class="product-detail-gallery__link active" href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip">
-                                    <img class="product-detail-gallery__image" src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-                                </a>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
+                    <div class="swiper-container product-gallery-big" style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide product-gallery-big__slide"><img src="<?= ProductHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+
+                            <?php if ($product->images): ?>
+                                <?php foreach (Json::decode($product->images) as $image): ?>
+                                    <div class="swiper-slide product-gallery-big__slide"><img src="<?= $image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+
+                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
+                                <div class="swiper-slide product-gallery-big__slide"><img src="<?= ProductHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                <?php foreach ($imagesFromProperty as $propertyValue): ?>
+                                    <div class="swiper-slide product-gallery-big__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                    </div>
+                    <div class="swiper-container product-gallery-thumbs" thumbsslider="">
+                        <div class="swiper-wrapper">
+
+                            <?php if ($product->images): ?>
+                                <?php foreach (Json::decode($product->images) as $image): ?>
+                                    <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $image; ?>" title="<?= $product->name; ?>"></div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+
+                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
+                                <?php foreach ($imagesFromProperty as $propertyValue): ?>
+                                    <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
+
+                        </div>
                     </div>
                 </div>
 
