@@ -98,7 +98,7 @@ LIST;
     </div>
 </div>
 <div class="profile__inline-group">
-    <h2 class="page__title">Ваши питомцы</h2>
+    <h2 class="page__title">Список вашх питомцев</h2>
     <?php if (!PetsHelper::isOverLimit(Yii::$app->user->id)): ?>
         <button class="profile-pet__add" type="button" data-toggle="modal" data-target="#newPetModal">Добавить</button>
     <?php endif ?>

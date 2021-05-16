@@ -47,17 +47,21 @@ class ProductAdmission extends React.Component {
         });
     }
 
+    handleCloseNotify() {
+        this.setState({
+            showModal: false
+        });
+    }
+
     render() {
         const {isAlreadyAdmission, product_id} = this.props;
         const {showModal, message} = this.state;
 
-        return <>
+        if (isAlreadyAdmission) return <AlreadyAdmission />
+        else return <>
             <NewAdmission product_id={product_id} handleSubmitForm={this.handleSubmitForm.bind(this)}/>
-            <ModalNotify show={showModal} message={message} />
+            <ModalNotify show={showModal} message={message} handleCloseNotify={this.handleCloseNotify.bind(this)}/>
         </>;
-
-        // if (isAlreadyAdmission) return <AlreadyAdmission product_id={product_id} handleRemove={this.handleRemove.bind(this)}/>
-        // else return <NewAdmission product_id={product_id} handleSubmitForm={this.handleSubmitForm.bind(this)}/>;
 
     }
 }

@@ -1,0 +1,20 @@
+.user-admission {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 400px;
+  width: 100%;
+
+  &__item {
+    border-bottom: 1px rgba(0, 0, 0, 0.04) solid;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+
+    &:not(:last-child) {
+      margin-bottom: 10px;
+    }
+  }
+}

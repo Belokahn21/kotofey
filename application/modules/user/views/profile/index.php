@@ -26,6 +26,7 @@ use app\modules\pets\widgets\PetList\PetListWidget;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\user\models\helpers\UserBillingHelper;
 use app\modules\pets\widgets\AddPetForm\AddPetFormWidget;
+use app\modules\catalog\widgets\UserAdmission\UserAdmissionWidget;
 use app\modules\bonus\widgets\UserBonusHistory\UserBonusHistoryWidget;
 
 $this->title = Title::show('Личный кабинет');
@@ -46,7 +47,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
     <div class="page__group-row">
         <div class="page__left profile-sections-wrap">
             <div class="profile-sections nav nav-tabs" id="proflieTabs" role="tablist">
-                <a class="profile-sections__item active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+
+
+                <a class="profile-sections__item active " id="dashboard-tab" data-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="true">
+                    <i class="fas fa-shopping-basket"></i>
+                    <div class="profile-sections__title">Рабочий стол</div>
+                </a>
+
+                <a class="profile-sections__item " id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
                     <i class="fas fa-user"></i>
                     <div class="profile-sections__title">Настройки</div>
                 </a>
@@ -74,7 +82,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
         </div>
         <div class="page__right profile-content">
             <div class="tab-content">
-                <div class="tab-pane fade show active" id="home">
+                <div class="tab-pane fade show active" id="dashboard">
+                    <h2 class="page__title">Кабинет покупателя</h2>
+                    <?= UserAdmissionWidget::widget(); ?>
+                </div>
+                <div class="tab-pane fade" id="home">
                     <h2 class="page__title">Настройки пользователя</h2>
                     <?php $form = ActiveForm::begin([
                         'options' => [

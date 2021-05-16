@@ -11171,6 +11171,9 @@ p {
   text-align: center;
   font-size: 25px; }
 
+.hide {
+  display: none !important; }
+
 .site-form {
   border-radius: inherit;
   padding: 10px; }
@@ -15689,6 +15692,22 @@ label[for="site-form-pet-avatar"] {
   .form-admission__button {
     font-size: 16px;
     margin-top: 10px; }
+
+.user-admission {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 400px;
+  width: 100%; }
+  .user-admission__item {
+    border-bottom: 1px rgba(0, 0, 0, 0.04) solid;
+    padding: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px; }
+    .user-admission__item:not(:last-child) {
+      margin-bottom: 10px; }
 
 
 /*# sourceMappingURL=main.css.map*/

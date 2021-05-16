@@ -6,22 +6,13 @@ class ModalNotify extends React.Component {
         super(props);
     }
 
-    setShow(show) {
-        this.setState({show: show});
-    }
-
-    handleClose() {
-        this.setShow(false);
-    }
-
-    handleShow() {
-        this.setShow(true);
-    }
-
     render() {
-        const {show, message} = this.props;
+        const {show, message, handleCloseNotify} = this.props;
 
-        return <Modal show={show} onHide={this.handleClose.bind(this)}>
+        return <Modal show={show} onHide={handleCloseNotify}>
+            <Modal.Header closeButton>
+
+            </Modal.Header>
             <Modal.Body className="modal-notify-text">
                 {message}
             </Modal.Body>

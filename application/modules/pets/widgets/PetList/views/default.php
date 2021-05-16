@@ -7,7 +7,6 @@ use app\modules\pets\models\helpers\PetsHelper;
 /* @var $models \app\modules\pets\models\entity\Pets[] */
 ?>
 <?php if ($models): ?>
-    <h3>Список вашх питомцев</h3>
     <div class="pet-list">
         <?php foreach ($models as $model): ?>
             <div class="pet-list__item">
