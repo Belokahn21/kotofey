@@ -33,7 +33,6 @@ class ManyPurchasedGoods extends Widget
                 ->where(['status_id' => Product::STATUS_ACTIVE])
                 ->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])
                 ->andWhere(['<>', 'description', ''])
-                ->andWhere(['<>', 'images', ''])
                 ->orderBy(['created_at' => SORT_DESC])
                 ->limit($limit)
                 ->all();
