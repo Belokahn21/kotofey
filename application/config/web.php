@@ -193,6 +193,7 @@ $config = [
                 'get-mini-cart-amount' => 'catalog/ajax/get-mini-cart-amount',
                 'get-mini-cart-count' => 'catalog/ajax/get-mini-cart-count',
 
+                'admin' => 'site/site-backend/index',
                 'admin/<module>/<controller>/' => '<module>/<controller>/index',
                 'admin/<module>/<controller>/<action>' => '<module>/<controller>/<action>',
 

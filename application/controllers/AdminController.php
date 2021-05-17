@@ -43,34 +43,6 @@ class AdminController extends MainBackendController
         return $parentAccess;
     }
 
-    public function actionIndex()
-    {
-        if (Yii::$app->request->get('save_dump') == 'Y') {
-            $backup = new Backup();
-            if ($backup->isOverSize()) {
-                $backup->clearDumpCatalog();
-            }
-
-            $backup->createDumpDatabase();
-
-            if (Yii::$app->request->get('out') == 'Y') {
-                $name = Yii::getAlias('@app') . $backup->getNameDirDumps() . $backup->getNameFile();
-                header('Content-Type: application/octet-stream');
-                header("Content-Transfer-Encoding: Binary");
-                header("Content-disposition: attachment; filename=\"" . $backup->getNameFile() . "\"");
-                readfile($name);
-                exit;
-            }
-
-            Alert::setSuccessNotify('Бэкап успешно создан');
-
-            return $this->redirect(['/admin/']);
-        }
-
-        return $this->render('index');
-    }
-
-
     public function actionCache()
     {
         Yii::$app->cache->flush();
