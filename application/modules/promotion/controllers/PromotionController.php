@@ -6,6 +6,7 @@ namespace app\modules\promotion\controllers;
 
 use app\modules\promotion\models\entity\Promotion;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
+use app\modules\promotion\models\helpers\PromotionHelper;
 use yii\web\Controller;
 use yii\web\HttpException;
 
@@ -13,18 +14,7 @@ class PromotionController extends Controller
 {
     public function actionIndex()
     {
-        $models = Promotion::find()->where(['is_active' => true])->andWhere([
-            'or',
-            'start_at = :default and end_at = :default',
-            'start_at is null and end_at is null',
-            'start_at < :now and end_at > :now'
-        ])
-            ->addParams([
-                ":now" => time(),
-                ":default" => 0,
-            ])
-            ->orderBy(['sort' => SORT_DESC])
-            ->all();
+        $models = PromotionHelper::getActualPromotions();
 
 
         return $this->render('index', [

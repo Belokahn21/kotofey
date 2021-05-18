@@ -9,14 +9,19 @@ use app\modules\promotion\models\helpers\PromotionHelper;
 /* @var $models \app\modules\promotion\models\entity\Promotion[] */
 ?>
 
-<h2>Обратите внимание на товары по акции</h2>
-<div class="current-promotions-slider-group">
-    <div class="swiper-container current-promotions-slider js-current-promotions-slider">
-        <div class="swiper-wrapper">
-            <?php foreach ($models as $model): ?>
+<?php foreach ($models as $model): ?>
+    <div class="current-promotions-slider-group my-5">
+        <div class="page-title__group">
+            <h2 class="page-title"><?= $model->name; ?></h2>
+            <a class="page-title__link" href="<?= PromotionHelper::getDetailUrl($model); ?>">Смотреть больше товаров</a>
+        </div>
+        <div class="swiper-container current-promotions-slider">
+            <div class="swiper-wrapper">
                 <div class="swiper-slide current-promotions-slider__slide">
                     <div class="current-promotions-slider__side">
-                        <?= Html::img(PromotionHelper::getImageUrl($model), ['class' => 'current-promotions-slider__image']); ?>
+                        <a href="<?= PromotionHelper::getDetailUrl($model); ?>">
+                            <?= Html::img(PromotionHelper::getImageUrl($model), ['class' => 'current-promotions-slider__image']); ?>
+                        </a>
                     </div>
                     <div class="current-promotions-slider__side">
 
@@ -44,11 +49,9 @@ use app\modules\promotion\models\helpers\PromotionHelper;
                         </div>
                     </div>
                 </div>
-            <?php endforeach; ?>
+            </div>
         </div>
     </div>
-    <div class="current-promotions-slider-button-next swiper-button-next"></div>
-    <div class="current-promotions-slider-button-prev swiper-button-prev"></div>
-</div>
+<?php endforeach; ?>
 
 

@@ -2,11 +2,9 @@
 
 /* @var $models \app\modules\promotion\models\entity\Promotion[] */
 
-use yii\helpers\Url;
-use yii\helpers\Html;
 use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\Title;
-use app\modules\promotion\models\helpers\PromotionHelper;
+use app\modules\promotion\widgets\CurrentPromotions\CurrentPromotionsWidget;
 
 $this->title = Title::show('Скидки и акции');
 $this->params['breadcrumbs'][] = ['label' => 'Скидки и акции'];
@@ -22,20 +20,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Скидки и акции'];
     ]); ?>
     <h1 class="page__title">Скидки и акции</h1>
     <?php if ($models): ?>
-        <div class="promotion-list">
-
-            <?php foreach ($models as $model): ?>
-                <a href="<?= PromotionHelper::getDetailUrl($model); ?>" class="promotion-list__item">
-                    <?php if ($model->media): ?>
-                        <?= Html::img(PromotionHelper::getImageUrl($model), [
-                            'class' => 'promotion-list__image'
-                        ]) ?>
-                    <?php else: ?>
-                        <?= $model->name; ?>
-                    <?php endif; ?>
-                </a>
-            <?php endforeach; ?>
-        </div>
+        <?= CurrentPromotionsWidget::widget([
+            'view' => 'no-slider',
+            'models' => $models
+        ]); ?>
     <?php else: ?>
         <p>Новых акций нету, приходите чуть позже!</p>
     <?php endif; ?>

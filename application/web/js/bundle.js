@@ -5184,31 +5184,31 @@ document.addEventListener('DOMContentLoaded', function () {
       swiper: productGalleryThumbs
     }
   });
-  var currentPromotionsSlider = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".current-promotions-slider", {
+  var currentPromotionsSlider = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".js-current-promotions-slider", {
     navigation: {
       nextEl: ".current-promotions-slider-button-next",
       prevEl: ".current-promotions-slider-button-prev"
     },
     on: {
-      init: function init() {
-        var verticalPromoProducts = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".vertical-promo-products-slider", {
-          // direction: "vertical",
-          slidesPerView: 1,
-          mousewheel: true,
-          breakpoints: {
-            780: {
-              // when window width is >= 480px
-              slidesPerView: 3,
-              spaceBetween: 25,
-              direction: "vertical"
-            }
-          },
-          pagination: {
-            el: ".vertical-promo-products-slider-pagination",
-            clickable: true
-          }
-        });
+      init: function init() {}
+    }
+  });
+  var verticalPromoProducts = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".vertical-promo-products-slider", {
+    // direction: "vertical",
+    autoplay: true,
+    slidesPerView: 1,
+    mousewheel: true,
+    breakpoints: {
+      780: {
+        // when window width is >= 480px
+        slidesPerView: 3,
+        spaceBetween: 25,
+        direction: "vertical"
       }
+    },
+    pagination: {
+      el: ".vertical-promo-products-slider-pagination",
+      clickable: true
     }
   });
 });

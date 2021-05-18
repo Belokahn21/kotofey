@@ -8,15 +8,16 @@ use yii\base\Widget;
 class CurrentPromotionsWidget extends Widget
 {
     public $view = 'default';
+    public $models;
 
     public function run()
     {
-        $models = PromotionHelper::getActualPromotions();
+        if (!$this->models) $this->models = PromotionHelper::getActualPromotions();
 
-        if (!$models) return false;
+        if (!$this->models) return false;
 
         return $this->render($this->view, [
-            'models' => $models
+            'models' => $this->models
         ]);
     }
 }

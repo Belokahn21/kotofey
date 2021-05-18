@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
-    let currentPromotionsSlider = new Swiper(".current-promotions-slider", {
+    let currentPromotionsSlider = new Swiper(".js-current-promotions-slider", {
         navigation: {
             nextEl: ".current-promotions-slider-button-next",
             prevEl: ".current-promotions-slider-button-prev",
@@ -243,25 +243,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
         on: {
             init() {
-                let verticalPromoProducts = new Swiper(".vertical-promo-products-slider", {
-                    // direction: "vertical",
-                    slidesPerView: 1,
-                    mousewheel: true,
-                    breakpoints: {
-                        780: { // when window width is >= 480px
-                            slidesPerView: 3,
-                            spaceBetween: 25,
-                            direction: "vertical",
-                        }
-                    },
-                    pagination: {
-                        el: ".vertical-promo-products-slider-pagination",
-                        clickable: true,
-                    },
-                });
+
             }
         },
     });
 
+
+    let verticalPromoProducts = new Swiper(".vertical-promo-products-slider", {
+        // direction: "vertical",
+        autoplay: true,
+        slidesPerView: 1,
+        mousewheel: true,
+        breakpoints: {
+            780: { // when window width is >= 480px
+                slidesPerView: 3,
+                spaceBetween: 25,
+                direction: "vertical",
+            }
+        },
+        pagination: {
+            el: ".vertical-promo-products-slider-pagination",
+            clickable: true,
+        },
+    });
 
 });
