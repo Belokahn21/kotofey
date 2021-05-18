@@ -19,19 +19,29 @@ use app\modules\promotion\models\helpers\PromotionHelper;
                         <?= Html::img(PromotionHelper::getImageUrl($model), ['class' => 'current-promotions-slider__image']); ?>
                     </div>
                     <div class="current-promotions-slider__side">
-                        <div class="swiper-container vertical-promo-products-slider">
-                            <div class="swiper-wrapper">
-                                <?php foreach ($model->promotionProductMechanics as $mechanic): ?>
-                                    <div class="swiper-slide vertical-promo-products-slider__slide">
-                                        <img class=" vertical-promo-products-slider__image" src="<?= ProductHelper::getImageUrl($mechanic->product); ?>" alt="<?= $mechanic->product->name; ?>">
-                                        <a href="<?= ProductHelper::getDetailUrl($mechanic->product); ?>" class=" vertical-promo-products-slider__name"><?= StringHelper::truncate($mechanic->product->name, 25, '...'); ?></a>
-                                        <div class=" vertical-promo-products-slider__price"><?= $mechanic->product->price; ?><?= Currency::getInstance()->show(); ?></div>
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
 
+                        <?php $limit = 15; ?>
+                        <?php $sliced = $model->promotionProductMechanics; ?>
+                        <?php if (count($model->promotionProductMechanics) > $limit): ?>
+                            <?php $sliced = array_slice($model->promotionProductMechanics, 0, $limit) ?>
+                        <?php endif; ?>
+
+                        <div class="vertical-promo-products-slider-group">
+                            <div class="swiper-container vertical-promo-products-slider">
+                                <div class="swiper-wrapper">
+                                    <?php foreach ($sliced as $mechanic): ?>
+                                        <div class="swiper-slide vertical-promo-products-slider__slide">
+                                            <img class=" vertical-promo-products-slider__image" src="<?= ProductHelper::getImageUrl($mechanic->product); ?>" alt="<?= $mechanic->product->name; ?>">
+                                            <a href="<?= ProductHelper::getDetailUrl($mechanic->product); ?>" class=" vertical-promo-products-slider__name"><?= StringHelper::truncate($mechanic->product->name, 25, '...'); ?></a>
+                                            <div class=" vertical-promo-products-slider__price"><?= $mechanic->product->price; ?><?= Currency::getInstance()->show(); ?></div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                <?php if (count($sliced) > 3): ?>
+                                    <div class="swiper-pagination vertical-promo-products-slider-pagination"></div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <?php endforeach; ?>

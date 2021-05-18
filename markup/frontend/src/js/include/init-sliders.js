@@ -244,9 +244,16 @@ document.addEventListener('DOMContentLoaded', () => {
         on: {
             init() {
                 let verticalPromoProducts = new Swiper(".vertical-promo-products-slider", {
-                    direction: "vertical",
-                    slidesPerView: 3,
+                    // direction: "vertical",
+                    slidesPerView: 1,
                     mousewheel: true,
+                    breakpoints: {
+                        780: { // when window width is >= 480px
+                            slidesPerView: 3,
+                            spaceBetween: 25,
+                            direction: "vertical",
+                        }
+                    },
                     pagination: {
                         el: ".vertical-promo-products-slider-pagination",
                         clickable: true,

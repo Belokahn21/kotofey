@@ -6,7 +6,8 @@
     &-group {
       position: relative;
       width: 100%;
-      height: 272px;
+      height: 300px;
+      margin: 20px 0;
     }
 
     &__slide {
@@ -14,6 +15,10 @@
       flex-direction: row;
       align-items: flex-start;
       justify-content: stretch;
+
+      @media (max-width: 780px) {
+        flex-direction: column;
+      }
     }
 
     &__image {
@@ -26,11 +31,19 @@
 
       &:first-child {
         width: 70%;
+
+        @media (max-width: 780px) {
+          width: 100%;
+        }
       }
 
       &:last-child {
         width: 30%;
         padding-left: 15px;
+
+        @media (max-width: 780px) {
+          width: 100%;
+        }
       }
     }
 
@@ -51,7 +64,13 @@
   &-slider {
     height: 100%;
 
+    &-group {
+      position: relative;
+      height: 100%;
+    }
+
     &__slide {
+      padding-right: 20px;
       display: flex;
       flex-direction: row;
       align-items: center;
@@ -74,6 +93,14 @@
     &__price {
       font-weight: bold;
       font-size: 18px;
+    }
+
+    &-pagination {
+      right: 0 !important;
+
+      .swiper-pagination-bullet-active {
+        background: $active-color;
+      }
     }
   }
 }

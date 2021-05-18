@@ -13,7 +13,7 @@ class CurrentPromotionsWidget extends Widget
     {
         $models = PromotionHelper::getActualPromotions();
 
-        if (!$models || \Yii::$app->user->id != 1) return false;
+        if (!$models) return false;
 
         return $this->render($this->view, [
             'models' => $models

@@ -5192,11 +5192,19 @@ document.addEventListener('DOMContentLoaded', function () {
     on: {
       init: function init() {
         var verticalPromoProducts = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".vertical-promo-products-slider", {
-          direction: "vertical",
-          slidesPerView: 3,
+          // direction: "vertical",
+          slidesPerView: 1,
           mousewheel: true,
+          breakpoints: {
+            780: {
+              // when window width is >= 480px
+              slidesPerView: 3,
+              spaceBetween: 25,
+              direction: "vertical"
+            }
+          },
           pagination: {
-            el: ".swiper-pagination",
+            el: ".vertical-promo-products-slider-pagination",
             clickable: true
           }
         });

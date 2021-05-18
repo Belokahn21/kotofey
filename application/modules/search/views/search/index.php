@@ -66,6 +66,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
         </div>
     </div>
     <?= CurrentPromotionsWidget::widget(); ?>
-    <?= FastButtonSearchWidget::widget(); ?>
     <?= VisitedProductsWidget::widget(); ?>
+    <?= FastButtonSearchWidget::widget(); ?>
 </div>
