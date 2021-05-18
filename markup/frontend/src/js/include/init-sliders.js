@@ -237,8 +237,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let currentPromotionsSlider = new Swiper(".current-promotions-slider", {
         navigation: {
-            nextEl: ".swiper-button-next",
-            prevEl: ".swiper-button-prev",
+            nextEl: ".current-promotions-slider-button-next",
+            prevEl: ".current-promotions-slider-button-prev",
         },
 
         on: {

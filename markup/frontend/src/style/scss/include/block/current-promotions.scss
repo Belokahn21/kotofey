@@ -1,7 +1,10 @@
 .current-promotions {
   &-slider {
-    width: 100%;
-    max-height: 272px;
+
+    &-container {
+      width: 100%;
+      max-height: 272px;
+    }
 
     &__slide {
       display: flex;
@@ -32,7 +35,6 @@
 
 .vertical-promo-products {
   &-slider {
-    height: 100%;
 
     &__slide {
       display: flex;
@@ -51,6 +53,7 @@
     &__name {
       max-width: 170px;
       font-weight: bold;
+      color: black;
     }
 
     &__price {
