@@ -10,8 +10,8 @@ use app\modules\promotion\models\helpers\PromotionHelper;
 ?>
 
 <h2>Обратите внимание на товары по акции</h2>
-<div class="current-promotions-slider">
-    <div class="swiper-container current-promotions-slider-container">
+<div class="current-promotions-slider-group">
+    <div class="swiper-container current-promotions-slider">
         <div class="swiper-wrapper">
             <?php foreach ($models as $model): ?>
                 <div class="swiper-slide current-promotions-slider__slide">
@@ -37,9 +37,8 @@ use app\modules\promotion\models\helpers\PromotionHelper;
             <?php endforeach; ?>
         </div>
     </div>
-
-    <div class="current-promotions-slider-button-next"></div>
-    <div class="current-promotions-slider-button-prev"></div>
+    <div class="current-promotions-slider-button-next swiper-button-next"></div>
+    <div class="current-promotions-slider-button-prev swiper-button-prev"></div>
 </div>
 
 

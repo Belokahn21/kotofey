@@ -248,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     slidesPerView: 3,
                     mousewheel: true,
                     pagination: {
-                        el: ".swiper-pagination",
+                        el: ".vertical-promo-products-slider-pagination",
                         clickable: true,
                     },
                 });

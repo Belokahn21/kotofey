@@ -5186,8 +5186,8 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   var currentPromotionsSlider = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".current-promotions-slider", {
     navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
+      nextEl: ".current-promotions-slider-button-next",
+      prevEl: ".current-promotions-slider-button-prev"
     },
     on: {
       init: function init() {
