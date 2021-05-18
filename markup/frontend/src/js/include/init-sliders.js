@@ -215,24 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
         slidesPerView: 4,
     });
 
-    // var steamGalleryThumbs = new Swiper('.steam-slider-thumbs-container', {
-    //     slidesPerView: 4,
-    //     freeMode: true,
-    //     watchSlidesVisibility: true,
-    //     watchSlidesProgress: true,
-    // });
-    // var steamGalleryTop = new Swiper('.steam-slider-top-container', {
-    //     spaceBetween: 10,
-    //     navigation: {
-    //         nextEl: '.swiper-button-next',
-    //         prevEl: '.swiper-button-prev',
-    //     },
-    //     thumbs: {
-    //         swiper: steamGalleryThumbs
-    //     }
-    // });
-
-
     let productGalleryThumbs = new Swiper(".product-gallery-thumbs", {
         spaceBetween: 10,
         slidesPerView: 3,
@@ -240,6 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
         watchSlidesVisibility: true,
         watchSlidesProgress: true,
     });
+
     let productGalleryBig = new Swiper(".product-gallery-big", {
         spaceBetween: 10,
         navigation: {
@@ -250,4 +233,28 @@ document.addEventListener('DOMContentLoaded', () => {
             swiper: productGalleryThumbs,
         },
     });
+
+
+    let currentPromotionsSlider = new Swiper(".current-promotions-slider", {
+        navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+        },
+
+        on: {
+            init() {
+                let verticalPromoProducts = new Swiper(".vertical-promo-products-slider", {
+                    direction: "vertical",
+                    slidesPerView: 3,
+                    mousewheel: true,
+                    pagination: {
+                        el: ".swiper-pagination",
+                        clickable: true,
+                    },
+                });
+            }
+        },
+    });
+
+
 });

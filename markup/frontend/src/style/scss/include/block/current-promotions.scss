@@ -1,0 +1,61 @@
+.current-promotions {
+  &-slider {
+    width: 100%;
+    max-height: 272px;
+
+    &__slide {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: stretch;
+    }
+
+    &__image {
+      width: 100%;
+      object-fit: contain;
+    }
+
+    &__side {
+      height: 100%;
+
+      &:first-child {
+        width: 70%;
+      }
+
+      &:last-child {
+        width: 30%;
+        padding-left: 15px;
+      }
+    }
+  }
+}
+
+.vertical-promo-products {
+  &-slider {
+    height: 100%;
+
+    &__slide {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+    }
+
+    &__image {
+      max-width: 75px;
+      height: 100px;
+      object-fit: contain;
+    }
+
+    &__name {
+      max-width: 170px;
+      font-weight: bold;
+    }
+
+    &__price {
+      font-weight: bold;
+      font-size: 18px;
+    }
+  }
+}
