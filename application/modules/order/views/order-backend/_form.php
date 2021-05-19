@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\site\models\tools\Price;
 use app\modules\site\models\tools\Currency;
 use app\modules\order\widgets\map\MapWidget;
+use \app\modules\user\models\helpers\UserHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -222,6 +223,9 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                 </div>
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'odd')->textInput(['placeholder' => 'Сдача'])->label(false); ?>
+                </div>
+                <div class="w-25 p-1">
+                    <?= $form->field($model, 'odd')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['prompt' => 'Менеджер заказа'])->label(false); ?>
                 </div>
             </div>
         </div>
