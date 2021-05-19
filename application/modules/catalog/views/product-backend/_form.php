@@ -210,7 +210,25 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                 else echo "Без категории";
                                 ?>
                             </legend>
+                            <?php $showedProps = 1; ?>
                             <?php foreach ($props as $property): ?>
+
+                                <?php
+                                if ($showedProps % 4 == 1) {
+//                                    echo "<div class='row'>";
+                                }
+                                ?>
+<!--                                <div class="3">1</div>-->
+<!--                                <div class="3">2</div>-->
+<!--                                <div class="3">3</div>-->
+<!--                                <div class="3">4</div>-->
+                                <?php
+                                if ($showedProps % 4 == 0) {
+//                                    echo "</div>";
+                                }
+                                $showedProps++;
+                                ?>
+
                                 <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
                                 <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
                                     <?php $value = PropertiesProductValues::findAll([
@@ -241,7 +259,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                         <?= "so value"; ?>
                                         <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => $value->value])->label($property->name); ?>
                                     <?php else: ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value'=>false])->label($property->name); ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => false])->label($property->name); ?>
                                     <?php endif; ?>
 
 
@@ -260,6 +278,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
+                            <?php if ($showedProps % 4 != 1) echo "</div>"; ?>
                         </fieldset>
                     <?php endforeach; ?>
                 </ul>

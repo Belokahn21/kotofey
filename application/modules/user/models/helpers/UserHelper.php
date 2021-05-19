@@ -25,4 +25,9 @@ class UserHelper
         $diff = date_diff(date_create($dateOfBirth), date_create($today));
         return $diff->format('%y год и %m месяца');
     }
+
+    public static function getFullName(User $user)
+    {
+        return implode(' ', [$user->first_name, $user->name, $user->last_name]);
+    }
 }
