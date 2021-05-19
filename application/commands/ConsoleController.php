@@ -13,6 +13,7 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
+        \Yii::$app->db->createCommand('update `order` set `manager_id`=1')->execute();
     }
 
     public function actionClearCache()
