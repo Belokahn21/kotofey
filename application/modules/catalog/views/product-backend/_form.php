@@ -238,7 +238,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
 
                                     <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['checked' => true])->label($property->name); ?>
                                     <?php else: ?>
                                         <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox()->label($property->name); ?>
                                     <?php endif; ?>
