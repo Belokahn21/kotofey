@@ -237,7 +237,10 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?>
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
 
-                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox()->label($property->name); ?>
+                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value'=>ArrayHelper::getColumn(PropertiesProductValues::findAll([
+                                        'product_id' => $model->id,
+                                        'property_id' => $property->id
+                                    ]), 'id')])->label($property->name); ?>
 
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
                                     <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
