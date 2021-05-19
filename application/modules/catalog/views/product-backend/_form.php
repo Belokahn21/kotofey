@@ -239,9 +239,9 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
                                     <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
                                         <?= "so value"; ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox()->label($property->name); ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => $value])->label($property->name); ?>
                                     <?php else: ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox()->label($property->name); ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value'=>false])->label($property->name); ?>
                                     <?php endif; ?>
 
 
