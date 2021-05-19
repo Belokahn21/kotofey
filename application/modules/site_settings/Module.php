@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /**
  * site_settings module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\site_settings\controllers';
     private $name = 'Настройки';

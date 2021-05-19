@@ -5,7 +5,7 @@ namespace app\modules\favorite;
 /**
  * favorite module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     /**
      * {@inheritdoc}

@@ -4,7 +4,7 @@ namespace app\modules\pets;
 
 use yii\helpers\Url;
 
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\pets\controllers';
     private $name = 'Питомцы';

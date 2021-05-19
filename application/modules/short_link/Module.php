@@ -4,7 +4,7 @@ namespace app\modules\short_link;
 
 use yii\helpers\Url;
 
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\short_link\controllers';
     public $name = 'Короткие ссылки';

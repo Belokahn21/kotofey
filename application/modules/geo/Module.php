@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /**
  * geo module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\geo\controllers';
     private $name = 'Гео-данные';

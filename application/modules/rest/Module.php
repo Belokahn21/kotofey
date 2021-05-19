@@ -5,7 +5,7 @@ namespace app\modules\rest;
 /**
  * rest module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     /**
      * {@inheritdoc}

@@ -4,7 +4,7 @@ namespace app\modules\promotion;
 
 use yii\helpers\Url;
 
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\promotion\controllers';
     public $name = 'Акции';

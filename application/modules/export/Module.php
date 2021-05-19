@@ -2,7 +2,7 @@
 
 namespace app\modules\export;
 
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\export\controllers';
     public $exportOrganizationName = 'Зоомагазин Котофей';

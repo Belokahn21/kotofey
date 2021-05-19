@@ -44,6 +44,7 @@ use yii\db\ActiveRecord;
  * @property string $phone
  * @property string $ip
  * @property string $discount
+ * @property integer $manager_id
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -66,16 +67,20 @@ class Order extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
-            self::SCENARIO_FAST => ['email', 'phone', 'type', 'is_paid', 'status', 'ip'],
+            self::SCENARIO_DEFAULT => ['manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
+            self::SCENARIO_FAST => ['manager_id', 'email', 'phone', 'type', 'is_paid', 'status', 'ip'],
         ];
     }
 
     public function rules()
     {
+        $module = \Yii::$app->getModule('order');
         return [
+            ['manager_id', 'integer'],
+            ['manager_id', 'default', 'value' => $module->default_manager_id],
+
             ['type', 'default', 'value' => '3'],
 
             [['phone'], 'string', 'max' => 25],
@@ -84,7 +89,7 @@ class Order extends ActiveRecord
                 ['phone'],
                 'filter',
                 'filter' => function ($value) {
-                        $value = str_replace('+7', '8', $value);
+                    $value = str_replace('+7', '8', $value);
                     return str_replace([' ', '(', ')', '-'], '', $value);
                 }
             ],

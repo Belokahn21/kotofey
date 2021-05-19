@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /**
  * support module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\support\controllers';
     public $name = 'Тех. поддержка';

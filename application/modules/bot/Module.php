@@ -5,7 +5,7 @@ namespace app\modules\bot;
 /**
  * bot module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     /**
      * {@inheritdoc}

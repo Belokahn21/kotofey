@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /**
  * content module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\content\controllers';
     public $name = 'Контент';

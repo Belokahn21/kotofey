@@ -2,12 +2,17 @@
 
 namespace app\modules\order;
 
+use app\modules\site\MainModule;
+use app\modules\user\models\helpers\UserHelper;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
-class Module extends \yii\base\Module
+class Module extends MainModule
 {
     public $controllerNamespace = 'app\modules\order\controllers';
     private $name = 'Заказы';
+
+    public $default_manager_id;
 
     public function init()
     {
@@ -25,5 +30,20 @@ class Module extends \yii\base\Module
     public function getName()
     {
         return $this->name;
+    }
+
+
+    public function getParams()
+    {
+        return [
+            'default_manager_id' => ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'),
+        ];
+    }
+
+    public function getParamsLabel()
+    {
+        return [
+            'default_manager_id' => 'Менеджер заказов по умолчанию',
+        ];
     }
 }

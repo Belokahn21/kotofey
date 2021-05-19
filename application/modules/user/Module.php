@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /**
  * user module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\user\controllers';
     public $avatarPath = "/upload/avatar/";

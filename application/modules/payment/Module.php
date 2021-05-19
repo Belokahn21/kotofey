@@ -2,9 +2,10 @@
 
 namespace app\modules\payment;
 
+use app\modules\site\MainModule;
 use yii\helpers\Url;
 
-class Module extends \yii\base\Module
+class Module extends MainModule
 {
     public $controllerNamespace = 'app\modules\payment\controllers';
     public $name = 'Оплаты';

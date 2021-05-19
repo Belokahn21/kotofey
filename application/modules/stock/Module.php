@@ -7,7 +7,7 @@ use yii\helpers\Url;
 /**
  * stock module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \app\modules\site\MainModule
 {
     public $controllerNamespace = 'app\modules\stock\controllers';
     private $name = 'Склады';
