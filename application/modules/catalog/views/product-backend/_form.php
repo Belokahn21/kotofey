@@ -236,17 +236,21 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
                                     ?>
                                     <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?>
-                                <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
 
-                                    <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
-                                        <?= "so value"; ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => $value->value])->label($property->name); ?>
+
+                                <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
+                                    <?php $value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id]); ?>
+
+                                    <?php if ($value): ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
                                     <?php else: ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => false])->label($property->name); ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox()->label($property->name); ?>
                                     <?php endif; ?>
 
 
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
+
+
                                     <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
                                         'values' => ArrayHelper::getColumn(PropertiesProductValues::findAll([
                                             'product_id' => $model->id,
@@ -259,6 +263,8 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     <?php else: ?>
                                         <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>
                                     <?php endif; ?>
+
+
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </fieldset>
