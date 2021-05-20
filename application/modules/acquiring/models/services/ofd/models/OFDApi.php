@@ -23,8 +23,8 @@ class OFDApi
 //    const DEMO_URL = 'https://ferma-test.ofd.ru/api/kkt/cloud/';
 
     protected $_url;
-    private  $_action_create_check = 'receipt';
-    private  $_action_status_check = 'status';
+    private $_action_create_check = 'receipt';
+    private $_action_status_check = 'status';
 
     /**
      * @property Module @module
@@ -68,6 +68,8 @@ class OFDApi
 //                "Inn" => "222261129226"
             ]
         ];
+
+        if (isset($userData['phone'])) $params['CustomerReceipt']['Phone'] = $userData['phone'];
 
         $paramsItems = [];
         foreach ($items as $item) {

@@ -57,9 +57,24 @@ class OFDFermaService
 
     public function sendCheckClientByPhone(Order $order, string $phone)
     {
-        $this->api->sendCheck($order, [
-            'phone' => $phone
-        ]);
+        // Чеки отправляются только оплаченым заказам.
+        if (!$order->is_paid) return false;
+
+        // Нет ли старых записей
+        if (ServiceCheckHistory::hasCheckHistory($order->id)) return false;
+
+        try {
+            $check_id = $this->api->sendCheck($order, [
+                'phone' => $phone
+            ]);
+
+            ServiceCheckHistory::saveCheckHistory($order->id, $check_id);
+
+
+        } catch (\Exception $e) {
+            LogService::saveErrorMessage("Ошибка отправки чека покупателю. Заказ: #{$order->id}. Сообщение: " . $e->getMessage() . ' // ' . $e->getFile() . ' // ' . $e->getLine(), 'acquiring');
+            //todo: оповестить Администратора?
+        }
     }
 
     public function getCheckStatusByOrderId(int $order_id)
