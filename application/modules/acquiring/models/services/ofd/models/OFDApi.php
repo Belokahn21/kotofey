@@ -53,7 +53,6 @@ class OFDApi
             'InvoiceId' => $order->id,
             'CustomerReceipt' => [
                 'TaxationSystem' => $this->module->ofd_taxation_system,
-                'Email' => $userData['email'],
                 "InstallmentPlace" => System::fullDomain(),
                 "PaymentType" => 1, //товар
                 'PaymentItems' => [
@@ -69,7 +68,8 @@ class OFDApi
             ]
         ];
 
-        if (isset($userData['phone'])) $params['CustomerReceipt']['Phone'] = $userData['phone'];
+        if (isset($userData['email']) && !empty($userData['email'])) $params['CustomerReceipt']['Email'] = $userData['email'];
+        if (isset($userData['phone']) && !empty($userData['phone'])) $params['CustomerReceipt']['Phone'] = $userData['phone'];
 
         $paramsItems = [];
         foreach ($items as $item) {
