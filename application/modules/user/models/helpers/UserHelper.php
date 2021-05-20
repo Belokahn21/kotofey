@@ -9,7 +9,7 @@ class UserHelper
 {
     public static function getManagers()
     {
-        return User::find()->leftJoin('auth_assignment as auth', ['auth.user_id' => 'id'])->where(['auth.item_name' => 'SaleManager'])->all();
+        return User::find()->leftJoin('auth_assignment as auth', 'auth.user_id=id')->where(['auth.item_name' => 'SaleManager'])->all();
     }
 
     public static function getAvatar(User $model)
