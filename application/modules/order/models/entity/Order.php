@@ -145,7 +145,10 @@ class Order extends ActiveRecord
         }
 
         BonusService::getInstance()->addUserBonus($this);
-        OFDFermaService::getInstance()->sendCheckClientByEmail($this, $this->email);
+        OFDFermaService::getInstance()->doSendCheck($this, [
+            'email' => $this->email,
+            'phone' => $this->phone,
+        ]);
 
 
         // todo: херня выходит с пересохранением заказа, надо поправить

@@ -33,29 +33,21 @@ class OFDFermaService
         return new OFDFermaService();
     }
 
-    public function sendCheckClientByEmail(Order $order, string $email)
+
+    public function doSendCheck(Order $order, array $options)
     {
-        // Чеки отправляются только оплаченым заказам.
-        if (!$order->is_paid) return false;
+        if (isset($options['email']) && !empty($options['email'])) {
+            $this->sendCheck($order, ['email' => $options['email']]);
+            return;
+        }
 
-        // Нет ли старых записей
-        if (ServiceCheckHistory::hasCheckHistory($order->id)) return false;
-
-        try {
-            $check_id = $this->api->sendCheck($order, [
-                'email' => $email
-            ]);
-
-            ServiceCheckHistory::saveCheckHistory($order->id, $check_id);
-
-
-        } catch (\Exception $e) {
-            LogService::saveErrorMessage("Ошибка отправки чека покупателю. Заказ: #{$order->id}. Сообщение: " . $e->getMessage() . ' // ' . $e->getFile() . ' // ' . $e->getLine(), 'acquiring');
-            //todo: оповестить Администратора?
+        if (isset($options['phone']) && !empty($options['phone'])) {
+            $this->sendCheck($order, ['phone' => $options['phone']]);
+            return;
         }
     }
 
-    public function sendCheckClientByPhone(Order $order, string $phone)
+    public function sendCheck($order, $options)
     {
         // Чеки отправляются только оплаченым заказам.
         if (!$order->is_paid) return false;
@@ -64,9 +56,7 @@ class OFDFermaService
         if (ServiceCheckHistory::hasCheckHistory($order->id)) return false;
 
         try {
-            $check_id = $this->api->sendCheck($order, [
-                'phone' => $phone
-            ]);
+            $check_id = $this->api->sendCheck($order, $options);
 
             ServiceCheckHistory::saveCheckHistory($order->id, $check_id);
 
