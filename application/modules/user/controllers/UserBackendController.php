@@ -36,10 +36,10 @@ class UserBackendController extends MainBackendController
     public function actionIndex()
     {
         $model = new User(['scenario' => User::SCENARIO_INSERT]);
-        $authAssigment = new AuthAssignment();
+        $authManager = Yii::$app->authManager;
         $searchModel = new UserSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
-        $groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
+        $groups = Yii::$app->authManager->getRoles();
 
         if (\Yii::$app->request->isPost) {
 
@@ -52,8 +52,17 @@ class UserBackendController extends MainBackendController
 
                     if ($model->save()) {
 
-                        if (!empty($model->group)) {
-                            $authAssigment->addUserRole(AuthItem::findOne(['name' => $model->group]), $model);
+                        if ($model->groups) {
+
+                            Yii::$app->authManager->revokeAll($model->id);
+
+                            foreach ($model->groups as $group) {
+                                $groupModel = $authManager->getRole($group);
+                                if ($groupModel) {
+                                    $authManager->assign($groupModel, $model->id);
+                                }
+                            }
+
                         }
 
                         Alert::setSuccessNotify('Пользователь успешно создан');
@@ -75,10 +84,11 @@ class UserBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $authAssigment = new AuthAssignment();
         $model = User::findOne($id);
         $model->scenario = User::SCENARIO_UPDATE;
-        $groups = AuthItem::find()->where(['type' => AuthItem::TYPE_ROLE])->all();
+        $groups = Yii::$app->authManager->getRoles();
+        $authManager = Yii::$app->authManager;
+
 
         // обновить юзера
         if (\Yii::$app->request->isPost) {
@@ -93,8 +103,16 @@ class UserBackendController extends MainBackendController
 
 
                     if ($model->groups) {
-                        $authAssigment->removeUserRoles($model->id);
-                        $authAssigment->addUserRole($model->groups, $model);
+
+                        Yii::$app->authManager->revokeAll($model->id);
+
+                        foreach ($model->groups as $group) {
+                            $groupModel = $authManager->getRole($group);
+                            if ($groupModel) {
+                                $authManager->assign($groupModel, $model->id);
+                            }
+                        }
+
                     }
 
                     if ($model->update() !== false) {

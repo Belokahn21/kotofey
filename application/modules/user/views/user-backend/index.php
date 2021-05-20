@@ -16,7 +16,9 @@ use app\modules\order\models\entity\Order;
 
 $this->title = Title::show("Пользователи"); ?>
     <section>
-        <h1 class="title">Пользователи</h1>
+        <div class="title-group">
+            <h1 class="title">Пользователи</h1>
+        </div>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?= $this->render('_form', [
             'model' => $model,

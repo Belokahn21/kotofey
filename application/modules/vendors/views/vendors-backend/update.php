@@ -15,8 +15,10 @@ use app\modules\site_settings\models\entity\SiteSettings;
 
 $this->title = Title::show("Поставщик:" . $model->name); ?>
 <section>
-    <h1 class="title">Поставщик: <?php echo $model->name; ?></h1>
-    <?= Html::a('Назад', ['index'], ['class' => 'btn-main']) ?>
+    <div class="title-group">
+        <h1 class="title"><?= $model->name; ?></h1>
+        <?= Html::a('Назад', \yii\helpers\Url::to(['index']), ['class' => 'btn-main']); ?>
+    </div>
     <div class="product-form">
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?= $this->render('_form', [

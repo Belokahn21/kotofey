@@ -1,11 +1,11 @@
 <?php
 
 use app\modules\user\models\entity\UserSex;
-use app\models\helpers\PersonalHelper;
 use yii\helpers\ArrayHelper;
 
 /* @var $model \app\modules\user\models\entity\User */
-/* @var $personalManagerModel \app\models\entity\UserManager */
+/* @var $form \yii\widgets\ActiveForm */
+/* @var $groups array */
 
 ?>
 
@@ -32,10 +32,10 @@ use yii\helpers\ArrayHelper;
             </div>
             <div class="col-sm-6">
                 <div class="form-element">
-                    <?php if (is_object($model->group)): ?>
-                        <?php $model->groups = $model->group->name; ?>
-                    <?php endif ?>
-                    <?= $form->field($model, 'groups')->dropDownList(ArrayHelper::map($groups, 'name', 'name'), ['prompt' => 'Выбрать группу']); ?>
+                    <?php if (!$model->isNewRecord): ?>
+                        <?php $model->groups = ArrayHelper::map(Yii::$app->authManager->getRolesByUser($model->id), 'name', 'name'); ?>
+                    <?php endif; ?>
+                    <?= $form->field($model, 'groups')->dropDownList(ArrayHelper::map($groups, 'name', 'name'), ['prompt' => 'Выбрать группу', 'multiple' => true, 'size' => 15]); ?>
                 </div>
             </div>
         </div>

@@ -10,8 +10,10 @@ use app\modules\user\models\entity\UserSex;
 
 $this->title = Title::show("Пользователи"); ?>
 <section>
-    <h1 class="title">Пользователь: <?= $model->email; ?></h1>
-    <?= Html::a("Назад", ['index'], ['class' => 'btn-main']) ?>
+    <div class="title-group">
+        <h1 class="title">Пользователь: <?= $model->email; ?></h1>
+        <?= Html::a('Назад', \yii\helpers\Url::to(['index']), ['class' => 'btn-main']); ?>
+    </div>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     <?= $this->render('_form', [
         'model' => $model,

@@ -78,7 +78,7 @@ class User extends ActiveRecord implements IdentityInterface
             [['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
 
             ['password', 'string'],
-            ['groups', 'string'],
+            ['groups', 'safe'],
 
             [['phone'], 'string', 'max' => 25],
             ['phone', 'default', 'value' => null],
@@ -158,13 +158,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getGroup()
     {
-        /* ругается что не приходит объект, надо бы исправить*/
-        // TODO: repair
-        try {
-            return AuthItem::findOne(['name' => AuthAssignment::findOne(['user_id' => $this->id])->item_name]);
-        } catch (ErrorException $exception) {
-            return $exception->getMessage();
-        }
+        return AuthItem::find()->where(['name' => AuthAssignment::findOne(['user_id' => $this->id])->item_name])->all();
     }
 
     public function getDisplay()
