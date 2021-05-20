@@ -225,7 +225,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                     <?= $form->field($model, 'odd')->textInput(['placeholder' => 'Сдача'])->label(false); ?>
                 </div>
                 <div class="w-25 p-1">
-                    <?= $form->field($model, 'odd')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['prompt' => 'Менеджер заказа'])->label(false); ?>
+                    <?= $form->field($model, 'manager_id')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['prompt' => 'Менеджер заказа'])->label(false); ?>
                 </div>
             </div>
         </div>
