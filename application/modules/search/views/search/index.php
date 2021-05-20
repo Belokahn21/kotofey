@@ -28,16 +28,16 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
     ]); ?>
     <h1 class="page__title">Результат поиска:</h1>
     <?= SearchMessageWidget::widget(['q' => $model->search]); ?>
-    <div class="catalog-container">
-        <aside class="left-siderbar">
-            <?php if ($products): ?>
-                <?= CatalogFilterWidget::widget([
-                    'product_id' => ArrayHelper::getColumn($duplicateQueryProducts->all(), 'id'),
-                ]); ?>
-            <?php endif; ?>
-        </aside>
-        <div class="catalog-wrap">
-            <?php if ($products): ?>
+    <?php if ($products): ?>
+        <div class="catalog-container">
+            <aside class="left-siderbar">
+                <?php if ($products): ?>
+                    <?= CatalogFilterWidget::widget([
+                        'product_id' => ArrayHelper::getColumn($duplicateQueryProducts->all(), 'id'),
+                    ]); ?>
+                <?php endif; ?>
+            </aside>
+            <div class="catalog-wrap">
                 <?= ProductSortWidget::widget(); ?>
                 <ul class="catalog">
                     <?php foreach ($products as $product): ?>
@@ -58,13 +58,13 @@ $this->params['breadcrumbs'][] = ['label' => 'Поиск по сайту', 'url'
                         'pagination' => $pagerItems,
                     ]); ?>
                 </div>
-            <?php else: ?>
-                <p style="text-align: center; margin: 20px 0; padding: 0 10px;">
-                    К сожаление ничего не нашлось :(
-                </p>
-            <?php endif; ?>
+            </div>
         </div>
-    </div>
+    <?php else: ?>
+        <div class="alert alert-danger w-100">
+            К сожалению, по вашему запросу ничего не найдено.
+        </div>
+    <?php endif; ?>
     <?= CurrentPromotionsWidget::widget(); ?>
     <?= VisitedProductsWidget::widget(); ?>
     <?= FastButtonSearchWidget::widget(); ?>
