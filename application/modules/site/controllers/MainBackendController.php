@@ -18,7 +18,7 @@ class MainBackendController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'rules' => [
-                    ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Administrator', 'Developer']],
+                    ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Administrator', 'Developer', 'SaleManager']],
                     ['allow' => true, 'actions' => ['delete'], 'roles' => ['Administrator']],
                     ['allow' => false],
                 ],

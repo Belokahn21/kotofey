@@ -3,11 +3,7 @@
 namespace app\controllers;
 
 use app\modules\site\controllers\MainBackendController;
-use app\modules\site\models\tools\Debug;
 use Yii;
-use app\modules\search\models\entity\SearchQuery;
-use app\modules\site\models\tools\Backup;
-use app\widgets\notification\Alert;
 
 class AdminController extends MainBackendController
 {
