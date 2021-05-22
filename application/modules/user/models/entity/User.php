@@ -129,10 +129,6 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function isRole($roleName)
     {
-        if (empty($roleName)) {
-            throw new InvalidArgumentException("Не указана роль для проверки");
-        }
-
         if (Yii::$app->user->isGuest) {
             return false;
         }

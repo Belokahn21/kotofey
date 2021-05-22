@@ -12,7 +12,17 @@ class AdminPanel extends \yii\base\Widget
 
     public function run()
     {
-        if (!User::isRole('Developer') and !User::isRole('Administrator') and !User::isRole('Content')) return false;
+        $access = false;
+        $roles = ['Developer', 'Administrator', 'Content', 'SaleManager'];
+
+        foreach ($roles as $role) {
+            if (User::isRole($role)) {
+                $access = true;
+                break;
+            }
+        }
+
+        if (!$access) return false;
 
         $cache = \Yii::$app->cache;
         $key = LastNewsWidget::className();
