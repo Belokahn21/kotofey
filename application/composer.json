@@ -35,7 +35,8 @@
     "ext-soap": "*",
     "yiisoft/yii2-authclient": "~2.1.0",
     "yiimaker/yii2-social-share": "^2.3",
-    "sendpulse/rest-api": "^1.0"
+    "sendpulse/rest-api": "^1.0",
+    "kartik-v/yii2-widget-select2": "@dev"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",

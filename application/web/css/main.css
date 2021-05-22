@@ -15817,6 +15817,9 @@ label[for="site-form-pet-avatar"] {
   .product-gallery-big__slide img {
     object-fit: contain;
     width: 100%; }
+  @media (max-width: 450px) {
+    .product-gallery-big {
+      width: 100%; } }
 
 .product-gallery-thumbs {
   width: 100%;
