@@ -198,9 +198,9 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
-        <ul style="list-style: none; margin: 0; padding: 0;">
+        <div style="list-style: none; margin: 0; padding: 0;">
             <?php try { ?>
-                <ul style="list-style: none; margin: 0; padding: 0;">
+                <div style="list-style: none; margin: 0; padding: 0;">
                     <?php foreach ($properties as $group_id => $props): ?>
                         <fieldset class="fieldset-props">
                             <legend>
@@ -210,8 +210,6 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                 else echo "Без категории";
                                 ?>
                             </legend>
-                            <?php $showedProps = 1; ?>
-
                             <?php foreach ($props as $property): ?>
 
                                 <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
@@ -241,11 +239,12 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     ])->label($property->name); ?>
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
 
-                                    <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
-                                        <?= "so value"; ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => $value->value])->label($property->name); ?>
+                                    <?php $value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id]); ?>
+
+                                    <?php if ($value): ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
                                     <?php else: ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => false])->label($property->name); ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox()->label($property->name); ?>
                                     <?php endif; ?>
 
 
@@ -266,12 +265,12 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                             <?php endforeach; ?>
                         </fieldset>
                     <?php endforeach; ?>
-                </ul>
+                </div>
             <?php } catch (ErrorException $exception) { ?>
                 <?= $exception->getMessage(); ?>
                 <?= $exception->getLine(); ?>
             <?php } ?>
-        </ul>
+        </div>
     </div>
 </div>
 
