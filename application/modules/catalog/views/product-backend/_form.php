@@ -235,7 +235,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                         });
                                     } else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'); ?>
                                     <?php /* <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?> */ ?>
-                                    <?= $form->field($model, 'properties[' . $property->id . ']')->widget(\kartik\select2\Select2::classname(), [
+                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
                                         'data' => $variants,
                                         'options' => $drop_down_params,
                                     ])->label($property->name); ?>
