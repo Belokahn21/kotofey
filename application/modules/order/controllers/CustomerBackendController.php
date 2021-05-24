@@ -3,6 +3,7 @@
 namespace app\modules\order\controllers;
 
 use app\modules\order\models\entity\CustomerProperties;
+use app\modules\order\models\entity\CustomerPropertiesValues;
 use app\modules\order\models\search\CustomerPropertiesSearchForm;
 use Yii;
 use app\widgets\notification\Alert;
@@ -20,6 +21,7 @@ class CustomerBackendController extends MainBackendController
         $searchModel = new CustomerPropertiesSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
         $properties = CustomerProperties::find()->all();
+        $propertiesValues = new CustomerPropertiesValues();
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -35,6 +37,7 @@ class CustomerBackendController extends MainBackendController
             'properties' => $properties,
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
+            'propertiesValues' => $propertiesValues,
         ]);
     }
 

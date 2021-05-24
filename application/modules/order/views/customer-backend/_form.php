@@ -26,5 +26,9 @@
                 <?= $form->field($model, 'sort')->textInput(); ?>
             </div>
         </div>
+
+<!--        --><?php //foreach ($properties as $property): ?>
+<!--            --><?//= $form->field($propertiesValues, 'property_id')->hiddenInput(['value' => $property->id]); ?>
+<!--        --><?php //endforeach; ?>
     </div>
 </div>

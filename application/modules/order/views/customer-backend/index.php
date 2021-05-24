@@ -9,22 +9,23 @@ use yii\grid\GridView;
 /* @var $model \app\modules\catalog\models\entity\Properties */
 /* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
 
-$this->title = Title::show("Покупатели"); ?>
+$this->title = Title::show("Карточки покупателей"); ?>
     <div class="title-group">
-        <h1 class="title">Покупатели</h1>
+        <h1 class="title">Карточки покупателей</h1>
     </div>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
     'properties' => $properties,
+    'propertiesValues' => $propertiesValues,
 ]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end(); ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Покупатели отсутствуют',
+    'emptyText' => 'Карточки покупателей отсутствуют',
     'columns' => [
         'id',
         [
