@@ -26,8 +26,8 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
                     <a class="footer-contact__link" href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
                 </li>
                 <li class="footer-contact__item">
-                    <a class="phone footer-contact__link js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>">
-                        <?= SiteSettings::getValueByCode('phone_1'); ?>
+                    <a class="phone footer-contact__link js-phone-mask" href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>">
+                        <?= SiteSettings::getValueByCode('phone_2'); ?>
                     </a>
                 </li>
             </ul>

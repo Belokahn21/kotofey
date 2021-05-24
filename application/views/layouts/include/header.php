@@ -27,19 +27,20 @@ use app\modules\catalog\models\helpers\CategoryHelper;
     <div class="phone">
         <img class="phone__icon" src="/upload/images/phone.png" alt="Телефон">
         <div class="wh-group">
-            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask">
-                <?= SiteSettings::getValueByCode('phone_1'); ?>
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>" class="js-phone-mask">
+                <?= SiteSettings::getValueByCode('phone_2'); ?>
             </a>
+            <?php /*
             <a class="wh-group-link" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
                 <img class="wh-group-icon" src="/images/whatsapp32x32.png" width="24px">
             </a>
+ */ ?>
         </div>
     </div>
     <div class="header-menu-mobile">
         <div class="phone">
             <img class="phone__icon" src="/upload/images/phone.png" alt="Телефон">
-            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"
-               class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>" class="js-phone-mask-8800"><?= SiteSettings::getValueByCode('phone_2'); ?></a>
         </div>
         <?= MenuWidget::widget([
             'menu_id' => 1
@@ -64,7 +65,7 @@ use app\modules\catalog\models\helpers\CategoryHelper;
             </a>
         </div>
         <div class="header-mobile__call">
-            <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>"><img src="/upload/images/phone.png"></a>
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>"><img src="/upload/images/phone.png"></a>
         </div>
     </div>
     <div class="header-mobile-full active">

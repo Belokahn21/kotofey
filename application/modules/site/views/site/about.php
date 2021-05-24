@@ -108,7 +108,11 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине'];
             </li>
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
-                Телефон: <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
+                Телефон: <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>" class="js-phone-mask-8800"><?= SiteSettings::getValueByCode('phone_2'); ?></a>
+            </li>
+            <li>
+                <span class="fa-li"><i class="fas fa-paw"></i></span>
+                Директор: <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
             </li>
         </ul>
         <ul class="fa-ul w-50">
