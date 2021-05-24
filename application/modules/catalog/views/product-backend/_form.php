@@ -237,7 +237,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     <?php /* <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?> */ ?>
                                     <?= $form->field($model, 'properties[' . $property->id . ']')->widget(\kartik\select2\Select2::classname(), [
                                         'data' => $variants,
-                                        'options' => ['placeholder' => 'Выбрать ...'],
+                                        'options' => $drop_down_params,
                                     ])->label($property->name); ?>
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
 
