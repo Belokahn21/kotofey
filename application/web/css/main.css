@@ -13384,6 +13384,12 @@ p {
     object-fit: contain;
     margin-left: 5px; }
 
+.c8800-group .note {
+  color: silver;
+  font-size: 12px;
+  line-height: 18px;
+  text-transform: uppercase; }
+
 #nav-tab-profile {
   margin-bottom: 40px; }
 

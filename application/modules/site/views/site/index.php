@@ -23,8 +23,8 @@ $this->title = Title::show("Зоотовары для животных в Бар
     <?php //= CanNowBuyWidget::widget() ?>
     <?= DiscountItemsWidget::widget(); ?>
     <?= InformerSliderWidget::widget(); ?>
-    <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
     <?php if (Yii::$app->user->id == 1): ?>
+        <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
         <?= ManyPurchasedGoods::widget(); ?>
     <?php endif; ?>
     <div class="page-title__group">
