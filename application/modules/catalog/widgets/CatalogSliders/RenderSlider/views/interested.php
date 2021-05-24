@@ -32,7 +32,9 @@ use app\modules\catalog\models\helpers\ProductHelper;
             <div class="swiper-wrapper steam-slider-wrapper">
                 <?php foreach ($models as $model): ?>
                     <a href="<?= ProductHelper::getDetailUrl($model); ?>" class="swiper-slide steam-slider-slide">
-                        <div class="steam-slider-slide__side"><img class="steam-slider-slide__image" alt="<?= $model->name; ?>" title="<?= $model->name; ?>" src="<?= ProductHelper::getImageUrl($model); ?>"/></div>
+                        <div class="steam-slider-slide__side">
+                            <img class="steam-slider-slide__image" alt="<?= $model->name; ?>" title="<?= $model->name; ?>" src="<?= ProductHelper::getImageUrl($model); ?>"/>
+                        </div>
                         <div class="steam-slider-slide__side steam-slider-card">
                             <div class="steam-slider-card__title"><?= $model->name; ?></div>
                             <div class="steam-slider-images">

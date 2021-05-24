@@ -36,6 +36,10 @@
     text-decoration: none !important;
     color: unset !important;
 
+    @media (max-width: 450px) {
+      flex-direction: column;
+    }
+
     &__side {
       flex: 0 0 50%;
       //border: 1px red solid;

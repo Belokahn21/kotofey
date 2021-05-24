@@ -13036,6 +13036,9 @@ p {
   flex-direction: row;
   text-decoration: none !important;
   color: unset !important; }
+  @media (max-width: 450px) {
+    .steam-slider-slide {
+      flex-direction: column; } }
   .steam-slider-slide__side {
     flex: 0 0 50%;
     display: flex;
