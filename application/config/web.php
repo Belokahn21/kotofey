@@ -17,6 +17,9 @@ $config = [
                 'yii\web\JqueryAsset' => [
                     'js' => []
                 ],
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false
+                ],
 //                'yii\bootstrap\BootstrapPluginAsset' => [
 //                    'js' => []
 //                ],

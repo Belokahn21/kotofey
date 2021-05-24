@@ -1,5 +1,6 @@
 <?php
 return [
+    'bsDependencyEnabled' => false,
     'vk' => [
         'grumingVkontakteId' => '150883522',
         'adminVkontakteId' => '111815168',

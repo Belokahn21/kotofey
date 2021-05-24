@@ -210,8 +210,10 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                 else echo "Без категории";
                                 ?>
                             </legend>
+                            <?php $showedProps = 1; ?>
 
                             <?php foreach ($props as $property): ?>
+
                                 <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
                                 <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
                                     <?php $value = PropertiesProductValues::findAll([
@@ -222,7 +224,6 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     if ($value) $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
 
                                     $drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->is_multiple];
-
                                     if ((boolean)$property->is_multiple == true) $drop_down_params['size'] = 10;
 
                                     $variants = [];
@@ -232,33 +233,23 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                         array_walk($variants, function (&$value, $key) {
                                             $value = $key . ' - ' . $value;
                                         });
-                                    } else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name');
-
-                                    ?>
-                                    <!--                                    --><? //= $form->field($model, 'properties[' . $property->id . ']')->widget(\kartik\select2\Select2::className(), [
-//                                        'data' => $variants,
-////                                        'language' => 'ru',
-////                                        'options' => ['placeholder' => 'Select a state ...'],
-////                                        'pluginOptions' => [
-////                                            'allowClear' => true
-////                                        ],
-//                                    ]); ?>
-                                    <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?>
-
-
+                                    } else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'); ?>
+                                    <?php /* <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?> */ ?>
+                                    <?= $form->field($model, 'properties[' . $property->id . ']')->widget(\kartik\select2\Select2::classname(), [
+                                        'data' => $variants,
+                                        'options' => ['placeholder' => 'Выбрать ...'],
+                                    ])->label($property->name); ?>
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
-                                    <?php $value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id]); ?>
 
-                                    <?php if ($value): ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
+                                    <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
+                                        <?= "so value"; ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => $value->value])->label($property->name); ?>
                                     <?php else: ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox()->label($property->name); ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . '][]')->checkbox(['value' => false])->label($property->name); ?>
                                     <?php endif; ?>
 
 
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
-
-
                                     <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
                                         'values' => ArrayHelper::getColumn(PropertiesProductValues::findAll([
                                             'product_id' => $model->id,
@@ -271,8 +262,6 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                     <?php else: ?>
                                         <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>
                                     <?php endif; ?>
-
-
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </fieldset>
