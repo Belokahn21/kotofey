@@ -53,6 +53,4 @@ class OrderSearchForm extends Order
 
         return $dataProvider;
     }
-
-
 }

@@ -25,6 +25,7 @@ class Module extends MainModule
             ['name' => 'Заказы', 'url' => Url::to(['/admin/order/order-backend/index'])],
             ['name' => 'Статусы заказа', 'url' => Url::to(['/admin/order/order-status-backend/index'])],
             ['name' => 'Кабинет оператора', 'url' => Url::to(['/admin/order/operator-backend/index'])],
+            ['name' => 'Карточки покупателей', 'url' => Url::to(['/admin/order/customer-backend/index'])],
         ];
     }
 
