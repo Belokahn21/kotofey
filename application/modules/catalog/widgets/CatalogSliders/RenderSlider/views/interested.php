@@ -49,7 +49,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
                                 <?php endif; ?>
                             </div>
                             <?php if ($model->description): ?>
-                                <div class="steam-slider-card__description"><?= StringHelper::truncate($model->description, 200); ?></div>
+                                <div class="steam-slider-card__description"><?php //= StringHelper::truncateWords($model->description, 70); ?></div>
                             <?php endif; ?>
 
                             <?php if ($model->comments): ?>

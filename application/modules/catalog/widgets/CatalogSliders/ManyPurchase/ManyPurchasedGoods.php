@@ -27,7 +27,7 @@ class ManyPurchasedGoods extends Widget
 
         if (!$products_in_orders) return false;
 
-        $models = \Yii::$app->cache->getOrSet('ManyPurchasedGoods-key', function () use ($products_in_orders, $limit) {
+        $models = \Yii::$app->cache->getOrSet('ManyPurchasedGoods-key' . $this->view, function () use ($products_in_orders, $limit) {
             return Product::find()
                 ->select(['id', 'name', 'price', 'discount_price', 'image', 'media_id', 'article', 'slug', 'status_id', 'description', 'images'])
                 ->where(['status_id' => Product::STATUS_ACTIVE])
