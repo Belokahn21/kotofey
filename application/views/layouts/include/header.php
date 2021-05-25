@@ -30,7 +30,7 @@ use app\modules\catalog\models\helpers\CategoryHelper;
             <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>" class="js-phone-mask-8800">
                 <?= SiteSettings::getValueByCode('phone_2'); ?>
             </a>
-            <div class="note">Звонок бесплатный</div>
+            <div class="note">горячая линия - пн-вс 10:00-21:00</div>
             <?php /*
             <a class="wh-group-link" href="whatsapp://send?phone=<?= SiteSettings::getValueByCode('phone_1'); ?>">
                 <img class="wh-group-icon" src="/images/whatsapp32x32.png" width="24px">
