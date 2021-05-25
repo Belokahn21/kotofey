@@ -59,8 +59,10 @@ class ProductPropertiesValuesHelper
 
     public static function savePropertyValue($product_id, $property_id, $value)
     {
+        if (PropertiesProductValues::findOne(['product_id' => $product_id, 'property_id' => $property_id, 'value' => $value])) return true;
+
         // save weight
-        $obj = new SaveProductPropertiesValues();
+        $obj = new PropertiesProductValues();
         $obj->property_id = $property_id;
         $obj->product_id = $product_id;
         $obj->value = $value;

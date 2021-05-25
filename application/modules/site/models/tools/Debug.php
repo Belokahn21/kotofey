@@ -10,7 +10,7 @@ class Debug
 {
     public static function p($target)
     {
-        if (\Yii::$app->user->id == 1) {
+//        if (\Yii::$app->user->id == 1) {
             if (!empty($target)) {
                 $debugInfo = debug_backtrace()[0];
 
@@ -20,7 +20,7 @@ class Debug
                 print_r($target);
                 echo "</pre>";
             }
-        }
+//        }
     }
 
     public static function isPageSpeed()
