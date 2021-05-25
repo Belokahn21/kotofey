@@ -8,10 +8,12 @@ use yii\grid\GridView;
 
 /* @var $model \app\modules\catalog\models\entity\Properties */
 /* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
+/* @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues */
 
 $this->title = Title::show("Карточки покупателей"); ?>
     <div class="title-group">
         <h1 class="title">Карточки покупателей</h1>
+        <?= Html::a('Свойства', Url::to(['customer-properties-backend/index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $this->render('_form', [

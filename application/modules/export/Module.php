@@ -4,14 +4,35 @@ namespace app\modules\export;
 
 class Module extends \app\modules\site\MainModule
 {
+    public $name = 'YML Экспорт';
     public $controllerNamespace = 'app\modules\export\controllers';
-    public $exportOrganizationName = 'Зоомагазин Котофей';
-    public $exportCompany = 'ИП Васин К.В.';
-    public $exportPlatform = 'Зоомагазин Котофей';
-    public $exportVersion = '1.0';
+    public $exportOrganizationName;
+    public $exportCompany;
+    public $exportPlatform;
+    public $exportVersion;
 
     public function init()
     {
         parent::init();
+    }
+
+    public function getParams()
+    {
+        return [
+            'exportOrganizationName' => '',
+            'exportCompany' => '',
+            'exportPlatform' => '',
+            'exportVersion' => '',
+        ];
+    }
+
+    public function getParamsLabel()
+    {
+        return [
+            'exportOrganizationName' => '(export) Название организации',
+            'exportCompany' => '(export) Юридическое название',
+            'exportPlatform' => '(export) Имя платформы',
+            'exportVersion' => '(export) Версия',
+        ];
     }
 }

@@ -2,6 +2,7 @@
 
 /* @var $model \app\modules\catalog\models\entity\Properties */
 /* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
+/* @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues */
 /* @var $form \yii\widgets\ActiveForm */
 
 ?>
@@ -27,8 +28,10 @@
             </div>
         </div>
 
-<!--        --><?php //foreach ($properties as $property): ?>
-<!--            --><?//= $form->field($propertiesValues, 'property_id')->hiddenInput(['value' => $property->id]); ?>
-<!--        --><?php //endforeach; ?>
+        <?php foreach ($properties as $counter => $property): ?>
+            <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
+            <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => null])->label(false); ?>
+            <?= $form->field($propertiesValues, '[' . $counter . ']value')->textInput()->label($property->name); ?>
+        <?php endforeach; ?>
     </div>
 </div>

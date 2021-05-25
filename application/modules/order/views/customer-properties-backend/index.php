@@ -12,6 +12,7 @@ use yii\grid\GridView;
 $this->title = Title::show("Свойства покупателей"); ?>
     <div class="title-group">
         <h1 class="title">Свойства покупателей</h1>
+        <?= Html::a('Карточки покупателей', Url::to(['customer-backend/index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $this->render('_form', [
@@ -26,6 +27,8 @@ $this->title = Title::show("Свойства покупателей"); ?>
     'emptyText' => 'Свойства покупателей отсутствуют',
     'columns' => [
         'id',
+        'is_active',
+        'name',
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
