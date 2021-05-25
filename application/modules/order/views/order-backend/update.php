@@ -22,7 +22,7 @@ $this->title = Title::show("Обновить заказ: " . $model->id);
         <h1>Обновить заказ: #<?= $model->id; ?></h1>
         <?= Html::a('Назад', Url::to(['index']), ['class' => 'btn-main']) ?>
         <?= Html::a('Удалить', Url::to(['delete', 'id' => $model->id]), ['class' => 'btn-main']) ?>
-        <?= Html::a('Через кабинет пользователя', '/profile/order/' . $model->id . '/', ['class' => 'btn-main', 'target' => 'blank']) ?>
+        <?= Html::a('Кабинет пользователя', '/profile/order/' . $model->id . '/', ['class' => 'btn-main', 'target' => 'blank']) ?>
         <?= CallCenterWidget::widget([
             'order_id' => $model->id
         ]); ?>
