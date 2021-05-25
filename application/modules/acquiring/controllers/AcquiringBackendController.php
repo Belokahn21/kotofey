@@ -3,7 +3,9 @@
 
 namespace app\modules\acquiring\controllers;
 
+use app\widgets\notification\Alert;
 use Yii;
+use yii\helpers\Url;
 use yii\web\HttpException;
 use app\modules\acquiring\models\forms\AcquiringForm;
 use app\modules\site\controllers\MainBackendController;
@@ -44,5 +46,14 @@ class AcquiringBackendController extends MainBackendController
             'model' => $model,
             'actionForm' => $actionForm
         ]);
+    }
+
+    public function actionDelete($id)
+    {
+        if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
+
+        if ($model->delete()) Alert::setSuccessNotify("Эквайринг транзакция успешно удалена");
+
+        return $this->redirect(Url::to(['index']));
     }
 }
