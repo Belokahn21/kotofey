@@ -50,6 +50,25 @@ class AcquiringTerminalService
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
     }
 
+    public function reInitCreateOrder(Order $order, $uniq_order_id_key)
+    {
+        $this->bank->getAuthParams($this->paramRequest);
+
+        $curl = new Curl();
+        $this->extendParams($this->paramRequest, [
+            'orderNumber' => $order->id . $uniq_order_id_key,
+            'currency' => 643,
+            'email' => $order->email,
+            'phone' => $order->phone,
+            'sessionTimeoutSecs' => 604800,
+            'amount' => OrderHelper::orderSummary($order) * 100,
+            'returnUrl' => System::fullDomain() . Url::to('/payment/success/'),
+            'failUrl' => System::fullDomain() . Url::to('/payment/fail/'),
+        ]);
+
+        return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
+    }
+
     public function cancelPay(AcquiringOrder $order)
     {
         $this->bank->getAuthParams($this->paramRequest);
