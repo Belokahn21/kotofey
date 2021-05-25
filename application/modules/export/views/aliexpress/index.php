@@ -5,13 +5,11 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\PropertiesHelper;
-use app\modules\export\models\tools\AliexpressHelper;
-
-$module = Yii::$app->getModule('export');
 
 /* @var $offersBatch
  * @var $offers \app\modules\catalog\models\entity\Product[]
  * @var $categories \app\modules\catalog\models\entity\ProductCategory[]
+ * @var $module \app\modules\export\Module
  */
 ?>
 <?= '<?xml version="1.0" encoding="UTF-8"?>'; ?>

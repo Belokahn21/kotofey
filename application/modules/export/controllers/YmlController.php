@@ -8,23 +8,25 @@ use yii\web\Controller;
 
 class YmlController extends Controller
 {
-	public function actionIndex()
-	{
+    public function actionIndex()
+    {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         \Yii::$app->response->headers->add('Content-Type', 'application/xml');
-		$categories = ProductCategory::find()->all();
-		$offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
+        $categories = ProductCategory::find()->all();
+        $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
+        $module = \Yii::$app->getModule('export');
 
-		$response = $this->renderPartial('index', [
-			'offers' => $offers,
-			'categories' => $categories
-		]);
+        $response = $this->renderPartial('index', [
+            'offers' => $offers,
+            'categories' => $categories,
+            'module' => $module
+        ]);
 
-		return $response;
-	}
+        return $response;
+    }
 
-	public function getXmlHead()
-	{
-		return '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '<!DOCTYPE yml_catalog SYSTEM "shops.dtd">' . PHP_EOL;
-	}
+    public function getXmlHead()
+    {
+        return '<?xml version="1.0" encoding="UTF-8"?>' . PHP_EOL . '<!DOCTYPE yml_catalog SYSTEM "shops.dtd">' . PHP_EOL;
+    }
 }

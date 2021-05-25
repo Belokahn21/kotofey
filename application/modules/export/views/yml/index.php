@@ -1,14 +1,12 @@
 <?php
 
 use app\modules\site\models\tools\System;
-use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\vendors\models\entity\Vendor;
 
-$module = Yii::$app->getModule('export');
-
 /* @var $offers \app\modules\catalog\models\entity\Product[]
  * @var $categories \app\modules\catalog\models\entity\ProductCategory[]
+ * @var $module \app\modules\export\Module
  */
 ?>
 <?= '<?xml version="1.0" encoding="UTF-8"?>'; ?>

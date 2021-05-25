@@ -2,6 +2,12 @@
 
 namespace app\modules\export;
 
+/**
+ * @property string $exportOrganizationName;
+ * @property string $exportCompany;
+ * @property string $exportPlatform;
+ * @property string $exportVersion;
+ */
 class Module extends \app\modules\site\MainModule
 {
     public $name = 'YML Экспорт';
@@ -19,10 +25,10 @@ class Module extends \app\modules\site\MainModule
     public function getParams()
     {
         return [
-            'exportOrganizationName' => '',
-            'exportCompany' => '',
-            'exportPlatform' => '',
-            'exportVersion' => '',
+            'exportOrganizationName',
+            'exportCompany',
+            'exportPlatform',
+            'exportVersion',
         ];
     }
 
