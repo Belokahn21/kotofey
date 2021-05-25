@@ -13390,8 +13390,9 @@ p {
 .c8800-group .note {
   color: silver;
   font-size: 12px;
-  line-height: 18px;
-  text-transform: uppercase; }
+  line-height: 5px;
+  text-transform: uppercase;
+  margin-bottom: 10px; }
 
 #nav-tab-profile {
   margin-bottom: 40px; }
