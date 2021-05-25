@@ -26,7 +26,7 @@ class ConsoleController extends Controller
         }
         $products = $products->all();
         foreach ($products as $product) {
-            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, 20, '240')) {
+            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, 20, '230')) {
 //            if (ProductPropertiesValuesHelper::removePropertyValue($product->id, 20)) {
                 echo "ok: " . $product->name . PHP_EOL;
             }
