@@ -153,9 +153,12 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                             <div>Зкупочная: <?= $item->product->purchase; ?></div>
                                             <div>Сейчас на складе: <?= $item->product->count; ?></div>
                                         <?php endif; ?>
-                                        <div>К продаже за штуку: <?= $item->price; ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price : null; ?></div>
+                                        <div>К продаже за штуку: <?= Price::format($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::format($item->discount_price) : null; ?></div>
                                         <div>Кол-во: <?= $item->count; ?></div>
-                                        <div>Итого к продаже: <?= $item->price * $item->count ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price * $item->count : null; ?></div>
+                                        <div>Итого к продаже:
+                                            <?= Price::format($item->price * $item->count) ?>
+                                            <?= $item->discount_price ? ' / со скидкой ' . Price::format($item->discount_price * $item->count) : null; ?>
+                                        </div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>
