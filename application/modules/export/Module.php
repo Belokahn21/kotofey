@@ -25,10 +25,10 @@ class Module extends \app\modules\site\MainModule
     public function getParams()
     {
         return [
-            'exportOrganizationName',
-            'exportCompany',
-            'exportPlatform',
-            'exportVersion',
+            'exportOrganizationName' => '',
+            'exportCompany' => '',
+            'exportPlatform' => '',
+            'exportVersion' => '',
         ];
     }
 
