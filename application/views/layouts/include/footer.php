@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+use app\modules\site\models\tools\System;
 use app\modules\stock\widgets\store\StoreWidget;
 use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\site\widgets\SocialMe\SocialMe;
@@ -16,7 +17,7 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
 <footer class="footer page-container">
     <div class="footer-layer-1">
         <div class="footer-col">
-            <div class="footer__logo">kotofey.store</div>
+            <div class="footer__logo"><?= System::domain(); ?></div>
             <div class="footer__description">Интернет-магазин зоотоваров</div>
             <ul class="footer-contact">
                 <li class="footer-contact__item">
