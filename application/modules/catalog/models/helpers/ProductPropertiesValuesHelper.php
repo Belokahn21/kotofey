@@ -82,4 +82,9 @@ class ProductPropertiesValuesHelper
 
         return true;
     }
+
+    public static function removePropertyValue($product_id, $property_id)
+    {
+        return PropertiesProductValues::deleteAll(['product_id' => $product_id, 'property_id' => $property_id]);
+    }
 }

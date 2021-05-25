@@ -15,7 +15,7 @@ class ConsoleController extends Controller
 {
     public function actionRun($name)
     {
-        //премиум класс
+//        //премиум класс
         $products = Product::find();
         foreach (explode(' ', $name) as $text_line) {
             $products->andFilterWhere([
@@ -26,7 +26,8 @@ class ConsoleController extends Controller
         }
         $products = $products->all();
         foreach ($products as $product) {
-            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, 20, '231')) {
+//            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, 20, '231')) {
+            if (ProductPropertiesValuesHelper::removePropertyValue($product->id, 20)) {
                 echo "ok: " . $product->name . PHP_EOL;
             }
         }
