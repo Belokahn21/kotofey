@@ -23,14 +23,13 @@ class PropertiesHelper
         }
 
         $weight = $cache->getOrSet(sprintf('gpw:%s', $product_id), function () use ($product) {
-            return SaveProductPropertiesValues::findOne(['property_id' => 2, 'product_id' => $product->id]);
+            return PropertiesProductValues::findOne(['property_id' => 2, 'product_id' => $product->id]);
+//            return SaveProductPropertiesValues::findOne(['property_id' => 2, 'product_id' => $product->id]);
         }, 3600 * 7 * 24);
 
-        if ($weight) {
-            return $weight->value;
-        }
+        if ($weight) return $weight->value;
 
-        return false;
+        return 0;
     }
 
     public static function getAllProperties($product_id, $properties = array())

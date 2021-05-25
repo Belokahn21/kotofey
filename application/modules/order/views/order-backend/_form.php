@@ -10,6 +10,7 @@ use \app\modules\user\models\helpers\UserHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
 use app\modules\delivery\ProfileTracking\ProfileTrackingWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
@@ -152,6 +153,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                             <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
                                             <div>Зкупочная: <?= $item->product->purchase; ?></div>
                                             <div>Сейчас на складе: <?= $item->product->count; ?></div>
+                                            <div>Суммарный весс: <?= PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
                                         <?php endif; ?>
                                         <div>К продаже за штуку: <?= Price::format($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::format($item->discount_price) : null; ?></div>
                                         <div>Кол-во: <?= $item->count; ?></div>
