@@ -134,6 +134,8 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                             'items' => $itemsModel
                         ]); ?>
 
+                        <?php $summary_weight = 0; ?>
+
                         <div class="order-items-list">
                             <?php foreach ($itemsModel as $item): ?>
                                 <div class="order-items-list__item<?= ($item->product && ($item->product->count >= $item->count)) ? ' isFull' : ''; ?>">
@@ -153,7 +155,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                             <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
                                             <div>Зкупочная: <?= $item->product->purchase; ?></div>
                                             <div>Сейчас на складе: <?= $item->product->count; ?></div>
-                                            <div>Суммарный весс: <?= PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
+                                            <div>Вес позиций: <?= $summary_weight += PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
                                         <?php endif; ?>
                                         <div>К продаже за штуку: <?= Price::format($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::format($item->discount_price) : null; ?></div>
                                         <div>Кол-во: <?= $item->count; ?></div>
@@ -165,6 +167,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                 </div>
                             <?php endforeach; ?>
                         </div>
+                        <div>Общий вес заказа: <?= $summary_weight; ?> кг.</div>
                     <?php endif; ?>
                 </div>
             </div>
