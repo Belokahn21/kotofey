@@ -15826,6 +15826,13 @@ label[for="site-form-pet-avatar"] {
     .contact-list {
       width: 100%; } }
 
+.eat-calculator {
+  display: flex;
+  flex-direction: column; }
+  .eat-calculator-config {
+    display: flex;
+    flex-direction: row; }
+
 .product-gallery-big {
   width: 400px;
   overflow: hidden;

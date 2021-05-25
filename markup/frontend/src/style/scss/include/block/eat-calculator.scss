@@ -1,0 +1,9 @@
+.eat-calculator {
+  display: flex;
+  flex-direction: column;
+
+  &-config {
+    display: flex;
+    flex-direction: row;
+  }
+}
