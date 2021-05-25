@@ -378,13 +378,13 @@ class OrderBackendController extends MainBackendController
         $order = Order::findOne($id);
         $module = \Yii::$app->getModule('acquiring');
 
-        $paters = AcquiringOrder::find()->where(['order_id' => $id])->all();
-        $uniq_key = count($paters) > 0 ? count($paters) : 1;
+//        $paters = AcquiringOrder::find()->where(['order_id' => $id])->all();
+//        $uniq_key = count($paters) > 0 ? count($paters) : 1;
 
-//        if (AcquiringOrder::findOne(['order_id' => $id])) {
-//            Alert::setSuccessNotify('Ссылка на оплату уже существует');
-//            return $this->redirect(['update', 'id' => $id]);
-//        }
+        if (AcquiringOrder::findOne(['order_id' => $id])) {
+            Alert::setSuccessNotify('Ссылка на оплату уже существует. Удалите старую.');
+            return $this->redirect(['update', 'id' => $id]);
+        }
 
         //settings
         $login = "";
@@ -403,7 +403,7 @@ class OrderBackendController extends MainBackendController
         if ($module->mode == 'off') throw new \Exception('В настройках сайта отключена работа Эквайринга, измените значение mode_acquiring в настройках сайта.');
 
         $terminal = new AcquiringTerminalService(new Sberbank(new SberbankAuthBasic($login, $password)));
-        $result = $terminal->reInitCreateOrder($order, 'reorder' . $uniq_key);
+        $result = $terminal->reInitCreateOrder($order, 'reorder' . time());
 
         try {
             if (!isset($result['orderId']) || !isset($result['formUrl'])) return $result;
