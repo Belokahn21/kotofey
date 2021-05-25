@@ -150,12 +150,12 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                                         <?php endif; ?>
                                         <?php if ($item->product): ?>
                                             <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
-                                        <?php endif; ?>
-                                        <?php if ($item->product): ?>
                                             <div>Зкупочная: <?= $item->product->purchase; ?></div>
+                                            <div>Сейчас на складе: <?= $item->product->count; ?></div>
                                         <?php endif; ?>
-                                        <div>К продаже: <?= $item->price; ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price : null; ?></div>
+                                        <div>К продаже за штуку: <?= $item->price; ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price : null; ?></div>
                                         <div>Кол-во: <?= $item->count; ?></div>
+                                        <div>Итого к продаже: <?= $item->price * $item->count ?><?= $item->discount_price ? ' / со скидкой ' . $item->discount_price * $item->count : null; ?></div>
                                     </div>
                                 </div>
                             <?php endforeach; ?>

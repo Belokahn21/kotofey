@@ -96,8 +96,8 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине'];
 
 
     <h2 class="page__title">Наши контакты</h2>
-    <div class="d-flex flex-row justify-content-start w-100">
-        <ul class="fa-ul w-50">
+    <div class="d-flex flex-column flex-sm-row justify-content-start w-100">
+        <ul class="fa-ul contact-list">
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
                 Email: <a href="mailto:<?= SiteSettings::getValueByCode('email'); ?>"><?= SiteSettings::getValueByCode('email'); ?></a>
@@ -115,7 +115,7 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине'];
                 Директор: <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>
             </li>
         </ul>
-        <ul class="fa-ul w-50">
+        <ul class="fa-ul contact-list">
             <li>
                 <span class="fa-li"><i class="fas fa-paw"></i></span>
                 ООО "Интернет-Зоомагазин Котофей"

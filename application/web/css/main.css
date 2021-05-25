@@ -15820,6 +15820,12 @@ label[for="site-form-pet-avatar"] {
     .vertical-promo-products-slider-pagination .swiper-pagination-bullet-active {
       background: #ff1a4a; }
 
+.contact-list {
+  width: 50%; }
+  @media (max-width: 450px) {
+    .contact-list {
+      width: 100%; } }
+
 .product-gallery-big {
   width: 400px;
   overflow: hidden;
