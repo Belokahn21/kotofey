@@ -1,0 +1,24 @@
+.thanks {
+  &-image {
+    position: relative;
+
+    &:after {
+      width: 25px;
+      height: 25px;
+      padding: 5px;
+      background: $active-color;
+      color: white;
+      text-align: center;
+      font-size: 12px;
+      line-height: 18px;
+      display: block;
+      content: "";
+      top: 0;
+      left: 0;
+      position: absolute;
+    }
+  }
+
+  &-block {
+  }
+}
