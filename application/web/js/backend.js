@@ -3361,11 +3361,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
-/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _FindProduct_Button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FindProduct/Button */ "./src/js/react/components/FindProduct/Button.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _FindCustomerFormResult__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FindCustomerFormResult */ "./src/js/react/components/FindCustomer/FindCustomerFormResult.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3393,50 +3392,52 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-
-
 var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
   _inherits(FindCustomerForm, _React$Component);
 
   var _super = _createSuper(FindCustomerForm);
 
   function FindCustomerForm(props) {
+    var _this;
+
     _classCallCheck(this, FindCustomerForm);
 
-    return _super.call(this, props); // this.state = {
-    // customer: null,
-    // show: false
-    // }
-  } // setShow(show) {
-  //     this.setState({show: show});
-  // }
-  //
-  // handleClose() {
-  //     this.setShow(false);
-  // }
-  //
-  // handleShow() {
-  //     this.setShow(true);
-  // }
-
+    _this = _super.call(this, props);
+    _this.timerEx = false;
+    _this.timer = 1500;
+    _this.state = {
+      customer: []
+    };
+    return _this;
+  }
 
   _createClass(FindCustomerForm, [{
     key: "handleTypingText",
     value: function handleTypingText(event) {
+      var _this2 = this;
+
       var input = event.target;
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one((_config__WEBPACK_IMPORTED_MODULE_3___default().restOrderCustomer), input.value).then(function (data) {
-        console.log(data);
-      });
+      if (this.timerEx) clearTimeout(this.timerEx);
+      this.timerEx = setTimeout(function () {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.one((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer), input.value).then(function (data) {
+          _this2.setState({
+            customer: data
+          });
+        });
+      }, this.timer);
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+      var customer = this.state.customer;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "form-finds"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "form-finds__input",
         onKeyUp: this.handleTypingText.bind(this),
         placeholder: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 8\u0445\u0445\u0445\u0445\u0445\u0445\u0445\u0445"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindCustomerFormResult__WEBPACK_IMPORTED_MODULE_3__.default, {
+        customer: customer
       }));
     }
   }]);
@@ -3445,6 +3446,79 @@ var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FindCustomerForm);
+
+/***/ }),
+
+/***/ "./src/js/react/components/FindCustomer/FindCustomerFormResult.js":
+/*!************************************************************************!*\
+  !*** ./src/js/react/components/FindCustomer/FindCustomerFormResult.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
+  _inherits(FindCustomerFormResult, _React$Component);
+
+  var _super = _createSuper(FindCustomerFormResult);
+
+  function FindCustomerFormResult(props) {
+    var _this;
+
+    _classCallCheck(this, FindCustomerFormResult);
+
+    _this = _super.call(this, props);
+    _this.inputId = "demo sadasd asd ";
+    return _this;
+  }
+
+  _createClass(FindCustomerFormResult, [{
+    key: "render",
+    value: function render() {
+      var customer = this.props.customer;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "list-finds"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "list-finds__item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "#",
+        className: "list-finds__link"
+      }, customer.name)));
+    }
+  }]);
+
+  return FindCustomerFormResult;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FindCustomerFormResult);
 
 /***/ }),
 
