@@ -30,6 +30,10 @@ $this->title = Title::show("Карточки покупателей"); ?>
     'emptyText' => 'Карточки покупателей отсутствуют',
     'columns' => [
         'id',
+        'is_active',
+        'sort',
+        'name',
+        'created_at',
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
