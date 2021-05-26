@@ -140,6 +140,14 @@ class SiteController extends Controller
         return $this->render('contacts');
     }
 
+
+    public function actionThanks()
+    {
+        Attributes::metaDescription("Как сказать спасибо интернет-магазину?");
+        Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/");
+        return $this->render('thanks');
+    }
+
     public function actionRestore($id = null)
     {
         if ($id) {
