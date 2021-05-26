@@ -29,7 +29,7 @@ $this->title = Title::show("Карточки покупателей"); ?>
     'filterModel' => $searchModel,
     'emptyText' => 'Карточки покупателей отсутствуют',
     'columns' => [
-        'id',
+        'phone',
         'is_active',
         'sort',
         'name',

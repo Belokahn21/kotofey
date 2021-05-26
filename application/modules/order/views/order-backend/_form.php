@@ -13,6 +13,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
 use app\modules\delivery\ProfileTracking\ProfileTrackingWidget;
+use app\modules\order\widgets\CustomerInput\CustomerInputWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 
 /* @var $users \app\modules\user\models\entity\User[]
@@ -211,6 +212,11 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
             <div class="d-flex flex-row">
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'phone')->textInput(['placeholder' => 'Телефон', 'class' => 'form-control clean-phone'])->label(false); ?>
+                    <?php if (Yii::$app->user->id == 1): ?>
+                        <?= $form->field($model, 'phone')->widget(CustomerInputWidget::className(), [
+                            'placeholder' => 'Телефон клиента'
+                        ])->label(false); ?>
+                    <?php endif; ?>
                 </div>
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'email')->textInput(['placeholder' => 'Email'])->label(false); ?>

@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDom from "react-dom";
 import {Modal} from "react-bootstrap";
+import FindProductForm from "../FindProduct/FindProductForm";
+import FindCustomerForm from "./FindCustomerForm";
 
 class FindCustomer extends React.Component {
 
@@ -29,7 +31,6 @@ class FindCustomer extends React.Component {
         const {customer, show} = this.state;
         return (
             <div>
-                <input name={options.name} placeholder="Телефон клиента"/>
                 <div className="form-finds__setup" onClick={this.handleShow.bind(this)}>+</div>
 
                 <Modal show={show} onHide={this.handleClose.bind(this)}>
@@ -37,7 +38,7 @@ class FindCustomer extends React.Component {
                         <Modal.Title>Найти карточку покупателя</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
+                        <FindCustomerForm />
                     </Modal.Body>
                 </Modal>
             </div>
@@ -49,6 +50,6 @@ class FindCustomer extends React.Component {
 let elements = document.querySelectorAll('.find-customer-react');
 if (elements) {
     elements.forEach(el => {
-        ReactDom.render(<FindCustomer/>, el);
+        ReactDom.render(<FindCustomer options={el.getAttribute('data-options')}/>, el);
     })
 }

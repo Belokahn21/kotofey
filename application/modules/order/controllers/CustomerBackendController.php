@@ -2,14 +2,13 @@
 
 namespace app\modules\order\controllers;
 
+use Yii;
+use yii\web\HttpException;
+use app\widgets\notification\Alert;
 use app\modules\order\models\entity\CustomerProperties;
 use app\modules\order\models\entity\CustomerPropertiesValues;
-use app\modules\order\models\search\CustomerPropertiesSearchForm;
-use Yii;
-use app\widgets\notification\Alert;
-use app\modules\order\models\entity\Customer;
+use app\modules\order\models\search\CustomerSearchForm;
 use app\modules\site\controllers\MainBackendController;
-use yii\web\HttpException;
 
 class CustomerBackendController extends MainBackendController
 {
@@ -18,7 +17,7 @@ class CustomerBackendController extends MainBackendController
     public function actionIndex()
     {
         $model = new $this->modelClass();
-        $searchModel = new CustomerPropertiesSearchForm();
+        $searchModel = new CustomerSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
         $properties = CustomerProperties::find()->all();
         $propertiesValues = new CustomerPropertiesValues();

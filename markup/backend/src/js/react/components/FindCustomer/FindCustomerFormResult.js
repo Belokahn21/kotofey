@@ -1,42 +1,27 @@
 import React from "react";
 import ReactDom from "react-dom";
 import {Form, Modal} from "react-bootstrap";
+import Button from "../FindProduct/Button";
 
 class FindCustomerFormResult extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.state = {
-        // customer: null,
-        // show: false
-        // }
-    }
-
-    // setShow(show) {
-    //     this.setState({show: show});
-    // }
-    //
-    // handleClose() {
-    //     this.setShow(false);
-    // }
-    //
-    // handleShow() {
-    //     this.setShow(true);
-    // }
-
-    handleTypingText(event) {
     }
 
     render() {
         const {items} = this.props;
         return (
-            <div>
-                {items.map((el, i) => {
-                    console.log(el);
-                    console.log(i);
+            <div className="list-finds">
+                {items.map((el, index) => {
+                    return <div className="list-finds__item" key={index}>
+                        <a href="#" className="list-finds__link">{el.name}</a>
+                        <Button productId={el.id} inputId={this.inputId}/>
+                    </div>
                 })}
             </div>
         );
     }
-
 }
+
+export default FindCustomerFormResult;

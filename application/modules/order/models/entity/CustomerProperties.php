@@ -3,6 +3,7 @@
 namespace app\modules\order\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "customer_properties".
@@ -16,6 +17,13 @@ use Yii;
  */
 class CustomerProperties extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function rules()
     {
         return [
