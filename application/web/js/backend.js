@@ -3461,6 +3461,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! prop-types */ "./node_modules/prop-types/index.js");
+/* harmony import */ var prop_types__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(prop_types__WEBPACK_IMPORTED_MODULE_1__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3485,6 +3487,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
   _inherits(FindCustomerFormResult, _React$Component);
 
@@ -3501,17 +3504,33 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(FindCustomerFormResult, [{
+    key: "handleSelectCustomer",
+    value: function handleSelectCustomer(customer, event) {
+      var element = event.target;
+      var parentInput = document.querySelector('.load-customer-info__pid');
+      if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
+    }
+  }, {
     key: "render",
     value: function render() {
       var customer = this.props.customer;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "list-finds"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "list-finds__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        href: "#",
-        className: "list-finds__link"
-      }, customer.name)));
+      console.log(customer);
+
+      if (!Array.isArray(customer)) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "list-finds"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "list-finds__item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          href: "#",
+          className: "list-finds__link"
+        }, customer.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          type: "button",
+          onClick: this.handleSelectCustomer.bind(this, customer)
+        }, "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C")));
+      } else {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
+      }
     }
   }]);
 

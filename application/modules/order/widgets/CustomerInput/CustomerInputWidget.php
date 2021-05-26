@@ -20,15 +20,12 @@ class CustomerInputWidget extends Widget
 
         parent::run();
 
-        $modalId = time();
-
         echo Html::beginTag('div', [
             'style' => 'display:flex; flex-direction:row; margin:auto;'
         ]);
         echo Html::activeInput('text', $this->model, $this->attribute, [
-            'class' => 'form-control load-product-info__pid',
+            'class' => 'form-control load-customer-info__pid',
             'placeholder' => $this->placeholder,
-            'id' => 'uniq-' . $modalId,
         ]);
 
         echo Html::tag('div', null, ['class' => 'find-customer-react', 'data-options' => Json::encode([

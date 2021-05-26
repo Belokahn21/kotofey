@@ -1,4 +1,5 @@
 import React from "react";
+import {array} from "prop-types";
 
 class FindCustomerFormResult extends React.Component {
 
@@ -7,15 +8,30 @@ class FindCustomerFormResult extends React.Component {
         this.inputId = "demo sadasd asd ";
     }
 
+    handleSelectCustomer(customer, event) {
+        let element = event.target;
+
+        let parentInput = document.querySelector('.load-customer-info__pid');
+        if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
+
+
+    }
+
     render() {
         const {customer} = this.props;
-        return (
-            <div className="list-finds">
-                <div className="list-finds__item">
-                    <a href="#" className="list-finds__link">{customer.name}</a>
+        console.log(customer);
+        if (!Array.isArray(customer)) {
+            return (
+                <div className="list-finds">
+                    <div className="list-finds__item">
+                        <a href="#" className="list-finds__link">{customer.name}</a>
+                        <button type="button" onClick={this.handleSelectCustomer.bind(this, customer)}>Получить</button>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return <></>
+        }
     }
 }
 
