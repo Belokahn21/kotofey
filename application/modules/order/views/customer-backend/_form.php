@@ -15,19 +15,23 @@
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-12 col-sm-3">
                 <?= $form->field($model, 'is_active')->radioList(['Нет', 'Да']) ?>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
+            <div class="col-12 col-sm-3">
+                <?= $form->field($model, 'phone') ?>
+            </div>
+            <div class="col-12 col-sm-3">
                 <?= $form->field($model, 'name') ?>
             </div>
-            <div class="col-sm-4">
+            <div class="col-12 col-sm-3">
                 <?= $form->field($model, 'sort')->textInput(); ?>
             </div>
         </div>
 
+        <br>
+        <hr>
+        <h4>Свойства</h4>
         <?php foreach ($properties as $counter => $property): ?>
             <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
             <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => null])->label(false); ?>

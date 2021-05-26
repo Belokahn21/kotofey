@@ -12,6 +12,7 @@ import './react/components/Media/Media';
 import './react/components/Cdn/Cdn';
 // import './react/components/Promotion/Promotion';
 import './react/components/MediaBrowser/MediaBrowser';
+import './react/components/FindCustomer/FindCustomer';
 
 
 import './block/CheckExistProduct';
