@@ -1,5 +1,7 @@
 <?php
 
+use app\modules\order\models\helpers\CustomerPropertiesHelper;
+
 /* @var $model \app\modules\catalog\models\entity\Properties */
 /* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
 /* @var $form \yii\widgets\ActiveForm */
@@ -14,17 +16,17 @@
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <?= $form->field($model, 'is_active')->radioList(['Нет', 'Да']) ?>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <?= $form->field($model, 'name') ?>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
+                <?= $form->field($model, 'cross')->dropDownList(CustomerPropertiesHelper::getCrossProperties()) ?>
+            </div>
+            <div class="col-sm-3">
                 <?= $form->field($model, 'sort')->textInput(); ?>
             </div>
         </div>
     </div>
-</div>

@@ -12,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $is_active
  * @property int|null $sort
  * @property string|null $name
+ * @property string|null $cross
  * @property int|null $created_at
  * @property int|null $updated_at
  */
@@ -28,7 +29,7 @@ class CustomerProperties extends \yii\db\ActiveRecord
     {
         return [
             [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['name','cross'], 'string', 'max' => 255],
         ];
     }
 
@@ -39,6 +40,7 @@ class CustomerProperties extends \yii\db\ActiveRecord
             'is_active' => 'Активность',
             'sort' => 'Сортировка',
             'name' => 'Название',
+            'cross' => 'Свойство в заказе',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
