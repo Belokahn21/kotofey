@@ -11,7 +11,7 @@ use app\modules\site\models\tools\Price;
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Отчет по продажам</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">Отчет по продажам(Закр+опл)</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
