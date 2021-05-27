@@ -3509,6 +3509,13 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
       var element = event.target;
       var parentInput = document.querySelector('.load-customer-info__pid');
       if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
+      customer.cross.map(function (el) {
+        var input = document.querySelector('#order-' + el.code);
+
+        if (input) {
+          input.value = el.value;
+        }
+      });
     }
   }, {
     key: "render",
