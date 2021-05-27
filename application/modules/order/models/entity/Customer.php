@@ -48,4 +48,13 @@ class Customer extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function extraFields()
+    {
+        return [
+            'cross' => function ($model) {
+                return time();
+            }
+        ];
+    }
 }

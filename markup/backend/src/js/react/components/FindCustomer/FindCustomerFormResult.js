@@ -15,6 +15,14 @@ class FindCustomerFormResult extends React.Component {
         if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
 
 
+        customer.cross.map(el => {
+            let input = document.querySelector('#order-' + el.code);
+
+            if (input) {
+                input.value = el.value;
+            }
+        });
+
     }
 
     render() {

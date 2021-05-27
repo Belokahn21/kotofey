@@ -18,7 +18,7 @@ class FindCustomerForm extends React.Component {
         let input = event.target;
         if (this.timerEx) clearTimeout(this.timerEx);
         this.timerEx = setTimeout(() => {
-            RestRequest.one(config.restOrderCustomer, input.value).then(data => {
+            RestRequest.one(config.restOrderCustomer, input.value, '?expand=cross').then(data => {
                 this.setState({customer: data})
             });
         }, this.timer);

@@ -3419,7 +3419,7 @@ var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
       var input = event.target;
       if (this.timerEx) clearTimeout(this.timerEx);
       this.timerEx = setTimeout(function () {
-        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.one((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer), input.value).then(function (data) {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.one((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer), input.value, '?expand=cross').then(function (data) {
           _this2.setState({
             customer: data
           });
