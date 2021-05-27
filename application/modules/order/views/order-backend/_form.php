@@ -212,7 +212,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
             <div class="d-flex flex-row">
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'phone')->textInput(['placeholder' => 'Телефон', 'class' => 'form-control clean-phone'])->label(false); ?>
-                    <?php if (Yii::$app->user->id == 1): ?>
+                    <?php if (Yii::$app->user->id == 1 && Yii::$app->request->get('debug') == 'Y'): ?>
                         <?= $form->field($model, 'phone')->widget(CustomerInputWidget::className(), [
                             'placeholder' => 'Телефон клиента'
                         ])->label(false); ?>
