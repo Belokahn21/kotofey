@@ -1,6 +1,8 @@
 <?php
 
-/* @var $model \app\modules\catalog\models\entity\Properties */
+use app\modules\order\models\entity\CustomerPropertiesValues;
+
+/* @var $model \app\modules\order\models\entity\Customer */
 /* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
 /* @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues */
 /* @var $form \yii\widgets\ActiveForm */
@@ -34,8 +36,16 @@
         <h4>Свойства</h4>
         <?php foreach ($properties as $counter => $property): ?>
             <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
-            <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => null])->label(false); ?>
-            <?= $form->field($propertiesValues, '[' . $counter . ']value')->textInput()->label($property->name); ?>
+            <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
+
+
+            <?php if ($model->isNewRecord): ?>
+                <?= $form->field($propertiesValues, '[' . $counter . ']value')->textInput()->label($property->name); ?>
+            <?php else: ?>
+                <?php $value = CustomerPropertiesValues::findOne(['customer_id' => $model->phone, 'property_id' => $property->id]); ?>
+                <?= $form->field($propertiesValues, '[' . $counter . ']value')->textInput(['value' => $value ? $value->value : false])->label($property->name); ?>
+            <?php endif; ?>
+
         <?php endforeach; ?>
     </div>
 </div>

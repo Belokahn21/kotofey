@@ -7,6 +7,7 @@ use yii\helpers\Url;
 
 /* @var $properties \app\modules\catalog\models\entity\PropertyGroup[]
  * @var $model \app\modules\catalog\models\entity\Properties
+ * @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues
  */
 
 $this->title = Title::show("Свойство покупателя"); ?>
@@ -20,6 +21,7 @@ $this->title = Title::show("Свойство покупателя"); ?>
         'model' => $model,
         'form' => $form,
         'properties' => $properties,
+        'propertiesValues' => $propertiesValues,
     ]); ?>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
     <?php ActiveForm::end(); ?>

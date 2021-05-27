@@ -2,6 +2,7 @@
 
 namespace app\modules\order\controllers;
 
+use app\modules\order\models\helpers\CustomerPropertiesValuesHelper;
 use Yii;
 use yii\web\HttpException;
 use app\widgets\notification\Alert;
@@ -19,15 +20,20 @@ class CustomerBackendController extends MainBackendController
         $model = new $this->modelClass();
         $searchModel = new CustomerSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
-        $properties = CustomerProperties::find()->all();
+        $properties = $this->getProperties();
         $propertiesValues = new CustomerPropertiesValues();
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
-                if ($model->validate() && $model->save()) {
-                    Alert::setSuccessNotify('Элемент успешно добавлен.');
-                    return $this->refresh();
+                if (!$model->validate() && !$model->save()) {
+                    Alert::setErrorNotify('Ошибка создания карточки товара.');
+                    return false;
                 }
+            }
+
+            if (CustomerPropertiesValuesHelper::saveItems($model->phone)) {
+                Alert::setSuccessNotify('Элемент успешно добавлен.');
+                return $this->refresh();
             }
         }
 
@@ -43,13 +49,21 @@ class CustomerBackendController extends MainBackendController
     public function actionUpdate($id)
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
-        $properties = CustomerProperties::find()->all();
+
+        $properties = $this->getProperties();
+        $propertiesValues = new CustomerPropertiesValues();
+
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
-                if ($model->validate() && $model->save()) {
-                    Alert::setSuccessNotify('Элемент успешно добавлен.');
+                if (!$model->validate() && $model->update() === false) {
+                    Alert::setErrorNotify('Карточка клиента не обновлена.');
                     return $this->refresh();
                 }
+            }
+
+            if (CustomerPropertiesValuesHelper::saveItems($model->phone)) {
+                Alert::setSuccessNotify('Карточка клиента обновлена.');
+                return $this->refresh();
             }
         }
 
@@ -57,6 +71,7 @@ class CustomerBackendController extends MainBackendController
         return $this->render('update', [
             'model' => $model,
             'properties' => $properties,
+            'propertiesValues' => $propertiesValues,
         ]);
     }
 
@@ -67,5 +82,10 @@ class CustomerBackendController extends MainBackendController
         if ($model->delete()) Alert::setSuccessNotify('Элемент удален');
 
         return $this->redirect(['index']);
+    }
+
+    private function getProperties()
+    {
+        return CustomerProperties::find()->all();
     }
 }
