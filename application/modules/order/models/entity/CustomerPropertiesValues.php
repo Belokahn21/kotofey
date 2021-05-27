@@ -13,6 +13,9 @@ use Yii;
  * @property string|null $value
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property Customer $customer
+ * @property CustomerProperties $property
  */
 class CustomerPropertiesValues extends \yii\db\ActiveRecord
 {
@@ -24,6 +27,7 @@ class CustomerPropertiesValues extends \yii\db\ActiveRecord
             [['value'], 'string', 'max' => 255],
         ];
     }
+
     public function attributeLabels()
     {
         return [
@@ -34,5 +38,15 @@ class CustomerPropertiesValues extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function getProperty()
+    {
+        return $this->hasOne(CustomerProperties::className(), ['id' => 'property_id']);
+    }
+
+    public function getCustomer()
+    {
+        return $this->hasOne(Customer::className(), ['phone' => 'customer_id']);
     }
 }
