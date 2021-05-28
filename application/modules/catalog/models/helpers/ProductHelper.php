@@ -58,7 +58,7 @@ class ProductHelper
 
     public static function getMarkup(Product $model)
     {
-        return round(($model->price / $model->purchase) * 100 - 100);
+        return @round(($model->price / $model->purchase) * 100 - 100);
     }
 
     private static function getPercentTwoNums($big, $small)
