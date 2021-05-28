@@ -3,6 +3,7 @@
 namespace app\modules\order\controllers;
 
 use app\modules\order\models\helpers\CustomerPropertiesValuesHelper;
+use app\modules\site\models\tools\Debug;
 use Yii;
 use yii\web\HttpException;
 use app\widgets\notification\Alert;
@@ -25,9 +26,9 @@ class CustomerBackendController extends MainBackendController
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
-                if (!$model->validate() && !$model->save()) {
+                if (!$model->validate() || !$model->save()) {
                     Alert::setErrorNotify('Ошибка создания карточки товара.');
-                    return false;
+                    return $this->refresh();
                 }
             }
 

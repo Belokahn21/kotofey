@@ -34,18 +34,28 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
         <br>
         <hr>
         <h4>Свойства</h4>
-        <?php foreach ($properties as $counter => $property): ?>
-            <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
-            <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
 
-
-            <?php if ($model->isNewRecord): ?>
-                <?= $form->field($propertiesValues, '[' . $counter . ']value')->textInput()->label($property->name); ?>
-            <?php else: ?>
-                <?php $value = CustomerPropertiesValues::findOne(['customer_id' => $model->phone, 'property_id' => $property->id]); ?>
-                <?= $form->field($propertiesValues, '[' . $counter . ']value')->textInput(['value' => $value ? $value->value : false])->label($property->name); ?>
-            <?php endif; ?>
-
-        <?php endforeach; ?>
+        <?php
+        $count = 1;
+        foreach ($properties as $property) {
+            if ($count % 4 == 1) {
+                echo "<div class='row'>";
+            } ?>
+            <div class="col-6 col-sm-3">
+                <?= $form->field($propertiesValues, '[' . $count . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
+                <?= $form->field($propertiesValues, '[' . $count . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
+                <?php if ($model->isNewRecord): ?>
+                    <?= $form->field($propertiesValues, '[' . $count . ']value')->textInput()->label($property->name); ?>
+                <?php else: ?>
+                    <?php $value = CustomerPropertiesValues::findOne(['customer_id' => $model->phone, 'property_id' => $property->id]); ?>
+                    <?= $form->field($propertiesValues, '[' . $count . ']value')->textInput(['value' => $value ? $value->value : false])->label($property->name); ?>
+                <?php endif; ?>
+            </div>
+            <? if ($count % 4 == 0) {
+                echo "</div>";
+            }
+            $count++;
+        }
+        if ($count % 4 != 1) echo "</div>"; ?>
     </div>
 </div>

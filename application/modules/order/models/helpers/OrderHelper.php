@@ -150,7 +150,7 @@ class OrderHelper
         $out_summ = 0;
 
         foreach ($order->items as $item) {
-            $out_summ += ($item->price - $item->purchase) * $item->count;
+            $out_summ += (($item->discount_price ? $item->discount_price : $item->price) - $item->purchase) * $item->count;
         }
 
         if ($order->discount) $out_summ = self::applyDiscountToAmount($order, $out_summ);
