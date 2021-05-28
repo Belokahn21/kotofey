@@ -25,6 +25,7 @@ $this->title = Title::show("Заказы");
         <h1>Заказы</h1>
         <?= GroupBuyWidget::widget(); ?>
         <?= Html::a('Выгрузка Email', Url::to(['order-backend/export']), ['class' => 'btn-main', 'target' => '_blank']); ?>
+        <?= Html::a('Карточки клиентов', Url::to(['customer-backend/index']), ['class' => 'btn-main', 'target' => '_blank']); ?>
     </div>
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
