@@ -41,7 +41,7 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
                 echo "<div class='row'>";
             } ?>
 
-            <div class="col-4"><?php echo $kicks->name; ?></div>
+            <div class="col-3"><?php echo $kicks->name; ?></div>
 
 
             <?php if ($count % 4 == 0) {
