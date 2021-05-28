@@ -34,6 +34,24 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
         <br>
         <hr>
         <h4>Свойства</h4>
+        <?php
+        $count = 1;
+        foreach ($properties as $kicks) {
+            if ($count % 4 == 1) {
+                echo "<div class='row'>";
+            } ?>
+
+            <div class="col-4"><?php echo $kicks->name; ?></div>
+
+
+            <?php if ($count % 4 == 0) {
+                echo "</div>";
+            }
+            $count++;
+        }
+        if ($count % 4 != 1) echo "</div>"; ?>
+
+
         <?php foreach ($properties as $counter => $property): ?>
             <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
             <?= $form->field($propertiesValues, '[' . $counter . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
