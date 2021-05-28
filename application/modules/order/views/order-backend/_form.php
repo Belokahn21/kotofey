@@ -281,7 +281,7 @@ use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
                     </div>
 
                     <div class="form-element order-delivery-info__item">
-                        <?= $form->field($model, 'country')->textInput(['placeholder' => 'Регион'])->label(false); ?>
+                        <?= $form->field($model, 'country')->textInput(['placeholder' => 'Страна'])->label(false); ?>
                     </div>
 
                     <div class="form-element order-delivery-info__item">
