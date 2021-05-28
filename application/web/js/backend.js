@@ -3503,22 +3503,18 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
   _createClass(FindCustomerFormResult, [{
     key: "handleSelectCustomer",
     value: function handleSelectCustomer(customer, event) {
-      var element = event.target;
+      var currentElement = event.target;
       var parentInput = document.querySelector('.load-customer-info__pid');
       if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
-      customer.cross.map(function (el) {
-        var input = document.querySelector('#order-' + el.code);
-
-        if (input) {
-          input.value = el.value;
-        }
+      Object.keys(customer.cross).map(function (key) {
+        var element = document.querySelector('#order-' + key);
+        if (element) element.value = customer.cross[key];
       });
     }
   }, {
     key: "render",
     value: function render() {
       var customer = this.props.customer;
-      console.log(customer);
 
       if (!Array.isArray(customer)) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

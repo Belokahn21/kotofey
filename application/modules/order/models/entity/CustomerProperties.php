@@ -28,8 +28,13 @@ class CustomerProperties extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['is_active'], 'default', 'value' => true],
+
+            [['sort'], 'default', 'value' => 500],
+
             [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
-            [['name','cross'], 'string', 'max' => 255],
+
+            [['name', 'cross'], 'string', 'max' => 255],
         ];
     }
 

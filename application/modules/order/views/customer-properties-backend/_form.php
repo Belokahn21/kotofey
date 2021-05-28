@@ -2,8 +2,7 @@
 
 use app\modules\order\models\helpers\CustomerPropertiesHelper;
 
-/* @var $model \app\modules\catalog\models\entity\Properties */
-/* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
+/* @var $model \app\modules\order\models\entity\CustomerProperties */
 /* @var $form \yii\widgets\ActiveForm */
 
 ?>
@@ -23,7 +22,7 @@ use app\modules\order\models\helpers\CustomerPropertiesHelper;
                 <?= $form->field($model, 'name') ?>
             </div>
             <div class="col-sm-3">
-                <?= $form->field($model, 'cross')->dropDownList(CustomerPropertiesHelper::getCrossProperties()) ?>
+                <?= $form->field($model, 'cross')->dropDownList(CustomerPropertiesHelper::getCrossProperties(), ['prompt' => 'Поле в заказе']) ?>
             </div>
             <div class="col-sm-3">
                 <?= $form->field($model, 'sort')->textInput(); ?>

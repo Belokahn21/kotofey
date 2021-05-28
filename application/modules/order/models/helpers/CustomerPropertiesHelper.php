@@ -10,7 +10,9 @@ class CustomerPropertiesHelper
     {
         $out = [];
         foreach ([Order::getTableSchema()->columns] as $model) {
-            $out += array_keys($model);
+            foreach (array_keys($model) as $key) {
+                $out[$key] = $key;
+            }
         }
         return $out;
     }

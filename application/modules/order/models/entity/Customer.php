@@ -57,9 +57,8 @@ class Customer extends \yii\db\ActiveRecord
 
                 $values = CustomerPropertiesValues::find()->where(['customer_id' => $model->phone])->all();
 
-                foreach ($values as $cnt => $value) {
-                    $out[$cnt]['value'] = $value;
-                    $out[$cnt]['customer'] = $value->customer;
+                foreach ($values as $value) {
+                    $out[$value->property->cross] = $value->value;
                 }
 
                 return $out;
