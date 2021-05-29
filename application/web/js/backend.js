@@ -3249,9 +3249,10 @@ if (element) react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
 /* harmony import */ var _FindProduct_FindProductForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FindProduct/FindProductForm */ "./src/js/react/components/FindProduct/FindProductForm.js");
 /* harmony import */ var _FindCustomerForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FindCustomerForm */ "./src/js/react/components/FindCustomer/FindCustomerForm.js");
+/* harmony import */ var _FindCustomerLast__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FindCustomerLast */ "./src/js/react/components/FindCustomer/FindCustomerLast.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3273,6 +3274,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -3316,6 +3318,17 @@ var FindCustomer = /*#__PURE__*/function (_React$Component) {
       this.setShow(true);
     }
   }, {
+    key: "handleSelectCustomer",
+    value: function handleSelectCustomer(customer, event) {
+      var currentElement = event.target;
+      var parentInput = document.querySelector('.load-customer-info__pid');
+      if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
+      Object.keys(customer.cross).map(function (key) {
+        var element = document.querySelector('#order-' + key);
+        if (element) element.value = customer.cross[key];
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var options = this.props.options;
@@ -3325,12 +3338,16 @@ var FindCustomer = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "form-finds__setup",
         onClick: this.handleShow.bind(this)
-      }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
+      }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
         show: show,
         onHide: this.handleClose.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Header, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Title, null, "\u041D\u0430\u0439\u0442\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E\u043A\u0443\u043F\u0430\u0442\u0435\u043B\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindCustomerForm__WEBPACK_IMPORTED_MODULE_3__.default, null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, "\u041D\u0430\u0439\u0442\u0438 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0443 \u043F\u043E\u043A\u0443\u043F\u0430\u0442\u0435\u043B\u044F")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindCustomerForm__WEBPACK_IMPORTED_MODULE_3__.default, {
+        handleSelectCustomer: this.handleSelectCustomer
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindCustomerLast__WEBPACK_IMPORTED_MODULE_4__.default, {
+        handleSelectCustomer: this.handleSelectCustomer
+      }))));
     }
   }]);
 
@@ -3437,6 +3454,7 @@ var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
         onKeyUp: this.handleTypingText.bind(this),
         placeholder: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 8\u0445\u0445\u0445\u0445\u0445\u0445\u0445\u0445"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindCustomerFormResult__WEBPACK_IMPORTED_MODULE_3__.default, {
+        handleSelectCustomer: this.props.handleSelectCustomer,
         customer: customer
       }));
     }
@@ -3501,17 +3519,6 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(FindCustomerFormResult, [{
-    key: "handleSelectCustomer",
-    value: function handleSelectCustomer(customer, event) {
-      var currentElement = event.target;
-      var parentInput = document.querySelector('.load-customer-info__pid');
-      if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
-      Object.keys(customer.cross).map(function (key) {
-        var element = document.querySelector('#order-' + key);
-        if (element) element.value = customer.cross[key];
-      });
-    }
-  }, {
     key: "render",
     value: function render() {
       var customer = this.props.customer;
@@ -3524,10 +3531,11 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
           href: "#",
           className: "list-finds__link"
-        }, customer.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        }, customer.phone, " / ", customer.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          className: "list-finds__setup",
           type: "button",
-          onClick: this.handleSelectCustomer.bind(this, customer)
-        }, "\u041F\u043E\u043B\u0443\u0447\u0438\u0442\u044C")));
+          onClick: this.props.handleSelectCustomer.bind(this, customer)
+        }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C")));
       } else {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
       }
@@ -3538,6 +3546,105 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FindCustomerFormResult);
+
+/***/ }),
+
+/***/ "./src/js/react/components/FindCustomer/FindCustomerLast.js":
+/*!******************************************************************!*\
+  !*** ./src/js/react/components/FindCustomer/FindCustomerLast.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var FindCustomerLast = /*#__PURE__*/function (_React$Component) {
+  _inherits(FindCustomerLast, _React$Component);
+
+  var _super = _createSuper(FindCustomerLast);
+
+  function FindCustomerLast(props) {
+    var _this;
+
+    _classCallCheck(this, FindCustomerLast);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      items: []
+    };
+
+    _this.load();
+
+    return _this;
+  }
+
+  _createClass(FindCustomerLast, [{
+    key: "load",
+    value: function load() {
+      var _this2 = this;
+
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer) + '?expand=cross').then(function (data) {
+        _this2.setState({
+          items: data
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      var items = this.state.items;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("h5", null, "\u041F\u043E\u0441\u043B\u0435\u0434\u043D\u0438\u0435 \u043A\u0430\u0440\u0442\u043E\u0447\u043A\u0438"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "list-finds"
+      }, items.map(function (customer, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: index,
+          className: "list-finds__item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, customer.phone, " / ", customer.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          className: "list-finds__setup",
+          onClick: _this3.props.handleSelectCustomer.bind(_this3, customer)
+        }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"));
+      })));
+    }
+  }]);
+
+  return FindCustomerLast;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FindCustomerLast);
 
 /***/ }),
 

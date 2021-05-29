@@ -7,19 +7,7 @@ class FindCustomerFormResult extends React.Component {
         this.inputId = "demo sadasd asd ";
     }
 
-    handleSelectCustomer(customer, event) {
-        let currentElement = event.target;
 
-        let parentInput = document.querySelector('.load-customer-info__pid');
-        if (parentInput && parentInput.value.length === 0) parentInput.value = customer.phone;
-
-
-        Object.keys(customer.cross).map(key => {
-            let element = document.querySelector('#order-' + key)
-            if (element) element.value = customer.cross[key];
-        })
-
-    }
 
     render() {
         const {customer} = this.props;
@@ -27,8 +15,8 @@ class FindCustomerFormResult extends React.Component {
             return (
                 <div className="list-finds">
                     <div className="list-finds__item">
-                        <a href="#" className="list-finds__link">{customer.name}</a>
-                        <button type="button" onClick={this.handleSelectCustomer.bind(this, customer)}>Получить</button>
+                        <a href="#" className="list-finds__link">{customer.phone} / {customer.name}</a>
+                        <button className="list-finds__setup" type="button" onClick={this.props.handleSelectCustomer.bind(this, customer)}>Выбрать</button>
                     </div>
                 </div>
             );

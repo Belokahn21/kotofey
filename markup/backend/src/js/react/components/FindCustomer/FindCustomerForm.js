@@ -32,7 +32,7 @@ class FindCustomerForm extends React.Component {
                     <input className="form-finds__input" onKeyUp={this.handleTypingText.bind(this)} placeholder="Телефон клиента в формате 8хххххххх"/>
                 </form>
 
-                <FindCustomerFormResult customer={customer}/>
+                <FindCustomerFormResult handleSelectCustomer={this.props.handleSelectCustomer} customer={customer}/>
             </>
         );
     }
