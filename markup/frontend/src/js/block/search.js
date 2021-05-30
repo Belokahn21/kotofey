@@ -5,9 +5,7 @@ if (searchElements) {
 		element.addEventListener('click', (event) => {
 			const form = document.querySelector('.js-search-form');
 
-			if (!form) {
-				return false;
-			}
+			if (!form)  return false;
 
 			form.classList.toggle('is-active');
 		});

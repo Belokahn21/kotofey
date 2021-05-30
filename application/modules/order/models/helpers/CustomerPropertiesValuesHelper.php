@@ -24,10 +24,11 @@ class CustomerPropertiesValuesHelper
 
             foreach ($items as $item) {
 
-//                if (OrderHelper::isEmptyItem($item)) continue;
+                if (empty($item->value)) continue;
 
                 $item->customer_id = $customer_id;
                 if (!$item->validate() || !$item->save()) {
+                    Debug::p($item);
                     Debug::p($item->getErrors());
                     return false;
                 }

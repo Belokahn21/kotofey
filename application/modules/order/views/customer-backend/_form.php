@@ -43,7 +43,6 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
 
             <div class="col-3">
                 <?= $form->field($propertiesValues, '[' . $count . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
-                <?= $form->field($propertiesValues, '[' . $count . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
 
 
                 <?php if ($model->isNewRecord): ?>

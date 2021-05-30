@@ -23,12 +23,19 @@ header.header.page-container
             li.header-menu__item
                 a(href="javascript:void(0);").header-menu__link.js-show-panel Контакты
 header.header-mobile
-    form.mobile-search.js-search-form
-        input.mobile-search__input(type="text" placeholder="Найти товар")
-        button(type="submit").mobile-search__submit.mobile-search__control
-            i.fas.fa-search
-        button(type="button").mobile-search__close.mobile-search__control.js-search-toggle
-            i.fas.fa-times
+    .js-search-form.mobile-search
+        form.mobile-search-form
+            button(type="button").mobile-search-form__close.mobile-search-form__control.js-search-toggle
+                i.fas.fa-times
+            input.mobile-search-form__input(type="text" placeholder="Найти товар")
+            button(type="submit").mobile-search-form__submit.mobile-search-form__control Найти
+        .mobile-last-queries-container
+            h5.mobile-search-title Последние запросы
+            .mobile-last-queries
+                a(href="#").mobile-last-queries__link фытвлыфтв
+                a(href="#").mobile-last-queries__link фытвлыфтвыфзвтфзшывтзшф ыт
+                a(href="#").mobile-last-queries__link фыьвзфы зщвьфзщы
+                a(href="#").mobile-last-queries__link 912вь-1вь2
     .header-mobile-container
         div.header-mobile__hamburger
             img(src="./assets/images/hamburger.svg")

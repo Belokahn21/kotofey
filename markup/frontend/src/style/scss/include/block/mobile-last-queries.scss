@@ -1,0 +1,16 @@
+.mobile-last-queries {
+  display: flex;
+  flex-direction: column;
+
+  &-container {
+    padding: 0 10px;
+  }
+
+  &__link {
+    color: $main-color;
+
+    &:hover {
+      color: $active-color;
+    }
+  }
+}

@@ -5,6 +5,8 @@ namespace app\modules\search\models\entity;
 
 use app\modules\search\models\entity\SearchQuery;
 use app\modules\catalog\models\entity\Product;
+use app\modules\search\models\services\SearchHistory\SearchHistory;
+use app\modules\search\models\services\SearchHistory\SearchHistoryStorage;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 
@@ -78,6 +80,9 @@ class Search extends Model
                 $SearchQuery->save();
             }
         }
+
+        $storage = new SearchHistory();
+        $storage->save($phrase);
 
         return $products;
 
