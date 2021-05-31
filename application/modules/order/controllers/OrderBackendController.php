@@ -353,8 +353,8 @@ class OrderBackendController extends MainBackendController
         $orders = Order::find()
             ->select(['id', 'email', 'created_at'])
             ->where(['!=', 'email', ''])
-            ->andWhere(['in', 'created_at', Order::find()->select('MAX(created_at)')->groupBy('email')])
-            ->andWhere(['<', 'created_at', strtotime('-2 month')])
+//            ->andWhere(['in', 'created_at', Order::find()->select('MAX(created_at)')->groupBy('email')])
+//            ->andWhere(['<', 'created_at', strtotime('-2 month')])
             ->asArray(true);
 
 
