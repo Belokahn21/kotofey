@@ -20,26 +20,26 @@ class TrackingService
 {
     private $_order;
     private $_service;
-    public $track_model;
+    private $_track_model;
 
     public function __construct(Order $order)
     {
         $this->_order = $order;
 
-        if (!$this->track_model instanceof OrderTracking) $this->getTrackModel();
-        if (!$this->track_model instanceof OrderTracking) throw new \Exception('Модель не получена');
+        if (!$this->_track_model instanceof OrderTracking) $this->getTrackModel();
+        if (!$this->_track_model instanceof OrderTracking) throw new \Exception('Модель не получена');
 
         $this->choseService();
     }
 
-    public function getTrackModel()
+    private function getTrackModel()
     {
-        $this->track_model = OrderTracking::findByOrderId($this->_order->id);
+        $this->_track_model = OrderTracking::findByOrderId($this->_order->id);
     }
 
-    public function choseService()
+    private function choseService()
     {
-        switch ($this->track_model->service_id) {
+        switch ($this->_track_model->service_id) {
             case OrderTracking::SERVICE_RUSSIAN_POST:
                 $this->_service = new RuPostTracking();
                 break;
@@ -54,12 +54,8 @@ class TrackingService
         }
     }
 
-    public function getDateDelivery()
-    {
-    }
-
     public function getOrderInfo()
     {
-        return $this->_service->getOrderInfo($this->track_model->ident_key);
+        return $this->_service->getOrderInfo($this->_track_model->ident_key);
     }
 }
