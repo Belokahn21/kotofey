@@ -70,12 +70,12 @@ $order_info = $tracking_info->OperationHistoryData->historyRecord;
             <div class="order-tracking-list">
 
                 <?php foreach ($order_info as $item): ?>
-                    <?php //\app\modules\site\models\tools\Debug::p($item->OperationParameters->OperType->Name); ?>
+                    <?php //\app\modules\site\models\tools\Debug::p($item->OperationParameters); ?>
                     <?php if (!isset($item->OperationParameters)) continue; ?>
                     <div class="order-tracking-list__row">
                         <div class="order-tracking-list__item name"><?= $item->OperationParameters->OperType->Name; ?></div>
                         <div class="order-tracking-list__item">
-                            Дата: Не указано
+                            Дата: <?= explode('T', $item->OperationParameters->OperDate)[0]; ?>
                         </div>
                     </div>
 
