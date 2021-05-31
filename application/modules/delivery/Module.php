@@ -15,6 +15,9 @@ class Module extends MainModule
     public $cdek_client_id_prod;
     public $cdek_client_secret_prod;
 
+    public $ru_post_login;
+    public $ru_post_password;
+
     public function init()
     {
         parent::init();
@@ -40,6 +43,8 @@ class Module extends MainModule
             'cdek_client_secret_dev' => '',
             'cdek_client_id_prod' => '',
             'cdek_client_secret_prod' => '',
+            'ru_post_login' => '',
+            'ru_post_password' => '',
         ];
     }
 
@@ -50,6 +55,9 @@ class Module extends MainModule
             'cdek_client_secret_dev' => 'Секретный ключ(dev)',
             'cdek_client_id_prod' => 'ID клиента(prod)',
             'cdek_client_secret_prod' => 'Секретный ключ(prod)',
+
+            'ru_post_login' => 'Почта России, логин',
+            'ru_post_password' => 'Почта России, пароль',
         ];
     }
 }

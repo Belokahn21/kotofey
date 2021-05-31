@@ -1,51 +1,55 @@
 <?
 // проверяем наличие класса SoapClient
-if (class_exists('SoapClient')){
-
-    // отключаем кэширование
-    ini_set("soap.wsdl_cache_enabled", "0" );
-
-    // подключаемся к серверу
-    $client = new SoapClient(
-        "https://tracking.russianpost.ru/rtm34?wsdl",
-        array(
-            "soap_Login", // логин
-            "soap_password" // пароль
-        )
-    );
-
-    // обращаемся к функции, передаем параметры
-    $result = $client->GetOrderInfo( array('OrderCode' => '20001827') );
-
-    if ($result->return){
-
-        // обращаемся к данным в виде объектов
-        echo
-            'Product: ' . $result->return->cmp->ProdName . '<br>' .
-            'Amount'    . $result->return->cmp->Amount .
-            'Price'     . $result->return->cmp->Price;
-
-    } else echo "Не удалось получить данные!";
-} else echo "Включите поддержку SOAP в PHP!";
+//if (class_exists('SoapClient')){
+//
+//    // отключаем кэширование
+//    ini_set("soap.wsdl_cache_enabled", "0" );
+//
+//    // подключаемся к серверу
+//    $client = new SoapClient(
+//        "https://tracking.russianpost.ru/rtm34?wsdl",
+//        array(
+//            "soap_Login", // логин
+//            "soap_password" // пароль
+//        )
+//    );
+//
+//    // обращаемся к функции, передаем параметры
+//    $result = $client->GetOrderInfo( array('OrderCode' => '20001827') );
+//
+//    if ($result->return){
+//
+//        // обращаемся к данным в виде объектов
+//        echo
+//            'Product: ' . $result->return->cmp->ProdName . '<br>' .
+//            'Amount'    . $result->return->cmp->Amount .
+//            'Price'     . $result->return->cmp->Price;
+//
+//    } else echo "Не удалось получить данные!";
+//} else echo "Включите поддержку SOAP в PHP!";
 ?>
 
 <?php
-$wsdlurl = 'https://tracking.russianpost.ru/rtm34?wsdl';
-$client2 = '';
-
-$client2 = new SoapClient($wsdlurl, array('trace' => 1, 'soap_version' => SOAP_1_2));
-
-$params3 = array ('OperationHistoryRequest' => array ('Barcode' => 'RA644000001RU', 'MessageType' => '0','Language' => 'RUS'),
-    'AuthorizationHeader' => array ('login'=>'myLogin','password'=>'myPassword'));
-
-$result = $client2->getOperationHistory(new SoapParam($params3,'OperationHistoryRequest'));
-
-foreach ($result->OperationHistoryData->historyRecord as $record) {
-    printf("<p>%s </br>  %s, %s</p>",
-        $record->OperationParameters->OperDate,
-        $record->AddressParameters->OperationAddress->Description,
-        $record->OperationParameters->OperAttr->Name);
-};
+//$wsdlurl = 'https://tracking.russianpost.ru/rtm34?wsdl';
+//$client2 = '';
+//
+//$client2 = new SoapClient($wsdlurl, array('trace' => 1, 'soap_version' => SOAP_1_2));
+//
+//$params3 = array ('OperationHistoryRequest' => array ('Barcode' => '80096460841518', 'MessageType' => '0','Language' => 'RUS'),
+//    'AuthorizationHeader' => array ('login'=>'KMhQooASlzAFLD','password'=>'BqT6Moh5ucj5'));
+//
+//$result = $client2->getOperationHistory(new SoapParam($params3,'OperationHistoryRequest'));
+//
+//\app\modules\site\models\tools\Debug::p($result);
+//
+//exit();
+//
+////foreach ($result->OperationHistoryData->historyRecord as $record) {
+////    printf("<p>%s </br>  %s, %s</p>",
+////        $record->OperationParameters->OperDate,
+////        $record->AddressParameters->OperationAddress->Description,
+////        $record->OperationParameters->OperAttr->Name);
+////};
 ?>
 
 

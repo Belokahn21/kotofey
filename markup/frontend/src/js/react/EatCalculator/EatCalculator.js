@@ -12,10 +12,21 @@ class EatCalculator extends React.Component {
     render() {
         const {products} = this.state;
         return <div className="eat-calculator">
-            <div className="eat-calculator-config">
+            <form className="eat-calculator-config">
                 <div className="eat-calculator-config__pet">
-                    <div>dog</div>
-                    <div>cat</div>
+
+
+                    <label>
+                        <input name="pet" value="102"/>
+                        <img src="./assets/images/pet/dog.jpg"/>
+                    </label>
+
+
+                    <label>
+                        <input name="pet" value="101"/>
+                        <img src="./assets/images/pet/cat.png"/>
+                    </label>
+
                 </div>
 
                 <div className="eat-calculator-config__age">
@@ -33,7 +44,7 @@ class EatCalculator extends React.Component {
                     <div>Полу-подвижный</div>
                     <div>Подвижный</div>
                 </div>
-            </div>
+            </form>
 
             <div className="eat-calculator-result">
                 {products.map((el, index) => {
