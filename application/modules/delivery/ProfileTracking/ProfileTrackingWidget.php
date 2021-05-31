@@ -37,6 +37,10 @@ class ProfileTrackingWidget extends Widget
             $this->view = 'default';
         }
 
+        if ($track_model->service_id == OrderTracking::SERVICE_RUSSIAN_POST) {
+            $this->view = 'ru_post';
+        }
+
         return $this->render($this->view, [
             'tracking_info' => $tracking_info
         ]);

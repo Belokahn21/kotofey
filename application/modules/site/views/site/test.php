@@ -1,8 +1,10 @@
 <?php
 $order = \app\modules\order\models\entity\Order::findOne(621);
 
-$tracking = new \app\modules\order\models\service\TrackingService($order);
-\app\modules\site\models\tools\Debug::p($tracking->getOrderInfo());
+//$tracking = new \app\modules\order\models\service\TrackingService($order);
+//\app\modules\site\models\tools\Debug::p($tracking->getOrderInfo());
+
+echo \app\modules\delivery\ProfileTracking\ProfileTrackingWidget::widget(['order' => $order]);
 
 ?>
 
