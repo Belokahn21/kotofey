@@ -1,7 +1,7 @@
 <?php
 /* @var $tracking_info Object */
 if (!$tracking_info->OperationHistoryData || !$tracking_info->OperationHistoryData->historyRecord) return;
-$order_info = $tracking_info->OperationHistoryData->historyRecord;
+$order_info = array_reverse($tracking_info->OperationHistoryData->historyRecord);
 
 ?>
 
