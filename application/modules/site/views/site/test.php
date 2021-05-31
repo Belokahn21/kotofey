@@ -1,3 +1,11 @@
+<?php
+$order = \app\modules\order\models\entity\Order::findOne(621);
+
+$tracking = new \app\modules\order\models\service\TrackingService($order);
+\app\modules\site\models\tools\Debug::p($tracking->getOrderInfo());
+
+?>
+
 <?
 // проверяем наличие класса SoapClient
 //if (class_exists('SoapClient')){
@@ -53,7 +61,6 @@
 ?>
 
 
-
 <?php
 $wsdlurl = 'https://tracking.russianpost.ru/rtm34?wsdl';
 $client2 = '';
@@ -66,23 +73,19 @@ $request = '<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope" 
       <oper:PostalOrderEventsForMail>
          <!--Optional:-->
          <data:AuthorizationHeader soapenv:mustUnderstand="">
-            <data:login>'.$login.'</data:login>
-            <data:password>'.$password.'</data:password>
+            <data:login>' . $login . '</data:login>
+            <data:password>' . $password . '</data:password>
          </data:AuthorizationHeader>
          <!--Optional:-->
-         <data1:PostalOrderEventsForMailInput Barcode="'.$barcode.'" Language=""/>
+         <data1:PostalOrderEventsForMailInput Barcode="' . $barcode . '" Language=""/>
       </oper:PostalOrderEventsForMail>
    </soap:Body>
 </soap:Envelope>';
 
-$client = new SoapClient($wsdlurl,  array('trace' => 1, 'soap_version' => SOAP_1_2));
+$client = new SoapClient($wsdlurl, array('trace' => 1, 'soap_version' => SOAP_1_2));
 
-echo '<textarea>'.$client->__doRequest($request, "https://tracking.russianpost.ru/rtm34", "PostalOrderEventsForMail", SOAP_1_2).'</textarea>';
+echo '<textarea>' . $client->__doRequest($request, "https://tracking.russianpost.ru/rtm34", "PostalOrderEventsForMail", SOAP_1_2) . '</textarea>';
 ?>
-
-
-
-
 
 
 <?php
@@ -104,9 +107,9 @@ $request = '<?xml version="1.0" encoding="UTF-8"?>
                 </soap:Body>
              </soap:Envelope>';
 
-$client = new SoapClient("https://tracking.russianpost.ru/rtm34?wsdl",  array('trace' => 1, 'soap_version' => SOAP_1_2));
+$client = new SoapClient("https://tracking.russianpost.ru/rtm34?wsdl", array('trace' => 1, 'soap_version' => SOAP_1_2));
 
-echo '<textarea>'.$client->__doRequest($request, "https://tracking.russianpost.ru/rtm34", "getOperationHistory", SOAP_1_2).'</textarea>';
+echo '<textarea>' . $client->__doRequest($request, "https://tracking.russianpost.ru/rtm34", "getOperationHistory", SOAP_1_2) . '</textarea>';
 ?>
 
 
