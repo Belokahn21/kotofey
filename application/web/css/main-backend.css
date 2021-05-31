@@ -8024,10 +8024,11 @@ html, body {
       justify-content: flex-start; } }
   .title-group h1 {
     margin-right: auto;
-    text-align: center; }
+    font-size: 26px; }
     @media (max-width: 450px) {
       .title-group h1 {
-        font-size: 20px; } }
+        font-size: 20px;
+        text-align: center; } }
 
 .form-control {
   border-radius: 0 !important;
