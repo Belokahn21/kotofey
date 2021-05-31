@@ -1,33 +1,44 @@
 <?php
 ini_set('default_socket_timeout', 10000);
-$wsdlurl = 'http://ws.valta.ru:8888/uppms/ws/exchange.1cws?wsdl';
+$wsdlurl = 'ws.valta.ru:8888/uppms/ws/exchange.1cws?wsdl';
+error_reporting(E_ALL);
+ini_set("soap.wsdl_cache_enabled", "0");
+$wsdl_url = $wsdlurl;
+$login = 'VasinKV_NSK';
+$password = 'aP85jU21g0';
+$service_location = 'http://dir/DataService.asmx';
+$service_uri = 'http://uri.org/';
 
-$opts = array(
-    'ssl' => array(
-        'ciphers' => 'RC4-SHA',
-        'verify_peer' => false,
-        'verify_peer_name' => false
-    )
-);
-// SOAP 1.2 client
-$params = array(
-    'encoding' => 'UTF-8',
-    'verifypeer' => false,
-    'verifyhost' => false,
-    'soap_version' => SOAP_1_2,
-    'trace' => 1,
-    'exceptions' => 1,
-    'connection_timeout' => 180,
-    'stream_context' => stream_context_create($opts)
-);
+try {
+    //не-WSDL
 
-$client = new SoapClient($wsdlurl, $params);
+    $options = array('login' => $login,
+        'password' => $password,
+        'location' => $service_location,
+        'uri' => $service_uri,
+        'authentication' => 'SOAP_AUTHENTICATION_DIGEST',
+        'trace' => true,
+        'exceptions' => true,
+        'cache_wsdl' => 'WSDL_CACHE_NONE',
+        'soap_version' => 'SOAP_1_1');
 
-//$params = array(
-//    'OperationHistoryRequest' => array('Barcode' => '3d49908e-4ee1-11ea-8156-005056bf23ce', 'Date' => date('d.m.Y')),
-//    'AuthorizationHeader' => array('login' => 'VasinKV_NSK', 'password' => 'aP85jU21g0')
-//);
-//
-//$result = $client->GetGoodList(new SoapParam($params));
+    try {
+        $client = new SoapClient($wsdl_url, $options);
+    } catch (Exception $e) {
+        print"Ошибка создания объекта SOAP:<br>" . $e->getMessage() . "<br>" . $e->getTraceAsString();
+    }
+
+    $params = array('ClientId' => 52, 'Date' => new DateTime());
+
+    try {
+        $response = $client->GetGoodList($params);
+    } catch (Exception $e) {
+        print"Ошибка вызова функции GetGoodList:<br>" . $e->getMessage() . "<br>" . $e->getTraceAsString();
+    }
+
+} catch (Exception $e) {
+    print "Ошибка работы с SOAP:<br>" . $e->getMessage() . "<br>" . $e->getTraceAsString();
+}
+?>
 
 ?>
