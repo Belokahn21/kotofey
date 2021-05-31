@@ -14,5 +14,6 @@ class RuPostTracking extends ATracking
 
     public function getOrderInfo($track_id)
     {
+        $this->_api->getOrderInfo($track_id);
     }
 }

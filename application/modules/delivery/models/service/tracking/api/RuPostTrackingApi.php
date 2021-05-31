@@ -27,8 +27,6 @@ class RuPostTrackingApi implements TrackingApi
 
         $result = $client->getOperationHistory(new SoapParam($params, 'OperationHistoryRequest'));
 
-        \app\modules\site\models\tools\Debug::p($result);
-
-        exit();
+        return $result;
     }
 }
