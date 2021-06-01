@@ -127,7 +127,7 @@ class ProductCalcForm {
     changeButtonLabel() {
         let button = this.form.querySelector('.js-add-basket');
         if (button) {
-            this.toggleText(button, 'Добавлено');
+            this.toggleText(button, 'В корзине');
             this.toggleIcon(button);
         }
     };

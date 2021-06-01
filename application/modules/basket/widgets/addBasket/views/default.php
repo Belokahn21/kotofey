@@ -3,6 +3,7 @@
 use app\modules\site\models\tools\Price;
 use app\modules\basket\models\entity\Basket;
 use app\modules\site\models\tools\Currency;
+use app\modules\basket\models\tools\BasketHelper;
 
 /* @var $product_id integer
  * @var $showButton boolean
@@ -69,10 +70,17 @@ $resultPrice = $discount_price ?: $price;
 
 
             <?php if ($showButton): ?>
-                <button class="add-basket js-add-basket" type="submit" onclick="ym(55089223, 'reachGoal', 'basket'); return true;">
-                    <img class="add-basket__icon" src="/upload/images/basket.png">
-                    <span class="add-basket__label">В корзину</span>
-                </button>
+                <?php if (BasketHelper::inBasket($product_id)): ?>
+                    <button class="add-basket" type="button">
+                        <img class="add-basket__icon" src="/upload/images/arrow-success.png">
+                        <span class="add-basket__label">В корзине</span>
+                    </button>
+                <?php else: ?>
+                    <button class="add-basket js-add-basket" type="submit" onclick="ym(55089223, 'reachGoal', 'basket'); return true;">
+                        <img class="add-basket__icon" src="/upload/images/basket.png">
+                        <span class="add-basket__label">В корзину</span>
+                    </button>
+                <?php endif; ?>
             <?php endif; ?>
             <?php if ($showOneClick): ?>
                 <div class="buy-one-click-react" data-product-id="<?= $product_id; ?>"></div>

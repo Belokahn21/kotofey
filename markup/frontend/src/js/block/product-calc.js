@@ -145,7 +145,7 @@ document.querySelectorAll('.js-product-calc').forEach((callbackElement) => {
         let changeButtonLabel = (form) => {
             let button = form.querySelector('.js-add-basket');
             if (button) {
-                toggleText(button, 'Добавлено');
+                toggleText(button, 'В корзине');
                 toggleIcon(button);
             }
         };
