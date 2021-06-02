@@ -2,6 +2,7 @@
 
 namespace app\modules\media\models\entity;
 
+use mohorev\file\UploadBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Json;
 
@@ -28,8 +29,6 @@ class Media extends \yii\db\ActiveRecord
     const MEDIA_TYPE_VIDEO = 'video';
     const MEDIA_TYPE_MUSIC = 'music';
 
-    public $file;
-
     public static function tableName()
     {
         return 'media';
@@ -44,14 +43,22 @@ class Media extends \yii\db\ActiveRecord
 
             [['name', 'path', 'location', 'type'], 'string', 'max' => 255],
 
-            ['file', 'file', 'extensions' => \Yii::$app->params['files']['extensions']]
+            ['path', 'file', 'extensions' => \Yii::$app->params['files']['extensions']]
+//            ['file', 'file', 'extensions' => \Yii::$app->params['files']['extensions'], 'skipOnEmpty' => false]
         ];
     }
 
     public function behaviors()
     {
         return [
-            TimestampBehavior::class
+            TimestampBehavior::class,
+            [
+                'class' => UploadBehavior::class,
+                'attribute' => 'path',
+//                'scenarios' => ['default'],
+                'path' => '@webroot/d/',
+                'url' => '@web/d/',
+            ],
         ];
     }
 

@@ -4277,8 +4277,15 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmitForm(event) {
       event.preventDefault();
       var form = event.target;
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post((_config__WEBPACK_IMPORTED_MODULE_2___default().restMediaUpload), {
-        body: new FormData(form)
+      var data = new FormData(form);
+      var input = form.querySelector('input[type="file"]');
+
+      if (input) {
+        data.append('path', input.files[0]);
+      }
+
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post((_config__WEBPACK_IMPORTED_MODULE_2___default().restMedia), {
+        body: data
       }).then(function (data) {
         console.log(data);
       });
@@ -4288,20 +4295,41 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         method: "POST",
-        onSubmit: this.handleSubmitForm.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        onSubmit: this.handleSubmitForm.bind(this),
+        encType: "multipart/form-data"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        htmlFor: "fileUpload"
+      }, "\u0424\u0430\u0439\u043B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "file",
-        name: "file"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "name",
-        name: "text"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        name: "text"
+        name: "path",
+        className: "form-control-file",
+        id: "fileUpload"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        htmlFor: "nameFile"
+      }, "\u0418\u043C\u044F \u0444\u0430\u0439\u043B\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        name: "name",
+        className: "form-control",
+        id: "nameFile",
+        "aria-describedby": "emailHelp",
+        placeholder: "\u0418\u043C\u044F \u0444\u0430\u0439\u043B\u0430"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "form-group"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        htmlFor: "selectLocation"
+      }, "Example select"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        name: "location",
+        className: "form-control",
+        id: "selectLocation"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0441\u0442\u043E \u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: "cdn"
       }, "CDN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
         value: "server"
-      }, "\u0421\u0435\u0440\u0432\u0435\u0440")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, "\u0421\u0435\u0440\u0432\u0435\u0440"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "btn-main"
       }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"));
