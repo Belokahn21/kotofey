@@ -21,6 +21,12 @@ class MediaBrowserForm extends React.Component {
     render() {
         return <form method="POST" onSubmit={this.handleSubmitForm.bind(this)}>
             <input type="file" name="file"/>
+            <input type="name" name="text"/>
+            <select name="text">
+                <option>Выбрать место хранения</option>
+                <option value="cdn">CDN</option>
+                <option value="server">Сервер</option>
+            </select>
             <button type="submit" className="btn-main">Загрузить</button>
         </form>
     }

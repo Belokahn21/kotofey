@@ -4277,7 +4277,7 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmitForm(event) {
       event.preventDefault();
       var form = event.target;
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post((_config__WEBPACK_IMPORTED_MODULE_2___default().restMedia), {
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post((_config__WEBPACK_IMPORTED_MODULE_2___default().restMediaUpload), {
         body: new FormData(form)
       }).then(function (data) {
         console.log(data);
@@ -4292,7 +4292,16 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "file",
         name: "file"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "name",
+        name: "text"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        name: "text"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0441\u0442\u043E \u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "cdn"
+      }, "CDN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+        value: "server"
+      }, "\u0421\u0435\u0440\u0432\u0435\u0440")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "btn-main"
       }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"));
@@ -5841,6 +5850,7 @@ module.exports = {
   restOrderCustomer: url + '/backend/api/order/customer/',
   restCdn: url + '/backend/api/cdn/',
   restMedia: url + '/backend/api/media/',
+  restMediaUpload: url + '/backend/api/media/upload/',
   restCatalog: url + '/backend/api/catalog/',
   restPropertiesProductValues: url + '/backend/api/catalog/properties-product-values/',
   restStatistic: url + '/backend/api/statistic/',

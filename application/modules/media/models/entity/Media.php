@@ -28,6 +28,8 @@ class Media extends \yii\db\ActiveRecord
     const MEDIA_TYPE_VIDEO = 'video';
     const MEDIA_TYPE_MUSIC = 'music';
 
+    public $file;
+
     public static function tableName()
     {
         return 'media';
@@ -41,6 +43,8 @@ class Media extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'integer'],
 
             [['name', 'path', 'location', 'type'], 'string', 'max' => 255],
+
+            ['file', 'file', 'extensions' => \Yii::$app->params['files']['extensions']]
         ];
     }
 
