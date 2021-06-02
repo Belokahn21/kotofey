@@ -3177,7 +3177,7 @@ var Cdn = /*#__PURE__*/function (_React$Component) {
     value: function loadResources() {
       var _this2 = this;
 
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all((_config__WEBPACK_IMPORTED_MODULE_3___default().restMeida)).then(function (data) {
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all((_config__WEBPACK_IMPORTED_MODULE_3___default().restMedia)).then(function (data) {
         _this2.setState({
           resources: data
         });
@@ -3987,9 +3987,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
 /* harmony import */ var _MediaCard__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MediaCard */ "./src/js/react/components/MediaBrowser/MediaCard.js");
 /* harmony import */ var _MediaInput__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./MediaInput */ "./src/js/react/components/MediaBrowser/MediaInput.js");
+/* harmony import */ var _MediaBrowserForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./MediaBrowserForm */ "./src/js/react/components/MediaBrowser/MediaBrowserForm.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
@@ -4032,6 +4033,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var MediaBrowser = /*#__PURE__*/function (_React$Component) {
   _inherits(MediaBrowser, _React$Component);
 
@@ -4045,6 +4047,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       show: false,
+      show_new_media: false,
       inputs: [],
       media: []
     };
@@ -4067,7 +4070,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
     value: function loadMedia() {
       var _this2 = this;
 
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all((_config__WEBPACK_IMPORTED_MODULE_3___default().restMeida)).then(function (data) {
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all((_config__WEBPACK_IMPORTED_MODULE_3___default().restMedia) + '?sort=-id').then(function (data) {
         _this2.setState({
           media: data
         });
@@ -4094,14 +4097,31 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "setShowNewMedia",
+    value: function setShowNewMedia(show) {
+      this.setState({
+        show_new_media: show
+      });
+    }
+  }, {
     key: "handleClose",
     value: function handleClose() {
       this.setShow(false);
     }
   }, {
+    key: "handleCloseNewMedia",
+    value: function handleCloseNewMedia() {
+      this.setShowNewMedia(false);
+    }
+  }, {
     key: "handleShow",
     value: function handleShow() {
       this.setShow(true);
+    }
+  }, {
+    key: "handleShowNewMedia",
+    value: function handleShowNewMedia() {
+      this.setShowNewMedia(true);
     }
   }, {
     key: "handleSelectImage",
@@ -4139,7 +4159,8 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
       var _this$state = this.state,
           show = _this$state.show,
           media = _this$state.media,
-          inputs = _this$state.inputs;
+          inputs = _this$state.inputs,
+          show_new_media = _this$state.show_new_media;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser"
       }, inputs.map(function (el, i) {
@@ -4156,13 +4177,17 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
         type: "button",
         onClick: this.handleShow.bind(this),
         className: "btn-main"
-      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
+      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
         size: "lg",
         show: show,
         onHide: this.handleClose.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Header, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Title, null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0434\u0438\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Title, null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0434\u0438\u0430", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        onClick: this.handleShowNewMedia.bind(this),
+        className: "btn-main"
+      }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser"
       }, media.map(function (el, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -4170,7 +4195,13 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
           key: i,
           element: el
         });
-      })))));
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default, {
+        size: "lg",
+        show: show_new_media,
+        onHide: this.handleCloseNewMedia.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Header, {
+        closeButton: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Title, null, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u043C\u0435\u0434\u0438\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaBrowserForm__WEBPACK_IMPORTED_MODULE_6__.default, null))));
     }
   }]);
 
@@ -4186,6 +4217,92 @@ if (elements) {
     }), el);
   });
 }
+
+/***/ }),
+
+/***/ "./src/js/react/components/MediaBrowser/MediaBrowserForm.js":
+/*!******************************************************************!*\
+  !*** ./src/js/react/components/MediaBrowser/MediaBrowserForm.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
+  _inherits(MediaBrowserForm, _React$Component);
+
+  var _super = _createSuper(MediaBrowserForm);
+
+  function MediaBrowserForm(props) {
+    _classCallCheck(this, MediaBrowserForm);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(MediaBrowserForm, [{
+    key: "handleSubmitForm",
+    value: function handleSubmitForm(event) {
+      event.preventDefault();
+      var form = event.target;
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post((_config__WEBPACK_IMPORTED_MODULE_2___default().restMedia), {
+        body: new FormData(form)
+      }).then(function (data) {
+        console.log(data);
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        method: "POST",
+        onSubmit: this.handleSubmitForm.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "file",
+        name: "file"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "submit",
+        className: "btn-main"
+      }, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C"));
+    }
+  }]);
+
+  return MediaBrowserForm;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MediaBrowserForm);
 
 /***/ }),
 
@@ -5723,7 +5840,7 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url 
 module.exports = {
   restOrderCustomer: url + '/backend/api/order/customer/',
   restCdn: url + '/backend/api/cdn/',
-  restMeida: url + '/backend/api/media/',
+  restMedia: url + '/backend/api/media/',
   restCatalog: url + '/backend/api/catalog/',
   restPropertiesProductValues: url + '/backend/api/catalog/properties-product-values/',
   restStatistic: url + '/backend/api/statistic/',

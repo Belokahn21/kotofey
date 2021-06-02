@@ -5,12 +5,14 @@ import config from "../../config";
 import {Modal} from "react-bootstrap";
 import MediaCard from "./MediaCard";
 import MediaInput from "./MediaInput";
+import MediaBrowserForm from "./MediaBrowserForm";
 
 class MediaBrowser extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             show: false,
+            show_new_media: false,
             inputs: [],
             media: []
         };
@@ -26,7 +28,7 @@ class MediaBrowser extends React.Component {
     }
 
     loadMedia() {
-        RestRequest.all(config.restMeida).then(data => {
+        RestRequest.all(config.restMedia + '?sort=-id').then(data => {
             this.setState({
                 media: data
             })
@@ -48,12 +50,24 @@ class MediaBrowser extends React.Component {
         this.setState({show: show});
     }
 
+    setShowNewMedia(show) {
+        this.setState({show_new_media: show});
+    }
+
     handleClose() {
         this.setShow(false);
     }
 
+    handleCloseNewMedia() {
+        this.setShowNewMedia(false);
+    }
+
     handleShow() {
         this.setShow(true);
+    }
+
+    handleShowNewMedia() {
+        this.setShowNewMedia(true);
     }
 
     handleSelectImage(mediaElement, e) {
@@ -87,7 +101,7 @@ class MediaBrowser extends React.Component {
     }
 
     render() {
-        const {show, media, inputs} = this.state;
+        const {show, media, inputs, show_new_media} = this.state;
         return (
             <div>
                 <div className="media-browser">
@@ -102,7 +116,11 @@ class MediaBrowser extends React.Component {
 
                 <Modal size="lg" show={show} onHide={this.handleClose.bind(this)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Выбрать медиа</Modal.Title>
+                        <Modal.Title>
+                            Выбрать медиа
+
+                            <button type="button" onClick={this.handleShowNewMedia.bind(this)} className="btn-main">Добавить</button>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="media-browser">
@@ -110,6 +128,17 @@ class MediaBrowser extends React.Component {
                                 return <MediaCard handleSelectImage={this.handleSelectImage.bind(this)} key={i} element={el}/>
                             })}
                         </div>
+                    </Modal.Body>
+                </Modal>
+
+                <Modal size="lg" show={show_new_media} onHide={this.handleCloseNewMedia.bind(this)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>
+                            Загрузить новое медиа
+                        </Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <MediaBrowserForm/>
                     </Modal.Body>
                 </Modal>
             </div>
