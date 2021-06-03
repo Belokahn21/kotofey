@@ -44,7 +44,6 @@ class Media extends \yii\db\ActiveRecord
             [['name', 'path', 'location', 'type'], 'string', 'max' => 255],
 
             ['path', 'file', 'extensions' => \Yii::$app->params['files']['extensions']]
-//            ['file', 'file', 'extensions' => \Yii::$app->params['files']['extensions'], 'skipOnEmpty' => false]
         ];
     }
 
@@ -56,8 +55,8 @@ class Media extends \yii\db\ActiveRecord
                 'class' => UploadBehavior::class,
                 'attribute' => 'path',
 //                'scenarios' => ['default'],
-                'path' => '@webroot/d/',
-                'url' => '@web/d/',
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/',
             ],
         ];
     }
