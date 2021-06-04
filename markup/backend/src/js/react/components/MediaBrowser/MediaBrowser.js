@@ -22,7 +22,7 @@ class MediaBrowser extends React.Component {
 
         if (props.config) this.config = JSON.parse(props.config);
 
-        if (this.config.values !== undefined && this.config.values.length > 0) {
+        if (this.config.values !== null && this.config.values.length > 0) {
             this.loadInputs(this.config.values);
         }
     }
@@ -32,6 +32,16 @@ class MediaBrowser extends React.Component {
             this.setState({
                 media: data
             })
+        });
+    }
+
+    addMedia(media_row) {
+        let {media} = this.state;
+
+        media.unshift(media_row);
+
+        this.setState({
+            media: media
         });
     }
 
@@ -102,13 +112,14 @@ class MediaBrowser extends React.Component {
 
     render() {
         const {show, media, inputs, show_new_media} = this.state;
+        console.log(this.config);
         return (
             <div>
                 <div className="media-browser">
                     {inputs.map((el, i) => {
                         return <>
                             <MediaCard key={i} element={el} handleRemoveImage={this.handleRemoveImage.bind(this)}/>
-                            <MediaInput name={this.config.model + this.config.attribute} element={el} key={i}/>
+                            <MediaInput name={this.config.model + "[" + this.config.attribute + "]"} element={el} key={i}/>
                         </>
                     })}
                 </div>
@@ -138,7 +149,7 @@ class MediaBrowser extends React.Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <MediaBrowserForm/>
+                        <MediaBrowserForm addMedia={this.addMedia.bind(this)}/>
                     </Modal.Body>
                 </Modal>
             </div>

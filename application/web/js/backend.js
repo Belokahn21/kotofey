@@ -4058,7 +4058,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
 
     if (props.config) _this.config = JSON.parse(props.config);
 
-    if (_this.config.values !== undefined && _this.config.values.length > 0) {
+    if (_this.config.values !== null && _this.config.values.length > 0) {
       _this.loadInputs(_this.config.values);
     }
 
@@ -4074,6 +4074,15 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
         _this2.setState({
           media: data
         });
+      });
+    }
+  }, {
+    key: "addMedia",
+    value: function addMedia(media_row) {
+      var media = this.state.media;
+      media.unshift(media_row);
+      this.setState({
+        media: media
       });
     }
   }, {
@@ -4161,6 +4170,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
           media = _this$state.media,
           inputs = _this$state.inputs,
           show_new_media = _this$state.show_new_media;
+      console.log(this.config);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser"
       }, inputs.map(function (el, i) {
@@ -4169,7 +4179,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
           element: el,
           handleRemoveImage: _this4.handleRemoveImage.bind(_this4)
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaInput__WEBPACK_IMPORTED_MODULE_5__.default, {
-          name: _this4.config.model + _this4.config.attribute,
+          name: _this4.config.model + "[" + _this4.config.attribute + "]",
           element: el,
           key: i
         }));
@@ -4201,7 +4211,9 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
         onHide: this.handleCloseNewMedia.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Title, null, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u043C\u0435\u0434\u0438\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaBrowserForm__WEBPACK_IMPORTED_MODULE_6__.default, null))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Title, null, "\u0417\u0430\u0433\u0440\u0443\u0437\u0438\u0442\u044C \u043D\u043E\u0432\u043E\u0435 \u043C\u0435\u0434\u0438\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaBrowserForm__WEBPACK_IMPORTED_MODULE_6__.default, {
+        addMedia: this.addMedia.bind(this)
+      }))));
     }
   }]);
 
@@ -4278,16 +4290,12 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
       var form = event.target;
       var data = new FormData(form);
-      var input = form.querySelector('input[type="file"]');
-
-      if (input) {
-        data.append('path', input.files[0]);
-      }
-
+      var addMedia = this.props.addMedia;
       _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.post((_config__WEBPACK_IMPORTED_MODULE_2___default().restMedia), {
         body: data
       }).then(function (data) {
-        console.log(data);
+        addMedia(data);
+        form.reset();
       });
     }
   }, {
@@ -4303,7 +4311,7 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
         htmlFor: "fileUpload"
       }, "\u0424\u0430\u0439\u043B"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "file",
-        name: "path",
+        name: "Media[path]",
         className: "form-control-file",
         id: "fileUpload"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -4312,7 +4320,7 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
         htmlFor: "nameFile"
       }, "\u0418\u043C\u044F \u0444\u0430\u0439\u043B\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
-        name: "name",
+        name: "Media[name]",
         className: "form-control",
         id: "nameFile",
         "aria-describedby": "emailHelp",
@@ -4321,8 +4329,8 @@ var MediaBrowserForm = /*#__PURE__*/function (_React$Component) {
         className: "form-group"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         htmlFor: "selectLocation"
-      }, "Example select"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
-        name: "location",
+      }, "\u041C\u0435\u0441\u0442\u043E \u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        name: "Media[location]",
         className: "form-control",
         id: "selectLocation"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", null, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C \u043C\u0435\u0441\u0442\u043E \u0445\u0440\u0430\u043D\u0435\u043D\u0438\u044F"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
@@ -4396,10 +4404,12 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           element = _this$props.element,
           handleSelectImage = _this$props.handleSelectImage,
-          handleRemoveImage = _this$props.handleRemoveImage;
+          handleRemoveImage = _this$props.handleRemoveImage,
+          key = _this$props.key;
       var elementCdn = JSON.parse(element.json_cdn_data);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "media-browser-card"
+        className: "media-browser-card",
+        key: key
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "media-browser-card__image",
         src: elementCdn.secure_url

@@ -119,9 +119,6 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                     <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
                 </div>
                 <div class="form-element">
-                    <?= $form->field($model, 'is_ali')->radioList(["Нет", "Да"]); ?>
-                </div>
-                <div class="form-element">
                     <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map(Stocks::find()->all(), 'id', 'name')) ?>
                 </div>
                 <div class="form-element">
@@ -158,9 +155,11 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <?= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
-                    'dopAttr' => 'media_id'
-                ]); ?>
+<!--                --><?//= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
+//                    'dopAttr' => 'media_id'
+//                ]); ?>
+
+                <?= $form->field($model, 'media_id')->widget(MediaBrowserWidget::className()); ?>
             </div>
             <div class="col-sm-6">
                 <div class="form-image more">
@@ -253,7 +252,8 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                         'values' => ArrayHelper::getColumn(PropertiesProductValues::findAll([
                                             'product_id' => $model->id,
                                             'property_id' => $property->id
-                                        ]), 'id')
+                                        ]), 'id'),
+                                        'is_multiple' => true
                                     ])->label($property->name); ?>
                                 <?php else: ?>
                                     <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>

@@ -11,16 +11,14 @@ class MediaBrowserForm extends React.Component {
         event.preventDefault();
         let form = event.target;
         let data = new FormData(form);
-        let input = form.querySelector('input[type="file"]');
+        let {addMedia} = this.props;
 
-        if (input) {
-            data.append('path', input.files[0]);
-        }
 
         RestRequest.post(config.restMedia, {
             body: data
         }).then(data => {
-            console.log(data);
+            addMedia(data);
+            form.reset();
         })
     }
 
@@ -29,18 +27,21 @@ class MediaBrowserForm extends React.Component {
 
             <div className="form-group">
                 <label htmlFor="fileUpload">Файл</label>
-                <input type="file" name="path" className="form-control-file" id="fileUpload"/>
+                {/*<input type="file" name="path" className="form-control-file" id="fileUpload"/>*/}
+                <input type="file" name="Media[path]" className="form-control-file" id="fileUpload"/>
             </div>
 
             <div className="form-group">
                 <label htmlFor="nameFile">Имя файла</label>
-                <input type="text" name="name" className="form-control" id="nameFile" aria-describedby="emailHelp" placeholder="Имя файла"/>
+                {/*<input type="text" name="name" className="form-control" id="nameFile" aria-describedby="emailHelp" placeholder="Имя файла"/>*/}
+                <input type="text" name="Media[name]" className="form-control" id="nameFile" aria-describedby="emailHelp" placeholder="Имя файла"/>
             </div>
 
 
             <div className="form-group">
-                <label htmlFor="selectLocation">Example select</label>
-                <select name="location" className="form-control" id="selectLocation">
+                <label htmlFor="selectLocation">Место хранения</label>
+                {/*<select name="location" className="form-control" id="selectLocation">*/}
+                <select name="Media[location]" className="form-control" id="selectLocation">
                     <option>Выбрать место хранения</option>
                     <option value="cdn">CDN</option>
                     <option value="server">Сервер</option>

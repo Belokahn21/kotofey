@@ -75,8 +75,8 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['is_ali', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['is_ali', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price'];
 
         return $parent;
@@ -87,7 +87,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'is_ali'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id'], 'integer'],
 
             [['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
 
@@ -142,6 +142,7 @@ class Product extends \yii\db\ActiveRecord
             'status_id' => 'Статус товара',
             'barcode' => 'Штрих-код',
             'is_ali' => 'Размещается на Aliexpress',
+            'media_id' => 'Изображение',
         ];
     }
 
@@ -183,32 +184,32 @@ class Product extends \yii\db\ActiveRecord
                         return false;
                     }
 
-                    foreach ($this->properties as $propertyId => $value) {
-                        if (empty($value)) {
-                            continue;
-                        }
-                        //save multiple property
-                        if (is_array($value) && count($value) > 0) {
-                            foreach ($value as $select_variant) {
-                                $propertyValues = new PropertiesProductValues();
-                                $propertyValues->product_id = $this->id;
-                                $propertyValues->property_id = $propertyId;
-                                $propertyValues->value = $select_variant;
-                                if ($propertyValues->save() === false) {
-                                    return false;
-                                }
-                            }
-                        } else {
-                            $propertyValues = new PropertiesProductValues();
-                            $propertyValues->product_id = $this->id;
-                            $propertyValues->property_id = $propertyId;
-                            $propertyValues->value = $value;
-                            if ($propertyValues->save() === false) {
-                                $transaction->rollBack();
-                                return false;
-                            }
-                        }
-                    }
+//                    foreach ($this->properties as $propertyId => $value) {
+//                        if (empty($value)) {
+//                            continue;
+//                        }
+//                        //save multiple property
+//                        if (is_array($value) && count($value) > 0) {
+//                            foreach ($value as $select_variant) {
+//                                $propertyValues = new PropertiesProductValues();
+//                                $propertyValues->product_id = $this->id;
+//                                $propertyValues->property_id = $propertyId;
+//                                $propertyValues->value = $select_variant;
+//                                if ($propertyValues->save() === false) {
+//                                    return false;
+//                                }
+//                            }
+//                        } else {
+//                            $propertyValues = new PropertiesProductValues();
+//                            $propertyValues->product_id = $this->id;
+//                            $propertyValues->property_id = $propertyId;
+//                            $propertyValues->value = $value;
+//                            if ($propertyValues->save() === false) {
+//                                $transaction->rollBack();
+//                                return false;
+//                            }
+//                        }
+//                    }
 
 
                     if ($this->is_product_order == true) {

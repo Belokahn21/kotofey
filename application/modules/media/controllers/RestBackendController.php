@@ -2,9 +2,7 @@
 
 namespace app\modules\media\controllers;
 
-use yii\db\Exception;
 use yii\rest\ActiveController;
-use yii\web\UploadedFile;
 
 class RestBackendController extends ActiveController
 {
@@ -32,9 +30,9 @@ class RestBackendController extends ActiveController
     {
         $model = new $this->modelClass();
 
-        if (!$model->load()) throw new \Exception('Данные в модель не были загружен');
+        if (!$model->load(\Yii::$app->request->post())) throw new \Exception('Данные в модель не были загружен');
 
-        if (!$model->validate() || !$model->save()) return new \Exception($model->getErrors());
+        if (!$model->validate() || !$model->save()) return $model->getErrors();
 
         return $model;
     }

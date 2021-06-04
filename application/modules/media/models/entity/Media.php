@@ -3,6 +3,7 @@
 namespace app\modules\media\models\entity;
 
 use app\modules\media\components\behaviors\ImageUploadMinify;
+use app\modules\media\components\behaviors\MediaFileUpload;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Json;
@@ -42,9 +43,9 @@ class Media extends \yii\db\ActiveRecord
 
             [['created_at', 'updated_at'], 'integer'],
 
-            [['name', 'path', 'location', 'type'], 'string', 'max' => 255],
+            [['name', 'location', 'type'], 'string', 'max' => 255],
 
-            ['path', 'file', 'extensions' => \Yii::$app->params['files']['extensions']]
+            ['path', 'file', 'extensions' => \Yii::$app->params['files']['extensions'], 'skipOnEmpty' => false]
         ];
     }
 
@@ -52,13 +53,13 @@ class Media extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::class,
-//            [
-//                'class' => ImageUploadMinify::class,
-//                'attribute' => 'path',
-//                'scenarios' => ['default'],
-//                'path' => '@webroot/upload/',
-//                'url' => '@web/upload/'
-//            ],
+            [
+                'class' => MediaFileUpload::class,
+                'attribute' => 'path',
+                'scenarios' => ['default'],
+                'path' => '@webroot/upload/',
+                'url' => '@web/upload/'
+            ],
         ];
     }
 
@@ -67,7 +68,7 @@ class Media extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Имя файла',
-            'path' => 'Путь то записи',
+            'path' => 'Путь до файла',
             'location' => 'Место хранения',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
