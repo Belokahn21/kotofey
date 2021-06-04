@@ -5,9 +5,7 @@ namespace app\modules\catalog\widgets\CatalogSliders\DiscountItems;
 
 use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
-use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
@@ -44,31 +42,31 @@ class DiscountItemsWidget extends Widget
         ]);
     }
 
-    public function getBrandProperty($product_id)
-    {
-        $cache = \Yii::$app->cache;
-        $ProductPropertiesValues = $cache->getOrSet('brands-props-ProductPropertiesValues', function () use ($product_id) {
-            return SaveProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 1])->all();
-        }, $this->cacheTime);
-
-        $InformerValues = $cache->getOrSet('brands-inf-ProductPropertiesValues', function () use ($ProductPropertiesValues) {
-            return SaveInformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
-        }, $this->cacheTime);
-
-        return $InformerValues;
-    }
-
-    public function getDiscountProperty($product_id)
-    {
-        $cache = \Yii::$app->cache;
-        $ProductPropertiesValues = $cache->getOrSet('discount-props-ProductPropertiesValues', function () use ($product_id) {
-            return SaveProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 11])->all();
-        }, $this->cacheTime);
-
-        $InformerValues = $cache->getOrSet('discount-inf-ProductPropertiesValues', function () use ($ProductPropertiesValues) {
-            return SaveInformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
-        }, $this->cacheTime);
-
-        return $InformerValues;
-    }
+//    public function getBrandProperty($product_id)
+//    {
+//        $cache = \Yii::$app->cache;
+//        $ProductPropertiesValues = $cache->getOrSet('brands-props-ProductPropertiesValues', function () use ($product_id) {
+//            return SaveProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 1])->all();
+//        }, $this->cacheTime);
+//
+//        $InformerValues = $cache->getOrSet('brands-inf-ProductPropertiesValues', function () use ($ProductPropertiesValues) {
+//            return SaveInformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
+//        }, $this->cacheTime);
+//
+//        return $InformerValues;
+//    }
+//
+//    public function getDiscountProperty($product_id)
+//    {
+//        $cache = \Yii::$app->cache;
+//        $ProductPropertiesValues = $cache->getOrSet('discount-props-ProductPropertiesValues', function () use ($product_id) {
+//            return SaveProductPropertiesValues::find()->select(['value'])->where(['product_id' => $product_id, 'property_id' => 11])->all();
+//        }, $this->cacheTime);
+//
+//        $InformerValues = $cache->getOrSet('discount-inf-ProductPropertiesValues', function () use ($ProductPropertiesValues) {
+//            return SaveInformersValues::find()->select(['informer_id', 'id', 'name'])->where(['id' => ArrayHelper::getColumn($ProductPropertiesValues, 'value')])->asArray(true)->one();
+//        }, $this->cacheTime);
+//
+//        return $InformerValues;
+//    }
 }

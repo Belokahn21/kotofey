@@ -4,15 +4,8 @@ namespace app\modules\catalog\models\form;
 
 
 use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\modules\catalog\models\entity\SaveProductProperties;
-use app\modules\catalog\models\entity\SaveProductPropertiesValues;
-use app\modules\site\models\tools\Debug;
-use phpDocumentor\Reflection\DocBlock\Tags\Property;
 use yii\base\Model;
 use yii\db\ActiveQuery;
-use yii\db\ActiveRecord;
-use yii\db\Expression;
-use yii\helpers\ArrayHelper;
 
 class CatalogFilter extends Model
 {

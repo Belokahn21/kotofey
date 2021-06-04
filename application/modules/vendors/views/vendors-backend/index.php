@@ -5,11 +5,6 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\helpers\Url;
-use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\SaveInformersValues;
-use app\modules\stock\models\entity\Stocks;
-use app\modules\site_settings\models\entity\SiteSettings;
 
 /* @var \yii\web\View $this */
 

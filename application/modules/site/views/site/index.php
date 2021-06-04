@@ -1,6 +1,5 @@
 <?php
 /* @var $this yii\web\View
- * @var $providers \app\modules\catalog\models\entity\SaveInformersValues[]
  * @var $news \app\modules\news\models\entity\News[]
  */
 

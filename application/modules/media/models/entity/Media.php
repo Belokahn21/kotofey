@@ -2,6 +2,7 @@
 
 namespace app\modules\media\models\entity;
 
+use app\modules\media\components\behaviors\ImageUploadMinify;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\TimestampBehavior;
 use yii\helpers\Json;
@@ -51,13 +52,13 @@ class Media extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::class,
-            [
-                'class' => UploadBehavior::class,
-                'attribute' => 'path',
+//            [
+//                'class' => ImageUploadMinify::class,
+//                'attribute' => 'path',
 //                'scenarios' => ['default'],
-                'path' => '@webroot/upload/',
-                'url' => '@web/upload/',
-            ],
+//                'path' => '@webroot/upload/',
+//                'url' => '@web/upload/'
+//            ],
         ];
     }
 

@@ -5,8 +5,6 @@ namespace app\modules\export\controllers;
 
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\SaveProductPropertiesValues;
-use app\modules\site\models\tools\Debug;
 use yii\web\Controller;
 
 class AliexpressController extends Controller

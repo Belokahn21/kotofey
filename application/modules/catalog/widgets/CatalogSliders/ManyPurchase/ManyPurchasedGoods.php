@@ -2,12 +2,9 @@
 
 namespace app\modules\catalog\widgets\CatalogSliders\ManyPurchase;
 
-use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\SaveProductPropertiesValues;
 use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use app\modules\order\models\entity\OrdersItems;
-use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 

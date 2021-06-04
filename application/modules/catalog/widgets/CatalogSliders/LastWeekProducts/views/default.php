@@ -8,7 +8,6 @@ use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
 use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 
 /* @var $models \app\modules\catalog\models\entity\Product[]
- * @var $informersValues \app\modules\catalog\models\entity\SaveInformersValues[]
  * @var $formatArray array
  * @var $this \yii\web\View
  */

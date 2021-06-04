@@ -3,8 +3,6 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\PropertiesVariants;
-use app\modules\catalog\models\entity\SaveInformersValues;
 use app\modules\catalog\models\search\PropertiesVariantsSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;

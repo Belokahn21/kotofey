@@ -3,8 +3,6 @@
 use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\modules\catalog\models\entity\SaveInformers;
-use yii\helpers\ArrayHelper;
 
 /* @var $this \yii\web\View */
 $this->title = Title::show($model->name); ?>

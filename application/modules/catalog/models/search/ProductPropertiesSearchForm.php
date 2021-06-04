@@ -2,9 +2,7 @@
 
 namespace app\modules\catalog\models\search;
 
-use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Properties;
-use app\modules\catalog\models\entity\SaveProductProperties;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

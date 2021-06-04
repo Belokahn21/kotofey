@@ -7,7 +7,6 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
- * @var $properties \app\modules\catalog\models\entity\SaveProductProperties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  */
 

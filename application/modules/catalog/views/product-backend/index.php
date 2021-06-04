@@ -16,7 +16,7 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
- * @var $properties \app\modules\catalog\models\entity\SaveProductProperties[]
+ * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  */
 

@@ -8,7 +8,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Properties;
 
-/* @var $model \app\modules\catalog\models\entity\SaveInformersValues
+/* @var $model \app\modules\catalog\models\entity\PropertiesVariants
  * @var $this \yii\web\View
  * @var $dataProvider \yii\data\ActiveDataProvider
  * @var $searchModel \app\modules\catalog\models\search\PropertiesVariantsSearchForm

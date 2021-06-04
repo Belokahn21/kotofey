@@ -4,7 +4,6 @@ namespace app\modules\catalog\controllers;
 
 
 use app\modules\catalog\models\entity\PropertyGroup;
-use app\modules\catalog\models\entity\SaveProductProperties;
 use app\modules\catalog\models\search\ProductPropertiesSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\user\models\tool\BehaviorsRoleManager;
