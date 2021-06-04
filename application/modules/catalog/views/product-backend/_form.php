@@ -155,11 +155,23 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-<!--                --><?//= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
-//                    'dopAttr' => 'media_id'
-//                ]); ?>
+                <?= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
+                    'dopAttr' => 'media_id'
+                ]); ?>
 
-                <?= $form->field($model, 'media_id')->widget(MediaBrowserWidget::className()); ?>
+                <?php
+
+                if (Yii::$app->user->id == 1) {
+
+                    $media_params = [];
+                    if ($model->media) {
+                        $media_params = [
+                            'values' => [$model->media->id]
+                        ];
+                    }
+                    echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+                }
+                ?>
             </div>
             <div class="col-sm-6">
                 <div class="form-image more">
