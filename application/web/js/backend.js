@@ -4092,7 +4092,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
 
       for (var id in ids) {
         _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one((_config__WEBPACK_IMPORTED_MODULE_3___default().restPropertiesProductValues), ids[id], '?expand=media').then(function (data) {
-          if (data.media !== undefined) {
+          if (data.media !== null) {
             _this3.fillInputs(data.media);
           }
         });
@@ -4170,18 +4170,23 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
           media = _this$state.media,
           inputs = _this$state.inputs,
           show_new_media = _this$state.show_new_media;
-      console.log(this.config);
+      var input_name = this.config.model + this.config.attribute;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser"
-      }, inputs.map(function (el, i) {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "hidden",
+        name: input_name
+      }), inputs.map(function (el, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
           key: i,
+          uniq: i,
           element: el,
           handleRemoveImage: _this4.handleRemoveImage.bind(_this4)
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaInput__WEBPACK_IMPORTED_MODULE_5__.default, {
-          name: _this4.config.model + "[" + _this4.config.attribute + "]",
+          name: input_name,
           element: el,
-          key: i
+          key: i,
+          uniq: i
         }));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
@@ -4202,6 +4207,7 @@ var MediaBrowser = /*#__PURE__*/function (_React$Component) {
       }, media.map(function (el, i) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCard__WEBPACK_IMPORTED_MODULE_4__.default, {
           handleSelectImage: _this4.handleSelectImage.bind(_this4),
+          uniq: i,
           key: i,
           element: el
         });
@@ -4405,11 +4411,16 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
           element = _this$props.element,
           handleSelectImage = _this$props.handleSelectImage,
           handleRemoveImage = _this$props.handleRemoveImage,
-          key = _this$props.key;
+          uniq = _this$props.uniq;
+
+      if (!element) {
+        return false;
+      }
+
       var elementCdn = JSON.parse(element.json_cdn_data);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser-card",
-        key: key
+        key: uniq
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "media-browser-card__image",
         src: elementCdn.secure_url
@@ -4485,6 +4496,7 @@ var MediaInput = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           name = _this$props.name,
           element = _this$props.element;
+      if (!element) return false;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "hidden",
         value: element.id,

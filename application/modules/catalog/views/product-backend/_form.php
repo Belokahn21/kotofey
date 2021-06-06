@@ -30,6 +30,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 <nav>
     <div class="nav nav-tabs" id="backendForms" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
+        <a class="nav-item nav-link" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="false">Описание</a>
         <a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo" aria-selected="false">SEO</a>
         <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-gallery" aria-selected="false">Изображения</a>
         <a class="nav-item nav-link" id="nav-additional-tab" data-toggle="tab" href="#nav-additional" role="tab" aria-controls="nav-additional" aria-selected="false">Условия доставки</a>
@@ -48,14 +49,6 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                 </div>
                 <div class="form-element">
                     <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Символьный код'])->label(false); ?>
-                </div>
-                <div class="form-element">
-                    <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-                        'editorOptions' => [
-                            'preset' => 'full',
-                            'inline' => false,
-                        ],
-                    ]); ?>
                 </div>
 
                 <div class="form-element">
@@ -128,6 +121,16 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
         </div>
 
     </div>
+    <div class="tab-pane fade" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
+        <div class="form-element">
+            <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                'editorOptions' => [
+                    'preset' => 'full',
+                    'inline' => false,
+                ],
+            ]); ?>
+        </div>
+    </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
         <div class="form-element">
             <?= $form->field($model, 'seo_keywords'); ?>
@@ -155,22 +158,22 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <?= $form->field($model, 'image')->widget(InputUploadWidget::className(), [
+                <?php echo $form->field($model, 'image')->widget(InputUploadWidget::className(), [
                     'dopAttr' => 'media_id'
                 ]); ?>
 
                 <?php
 
-                if (Yii::$app->user->id == 1) {
-
-                    $media_params = [];
-                    if ($model->media) {
-                        $media_params = [
-                            'values' => [$model->media->id]
-                        ];
-                    }
-                    echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
-                }
+//                if (Yii::$app->user->id == 1) {
+//
+//                    $media_params = [];
+//                    if ($model->media) {
+//                        $media_params = [
+////                            'values' => [$model->media_id]
+//                        ];
+//                    }
+//                    echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+//                }
                 ?>
             </div>
             <div class="col-sm-6">

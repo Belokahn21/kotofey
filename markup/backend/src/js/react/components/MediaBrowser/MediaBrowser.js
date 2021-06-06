@@ -48,7 +48,7 @@ class MediaBrowser extends React.Component {
     loadInputs(ids) {
         for (let id in ids) {
             RestRequest.one(config.restPropertiesProductValues, ids[id], '?expand=media').then(data => {
-                if (data.media !== undefined) {
+                if (data.media !== null) {
                     this.fillInputs(data.media);
                 }
             });
@@ -100,7 +100,6 @@ class MediaBrowser extends React.Component {
 
     fillInputs(mediaElement) {
         let {inputs} = this.state;
-
         inputs.push(mediaElement);
 
         inputs = [...new Set(inputs)];
@@ -112,14 +111,15 @@ class MediaBrowser extends React.Component {
 
     render() {
         const {show, media, inputs, show_new_media} = this.state;
-        console.log(this.config);
+        const input_name = this.config.model + this.config.attribute;
         return (
             <div>
                 <div className="media-browser">
+                    <input type="hidden" name={input_name}/>
                     {inputs.map((el, i) => {
                         return <>
-                            <MediaCard key={i} element={el} handleRemoveImage={this.handleRemoveImage.bind(this)}/>
-                            <MediaInput name={this.config.model + "[" + this.config.attribute + "]"} element={el} key={i}/>
+                            <MediaCard key={i} uniq={i} element={el} handleRemoveImage={this.handleRemoveImage.bind(this)}/>
+                            <MediaInput name={input_name} element={el} key={i} uniq={i}/>
                         </>
                     })}
                 </div>
@@ -136,7 +136,7 @@ class MediaBrowser extends React.Component {
                     <Modal.Body>
                         <div className="media-browser">
                             {media.map((el, i) => {
-                                return <MediaCard handleSelectImage={this.handleSelectImage.bind(this)} key={i} element={el}/>
+                                return <MediaCard handleSelectImage={this.handleSelectImage.bind(this)} uniq={i} key={i} element={el}/>
                             })}
                         </div>
                     </Modal.Body>

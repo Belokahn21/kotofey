@@ -8,6 +8,7 @@ class MediaInput extends React.Component {
 
     render() {
         const {name, element} = this.props;
+        if (!element) return false;
         return <input type="hidden" value={element.id} name={name}/>
     }
 
