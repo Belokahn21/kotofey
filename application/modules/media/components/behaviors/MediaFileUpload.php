@@ -87,21 +87,21 @@ class MediaFileUpload extends UploadBehavior
         }
     }
 
-    private function removeMediaImage()
-    {
-        if ($this->owner->media_id) {
-            $media = Media::findOne($this->owner->media_id);
-
-            if ($media) {
-                if ($media->location == Media::LOCATION_CDN) {
-                    if (!\Yii::$app->CDN->remove($media->cdnData['public_id'])) {
-                        return false;
-                    }
-                }
-
-                $media->delete();
-                return true;
-            }
-        }
-    }
+//    private function removeMediaImage()
+//    {
+//        if ($this->owner->media_id) {
+//            $media = Media::findOne($this->owner->media_id);
+//
+//            if ($media) {
+//                if ($media->location == Media::LOCATION_CDN) {
+//                    if (!\Yii::$app->CDN->remove($media->cdnData['public_id'])) {
+//                        return false;
+//                    }
+//                }
+//
+//                $media->delete();
+//                return true;
+//            }
+//        }
+//    }
 }

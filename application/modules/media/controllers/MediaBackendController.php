@@ -5,6 +5,7 @@ namespace app\modules\media\controllers;
 use app\modules\media\models\search\MediaSearch;
 use app\modules\site\controllers\MainBackendController;
 use yii\web\HttpException;
+use app\widgets\notification\Alert;
 
 class MediaBackendController extends MainBackendController
 {
@@ -30,7 +31,7 @@ class MediaBackendController extends MainBackendController
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException('Элемент не найден');
 
-//        if ($model->delete()) Alert::setSuccessNotify('Медиа успешно удалено');
+        if ($model->delete()) Alert::setSuccessNotify('Медиа успешно удалено');
 
         return $this->redirect(['index']);
     }
