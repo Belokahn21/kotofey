@@ -47,9 +47,9 @@ class MediaBrowser extends React.Component {
 
     loadInputs(ids) {
         for (let id in ids) {
-            RestRequest.one(config.restPropertiesProductValues, ids[id], '?expand=media').then(data => {
-                if (data.media !== null) {
-                    this.fillInputs(data.media);
+            RestRequest.one(config.restMedia, ids[id]).then(data => {
+                if (data !== null) {
+                    this.fillInputs(data);
                 }
             });
         }

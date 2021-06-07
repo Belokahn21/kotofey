@@ -158,22 +158,22 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <?php echo $form->field($model, 'image')->widget(InputUploadWidget::className(), [
+                <?php /*echo $form->field($model, 'image')->widget(InputUploadWidget::className(), [
                     'dopAttr' => 'media_id'
-                ]); ?>
+                ]); */?>
 
                 <?php
 
-//                if (Yii::$app->user->id == 1) {
-//
-//                    $media_params = [];
-//                    if ($model->media) {
-//                        $media_params = [
-////                            'values' => [$model->media_id]
-//                        ];
-//                    }
-//                    echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
-//                }
+                if (Yii::$app->user->id == 1) {
+
+                    $media_params = [];
+                    if ($model->media) {
+                        $media_params = [
+                            'values' => [$model->media_id]
+                        ];
+                    }
+                    echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+                }
                 ?>
             </div>
             <div class="col-sm-6">
@@ -264,10 +264,10 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
                                 <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
                                     <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
-                                        'values' => ArrayHelper::getColumn(PropertiesProductValues::findAll([
+                                        'values' => ArrayHelper::getColumn(ArrayHelper::getColumn(PropertiesProductValues::findAll([
                                             'product_id' => $model->id,
                                             'property_id' => $property->id
-                                        ]), 'id'),
+                                        ]), 'media'),'id'),
                                         'is_multiple' => true
                                     ])->label($property->name); ?>
                                 <?php else: ?>
