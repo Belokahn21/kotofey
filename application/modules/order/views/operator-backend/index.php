@@ -22,7 +22,7 @@ $this->title = Title::show('Кабинет оператора');
         Прибыль за месяц:
         <?php
         $result_summ = 0;
-        foreach ($orderQuery->where(['is_paid' => true, 'is_close' => true])->all() as $order) {
+        foreach ($orderQuery->where(['is_paid' => true, 'is_close' => true, 'manager_id' => $user->id])->all() as $order) {
             $result_summ += OrderHelper::orderSummary($order);
         }
 
