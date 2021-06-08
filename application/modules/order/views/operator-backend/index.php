@@ -1,7 +1,10 @@
 <?php
 
 use app\modules\seo\models\tools\Title;
+use app\modules\site\models\tools\Price;
+use app\modules\order\models\entity\Order;
 use app\modules\user\models\helpers\UserHelper;
+use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\OperatorAdmin\OperatorAdminWidget;
 
 /* @var $this \yii\web\View
@@ -19,11 +22,11 @@ $this->title = Title::show('Кабинет оператора');
         Прибыль за месяц:
         <?php
         $result_summ = 0;
-        foreach (\app\modules\order\models\entity\Order::find()->where(['manager_id' => $user->id, 'is_paid' => true, 'is_close' => true])->all() as $order) {
-            $result_summ += \app\modules\order\models\helpers\OrderHelper::orderSummary($order);
+        foreach (Order::find()->where(['manager_id' => $user->id, 'is_paid' => true, 'is_close' => true])->all() as $order) {
+            $result_summ += OrderHelper::orderSummary($order);
         }
 
-        echo \app\modules\site\models\tools\Price::format($result_summ) . '/' . \app\modules\site\models\tools\Price::format(round($result_summ * 0.1));
+        echo Price::format($result_summ) . '/' . Price::format(round($result_summ * 0.1));
         ?>
     </li>
 </ul>
