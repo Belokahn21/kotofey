@@ -26,7 +26,7 @@ $this->title = Title::show('Кабинет оператора');
             $result_summ += OrderHelper::orderSummary($order);
         }
 
-        echo Price::format($result_summ) . '/<div class="green">' . Price::format(round($result_summ * 0.1)) . '</div>'
+        echo Price::format($result_summ) . '/<span class="green">' . Price::format(round($result_summ * 0.1)) . '</span>'
         ?>
     </li>
 </ul>
