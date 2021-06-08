@@ -37,6 +37,7 @@ $this->beginPage() ?>
     <?php if (YII_ENV == 'prod'): ?>
         <?php echo $this->render('include/head/yandex/webmaster.php'); ?>
         <?php echo $this->render('include/head/google/google_metrika.php'); ?>
+        <?php echo $this->render('include/head/regmarkets.php'); ?>
     <?php endif; ?>
     <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
     <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">

@@ -1,0 +1,1 @@
+<script src="https://regmarkets.ru/js/r17.js" async type="text/javascript"></script>
