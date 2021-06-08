@@ -23,7 +23,7 @@ $this->title = Title::show('Кабинет оператора');
             $result_summ += \app\modules\order\models\helpers\OrderHelper::orderSummary($order);
         }
 
-        echo round($result_summ * 0.1);
+        echo $result_summ . '/' . round($result_summ * 0.1);
         ?>
     </li>
 </ul>
