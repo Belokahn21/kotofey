@@ -59,6 +59,9 @@ create-cache-folder:
 chmod-cache:
 	chmod 777 -R application/runtime/cache/
 
+assets:
+	mkdir application/web/assets
+
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/user/install/migrations --interactive=0

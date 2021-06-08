@@ -10,9 +10,9 @@ class OperatorBackendController extends MainBackendController
 {
     public function actionIndex()
     {
-        $user_id = \Yii::$app->request->get('user_id', \Yii::$app->user->id);
+        $user_id = \Yii::$app->request->get('manager_id', \Yii::$app->user->id);
         $modelQuery = Order::find()->where(['manager_id' => $user_id]);
-        $user = User::findOne(\Yii::$app->request->get('manager_id', $user_id));
+        $user = User::findOne($user_id);
 
         return $this->render('index', [
             'modelQuery' => $modelQuery,
