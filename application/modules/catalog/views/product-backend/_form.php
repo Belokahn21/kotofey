@@ -158,22 +158,14 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>
-                <?php /*echo $form->field($model, 'image')->widget(InputUploadWidget::className(), [
-                    'dopAttr' => 'media_id'
-                ]); */?>
-
                 <?php
-
-                if (Yii::$app->user->id == 1) {
-
-                    $media_params = [];
-                    if ($model->media) {
-                        $media_params = [
-                            'values' => [$model->media_id]
-                        ];
-                    }
-                    echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+                $media_params = [];
+                if ($model->media) {
+                    $media_params = [
+                        'values' => [$model->media_id]
+                    ];
                 }
+                echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
                 ?>
             </div>
             <div class="col-sm-6">
@@ -267,7 +259,7 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
                                         'values' => ArrayHelper::getColumn(ArrayHelper::getColumn(PropertiesProductValues::findAll([
                                             'product_id' => $model->id,
                                             'property_id' => $property->id
-                                        ]), 'media'),'id'),
+                                        ]), 'media'), 'id'),
                                         'is_multiple' => true
                                     ])->label($property->name); ?>
                                 <?php else: ?>
