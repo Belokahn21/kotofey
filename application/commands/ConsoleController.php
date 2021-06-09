@@ -3,19 +3,13 @@
 namespace app\commands;
 
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\PropertiesVariants;
-use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
-use app\modules\catalog\models\helpers\PropertiesHelper;
-use app\modules\order\models\entity\Order;
-use app\modules\promotion\models\entity\PromotionProductMechanics;
-use app\modules\site\models\tools\Debug;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
 {
-    public function actionRun($name)
+    public function actionRun($name=null)
     {
-//        //премиум класс
+        if($name==null){$name='banters';}
         $products = Product::find();
         foreach (explode(' ', $name) as $text_line) {
             $products->andFilterWhere([
@@ -26,10 +20,16 @@ class ConsoleController extends Controller
         }
         $products = $products->all();
         foreach ($products as $product) {
-            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, 20, '230')) {
-//            if (ProductPropertiesValuesHelper::removePropertyValue($product->id, 20)) {
+
+            $product->status_id = Product::STATUS_WAIT;
+            if ($product->validate() && $product->update()) {
                 echo "ok: " . $product->name . PHP_EOL;
             }
+
+//            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, 20, '230')) {
+////            if (ProductPropertiesValuesHelper::removePropertyValue($product->id, 20)) {
+//                echo "ok: " . $product->name . PHP_EOL;
+//            }
         }
     }
 
