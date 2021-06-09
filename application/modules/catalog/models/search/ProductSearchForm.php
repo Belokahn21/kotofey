@@ -6,9 +6,11 @@ namespace app\modules\catalog\models\search;
 use app\modules\catalog\models\entity\Product;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
+use yii\db\ActiveQuery;
 
 class ProductSearchForm extends Product
 {
+    public $mixed_value;
 
     public static function tableName()
     {
@@ -19,7 +21,7 @@ class ProductSearchForm extends Product
     {
         return [
             [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
-            [['name', 'article', 'code'], 'string'],
+            [['name', 'article', 'code', 'mixed_value'], 'string'],
         ];
     }
 
@@ -40,46 +42,71 @@ class ProductSearchForm extends Product
             return $dataProvider;
         }
 
-//        exit();
-//        $product_properties_values = [];
-//        if ($this->prop_sales) {
-//            $product_properties_values = ArrayHelper::getColumn(SaveProductPropertiesValues::find()->select(['product_id'])->where(['value' => $this->prop_sales, 'property_id' => 11])->all(), 'product_id');
-//        }
+        if (!empty($this->mixed_value)) {
+            $this->applySpecialFilter($query);
+        } else {
+            $query->andFilterWhere([
+                'id' => $this->id,
+                'category_id' => $this->category_id,
+                'status_id' => $this->status_id,
+                'article' => $this->article,
+                'code' => $this->code,
+                'count' => $this->count,
+                'price' => $this->price,
+                'purchase' => $this->purchase,
+                'vendor_id' => $this->vendor_id,
+            ]);
 
-//        if ($this->id) {
-//            array_push($product_properties_values, $this->id);
-//        }
+            if (!empty($this->name)) {
+                foreach (explode(' ', $this->name) as $text_line) {
+                    $query->andFilterWhere([
+                        'or',
+                        ['like', 'name', $text_line],
+                        ['like', 'feed', $text_line]
+                    ]);
+                }
+            }
+        }
+        return $dataProvider;
+    }
 
-        $query->andFilterWhere([
-            'id' => $this->id,
-            'category_id' => $this->category_id,
-            'status_id' => $this->status_id,
-            'article' => $this->article,
-            'code' => $this->code,
-            'count' => $this->count,
-            'price' => $this->price,
-            'purchase' => $this->purchase,
-            'vendor_id' => $this->vendor_id,
+    private function applySpecialFilter(ActiveQuery &$query)
+    {
+        //check article
+        $tmp_query = clone $query;
+        $tmp_query->andFilterWhere([
+            'article' => $this->mixed_value
         ]);
 
-
-//        if ($product_properties_values) {
-//            $query->andFilterWhere([
-//                'id' => $product_properties_values,
-//            ]);
-//        }
-
-        if (!empty($this->name)) {
-            foreach (explode(' ', $this->name) as $text_line) {
-                $query->andFilterWhere([
-                    'or',
-                    ['like', 'name', $text_line],
-                    ['like', 'feed', $text_line]
-                ]);
-            }
+        if ($tmp_query->count() > 0) {
+            $query->andFilterWhere([
+                'article' => $this->mixed_value
+            ]);
+            return;
         }
 
 
-        return $dataProvider;
+        //check external_code
+        $tmp_query = clone $query;
+        $tmp_query->andFilterWhere([
+            'code' => $this->mixed_value
+        ]);
+
+        if ($tmp_query->count() > 0) {
+            $query->andFilterWhere([
+                'code' => $this->mixed_value
+            ]);
+            return;
+        }
+
+
+        //check name
+        foreach (explode(' ', $this->mixed_value) as $text_line) {
+            $query->andFilterWhere([
+                'or',
+                ['like', 'name', $text_line],
+                ['like', 'feed', $text_line]
+            ]);
+        }
     }
 }

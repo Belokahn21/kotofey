@@ -8454,19 +8454,34 @@ html, body {
   .pagination li {
     width: 40px;
     height: 40px;
-    background: deepskyblue;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    margin: 5px; }
+    margin: 5px;
+    background: white;
+    border: 1px #00BFFF solid;
+    color: #00BFFF;
+    font-weight: bold;
+    transition: background-color 0.3s ease-out; }
+    .pagination li:hover {
+      background-color: #00BFFF; }
+      .pagination li:hover a {
+        color: white; }
+    .pagination li a {
+      color: #00BFFF; }
+    .pagination li.active {
+      background: #00BFFF;
+      color: white; }
+      .pagination li.active a {
+        color: white; }
   .pagination a {
     display: block;
     width: 100%;
     height: 100%;
     color: white;
     text-align: center;
-    line-height: 40px; }
+    line-height: 35px; }
 
 .month-stat {
   display: flex;
@@ -8883,6 +8898,95 @@ html, body {
       margin-bottom: 10px; }
   .order-tracking-list__item.name {
     width: 100%; }
+
+.calc-panel {
+  max-width: 100%;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  border: 1px #c6c6c6 solid;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start; }
+
+.calc-delivery-services {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start; }
+  .calc-delivery-services__label {
+    margin: 10px;
+    cursor: pointer; }
+  .calc-delivery-services__item {
+    max-width: 120px;
+    height: 80px;
+    border: 1px #C6C6C6 solid;
+    padding: 10px; }
+  .calc-delivery-services__image {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain; }
+  .calc-delivery-services__input {
+    display: none; }
+    .calc-delivery-services__input:checked ~ .calc-delivery-services__item {
+      border-color: #25D366; }
+
+.calc-products {
+  width: 50%;
+  border: 1px silver solid; }
+  .calc-products-search {
+    border-bottom: 1px solid silver; }
+    .calc-products-search__label {
+      width: 100%;
+      padding: 10px; }
+    .calc-products-search__input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 7px;
+      border: 1px silver solid;
+      font-size: 14px; }
+  .calc-products-result {
+    height: 500px;
+    overflow: scroll; }
+    .calc-products-result__label {
+      display: block;
+      border-bottom: 1px silver solid;
+      margin-top: 5px; }
+    .calc-products-result__item {
+      border: 1px solid silver;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px; }
+    .calc-products-result__name {
+      font-size: 12px; }
+    .calc-products-result__checked {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px silver solid;
+      padding: 10px;
+      text-align: center;
+      line-height: 1;
+      transition: background-color 0.3s ease-out;
+      cursor: pointer; }
+      .calc-products-result__checked i {
+        display: none; }
+    .calc-products-result__input {
+      display: none; }
+      .calc-products-result__input:checked + .calc-products-result__item {
+        border-color: #25D366; }
+        .calc-products-result__input:checked + .calc-products-result__item .calc-products-result__checked {
+          background-color: #25D366;
+          color: white; }
+          .calc-products-result__input:checked + .calc-products-result__item .calc-products-result__checked i {
+            display: block; }
+
+.calc-result {
+  width: 50%;
+  border: 1px silver solid; }
 
 /*-----------------------------------------------------------*/
 .content {

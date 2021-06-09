@@ -1,0 +1,12 @@
+.calc {
+  &-panel {
+    max-width: 100%;
+    box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+    border: 1px #c6c6c6 solid;
+    padding: 10px;
+    margin: 10px 0;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+}

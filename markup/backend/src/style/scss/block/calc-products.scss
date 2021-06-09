@@ -1,0 +1,81 @@
+.calc-products {
+  width: 50%;
+  border: 1px silver solid;
+
+  &-search {
+    border-bottom: 1px solid silver;
+
+    &__label {
+      width: 100%;
+      padding: 10px;
+    }
+
+    &__input {
+      width: 100%;
+      padding: 5px;
+      border-radius: 7px;
+      border: 1px silver solid;
+      font-size: 14px;
+    }
+  }
+
+  &-result {
+    height: 500px;
+    overflow: scroll;
+
+    &__label {
+      display: block;
+      border-bottom: 1px silver solid;
+      margin-top: 5px;
+    }
+
+    &__item {
+      border: 1px solid silver;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px;
+    }
+
+    &__name {
+      font-size: 12px;
+    }
+
+    &__checked {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px silver solid;
+      padding: 10px;
+      text-align: center;
+      line-height: 1;
+      transition: background-color 0.3s ease-out;
+      cursor: pointer;
+
+      i {
+        display: none;
+      }
+    }
+
+    &__input {
+      display: none;
+
+      &:checked {
+        & + .calc-products-result__item {
+          border-color: $whatsapp-green;
+
+          .calc-products-result__checked {
+            background-color: $whatsapp-green;
+            color: white;
+
+            i {
+              display: block;
+            }
+          }
+        }
+      }
+    }
+  }
+}

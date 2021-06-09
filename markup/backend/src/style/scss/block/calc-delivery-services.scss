@@ -1,0 +1,34 @@
+.calc-delivery-services {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  &__label {
+    margin: 10px;
+    cursor: pointer;
+  }
+
+  &__item {
+    max-width: 120px;
+    height: 80px;
+    border: 1px #C6C6C6 solid;
+    padding: 10px;
+  }
+
+  &__image {
+    max-width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  &__input {
+    display: none;
+
+    &:checked {
+      & ~ .calc-delivery-services__item {
+        border-color: $whatsapp-green;
+      }
+    }
+  }
+}

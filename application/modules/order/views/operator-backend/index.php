@@ -15,7 +15,7 @@ use app\modules\order\widgets\OperatorAdmin\OperatorAdminWidget;
 $this->title = Title::show('Кабинет оператора');
 ?>
 <?= OperatorAdminWidget::widget(); ?>
-<h1>Добро пожаловать, <?= UserHelper::getFullName($user); ?></h1>
+<h5>Добро пожаловать, <?= UserHelper::getFullName($user); ?></h5>
 <ul>
     <li>Всего обработано заказов: <?= $orderQuery->count(); ?></li>
     <li>
@@ -30,3 +30,6 @@ $this->title = Title::show('Кабинет оператора');
         ?>
     </li>
 </ul>
+
+
+<div class="operator-calculator-react"></div>
