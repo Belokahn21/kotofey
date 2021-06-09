@@ -5036,6 +5036,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CalculatorDeliveryService__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CalculatorDeliveryService */ "./src/js/react/components/OperatorCalculator/CalculatorDeliveryService.js");
 /* harmony import */ var _CalculatorProducts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CalculatorProducts */ "./src/js/react/components/OperatorCalculator/CalculatorProducts.js");
 /* harmony import */ var _CalculatorResult__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./CalculatorResult */ "./src/js/react/components/OperatorCalculator/CalculatorResult.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_6__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5057,6 +5060,8 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
 
 
 
@@ -5100,6 +5105,11 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
     value: function handleFormSubmit(e) {
       e.preventDefault();
       var form = e.target;
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_5__.default.post((_config__WEBPACK_IMPORTED_MODULE_6___default().restDeliveryCalculate), {
+        body: new FormData(form)
+      }).then(function (data) {
+        console.log(data);
+      });
     }
   }, {
     key: "handleSelectService",
@@ -6297,6 +6307,7 @@ var url = location.protocol + '//' + location.hostname;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store';
 module.exports = {
   restOrderCustomer: url + '/backend/api/order/customer/',
+  restDeliveryCalculate: url + '/backend/api/delivery/calculate/',
   restCdn: url + '/backend/api/cdn/',
   restMedia: url + '/backend/api/media/',
   restMediaUpload: url + '/backend/api/media/upload/',

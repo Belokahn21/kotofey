@@ -8967,6 +8967,7 @@ html, body {
       font-size: 14px; }
   .calc-products-result {
     height: 500px;
+    padding: 10px;
     overflow: scroll; }
     .calc-products-result__label {
       display: block;

@@ -3,6 +3,7 @@
 namespace app\modules\delivery\models\service\delivery\tariffs;
 
 use app\modules\catalog\models\helpers\PropertiesHelper;
+use app\modules\delivery\models\helper\RuPostHelper;
 
 class RuPostTariffData implements TariffDataInterface
 {
@@ -27,7 +28,7 @@ class RuPostTariffData implements TariffDataInterface
         $this->fill($data);
     }
 
-    public function fill($data)
+    public function fill(array $data)
     {
         foreach ($data as $key => $value) {
             if (isset($this->assoc[$key])) $this->{$this->assoc[$key]} = $value;
@@ -38,5 +39,9 @@ class RuPostTariffData implements TariffDataInterface
                 $this->mass += PropertiesHelper::getProductWeight($product_id);
             }
         }
+
+
+
+        if (!empty($this->mass)) $this->mass = RuPostHelper::getMass($this->mass);
     }
 }

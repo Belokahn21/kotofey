@@ -72,8 +72,13 @@ class RussianPostApi implements DeliveryApi
         ], $this->_AUTH_HEADERS);
 
         if (!array_key_exists('total-rate', $result)) {
-            throw new \Exception($result['error']);
+            throw new \Exception($result['desc']);
         }
+
+
+        Debug::p($result);
+
+        exit();
 
         return [
             'total' => $result['total-rate'],

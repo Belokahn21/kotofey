@@ -6,7 +6,7 @@ use app\modules\delivery\models\service\delivery\tariffs\services\ProvideTariff;
 use app\modules\delivery\models\service\DeliveryCalculateService;
 use yii\rest\Controller;
 
-class RestCalculateController extends Controller
+class CalculateRestBackendController extends Controller
 {
     public function behaviors()
     {
@@ -17,6 +17,11 @@ class RestCalculateController extends Controller
         ];
 
         return $behaviors;
+    }
+
+    public function actionIndex()
+    {
+        return rand();
     }
 
     public function actionCreate()
