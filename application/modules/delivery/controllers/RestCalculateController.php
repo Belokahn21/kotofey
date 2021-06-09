@@ -8,7 +8,18 @@ use yii\rest\Controller;
 
 class RestCalculateController extends Controller
 {
-    public function get()
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
+
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionCreate()
     {
         $data = \Yii::$app->request->post();
         $prov_tarif = new ProvideTariff();

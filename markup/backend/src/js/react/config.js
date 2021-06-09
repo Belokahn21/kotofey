@@ -5,6 +5,7 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
 
 module.exports = {
     restOrderCustomer: url + '/backend/api/order/customer/',
+    restDeliveryCalculate: url + '/backend/api/delivery/calculate/',
     restCdn: url + '/backend/api/cdn/',
     restMedia: url + '/backend/api/media/',
     restMediaUpload: url + '/backend/api/media/upload/',

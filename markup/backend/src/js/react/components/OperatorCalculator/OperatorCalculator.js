@@ -3,6 +3,8 @@ import ReactDom from 'react-dom';
 import CalculatorDeliveryService from "./CalculatorDeliveryService";
 import CalculatorProducts from "./CalculatorProducts";
 import CalculatorResult from "./CalculatorResult";
+import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
+import config from "../../config";
 
 class OperatorCalculator extends React.Component {
     constructor() {
@@ -18,6 +20,12 @@ class OperatorCalculator extends React.Component {
     handleFormSubmit(e) {
         e.preventDefault();
         let form = e.target;
+
+        RestRequest.post(config.restDeliveryCalculate, {
+            body: new FormData(form),
+        }).then(data => {
+            console.log(data);
+        });
     }
 
     handleSelectService(e) {
