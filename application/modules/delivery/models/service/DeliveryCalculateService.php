@@ -2,10 +2,11 @@
 
 namespace app\modules\delivery\models\service;
 
-use app\modules\delivery\models\service\delivery\CdekApi;
-use app\modules\delivery\models\service\delivery\DeliveryApi;
-use app\modules\delivery\models\service\delivery\DpdApi;
-use app\modules\delivery\models\service\delivery\RussianPostApi;
+use app\modules\delivery\models\service\delivery\api\CdekApi;
+use app\modules\delivery\models\service\delivery\api\DeliveryApi;
+use app\modules\delivery\models\service\delivery\api\DpdApi;
+use app\modules\delivery\models\service\delivery\api\RussianPostApi;
+use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 use app\modules\site\models\tools\Debug;
 
 
@@ -30,7 +31,7 @@ class DeliveryCalculateService
             case 'dpd':
                 $this->api = new DpdApi();
                 break;
-            case 'russian_post':
+            case 'ru_post':
                 $this->api = new RussianPostApi();
                 break;
             default:
@@ -48,13 +49,12 @@ class DeliveryCalculateService
         return $this->api->getNormalPhone($phone);
     }
 
-
-    public function getPriceInfo()
+    public function getPriceInfo(TariffDataInterface $tariff_data)
     {
         $total = false;
 
         try {
-            $total = $this->api->getPriceInfo();
+            $total = $this->api->getPriceInfo($tariff_data);
         } catch (\Exception $exception) {
             echo "При вычислении стоимости доставки произошла ошибка";
         }

@@ -8899,6 +8899,14 @@ html, body {
   .order-tracking-list__item.name {
     width: 100%; }
 
+.calc-form__submit {
+  width: 300px;
+  background-color: #25D366;
+  color: white;
+  font-weight: bold;
+  padding: 5px;
+  border: 0; }
+
 .calc-panel {
   max-width: 100%;
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
@@ -8908,6 +8916,18 @@ html, body {
   display: flex;
   flex-direction: row;
   align-items: flex-start; }
+
+.calc-placement {
+  display: flex;
+  flex-direction: row;
+  max-width: 50%; }
+  .calc-placement__from, .calc-placement__to {
+    width: 50%;
+    padding: 5px; }
+    .calc-placement__from input, .calc-placement__to input {
+      border: 1px solid silver;
+      width: 100%;
+      padding: 5px; }
 
 .calc-delivery-services {
   display: flex;

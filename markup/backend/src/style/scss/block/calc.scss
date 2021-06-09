@@ -1,4 +1,15 @@
 .calc {
+  &-form {
+    &__submit {
+      width: 300px;
+      background-color: $whatsapp-green;
+      color: white;
+      font-weight: bold;
+      padding: 5px;
+      border: 0;
+    }
+  }
+
   &-panel {
     max-width: 100%;
     box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);

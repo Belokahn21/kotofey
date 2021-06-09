@@ -22,9 +22,9 @@ class CleanAddressRestController extends Controller
     public function actionIndex()
     {
         $filter = \Yii::$app->request->get('filter');
+        $service = \Yii::$app->request->get('service', 'ru_post');
 
-
-        $calcService = new DeliveryCalculateService('russian_post');
+        $calcService = new DeliveryCalculateService($service);
         $normalAddress = $calcService->getNormalAddress($filter['text']);
 
 

@@ -1,0 +1,22 @@
+.calc-placement {
+  display: flex;
+  flex-direction: row;
+  max-width: 50%;
+
+  &__from, &__to {
+    width: 50%;
+    padding: 5px;
+
+    input {
+      border: 1px solid silver;
+      width: 100%;
+      padding: 5px;
+    }
+  }
+
+  &__from {
+  }
+
+  &__to {
+  }
+}

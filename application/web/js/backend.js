@@ -4806,14 +4806,20 @@ var CalculatorDeliveryService = /*#__PURE__*/function (_React$Component) {
   _createClass(CalculatorDeliveryService, [{
     key: "render",
     value: function render() {
-      var items = this.props.items;
+      var _this = this;
+
+      var _this$props = this.props,
+          items = _this$props.items,
+          handleSelectService = _this$props.handleSelectService;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-delivery-services"
-      }, items.map(function (el) {
+      }, items.map(function (el, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          key: index,
           className: "calc-delivery-services__label"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           name: "service",
+          onChange: handleSelectService.bind(_this),
           className: "calc-delivery-services__input",
           type: "radio",
           value: el.value
@@ -5064,37 +5070,73 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(OperatorCalculator);
 
   function OperatorCalculator() {
+    var _this;
+
     _classCallCheck(this, OperatorCalculator);
 
-    return _super.call(this);
+    _this = _super.call(this);
+    var img_src = '/images/tk/';
+    _this.state = {
+      editable: true,
+      services: [{
+        name: 'cdek',
+        src: "".concat(img_src, "cdek.jpg"),
+        value: 'cdek'
+      }, {
+        name: 'ru_post',
+        src: "".concat(img_src, "ru_post.png"),
+        value: 'ru_post'
+      }, {
+        name: 'dpd',
+        src: "".concat(img_src, "dpd.png"),
+        value: 'dpd'
+      }]
+    };
+    return _this;
   }
 
   _createClass(OperatorCalculator, [{
+    key: "handleFormSubmit",
+    value: function handleFormSubmit(e) {
+      e.preventDefault();
+      var form = e.target;
+    }
+  }, {
+    key: "handleSelectService",
+    value: function handleSelectService(e) {
+      this.setState({
+        editable: false
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      var img_src = '/images/tk/';
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorDeliveryService__WEBPACK_IMPORTED_MODULE_2__.default, {
-        items: [{
-          name: 'cdek',
-          src: "".concat(img_src, "cdek.jpg"),
-          value: 'cdek'
-        }, {
-          name: 'ru_post',
-          src: "".concat(img_src, "ru_post.png"),
-          value: 'ru_post'
-        }, {
-          name: 'dpd',
-          src: "".concat(img_src, "dpd.png"),
-          value: 'dpd'
-        }]
+      var _this$state = this.state,
+          services = _this$state.services,
+          editable = _this$state.editable;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "calc-form",
+        onSubmit: this.handleFormSubmit.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "calc-form__submit",
+        type: "submit"
+      }, "\u0420\u0430\u0441\u0447\u0438\u0442\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorDeliveryService__WEBPACK_IMPORTED_MODULE_2__.default, {
+        handleSelectService: this.handleSelectService.bind(this),
+        items: services
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "d-flex flex-row"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "calc-placement"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "calc-placement__from"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        readOnly: editable,
         name: "placement_from",
         placeholder: "\u041C\u0435\u0441\u0442\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "calc-placement__to"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         type: "text",
+        readOnly: editable,
         name: "placement_to",
         placeholder: "\u041C\u0435\u0441\u0442\u043E \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {

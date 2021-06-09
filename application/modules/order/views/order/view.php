@@ -4,7 +4,7 @@
  * @var $items \app\modules\order\models\entity\OrdersItems[]
  */
 
-use app\modules\delivery\ProfileTracking\ProfileTrackingWidget;
+use app\modules\delivery\ProfileTracking\widgets\ProfileTrackingWidget;
 use app\modules\acquiring\models\helpers\AcquiringHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;

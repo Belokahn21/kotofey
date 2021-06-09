@@ -1,0 +1,42 @@
+<?php
+
+namespace app\modules\delivery\models\service\delivery\tariffs;
+
+use app\modules\catalog\models\helpers\PropertiesHelper;
+
+class RuPostTariffData implements TariffDataInterface
+{
+    public $index_from;
+    public $index_to;
+    public $mail_category = 'SIMPLE';
+    public $mail_type = 'ONLINE_PARCEL';
+    public $mass;
+    public $dimension = array(
+        'width' => null,
+        'height' => null,
+        'length' => null,
+    );
+
+    private $assoc = [
+        'placement_from' => 'index_from',
+        'placement_to' => 'index_to',
+    ];
+
+    public function __construct(array $data)
+    {
+        $this->fill($data);
+    }
+
+    public function fill($data)
+    {
+        foreach ($data as $key => $value) {
+            if (isset($this->assoc[$key])) $this->{$this->assoc[$key]} = $value;
+        }
+
+        if ($data['products']) {
+            foreach ($data['products'] as $product_id) {
+                $this->mass += PropertiesHelper::getProductWeight($product_id);
+            }
+        }
+    }
+}

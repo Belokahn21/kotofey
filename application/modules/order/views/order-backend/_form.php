@@ -12,7 +12,7 @@ use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
-use app\modules\delivery\ProfileTracking\ProfileTrackingWidget;
+use app\modules\delivery\ProfileTracking\widgets\ProfileTrackingWidget;
 use app\modules\order\widgets\CustomerInput\CustomerInputWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 

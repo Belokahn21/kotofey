@@ -1,8 +1,11 @@
 <?php
 
 
-namespace app\modules\delivery\models\service\delivery;
+namespace app\modules\delivery\models\service\delivery\api;
 
+
+use app\modules\delivery\models\service\delivery\api\DeliveryApi;
+use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 
 class CdekApi implements DeliveryApi
 {
@@ -12,7 +15,7 @@ class CdekApi implements DeliveryApi
         // TODO: Implement getNormalAddress() method.
     }
 
-    public function getPriceInfo($address)
+    public function getPriceInfo(TariffDataInterface $tariff_data)
     {
         // TODO: Implement getPriceInfo() method.
     }

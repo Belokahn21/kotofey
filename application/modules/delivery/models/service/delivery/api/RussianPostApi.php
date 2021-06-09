@@ -1,9 +1,12 @@
 <?php
 
 
-namespace app\modules\delivery\models\service\delivery;
+namespace app\modules\delivery\models\service\delivery\api;
 
 
+use app\modules\delivery\models\service\delivery\api\DeliveryApi;
+use app\modules\delivery\models\service\delivery\tariffs\RuPostTariffData;
+use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 
@@ -56,19 +59,16 @@ class RussianPostApi implements DeliveryApi
         return $result;
     }
 
-    public function getPriceInfo()
+    public function getPriceInfo(TariffDataInterface $tariff_data)
     {
+        /* @var $tariff_data RuPostTariffData */
         $result = $this->sendRequest($this->_URL . self::ACTION_TARIF, [
-            "index-from" => "656000",
-            "index-to" => "644015",
-            "mail-category" => "ORDINARY",
-            "mail-type" => "ONLINE_PARCEL",
-            "mass" => '1000',
-            "dimension" => [
-                "height" => 2,
-                "length" => 5,
-                "width" => 197
-            ],
+            "index-from" => $tariff_data->index_from,
+            "index-to" => $tariff_data->index_to,
+            "mail-category" => $tariff_data->mail_category,
+            "mail-type" => $tariff_data->mail_type,
+            "mass" => $tariff_data->mass,
+            "dimension" => $tariff_data->dimension,
         ], $this->_AUTH_HEADERS);
 
         if (!array_key_exists('total-rate', $result)) {

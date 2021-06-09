@@ -7,23 +7,40 @@ import CalculatorResult from "./CalculatorResult";
 class OperatorCalculator extends React.Component {
     constructor() {
         super();
+
+        let img_src = '/images/tk/';
+        this.state = {
+            editable: true,
+            services: [{name: 'cdek', src: `${img_src}cdek.jpg`, value: 'cdek'}, {name: 'ru_post', src: `${img_src}ru_post.png`, value: 'ru_post'}, {name: 'dpd', src: `${img_src}dpd.png`, value: 'dpd'}]
+        };
+    }
+
+    handleFormSubmit(e) {
+        e.preventDefault();
+        let form = e.target;
+    }
+
+    handleSelectService(e) {
+        this.setState({editable: false})
     }
 
     render() {
-        let img_src = '/images/tk/';
-        return <form>
-            <CalculatorDeliveryService items={[{name: 'cdek', src: `${img_src}cdek.jpg`, value: 'cdek'}, {name: 'ru_post', src: `${img_src}ru_post.png`, value: 'ru_post'}, {name: 'dpd', src: `${img_src}dpd.png`, value: 'dpd'}]}/>
+        const {services, editable} = this.state;
+        return <form className="calc-form" onSubmit={this.handleFormSubmit.bind(this)}>
 
-            <div className="d-flex flex-row">
-                <div><input type="text" name="placement_from" placeholder="Место отправки"/></div>
-                <div><input type="text" name="placement_to" placeholder="Место доставки"/></div>
+            <button className="calc-form__submit" type="submit">Расчитать</button>
+
+            <CalculatorDeliveryService handleSelectService={this.handleSelectService.bind(this)} items={services}/>
+
+            <div className="calc-placement">
+                <div className="calc-placement__from"><input type="text" readOnly={editable} name="placement_from" placeholder="Место отправки"/></div>
+                <div className="calc-placement__to"><input type="text" readOnly={editable} name="placement_to" placeholder="Место доставки"/></div>
             </div>
 
             <div className="calc-panel">
                 <CalculatorProducts/>
                 <CalculatorResult/>
             </div>
-
         </form>
     }
 }

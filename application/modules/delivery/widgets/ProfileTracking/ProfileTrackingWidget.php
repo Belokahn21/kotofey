@@ -1,13 +1,11 @@
 <?php
 
-namespace app\modules\delivery\ProfileTracking;
+namespace app\modules\delivery\ProfileTracking\widgets;
 
-use app\modules\logger\models\entity\Logger;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrderTracking;
 use app\modules\order\models\service\TrackingService;
-use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
 
 /**
