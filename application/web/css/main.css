@@ -10962,6 +10962,17 @@ Build date: 2019-12-19 16:51:02
     text-decoration: none;
     background: #ff4d69; }
 
+.compare-button {
+  border-bottom: 2px #ff1a4a dashed;
+  text-align: center;
+  color: #ff1a4a;
+  margin: 20px auto 0 auto;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  max-width: 112px; }
+
 * {
   padding: 0;
   margin: 0;
@@ -16081,9 +16092,30 @@ label[for="site-form-pet-avatar"] {
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px silver solid; }
+  .compare-list__row.is-ident {
+    background-color: rgba(0, 170, 0, 0.1); }
 
 .compare-list__col {
-  flex: 1 1 15%; }
+  flex: 1 1 15%;
+  padding: 5px; }
+
+.compare-list__product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+
+.compare-list__image {
+  max-width: 50px;
+  object-fit: contain;
+  display: block; }
+
+.compare-list__link {
+  max-width: 100px;
+  margin-top: 5px;
+  display: block;
+  font-size: 12px;
+  color: #2d0c03; }
 
 .product-gallery-big {
   width: 400px;

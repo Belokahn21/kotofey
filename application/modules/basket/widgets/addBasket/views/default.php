@@ -88,7 +88,7 @@ $resultPrice = $discount_price ?: $price;
             <?php endif; ?>
         </div>
         <?php if ($showCompare): ?>
-            <div class="compare-button js-add-compare">Сравнить товар</div>
+            <div class="compare-button js-add-compare" data-id="<?= $product_id; ?>">Сравнить товар</div>
         <?php endif; ?>
     </form>
 </div>

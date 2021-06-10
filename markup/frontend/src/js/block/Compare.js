@@ -1,3 +1,6 @@
+import RestRequest from "../tools/RestRequest";
+import config from "../config";
+
 class Compare {
     constructor() {
         this.items = document.querySelectorAll('.js-add-compare');
@@ -11,9 +14,16 @@ class Compare {
     }
 
     handleAddEvent(e) {
+        let element = e.target;
         e.preventDefault();
+        let data = new FormData();
+        data.append('product_id', element.getAttribute('data-id'));
 
-        alert('hello')
+        RestRequest.post(config.restCompare, {
+            body: data
+        }).then(data => {
+            console.log(data);
+        });
     }
 }
 

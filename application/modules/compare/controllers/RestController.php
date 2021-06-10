@@ -7,19 +7,23 @@ use yii\rest\Controller;
 
 class RestController extends Controller
 {
-	protected function verbs()
-	{
-		return [
-			'add' => ['POST'],
-		];
-	}
+    public function behaviors()
+    {
+        $behaviors = parent::behaviors();
 
-	public function actionAdd()
-	{
-		$data = \Yii::$app->request->post();
-		$compare = new Compare();
-		$compare->product_id = $data['product_id'];
-		$compare->save();
-		return true;
-	}
+        $behaviors['corsFilter'] = [
+            'class' => \yii\filters\Cors::className(),
+        ];
+
+        return $behaviors;
+    }
+
+    public function actionCreate()
+    {
+        $data = \Yii::$app->request->post();
+        $compare = new Compare();
+        $compare->product_id = $data['product_id'];
+        $compare->save();
+        return true;
+    }
 }

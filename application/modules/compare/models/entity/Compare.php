@@ -13,16 +13,11 @@ class Compare
 
     public function save()
     {
-        $product = Product::findOne($this->product_id);
-        if (!$product) {
-            return false;
-        }
-
         \Yii::$app->session->open();
-        $_SESSION[self::COMPARE_SESSION_KEY][$product->id] = $product;
+        $_SESSION[self::COMPARE_SESSION_KEY][$this->product_id] = $this->product_id;
 
         if (array_key_exists(self::COMPARE_SESSION_KEY, $_SESSION)) {
-            if (array_key_exists($product->id, $_SESSION[self::COMPARE_SESSION_KEY])) {
+            if (array_key_exists($this->product_id, $_SESSION[self::COMPARE_SESSION_KEY])) {
                 return true;
             }
         }

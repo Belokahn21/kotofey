@@ -3,6 +3,7 @@ let url = location.protocol + '//' + location.hostname + '/';
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store/';
 
 const config = {
+    restCompare: url + 'api/compare/',
     restFavorite: url + 'api/favorite/',
     restOrder: url + 'api/order/',
     restFastOrder: url + 'api/order/fast/',

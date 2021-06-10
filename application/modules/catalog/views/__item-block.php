@@ -57,5 +57,6 @@ $isDiscount = $product->getDiscountPrice() > 0;
         'showOneClick' => false,
         'showControl' => false,
         'showButton' => true,
+        'showCompare' => true,
     ]) ?>
 </li>

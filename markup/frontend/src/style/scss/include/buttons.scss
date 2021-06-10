@@ -83,7 +83,13 @@
 }
 
 .compare-button {
-  border-bottom: 1px $active-color dashed;
+  border-bottom: 2px $active-color dashed;
   text-align: center;
   color: $active-color;
+  margin: 20px auto 0 auto;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  max-width: 112px;
 }
