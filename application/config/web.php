@@ -167,6 +167,7 @@ $config = [
                 'clear' => 'basket/basket/clear',
                 'gii' => 'gii',
 
+                'compare'=>'compare/compare/index',
                 'vacancy' => 'vacancy/vacancy/index',
                 'vacancy/<id>' => 'vacancy/vacancy/view',
                 'brand' => 'catalog/brand/index',

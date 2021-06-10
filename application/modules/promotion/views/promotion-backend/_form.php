@@ -5,8 +5,9 @@
  * @var $subModel \app\modules\promotion\models\forms\PromotionProductMechanicsForm[]
  */
 
-use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
+use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
+use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 
 ?>
@@ -29,7 +30,15 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
             <?= $form->field($model, 'sort') ?>
         </div>
         <div class="form-element">
-            <?= $form->field($model, 'image')->widget(InputUploadWidget::className()); ?>
+            <?php
+            $media_params = [];
+            if ($model->media_id) {
+                $media_params = [
+                    'values' => [$model->media_id]
+                ];
+            }
+            echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+            ?>
         </div>
         <div class="row">
             <div class="form-element col-sm-6">
