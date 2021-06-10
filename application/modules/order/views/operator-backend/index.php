@@ -22,7 +22,8 @@ $this->title = Title::show('Кабинет оператора');
         Прибыль за месяц:
         <?php
         $result_summ = 0;
-        foreach ($orderQuery->where(['is_paid' => true, 'is_close' => true, 'manager_id' => $user->id])->andWhere('MONTH(created_at) = MONTH(CURRENT_DATE()) AND YEAR(created_at) = YEAR(CURRENT_DATE())')->all() as $order) {
+        foreach ($orderQuery->where(['is_paid' => true, 'is_close' => true, 'manager_id' => $user->id])
+                     ->andWhere('created_at >= UNIX_TIMESTAMP(LAST_DAY(CURDATE()) + INTERVAL 1 DAY - INTERVAL 1 MONTH) AND created_at <  UNIX_TIMESTAMP(LAST_DAY(CURDATE()) + INTERVAL 1 DAY)')->all() as $order) {
             $result_summ += OrderHelper::orderSummary($order);
         }
 
