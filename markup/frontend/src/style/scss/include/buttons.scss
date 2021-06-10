@@ -81,3 +81,9 @@
     background: $active-color-light;
   }
 }
+
+.compare-button {
+  border-bottom: 1px $active-color dashed;
+  text-align: center;
+  color: $active-color;
+}

@@ -23,6 +23,7 @@ class AddBasketWidget extends Widget
     public $showControl = true;
     public $showOneClick = true;
     public $showPrice = false;
+    public $showCompare = false;
 
     public function run()
     {
@@ -45,6 +46,7 @@ class AddBasketWidget extends Widget
             'showControl' => $this->showControl,
             'showOneClick' => $this->showOneClick,
             'showPrice' => $this->showPrice,
+            'showCompare' => $this->showCompare,
             'discount' => $this->discount,
         ]);
     }

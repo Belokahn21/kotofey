@@ -14,6 +14,7 @@ use app\modules\basket\models\tools\BasketHelper;
  * @var $showControl boolean
  * @var $showOneClick boolean
  * @var $showPrice boolean
+ * @var $showCompare boolean
  * @var $basket Basket
  */
 $resultPrice = $discount_price ?: $price;
@@ -86,5 +87,8 @@ $resultPrice = $discount_price ?: $price;
                 <div class="buy-one-click-react" data-product-id="<?= $product_id; ?>"></div>
             <?php endif; ?>
         </div>
+        <?php if ($showCompare): ?>
+            <div class="compare-button js-add-compare">Сравнить товар</div>
+        <?php endif; ?>
     </form>
 </div>

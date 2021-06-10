@@ -9,7 +9,7 @@ import 'bootstrap';
 import ProductCalc from './block/PoductCalc/ProductCalc';
 import Menu from './block/Menu';
 import Favorite from './block/favorite';
-import Compare from './block/compare';
+import Compare from './block/Compare';
 import Catalog from './block/Catalog';
 import StickFilter from './block/StickFilter';
 import RemoveBasketItem from './block/RemoveBasketItem';
