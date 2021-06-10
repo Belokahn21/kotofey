@@ -11,6 +11,7 @@ use app\assets\AppAsset;
 use app\widgets\notification\Alert;
 use app\modules\user\models\entity\User;
 use app\modules\basket\models\entity\Basket;
+use app\modules\compare\models\entity\Compare;
 use app\modules\site\widgets\PageUp\PageUpWidget;
 use app\modules\search\widges\search\SearchWidget;
 use app\modules\site\widgets\AdminPanel\AdminPanel;
@@ -102,11 +103,17 @@ $this->beginPage() ?>
 
         <div class="menu__item">
             <a class="menu__link basket" href="<?= Url::to(['/checkout/']) ?>">
-                <img class="basket__icon" src="/upload/images/basket.png" alt="Корзина">
+                <img class="basket__icon" src="/images/basket.png" alt="Корзина">
                 <div class="basket__counter<?= (Basket::count() > 0 ? '' : ' hidden'); ?>">
                     <span><?= Basket::count(); ?></span>
                 </div>
             </a>
+<!--            <a class="menu__link basket" href="--><?//= Url::to(['/compare/']) ?><!--">-->
+<!--                <img class="basket__icon" src="/images/compare.png" alt="Сравнение товара">-->
+<!--                <div class="basket__counter--><?//= (count(Compare::getListId()) > 0 ? '' : ' hidden'); ?><!--">-->
+<!--                    <span>--><?//= count(Compare::getListId()); ?><!--</span>-->
+<!--                </div>-->
+<!--            </a>-->
         </div>
     </div>
     <div class="menu-full js-show-with-hamburger">
