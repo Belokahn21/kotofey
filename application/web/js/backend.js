@@ -3799,8 +3799,7 @@ var FindProductForm = /*#__PURE__*/function (_React$Component) {
       if (this.timerEx) clearTimeout(this.timerEx);
       var element = e.target,
           value = element.value;
-      var queryParam = '?ProductSearchForm[name]=';
-      if (this.isNumeric(value)) queryParam = '?ProductSearchForm[code]=';
+      var queryParam = '?ProductSearchForm[mixed_value]=';
       this.timerEx = setTimeout(function () {
         _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_4__.default.all((_config__WEBPACK_IMPORTED_MODULE_1___default().restCatalog) + queryParam + value).then(function (result) {
           _this2.setState({
@@ -3934,28 +3933,7 @@ var Index = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Title, null, "\u041D\u0430\u0439\u0442\u0438 ID \u0442\u043E\u0432\u0430\u0440\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_3__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindProductForm__WEBPACK_IMPORTED_MODULE_2__.default, {
         inputId: this.modalId
       }))));
-    } // render() {
-    //     return <div>
-    //         <div className="modal fade" id={this.modalId} tabIndex="-1" role="dialog" aria-labelledby={this.modalId + 'Label'} aria-hidden="true">
-    //             <div className="modal-dialog" role="document">
-    //                 <div className="modal-content">
-    //                     <div className="modal-header">
-    //                         <h5 className="modal-title" id={this.modalId + 'Label'}>Найти товар</h5>
-    //                         <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-    //                             <span aria-hidden="true">&times;</span>
-    //                         </button>
-    //                     </div>
-    //                     <div className="modal-body">
-    //                     </div>
-    //                     <div className="modal-footer">
-    //                         <button type="button" className="btn btn-secondary" data-dismiss="modal">Закрыть</button>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </div>
-    //     </div>;
-    // }
-
+    }
   }]);
 
   return Index;
