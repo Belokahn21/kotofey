@@ -3818,7 +3818,7 @@ var FindProductForm = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "form-finds__input",
         onKeyUp: this.handleInput.bind(this),
-        placeholder: "\u041D\u0430\u0437\u0432\u0430\u043D\u0438\u0435 \u0434\u043B\u044F \u043F\u043E\u0438\u0441\u043A\u0430"
+        placeholder: "\u041F\u043E\u0438\u0441\u043A \u043F\u043E \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044E, \u0430\u0440\u0442\u0438\u043A\u0443\u043B\u0443, \u0432\u043D\u0435\u0448\u043D\u0435\u043C\u0443 \u043A\u043E\u0434\u0443"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "list-finds"
       }, this.state.items.map(function (el, index) {
