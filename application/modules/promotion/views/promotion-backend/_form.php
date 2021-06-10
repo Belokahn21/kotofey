@@ -6,7 +6,7 @@
  */
 
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
-use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
+use app\modules\promotion\models\helpers\PromotionHelper;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 
@@ -30,6 +30,9 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
             <?= $form->field($model, 'sort') ?>
         </div>
         <div class="form-element">
+            <?php if ($model->media_id): ?>
+                <img src="<?= PromotionHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+            <?php endif; ?>
             <?php
             $media_params = [];
             if ($model->media_id) {
