@@ -14,27 +14,27 @@ $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров'
 ?>
 <h1>Сравнение товаров</h1>
 
-<table border="1" width="100%">
-    <tr>
-        <td></td>
+<div class="compare-list">
+    <div class="compare-list__row">
+        <div class="compare-list__col"></div>
         <?php foreach ($models as $product_id => $data): ?>
-            <td><?= $data['product']->name; ?></td>
+            <div class="compare-list__col"><?= $data['product']->name; ?></div>
         <?php endforeach; ?>
-    </tr>
+    </div>
 
     <?php foreach ($avail_properties as $property_id => $properties_data): ?>
-        <tr>
-            <td><?= $properties_data['property']->name; ?></td>
+        <div class="compare-list__row">
+            <div class="compare-list__col"><?= $properties_data['property']->name; ?></div>
             <?php foreach ($models as $product_id => $data): ?>
-                <td>
+                <div class="compare-list__col">
                     <?php $value = PropertiesHelper::extractPropertyById($data['product'], $property_id); ?>
                     <?php if ($value): ?>
                         <?= ProductPropertiesValuesHelper::getFinalValue($value); ?>
                     <?php else: ?>
                         -
                     <?php endif; ?>
-                </td>
+                </div>
             <?php endforeach; ?>
-        </tr>
+        </div>
     <?php endforeach; ?>
-</table>
+</div>

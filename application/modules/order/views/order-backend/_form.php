@@ -12,9 +12,9 @@ use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
-use app\modules\delivery\ProfileTracking\widgets\ProfileTrackingWidget;
 use app\modules\order\widgets\CustomerInput\CustomerInputWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
+use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order

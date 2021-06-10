@@ -1,0 +1,13 @@
+.compare-list {
+  &__row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px silver solid;
+  }
+
+  &__col {
+    flex: 1 1 15%;
+  }
+}

@@ -16075,6 +16075,16 @@ label[for="site-form-pet-avatar"] {
     display: flex;
     flex-direction: row; }
 
+.compare-list__row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px silver solid; }
+
+.compare-list__col {
+  flex: 1 1 15%; }
+
 .product-gallery-big {
   width: 400px;
   overflow: hidden;

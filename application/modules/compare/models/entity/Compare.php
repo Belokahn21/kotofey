@@ -7,38 +7,48 @@ use app\modules\catalog\models\entity\Product;
 
 class Compare
 {
-	const COMPARE_SESSION_KEY = 'compare';
+    const COMPARE_SESSION_KEY = 'compare';
 
-	public $product_id;
+    public $product_id;
 
-	public function save()
-	{
-		$product = Product::findOne($this->product_id);
-		if (!$product) {
-			return false;
-		}
+    public function save()
+    {
+        $product = Product::findOne($this->product_id);
+        if (!$product) {
+            return false;
+        }
 
-		\Yii::$app->session->open();
-		$_SESSION[self::COMPARE_SESSION_KEY][$product->id] = $product;
+        \Yii::$app->session->open();
+        $_SESSION[self::COMPARE_SESSION_KEY][$product->id] = $product;
 
-		if (array_key_exists(self::COMPARE_SESSION_KEY, $_SESSION)) {
-			if (array_key_exists($product->id, $_SESSION[self::COMPARE_SESSION_KEY])) {
-				return true;
-			}
-		}
+        if (array_key_exists(self::COMPARE_SESSION_KEY, $_SESSION)) {
+            if (array_key_exists($product->id, $_SESSION[self::COMPARE_SESSION_KEY])) {
+                return true;
+            }
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	public static function findAll()
-	{
-		$items = array();
-		\Yii::$app->session->open();
-		if ($compare = \Yii::$app->session->get(self::COMPARE_SESSION_KEY)) {
-			foreach ($compare as $product_id => $item) {
-				$items[] = Product::findOne($product_id);
-			}
-		}
-		return $items;
-	}
+    public static function getListId()
+    {
+        \Yii::$app->session->open();
+        if ($compare = \Yii::$app->session->get(self::COMPARE_SESSION_KEY)) {
+            return $compare;
+        }
+
+        return [];
+    }
+
+    public static function findAll()
+    {
+        $items = array();
+        \Yii::$app->session->open();
+        if ($compare = \Yii::$app->session->get(self::COMPARE_SESSION_KEY)) {
+            foreach ($compare as $product_id => $item) {
+                $items[] = Product::findOne($product_id);
+            }
+        }
+        return $items;
+    }
 }

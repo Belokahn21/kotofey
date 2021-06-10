@@ -4,13 +4,12 @@
  * @var $items \app\modules\order\models\entity\OrdersItems[]
  */
 
-use app\modules\delivery\ProfileTracking\widgets\ProfileTrackingWidget;
+use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 use app\modules\acquiring\models\helpers\AcquiringHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Price;
-use app\modules\site\models\tools\System;
 use app\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use yii\helpers\Url;

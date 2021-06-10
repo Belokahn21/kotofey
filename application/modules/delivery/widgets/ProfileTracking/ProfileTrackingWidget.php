@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\delivery\ProfileTracking\widgets;
+namespace app\modules\delivery\widgets\ProfileTracking;
 
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;

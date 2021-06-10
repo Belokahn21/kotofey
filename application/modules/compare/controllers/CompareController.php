@@ -3,13 +3,14 @@
 namespace app\modules\compare\controllers;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\compare\models\entity\Compare;
 use yii\web\Controller;
 
 class CompareController extends Controller
 {
     public function actionIndex()
     {
-        $ids = [444, 445, 446, 447];
+        $ids = Compare::getListId();
         $models = [];
         $avail_properties = [];
 
