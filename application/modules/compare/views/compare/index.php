@@ -1,6 +1,7 @@
 <?php
 
 use app\modules\seo\models\tools\Title;
+use app\modules\compare\models\helpers\CompareHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
@@ -26,17 +27,30 @@ $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров'
         <?php endforeach; ?>
     </div>
 
+    <?php
+    $props = [];
+    ?>
+
     <?php foreach ($avail_properties as $property_id => $properties_data): ?>
-        <div class="compare-list__row isn-ident">
+        <?php foreach ($models as $product_id => $data): ?>
+            <?php if ($value = PropertiesHelper::extractPropertyById($data['product'], $property_id)): ?>
+                <?php $props[$property_id][$product_id] = ProductPropertiesValuesHelper::getFinalValue($value); ?>
+            <?php else: ?>
+                <?php $props[$property_id][$product_id] = '-'; ?>
+            <?php endif; ?>
+
+            <?php $props[$property_id]['is_ident'] = CompareHelper::findIdent($props[$property_id]); ?>
+
+        <?php endforeach; ?>
+    <?php endforeach; ?>
+
+    <?php foreach ($avail_properties as $property_id => $properties_data): ?>
+        <div class="compare-list__row <?= $props[$property_id]['is_ident'] === true ? 'is-ident' : ''; ?>">
             <div class="compare-list__col"><?= $properties_data['property']->name; ?></div>
 
             <?php foreach ($models as $product_id => $data): ?>
                 <div class="compare-list__col">
-                    <?php if ($value = PropertiesHelper::extractPropertyById($data['product'], $property_id)): ?>
-                        <?= ProductPropertiesValuesHelper::getFinalValue($value); ?>
-                    <?php else: ?>
-                        <div>-</div>
-                    <?php endif; ?>
+                    <?= $props[$property_id][$product_id]; ?>
                 </div>
             <?php endforeach; ?>
         </div>
