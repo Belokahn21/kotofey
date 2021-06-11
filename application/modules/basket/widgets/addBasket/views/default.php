@@ -88,7 +88,11 @@ $resultPrice = $discount_price ?: $price;
             <?php endif; ?>
         </div>
         <?php if ($showCompare): ?>
-            <div class="compare-button js-add-compare" data-id="<?= $product_id; ?>">Сравнить товар</div>
+            <?php if (Yii::$app->user->id == 1): ?>
+                <div class="compare-button-react" data-id="<?= $product_id; ?>">Сравнить товар</div>
+            <?php else: ?>
+                <div class="compare-button js-add-compare" data-id="<?= $product_id; ?>">Сравнить товар</div>
+            <?php endif; ?>
         <?php endif; ?>
     </form>
 </div>

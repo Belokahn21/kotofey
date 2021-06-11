@@ -5507,6 +5507,88 @@ if (elements) {
 
 /***/ }),
 
+/***/ "./src/js/react/Compare/CompareButton.js":
+/*!***********************************************!*\
+  !*** ./src/js/react/Compare/CompareButton.js ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+var CompareButton = /*#__PURE__*/function (_React$Component) {
+  _inherits(CompareButton, _React$Component);
+
+  var _super = _createSuper(CompareButton);
+
+  function CompareButton() {
+    var _this;
+
+    _classCallCheck(this, CompareButton);
+
+    _this = _super.call(this);
+    _this.state = {
+      is_added: false
+    };
+    return _this;
+  }
+
+  _createClass(CompareButton, [{
+    key: "render",
+    value: function render() {
+      var is_added = this.state.is_added;
+      var html;
+
+      switch (is_added) {
+        case true:
+          html = "<div class='compare-button'>Сравнить товар</div>";
+          break;
+
+        case false:
+          html = "<a href='/compare/' class='compare-button-next'>Перейти к сравнению</a>";
+          break;
+      }
+
+      return html;
+    }
+  }]);
+
+  return CompareButton;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+var init = document.querySelectorAll('.compare-button-react');
+if (init) init.forEach(function (el) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(CompareButton, null), el);
+});
+
+/***/ }),
+
 /***/ "./src/js/react/ModalNotify.js":
 /*!*************************************!*\
   !*** ./src/js/react/ModalNotify.js ***!
@@ -89847,6 +89929,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./react/BuyOneClick/BuyOneClick */ "./src/js/react/BuyOneClick/BuyOneClick.js");
 /* harmony import */ var _react_Page_Page__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./react/Page/Page */ "./src/js/react/Page/Page.js");
 /* harmony import */ var _react_ProductAdmission_ProductAdmission__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./react/ProductAdmission/ProductAdmission */ "./src/js/react/ProductAdmission/ProductAdmission.js");
+/* harmony import */ var _react_Compare_CompareButton__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./react/Compare/CompareButton */ "./src/js/react/Compare/CompareButton.js");
 
 window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
@@ -89892,6 +89975,7 @@ document.addEventListener('DOMContentLoaded', function () {
   new _block_PoductCalc_ProductCalc__WEBPACK_IMPORTED_MODULE_3__.default(new _block_FastCart__WEBPACK_IMPORTED_MODULE_10__.default());
 }); //react js
 // import './react/cdek-calculator/CdekCalculator';
+
 
 
 
