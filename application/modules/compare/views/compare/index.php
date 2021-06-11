@@ -28,9 +28,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров'
         <?php endforeach; ?>
     </div>
 
-    <?php
-    $props = [];
-    ?>
+    <?php $props = []; ?>
 
     <?php foreach ($avail_properties as $property_id => $properties_data): ?>
         <?php foreach ($models as $product_id => $data): ?>
