@@ -57,9 +57,11 @@ $this->title = ProductTitle::show($product->name);
 
                             <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
                                 <?php foreach ($imagesFromProperty as $propertyValue): ?>
-                                    <a href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
-                                        <img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-                                    </a>
+                                    <?php if ($propertyValue->media): ?>
+                                        <a href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
+                                            <img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                                        </a>
+                                    <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php endif; ?>
 
@@ -83,7 +85,9 @@ $this->title = ProductTitle::show($product->name);
 
                                 <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
                                     <?php foreach ($imagesFromProperty as $propertyValue): ?>
-                                        <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                        <?php if ($propertyValue->media): ?>
+                                            <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                        <?php endif; ?>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
 
