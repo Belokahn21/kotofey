@@ -19,7 +19,7 @@ class CompareController extends Controller
 
 
         foreach ($ids as $id) {
-            $product = Product::findOne($id);
+            $product = Product::find()->where(['id' => $id])->select(['id', 'name'])->one();
             if (!$product) continue;
 
             $models[$id] = [

@@ -58,3 +58,4 @@ import './react/BuyOneClick/BuyOneClick';
 import './react/Page/Page';
 import './react/ProductAdmission/ProductAdmission';
 import './react/Compare/CompareButton'
+import './react/Compare/CompareList'
