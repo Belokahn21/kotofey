@@ -42,14 +42,14 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
             } ?>
 
             <div class="col-3">
-                <?= $form->field($propertiesValues, '[' . $count - 1 . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
+                <?= $form->field($propertiesValues, '[' . ($count - 1) . ']property_id')->hiddenInput(['value' => $property->id])->label(false); ?>
 
 
                 <?php if ($model->isNewRecord): ?>
-                    <?= $form->field($propertiesValues, '[' . $count - 1 . ']value')->textInput()->label($property->name); ?>
+                    <?= $form->field($propertiesValues, '[' . ($count - 1) . ']value')->textInput()->label($property->name); ?>
                 <?php else: ?>
                     <?php $value = CustomerPropertiesValues::findOne(['customer_id' => $model->phone, 'property_id' => $property->id]); ?>
-                    <?= $form->field($propertiesValues, '[' . $count - 1 . ']value')->textInput(['value' => $value ? $value->value : false])->label($property->name); ?>
+                    <?= $form->field($propertiesValues, '[' . ($count - 1) . ']value')->textInput(['value' => $value ? $value->value : false])->label($property->name); ?>
                 <?php endif; ?>
             </div>
 
