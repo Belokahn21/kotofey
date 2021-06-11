@@ -52,7 +52,7 @@ class Media extends \yii\db\ActiveRecord
 
             [['name', 'location', 'type'], 'string', 'max' => 255],
 
-            ['path', 'file', 'extensions' => \Yii::$app->params['files']['extensions'], 'skipOnEmpty' => false]
+            ['path', 'file', 'extensions' => \Yii::$app->params['files']['extensions'], 'skipOnEmpty' => true]
         ];
     }
 

@@ -75,7 +75,7 @@ class ProductFromSibagoForm extends Product
             if ($this->methodSave == Media::LOCATION_SERVER) move_uploaded_file($pathToTmpImage, \Yii::getAlias("@web/upload/$image"));
 
             $media = new Media();
-            $media->path = $file;
+//            $media->path = $file;
             $media->name = $image;
             $media->type = $this->methodSave;
             $media->location = $this->methodSave;
