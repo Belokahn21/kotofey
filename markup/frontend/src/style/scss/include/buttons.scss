@@ -83,6 +83,7 @@
 }
 
 .compare-button {
+  display: block;
   border-bottom: 2px $active-color dashed;
   text-align: center;
   color: $active-color;
@@ -92,4 +93,9 @@
   cursor: pointer;
   font-weight: bold;
   max-width: 112px;
+
+  &:hover {
+    color: $active-color-light;
+    text-decoration: none;
+  }
 }

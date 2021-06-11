@@ -3,6 +3,9 @@
 namespace app\modules\compare\controllers;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\PropertiesProductValues;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\compare\models\entity\Compare;
 use yii\web\Controller;
 
@@ -21,12 +24,16 @@ class CompareController extends Controller
 
             $models[$id] = [
                 'product' => $product,
-                'properties' => $product->propsValues
+                'properties' => $product->propsValues,
+                'detail_link' => ProductHelper::getDetailUrl($product),
+                'detail_image' => ProductHelper::getImageUrl($product),
             ];
 
 
             foreach ($product->propsValues as $property_value_row) {
-                $avail_properties[$property_value_row->property->id]['property'] = $property_value_row->property;
+                if ($property_value_row instanceof PropertiesProductValues && $property_value_row->property instanceof Properties) {
+                    $avail_properties[$property_value_row->property->id]['property'] = $property_value_row->property;
+                }
             }
         }
 

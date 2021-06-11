@@ -5517,6 +5517,8 @@ if (elements) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/config.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5542,24 +5544,42 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var CompareButton = /*#__PURE__*/function (_React$Component) {
   _inherits(CompareButton, _React$Component);
 
   var _super = _createSuper(CompareButton);
 
-  function CompareButton() {
+  function CompareButton(props) {
     var _this;
 
     _classCallCheck(this, CompareButton);
 
-    _this = _super.call(this);
+    _this = _super.call(this, props);
     _this.state = {
-      is_added: false
+      is_added: _this.props.already === '1'
     };
     return _this;
   }
 
   _createClass(CompareButton, [{
+    key: "onClickEvent",
+    value: function onClickEvent(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var data = new FormData();
+      data.append('product_id', this.props.product_id);
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.post(_config__WEBPACK_IMPORTED_MODULE_3__.default.restCompare, {
+        body: data
+      }).then(function (data) {
+        _this2.setState({
+          is_added: data
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var is_added = this.state.is_added;
@@ -5567,11 +5587,17 @@ var CompareButton = /*#__PURE__*/function (_React$Component) {
 
       switch (is_added) {
         case true:
-          html = "<div class='compare-button'>Сравнить товар</div>";
+          html = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+            href: "/compare/",
+            className: "compare-button compare-button-next"
+          }, "\u041F\u0435\u0440\u0435\u0439\u0442\u0438 \u043A \u0441\u0440\u0430\u0432\u043D\u0435\u043D\u0438\u044E");
           break;
 
         case false:
-          html = "<a href='/compare/' class='compare-button-next'>Перейти к сравнению</a>";
+          html = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+            className: "compare-button",
+            onClick: this.onClickEvent.bind(this)
+          }, "\u0421\u0440\u0430\u0432\u043D\u0438\u0442\u044C \u0442\u043E\u0432\u0430\u0440");
           break;
       }
 
@@ -5584,7 +5610,10 @@ var CompareButton = /*#__PURE__*/function (_React$Component) {
 
 var init = document.querySelectorAll('.compare-button-react');
 if (init) init.forEach(function (el) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(CompareButton, null), el);
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(CompareButton, {
+    already: el.getAttribute('data-already'),
+    product_id: el.getAttribute('data-id')
+  }), el);
 });
 
 /***/ }),

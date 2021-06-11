@@ -3,6 +3,7 @@
 namespace app\modules\compare\controllers;
 
 use app\modules\compare\models\entity\Compare;
+use app\modules\compare\models\helpers\CompareHelper;
 use yii\rest\Controller;
 
 class RestController extends Controller
@@ -24,6 +25,6 @@ class RestController extends Controller
         $compare = new Compare();
         $compare->product_id = $data['product_id'];
         $compare->save();
-        return true;
+        return CompareHelper::isComparing($data['product_id']);
     }
 }

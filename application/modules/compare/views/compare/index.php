@@ -21,8 +21,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров'
         <div class="compare-list__col"></div>
         <?php foreach ($models as $product_id => $data): ?>
             <div class="compare-list__col compare-list__product">
-                <img class="compare-list__image" src="<?= ProductHelper::getImageUrl($data['product']) ?>">
-                <a class="compare-list__link" href="<?= ProductHelper::getDetailUrl($data['product']) ?>"><?= $data['product']->name; ?></a>
+                <a class="compare-list__link" href="<?= $data['detail_link'] ?>">
+                    <img class="compare-list__image" src="<?= $data['detail_image'] ?>">
+                </a>
             </div>
         <?php endforeach; ?>
     </div>

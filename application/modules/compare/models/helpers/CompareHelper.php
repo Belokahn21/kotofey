@@ -2,8 +2,15 @@
 
 namespace app\modules\compare\models\helpers;
 
+use app\modules\compare\models\entity\Compare;
+
 class CompareHelper
 {
+    public static function isComparing(int $product_id)
+    {
+        return in_array($product_id, Compare::getListId());
+    }
+
     public static function findIdent(array $data)
     {
         $old = '';

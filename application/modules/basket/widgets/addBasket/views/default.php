@@ -4,6 +4,7 @@ use app\modules\site\models\tools\Price;
 use app\modules\basket\models\entity\Basket;
 use app\modules\site\models\tools\Currency;
 use app\modules\basket\models\tools\BasketHelper;
+use app\modules\compare\models\helpers\CompareHelper;
 
 /* @var $product_id integer
  * @var $showButton boolean
@@ -88,11 +89,7 @@ $resultPrice = $discount_price ?: $price;
             <?php endif; ?>
         </div>
         <?php if ($showCompare): ?>
-            <?php if (Yii::$app->user->id == 1): ?>
-                <div class="compare-button-react" data-id="<?= $product_id; ?>">Сравнить товар</div>
-            <?php else: ?>
-                <div class="compare-button js-add-compare" data-id="<?= $product_id; ?>">Сравнить товар</div>
-            <?php endif; ?>
+            <div class="compare-button-react" data-already="<?= CompareHelper::isComparing($product_id); ?>" data-id="<?= $product_id; ?>">Сравнить товар</div>
         <?php endif; ?>
     </form>
 </div>

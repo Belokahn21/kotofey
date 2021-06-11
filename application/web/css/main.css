@@ -10963,6 +10963,7 @@ Build date: 2019-12-19 16:51:02
     background: #ff4d69; }
 
 .compare-button {
+  display: block;
   border-bottom: 2px #ff1a4a dashed;
   text-align: center;
   color: #ff1a4a;
@@ -10972,6 +10973,9 @@ Build date: 2019-12-19 16:51:02
   cursor: pointer;
   font-weight: bold;
   max-width: 112px; }
+  .compare-button:hover {
+    color: #ff4d69;
+    text-decoration: none; }
 
 * {
   padding: 0;
