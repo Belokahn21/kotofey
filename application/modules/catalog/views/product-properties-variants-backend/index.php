@@ -32,10 +32,11 @@ $this->title = Title::show("Значения свойств"); ?>
     'emptyText' => 'Значения отсутствуют',
     'columns' => [
         'id',
+
         [
             'attribute' => 'is_active',
-            'format' => 'raw',
             'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
             'value' => function ($model) {
                 if ($model->is_active) {
                     return Html::tag('span', 'Активен', ['class' => 'green']);

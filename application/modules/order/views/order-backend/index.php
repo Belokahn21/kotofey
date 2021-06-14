@@ -91,9 +91,11 @@ $this->title = Title::show("Заказы");
         ],
         [
             'attribute' => 'created_at',
-            'value' => function ($model) {
-                return date("d.m.Y", $model->created_at);
-            }
+            'format' => ['date', 'dd.MM.YYYY'],
+        ],
+        [
+            'attribute' => 'updated_at',
+            'format' => ['date', 'dd.MM.YYYY'],
         ],
         [
             'class' => 'yii\grid\ActionColumn',

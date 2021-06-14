@@ -30,10 +30,29 @@ $this->title = Title::show("Карточки покупателей"); ?>
     'emptyText' => 'Карточки покупателей отсутствуют',
     'columns' => [
         'phone',
-        'is_active',
+        [
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
         'sort',
         'name',
-        'created_at',
+
+        [
+            'attribute' => 'created_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+        ],
+        [
+            'attribute' => 'updated_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+        ],
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [

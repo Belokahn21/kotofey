@@ -12,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $is_active
  * @property int|null $sort
  * @property string|null $name
+ * @property string $description
  * @property int|null $created_at
  * @property int|null $updated_at
  */
@@ -31,23 +32,26 @@ class Customer extends \yii\db\ActiveRecord
 
             [['sort'], 'default', 'value' => 500],
 
+            [['is_active'], 'boolean'],
             [['is_active'], 'default', 'value' => true],
 
-            [['phone', 'is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
+            [['phone', 'sort', 'created_at', 'updated_at'], 'integer'],
 
             [['name'], 'string', 'max' => 255],
+            [['description'], 'string'],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            'phone' => 'Phone',
-            'is_active' => 'Is Active',
-            'sort' => 'Sort',
-            'name' => 'Name',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'phone' => 'Телефон',
+            'is_active' => 'Активность',
+            'sort' => 'Сортировка',
+            'name' => 'Имя/Название',
+            'description' => 'Описание',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

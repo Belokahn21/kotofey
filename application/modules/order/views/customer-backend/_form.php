@@ -21,13 +21,25 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
                 <?= $form->field($model, 'is_active')->radioList(['Нет', 'Да']) ?>
             </div>
             <div class="col-12 col-sm-3">
-                <?= $form->field($model, 'phone') ?>
+                <?= $form->field($model, 'phone')->textInput(['class' => 'clean-phone form-control']) ?>
             </div>
             <div class="col-12 col-sm-3">
                 <?= $form->field($model, 'name') ?>
             </div>
             <div class="col-12 col-sm-3">
                 <?= $form->field($model, 'sort')->textInput(); ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12 col-sm-3">
+                <?= $form->field($model, 'description')->textarea(); ?>
+            </div>
+            <div class="col-12 col-sm-3">
+            </div>
+            <div class="col-12 col-sm-3">
+            </div>
+            <div class="col-12 col-sm-3">
             </div>
         </div>
 

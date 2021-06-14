@@ -32,7 +32,6 @@ $this->title = Title::show("Группа поставщиков"); ?>
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
         ],
         [
             'class' => 'yii\grid\ActionColumn',

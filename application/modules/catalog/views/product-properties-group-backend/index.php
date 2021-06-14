@@ -25,12 +25,17 @@ $this->title = Title::show("Группы свойств"); ?>
     'emptyText' => 'Группы свойств отсутствуют',
     'columns' => [
         'id',
+
         [
             'attribute' => 'is_active',
-            'filter' => ['Неактивные', 'Активные'],
+            'filter' => ['Не активен', 'Активен'],
             'format' => 'raw',
             'value' => function ($model) {
-                return ($model->is_active == 1 ? "Да" : "Нет");
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
             }
         ],
         [
