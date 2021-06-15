@@ -32,6 +32,18 @@ $this->title = Title::show("Новости");
     'columns' => [
         'id',
         [
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
+        [
             'attribute' => 'title',
             'format' => 'raw',
             'value' => function ($model) {

@@ -12,6 +12,7 @@ use yii\db\ActiveRecord;
  * News model
  *
  * @property integer $id
+ * @property boolean $is_active
  * @property string $title
  * @property string $slug
  * @property string $preview
