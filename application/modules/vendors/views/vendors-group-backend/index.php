@@ -7,6 +7,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 
 /* @var \yii\web\View $this */
+/* @var \app\modules\vendors\models\entity\VendorGroup $model */
 
 $this->title = Title::show("Группа поставщиков"); ?>
     <div class="title-group">
@@ -28,6 +29,18 @@ $this->title = Title::show("Группа поставщиков"); ?>
     'emptyText' => 'Группы поставщиков отсутствуют',
     'columns' => [
         'id',
+        [
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
         'name',
         [
             'attribute' => 'created_at',
