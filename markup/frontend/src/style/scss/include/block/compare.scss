@@ -1,3 +1,7 @@
 .compare {
+  margin-left: 15px;
 
+  &__counter {
+    @extend .basket__counter;
+  }
 }

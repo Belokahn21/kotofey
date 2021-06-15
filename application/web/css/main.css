@@ -10967,7 +10967,7 @@ Build date: 2019-12-19 16:51:02
   border-bottom: 2px #ff1a4a dashed;
   text-align: center;
   color: #ff1a4a;
-  margin: 20px auto 0 auto;
+  margin: 10px auto 0 auto;
   text-transform: uppercase;
   font-size: 12px;
   cursor: pointer;
@@ -11827,19 +11827,19 @@ img {
 
 .basket {
   position: relative; }
-  .basket__counter {
+  .basket__counter, .compare__counter {
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    font-size: 12px;
-    line-height: 21px;
+    font-size: 10px;
+    line-height: 18px;
+    width: 18px;
     font-weight: 700;
     position: absolute;
-    top: -30%;
-    right: -70%;
+    top: -0.5rem;
+    right: -0.5rem;
     text-align: center;
-    width: 22px;
     border-radius: 50%;
     background: #fff;
     color: #2d0c03; }
@@ -13659,7 +13659,7 @@ img {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin: 0 40px;
+  margin: 0 10px;
   font-size: 14px; }
   .profile__icon {
     width: 20px;
@@ -15391,7 +15391,8 @@ label[for="site-form-pet-avatar"] {
     border: 1px rgba(0, 0, 0, 0.05) solid;
     box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
     padding: 10px;
-    margin-bottom: 20px; }
+    margin-bottom: 20px;
+    flex-wrap: wrap; }
   .catalog-line__name {
     max-width: 30%;
     width: 100%;
@@ -15400,6 +15401,10 @@ label[for="site-form-pet-avatar"] {
     font-weight: 700;
     color: #2d0c03;
     transition: 0.2s ease-in-out color; }
+    @media (max-width: 800px) {
+      .catalog-line__name {
+        max-width: 100%;
+        margin-top: 15px; } }
     .catalog-line__name a {
       color: inherit;
       text-decoration: none !important; }
@@ -16090,6 +16095,9 @@ label[for="site-form-pet-avatar"] {
     display: flex;
     flex-direction: row; }
 
+.compare {
+  margin-left: 15px; }
+
 .compare-list__row {
   display: flex;
   flex-direction: row;
@@ -16102,6 +16110,8 @@ label[for="site-form-pet-avatar"] {
 .compare-list__col {
   flex: 1 1 15%;
   padding: 5px; }
+  .compare-list__col:not(.compare-list__property) {
+    text-align: center; }
 
 .compare-list__product {
   display: flex;

@@ -108,13 +108,14 @@ $this->beginPage() ?>
                     <span><?= Basket::count(); ?></span>
                 </div>
             </a>
-            <?php /*
-            <a class="menu__link basket" href="<?= Url::to(['/compare/']) ?>">
-                <img class="basket__icon" src="/images/compare.png" alt="Сравнение товара">
-                <div class="basket__counter<?= (count(Compare::getListId()) > 0 ? '' : ' hidden'); ?>">
+        </div>
+        <div class="menu__item">
+            <a class="menu__link compare" href="<?= Url::to(['/compare/']) ?>">
+                <img class="compare__icon" src="/images/compare.png" alt="Сравнение товара">
+                <div class="compare__counter<?= (count(Compare::getListId()) > 0 ? '' : ' hidden'); ?>">
                     <span><?= count(Compare::getListId()); ?></span>
                 </div>
-            </a>*/ ?>
+            </a>
         </div>
     </div>
     <div class="menu-full js-show-with-hamburger">

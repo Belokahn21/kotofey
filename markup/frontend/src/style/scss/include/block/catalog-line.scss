@@ -11,17 +11,23 @@
     box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
     padding: 10px;
     margin-bottom: 20px;
+    flex-wrap: wrap;
+
   }
 
   &__name {
     max-width: 30%;
     width: 100%;
-
     font-size: 18px;
     line-height: 24px;
     font-weight: 700;
     color: $main-color;
     transition: 0.2s ease-in-out color;
+
+    @media (max-width: 800px) {
+      max-width: 100%;
+      margin-top: 15px;
+    }
 
     a {
       color: inherit;

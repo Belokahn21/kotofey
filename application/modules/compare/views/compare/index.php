@@ -16,6 +16,7 @@ $this->title = Title::show("Сравните выбранные товары");
 $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров', 'url' => ['site/compare']];
 ?>
     <h1>Сравнение товаров</h1>
+    <a class="btn-main" href="<?= \yii\helpers\Url::to(['compare/clean']) ?>">Очистить выбор</a>
 
     <div class="compare-list">
         <div class="compare-list__row">
@@ -46,7 +47,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Сравнение твоаров'
 
         <?php foreach ($avail_properties as $property_id => $properties_data): ?>
             <div class="compare-list__row <?= $props[$property_id]['is_ident'] === true ? 'is-ident' : ''; ?>">
-                <div class="compare-list__col"><?= $properties_data['property']->name; ?></div>
+                <div class="compare-list__col compare-list__property"><?= $properties_data['property']->name; ?></div>
 
                 <?php foreach ($models as $product_id => $data): ?>
                     <div class="compare-list__col">

@@ -19,9 +19,19 @@ class CompareButton extends React.Component {
         RestRequest.post(config.restCompare, {
             body: data
         }).then(data => {
-            this.setState({is_added: data})
+            this.setState({is_added: data});
+            this.addCounter(1);
         });
 
+    }
+
+    addCounter(count) {
+        let element = document.querySelector('.compare__counter');
+        if (!element) return false;
+
+        if (element.classList.contains('hidden')) element.classList.remove('hidden');
+
+        element.textContent = parseInt(element.textContent) + parseInt(count);
     }
 
     render() {

@@ -21,6 +21,7 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
             'showOneClick' => false,
             'showControl' => true,
             'showButton' => true,
+            'showCompare' => true
         ]) ?>
     </div>
 </div>

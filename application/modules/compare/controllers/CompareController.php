@@ -19,7 +19,7 @@ class CompareController extends Controller
 
 
         foreach ($ids as $id) {
-            $product = Product::find()->where(['id' => $id])->select(['id', 'name'])->one();
+            $product = Product::find()->where(['id' => $id])->select(['id', 'name', 'price', 'media_id', 'slug'])->one();
             if (!$product) continue;
 
             $models[$id] = [
@@ -42,5 +42,11 @@ class CompareController extends Controller
             'models' => $models,
             'avail_properties' => $avail_properties,
         ]);
+    }
+
+    public function actionClean()
+    {
+        Compare::clean();
+        return $this->redirect(['/']);
     }
 }

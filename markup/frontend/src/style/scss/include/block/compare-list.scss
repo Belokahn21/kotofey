@@ -14,6 +14,10 @@
   &__col {
     flex: 1 1 15%;
     padding: 5px;
+
+    &:not(.compare-list__property) {
+      text-align: center;
+    }
   }
 
   &__product {

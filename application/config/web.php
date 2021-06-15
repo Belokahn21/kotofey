@@ -168,6 +168,7 @@ $config = [
                 'gii' => 'gii',
 
                 'compare'=>'compare/compare/index',
+                'compare-clean'=>'compare/compare/clean',
                 'vacancy' => 'vacancy/vacancy/index',
                 'vacancy/<id>' => 'vacancy/vacancy/view',
                 'brand' => 'catalog/brand/index',

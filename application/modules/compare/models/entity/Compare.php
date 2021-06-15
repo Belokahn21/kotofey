@@ -46,4 +46,10 @@ class Compare
         }
         return $items;
     }
+
+    public static function clean()
+    {
+        \Yii::$app->session->open();
+        \Yii::$app->session->remove(self::COMPARE_SESSION_KEY);
+    }
 }
