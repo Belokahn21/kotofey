@@ -32,6 +32,7 @@ class CompareController extends Controller
 
             foreach ($product->propsValues as $property_value_row) {
                 if ($property_value_row instanceof PropertiesProductValues && $property_value_row->property instanceof Properties) {
+                    if ($property_value_row->property->is_show_site != true) continue;
                     $avail_properties[$property_value_row->property->id]['property'] = $property_value_row->property;
                 }
             }
