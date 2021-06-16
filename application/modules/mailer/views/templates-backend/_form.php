@@ -49,7 +49,7 @@ use yii\helpers\ArrayHelper;
             ]
         ]); */ ?>
 
-        <?= $form->field($model, 'text')->textarea(); ?>
+        <?= $form->field($model, 'text')->textarea(['rows' => 10]); ?>
 
     </div>
 </div>
