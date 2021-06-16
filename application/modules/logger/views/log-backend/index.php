@@ -26,6 +26,11 @@ $this->title = Title::show('Логи сайта');
         'message',
         'status',
         [
+            'attribute' => 'status',
+            'format' => 'raw',
+            'filter' => ArrayHelper::map(Logger::find()->select('status')->groupBy(['status'])->all(), 'status', 'status')
+        ],
+        [
             'attribute' => 'uniqCode',
             'format' => 'raw',
             'filter' => ArrayHelper::map(Logger::find()->select('uniqCode')->groupBy(['uniqCode'])->all(), 'uniqCode', 'uniqCode')
