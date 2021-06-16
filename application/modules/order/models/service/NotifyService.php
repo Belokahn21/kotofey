@@ -158,7 +158,9 @@ class NotifyService
 
         if (empty($order->email) || $order->status != 8) return false;
 
-        if (!$event = MailEvents::findOne(2)) return false;
+        if (!$module = Yii::$app->getModule('order')) return false;
+
+        if (!$event = MailEvents::findOne($module->mail_event_id_order_ready)) return false;
 
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
