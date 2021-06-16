@@ -2,6 +2,7 @@
 
 namespace app\modules\site\controllers;
 
+use app\modules\user\models\entity\User;
 use Yii;
 use app\modules\site\models\forms\ConsoleForm;
 use app\modules\site\models\tools\Backup;
@@ -32,7 +33,7 @@ class SiteBackendController extends MainBackendController
 
             $backup->createDumpDatabase();
 
-            if (Yii::$app->request->get('out') == 'Y') {
+            if (Yii::$app->request->get('out') == 'Y' && User::isRole('Developer')) {
                 $name = Yii::getAlias('@app') . $backup->getNameDirDumps() . $backup->getNameFile();
                 header('Content-Type: application/octet-stream');
                 header("Content-Transfer-Encoding: Binary");
