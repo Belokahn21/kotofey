@@ -169,6 +169,8 @@ class NotifyService
             'ORDER_ID' => $order->id,
             'STORE_ADDRESS' => 'г. Барнаул, ул. Северо-Западная, д. 6Б',
             'STORE_TIME' => '10:00 до 19:00',
+            'DELIVERY_DATE' => $order->dateDelivery->date,
+            'DELIVERY_TIME' => $order->dateDelivery->time,
         ]);
 
         $history = new OrderMailHistory();
