@@ -6,6 +6,7 @@ namespace app\modules\order\models\entity;
 use app\modules\acquiring\models\services\ofd\OFDFermaService;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\service\BonusService;
+use app\modules\order\models\service\NotifyService;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\user\models\entity\User;
@@ -149,6 +150,9 @@ class Order extends ActiveRecord
             'email' => $this->email,
             'phone' => $this->phone,
         ]);
+
+        $ns = new NotifyService();
+        $ns->notifyCompleteOrder($this);
 
 
         // todo: херня выходит с пересохранением заказа, надо поправить

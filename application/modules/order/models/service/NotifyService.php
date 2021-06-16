@@ -3,14 +3,18 @@
 namespace app\modules\order\models\service;
 
 
-use app\modules\site\models\tools\Currency;
-use app\modules\site\models\tools\Debug;
-use app\modules\site\models\forms\GrumingForm;
+use app\modules\order\models\entity\OrderMailHistory;
 use app\modules\site_settings\models\entity\SiteSettings;
+use app\modules\mailer\models\services\MailService;
+use app\modules\mailer\models\entity\MailTemplates;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\models\entity\Order;
-use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\OrdersItems;
+use app\modules\mailer\models\entity\MailEvents;
+use app\modules\order\models\entity\OrderDate;
+use app\modules\site\models\forms\GrumingForm;
+use app\modules\site\models\tools\Currency;
+use app\modules\order\models\entity\Order;
+use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Price;
 use VK\Client\VKApiClient;
 use Yii;
@@ -146,5 +150,28 @@ class NotifyService
         }
 
         $this->accessToken = $token;
+    }
+
+    public function notifyCompleteOrder(Order $order)
+    {
+        if (OrderMailHistory::findByOrderId($order->id)) return false;
+
+        if (empty($order->email) || $order->status != 8) return false;
+
+        if (!$event = MailEvents::findOne(2)) return false;
+
+        $mailer = new MailService();
+        $mailer->sendEvent($event->id, [
+            'EMAIL_FROM' => 'sale@kotofey.store',
+            'EMAIL_TO' => $order->email,
+            'ORDER_ID' => $order->id,
+            'STORE_ADDRESS' => 'г. Барнаул, ул. Северо-Западная, д. 6Б',
+            'STORE_TIME' => '10:00 до 19:00',
+        ]);
+
+        $history = new OrderMailHistory();
+        $history->order_id = $order->id;
+        $history->event_id = $event->id;
+        return $history->validate() && $history->save();
     }
 }

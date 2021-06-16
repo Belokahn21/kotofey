@@ -2,6 +2,7 @@
 
 namespace app\modules\order;
 
+use app\modules\mailer\models\entity\MailEvents;
 use app\modules\site\MainModule;
 use app\modules\user\models\helpers\UserHelper;
 use yii\helpers\ArrayHelper;
@@ -13,6 +14,7 @@ class Module extends MainModule
     private $name = 'Заказы';
 
     public $default_manager_id;
+    public $mail_event_id_order_ready;
 
     public function init()
     {
@@ -39,6 +41,7 @@ class Module extends MainModule
     {
         return [
             'default_manager_id' => ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'),
+            'mail_event_id_order_ready' => ArrayHelper::map(MailEvents::find()->all(), 'id', 'name'),
         ];
     }
 
@@ -46,6 +49,7 @@ class Module extends MainModule
     {
         return [
             'default_manager_id' => 'Менеджер заказов по умолчанию',
+            'mail_event_id_order_ready' => 'ID почтового события, заказ готов к выдаче',
         ];
     }
 }
