@@ -25,7 +25,7 @@ class SiteBackendController extends MainBackendController
     public function actionIndex()
     {
 
-        if (Yii::$app->request->get('save_dump') == 'Y' && User::isRole('Developer')) {
+        if (Yii::$app->request->get('save_dump') == 'Y') {
             $backup = new Backup();
             if ($backup->isOverSize()) {
                 $backup->clearDumpCatalog();
