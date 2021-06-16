@@ -147,6 +147,7 @@ $config = [
                 'DELETE api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/delete',
 
                 '/' => 'site/site/index',
+                'thanks' => 'site/site/thanks',
                 'delivery' => 'site/site/delivery',
                 'contacts' => 'site/site/contacts',
                 'about' => 'site/site/about',
