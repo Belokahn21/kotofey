@@ -47,7 +47,7 @@ $this->title = Title::show("Список доставок");
                         <div class="logistic-list-data__value">
                             <?= OrderHelper::getPayment($order); ?>
                             <?php if (!empty($order->odd)): ?>
-                                / Сдача: <?= Price::format($order->odd - OrderHelper::orderSummary($order)); ?>
+                                / <span class="red">Сдача: <?= Price::format($order->odd - OrderHelper::orderSummary($order)); ?></span>
                             <?php endif; ?>
                         </div>
                     </div>
