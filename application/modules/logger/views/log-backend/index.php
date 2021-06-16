@@ -24,7 +24,6 @@ $this->title = Title::show('Логи сайта');
     'columns' => [
         'id',
         'message',
-        'status',
         [
             'attribute' => 'status',
             'format' => 'raw',

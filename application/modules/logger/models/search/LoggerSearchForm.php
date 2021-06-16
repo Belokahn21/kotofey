@@ -19,7 +19,7 @@ class LoggerSearchForm extends Logger
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'status'], 'integer'],
             [['message', 'uniqCode'], 'string'],
         ];
     }
@@ -43,6 +43,7 @@ class LoggerSearchForm extends Logger
 
         $query->andFilterWhere(['id' => $this->id])
             ->andFilterWhere(['like', 'message', $this->message])
+            ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'uniqCode', $this->uniqCode]);
 
         return $dataProvider;
