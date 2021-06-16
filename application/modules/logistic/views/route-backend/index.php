@@ -34,7 +34,9 @@ $this->title = Title::show("Список доставок");
 
                     <div class="logistic-list-data__row">
                         <div class="logistic-list-data__key">Сумма заказа:</div>
-                        <div class="logistic-list-data__value red bold"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
+                        <div class="logistic-list-data__value red bold">
+                            <?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?>
+                        </div>
                     </div>
                     <div class="logistic-list-data__row">
                         <div class="logistic-list-data__key">Статус:</div>
@@ -42,7 +44,12 @@ $this->title = Title::show("Список доставок");
                     </div>
                     <div class="logistic-list-data__row">
                         <div class="logistic-list-data__key">Оплата:</div>
-                        <div class="logistic-list-data__value"><?= OrderHelper::getPayment($order); ?></div>
+                        <div class="logistic-list-data__value">
+                            <?= OrderHelper::getPayment($order); ?>
+                            <?php if (!empty($order->odd)): ?>
+                                / Сдача: <?= Price::format($order->odd - OrderHelper::orderSummary($order)); ?>
+                            <?php endif; ?>
+                        </div>
                     </div>
 
                     <div class="logistic-list-data__col">
