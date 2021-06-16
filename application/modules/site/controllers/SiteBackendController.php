@@ -25,7 +25,7 @@ class SiteBackendController extends MainBackendController
     public function actionIndex()
     {
 
-        if (Yii::$app->request->get('save_dump') == 'Y') {
+        if (Yii::$app->request->get('save_dump') == 'Y' && User::isRole('Developer')) {
             $backup = new Backup();
             if ($backup->isOverSize()) {
                 $backup->clearDumpCatalog();
@@ -33,7 +33,7 @@ class SiteBackendController extends MainBackendController
 
             $backup->createDumpDatabase();
 
-            if (Yii::$app->request->get('out') == 'Y' && User::isRole('Developer')) {
+            if (Yii::$app->request->get('out') == 'Y') {
                 $name = Yii::getAlias('@app') . $backup->getNameDirDumps() . $backup->getNameFile();
                 header('Content-Type: application/octet-stream');
                 header("Content-Transfer-Encoding: Binary");
