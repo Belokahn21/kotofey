@@ -2,6 +2,7 @@
 
 namespace app\modules\order\models\entity;
 
+use app\modules\mailer\models\entity\MailTemplates;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -40,6 +41,11 @@ class OrderMailHistory extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function getEvent()
+    {
+        return $this->hasOne(MailTemplates::className(), ['event_id' => 'event_id']);
     }
 
     public static function findByOrderId(int $order_id)
