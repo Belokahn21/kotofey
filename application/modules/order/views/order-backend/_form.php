@@ -341,7 +341,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
         <?php endif; ?>
 
         <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
-            <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?>/<?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
+            <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
         <?php endif; ?>
     </div>
 
