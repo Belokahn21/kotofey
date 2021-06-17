@@ -16134,34 +16134,55 @@ label[for="site-form-pet-avatar"] {
 .thanks-image {
   max-width: 100%;
   width: 100%;
-  height: 100%;
+  height: 500px;
   position: relative;
-  object-fit: cover; }
-  .thanks-image:after {
+  object-fit: cover;
+  object-position: top; }
+
+.thanks-block {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: stretch;
+  margin-bottom: 1rem; }
+
+.thanks-item {
+  position: relative;
+  display: block;
+  width: 25%;
+  margin: 0 20px 20px 0;
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); }
+  .thanks-item:after {
     width: 25px;
     height: 25px;
     padding: 5px;
+    margin: -0.5rem;
     background: #ff1a4a;
     color: white;
     text-align: center;
     font-size: 12px;
     line-height: 18px;
     display: block;
-    content: "";
+    content: attr(data-index);
     top: 0;
     left: 0;
-    position: absolute; }
+    position: absolute;
+    border-radius: 50%;
+    font-weight: bold; }
 
-.thanks-block {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between; }
-
-.thanks-item {
-  display: block;
-  width: 25%;
-  max-height: 300px; }
+.thanks-note {
+  width: 100%;
+  padding: 10px 5px 5px 5px;
+  color: grey;
+  text-align: justify;
+  font-size: 12px;
+  line-height: 18px;
+  display: block; }
+  .thanks-note a {
+    font-weight: bold;
+    color: #ff1a4a; }
+    .thanks-note a:hover {
+      color: #ff1a4a; }
 
 .product-gallery-big {
   width: 400px;

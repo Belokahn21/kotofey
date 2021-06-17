@@ -11,14 +11,20 @@ $this->title = 'Как сказать спасибо интернет-магаз
 </div>
 <h2>Оставить отзыв на 2GIS, +10 к карме</h2>
 <div class="thanks-block">
-    <a href="/images/thanks/2gis/1.png" class="thanks-item" data-lightbox="roadtrip">
-        <img src="/images/thanks/2gis/1.png" class="thanks-image">
-    </a>
+    <div class="thanks-item" data-index="1">
+        <a href="/images/thanks/2gis/1.png" data-lightbox="roadtrip">
+            <img src="/images/thanks/2gis/1.png" class="thanks-image">
+        </a>
+        <div class="thanks-note">Найдите нас в 2GIS <a href="https://2gis.ru/barnaul/firm/70000001039815724?m=83.75344%2C53.374988%2F16" target="_blank">по ссылке</a> и нажмите оставить отзыв</div>
+    </div>
 
-    <a href="/images/thanks/2gis/2.png" class="thanks-item" data-lightbox="roadtrip">
-        <img src="/images/thanks/2gis/2.png" class="thanks-image">
-    </a>
+    <div class="thanks-item" data-index="2">
+        <a href="/images/thanks/2gis/2.png" data-lightbox="roadtrip">
+            <img src="/images/thanks/2gis/2.png" class="thanks-image">
+        </a>
+        <div class="thanks-note">Напишите всё что вам понравилось или не понравилось и отправьте форму</div>
+    </div>
 </div>
 <h2>Оставить отзыв в Яндекс-справочнике, +10 к карме</h2>
 <h2>Оставить отзыв на нашем сайте, +20 к карме</h2>
-<h2>Поделить мнением о купленном товаре, +20 к карме</h2>
+<h2>Поделиться мнением о купленном товаре, +20 к карме</h2>
