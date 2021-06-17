@@ -36,7 +36,9 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
         <a class="nav-item nav-link<?= ($model->isNewRecord ? ' active' : ''); ?>" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
         <a class="nav-item nav-link" id="nav-items-edit-tab" data-toggle="tab" href="#nav-items-edit" role="tab" aria-controls="nav-items-edit" aria-selected="false">Товары в заказе</a>
         <a class="nav-item nav-link" id="nav-delivery-edit-tab" data-toggle="tab" href="#nav-delivery-edit" role="tab" aria-controls="nav-delivery-edit" aria-selected="false">Доставка</a>
-        <a class="nav-item nav-link" id="nav-history-edit-tab" data-toggle="tab" href="#nav-history-edit" role="tab" aria-controls="nav-history-edit" aria-selected="false">История заказа</a>
+        <?php if (!$model->isNewRecord): ?>
+            <a class="nav-item nav-link" id="nav-history-edit-tab" data-toggle="tab" href="#nav-history-edit" role="tab" aria-controls="nav-history-edit" aria-selected="false">История заказа</a>
+        <?php endif; ?>
         <a class="nav-item nav-link" id="nav-tracking-edit-tab" data-toggle="tab" href="#nav-tracking-edit" role="tab" aria-controls="nav-tracking-edit" aria-selected="false">Отслеживание заказа</a>
     </div>
 </nav>
@@ -324,26 +326,27 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
             </div>
         </div>
     </div>
+    <?php if (!$model->isNewRecord): ?>
+        <div class="tab-pane fade" id="nav-history-edit" role="tabpanel" aria-labelledby="nav-history-edit">
+            <?php if ($bonus = \app\modules\bonus\models\entity\UserBonusHistory::findOneByOrder($model)): ?>
+                <?= Html::a('Начислено ' . $bonus->count . ' бонуса', Url::to(['/admin/bonus/bonus-history-backend/update', 'id' => $bonus->id])); ?>
+            <?php endif; ?>
 
-    <div class="tab-pane fade" id="nav-history-edit" role="tabpanel" aria-labelledby="nav-history-edit">
-        <?php if ($bonus = \app\modules\bonus\models\entity\UserBonusHistory::findOneByOrder($model)): ?>
-            <?= Html::a('Начислено ' . $bonus->count . ' бонуса', Url::to(['/admin/bonus/bonus-history-backend/update', 'id' => $bonus->id])); ?>
-        <?php endif; ?>
+            <?php if ($sberPayment = \app\modules\acquiring\models\entity\AcquiringOrder::findOne(['order_id' => $model->id])): ?>
+                <hr/>
+                <?= Html::a('Эквайринг транзакция: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
+            <?php endif; ?>
 
-        <?php if ($sberPayment = \app\modules\acquiring\models\entity\AcquiringOrder::findOne(['order_id' => $model->id])): ?>
-            <hr/>
-            <?= Html::a('Эквайринг транзакция: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
-        <?php endif; ?>
+            <?php if ($check = \app\modules\acquiring\models\entity\AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
+                <hr/>
+                <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
+            <?php endif; ?>
 
-        <?php if ($check = \app\modules\acquiring\models\entity\AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
-            <hr/>
-            <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
-        <?php endif; ?>
-
-        <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
-            <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
-        <?php endif; ?>
-    </div>
+            <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
+                <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
 
     <div class="tab-pane fade" id="nav-tracking-edit" role="tabpanel" aria-labelledby="nav-tracking-edit">
         <div class="row">
