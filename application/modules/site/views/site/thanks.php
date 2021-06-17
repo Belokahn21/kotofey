@@ -26,5 +26,20 @@ $this->title = 'Как сказать спасибо интернет-магаз
     </div>
 </div>
 <h2>Оставить отзыв в Яндекс-справочнике, +10 к карме</h2>
+<div class="thanks-block">
+    <div class="thanks-item" data-index="1">
+        <a href="/images/thanks/sprav/1.png" data-lightbox="roadtrip">
+            <img src="/images/thanks/sprav/1.png" class="thanks-image">
+        </a>
+        <div class="thanks-note">Воспользуйтесь <a href="https://yandex.ru/profile/70750917615" target="_blank">быстрой ссылкой</a> и внизу оцените по 5-ти бальной шкале</div>
+    </div>
+
+    <div class="thanks-item" data-index="2">
+        <a href="/images/thanks/sprav/2.png" data-lightbox="roadtrip">
+            <img src="/images/thanks/sprav/2.png" class="thanks-image">
+        </a>
+        <div class="thanks-note">После выставления оценки появится форма для отправки отзыва, оценка со словами - будет гарантией, что отзыв опубликуется!</div>
+    </div>
+</div>
 <h2>Оставить отзыв на нашем сайте, +20 к карме</h2>
 <h2>Поделиться мнением о купленном товаре, +20 к карме</h2>

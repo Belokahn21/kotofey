@@ -16177,7 +16177,8 @@ label[for="site-form-pet-avatar"] {
   text-align: justify;
   font-size: 12px;
   line-height: 18px;
-  display: block; }
+  display: block;
+  border-top: 1px silver solid; }
   .thanks-note a {
     font-weight: bold;
     color: #ff1a4a; }

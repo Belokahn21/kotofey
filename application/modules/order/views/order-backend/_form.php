@@ -10,6 +10,7 @@ use \app\modules\user\models\helpers\UserHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\order\models\entity\OrderMailHistory;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
 use app\modules\order\widgets\CustomerInput\CustomerInputWidget;
@@ -337,6 +338,10 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
         <?php if ($check = \app\modules\acquiring\models\entity\AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
             <hr/>
             <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
+        <?php endif; ?>
+
+        <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
+            Отправлено письмо: <?= Html::a('#' . $mail->id, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?>
         <?php endif; ?>
     </div>
 
