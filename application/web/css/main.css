@@ -16131,6 +16131,15 @@ label[for="site-form-pet-avatar"] {
   font-size: 12px;
   color: #2d0c03; }
 
+.thanks-description p {
+  text-align: justify;
+  text-indent: 1.25em; }
+
+.thanks-description ~ h2 {
+  font-weight: bold;
+  font-size: 18px;
+  margin-bottom: 10px; }
+
 .thanks-image {
   max-width: 100%;
   width: 100%;
@@ -16144,7 +16153,8 @@ label[for="site-form-pet-avatar"] {
   flex-direction: row;
   align-items: flex-start;
   justify-content: stretch;
-  margin-bottom: 1rem; }
+  margin-bottom: 1rem;
+  flex-wrap: wrap; }
 
 .thanks-item {
   position: relative;
@@ -16152,6 +16162,9 @@ label[for="site-form-pet-avatar"] {
   width: 25%;
   margin: 0 20px 20px 0;
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); }
+  @media (max-width: 450px) {
+    .thanks-item {
+      width: 100%; } }
   .thanks-item:after {
     width: 25px;
     height: 25px;
