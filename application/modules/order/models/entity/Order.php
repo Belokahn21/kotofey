@@ -153,8 +153,8 @@ class Order extends ActiveRecord
 
         $ns = new NotifyService();
         $ns->notifyCompleteOrder($this);
-        $ns->sendMessageToVkontakte($this->id, '9b20f6f75e3d6afce2cfa6b16024dad5fadfbdc83cf92e57c7897a3310b4a5f17b7e0ce4ccd708fec1674');
-        $ns->sendEmailClient($this->id);
+//        $ns->sendMessageToVkontakte($this->id, '9b20f6f75e3d6afce2cfa6b16024dad5fadfbdc83cf92e57c7897a3310b4a5f17b7e0ce4ccd708fec1674');
+//        $ns->sendEmailClient($this->id);
 
 
         // todo: херня выходит с пересохранением заказа, надо поправить
