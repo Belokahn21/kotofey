@@ -1,3 +1,7 @@
 extends include/layer
 
 block contents
+    div Ваш заказ №#ORDER_ID# полностью собран и готов к доставке. Вы так же можете забрать его самостоятельно в нашем пункте выдаче по адресу #STOCK_ADDRESS# с #STOCK_TIME#.
+    div Доставка заказа будует #DELVIERY_DATE# время #ORDER_TIME#
+    div Спасибо за покупку!
+    a.order-detail(href="#ORDER_LINK#") Открыть заказ на сайте
