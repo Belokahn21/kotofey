@@ -2,10 +2,12 @@ extends include/layer
 
 block contents
     table(width="600px" style="display:block; margin:auto; font-size:18px; text-align:center;")
-        tr
-            td Ваш заказ №#ORDER_ID# полностью собран и готов к доставке. Вы так же можете забрать его самостоятельно в нашем пункте выдаче по адресу #STORE_ADDRESS# с #STORE_TIME#.<br>
-        tr
-            td  Доставка заказа будует #DELIVERY_DATE# время #DELIVERY_TIME#
-        tr
+        tr(style="margin-bottom:40px;")
+            td Ваш заказ №#ORDER_ID# полностью собран и готов к доставке.<br><br>
+        tr(style="margin-bottom:40px;")
+            td Вы так же можете забрать его самостоятельно в нашем пункте выдаче по адресу #STORE_ADDRESS# с #STORE_TIME#.<br><br>
+        tr(style="margin-bottom:40px;")
+            td  Доставка заказа будует #DELIVERY_DATE# время #DELIVERY_TIME# <br><br>
+        tr(style="margin-bottom:40px;")
             td
-                a(href="#ORDER_LINK#" style="margin-top:10px; display:block; margin:auto; color:#ff1a4a; border-radius:4px; max-width:200px; text-align:center; text-transform:uppercase; border:1px #ff1a4a solid; padding:6px; font-weight:bold; font-size:14px;") Открыть заказ на сайте
+                a(href="#ORDER_LINK#" style="display:block; text-decoration:none!important; margin:auto; color:#ff1a4a; border-radius:4px; max-width:200px; text-align:center; text-transform:uppercase; border:1px #ff1a4a solid; padding:6px; font-weight:bold; font-size:14px;") Открыть заказ на сайте
