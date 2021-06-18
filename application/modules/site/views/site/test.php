@@ -7,6 +7,7 @@ $event = \app\modules\mailer\models\entity\MailEvents::findOne(3);
 if (!$event) return false;
 
 $mails = \app\modules\mailer\models\entity\MailTemplates::findAll(['event_id' => $event->id]);
+$order = \app\modules\order\models\entity\Order::findOne(525);
 
 foreach ($mails as $mail) {
     $mailer = new MailService();
@@ -16,6 +17,11 @@ foreach ($mails as $mail) {
         'ORDER_ID' => '1',
         'STORE_ADDRESS' => 'г. Барнаул, ул. Северо-Западная, д. 6Б',
         'STORE_TIME' => '10:00 до 19:00',
+
+
+        'ORDER_LINK' => "https://kotofey.store/profile/order/{$order->id}/",
+        'DELIVERY_DATE' => $order->dateDelivery->date,
+        'DELIVERY_TIME' => $order->dateDelivery->time,
     ]);
 }
 ?>
