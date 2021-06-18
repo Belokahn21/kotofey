@@ -3,7 +3,7 @@
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\mailer\models\services\MailService;
 
-$event = \app\modules\mailer\models\entity\MailEvents::findOne(2);
+$event = \app\modules\mailer\models\entity\MailEvents::findOne(3);
 if (!$event) return false;
 
 $mails = \app\modules\mailer\models\entity\MailTemplates::findAll(['event_id' => $event->id]);
