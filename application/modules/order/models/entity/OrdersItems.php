@@ -76,11 +76,11 @@ class OrdersItems extends ActiveRecord
 
         Basket::clear();
 
-        $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\modules\order\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
-                'order_id' => $this->order_id
-            ]
-        );
-        $this->trigger(OrdersItems::EVENT_CREATE_ITEMS);
+//        $this->on(OrdersItems::EVENT_CREATE_ITEMS, ['app\modules\order\models\events\OrderEvents', 'noticeAboutCreateOrder'], [
+//                'order_id' => $this->order_id
+//            ]
+//        );
+//        $this->trigger(OrdersItems::EVENT_CREATE_ITEMS);
 
 
         return true;
