@@ -42,14 +42,14 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
 
-        <?php /*= $form->field($model, 'text')->widget(CKEditor::className(), [
+        <?= $form->field($model, 'text')->widget(CKEditor::className(), [
             'editorOptions' => [
                 'preset' => 'full',
                 'inline' => false
             ]
-        ]); */ ?>
+        ]); ?>
 
-        <?= $form->field($model, 'text')->textarea(['rows' => 10]); ?>
+        <?php //= $form->field($model, 'text')->textarea(['rows' => 10]); ?>
 
     </div>
 </div>

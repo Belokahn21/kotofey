@@ -33,6 +33,18 @@ $this->title = Title::show("Рубрики");
         'id',
         'name',
         [
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
+        [
             'attribute' => 'created_at',
             'value' => function ($model) {
                 return date("d.m.Y", $model->created_at);
