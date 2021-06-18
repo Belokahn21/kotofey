@@ -16,6 +16,7 @@ use app\modules\site\models\tools\Currency;
 use app\modules\order\models\entity\Order;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Price;
+use app\modules\stock\models\entity\Stocks;
 use VK\Client\VKApiClient;
 use Yii;
 use yii\helpers\Url;
@@ -164,13 +165,16 @@ class NotifyService
 
         if (!$event = MailEvents::findOne($module->mail_event_id_order_ready)) return false;
 
+        $stock = Stocks::findOne(1);
+
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
             'EMAIL_FROM' => 'sale@kotofey.store',
             'EMAIL_TO' => $order->email,
             'ORDER_ID' => $order->id,
-            'STORE_ADDRESS' => 'г. Барнаул, ул. Северо-Западная, д. 6Б',
-            'STORE_TIME' => '10:00 до 19:00',
+            'ORDER_LINK' => $order->id,
+            'STORE_ADDRESS' => $stock->address,
+            'STORE_TIME' => "{$stock->time_start} до {$stock->time_end}",
             'DELIVERY_DATE' => $order->dateDelivery->date,
             'DELIVERY_TIME' => $order->dateDelivery->time,
         ]);
