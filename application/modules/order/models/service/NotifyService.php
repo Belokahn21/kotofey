@@ -71,12 +71,14 @@ class NotifyService
                 $message .= "Подробнее {$detailUrlPage}\n";
 
 
-                $message_response = $vk->messages()->send($access_token, [
-                    'user_id' => Yii::$app->params['vk']['adminVkontakteId'],
-                    'random_id' => rand(1, 999999),
-                    'peer_id' => Yii::$app->params['vk']['adminVkontakteId'],
-                    'message' => $message,
-                ]);
+                foreach (Yii::$app->params['vk']['adminVkontakteId'] as $vk_id) {
+                    $message_response = $vk->messages()->send($access_token, [
+                        'user_id' => $vk_id,
+                        'random_id' => rand(1, 999999),
+                        'peer_id' => $vk_id,
+                        'message' => $message,
+                    ]);
+                }
 
             }
         } catch (\Exception $exception) {
