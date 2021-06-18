@@ -43,7 +43,9 @@
     "prop-types": "^15.7.2",
     "rc-slider": "^9.7.1",
     "react": "^17.0.1",
+    "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
+    "select2": "^4.1.0-rc.0",
     "selectize": "^0.12.6",
     "swiper": "^5.3.8"
   }
