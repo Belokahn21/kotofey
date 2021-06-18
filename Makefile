@@ -3,6 +3,7 @@ build:
 
 webpack: webpack-build webpack-copy
 webpack-backend: webpack-build-backend webpack-copy-backend
+webpack-mail: webpack-build-mail
 
 webpack-copy:
 	cp -R markup/frontend/build/js application/web
@@ -19,6 +20,9 @@ webpack-build:
 
 webpack-build-backend:
 	cd markup/backend && npm run build
+
+webpack-build-mail:
+	cd markup/mails && npm run build
 
 gulp-build:
 	rm -rf markup/build/ && rm -rf application/web/css/ && rm -rf application/web/js/ && rm -rf application/web/images/ && cd markup && gulp build
