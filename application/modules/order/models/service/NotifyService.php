@@ -177,6 +177,10 @@ class NotifyService
             'STORE_TIME' => "{$stock->time_start} до {$stock->time_end}",
             'DELIVERY_DATE' => $order->dateDelivery->date,
             'DELIVERY_TIME' => $order->dateDelivery->time,
+            'LINK_CAT' => 'https://kotofey.store/catalog/koski/',
+            'LINK_DOG' => 'https://kotofey.store/catalog/sobaki/',
+            'LINK_MOUSE' => 'https://kotofey.store/catalog/gryzuny/',
+            'LINK_FISH' => 'https://kotofey.store/catalog/rybki/',
         ]);
 
         $history = new OrderMailHistory();
