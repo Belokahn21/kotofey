@@ -67,14 +67,7 @@ class OrderController extends Controller
                     return false;
                 }
 
-                if ($module = \Yii::$app->getModule('bonus')) {
-                    if ($module->getEnable()) {
-                        if ($order->bonus && $order->bonus > 0) {
-                            BonusHelper::addHistory($order, $order->bonus * -1, 'Списание за заказ #' . $order->id, true);
-                            $order->discount = $order->bonus * -1;
-                        }
-                    }
-                }
+
                 if (!$order->save()) {
                     Alert::setErrorNotify("Ошибка при создании заказа.");
                     $transaction->rollBack();

@@ -151,6 +151,15 @@ class Order extends ActiveRecord
             'phone' => $this->phone,
         ]);
 
+        if ($module = \Yii::$app->getModule('bonus')) {
+            if ($module->getEnable()) {
+                if ($this->bonus && $this->bonus > 0) {
+                    BonusHelper::addHistory($this, $this->bonus * -1, 'Списание за заказ #' . $this->id, true);
+                    $this->discount = $this->bonus * -1;
+                }
+            }
+        }
+
         $ns = new NotifyService();
         $ns->notifyCompleteOrder($this);
 //        $ns->sendMessageToVkontakte($this->id, '9b20f6f75e3d6afce2cfa6b16024dad5fadfbdc83cf92e57c7897a3310b4a5f17b7e0ce4ccd708fec1674');

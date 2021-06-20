@@ -241,6 +241,9 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'manager_id')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['prompt' => 'Менеджер заказа'])->label(false); ?>
                 </div>
+                <div class="w-25 p-1">
+                    <?= $form->field($model, 'bouns')->textInput(['placeholder' => 'Списать клиентские бонусы'])->label(false); ?>
+                </div>
             </div>
         </div>
 
