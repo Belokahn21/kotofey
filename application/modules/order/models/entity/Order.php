@@ -228,6 +228,7 @@ class Order extends ActiveRecord
 
     public function hasAccess()
     {
+        if (\Yii::$app->user->isGuest) return false;
         return $this->phone == \Yii::$app->user->identity->phone || $this->user_id == \Yii::$app->user->identity->id || \Yii::$app->user->identity->id == 1;
     }
 
