@@ -1,0 +1,19 @@
+.product {
+  &-additional-panel {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: stretch;
+    padding: 10px;
+  }
+
+  &-markup {
+    padding: 10px;
+    border-radius: 3px;
+    border: 1px $theme-color solid;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    margin-right: 10px;
+  }
+}

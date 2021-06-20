@@ -9009,6 +9009,22 @@ html, body {
   width: 50%;
   border: 1px silver solid; }
 
+.product-additional-panel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: stretch;
+  padding: 10px; }
+
+.product-markup {
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px #00BFFF solid;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 12px;
+  margin-right: 10px; }
+
 /*-----------------------------------------------------------*/
 .content {
   float: left;

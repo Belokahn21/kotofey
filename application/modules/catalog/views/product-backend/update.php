@@ -1,6 +1,8 @@
 <?php
 
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\models\tool\parser\providers\SibagroTrade;
+use app\modules\vendors\models\entity\Vendor;
 use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
@@ -21,7 +23,14 @@ $this->title = Title::show('Товары');
 <?php $form = ActiveForm::begin([
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
-    Наценка: <?= ProductHelper::getMarkup($model); ?>
+    <div class="product-additional-panel">
+        <div class="product-markup">Наценка: <?= ProductHelper::getMarkup($model); ?></div>
+        <?php if ($model->vendor_id == Vendor::VENDOR_ID_SIBAGRO): ?>
+            <div>
+                <?= Html::a('Открыть на сайте поставщика ', SibagroTrade::getProductDetailByCode($model->code), ['target' => '_blank']) . Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]); ?>
+            </div>
+        <?php endif; ?>
+    </div>
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
