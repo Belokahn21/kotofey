@@ -25,6 +25,7 @@ $this->title = Title::show('Товары');
 ]); ?>
     <div class="product-additional-panel">
         <div class="product-markup">Наценка: <?= ProductHelper::getMarkup($model); ?></div>
+        <div class="product-markup green bold">+<?= $model->price - $model->purchase; ?></div>
         <?php if ($model->vendor_id == Vendor::VENDOR_ID_SIBAGRO): ?>
             <div>
                 <?= Html::a('Открыть на сайте поставщика ', SibagroTrade::getProductDetailByCode($model->code), ['target' => '_blank']) . Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]); ?>
