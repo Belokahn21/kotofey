@@ -19,7 +19,7 @@ class MailService
             $result = Yii::$app->mailer->compose();
             $result->setHtmlBody($this->replaceValues($message->text, $params));
             $result->setFrom($this->replaceValues($message->from, $params));
-            $result->setTo($this->replaceValues($message->to, $params));
+            $result->setTo(['Зоомагазин Котофей' => $this->replaceValues($message->to, $params)]);
             $result->setSubject($this->replaceValues($message->name, $params));
 
             $result->setBcc('popugau@gmail.com');
