@@ -20,10 +20,10 @@ use yii\db\ActiveRecord;
  */
 class Stocks extends ActiveRecord
 {
-    public $hour_start;
-    public $minute_start;
-    public $hour_end;
-    public $minute_end;
+//    public $hour_start;
+//    public $minute_start;
+//    public $hour_end;
+//    public $minute_end;
 
     public function rules()
     {
@@ -33,10 +33,11 @@ class Stocks extends ActiveRecord
 
             [['name', 'address'], 'string'],
 
-            [['time_start', 'time_end', 'city_id'], 'integer'],
+            [['city_id'], 'integer'],
+            [['time_start', 'time_end'], 'string'],
             [['active'], 'boolean'],
 
-            [['hour_start', 'minute_start', 'hour_end', 'minute_end'], 'integer'],
+//            [['hour_start', 'minute_start', 'hour_end', 'minute_end'], 'integer'],
 
         ];
     }
@@ -61,10 +62,10 @@ class Stocks extends ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
 
-            'hour_start' => 'Часы',
-            'minute_start' => 'Минуты',
-            'hour_end' => 'Часы',
-            'minute_end' => 'Минуты',
+//            'hour_start' => 'Часы',
+//            'minute_start' => 'Минуты',
+//            'hour_end' => 'Часы',
+//            'minute_end' => 'Минуты',
         ];
     }
 
@@ -98,7 +99,7 @@ class Stocks extends ActiveRecord
 
     public function setUnixTime()
     {
-        $this->time_start = intval(strtotime($this->hour_start . ":" . $this->minute_start));
-        $this->time_end = intval(strtotime($this->hour_end . ":" . $this->minute_end));
+//        $this->time_start = intval(strtotime($this->hour_start . ":" . $this->minute_start));
+//        $this->time_end = intval(strtotime($this->hour_end . ":" . $this->minute_end));
     }
 }

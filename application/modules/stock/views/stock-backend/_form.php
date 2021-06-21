@@ -3,6 +3,9 @@
 use yii\helpers\ArrayHelper;
 use app\modules\geo\models\entity\Geo;
 
+/* @var $form \yii\widgets\ActiveForm */
+/* @var $model \app\modules\stock\models\entity\Stocks */
+
 ?>
 <nav>
     <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -23,14 +26,10 @@ use app\modules\geo\models\entity\Geo;
     <div class="tab-pane fade" id="nav-time" role="tabpanel" aria-labelledby="nav-time-tab">
         <div class="row">
             <div class="col-sm-6">
-                <p>Время открытия</p>
-                <?= $form->field($model, 'hour_start')->dropDownList(range(0, 23)); ?>
-                <?= $form->field($model, 'minute_start')->dropDownList(range(0, 59)); ?>
+                <?= $form->field($model, 'time_start')->textInput(['class' => 'js-time-mask']); ?>
             </div>
             <div class="col-sm-6">
-                <p>Время закрытия</p>
-                <?= $form->field($model, 'hour_end')->dropDownList(range(0, 23)); ?>
-                <?= $form->field($model, 'minute_end')->dropDownList(range(0, 59)); ?>
+                <?= $form->field($model, 'time_end')->textInput(['class' => 'js-time-mask']); ?>
             </div>
         </div>
     </div>

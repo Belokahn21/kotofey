@@ -4942,12 +4942,16 @@ document.addEventListener('DOMContentLoaded', function () {
       });
       im.mask(el);
     });
-  } //     let russsianPhone = document.querySelector(".js-mask-ru");
-  //     if (russsianPhone) {
-  //         let im = new Inputmask("+7 (999) 999 99-99", {placeholder: "+7 (___) ___ __ __"});
-  //         im.mask(russsianPhone);
-  //     }
+  }
 
+  var timeMask = document.querySelectorAll(".js-time-mask");
+
+  if (timeMask) {
+    timeMask.forEach(function (el) {
+      var im = new (maskedinput__WEBPACK_IMPORTED_MODULE_0___default())("99:99:99");
+      im.mask(el);
+    });
+  }
 });
 
 /***/ }),
