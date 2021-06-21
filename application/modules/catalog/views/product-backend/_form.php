@@ -147,7 +147,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         <?php $stock_model = new ProductStock(); ?>
         <?php foreach ($stocks as $stock): ?>
 
-            <?php $value = false; ?>
+            <?php $value = 0; ?>
             <?php if (!$model->isNewRecord): ?>
                 <?php $value = @ProductStock::findOne(['product_id' => $model->id, 'stock_id' => $stock->id])->count; ?>
             <?php endif; ?>
