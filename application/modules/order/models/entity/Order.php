@@ -151,7 +151,7 @@ class Order extends ActiveRecord
             'phone' => $this->phone,
         ]);
 
-        if ($module = \Yii::$app->getModule('bonus')) {
+        if ($module = \Yii::$app->getModule('bonus') && !empty($this->bonus)) {
             if ($module->getEnable()) {
                 if ($this->bonus && $this->bonus > 0) {
                     BonusHelper::addHistory($this, $this->bonus * -1, 'Списание за заказ #' . $this->id, true);
