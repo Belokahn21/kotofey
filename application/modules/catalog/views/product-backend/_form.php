@@ -144,14 +144,21 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         </div>
     </div>
     <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
-        <?php if (!$model->isNewRecord): ?>
-            <?php $stock_model = new ProductStock(); ?>
-            <?php foreach ($stocks as $stock): ?>
-                <?= $form->field($stock_model, 'stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
-                <?= $form->field($stock_model, 'product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
-                <?= $form->field($stock_model, 'count')->textInput(['placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})"])->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
-            <?php endforeach; ?>
-        <?php endif; ?>
+        <?php $stock_model = new ProductStock(); ?>
+        <?php foreach ($stocks as $stock): ?>
+
+            <?php $value = false; ?>
+            <?php if (!$model->isNewRecord): ?>
+                <?php $value = @ProductStock::findOne(['product_id' => $model->id, 'stock_id' => $stock->id])->count; ?>
+            <?php endif; ?>
+
+            <?= $form->field($stock_model, 'stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
+            <?= $form->field($stock_model, 'product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+            <?= $form->field($stock_model, 'count')->textInput([
+                'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
+                'value' => $value
+            ])->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
+        <?php endforeach; ?>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">
