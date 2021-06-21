@@ -51,6 +51,7 @@ $this->title = Title::show("Заказы");
         'email',
         [
             'attribute' => 'operator_id',
+            'label' => 'Оператор',
             'format' => 'raw',
             'value' => function ($model) {
                 return $model->manager->email;
