@@ -4,6 +4,7 @@ namespace app\modules\order\models\service;
 
 
 use app\modules\order\models\entity\OrderMailHistory;
+use app\modules\site\models\tools\System;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\mailer\models\services\MailService;
 use app\modules\mailer\models\entity\MailTemplates;
@@ -172,15 +173,15 @@ class NotifyService
             'EMAIL_FROM' => 'sale@kotofey.store',
             'EMAIL_TO' => $order->email,
             'ORDER_ID' => $order->id,
-            'ORDER_LINK' => $order->id,
+            'ORDER_LINK' => System::fullDomain() . "/profile/order/{$order->id}/",
             'STORE_ADDRESS' => $stock->address,
             'STORE_TIME' => "{$stock->time_start} до {$stock->time_end}",
             'DELIVERY_DATE' => $order->dateDelivery->date,
             'DELIVERY_TIME' => $order->dateDelivery->time,
-            'LINK_CAT' => 'https://kotofey.store/catalog/koski/',
-            'LINK_DOG' => 'https://kotofey.store/catalog/sobaki/',
-            'LINK_MOUSE' => 'https://kotofey.store/catalog/gryzuny/',
-            'LINK_FISH' => 'https://kotofey.store/catalog/rybki/',
+            'LINK_CAT' => System::fullDomain() . '/catalog/koski/',
+            'LINK_DOG' => System::fullDomain() . '/catalog/sobaki/',
+            'LINK_MOUSE' => System::fullDomain() . '/catalog/gryzuny/',
+            'LINK_FISH' => System::fullDomain() . '/catalog/rybki/',
         ]);
 
         $history = new OrderMailHistory();
