@@ -152,12 +152,16 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                 <?php $value = @ProductStock::findOne(['product_id' => $model->id, 'stock_id' => $stock->id])->count; ?>
             <?php endif; ?>
 
-            <?= $form->field($stock_model, 'stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
-            <?= $form->field($stock_model, 'product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
-            <?= $form->field($stock_model, 'count')->textInput([
-                'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
-                'value' => $value
-            ])->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
+            <div class="row">
+                <div class="col-4">
+                    <?= $form->field($stock_model, 'stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
+                    <?= $form->field($stock_model, 'product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                    <?= $form->field($stock_model, 'count')->textInput([
+                        'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
+                        'value' => $value
+                    ])->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
+                </div>
+            </div>
         <?php endforeach; ?>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
