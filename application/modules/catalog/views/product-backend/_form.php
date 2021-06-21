@@ -8,7 +8,7 @@ use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductOrder;
-use app\modules\cdn\widgets\CdnInput\CdnInputWidget;
+use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\ProductCategory;
@@ -17,12 +17,12 @@ use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
-use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $form \yii\widgets\ActiveForm
+ * @var $stocks Stocks[]
  */
 
 ?>
@@ -144,7 +144,14 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
         </div>
     </div>
     <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
-        Будет интересненькое
+        <?php if (!$model->isNewRecord): ?>
+            <?php $stock_model = new ProductStock(); ?>
+            <?php foreach ($stocks as $stock): ?>
+                <?= $form->field($stock_model, 'stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
+                <?= $form->field($stock_model, 'product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                <?= $form->field($stock_model, 'count')->textInput()->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">

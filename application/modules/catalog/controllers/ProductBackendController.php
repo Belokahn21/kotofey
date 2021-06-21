@@ -5,6 +5,7 @@ namespace app\modules\catalog\controllers;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
+use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use Yii;
 use app\modules\catalog\models\search\ProductSearchForm;
@@ -40,6 +41,7 @@ class ProductBackendController extends MainBackendController
         $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_NEW_PRODUCT]);
         $modelDelivery = new ProductOrder();
         $properties = Properties::find()->all();
+        $stocks = Stocks::find()->where(['active' => true])->all();
 
         $outProps = [];
         foreach ($properties as $prop) {
@@ -61,6 +63,7 @@ class ProductBackendController extends MainBackendController
 
         return $this->render('index', [
             'model' => $model,
+            'stocks' => $stocks,
             'properties' => $outProps,
 //            'properties' => $properties,
             'modelDelivery' => $modelDelivery,
@@ -75,6 +78,7 @@ class ProductBackendController extends MainBackendController
 
         $model->scenario = $this->modelClass::SCENARIO_UPDATE_PRODUCT;
         $properties = Properties::find()->all();
+        $stocks = Stocks::find()->where(['active' => true])->all();
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
@@ -90,6 +94,7 @@ class ProductBackendController extends MainBackendController
 
         return $this->render('update', [
             'model' => $model,
+            'stocks' => $stocks,
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
         ]);

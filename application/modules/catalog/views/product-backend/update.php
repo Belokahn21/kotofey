@@ -11,6 +11,7 @@ use yii\helpers\Html;
  * @var $model \app\modules\catalog\models\entity\Product
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
+ * @var $stocks \app\modules\stock\models\entity\Stocks[]
  */
 
 $this->title = Title::show('Товары');
@@ -35,6 +36,7 @@ $this->title = Title::show('Товары');
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
+    'stocks' => $stocks,
     'properties' => $properties,
     'modelDelivery' => $modelDelivery,
 ]) ?>
