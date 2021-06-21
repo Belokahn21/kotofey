@@ -53,6 +53,7 @@ use yii\db\ActiveRecord;
  * @property Promocode $promocodeEntity
  * @property boolean $chargeBonus
  * @property OrderDate $dateDelivery
+ * @property User $manager
  */
 class Order extends ActiveRecord
 {
@@ -267,5 +268,10 @@ class Order extends ActiveRecord
     public function getPromocodeEntity()
     {
         return $this->hasOne(Promocode::className(), ['code' => 'promocode']);
+    }
+
+    public function getManager()
+    {
+        return $this->hasOne(User::className(), ['id' => 'manager_id']);
     }
 }

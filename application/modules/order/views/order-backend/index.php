@@ -49,7 +49,13 @@ $this->title = Title::show("Заказы");
     'columns' => [
         'id',
         'email',
-        'ip',
+        [
+            'attribute' => 'operator_id',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return $model->manager->email;
+            }
+        ],
         [
             'attribute' => 'status',
             'filter' => ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'),
