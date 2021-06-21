@@ -149,7 +149,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
             <?php foreach ($stocks as $stock): ?>
                 <?= $form->field($stock_model, 'stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
                 <?= $form->field($stock_model, 'product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
-                <?= $form->field($stock_model, 'count')->textInput()->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
+                <?= $form->field($stock_model, 'count')->textInput(['placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})"])->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
             <?php endforeach; ?>
         <?php endif; ?>
     </div>
