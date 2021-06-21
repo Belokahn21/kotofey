@@ -26,10 +26,10 @@ use app\modules\geo\models\entity\Geo;
     <div class="tab-pane fade" id="nav-time" role="tabpanel" aria-labelledby="nav-time-tab">
         <div class="row">
             <div class="col-sm-6">
-                <?= $form->field($model, 'time_start')->textInput(['class' => 'js-time-mask']); ?>
+                <?= $form->field($model, 'time_start')->textInput(['class' => 'js-time-mask form-control']); ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($model, 'time_end')->textInput(['class' => 'js-time-mask']); ?>
+                <?= $form->field($model, 'time_end')->textInput(['class' => 'js-time-mask form-control']); ?>
             </div>
         </div>
     </div>
