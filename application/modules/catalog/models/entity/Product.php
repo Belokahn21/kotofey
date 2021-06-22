@@ -43,7 +43,6 @@ use function foo\func;
  * @property integer $purchase
  * @property integer $count
  * @property boolean $vitrine
- * @property boolean $stock_id
  * @property string $code
  * @property string $barcode
  * @property string $threeDCode
@@ -76,8 +75,8 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'stock_id', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price'];
 
         return $parent;
@@ -88,7 +87,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'stock_id', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id'], 'integer'],
 
             [['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
 
@@ -131,7 +130,6 @@ class Product extends \yii\db\ActiveRecord
             'imageFile' => 'Изображение товара',
             'imagesFiles' => 'Галлерея фото',
             'properties' => 'Свойства',
-            'stock_id' => 'Склад',
             'vendor_id' => 'Поставщик',
             'code' => 'Внешний код',
             'has_store' => 'Сохранить в маркете Вконтакте',
