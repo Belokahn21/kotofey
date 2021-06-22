@@ -18,7 +18,7 @@ class MailService
         foreach ($messages as $message) {
             $result = Yii::$app->mailer->compose();
             $result->setHtmlBody($this->replaceValues($message->text, $params));
-            $result->setFrom(['Зоомагазин Котофей' => $this->replaceValues($message->from, $params)]);
+            $result->setFrom([$this->replaceValues($message->from, $params) => 'Зоомагазин Котофей']);
             $result->setTo($this->replaceValues($message->to, $params));
             $result->setSubject($this->replaceValues($message->name, $params));
 
