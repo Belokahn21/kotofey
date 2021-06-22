@@ -42,14 +42,13 @@ class ProductBackendController extends MainBackendController
         $modelDelivery = new ProductOrder();
         $properties = Properties::find()->all();
         $stocks = Stocks::find()->where(['active' => true])->all();
+        $searchModel = new ProductSearchForm();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         $outProps = [];
         foreach ($properties as $prop) {
             $outProps[$prop->group_id][] = $prop;
         }
-
-        $searchModel = new ProductSearchForm();
-        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;

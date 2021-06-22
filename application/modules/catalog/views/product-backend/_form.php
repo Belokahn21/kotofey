@@ -1,6 +1,8 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Json;
+use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use mihaildev\ckeditor\CKEditor;
 use app\modules\media\models\entity\Media;
@@ -145,7 +147,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
     </div>
     <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
         <?php $stock_model = new ProductStock(); ?>
-        <?php foreach ($stocks as $stock): ?>
+        <?php foreach ($stocks as $count => $stock): ?>
 
             <?php $value = 0; ?>
             <?php if (!$model->isNewRecord): ?>
@@ -154,12 +156,12 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 
             <div class="row">
                 <div class="col-4">
-                    <?= $form->field($stock_model, 'stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
-                    <?= $form->field($stock_model, 'product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
-                    <?= $form->field($stock_model, 'count')->textInput([
+                    <?= $form->field($stock_model, '[' . $count . ']stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
+                    <?= $form->field($stock_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                    <?= $form->field($stock_model, '[' . $count . ']count')->textInput([
                         'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
                         'value' => $value
-                    ])->label($stock->name . " (<strong>{$stock->address}</strong>)"); ?>
+                    ])->label(Html::a($stock->name . " (<strong>{$stock->address}</strong>)", Url::to(['/admin/stock/stock-backend/update', 'id' => $stock->id]))); ?>
                 </div>
             </div>
         <?php endforeach; ?>
