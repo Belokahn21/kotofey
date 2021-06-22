@@ -15,7 +15,10 @@ class ProductStock extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['count'], 'default', 'value' => 0],
+
             [['product_id', 'stock_id'], 'required'],
+
             [['product_id', 'stock_id', 'count'], 'integer'],
         ];
     }
