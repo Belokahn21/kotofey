@@ -31,7 +31,7 @@ $inside_money = 0;
                             ?>
                             <div class="month-stat__title"><?= $month; ?></div>
                             <div class="month-stat__count">Заказов: <?= $query->count(); ?></div>
-                            <div class="month-stat__rotate">Доход: <?= (int)ArrayHelper::getValue($query->all(), function ($models, $defaultValue) use (&$inside_money) {
+                            <div class="month-stat__rotate">Доход: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) use (&$inside_money) {
 
                                     foreach ($models as $model) $inside_money += OrderHelper::income($model);
 
