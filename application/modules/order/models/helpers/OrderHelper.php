@@ -30,12 +30,18 @@ class OrderHelper
         return empty($item->name) && empty($item->price) && empty($item->count);
     }
 
-    public static function rotate()
+    public static function rotate($params=[])
     {
         $out = 0;
-        $orders = Order::find()->where(['is_paid' => true, 'is_close' => true])->all();
+        $orders = Order::find()->where(['is_paid' => true, 'is_close' => true]);
 
-        foreach ($orders as $order) {
+        if ($params) {
+            foreach ($params as $block_params) {
+                $orders->andWhere($block_params);
+            }
+        }
+
+        foreach ($orders->all() as $order) {
             $items = $order->items;
 
             foreach ($items as $item) {
@@ -131,13 +137,18 @@ class OrderHelper
         return $out;
     }
 
-    public static function marginalityAllOrder()
+    public static function marginalityAllOrder($params = [])
     {
         $outAmount = 0;
-        $orders = Order::find()
-            ->where(['is_paid' => true, 'is_close' => true])
-            ->all();
-        foreach ($orders as $order) {
+        $orders = Order::find()->where(['is_paid' => true, 'is_close' => true]);
+
+        if ($params) {
+            foreach ($params as $block_params) {
+                $orders->andWhere($block_params);
+            }
+        }
+
+        foreach ($orders->all() as $order) {
             $outAmount += self::marginality($order);
         }
 

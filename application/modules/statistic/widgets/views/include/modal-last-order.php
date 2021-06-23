@@ -6,6 +6,7 @@ use app\modules\site\models\tools\Currency;
 use yii\helpers\ArrayHelper;
 use app\modules\site\models\tools\Price;
 
+$inside_money = 0;
 ?>
 <div class="modal fade" id="order-list" tabindex="-1" role="dialog" aria-labelledby="order-listLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -30,15 +31,14 @@ use app\modules\site\models\tools\Price;
                             ?>
                             <div class="month-stat__title"><?= $month; ?></div>
                             <div class="month-stat__count">Заказов: <?= $query->count(); ?></div>
-                            <div class="month-stat__rotate">Оборот: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
-                                    $out = 0;
-                                    foreach ($models as $model) {
-                                        $out += OrderHelper::income($model);
-                                    }
-                                    return Price::format($out) . Currency::getInstance()->show();
+                            <div class="month-stat__rotate">Доход: <?= (int)ArrayHelper::getValue($query->all(), function ($models, $defaultValue) use (&$inside_money) {
+
+                                    foreach ($models as $model) $inside_money += OrderHelper::income($model);
+
+                                    return Price::format($inside_money) . Currency::getInstance()->show();
                                 }) ?>
                             </div>
-                            <div class="month-stat__summary">Доход: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
+                            <div class="month-stat__summary">Выручка: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
                                     $out = 0;
                                     foreach ($models as $model) {
                                         $out += OrderHelper::marginality($model);
@@ -49,6 +49,11 @@ use app\modules\site\models\tools\Price;
                         </li>
                     <?php endforeach; ?>
                 </ul>
+            </div>
+            <div class="modal-footer">
+                <div style="width:100%; text-align: left;">
+                    Уплата налога: <?= Price::format(round($inside_money * 0.015)); ?><?= Currency::getInstance()->show(); ?>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>

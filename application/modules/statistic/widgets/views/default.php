@@ -8,12 +8,9 @@
  * @var $no_attention_reviews \app\modules\reviews\models\entity\Reviews[]
  */
 
-use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\entity\Product;
-use app\modules\site\models\tools\Currency;
 use app\modules\order\models\entity\Order;
 use app\modules\site\models\tools\Backup;
-use app\modules\site\models\tools\Price;
 use yii\helpers\StringHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -37,26 +34,11 @@ $product = Product::find();
                     </div>
                 </div>
             </div>
-            <div class="statistic__item">
-                <div class="statistic__icon" data-toggle="modal" data-target="#order-list"><i class="fas fa-cookie"></i>
-                </div>
-                <div class="statistic__content">
-                    <div class="statistic-info">
-                        <div class="statistic-info__item">
-                            <div class="statistic-info__key">Заказов</div>
-                            <div class="statistic-info__value"><?= Order::find()->count(); ?></div>
-                        </div>
-                        <div class="statistic-info__item">
-                            <div class="statistic-info__key">Прибыль</div>
-                            <div class="statistic-info__value"><?= Price::format(OrderHelper::marginalityAllOrder()); ?><?= Currency::getInstance()->show(); ?></div>
-                        </div>
-                        <div class="statistic-info__item">
-                            <div class="statistic-info__key">Оборот</div>
-                            <div class="statistic-info__value"><?= Price::format(OrderHelper::rotate()); ?><?= Currency::getInstance()->show(); ?></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+            <?= $this->render('include/stat-item/item-order-report'); ?>
+
+
             <div class="statistic__item">
                 <div class="statistic__icon"><i class="fas fa-cookie"></i></div>
                 <div class="statistic__content">
