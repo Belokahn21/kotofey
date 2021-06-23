@@ -20,7 +20,7 @@ $product = Product::find();
     <div class="statistic-wrap">
         <div class="statistic">
             <div class="statistic__item">
-                <div class="statistic__icon"><i class="fas fa-cookie"></i></div>
+                <div class="statistic__icon"><i class="fas fa-tools"></i></div>
                 <div class="statistic__content">
                     <div class="statistic-info">
                         <div class="statistic-info__item">
@@ -40,7 +40,7 @@ $product = Product::find();
 
 
             <div class="statistic__item">
-                <div class="statistic__icon"><i class="fas fa-cookie"></i></div>
+                <div class="statistic__icon" data-toggle="modal" data-target="#product-stat"><i class="fas fa-cookie"></i></div>
                 <div class="statistic__content">
                     <div class="statistic-info">
                         <div class="statistic-info__item">
@@ -156,3 +156,4 @@ $product = Product::find();
     'logs' => $logs
 ]); ?>
 <?= $this->render('include/modal-last-order'); ?>
+<?= $this->render('include/modal-product-stat'); ?>

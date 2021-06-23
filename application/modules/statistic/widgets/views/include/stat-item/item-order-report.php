@@ -10,7 +10,7 @@ $avail_mont_end = strtotime('31.12.' . date('Y'));
 
 ?>
 <div class="statistic__item">
-    <div class="statistic__icon" data-toggle="modal" data-target="#order-list"><i class="fas fa-cookie"></i></div>
+    <div class="statistic__icon" data-toggle="modal" data-target="#order-list"><i class="fas fa-receipt"></i></div>
     <div class="statistic__content">
         <div class="statistic-info">
             <div class="statistic-info__item">
