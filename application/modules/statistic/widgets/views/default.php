@@ -48,8 +48,8 @@ $product = Product::find();
                             <div class="statistic-info__value"><?= $product->count(); ?></div>
                         </div>
                         <div class="statistic-info__item">
-                            <div class="statistic-info__key">А/Ч/БП</div>
-                            <div class="statistic-info__value"><?= $product->where(['status_id' => Product::STATUS_ACTIVE])->count(); ?>/<?= $product->where(['status_id' => Product::STATUS_DRAFT])->count(); ?>/<?= $product->where(['vendor_id' => null])->count(); ?></div>
+                            <div class="statistic-info__key">А/Ожид/БП</div>
+                            <div class="statistic-info__value"><?= $product->where(['status_id' => Product::STATUS_ACTIVE])->count(); ?>/<?= $product->where(['status_id' => Product::STATUS_WAIT])->count(); ?>/<?= $product->where(['vendor_id' => null])->count(); ?></div>
                         </div>
                     </div>
                 </div>
