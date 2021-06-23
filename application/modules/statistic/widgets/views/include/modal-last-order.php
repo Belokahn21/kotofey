@@ -36,7 +36,7 @@ $inside_money = 0;
 
                                     foreach ($models as $model) $out += OrderHelper::income($model);
 
-                                    $inside_money = $out;
+                                    $inside_money += $out;
 
                                     return Price::format($out) . Currency::getInstance()->show();
                                 }) ?>
