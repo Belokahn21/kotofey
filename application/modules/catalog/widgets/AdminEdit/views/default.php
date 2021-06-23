@@ -70,7 +70,6 @@ use yii\helpers\Html;
                                 </div>
                                 <?= $form->field($model, 'code'); ?>
                                 <?= $form->field($model, 'vitrine')->radioList(['Нет', 'Да']); ?>
-                                <?= $form->field($model, 'stock_id')->dropDownList(ArrayHelper::map($stocks, 'id', 'name')); ?>
                             </div>
                         </div>
                     </div>
