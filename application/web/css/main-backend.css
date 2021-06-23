@@ -8712,7 +8712,10 @@ html, body {
     border-bottom: 1px rgba(0, 0, 0, 0.1) solid;
     font-weight: bold;
     padding: 5px 0;
-    margin-bottom: 10px; }
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between; }
   .modules__item {
     border: 1px rgba(0, 0, 0, 0.1) solid;
     padding: 10px;

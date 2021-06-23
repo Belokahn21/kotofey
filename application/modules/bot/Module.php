@@ -7,18 +7,21 @@ namespace app\modules\bot;
  */
 class Module extends \app\modules\site\MainModule
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\bot\controllers';
+    private $name = 'Чат-бот';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

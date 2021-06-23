@@ -2,23 +2,28 @@
 
 namespace app\modules\compare;
 
+use yii\helpers\Url;
+
 /**
  * compare module definition class
  */
 class Module extends \app\modules\site\MainModule
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\compare\controllers';
+    private $name = 'Сравнение товаров';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

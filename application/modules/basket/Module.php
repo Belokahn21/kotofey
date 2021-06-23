@@ -2,23 +2,23 @@
 
 namespace app\modules\basket;
 
-/**
- * basket module definition class
- */
 class Module extends \app\modules\site\MainModule
 {
-    /**
-     * {@inheritdoc}
-     */
     public $controllerNamespace = 'app\modules\basket\controllers';
+    private $name = 'Корзина';
 
-    /**
-     * {@inheritdoc}
-     */
     public function init()
     {
         parent::init();
+    }
 
-        // custom initialization code goes here
+    public function menuIndex()
+    {
+        return [];
+    }
+
+    public function getName()
+    {
+        return $this->name;
     }
 }

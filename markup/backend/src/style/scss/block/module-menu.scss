@@ -9,6 +9,9 @@
     font-weight: bold;
     padding: 5px 0;
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
 
   &__item {
