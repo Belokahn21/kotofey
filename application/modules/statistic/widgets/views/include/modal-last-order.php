@@ -32,10 +32,13 @@ $inside_money = 0;
                             <div class="month-stat__title"><?= $month; ?></div>
                             <div class="month-stat__count">Заказов: <?= $query->count(); ?></div>
                             <div class="month-stat__rotate">Доход: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) use (&$inside_money) {
+                                    $out = 0;
 
-                                    foreach ($models as $model) $inside_money += OrderHelper::income($model);
+                                    foreach ($models as $model) $out += OrderHelper::income($model);
 
-                                    return Price::format($inside_money) . Currency::getInstance()->show();
+                                    $inside_money = $out;
+
+                                    return Price::format($out) . Currency::getInstance()->show();
                                 }) ?>
                             </div>
                             <div class="month-stat__summary">Выручка: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
