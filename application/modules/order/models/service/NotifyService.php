@@ -222,7 +222,7 @@ class NotifyService
                     $html .= "<tr><td>{$item->name}</td><td>{$item->count}</td><td>{$price}{$currency}</td><td>{$summ}{$currency}</td></tr>";
                 }
 
-                $html .= "<tr style='background-color: #e6e6e6;'><td colspan='3'>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td >Итого к оплате " . Price::format($total) . "{$currency}</td></tr>";
+                $html .= "<tr style='background-color: #e6e6e6;'><td>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td colspan='3'>Итого к оплате " . Price::format($total) . "{$currency}</td></tr>";
 
                 return $html;
             }),
