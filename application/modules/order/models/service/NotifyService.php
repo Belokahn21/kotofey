@@ -194,16 +194,16 @@ class NotifyService
         if (!$module = Yii::$app->getModule('order')) return false;
         if (!$event = MailEvents::findOne($module->mail_event_id_order_created)) return false;
 
-//        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
+        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
         if (empty($order->email)) return false;
-//        if (empty($order->email) || $order->status != 0) return false;
+        if (empty($order->email) || $order->status != 0) return false;
 
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
             'EMAIL_FROM' => 'sale@kotofey.store',
-//            'EMAIL_TO' => $order->email,
-            'EMAIL_TO' => 'popugau@gmail.com',
+            'EMAIL_TO' => $order->email,
+//            'EMAIL_TO' => 'popugau@gmail.com',
             'ORDER_ID' => $order->id,
             'ORDER_LINK' => System::fullSiteUrl() . "/profile/order/{$order->id}/",
             'SITE_LINK' => System::fullSiteUrl(),
