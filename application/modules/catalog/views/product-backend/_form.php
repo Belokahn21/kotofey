@@ -167,7 +167,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         <?php endforeach; ?>
     </div>
     <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
-        <?php $composition_model = new CompositionProducts(); ?>
+        <?php /* $composition_model = new CompositionProducts(); ?>
         <?php foreach ($compositions as $count => $composit): ?>
 
             <?php $value = 0; ?>
@@ -184,7 +184,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                     ])->label(Html::a($composit->name, Url::to(['/admin/catalog/composition-backend/update', 'id' => $composit->id]))); ?>
                 </div>
             </div>
-        <?php endforeach; ?>
+        <?php endforeach; */?>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">
