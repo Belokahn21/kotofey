@@ -19,12 +19,14 @@ use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
+use app\modules\catalog\models\entity\CompositionProducts;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $form \yii\widgets\ActiveForm
  * @var $stocks Stocks[]
+ * @var $compositions \app\modules\catalog\models\entity\Composition[]
  */
 
 ?>
@@ -34,9 +36,10 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
         <a class="nav-item nav-link" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="false">Описание</a>
         <a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo" aria-selected="false">SEO</a>
-        <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
-        <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-gallery" aria-selected="false">Изображения</a>
         <a class="nav-item nav-link" id="nav-additional-tab" data-toggle="tab" href="#nav-additional" role="tab" aria-controls="nav-additional" aria-selected="false">Условия доставки</a>
+        <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
+        <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
+        <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-gallery" aria-selected="false">Изображения</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
     </div>
 </nav>
@@ -162,6 +165,27 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                 </div>
             </div>
         <?php endforeach; ?>
+    </div>
+    <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
+        <?php /* $composition_model = new CompositionProducts(); ?>
+        <?php foreach ($compositions as $count => $composit): ?>
+
+            <?php $value = 0; ?>
+            <?php if (!$model->isNewRecord): ?>
+                <?php $value = @CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id])->count; ?>
+            <?php endif; ?>
+
+            <div class="row">
+                <div class="col-4">
+                    <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
+                    <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
+                    <?= $form->field($composition_model, '[' . $count . ']count')->textInput([
+                        'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
+                        'value' => $value
+                    ])->label(Html::a($stock->name . " (<strong>{$stock->address}</strong>)", Url::to(['/admin/stock/stock-backend/update', 'id' => $stock->id]))); ?>
+                </div>
+            </div>
+        <?php endforeach; */?>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">

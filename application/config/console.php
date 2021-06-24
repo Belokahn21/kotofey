@@ -186,9 +186,6 @@ $config = [
         'export' => [
             'class' => 'app\modules\export\Module',
         ],
-        'rest' => [
-            'class' => 'app\modules\rest\Module',
-        ],
         'bot' => [
             'class' => 'app\modules\bot\Module',
         ],

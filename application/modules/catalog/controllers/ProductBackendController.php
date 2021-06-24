@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\entity\Composition;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
@@ -42,6 +43,7 @@ class ProductBackendController extends MainBackendController
         $modelDelivery = new ProductOrder();
         $properties = Properties::find()->all();
         $stocks = Stocks::find()->where(['active' => true])->all();
+        $compositions = Composition::find()->where(['is_active' => true])->all();
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -63,6 +65,7 @@ class ProductBackendController extends MainBackendController
         return $this->render('index', [
             'model' => $model,
             'stocks' => $stocks,
+            'compositions' => $compositions,
             'properties' => $outProps,
 //            'properties' => $properties,
             'modelDelivery' => $modelDelivery,
