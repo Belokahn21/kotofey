@@ -194,9 +194,10 @@ class NotifyService
         if (!$module = Yii::$app->getModule('order')) return false;
         if (!$event = MailEvents::findOne($module->mail_event_id_order_created)) return false;
 
-        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
+//        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
-        if (empty($order->email) || $order->status != 0) return false;
+        if (empty($order->email)) return false;
+//        if (empty($order->email) || $order->status != 0) return false;
 
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
@@ -207,7 +208,7 @@ class NotifyService
             'ORDER_LINK' => System::fullSiteUrl() . "/profile/order/{$order->id}/",
             'SITE_LINK' => System::fullSiteUrl(),
             'SITE_NAME' => 'Интернет-зоомагазин Котофей',
-            'ORDER_ITEMS' => function ($order) {
+            'ORDER_ITEMS' => call_user_func(function () use ($order) {
                 /* @var $order Order */
                 $html = '<tr><td>Наименование</td><td>Количество</td><td>Цена за шт.</td><td>Итого</td></tr>';
                 foreach ($order->items as $item) {
@@ -217,8 +218,9 @@ class NotifyService
                 }
 
                 return $html;
-            },
+            }),
         ]);
+
 
         $history = new OrderMailHistory();
         $history->order_id = $order->id;
