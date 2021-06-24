@@ -16,10 +16,10 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
+use app\modules\catalog\models\entity\CompositionProducts;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
-use app\modules\catalog\models\entity\CompositionProducts;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -167,7 +167,7 @@ use app\modules\catalog\models\entity\CompositionProducts;
         <?php endforeach; ?>
     </div>
     <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
-        <?php /* $composition_model = new CompositionProducts(); ?>
+        <?php $composition_model = new CompositionProducts(); ?>
         <?php foreach ($compositions as $count => $composit): ?>
 
             <?php $value = 0; ?>
@@ -178,14 +178,13 @@ use app\modules\catalog\models\entity\CompositionProducts;
             <div class="row">
                 <div class="col-4">
                     <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
-                    <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
-                    <?= $form->field($composition_model, '[' . $count . ']count')->textInput([
-                        'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
+                    <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                    <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
                         'value' => $value
-                    ])->label(Html::a($stock->name . " (<strong>{$stock->address}</strong>)", Url::to(['/admin/stock/stock-backend/update', 'id' => $stock->id]))); ?>
+                    ])->label(Html::a($composit->name, Url::to(['/admin/catalog/composition-backend/update', 'id' => $composit->id]))); ?>
                 </div>
             </div>
-        <?php endforeach; */?>
+        <?php endforeach; ?>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">
