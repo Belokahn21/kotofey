@@ -15,6 +15,7 @@ class Module extends MainModule
 
     public $default_manager_id;
     public $mail_event_id_order_ready;
+    public $mail_event_id_order_created;
 
     public function init()
     {
@@ -39,9 +40,11 @@ class Module extends MainModule
 
     public function getParams()
     {
+        $events = MailEvents::find()->all();
         return [
             'default_manager_id' => ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'),
-            'mail_event_id_order_ready' => ArrayHelper::map(MailEvents::find()->all(), 'id', 'name'),
+            'mail_event_id_order_ready' => ArrayHelper::map($events, 'id', 'name'),
+            'mail_event_id_order_created' => ArrayHelper::map($events, 'id', 'name'),
         ];
     }
 
@@ -50,6 +53,7 @@ class Module extends MainModule
         return [
             'default_manager_id' => 'Менеджер заказов по умолчанию',
             'mail_event_id_order_ready' => 'ID почтового события, заказ готов к выдаче',
+            'mail_event_id_order_created' => 'ID почтового события, заказ создан',
         ];
     }
 }

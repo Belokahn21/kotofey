@@ -272,7 +272,7 @@ class OrderBackendController extends MainBackendController
         $sheet->setCellValue('A3', 'Продавец');
         $sheet->setCellValue('B3', 'ООО Интернет-зоомагазин Котофей');
         $sheet->getStyle('B3')->getFont()->setBold(true);
-        $sheet->setCellValue('B4', sprintf('Адрес г. Барнаул, ул. Весеняя, дом 4. Телефон: %s, Сайт %s', SiteSettings::getValueByCode('phone_1'), System::fullDomain()));
+        $sheet->setCellValue('B4', sprintf('Адрес г. Барнаул, ул. Весеняя, дом 4. Телефон: %s, Сайт %s', SiteSettings::getValueByCode('phone_1'), System::fullSiteUrl()));
         $sheet->setCellValue('B5', sprintf('ИНН %s, ОГРН %s', SiteSettings::getValueByCode('inn'), SiteSettings::getValueByCode('ogrn')));
         $sheet->mergeCells('B3:G3');
         $sheet->mergeCells('B4:G4');

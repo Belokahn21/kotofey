@@ -17,7 +17,7 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>
         <company><?= $module->exportCompany; ?></company>
-        <url><?= System::fullDomain(); ?></url>
+        <url><?= System::fullSiteUrl(); ?></url>
         <platform><?= $module->exportPlatform; ?></platform>
         <version><?= $module->exportVersion; ?></version>
         <agency></agency>

@@ -14,7 +14,7 @@ use app\modules\vendors\models\entity\Vendor;
     <shop>
         <name><?= $module->exportOrganizationName; ?></name>
         <company><?= $module->exportCompany; ?></company>
-        <url><?= System::fullDomain(); ?></url>
+        <url><?= System::fullSiteUrl(); ?></url>
         <platform><?= $module->exportPlatform; ?></platform>
         <version><?= $module->exportVersion; ?></version>
         <agency></agency>

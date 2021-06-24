@@ -116,7 +116,7 @@ class ProductHelper
 
             if (!is_file(\Yii::getAlias('@webroot/upload/' . $media->name))) $url = $noImage;
 
-            if ($isFull) return System::fullDomain() . $url;
+            if ($isFull) return System::fullSiteUrl() . $url;
 
             return $url;
         }
@@ -132,14 +132,14 @@ class ProductHelper
         if (!is_file(\Yii::getAlias('@webroot/upload/' . $model->image))) $url = $noImage;
 
 
-        if ($isFull) return System::fullDomain() . $url;
+        if ($isFull) return System::fullSiteUrl() . $url;
 
         return $url;
     }
 
     public static function getDetailUrl(Product $model, $isFull = false)
     {
-        if ($isFull) return System::fullDomain() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
+        if ($isFull) return System::fullSiteUrl() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
 
         return Url::to(['/catalog/product/view', 'id' => $model->slug]);
     }

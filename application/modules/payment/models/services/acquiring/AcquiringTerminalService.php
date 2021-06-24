@@ -43,8 +43,8 @@ class AcquiringTerminalService
             'phone' => $order->phone,
             'sessionTimeoutSecs' => 604800,
             'amount' => OrderHelper::orderSummary($order) * 100,
-            'returnUrl' => System::fullDomain() . Url::to('/payment/success/'),
-            'failUrl' => System::fullDomain() . Url::to('/payment/fail/'),
+            'returnUrl' => System::fullSiteUrl() . Url::to('/payment/success/'),
+            'failUrl' => System::fullSiteUrl() . Url::to('/payment/fail/'),
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
@@ -62,8 +62,8 @@ class AcquiringTerminalService
             'phone' => $order->phone,
             'sessionTimeoutSecs' => 604800,
             'amount' => OrderHelper::orderSummary($order) * 100,
-            'returnUrl' => System::fullDomain() . Url::to('/payment/success/'),
-            'failUrl' => System::fullDomain() . Url::to('/payment/fail/'),
+            'returnUrl' => System::fullSiteUrl() . Url::to('/payment/success/'),
+            'failUrl' => System::fullSiteUrl() . Url::to('/payment/fail/'),
         ]);
 
         return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));

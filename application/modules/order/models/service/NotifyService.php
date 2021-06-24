@@ -158,13 +158,12 @@ class NotifyService
 
     public function notifyCompleteOrder(Order $order)
     {
-        if (OrderMailHistory::findByOrderId($order->id)) return false;
+        if (!$module = Yii::$app->getModule('order')) return false;
+        if (!$event = MailEvents::findOne($module->mail_event_id_order_ready)) return false;
+
+        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
         if (empty($order->email) || $order->status != 8) return false;
-
-        if (!$module = Yii::$app->getModule('order')) return false;
-
-        if (!$event = MailEvents::findOne($module->mail_event_id_order_ready)) return false;
 
         $stock = Stocks::findOne(1);
 
@@ -173,15 +172,52 @@ class NotifyService
             'EMAIL_FROM' => 'sale@kotofey.store',
             'EMAIL_TO' => $order->email,
             'ORDER_ID' => $order->id,
-            'ORDER_LINK' => System::fullDomain() . "/profile/order/{$order->id}/",
+            'ORDER_LINK' => System::fullSiteUrl() . "/profile/order/{$order->id}/",
             'STORE_ADDRESS' => $stock->address,
             'STORE_TIME' => "{$stock->time_start} до {$stock->time_end}",
             'DELIVERY_DATE' => $order->dateDelivery->date,
             'DELIVERY_TIME' => $order->dateDelivery->time,
-            'LINK_CAT' => System::fullDomain() . '/catalog/koski/',
-            'LINK_DOG' => System::fullDomain() . '/catalog/sobaki/',
-            'LINK_MOUSE' => System::fullDomain() . '/catalog/gryzuny/',
-            'LINK_FISH' => System::fullDomain() . '/catalog/rybki/',
+            'LINK_CAT' => System::fullSiteUrl() . '/catalog/koski/',
+            'LINK_DOG' => System::fullSiteUrl() . '/catalog/sobaki/',
+            'LINK_MOUSE' => System::fullSiteUrl() . '/catalog/gryzuny/',
+            'LINK_FISH' => System::fullSiteUrl() . '/catalog/rybki/',
+        ]);
+
+        $history = new OrderMailHistory();
+        $history->order_id = $order->id;
+        $history->event_id = $event->id;
+        return $history->validate() && $history->save();
+    }
+
+    public function notifyOrderCreate(Order $order)
+    {
+        if (!$module = Yii::$app->getModule('order')) return false;
+        if (!$event = MailEvents::findOne($module->mail_event_id_order_created)) return false;
+
+        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
+
+        if (empty($order->email) || $order->status != 0) return false;
+
+        $mailer = new MailService();
+        $mailer->sendEvent($event->id, [
+            'EMAIL_FROM' => 'sale@kotofey.store',
+//            'EMAIL_TO' => $order->email,
+            'EMAIL_TO' => 'popugau@gmail.com',
+            'ORDER_ID' => $order->id,
+            'ORDER_LINK' => System::fullSiteUrl() . "/profile/order/{$order->id}/",
+            'SITE_LINK' => System::fullSiteUrl(),
+            'SITE_NAME' => 'Интернет-зоомагазин Котофей',
+            'ORDER_ITEMS' => function ($order) {
+                /* @var $order Order */
+                $html = '<tr><td>Наименование</td><td>Количество</td><td>Цена за шт.</td><td>Итого</td></tr>';
+                foreach ($order->items as $item) {
+                    $summ = Price::format($item->price * $item->count);
+                    $currency = Currency::getInstance()->show();
+                    $html .= "<tr><td>{$item->name}</td><td>{$item->count}</td><td>{$item->price}{$currency}</td><td>{$summ}{$currency}</td></tr>";
+                }
+
+                return $html;
+            },
         ]);
 
         $history = new OrderMailHistory();

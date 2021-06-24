@@ -53,7 +53,7 @@ class OFDApi
             'InvoiceId' => $order->id,
             'CustomerReceipt' => [
                 'TaxationSystem' => $this->module->ofd_taxation_system,
-                "InstallmentPlace" => System::fullDomain(),
+                "InstallmentPlace" => System::fullSiteUrl(),
                 "PaymentType" => 1, //товар
                 'PaymentItems' => [
                     [
