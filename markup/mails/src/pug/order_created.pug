@@ -1,11 +1,13 @@
 extends include/layer
 
 block contents
-    table(width="600px" style="display:block; margin:auto; font-size:18px; text-align:left;")
+    table(width="600px" style="display:block; margin:auto; font-size:14px; text-align:left;")
         tr(style="margin-bottom:40px; text-align:center;")
             td Заказ №#ORDER_ID#.
         tr(style="margin-bottom:40px;")
             td Доброго времени суток.
         tr(style="margin-bottom:40px;")
             td Вы совершили покупку на нашем сайте <a href="#SITE_LINK#" target="_blank">#SITE_NAME#</a>
+        tr(style="margin-bottom:40px;")
+            td Информация о заказе
     table(style="width:600px; display:block; margin:auto; font-size:14px;") #ORDER_ITEMS#
