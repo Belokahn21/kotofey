@@ -219,7 +219,7 @@ class NotifyService
 
                     $total += $item->price * $item->count;
 
-                    $html .= "<tr><td>{$item->name}</td><td>{$item->count}</td><td>{$price}{$currency}</td><td>{$summ}{$currency}</td></tr>";
+                    $html .= "<tr><td style='text-align:left;'>{$item->name}</td><td>{$item->count}</td><td>{$price}{$currency}</td><td>{$summ}{$currency}</td></tr>";
                 }
 
                 $html .= "<tr style='background-color: #e6e6e6;'><td style='text-align:left;'>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td  colspan='2'>Итого к оплате</td><td>" . Price::format($total) . "{$currency}</td></tr>";
