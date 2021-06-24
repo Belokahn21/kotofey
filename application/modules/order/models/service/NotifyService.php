@@ -210,7 +210,7 @@ class NotifyService
             'SITE_NAME' => 'Интернет-зоомагазин Котофей',
             'ORDER_ITEMS' => call_user_func(function () use ($order) {
                 /* @var $order Order */
-                $html = '<tr><td width="55%">Наименование</td><td width="15%">Количество</td><td width="15%">Цена за шт.</td><td width="15%">Итого</td></tr>';
+                $html = '<tr style="background-color: #e6e6e6;"><td width="55%">Наименование</td><td width="15%">Количество</td><td width="15%">Цена за шт.</td><td width="15%">Итого</td></tr>';
                 $total = 0;
                 foreach ($order->items as $item) {
                     $price = Price::format($item->price);
@@ -222,7 +222,7 @@ class NotifyService
                     $html .= "<tr><td>{$item->name}</td><td>{$item->count}</td><td>{$price}{$currency}</td><td>{$summ}{$currency}</td></tr>";
                 }
 
-                $html .= "<tr><td colspan='3'>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td >Итого к оплате</td><td >" . Price::format($total) . "{$currency}</td></tr>";
+                $html .= "<tr style='background-color: #e6e6e6;'><td colspan='3'>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td >Итого к оплате</td><td >" . Price::format($total) . "{$currency}</td></tr>";
 
                 return $html;
             }),
