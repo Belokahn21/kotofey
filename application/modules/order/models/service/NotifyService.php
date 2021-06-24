@@ -210,11 +210,12 @@ class NotifyService
             'SITE_NAME' => 'Интернет-зоомагазин Котофей',
             'ORDER_ITEMS' => call_user_func(function () use ($order) {
                 /* @var $order Order */
-                $html = '<tr><td>Наименование</td><td>Количество</td><td>Цена за шт.</td><td>Итого</td></tr>';
+                $html = '<tr><td width="55%">Наименование</td><td width="15%">Количество</td><td width="15%">Цена за шт.</td><td width="15%">Итого</td></tr>';
                 foreach ($order->items as $item) {
+                    $price = Price::format($item->price);
                     $summ = Price::format($item->price * $item->count);
                     $currency = Currency::getInstance()->show();
-                    $html .= "<tr><td>{$item->name}</td><td>{$item->count}</td><td>{$item->price}{$currency}</td><td>{$summ}{$currency}</td></tr>";
+                    $html .= "<tr><td>{$item->name}</td><td>{$item->count}</td><td>{$price}{$currency}</td><td>{$summ}{$currency}</td></tr>";
                 }
 
                 return $html;
