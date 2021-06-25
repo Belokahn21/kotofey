@@ -17,7 +17,7 @@ class ProductStock extends \yii\db\ActiveRecord
         return [
             [['count'], 'default', 'value' => 0],
 
-            [['product_id', 'stock_id'], 'required'],
+            [['stock_id'], 'required'],
 
             [['product_id', 'stock_id', 'count'], 'integer'],
         ];
