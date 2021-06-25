@@ -14,6 +14,7 @@ $this->title = Title::show('Элементы состава');
 ?>
     <div class="title-group">
         <h1>Элементы состава</h1>
+        <?= Html::a('Типы составов', Url::to(['composition-type-backend/index']), ['target' => '_blank', 'class' => 'btn-main']) ?>
     </div>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,

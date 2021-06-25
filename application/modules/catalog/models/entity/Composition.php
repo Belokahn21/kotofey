@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "composition".
@@ -16,37 +17,35 @@ use Yii;
  */
 class Composition extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'composition';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
+            [['sort'], 'default', 'value' => 500],
+
+            [['is_active'], 'default', 'value' => 1],
+
             [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
+
             [['name'], 'string', 'max' => 255],
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className()
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'is_active' => 'Is Active',
-            'sort' => 'Sort',
-            'name' => 'Name',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'is_active' => 'Активность',
+            'sort' => 'Сортировка',
+            'name' => 'Название',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

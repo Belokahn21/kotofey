@@ -12,6 +12,7 @@ use yii\helpers\Html;
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $stocks \app\modules\stock\models\entity\Stocks[]
+ * @var $compositions \app\modules\catalog\models\entity\Composition[]
  */
 
 $this->title = Title::show('Товары');
@@ -38,6 +39,7 @@ $this->title = Title::show('Товары');
     'form' => $form,
     'stocks' => $stocks,
     'properties' => $properties,
+    'compositions' => $compositions,
     'modelDelivery' => $modelDelivery,
 ]) ?>
 <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>

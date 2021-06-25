@@ -15,6 +15,7 @@ $this->title = Title::show('Типы элементов состава');
 ?>
     <div class="title-group">
         <h1>Типы элементов состава</h1>
+        <?= Html::a('Элемент состава', Url::to(['composition-backend/index']), ['target' => '_blank', 'class' => 'btn-main']) ?>
     </div>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,
@@ -26,7 +27,7 @@ $this->title = Title::show('Типы элементов состава');
 ]) ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>
-    <h2>Список товаров</h2>
+    <h2>Список типов состава</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
@@ -36,12 +37,10 @@ $this->title = Title::show('Типы элементов состава');
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
         ],
         [
             'attribute' => 'updated_at',
             'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
         ],
         [
             'class' => 'yii\grid\ActionColumn',

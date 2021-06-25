@@ -80,6 +80,7 @@ class ProductBackendController extends MainBackendController
 
         $model->scenario = $this->modelClass::SCENARIO_UPDATE_PRODUCT;
         $properties = Properties::find()->all();
+        $compositions = Composition::find()->where(['is_active' => true])->all();
         $stocks = Stocks::find()->where(['active' => true])->all();
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
@@ -96,6 +97,7 @@ class ProductBackendController extends MainBackendController
 
         return $this->render('update', [
             'model' => $model,
+            'compositions' => $compositions,
             'stocks' => $stocks,
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
