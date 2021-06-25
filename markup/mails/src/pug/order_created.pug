@@ -1,13 +1,15 @@
 extends include/layer
 
 block contents
-    table(width="600px" style="display:block; margin:auto; font-size:14px; text-align:left;" border=0 cellpadding="0" cellspacing="0")
-        tr(style="margin-bottom:40px; text-align:center;")
-            td Заказ №#ORDER_ID#.
-        tr(style="margin-bottom:40px;")
-            td Доброго времени суток.
-        tr(style="margin-bottom:40px;")
-            td Вы совершили покупку на нашем сайте <a href="#SITE_LINK#" target="_blank">#SITE_NAME#</a><br><br>
-        tr(style="margin-bottom:40px;")
-            td Информация о заказе
-    table(style="width:600px; display:block; margin:auto; font-size:14px; text-align:center;" border=0 cellpadding="0" cellspacing="0") #ORDER_ITEMS#
+    table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:14px; text-align:left;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;")
+            tr(style="margin-bottom:40px; text-align:center;")
+                td Заказ №#ORDER_ID#.
+            tr(style="margin-bottom:40px;")
+                td Доброго времени суток.
+            tr(style="margin-bottom:40px;")
+                td Вы совершили покупку на нашем сайте <a href="#SITE_LINK#" target="_blank">#SITE_NAME#</a><br><br>
+            tr(style="margin-bottom:40px;")
+                td Информация о заказе
+    table(style="max-width:600px; width:100%;; display:block; margin:auto; font-size:14px; text-align:center;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;") #ORDER_ITEMS#

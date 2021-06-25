@@ -1,18 +1,21 @@
 extends include/layer
 
 block contents
-    table(style="width:600px; display:block; margin:auto; font-size:14px;" border=0 cellpadding="0" cellspacing="0")
-        tr
-            td(style="text-align:center; font-weight:bold; color: #ff1a4a; font-size:18px;") Июнь - товары со скидкой в этом месяце
-        tr
-            td Дорогой покупатель, хотим уведомить, что ранее покупаемые Вами товары стали доступны со скидкой в нашем интернет-зоомагазине Котофей.
-    table(style="width:600px; display:block; margin:20px auto auto auto; font-size:14px;" border=0 cellpadding="0" cellspacing="0")
-        tr
-            td(style="font-weight:bold;") Мои товары со скидкой сейчас:
-    table(style="width:600px; display:block; margin:auto; font-size:14px;" border=0 cellpadding="0" cellspacing="0")
-        tr
-            td Hiil`s Sterilised со вкусом курицы, 1.5кг
-            td 1500 Р
-            td 1200 Р
-            td
-                a(href="#") Купить
+    table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;")
+            tr
+                td(style="text-align:center; font-weight:bold; color: #ff1a4a; font-size:18px;") Июнь - товары со скидкой в этом месяце
+            tr
+                td(style="text-align:justify;") Дорогой покупатель, хотим уведомить, что ранее покупаемые Вами товары стали доступны со скидкой в нашем интернет-зоомагазине Котофей.
+    table(style="max-width:600px; width:100%; display:block; margin:20px auto auto auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;")
+            tr
+                td(style="font-weight:bold;") Мои товары со скидкой сейчас:
+    table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:18px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;")
+            tr(style="display: block; width: 100%;")
+                td(style="width:60% padding: 5px;") Hiil`s Sterilised со вкусом курицы, 1.5кг
+                td(style="width:10% padding: 5px;") 1500 Р
+                td(style="width:10% padding: 5px;") 1200 Р
+                td(style="width:10% padding: 5px;")
+                    a(href="#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;") Купить
