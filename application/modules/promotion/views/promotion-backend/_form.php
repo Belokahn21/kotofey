@@ -5,8 +5,9 @@
  * @var $subModel \app\modules\promotion\models\forms\PromotionProductMechanicsForm[]
  */
 
-use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
+use yii\helpers\ArrayHelper;
 use app\modules\promotion\models\helpers\PromotionHelper;
+use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
@@ -109,6 +110,7 @@ use app\modules\promotion\models\entity\PromotionProductMechanics;
 
             $list_product_id = PromotionProductMechanics::find()->where(['promotion_id' => $model->id])->select(['product_id'])->all();
 
+            $list_product_id = ArrayHelper::getValue($list_product_id, 'product_id');
             var_dump($list_product_id);
 
             ?>
