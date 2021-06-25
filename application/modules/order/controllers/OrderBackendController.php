@@ -5,6 +5,7 @@ namespace app\modules\order\controllers;
 use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\OrderTracking;
+use app\modules\order\models\service\NotifyService;
 use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\acquiring\banks\Sberbank;
 use app\modules\payment\models\services\acquiring\AcquiringTerminalService;
@@ -106,6 +107,10 @@ class OrderBackendController extends MainBackendController
 
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно создан');
+
+                $ns = new NotifyService();
+                $ns->sendClientNotify(Order::findOne($model->id));
+
                 return $this->refresh();
             }
         }

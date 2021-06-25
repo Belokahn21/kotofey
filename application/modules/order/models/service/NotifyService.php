@@ -234,4 +234,10 @@ class NotifyService
         $history->event_id = $event->id;
         return $history->validate() && $history->save();
     }
+
+    public function sendClientNotify(Order $order)
+    {
+        $this->notifyCompleteOrder($order);
+        $this->notifyOrderCreate($order);
+    }
 }
