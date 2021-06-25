@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\entity;
 
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
+use app\modules\catalog\models\helpers\CompositionProductHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\ProductStockHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
@@ -183,35 +184,9 @@ class Product extends \yii\db\ActiveRecord
                         return false;
                     }
 
-//                    foreach ($this->properties as $propertyId => $value) {
-//                        if (empty($value)) {
-//                            continue;
-//                        }
-//                        //save multiple property
-//                        if (is_array($value) && count($value) > 0) {
-//                            foreach ($value as $select_variant) {
-//                                $propertyValues = new PropertiesProductValues();
-//                                $propertyValues->product_id = $this->id;
-//                                $propertyValues->property_id = $propertyId;
-//                                $propertyValues->value = $select_variant;
-//                                if ($propertyValues->save() === false) {
-//                                    return false;
-//                                }
-//                            }
-//                        } else {
-//                            $propertyValues = new PropertiesProductValues();
-//                            $propertyValues->product_id = $this->id;
-//                            $propertyValues->property_id = $propertyId;
-//                            $propertyValues->value = $value;
-//                            if ($propertyValues->save() === false) {
-//                                $transaction->rollBack();
-//                                return false;
-//                            }
-//                        }
-//                    }
-
-                    ProductStockHelper::saveStockControl($this->id);
-
+                    //todo реализовать хелпер по сохранению свойств
+                    ProductStockHelper::saveItems($this->id);
+                    CompositionProductHelper::saveItems($this->id);
 
                     if ($this->is_product_order == true) {
                         $productOrder = new ProductOrder();
@@ -238,9 +213,6 @@ class Product extends \yii\db\ActiveRecord
     public function updateProduct()
     {
         if (\Yii::$app->request->isPost) {
-
-//            Debug::p($_POST);
-//            exit();
             $db = \Yii::$app->db;
             $transaction = $db->beginTransaction();
             if ($this->load(\Yii::$app->request->post())) {
@@ -283,39 +255,10 @@ class Product extends \yii\db\ActiveRecord
                         }
                     }
 
-                    ProductStockHelper::saveStockControl($this->id);
-
-//                    if ($this->is_product_order == true) {
-//
-//                        $is_new_record = false;
-//
-//                        if (!$productOrder = ProductOrder::findOneByProductId($this->id)) {
-//                            $productOrder = new ProductOrder();
-//                            $is_new_record = true;
-//                        }
-//
-//                        $productOrder->product_id = $this->id;
-//                        if ($productOrder->load(\Yii::$app->request->post())) {
-//                            if ($productOrder->validate()) {
-//
-//                                if ($is_new_record) {
-//                                    if (!$productOrder->save()) {
-//                                        $transaction->rollBack();
-//                                        return false;
-//                                    }
-//                                } else {
-//                                    if ($productOrder->update() === false) {
-//                                        $transaction->rollBack();
-//                                        return false;
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-
+                    ProductStockHelper::saveItems($this->id);
+                    CompositionProductHelper::saveItems($this->id);
 
                     $transaction->commit();
-
                     return true;
                 }
             }

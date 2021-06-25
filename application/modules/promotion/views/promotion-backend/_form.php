@@ -9,6 +9,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\promotion\models\helpers\PromotionHelper;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
+use app\modules\promotion\models\entity\PromotionProductMechanics;
 
 ?>
 
@@ -16,6 +17,9 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
     <div class="nav nav-tabs" id="backendForms" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
         <a class="nav-item nav-link" id="nav-items-tab" data-toggle="tab" href="#nav-items" role="tab" aria-controls="nav-items" aria-selected="true">Товары</a>
+        <?php if (!$model->isNewRecord): ?>
+            <a class="nav-item nav-link" id="nav-members-mail-tab" data-toggle="tab" href="#nav-members-mail" role="tab" aria-controls="nav-members-mail" aria-selected="true">Участники</a>
+        <?php endif; ?>
     </div>
 </nav>
 <div class="tab-content" id="backendFormsContent">
@@ -99,6 +103,17 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
         <?php endif; ?>
 
     </div>
+    <?php if (!$model->isNewRecord): ?>
+        <div class="tab-pane fade" id="nav-members-mail" role="tabpanel" aria-labelledby="nav-members-mail-tab">
+            <?php
+
+            $list_product_id = PromotionProductMechanics::find()->where(['promotion_id' => $model->id])->select(['product_id'])->all();
+
+            var_dump($list_product_id);
+
+            ?>
+        </div>
+    <?php endif; ?>
 </div>
 
 <!--<div class="promotion-form-react"></div>-->

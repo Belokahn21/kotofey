@@ -8,7 +8,7 @@ use app\modules\catalog\models\entity\ProductStock;
 
 class ProductStockHelper
 {
-    public static function saveStockControl(int $product_id)
+    public static function saveItems(int $product_id)
     {
         $count = count(Yii::$app->request->post('ProductStock', []));
 
