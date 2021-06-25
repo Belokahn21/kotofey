@@ -5,7 +5,11 @@
  * @var $subModel \app\modules\promotion\models\forms\PromotionProductMechanicsForm[]
  */
 
+use yii\helpers\Url;
+use  yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use app\modules\order\models\entity\Order;
+use app\modules\order\models\entity\OrdersItems;
 use app\modules\promotion\models\helpers\PromotionHelper;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
@@ -109,9 +113,15 @@ use app\modules\promotion\models\entity\PromotionProductMechanics;
             <?php
 
             $list_product_id = PromotionProductMechanics::find()->where(['promotion_id' => $model->id])->select(['product_id'])->all();
+            $list_product_id = ArrayHelper::getColumn($list_product_id, 'product_id');
 
-            $list_product_id = ArrayHelper::getValue($list_product_id, 'product_id');
-            var_dump($list_product_id);
+            $order_items = OrdersItems::find()->where(['product_id' => $list_product_id])->select(['order_id'])->groupBy(['order_id'])->all();
+            $orders = Order::find()->where(['id' => ArrayHelper::getColumn($order_items, 'order_id')])->all();
+
+            foreach ($orders as $order) {
+                $link = Html::a($order->email, Url::to(['/admin/order/order-backend/update', 'id' => $order->id]));
+                echo Html::tag('div', $link);
+            }
 
             ?>
         </div>
