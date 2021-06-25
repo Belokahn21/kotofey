@@ -111,6 +111,9 @@ use app\modules\promotion\models\entity\PromotionProductMechanics;
     <?php if (!$model->isNewRecord): ?>
         <div class="tab-pane fade" id="nav-members-mail" role="tabpanel" aria-labelledby="nav-members-mail-tab">
             <?php
+            //todo уточнить период акций
+            //todo вывести последние 5 заказов
+            //todo показать цену товара со скдикой, без скидки
 
             $list_product_id = PromotionProductMechanics::find()->where(['promotion_id' => $model->id])->select(['product_id'])->all();
             $list_product_id = ArrayHelper::getColumn($list_product_id, 'product_id');
