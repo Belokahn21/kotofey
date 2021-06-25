@@ -11,6 +11,7 @@ use app\modules\order\models\entity\CustomerProperties;
 use app\modules\order\models\entity\CustomerPropertiesValues;
 use app\modules\order\models\search\CustomerSearchForm;
 use app\modules\site\controllers\MainBackendController;
+use yii\widgets\ActiveForm;
 
 class CustomerBackendController extends MainBackendController
 {
@@ -24,10 +25,16 @@ class CustomerBackendController extends MainBackendController
         $properties = $this->getProperties();
         $propertiesValues = new CustomerPropertiesValues();
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
                 if (!$model->validate() || !$model->save()) {
                     Alert::setErrorNotify('Ошибка создания карточки товара.');
+                    Debug::p($model->getErrors());
                     return $this->refresh();
                 }
             }

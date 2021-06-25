@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 
-/* @var $model \app\modules\catalog\models\entity\Properties */
+/* @var $model \app\modules\order\models\entity\Customer */
 /* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
 /* @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues */
 
@@ -15,7 +15,10 @@ $this->title = Title::show("Карточки покупателей"); ?>
         <h1 class="title">Карточки покупателей</h1>
         <?= Html::a('Свойства', Url::to(['customer-properties-backend/index']), ['class' => 'btn-main']); ?>
     </div>
-<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?php $form = ActiveForm::begin([
+    'enableAjaxValidation' => true,
+    'options' => ['enctype' => 'multipart/form-data']
+]); ?>
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,

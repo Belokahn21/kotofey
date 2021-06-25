@@ -39,6 +39,8 @@ class Customer extends \yii\db\ActiveRecord
 
             [['name'], 'string', 'max' => 255],
             [['description'], 'string'],
+
+            ['phone', 'unique', 'targetClass' => Customer::className(), 'message' => 'Этот телефон уже добавлен.'],
         ];
     }
 
