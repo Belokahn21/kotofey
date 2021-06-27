@@ -73,6 +73,9 @@ use app\modules\vendors\models\entity\VendorGroup;
             <div class="col-sm-3">
                 <?= $form->field($model, 'min_summary_sale')->textInput(); ?>
             </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'type_price')->dropDownList($model->getTypePrice(), ['prompt' => 'Цена в прайсе']); ?>
+            </div>
         </div>
     </div>
 </div>

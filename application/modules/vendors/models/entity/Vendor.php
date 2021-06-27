@@ -19,6 +19,7 @@ use yii\helpers\Json;
  * @property string $delivery_days
  * @property string $email
  * @property string $phone
+ * @property string $type_price
  * @property int $group_id
  * @property int $discount
  * @property int $min_summary_sale
@@ -45,6 +46,9 @@ class Vendor extends \yii\db\ActiveRecord
     const VENDOR_ID_MURKEL = 15;
     const VENDOR_ID_LUKAS = 16;
 
+    const TYPE_PRICE_BASE = 'base';
+    const TYPE_PRICE_PURCHASE = 'purchase';
+
     public function behaviors()
     {
         return [
@@ -57,23 +61,12 @@ class Vendor extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'vendor';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
             [['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale', 'phone', 'how_send_order'], 'integer'],
             [['name'], 'required'],
-            [['name', 'slug', 'address', 'legal_name'], 'string', 'max' => 255],
+            [['name', 'slug', 'address', 'legal_name','type_price'], 'string', 'max' => 255],
             [['email'], 'string'],
             [['delivery_days'], 'safe'],
             [['email'], 'email'],
@@ -81,9 +74,6 @@ class Vendor extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function attributeLabels()
     {
         return [
@@ -99,6 +89,7 @@ class Vendor extends \yii\db\ActiveRecord
             'address' => 'Адрес',
             'group_id' => 'Группа',
             'discount' => 'Скидка',
+            'type_price' => 'Цена в прайсе',
             'min_summary_sale' => 'Минимальная сумма заказа',
             'time_open' => 'Время открытия',
             'time_close' => 'Время закрытия',
@@ -128,6 +119,14 @@ class Vendor extends \yii\db\ActiveRecord
         return [
             self::SEND_ORDER_VARIANT_WA => 'Whatsapp',
             self::SEND_ORDER_VARIANT_EMAIL => 'E-Mail',
+        ];
+    }
+
+    public function getTypePrice()
+    {
+        return [
+            self::TYPE_PRICE_BASE => 'В прайсе базовая цена',
+            self::TYPE_PRICE_PURCHASE => 'В прайсе закупочная цена',
         ];
     }
 }
