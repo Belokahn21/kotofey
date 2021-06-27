@@ -17,23 +17,25 @@ use app\modules\vendors\models\entity\VendorGroup;
             <?= $form->field($model, 'is_active')->checkbox(); ?>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <div class="form-element">
                     <?= $form->field($model, 'name')->textInput(); ?>
                 </div>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-3">
                 <div class="form-element">
                     <?= $form->field($model, 'legal_name')->textInput(); ?>
                 </div>
             </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'address')->textInput(); ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'sort')->textInput(); ?>
+            </div>
+
         </div>
         <div class="row">
-            <div class="col-sm-3">
-                <div class="form-element">
-                    <?= $form->field($model, 'address')->textInput(); ?>
-                </div>
-            </div>
             <div class="col-sm-3">
                 <div class="form-element">
                     <?= $form->field($model, 'delivery_days')->dropDownList([
@@ -53,33 +55,24 @@ use app\modules\vendors\models\entity\VendorGroup;
                 </div>
             </div>
             <div class="col-sm-3">
-                <div class="form-element">
-                    <?= $form->field($model, 'phone')->textInput(); ?>
-                </div>
+                <?= $form->field($model, 'phone')->textInput(); ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'how_send_order')->dropDownList($model->getSendOrderVariants(), ['prompt' => 'Заявка отправляется через']) ?>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4">
-                <div class="form-element">
-                    <?= $form->field($model, 'sort')->textInput(); ?>
-                </div>
-            </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <div class="form-element">
                     <?= $form->field($model, 'discount')->textInput(); ?>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="form-element">
-                    <?= $form->field($model, 'min_summary_sale')->textInput(); ?>
-                </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map(VendorGroup::find()->all(), 'id', 'name'), ['prompt' => 'Группа поставщиков']) ?>
             </div>
-        </div>
-        <div class="form-element">
-            <?= $form->field($model, 'group_id')->dropDownList(ArrayHelper::map(VendorGroup::find()->all(), 'id', 'name'), ['prompt' => 'Группа поставщиков']) ?>
-        </div>
-        <div class="form-element">
-            <?= $form->field($model, 'how_send_order')->dropDownList($model->getSendOrderVariants(), ['prompt' => 'Заявка отправляется через']) ?>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'min_summary_sale')->textInput(); ?>
+            </div>
         </div>
     </div>
 </div>

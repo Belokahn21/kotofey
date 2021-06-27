@@ -3,34 +3,36 @@
 namespace app\modules\vendors\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "vendor_manager".
  *
  * @property int $id
- * @property string $fio
- * @property int $vendor_id
- * @property int $phone
- * @property string $email
- * @property string $welcome_message
- * @property int $created_at
- * @property int $updated_at
- *
- * @property Vendor $vendor
+ * @property int|null $is_active
+ * @property int|null $sort
+ * @property int|null $vendor_id
+ * @property string|null $name
+ * @property string|null $method_buy
+ * @property int|null $phone
+ * @property string|null $email
+ * @property int|null $created_at
+ * @property int|null $updated_at
  */
 class VendorManager extends \yii\db\ActiveRecord
 {
-    public static function tableName()
+    public function behaviors()
     {
-        return 'vendor_manager';
+        return [
+            TimestampBehavior::className()
+        ];
     }
 
     public function rules()
     {
         return [
-            [['vendor_id', 'phone', 'created_at', 'updated_at'], 'integer'],
-            [['fio', 'email', 'welcome_message'], 'string', 'max' => 255],
-            [['vendor_id'], 'exist', 'skipOnError' => true, 'targetClass' => Vendor::className(), 'targetAttribute' => ['vendor_id' => 'id']],
+            [['is_active', 'sort', 'vendor_id', 'phone', 'created_at', 'updated_at'], 'integer'],
+            [['name', 'method_buy', 'email'], 'string', 'max' => 255],
         ];
     }
 
@@ -38,18 +40,15 @@ class VendorManager extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'fio' => 'Fio',
+            'is_active' => 'Is Active',
+            'sort' => 'Sort',
             'vendor_id' => 'Vendor ID',
+            'name' => 'Name',
+            'method_buy' => 'Method Buy',
             'phone' => 'Phone',
             'email' => 'Email',
-            'welcome_message' => 'Welcome Message',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
-    }
-
-    public function getVendor()
-    {
-        return $this->hasOne(Vendor::className(), ['id' => 'vendor_id']);
     }
 }

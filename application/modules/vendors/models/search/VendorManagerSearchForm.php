@@ -2,15 +2,16 @@
 
 namespace app\modules\vendors\models\search;
 
-use app\modules\vendors\models\entity\Vendor;
+use app\modules\vendors\models\entity\VendorManager;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class VendorSearchForm extends Vendor
+class VendorManagerSearchForm extends VendorManager
 {
+
     public static function tableName()
     {
-        return Vendor::tableName();
+        return VendorManager::tableName();
     }
 
     public function rules()
@@ -27,7 +28,7 @@ class VendorSearchForm extends Vendor
 
     public function search($params)
     {
-        $query = Vendor::find();
+        $query = VendorManager::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

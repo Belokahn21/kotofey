@@ -7,24 +7,26 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 
 /* @var \yii\web\View $this */
-/* @var \app\modules\vendors\models\entity\Vendor $model */
+/* @var \app\modules\vendors\models\entity\VendorManager $model */
+/* @var \app\modules\vendors\models\entity\Vendor[] $vendors */
 
-$this->title = Title::show("Поставщики"); ?>
+$this->title = Title::show("Менеджеры"); ?>
     <div class="title-group">
-        <h1 class="title">Поставщики</h1>
-        <?= Html::a('Менеджеры', Url::to(['/admin/vendors/vendor-manager-backend/index']), ['class' => 'btn-main']); ?>
+        <h1 class="title">Менеджеры</h1>
+        <?= Html::a('Поставщики', Url::to(['/admin/vendors/vendors-backend/index']), ['class' => 'btn-main']); ?>
         <?= Html::a('Группы поставщиков', Url::to(['/admin/vendors/vendors-group-backend/index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 <?= $this->render('_form', [
     'model' => $model,
+    'vendors' => $vendors,
     'form' => $form
 ]); ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end(); ?>
 
     <div class="clearfix"></div>
-    <h2>Список поставщиков</h2>
+    <h2>Список менеджеров</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
@@ -44,7 +46,6 @@ $this->title = Title::show("Поставщики"); ?>
             }
         ],
         'name',
-        'legal_name',
         [
             'attribute' => 'email',
             'format' => 'raw',
@@ -59,7 +60,6 @@ $this->title = Title::show("Поставщики"); ?>
                 return Html::a($model->phone, 'tel:' . $model->phone);
             }
         ],
-        'discount',
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],

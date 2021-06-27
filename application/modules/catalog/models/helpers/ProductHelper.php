@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\helpers;
 
+use app\modules\vendors\models\entity\Vendor;
 use Yii;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -59,6 +60,11 @@ class ProductHelper
     public static function getMarkup(Product $model)
     {
         return @round(($model->price / $model->purchase) * 100 - 100);
+    }
+
+    public static function makePurchase(Product &$model, Vendor $vendor)
+    {
+        $model->purchase = round($model->base_price * ($vendor->discount / 100));
     }
 
     private static function getPercentTwoNums($big, $small)

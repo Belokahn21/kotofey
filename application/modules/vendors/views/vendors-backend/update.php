@@ -7,7 +7,7 @@ use yii\helpers\Html;
 /* @var \yii\web\View $this */
 /* @var \app\modules\vendors\models\entity\Vendor $model */
 
-$this->title = Title::show("Поставщик:" . $model->name); ?>
+$this->title = Title::show($model->name); ?>
 <section>
     <div class="title-group">
         <h1 class="title"><?= $model->name; ?></h1>
