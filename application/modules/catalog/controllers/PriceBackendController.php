@@ -7,15 +7,17 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\PriceUpdateForm;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\controllers\MainBackendController;
-use app\modules\site\models\tools\Debug;
 use app\modules\vendors\models\entity\Vendor;
-use yii\helpers\Html;
 use yii\web\UploadedFile;
 
 class PriceBackendController extends MainBackendController
 {
     public function actionIndex()
     {
+        $empty_ids = [];
+        $complete_ids = [];
+        $error_elements = [];
+
         $model = new PriceUpdateForm();
         $vendors = Vendor::find()->all();
 
@@ -23,9 +25,6 @@ class PriceBackendController extends MainBackendController
             if ($model->load(\Yii::$app->request->post())) {
                 $vendor = Vendor::findOne($model->vendor_id);
                 $upl = UploadedFile::getInstance($model, 'file');
-                $empty_ids = [];
-                $complete_ids = [];
-                $error_elements = [];
 
 
                 if (($handle = fopen($upl->tempName, "r")) !== false) {
@@ -74,7 +73,7 @@ class PriceBackendController extends MainBackendController
                             }
 
 
-//                            $product->update();
+                            $product->update();
                             $complete_ids[] = $product;
                         } else {
                             $empty_ids[] = $code;
