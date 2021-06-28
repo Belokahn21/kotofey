@@ -6,6 +6,9 @@ use yii\helpers\ArrayHelper;
 
 /* @var \app\modules\vendors\models\entity\Vendor[] $vendors */
 /* @var $model \app\modules\catalog\models\form\PriceUpdateForm */
+/* @var $complete_ids \app\modules\catalog\models\entity\Product[] */
+/* @var $empty_ids array */
+/* @var $error_elements array */
 
 $this->title = \app\modules\seo\models\tools\Title::show('Обновить прайс лист');
 ?>
@@ -35,5 +38,26 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
     </div>
 </div>
 
+
+<?php if ($empty_ids): ?>
+    <?php foreach ($empty_ids as $empty_id): ?>
+        <div>
+            Не найден товар с кодом: <?= $empty_id; ?>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+<?php if ($complete_ids): ?>
+    <?php foreach ($complete_ids as $complete_element): ?>
+        <div style="border-bottom: 1px solid grey;">
+            <span>
+                <span class="green">Обновлен</span>
+                <span><?= $complete_element->name; ?></span>
+            </span>
+
+            <span><?= Html::a('Перейти', \yii\helpers\Url::to(['product-backend/update', 'id' => $complete_element->id])); ?></span>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
 <?= Html::submitButton('Запустить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end(); ?>
