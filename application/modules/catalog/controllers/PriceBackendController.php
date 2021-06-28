@@ -28,7 +28,7 @@ class PriceBackendController extends MainBackendController
 
 
                 if (($handle = fopen($upl->tempName, "r")) !== false) {
-                    while (($line = fgetcsv($handle, 1000, ";")) !== false) {
+                    while (($line = fgetcsv($handle, 1000, $model->delimiter)) !== false) {
                         $code = $line[2];
                         $bad_price = $line[6];
                         $base_price = null;

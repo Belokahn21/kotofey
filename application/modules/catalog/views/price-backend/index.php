@@ -5,6 +5,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 
 /* @var \app\modules\vendors\models\entity\Vendor[] $vendors */
+/* @var $model \app\modules\catalog\models\form\PriceUpdateForm */
 
 $this->title = \app\modules\seo\models\tools\Title::show('Обновить прайс лист');
 ?>
@@ -26,6 +27,10 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
             <div class="col-3">
                 <?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map($vendors, 'id', 'name'), ['prompt' => 'Указать поставщика']); ?>
             </div>
+            <div class="col-3">
+                <?= $form->field($model, 'delimiter')->textInput(['value' => ';']); ?>
+            </div>
+            <div class="col-3"></div>
         </div>
     </div>
 </div>
