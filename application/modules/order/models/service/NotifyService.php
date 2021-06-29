@@ -2,12 +2,16 @@
 
 namespace app\modules\order\models\service;
 
-
+use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\OrderMailHistory;
+use app\modules\promotion\models\entity\Promotion;
+use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\site\models\tools\System;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\mailer\models\services\MailService;
-use app\modules\mailer\models\entity\MailTemplates;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\mailer\models\entity\MailEvents;
@@ -15,7 +19,6 @@ use app\modules\order\models\entity\OrderDate;
 use app\modules\site\models\forms\GrumingForm;
 use app\modules\site\models\tools\Currency;
 use app\modules\order\models\entity\Order;
-use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Price;
 use app\modules\stock\models\entity\Stocks;
 use VK\Client\VKApiClient;
@@ -239,5 +242,69 @@ class NotifyService
     {
         $this->notifyCompleteOrder($order);
         $this->notifyOrderCreate($order);
+    }
+
+    public function notifyBeginSale(Promotion $model)
+    {
+        $sender = new MailService();
+        $promotion_id = $model->id;
+        $list_product_id = PromotionProductMechanics::find()->where(['promotion_id' => $model->id])->select(['product_id'])->all();
+        $list_product_id = ArrayHelper::getColumn($list_product_id, 'product_id');
+
+        $order_items = OrdersItems::find()->where(['product_id' => $list_product_id])->select(['order_id'])->groupBy(['order_id'])->all();
+        $orders = Order::find()->where(['id' => ArrayHelper::getColumn($order_items, 'order_id')])->all();
+
+        foreach ($orders as $order) {
+            $link = Html::a($order->email, Url::to(['/admin/order/order-backend/update', 'id' => $order->id]));
+            $user_phone = $order->phone;
+
+            try {
+                $sender->sendEvent(5, [
+                    'EMAIL_TO' => $order->email,
+                    'MONTH' => date('F'),
+                    'PROMO_NAME' => $model->name,
+                    'SALE_ITEMS' => call_user_func(function () use ($promotion_id) {
+                        $html = '';
+                        $cur_icon = Currency::getInstance()->show();
+                        $items = PromotionProductMechanics::find()->where(['promotion_id' => $promotion_id])->all();
+                        foreach ($items as $item) {
+                            $product = $item->product;
+                            $detail = ProductHelper::getDetailUrl($product);
+                            $html .= "
+                            <tr style='display: block; width: 100%;'>
+                              <td style='width:45%; padding: 5px; font-size:16px; '>{$product->name}</td>
+                              <td style='width:15%; padding: 5px;'>{$product->price} {$cur_icon}</td>
+                              <td style='width:15%; padding: 5px;'>{$product->discount_price} {$cur_icon}</td>
+                              <td style='width:15%; padding: 5px;'>
+                              <a href='{$detail}' style='border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;'>Купить</a>
+                              </td>
+                            </tr>";
+                        }
+
+
+                        return $html;
+                    }),
+                    'LAST_ORDERS' => call_user_func(function () use ($user_phone) {
+                        $html = '';
+                        $last = Order::find()->where(['phone' => $user_phone])->all();
+                        foreach ($last as $order) {
+                            $cur_icon = Currency::getInstance()->show();
+                            $sum = OrderHelper::orderSummary($order);
+                            $sum_formated = Price::format($sum);
+                            $html .= "
+                            <tr style='display: block; width: 100%;'>
+                              <td style='width:40%; padding: 5px;'>Заказ № {$order->id}</td>
+                              <td style='width:45%; padding: 5px;'>Сумма заказа {$sum_formated} {$cur_icon}</td>
+                              <td style='width:15%; padding: 5px;'><a href='#' style='border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;'>Повторить</a></td>
+                            </tr>";
+                        }
+                        return $html;
+                    }),
+                ]);
+
+            } catch (\Exception $exception) {
+                LogService::saveErrorMessage($exception->getMessage(), 'mail_service');
+            }
+        }
     }
 }

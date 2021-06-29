@@ -1,0 +1,21 @@
+extends include/layer
+
+block contents
+    table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;")
+            tr
+                td(style="text-align:center; font-weight:bold; color: #ff1a4a; font-size:24px; padding-bottom:20px; ") #MONTH# - товары со скидкой в этом месяце
+            tr
+                td(style="text-align:justify;") Дорогой покупатель, в нашем интернет-магазине Котофей стартовала распродажа товаров. Мы собрали товары, которые Вы ранее покупали у нас и они стали доступны со скидкой в нашем магазине.
+    table(style="max-width:600px; width:100%; display:block; margin:20px auto auto auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%; margin-bottom:15px;")
+            tr
+                td(style="font-weight:bold;") Мои товары со скидкой сейчас:
+    table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:20px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;") #SALE_ITEMS#
+    table(style="max-width:600px; width:100%; display:block; margin:20px auto auto auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%; margin-bottom:15px;")
+            tr
+                td(style="font-weight:bold;") Последние мои заказы:
+    table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:20px;" border=0 cellpadding="0" cellspacing="0")
+        tbody(style="display:block; width:100%;") #LAST_ORDERS#

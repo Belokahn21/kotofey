@@ -2,10 +2,13 @@
 
 namespace app\modules\promotion\controllers;
 
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\logger\models\service\LogService;
 use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
+use app\modules\order\models\service\NotifyService;
+use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\promotion\models\helpers\PromotionProductMechanicHelper;
 use app\modules\promotion\models\search\PromotionSearch;
@@ -53,21 +56,8 @@ class PromotionBackendController extends Controller
                 }
             }
 
-            try {
-                $sender = new MailService();
-                $sender->sendEvent(5, [
-                    'SALE_ITEMS' => call_user_func(function () {
-                        $html = '';
-                        return $html;
-                    }),
-                    'LAST_ORDERS' => call_user_func(function () {
-                        $html = '';
-                        return $html;
-                    }),
-                ]);
-            } catch (\Exception $exception) {
-                LogService::saveErrorMessage($exception->getMessage(), 'mail_service');
-            }
+            $notify = new NotifyService();
+            $notify->notifyBeginSale($model);
 
             Alert::setSuccessNotify('Акция успешно сохранена');
             return $this->refresh();
