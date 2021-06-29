@@ -262,7 +262,7 @@ class NotifyService
                     'EMAIL_FROM' => 'sale@kotofey.store',
                     'EMAIL_TO' => 'popugau@gmail.com',
 //                    'EMAIL_TO' => $order->email,
-                    'MONTH' => date('F'),
+                    'MONTH' => ArrayHelper::getValue(['Январь', 'Февраль', 'Март', 'Аперль', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], date('m') - 1),
                     'PROMO_NAME' => $model->name,
                     'SALE_ITEMS' => call_user_func(function () use ($promotion_id) {
                         $html = '';
