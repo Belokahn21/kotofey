@@ -60,6 +60,10 @@ class PromotionBackendController extends Controller
                         $html = '';
                         return $html;
                     }),
+                    'LAST_ORDERS' => call_user_func(function () {
+                        $html = '';
+                        return $html;
+                    }),
                 ]);
             } catch (\Exception $exception) {
                 LogService::saveErrorMessage($exception->getMessage(), 'mail_service');
