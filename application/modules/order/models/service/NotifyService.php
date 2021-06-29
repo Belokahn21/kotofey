@@ -259,7 +259,8 @@ class NotifyService
 
             try {
                 $sender->sendEvent(5, [
-                    'EMAIL_TO' => $order->email,
+                    'EMAIL_TO' => 'popugau@gmail.com',
+//                    'EMAIL_TO' => $order->email,
                     'MONTH' => date('F'),
                     'PROMO_NAME' => $model->name,
                     'SALE_ITEMS' => call_user_func(function () use ($promotion_id) {
