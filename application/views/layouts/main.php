@@ -10,6 +10,7 @@ use yii\helpers\Html;
 use app\assets\AppAsset;
 use app\widgets\notification\Alert;
 use app\modules\user\models\entity\User;
+use app\widgets\notification\NotifyWidget;
 use app\modules\basket\models\entity\Basket;
 use app\modules\compare\models\entity\Compare;
 use app\modules\site\widgets\PageUp\PageUpWidget;
@@ -65,6 +66,9 @@ $this->beginPage() ?>
 <?php $this->beginBody() ?>
 
 <?= AdminPanel::widget(); ?>
+<?= NotifyWidget::widget([
+    'message' => 'Дорогие клиенты, в период с 28.06.2021 по 05.07.2021 доставка заказов может увеличится по времени ожидания. Технические неполадки с курьерским ТС. Доставка временно осуществляется другим сервисом.'
+]); ?>
 
 <?= $this->render('include/header', [
     'parentCategories' => $parentCategories

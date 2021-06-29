@@ -16198,6 +16198,24 @@ label[for="site-form-pet-avatar"] {
     .thanks-note a:hover {
       color: #ff1a4a; }
 
+.site-message {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  background-color: red;
+  color: white;
+  padding: 10px;
+  font-weight: bold; }
+  .site-message__button {
+    margin-left: auto;
+    background-color: transparent;
+    border: white 1px solid;
+    border-radius: 7px;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    outline: none; }
+
 .product-gallery-big {
   width: 400px;
   overflow: hidden;

@@ -16,6 +16,7 @@ import RemoveBasketItem from './block/RemoveBasketItem';
 import FastCart from './block/FastCart';
 import LiveSearch from "./block/LiveSearch";
 import HelpDashboard from "./classes/HelpDashboard/HelpDashboard";
+import SiteMessage from "./classes/SiteMessage";
 // import SmoothChangeNumber from "./classes/SmoothChangeNumber";
 
 // no class block
@@ -44,6 +45,7 @@ new Menu();
 new LiveSearch('.js-live-search');
 // new SmoothChangeNumber('[data-smooth-change]');
 new HelpDashboard();
+new SiteMessage();
 
 
 document.addEventListener('DOMContentLoaded', () => {
