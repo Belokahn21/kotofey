@@ -2,6 +2,8 @@
 
 namespace app\modules\promotion\controllers;
 
+use app\modules\logger\models\service\LogService;
+use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\promotion\models\helpers\PromotionProductMechanicHelper;
@@ -46,6 +48,15 @@ class PromotionBackendController extends Controller
                         return $this->refresh();
                     }
                 }
+            }
+
+            try {
+                $sender = new MailService();
+                $sender->sendEvent(5, [
+
+                ]);
+            } catch (\Exception $exception) {
+                LogService::saveErrorMessage($exception->getMessage(), 'mail_service');
             }
 
             Alert::setSuccessNotify('Акция успешно сохранена');
