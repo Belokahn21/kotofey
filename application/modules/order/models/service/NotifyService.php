@@ -259,6 +259,7 @@ class NotifyService
 
             try {
                 $sender->sendEvent(5, [
+                    'EMAIL_FROM' => 'sale@kotofey.store',
                     'EMAIL_TO' => 'popugau@gmail.com',
 //                    'EMAIL_TO' => $order->email,
                     'MONTH' => date('F'),
@@ -286,7 +287,7 @@ class NotifyService
                     }),
                     'LAST_ORDERS' => call_user_func(function () use ($user_phone) {
                         $html = '';
-                        $last = Order::find()->where(['phone' => $user_phone])->all();
+                        $last = Order::find()->where(['phone' => $user_phone])->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
                         foreach ($last as $order) {
                             $cur_icon = Currency::getInstance()->show();
                             $sum = OrderHelper::orderSummary($order);
