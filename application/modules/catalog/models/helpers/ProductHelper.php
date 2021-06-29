@@ -64,7 +64,7 @@ class ProductHelper
 
     public static function makePurchase(Product &$model, Vendor $vendor)
     {
-        $model->purchase = round($model->base_price * ($vendor->discount / 100));
+        $model->purchase = $model->base_price - round($model->base_price * ($vendor->discount / 100));
     }
 
     private static function getPercentTwoNums($big, $small)

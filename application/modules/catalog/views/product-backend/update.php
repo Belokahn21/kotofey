@@ -33,6 +33,8 @@ $this->title = Title::show('Товары');
                 <?= Html::a('Открыть на сайте поставщика ', SibagroTrade::getProductDetailByCode($model->code), ['target' => '_blank']) . Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]); ?>
             </div>
         <?php endif; ?>
+        <div class="product-markup">Создан: <?= date('d.m.Y', $model->created_at) ?></div>
+        <div class="product-markup">Обновлен: <?= date('d.m.Y', $model->updated_at) ?></div>
     </div>
 <?= $this->render('_form', [
     'model' => $model,
