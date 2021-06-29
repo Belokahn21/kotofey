@@ -255,7 +255,6 @@ class NotifyService
         $orders = Order::find()->where(['id' => ArrayHelper::getColumn($order_items, 'order_id')])->all();
 
         foreach ($orders as $order) {
-            $link = Html::a($order->email, Url::to(['/admin/order/order-backend/update', 'id' => $order->id]));
             $user_phone = $order->phone;
 
             try {
