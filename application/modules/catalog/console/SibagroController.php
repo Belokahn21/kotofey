@@ -98,8 +98,9 @@ class SibagroController extends Controller
     // TODO:  реализовать метод очистки таблицы productsync
     public function actionCleanProductSync()
     {
+        $module = \Yii::$app->getModule('catalog');
         $log = new Logger();
-        $history = ProductSync::find()->where('created_at < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL 2 day))');
+        $history = ProductSync::find()->where('created_at < UNIX_TIMESTAMP(DATE_SUB(NOW(), INTERVAL ' . (!empty($module->sibagro_clean_sync_interval_cleaning) ? $module->sibagro_clean_sync_interval_cleaning : '2 day') . '))');
 
         if ($history->count() > 0) {
             $log->saveMessage("Очищено {$history->count()} записей из таблицы ProductSync", self::UNIQ_LOG_CLEAN);

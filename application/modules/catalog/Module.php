@@ -15,6 +15,7 @@ class Module extends MainModule
 {
     public $controllerNamespace = 'app\modules\catalog\controllers';
     public $admission_event_id;
+    public $sibagro_clean_sync_interval_cleaning;
     private $name = 'Каталог';
 
     public function init()
@@ -47,6 +48,7 @@ class Module extends MainModule
     {
         return [
             'admission_event_id' => ArrayHelper::map(MailEvents::find()->all(), 'id', 'name'),
+            'sibagro_clean_sync_interval_cleaning'=>'',
         ];
     }
 
@@ -54,6 +56,7 @@ class Module extends MainModule
     {
         return [
             'admission_event_id' => 'Почтовое событие для пользователя (Поступление товара)',
+            'sibagro_clean_sync_interval_cleaning' => 'Значение времени очистки(для MySQL Interval)',
         ];
     }
 }
