@@ -4,11 +4,14 @@ namespace app\modules\promotion\controllers;
 
 use app\modules\logger\models\service\LogService;
 use app\modules\mailer\models\services\MailService;
+use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\promotion\models\helpers\PromotionProductMechanicHelper;
 use app\modules\promotion\models\search\PromotionSearch;
+use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Debug;
+use app\modules\site\models\tools\Price;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;
@@ -53,7 +56,10 @@ class PromotionBackendController extends Controller
             try {
                 $sender = new MailService();
                 $sender->sendEvent(5, [
-
+                    'SALE_ITEMS' => call_user_func(function () {
+                        $html = '';
+                        return $html;
+                    }),
                 ]);
             } catch (\Exception $exception) {
                 LogService::saveErrorMessage($exception->getMessage(), 'mail_service');
