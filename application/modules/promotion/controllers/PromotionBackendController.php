@@ -56,9 +56,6 @@ class PromotionBackendController extends Controller
                 }
             }
 
-//            $notify = new NotifyService();
-//            $notify->notifyBeginSale($model);
-
             Alert::setSuccessNotify('Акция успешно сохранена');
             return $this->refresh();
         }

@@ -20,6 +20,7 @@ class PromotionController extends Controller
 {
     public function actionGroupNotify()
     {
+        //todo проблема в том что клиенту нужно отправлять товары по скидке, которые он заказал, а приходят все
         //collect promo in current
         $list_promo_mechanics = PromotionProductMechanics::find()->joinWith('promotion')->andWhere([
             'or',
