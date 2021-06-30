@@ -222,6 +222,8 @@ class OrderBackendController extends MainBackendController
                     }
                 }
 
+                $ns = new NotifyService();
+                $ns->sendClientNotify(Order::findOne($model->id));
                 $transaction->commit();
                 Alert::setSuccessNotify('Заказ успешно обновлён');
                 return $this->refresh();
