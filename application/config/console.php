@@ -160,6 +160,9 @@ $config = [
         'content' => [
             'class' => 'app\modules\content\console\ContentController'
         ],
+        'promotion' => [
+            'class' => 'app\modules\promotion\console\PromotionController'
+        ],
     ],
     'modules' => [
         'catalog' => [
