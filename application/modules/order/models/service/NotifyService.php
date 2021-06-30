@@ -163,6 +163,7 @@ class NotifyService
     {
         if (!$module = Yii::$app->getModule('order')) return false;
         if (!$event = MailEvents::findOne($module->mail_event_id_order_ready)) return false;
+        if ($order->is_close) return false;
 
         if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
