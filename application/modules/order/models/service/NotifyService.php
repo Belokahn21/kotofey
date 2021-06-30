@@ -2,6 +2,7 @@
 
 namespace app\modules\order\models\service;
 
+use app\modules\site\models\tools\Month;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -263,7 +264,7 @@ class NotifyService
                     'EMAIL_FROM' => 'sale@kotofey.store',
                     'EMAIL_TO' => 'popugau@gmail.com',
 //                    'EMAIL_TO' => $order->email,
-                    'MONTH' => ArrayHelper::getValue(['Январь', 'Февраль', 'Март', 'Аперль', 'Май', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь'], date('m') - 1),
+                    'MONTH' => Month::getLabelCurrentMonth(date('m') - 1),
                     'PROMO_NAME' => $model->name,
                     'SALE_ITEMS' => call_user_func(function () use ($promotion_id) {
                         $html = '';
