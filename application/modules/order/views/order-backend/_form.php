@@ -159,7 +159,13 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                                             <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
                                             <div>Зкупочная: <?= $item->product->purchase; ?></div>
                                             <div>Сейчас на складе: <?= $item->product->count; ?></div>
-                                            <div>Вес позиций: <?= $summary_weight += PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
+                                            <?php
+                                            try { ?>
+                                                <div>Вес позиций: <?= $summary_weight += PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
+
+                                            <?php } catch (Exception $exception) { ?>
+                                                <div class="red bold">При расчете веса возникла ошибка: <?= $exception->getMessage(); ?></div>
+                                            <?php } ?>
                                         <?php endif; ?>
                                         <div>К продаже за штуку: <?= Price::format($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::format($item->discount_price) : null; ?></div>
                                         <div>Кол-во: <?= $item->count; ?></div>
