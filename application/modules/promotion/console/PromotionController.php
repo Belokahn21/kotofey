@@ -5,6 +5,7 @@ namespace app\modules\promotion\console;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\logger\models\service\LogService;
+use app\modules\mailer\models\helpers\PromotionHtmlHelper;
 use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
@@ -53,21 +54,9 @@ class PromotionController extends Controller
                     'MONTH' => Month::getLabelCurrentMonth(date('m') - 1),
                     'SALE_ITEMS' => call_user_func(function () use ($products) {
                         $html = '';
-                        $cur_icon = Currency::getInstance()->show();
                         foreach ($products as $product) {
-                            $detail = ProductHelper::getDetailUrl($product);
-                            $html .= "
-                            <tr style='display: block; width: 100%;'>
-                              <td style='width:45%; padding: 5px; font-size:16px; '>{$product->name}</td>
-                              <td style='width:15%; padding: 5px;'>{$product->price} {$cur_icon}</td>
-                              <td style='width:15%; padding: 5px;'>{$product->discount_price} {$cur_icon}</td>
-                              <td style='width:15%; padding: 5px;'>
-                              <a href='{$detail}' style='border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;'>Купить</a>
-                              </td>
-                            </tr>";
+                            $html .= PromotionHtmlHelper::renderProduct($product);
                         }
-
-
                         return $html;
                     }),
                     'LAST_ORDERS' => call_user_func(function () use ($user_phone) {
