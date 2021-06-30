@@ -2,7 +2,6 @@
 
 namespace app\modules\subscribe\models\entity;
 
-use Yii;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -26,6 +25,8 @@ class Subscribes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['active'], 'default', 'value' => 1],
+
             [['email', 'active'], 'required'],
 
             [['active', 'created_at', 'updated_at'], 'integer'],
@@ -40,9 +41,9 @@ class Subscribes extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'email' => 'Email',
-            'active' => 'Active',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'active' => 'Активность',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

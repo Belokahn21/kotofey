@@ -27,6 +27,8 @@ Disallow: /referal/
 Disallow: /restore/
 Disallow: /restore/*
 Disallow: /about/agree/
+Disallow: /unsubscribe/
+Disallow: /unsubscribe/*
 
 Sitemap: https://kotofey.store/sitemap.xml
 
