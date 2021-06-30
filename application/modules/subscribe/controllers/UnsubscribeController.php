@@ -18,7 +18,7 @@ class UnsubscribeController extends Controller
             $model->active = 0;
             if (!$model->validate() || !$model->save()) {
                 LogService::saveErrorMessage(Debug::modelErrors($model), 'unsubscribe');
-                Alert::setErrorNotify('Отписаться не удалось из-за непредвиденной ошибки. Мы сообщим вам, когда решится вопрос!');
+                Alert::setErrorNotify("Отписаться не удалось из-за непредвиденной ошибки. Мы сообщим вам на {$email}, когда решится вопрос!");
                 return $this->redirect(['/']);
             }
         }
@@ -27,7 +27,7 @@ class UnsubscribeController extends Controller
         $model->active = 0;
         if (!$model->validate() || $model->update() === false) {
             LogService::saveErrorMessage(Debug::modelErrors($model), 'unsubscribe');
-            Alert::setErrorNotify('Отписаться не удалось из-за непредвиденной ошибки. Мы сообщим вам, когда решится вопрос!');
+            Alert::setErrorNotify("Отписаться не удалось из-за непредвиденной ошибки. Мы сообщим вам на {$email}, когда решится вопрос!");
             return $this->redirect(['/']);
         }
 
