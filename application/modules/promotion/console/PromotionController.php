@@ -3,20 +3,15 @@
 namespace app\modules\promotion\console;
 
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\logger\models\service\LogService;
 use app\modules\mailer\models\helpers\PromotionHtmlHelper;
 use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
-use app\modules\order\models\helpers\OrderHelper;
 use app\modules\promotion\models\entity\PromotionMailHistory;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
-use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Month;
-use app\modules\site\models\tools\Price;
-use app\modules\site\models\tools\System;
 use app\modules\subscribe\models\entity\Subscribes;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
@@ -87,8 +82,7 @@ class PromotionController extends Controller
             try {
                 $sender->sendEvent(5, [
                     'EMAIL_FROM' => 'sale@kotofey.store',
-                    'EMAIL_TO' => 'popugau@gmail.com',
-//                    'EMAIL_TO' => $order->email,
+                    'EMAIL_TO' => $order->email,
                     'LINK_MORE_PROMO' => Url::to(['promotion/promotion/index'], true),
                     'MONTH' => Month::getLabelCurrentMonth(date('m') - 1),
                     'FROM_CURRENT_PROMO_BY_SALES' => call_user_func(function () use ($current_items) {
