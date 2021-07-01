@@ -169,28 +169,56 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
     </div>
     <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
         <?php $composition_model = new CompositionProducts(); ?>
-        <?php foreach ($compositions as $count => $composit): ?>
 
-            <?php if (!$model->isNewRecord): ?>
-                <?php $composit_element = CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id]); ?>
-            <?php endif; ?>
 
-            <div class="row">
-                <div class="col-3">
-                    <div class="hidden">
-                        <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
-                        <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+
+        <?php
+        $count = 0;
+        $grouped_composition = [];
+        foreach ($compositions as $composition) {
+            $grouped_composition[$composition->composition_type_id][] = $composition;
+        }
+        ?>
+
+
+        <?php foreach ($grouped_composition as $type_id => $composit_list): ?>
+
+            <fieldset class="fieldset-props">
+                <legend>
+                    <?php
+                    $type = \app\modules\catalog\models\entity\CompositionType::findOne($type_id);
+                    if ($type) {
+                        echo $type->name;
+                    }
+                    ?>
+                </legend>
+
+                <?php foreach ($composit_list as $composit): ?>
+
+                    <?php $composit_element = null; ?>
+                    <?php if (!$model->isNewRecord): ?>
+                        <?php $composit_element = CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id]); ?>
+                    <?php endif; ?>
+
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="hidden">
+                                <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
+                                <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                            </div>
+                            <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
+                                'value' => $composit_element ? $composit_element->value : null,
+                                'placeholder' => $composit->name
+                            ])->label(false); ?>
+                        </div>
+                        <div class="col-3">
+                            <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['options' => [$composit_element ? $composit_element->metric_id : null => ["Selected" => true]]])->label(false); ?>
+                        </div>
                     </div>
-                    <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
-                        'value' => $composit_element ? $composit_element->value : null,
-                        'placeholder' => $composit->name
-                    ])->label(false); ?>
-                </div>
-                <div class="col-3">
-                    <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['options' => [$composit_element->metric_id => ["Selected" => true]]])->label(false); ?>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            </fieldset>
         <?php endforeach; ?>
+
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
         <div class="row">
