@@ -12,23 +12,26 @@ use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\site\models\tools\Currency;
+use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Month;
 use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\System;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 class PromotionController extends Controller
 {
     public function actionGroupNotify()
     {
-        //todo проблема в том что клиенту нужно отправлять товары по скидке, которые он заказал, а приходят все
-        //collect promo in current
-        $list_promo_mechanics = PromotionProductMechanics::find()->joinWith('promotion')->andWhere([
-            'or',
-            'promotion.start_at = :default and promotion.end_at = :default',
-            'promotion.start_at is null and promotion.end_at is null',
-            'promotion.start_at < :now and promotion.end_at > :now'
-        ])
+        $list_promo_mechanics = PromotionProductMechanics::find()
+            ->joinWith('promotion')
+            ->andWhere([
+                'or',
+                'promotion.start_at = :default and promotion.end_at = :default',
+                'promotion.start_at is null and promotion.end_at is null',
+                'promotion.start_at < :now and promotion.end_at > :now'
+            ])
             ->andWhere(['promotion.is_active' => true])
             ->addParams([
                 ":now" => time(),
@@ -36,42 +39,56 @@ class PromotionController extends Controller
             ])
             ->all();
 
+        $data = [];
         $sender = new MailService();
-        $list_product_id = ArrayHelper::getColumn($list_promo_mechanics, 'product_id');
-        $order_items = OrdersItems::find()->where(['product_id' => $list_product_id])->select(['order_id'])->groupBy(['order_id'])->all();
-        $orders = Order::find()->where(['id' => ArrayHelper::getColumn($order_items, 'order_id')])->all();
 
-        $products = Product::find()->where(['id' => $list_product_id])->all();
+        $list_all_product_id_current_promo = ArrayHelper::getColumn($list_promo_mechanics, 'product_id');
+
+        $order_items = OrdersItems::find()->where(['product_id' => $list_all_product_id_current_promo])->select(['order_id'])->groupBy(['order_id'])->all();
+        $list_order_id = ArrayHelper::getColumn($order_items, 'order_id');
+
+        $orders = Order::find()->where(['id' => $list_order_id])->andWhere(['<>', 'email', ''])->all();
+
+        $products = Product::find()->where(['id' => $list_all_product_id_current_promo])->limit(5)->all();
+
 
         foreach ($orders as $order) {
-            $user_phone = $order->phone;
+            foreach ($order->items as $item) {
+
+                if ($item->product) {
+                    if (ArrayHelper::isIn($item->product->id, $list_all_product_id_current_promo)) {
+                        $data[$order->email]['FROM_CURRENT_PROMO_BY_SALES'][] = $item->product;
+                    }
+                }
+            }
+
+
+            $data[$order->email]['ALL_ITEMS_ALL_PROMO_NO_MORE_FIVE'] = $products;
+        }
+
+        foreach ($orders as $order) {
+
+            $current_items = $data[$order->email]['FROM_CURRENT_PROMO_BY_SALES'];
+            $all_items = $data[$order->email]['ALL_ITEMS_ALL_PROMO_NO_MORE_FIVE'];
 
             try {
                 $sender->sendEvent(5, [
                     'EMAIL_FROM' => 'sale@kotofey.store',
-                    'EMAIL_TO' => 'popugau@gmail.com',
-//                    'EMAIL_TO' => $order->email,
+//                    'EMAIL_TO' => 'popugau@gmail.com',
+                    'EMAIL_TO' => $order->email,
+                    'LINK_MORE_PROMO' => Url::to(['promotion/promotion/index'],true),
                     'MONTH' => Month::getLabelCurrentMonth(date('m') - 1),
-                    'SALE_ITEMS' => call_user_func(function () use ($products) {
+                    'FROM_CURRENT_PROMO_BY_SALES' => call_user_func(function () use ($current_items) {
                         $html = '';
-                        foreach ($products as $product) {
+                        foreach ($current_items as $product) {
                             $html .= PromotionHtmlHelper::renderProduct($product);
                         }
                         return $html;
                     }),
-                    'LAST_ORDERS' => call_user_func(function () use ($user_phone) {
+                    'ALL_ITEMS_ALL_PROMO_NO_MORE_FIVE' => call_user_func(function () use ($all_items) {
                         $html = '';
-                        $last = Order::find()->where(['phone' => $user_phone])->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
-                        foreach ($last as $order) {
-                            $cur_icon = Currency::getInstance()->show();
-                            $sum = OrderHelper::orderSummary($order);
-                            $sum_formated = Price::format($sum);
-                            $html .= "
-                            <tr style='display: block; width: 100%;'>
-                              <td style='width:40%; padding: 5px;'>Заказ № {$order->id}</td>
-                              <td style='width:45%; padding: 5px;'>Сумма заказа {$sum_formated} {$cur_icon}</td>
-                              <td style='width:15%; padding: 5px;'><a href='#' style='border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;'>Повторить</a></td>
-                            </tr>";
+                        foreach ($all_items as $product) {
+                            $html .= PromotionHtmlHelper::renderProduct($product);
                         }
                         return $html;
                     }),

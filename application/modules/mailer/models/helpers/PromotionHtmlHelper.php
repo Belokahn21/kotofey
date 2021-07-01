@@ -12,11 +12,13 @@ class PromotionHtmlHelper
     {
         $detail = ProductHelper::getDetailUrl($model);
         $cur_icon = Currency::getInstance()->show();
+        $image = ProductHelper::getImageUrl($model);
         return "
         <tr style='display: block; width: 100%;'>
-          <td style='width:45%; padding: 5px; font-size:16px; '>{$model->name}</td>
+          <td style='width:15%; padding: 5px; font-size:16px; '><img src='{$image}' style='width: 100%; object-fit: contain;'></td>
+          <td style='width:30%; padding: 5px; font-size:16px; '>{$model->name}</td>
           <td style='width:15%; padding: 5px;'>{$model->price} {$cur_icon}</td>
-          <td style='width:15%; padding: 5px;'>{$model->discount_price} {$cur_icon}</td>
+          <td style='width:15%; padding: 5px;'>{$model->getDiscountPrice()} {$cur_icon}</td>
           <td style='width:15%; padding: 5px;'>
           <a href='{$detail}' style='border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;'>Купить</a>
           </td>
