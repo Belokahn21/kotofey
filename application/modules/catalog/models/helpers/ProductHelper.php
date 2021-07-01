@@ -59,7 +59,7 @@ class ProductHelper
 
     public static function getMarkup(Product $model)
     {
-        return @round(($model->price / $model->purchase) * 100 - 100);
+        return intval(@round(($model->price / $model->purchase) * 100 - 100));
     }
 
     public static function makePurchase(Product &$model, Vendor $vendor)
