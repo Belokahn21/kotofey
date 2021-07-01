@@ -49,7 +49,7 @@ class PriceBackendController extends MainBackendController
 
                         if ($product = Product::find()->where(['code' => $code, 'vendor_id' => $model->vendor_id])->one()) {
                             $product->scenario = Product::SCENARIO_STOCK_COUNT;
-                            $old_markup = ProductHelper::getMarkup($product, $model->default_markup);
+                            $old_markup = ProductHelper::getMarkup($product, intval($model->default_markup));
 
                             if ($vendor->type_price == Vendor::TYPE_PRICE_BASE) {
                                 $product->base_price = $base_price;
