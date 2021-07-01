@@ -171,7 +171,6 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         <?php $composition_model = new CompositionProducts(); ?>
         <?php foreach ($compositions as $count => $composit): ?>
 
-            <?php $value = null; ?>
             <?php if (!$model->isNewRecord): ?>
                 <?php $composit_element = CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id]); ?>
             <?php endif; ?>
@@ -183,7 +182,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                         <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
                     </div>
                     <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
-                        'value' => $composit_element->value,
+                        'value' => $composit_element ? $composit_element->value : null,
                         'placeholder' => $composit->name
                     ])->label(false); ?>
                 </div>
