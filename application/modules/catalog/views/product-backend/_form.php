@@ -212,7 +212,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                             ])->label(false); ?>
                         </div>
                         <div class="col-3">
-                            <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['options' => [$composit_element ? $composit_element->metric_id : null => ["Selected" => true]]])->label(false); ?>
+                            <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['prompt' => 'Выбрать весовку', 'options' => [$composit_element ? $composit_element->metric_id : null => ["Selected" => true]]])->label(false); ?>
                         </div>
                     </div>
                 <?php endforeach; ?>
