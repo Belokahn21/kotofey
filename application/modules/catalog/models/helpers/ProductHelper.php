@@ -81,6 +81,7 @@ class ProductHelper
     public static function applyMarkup(Product &$model, $markup)
     {
         $model->price = round($model->purchase + $model->purchase / 100 * $markup);
+        $model->price = strval($model->price);
     }
 
     public static function purchaseVirtual(array $products)

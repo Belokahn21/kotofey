@@ -9,13 +9,13 @@ class Price
         return number_format($price, 0, '.', ' ');
     }
 
-    public static function normalize($str)
+    public static function normalize($price)
     {
-        $str = str_replace(' ', '', $str);
-        $str = str_replace(',', '.', $str);
-        $str = (float)$str;
-        $str = round($str);
+        $price = str_replace(' ', '', $price);
+        $price = str_replace(',', '.', $price);
+        $price = (float)$price;
+        $price = round($price);
 
-        return $str;
+        return strval($price);
     }
 }
