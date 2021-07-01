@@ -20,6 +20,7 @@ use yii\helpers\Json;
  * @property string $email
  * @property string $phone
  * @property string $type_price
+ * @property string $notes
  * @property int $group_id
  * @property int $discount
  * @property int $min_summary_sale
@@ -31,6 +32,11 @@ use yii\helpers\Json;
  */
 class Vendor extends \yii\db\ActiveRecord
 {
+
+    const SEND_ORDER_VARIANT_WA = 1;
+    const SEND_ORDER_VARIANT_EMAIL = 2;
+
+    
     const VENDOR_ID_PURINA = 1;
     const VENDOR_ID_MARS = 2;
     const VENDOR_ID_ROYAL = 3;
@@ -65,11 +71,17 @@ class Vendor extends \yii\db\ActiveRecord
     {
         return [
             [['is_active', 'sort', 'group_id', 'created_at', 'updated_at', 'discount', 'time_open', 'time_close', 'min_summary_sale', 'phone', 'how_send_order'], 'integer'],
+
             [['name'], 'required'],
-            [['name', 'slug', 'address', 'legal_name','type_price'], 'string', 'max' => 255],
-            [['email'], 'string'],
+
+            [['name', 'slug', 'address', 'legal_name', 'type_price'], 'string', 'max' => 255],
+
+            [['email', 'notes'], 'string'],
+
             [['delivery_days'], 'safe'],
+
             [['email'], 'email'],
+
             ['how_send_order', 'default', 'value' => 0],
         ];
     }
@@ -90,6 +102,7 @@ class Vendor extends \yii\db\ActiveRecord
             'group_id' => 'Группа',
             'discount' => 'Скидка',
             'type_price' => 'Цена в прайсе',
+            'notes' => 'Заметки',
             'min_summary_sale' => 'Минимальная сумма заказа',
             'time_open' => 'Время открытия',
             'time_close' => 'Время закрытия',
@@ -110,9 +123,6 @@ class Vendor extends \yii\db\ActiveRecord
         $this->delivery_days = Json::encode($this->delivery_days);
         return parent::beforeValidate();
     }
-
-    const SEND_ORDER_VARIANT_WA = 1;
-    const SEND_ORDER_VARIANT_EMAIL = 2;
 
     public function getSendOrderVariants()
     {

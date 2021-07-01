@@ -77,5 +77,12 @@ use app\modules\vendors\models\entity\VendorGroup;
                 <?= $form->field($model, 'type_price')->dropDownList($model->getTypePrice(), ['prompt' => 'Цена в прайсе']); ?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-element">
+                    <?= $form->field($model, 'notes')->textarea(); ?>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
