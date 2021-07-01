@@ -201,6 +201,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <?php endif; ?>
 
                     <div class="row">
+                        <div class="col-3"><?= $composit->name; ?></div>
                         <div class="col-3">
                             <div class="hidden">
                                 <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
