@@ -10,7 +10,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property int $promotion_id
- * @property int $user_id
+ * @property string|null $email
  * @property int|null $created_at
  * @property int|null $updated_at
  */
@@ -26,8 +26,13 @@ class PromotionMailHistory extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['promotion_id', 'user_id'], 'required'],
-            [['promotion_id', 'user_id', 'created_at', 'updated_at'], 'integer'],
+            [['promotion_id'], 'required'],
+
+            [['promotion_id', 'created_at', 'updated_at'], 'integer'],
+
+            [['email'], 'string', 'max' => 255],
+
+            ['email', 'unique', 'targetAttribute' => ['email', 'promotion_id']],
         ];
     }
 
@@ -35,8 +40,8 @@ class PromotionMailHistory extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'promotion_id' => 'ID промоакции',
-            'user_id' => 'ID пользователя',
+            'promotion_id' => 'ID акции',
+            'email' => 'Почта',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];

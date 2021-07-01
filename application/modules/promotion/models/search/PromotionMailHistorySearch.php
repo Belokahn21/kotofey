@@ -2,15 +2,15 @@
 
 namespace app\modules\promotion\models\search;
 
-use app\modules\promotion\models\entity\PromotionProductMechanics;
+use app\modules\promotion\models\entity\PromotionMailHistory;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class PromotionMechanicsSearch extends PromotionProductMechanics
+class PromotionMailHistorySearch extends PromotionMailHistory
 {
     public static function tableName()
     {
-        return PromotionProductMechanics::tableName();
+        return PromotionMailHistory::tableName();
     }
 
     public function rules()
@@ -28,7 +28,7 @@ class PromotionMechanicsSearch extends PromotionProductMechanics
 
     public function search($params)
     {
-        $query = PromotionProductMechanics::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = PromotionMailHistory::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

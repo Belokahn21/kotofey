@@ -18,6 +18,7 @@ class Module extends \app\modules\site\MainModule
     {
         return [
             ['name' => 'Акции', 'url' => Url::to(['/admin/promotion/promotion-backend/index'])],
+            ['name' => 'История оповещений', 'url' => Url::to(['/admin/promotion/promotion-mail-history-backend/index'])],
         ];
     }
 }

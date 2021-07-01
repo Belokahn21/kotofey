@@ -10,12 +10,14 @@ use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\promotion\models\entity\PromotionMailHistory;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Month;
 use app\modules\site\models\tools\Price;
 use app\modules\site\models\tools\System;
+use app\modules\subscribe\models\entity\Subscribes;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -42,12 +44,22 @@ class PromotionController extends Controller
         $data = [];
         $sender = new MailService();
 
+        $_excluded_email = ArrayHelper::getColumn(Subscribes::find()->select(['email'])->where(['active' => 0])->all(), 'email');
+        $_excluded_email = array_merge($_excluded_email, ArrayHelper::getColumn(PromotionMailHistory::find()->select(['email'])->all(), 'email'));
+        $excluded_email = array_unique($_excluded_email);
+
+        $list_promotion_id = [];
+        foreach ($list_promo_mechanics as $mechanic) {
+            $list_promotion_id[] = $mechanic->promotion_id;
+        }
+        $list_promotion_id = array_unique($list_promotion_id);
+
         $list_all_product_id_current_promo = ArrayHelper::getColumn($list_promo_mechanics, 'product_id');
 
         $order_items = OrdersItems::find()->where(['product_id' => $list_all_product_id_current_promo])->select(['order_id'])->groupBy(['order_id'])->all();
         $list_order_id = ArrayHelper::getColumn($order_items, 'order_id');
 
-        $orders = Order::find()->where(['id' => $list_order_id])->andWhere(['<>', 'email', ''])->all();
+        $orders = Order::find()->where(['id' => $list_order_id])->andWhere(['<>', 'email', ''])->andWhere(['not in', 'email', $excluded_email])->all();
 
         $products = Product::find()->where(['id' => $list_all_product_id_current_promo])->limit(5)->all();
 
@@ -71,12 +83,13 @@ class PromotionController extends Controller
             $current_items = $data[$order->email]['FROM_CURRENT_PROMO_BY_SALES'];
             $all_items = $data[$order->email]['ALL_ITEMS_ALL_PROMO_NO_MORE_FIVE'];
 
+
             try {
                 $sender->sendEvent(5, [
                     'EMAIL_FROM' => 'sale@kotofey.store',
-//                    'EMAIL_TO' => 'popugau@gmail.com',
-                    'EMAIL_TO' => $order->email,
-                    'LINK_MORE_PROMO' => Url::to(['promotion/promotion/index'],true),
+                    'EMAIL_TO' => 'popugau@gmail.com',
+//                    'EMAIL_TO' => $order->email,
+                    'LINK_MORE_PROMO' => Url::to(['promotion/promotion/index'], true),
                     'MONTH' => Month::getLabelCurrentMonth(date('m') - 1),
                     'FROM_CURRENT_PROMO_BY_SALES' => call_user_func(function () use ($current_items) {
                         $html = '';
@@ -94,10 +107,20 @@ class PromotionController extends Controller
                     }),
                 ]);
 
+                foreach ($list_promotion_id as $promo_id) {
+                    $history = new PromotionMailHistory();
+                    $history->promotion_id = $promo_id;
+                    $history->email = $order->email;
+                    if (!$history->validate() || !$history->save()) {
+                        LogService::saveErrorMessage(Debug::modelErrors($history), 'mail_service_history');
+                    }
+                }
+
             } catch (\Exception $exception) {
                 LogService::saveErrorMessage($exception->getMessage(), 'mail_service');
             }
         }
+
 
     }
 }
