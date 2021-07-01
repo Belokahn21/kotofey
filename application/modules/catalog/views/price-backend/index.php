@@ -3,12 +3,13 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use app\modules\site\models\tools\Debug;
 
 /* @var \app\modules\vendors\models\entity\Vendor[] $vendors */
 /* @var $model \app\modules\catalog\models\form\PriceUpdateForm */
 /* @var $complete_ids \app\modules\catalog\models\entity\Product[] */
 /* @var $empty_ids array */
-/* @var $error_elements array */
+/* @var $error_elements \app\modules\catalog\models\entity\Product[] */
 
 $this->title = \app\modules\seo\models\tools\Title::show('Обновить прайс лист');
 ?>
@@ -59,5 +60,18 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
         </div>
     <?php endforeach; ?>
 <?php endif; ?>
+
+<?php if ($error_elements): ?>
+    <?php foreach ($error_elements as $product): ?>
+        <div style="display: flex; flex-direction: row;">
+            <div class="red">Ошибка</div>
+            <div><?= $product->name; ?></div>
+            <div><?= Debug::modelErrors($product); ?></div>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+
+
 <?= Html::submitButton('Запустить', ['class' => 'btn-main']); ?>
 <?php ActiveForm::end(); ?>

@@ -68,8 +68,9 @@ class PriceBackendController extends MainBackendController
                             }
 
 
-                            $product->update();
-                            $complete_ids[] = $product;
+                            if ($product->update() !== false) {
+                                $complete_ids[] = $product;
+                            }
                         } else {
                             $empty_ids[] = $code;
                         }
