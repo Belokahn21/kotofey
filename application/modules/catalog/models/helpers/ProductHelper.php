@@ -57,7 +57,7 @@ class ProductHelper
         return $model->getDiscountPrice() ? 100 - round(($model->getDiscountPrice() * 100) / $model->getPrice()) : false;
     }
 
-    public static function getMarkup(Product $model, int $default_value = 0)
+    public static function getMarkup(Product $model, int $default_value = 1)
     {
         $calc_value = intval(@round(($model->price / $model->purchase) * 100 - 100));
         return $calc_value > 0 ? $calc_value : $default_value;
