@@ -20,6 +20,7 @@ use app\modules\catalog\models\entity\CompositionProducts;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
+use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -149,13 +150,13 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         <?php $stock_model = new ProductStock(); ?>
         <?php foreach ($stocks as $count => $stock): ?>
 
-            <?php $value = 0; ?>
+            <?php $value = null; ?>
             <?php if (!$model->isNewRecord): ?>
                 <?php $value = @ProductStock::findOne(['product_id' => $model->id, 'stock_id' => $stock->id])->count; ?>
             <?php endif; ?>
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-12">
                     <?= $form->field($stock_model, '[' . $count . ']stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
                     <?= $form->field($stock_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
                     <?= $form->field($stock_model, '[' . $count . ']count')->textInput([
@@ -167,21 +168,27 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         <?php endforeach; ?>
     </div>
     <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
-        <?php  $composition_model = new CompositionProducts(); ?>
+        <?php $composition_model = new CompositionProducts(); ?>
         <?php foreach ($compositions as $count => $composit): ?>
 
-            <?php $value = 0; ?>
+            <?php $value = null; ?>
             <?php if (!$model->isNewRecord): ?>
-                <?php $value = @CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id])->count; ?>
+                <?php $composit_element = CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id]); ?>
             <?php endif; ?>
 
             <div class="row">
-                <div class="col-4">
-                    <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
-                    <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                <div class="col-3">
+                    <div class="hidden">
+                        <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
+                        <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                    </div>
                     <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
-                        'value' => $value
-                    ])->label(Html::a($composit->name, Url::to(['/admin/catalog/composition-backend/update', 'id' => $composit->id]))); ?>
+                        'value' => $composit_element->value,
+                        'placeholder' => $composit->name
+                    ])->label(false); ?>
+                </div>
+                <div class="col-3">
+                    <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['options' => [$composit_element->metric_id => ["Selected" => true]]])->label(false); ?>
                 </div>
             </div>
         <?php endforeach; ?>

@@ -16,7 +16,7 @@ class CompositionProductHelper
         $items = [new CompositionProducts()];
 
         for ($i = 1; $i < $count; $i++) {
-            $items[] = new ProductStock();
+            $items[] = new CompositionProducts();
         }
 
         CompositionProducts::deleteAll(['product_id' => $product_id]);
@@ -24,12 +24,13 @@ class CompositionProductHelper
         if (CompositionProducts::loadMultiple($items, Yii::$app->request->post())) {
             foreach ($items as $item) {
 
-                if (empty($item->count)) continue;
+                if (empty($item->value)) continue;
 
                 $item->product_id = $product_id;
                 if (!$item->validate() || !$item->save()) {
                     Debug::p($item);
                     Debug::p($item->getErrors());
+                    exit();
                     return false;
                 }
             }

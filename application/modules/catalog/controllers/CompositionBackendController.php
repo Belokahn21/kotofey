@@ -2,11 +2,13 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\entity\CompositionType;
 use app\modules\catalog\models\search\CompositionSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
 use yii\web\HttpException;
 use Yii;
+use yii\widgets\ActiveForm;
 
 class CompositionBackendController extends MainBackendController
 {
@@ -17,6 +19,12 @@ class CompositionBackendController extends MainBackendController
         $model = new $this->modelClass();
         $searchModel = new CompositionSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
+        $type = CompositionType::find()->all();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -28,6 +36,7 @@ class CompositionBackendController extends MainBackendController
         }
         return $this->render('index', [
             'model' => $model,
+            'type' => $type,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -36,6 +45,13 @@ class CompositionBackendController extends MainBackendController
     public function actionUpdate($id)
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
+
+        $type = CompositionType::find()->all();
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -47,7 +63,8 @@ class CompositionBackendController extends MainBackendController
         }
 
         return $this->render('update', [
-            'model' => $model
+            'model' => $model,
+            'type' => $type,
         ]);
     }
 

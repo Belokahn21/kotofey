@@ -26,6 +26,8 @@ class CompositionType extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['name'], 'required'],
+
             [['sort'], 'default', 'value' => 500],
 
             [['is_active'], 'default', 'value' => 1],

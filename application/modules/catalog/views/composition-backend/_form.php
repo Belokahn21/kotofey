@@ -1,7 +1,10 @@
 <?php
 
+use yii\helpers\ArrayHelper;
+
 /* @var $model \app\modules\catalog\models\entity\Composition
  * @var $form \yii\widgets\ActiveForm
+ * @var $type \app\modules\catalog\models\entity\CompositionType[]
  */
 
 ?>
@@ -14,7 +17,7 @@
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="row">
             <div class="col-3">
-                <?= $form->field($model, 'is_active'); ?>
+                <?= $form->field($model, 'is_active')->checkbox(); ?>
             </div>
             <div class="col-3">
                 <?= $form->field($model, 'name'); ?>
@@ -23,7 +26,7 @@
                 <?= $form->field($model, 'sort'); ?>
             </div>
             <div class="col-3">
-
+                <?= $form->field($model, 'composition_type_id')->dropDownList(ArrayHelper::map($type, 'id', 'name'), ['prompt' => 'Указать тип добавки']); ?>
             </div>
         </div>
     </div>

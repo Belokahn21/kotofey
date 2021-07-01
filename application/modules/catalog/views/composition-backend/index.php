@@ -8,6 +8,7 @@ use app\modules\seo\models\tools\Title;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
+ * @var $type \app\modules\catalog\models\entity\CompositionType[]
  */
 
 $this->title = Title::show('Элементы состава');
@@ -23,6 +24,7 @@ $this->title = Title::show('Элементы состава');
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
+    'type' => $type,
 ]) ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>
@@ -33,6 +35,19 @@ $this->title = Title::show('Элементы состава');
     'emptyText' => 'Элементы состава отсутствуют',
     'columns' => [
         'id',
+        'name',
+        [
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
@@ -47,7 +62,7 @@ $this->title = Title::show('Элементы состава');
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
+//                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));

@@ -34,6 +34,19 @@ $this->title = Title::show('Типы элементов состава');
     'emptyText' => 'Типы элементов состава отсутствуют',
     'columns' => [
         'id',
+        'name',
+        [
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
@@ -46,7 +59,7 @@ $this->title = Title::show('Типы элементов состава');
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
+//                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
