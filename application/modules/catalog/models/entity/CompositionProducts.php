@@ -28,8 +28,6 @@ class CompositionProducts extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['composition_id', 'metric_id'], 'required'],
-
             [['product_id', 'composition_id', 'created_at', 'updated_at'], 'integer'],
 
             [['metric_id', 'value'], 'string'],
