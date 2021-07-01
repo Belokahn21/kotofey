@@ -64,12 +64,7 @@ class ProductHelper
 
     public static function makePurchase(Product &$model, Vendor $vendor)
     {
-        $model->purchase = $model->base_price - round($model->base_price * ($vendor->discount / 100));
-    }
-
-    private static function getPercentTwoNums($big, $small)
-    {
-        return round(($big / $small) * 100 - 100);
+        $model->purchase = intval($model->base_price - round($model->base_price * ($vendor->discount / 100)));
     }
 
     public static function setDiscount(Product &$model, $prcent)
@@ -78,10 +73,9 @@ class ProductHelper
     }
 
 
-    public static function applyMarkup(Product &$model, $markup)
+    public static function applyMarkup(Product &$model, int $markup)
     {
-        $model->price = round($model->purchase + $model->purchase / 100 * $markup);
-        $model->price = strval($model->price);
+        $model->price = intval(round($model->purchase + $model->purchase / 100 * $markup));
     }
 
     public static function purchaseVirtual(array $products)
@@ -149,16 +143,5 @@ class ProductHelper
         if ($isFull) return System::fullSiteUrl() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
 
         return Url::to(['/catalog/product/view', 'id' => $model->slug]);
-    }
-
-    public static function getGalleryImages(Product $model)
-    {
-        $out = [];
-        if ($model->images) {
-            foreach (Json::decode($model->images) as $image) {
-                $out[] = $image;
-            }
-        }
-        return $out;
     }
 }

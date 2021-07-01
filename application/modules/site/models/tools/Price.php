@@ -16,6 +16,6 @@ class Price
         $price = (float)$price;
         $price = round($price);
 
-        return strval($price);
+        return intval($price);
     }
 }
