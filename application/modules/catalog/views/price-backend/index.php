@@ -34,7 +34,9 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
             <div class="col-3">
                 <?= $form->field($model, 'delimiter')->textInput(['value' => ';']); ?>
             </div>
-            <div class="col-3"></div>
+            <div class="col-3">
+                <?= $form->field($model, 'default_markup')->textInput(); ?>
+            </div>
         </div>
     </div>
 </div>

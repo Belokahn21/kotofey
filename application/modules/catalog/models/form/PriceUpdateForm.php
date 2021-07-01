@@ -10,6 +10,7 @@ class PriceUpdateForm extends Model
     public $file;
     public $vendor_id;
     public $delimiter;
+    public $default_markup;
 
     public function rules()
     {
@@ -17,12 +18,12 @@ class PriceUpdateForm extends Model
 
             [['vendor_id'], 'required'],
 
-            ['vendor_id', 'integer'],
+            [['vendor_id', 'default_markup'], 'integer'],
 
             ['delimiter', 'default', 'value' => ';'],
             ['delimiter', 'string'],
 
-            ['file', 'file']
+            ['file', 'file', 'skipOnEmpty' => false]
         ];
     }
 
@@ -32,6 +33,7 @@ class PriceUpdateForm extends Model
             'delimiter' => 'Разделитель',
             'file' => 'Прайс-лист',
             'vendor_id' => 'Поставщик',
+            'default_markup' => 'Наценка, если у товара отстуствует',
         ];
     }
 }
