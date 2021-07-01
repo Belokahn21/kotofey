@@ -11,6 +11,7 @@ class PriceUpdateForm extends Model
     public $vendor_id;
     public $delimiter;
     public $default_markup;
+    public $force_markup;
 
     public function rules()
     {
@@ -18,7 +19,7 @@ class PriceUpdateForm extends Model
 
             [['vendor_id'], 'required'],
 
-            [['vendor_id', 'default_markup'], 'integer'],
+            [['vendor_id', 'default_markup', 'force_markup'], 'integer'],
 
             ['delimiter', 'default', 'value' => ';'],
             ['delimiter', 'string'],
@@ -34,6 +35,7 @@ class PriceUpdateForm extends Model
             'file' => 'Прайс-лист',
             'vendor_id' => 'Поставщик',
             'default_markup' => 'Наценка, если у товара отстуствует',
+            'force_markup' => 'Принудительно проставить скидку',
         ];
     }
 }
