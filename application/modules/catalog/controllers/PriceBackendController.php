@@ -7,6 +7,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\PriceUpdateForm;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\controllers\MainBackendController;
+use app\modules\site\models\tools\Price;
 use app\modules\vendors\models\entity\Vendor;
 use yii\web\UploadedFile;
 
@@ -38,17 +39,11 @@ class PriceBackendController extends MainBackendController
                         if (empty($code) || mb_strlen($code) == 0) continue;
 
                         if ($vendor->type_price == Vendor::TYPE_PRICE_BASE) {
-                            $bad_price = str_replace(' ', '', $bad_price);
-                            $bad_price = str_replace(',', '.', $bad_price);
-                            $bad_price = (float)$bad_price;
-                            $base_price = round($bad_price);
+                            $base_price = Price::normalize($bad_price);
                         }
 
                         if ($vendor->type_price == Vendor::TYPE_PRICE_PURCHASE) {
-                            $purchase_price = str_replace(' ', '', $purchase_price);
-                            $purchase_price = str_replace(',', '.', $purchase_price);
-                            $purchase_price = (float)$purchase_price;
-                            $purchase_price = round($purchase_price);
+                            $purchase_price = Price::normalize($bad_price);
                         }
 
 

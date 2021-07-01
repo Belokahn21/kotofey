@@ -2,7 +2,6 @@
 
 namespace app\modules\site\models\tools;
 
-
 class Price
 {
     public static function format($price)
@@ -10,9 +9,13 @@ class Price
         return number_format($price, 0, '.', ' ');
     }
 
-    public static function toFloat(int $summ)
+    public static function normalize($str)
     {
-        return $summ;
-//        return floor((float) floatval($summ));
+        $str = str_replace(' ', '', $str);
+        $str = str_replace(',', '.', $str);
+        $str = (float)$str;
+        $str = round($str);
+
+        return $str;
     }
 }
