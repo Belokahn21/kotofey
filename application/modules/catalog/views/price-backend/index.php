@@ -63,7 +63,7 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
 
 <?php if ($error_elements): ?>
     <?php foreach ($error_elements as $product): ?>
-        <div style="display: flex; flex-direction: row;">
+        <div style="display: flex; flex-direction: row; align-items: center;">
             <div class="red">Ошибка</div>
             <div><?= $product->name; ?></div>
             <div><?= Debug::modelErrors($product); ?></div>
