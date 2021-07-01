@@ -61,7 +61,7 @@ class MediaFileUpload extends UploadBehavior
 
     public function afterDelete()
     {
-        $this->removeMediaImage();
+//        $this->removeMediaImage();
         // если не было media_id
         parent::afterDelete();
     }

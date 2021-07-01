@@ -35,8 +35,10 @@ class Media extends \yii\db\ActiveRecord
     public function beforeDelete()
     {
         if ($this->location == self::LOCATION_CDN) {
-            if (!\Yii::$app->CDN->remove($this->cdnData['public_id'])) {
-                return false;
+            if ($this->cdnData['public_id']) {
+                if (!\Yii::$app->CDN->remove($this->cdnData['public_id'])) {
+                    return false;
+                }
             }
         }
 
