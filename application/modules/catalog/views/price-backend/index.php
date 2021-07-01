@@ -35,7 +35,14 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
                 <?= $form->field($model, 'delimiter')->textInput(['value' => ';']); ?>
             </div>
             <div class="col-3">
-                <?= $form->field($model, 'default_markup')->textInput(); ?>
+                <div class="row">
+                    <div class="col-12">
+                        <?= $form->field($model, 'default_markup')->textInput(); ?>
+                    </div>
+                    <div class="col-12">
+                        <?= $form->field($model, 'force_markup')->checkbox(); ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
