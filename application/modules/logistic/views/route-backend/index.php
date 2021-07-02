@@ -38,27 +38,27 @@ $this->title = Title::show("Список доставок");
                         <div class="col-12">
 
                             <div class="row my-1">
-                                <div class="col-5">Сумма заказа:</div>
+                                <div class="col-5 bold">Сумма заказа:</div>
                                 <div class="col-7"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
                             </div>
                             <div class="row my-1">
-                                <div class="col-5">Статус:</div>
+                                <div class="col-5 bold">Статус:</div>
                                 <div class="col-7"><?= OrderHelper::getStatus($order); ?></div>
                             </div>
                             <div class="row my-1">
-                                <div class="col-5">Оплата:</div>
+                                <div class="col-5 bold">Оплата:</div>
                                 <div class="col-7"><?= OrderHelper::getPayment($order); ?></div>
                             </div>
                             <div class="row my-1">
-                                <div class="col-5">Телефон:</div>
+                                <div class="col-5 bold">Телефон:</div>
                                 <div class="col-7"><?= $order->phone; ?></div>
                             </div>
                             <div class="row my-1">
-                                <div class="col-5">Email:</div>
+                                <div class="col-5 bold">Email:</div>
                                 <div class="col-7"><?= $order->email; ?></div>
                             </div>
                             <div class="row my-1">
-                                <div class="col-12">Адрес доставки:</div>
+                                <div class="col-12 bold">Адрес доставки:</div>
                                 <div class="col-12">
                                     <?= !$order->city ? '' : 'г.' . $order->city; ?>
                                     <?= !$order->street ? '' : ' , ул.' . $order->street; ?>
