@@ -30,6 +30,7 @@ class Composition extends \yii\db\ActiveRecord
             [['is_active', 'sort', 'created_at', 'updated_at', 'composition_type_id'], 'integer'],
 
             [['name'], 'string', 'max' => 255],
+            ['name', 'unique']
         ];
     }
 
