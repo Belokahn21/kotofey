@@ -21,75 +21,76 @@ $this->title = Title::show("Список доставок");
 <?php if ($models): ?>
     <div class="logistic-list">
         <?php foreach ($models as $order): ?>
-            <div class="logistic-list__item">
-                <div class="logistic-list__title">
-                    Заказ #<?= $order->id; ?>
-                    <?php if ($order->is_paid): ?>
-                        [<span class="green">Оплачено</span>]
-                    <?php else: ?>
-                        [<span class="red">Не оплачено</span>]
-                    <?php endif; ?>
-                </div>
-                <div class="logistic-list-data">
+            <div class="card m-1">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-5"><h5 class="card-title">Заказ #<?= $order->id; ?></h5></div>
+                        <div class="col-7">
+                            <?php if ($order->is_paid): ?>
+                                [<span class="green">Оплачено</span>]
+                            <?php else: ?>
+                                [<span class="red">Не оплачено</span>]
+                            <?php endif; ?>
+                        </div>
+                        <div></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
 
-                    <div class="logistic-list-data__row">
-                        <div class="logistic-list-data__key">Сумма заказа:</div>
-                        <div class="logistic-list-data__value red bold">
-                            <?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?>
+                            <div class="row my-1">
+                                <div class="col-5">Сумма заказа:</div>
+                                <div class="col-7"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-5">Статус:</div>
+                                <div class="col-7"><?= OrderHelper::getStatus($order); ?></div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-5">Оплата:</div>
+                                <div class="col-7"><?= OrderHelper::getPayment($order); ?></div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-5">Телефон:</div>
+                                <div class="col-7"><?= $order->phone; ?></div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-5">Email:</div>
+                                <div class="col-7"><?= $order->email; ?></div>
+                            </div>
+                            <div class="row my-1">
+                                <div class="col-12">Адрес доставки:</div>
+                                <div class="col-12">
+                                    <?= !$order->city ? '' : 'г.' . $order->city; ?>
+                                    <?= !$order->street ? '' : ' , ул.' . $order->street; ?>
+                                    <?= !$order->number_home ? '' : ', дом ' . $order->number_home; ?>
+                                    <?= !$order->entrance ? '' : ', п. ' . $order->entrance; ?>
+                                    <?= !$order->number_appartament ? '' : ', кв. ' . $order->number_appartament; ?>
+                                    <?= !$order->floor_house ? '' : ', эт. ' . $order->floor_house; ?>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
-                    <div class="logistic-list-data__row">
-                        <div class="logistic-list-data__key">Статус:</div>
-                        <div class="logistic-list-data__value"><?= OrderHelper::getStatus($order); ?></div>
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <div class="row">
+                                <div class="col-4"><a href="tel:<?= $order->phone; ?>" type="button" class="btn btn-info"><i class="fas fa-phone"></i></a></div>
+                                <div class="col-4"><a href="<?= Url::to(['/admin/order/order-backend/update', 'id' => $order->id]); ?>" type="button" class="btn btn-info"><i class="fas fa-clipboard-list"></i></a></div>
+                                <div class="col-4"><a href="tel:<?= $order->phone; ?>" type="button" class="btn btn-info"><i class="fas fa-map-marker-alt"></i></a></div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="logistic-list-data__row">
-                        <div class="logistic-list-data__key">Оплата:</div>
-                        <div class="logistic-list-data__value">
-                            <?= OrderHelper::getPayment($order); ?>
-                            <?php if (!empty($order->odd)): ?>
-                                / <span class="red bold">Сдача: <?= Price::format($order->odd - OrderHelper::orderSummary($order)); ?></span>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <?php if (!$order->is_close): ?>
+                                <?php $form = ActiveForm::begin(); ?>
+                                <?= $form->field($model, 'order_id')->hiddenInput(['value' => $order->id])->label(false) ?>
+                                <?= Html::submitButton('Завершить заказ', ['class' => 'btn btn-success w-100']) ?>
+                                <?php ActiveForm::end(); ?>
                             <?php endif; ?>
                         </div>
                     </div>
-
-                    <div class="logistic-list-data__col">
-                        <div class="logistic-list-data__key">Телефон/Email:</div>
-                        <div class="logistic-list-data__value">
-
-                            <?php if ($order->phone): ?>
-                                <span class="js-mask-phone"><?= $order->phone; ?></span>
-                            <?php endif; ?>
-
-                            <?php if ($order->email): ?>
-                                <span><a href="mailto:<?= $order->email; ?>"><?= $order->email; ?></a></span>
-                            <?php endif; ?>
-                        </div>
-                    </div>
-
-                    <div class="logistic-list-data__col">
-                        <div class="logistic-list-data__key">Адрес доставки:</div>
-                        <div class="logistic-list-data__value">
-                            <?= !$order->city ? '' : 'г.'.$order->city; ?>
-                            <?= !$order->street ? '' : ' , ул.' . $order->street; ?>
-                            <?= !$order->number_home ? '' : ', дом ' . $order->number_home; ?>
-                            <?= !$order->entrance ? '' : ', п. ' . $order->entrance; ?>
-                            <?= !$order->number_appartament ? '' : ', кв. ' . $order->number_appartament; ?>
-                            <?= !$order->floor_house ? '' : ', эт. ' . $order->floor_house; ?>
-                        </div>
-                    </div>
-                </div>
-                <div class="logistic-list__controls">
-                    <?= Html::a(Html::tag('i', '', ['class' => 'fas fa-receipt']), Url::to(['/admin/order/order-backend/update', 'id' => $order->id])); ?>
-                    <?= Html::a(Html::tag('i', '', ['class' => 'fas fa-phone']), 'tel:' . $order->phone); ?>
-                    <?= Html::a(Html::tag('i', '', ['class' => 'fas fa-map-marker-alt']), 'javascript:void(0);'); ?>
-                </div>
-                <div class="logistic-list__action">
-                    <?php if (!$order->is_close): ?>
-                        <?php $form = ActiveForm::begin(); ?>
-                        <?= $form->field($model, 'order_id')->hiddenInput(['value' => $order->id])->label(false) ?>
-                        <?= Html::submitButton('Завершить заказ') ?>
-                        <?php ActiveForm::end(); ?>
-                    <?php endif; ?>
                 </div>
             </div>
         <?php endforeach; ?>
