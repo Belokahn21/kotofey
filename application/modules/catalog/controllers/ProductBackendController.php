@@ -41,9 +41,9 @@ class ProductBackendController extends MainBackendController
     {
         $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_NEW_PRODUCT]);
         $modelDelivery = new ProductOrder();
-        $properties = Properties::find()->all();
-        $stocks = Stocks::find()->where(['active' => true])->all();
-        $compositions = Composition::find()->where(['is_active' => true])->all();
+        $properties = $this->getProperties();
+        $compositions = $this->getCompositions();
+        $stocks = $this->getStocks();
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -79,9 +79,9 @@ class ProductBackendController extends MainBackendController
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Товар такой не существует');
 
         $model->scenario = $this->modelClass::SCENARIO_UPDATE_PRODUCT;
-        $properties = Properties::find()->all();
-        $compositions = Composition::find()->where(['is_active' => true])->all();
-        $stocks = Stocks::find()->where(['active' => true])->all();
+        $properties = $this->getProperties();
+        $compositions = $this->getCompositions();
+        $stocks = $this->getStocks();
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
@@ -179,5 +179,26 @@ class ProductBackendController extends MainBackendController
         if ($product->delete()) Alert::setSuccessNotify('Продукт удалён');
 
         return $this->redirect(Url::to(['index']));
+    }
+
+    private function getCompositions()
+    {
+        return Yii::$app->cache->getOrSet('product-composition-backend', function () {
+            return Composition::find()->where(['is_active' => true])->all();
+        });
+    }
+
+    private function getStocks()
+    {
+        return Yii::$app->cache->getOrSet('product-stocks-backend', function () {
+            return Stocks::find()->where(['active' => true])->all();
+        });
+    }
+
+    private function getProperties()
+    {
+        return Yii::$app->cache->getOrSet('product-properties-backend', function () {
+            return Properties::find()->all();
+        });
     }
 }
