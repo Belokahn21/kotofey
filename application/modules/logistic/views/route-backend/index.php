@@ -95,10 +95,10 @@ $this->title = Title::show("Список доставок");
 
 
                     <div class="mt-3">
-                        <a class="card-link" data-toggle="collapse" href="#list_items" role="button" aria-expanded="false" aria-controls="list_items">
+                        <a class="card-link" data-toggle="collapse" href="#list_items-<?= $order->id; ?>" role="button" aria-expanded="false" aria-controls="list_items-<?= $order->id; ?>">
                             Список товаров в заказе
                         </a>
-                        <div class="collapse" id="list_items">
+                        <div class="collapse" id="list_items-<?= $order->id; ?>">
                             <div class="card card-body">
                                 <ul class="list-group list-group-flush">
                                     <?php foreach ($order->items as $item): ?>
