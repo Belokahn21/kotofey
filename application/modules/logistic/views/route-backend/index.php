@@ -6,6 +6,7 @@ use yii\helpers\Html;
 use app\modules\seo\models\tools\Title;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\helpers\OrderHelper;
 
 /* @var $models \app\modules\order\models\entity\Order[]
@@ -89,6 +90,31 @@ $this->title = Title::show("Список доставок");
                                 <?= Html::submitButton('Завершить заказ', ['class' => 'btn btn-success w-100']) ?>
                                 <?php ActiveForm::end(); ?>
                             <?php endif; ?>
+                        </div>
+                    </div>
+
+
+                    <div class="mt-3">
+                        <a class="card-link" data-toggle="collapse" href="#list_items" role="button" aria-expanded="false" aria-controls="list_items">
+                            Список товаров в заказе
+                        </a>
+                        <div class="collapse" id="list_items">
+                            <div class="card card-body">
+                                <ul class="list-group list-group-flush">
+                                    <?php foreach ($order->items as $item): ?>
+                                        <?php if ($item->product instanceof Product): ?>
+                                            <li class="list-group-item">
+                                                <?= $item->count; ?>шт. x <?= Price::format($item->price); ?>(<?= Price::format($item->purchase); ?>) <?= Currency::getInstance()->show(); ?>
+                                                <a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>">
+                                                    <?= $item->product->name; ?>
+                                                </a>
+                                            </li>
+                                        <?php else: ?>
+                                            <li class="list-group-item"><?= $item->name; ?></li>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
