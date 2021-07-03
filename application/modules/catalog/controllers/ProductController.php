@@ -2,6 +2,8 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\entity\CompositionProducts;
+use app\modules\catalog\models\entity\CompositionType;
 use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
@@ -70,9 +72,17 @@ class ProductController extends Controller
             ->all();
         ProductHelper::addVisitedItem($product->id);
 
+        $compositionGroup = [];
+        $compositions = CompositionProducts::find()->where(['product_id' => $product->id])->all();
+        foreach ($compositions as $composit_value_item) {
+            $compositionGroup[$composit_value_item->composition->composition_type_id]['group'] = CompositionType::findOne($composit_value_item->composition->composition_type_id);
+            $compositionGroup[$composit_value_item->composition->composition_type_id]['items'][] = $composit_value_item;
+        }
+
         return $this->render('view', [
             'product' => $product,
             'category' => $category,
+            'compositionGroup' => $compositionGroup,
             'propertiesValues' => $propertiesValues,
         ]);
     }

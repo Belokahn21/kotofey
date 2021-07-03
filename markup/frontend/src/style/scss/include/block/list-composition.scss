@@ -1,0 +1,33 @@
+.list-composition {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  &-wrap {
+    padding: 10px 0;
+  }
+
+  &-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: stretch;
+    margin-right: 5px;
+
+    &:not(:last-child) {
+      &:after {
+        content: ",";
+      }
+    }
+
+    &__key {
+      margin-right: 5px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    &__value {
+      font-size: 12px;
+    }
+  }
+}

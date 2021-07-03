@@ -13161,21 +13161,6 @@ img {
     margin-top: 70px; }
   .product-tabs ~ .tab-content {
     width: 100%; }
-  .product-tabs ~ .product-tab-content {
-    padding: 30px 0;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: 400; }
-    .product-tabs ~ .product-tab-content p {
-      margin: 0;
-      padding: 0; }
-    .product-tabs ~ .product-tab-content ul li::before {
-      content: "\2022";
-      color: #2d0c03;
-      font-weight: bold;
-      display: inline-block;
-      width: 1em;
-      margin-left: -1em; }
   .product-tabs .nav-tabs {
     display: flex;
     flex-direction: row;
@@ -13374,6 +13359,27 @@ img {
       margin: 15px 0; }
     .product-reviews-card__line-title {
       font-weight: bold; }
+
+.list-composition {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; }
+  .list-composition-wrap {
+    padding: 10px 0; }
+  .list-composition-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: stretch;
+    margin-right: 5px; }
+    .list-composition-item:not(:last-child):after {
+      content: ","; }
+    .list-composition-item__key {
+      margin-right: 5px;
+      font-size: 14px;
+      font-weight: bold; }
+    .list-composition-item__value {
+      font-size: 12px; }
 
 .footer {
   color: #fff;

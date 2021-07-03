@@ -13,33 +13,33 @@
     width: 100%;
   }
 
-  ~ .product-tab-content {
-    padding: 30px 0;
-    font-size: 18px;
-    line-height: 22px;
-    font-weight: 400;
-
-    p {
-      margin: 0;
-      padding: 0;
-    }
-
-    ul li {
-      //padding-left: 15px;
-      //font-size: 14px;
-      //line-height: 32px;
-      //font-weight: 400;
-    }
-
-    ul li::before {
-      content: "\2022";
-      color: $main-color;
-      font-weight: bold;
-      display: inline-block;
-      width: 1em;
-      margin-left: -1em;
-    }
-  }
+  //~ .product-tab-content {
+  //  padding: 30px 0;
+  //  font-size: 18px;
+  //  line-height: 22px;
+  //  font-weight: 400;
+  //
+  //  p {
+  //    margin: 0;
+  //    padding: 0;
+  //  }
+  //
+  //  ul li {
+  //    //padding-left: 15px;
+  //    //font-size: 14px;
+  //    //line-height: 32px;
+  //    //font-weight: 400;
+  //  }
+  //
+  //  ul li::before {
+  //    content: "\2022";
+  //    color: $main-color;
+  //    font-weight: bold;
+  //    display: inline-block;
+  //    width: 1em;
+  //    margin-left: -1em;
+  //  }
+  //}
 
   .nav-tabs {
     display: flex;

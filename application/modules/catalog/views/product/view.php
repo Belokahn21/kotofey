@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Json;
+use yii\helpers\ArrayHelper;
 use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\ProductTitle;
 use app\modules\reviews\models\entity\Reviews;
@@ -16,11 +17,13 @@ use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
 use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
 use app\modules\reviews\widgets\ProductReviewsForm\ProductReviewsFormWidget;
 use app\modules\promotion\widgets\PromotionsForProduct\PromotionsForProductWidget;
+use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
  * @var \app\modules\catalog\models\entity\Product $product
  * @var \app\modules\catalog\models\entity\ProductCategory $category
+ * @var $compositionGroup array
  */
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
@@ -160,7 +163,7 @@ $this->title = ProductTitle::show($product->name);
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
                 <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
-                <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Как купить?</a>
+                <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Состав товара</a>
                 <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы (<?= Reviews::find()->where(['product_id' => $product->id, 'is_active' => 1, 'status_id' => Reviews::STATUS_ENABLE])->count(); ?>)</a>
             </div>
         </nav>
@@ -177,8 +180,24 @@ $this->title = ProductTitle::show($product->name);
                 <i>*Оплата только при получении заказа</i>
             </div>
             <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
-                Для покупки товаров на нашем сайте вам нужно добавить интересующий вас товар в корзину и пройти к оформлению заказа.<br>
-                После того как заказ был оформлен с вами свяжется оператор (через 15 минут) для уточнения деталей заказа и согласования времени доставки.
+
+                <div class="list-composition-wrap">
+                    <?php foreach ($compositionGroup as $group_id => $data): ?>
+
+                        <h4><?= $data['group']->name; ?></h4>
+
+                        <ul class="list-composition">
+
+                            <?php foreach ($data['items'] as $item): ?>
+                                <li class="list-composition-item">
+                                    <div class="list-composition-item__key"><?= $item->composition->name; ?></div>
+                                    <div class="list-composition-item__value"><?= $item->value; ?><?= ArrayHelper::getValue(CompositionMetricsHelper::getMetrics(), $item->metric_id); ?></div>
+                                </li>
+                            <?php endforeach; ?>
+
+                        </ul>
+                    <?php endforeach; ?>
+                </div>
             </div>
 
             <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
