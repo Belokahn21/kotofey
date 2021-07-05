@@ -1,3 +1,6 @@
+import RestRequest from "../../../../frontend/src/js/tools/RestRequest";
+import config from "../../../../backend/src/js/react/config";
+
 class ProductVendorFill {
 
     constructor() {
@@ -7,20 +10,20 @@ class ProductVendorFill {
     }
 
     initEvents() {
-        if (this.input) {
-            this.input.addEventListener('change', this.handleInput);
-        }
+        if (!this.input) return false;
+
+
+        this.input.onchange = this.handleInput.bind(this);
     }
 
-    handleInput(element) {
-        console.log(element);
-    }
+    handleInput(event) {
+        console.log(event);
+        let element = event.target;
 
-    sendAjax(data) {
-        fetch(location.protocol + '//' + location.hostname + '/admin/catalog-fill/');
+        RestRequest.one(config.restCatalogFill, escape(btoa(element.value)));
     }
 
 
 }
 
-module.exports = ProductVendorFill;
+export default ProductVendorFill;

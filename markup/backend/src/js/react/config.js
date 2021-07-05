@@ -10,6 +10,7 @@ module.exports = {
     restMedia: url + '/backend/api/media/',
     restMediaUpload: url + '/backend/api/media/upload/',
     restCatalog: url + '/backend/api/catalog/',
+    restCatalogFill: url + '/backend/api/catalog/fill/',
     restPropertiesProductValues: url + '/backend/api/catalog/properties-product-values/',
     restStatistic: url + '/backend/api/statistic/',
     restMenu: url + '/backend/api/menu/',
