@@ -9,11 +9,14 @@ use app\modules\bonus\models\service\BonusService;
 use app\modules\order\models\service\NotifyService;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
+use app\modules\site\models\tools\Debug;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\UserBilling;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\user\models\helpers\UserHelper;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 
 /**
@@ -217,23 +220,10 @@ class Order extends ActiveRecord
         ];
     }
 
-    public function getStatus()
-    {
-        $status = null;
-        if ($this->status == 0) {
-            $status = new OrderStatus();
-            $status->name = 'В обработке';
-        } else {
-            $status = OrderStatus::findOne($this->status);
-        }
-
-        return $status->name;
-    }
-
     public function hasAccess()
     {
         if (\Yii::$app->user->isGuest) return false;
-        return $this->phone == \Yii::$app->user->identity->phone || $this->user_id == \Yii::$app->user->identity->id || \Yii::$app->user->identity->id == 1;
+        return $this->phone == \Yii::$app->user->identity->phone || $this->user_id == \Yii::$app->user->identity->id || in_array(\Yii::$app->user->identity->id, ArrayHelper::getColumn(UserHelper::getManagers(), 'id'));
     }
 
     public function getBilling()

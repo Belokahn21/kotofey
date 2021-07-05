@@ -30,7 +30,7 @@ class OrderHelper
         return empty($item->name) && empty($item->price) && empty($item->count);
     }
 
-    public static function rotate($params=[])
+    public static function rotate($params = [])
     {
         $out = 0;
         $orders = Order::find()->where(['is_paid' => true, 'is_close' => true]);
@@ -104,8 +104,13 @@ class OrderHelper
     public static function getStatus(Order $order)
     {
         if ($order->status) {
-            return OrderStatus::findOne($order->status)->name;
+
+            $status_model = OrderStatus::findOne($order->status);
+            if ($status_model) {
+                return $status_model->name;
+            }
         }
+
         return 'В обработке';
     }
 

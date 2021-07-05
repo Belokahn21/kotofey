@@ -61,7 +61,7 @@ $this->title = Title::show("Заказы");
             'attribute' => 'status',
             'filter' => ArrayHelper::map(OrderStatus::find()->all(), 'id', 'name'),
             'value' => function ($model) {
-                return $model->getStatus();
+                return OrderHelper::getStatus($model);
             }
         ],
         [
