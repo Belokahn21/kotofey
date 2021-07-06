@@ -3,13 +3,16 @@
 namespace app\commands;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
 {
-    public function actionRun($name=null)
+    public function actionRun($name = null)
     {
-        if($name==null){$name='banters';}
+        if ($name == null) {
+            $name = 'purina';
+        }
         $products = Product::find();
         foreach (explode(' ', $name) as $text_line) {
             $products->andFilterWhere([
@@ -18,16 +21,17 @@ class ConsoleController extends Controller
                 ['like', 'feed', $text_line]
             ]);
         }
+
+        $products->andWhere(['vendor_id' => Vendor::VENDOR_ID_PURINA]);
+
         $products = $products->all();
         foreach ($products as $product) {
-
-            $product->status_id = Product::STATUS_WAIT;
-            if ($product->validate() && $product->update()) {
-                echo "ok: " . $product->name . PHP_EOL;
+            $name = $product->name;
+            if ($product->delete()) {
+                echo "ok: " . $name . PHP_EOL;
             }
 
-//            if (ProductPropertiesValuesHelper::savePropertyValue($product->id, 20, '230')) {
-////            if (ProductPropertiesValuesHelper::removePropertyValue($product->id, 20)) {
+//            if ($product->validate() && $product->update() !== false) {
 //                echo "ok: " . $product->name . PHP_EOL;
 //            }
         }
