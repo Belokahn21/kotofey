@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\modules\site\models\behaviors\CacheBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -37,7 +38,8 @@ class Composition extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            CacheBehavior::className()
         ];
     }
 
