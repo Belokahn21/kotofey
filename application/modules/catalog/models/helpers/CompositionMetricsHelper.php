@@ -24,13 +24,13 @@ class CompositionMetricsHelper
 
             self::WEIGHT_PERCENT => '%',
 
-            self::WEIGHT_GG => 'Грамм',
-            self::WEIGHT_MG => 'Милиграмм',
-            self::WEIGHT_KG => 'Килограмм',
+            self::WEIGHT_GG => 'Грамм(гр)',
+            self::WEIGHT_MG => 'Милиграмм(мг)',
+            self::WEIGHT_KG => 'Килограмм(кг)',
 
-            self::LIQUID_GG => 'Гамм',
-            self::LIQUID_MG => 'Милиграмм',
-            self::LIQUID_L => 'Литр',
+            self::LIQUID_GG => 'Грамм(г)',
+            self::LIQUID_MG => 'Милиграмм(мл)',
+            self::LIQUID_L => 'Литр(л)',
         ];
     }
 }
