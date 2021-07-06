@@ -108,7 +108,9 @@ class ProductBackendController extends MainBackendController
     {
         if (!$oldProduct = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не неайден');
         $oldProduct->scenario = $this->modelClass::SCENARIO_NEW_PRODUCT;
-        $properties = Properties::find()->all();
+        $properties = $this->getProperties();
+        $compositions = $this->getCompositions();
+        $stocks = $this->getStocks();
         $outProps = [];
         foreach ($properties as $prop) {
             $outProps[$prop->group_id][] = $prop;
@@ -139,6 +141,8 @@ class ProductBackendController extends MainBackendController
             'model' => $oldProduct,
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
+            'stocks' => $stocks,
+            'compositions' => $compositions,
         ]);
     }
 

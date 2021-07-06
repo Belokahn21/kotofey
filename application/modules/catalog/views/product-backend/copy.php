@@ -18,6 +18,8 @@ $this->title = Title::show('Товары');
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
+    'stocks' => $stocks,
+    'compositions' => $compositions,
     'properties' => $properties,
     'modelDelivery' => $modelDelivery,
 ]) ?>
