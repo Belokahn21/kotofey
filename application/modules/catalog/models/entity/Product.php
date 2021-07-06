@@ -103,7 +103,7 @@ class Product extends \yii\db\ActiveRecord
 
             [['has_store', 'is_product_order'], 'boolean'],
 
-            [['code', 'slug'], 'unique', 'message' => 'Такой внешний код уже используется'],
+            [['code', 'slug', 'barcode'], 'unique', 'message' => 'Такой внешний код уже используется'],
 
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
             [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions'], 'maxFiles' => 10],
