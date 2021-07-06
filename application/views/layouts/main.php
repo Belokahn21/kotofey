@@ -66,9 +66,9 @@ $this->beginPage() ?>
 <?php $this->beginBody() ?>
 
 <?= AdminPanel::widget(); ?>
-<?= NotifyWidget::widget([
+<?php /*= NotifyWidget::widget([
     'message' => 'Дорогие клиенты, в период с 28.06.2021 по 05.07.2021 доставка заказов может увеличится по времени ожидания до 30 минут. Технические неполадки с курьерским ТС. Доставка временно осуществляется другим сервисом.'
-]); ?>
+]);*/ ?>
 
 <?= $this->render('include/header', [
     'parentCategories' => $parentCategories
