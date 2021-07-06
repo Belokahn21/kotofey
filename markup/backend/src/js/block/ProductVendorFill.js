@@ -17,10 +17,30 @@ class ProductVendorFill {
     }
 
     handleInput(event) {
-        console.log(event);
         let element = event.target;
+        let fd = new FormData();
+        fd.append('link', element.value)
 
-        RestRequest.one(config.restCatalogFill, escape(btoa(element.value)));
+        RestRequest.post(config.restCatalogFill, {
+            body: fd
+        }).then(data => {
+            if (!data instanceof Object) return false;
+
+            Object.keys(data).map(key => {
+
+                if (key === 'purchase') {
+                    let purchase = document.querySelector('#id-purchase');
+                    if (purchase) {
+                        purchase.value = data[key];
+                        purchase.onchange();
+                    }
+                } else {
+                    let el = document.querySelector('#product-' + key);
+                    if (el) el.value = data[key];
+                }
+            });
+
+        });
     }
 
 

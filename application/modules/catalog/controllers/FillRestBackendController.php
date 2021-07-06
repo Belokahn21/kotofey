@@ -9,12 +9,12 @@ use yii\rest\Controller;
 
 class FillRestBackendController extends Controller
 {
-    public function actionView($id)
+    public function actionCreate()
     {
-        $id = base64_decode($id);
+        $id = \Yii::$app->request->post('link');
         $factory = new ParseProvider($id);
         $factory->contract();
 
-        return Json::encode($factory->getInfo());
+        return $factory->getInfo();
     }
 }
