@@ -2,13 +2,14 @@
 
 namespace app\modules\catalog\controllers;
 
-
-use app\modules\catalog\models\search\PropertiesVariantsSearchForm;
-use app\modules\site\controllers\MainBackendController;
+use Yii;
+use yii\web\HttpException;
+use yii\widgets\ActiveForm;
+use app\widgets\notification\Alert;
 use app\modules\site\models\tools\Debug;
 use app\modules\user\models\tool\BehaviorsRoleManager;
-use app\widgets\notification\Alert;
-use yii\web\HttpException;
+use app\modules\site\controllers\MainBackendController;
+use app\modules\catalog\models\search\PropertiesVariantsSearchForm;
 
 class ProductPropertiesVariantsBackendController extends MainBackendController
 {
@@ -31,6 +32,11 @@ class ProductPropertiesVariantsBackendController extends MainBackendController
         $model = new $this->modelClass();
         $searchModel = new PropertiesVariantsSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -55,9 +61,13 @@ class ProductPropertiesVariantsBackendController extends MainBackendController
     public function actionUpdate($id)
     {
         $model = $this->modelClass::findOne($id);
-        if (!$model) {
-            throw new HttpException(404, 'Запись не существует');
+        if (!$model) throw new HttpException(404, 'Запись не существует');
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
         }
+
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
                 if ($model->validate()) {

@@ -17,7 +17,10 @@ use app\modules\catalog\models\entity\Properties;
 $this->title = Title::show("Значения свойств"); ?>
     <section>
         <h1 class="title">Значения справочников</h1>
-        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+        <?php $form = ActiveForm::begin([
+            'enableAjaxValidation' => true,
+            'options' => ['enctype' => 'multipart/form-data']
+        ]); ?>
         <?= $this->render('_form', [
             'model' => $model,
             'form' => $form,
