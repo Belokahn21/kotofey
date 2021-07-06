@@ -10,7 +10,6 @@ class Purina implements ProviderInterface
 {
     public function info($url)
     {
-        $parts = explode('	', $url);
         if ($curl = curl_init()) {
 
             $name = null;
@@ -18,7 +17,7 @@ class Purina implements ProviderInterface
             $desciption = null;
             $weight = null;
 
-            $url = 'https://shop.purina.ru/catalogsearch/result/?q=' . $parts[0];
+//            $url = 'https://shop.purina.ru/catalogsearch/result/?q=' . $parts[0];
 
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -30,10 +29,10 @@ class Purina implements ProviderInterface
             $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
             $xpath = new \DOMXPath($dom);
 
-            $price = ceil($parts[2]);
+//            $price = ceil($parts[2]);
             $name = $xpath->query('//h1[@class="page-title hidden-xs hidden-sm js-name"]')->item(0)->nodeValue;
             $desciption = $xpath->query('//div[@class="short-descr"]')->item(0)->nodeValue;
-            $code = $parts[0];
+//            $code = $xpath->query('//div[@class="sku"]/span')->item(0)->nodeValue;
 
             $nameParts = explode(', ', $name);
 
@@ -45,17 +44,17 @@ class Purina implements ProviderInterface
 
             $product = new CatalogInfo();
             $product->name = $name;
-            $product->purchase = $price;
-            $product->price = $product->purchase + ceil(($product->purchase * (15 / 100)));
+//            $product->purchase = $price;
+//            $product->price = $product->purchase + ceil(($product->purchase * (15 / 100)));
             $product->count = 0;
             $product->description = $desciption;
             $product->vitrine = 1;
             $product->status_id = Product::STATUS_ACTIVE;
-            $product->code = $code;
+//            $product->barcode = $code;
             $product->vendor_id = 1;
-            $product->weight = $weight;
-            $product->country = 51;
-            $product->model = 6;
+//            $product->weight = $weight;
+//            $product->country = 51;
+//            $product->model = 6;
 
             return $product;
         }
