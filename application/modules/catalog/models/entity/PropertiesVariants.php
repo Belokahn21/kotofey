@@ -55,10 +55,16 @@ class PropertiesVariants extends \yii\db\ActiveRecord
     {
         return [
             [['property_id', 'name'], 'required'],
+
             [['property_id', 'is_active', 'media_id', 'sort'], 'integer'],
+
             [['link', 'text'], 'string'],
+
             [['image', 'view', 'slug'], 'string', 'max' => 255],
+
             [['name'], 'string', 'max' => 128],
+            ['name', 'unique'],
+
             [['property_id'], 'exist', 'skipOnError' => true, 'targetClass' => Properties::className(), 'targetAttribute' => ['property_id' => 'id']],
         ];
     }

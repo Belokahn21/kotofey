@@ -61,6 +61,14 @@ $this->title = Title::show("Значения свойств"); ?>
             }
         ],
         [
+            'attribute' => 'created_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+        ],
+        [
+            'attribute' => 'updated_at',
+            'format' => ['date', 'dd.MM.YYYY'],
+        ],
+        [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
