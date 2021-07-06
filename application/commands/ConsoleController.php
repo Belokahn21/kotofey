@@ -22,7 +22,7 @@ class ConsoleController extends Controller
             ]);
         }
 
-        $products->andWhere(['vendor_id' => Vendor::VENDOR_ID_PURINA]);
+        $products->orFilterWhere(['vendor_id' => Vendor::VENDOR_ID_PURINA]);
 
         $products = $products->all();
         foreach ($products as $product) {
