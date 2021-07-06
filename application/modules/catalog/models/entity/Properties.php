@@ -2,7 +2,9 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\modules\site\models\behaviors\CacheBehavior;
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "properties".
@@ -23,14 +25,27 @@ use Yii;
  */
 class Properties extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+            CacheBehavior::className()
+        ];
+    }
+
     public function rules()
     {
         return [
             [['is_active', 'is_multiple', 'is_offer_catalog', 'is_show_site', 'sort', 'type', 'group_id'], 'integer'],
+
             ['sort', 'default', 'value' => 500],
+
             ['is_show_site', 'default', 'value' => 1],
+
             [['name'], 'required'],
+
             [['name'], 'string', 'max' => 128],
+
         ];
     }
 

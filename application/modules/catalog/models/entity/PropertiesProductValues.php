@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 use app\modules\media\models\entity\Media;
+use app\modules\site\models\behaviors\CacheBehavior;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -24,7 +25,8 @@ class PropertiesProductValues extends \yii\db\ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            CacheBehavior::className()
         ];
     }
 

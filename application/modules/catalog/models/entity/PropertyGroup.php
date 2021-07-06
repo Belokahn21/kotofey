@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\modules\site\models\behaviors\CacheBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -28,6 +29,7 @@ class PropertyGroup extends \yii\db\ActiveRecord
                 'attribute' => 'name',
                 'ensureUnique' => true,
             ],
+            CacheBehavior::className()
         ];
     }
 

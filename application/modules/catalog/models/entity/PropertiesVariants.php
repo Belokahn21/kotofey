@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\entity;
 
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
+use app\modules\site\models\behaviors\CacheBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
@@ -46,6 +47,7 @@ class PropertiesVariants extends \yii\db\ActiveRecord
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/'
             ],
+            CacheBehavior::className(),
         ];
     }
 

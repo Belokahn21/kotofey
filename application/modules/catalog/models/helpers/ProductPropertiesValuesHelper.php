@@ -79,6 +79,37 @@ class ProductPropertiesValuesHelper
         return true;
     }
 
+    public static function saveProductProperties(array $properties_data,int $product_id)
+    {
+        PropertiesProductValues::deleteAll(['product_id' => $product_id]);
+
+        foreach ($properties_data as $propertyId => $value) {
+            if (empty($value)) continue;
+
+            //save multiple property
+            if (is_array($value) && count($value) > 0) {
+                foreach ($value as $select_variant) {
+                    if (empty($select_variant)) continue;
+                    $propertyValues = new PropertiesProductValues();
+                    $propertyValues->product_id = $product_id;
+                    $propertyValues->property_id = $propertyId;
+                    $propertyValues->value = $select_variant;
+                    if ($propertyValues->save() === false) {
+                        return false;
+                    }
+                }
+            } else {
+                $propertyValues = new PropertiesProductValues();
+                $propertyValues->product_id = $product_id;
+                $propertyValues->property_id = $propertyId;
+                $propertyValues->value = $value;
+                if ($propertyValues->save() === false) {
+                    return false;
+                }
+            }
+        }
+    }
+
     public static function removePropertyValue($product_id, $property_id)
     {
         return PropertiesProductValues::deleteAll(['product_id' => $product_id, 'property_id' => $property_id]);

@@ -22,7 +22,9 @@ class CacheBehavior extends Behavior
     {
         if ($this->tags && is_array($this->tags) && count($this->tags) > 0) {
             foreach ($this->tags as $tag) {
-                \Yii::$app->cache->delete($tag);
+                if (\Yii::$app->cache->exists($tag)) {
+                    \Yii::$app->cache->delete($tag);
+                }
             }
         } else {
             \Yii::$app->cache->flush();
