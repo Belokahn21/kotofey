@@ -30,24 +30,24 @@ class PriceBackendController extends MainBackendController
 
                 if (($handle = fopen($upl->tempName, "r")) !== false) {
                     while (($line = fgetcsv($handle, 1000, $model->delimiter)) !== false) {
-                        $code = $line[2];
-                        $bad_price = $line[6];
+                        $code = $line[0];
+                        $bad_price = $line[4];
                         $base_price = null;
                         $purchase_price = null;
 
 
                         if (empty($code) || mb_strlen($code) == 0) continue;
 
-                        if ($vendor->type_price == Vendor::TYPE_PRICE_BASE) {
+                        if ($model->type_price == PriceUpdateForm::TYPE_PRICE_BASE) {
                             $base_price = Price::normalize($bad_price);
                         }
 
-                        if ($vendor->type_price == Vendor::TYPE_PRICE_PURCHASE) {
+                        if ($model->type_price == PriceUpdateForm::TYPE_PRICE_PURCHASE) {
                             $purchase_price = Price::normalize($bad_price);
                         }
 
 
-                        if ($product = Product::find()->where(['code' => $code, 'vendor_id' => $model->vendor_id])->one()) {
+                        if ($product = Product::find()->where([$model->related_key_filter ?: 'code' => $code, 'vendor_id' => $model->vendor_id])->one()) {
                             $product->scenario = Product::SCENARIO_STOCK_COUNT;
 
                             $old_markup = ProductHelper::getMarkup($product, intval($model->default_markup));
