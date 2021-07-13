@@ -12,6 +12,7 @@ use yii\base\Model;
  * @property integer $default_markup;
  * @property integer $force_markup;
  * @property integer $type_price;
+ * @property integer $related_key_filter;
  */
 class PriceUpdateForm extends Model
 {
@@ -30,7 +31,7 @@ class PriceUpdateForm extends Model
     {
         return [
 
-            [['vendor_id'], 'required'],
+            [['vendor_id', 'type_price'], 'required', 'message' => '{attribute} нужно указать'],
 
             [['vendor_id', 'default_markup', 'force_markup'], 'integer'],
 
@@ -50,7 +51,7 @@ class PriceUpdateForm extends Model
             'file' => 'Прайс-лист',
             'vendor_id' => 'Поставщик',
             'type_price' => 'Цена в прайсе',
-            're' => 'Свойство по которому искать',
+            'related_key_filter' => 'Свойство по которому искать',
             'default_markup' => 'Наценка, если у товара отстуствует',
             'force_markup' => 'Принудительно проставить скидку',
         ];

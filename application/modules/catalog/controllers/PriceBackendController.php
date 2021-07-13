@@ -47,7 +47,7 @@ class PriceBackendController extends MainBackendController
                         }
 
 
-                        if ($product = Product::find()->where(['barcode' => $code, 'vendor_id' => $model->vendor_id])->one()) {
+                        if ($product = Product::find()->where([$model->related_key_filter ?: 'code' => $code, 'vendor_id' => $model->vendor_id])->one()) {
                             $product->scenario = Product::SCENARIO_STOCK_COUNT;
 
                             $old_markup = ProductHelper::getMarkup($product, intval($model->default_markup));
