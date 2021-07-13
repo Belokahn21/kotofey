@@ -12,7 +12,7 @@ class ConsoleController extends Controller
     public function actionRun($name = null)
     {
         //todo https://codedzen.ru/elasticsearch-urok-6-3-poisk/
-        $models = ProductElastic::find()->query(['match' => ['name' => 'sirius']])->limit(10000)->all();
+        $models = ProductElastic::find()->query(['match' => ['name' => 'sirius'], 'analyze' => 'russian'])->limit(10000)->all();
         echo count($models);
     }
 
