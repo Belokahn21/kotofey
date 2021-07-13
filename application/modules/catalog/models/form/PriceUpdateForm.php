@@ -21,6 +21,7 @@ class PriceUpdateForm extends Model
     public $default_markup;
     public $force_markup;
     public $type_price;
+    public $related_key_filter;
 
     const TYPE_PRICE_BASE = 'base';
     const TYPE_PRICE_PURCHASE = 'purchase';
@@ -36,7 +37,7 @@ class PriceUpdateForm extends Model
             ['delimiter', 'default', 'value' => ';'],
             ['delimiter', 'string'],
 
-            ['type_price', 'string'],
+            [['type_price', 'related_key_filter'], 'string'],
 
             ['file', 'file', 'skipOnEmpty' => false]
         ];
@@ -49,6 +50,7 @@ class PriceUpdateForm extends Model
             'file' => 'Прайс-лист',
             'vendor_id' => 'Поставщик',
             'type_price' => 'Цена в прайсе',
+            're' => 'Свойство по которому искать',
             'default_markup' => 'Наценка, если у товара отстуствует',
             'force_markup' => 'Принудительно проставить скидку',
         ];
