@@ -29,6 +29,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
  * @var $form \yii\widgets\ActiveForm
  * @var $stocks Stocks[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
+ * @var $products Product[]
  */
 
 ?>
@@ -53,7 +54,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара'])->label(false); ?>
                 </div>
                 <div class="form-element">
-                    <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map(Product::find()->all(), 'id', 'name'), ['prompt' => 'Товар'])->label(false); ?>
+                    <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map($products, 'id', 'name'), ['prompt' => 'Товар'])->label(false); ?>
                 </div>
                 <div class="form-element">
                     <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>

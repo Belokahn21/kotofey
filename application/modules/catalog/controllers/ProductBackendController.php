@@ -2,8 +2,8 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\search\ProductSearchForm;
 use app\modules\site\controllers\MainBackendController;
-use app\modules\catalog\models\entity\Offers;
 use app\widgets\notification\Alert;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -11,9 +11,13 @@ use Yii;
 
 class ProductBackendController extends MainBackendController
 {
+    public $modelClass = 'app\modules\catalog\models\entity\Product';
+
     public function actionIndex()
     {
-        $model = new Offers();
+        $model = new $this->modelClass();
+        $searchModel = new ProductSearchForm();
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -26,6 +30,8 @@ class ProductBackendController extends MainBackendController
 
         return $this->render('index', [
             'model' => $model,
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -59,6 +65,6 @@ class ProductBackendController extends MainBackendController
 
     private function getModel($id)
     {
-        return Offers::findOne($id);
+        return $this->modelClass::findOne($id);
     }
 }

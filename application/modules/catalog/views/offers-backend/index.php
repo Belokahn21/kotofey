@@ -44,6 +44,7 @@ $this->title = Title::show('Предложения');
     'compositions' => $compositions,
     'properties' => $properties,
     'modelDelivery' => $modelDelivery,
+    'products' => $products,
 ]) ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>
@@ -133,12 +134,10 @@ $this->title = Title::show('Предложения');
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
         ],
         [
             'attribute' => 'updated_at',
             'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
         ],
         [
             'class' => 'yii\grid\ActionColumn',

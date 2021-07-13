@@ -2,20 +2,21 @@
 
 namespace app\modules\catalog\controllers;
 
-use app\modules\catalog\models\entity\Composition;
-use app\modules\catalog\models\entity\Properties;
-use app\modules\catalog\models\form\PriceRepairForm;
-use app\modules\stock\models\entity\Stocks;
-use app\modules\user\models\tool\BehaviorsRoleManager;
+use app\modules\catalog\models\entity\Product;
 use Yii;
+use yii\helpers\Url;
+use yii\web\HttpException;
+use yii\widgets\ActiveForm;
+use app\widgets\notification\Alert;
+use app\modules\stock\models\entity\Stocks;
+use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\Composition;
+use app\modules\catalog\models\entity\ProductOrder;
+use app\modules\catalog\models\entity\ProductMarket;
+use app\modules\catalog\models\form\PriceRepairForm;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\modules\catalog\models\search\OffersSearchForm;
 use app\modules\site\controllers\MainBackendController;
-use app\modules\catalog\models\entity\ProductMarket;
-use app\modules\catalog\models\entity\ProductOrder;
-use app\widgets\notification\Alert;
-use yii\widgets\ActiveForm;
-use yii\web\HttpException;
-use yii\helpers\Url;
 
 
 class OffersBackendController extends MainBackendController
@@ -39,6 +40,7 @@ class OffersBackendController extends MainBackendController
     public function actionIndex()
     {
         $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_NEW_PRODUCT]);
+        $products = $this->getProducts();
         $modelDelivery = new ProductOrder();
         $properties = $this->getProperties();
         $compositions = $this->getCompositions();
@@ -70,6 +72,7 @@ class OffersBackendController extends MainBackendController
             'modelDelivery' => $modelDelivery,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'products' => $products,
         ]);
     }
 
@@ -78,6 +81,7 @@ class OffersBackendController extends MainBackendController
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Товар такой не существует');
 
         $model->scenario = $this->modelClass::SCENARIO_UPDATE_PRODUCT;
+        $products = $this->getProducts();
         $properties = $this->getProperties();
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
@@ -100,6 +104,7 @@ class OffersBackendController extends MainBackendController
             'stocks' => $stocks,
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
+            'products' => $products,
         ]);
     }
 
@@ -202,6 +207,13 @@ class OffersBackendController extends MainBackendController
     {
         return Yii::$app->cache->getOrSet('product-properties-backend', function () {
             return Properties::find()->all();
+        });
+    }
+
+    private function getProducts()
+    {
+        return Yii::$app->cache->getOrSet('products-to-offers', function () {
+            return Product::find()->all();
         });
     }
 }
