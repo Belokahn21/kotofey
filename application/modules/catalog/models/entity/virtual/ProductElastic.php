@@ -8,7 +8,7 @@ class ProductElastic extends ActiveRecord
 {
     public function attributes()
     {
-        return [];
+        return ['name'];
     }
 
     public function rules()

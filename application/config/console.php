@@ -35,17 +35,15 @@ $config = [
                 ],
             ],
         ],
-        'components' => [
-            'elasticsearch' => [
-                'class' => 'yii\elasticsearch\Connection',
-                'nodes' => [
-                    ['http_address' => '127.0.0.1:9200'],
-                    //настройте несколько хостов, если у вас есть кластер
-                ],
-                // установите autodetectCluster = false, чтобы не определять адреса узлов в кластере автоматически
-                // 'autodetectCluster' => false,
-                'dslVersion' => 7, // по умолчанию - 5
+        'elasticsearch' => [
+            'class' => 'yii\elasticsearch\Connection',
+            'nodes' => [
+                ['http_address' => '127.0.0.1:9200'],
+                //настройте несколько хостов, если у вас есть кластер
             ],
+            // установите autodetectCluster = false, чтобы не определять адреса узлов в кластере автоматически
+             'autodetectCluster' => false,
+            'dslVersion' => 7, // по умолчанию - 5
         ],
         'db' => $db,
         'urlManager' => [

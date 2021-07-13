@@ -3,6 +3,7 @@
 namespace app\commands;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\virtual\ProductElastic;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 
@@ -10,30 +11,23 @@ class ConsoleController extends Controller
 {
     public function actionRun($name = null)
     {
-        if ($name == null) {
-            $name = 'purina';
-        }
-        $products = Product::find();
-        foreach (explode(' ', $name) as $text_line) {
-            $products->andFilterWhere([
-                'or',
-                ['like', 'name', $text_line],
-                ['like', 'feed', $text_line]
-            ]);
-        }
+        //todo https://codedzen.ru/elasticsearch-urok-6-3-poisk/
+        $models = ProductElastic::find()->query(['match' => ['name' => 'sirius']])->limit(10000)->all();
+        echo count($models);
+    }
 
-        $products->orFilterWhere(['vendor_id' => Vendor::VENDOR_ID_PURINA]);
+    public function actionIndex()
+    {
+        $models = Product::find()->all();
+        foreach ($models as $model) {
+            $el = new ProductElastic();
+            $el->setPrimaryKey($model->id);
+            $el->_id = $model->id;
+            $el->name = $model->name;
 
-        $products = $products->all();
-        foreach ($products as $product) {
-            $name = $product->name;
-            if ($product->delete()) {
-                echo "ok: " . $name . PHP_EOL;
+            if ($el->insert()) {
+                echo $model->name . PHP_EOL;
             }
-
-//            if ($product->validate() && $product->update() !== false) {
-//                echo "ok: " . $product->name . PHP_EOL;
-//            }
         }
     }
 
