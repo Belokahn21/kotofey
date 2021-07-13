@@ -22,10 +22,10 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
  */
 
-$this->title = Title::show('Товары');
+$this->title = Title::show('Предложения');
 ?>
     <div class="title-group">
-        <h1>Товары</h1>
+        <h1>Предложения</h1>
         <?= Html::a('Прайсы', Url::to(['/admin/catalog/price-backend/index']), ['class' => 'btn-main']); ?>
         <?= Html::a('Приход товара', Url::to(['/admin/catalog/transfer-backend/index']), ['class' => 'btn-main']); ?>
         <?= Html::a('Цены без наценки', Url::to(['/admin/catalog/product-backend/price-repair']), ['class' => 'btn-main']); ?>
@@ -51,7 +51,7 @@ $this->title = Title::show('Товары');
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Товары отсутствуют',
+    'emptyText' => 'Предложения отсутствуют',
     'columns' => [
         'id',
         'article',

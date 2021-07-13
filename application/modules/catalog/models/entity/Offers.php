@@ -24,6 +24,7 @@ use function foo\func;
  * Product model
  *
  * @property integer $id
+ * @property integer $product_id
  * @property integer $article
  * @property string $name
  * @property string $description
@@ -77,8 +78,8 @@ class Offers extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['product_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['product_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price', 'base_price'];
 
         return $parent;
@@ -89,7 +90,7 @@ class Offers extends \yii\db\ActiveRecord
         return [
             [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id', 'product_id'], 'integer'],
 
             [['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
 
@@ -114,6 +115,7 @@ class Offers extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'product_id' => 'ID товара',
             'article' => 'Артикул',
             'name' => 'Название',
             'description' => 'Описание',

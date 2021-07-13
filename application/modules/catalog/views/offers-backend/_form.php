@@ -9,6 +9,7 @@ use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Offers;
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
@@ -50,6 +51,9 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             <div class="col-sm-6">
                 <div class="form-element">
                     <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара'])->label(false); ?>
+                </div>
+                <div class="form-element">
+                    <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map(Product::find()->all(), 'id', 'name'), ['prompt' => 'Товар'])->label(false); ?>
                 </div>
                 <div class="form-element">
                     <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
