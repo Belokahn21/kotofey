@@ -5,7 +5,7 @@ namespace app\modules\catalog\controllers;
 
 use app\modules\site\models\tools\Debug;
 use Yii;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\search\ProductTransferHistorySearch;
 use app\modules\order\models\entity\Order;
 use app\modules\site\controllers\MainBackendController;
@@ -20,7 +20,7 @@ class TransferBackendController extends MainBackendController
     {
         $model = new $this->modelClass();
         $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
-        $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $products = Offers::find()->orderBy(['created_at' => SORT_DESC])->all();
         $searchModel = new ProductTransferHistorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -50,7 +50,7 @@ class TransferBackendController extends MainBackendController
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден.');
 
         $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
-        $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $products = Offers::find()->orderBy(['created_at' => SORT_DESC])->all();
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {

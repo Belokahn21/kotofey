@@ -4,7 +4,7 @@ namespace app\modules\export\controllers;
 
 
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\web\Controller;
 
 class AliexpressController extends Controller
@@ -15,7 +15,7 @@ class AliexpressController extends Controller
         $categories = ProductCategory::find()->all();
         $module = \Yii::$app->getModule('export');
         $offers = \Yii::$app->cache->getOrSet('ali:export', function () {
-            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE]);
+            return Offers::find()->where(['status_id' => Offers::STATUS_ACTIVE]);
         });
 
 

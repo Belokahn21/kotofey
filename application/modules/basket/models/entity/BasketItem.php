@@ -3,7 +3,7 @@
 namespace app\modules\basket\models\entity;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 class BasketItem
 {
@@ -83,7 +83,7 @@ class BasketItem
 	 */
 	public function getProduct()
 	{
-		return Product::findOne($this->getProductId());
+		return Offers::findOne($this->getProductId());
 	}
 
 	/**

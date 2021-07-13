@@ -3,7 +3,7 @@
 namespace app\models\tool\import;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\helpers\ArrayHelper;
 
 class Forza10 extends Importer
@@ -41,11 +41,11 @@ class Forza10 extends Importer
                     continue;
                 }
 
-                if (!$product = Product::findOneByCode($article)) {
+                if (!$product = Offers::findOneByCode($article)) {
                     $this->addEmptyCode($article);
                 }
 
-                if ($product instanceof Product) {
+                if ($product instanceof Offers) {
                     echo $this->getOldPercent($product->price, $product->purchase);
                     echo PHP_EOL;
                 }

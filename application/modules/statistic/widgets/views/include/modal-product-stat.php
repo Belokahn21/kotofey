@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 ?>
 <div class="modal fade" id="product-stat" tabindex="-1" role="dialog" aria-labelledby="product-statLabel" aria-hidden="true">
@@ -27,14 +27,14 @@ use app\modules\catalog\models\entity\Product;
                 </ul>
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                        <?php foreach (Product::find()->where(['status_id' => Product::STATUS_WAIT])->orderBy(['vendor_id' => SORT_DESC])->all() as $product): ?>
+                        <?php foreach (Offers::find()->where(['status_id' => Offers::STATUS_WAIT])->orderBy(['vendor_id' => SORT_DESC])->all() as $product): ?>
                             <div>
                                 <?= Html::a($product->name, \yii\helpers\Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id])); ?>
                             </div>
                         <?php endforeach; ?>
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                        <?php foreach (Product::find()->where(['vendor_id' => null])->all() as $product): ?>
+                        <?php foreach (Offers::find()->where(['vendor_id' => null])->all() as $product): ?>
                             <div>
                                 <?= Html::a($product->name, \yii\helpers\Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id])); ?>
                             </div>

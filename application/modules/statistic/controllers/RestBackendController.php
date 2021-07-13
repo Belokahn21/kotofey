@@ -2,7 +2,7 @@
 
 namespace app\modules\statistic\controllers;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\Order;
 use app\modules\search\models\entity\SearchQuery;
@@ -38,7 +38,7 @@ class RestBackendController extends Controller
 	public function actionGet()
 	{
 		\Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-		$products = Product::find();
+		$products = Offers::find();
 		$queryData = array();
 		$queries = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
 		/* @var $query SearchQuery */

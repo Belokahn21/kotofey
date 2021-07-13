@@ -6,7 +6,7 @@
  * @var $billings \app\modules\user\models\entity\UserBilling[]
  * @var $orders \app\modules\order\models\entity\Order[]
  * @var $sexList \app\modules\user\models\entity\UserSex[]
- * @var $favorite \app\modules\catalog\models\entity\Product[]
+ * @var $favorite \app\modules\catalog\models\entity\Offers[]
  * @var $history \yii\db\ActiveQuery
  */
 

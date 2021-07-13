@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View
- * @var $products \app\modules\catalog\models\entity\Product[]
+ * @var $products \app\modules\catalog\models\entity\Offers[]
  * @var $filterModel \app\modules\catalog\models\form\CatalogFilter
  * @var $display string
  * @var $category \app\modules\catalog\models\entity\ProductCategory

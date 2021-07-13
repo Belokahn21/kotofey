@@ -7,14 +7,14 @@ use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\helpers\ProductHelper;
 use yii\helpers\Json;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\rest\ActiveController;
 use yii\rest\Controller;
 
 class RestController extends ActiveController
 {
-    public $modelClass = 'app\modules\catalog\models\entity\Product';
-    public $searchModelClass = 'app\modules\catalog\models\search\ProductSearchForm';
+    public $modelClass = 'app\modules\catalog\models\entity\Offers';
+    public $searchModelClass = 'app\modules\catalog\models\search\OffersSearchForm';
 
     public function behaviors()
     {

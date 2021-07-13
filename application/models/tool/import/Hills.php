@@ -3,7 +3,7 @@
 namespace app\models\tool\import;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
 
 class Hills
@@ -33,7 +33,7 @@ class Hills
 
                 $oldPercent = null;
 
-                if ($product = Product::findOneByCode($code)) {
+                if ($product = Offers::findOneByCode($code)) {
 
                     $percent = round(ProductHelper::getMarkup($product) / 100);
 
@@ -41,7 +41,7 @@ class Hills
 
                     if (!$percent) $percent = 0.15;
 
-                    $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+                    $product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
                     $product->base_price = $base;
                     $product->purchase = $purchase;
                     $product->price = $product->purchase + ceil($product->purchase * $percent);

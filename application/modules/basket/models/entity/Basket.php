@@ -4,14 +4,14 @@ namespace app\modules\basket\models\entity;
 
 
 use app\modules\site\models\tools\Debug;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\order\models\entity\OrdersItems;
 use yii\base\Model;
 
 /**
  * Basket model
  *
- * @property Product $product
+ * @property Offers $product
  * @property integer $count
  */
 class Basket extends Model

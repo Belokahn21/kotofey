@@ -3,7 +3,7 @@
 namespace app\models\tool\import;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 class Tavela
 {
@@ -28,8 +28,8 @@ class Tavela
 					continue;
 				}
 
-				if ($product = Product::findOneByCode($code)) {
-					$product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+				if ($product = Offers::findOneByCode($code)) {
+					$product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
 					$product->purchase = $price;
 					$product->price = $product->purchase + (ceil($product->purchase * 0.3));
 					$product->active = 1;

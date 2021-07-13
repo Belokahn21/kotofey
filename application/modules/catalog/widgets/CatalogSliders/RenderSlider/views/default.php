@@ -6,7 +6,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 
-/* @var $models \app\modules\catalog\models\entity\Product[]
+/* @var $models \app\modules\catalog\models\entity\Offers[]
  * @var $this \yii\web\View
  * @var $title string
  * @var $subTitle string

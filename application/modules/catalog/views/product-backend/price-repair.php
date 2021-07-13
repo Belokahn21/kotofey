@@ -1,6 +1,6 @@
 <?php
 /* @var $this \yii\web\View
- * @var $models \app\modules\catalog\models\entity\Product[]
+ * @var $models \app\modules\catalog\models\entity\Offers[]
  */
 
 use yii\helpers\Html;

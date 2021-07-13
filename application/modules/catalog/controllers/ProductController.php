@@ -18,7 +18,7 @@ use app\modules\seo\models\tools\Attributes;
 use app\modules\seo\models\tools\og\OpenGraph;
 use app\modules\seo\models\tools\og\OpenGraphProduct;
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\web\Response;
 
 class ProductController extends Controller
@@ -31,8 +31,8 @@ class ProductController extends Controller
 
     public function actionView($id)
     {
-        $product = Product::findBySlug($id);
-        if (!$product instanceof Product) throw new \yii\web\NotFoundHttpException("Товар не найден.");
+        $product = Offers::findBySlug($id);
+        if (!$product instanceof Offers) throw new \yii\web\NotFoundHttpException("Товар не найден.");
 
         $category = ProductCategory::findOne($product->category_id);
 

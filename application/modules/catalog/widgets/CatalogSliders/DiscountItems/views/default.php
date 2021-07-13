@@ -7,7 +7,7 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
 use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 
-/* @var $models \app\modules\catalog\models\entity\Product[]
+/* @var $models \app\modules\catalog\models\entity\Offers[]
  * @var $formatArray array
  * @var $this \yii\web\View
  */

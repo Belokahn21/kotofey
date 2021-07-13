@@ -3,7 +3,7 @@
 namespace app\modules\order\controllers;
 
 use app\modules\basket\models\entity\Basket;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
@@ -26,7 +26,7 @@ class FastRestController extends Controller
             return $response;
         }
 
-        if (!$product = Product::findOne($basketItem->product_id)) {
+        if (!$product = Offers::findOne($basketItem->product_id)) {
             $response['status'] = 500;
             $response['errors'] = 'Такого товара не существует';
             return $response;

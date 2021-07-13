@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -17,7 +17,7 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\ProductTransferHistory
  * @var $orders \app\modules\order\models\entity\Order[]
- * @var $products Product[]
+ * @var $products Offers[]
  * @var $dataProvider \yii\data\ActiveDataProvider
  * @var $searchModel \app\modules\catalog\models\search\ProductTransferHistorySearch
  */

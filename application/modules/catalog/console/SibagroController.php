@@ -8,7 +8,7 @@ use app\modules\site_settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\parser\ParseProvider;
 use app\models\tool\parser\providers\SibagroTrade;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductSync;
 use app\modules\logger\models\entity\Logger;
 use app\modules\vendors\models\entity\Vendor;
@@ -24,7 +24,7 @@ class SibagroController extends Controller
     public function actionUpdate()
     {
         $log = new Logger();
-        $products = Product::find()->where(['vendor_id' => self::VENDOR_SIBAGRO_ID])->limit(500);
+        $products = Offers::find()->where(['vendor_id' => self::VENDOR_SIBAGRO_ID])->limit(500);
 
         if ($alreadySync = ProductSync::find()->all()) $products->andWhere(['not in', 'id', ArrayHelper::getColumn($alreadySync, 'product_id')]);
 
@@ -53,11 +53,11 @@ class SibagroController extends Controller
                 continue;
             }
 
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
             $product->status_id = $virProduct->status_id;
 
             if ($product->count > 0) {
-                $product->status_id = Product::STATUS_ACTIVE;
+                $product->status_id = Offers::STATUS_ACTIVE;
             }
 
 

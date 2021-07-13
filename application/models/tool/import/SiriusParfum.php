@@ -3,7 +3,7 @@
 
 namespace app\models\tool\import;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\models\tools\Debug;
 use app\modules\site_settings\models\helpers\MarkupHelpers;
@@ -24,8 +24,8 @@ class SiriusParfum
                 $code = $line[0];
                 $purchase = round(str_replace(',', '.', str_replace(' ', '', $line[3])));
                 if (!is_numeric($code) || !is_numeric($purchase)) continue;
-                if (!$product = Product::find()->where(['vendor_id' => self::VENDOR_ID, 'code' => $code])->one()) continue;
-                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+                if (!$product = Offers::find()->where(['vendor_id' => self::VENDOR_ID, 'code' => $code])->one()) continue;
+                $product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
                 $oldMarkup = ProductHelper::getMarkup($product);
                 $product->purchase = round($purchase);
                 MarkupHelpers::applyMarkup($product, $oldMarkup);

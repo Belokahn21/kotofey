@@ -3,7 +3,7 @@
 namespace app\modules\compare\models\entity;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 class Compare
 {
@@ -41,7 +41,7 @@ class Compare
         \Yii::$app->session->open();
         if ($compare = \Yii::$app->session->get(self::COMPARE_SESSION_KEY)) {
             foreach ($compare as $product_id => $item) {
-                $items[] = Product::findOne($product_id);
+                $items[] = Offers::findOne($product_id);
             }
         }
         return $items;

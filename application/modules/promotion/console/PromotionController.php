@@ -2,7 +2,7 @@
 
 namespace app\modules\promotion\console;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\logger\models\service\LogService;
 use app\modules\mailer\models\helpers\PromotionHtmlHelper;
 use app\modules\mailer\models\services\MailService;
@@ -56,7 +56,7 @@ class PromotionController extends Controller
 
         $orders = Order::find()->where(['id' => $list_order_id])->andWhere(['<>', 'email', ''])->andWhere(['not in', 'email', $excluded_email])->all();
 
-        $products = Product::find()->where(['id' => $list_all_product_id_current_promo])->limit(5)->all();
+        $products = Offers::find()->where(['id' => $list_all_product_id_current_promo])->limit(5)->all();
 
 
         foreach ($orders as $order) {

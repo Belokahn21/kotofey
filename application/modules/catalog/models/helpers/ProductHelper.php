@@ -8,7 +8,7 @@ use yii\helpers\Json;
 use yii\helpers\Url;
 use app\modules\site\models\tools\System;
 use app\modules\media\models\entity\Media;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 class ProductHelper
 {
@@ -34,7 +34,7 @@ class ProductHelper
     }
 
     /* цена товара за 1 киллограмм */
-    public static function getPriceByWeight(Product $product, $weight)
+    public static function getPriceByWeight(Offers $product, $weight)
     {
         $product_weight = PropertiesHelper::getProductWeight($product->id);
         if (!$product_weight) {
@@ -47,34 +47,34 @@ class ProductHelper
         return $summary_price;
     }
 
-    public static function getResultPrice(Product $model)
+    public static function getResultPrice(Offers $model)
     {
         return ($model->getDiscountPrice() ? $model->getDiscountPrice() : $model->getPrice());
     }
 
-    public static function getPercent(Product $model)
+    public static function getPercent(Offers $model)
     {
         return $model->getDiscountPrice() ? 100 - round(($model->getDiscountPrice() * 100) / $model->getPrice()) : false;
     }
 
-    public static function getMarkup(Product $model, int $default_value = 1)
+    public static function getMarkup(Offers $model, int $default_value = 1)
     {
         $calc_value = intval(@round(($model->price / $model->purchase) * 100 - 100));
         return $calc_value > 0 ? $calc_value : $default_value;
     }
 
-    public static function makePurchase(Product &$model, Vendor $vendor)
+    public static function makePurchase(Offers &$model, Vendor $vendor)
     {
         $model->purchase = intval($model->base_price - round($model->base_price * ($vendor->discount / 100)));
     }
 
-    public static function setDiscount(Product &$model, $prcent)
+    public static function setDiscount(Offers &$model, $prcent)
     {
         $model->discount_price = $model->price - round($model->price * ($prcent / 100));
     }
 
 
-    public static function applyMarkup(Product &$model, int $markup)
+    public static function applyMarkup(Offers &$model, int $markup)
     {
         $model->price = intval(round($model->purchase + $model->purchase / 100 * $markup));
     }
@@ -82,7 +82,7 @@ class ProductHelper
     public static function purchaseVirtual(array $products)
     {
         $out = 0;
-        /* @var $product Product */
+        /* @var $product Offers */
         foreach ($products as $product) {
             $out += $product->count * $product->purchase;
         }
@@ -93,7 +93,7 @@ class ProductHelper
     public static function profitVirtual(array $products)
     {
         $out = 0;
-        /* @var $product Product */
+        /* @var $product Offers */
         foreach ($products as $product) {
             $out += $product->count * $product->price;
         }
@@ -101,7 +101,7 @@ class ProductHelper
         return $out;
     }
 
-    public static function getImageUrl(Product $model, $isFull = false, $options = [])
+    public static function getImageUrl(Offers $model, $isFull = false, $options = [])
     {
         if ($media = $model->media) {
             if ($media->location == Media::LOCATION_CDN) {
@@ -139,7 +139,7 @@ class ProductHelper
         return $url;
     }
 
-    public static function getDetailUrl(Product $model, $isFull = false)
+    public static function getDetailUrl(Offers $model, $isFull = false)
     {
         if ($isFull) return System::fullSiteUrl() . Url::to(['/catalog/product/view', 'id' => $model->slug]);
 

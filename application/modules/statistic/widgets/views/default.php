@@ -8,14 +8,14 @@
  * @var $no_attention_reviews \app\modules\reviews\models\entity\Reviews[]
  */
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\order\models\entity\Order;
 use app\modules\site\models\tools\Backup;
 use yii\helpers\StringHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
-$product = Product::find();
+$product = Offers::find();
 ?>
     <div class="statistic-wrap">
         <div class="statistic">
@@ -49,7 +49,7 @@ $product = Product::find();
                         </div>
                         <div class="statistic-info__item">
                             <div class="statistic-info__key">А/Ожид/БП</div>
-                            <div class="statistic-info__value"><?= $product->where(['status_id' => Product::STATUS_ACTIVE])->count(); ?>/<?= $product->where(['status_id' => Product::STATUS_WAIT])->count(); ?>/<?= $product->where(['vendor_id' => null])->count(); ?></div>
+                            <div class="statistic-info__value"><?= $product->where(['status_id' => Offers::STATUS_ACTIVE])->count(); ?>/<?= $product->where(['status_id' => Offers::STATUS_WAIT])->count(); ?>/<?= $product->where(['vendor_id' => null])->count(); ?></div>
                         </div>
                     </div>
                 </div>
@@ -134,7 +134,7 @@ $product = Product::find();
                                 <div class="statistic-summary__item" title="<?= $admission->email; ?>">
                                     <?= Html::a($admission->email . ' (' . date('d.m.Y', $admission->created_at) . ')', Url::to(['/admin/catalog/admission-backend/update', 'id' => $admission->id])) ?>
                                     <p style="font-size: 8px; margin: 0;">
-                                        <?php $product = Product::findOne($admission->product_id); ?>
+                                        <?php $product = Offers::findOne($admission->product_id); ?>
 
                                         <?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $admission->product_id])) ?>
                                     </p>

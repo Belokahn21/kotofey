@@ -5,13 +5,13 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\media\models\entity\Media;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\form\ProductFromSibagoForm;
+use app\modules\catalog\models\form\OffersFromSibagoForm;
 
 /* @var $items \app\modules\catalog\models\entity\virtual\SibagroElement[]
  * @var $this \yii\web\View
- * @var $productModelList \app\modules\catalog\models\form\ProductFromSibagoForm[]
+ * @var $productModelList \app\modules\catalog\models\form\OffersFromSibagoForm[]
  */
 
 $this->title = 'Обновить прайсы по HTML';
@@ -42,7 +42,7 @@ $this->title = 'Обновить прайсы по HTML';
         <?php foreach ($items as $item): ?>
             <?php
             $productModel = $productModelList[$i];
-            $product = Product::findOneByCode($item->code);
+            $product = Offers::findOneByCode($item->code);
             ?>
 
             <div class="sync-html-price__item row">
@@ -65,7 +65,7 @@ $this->title = 'Обновить прайсы по HTML';
                 </div>
 
                 <div class="col-1">
-                    <?= $form->field($productModel, '[' . $i . ']skip')->checkbox(['value' => $product instanceof Product, 'checked' => $product instanceof Product]); ?>
+                    <?= $form->field($productModel, '[' . $i . ']skip')->checkbox(['value' => $product instanceof Offers, 'checked' => $product instanceof Offers]); ?>
                 </div>
                 <div class="col-2">
                     <?php // $form->field($productModel, '[' . $i . ']remove')->checkbox(); ?>

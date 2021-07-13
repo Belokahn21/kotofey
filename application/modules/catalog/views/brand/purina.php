@@ -2,7 +2,7 @@
 /* @var $this yii\web\View
  * @var $model \app\modules\catalog\models\entity\PropertiesProductValues
  * @var $display string
- * @var $products \app\modules\catalog\models\entity\Product[]
+ * @var $products \app\modules\catalog\models\entity\Offers[]
  */
 
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;

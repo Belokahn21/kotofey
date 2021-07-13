@@ -1,6 +1,6 @@
 <?php
 
-/* @var $products \app\modules\catalog\models\entity\Product[] */
+/* @var $products \app\modules\catalog\models\entity\Offers[] */
 
 use yii\helpers\Html;
 use app\modules\catalog\models\helpers\ProductHelper;

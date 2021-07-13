@@ -1,5 +1,5 @@
 <?php
 
 
-/* @var $model \app\modules\catalog\models\entity\Product */
+/* @var $model \app\modules\catalog\models\entity\Offers */
 ?>

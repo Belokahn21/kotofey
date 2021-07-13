@@ -2,7 +2,7 @@
 
 namespace app\modules\promotion\models\entity;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -18,7 +18,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $created_at
  * @property int|null $updated_at
  *
- * @property Product $product
+ * @property Offers $product
  */
 class PromotionProductMechanics extends \yii\db\ActiveRecord
 {
@@ -31,7 +31,7 @@ class PromotionProductMechanics extends \yii\db\ActiveRecord
 
     public function getProduct()
     {
-        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+        return $this->hasOne(Offers::className(), ['id' => 'product_id']);
     }
 
     public function getPromotion()

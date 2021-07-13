@@ -2,7 +2,7 @@
 
 namespace app\commands;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\vendors\models\entity\Vendor;
 use yii\console\Controller;
 
@@ -13,7 +13,7 @@ class ConsoleController extends Controller
         if ($name == null) {
             $name = 'purina';
         }
-        $products = Product::find();
+        $products = Offers::find();
         foreach (explode(' ', $name) as $text_line) {
             $products->andFilterWhere([
                 'or',

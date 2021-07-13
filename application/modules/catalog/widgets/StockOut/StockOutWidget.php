@@ -3,7 +3,7 @@
 namespace app\modules\catalog\widgets\StockOut;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\base\Widget;
 
 class StockOutWidget extends Widget
@@ -12,7 +12,7 @@ class StockOutWidget extends Widget
 
 	public function run()
 	{
-		$products = Product::find()->where(['>', 'count', 0])->all();
+		$products = Offers::find()->where(['>', 'count', 0])->all();
 		return $this->render($this->view, [
 			'products' => $products
 		]);

@@ -8,7 +8,7 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\catalog\models\helpers\ProductOrderHelper;
 
-/* @var $product \app\modules\catalog\models\entity\Product */
+/* @var $product \app\modules\catalog\models\entity\Offers */
 
 $isDiscount = $product->getDiscountPrice() > 0;
 ?>

@@ -3,7 +3,7 @@
 namespace app\modules\export\controllers;
 
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\web\Controller;
 
 class YmlController extends Controller
@@ -13,7 +13,7 @@ class YmlController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         \Yii::$app->response->headers->add('Content-Type', 'application/xml');
         $categories = ProductCategory::find()->all();
-        $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
+        $offers = Offers::find()->where(['status_id' => Offers::STATUS_ACTIVE])->all();
         $module = \Yii::$app->getModule('export');
 
         $response = $this->renderPartial('index', [

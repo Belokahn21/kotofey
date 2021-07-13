@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use app\modules\seo\models\tools\Title;
@@ -39,7 +39,7 @@ use yii\helpers\Url;
             'attribute' => 'test',
             'label' => 'Количество товаров',
             'value' => function ($model) {
-                return Product::find()->where(['category_id' => $model->id])->count();
+                return Offers::find()->where(['category_id' => $model->id])->count();
             },
         ],
         [

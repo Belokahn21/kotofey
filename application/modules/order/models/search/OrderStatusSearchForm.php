@@ -3,7 +3,7 @@
 namespace app\modules\order\models\search;
 
 use app\modules\order\models\entity\OrderStatus;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 

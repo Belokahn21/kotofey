@@ -1,5 +1,5 @@
 <?php
-/* @var $products \app\modules\catalog\models\entity\Product[] */
+/* @var $products \app\modules\catalog\models\entity\Offers[] */
 ?>
 
 <ul class="catalog">

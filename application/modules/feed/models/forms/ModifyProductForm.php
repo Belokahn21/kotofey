@@ -3,7 +3,7 @@
 namespace app\modules\feed\models\forms;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 
@@ -37,7 +37,7 @@ class ModifyProductForm extends Model
                 $product->feed .= $this->feed;
             }
 
-            $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
             if ($product->validate()) {
                 if (!$product->save()) {
                     return false;

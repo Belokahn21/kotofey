@@ -3,7 +3,7 @@
 namespace app\models\tool\import;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\site\models\tools\Debug;
@@ -32,8 +32,8 @@ class Valta
                 $purchase = round($purchase);
 
 
-                $product = new Product();
-                $product->scenario = Product::SCENARIO_NEW_PRODUCT;
+                $product = new Offers();
+                $product->scenario = Offers::SCENARIO_NEW_PRODUCT;
                 $product->name = $rus_name;
                 $product->base_price = $purchase;
                 $product->purchase = $product->base_price;
@@ -43,7 +43,7 @@ class Valta
                 $product->vendor_id = 10;
                 $product->code = $article;
                 $product->barcode = $barcode;
-                $product->status_id = Product::STATUS_DRAFT;
+                $product->status_id = Offers::STATUS_DRAFT;
                 $product->stock_id = 1;
                 $product->stock_id = 1;
                 $product->feed = "монж";

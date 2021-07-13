@@ -7,7 +7,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Html;
 
-/* @var $model \app\modules\catalog\models\entity\Product
+/* @var $model \app\modules\catalog\models\entity\Offers
  * @var $categories ProductCategory[]
  * @var $vendors \app\modules\vendors\models\entity\Vendor[]
  * @var $stocks \app\modules\stock\models\entity\Stocks[]

@@ -5,7 +5,7 @@ use yii\helpers\Json;
 use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\cdn\widgets\CdnInput\CdnInputWidget;
 use app\modules\catalog\models\entity\PropertyGroup;

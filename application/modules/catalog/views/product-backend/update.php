@@ -8,7 +8,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 
 /* @var $this \yii\web\View
- * @var $model \app\modules\catalog\models\entity\Product
+ * @var $model \app\modules\catalog\models\entity\Offers
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $stocks \app\modules\stock\models\entity\Stocks[]

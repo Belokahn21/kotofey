@@ -1,6 +1,6 @@
 <?php
 
-/* @var $models \app\modules\catalog\models\entity\Product[]
+/* @var $models \app\modules\catalog\models\entity\Offers[]
  * @var $this \yii\web\View
  */
 

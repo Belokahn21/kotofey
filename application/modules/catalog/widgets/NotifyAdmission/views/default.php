@@ -4,7 +4,7 @@ use yii\helpers\Url;
 use app\modules\catalog\models\helpers\NotifyAdmissionHelper;
 
 /* @var $model \app\modules\catalog\models\entity\NotifyAdmission
- * @var $product \app\modules\catalog\models\entity\Product
+ * @var $product \app\modules\catalog\models\entity\Offers
  * @var $this \yii\web\View
  */
 

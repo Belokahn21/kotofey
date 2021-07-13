@@ -4,7 +4,7 @@ use app\modules\seo\models\tools\Title;
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\helpers\Url;
 
 /* @var $model \app\modules\stock\models\entity\Stocks */
@@ -46,7 +46,7 @@ use yii\helpers\Url;
         [
             'label' => 'Количетсво товаров',
             'value' => function ($model) {
-                return Product::find()->where(['stock_id' => $model->id])->count();
+                return Offers::find()->where(['stock_id' => $model->id])->count();
             },
         ],
         [

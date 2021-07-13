@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\widgets\CatalogSliders\ManyPurchase;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use app\modules\order\models\entity\OrdersItems;
 use yii\base\Widget;
@@ -25,9 +25,9 @@ class ManyPurchasedGoods extends Widget
         if (!$products_in_orders) return false;
 
         $models = \Yii::$app->cache->getOrSet('ManyPurchasedGoods-key' . $this->view, function () use ($products_in_orders, $limit) {
-            return Product::find()
+            return Offers::find()
                 ->select(['id', 'name', 'price', 'discount_price', 'image', 'media_id', 'article', 'slug', 'status_id', 'description', 'images'])
-                ->where(['status_id' => Product::STATUS_ACTIVE])
+                ->where(['status_id' => Offers::STATUS_ACTIVE])
                 ->andWhere(['id' => ArrayHelper::getColumn($products_in_orders, 'product_id')])
                 ->andWhere(['<>', 'description', ''])
                 ->orderBy(['created_at' => SORT_DESC])

@@ -3,7 +3,7 @@
 namespace app\modules\catalog\widgets\PreviewProperties;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use yii\base\Widget;
 
@@ -14,7 +14,7 @@ class PreviewPropertiesWidget extends Widget
 
     public function run()
     {
-        if (!$this->product instanceof Product) {
+        if (!$this->product instanceof Offers) {
             return false;
         }
 

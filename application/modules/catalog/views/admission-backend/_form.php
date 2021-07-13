@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 /* @var $model \app\modules\catalog\models\entity\NotifyAdmission
  * @var $form \yii\widgets\ActiveForm
@@ -24,8 +24,8 @@ use app\modules\catalog\models\entity\Product;
                 </div>
             </div>
             <div class="col-6">
-                <?php if ($product = Product::findOne($model->product_id)): ?>
-                    <h5><?= $product->name; ?>[<?= $product->status_id == Product::STATUS_ACTIVE ? '<span class="green">Активен</span>' : '<span class="red">Не активен</span>'; ?>]</h5>
+                <?php if ($product = Offers::findOne($model->product_id)): ?>
+                    <h5><?= $product->name; ?>[<?= $product->status_id == Offers::STATUS_ACTIVE ? '<span class="green">Активен</span>' : '<span class="red">Не активен</span>'; ?>]</h5>
                 <?php endif; ?>
             </div>
         </div>

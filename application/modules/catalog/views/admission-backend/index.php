@@ -5,7 +5,7 @@ use yii\helpers\Url;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use app\modules\seo\models\tools\Title;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\NotifyAdmission
@@ -38,7 +38,7 @@ $this->title = Title::show('Запросы на уведомление');
             'attribute' => 'product_id',
             'format' => 'raw',
             'value' => function ($model) {
-                $product = Product::find()->where(['id' => $model->product_id])->select(['name'])->one();
+                $product = Offers::find()->where(['id' => $model->product_id])->select(['name'])->one();
                 if ($product) {
                     return '(' . $model->product_id . ') ' . Html::a($product->name, Url::to(['product-backend/update', 'id' => $model->product_id]), ['target' => '_blank']);
                 } else {

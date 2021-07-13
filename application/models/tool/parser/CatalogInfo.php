@@ -3,9 +3,9 @@
 namespace app\models\tool\parser;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
-class CatalogInfo extends Product
+class CatalogInfo extends Offers
 {
     public static function tableName()
     {

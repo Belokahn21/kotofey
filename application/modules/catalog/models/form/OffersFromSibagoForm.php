@@ -3,12 +3,12 @@
 namespace app\modules\catalog\models\form;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\media\models\entity\Media;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 
-class ProductFromSibagoForm extends Product
+class OffersFromSibagoForm extends Offers
 {
     public $lazyImageUrl;
     public $methodSave;
@@ -44,12 +44,12 @@ class ProductFromSibagoForm extends Product
 
     public static function tableName()
     {
-        return Product::tableName();
+        return Offers::tableName();
     }
 
     public function beforeSave($insert)
     {
-        $product = Product::findOneByCode($this->code);
+        $product = Offers::findOneByCode($this->code);
         if (!empty($this->lazyImageUrl) && !empty($this->methodSave) && empty($product->media_id)) {
 
             $file = file_get_contents($this->lazyImageUrl);
@@ -82,7 +82,7 @@ class ProductFromSibagoForm extends Product
             if ($this->methodSave == Media::LOCATION_CDN) $media->json_cdn_data = Json::encode($cdnData);
 
 
-            if (!Product::findOneByCode($this->code)) {
+            if (!Offers::findOneByCode($this->code)) {
                 if (!$media->validate() or !$media->save()) {
                     Debug::p($media->getErrors());
                 }
@@ -95,6 +95,6 @@ class ProductFromSibagoForm extends Product
             $this->media_id = $media->id;
         }
 
-        return Product::beforeSave($insert);
+        return Offers::beforeSave($insert);
     }
 }

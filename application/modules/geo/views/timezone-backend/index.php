@@ -7,7 +7,7 @@ use yii\grid\GridView;
 use yii\helpers\Url;
 
 
-/* @var $model \app\modules\catalog\models\entity\Product */
+/* @var $model \app\modules\catalog\models\entity\Offers */
 
 $this->title = Title::show("Временные зоны"); ?>
     <section>

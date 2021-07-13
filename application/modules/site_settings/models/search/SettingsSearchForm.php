@@ -3,7 +3,7 @@
 namespace app\modules\site_settings\models\search;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\site_settings\models\entity\SiteSettings;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

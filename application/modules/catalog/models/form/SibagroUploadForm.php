@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\models\form;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\virtual\SibagroElement;
 use app\modules\vendors\models\entity\Vendor;
 use yii\base\Model;
@@ -81,9 +81,9 @@ class SibagroUploadForm extends Model
             $sibEl->vendorId = Vendor::VENDOR_ID_SIBAGRO;
             $sibEl->imagePath = 'http://www.sat-altai.ru' . $image->item(0)->attributes->getNamedItem('href')->value;
 
-            $sibEl->status = Product::STATUS_ACTIVE;
-            if ($statusAvail) $sibEl->status = Product::STATUS_ACTIVE;
-            if ($statusWait) $sibEl->status = Product::STATUS_WAIT;
+            $sibEl->status = Offers::STATUS_ACTIVE;
+            if ($statusAvail) $sibEl->status = Offers::STATUS_ACTIVE;
+            if ($statusWait) $sibEl->status = Offers::STATUS_WAIT;
 
             $items[] = $sibEl;
         }

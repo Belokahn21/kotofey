@@ -2,7 +2,7 @@
 
 namespace app\modules\compare\controllers;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -19,7 +19,7 @@ class CompareController extends Controller
 
 
         foreach ($ids as $id) {
-            $product = Product::find()->where(['id' => $id])->select(['id', 'name', 'price', 'media_id', 'slug'])->one();
+            $product = Offers::find()->where(['id' => $id])->select(['id', 'name', 'price', 'media_id', 'slug'])->one();
             if (!$product) continue;
 
             $models[$id] = [

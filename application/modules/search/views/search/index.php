@@ -11,7 +11,7 @@ use yii\helpers\ArrayHelper;
 use app\widgets\Breadcrumbs;
 use yii\widgets\LinkPager;
 
-/* @var $products \app\modules\catalog\models\entity\Product[]
+/* @var $products \app\modules\catalog\models\entity\Offers[]
  * @var $model \app\modules\search\models\entity\Search
  */
 

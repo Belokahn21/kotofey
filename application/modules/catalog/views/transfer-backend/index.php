@@ -7,12 +7,12 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
 use app\modules\order\models\entity\Order;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\ProductTransferHistory
  * @var $orders \app\modules\order\models\entity\Order[]
- * @var $products Product[]
+ * @var $products Offers[]
  * @var $dataProvider \yii\data\ActiveDataProvider
  * @var $searchModel \app\modules\catalog\models\search\ProductTransferHistorySearch
  */
@@ -56,7 +56,7 @@ $this->title = Title::show('Поступления товаров');
             'filter' => ArrayHelper::map($products, 'id', 'name'),
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::a(Product::findOne($model->product_id)->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $model->product_id]));
+                return Html::a(Offers::findOne($model->product_id)->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $model->product_id]));
             }
         ],
         [

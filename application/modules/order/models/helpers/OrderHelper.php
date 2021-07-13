@@ -5,7 +5,7 @@ namespace app\modules\order\models\helpers;
 use app\modules\catalog\models\entity\ProductTransferHistory;
 use app\modules\catalog\models\helpers\ProductTransferHistoryHelper;
 use app\modules\delivery\models\entity\Delivery;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
@@ -191,11 +191,11 @@ class OrderHelper
 
             if (!$item->product or ProductTransferHistoryHelper::isStockApplyTransfer($model, $item->product)) continue;
 
-            $product = Product::findOne($item->product->id);
+            $product = Offers::findOne($item->product->id);
 
             if (!$product) continue;
 
-            $product->scenario = Product::SCENARIO_STOCK_COUNT;
+            $product->scenario = Offers::SCENARIO_STOCK_COUNT;
 
             if ($product->count > 0 && $product->count - $item->count >= 0) $product->count -= $item->count;
 

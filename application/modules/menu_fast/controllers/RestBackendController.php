@@ -2,7 +2,7 @@
 
 namespace app\modules\menu_fast\controllers;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\order\models\entity\Order;
 use yii\filters\Cors;
 use yii\helpers\Json;
@@ -49,7 +49,7 @@ class RestBackendController extends Controller
             [
                 'icon' => 'fa-cubes',
                 'href' => Url::to(['/admin/catalog/product-backend/index']),
-                'isNewData' => (Product::find()->where([
+                'isNewData' => (Offers::find()->where([
                         'and',
                         ['>', 'created_at', $start->getTimestamp()],
                         ['<', 'created_at', $end->getTimestamp()],

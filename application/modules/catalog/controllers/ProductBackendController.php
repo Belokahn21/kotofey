@@ -3,13 +3,13 @@
 namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Composition;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use Yii;
-use app\modules\catalog\models\search\ProductSearchForm;
+use app\modules\catalog\models\search\OffersSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\catalog\models\entity\ProductMarket;
 use app\modules\catalog\models\entity\ProductOrder;
@@ -22,7 +22,7 @@ use yii\helpers\Url;
 class ProductBackendController extends MainBackendController
 {
     public $layout = '@app/views/layouts/admin';
-    public $modelClass = 'app\modules\catalog\models\entity\Product';
+    public $modelClass = 'app\modules\catalog\models\entity\Offers';
 
     public function behaviors()
     {
@@ -44,7 +44,7 @@ class ProductBackendController extends MainBackendController
         $properties = $this->getProperties();
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
-        $searchModel = new ProductSearchForm();
+        $searchModel = new OffersSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         $outProps = [];

@@ -6,7 +6,7 @@ use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Price;
 use yii\helpers\Url;
 
-/* @var $products \app\modules\catalog\models\entity\Product[] */
+/* @var $products \app\modules\catalog\models\entity\Offers[] */
 ?>
 
 <?php if (!$products) return false; ?>

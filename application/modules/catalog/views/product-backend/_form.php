@@ -8,7 +8,7 @@ use mihaildev\ckeditor\CKEditor;
 use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
@@ -22,7 +22,7 @@ use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
-/* @var $model \app\modules\catalog\models\entity\Product
+/* @var $model \app\modules\catalog\models\entity\Offers
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $form \yii\widgets\ActiveForm
@@ -313,7 +313,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                                     $variants = [];
 
                                     if ($property->type == TypeProductProperties::TYPE_CATALOG) {
-                                        $variants = ArrayHelper::map(Product::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
+                                        $variants = ArrayHelper::map(Offers::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
                                         array_walk($variants, function (&$value, $key) {
                                             $value = $key . ' - ' . $value;
                                         });

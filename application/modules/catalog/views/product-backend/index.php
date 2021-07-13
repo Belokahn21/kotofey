@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -15,7 +15,7 @@ use app\modules\catalog\widgets\StockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
- * @var $model \app\modules\catalog\models\entity\Product
+ * @var $model \app\modules\catalog\models\entity\Offers
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $stocks \app\modules\stock\models\entity\Stocks[]
@@ -69,9 +69,9 @@ $this->title = Title::show('Товары');
             'filter' => ['Черновик', 'Активен'],
             'format' => 'raw',
             'value' => function ($model) {
-                if ($model->status_id == Product::STATUS_ACTIVE) {
+                if ($model->status_id == Offers::STATUS_ACTIVE) {
                     return Html::tag('div', 'Активен', ['style' => 'color: green;']);
-                } elseif ($model->status_id == Product::STATUS_WAIT) {
+                } elseif ($model->status_id == Offers::STATUS_WAIT) {
                     return Html::tag('div', 'Ожидается', ['style' => 'color: orange;']);
                 } else {
                     return Html::tag('div', 'Черновик', ['style' => 'color: red;']);

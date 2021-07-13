@@ -4,7 +4,7 @@ use app\modules\site\models\tools\System;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\vendors\models\entity\Vendor;
 
-/* @var $offers \app\modules\catalog\models\entity\Product[]
+/* @var $offers \app\modules\catalog\models\entity\Offers[]
  * @var $categories \app\modules\catalog\models\entity\ProductCategory[]
  * @var $module \app\modules\export\Module
  */

@@ -4,7 +4,7 @@ namespace app\modules\order\models\entity;
 
 use app\modules\basket\models\entity\Basket;
 use app\modules\delivery\models\entity\Delivery;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\site\models\tools\Debug;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
@@ -25,7 +25,7 @@ use yii\db\ActiveRecord;
  * @property integer $created_at
  * @property integer $updated_at
  *
- * @property Product $product
+ * @property Offers $product
  */
 class OrdersItems extends ActiveRecord
 {
@@ -88,7 +88,7 @@ class OrdersItems extends ActiveRecord
 
     public function getProduct()
     {
-        return Product::findOne($this->product_id);
+        return Offers::findOne($this->product_id);
     }
 
     public function attributeLabels()

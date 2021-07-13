@@ -5,7 +5,7 @@ namespace app\modules\bonus\models\helper;
 
 use app\modules\bonus\models\entity\UserBonus;
 use app\modules\bonus\models\entity\UserBonusHistory;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Debug;
@@ -70,7 +70,7 @@ class BonusHelper
         return $obj->validate() && $obj->save();
     }
 
-    public static function calcProductBonus(Product $model)
+    public static function calcProductBonus(Offers $model)
     {
         return round(($model->getPrice() * UserBonus::PERCENT_AFTER_SALE) / 100);
     }

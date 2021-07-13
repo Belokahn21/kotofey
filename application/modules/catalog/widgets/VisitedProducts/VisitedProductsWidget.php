@@ -3,7 +3,7 @@
 namespace app\modules\catalog\widgets\VisitedProducts;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
@@ -22,7 +22,7 @@ class VisitedProductsWidget extends Widget
         $params = [];
         foreach ($visitedIDs as $i => $recipeId) $params[':id_' . $i] = $recipeId;
 
-        $products = Product::find()
+        $products = Offers::find()
             ->where(['in', 'id', $visitedIDs])
             ->orderBy([new \yii\db\Expression('FIELD (id, ' . implode(',', array_reverse(array_keys($params))) . ')')])
             ->addParams($params)

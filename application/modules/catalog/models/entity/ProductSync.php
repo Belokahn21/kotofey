@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\models\entity;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -15,7 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $created_at
  * @property int $updated_at
  *
- * @property Product $product
+ * @property Offers $product
  */
 class ProductSync extends \yii\db\ActiveRecord
 {
@@ -35,7 +35,7 @@ class ProductSync extends \yii\db\ActiveRecord
         return [
             [['product_id'], 'required'],
             [['product_id', 'last_run_at', 'created_at', 'updated_at'], 'integer'],
-            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['product_id' => 'id']],
+            [['product_id'], 'exist', 'skipOnError' => true, 'targetClass' => Offers::className(), 'targetAttribute' => ['product_id' => 'id']],
         ];
     }
 
@@ -59,7 +59,7 @@ class ProductSync extends \yii\db\ActiveRecord
 
     public function getProduct()
     {
-        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+        return $this->hasOne(Offers::className(), ['id' => 'product_id']);
     }
 
     public function push($product_id)

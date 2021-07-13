@@ -3,11 +3,11 @@
 use app\modules\site\models\tools\System;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 
 /* @var $offersBatch
- * @var $offers \app\modules\catalog\models\entity\Product[]
+ * @var $offers \app\modules\catalog\models\entity\Offers[]
  * @var $categories \app\modules\catalog\models\entity\ProductCategory[]
  * @var $module \app\modules\export\Module
  */
@@ -48,7 +48,7 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
                     ?>
 
 
-                    <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
+                    <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Offers::STATUS_ACTIVE ? 'true' : 'false'); ?>">
 
                         <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
 

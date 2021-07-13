@@ -9,7 +9,7 @@ use app\models\tool\import\SiriusParfum;
 use app\models\tool\import\Tavela;
 use app\models\tool\import\Valta;
 use app\models\tool\import\Purina;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\site_settings\models\helpers\MarkupHelpers;
 use yii\console\Controller;
 
@@ -76,7 +76,7 @@ class PriceController extends Controller
 
     public function actionFast($phrase, $markup)
     {
-        $models = Product::find();
+        $models = Offers::find();
 
         foreach (explode(' ', $phrase) as $text_line) {
             $models->andFilterWhere([
@@ -89,7 +89,7 @@ class PriceController extends Controller
         $models = $models->all();
 
         foreach ($models as $model) {
-            $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $model->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
             MarkupHelpers::applyMarkup($model, $markup);
 
             if ($model->validate() && $model->update()) {

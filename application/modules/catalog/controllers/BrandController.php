@@ -3,7 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use yii\data\Pagination;
 use yii\web\Controller;
@@ -36,7 +36,7 @@ class BrandController extends Controller
 
         if ($model->view) $view = $model->view;
 
-        $query = Product::find()->orderBy(['created_at' => SORT_DESC])->joinWith('propsValues pv')->where(['pv.property_id' => 1, 'pv.value' => $model->id]);
+        $query = Offers::find()->orderBy(['created_at' => SORT_DESC])->joinWith('propsValues pv')->where(['pv.property_id' => 1, 'pv.value' => $model->id]);
         $countQuery = clone $query;
         $pagerItems = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 12]);
         $pagerItems->pageSizeParam = false;

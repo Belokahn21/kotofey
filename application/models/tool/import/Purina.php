@@ -3,7 +3,7 @@
 namespace app\models\tool\import;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\site\models\tools\Debug;
 
 class Purina extends Importer
@@ -36,8 +36,8 @@ class Purina extends Importer
 
                 $product->purchase = $price;
                 $product->price = $this->getNewPrice($price, $mark);
-                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
-                $product->status_id = Product::STATUS_ACTIVE;
+                $product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
+                $product->status_id = Offers::STATUS_ACTIVE;
 
 
                 if ($product->validate() && $product->update()) {
@@ -53,10 +53,10 @@ class Purina extends Importer
 
     public function getActualProduct($line)
     {
-        if ($p1 = Product::findOneByCode($line[0])) {
+        if ($p1 = Offers::findOneByCode($line[0])) {
             return $p1;
         }
-        if ($p2 = Product::findOneByCode($line[1])) {
+        if ($p2 = Offers::findOneByCode($line[1])) {
             return $p2;
         }
 

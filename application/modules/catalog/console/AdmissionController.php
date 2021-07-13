@@ -3,7 +3,7 @@
 namespace app\modules\catalog\console;
 
 use app\modules\catalog\models\entity\NotifyAdmission;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\mailer\models\services\MailService;
 use yii\console\Controller;
@@ -17,8 +17,8 @@ class AdmissionController extends Controller
         if (empty($module->admission_event_id)) return false;
 
         foreach ($members as $member) {
-            if (!$product = Product::findOne($member->product_id)) continue;
-            if ($product->status_id == Product::STATUS_ACTIVE) continue;
+            if (!$product = Offers::findOne($member->product_id)) continue;
+            if ($product->status_id == Offers::STATUS_ACTIVE) continue;
 
             $mailer = new MailService();
             $mailer->sendEvent($module->admission_event_id, [

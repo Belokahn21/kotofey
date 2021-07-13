@@ -7,7 +7,7 @@ use yii\widgets\ActiveForm;
 use app\modules\seo\models\tools\Title;
 
 /* @var $this \yii\web\View
- * @var $model \app\modules\catalog\models\entity\Product
+ * @var $model \app\modules\catalog\models\entity\Offers
  * @var $type \app\modules\catalog\models\entity\CompositionType[]
  */
 

@@ -4,7 +4,7 @@ namespace app\modules\catalog\models\helpers;
 
 
 use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\web\HttpException;
 
 class PropertiesHelper
@@ -12,7 +12,7 @@ class PropertiesHelper
     public static function getProductWeight($product_id)
     {
         $cache = \Yii::$app->cache;
-        $product = Product::findOne($product_id);
+        $product = Offers::findOne($product_id);
 
         if (!$product) {
             throw new HttpException(404, 'Элемент не найден');
@@ -54,18 +54,18 @@ class PropertiesHelper
 //    }
 
     /**
-     * @param Product $model
+     * @param Offers $model
      * @param $property_id
      * @return false|PropertiesProductValues
      */
-    public static function extractPropertyById(Product $model, $property_id)
+    public static function extractPropertyById(Offers $model, $property_id)
     {
         foreach ($model->propsValues as $value) if ($value->property_id === $property_id) return $value;
 
         return false;
     }
 
-    public static function extractAllPropertyById(Product $model, $property_id)
+    public static function extractAllPropertyById(Offers $model, $property_id)
     {
         $values = [];
 

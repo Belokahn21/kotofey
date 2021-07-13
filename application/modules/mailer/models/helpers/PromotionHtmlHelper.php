@@ -2,13 +2,13 @@
 
 namespace app\modules\mailer\models\helpers;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\models\tools\Currency;
 
 class PromotionHtmlHelper
 {
-    public static function renderProduct(Product $model)
+    public static function renderProduct(Offers $model)
     {
         $detail = ProductHelper::getDetailUrl($model);
         $cur_icon = Currency::getInstance()->show();

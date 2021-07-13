@@ -4,7 +4,7 @@ namespace app\modules\search\models\entity;
 
 
 use app\modules\search\models\entity\SearchQuery;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\search\models\services\SearchHistory\SearchHistory;
 use app\modules\search\models\services\SearchHistory\SearchHistoryStorage;
 use yii\base\Model;
@@ -36,7 +36,7 @@ class Search extends Model
 
     public function search()
     {
-        $products = Product::find();
+        $products = Offers::find();
         $products = $this->setFilter($products);
 
         return $products;

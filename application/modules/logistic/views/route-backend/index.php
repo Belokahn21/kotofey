@@ -6,7 +6,7 @@ use yii\helpers\Html;
 use app\modules\seo\models\tools\Title;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\order\models\helpers\OrderHelper;
 
 /* @var $models \app\modules\order\models\entity\Order[]
@@ -102,7 +102,7 @@ $this->title = Title::show("Список доставок");
                             <div class="card card-body">
                                 <ul class="list-group list-group-flush">
                                     <?php foreach ($order->items as $item): ?>
-                                        <?php if ($item->product instanceof Product): ?>
+                                        <?php if ($item->product instanceof Offers): ?>
                                             <li class="list-group-item">
                                                 <?= $item->count; ?>шт. x <?= Price::format($item->price); ?>(<?= Price::format($item->purchase); ?>) <?= Currency::getInstance()->show(); ?>
                                                 <a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>">

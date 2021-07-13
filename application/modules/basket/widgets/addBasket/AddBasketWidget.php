@@ -3,7 +3,7 @@
 namespace app\modules\basket\widgets\addBasket;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\base\Widget;
 use app\modules\basket\models\entity\Basket;
 
@@ -27,11 +27,11 @@ class AddBasketWidget extends Widget
 
     public function run()
     {
-        if (!$this->product instanceof Product) return false;
+        if (!$this->product instanceof Offers) return false;
 
-        if ($this->product->status_id == Product::STATUS_WAIT) return $this->render('wait', ['product' => $this->product, 'showOrderButton' => $this->showOrderButton]);
+        if ($this->product->status_id == Offers::STATUS_WAIT) return $this->render('wait', ['product' => $this->product, 'showOrderButton' => $this->showOrderButton]);
 
-        if ($this->product->status_id == Product::STATUS_DRAFT) return $this->render('draft');
+        if ($this->product->status_id == Offers::STATUS_DRAFT) return $this->render('draft');
 
         $basket = Basket::findOne($this->product->id);
 

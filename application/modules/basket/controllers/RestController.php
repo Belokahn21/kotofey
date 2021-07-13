@@ -3,7 +3,7 @@
 namespace app\modules\basket\controllers;
 
 use app\modules\basket\models\entity\Basket;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\site\models\tools\Debug;
@@ -45,7 +45,7 @@ class RestController extends ActiveController
         $product_id = $data['product_id'];
         $count = $data['count'];
 
-        $product = Product::find()->where(['id' => $product_id, 'status_id' => Product::STATUS_ACTIVE])->one();
+        $product = Offers::find()->where(['id' => $product_id, 'status_id' => Offers::STATUS_ACTIVE])->one();
         if (!$product) throw new HttpException(404, 'Товар не найден');
 
 

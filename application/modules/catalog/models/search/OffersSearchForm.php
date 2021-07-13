@@ -3,18 +3,18 @@
 namespace app\modules\catalog\models\search;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
 
-class ProductSearchForm extends Product
+class OffersSearchForm extends Offers
 {
     public $mixed_value;
 
     public static function tableName()
     {
-        return Product::tableName();
+        return Offers::tableName();
     }
 
     public function rules()
@@ -32,7 +32,7 @@ class ProductSearchForm extends Product
 
     public function search($params)
     {
-        $query = Product::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = Offers::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

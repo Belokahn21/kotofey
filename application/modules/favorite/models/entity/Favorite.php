@@ -3,7 +3,7 @@
 namespace app\modules\favorite\models\entity;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 
 class Favorite
 {
@@ -50,7 +50,7 @@ class Favorite
 		$items = array();
 		if (\Yii::$app->session->get(self::NAME_KEY_SESSION_FAVORITE)) {
 			foreach (\Yii::$app->session->get(self::NAME_KEY_SESSION_FAVORITE) as $product_id) {
-				$items[] = Product::findOne($product_id);
+				$items[] = Offers::findOne($product_id);
 			}
 		}
 		return $items;

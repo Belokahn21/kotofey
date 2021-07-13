@@ -6,7 +6,7 @@ namespace app\models\tool\parser\providers;
 use app\modules\site\models\tools\Debug;
 use app\models\tool\parser\CatalogInfo;
 use app\models\tool\parser\page\Page;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\site_settings\models\entity\SiteSettings;
 
 class SibagroTrade implements ProviderInterface
@@ -45,15 +45,15 @@ class SibagroTrade implements ProviderInterface
         }
 
 
-        $available = Product::STATUS_DRAFT;
+        $available = Offers::STATUS_DRAFT;
         $availableElement = $dom->getElementsByTagName('strong')->item(5)->nodeValue;
 
         if (strpos($availableElement, 'В наличии') !== false) {
-            $available = Product::STATUS_ACTIVE;
+            $available = Offers::STATUS_ACTIVE;
         } elseif (strpos($availableElement, 'Ожидается') !== false) {
-            $available = Product::STATUS_WAIT;
+            $available = Offers::STATUS_WAIT;
         } elseif (empty($availableElement)) {
-            $available = Product::STATUS_DRAFT;
+            $available = Offers::STATUS_DRAFT;
         }
 
         $product = new CatalogInfo();

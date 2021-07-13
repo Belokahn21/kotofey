@@ -3,7 +3,7 @@
 
 namespace app\modules\catalog\widgets\CatalogSliders\LastWeekProducts;
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use app\modules\site\models\tools\Debug;
 use yii\bootstrap\Widget;
@@ -21,7 +21,7 @@ class LastWeekProducts extends Widget
 
 
         $models = \Yii::$app->cache->getOrSet('last-week-products', function () use ($limit) {
-            return Product::find()->select(['id', 'name', 'price', 'media_id', 'media_id', 'image', 'slug', 'article', 'status_id'])->where(['between', 'created_at', time() - 604800, time()])->limit($limit)->all();
+            return Offers::find()->select(['id', 'name', 'price', 'media_id', 'media_id', 'image', 'slug', 'article', 'status_id'])->where(['between', 'created_at', time() - 604800, time()])->limit($limit)->all();
         }, $this->cacheTime, new DbDependency([
             'sql' => 'select count(*) from `product` where created_at BETWEEN ' . (time() - 604800) . ' AND ' . time() . ' limit ' . $limit . ';'
         ]));

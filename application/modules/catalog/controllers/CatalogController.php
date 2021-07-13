@@ -7,7 +7,7 @@ use app\modules\catalog\models\form\CatalogFilter;
 use app\modules\seo\models\tools\Attributes;
 use app\modules\site\models\tools\System;
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\short_link\models\entity\ShortLinks;
 use yii\data\Pagination;
 use yii\helpers\ArrayHelper;
@@ -35,14 +35,14 @@ class CatalogController extends Controller
 
 
         if ($id) {
-            $query = Product::find()->orderBy(['created_at' => SORT_DESC]);
+            $query = Offers::find()->orderBy(['created_at' => SORT_DESC]);
 
             if ($subSectionsArray) $query->where(['category_id' => ArrayHelper::getColumn($subSectionsArray, 'id')]);
 
-        } else  $query = Product::find()->orderBy(['created_at' => SORT_DESC]);
+        } else  $query = Offers::find()->orderBy(['created_at' => SORT_DESC]);
 
 
-        $query->andWhere(['<>', 'status_id', Product::STATUS_DRAFT]);
+        $query->andWhere(['<>', 'status_id', Offers::STATUS_DRAFT]);
         if ($sortValue = Yii::$app->request->get('sort', 'asc')) $query->orderBy(['price' => $sortValue == 'desc' ? SORT_DESC : SORT_ASC]);
 
         $duplicateQueryProducts = clone $query;

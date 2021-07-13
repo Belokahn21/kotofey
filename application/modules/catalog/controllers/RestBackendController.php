@@ -7,8 +7,8 @@ use yii\rest\ActiveController;
 
 class RestBackendController extends ActiveController
 {
-    public $modelClass = 'app\modules\catalog\models\entity\Product';
-    public $searchModelClass = 'app\modules\catalog\models\search\ProductSearchForm';
+    public $modelClass = 'app\modules\catalog\models\entity\Offers';
+    public $searchModelClass = 'app\modules\catalog\models\search\OffersSearchForm';
 
     public function behaviors()
     {

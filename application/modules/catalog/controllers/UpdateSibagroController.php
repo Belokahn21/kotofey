@@ -3,8 +3,8 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\form\ProductFromSibagoForm;
+use app\modules\catalog\models\entity\Offers;
+use app\modules\catalog\models\form\OffersFromSibagoForm;
 use app\modules\catalog\models\form\SibagroUploadForm;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site_settings\models\helpers\MarkupHelpers;
@@ -43,8 +43,8 @@ class UpdateSibagroController extends MainBackendController
                 foreach ($data as $datum) {
                     if ($datum['skip'] == 1) continue;
 
-                    $obj = new ProductFromSibagoForm();
-                    $obj->scenario = ProductFromSibagoForm::SCENATIO_SIBAGRO_SAVE;
+                    $obj = new OffersFromSibagoForm();
+                    $obj->scenario = OffersFromSibagoForm::SCENATIO_SIBAGRO_SAVE;
                     $obj->setAttributes($datum);
 
 
@@ -52,7 +52,7 @@ class UpdateSibagroController extends MainBackendController
                     if ($category_id) $obj->category_id = $category_id;
 
 
-                    if (Product::findOneByCode($datum['code'])) {
+                    if (Offers::findOneByCode($datum['code'])) {
                         if (!$obj->validate() || !$obj->update()) {
                             Debug::p($obj->getErrors());
                         }
@@ -69,7 +69,7 @@ class UpdateSibagroController extends MainBackendController
             }
 
             for ($i = 0; $i < sizeof($items); $i++) {
-                $productModelList[] = new \app\modules\catalog\models\form\ProductFromSibagoForm();
+                $productModelList[] = new \app\modules\catalog\models\form\OffersFromSibagoForm();
             }
         }
 

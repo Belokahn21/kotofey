@@ -4,7 +4,7 @@
 namespace app\modules\catalog\models\form;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\site_settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
 use yii\base\Model;
@@ -33,7 +33,7 @@ class PriceRepairForm extends Model
 
     public function run()
     {
-        $models = Product::find();
+        $models = Offers::find();
 
         foreach (explode(' ', $this->name) as $text_line) {
             $models->andFilterWhere([
@@ -46,7 +46,7 @@ class PriceRepairForm extends Model
         $models = $models->all();
 
         foreach ($models as $model) {
-            $model->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+            $model->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
             MarkupHelpers::applyMarkup($model, $this->amount);
 
             if (!$model->validate() || !$model->update()) {

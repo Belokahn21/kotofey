@@ -3,7 +3,7 @@
 namespace app\modules\catalog\models\helpers;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
@@ -46,7 +46,7 @@ class ProductPropertiesValuesHelper
                 $value = PropertiesVariants::findOne(['property_id' => $variant->property_id, 'id' => $variant->value])->name;
                 break;
             case TypeProductProperties::TYPE_CATALOG:
-                $value = Product::findOne($variant->value)->name;
+                $value = Offers::findOne($variant->value)->name;
                 break;
         }
 

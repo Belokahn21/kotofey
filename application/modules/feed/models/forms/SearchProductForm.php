@@ -3,7 +3,7 @@
 namespace app\modules\feed\models\forms;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\base\Model;
 
 class SearchProductForm extends Model
@@ -32,7 +32,7 @@ class SearchProductForm extends Model
      */
     public function search()
     {
-        $products = Product::find();
+        $products = Offers::find();
 
         foreach (explode(' ', $this->name) as $text_line) {
             $products->andFilterWhere(['or',

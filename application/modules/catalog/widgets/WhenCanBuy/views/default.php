@@ -1,8 +1,8 @@
 <?php
-/* @var $product \app\modules\catalog\models\entity\Product */
+/* @var $product \app\modules\catalog\models\entity\Offers */
 
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\site_settings\models\entity\SiteSettings;
 
 ?>
@@ -10,7 +10,7 @@ use app\modules\site_settings\models\entity\SiteSettings;
     <?php if ($product->count > 0): ?>
         <div class="green"><strong>В налиии <?= $product->count; ?> шт.</strong></div>
         <div class="green"><strong>Доставим сегодня после 19.00</strong></div>
-    <?php elseif ($product->status_id == Product::STATUS_WAIT or $product->status_id == Product::STATUS_DRAFT): ?>
+    <?php elseif ($product->status_id == Offers::STATUS_WAIT or $product->status_id == Offers::STATUS_DRAFT): ?>
     <?php else:
         $nDay = date('w');
 

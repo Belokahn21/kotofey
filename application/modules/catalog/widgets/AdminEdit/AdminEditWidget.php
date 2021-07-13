@@ -5,7 +5,7 @@ namespace app\modules\catalog\widgets\AdminEdit;
 
 use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\entity\User;
 use app\modules\vendors\models\entity\Vendor;
@@ -22,7 +22,7 @@ class AdminEditWidget extends Widget
         if (!$slug = $this->getProductSlug()) return false;
 
 
-        $model = Product::findOneBySlug($slug);
+        $model = Offers::findOneBySlug($slug);
 
         if (!$model) {
             return false;

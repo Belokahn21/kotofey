@@ -4,7 +4,7 @@ use yii\helpers\StringHelper;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 
-/* @var $models \app\modules\catalog\models\entity\Product[]
+/* @var $models \app\modules\catalog\models\entity\Offers[]
  * @var $this \yii\web\View
  * @var $title string
  * @var $subTitle string

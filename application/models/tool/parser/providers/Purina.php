@@ -3,7 +3,7 @@
 namespace app\models\tool\parser\providers;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\models\tool\parser\CatalogInfo;
 
 class Purina implements ProviderInterface
@@ -49,7 +49,7 @@ class Purina implements ProviderInterface
             $product->count = 0;
             $product->description = $desciption;
             $product->vitrine = 1;
-            $product->status_id = Product::STATUS_ACTIVE;
+            $product->status_id = Offers::STATUS_ACTIVE;
 //            $product->barcode = $code;
             $product->vendor_id = 1;
 //            $product->weight = $weight;

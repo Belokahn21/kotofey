@@ -3,7 +3,7 @@
 /* @var $count_orders integer */
 
 use app\modules\catalog\widgets\AdminEdit\AdminEditWidget;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\user\models\entity\User;
 use yii\helpers\Url;
 
@@ -13,7 +13,7 @@ use yii\helpers\Url;
         <li class="admin-panel-list__item link"><a href="/">Сайт</a></li>
         <li class="admin-panel-list__item link"><a href="/admin/">Панель управления</a></li>
         <li class="admin-panel-list__item link"><a href="<?= Url::to(['/admin/order/order-backend/index']); ?>">Заказы <span class="actual-count"><?= $count_orders; ?></span></a></li>
-        <li class="admin-panel-list__item link"><a href="<?= Url::to(['/admin/catalog/product-backend/index']); ?>">Товары <span class="actual-count"><?= Product::find()->count(); ?></span></a></li>
+        <li class="admin-panel-list__item link"><a href="<?= Url::to(['/admin/catalog/product-backend/index']); ?>">Товары <span class="actual-count"><?= Offers::find()->count(); ?></span></a></li>
         <li class="admin-panel-list__item link"><a href="<?= Url::to(['/admin/user/user-backend/index']); ?>">Пользователи <span class="actual-count"><?= User::find()->count(); ?></span></a></li>
         <li class="admin-panel-list__item"><a href="#"><span>TS: <span class="admin-panel-list__item-ts"><?= time(); ?></span></span></a></li>
         <li class="admin-panel-list__item"><a href="#">Сегодня: <?= date('d.m.Y H:i:s'); ?></a></li>

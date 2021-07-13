@@ -2,7 +2,7 @@
 
 use app\modules\catalog\widgets\NotifyAdmission\NotifyAdmissionWidget;
 
-/* @var $product \app\modules\catalog\models\entity\Product
+/* @var $product \app\modules\catalog\models\entity\Offers
  * @var $showOrderButton boolean
  */
 ?>

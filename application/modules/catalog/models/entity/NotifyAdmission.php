@@ -16,7 +16,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $created_at
  * @property int|null $updated_at
  *
- * @property Product $product
+ * @property Offers $product
  */
 class NotifyAdmission extends \yii\db\ActiveRecord
 {
@@ -71,6 +71,6 @@ class NotifyAdmission extends \yii\db\ActiveRecord
 
     public function getProduct()
     {
-        return $this->hasOne(Product::className(), ['id' => 'product_id']);
+        return $this->hasOne(Offers::className(), ['id' => 'product_id']);
     }
 }

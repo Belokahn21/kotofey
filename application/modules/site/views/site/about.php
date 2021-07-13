@@ -3,7 +3,7 @@
 use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\Title;
 use app\modules\order\models\entity\Order;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\content\widgets\slider\SliderWidget;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\content\widgets\informers_slider\InformerSliderWidget;
@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = ['label' => 'О зоомагазине'];
             <div class="about-statistic__sub-title">работаем с 01.01.2020</div>
         </div>
         <div class="about-statistic__item">
-            <div class="about-statistic__title">более <?= Product::find()->count(); ?> товаров</div>
+            <div class="about-statistic__title">более <?= Offers::find()->count(); ?> товаров</div>
             <div class="about-statistic__sub-title">
                 Сухие, влажные корма, акссуары для собак
             </div>

@@ -3,7 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\form\PriceUpdateForm;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\controllers\MainBackendController;
@@ -47,8 +47,8 @@ class PriceBackendController extends MainBackendController
                         }
 
 
-                        if ($product = Product::find()->where([$model->related_key_filter ?: 'code' => $code, 'vendor_id' => $model->vendor_id])->one()) {
-                            $product->scenario = Product::SCENARIO_STOCK_COUNT;
+                        if ($product = Offers::find()->where([$model->related_key_filter ?: 'code' => $code, 'vendor_id' => $model->vendor_id])->one()) {
+                            $product->scenario = Offers::SCENARIO_STOCK_COUNT;
 
                             $old_markup = ProductHelper::getMarkup($product, intval($model->default_markup));
 

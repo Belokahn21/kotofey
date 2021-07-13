@@ -8,9 +8,9 @@ use app\modules\catalog\models\helpers\PriceHelper;
 
 /* @var \app\modules\vendors\models\entity\Vendor[] $vendors */
 /* @var $model \app\modules\catalog\models\form\PriceUpdateForm */
-/* @var $complete_ids \app\modules\catalog\models\entity\Product[] */
+/* @var $complete_ids \app\modules\catalog\models\entity\Offers[] */
 /* @var $empty_ids array */
-/* @var $error_elements \app\modules\catalog\models\entity\Product[] */
+/* @var $error_elements \app\modules\catalog\models\entity\Offers[] */
 
 $this->title = \app\modules\seo\models\tools\Title::show('Обновить прайс лист');
 ?>

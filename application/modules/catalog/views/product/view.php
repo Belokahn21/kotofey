@@ -21,7 +21,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
- * @var \app\modules\catalog\models\entity\Product $product
+ * @var \app\modules\catalog\models\entity\Offers $product
  * @var \app\modules\catalog\models\entity\ProductCategory $category
  * @var $compositionGroup array
  */

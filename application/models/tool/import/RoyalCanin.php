@@ -3,7 +3,7 @@
 namespace app\models\tool\import;
 
 
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
@@ -60,7 +60,7 @@ class RoyalCanin extends Importer
                     continue;
                 }
 
-                $product = Product::find()->where(['code' => $article])->one();
+                $product = Offers::find()->where(['code' => $article])->one();
                 $vendor = Vendor::findOne($this->vendor_id);
 
                 if (!$vendor) {
@@ -72,7 +72,7 @@ class RoyalCanin extends Importer
                     continue;
                 }
 
-                $product->scenario = Product::SCENARIO_UPDATE_PRODUCT;
+                $product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
                 $product->base_price = intval($purchase);
                 $oldMarkup = $this->getOldPercent($product->price,$product->purchase);
                 $product->purchase = $product->base_price - ceil($product->base_price * ($vendor->discount / 100));

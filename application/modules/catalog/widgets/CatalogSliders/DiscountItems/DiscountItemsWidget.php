@@ -5,7 +5,7 @@ namespace app\modules\catalog\widgets\CatalogSliders\DiscountItems;
 
 use app\modules\catalog\widgets\CatalogSliders\RenderSlider\RenderSliderWidget;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
-use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\Offers;
 use yii\base\Widget;
 use yii\helpers\ArrayHelper;
 
@@ -20,7 +20,7 @@ class DiscountItemsWidget extends Widget
         $limit = $this->limit;
 
         $models = \Yii::$app->cache->getOrSet('discountProducts', function () use ($limit) {
-            return Product::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article', 'status_id'])
+            return Offers::find()->select(['id', 'name', 'price', 'media_id', 'image', 'discount_price', 'slug', 'article', 'status_id'])
                 ->andWhere(['in', 'id', ArrayHelper::getColumn(PromotionProductMechanics::find()->joinWith('promotion')->andWhere([
                     'or',
                     'promotion.start_at = :default and promotion.end_at = :default',
