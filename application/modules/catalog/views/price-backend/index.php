@@ -45,6 +45,15 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-3">
+                <?= $form->field($model, 'type_price')->dropDownList($model->getTypePrice()); ?>
+            </div>
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+            <div class="col-3"></div>
+        </div>
     </div>
 </div>
 

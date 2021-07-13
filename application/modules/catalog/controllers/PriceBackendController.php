@@ -38,11 +38,11 @@ class PriceBackendController extends MainBackendController
 
                         if (empty($code) || mb_strlen($code) == 0) continue;
 
-                        if ($vendor->type_price == Vendor::TYPE_PRICE_BASE) {
+                        if ($model->type_price == PriceUpdateForm::TYPE_PRICE_BASE) {
                             $base_price = Price::normalize($bad_price);
                         }
 
-                        if ($vendor->type_price == Vendor::TYPE_PRICE_PURCHASE) {
+                        if ($model->type_price == PriceUpdateForm::TYPE_PRICE_PURCHASE) {
                             $purchase_price = Price::normalize($bad_price);
                         }
 
