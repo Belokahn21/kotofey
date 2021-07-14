@@ -86,7 +86,7 @@ $this->title = ProductTitle::show($product->name);
                                     <?php endforeach; ?>
                                 <?php endif; ?>
 
-                                <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
+                                <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 23)): ?>
                                     <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                         <?php if ($propertyValue->media): ?>
                                             <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
