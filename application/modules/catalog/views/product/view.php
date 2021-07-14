@@ -21,7 +21,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
- * @var \app\modules\catalog\models\entity\Offers $product
+ * @var \app\modules\catalog\models\entity\Offers $offer
  * @var \app\modules\catalog\models\entity\ProductCategory $category
  * @var $compositionGroup array
  */
@@ -34,10 +34,12 @@ if ($category) {
         $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];
     }
 }
-$this->params['breadcrumbs'][] = ['label' => $product->name];
+$this->params['breadcrumbs'][] = ['label' => $offer->name];
 
-$this->title = ProductTitle::show($product->name);
+$this->title = ProductTitle::show($offer->name);
 
+$other_offers = \app\modules\catalog\models\entity\Offers::find()->where(['product_id' => $offer->product_id])->andWhere(['<>', 'id', $offer->id])->all();
+\app\modules\site\models\tools\Debug::p($other_offers);
 ?>
     <div itemscope itemtype="http://schema.org/Product">
         <div class="product-detail" itemscope itemtype="http://schema.org/Product">
@@ -46,23 +48,23 @@ $this->title = ProductTitle::show($product->name);
 
                     <div class="swiper-container product-gallery-big" style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff">
                         <div class="swiper-wrapper">
-                            <a href="<?= OfferHelper::getImageUrl($product); ?>" class="swiper-slide product-gallery-big__slide" data-lightbox="roadtrip">
-                                <img src="<?= OfferHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                            <a href="<?= OfferHelper::getImageUrl($offer); ?>" class="swiper-slide product-gallery-big__slide" data-lightbox="roadtrip">
+                                <img src="<?= OfferHelper::getImageUrl($offer, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" alt="<?= $offer->name; ?>" title="<?= $offer->name; ?>">
                             </a>
 
-                            <?php if ($product->images): ?>
-                                <?php foreach (Json::decode($product->images) as $image): ?>
+                            <?php if ($offer->images): ?>
+                                <?php foreach (Json::decode($offer->images) as $image): ?>
                                     <a href="<?= $image; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
-                                        <img src="<?= $image; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                                        <img src="<?= $image; ?>" alt="<?= $offer->name; ?>" title="<?= $offer->name; ?>">
                                     </a>
                                 <?php endforeach; ?>
                             <?php endif; ?>
 
-                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
+                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($offer, 22)): ?>
                                 <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                     <?php if ($propertyValue->media): ?>
                                         <a href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
-                                            <img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                                            <img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $offer->name; ?>" title="<?= $offer->name; ?>">
                                         </a>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
@@ -73,23 +75,23 @@ $this->title = ProductTitle::show($product->name);
                         <div class="swiper-button-prev"></div>
                     </div>
 
-                    <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22) || $product->images): ?>
+                    <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($offer, 22) || $offer->images): ?>
                         <div class="swiper-container product-gallery-thumbs" thumbsslider="">
                             <div class="swiper-wrapper">
 
-                                <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= OfferHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>"></div>
+                                <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= OfferHelper::getImageUrl($offer); ?>" title="<?= $offer->name; ?>"></div>
 
 
-                                <?php if ($product->images): ?>
-                                    <?php foreach (Json::decode($product->images) as $image): ?>
-                                        <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $image; ?>" title="<?= $product->name; ?>"></div>
+                                <?php if ($offer->images): ?>
+                                    <?php foreach (Json::decode($offer->images) as $image): ?>
+                                        <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $image; ?>" title="<?= $offer->name; ?>"></div>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
 
-                                <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
+                                <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($offer, 22)): ?>
                                     <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                         <?php if ($propertyValue->media): ?>
-                                            <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                            <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $offer->name; ?>" title="<?= $offer->name; ?>"></div>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 <?php endif; ?>
@@ -102,14 +104,14 @@ $this->title = ProductTitle::show($product->name);
 
                 <div class="product-blocks">
                     <div class="product-blocks__item product-bonus">
-                        <?php $bouns = BonusHelper::calcProductBonus($product); ?>
+                        <?php $bouns = BonusHelper::calcProductBonus($offer); ?>
                         <div class="product-bonus__count">+<?= $bouns; ?></div>
                         <div class="product-bonus__title"><?= \Yii::t('app', '{n, plural, =0{бонусов} =1{бонус} one{бонус} few{бонусов} many{бонусов} other{бонуса}} на счёт', ['n' => $bouns]); ?></div>
                     </div>
                 </div>
 
                 <?= PromotionsForProductWidget::widget([
-                    'product_id' => $product->id
+                    'product_id' => $offer->id
                 ]); ?>
 
             </div>
@@ -122,7 +124,7 @@ $this->title = ProductTitle::show($product->name);
                     ],
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ]); ?>
-                <h1 itemprop="name" class="product-detail__title"><?= $product->name; ?></h1>
+                <h1 itemprop="name" class="product-detail__title"><?= $offer->name; ?></h1>
 
                 <?php if ($propertiesValues): ?>
                     <?php foreach ($propertiesValues as $property): ?>
@@ -135,17 +137,17 @@ $this->title = ProductTitle::show($product->name);
                     <?php endforeach; ?>
                 <?php endif; ?>
                 <?= AddBasketWidget::widget([
-                    'product' => $product,
+                    'product' => $offer,
                     'showOrderButton' => true,
                     'showOneClick' => true,
                 ]); ?>
                 <?= WhenCanBuyWidget::widget([
-                    'product' => $product
+                    'product' => $offer
                 ]); ?>
                 <ul class="product-properties">
                     <li class="product-properties__line">
                         <div class="product-properties__key">Артикул</div>
-                        <div class="product-properties__value"><?= $product->article; ?></div>
+                        <div class="product-properties__value"><?= $offer->article; ?></div>
                     </li>
                     <?php if ($propertiesValues): ?>
                         <?php foreach ($propertiesValues as $property): ?>
@@ -164,12 +166,12 @@ $this->title = ProductTitle::show($product->name);
                 <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
                 <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
                 <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Состав товара</a>
-                <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы (<?= Reviews::find()->where(['product_id' => $product->id, 'is_active' => 1, 'status_id' => Reviews::STATUS_ENABLE])->count(); ?>)</a>
+                <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы (<?= Reviews::find()->where(['product_id' => $offer->id, 'is_active' => 1, 'status_id' => Reviews::STATUS_ENABLE])->count(); ?>)</a>
             </div>
         </nav>
         <div class="tab-content product-tab-content" id="nav-tabContent">
             <div class="<?= Yii::$app->user->id == 1 ? 'default-styles' : ''; ?> tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" itemprop="description">
-                <?= $product->description ?: 'Отсутсвует'; ?>
+                <?= $offer->description ?: 'Отсутсвует'; ?>
             </div>
             <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
                 <strong>Оплатить можно:</strong>
@@ -202,22 +204,22 @@ $this->title = ProductTitle::show($product->name);
 
             <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
                 <?= ProductReviewsWidget::widget([
-                    'product_id' => $product->id
+                    'product_id' => $offer->id
 
                 ]); ?>
                 <?= ProductReviewsFormWidget::widget([
-                    'product_id' => $product->id
+                    'product_id' => $offer->id
                 ]); ?>
             </div>
         </div>
     </div>
 <?= RecomendedWidget::widget([
     'property_id' => 19,
-    'product' => $product
+    'product' => $offer
 ]); ?>
 
 <?= AnalogWidget::widget([
     'property_id' => 21,
-    'product' => $product
+    'product' => $offer
 ]); ?>
 <?= VisitedProductsWidget::widget(); ?>
