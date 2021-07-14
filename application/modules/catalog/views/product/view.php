@@ -6,7 +6,7 @@ use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\ProductTitle;
 use app\modules\reviews\models\entity\Reviews;
 use app\modules\bonus\models\helper\BonusHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
@@ -46,8 +46,8 @@ $this->title = ProductTitle::show($product->name);
 
                     <div class="swiper-container product-gallery-big" style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff">
                         <div class="swiper-wrapper">
-                            <a href="<?= ProductHelper::getImageUrl($product); ?>" class="swiper-slide product-gallery-big__slide" data-lightbox="roadtrip">
-                                <img src="<?= ProductHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                            <a href="<?= OfferHelper::getImageUrl($product); ?>" class="swiper-slide product-gallery-big__slide" data-lightbox="roadtrip">
+                                <img src="<?= OfferHelper::getImageUrl($product, false, array("width" => 300, "height" => 400, "crop" => "fit")); ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                             </a>
 
                             <?php if ($product->images): ?>
@@ -77,7 +77,7 @@ $this->title = ProductTitle::show($product->name);
                         <div class="swiper-container product-gallery-thumbs" thumbsslider="">
                             <div class="swiper-wrapper">
 
-                                <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>"></div>
+                                <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= OfferHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>"></div>
 
 
                                 <?php if ($product->images): ?>

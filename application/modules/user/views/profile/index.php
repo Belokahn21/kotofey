@@ -23,7 +23,7 @@ use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\pets\widgets\PetList\PetListWidget;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\user\models\helpers\UserBillingHelper;
 use app\modules\pets\widgets\AddPetForm\AddPetFormWidget;
 use app\modules\catalog\widgets\UserAdmission\UserAdmissionWidget;
@@ -171,7 +171,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                         <div class="profile-favorite-list">
                             <?php foreach ($favorite as $item): ?>
                                 <div class="profile-favorite-list__item">
-                                    <div class="profile-favorite-list__image"><img src="<?= ProductHelper::getImageUrl($item) ?>"></div>
+                                    <div class="profile-favorite-list__image"><img src="<?= OfferHelper::getImageUrl($item) ?>"></div>
                                     <div class="profile-favorite-list__info">
                                         <div class="profile-favorite-list__title"><?= $item->name; ?></div>
                                         <div class="profile-favorite-list__group-row">

@@ -10,7 +10,7 @@ use app\modules\site\models\tools\System;
 use app\modules\media\models\entity\Media;
 use app\modules\catalog\models\entity\Offers;
 
-class ProductHelper
+class OfferHelper
 {
     const COOKIE_VISITED_KEY = 'user_visited';
 

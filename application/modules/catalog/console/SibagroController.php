@@ -2,7 +2,7 @@
 
 namespace app\modules\catalog\console;
 
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\logger\models\service\LogService;
 use app\modules\site_settings\models\helpers\MarkupHelpers;
 use app\modules\site\models\tools\Debug;
@@ -37,7 +37,7 @@ class SibagroController extends Controller
             $virProduct = null;
 
             $productUrl = SibagroTrade::getProductDetailByCode($product->code);
-            $oldPercent = ProductHelper::getMarkup($product);
+            $oldPercent = OfferHelper::getMarkup($product);
 
             $provider = new ParseProvider($productUrl);
             $provider->contract();

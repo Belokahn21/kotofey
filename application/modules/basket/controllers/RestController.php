@@ -4,7 +4,7 @@ namespace app\modules\basket\controllers;
 
 use app\modules\basket\models\entity\Basket;
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
@@ -118,8 +118,8 @@ class RestController extends ActiveController
                 'price' => $basketItem->product->price,
                 'count' => $basketItem->count,
                 'article' => $basketItem->product->article,
-                'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
-                'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
+                'detailUrl' => OfferHelper::getDetailUrl($basketItem->product),
+                'imageUrl' => OfferHelper::getImageUrl($basketItem->product),
             ];
         }
 

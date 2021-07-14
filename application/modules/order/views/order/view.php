@@ -6,7 +6,7 @@
 
 use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 use app\modules\acquiring\models\helpers\AcquiringHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Price;
@@ -97,11 +97,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <?php foreach ($items as $item): ?>
                         <li class="profile-order-products__item">
                             <?php if ($item->product): ?>
-                                <img class="profile-order-products__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" alt="<?= $item->image; ?>">
+                                <img class="profile-order-products__image" src="<?= OfferHelper::getImageUrl($item->product) ?>" alt="<?= $item->image; ?>">
                             <?php else: ?>
                                 <img class="profile-order-products__image" src="/images/not-image.png" alt="<?= $item->image; ?>">
                             <?php endif; ?>
-                            <?= Html::a($item->name, $item->product ? ProductHelper::getDetailUrl($item->product) : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
+                            <?= Html::a($item->name, $item->product ? OfferHelper::getDetailUrl($item->product) : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
                             <div class="profile-order-products__price"><?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                             <div class="profile-order-products__char">X</div>
                             <div class="profile-order-products__count"><?= $item->count; ?> шт.</div>

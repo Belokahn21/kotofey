@@ -13,7 +13,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
@@ -233,13 +233,13 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                 <div class="form-image single">
                     <?php if ($model->media): ?>
                         <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
-                            <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
-                                <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+                            <a target="_blank" href="<?= OfferHelper::getImageUrl($model) ?>">
+                                <img src="<?= OfferHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                             </a>
                             <br>
-                            Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
+                            Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . OfferHelper::getImageUrl($model)))); ?>
                         <?php else: ?>
-                            <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+                            <img src="<?= OfferHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                         <?php endif; ?>
                     <?php endif; ?>
                 </div>

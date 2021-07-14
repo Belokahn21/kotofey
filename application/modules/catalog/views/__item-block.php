@@ -2,14 +2,16 @@
 
 use app\modules\site\models\tools\Price;
 use app\modules\site\models\tools\Currency;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 use app\modules\favorite\models\entity\Favorite;
 use app\modules\catalog\models\helpers\ProductOrderHelper;
 
 /* @var $product \app\modules\catalog\models\entity\Offers */
+$product = $product->offer;
 
+//var_dump($product); exit();
 $isDiscount = $product->getDiscountPrice() > 0;
 ?>
 
@@ -31,13 +33,13 @@ $isDiscount = $product->getDiscountPrice() > 0;
         <?php endif; ?>
     </div>
     <?php if ($isDiscount): ?>
-        <div class="catalog__discount"><span>-<?= ProductHelper::getPercent($product); ?>%</span></div>
+        <div class="catalog__discount"><span>-<?= OfferHelper::getPercent($product); ?>%</span></div>
     <?php endif; ?>
-    <a href="<?= ProductHelper::getDetailUrl($product); ?>">
-        <img title="<?= $product->name; ?>" alt="<?= $product->name; ?>" class="catalog__image" src="<?= ProductHelper::getImageUrl($product, false, array("width" => 246, "height" => 300, "crop" => "fit")); ?>">
+    <a href="<?= OfferHelper::getDetailUrl($product); ?>">
+        <img title="<?= $product->name; ?>" alt="<?= $product->name; ?>" class="catalog__image" src="<?= OfferHelper::getImageUrl($product, false, array("width" => 246, "height" => 300, "crop" => "fit")); ?>">
     </a>
     <div class="catalog__title">
-        <a class="catalog__link" href="<?= ProductHelper::getDetailUrl($product); ?>"><?= $product->name; ?></a>
+        <a class="catalog__link" href="<?= OfferHelper::getDetailUrl($product); ?>"><?= $product->name; ?></a>
     </div>
     <?= PreviewPropertiesWidget::widget([
         'product' => $product

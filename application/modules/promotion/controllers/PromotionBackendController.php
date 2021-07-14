@@ -2,7 +2,7 @@
 
 namespace app\modules\promotion\controllers;
 
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\logger\models\service\LogService;
 use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;

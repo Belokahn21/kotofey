@@ -6,7 +6,7 @@ namespace app\modules\catalog\controllers;
 use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\form\OffersFromSibagoForm;
 use app\modules\catalog\models\form\SibagroUploadForm;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site_settings\models\helpers\MarkupHelpers;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Debug;

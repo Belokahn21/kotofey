@@ -9,7 +9,7 @@ use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\cdn\widgets\CdnInput\CdnInputWidget;
 use app\modules\catalog\models\entity\PropertyGroup;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;

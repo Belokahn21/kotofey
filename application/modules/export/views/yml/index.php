@@ -1,7 +1,7 @@
 <?php
 
 use app\modules\site\models\tools\System;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\vendors\models\entity\Vendor;
 
 /* @var $offers \app\modules\catalog\models\entity\Offers[]
@@ -36,7 +36,7 @@ use app\modules\vendors\models\entity\Vendor;
         <offers>
             <?php foreach ($offers as $offer): ?>
                 <offer id="<?= $offer->id ?>" available="true">
-                    <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
+                    <url><?= OfferHelper::getDetailUrl($offer, true); ?></url>
                     <?php if ($offer->barcode): ?>
                         <vendorCode><?= $offer->barcode ?></vendorCode>
                     <?php endif; ?>
@@ -48,7 +48,7 @@ use app\modules\vendors\models\entity\Vendor;
                     <?php endif; ?>
                     <currencyId>RUB</currencyId>
                     <categoryId><?= $offer->category_id; ?></categoryId>
-                    <picture><?= ProductHelper::getImageUrl($offer); ?></picture>
+                    <picture><?= OfferHelper::getImageUrl($offer); ?></picture>
                     <name><?= htmlspecialchars(strip_tags($offer->name)); ?></name>
                     <?php if (!empty($offer->description)): ?>
                         <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>

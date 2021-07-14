@@ -4,7 +4,7 @@
 namespace app\models\tool\import;
 
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site\models\tools\Debug;
 use app\modules\site_settings\models\helpers\MarkupHelpers;
 
@@ -26,7 +26,7 @@ class SiriusParfum
                 if (!is_numeric($code) || !is_numeric($purchase)) continue;
                 if (!$product = Offers::find()->where(['vendor_id' => self::VENDOR_ID, 'code' => $code])->one()) continue;
                 $product->scenario = Offers::SCENARIO_UPDATE_PRODUCT;
-                $oldMarkup = ProductHelper::getMarkup($product);
+                $oldMarkup = OfferHelper::getMarkup($product);
                 $product->purchase = round($purchase);
                 MarkupHelpers::applyMarkup($product, $oldMarkup);
 

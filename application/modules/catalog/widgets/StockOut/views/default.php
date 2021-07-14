@@ -3,7 +3,7 @@
 /* @var $products \app\modules\catalog\models\entity\Offers[] */
 
 use yii\helpers\Html;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site\models\tools\Price;
 use yii\helpers\Url;
 
@@ -17,7 +17,7 @@ use yii\helpers\Url;
             <div class="modal-header">
                 <h5 class="modal-title" id="stockOutTitle">
                     <div>Складской учёт</div>
-                    <div>Закуп: <?= Price::format(ProductHelper::purchaseVirtual($products)); ?></div>
+                    <div>Закуп: <?= Price::format(OfferHelper::purchaseVirtual($products)); ?></div>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
@@ -31,7 +31,7 @@ use yii\helpers\Url;
                                 <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>"><?= $product->name; ?></a>
                             </div>
                             <a href="<?= Url::to(['/catalog/product-backend/update', 'id' => $product->id]); ?>">
-                                <img class="stock-out__image" src="<?= ProductHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
+                                <img class="stock-out__image" src="<?= OfferHelper::getImageUrl($product); ?>" title="<?= $product->name; ?>" alt="<?= $product->name; ?>">
                             </a>
                             <div class="stock-out__price">Цена: <?= $product->price; ?></div>
                             <div class="stock-out__count">Количество: <?= $product->count; ?></div>

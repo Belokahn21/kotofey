@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\promotion\models\helpers\PromotionHelper;
 
 /* @var $models \app\modules\promotion\models\entity\Promotion[] */
@@ -20,8 +20,8 @@ use app\modules\promotion\models\helpers\PromotionHelper;
                 <div class="swiper-wrapper">
                     <?php foreach ($model->promotionProductMechanics as $mechanics): ?>
                         <div class="swiper-slide">
-                            <a href="<?= ProductHelper::getDetailUrl($mechanics->product) ?>">
-                                <img src="<?= ProductHelper::getImageUrl($mechanics->product) ?>">
+                            <a href="<?= OfferHelper::getDetailUrl($mechanics->product) ?>">
+                                <img src="<?= OfferHelper::getImageUrl($mechanics->product) ?>">
                             </a>
                         </div>
                     <?php endforeach; ?>

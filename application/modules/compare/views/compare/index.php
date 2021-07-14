@@ -3,7 +3,7 @@
 use yii\helpers\Json;
 use app\modules\seo\models\tools\Title;
 use app\modules\compare\models\helpers\CompareHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 

@@ -10,7 +10,7 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\models\tool\parser\providers\SibagroTrade;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\widgets\StockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
@@ -102,7 +102,7 @@ $this->title = Title::show('Предложения');
             'value' => function ($model) {
                 $out = "";
 
-                @$out .= "Цена: " . $model->price . sprintf(" (%s%%)", ProductHelper::getMarkup($model)) . "<br>";
+                @$out .= "Цена: " . $model->price . sprintf(" (%s%%)", OfferHelper::getMarkup($model)) . "<br>";
                 if ($model->discount_price) {
                     @$out .= "Со скидкой: " . $model->discount_price . "<br>";
                 }
@@ -128,7 +128,7 @@ $this->title = Title::show('Предложения');
             'attribute' => 'image',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::img(ProductHelper::getImageUrl($model), ['width' => 70]);
+                return Html::img(OfferHelper::getImageUrl($model), ['width' => 70]);
             }
         ],
         [

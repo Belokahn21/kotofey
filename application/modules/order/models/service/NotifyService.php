@@ -5,7 +5,7 @@ namespace app\modules\order\models\service;
 use app\modules\site\models\tools\Month;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\OrderMailHistory;
 use app\modules\promotion\models\entity\Promotion;
@@ -272,7 +272,7 @@ class NotifyService
                         $items = PromotionProductMechanics::find()->where(['promotion_id' => $promotion_id])->all();
                         foreach ($items as $item) {
                             $product = $item->product;
-                            $detail = ProductHelper::getDetailUrl($product);
+                            $detail = OfferHelper::getDetailUrl($product);
                             $html .= "
                             <tr style='display: block; width: 100%;'>
                               <td style='width:45%; padding: 5px; font-size:16px; '>{$product->name}</td>

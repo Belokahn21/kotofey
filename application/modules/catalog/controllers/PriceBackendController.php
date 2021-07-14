@@ -5,7 +5,7 @@ namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\form\PriceUpdateForm;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\site\models\tools\Price;
 use app\modules\vendors\models\entity\Vendor;
@@ -50,7 +50,7 @@ class PriceBackendController extends MainBackendController
                         if ($product = Offers::find()->where([$model->related_key_filter ?: 'code' => $code, 'vendor_id' => $model->vendor_id])->one()) {
                             $product->scenario = Offers::SCENARIO_STOCK_COUNT;
 
-                            $old_markup = ProductHelper::getMarkup($product, intval($model->default_markup));
+                            $old_markup = OfferHelper::getMarkup($product, intval($model->default_markup));
 
                             if ($model->force_markup) {
                                 $old_markup = intval($model->default_markup);
@@ -58,13 +58,13 @@ class PriceBackendController extends MainBackendController
 
                             if ($model->type_price == PriceUpdateForm::TYPE_PRICE_BASE) {
                                 $product->base_price = $base_price;
-                                ProductHelper::makePurchase($product, $vendor);
-                                ProductHelper::applyMarkup($product, $old_markup);
+                                OfferHelper::makePurchase($product, $vendor);
+                                OfferHelper::applyMarkup($product, $old_markup);
                             }
 
                             if ($model->type_price == PriceUpdateForm::TYPE_PRICE_PURCHASE) {
                                 $product->purchase = $purchase_price;
-                                ProductHelper::applyMarkup($product, $old_markup);
+                                OfferHelper::applyMarkup($product, $old_markup);
                             }
 
 

@@ -10,7 +10,7 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\models\tool\parser\providers\SibagroTrade;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\widgets\StockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 

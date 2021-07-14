@@ -9,7 +9,7 @@ use app\modules\order\widgets\map\MapWidget;
 use \app\modules\user\models\helpers\UserHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\parser\providers\SibagroTrade;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\order\models\entity\OrderMailHistory;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
@@ -144,7 +144,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                             <?php foreach ($itemsModel as $item): ?>
                                 <div class="order-items-list__item<?= ($item->product && ($item->product->count >= $item->count)) ? ' isFull' : ''; ?>">
                                     <?php if ($item->product): ?>
-                                        <img class="order-items-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
+                                        <img class="order-items-list__image" src="<?= OfferHelper::getImageUrl($item->product) ?>" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
                                     <?php else: ?>
                                         <img class="order-items-list__image" src="/upload/images/not-image.png" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
                                     <?php endif; ?>

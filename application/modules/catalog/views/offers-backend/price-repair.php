@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
         <li>
             Цена: <?= $model->price; ?>
             Закупочная: <?= $model->purchase; ?>
-            <?= \app\modules\catalog\models\helpers\ProductHelper::getMarkup($model); ?>
+            <?= \app\modules\catalog\models\helpers\OfferHelper::getMarkup($model); ?>
             <?= Html::a($model->name, Url::to(['product-backend/update', 'id' => $model->id]), ['target' => '_blank']); ?>
         </li>
     <?php endforeach; ?>

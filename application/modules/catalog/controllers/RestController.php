@@ -5,7 +5,7 @@ namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\PropertiesVariants;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use yii\helpers\Json;
 use app\modules\catalog\models\entity\Offers;
 use yii\rest\ActiveController;

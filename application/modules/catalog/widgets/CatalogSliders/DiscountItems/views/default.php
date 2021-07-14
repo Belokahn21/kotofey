@@ -2,7 +2,7 @@
 
 use app\modules\site\models\tools\Price;
 use app\modules\site\models\tools\Currency;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\DiscountItemsWidgetHelper;
 use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
@@ -29,11 +29,11 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
             <div class="swiper-wrapper vitrine-wrapper">
                 <?php foreach ($models as $model): ?>
                     <div class="swiper-slide vitrine__slide">
-                        <div class="discount">- <?= ProductHelper::getPercent($model); ?>%</div>
-                        <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, false, ['width' => 256, 'height' => 300, 'crop' => 'fit']); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
+                        <div class="discount">- <?= OfferHelper::getPercent($model); ?>%</div>
+                        <img class="vitrine__image swiper-lazy" data-src="<?= OfferHelper::getImageUrl($model, false, ['width' => 256, 'height' => 300, 'crop' => 'fit']); ?>" alt="<?= $model->name; ?>" title="<?= $model->image; ?>">
                         <div class="swiper-lazy-preloader"></div>
                         <div class="vitrine__title">
-                            <a class="vitrine__link" href="<?= ProductHelper::getDetailUrl($model); ?>"><?= $model->name; ?></a>
+                            <a class="vitrine__link" href="<?= OfferHelper::getDetailUrl($model); ?>"><?= $model->name; ?></a>
                         </div>
                         <div class="vitrine__properties">
                             <?= PreviewPropertiesWidget::widget([

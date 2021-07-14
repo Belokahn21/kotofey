@@ -3,16 +3,16 @@
 namespace app\modules\mailer\models\helpers;
 
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site\models\tools\Currency;
 
 class PromotionHtmlHelper
 {
     public static function renderProduct(Offers $model)
     {
-        $detail = ProductHelper::getDetailUrl($model);
+        $detail = OfferHelper::getDetailUrl($model);
         $cur_icon = Currency::getInstance()->show();
-        $image = ProductHelper::getImageUrl($model);
+        $image = OfferHelper::getImageUrl($model);
         return "
         <tr style='display: block; width: 100%;'>
           <td style='width:15%; padding: 5px; font-size:16px; '><img src='{$image}' style='width: 100%; object-fit: contain;'></td>

@@ -24,7 +24,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\basket\models\entity\Basket;
 use app\modules\payment\models\entity\Payment;
 use app\modules\delivery\models\entity\Delivery;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\bonus\widgets\BonusFiled\BonusFieldWidget;

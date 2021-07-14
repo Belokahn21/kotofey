@@ -2,7 +2,7 @@
 
 use app\modules\site\models\tools\System;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 
@@ -50,7 +50,7 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
 
                     <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Offers::STATUS_ACTIVE ? 'true' : 'false'); ?>">
 
-                        <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
+                        <url><?= OfferHelper::getDetailUrl($offer, true); ?></url>
 
                         <?php if ($vendor = PropertiesHelper::extractPropertyById($offer, 1)): ?>
                             <vendor><?php $vendor->name; ?></vendor>
@@ -66,7 +66,7 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
 
                         <currencyId>RUB</currencyId>
                         <categoryId><?= $offer->category_id; ?></categoryId>
-                        <picture><?= ProductHelper::getImageUrl($offer, false, ['width' => 246, 'height' => 300, 'crop' => 'fit']); ?></picture>
+                        <picture><?= OfferHelper::getImageUrl($offer, false, ['width' => 246, 'height' => 300, 'crop' => 'fit']); ?></picture>
                         <name><?= htmlspecialchars(strip_tags(\yii\helpers\StringHelper::truncate($offer->name, 128, false))); ?></name>
                         <?php if (!empty($offer->description)): ?>
                             <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>

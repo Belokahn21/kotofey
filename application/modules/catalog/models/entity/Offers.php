@@ -5,7 +5,7 @@ namespace app\modules\catalog\models\entity;
 use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\helpers\CompositionProductHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\models\helpers\ProductStockHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
@@ -357,13 +357,13 @@ class Offers extends \yii\db\ActiveRecord
     {
         return [
             'href' => function ($model) {
-                return ProductHelper::getDetailUrl($model);
+                return OfferHelper::getDetailUrl($model);
             },
             'backendHref' => function ($model) {
                 return Url::to(['/admin/catalog/product-backend/update', 'id' => $model->id]);
             },
             'imageUrl' => function ($model) {
-                return ProductHelper::getImageUrl($model);
+                return OfferHelper::getImageUrl($model);
             },
         ];
     }

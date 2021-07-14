@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\CompositionType;
 use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site\models\tools\Debug;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -64,13 +64,13 @@ class ProductController extends Controller
         OpenGraphProduct::amount($product->price);
         OpenGraphProduct::currency('RUB');
 
-        if ($product->media) OpenGraphProduct::image(ProductHelper::getImageUrl($product, true));
+        if ($product->media) OpenGraphProduct::image(OfferHelper::getImageUrl($product, true));
 
         $propertiesValues = PropertiesProductValues::find()
             ->where(['product_id' => $product->id])
             ->andWhere(['not in', 'property_id', ArrayHelper::getColumn(Properties::find()->select('id')->where(['is_show_site' => false])->all(), 'id')])
             ->all();
-        ProductHelper::addVisitedItem($product->id);
+        OfferHelper::addVisitedItem($product->id);
 
         $compositionGroup = [];
         $compositions = CompositionProducts::find()->where(['product_id' => $product->id])->all();

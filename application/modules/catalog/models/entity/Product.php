@@ -39,4 +39,13 @@ class Product extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
         ];
     }
+
+    public function getOffer()
+    {
+        return $this->hasOne(Offers::className(), ['product_id' => 'id']);
+    }
+
+    public function getDiscountPrice()
+    {
+    }
 }

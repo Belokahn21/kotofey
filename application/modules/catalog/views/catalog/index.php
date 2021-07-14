@@ -103,9 +103,9 @@ if ($category) {
                 <?php endif; ?>
 
                 <div class="pagination-wrap">
-                    <?= LinkPager::widget([
+                    <?php /*= LinkPager::widget([
                         'pagination' => $pagerItems,
-                    ]); ?>
+                    ]); */ ?>
                 </div>
             <?php else: ?>
                 <img style="width: 100%;" src="/upload/images/not-found.png">

@@ -4,7 +4,7 @@ namespace app\modules\catalog\widgets\VisitedProducts;
 
 
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
 
@@ -15,7 +15,7 @@ class VisitedProductsWidget extends Widget
 
     public function run()
     {
-        $visitedIDs = ProductHelper::getAllVisitedItems();
+        $visitedIDs = OfferHelper::getAllVisitedItems();
 
         if (!$visitedIDs) return false;
 

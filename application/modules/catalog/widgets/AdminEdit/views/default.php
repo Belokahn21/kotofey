@@ -1,7 +1,7 @@
 <?php
 
 use yii\widgets\ActiveForm;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
@@ -84,7 +84,7 @@ use yii\helpers\Html;
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
                             <div class="card-body">
                                 <?php if ($model->image): ?>
-                                    <img width="150" alt="<?= $model->name; ?>" title="<?= $model->name; ?>" src="<?= ProductHelper::getImageUrl($model) ?>">
+                                    <img width="150" alt="<?= $model->name; ?>" title="<?= $model->name; ?>" src="<?= OfferHelper::getImageUrl($model) ?>">
                                 <?php endif; ?>
                                 <?= $form->field($model, 'image')->fileInput(); ?>
                             </div>

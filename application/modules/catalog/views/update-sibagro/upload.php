@@ -6,7 +6,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\media\models\entity\Media;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\form\OffersFromSibagoForm;
 
 /* @var $items \app\modules\catalog\models\entity\virtual\SibagroElement[]
@@ -53,7 +53,7 @@ $this->title = 'Обновить прайсы по HTML';
                 <div class="col-1"><?= $form->field($productModel, '[' . $i . ']purchase')->textInput(['value' => $item->price]); ?></div>
 
                 <?php if ($product): ?>
-                    <div class="col-1"><?= $form->field($productModel, '[' . $i . ']price')->textInput(['value' => $item->price + ProductHelper::getMarkup($product)]); ?></div>
+                    <div class="col-1"><?= $form->field($productModel, '[' . $i . ']price')->textInput(['value' => $item->price + OfferHelper::getMarkup($product)]); ?></div>
                 <?php else: ?>
                     <div class="col-1"><?= $form->field($productModel, '[' . $i . ']price')->textInput(['value' => $item->price + round($item->price * 0.3)]); ?></div>
                 <?php endif; ?>
@@ -77,7 +77,7 @@ $this->title = 'Обновить прайсы по HTML';
                 <?= $form->field($productModel, '[' . $i . ']count')->hiddenInput(['value' => 0])->label(false); ?>
                 <?= $form->field($productModel, '[' . $i . ']vitrine')->hiddenInput(['value' => 1])->label(false); ?>
                 <?php if ($product): ?>
-                    <div class="green px-3"><strong><?= $product->name . ' Уже существует'; ?> (+ <?= ProductHelper::getMarkup($product) ?>%)</strong></div>
+                    <div class="green px-3"><strong><?= $product->name . ' Уже существует'; ?> (+ <?= OfferHelper::getMarkup($product) ?>%)</strong></div>
                 <?php endif; ?>
                 <?php $i++; ?>
             </div>

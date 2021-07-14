@@ -4,7 +4,7 @@ namespace app\modules\catalog\console;
 
 use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\mailer\models\services\MailService;
 use yii\console\Controller;
 
@@ -25,7 +25,7 @@ class AdmissionController extends Controller
                 'EMAIL_FROM' => 'sale@kotofey.store',
                 'EMAIL_TO' => $member->email,
                 'NAME' => $product->name,
-                'LINK' => ProductHelper::getDetailUrl($product),
+                'LINK' => OfferHelper::getDetailUrl($product),
             ]);
 
             $member->is_active = false;

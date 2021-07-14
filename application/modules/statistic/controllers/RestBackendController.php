@@ -3,7 +3,7 @@
 namespace app\modules\statistic\controllers;
 
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\order\models\entity\Order;
 use app\modules\search\models\entity\SearchQuery;
 use yii\helpers\Json;
@@ -64,8 +64,8 @@ class RestBackendController extends Controller
 				'icon' => 'fa-cubes',
 				'data' => [
 					'Товаров' => $products->where(['>', 'count', 0])->count(),
-					'Закуп' => Price::format(ProductHelper::purchaseVirtual($products->where(['>', 'count', 0])->all())),
-					'Доход' => Price::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
+					'Закуп' => Price::format(OfferHelper::purchaseVirtual($products->where(['>', 'count', 0])->all())),
+					'Доход' => Price::format(OfferHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
 				],
 			],
 			[

@@ -4,7 +4,7 @@ namespace app\models\tool\import;
 
 
 use app\modules\catalog\models\entity\Offers;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 
 class Hills
 {
@@ -35,9 +35,9 @@ class Hills
 
                 if ($product = Offers::findOneByCode($code)) {
 
-                    $percent = round(ProductHelper::getMarkup($product) / 100);
+                    $percent = round(OfferHelper::getMarkup($product) / 100);
 
-                    if ($product->discount_price) $oldPercent = ProductHelper::getPercent($product);
+                    if ($product->discount_price) $oldPercent = OfferHelper::getPercent($product);
 
                     if (!$percent) $percent = 0.15;
 
@@ -46,7 +46,7 @@ class Hills
                     $product->purchase = $purchase;
                     $product->price = $product->purchase + ceil($product->purchase * $percent);
 
-                    if ($oldPercent) ProductHelper::setDiscount($product, $oldPercent);
+                    if ($oldPercent) OfferHelper::setDiscount($product, $oldPercent);
 
                     if (!$product->validate()) {
                         return false;

@@ -2,7 +2,7 @@
 
 use app\modules\site\models\tools\Price;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 
 /* @var $order_items \app\modules\order\models\entity\OrdersItems[]
  * @var $order \app\modules\order\models\entity\Order
@@ -66,7 +66,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
                 <?php foreach ($order_items as $item): ?>
                     <?php if ($item->product_id > 0): ?>
                         <li style="width: 25%; margin: 5px;">
-                            <img src="<?= ProductHelper::getImageUrl($item->product, true) ?>" style="width: 100%;">
+                            <img src="<?= OfferHelper::getImageUrl($item->product, true) ?>" style="width: 100%;">
                             <div style="text-align: center;">
                                 <?= $item->name; ?>
                             </div>

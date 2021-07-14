@@ -20,7 +20,7 @@ class CatalogController extends Controller
     public function actionIndex($id = null)
     {
         $pagerItems = [];
-        $products = [];
+        $products = Product::find()->all();
         $duplicateQueryProducts = [];
         $category = [];
         return $this->render('index', [

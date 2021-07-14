@@ -6,7 +6,7 @@ namespace app\modules\compare\controllers;
 use app\modules\catalog\models\entity\Offers;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\compare\models\entity\Compare;
 use yii\rest\Controller;
 
@@ -37,8 +37,8 @@ class MixedRestController extends Controller
             $models[$id] = [
                 'product' => $product,
                 'properties' => $product->propsValues,
-                'detail_link' => ProductHelper::getDetailUrl($product),
-                'detail_image' => ProductHelper::getImageUrl($product),
+                'detail_link' => OfferHelper::getDetailUrl($product),
+                'detail_image' => OfferHelper::getImageUrl($product),
             ];
 
 
