@@ -80,7 +80,7 @@ class ProductController extends Controller
         }
 
         return $this->render('view', [
-            'product' => $offer,
+            'offer' => $offer,
             'category' => $category,
             'compositionGroup' => $compositionGroup,
             'propertiesValues' => $propertiesValues,
