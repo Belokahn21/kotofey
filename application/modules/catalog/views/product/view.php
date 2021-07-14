@@ -58,7 +58,7 @@ $this->title = ProductTitle::show($product->name);
                                 <?php endforeach; ?>
                             <?php endif; ?>
 
-                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22)): ?>
+                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 23)): ?>
                                 <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                     <?php if ($propertyValue->media): ?>
                                         <a href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
@@ -73,7 +73,7 @@ $this->title = ProductTitle::show($product->name);
                         <div class="swiper-button-prev"></div>
                     </div>
 
-                    <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 22) || $product->images): ?>
+                    <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 23) || $product->images): ?>
                         <div class="swiper-container product-gallery-thumbs" thumbsslider="">
                             <div class="swiper-wrapper">
 
