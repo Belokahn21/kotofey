@@ -60,7 +60,7 @@ $other_offers = \app\modules\catalog\models\entity\Offers::find()->where(['produ
                                 <?php endforeach; ?>
                             <?php endif; ?>
 
-                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($offer, 22)): ?>
+                            <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($offer, 23)): ?>
                                 <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                     <?php if ($propertyValue->media): ?>
                                         <a href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
@@ -75,7 +75,7 @@ $other_offers = \app\modules\catalog\models\entity\Offers::find()->where(['produ
                         <div class="swiper-button-prev"></div>
                     </div>
 
-                    <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($offer, 22) || $offer->images): ?>
+                    <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($offer, 23) || $offer->images): ?>
                         <div class="swiper-container product-gallery-thumbs" thumbsslider="">
                             <div class="swiper-wrapper">
 
