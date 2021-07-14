@@ -31,56 +31,56 @@ class ProductController extends Controller
 
     public function actionView($id)
     {
-        $product = Offers::findBySlug($id);
-        if (!$product instanceof Offers) throw new \yii\web\NotFoundHttpException("Товар не найден.");
+        $offer = Offers::findBySlug($id);
+        if (!$offer instanceof Offers) throw new \yii\web\NotFoundHttpException("Товар не найден.");
 
-        $category = ProductCategory::findOne($product->category_id);
+        $category = ProductCategory::findOne($offer->category_id);
 
-        if (!empty($product->seo_description)) {
-            Attributes::metaDescription($product->seo_description);
+        if (!empty($offer->seo_description)) {
+            Attributes::metaDescription($offer->seo_description);
         } else {
-            if (!empty($product->description)) {
-                Attributes::metaDescription($product->description);
+            if (!empty($offer->description)) {
+                Attributes::metaDescription($offer->description);
             } else {
-                Attributes::metaDescription(sprintf('В нашем интернет-магазине зоотоваров в продаже  имеется %s по низкой цене в Барнауле. За каждую покупку выполучите 5%% бонусов, а мы доставим бесплатно!', $product->name));
+                Attributes::metaDescription(sprintf('В нашем интернет-магазине зоотоваров в продаже  имеется %s по низкой цене в Барнауле. За каждую покупку выполучите 5%% бонусов, а мы доставим бесплатно!', $offer->name));
             }
         }
 
-        if (!empty($product->seo_keywords)) {
-            Attributes::metaKeywords($product->seo_keywords);
+        if (!empty($offer->seo_keywords)) {
+            Attributes::metaKeywords($offer->seo_keywords);
         } else {
-            Attributes::metaKeywords(explode(';', sprintf("купить %s в барнауле;интернет-зоомагазин;зоомагазин интернет барнаул;анго зоомагазин интернет барнаул;интернет зоомагазин с доставкой", $product->name)));
+            Attributes::metaKeywords(explode(';', sprintf("купить %s в барнауле;интернет-зоомагазин;зоомагазин интернет барнаул;анго зоомагазин интернет барнаул;интернет зоомагазин с доставкой", $offer->name)));
         }
 
-        Attributes::canonical(System::protocol() . "://" . System::domain() . "/product/" . $product->slug . "/");
+        Attributes::canonical(System::protocol() . "://" . System::domain() . "/product/" . $offer->slug . "/");
 
-        OpenGraphProduct::title($product->name);
-        if (!empty($product->description)) {
-            OpenGraph::description($product->description);
-            Attributes::metaDescription($product->description);
+        OpenGraphProduct::title($offer->name);
+        if (!empty($offer->description)) {
+            OpenGraph::description($offer->description);
+            Attributes::metaDescription($offer->description);
         }
         OpenGraphProduct::type();
-        OpenGraphProduct::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $product->slug . "/");
-        OpenGraphProduct::amount($product->price);
+        OpenGraphProduct::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $offer->slug . "/");
+        OpenGraphProduct::amount($offer->price);
         OpenGraphProduct::currency('RUB');
 
-        if ($product->media) OpenGraphProduct::image(OfferHelper::getImageUrl($product, true));
+        if ($offer->media) OpenGraphProduct::image(OfferHelper::getImageUrl($offer, true));
 
         $propertiesValues = PropertiesProductValues::find()
-            ->where(['product_id' => $product->id])
+            ->where(['product_id' => $offer->id])
             ->andWhere(['not in', 'property_id', ArrayHelper::getColumn(Properties::find()->select('id')->where(['is_show_site' => false])->all(), 'id')])
             ->all();
-        OfferHelper::addVisitedItem($product->id);
+        OfferHelper::addVisitedItem($offer->id);
 
         $compositionGroup = [];
-        $compositions = CompositionProducts::find()->where(['product_id' => $product->id])->all();
+        $compositions = CompositionProducts::find()->where(['product_id' => $offer->id])->all();
         foreach ($compositions as $composit_value_item) {
             $compositionGroup[$composit_value_item->composition->composition_type_id]['group'] = CompositionType::findOne($composit_value_item->composition->composition_type_id);
             $compositionGroup[$composit_value_item->composition->composition_type_id]['items'][] = $composit_value_item;
         }
 
         return $this->render('view', [
-            'product' => $product,
+            'product' => $offer,
             'category' => $category,
             'compositionGroup' => $compositionGroup,
             'propertiesValues' => $propertiesValues,
