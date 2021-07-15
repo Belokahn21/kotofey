@@ -46,15 +46,18 @@ foreach ($other_offers as $offer_item) {
     }
 }
 
-//\app\modules\site\models\tools\Debug::p($formated_props);
-
+$build_data = [];
 foreach ($formated_props as $key => $value) {
 
     foreach ($value as $item) {
         if (count($other_offers) == count($value)) continue;
         \app\modules\site\models\tools\Debug::p($key . '=' . count($value) . ' = ' . $item->property->name);
+
+        $build_data[$item->property->id][] = $item->value;
     }
 }
+
+\app\modules\site\models\tools\Debug::p($build_data);
 ?>
     <div itemscope itemtype="http://schema.org/Product">
         <div class="product-detail" itemscope itemtype="http://schema.org/Product">
@@ -128,6 +131,28 @@ foreach ($formated_props as $key => $value) {
                 <?= PromotionsForProductWidget::widget([
                     'product_id' => $offer->id
                 ]); ?>
+
+
+                <p>Вкус</p>
+                <label>
+                    Раки
+                    <input type="radio" name="prop[1]" value="1">
+                </label>
+                <label>
+                    Ягненок
+                    <input type="radio" name="prop[1]" value="2">
+                </label>
+
+
+                <p>Вес</p>
+                <label>
+                    1кг
+                    <input type="radio" name="prop[2]" value="1">
+                </label>
+                <label>
+                    2кг
+                    <input type="radio" name="prop[2]" value="2">
+                </label>
 
             </div>
             <div class="product-detail-right">
