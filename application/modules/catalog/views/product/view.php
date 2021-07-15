@@ -53,11 +53,10 @@ foreach ($formated_props as $key => $value) {
         if (count($other_offers) == count($value)) continue;
         \app\modules\site\models\tools\Debug::p($key . '=' . count($value) . ' = ' . $item->property->name);
 
-        $build_data[$item->property->id][] = $item->value;
+        $build_data[$item->property->id]['property'] = $item->property;
+        $build_data[$item->property->id]['values'][] = $item;
     }
 }
-
-\app\modules\site\models\tools\Debug::p($build_data);
 ?>
     <div itemscope itemtype="http://schema.org/Product">
         <div class="product-detail" itemscope itemtype="http://schema.org/Product">
@@ -133,15 +132,15 @@ foreach ($formated_props as $key => $value) {
                 ]); ?>
 
 
-                <p>Вкус</p>
-                <label>
-                    Раки
-                    <input type="radio" name="prop[1]" value="1">
-                </label>
-                <label>
-                    Ягненок
-                    <input type="radio" name="prop[1]" value="2">
-                </label>
+                <?php foreach ($build_data as $property_id => $value_data): ?>
+                    <p><?= $value_data['property']->name; ?></p>
+                    <?php foreach ($value_data['values'] as $data): ?>
+                        <label>
+                            <?= ProductPropertiesValuesHelper::getFinalValue($data); ?>
+                            <input type="radio" name="prop[1]" value="<?= $data->value; ?>">
+                        </label>
+                    <?php endforeach; ?>
+                <?php endforeach; ?>
 
 
                 <p>Вес</p>
