@@ -131,14 +131,27 @@ $this->title = Title::show('Товары');
             }
         ],
         [
-            'attribute' => 'created_at',
-            'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
+            'attribute' => 'created_user_id',
+            'format' => 'raw',
+            'value' => function ($model) {
+                $user = \app\modules\user\models\entity\User::findOne($model->created_user_id);
+                if ($user) {
+                    return $user->email;
+                }
+                return "Не указано";
+            }
         ],
         [
-            'attribute' => 'updated_at',
-            'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
+            'attribute' => 'updated_user_id',
+            'format' => 'raw',
+            'value' => function ($model) {
+                \app\modules\site\models\tools\Debug::p($model->updated_user_id);
+                $user = \app\modules\user\models\entity\User::findOne($model->updated_user_id);
+                if ($user) {
+                    return $user->email;
+                }
+                return "Не указано";
+            }
         ],
         [
             'class' => 'yii\grid\ActionColumn',

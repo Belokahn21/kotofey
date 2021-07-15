@@ -56,13 +56,13 @@ class PriceBackendController extends MainBackendController
                                 $old_markup = intval($model->default_markup);
                             }
 
-                            if ($vendor->type_price == Vendor::TYPE_PRICE_BASE) {
+                            if ($model->type_price == PriceUpdateForm::TYPE_PRICE_BASE) {
                                 $product->base_price = $base_price;
                                 ProductHelper::makePurchase($product, $vendor);
                                 ProductHelper::applyMarkup($product, $old_markup);
                             }
 
-                            if ($vendor->type_price == Vendor::TYPE_PRICE_PURCHASE) {
+                            if ($model->type_price == PriceUpdateForm::TYPE_PRICE_PURCHASE) {
                                 $product->purchase = $purchase_price;
                                 ProductHelper::applyMarkup($product, $old_markup);
                             }
