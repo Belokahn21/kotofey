@@ -23,6 +23,8 @@ use yii\helpers\ArrayHelper;
  * Order model
  *
  * @property integer $id
+ * @property integer $created_user_id
+ * @property integer $updated_user_id
  * @property integer $odd
  * @property integer $user_id
  * @property integer $delivery_id
@@ -72,10 +74,10 @@ class Order extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
-            self::SCENARIO_FAST => ['manager_id', 'email', 'phone', 'type', 'is_paid', 'status', 'ip'],
+            self::SCENARIO_DEFAULT => ['created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
+            self::SCENARIO_FAST => ['created_user_id', 'updated_user_id', 'manager_id', 'email', 'phone', 'type', 'is_paid', 'status', 'ip'],
         ];
     }
 
@@ -99,7 +101,9 @@ class Order extends ActiveRecord
                 }
             ],
 
-            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house', 'odd'], 'integer'],
+            [['created_user_id', 'updated_user_id'], 'default', 'value' => 0],
+
+            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house', 'odd', 'created_user_id', 'updated_user_id'], 'integer'],
 
 
             [['payment_id', 'delivery_id'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите {attribute}'],
