@@ -12,6 +12,7 @@ use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\reviews\models\entity\Reviews;
+use app\modules\site\models\behaviors\UserEntityBehavior;
 use app\modules\site\models\tools\Debug;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\SluggableBehavior;
@@ -24,6 +25,8 @@ use function foo\func;
  * Product model
  *
  * @property integer $id
+ * @property integer $created_user_id
+ * @property integer $updated_user_id
  * @property integer $article
  * @property string $name
  * @property string $description
@@ -77,8 +80,8 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price', 'base_price'];
 
         return $parent;
@@ -89,7 +92,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['name', 'count', 'price'], 'required', 'message' => '{attribute} обязательное поле'],
 
-            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id'], 'integer'],
+            [['count', 'price', 'purchase', 'category_id', 'vitrine', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id', 'created_user_id', 'updated_user_id'], 'integer'],
 
             [['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
 
@@ -144,6 +147,8 @@ class Product extends \yii\db\ActiveRecord
             'barcode' => 'Штрих-код',
             'is_ali' => 'Размещается на Aliexpress',
             'media_id' => 'Изображение',
+            'created_user_id' => 'Кем создано',
+            'updated_user_id' => 'Кем обновлено',
         ];
     }
 
@@ -168,7 +173,12 @@ class Product extends \yii\db\ActiveRecord
                 'class' => SocialStore::class,
                 'has_store' => 'has_store',
             ],
-            ArticleBehavior::className()
+            ArticleBehavior::className(),
+            [
+                'class' => UserEntityBehavior::className(),
+                'attr_at_save' => 'created_user_id',
+                'attr_at_update' => 'updated_user_id',
+            ]
         ];
     }
 
