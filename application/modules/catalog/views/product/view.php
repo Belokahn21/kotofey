@@ -6,6 +6,7 @@ use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\ProductTitle;
 use app\modules\reviews\models\entity\Reviews;
 use app\modules\bonus\models\helper\BonusHelper;
+use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\helpers\OfferHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
@@ -38,26 +39,24 @@ $this->params['breadcrumbs'][] = ['label' => $offer->name];
 
 $this->title = ProductTitle::show($offer->name);
 
-$other_offers = \app\modules\catalog\models\entity\Offers::find()->where(['product_id' => $offer->product_id])->andWhere(['<>', 'id', $offer->id])->all();
-$formated_props = [];
-foreach ($other_offers as $offer_item) {
-    foreach ($offer_item->propsValues as $propsValue) {
-        $formated_props[$propsValue->value][] = $propsValue;
-    }
-}
-
 $build_data = [];
-foreach ($formated_props as $key => $value) {
+$formated_props = [];
+$other_offers = \app\modules\catalog\models\entity\Offers::find()->where(['product_id' => $offer->product_id])->andWhere(['<>', 'id', $offer->id])->all();
 
-    foreach ($value as $item) {
-        if (count($other_offers) == count($value)) continue;
-        \app\modules\site\models\tools\Debug::p($key . '=' . count($value) . ' = ' . $item->property->name);
 
-        $build_data[$item->property->id]['property'] = $item->property;
-        $build_data[$item->property->id]['values'][] = $item;
+foreach ($other_offers as $other_offer) {
+    echo $other_offer->name . "<br/>";
+
+    foreach ($other_offer->propsValues as $value_item) {
+        echo '<strong>' . $value_item->property->name . '</strong>' . ' - ' . $value_item->value . ', ';
+        $formated_props[$value_item->property->id][$value_item->value] = $value_item;
     }
+    echo "<br>";
+
 }
 ?>
+
+
     <div itemscope itemtype="http://schema.org/Product">
         <div class="product-detail" itemscope itemtype="http://schema.org/Product">
             <div class="product-detail-left">
@@ -132,27 +131,20 @@ foreach ($formated_props as $key => $value) {
                 ]); ?>
 
 
-                <?php foreach ($build_data as $property_id => $value_data): ?>
-                    <p><?= $value_data['property']->name; ?></p>
-                    <?php foreach ($value_data['values'] as $data): ?>
-                        <label>
-                            <?= ProductPropertiesValuesHelper::getFinalValue($data); ?>
-                            <input type="radio" name="prop[1]" value="<?= $data->value; ?>">
-                        </label>
+                <?php if ($formated_props): ?>
+                    <?php foreach ($formated_props as $property_id => $data) : ?>
+                        <?php if (count($data) == 1) continue; ?>
+                        <p><?= Properties::findOne($property_id)->name; ?></p>
+                        <?php foreach ($data as $value => $item): ?>
+                            <div class="row">
+                                <div class="col-3"><?= ProductPropertiesValuesHelper::getFinalValue($item); ?></div>
+                                <div class="col-1">
+                                    <input type='radio' name='prop[<?= $item->property->id; ?>]' value='<?= $value; ?>'>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
                     <?php endforeach; ?>
-                <?php endforeach; ?>
-
-
-                <p>Вес</p>
-                <label>
-                    1кг
-                    <input type="radio" name="prop[2]" value="1">
-                </label>
-                <label>
-                    2кг
-                    <input type="radio" name="prop[2]" value="2">
-                </label>
-
+                <?php endif; ?>
             </div>
             <div class="product-detail-right">
                 <?= Breadcrumbs::widget([
