@@ -39,7 +39,22 @@ $this->params['breadcrumbs'][] = ['label' => $offer->name];
 $this->title = ProductTitle::show($offer->name);
 
 $other_offers = \app\modules\catalog\models\entity\Offers::find()->where(['product_id' => $offer->product_id])->andWhere(['<>', 'id', $offer->id])->all();
-\app\modules\site\models\tools\Debug::p($other_offers);
+$formated_props = [];
+foreach ($other_offers as $offer_item) {
+    foreach ($offer_item->propsValues as $propsValue) {
+        $formated_props[$propsValue->value][] = $propsValue;
+    }
+}
+
+//\app\modules\site\models\tools\Debug::p($formated_props);
+
+foreach ($formated_props as $key => $value) {
+
+    foreach ($value as $item) {
+        if (count($value) == count($other_offers)) continue;
+        \app\modules\site\models\tools\Debug::p($key . '=' . count($value) . ' = ' . $item->property->name);
+    }
+}
 ?>
     <div itemscope itemtype="http://schema.org/Product">
         <div class="product-detail" itemscope itemtype="http://schema.org/Product">
