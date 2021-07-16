@@ -145,7 +145,6 @@ $this->title = Title::show('Товары');
             'attribute' => 'updated_user_id',
             'format' => 'raw',
             'value' => function ($model) {
-                \app\modules\site\models\tools\Debug::p($model->updated_user_id);
                 $user = \app\modules\user\models\entity\User::findOne($model->updated_user_id);
                 if ($user) {
                     return $user->email;
