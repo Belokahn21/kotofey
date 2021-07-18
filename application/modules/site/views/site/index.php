@@ -55,8 +55,5 @@ $this->title = Title::show("Зоотовары для животных в Бар
     <?= LastNewsWidget::widget(['limit' => 3]) ?>
     <?= InstagramMediaWidget::widget(); ?>
     <?= LastWeekProducts::widget(); ?>
-    <div class="page-title__group">
-        <h2 class="page-title">Быстрый поиск</h2>
-    </div>
     <?= FastButtonSearchWidget::widget(); ?>
 </div>
