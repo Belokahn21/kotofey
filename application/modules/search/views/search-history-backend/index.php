@@ -1,5 +1,6 @@
 <?php
 /* @var $this \yii\web\View */
+/* @var $model \app\modules\search\models\entity\SearchQuery */
 
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -19,13 +20,11 @@ echo \yii\grid\GridView::widget([
     'emptyText' => 'История поиска отсутствует',
     'columns' => [
         'id',
+        'ip',
         'text',
+        'count',
         [
             'attribute' => 'created_at',
-            'format' => ['date', 'dd.MM.YYYY'],
-        ],
-        [
-            'attribute' => 'updated_at',
             'format' => ['date', 'dd.MM.YYYY'],
         ],
         [

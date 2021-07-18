@@ -2,6 +2,7 @@
 
 namespace app\modules\search\controllers;
 
+use app\modules\search\models\entity\SearchQuery;
 use app\modules\search\models\search\SearchHistorySearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\user\models\tool\BehaviorsRoleManager;
@@ -38,7 +39,13 @@ class SearchHistoryBackendController extends MainBackendController
     public function actionUpdate($id)
     {
         if (!$model = $this->getModel($id)) throw new HttpException(404, 'Элемент не найден');
-        return $this->render('update');
+
+        $other_models = SearchQuery::find()->where(['ip' => $model->ip])->all();
+
+        return $this->render('update', [
+            'model' => $model,
+            'other_models' => $other_models
+        ]);
     }
 
     public function actionDelete($id)
