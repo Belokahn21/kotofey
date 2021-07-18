@@ -27,7 +27,7 @@ class SearchHistorySearchForm extends SearchQuery
 
     public function search($params)
     {
-        $query = SearchQuery::find();
+        $query = SearchQuery::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
