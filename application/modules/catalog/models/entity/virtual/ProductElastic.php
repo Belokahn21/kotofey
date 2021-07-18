@@ -23,7 +23,7 @@ class ProductElastic extends ActiveRecord
         return [
             // Типы полей: https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html#field-datatypes
             'properties' => [
-                'name' => ['type' => 'text'],
+                'name' => ['type' => 'text', 'analyzer' => 'my_analyzer'],
             ]
         ];
     }
@@ -42,7 +42,21 @@ class ProductElastic extends ActiveRecord
         $command->createIndex(static::index(), [
             //'aliases' => [ /* ... */ ],
             'mappings' => static::mapping(),
-            //'settings' => [ /* ... */ ],
+            'settings' => [
+                'analysis' => [
+                    'analyzer' => [
+                        'my_analyzer' => [
+                            "type" => "custom",
+                            "tokenizer" => "standard",
+                            'filter' => [
+                                'lowercase',
+                                'russian_morphology',
+//                                'english_morphology',
+                            ]
+                        ]
+                    ]
+                ]
+            ],
         ]);
     }
 
