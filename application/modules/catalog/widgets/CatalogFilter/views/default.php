@@ -32,7 +32,7 @@ $resultArray = [];
 <div class="filter-catalog-container">
     <div class="filter-catalog__item">
         <label class="filter-catalog__label" for="js-filter-from">Наличие</label>
-        <?= $form->field($filterModel, 'available')->checkbox(['class' => 'filter-catalog__input', 'value' => $filterModel->available ?: 'Y'])->label(false); ?>
+        <?= $form->field($filterModel, 'available')->checkbox(['value' => $filterModel->available ?: 'Y'])->label(false); ?>
     </div>
     <div class="filter-catalog__item">
         <label class="filter-catalog__label" for="js-filter-from">Цена</label>
