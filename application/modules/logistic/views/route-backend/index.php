@@ -69,18 +69,23 @@ $this->title = Title::show("Список доставок");
                                     <?= !$order->floor_house ? '' : ', эт. ' . $order->floor_house; ?>
                                 </div>
                             </div>
-                            <div class="row my-1">
-                                <div class="col-12 bold">Заметки админов:</div>
-                                <div class="col-12">
-                                    <?= $order->notes; ?>
+                            <?php if ($order->notes): ?>
+                                <div class="row my-1">
+                                    <div class="col-5 bold">Заметки админов:</div>
+                                    <div class="col-7">
+                                        <?= $order->notes; ?>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row my-1">
-                                <div class="col-12 bold">Комментарий заказа:</div>
-                                <div class="col-12">
-                                    <?= $order->comment; ?>
+                            <?php endif; ?>
+
+                            <?php if ($order->comment): ?>
+                                <div class="row my-1">
+                                    <div class="col-5 bold">Комментарий заказа:</div>
+                                    <div class="col-7">
+                                        <?= $order->comment; ?>
+                                    </div>
                                 </div>
-                            </div>
+                            <?php endif; ?>
 
                         </div>
                     </div>
