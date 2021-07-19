@@ -33,7 +33,7 @@ class CatalogFilter extends Model
     public function attributeLabels()
     {
         return [
-            'available' => 'В наличии',
+            'available' => 'С доставкой на сегодня',
             'params' => 'Справочник',
             'price_from' => 'Цена от',
             'price_to' => 'Цена до',

@@ -31,7 +31,7 @@ $resultArray = [];
 <div class="filter-catalog__title"><span>Подобрать товар</span><span class="filter-catalog__arrow"><img src="/upload/images/arrow-left-black.svg"></span></div>
 <div class="filter-catalog-container">
     <div class="filter-catalog__item">
-        <label class="filter-catalog__label" for="js-filter-from">Наличие</label>
+        <label class="filter-catalog__label" for="js-filter-from">Сейчас на складе:</label>
         <?= $form->field($filterModel, 'available')->checkbox(['value' => $filterModel->available ?: 'Y'])->label(false); ?>
     </div>
     <div class="filter-catalog__item">
@@ -41,9 +41,11 @@ $resultArray = [];
             <?= $form->field($filterModel, 'price_to')->textInput(['id' => 'js-filter-to', 'class' => 'filter-catalog__input', 'placeholder' => '1000', 'value' => $filterModel->price_to])->label(false); ?>
         </div>
     </div>
+
+    <?php /*
     <div class="filter-catalog__item">
         <input class="filter-catalog__range" type="range">
-    </div>
+    </div> */ ?>
 
     <?php foreach ($resultArray as $item): ?>
 
