@@ -24,6 +24,7 @@ class CatalogFilter extends Model
     public function rules()
     {
         return [
+            [['available'], 'string'],
             [['price_from', 'price_to', 'weight_from', 'weight_to'], 'integer'],
             ['params', 'safe']
         ];
