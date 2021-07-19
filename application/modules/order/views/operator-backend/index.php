@@ -51,7 +51,7 @@ $this->title = Title::show('Кабинет оператора');
 </ul>
 <?php foreach ($orderQuery->all() as $order): ?>
     <div class="row">
-        <div class="col-3">Заказ № <?= $order->id; ?></div>
+        <div class="col-3"><?= Html::a('Заказ № ' . $order->id, Url::to(['order-backend/update', 'id' => $order->id])) ?></div>
         <div class="col-3"><?= Price::format(OrderHelper::orderSummary($order)); ?><?= Currency::getInstance()->show(); ?></div>
         <div class="col-3"><?= date('d.m.Y H:i:s', $order->created_at); ?></div>
         <div class="col-3"><?= $order->email ? $order->email . '/' : null; ?><?= $order->phone; ?></div>
