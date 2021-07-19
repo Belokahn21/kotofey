@@ -31,7 +31,7 @@ $this->title = Title::show('Кабинет оператора');
     <div class="col-4"><?= $form->field($filterModel, 'end_at')->textInput(['class' => 'js-datepicker form-control']); ?></div>
     <div class="col-4"><?= $form->field($filterModel, 'manager_id')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['class' => 'js-datepicker form-control']); ?></div>
 </div>
-<?= Html::submitButton('Отправить', ['class' => 'btn-main']) ?>
+<?= Html::submitButton('Получить отчёт', ['class' => 'btn-main']) ?>
 <?= Html::a('Очистить', Url::to(['index']), ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>
 
