@@ -1,8 +1,10 @@
 <?php
 
-use yii\helpers\StringHelper;
+use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\Currency;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 
 /* @var $models \app\modules\catalog\models\entity\Product[]
  * @var $this \yii\web\View
@@ -12,6 +14,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
  * @var $linkTitle string
  * @var $uniqKey string
  */
+
 
 ?>
 
@@ -31,6 +34,32 @@ use app\modules\catalog\models\helpers\ProductHelper;
         <div class="swiper-container steam-slider-container">
             <div class="swiper-wrapper steam-slider-wrapper">
                 <?php foreach ($models as $model): ?>
+
+                    <?php
+                    $render_images = [];
+                    $discount = $model->getDiscountPrice();
+
+                    if ($model->images) {
+                        foreach (\yii\helpers\Json::decode($model->images) as $image) {
+                            $render_images[] = [
+                                'href' => $image
+                            ];
+                        }
+                    }
+
+                    if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($model, 23)): ?>
+                        <?php foreach ($imagesFromProperty as $propertyValue): ?>
+                            <?php if ($propertyValue->media):
+                                $render_images[] = [
+                                    'href' => $propertyValue->media->cdnData['secure_url']
+                                ];
+                            endif; ?>
+                        <?php endforeach; ?>
+                    <?php endif;
+
+
+                    ?>
+
                     <a href="<?= ProductHelper::getDetailUrl($model); ?>" class="swiper-slide steam-slider-slide">
                         <div class="steam-slider-slide__side">
                             <img class="steam-slider-slide__image" alt="<?= $model->name; ?>" title="<?= $model->name; ?>" src="<?= ProductHelper::getImageUrl($model); ?>"/>
@@ -38,11 +67,11 @@ use app\modules\catalog\models\helpers\ProductHelper;
                         <div class="steam-slider-slide__side steam-slider-card">
                             <div class="steam-slider-card__title"><?= $model->name; ?></div>
                             <div class="steam-slider-images">
-                                <?php if ($model->images): ?>
+                                <?php if ($render_images): ?>
                                     <?php $count = 1; ?>
-                                    <?php foreach (\yii\helpers\Json::decode($model->images) as $image): ?>
+                                    <?php foreach ($render_images as $image): ?>
                                         <?php if ($count <= 4): ?>
-                                            <div class="steam-slider-images__item"><img src="<?= $image; ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>"/></div>
+                                            <div class="steam-slider-images__item"><img src="<?= $image['href']; ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>"/></div>
                                         <?php endif; ?>
                                         <?php $count++; ?>
                                     <?php endforeach; ?>
@@ -65,7 +94,42 @@ use app\modules\catalog\models\helpers\ProductHelper;
                                         </div>
                                     </div>
                                 </div>
+
                             <?php endif; ?>
+                            <div class="steam-slider-price-container">
+                                <div class="steam-slider-price">
+                                    <?php if ($discount): ?>
+                                        <div class="steam-slider-price__old"><?= Price::format($model->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
+                                        <div class="steam-slider-price__current"><?= Price::format($discount); ?> <?= Currency::getInstance()->show(); ?></div>
+                                    <?php else: ?>
+                                        <div class="steam-slider-price__current"><?= Price::format($model->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
+                                    <?php endif; ?>
+                                </div>
+                                <div class="steam-slider-for">
+                                    <?php $for = PropertiesHelper::extractAllPropertyById($model, 24) ?>
+                                    <?php if ($for): ?>
+                                        <div class="steam-slider-for__label">подходит для:
+                                            <div class="steam-slider-for__group">
+
+                                                <?php foreach ($for as $elem_val): ?>
+                                                    <?php $path = null; ?>
+                                                    <?php switch ($elem_val->value) {
+                                                        case 241:
+                                                            $path = '/images/dog.png';
+                                                            break;
+                                                        case 242:
+                                                            $path = '/images/cat.png';
+                                                            break;
+                                                    }
+                                                    ?>
+                                                    <img class="steam-slider-for__icon" src="<?= $path; ?>"/>
+                                                <?php endforeach; ?>
+
+                                            </div>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
+                            </div>
                         </div>
                     </a>
                 <?php endforeach; ?>

@@ -21,51 +21,46 @@ use yii\behaviors\TimestampBehavior;
  */
 class SearchQuery extends \yii\db\ActiveRecord
 {
-	/**
-	 * {@inheritdoc}
-	 */
-	public static function tableName()
-	{
-		return 'search_query';
-	}
+    public function rules()
+    {
+        return [
+            [['text'], 'required'],
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function rules()
-	{
-		return [
-			[['text'], 'required'],
-			[['text', 'ip'], 'string'],
-			[['user_id', 'created_at', 'updated_at', 'count_find'], 'integer'],
-		];
-	}
+            [['text', 'ip'], 'string'],
 
-	public function behaviors()
-	{
-		return [
-			TimestampBehavior::className(),
-		];
-	}
+            [['user_id', 'created_at', 'updated_at', 'count_find'], 'integer'],
+        ];
+    }
 
-	/**
-	 * {@inheritdoc}
-	 */
-	public function attributeLabels()
-	{
-		return [
-			'id' => 'ID',
-			'text' => 'Поисковая фраза',
-			'user_id' => 'User ID',
-			'ip' => 'IP адрес',
-			'count_find' => 'Количество найденых товаров',
-			'created_at' => 'Дата создания',
-			'updated_at' => 'Дата обновления',
-		];
-	}
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
 
-	public function getUser()
-	{
-		return User::findOne($this->user_id);
-	}
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'text' => 'Поисковая фраза',
+            'user_id' => 'User ID',
+            'ip' => 'IP адрес',
+            'count_find' => 'Количество найденых товаров',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
+
+            'count' => 'Кол-во запросов с адреса',
+        ];
+    }
+
+    public function getUser()
+    {
+        return User::findOne($this->user_id);
+    }
+
+    public function getCount()
+    {
+        return self::find()->where(['ip' => $this->ip])->count();
+    }
 }
