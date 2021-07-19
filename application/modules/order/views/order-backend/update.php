@@ -34,6 +34,11 @@ $this->title = Title::show("Обновить заказ: " . $model->id);
             <?= Html::a('Ссылка на оплату', AcquiringHelper::getInstance()->productionPaymentLink($model), ['target' => '_blank', 'class' => 'btn-main']); ?>
         <?php endif; ?>
     </div>
+
+    <div class="product-additional-panel">
+        <div class="product-markup">Создан: <?= date('d.m.Y', $model->created_at) ?></div>
+        <div class="product-markup">Обновлен: <?= date('d.m.Y', $model->updated_at) ?></div>
+    </div>
 <?php if (!$model->isNewRecord): ?>
     <?php //todo: лень вывести данные цифровые ?>
 <?php endif; ?>
