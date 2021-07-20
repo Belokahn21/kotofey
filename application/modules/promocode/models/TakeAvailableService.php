@@ -18,17 +18,17 @@ class TakeAvailableService
 
     public function getPromo()
     {
-        $code_list = Promocode::find()->where(['quality' => Promocode::QUALITY_SIMPLE])->all();
+        $used_list = PromocodeUser::find()->where(['phone' => $this->phone])->all();
+        $code_list = Promocode::find()->where(['quality' => Promocode::QUALITY_SIMPLE])->andWhere(['not in', 'code', ArrayHelper::getColumn($used_list, 'code')])->all();
 
+        if (!$code_list) {
+            $code = $this->randomSaleCode();
+        } else {
+            $code = $code_list[0];
+        }
 
+        return $code->code;
     }
-
-//    public function sortFreeCode(string $phone, array $code_list)
-//    {
-//        $result = PromocodeUser::find()->where(['phone' => $phone])->andWhere(['code' => $code_list])->all();
-//
-//        return ArrayHelper::getColumn($result, 'promocode') ?: false;
-//    }
 
     public function randomSaleCode()
     {

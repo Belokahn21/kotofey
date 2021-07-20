@@ -52,4 +52,9 @@ class PromocodeUser extends \yii\db\ActiveRecord
     {
         return self::findOne(['phone' => $phone]);
     }
+
+    public function getPromocode()
+    {
+        return $this->hasOne(Promocode::className(), ['code' => 'code']);
+    }
 }
