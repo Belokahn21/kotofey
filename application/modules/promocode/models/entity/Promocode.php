@@ -9,6 +9,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "promocode".
  *
  * @property int $id
+ * @property string $quality
  * @property string $code
  * @property int $count
  * @property int $discount
@@ -20,10 +21,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class Promocode extends \yii\db\ActiveRecord
 {
-    public static function tableName()
-    {
-        return 'promocode';
-    }
+    const QUALITY_PERSONAL = 'personal';
+    const QUALITY_SIMPLE = 'simple';
 
     public function behaviors()
     {
@@ -37,10 +36,15 @@ class Promocode extends \yii\db\ActiveRecord
     {
         return [
             [['count'], 'default', 'value' => 0],
+
             [['count', 'discount'], 'integer'],
-            [['code'], 'string', 'max' => 255],
+
+            [['code', 'quality'], 'string', 'max' => 255],
+
             [['code'], 'unique'],
+
             [['infinity'], 'boolean'],
+
             [['start_at', 'end_at'], 'safe'],
         ];
     }
@@ -49,6 +53,7 @@ class Promocode extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'quality' => 'Качество',
             'code' => 'Код',
             'count' => 'Кол-во использований',
             'discount' => 'Скидка (%)',
@@ -86,5 +91,13 @@ class Promocode extends \yii\db\ActiveRecord
         }
 
         return true;
+    }
+
+    public function getQualityList()
+    {
+        return [
+            self::QUALITY_SIMPLE => 'Обычный промокод',
+            self::QUALITY_PERSONAL => 'Специальный промокод',
+        ];
     }
 }

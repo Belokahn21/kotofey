@@ -4,6 +4,7 @@ namespace app\modules\promocode\models;
 
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\entity\PromocodeUser;
+use yii\helpers\ArrayHelper;
 
 class TakeAvailableService
 {
@@ -16,9 +17,9 @@ class TakeAvailableService
 
     public function getPromo()
     {
-        $code = Promocode::findOne(['code' => rand()]);
+        $code_list = ArrayHelper::getColumn(Promocode::find()->where(['quality' => Promocode::QUALITY_SIMPLE])->all(), 'code');
 
-        if ($this->isFree($this->phone, $code)) {
+        if (!$code = $this->isFreePack($this->phone, $code_list)) {
             $code = $this->randomSaleCode();
         }
 
@@ -27,9 +28,14 @@ class TakeAvailableService
         return $code->code;
     }
 
+    public function isFreePack(string $phone, array $code)
+    {
+        return PromocodeUser::find()->where(['phone' => $phone])->andWhere(['in', 'code', $code])->all()[0] ?: false;
+    }
+
     public function isFree(string $phone, Promocode $code)
     {
-        return PromocodeUser::find()->where(['phone' => $phone, 'code' => $code->code]) ? true : false;
+        return PromocodeUser::findOne(['phone' => $phone, 'code' => $code->code]) ?: false;
     }
 
     public function randomSaleCode()
@@ -39,6 +45,7 @@ class TakeAvailableService
         $pc->discount = 5;
         $pc->infinity = 1;
         $pc->count = 0;
+        $pc->quality = Promocode::QUALITY_SIMPLE;
 
         if (!$pc->validate() || !$pc->save()) return false;
 
