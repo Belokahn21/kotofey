@@ -23,8 +23,8 @@ class ConsoleController extends Controller
     {
         ProductElastic::deleteIndex();
         ProductElastic::createIndex();
-//        $models = Product::find()->all();
-        $models = Product::find()->limit(10)->all();
+        $models = Product::find()->all();
+//        $models = Product::find()->limit(10)->all();
         foreach ($models as $model) {
             $el = new ProductElastic();
             $el->setPrimaryKey($model->id);

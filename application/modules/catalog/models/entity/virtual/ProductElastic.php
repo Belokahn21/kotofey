@@ -44,14 +44,29 @@ class ProductElastic extends ActiveRecord
             'mappings' => static::mapping(),
             'settings' => [
                 'analysis' => [
+                    'filter' => [
+                        'russian_stop' => [
+                            'type' => 'stop',
+                            'stopwords' => '_russian_',
+                        ],
+                        'russian_keywords' => [
+                            'type' => 'keyword_marker',
+                            'keywords' => ['пример'],
+                        ],
+                        'russian_stemmer' => [
+                            'type' => 'stemmer',
+                            'language' => 'russian',
+                        ],
+                    ],
                     'analyzer' => [
                         'my_analyzer' => [
                             "type" => "custom",
                             "tokenizer" => "standard",
                             'filter' => [
                                 'lowercase',
-                                'russian_morphology',
-//                                'english_morphology',
+                                'russian_stop',
+                                'russian_keywords',
+                                'russian_stemmer',
                             ]
                         ]
                     ]
