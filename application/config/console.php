@@ -163,6 +163,9 @@ $config = [
         'promotion' => [
             'class' => 'app\modules\promotion\console\PromotionController'
         ],
+        'sender' => [
+            'class' => 'app\modules\mailer\console\SenderController'
+        ],
     ],
     'modules' => [
         'catalog' => [
