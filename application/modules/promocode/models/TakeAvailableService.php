@@ -4,6 +4,7 @@ namespace app\modules\promocode\models;
 
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\entity\PromocodeUser;
+use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 
 class TakeAvailableService

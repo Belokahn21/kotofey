@@ -5,6 +5,7 @@ namespace app\modules\mailer\console;
 use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;
 use app\modules\promocode\models\TakeAvailableService;
+use app\modules\site\models\tools\Debug;
 use app\modules\subscribe\models\entity\Subscribes;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
@@ -15,7 +16,7 @@ class SenderController extends Controller
     {
         $module = \Yii::$app->getModule('mailer');
 
-        if (!$module || empty($module->remember_event_id)) return false;
+//        if (!$module || empty($module->remember_event_id)) return false;
 
         $orders = Order::find()
             ->select(['id', 'email', 'created_at'])
@@ -27,15 +28,15 @@ class SenderController extends Controller
 
 
         foreach ($orders as $order) {
-
             $take_serivce = new TakeAvailableService($order->phone);
             $promo_code = $take_serivce->getPromo();
+            Debug::p($promo_code);
 
-            $es = new MailService();
-            $es->sendEvent($module->remember_event_id, [
-                'PROMO_CODE' => $promo_code,
-                'EMAIL_TO' => $order->email,
-            ]);
+//            $es = new MailService();
+//            $es->sendEvent($module->remember_event_id, [
+//                'PROMO_CODE' => $promo_code,
+//                'EMAIL_TO' => $order->email,
+//            ]);
         }
     }
 }
