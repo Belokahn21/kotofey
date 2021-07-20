@@ -11,8 +11,9 @@ class ConsoleController extends Controller
 {
     public function actionRun($name = null)
     {
+        //todo поиск по логике
         //todo https://codedzen.ru/elasticsearch-urok-6-3-poisk/
-        $models = ProductElastic::find()->query(['match' => ['name' => 'Yorkshire puppy']])->limit(10000)->all();
+        $models = ProductElastic::find()->query(['match' => ['name' => 'стерилизованные']])->limit(10000)->all();
         foreach ($models as $model) {
             echo $model->name . PHP_EOL;
         }
