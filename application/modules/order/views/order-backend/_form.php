@@ -156,22 +156,37 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                                             <div><?= $item->name; ?></div>
                                         <?php endif; ?>
                                         <?php if ($item->product): ?>
-                                            <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
-                                            <div>Зкупочная: <?= $item->product->purchase; ?></div>
-                                            <div>Сейчас на складе: <?= $item->product->count; ?></div>
-                                            <?php
-                                            try { ?>
-                                                <div>Вес позиций: <?= $summary_weight += PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
 
-                                            <?php } catch (Exception $exception) { ?>
-                                                <div class="red bold">При расчете веса возникла ошибка: <?= $exception->getMessage(); ?></div>
-                                            <?php } ?>
+
+                                            <div class="order-items-list-info__block">
+                                                <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
+                                                <?php
+                                                try { ?>
+                                                    <div>Вес позиций: <?= $summary_weight += PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
+
+                                                <?php } catch (Exception $exception) { ?>
+                                                    <div class="red bold">При расчете веса возникла ошибка: <?= $exception->getMessage(); ?></div>
+                                                <?php } ?>
+                                            </div>
                                         <?php endif; ?>
-                                        <div>К продаже за штуку: <?= Price::format($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::format($item->discount_price) : null; ?></div>
-                                        <div>Кол-во: <?= $item->count; ?></div>
-                                        <div>Итого к продаже:
-                                            <?= Price::format($item->price * $item->count) ?>
-                                            <?= $item->discount_price ? ' / со скидкой ' . Price::format($item->discount_price * $item->count) : null; ?>
+
+                                        <div class="order-items-list-info__block">
+                                            <div>Сейчас на складе: <?= $item->product->count; ?></div>
+                                            <div>Кол-во: <?= $item->count; ?></div>
+                                        </div>
+
+
+                                        <div class="order-items-list-info__block">
+                                            <div>Зкупочная: <?= Price::showFormat($item->product->purchase); ?></div>
+                                            <div>К продаже за штуку: <?= Price::showFormat($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::showFormat($item->discount_price) : null; ?></div>
+                                        </div>
+
+
+                                        <div class="order-items-list-info__block">
+                                            <div>Итого к продаже:
+                                                <?= Price::showFormat($item->price * $item->count) ?>
+                                                <?= $item->discount_price ? ' / со скидкой ' . Price::showFormat($item->discount_price * $item->count) : null; ?>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

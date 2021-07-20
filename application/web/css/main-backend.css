@@ -8694,6 +8694,8 @@ html, body {
     font-weight: bold; }
     .order-items-list-info__name a {
       color: inherit; }
+  .order-items-list-info__block {
+    margin-bottom: 10px; }
 
 .order-delivery-info {
   display: flex;
