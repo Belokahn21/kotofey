@@ -24,8 +24,9 @@ class Module extends MainModule
 
     public function getParams()
     {
+        $events = MailEvents::find()->all();
         return [
-            'remember_event_id' => '',
+            'remember_event_id' => ArrayHelper::map($events, 'id', 'name'),
         ];
     }
 
