@@ -4,6 +4,7 @@ namespace app\modules\mailer\console;
 
 use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;
+use app\modules\promocode\models\TakeAvailableService;
 use app\modules\subscribe\models\entity\Subscribes;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
@@ -26,11 +27,14 @@ class SenderController extends Controller
 
 
         foreach ($orders as $order) {
-            $promo_code = rand();
+
+            $take_serivce = new TakeAvailableService($order->phone);
+            $promo_code = $take_serivce->getPromo();
 
             $es = new MailService();
             $es->sendEvent($module->remember_event_id, [
-                'PROMO_CODE' => $promo_code
+                'PROMO_CODE' => $promo_code,
+                'EMAIL_TO' => $order->email,
             ]);
         }
     }
