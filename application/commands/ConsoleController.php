@@ -11,7 +11,7 @@ class ConsoleController extends Controller
     public function actionRun($name = null)
     {
         if ($name == null) {
-            $name = 'purina';
+            $name = 'purina one';
         }
         $products = Product::find();
         foreach (explode(' ', $name) as $text_line) {
