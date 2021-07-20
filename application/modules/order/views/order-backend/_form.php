@@ -171,13 +171,19 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                                         <?php endif; ?>
 
                                         <div class="order-items-list-info__block">
-                                            <div>Сейчас на складе: <?= $item->product->count; ?></div>
+                                            <?php if ($item->product): ?>
+                                                <div>Сейчас на складе: <?= $item->product->count; ?></div>
+                                            <?php endif; ?>
                                             <div>Кол-во: <?= $item->count; ?></div>
                                         </div>
 
 
                                         <div class="order-items-list-info__block">
-                                            <div>Зкупочная: <?= Price::showFormat($item->product->purchase); ?></div>
+                                            <?php if ($item->product): ?>
+                                                <div>Зкупочная: <?= Price::showFormat($item->product->purchase); ?></div>
+                                            <?php else: ?>
+                                                <div>Зкупочная: <?= Price::showFormat($item->purchase); ?></div>
+                                            <?php endif; ?>
                                             <div>К продаже за штуку: <?= Price::showFormat($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::showFormat($item->discount_price) : null; ?></div>
                                         </div>
 
