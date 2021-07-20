@@ -18,27 +18,26 @@ class TakeAvailableService
 
     public function getPromo()
     {
-        $code_list = ArrayHelper::getColumn(Promocode::find()->where(['quality' => Promocode::QUALITY_SIMPLE])->all(), 'code');
+        $code_list = Promocode::find()->where(['quality' => Promocode::QUALITY_SIMPLE])->all();
 
         $check = $this->isFreePack($this->phone, $code_list);
-
-        Debug::p($code_list);
-        Debug::p($check);
-
-        exit();
 
         if (!$this->isFreePack($this->phone, $code_list)) {
             $code = $this->randomSaleCode();
         }
 
+        if ($code_list) {
+            exit();
+        }
         if (!$code instanceof Promocode) throw new \Exception('Ошибка');
 
         return $code->code;
     }
 
-    public function isFreePack(string $phone, array $code)
+    public function isFreePack(string $phone, array $code_list)
     {
-        return PromocodeUser::find()->where(['phone' => $phone])->andWhere(['in', 'code', $code])->all() ?: false;
+        $q = PromocodeUser::find()->where(['phone' => $phone])->andWhere(['code' => ArrayHelper::getColumn($code_list, 'code')])->all();
+        return $q ? false : true;
     }
 
     public function isFree(string $phone, Promocode $code)
