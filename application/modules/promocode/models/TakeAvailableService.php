@@ -33,7 +33,7 @@ class TakeAvailableService
     public function randomSaleCode()
     {
         $pc = new Promocode();
-        $pc->code = \Yii::$app->security->generateRandomString(5);
+        $pc->code = \Yii::$app->security->generateRandomKey(5);
         $pc->discount = 5;
         $pc->infinity = 1;
         $pc->count = 0;
