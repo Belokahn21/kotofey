@@ -14,7 +14,7 @@ class ConsoleController extends Controller
         //todo поиск по логике
         //todo https://codedzen.ru/elasticsearch-urok-6-3-poisk/
         //todo https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-match-query.html
-        $models = ProductElastic::find()->query(['multi_match' => ['query' => 'лоток', 'fields' => ['name'], 'operator' => 'and']])->limit(10000)->all();
+        $models = ProductElastic::find()->query(['multi_match' => ['query' => 'лоток для кошек', 'fields' => ['name'], 'operator' => 'or']])->limit(10000)->all();
         foreach ($models as $model) {
             echo $model->name . PHP_EOL;
         }
