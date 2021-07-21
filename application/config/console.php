@@ -176,6 +176,9 @@ $config = [
         'sender' => [
             'class' => 'app\modules\mailer\console\SenderController'
         ],
+        'elastic' => [
+            'class' => 'app\modules\catalog\console\ElasticController'
+        ],
     ],
     'modules' => [
         'catalog' => [

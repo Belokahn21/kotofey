@@ -23,8 +23,8 @@ class ProductElastic extends ActiveRecord
         return [
             // Типы полей: https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html#field-datatypes
             'properties' => [
-                'name' => ['type' => 'text', 'analyzer' => 'russian'],
-//                'name' => ['type' => 'text', 'analyzer' => 'my_analyzer'],
+//                'name' => ['type' => 'text', 'analyzer' => 'russian'],
+                'name' => ['type' => 'text', 'analyzer' => 'my_analyzer'],
             ]
         ];
     }
