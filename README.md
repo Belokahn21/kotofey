@@ -19,4 +19,5 @@ MySQL<br><br>
  - Интеграция с TinyPNG API (free 500/mounth)<br>
  - Интеграция с Cloudinary (CDN)<br>
  - Интеграция с OFD.RU (Ferma)<br>
- - Интеграция с Почта России (API расчётов)
+ - Интеграция с Почта России (API расчётов)<br>
+ - Elasticsearch<br>
