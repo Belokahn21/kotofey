@@ -4,10 +4,8 @@ namespace app\modules\search\models\entity;
 
 
 use app\modules\catalog\models\entity\virtual\ProductElastic;
-use app\modules\search\models\entity\SearchQuery;
 use app\modules\catalog\models\entity\Product;
 use app\modules\search\models\services\SearchHistory\SearchHistory;
-use app\modules\search\models\services\SearchHistory\SearchHistoryStorage;
 use app\modules\search\Module;
 use yii\base\Model;
 use yii\db\ActiveQuery;
