@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\entity\virtual;
 
+use app\modules\catalog\models\entity\Product;
 use yii\elasticsearch\ActiveRecord;
 
 class ProductElastic extends ActiveRecord
@@ -83,5 +84,12 @@ class ProductElastic extends ActiveRecord
         $db = static::getDb();
         $command = $db->createCommand();
         $command->deleteIndex(static::index(), static::type());
+    }
+
+    public function fillAttributes(Product $product)
+    {
+        $this->_id = $product->id;
+        $this->id = $product->id;
+        $this->name = $product->name;
     }
 }
