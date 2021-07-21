@@ -6,8 +6,13 @@ use yii\helpers\Url;
 
 class Module extends \app\modules\site\MainModule
 {
+    const SEARCH_ENGINE_SITE = 'site';
+    const SEARCH_ENGINE_ELASTIC = 'elastic';
+
     public $controllerNamespace = 'app\modules\search\controllers';
     private $name = 'Поиск';
+
+    public $search_engine;
 
     public function init()
     {
@@ -24,5 +29,28 @@ class Module extends \app\modules\site\MainModule
     public function getName()
     {
         return $this->name;
+    }
+
+
+    public function getParams()
+    {
+        return [
+            'search_engine' => $this->getSearchEngine(),
+        ];
+    }
+
+    public function getParamsLabel()
+    {
+        return [
+            'search_engine' => 'Поисковое ядро',
+        ];
+    }
+
+    public function getSearchEngine()
+    {
+        return [
+            self::SEARCH_ENGINE_SITE => 'Обычный поиск',
+            self::SEARCH_ENGINE_ELASTIC => 'Elasticsearch',
+        ];
     }
 }
