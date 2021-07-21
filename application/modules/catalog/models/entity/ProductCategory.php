@@ -89,7 +89,9 @@ class ProductCategory extends ActiveRecord
 
     public function categoryTree($parent_id = 0, $delim = "")
     {
-        $categories = ProductCategory::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
+        $categories = \Yii::$app->cache->getOrSet(__FILE__ . __METHOD__, function () use ($parent_id) {
+            return ProductCategory::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
+        });
 
         if ($categories) {
 
