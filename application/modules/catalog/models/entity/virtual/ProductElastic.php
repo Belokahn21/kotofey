@@ -8,13 +8,14 @@ class ProductElastic extends ActiveRecord
 {
     public function attributes()
     {
-        return ['name'];
+        return ['id', 'name'];
     }
 
     public function rules()
     {
         return [
-            ['name', 'string']
+            ['id', 'integer'],
+            ['name', 'string'],
         ];
     }
 
@@ -23,8 +24,9 @@ class ProductElastic extends ActiveRecord
         return [
             // Типы полей: https://www.elastic.co/guide/en/elasticsearch/reference/current/mapping.html#field-datatypes
             'properties' => [
-//                'name' => ['type' => 'text', 'analyzer' => 'russian'],
+                'id' => ['type' => 'integer'],
                 'name' => ['type' => 'text', 'analyzer' => 'my_analyzer'],
+//                'name' => ['type' => 'text', 'analyzer' => 'russian'],
             ]
         ];
     }
