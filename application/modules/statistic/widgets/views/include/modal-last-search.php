@@ -26,7 +26,7 @@ use yii\helpers\Url;
                         </div>
                         <?php foreach ($searches as $search): ?>
                             <div class="search-history__item">
-                                <div class="search-history__ip"><?= Html::a($search->ip, Url::to(['/admin/order/order-backend/index/', 'OrderSearchForm[ip]' => $search->ip]), ['target' => '_blank']); ?>(<?= Order::find()->where(['ip' => $search->ip])->count(); ?>)</div>
+                                <div class="search-history__ip"><?= Html::a($search->ip, Url::to(['/admin/order/order-backend/index/', 'OrderSearchForm[ip]' => $search->ip]), ['target' => '_blank']); ?>(<?= Order::find()->where(['ip' => $search->ip])->count(); ?> / <?= $search->count; ?>)</div>
                                 <div class="search-history__phrase"><?= Html::a($search->text, '/search/?Search[search]=' . $search->text, ['target' => '_blank']) ?></div>
                                 <div class="search-history__count"><?= $search->count_find; ?></div>
                                 <div class="search-history__date"><?= date('d.m.Y', $search->created_at) ?></div>

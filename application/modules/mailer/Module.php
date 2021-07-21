@@ -2,7 +2,9 @@
 
 namespace app\modules\mailer;
 
+use app\modules\mailer\models\entity\MailEvents;
 use app\modules\site\MainModule;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
 /**
@@ -13,11 +15,27 @@ class Module extends MainModule
     public $controllerNamespace = 'app\modules\mailer\controllers';
     public $name = 'Почта';
 
+    public $remember_event_id;
+
     public function init()
     {
         parent::init();
     }
 
+    public function getParams()
+    {
+        $events = MailEvents::find()->all();
+        return [
+            'remember_event_id' => ArrayHelper::map($events, 'id', 'name'),
+        ];
+    }
+
+    public function getParamsLabel()
+    {
+        return [
+            'remember_event_id' => 'Почтовое событие для рассылки потеряшек',
+        ];
+    }
 
     public function menuIndex()
     {

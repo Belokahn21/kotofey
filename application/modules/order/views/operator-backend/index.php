@@ -6,6 +6,7 @@ use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\modules\seo\models\tools\Title;
 use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\Currency;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\OperatorAdmin\OperatorAdminWidget;
@@ -30,7 +31,7 @@ $this->title = Title::show('Кабинет оператора');
     <div class="col-4"><?= $form->field($filterModel, 'end_at')->textInput(['class' => 'js-datepicker form-control']); ?></div>
     <div class="col-4"><?= $form->field($filterModel, 'manager_id')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['class' => 'js-datepicker form-control']); ?></div>
 </div>
-<?= Html::submitButton('Отправить', ['class' => 'btn-main']) ?>
+<?= Html::submitButton('Получить отчёт', ['class' => 'btn-main']) ?>
 <?= Html::a('Очистить', Url::to(['index']), ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>
 
@@ -48,6 +49,14 @@ $this->title = Title::show('Кабинет оператора');
         ?>
     </li>
 </ul>
+<?php foreach ($orderQuery->all() as $order): ?>
+    <div class="row">
+        <div class="col-3"><?= Html::a('Заказ № ' . $order->id, Url::to(['order-backend/update', 'id' => $order->id])) ?></div>
+        <div class="col-3"><?= Price::format(OrderHelper::orderSummary($order)); ?><?= Currency::getInstance()->show(); ?></div>
+        <div class="col-3"><?= date('d.m.Y H:i:s', $order->created_at); ?></div>
+        <div class="col-3"><?= $order->email ? $order->email . '/' : null; ?><?= $order->phone; ?></div>
+    </div>
+<?php endforeach; ?>
 
 
 <div class="operator-calculator-react"></div>

@@ -2,13 +2,19 @@
 
 namespace app\modules\catalog\models\form;
 
-
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 
+/**
+ * @property integer $available
+ * @property integer $price_from
+ * @property integer $price_to
+ * @property integer $params
+ */
 class CatalogFilter extends Model
 {
+    public $available;
     public $price_from;
     public $price_to;
     public $weight_from;
@@ -18,7 +24,7 @@ class CatalogFilter extends Model
     public function rules()
     {
         return [
-//            [['price_from', 'price_to', 'weight_from', 'weight_to', 'params'], 'integer'],
+            [['available'], 'string'],
             [['price_from', 'price_to', 'weight_from', 'weight_to'], 'integer'],
             ['params', 'safe']
         ];
@@ -27,6 +33,7 @@ class CatalogFilter extends Model
     public function attributeLabels()
     {
         return [
+            'available' => 'С доставкой на сегодня',
             'params' => 'Справочник',
             'price_from' => 'Цена от',
             'price_to' => 'Цена до',
@@ -61,6 +68,7 @@ class CatalogFilter extends Model
             $query->innerJoin(['sq' => $valuesQuery], 'sq.product_id = product.id');
 
             if ($this->price_from and $this->price_to) $query->andFilterWhere(['between', 'price', $this->price_from, $this->price_to]);
+            if ($this->available == 'Y') $query->andFilterWhere(['>', 'count', 0]);
         }
     }
 }

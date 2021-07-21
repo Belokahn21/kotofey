@@ -9,6 +9,7 @@ use app\modules\bonus\models\service\BonusService;
 use app\modules\order\models\service\NotifyService;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
+use app\modules\site\models\behaviors\UserEntityBehavior;
 use app\modules\site\models\tools\Debug;
 use app\modules\user\models\entity\User;
 use app\modules\user\models\entity\UserBilling;
@@ -184,7 +185,12 @@ class Order extends ActiveRecord
     public function behaviors()
     {
         return [
-            TimestampBehavior::className()
+            TimestampBehavior::className(),
+            [
+                'class' => UserEntityBehavior::className(),
+                'attr_at_save' => 'created_user_id',
+                'attr_at_update' => 'updated_user_id',
+            ]
         ];
     }
 
@@ -202,6 +208,7 @@ class Order extends ActiveRecord
             'user_id' => 'Покупатель',
             'cash' => 'Сумма заказа',
             'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
             'comment' => 'Комментарий к заказу',
             'notes' => 'Заметки(Для админов)',
             'promocode' => 'Промо код',
@@ -221,6 +228,8 @@ class Order extends ActiveRecord
             'chargeBonus' => 'Начислить бонусы',
             'odd' => 'С какой суммы сдача?',
             'client' => 'Ваше ФИО',
+            'created_user_id' => 'Кем создан',
+            'updated_user_id' => 'Кем обновлен',
         ];
     }
 

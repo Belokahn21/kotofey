@@ -97,12 +97,10 @@ $this->title = Title::show("Заказы");
             }
         ],
         [
-            'attribute' => 'created_at',
-            'format' => ['date', 'dd.MM.YYYY'],
+            'attribute' => 'created_user_id',
         ],
         [
-            'attribute' => 'updated_at',
-            'format' => ['date', 'dd.MM.YYYY'],
+            'attribute' => 'updated_user_id',
         ],
         [
             'class' => 'yii\grid\ActionColumn',

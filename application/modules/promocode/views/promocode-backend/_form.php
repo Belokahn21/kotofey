@@ -33,5 +33,11 @@
                 <?= $form->field($model, 'end_at')->textInput(['class' => 'form-control js-datepicker']); ?>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'quality')->dropDownList($model->getQualityList()); ?>
+            </div>
+        </div>
     </div>
 </div>
