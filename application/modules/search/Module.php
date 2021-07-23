@@ -22,6 +22,7 @@ class Module extends \app\modules\site\MainModule
     public function menuIndex()
     {
         return [
+            ['name' => 'Elasticsearch управление', 'url' => Url::to(['/admin/search/elasticsearch-backend/index'])],
             ['name' => 'История поиска', 'url' => Url::to(['/admin/search/search-history-backend/index'])],
         ];
     }
