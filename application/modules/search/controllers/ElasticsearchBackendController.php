@@ -28,11 +28,14 @@ class ElasticsearchBackendController extends MainBackendController
 
     public function actionReIndex()
     {
-        $count_all_success = 0;
-        $count_all_products = 0;
         ProductElastic::deleteIndex();
         ProductElastic::createIndex();
+
         $models = Product::find()->all();
+
+        $count_all_success = 0;
+        $count_all_products = count($models);
+
         foreach ($models as $model) {
             $el = new ProductElastic();
             $el->fillAttributes($model);
