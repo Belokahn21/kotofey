@@ -65,6 +65,8 @@ class ProductElastic extends ActiveRecord
                             'type' => 'synonym',
                             'synonyms' => [
                                 'силикагель, силикагелевый',
+                                'роял, royal, рояль',
+                                'canon, canin, канин',
                             ],
                         ],
 
