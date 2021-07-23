@@ -1,13 +1,17 @@
-.product {
-  &-additional-panel {
+.info-panel {
+  &-container {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: stretch;
     padding: 10px;
+
+    @media (max-width: 450px) {
+      flex-direction: column;
+    }
   }
 
-  &-markup {
+  &-data {
     padding: 10px;
     border-radius: 3px;
     border: 1px $theme-color solid;
@@ -15,5 +19,11 @@
     text-transform: uppercase;
     font-size: 12px;
     margin-right: 10px;
+
+    @media (max-width: 450px) {
+      &:not(:last-child) {
+        margin-bottom: 10px;
+      }
+    }
   }
 }

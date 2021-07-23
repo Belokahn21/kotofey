@@ -9014,14 +9014,17 @@ html, body {
   width: 50%;
   border: 1px silver solid; }
 
-.product-additional-panel {
+.info-panel-container {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: stretch;
   padding: 10px; }
+  @media (max-width: 450px) {
+    .info-panel-container {
+      flex-direction: column; } }
 
-.product-markup {
+.info-panel-data {
   padding: 10px;
   border-radius: 3px;
   border: 1px #00BFFF solid;
@@ -9029,6 +9032,9 @@ html, body {
   text-transform: uppercase;
   font-size: 12px;
   margin-right: 10px; }
+  @media (max-width: 450px) {
+    .info-panel-data:not(:last-child) {
+      margin-bottom: 10px; } }
 
 /*-----------------------------------------------------------*/
 .content {

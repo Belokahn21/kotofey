@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\catalog\models\entity\virtual\ProductElastic;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\vendors\models\entity\Vendor;
@@ -25,16 +26,17 @@ $this->title = Title::show('Товары');
 <?php $form = ActiveForm::begin([
     'options' => ['enctype' => 'multipart/form-data']
 ]); ?>
-    <div class="product-additional-panel">
-        <div class="product-markup">Наценка: <?= ProductHelper::getMarkup($model); ?></div>
-        <div class="product-markup green bold">+<?= $model->price - $model->purchase; ?></div>
+    <div class="info-panel-container">
+        <div class="info-panel-data">Наценка: <?= ProductHelper::getMarkup($model); ?></div>
+        <div class="info-panel-data green bold">+<?= $model->price - $model->purchase; ?></div>
         <?php if ($model->vendor_id == Vendor::VENDOR_ID_SIBAGRO): ?>
-            <div>
+            <div style="margin-right: 10px;">
                 <?= Html::a('Открыть на сайте поставщика ', SibagroTrade::getProductDetailByCode($model->code), ['target' => '_blank']) . Html::a('<i class="far fa-question-circle"></i>', 'javascript:void(0);', ['class' => 'js-check-exist-product', 'data-code' => $model->code, 'data-vendor-id' => $model->vendor_id]); ?>
             </div>
         <?php endif; ?>
-        <div class="product-markup">Создан: <?= date('d.m.Y', $model->created_at) ?></div>
-        <div class="product-markup">Обновлен: <?= date('d.m.Y', $model->updated_at) ?></div>
+        <div class="info-panel-data">Создан: <?= date('d.m.Y', $model->created_at) ?></div>
+        <div class="info-panel-data">Обновлен: <?= date('d.m.Y', $model->updated_at) ?></div>
+        <div class="info-panel-data"><?= ProductElastic::findOne($model->id) ? ' <span class="green">Elasticsearch: Ok</span>' : '<span>Elasticsearch: Not exist</span>' ?></div>
     </div>
 <?= $this->render('_form', [
     'model' => $model,
