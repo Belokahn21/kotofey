@@ -88,8 +88,10 @@ class ProductElastic extends ActiveRecord
 
     public function fillAttributes(Product $product)
     {
-        $this->_id = $product->id;
-        $this->id = $product->id;
+        // already exist, not do rewrite
+        if (!$this->_id) $this->_id = $product->id;
+        if (!$this->id) $this->id = $product->id;
+
         $this->name = $product->name;
     }
 }

@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 use app\modules\catalog\models\behaviors\ArticleBehavior;
+use app\modules\catalog\models\behaviors\ElasticSearchBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\helpers\CompositionProductHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -178,7 +179,8 @@ class Product extends \yii\db\ActiveRecord
                 'class' => UserEntityBehavior::className(),
                 'attr_at_save' => 'created_user_id',
                 'attr_at_update' => 'updated_user_id',
-            ]
+            ],
+            ElasticSearchBehavior::className()
         ];
     }
 
