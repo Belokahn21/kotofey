@@ -61,6 +61,13 @@ class ProductElastic extends ActiveRecord
                             'type' => 'stemmer',
                             'language' => 'russian',
                         ],
+                        'my_synonym_filter' => [
+                            'type' => 'synonym',
+                            'synonyms' => [
+                                'силикагель, силикагелевый',
+                            ],
+                        ],
+
                     ],
                     'analyzer' => [
                         'my_analyzer' => [
@@ -71,6 +78,7 @@ class ProductElastic extends ActiveRecord
                                 'russian_stop',
                                 'russian_keywords',
                                 'russian_stemmer',
+                                'my_synonym_filter',
                             ]
                         ]
                     ]

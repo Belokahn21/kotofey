@@ -4,6 +4,7 @@ namespace app\modules\catalog\console;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\virtual\ProductElastic;
+use app\modules\search\models\services\ElasticsearchService;
 use yii\console\Controller;
 
 class ElasticController extends Controller
@@ -23,20 +24,11 @@ class ElasticController extends Controller
 
     public function actionIndex()
     {
+        $elastic_service = new ElasticsearchService();
+        $elastic_service->reIndex();
 
-        ProductElastic::deleteIndex();
-        ProductElastic::createIndex();
-        $models = Product::find()->all();
-//        $models = Product::find()->limit(10)->all();
-        foreach ($models as $model) {
-            $el = new ProductElastic();
-            $el->_id = $model->id;
-            $el->id = $model->id;
-            $el->name = $model->name;
-
-            if ($el->insert()) {
-                echo $model->name . PHP_EOL;
-            }
+        if ($elastic_service->count_all_success > 0) {
+            echo $elastic_service->count_all_success . ":OK";
         }
     }
 }
