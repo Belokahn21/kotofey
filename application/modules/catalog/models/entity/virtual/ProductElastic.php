@@ -76,6 +76,9 @@ class ProductElastic extends ActiveRecord
                         'my_analyzer' => [
                             "type" => "custom",
                             "tokenizer" => "standard",
+//                            "char_filter" => [
+//                                "my_mappings_char_filter"
+//                            ],
                             'filter' => [
                                 'lowercase',
                                 'russian_stop',
@@ -83,20 +86,17 @@ class ProductElastic extends ActiveRecord
                                 'russian_stemmer',
                                 'my_synonym_filter',
                             ],
-                            "char_filter" => [
-                                "my_mappings_char_filter"
-                            ]
                         ]
                     ],
-                    "char_filter" => [
-                        "my_mappings_char_filter" => [
-                            "type" => "mapping",
-                            "mappings" => [
-                                "`" => "",
-                                "''" => "",
-                            ]
-                        ],
-                    ]
+//                    "char_filter" => [
+//                        "my_mappings_char_filter" => [
+//                            "type" => "mapping",
+//                            "mappings" => [
+//                                "`" => "",
+//                                "''" => "",
+//                            ]
+//                        ],
+//                    ]
                 ]
             ],
         ]);
