@@ -61,6 +61,15 @@ class ProductElastic extends ActiveRecord
                             'type' => 'stemmer',
                             'language' => 'russian',
                         ],
+                        'my_synonym_filter' => [
+                            'type' => 'synonym',
+                            'synonyms' => [
+                                'силикагель, силикагелевый',
+                                'роял, royal, рояль',
+                                'canon, canin, канин',
+                            ],
+                        ],
+
                     ],
                     'analyzer' => [
                         'my_analyzer' => [
@@ -71,6 +80,7 @@ class ProductElastic extends ActiveRecord
                                 'russian_stop',
                                 'russian_keywords',
                                 'russian_stemmer',
+                                'my_synonym_filter',
                             ]
                         ]
                     ]
@@ -88,8 +98,10 @@ class ProductElastic extends ActiveRecord
 
     public function fillAttributes(Product $product)
     {
-        $this->_id = $product->id;
-        $this->id = $product->id;
+        // already exist, not do rewrite
+        if (!$this->_id) $this->_id = $product->id;
+        if (!$this->id) $this->id = $product->id;
+
         $this->name = $product->name;
     }
 }

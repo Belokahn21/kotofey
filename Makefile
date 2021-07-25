@@ -69,6 +69,9 @@ assets:
 promo:
 	cd application && php yii promotion/group-notify
 
+elastic-index:
+	cd application && php yii elastic/index
+
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/user/install/migrations --interactive=0

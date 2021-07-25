@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 use app\modules\catalog\models\behaviors\ArticleBehavior;
+use app\modules\catalog\models\behaviors\ElasticSearchBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\helpers\CompositionProductHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -39,7 +40,6 @@ use function foo\func;
  * @property string $slug
  * @property integer $sort
  * @property integer $status_id
- * @property integer $is_ali
  * @property integer $category_id
  * @property integer $vendor_id
  * @property integer $discount_price
@@ -102,7 +102,7 @@ class Product extends \yii\db\ActiveRecord
 
             ['description', 'string', 'min' => 10],
 
-            [['vitrine', 'is_ali'], 'default', 'value' => 0],
+            [['vitrine'], 'default', 'value' => 1],
 
             [['has_store', 'is_product_order'], 'boolean'],
 
@@ -145,7 +145,6 @@ class Product extends \yii\db\ActiveRecord
             'threeDCode' => '3D представление',
             'status_id' => 'Статус товара',
             'barcode' => 'Штрих-код',
-            'is_ali' => 'Размещается на Aliexpress',
             'media_id' => 'Изображение',
             'created_user_id' => 'Кем создано',
             'updated_user_id' => 'Кем обновлено',
@@ -178,7 +177,8 @@ class Product extends \yii\db\ActiveRecord
                 'class' => UserEntityBehavior::className(),
                 'attr_at_save' => 'created_user_id',
                 'attr_at_update' => 'updated_user_id',
-            ]
+            ],
+            ElasticSearchBehavior::className()
         ];
     }
 

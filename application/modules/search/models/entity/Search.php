@@ -2,11 +2,11 @@
 
 namespace app\modules\search\models\entity;
 
-
 use app\modules\catalog\models\entity\virtual\ProductElastic;
 use app\modules\catalog\models\entity\Product;
 use app\modules\search\models\services\SearchHistory\SearchHistory;
 use app\modules\search\Module;
+use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
@@ -46,24 +46,40 @@ class Search extends Model
     public function setFilter(ActiveQuery $products)
     {
         if (!empty($this->search)) {
-
+            $phrase = $this->search;
             $module = \Yii::$app->getModule('search');
 
             if ($module->search_engine == Module::SEARCH_ENGINE_ELASTIC) {
-                $elastic_ids = [];
+                try {
+                    $elastic_ids = [-1];
 
-                $productElastics = ProductElastic::find()->query(['multi_match' => ['query' => $this->search, 'fields' => ['name'], 'operator' => 'and']])->limit(10000)->all();
-                if ($productElastics) {
-                    $elastic_ids = ArrayHelper::getColumn($productElastics, 'id');
+                    $productElastics = ProductElastic::find()
+                        ->query(['multi_match' => ['query' => $phrase, 'fields' => ['name'], 'operator' => 'and']])
+                        ->limit(10000)
+                        ->all();
+
+
+                    if ($productElastics) $elastic_ids = ArrayHelper::getColumn($productElastics, 'id');
+                    if ($elastic_ids) $products->where(['id' => $elastic_ids]);
+
+
+                } catch (\Exception $exception) {
+
+                    if (is_numeric($phrase)) {
+                        $products->where(['article' => $phrase]);
+                    } else {
+                        foreach (explode(' ', $phrase) as $text_line) {
+                            $products->andFilterWhere([
+                                'or',
+                                ['like', 'name', $text_line],
+                                ['like', 'feed', $text_line]
+                            ]);
+                        }
+                    }
                 }
 
-                if ($elastic_ids) {
-                    $products->where(['id' => $elastic_ids]);
-                }
             }
             if ($module->search_engine == Module::SEARCH_ENGINE_SITE) {
-                $phrase = $this->search;
-
                 if (is_numeric($phrase)) {
                     $products->where(['article' => $phrase]);
                 } else {

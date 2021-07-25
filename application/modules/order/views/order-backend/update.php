@@ -35,9 +35,9 @@ $this->title = Title::show("Обновить заказ: " . $model->id);
         <?php endif; ?>
     </div>
 
-    <div class="product-additional-panel">
-        <div class="product-markup">Создан: <?= date('d.m.Y', $model->created_at) ?></div>
-        <div class="product-markup">Обновлен: <?= date('d.m.Y', $model->updated_at) ?></div>
+    <div class="info-panel-container">
+        <div class="info-panel-data">Создан: <?= date('d.m.Y', $model->created_at) ?></div>
+        <div class="info-panel-data">Обновлен: <?= date('d.m.Y', $model->updated_at) ?></div>
     </div>
 <?php if (!$model->isNewRecord): ?>
     <?php //todo: лень вывести данные цифровые ?>
