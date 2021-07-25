@@ -67,6 +67,7 @@ class ProductElastic extends ActiveRecord
                                 'силикагель, силикагелевый',
                                 'роял, royal, рояль',
                                 'canon, canin, канин',
+                                'hills, хилс, hill`s',
                             ],
                         ],
 
