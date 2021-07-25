@@ -54,7 +54,7 @@ class Search extends Model
                     $elastic_ids = [-1];
 
                     $productElastics = ProductElastic::find()
-                        ->query(['multi_match' => ['query' => $phrase, 'fields' => ['name'], 'operator' => 'and']])
+                        ->query(['multi_match' => ['query' => $phrase, 'fields' => ['name', 'feed'], 'operator' => 'and']])
                         ->limit(10000)
                         ->all();
 

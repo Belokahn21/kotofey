@@ -27,6 +27,7 @@ class ProductElastic extends ActiveRecord
             'properties' => [
                 'id' => ['type' => 'integer'],
                 'name' => ['type' => 'text', 'analyzer' => 'my_analyzer'],
+                'feed' => ['type' => 'text', 'analyzer' => 'my_analyzer'],
 //                'name' => ['type' => 'text', 'analyzer' => 'russian'],
             ]
         ];
