@@ -9,5 +9,7 @@ $this->title = \app\modules\seo\models\tools\Title::show('Поисковой з�
 
 <?php if ($other_models): ?>
     <?php foreach ($other_models as $other_model): ?>
+        <?= date('d.m.Y', $other_model->created_at); ?>/<?= $other_model->text; ?>/<?= $other_model->ip; ?>
+        <hr>
     <?php endforeach; ?>
 <?php endif; ?>
