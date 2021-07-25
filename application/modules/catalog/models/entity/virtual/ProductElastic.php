@@ -67,7 +67,7 @@ class ProductElastic extends ActiveRecord
                                 'силикагель, силикагелевый',
                                 'роял, royal, рояль',
                                 'canon, canin, канин',
-                                'hills, хилс, hill`s',
+                                'hills, хилс',
                             ],
                         ],
 
@@ -82,8 +82,20 @@ class ProductElastic extends ActiveRecord
                                 'russian_keywords',
                                 'russian_stemmer',
                                 'my_synonym_filter',
+                            ],
+                            "char_filter" => [
+                                "my_mappings_char_filter"
                             ]
                         ]
+                    ],
+                    "char_filter" => [
+                        "my_mappings_char_filter" => [
+                            "type" => "mapping",
+                            "mappings" => [
+                                "`" => "",
+                                "''" => "",
+                            ]
+                        ],
                     ]
                 ]
             ],
