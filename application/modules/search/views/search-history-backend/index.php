@@ -34,7 +34,7 @@ echo \yii\grid\GridView::widget([
 //                    return Html::a('<i class="fas fa-file-alt"></i>', Url::to(["report", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
-//                    return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
 //                    if ($key) {
