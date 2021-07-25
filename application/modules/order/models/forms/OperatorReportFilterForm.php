@@ -31,7 +31,7 @@ class OperatorReportFilterForm extends Model
 
     public function applyFilter(ActiveQuery &$query)
     {
-        $query->where(['manager_id' => $this->manager_id ?: 1])
+        $query->where(['manager_id' => $this->manager_id ?: 1, 'is_paid' => 1, 'is_close' => 1])
             ->andWhere('created_at >= :start_at AND created_at <  :end_at', [
                 ':start_at' => $this->start_at ? strtotime($this->start_at) : null,
                 ':end_at' => $this->end_at ? strtotime($this->end_at) : null,
