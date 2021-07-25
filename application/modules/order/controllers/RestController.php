@@ -7,6 +7,7 @@ use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\order\models\service\NotifyService;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Price;
 use app\modules\user\models\entity\UserBilling;
@@ -73,6 +74,10 @@ class RestController extends ActiveController
 //            $response['errors'] = $billing->getErrors();
 //            return $response;
 //        }
+
+
+        $ns = new NotifyService();
+        $ns->sendClientNotify(Order::findOne($order->id));
 
         $response['data']['order'] = [
             'id' => $order->id,

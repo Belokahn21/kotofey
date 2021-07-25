@@ -202,7 +202,7 @@ class NotifyService
         if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
         if (empty($order->email)) return false;
-        if (empty($order->email) || $order->status != 0) return false;
+        if (empty($order->email) || $order->status != 3) return false;
 
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
