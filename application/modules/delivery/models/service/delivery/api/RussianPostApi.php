@@ -69,16 +69,17 @@ class RussianPostApi implements DeliveryApi
             "mail-type" => $tariff_data->mail_type,
             "mass" => $tariff_data->mass,
             "dimension" => $tariff_data->dimension,
+            "inventory" => false,
+            "fragile" => false,
+            "with-order-of-notice" => false,
+            "with-simple-notice" => false,
         ], $this->_AUTH_HEADERS);
 
         if (!array_key_exists('total-rate', $result)) {
             throw new \Exception($result['desc']);
         }
 
-
-        Debug::p($result);
-
-        exit();
+        Debug::p($result); exit();
 
         return [
             'total' => $result['total-rate'],
