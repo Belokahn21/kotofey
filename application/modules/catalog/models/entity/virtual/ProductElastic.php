@@ -69,7 +69,7 @@ class ProductElastic extends ActiveRecord
                                 'роял, royal, рояль',
                                 'canon, canin, канин',
                                 'hills, хилс',
-                                'pro plan, проплан, про план',
+                                'pro plan, проплан',
                                 'сириус, sirius',
                             ],
                         ],
