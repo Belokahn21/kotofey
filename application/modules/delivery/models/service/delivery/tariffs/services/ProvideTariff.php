@@ -2,18 +2,16 @@
 
 namespace app\modules\delivery\models\service\delivery\tariffs\services;
 
+use app\modules\delivery\models\service\delivery\tariffs\CdekTariffData;
 use app\modules\delivery\models\service\delivery\tariffs\RuPostTariffData;
 
 class ProvideTariff
 {
-    /**
-     * @param $data
-     * @return RuPostTariffData
-     * @throws \Exception
-     */
-    public function make($data): RuPostTariffData
+    public function make($data)
     {
         switch ($data['service']) {
+            case "cdek":
+                return new CdekTariffData($data);
             case "ru_post":
                 return new RuPostTariffData($data);
             default:

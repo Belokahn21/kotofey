@@ -8,6 +8,7 @@ use app\modules\delivery\models\service\delivery\api\DeliveryApi;
 use app\modules\delivery\models\service\delivery\tariffs\RuPostTariffData;
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 use app\modules\site\models\tools\Debug;
+use app\modules\site\models\tools\Money;
 use yii\helpers\Json;
 
 class RussianPostApi implements DeliveryApi
@@ -52,10 +53,6 @@ class RussianPostApi implements DeliveryApi
             ]
         ], $this->_AUTH_HEADERS);
 
-        Debug::p($phone);
-        Debug::p($result);
-
-
         return $result;
     }
 
@@ -79,10 +76,10 @@ class RussianPostApi implements DeliveryApi
             throw new \Exception($result['desc']);
         }
 
-        Debug::p($result); exit();
+        Debug::p($result);exit();
 
         return [
-            'total' => $result['total-rate'],
+            'total' => Money::convertCopToRub($result['total-rate']),
             'time' => [
                 'max-days' => $result['delivery-time']['max-days']
             ]
@@ -98,7 +95,6 @@ class RussianPostApi implements DeliveryApi
             curl_setopt($curl, CURLOPT_POST, true);
 
             if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-            Debug::p($data);
             if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, Json::encode($data));
 
             $response = curl_exec($curl);

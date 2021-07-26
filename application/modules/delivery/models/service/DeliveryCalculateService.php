@@ -60,7 +60,7 @@ class DeliveryCalculateService
 //            echo "При вычислении стоимости доставки произошла ошибка: " . $exception->getMessage() . '. В Файле: ' . $exception->getFile() . '(' . $exception->getLine() . ')';
         }
 
-        Debug::p($total);
+//        Debug::p($total);
         return $total;
     }
 }
