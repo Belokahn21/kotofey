@@ -1,5 +1,6 @@
 <?php
 /* @var $this \yii\web\View */
+/* @var $statistic_queries array */
 
 /* @var $model \app\modules\search\models\entity\SearchQuery */
 
@@ -15,15 +16,25 @@ $this->title = Title::show('История поиска');
     </div>
 
 <?php if ($statistic_queries): ?>
-<!--    --><?php //\app\modules\site\models\tools\Debug::p($statistic_queries); ?>
+    <?php $count = 1; ?>
     <?php foreach ($statistic_queries as $data_block): ?>
-        <div class="card border-info mb-3" style="width: 18rem;">
+
+        <?php if ($count % 4 == 1) echo "<div class='row p-3'>"; ?>
+
+        <div class="card border-info m-2" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title"><?= $data_block['ForDate']; ?></h5>
                 <p class="card-text">Запросов: <?= $data_block['NumPosts']; ?></p>
             </div>
         </div>
+
+        <?php if ($count % 4 == 0) echo "</div>"; ?>
+
+
+        <?php $count++; ?>
     <?php endforeach; ?>
+
+    <?php if ($count % 4 != 1) echo "</div>"; ?>
 <?php endif; ?>
 
 <?php
