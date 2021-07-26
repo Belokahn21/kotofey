@@ -28,31 +28,6 @@ class PropertiesHelper
         return 0;
     }
 
-//    public static function getAllProperties($product_id, $properties = array())
-//    {
-//        $out = [];
-//        $cache = \Yii::$app->cache;
-//
-////        $values = $cache->getOrSet(sprintf('gap:%s', $product_id), function () use ($product_id) {
-////            return ProductPropertiesValues::find()->where(['product_id' => $product_id])->all();
-////        });
-//
-//        $values = SaveProductPropertiesValues::find()->where(['product_id' => $product_id]);
-//
-//        if ($properties) $values->andWhere(['property_id' => $properties]);
-//
-//        $values = $values->all();
-//
-//
-//        if ($values) {
-//            foreach ($values as $value) {
-//                $out[$value->property->id] = $value->getFinalValue();
-//            }
-//        }
-//
-//        return $out;
-//    }
-
     /**
      * @param Product $model
      * @param $property_id

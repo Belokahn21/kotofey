@@ -42,8 +42,14 @@ class ElasticSearchBehavior extends Behavior
         $product = $this->owner;
 
         $elastic = ProductElastic::findOne($product->id);
-        $elastic->fillAttributes($product);
-        $elastic->update();
+        if ($elastic) {
+            $elastic->fillAttributes($product);
+            $elastic->update();
+        } else {
+            $elastic = new ProductElastic();
+            $elastic->fillAttributes($product);
+            $elastic->insert();
+        }
     }
 
     public function afterDelete()

@@ -97,6 +97,7 @@ class RussianPostApi implements DeliveryApi
             curl_setopt($curl, CURLOPT_POST, true);
 
             if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+            Debug::p($data);
             if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, Json::encode($data));
 
             $response = curl_exec($curl);

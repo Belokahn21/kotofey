@@ -38,8 +38,12 @@ class RuPostTariffData implements TariffDataInterface
             foreach ($data['products'] as $product_id) {
                 $this->mass += PropertiesHelper::getProductWeight($product_id);
             }
+
         }
 
+        $this->dimension['width'] = rand(1, 10);
+        $this->dimension['height'] = rand(1, 10);
+        $this->dimension['length'] = rand(1, 10);
 
 
         if (!empty($this->mass)) $this->mass = RuPostHelper::getMass($this->mass);
