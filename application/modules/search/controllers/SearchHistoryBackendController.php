@@ -26,13 +26,21 @@ class SearchHistoryBackendController extends MainBackendController
 
     public function actionIndex()
     {
+        $statistic_queries = \Yii::$app->db->createCommand('
+        SELECT DATE(FROM_UNIXTIME(created_at)) AS ForDate,
+        COUNT(*) AS NumPosts
+ FROM   search_query
+ GROUP BY DATE(FROM_UNIXTIME(created_at))
+ ORDER BY ForDate
+        ')->queryAll();
         $model = $this->modelClass;
         $searchModel = new SearchHistorySearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
         return $this->render('index', [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider
+            'dataProvider' => $dataProvider,
+            'statistic_queries' => $statistic_queries
         ]);
     }
 

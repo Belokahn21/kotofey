@@ -3651,7 +3651,7 @@ var FindCustomerLast = /*#__PURE__*/function (_React$Component) {
     value: function load() {
       var _this2 = this;
 
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer) + '?expand=cross').then(function (data) {
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer) + '?expand=cross&sort=-created_at&limit=5').then(function (data) {
         _this2.setState({
           items: data
         });

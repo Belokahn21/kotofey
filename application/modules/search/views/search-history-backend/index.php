@@ -1,5 +1,6 @@
 <?php
 /* @var $this \yii\web\View */
+
 /* @var $model \app\modules\search\models\entity\SearchQuery */
 
 use yii\helpers\Html;
@@ -12,6 +13,18 @@ $this->title = Title::show('История поиска');
         <h1>История поиска</h1>
         <?= Html::a("Очистить всё", Url::to(['clean']), ['class' => 'btn-main']); ?>
     </div>
+
+<?php if ($statistic_queries): ?>
+<!--    --><?php //\app\modules\site\models\tools\Debug::p($statistic_queries); ?>
+    <?php foreach ($statistic_queries as $data_block): ?>
+        <div class="card border-info mb-3" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title"><?= $data_block['ForDate']; ?></h5>
+                <p class="card-text">Запросов: <?= $data_block['NumPosts']; ?></p>
+            </div>
+        </div>
+    <?php endforeach; ?>
+<?php endif; ?>
 
 <?php
 echo \yii\grid\GridView::widget([

@@ -14,7 +14,7 @@ class FindCustomerLast extends React.Component {
     }
 
     load() {
-        RestRequest.all(config.restOrderCustomer + '?expand=cross').then(data => {
+        RestRequest.all(config.restOrderCustomer + '?expand=cross&sort=-created_at&limit=5').then(data => {
             this.setState({items: data})
         });
     }
@@ -22,7 +22,7 @@ class FindCustomerLast extends React.Component {
     render() {
         const {items} = this.state;
         return <div>
-            <br />
+            <br/>
             <h5>Последние карточки</h5>
             <div className="list-finds">
                 {items.map((customer, index) => {
