@@ -10,6 +10,7 @@ use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 use yii\db\ActiveQuery;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Inflector;
 
 class Search extends Model
 {
@@ -57,6 +58,14 @@ class Search extends Model
                         ->query(['multi_match' => ['query' => $phrase, 'fields' => ['name', 'feed'], 'operator' => 'and']])
                         ->limit(10000)
                         ->all();
+
+
+                    if (count($productElastics) == 0) {
+                        $productElastics = ProductElastic::find()
+                            ->query(['multi_match' => ['query' => Inflector::transliterate($phrase), 'fields' => ['name', 'feed'], 'operator' => 'and']])
+                            ->limit(10000)
+                            ->all();
+                    }
 
 
                     if ($productElastics) $elastic_ids = ArrayHelper::getColumn($productElastics, 'id');
