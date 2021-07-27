@@ -32,80 +32,79 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
                 <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
             <?php endforeach; ?>
         </categories>
+        <?php /*
         <delivery-options>
             <option cost="0" days="0"/>
-        </delivery-options>
+        </delivery-options> */ ?>
         <cpa>1</cpa>
         <offers>
-            <?php foreach ($offersBatch->batch(780) as $offers): ?>
-                <?php foreach ($offers as $offer): ?>
+            <?php foreach ($offers as $offer): ?>
 
-                    <?php if ($offer->vendor_id == Vendor::VENDOR_ID_LUKAS and $offer->purchase < 5000) continue; ?>
+                <?php if ($offer->vendor_id == Vendor::VENDOR_ID_LUKAS and $offer->purchase < 5000) continue; ?>
+
+                <?php
+                $weight = PropertiesHelper::extractPropertyById($offer, 2);
+                if (!$weight) continue;
+                ?>
+
+
+                <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
+
+                    <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
+
+                    <?php if ($vendor = PropertiesHelper::extractPropertyById($offer, 1)): ?>
+                        <vendor><?php $vendor->name; ?></vendor>
+                    <?php endif; ?>
+                    <?php if ($offer->barcode): ?>
+                        <vendorCode><?= $offer->barcode ?></vendorCode>
+                    <?php endif; ?>
+                    <?php if ($offer->discount_price): ?>
+                        <discountprice><?= $offer->discount_price; ?></discountprice>
+                    <?php endif; ?>
+                    <price><?= $offer->price; ?></price>
+
+
+                    <currencyId>RUB</currencyId>
+                    <categoryId><?= $offer->category_id; ?></categoryId>
+                    <picture><?= ProductHelper::getImageUrl($offer, false, ['width' => 246, 'height' => 300, 'crop' => 'fit']); ?></picture>
+                    <name><?= htmlspecialchars(strip_tags(\yii\helpers\StringHelper::truncate($offer->name, 128, false))); ?></name>
+                    <?php if (!empty($offer->description)): ?>
+                        <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
+                    <?php endif; ?>
+                    <pickup>false</pickup>
+                    <store>false</store>
+                    <delivery>true</delivery>
 
                     <?php
-                    $weight = PropertiesHelper::extractPropertyById($offer, 2);
-                    if (!$weight) continue;
+                    $xValue = PropertiesHelper::extractPropertyById($offer, 16);
+                    $yValue = PropertiesHelper::extractPropertyById($offer, 17);
+                    $zValue = PropertiesHelper::extractPropertyById($offer, 18);
                     ?>
-
-
-                    <offer id="<?= $offer->id ?>" available="<?= ($offer->status_id == Product::STATUS_ACTIVE ? 'true' : 'false'); ?>">
-
-                        <url><?= ProductHelper::getDetailUrl($offer, true); ?></url>
-
-                        <?php if ($vendor = PropertiesHelper::extractPropertyById($offer, 1)): ?>
-                            <vendor><?php $vendor->name; ?></vendor>
-                        <?php endif; ?>
-                        <?php if ($offer->barcode): ?>
-                            <vendorCode><?= $offer->barcode ?></vendorCode>
-                        <?php endif; ?>
-                        <?php if ($offer->discount_price): ?>
-                            <discountprice><?= $offer->discount_price; ?></discountprice>
-                        <?php endif; ?>
-                        <price><?= $offer->price; ?></price>
-
-
-                        <currencyId>RUB</currencyId>
-                        <categoryId><?= $offer->category_id; ?></categoryId>
-                        <picture><?= ProductHelper::getImageUrl($offer, false, ['width' => 246, 'height' => 300, 'crop' => 'fit']); ?></picture>
-                        <name><?= htmlspecialchars(strip_tags(\yii\helpers\StringHelper::truncate($offer->name, 128, false))); ?></name>
-                        <?php if (!empty($offer->description)): ?>
-                            <description><?= htmlspecialchars(strip_tags($offer->description)); ?></description>
-                        <?php endif; ?>
-                        <pickup>false</pickup>
-                        <store>false</store>
-                        <delivery>true</delivery>
-
-                        <?php
-                        $xValue = PropertiesHelper::extractPropertyById($offer, 16);
-                        $yValue = PropertiesHelper::extractPropertyById($offer, 17);
-                        $zValue = PropertiesHelper::extractPropertyById($offer, 18);
-                        ?>
-                        <?php if ($xValue && $yValue && $zValue): ?>
-                            <dimensions><?= $xValue->value; ?>/<?= $yValue->value; ?>/<?= $zValue->value; ?></dimensions>
-                        <?php endif; ?>
+                    <?php if ($xValue && $yValue && $zValue): ?>
+                        <dimensions><?= $xValue->value; ?>/<?= $yValue->value; ?>/<?= $zValue->value; ?></dimensions>
+                    <?php endif; ?>
 
 
 
-                        <?php if ($xValue): ?>
-                            <width><?= $xValue->value; ?></width>
-                        <?php endif; ?>
+                    <?php if ($xValue): ?>
+                        <width><?= $xValue->value; ?></width>
+                    <?php endif; ?>
 
-                        <?php if ($yValue): ?>
-                            <height><?= $yValue->value; ?></height>
-                        <?php endif; ?>
+                    <?php if ($yValue): ?>
+                        <height><?= $yValue->value; ?></height>
+                    <?php endif; ?>
 
-                        <?php if ($zValue): ?>
-                            <length><?= $zValue->value; ?></length>
-                        <?php endif; ?>
+                    <?php if ($zValue): ?>
+                        <length><?= $zValue->value; ?></length>
+                    <?php endif; ?>
 
 
-                        <?php if ($weight): ?>
-                            <weight><?= $weight->value; ?></weight>
-                        <?php endif; ?>
+                    <?php if ($weight): ?>
+                        <weight><?= $weight->value; ?></weight>
+                    <?php endif; ?>
 
-                        <count><?= $offer->count > 0 ? $offer->count : 500; ?></count>
-                    </offer>
-                <?php endforeach; ?>
+                    <count><?= $offer->count > 0 ? $offer->count : 500; ?></count>
+                </offer>
             <?php endforeach; ?>
         </offers>
     </shop>
