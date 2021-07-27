@@ -32,10 +32,6 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
                 <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
             <?php endforeach; ?>
         </categories>
-        <?php /*
-        <delivery-options>
-            <option cost="0" days="0"/>
-        </delivery-options> */ ?>
         <cpa>1</cpa>
         <offers>
             <?php foreach ($offers as $offer): ?>
