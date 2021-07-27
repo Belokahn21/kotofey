@@ -9,6 +9,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\payment\models\services\acquiring\banks\EquiringBank;
 use app\modules\site\models\tools\Curl;
+use app\modules\site\models\tools\CurlDataFormat;
 use app\modules\site\models\tools\System;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -47,7 +48,7 @@ class AcquiringTerminalService
             'failUrl' => System::fullSiteUrl() . Url::to('/payment/fail/'),
         ]);
 
-        return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
+        return Json::decode($curl->post(self::REGISTER_ORDER, CurlDataFormat::asFormData($this->paramRequest)));
     }
 
     public function reInitCreateOrder(Order $order, $uniq_order_id_key)
@@ -66,7 +67,7 @@ class AcquiringTerminalService
             'failUrl' => System::fullSiteUrl() . Url::to('/payment/fail/'),
         ]);
 
-        return Json::decode($curl->post(self::REGISTER_ORDER, $this->paramRequest));
+        return Json::decode($curl->post(self::REGISTER_ORDER, CurlDataFormat::asFormData($this->paramRequest)));
     }
 
     public function cancelPay(AcquiringOrder $order)
@@ -78,7 +79,7 @@ class AcquiringTerminalService
             'orderId' => $order->identifier_id,
         ]);
 
-        return Json::decode($curl->post(self::CANCEL_PAY, $this->paramRequest));
+        return Json::decode($curl->post(self::CANCEL_PAY, CurlDataFormat::asFormData($this->paramRequest)));
     }
 
     public function decline(AcquiringOrder $order)
@@ -91,7 +92,7 @@ class AcquiringTerminalService
             'merchantLogin' => "T2222889641",
         ]);
 
-        return Json::decode($curl->post(self::DECLINE, $this->paramRequest));
+        return Json::decode($curl->post(self::DECLINE, CurlDataFormat::asFormData($this->paramRequest)));
     }
 
     public function rollbackMoney(AcquiringOrder $order, $amount)
@@ -105,7 +106,7 @@ class AcquiringTerminalService
         ]);
 
 
-        return Json::decode($curl->post(self::ROLLBACK_MONEY, $this->paramRequest));
+        return Json::decode($curl->post(self::ROLLBACK_MONEY, CurlDataFormat::asFormData($this->paramRequest)));
     }
 
     public function saveHistoryPaymentTransaction(Order $order, $identificator)

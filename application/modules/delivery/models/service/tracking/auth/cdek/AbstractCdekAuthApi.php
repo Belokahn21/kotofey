@@ -3,9 +3,8 @@
 
 namespace app\modules\delivery\models\service\tracking\auth\cdek;
 
-
 use app\modules\site\models\tools\Curl;
-use app\modules\site\models\tools\Debug;
+use app\modules\site\models\tools\CurlDataFormat;
 use yii\helpers\Json;
 
 class AbstractCdekAuthApi implements CdekAuthApiInterface
@@ -24,11 +23,11 @@ class AbstractCdekAuthApi implements CdekAuthApiInterface
     {
         $curl = new Curl();
         $response = $curl->post($this->_url,
-            [
+            CurlDataFormat::asFormData([
                 'grant_type' => 'client_credentials',
                 'client_id' => $this->_login,
                 'client_secret' => $this->_password,
-            ],
+            ]),
             [
                 'Content-Type: application/x-www-form-urlencoded'
             ]

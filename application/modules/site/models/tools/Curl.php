@@ -2,10 +2,9 @@
 
 namespace app\modules\site\models\tools;
 
-
 class Curl
 {
-    public function post(string $url, array $data = [], array $headers = [])
+    public function post(string $url, $data = null, array $headers = [])
     {
         $out = false;
         if ($curl = curl_init()) {
@@ -13,7 +12,7 @@ class Curl
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_POST, true);
             if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-            if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($data));
+            if ($data) curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
             $out = curl_exec($curl);
             curl_close($curl);
         }
