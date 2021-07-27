@@ -7,7 +7,7 @@ namespace app\modules\delivery\models\service\tracking\api;
 use SoapClient;
 use SoapParam;
 
-class RuPostTrackingApi implements TrackingApi
+class RuPostIDeliveryApi implements IDeliveryApi
 {
 
     public function getOrderInfo(string $track_id)

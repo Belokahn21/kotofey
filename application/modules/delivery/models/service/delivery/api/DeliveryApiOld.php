@@ -6,7 +6,7 @@ namespace app\modules\delivery\models\service\delivery\api;
 
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 
-interface DeliveryApi
+interface DeliveryApiOld
 {
     public function getNormalAddress($address);
 

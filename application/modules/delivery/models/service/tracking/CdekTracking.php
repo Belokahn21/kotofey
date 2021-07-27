@@ -4,17 +4,17 @@
 namespace app\modules\delivery\models\service\tracking;
 
 
-use app\modules\delivery\models\service\tracking\api\CdekTrackingApi;
-use app\modules\delivery\models\service\tracking\api\TrackingApi;
+use app\modules\delivery\models\service\tracking\api\CdekApi;
+use app\modules\delivery\models\service\tracking\api\IDeliveryApi;
 
 /**
- * @var $_api TrackingApi
+ * @var $_api IDeliveryApi
  */
 class CdekTracking extends ATracking
 {
     public function __construct()
     {
-        $this->_api = new CdekTrackingApi();
+        $this->_api = new CdekApi();
     }
 
     public function getOrderInfo($track_id)

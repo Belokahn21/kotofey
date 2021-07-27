@@ -2,11 +2,11 @@
 
 namespace app\modules\delivery\models\service\tracking;
 
-use app\modules\delivery\models\service\tracking\api\TrackingApi;
+use app\modules\delivery\models\service\tracking\api\IDeliveryApi;
 
 
 /**
- * @var $_api TrackingApi
+ * @var $_api IDeliveryApi
  */
 abstract class ATracking implements Tracking
 {

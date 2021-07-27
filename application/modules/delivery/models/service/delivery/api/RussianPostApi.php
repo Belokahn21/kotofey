@@ -4,14 +4,14 @@
 namespace app\modules\delivery\models\service\delivery\api;
 
 
-use app\modules\delivery\models\service\delivery\api\DeliveryApi;
+use app\modules\delivery\models\service\delivery\api\DeliveryApiOld;
 use app\modules\delivery\models\service\delivery\tariffs\RuPostTariffData;
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Money;
 use yii\helpers\Json;
 
-class RussianPostApi implements DeliveryApi
+class RussianPostApi implements DeliveryApiOld
 {
     private $_LOGIN = 'info@kotofey.store';
     private $_PASSWORD = '123qweR%';

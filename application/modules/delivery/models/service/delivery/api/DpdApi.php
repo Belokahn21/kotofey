@@ -4,10 +4,10 @@
 namespace app\modules\delivery\models\service\delivery\api;
 
 
-use app\modules\delivery\models\service\delivery\api\DeliveryApi;
+use app\modules\delivery\models\service\delivery\api\DeliveryApiOld;
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 
-class DpdApi implements DeliveryApi
+class DpdApi implements DeliveryApiOld
 {
 
     public function getNormalAddress($address)

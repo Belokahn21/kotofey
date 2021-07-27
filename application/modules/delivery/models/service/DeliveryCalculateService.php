@@ -2,16 +2,15 @@
 
 namespace app\modules\delivery\models\service;
 
-use app\modules\delivery\models\service\delivery\api\CdekApi;
-use app\modules\delivery\models\service\delivery\api\DeliveryApi;
+use app\modules\delivery\models\service\delivery\api\DeliveryApiOld;
 use app\modules\delivery\models\service\delivery\api\DpdApi;
 use app\modules\delivery\models\service\delivery\api\RussianPostApi;
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
-use app\modules\site\models\tools\Debug;
+use app\modules\delivery\models\service\tracking\api\CdekApi;
 
 
 /**
- * @property  DeliveryApi $api
+ * @property  DeliveryApiOld $api
  */
 class DeliveryCalculateService
 {
