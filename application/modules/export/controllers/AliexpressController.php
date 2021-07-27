@@ -24,7 +24,7 @@ class AliexpressController extends Controller
 
 
         $response = $this->renderPartial('index', [
-            'offersBatch' => $offers,
+            'offers' => $offers,
             'categories' => $categories,
             'module' => $module,
         ]);
