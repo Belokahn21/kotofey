@@ -55,7 +55,7 @@ class DeliveryCalculateService
         try {
             $total = $this->api->getPriceInfo($tariff_data);
         } catch (\Exception $exception) {
-            echo "При вычислении стоимости доставки произошла ошибка: " . $exception->getMessage();
+            echo "При вычислении стоимости доставки произошла ошибка: " . $exception->getMessage() . '/' . $exception->getFile() . '/' . $exception->getCode();
         }
 
         return $total;

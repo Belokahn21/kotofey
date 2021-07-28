@@ -27,8 +27,6 @@ class ResponseNormalizer
     {
         $list_cards = [];
 
-//        Debug::p($data);
-
         if (ArrayHelper::keyExists('tariff_codes', $data)) {
             foreach ($data->tariff_codes as $tariff_code) {
                 $card = new ResponseCard();
@@ -54,8 +52,6 @@ class ResponseNormalizer
     public function normalizeRuPostResponse(array $data)
     {
         $list_cards = [];
-
-//        Debug::printFile($data);
 
         $card = new ResponseCard();
         $card->name = ArrayHelper::getValue($data, 'name');
