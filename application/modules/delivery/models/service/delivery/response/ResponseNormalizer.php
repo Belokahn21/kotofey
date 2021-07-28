@@ -29,12 +29,24 @@ class ResponseNormalizer
 
         Debug::printFile($data);
 
-        $card = new ResponseCard();
-        $card->total = ArrayHelper::getValue($data, 'total_sum');
-        $card->min_days = ArrayHelper::getValue($data, 'period_min');
-        $card->max_days = ArrayHelper::getValue($data, 'period_max');
+        if (is_object($data) && ArrayHelper::keyExists('tariff_codes', $data)) {
+            foreach ($data->tariff_codes as $tariff_code) {
+                $card = new ResponseCard();
+                $card->total = ArrayHelper::getValue($data, 'total_sum');
+                $card->min_days = ArrayHelper::getValue($data, 'period_min');
+                $card->max_days = ArrayHelper::getValue($data, 'period_max');
 
-        $list_cards[] = $card;
+                $list_cards[] = $card;
+            }
+        } else {
+            $card = new ResponseCard();
+            $card->total = ArrayHelper::getValue($data, 'total_sum');
+            $card->min_days = ArrayHelper::getValue($data, 'period_min');
+            $card->max_days = ArrayHelper::getValue($data, 'period_max');
+
+            $list_cards[] = $card;
+        }
+
         return $list_cards;
     }
 
