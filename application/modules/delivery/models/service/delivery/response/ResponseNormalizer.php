@@ -40,6 +40,8 @@ class ResponseNormalizer
     {
         $list_cards = [];
 
+        Debug::printFile($data);
+
         $card = new ResponseCard();
         $card->name = ArrayHelper::getValue($data, 'name');
         $card->total = Money::convertCopToRub(ArrayHelper::getValue($data, 'total-rate'));
