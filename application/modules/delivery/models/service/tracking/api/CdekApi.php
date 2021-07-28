@@ -2,7 +2,7 @@
 
 namespace app\modules\delivery\models\service\tracking\api;
 
-use app\modules\delivery\models\service\delivery\response\CdekResponse;
+use app\modules\delivery\models\service\delivery\response\ResponseNormalizer;
 use app\modules\delivery\models\service\delivery\tariffs\CdekTariffData;
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 use app\modules\delivery\models\service\tracking\auth\cdek\CdekAuth;
@@ -98,9 +98,9 @@ class CdekApi implements IDeliveryApi
         ]);
 
 
-        $response_model = new CdekResponse($response);
+        $normalizer = new ResponseNormalizer();
 
-        return $response_model->getFulInfo();
+        return $normalizer->normalize(ResponseNormalizer::SERVICE_CDEK, $response);
     }
 
     public function sendRequest(string $url, array $data = [], array $headers = [])

@@ -3,12 +3,9 @@
 
 namespace app\modules\delivery\models\service\delivery\api;
 
-
-use app\modules\delivery\models\service\delivery\api\DeliveryApiOld;
+use app\modules\delivery\models\service\delivery\response\ResponseNormalizer;
 use app\modules\delivery\models\service\delivery\tariffs\RuPostTariffData;
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
-use app\modules\site\models\tools\Debug;
-use app\modules\site\models\tools\Money;
 use yii\helpers\Json;
 
 class RussianPostApi implements DeliveryApiOld
@@ -59,7 +56,7 @@ class RussianPostApi implements DeliveryApiOld
     public function getPriceInfo(TariffDataInterface $tariff_data)
     {
         /* @var $tariff_data RuPostTariffData */
-        $result = $this->sendRequest($this->_URL . self::ACTION_TARIF, [
+        $response = $this->sendRequest($this->_URL . self::ACTION_TARIF, [
             "index-from" => $tariff_data->index_from,
             "index-to" => $tariff_data->index_to,
             "mail-category" => $tariff_data->mail_category,
@@ -72,18 +69,12 @@ class RussianPostApi implements DeliveryApiOld
             "with-simple-notice" => false,
         ], $this->_AUTH_HEADERS);
 
-        if (!array_key_exists('total-rate', $result)) {
-            throw new \Exception($result['desc']);
+        if (!array_key_exists('total-rate', $response)) {
+            throw new \Exception($response['desc']);
         }
 
-        Debug::p($result);exit();
-
-        return [
-            'total' => Money::convertCopToRub($result['total-rate']),
-            'time' => [
-                'max-days' => $result['delivery-time']['max-days']
-            ]
-        ];
+        $normalizer = new ResponseNormalizer();
+        return $normalizer->normalize(ResponseNormalizer::SERVICE_CDEK, $response);
     }
 
     public function sendRequest(string $url, array $data = [], array $headers = [])
