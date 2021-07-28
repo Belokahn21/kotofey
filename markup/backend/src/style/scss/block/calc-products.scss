@@ -38,6 +38,7 @@
       align-items: center;
       justify-content: space-between;
       padding: 5px;
+      box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
     }
 
     &__name {
@@ -70,6 +71,8 @@
           .calc-products-result__checked {
             background-color: $whatsapp-green;
             color: white;
+            border-color: transparent;
+            box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
 
             i {
               display: block;

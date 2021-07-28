@@ -74,7 +74,7 @@ class RussianPostApi implements DeliveryApiOld
         }
 
         $normalizer = new ResponseNormalizer();
-        return $normalizer->normalize(ResponseNormalizer::SERVICE_CDEK, $response);
+        return $normalizer->normalize(ResponseNormalizer::SERVICE_RU_POST, $response);
     }
 
     public function sendRequest(string $url, array $data = [], array $headers = [])

@@ -2,6 +2,7 @@
 
 namespace app\modules\delivery\models\service\delivery\response;
 
+use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\Money;
 use yii\helpers\ArrayHelper;
 
@@ -27,9 +28,9 @@ class ResponseNormalizer
         $list_cards = [];
 
         $card = new ResponseCard();
-        $card->name = ArrayHelper::getValue($data, 'name');
-        $card->total = ArrayHelper::getValue($data, 'total');
-        $card->days = ArrayHelper::getValue($data, 'min-days');
+        $card->total = ArrayHelper::getValue($data, 'total_sum');
+        $card->min_days = ArrayHelper::getValue($data, 'period_min');
+        $card->max_days = ArrayHelper::getValue($data, 'period_max');
 
         $list_cards[] = $card;
         return $list_cards;
@@ -42,8 +43,7 @@ class ResponseNormalizer
         $card = new ResponseCard();
         $card->name = ArrayHelper::getValue($data, 'name');
         $card->total = Money::convertCopToRub(ArrayHelper::getValue($data, 'total-rate'));
-        $card->max_days = ArrayHelper::getValue(ArrayHelper::getColumn($data, 'delivery-time'), 'max-days');
-        $card->min_days = ArrayHelper::getValue(ArrayHelper::getColumn($data, 'delivery-time'), 'min-days');
+        $card->max_days = ArrayHelper::getValue(ArrayHelper::getValue($data, 'delivery-time'), 'max-days');
 
         $list_cards[] = $card;
         return $list_cards;

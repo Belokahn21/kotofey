@@ -4820,11 +4820,7 @@ var CalculatorDeliveryService = /*#__PURE__*/function (_React$Component) {
   _createClass(CalculatorDeliveryService, [{
     key: "render",
     value: function render() {
-      var _this = this;
-
-      var _this$props = this.props,
-          items = _this$props.items,
-          handleSelectService = _this$props.handleSelectService;
+      var items = this.props.items;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-delivery-services"
       }, items.map(function (el, index) {
@@ -4833,7 +4829,6 @@ var CalculatorDeliveryService = /*#__PURE__*/function (_React$Component) {
           className: "calc-delivery-services__label"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           name: "service",
-          onChange: handleSelectService.bind(_this),
           className: "calc-delivery-services__input",
           type: "radio",
           value: el.value
@@ -4986,6 +4981,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _frontend_src_js_tools_Price__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/Price */ "../frontend/src/js/tools/Price.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5010,6 +5006,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var CalculatorResult = /*#__PURE__*/function (_React$Component) {
   _inherits(CalculatorResult, _React$Component);
 
@@ -5024,9 +5021,27 @@ var CalculatorResult = /*#__PURE__*/function (_React$Component) {
   _createClass(CalculatorResult, [{
     key: "render",
     value: function render() {
+      var tariff_list = this.props.tariff_list;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-result"
-      }, "\u0412\u0430\u0440\u0438\u0430\u043D\u0442\u044B \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438");
+      }, "\u0412\u0430\u0440\u0438\u0430\u043D\u0442\u044B \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", {
+        className: "delivery-variants"
+      }, tariff_list.map(function (el, i) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("li", {
+          className: "delivery-variants-item",
+          key: i
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "delivery-variants-item__header"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "delivery-variants-item__name"
+        }, "\u0422\u0430\u0440\u0438\u0444: ", el.name === null ? 'Без указания' : el.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "delivery-variants-item__time"
+        }, "\u0412\u0440\u0435\u043C\u044F \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438: ", el.max_days, " \u0434\u043D.")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "delivery-variants-item__body"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "delivery-variants-item__money"
+        }, "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438: ", _frontend_src_js_tools_Price__WEBPACK_IMPORTED_MODULE_1__.default.format(el.total), " \u0440\u0443\u0431.")));
+      })));
     }
   }]);
 
@@ -5034,6 +5049,253 @@ var CalculatorResult = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CalculatorResult);
+
+/***/ }),
+
+/***/ "./src/js/react/components/OperatorCalculator/FormLocation.js":
+/*!********************************************************************!*\
+  !*** ./src/js/react/components/OperatorCalculator/FormLocation.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var _Location__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Location */ "./src/js/react/components/OperatorCalculator/Location.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../frontend/src/js/config */ "../frontend/src/js/config.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var FormLocation = /*#__PURE__*/function (_React$Component) {
+  _inherits(FormLocation, _React$Component);
+
+  var _super = _createSuper(FormLocation);
+
+  function FormLocation(props) {
+    var _this;
+
+    _classCallCheck(this, FormLocation);
+
+    _this = _super.call(this, props);
+    _this.cleanAddressTimerEx;
+    _this.state = {
+      show: false,
+      postal: '',
+      items: []
+    };
+    return _this;
+  }
+
+  _createClass(FormLocation, [{
+    key: "setShow",
+    value: function setShow(show) {
+      this.setState({
+        show: show
+      });
+    }
+  }, {
+    key: "handleClose",
+    value: function handleClose() {
+      this.setShow(false);
+    }
+  }, {
+    key: "handleShow",
+    value: function handleShow() {
+      this.setShow(true);
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var form = event.target.parentNode.parentNode;
+      var input = form.querySelector("input[name='address']");
+      if (input.value.length === 0) return false;
+      if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
+      this.cleanAddressTimerEx = setTimeout(function () {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restDeliveryCleanAddress + '?filter[text]=' + input.value).then(function (result) {
+          var data = [];
+          result.map(function (el) {
+            console.log(el);
+            data.push({
+              index: el.index,
+              city: el.place,
+              street: el.street,
+              home: el.house,
+              room: el.room
+            });
+          });
+
+          _this2.setState({
+            items: data
+          });
+        });
+      }, this.cleanAddressTimer);
+    }
+  }, {
+    key: "selectAddress",
+    value: function selectAddress(address, event) {
+      this.setState({
+        postal: address.index
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$state = this.state,
+          show = _this$state.show,
+          items = _this$state.items,
+          postal = _this$state.postal;
+      var options = this.props.options;
+      console.log(postal);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "calc-placement__location"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
+        show: show,
+        onHide: this.handleClose.bind(this)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Header, {
+        closeButton: true
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Title, null, "\u0417\u0430\u043F\u043E\u043B\u043D\u0438\u0442\u044C ", options.placeholder)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+        className: "choose-address"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        className: "choose-address__item"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "choose-address__input",
+        type: "text",
+        placeholder: "656992, \u0433 \u0411\u0430\u0440\u043D\u0430\u0443\u043B, \u0443\u043B \u041F\u043E\u043F\u043E\u0432\u0430, \u0434 125, \u043A\u0432 18",
+        name: "address"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        onClick: this.handleClick.bind(this),
+        className: "btn-main"
+      }, "\u041D\u0430\u0439\u0442\u0438 \u0430\u0434\u0440\u0435\u0441\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Location__WEBPACK_IMPORTED_MODULE_1__.default, {
+        selectAddress: this.selectAddress.bind(this),
+        items: items
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "calc-placement__choose",
+        onClick: this.handleShow.bind(this)
+      }, "+"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        type: "text",
+        defaultValue: postal,
+        className: "calc-placement__postal-code",
+        name: options.name,
+        placeholder: "\u041C\u0435\u0441\u0442\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438"
+      }));
+    }
+  }]);
+
+  return FormLocation;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FormLocation);
+
+/***/ }),
+
+/***/ "./src/js/react/components/OperatorCalculator/Location.js":
+/*!****************************************************************!*\
+  !*** ./src/js/react/components/OperatorCalculator/Location.js ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var Location = /*#__PURE__*/function (_React$Component) {
+  _inherits(Location, _React$Component);
+
+  var _super = _createSuper(Location);
+
+  function Location(props) {
+    _classCallCheck(this, Location);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(Location, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var _this$props = this.props,
+          items = _this$props.items,
+          selectAddress = _this$props.selectAddress;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "list-finds"
+      }, items.map(function (el, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: index,
+          className: "list-finds__item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, el.index ? el.index : '', el.city ? ', ' + el.city : '', el.street ? ', ' + el.street : '', el.home ? ', ' + el.home : '', el.room ? ', кв ' + el.room : ''), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          className: "list-finds__setup",
+          onClick: selectAddress.bind(_this, el)
+        }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"));
+      })));
+    }
+  }]);
+
+  return Location;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Location);
 
 /***/ }),
 
@@ -5053,6 +5315,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _FormLocation__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./FormLocation */ "./src/js/react/components/OperatorCalculator/FormLocation.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5074,6 +5337,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -5096,7 +5360,7 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this);
     var img_src = '/images/tk/';
     _this.state = {
-      editable: true,
+      tariff_list: [],
       services: [{
         name: 'cdek',
         src: "".concat(img_src, "cdek.jpg"),
@@ -5117,19 +5381,16 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
   _createClass(OperatorCalculator, [{
     key: "handleFormSubmit",
     value: function handleFormSubmit(e) {
+      var _this2 = this;
+
       e.preventDefault();
       var form = e.target;
       _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_5__.default.post((_config__WEBPACK_IMPORTED_MODULE_6___default().restDeliveryCalculate), {
         body: new FormData(form)
       }).then(function (data) {
-        console.log(data);
-      });
-    }
-  }, {
-    key: "handleSelectService",
-    value: function handleSelectService(e) {
-      this.setState({
-        editable: false
+        _this2.setState({
+          tariff_list: data
+        });
       });
     }
   }, {
@@ -5137,35 +5398,32 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$state = this.state,
           services = _this$state.services,
-          editable = _this$state.editable;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
+          tariff_list = _this$state.tariff_list;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "calc-form",
         onSubmit: this.handleFormSubmit.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "calc-form__submit",
         type: "submit"
       }, "\u0420\u0430\u0441\u0447\u0438\u0442\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorDeliveryService__WEBPACK_IMPORTED_MODULE_2__.default, {
-        handleSelectService: this.handleSelectService.bind(this),
         items: services
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-placement"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "calc-placement__from"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        readOnly: editable,
-        name: "placement_from",
-        placeholder: "\u041C\u0435\u0441\u0442\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FormLocation__WEBPACK_IMPORTED_MODULE_7__.default, {
+        options: {
+          name: 'placement_from',
+          placeholder: 'Место отправки'
+        }
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FormLocation__WEBPACK_IMPORTED_MODULE_7__.default, {
+        options: {
+          name: 'placement_to',
+          placeholder: 'Место доставки'
+        }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "calc-placement__to"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "text",
-        readOnly: editable,
-        name: "placement_to",
-        placeholder: "\u041C\u0435\u0441\u0442\u043E \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-panel"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorProducts__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorResult__WEBPACK_IMPORTED_MODULE_4__.default, null)));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorProducts__WEBPACK_IMPORTED_MODULE_3__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorResult__WEBPACK_IMPORTED_MODULE_4__.default, {
+        tariff_list: tariff_list
+      }))));
     }
   }]);
 
@@ -6343,6 +6601,44 @@ module.exports = {
 
 /***/ }),
 
+/***/ "../frontend/src/js/config.js":
+/*!************************************!*\
+  !*** ../frontend/src/js/config.js ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+var url = location.protocol + '//' + location.hostname + '/';
+if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store/';
+var config = {
+  restCompare: url + 'api/compare/',
+  restCompareMixed: url + 'api/compare/mixed/',
+  restFavorite: url + 'api/favorite/',
+  restOrder: url + 'api/order/',
+  restFastOrder: url + 'api/order/fast/',
+  restBasket: url + 'api/basket/',
+  restDelivery: url + 'api/delivery/',
+  restDeliveryCleanAddress: url + 'api/delivery/clean-address/',
+  restPayment: url + 'api/payment/',
+  restDates: url + 'api/order/dates/',
+  ajaxActionGetMiniCartAmount: url + 'get-mini-cart-amount/',
+  ajaxActionGetMiniCartCount: url + 'get-mini-cart-count/',
+  restCatalog: url + 'api/catalog/',
+  restBonus: url + 'api/bonus/',
+  restPromocode: url + 'api/promocode/',
+  restUser: url + 'api/user/',
+  // sberbank payments
+  restAcquiring: url + 'api/acquiring/',
+  restAcquiringOrder: url + 'api/acquiring/order/'
+};
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (config);
+
+/***/ }),
+
 /***/ "../frontend/src/js/tools/BuildQuery.js":
 /*!**********************************************!*\
   !*** ../frontend/src/js/tools/BuildQuery.js ***!
@@ -6412,6 +6708,42 @@ var BuildQuery = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BuildQuery);
+
+/***/ }),
+
+/***/ "../frontend/src/js/tools/Price.js":
+/*!*****************************************!*\
+  !*** ../frontend/src/js/tools/Price.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Price = /*#__PURE__*/function () {
+  function Price() {
+    _classCallCheck(this, Price);
+  }
+
+  _createClass(Price, null, [{
+    key: "format",
+    value: function format(price) {
+      return new Intl.NumberFormat('ru-RU').format(price);
+    }
+  }]);
+
+  return Price;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Price);
 
 /***/ }),
 

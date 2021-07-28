@@ -5,6 +5,7 @@ import CalculatorProducts from "./CalculatorProducts";
 import CalculatorResult from "./CalculatorResult";
 import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
 import config from "../../config";
+import FormLocation from "./FormLocation";
 
 class OperatorCalculator extends React.Component {
     constructor() {
@@ -12,7 +13,7 @@ class OperatorCalculator extends React.Component {
 
         let img_src = '/images/tk/';
         this.state = {
-            editable: true,
+            tariff_list: [],
             services: [{name: 'cdek', src: `${img_src}cdek.jpg`, value: 'cdek'}, {name: 'ru_post', src: `${img_src}ru_post.png`, value: 'ru_post'}, {name: 'dpd', src: `${img_src}dpd.png`, value: 'dpd'}]
         };
     }
@@ -24,32 +25,36 @@ class OperatorCalculator extends React.Component {
         RestRequest.post(config.restDeliveryCalculate, {
             body: new FormData(form),
         }).then(data => {
-            console.log(data);
+            this.setState({tariff_list: data});
         });
     }
 
-    handleSelectService(e) {
-        this.setState({editable: false})
-    }
-
     render() {
-        const {services, editable} = this.state;
-        return <form className="calc-form" onSubmit={this.handleFormSubmit.bind(this)}>
+        const {services, tariff_list} = this.state;
+        return <>
+            <form className="calc-form" onSubmit={this.handleFormSubmit.bind(this)}>
 
-            <button className="calc-form__submit" type="submit">Расчитать</button>
+                <button className="calc-form__submit" type="submit">Расчитать</button>
 
-            <CalculatorDeliveryService handleSelectService={this.handleSelectService.bind(this)} items={services}/>
+                <CalculatorDeliveryService items={services}/>
 
-            <div className="calc-placement">
-                <div className="calc-placement__from"><input type="text" readOnly={editable} name="placement_from" placeholder="Место отправки"/></div>
-                <div className="calc-placement__to"><input type="text" readOnly={editable} name="placement_to" placeholder="Место доставки"/></div>
-            </div>
+                <div className="calc-placement">
+                    <FormLocation options={{
+                        name: 'placement_from',
+                        placeholder: 'Место отправки',
+                    }}/>
+                    <FormLocation options={{
+                        name: 'placement_to',
+                        placeholder: 'Место доставки',
+                    }}/>
+                </div>
 
-            <div className="calc-panel">
-                <CalculatorProducts/>
-                <CalculatorResult/>
-            </div>
-        </form>
+                <div className="calc-panel">
+                    <CalculatorProducts/>
+                    <CalculatorResult tariff_list={tariff_list}/>
+                </div>
+            </form>
+        </>
     }
 }
 
