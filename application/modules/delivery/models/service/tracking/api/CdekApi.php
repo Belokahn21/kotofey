@@ -2,8 +2,8 @@
 
 namespace app\modules\delivery\models\service\tracking\api;
 
+use app\modules\delivery\models\service\delivery\response\CdekResponse;
 use app\modules\delivery\models\service\delivery\tariffs\CdekTariffData;
-use app\modules\delivery\models\service\delivery\tariffs\RuPostTariffData;
 use app\modules\delivery\models\service\delivery\tariffs\TariffDataInterface;
 use app\modules\delivery\models\service\tracking\auth\cdek\CdekAuth;
 use app\modules\delivery\models\service\tracking\auth\cdek\CdekAuthApiInterface;
@@ -85,17 +85,22 @@ class CdekApi implements IDeliveryApi
             ],
             "packages" => [
                 [
-                    "height" => 10,
-                    "length" => 10,
-                    "weight" => 4000,
-                    "width" => 10
+                    "height" => $tariff_data->dimension['height'],
+                    "length" => $tariff_data->dimension['length'],
+                    "weight" => $tariff_data->dimension['weight'],
+                    "width" => $tariff_data->dimension['width']
                 ]
             ],
         ];
 
-        return $this->postRequest('/calculator/tarifflist', CurlDataFormat::asJson($params), [
+        $response = $this->postRequest('/calculator/tarifflist', CurlDataFormat::asJson($params), [
             'Content-Type:application/json'
         ]);
+
+
+        $response_model = new CdekResponse($response);
+
+        return $response_model->getFulInfo();
     }
 
     public function sendRequest(string $url, array $data = [], array $headers = [])
