@@ -33,7 +33,7 @@ class ResponseNormalizer
             foreach ($data->tariff_codes as $tariff_code) {
                 $card = new ResponseCard();
                 $card->name = ArrayHelper::getValue($data, 'tariff_name');
-                $card->total = ArrayHelper::getValue($data, 'total_sum');
+                $card->total = ArrayHelper::getValue($data, 'delivery_sum');
                 $card->min_days = ArrayHelper::getValue($data, 'period_min');
                 $card->max_days = ArrayHelper::getValue($data, 'period_max');
 
