@@ -5110,7 +5110,7 @@ var FormLocation = /*#__PURE__*/function (_React$Component) {
     _this.cleanAddressTimerEx;
     _this.state = {
       show: false,
-      postal: '',
+      postal: props.options["default"],
       items: []
     };
     return _this;
@@ -5147,7 +5147,6 @@ var FormLocation = /*#__PURE__*/function (_React$Component) {
         _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restDeliveryCleanAddress + '?filter[text]=' + input.value).then(function (result) {
           var data = [];
           result.map(function (el) {
-            console.log(el);
             data.push({
               index: el.index,
               city: el.place,
@@ -5178,7 +5177,6 @@ var FormLocation = /*#__PURE__*/function (_React$Component) {
           items = _this$state.items,
           postal = _this$state.postal;
       var options = this.props.options;
-      console.log(postal);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-placement__location"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -5210,8 +5208,9 @@ var FormLocation = /*#__PURE__*/function (_React$Component) {
         type: "text",
         defaultValue: postal,
         className: "calc-placement__postal-code",
+        readOnly: options.readonly,
         name: options.name,
-        placeholder: "\u041C\u0435\u0441\u0442\u043E \u043E\u0442\u043F\u0440\u0430\u0432\u043A\u0438"
+        placeholder: options.placeholder
       }));
     }
   }]);
@@ -5412,12 +5411,16 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FormLocation__WEBPACK_IMPORTED_MODULE_7__.default, {
         options: {
           name: 'placement_from',
-          placeholder: 'Место отправки'
+          placeholder: 'Индекс отправки',
+          "default": '656000',
+          readonly: true
         }
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FormLocation__WEBPACK_IMPORTED_MODULE_7__.default, {
         options: {
           name: 'placement_to',
-          placeholder: 'Место доставки'
+          placeholder: 'Индекс доставки',
+          "default": '',
+          readonly: false
         }
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-panel"

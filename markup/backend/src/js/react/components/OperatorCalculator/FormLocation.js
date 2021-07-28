@@ -12,7 +12,7 @@ class FormLocation extends React.Component {
 
         this.state = {
             show: false,
-            postal: '',
+            postal: props.options.default,
             items: [],
         }
     }
@@ -44,8 +44,6 @@ class FormLocation extends React.Component {
                 let data = [];
 
                 result.map(el => {
-                    console.log(el);
-
                     data.push({
                         index: el.index,
                         city: el.place,
@@ -87,8 +85,7 @@ class FormLocation extends React.Component {
 
 
             <button type="button" className="calc-placement__choose" onClick={this.handleShow.bind(this)}>+</button>
-
-            <input type="text" defaultValue={postal} className="calc-placement__postal-code" name={options.name} placeholder="Место отправки"/>
+            <input type="text" defaultValue={postal} className="calc-placement__postal-code" readOnly={options.readonly} name={options.name} placeholder={options.placeholder}/>
         </div>
     }
 }

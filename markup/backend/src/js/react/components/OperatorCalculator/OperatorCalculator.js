@@ -41,11 +41,15 @@ class OperatorCalculator extends React.Component {
                 <div className="calc-placement">
                     <FormLocation options={{
                         name: 'placement_from',
-                        placeholder: 'Место отправки',
+                        placeholder: 'Индекс отправки',
+                        default: '656000',
+                        readonly: true,
                     }}/>
                     <FormLocation options={{
                         name: 'placement_to',
-                        placeholder: 'Место доставки',
+                        placeholder: 'Индекс доставки',
+                        default: '',
+                        readonly: false,
                     }}/>
                 </div>
 
