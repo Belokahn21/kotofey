@@ -32,6 +32,7 @@ class ResponseNormalizer
         if (is_object($data) && ArrayHelper::keyExists('tariff_codes', $data)) {
             foreach ($data->tariff_codes as $tariff_code) {
                 $card = new ResponseCard();
+                $card->name = ArrayHelper::getValue($data, 'tariff_name');
                 $card->total = ArrayHelper::getValue($data, 'total_sum');
                 $card->min_days = ArrayHelper::getValue($data, 'period_min');
                 $card->max_days = ArrayHelper::getValue($data, 'period_max');
