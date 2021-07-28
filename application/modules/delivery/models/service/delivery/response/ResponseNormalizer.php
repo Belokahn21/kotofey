@@ -28,12 +28,12 @@ class ResponseNormalizer
         $list_cards = [];
 
         if (ArrayHelper::keyExists('tariff_codes', $data)) {
-            foreach ($data->tariff_codes as $tariff_code) {
+            foreach ($data['tariff_codes'] as $tariff_code) {
                 $card = new ResponseCard();
-                $card->name = ArrayHelper::getValue($data, 'tariff_name');
-                $card->total = ArrayHelper::getValue($data, 'delivery_sum');
-                $card->min_days = ArrayHelper::getValue($data, 'period_min');
-                $card->max_days = ArrayHelper::getValue($data, 'period_max');
+                $card->name = ArrayHelper::getValue($tariff_code, 'tariff_name');
+                $card->total = ArrayHelper::getValue($tariff_code, 'delivery_sum');
+                $card->min_days = ArrayHelper::getValue($tariff_code, 'period_min');
+                $card->max_days = ArrayHelper::getValue($tariff_code, 'period_max');
 
                 $list_cards[] = $card;
             }
