@@ -9037,7 +9037,7 @@ html, body {
 
 .calc-result {
   width: 50%;
-  border: 1px silver solid; }
+  padding: 10px; }
 
 .info-panel-container {
   display: flex;
@@ -9069,7 +9069,8 @@ html, body {
     display: flex;
     flex-direction: column;
     border: 1px #e6e6e6 solid;
-    padding: 10px; }
+    padding: 10px;
+    margin-bottom: 15px; }
     .delivery-variants-item__header {
       display: flex;
       flex-direction: row;
