@@ -11,7 +11,7 @@ class ResponseNormalizer
     const SERVICE_CDEK = 'cdek';
     const SERVICE_RU_POST = 'ru_post';
 
-    public function normalize(string $service_name, $data)
+    public function normalize(string $service_name, array $data)
     {
         switch ($service_name) {
             case self::SERVICE_CDEK:
@@ -23,13 +23,13 @@ class ResponseNormalizer
         }
     }
 
-    public function normalizeCdekResponse($data)
+    public function normalizeCdekResponse(array $data)
     {
         $list_cards = [];
 
-//        Debug::printFile($data);
+        Debug::p($data);
 
-        if (is_object($data) && ArrayHelper::keyExists('tariff_codes', $data)) {
+        if (ArrayHelper::keyExists('tariff_codes', $data)) {
             foreach ($data->tariff_codes as $tariff_code) {
                 $card = new ResponseCard();
                 $card->name = ArrayHelper::getValue($data, 'tariff_name');
@@ -51,7 +51,7 @@ class ResponseNormalizer
         return $list_cards;
     }
 
-    public function normalizeRuPostResponse($data)
+    public function normalizeRuPostResponse(array $data)
     {
         $list_cards = [];
 

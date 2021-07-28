@@ -46,7 +46,7 @@ class CdekApi implements IDeliveryApi
         $curl = new Curl();
         $response = $curl->post($this->_url . $url, $params, $headers);
 
-        return Json::decode($response, false);
+        return Json::decode($response, true);
     }
 
     public function getRequest(string $url, array $params = [], array $headers = [])
@@ -59,7 +59,7 @@ class CdekApi implements IDeliveryApi
         $curl = new Curl();
         $response = $curl->get($this->_url . $url, $params, $headers);
 
-        return Json::decode($response, false);
+        return Json::decode($response, true);
     }
 
 
