@@ -27,7 +27,7 @@ class ResponseNormalizer
     {
         $list_cards = [];
 
-        Debug::p($data);
+//        Debug::p($data);
 
         if (ArrayHelper::keyExists('tariff_codes', $data)) {
             foreach ($data->tariff_codes as $tariff_code) {
