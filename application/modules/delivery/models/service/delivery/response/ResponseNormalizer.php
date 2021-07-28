@@ -27,6 +27,8 @@ class ResponseNormalizer
     {
         $list_cards = [];
 
+        Debug::printFile($data);
+
         $card = new ResponseCard();
         $card->total = ArrayHelper::getValue($data, 'total_sum');
         $card->min_days = ArrayHelper::getValue($data, 'period_min');
