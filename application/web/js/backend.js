@@ -3835,7 +3835,7 @@ var FindProductForm = /*#__PURE__*/function (_React$Component) {
       if (this.timerEx) clearTimeout(this.timerEx);
       var element = e.target,
           value = element.value;
-      var queryParam = '?expand=imageUrl,discount_price&ProductSearchForm[mixed_value]=';
+      var queryParam = '?expand=imageUrl,discount_price,backendHref&ProductSearchForm[mixed_value]=';
       this.timerEx = setTimeout(function () {
         _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_4__.default.all((_config__WEBPACK_IMPORTED_MODULE_1___default().restCatalog) + queryParam + value).then(function (result) {
           _this2.setState({
@@ -3868,7 +3868,8 @@ var FindProductForm = /*#__PURE__*/function (_React$Component) {
           src: el.imageUrl,
           className: "list-finds__image"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-          href: "#",
+          href: el.backendHref,
+          target: "_blank",
           className: "list-finds__link"
         }, el.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "list-finds-data"

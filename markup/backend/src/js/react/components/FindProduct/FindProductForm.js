@@ -26,7 +26,7 @@ class FindProductForm extends React.Component {
         if (this.timerEx) clearTimeout(this.timerEx);
         const element = e.target, value = element.value;
 
-        let queryParam = '?expand=imageUrl,discount_price&ProductSearchForm[mixed_value]=';
+        let queryParam = '?expand=imageUrl,discount_price,backendHref&ProductSearchForm[mixed_value]=';
 
         this.timerEx = setTimeout(() => {
             RestRequest.all(config.restCatalog + queryParam + value).then(result => {
@@ -45,7 +45,7 @@ class FindProductForm extends React.Component {
                 {this.state.items.map((el, index) => {
                     return <div className="list-finds__item" key={index}>
                         <a href={el.imageUrl} data-lightbox="roadtrip"><img src={el.imageUrl} className="list-finds__image"/></a>
-                        <a href="#" className="list-finds__link">{el.name}</a>
+                        <a href={el.backendHref} target="_blank" className="list-finds__link">{el.name}</a>
                         <div className="list-finds-data">
                             <div className="list-finds-data__row">
                                 <div className="list-finds-data__key">Цена</div>
