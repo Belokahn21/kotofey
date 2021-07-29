@@ -4,12 +4,24 @@ namespace app\modules\media\controllers;
 
 use app\modules\media\models\search\MediaSearch;
 use app\modules\site\controllers\MainBackendController;
+use app\modules\user\models\tool\BehaviorsRoleManager;
 use yii\web\HttpException;
 use app\widgets\notification\Alert;
 
 class MediaBackendController extends MainBackendController
 {
     public $modelClass = 'app\modules\media\models\entity\Media';
+
+    public function behaviors()
+    {
+        $parentAccess = parent::behaviors();
+
+        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
+            ['allow' => true, 'actions' => ['index', 'update', 'delete'], 'roles' => ['Content']]
+        ]);
+
+        return $parentAccess;
+    }
 
     public function actionIndex()
     {
