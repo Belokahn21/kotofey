@@ -62,7 +62,6 @@ class RussianPostApi implements DeliveryApiOld
             "mail-category" => $tariff_data->mail_category,
             "mail-type" => $tariff_data->mail_type,
             "mass" => $tariff_data->mass,
-            "dimension" => $tariff_data->dimension,
             "inventory" => false,
             "fragile" => false,
             "with-order-of-notice" => false,

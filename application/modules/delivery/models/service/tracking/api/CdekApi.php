@@ -9,6 +9,7 @@ use app\modules\delivery\models\service\tracking\auth\cdek\CdekAuth;
 use app\modules\delivery\models\service\tracking\auth\cdek\CdekAuthApiInterface;
 use app\modules\site\models\tools\Curl;
 use app\modules\site\models\tools\CurlDataFormat;
+use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 
 /**
@@ -83,15 +84,11 @@ class CdekApi implements IDeliveryApi
             "to_location" => [
                 'postal_code' => $tariff_data->to_location
             ],
-            "packages" => [
-                [
-                    "height" => $tariff_data->dimension['height'],
-                    "length" => $tariff_data->dimension['length'],
-                    "weight" => $tariff_data->dimension['weight'],
-                    "width" => $tariff_data->dimension['width']
-                ]
-            ],
+            "packages" => $tariff_data->packages,
         ];
+
+//        Debug::p($params);
+//        exit();
 
         $response = $this->postRequest('/calculator/tarifflist', CurlDataFormat::asJson($params), [
             'Content-Type:application/json'
