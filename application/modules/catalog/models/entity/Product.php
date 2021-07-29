@@ -367,6 +367,9 @@ class Product extends \yii\db\ActiveRecord
             'href' => function ($model) {
                 return ProductHelper::getDetailUrl($model);
             },
+            'discount_price' => function ($model) {
+                return $model->getDiscountPrice();
+            },
             'backendHref' => function ($model) {
                 return Url::to(['/admin/catalog/product-backend/update', 'id' => $model->id]);
             },

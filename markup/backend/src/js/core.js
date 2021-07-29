@@ -1,5 +1,5 @@
 import $ from 'jquery';
-
+import 'lightbox2';
 window.$ = window.jQuery = $;
 import 'popper.js';
 import 'bootstrap';

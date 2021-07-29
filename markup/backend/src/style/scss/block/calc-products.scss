@@ -1,6 +1,6 @@
 .calc-products {
   width: 50%;
-  border: 1px silver solid;
+  //border: 1px silver solid;
 
   &-search {
     border-bottom: 1px solid silver;
@@ -21,8 +21,9 @@
 
   &-result {
     height: 500px;
-    padding: 10px;
-    overflow: scroll;
+    padding: 0;
+    overflow-y: scroll;
+    margin-top: 10px;
 
     &__label {
       display: block;
