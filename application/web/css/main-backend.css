@@ -8961,7 +8961,8 @@ html, body {
   .list-finds-data {
     max-width: 100px;
     font-size: 11px;
-    text-transform: uppercase; }
+    text-transform: uppercase;
+    padding-left: 5px; }
     .list-finds-data__row {
       display: flex;
       flex-direction: row;
