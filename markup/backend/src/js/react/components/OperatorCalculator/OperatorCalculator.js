@@ -29,6 +29,12 @@ class OperatorCalculator extends React.Component {
         });
     }
 
+    handleSelectService(event) {
+        event.preventDefault();
+
+        console.log('select service, get tariffs');
+    }
+
     render() {
         const {services, tariff_list} = this.state;
         return <>
@@ -36,7 +42,7 @@ class OperatorCalculator extends React.Component {
 
                 <button className="calc-form__submit" type="submit">Расчитать</button>
 
-                <CalculatorDeliveryService items={services}/>
+                <CalculatorDeliveryService handleSelectService={this.handleSelectService} items={services}/>
 
                 <div className="calc-placement">
                     <FormLocation options={{

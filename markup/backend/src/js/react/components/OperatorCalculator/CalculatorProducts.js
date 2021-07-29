@@ -35,30 +35,38 @@ class CalculatorProducts extends React.Component {
 
                 <div className="calc-products-result">
                     {products.map((product, index) => {
-                        return <label key={index} className="calc-products-result__label">
-                            <input type="checkbox" name="products[]" value={product.id} className="calc-products-result__input"/>
-                            <div className="calc-products-result__item">
-                                <div className="calc-products-result__image">
-                                    <img src={product.imageUrl}/>
-                                </div>
-                                <div className="calc-products-result__name">
-                                    <a href={product.backendHref} target="_blank">{product.name}</a>
-                                </div>
-                                <div className="calc-products-result-data">
-                                    <div className="calc-products-result-data__row">
-                                        <div className="calc-products-result-data__key">Вес</div>
-                                        <div className="calc-products-result-data__value">{product.weight}</div>
+                        return <>
+                            <label key={index} className="calc-products-result__label">
+                                <input type="checkbox" name={`[products][${product.id}]id`} value={product.id} className="calc-products-result__input"/>
+
+                                <div className="calc-products-result__item">
+                                    <div className="calc-products-result__image">
+                                        <img src={product.imageUrl}/>
                                     </div>
-                                    <div className="calc-products-result-data__row">
-                                        <div className="calc-products-result-data__key">ШхВхД</div>
-                                        <div className="calc-products-result-data__value">{product.width}/{product.height}/{product.length}</div>
+                                    <div className="calc-products-result__name">
+                                        <a href={product.backendHref} target="_blank">{product.name}</a>
+                                    </div>
+                                    <div className="calc-products-result-data">
+                                        <div className="calc-products-result-data__row">
+                                            <div className="calc-products-result-data__key">Вес</div>
+                                            <div className="calc-products-result-data__value">{product.weight}</div>
+                                        </div>
+                                        <div className="calc-products-result-data__row">
+                                            <div className="calc-products-result-data__key">ШхВхД</div>
+                                            <div className="calc-products-result-data__value">{product.width}/{product.height}/{product.length}</div>
+                                        </div>
+                                    </div>
+                                    <div className="calc-products-result__checked">
+                                        <i className="fas fa-check"/>
                                     </div>
                                 </div>
-                                <div className="calc-products-result__checked">
-                                    <i className="fas fa-check"/>
-                                </div>
-                            </div>
-                        </label>
+                            </label>
+
+                            <input type="hidden" name={`dimension[${product.id}][weight]`} value={product.weight} className="calc-products-result__input"/>
+                            <input type="hidden" name={`dimension[${product.id}][width]`} value={product.width} className="calc-products-result__input"/>
+                            <input type="hidden" name={`dimension[${product.id}][length]`} value={product.length} className="calc-products-result__input"/>
+                            <input type="hidden" name={`dimension[${product.id}][height]`} value={product.height} className="calc-products-result__input"/>
+                        </>
                     })}
                 </div>
             </div>

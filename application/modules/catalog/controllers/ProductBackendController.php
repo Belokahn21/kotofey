@@ -31,7 +31,7 @@ class ProductBackendController extends MainBackendController
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
             ['allow' => true, 'actions' => ['copy'], 'roles' => ['Administrator', 'Content']],
             ['allow' => true, 'actions' => ['transfer', 'price-repair'], 'roles' => ['Administrator']],
-            ['allow' => true, 'actions' => ['index', 'update'], 'roles' => ['Content']]
+            ['allow' => true, 'actions' => ['index', 'update','delete'], 'roles' => ['Content']]
         ]);
 
         return $parentAccess;

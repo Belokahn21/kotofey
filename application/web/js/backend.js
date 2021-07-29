@@ -4847,13 +4847,18 @@ var CalculatorDeliveryService = /*#__PURE__*/function (_React$Component) {
   _createClass(CalculatorDeliveryService, [{
     key: "render",
     value: function render() {
-      var items = this.props.items;
+      var _this = this;
+
+      var _this$props = this.props,
+          items = _this$props.items,
+          handleSelectService = _this$props.handleSelectService;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-delivery-services"
       }, items.map(function (el, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
           key: index,
-          className: "calc-delivery-services__label"
+          className: "calc-delivery-services__label",
+          onChange: handleSelectService.bind(_this)
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           name: "service",
           className: "calc-delivery-services__input",
@@ -4968,12 +4973,12 @@ var CalculatorProducts = /*#__PURE__*/function (_React$Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-products-result"
       }, products.map(function (product, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
           key: index,
           className: "calc-products-result__label"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "checkbox",
-          name: "products[]",
+          name: "[products][".concat(product.id, "]id"),
           value: product.id,
           className: "calc-products-result__input"
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -5005,7 +5010,27 @@ var CalculatorProducts = /*#__PURE__*/function (_React$Component) {
           className: "calc-products-result__checked"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-check"
-        }))));
+        })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "hidden",
+          name: "dimension[".concat(product.id, "][weight]"),
+          value: product.weight,
+          className: "calc-products-result__input"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "hidden",
+          name: "dimension[".concat(product.id, "][width]"),
+          value: product.width,
+          className: "calc-products-result__input"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "hidden",
+          name: "dimension[".concat(product.id, "][length]"),
+          value: product.length,
+          className: "calc-products-result__input"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          type: "hidden",
+          name: "dimension[".concat(product.id, "][height]"),
+          value: product.height,
+          className: "calc-products-result__input"
+        }));
       })));
     }
   }]);
@@ -5441,6 +5466,12 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "handleSelectService",
+    value: function handleSelectService(event) {
+      event.preventDefault();
+      console.log('select service, get tariffs');
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
@@ -5453,6 +5484,7 @@ var OperatorCalculator = /*#__PURE__*/function (_React$Component) {
         className: "calc-form__submit",
         type: "submit"
       }, "\u0420\u0430\u0441\u0447\u0438\u0442\u0430\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_CalculatorDeliveryService__WEBPACK_IMPORTED_MODULE_2__.default, {
+        handleSelectService: this.handleSelectService,
         items: services
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "calc-placement"

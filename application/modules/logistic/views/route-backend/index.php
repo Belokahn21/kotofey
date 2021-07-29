@@ -104,7 +104,7 @@ $this->title = Title::show("Список доставок");
                             <?php if (!$order->is_close): ?>
                                 <?php $form = ActiveForm::begin(); ?>
                                 <?= $form->field($model, 'order_id')->hiddenInput(['value' => $order->id])->label(false) ?>
-                                <?= Html::submitButton('Завершить заказ', ['class' => 'btn btn-success w-100']) ?>
+                                <?= Html::submitButton('Завершить заказ', ['class' => 'btn btn-success w-100', 'onClick' => 'return confirm();']) ?>
                                 <?php ActiveForm::end(); ?>
                             <?php endif; ?>
                         </div>

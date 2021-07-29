@@ -18,7 +18,7 @@ class RuPostTariffData implements TariffDataInterface
         'length' => null,
     );
 
-    private $assoc = [
+    private $alias = [
         'placement_from' => 'index_from',
         'placement_to' => 'index_to',
     ];
@@ -31,7 +31,7 @@ class RuPostTariffData implements TariffDataInterface
     public function fill(array $data)
     {
         foreach ($data as $key => $value) {
-            if (isset($this->assoc[$key])) $this->{$this->assoc[$key]} = $value;
+            if (isset($this->alias[$key])) $this->{$this->alias[$key]} = $value;
         }
 
         if ($data['products']) {
