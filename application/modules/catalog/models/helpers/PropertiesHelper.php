@@ -9,6 +9,11 @@ use yii\web\HttpException;
 
 class PropertiesHelper
 {
+    const PROPERTY_WEIGHT = 2;
+    const PROPERTY_WIDTH = 16;
+    const PROPERTY_LENGTH = 17;
+    const PROPERTY_HEIGHT = 18;
+
     public static function getProductWeight($product_id)
     {
         $cache = \Yii::$app->cache;

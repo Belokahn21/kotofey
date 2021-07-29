@@ -9,6 +9,7 @@ use app\modules\catalog\models\helpers\CompositionProductHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\models\helpers\ProductStockHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
@@ -375,6 +376,34 @@ class Product extends \yii\db\ActiveRecord
             },
             'imageUrl' => function ($model) {
                 return ProductHelper::getImageUrl($model);
+            },
+            'weight' => function ($model) {
+                try {
+                    return PropertiesHelper::extractPropertyById($model, PropertiesHelper::PROPERTY_WEIGHT)->value;
+                } catch (\Exception $exception) {
+                    return false;
+                }
+            },
+            'width' => function ($model) {
+                try {
+                    return PropertiesHelper::extractPropertyById($model, PropertiesHelper::PROPERTY_WIDTH)->value;
+                } catch (\Exception $exception) {
+                    return false;
+                }
+            },
+            'height' => function ($model) {
+                try {
+                    return PropertiesHelper::extractPropertyById($model, PropertiesHelper::PROPERTY_HEIGHT)->value;
+                } catch (\Exception $exception) {
+                    return false;
+                }
+            },
+            'length' => function ($model) {
+                try {
+                    return PropertiesHelper::extractPropertyById($model, PropertiesHelper::PROPERTY_LENGTH)->value;
+                } catch (\Exception $exception) {
+                    return false;
+                }
             },
         ];
     }

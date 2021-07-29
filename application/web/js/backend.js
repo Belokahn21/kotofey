@@ -4944,7 +4944,7 @@ var CalculatorProducts = /*#__PURE__*/function (_React$Component) {
       event.preventDefault();
       var element = event.target;
       var value = element.value;
-      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all((_config__WEBPACK_IMPORTED_MODULE_2___default().restCatalog) + '?ProductSearchForm[mixed_value]=' + value).then(function (data) {
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all((_config__WEBPACK_IMPORTED_MODULE_2___default().restCatalog) + '?expand=imageUrl,backendHref,weight,width,height,length&ProductSearchForm[mixed_value]=' + value).then(function (data) {
         _this2.setState({
           products: data
         });
@@ -4979,8 +4979,29 @@ var CalculatorProducts = /*#__PURE__*/function (_React$Component) {
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "calc-products-result__item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result__image"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: product.imageUrl
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "calc-products-result__name"
-        }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+          href: product.backendHref,
+          target: "_blank"
+        }, product.name)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result-data"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result-data__row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result-data__key"
+        }, "\u0412\u0435\u0441"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result-data__value"
+        }, product.weight)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result-data__row"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result-data__key"
+        }, "\u0428\u0445\u0412\u0445\u0414"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "calc-products-result-data__value"
+        }, product.width, "/", product.height, "/", product.length))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "calc-products-result__checked"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
           className: "fas fa-check"

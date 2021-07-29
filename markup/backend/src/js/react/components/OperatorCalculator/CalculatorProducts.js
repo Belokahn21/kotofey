@@ -16,7 +16,7 @@ class CalculatorProducts extends React.Component {
         let element = event.target;
         let value = element.value;
 
-        RestRequest.all(config.restCatalog + '?ProductSearchForm[mixed_value]=' + value).then(data => {
+        RestRequest.all(config.restCatalog + '?expand=imageUrl,backendHref,weight,width,height,length&ProductSearchForm[mixed_value]=' + value).then(data => {
             this.setState({products: data});
         })
     }
@@ -38,8 +38,21 @@ class CalculatorProducts extends React.Component {
                         return <label key={index} className="calc-products-result__label">
                             <input type="checkbox" name="products[]" value={product.id} className="calc-products-result__input"/>
                             <div className="calc-products-result__item">
+                                <div className="calc-products-result__image">
+                                    <img src={product.imageUrl}/>
+                                </div>
                                 <div className="calc-products-result__name">
-                                    {product.name}
+                                    <a href={product.backendHref} target="_blank">{product.name}</a>
+                                </div>
+                                <div className="calc-products-result-data">
+                                    <div className="calc-products-result-data__row">
+                                        <div className="calc-products-result-data__key">Вес</div>
+                                        <div className="calc-products-result-data__value">{product.weight}</div>
+                                    </div>
+                                    <div className="calc-products-result-data__row">
+                                        <div className="calc-products-result-data__key">ШхВхД</div>
+                                        <div className="calc-products-result-data__value">{product.width}/{product.height}/{product.length}</div>
+                                    </div>
                                 </div>
                                 <div className="calc-products-result__checked">
                                     <i className="fas fa-check"/>
