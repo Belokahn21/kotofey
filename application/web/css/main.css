@@ -16258,6 +16258,9 @@ label[for="site-form-pet-avatar"] {
     padding: 5px;
     outline: none; }
 
+.product-count-buy {
+  color: #25D366; }
+
 .product-gallery-big {
   width: 400px;
   overflow: hidden;

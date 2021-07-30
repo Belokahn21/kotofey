@@ -9,6 +9,7 @@ use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
+use app\modules\catalog\models\helpers\HtmlProductHelper;
 use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
 use app\modules\catalog\widgets\CatalogSliders\Analog\AnalogWidget;
 use app\modules\reviews\widgets\ProductReviews\ProductReviewsWidget;
@@ -134,6 +135,7 @@ $this->title = ProductTitle::show($product->name);
                         <?php endif; ?>
                     <?php endforeach; ?>
                 <?php endif; ?>
+                <?= HtmlProductHelper::showHtmlCountBuy($product); ?>
                 <?= AddBasketWidget::widget([
                     'product' => $product,
                     'showOrderButton' => true,
