@@ -42,6 +42,7 @@ class Module extends MainModule
         return [
             ['name' => 'Почтовые события', 'url' => Url::to(['/admin/mailer/events-backend/index'])],
             ['name' => 'Почтовые шаблоны', 'url' => Url::to(['/admin/mailer/templates-backend/index'])],
+            ['name' => 'История', 'url' => Url::to(['/admin/mailer/history-backend/index'])],
         ];
     }
 
