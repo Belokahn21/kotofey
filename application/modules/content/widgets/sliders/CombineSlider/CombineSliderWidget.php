@@ -26,7 +26,7 @@ class CombineSliderWidget extends Widget
         }
 
 
-        $sliders = SlidersImages::find()->where(['active' => true, 'slider_id' => $this->sliderId])->where(['created_at' => SORT_DESC])->all();
+        $sliders = SlidersImages::find()->where(['active' => true, 'slider_id' => $this->sliderId])->orderBy(['created_at' => SORT_DESC])->all();
         foreach ($sliders as $slider) {
             $this->extendDataArrayFromSliderImage($slider, $data);
         }
