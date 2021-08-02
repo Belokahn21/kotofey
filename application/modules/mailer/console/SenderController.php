@@ -37,7 +37,7 @@ class SenderController extends Controller
             $es->sendEvent($module->remember_event_id, [
                 'EMAIL_TO' => 'popugau@gmail.com',
                 'EMAIL_FROM' => 'sale@kotofey.store',
-                'LINK_SITE' => System::fullSiteUrl(),
+                'LINK_SITE' => 'https:kotofey.store/catalog/',
                 'PROMOCODE' => $promo_code->code,
                 'DISCOUNT' => $promo_code->discount,
             ]);
