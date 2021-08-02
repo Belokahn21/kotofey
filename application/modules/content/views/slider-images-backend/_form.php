@@ -3,6 +3,7 @@
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use app\modules\content\models\entity\Sliders;
+use app\modules\content\models\helpers\SlidersImagesHelper;
 use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
 
 /* @var $model \app\modules\content\models\entity\SlidersImages */
@@ -47,8 +48,8 @@ use app\modules\media\widgets\InputUploadWidget\InputUploadWidget;
         </div>
 
         <div class="form-element">
-            <?php if ($model->image): ?>
-                <?= Html::img('/upload/' . $model->image, ['width' => 200]) ?>
+            <?php if ($model->media_id): ?>
+                <?= Html::img(SlidersImagesHelper::getImageUrl($model), ['width' => 200]) ?>
             <?php endif; ?>
             <?= $form->field($model, 'image')->widget(InputUploadWidget::className()); ?>
         </div>

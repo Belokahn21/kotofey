@@ -7,6 +7,7 @@ use app\modules\content\models\entity\SlidersImages;
 use app\modules\content\models\helpers\SlidersImagesHelper;
 use app\modules\promotion\models\entity\Promotion;
 use app\modules\promotion\models\helpers\PromotionHelper;
+use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
 
 class CombineSliderWidget extends Widget
@@ -30,6 +31,13 @@ class CombineSliderWidget extends Widget
             $this->extendDataArrayFromSliderImage($slider, $data);
         }
 
+        usort($data, function ($a, $b) {
+            if ($a['sort'] == $b['sort']) {
+                return 0;
+            }
+            return ($a['sort'] > $b['sort']) ? -1 : 1;
+        });
+
         return $this->render($this->view, [
             'data' => $data
         ]);
@@ -42,6 +50,7 @@ class CombineSliderWidget extends Widget
             'link' => $image->link,
             'alt' => $image->text,
             'title' => $image->text,
+            'sort' => $image->sort,
         ];
     }
 
@@ -52,6 +61,7 @@ class CombineSliderWidget extends Widget
             'link' => PromotionHelper::getDetailUrl($model),
             'alt' => $model->name,
             'title' => $model->name,
+            'sort' => $model->sort,
         ];
     }
 }

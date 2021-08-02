@@ -12,19 +12,17 @@ use app\modules\content\models\helpers\SlidersImagesHelper;
  */
 
 $this->title = Title::show("Изображения слайдеров"); ?>
-    <section>
+    <div class="title-group">
         <h1 class="title">Изображения слайдеров</h1>
-        <div class="product-form">
-            <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-            <?= $this->render('_form', [
-                'form' => $form,
-                'model' => $model
-            ]) ?>
-            <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-            <?php ActiveForm::end(); ?>
-        </div>
-    </section>
-    <div class="clearfix"></div>
+    </div>
+
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?= $this->render('_form', [
+    'form' => $form,
+    'model' => $model
+]) ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?php ActiveForm::end(); ?>
     <h2>Список изображений</h2>
 <?php echo \yii\grid\GridView::widget([
     'dataProvider' => $dataProvider,
