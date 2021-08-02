@@ -6,6 +6,7 @@ use app\modules\mailer\models\services\MailService;
 use app\modules\order\models\entity\Order;
 use app\modules\promocode\models\TakeAvailableService;
 use app\modules\site\models\tools\Debug;
+use app\modules\site\models\tools\System;
 use app\modules\subscribe\models\entity\Subscribes;
 use yii\console\Controller;
 use yii\helpers\ArrayHelper;
@@ -34,8 +35,11 @@ class SenderController extends Controller
 
             $es = new MailService();
             $es->sendEvent($module->remember_event_id, [
-                'PROMO_CODE' => $promo_code,
                 'EMAIL_TO' => 'popugau@gmail.com',
+                'EMAIL_FROM' => 'sale@kotofey.store',
+                'LINK_SITE' => System::fullSiteUrl(),
+                'PROMOCODE' => $promo_code->code,
+                'DISCOUNT' => $promo_code->discount,
             ]);
         }
     }

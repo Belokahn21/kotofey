@@ -16,6 +16,9 @@ class TakeAvailableService
         $this->phone = $phone;
     }
 
+    /**
+     * @return Promocode|false|mixed|\yii\db\ActiveRecord
+     */
     public function getPromo()
     {
         $used_list = PromocodeUser::find()->where(['phone' => $this->phone])->all();
@@ -27,7 +30,7 @@ class TakeAvailableService
             $code = $code_list[0];
         }
 
-        return $code->code;
+        return $code;
     }
 
     public function randomSaleCode()
