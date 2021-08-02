@@ -39,7 +39,7 @@ class SenderController extends Controller
                 'EMAIL_FROM' => 'sale@kotofey.store',
                 'LINK_SITE' => 'https://kotofey.store/catalog/',
                 'PROMOCODE' => $promo_code->code,
-                'DISCOUNT' => $promo_code->discount,
+                'DISCOUNT' => '-' . $promo_code->discount . '%',
             ]);
         }
     }
