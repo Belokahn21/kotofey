@@ -25,7 +25,7 @@ class SenderController extends Controller
             ->andWhere(['in', 'created_at', Order::find()->select('MAX(created_at)')->groupBy('email')])
             ->andWhere(['<', 'created_at', strtotime('-2 month')])
             ->andWhere(['not in', 'email', ArrayHelper::getColumn(Subscribes::find()->where(['active' => 0])->all(), 'email')])
-            ->limit(5);
+            ->andWhere(['not in', 'email', ['usova-tatyana@bk.ru', 'tochony1981@mail.ru', 'a.selivanova02@mail.ru', '13_93@mail.ru', 'ewan.lezhaev@yandex.ru']]);
         $orders = $orders->all();
 
 
@@ -33,9 +33,9 @@ class SenderController extends Controller
             $take_serivce = new TakeAvailableService($order->phone);
             $promo_code = $take_serivce->getPromo();
 
+
             $es = new MailService();
             $es->sendEvent($module->remember_event_id, [
-//                'EMAIL_TO' => 'popugau@gmail.com',
                 'EMAIL_TO' => $order->email,
                 'EMAIL_FROM' => 'sale@kotofey.store',
                 'LINK_SITE' => 'https://kotofey.store/catalog/',
