@@ -210,6 +210,9 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
             <div class="w-25 p-1"><?= $form->field($model, 'is_paid')->checkbox(); ?></div>
             <div class="w-25 p-1"><?= $form->field($model, 'is_cancel')->checkbox(); ?></div>
             <div class="w-25 p-1"><?= $form->field($model, 'is_close')->checkbox(); ?></div>
+            <?php if (Yii::$app->user->id == 1): ?>
+                <div class="w-25 p-1"><?= $form->field($model, 'is_skip')->checkbox(); ?></div>
+            <?php endif; ?>
         </div>
         <div class="form-element">
             <div class="d-flex flex-row">

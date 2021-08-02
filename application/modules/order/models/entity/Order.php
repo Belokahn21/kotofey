@@ -2,7 +2,6 @@
 
 namespace app\modules\order\models\entity;
 
-
 use app\modules\acquiring\models\services\ofd\OFDFermaService;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\service\BonusService;
@@ -18,7 +17,6 @@ use app\modules\user\models\helpers\UserHelper;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
-
 
 /**
  * Order model
@@ -68,6 +66,7 @@ class Order extends ActiveRecord
     const SCENARIO_CLIENT_BUY = 'client_buy';
     const SCENARIO_FAST = 'fast';
 
+    public $is_skip;
     public $is_update;
     public $bonus;
     public $address;
@@ -75,10 +74,10 @@ class Order extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
-            self::SCENARIO_FAST => ['created_user_id', 'updated_user_id', 'manager_id', 'email', 'phone', 'type', 'is_paid', 'status', 'ip'],
+            self::SCENARIO_DEFAULT => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
+            self::SCENARIO_FAST => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'email', 'phone', 'type', 'is_paid', 'status', 'ip'],
         ];
     }
 
@@ -112,7 +111,7 @@ class Order extends ActiveRecord
 
             [['is_paid', 'is_cancel'], 'default', 'value' => false],
 
-            [['is_cancel', 'is_close'], 'boolean'],
+            [['is_cancel', 'is_close', 'is_skip'], 'boolean'],
 
             ['email', 'email', 'message' => 'Не верный формат Email адреса'],
             [['email'], 'required', 'message' => '{attribute} необходимо указать', 'on' => self::SCENARIO_CLIENT_BUY],
@@ -155,10 +154,12 @@ class Order extends ActiveRecord
         }
 
         BonusService::getInstance()->addUserBonus($this);
-        OFDFermaService::getInstance()->doSendCheck($this, [
-            'email' => $this->email,
-            'phone' => $this->phone,
-        ]);
+        if (empty($this->is_skip)) {
+            OFDFermaService::getInstance()->doSendCheck($this, [
+                'email' => $this->email,
+                'phone' => $this->phone,
+            ]);
+        }
 
         if ($module = \Yii::$app->getModule('bonus') && !empty($this->bonus)) {
             if ($module->getEnable()) {
