@@ -10961,6 +10961,10 @@ Build date: 2019-12-19 16:51:02
     color: white;
     text-decoration: none;
     background: #ff4d69; }
+  .btn-main-out {
+    background: #ff1a4a;
+    border: 1px #ff1a4a solid;
+    color: #fff; }
 
 .compare-button {
   display: block;

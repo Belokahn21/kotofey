@@ -1,6 +1,8 @@
 import $ from 'jquery';
+import * as Cookies from "es-cookie";
 
 window.$ = window.jQuery = $;
+window.Cookies = Cookies;
 import 'lightbox2';
 import 'popper.js';
 import 'bootstrap';

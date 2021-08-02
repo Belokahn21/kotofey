@@ -90085,51 +90085,55 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 /* harmony import */ var jquery__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js");
-/* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lightbox2__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
-/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _block_PoductCalc_ProductCalc__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block/PoductCalc/ProductCalc */ "./src/js/block/PoductCalc/ProductCalc.js");
-/* harmony import */ var _block_Menu__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block/Menu */ "./src/js/block/Menu.js");
-/* harmony import */ var _block_favorite__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block/favorite */ "./src/js/block/favorite.js");
-/* harmony import */ var _block_Compare__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block/Compare */ "./src/js/block/Compare.js");
-/* harmony import */ var _block_Catalog__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block/Catalog */ "./src/js/block/Catalog.js");
-/* harmony import */ var _block_StickFilter__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./block/StickFilter */ "./src/js/block/StickFilter.js");
-/* harmony import */ var _block_RemoveBasketItem__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./block/RemoveBasketItem */ "./src/js/block/RemoveBasketItem.js");
-/* harmony import */ var _block_FastCart__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./block/FastCart */ "./src/js/block/FastCart.js");
-/* harmony import */ var _block_LiveSearch__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./block/LiveSearch */ "./src/js/block/LiveSearch.js");
-/* harmony import */ var _classes_HelpDashboard_HelpDashboard__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./classes/HelpDashboard/HelpDashboard */ "./src/js/classes/HelpDashboard/HelpDashboard.js");
-/* harmony import */ var _classes_SiteMessage__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./classes/SiteMessage */ "./src/js/classes/SiteMessage.js");
-/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./block/gifts */ "./src/js/block/gifts.js");
-/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_block_gifts__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./block/mobile-menu */ "./src/js/block/mobile-menu.js");
-/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_block_mobile_menu__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./block/basket */ "./src/js/block/basket.js");
-/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_block_basket__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./block/search */ "./src/js/block/search.js");
-/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_block_search__WEBPACK_IMPORTED_MODULE_17__);
-/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./block/ui-placeholder */ "./src/js/block/ui-placeholder.js");
-/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_block_ui_placeholder__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _block_other_jquery__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./block/other-jquery */ "./src/js/block/other-jquery.js");
-/* harmony import */ var _block_catalog_filter__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./block/catalog-filter */ "./src/js/block/catalog-filter.js");
-/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/toggleClass */ "./src/js/block/toggleClass.js");
-/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_21___default = /*#__PURE__*/__webpack_require__.n(_block_toggleClass__WEBPACK_IMPORTED_MODULE_21__);
-/* harmony import */ var _block_promocode__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./block/promocode */ "./src/js/block/promocode.js");
-/* harmony import */ var _include_init_sliders__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./include/init-sliders */ "./src/js/include/init-sliders.js");
-/* harmony import */ var _include_init_range_sliders__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./include/init-range-sliders */ "./src/js/include/init-range-sliders.js");
-/* harmony import */ var _include_init_maskedinput__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./include/init-maskedinput */ "./src/js/include/init-maskedinput.js");
-/* harmony import */ var _include_init_datepicker__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./include/init-datepicker */ "./src/js/include/init-datepicker.js");
-/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./include/phone-mask */ "./src/js/include/phone-mask.js");
-/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_27___default = /*#__PURE__*/__webpack_require__.n(_include_phone_mask__WEBPACK_IMPORTED_MODULE_27__);
-/* harmony import */ var _react_search_Search__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./react/search/Search */ "./src/js/react/search/Search.js");
-/* harmony import */ var _react_checkout_Checkout__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./react/checkout/Checkout */ "./src/js/react/checkout/Checkout.js");
-/* harmony import */ var _react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./react/BuyOneClick/BuyOneClick */ "./src/js/react/BuyOneClick/BuyOneClick.js");
-/* harmony import */ var _react_Page_Page__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./react/Page/Page */ "./src/js/react/Page/Page.js");
-/* harmony import */ var _react_ProductAdmission_ProductAdmission__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./react/ProductAdmission/ProductAdmission */ "./src/js/react/ProductAdmission/ProductAdmission.js");
-/* harmony import */ var _react_Compare_CompareButton__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./react/Compare/CompareButton */ "./src/js/react/Compare/CompareButton.js");
-/* harmony import */ var _react_Compare_CompareList__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./react/Compare/CompareList */ "./src/js/react/Compare/CompareList.js");
+/* harmony import */ var es_cookie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! es-cookie */ "./node_modules/es-cookie/src/es-cookie.js");
+/* harmony import */ var es_cookie__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(es_cookie__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lightbox2 */ "./node_modules/lightbox2/dist/js/lightbox.js");
+/* harmony import */ var lightbox2__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lightbox2__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
+/* harmony import */ var bootstrap__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(bootstrap__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _block_PoductCalc_ProductCalc__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./block/PoductCalc/ProductCalc */ "./src/js/block/PoductCalc/ProductCalc.js");
+/* harmony import */ var _block_Menu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block/Menu */ "./src/js/block/Menu.js");
+/* harmony import */ var _block_favorite__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block/favorite */ "./src/js/block/favorite.js");
+/* harmony import */ var _block_Compare__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block/Compare */ "./src/js/block/Compare.js");
+/* harmony import */ var _block_Catalog__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./block/Catalog */ "./src/js/block/Catalog.js");
+/* harmony import */ var _block_StickFilter__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./block/StickFilter */ "./src/js/block/StickFilter.js");
+/* harmony import */ var _block_RemoveBasketItem__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./block/RemoveBasketItem */ "./src/js/block/RemoveBasketItem.js");
+/* harmony import */ var _block_FastCart__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./block/FastCart */ "./src/js/block/FastCart.js");
+/* harmony import */ var _block_LiveSearch__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./block/LiveSearch */ "./src/js/block/LiveSearch.js");
+/* harmony import */ var _classes_HelpDashboard_HelpDashboard__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./classes/HelpDashboard/HelpDashboard */ "./src/js/classes/HelpDashboard/HelpDashboard.js");
+/* harmony import */ var _classes_SiteMessage__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./classes/SiteMessage */ "./src/js/classes/SiteMessage.js");
+/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./block/gifts */ "./src/js/block/gifts.js");
+/* harmony import */ var _block_gifts__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_block_gifts__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./block/mobile-menu */ "./src/js/block/mobile-menu.js");
+/* harmony import */ var _block_mobile_menu__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_block_mobile_menu__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./block/basket */ "./src/js/block/basket.js");
+/* harmony import */ var _block_basket__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_block_basket__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./block/search */ "./src/js/block/search.js");
+/* harmony import */ var _block_search__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_block_search__WEBPACK_IMPORTED_MODULE_18__);
+/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./block/ui-placeholder */ "./src/js/block/ui-placeholder.js");
+/* harmony import */ var _block_ui_placeholder__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_block_ui_placeholder__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _block_other_jquery__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./block/other-jquery */ "./src/js/block/other-jquery.js");
+/* harmony import */ var _block_catalog_filter__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/catalog-filter */ "./src/js/block/catalog-filter.js");
+/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./block/toggleClass */ "./src/js/block/toggleClass.js");
+/* harmony import */ var _block_toggleClass__WEBPACK_IMPORTED_MODULE_22___default = /*#__PURE__*/__webpack_require__.n(_block_toggleClass__WEBPACK_IMPORTED_MODULE_22__);
+/* harmony import */ var _block_promocode__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./block/promocode */ "./src/js/block/promocode.js");
+/* harmony import */ var _include_init_sliders__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./include/init-sliders */ "./src/js/include/init-sliders.js");
+/* harmony import */ var _include_init_range_sliders__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./include/init-range-sliders */ "./src/js/include/init-range-sliders.js");
+/* harmony import */ var _include_init_maskedinput__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./include/init-maskedinput */ "./src/js/include/init-maskedinput.js");
+/* harmony import */ var _include_init_datepicker__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./include/init-datepicker */ "./src/js/include/init-datepicker.js");
+/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./include/phone-mask */ "./src/js/include/phone-mask.js");
+/* harmony import */ var _include_phone_mask__WEBPACK_IMPORTED_MODULE_28___default = /*#__PURE__*/__webpack_require__.n(_include_phone_mask__WEBPACK_IMPORTED_MODULE_28__);
+/* harmony import */ var _react_search_Search__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./react/search/Search */ "./src/js/react/search/Search.js");
+/* harmony import */ var _react_checkout_Checkout__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./react/checkout/Checkout */ "./src/js/react/checkout/Checkout.js");
+/* harmony import */ var _react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./react/BuyOneClick/BuyOneClick */ "./src/js/react/BuyOneClick/BuyOneClick.js");
+/* harmony import */ var _react_Page_Page__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./react/Page/Page */ "./src/js/react/Page/Page.js");
+/* harmony import */ var _react_ProductAdmission_ProductAdmission__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./react/ProductAdmission/ProductAdmission */ "./src/js/react/ProductAdmission/ProductAdmission.js");
+/* harmony import */ var _react_Compare_CompareButton__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./react/Compare/CompareButton */ "./src/js/react/Compare/CompareButton.js");
+/* harmony import */ var _react_Compare_CompareList__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./react/Compare/CompareList */ "./src/js/react/Compare/CompareList.js");
+
 
 window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
+window.Cookies = es_cookie__WEBPACK_IMPORTED_MODULE_1__;
 
 
  // class block
@@ -90162,17 +90166,17 @@ window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
 
 
-new _block_StickFilter__WEBPACK_IMPORTED_MODULE_8__.default(new _block_Catalog__WEBPACK_IMPORTED_MODULE_7__.default());
-new _block_RemoveBasketItem__WEBPACK_IMPORTED_MODULE_9__.default();
-new _block_Compare__WEBPACK_IMPORTED_MODULE_6__.default();
-new _block_favorite__WEBPACK_IMPORTED_MODULE_5__.default();
-new _block_Menu__WEBPACK_IMPORTED_MODULE_4__.default();
-new _block_LiveSearch__WEBPACK_IMPORTED_MODULE_11__.default('.js-live-search'); // new SmoothChangeNumber('[data-smooth-change]');
+new _block_StickFilter__WEBPACK_IMPORTED_MODULE_9__.default(new _block_Catalog__WEBPACK_IMPORTED_MODULE_8__.default());
+new _block_RemoveBasketItem__WEBPACK_IMPORTED_MODULE_10__.default();
+new _block_Compare__WEBPACK_IMPORTED_MODULE_7__.default();
+new _block_favorite__WEBPACK_IMPORTED_MODULE_6__.default();
+new _block_Menu__WEBPACK_IMPORTED_MODULE_5__.default();
+new _block_LiveSearch__WEBPACK_IMPORTED_MODULE_12__.default('.js-live-search'); // new SmoothChangeNumber('[data-smooth-change]');
 
-new _classes_HelpDashboard_HelpDashboard__WEBPACK_IMPORTED_MODULE_12__.default();
-new _classes_SiteMessage__WEBPACK_IMPORTED_MODULE_13__.default();
+new _classes_HelpDashboard_HelpDashboard__WEBPACK_IMPORTED_MODULE_13__.default();
+new _classes_SiteMessage__WEBPACK_IMPORTED_MODULE_14__.default();
 document.addEventListener('DOMContentLoaded', function () {
-  new _block_PoductCalc_ProductCalc__WEBPACK_IMPORTED_MODULE_3__.default(new _block_FastCart__WEBPACK_IMPORTED_MODULE_10__.default());
+  new _block_PoductCalc_ProductCalc__WEBPACK_IMPORTED_MODULE_4__.default(new _block_FastCart__WEBPACK_IMPORTED_MODULE_11__.default());
 }); //react js
 // import './react/cdek-calculator/CdekCalculator';
 

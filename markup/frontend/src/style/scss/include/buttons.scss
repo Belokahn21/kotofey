@@ -61,8 +61,6 @@
 }
 
 .btn-main {
-  //border: 0;
-  //background: $active-color;
   background: $text-color;
   border: 1px $active-color solid;
   color: $active-color;
@@ -72,13 +70,17 @@
   text-transform: uppercase;
   font-size: 10px;
   transition: background-color 0.2s ease-out;
-  //border-bottom: 3px transparent solid;
 
   &:hover {
     color: white;
     text-decoration: none;
-    //  border-bottom: 3px red solid;
     background: $active-color-light;
+  }
+
+  &-out {
+    background: $active-color;
+    border: 1px $active-color solid;
+    color: $text-color;
   }
 }
 
