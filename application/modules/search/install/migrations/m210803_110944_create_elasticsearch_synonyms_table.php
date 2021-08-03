@@ -16,6 +16,7 @@ class m210803_110944_create_elasticsearch_synonyms_table extends Migration
 
         $this->createTable('{{%elasticsearch_synonyms}}', [
             'id' => $this->primaryKey(),
+            'is_active' => $this->boolean()->defaultValue(true),
             'name' => $this->string(),
             'created_at' => $this->integer(),
             'updated_at' => $this->integer(),

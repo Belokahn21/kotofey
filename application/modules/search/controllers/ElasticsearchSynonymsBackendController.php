@@ -44,6 +44,10 @@ class ElasticsearchSynonymsBackendController extends MainBackendController
     {
         if (!$model = $this->getModel($id)) throw new HttpException(404, 'Элемент не найден.');
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {

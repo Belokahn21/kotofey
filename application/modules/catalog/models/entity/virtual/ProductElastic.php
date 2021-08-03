@@ -3,7 +3,9 @@
 namespace app\modules\catalog\models\entity\virtual;
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\search\models\entity\ElasticsearchSynonyms;
 use yii\elasticsearch\ActiveRecord;
+use yii\helpers\ArrayHelper;
 
 class ProductElastic extends ActiveRecord
 {
@@ -42,6 +44,21 @@ class ProductElastic extends ActiveRecord
 
     public static function createIndex()
     {
+        $synonyms = [
+            'силикагель, силикагелевый',
+            'роял, royal, рояль',
+            'canon, canin, канин',
+            'hills, хилс',
+            'pro plan, проплан',
+            'сириус, sirius',
+        ];
+
+        $synonym_list = ElasticsearchSynonyms::find()->where(['is_active' => 1])->all();
+
+        if ($synonym_list) {
+            $synonyms = ArrayHelper::getColumn($synonym_list, 'name');
+        }
+
         $db = static::getDb();
         $command = $db->createCommand();
         $command->createIndex(static::index(), [
@@ -64,14 +81,7 @@ class ProductElastic extends ActiveRecord
                         ],
                         'my_synonym_filter' => [
                             'type' => 'synonym',
-                            'synonyms' => [
-                                'силикагель, силикагелевый',
-                                'роял, royal, рояль',
-                                'canon, canin, канин',
-                                'hills, хилс',
-                                'pro plan, проплан',
-                                'сириус, sirius',
-                            ],
+                            'synonyms' => $synonyms,
                         ],
 
                     ],
