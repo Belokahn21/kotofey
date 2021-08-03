@@ -2,7 +2,6 @@
 
 namespace app\modules\catalog\console;
 
-use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\virtual\ProductElastic;
 use app\modules\search\models\services\ElasticsearchService;
 use yii\console\Controller;
