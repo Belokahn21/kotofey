@@ -95,14 +95,14 @@ class OrderHelper
         if (is_numeric($order->promocodeEntity->discount)) return $summ + $order->promocodeEntity->discount;
 
 
+        $tmpDiscount = $order->promocodeEntity->discount;
         if (explode('%', $order->promocodeEntity->discount)) {
             $tmpDiscount = str_replace('%', '', $order->promocodeEntity->discount);
-
-            return $summ + round($summ * ($tmpDiscount / 100));
         }
 
 
-        return $summ;
+        return $summ + round($summ * ($tmpDiscount / 100));
+
     }
 
     public static function getStatus(Order $order)
