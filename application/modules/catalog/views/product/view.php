@@ -142,9 +142,9 @@ $this->title = ProductTitle::show($product->name);
                 'showOrderButton' => true,
                 'showOneClick' => true,
             ]); ?>
-            <?= WhenCanBuyWidget::widget([
+            <?php /*= WhenCanBuyWidget::widget([
                 'product' => $product
-            ]); ?>
+            ]); */ ?>
             <ul class="product-properties">
                 <li class="product-properties__line">
                     <div class="product-properties__key">Артикул</div>

@@ -7711,7 +7711,37 @@ var DateDeliveryField = /*#__PURE__*/function (_Component) {
   _createClass(DateDeliveryField, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      $(this.refs.datepicker).datepicker();
+      var availableDates = ['04-25-2021', '04-27-2021', '04-22-2021'];
+      $(this.refs.datepicker).datepicker({
+        autoClose: true,
+        startDate: '07/03/2013',
+        beforeShow: function beforeShow(e) {
+          alert('demo 2');
+          console.log('demo 2');
+          console.log(e);
+        },
+        beforeShowDay: function beforeShowDay(d) {
+          alert('demo');
+          console.log('demo');
+        } // beforeShowDay: function (d) {
+        //     var dmy = (d.getMonth() + 1)
+        //     if (d.getMonth() < 9)
+        //         dmy = "0" + dmy;
+        //     dmy += "-";
+        //
+        //     if (d.getDate() < 10) dmy += "0";
+        //     dmy += d.getDate() + "-" + d.getFullYear();
+        //
+        //     console.log(dmy + ' : ' + ($.inArray(dmy, availableDates)));
+        //
+        //     if ($.inArray(dmy, availableDates) != -1) {
+        //         return [true, "", "Available"];
+        //     } else {
+        //         return [false, "", "unAvailable"];
+        //     }
+        // }
+
+      });
     }
   }, {
     key: "render",
