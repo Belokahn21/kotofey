@@ -52,27 +52,12 @@ class OrderHelper
         return $out;
     }
 
-    public static function orderPurchase($order_id)
+    public static function orderPurchase(Order $order)
     {
-        $out = 0;
+        $summ = 0;
+        foreach ($order->items as $item) $summ += $item->count * ($item->purchase);
 
-        $items = OrdersItems::find()->where(['order_id' => $order_id])->all();
-
-        foreach ($items as $item) {
-
-            if (static::isEmptyItem($item)) {
-                continue;
-            }
-
-            if ($item->product) {
-                $out += $item->count * $item->product->purchase;
-            } else {
-                $out += $item->count * $item->price;
-            }
-        }
-
-
-        return $out;
+        return $summ;
     }
 
     public static function orderSummary(Order $order)
@@ -164,20 +149,8 @@ class OrderHelper
     /* прибыль заказа */
     public static function marginality(Order $order)
     {
-        $purchase = 0;
-        $out_summ = 0;
-
-        foreach ($order->items as $item) {
-            $purchase += $item->purchase * $item->count;
-            $out_summ += (($item->discount_price ? $item->discount_price : $item->price) - $item->purchase) * $item->count;
-        }
-
-        if ($order->discount) $out_summ = self::applyDiscountToAmount($order, $out_summ);
-        if ($order->promocode) {
-            if ($promo = Promocode::findOneByCode($order->promocode)) {
-                $out_summ = self::applyDiscountToAmount($order, $promo->discount);
-            }
-        }
+        $purchase = self::orderPurchase($order);
+        $out_summ = self::orderSummary($order);
 
         return $out_summ - $purchase;
     }
