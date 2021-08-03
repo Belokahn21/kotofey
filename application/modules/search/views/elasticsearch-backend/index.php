@@ -17,4 +17,5 @@ $this->title = Title::show('Elasticsearch элементы');
 <div class="title-group">
     <h1>Elasticsearch элементы</h1>
     <?= Html::a('Обновить индекс', Url::to(['/admin/search/elasticsearch-backend/re-index']), ['class' => 'btn-main']); ?>
+    <?= Html::a('Синонимы', Url::to(['/admin/search/elasticsearch-synonyms-backend/index']), ['class' => 'btn-main']); ?>
 </div>
