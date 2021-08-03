@@ -66,6 +66,10 @@ $this->title = Title::show("Список доставок");
                                 <div class="col-7"><?= $order->email; ?></div>
                             </div>
                             <div class="row my-1">
+                                <div class="col-5 bold">Дата/Время доставки:</div>
+                                <div class="col-7"><?= $order->dateDelivery->date; ?>/<?= $order->dateDelivery->time; ?></div>
+                            </div>
+                            <div class="row my-1">
                                 <div class="col-12 bold">Адрес доставки:</div>
                                 <div class="col-12">
                                     <?= !$order->city ? '' : 'г.' . $order->city; ?>
