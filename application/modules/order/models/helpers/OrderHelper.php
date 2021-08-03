@@ -66,6 +66,7 @@ class OrderHelper
         foreach ($order->items as $item) $summ += $item->count * ($item->discount_price ? $item->discount_price : $item->price);
 
         $summ = self::applyDiscountToAmount($order, $summ);
+        $summ = self::applyPromocodeToAmount($order, $summ);
 
         return $summ;
     }
