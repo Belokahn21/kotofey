@@ -1,12 +1,13 @@
 <?php
 
-use app\modules\seo\models\tools\Title;
-use yii\grid\GridView;
 use yii\helpers\Url;
-use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
+use app\modules\seo\models\tools\Title;
 use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 
 /* @var $model \app\modules\catalog\models\entity\PropertiesVariants
  * @var $this \yii\web\View
@@ -36,7 +37,6 @@ $this->title = Title::show("Значения свойств"); ?>
     'emptyText' => 'Значения отсутствуют',
     'columns' => [
         'id',
-
         [
             'attribute' => 'is_active',
             'filter' => ['Не активен', 'Активен'],
@@ -65,15 +65,13 @@ $this->title = Title::show("Значения свойств"); ?>
             }
         ],
         [
-            'attribute' => 'created_at',
-            'format' => ['date', 'dd.MM.YYYY'],
+            'attribute' => 'media_id',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::img(ProductPropertiesValuesHelper::getImageUrl($model), ['width' => '70px']);
+            }
         ],
-        [
-            'attribute' => 'updated_at',
-            'format' => ['date', 'dd.MM.YYYY'],
-        ],
-        [
-            'class' => 'yii\grid\ActionColumn',
+        ['class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
 //                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
