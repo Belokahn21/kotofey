@@ -87,6 +87,23 @@ class OrderHelper
         return $summ;
     }
 
+    public static function applyPromocodeToAmount(Order $order, $summ)
+    {
+        if (!$order->promocodeEntity) return $summ;
+
+        if (is_numeric($order->promocodeEntity->discount)) return $summ + $order->promocodeEntity->discount;
+
+
+        if (explode('%', $order->promocodeEntity->discount)) {
+            $tmpDiscount = str_replace('%', '', $order->promocodeEntity->discount);
+
+            return $summ + round($summ * ($tmpDiscount / 100));
+        }
+
+
+        return $summ;
+    }
+
     public static function getStatus(Order $order)
     {
         if ($order->status) {
