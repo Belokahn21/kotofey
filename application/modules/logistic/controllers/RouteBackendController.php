@@ -17,7 +17,7 @@ class RouteBackendController extends MainBackendController
             ->where(['order_date.date' => date('d.m.Y')])
             ->andWhere(['is_close' => false])
             ->andWhere(['is_cancel' => false])
-            ->orderBy(['order_date.date' => SORT_ASC]);
+            ->orderBy(['id' => SORT_ASC]);
         $models = $models->all();
 
 
