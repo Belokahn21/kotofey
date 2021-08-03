@@ -22,6 +22,7 @@ $this->title = Title::show("Список доставок");
 <?php if ($models): ?>
     <div class="logistic-list">
         <?php foreach ($models as $order): ?>
+            <?php $order_summary = OrderHelper::orderSummary($order); ?>
             <div class="card m-1">
                 <div class="card-body">
                     <div class="row">
@@ -40,12 +41,18 @@ $this->title = Title::show("Список доставок");
 
                             <div class="row my-1">
                                 <div class="col-5 bold">Сумма заказа:</div>
-                                <div class="col-7"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
+                                <div class="col-7"><?= Price::format($order_summary); ?> <?= Currency::getInstance()->show(); ?></div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-5 bold">Статус:</div>
                                 <div class="col-7"><?= OrderHelper::getStatus($order); ?></div>
                             </div>
+                            <?php if ($order->odd): ?>
+                                <div class="row my-1">
+                                    <div class="col-5 bold">Сдача</div>
+                                    <div class="col-7"><?= Price::format($order->odd - $order_summary); ?></div>
+                                </div>
+                            <?php endif; ?>
                             <div class="row my-1">
                                 <div class="col-5 bold">Оплата:</div>
                                 <div class="col-7"><?= OrderHelper::getPayment($order); ?></div>
