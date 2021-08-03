@@ -89,7 +89,7 @@ class OrderHelper
     {
         if (!$order->discount) return $summ;
 
-        if (is_numeric($order->discount)) return $summ += $order->discount;
+        if (is_numeric($order->discount)) return $summ + $order->discount;
 
 
         if (explode('%', $order->discount)) {
@@ -99,6 +99,7 @@ class OrderHelper
         }
 
 
+        return $summ;
     }
 
     public static function getStatus(Order $order)
