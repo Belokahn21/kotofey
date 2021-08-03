@@ -7,7 +7,7 @@ use Yii;
 use yii\web\HttpException;
 use app\widgets\notification\Alert;
 use app\modules\site\controllers\MainBackendController;
-use app\modules\search\models\entity\ElasticsearchSynonyms;
+use yii\widgets\ActiveForm;
 
 class ElasticsearchSynonymsBackendController extends MainBackendController
 {
@@ -15,9 +15,14 @@ class ElasticsearchSynonymsBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new ElasticsearchSynonyms();
+        $model = new $this->modelClass();
         $searchModel = new ElasticsearchSynonymSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -61,6 +66,6 @@ class ElasticsearchSynonymsBackendController extends MainBackendController
 
     private function getModel($primaryKey)
     {
-        return ElasticsearchSynonyms::findOne($primaryKey);
+        return $this->modelClass::findOne($primaryKey);
     }
 }

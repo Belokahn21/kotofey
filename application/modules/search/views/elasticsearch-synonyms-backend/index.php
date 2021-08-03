@@ -1,15 +1,17 @@
 <?php
 
+use yii\helpers\Url;
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
 use yii\grid\GridView;
+use yii\widgets\ActiveForm;
 
 /* @var $this \yii\web\View */
 /* @var $model \app\modules\search\models\entity\ElasticsearchSynonyms */
 /* @var $searchModel \app\modules\search\models\search\ElasticsearchSynonymSearch */
 /* @var $dataProvider \yii\data\ActiveDataProvider */
-?>
 
+$this->title = 'Синонимы Elasticsearch';
+?>
     <div class="title-group">
         <h1>Синонимы Elasticsearch</h1>
     </div>
