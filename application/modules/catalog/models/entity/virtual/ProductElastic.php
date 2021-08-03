@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\entity\virtual;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\search\models\entity\ElasticsearchSynonyms;
+use app\modules\site\models\tools\Debug;
 use yii\elasticsearch\ActiveRecord;
 use yii\helpers\ArrayHelper;
 
