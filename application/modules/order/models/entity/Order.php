@@ -201,6 +201,7 @@ class Order extends ActiveRecord
             'id' => 'ID',
             'ip' => 'IP',
             'status' => 'Статус',
+            'is_skip' => 'Теневой заказ',
             'payment_id' => 'Способ оплаты',
             'delivery_id' => 'Способ доставки',
             'is_paid' => 'Оплачено',

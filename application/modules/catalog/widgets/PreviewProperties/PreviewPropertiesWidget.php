@@ -21,7 +21,8 @@ class PreviewPropertiesWidget extends Widget
         $properties = array();
         $properties['Артикул'] = $this->product->article;
         $properties['Вес'] = 'Не указан';
-        if ($this->product->count > 0) $properties['В наличии'] = $this->product->count . ' шт.';
+//        if ($this->product->count > 0) $properties['В наличии'] = $this->product->count . ' шт.';
+        if ($this->product->status_id == Product::STATUS_ACTIVE) $properties['В наличии'] = '<i style="color: #00b000;" class="fas fa-check"></i>';
 
         if ($this->product->propsValues) {
             foreach ($this->product->propsValues as $property) {
