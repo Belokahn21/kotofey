@@ -164,9 +164,11 @@ class OrderHelper
     /* прибыль заказа */
     public static function marginality(Order $order)
     {
+        $purchase = 0;
         $out_summ = 0;
 
         foreach ($order->items as $item) {
+            $purchase += $item->purchase * $item->count;
             $out_summ += (($item->discount_price ? $item->discount_price : $item->price) - $item->purchase) * $item->count;
         }
 
@@ -177,7 +179,7 @@ class OrderHelper
             }
         }
 
-        return $out_summ;
+        return $out_summ - $purchase;
     }
 
 
