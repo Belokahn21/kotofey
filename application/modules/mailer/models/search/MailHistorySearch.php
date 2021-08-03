@@ -18,6 +18,7 @@ class MailHistorySearch extends MailHistory
     {
         return [
             [['mail_template_id'], 'integer'],
+            [['email'], 'string'],
         ];
     }
 
@@ -38,7 +39,8 @@ class MailHistorySearch extends MailHistory
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
+        $query->andFilterWhere(['like', 'email', $this->email])
+            ->andFilterWhere(['mail_template_id' => $this->mail_template_id]);
 
         return $dataProvider;
     }

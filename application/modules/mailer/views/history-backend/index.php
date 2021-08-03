@@ -4,6 +4,8 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\GridView;
 use app\modules\seo\models\tools\Title;
+use yii\helpers\ArrayHelper;
+use app\modules\mailer\models\entity\MailTemplates;
 
 /* @var $this \yii\web\View
  */
@@ -22,7 +24,10 @@ $this->title = Title::show('История отправок писем');
     'columns' => [
         'id',
         'email',
-        'mail_template_id',
+        [
+            'attribute' => 'mail_template_id',
+            'filter' => ArrayHelper::map(MailTemplates::find()->all(), 'id', 'name')
+        ],
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
