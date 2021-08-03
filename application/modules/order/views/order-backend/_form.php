@@ -245,7 +245,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
             <div class="d-flex flex-row">
                 <div class="w-25 p-1">
                     <?= $form->field($model, 'phone')->widget(CustomerInputWidget::className(), [
-                        'placeholder' => 'Телефон клиента'
+                        'placeholder' => 'Телефон клиента',
                     ])->label(false); ?>
                 </div>
                 <div class="w-25 p-1">

@@ -2,11 +2,11 @@
 
 namespace app\modules\order\controllers;
 
-use app\modules\order\models\search\CustomerPropertiesSearchForm;
 use Yii;
-use app\modules\site\controllers\MainBackendController;
-use app\widgets\notification\Alert;
 use yii\web\HttpException;
+use app\widgets\notification\Alert;
+use app\modules\site\controllers\MainBackendController;
+use app\modules\order\models\search\CustomerPropertiesSearchForm;
 
 class CustomerPropertiesBackendController extends MainBackendController
 {

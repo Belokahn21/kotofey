@@ -3418,6 +3418,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config */ "./src/js/react/config.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_config__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _FindCustomerFormResult__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FindCustomerFormResult */ "./src/js/react/components/FindCustomer/FindCustomerFormResult.js");
+/* harmony import */ var _block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../../block/CleanOrderPhone */ "./src/js/block/CleanOrderPhone.js");
+/* harmony import */ var _block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_4__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3445,6 +3447,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
   _inherits(FindCustomerForm, _React$Component);
 
@@ -3465,6 +3468,11 @@ var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(FindCustomerForm, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      new (_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_4___default())();
+    }
+  }, {
     key: "handleTypingText",
     value: function handleTypingText(event) {
       var _this2 = this;
@@ -3486,7 +3494,7 @@ var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "form-finds"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "form-finds__input",
+        className: "form-finds__input clean-phone",
         onKeyUp: this.handleTypingText.bind(this),
         placeholder: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 8\u0445\u0445\u0445\u0445\u0445\u0445\u0445\u0445"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindCustomerFormResult__WEBPACK_IMPORTED_MODULE_3__.default, {

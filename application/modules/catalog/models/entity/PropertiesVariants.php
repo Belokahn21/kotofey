@@ -27,6 +27,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $updated_at
  *
  * @property Properties $property
+ * @property Media $media
  */
 class PropertiesVariants extends \yii\db\ActiveRecord
 {

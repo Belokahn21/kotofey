@@ -2,6 +2,7 @@
 
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Properties;
+use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 
 /* @var $model \app\modules\catalog\models\entity\PropertiesVariants
  * @var $form \yii\widgets\ActiveForm
@@ -22,6 +23,15 @@ use app\modules\catalog\models\entity\Properties;
         <?= $form->field($model, 'property_id')->dropDownList(ArrayHelper::map(Properties::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
         <?= $form->field($model, 'sort')->textInput(['value' => 500]) ?>
         <?= $form->field($model, 'link')->textInput(); ?>
+        <?php
+        $media_params = [];
+        if ($model->media) {
+            $media_params = [
+                'values' => [$model->media_id]
+            ];
+        }
+        echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+        ?>
     </div>
     <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
         <?= $form->field($model, 'view')->textInput() ?>

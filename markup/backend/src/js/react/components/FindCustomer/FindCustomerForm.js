@@ -2,6 +2,7 @@ import React from "react";
 import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
 import config from "../../config";
 import FindCustomerFormResult from "./FindCustomerFormResult";
+import CleanOrderPhone from './../../../block/CleanOrderPhone'
 
 class FindCustomerForm extends React.Component {
 
@@ -12,6 +13,10 @@ class FindCustomerForm extends React.Component {
         this.state = {
             customer: [],
         }
+    }
+
+    componentDidMount() {
+        new CleanOrderPhone();
     }
 
     handleTypingText(event) {
@@ -29,7 +34,7 @@ class FindCustomerForm extends React.Component {
         return (
             <>
                 <form className="form-finds">
-                    <input className="form-finds__input" onKeyUp={this.handleTypingText.bind(this)} placeholder="Телефон клиента в формате 8хххххххх"/>
+                    <input className="form-finds__input clean-phone" onKeyUp={this.handleTypingText.bind(this)} placeholder="Телефон клиента в формате 8хххххххх"/>
                 </form>
 
                 <FindCustomerFormResult handleSelectCustomer={this.props.handleSelectCustomer} customer={customer}/>

@@ -24,7 +24,7 @@ class CustomerInputWidget extends Widget
             'style' => 'display:flex; flex-direction:row; margin:auto;'
         ]);
         echo Html::activeInput('text', $this->model, $this->attribute, [
-            'class' => 'form-control load-customer-info__pid',
+            'class' => 'form-control load-customer-info__pid clean-phone',
             'placeholder' => $this->placeholder,
         ]);
 

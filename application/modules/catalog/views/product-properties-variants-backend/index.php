@@ -15,19 +15,20 @@ use app\modules\catalog\models\entity\Properties;
  */
 
 $this->title = Title::show("Значения свойств"); ?>
-    <section>
-        <h1 class="title">Значения справочников</h1>
-        <?php $form = ActiveForm::begin([
-            'enableAjaxValidation' => true,
-            'options' => ['enctype' => 'multipart/form-data']
-        ]); ?>
-        <?= $this->render('_form', [
-            'model' => $model,
-            'form' => $form,
-        ]) ?>
-        <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-        <?php ActiveForm::end(); ?>
-    </section>
+
+    <div class="title-group">
+        <h1>Значения справочников</h1>
+    </div>
+<?php $form = ActiveForm::begin([
+    'enableAjaxValidation' => true,
+    'options' => ['enctype' => 'multipart/form-data']
+]); ?>
+<?= $this->render('_form', [
+    'model' => $model,
+    'form' => $form,
+]) ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?php ActiveForm::end(); ?>
     <h2>Список значений</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
