@@ -16271,7 +16271,10 @@ label[for="site-form-pet-avatar"] {
   margin-bottom: 20px; }
   .product-gallery-big__slide img {
     object-fit: contain;
-    width: 100%; }
+    width: 100%;
+    max-width: 300px;
+    display: block;
+    margin: auto; }
   @media (max-width: 450px) {
     .product-gallery-big {
       width: 100%; } }

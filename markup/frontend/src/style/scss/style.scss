@@ -174,8 +174,10 @@
   &__slide {
     img {
       object-fit: contain;
-      //height: 100px;
       width: 100%;
+      max-width: 300px;
+      display: block;
+      margin: auto;
     }
   }
 
