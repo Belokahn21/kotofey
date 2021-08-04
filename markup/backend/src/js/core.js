@@ -25,10 +25,10 @@ import './include/datepicker';
 import './include/other-jquery';
 import './include/maskedinput';
 import ProductVendorFill from './block/ProductVendorFill';
-import SetPrice from './block/SetPrice';
+// import SetPrice from './block/SetPrice';
 
 new ProductVendorFill();
-new SetPrice('.set-price');
+// new SetPrice('.set-price');
 new CleanOrderPhone();
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');

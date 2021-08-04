@@ -92,10 +92,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                         </div>
 
                         <div class="set-price">
-                            <input class="set-price__input" placeholder="<?= ProductMarkupHelper::getProductMarkupFromCookie() ?>" value="<?= ProductMarkupHelper::getProductMarkupFromCookie(); ?>">
-                            <a href="javascript:void(0);" class="set-price__action">
-                                <img src="/upload/images/percentage.png">
-                            </a>
+                            <input class="set-price__input form-control" placeholder="<?= ProductMarkupHelper::getProductMarkupFromCookie() ?>" value="<?= ProductMarkupHelper::getProductMarkupFromCookie(); ?>">
                         </div>
                     </div>
 

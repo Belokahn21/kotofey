@@ -1,7 +1,5 @@
 .set-price {
-  flex: 1;
-  width: 50%;
-
+  height: 70%;
   &-container {
     display: flex;
     flex-direction: row;
@@ -9,8 +7,6 @@
     padding: 0;
 
     .form-element {
-      flex: 1;
-      width: 50%;
     }
   }
 
