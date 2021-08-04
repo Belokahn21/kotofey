@@ -4,6 +4,7 @@ namespace app\modules\export\controllers;
 
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\entity\Product;
+use app\modules\vendors\models\entity\Vendor;
 use yii\web\Controller;
 
 class YmlController extends Controller
@@ -12,9 +13,18 @@ class YmlController extends Controller
     {
         \Yii::$app->response->format = \yii\web\Response::FORMAT_RAW;
         \Yii::$app->response->headers->add('Content-Type', 'application/xml');
-        $categories = ProductCategory::find()->all();
-        $offers = Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
+
         $module = \Yii::$app->getModule('export');
+
+
+        $offers = \Yii::$app->cache->getOrSet('yml-offers-market', function () {
+            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE, 'vendor_id' => Vendor::VENDOR_ID_ROYAL])->all();
+        });
+
+        $categories = \Yii::$app->cache->getOrSet('yml-categories-market', function () {
+            return ProductCategory::find()->all();
+        });
+
 
         $response = $this->renderPartial('index', [
             'offers' => $offers,
