@@ -4,7 +4,7 @@ use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
 use yii\helpers\ArrayHelper;
 use app\modules\site\models\tools\Currency;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 
 ?>
 <div class="modal fade" id="show-order-stat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
@@ -36,7 +36,7 @@ use app\modules\site\models\tools\Price;
                                     foreach ($models as $model) {
                                         $out += OrderHelper::income($model);
                                     }
-                                    return Price::format($out) . Currency::getInstance()->show();
+                                    return PriceTool::format($out) . Currency::getInstance()->show();
                                 }) ?>
                             </div>
                             <div class="month-stat__summary">Доход: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
@@ -44,7 +44,7 @@ use app\modules\site\models\tools\Price;
                                     foreach ($models as $model) {
                                         $out += OrderHelper::marginality($model->id);
                                     }
-                                    return Price::format($out) . Currency::getInstance()->show();
+                                    return PriceTool::format($out) . Currency::getInstance()->show();
                                 }) ?>
                             </div>
                         </li>

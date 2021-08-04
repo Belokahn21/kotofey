@@ -7,7 +7,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use yii\rest\Controller;
 
 class FastRestController extends Controller
@@ -80,7 +80,7 @@ class FastRestController extends Controller
             'delivery' => OrderHelper::getDelivery($order),
             'payment' => OrderHelper::getPayment($order),
             'created' => date('d.m.Y H:i:s', $order->created_at),
-            'total' => Price::format(OrderHelper::orderSummary($order)) . ' ' . Currency::getInstance()->show(),
+            'total' => PriceTool::format(OrderHelper::orderSummary($order)) . ' ' . Currency::getInstance()->show(),
         ];
         return $response;
     }

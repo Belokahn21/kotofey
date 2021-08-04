@@ -2,7 +2,7 @@
 
 namespace app\modules\site\models\tools;
 
-class Price
+class PriceTool
 {
     public static function showFormat($price)
     {

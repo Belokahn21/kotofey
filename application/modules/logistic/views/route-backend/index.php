@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\site\models\tools\Currency;
 use yii\helpers\Html;
 use app\modules\seo\models\tools\Title;
@@ -41,7 +41,7 @@ $this->title = Title::show("Список доставок");
 
                             <div class="row my-1">
                                 <div class="col-5 bold">Сумма заказа:</div>
-                                <div class="col-7"><?= Price::format($order_summary); ?> <?= Currency::getInstance()->show(); ?></div>
+                                <div class="col-7"><?= PriceTool::format($order_summary); ?> <?= Currency::getInstance()->show(); ?></div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-5 bold">Статус:</div>
@@ -50,7 +50,7 @@ $this->title = Title::show("Список доставок");
                             <?php if ($order->odd): ?>
                                 <div class="row my-1">
                                     <div class="col-5 bold">Сдача</div>
-                                    <div class="col-7"><?= Price::format($order->odd - $order_summary); ?></div>
+                                    <div class="col-7"><?= PriceTool::format($order->odd - $order_summary); ?></div>
                                 </div>
                             <?php endif; ?>
                             <div class="row my-1">
@@ -132,7 +132,7 @@ $this->title = Title::show("Список доставок");
                                     <?php foreach ($order->items as $item): ?>
                                         <?php if ($item->product instanceof Product): ?>
                                             <li class="list-group-item">
-                                                <?= $item->count; ?>шт. x <?= Price::format($item->price); ?>(<?= Price::format($item->purchase); ?>) <?= Currency::getInstance()->show(); ?>
+                                                <?= $item->count; ?>шт. x <?= PriceTool::format($item->price); ?>(<?= PriceTool::format($item->purchase); ?>) <?= Currency::getInstance()->show(); ?>
                                                 <a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>">
                                                     <?= $item->product->name; ?>
                                                 </a>

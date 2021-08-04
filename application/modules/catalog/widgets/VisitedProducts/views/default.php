@@ -3,7 +3,7 @@
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\models\tools\Currency;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use yii\helpers\Url;
 
 /* @var $products \app\modules\catalog\models\entity\Product[] */
@@ -20,7 +20,7 @@ use yii\helpers\Url;
             <div class="catalog-line__name">
                 <a href="<?= ProductHelper::getDetailUrl($product); ?>"><?= $product->name; ?></a>
             </div>
-            <div class="catalog-line__price"><?= Price::format($product->getPrice()); ?><?= Currency::getInstance()->show(); ?></div>
+            <div class="catalog-line__price"><?= PriceTool::format($product->getPrice()); ?><?= Currency::getInstance()->show(); ?></div>
             <div class="catalog-line__to-cart">
                 <?= AddBasketWidget::widget([
                     'product' => $product,

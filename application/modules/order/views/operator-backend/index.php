@@ -5,7 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use app\modules\seo\models\tools\Title;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\site\models\tools\Currency;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\order\models\helpers\OrderHelper;
@@ -45,14 +45,14 @@ $this->title = Title::show('Кабинет оператора');
             $result_summ += OrderHelper::orderSummary($order);
         }
 
-        echo Price::format($result_summ) . '/<span class="green">' . Price::format(round($result_summ * 0.05)) . '</span>'
+        echo PriceTool::format($result_summ) . '/<span class="green">' . PriceTool::format(round($result_summ * 0.05)) . '</span>'
         ?>
     </li>
 </ul>
 <?php foreach ($orderQuery->all() as $order): ?>
     <div class="row">
         <div class="col-3"><?= Html::a('Заказ № ' . $order->id, Url::to(['order-backend/update', 'id' => $order->id])) ?></div>
-        <div class="col-3"><?= Price::format(OrderHelper::orderSummary($order)); ?><?= Currency::getInstance()->show(); ?></div>
+        <div class="col-3"><?= PriceTool::format(OrderHelper::orderSummary($order)); ?><?= Currency::getInstance()->show(); ?></div>
         <div class="col-3"><?= date('d.m.Y H:i:s', $order->created_at); ?></div>
         <div class="col-3"><?= $order->email ? $order->email . '/' : null; ?><?= $order->phone; ?></div>
     </div>

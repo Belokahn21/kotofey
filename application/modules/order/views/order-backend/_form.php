@@ -3,7 +3,7 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\site\models\tools\Currency;
 use app\modules\order\widgets\map\MapWidget;
 use \app\modules\user\models\helpers\UserHelper;
@@ -57,8 +57,8 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 
                         <div class="info-card">
                             <div class="title">Финансы</div>
-                            <div class="text">Закуп: <?= Price::format(OrderHelper::orderPurchase($model)); ?></div>
-                            <div class="text">Сумма заказа: <?= Price::format(OrderHelper::orderSummary($model)); ?></div>
+                            <div class="text">Закуп: <?= PriceTool::format(OrderHelper::orderPurchase($model)); ?></div>
+                            <div class="text">Сумма заказа: <?= PriceTool::format(OrderHelper::orderSummary($model)); ?></div>
                             <?php $marge = OrderHelper::marginality($model); ?>
                             <div class="text">Прибыль: <?= $marge > 1 ? '<span class="green">+' . $marge . '</span>' : '<span class="red">' . $marge . '</span>'; ?></div>
                             <hr/>
@@ -180,18 +180,18 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 
                                         <div class="order-items-list-info__block">
                                             <?php if ($item->product): ?>
-                                                <div>Зкупочная: <?= Price::showFormat($item->product->purchase); ?></div>
+                                                <div>Зкупочная: <?= PriceTool::showFormat($item->product->purchase); ?></div>
                                             <?php else: ?>
-                                                <div>Зкупочная: <?= Price::showFormat($item->purchase); ?></div>
+                                                <div>Зкупочная: <?= PriceTool::showFormat($item->purchase); ?></div>
                                             <?php endif; ?>
-                                            <div>К продаже за штуку: <?= Price::showFormat($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . Price::showFormat($item->discount_price) : null; ?></div>
+                                            <div>К продаже за штуку: <?= PriceTool::showFormat($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . PriceTool::showFormat($item->discount_price) : null; ?></div>
                                         </div>
 
 
                                         <div class="order-items-list-info__block">
                                             <div>Итого к продаже:
-                                                <?= Price::showFormat($item->price * $item->count) ?>
-                                                <?= $item->discount_price ? ' / со скидкой ' . Price::showFormat($item->discount_price * $item->count) : null; ?>
+                                                <?= PriceTool::showFormat($item->price * $item->count) ?>
+                                                <?= $item->discount_price ? ' / со скидкой ' . PriceTool::showFormat($item->discount_price * $item->count) : null; ?>
                                             </div>
                                         </div>
                                     </div>

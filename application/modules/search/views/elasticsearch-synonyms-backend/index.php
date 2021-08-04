@@ -29,7 +29,7 @@ $this->title = 'Синонимы Elasticsearch';
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Товары отсутствуют',
+    'emptyText' => 'Синонимы отсутствуют',
     'columns' => [
         'id',
         'name',
@@ -37,7 +37,7 @@ $this->title = 'Синонимы Elasticsearch';
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
+//                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));

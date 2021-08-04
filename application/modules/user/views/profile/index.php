@@ -12,7 +12,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use yii\widgets\ActiveForm;
 use app\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
@@ -154,7 +154,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                                     <div class="profile-orders__number">#<?= $order->id; ?></div>
                                     <div class="profile-orders__date"><?= date('d.m.Y', $order->created_at) ?></div>
                                     <div class="profile-orders__status"><?= OrderHelper::getStatus($order); ?></div>
-                                    <div class="profile-orders__summary"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
+                                    <div class="profile-orders__summary"><?= PriceTool::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></div>
                                     <div class="profile-orders__action">
                                         <?= Html::a('Подробнее', '/profile/order/' . $order->id . '/', ['class' => 'profile-orders__link']); ?>
                                     </div>
@@ -176,7 +176,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                                         <div class="profile-favorite-list__title"><?= $item->name; ?></div>
                                         <div class="profile-favorite-list__group-row">
                                             <div class="profile-favorite-list__article"><?= $item->article; ?></div>
-                                            <div class="profile-favorite-list__price"><?= Price::format($item->price) ?> <?= Currency::getInstance()->show(); ?></div>
+                                            <div class="profile-favorite-list__price"><?= PriceTool::format($item->price) ?> <?= Currency::getInstance()->show(); ?></div>
                                         </div>
                                     </div>
                                     <div class="profile-favorite-list__action">

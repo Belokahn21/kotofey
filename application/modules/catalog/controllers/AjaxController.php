@@ -6,7 +6,7 @@ use yii\helpers\Json;
 use yii\web\Controller;
 use app\models\tool\parser\ParseProvider;
 use app\modules\site\models\tools\Currency;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\basket\models\entity\Basket;
 
 class AjaxController extends Controller
@@ -24,7 +24,7 @@ class AjaxController extends Controller
     public function actionGetMiniCartAmount()
     {
         return Json::encode([
-            'text' => Price::format(Basket::getInstance()->cash()) . Currency::getInstance()->show()
+            'text' => PriceTool::format(Basket::getInstance()->cash()) . Currency::getInstance()->show()
         ]);
     }
 

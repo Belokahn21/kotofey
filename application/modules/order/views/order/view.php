@@ -9,7 +9,7 @@ use app\modules\acquiring\models\helpers\AcquiringHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\widgets\Breadcrumbs;
 use yii\helpers\Html;
 use yii\helpers\Url;
@@ -52,10 +52,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                     <div class="profile-order-info__row">Сумма заказа</div>
                     <div class="profile-order-info__value">
                         <?php if (OrderHelper::orderSummary($order) == OrderHelper::orderSummary($order)): ?>
-                            <span><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></span>
+                            <span><?= PriceTool::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></span>
                         <?php else: ?>
-                            <span style="text-decoration: line-through;"><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></span>
-                            <span><?= Price::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></span>
+                            <span style="text-decoration: line-through;"><?= PriceTool::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></span>
+                            <span><?= PriceTool::format(OrderHelper::orderSummary($order)); ?> <?= Currency::getInstance()->show(); ?></span>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -102,10 +102,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                                 <img class="profile-order-products__image" src="/images/not-image.png" alt="<?= $item->image; ?>">
                             <?php endif; ?>
                             <?= Html::a($item->name, $item->product ? ProductHelper::getDetailUrl($item->product) : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
-                            <div class="profile-order-products__price"><?= Price::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
+                            <div class="profile-order-products__price"><?= PriceTool::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                             <div class="profile-order-products__char">X</div>
                             <div class="profile-order-products__count"><?= $item->count; ?> шт.</div>
-                            <div class="profile-order-products__summary"><?= Price::format($item->count * $item->price); ?> <?= Currency::getInstance()->show(); ?></div>
+                            <div class="profile-order-products__summary"><?= PriceTool::format($item->count * $item->price); ?> <?= Currency::getInstance()->show(); ?></div>
                         </li>
                     <?php endforeach; ?>
                 </ul>

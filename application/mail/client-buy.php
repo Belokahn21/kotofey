@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 
@@ -55,7 +55,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
                         Итого:
                     </div>
                     <div style="text-align: center;width: 15%; padding: 5px;">
-                        <?= Price::format(OrderHelper::orderSummary($order)); ?> р.
+                        <?= PriceTool::format(OrderHelper::orderSummary($order)); ?> р.
                     </div>
                 </li>
             </ul>

@@ -3,7 +3,7 @@
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\site\models\tools\Currency;
 use app\modules\order\models\entity\Order;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 
 $avail_mont_start = strtotime('01.01.' . date('Y'));
 $avail_mont_end = strtotime('31.12.' . date('Y'));
@@ -19,14 +19,14 @@ $avail_mont_end = strtotime('31.12.' . date('Y'));
             </div>
             <div class="statistic-info__item">
                 <div class="statistic-info__key">Прибыль</div>
-                <div class="statistic-info__value"><?= Price::format(OrderHelper::marginalityAllOrder([
+                <div class="statistic-info__value"><?= PriceTool::format(OrderHelper::marginalityAllOrder([
                         ['>', 'created_at', $avail_mont_start],
                         ['<', 'created_at', $avail_mont_end]
                     ])); ?><?= Currency::getInstance()->show(); ?></div>
             </div>
             <div class="statistic-info__item">
                 <div class="statistic-info__key">Оборот</div>
-                <div class="statistic-info__value"><?= Price::format(OrderHelper::rotate([
+                <div class="statistic-info__value"><?= PriceTool::format(OrderHelper::rotate([
                         ['>', 'created_at', $avail_mont_start],
                         ['<', 'created_at', $avail_mont_end]
                     ])); ?><?= Currency::getInstance()->show(); ?></div>

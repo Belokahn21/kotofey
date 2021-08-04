@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\basket\models\entity\Basket;
 use app\modules\site\models\tools\Currency;
 use app\modules\basket\models\tools\BasketHelper;
@@ -30,16 +30,16 @@ $resultPrice = $discount_price ?: $price;
                 <link itemprop="availability" href="http://schema.org/InStock">
                 <div class="product-calc__discount-unit">
                     <?php if ($discount_price): ?>
-                        <div class="product-calc__price-group-price __old"><?= Price::format($price); ?></div>
-                        <div class="product-calc__price-group-price __discount"><?= Price::format($discount_price); ?></div>
+                        <div class="product-calc__price-group-price __old"><?= PriceTool::format($price); ?></div>
+                        <div class="product-calc__price-group-price __discount"><?= PriceTool::format($discount_price); ?></div>
                     <?php else: ?>
-                        <div class="product-calc__price-group-price"><?= Price::format($price); ?></div>
+                        <div class="product-calc__price-group-price"><?= PriceTool::format($price); ?></div>
                     <?php endif; ?>
                 </div>
                 <div class="product-calc__price-group-char-val">шт</div>
                 <div class="product-calc__price-group-char-equal">=</div>
                 <div class="product-calc__price-group-summary js-product-calc-summary">
-                    <div class="count"><?= Price::format($resultPrice * ($basket->count ? $basket->count : 1)); ?></div>
+                    <div class="count"><?= PriceTool::format($resultPrice * ($basket->count ? $basket->count : 1)); ?></div>
                 </div>
                 <div class="product-calc__price-group-currency">₽</div>
             </div>
@@ -57,10 +57,10 @@ $resultPrice = $discount_price ?: $price;
                     <?php if ($showPrice): ?>
                         <div class="product-calc__price-info">
                             <?php if ($discount): ?>
-                                <div class="product-calc__price-info-normal">Цена за товар: <?= Price::format($price); ?><?= Currency::getInstance()->show(); ?></div>
+                                <div class="product-calc__price-info-normal">Цена за товар: <?= PriceTool::format($price); ?><?= Currency::getInstance()->show(); ?></div>
                                 <?php /*<div class="product-calc__price-info-discount">Со скдикой: <?= Price::format($discount); ?><?= Currency::getInstance()->show(); ?></div>*/ ?>
                             <?php else: ?>
-                                <div class="product-calc__price-info-normal">Цена за товар: <?= Price::format($price); ?><?= Currency::getInstance()->show(); ?></div>
+                                <div class="product-calc__price-info-normal">Цена за товар: <?= PriceTool::format($price); ?><?= Currency::getInstance()->show(); ?></div>
                             <?php endif; ?>
                         </div>
                     <?php endif; ?>

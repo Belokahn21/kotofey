@@ -14,7 +14,7 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use yii\helpers\ArrayHelper;
 use yii\bootstrap\ActiveForm;
 use app\modules\site\models\tools\Currency;

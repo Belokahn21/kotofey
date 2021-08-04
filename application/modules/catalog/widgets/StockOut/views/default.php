@@ -4,7 +4,7 @@
 
 use yii\helpers\Html;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use yii\helpers\Url;
 
 ///admin/catalog/product-backend/update
@@ -17,7 +17,7 @@ use yii\helpers\Url;
             <div class="modal-header">
                 <h5 class="modal-title" id="stockOutTitle">
                     <div>Складской учёт</div>
-                    <div>Закуп: <?= Price::format(ProductHelper::purchaseVirtual($products)); ?></div>
+                    <div>Закуп: <?= PriceTool::format(ProductHelper::purchaseVirtual($products)); ?></div>
                 </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>

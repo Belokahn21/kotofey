@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\site\models\tools\Currency;
 use app\modules\user\models\helpers\UserHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -99,10 +99,10 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
                             <div class="steam-slider-price-container">
                                 <div class="steam-slider-price">
                                     <?php if ($discount): ?>
-                                        <div class="steam-slider-price__old"><?= Price::format($model->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
-                                        <div class="steam-slider-price__current"><?= Price::format($discount); ?> <?= Currency::getInstance()->show(); ?></div>
+                                        <div class="steam-slider-price__old"><?= PriceTool::format($model->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
+                                        <div class="steam-slider-price__current"><?= PriceTool::format($discount); ?> <?= Currency::getInstance()->show(); ?></div>
                                     <?php else: ?>
-                                        <div class="steam-slider-price__current"><?= Price::format($model->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
+                                        <div class="steam-slider-price__current"><?= PriceTool::format($model->getPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
                                     <?php endif; ?>
                                 </div>
                                 <div class="steam-slider-for">

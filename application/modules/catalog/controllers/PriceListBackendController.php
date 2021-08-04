@@ -2,12 +2,11 @@
 
 namespace app\modules\catalog\controllers;
 
-
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\PriceUpdateForm;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\site\controllers\MainBackendController;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\vendors\models\entity\Vendor;
 use yii\web\UploadedFile;
 
@@ -39,11 +38,11 @@ class PriceListBackendController extends MainBackendController
                         if (empty($code) || mb_strlen($code) == 0) continue;
 
                         if ($model->type_price == PriceUpdateForm::TYPE_PRICE_BASE) {
-                            $base_price = Price::normalize($bad_price);
+                            $base_price = PriceTool::normalize($bad_price);
                         }
 
                         if ($model->type_price == PriceUpdateForm::TYPE_PRICE_PURCHASE) {
-                            $purchase_price = Price::normalize($bad_price);
+                            $purchase_price = PriceTool::normalize($bad_price);
                         }
 
 

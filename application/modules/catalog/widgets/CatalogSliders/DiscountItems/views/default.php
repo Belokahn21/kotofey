@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\site\models\tools\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
@@ -41,8 +41,8 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
                             ]); ?>
                         </div>
                         <div class="vitrine__price">
-                            <span class="amount-old"><?= Price::format($model->getPrice()); ?></span>
-                            <span class="amount"><?= Price::format($model->getDiscountPrice()); ?></span>
+                            <span class="amount-old"><?= PriceTool::format($model->getPrice()); ?></span>
+                            <span class="amount"><?= PriceTool::format($model->getDiscountPrice()); ?></span>
                             <span class="rate"><?= Currency::getInstance()->show(); ?> / шт</span>
                         </div>
                         <?= AddBasketWidget::widget([

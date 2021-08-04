@@ -4,7 +4,7 @@ use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\entity\Order;
 use app\modules\site\models\tools\Currency;
 use yii\helpers\ArrayHelper;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 
 $inside_money = 0;
 ?>
@@ -38,7 +38,7 @@ $inside_money = 0;
 
                                     $inside_money += $out;
 
-                                    return Price::format($out) . Currency::getInstance()->show();
+                                    return PriceTool::format($out) . Currency::getInstance()->show();
                                 }) ?>
                             </div>
                             <div class="month-stat__summary">Выручка: <?= ArrayHelper::getValue($query->all(), function ($models, $defaultValue) {
@@ -46,7 +46,7 @@ $inside_money = 0;
                                     foreach ($models as $model) {
                                         $out += OrderHelper::marginality($model);
                                     }
-                                    return Price::format($out) . Currency::getInstance()->show();
+                                    return PriceTool::format($out) . Currency::getInstance()->show();
                                 }) ?>
                             </div>
                         </li>
@@ -55,7 +55,7 @@ $inside_money = 0;
             </div>
             <div class="modal-footer">
                 <div style="width:100%; text-align: left;">
-                    Уплата налога: <?= Price::format(round($inside_money * 0.015)); ?><?= Currency::getInstance()->show(); ?>
+                    Уплата налога: <?= PriceTool::format(round($inside_money * 0.015)); ?><?= Currency::getInstance()->show(); ?>
                 </div>
             </div>
             <div class="modal-footer">

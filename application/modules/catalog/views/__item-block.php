@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\site\models\tools\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
@@ -44,10 +44,10 @@ $isDiscount = $product->getDiscountPrice() > 0;
     ]); ?>
     <div class="catalog__price-group">
         <?php if ($isDiscount): ?>
-            <div class="catalog__old-price"><?= Price::format($product->getPrice()); ?></div>
-            <div class="catalog__new-price"><?= Price::format($product->getDiscountPrice()); ?></div>
+            <div class="catalog__old-price"><?= PriceTool::format($product->getPrice()); ?></div>
+            <div class="catalog__new-price"><?= PriceTool::format($product->getDiscountPrice()); ?></div>
         <?php else: ?>
-            <div class="catalog__price"><?= Price::format($product->getPrice()); ?></div>
+            <div class="catalog__price"><?= PriceTool::format($product->getPrice()); ?></div>
         <?php endif; ?>
         <div class="catalog__rate"><?= Currency::getInstance()->show(); ?> / шт</div>
     </div>

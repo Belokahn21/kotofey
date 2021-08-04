@@ -14,7 +14,7 @@ use app\modules\promotion\models\helpers\PromotionProductMechanicHelper;
 use app\modules\promotion\models\search\PromotionSearch;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\Debug;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\widgets\notification\Alert;
 use yii\web\Controller;
 use yii\web\HttpException;

@@ -3,6 +3,7 @@
 namespace app\modules\order\models\service;
 
 use app\modules\site\models\tools\Month;
+use app\modules\site\models\tools\PriceTool;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -20,7 +21,6 @@ use app\modules\order\models\entity\OrderDate;
 use app\modules\site\models\forms\GrumingForm;
 use app\modules\site\models\tools\Currency;
 use app\modules\order\models\entity\Order;
-use app\modules\site\models\tools\Price;
 use app\modules\stock\models\entity\Stocks;
 use VK\Client\VKApiClient;
 use Yii;
@@ -39,7 +39,7 @@ class NotifyService
             if ($access_token) {
                 $order = Order::findOne($order_id);
                 $orderSumm = OrderHelper::orderSummary($order);
-                $orderSumm = Price::format($orderSumm) . Currency::getInstance()->show();
+                $orderSumm = PriceTool::format($orderSumm) . Currency::getInstance()->show();
                 $orderDateDelivery = OrderDate::findOne(['order_id' => $order->id]);
                 $detailUrlPage = Url::to(['/admin/order/order-backend/update', 'id' => $order->id], true);
 
@@ -218,8 +218,8 @@ class NotifyService
                 $html = '<tr style="background-color: #e6e6e6;"><td width="55%" style="text-align:left; padding: 5px;">Наименование</td><td style="padding: 5px;" width="15%">Количество</td><td style="padding: 5px;" width="15%">Цена за шт.</td><td style="padding: 5px;" width="15%">Итого</td></tr>';
                 $total = 0;
                 foreach ($order->items as $item) {
-                    $price = Price::format($item->price);
-                    $summ = Price::format($item->price * $item->count);
+                    $price = PriceTool::format($item->price);
+                    $summ = PriceTool::format($item->price * $item->count);
                     $currency = Currency::getInstance()->show();
 
                     $total += $item->price * $item->count;
@@ -227,7 +227,7 @@ class NotifyService
                     $html .= "<tr><td style='text-align:left; padding: 5px;'>{$item->name}</td><td style='padding: 5px;'>{$item->count}</td><td style='padding: 5px;'>{$price}{$currency}</td><td style='padding: 5px;'>{$summ}{$currency}</td></tr>";
                 }
 
-//                $html .= "<tr style='background-color: #e6e6e6;'><td style='text-align:left; padding: 5px;'>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td style='text-align:center; padding: 5px;' colspan='2'>Итого к оплате</td><td>" . Price::format($total) . "{$currency}</td></tr>";
+//                $html .= "<tr style='background-color: #e6e6e6;'><td style='text-align:left; padding: 5px;'>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td style='text-align:center; padding: 5px;' colspan='2'>Итого к оплате</td><td>" . PriceTool::format($total) . "{$currency}</td></tr>";
 
                 return $html;
             }),
@@ -293,7 +293,7 @@ class NotifyService
                         foreach ($last as $order) {
                             $cur_icon = Currency::getInstance()->show();
                             $sum = OrderHelper::orderSummary($order);
-                            $sum_formated = Price::format($sum);
+                            $sum_formated = PriceTool::format($sum);
                             $html .= "
                             <tr style='display: block; width: 100%;'>
                               <td style='width:40%; padding: 5px;'>Заказ № {$order->id}</td>

@@ -42,7 +42,7 @@ class ElasticsearchSynonymsBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        if (!$model = $this->getModel($id)) throw new HttpException(404, 'Элемент не найден.');
+        if (!$model = $this->findModel($id)) throw new HttpException(404, 'Элемент не найден.');
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -63,12 +63,12 @@ class ElasticsearchSynonymsBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (!$model = $this->getModel($id)) throw new HttpException(404, 'Элемент не найден.');
+        if (!$model = $this->findModel($id)) throw new HttpException(404, 'Элемент не найден.');
         if ($model->delete()) Alert::setSuccessNotify('Элемент удален.');
         return $this->redirect(['index']);
     }
 
-    private function getModel($primaryKey)
+    private function findModel($primaryKey)
     {
         return $this->modelClass::findOne($primaryKey);
     }

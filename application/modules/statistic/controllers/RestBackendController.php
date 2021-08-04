@@ -8,7 +8,7 @@ use app\modules\order\models\entity\Order;
 use app\modules\search\models\entity\SearchQuery;
 use yii\helpers\Json;
 use yii\web\Controller;
-use app\modules\site\models\tools\Price;
+use app\modules\site\models\tools\PriceTool;
 use app\modules\order\models\helpers\OrderHelper;
 
 class RestBackendController extends Controller
@@ -56,16 +56,16 @@ class RestBackendController extends Controller
 				'icon' => 'fa-clipboard',
 				'data' => [
 					'Заказов' => Order::find()->count(),
-					'Оборот' => Price::format(OrderHelper::income()),
-					'Доход' => Price::format(OrderHelper::marginality()),
+					'Оборот' => PriceTool::format(OrderHelper::income()),
+					'Доход' => PriceTool::format(OrderHelper::marginality()),
 				],
 			],
 			[
 				'icon' => 'fa-cubes',
 				'data' => [
 					'Товаров' => $products->where(['>', 'count', 0])->count(),
-					'Закуп' => Price::format(ProductHelper::purchaseVirtual($products->where(['>', 'count', 0])->all())),
-					'Доход' => Price::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
+					'Закуп' => PriceTool::format(ProductHelper::purchaseVirtual($products->where(['>', 'count', 0])->all())),
+					'Доход' => PriceTool::format(ProductHelper::profitVirtual($products->where(['>', 'count', 0])->all()))
 				],
 			],
 			[
