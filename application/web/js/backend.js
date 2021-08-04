@@ -2956,6 +2956,107 @@ var ProductVendorFill = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/block/SetPrice.js":
+/*!**********************************!*\
+  !*** ./src/js/block/SetPrice.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _react_config__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../react/config */ "./src/js/react/config.js");
+/* harmony import */ var _react_config__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_react_config__WEBPACK_IMPORTED_MODULE_0__);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var SetPrice = /*#__PURE__*/function () {
+  function SetPrice(element) {
+    _classCallCheck(this, SetPrice);
+
+    var inst = this;
+    this.timerEx;
+    this.timeoutSave = 200;
+    var self = document.querySelector(element);
+
+    if (!self) {
+      return false;
+    }
+
+    this.applyDiscount = self.querySelector('.set-price__action');
+    this.discountInput = self.querySelector('.set-price__input');
+    this.priceInput = document.querySelector("#id-price");
+    this.purchaseInput = document.querySelector("#id-purchase");
+    this.initEvents();
+    return inst;
+  }
+
+  _createClass(SetPrice, [{
+    key: "initEvents",
+    value: function initEvents() {
+      if (!this.priceInput || !this.purchaseInput) {
+        return false;
+      }
+
+      this.purchaseInput.onchange = this.handlePurchase.bind(this);
+      this.purchaseInput.onkeyup = this.handlePurchase.bind(this);
+      this.discountInput.onchange = this.handleDiscount.bind(this);
+      this.discountInput.onkeyup = this.handleDiscount.bind(this);
+      this.applyDiscount.onclick = this.handleApply.bind(this);
+    }
+  }, {
+    key: "handlePurchase",
+    value: function handlePurchase() {
+      this.priceInput.value = parseInt(this.purchaseInput.value) + parseInt(Math.round(this.purchaseInput.value * (this.discountInput.value / 100)));
+    }
+  }, {
+    key: "handleDiscount",
+    value: function handleDiscount() {
+      if (!this.discountInput.value) {
+        return false;
+      }
+
+      this.handleApply();
+
+      if (!this.discountInput.value || !this.purchaseInput.value) {
+        return false;
+      }
+
+      this.priceInput.value = parseInt(this.purchaseInput.value) + parseInt(Math.round(this.purchaseInput.value * (this.discountInput.value / 100)));
+    }
+  }, {
+    key: "handleApply",
+    value: function handleApply(event) {
+      var _this = this;
+
+      if (this.timerEx) {
+        clearTimeout(this.timerEx);
+      }
+
+      this.timerEx = setTimeout(function () {
+        fetch((_react_config__WEBPACK_IMPORTED_MODULE_0___default().ajaxSaveProductMark) + _this.discountInput.value + '/').then(function (response) {
+          return response.json();
+        }).then(function (data) {
+          console.log(data);
+        });
+      }, this.timeoutSave);
+    }
+  }]);
+
+  return SetPrice;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (SetPrice);
+
+/***/ }),
+
 /***/ "./src/js/block/notify.js":
 /*!********************************!*\
   !*** ./src/js/block/notify.js ***!
@@ -62368,6 +62469,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _include_other_jquery__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_include_other_jquery__WEBPACK_IMPORTED_MODULE_18__);
 /* harmony import */ var _include_maskedinput__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./include/maskedinput */ "./src/js/include/maskedinput.js");
 /* harmony import */ var _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./block/ProductVendorFill */ "./src/js/block/ProductVendorFill.js");
+/* harmony import */ var _block_SetPrice__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/SetPrice */ "./src/js/block/SetPrice.js");
 
 
 window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
@@ -62391,10 +62493,10 @@ window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
 
 
- // import SetPrice from './block/SetPrice';
 
-new _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_20__.default(); // new SetPrice('.set-price');
 
+new _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_20__.default();
+new _block_SetPrice__WEBPACK_IMPORTED_MODULE_21__.default('.set-price');
 new (_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_16___default())();
 var buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 
