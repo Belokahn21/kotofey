@@ -59,7 +59,7 @@ $config = [
                     'clientSecret' => 'FxeKQQ5slF3iXqhanR4c', // secret key приложения
                     'apiVersion' => '5.130',
                     'scope' => ['email'],
-                    'returnUrl' => ($_SERVER['HTTPS'] ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'] . '/vk/'
+                    'returnUrl' => ((isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on") ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'] . '/vk/'
                 ],
             ],
         ],

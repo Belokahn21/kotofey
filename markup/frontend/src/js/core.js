@@ -63,3 +63,4 @@ import './react/Page/Page';
 import './react/ProductAdmission/ProductAdmission';
 import './react/Compare/CompareButton'
 import './react/Compare/CompareList'
+import './react/EatCalculator/EatCalculator'
