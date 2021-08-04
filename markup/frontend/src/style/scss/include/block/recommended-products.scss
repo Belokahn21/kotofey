@@ -1,5 +1,4 @@
 .recommended-products {
-  margin-top: 40px;
 
   @media (max-width: 450px) {
     .catalog-line__item {
@@ -10,5 +9,12 @@
       margin-top: 10px;
       margin-bottom: 10px;
     }
+  }
+
+  &-container {
+    margin-top: 40px;
+  }
+
+  &-title {
   }
 }

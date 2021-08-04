@@ -13198,15 +13198,16 @@ img {
   .in-stock-detail-product__item::before {
     content: '' !important; }
 
-.recommended-products {
+@media (max-width: 450px) {
+  .recommended-products .catalog-line__item {
+    flex-wrap: wrap; }
+  .recommended-products .catalog-line__name {
+    max-width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px; } }
+
+.recommended-products-container {
   margin-top: 40px; }
-  @media (max-width: 450px) {
-    .recommended-products .catalog-line__item {
-      flex-wrap: wrap; }
-    .recommended-products .catalog-line__name {
-      max-width: 100%;
-      margin-top: 10px;
-      margin-bottom: 10px; } }
 
 .product-status {
   display: flex;
