@@ -83,6 +83,8 @@ class Order extends ActiveRecord
     {
         $module = \Yii::$app->getModule('order');
         return [
+            [['phone', 'email'], 'trim'],
+
             ['manager_id', 'integer'],
             ['manager_id', 'default', 'value' => $module->default_manager_id],
 

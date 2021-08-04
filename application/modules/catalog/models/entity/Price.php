@@ -29,6 +29,9 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             [['is_main'], 'default', 'value' => 0],
+            ['is_main', function ($attribute, $params) {
+                if ($model = Price::findOne([$attribute => 1])) $this->addError($attribute, 'Основная цена должна быть только одна!(Текущая: (id:' . $model->id . ') ' . $model->name . ')');
+            }],
 
             [['is_active'], 'default', 'value' => 1],
 
