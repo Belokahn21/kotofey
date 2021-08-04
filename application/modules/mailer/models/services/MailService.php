@@ -33,10 +33,10 @@ class MailService
 
             $mailer->setBcc('popugau@gmail.com');
 
-            if (!empty($dkim_private_key) && !empty($dkim_domain) && !empty($dkim_selector)) {
-                $signer = new \Swift_Signers_DKIMSigner(file_get_contents($dkim_private_key), $dkim_domain, $dkim_selector);
-                $mailer->getSwiftMessage()->attachSigner($signer);
-            }
+//            if (!empty($dkim_private_key) && !empty($dkim_domain) && !empty($dkim_selector)) {
+//                $signer = new \Swift_Signers_DKIMSigner(file_get_contents($dkim_private_key), $dkim_domain, $dkim_selector);
+//                $mailer->getSwiftMessage()->attachSigner($signer);
+//            }
 
             $mailer->send();
         }
