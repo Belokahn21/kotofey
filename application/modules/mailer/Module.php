@@ -16,6 +16,9 @@ class Module extends MainModule
     public $name = 'Почта';
 
     public $remember_event_id;
+    public $dkim_private_key;
+    public $dkim_domain;
+    public $dkim_selector;
 
     public function init()
     {
@@ -27,6 +30,9 @@ class Module extends MainModule
         $events = MailEvents::find()->all();
         return [
             'remember_event_id' => ArrayHelper::map($events, 'id', 'name'),
+            'dkim_private_key' => '',
+            'dkim_domain' => '',
+            'dkim_selector' => '',
         ];
     }
 
@@ -34,6 +40,9 @@ class Module extends MainModule
     {
         return [
             'remember_event_id' => 'Почтовое событие для рассылки потеряшек',
+            'dkim_private_key' => 'dkim_private_key',
+            'dkim_domain' => 'dkim_domain',
+            'dkim_selector' => 'dkim_selector',
         ];
     }
 
