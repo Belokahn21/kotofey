@@ -5,6 +5,9 @@ use yii\widgets\ActiveForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+/* @var $stocks \app\modules\stock\models\entity\Stocks[] */
+/* @var $prices \app\modules\catalog\models\entity\Price[] */
+
 $this->title = Title::show('Товары');
 ?>
     <div class="title-group">
@@ -19,6 +22,7 @@ $this->title = Title::show('Товары');
     'model' => $model,
     'form' => $form,
     'stocks' => $stocks,
+    'prices' => $prices,
     'compositions' => $compositions,
     'properties' => $properties,
     'modelDelivery' => $modelDelivery,

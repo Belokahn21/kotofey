@@ -15,10 +15,8 @@
             <div class="col-3"><?= $form->field($model, 'is_main')->checkbox(); ?></div>
         </div>
         <div class="row">
-            <div class="col-12"><?= $form->field($model, 'name')->textInput(['placeholder' => 'canon, canin, канин']); ?></div>
-        </div>
-        <div class="row">
-            <div class="col-12"><?= $form->field($model, 'sort')->checkbox(); ?></div>
+            <div class="col-6"><?= $form->field($model, 'name')->textInput(); ?></div>
+            <div class="col-6"><?= $form->field($model, 'sort')->textInput(); ?></div>
         </div>
     </div>
 </div>

@@ -28,9 +28,11 @@ class Price extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['is_active'],'default','value' => 1],
+            [['is_main'], 'default', 'value' => 0],
 
-            [['sort'],'default','value' => 500],
+            [['is_active'], 'default', 'value' => 1],
+
+            [['sort'], 'default', 'value' => 500],
 
             [['is_active', 'is_main', 'sort', 'created_at', 'updated_at'], 'integer'],
 
@@ -42,12 +44,12 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'is_active' => 'Is Active',
-            'is_main' => 'Is Main',
-            'sort' => 'Sort',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => 'Название',
+            'is_active' => 'Активность',
+            'is_main' => 'Основаная цена',
+            'sort' => 'Сортировка',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 }

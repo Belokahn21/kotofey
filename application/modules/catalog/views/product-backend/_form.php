@@ -9,6 +9,7 @@ use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\entity\PriceProduct;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
@@ -27,6 +28,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $form \yii\widgets\ActiveForm
  * @var $stocks Stocks[]
+ * @var $prices \app\modules\catalog\models\entity\Price[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
  */
 
@@ -39,6 +41,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         <a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo" aria-selected="false">SEO</a>
         <a class="nav-item nav-link" id="nav-additional-tab" data-toggle="tab" href="#nav-additional" role="tab" aria-controls="nav-additional" aria-selected="false">Условия доставки</a>
         <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
+        <a class="nav-item nav-link" id="nav-price-tab" data-toggle="tab" href="#nav-price" role="tab" aria-controls="nav-price" aria-selected="false">Цены</a>
         <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
         <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-gallery" aria-selected="false">Изображения</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
@@ -146,6 +149,27 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             <?= $form->field($model, 'feed')->textarea(['id' => 'feed-replace']); ?>
         </div>
     </div>
+    <div class="tab-pane fade" id="nav-price" role="tabpanel" aria-labelledby="nav-price-tab">
+        <?php $price_product_model = new PriceProduct(); ?>
+        <?php foreach ($prices as $count => $price): ?>
+
+            <?php $value = null; ?>
+            <?php if (!$model->isNewRecord): ?>
+                <?php $value = @PriceProduct::findOne(['product_id' => $model->id, 'price_id' => $price->id])->value; ?>
+            <?php endif; ?>
+
+            <div class="row">
+                <div class="col-12">
+                    <?= $form->field($price_product_model, '[' . $count . ']price_id')->hiddenInput(['value' => $price->id])->label(false); ?>
+                    <?= $form->field($price_product_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                    <?= $form->field($price_product_model, '[' . $count . ']value')->textInput([
+                        'placeholder' => $price->name,
+                        'value' => $value
+                    ])->label(Html::a($price->name, Url::to(['/admin/catalog/price-backend/update', 'id' => $price->id]), ['target' => '_blank'])); ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
     <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
         <?php $stock_model = new ProductStock(); ?>
         <?php foreach ($stocks as $count => $stock): ?>
@@ -162,7 +186,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <?= $form->field($stock_model, '[' . $count . ']count')->textInput([
                         'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
                         'value' => $value
-                    ])->label(Html::a($stock->name . " (<strong>{$stock->address}</strong>)", Url::to(['/admin/stock/stock-backend/update', 'id' => $stock->id]))); ?>
+                    ])->label(Html::a($stock->name . " (<strong>{$stock->address}</strong>)", Url::to(['/admin/stock/stock-backend/update', 'id' => $stock->id]), ['target' => '_blank'])); ?>
                 </div>
             </div>
         <?php endforeach; ?>

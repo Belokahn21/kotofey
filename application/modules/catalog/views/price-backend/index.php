@@ -32,7 +32,10 @@ $this->title = 'Цены';
     'emptyText' => 'Цены отсутствуют',
     'columns' => [
         'id',
+        'is_active',
+        'is_main',
         'name',
+        'sort',
         [
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [

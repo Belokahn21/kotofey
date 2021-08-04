@@ -19,6 +19,7 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
  * @var $stocks \app\modules\stock\models\entity\Stocks[]
+ * @var $prices \app\modules\catalog\models\entity\Price[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
  */
 
@@ -40,6 +41,7 @@ $this->title = Title::show('Товары');
 <?= $this->render('_form', [
     'model' => $model,
     'stocks' => $stocks,
+    'prices' => $prices,
     'form' => $form,
     'compositions' => $compositions,
     'properties' => $properties,

@@ -3,6 +3,7 @@
 namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Composition;
+use app\modules\catalog\models\entity\Price;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
@@ -44,6 +45,7 @@ class ProductBackendController extends MainBackendController
         $properties = $this->getProperties();
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
+        $prices = $this->getPrices();
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -65,9 +67,9 @@ class ProductBackendController extends MainBackendController
         return $this->render('index', [
             'model' => $model,
             'stocks' => $stocks,
+            'prices' => $prices,
             'compositions' => $compositions,
             'properties' => $outProps,
-//            'properties' => $properties,
             'modelDelivery' => $modelDelivery,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -82,6 +84,7 @@ class ProductBackendController extends MainBackendController
         $properties = $this->getProperties();
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
+        $prices = $this->getPrices();
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
@@ -99,6 +102,7 @@ class ProductBackendController extends MainBackendController
             'model' => $model,
             'compositions' => $compositions,
             'stocks' => $stocks,
+            'prices' => $prices,
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
         ]);
@@ -111,6 +115,7 @@ class ProductBackendController extends MainBackendController
         $properties = $this->getProperties();
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
+        $prices = $this->getPrices();
         $outProps = [];
         foreach ($properties as $prop) {
             $outProps[$prop->group_id][] = $prop;
@@ -142,6 +147,7 @@ class ProductBackendController extends MainBackendController
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
             'stocks' => $stocks,
+            'prices' => $prices,
             'compositions' => $compositions,
         ]);
     }
@@ -203,6 +209,13 @@ class ProductBackendController extends MainBackendController
     {
         return Yii::$app->cache->getOrSet('product-properties-backend', function () {
             return Properties::find()->all();
+        });
+    }
+
+    private function getPrices()
+    {
+        return Yii::$app->cache->getOrSet('product-prices-backend', function () {
+            return Price::find()->all();
         });
     }
 }
