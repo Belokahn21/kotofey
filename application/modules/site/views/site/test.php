@@ -5,5 +5,5 @@ $sender = new MailService();
 
 $sender->sendEvent(3, [
     'EMAIL_FROM' => 'sale@kotofey.store',
-    'EMAIL_TO' => 'test-zq48ptlip@srv1.mail-tester.com',
+    'EMAIL_TO' => Yii::$app->request->get('email'),
 ]);
