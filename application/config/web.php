@@ -59,7 +59,7 @@ $config = [
                     'clientSecret' => 'FxeKQQ5slF3iXqhanR4c', // secret key приложения
                     'apiVersion' => '5.130',
                     'scope' => ['email'],
-                    'returnUrl' => 'http://local.kotofey.store/vk/'
+                    'returnUrl' => ($_SERVER['HTTPS'] ? 'https://' : 'http://') . $_SERVER['SERVER_NAME'] . '/vk/'
                 ],
             ],
         ],
@@ -115,7 +115,7 @@ $config = [
                 //настройте несколько хостов, если у вас есть кластер
             ],
             // установите autodetectCluster = false, чтобы не определять адреса узлов в кластере автоматически
-             'autodetectCluster' => false,
+            'autodetectCluster' => false,
             'dslVersion' => 7, // по умолчанию - 5
         ],
         'db' => $db,
