@@ -13,7 +13,7 @@ class FindAnimal extends React.Component {
     }
 
     loadAnimal() {
-        RestRequest.all(config.restAnimal+'?expand=image').then(data => {
+        RestRequest.all(config.restAnimal + '?expand=image').then(data => {
             this.setState({animals: data});
         })
     }

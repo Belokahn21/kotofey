@@ -5848,8 +5848,7 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       products: [],
       breeds: []
-    }; // this.loadBreeds();
-
+    };
     return _this;
   }
 

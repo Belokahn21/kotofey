@@ -13,7 +13,6 @@ class EatCalculator extends React.Component {
             products: [],
             breeds: []
         }
-        // this.loadBreeds();
     }
 
     handleTyping(event) {
