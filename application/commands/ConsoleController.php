@@ -11,7 +11,7 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $html = file_get_contents(\Yii::getAlias('@app') . '/tmp/dogs.html');
+        $html = file_get_contents(\Yii::getAlias('@app') . '/tmp/cats.html');
 
         $dom = new \DOMDocument();
         $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
@@ -23,7 +23,7 @@ class ConsoleController extends Controller
         foreach ($names as $dog_name) {
             $breed = new Breed();
             $breed->name = $dog_name->nodeValue;
-            $breed->animal_id = Animal::TYPE_DOG_ID;
+            $breed->animal_id = Animal::TYPE_CAT_ID;
 
             if ($breed->validate() && $breed->save()) echo $dog_name->nodeValue . PHP_EOL;
         }
