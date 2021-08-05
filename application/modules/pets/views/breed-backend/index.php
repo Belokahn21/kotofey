@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
 use app\modules\pets\models\entity\Animal;
 
 /* @var $this \yii\web\View */
@@ -51,6 +52,7 @@ $this->title = 'Породы';
         'sort',
         [
             'attribute' => 'animal_id',
+            'filter' => ArrayHelper::map(Animal::find()->all(), 'id', 'name'),
             'format' => 'raw',
             'value' => function ($model) {
                 $animal = Animal::findOne($model->animal_id);
