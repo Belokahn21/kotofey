@@ -23,6 +23,12 @@ use yii\behaviors\TimestampBehavior;
  */
 class Animal extends \yii\db\ActiveRecord
 {
+    const TYPE_DOG_ID = 1;
+    const TYPE_CAT_ID = 2;
+    const TYPE_FISH_ID = 3;
+    const TYPE_RABBIT_ID = 4;
+    const TYPE_BIRD_ID = 5;
+
     public function behaviors()
     {
         return [

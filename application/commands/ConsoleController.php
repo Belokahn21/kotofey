@@ -2,16 +2,33 @@
 
 namespace app\commands;
 
+use app\modules\pets\models\entity\Animal;
+use app\modules\pets\models\entity\Breed;
+use app\modules\site\models\tools\Debug;
 use yii\console\Controller;
 
 class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/tmp/dogs.html');
+        $html = file_get_contents(\Yii::getAlias('@app') . '/tmp/dogs.html');
+
+        $dom = new \DOMDocument();
+        $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
+
+        $xpath = new \DOMXPath($dom);
+        $names = $xpath->query('//p[@class="has-text-align-center"]/a');
 
 
-        echo $file;
+        foreach ($names as $dog_name) {
+            $breed = new Breed();
+            $breed->name = $dog_name->nodeValue;
+            $breed->animal_id = Animal::TYPE_DOG_ID;
+
+            if ($breed->validate() && $breed->validate()) echo $dog_name->nodeValue . PHP_EOL;
+        }
+
+
     }
 
     public function actionClearCache()
