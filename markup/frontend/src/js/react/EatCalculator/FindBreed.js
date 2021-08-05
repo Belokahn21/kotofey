@@ -14,7 +14,7 @@ class FindBreed extends React.Component {
     }
 
     render() {
-        const {breeds,handleTyping} = this.props;
+        const {breeds, handleTyping} = this.props;
         return <>
             <FindBreedForm handleTyping={handleTyping}/>
             <div className="breed-list">
@@ -24,10 +24,10 @@ class FindBreed extends React.Component {
                             {el.name}
                         </div>
 
-                        <label className="breed-list-item-select">
-                            <input type="checkbox" name="breed" value={el.id}/>
-                            <div className="breed-list-item-select__marker"/>
-                        </label>
+                        <div className="filter-catalog-checkboxes__item">
+                            <input type="radio" name="breed" value={el.id} id={"breed-filter-" + el.id}/>
+                            <label htmlFor={"breed-filter-" + el.id}><i className="fas fa-paw" aria-hidden="true"/></label>
+                        </div>
                     </div>
                 })}
             </div>

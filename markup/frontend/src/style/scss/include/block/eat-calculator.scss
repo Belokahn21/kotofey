@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
 
+  &-panel-action {
+    border: 0!important;
+    margin: 15px -5px 0 -5px;
+  }
 
   &-config {
     display: flex;
@@ -10,12 +14,13 @@
     &-row {
       display: flex;
       flex-direction: row;
-      border: 1px silver solid;
+      border: 1px $eat-calculator-border-color solid;
       padding: 5px;
     }
 
     &-col {
-      width: 25%;
+      width: 33%;
+      flex: 1 1 33%;
       padding: 10px;
     }
 
@@ -23,7 +28,7 @@
       width: 100%;
       height: 100%;
       padding: 10px;
-      border: 1px silver solid;
+      border: 1px $eat-calculator-border-color solid;
     }
 
     &-pet {

@@ -11,17 +11,22 @@ class EatCalculator extends React.Component {
         super(props);
         this.state = {
             products: [],
-            breeds: []
+            breeds: [],
+            selected_animal_id: null
         }
     }
 
     handleTyping(event) {
         if (this.timerEx) clearTimeout(this.timerEx);
-        let input_element = event.target;
+        let element = event.target;
+        let value = element.value;
+        let {selected_animal_id} = this.state;
+
+        if (selected_animal_id == null) return false;
 
         this.timerEx = setTimeout(() => {
-            RestRequest.all(config.restBreeds + '?BreedSearchForm[name]=' + input_element.value).then(data => {
-                this.setState({breeds: data});
+            RestRequest.all(config.restBreeds + '?BreedSearchForm[name]=' + value + '&BreedSearchForm[animal_id]=' + selected_animal_id).then(data => {
+                this.setBreeds(data);
             });
         }, this.timerSec)
     }
@@ -50,16 +55,18 @@ class EatCalculator extends React.Component {
     handleSelectAnimal(event) {
         if (this.timerEx) clearTimeout(this.timerEx);
         let element = event.target;
+        let value = element.value;
 
         this.timerEx = setTimeout(() => {
             RestRequest.all(config.restBreeds + '?BreedSearchForm[animal_id]=' + element.value).then(data => {
-                this.setState({breeds: data});
+                this.setBreeds(data)
+                this.setState({selected_animal_id: value});
             });
         }, this.timerSec)
     }
 
     render() {
-        const {products, breeds} = this.state;
+        const {products, breeds, selected_animal_id} = this.state;
         return <div className="eat-calculator">
             <form className="eat-calculator-config" onSubmit={this.handleSubmitForm.bind(this)}>
 
@@ -76,23 +83,17 @@ class EatCalculator extends React.Component {
                     <div className="eat-calculator-config-age eat-calculator-config-col">
                         <div className="eat-calculator-config-block">
                             <div className="filter-catalog-checkboxes__item">
-                                <input type="checkbox" name="age" value="1" id="filter-chb-1"/>
+                                <input type="radio" name="age" value="1" id="filter-chb-1"/>
                                 <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>До года</label>
                             </div>
                             <div className="filter-catalog-checkboxes__item">
-                                <input type="checkbox" name="age" value="2" id="filter-chb-2"/>
+                                <input type="radio" name="age" value="2" id="filter-chb-2"/>
                                 <label htmlFor="filter-chb-2"><i className="fas fa-paw" aria-hidden="true"/>Больше года</label>
                             </div>
                             <div className="filter-catalog-checkboxes__item">
-                                <input type="checkbox" name="age" value="3" id="filter-chb-3"/>
+                                <input type="radio" name="age" value="3" id="filter-chb-3"/>
                                 <label htmlFor="filter-chb-3"><i className="fas fa-paw" aria-hidden="true"/>Старше 7 лет</label>
                             </div>
-                        </div>
-                    </div>
-
-                    <div className="eat-calculator-config-weight eat-calculator-config-col">
-                        <div className="eat-calculator-config-block">
-                            <input className="bread-filter-item__input" type="text" name="weight" placeholder="Вес вашего питомца"/>
                         </div>
                     </div>
 
@@ -103,7 +104,7 @@ class EatCalculator extends React.Component {
                     </div>
                 </div>
 
-                <div className="eat-calculator-config-row">
+                <div className="eat-calculator-config-row eat-calculator-panel-action">
                     <button className="eat-calculator-submit" type="submit">Найти</button>
                 </div>
             </form>

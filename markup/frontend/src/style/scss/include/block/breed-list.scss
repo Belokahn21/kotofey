@@ -3,7 +3,7 @@
   flex-direction: column;
 
   &-item {
-    border: 1px silver solid;
+    border: 1px $eat-calculator-border-color solid;
     margin: 5px 0;
     display: flex;
     flex-direction: row;
@@ -15,32 +15,15 @@
       padding: 5px;
     }
 
-    &-select {
+    .filter-catalog-checkboxes__item {
+      width: auto;
       height: 100%;
       display: block;
       margin: auto 10px auto 0;
       cursor: pointer;
 
-
-      &__marker {
-        width: 15px;
-        height: 15px;
-        border: 1px silver solid;
-        display: block;
-
-        &:hover {
-          border-color: $whatsapp-green;
-        }
-      }
-
-      input {
-        display: none;
-
-        &:checked {
-          & ~ .breed-list-item-select__marker {
-            border-color: $whatsapp-green;
-          }
-        }
+      label {
+        margin: 0;
       }
     }
   }

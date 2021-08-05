@@ -6,8 +6,12 @@ use yii\console\Controller;
 
 class ConsoleController extends Controller
 {
-    public function actionRun($name = null)
+    public function actionRun()
     {
+        $file = file_get_contents($_SERVER['DOCUMENT_ROOT'] . '/tmp/dogs.html');
+
+
+        echo $file;
     }
 
     public function actionClearCache()
