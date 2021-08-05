@@ -1,71 +1,115 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import FindBreed from "./FindBreed";
+import RestRequest from "../../tools/RestRequest";
+import config from "../../config";
+import Result from "./Result";
+import FindAnimal from "./FindAnimal";
 
 class EatCalculator extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            products: []
+            products: [],
+            breeds: []
         }
+        // this.loadBreeds();
+    }
+
+    handleTyping(event) {
+        if (this.timerEx) clearTimeout(this.timerEx);
+        let input_element = event.target;
+
+        this.timerEx = setTimeout(() => {
+            RestRequest.all(config.restBreeds + '?BreedSearchForm[name]=' + input_element.value).then(data => {
+                this.setState({breeds: data});
+            });
+        }, this.timerSec)
+    }
+
+    setBreeds(data) {
+        this.setState({breeds: data});
+    }
+
+    loadBreeds() {
+        RestRequest.all(config.restBreeds).then(data => {
+            this.setBreeds(data);
+        });
+    }
+
+    handleSubmitForm(event) {
+        event.preventDefault();
+        let form = event.target;
+
+        RestRequest.post(config.restPetCalculator, {
+            body: new FormData(form)
+        }).then(data => {
+            this.setState({products: data});
+        })
+    }
+
+    handleSelectAnimal(event) {
+        if (this.timerEx) clearTimeout(this.timerEx);
+        let element = event.target;
+
+        this.timerEx = setTimeout(() => {
+            RestRequest.all(config.restBreeds + '?BreedSearchForm[animal_id]=' + element.value).then(data => {
+                this.setState({breeds: data});
+            });
+        }, this.timerSec)
     }
 
     render() {
-        const {products} = this.state;
+        const {products, breeds} = this.state;
         return <div className="eat-calculator">
-            <form className="eat-calculator-config">
-                <div className="eat-calculator-config-pet eat-calculator-config-block">
+            <form className="eat-calculator-config" onSubmit={this.handleSubmitForm.bind(this)}>
+
+                <div className="eat-calculator-config-row">
 
 
-                    <label className="eat-calculator-config-pet__item">
-                        <input name="pet" value="102" type="checkbox"/>
-                        <div className="eat-calculator-config-pet__checked">
-                            <i className="fas fa-check"/>
+                    <div className="eat-calculator-config-pet eat-calculator-config-col">
+                        <div className="eat-calculator-config-block">
+                            <FindAnimal selectAnimal={this.handleSelectAnimal.bind(this)}/>
                         </div>
-                        <img src="./assets/images/pet/dog.png"/>
-                    </label>
 
+                    </div>
 
-                    <label className="eat-calculator-config-pet__item">
-                        <input name="pet" value="101" type="checkbox"/>
-                        <div className="eat-calculator-config-pet__checked">
-                            <i className="fas fa-check"/>
+                    <div className="eat-calculator-config-age eat-calculator-config-col">
+                        <div className="eat-calculator-config-block">
+                            <div className="filter-catalog-checkboxes__item">
+                                <input type="checkbox" name="age"/>
+                                <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>До года</label>
+                            </div>
+                            <div className="filter-catalog-checkboxes__item">
+                                <input type="checkbox" name="age"/>
+                                <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>Больше года</label>
+                            </div>
+                            <div className="filter-catalog-checkboxes__item">
+                                <input type="checkbox" name="age"/>
+                                <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>Старше 7 лет</label>
+                            </div>
                         </div>
-                        <img src="./assets/images/pet/cat.png"/>
-                    </label>
-
-                </div>
-
-                <div className="eat-calculator-config__age eat-calculator-config-block">
-                    <div className="filter-catalog-checkboxes__item">
-                        <input type="checkbox" name="age"/>
-                        <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>До года</label>
                     </div>
-                    <div className="filter-catalog-checkboxes__item">
-                        <input type="checkbox" name="age"/>
-                        <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>Больше года</label>
+
+                    <div className="eat-calculator-config-weight eat-calculator-config-col">
+                        <div className="eat-calculator-config-block">
+                            <input className="bread-filter-item__input" type="text" name="weight" placeholder="Вес вашего питомца"/>
+                        </div>
                     </div>
-                    <div className="filter-catalog-checkboxes__item">
-                        <input type="checkbox" name="age"/>
-                        <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>Старше 7 лет</label>
+
+                    <div className="eat-calculator-config-breed eat-calculator-config-col">
+                        <div className="eat-calculator-config-block">
+                            <FindBreed handleTyping={this.handleTyping.bind(this)} breeds={breeds}/>
+                        </div>
                     </div>
                 </div>
 
-                <div className="eat-calculator-config__weight eat-calculator-config-block">
-                    <input type="text" placeholder="Вес вашего питомца"/>
-                </div>
-
-                <div className="eat-calculator-config__activity eat-calculator-config-block">
-                    <div>Сидячий</div>
-                    <div>Полу-подвижный</div>
-                    <div>Подвижный</div>
+                <div className="eat-calculator-config-row">
+                    <button className="eat-calculator-submit" type="submit">Найти</button>
                 </div>
             </form>
 
-            <div className="eat-calculator-result">
-                {products.map((el, index) => {
-                    <div className="eat-calculator-result__item">{el.name}</div>
-                })}
-            </div>
+            <Result models={products}/>
         </div>
     }
 

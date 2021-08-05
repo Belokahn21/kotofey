@@ -19,6 +19,7 @@ class Module extends \app\modules\site\MainModule
         return [
             ['name' => 'Карточки питомцев', 'url' => Url::to(['/admin/pets/pet-backend/index']),],
             ['name' => 'Животные', 'url' => Url::to(['/admin/pets/animal-backend/index']),],
+            ['name' => 'Породы', 'url' => Url::to(['/admin/pets/breed-backend/index']),],
         ];
     }
 

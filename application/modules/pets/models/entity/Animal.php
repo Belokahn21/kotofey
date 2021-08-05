@@ -2,6 +2,7 @@
 
 namespace app\modules\pets\models\entity;
 
+use app\modules\pets\models\helpers\AnimalHelper;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -45,6 +46,15 @@ class Animal extends \yii\db\ActiveRecord
             'icon' => 'Icon',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
+        ];
+    }
+
+    public function extraFields()
+    {
+        return [
+            'image' => function ($model) {
+                return AnimalHelper::getImageUrl($model);
+            },
         ];
     }
 }

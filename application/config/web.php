@@ -140,8 +140,10 @@ $config = [
 
 
                 //frontend rest
-                'GET api/<module>/<id[\w]+>' => '<module>/rest/view',
-                'GET api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/view',
+//                'GET api/<module>/<id:[\w]+>' => '<module>/rest/view',
+//                'GET api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest/view',
+                'GET api/<module>/<id:[\d]+>' => '<module>/rest/view',
+                'GET api/<module>/<controller>/<id:[\d]+>' => '<module>/<controller>-rest/view',
 
 
                 'GET api/<module>' => '<module>/rest/index',

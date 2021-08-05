@@ -1,0 +1,13 @@
+.bread-filter {
+  width: 100%;
+
+  &-item {
+    width: 100%;
+
+    &__input {
+      border: 1px $eat-calculator-border-color solid;
+      width: 100%;
+      padding: 5px;
+    }
+  }
+}

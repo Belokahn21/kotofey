@@ -22,6 +22,10 @@ const config = {
     // sberbank payments
     restAcquiring: url + 'api/acquiring/',
     restAcquiringOrder: url + 'api/acquiring/order/',
+    // pets
+    restAnimal: url + 'api/pets/animal/',
+    restBreeds: url + 'api/pets/breed/',
+    restPetCalculator: url + 'api/pets/calculate/',
 };
 
 
