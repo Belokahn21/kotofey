@@ -35,6 +35,7 @@ class Breed extends \yii\db\ActiveRecord
             [['is_active', 'sort', 'animal_id', 'created_at', 'updated_at'], 'integer'],
 
             [['name'], 'required'],
+            [['name'], 'unique'],
 
             [['name'], 'string', 'max' => 255],
         ];
