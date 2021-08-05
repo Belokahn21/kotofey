@@ -94,9 +94,10 @@ $this->title = Title::show('Товары');
             'format' => 'raw',
             'value' => function ($model) {
                 $vendor = Vendor::findOne($model->vendor_id);
-                $currency = Currency::getInstance()->show();
-                $purchase_html = !$vendor->min_summary_sale ?: "Мин. закуп {$vendor->min_summary_sale}{$currency} ";
                 if ($vendor) {
+                    $currency = Currency::getInstance()->show();
+                    $purchase_html = !$vendor->min_summary_sale ?: "Мин. закуп {$vendor->min_summary_sale}{$currency} ";
+
                     $link = Url::to(['/vendors/vendors-backend/update', 'id' => $vendor->id]);
                     return Html::tag('span', $vendor->name, [
                         'class' => "vendor-tooltip",
@@ -113,6 +114,7 @@ VENDOR
 
                     ]);
                 }
+                return "Поставщик не указан";
             }
         ],
         [
