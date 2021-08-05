@@ -1,7 +1,10 @@
 <?php
 /* @var $form \yii\widgets\ActiveForm
- * @var $model \app\modules\menu\models\entity\Menu
+ * @var $model \app\modules\pets\models\entity\Animal
  */
+
+use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
+
 ?>
 
 <nav>
@@ -11,9 +14,28 @@
 </nav>
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-main-edit" role="tabpanel" aria-labelledby="nav-main-edit">
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'is_active')->checkbox(); ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"></div>
+        </div>
         <?= $form->field($model, 'name'); ?>
-        <?= $form->field($model, 'is_active')->checkbox(); ?>
         <?= $form->field($model, 'icon'); ?>
+        <?php
+        $media_params = [];
+        if ($model->media) {
+            $media_params = [
+                'values' => [$model->media_id]
+            ];
+        }
+        echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+        ?>
         <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
     </div>
 </div>

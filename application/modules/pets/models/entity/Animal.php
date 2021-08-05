@@ -2,6 +2,7 @@
 
 namespace app\modules\pets\models\entity;
 
+use app\modules\media\models\entity\Media;
 use app\modules\pets\models\helpers\AnimalHelper;
 use Yii;
 use yii\behaviors\TimestampBehavior;
@@ -14,8 +15,11 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $sort
  * @property int|null $is_active
  * @property string|null $icon
+ * @property int|null $media_id
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property Media $media
  */
 class Animal extends \yii\db\ActiveRecord
 {
@@ -30,9 +34,13 @@ class Animal extends \yii\db\ActiveRecord
     {
         return [
             [['sort'], 'default', 'value' => 500],
+
             [['is_active'], 'default', 'value' => 1],
-            [['sort', 'is_active', 'created_at', 'updated_at'], 'integer'],
+
+            [['sort', 'is_active', 'created_at', 'updated_at', 'media_id'], 'integer'],
+
             [['name', 'icon'], 'string', 'max' => 255],
+
         ];
     }
 
@@ -40,13 +48,19 @@ class Animal extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'name' => 'Name',
-            'sort' => 'Sort',
-            'is_active' => 'Is Active',
-            'icon' => 'Icon',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'name' => 'Название',
+            'sort' => 'Сортировка',
+            'is_active' => 'Активность',
+            'icon' => 'Иконка',
+            'media_id' => 'Картинка',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
     }
 
     public function extraFields()
