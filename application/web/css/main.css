@@ -16161,9 +16161,9 @@ label[for="site-form-pet-avatar"] {
         cursor: pointer; }
         .eat-calculator-config-pet__item:not(:last-child) {
           margin-right: 10px; }
-        .eat-calculator-config-pet__item input[type="checkbox"] {
+        .eat-calculator-config-pet__item input {
           display: none; }
-          .eat-calculator-config-pet__item input[type="checkbox"]:checked ~ .eat-calculator-config-pet__checked {
+          .eat-calculator-config-pet__item input:checked ~ .eat-calculator-config-pet__checked {
             display: block; }
       .eat-calculator-config-pet__checked {
         width: 25px;
@@ -16178,6 +16178,8 @@ label[for="site-form-pet-avatar"] {
         text-align: center;
         border-radius: 50%;
         display: none; }
+    .eat-calculator-config-age .filter-catalog-checkboxes__item {
+      width: 100%; }
   .eat-calculator-submit {
     width: 100%;
     font-size: 18px; }

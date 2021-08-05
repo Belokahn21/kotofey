@@ -4958,6 +4958,7 @@ var config = {
   restAcquiring: url + 'api/acquiring/',
   restAcquiringOrder: url + 'api/acquiring/order/',
   // pets
+  restAnimal: url + 'api/pets/animal/',
   restBreeds: url + 'api/pets/breed/',
   restPetCalculator: url + 'api/pets/calculate/'
 };
@@ -5802,6 +5803,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../config */ "./src/js/config.js");
 /* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Result */ "./src/js/react/EatCalculator/Result.js");
+/* harmony import */ var _FindAnimal__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./FindAnimal */ "./src/js/react/EatCalculator/FindAnimal.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5831,6 +5833,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var EatCalculator = /*#__PURE__*/function (_React$Component) {
   _inherits(EatCalculator, _React$Component);
 
@@ -5843,32 +5846,80 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      products: []
-    };
+      products: [],
+      breeds: []
+    }; // this.loadBreeds();
+
     return _this;
   }
 
   _createClass(EatCalculator, [{
+    key: "handleTyping",
+    value: function handleTyping(event) {
+      var _this2 = this;
+
+      if (this.timerEx) clearTimeout(this.timerEx);
+      var input_element = event.target;
+      this.timerEx = setTimeout(function () {
+        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_config__WEBPACK_IMPORTED_MODULE_4__.default.restBreeds + '?BreedSearchForm[name]=' + input_element.value).then(function (data) {
+          _this2.setState({
+            breeds: data
+          });
+        });
+      }, this.timerSec);
+    }
+  }, {
+    key: "setBreeds",
+    value: function setBreeds(data) {
+      this.setState({
+        breeds: data
+      });
+    }
+  }, {
+    key: "loadBreeds",
+    value: function loadBreeds() {
+      var _this3 = this;
+
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_config__WEBPACK_IMPORTED_MODULE_4__.default.restBreeds).then(function (data) {
+        _this3.setBreeds(data);
+      });
+    }
+  }, {
     key: "handleSubmitForm",
     value: function handleSubmitForm(event) {
-      var _this2 = this;
+      var _this4 = this;
 
       event.preventDefault();
       var form = event.target;
       _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.post(_config__WEBPACK_IMPORTED_MODULE_4__.default.restPetCalculator, {
         body: new FormData(form)
       }).then(function (data) {
-        console.log(data);
-
-        _this2.setState({
+        _this4.setState({
           products: data
         });
       });
     }
   }, {
+    key: "handleSelectAnimal",
+    value: function handleSelectAnimal(event) {
+      var _this5 = this;
+
+      if (this.timerEx) clearTimeout(this.timerEx);
+      var element = event.target;
+      this.timerEx = setTimeout(function () {
+        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_config__WEBPACK_IMPORTED_MODULE_4__.default.restBreeds + '?BreedSearchForm[animal_id]=' + element.value).then(function (data) {
+          _this5.setState({
+            breeds: data
+          });
+        });
+      }, this.timerSec);
+    }
+  }, {
     key: "render",
     value: function render() {
-      var products = this.state.products;
+      var _this$state = this.state,
+          products = _this$state.products,
+          breeds = _this$state.breeds;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -5880,31 +5931,9 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
         className: "eat-calculator-config-pet eat-calculator-config-col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        className: "eat-calculator-config-pet__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        name: "pet",
-        value: "102",
-        type: "checkbox"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "eat-calculator-config-pet__checked"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "fas fa-check"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: "./assets/images/pet/dog.png"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        className: "eat-calculator-config-pet__item"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        name: "pet",
-        value: "101",
-        type: "checkbox"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "eat-calculator-config-pet__checked"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-        className: "fas fa-check"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-        src: "./assets/images/pet/cat.png"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindAnimal__WEBPACK_IMPORTED_MODULE_6__.default, {
+        selectAnimal: this.handleSelectAnimal.bind(this)
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-age eat-calculator-config-col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-block"
@@ -5943,13 +5972,18 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-block"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "bread-filter-item__input",
         type: "text",
+        name: "weight",
         placeholder: "\u0412\u0435\u0441 \u0432\u0430\u0448\u0435\u0433\u043E \u043F\u0438\u0442\u043E\u043C\u0446\u0430"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-breed eat-calculator-config-col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindBreed__WEBPACK_IMPORTED_MODULE_2__.default, null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindBreed__WEBPACK_IMPORTED_MODULE_2__.default, {
+        handleTyping: this.handleTyping.bind(this),
+        breeds: breeds
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "eat-calculator-submit",
@@ -5970,6 +6004,109 @@ if (elements) {
     react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(EatCalculator, null), el);
   });
 }
+
+/***/ }),
+
+/***/ "./src/js/react/EatCalculator/FindAnimal.js":
+/*!**************************************************!*\
+  !*** ./src/js/react/EatCalculator/FindAnimal.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../config */ "./src/js/config.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+var FindAnimal = /*#__PURE__*/function (_React$Component) {
+  _inherits(FindAnimal, _React$Component);
+
+  var _super = _createSuper(FindAnimal);
+
+  function FindAnimal(props) {
+    var _this;
+
+    _classCallCheck(this, FindAnimal);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      animals: []
+    };
+
+    _this.loadAnimal();
+
+    return _this;
+  }
+
+  _createClass(FindAnimal, [{
+    key: "loadAnimal",
+    value: function loadAnimal() {
+      var _this2 = this;
+
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restAnimal + '?expand=image').then(function (data) {
+        _this2.setState({
+          animals: data
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var animals = this.state.animals;
+      var selectAnimal = this.props.selectAnimal;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, animals.map(function (element, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          className: "eat-calculator-config-pet__item",
+          key: index
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          name: "pet",
+          value: element.id,
+          type: "radio",
+          onChange: selectAnimal
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "eat-calculator-config-pet__checked"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-check"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          src: element.image
+        }));
+      }));
+    }
+  }]);
+
+  return FindAnimal;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (FindAnimal);
 
 /***/ }),
 
@@ -6028,53 +6165,17 @@ var FindBreed = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.timerEx;
     _this.timerSec = 600;
-    _this.state = {
-      breeds: []
-    };
-
-    _this.loadBreeds();
-
     return _this;
   }
 
   _createClass(FindBreed, [{
-    key: "setBreeds",
-    value: function setBreeds(data) {
-      console.log('asdad21212121');
-      this.setState({
-        breeds: data
-      });
-    }
-  }, {
-    key: "loadBreeds",
-    value: function loadBreeds() {
-      var _this2 = this;
-
-      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBreeds).then(function (data) {
-        _this2.setBreeds(data);
-      });
-    }
-  }, {
-    key: "handleTyping",
-    value: function handleTyping(event) {
-      var _this3 = this;
-
-      if (this.timerEx) clearTimeout(this.timerEx);
-      var input_element = event.target;
-      this.timerEx = setTimeout(function () {
-        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBreeds + '?BreedSearchForm[name]=' + input_element.value).then(function (data) {
-          _this3.setState({
-            breeds: data
-          });
-        });
-      }, this.timerSec);
-    }
-  }, {
     key: "render",
     value: function render() {
-      var breeds = this.state.breeds;
+      var _this$props = this.props,
+          breeds = _this$props.breeds,
+          handleTyping = _this$props.handleTyping;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindBreedForm__WEBPACK_IMPORTED_MODULE_3__.default, {
-        handleTyping: this.handleTyping.bind(this)
+        handleTyping: handleTyping
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "breed-list"
       }, breeds.map(function (el, i) {
