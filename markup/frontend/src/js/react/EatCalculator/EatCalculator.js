@@ -76,16 +76,16 @@ class EatCalculator extends React.Component {
                     <div className="eat-calculator-config-age eat-calculator-config-col">
                         <div className="eat-calculator-config-block">
                             <div className="filter-catalog-checkboxes__item">
-                                <input type="checkbox" name="age"/>
+                                <input type="checkbox" name="age" value="1" id="filter-chb-1"/>
                                 <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>До года</label>
                             </div>
                             <div className="filter-catalog-checkboxes__item">
-                                <input type="checkbox" name="age"/>
-                                <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>Больше года</label>
+                                <input type="checkbox" name="age" value="2" id="filter-chb-2"/>
+                                <label htmlFor="filter-chb-2"><i className="fas fa-paw" aria-hidden="true"/>Больше года</label>
                             </div>
                             <div className="filter-catalog-checkboxes__item">
-                                <input type="checkbox" name="age"/>
-                                <label htmlFor="filter-chb-1"><i className="fas fa-paw" aria-hidden="true"/>Старше 7 лет</label>
+                                <input type="checkbox" name="age" value="3" id="filter-chb-3"/>
+                                <label htmlFor="filter-chb-3"><i className="fas fa-paw" aria-hidden="true"/>Старше 7 лет</label>
                             </div>
                         </div>
                     </div>
