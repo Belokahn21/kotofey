@@ -114,7 +114,7 @@ VENDOR
 
                     ]);
                 }
-                return "Поставщик не указан";
+                return "<span class='red'>Поставщик не указан</span>";
             }
         ],
         [
