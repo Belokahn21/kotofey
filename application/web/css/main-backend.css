@@ -8202,6 +8202,24 @@ html, body {
   font-size: 12px;
   font-weight: bold; }
 
+.backendFormsPanel {
+  display: flex;
+  flex-direction: row; }
+  @media (max-width: 450px) {
+    .backendFormsPanel {
+      flex-direction: column; } }
+  .backendFormsPanel__form-side {
+    width: 50%;
+    padding: 10px; }
+    @media (max-width: 450px) {
+      .backendFormsPanel__form-side {
+        width: 100%; } }
+
+.vendor-tooltip {
+  cursor: help;
+  display: block;
+  text-decoration: underline; }
+
 .left-sidebar {
   width: 100%; }
   .left-sidebar-container {

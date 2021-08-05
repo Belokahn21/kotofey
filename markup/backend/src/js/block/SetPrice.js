@@ -30,13 +30,13 @@ class SetPrice {
             return false;
         }
 
-        this.purchaseInput.onchange = this.handlePurchase.bind(this);
-        this.purchaseInput.onkeyup = this.handlePurchase.bind(this);
+        if (this.purchaseInput) this.purchaseInput.onchange = this.handlePurchase.bind(this);
+        if (this.purchaseInput) this.purchaseInput.onkeyup = this.handlePurchase.bind(this);
 
-        this.discountInput.onchange = this.handleDiscount.bind(this);
-        this.discountInput.onkeyup = this.handleDiscount.bind(this);
+        if (this.discountInput) this.discountInput.onchange = this.handleDiscount.bind(this);
+        if (this.discountInput) this.discountInput.onkeyup = this.handleDiscount.bind(this);
 
-        this.applyDiscount.onclick = this.handleApply.bind(this);
+        if (this.applyDiscount) this.applyDiscount.onclick = this.handleApply.bind(this);
     }
 
     handlePurchase() {

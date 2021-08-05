@@ -6,6 +6,7 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
+use app\modules\site\models\tools\Currency;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductCategory;
@@ -90,8 +91,27 @@ $this->title = Title::show('Товары');
         [
             'attribute' => 'vendor_id',
             'filter' => ArrayHelper::map(Vendor::find()->all(), 'id', 'name'),
+            'format' => 'raw',
             'value' => function ($model) {
-                return @Vendor::findOne($model->vendor_id)->name;
+                $vendor = Vendor::findOne($model->vendor_id);
+                $currency = Currency::getInstance()->show();
+                if ($vendor) {
+                    $link = Url::to(['/vendors/vendors-backend/update', 'id' => $vendor->id]);
+                    return Html::tag('span', $vendor->name, [
+                        'class' => "vendor-tooltip",
+                        'rel' => "tooltip",
+                        'data-placement' => "left",
+                        'data-html' => "true",
+                        'data-delay' => '{ "hide": 1000 }',
+                        'title' => <<<VENDOR
+{$vendor->name}<br>
+Скидка {$vendor->discount}<br>
+Мин. закуп {$vendor->min_summary_sale}{$currency}<br>
+<a href="{$link}" target="_blank">Подробнее</a>
+VENDOR
+
+                    ]);
+                }
             }
         ],
         [

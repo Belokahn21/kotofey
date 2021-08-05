@@ -3005,11 +3005,11 @@ var SetPrice = /*#__PURE__*/function () {
         return false;
       }
 
-      this.purchaseInput.onchange = this.handlePurchase.bind(this);
-      this.purchaseInput.onkeyup = this.handlePurchase.bind(this);
-      this.discountInput.onchange = this.handleDiscount.bind(this);
-      this.discountInput.onkeyup = this.handleDiscount.bind(this);
-      this.applyDiscount.onclick = this.handleApply.bind(this);
+      if (this.purchaseInput) this.purchaseInput.onchange = this.handlePurchase.bind(this);
+      if (this.purchaseInput) this.purchaseInput.onkeyup = this.handlePurchase.bind(this);
+      if (this.discountInput) this.discountInput.onchange = this.handleDiscount.bind(this);
+      if (this.discountInput) this.discountInput.onkeyup = this.handleDiscount.bind(this);
+      if (this.applyDiscount) this.applyDiscount.onclick = this.handleApply.bind(this);
     }
   }, {
     key: "handlePurchase",
@@ -6744,7 +6744,11 @@ var config = {
   restUser: url + 'api/user/',
   // sberbank payments
   restAcquiring: url + 'api/acquiring/',
-  restAcquiringOrder: url + 'api/acquiring/order/'
+  restAcquiringOrder: url + 'api/acquiring/order/',
+  // pets
+  restAnimal: url + 'api/pets/animal/',
+  restBreeds: url + 'api/pets/breed/',
+  restPetCalculator: url + 'api/pets/calculate/'
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (config);
 
@@ -62509,6 +62513,10 @@ if (buttonToggleSlider) {
     }
   });
 }
+
+jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
+  jquery__WEBPACK_IMPORTED_MODULE_0___default()("[rel='tooltip']").tooltip();
+});
 })();
 
 // This entry need to be wrapped in an IIFE because it need to be in strict mode.

@@ -26,3 +26,27 @@
   font-size: 12px;
   font-weight: bold;
 }
+
+.backendFormsPanel {
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 450px) {
+    flex-direction: column;
+  }
+
+  &__form-side {
+    width: 50%;
+    padding: 10px;
+
+    @media (max-width: 450px) {
+      width: 100%;
+    }
+  }
+}
+
+.vendor-tooltip {
+  cursor: help;
+  display: block;
+  text-decoration: underline;
+}

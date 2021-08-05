@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import 'lightbox2';
+
 window.$ = window.jQuery = $;
 import 'popper.js';
 import 'bootstrap';
@@ -41,3 +42,6 @@ if (buttonToggleSlider) {
         }
     });
 }
+$(document).ready(function () {
+    $("[rel='tooltip']").tooltip();
+});
