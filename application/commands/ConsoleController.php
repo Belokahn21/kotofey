@@ -25,7 +25,7 @@ class ConsoleController extends Controller
             $breed->name = $dog_name->nodeValue;
             $breed->animal_id = Animal::TYPE_DOG_ID;
 
-            if ($breed->validate() && $breed->validate()) echo $dog_name->nodeValue . PHP_EOL;
+            if ($breed->validate() && $breed->save()) echo $dog_name->nodeValue . PHP_EOL;
         }
 
 
