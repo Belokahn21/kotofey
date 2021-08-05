@@ -95,6 +95,7 @@ $this->title = Title::show('Товары');
             'value' => function ($model) {
                 $vendor = Vendor::findOne($model->vendor_id);
                 $currency = Currency::getInstance()->show();
+                $purchase_html = !$vendor->min_summary_sale ?: "Мин. закуп {$vendor->min_summary_sale}{$currency} ";
                 if ($vendor) {
                     $link = Url::to(['/vendors/vendors-backend/update', 'id' => $vendor->id]);
                     return Html::tag('span', $vendor->name, [
@@ -105,8 +106,8 @@ $this->title = Title::show('Товары');
                         'data-delay' => '{ "hide": 1000 }',
                         'title' => <<<VENDOR
 {$vendor->name}<br>
-Скидка {$vendor->discount}<br>
-Мин. закуп {$vendor->min_summary_sale}{$currency}<br>
+Скидка {$vendor->discount}%<br>
+{$purchase_html}<br>
 <a href="{$link}" target="_blank">Подробнее</a>
 VENDOR
 
