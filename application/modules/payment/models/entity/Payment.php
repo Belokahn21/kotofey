@@ -22,6 +22,9 @@ use yii\behaviors\TimestampBehavior;
  */
 class Payment extends ActiveRecord
 {
+    const PAYMENT_SITE = 1;
+    const PAYMENT_CASH = 2;
+    const PAYMENT_TERMINAL = 3;
     public function rules()
     {
         return [

@@ -8,6 +8,8 @@ use yii\helpers\Url;
 use yii\widgets\ActiveForm;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\payment\models\entity\Payment;
+
 
 /* @var $models \app\modules\order\models\entity\Order[]
  * @var $model \app\modules\logistic\models\forms\LogisticForm
@@ -55,7 +57,18 @@ $this->title = Title::show("Список доставок");
                             <?php endif; ?>
                             <div class="row my-1">
                                 <div class="col-5 bold">Оплата:</div>
-                                <div class="col-7"><?= OrderHelper::getPayment($order); ?></div>
+                                <div class="col-7">
+                                    <?php if ($order->payment_id == Payment::PAYMENT_TERMINAL): ?>
+                                        <div class="logistic-payment">
+                                            <i class="fab fa-cc-visa"></i>
+                                        </div>
+                                    <?php elseif ($order->payment_id == Payment::PAYMENT_CASH): ?>
+                                        <div class="logistic-payment">
+                                            <i class="fas fa-money-bill"></i>
+                                        </div>
+                                    <?php endif; ?>
+                                    <?= OrderHelper::getPayment($order); ?>
+                                </div>
                             </div>
                             <div class="row my-1">
                                 <div class="col-5 bold">Телефон:</div>

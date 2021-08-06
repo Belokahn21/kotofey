@@ -8978,6 +8978,15 @@ html, body {
   padding: 5px;
   border: 1px rgba(0, 0, 0, 0.2) solid; }
 
+.logistic-payment {
+  color: #00BFFF;
+  display: inline-block;
+  border: 1px silver solid;
+  padding: 5px;
+  border-radius: 50%;
+  line-height: 1;
+  text-align: center; }
+
 .logistic-list {
   display: flex;
   flex-direction: column;
