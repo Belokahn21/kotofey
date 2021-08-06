@@ -149,7 +149,7 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        if ($this->is_paid) {
+        if ($this->is_paid && $this->is_close) {
             OrderHelper::minusStockCount($this);
         }
 
