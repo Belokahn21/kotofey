@@ -92,7 +92,6 @@ class OrderHelper
     {
         if (!$order->promocodeEntity) return $summ;
 
-        if (is_numeric($order->promocodeEntity->discount)) return $summ + $order->promocodeEntity->discount;
 
 
         $tmpDiscount = $order->promocodeEntity->discount;
@@ -101,7 +100,7 @@ class OrderHelper
         }
 
 
-        return $summ + round($summ * ($tmpDiscount / 100));
+        return $summ - round($summ * ($tmpDiscount / 100));
 
     }
 
