@@ -22,6 +22,7 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
  * @var $stocks \app\modules\stock\models\entity\Stocks[]
  * @var $prices \app\modules\catalog\models\entity\Price[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
+ * @var $vendors Vendor[]
  */
 
 $this->title = Title::show('Товары');
@@ -43,6 +44,7 @@ $this->title = Title::show('Товары');
     'model' => $model,
     'stocks' => $stocks,
     'prices' => $prices,
+    'vendors' => $vendors,
     'form' => $form,
     'compositions' => $compositions,
     'properties' => $properties,

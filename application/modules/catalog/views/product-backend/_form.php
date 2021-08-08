@@ -30,6 +30,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
  * @var $stocks Stocks[]
  * @var $prices \app\modules\catalog\models\entity\Price[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
+ * @var $vendors Vendor[]
  */
 
 ?>
@@ -41,9 +42,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         <a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo" aria-selected="false">SEO</a>
         <a class="nav-item nav-link" id="nav-additional-tab" data-toggle="tab" href="#nav-additional" role="tab" aria-controls="nav-additional" aria-selected="false">Условия доставки</a>
         <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
-        <a class="nav-item nav-link" id="nav-price-tab" data-toggle="tab" href="#nav-price" role="tab" aria-controls="nav-price" aria-selected="false">Цены</a>
         <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
-        <a class="nav-item nav-link" id="nav-gallery-tab" data-toggle="tab" href="#nav-gallery" role="tab" aria-controls="nav-gallery" aria-selected="false">Изображения</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
     </div>
 </nav>
@@ -51,23 +50,36 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
         <div class="row">
             <div class="col-sm-6">
-                <div class="form-element">
-                    <?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара'])->label(false); ?>
-                </div>
-                <div class="form-element">
-                    <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
-                </div>
-                <div class="form-element">
-                    <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Символьный код'])->label(false); ?>
+                <div class="row">
+                    <div class="col-sm-4"><?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара'])->label(false); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new ProductCategory())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map($vendors, 'id', 'name'), ['prompt' => 'Поставщик'])->label(false); ?></div>
                 </div>
 
-                <div class="form-element">
-                    <?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new ProductCategory())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Символьный код'])->label(false); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6"><?= $form->field($model, 'has_store')->checkbox()->label(false); ?></div>
+                    <div class="col-sm-6"><?= $form->field($model, 'vitrine')->checkbox()->label(false); ?></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <?= $form->field($model, 'code')->textInput(['placeholder' => 'Внешний код'])->label(false); ?>
+                    </div>
+
+                    <div class="col-sm-6">
+                        <?= $form->field($model, 'barcode')->textInput(['placeholder' => 'Штрих-код'])->label(false); ?>
+                    </div>
                 </div>
 
-                <div class="form-element">
-                    <?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map(Vendor::find()->all(), 'id', 'name'), ['prompt' => 'Поставщик'])->label(false); ?>
-                </div>
 
                 <div class="row">
                     <div class="col-sm-2">
@@ -103,23 +115,33 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     </div>
                 </div>
 
-                <div class="form-element">
-                    <?= $form->field($model, 'has_store')->checkbox()->label(false); ?>
-                </div>
             </div>
             <div class="col-sm-6">
-
-                <div class="form-element">
-                    <?= $form->field($model, 'code')->textInput(['placeholder' => 'Внешний код'])->label(false); ?>
-                </div>
-                <div class="form-element">
-                    <?= $form->field($model, 'barcode')->textInput(['placeholder' => 'Штрих-код'])->label(false); ?>
-                </div>
-                <div class="form-element">
-                    <?= $form->field($model, 'vitrine')->radioList(["Нет", "Да"]); ?>
-                </div>
-                <div class="form-element">
-                    <?= $form->field($model, 'threeDCode')->textarea(['rows' => 5]) ?>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="form-image single">
+                            <?php if ($model->media): ?>
+                                <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
+                                    <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
+                                        <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+                                    </a>
+                                    <br>
+                                    Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
+                                <?php else: ?>
+                                    <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+                        <?php
+                        $media_params = [];
+                        if ($model->media) {
+                            $media_params = [
+                                'values' => [$model->media_id]
+                            ];
+                        }
+                        echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -146,47 +168,51 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             <?= $form->field($model, 'feed')->textarea(['id' => 'feed-replace']); ?>
         </div>
     </div>
-    <div class="tab-pane fade" id="nav-price" role="tabpanel" aria-labelledby="nav-price-tab">
-        <?php $price_product_model = new PriceProduct(); ?>
-        <?php foreach ($prices as $count => $price): ?>
-
-            <?php $value = null; ?>
-            <?php if (!$model->isNewRecord): ?>
-                <?php $value = @PriceProduct::findOne(['product_id' => $model->id, 'price_id' => $price->id])->value; ?>
-            <?php endif; ?>
-
-            <div class="row">
-                <div class="col-12">
-                    <?= $form->field($price_product_model, '[' . $count . ']price_id')->hiddenInput(['value' => $price->id])->label(false); ?>
-                    <?= $form->field($price_product_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
-                    <?= $form->field($price_product_model, '[' . $count . ']value')->textInput([
-                        'placeholder' => $price->name,
-                        'value' => $value
-                    ])->label(Html::a($price->name, Url::to(['/admin/catalog/price-backend/update', 'id' => $price->id]), ['target' => '_blank'])); ?>
-                </div>
-            </div>
-        <?php endforeach; ?>
-    </div>
     <div class="tab-pane fade" id="nav-stock" role="tabpanel" aria-labelledby="nav-stock-tab">
-        <?php $stock_model = new ProductStock(); ?>
-        <?php foreach ($stocks as $count => $stock): ?>
+        <div class="row">
+            <div class="col-sm-6">
+                <?php $price_product_model = new PriceProduct(); ?>
+                <?php foreach ($prices as $count => $price): ?>
 
-            <?php $value = null; ?>
-            <?php if (!$model->isNewRecord): ?>
-                <?php $value = @ProductStock::findOne(['product_id' => $model->id, 'stock_id' => $stock->id])->count; ?>
-            <?php endif; ?>
+                    <?php $value = null; ?>
+                    <?php if (!$model->isNewRecord): ?>
+                        <?php $value = @PriceProduct::findOne(['product_id' => $model->id, 'price_id' => $price->id])->value; ?>
+                    <?php endif; ?>
 
-            <div class="row">
-                <div class="col-12">
-                    <?= $form->field($stock_model, '[' . $count . ']stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
-                    <?= $form->field($stock_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
-                    <?= $form->field($stock_model, '[' . $count . ']count')->textInput([
-                        'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
-                        'value' => $value
-                    ])->label(Html::a($stock->name . " (<strong>{$stock->address}</strong>)", Url::to(['/admin/stock/stock-backend/update', 'id' => $stock->id]), ['target' => '_blank'])); ?>
-                </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <?= $form->field($price_product_model, '[' . $count . ']price_id')->hiddenInput(['value' => $price->id])->label(false); ?>
+                            <?= $form->field($price_product_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                            <?= $form->field($price_product_model, '[' . $count . ']value')->textInput([
+                                'placeholder' => $price->name,
+                                'value' => $value
+                            ])->label(Html::a($price->name, Url::to(['/admin/catalog/price-backend/update', 'id' => $price->id]), ['target' => '_blank'])); ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-        <?php endforeach; ?>
+            <div class="col-sm-6">
+                <?php $stock_model = new ProductStock(); ?>
+                <?php foreach ($stocks as $count => $stock): ?>
+
+                    <?php $value = null; ?>
+                    <?php if (!$model->isNewRecord): ?>
+                        <?php $value = @ProductStock::findOne(['product_id' => $model->id, 'stock_id' => $stock->id])->count; ?>
+                    <?php endif; ?>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <?= $form->field($stock_model, '[' . $count . ']stock_id')->hiddenInput(['value' => $stock->id])->label(false); ?>
+                            <?= $form->field($stock_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                            <?= $form->field($stock_model, '[' . $count . ']count')->textInput([
+                                'placeholder' => 'Количество на ' . $stock->name . " ({$stock->address})",
+                                'value' => $value
+                            ])->label(Html::a($stock->name . " (<strong>{$stock->address}</strong>)", Url::to(['/admin/stock/stock-backend/update', 'id' => $stock->id]), ['target' => '_blank'])); ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
     <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
         <?php $composition_model = new CompositionProducts(); ?>
@@ -242,47 +268,6 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             </fieldset>
         <?php endforeach; ?>
 
-    </div>
-    <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-image single">
-                    <?php if ($model->media): ?>
-                        <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
-                            <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
-                                <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
-                            </a>
-                            <br>
-                            Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
-                        <?php else: ?>
-                            <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
-                        <?php endif; ?>
-                    <?php endif; ?>
-                </div>
-                <?php
-                $media_params = [];
-                if ($model->media) {
-                    $media_params = [
-                        'values' => [$model->media_id]
-                    ];
-                }
-                echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
-                ?>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-image more">
-                    <?php if ($model->images): ?>
-                        <?php foreach (Json::decode($model->images) as $image): ?>
-                            <img src="<?= $image; ?>" width="150">
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-                <?= $form->field($model, 'imagesFiles[]')->fileInput([
-                    'multiple' => true,
-                    'accept' => 'image/*'
-                ]); ?>
-            </div>
-        </div>
     </div>
     <div class="tab-pane fade" id="nav-additional" role="tabpanel" aria-labelledby="nav-additional-tab">
         <div class="form-title">

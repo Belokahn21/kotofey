@@ -15,6 +15,7 @@ use yii\helpers\Html;
  * @var $stocks \app\modules\stock\models\entity\Stocks[]
  * @var $prices \app\modules\catalog\models\entity\Price[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
+ * @var $vendors Vendor[]
  */
 
 $this->title = Title::show('Товары');
@@ -43,6 +44,7 @@ $this->title = Title::show('Товары');
     'model' => $model,
     'form' => $form,
     'stocks' => $stocks,
+    'vendors' => $vendors,
     'prices' => $prices,
     'properties' => $properties,
     'compositions' => $compositions,

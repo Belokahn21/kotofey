@@ -82,8 +82,8 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'vitrine', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price', 'base_price'];
 
         return $parent;

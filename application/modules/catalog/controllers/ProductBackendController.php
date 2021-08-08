@@ -9,6 +9,7 @@ use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\tool\BehaviorsRoleManager;
+use app\modules\vendors\models\entity\Vendor;
 use Yii;
 use app\modules\catalog\models\search\ProductSearchForm;
 use app\modules\site\controllers\MainBackendController;
@@ -46,6 +47,7 @@ class ProductBackendController extends MainBackendController
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
         $prices = $this->getPrices();
+        $vendors = $this->getVendors();
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -68,6 +70,7 @@ class ProductBackendController extends MainBackendController
             'model' => $model,
             'stocks' => $stocks,
             'prices' => $prices,
+            'vendors' => $vendors,
             'compositions' => $compositions,
             'properties' => $outProps,
             'modelDelivery' => $modelDelivery,
@@ -85,6 +88,7 @@ class ProductBackendController extends MainBackendController
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
         $prices = $this->getPrices();
+        $vendors = $this->getVendors();
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
@@ -103,6 +107,7 @@ class ProductBackendController extends MainBackendController
             'compositions' => $compositions,
             'stocks' => $stocks,
             'prices' => $prices,
+            'vendors' => $vendors,
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
         ]);
@@ -216,6 +221,13 @@ class ProductBackendController extends MainBackendController
     {
         return Yii::$app->cache->getOrSet('product-prices-backend', function () {
             return Price::find()->all();
+        });
+    }
+
+    private function getVendors()
+    {
+        return Yii::$app->cache->getOrSet('product-vendors-backend', function () {
+            return Vendor::find()->all();
         });
     }
 }
