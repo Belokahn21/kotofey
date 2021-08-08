@@ -122,7 +122,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                         <div class="form-image single">
                             <?php if ($model->media): ?>
                                 <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
-                                    <a target="_blank" href="<?= ProductHelper::getImageUrl($model) ?>">
+                                    <a data-lightbox="roadtrip" href="<?= ProductHelper::getImageUrl($model) ?>">
                                         <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                                     </a>
                                     <br>
