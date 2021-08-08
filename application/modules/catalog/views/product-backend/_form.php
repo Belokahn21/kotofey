@@ -245,8 +245,8 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <?php endif; ?>
 
                     <div class="row">
-                        <div class="col-3"><?= $composit->name; ?></div>
-                        <div class="col-3">
+                        <div class="col-4"><?= $composit->name; ?></div>
+                        <div class="col-4">
                             <div class="hidden">
                                 <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
                                 <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
@@ -256,7 +256,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                                 'placeholder' => $composit->name
                             ])->label(false); ?>
                         </div>
-                        <div class="col-3">
+                        <div class="col-4">
                             <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['prompt' => 'Выбрать весовку', 'options' => [$composit_element ? $composit_element->metric_id : null => ["Selected" => true]]])->label(false); ?>
                         </div>
                     </div>
