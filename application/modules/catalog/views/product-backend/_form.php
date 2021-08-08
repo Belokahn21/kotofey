@@ -121,14 +121,11 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <div class="col-sm-12">
                         <div class="form-image single">
                             <?php if ($model->media): ?>
-                                <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
-                                    <a data-lightbox="roadtrip" href="<?= ProductHelper::getImageUrl($model) ?>">
-                                        <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
-                                    </a>
-                                    <br>
-                                    Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
-                                <?php else: ?>
+                                <a data-lightbox="roadtrip" href="<?= ProductHelper::getImageUrl($model) ?>">
                                     <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
+                                </a>
+                                <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
+                                    Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
                                 <?php endif; ?>
                             <?php endif; ?>
                         </div>
