@@ -224,7 +224,7 @@ $this->title = ProductTitle::show($product->name);
     'product' => $product
 ]); ?>
 <?= VisitedProductsWidget::widget(); ?>
-<?= SpecialPromoModalWidget::widget([
+<?php /* SpecialPromoModalWidget::widget([
     'product' => $product
-]); ?>
+]); */ ?>
 
