@@ -33,7 +33,7 @@ class Module extends MainModule
             ['name' => 'Элементы состава', 'url' => Url::to(['/admin/catalog/composition-backend/index'])],
             ['name' => 'Типы элементов состава', 'url' => Url::to(['/admin/catalog/composition-type-backend/index'])],
             ['name' => 'Группы свойств', 'url' => Url::to(['/admin/catalog/product-properties-group-backend/index'])],
-            ['name' => 'Движение товара', 'url' => Url::to(['/admin/catalog/transfer-backend/index'])],
+            ['name' => 'История товара', 'url' => Url::to(['/admin/catalog/transfer-backend/index'])],
             ['name' => 'Уведомление о поступлении', 'url' => Url::to(['/admin/catalog/admission-backend/index'])],
             ['name' => 'Цены', 'url' => Url::to(['/admin/catalog/price-backend/index'])],
         ];

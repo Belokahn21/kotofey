@@ -8202,6 +8202,9 @@ html, body {
   font-size: 12px;
   font-weight: bold; }
 
+#backendFormsContent {
+  padding: 10px; }
+
 .backendFormsPanel {
   display: flex;
   flex-direction: row; }

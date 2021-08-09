@@ -5,6 +5,7 @@ namespace app\modules\order\models\entity;
 use app\modules\acquiring\models\services\ofd\OFDFermaService;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\service\BonusService;
+use app\modules\order\models\service\StockService;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\site\models\behaviors\UserEntityBehavior;
@@ -149,9 +150,10 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-        if ($this->is_paid && $this->is_close) {
-            OrderHelper::minusStockCount($this);
-        }
+
+        $ss = new StockService($this);
+        $ss->plus();
+        $ss->minus();
 
         BonusService::getInstance()->addUserBonus($this);
         if (empty($this->is_skip)) {

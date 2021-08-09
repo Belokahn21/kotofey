@@ -16,9 +16,25 @@ use yii\helpers\ArrayHelper;
 </nav>
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <?= $form->field($model, 'count'); ?>
-        <?= $form->field($model, 'reason'); ?>
-        <?= $form->field($model, 'order_id')->textInput(); ?>
-        <?= $form->field($model, 'product_id')->textInput(); ?>
+        <div class="row">
+            <div class="col-sm-3">
+                <?= $form->field($model, 'count'); ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'order_id')->textInput(); ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'product_id')->textInput(); ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'operation_id')->dropDownList($model->getOperations(), ['prompt' => 'Операция по товару']); ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'reason'); ?>
+            </div>
+        </div>
     </div>
 </div>

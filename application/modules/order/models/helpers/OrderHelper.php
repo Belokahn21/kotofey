@@ -93,7 +93,6 @@ class OrderHelper
         if (!$order->promocodeEntity) return $summ;
 
 
-
         $tmpDiscount = $order->promocodeEntity->discount;
         if (explode('%', $order->promocodeEntity->discount)) {
             $tmpDiscount = str_replace('%', '', $order->promocodeEntity->discount);
@@ -182,7 +181,7 @@ class OrderHelper
         /* @var $item OrdersItems */
         foreach ($items as $item) {
 
-            if (!$item->product or ProductTransferHistoryHelper::isStockApplyTransfer($model, $item->product)) continue;
+            if (!$item->product or ProductTransferHistoryHelper::isStockApplyMinusTransfer($model, $item->product)) continue;
 
             $product = Product::findOne($item->product->id);
 
@@ -198,12 +197,54 @@ class OrderHelper
                 exit();
             }
 
-            if ($product->update()) {
+            if ($product->update() !== false) {
                 $obj = new ProductTransferHistory();
                 $obj->order_id = $model->id;
                 $obj->count = $item->count;
                 $obj->product_id = $item->product->id;
+                $obj->operation_id = ProductTransferHistory::CONTROL_TRANSFER_MINUS;
                 $obj->reason = "Списание {$item->name} в количестве {$item->count}шт. за заказ №{$model->id} от " . date('d.m.Y');
+
+                if (!$obj->validate() || !$obj->save()) {
+                    Debug::p($obj->getErrors());
+                    exit();
+                }
+            }
+        }
+
+        return true;
+    }
+
+    public static function plusStockCount(Order $model)
+    {
+
+        if (!$items = $model->items) return false;
+
+        /* @var $item OrdersItems */
+        foreach ($items as $item) {
+
+            if (!$item->product or ProductTransferHistoryHelper::isStockApplyPlusTransfer($model, $item->product)) continue;
+
+            $product = Product::findOne($item->product->id);
+
+            if (!$product) continue;
+
+            $product->scenario = Product::SCENARIO_STOCK_COUNT;
+
+            if ($product->count > 0 && $product->count + $item->count >= 0) $product->count += $item->count;
+
+            if (!$product->validate()) {
+                print_r($product->getErrors());
+                exit();
+            }
+
+            if ($product->update() !== false) {
+                $obj = new ProductTransferHistory();
+                $obj->order_id = $model->id;
+                $obj->count = $item->count;
+                $obj->operation_id = ProductTransferHistory::CONTROL_TRANSFER_PLUS;
+                $obj->product_id = $item->product->id;
+                $obj->reason = "Приход {$item->name} в количестве {$item->count}шт. по заказу №{$model->id}";
 
                 if (!$obj->validate() || !$obj->save()) {
                     Debug::p($obj->getErrors());

@@ -41,6 +41,14 @@ $this->title = Title::show('Поступления товаров');
     'columns' => [
         'id',
         'count',
+        'reason',
+        [
+            'attribute' => 'operation_id',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::tag('div', ArrayHelper::getValue($model->getOperations(), $model->operation_id));
+            }
+        ],
         [
             'attribute' => 'order_id',
             'filter' => ArrayHelper::map($orders, 'id', 'id'),
@@ -58,16 +66,6 @@ $this->title = Title::show('Поступления товаров');
             'value' => function ($model) {
                 return Html::a(Product::findOne($model->product_id)->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $model->product_id]));
             }
-        ],
-        [
-            'attribute' => 'created_at',
-            'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
-        ],
-        [
-            'attribute' => 'updated_at',
-            'format' => ['date', 'dd.MM.YYYY'],
-            'options' => ['width' => '200']
         ],
         [
             'class' => 'yii\grid\ActionColumn',

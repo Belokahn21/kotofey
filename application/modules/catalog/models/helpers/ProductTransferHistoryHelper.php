@@ -10,8 +10,13 @@ use app\modules\order\models\entity\Order;
 
 class ProductTransferHistoryHelper
 {
-    public static function isStockApplyTransfer(Order $model, Product $product)
+    public static function isStockApplyMinusTransfer(Order $model, Product $product)
     {
-        return ProductTransferHistory::find()->where(['order_id' => $model->id, 'product_id' => $product->id])->one();
+        return ProductTransferHistory::find()->where(['order_id' => $model->id, 'product_id' => $product->id, 'operation_id' => ProductTransferHistory::CONTROL_TRANSFER_MINUS])->one();
+    }
+
+    public static function isStockApplyPlusTransfer(Order $model, Product $product)
+    {
+        return ProductTransferHistory::find()->where(['order_id' => $model->id, 'product_id' => $product->id, 'operation_id' => ProductTransferHistory::CONTROL_TRANSFER_PLUS])->one();
     }
 }
