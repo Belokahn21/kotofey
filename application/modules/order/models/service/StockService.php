@@ -17,7 +17,7 @@ class StockService
 
     public function plus()
     {
-        if ($this->_model->status == 1) {
+        if ($this->_model->status == 8) {
             OrderHelper::plusStockCount($this->_model);
         }
     }
