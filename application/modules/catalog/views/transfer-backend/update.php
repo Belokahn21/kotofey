@@ -26,6 +26,7 @@ $this->title = Title::show($model->reason);
 ?>
     <div class="title-group">
         <h1><?= $model->reason; ?></h1>
+        <?= Html::a("Удалить", Url::to(['delete', 'id' => $model->id]), ['class' => 'btn-main']) ?>
     </div>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,
@@ -34,8 +35,6 @@ $this->title = Title::show($model->reason);
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
-    'orders' => $orders,
-    'products' => $products,
 ]) ?>
 <?= Html::submitButton('Обновить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>

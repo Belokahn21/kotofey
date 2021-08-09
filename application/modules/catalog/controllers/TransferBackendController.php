@@ -49,8 +49,6 @@ class TransferBackendController extends MainBackendController
     {
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден.');
 
-        $orders = Order::find()->orderBy(['created_at' => SORT_DESC])->all();
-        $products = Product::find()->orderBy(['created_at' => SORT_DESC])->all();
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -63,8 +61,6 @@ class TransferBackendController extends MainBackendController
 
         return $this->render('update', [
             'model' => $model,
-            'orders' => $orders,
-            'products' => $products,
         ]);
     }
 
@@ -74,6 +70,6 @@ class TransferBackendController extends MainBackendController
 
         if ($model->delete()) Alert::setSuccessNotify('Элемент успешно удален.');
 
-        return $this->refresh();
+        return $this->redirect(['index']);
     }
 }

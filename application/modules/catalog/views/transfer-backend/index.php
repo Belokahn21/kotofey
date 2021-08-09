@@ -28,8 +28,6 @@ $this->title = Title::show('Поступления товаров');
 <?= $this->render('_form', [
     'model' => $model,
     'form' => $form,
-    'orders' => $orders,
-    'products' => $products,
 ]) ?>
 <?= Html::submitButton('Добавить', ['class' => 'btn-main']) ?>
 <?php ActiveForm::end(); ?>

@@ -231,7 +231,7 @@ class OrderHelper
 
             $product->scenario = Product::SCENARIO_STOCK_COUNT;
 
-            if ($product->count > 0 && $product->count + $item->count >= 0) $product->count += $item->count;
+            $product->count += $item->count;
 
             if (!$product->validate()) {
                 print_r($product->getErrors());

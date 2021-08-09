@@ -4,8 +4,6 @@ use yii\helpers\ArrayHelper;
 
 /* @var $model \app\modules\catalog\models\entity\ProductTransferHistory
  * @var $form \yii\widgets\ActiveForm
- * @var $orders \app\modules\order\models\entity\Order[]
- * @var $products \app\modules\catalog\models\entity\Product[]
  */
 
 ?>

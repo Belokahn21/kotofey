@@ -11,8 +11,11 @@ use app\modules\order\models\helpers\OrderHelper;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrderMailHistory;
+use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\widgets\BuyerInfo\BuyerInfoWidget;
+use app\modules\acquiring\models\entity\AcquiringOrderCheck;
+use app\modules\catalog\models\entity\ProductTransferHistory;
 use app\modules\order\widgets\CustomerInput\CustomerInputWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
@@ -365,12 +368,12 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                 <?= Html::a('Начислено ' . $bonus->count . ' бонуса', Url::to(['/admin/bonus/bonus-history-backend/update', 'id' => $bonus->id])); ?>
             <?php endif; ?>
 
-            <?php if ($sberPayment = \app\modules\acquiring\models\entity\AcquiringOrder::findOne(['order_id' => $model->id])): ?>
+            <?php if ($sberPayment = AcquiringOrder::findOne(['order_id' => $model->id])): ?>
                 <hr/>
                 <?= Html::a('Эквайринг транзакция: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
             <?php endif; ?>
 
-            <?php if ($check = \app\modules\acquiring\models\entity\AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
+            <?php if ($check = AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
                 <hr/>
                 <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
             <?php endif; ?>
@@ -378,6 +381,13 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
             <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
                 <hr/>
                 <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
+            <?php endif; ?>
+
+            <?php if ($transfers = ProductTransferHistory::find()->where(['order_id' => $model->id])->all()): ?>
+                <?php foreach ($transfers as $transfer): ?>
+                    <hr/>
+                    (<strong><?= ArrayHelper::getValue($transfer->getOperations(), $transfer->operation_id); ?></strong>) <?= Html::a($transfer->reason, Url::to(['/admin/catalog/transfer-backend/update', 'id' => $transfer->id])) ?>
+                <?php endforeach; ?>
             <?php endif; ?>
         </div>
     <?php endif; ?>
