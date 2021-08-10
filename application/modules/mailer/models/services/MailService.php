@@ -19,10 +19,6 @@ class MailService
         /* @var $module Module */
         $module = Yii::$app->getModule('mailer');
 
-        $dkim_private_key = $module->dkim_private_key;
-        $dkim_domain = $module->dkim_domain;
-        $dkim_selector = $module->dkim_selector;
-
         foreach ($messages as $message) {
 
             $mailer = Yii::$app->mailer->compose();
@@ -30,13 +26,9 @@ class MailService
             $mailer->setFrom([$this->replaceValues($message->from, $params) => 'Зоомагазин Котофей']);
             $mailer->setTo($this->replaceValues($message->to, $params));
             $mailer->setSubject($this->replaceValues($message->name, $params));
+            $mailer->addHeader('List-Unsubscribe', 'https://kotofey.store/unsubscribe/' . $this->replaceValues($message->to, $params));
 
             $mailer->setBcc('popugau@gmail.com');
-
-//            if (!empty($dkim_private_key) && !empty($dkim_domain) && !empty($dkim_selector)) {
-//                $signer = new \Swift_Signers_DKIMSigner(file_get_contents($dkim_private_key), $dkim_domain, $dkim_selector);
-//                $mailer->getSwiftMessage()->attachSigner($signer);
-//            }
 
             $mailer->send();
         }
