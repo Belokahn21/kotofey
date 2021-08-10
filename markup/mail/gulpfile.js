@@ -146,7 +146,7 @@ gulp.task('browser-sync', function () {
     browserSync.init({
         disable: false,
         server: {
-            baseDir: "./build"
+            baseDir: "./build/frontend"
         },
         host: 'localhost',
         port: 8006,
