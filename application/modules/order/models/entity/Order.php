@@ -134,7 +134,9 @@ class Order extends ActiveRecord
             }],
 
             // всё ниже нештатные переменные
-            [['address'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите адрес доставки'],
+            [['address'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите адрес доставки', 'when' => function ($model) {
+                return $model->payment_id != 3;
+            }],
             [['bonus'], 'integer'],
         ];
     }
