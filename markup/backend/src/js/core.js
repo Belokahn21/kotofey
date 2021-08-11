@@ -17,6 +17,7 @@ import './react/components/FindCustomer/FindCustomer';
 import './react/components/OperatorCalculator/OperatorCalculator';
 
 
+import CopyFormElement from "./block/CopyFormElement";
 import './block/CheckExistProduct';
 import './block/OrderLoadProduct';
 import './block/PhoneMask';
@@ -31,6 +32,7 @@ import SetPrice from './block/SetPrice';
 new ProductVendorFill();
 new SetPrice('.set-price');
 new CleanOrderPhone();
+new CopyFormElement();
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {

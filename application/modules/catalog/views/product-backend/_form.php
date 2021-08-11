@@ -1,7 +1,6 @@
 <?php
 
 use yii\helpers\Url;
-use yii\helpers\Json;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use mihaildev\ckeditor\CKEditor;
@@ -14,6 +13,7 @@ use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\entity\ProductToBreed;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
@@ -31,16 +31,17 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
  * @var $prices \app\modules\catalog\models\entity\Price[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
  * @var $vendors Vendor[]
+ * @var $animals \app\modules\pets\models\entity\Animal[]
+ * @var $breeds \app\modules\pets\models\entity\Breed[]
  */
 
 ?>
-<?php //= FillFromVendorWidget::widget(); ?>
 <nav>
     <div class="nav nav-tabs" id="backendForms" role="tablist">
         <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
         <a class="nav-item nav-link" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="false">Описание</a>
         <a class="nav-item nav-link" id="nav-seo-tab" data-toggle="tab" href="#nav-seo" role="tab" aria-controls="nav-seo" aria-selected="false">SEO</a>
-        <a class="nav-item nav-link" id="nav-additional-tab" data-toggle="tab" href="#nav-additional" role="tab" aria-controls="nav-additional" aria-selected="false">Условия доставки</a>
+        <a class="nav-item nav-link" id="nav-pet-tab" data-toggle="tab" href="#nav-pet" role="tab" aria-controls="nav-pet" aria-selected="false">Питомец</a>
         <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
         <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
@@ -112,6 +113,21 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                         <div class="form-element">
                             <?= $form->field($model, 'count')->textInput(['placeholder' => 'Количество'])->label(false); ?>
                         </div>
+                    </div>
+                </div>
+
+                <hr/>
+
+                <h5>Условия доставки заказа</h5>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'is_product_order')->checkbox()->label(false); ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>
+                    </div>
+                    <div class="col-sm-4">
+                        <?= $form->field($modelDelivery, 'end')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать максимальное значение']); ?>
                     </div>
                 </div>
 
@@ -266,24 +282,47 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         <?php endforeach; ?>
 
     </div>
-    <div class="tab-pane fade" id="nav-additional" role="tabpanel" aria-labelledby="nav-additional-tab">
-        <div class="form-title">
-            Условия доставки заказа
-        </div>
-        <div class="form-element">
-            <?= $form->field($model, 'is_product_order')->checkbox()->label(false); ?>
-        </div>
+    <div class="tab-pane fade" id="nav-pet" role="tabpanel" aria-labelledby="nav-pet-tab">
 
-        <div class="form-element">
+        <?php $ptb = new ProductToBreed(); ?>
+        <?php $ptb_counter = 0; ?>
+
+        <?php $ptb_models = ProductToBreed::find()->where(['product_id' => $model->id])->all() ?>
+        <?php if ($ptb_models): ?>
+            <?php foreach ($ptb_models as $ptb_counter => $ptb_model): ?>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <?= $form->field($ptb_model, '[' . $ptb_counter . ']animal_id')->dropDownList(ArrayHelper::map($animals, 'id', 'name'), ['prompt' => 'Указать животное']); ?>
+                    </div>
+                    <div class="col-sm-6">
+                        <?= $form->field($ptb_model, '[' . $ptb_counter . ']breed_id')->dropDownList(ArrayHelper::map($breeds, 'id', 'name'), ['prompt' => 'Указать породу']); ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else: ?>
             <div class="row">
                 <div class="col-sm-6">
-                    <?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>
+                    <?= $form->field($ptb, '[' . $ptb_counter . ']animal_id')->dropDownList(ArrayHelper::map($animals, 'id', 'name'), ['prompt' => 'Указать животное']); ?>
                 </div>
                 <div class="col-sm-6">
-                    <?= $form->field($modelDelivery, 'end')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать максимальное значение']); ?>
+                    <?= $form->field($ptb, '[' . $ptb_counter . ']breed_id')->dropDownList(ArrayHelper::map($breeds, 'id', 'name'), ['prompt' => 'Указать породу']); ?>
                 </div>
             </div>
+        <?php endif; ?>
+
+
+        <div class="row" style="display: none;" id="ptb-new-line">
+            <div class="col-sm-6">
+                <?= $form->field($ptb, '[#counter#]animal_id')->dropDownList(ArrayHelper::map($animals, 'id', 'name'), ['prompt' => 'Указать животное']); ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($ptb, '[#counter#]breed_id')->dropDownList(ArrayHelper::map($breeds, 'id', 'name'), ['prompt' => 'Указать породу']); ?>
+            </div>
         </div>
+
+        <div class="js-add-new-line-area"></div>
+        <button class="js-add-new-line-item" type="button" data-target="#ptb-new-line" data-counter="<?= $ptb_counter; ?>">+</button>
+
 
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">

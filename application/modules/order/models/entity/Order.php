@@ -2,21 +2,19 @@
 
 namespace app\modules\order\models\entity;
 
-use app\modules\acquiring\models\services\ofd\OFDFermaService;
+use yii\db\ActiveRecord;
+use yii\helpers\ArrayHelper;
+use yii\behaviors\TimestampBehavior;
+use app\modules\user\models\entity\User;
+use app\modules\user\models\entity\UserBilling;
+use app\modules\user\models\helpers\UserHelper;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\service\BonusService;
 use app\modules\order\models\service\StockService;
-use app\modules\payment\models\entity\Payment;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\site\models\behaviors\UserEntityBehavior;
-use app\modules\user\models\entity\User;
-use app\modules\user\models\entity\UserBilling;
-use app\modules\order\models\helpers\OrderHelper;
-use app\modules\user\models\helpers\UserHelper;
-use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
-use yii\helpers\ArrayHelper;
+use app\modules\acquiring\models\services\ofd\OFDFermaService;
 
 /**
  * Order model

@@ -7,6 +7,8 @@ use app\modules\catalog\models\entity\Price;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
+use app\modules\pets\models\entity\Animal;
+use app\modules\pets\models\entity\Breed;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\modules\vendors\models\entity\Vendor;
@@ -48,6 +50,8 @@ class ProductBackendController extends MainBackendController
         $stocks = $this->getStocks();
         $prices = $this->getPrices();
         $vendors = $this->getVendors();
+        $animals = $this->getAnimals();
+        $breeds = $this->getBreeds();
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
@@ -71,6 +75,8 @@ class ProductBackendController extends MainBackendController
             'stocks' => $stocks,
             'prices' => $prices,
             'vendors' => $vendors,
+            'animals' => $animals,
+            'breeds' => $breeds,
             'compositions' => $compositions,
             'properties' => $outProps,
             'modelDelivery' => $modelDelivery,
@@ -89,6 +95,8 @@ class ProductBackendController extends MainBackendController
         $stocks = $this->getStocks();
         $prices = $this->getPrices();
         $vendors = $this->getVendors();
+        $animals = $this->getAnimals();
+        $breeds = $this->getBreeds();
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
@@ -108,6 +116,8 @@ class ProductBackendController extends MainBackendController
             'stocks' => $stocks,
             'prices' => $prices,
             'vendors' => $vendors,
+            'animals' => $animals,
+            'breeds' => $breeds,
             'modelDelivery' => $modelDelivery,
             'properties' => $outProps,
         ]);
@@ -121,6 +131,8 @@ class ProductBackendController extends MainBackendController
         $compositions = $this->getCompositions();
         $stocks = $this->getStocks();
         $prices = $this->getPrices();
+        $animals = $this->getAnimals();
+        $breeds = $this->getBreeds();
         $outProps = [];
         foreach ($properties as $prop) {
             $outProps[$prop->group_id][] = $prop;
@@ -153,6 +165,8 @@ class ProductBackendController extends MainBackendController
             'properties' => $outProps,
             'stocks' => $stocks,
             'prices' => $prices,
+            'animals' => $animals,
+            'breeds' => $breeds,
             'compositions' => $compositions,
         ]);
     }
@@ -228,6 +242,20 @@ class ProductBackendController extends MainBackendController
     {
         return Yii::$app->cache->getOrSet('product-vendors-backend', function () {
             return Vendor::find()->all();
+        });
+    }
+
+    private function getAnimals()
+    {
+        return Yii::$app->cache->getOrSet('product-animals-backend', function () {
+            return Animal::find()->all();
+        });
+    }
+
+    private function getBreeds()
+    {
+        return Yii::$app->cache->getOrSet('product-breeds-backend', function () {
+            return Breed::find()->all();
         });
     }
 }

@@ -10,6 +10,7 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\ProductPriceHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\models\helpers\ProductStockHelper;
+use app\modules\catalog\models\helpers\ProductToBreadHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
@@ -201,6 +202,7 @@ class Product extends \yii\db\ActiveRecord
                     ProductStockHelper::saveItems($this->id);
                     CompositionProductHelper::saveItems($this->id);
                     ProductPriceHelper::saveItems($this->id);
+                    ProductToBreadHelper::saveItems($this->id);
 
                     if ($this->is_product_order == true) {
                         $productOrder = new ProductOrder();
@@ -237,9 +239,11 @@ class Product extends \yii\db\ActiveRecord
                     }
 
                     if ($this->properties) ProductPropertiesValuesHelper::saveProductProperties($this->properties, $this->id);
+
                     ProductStockHelper::saveItems($this->id);
                     CompositionProductHelper::saveItems($this->id);
                     ProductPriceHelper::saveItems($this->id);
+                    ProductToBreadHelper::saveItems($this->id);
 
                     $transaction->commit();
                     return true;

@@ -2802,6 +2802,75 @@ var ConvertDate = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/block/CopyFormElement.js":
+/*!*****************************************!*\
+  !*** ./src/js/block/CopyFormElement.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+var CopyFormElement = /*#__PURE__*/function () {
+  function CopyFormElement() {
+    _classCallCheck(this, CopyFormElement);
+
+    this.button_add_new = document.querySelector('.js-add-new-line-item');
+    this.area_new_insert = document.querySelector('.js-add-new-line-area');
+    this.target_key = 0;
+    this.counter = 0;
+    this.initEvents();
+  }
+
+  _createClass(CopyFormElement, [{
+    key: "initEvents",
+    value: function initEvents() {
+      if (this.button_add_new) this.button_add_new.onclick = this.handleClick.bind(this);
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(event) {
+      var _this = this;
+
+      var element = event.target;
+      this.target_key = element.getAttribute('data-target');
+      this.counter = parseInt(element.getAttribute('data-counter'));
+      if (this.target_key.length === 0) return false;
+      var targetCopyElement = document.querySelector(this.target_key).cloneNode(true);
+      if (!targetCopyElement) return false;
+      targetCopyElement.removeAttribute('style');
+      this.counter++;
+      targetCopyElement.querySelectorAll('[name]').forEach(function (el) {
+        _this.getNewName(el);
+      });
+      if (this.area_new_insert) this.area_new_insert.appendChild(targetCopyElement);
+    }
+  }, {
+    key: "getNewName",
+    value: function getNewName(element) {
+      var old_name = element.getAttribute('name');
+      var new_name = old_name.replace('#counter#', this.counter);
+      element.setAttribute('name', new_name);
+    }
+  }]);
+
+  return CopyFormElement;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (CopyFormElement);
+
+/***/ }),
+
 /***/ "./src/js/block/OrderLoadProduct.js":
 /*!******************************************!*\
   !*** ./src/js/block/OrderLoadProduct.js ***!
@@ -62459,21 +62528,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _react_components_MediaBrowser_MediaBrowser__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./react/components/MediaBrowser/MediaBrowser */ "./src/js/react/components/MediaBrowser/MediaBrowser.js");
 /* harmony import */ var _react_components_FindCustomer_FindCustomer__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./react/components/FindCustomer/FindCustomer */ "./src/js/react/components/FindCustomer/FindCustomer.js");
 /* harmony import */ var _react_components_OperatorCalculator_OperatorCalculator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./react/components/OperatorCalculator/OperatorCalculator */ "./src/js/react/components/OperatorCalculator/OperatorCalculator.js");
-/* harmony import */ var _block_CheckExistProduct__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./block/CheckExistProduct */ "./src/js/block/CheckExistProduct.js");
-/* harmony import */ var _block_CheckExistProduct__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(_block_CheckExistProduct__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _block_OrderLoadProduct__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./block/OrderLoadProduct */ "./src/js/block/OrderLoadProduct.js");
-/* harmony import */ var _block_PhoneMask__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./block/PhoneMask */ "./src/js/block/PhoneMask.js");
-/* harmony import */ var _block_PhoneMask__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(_block_PhoneMask__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _block_notify__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./block/notify */ "./src/js/block/notify.js");
-/* harmony import */ var _block_notify__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_block_notify__WEBPACK_IMPORTED_MODULE_15__);
-/* harmony import */ var _block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./block/CleanOrderPhone */ "./src/js/block/CleanOrderPhone.js");
-/* harmony import */ var _block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_16__);
-/* harmony import */ var _include_datepicker__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./include/datepicker */ "./src/js/include/datepicker.js");
-/* harmony import */ var _include_other_jquery__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./include/other-jquery */ "./src/js/include/other-jquery.js");
-/* harmony import */ var _include_other_jquery__WEBPACK_IMPORTED_MODULE_18___default = /*#__PURE__*/__webpack_require__.n(_include_other_jquery__WEBPACK_IMPORTED_MODULE_18__);
-/* harmony import */ var _include_maskedinput__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./include/maskedinput */ "./src/js/include/maskedinput.js");
-/* harmony import */ var _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./block/ProductVendorFill */ "./src/js/block/ProductVendorFill.js");
-/* harmony import */ var _block_SetPrice__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/SetPrice */ "./src/js/block/SetPrice.js");
+/* harmony import */ var _block_CopyFormElement__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./block/CopyFormElement */ "./src/js/block/CopyFormElement.js");
+/* harmony import */ var _block_CheckExistProduct__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./block/CheckExistProduct */ "./src/js/block/CheckExistProduct.js");
+/* harmony import */ var _block_CheckExistProduct__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(_block_CheckExistProduct__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _block_OrderLoadProduct__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./block/OrderLoadProduct */ "./src/js/block/OrderLoadProduct.js");
+/* harmony import */ var _block_PhoneMask__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./block/PhoneMask */ "./src/js/block/PhoneMask.js");
+/* harmony import */ var _block_PhoneMask__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(_block_PhoneMask__WEBPACK_IMPORTED_MODULE_15__);
+/* harmony import */ var _block_notify__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./block/notify */ "./src/js/block/notify.js");
+/* harmony import */ var _block_notify__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(_block_notify__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var _block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./block/CleanOrderPhone */ "./src/js/block/CleanOrderPhone.js");
+/* harmony import */ var _block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _include_datepicker__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./include/datepicker */ "./src/js/include/datepicker.js");
+/* harmony import */ var _include_other_jquery__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./include/other-jquery */ "./src/js/include/other-jquery.js");
+/* harmony import */ var _include_other_jquery__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_include_other_jquery__WEBPACK_IMPORTED_MODULE_19__);
+/* harmony import */ var _include_maskedinput__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./include/maskedinput */ "./src/js/include/maskedinput.js");
+/* harmony import */ var _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/ProductVendorFill */ "./src/js/block/ProductVendorFill.js");
+/* harmony import */ var _block_SetPrice__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./block/SetPrice */ "./src/js/block/SetPrice.js");
 
 
 window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
@@ -62499,9 +62569,11 @@ window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
 
 
-new _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_20__.default();
-new _block_SetPrice__WEBPACK_IMPORTED_MODULE_21__.default('.set-price');
-new (_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_16___default())();
+
+new _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_21__.default();
+new _block_SetPrice__WEBPACK_IMPORTED_MODULE_22__.default('.set-price');
+new (_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_17___default())();
+new _block_CopyFormElement__WEBPACK_IMPORTED_MODULE_12__.default();
 var buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 
 if (buttonToggleSlider) {
