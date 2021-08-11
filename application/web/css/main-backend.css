@@ -8962,19 +8962,19 @@ html, body {
       font-weight: bold;
       margin-right: 5px; }
 
-.form-finds__setup {
+.form-finds__setup, .add-new-line-button {
   border: 1px solid grey;
   display: inline-block;
-  width: 30px;
-  height: 30px;
+  width: calc(1.5em + 0.75rem + 2px);
+  height: calc(1.5em + 0.75rem + 2px);
   text-align: center;
   cursor: pointer;
   border-radius: 3px;
-  line-height: 28px;
+  line-height: 2;
   margin-left: 3px;
-  transition: 0.3s background-color ease-in-out; }
-  .form-finds__setup:hover {
-    background: rgba(0, 0, 0, 0.1); }
+  transition: 0.3s all ease-in-out; }
+  .form-finds__setup:hover, .add-new-line-button:hover {
+    border-color: #00BFFF; }
 
 .form-finds__input {
   width: 100%;

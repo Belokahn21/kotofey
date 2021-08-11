@@ -320,8 +320,8 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             </div>
         </div>
 
-        <div class="js-add-new-line-area"></div>
-        <button class="js-add-new-line-item" type="button" data-target="#ptb-new-line" data-counter="<?= $ptb_counter; ?>">+</button>
+        <div class="js-add-new-line-area "></div>
+        <div class="js-add-new-line-item add-new-line-button" data-target="#ptb-new-line" data-counter="<?= $ptb_counter; ?>">+</div>
 
 
     </div>
