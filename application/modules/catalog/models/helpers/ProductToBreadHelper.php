@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\helpers;
 
+use app\modules\pets\models\entity\Breed;
 use Yii;
 use app\modules\catalog\models\entity\ProductToBreed;
 use app\modules\site\models\tools\Debug;
@@ -34,5 +35,16 @@ class ProductToBreadHelper
             }
         }
         return true;
+    }
+
+    public static function getGroupedItems()
+    {
+        $result = [];
+
+        foreach (Breed::find()->all() as $breed) {
+            $result[$breed->animal->name][$breed->id] = $breed->name;
+        }
+
+        return $result;
     }
 }

@@ -19,6 +19,7 @@ use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\CompositionProducts;
 use app\modules\catalog\models\entity\TypeProductProperties;
+use app\modules\catalog\models\helpers\ProductToBreadHelper;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
@@ -305,7 +306,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <?= $form->field($ptb, '[' . $ptb_counter . ']animal_id')->dropDownList(ArrayHelper::map($animals, 'id', 'name'), ['prompt' => 'Указать животное']); ?>
                 </div>
                 <div class="col-sm-6">
-                    <?= $form->field($ptb, '[' . $ptb_counter . ']breed_id')->dropDownList(ArrayHelper::map($breeds, 'id', 'name'), ['prompt' => 'Указать породу']); ?>
+                    <?= $form->field($ptb, '[' . $ptb_counter . ']breed_id')->dropDownList(ProductToBreadHelper::getGroupedItems(), ['prompt' => 'Указать породу']); ?>
                 </div>
             </div>
         <?php endif; ?>
@@ -316,7 +317,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                 <?= $form->field($ptb, '[#counter#]animal_id')->dropDownList(ArrayHelper::map($animals, 'id', 'name'), ['prompt' => 'Указать животное']); ?>
             </div>
             <div class="col-sm-6">
-                <?= $form->field($ptb, '[#counter#]breed_id')->dropDownList(ArrayHelper::map($breeds, 'id', 'name'), ['prompt' => 'Указать породу']); ?>
+                <?= $form->field($ptb, '[#counter#]breed_id')->dropDownList(ProductToBreadHelper::getGroupedItems(), ['prompt' => 'Указать породу']); ?>
             </div>
         </div>
 

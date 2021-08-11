@@ -15,6 +15,8 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $animal_id
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property Animal $animal
  */
 class Breed extends \yii\db\ActiveRecord
 {
@@ -52,5 +54,10 @@ class Breed extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function getAnimal()
+    {
+        return $this->hasOne(Animal::className(), ['id' => 'animal_id']);
     }
 }
