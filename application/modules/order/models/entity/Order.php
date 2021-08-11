@@ -6,6 +6,7 @@ use app\modules\acquiring\models\services\ofd\OFDFermaService;
 use app\modules\bonus\models\helper\BonusHelper;
 use app\modules\bonus\models\service\BonusService;
 use app\modules\order\models\service\StockService;
+use app\modules\payment\models\entity\Payment;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\promocode\models\events\Manegment;
 use app\modules\site\models\behaviors\UserEntityBehavior;
@@ -135,7 +136,7 @@ class Order extends ActiveRecord
 
             // всё ниже нештатные переменные
             [['address'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите адрес доставки', 'when' => function ($model) {
-                return $model->payment_id != 3;
+                return $model->delivery_id != 3;
             }],
             [['bonus'], 'integer'],
         ];
