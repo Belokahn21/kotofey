@@ -11,7 +11,9 @@ use yii\grid\GridView;
 
 $this->title = Title::show("Свойства товаров"); ?>
     <section>
-        <h1 class="title">Свойства товаров</h1>
+        <div class="title-group">
+            <h1>Свойства товаров</h1>
+        </div>
         <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
         <?= $this->render('_form', [
             'model' => $model,

@@ -6,6 +6,7 @@ use app\modules\seo\models\tools\Title;
 use yii\helpers\Url;
 
 /* @var $categories \app\modules\catalog\models\entity\ProductCategory[] */
+/* @var $model  \app\modules\catalog\models\entity\ProductCategory */
 
 $this->title = Title::show("Раздел: " . $model->name); ?>
 <section>

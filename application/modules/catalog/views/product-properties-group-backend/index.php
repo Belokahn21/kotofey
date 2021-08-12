@@ -9,23 +9,22 @@ use yii\grid\GridView;
 /* @var $model \app\modules\catalog\models\entity\PropertyGroup */
 
 $this->title = Title::show("Группы свойств"); ?>
-    <section>
+    <div class="title-group">
         <h1 class="title">Группы свойств</h1>
-        <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-        <?= $this->render('_form', [
-            'model' => $model,
-            'form' => $form,
-        ]); ?>
-        <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-        <?php ActiveForm::end(); ?>
-    </section>
+    </div>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?= $this->render('_form', [
+    'model' => $model,
+    'form' => $form,
+]); ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?php ActiveForm::end(); ?>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'emptyText' => 'Группы свойств отсутствуют',
     'columns' => [
         'id',
-
         [
             'attribute' => 'is_active',
             'filter' => ['Не активен', 'Активен'],

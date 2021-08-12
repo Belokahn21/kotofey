@@ -203,7 +203,7 @@ $config = [
                 'catalog/<id[A-Za-z-\/\d_]+>/<page>' => 'catalog/catalog/index',
                 'catalog/<id[A-Za-z-\/\d_]+>' => 'catalog/catalog/index',
 
-                'ajax/exist' => 'ajax/exist',
+                'ajax/exist' => 'catalog/ajax/exist',
                 'ajax/mark/<mark:\d+>' => 'site/ajax/save-product-mark',
                 'test' => 'site/site/test',
                 'admin/catalog-fill' => 'catalog/ajax/catalog-fill-from-vendor',

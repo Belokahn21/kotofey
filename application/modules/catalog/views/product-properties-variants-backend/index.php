@@ -16,7 +16,6 @@ use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
  */
 
 $this->title = Title::show("Значения свойств"); ?>
-
     <div class="title-group">
         <h1>Значения справочников</h1>
     </div>
