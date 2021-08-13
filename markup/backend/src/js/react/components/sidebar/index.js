@@ -20,7 +20,7 @@ class Sidebar extends React.Component {
                     <div className="bottom-menu">
                         <a className="bottom-menu__item" href="/logout/"><i className="fas fa-sign-out-alt"/></a>
                         <a className="bottom-menu__item" href="/cache/"><i className="fas fa-sync-alt"/></a>
-                        <a className="bottom-menu__item" href="/admin/site/settings-backend/"><i className="fas fa-sliders-h"/></a>
+                        <a className="bottom-menu__item" href="/admin/site_settings/settings-backend/"><i className="fas fa-sliders-h"/></a>
                         <a className="bottom-menu__item" href="/profile/"><i className="fas fa-user-cog"/></a>
                     </div>
                 </div>

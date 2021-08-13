@@ -211,7 +211,7 @@ class NotifyService
             'ORDER_ID' => $order->id,
             'ORDER_LINK' => System::fullSiteUrl() . "/profile/order/{$order->id}/",
             'SITE_LINK' => System::fullSiteUrl(),
-            'SITE_NAME' => 'Интернет-зоомагазин Котофей',
+            'SITE_NAME' => SiteSettings::getValueByCode('site_name'),
             'ORDER_ITEMS' => call_user_func(function () use ($order) {
                 /* @var $order Order */
                 $html = '<tr style="background-color: #e6e6e6;"><td width="55%" style="text-align:left; padding: 5px;">Наименование</td><td style="padding: 5px;" width="15%">Количество</td><td style="padding: 5px;" width="15%">Цена за шт.</td><td style="padding: 5px;" width="15%">Итого</td></tr>';
@@ -225,8 +225,6 @@ class NotifyService
 
                     $html .= "<tr><td style='text-align:left; padding: 5px;'>{$item->name}</td><td style='padding: 5px;'>{$item->count}</td><td style='padding: 5px;'>{$price}{$currency}</td><td style='padding: 5px;'>{$summ}{$currency}</td></tr>";
                 }
-
-//                $html .= "<tr style='background-color: #e6e6e6;'><td style='text-align:left; padding: 5px;'>Доставка заказа {$order->dateDelivery->date}, время {$order->dateDelivery->date}</td><td style='text-align:center; padding: 5px;' colspan='2'>Итого к оплате</td><td>" . PriceTool::format($total) . "{$currency}</td></tr>";
 
                 return $html;
             }),
