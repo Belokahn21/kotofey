@@ -74,4 +74,9 @@ class Price extends \yii\db\ActiveRecord
             'updated_at' => 'Дата обновления',
         ];
     }
+
+    public static function findOneByCode(string $code)
+    {
+        return static::findOne(['code' => $code]);
+    }
 }
