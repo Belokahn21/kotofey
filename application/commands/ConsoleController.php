@@ -24,12 +24,15 @@ class ConsoleController extends Controller
                 'base' => 'base_price',
             ];
 
+
+            PriceProduct::deleteAll();
             foreach ($priceList as $key => $value) {
                 $price_tmp = Price::findOneByCode($key);
                 $value = $product->{$priceList[$key]};
                 if ($price_tmp && !empty($value)) {
                     $purchase = new PriceProduct();
                     $purchase->price_id = $price_tmp->id;
+                    $purchase->product_id = $product->id;
                     $purchase->value = $product->{$priceList[$key]};
                     if ($purchase->validate() && $purchase->save()) {
                         echo $price_tmp->name . PHP_EOL;
