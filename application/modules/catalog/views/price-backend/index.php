@@ -35,6 +35,7 @@ $this->title = 'Цены';
         'is_active',
         'is_main',
         'name',
+        'code',
         'sort',
         [
             'class' => 'yii\grid\ActionColumn',

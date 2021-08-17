@@ -2,7 +2,9 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\modules\site\models\tools\Debug;
 use Yii;
+use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
 
 /**
@@ -10,6 +12,7 @@ use yii\behaviors\TimestampBehavior;
  *
  * @property int $id
  * @property string|null $name
+ * @property string $code
  * @property int|null $is_active
  * @property int|null $is_main
  * @property int|null $sort
@@ -22,6 +25,13 @@ class Price extends \yii\db\ActiveRecord
     {
         return [
             TimestampBehavior::className(),
+            [
+                'class' => SluggableBehavior::className(),
+                'attribute' => 'name',
+                'slugAttribute' => 'code',
+                'ensureUnique' => true,
+                'immutable' => true
+            ],
         ];
     }
 
@@ -30,7 +40,15 @@ class Price extends \yii\db\ActiveRecord
         return [
             [['is_main'], 'default', 'value' => 0],
             ['is_main', function ($attribute, $params) {
-                if ($model = Price::findOne([$attribute => 1])) $this->addError($attribute, 'Основная цена должна быть только одна!(Текущая: (id:' . $model->id . ') ' . $model->name . ')');
+
+                if ((int)$this->is_main == 1) {
+                    if ($model = Price::findOne([$attribute => 1])) {
+
+                        if ($model->id !== $this->id) {
+                            $this->addError($attribute, 'Основная цена должна быть только одна!(Текущая: (id:' . $model->id . ') ' . $model->name . ')');
+                        }
+                    }
+                }
             }],
 
             [['is_active'], 'default', 'value' => 1],
@@ -39,7 +57,7 @@ class Price extends \yii\db\ActiveRecord
 
             [['is_active', 'is_main', 'sort', 'created_at', 'updated_at'], 'integer'],
 
-            [['name'], 'string', 'max' => 255],
+            [['name', 'code'], 'string', 'max' => 255],
         ];
     }
 
@@ -48,6 +66,7 @@ class Price extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'name' => 'Название',
+            'code' => 'Символьный код',
             'is_active' => 'Активность',
             'is_main' => 'Основаная цена',
             'sort' => 'Сортировка',

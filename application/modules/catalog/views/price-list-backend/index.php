@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\site\models\tools\Debug;
-use app\modules\catalog\models\helpers\PriceHelper;
+use app\modules\catalog\models\helpers\PriceListHelper;
 
 /* @var \app\modules\vendors\models\entity\Vendor[] $vendors */
 /* @var $model \app\modules\catalog\models\form\PriceUpdateForm */
@@ -52,7 +52,7 @@ $this->title = \app\modules\seo\models\tools\Title::show('Обновить пр�
                     <?= $form->field($model, 'type_price')->dropDownList($model->getTypePrice(), ['prompt' => 'Указать типа цены в прайсе']); ?>
                 </div>
                 <div class="col-3">
-                    <?= $form->field($model, 'related_key_filter')->dropDownList(PriceHelper::getModelKeys(), ['prompt' => 'Свойство ключевое']); ?>
+                    <?= $form->field($model, 'related_key_filter')->dropDownList(PriceListHelper::getModelKeys(), ['prompt' => 'Свойство ключевое']); ?>
                 </div>
                 <div class="col-3"></div>
                 <div class="col-3"></div>

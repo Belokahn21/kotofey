@@ -178,7 +178,7 @@ class Order extends ActiveRecord
             (new Manegment())->applyCodeToUser($this);
         }
 
-        return parent::afterSave($insert, $changedAttributes);
+        parent::afterSave($insert, $changedAttributes);
     }
 
     public function beforeValidate()

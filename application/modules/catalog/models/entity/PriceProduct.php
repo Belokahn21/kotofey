@@ -13,6 +13,8 @@ use Yii;
  * @property int|null $value
  * @property int|null $created_at
  * @property int|null $updated_at
+ *
+ * @property Price $price
  */
 class PriceProduct extends \yii\db\ActiveRecord
 {
@@ -33,5 +35,10 @@ class PriceProduct extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public function getPrice()
+    {
+        return $this->hasOne(Price::className(), ['id' => 'price_id']);
     }
 }

@@ -15,8 +15,9 @@
             <div class="col-3"><?= $form->field($model, 'is_main')->checkbox(); ?></div>
         </div>
         <div class="row">
-            <div class="col-6"><?= $form->field($model, 'name')->textInput(); ?></div>
-            <div class="col-6"><?= $form->field($model, 'sort')->textInput(); ?></div>
+            <div class="col-4"><?= $form->field($model, 'name')->textInput(); ?></div>
+            <div class="col-4"><?= $form->field($model, 'code')->textInput(); ?></div>
+            <div class="col-4"><?= $form->field($model, 'sort')->textInput(); ?></div>
         </div>
     </div>
 </div>

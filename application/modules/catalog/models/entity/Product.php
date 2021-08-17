@@ -6,6 +6,7 @@ use app\modules\catalog\models\behaviors\ArticleBehavior;
 use app\modules\catalog\models\behaviors\ElasticSearchBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\helpers\CompositionProductHelper;
+use app\modules\catalog\models\helpers\PriceHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\ProductPriceHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
@@ -322,8 +323,17 @@ class Product extends \yii\db\ActiveRecord
         return $this->hasOne(Media::className(), ['id' => 'media_id']);
     }
 
+    public function getPurchase()
+    {
+        $price = PriceHelper::getPriceByCode($this->id, 'purchase');
+        if ($price) return $price->value;
+        return $this->purchase;
+    }
+
     public function getPrice()
     {
+        $price = PriceHelper::getPriceByCode($this->id, 'sale');
+        if ($price) return $price->value;
         return $this->price;
     }
 
