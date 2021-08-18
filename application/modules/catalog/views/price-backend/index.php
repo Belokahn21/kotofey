@@ -14,7 +14,7 @@ $this->title = 'Цены';
 ?>
     <div class="title-group">
         <h1>Цены</h1>
-        <?= Html::a('Цены товаров', Url::to(['price-product-backend/index'])); ?>
+        <?= Html::a('Цены товаров', Url::to(['price-product-backend/index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,
