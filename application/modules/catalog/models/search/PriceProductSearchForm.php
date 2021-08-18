@@ -2,7 +2,6 @@
 
 namespace app\modules\catalog\models\search;
 
-use app\modules\catalog\models\entity\Price;
 use app\modules\catalog\models\entity\PriceProduct;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -12,7 +11,7 @@ class PriceProductSearchForm extends PriceProduct
 
     public static function tableName()
     {
-        return Price::tableName();
+        return PriceProduct::tableName();
     }
 
     public function rules()

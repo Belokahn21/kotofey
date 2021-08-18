@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\entity;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "price_product".
@@ -18,10 +19,18 @@ use Yii;
  */
 class PriceProduct extends \yii\db\ActiveRecord
 {
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
     public function rules()
     {
         return [
             [['price_id', 'product_id', 'value', 'created_at', 'updated_at'], 'integer'],
+            [['price_id', 'product_id', 'value',], 'required'],
         ];
     }
 

@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\controllers;
 
+use app\modules\catalog\models\search\PriceProductSearchForm;
 use Yii;
 use yii\web\HttpException;
 use yii\widgets\ActiveForm;
@@ -9,14 +10,14 @@ use app\widgets\notification\Alert;
 use app\modules\catalog\models\entity\PriceProduct;
 use app\modules\site\controllers\MainBackendController;
 
-class PriceProductController extends MainBackendController
+class PriceProductBackendController extends MainBackendController
 {
     public $modelClass = 'app\modules\catalog\models\entity\PriceProduct';
 
     public function actionIndex()
     {
         $model = new $this->modelClass();
-        $searchModel = new PriceProduct();
+        $searchModel = new PriceProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {

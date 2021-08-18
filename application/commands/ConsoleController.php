@@ -26,16 +26,21 @@ class ConsoleController extends Controller
 
 
             PriceProduct::deleteAll();
-            foreach ($priceList as $key => $value) {
+            foreach ($priceList as $key => $code) {
                 $price_tmp = Price::findOneByCode($key);
                 $value = $product->{$priceList[$key]};
                 if ($price_tmp && !empty($value)) {
                     $purchase = new PriceProduct();
                     $purchase->price_id = $price_tmp->id;
                     $purchase->product_id = $product->id;
-                    $purchase->value = $product->{$priceList[$key]};
-                    if ($purchase->validate() && $purchase->save()) {
-                        echo $price_tmp->name . PHP_EOL;
+                    $purchase->value = $value;
+                    if (!empty($purchase->product_id) && $purchase->validate() && $purchase->save()) {
+//                        echo $price_tmp->name . PHP_EOL;
+//                        echo $purchase->id . PHP_EOL;
+
+//                        Debug::p($purchase);
+                    } else {
+                        Debug::p($purchase->getErrors());
                     }
                 }
             }
