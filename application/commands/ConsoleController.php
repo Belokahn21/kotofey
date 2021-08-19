@@ -15,17 +15,16 @@ class ConsoleController extends Controller
     public function actionRun()
     {
         $products = Product::find()->all();
+        \Yii::$app->db->createCommand('truncate table `price_product`')->execute();
+
 
         foreach ($products as $product) {
-
             $priceList = [
                 'purchase' => 'purchase',
                 'sale' => 'price',
                 'base' => 'base_price',
             ];
 
-
-            PriceProduct::deleteAll();
             foreach ($priceList as $key => $code) {
                 $price_tmp = Price::findOneByCode($key);
                 $value = $product->{$priceList[$key]};
@@ -35,10 +34,8 @@ class ConsoleController extends Controller
                     $purchase->product_id = $product->id;
                     $purchase->value = $value;
                     if (!empty($purchase->product_id) && $purchase->validate() && $purchase->save()) {
-//                        echo $price_tmp->name . PHP_EOL;
-//                        echo $purchase->id . PHP_EOL;
-
-//                        Debug::p($purchase);
+                        Debug::p($purchase->id . '-' . $purchase->product_id . '-' . $purchase->price_id . '-' . $purchase->value);
+                        echo PHP_EOL;
                     } else {
                         Debug::p($purchase->getErrors());
                     }
