@@ -29,6 +29,7 @@ class Module extends MainModule
     {
         return [
             ['name' => 'Доставки', 'url' => Url::to(['/admin/delivery/delivery-backend/index'])],
+            ['name' => 'Транспортные компании', 'url' => Url::to(['/admin/delivery/services-backend/index'])],
         ];
     }
 

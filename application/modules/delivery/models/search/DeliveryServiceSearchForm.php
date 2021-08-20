@@ -2,15 +2,16 @@
 
 namespace app\modules\delivery\models\search;
 
-use app\modules\delivery\models\entity\Delivery;
+use app\modules\delivery\models\entity\DeliveryService;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class DeliverySearchForm extends Delivery
+class DeliveryServiceSearchForm extends DeliveryService
 {
+
     public static function tableName()
     {
-        return Delivery::tableName();
+        return DeliveryService::tableName();
     }
 
     public function rules()
@@ -28,7 +29,7 @@ class DeliverySearchForm extends Delivery
 
     public function search($params)
     {
-        $query = Delivery::find()->orderBy(['created_at' => SORT_DESC]);
+        $query = DeliveryService::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

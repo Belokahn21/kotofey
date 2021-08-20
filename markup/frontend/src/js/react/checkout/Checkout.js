@@ -29,6 +29,7 @@ class Checkout extends Component {
             order: null,
             promocode: null,
             deliveryAddress: [],
+            deliveryServices: [],
             excludePayments: [],
             delivery: [],
             payment: [],
@@ -54,6 +55,7 @@ class Checkout extends Component {
     componentDidMount() {
         this.loadDelivery();
         this.loadPayment();
+        this.loadServices();
         this.loadBasket();
         this.loadUser();
     }
@@ -125,6 +127,14 @@ class Checkout extends Component {
         RestRequest.all(config.restPayment + '?filter[active]=1').then(data => {
             this.setState({
                 payment: data
+            });
+        });
+    }
+
+    loadServices() {
+        RestRequest.all(config.restDeliveryService + '?filter[active]=1').then(data => {
+            this.setState({
+                deliveryServices: data
             });
         });
     }
@@ -227,9 +237,9 @@ class Checkout extends Component {
             this.refreshPayment([]);
         }
 
-        // let data = new FormData();
-        // data.append('index_to', this.state.addr_index);
-        //
+        let data = new FormData();
+        data.append('index_to', this.state.addr_index);
+
         // RestRequest.post(config.restDeliveryCalculate, {
         //     body: data,
         // }).then(data => {
@@ -395,7 +405,7 @@ class Checkout extends Component {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService, oddInput, clientInput;
 
         if (parseInt(this.state.deliveryId) === 1) {
-            deliveryService = <DeliveryService/>
+            deliveryService = <DeliveryService models={this.state.deliveryServices}/>
             clientInput = <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "client", title: "Укажите Фамилию Имя Отчество", placeholder: "Введите ваше ФИО"}}/>;
         }
         if (parseInt(this.state.paymentId) === 2) oddInput = <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "odd", title: "С какой суммы приготовить сдачу?", placeholder: "Оставьте пустым, если не нужна сдача"}}/>

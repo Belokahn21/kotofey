@@ -22,13 +22,13 @@ class StatisticWidget extends Widget
         $lastlogs = Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
 
         $searches = \Yii::$app->cache->getOrSet('admin-searches-full', function () {
-            return SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->all();
+            return SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
         }, $this->cacheTime, new DbDependency([
             'sql' => 'select count(`id`) from `search_query`'
         ]));
 
         $logs = \Yii::$app->cache->getOrSet('admin-logs-full', function () {
-            return Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(500)->all();
+            return Logger::find()->orderBy(['created_at' => SORT_DESC])->limit(5)->all();
         }, $this->cacheTime, new DbDependency([
             'sql' => 'select count(`id`) from `logger`'
         ]));

@@ -30,6 +30,6 @@ class CalculateRestController extends Controller
         }
 
         $ds = new DeliveryService($products);
-        $ds->availableTariffs($post_data);
+        return $ds->availableTariffs($post_data);
     }
 }

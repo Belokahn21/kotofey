@@ -4945,6 +4945,7 @@ var config = {
   restFastOrder: url + 'api/order/fast/',
   restBasket: url + 'api/basket/',
   restDelivery: url + 'api/delivery/',
+  restDeliveryService: url + 'api/delivery/service/',
   restDeliveryCalculate: url + 'api/delivery/calculate/',
   restDeliveryCleanAddress: url + 'api/delivery/clean-address/',
   restPayment: url + 'api/payment/',
@@ -7167,6 +7168,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       order: null,
       promocode: null,
       deliveryAddress: [],
+      deliveryServices: [],
       excludePayments: [],
       delivery: [],
       payment: [],
@@ -7195,6 +7197,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
     value: function componentDidMount() {
       this.loadDelivery();
       this.loadPayment();
+      this.loadServices();
       this.loadBasket();
       this.loadUser();
     }
@@ -7282,17 +7285,28 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "loadServices",
+    value: function loadServices() {
+      var _this6 = this;
+
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryService + '?filter[active]=1').then(function (data) {
+        _this6.setState({
+          deliveryServices: data
+        });
+      });
+    }
+  }, {
     key: "loadBasket",
     value: function loadBasket() {
-      var _this6 = this;
+      var _this7 = this;
 
       _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restBasket).then(function (data) {
         if (data.status === 200 && data.items.length > 0) {
-          _this6.setState({
+          _this7.setState({
             basket: data.items
           });
 
-          _this6.calcTotal();
+          _this7.calcTotal();
         }
       });
     }
@@ -7370,15 +7384,14 @@ var Checkout = /*#__PURE__*/function (_Component) {
         this.refreshPayment([2, 3]);
       } else {
         this.refreshPayment([]);
-      } // let data = new FormData();
-      // data.append('index_to', this.state.addr_index);
-      //
-      // RestRequest.post(config.restDeliveryCalculate, {
+      }
+
+      var data = new FormData();
+      data.append('index_to', this.state.addr_index); // RestRequest.post(config.restDeliveryCalculate, {
       //     body: data,
       // }).then(data => {
       //     console.log(data);
       // });
-
     }
   }, {
     key: "handleSelectPayment",
@@ -7414,13 +7427,13 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleAddress",
     value: function handleAddress(event) {
-      var _this7 = this;
+      var _this8 = this;
 
       if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
       this.unsetError('address');
       this.cleanAddressTimerEx = setTimeout(function () {
         _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(function (result) {
-          _this7.setState({
+          _this8.setState({
             deliveryAddress: result,
             addr_index: result[0].index,
             addr_city: result[0].place,
@@ -7454,7 +7467,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderAddress",
     value: function renderAddress() {
-      var _this8 = this;
+      var _this9 = this;
 
       var errors = this.state.errors,
           deliveryAddress = this.state.deliveryAddress;
@@ -7497,7 +7510,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           className: "checkout-address-list__address"
         }, addrr), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           className: "checkout-address-list__select",
-          onClick: _this8.handleSelectAddress.bind(_this8, addrr),
+          onClick: _this9.handleSelectAddress.bind(_this9, addrr),
           type: "button"
         }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -7653,7 +7666,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "dashboard",
     value: function dashboard() {
-      var _this9 = this;
+      var _this10 = this;
 
       var buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ',
           deliveryService,
@@ -7661,7 +7674,9 @@ var Checkout = /*#__PURE__*/function (_Component) {
           clientInput;
 
       if (parseInt(this.state.deliveryId) === 1) {
-        deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, null);
+        deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, {
+          models: this.state.deliveryServices
+        });
         clientInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
           errors: this.state.errors,
           unsetError: this.unsetError.bind(this),
@@ -7748,7 +7763,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         attribute: "payment_id",
         handlerSelect: this.handleSelectPayment.bind(this),
         models: this.state.payment.filter(function (element) {
-          return !_this9.state.excludePayments.includes(element.id);
+          return !_this10.state.excludePayments.includes(element.id);
         })
       }), oddInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row",
@@ -8221,13 +8236,9 @@ var DeliveryService = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(DeliveryService);
 
   function DeliveryService(props) {
-    var _this;
-
     _classCallCheck(this, DeliveryService);
 
-    _this = _super.call(this, props);
-    _this.services = ['DPD', 'CDEK', 'Почта России'];
-    return _this;
+    return _super.call(this, props);
   }
 
   _createClass(DeliveryService, [{
@@ -8235,11 +8246,11 @@ var DeliveryService = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-delivery-service"
-      }, this.services.map(function (el, key) {
+      }, this.props.models.map(function (el, key) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           key: key,
           className: "checkout-delivery-service__item"
-        }, el);
+        }, el.name);
       }));
     }
   }]);

@@ -55,7 +55,7 @@ $product = Product::find();
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon" data-toggle="modal" data-target="#search-list"><i class="fas fa-search"></i></div>
+                <a href="<?= Url::to(['/admin/search/search-history-backend/index']) ?>" target="_blank" class="statistic__icon"><i class="fas fa-search"></i></a>
                 <div class="statistic__content">
                     <?php if ($lastSearch): ?>
                         <div class="statistic-summary">
@@ -68,8 +68,7 @@ $product = Product::find();
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon" data-toggle="modal" data-target="#log-list"><i class="fas fa-history"></i>
-                </div>
+                <a href="<?= Url::to(['/admin/logger/log-backend/index']); ?>" target="_blank" class="statistic__icon"><i class="fas fa-history"></i></a>
                 <div class="statistic__content">
                     <?php if ($lastlogs): ?>
                         <div class="statistic-summary">

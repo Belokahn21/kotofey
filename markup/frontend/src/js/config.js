@@ -10,6 +10,7 @@ const config = {
     restFastOrder: url + 'api/order/fast/',
     restBasket: url + 'api/basket/',
     restDelivery: url + 'api/delivery/',
+    restDeliveryService: url + 'api/delivery/service/',
     restDeliveryCalculate: url + 'api/delivery/calculate/',
     restDeliveryCleanAddress: url + 'api/delivery/clean-address/',
     restPayment: url + 'api/payment/',
