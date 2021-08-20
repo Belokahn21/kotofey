@@ -16138,22 +16138,26 @@ label[for="site-form-pet-avatar"] {
 .eat-calculator {
   display: flex;
   flex-direction: column; }
+  .eat-calculator-panel-action {
+    border: 0 !important;
+    margin: 15px -5px 0 -5px; }
   .eat-calculator-config {
     display: flex;
     flex-direction: column; }
     .eat-calculator-config-row {
       display: flex;
       flex-direction: row;
-      border: 1px silver solid;
+      border: 1px #e6e6e6 solid;
       padding: 5px; }
     .eat-calculator-config-col {
-      width: 25%;
+      width: 33%;
+      flex: 1 1 33%;
       padding: 10px; }
     .eat-calculator-config-block {
       width: 100%;
       height: 100%;
       padding: 10px;
-      border: 1px silver solid; }
+      border: 1px #e6e6e6 solid; }
     .eat-calculator-config-pet {
       padding: 10px; }
       .eat-calculator-config-pet__item {
@@ -16188,7 +16192,7 @@ label[for="site-form-pet-avatar"] {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    border: 1px #c6c6c6 solid;
+    border: 1px #e6e6e6 solid;
     margin: 5px 0; }
     .eat-calculator-result-item__image {
       width: 100%;
@@ -16220,7 +16224,7 @@ label[for="site-form-pet-avatar"] {
   display: flex;
   flex-direction: column; }
   .breed-list-item {
-    border: 1px silver solid;
+    border: 1px #e6e6e6 solid;
     margin: 5px 0;
     display: flex;
     flex-direction: row;
@@ -16229,29 +16233,21 @@ label[for="site-form-pet-avatar"] {
     .breed-list-item__name {
       height: 100%;
       padding: 5px; }
-    .breed-list-item-select {
+    .breed-list-item .filter-catalog-checkboxes__item {
+      width: auto;
       height: 100%;
       display: block;
       margin: auto 10px auto 0;
       cursor: pointer; }
-      .breed-list-item-select__marker {
-        width: 15px;
-        height: 15px;
-        border: 1px silver solid;
-        display: block; }
-        .breed-list-item-select__marker:hover {
-          border-color: #25D366; }
-      .breed-list-item-select input {
-        display: none; }
-        .breed-list-item-select input:checked ~ .breed-list-item-select__marker {
-          border-color: #25D366; }
+      .breed-list-item .filter-catalog-checkboxes__item label {
+        margin: 0; }
 
 .bread-filter {
   width: 100%; }
   .bread-filter-item {
     width: 100%; }
     .bread-filter-item__input {
-      border: 1px #c6c6c6 solid;
+      border: 1px #e6e6e6 solid;
       width: 100%;
       padding: 5px; }
 

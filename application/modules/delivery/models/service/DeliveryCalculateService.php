@@ -14,6 +14,10 @@ use app\modules\delivery\models\service\tracking\api\CdekApi;
  */
 class DeliveryCalculateService
 {
+    const SERVICE_CDEK = 'cdek';
+    const SERVICE_RU_POST = 'ru_post';
+    const SERVICE_DPD = 'dpd';
+
     private $api;
 
     public function __construct(string $service)
@@ -24,13 +28,13 @@ class DeliveryCalculateService
     public function getApi($service)
     {
         switch ($service) {
-            case  'cdek':
+            case  self::SERVICE_CDEK:
                 $this->api = new CdekApi();
                 break;
-            case 'dpd':
+            case self::SERVICE_DPD:
                 $this->api = new DpdApi();
                 break;
-            case 'ru_post':
+            case self::SERVICE_RU_POST:
                 $this->api = new RussianPostApi();
                 break;
             default:

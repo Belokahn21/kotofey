@@ -4945,6 +4945,7 @@ var config = {
   restFastOrder: url + 'api/order/fast/',
   restBasket: url + 'api/basket/',
   restDelivery: url + 'api/delivery/',
+  restDeliveryCalculate: url + 'api/delivery/calculate/',
   restDeliveryCleanAddress: url + 'api/delivery/clean-address/',
   restPayment: url + 'api/payment/',
   restDates: url + 'api/order/dates/',
@@ -5847,7 +5848,8 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
     _this = _super.call(this, props);
     _this.state = {
       products: [],
-      breeds: []
+      breeds: [],
+      selected_animal_id: null
     };
     return _this;
   }
@@ -5858,12 +5860,13 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       if (this.timerEx) clearTimeout(this.timerEx);
-      var input_element = event.target;
+      var element = event.target;
+      var value = element.value;
+      var selected_animal_id = this.state.selected_animal_id;
+      if (selected_animal_id == null) return false;
       this.timerEx = setTimeout(function () {
-        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_config__WEBPACK_IMPORTED_MODULE_4__.default.restBreeds + '?BreedSearchForm[name]=' + input_element.value).then(function (data) {
-          _this2.setState({
-            breeds: data
-          });
+        _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_config__WEBPACK_IMPORTED_MODULE_4__.default.restBreeds + '?BreedSearchForm[name]=' + value + '&BreedSearchForm[animal_id]=' + selected_animal_id).then(function (data) {
+          _this2.setBreeds(data);
         });
       }, this.timerSec);
     }
@@ -5905,10 +5908,13 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
 
       if (this.timerEx) clearTimeout(this.timerEx);
       var element = event.target;
+      var value = element.value;
       this.timerEx = setTimeout(function () {
         _tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_config__WEBPACK_IMPORTED_MODULE_4__.default.restBreeds + '?BreedSearchForm[animal_id]=' + element.value).then(function (data) {
+          _this5.setBreeds(data);
+
           _this5.setState({
-            breeds: data
+            selected_animal_id: value
           });
         });
       }, this.timerSec);
@@ -5918,7 +5924,8 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$state = this.state,
           products = _this$state.products,
-          breeds = _this$state.breeds;
+          breeds = _this$state.breeds,
+          selected_animal_id = _this$state.selected_animal_id;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
@@ -5939,8 +5946,10 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "filter-catalog-checkboxes__item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "checkbox",
-        name: "age"
+        type: "radio",
+        name: "age",
+        value: "1",
+        id: "filter-chb-1"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         htmlFor: "filter-chb-1"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
@@ -5949,33 +5958,28 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
       }), "\u0414\u043E \u0433\u043E\u0434\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "filter-catalog-checkboxes__item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "checkbox",
-        name: "age"
+        type: "radio",
+        name: "age",
+        value: "2",
+        id: "filter-chb-2"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        htmlFor: "filter-chb-1"
+        htmlFor: "filter-chb-2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-paw",
         "aria-hidden": "true"
       }), "\u0411\u043E\u043B\u044C\u0448\u0435 \u0433\u043E\u0434\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "filter-catalog-checkboxes__item"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        type: "checkbox",
-        name: "age"
+        type: "radio",
+        name: "age",
+        value: "3",
+        id: "filter-chb-3"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-        htmlFor: "filter-chb-1"
+        htmlFor: "filter-chb-3"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
         className: "fas fa-paw",
         "aria-hidden": "true"
       }), "\u0421\u0442\u0430\u0440\u0448\u0435 7 \u043B\u0435\u0442")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "eat-calculator-config-weight eat-calculator-config-col"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "eat-calculator-config-block"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "bread-filter-item__input",
-        type: "text",
-        name: "weight",
-        placeholder: "\u0412\u0435\u0441 \u0432\u0430\u0448\u0435\u0433\u043E \u043F\u0438\u0442\u043E\u043C\u0446\u0430"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-breed eat-calculator-config-col"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "eat-calculator-config-block"
@@ -5983,7 +5987,7 @@ var EatCalculator = /*#__PURE__*/function (_React$Component) {
         handleTyping: this.handleTyping.bind(this),
         breeds: breeds
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "eat-calculator-config-row"
+        className: "eat-calculator-config-row eat-calculator-panel-action"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "eat-calculator-submit",
         type: "submit"
@@ -6183,15 +6187,19 @@ var FindBreed = /*#__PURE__*/function (_React$Component) {
           key: i
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "breed-list-item__name"
-        }, el.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-          className: "breed-list-item-select"
+        }, el.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "filter-catalog-checkboxes__item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "checkbox",
+          type: "radio",
           name: "breed",
-          value: el.id
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "breed-list-item-select__marker"
-        })));
+          value: el.id,
+          id: "breed-filter-" + el.id
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          htmlFor: "breed-filter-" + el.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "fas fa-paw",
+          "aria-hidden": "true"
+        }))));
       })));
     }
   }]);
@@ -7362,7 +7370,15 @@ var Checkout = /*#__PURE__*/function (_Component) {
         this.refreshPayment([2, 3]);
       } else {
         this.refreshPayment([]);
-      }
+      } // let data = new FormData();
+      // data.append('index_to', this.state.addr_index);
+      //
+      // RestRequest.post(config.restDeliveryCalculate, {
+      //     body: data,
+      // }).then(data => {
+      //     console.log(data);
+      // });
+
     }
   }, {
     key: "handleSelectPayment",

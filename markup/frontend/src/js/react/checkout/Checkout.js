@@ -226,6 +226,15 @@ class Checkout extends Component {
         } else {
             this.refreshPayment([]);
         }
+
+        // let data = new FormData();
+        // data.append('index_to', this.state.addr_index);
+        //
+        // RestRequest.post(config.restDeliveryCalculate, {
+        //     body: data,
+        // }).then(data => {
+        //     console.log(data);
+        // });
     }
 
     handleSelectPayment(event) {

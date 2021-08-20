@@ -10,6 +10,8 @@ class Module extends MainModule
     public $controllerNamespace = 'app\modules\delivery\controllers';
     private $name = 'Доставка';
 
+    public $default_index_from;
+
     public $cdek_client_id_dev;
     public $cdek_client_secret_dev;
     public $cdek_client_id_prod;
@@ -39,6 +41,8 @@ class Module extends MainModule
     public function getParams()
     {
         return [
+            'default_index_from' => '',
+
             'cdek_client_id_dev' => '',
             'cdek_client_secret_dev' => '',
             'cdek_client_id_prod' => '',
@@ -51,6 +55,8 @@ class Module extends MainModule
     public function getParamsLabel()
     {
         return [
+            'default_index_from' => 'Индекс города отправителя(По умолчанию)',
+
             'cdek_client_id_dev' => 'ID клиента(dev)',
             'cdek_client_secret_dev' => 'Секретный ключ(dev)',
             'cdek_client_id_prod' => 'ID клиента(prod)',

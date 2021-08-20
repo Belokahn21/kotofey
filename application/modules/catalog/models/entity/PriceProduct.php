@@ -30,7 +30,6 @@ class PriceProduct extends \yii\db\ActiveRecord
     {
         return [
             [['price_id', 'product_id', 'value', 'created_at', 'updated_at'], 'integer'],
-            [['price_id', 'product_id', 'value',], 'required'],
         ];
     }
 
