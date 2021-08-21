@@ -21,15 +21,13 @@ class BonusHelper
     public static function applyOrderBonus(Order $order)
     {
         if ($module = \Yii::$app->getModule('bonus')) {
-            if ($module->getEnable()) {
-                $elementHistory = UserBonusHistory::findOneByOrder($order);
-                if ($elementHistory) {
-                    $elementHistory->is_active = true;
-                    return $elementHistory->validate() && $elementHistory->update();
-                }
-
-                return self::addOrderBonus($order);
+            $elementHistory = UserBonusHistory::findOneByOrder($order);
+            if ($elementHistory) {
+                $elementHistory->is_active = true;
+                return $elementHistory->validate() && $elementHistory->update();
             }
+
+            return self::addOrderBonus($order);
         }
     }
 

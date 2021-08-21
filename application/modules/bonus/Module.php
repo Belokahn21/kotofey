@@ -30,9 +30,4 @@ class Module extends \app\modules\site\MainModule
     {
         return $this->name;
     }
-
-    public function getEnable()
-    {
-        return $this->enable;
-    }
 }

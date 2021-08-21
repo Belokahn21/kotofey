@@ -146,6 +146,13 @@ class Order extends ActiveRecord
             $this->is_update = true;
         }
 
+        if ($module = \Yii::$app->getModule('bonus') && !empty($this->bonus)) {
+            if ($this->bonus && $this->bonus > 0) {
+                BonusHelper::addHistory($this, $this->bonus * -1, 'Списание за заказ #' . $this->id, true);
+                $this->discount = $this->bonus * -1;
+            }
+        }
+
         return parent::beforeSave($insert);
     }
 
@@ -162,15 +169,6 @@ class Order extends ActiveRecord
                 'email' => $this->email,
                 'phone' => $this->phone,
             ]);
-        }
-
-        if ($module = \Yii::$app->getModule('bonus') && !empty($this->bonus)) {
-            if ($module->getEnable()) {
-                if ($this->bonus && $this->bonus > 0) {
-                    BonusHelper::addHistory($this, $this->bonus * -1, 'Списание за заказ #' . $this->id, true);
-                    $this->discount = $this->bonus * -1;
-                }
-            }
         }
 
         // todo: херня выходит с пересохранением заказа, надо поправить
