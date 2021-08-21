@@ -15,6 +15,7 @@ import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
 import Input from "./html/Input";
 import Error from "./html/Error";
+import {parse} from "es-cookie";
 
 class Checkout extends Component {
     constructor(props) {
@@ -30,6 +31,7 @@ class Checkout extends Component {
             promocode: null,
             deliveryAddress: [],
             deliveryServices: [],
+            deliveryService: "",
             excludePayments: [],
             delivery: [],
             payment: [],
@@ -132,7 +134,7 @@ class Checkout extends Component {
     }
 
     loadServices() {
-        RestRequest.all(config.restDeliveryService + '?filter[active]=1').then(data => {
+        RestRequest.all(config.restDeliveryService + '?filter[active]=1&expand=imageUrl').then(data => {
             this.setState({
                 deliveryServices: data
             });
@@ -222,6 +224,11 @@ class Checkout extends Component {
         });
     }
 
+    handleSelectDeliveryService(event) {
+        console.log(event.target.value);
+        this.setState({deliveryService: event.target.value || ''});
+    }
+
     handleSelectDelivery(event) {
         let current = event.target;
         let deliveryId = parseInt(current.value);
@@ -236,15 +243,33 @@ class Checkout extends Component {
         } else {
             this.refreshPayment([]);
         }
+    }
+
+    calculateDelivery() {
+        const {addr_index, deliveryService} = this.state;
+        let {basket} = this.state;
+
+        if (addr_index === undefined || deliveryService === undefined) return false;
 
         let data = new FormData();
-        data.append('index_to', this.state.addr_index);
+        data.append('index_to', addr_index);
+        data.append('service', deliveryService);
 
-        // RestRequest.post(config.restDeliveryCalculate, {
-        //     body: data,
-        // }).then(data => {
-        //     console.log(data);
-        // });
+        RestRequest.post(config.restDeliveryCalculate, {
+            body: data,
+        }).then(data => {
+            let service = data[0];
+
+            basket.push({
+                name: 'Доставка Почта России',
+                price: service.total,
+                count: 1,
+                imageUrl: `/images/delivery/${this.state.deliveryService}.png`
+            });
+
+            this.setState({basket: basket});
+            this.calcTotal();
+        });
     }
 
     handleSelectPayment(event) {
@@ -274,31 +299,34 @@ class Checkout extends Component {
 
     handleAddress(event) {
         if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
-        this.unsetError('address');
+        // this.unsetError('address');
 
         this.cleanAddressTimerEx = setTimeout(() => {
             RestRequest.all(config.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(result => {
 
                 this.setState({
                     deliveryAddress: result,
-                    addr_index: result[0].index,
-                    addr_city: result[0].place,
-                    addr_street: result[0].street,
-                    addr_home: result[0].house,
-                    addr_room: result[0].room,
-                    addr_pouch: null,
-                    addr_floor: null,
+                    addr_index: result[0].index || "",
+                    addr_city: result[0].place || "",
+                    addr_street: result[0].street || "",
+                    addr_home: result[0].house || "",
+                    addr_room: result[0].room || "",
+                    addr_pouch: "",
+                    addr_floor: "",
                 });
             });
+
         }, this.cleanAddressTimer);
     }
 
     handleSelectAddress(address, event) {
+
         this.setState({
             selectedAddress: address,
             deliveryAddress: []
         });
 
+        this.calculateDelivery();
         this.unsetError('address');
     }
 
@@ -405,7 +433,7 @@ class Checkout extends Component {
         let buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ', deliveryService, oddInput, clientInput;
 
         if (parseInt(this.state.deliveryId) === 1) {
-            deliveryService = <DeliveryService models={this.state.deliveryServices}/>
+            deliveryService = <DeliveryService handleSelectDeliveryService={this.handleSelectDeliveryService.bind(this)} models={this.state.deliveryServices}/>
             clientInput = <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "client", title: "Укажите Фамилию Имя Отчество", placeholder: "Введите ваше ФИО"}}/>;
         }
         if (parseInt(this.state.paymentId) === 2) oddInput = <HtmlHelper errors={this.state.errors} unsetError={this.unsetError.bind(this)} element="input" modelName={this.modelName} options={{name: "odd", title: "С какой суммы приготовить сдачу?", placeholder: "Оставьте пустым, если не нужна сдача"}}/>
@@ -419,7 +447,7 @@ class Checkout extends Component {
 
                         <Variants errors={this.state.errors} unsetError={this.unsetError.bind(this)} modelName={this.modelName} attribute="delivery_id" handlerSelect={this.handleSelectDelivery.bind(this)} models={this.state.delivery}/>
 
-                        {/*{deliveryService}*/}
+                        {deliveryService}
 
 
                         {/*<div className="checkout-form__title">Время и дата доставки</div>*/}

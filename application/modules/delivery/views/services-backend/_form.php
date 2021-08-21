@@ -4,6 +4,8 @@
  * @var $form \yii\widgets\ActiveForm
  */
 
+use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
+
 ?>
 <nav>
     <div class="nav nav-tabs" id="backendForms" role="tablist">
@@ -18,8 +20,19 @@
             <div class="col-4"><?= $form->field($model, 'sort')->textInput(); ?></div>
         </div>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-6">
                 <?= $form->field($model, 'is_active')->checkbox() ?>
+            </div>
+            <div class="col-sm-6">
+                <?php
+                $media_params = [];
+                if ($model->media) {
+                    $media_params = [
+                        'values' => [$model->media_id]
+                    ];
+                }
+                echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+                ?>
             </div>
         </div>
         <div class="row">

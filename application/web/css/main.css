@@ -14886,6 +14886,41 @@ label[for="site-form-pet-avatar"] {
   text-transform: uppercase;
   font-weight: bold; }
 
+.checkout-delivery-service {
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .checkout-delivery-service-item {
+    cursor: pointer;
+    border: 1px silver solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    position: relative; }
+    .checkout-delivery-service-item:not(:last-child) {
+      margin-right: 10px; }
+    .checkout-delivery-service-item__mark {
+      display: none;
+      position: absolute;
+      top: -5px;
+      right: 0;
+      font-size: 28px;
+      color: #25D366; }
+    .checkout-delivery-service-item__input {
+      display: none; }
+      .checkout-delivery-service-item__input:checked ~ .checkout-delivery-service-item__mark {
+        display: block; }
+    .checkout-delivery-service-item__icon {
+      max-width: 120px;
+      height: 70px;
+      object-fit: contain; }
+    .checkout-delivery-service-item__name {
+      margin-top: 10px;
+      text-align: center;
+      font-weight: bold; }
+
 .action-list {
   display: flex;
   flex-direction: row;

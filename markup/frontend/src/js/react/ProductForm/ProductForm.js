@@ -48,9 +48,11 @@ class ProductForm extends React.Component {
                     <input type="hidden" name="count" className="product-calc__count" value={element.id}/>
                     <div className="div">
 
-                        <button className="product-calc__control product-calc__minus" onClick={this.handleMinus.bind(this)} type="button">-</button>
-                        <input name="count" type="text" className="product-calc__count js-product-calc-amount" onChange={this.handleChange.bind(this)} value={this.state.count} placeholder={this.state.count}/>
-                        <button className="product-calc__control product-calc__plus" onClick={this.handlePlus.bind(this)} type="button">+</button>
+                        {options.showControl !== true ? '' : <>
+                            <button className="product-calc__control product-calc__minus" onClick={this.handleMinus.bind(this)} type="button">-</button>
+                            <input name="count" type="text" className="product-calc__count js-product-calc-amount" onChange={this.handleChange.bind(this)} value={this.state.count} placeholder={this.state.count}/>
+                            <button className="product-calc__control product-calc__plus" onClick={this.handlePlus.bind(this)} type="button">+</button>
+                        </>}
 
                         {options.showPrice !== true ? null : <div className="product-calc__price-info">
                             <div className="product-calc__price-info-normal">Цена за товар: {Price.format(element.price)}₽</div>

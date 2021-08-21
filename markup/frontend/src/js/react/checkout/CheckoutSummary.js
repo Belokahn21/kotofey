@@ -29,7 +29,7 @@ class CheckoutSummary extends Component {
                     <div className="checkout-reglament__text">
                         <p>После оформления заказа, с вами свяжется менеджер для подтверждения заявки и уточнит сроки доставки (Обычно 1 час).</p>
                         <p>Доставка бесплатная при заказе на сумму от 500 рублей. Если ваш адрес дальше Барнаула советуем вам уточнить стоимость доставки у наших операторов.</p>
-                        <p>Остались вопросы — <a href="mailto:info@kotofey.store">info@kotofey.store</a> или <a href="tel:89967026637" className="js-phone-mask">8 (996) 702 66-37</a></p>
+                        <p>Остались вопросы — <a href="mailto:info@kotofey.store">info@kotofey.store</a> или <a href="tel:88002229070" className="js-phone-mask">8 (800) 222 90-70</a></p>
                     </div>
                 </div>
             </>

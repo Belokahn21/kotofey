@@ -7056,7 +7056,7 @@ var ProductForm = /*#__PURE__*/function (_React$Component) {
         value: element.id
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "div"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }, options.showControl !== true ? '' : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         className: "product-calc__control product-calc__minus",
         onClick: this.handleMinus.bind(this),
         type: "button"
@@ -7071,7 +7071,7 @@ var ProductForm = /*#__PURE__*/function (_React$Component) {
         className: "product-calc__control product-calc__plus",
         onClick: this.handlePlus.bind(this),
         type: "button"
-      }, "+"), options.showPrice !== true ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "+")), options.showPrice !== true ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "product-calc__price-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "product-calc__price-info-normal"
@@ -7110,6 +7110,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DeliveryService__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./DeliveryService */ "./src/js/react/checkout/DeliveryService.js");
 /* harmony import */ var _html_Input__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./html/Input */ "./src/js/react/checkout/html/Input.js");
 /* harmony import */ var _html_Error__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./html/Error */ "./src/js/react/checkout/html/Error.js");
+/* harmony import */ var es_cookie__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! es-cookie */ "./node_modules/es-cookie/src/es-cookie.js");
+/* harmony import */ var es_cookie__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(es_cookie__WEBPACK_IMPORTED_MODULE_16__);
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -7149,6 +7151,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
 var Checkout = /*#__PURE__*/function (_Component) {
   _inherits(Checkout, _Component);
 
@@ -7169,6 +7172,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
       promocode: null,
       deliveryAddress: [],
       deliveryServices: [],
+      deliveryService: "",
       excludePayments: [],
       delivery: [],
       payment: [],
@@ -7289,7 +7293,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
     value: function loadServices() {
       var _this6 = this;
 
-      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryService + '?filter[active]=1').then(function (data) {
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryService + '?filter[active]=1&expand=imageUrl').then(function (data) {
         _this6.setState({
           deliveryServices: data
         });
@@ -7372,6 +7376,14 @@ var Checkout = /*#__PURE__*/function (_Component) {
       });
     }
   }, {
+    key: "handleSelectDeliveryService",
+    value: function handleSelectDeliveryService(event) {
+      console.log(event.target.value);
+      this.setState({
+        deliveryService: event.target.value || ''
+      });
+    }
+  }, {
     key: "handleSelectDelivery",
     value: function handleSelectDelivery(event) {
       var current = event.target;
@@ -7385,13 +7397,37 @@ var Checkout = /*#__PURE__*/function (_Component) {
       } else {
         this.refreshPayment([]);
       }
+    }
+  }, {
+    key: "calculateDelivery",
+    value: function calculateDelivery() {
+      var _this8 = this;
 
+      var _this$state = this.state,
+          addr_index = _this$state.addr_index,
+          deliveryService = _this$state.deliveryService;
+      var basket = this.state.basket;
+      if (addr_index === undefined || deliveryService === undefined) return false;
       var data = new FormData();
-      data.append('index_to', this.state.addr_index); // RestRequest.post(config.restDeliveryCalculate, {
-      //     body: data,
-      // }).then(data => {
-      //     console.log(data);
-      // });
+      data.append('index_to', addr_index);
+      data.append('service', deliveryService);
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.post(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryCalculate, {
+        body: data
+      }).then(function (data) {
+        var service = data[0];
+        basket.push({
+          name: 'Доставка Почта России',
+          price: service.total,
+          count: 1,
+          imageUrl: "/images/delivery/".concat(_this8.state.deliveryService, ".png")
+        });
+
+        _this8.setState({
+          basket: basket
+        });
+
+        _this8.calcTotal();
+      });
     }
   }, {
     key: "handleSelectPayment",
@@ -7427,21 +7463,21 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "handleAddress",
     value: function handleAddress(event) {
-      var _this8 = this;
+      var _this9 = this;
 
-      if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx);
-      this.unsetError('address');
+      if (this.cleanAddressTimerEx) clearTimeout(this.cleanAddressTimerEx); // this.unsetError('address');
+
       this.cleanAddressTimerEx = setTimeout(function () {
         _tools_RestRequest__WEBPACK_IMPORTED_MODULE_11__.default.all(_config__WEBPACK_IMPORTED_MODULE_2__.default.restDeliveryCleanAddress + '?filter[text]=' + event.target.value).then(function (result) {
-          _this8.setState({
+          _this9.setState({
             deliveryAddress: result,
-            addr_index: result[0].index,
-            addr_city: result[0].place,
-            addr_street: result[0].street,
-            addr_home: result[0].house,
-            addr_room: result[0].room,
-            addr_pouch: null,
-            addr_floor: null
+            addr_index: result[0].index || "",
+            addr_city: result[0].place || "",
+            addr_street: result[0].street || "",
+            addr_home: result[0].house || "",
+            addr_room: result[0].room || "",
+            addr_pouch: "",
+            addr_floor: ""
           });
         });
       }, this.cleanAddressTimer);
@@ -7453,6 +7489,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         selectedAddress: address,
         deliveryAddress: []
       });
+      this.calculateDelivery();
       this.unsetError('address');
     }
   }, {
@@ -7467,7 +7504,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "renderAddress",
     value: function renderAddress() {
-      var _this9 = this;
+      var _this10 = this;
 
       var errors = this.state.errors,
           deliveryAddress = this.state.deliveryAddress;
@@ -7510,7 +7547,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
           className: "checkout-address-list__address"
         }, addrr), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           className: "checkout-address-list__select",
-          onClick: _this9.handleSelectAddress.bind(_this9, addrr),
+          onClick: _this10.handleSelectAddress.bind(_this10, addrr),
           type: "button"
         }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C"));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -7666,7 +7703,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
   }, {
     key: "dashboard",
     value: function dashboard() {
-      var _this10 = this;
+      var _this11 = this;
 
       var buttonLabel = parseInt(this.state.paymentId) === 1 ? 'Оформить заказ и оплатить' : 'Оформить заказ',
           deliveryService,
@@ -7675,6 +7712,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
 
       if (parseInt(this.state.deliveryId) === 1) {
         deliveryService = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_DeliveryService__WEBPACK_IMPORTED_MODULE_13__.default, {
+          handleSelectDeliveryService: this.handleSelectDeliveryService.bind(this),
           models: this.state.deliveryServices
         });
         clientInput = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_html_HtmlHelper__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -7717,7 +7755,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         attribute: "delivery_id",
         handlerSelect: this.handleSelectDelivery.bind(this),
         models: this.state.delivery
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), deliveryService, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
       }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"
@@ -7763,7 +7801,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         attribute: "payment_id",
         handlerSelect: this.handleSelectPayment.bind(this),
         models: this.state.payment.filter(function (element) {
-          return !_this10.state.excludePayments.includes(element.id);
+          return !_this11.state.excludePayments.includes(element.id);
         })
       }), oddInput, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row",
@@ -7993,15 +8031,16 @@ var CheckoutBasketElement = /*#__PURE__*/function (_React$Component) {
         href: element.detailUrl
       }, element.name)), !element.article ? '' : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "light-checkout-list__article"
-      }, "\u0410\u0440\u0442\u0438\u043A\u0443\u043B: ", element.article)), !element.id ? '' : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProductForm_ProductForm__WEBPACK_IMPORTED_MODULE_4__.default, {
-        key: element.id,
+      }, "\u0410\u0440\u0442\u0438\u043A\u0443\u043B: ", element.article)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_ProductForm_ProductForm__WEBPACK_IMPORTED_MODULE_4__.default, {
+        key: element.name,
         updateBasketItem: this.props.updateBasketItem,
         element: element,
         options: {
           'showButton': false,
           'showInfo': false,
           'showOneClick': false,
-          'showPrice': true
+          'showPrice': true,
+          'showControl': element.id !== undefined
         }
       }));
     }
@@ -8113,9 +8152,9 @@ var CheckoutSummary = /*#__PURE__*/function (_Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "\u041F\u043E\u0441\u043B\u0435 \u043E\u0444\u043E\u0440\u043C\u043B\u0435\u043D\u0438\u044F \u0437\u0430\u043A\u0430\u0437\u0430, \u0441 \u0432\u0430\u043C\u0438 \u0441\u0432\u044F\u0436\u0435\u0442\u0441\u044F \u043C\u0435\u043D\u0435\u0434\u0436\u0435\u0440 \u0434\u043B\u044F \u043F\u043E\u0434\u0442\u0432\u0435\u0440\u0436\u0434\u0435\u043D\u0438\u044F \u0437\u0430\u044F\u0432\u043A\u0438 \u0438 \u0443\u0442\u043E\u0447\u043D\u0438\u0442 \u0441\u0440\u043E\u043A\u0438 \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438 (\u041E\u0431\u044B\u0447\u043D\u043E 1 \u0447\u0430\u0441)."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430 \u0431\u0435\u0441\u043F\u043B\u0430\u0442\u043D\u0430\u044F \u043F\u0440\u0438 \u0437\u0430\u043A\u0430\u0437\u0435 \u043D\u0430 \u0441\u0443\u043C\u043C\u0443 \u043E\u0442 500 \u0440\u0443\u0431\u043B\u0435\u0439. \u0415\u0441\u043B\u0438 \u0432\u0430\u0448 \u0430\u0434\u0440\u0435\u0441 \u0434\u0430\u043B\u044C\u0448\u0435 \u0411\u0430\u0440\u043D\u0430\u0443\u043B\u0430 \u0441\u043E\u0432\u0435\u0442\u0443\u0435\u043C \u0432\u0430\u043C \u0443\u0442\u043E\u0447\u043D\u0438\u0442\u044C \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438 \u0443 \u043D\u0430\u0448\u0438\u0445 \u043E\u043F\u0435\u0440\u0430\u0442\u043E\u0440\u043E\u0432."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("p", null, "\u041E\u0441\u0442\u0430\u043B\u0438\u0441\u044C \u0432\u043E\u043F\u0440\u043E\u0441\u044B \u2014 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
         href: "mailto:info@kotofey.store"
       }, "info@kotofey.store"), " \u0438\u043B\u0438 ", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-        href: "tel:89967026637",
+        href: "tel:88002229070",
         className: "js-phone-mask"
-      }, "8 (996) 702 66-37")))));
+      }, "8 (800) 222 90-70")))));
     }
   }]);
 
@@ -8244,13 +8283,32 @@ var DeliveryService = /*#__PURE__*/function (_React$Component) {
   _createClass(DeliveryService, [{
     key: "render",
     value: function render() {
+      var _this = this;
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-delivery-service"
       }, this.props.models.map(function (el, key) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
           key: key,
-          className: "checkout-delivery-service__item"
-        }, el.name);
+          className: "checkout-delivery-service-item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+          onChange: _this.props.handleSelectDeliveryService,
+          type: "radio",
+          className: "checkout-delivery-service-item__input",
+          name: "service",
+          value: el.code
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-delivery-service-item__mark"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "far fa-check-circle"
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+          alt: el.name,
+          title: el.name,
+          className: "checkout-delivery-service-item__icon",
+          src: el.imageUrl
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "checkout-delivery-service-item__name"
+        }, el.name));
       }));
     }
   }]);

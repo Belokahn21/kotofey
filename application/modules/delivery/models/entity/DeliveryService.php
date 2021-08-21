@@ -2,6 +2,8 @@
 
 namespace app\modules\delivery\models\entity;
 
+use app\modules\delivery\models\helper\DeliveryServiceHelper;
+use app\modules\media\models\entity\Media;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -40,14 +42,28 @@ class DeliveryService extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'is_active' => 'Is Active',
-            'sort' => 'Sort',
-            'name' => 'Name',
-            'code' => 'Code',
-            'description' => 'Description',
-            'media_id' => 'Media ID',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'is_active' => 'Активность',
+            'sort' => 'Сортировка',
+            'name' => 'Название',
+            'code' => 'Символьный код',
+            'description' => 'Описание',
+            'media_id' => 'Картинка',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
+    }
+
+    public function extraFields()
+    {
+        return [
+            'imageUrl' => function ($model) {
+                return DeliveryServiceHelper::getImageUrl($model);
+            }
+        ];
+    }
+
+    public function getMedia()
+    {
+        return $this->hasOne(Media::className(), ['id' => 'media_id']);
     }
 }

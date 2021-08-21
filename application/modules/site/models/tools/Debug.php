@@ -10,17 +10,15 @@ class Debug
 {
     public static function p($target)
     {
-//        if (\Yii::$app->user->id == 1) {
-            if (!empty($target)) {
-                $debugInfo = debug_backtrace()[0];
+        if (!empty($target)) {
+            $debugInfo = debug_backtrace()[0];
 
-                echo "<pre>";
-                echo "info: line: " . $debugInfo['line'] . " in file: " . $debugInfo['file'];
-                echo "\n";
-                print_r($target);
-                echo "</pre>";
-            }
-//        }
+            echo "<pre>";
+            echo "info: line: " . $debugInfo['line'] . " in file: " . $debugInfo['file'];
+            echo "\n";
+            print_r($target);
+            echo "</pre>";
+        }
     }
 
     public static function isPageSpeed()
@@ -30,7 +28,7 @@ class Debug
 
     public static function printFile($target = null, $clear = false, $no_wrap = false)
     {
-        $filePath = \Yii::getAlias('@webroot/debug.html');
+        $filePath = \Yii::getAlias('@webroot/log.log');
 //        if (file_exists($filePath)) {
 //            chmod($filePath, 0777);
 //        }

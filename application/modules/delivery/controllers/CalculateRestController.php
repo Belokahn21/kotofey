@@ -2,10 +2,9 @@
 
 namespace app\modules\delivery\controllers;
 
+use yii\rest\Controller;
 use app\modules\basket\models\entity\Basket;
 use app\modules\delivery\models\service\DeliveryService;
-use app\modules\site\models\tools\Debug;
-use yii\rest\Controller;
 
 class CalculateRestController extends Controller
 {

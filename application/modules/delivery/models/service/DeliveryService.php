@@ -4,6 +4,7 @@ namespace app\modules\delivery\models\service;
 
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\delivery\models\service\delivery\tariffs\services\ProvideTariff;
+use app\modules\site\models\tools\Debug;
 
 class DeliveryService
 {
@@ -25,12 +26,15 @@ class DeliveryService
 
             $dcs = new DeliveryCalculateService(DeliveryCalculateService::SERVICE_RU_POST);
             $tariff = new ProvideTariff();
-            $tariffData = $dcs->getPriceInfo($tariff->make([
-                'service' => DeliveryCalculateService::SERVICE_RU_POST,
+
+            $tariff_params = [
+                'service' => $post_data['service'],
                 'index_from' => $module->default_index_from,
                 'index_to' => $post_data['index_to'],
-                'mass' => $mass,
-            ]));
+                'mass' => $mass * 1000,
+            ];
+
+            $tariffData = $dcs->getPriceInfo($tariff->make($tariff_params));
 
             return $tariffData;
         }

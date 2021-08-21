@@ -1,15 +1,13 @@
 <?php
 
-namespace app\modules\content\models\helpers;
+namespace app\modules\delivery\models\helper;
 
-
-use app\modules\content\models\entity\SlidersImages;
 use app\modules\media\models\entity\Media;
-use app\modules\site\models\tools\Debug;
+use app\modules\delivery\models\entity\DeliveryService;
 
-class SlidersImagesHelper
+class DeliveryServiceHelper
 {
-    public static function getImageUrl(SlidersImages $model, $options = [])
+    public static function getImageUrl(DeliveryService $model, $options = [])
     {
         if ($model->media) {
 

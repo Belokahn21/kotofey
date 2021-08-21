@@ -40,12 +40,13 @@ class CheckoutBasketElement extends React.Component {
                 </div>
                 {!element.article ? '' : <div className="light-checkout-list__article">Артикул: {element.article}</div>}
             </div>
-            {!element.id ? '' : <ProductForm key={element.id} updateBasketItem={this.props.updateBasketItem} element={element} options={{
+            <ProductForm key={element.name} updateBasketItem={this.props.updateBasketItem} element={element} options={{
                 'showButton': false,
                 'showInfo': false,
                 'showOneClick': false,
                 'showPrice': true,
-            }}/>}
+                'showControl': element.id !== undefined,
+            }}/>
         </li>
     }
 }
