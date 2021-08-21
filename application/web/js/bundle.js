@@ -7488,8 +7488,8 @@ var Checkout = /*#__PURE__*/function (_Component) {
       this.setState({
         selectedAddress: address,
         deliveryAddress: []
-      });
-      this.calculateDelivery();
+      }); // this.calculateDelivery();
+
       this.unsetError('address');
     }
   }, {
@@ -7755,7 +7755,7 @@ var Checkout = /*#__PURE__*/function (_Component) {
         attribute: "delivery_id",
         handlerSelect: this.handleSelectDelivery.bind(this),
         models: this.state.delivery
-      }), deliveryService, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__title"
       }, "\u0423\u043A\u0430\u0436\u0438\u0442\u0435 \u0432\u0430\u0448\u0438 \u0434\u0430\u043D\u043D\u044B\u0435"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "checkout-form__group-row"

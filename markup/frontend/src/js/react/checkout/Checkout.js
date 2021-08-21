@@ -326,7 +326,7 @@ class Checkout extends Component {
             deliveryAddress: []
         });
 
-        this.calculateDelivery();
+        // this.calculateDelivery();
         this.unsetError('address');
     }
 
@@ -447,7 +447,7 @@ class Checkout extends Component {
 
                         <Variants errors={this.state.errors} unsetError={this.unsetError.bind(this)} modelName={this.modelName} attribute="delivery_id" handlerSelect={this.handleSelectDelivery.bind(this)} models={this.state.delivery}/>
 
-                        {deliveryService}
+                        {/*{deliveryService}*/}
 
 
                         {/*<div className="checkout-form__title">Время и дата доставки</div>*/}
