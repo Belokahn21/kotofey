@@ -25,29 +25,27 @@ class NewsController extends Controller
 
     public function actionView($id)
     {
-        $new = News::findBySlug($id);
-        if ($new->slug) {
-            Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
-        }
+        $model = News::findBySlug($id);
 
-        if ($new->seo_description) {
-            Attributes::metaDescription($new->seo_description);
-        }
+        if (!$model->hasAccess()) return false;
 
-        if ($new->seo_keywords) {
-            Attributes::metaKeywords($new->seo_keywords);
-        }
+        if ($model->slug) Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $model->slug . "/");
 
-        OpenGraph::title($new->title);
-        OpenGraph::description(((!empty($new->preview)) ? $new->preview : $new->detail));
+        if ($model->seo_description) Attributes::metaDescription($model->seo_description);
+
+        if ($model->seo_keywords) Attributes::metaKeywords($model->seo_keywords);
+
+
+        OpenGraph::title($model->title);
+        OpenGraph::description(((!empty($model->preview)) ? $model->preview : $model->detail));
         OpenGraph::type("new");
-        OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $new->slug . "/");
+        OpenGraph::url(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $model->slug . "/");
 
-        if (!empty($new->preview_image)) {
-            OpenGraph::image(sprintf(' % s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $new->preview_image));
+        if (!empty($model->preview_image)) {
+            OpenGraph::image(sprintf(' % s://%s/web/upload/%s', System::protocol(), $_SERVER['SERVER_NAME'], $model->preview_image));
         }
 
-        return $this->render('view', ['model' => $new]);
+        return $this->render('view', ['model' => $model]);
 
     }
 }

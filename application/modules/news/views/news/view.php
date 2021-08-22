@@ -30,10 +30,15 @@ $this->title = Title::show($model->title);
             <div class="news-summary__key">Дата публикации</div>
             <div class="news-summary__value"><?= date('d.m.Y', $model->created_at); ?></div>
         </div>
-        <div class="news-summary__item">
-            <div class="news-summary__key">Рубрика</div>
-            <div class="news-summary__value"><?= NewsCategory::findOne($model->category)->name; ?></div>
-        </div>
+
+        <?php if ($model->categoryModel): ?>
+            <div class="news-summary__item">
+                <div class="news-summary__key">Рубрика</div>
+                <div class="news-summary__value"><?= $model->categoryModel->name; ?></div>
+            </div>
+        <?php endif; ?>
+
+
         <div class="news-summary__item">
             <div class="news-summary__key">Автор</div>
             <div class="news-summary__value">Редактор</div>

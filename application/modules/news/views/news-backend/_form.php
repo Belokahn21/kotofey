@@ -20,8 +20,9 @@ use mihaildev\ckeditor\CKEditor;
         <div class="form-element">
             <?= $form->field($model, 'is_active')->checkbox(); ?>
         </div>
-        <div class="form-element">
-            <?= $form->field($model, 'title'); ?>
+        <div class="row">
+            <div class="col-6"><?= $form->field($model, 'title'); ?></div>
+            <div class="col-6"><?= $form->field($model, 'slug'); ?></div>
         </div>
         <div class="form-element">
             <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?>

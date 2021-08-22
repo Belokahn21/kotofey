@@ -14,6 +14,7 @@ $this->title = Title::show("Новости");
 
     <div class="title-group">
         <h1><?= $model->title; ?></h1>
+        <?= Html::a("Посмотреть", Url::to(['news/view', 'id' => $model->slug]), ['class' => 'btn-main', 'target' => '_blank']) ?>
         <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>
     </div>
 

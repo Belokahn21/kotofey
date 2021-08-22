@@ -106,7 +106,7 @@ $this->title = Title::show("Новости");
             'class' => 'yii\grid\ActionColumn',
             'buttons' => [
                 'view' => function ($url, $model, $key) {
-//                    return Html::img('/images/eye.png', ['class' => 'grid-view-img feedback-view']);
+                    return Html::a('<i class="fas fa-external-link-alt"></i>', Url::to(["news/view", 'id' => $model->slug]), ['target' => '_blank']);
                 },
                 'update' => function ($url, $model, $key) {
                     return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));

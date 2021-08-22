@@ -27,6 +27,7 @@ use yii\db\ActiveRecord;
  * @property integer $updated_at
  *
  * @property string $detailurl
+ * @property NewsCategory $categoryModel
  */
 class News extends ActiveRecord
 {
@@ -83,6 +84,7 @@ class News extends ActiveRecord
         return [
             "is_active" => 'Активность',
             "title" => 'Заголовок',
+            "slug" => 'Символьный код',
             "preview" => 'Краткое описание',
             "detail" => 'Текст страницы',
             "category" => 'Раздел',
@@ -115,5 +117,11 @@ class News extends ActiveRecord
     public static function findBySlug($slug)
     {
         return static::findOne(['slug' => $slug]);
+    }
+
+    public function hasAccess()
+    {
+        return (boolean)$this->is_active || \Yii::$app->user->id == 1;
+//        return \Yii::$app->user->id != 1 && (boolean) $this->is_active;
     }
 }
