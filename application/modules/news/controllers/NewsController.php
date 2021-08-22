@@ -9,6 +9,7 @@ use app\modules\seo\models\tools\og\OpenGraph;
 use app\modules\site\models\tools\System;
 use app\modules\news\models\entity\News;
 use yii\web\Controller;
+use yii\web\HttpException;
 
 class NewsController extends Controller
 {
@@ -27,7 +28,7 @@ class NewsController extends Controller
     {
         $model = News::findBySlug($id);
 
-        if (!$model->hasAccess()) return false;
+        if (!$model->hasAccess()) new HttpException(404, 'Новость не найдена');
 
         if ($model->slug) Attributes::canonical(System::protocol() . "://" . System::domain() . "/" . Yii::$app->controller->action->id . "/" . $model->slug . "/");
 
