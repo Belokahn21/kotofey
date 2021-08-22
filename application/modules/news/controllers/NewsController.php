@@ -14,7 +14,7 @@ class NewsController extends Controller
 {
     public function actionIndex()
     {
-        $models = News::find()->orderBy(['created_at' => SORT_DESC])->all();
+        $models = News::find()->where(['is_active' => 1])->orderBy(['created_at' => SORT_DESC])->all();
         $categories = NewsCategory::find()->orderBy(['sort' => SORT_ASC])->all();
 
         return $this->render('index', [

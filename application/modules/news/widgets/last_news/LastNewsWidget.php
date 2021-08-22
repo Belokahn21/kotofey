@@ -19,7 +19,7 @@ class LastNewsWidget extends Widget
         $this->time_cache = 3600 * 60 * 24;
 
         $news = $cache->getOrSet($key, function () {
-            return News::find()->limit($this->limit)->orderBy(['created_at' => SORT_DESC])->all();
+            return News::find()->where(['is_active' => 1])->limit($this->limit)->orderBy(['created_at' => SORT_DESC])->all();
         }, $this->time_cache);
 
         return $this->render($this->view, [
