@@ -47,6 +47,7 @@ echo \yii\grid\GridView::widget([
         'ip',
         'text',
         'count',
+        'count_find',
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],

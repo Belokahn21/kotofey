@@ -1,15 +1,18 @@
 <?php
-/* @var $this yii\web\View */
 
-/* @var $model \app\modules\news\models\entity\News */
+
+/* @var $this yii\web\View
+ * @var $model \app\modules\news\models\entity\News
+ * @var $models_current_category \app\modules\news\models\entity\News[]
+ * @var $models_all \app\modules\news\models\entity\News[]
+ */
 
 use app\modules\news\models\tools\NewsHelper;
-use app\modules\news\models\entity\NewsCategory;
 use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
 
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/']];
-$this->params['breadcrumbs'][] = ['label' => $model->title, 'url' => [NewsHelper::getDetailUrl($model)]];
+$this->params['breadcrumbs'][] = ['label' => $model->title];
 $this->title = Title::show($model->title);
 ?>
 <div class="page">
@@ -22,31 +25,46 @@ $this->title = Title::show($model->title);
         ],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
-    <h1><?= $model->title; ?></h1>
-
-
-    <div class="news-summary">
-        <div class="news-summary__item">
-            <div class="news-summary__key">Дата публикации</div>
-            <div class="news-summary__value"><?= date('d.m.Y', $model->created_at); ?></div>
+    <div class="news-detail-container">
+        <div class="news-detail-sidebar">
+            <?php if ($models_current_category): ?>
+                <div class="news-detail-sidebar__title">Новости похожей рубрики</div>
+                <div class="other-news">
+                    <?php foreach ($models_current_category as $model_current_category): ?>
+                        <div class="other-news-item">
+                            <div class="other-news-item__title"><?= $model_current_category->title; ?></div>
+                            <div class="other-news-item__preview"><?= $model_current_category->preview; ?></div>
+                            <div class="other-news-item-group">
+                                <div class="other-news-item__date"><?= date('d.m.Y', $model_current_category->created_at); ?></div>
+                                <a href="<?= NewsHelper::getDetailUrl($model_current_category); ?>" class="other-news-item__next">Читать далее</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
+        <div class="news-detail-content">
+            <h1 class="page__title"><?= $model->title; ?></h1>
+            <?= $model->detail; ?>
+        </div>
+        <div class="news-detail-sidebar">
+            <?php if ($models_all): ?>
+                <div class="news-detail-sidebar__title">Все новости</div>
+                <div class="other-news">
+                    <?php foreach ($models_all as $model_all): ?>
+                        <div class="other-news-item">
+                            <div class="other-news-item__title"><?= $model_all->title; ?></div>
+                            <div class="other-news-item__preview"><?= $model_all->preview; ?></div>
+                            <div class="other-news-item-group">
+                                <div class="other-news-item__date"><?= date('d.m.Y', $model_all->created_at); ?></div>
+                                <a href="<?= NewsHelper::getDetailUrl($model_all); ?>" class="other-news-item__next">Читать далее</a>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
-        <?php if ($model->categoryModel): ?>
-            <div class="news-summary__item">
-                <div class="news-summary__key">Рубрика</div>
-                <div class="news-summary__value"><?= $model->categoryModel->name; ?></div>
-            </div>
-        <?php endif; ?>
-
-
-        <div class="news-summary__item">
-            <div class="news-summary__key">Автор</div>
-            <div class="news-summary__value">Редактор</div>
         </div>
     </div>
 
-    <div class="news-detail">
-        <img alt="<?= $model->title; ?>" class="news-detail__detail-img" src="<?= NewsHelper::getDetailImage($model, true); ?>">
-        <?= ($model->detail ? $model->detail : $model->preview); ?>
-    </div>
 </div>

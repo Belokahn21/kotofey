@@ -17,20 +17,20 @@ use mihaildev\ckeditor\CKEditor;
 </nav>
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <div class="form-element">
-            <?= $form->field($model, 'is_active')->checkbox(); ?>
+        <div class="row">
+            <div class="col-sm-12"><?= $form->field($model, 'is_active')->checkbox(); ?></div>
         </div>
         <div class="row">
-            <div class="col-6"><?= $form->field($model, 'title'); ?></div>
-            <div class="col-6"><?= $form->field($model, 'slug'); ?></div>
+            <div class="col-sm-6"><?= $form->field($model, 'title'); ?></div>
+            <div class="col-sm-6"><?= $form->field($model, 'slug'); ?></div>
         </div>
-        <div class="form-element">
-            <?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?>
+        <div class="row">
+            <div class="col-sm-12"><?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?></div>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
-        <div class="form-element">
-            <?= $form->field($model, 'seo_keywords')->textInput(); ?>
+        <div class="row">
+            <div class="col-sm-12"><?= $form->field($model, 'seo_keywords')->textInput(); ?></div>
         </div>
         <div class="form-element">
             <?= $form->field($model, 'seo_description')->textarea(); ?>

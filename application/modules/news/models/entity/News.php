@@ -122,6 +122,5 @@ class News extends ActiveRecord
     public function hasAccess()
     {
         return (boolean)$this->is_active || \Yii::$app->user->id == 1;
-//        return \Yii::$app->user->id != 1 && (boolean) $this->is_active;
     }
 }
