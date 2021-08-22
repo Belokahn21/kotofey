@@ -2,6 +2,7 @@
 
 namespace app\modules\news\models\entity;
 
+use app\modules\user\models\entity\User;
 use mohorev\file\UploadBehavior;
 use Yii;
 use yii\behaviors\SluggableBehavior;
@@ -28,6 +29,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string|null $seo_description
  * @property int $created_at
  * @property int $updated_at
+ *
+ * @property User $author
  */
 class News extends \yii\db\ActiveRecord
 {
@@ -64,7 +67,7 @@ class News extends \yii\db\ActiveRecord
 
             [['detail_media_id', 'preview_media_id', 'created_user_id', 'author_id', 'is_active', 'sort', 'category', 'created_at', 'updated_at'], 'integer'],
 
-            [['title', 'preview', 'detail'], 'required'],
+            [['title'], 'required'],
 
             [['preview', 'detail'], 'string'],
 
@@ -94,5 +97,25 @@ class News extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public static function findBySlug($slug)
+    {
+        return static::findOne(['slug' => $slug]);
+    }
+
+    public function hasAccess()
+    {
+        return Yii::$app->user->id == 1;
+    }
+
+    public function getAuthor()
+    {
+        return $this->hasOne(User::className(), ['id' => 'author_id']);
+    }
+
+    public function getCategoryModel()
+    {
+        return $this->hasOne(NewsCategory::className(), ['id' => 'category']);
     }
 }

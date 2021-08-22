@@ -7,9 +7,10 @@
  * @var $models_all \app\modules\news\models\entity\News[]
  */
 
-use app\modules\news\models\tools\NewsHelper;
-use app\modules\seo\models\tools\Title;
 use app\widgets\Breadcrumbs;
+use app\modules\seo\models\tools\Title;
+use app\modules\news\models\tools\NewsHelper;
+use app\modules\user\models\helpers\UserHelper;
 
 $this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/']];
 $this->params['breadcrumbs'][] = ['label' => $model->title];
@@ -45,7 +46,16 @@ $this->title = Title::show($model->title);
         </div>
         <div class="news-detail-content">
             <h1 class="page__title"><?= $model->title; ?></h1>
-            <?= $model->detail; ?>
+            <?php if ($model->author): ?>
+                <div class="news-detail-author">
+                    <div class="news-detail-author__avatar"><img src="<?= UserHelper::getAvatar($model->author); ?>"/></div>
+                    <div class="news-detail-author-data">
+                        <div class="news-detail-author-data__title">Автор <a href="#"><?= UserHelper::getFullName($model->author); ?></a></div>
+                        <div class="news-detail-author-data__date">Опубликовано <?= date('', $model->created_at) ?></div>
+                    </div>
+                </div>
+            <?php endif; ?>
+            <div class="news-detail-text"><?= $model->detail; ?></div>
         </div>
         <div class="news-detail-sidebar">
             <?php if ($models_all): ?>

@@ -15693,6 +15693,31 @@ label[for="site-form-pet-avatar"] {
   .news-summary__value {
     padding: 5px; }
 
+.news-detail-author {
+  margin: 40px 0 60px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start; }
+  .news-detail-author__avatar {
+    margin-right: 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    width: 45px;
+    height: 45px;
+    border: 1px silver solid; }
+    .news-detail-author__avatar img {
+      width: 100%; }
+  .news-detail-author-data__title {
+    font-weight: bold; }
+    .news-detail-author-data__title a {
+      color: #ff1a4a;
+      text-decoration: none !important;
+      border-bottom: 1px dashed #ff1a4a; }
+
+.news-detail-text p {
+  margin: 0 0 22px; }
+
 .news-detail-container {
   display: flex;
   flex-direction: row;
