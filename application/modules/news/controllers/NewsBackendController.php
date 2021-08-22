@@ -13,7 +13,7 @@ class NewsBackendController extends MainBackendController
 
     public function actionIndex()
     {
-        $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_INSERT]);
+        $model = new $this->modelClass();
         $searchModel = new NewsSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
@@ -42,7 +42,6 @@ class NewsBackendController extends MainBackendController
         if (!$model) {
             throw new HttpException(404, 'Запись не существует');
         }
-        $model->scenario = $this->modelClass::SCENARIO_UPDATE;
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {

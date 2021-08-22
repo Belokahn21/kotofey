@@ -2,38 +2,35 @@
 
 namespace app\modules\news\models\entity;
 
-
 use mohorev\file\UploadBehavior;
+use Yii;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
-use yii\db\ActiveRecord;
 
 /**
- * News model
+ * This is the model class for table "news".
  *
- * @property integer $id
- * @property boolean $is_active
+ * @property int $id
+ * @property int|null $detail_media_id
+ * @property int|null $preview_media_id
+ * @property int|null $created_user_id
+ * @property int|null $author_id
+ * @property int|null $is_active
  * @property string $title
  * @property string $slug
+ * @property int $sort
+ * @property int|null $category
  * @property string $preview
- * @property string $preview_image
+ * @property string|null $preview_image
  * @property string $detail
- * @property string $detail_image
- * @property integer $sort
- * @property integer $category
- * @property string $seo_keywords
- * @property string $seo_description
- * @property integer $created_at
- * @property integer $updated_at
- *
- * @property string $detailurl
- * @property NewsCategory $categoryModel
+ * @property string|null $detail_image
+ * @property string|null $seo_keywords
+ * @property string|null $seo_description
+ * @property int $created_at
+ * @property int $updated_at
  */
-class News extends ActiveRecord
+class News extends \yii\db\ActiveRecord
 {
-    const SCENARIO_INSERT = 'insert';
-    const SCENARIO_UPDATE = 'update';
-
     public function behaviors()
     {
         return [
@@ -46,14 +43,14 @@ class News extends ActiveRecord
             [
                 'class' => UploadBehavior::class,
                 'attribute' => 'preview_image',
-                'scenarios' => ['insert', 'update'],
+                'scenarios' => ['default'],
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/',
             ],
             [
                 'class' => UploadBehavior::class,
                 'attribute' => 'detail_image',
-                'scenarios' => ['insert', 'update'],
+                'scenarios' => ['default'],
                 'path' => '@webroot/upload/',
                 'url' => '@web/upload/',
             ],
@@ -63,64 +60,39 @@ class News extends ActiveRecord
     public function rules()
     {
         return [
-            [['title'], 'required', 'message' => "{attribute} обязательное"],
+            [['created_user_id'], 'default', 'value' => Yii::$app->user->id],
 
-            [
-                ['title', 'preview', 'detail', 'seo_keywords', 'seo_description'],
-                'string',
-                'message' => "{attribute} должен быть строкой"
-            ],
+            [['detail_media_id', 'preview_media_id', 'created_user_id', 'author_id', 'is_active', 'sort', 'category', 'created_at', 'updated_at'], 'integer'],
 
-            ['sort', 'default', 'value' => 500],
+            [['title', 'preview', 'detail'], 'required'],
 
-            [['category', 'is_active'], 'integer'],
+            [['preview', 'detail'], 'string'],
 
-            [['preview_image', 'detail_image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
+            [['title', 'slug', 'preview_image', 'detail_image', 'seo_keywords', 'seo_description'], 'string', 'max' => 255],
         ];
     }
 
     public function attributeLabels()
     {
         return [
-            "is_active" => 'Активность',
-            "title" => 'Заголовок',
-            "slug" => 'Символьный код',
-            "preview" => 'Краткое описание',
-            "detail" => 'Текст страницы',
-            "category" => 'Раздел',
-            "seo_keywords" => '(SEO) Ключи',
-            "seo_description" => '(SEO) Описание',
-            "created_at" => 'Дата создания',
-            "preview_image_file" => 'Изображение анонса',
-            "detail_image_file" => 'Детальное изображение',
+            'id' => 'ID',
+            'detail_media_id' => 'Детальная картинка',
+            'preview_media_id' => 'Картинка превью',
+            'created_user_id' => 'Кто создал',
+            'author_id' => 'Автор статьи',
+            'is_active' => 'Активность',
+            'title' => 'Заголовок',
+            'slug' => 'Символьный код',
+            'sort' => 'Сортировка',
+            'category' => 'Категория',
+            'preview' => 'Превью текст',
+            'preview_image' => 'Превью картинка',
+            'detail' => 'Детальное описание',
+            'detail_image' => 'Дательная картинка',
+            'seo_keywords' => 'Seo Keywords',
+            'seo_description' => 'Seo Description',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
-    }
-
-    public function scenarios()
-    {
-        return [
-            self::SCENARIO_INSERT => ['title', 'sort', 'preview', 'detail', 'category', 'seo_keywords', 'seo_description', 'created_at', 'preview_image', 'detail_image', 'is_active'],
-            self::SCENARIO_UPDATE => ['title', 'sort', 'preview', 'detail', 'category', 'seo_keywords', 'seo_description', 'created_at', 'preview_image', 'detail_image', 'is_active']
-        ];
-    }
-
-    public function getDetailurl()
-    {
-        return "/news/" . $this->slug . "/";
-    }
-
-    public function getCategoryModel()
-    {
-        return $this->hasOne(NewsCategory::className(), ['id' => 'category']);
-    }
-
-    public static function findBySlug($slug)
-    {
-        return static::findOne(['slug' => $slug]);
-    }
-
-    public function hasAccess()
-    {
-        return (boolean)$this->is_active || \Yii::$app->user->id == 1;
     }
 }

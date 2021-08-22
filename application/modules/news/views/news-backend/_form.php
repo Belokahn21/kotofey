@@ -1,10 +1,12 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\modules\news\models\entity\NewsCategory;
 use mihaildev\ckeditor\CKEditor;
+use app\modules\user\models\entity\User;
+use app\modules\news\models\entity\NewsCategory;
 
 /* @var $model \app\modules\news\models\entity\News */
+/* @var $form \yii\widgets\ActiveForm */
 
 ?>
 <nav>
@@ -21,6 +23,9 @@ use mihaildev\ckeditor\CKEditor;
             <div class="col-sm-12"><?= $form->field($model, 'is_active')->checkbox(); ?></div>
         </div>
         <div class="row">
+            <div class="col-sm-12"><?= $form->field($model, 'author_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Автор статьи']); ?></div>
+        </div>
+        <div class="row">
             <div class="col-sm-6"><?= $form->field($model, 'title'); ?></div>
             <div class="col-sm-6"><?= $form->field($model, 'slug'); ?></div>
         </div>
@@ -32,8 +37,8 @@ use mihaildev\ckeditor\CKEditor;
         <div class="row">
             <div class="col-sm-12"><?= $form->field($model, 'seo_keywords')->textInput(); ?></div>
         </div>
-        <div class="form-element">
-            <?= $form->field($model, 'seo_description')->textarea(); ?>
+        <div class="row">
+            <div class="col-sm-12"><?= $form->field($model, 'seo_description')->textarea(); ?></div>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-preview" role="tabpanel" aria-labelledby="nav-preview-tab">
