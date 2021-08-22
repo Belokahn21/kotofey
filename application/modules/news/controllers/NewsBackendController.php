@@ -2,20 +2,18 @@
 
 namespace app\modules\news\controllers;
 
-use app\modules\news\models\entity\News;
 use app\modules\news\models\search\NewsSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\widgets\notification\Alert;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
 use yii\web\HttpException;
 
 class NewsBackendController extends MainBackendController
 {
+    public $modelClass = 'app\modules\news\models\entity\News';
+
     public function actionIndex()
     {
-        $model = new News(['scenario' => News::SCENARIO_INSERT]);
+        $model = new $this->modelClass(['scenario' => $this->modelClass::SCENARIO_INSERT]);
         $searchModel = new NewsSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
@@ -40,11 +38,11 @@ class NewsBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = News::findOne($id);
+        $model = $this->modelClass::findOne($id);
         if (!$model) {
             throw new HttpException(404, 'Запись не существует');
         }
-        $model->scenario = News::SCENARIO_UPDATE;
+        $model->scenario = $this->modelClass::SCENARIO_UPDATE;
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -64,7 +62,7 @@ class NewsBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (News::findOne($id)->delete()) {
+        if ($this->modelClass::findOne($id)->delete()) {
             Alert::setSuccessNotify('Новость успешно удалена');
         }
 

@@ -11,19 +11,20 @@ use yii\helpers\Url;
 
 $this->title = Title::show("Новости");
 ?>
-
-
-<section>
+<div class="title-group">
     <h1 class="title">Новости</h1>
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $this->render('_form', [
-        'form' => $form,
-        'model' => $model,
-    ]); ?>
-    <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-    <?php ActiveForm:: end(); ?>
-</section>
-<div class="clearfix"></div>
+</div>
+
+
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?= $this->render('_form', [
+    'form' => $form,
+    'model' => $model,
+]); ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?php ActiveForm:: end(); ?>
+
+
 <h2>Список новостей</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -62,7 +63,10 @@ $this->title = Title::show("Новости");
             'attribute' => 'category',
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::a(NewsCategory::findOne($model->category)->name, Url::to(['admin/newssections', 'id' => $model->category]), ['target' => '_blank']);
+                $category = NewsCategory::findOne($model->category);
+                if ($category) {
+                    return Html::a($category->name, Url::to(['admin/newssections', 'id' => $model->category]), ['target' => '_blank']);
+                }
             }
         ],
         [

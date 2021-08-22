@@ -28,16 +28,16 @@ class CdekTariffData implements TariffDataInterface
             if ($key == 'dimension') {
                 $sum_volumes = 0;
                 $sum_s = 0;
-                foreach ($data['dimension'] as $product_id => $data) {
+                foreach (ArrayHelper::getColumn($data, 'dimension') as $product_id => $dimension_data) {
                     $this->packages[] = [
-                        'width' => $data['width'],
-                        'height' => $data['height'],
-                        'length' => $data['length'],
-                        'weight' => $data['weight'] * 1000,
+                        'width' => $dimension_data['width'],
+                        'height' => $dimension_data['height'],
+                        'length' => $dimension_data['length'],
+                        'weight' => $dimension_data['weight'] * 1000,
                     ];
 
-                    $sum_volumes += DimensionHelper::getBoxVolume($data['width'], $data['height'], $data['length']);
-                    $sum_s += DimensionHelper::getBoxSquare($data['width'], $data['height'], $data['length']);
+                    $sum_volumes += DimensionHelper::getBoxVolume($dimension_data['width'], $dimension_data['height'], $dimension_data['length']);
+                    $sum_s += DimensionHelper::getBoxSquare($dimension_data['width'], $dimension_data['height'], $dimension_data['length']);
 
                     continue;
                 }

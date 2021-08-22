@@ -11,7 +11,7 @@ class NewsSearchForm extends News
 
     public static function tableName()
     {
-        return "news";
+        return News::tableName();
     }
 
     public function rules()
@@ -29,7 +29,7 @@ class NewsSearchForm extends News
 
     public function search($params)
     {
-        $query = News::find();
+        $query = News::find()->orderBy(['created_at' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

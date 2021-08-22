@@ -5,6 +5,7 @@ namespace app\modules\delivery\models\service;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\delivery\models\service\delivery\tariffs\services\ProvideTariff;
 use app\modules\site\models\tools\Debug;
+use yii\helpers\ArrayHelper;
 
 class DeliveryService
 {
@@ -20,18 +21,32 @@ class DeliveryService
         if ($this->checkWeight()) {
             $module = \Yii::$app->getModule('delivery');
             $mass = 0;
+            $dimensions = [];
             foreach ($this->products as $product) {
-                $mass += PropertiesHelper::getProductWeight($product->id);
+                $mass_tmp = PropertiesHelper::getProductWeight($product->id);
+                $height = ArrayHelper::getValue(PropertiesHelper::extractPropertyById($product, PropertiesHelper::PROPERTY_HEIGHT), 'value', 0);
+                $width = ArrayHelper::getValue(PropertiesHelper::extractPropertyById($product, PropertiesHelper::PROPERTY_WEIGHT), 'value', 0);
+                $length = ArrayHelper::getValue(PropertiesHelper::extractPropertyById($product, PropertiesHelper::PROPERTY_LENGTH), 'value', 0);
+
+                $mass += $mass_tmp;
+
+                $dimensions[] = [
+                    'weight' => $mass_tmp,
+                    'width' => $width,
+                    'height' => $height,
+                    'length' => $length,
+                ];
             }
 
-            $dcs = new DeliveryCalculateService(DeliveryCalculateService::SERVICE_RU_POST);
+            $dcs = new DeliveryCalculateService($post_data['service']);
             $tariff = new ProvideTariff();
 
             $tariff_params = [
                 'service' => $post_data['service'],
-                'index_from' => $module->default_index_from,
-                'index_to' => $post_data['index_to'],
+                'placement_from' => $module->default_index_from,
+                'placement_to' => $post_data['index_to'],
                 'mass' => $mass * 1000,
+                'dimension' => $dimensions
             ];
 
             $tariffData = $dcs->getPriceInfo($tariff->make($tariff_params));
