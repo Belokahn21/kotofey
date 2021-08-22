@@ -51,7 +51,7 @@ $this->title = Title::show($model->title);
                     <div class="news-detail-author__avatar"><img src="<?= UserHelper::getAvatar($model->author); ?>"/></div>
                     <div class="news-detail-author-data">
                         <div class="news-detail-author-data__title">Автор <a href="#"><?= UserHelper::getFullName($model->author); ?></a></div>
-                        <div class="news-detail-author-data__date">Опубликовано <?= date('', $model->created_at) ?></div>
+                        <div class="news-detail-author-data__date">Опубликовано <?= date('M d, Y', $model->created_at) ?></div>
                     </div>
                 </div>
             <?php endif; ?>
