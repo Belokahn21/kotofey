@@ -397,7 +397,10 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                     <?php if ($searches = SearchQuery::find()->where(['ip' => $model->ip])->all()): ?>
                         <ul>
                             <?php foreach ($searches as $search): ?>
-                                <li><?= $search->text; ?></li>
+                                <li>
+                                    <span><?= $search->text; ?></span>
+                                    <span><?= date('d.m.Y', $search->created_at) == date('d.m.Y') ? 'Сегодня' : date('d.m.Y', $search->created_at); ?></span>
+                                </li>
                             <?php endforeach; ?>
                         </ul>
                     <?php endif; ?>
