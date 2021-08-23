@@ -7,6 +7,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use app\modules\seo\models\tools\Title;
+use \app\modules\site\models\tools\IP;
 
 $this->title = Title::show('История поиска');
 ?>
@@ -44,7 +45,37 @@ echo \yii\grid\GridView::widget([
     'emptyText' => 'История поиска отсутствует',
     'columns' => [
         'id',
-        'ip',
+        [
+            'attribute' => 'ip',
+            'format' => 'raw',
+            'value' => function ($model) {
+
+                if ($ip_info = IP::getIpInfo($model->ip)) {
+                    $time_zone = $ip_info['geoplugin_timezone'];
+                    $country = $ip_info['geoplugin_countryName'];
+                    $city = $ip_info['geoplugin_city'];
+                    $region = $ip_info['geoplugin_region'];
+                    $country_code = $ip_info['geoplugin_countryCode'];
+                    return Html::tag('span', $model->ip . Html::tag('div', $city ?: $time_zone), [
+                        'class' => "ip-info-tooltip",
+                        'rel' => "tooltip",
+                        'data-placement' => "left",
+                        'data-html' => "true",
+                        'title' => <<<INFO
+Timezone: {$time_zone}<br>
+Страна: {$country}<br>
+Регион: {$region}<br>
+Город: {$city}<br>
+Код страны: {$country_code}<br>
+INFO
+
+                    ]);
+
+                }
+
+                return $model->ip;
+            }
+        ],
         'text',
         'count',
         'count_find',
