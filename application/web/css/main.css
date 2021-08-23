@@ -15718,6 +15718,9 @@ label[for="site-form-pet-avatar"] {
 .news-detail-text p {
   margin: 0 0 22px; }
 
+.news-detail-text h1, .news-detail-text h2, .news-detail-text h3, .news-detail-text h4, .news-detail-text h5, .news-detail-text h6 {
+  font-weight: bold; }
+
 .news-detail-text h3 {
   margin: 20px 0 10px;
   font-size: 20px; }
@@ -15748,6 +15751,17 @@ label[for="site-form-pet-avatar"] {
   padding: 0 20px;
   max-width: 768px;
   width: 100%; }
+
+.news-detail-comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between; }
+  .news-detail-comment-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start; }
 
 .other-news {
   display: flex;
