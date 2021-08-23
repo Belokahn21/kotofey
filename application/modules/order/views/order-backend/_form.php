@@ -395,14 +395,12 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                 </div>
                 <div class="col-sm-6">
                     <?php if ($searches = SearchQuery::find()->where(['ip' => $model->ip])->all()): ?>
-                        <ul>
-                            <?php foreach ($searches as $search): ?>
-                                <li>
-                                    <span class="bold"><?= $search->text; ?>&nbsp;&nbsp;&nbsp;</span>
-                                    <span><?= date('d.m.Y', $search->created_at) == date('d.m.Y') ? '<span class="bold green">Сегодня</span>' : date('d.m.Y', $search->created_at); ?></span>
-                                </li>
-                            <?php endforeach; ?>
-                        </ul>
+                        <?php foreach ($searches as $search): ?>
+                            <div class="row">
+                                <div class="col-sm-6"><span class="bold"><?= $search->text; ?></span></div>
+                                <div class="col-sm-6"><span><?= date('d.m.Y', $search->created_at) == date('d.m.Y') ? '<span class="bold green">Сегодня</span>' : date('d.m.Y', $search->created_at); ?></span></div>
+                            </div>
+                        <?php endforeach; ?>
                     <?php endif; ?>
                 </div>
             </div>
