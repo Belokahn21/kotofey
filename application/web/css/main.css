@@ -15716,7 +15716,9 @@ label[for="site-form-pet-avatar"] {
       border-bottom: 1px dashed #ff1a4a; }
 
 .news-detail-text p {
-  margin: 0 0 22px; }
+  margin: 0 0 22px;
+  font-size: 16px;
+  line-height: 1.7; }
 
 .news-detail-text h1, .news-detail-text h2, .news-detail-text h3, .news-detail-text h4, .news-detail-text h5, .news-detail-text h6 {
   font-weight: bold; }
