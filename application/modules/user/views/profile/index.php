@@ -97,6 +97,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                     <div class="page__group-row">
                         <div class="page__left">
                             <div class="site-form__item">
+                                <?= Html::label('Логин/Ник', 'site-form-login', ['class' => 'site-form__label']) ?>
+                                <?= $form->field($model, 'login')->textInput(['id' => 'site-form-login', 'class' => 'site-form__input'])->label(false); ?>
+                            </div>
+                            <div class="site-form__item">
                                 <?= Html::label('Адрес вашей электронной почты', 'site-form-email', ['class' => 'site-form__label']) ?>
                                 <?= $form->field($model, 'email')->textInput(['id' => 'site-form-email', 'class' => 'site-form__input'])->label(false); ?>
                             </div>

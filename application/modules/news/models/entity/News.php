@@ -94,8 +94,8 @@ class News extends \yii\db\ActiveRecord
             'detail_image' => 'Дательная картинка',
             'seo_keywords' => 'Seo Keywords',
             'seo_description' => 'Seo Description',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'created_at' => 'Дата создания',
+            'updated_at' => 'Дата обновления',
         ];
     }
 

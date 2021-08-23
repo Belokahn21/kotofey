@@ -16,6 +16,7 @@ use app\modules\rbac\models\entity\AuthAssignment;
  * User model
  *
  * @property integer $id
+ * @property string $login
  * @property string $auth_key
  * @property string $access_token
  * @property string $email
@@ -50,7 +51,7 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return [
             self::SCENARIO_INSERT => ['phone', 'email', 'password', 'groups', 'new_password'],
-            self::SCENARIO_UPDATE => ['phone', 'email', 'password', 'groups', 'new_password', 'name', 'first_name', 'last_name', 'sex'],
+            self::SCENARIO_UPDATE => ['phone', 'email', 'password', 'groups', 'new_password', 'name', 'first_name', 'last_name', 'sex', 'login'],
             self::SCENARIO_LOGIN => ['phone', 'email', 'password'],
             self::SCENARIO_CHECKOUT => ['phone', 'email', 'password'],
             self::SCENARIO_PROFILE_UPDATE => ['email', 'sex', 'avatar'],
@@ -77,6 +78,9 @@ class User extends ActiveRecord implements IdentityInterface
             [['email', 'password', 'phone'], 'required', 'on' => [self::SCENARIO_INSERT, self::SCENARIO_CHECKOUT], 'message' => '{attribute} не может быть пустым'],
             [['email', 'password'], 'required', 'on' => self::SCENARIO_LOGIN, 'message' => '{attribute} не может быть пустым'],
 
+            ['login', 'string'],
+            ['login', 'unique'],
+
             ['password', 'string'],
             ['groups', 'safe'],
 
@@ -102,6 +106,7 @@ class User extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
+            'login' => "Логин/Ник нейм",
             'phone' => "Телефон",
             'first_name' => "Фамилия",
             'name' => "Имя",
@@ -147,31 +152,14 @@ class User extends ActiveRecord implements IdentityInterface
         return false;
     }
 
-    public function getBilling()
-    {
-        return UserBilling::findByUser($this->id);
-    }
+//    public function getBilling()
+//    {
+//        return UserBilling::findByUser($this->id);
+//    }
 
     public function getGroup()
     {
         return AuthItem::find()->where(['name' => AuthAssignment::findOne(['user_id' => $this->id])->item_name])->all();
-    }
-
-    public function getDisplay()
-    {
-        $display_name = null;
-
-        foreach (['first_name', 'name', 'last_name'] as $attr) {
-            if (!empty($this->{$attr})) {
-                $display_name .= $this->{$attr} . " ";
-            }
-        }
-
-        if ($display_name === null) {
-            $display_name = $this->email;
-        }
-
-        return $display_name;
     }
 
     //---------------------------------
