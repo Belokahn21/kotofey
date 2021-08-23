@@ -397,7 +397,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                     <?php if ($searches = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->where(['ip' => $model->ip])->all()): ?>
                         <?php foreach ($searches as $search): ?>
                             <div class="row">
-                                <div class="col-sm-6"><span class="bold"><?= $search->text; ?></span></div>
+                                <div class="col-sm-6"><?= $search->text; ?></div>
                                 <div class="col-sm-6"><span><?= date('d.m.Y', $search->created_at) == date('d.m.Y') ? '<span class="bold green">Сегодня</span>' : date('d.m.Y', $search->created_at); ?></span></div>
                             </div>
                         <?php endforeach; ?>
