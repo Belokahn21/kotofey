@@ -1,13 +1,15 @@
 <?php
-/* @var $this \yii\web\View */
-/* @var $statistic_queries array */
 
-/* @var $model \app\modules\search\models\entity\SearchQuery */
+/* @var $this \yii\web\View
+ * @var $statistic_queries array
+ * @var $model \app\modules\search\models\entity\SearchQuery
+ */
 
-use yii\helpers\Html;
 use yii\helpers\Url;
-use app\modules\seo\models\tools\Title;
+use yii\helpers\Html;
 use \app\modules\site\models\tools\IP;
+use app\modules\seo\models\tools\Title;
+use app\modules\order\models\entity\Order;
 
 $this->title = Title::show('История поиска');
 ?>
@@ -76,9 +78,22 @@ INFO
                 return $model->ip;
             }
         ],
-        'text',
+        [
+            'attribute' => 'text',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Html::a($model->text, Url::to(['search/index', 'Search[search]' => $model->text]), ['target' => '_blank']);
+            }
+        ],
         'count',
         'count_find',
+        [
+            'label' => 'Заказов',
+            'format' => 'raw',
+            'value' => function ($model) {
+                return Order::find()->where(['ip' => $model->ip])->count();
+            }
+        ],
         [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
