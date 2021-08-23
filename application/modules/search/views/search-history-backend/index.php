@@ -91,7 +91,12 @@ INFO
             'label' => 'Заказов',
             'format' => 'raw',
             'value' => function ($model) {
-                return Order::find()->where(['ip' => $model->ip])->count();
+                $count = Order::find()->where(['ip' => $model->ip])->count();
+                if ($count > 0) {
+                    return Html::a($count, Url::to(['/admin/order/order-backend/index', 'OrderSearchForm[ip]' => $model->ip]));
+                } else {
+                    return Html::tag('div', $count);
+                }
             }
         ],
         [

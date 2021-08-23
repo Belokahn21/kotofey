@@ -3,11 +3,12 @@
 use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
-use app\modules\site\models\tools\PriceTool;
 use app\modules\site\models\tools\Currency;
 use app\modules\order\widgets\map\MapWidget;
+use app\modules\site\models\tools\PriceTool;
 use \app\modules\user\models\helpers\UserHelper;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\search\models\entity\SearchQuery;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrderMailHistory;
@@ -364,31 +365,44 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
     </div>
     <?php if (!$model->isNewRecord): ?>
         <div class="tab-pane fade" id="nav-history-edit" role="tabpanel" aria-labelledby="nav-history-edit">
-            <?php if ($bonus = \app\modules\bonus\models\entity\UserBonusHistory::findOneByOrder($model)): ?>
-                <?= Html::a('Начислено ' . $bonus->count . ' бонуса', Url::to(['/admin/bonus/bonus-history-backend/update', 'id' => $bonus->id])); ?>
-            <?php endif; ?>
+            <div class="row">
+                <div class="col-sm-6">
+                    <?php if ($bonus = \app\modules\bonus\models\entity\UserBonusHistory::findOneByOrder($model)): ?>
+                        <?= Html::a('Начислено ' . $bonus->count . ' бонуса', Url::to(['/admin/bonus/bonus-history-backend/update', 'id' => $bonus->id])); ?>
+                    <?php endif; ?>
 
-            <?php if ($sberPayment = AcquiringOrder::findOne(['order_id' => $model->id])): ?>
-                <hr/>
-                <?= Html::a('Эквайринг транзакция: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
-            <?php endif; ?>
+                    <?php if ($sberPayment = AcquiringOrder::findOne(['order_id' => $model->id])): ?>
+                        <hr/>
+                        <?= Html::a('Эквайринг транзакция: ' . $sberPayment->identifier_id, Url::to(['/admin/acquiring/acquiring-backend/update', 'id' => $sberPayment->id])); ?>
+                    <?php endif; ?>
 
-            <?php if ($check = AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
-                <hr/>
-                <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
-            <?php endif; ?>
+                    <?php if ($check = AcquiringOrderCheck::findOne(['order_id' => $model->id])): ?>
+                        <hr/>
+                        <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
+                    <?php endif; ?>
 
-            <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
-                <hr/>
-                <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
-            <?php endif; ?>
+                    <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
+                        <hr/>
+                        <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
+                    <?php endif; ?>
 
-            <?php if ($transfers = ProductTransferHistory::find()->where(['order_id' => $model->id])->all()): ?>
-                <?php foreach ($transfers as $transfer): ?>
-                    <hr/>
-                    (<strong><?= ArrayHelper::getValue($transfer->getOperations(), $transfer->operation_id); ?></strong>) <?= Html::a($transfer->reason, Url::to(['/admin/catalog/transfer-backend/update', 'id' => $transfer->id])) ?>
-                <?php endforeach; ?>
-            <?php endif; ?>
+                    <?php if ($transfers = ProductTransferHistory::find()->where(['order_id' => $model->id])->all()): ?>
+                        <?php foreach ($transfers as $transfer): ?>
+                            <hr/>
+                            (<strong><?= ArrayHelper::getValue($transfer->getOperations(), $transfer->operation_id); ?></strong>) <?= Html::a($transfer->reason, Url::to(['/admin/catalog/transfer-backend/update', 'id' => $transfer->id])) ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+                </div>
+                <div class="col-sm-6">
+                    <?php if ($searches = SearchQuery::find()->where(['ip' => $model->ip])->all()): ?>
+                        <ul>
+                            <?php foreach ($searches as $search): ?>
+                                <li><?= $search->text; ?></li>
+                            <?php endforeach; ?>
+                        </ul>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     <?php endif; ?>
 
