@@ -398,8 +398,8 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                         <ul>
                             <?php foreach ($searches as $search): ?>
                                 <li>
-                                    <span><?= $search->text; ?></span>
-                                    <span><?= date('d.m.Y', $search->created_at) == date('d.m.Y') ? 'Сегодня' : date('d.m.Y', $search->created_at); ?></span>
+                                    <span class="bold"><?= $search->text; ?>&nbsp;&nbsp;&nbsp;</span>
+                                    <span><?= date('d.m.Y', $search->created_at) == date('d.m.Y') ? '<span class="bold green">Сегодня</span>' : date('d.m.Y', $search->created_at); ?></span>
                                 </li>
                             <?php endforeach; ?>
                         </ul>
