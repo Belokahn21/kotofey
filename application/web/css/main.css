@@ -15742,6 +15742,9 @@ label[for="site-form-pet-avatar"] {
   padding: 10px;
   max-width: 250px;
   width: 100%; }
+  @media (max-width: 780px) {
+    .news-detail-sidebar {
+      display: none; } }
   .news-detail-sidebar__title {
     font-weight: bold;
     font-size: 12px;
@@ -15753,6 +15756,8 @@ label[for="site-form-pet-avatar"] {
   padding: 0 20px;
   max-width: 768px;
   width: 100%; }
+  .news-detail-content .page__title {
+    font-size: 1.25rem; }
 
 .news-detail-comment {
   display: flex;
