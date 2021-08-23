@@ -394,7 +394,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                     <?php endif; ?>
                 </div>
                 <div class="col-sm-6">
-                    <?php if ($searches = SearchQuery::find()->where(['ip' => $model->ip])->all()): ?>
+                    <?php if ($searches = SearchQuery::find()->orderBy(['created_at' => SORT_DESC])->where(['ip' => $model->ip])->all()): ?>
                         <?php foreach ($searches as $search): ?>
                             <div class="row">
                                 <div class="col-sm-6"><span class="bold"><?= $search->text; ?></span></div>
