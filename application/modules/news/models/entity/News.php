@@ -20,7 +20,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $title
  * @property string $slug
  * @property int $sort
- * @property int|null $category
+ * @property int|null $category_id
  * @property string $preview
  * @property string|null $preview_image
  * @property string $detail
@@ -31,6 +31,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $updated_at
  *
  * @property User $author
+ * @property NewsCategory $category
  */
 class News extends \yii\db\ActiveRecord
 {
@@ -65,7 +66,7 @@ class News extends \yii\db\ActiveRecord
         return [
             [['created_user_id'], 'default', 'value' => Yii::$app->user->id],
 
-            [['detail_media_id', 'preview_media_id', 'created_user_id', 'author_id', 'is_active', 'sort', 'category', 'created_at', 'updated_at'], 'integer'],
+            [['detail_media_id', 'preview_media_id', 'created_user_id', 'author_id', 'is_active', 'sort', 'category_id', 'created_at', 'updated_at'], 'integer'],
 
             [['title'], 'required'],
 
@@ -87,7 +88,7 @@ class News extends \yii\db\ActiveRecord
             'title' => 'Заголовок',
             'slug' => 'Символьный код',
             'sort' => 'Сортировка',
-            'category' => 'Категория',
+            'category_id' => 'Категория',
             'preview' => 'Превью текст',
             'preview_image' => 'Превью картинка',
             'detail' => 'Детальное описание',
@@ -114,8 +115,8 @@ class News extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'author_id']);
     }
 
-    public function getCategoryModel()
+    public function getCategory()
     {
-        return $this->hasOne(NewsCategory::className(), ['id' => 'category']);
+        return $this->hasOne(NewsCategory::className(), ['id' => 'category_id']);
     }
 }

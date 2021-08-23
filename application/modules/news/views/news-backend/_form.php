@@ -30,7 +30,7 @@ use app\modules\news\models\entity\NewsCategory;
             <div class="col-sm-6"><?= $form->field($model, 'slug'); ?></div>
         </div>
         <div class="row">
-            <div class="col-sm-12"><?= $form->field($model, 'category')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?></div>
+            <div class="col-sm-12"><?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(NewsCategory::find()->all(), 'id', 'name'), ['prompt' => 'Выбрать рубрику']); ?></div>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">

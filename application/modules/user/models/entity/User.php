@@ -86,7 +86,6 @@ class User extends ActiveRecord implements IdentityInterface
 
             [['phone'], 'string', 'max' => 25],
             ['phone', 'default', 'value' => null],
-//            ['phone', 'uniquePhoneLogin', 'on' => self::SCENARIO_INSERT],
             [
                 ['phone'],
                 'filter',

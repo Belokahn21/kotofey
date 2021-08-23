@@ -60,12 +60,12 @@ $this->title = Title::show("Новости");
             'format' => ['date', 'dd.MM.YYYY'],
         ],
         [
-            'attribute' => 'category',
+            'attribute' => 'category_id',
             'format' => 'raw',
             'value' => function ($model) {
-                $category = NewsCategory::findOne($model->category);
+                $category = NewsCategory::findOne($model->category_id);
                 if ($category) {
-                    return Html::a($category->name, Url::to(['admin/newssections', 'id' => $model->category]), ['target' => '_blank']);
+                    return Html::a($category->name, Url::to(['admin/newssections', 'id' => $model->category_id]), ['target' => '_blank']);
                 }
             }
         ],

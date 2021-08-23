@@ -44,7 +44,7 @@ class NewsController extends Controller
 
         $models_current_category = [];
         if ($model->category) {
-            $models_current_category = News::find()->limit(5)->where(['category' => $model->category])->all();
+            $models_current_category = News::find()->limit(5)->where(['category_id' => $model->category])->all();
         }
 
         $models_all = News::find()->limit(5)->all();
