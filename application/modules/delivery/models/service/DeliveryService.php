@@ -49,6 +49,7 @@ class DeliveryService
                 'dimension' => $dimensions
             ];
 
+            Debug::p($tariff_params);
             $tariffData = $dcs->getPriceInfo($tariff->make($tariff_params));
 
             return $tariffData;

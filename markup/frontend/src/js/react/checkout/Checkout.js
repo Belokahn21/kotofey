@@ -225,7 +225,6 @@ class Checkout extends Component {
     }
 
     handleSelectDeliveryService(event) {
-        console.log(event.target.value);
         this.setState({deliveryService: event.target.value || ''});
     }
 
