@@ -71,13 +71,15 @@ class CdekApi implements IDeliveryApi
 
     public function getPriceInfo(TariffDataInterface $tariff_data)
     {
+
+        $module = \Yii::$app->getModule('delivery');
+
         /* @var $tariff_data CdekTariffData */
         $params = [
             "type" => 1,
             "date" => date('Y-m-d\Th:i:s+0700'),
             "currency" => 1,
-//            "tariff_code" => 62,
-            "tariff_code" => 136,
+            "tariff_code" => $module->cdek_default_tariff_code,
             "lang" => "rus",
             "from_location" => [
                 'postal_code' => $tariff_data->from_location
