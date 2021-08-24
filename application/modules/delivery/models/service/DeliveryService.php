@@ -25,7 +25,7 @@ class DeliveryService
             foreach ($this->products as $product) {
                 $mass_tmp = PropertiesHelper::getProductWeight($product->id);
                 $height = ArrayHelper::getValue(PropertiesHelper::extractPropertyById($product, PropertiesHelper::PROPERTY_HEIGHT), 'value', 0);
-                $width = ArrayHelper::getValue(PropertiesHelper::extractPropertyById($product, PropertiesHelper::PROPERTY_WEIGHT), 'value', 0);
+                $width = ArrayHelper::getValue(PropertiesHelper::extractPropertyById($product, PropertiesHelper::PROPERTY_WIDTH), 'value', 0);
                 $length = ArrayHelper::getValue(PropertiesHelper::extractPropertyById($product, PropertiesHelper::PROPERTY_LENGTH), 'value', 0);
 
                 $mass += $mass_tmp;
