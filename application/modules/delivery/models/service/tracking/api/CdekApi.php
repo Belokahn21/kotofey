@@ -76,7 +76,8 @@ class CdekApi implements IDeliveryApi
             "type" => 1,
             "date" => date('Y-m-d\Th:i:s+0700'),
             "currency" => 1,
-            "tariff_code" => 62,
+//            "tariff_code" => 62,
+            "tariff_code" => 136,
             "lang" => "rus",
             "from_location" => [
                 'postal_code' => $tariff_data->from_location
