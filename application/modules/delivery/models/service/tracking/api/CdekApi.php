@@ -87,7 +87,11 @@ class CdekApi implements IDeliveryApi
             "packages" => $tariff_data->packages,
         ];
 
-        $response = $this->postRequest('/calculator/tarifflist', CurlDataFormat::asJson($params), [
+//        $response = $this->postRequest('/calculator/tarifflist', CurlDataFormat::asJson($params), [
+//            'Content-Type:application/json'
+//        ]);
+
+        $response = $this->postRequest('/calculator/tariff', CurlDataFormat::asJson($params), [
             'Content-Type:application/json'
         ]);
 
