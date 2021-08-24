@@ -18,11 +18,11 @@ $this->title = Title::show('Настройки модуля: ' . $module->name);
     <?php foreach ($module->getParams() as $moduleParameter => $defaultValue): ?>
         <div class="row">
             <?= $form->field($model, '[' . $moduleParameter . ']module_id')->hiddenInput(['value' => $module->id])->label(false); ?>
-            <div class="col-2">
+            <div class="col-6">
                 <b><?= ArrayHelper::getValue($module->getParamsLabel(), $moduleParameter, $moduleParameter); ?></b>
                 <?= $form->field($model, '[' . $moduleParameter . ']param_name')->hiddenInput(['value' => $moduleParameter])->label(false); ?>
             </div>
-            <div class="col-2">
+            <div class="col-6">
                 <?php $value = $defaultValue; ?>
                 <?php $valueModel = ModuleSettings::findOne(['module_id' => $module->id, 'param_name' => $moduleParameter]); ?>
                 <?php if ($valueModel) $value = $valueModel->param_value; ?>
