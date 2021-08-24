@@ -20,7 +20,6 @@ class Lukas implements ProviderInterface
 		], true);
 		$html = $page->content($url);
 
-		Debug::printFile($html);
 		$dom = new \DOMDocument();
 		$dom->loadHTML($html, LIBXML_HTML_NOIMPLIED | LIBXML_HTML_NODEFDTD | LIBXML_NOERROR | LIBXML_NOWARNING);
 

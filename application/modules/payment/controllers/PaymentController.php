@@ -32,8 +32,6 @@ class PaymentController extends Controller
 
     public function actionFail()
     {
-        Debug::printFile(\Yii::$app->request->post());
-        Debug::printFile(\Yii::$app->request->get());
         return $this->render('result');
     }
 }

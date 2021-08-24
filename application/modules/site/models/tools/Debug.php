@@ -8,6 +8,8 @@ use yii\db\ActiveRecord;
 
 class Debug
 {
+    const DEBUG_FILE_ALIAS_PATH = '@webroot/log.log';
+
     public static function p($target)
     {
         if (!empty($target)) {
@@ -28,7 +30,7 @@ class Debug
 
     public static function printFile($target = null, $clear = false, $no_wrap = false)
     {
-        $filePath = \Yii::getAlias('@webroot/log.log');
+        $filePath = \Yii::getAlias(self::DEBUG_FILE_ALIAS_PATH);
 //        if (file_exists($filePath)) {
 //            chmod($filePath, 0777);
 //        }

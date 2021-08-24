@@ -96,6 +96,7 @@ class CdekApi implements IDeliveryApi
             'Content-Type:application/json'
         ]);
 
+        Debug::printFile($response);
 
         $normalizer = new ResponseNormalizer();
 

@@ -2,6 +2,7 @@
 
 namespace app\modules\site\controllers;
 
+use app\modules\site\models\tools\Debug;
 use app\modules\user\models\entity\User;
 use Yii;
 use app\modules\site\models\forms\ConsoleForm;
@@ -16,7 +17,7 @@ class SiteBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
 
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['console', 'settings'], 'roles' => ['Administrator']],
+            ['allow' => true, 'actions' => ['console', 'settings','log','log-clear'], 'roles' => ['Administrator']],
         ]);
 
         return $parentAccess;
@@ -65,5 +66,19 @@ class SiteBackendController extends MainBackendController
         return $this->render('console', [
             'console' => $console
         ]);
+    }
+
+    public function actionLog()
+    {
+        $data = @file_get_contents(Yii::getAlias(Debug::DEBUG_FILE_ALIAS_PATH));
+        return $this->render('log', [
+            'data' => $data
+        ]);
+    }
+
+    public function actionLogClear()
+    {
+        unlink(Yii::getAlias(Debug::DEBUG_FILE_ALIAS_PATH));
+        return $this->redirect(['site-backend/log']);
     }
 }

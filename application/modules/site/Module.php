@@ -16,4 +16,11 @@ class Module extends MainModule
     {
         return $this->name;
     }
+
+    public function menuIndex()
+    {
+        return [
+            ['name' => 'Лог файл', 'url' => Url::to(['/admin/site/site-backend/log'])],
+        ];
+    }
 }
