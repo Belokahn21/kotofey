@@ -15756,8 +15756,9 @@ label[for="site-form-pet-avatar"] {
   padding: 0 20px;
   max-width: 768px;
   width: 100%; }
-  .news-detail-content .page__title {
-    font-size: 1.25rem; }
+  @media (max-width: 780px) {
+    .news-detail-content .page__title {
+      font-size: 1.25rem; } }
 
 .news-detail-comment {
   display: flex;

@@ -89,7 +89,9 @@
     width: 100%;
 
     .page__title {
-      font-size: 1.25rem;
+      @media (max-width: 780px) {
+        font-size: 1.25rem;
+      }
     }
   }
 

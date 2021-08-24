@@ -24,11 +24,22 @@ class CdekTariffData implements TariffDataInterface
 
     public function fill(array $data)
     {
+        Debug::printFile($data);
+
         foreach ($data as $key => $value) {
             if ($key == 'dimension') {
+
+                Debug::printFile($key);
+                Debug::printFile($value);
+
                 $sum_volumes = 0;
                 $sum_s = 0;
-                foreach (ArrayHelper::getColumn($data, 'dimension') as $product_id => $dimension_data) {
+
+
+                Debug::printFile(ArrayHelper::getColumn($data, 'dimension'));
+
+
+                foreach ($value as $product_id => $dimension_data) {
                     $this->packages[] = [
                         'width' => $dimension_data['width'],
                         'height' => $dimension_data['height'],
@@ -36,12 +47,14 @@ class CdekTariffData implements TariffDataInterface
                         'weight' => $dimension_data['weight'] * 1000,
                     ];
 
+
+                    Debug::printFile($dimension_data);
                     $sum_volumes += DimensionHelper::getBoxVolume($dimension_data['width'], $dimension_data['height'], $dimension_data['length']);
                     $sum_s += DimensionHelper::getBoxSquare($dimension_data['width'], $dimension_data['height'], $dimension_data['length']);
 
-                    continue;
                 }
 
+                continue;
             }
 
             if (ArrayHelper::keyExists($key, $this->alias)) {
