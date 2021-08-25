@@ -54,14 +54,15 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
                         <?= CatalogCategoriesWidget::widget([
                             'select' => ['id', 'name', 'slug', 'seo_title'],
                             'where' => ['id' => 1],
-                            'view' => 'footer-with-subs'
+                            'cache_key' => md5(__LINE__ . __FILE__),
                         ]); ?>
                     </div>
                     <div class="col-6">
                         <?= CatalogCategoriesWidget::widget([
                             'select' => ['id', 'name', 'slug', 'seo_title'],
                             'where' => ['id' => 2],
-                            'view' => 'footer-with-subs'
+                            'view' => 'footer-with-subs',
+                            'cache_key' => md5(__LINE__ . __FILE__),
                         ]); ?>
                     </div>
 
