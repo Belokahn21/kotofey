@@ -81,10 +81,9 @@ if ($category) {
             <?php endif; ?>
         </aside>
         <div class="catalog-wrap">
-
-
             <?= CatalogCategoriesWidget::widget([
-                'where' => !$category instanceof ProductCategory ? ['parent_category_id' => 0] : ['parent_category_id' => $category->id]
+                'where' => !$category instanceof ProductCategory ? ['parent_category_id' => 0] : ['parent_category_id' => $category->id],
+                'cache_key' => md5(__FILE__ . __LINE__),
             ]); ?>
 
 

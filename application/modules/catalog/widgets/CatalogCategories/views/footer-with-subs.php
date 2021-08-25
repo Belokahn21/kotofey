@@ -14,7 +14,7 @@ use app\modules\catalog\models\entity\ProductCategory;
                 <a class="footer-categories__link" href="<?= ProductCategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
             </li>
 
-            <?php $subCategories = [] ?>
+            <?php $subCategories = ProductCategory::find()->where(['parent_category_id' => $item->id])->all(); ?>
             <?php if ($subCategories): ?>
                 <?php foreach ($subCategories as $element): ?>
                     <li class="footer-categories__item">
