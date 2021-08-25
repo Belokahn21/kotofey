@@ -3,7 +3,6 @@
 namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\helpers\ProductCategoryHelper;
-use app\modules\site\models\tools\Debug;
 use Yii;
 use app\modules\catalog\models\form\CatalogFilter;
 use app\modules\seo\models\tools\Attributes;
