@@ -16,8 +16,8 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
  */
 
 ?>
-<?php if ($models): ?>
-    <?php if ($this->beginCache(md5($title . $uniqKey), ['duration' => 3600 * 24 * 7])): ?>
+<?php if ($this->beginCache(md5($title . $uniqKey), ['duration' => 3600 * 24 * 7])): ?>
+    <?php if ($models): ?>
         <div class="page-title__group">
             <h2 class="page-title"><?= $title; ?></h2>
 
@@ -65,5 +65,6 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
             </div>
             <div class="vitrine-swiper-pagination"></div>
         </div>
-        <?php $this->endCache(); endif; ?>
+    <?php endif; ?>
+    <?php $this->endCache(); ?>
 <?php endif; ?>

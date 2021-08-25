@@ -7,7 +7,7 @@ use app\modules\news\models\tools\NewsHelper;
 /* @var $this \yii\web\View */
 ?>
 
-<?php if ($this->beginCache(__FILE__ . __METHOD__)) : ?>
+<?php if ($this->beginCache(__FILE__ . __METHOD__, ['duration' => 3600 * 24 * 7])) : ?>
     <div class="page-title__group">
         <h2 class="page-title">Последние новости</h2><a class="page-title__link" href="<?= Url::to(['/news/']) ?>">Все новости</a>
     </div>
