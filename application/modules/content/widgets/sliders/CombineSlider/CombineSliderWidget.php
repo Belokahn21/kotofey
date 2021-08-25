@@ -9,6 +9,7 @@ use app\modules\promotion\models\entity\Promotion;
 use app\modules\promotion\models\helpers\PromotionHelper;
 use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
+use yii\caching\DbDependency;
 
 class CombineSliderWidget extends Widget
 {
@@ -26,7 +27,12 @@ class CombineSliderWidget extends Widget
         }
 
 
-        $sliders = SlidersImages::find()->where(['active' => true, 'slider_id' => $this->sliderId])->orderBy(['created_at' => SORT_DESC])->all();
+        $sliders = \Yii::$app->cache->getOrSet(__METHOD__ . __FILE__ . '-sliders', function () {
+            return SlidersImages::find()->where(['active' => true, 'slider_id' => $this->sliderId])->orderBy(['created_at' => SORT_DESC])->all();
+        }, 3600 * 24 * 60, new DbDependency([
+            'sql' => 'select max(updated_at) from `sliders_images`',
+        ]));
+
         foreach ($sliders as $slider) {
             $this->extendDataArrayFromSliderImage($slider, $data);
         }
