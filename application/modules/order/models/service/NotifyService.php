@@ -131,24 +131,6 @@ class NotifyService
         return false;
     }
 
-    public function sendEmailClient($order_id)
-    {
-        $order = Order::findOne($order_id);
-
-        if (!$order or empty($order->email)) return false;
-
-        $result = Yii::$app->mailer->compose('client-buy', [
-            'order' => $order,
-            'order_items' => OrdersItems::find()->where(['order_id' => $order_id])->all()
-        ])
-            ->setFrom([Yii::$app->params['email']['sale'] => 'kotofey.store'])
-            ->setTo($order->email)
-            ->setSubject('Квитанция о покупке - спасибо, что вы с нами!')
-            ->send();
-
-        return $result;
-    }
-
     public function getAccessToken()
     {
         $token = Yii::$app->params['vk']['access_token'];
@@ -217,8 +199,8 @@ class NotifyService
                 $html = '<tr style="background-color: #e6e6e6;"><td width="55%" style="text-align:left; padding: 5px;">Наименование</td><td style="padding: 5px;" width="15%">Количество</td><td style="padding: 5px;" width="15%">Цена за шт.</td><td style="padding: 5px;" width="15%">Итого</td></tr>';
                 $total = 0;
                 foreach ($order->items as $item) {
-                    $price = PriceTool::format($item->price);
-                    $summ = PriceTool::format($item->price * $item->count);
+                    $price = $item->purchase ? PriceTool::format($item->purchase) : PriceTool::format($item->price);
+                    $summ = PriceTool::format($price * $item->count);
                     $currency = Currency::getInstance()->show();
 
                     $total += $item->price * $item->count;
