@@ -171,8 +171,8 @@ $this->title = ProductTitle::show($product->name);
         </div>
     </nav>
     <div class="tab-content product-tab-content" id="nav-tabContent">
-        <div class="<?= Yii::$app->user->id == 1 ? 'default-styles' : ''; ?> tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" itemprop="description">
-            <?= $product->description ?: 'Отсутсвует'; ?>
+        <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab" itemprop="description">
+            <div class="news-detail-text pt-2"><?= $product->description ?: 'Отсутсвует'; ?></div>
         </div>
         <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
             <strong>Оплатить можно:</strong>
