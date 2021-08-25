@@ -7,6 +7,7 @@ use app\modules\media\models\entity\Media;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\models\form\ProductFromSibagoForm;
 
 /* @var $items \app\modules\catalog\models\entity\virtual\SibagroElement[]
@@ -35,7 +36,7 @@ $this->title = 'Обновить прайсы по HTML';
                 <?= Html::input('text', 'markup'); ?>
             </div>
             <div class="col-6">
-                <?= Html::dropDownList('category_id', false, ArrayHelper::map((new \app\modules\catalog\models\entity\ProductCategory())->categoryTree(), 'id', 'name'), ['prompt' => 'Категория']); ?>
+                <?= Html::dropDownList('category_id', false, ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'), ['prompt' => 'Категория']); ?>
             </div>
         </div>
         <?php $i = 0; ?>

@@ -4,6 +4,7 @@ namespace app\modules\catalog\controllers;
 
 
 use app\modules\catalog\models\entity\ProductCategory;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\models\search\ProductCategorySearchForm;
 use app\modules\site\controllers\MainBackendController;
 use app\modules\user\models\tool\BehaviorsRoleManager;
@@ -50,7 +51,7 @@ class ProductCategoryBackendController extends MainBackendController
         return $this->render('index', [
             'model' => $model,
             'searchForm' => $searchForm,
-            'categories' => $model->categoryTree(),
+            'categories' => $this->getCategoryTree(),
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -75,7 +76,7 @@ class ProductCategoryBackendController extends MainBackendController
 
         return $this->render('update', [
             'model' => $model,
-            'categories' => $model->categoryTree(),
+            'categories' => $this->getCategoryTree(),
         ]);
     }
 
@@ -86,5 +87,10 @@ class ProductCategoryBackendController extends MainBackendController
         }
 
         return $this->redirect(Url::to(['index']));
+    }
+
+    private function getCategoryTree()
+    {
+        return ProductCategoryHelper::getInstance()->getFormated();
     }
 }

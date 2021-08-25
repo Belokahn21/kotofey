@@ -6,7 +6,7 @@ use app\modules\stock\widgets\store\StoreWidget;
 use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\site\widgets\SocialMe\SocialMe;
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\site_settings\models\entity\SiteSettings;
 use app\modules\subscribe\widgets\subscribe\SubscribeWidget;
 use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
@@ -76,7 +76,7 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
                 <ul class="footer-categories">
                     <?php foreach ($specialCategories as $item): ?>
                         <li class="footer-categories__item is-parent">
-                            <a class="footer-categories__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->seo_title; ?></a>
+                            <a class="footer-categories__link" href="<?= ProductCategoryHelper::getDetailUrl($item); ?>"><?= $item->seo_title; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>

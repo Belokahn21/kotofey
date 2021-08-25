@@ -9,9 +9,10 @@ use app\modules\seo\models\tools\Title;
 use app\modules\site\models\tools\Currency;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
-use app\modules\catalog\models\entity\ProductCategory;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
+use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\StockOut\StockOutWidget;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
@@ -142,7 +143,7 @@ VENDOR
         [
             'attribute' => 'category_id',
             'format' => 'raw',
-            'filter' => ArrayHelper::map((new ProductCategory())->categoryTree(), 'id', 'name'),
+            'filter' => ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'),
             'value' => function ($model) {
                 $category = ProductCategory::findOne($model->category_id);
                 if ($category) {

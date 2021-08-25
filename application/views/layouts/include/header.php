@@ -5,7 +5,7 @@ use app\modules\search\widges\search\SearchWidget;
 use app\modules\menu\widgets\Menu\MenuWidget;
 use app\modules\basket\models\entity\Basket;
 use yii\helpers\Url;
-use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 
 ?>
 <header class="header page-container">
@@ -77,7 +77,7 @@ use app\modules\catalog\models\helpers\CategoryHelper;
         <ul class="full-mobile-menu">
             <?php if ($parentCategories): ?>
                 <?php foreach ($parentCategories as $category): ?>
-                    <li class="full-mobile-menu__item"><a class="full-mobile-menu__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a></li>
+                    <li class="full-mobile-menu__item"><a class="full-mobile-menu__link" href="<?= ProductCategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a></li>
                 <?php endforeach; ?>
             <?php endif; ?>
         </ul>

@@ -12,7 +12,7 @@ use app\widgets\Breadcrumbs;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
 use app\modules\catalog\models\form\CatalogFilter;
-use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\Sort\ProductSortWidget;
 use app\modules\catalog\widgets\CatalogFilter\CatalogFilterWidget;
@@ -25,7 +25,7 @@ $category_id = 0;
 if ($category) {
     $this->params['breadcrumbs'][] = ['label' => 'Зоотовары', 'url' => ['/catalog/']];
 
-    $subsections = $category->undersections();
+    $subsections = ProductCategoryHelper::getInstance()->getBreadcrumbs($category);
     for ($i = 0; $i < count($subsections); $i++) {
         $parents = $subsections[$i];
         if ($i + 1 == count($subsections)) {
@@ -63,18 +63,18 @@ if ($category) {
                 <?php $id = 0; ?>
             <?php endif; ?>
 
-            <?php $subCategories = ProductCategory::find()->where(['parent' => $id])->all(); ?>
+            <?php $subCategories = ProductCategory::find()->where(['parent_category_id' => $id])->all(); ?>
 
             <?php if ($subCategories): ?>
                 <ul class="aside-sub-categories">
                     <?php foreach ($subCategories as $subCategory): ?>
                         <li class="aside-sub-categories__item">
-                            <a class="aside-sub-categories__link" href="<?= CategoryHelper::getDetailUrl($subCategory); ?>"><?= $subCategory->name; ?></a>
+                            <a class="aside-sub-categories__link" href="<?= ProductCategoryHelper::getDetailUrl($subCategory); ?>"><?= $subCategory->name; ?></a>
                         </li>
                     <?php endforeach; ?>
                 </ul>
             <?php endif; ?>
-            <?php if ($category && $category->parent > 0): ?>
+            <?php if ($category && $category->parent_category_id > 0): ?>
                 <?= CatalogFilterWidget::widget([
                     'product_id' => ArrayHelper::getColumn($duplicateQueryProducts->all(), 'id'),
                 ]); ?>
@@ -84,7 +84,7 @@ if ($category) {
 
 
             <?= CatalogCategoriesWidget::widget([
-                'where' => !$category instanceof ProductCategory ? ['parent' => 0] : ['parent' => $category->id]
+                'where' => !$category instanceof ProductCategory ? ['parent_category_id' => 0] : ['parent_category_id' => $category->id]
             ]); ?>
 
 

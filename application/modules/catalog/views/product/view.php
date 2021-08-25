@@ -10,16 +10,15 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\HtmlProductHelper;
-use app\modules\catalog\widgets\WhenCanBuy\WhenCanBuyWidget;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
+use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 use app\modules\catalog\widgets\CatalogSliders\Analog\AnalogWidget;
 use app\modules\reviews\widgets\ProductReviews\ProductReviewsWidget;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
 use app\modules\catalog\widgets\VisitedProducts\VisitedProductsWidget;
-use app\modules\catalog\widgets\SpecialPromoModal\SpecialPromoModalWidget;
 use app\modules\catalog\widgets\CatalogSliders\Recomended\RecomendedWidget;
 use app\modules\reviews\widgets\ProductReviewsForm\ProductReviewsFormWidget;
 use app\modules\promotion\widgets\PromotionsForProduct\PromotionsForProductWidget;
-use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
 /* @var $propertiesValues \app\modules\catalog\models\entity\PropertiesProductValues[]
  * @var \yii\web\View $this
@@ -30,7 +29,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
 $this->params['breadcrumbs'][] = ['label' => "Каталог", 'url' => ['/catalog/']];
 if ($category) {
-    $subsections = $category->undersections();
+    $subsections = ProductCategoryHelper::getInstance()->getBreadcrumbs($category);
     for ($i = 0; $i < count($subsections); $i++) {
         $parents = $subsections[$i];
         $this->params['breadcrumbs'][] = ['label' => $parents->name, 'url' => ['/catalog/' . $parents->slug . "/"]];

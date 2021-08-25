@@ -18,13 +18,13 @@ use app\modules\search\widges\search\SearchWidget;
 use app\modules\site\widgets\AdminPanel\AdminPanel;
 use app\modules\site\widgets\PageInfo\PageInfoWidget;
 use app\modules\catalog\models\entity\ProductCategory;
-use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\basket\widgets\MiniMobileCart\MiniMobileCartWidget;
 
 AppAsset::register($this);
 
 $parentCategories = Yii::$app->cache->getOrSet('parent-cats', function () {
-    return ProductCategory::find()->select(['id', 'name', 'slug'])->where(['parent' => 0])->all();
+    return ProductCategory::find()->select(['id', 'name', 'slug'])->where(['parent_category_id' => 0])->all();
 }, 3600 * 7 * 24);
 
 $this->beginPage() ?>
@@ -127,11 +127,11 @@ $this->beginPage() ?>
             <?php foreach ($parentCategories as $parentCategory) : ?>
                 <div class="block-menu">
                     <div class="block-menu__title"><?= $parentCategory->name; ?></div>
-                    <?php if ($subsection = $parentCategory->subsections()): ?>
+                    <?php if ($subsection = ProductCategoryHelper::getInstance()->getNavChain($parentCategory)): ?>
                         <ul class="block-menu-list">
                             <?php foreach ($subsection as $item): ?>
                                 <li class="block-menu-list__item">
-                                    <a class="block-menu-list__link" href="<?= CategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
+                                    <a class="block-menu-list__link" href="<?= ProductCategoryHelper::getDetailUrl($item); ?>"><?= $item->name; ?></a>
                                 </li>
                             <?php endforeach; ?>
                         </ul>

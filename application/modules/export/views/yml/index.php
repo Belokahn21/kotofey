@@ -29,7 +29,7 @@ use app\modules\vendors\models\entity\Vendor;
         </delivery-options>
         <categories>
             <?php foreach ($categories as $category): ?>
-                <category id="<?= $category->id ?>" <?= $category->parent ? sprintf('parentId="%s"', $category->parent) : ''; ?>><?= $category->name; ?></category>
+                <category id="<?= $category->id ?>" <?= $category->parent_category_id ? sprintf('parentId="%s"', $category->parent_category_id) : ''; ?>><?= $category->name; ?></category>
             <?php endforeach; ?>
         </categories>
         <cpa>1</cpa>

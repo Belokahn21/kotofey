@@ -6,6 +6,7 @@ use app\modules\site\models\tools\Debug;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
 use yii\behaviors\TimestampBehavior;
+use yii\caching\DbDependency;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveRecord;
 use yii\web\UploadedFile;
@@ -22,17 +23,15 @@ use yii\web\UploadedFile;
  * @property string $image
  * @property string $slug
  * @property integer $sort
- * @property integer $parent
+ * @property integer $parent_category_id
  * @property integer $created_at
  * @property integer $updated_at
  *
- * @property ProductCategory $childs
+ * @property ProductCategory[] $childs
+ * @property ProductCategory $parent
  */
 class ProductCategory extends ActiveRecord
 {
-    public $items;
-    public $subsections;
-
     public function behaviors()
     {
         return [
@@ -58,11 +57,11 @@ class ProductCategory extends ActiveRecord
         return [
             [['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-            [['parent', 'seo_keywords', 'seo_description', 'description', 'seo_title'], 'string'],
+            [['parent_category_id', 'seo_keywords', 'seo_description', 'description', 'seo_title'], 'string'],
 
             ['sort', 'integer'],
 
-            ['parent', 'default', 'value' => '0'],
+            ['parent_category_id', 'default', 'value' => '0'],
 
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
         ];
@@ -74,7 +73,7 @@ class ProductCategory extends ActiveRecord
             'name' => 'Название',
             'description' => 'Описание',
             'sort' => 'Сортировка',
-            'parent' => 'Родительский раздел',
+            'parent_category_id' => 'Родительский раздел',
             'image' => 'Изображение',
             'seo_title' => 'Заголовок (seo)',
             'seo_keywords' => 'Ключевые слова (seo)',
@@ -87,69 +86,13 @@ class ProductCategory extends ActiveRecord
         return static::findOne(['slug' => $slug]);
     }
 
-    public function categoryTree($parent_id = 0, $delim = "")
-    {
-        $categories = ProductCategory::find()->select(['id', 'name', 'parent'])->where(['parent' => $parent_id])->all();
-
-        if ($categories) {
-
-            foreach ($categories as &$category) {
-                $category->name = $delim . $category->name;
-                $this->items[] = $category;
-                self::categoryTree($category->id, $delim . '---');
-            }
-
-        }
-
-        return $this->items;
-    }
-
-    public function subsections($parent_id = null)
-    {
-        $cache = \Yii::$app->cache;
-        $current_category_id = $this->id;
-        if ($parent_id) {
-            $current_category_id = $parent_id;
-        } else {
-
-            $this->subsections[] = $cache->getOrSet('subsection-' . $current_category_id, function () use ($current_category_id) {
-                return ProductCategory::findOne($current_category_id);
-            });
-        }
-
-        $categories = $cache->getOrSet('subsections-' . $current_category_id, function () use ($current_category_id) {
-            return ProductCategory::find()->where(['parent' => $current_category_id])->all();
-        });
-
-        if ($categories) {
-            foreach ($categories as $category) {
-                $this->subsections[] = $category;
-                $this->subsections($category->id);
-            }
-        }
-
-        return $this->subsections;
-    }
-
-    public $under_sections;
-
-    public function undersections($parent_id = null)
-    {
-        if ($parent_id === null) {
-            $parent_id = $this->id;
-        }
-        $category = ProductCategory::findOne($parent_id);
-
-        if ($category) {
-            $this->under_sections[] = $category;
-            $this->undersections($category->parent);
-        }
-
-        return array_reverse($this->under_sections);
-    }
-
     public function getChilds()
     {
-        return $this->hasMany(ProductCategory::className(), ['parent' => 'id']);
+        return $this->hasMany(ProductCategory::className(), ['parent_category_id' => 'id']);
+    }
+
+    public function getParent()
+    {
+        return $this->hasOne(ProductCategory::className(), ['id' => 'parent_category_id']);
     }
 }

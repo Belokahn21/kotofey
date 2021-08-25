@@ -14,7 +14,7 @@ use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\ProductToBreed;
-use app\modules\catalog\models\entity\ProductCategory;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\CompositionProducts;
@@ -54,7 +54,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             <div class="col-sm-6">
                 <div class="row">
                     <div class="col-sm-4"><?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара'])->label(false); ?></div>
-                    <div class="col-sm-4"><?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map((new ProductCategory())->categoryTree(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?></div>
                     <div class="col-sm-4"><?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map($vendors, 'id', 'name'), ['prompt' => 'Поставщик'])->label(false); ?></div>
                 </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\catalog\models\helpers\CategoryHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 
 /* @var $categories \app\modules\catalog\models\entity\ProductCategory[] */
 ?>
@@ -10,17 +10,17 @@ use app\modules\catalog\models\helpers\CategoryHelper;
             <li class="catalog-categories__item">
                 <div class="catalog-categories__header">
                     <?php if ($category->image): ?>
-                        <div class="catalog-categories__icon"><img src="<?= CategoryHelper::getImageUrl($category); ?>" alt="<?= $category->name; ?>" title="<?= $category->name; ?>"></div>
+                        <div class="catalog-categories__icon"><img src="<?= ProductCategoryHelper::getImageUrl($category); ?>" alt="<?= $category->name; ?>" title="<?= $category->name; ?>"></div>
                     <?php endif; ?>
                     <div class="catalog-categories__name">
-                        <a class="catalog-categories__link" href="<?= CategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a>
+                        <a class="catalog-categories__link" href="<?= ProductCategoryHelper::getDetailUrl($category); ?>"><?= $category->name; ?></a>
                     </div>
                 </div>
 
                 <div class="catalog-categories-list">
                     <?php foreach ($category->childs as $child): ?>
                         <div class="catalog-categories-list__item">
-                            <a class="catalog-categories-list__link" href="<?= CategoryHelper::getDetailUrl($child); ?>"><?= $child->name; ?></a>
+                            <a class="catalog-categories-list__link" href="<?= ProductCategoryHelper::getDetailUrl($child); ?>"><?= $child->name; ?></a>
                         </div>
                     <?php endforeach; ?>
                 </div>
