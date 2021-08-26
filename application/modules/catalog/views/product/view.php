@@ -1,8 +1,10 @@
 <?php
 
 use yii\helpers\Json;
+use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\widgets\Breadcrumbs;
+use app\modules\vendors\models\entity\Vendor;
 use app\modules\seo\models\tools\ProductTitle;
 use app\modules\reviews\models\entity\Reviews;
 use app\modules\bonus\models\helper\BonusHelper;
@@ -203,6 +205,9 @@ $this->title = ProductTitle::show($product->name);
         </div>
 
         <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
+            <?php if ($product->vendor_id == Vendor::VENDOR_ID_ROYAL): ?>
+                <?= Html::img('/images/royal_reward.jpg', ['style'=>'width:100%; object-fit:contain;', 'class'=>'my-3']); ?>
+            <?php endif; ?>
             <?= ProductReviewsWidget::widget([
                 'product_id' => $product->id
 
