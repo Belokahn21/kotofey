@@ -17,14 +17,22 @@ $client = new SoapClient($url, [
 
 \app\modules\site\models\tools\Debug::p($client->__getFunctions());
 
+//$params = new stdClass();
+//$params->ClientID = $id;
 $params = new stdClass();
 $params->ClientID = $id;
+$params->StockIdList = null;
 
 
 //$response = $client->__soapCall('GetGoodList', $params);
-$response = $client->GetGoodList($params);
+//$response = $client->GetGoodList($params);
+$response = $client->GetGoodStock($params);
 
 $response = \yii\helpers\ArrayHelper::toArray($response);
+
+\app\modules\site\models\tools\Debug::p($response);
+
+exit();
 
 if ($response) {
     foreach ($response['return']['Result'] as $valta_product) {

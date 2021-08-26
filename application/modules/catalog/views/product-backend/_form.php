@@ -73,12 +73,16 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <div class="col-sm-6"><?= $form->field($model, 'vitrine')->checkbox()->label(false); ?></div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <?= $form->field($model, 'code')->textInput(['placeholder' => 'Внешний код'])->label(false); ?>
                     </div>
 
-                    <div class="col-sm-6">
+                    <div class="col-sm-4">
                         <?= $form->field($model, 'barcode')->textInput(['placeholder' => 'Штрих-код'])->label(false); ?>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <?= $form->field($model, 'ident_key')->textInput(['placeholder' => 'Специальный ключ'])->label(false); ?>
                     </div>
                 </div>
 

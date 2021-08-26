@@ -53,6 +53,7 @@ use function foo\func;
  * @property integer $count
  * @property boolean $vitrine
  * @property string $code
+ * @property string $ident_key
  * @property string $barcode
  * @property string $threeDCode
  * @property integer $created_at
@@ -84,8 +85,8 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['ident_key','created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['ident_key','created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price', 'base_price'];
 
         return $parent;
@@ -110,7 +111,7 @@ class Product extends \yii\db\ActiveRecord
 
             [['has_store', 'is_product_order'], 'boolean'],
 
-            [['code', 'slug', 'barcode'], 'unique', 'message' => 'Такой {attribute} уже используется'],
+            [['code', 'slug', 'barcode','ident_key'], 'unique', 'message' => 'Такой {attribute} уже используется'],
 
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
             [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions'], 'maxFiles' => 10],
@@ -141,6 +142,7 @@ class Product extends \yii\db\ActiveRecord
             'properties' => 'Свойства',
             'vendor_id' => 'Поставщик',
             'code' => 'Внешний код',
+            'ident_key' => 'Специальный ключ',
             'has_store' => 'Сохранить в маркете Вконтакте',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
