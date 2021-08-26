@@ -24,5 +24,11 @@ $params->ClientID = $id;
 //$response = $client->__soapCall('GetGoodList', $params);
 $response = $client->GetGoodList($params);
 
-\app\modules\site\models\tools\Debug::p($response);
+$response = \yii\helpers\ArrayHelper::toArray($response);
+
+if ($response) {
+    foreach ($response['return']['Result'] as $valta_product) {
+        \app\modules\site\models\tools\Debug::p($valta_product['Name']);
+    }
+}
 ?>
