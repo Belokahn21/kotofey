@@ -189,7 +189,6 @@ class NotifyService
         $mailer->sendEvent($event->id, [
             'EMAIL_FROM' => 'sale@kotofey.store',
             'EMAIL_TO' => $order->email,
-//            'EMAIL_TO' => 'popugau@gmail.com',
             'ORDER_ID' => $order->id,
             'ORDER_LINK' => System::fullSiteUrl() . "/profile/order/{$order->id}/",
             'SITE_LINK' => System::fullSiteUrl(),

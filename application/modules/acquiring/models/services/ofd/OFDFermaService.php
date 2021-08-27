@@ -49,8 +49,8 @@ class OFDFermaService
 
     public function sendCheck($order, $options)
     {
-        // Чеки отправляются только оплаченым заказам.
-        if (!$order->is_paid) return false;
+        // Чеки отправляются только оплаченым и закрытым заказам.
+        if (!$order->is_paid || !$order->is_close) return false;
 
         // Нет ли старых записей
         if (ServiceCheckHistory::hasCheckHistory($order->id)) return false;
