@@ -199,7 +199,7 @@ class NotifyService
                 $html = '<tr style="background-color: #e6e6e6;"><td width="55%" style="text-align:left; padding: 5px;">Наименование</td><td style="padding: 5px;" width="15%">Количество</td><td style="padding: 5px;" width="15%">Цена за шт.</td><td style="padding: 5px;" width="15%">Итого</td></tr>';
                 $total = 0;
                 foreach ($order->items as $item) {
-                    $price = $item->purchase ? PriceTool::format($item->purchase) : PriceTool::format($item->price);
+                    $price = $item->purchase ? $item->purchase : $item->price;
                     $summ = PriceTool::format($price * $item->count);
                     $currency = Currency::getInstance()->show();
 
