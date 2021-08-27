@@ -163,6 +163,13 @@ $this->title = ProductTitle::show($product->name);
             </ul>
         </div>
     </div>
+
+
+    <?= RecomendedWidget::widget([
+        'property_id' => 19,
+        'product' => $product
+    ]); ?>
+
     <nav class="product-tabs in-product">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
@@ -218,10 +225,6 @@ $this->title = ProductTitle::show($product->name);
         </div>
     </div>
 </div>
-<?= RecomendedWidget::widget([
-    'property_id' => 19,
-    'product' => $product
-]); ?>
 
 <?= AnalogWidget::widget([
     'property_id' => 21,
