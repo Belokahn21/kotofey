@@ -227,7 +227,7 @@ class OrderHelper
 
             $product = Product::findOne($item->product->id);
 
-            if (!$product || $product->count == $item->count) continue;
+            if (!$product || $product->count >= $item->count ) continue;
 
             $product->scenario = Product::SCENARIO_STOCK_COUNT;
 
