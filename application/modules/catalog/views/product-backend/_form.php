@@ -300,7 +300,9 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                         <?= $form->field($ptb_model, '[' . $ptb_counter . ']animal_id')->dropDownList(ArrayHelper::map($animals, 'id', 'name'), ['prompt' => 'Указать животное']); ?>
                     </div>
                     <div class="col-sm-6">
-                        <?= $form->field($ptb_model, '[' . $ptb_counter . ']breed_id')->dropDownList(ArrayHelper::map($breeds, 'id', 'name'), ['prompt' => 'Указать породу']); ?>
+                        <?= $form->field($ptb_model, '[' . $ptb_counter . ']breed_id')->widget(\kartik\select2\Select2::classname(), [
+                            'data' => ProductToBreadHelper::getGroupedItems(),
+                        ]); ?>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -310,7 +312,9 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                     <?= $form->field($ptb, '[' . $ptb_counter . ']animal_id')->dropDownList(ArrayHelper::map($animals, 'id', 'name'), ['prompt' => 'Указать животное']); ?>
                 </div>
                 <div class="col-sm-6">
-                    <?= $form->field($ptb, '[' . $ptb_counter . ']breed_id')->dropDownList(ProductToBreadHelper::getGroupedItems(), ['prompt' => 'Указать породу']); ?>
+                    <?= $form->field($ptb, '[' . $ptb_counter . ']breed_id')->widget(\kartik\select2\Select2::classname(), [
+                        'data' => ProductToBreadHelper::getGroupedItems(),
+                    ]); ?>
                 </div>
             </div>
         <?php endif; ?>

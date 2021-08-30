@@ -41,7 +41,9 @@ class ProductToBreadHelper
     {
         $result = [];
 
-        foreach (Breed::find()->all() as $breed) {
+        foreach (Yii::$app->cache->getOrSet('grouped_breeds', function () {
+            return Breed::find()->all();
+        }) as $breed) {
             $result[$breed->animal->name][$breed->id] = $breed->name;
         }
 
