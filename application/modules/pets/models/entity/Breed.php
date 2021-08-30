@@ -11,6 +11,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int $id
  * @property int|null $is_active
  * @property string $name
+ * @property string $size
  * @property int|null $sort
  * @property int|null $animal_id
  * @property int|null $created_at
@@ -20,6 +21,11 @@ use yii\behaviors\TimestampBehavior;
  */
 class Breed extends \yii\db\ActiveRecord
 {
+    const SIZE_MINI = 'mini';
+    const SIZE_SMALL = 'small';
+    const SIZE_MEDIUM = 'medium';
+    const SIZE_LARGE = 'large';
+
     public function behaviors()
     {
         return [
@@ -39,7 +45,7 @@ class Breed extends \yii\db\ActiveRecord
             [['name'], 'required'],
             [['name'], 'unique'],
 
-            [['name'], 'string', 'max' => 255],
+            [['name', 'size'], 'string', 'max' => 255],
         ];
     }
 
@@ -49,6 +55,7 @@ class Breed extends \yii\db\ActiveRecord
             'id' => 'ID',
             'is_active' => 'Активность',
             'name' => 'Название',
+            'size' => 'Размер породы',
             'sort' => 'Сортировка',
             'animal_id' => 'Тип животного',
             'created_at' => 'Дата создания',
@@ -59,5 +66,15 @@ class Breed extends \yii\db\ActiveRecord
     public function getAnimal()
     {
         return $this->hasOne(Animal::className(), ['id' => 'animal_id']);
+    }
+
+    public function getSizes()
+    {
+        return [
+            self::SIZE_MINI => 'Миниатюрная',
+            self::SIZE_SMALL => 'Мелкая',
+            self::SIZE_MEDIUM => 'Средняя',
+            self::SIZE_LARGE => 'Курпная',
+        ];
     }
 }
