@@ -113,7 +113,7 @@ class MediaBrowser extends React.Component {
         const {show, media, inputs, show_new_media} = this.state;
         const input_name = this.config.model + this.config.attribute;
         return (
-            <div>
+            <div >
                 <div className="media-browser">
                     <input type="hidden" name={input_name}/>
                     {inputs.map((el, i) => {

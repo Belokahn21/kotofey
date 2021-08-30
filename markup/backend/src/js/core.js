@@ -28,11 +28,13 @@ import './include/other-jquery';
 import './include/maskedinput';
 import ProductVendorFill from './block/ProductVendorFill';
 import SetPrice from './block/SetPrice';
+import LoadBreedSizes from './block/LoadBreedSizes';
 
 new ProductVendorFill();
 new SetPrice('.set-price');
 new CleanOrderPhone();
 new CopyFormElement();
+new LoadBreedSizes();
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {

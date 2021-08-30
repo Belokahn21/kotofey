@@ -8836,6 +8836,18 @@ html, body {
     margin: 0 0 0 10px;
     border: 1px silver solid; }
 
+.list-breeds {
+  display: flex;
+  align-items: center; }
+  .list-breeds-item {
+    border: 1px #00BFFF solid;
+    padding: 5px;
+    margin: 5px; }
+    .list-breeds-item:hover {
+      background: #00BFFF;
+      color: white;
+      cursor: pointer; }
+
 .order-items-list__item {
   display: flex;
   flex-direction: row;

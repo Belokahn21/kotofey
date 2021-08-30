@@ -1,0 +1,16 @@
+.list-breeds {
+  display: flex;
+  align-items: center;
+
+  &-item {
+    border: 1px $theme-color solid;
+    padding: 5px;
+    margin: 5px;
+
+    &:hover {
+      background: $theme-color;
+      color: white;
+      cursor: pointer;
+    }
+  }
+}

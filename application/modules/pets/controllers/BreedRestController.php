@@ -13,7 +13,7 @@ class BreedRestController extends ActiveController
     {
         $behaviors = parent::behaviors();
 
-        unset($behaviors['authenticator']);
+//        unset($behaviors['authenticator']);
 
         $behaviors['corsFilter'] = [
             'class' => \yii\filters\Cors::className(),

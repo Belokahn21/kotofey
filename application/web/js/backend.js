@@ -2873,6 +2873,133 @@ var CopyFormElement = /*#__PURE__*/function () {
 
 /***/ }),
 
+/***/ "./src/js/block/LoadBreedSizes.js":
+/*!****************************************!*\
+  !*** ./src/js/block/LoadBreedSizes.js ***!
+  \****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _frontend_src_js_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../frontend/src/js/config */ "../frontend/src/js/config.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+
+var LoadBreedSizes = /*#__PURE__*/function () {
+  function LoadBreedSizes() {
+    _classCallCheck(this, LoadBreedSizes);
+
+    this.element = document.querySelectorAll('.js-load-breed-sizes');
+    this.panel = document.querySelector('.js-add-new-line-area');
+    this.init();
+  }
+
+  _createClass(LoadBreedSizes, [{
+    key: "init",
+    value: function init() {
+      var _this = this;
+
+      if (this.element) {
+        this.element.forEach(function (el) {
+          el.onclick = _this.handleClick.bind(_this);
+        });
+      }
+    }
+  }, {
+    key: "handleClick",
+    value: function handleClick(e) {
+      var _this2 = this;
+
+      e.preventDefault();
+      var element = e.target;
+      var key = element.getAttribute('data-key');
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_1__.default.restBreeds + '?BreedSearchForm[size]=' + key).then(function (data) {
+        data.map(function (model) {
+          react_dom__WEBPACK_IMPORTED_MODULE_3__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(RenderFormElement, {
+            models: data
+          }), _this2.panel);
+        });
+      });
+    }
+  }]);
+
+  return LoadBreedSizes;
+}();
+
+var RenderFormElement = /*#__PURE__*/function (_React$Component) {
+  _inherits(RenderFormElement, _React$Component);
+
+  var _super = _createSuper(RenderFormElement);
+
+  function RenderFormElement(props) {
+    _classCallCheck(this, RenderFormElement);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(RenderFormElement, [{
+    key: "render",
+    value: function render() {
+      var count = -1;
+      var models = this.props.models;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement(react__WEBPACK_IMPORTED_MODULE_2__.Fragment, null, models.map(function (el) {
+        count++;
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+          className: "row",
+          key: el.id
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+          className: "col-sm-6"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("input", {
+          name: "ProductToBreed[".concat(count, "][animal_id]"),
+          value: el.animal_id
+        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("div", {
+          className: "col-sm-6"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_2__.createElement("input", {
+          name: "ProductToBreed[".concat(count, "][breed_id]"),
+          value: el.id
+        })));
+      }));
+    }
+  }]);
+
+  return RenderFormElement;
+}(react__WEBPACK_IMPORTED_MODULE_2__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (LoadBreedSizes);
+
+/***/ }),
+
 /***/ "./src/js/block/OrderLoadProduct.js":
 /*!******************************************!*\
   !*** ./src/js/block/OrderLoadProduct.js ***!
@@ -62432,6 +62559,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _include_maskedinput__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./include/maskedinput */ "./src/js/include/maskedinput.js");
 /* harmony import */ var _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/ProductVendorFill */ "./src/js/block/ProductVendorFill.js");
 /* harmony import */ var _block_SetPrice__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./block/SetPrice */ "./src/js/block/SetPrice.js");
+/* harmony import */ var _block_LoadBreedSizes__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./block/LoadBreedSizes */ "./src/js/block/LoadBreedSizes.js");
 
 
 window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
@@ -62458,10 +62586,12 @@ window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
 
 
+
 new _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_21__.default();
 new _block_SetPrice__WEBPACK_IMPORTED_MODULE_22__.default('.set-price');
 new (_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_17___default())();
 new _block_CopyFormElement__WEBPACK_IMPORTED_MODULE_12__.default();
+new _block_LoadBreedSizes__WEBPACK_IMPORTED_MODULE_23__.default();
 var buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 
 if (buttonToggleSlider) {

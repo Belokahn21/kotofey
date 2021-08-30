@@ -289,10 +289,20 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
     </div>
     <div class="tab-pane fade" id="nav-pet" role="tabpanel" aria-labelledby="nav-pet-tab">
 
+        <ul class="list-breeds">
+            <?php foreach ((new \app\modules\pets\models\entity\Breed())->getSizes() as $key => $value): ?>
+                <li class="list-breeds-item js-load-breed-sizes" data-key="<?= $key; ?>"><?= $value; ?></li>
+            <?php endforeach; ?>
+        </ul>
+
         <?php $ptb = new ProductToBreed(); ?>
         <?php $ptb_counter = 0; ?>
 
-        <?php $ptb_models = ProductToBreed::find()->where(['product_id' => $model->id])->all() ?>
+        <?php
+        $model_id = $model->id;
+        $ptb_models = Yii::$app->cache->getOrSet('value_ptb_model-' . $model_id, function () use ($model_id) {
+            return ProductToBreed::find()->where(['product_id' => $model_id])->all();
+        }) ?>
         <?php if ($ptb_models): ?>
             <?php foreach ($ptb_models as $ptb_counter => $ptb_model): ?>
                 <div class="row">

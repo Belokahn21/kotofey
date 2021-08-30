@@ -17,7 +17,7 @@ class BreedSearchForm extends Breed
     public function rules()
     {
         return [
-            [['name'], 'string'],
+            [['name', 'size'], 'string'],
             [['animal_id'], 'integer'],
         ];
     }
@@ -39,8 +39,9 @@ class BreedSearchForm extends Breed
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['like', 'name', $this->name]);
-        $query->andFilterWhere(['animal_id' => $this->animal_id]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['size' => $this->size])
+            ->andFilterWhere(['animal_id' => $this->animal_id]);
 
         return $dataProvider;
     }
