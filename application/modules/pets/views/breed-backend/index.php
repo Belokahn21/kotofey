@@ -49,6 +49,7 @@ $this->title = 'Породы';
             }
         ],
         'name',
+        'size',
         'sort',
         [
             'attribute' => 'animal_id',
