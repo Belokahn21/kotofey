@@ -21,7 +21,6 @@ $this->title = Title::show("Зоотовары для животных в Бар
     <?= CombineSliderWidget::widget(['sliderId' => 1]) ?>
     <?php //= CanNowBuyWidget::widget() ?>
     <?= DiscountItemsWidget::widget(); ?>
-    <?= InformerSliderWidget::widget(); ?>
     <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
     <?php if (Yii::$app->user->id == 1): ?>
         <div class="eat-calculator-react"></div>
