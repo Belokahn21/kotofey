@@ -86,6 +86,11 @@ class OrdersItems extends ActiveRecord
         return true;
     }
 
+    public function getResultPrice()
+    {
+        return $this->discount_price ?: $this->price;
+    }
+
     public function getProduct()
     {
         return Product::findOne($this->product_id);

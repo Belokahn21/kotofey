@@ -102,10 +102,10 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                                 <img class="profile-order-products__image" src="/images/not-image.png" alt="<?= $item->image; ?>">
                             <?php endif; ?>
                             <?= Html::a($item->name, $item->product ? ProductHelper::getDetailUrl($item->product) : 'javascript:void(0);', ['class' => 'profile-order-products__link']); ?>
-                            <div class="profile-order-products__price"><?= PriceTool::format($item->price); ?> <?= Currency::getInstance()->show(); ?></div>
+                            <div class="profile-order-products__price"><?= PriceTool::format($item->getResultPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
                             <div class="profile-order-products__char">X</div>
                             <div class="profile-order-products__count"><?= $item->count; ?> шт.</div>
-                            <div class="profile-order-products__summary"><?= PriceTool::format($item->count * $item->price); ?> <?= Currency::getInstance()->show(); ?></div>
+                            <div class="profile-order-products__summary"><?= PriceTool::format($item->count * $item->getResultPrice()); ?> <?= Currency::getInstance()->show(); ?></div>
                         </li>
                     <?php endforeach; ?>
                 </ul>
