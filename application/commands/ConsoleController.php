@@ -15,17 +15,6 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $models = Pets::find()->all();
-
-        foreach ($models as $pet) {
-
-            $pet->user_id = $pet->status_id;
-            $pet->status_id = Pets::STATUS_ON;
-
-            if ($pet->validate() && $pet->update() !== false) {
-                echo $pet->name . PHP_EOL;
-            }
-        }
     }
 
     public function actionClearCache()

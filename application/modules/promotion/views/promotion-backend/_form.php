@@ -9,12 +9,13 @@ use yii\helpers\Url;
 use  yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\order\models\entity\Order;
+use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\promotion\models\helpers\PromotionHelper;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
+use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\promotion\models\forms\PromotionProductMechanicsForm;
 use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
-use app\modules\promotion\models\entity\PromotionProductMechanics;
 
 ?>
 
@@ -72,6 +73,12 @@ use app\modules\promotion\models\entity\PromotionProductMechanics;
                     <div class="<?= $item->promotion_mechanic_id ? '' : 'hidden'; ?> row col-sm-9" id="inputs-mechanic-<?= PromotionProductMechanicsForm::MECH_PRODUCT_DISCOUNT ?>-<?= $iter; ?>">
                         <div class="col-sm-3">
                             <?= $form->field($item, '[' . $iter . ']product_id')->widget(FindProducstWidgets::className()); ?>
+
+                            <?php $product = Product::findOne($item->product_id); ?>
+
+                            <?php if ($product): ?>
+                                <div style="font-size: 10px; text-transform: uppercase;"><?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id]), ['target' => '_blank']) ?></div>
+                            <?php endif; ?>
                         </div>
                         <div class="col-sm-3">
                             <?= $form->field($item, '[' . $iter . ']discountRule')->dropDownList($item->getDiscountRules(), ['prompt' => 'Правило цены']); ?>
