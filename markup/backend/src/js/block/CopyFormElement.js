@@ -32,6 +32,7 @@ class CopyFormElement {
 
         targetCopyElement.querySelectorAll('[name]').forEach(el => {
             this.getNewName(el);
+            this.button_add_new.setAttribute('data-counter', this.counter);
         });
 
         if (this.area_new_insert) this.area_new_insert.appendChild(targetCopyElement);
