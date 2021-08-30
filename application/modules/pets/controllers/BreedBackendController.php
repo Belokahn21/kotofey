@@ -62,7 +62,7 @@ class BreedBackendController extends MainBackendController
             }
         }
 
-        return $this->render('update', ['model' => $model]);
+        return $this->render('update', ['model' => $model, 'animals' => $animals]);
     }
 
     public function actionDelete($id)
