@@ -10,23 +10,16 @@ use yii\helpers\Url;
 ?>
 
 <div class="review-form">
-
-    <?php if (Yii::$app->user->isGuest): ?>
-        <div class="review-no-login">
-            Чтобы оставлять комментарии вы должны быть авторизованы на сайте.
-        </div>
-    <?php else: ?>
-        <?php $form = ActiveForm::begin([
-            'action' => Url::to(['/reviews/reviews/create'])
-        ]); ?>
-        <?= $form->field($model, 'product_id')->hiddenInput(['value' => $product_id])->label(false) ?>
-        <?= $form->field($model, 'rate')->dropDownList($model->getRates(), ['prompt' => 'Как вы оцениваете товар ?']); ?>
-        <div class="row">
-            <div class="col-12 col-sm-4"><?= $form->field($model, 'text')->textarea(); ?></div>
-            <div class="col-12 col-sm-4"><?= $form->field($model, 'pluses')->textarea(); ?></div>
-            <div class="col-12 col-sm-4"><?= $form->field($model, 'minuses')->textarea(); ?></div>
-        </div>
-        <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-        <?php ActiveForm::end(); ?>
-    <?php endif; ?>
+    <?php $form = ActiveForm::begin([
+        'action' => Url::to(['/reviews/reviews/create'])
+    ]); ?>
+    <?= $form->field($model, 'product_id')->hiddenInput(['value' => $product_id])->label(false) ?>
+    <?= $form->field($model, 'rate')->dropDownList($model->getRates(), ['prompt' => 'Как вы оцениваете товар ?']); ?>
+    <div class="row">
+        <div class="col-12 col-sm-4"><?= $form->field($model, 'text')->textarea(); ?></div>
+        <div class="col-12 col-sm-4"><?= $form->field($model, 'pluses')->textarea(); ?></div>
+        <div class="col-12 col-sm-4"><?= $form->field($model, 'minuses')->textarea(); ?></div>
+    </div>
+    <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+    <?php ActiveForm::end(); ?>
 </div>
