@@ -1,45 +1,17 @@
 <?php
-error_reporting(E_ALL);
-ini_set('display_errors', '1');
-$url = 'http://ws.valta.ru:8888/uppms/ws/exchange.1cws?wsdl';
-$login = 'VasinKV_NSK';
-$password = 'aP85jU21g0';
-$id = "3d49908e-4ee1-11ea-8156-005056bf23ce";
 
-$client = new SoapClient($url, [
-    'cache_wsdl' => WSDL_CACHE_NONE,
-    'trace' => true,
-//    'exceptions' => 0,
-    'login' => $login,
-    'password' => $password,
-]);
+use app\modules\pets\models\entity\Pets;
 
+$models = Pets::find()->all();
 
-\app\modules\site\models\tools\Debug::p($client->__getFunctions());
+foreach ($models as $pet) {
 
-//$params = new stdClass();
-//$params->ClientID = $id;
-$params = new stdClass();
-$params->ClientID = $id;
-$params->StockIdList = null;
+    $pet->user_id = $pet->status_id;
+    $pet->status_id = Pets::STATUS_ON;
 
-
-//$response = $client->__soapCall('GetGoodList', $params);
-//$response = $client->GetGoodList($params);
-$response = $client->GetGoodStock($params);
-
-$response = \yii\helpers\ArrayHelper::toArray($response);
-
-\app\modules\site\models\tools\Debug::p($response);
-
-exit();
-
-if ($response) {
-    foreach ($response['return']['Result'] as $valta_product) {
-        \app\modules\site\models\tools\Debug::p($valta_product);
-//        \app\modules\site\models\tools\Debug::p($valta_product['Name']);
-
-        exit();
+    if ($pet->validate() && $pet->update() !== false) {
+        echo $pet->name . PHP_EOL;
     }
 }
+
 ?>

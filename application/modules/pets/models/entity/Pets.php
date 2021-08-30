@@ -55,7 +55,8 @@ class Pets extends \yii\db\ActiveRecord
         return [
             [['user_id'], 'default', 'value' => self::STATUS_ON],
 
-            [['status_id'], 'default', 'value' => Yii::$app->user->identity->id],
+            [['user_id'], 'default', 'value' => Yii::$app->user->identity->id],
+            [['status_id'], 'default', 'value' => self::STATUS_OFF],
 
             [['user_id', 'name', 'animal_id'], 'required'],
 

@@ -7,6 +7,7 @@ use app\modules\catalog\models\entity\PriceProduct;
 use app\modules\catalog\models\entity\Product;
 use app\modules\pets\models\entity\Animal;
 use app\modules\pets\models\entity\Breed;
+use app\modules\pets\models\entity\Pets;
 use app\modules\site\models\tools\Debug;
 use yii\console\Controller;
 
@@ -14,16 +15,15 @@ class ConsoleController extends Controller
 {
     public function actionRun()
     {
-        $products = Product::find()->where(['>', 'count', 0])->all();
+        $models = Pets::find()->all();
 
-        foreach ($products as $product) {
-            $product->count = 0;
-            $product->scenario = Product::SCENARIO_STOCK_COUNT;
+        foreach ($models as $pet) {
 
-            if ($product->validate() && $product->update()) {
-                echo $product->name . PHP_EOL;
-            } else {
-                Debug::p($product->getErrors());
+            $pet->user_id = $pet->status_id;
+            $pet->status_id = Pets::STATUS_ON;
+
+            if ($pet->validate() && $pet->update() !== false) {
+                echo $pet->name . PHP_EOL;
             }
         }
     }
