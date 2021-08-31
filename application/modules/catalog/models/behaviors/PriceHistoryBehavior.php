@@ -20,7 +20,6 @@ class PriceHistoryBehavior extends Behavior
     public function afterSave()
     {
         $product = $this->owner;
-
         PriceHistoryService::saveHistoryElement($product->id, $product->price);
     }
 
