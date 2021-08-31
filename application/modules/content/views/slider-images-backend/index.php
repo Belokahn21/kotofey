@@ -30,6 +30,7 @@ $this->title = Title::show("Изображения слайдеров"); ?>
     'emptyText' => 'Сладеры отсутствуют',
     'columns' => [
         'id',
+        'sort',
         'active',
         'text',
         'description',
