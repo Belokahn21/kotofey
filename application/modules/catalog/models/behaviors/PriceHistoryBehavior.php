@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\behaviors;
 
 use app\modules\catalog\models\services\PriceHistoryService;
+use app\modules\site\models\tools\Debug;
 use yii\base\Behavior;
 use yii\db\BaseActiveRecord;
 
@@ -26,12 +27,12 @@ class PriceHistoryBehavior extends Behavior
     public function afterUpdate()
     {
         $product = $this->owner;
-        PriceHistoryService::updateHistoryElement($product->id, $product->price);
+        PriceHistoryService::saveHistoryElement($product->id, $product->price);
     }
 
     public function afterDelete()
     {
         $product = $this->owner;
-        PriceHistoryService::deleteHistoryElement($product->id);
+        PriceHistoryService::clear($product->id);
     }
 }

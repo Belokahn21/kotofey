@@ -17,7 +17,9 @@ class PriceHistoryService
 
     public static function updateHistoryElement(int $product_id, int $value)
     {
-        $model = self::getModel($product_id);
+        if (!$model = self::getModel($product_id)) {
+            return self::saveHistoryElement($product_id, $value);
+        }
         $model->value = $value;
 
         return $model->validate() && $model->update() !== false;
@@ -30,6 +32,11 @@ class PriceHistoryService
         if (!$model) return false;
 
         return $model->delete();
+    }
+
+    public static function clear(int $product_id)
+    {
+        return ProductPriceHistory::deleteAll(['product_id' => $product_id]);
     }
 
     private static function getModel($product_id)
