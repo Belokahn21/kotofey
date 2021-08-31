@@ -39,8 +39,20 @@ $this->title = Title::show('Акции магазина');
     'emptyText' => 'Акции отсутствуют',
     'columns' => [
         'id',
-        'is_active',
+        [
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
         'name',
+        'sort',
         [
             'attribute' => 'start_at',
             'format' => ['date', 'dd.MM.YYYY'],
