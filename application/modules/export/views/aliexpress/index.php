@@ -99,7 +99,15 @@ use app\modules\catalog\models\helpers\PropertiesHelper;
                         <weight><?= $weight->value; ?></weight>
                     <?php endif; ?>
 
-                    <count><?= $offer->vendor_id != Vendor::VENDOR_ID_ROYAL ? 0 : 500; ?></count>
+                    <count>
+                        <?php
+                        if ($offer->vendor_id == Vendor::VENDOR_ID_ROYAL) {
+                            echo 500;
+                        } else {
+                            echo 0;
+                        }
+                        ?>
+                    </count>
                 </offer>
             <?php endforeach; ?>
         </offers>
