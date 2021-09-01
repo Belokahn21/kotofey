@@ -47,20 +47,17 @@ class OFDFermaService
         }
     }
 
-    public function sendCheck($order, $options)
+    public function sendCheck(Order $order, array $options)
     {
         // Чеки отправляются только оплаченым и закрытым заказам.
-        if (!$order->is_paid || !$order->is_close) return false;
+        if (!$order->is_paid || !$order->is_close || $order->is_skip) return false;
 
         // Нет ли старых записей
         if (ServiceCheckHistory::hasCheckHistory($order->id)) return false;
 
         try {
             $check_id = $this->api->sendCheck($order, $options);
-
             ServiceCheckHistory::saveCheckHistory($order->id, $check_id);
-
-
         } catch (\Exception $e) {
             LogService::saveErrorMessage("Ошибка отправки чека покупателю. Заказ: #{$order->id}. Сообщение: " . $e->getMessage() . ' // ' . $e->getFile() . ' // ' . $e->getLine(), 'acquiring');
             //todo: оповестить Администратора?

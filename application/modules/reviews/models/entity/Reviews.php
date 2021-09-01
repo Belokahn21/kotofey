@@ -17,6 +17,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $text
  * @property string $pluses
  * @property string $minuses
+ * @property string $email
+ * @property integer $phone
  * @property string|null $image
  * @property int|null $rate
  * @property int|null $created_at
@@ -46,11 +48,11 @@ class Reviews extends \yii\db\ActiveRecord
 
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
 
-            [['user_id', 'product_id', 'rate', 'created_at', 'updated_at', 'status_id'], 'integer'],
+            [['user_id', 'product_id', 'rate', 'created_at', 'updated_at', 'status_id','phone'], 'integer'],
 
             [['product_id', 'text'], 'required'],
 
-            [['text', 'pluses', 'minuses'], 'string'],
+            [['text', 'pluses', 'minuses','email'], 'string'],
 
             [['is_active'], 'boolean'],
 
@@ -71,6 +73,8 @@ class Reviews extends \yii\db\ActiveRecord
             'minuses' => 'Недостатки',
             'image' => 'Картинка',
             'rate' => 'Оценка',
+            'phone' => 'Телефон',
+            'email' => 'Почта',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];

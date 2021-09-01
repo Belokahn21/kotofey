@@ -31,6 +31,7 @@ use app\modules\acquiring\models\services\ofd\OFDFermaService;
  * @property integer $status
  * @property boolean $is_paid
  * @property boolean $is_close
+ * @property boolean $is_skip
  * @property boolean $is_cancel
  * @property string $postalcode
  * @property string $country
@@ -64,7 +65,6 @@ class Order extends ActiveRecord
     const SCENARIO_CLIENT_BUY = 'client_buy';
     const SCENARIO_FAST = 'fast';
 
-    public $is_skip;
     public $is_update;
     public $bonus;
     public $address;
@@ -164,12 +164,10 @@ class Order extends ActiveRecord
         $ss->minus();
 
         BonusService::getInstance()->addUserBonus($this);
-        if (empty($this->is_skip)) {
-            OFDFermaService::getInstance()->doSendCheck($this, [
-                'email' => $this->email,
-                'phone' => $this->phone,
-            ]);
-        }
+        OFDFermaService::getInstance()->doSendCheck($this, [
+            'email' => $this->email,
+            'phone' => $this->phone,
+        ]);
 
         // todo: херня выходит с пересохранением заказа, надо поправить
         if (!$this->is_update) {
