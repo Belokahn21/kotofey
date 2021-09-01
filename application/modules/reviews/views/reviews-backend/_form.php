@@ -21,5 +21,7 @@ use app\modules\user\models\entity\User;
         <?= $form->field($model, 'rate')->dropDownList($model->getRates(), ['prompt' => 'Оценка']); ?>
         <?= $form->field($model, 'user_id')->dropDownList(ArrayHelper::map(User::find()->all(), 'id', 'email'), ['prompt' => 'Автор']); ?>
         <?= $form->field($model, 'text')->textarea(); ?>
+        <?= $form->field($model, 'phone')->textInput(); ?>
+        <?= $form->field($model, 'email')->textInput(); ?>
     </div>
 </div>
