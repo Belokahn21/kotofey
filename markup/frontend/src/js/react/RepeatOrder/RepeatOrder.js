@@ -97,8 +97,9 @@ class RepeatOrder extends React.Component {
                             })}
                         </div>
 
+                        <hr/>
 
-                        <button type="button" onClick={this.handleSubmitForm.bind(this)}>Повторить заказ</button>
+                        <button className="btn-main" type="button" onClick={this.handleSubmitForm.bind(this)}>Повторить заказ</button>
 
                     </Modal.Body>
                 </Modal>

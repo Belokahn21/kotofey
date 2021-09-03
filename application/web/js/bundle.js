@@ -4943,6 +4943,7 @@ var config = {
   restFavorite: url + 'api/favorite/',
   restOrder: url + 'api/order/',
   restFastOrder: url + 'api/order/fast/',
+  restOrderRepeat: url + 'api/order/repeat/',
   restBasket: url + 'api/basket/',
   restDelivery: url + 'api/delivery/',
   restDeliveryService: url + 'api/delivery/service/',
@@ -7198,6 +7199,17 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
       this.setShow(false);
     }
   }, {
+    key: "handleSubmitForm",
+    value: function handleSubmitForm(event) {
+      var data = new FormData();
+      data.append('order_id', this.props.id);
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.post(_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrderRepeat, {
+        body: data
+      }).then(function (data) {
+        console.log(data);
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$state = this.state,
@@ -7228,7 +7240,11 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
         }, el.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "order-repeat-products-item__price"
         }, _tools_Price__WEBPACK_IMPORTED_MODULE_4__.default.format(el.price), " \u20BD"));
-      })))));
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        className: "btn-main",
+        type: "button",
+        onClick: this.handleSubmitForm.bind(this)
+      }, "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"))));
     }
   }]);
 
