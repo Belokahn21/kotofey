@@ -3,6 +3,8 @@
 namespace app\modules\order\controllers;
 
 
+use app\modules\order\models\entity\Order;
+use app\modules\order\models\service\RepeatOrderService;
 use yii\rest\Controller;
 
 class OrderRepeatRestController extends Controller
@@ -14,6 +16,15 @@ class OrderRepeatRestController extends Controller
 
     public function actionCreate()
     {
+        $post = \Yii::$app->request->post();
+        $order = Order::findOne($post['id']);
+
+        if (!$order) throw new \Exception('Заказ не найден');
+
+        $service = new RepeatOrderService($order);
+        $service->doRepeat();
+
+
     }
 
     public function actionIndex()
