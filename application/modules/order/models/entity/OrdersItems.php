@@ -96,6 +96,11 @@ class OrdersItems extends ActiveRecord
         return Product::findOne($this->product_id);
     }
 
+    public static function findByOrderId($order_id)
+    {
+        return static::find()->where(['order_id' => $order_id])->all();
+    }
+
     public function attributeLabels()
     {
         return [

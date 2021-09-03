@@ -272,4 +272,13 @@ class Order extends ActiveRecord
     {
         return $this->hasOne(User::className(), ['id' => 'manager_id']);
     }
+
+    public function extraFields()
+    {
+        return [
+            'items' => function ($model) {
+                return OrdersItems::findByOrderId($model->id);
+            },
+        ];
+    }
 }

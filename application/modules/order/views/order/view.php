@@ -4,6 +4,7 @@
  * @var $items \app\modules\order\models\entity\OrdersItems[]
  */
 
+use app\modules\order\models\service\RepeatOrderService;
 use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 use app\modules\acquiring\models\helpers\AcquiringHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -29,6 +30,11 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
     <h1 class="page__title">Просмотр заказа: #<?= $order->id; ?></h1>
+    <div class="page-controls">
+        <?php if (RepeatOrderService::hasRepeat($order->id)): ?>
+            <div class="react-order-repeat" data-order-id="<?= $order->id; ?>"></div>
+        <?php endif; ?>
+    </div>
     <div class="row" style="width: 100%;">
         <div class="col-12 col-sm-6">
             <div class="profile-order-info">
