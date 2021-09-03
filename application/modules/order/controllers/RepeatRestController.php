@@ -23,7 +23,7 @@ class RepeatRestController extends Controller
 
     public function actionCreate()
     {
-        if (\Yii::$app->user->id != 1) return false;
+//        if (\Yii::$app->user->id != 1) return false;
         $order_id = \Yii::$app->request->post('order_id', false);
 
         if (!$order_id) throw new \Exception('Параметры не переданы.');
