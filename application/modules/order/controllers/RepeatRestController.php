@@ -3,6 +3,7 @@
 namespace app\modules\order\controllers;
 
 
+use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\service\RepeatOrderService;
 use yii\rest\Controller;
@@ -22,6 +23,7 @@ class RepeatRestController extends Controller
 
     public function actionCreate()
     {
+        if (\Yii::$app->user->id != 1) return false;
         $order_id = \Yii::$app->request->post('order_id', false);
 
         if (!$order_id) throw new \Exception('Параметры не переданы.');
@@ -30,11 +32,18 @@ class RepeatRestController extends Controller
 
 
         $service = new RepeatOrderService($order);
-        if ($service->doRepeat()) {
+        try {
+            $service->doRepeat();
+        } catch (\Exception $exception) {
             return [
-                'status' => 200,
+                'status' => 500,
+                'text' => $exception->getMessage(),
             ];
         }
+
+        return [
+            'status' => 200,
+        ];
     }
 
     public function actionIndex()

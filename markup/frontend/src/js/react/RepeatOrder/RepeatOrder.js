@@ -64,8 +64,13 @@ class RepeatOrder extends React.Component {
         }).then(data => {
             const status = parseInt(data.status);
 
-            if (status === 200) {
-                this.setShow(false);
+            switch (status) {
+                case 200:
+                    this.setShow(false);
+                    break;
+                case 500:
+                    console.log(data.text);
+                    break;
             }
         })
     }

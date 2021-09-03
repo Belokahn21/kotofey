@@ -7210,8 +7210,15 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
       }).then(function (data) {
         var status = parseInt(data.status);
 
-        if (status === 200) {
-          _this3.setShow(false);
+        switch (status) {
+          case 200:
+            _this3.setShow(false);
+
+            break;
+
+          case 500:
+            console.log(data.text);
+            break;
         }
       });
     }

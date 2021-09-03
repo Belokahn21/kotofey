@@ -16,7 +16,6 @@ use yii\base\Model;
  */
 class Basket extends Model
 {
-    const EVENT_AFTER_ADD_ITEM = 'item_add';
     const BASKET_KEY = 'basket';
 
     public static function getInstance()
