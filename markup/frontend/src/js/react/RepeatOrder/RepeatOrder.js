@@ -39,7 +39,6 @@ class RepeatOrder extends React.Component {
 
 
         this.setState({products: products});
-        console.log(products);
     }
 
     setShow(show) {
@@ -55,6 +54,7 @@ class RepeatOrder extends React.Component {
     }
 
     handleSubmitForm(event) {
+        event.preventDefault();
         let data = new FormData();
         data.append('order_id', this.props.id);
 
@@ -62,7 +62,11 @@ class RepeatOrder extends React.Component {
         RestRequest.post(config.restOrderRepeat, {
             body: data
         }).then(data => {
-            console.log(data);
+            const status = parseInt(data.status);
+
+            if (status === 200) {
+                this.setShow(false);
+            }
         })
     }
 
@@ -82,8 +86,8 @@ class RepeatOrder extends React.Component {
                     <Modal.Body>
 
                         <div className="order-repeat-products">
-                            {products.map((el, i) => {
-                                return <div className="order-repeat-products-item">
+                            {products.map((el, key) => {
+                                return <div key={key} className="order-repeat-products-item">
                                     <div className="order-repeat-products-item__image">
                                         <img src={el.imageUrl} alt={el.name} title={el.name}/>
                                     </div>

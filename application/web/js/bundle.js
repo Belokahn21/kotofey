@@ -7179,7 +7179,6 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
       this.setState({
         products: products
       });
-      console.log(products);
     }
   }, {
     key: "setShow",
@@ -7201,12 +7200,19 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmitForm",
     value: function handleSubmitForm(event) {
+      var _this3 = this;
+
+      event.preventDefault();
       var data = new FormData();
       data.append('order_id', this.props.id);
       _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.post(_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrderRepeat, {
         body: data
       }).then(function (data) {
-        console.log(data);
+        var status = parseInt(data.status);
+
+        if (status === 200) {
+          _this3.setShow(false);
+        }
       });
     }
   }, {
@@ -7226,8 +7232,9 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
         closeButton: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "order-repeat-products"
-      }, products.map(function (el, i) {
+      }, products.map(function (el, key) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: key,
           className: "order-repeat-products-item"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "order-repeat-products-item__image"

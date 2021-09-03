@@ -3,7 +3,7 @@ return [
     'bsDependencyEnabled' => false,
     'vk' => [
         'grumingVkontakteId' => '150883522',
-        'adminVkontakteId' => [111815168],
+        'adminVkontakteId' => [111815168, 17035948],
         'access_token' => '9b20f6f75e3d6afce2cfa6b16024dad5fadfbdc83cf92e57c7897a3310b4a5f17b7e0ce4ccd708fec1674',
     ],
     'email' => [
