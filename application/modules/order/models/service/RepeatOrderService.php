@@ -28,9 +28,11 @@ class RepeatOrderService
         $new_order_items = new OrdersItems();
 
         foreach ($order_items as $order_item) {
-            $_tmp = clone $order_item;
-            $_tmp->order_id = null;
-            $basket->add($_tmp);
+            $_new_basket_item = new OrdersItems();
+            $_new_basket_item->setAttributes(ArrayHelper::toArray($order_item));
+            $_new_basket_item->order_id = null;
+
+            $basket->add($_new_basket_item);
         }
 
         $model->setAttributes(ArrayHelper::toArray($this->order));
