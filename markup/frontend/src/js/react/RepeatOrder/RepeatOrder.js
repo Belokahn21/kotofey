@@ -54,6 +54,18 @@ class RepeatOrder extends React.Component {
         this.setShow(false);
     }
 
+    handleSubmitForm(event) {
+        let data = new FormData();
+        data.append('order_id', this.props.id);
+
+
+        RestRequest.post(config.restOrderRepeat, {
+            body: data
+        }).then(data => {
+            console.log(data);
+        })
+    }
+
     render() {
 
         const {show, products} = this.state;
@@ -84,6 +96,9 @@ class RepeatOrder extends React.Component {
                                 </div>;
                             })}
                         </div>
+
+
+                        <button type="button" onClick={this.handleSubmitForm.bind(this)}>Повторить заказ</button>
 
                     </Modal.Body>
                 </Modal>
