@@ -21,7 +21,7 @@ use app\modules\promotion\models\helpers\PromotionHelper;
                     <?php foreach ($model->promotionProductMechanics as $mechanics): ?>
                         <div class="swiper-slide">
                             <a href="<?= ProductHelper::getDetailUrl($mechanics->product) ?>">
-                                <img src="<?= ProductHelper::getImageUrl($mechanics->product) ?>">
+                                <img src="<?= ProductHelper::getImageUrl($mechanics->product) ?>" alt="<?= $mechanics->product->name; ?>" title="<?= $mechanics->product->name; ?>">
                             </a>
                         </div>
                     <?php endforeach; ?>

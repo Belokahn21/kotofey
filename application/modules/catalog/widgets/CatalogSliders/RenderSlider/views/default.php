@@ -49,9 +49,19 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
                                 'product' => $model
                             ]); ?>
                         </div>
+
                         <div class="vitrine__price">
-                            <span class="amount"><?= PriceTool::format($model->getPrice()); ?></span>
-                            <span class="rate"><?= Currency::getInstance()->show(); ?> / шт </span></div>
+
+                            <?php if ($model->getDiscountPrice()): ?>
+                                <span class="amount-old"><?= $model->getPrice(); ?></span>
+                                <span class="amount"><?= $model->getDiscountPrice() ?></span>
+                            <?php else: ?>
+                                <span class="amount"><?= $model->getPrice(); ?></span>
+                            <?php endif; ?>
+
+
+                            <span class="rate"><?= Currency::getInstance()->show(); ?> / шт</span>
+                        </div>
                         <?= AddBasketWidget::widget([
                             'product' => $model,
                             'showInfo' => false,

@@ -4636,6 +4636,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _MediaCardCDN__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MediaCardCDN */ "./src/js/react/components/MediaBrowser/MediaCardCDN.js");
+/* harmony import */ var _MediaCardServer__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./MediaCardServer */ "./src/js/react/components/MediaBrowser/MediaCardServer.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -4660,6 +4662,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var MediaCard = /*#__PURE__*/function (_React$Component) {
   _inherits(MediaCard, _React$Component);
 
@@ -4679,11 +4683,83 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
           handleSelectImage = _this$props.handleSelectImage,
           handleRemoveImage = _this$props.handleRemoveImage,
           uniq = _this$props.uniq;
+      if (!element) return false;
+      return element.location === 'cdn' ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCardCDN__WEBPACK_IMPORTED_MODULE_1__.default, {
+        element: element,
+        handleSelectImage: handleSelectImage,
+        handleRemoveImage: handleRemoveImage,
+        uniq: uniq
+      }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_MediaCardServer__WEBPACK_IMPORTED_MODULE_2__.default, {
+        element: element,
+        handleSelectImage: handleSelectImage,
+        handleRemoveImage: handleRemoveImage,
+        uniq: uniq
+      });
+    }
+  }]);
 
-      if (!element) {
-        return false;
-      }
+  return MediaCard;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MediaCard);
+
+/***/ }),
+
+/***/ "./src/js/react/components/MediaBrowser/MediaCardCDN.js":
+/*!**************************************************************!*\
+  !*** ./src/js/react/components/MediaBrowser/MediaCardCDN.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var MediaCardCDN = /*#__PURE__*/function (_React$Component) {
+  _inherits(MediaCardCDN, _React$Component);
+
+  var _super = _createSuper(MediaCardCDN);
+
+  function MediaCardCDN(props) {
+    _classCallCheck(this, MediaCardCDN);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(MediaCardCDN, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          element = _this$props.element,
+          handleSelectImage = _this$props.handleSelectImage,
+          handleRemoveImage = _this$props.handleRemoveImage,
+          uniq = _this$props.uniq;
       var elementCdn = JSON.parse(element.json_cdn_data);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser-card",
@@ -4703,10 +4779,91 @@ var MediaCard = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return MediaCard;
+  return MediaCardCDN;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MediaCard);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MediaCardCDN);
+
+/***/ }),
+
+/***/ "./src/js/react/components/MediaBrowser/MediaCardServer.js":
+/*!*****************************************************************!*\
+  !*** ./src/js/react/components/MediaBrowser/MediaCardServer.js ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+var MediaCardServer = /*#__PURE__*/function (_React$Component) {
+  _inherits(MediaCardServer, _React$Component);
+
+  var _super = _createSuper(MediaCardServer);
+
+  function MediaCardServer(props) {
+    _classCallCheck(this, MediaCardServer);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(MediaCardServer, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          element = _this$props.element,
+          handleSelectImage = _this$props.handleSelectImage,
+          handleRemoveImage = _this$props.handleRemoveImage,
+          uniq = _this$props.uniq;
+      var image_path = "/upload/".concat(element.path);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "media-browser-card",
+        key: uniq
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
+        className: "media-browser-card__image",
+        src: image_path
+      }), handleSelectImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "media-browser-card__select",
+        onClick: handleSelectImage.bind(this, element)
+      }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C") : "", handleRemoveImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+        type: "button",
+        className: "media-browser-card__select",
+        onClick: handleRemoveImage.bind(this, element)
+      }, "\u0423\u0434\u0430\u043B\u0438\u0442\u044C") : "");
+    }
+  }]);
+
+  return MediaCardServer;
+}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (MediaCardServer);
 
 /***/ }),
 
@@ -6929,6 +7086,7 @@ var config = {
   restFavorite: url + 'api/favorite/',
   restOrder: url + 'api/order/',
   restFastOrder: url + 'api/order/fast/',
+  restOrderRepeat: url + 'api/order/repeat/',
   restBasket: url + 'api/basket/',
   restDelivery: url + 'api/delivery/',
   restDeliveryService: url + 'api/delivery/service/',

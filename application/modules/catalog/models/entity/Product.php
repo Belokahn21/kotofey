@@ -86,8 +86,8 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['ident_key','created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['ident_key','created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price', 'base_price'];
 
         return $parent;
@@ -112,7 +112,7 @@ class Product extends \yii\db\ActiveRecord
 
             [['has_store', 'is_product_order'], 'boolean'],
 
-            [['code', 'slug', 'barcode','ident_key'], 'unique', 'message' => 'Такой {attribute} уже используется'],
+            [['code', 'slug', 'barcode', 'ident_key'], 'unique', 'message' => 'Такой {attribute} уже используется'],
 
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
             [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions'], 'maxFiles' => 10],
@@ -332,6 +332,11 @@ class Product extends \yii\db\ActiveRecord
         $price = PriceHelper::getPriceByCode($this->id, 'purchase');
         if ($price) return $price->value;
         return $this->purchase;
+    }
+
+    public function getResultPrice()
+    {
+        return $this->getDiscountPrice() ?: $this->getPrice();
     }
 
     public function getPrice()

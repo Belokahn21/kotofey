@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\helpers;
 
+use app\modules\site\models\tools\Debug;
 use app\modules\vendors\models\entity\Vendor;
 use Yii;
 use yii\helpers\Json;
@@ -110,15 +111,13 @@ class ProductHelper
 
                 return $media->cdnData['secure_url'];
             }
-            $url = "/upload/" . $media->name;
+            $url = "/upload/" . $media->path;
             $noImage = "/upload/images/not-image.png";
 
-            if (empty($model->image)) $url = $noImage;
-
-
-            if (!is_file(\Yii::getAlias('@webroot/upload/' . $media->name))) $url = $noImage;
+            if (!is_file(\Yii::getAlias('@webroot/upload/' . $media->path))) $url = $noImage;
 
             if ($isFull) return System::fullSiteUrl() . $url;
+
 
             return $url;
         }
