@@ -14,12 +14,13 @@ use app\modules\catalog\models\entity\ProductStock;
 use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\ProductToBreed;
-use app\modules\catalog\models\helpers\ProductCategoryHelper;
+use app\modules\catalog\models\entity\CompositionType;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\CompositionProducts;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\helpers\ProductToBreadHelper;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
@@ -233,11 +234,19 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         </div>
     </div>
     <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
-        <?php $composition_model = new CompositionProducts(); ?>
 
-
+        <div>
+            <?= \kartik\select2\Select2::widget([
+                'name' => '',
+                'options' => ['class' => 'js-load-composition'],
+                'data' => Yii::$app->cache->getOrSet('js-load-composition', function () {
+                    return ArrayHelper::map(ArrayHelper::getColumn(CompositionProducts::find()->groupBy('product_id')->orderBy(['created_at' => SORT_DESC])->all(), 'product'), 'id', 'name');
+                }),
+            ]); ?>
+        </div>
 
         <?php
+        $composition_model = new CompositionProducts();
         $count = 0;
         $grouped_composition = [];
         foreach ($compositions as $composition) {
@@ -251,10 +260,8 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             <fieldset class="fieldset-props">
                 <legend>
                     <?php
-                    $type = \app\modules\catalog\models\entity\CompositionType::findOne($type_id);
-                    if ($type) {
-                        echo $type->name;
-                    }
+                    $type = CompositionType::findOne($type_id);
+                    if ($type) echo $type->name;
                     ?>
                 </legend>
 
@@ -274,11 +281,17 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                             </div>
                             <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
                                 'value' => $composit_element ? $composit_element->value : null,
-                                'placeholder' => $composit->name
+                                'placeholder' => $composit->name,
+                                'class' => 'js-row-composition form-control',
+                                'data-composit-id' => $composit->id,
                             ])->label(false); ?>
                         </div>
                         <div class="col-4">
-                            <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['prompt' => 'Выбрать весовку', 'options' => [$composit_element ? $composit_element->metric_id : null => ["Selected" => true]]])->label(false); ?>
+                            <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['prompt' => 'Выбрать весовку',
+                                'options' => [$composit_element ? $composit_element->metric_id : null => ["Selected" => true]],
+                                'class' => 'js-row-metrik form-control',
+                                'data-composit-id' => $composit->id,
+                            ])->label(false); ?>
                         </div>
                     </div>
                     <?php $count++; ?>

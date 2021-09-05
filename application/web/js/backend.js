@@ -3334,9 +3334,27 @@ document.addEventListener('DOMContentLoaded', function () {
 /*!****************************************!*\
   !*** ./src/js/include/other-jquery.js ***!
   \****************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _react_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../react/config */ "./src/js/react/config.js");
+/* harmony import */ var _react_config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_config__WEBPACK_IMPORTED_MODULE_1__);
 
 
+$('.js-load-composition').change(function (e) {
+  var $this = $(this);
+  _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__.default.all((_react_config__WEBPACK_IMPORTED_MODULE_1___default().restProductComposition) + '?CompositionProducts[product_id]=' + $this.val()).then(function (data) {
+    data.map(function (el) {
+      console.log(el);
+      var j1 = $(".js-row-composition[data-composit-id=\"".concat(el.composition_id, "\"]"));
+      var j2 = $(".js-row-metrik[data-composit-id=\"".concat(el.composition_id, "\"]"));
+      j1.val(el.value);
+      j2.val(el.metric_id);
+    });
+  });
+});
 
 /***/ }),
 
@@ -7044,6 +7062,7 @@ var TodoList = /*#__PURE__*/function (_React$Component) {
 var url = location.protocol + '//' + location.hostname;
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store';
 module.exports = {
+  restProductComposition: url + '/backend/api/catalog/product-composition/',
   restOrderCustomer: url + '/backend/api/order/customer/',
   restDeliveryCalculate: url + '/backend/api/delivery/calculate/',
   restCdn: url + '/backend/api/cdn/',
@@ -62713,7 +62732,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_17__);
 /* harmony import */ var _include_datepicker__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./include/datepicker */ "./src/js/include/datepicker.js");
 /* harmony import */ var _include_other_jquery__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./include/other-jquery */ "./src/js/include/other-jquery.js");
-/* harmony import */ var _include_other_jquery__WEBPACK_IMPORTED_MODULE_19___default = /*#__PURE__*/__webpack_require__.n(_include_other_jquery__WEBPACK_IMPORTED_MODULE_19__);
 /* harmony import */ var _include_maskedinput__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./include/maskedinput */ "./src/js/include/maskedinput.js");
 /* harmony import */ var _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./block/ProductVendorFill */ "./src/js/block/ProductVendorFill.js");
 /* harmony import */ var _block_SetPrice__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./block/SetPrice */ "./src/js/block/SetPrice.js");

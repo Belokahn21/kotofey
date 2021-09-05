@@ -17,6 +17,7 @@ use yii\behaviors\TimestampBehavior;
  * @property int|null $updated_at
  *
  * @property Composition $composition
+ * @property Product $product
  */
 class CompositionProducts extends \yii\db\ActiveRecord
 {
@@ -39,6 +40,11 @@ class CompositionProducts extends \yii\db\ActiveRecord
     public function getComposition()
     {
         return $this->hasOne(Composition::className(), ['id' => 'composition_id']);
+    }
+
+    public function getProduct()
+    {
+        return $this->hasOne(Product::className(), ['id' => 'product_id']);
     }
 
     public function attributeLabels()
