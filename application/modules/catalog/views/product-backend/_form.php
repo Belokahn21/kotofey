@@ -238,7 +238,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         <div>
             <?= \kartik\select2\Select2::widget([
                 'name' => '',
-                'options' => ['class' => 'js-load-composition'],
+                'options' => ['class' => 'js-load-composition', 'placeholder' => 'Выбрать готовый состав ...'],
                 'data' => Yii::$app->cache->getOrSet('js-load-composition', function () {
                     return ArrayHelper::map(ArrayHelper::getColumn(CompositionProducts::find()->groupBy('product_id')->orderBy(['created_at' => SORT_DESC])->all(), 'product'), 'id', 'name');
                 }),
