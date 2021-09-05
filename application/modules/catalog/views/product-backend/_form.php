@@ -278,8 +278,8 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                         <div class="col-4"><?= $composit->name; ?></div>
                         <div class="col-4">
                             <div class="hidden">
-                                <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id])->label(false); ?>
-                                <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id])->label(false); ?>
+                                <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id, 'class' => 'form-control js-row-composition-id', 'data-composit-id' => $composit->id])->label(false); ?>
+                                <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id,'class' => 'form-control js-row-product-id'])->label(false); ?>
                             </div>
                             <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
                                 'value' => $composit_element ? $composit_element->value : null,
