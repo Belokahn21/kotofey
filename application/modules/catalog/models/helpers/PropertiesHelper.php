@@ -45,6 +45,11 @@ class PropertiesHelper
         return false;
     }
 
+    /**
+     * @param Product $model
+     * @param $property_id
+     * @return array
+     */
     public static function extractAllPropertyById(Product $model, $property_id)
     {
         $values = [];

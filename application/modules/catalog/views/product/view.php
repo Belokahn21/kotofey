@@ -4,6 +4,7 @@ use yii\helpers\Json;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\widgets\Breadcrumbs;
+use app\modules\media\models\entity\Media;
 use app\modules\vendors\models\entity\Vendor;
 use app\modules\seo\models\tools\ProductTitle;
 use app\modules\reviews\models\entity\Reviews;
@@ -64,9 +65,15 @@ $this->title = ProductTitle::show($product->name);
                         <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 23)): ?>
                             <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                 <?php if ($propertyValue->media): ?>
-                                    <a href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
-                                        <img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
-                                    </a>
+                                    <?php if ($propertyValue->media->location == Media::LOCATION_CDN): ?>
+                                        <a href="<?= $propertyValue->media->cdnData['secure_url']; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
+                                            <img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                                        </a>
+                                    <?php else: ?>
+                                        <a href="/upload/<?= $propertyValue->media->path; ?>" data-lightbox="roadtrip" class="swiper-slide product-gallery-big__slide">
+                                            <img src="/upload/<?= $propertyValue->media->path; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                                        </a>
+                                    <?php endif; ?>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
@@ -92,7 +99,11 @@ $this->title = ProductTitle::show($product->name);
                             <?php if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($product, 23)): ?>
                                 <?php foreach ($imagesFromProperty as $propertyValue): ?>
                                     <?php if ($propertyValue->media): ?>
-                                        <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                        <?php if ($propertyValue->media->location == Media::LOCATION_CDN): ?>
+                                            <div class="swiper-slide product-gallery-thumbs__slide"><img src="<?= $propertyValue->media->cdnData['secure_url']; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                        <?php else: ?>
+                                            <div class="swiper-slide product-gallery-thumbs__slide"><img src="/upload/<?= $propertyValue->media->path; ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>"></div>
+                                        <?php endif; ?>
                                     <?php endif; ?>
                                 <?php endforeach; ?>
                             <?php endif; ?>
@@ -213,7 +224,7 @@ $this->title = ProductTitle::show($product->name);
 
         <div class="tab-pane fade" id="nav-reviews" role="tabpanel" aria-labelledby="nav-reviews-tab">
             <?php if ($product->vendor_id == Vendor::VENDOR_ID_ROYAL): ?>
-                <?= Html::img('/images/royal_reward.jpg', ['style'=>'width:100%; object-fit:contain;', 'class'=>'my-3']); ?>
+                <?= Html::img('/images/royal_reward.jpg', ['style' => 'width:100%; object-fit:contain;', 'class' => 'my-3']); ?>
             <?php endif; ?>
             <?= ProductReviewsWidget::widget([
                 'product_id' => $product->id
