@@ -3354,6 +3354,15 @@ $('.js-load-composition').change(function (e) {
     });
   });
 });
+$('.js-reset-composition').click(function (e) {
+  e.preventDefault();
+  $('#nav-composition input').each(function (index, el) {
+    $(el).val('');
+  });
+  $('#nav-composition select').each(function (index, el) {
+    $(el).prop('selectedIndex', 0);
+  });
+});
 
 /***/ }),
 

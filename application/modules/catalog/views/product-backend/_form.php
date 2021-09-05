@@ -245,6 +245,8 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             ]); ?>
         </div>
 
+        <button type="button" class="js-reset-composition btn-main">Очистить состав товара</button>
+
         <?php
         $composition_model = new CompositionProducts();
         $count = 0;
