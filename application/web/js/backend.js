@@ -3345,9 +3345,8 @@ __webpack_require__.r(__webpack_exports__);
 
 $('.js-load-composition').change(function (e) {
   var $this = $(this);
-  _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__.default.all((_react_config__WEBPACK_IMPORTED_MODULE_1___default().restProductComposition) + '?CompositionProducts[product_id]=' + $this.val()).then(function (data) {
+  _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__.default.all((_react_config__WEBPACK_IMPORTED_MODULE_1___default().restProductComposition) + '?CompositionProductSearchForm[product_id]=' + $this.val()).then(function (data) {
     data.map(function (el) {
-      console.log(el);
       var j1 = $(".js-row-composition[data-composit-id=\"".concat(el.composition_id, "\"]"));
       var j2 = $(".js-row-metrik[data-composit-id=\"".concat(el.composition_id, "\"]"));
       j1.val(el.value);
