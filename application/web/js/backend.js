@@ -4792,10 +4792,12 @@ var MediaCardCDN = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser-card",
         key: uniq
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "/admin/media/media-backend/update/?id=".concat(element.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "media-browser-card__image",
         src: elementCdn.secure_url
-      }), handleSelectImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      })), handleSelectImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         className: "media-browser-card__select",
         onClick: handleSelectImage.bind(this, element)
@@ -4873,10 +4875,12 @@ var MediaCardServer = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "media-browser-card",
         key: uniq
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "/admin/media/media-backend/update/?id=".concat(element.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         className: "media-browser-card__image",
         src: image_path
-      }), handleSelectImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      })), handleSelectImage ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "button",
         className: "media-browser-card__select",
         onClick: handleSelectImage.bind(this, element)

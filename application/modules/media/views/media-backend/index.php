@@ -42,7 +42,7 @@ $this->title = \app\modules\seo\models\tools\Title::show('Медиа');
 //                    return Html::a('<i class="far fa-copy"></i>', Url::to(["copy", 'id' => $key]));
                 },
                 'update' => function ($url, $model, $key) {
-//                    return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
+                    return Html::a('<i class="far fa-eye"></i>', Url::to(["update", 'id' => $key]));
                 },
                 'delete' => function ($url, $model, $key) {
                     return Html::a('<i class="fas fa-trash-alt"></i>', Url::to(["delete", 'id' => $key]));
