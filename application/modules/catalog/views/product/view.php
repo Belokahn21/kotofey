@@ -136,7 +136,7 @@ $this->title = ProductTitle::show($product->name);
                 ],
                 'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
             ]); ?>
-            <h1 itemprop="name" class="product-detail__title"><?= $product->name; ?></h1>
+            <h1 itemprop="name" content="<?= $product->name; ?>" class="product-detail__title"><?= $product->name; ?></h1>
 
             <?php if ($propertiesValues): ?>
                 <?php foreach ($propertiesValues as $property): ?>
