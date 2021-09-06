@@ -72,7 +72,9 @@ class News extends \yii\db\ActiveRecord
 
             [['preview', 'detail'], 'string'],
 
-            [['title', 'slug', 'preview_image', 'detail_image', 'seo_keywords', 'seo_description'], 'string', 'max' => 255],
+            [['title', 'slug', 'seo_keywords', 'seo_description'], 'string', 'max' => 255],
+
+            [['preview_image', 'detail_image'], 'file', 'skipOnEmpty' => true, 'extensions' => Yii::$app->params['files']['extensions']],
         ];
     }
 

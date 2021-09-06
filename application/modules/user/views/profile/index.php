@@ -202,6 +202,9 @@ $this->params['breadcrumbs'][] = ['label' => 'Личный кабинет'];
                         <h2 class="page__title">Ваши бонусы</h2>
                         <div class="profile-bonus-count"><?= BonusHelper::getUserBonus(Yii::$app->user->identity->phone); ?></div>
                     </div>
+                    <div class="alert alert-danger" role="alert">
+                        Внимание! Изменение политики использования бонусов! <a href="/news/izmenenia-reglamenta-ispolzovania-bonusov-za-pokupku/">Читать далее...</a>
+                    </div>
                     <?= UserBonusHistoryWidget::widget(); ?>
                 </div>
                 <div class="tab-pane fade" id="billing">
