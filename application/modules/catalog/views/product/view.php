@@ -141,9 +141,9 @@ $this->title = ProductTitle::show($product->name);
             <?php if ($propertiesValues): ?>
                 <?php foreach ($propertiesValues as $property): ?>
                     <?php if ($property->property && $property->property->id == 1): ?>
-                        <div class="product-detail__brand" itemprop="brand">
+                        <div class="product-detail__brand" >
                             <div>Бренд</div>
-                            <a href="<?= ProductPropertiesValuesHelper::getBrandDetailUrl($property->variant); ?>"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></a>
+                            <a itemprop="brand" href="<?= ProductPropertiesValuesHelper::getBrandDetailUrl($property->variant); ?>"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></a>
                         </div>
                     <?php endif; ?>
                 <?php endforeach; ?>
