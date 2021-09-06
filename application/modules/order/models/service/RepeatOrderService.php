@@ -47,7 +47,13 @@ class RepeatOrderService
         $new_order_items->order_id = $model->id;
         if (!$new_order_items->saveItems()) throw new \Exception($new_order_items->getErrors());
 
+
+
         Basket::clear();
+
+        $ns = new NotifyService();
+        $ns->sendClientNotify(Order::findOne($model->id));
+
         return true;
     }
 
