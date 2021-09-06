@@ -13656,6 +13656,27 @@ img {
     color: white !important;
     border-bottom: 1px dashed white; }
 
+.order-repeat-notes {
+  color: grey;
+  font-size: 14px; }
+
+.order-repeat-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; }
+  .order-repeat-success__status {
+    max-width: 100%; }
+    .order-repeat-success__status img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain; }
+  .order-repeat-success__thanks {
+    font-size: 22px;
+    margin-bottom: 10px; }
+  .order-repeat-success__close {
+    margin-top: 15px; }
+
 .order-repeat-products {
   display: flex;
   flex-direction: column;

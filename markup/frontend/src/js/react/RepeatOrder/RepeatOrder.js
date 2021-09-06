@@ -3,7 +3,8 @@ import ReactDom from "react-dom";
 import {Modal} from "react-bootstrap";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
-import Price from "../../tools/Price";
+import RepeatSuccess from "./RepeatSuccess";
+import RepeatForm from "./RepeatForm";
 
 class RepeatOrder extends React.Component {
 
@@ -12,6 +13,7 @@ class RepeatOrder extends React.Component {
         this.state = {
             show: false,
             order: false,
+            success: false,
             products: [],
         }
     }
@@ -66,7 +68,8 @@ class RepeatOrder extends React.Component {
 
             switch (status) {
                 case 200:
-                    this.setShow(false);
+                    // this.setShow(false);
+                    this.setState({success: true});
                     break;
                 case 500:
                     console.log(data.text);
@@ -77,7 +80,7 @@ class RepeatOrder extends React.Component {
 
     render() {
 
-        const {show, products} = this.state;
+        const {show, products, success} = this.state;
 
         return (
             <>
@@ -89,27 +92,7 @@ class RepeatOrder extends React.Component {
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
-                        <div className="order-repeat-products">
-                            {products.map((el, key) => {
-                                return <div key={key} className="order-repeat-products-item">
-                                    <div className="order-repeat-products-item__image">
-                                        <img src={el.imageUrl} alt={el.name} title={el.name}/>
-                                    </div>
-                                    <div className="order-repeat-products-item__name">
-                                        {el.name}
-                                    </div>
-                                    <div className="order-repeat-products-item__price">
-                                        {Price.format(el.price)} ₽
-                                    </div>
-                                </div>;
-                            })}
-                        </div>
-
-                        <hr/>
-
-                        <button className="btn-main" type="button" onClick={this.handleSubmitForm.bind(this)}>Повторить заказ</button>
-
+                        {success ? <RepeatSuccess handleShow={this.handleShow.bind(this)}/> : <RepeatForm products={products} handleSubmitForm={this.handleSubmitForm.bind(this)}/>}
                     </Modal.Body>
                 </Modal>
             </>
