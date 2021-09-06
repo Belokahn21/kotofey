@@ -13,17 +13,16 @@ use app\modules\news\models\entity\NewsCategory;
 
 $this->title = Title::show("Рубрики");
 ?>
-<section>
-    <h1 class="title">Рубрики</h1>
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $this->render('_form', [
-        'model' => $model,
-        'form' => $form,
-    ]); ?>
-    <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-    <?php ActiveForm::end(); ?>
-</section>
-<div class="clearfix"></div>
+<div class="title-group">
+    <h1 class="title">Рубрики новостей</h1>
+</div>
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?= $this->render('_form', [
+    'model' => $model,
+    'form' => $form,
+]); ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?php ActiveForm::end(); ?>
 <h2>Список рубрик</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
@@ -32,18 +31,18 @@ $this->title = Title::show("Рубрики");
     'columns' => [
         'id',
         'name',
-        [
-            'attribute' => 'is_active',
-            'filter' => ['Не активен', 'Активен'],
-            'format' => 'raw',
-            'value' => function ($model) {
-                if ($model->is_active) {
-                    return Html::tag('span', 'Активен', ['class' => 'green']);
-                } else {
-                    return Html::tag('span', 'Не активен', ['class' => 'red']);
-                }
-            }
-        ],
+//        [
+//            'attribute' => 'is_active',
+//            'filter' => ['Не активен', 'Активен'],
+//            'format' => 'raw',
+//            'value' => function ($model) {
+//                if ($model->is_active) {
+//                    return Html::tag('span', 'Активен', ['class' => 'green']);
+//                } else {
+//                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+//                }
+//            }
+//        ],
         [
             'attribute' => 'created_at',
             'value' => function ($model) {

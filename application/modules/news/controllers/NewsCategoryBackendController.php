@@ -8,22 +8,18 @@
 namespace app\modules\news\controllers;
 
 
-use app\modules\news\models\entity\NewsCategory;
+use yii\web\HttpException;
+use app\widgets\notification\Alert;
 use app\modules\news\models\search\NewsCategorySearchForm;
 use app\modules\site\controllers\MainBackendController;
-use app\widgets\notification\Alert;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\web\Controller;
-use yii\web\HttpException;
 
 class NewsCategoryBackendController extends MainBackendController
 {
-    public $layout = '@app/views/layouts/admin';
+    public $modelClass = 'app\modules\news\models\entity\NewsCategory';
 
     public function actionIndex()
     {
-        $model = new NewsCategory();
+        $model = new $this->modelClass();
         $searchModel = new NewsCategorySearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
@@ -47,10 +43,7 @@ class NewsCategoryBackendController extends MainBackendController
 
     public function actionUpdate($id)
     {
-        $model = NewsCategory::findOne($id);
-        if (!$model) {
-            throw new HttpException(404, 'Запись не найдена');
-        }
+        if (!$model = $this->getModel($id)) throw new HttpException(404, 'Элемент не найден');
 
         if (\Yii::$app->request->isPost) {
             if ($model->load(\Yii::$app->request->post())) {
@@ -70,10 +63,15 @@ class NewsCategoryBackendController extends MainBackendController
 
     public function actionDelete($id)
     {
-        if (NewsCategory::findOne($id)->delete()) {
-            Alert::setSuccessNotify('Категория новости удалена');
-        }
+        if (!$model = $this->getModel($id)) throw new HttpException(404, 'Элемент не найден');
+
+        if ($model->delete()) Alert::setSuccessNotify('Категория новости удалена');
 
         return $this->redirect(['index']);
+    }
+
+    private function getModel($id)
+    {
+        return $this->modelClass::findOne($id);
     }
 }
