@@ -12,7 +12,7 @@ use yii\helpers\Url;
 <?php if (!$products) return false; ?>
 
 <div class="recommended-products-container">
-    <h4 class="recommended-products-title">Ранее просмотренные товары</h4>
+    <h4 class="recommended-products-title">Вы смотрели</h4>
     <div class="catalog-line recommended-products">
         <?php foreach ($products as $product): ?>
             <div class="catalog-line__item">
