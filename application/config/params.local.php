@@ -26,6 +26,7 @@ return [
             'merchantLogin' => 'T2222889641',
         ]
     ],
+    'cache_time' => 3600 * 7 * 24,
     'bonus_by_buy' => false,
     'use_promocode' => true,
     'yandex' => [
