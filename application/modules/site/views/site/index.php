@@ -49,3 +49,10 @@ $this->title = Title::show("Зоотовары для животных в Бар
         </div>
     </div>
 </div>
+<?php GrumingWidget::widget(); ?>
+<div class="page-container">
+    <?= LastNewsWidget::widget(['limit' => 3]) ?>
+    <?= InstagramMediaWidget::widget(); ?>
+    <?= LastWeekProducts::widget(); ?>
+    <?= FastButtonSearchWidget::widget(); ?>
+</div>
