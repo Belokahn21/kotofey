@@ -11,16 +11,18 @@ class SlidersImagesHelper
 {
     public static function getImageUrl(SlidersImages $model, $options = [])
     {
-        if ($model->media) {
+        return \Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__ . $model->id, function () use ($model, $options) {
+            if ($media = $model->media) {
 
-            switch ($model->media->location) {
-                case Media::LOCATION_SERVER:
-                    return '/upload/' . $model->media->name;
-                case Media::LOCATION_CDN:
-                    return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
+                switch ($media->location) {
+                    case Media::LOCATION_SERVER:
+                        return '/upload/' . $media->name;
+                    case Media::LOCATION_CDN:
+                        return \Yii::$app->CDN->resizeImage($media->cdnData['public_id'], $options);
+                }
             }
-        }
 
-        return false;
+            return false;
+        });
     }
 }

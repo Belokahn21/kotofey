@@ -16,7 +16,9 @@ class PromotionHelper
 
     public static function getImageUrl(Promotion $model, $options = [])
     {
-        return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
+        return \Yii::$app->cache->getOrSet(__METHOD__ . $model->id, function () use ($model, $options) {
+            return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
+        });
     }
 
     public static function getActualPromotions($sort = ['created_at' => SORT_DESC, 'sort' => SORT_DESC])

@@ -43,13 +43,13 @@ class StatisticWidget extends Widget
         $no_attention_reviews = \Yii::$app->cache->getOrSet('no_attention_reviews', function () {
             return Reviews::find()->where(['is_active' => 1, 'status_id' => Reviews::STATUS_MODERATE])->all();
         }, $this->cacheTime, new DbDependency([
-            'sql' => 'select count(id) from `reviews` where `is_active`=1 and `status_id`=' . Reviews::STATUS_MODERATE
+            'sql' => 'select count(*) from `reviews` where `is_active`=1 and `status_id`=' . Reviews::STATUS_MODERATE
         ]));
 
         $last_admission = \Yii::$app->cache->getOrSet('last_admission', function () {
             return NotifyAdmission::find()->where(['is_active' => true])->orderBy(['created_at' => SORT_DESC])->limit(3)->all();
         }, $this->cacheTime, new DbDependency([
-            'sql' => 'select count(id) from `notify_admission`'
+            'sql' => 'select count(*) from `notify_admission`'
         ]));
 
 

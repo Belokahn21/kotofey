@@ -6,7 +6,7 @@ use yii\helpers\Html;
 
 ?>
 <?php if ($data): ?>
-    <?php if ($this->beginCache('index-combine-slider-html', ['duration' => 3600 * 24 * 7])): ?>
+    <?php if ($this->beginCache('index-combine-slider-html', ['duration' => Yii::$app->params['cache_time']])): ?>
         <div class="swiper-container slider-container">
             <div class="swiper-wrapper slider-wrapper">
                 <?php foreach ($data as $datum): ?>

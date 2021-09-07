@@ -30,7 +30,7 @@ class CombineSliderWidget extends Widget
         $sliders = \Yii::$app->cache->getOrSet(__METHOD__ . __FILE__ . '-sliders', function () {
             return SlidersImages::find()->where(['active' => true, 'slider_id' => $this->sliderId])->orderBy(['created_at' => SORT_DESC])->all();
         }, 3600 * 24 * 60, new DbDependency([
-            'sql' => 'select max(updated_at) from `sliders_images`',
+            'sql' => 'select count(`id`) from `sliders_images`',
         ]));
 
         foreach ($sliders as $slider) {
