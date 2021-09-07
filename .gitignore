@@ -39,6 +39,7 @@ composer.lock
 markup/build/
 markup_experience/build/
 node_modules
+params.php
 package-lock.json
 application/web/*.xls
 application/web/*.xlsx
