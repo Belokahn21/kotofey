@@ -34,7 +34,7 @@ class PromotionHelper
                 ])
                 ->orderBy($sort)
                 ->all();
-        });
+        }, \Yii::$app->params['cache_time']);
 
         return $promotions;
     }
