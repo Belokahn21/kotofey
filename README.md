@@ -21,3 +21,13 @@ MySQL<br><br>
  - Интеграция с OFD.RU (Ferma)<br>
  - Интеграция с Почта России (API расчётов)<br>
  - Elasticsearch<br>
+
+Crontab
+0 * * * * /usr/bin/php /var/www/kotofey.store/application/yii sibagro/update
+0 */1 * * * /usr/bin/php /var/www/kotofey.store/application/yii sibagro/clean-product-sync
+0 * * * * /usr/bin/php /var/www/kotofey.store/application/yii backup/save
+0 8 * * * /usr/bin/php /var/www/kotofey.store/application/yii content/clean
+10 10 25 * * /usr/bin/php /var/www/kotofey.store/application/yii instagram/rebase
+0 * * * * /usr/bin/php /var/www/kotofey.store/application/yii admission/send
+0 10 * * * /usr/bin/php /var/www/kotofey.store/application/yii promotion/group-notify
+0 10 * */1 * /usr/bin/php /var/www/kotofey.store/application/yii sender/remember

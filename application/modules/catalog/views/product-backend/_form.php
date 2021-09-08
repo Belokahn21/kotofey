@@ -240,7 +240,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                 'name' => '',
                 'options' => ['class' => 'js-load-composition', 'placeholder' => 'Выбрать готовый состав ...'],
                 'data' => Yii::$app->cache->getOrSet('js-load-composition', function () {
-                    return ArrayHelper::map(ArrayHelper::getColumn(CompositionProducts::find()->groupBy('product_id')->orderBy(['created_at' => SORT_DESC])->all(), 'product'), 'id', 'name');
+                    return ArrayHelper::map(ArrayHelper::getColumn(CompositionProducts::find()->select(['product_id'])->groupBy('product_id')->all(), 'product'), 'id', 'name');
                 }),
             ]); ?>
         </div>
@@ -279,7 +279,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                         <div class="col-4">
                             <div class="hidden">
                                 <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id, 'class' => 'form-control js-row-composition-id', 'data-composit-id' => $composit->id])->label(false); ?>
-                                <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id,'class' => 'form-control js-row-product-id'])->label(false); ?>
+                                <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id, 'class' => 'form-control js-row-product-id'])->label(false); ?>
                             </div>
                             <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
                                 'value' => $composit_element ? $composit_element->value : null,
