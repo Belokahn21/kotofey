@@ -5284,7 +5284,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
   var productPromotionsSlider = new swiper__WEBPACK_IMPORTED_MODULE_0__.default('.product-promotions-slider', {
-    slidesPerView: 4
+    slidesPerView: 6,
+    autoplay: true
   });
   var productGalleryThumbs = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".product-gallery-thumbs", {
     spaceBetween: 10,

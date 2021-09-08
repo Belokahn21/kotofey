@@ -212,7 +212,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     let productPromotionsSlider = new Swiper('.product-promotions-slider', {
-        slidesPerView: 4,
+        slidesPerView: 6,
+        autoplay: true,
     });
 
     let productGalleryThumbs = new Swiper(".product-gallery-thumbs", {

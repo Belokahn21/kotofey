@@ -18,8 +18,14 @@
       margin-bottom: 10px;
     }
 
+
     img {
-      width: 100%;
+      &:first-child {
+        width: 100%;
+        height: auto;
+      }
+
+      height: 70px;
       object-fit: contain;
 
     }
