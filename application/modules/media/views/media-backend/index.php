@@ -1,8 +1,9 @@
 <?php
 
-use yii\grid\GridView;
-use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\GridView;
+use app\modules\media\models\entity\Media;
 
 /* @var $this \yii\web\View */
 /* @var $models \app\modules\media\models\entity\Media[] */
@@ -22,7 +23,11 @@ $this->title = \app\modules\seo\models\tools\Title::show('Медиа');
         [
             'format' => 'raw',
             'value' => function ($model) {
-                return Html::img($model->cdnData['secure_url'], ['width' => 70]);
+                if ($model->location == Media::LOCATION_CDN) {
+                    return Html::img($model->cdnData['secure_url'], ['width' => 70]);
+                } else {
+                    return Html::img('/upload/' . $model->path, ['width' => 70]);
+                }
             }
         ],
         [
