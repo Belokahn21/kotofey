@@ -1,4 +1,11 @@
 .news-detail {
+
+  &-image {
+    width: 100%;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
   &-author {
     margin: 40px 0 60px 0;
     display: flex;

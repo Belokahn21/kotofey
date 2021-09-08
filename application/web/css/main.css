@@ -15743,6 +15743,11 @@ label[for="site-form-pet-avatar"] {
   .news-summary__value {
     padding: 5px; }
 
+.news-detail-image {
+  width: 100%;
+  max-width: 100%;
+  object-fit: contain; }
+
 .news-detail-author {
   margin: 40px 0 60px 0;
   display: flex;

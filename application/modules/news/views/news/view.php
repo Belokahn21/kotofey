@@ -46,9 +46,19 @@ $this->title = Title::show($model->title);
         </div>
         <div class="news-detail-content">
             <h1 class="page__title"><?= $model->title; ?></h1>
+
+
+            <?php if ($image = NewsHelper::getPreviewImageUrl($model)): ?>
+                <img class="news-detail-image" src="<?= $image; ?>" title="<?= $model->title; ?>" alt="<?= $model->title; ?>">
+            <?php endif; ?>
+            <?php if ($image = NewsHelper::getDetailImage($model)): ?>
+                <img class="news-detail-image" src="<?= $image; ?>" title="<?= $model->title; ?>" alt="<?= $model->title; ?>">
+            <?php endif; ?>
+
+
             <?php if ($model->author): ?>
                 <div class="news-detail-author">
-                    <div class="news-detail-author__avatar"><img src="<?= UserHelper::getAvatar($model->author); ?>"/></div>
+                    <div class="news-detail-author__avatar"><img title="<?= $model->author->email; ?>" alt="<?= $model->author->email; ?>" src="<?= UserHelper::getAvatar($model->author); ?>"/></div>
                     <div class="news-detail-author-data">
                         <div class="news-detail-author-data__title">Автор <a href="#"><?= UserHelper::getFullName($model->author); ?></a></div>
                         <div class="news-detail-author-data__date">Опубликовано <?= date('M d, Y', $model->created_at) ?></div>
