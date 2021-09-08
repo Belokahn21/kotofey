@@ -17,17 +17,14 @@
     &:not(:last-child) {
       margin-bottom: 10px;
     }
+  }
 
+  &__image {
+    height: 70px;
+    object-fit: contain;
+  }
 
-    img {
-      &:first-child {
-        width: 100%;
-        height: auto;
-      }
-
-      height: 70px;
-      object-fit: contain;
-
-    }
+  &__action-img {
+    width: 100%;
   }
 }

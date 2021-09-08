@@ -13,7 +13,7 @@ use app\modules\promotion\models\helpers\PromotionHelper;
     <?php foreach ($models as $model): ?>
         <div class="product-promotions__item">
             <a href="<?= PromotionHelper::getDetailUrl($model); ?>" class="product-promotions__link">
-                <img src="<?= PromotionHelper::getImageUrl($model); ?>">
+                <img class="product-promotions__action-img" src="<?= PromotionHelper::getImageUrl($model); ?>">
             </a>
 
             <div class="swiper-container product-promotions-slider">
@@ -21,7 +21,7 @@ use app\modules\promotion\models\helpers\PromotionHelper;
                     <?php foreach ($model->promotionProductMechanics as $mechanics): ?>
                         <div class="swiper-slide">
                             <a href="<?= ProductHelper::getDetailUrl($mechanics->product) ?>">
-                                <img src="<?= ProductHelper::getImageUrl($mechanics->product) ?>" alt="<?= $mechanics->product->name; ?>" title="<?= $mechanics->product->name; ?>">
+                                <img class="product-promotions__image" src="<?= ProductHelper::getImageUrl($mechanics->product) ?>" alt="<?= $mechanics->product->name; ?>" title="<?= $mechanics->product->name; ?>">
                             </a>
                         </div>
                     <?php endforeach; ?>
