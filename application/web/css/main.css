@@ -11086,11 +11086,11 @@ p {
   .help-block-error:first-letter {
     text-transform: uppercase; }
 
-.clean-style ul {
+.clean-style ul, .news-detail-text ul {
   list-style-type: disc;
   list-style-position: inside; }
 
-.clean-style ol {
+.clean-style ol, .news-detail-text ol {
   display: block;
   list-style: decimal;
   margin-top: 1em;
@@ -11098,20 +11098,20 @@ p {
   margin-left: 0;
   margin-right: 0;
   padding-left: 40px; }
-  .clean-style ol li {
+  .clean-style ol li, .news-detail-text ol li {
     list-style: inherit; }
 
-.clean-style ul ul, .clean-style ol ul {
+.clean-style ul ul, .news-detail-text ul ul, .clean-style ol ul, .news-detail-text ol ul {
   list-style-type: circle;
   list-style-position: inside;
   margin-left: 15px; }
 
-.clean-style ol ol, .clean-style ul ol {
+.clean-style ol ol, .news-detail-text ol ol, .clean-style ul ol, .news-detail-text ul ol {
   list-style-type: lower-latin;
   list-style-position: inside;
   margin-left: 15px; }
 
-.clean-style p {
+.clean-style p, .news-detail-text p {
   display: block;
   margin-top: 1em;
   margin-bottom: 1em;
