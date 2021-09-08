@@ -16240,12 +16240,11 @@ label[for="site-form-pet-avatar"] {
     display: block; }
     .product-promotions__item:not(:last-child) {
       margin-bottom: 10px; }
-    .product-promotions__item img {
-      height: 70px;
-      object-fit: contain; }
-      .product-promotions__item img:first-child {
-        width: 100%;
-        height: auto; }
+  .product-promotions__image {
+    height: 70px;
+    object-fit: contain; }
+  .product-promotions__action-img {
+    width: 100%; }
 
 .current-promotions-slider {
   width: 100%;
