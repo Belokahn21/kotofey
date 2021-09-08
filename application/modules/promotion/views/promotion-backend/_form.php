@@ -11,6 +11,7 @@ use yii\helpers\ArrayHelper;
 use app\modules\order\models\entity\Order;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\promotion\models\helpers\PromotionHelper;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
@@ -74,17 +75,21 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
                         <div class="col-sm-3">
                             <?= $form->field($item, '[' . $iter . ']product_id')->widget(FindProducstWidgets::className()); ?>
 
-                            <?php $product = Product::findOne($item->product_id); ?>
 
-                            <?php if ($product): ?>
-                                <div style="font-size: 10px; text-transform: uppercase;"><?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id]), ['target' => '_blank']) ?></div>
-                            <?php endif; ?>
                         </div>
                         <div class="col-sm-3">
                             <?= $form->field($item, '[' . $iter . ']discountRule')->dropDownList($item->getDiscountRules(), ['prompt' => 'Правило цены']); ?>
                         </div>
                         <div class="col-sm-3">
                             <?= $form->field($item, '[' . $iter . ']amount')->textInput(); ?>
+                        </div>
+                        <div class="col-sm-3">
+                            <?php if ($product = Product::findOne($item->product_id)): ?>
+                                <div style="font-size: 10px; text-transform: uppercase;" class="d-flex align-items-center">
+                                    <?= Html::img(ProductHelper::getImageUrl($product), ['width' => 70]); ?>
+                                    <?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id]), ['target' => '_blank']) ?>
+                                </div>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
