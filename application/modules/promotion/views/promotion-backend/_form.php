@@ -86,7 +86,7 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
                         <div class="col-sm-3">
                             <?php if ($product = Product::findOne($item->product_id)): ?>
                                 <div style="font-size: 10px; text-transform: uppercase;" class="d-flex align-items-center">
-                                    <?= Html::img(ProductHelper::getImageUrl($product), ['width' => 70, 'style' => 'object-fit:contain;']); ?>
+                                    <?= Html::img(ProductHelper::getImageUrl($product), ['height' => 70, 'style' => 'object-fit:contain;']); ?>
                                     <?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id]), ['target' => '_blank', 'style' => 'max-width:100px;']) ?>
                                     <div>
                                         +<?= ProductHelper::getMarkup($product); ?>%
