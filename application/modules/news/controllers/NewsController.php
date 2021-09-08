@@ -2,25 +2,40 @@
 
 namespace app\modules\news\controllers;
 
-use app\modules\news\models\entity\NewsCategory;
 use Yii;
-use app\modules\seo\models\tools\Attributes;
-use app\modules\seo\models\tools\og\OpenGraph;
-use app\modules\site\models\tools\System;
-use app\modules\news\models\entity\News;
 use yii\web\Controller;
 use yii\web\HttpException;
+use yii\helpers\ArrayHelper;
+use app\modules\news\models\entity\News;
+use app\modules\site\models\tools\System;
+use app\modules\seo\models\tools\og\OpenGraph;
+use app\modules\seo\models\tools\Attributes;
+use app\modules\news\models\entity\NewsCategory;
+use app\modules\news\models\search\NewsSearchForm;
 
 class NewsController extends Controller
 {
     public function actionIndex()
     {
-        $models = News::find()->where(['is_active' => 1])->orderBy(['created_at' => SORT_DESC])->all();
         $categories = NewsCategory::find()->orderBy(['sort' => SORT_ASC])->all();
+        $searchModel = new NewsSearchForm();
+        $models = $searchModel->search(Yii::$app->request->get());
+        $models->query->andFilterWhere([
+            'is_active' => 1,
+        ]);
+        $models->query->orderBy(['created_at' => SORT_DESC]);
+        $models = $models->getModels();
+
+        $sub_category = null;
+        if ($sub_category_id = ArrayHelper::getValue(Yii::$app->request->get('NewsSearchForm'), 'category_id')) {
+            $sub_category = NewsCategory::findOne($sub_category_id);
+        }
+
 
         return $this->render('index', [
             'models' => $models,
             'categories' => $categories,
+            'sub_category' => $sub_category,
         ]);
     }
 

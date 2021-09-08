@@ -18,7 +18,7 @@ class NewsSearchForm extends News
     {
         return [
             [['title'], 'string'],
-            [['description'], 'string'],
+            [['category_id'], 'integer'],
         ];
     }
 
@@ -40,7 +40,7 @@ class NewsSearchForm extends News
         }
 
         $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'description', $this->description]);
+            ->andFilterWhere(['category_id' => $this->category_id]);
 
         return $dataProvider;
     }

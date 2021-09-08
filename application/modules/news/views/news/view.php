@@ -7,12 +7,14 @@
  * @var $models_all \app\modules\news\models\entity\News[]
  */
 
+use yii\helpers\Url;
 use app\widgets\Breadcrumbs;
 use app\modules\seo\models\tools\Title;
 use app\modules\news\models\tools\NewsHelper;
 use app\modules\user\models\helpers\UserHelper;
 
-$this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => ['/news/']];
+$this->params['breadcrumbs'][] = ['label' => 'Новости', 'url' => Url::to(['index'])];
+$this->params['breadcrumbs'][] = ['label' => $model->category->name, 'url' => Url::to(['index', 'NewsSearchForm[category_id]' => $model->category->id])];
 $this->params['breadcrumbs'][] = ['label' => $model->title];
 $this->title = Title::show($model->title);
 ?>

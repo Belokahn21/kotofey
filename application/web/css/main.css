@@ -15400,11 +15400,13 @@ label[for="site-form-pet-avatar"] {
     color: #fff;
     font-size: 18px;
     font-weight: 700;
-    line-height: 40px; }
+    line-height: 40px;
+    transition: color 200ms; }
+    .aside-sub-categories__item.active, .aside-sub-categories__item:hover {
+      color: #ff1a4a; }
   .aside-sub-categories__link {
-    color: #fff; }
-    .aside-sub-categories__link:hover {
-      color: #fff; }
+    transition: color 200ms;
+    color: inherit !important; }
 
 .catalog {
   display: flex;
@@ -15684,9 +15686,11 @@ label[for="site-form-pet-avatar"] {
   width: 80%;
   margin-left: 15px; }
   .news-list-wrap {
+    width: 100%;
     display: flex;
     flex-direction: column; }
   .news-list-container {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
