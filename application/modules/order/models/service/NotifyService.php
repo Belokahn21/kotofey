@@ -170,10 +170,7 @@ class NotifyService
             'LINK_FISH' => System::fullSiteUrl() . '/catalog/rybki/',
         ]);
 
-        $history = new OrderMailHistory();
-        $history->order_id = $order->id;
-        $history->event_id = $event->id;
-        return $history->validate() && $history->save();
+        return OrderMailHistoryService::add($order->id, $event->id);
     }
 
     public function notifyOrderCreate(Order $order)
@@ -212,16 +209,34 @@ class NotifyService
         ]);
 
 
-        $history = new OrderMailHistory();
-        $history->order_id = $order->id;
-        $history->event_id = $event->id;
-        return $history->validate() && $history->save();
+        return OrderMailHistoryService::add($order->id, $event->id);
+    }
+
+    public function notifyOrderComplete(Order $order)
+    {
+        if (!$module = Yii::$app->getModule('order')) return false;
+        if (!$event = MailEvents::findOne($module->mail_event_id_order_complete)) return false;
+
+        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
+
+        if (empty($order->email) || $order->status == 3) return false;
+
+        $mailer = new MailService();
+        $mailer->sendEvent($event->id, [
+            'EMAIL_FROM' => 'sale@kotofey.store',
+            'EMAIL_TO' => 'popugau@gmail.com',
+//            'EMAIL_TO' => $order->email,
+            'ORDER_ID' => $order->id,
+        ]);
+
+        return OrderMailHistoryService::add($order->id, $event->id);
     }
 
     public function sendClientNotify(Order $order)
     {
         $this->notifyCompleteOrder($order);
         $this->notifyOrderCreate($order);
+        $this->notifyOrderComplete($order);
     }
 
     public function notifyBeginSale(Promotion $model)
