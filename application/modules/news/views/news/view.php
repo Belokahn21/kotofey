@@ -51,8 +51,8 @@ $this->title = Title::show($model->title);
             <?php if ($image = NewsHelper::getPreviewImageUrl($model)): ?>
                 <img class="news-detail-image" src="<?= $image; ?>" title="<?= $model->title; ?>" alt="<?= $model->title; ?>">
             <?php endif; ?>
-            <?php if ($image = NewsHelper::getDetailImage($model)): ?>
-                <img class="news-detail-image" src="<?= $image; ?>" title="<?= $model->title; ?>" alt="<?= $model->title; ?>">
+            <?php if (!$image && $image2 = NewsHelper::getDetailImage($model)): ?>
+                <img class="news-detail-image" src="<?= $image2; ?>" title="<?= $model->title; ?>" alt="<?= $model->title; ?>">
             <?php endif; ?>
 
 
