@@ -64,7 +64,7 @@ class PromotionController extends Controller
 
                 if ($item->product) {
                     if (ArrayHelper::isIn($item->product->id, $list_all_product_id_current_promo)) {
-                        $data[$order->email]['FROM_CURRENT_PROMO_BY_SALES'][] = $item->product;
+                        $data[$order->email]['FROM_CURRENT_PROMO_BY_SALES'][$item->product->id] = $item->product;
                     }
                 }
             }
