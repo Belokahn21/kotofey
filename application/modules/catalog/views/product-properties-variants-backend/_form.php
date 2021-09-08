@@ -17,24 +17,52 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 </nav>
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <?= $form->field($model, 'name')->textInput(); ?>
-        <?= $form->field($model, 'slug')->textInput(); ?>
-        <?= $form->field($model, 'is_active')->checkbox(); ?>
-        <?= $form->field($model, 'property_id')->dropDownList(ArrayHelper::map(Properties::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
-        <?= $form->field($model, 'sort')->textInput(['value' => 500]) ?>
-        <?= $form->field($model, 'link')->textInput(); ?>
-        <?php
-        $media_params = [];
-        if ($model->media) {
-            $media_params = [
-                'values' => [$model->media_id]
-            ];
-        }
-        echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
-        ?>
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'is_active')->checkbox(); ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'property_id')->dropDownList(ArrayHelper::map(Properties::find()->all(), 'id', 'name'), ['prompt' => 'Справочник']) ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'name')->textInput(); ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'slug')->textInput(); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'sort')->textInput(['value' => 500]) ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'link')->textInput(); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <?php
+                $media_params = [];
+                if ($model->media) {
+                    $media_params = [
+                        'values' => [$model->media_id]
+                    ];
+                }
+                echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+                ?>
+            </div>
+        </div>
     </div>
     <div class="tab-pane fade" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
-        <?= $form->field($model, 'view')->textInput() ?>
-        <?= $form->field($model, 'text')->textarea() ?>
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'view')->textInput() ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'text')->textarea() ?>
+            </div>
+        </div>
     </div>
 </div>

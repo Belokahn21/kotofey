@@ -25,7 +25,7 @@ use app\modules\catalog\models\helpers\ProductCategoryHelper;
     </div>
 
     <div class="phone">
-        <img class="phone__icon" src="/upload/images/phone.png" alt="Телефон">
+        <img class="phone__icon" src="/images/phone-black.png" alt="Телефон">
         <div class="c8800-group">
             <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>" class="js-phone-mask-8800">
                 <?= SiteSettings::getValueByCode('phone_2'); ?>

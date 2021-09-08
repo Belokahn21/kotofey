@@ -24,9 +24,10 @@ $this->title = Title::show($model->name);
         ],
         'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
     ]); ?>
-    <h1><?= $model->name; ?></h1>
-
-
+    <h1 class="brand-page-title"><?= $model->name; ?></h1>
+    <div class="brand-page-description">
+        С 1968 года компания ROYAL CANIN® работает над тем, чтобы сделать питание одним из методов поддержания здоровья кошек и собак. Это наш способ сделать мир для домашних животных лучше.
+    </div>
     <div class="catalog-container">
         <div class="catalog-wrap">
             <?= ProductSortWidget::widget(); ?>
@@ -64,5 +65,9 @@ $this->title = Title::show($model->name);
 
     body > .page-container {
         background: white;
+    }
+
+    .footer {
+        background: none !important;
     }
 </style>
