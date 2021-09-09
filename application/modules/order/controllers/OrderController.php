@@ -111,7 +111,7 @@ class OrderController extends Controller
         }
 
         if (!$order->hasAccess()) {
-            throw new ForbiddenHttpException('Доступ к заказу запрещён');
+            throw new ForbiddenHttpException('Доступ к заказу запрещён. Зарегистрируйтесь на сайте чтобы смотреть свои заказы!');
         }
 
         $items = OrdersItems::find()->where(['order_id' => $order->id])->all();
