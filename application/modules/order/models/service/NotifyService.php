@@ -3,8 +3,10 @@
 namespace app\modules\order\models\service;
 
 use app\modules\bonus\models\entity\UserBonusHistory;
+use app\modules\catalog\models\entity\Product;
 use app\modules\site\models\tools\Month;
 use app\modules\site\models\tools\PriceTool;
+use app\modules\vendors\models\entity\Vendor;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -223,8 +225,11 @@ class NotifyService
         if (!$bonus = UserBonusHistory::findOne(['order_id' => $order->id])) return false;
 
         $royal_html = 'demo list';
+        $royal_list_items = '';
         foreach ($order->items as $ordersItems) {
-
+            if ($ordersItems->product->vendor_id == Vendor::VENDOR_ID_ROYAL) {
+                $royal_list_items .= '';
+            }
         }
 
         $mailer = new MailService();
