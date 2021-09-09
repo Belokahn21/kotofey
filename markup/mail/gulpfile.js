@@ -26,41 +26,41 @@ const config = {
             src_frontend: './src/style/scss/*.{sass,scss}',
             watch_frontend: './src/style/scss/**/*.{sass,scss}',
             build_frontend: './build/frontend/assets/css/',
-            application_frontend: './build/web/css/',
+            application_frontend: './build/css/',
         },
         html: {
             src_frontend: './src/html/*.{html,htm}',
             watch_frontend: './src/html/**/*.{html,htm}',
-            build_frontend: './build/frontend/',
+            build_frontend: './build/',
         },
         pug: {
             src_frontend: './src/pug/*.pug',
             watch_frontend: './src/pug/**/*.pug',
-            build_frontend: './build/frontend/',
+            build_frontend: './build/',
         },
         js: {
             src_frontend: './src/js/*.js',
             watch_frontend: './src/js/**/*.js',
             build_frontend: './build/frontend/assets/js/',
-            application_frontend: './build/web/js/',
+            application_frontend: './build/js/',
         },
         image: {
             src_frontend: './src/images/**/*.{png,jpg,jpeg,svg,gif}',
             watch_frontend: './src/images/**/*.{png,jpg,jpeg,svg,gif}',
             build_frontend: './build/frontend/assets/images/',
-            application_frontend: './build/web/images/',
+            application_frontend: './build/images/',
         },
         copy: {
             src_frontend: './src/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_frontend: './src/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             build_frontend: './build/frontend/assets/images/',
-            application_frontend: './build/web/upload/images/',
+            application_frontend: './build/upload/images/',
         },
         ecmascript6: {
             src_frontend: './src/js/core.js',
             watch_frontend: './src/js/**/*.js',
             build_frontend: './build/frontend/assets/js/',
-            application_frontend: './build/web/js/'
+            application_frontend: './build/js/'
 
         },
     }
@@ -146,7 +146,7 @@ gulp.task('browser-sync', function () {
     browserSync.init({
         disable: false,
         server: {
-            baseDir: "./build/frontend"
+            baseDir: "./build"
         },
         host: 'localhost',
         port: 8006,
