@@ -65,6 +65,16 @@ class Order extends ActiveRecord
     const SCENARIO_CLIENT_BUY = 'client_buy';
     const SCENARIO_FAST = 'fast';
 
+    const STATUS_SENDED_CLIENT = 1;
+    const STATUS_CREATED = 2;
+    const STATUS_FINISHED = 3;
+    const STATUS_CANCEL = 4;
+    const STATUS_IN_WORK = 5;
+    const STATUS_QUEUE = 6;
+    const STATUS_FORMED = 7;
+    const STATUS_READY_TAKE = 8;
+    const STATUS_AWAIT_PRODUCT = 9;
+
     public $is_update;
     public $bonus;
     public $address;

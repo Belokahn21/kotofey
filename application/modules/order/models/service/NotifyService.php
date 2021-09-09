@@ -150,7 +150,7 @@ class NotifyService
 
         if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
-        if (empty($order->email) || $order->status != 8) return false;
+        if (empty($order->email) || $order->status != Order::STATUS_READY_TAKE) return false;
 
         $stock = Stocks::findOne(1);
 
@@ -180,7 +180,7 @@ class NotifyService
 
         if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
-        if (empty($order->email) || $order->status == 3) return false;
+        if (empty($order->email) || $order->status == Order::STATUS_FINISHED) return false;
 
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
@@ -219,7 +219,8 @@ class NotifyService
 
         if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
 
-        if (empty($order->email) || $order->status == 3) return false;
+        if (empty($order->email) || $order->status != Order::STATUS_FINISHED) return false;
+        echo rand();
 
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
