@@ -219,24 +219,43 @@ class NotifyService
     {
         if (!$module = Yii::$app->getModule('order')) return false;
         if (!$event = MailEvents::findOne($module->mail_event_id_order_complete)) return false;
-//        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
+        if (OrderMailHistory::findOne(['order_id' => $order->id, 'event_id' => $event->id])) return false;
         if (empty($order->email) || $order->status != Order::STATUS_FINISHED) return false;
 
         if (!$bonus = UserBonusHistory::findOne(['order_id' => $order->id])) return false;
 
-        $royal_html = 'demo list';
         $royal_list_items = '';
         foreach ($order->items as $ordersItems) {
             if ($ordersItems->product->vendor_id == Vendor::VENDOR_ID_ROYAL) {
-                $royal_list_items .= '';
+                $royal_list_items .= '
+                <tr style="display: block; width: 100%;">
+                    <td style="width:10%; padding: 5px; font-size:16px; "><img style="height: 70px; object-fit: contain;" src="' . ProductHelper::getImageUrl($ordersItems->product, true) . '"></td>
+                    <td style="width:60%; padding: 5px; font-size:16px; ">' . $ordersItems->product->name . '</td>
+                    <td style="width:20%; padding: 5px;"><a href="' . ProductHelper::getDetailUrl($ordersItems->product) . '" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;">Оставить отзыв</a></td>
+                </tr>';
             }
+        }
+
+        if (strlen($royal_list_items) > 0) {
+            $royal_html = '
+        <tr style="margin-bottom:20px; display:block;">
+        <td>Чтобы получить больше бонусов оставьте отзыв о купленных товарах Royal Canin и получите 100 бонусов на счёт.</td>
+    </tr>
+    <tr style="margin-bottom:20px; display:block;">
+        <td><img src="https://kotofey.store/images/royal_reward.jpg" style="max-width:100%; object-fit:contain;">
+            <table style="max-width:600px; width:100%; display:block; margin:auto; font-size:20px;" border="0" cellpadding="0" cellspacing="0">
+                <tbody style="display:block; width:100%;">
+                ' . $royal_list_items . '
+                </tbody>
+            </table>
+        </td>
+    </tr>';
         }
 
         $mailer = new MailService();
         $mailer->sendEvent($event->id, [
             'EMAIL_FROM' => 'sale@kotofey.store',
-            'EMAIL_TO' => 'popugau@gmail.com',
-//            'EMAIL_TO' => $order->email,
+            'EMAIL_TO' => $order->email,
             'ORDER_ID' => $order->id,
             'AMOUNT' => \Yii::t('app', '{n, plural, =0{0 бонусов} =1{бонус} other{# бонуса}}', array(
                 'n' => $bonus->count,
