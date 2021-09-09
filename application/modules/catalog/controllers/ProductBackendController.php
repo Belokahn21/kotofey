@@ -132,6 +132,7 @@ class ProductBackendController extends MainBackendController
         $stocks = $this->getStocks();
         $prices = $this->getPrices();
         $animals = $this->getAnimals();
+        $vendors = $this->getVendors();
         $breeds = $this->getBreeds();
         $outProps = [];
         foreach ($properties as $prop) {
@@ -167,6 +168,7 @@ class ProductBackendController extends MainBackendController
             'prices' => $prices,
             'animals' => $animals,
             'breeds' => $breeds,
+            'vendors' => $vendors,
             'compositions' => $compositions,
         ]);
     }

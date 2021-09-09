@@ -24,6 +24,7 @@ $this->title = Title::show('Товары');
     'stocks' => $stocks,
     'prices' => $prices,
     'animals' => $animals,
+    'vendors' => $vendors,
     'breeds' => $breeds,
     'compositions' => $compositions,
     'properties' => $properties,
