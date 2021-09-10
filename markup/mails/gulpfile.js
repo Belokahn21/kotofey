@@ -25,7 +25,7 @@ const config = {
 
             src_frontend: './src/style/scss/*.{sass,scss}',
             watch_frontend: './src/style/scss/**/*.{sass,scss}',
-            build_frontend: './build/frontend/assets/css/',
+            build_frontend: './build/assets/css/',
             application_frontend: './build/css/',
         },
         html: {
@@ -41,25 +41,25 @@ const config = {
         js: {
             src_frontend: './src/js/*.js',
             watch_frontend: './src/js/**/*.js',
-            build_frontend: './build/frontend/assets/js/',
+            build_frontend: './build/assets/js/',
             application_frontend: './build/js/',
         },
         image: {
             src_frontend: './src/images/**/*.{png,jpg,jpeg,svg,gif}',
             watch_frontend: './src/images/**/*.{png,jpg,jpeg,svg,gif}',
-            build_frontend: './build/frontend/assets/images/',
+            build_frontend: './build/assets/images/',
             application_frontend: './build/images/',
         },
         copy: {
             src_frontend: './src/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
             watch_frontend: './src/images/**/*.{png,webp,jpg,jpeg,svg,gif}',
-            build_frontend: './build/frontend/assets/images/',
+            build_frontend: './build/assets/images/',
             application_frontend: './build/upload/images/',
         },
         ecmascript6: {
             src_frontend: './src/js/core.js',
             watch_frontend: './src/js/**/*.js',
-            build_frontend: './build/frontend/assets/js/',
+            build_frontend: './build/assets/js/',
             application_frontend: './build/js/'
 
         },

@@ -1,4 +1,5 @@
 extends include/layer_unsubscribe
+include mixins/renderProduct
 
 block contents
     table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
@@ -10,52 +11,53 @@ block contents
     table(style="max-width:600px; width:100%; display:block; margin:20px auto auto auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
         tbody(style="display:block; width:100%; margin-bottom:15px;")
             tr
-                td(style="font-weight:bold;") Мои товары со скидкой сейчас:
+                td(style="font-weight:bold;") Товары, которые вы покупали:
     table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:20px;" border=0 cellpadding="0" cellspacing="0")
         tbody(style="display:block; width:100%;")
-            tr(style="display: block; width: 100%;")
-                td(style="width:45%; padding: 5px; font-size:16px; ") Hiil`s Sterilised со вкусом курицы, 1.5кг
-                td(style="width:15%; padding: 5px;") 1500 Р
-                td(style="width:15%; padding: 5px;") 1200 Р
-                td(style="width:15%; padding: 5px;")
-                    a(href="#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;") Купить
-            tr(style="display: block; width: 100%;")
-                td(style="width:45%; padding: 5px; font-size:16px; ") Hiil`s Sterilised со вкусом курицы, 1.5кг
-                td(style="width:15%; padding: 5px;") 1500 Р
-                td(style="width:15%; padding: 5px;") 1200 Р
-                td(style="width:15%; padding: 5px;")
-                    a(href="#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;") Купить
-            tr(style="display: block; width: 100%;")
-                td(style="width:45%; padding: 5px; font-size:16px; ") Hiil`s Sterilised со вкусом курицы, 1.5кг
-                td(style="width:15%; padding: 5px;") 1500 Р
-                td(style="width:15%; padding: 5px;") 1200 Р
-                td(style="width:15%; padding: 5px;")
-                    a(href="#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;") Купить
-            tr(style="display: block; width: 100%;")
-                td(style="width:45%; padding: 5px; font-size:16px; ") Hiil`s Sterilised со вкусом курицы, 1.5кг
-                td(style="width:15%; padding: 5px;") 1500 Р
-                td(style="width:15%; padding: 5px;") 1200 Р
-                td(style="width:15%; padding: 5px;")
-                    a(href="#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;") Купить
-            tr(style="display: block; width: 100%;")
-                td(style="width:45%; padding: 5px; font-size:16px; ") Hiil`s Sterilised со вкусом курицы, 1.5кг
-                td(style="width:15%; padding: 5px;") 1500 Р
-                td(style="width:15%; padding: 5px;") 1200 Р
-                td(style="width:15%; padding: 5px;")
-                    a(href="#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;") Купить
+            -
+                var items = [
+                    {
+                        button:'Купить',
+                    },
+                    {
+                        button:'Купить',
+                    },
+                    {
+                        button:'Купить',
+                    },
+                    {
+                        button:'Купить',
+                    },
+                    {
+                        button:'Купить',
+                    },
+                    {
+                        button:'Купить',
+                    },
+                    {
+                        button:'Купить',
+                    },
+                    {
+                        button:'Купить',
+                    },
+                ]
+            each item,index in items
+                +renderProduct(item)
     table(style="max-width:600px; width:100%; display:block; margin:20px auto auto auto; font-size:16px;" border=0 cellpadding="0" cellspacing="0")
         tbody(style="display:block; width:100%; margin-bottom:15px;")
             tr
-                td(style="font-weight:bold;") Другие товары по акции:
+                td(style="font-weight:bold;") Другие товары в этой акции:
     table(style="max-width:600px; width:100%; display:block; margin:auto; font-size:20px;" border=0 cellpadding="0" cellspacing="0")
         tbody(style="display:block; width:100%;")
-            tr(style="display: block; width: 100%;")
-                td(style="width:45%; padding: 5px; font-size:16px; ") Hiil`s Sterilised со вкусом курицы, 1.5кг
-                td(style="width:15%; padding: 5px;") 1500 Р
-                td(style="width:15%; padding: 5px;") 1200 Р
-                td(style="width:15%; padding: 5px;")
-                    a(href="#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px;") Купить
+            -
+                var items = [
+                    {},
+                    {},
+                    {},
+                ]
+            each item,index in items
+                +renderProduct(item)
         tfoot(style="display:block;width:100%;")
             tr(style="display:block;width:100%;")
                 td(style="display:block;width:100%;")
-                    a(href="#LINK_MORE_PROMO#" style="border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px; width:190px;margin:auto; display:block;") Посмотреть больше товаров
+                    a(href="#LINK_MORE_PROMO#" style="text-align:center;border:1px solid #ff1a4a; color:#ff1a4a; padding:5px; text-decoration:none!important; text-transform:uppercase; font-size:12px; width:210px;margin:auto; display:block;") Посмотреть больше товаров
