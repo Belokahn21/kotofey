@@ -383,7 +383,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 
                     <?php foreach (OrderMailHistory::findAll(['order_id' => $model->id]) as $mail): ?>
                         <hr/>
-                        <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
+                        <?= Html::a('[' . date('d.m.Y', $mail->created_at) . ']Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
                     <?php endforeach; ?>
 
                     <?php if ($transfers = ProductTransferHistory::find()->where(['order_id' => $model->id])->all()): ?>
