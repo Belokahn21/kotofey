@@ -42,14 +42,19 @@ use yii\helpers\ArrayHelper;
             </div>
         </div>
 
-        <?php /*= $form->field($model, 'text')->widget(CKEditor::className(), [
-            'editorOptions' => [
-                'preset' => 'full',
-                'inline' => false
-            ]
-        ]); */ ?>
+        <div class="row">
+            <div class="col-6">
+                <?= $form->field($model, 'layout')->textInput(['placeholder' => 'Layout'])->label(false); ?>
+            </div>
+            <div class="col-6">
+                <?= $form->field($model, 'template')->textInput(['placeholder' => 'Шаблон'])->label(false); ?>
+            </div>
+        </div>
 
-        <?= $form->field($model, 'text')->textarea(['rows' => 10]); ?>
-
+        <div class="row">
+            <div class="col-12">
+                <?= $form->field($model, 'text')->textarea(['rows' => 10]); ?>
+            </div>
+        </div>
     </div>
 </div>

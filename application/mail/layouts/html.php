@@ -10,7 +10,7 @@ use yii\helpers\Html;
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset="<?= Yii::$app->charset ?>" />
+    <meta http-equiv="Content-Type" content="text/html;" charset="<?= Yii::$app->charset ?>"/>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>

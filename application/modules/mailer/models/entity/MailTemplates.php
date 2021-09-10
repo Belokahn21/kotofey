@@ -17,6 +17,8 @@ use yii\behaviors\TimestampBehavior;
  * @property string $code
  * @property string|null $text
  * @property string|null $event_id
+ * @property string|null $layout
+ * @property string|null $template
  * @property int|null $created_at
  * @property int|null $updated_at
  */
@@ -41,7 +43,7 @@ class MailTemplates extends \yii\db\ActiveRecord
 
             [['name', 'code', 'event_id'], 'required'],
 
-            [['text', 'event_id'], 'string'],
+            [['text', 'event_id', 'layout', 'template'], 'string'],
 
             [['name', 'to', 'from'], 'string', 'max' => 128],
 
@@ -61,6 +63,8 @@ class MailTemplates extends \yii\db\ActiveRecord
             'code' => 'Символьный код',
             'text' => 'Текст письма',
             'event_id' => 'ID события',
+            'layout' => 'Layout',
+            'template' => 'Шаблон письма',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];
