@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\helpers;
 
+use app\modules\media\models\helpers\MediaHelper;
 use app\modules\site\models\tools\Debug;
 use app\modules\vendors\models\entity\Vendor;
 use Yii;
@@ -34,19 +35,6 @@ class ProductHelper
         return array_unique($cookies->getValue(self::COOKIE_VISITED_KEY, array()));
     }
 
-    /* цена товара за 1 киллограмм */
-    public static function getPriceByWeight(Product $product, $weight)
-    {
-        $product_weight = PropertiesHelper::getProductWeight($product->id);
-        if (!$product_weight) {
-            return false;
-        }
-
-        $price_by_one_position_weight = round($product->price / $product_weight);
-        $summary_price = round($price_by_one_position_weight * ($weight / 1000));
-
-        return $summary_price;
-    }
 
     public static function getResultPrice(Product $model)
     {
@@ -104,38 +92,7 @@ class ProductHelper
 
     public static function getImageUrl(Product $model, $isFull = false, $options = [])
     {
-        if ($media = $model->media) {
-            if ($media->location == Media::LOCATION_CDN) {
-
-                if ($options) return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
-
-                return $media->cdnData['secure_url'];
-            }
-            $url = "/upload/" . $media->path;
-            $noImage = "/upload/images/not-image.png";
-
-            if (!is_file(\Yii::getAlias('@webroot/upload/' . $media->path))) $url = $noImage;
-
-            if ($isFull) return System::fullSiteUrl() . $url;
-
-
-            return $url;
-        }
-
-        // for old engine
-        $url = "/upload/" . $model->image;
-        $noImage = "/upload/images/not-image.png";
-
-        if (empty($model->image)) {
-            $url = $noImage;
-        }
-
-        if (!is_file(\Yii::getAlias('@webroot/upload/' . $model->image))) $url = $noImage;
-
-
-        if ($isFull) return System::fullSiteUrl() . $url;
-
-        return $url;
+        return MediaHelper::getImageUrl($model->media, $isFull, $options);
     }
 
     public static function getDetailUrl(Product $model, $isFull = false)

@@ -33,10 +33,11 @@ use app\modules\pets\models\helpers\PetsHelper;
                             <?= $form->field($petModel, 'animal_id')->radioList(ArrayHelper::map($animals, 'id', 'name'), [
                                 'item' => function ($index, $label, $name, $checked, $value) {
                                     $animal = Animal::findOne($value);
+                                    $src = \app\modules\pets\models\helpers\AnimalHelper::getImageUrl($animal);
                                     return <<<LIST
                                         <div class="select-pet__item">
                                             <input type="radio" name="$name" value="$value" id="select-pet-dog-$value">
-                                            <label class="select-pet__icon" for="select-pet-dog-$value"><i class="$animal->icon"></i></label>
+                                            <img src="$src">
                                         </div>
 LIST;
                                 }

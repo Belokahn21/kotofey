@@ -24,14 +24,11 @@ use app\modules\content\widgets\informers_slider\model\helper\FilterBuildHelper;
                                 <a class="category-slider__link" href="/catalog/?<?= FilterBuildHelper::buildSearchQuery($provider); ?>"><?= $provider->name; ?></a>
                             </div>
                             <div class="category-slider__label">
-                                <?php /* Yii::$app->cache->getOrSet('count-provider-' . $provider->id, function () use ($provider) {
-                                                                    return SaveProductPropertiesValues::find()->where(['value' => $provider->id])->count('product_id');
-                                                                }); */ ?>
-                                <!--                                позиций-->
+                                
                             </div>
                         </div>
                         <div class="category-slider__icon">
-                            <img src="<?= ProductPropertiesValuesHelper::getImageUrl($provider, ['width' => 70, 'height' => 70, 'crop' => 'fit']); ?>" alt="<?= $provider->name; ?>" title="<?= $provider->name; ?>">
+                            <img src="<?= ProductPropertiesValuesHelper::getImageUrl($provider, false, ['width' => 70, 'height' => 70, 'crop' => 'fit']); ?>" alt="<?= $provider->name; ?>" title="<?= $provider->name; ?>">
                         </div>
                     </div>
                 <?php endforeach; ?>

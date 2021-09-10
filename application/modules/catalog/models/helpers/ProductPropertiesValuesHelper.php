@@ -7,6 +7,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
+use app\modules\media\models\helpers\MediaHelper;
 use app\modules\site\models\helpers\ImageHelper;
 use app\modules\site\models\tools\Debug;
 use app\modules\media\models\entity\Media;
@@ -14,19 +15,9 @@ use yii\helpers\Url;
 
 class ProductPropertiesValuesHelper
 {
-    public static function getImageUrl(PropertiesVariants $model, $options = [])
+    public static function getImageUrl(PropertiesVariants $model, $isFull = false, $options = [])
     {
-        if ($media = $model->media) {
-            if ($media->location == Media::LOCATION_CDN) {
-
-                if ($options) {
-                    return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
-                }
-
-                return $media->cdnData['secure_url'];
-            }
-        }
-        return ImageHelper::notFoundImage();
+        return MediaHelper::getImageUrl($model->media, $isFull, $options);
     }
 
     public static function getBrandDetailUrl(PropertiesVariants $variant)
@@ -79,7 +70,7 @@ class ProductPropertiesValuesHelper
         return true;
     }
 
-    public static function saveProductProperties(array $properties_data,int $product_id)
+    public static function saveProductProperties(array $properties_data, int $product_id)
     {
         PropertiesProductValues::deleteAll(['product_id' => $product_id]);
 

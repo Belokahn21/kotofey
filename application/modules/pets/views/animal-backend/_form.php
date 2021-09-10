@@ -21,21 +21,25 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         </div>
 
         <div class="row">
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4"></div>
-            <div class="col-sm-4"></div>
+            <div class="col-sm-4"><?= $form->field($model, 'name'); ?></div>
+            <div class="col-sm-4"><?= $form->field($model, 'icon'); ?></div>
+            <div class="col-sm-4"><?= $form->field($model, 'sort')->textInput(['value' => 500]); ?></div>
         </div>
-        <?= $form->field($model, 'name'); ?>
-        <?= $form->field($model, 'icon'); ?>
-        <?php
-        $media_params = [];
-        if ($model->media) {
-            $media_params = [
-                'values' => [$model->media_id]
-            ];
-        }
-        echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
-        ?>
-        <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <?php
+                $media_params = [];
+                if ($model->media) {
+                    $media_params = [
+                        'values' => [$model->media_id]
+                    ];
+                }
+                echo $form->field($model, 'media_id')->widget(MediaBrowserWidget::className(), $media_params);
+                ?>
+            </div>
+        </div>
+
+
     </div>
 </div>
