@@ -381,10 +381,10 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                         <?= Html::a('Выдан чек: ' . $check->identifier_id, Url::to(['/admin/acquiring/acquiring-check-backend/update', 'id' => $check->id])); ?>
                     <?php endif; ?>
 
-                    <?php if ($mail = OrderMailHistory::findByOrderId($model->id)): ?>
+                    <?php foreach (OrderMailHistory::findAll(['order_id' => $model->id]) as $mail): ?>
                         <hr/>
                         <?= Html::a('Отправлено письмо: ' . $mail->event->name, Url::to(['order-mail-history-backend/update', 'id' => $mail->id])); ?> / <?= Html::a('Удалить письмо #' . $mail->id, Url::to(['order-mail-history-backend/delete', 'id' => $mail->id])); ?>
-                    <?php endif; ?>
+                    <?php endforeach; ?>
 
                     <?php if ($transfers = ProductTransferHistory::find()->where(['order_id' => $model->id])->all()): ?>
                         <?php foreach ($transfers as $transfer): ?>
