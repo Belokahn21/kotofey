@@ -56,7 +56,7 @@ use function foo\func;
  * @property string $code
  * @property string $ident_key
  * @property string $barcode
- * @property string $threeDCode
+ * @property string $instruction
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -86,8 +86,8 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'threeDCode', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'instruction', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'instruction', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
         $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price', 'base_price'];
 
         return $parent;
@@ -100,7 +100,7 @@ class Product extends \yii\db\ActiveRecord
 
             [['count', 'price', 'purchase', 'category_id', 'vitrine', 'base_price', 'vendor_id', 'discount_price', 'status_id', 'media_id', 'created_user_id', 'updated_user_id'], 'integer'],
 
-            [['images', 'code', 'description', 'feed', 'threeDCode'], 'string'],
+            [['images', 'code', 'description', 'feed', 'instruction'], 'string'],
 
             ['barcode', 'string', 'max' => 255],
 
@@ -149,7 +149,7 @@ class Product extends \yii\db\ActiveRecord
             'updated_at' => 'Дата обновления',
             'is_product_order' => 'Товар под заказ',
             'feed' => 'Поисковой контент',
-            'threeDCode' => '3D представление',
+            'instruction' => 'Инструкция',
             'status_id' => 'Статус товара',
             'barcode' => 'Штрих-код',
             'media_id' => 'Изображение',

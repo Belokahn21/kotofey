@@ -186,7 +186,7 @@ $this->title = ProductTitle::show($product->name);
     <nav class="product-tabs in-product">
         <div class="nav nav-tabs" id="nav-tab" role="tablist">
             <a class="nav-item nav-link active" id="nav-description-tab" data-toggle="tab" href="#nav-description" role="tab" aria-controls="nav-description" aria-selected="true">Описание</a>
-            <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Оплата</a>
+            <a class="nav-item nav-link" id="nav-payment-tab" data-toggle="tab" href="#nav-payment" role="tab" aria-controls="nav-payment" aria-selected="false">Иструкция</a>
             <a class="nav-item nav-link" id="nav-buy-tab" data-toggle="tab" href="#nav-buy" role="tab" aria-controls="nav-buy" aria-selected="false">Состав товара</a>
             <a class="nav-item nav-link" id="nav-reviews-tab" data-toggle="tab" href="#nav-reviews" role="tab" aria-controls="nav-reviews" aria-selected="false">Отзывы (<?= Reviews::find()->where(['product_id' => $product->id, 'is_active' => 1, 'status_id' => Reviews::STATUS_ENABLE])->count(); ?>)</a>
         </div>
@@ -196,12 +196,7 @@ $this->title = ProductTitle::show($product->name);
             <div class="news-detail-text pt-2"><?= $product->description ?: 'Отсутсвует'; ?></div>
         </div>
         <div class="tab-pane fade" id="nav-payment" role="tabpanel" aria-labelledby="nav-payment-tab">
-            <strong>Оплатить можно:</strong>
-            <ul>
-                <li>Наличными;</li>
-                <li>Через терминала.</li>
-            </ul>
-            <i>*Оплата только при получении заказа</i>
+            <div class="news-detail-text pt-2"><?= $product->instruction ?: 'Отсутсвует'; ?></div>
         </div>
         <div class="tab-pane fade" id="nav-buy" role="tabpanel" aria-labelledby="nav-buy-tab">
 

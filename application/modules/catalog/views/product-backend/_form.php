@@ -167,13 +167,25 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
     </div>
     <div class="tab-pane fade" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">
-        <div class="form-element">
-            <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-                'editorOptions' => [
-                    'preset' => 'full',
-                    'inline' => false,
-                ],
-            ]); ?>
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                    'editorOptions' => [
+                        'preset' => 'full',
+                        'inline' => false,
+                    ],
+                ]); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'instruction')->widget(CKEditor::className(), [
+                    'editorOptions' => [
+                        'preset' => 'full',
+                        'inline' => false,
+                    ],
+                ]); ?>
+            </div>
         </div>
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
