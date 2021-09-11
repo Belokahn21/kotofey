@@ -92,7 +92,7 @@ class ProductHelper
 
     public static function getImageUrl(Product $model, $isFull = false, $options = [])
     {
-        return MediaHelper::getImageUrl($model->media, $isFull, $options);
+        return MediaHelper::getImageUrl($model, $isFull, $options);
     }
 
     public static function getDetailUrl(Product $model, $isFull = false)
