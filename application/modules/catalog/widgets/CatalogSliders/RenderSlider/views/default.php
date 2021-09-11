@@ -1,6 +1,6 @@
 <?php
 
-use app\modules\site\models\tools\PriceTool;
+use yii\helpers\StringHelper;
 use app\modules\site\models\tools\Currency;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\basket\widgets\addBasket\AddBasketWidget;
@@ -42,7 +42,7 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
                         <img class="vitrine__image swiper-lazy" data-src="<?= ProductHelper::getImageUrl($model, false, ['width' => 250, 'height' => 300, 'crop' => 'fit']); ?>" alt="<?= $model->name; ?>" title="<?= $model->name; ?>">
                         <div class="swiper-lazy-preloader"></div>
                         <div class="vitrine__title">
-                            <a class="vitrine__link" href="<?= ProductHelper::getDetailUrl($model); ?>"><?= $model->name; ?></a>
+                            <a class="vitrine__link" href="<?= ProductHelper::getDetailUrl($model); ?>"><?= StringHelper::truncate($model->name, 100); ?></a>
                         </div>
                         <div class="vitrine__properties">
                             <?= PreviewPropertiesWidget::widget([
