@@ -12967,7 +12967,7 @@ img {
     align-items: center;
     justify-content: center;
     border: 1px #C6C6C6 solid; }
-    .product-gallery-thumbs__slide.swiper-slide-active {
+    .product-gallery-thumbs__slide.swiper-slide-thumb-active {
       border-color: #ff1a4a; }
     .product-gallery-thumbs__slide img {
       object-fit: contain;
