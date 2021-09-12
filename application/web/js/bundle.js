@@ -5282,7 +5282,7 @@ document.addEventListener('DOMContentLoaded', function () {
   });
   var productGalleryThumbs = new swiper__WEBPACK_IMPORTED_MODULE_0__.default(".product-gallery-thumbs", {
     spaceBetween: 10,
-    slidesPerView: 5,
+    slidesPerView: 4,
     freeMode: true,
     watchSlidesVisibility: true,
     watchSlidesProgress: true
