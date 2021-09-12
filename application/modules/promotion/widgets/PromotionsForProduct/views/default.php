@@ -1,5 +1,6 @@
 <?php
 
+use app\modules\site\models\helpers\ImageHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\promotion\models\helpers\PromotionHelper;
 
@@ -25,7 +26,7 @@ use app\modules\promotion\models\helpers\PromotionHelper;
                                     <img class="product-promotions__image" src="<?= ProductHelper::getImageUrl($product) ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
                                 </a>
                             <?php else: ?>
-                                <img class="product-promotions__image" src="<?= ProductHelper::getImageUrl($mechanics->product) ?>" alt="<?= $mechanics->product->name; ?>" title="<?= $mechanics->product->name; ?>">
+                                <img class="product-promotions__image" src="<?= ImageHelper::notFoundImage() ?>">
                             <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
