@@ -12893,6 +12893,7 @@ img {
     font-weight: 700;
     margin-bottom: 0; }
   .product-detail-left {
+    padding-right: 15px;
     width: 40%; }
     @media (max-width: 450px) {
       .product-detail-left {
@@ -12956,6 +12957,21 @@ img {
       color: #ff1a4a;
       border-bottom: 1px dashed #ff1a4a;
       text-decoration: none !important; }
+
+.product-gallery-thumbs {
+  width: 100%;
+  overflow: hidden; }
+  .product-gallery-thumbs__slide {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px #C6C6C6 solid; }
+    .product-gallery-thumbs__slide.swiper-slide-active {
+      border-color: #ff1a4a; }
+    .product-gallery-thumbs__slide img {
+      object-fit: contain;
+      height: 100px; }
 
 .product-blocks {
   display: flex;
@@ -16573,19 +16589,6 @@ label[for="site-form-pet-avatar"] {
   @media (max-width: 450px) {
     .product-gallery-big {
       width: 100%; } }
-
-.product-gallery-thumbs {
-  width: 100%;
-  overflow: hidden; }
-  .product-gallery-thumbs__slide {
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px #C6C6C6 solid; }
-    .product-gallery-thumbs__slide img {
-      object-fit: contain;
-      height: 100px; }
 
 
 /*# sourceMappingURL=main.css.map*/
