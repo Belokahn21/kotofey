@@ -16577,9 +16577,15 @@ label[for="site-form-pet-avatar"] {
 .product-gallery-thumbs {
   width: 100%;
   overflow: hidden; }
-  .product-gallery-thumbs__slide img {
-    object-fit: contain;
-    height: 100px; }
+  .product-gallery-thumbs__slide {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px #C6C6C6 solid; }
+    .product-gallery-thumbs__slide img {
+      object-fit: contain;
+      height: 100px; }
 
 
 /*# sourceMappingURL=main.css.map*/

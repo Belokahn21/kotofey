@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let productGalleryThumbs = new Swiper(".product-gallery-thumbs", {
         spaceBetween: 10,
-        slidesPerView: 3,
+        slidesPerView: 5,
         freeMode: true,
         watchSlidesVisibility: true,
         watchSlidesProgress: true,

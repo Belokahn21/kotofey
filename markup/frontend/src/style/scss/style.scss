@@ -201,6 +201,12 @@
   overflow: hidden;
 
   &__slide {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px #C6C6C6 solid;
+
     img {
       object-fit: contain;
       height: 100px;
