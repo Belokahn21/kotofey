@@ -10,6 +10,6 @@ class DeliveryServiceHelper
 {
     public static function getImageUrl(DeliveryService $model, $isFull = false, $options = [])
     {
-        return MediaHelper::getImageUrl($model->media, $isFull, $options);
+        return MediaHelper::getImageUrl($model, $isFull, $options);
     }
 }

@@ -17,7 +17,7 @@ class ProductPropertiesValuesHelper
 {
     public static function getImageUrl(PropertiesVariants $model, $isFull = false, $options = [])
     {
-        return MediaHelper::getImageUrl($model->media, $isFull, $options);
+        return MediaHelper::getImageUrl($model, $isFull, $options);
     }
 
     public static function getBrandDetailUrl(PropertiesVariants $variant)
