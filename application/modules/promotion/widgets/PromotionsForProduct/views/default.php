@@ -20,9 +20,13 @@ use app\modules\promotion\models\helpers\PromotionHelper;
                 <div class="swiper-wrapper">
                     <?php foreach ($model->promotionProductMechanics as $mechanics): ?>
                         <div class="swiper-slide">
-                            <a href="<?= ProductHelper::getDetailUrl($mechanics->product) ?>">
+                            <?php if ($product = $mechanics->product): ?>
+                                <a href="<?= ProductHelper::getDetailUrl($product) ?>">
+                                    <img class="product-promotions__image" src="<?= ProductHelper::getImageUrl($product) ?>" alt="<?= $product->name; ?>" title="<?= $product->name; ?>">
+                                </a>
+                            <?php else: ?>
                                 <img class="product-promotions__image" src="<?= ProductHelper::getImageUrl($mechanics->product) ?>" alt="<?= $mechanics->product->name; ?>" title="<?= $mechanics->product->name; ?>">
-                            </a>
+                            <?php endif; ?>
                         </div>
                     <?php endforeach; ?>
                 </div>

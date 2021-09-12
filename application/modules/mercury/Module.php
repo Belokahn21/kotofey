@@ -21,7 +21,7 @@ class Module extends MainModule
     public function menuIndex()
     {
         return [
-            ['name' => 'Документы', 'url' => Url::to(['/admin/mercury/mercury-backend/index'])],
+            ['name' => 'Документы', 'url' => Url::to(['/admin/mercury/vsd-backend/index'])],
         ];
     }
 
