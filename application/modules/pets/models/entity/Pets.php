@@ -53,12 +53,12 @@ class Pets extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'default', 'value' => self::STATUS_ON],
+//            [['user_id'], 'default', 'value' => self::STATUS_ON],
 
             [['user_id'], 'default', 'value' => Yii::$app->user->identity->id],
             [['status_id'], 'default', 'value' => self::STATUS_OFF],
 
-            [['user_id', 'name', 'animal_id'], 'required'],
+            [['user_id', 'name', 'animal_id','birthday'], 'required','message' => '{attribute} нужно указать'],
 
             [['user_id', 'animal_id', 'created_at', 'updated_at', 'sex_id'], 'integer'],
 
