@@ -35,10 +35,10 @@ use app\modules\pets\models\helpers\PetsHelper;
                                     $animal = Animal::findOne($value);
                                     $src = \app\modules\pets\models\helpers\AnimalHelper::getImageUrl($animal);
                                     return <<<LIST
-                                        <div class="select-pet__item">
+                                        <label class="select-pet__item">
                                             <input type="radio" name="$name" value="$value" id="select-pet-dog-$value">
-                                            <img src="$src">
-                                        </div>
+                                            <img class="select-pet__image" src="$src">
+                                        </label>
 LIST;
                                 }
                             ])->label('Выберите кто ваш питомец') ?>

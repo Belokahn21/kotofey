@@ -29,10 +29,16 @@
 
     input {
       display: none;
-    }
 
-    input:checked ~ .select-pet__icon {
-      border-color: $active-color;
+      &:checked {
+        & ~ .select-pet__icon {
+          border-color: $active-color;
+        }
+
+        & ~ .select-pet__image {
+          border-color: $active-color;
+        }
+      }
     }
   }
 

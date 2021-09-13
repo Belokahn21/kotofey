@@ -96,6 +96,8 @@ class User extends ActiveRecord implements IdentityInterface
                 'on' => self::SCENARIO_INSERT
             ],
 
+            [['email','phone'], 'trim'],
+
             ['email', 'email'],
             ['email', 'unique', 'targetClass' => User::className(), 'except' => self::SCENARIO_LOGIN, 'message' => 'Почта {value} уже занята'],
 
