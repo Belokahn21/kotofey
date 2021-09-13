@@ -46,10 +46,15 @@
   }
 
   &__image {
+    cursor: pointer;
     display: block;
-    height: 150px;
+    height: 100px;
     object-fit: contain;
     border: 1px #c6c6c6 solid;
+
+    &:hover {
+      border-color: $active-color;
+    }
   }
 
   &__icon {

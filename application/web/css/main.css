@@ -14060,10 +14060,13 @@ img {
       border-color: #ff1a4a; }
 
 .select-pet__image {
+  cursor: pointer;
   display: block;
-  height: 150px;
+  height: 100px;
   object-fit: contain;
   border: 1px #c6c6c6 solid; }
+  .select-pet__image:hover {
+    border-color: #ff1a4a; }
 
 .select-pet__icon {
   cursor: pointer;
