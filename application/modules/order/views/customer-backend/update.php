@@ -10,10 +10,10 @@ use yii\helpers\Url;
  * @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues
  */
 
-$this->title = Title::show("Свойство покупателя"); ?>
+$this->title = Title::show("Покупатель: " . $model->name); ?>
 <section>
     <div class="title-group">
-        <h1 class="title">Свойство покупателя: <?= $model->name; ?></h1>
+        <h1 class="title">Покупатель: <?= $model->name; ?></h1>
         <?= Html::a("Назад", Url::to(['index']), ['class' => 'btn-main']) ?>
     </div>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
