@@ -26,6 +26,9 @@
   &__item {
     margin: 5px;
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     input {
       display: none;
@@ -40,6 +43,13 @@
         }
       }
     }
+  }
+
+  &__image {
+    display: block;
+    height: 150px;
+    object-fit: contain;
+    border: 1px #c6c6c6 solid;
   }
 
   &__icon {

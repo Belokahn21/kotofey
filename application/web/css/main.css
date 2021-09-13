@@ -14048,13 +14048,22 @@ img {
 
 .select-pet__item {
   margin: 5px;
-  flex: 1; }
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
   .select-pet__item input {
     display: none; }
     .select-pet__item input:checked ~ .select-pet__icon {
       border-color: #ff1a4a; }
     .select-pet__item input:checked ~ .select-pet__image {
       border-color: #ff1a4a; }
+
+.select-pet__image {
+  display: block;
+  height: 150px;
+  object-fit: contain;
+  border: 1px #c6c6c6 solid; }
 
 .select-pet__icon {
   cursor: pointer;
