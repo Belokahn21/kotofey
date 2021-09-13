@@ -75,7 +75,7 @@ class Pets extends \yii\db\ActiveRecord
             'status_id' => 'ID статуса',
             'user_id' => 'ID владельца',
             'name' => 'Имя',
-            'animal_id' => 'ID Вида животного',
+            'animal_id' => 'Какое животное',
             'birthday' => 'День рождения',
             'avatar' => 'Фото питомца',
             'sex_id' => 'Пол питомца',
