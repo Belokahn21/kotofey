@@ -8,6 +8,8 @@ import Email from "../../../../../../frontend/src/js/tools/Email";
 class RepeatOrder extends React.Component {
     constructor(props) {
         super(props);
+        this.timerEx = null;
+        this.timer = 1000;
         this.state = {
             show: false,
             orders: [],
@@ -32,30 +34,32 @@ class RepeatOrder extends React.Component {
         let value = element.value;
         let _value = parseInt(value);
 
+        if (this.timerEx) clearTimeout(this.timerEx);
 
-        //is order id
-        if (Number.isInteger(_value) && _value.toString().length < 10) {
-            RestRequest.one(config.restOrder, value).then(data => {
-                let arData = [];
-                arData.push(data);
-                this.setState({orders: arData});
-            });
-        }
+        this.timerEx = setTimeout(() => {
+            //is order id
+            if (Number.isInteger(_value) && _value.toString().length < 10) {
+                RestRequest.one(config.restOrder, value).then(data => {
+                    let arData = [];
+                    arData.push(data);
+                    this.setState({orders: arData});
+                });
+            }
 
-        //is phone
-        if (Number.isInteger(_value) && _value.toString().length === 10) {
-            RestRequest.all(config.restOrder + '?OrderSearchForm[phone]=' + value).then(data => {
-                this.setState({orders: data});
-            });
-        }
+            //is phone
+            if (Number.isInteger(_value) && _value.toString().length === 11) {
+                RestRequest.all(config.restOrder + '?OrderSearchForm[phone]=' + value).then(data => {
+                    this.setState({orders: data});
+                });
+            }
 
-        //is email
-        if (Email.validateEmail(value)) {
-            RestRequest.one(config.restOrder, value + '?OrderSearchForm[email]=' + value).then(data => {
-                this.setState({orders: data});
-            });
-        }
-
+            //is email
+            if (Email.validateEmail(value)) {
+                RestRequest.one(config.restOrder, value + '?OrderSearchForm[email]=' + value).then(data => {
+                    this.setState({orders: data});
+                });
+            }
+        }, this.timer);
     }
 
     render() {
@@ -78,8 +82,11 @@ class RepeatOrder extends React.Component {
 
                             <div className="repeat-order-list">
                                 {orders.map((el, index) => {
-                                    return <div key={index}>
-                                        Заказ #{el.id}
+                                    return <div key={index} className="repeat-order-list-item">
+
+                                        <div className="repeat-order-list-item__name">Заказ #{el.id}</div>
+
+                                        <button className="repeat-order-list-item__do-action">Повторить</button>
                                     </div>
                                 })}
                             </div>

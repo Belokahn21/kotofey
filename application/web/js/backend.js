@@ -5991,6 +5991,8 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, RepeatOrder);
 
     _this = _super.call(this, props);
+    _this.timerEx = null;
+    _this.timer = 1000;
     _this.state = {
       show: false,
       orders: []
@@ -6024,40 +6026,40 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
       var element = event.target;
       var value = element.value;
 
-      var _value = parseInt(value); //is order id
+      var _value = parseInt(value);
 
+      if (this.timerEx) clearTimeout(this.timerEx);
+      this.timerEx = setTimeout(function () {
+        //is order id
+        if (Number.isInteger(_value) && _value.toString().length < 10) {
+          _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value).then(function (data) {
+            var arData = [];
+            arData.push(data);
 
-      if (Number.isInteger(_value) && _value.toString().length < 10) {
-        console.log("p1");
-        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value).then(function (data) {
-          var arData = [];
-          arData.push(data);
-
-          _this2.setState({
-            orders: arData
+            _this2.setState({
+              orders: arData
+            });
           });
-        });
-      } //is phone
+        } //is phone
 
 
-      if (Number.isInteger(_value) && _value.toString().length === 10) {
-        console.log("p2");
-        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder + '?OrderSearchForm[phone]=' + value).then(function (data) {
-          _this2.setState({
-            orders: data
+        if (Number.isInteger(_value) && _value.toString().length === 11) {
+          _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder + '?OrderSearchForm[phone]=' + value).then(function (data) {
+            _this2.setState({
+              orders: data
+            });
           });
-        });
-      } //is email
+        } //is email
 
 
-      if (_frontend_src_js_tools_Email__WEBPACK_IMPORTED_MODULE_4__.default.validateEmail(value)) {
-        console.log("p3");
-        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value + '?OrderSearchForm[email]=' + value).then(function (data) {
-          _this2.setState({
-            orders: data
+        if (_frontend_src_js_tools_Email__WEBPACK_IMPORTED_MODULE_4__.default.validateEmail(value)) {
+          _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value + '?OrderSearchForm[email]=' + value).then(function (data) {
+            _this2.setState({
+              orders: data
+            });
           });
-        });
-      }
+        }
+      }, this.timer);
     }
   }, {
     key: "render",
@@ -6086,8 +6088,13 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
         className: "repeat-order-list"
       }, orders.map(function (el, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          key: index
-        }, "\u0417\u0430\u043A\u0430\u0437 #", el.id);
+          key: index,
+          className: "repeat-order-list-item"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          className: "repeat-order-list-item__name"
+        }, "\u0417\u0430\u043A\u0430\u0437 #", el.id), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+          className: "repeat-order-list-item__do-action"
+        }, "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C"));
       }))))));
     }
   }]);

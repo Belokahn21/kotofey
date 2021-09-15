@@ -9332,6 +9332,28 @@ html, body {
     padding: 5px;
     border: 1px #e6e6e6 solid; }
 
+.admin-repeat-order {
+  width: 100%; }
+
+.repeat-order-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%; }
+  .repeat-order-list-item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px #c6c6c6 solid;
+    margin: 5px 0;
+    padding: 7px 0; }
+    .repeat-order-list-item__do-action {
+      padding: 2.5px 5px;
+      border: 1px #00BFFF solid;
+      background: transparent; }
+
 /*-----------------------------------------------------------*/
 .content {
   float: left;
