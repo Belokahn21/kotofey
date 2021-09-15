@@ -4,6 +4,8 @@ import {Modal} from "react-bootstrap";
 import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
 import config from "../../../../../../frontend/src/js/config";
 import Email from "../../../../../../frontend/src/js/tools/Email";
+import RepeatOrderItems from "./RepeatOrderItems";
+import RepeatNewOrderModal from "./RepeatNewOrderModal";
 
 class RepeatOrder extends React.Component {
     constructor(props) {
@@ -39,7 +41,7 @@ class RepeatOrder extends React.Component {
         this.timerEx = setTimeout(() => {
             //is order id
             if (Number.isInteger(_value) && _value.toString().length < 10) {
-                RestRequest.one(config.restOrder, value).then(data => {
+                RestRequest.one(config.restOrder, value, '?expand=items').then(data => {
                     let arData = [];
                     arData.push(data);
                     this.setState({orders: arData});
@@ -48,14 +50,14 @@ class RepeatOrder extends React.Component {
 
             //is phone
             if (Number.isInteger(_value) && _value.toString().length === 11) {
-                RestRequest.all(config.restOrder + '?OrderSearchForm[phone]=' + value).then(data => {
+                RestRequest.all(config.restOrder + '?expand=items&OrderSearchForm[phone]=' + value).then(data => {
                     this.setState({orders: data});
                 });
             }
 
             //is email
             if (Email.validateEmail(value)) {
-                RestRequest.one(config.restOrder, value + '?OrderSearchForm[email]=' + value).then(data => {
+                RestRequest.one(config.restOrder, value + '?expand=items&OrderSearchForm[email]=' + value).then(data => {
                     this.setState({orders: data});
                 });
             }
@@ -68,7 +70,7 @@ class RepeatOrder extends React.Component {
 
         return (
             <>
-                <a href="javascript:void(0);" type="button" className="btn-main" onClick={this.handleShow.bind(this)}>Повторить заказ</a>
+                <a href="#" type="button" className="btn-main" onClick={this.handleShow.bind(this)}>Повторить заказ</a>
 
                 <Modal show={show} onHide={this.handleClose.bind(this)}>
                     <Modal.Header closeButton>
@@ -82,11 +84,22 @@ class RepeatOrder extends React.Component {
 
                             <div className="repeat-order-list">
                                 {orders.map((el, index) => {
+                                    console.log(el.phone);
+                                    console.log(el.items);
                                     return <div key={index} className="repeat-order-list-item">
+                                        <div className="repeat-order-list-item-row">
 
-                                        <div className="repeat-order-list-item__name">Заказ #{el.id}</div>
+                                            <div className="repeat-order-list-item__name">Заказ #{el.id}</div>
 
-                                        <button className="repeat-order-list-item__do-action">Повторить</button>
+                                            <div className="repeat-order-list-item__phone">{el.phone}</div>
+
+                                            <div className="repeat-order-list-item__email">{el.email}</div>
+
+                                            <RepeatNewOrderModal order={el}/>
+                                        </div>
+                                        <div className="repeat-order-list-item-row">
+                                            <RepeatOrderItems items={el.items}/>
+                                        </div>
                                     </div>
                                 })}
                             </div>

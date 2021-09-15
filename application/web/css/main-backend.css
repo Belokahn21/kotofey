@@ -9343,12 +9343,14 @@ html, body {
   width: 100%; }
   .repeat-order-list-item {
     width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
     border-bottom: 1px #c6c6c6 solid;
     margin: 5px 0;
     padding: 7px 0; }
+    .repeat-order-list-item-row {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; }
     .repeat-order-list-item__do-action {
       padding: 2.5px 5px;
       border: 1px #00BFFF solid;
