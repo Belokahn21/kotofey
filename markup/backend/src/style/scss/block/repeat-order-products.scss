@@ -1,0 +1,33 @@
+.repeat-order-products {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-item {
+    width: 100%;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px #c6c6c6 solid;
+    margin-bottom: 5px;
+    padding: 5px 0;
+
+    &__name {
+    }
+
+    &__count {
+    }
+
+    &__price {
+    }
+
+    &__summary {
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.repeat-order-form {
+  display: flex;
+  flex-direction: column;
+
+  &-label {
+    display: block;
+    margin: 10px 0;
+  }
+
+  &-title {
+    color: grey;
+    font-size: 12px;
+    width: 100%;
+  }
+
+  &-input {
+    border: 1px solid #C6C6C6;
+    width: 100%;
+    padding: 5px;
+  }
+
+  &-submit {
+    border: 1px $theme-color solid;
+    padding: 2.5px 5px;
+    margin: 10px 0;
+    background-color: transparent;
+    transition: all 200ms;
+    font-weight: bold;
+
+    &:hover {
+      background-color: $theme-color;
+      color: white;
+    }
+  }
+}

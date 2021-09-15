@@ -1,3 +1,9 @@
 .admin-repeat-order {
   width: 100%;
+
+  &__input {
+    width: 100%;
+    border: 1px #C6C6C6 solid;
+    padding: 5px;
+  }
 }

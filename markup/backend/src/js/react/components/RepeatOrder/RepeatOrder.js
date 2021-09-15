@@ -84,8 +84,6 @@ class RepeatOrder extends React.Component {
 
                             <div className="repeat-order-list">
                                 {orders.map((el, index) => {
-                                    console.log(el.phone);
-                                    console.log(el.items);
                                     return <div key={index} className="repeat-order-list-item">
                                         <div className="repeat-order-list-item-row">
 
