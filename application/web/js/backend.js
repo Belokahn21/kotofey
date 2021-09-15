@@ -5980,9 +5980,15 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(RepeatOrder);
 
   function RepeatOrder(props) {
+    var _this;
+
     _classCallCheck(this, RepeatOrder);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      show: false
+    };
+    return _this;
   }
 
   _createClass(RepeatOrder, [{

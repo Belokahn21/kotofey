@@ -5,7 +5,9 @@ import {Modal} from "react-bootstrap";
 class RepeatOrder extends React.Component {
     constructor(props) {
         super(props);
-
+        this.state = {
+            show: false
+        };
     }
 
     setShow(show) {
