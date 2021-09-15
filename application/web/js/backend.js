@@ -6022,18 +6022,26 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
 
       event.preventDefault();
       var element = event.target;
-      var value = element.value; //is order id
+      var value = element.value;
 
-      if (Number.isInteger(value) && value.length < 10) {
+      var _value = parseInt(value); //is order id
+
+
+      if (Number.isInteger(_value) && _value.toString().length < 10) {
+        console.log("p1");
         _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value).then(function (data) {
+          var arData = [];
+          arData.push(data);
+
           _this2.setState({
-            orders: data
+            orders: arData
           });
         });
       } //is phone
 
 
-      if (Number.isInteger(value) && value.length === 10) {
+      if (Number.isInteger(_value) && _value.toString().length === 10) {
+        console.log("p2");
         _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder + '?OrderSearchForm[phone]=' + value).then(function (data) {
           _this2.setState({
             orders: data
@@ -6043,6 +6051,7 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
 
 
       if (_frontend_src_js_tools_Email__WEBPACK_IMPORTED_MODULE_4__.default.validateEmail(value)) {
+        console.log("p3");
         _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value + '?OrderSearchForm[email]=' + value).then(function (data) {
           _this2.setState({
             orders: data
@@ -6072,7 +6081,7 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
         className: "admin-repeat-order__input",
         type: "text",
         placeholder: "ID \u0437\u0430\u043A\u0430\u0437\u0430 \u0438\u043B\u0438 \u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0438\u043B\u0438 Email \u043A\u043B\u0438\u0435\u043D\u0442\u0430",
-        onKeyUp: this.handleTyping.bind(this)
+        onChange: this.handleTyping.bind(this)
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "repeat-order-list"
       }, orders.map(function (el, index) {

@@ -30,16 +30,20 @@ class RepeatOrder extends React.Component {
         event.preventDefault();
         let element = event.target;
         let value = element.value;
+        let _value = parseInt(value);
+
 
         //is order id
-        if (Number.isInteger(value) && value.length < 10) {
+        if (Number.isInteger(_value) && _value.toString().length < 10) {
             RestRequest.one(config.restOrder, value).then(data => {
-                this.setState({orders: data});
+                let arData = [];
+                arData.push(data);
+                this.setState({orders: arData});
             });
         }
 
         //is phone
-        if (Number.isInteger(value) && value.length === 10) {
+        if (Number.isInteger(_value) && _value.toString().length === 10) {
             RestRequest.all(config.restOrder + '?OrderSearchForm[phone]=' + value).then(data => {
                 this.setState({orders: data});
             });
@@ -70,7 +74,7 @@ class RepeatOrder extends React.Component {
 
 
                         <div className="admin-repeat-order">
-                            <input className="admin-repeat-order__input" type="text" placeholder="ID заказа или Номер телефона клиента или Email клиента" onKeyUp={this.handleTyping.bind(this)}/>
+                            <input className="admin-repeat-order__input" type="text" placeholder="ID заказа или Номер телефона клиента или Email клиента" onChange={this.handleTyping.bind(this)}/>
 
                             <div className="repeat-order-list">
                                 {orders.map((el, index) => {
