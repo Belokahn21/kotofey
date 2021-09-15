@@ -11,6 +11,7 @@ import './react/components/todo/Todo';
 import './react/components/FindProduct';
 import './react/components/Media/Media';
 import './react/components/Cdn/Cdn';
+import './react/components/RepeatOrder/RepeatOrder';
 // import './react/components/Promotion/Promotion';
 import './react/components/MediaBrowser/MediaBrowser';
 import './react/components/FindCustomer/FindCustomer';

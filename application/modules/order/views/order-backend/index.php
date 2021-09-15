@@ -24,6 +24,7 @@ $this->title = Title::show("Заказы");
     <div class="title-group">
         <h1>Заказы</h1>
         <?= GroupBuyWidget::widget(); ?>
+        <div class="repeat-order-react"></div>
         <?= Html::a('Выгрузка Email', Url::to(['order-backend/export']), ['class' => 'btn-main', 'target' => '_blank']); ?>
         <?= Html::a('Карточки клиентов', Url::to(['customer-backend/index']), ['class' => 'btn-main', 'target' => '_blank']); ?>
     </div>

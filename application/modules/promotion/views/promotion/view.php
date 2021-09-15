@@ -32,9 +32,11 @@ $this->params['breadcrumbs'][] = ['label' => $model->name];
         <div class="catalog-wrap">
             <ul class="catalog">
                 <?php foreach ($products as $product): ?>
-                    <?= $this->render('@app/modules/catalog/views/__item-block', [
-                        'product' => $product->product
-                    ]); ?>
+                    <?php if ($_product = $product->product): ?>
+                        <?= $this->render('@app/modules/catalog/views/__item-block', [
+                            'product' => $_product
+                        ]); ?>
+                    <?php endif; ?>
                 <?php endforeach; ?>
             </ul>
         </div>

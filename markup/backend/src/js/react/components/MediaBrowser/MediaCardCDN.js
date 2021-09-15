@@ -11,7 +11,7 @@ class MediaCardCDN extends React.Component {
 
         return (
             <div className="media-browser-card" key={uniq}>
-                <a href={`/admin/media/media-backend/update/?id=${element.id}`}>
+                <a target="_blank" href={`/admin/media/media-backend/update/?id=${element.id}`}>
                     <img className="media-browser-card__image" src={elementCdn.secure_url}/>
                 </a>
                 {handleSelectImage ? <button type="button" className="media-browser-card__select" onClick={handleSelectImage.bind(this, element)}>Выбрать</button> : ""}
