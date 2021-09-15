@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDom from 'react-dom';
 import {Modal} from "react-bootstrap";
+import RestRequest from "../../../../../../frontend/src/js/tools/RestRequest";
+import config from "../../../../../../frontend/src/js/config";
+import Email from "../../../../../../frontend/src/js/tools/Email";
 
 class RepeatOrder extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            show: false
+            show: false,
+            orders: [],
         };
     }
 
@@ -22,20 +26,60 @@ class RepeatOrder extends React.Component {
         this.setShow(true);
     }
 
+    handleTyping(event) {
+        event.preventDefault();
+        let element = event.target;
+        let value = element.value;
+
+        //is order id
+        if (Number.isInteger(value) && value.length < 10) {
+            RestRequest.one(config.restOrder, value).then(data => {
+                this.setState({orders: data});
+            });
+        }
+
+        //is phone
+        if (Number.isInteger(value) && value.length === 10) {
+            RestRequest.all(config.restOrder + '?OrderSearchForm[phone]=' + value).then(data => {
+                this.setState({orders: data});
+            });
+        }
+
+        //is email
+        if (Email.validateEmail(value)) {
+            RestRequest.one(config.restOrder, value + '?OrderSearchForm[email]=' + value).then(data => {
+                this.setState({orders: data});
+            });
+        }
+
+    }
+
     render() {
 
-        const {show} = this.state;
+        const {show, orders} = this.state;
 
         return (
             <>
-                <button type="button" className="btn-main" onClick={this.handleShow.bind(this)}>Повторить заказ</button>
+                <a href="javascript:void(0);" type="button" className="btn-main" onClick={this.handleShow.bind(this)}>Повторить заказ</a>
 
                 <Modal show={show} onHide={this.handleClose.bind(this)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Найти ID товара</Modal.Title>
+                        <Modal.Title>Повторить заказ</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        повторяем заказ)
+
+
+                        <div className="admin-repeat-order">
+                            <input className="admin-repeat-order__input" type="text" placeholder="ID заказа или Номер телефона клиента или Email клиента" onKeyUp={this.handleTyping.bind(this)}/>
+
+                            <div className="repeat-order-list">
+                                {orders.map((el, index) => {
+                                    return <div key={index}>
+                                        Заказ #{el.id}
+                                    </div>
+                                })}
+                            </div>
+                        </div>
                     </Modal.Body>
                 </Modal>
             </>

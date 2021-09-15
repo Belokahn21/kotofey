@@ -5947,7 +5947,10 @@ if (init) init.forEach(function (el) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../frontend/src/js/config */ "../frontend/src/js/config.js");
+/* harmony import */ var _frontend_src_js_tools_Email__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/Email */ "../frontend/src/js/tools/Email.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5974,6 +5977,9 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
+
 var RepeatOrder = /*#__PURE__*/function (_React$Component) {
   _inherits(RepeatOrder, _React$Component);
 
@@ -5986,7 +5992,8 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
 
     _this = _super.call(this, props);
     _this.state = {
-      show: false
+      show: false,
+      orders: []
     };
     return _this;
   }
@@ -6009,19 +6016,70 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
       this.setShow(true);
     }
   }, {
+    key: "handleTyping",
+    value: function handleTyping(event) {
+      var _this2 = this;
+
+      event.preventDefault();
+      var element = event.target;
+      var value = element.value; //is order id
+
+      if (Number.isInteger(value) && value.length < 10) {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value).then(function (data) {
+          _this2.setState({
+            orders: data
+          });
+        });
+      } //is phone
+
+
+      if (Number.isInteger(value) && value.length === 10) {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder + '?OrderSearchForm[phone]=' + value).then(function (data) {
+          _this2.setState({
+            orders: data
+          });
+        });
+      } //is email
+
+
+      if (_frontend_src_js_tools_Email__WEBPACK_IMPORTED_MODULE_4__.default.validateEmail(value)) {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_3__.default.restOrder, value + '?OrderSearchForm[email]=' + value).then(function (data) {
+          _this2.setState({
+            orders: data
+          });
+        });
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
-      var show = this.state.show;
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      var _this$state = this.state,
+          show = _this$state.show,
+          orders = _this$state.orders;
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
+        href: "javascript:void(0);",
         type: "button",
         className: "btn-main",
         onClick: this.handleShow.bind(this)
-      }, "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default, {
+      }, "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default, {
         show: show,
         onHide: this.handleClose.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default.Header, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default.Title, null, "\u041D\u0430\u0439\u0442\u0438 ID \u0442\u043E\u0432\u0430\u0440\u0430")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_2__.default.Body, null, "\u043F\u043E\u0432\u0442\u043E\u0440\u044F\u0435\u043C \u0437\u0430\u043A\u0430\u0437)")));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Title, null, "\u041F\u043E\u0432\u0442\u043E\u0440\u0438\u0442\u044C \u0437\u0430\u043A\u0430\u0437")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "admin-repeat-order"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "admin-repeat-order__input",
+        type: "text",
+        placeholder: "ID \u0437\u0430\u043A\u0430\u0437\u0430 \u0438\u043B\u0438 \u041D\u043E\u043C\u0435\u0440 \u0442\u0435\u043B\u0435\u0444\u043E\u043D\u0430 \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0438\u043B\u0438 Email \u043A\u043B\u0438\u0435\u043D\u0442\u0430",
+        onKeyUp: this.handleTyping.bind(this)
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+        className: "repeat-order-list"
+      }, orders.map(function (el, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: index
+        }, "\u0417\u0430\u043A\u0430\u0437 #", el.id);
+      }))))));
     }
   }]);
 
@@ -7240,6 +7298,43 @@ var config = {
   restPetCalculator: url + 'api/pets/calculate/'
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (config);
+
+/***/ }),
+
+/***/ "../frontend/src/js/tools/Email.js":
+/*!*****************************************!*\
+  !*** ../frontend/src/js/tools/Email.js ***!
+  \*****************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Email = /*#__PURE__*/function () {
+  function Email() {
+    _classCallCheck(this, Email);
+  }
+
+  _createClass(Email, null, [{
+    key: "validateEmail",
+    value: function validateEmail(email) {
+      var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      return re.test(String(email).toLowerCase());
+    }
+  }]);
+
+  return Email;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Email);
 
 /***/ }),
 
