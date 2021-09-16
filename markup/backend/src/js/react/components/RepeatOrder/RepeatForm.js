@@ -118,7 +118,10 @@ class RepeatForm extends React.Component {
                                     <div className="list-finds-data__value">{el.count}</div>
                                 </div>
                             </div>
-                            <button type="button" className="list-finds__setup">J</button>
+                            <label>
+                                <span>Пропустить</span>
+                                <input type="checkbox" name="skip"/>
+                            </label>
                         </div>
                     })}
                 </div>
