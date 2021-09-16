@@ -5951,6 +5951,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _frontend_src_js_tools_Price__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/Price */ "../frontend/src/js/tools/Price.js");
 /* harmony import */ var _FindProduct_Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FindProduct/Button */ "./src/js/react/components/FindProduct/Button.js");
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _frontend_src_js_config__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../../frontend/src/js/config */ "../frontend/src/js/config.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5977,27 +5979,80 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var RepeatForm = /*#__PURE__*/function (_React$Component) {
   _inherits(RepeatForm, _React$Component);
 
   var _super = _createSuper(RepeatForm);
 
   function RepeatForm(props) {
+    var _this;
+
     _classCallCheck(this, RepeatForm);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = {
+      status: [],
+      delivery: [],
+      payment: []
+    };
+    return _this;
   }
 
   _createClass(RepeatForm, [{
     key: "handleSubmitForm",
     value: function handleSubmitForm(e) {
       e.preventDefault();
-      alert();
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.loadStatus();
+      this.loadPayment();
+      this.loadDelivery();
+    }
+  }, {
+    key: "loadStatus",
+    value: function loadStatus() {
+      var _this2 = this;
+
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_4__.default.restOrderStatus).then(function (data) {
+        _this2.setState({
+          status: data
+        });
+      });
+    }
+  }, {
+    key: "loadDelivery",
+    value: function loadDelivery() {
+      var _this3 = this;
+
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_4__.default.restDelivery).then(function (data) {
+        _this3.setState({
+          delivery: data
+        });
+      });
+    }
+  }, {
+    key: "loadPayment",
+    value: function loadPayment() {
+      var _this4 = this;
+
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.all(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_4__.default.restPayment).then(function (data) {
+        _this4.setState({
+          payment: data
+        });
+      });
     }
   }, {
     key: "render",
     value: function render() {
       var order = this.props.order;
+      var _this$state = this.state,
+          status = _this$state.status,
+          payment = _this$state.payment,
+          delivery = _this$state.delivery;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("form", {
         className: "repeat-order-form",
         onSubmit: this.handleSubmitForm.bind(this)
@@ -6029,12 +6084,15 @@ var RepeatForm = /*#__PURE__*/function (_React$Component) {
         className: "repeat-order-form-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "repeat-order-form-title"
-      }, "\u0421\u0442\u0430\u0442\u0443\u0441"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "repeat-order-form-input",
-        type: "text",
-        placeholder: "status",
-        defaultValue: order.status
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "\u0421\u0442\u0430\u0442\u0443\u0441"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        className: "repeat-order-form-select"
+      }, status.map(function (el, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          key: index,
+          selected: order.status === el.id,
+          defaultValue: el.id
+        }, el.name);
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-sm-6"
@@ -6042,23 +6100,29 @@ var RepeatForm = /*#__PURE__*/function (_React$Component) {
         className: "repeat-order-form-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "repeat-order-form-title"
-      }, "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "repeat-order-form-input",
-        type: "text",
-        placeholder: "delivery",
-        defaultValue: order.delivery_id
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        className: "repeat-order-form-select"
+      }, delivery.map(function (el, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          key: index,
+          selected: order.delivery_id === el.id,
+          defaultValue: el.id
+        }, el.name);
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "col-sm-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
         className: "repeat-order-form-label"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "repeat-order-form-title"
-      }, "\u041E\u043F\u043B\u0430\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-        className: "repeat-order-form-input",
-        type: "text",
-        placeholder: "payment",
-        defaultValue: order.payment_id
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      }, "\u041E\u043F\u043B\u0430\u0442\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("select", {
+        className: "repeat-order-form-select"
+      }, payment.map(function (el, index) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("option", {
+          key: index,
+          selected: order.payment_id === el.id,
+          defaultValue: el.id
+        }, el.name);
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
         className: "list-finds"
       }, order.items.map(function (el, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
@@ -7677,6 +7741,7 @@ var config = {
   restFavorite: url + 'api/favorite/',
   restOrder: url + 'api/order/',
   restFastOrder: url + 'api/order/fast/',
+  restOrderStatus: url + 'api/order/status/',
   restOrderRepeat: url + 'api/order/repeat/',
   restBasket: url + 'api/basket/',
   restDelivery: url + 'api/delivery/',

@@ -19,6 +19,12 @@
     padding: 5px;
   }
 
+  &-select {
+    border: 1px solid #C6C6C6;
+    width: 100%;
+    padding: 5px;
+  }
+
   &-submit {
     border: 1px $theme-color solid;
     padding: 2.5px 5px;

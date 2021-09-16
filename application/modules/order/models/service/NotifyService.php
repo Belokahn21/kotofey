@@ -238,18 +238,18 @@ class NotifyService
 
         if (strlen($royal_list_items) > 0) {
             $royal_html = '
-        <tr style="margin-bottom:20px; display:block;">
-        <td>Чтобы получить больше бонусов оставьте отзыв о купленных товарах Royal Canin и получите 100 бонусов на счёт.</td>
-    </tr>
-    <tr style="margin-bottom:20px; display:block;">
-        <td><img src="https://kotofey.store/images/royal_reward.jpg" style="max-width:100%; object-fit:contain;">
-            <table style="max-width:600px; width:100%; display:block; margin:auto; font-size:20px;" border="0" cellpadding="0" cellspacing="0">
-                <tbody style="display:block; width:100%;">
-                ' . $royal_list_items . '
-                </tbody>
-            </table>
-        </td>
-    </tr>';
+                <tr style="margin-bottom:20px; display:block;">
+                    <td>Чтобы получить больше бонусов оставьте отзыв о купленных товарах Royal Canin и получите 100 бонусов на счёт.</td>
+                </tr>
+                <tr style="margin-bottom:20px; display:block;">
+                    <td><img src="https://kotofey.store/images/royal_reward.jpg" style="max-width:100%; object-fit:contain;">
+                        <table style="max-width:600px; width:100%; display:block; margin:auto; font-size:20px;" border="0" cellpadding="0" cellspacing="0">
+                            <tbody style="display:block; width:100%;">
+                            ' . $royal_list_items . '
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>';
         }
 
         $mailer = new MailService();

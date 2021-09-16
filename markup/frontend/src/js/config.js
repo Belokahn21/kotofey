@@ -8,6 +8,7 @@ const config = {
     restFavorite: url + 'api/favorite/',
     restOrder: url + 'api/order/',
     restFastOrder: url + 'api/order/fast/',
+    restOrderStatus: url + 'api/order/status/',
     restOrderRepeat: url + 'api/order/repeat/',
     restBasket: url + 'api/basket/',
     restDelivery: url + 'api/delivery/',
