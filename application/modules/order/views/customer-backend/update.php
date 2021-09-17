@@ -8,6 +8,7 @@ use yii\helpers\Url;
 /* @var $properties \app\modules\catalog\models\entity\PropertyGroup[]
  * @var $model \app\modules\catalog\models\entity\Properties
  * @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues
+ * @var $customer_status \app\modules\order\models\entity\CustomerStatus[]
  */
 
 $this->title = Title::show("Покупатель: " . $model->name); ?>
@@ -22,6 +23,7 @@ $this->title = Title::show("Покупатель: " . $model->name); ?>
         'form' => $form,
         'properties' => $properties,
         'propertiesValues' => $propertiesValues,
+        'customer_status' => $customer_status,
     ]); ?>
     <?= Html::submitButton('Обновить', ['class' => 'btn-main']); ?>
     <?php ActiveForm::end(); ?>

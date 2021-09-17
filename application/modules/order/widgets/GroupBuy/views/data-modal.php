@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
+use app\modules\order\models\entity\CustomerStatus;
 
 /* @var $groupedData array */
 ?>
@@ -24,7 +25,15 @@ use yii\helpers\ArrayHelper;
                                     <a href="tel:<?= $phone; ?>" class="group-buy__link js-phone-mask"><?= $phone; ?></a>
                                     <?php $card = ArrayHelper::getValue($data, 'card'); ?>
                                     <?php if ($card): ?>
-                                        <div class="group-buy-item-title"><?= $card->name ?></div>
+                                        <div class="group-buy-item-title">
+                                            <a target="_blank" href="<?= Url::to(['/admin/order/customer-backend/update', 'id' => $card->phone]); ?>"><?= $card->name ?></a>
+                                            <?php switch ($card->status_id) {
+                                                default :
+                                                    echo '<i class="far fa-check-circle green"></i>';
+//                                                    echo '<i class="fas fa-check-double green"></i>';
+                                                    break;
+                                            } ?>
+                                        </div>
                                     <?php endif; ?>
                                     <?php if (array_key_exists('group_items', $data)): ?>
                                         <?php $key = uniqid(); ?>

@@ -17,6 +17,8 @@ use yii\behaviors\TimestampBehavior;
  */
 class CustomerStatus extends \yii\db\ActiveRecord
 {
+    const STATUS_ACTIVE = 1;
+
     public function behaviors()
     {
         return [
