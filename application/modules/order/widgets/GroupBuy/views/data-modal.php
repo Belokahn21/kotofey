@@ -22,7 +22,7 @@ use app\modules\order\models\entity\CustomerStatus;
                         <?php foreach ($groupedData as $phone => $data): ?>
                             <li class="group-buy-item-wrap">
                                 <div class="group-buy-item">
-                                    <a href="tel:<?= $phone; ?>" class="group-buy__link js-phone-mask"><?= $phone; ?></a>
+                                    <a href="<?= Url::to(['order-backend/index', 'OrderSearchForm[phone]' => $phone]) ?>" class="group-buy__link js-phone-mask"><?= $phone; ?></a>
                                     <?php $card = ArrayHelper::getValue($data, 'card'); ?>
                                     <?php if ($card): ?>
                                         <div class="group-buy-item-title">
