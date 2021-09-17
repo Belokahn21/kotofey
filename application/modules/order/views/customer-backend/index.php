@@ -15,6 +15,7 @@ $this->title = Title::show("Карточки покупателей"); ?>
     <div class="title-group">
         <h1 class="title">Карточки покупателей</h1>
         <?= Html::a('Свойства', Url::to(['customer-properties-backend/index']), ['class' => 'btn-main']); ?>
+        <?= Html::a('Статусы', Url::to(['customer-status-backend/index']), ['class' => 'btn-main']); ?>
     </div>
 <?php $form = ActiveForm::begin([
     'enableAjaxValidation' => true,
