@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+use yii\helpers\ArrayHelper;
 
 /* @var $groupedData array */
 ?>
@@ -9,7 +10,7 @@ use yii\helpers\Url;
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="group-buyLabel">Информация по покупателям</h5>
+                <h5 class="modal-title" id="group-buyLabel">Информация по покупателям (Всего: <?= count($groupedData); ?>)</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -18,21 +19,34 @@ use yii\helpers\Url;
                 <?php if ($groupedData): ?>
                     <ul class="group-buy">
                         <?php foreach ($groupedData as $phone => $data): ?>
-                            <li class="group-buy__item">
-                                <a href="tel:<?= $phone; ?>" class="group-buy__link phone-mask"><?= $phone; ?></a>
-                                <?php if (array_key_exists('group_items', $data)): ?>
-                                    <ul class="group-buy-list">
-                                        <?php foreach ($data['group_items']['item'] as $item): ?>
-                                            <li class="group-buy-list__item">
-                                                <?php if ($item->product): ?>
-                                                    (<?= count($data['group_items']['count'][$item->product->id]); ?>) <?= Html::a($item->product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]), ['class' => 'group-buy-list__link']); ?>
-                                                <?php else: ?>
-                                                    <?= Html::tag('div', "(" . count($data['group_items']['count'][$item->product_id]) . ") " . $item->name, ['class' => 'group-buy-list__link']); ?>
-                                                <?php endif; ?>
-                                            </li>
-                                        <?php endforeach; ?>
-                                    </ul>
-                                <?php endif; ?>
+                            <li class="group-buy-item-wrap">
+                                <div class="group-buy-item">
+                                    <a href="tel:<?= $phone; ?>" class="group-buy__link js-phone-mask"><?= $phone; ?></a>
+                                    <?php $card = ArrayHelper::getValue($data, 'card'); ?>
+                                    <?php if ($card): ?>
+                                        <div class="group-buy-item-title"><?= $card->name ?></div>
+                                    <?php endif; ?>
+                                    <?php if (array_key_exists('group_items', $data)): ?>
+                                        <?php $key = uniqid(); ?>
+                                        <button data-toggle="collapse" data-target="#collapseExample-<?= $key ?>" aria-expanded="false">
+                                            <span>Показать товары</span>
+                                            <span>Скрыть товары</span>
+                                        </button>
+                                        <div class="collapse" id="collapseExample-<?= $key ?>">
+                                            <ul class="group-buy-list">
+                                                <?php foreach ($data['group_items']['item'] as $item): ?>
+                                                    <li class="group-buy-list__item">
+                                                        <?php if ($item->product): ?>
+                                                            (<?= count($data['group_items']['count'][$item->product->id]); ?>) <?= Html::a($item->product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]), ['class' => 'group-buy-list__link']); ?>
+                                                        <?php else: ?>
+                                                            <?= Html::tag('div', "(" . count($data['group_items']['count'][$item->product_id]) . ") " . $item->name, ['class' => 'group-buy-list__link']); ?>
+                                                        <?php endif; ?>
+                                                    </li>
+                                                <?php endforeach; ?>
+                                            </ul>
+                                        </div>
+                                    <?php endif; ?>
+                                </div>
                             </li>
                         <?php endforeach; ?>
                     </ul>

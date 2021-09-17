@@ -8609,12 +8609,35 @@ html, body {
 .group-buy {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap; }
-  .group-buy__item {
+  flex-wrap: wrap;
+  margin: 0 -10px; }
+  .group-buy-item {
     display: flex;
     flex-direction: column;
-    width: 33%;
-    padding: 5px; }
+    padding: 5px;
+    border: 1px #c6c6c6 solid; }
+    .group-buy-item-wrap {
+      width: 33%;
+      padding: 10px; }
+    .group-buy-item-title {
+      color: grey;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 9px; }
+    .group-buy-item a {
+      color: black !important; }
+    .group-buy-item button {
+      margin-top: 5px;
+      background: transparent;
+      border: 1px #C6C6C6 solid; }
+      .group-buy-item button[aria-expanded="false"] span:nth-child(1) {
+        display: block; }
+      .group-buy-item button[aria-expanded="false"] span:nth-child(2) {
+        display: none; }
+      .group-buy-item button[aria-expanded="true"] span:nth-child(1) {
+        display: none; }
+      .group-buy-item button[aria-expanded="true"] span:nth-child(2) {
+        display: block; }
 
 .group-buy-list__item {
   font-size: 12px;

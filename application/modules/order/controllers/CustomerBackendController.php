@@ -2,16 +2,17 @@
 
 namespace app\modules\order\controllers;
 
-use app\modules\order\models\helpers\CustomerPropertiesValuesHelper;
-use app\modules\site\models\tools\Debug;
 use Yii;
 use yii\web\HttpException;
+use yii\widgets\ActiveForm;
 use app\widgets\notification\Alert;
+use app\modules\site\models\tools\Debug;
+use app\modules\order\models\entity\CustomerStatus;
+use app\modules\order\models\helpers\CustomerPropertiesValuesHelper;
 use app\modules\order\models\entity\CustomerProperties;
 use app\modules\order\models\entity\CustomerPropertiesValues;
 use app\modules\order\models\search\CustomerSearchForm;
 use app\modules\site\controllers\MainBackendController;
-use yii\widgets\ActiveForm;
 
 class CustomerBackendController extends MainBackendController
 {
@@ -24,6 +25,7 @@ class CustomerBackendController extends MainBackendController
         $dataProvider = $searchModel->search(Yii::$app->request->get());
         $properties = $this->getProperties();
         $propertiesValues = new CustomerPropertiesValues();
+        $customer_status = $this->getCustomerStatus();
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -51,6 +53,7 @@ class CustomerBackendController extends MainBackendController
             'dataProvider' => $dataProvider,
             'searchModel' => $searchModel,
             'propertiesValues' => $propertiesValues,
+            'customer_status' => $customer_status,
         ]);
     }
 
@@ -60,6 +63,7 @@ class CustomerBackendController extends MainBackendController
 
         $properties = $this->getProperties();
         $propertiesValues = new CustomerPropertiesValues();
+        $customer_status = $this->getCustomerStatus();
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
@@ -80,6 +84,7 @@ class CustomerBackendController extends MainBackendController
             'model' => $model,
             'properties' => $properties,
             'propertiesValues' => $propertiesValues,
+            'customer_status' => $customer_status,
         ]);
     }
 
@@ -95,5 +100,10 @@ class CustomerBackendController extends MainBackendController
     private function getProperties()
     {
         return CustomerProperties::find()->all();
+    }
+
+    private function getCustomerStatus()
+    {
+        return CustomerStatus::find()->all();
     }
 }

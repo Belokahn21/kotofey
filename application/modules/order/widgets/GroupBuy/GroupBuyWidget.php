@@ -3,6 +3,7 @@
 namespace app\modules\order\widgets\GroupBuy;
 
 
+use app\modules\order\models\entity\Customer;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use yii\base\Widget;
@@ -23,11 +24,22 @@ class GroupBuyWidget extends Widget
         }
 
         $this->loadOrderItems($groupedData);
+        $this->loadCards($groupedData);
         $this->groupItems($groupedData);
 
         return $this->render($this->view, [
             'groupedData' => $groupedData
         ]);
+    }
+
+    public function loadCards(array &$data)
+    {
+        foreach ($data as $phone => $someData) {
+
+            $card = Customer::findOne(['phone' => $phone]);
+
+            if ($card) $data[$phone]['card'] = $card;
+        }
     }
 
     public function loadOrderItems(array &$data)
@@ -54,8 +66,8 @@ class GroupBuyWidget extends Widget
             if (array_key_exists('items', $userData)) {
                 foreach ($userData['items'] as $item) {
 //                    if ($item->product) {
-                        $userData['group_items']['item'][$item->product_id] = $item;
-                        $userData['group_items']['count'][$item->product_id][] = $item;
+                    $userData['group_items']['item'][$item->product_id] = $item;
+                    $userData['group_items']['count'][$item->product_id][] = $item;
 //                    }
                 }
             }

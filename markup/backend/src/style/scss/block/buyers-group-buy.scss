@@ -2,12 +2,59 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin: 0 -10px;
 
-  &__item {
+  &-item {
+    &-wrap {
+      width: 33%;
+      padding: 10px;
+    }
+
+    &-title {
+      color: grey;
+      font-weight: bold;
+      text-transform: uppercase;
+      font-size: 9px;
+    }
+
     display: flex;
     flex-direction: column;
-    width: 33%;
     padding: 5px;
+    border: 1px #c6c6c6 solid;
+
+    a {
+      color: black !important;
+    }
+
+    button {
+      margin-top: 5px;
+      background: transparent;
+      border: 1px #C6C6C6 solid;
+
+      &[aria-expanded="false"] {
+        span {
+          &:nth-child(1) {
+            display: block;
+          }
+
+          &:nth-child(2) {
+            display: none;
+          }
+        }
+      }
+
+      &[aria-expanded="true"] {
+        span {
+          &:nth-child(1) {
+            display: none;
+          }
+
+          &:nth-child(2) {
+            display: block;
+          }
+        }
+      }
+    }
   }
 }
 

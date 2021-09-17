@@ -15,6 +15,7 @@ use yii\behaviors\TimestampBehavior;
  * @property string $description
  * @property int|null $created_at
  * @property int|null $updated_at
+ * @property int|null $customer_id
  */
 class Customer extends \yii\db\ActiveRecord
 {
@@ -35,7 +36,7 @@ class Customer extends \yii\db\ActiveRecord
             [['is_active'], 'boolean'],
             [['is_active'], 'default', 'value' => true],
 
-            [['phone', 'sort', 'created_at', 'updated_at'], 'integer'],
+            [['phone', 'sort', 'created_at', 'updated_at', 'customer_id'], 'integer'],
 
             [['name'], 'string', 'max' => 255],
             [['description'], 'string'],
@@ -52,6 +53,7 @@ class Customer extends \yii\db\ActiveRecord
             'sort' => 'Сортировка',
             'name' => 'Имя/Название',
             'description' => 'Описание',
+            'customer_id' => 'Статус клиента',
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
         ];

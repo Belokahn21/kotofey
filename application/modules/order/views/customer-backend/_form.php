@@ -1,11 +1,13 @@
 <?php
 
+use yii\helpers\ArrayHelper;
 use app\modules\order\models\entity\CustomerPropertiesValues;
 
 /* @var $model \app\modules\order\models\entity\Customer */
 /* @var $properties \app\modules\order\models\entity\CustomerProperties[] */
 /* @var $propertiesValues \app\modules\order\models\entity\CustomerPropertiesValues */
 /* @var $form \yii\widgets\ActiveForm */
+/* @var $customer_status \app\modules\order\models\entity\CustomerStatus[] */
 
 ?>
 
@@ -36,6 +38,7 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
                 <?= $form->field($model, 'description')->textarea(); ?>
             </div>
             <div class="col-12 col-sm-3">
+                <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map($customer_status, 'id', 'namee')); ?>
             </div>
             <div class="col-12 col-sm-3">
             </div>
