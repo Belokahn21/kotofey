@@ -18,6 +18,14 @@ class RepeatForm extends React.Component {
     handleSubmitForm(e) {
         e.preventDefault();
 
+        let body = new FormData();
+        body.append('order_id', this.props.order.id);
+
+        RestRequest.post(config.restOrderRepeat, {
+            body: body
+        }).then(data => {
+            console.log(data);
+        });
     }
 
     componentDidMount() {
@@ -95,35 +103,6 @@ class RepeatForm extends React.Component {
                             </select>
                         </label>
                     </div>
-                </div>
-
-
-                <div className="list-finds">
-                    {order.items.map((el, index) => {
-                        return <div className="list-finds__item" key={index}>
-                            <a href={el.imageUrl} data-lightbox="roadtrip"><img src={el.imageUrl} className="list-finds__image"/></a>
-                            <a href={el.backendHref} target="_blank" className="list-finds__link">{el.name}</a>
-                            <div className="list-finds-data">
-                                <div className="list-finds-data__row">
-                                    <div className="list-finds-data__key">Цена</div>
-                                    <div className="list-finds-data__value">{Price.format(el.price)}</div>
-                                </div>
-                                {!el.discount_price ? '' :
-                                    <div className="list-finds-data__row">
-                                        <div className="list-finds-data__key">Со скидкой</div>
-                                        <div className="list-finds-data__value">{Price.format(el.discount_price)}</div>
-                                    </div>}
-                                <div className="list-finds-data__row">
-                                    <div className="list-finds-data__key">Кол-во</div>
-                                    <div className="list-finds-data__value">{el.count}</div>
-                                </div>
-                            </div>
-                            <label className="skip-icon">
-                                <input type="checkbox" name="skip"/>
-                                <i className="far fa-times-circle" />
-                            </label>
-                        </div>
-                    })}
                 </div>
 
                 <button type="submit" className="repeat-order-form-submit">Отправить</button>

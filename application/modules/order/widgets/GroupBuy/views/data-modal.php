@@ -3,7 +3,6 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\helpers\ArrayHelper;
-use app\modules\order\models\entity\CustomerStatus;
 
 /* @var $groupedData array */
 ?>
