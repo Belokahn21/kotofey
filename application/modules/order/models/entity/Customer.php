@@ -31,6 +31,8 @@ class Customer extends \yii\db\ActiveRecord
         return [
             [['phone'], 'required'],
 
+            [['status_id'], 'default', 'value' => 1],
+
             [['sort'], 'default', 'value' => 500],
 
             [['is_active'], 'boolean'],
