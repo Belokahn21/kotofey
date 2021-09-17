@@ -1,8 +1,12 @@
 <?php
 
+use yii\helpers\Html;
 use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 
-/* @var $itemsModel \app\modules\order\models\entity\OrdersItems */
+/* @var $itemsModel \app\modules\order\models\entity\OrdersItems
+ * @var $form \yii\widgets\ActiveForm
+ */
+
 $iter = 0;
 $model = new \app\modules\order\models\entity\OrdersItems();
 ?>
@@ -27,7 +31,12 @@ $model = new \app\modules\order\models\entity\OrdersItems();
             <?= $form->field($item, '[' . $i . ']product_id')->widget(FindProducstWidgets::className(), ['placeholder' => 'ID товара'])->label(false); ?>
         </div>
         <div class="col-sm-1">
-            <?= $form->field($item, '[' . $i . ']need_delete')->checkbox(); ?>
+            <label class="skip-icon">
+                <?= Html::activeCheckbox($item, '[' . $i . ']need_delete', [
+                    'label' => false,
+                ]); ?>
+                <i class="far fa-times-circle"></i>
+            </label>
         </div>
     </div>
     <?php $iter++; ?>
@@ -53,7 +62,12 @@ $model = new \app\modules\order\models\entity\OrdersItems();
             <?= $form->field($model, '[' . $j . ']product_id')->widget(FindProducstWidgets::className())->label(false); ?>
         </div>
         <div class="col-sm-1">
-            <?= $form->field($model, '[' . $j . ']need_delete')->checkbox(); ?>
+            <label class="skip-icon">
+                <?= Html::activeCheckbox($model, '[' . $i . ']need_delete', [
+                    'label' => false,
+                ]); ?>
+                <i class="far fa-times-circle"></i>
+            </label>
         </div>
     </div>
 <?php endfor; ?>

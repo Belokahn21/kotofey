@@ -118,9 +118,9 @@ class RepeatForm extends React.Component {
                                     <div className="list-finds-data__value">{el.count}</div>
                                 </div>
                             </div>
-                            <label>
-                                <span>Пропустить</span>
+                            <label className="skip-icon">
                                 <input type="checkbox" name="skip"/>
+                                <i className="far fa-times-circle" />
                             </label>
                         </div>
                     })}

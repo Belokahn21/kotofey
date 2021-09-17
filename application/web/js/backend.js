@@ -6158,9 +6158,13 @@ var RepeatForm = /*#__PURE__*/function (_React$Component) {
           className: "list-finds-data__key"
         }, "\u041A\u043E\u043B-\u0432\u043E"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "list-finds-data__value"
-        }, el.count))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("span", null, "\u041F\u0440\u043E\u043F\u0443\u0441\u0442\u0438\u0442\u044C"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        }, el.count))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
+          className: "skip-icon"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
           type: "checkbox",
           name: "skip"
+        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
+          className: "far fa-times-circle"
         })));
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",

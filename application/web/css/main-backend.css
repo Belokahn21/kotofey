@@ -8198,10 +8198,6 @@ html, body {
         font-size: 20px;
         text-align: center; } }
 
-.order-item-skip {
-  font-size: 12px;
-  font-weight: bold; }
-
 #backendFormsContent {
   padding: 10px; }
 
@@ -9405,6 +9401,31 @@ html, body {
     .repeat-order-form-submit:hover {
       background-color: #00BFFF;
       color: white; }
+
+.skip-icon {
+  border-radius: 50%;
+  transition: all 200ms;
+  line-height: 1;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  margin: auto;
+  width: 40px;
+  height: 40px; }
+  .skip-icon:hover {
+    border-color: #25D366; }
+    .skip-icon:hover i {
+      color: #25D366; }
+  .skip-icon input, .skip-icon .form-control {
+    display: none; }
+  .skip-icon i {
+    transition: all 200ms; }
+  .skip-icon input:checked ~ i {
+    color: #25D366; }
 
 /*-----------------------------------------------------------*/
 .content {

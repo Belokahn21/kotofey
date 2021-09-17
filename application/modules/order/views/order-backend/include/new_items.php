@@ -1,6 +1,9 @@
 <?php
-/* @var $itemsModel \app\modules\order\models\entity\OrdersItems */
+/* @var $itemsModel \app\modules\order\models\entity\OrdersItems
+ * @var $form \yii\widgets\ActiveForm
+ */
 
+use yii\helpers\Html;
 use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
 
 ?>
@@ -24,8 +27,13 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
         <div class="col-sm-1">
             <?= $form->field($itemsModel, '[' . $i . ']product_id')->widget(FindProducstWidgets::className(), ['placeholder' => 'ID товара'])->label(false); ?>
         </div>
-        <div class="col-sm-1 order-item-skip">
-            <?= $form->field($itemsModel, '[' . $i . ']need_delete')->checkbox(); ?>
+        <div class="col-sm-1">
+            <label class="skip-icon">
+                <?= Html::activeCheckbox($itemsModel, '[' . $i . ']need_delete', [
+                    'label' => false,
+                ]); ?>
+                <i class="far fa-times-circle"></i>
+            </label>
         </div>
     </div>
 <?php endfor; ?>
