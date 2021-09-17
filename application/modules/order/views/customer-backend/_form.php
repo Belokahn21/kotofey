@@ -38,7 +38,7 @@ use app\modules\order\models\entity\CustomerPropertiesValues;
                 <?= $form->field($model, 'description')->textarea(); ?>
             </div>
             <div class="col-12 col-sm-3">
-                <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map($customer_status, 'id', 'name')); ?>
+                <?= $form->field($model, 'status_id')->dropDownList(ArrayHelper::map($customer_status, 'id', 'name'), ['prompt' => 'Статус клиента']); ?>
             </div>
             <div class="col-12 col-sm-3">
             </div>
