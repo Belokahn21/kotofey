@@ -112,13 +112,13 @@ class RestController extends ActiveController
 //            ];
 //        }
 
-        /* @var $basketItem BasketItem */
+        /* @var $basketItem OrdersItems */
         foreach ($this->modelClass::findAll() as $basketItem) {
             $data[] = [
                 'id' => $basketItem->product->id,
                 'name' => $basketItem->product->name,
                 'price' => $basketItem->product->getDiscountPrice() ?: $basketItem->product->getPrice(),
-                'count' => $basketItem->getCount(),
+                'count' => $basketItem->count,
                 'article' => $basketItem->product->article,
                 'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
                 'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
