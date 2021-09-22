@@ -3,6 +3,7 @@
 namespace app\modules\basket\controllers;
 
 use app\modules\basket\models\entity\Basket;
+use app\modules\basket\models\entity\BasketItem;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrdersItems;
@@ -111,11 +112,12 @@ class RestController extends ActiveController
 //            ];
 //        }
 
+        /* @var $basketItem OrdersItems */
         foreach ($this->modelClass::findAll() as $basketItem) {
             $data[] = [
                 'id' => $basketItem->product->id,
                 'name' => $basketItem->product->name,
-                'price' => $basketItem->product->price,
+                'price' => $basketItem->product->getDiscountPrice() ?: $basketItem->product->getPrice(),
                 'count' => $basketItem->count,
                 'article' => $basketItem->product->article,
                 'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
