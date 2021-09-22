@@ -58,7 +58,7 @@ class Pets extends \yii\db\ActiveRecord
             [['user_id'], 'default', 'value' => Yii::$app->user->identity->id],
             [['status_id'], 'default', 'value' => self::STATUS_OFF],
 
-            [['user_id', 'name', 'animal_id','birthday'], 'required','message' => '{attribute} нужно указать'],
+            [['user_id', 'name', 'animal_id', 'birthday'], 'required', 'message' => '{attribute} нужно указать'],
 
             [['user_id', 'animal_id', 'created_at', 'updated_at', 'sex_id'], 'integer'],
 
@@ -87,5 +87,12 @@ class Pets extends \yii\db\ActiveRecord
     public function hasOwner()
     {
         return Yii::$app->user->id === $this->user_id;
+    }
+
+    public function afterValidate()
+    {
+        parent::afterValidate();
+
+        $this->birthday = date('Y-m-d', strtotime($this->birthday));
     }
 }

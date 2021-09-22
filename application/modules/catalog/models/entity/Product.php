@@ -7,7 +7,6 @@ use app\modules\catalog\models\behaviors\ElasticSearchBehavior;
 use app\modules\catalog\models\behaviors\PriceHistoryBehavior;
 use app\modules\catalog\models\behaviors\SocialStore;
 use app\modules\catalog\models\helpers\CompositionProductHelper;
-use app\modules\catalog\models\helpers\PriceHelper;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\ProductPriceHelper;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
@@ -16,6 +15,7 @@ use app\modules\catalog\models\helpers\ProductToBreadHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
+use app\modules\pets\models\entity\Pets;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\reviews\models\entity\Reviews;
 use app\modules\site\models\behaviors\UserEntityBehavior;
@@ -348,7 +348,7 @@ class Product extends \yii\db\ActiveRecord
 
     public function getDiscountPrice()
     {
-
+        $hasDiscount = false;
         $action = \Yii::$app->cache->getOrSet('PromotionProductMechanics-' . $this->id, function () {
             return PromotionProductMechanics::find()->where(['product_id' => $this->id])->joinWith('promotion')->andWhere([
                 'or',
@@ -364,7 +364,18 @@ class Product extends \yii\db\ActiveRecord
         });
 
 
-        if ($action) $this->discount_price = round($this->price - ($this->price * ($action->amount / 100)));
+        if ($action) {
+            $hasDiscount = true;
+            $this->discount_price = round($this->price - ($this->price * ($action->amount / 100)));
+        }
+
+        $pet_bithday = Pets::find()->where('month(`birthday`)=:m and day(`birthday`)=:d')
+            ->addParams([
+                ':m' => date('n'),
+                ':d' => date('d'),
+            ])
+            ->one();
+        if ($pet_bithday && !$hasDiscount) ProductHelper::setDiscount($this, 5);
 
         return $this->discount_price;
     }
