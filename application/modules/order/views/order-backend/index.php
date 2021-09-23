@@ -1,13 +1,14 @@
 <?php
 
-use yii\widgets\ActiveForm;
 use yii\helpers\Html;
-use app\modules\seo\models\tools\Title;
-use yii\grid\GridView;
 use yii\helpers\Url;
+use yii\grid\GridView;
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use app\modules\seo\models\tools\Title;
+use app\modules\order\models\entity\Customer;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\GroupBuy\GroupBuyWidget;
-use yii\helpers\ArrayHelper;
 use app\modules\order\models\entity\OrderStatus;
 
 /* @var $users \app\modules\user\models\entity\User[]
@@ -68,6 +69,7 @@ $this->title = Title::show("Заказы");
         [
             'attribute' => 'phone',
             'format' => 'raw',
+            'filter' => ArrayHelper::map(Customer::find()->all(), 'phone', 'name'),
             'value' => function ($model) {
                 if ($model->phone) {
                     return Html::a($model->phone, 'tel:' . $model->phone, ['class' => 'js-phone-mask']);
