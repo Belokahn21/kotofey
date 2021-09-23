@@ -3,22 +3,25 @@
 namespace app\modules\catalog\models\helpers;
 
 use app\modules\catalog\models\entity\ProductCategory;
+use app\modules\media\models\helpers\MediaHelper;
 use app\modules\site\models\tools\Debug;
 use yii\caching\DbDependency;
+use yii\helpers\Url;
 
 class ProductCategoryHelper
 {
     private $formated_items;
-    private $subsections;
-    private $under_sections;
 
     public static function getDetailUrl(ProductCategory $model)
     {
         return "/catalog/" . $model->slug . "/";
     }
 
-    public static function getImageUrl(ProductCategory $model)
+    public static function getImageUrl(ProductCategory $model, $isFull = false)
     {
+        if ($isFull) {
+            return Url::base(true) . "/upload/" . $model->image;
+        }
         return "/upload/" . $model->image;
     }
 

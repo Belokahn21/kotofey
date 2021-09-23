@@ -17,7 +17,7 @@ class ProductCategorySearchForm extends ProductCategory
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            [['id', 'parent_category_id'], 'integer'],
             [['name'], 'string'],
         ];
     }
@@ -40,7 +40,8 @@ class ProductCategorySearchForm extends ProductCategory
         }
 
         $query->andFilterWhere(['like', 'id', $this->id])
-            ->andFilterWhere(['like', 'name', $this->name]);
+            ->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['parent_category_id' => $this->parent_category_id]);
 
         return $dataProvider;
     }

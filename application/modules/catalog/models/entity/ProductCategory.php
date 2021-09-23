@@ -2,6 +2,7 @@
 
 namespace app\modules\catalog\models\entity;
 
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\site\models\tools\Debug;
 use mohorev\file\UploadBehavior;
 use yii\behaviors\SluggableBehavior;
@@ -57,9 +58,9 @@ class ProductCategory extends ActiveRecord
         return [
             [['name'], 'required', 'message' => '{attribute} должно быть заполнено'],
 
-            [['parent_category_id', 'seo_keywords', 'seo_description', 'description', 'seo_title'], 'string'],
+            [['seo_keywords', 'seo_description', 'description', 'seo_title'], 'string'],
 
-            ['sort', 'integer'],
+            [['sort', 'parent_category_id'], 'integer'],
 
             ['parent_category_id', 'default', 'value' => '0'],
 
@@ -94,5 +95,17 @@ class ProductCategory extends ActiveRecord
     public function getParent()
     {
         return $this->hasOne(ProductCategory::className(), ['id' => 'parent_category_id']);
+    }
+
+    public function extraFields()
+    {
+        return [
+            'image' => function ($model) {
+                return ProductCategoryHelper::getImageUrl($model, true);
+            },
+            'url' => function ($model) {
+                return ProductCategoryHelper::getDetailUrl($model);
+            },
+        ];
     }
 }

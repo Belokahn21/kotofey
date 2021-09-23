@@ -3,6 +3,7 @@
 namespace app\modules\content\models\entity;
 
 use app\modules\content\models\behaviors\DateToIntBehaviors;
+use app\modules\content\models\helpers\SlidersImagesHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
 use yii\behaviors\TimestampBehavior;
@@ -80,5 +81,14 @@ class SlidersImages extends ActiveRecord
     public function getMedia()
     {
         return $this->hasOne(Media::className(), ['id' => 'media_id']);
+    }
+
+    public function extraFields()
+    {
+        return [
+            'href' => function ($model) {
+                return SlidersImagesHelper::getImageUrl($this);
+            }
+        ];
     }
 }
