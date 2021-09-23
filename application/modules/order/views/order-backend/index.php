@@ -7,9 +7,10 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
 use app\modules\order\models\entity\Customer;
+use app\modules\order\models\entity\OrderStatus;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\widgets\GroupBuy\GroupBuyWidget;
-use app\modules\order\models\entity\OrderStatus;
+use app\modules\site\widgets\AdminMenu\AdminMenuWidget;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -22,13 +23,20 @@ use app\modules\order\models\entity\OrderStatus;
 
 $this->title = Title::show("Заказы");
 ?>
-    <div class="title-group">
-        <h1>Заказы</h1>
-        <?= GroupBuyWidget::widget(); ?>
-        <div class="repeat-order-react"></div>
-        <?= Html::a('Выгрузка Email', Url::to(['order-backend/export']), ['class' => 'btn-main', 'target' => '_blank']); ?>
-        <?= Html::a('Карточки клиентов', Url::to(['customer-backend/index']), ['class' => 'btn-main', 'target' => '_blank']); ?>
-    </div>
+
+<?php /*
+<?= GroupBuyWidget::widget(); ?>
+    <div class="repeat-order-react"></div>
+ */ ?>
+
+<?= AdminMenuWidget::widget([
+    'title' => 'Заказы',
+    'links' => [
+        ['title' => 'Выгрузка Email', 'url' => Url::to(['order-backend/export'])],
+        ['title' => 'Карточки клиентов', 'url' => Url::to(['customer-backend/index'])],
+    ]
+]); ?>
+
 <?php $form = ActiveForm::begin() ?>
 <?= $this->render('_form', [
     'dateDelivery' => $dateDelivery,

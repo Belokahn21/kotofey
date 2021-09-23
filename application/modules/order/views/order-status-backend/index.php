@@ -1,26 +1,28 @@
 <?php
 
-use app\modules\seo\models\tools\Title;
-use yii\widgets\ActiveForm;
+use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use yii\helpers\ArrayHelper;
-use yii\helpers\Url;
+use yii\widgets\ActiveForm;
+use app\modules\seo\models\tools\Title;
+use app\modules\site\widgets\AdminMenu\AdminMenuWidget;
 
 /* @var $model \app\modules\order\models\entity\OrderStatus */
 /* @var $this \yii\web\View */
 ?>
 <?php $this->title = Title::show("Статусы заказа"); ?>
-<section>
-    <h1 class="title">Статусы заказа</h1>
-    <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
-    <?= $this->render('_form', [
-        'model' => $model,
-        'form' => $form
-    ]) ?>
-    <?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
-    <?php ActiveForm::end(); ?>
-</section>
+
+<?= AdminMenuWidget::widget([
+    'title' => 'Статусы заказа',
+]); ?>
+
+<?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
+<?= $this->render('_form', [
+    'model' => $model,
+    'form' => $form
+]) ?>
+<?= Html::submitButton('Добавить', ['class' => 'btn-main']); ?>
+<?php ActiveForm::end(); ?>
 <h2 class="title">Список статусов</h2>
 <?= GridView::widget([
     'dataProvider' => $dataProvider,
