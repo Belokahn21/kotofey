@@ -412,7 +412,7 @@ class Product extends \yii\db\ActiveRecord
                 return Url::to(['/admin/catalog/product-backend/update', 'id' => $model->id]);
             },
             'imageUrl' => function ($model) {
-                return ProductHelper::getImageUrl($model);
+                return ProductHelper::getImageUrl($model, true);
             },
             'weight' => function ($model) {
                 try {
