@@ -72,6 +72,7 @@ class ProductCategory extends ActiveRecord
     {
         return [
             'name' => 'Название',
+            'slug' => 'Символьный код',
             'description' => 'Описание',
             'sort' => 'Сортировка',
             'parent_category_id' => 'Родительский раздел',
