@@ -21,7 +21,7 @@ class ProductSearchForm extends Product
     {
         return [
             [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
-            [['name', 'article', 'code', 'mixed_value'], 'string'],
+            [['name', 'article', 'code', 'mixed_value', 'slug'], 'string'],
         ];
     }
 
@@ -51,6 +51,7 @@ class ProductSearchForm extends Product
                 'status_id' => $this->status_id,
                 'article' => $this->article,
                 'code' => $this->code,
+                'slug' => $this->slug,
                 'count' => $this->count,
                 'price' => $this->price,
                 'purchase' => $this->purchase,
