@@ -23,7 +23,7 @@ class ProductSearchForm extends Product
     public function rules()
     {
         return [
-//            ['ar_id', 'each', 'rule' => ['integer']],
+            ['ar_id', 'each', 'rule' => ['integer']],
             [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
             [['name', 'article', 'code', 'mixed_value', 'slug_'], 'string'],
         ];
