@@ -21,7 +21,7 @@ class ProductSearchForm extends Product
     public function rules()
     {
         return [
-            ['ar_id', 'string'],
+            ['ar_id', 'each', 'rule' => ['string']],
 
             [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
 
@@ -52,7 +52,7 @@ class ProductSearchForm extends Product
             $this->applySpecialFilter($query);
         } else {
             $query->andFilterWhere([
-                'id' => $this->ar_id ? explode(',', $this->ar_id) : $this->id,
+                'id' => $this->ar_id ? explode(',', $this->ar_id[0]) : $this->id,
                 'category_id' => $this->category_id,
                 'status_id' => $this->status_id,
                 'article' => $this->article,
