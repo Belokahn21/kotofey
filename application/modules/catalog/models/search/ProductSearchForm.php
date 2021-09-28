@@ -10,7 +10,6 @@ use yii\db\ActiveQuery;
 
 class ProductSearchForm extends Product
 {
-    public $ar_id;
     public $mixed_value;
 
     public static function tableName()
@@ -21,12 +20,9 @@ class ProductSearchForm extends Product
     public function rules()
     {
         return [
-            ['ar_id', 'each', 'rule' => ['string']],
-
-            [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
-
+            ['id', 'each', 'rule' => ['integer']],
+            [['count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
             [['name', 'article', 'code', 'mixed_value', 'slug'], 'string'],
-
         ];
     }
 
@@ -52,7 +48,7 @@ class ProductSearchForm extends Product
             $this->applySpecialFilter($query);
         } else {
             $query->andFilterWhere([
-                'id' => $this->ar_id ? explode(',', $this->ar_id[0]) : $this->id,
+                'id' => $this->id,
                 'category_id' => $this->category_id,
                 'status_id' => $this->status_id,
                 'article' => $this->article,
