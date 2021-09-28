@@ -4,6 +4,7 @@ namespace app\modules\catalog\models\search;
 
 
 use app\modules\catalog\models\entity\Product;
+use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use yii\db\ActiveQuery;
@@ -11,6 +12,7 @@ use yii\db\ActiveQuery;
 class ProductSearchForm extends Product
 {
     public $mixed_value;
+    public $slug_;
     public $ar_id;
 
     public static function tableName()
@@ -21,9 +23,9 @@ class ProductSearchForm extends Product
     public function rules()
     {
         return [
-            ['ar_id', 'each', 'rule' => ['integer']],
+//            ['ar_id', 'each', 'rule' => ['integer']],
             [['id', 'count', 'price', 'purchase', 'category_id', 'prop_sales', 'status_id', 'vendor_id'], 'integer'],
-            [['name', 'article', 'code', 'mixed_value', 'slug'], 'string'],
+            [['name', 'article', 'code', 'mixed_value', 'slug_'], 'string'],
         ];
     }
 
@@ -44,7 +46,6 @@ class ProductSearchForm extends Product
             return $dataProvider;
         }
 
-
         if (!empty($this->mixed_value)) {
             $this->applySpecialFilter($query);
         } else {
@@ -54,7 +55,7 @@ class ProductSearchForm extends Product
                 'status_id' => $this->status_id,
                 'article' => $this->article,
                 'code' => $this->code,
-                'slug' => $this->slug,
+                'slug' => $this->slug_,
                 'count' => $this->count,
                 'price' => $this->price,
                 'purchase' => $this->purchase,
@@ -63,6 +64,7 @@ class ProductSearchForm extends Product
 
             if (!empty($this->name)) {
                 foreach (explode(' ', $this->name) as $text_line) {
+
                     $query->andFilterWhere([
                         'or',
                         ['like', 'name', $text_line],
