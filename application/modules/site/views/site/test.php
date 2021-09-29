@@ -1,16 +1,9 @@
-<?php
-//$order = \app\modules\order\models\entity\Order::findOne(798);
-//$order = \app\modules\order\models\entity\Order::findOne(802);
-//
-//$ns = new \app\modules\order\models\service\NotifyService();
-//$ns->notifyOrderComplete($order);
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-use app\modules\pets\models\entity\Pets;
-
-foreach (Pets::find()->all() as $pet) {
-    $pet->birthday = date('Y-m-d', strtotime($pet->birthday));
-
-    if ($pet->validate() && $pet->update() !== false) {
-        echo $pet->name . PHP_EOL;
-    }
-}
+<script>
+    grecaptcha.execute('6LdFXZccAAAAAD6iFvTtCDkzZVLnqwaQnEwcFtnY').then(
+        function (token) {
+            console.log(token);
+        }
+    );
+</script>
