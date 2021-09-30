@@ -5511,14 +5511,24 @@ var BuyOneClick = /*#__PURE__*/function (_React$Component) {
         placeholder: "\u0412\u0430\u0448 \u044D\u043B\u0435\u043A\u0442\u0440\u043E\u043D\u043D\u044B\u0439 \u0430\u0434\u0440\u0435\u0441"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "checkout-form__input",
-        name: "OrdersItems[product_id]",
+        name: "OrdersItems[".concat(product.id, "][product_id]"),
         type: "hidden",
         value: product.id
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
         className: "checkout-form__input",
-        name: "OrdersItems[count]",
+        name: "OrdersItems[".concat(product.id, "][count]"),
         type: "hidden",
         value: "1"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "checkout-form__input",
+        name: "OrdersItems[".concat(product.id, "][name]"),
+        type: "hidden",
+        value: product.name
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
+        className: "checkout-form__input",
+        name: "OrdersItems[".concat(product.id, "][price]"),
+        type: "hidden",
+        value: product.price
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
         alt: product.name,
         title: product.name,
