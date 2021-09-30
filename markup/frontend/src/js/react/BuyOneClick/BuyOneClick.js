@@ -70,8 +70,10 @@ class BuyOneClick extends React.Component {
                 <input className="checkout-form__input" name="Order[email]" type="text" placeholder='Ваш электронный адрес'/>
             </label>
 
-            <input className="checkout-form__input" name="OrdersItems[product_id]" type="hidden" value={product.id}/>
-            <input className="checkout-form__input" name="OrdersItems[count]" type="hidden" value="1"/>
+            <input className="checkout-form__input" name={`OrdersItems[${product.id}][product_id]`} type="hidden" value={product.id}/>
+            <input className="checkout-form__input" name={`OrdersItems[${product.id}][count]`} type="hidden" value="1"/>
+            <input className="checkout-form__input" name={`OrdersItems[${product.id}][name]`} type="hidden" value={product.name}/>
+            <input className="checkout-form__input" name={`OrdersItems[${product.id}][price]`} type="hidden" value={product.price}/>
 
             <img alt={product.name} title={product.name} className="buy-one-click__image" src={product.imageUrl}/>
 
