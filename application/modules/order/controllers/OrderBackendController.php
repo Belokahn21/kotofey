@@ -5,6 +5,7 @@ namespace app\modules\order\controllers;
 use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\OrderTracking;
+use app\modules\order\models\helpers\OrdersItemsHelpers;
 use app\modules\order\models\service\NotifyService;
 use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\acquiring\banks\Sberbank;
@@ -72,31 +73,13 @@ class OrderBackendController extends MainBackendController
                     }
                 }
 
-                $count = count(Yii::$app->request->post('OrdersItems', []));
 
-                $items = [new OrdersItems()];
-
-                for ($i = 1; $i < $count; $i++) {
-                    $items[] = new OrdersItems();
+                $item_saver = new OrdersItemsHelpers();
+                $save_result = $item_saver->loadItemsAndSave($model->id);
+                if ($save_result !== true) {
+                    $transaction->rollBack();
+                    return $this->refresh();
                 }
-
-                if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
-
-                    foreach ($items as $item) {
-
-                        if (OrderHelper::isEmptyItem($item)) continue;
-
-                        $item->order_id = $model->id;
-                        if ($item->validate()) {
-                            if (!$item->save()) {
-                                $transaction->rollBack();
-                                return $this->refresh();
-                            }
-                        }
-                    }
-
-                }
-
 
                 if ($dateDelivery->load(Yii::$app->request->post())) {
                     $dateDelivery->order_id = $model->id;
@@ -163,31 +146,11 @@ class OrderBackendController extends MainBackendController
 
                 OrdersItems::deleteAll(['order_id' => $model->id]);
 
-                $count = count(Yii::$app->request->post('OrdersItems', []));
-
-                $items = [new OrdersItems()];
-
-                for ($i = 1; $i < $count; $i++) {
-                    $items[] = new OrdersItems();
-                }
-
-                if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
-
-                    foreach ($items as $item) {
-
-                        if (!empty($item->need_delete)) continue;
-
-                        if (OrderHelper::isEmptyItem($item)) continue;
-
-                        $item->order_id = $model->id;
-                        if ($item->validate()) {
-                            if (!$item->save()) {
-                                $transaction->rollBack();
-                                return $this->refresh();
-                            }
-                        }
-                    }
-
+                $item_saver = new OrdersItemsHelpers();
+                $save_result = $item_saver->loadItemsAndSave($model->id);
+                if ($save_result !== true) {
+                    $transaction->rollBack();
+                    return $this->refresh();
                 }
 
                 if ($dateDelivery->isNewRecord) {

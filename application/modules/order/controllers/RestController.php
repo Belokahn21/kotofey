@@ -2,10 +2,12 @@
 
 namespace app\modules\order\controllers;
 
+use app\modules\basket\models\entity\Basket;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\order\models\helpers\OrdersItemsHelpers;
 use app\modules\order\models\service\NotifyService;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\PriceTool;
@@ -48,8 +50,6 @@ class RestController extends ActiveController
     public function actionCreate()
     {
         $order = new $this->modelClass(['scenario' => Order::SCENARIO_CLIENT_BUY]);
-        $orderDate = new OrderDate();
-        $billing = new UserBilling();
         $items = new OrdersItems();
         $response = [
             'status' => 200,
@@ -73,19 +73,24 @@ class RestController extends ActiveController
             return $response;
         }
 
-        $items->order_id = $order->id;
-        if (!$items->saveItems()) {
-            $response['status'] = 530;
-            $response['errors'] = $items->getErrors();
-            return $response;
+        //bad code
+        // todo: need refactor
+        if (Basket::findAll()) {
+            $items->order_id = $order->id;
+            if (!$items->saveItems()) {
+                $response['status'] = 530;
+                $response['errors'] = $items->getErrors();
+                return $response;
+            }
+        } else {
+            $item_saver = new OrdersItemsHelpers();
+            $item_saver->loadItemsAndSave($order->id);
+            if ($item_saver !== true) {
+                $response['status'] = 530;
+                $response['errors'] = $item_saver->getErrors();
+                return $response;
+            }
         }
-
-//        if (!$billing->load(\Yii::$app->request->post()) || !$billing->validate()) {
-//            $response['status'] = 530;
-//            $response['errors'] = $billing->getErrors();
-//            return $response;
-//        }
-
 
         $ns = new NotifyService();
         $ns->sendClientNotify(Order::findOne($order->id));

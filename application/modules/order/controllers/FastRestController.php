@@ -2,6 +2,7 @@
 
 namespace app\modules\order\controllers;
 
+use app\modules\order\models\helpers\OrdersItemsHelpers;
 use Yii;
 use yii\filters\Cors;
 use yii\rest\Controller;
@@ -50,26 +51,12 @@ class FastRestController extends Controller
             return $response;
         }
 
-        $count = count(Yii::$app->request->post('OrdersItems', []));
-
-        $items = [new OrdersItems()];
-        for ($i = 1; $i < $count; $i++) {
-            $items[] = new OrdersItems();
-        }
-
-        if (OrdersItems::loadMultiple($items, Yii::$app->request->post())) {
-            foreach ($items as $item) {
-
-                if (OrderHelper::isEmptyItem($item)) continue;
-
-                $item->order_id = $order->id;
-                if (!$item->validate() || !$item->save()) {
-                    $response['status'] = 510;
-                    $response['errors'] = $item->getErrors();
-                    return $response;
-                }
-            }
-
+        $item_saver = new OrdersItemsHelpers();
+        $save_result = $item_saver->loadItemsAndSave($order->id);
+        if ($save_result !== true) {
+            $response['status'] = 510;
+            $response['errors'] = $save_result->getErrors();
+            return $response;
         }
 
         $response['data']['order'] = [
