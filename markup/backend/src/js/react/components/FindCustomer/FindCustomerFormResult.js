@@ -8,21 +8,17 @@ class FindCustomerFormResult extends React.Component {
     }
 
 
-
     render() {
-        const {customer} = this.props;
-        if (!Array.isArray(customer)) {
-            return (
-                <div className="list-finds">
-                    <div className="list-finds__item">
-                        <a href="#" className="list-finds__link">{customer.phone} / {customer.name}</a>
-                        <button className="list-finds__setup" type="button" onClick={this.props.handleSelectCustomer.bind(this, customer)}>Выбрать</button>
-                    </div>
+        const {customers} = this.props;
+        return customers.map((customer, index) => {
+            return <div key={index} className="list-finds">
+                <div className="list-finds__item">
+                    <a href="#" className="list-finds__link">{customer.phone} / {customer.name}</a>
+                    <button className="list-finds__setup" type="button" onClick={this.props.handleSelectCustomer.bind(this, customer)}>Выбрать</button>
                 </div>
-            );
-        } else {
-            return <></>
-        }
+            </div>;
+        });
+
     }
 }
 

@@ -8,6 +8,8 @@ use yii\data\ActiveDataProvider;
 
 class CustomerSearchForm extends Customer
 {
+    public $mixed;
+
     public static function tableName()
     {
         return Customer::tableName();
@@ -16,7 +18,8 @@ class CustomerSearchForm extends Customer
     public function rules()
     {
         return [
-            [['id'], 'integer'],
+            ['mixed', 'safe'],
+            [['phone'], 'integer'],
         ];
     }
 
@@ -38,7 +41,15 @@ class CustomerSearchForm extends Customer
             return $dataProvider;
         }
 
-        $query->andFilterWhere(['id' => $this->id]);
+        if ($this->mixed) {
+            if (is_numeric($this->mixed)) {
+                $query->andFilterWhere(['phone' => $this->mixed]);
+            } else {
+                $query->andFilterWhere(['like', 'name', $this->mixed]);
+            }
+        } else {
+            $query->andFilterWhere(['phone' => $this->phone]);
+        }
 
         return $dataProvider;
     }

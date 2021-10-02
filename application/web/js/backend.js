@@ -3706,7 +3706,7 @@ var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
       var input = event.target;
       if (this.timerEx) clearTimeout(this.timerEx);
       this.timerEx = setTimeout(function () {
-        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.one((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer), input.value, '?expand=cross').then(function (data) {
+        _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_1__.default.all("".concat((_config__WEBPACK_IMPORTED_MODULE_2___default().restOrderCustomer), "?CustomerSearchForm[mixed]=").concat(input.value, "&expand=cross")).then(function (data) {
           _this2.setState({
             customer: data
           });
@@ -3725,7 +3725,7 @@ var FindCustomerForm = /*#__PURE__*/function (_React$Component) {
         placeholder: "\u0422\u0435\u043B\u0435\u0444\u043E\u043D \u043A\u043B\u0438\u0435\u043D\u0442\u0430 \u0432 \u0444\u043E\u0440\u043C\u0430\u0442\u0435 8\u0445\u0445\u0445\u0445\u0445\u0445\u0445\u0445"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_FindCustomerFormResult__WEBPACK_IMPORTED_MODULE_3__.default, {
         handleSelectCustomer: this.props.handleSelectCustomer,
-        customer: customer
+        customers: customer
       }));
     }
   }]);
@@ -3791,10 +3791,12 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
   _createClass(FindCustomerFormResult, [{
     key: "render",
     value: function render() {
-      var customer = this.props.customer;
+      var _this2 = this;
 
-      if (!Array.isArray(customer)) {
+      var customers = this.props.customers;
+      return customers.map(function (customer, index) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+          key: index,
           className: "list-finds"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
           className: "list-finds__item"
@@ -3804,11 +3806,9 @@ var FindCustomerFormResult = /*#__PURE__*/function (_React$Component) {
         }, customer.phone, " / ", customer.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
           className: "list-finds__setup",
           type: "button",
-          onClick: this.props.handleSelectCustomer.bind(this, customer)
+          onClick: _this2.props.handleSelectCustomer.bind(_this2, customer)
         }, "\u0412\u044B\u0431\u0440\u0430\u0442\u044C")));
-      } else {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, null);
-      }
+      });
     }
   }]);
 
@@ -6004,6 +6004,13 @@ var RepeatForm = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmitForm",
     value: function handleSubmitForm(e) {
       e.preventDefault();
+      var body = new FormData();
+      body.append('order_id', this.props.order.id);
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_3__.default.post(_frontend_src_js_config__WEBPACK_IMPORTED_MODULE_4__.default.restOrderRepeat, {
+        body: body
+      }).then(function (data) {
+        console.log(data);
+      });
     }
   }, {
     key: "componentDidMount",
@@ -6122,51 +6129,7 @@ var RepeatForm = /*#__PURE__*/function (_React$Component) {
           selected: order.payment_id === el.id,
           defaultValue: el.id
         }, el.name);
-      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-        className: "list-finds"
-      }, order.items.map(function (el, index) {
-        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds__item",
-          key: index
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-          href: el.imageUrl,
-          "data-lightbox": "roadtrip"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("img", {
-          src: el.imageUrl,
-          className: "list-finds__image"
-        })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("a", {
-          href: el.backendHref,
-          target: "_blank",
-          className: "list-finds__link"
-        }, el.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__key"
-        }, "\u0426\u0435\u043D\u0430"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__value"
-        }, _frontend_src_js_tools_Price__WEBPACK_IMPORTED_MODULE_1__.default.format(el.price))), !el.discount_price ? '' : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__key"
-        }, "\u0421\u043E \u0441\u043A\u0438\u0434\u043A\u043E\u0439"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__value"
-        }, _frontend_src_js_tools_Price__WEBPACK_IMPORTED_MODULE_1__.default.format(el.discount_price))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__row"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__key"
-        }, "\u041A\u043E\u043B-\u0432\u043E"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
-          className: "list-finds-data__value"
-        }, el.count))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("label", {
-          className: "skip-icon"
-        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("input", {
-          type: "checkbox",
-          name: "skip"
-        }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("i", {
-          className: "far fa-times-circle"
-        })));
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
+      }))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("button", {
         type: "submit",
         className: "repeat-order-form-submit"
       }, "\u041E\u0442\u043F\u0440\u0430\u0432\u0438\u0442\u044C"));

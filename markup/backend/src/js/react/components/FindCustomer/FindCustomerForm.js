@@ -23,7 +23,7 @@ class FindCustomerForm extends React.Component {
         let input = event.target;
         if (this.timerEx) clearTimeout(this.timerEx);
         this.timerEx = setTimeout(() => {
-            RestRequest.one(config.restOrderCustomer, input.value, '?expand=cross').then(data => {
+            RestRequest.all(`${config.restOrderCustomer}?CustomerSearchForm[mixed]=${input.value}&expand=cross`).then(data => {
                 this.setState({customer: data})
             });
         }, this.timer);
@@ -31,13 +31,14 @@ class FindCustomerForm extends React.Component {
 
     render() {
         const {customer} = this.state;
+
         return (
             <>
                 <form className="form-finds">
                     <input className="form-finds__input clean-phone" onKeyUp={this.handleTypingText.bind(this)} placeholder="Телефон клиента в формате 8хххххххх"/>
                 </form>
 
-                <FindCustomerFormResult handleSelectCustomer={this.props.handleSelectCustomer} customer={customer}/>
+                <FindCustomerFormResult handleSelectCustomer={this.props.handleSelectCustomer} customers={customer}/>
             </>
         );
     }
