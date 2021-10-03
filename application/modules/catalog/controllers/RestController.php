@@ -16,16 +16,16 @@ class RestController extends ActiveController
     public $modelClass = 'app\modules\catalog\models\entity\Product';
     public $searchModelClass = 'app\modules\catalog\models\search\ProductSearchForm';
 
-    public function behaviors()
-    {
-        $behaviors = parent::behaviors();
-
-        $behaviors['corsFilter'] = [
-            'class' => \yii\filters\Cors::className(),
-        ];
-
-        return $behaviors;
-    }
+//    public function behaviors()
+//    {
+//        $behaviors = parent::behaviors();
+//
+//        $behaviors['corsFilter'] = [
+//            'class' => \yii\filters\Cors::className(),
+//        ];
+//
+//        return $behaviors;
+//    }
 
     public function actions()
     {
