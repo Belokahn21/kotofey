@@ -34,7 +34,7 @@ class Search extends Component {
                 let queryParam = '?ProductSearchForm[name]=';
                 RestRequest.all(config.restCatalog + queryParam + element.value + '&expand=href').then(result => {
                     this.setState({
-                        variants: result
+                        variants: result.items
                     });
                 });
             }, this.timeout)
