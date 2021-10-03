@@ -23,7 +23,7 @@ class BuyOneClick extends React.Component {
 
     loadProduct() {
         RestRequest.one(config.restCatalog, this.props.product_id, '?expand=imageUrl').then(data => {
-            this.setState({product: data.items});
+            this.setState({product: data});
         });
     }
 

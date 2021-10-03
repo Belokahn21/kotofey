@@ -35,7 +35,7 @@ class RepeatOrder extends React.Component {
         let products = [];
         this.state.order.items.map(el => {
             RestRequest.one(config.restCatalog, el.product_id, '?expand=imageUrl').then(data => {
-                products.push(data.items);
+                products.push(data);
             });
         });
 

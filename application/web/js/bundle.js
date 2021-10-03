@@ -5430,7 +5430,7 @@ var BuyOneClick = /*#__PURE__*/function (_React$Component) {
 
       _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_3__.default.restCatalog, this.props.product_id, '?expand=imageUrl').then(function (data) {
         _this2.setState({
-          product: data.items
+          product: data
         });
       });
     }
@@ -7270,7 +7270,7 @@ var RepeatOrder = /*#__PURE__*/function (_React$Component) {
       var products = [];
       this.state.order.items.map(function (el) {
         _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_3__.default.restCatalog, el.product_id, '?expand=imageUrl').then(function (data) {
-          products.push(data.items);
+          products.push(data);
         });
       });
       this.setState({
