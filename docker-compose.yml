@@ -1,12 +1,16 @@
 version: "3.9"
 services:
   db:
+    container_name: "mariadb"
     image: mariadb:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
     ports:
       - "3361:3306"
   fpm:
+    container_name: "php"
+    ports:
+    - "9000:9000"
     build:
       context: .
       dockerfile: docker/nginx/Dockerfile
@@ -15,12 +19,13 @@ services:
     volumes:
       - ./:/var/www/kotofey.store
   nginx:
+    container_name: "site"
     links:
       - fpm
     build:
       context: .
       dockerfile: docker/nginx/Dockerfile
     ports:
-      - "27015:80"
+      - "8099:80"
     volumes:
       - ./:/var/www/kotofey.store
