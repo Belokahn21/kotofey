@@ -18,7 +18,8 @@ class YmlController extends Controller
 
 
         $offers = \Yii::$app->cache->getOrSet('yml-offers-market', function () {
-            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE, 'vendor_id' => Vendor::VENDOR_ID_ROYAL])->all();
+            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE])->all();
+//            return Product::find()->where(['status_id' => Product::STATUS_ACTIVE, 'vendor_id' => Vendor::VENDOR_ID_ROYAL])->all();
         });
 
         $categories = \Yii::$app->cache->getOrSet('yml-categories-market', function () {
