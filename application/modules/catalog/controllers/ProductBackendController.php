@@ -7,6 +7,7 @@ use app\modules\catalog\models\entity\Price;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\pets\models\entity\Animal;
 use app\modules\pets\models\entity\Breed;
 use app\modules\stock\models\entity\Stocks;
@@ -186,13 +187,19 @@ class ProductBackendController extends MainBackendController
             }
         }
 
-        $models = $this->modelClass::find()
-            ->where("`price`=`purchase`")
-            ->orWhere('round((price / purchase) * 100 - 100) < :markup', [
-                ':markup' => Yii::$app->request->get('markup', 15)
-            ]);
-
+        $models = $this->modelClass::find();
         $models = $models->all();
+
+        $_bad_models = [];
+        foreach ($models as $model) {
+            $brand = PropertiesHelper::extractPropertyById($model, 1);
+
+            if (!$brand) {
+                $_bad_models[] = $model;
+            }
+        }
+
+        $models = $_bad_models;
 
 
         return $this->render('price-repair', [

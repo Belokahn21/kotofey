@@ -77,6 +77,9 @@ elastic-index:
 docker:
 	docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.13.3
 
+docker-run:
+	docker-compose build && docker-compose up -d
+
 migrate:
 	cd application && php yii migrate --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/user/install/migrations --interactive=0

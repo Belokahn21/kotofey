@@ -40,9 +40,12 @@ class PropertiesHelper
      */
     public static function extractPropertyById(Product $model, $property_id)
     {
-        foreach ($model->propsValues as $value) if ($value->property_id === $property_id) return $value;
+        return \Yii::$app->cache->getOrSet(__METHOD__ . $model->id . $property_id, function () use ($model, $property_id) {
 
-        return false;
+            foreach ($model->propsValues as $value) if ($value->property_id === $property_id) return $value;
+
+            return false;
+        });
     }
 
     /**
