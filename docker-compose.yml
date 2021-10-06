@@ -10,6 +10,7 @@ services:
       - ./docker/nginx/config:/etc/nginx/conf.d:ro
 
   php-fpm:
+    working_dir: "/var/www/kotofey.store"
     build:
       context: ./docker/php-fpm
     volumes:
