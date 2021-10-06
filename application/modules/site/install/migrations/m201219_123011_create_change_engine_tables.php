@@ -18,7 +18,7 @@ class m201219_123011_create_change_engine_tables extends Migration
         $this->execute('ALTER TABLE `product_market` ENGINE = InnoDB;');
         $this->execute('ALTER TABLE `product_order` ENGINE = InnoDB;');
         $this->execute('ALTER TABLE `product_reviews` ENGINE = InnoDB;');
-        $this->execute('ALTER TABLE `providers` ENGINE = InnoDB;');
+//        $this->execute('ALTER TABLE `providers` ENGINE = InnoDB;');
         $this->execute('ALTER TABLE `search_query` ENGINE = InnoDB;');
         $this->execute('ALTER TABLE `short_links` ENGINE = InnoDB;');
         $this->execute('ALTER TABLE `site_reviews` ENGINE = InnoDB;');
