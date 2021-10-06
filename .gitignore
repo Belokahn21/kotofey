@@ -54,3 +54,4 @@ inc
 debug*.*
 assets
 *.log
+db.php

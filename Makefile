@@ -42,7 +42,7 @@ pull:
 init-dev:
 	cp application/web/index.dev.php application/web/index.php
 	cp application/config/params.local.php application/config/params.php
-	cp application/config/main.db.local.php application/config/db.php
+	cp application/config/main.db.php application/config/db.php
 
 init-prod:
 	cp application/web/index.prod.php application/web/index.php
