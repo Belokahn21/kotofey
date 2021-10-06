@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-#      - ./:/var/www/kotofey.store:ro
+      - ./:/var/www/kotofey.store:ro
       - ./docker/nginx/config:/etc/nginx/conf.d:ro
 
   php-fpm:
