@@ -6,9 +6,8 @@ use yii\helpers\StringHelper;
  * @var $cacheTime integer
  * @var $this \yii\web\View
  */
-
 ?>
-<?php if (property_exists($media, 'data')): ?>
+<?php if ($media !== null): ?>
     <?php if ($this->beginCache('instagramm-media-widget-' . count($media->data), ['duration' => $cacheTime])): ?>
         <div class="page-title__group is-column">
             <h2 class="page-title">Наш Instagram</h2>

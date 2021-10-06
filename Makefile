@@ -52,6 +52,11 @@ init-prod:
 init-test:
 	cp application/web/index.test.php application/web/index.php
 
+init-docker:
+	cp application/web/index.dev.php application/web/index.php
+	cp application/config/params.local.php application/config/params.php
+	cp application/config/docker.db.php application/config/db.php
+
 composer-install:
 	rm application/composer.lock && cd application && composer install
 
@@ -117,4 +122,5 @@ migrate:
 deploy-local: pull init-dev cache migrate
 deploy: pull init-prod migrate cache
 deploy-test: pull init-test migrate
+deploy-docker: pull init-docker migrate
 
