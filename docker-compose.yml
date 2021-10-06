@@ -1,26 +1,25 @@
 version: "3.9"
 services:
-  db:
-    image: mariadb:latest
-    environment:
-      - MYSQL_ROOT_PASSWORD=root
+  nginx:
+    image: nginx:1.21-alpine
     ports:
-      - "3361:3306"
-  fpm:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/kotofey.store:ro
+      - ./docker/nginx/config:/etc/nginx/conf.d:ro
+
+  php-fpm:
     build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
-    ports:
-    - "9000:9000"
-    links:
-      - db
+      context: ./docker/php-fpm
     volumes:
       - ./:/var/www/kotofey.store
-  nginx:
-    links:
-      - fpm
-    build:
-      context: .
-      dockerfile: docker/nginx/Dockerfile
+
+  postgres:
+    image: postgres:13.3-alpine
+    restart: always
     ports:
-      - "8099:80"
+      - "3361:3306"
+    environment:
+      POSTGRES_USER: kotofey
+      POSTGRES_PASSWORD: 123qweR%
+      POSTGRES_DB: kotofey

@@ -14,7 +14,7 @@ class PropertiesHelper
     const PROPERTY_LENGTH = 17;
     const PROPERTY_HEIGHT = 18;
 
-    public static function getProductWeight($product_id)
+    public static function getProductWeight(int $product_id)
     {
         $cache = \Yii::$app->cache;
         $product = Product::findOne($product_id);
@@ -38,7 +38,7 @@ class PropertiesHelper
      * @param $property_id
      * @return false|PropertiesProductValues
      */
-    public static function extractPropertyById(Product $model, $property_id)
+    public static function extractPropertyById(Product $model, int $property_id)
     {
         return \Yii::$app->cache->getOrSet(__METHOD__ . $model->id . $property_id, function () use ($model, $property_id) {
 
@@ -53,7 +53,7 @@ class PropertiesHelper
      * @param $property_id
      * @return array
      */
-    public static function extractAllPropertyById(Product $model, $property_id)
+    public static function extractAllPropertyById(Product $model, int $property_id)
     {
         $values = [];
 
