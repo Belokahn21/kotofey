@@ -7,7 +7,7 @@ services:
       - "8080:80"
     volumes:
       - ./:/var/www/kotofey.store:ro
-      - ./docker/nginx/config:/etc/nginx/conf.d:ro
+      - ./docker/nginx/config:/etc/nginx/conf.d
 
   php-fpm:
     working_dir: "/var/www/kotofey.store"
@@ -25,13 +25,3 @@ services:
       MYSQL_ROOT_PASSWORD: root
     ports:
     - "3361:3306"
-
-#  postgres:
-#    image: postgres:13.3-alpine
-#    restart: always
-#    ports:
-#      - "3361:3306"
-#    environment:
-#      POSTGRES_USER: kotofey
-#      POSTGRES_PASSWORD: 123qweR%
-#      POSTGRES_DB: kotofey
