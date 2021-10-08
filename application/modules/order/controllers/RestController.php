@@ -4,14 +4,12 @@ namespace app\modules\order\controllers;
 
 use app\modules\basket\models\entity\Basket;
 use app\modules\order\models\entity\OrdersItems;
-use app\modules\order\models\entity\OrderDate;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\helpers\OrdersItemsHelpers;
 use app\modules\order\models\service\NotifyService;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\PriceTool;
-use app\modules\user\models\entity\UserBilling;
 use yii\filters\Cors;
 use yii\rest\ActiveController;
 
@@ -84,10 +82,11 @@ class RestController extends ActiveController
             }
         } else {
             $item_saver = new OrdersItemsHelpers();
-            $item_saver->loadItemsAndSave($order->id);
-            if ($item_saver !== true) {
+            $result = $item_saver->loadItemsAndSave($order->id);
+
+            if ($result !== true) {
                 $response['status'] = 530;
-                $response['errors'] = $item_saver->getErrors();
+                $response['errors'] = $result->getErrors();
                 return $response;
             }
         }

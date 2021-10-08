@@ -3,6 +3,7 @@
 
 namespace app\modules\order\models\helpers;
 
+use app\modules\site\models\tools\Debug;
 use Yii;
 use app\modules\order\models\entity\OrdersItems;
 
