@@ -4,6 +4,8 @@ import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
 import {Modal} from 'react-bootstrap';
 
+var slider = require('ion-rangeslider');
+
 class SetWeight extends React.Component {
     constructor(props) {
         super(props);
@@ -14,6 +16,10 @@ class SetWeight extends React.Component {
         }
 
         this.loadProduct();
+    }
+
+    componentDidMount() {
+
     }
 
     loadProduct() {
@@ -34,13 +40,24 @@ class SetWeight extends React.Component {
         this.setState({show: show});
     }
 
+    handleOnShow() {
+        $(".js-range-slider-set-weight").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 1000,
+            from: 200,
+            to: 500,
+            grid: true
+        });
+    }
+
     render() {
         const {show} = this.state;
         return (
             <div>
                 <div onClick={this.handleShow.bind(this)}>Купить на разновес</div>
 
-                <Modal show={show} onHide={this.handleClose.bind(this)}>
+                <Modal show={show} onHide={this.handleClose.bind(this)} onShow={this.handleOnShow.bind(this)}>
                     <Modal.Header closeButton>
                         <Modal.Title>Отмерить на разновес</Modal.Title>
                     </Modal.Header>
@@ -48,7 +65,9 @@ class SetWeight extends React.Component {
 
                         <div className="row">
                             <div className="col-sm-6">pack</div>
-                            <div className="col-sm-6">progress</div>
+                            <div className="col-sm-6">
+                                <input type="text" className="js-range-slider-set-weight" name="my_range" value=""/>
+                            </div>
                         </div>
 
                     </Modal.Body>

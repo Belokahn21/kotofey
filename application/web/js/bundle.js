@@ -8590,6 +8590,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+var slider = __webpack_require__(/*! ion-rangeslider */ "./node_modules/ion-rangeslider/js/ion.rangeSlider.js");
+
 var SetWeight = /*#__PURE__*/function (_React$Component) {
   _inherits(SetWeight, _React$Component);
 
@@ -8612,6 +8614,9 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(SetWeight, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
     key: "loadProduct",
     value: function loadProduct() {
       var _this2 = this;
@@ -8640,6 +8645,18 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "handleOnShow",
+    value: function handleOnShow() {
+      $(".js-range-slider-set-weight").ionRangeSlider({
+        type: "double",
+        min: 0,
+        max: 1000,
+        from: 200,
+        to: 500,
+        grid: true
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var show = this.state.show;
@@ -8647,7 +8664,8 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
         onClick: this.handleShow.bind(this)
       }, "\u041A\u0443\u043F\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
         show: show,
-        onHide: this.handleClose.bind(this)
+        onHide: this.handleClose.bind(this),
+        onShow: this.handleOnShow.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Header, {
         closeButton: true
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Title, null, "\u041E\u0442\u043C\u0435\u0440\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
@@ -8656,7 +8674,12 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
         className: "col-sm-6"
       }, "pack"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "col-sm-6"
-      }, "progress")))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
+        type: "text",
+        className: "js-range-slider-set-weight",
+        name: "my_range",
+        value: ""
+      }))))));
     }
   }]);
 
