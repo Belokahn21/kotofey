@@ -8,7 +8,8 @@ class SetWeight extends React.Component {
         super(props);
 
         this.state = {
-            product: {}
+            product: {},
+            show: false,
         }
 
         this.loadProduct();
@@ -20,10 +21,37 @@ class SetWeight extends React.Component {
         });
     }
 
+    handleClose() {
+        this.setShow(false);
+    }
+
+    handleShow() {
+        this.setShow(true);
+    }
+
+    setShow(show) {
+        this.setState({show: show});
+    }
+
     render() {
+        const {show} = this.state;
         return (
             <div>
+                <div className="form-finds__setup" onClick={this.handleShow.bind(this)}>+</div>
 
+                <Modal show={show} onHide={this.handleClose.bind(this)}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Отмерить на разновес</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                        <div className="row">
+                            <div className="col-sm-6">pack</div>
+                            <div className="col-sm-6">progress</div>
+                        </div>
+
+                    </Modal.Body>
+                </Modal>
             </div>
         );
     }
