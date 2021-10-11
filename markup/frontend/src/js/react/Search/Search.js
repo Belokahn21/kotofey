@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDom from "react-dom";
 import config from "../../config";
-import BuildQuery from "../../tools/BuildQuery";
 import ResultSearch from './ResultSearch';
 import RestRequest from "../../tools/RestRequest";
 

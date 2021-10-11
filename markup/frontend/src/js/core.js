@@ -55,9 +55,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 //react js
-// import './react/cdek-calculator/CdekCalculator';
-import './react/search/Search';
-import './react/checkout/Checkout';
+import './react/Search/Search';
+import './react/Checkout/Checkout';
 import './react/BuyOneClick/BuyOneClick';
 import './react/Page/Page';
 import './react/ProductAdmission/ProductAdmission';
@@ -65,3 +64,4 @@ import './react/Compare/CompareButton';
 import './react/Compare/CompareList';
 import './react/EatCalculator/EatCalculator';
 import './react/RepeatOrder/RepeatOrder';
+import './react/SetWeight/SetWeight';

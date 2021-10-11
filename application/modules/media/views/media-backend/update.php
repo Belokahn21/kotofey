@@ -20,4 +20,6 @@ $this->title = \app\modules\seo\models\tools\Title::show($model->name);
 <?php else: ?>
     <?php $image_path = '/upload/' . $model->path; ?>
 <?php endif; ?>
-<img src="<?= $image_path; ?>" width="200" class="m-5">
+<a href="<?= $image_path; ?>" class="roadtrip">
+    <img src="<?= $image_path; ?>" width="200" class="m-5">
+</a>
