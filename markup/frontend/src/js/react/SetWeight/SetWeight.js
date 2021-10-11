@@ -2,6 +2,7 @@ import ReactDom from "react-dom";
 import React from "react";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
+import {Modal} from 'react-bootstrap';
 
 class SetWeight extends React.Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class SetWeight extends React.Component {
         const {show} = this.state;
         return (
             <div>
-                <div className="form-finds__setup" onClick={this.handleShow.bind(this)}>+</div>
+                <div onClick={this.handleShow.bind(this)}>Купить на разновес</div>
 
                 <Modal show={show} onHide={this.handleClose.bind(this)}>
                     <Modal.Header closeButton>

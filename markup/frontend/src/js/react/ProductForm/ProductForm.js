@@ -1,6 +1,6 @@
 import React from 'react';
 import Price from "../../tools/Price";
-import CheckoutBasket from "../checkout/CheckoutBasket";
+import CheckoutBasket from "../Checkout/CheckoutBasket";
 
 class ProductForm extends React.Component {
     constructor(props) {

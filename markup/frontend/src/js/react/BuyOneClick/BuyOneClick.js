@@ -3,7 +3,6 @@ import ReactDom from "react-dom";
 import {Modal, Button} from 'react-bootstrap';
 import RestRequest from "../../tools/RestRequest";
 import config from '../../config';
-import HtmlHelper from "../checkout/html/HtmlHelper";
 import Inputmask from "maskedinput";
 
 class BuyOneClick extends React.Component {

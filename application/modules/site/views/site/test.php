@@ -1,5 +1,8 @@
-<?php
+<div class="set-weight-react" data-product-id="1"></div>
 
+
+<?php /*
+exit();
 $html = '
 <tbody><tr class="commonheader">
 				<td style="width: 217px"><b><font size="4">Район</font></b></td>

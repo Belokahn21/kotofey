@@ -4,18 +4,11 @@ import config from "../../config";
 
 import CheckoutSummary from "./CheckoutSummary";
 import HtmlHelper from "./html/HtmlHelper";
-import TimeDeliveryField from "./field/TimeDeliveryField";
-import PromocodeField from "./field/PromocodeField";
-import UserBonusField from "./field/UserBonusField";
-import DateDeliveryField from "./field/DateDeliveryField";
-import CheckoutUserBonusAuth from "./CheckoutUserBonusAuth";
+import Error from "./html/Error";
 import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
-import Input from "./html/Input";
-import Error from "./html/Error";
-import {parse} from "es-cookie";
 
 class Checkout extends Component {
     constructor(props) {

@@ -1,9 +1,7 @@
 import React from 'react';
-import Price from "../../tools/Price";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
 import ProductForm from "../ProductForm/ProductForm";
-import CheckoutBasket from "./CheckoutBasket";
 
 class CheckoutBasketElement extends React.Component {
     constructor(props) {
