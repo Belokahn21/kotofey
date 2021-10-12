@@ -116,6 +116,8 @@ class Product extends \yii\db\ActiveRecord
 
             [['image'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions']],
             [['imagesFiles'], 'file', 'skipOnEmpty' => true, 'extensions' => \Yii::$app->params['files']['extensions'], 'maxFiles' => 10],
+
+            [['name', 'code', 'article', 'barcode', 'ident_key'], 'trim']
         ];
     }
 
