@@ -1,0 +1,15 @@
+.set-weight {
+  &-product {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    &-image {
+      max-width: 100%;
+      width: 200px;
+      display: block;
+      object-fit: contain;
+    }
+  }
+}

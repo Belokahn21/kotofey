@@ -15,15 +15,15 @@ class SetWeight extends React.Component {
             show: false,
         }
 
-        this.loadProduct();
+        this.slider_params = JSON.parse(this.props.slider_params);
     }
 
     componentDidMount() {
-
+        this.loadProduct();
     }
 
     loadProduct() {
-        RestRequest.one(config.restCatalog, this.props.product_id).then(data => {
+        RestRequest.one(config.restCatalog, this.props.product_id, '?expand=imageUrl').then(data => {
             this.setState({product: data});
         });
     }
@@ -42,9 +42,8 @@ class SetWeight extends React.Component {
 
     handleOnShow() {
         $(".js-range-slider-set-weight").ionRangeSlider({
-            type: "double",
             min: 0,
-            max: 1000,
+            max: this.slider_params.max,
             from: 200,
             to: 500,
             grid: true
@@ -52,7 +51,9 @@ class SetWeight extends React.Component {
     }
 
     render() {
-        const {show} = this.state;
+        const {show, product} = this.state;
+        console.log(product);
+
         return (
             <div>
                 <div onClick={this.handleShow.bind(this)}>Купить на разновес</div>
@@ -64,8 +65,15 @@ class SetWeight extends React.Component {
                     <Modal.Body>
 
                         <div className="row">
-                            <div className="col-sm-6">pack</div>
-                            <div className="col-sm-6">
+                            <div className="col-sm-12">
+                                <div className="set-weight-product">
+                                    <img className="set-weight-product-image" src={product.imageUrl}/>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-sm-12">
                                 <input type="text" className="js-range-slider-set-weight" name="my_range" value=""/>
                             </div>
                         </div>
@@ -81,5 +89,5 @@ class SetWeight extends React.Component {
 
 const element = document.querySelector('.set-weight-react');
 if (element) {
-    ReactDom.render(<SetWeight product_id={element.getAttribute('data-product-id')}/>, element);
+    ReactDom.render(<SetWeight slider_params={element.getAttribute('data-slider-params')} product_id={element.getAttribute('data-product-id')}/>, element);
 }

@@ -8607,21 +8607,21 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
       product: {},
       show: false
     };
-
-    _this.loadProduct();
-
+    _this.slider_params = JSON.parse(_this.props.slider_params);
     return _this;
   }
 
   _createClass(SetWeight, [{
     key: "componentDidMount",
-    value: function componentDidMount() {}
+    value: function componentDidMount() {
+      this.loadProduct();
+    }
   }, {
     key: "loadProduct",
     value: function loadProduct() {
       var _this2 = this;
 
-      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_3__.default.restCatalog, this.props.product_id).then(function (data) {
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_3__.default.restCatalog, this.props.product_id, '?expand=imageUrl').then(function (data) {
         _this2.setState({
           product: data
         });
@@ -8648,9 +8648,8 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
     key: "handleOnShow",
     value: function handleOnShow() {
       $(".js-range-slider-set-weight").ionRangeSlider({
-        type: "double",
         min: 0,
-        max: 1000,
+        max: this.slider_params.max,
         from: 200,
         to: 500,
         grid: true
@@ -8659,7 +8658,10 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var show = this.state.show;
+      var _this$state = this.state,
+          show = _this$state.show,
+          product = _this$state.product;
+      console.log(product);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         onClick: this.handleShow.bind(this)
       }, "\u041A\u0443\u043F\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
@@ -8671,9 +8673,16 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Title, null, "\u041E\u0442\u043C\u0435\u0440\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "col-sm-6"
-      }, "pack"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "col-sm-6"
+        className: "col-sm-12"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-product"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("img", {
+        className: "set-weight-product-image",
+        src: product.imageUrl
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "row"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "col-sm-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("input", {
         type: "text",
         className: "js-range-slider-set-weight",
@@ -8690,6 +8699,7 @@ var element = document.querySelector('.set-weight-react');
 
 if (element) {
   react_dom__WEBPACK_IMPORTED_MODULE_0__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(SetWeight, {
+    slider_params: element.getAttribute('data-slider-params'),
     product_id: element.getAttribute('data-product-id')
   }), element);
 }
