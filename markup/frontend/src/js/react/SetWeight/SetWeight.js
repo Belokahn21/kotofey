@@ -5,6 +5,7 @@ import config from "../../config";
 import Price from "../../tools/Price";
 import Currency from "../../tools/Currency";
 import {Modal} from 'react-bootstrap';
+import BuyOneClick from "../BuyOneClick/BuyOneClick";
 
 var slider = require('ion-rangeslider');
 
@@ -99,6 +100,15 @@ class SetWeight extends React.Component {
                         <div className="row">
                             <div className="col-sm-12">
                                 <input type="text" className="js-range-slider-set-weight" name="my_range" value=""/>
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="col-sm-6">
+                                <BuyOneClick/>
+                            </div>
+                            <div className="col-sm-6">
+                                <button className="btn-main">Добавить в корзину</button>
                             </div>
                         </div>
 

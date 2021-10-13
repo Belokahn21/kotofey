@@ -1,5 +1,7 @@
 import $ from 'jquery';
 import * as Cookies from "es-cookie";
+import ReactDom from "react-dom";
+import React from "react";
 
 window.$ = window.jQuery = $;
 window.Cookies = Cookies;
@@ -57,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
 //react js
 import './react/Search/Search';
 import './react/Checkout/Checkout';
-import './react/BuyOneClick/BuyOneClick';
 import './react/Page/Page';
 import './react/ProductAdmission/ProductAdmission';
 import './react/Compare/CompareButton';
@@ -65,3 +66,23 @@ import './react/Compare/CompareList';
 import './react/EatCalculator/EatCalculator';
 import './react/RepeatOrder/RepeatOrder';
 import './react/SetWeight/SetWeight';
+
+
+// import './react/BuyOneClick/BuyOneClick';
+
+import BuyOneClick from "./react/BuyOneClick/BuyOneClick";
+
+
+let elements = document.querySelectorAll('.buy-one-click-react');
+if (elements) {
+
+
+    elements.forEach(el => {
+        let product_id = el.getAttribute('data-product-id');
+        if (product_id) {
+            ReactDom.render(<BuyOneClick product_id={product_id}/>, el);
+        } else {
+            ReactDom.render(<BuyOneClick/>, el);
+        }
+    });
+}
