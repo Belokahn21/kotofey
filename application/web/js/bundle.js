@@ -8546,6 +8546,9 @@ if (search) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ SetWeight)
+/* harmony export */ });
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
@@ -8716,7 +8719,7 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
         name: "my_range",
         value: ""
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "row"
+        className: "row mt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "col-sm-6"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_6__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
@@ -8730,13 +8733,7 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
   return SetWeight;
 }(react__WEBPACK_IMPORTED_MODULE_1__.Component);
 
-var element = document.querySelector('.set-weight-react');
 
-if (element) {
-  react_dom__WEBPACK_IMPORTED_MODULE_0__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(SetWeight, {
-    product_id: element.getAttribute('data-product-id')
-  }), element);
-}
 
 /***/ }),
 
@@ -80583,13 +80580,20 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
- // import './react/BuyOneClick/BuyOneClick';
+
+var set_weight_element = document.querySelector('.set-weight-react');
+
+if (set_weight_element) {
+  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_SetWeight_SetWeight__WEBPACK_IMPORTED_MODULE_39__.default, {
+    product_id: set_weight_element.getAttribute('data-product-id')
+  }), set_weight_element);
+}
 
 
-var elements = document.querySelectorAll('.buy-one-click-react');
+var buy_one_click_elements = document.querySelectorAll('.buy-one-click-react');
 
-if (elements) {
-  elements.forEach(function (el) {
+if (buy_one_click_elements) {
+  buy_one_click_elements.forEach(function (el) {
     var product_id = el.getAttribute('data-product-id');
 
     if (product_id) {

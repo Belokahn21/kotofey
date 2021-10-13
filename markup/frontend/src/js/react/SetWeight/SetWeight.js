@@ -103,7 +103,7 @@ export default class SetWeight extends React.Component {
                             </div>
                         </div>
 
-                        <div className="row">
+                        <div className="row mt-5">
                             <div className="col-sm-6">
                                 <BuyOneClick/>
                             </div>
