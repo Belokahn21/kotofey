@@ -9,7 +9,7 @@ import BuyOneClick from "../BuyOneClick/BuyOneClick";
 
 var slider = require('ion-rangeslider');
 
-class SetWeight extends React.Component {
+export default class SetWeight extends React.Component {
     constructor(props) {
         super(props);
 
@@ -118,10 +118,4 @@ class SetWeight extends React.Component {
         );
     }
 
-}
-
-
-const element = document.querySelector('.set-weight-react');
-if (element) {
-    ReactDom.render(<SetWeight product_id={element.getAttribute('data-product-id')}/>, element);
 }

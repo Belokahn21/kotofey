@@ -65,19 +65,19 @@ import './react/Compare/CompareButton';
 import './react/Compare/CompareList';
 import './react/EatCalculator/EatCalculator';
 import './react/RepeatOrder/RepeatOrder';
-import './react/SetWeight/SetWeight';
 
 
-// import './react/BuyOneClick/BuyOneClick';
+import SetWeight from "./react/SetWeight/SetWeight";
+const set_weight_element = document.querySelector('.set-weight-react');
+if (set_weight_element) {
+    ReactDom.render(<SetWeight product_id={set_weight_element.getAttribute('data-product-id')}/>, set_weight_element);
+}
+
 
 import BuyOneClick from "./react/BuyOneClick/BuyOneClick";
-
-
-let elements = document.querySelectorAll('.buy-one-click-react');
-if (elements) {
-
-
-    elements.forEach(el => {
+let buy_one_click_elements = document.querySelectorAll('.buy-one-click-react');
+if (buy_one_click_elements) {
+    buy_one_click_elements.forEach(el => {
         let product_id = el.getAttribute('data-product-id');
         if (product_id) {
             ReactDom.render(<BuyOneClick product_id={product_id}/>, el);
