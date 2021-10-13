@@ -8561,7 +8561,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
 /* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/config.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
+/* harmony import */ var _tools_Price__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/Price */ "./src/js/tools/Price.js");
+/* harmony import */ var _tools_Currency__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/Currency */ "./src/js/tools/Currency.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Modal.js");
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -8590,6 +8592,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var slider = __webpack_require__(/*! ion-rangeslider */ "./node_modules/ion-rangeslider/js/ion.rangeSlider.js");
 
 var SetWeight = /*#__PURE__*/function (_React$Component) {
@@ -8598,17 +8602,17 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(SetWeight);
 
   function SetWeight(props) {
-    var _this;
+    var _this2;
 
     _classCallCheck(this, SetWeight);
 
-    _this = _super.call(this, props);
-    _this.state = {
+    _this2 = _super.call(this, props);
+    _this2.state = {
       product: {},
-      show: false
+      show: false,
+      count: 0
     };
-    _this.slider_params = JSON.parse(_this.props.slider_params);
-    return _this;
+    return _this2;
   }
 
   _createClass(SetWeight, [{
@@ -8619,10 +8623,10 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "loadProduct",
     value: function loadProduct() {
-      var _this2 = this;
+      var _this3 = this;
 
-      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_3__.default.restCatalog, this.props.product_id, '?expand=imageUrl').then(function (data) {
-        _this2.setState({
+      _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__.default.one(_config__WEBPACK_IMPORTED_MODULE_3__.default.restCatalog, this.props.product_id, '?expand=imageUrl,weight').then(function (data) {
+        _this3.setState({
           product: data
         });
       });
@@ -8647,12 +8651,21 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleOnShow",
     value: function handleOnShow() {
+      var product = this.state.product;
+
+      var _this = this;
+
       $(".js-range-slider-set-weight").ionRangeSlider({
         min: 0,
-        max: this.slider_params.max,
-        from: 200,
-        to: 500,
-        grid: true
+        step: product.weight / 100,
+        max: product.weight,
+        from: 0,
+        grid: true,
+        onChange: function onChange(data) {
+          _this.setState({
+            count: data.from
+          });
+        }
       });
     }
   }, {
@@ -8660,17 +8673,20 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$state = this.state,
           show = _this$state.show,
-          product = _this$state.product;
-      console.log(product);
+          product = _this$state.product,
+          count = _this$state.count;
+      var rate = Math.round(product.price / product.weight),
+          result = Math.round(rate * count);
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-buy",
         onClick: this.handleShow.bind(this)
-      }, "\u041A\u0443\u043F\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default, {
+      }, "\u041A\u0443\u043F\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default, {
         show: show,
         onHide: this.handleClose.bind(this),
         onShow: this.handleOnShow.bind(this)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Header, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Title, null, "\u041E\u0442\u043C\u0435\u0440\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Title, null, "\u041E\u0442\u043C\u0435\u0440\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "col-sm-12"
@@ -8680,6 +8696,26 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
         className: "set-weight-product-image",
         src: product.imageUrl
       })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item value"
+      }, count, count > 1 ? 'кг' : 'гр'), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item"
+      }, "x"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item value"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item__value"
+      }, _tools_Price__WEBPACK_IMPORTED_MODULE_4__.default.format(rate), _tools_Currency__WEBPACK_IMPORTED_MODULE_5__.default.show()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item__label"
+      }, "\u0437\u0430 \u043A\u0433")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item"
+      }, "="), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item value"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item__value"
+      }, _tools_Price__WEBPACK_IMPORTED_MODULE_4__.default.format(result), _tools_Currency__WEBPACK_IMPORTED_MODULE_5__.default.show()), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-rate-item__label"
+      }, "\u0418\u0442\u043E\u0433\u043E"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "col-sm-12"
@@ -8699,7 +8735,6 @@ var element = document.querySelector('.set-weight-react');
 
 if (element) {
   react_dom__WEBPACK_IMPORTED_MODULE_0__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(SetWeight, {
-    slider_params: element.getAttribute('data-slider-params'),
     product_id: element.getAttribute('data-product-id')
   }), element);
 }
@@ -8775,6 +8810,42 @@ var BuildQuery = /*#__PURE__*/function () {
 }();
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BuildQuery);
+
+/***/ }),
+
+/***/ "./src/js/tools/Currency.js":
+/*!**********************************!*\
+  !*** ./src/js/tools/Currency.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Currency = /*#__PURE__*/function () {
+  function Currency() {
+    _classCallCheck(this, Currency);
+  }
+
+  _createClass(Currency, null, [{
+    key: "show",
+    value: function show() {
+      return "₽";
+    }
+  }]);
+
+  return Currency;
+}();
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Currency);
 
 /***/ }),
 

@@ -2,6 +2,8 @@ import ReactDom from "react-dom";
 import React from "react";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
+import Price from "../../tools/Price";
+import Currency from "../../tools/Currency";
 import {Modal} from 'react-bootstrap';
 
 var slider = require('ion-rangeslider');
@@ -13,9 +15,8 @@ class SetWeight extends React.Component {
         this.state = {
             product: {},
             show: false,
+            count: 0,
         }
-
-        this.slider_params = JSON.parse(this.props.slider_params);
     }
 
     componentDidMount() {
@@ -23,7 +24,7 @@ class SetWeight extends React.Component {
     }
 
     loadProduct() {
-        RestRequest.one(config.restCatalog, this.props.product_id, '?expand=imageUrl').then(data => {
+        RestRequest.one(config.restCatalog, this.props.product_id, '?expand=imageUrl,weight').then(data => {
             this.setState({product: data});
         });
     }
@@ -41,22 +42,28 @@ class SetWeight extends React.Component {
     }
 
     handleOnShow() {
+        const {product} = this.state;
+        let _this = this;
+
         $(".js-range-slider-set-weight").ionRangeSlider({
             min: 0,
-            max: this.slider_params.max,
-            from: 200,
-            to: 500,
-            grid: true
+            step: product.weight / 100,
+            max: product.weight,
+            from: 0,
+            grid: true,
+            onChange: function (data) {
+                _this.setState({count: data.from});
+            },
         });
     }
 
     render() {
-        const {show, product} = this.state;
-        console.log(product);
+        const {show, product, count} = this.state;
+        let rate = Math.round(product.price / product.weight), result = Math.round(rate * count);
 
         return (
             <div>
-                <div onClick={this.handleShow.bind(this)}>Купить на разновес</div>
+                <div className="set-weight-buy" onClick={this.handleShow.bind(this)}>Купить на разновес</div>
 
                 <Modal show={show} onHide={this.handleClose.bind(this)} onShow={this.handleOnShow.bind(this)}>
                     <Modal.Header closeButton>
@@ -69,6 +76,23 @@ class SetWeight extends React.Component {
                                 <div className="set-weight-product">
                                     <img className="set-weight-product-image" src={product.imageUrl}/>
                                 </div>
+                            </div>
+                        </div>
+
+                        <div className="set-weight-rate">
+                            <div className="set-weight-rate-item value">{count}{count > 1 ? 'кг' : 'гр'}</div>
+
+                            <div className="set-weight-rate-item">x</div>
+
+                            <div className="set-weight-rate-item value">
+                                <div className="set-weight-rate-item__value">{Price.format(rate)}{Currency.show()}</div>
+                                <div className="set-weight-rate-item__label">за кг</div>
+                            </div>
+                            <div className="set-weight-rate-item">=</div>
+
+                            <div className="set-weight-rate-item value">
+                                <div className="set-weight-rate-item__value">{Price.format(result)}{Currency.show()}</div>
+                                <div className="set-weight-rate-item__label">Итого</div>
                             </div>
                         </div>
 
@@ -89,5 +113,5 @@ class SetWeight extends React.Component {
 
 const element = document.querySelector('.set-weight-react');
 if (element) {
-    ReactDom.render(<SetWeight slider_params={element.getAttribute('data-slider-params')} product_id={element.getAttribute('data-product-id')}/>, element);
+    ReactDom.render(<SetWeight product_id={element.getAttribute('data-product-id')}/>, element);
 }

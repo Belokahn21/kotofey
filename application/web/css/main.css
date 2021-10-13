@@ -10947,7 +10947,7 @@ Build date: 2019-12-19 16:51:02
   .one-click-buy:hover {
     color: inherit; }
 
-.btn-main, .checkout-button-auth, .site-form__button, .last-news__go-detail, .form-delivery-calc__submit, .checkout-address-list__select, .eat-calculator-result-item__action {
+.btn-main, .checkout-button-auth, .site-form__button, .last-news__go-detail, .form-delivery-calc__submit, .checkout-address-list__select, .eat-calculator-result-item__action, .set-weight-buy {
   background: #fff;
   border: 1px #ff1a4a solid;
   color: #ff1a4a;
@@ -10957,7 +10957,7 @@ Build date: 2019-12-19 16:51:02
   text-transform: uppercase;
   font-size: 10px;
   transition: background-color 0.2s ease-out; }
-  .btn-main:hover, .checkout-button-auth:hover, .site-form__button:hover, .last-news__go-detail:hover, .form-delivery-calc__submit:hover, .checkout-address-list__select:hover, .eat-calculator-result-item__action:hover {
+  .btn-main:hover, .checkout-button-auth:hover, .site-form__button:hover, .last-news__go-detail:hover, .form-delivery-calc__submit:hover, .checkout-address-list__select:hover, .eat-calculator-result-item__action:hover, .set-weight-buy:hover {
     color: white;
     text-decoration: none;
     background: #ff4d69; }
@@ -14597,7 +14597,7 @@ label[for="site-form-pet-avatar"] {
     text-transform: uppercase;
     font-size: 23px;
     margin: 5px 0; }
-  .feedback-form .btn-main, .feedback-form .checkout-button-auth, .feedback-form .site-form__button, .feedback-form .last-news__go-detail, .feedback-form .form-delivery-calc__submit, .feedback-form .checkout-address-list__select, .feedback-form .eat-calculator-result-item__action {
+  .feedback-form .btn-main, .feedback-form .checkout-button-auth, .feedback-form .site-form__button, .feedback-form .last-news__go-detail, .feedback-form .form-delivery-calc__submit, .feedback-form .checkout-address-list__select, .feedback-form .eat-calculator-result-item__action, .feedback-form .set-weight-buy {
     font-size: 14px; }
 
 .feedback-list {
@@ -16040,7 +16040,7 @@ label[for="site-form-pet-avatar"] {
   flex-direction: column;
   align-items: center;
   justify-content: space-between; }
-  .buy-one-click-form .btn-main, .buy-one-click-form .checkout-button-auth, .buy-one-click-form .site-form__button, .buy-one-click-form .last-news__go-detail, .buy-one-click-form .form-delivery-calc__submit, .buy-one-click-form .checkout-address-list__select, .buy-one-click-form .eat-calculator-result-item__action {
+  .buy-one-click-form .btn-main, .buy-one-click-form .checkout-button-auth, .buy-one-click-form .site-form__button, .buy-one-click-form .last-news__go-detail, .buy-one-click-form .form-delivery-calc__submit, .buy-one-click-form .checkout-address-list__select, .buy-one-click-form .eat-calculator-result-item__action, .buy-one-click-form .set-weight-buy {
     margin-top: 10px;
     padding: 10px 20px;
     font-size: 14px; }
@@ -16587,6 +16587,9 @@ label[for="site-form-pet-avatar"] {
     padding: 5px;
     outline: none; }
 
+.set-weight-buy {
+  max-width: 120px; }
+
 .set-weight-product {
   display: flex;
   flex-direction: column;
@@ -16597,6 +16600,29 @@ label[for="site-form-pet-avatar"] {
     width: 200px;
     display: block;
     object-fit: contain; }
+
+.set-weight-rate {
+  margin: 20px 0;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+  .set-weight-rate-item {
+    margin: 0 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; }
+    .set-weight-rate-item.value {
+      width: 70px; }
+    .set-weight-rate-item__value {
+      line-height: 1;
+      text-align: center; }
+    .set-weight-rate-item__label {
+      line-height: 1;
+      font-size: 14px;
+      color: grey;
+      text-align: center; }
 
 .product-count-buy {
   color: #25D366; }

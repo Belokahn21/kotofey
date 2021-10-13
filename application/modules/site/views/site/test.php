@@ -1,6 +1,4 @@
-<div class="set-weight-react" data-product-id="1" data-slider-params='<?= \yii\helpers\Json::encode([
-    'max' => 800
-]); ?>'></div>
+<div class="set-weight-react" data-product-id="74"></div>
 
 
 <?php
