@@ -8680,7 +8680,13 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
         onShow: this.handleOnShow.bind(this)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Header, {
         closeButton: true
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Title, null, "\u041E\u0442\u043C\u0435\u0440\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Title, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-modal"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-modal__title"
+      }, product.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        className: "set-weight-modal__label"
+      }, "\u041A\u0443\u043F\u0438\u0442\u044C \u043D\u0430 \u0440\u0430\u0437\u043D\u043E\u0432\u0435\u0441")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__.default.Body, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "row"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "col-sm-12"
@@ -8721,11 +8727,11 @@ var SetWeight = /*#__PURE__*/function (_React$Component) {
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
         className: "row mt-5"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "col-sm-6"
+        className: "col-sm-6 col-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_6__.default, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
-        className: "col-sm-6"
+        className: "col-sm-6 col-12"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("button", {
-        className: "btn-main"
+        className: "btn-main set-weight-basket"
       }, "\u0414\u043E\u0431\u0430\u0432\u0438\u0442\u044C \u0432 \u043A\u043E\u0440\u0437\u0438\u043D\u0443"))))));
     }
   }]);

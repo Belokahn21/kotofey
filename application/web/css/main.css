@@ -16590,6 +16590,20 @@ label[for="site-form-pet-avatar"] {
 .set-weight-buy {
   max-width: 120px; }
 
+.set-weight-basket {
+  display: block;
+  margin: auto; }
+  @media (max-width: 450px) {
+    .set-weight-basket {
+      margin: 10px auto; } }
+
+.set-weight-modal__title {
+  font-size: 18px; }
+
+.set-weight-modal__label {
+  font-size: 14px;
+  color: grey; }
+
 .set-weight-product {
   display: flex;
   flex-direction: column;

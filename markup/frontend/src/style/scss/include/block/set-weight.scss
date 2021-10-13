@@ -4,6 +4,26 @@
     max-width: 120px;
   }
 
+  &-basket {
+    display: block;
+    margin: auto;
+
+    @media (max-width: 450px) {
+      margin: 10px auto;
+    }
+  }
+
+  &-modal {
+    &__title {
+      font-size: 18px;
+    }
+
+    &__label {
+      font-size: 14px;
+      color: grey;
+    }
+  }
+
   &-product {
     display: flex;
     flex-direction: column;

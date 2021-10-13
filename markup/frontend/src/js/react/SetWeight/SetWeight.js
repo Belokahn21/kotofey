@@ -68,7 +68,12 @@ export default class SetWeight extends React.Component {
 
                 <Modal show={show} onHide={this.handleClose.bind(this)} onShow={this.handleOnShow.bind(this)}>
                     <Modal.Header closeButton>
-                        <Modal.Title>Отмерить на разновес</Modal.Title>
+                        <Modal.Title>
+                            <div className="set-weight-modal">
+                                <div className="set-weight-modal__title">{product.name}</div>
+                                <div className="set-weight-modal__label">Купить на разновес</div>
+                            </div>
+                        </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
 
@@ -104,11 +109,11 @@ export default class SetWeight extends React.Component {
                         </div>
 
                         <div className="row mt-5">
-                            <div className="col-sm-6">
+                            <div className="col-sm-6 col-12">
                                 <BuyOneClick/>
                             </div>
-                            <div className="col-sm-6">
-                                <button className="btn-main">Добавить в корзину</button>
+                            <div className="col-sm-6 col-12">
+                                <button className="btn-main set-weight-basket">Добавить в корзину</button>
                             </div>
                         </div>
 
