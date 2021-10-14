@@ -87,7 +87,7 @@ class SlidersImages extends ActiveRecord
     {
         return [
             'href' => function ($model) {
-                return SlidersImagesHelper::getImageUrl($this, true);
+                return SlidersImagesHelper::getImageUrl($model, true);
             }
         ];
     }
