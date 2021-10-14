@@ -12,7 +12,7 @@ class SlidersImagesHelper
 {
     public static function getImageUrl(SlidersImages $model, $isFull = false, $options = [])
     {
-        return \Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__ . $model->id . $isFull, function () use ($model, $isFull, $options) {
+        return \Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__ . $model->id . ((int)$isFull), function () use ($model, $isFull, $options) {
             if ($media = $model->media) {
 
                 switch ($media->location) {
