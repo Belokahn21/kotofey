@@ -1,9 +1,8 @@
 <?php
 
-
 namespace app\modules\promotion\models\helpers;
 
-
+use app\modules\media\models\helpers\MediaHelper;
 use app\modules\promotion\models\entity\Promotion;
 use yii\helpers\Url;
 
@@ -14,10 +13,10 @@ class PromotionHelper
         return Url::to(['/promotion/promotion/view', 'id' => $model->slug]);
     }
 
-    public static function getImageUrl(Promotion $model, $options = [])
+    public static function getImageUrl(Promotion $model, $isFull = false, $options = [])
     {
-        return \Yii::$app->cache->getOrSet(__METHOD__ . $model->id, function () use ($model, $options) {
-            return \Yii::$app->CDN->resizeImage($model->media->cdnData['public_id'], $options);
+        return \Yii::$app->cache->getOrSet(__METHOD__ . $model->id, function () use ($model, $isFull, $options) {
+            return MediaHelper::getImageUrl($model, $isFull, $options);
         });
     }
 
