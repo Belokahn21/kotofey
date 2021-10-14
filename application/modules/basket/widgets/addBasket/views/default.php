@@ -36,7 +36,7 @@ $resultPrice = $discount_price ?: $price;
                         <div class="product-calc__price-group-price"><?= PriceTool::format($price); ?></div>
                     <?php endif; ?>
                 </div>
-                <div class="product-calc__price-group-char-val">шт</div>
+                <div class="product-calc__price-group-char-val">за/шт</div>
                 <div class="product-calc__price-group-char-equal">=</div>
                 <div class="product-calc__price-group-summary js-product-calc-summary">
                     <div class="count"><?= PriceTool::format($resultPrice * ($basket->count ? $basket->count : 1)); ?></div>
