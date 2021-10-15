@@ -9452,6 +9452,13 @@ html, body {
   .skip-icon input:checked ~ i {
     color: #25D366; }
 
+.price-list {
+  display: flex;
+  flex-direction: column; }
+  .price-list-item {
+    font-size: 12px;
+    margin: 5px 0; }
+
 /*-----------------------------------------------------------*/
 .content {
   float: left;

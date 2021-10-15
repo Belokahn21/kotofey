@@ -55,3 +55,4 @@ debug*.*
 assets
 *.log
 db.php
+*.sql

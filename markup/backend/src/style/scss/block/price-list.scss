@@ -1,0 +1,9 @@
+.price-list {
+  display: flex;
+  flex-direction: column;
+
+  &-item{
+    font-size: 12px;
+    margin: 5px 0;
+  }
+}

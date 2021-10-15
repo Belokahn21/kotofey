@@ -1,4 +1,7 @@
 version: "3.9"
+networks:
+  default:
+    name: "kotofey"
 services:
   nginx:
     build:
@@ -18,10 +21,12 @@ services:
   mariadb:
     image: mariadb:latest
     restart: "always"
+    volumes:
+      - ./docker/db/sql.sql:/docker-entrypoint-initdb.d/sql.sql
     environment:
       MARIADB_DATABASE: kotofey
       MARIADB_USER: kotofey
       MARIADB_PASSWORD: 123qweR%
       MYSQL_ROOT_PASSWORD: root
     ports:
-    - "3361:3306"
+    - "3306:3306"

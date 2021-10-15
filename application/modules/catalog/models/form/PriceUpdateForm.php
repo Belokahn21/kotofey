@@ -13,6 +13,7 @@ use yii\base\Model;
  * @property integer $force_markup;
  * @property integer $type_price;
  * @property integer $related_key_filter;
+ * @property integer $maker_id;
  */
 class PriceUpdateForm extends Model
 {
@@ -23,6 +24,9 @@ class PriceUpdateForm extends Model
     public $force_markup;
     public $type_price;
     public $related_key_filter;
+    public $maker_id;
+    public $price_col_id;
+    public $ident_key_col_id;
 
     const TYPE_PRICE_BASE = 'base';
     const TYPE_PRICE_PURCHASE = 'purchase';
@@ -33,7 +37,7 @@ class PriceUpdateForm extends Model
 
             [['vendor_id', 'type_price'], 'required', 'message' => '{attribute} нужно указать'],
 
-            [['vendor_id', 'default_markup', 'force_markup'], 'integer'],
+            [['vendor_id', 'default_markup', 'force_markup', 'maker_id', 'price_col_id', 'ident_key_col_id'], 'integer'],
 
             ['delimiter', 'default', 'value' => ';'],
             ['delimiter', 'string'],
@@ -47,6 +51,9 @@ class PriceUpdateForm extends Model
     public function attributeLabels()
     {
         return [
+            'maker_id' => 'Марка',
+            'price_col_id' => 'Колонка цены',
+            'ident_key_col_id' => 'Колонка связи',
             'delimiter' => 'Разделитель',
             'file' => 'Прайс-лист',
             'vendor_id' => 'Поставщик',

@@ -81,7 +81,7 @@ promo:
 elastic-index:
 	cd application && php yii elastic/index
 
-docker:
+elastic:
 	docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.13.3
 
 docker-run:
