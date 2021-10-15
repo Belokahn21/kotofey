@@ -181,7 +181,7 @@ class OrderHelper
         /* @var $item OrdersItems */
         foreach ($items as $item) {
 
-            if (!$item->product or ProductTransferHistoryHelper::isStockApplyMinusTransfer($model, $item->product)) continue;
+            if (!$item->product or ProductTransferHistoryHelper::isStockApplyMinusTransfer($model, $item->product) or empty($item->count)) continue;
 
             $product = Product::findOne($item->product->id);
 
@@ -227,7 +227,7 @@ class OrderHelper
 
             $product = Product::findOne($item->product->id);
 
-            if (!$product || $product->count >= $item->count ) continue;
+            if (!$product || $product->count >= $item->count) continue;
 
             $product->scenario = Product::SCENARIO_STOCK_COUNT;
 
