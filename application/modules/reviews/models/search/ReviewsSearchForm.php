@@ -42,6 +42,7 @@ class ReviewsSearchForm extends Reviews
 
         $query->andFilterWhere(['like', 'text', $this->text])
             ->andFilterWhere(['product_id' => $this->product_id])
+            ->andFilterWhere(['status_id' => $this->status_id])
             ->andFilterWhere(['is_active' => $this->is_active]);
 
         return $dataProvider;
