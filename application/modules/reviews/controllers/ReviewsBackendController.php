@@ -5,7 +5,7 @@ namespace app\modules\reviews\controllers;
 use Yii;
 use app\widgets\notification\Alert;
 use app\modules\reviews\models\entity\Reviews;
-use app\modules\reviews\models\search\ReviewsSearch;
+use app\modules\reviews\models\search\ReviewsSearchForm;
 use app\modules\site\controllers\MainBackendController;
 use yii\web\HttpException;
 
@@ -14,7 +14,7 @@ class ReviewsBackendController extends MainBackendController
     public function actionIndex()
     {
         $model = new Reviews();
-        $searchModel = new ReviewsSearch();
+        $searchModel = new ReviewsSearchForm();
         $dataProvider = $searchModel->search(\Yii::$app->request->get());
 
 

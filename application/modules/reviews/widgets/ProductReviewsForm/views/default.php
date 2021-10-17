@@ -17,8 +17,7 @@ use yii\helpers\Url;
     <?= $form->field($model, 'rate')->dropDownList($model->getRates(), ['prompt' => 'Как вы оцениваете товар ?']); ?>
 
     <div class="row">
-        <div class="col-6"><?= $form->field($model, 'phone')->textInput(); ?></div>
-        <div class="col-6"><?= $form->field($model, 'email')->textInput(); ?></div>
+        <div class="col-12"><?= $form->field($model, 'phone')->textInput(); ?></div>
     </div>
     <div class="row">
         <div class="col-12 col-sm-12"><?= $form->field($model, 'text')->textarea(); ?></div>

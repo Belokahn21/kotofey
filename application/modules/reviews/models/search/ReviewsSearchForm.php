@@ -6,7 +6,7 @@ use app\modules\reviews\models\entity\Reviews;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 
-class ReviewsSearch extends Reviews
+class ReviewsSearchForm extends Reviews
 {
 
     public static function tableName()
@@ -17,6 +17,7 @@ class ReviewsSearch extends Reviews
     public function rules()
     {
         return [
+            [['product_id'], 'integer'],
             [['text'], 'string'],
             [['is_active'], 'boolean'],
         ];
@@ -40,6 +41,7 @@ class ReviewsSearch extends Reviews
         }
 
         $query->andFilterWhere(['like', 'text', $this->text])
+            ->andFilterWhere(['product_id' => $this->product_id])
             ->andFilterWhere(['is_active' => $this->is_active]);
 
         return $dataProvider;

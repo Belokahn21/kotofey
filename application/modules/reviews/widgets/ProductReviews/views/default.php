@@ -20,6 +20,7 @@
 
                                 <?php if ($model->rate): ?>
                                     <?php for ($i = 1; $i <= 10; $i++): ?>
+                                        <?php $realRate = 0; ?>
                                         <?php $realRate = $i / 2; ?>
                                         <?php $checked = ''; ?>
                                         <?php if ($realRate == 1 || $realRate == $model->rate): ?>
