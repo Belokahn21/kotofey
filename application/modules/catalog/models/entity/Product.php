@@ -421,7 +421,7 @@ class Product extends \yii\db\ActiveRecord
                 $data = [];
                 if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($model, 23)):
                     foreach ($imagesFromProperty as $propertyValue):
-                        $data[] = MediaHelper::getImageUrl($propertyValue->media, true);
+                        $data[] = MediaHelper::getImageUrl($propertyValue, true);
                     endforeach;
                 endif;
 
