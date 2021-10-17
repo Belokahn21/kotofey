@@ -3,6 +3,7 @@
 namespace app\modules\reviews\models\entity;
 
 use app\modules\user\models\entity\User;
+use app\modules\user\models\helpers\UserHelper;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 
@@ -48,11 +49,11 @@ class Reviews extends \yii\db\ActiveRecord
 
             [['user_id'], 'default', 'value' => Yii::$app->user->id],
 
-            [['user_id', 'product_id', 'rate', 'created_at', 'updated_at', 'status_id','phone'], 'integer'],
+            [['user_id', 'product_id', 'rate', 'created_at', 'updated_at', 'status_id', 'phone'], 'integer'],
 
             [['product_id', 'text'], 'required'],
 
-            [['text', 'pluses', 'minuses','email'], 'string'],
+            [['text', 'pluses', 'minuses', 'email'], 'string'],
 
             [['is_active'], 'boolean'],
 
@@ -97,5 +98,16 @@ class Reviews extends \yii\db\ActiveRecord
     public function getAuthor()
     {
         return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+
+    public function extraFields()
+    {
+        return [
+            'author' => function ($model) {
+                $author = 'Не указан';
+                if ($model->user_id) $author = UserHelper::getFullName(User::findOne($model->user_id));
+                return $author;
+            }
+        ];
     }
 }
