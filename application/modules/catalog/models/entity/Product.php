@@ -15,6 +15,7 @@ use app\modules\catalog\models\helpers\ProductToBreadHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\media\components\behaviors\ImageUploadMinify;
 use app\modules\media\models\entity\Media;
+use app\modules\media\models\helpers\MediaHelper;
 use app\modules\pets\models\entity\Pets;
 use app\modules\promotion\models\entity\PromotionProductMechanics;
 use app\modules\reviews\models\entity\Reviews;
@@ -415,6 +416,16 @@ class Product extends \yii\db\ActiveRecord
             },
             'imageUrl' => function ($model) {
                 return ProductHelper::getImageUrl($model, true);
+            },
+            'gallery' => function ($model) {
+                $data = [];
+                if ($imagesFromProperty = PropertiesHelper::extractAllPropertyById($model, 23)):
+                    foreach ($imagesFromProperty as $propertyValue):
+                        $data[] = MediaHelper::getImageUrl($propertyValue->media, true);
+                    endforeach;
+                endif;
+
+                return $data;
             },
             'weight' => function ($model) {
                 try {
