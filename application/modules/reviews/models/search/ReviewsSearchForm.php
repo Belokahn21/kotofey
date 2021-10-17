@@ -17,7 +17,7 @@ class ReviewsSearchForm extends Reviews
     public function rules()
     {
         return [
-            [['product_id'], 'integer'],
+            [['product_id','status_id'], 'integer'],
             [['text'], 'string'],
             [['is_active'], 'boolean'],
         ];
