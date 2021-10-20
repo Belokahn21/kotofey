@@ -236,6 +236,7 @@ class NotifyService
             }
         }
 
+        $royal_html = '';
         if (strlen($royal_list_items) > 0) {
             $royal_html = '
                 <tr style="margin-bottom:20px; display:block;">
