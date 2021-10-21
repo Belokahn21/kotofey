@@ -67,7 +67,7 @@ class CustomerBackendController extends MainBackendController
 
         if (Yii::$app->request->isPost) {
             if ($model->load(Yii::$app->request->post())) {
-                if (!$model->validate() && $model->update() === false) {
+                if (!$model->validate() || $model->update() === false) {
                     Alert::setErrorNotify('Карточка клиента не обновлена.');
                     return $this->refresh();
                 }
