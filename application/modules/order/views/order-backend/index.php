@@ -34,6 +34,7 @@ $this->title = Title::show("Заказы");
     'links' => [
         ['title' => 'Выгрузка Email', 'url' => Url::to(['order-backend/export'])],
         ['title' => 'Карточки клиентов', 'url' => Url::to(['customer-backend/index'])],
+        ['title' => 'Группированные продажи', 'url' => Url::to(['order-backend/group'])],
     ]
 ]); ?>
 

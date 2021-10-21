@@ -6,6 +6,7 @@ use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\OrderTracking;
 use app\modules\order\models\helpers\OrdersItemsHelpers;
+use app\modules\order\models\service\GroupBuyDataService;
 use app\modules\order\models\service\NotifyService;
 use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\acquiring\banks\Sberbank;
@@ -42,7 +43,7 @@ class OrderBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
 
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['report', 'export', 'payment-link'], 'roles' => ['Administrator']]
+            ['allow' => true, 'actions' => ['report', 'export', 'payment-link','group'], 'roles' => ['Administrator']]
         ]);
 
         return $parentAccess;
@@ -312,6 +313,14 @@ class OrderBackendController extends MainBackendController
         header("Content-Disposition: attachment; filename={$file_name}");
         $writer->save('php://output');
         exit();
+    }
+
+    public function actionGroup()
+    {
+        $groupedData = GroupBuyDataService::getInstance()->load_data();
+        return $this->render('group', [
+            'groupedData' => $groupedData
+        ]);
     }
 
     public function actionExport()
