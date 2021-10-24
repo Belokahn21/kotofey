@@ -20,11 +20,11 @@ use yii\helpers\Url;
         <?php if ($module): ?>
             <?php if (method_exists($module, 'menuIndex')): ?>
                 <div class="panel-menu-item">
-                    <?php try { ?>
-                        <?= Html::a($module->name, Url::to(['/admin/site/settings-backend/module', 'id' => $moduleId]), ['class' => 'panel-menu-item__link']); ?>
-                    <? } catch (\yii\base\UnknownPropertyException $exception) { ?>
-                        <?= Html::a("Без названия", Url::to(['/admin/site/settings-backend/module', 'id' => $moduleId]), ['class' => 'panel-menu-item__link']); ?>
-                    <?php } ?>
+                    <?php try {
+                        echo Html::a($module->name, Url::to(['/admin/site/settings-backend/module', 'id' => $moduleId]), ['class' => 'panel-menu-item__link']);
+                    } catch (\yii\base\UnknownPropertyException $exception) {
+                        echo Html::a("Без названия", Url::to(['/admin/site/settings-backend/module', 'id' => $moduleId]), ['class' => 'panel-menu-item__link']);
+                    } ?>
 
 
                     <?php if ($items = $module->menuIndex()): ?>
