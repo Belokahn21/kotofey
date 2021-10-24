@@ -65,7 +65,7 @@ class ProductSearchForm extends Product
             $query->andFilterWhere([
                 'id' => ArrayHelper::getColumn($available_promotions, 'product_id')
             ]);
-            $query->limit(-1);
+            $query->limit(1000);
         } else {
             if (!empty($this->mixed_value)) {
                 $this->applyMixedFilter($query);
