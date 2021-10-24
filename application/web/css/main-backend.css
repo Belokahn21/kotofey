@@ -8235,6 +8235,9 @@ html, body {
     float: left;
     width: 20%;
     background: #0b0b0b; }
+    @media (min-width: 450px) {
+      .left-sidebar-react {
+        display: none; } }
     @media (max-width: 1600px) {
       .left-sidebar-react {
         width: 30%; } }
@@ -9459,13 +9462,38 @@ html, body {
     font-size: 12px;
     margin: 5px 0; }
 
+.panel-menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px; }
+  .panel-menu-item {
+    position: relative; }
+    .panel-menu-item:hover .panel-menu-sub {
+      display: block; }
+    .panel-menu-item__link {
+      color: black;
+      display: block;
+      line-height: 1;
+      border-right: 1px #e6e6e6 solid;
+      padding: 5px 10px; }
+  .panel-menu-sub {
+    box-shadow: 0 9px 16px 0 rgba(34, 60, 80, 0.2);
+    left: 0;
+    width: 200px;
+    z-index: 999;
+    background: white;
+    display: none;
+    position: absolute;
+    padding: 10px; }
+    .panel-menu-sub-item {
+      margin: 5px 0; }
+      .panel-menu-sub-item__link {
+        color: black; }
+
 /*-----------------------------------------------------------*/
 .content {
-  float: left;
-  width: 85%; }
-  @media (max-width: 414px) {
-    .content {
-      width: 100%; } }
+  width: 100%; }
 
 .hidden {
   display: none; }

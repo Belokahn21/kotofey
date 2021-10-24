@@ -1,6 +1,7 @@
 .left-sidebar {
   width: 100%;
 
+
   &-container {
     width: 100%;
     height: 100%;
@@ -20,6 +21,10 @@
     float: left;
     width: 20%;
     background: $main-dark-color;
+
+    @media (min-width: 450px) {
+      display: none;
+    }
 
     @media (max-width: 1600px) {
       width: 30%;

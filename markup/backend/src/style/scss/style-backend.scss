@@ -71,16 +71,13 @@
 // прайс-листы
 @import "block/price-list";
 
+// panel menu
+@import "block/panel-menu";
+
 /*-----------------------------------------------------------*/
 
 .content {
-  float: left;
-  width: 85%;
-  //padding: 10px;
-
-  @media(max-width: 414px) {
-    width: 100%;
-  }
+  width: 100%;
 }
 
 .hidden {

@@ -6,8 +6,9 @@
 
 use yii\helpers\Html;
 use app\assets\AdminAsset;
-use app\modules\user\models\entity\User;
 use app\widgets\notification\Alert;
+use app\modules\user\models\entity\User;
+use app\modules\site\widgets\ModuleMenu\ModuleMenuWidget;
 
 AdminAsset::register($this);
 $this->beginPage();
@@ -27,6 +28,7 @@ $user = User::findOne(Yii::$app->user->identity->id);
 </head>
 <body>
 <?php $this->beginBody() ?>
+<?= ModuleMenuWidget::widget(['view' => 'menu']); ?>
 <div class="page-container">
     <?= Alert::widget([
         'template' => 'backend'

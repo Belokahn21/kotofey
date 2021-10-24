@@ -1,7 +1,23 @@
 extends include/template
 block content
     .page-container
-        include block/left-sidebar
+        .panel-menu
+            .panel-menu-item
+                a(href="#").panel-menu-item__link Главная
+            .panel-menu-item
+                a(href="#").panel-menu-item__link Каталог
+            .panel-menu-item
+                a(href="#").panel-menu-item__link Заказы
+                .panel-menu-sub
+                    .panel-menu-sub-item
+                        a(href="#").panel-menu-sub-item__link Список доставок
+                    .panel-menu-sub-item
+                        a(href="#").panel-menu-sub-item__link Список оплат
+                    .panel-menu-sub-item
+                        a(href="#").panel-menu-sub-item__link Статусы заказов
+
+
+    .page-container
         .content
             include block/statistic
             #todo-react

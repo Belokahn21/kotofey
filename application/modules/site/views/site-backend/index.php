@@ -11,7 +11,6 @@ use app\modules\site\widgets\ModuleMenu\ModuleMenuWidget;
 $this->title = Title::show("Главная страница");
 ?>
 <?= StatisticWidget::widget(); ?>
-<?= ModuleMenuWidget::widget(); ?>
 <?php if (Yii::$app->user->id == 1): ?>
     <div id="todo-react"></div>
 <?php endif; ?>

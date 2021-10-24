@@ -1,0 +1,43 @@
+.panel-menu {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 10px;
+
+  &-item {
+    position: relative;
+
+    &:hover {
+      .panel-menu-sub {
+        display: block;
+      }
+    }
+
+    &__link {
+      color: black;
+      display: block;
+      line-height: 1;
+      border-right: 1px #e6e6e6 solid;
+      padding: 5px 10px;
+    }
+  }
+
+  &-sub {
+    box-shadow: 0 9px 16px 0 rgba(34, 60, 80, 0.2);
+    left: 0;
+    width: 200px;
+    z-index: 999;
+    background: white;
+    display: none;
+    position: absolute;
+    padding: 10px;
+
+    &-item {
+      margin: 5px 0;
+
+      &__link {
+        color: black;
+      }
+    }
+  }
+}
