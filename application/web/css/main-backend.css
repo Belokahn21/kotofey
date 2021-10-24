@@ -9467,6 +9467,9 @@ html, body {
   align-items: center;
   flex-wrap: wrap;
   padding: 10px; }
+  @media (max-width: 450px) {
+    .panel-menu {
+      display: none; } }
   .panel-menu-item {
     position: relative; }
     .panel-menu-item:hover .panel-menu-sub {

@@ -4,6 +4,10 @@
   flex-wrap: wrap;
   padding: 10px;
 
+  @media (max-width: 450px) {
+    display: none;
+  }
+
   &-item {
     position: relative;
 
