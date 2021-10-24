@@ -1,6 +1,10 @@
 <?php
 // comment out the following two lines when deployed to production
-defined('YII_DEBUG') or define('YII_DEBUG', false);
+if (in_array($_SERVER['REMOTE_ADDR'], ['109.171.61.86'])) {
+    defined('YII_DEBUG') or define('YII_DEBUG', true);
+} else {
+    defined('YII_DEBUG') or define('YII_DEBUG', false);
+}
 defined('YII_ENV') or define('YII_ENV', 'prod');
 if (!ini_get('date.timezone')) {
     date_default_timezone_set('Asia/Barnaul');
