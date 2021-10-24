@@ -21,6 +21,16 @@ use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\basket\widgets\MiniMobileCart\MiniMobileCartWidget;
 
+if (Yii::$app->request->get('comeback')) {
+    Yii::$app->response->cookies->add(new \yii\web\Cookie([
+        'name' => 'comeback',
+        'value' => Yii::$app->request->get('comeback'),
+    ]));
+}
+$mb = new Mobile_Detect();
+if ($mb->isMobile() && Yii::$app->request->cookies->getValue('comeback', 'N') !== 'Y') Yii::$app->controller->redirect('https://m.kotofey.store');
+
+
 AppAsset::register($this);
 
 $parentCategories = Yii::$app->cache->getOrSet('parent-cats', function () {

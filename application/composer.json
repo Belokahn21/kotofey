@@ -25,6 +25,7 @@
     "cloudinary/cloudinary_php": "^1.18",
     "ext-curl": "*",
     "ext-json": "*",
+    "mobiledetect/mobiledetectlib": "^2.8",
     "yiisoft/yii2-imagine": "^2.2",
     "bizley/migration": "^3.6",
     "sunra/php-simple-html-dom-parser": "1.5.2",
