@@ -6,11 +6,10 @@ use yii\grid\GridView;
 use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use app\modules\seo\models\tools\Title;
-use app\modules\order\models\entity\Customer;
 use app\modules\order\models\entity\OrderStatus;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\widgets\GroupBuy\GroupBuyWidget;
 use app\modules\site\widgets\AdminMenu\AdminMenuWidget;
+use app\modules\order\models\repository\CustomerRepository;
 
 /* @var $users \app\modules\user\models\entity\User[]
  * @var $model \app\modules\order\models\entity\Order
@@ -56,7 +55,7 @@ $this->title = Title::show("Заказы");
 <?php echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
-    'emptyText' => 'Закзаы отсутствуют',
+    'emptyText' => 'Заказы отсутствуют',
     'columns' => [
         'id',
         'email',
@@ -78,7 +77,7 @@ $this->title = Title::show("Заказы");
         [
             'attribute' => 'phone',
             'format' => 'raw',
-            'filter' => ArrayHelper::map(Customer::find()->all(), 'phone', 'name'),
+            'filter' => Yii::$app->user->id == 1 ? ArrayHelper::map(CustomerRepository::getAll(), 'phone', 'name') : true,
             'value' => function ($model) {
                 if ($model->phone) {
                     return Html::a($model->phone, 'tel:' . $model->phone, ['class' => 'js-phone-mask']);
