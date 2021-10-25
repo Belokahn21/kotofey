@@ -11,15 +11,18 @@
         if (!document.getElementById('field').value) {
             alert("You must add text to the required field");
         } else {
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL').then(
-                    function (token) {
-                        console.log(token);
-                        // $('input[name="g-recaptcha-response"]').val(token);
-                        // console.log($('input[name="g-recaptcha-response"]').val())
-                    }
-                );
-            });
+
+            grecaptcha.execute();
+
+            // grecaptcha.ready(function () {
+            //     grecaptcha.execute('6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL').then(
+            //         function (token) {
+            //             console.log(token);
+            //             // $('input[name="g-recaptcha-response"]').val(token);
+            //             // console.log($('input[name="g-recaptcha-response"]').val())
+            //         }
+            //     );
+            // });
         }
     }
 
