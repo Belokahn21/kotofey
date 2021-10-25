@@ -1,4 +1,15 @@
-<div class="set-weight-react" data-product-id="74"></div>
+<script src="https://www.google.com/recaptcha/api.js?render=6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL>" ></script>
+<script type="text/javascript" >
+    grecaptcha.ready(function () {
+        grecaptcha.execute("6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL").then(
+            function (token) {
+                console.log(token);
+                // $('input[name="g-recaptcha-response"]').val(token);
+                // console.log($('input[name="g-recaptcha-response"]').val())
+            }
+        );
+    });
+</script>
 
 
 <?php
