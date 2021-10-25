@@ -1,6 +1,6 @@
 <?php
 // comment out the following two lines when deployed to production
-if (in_array($_SERVER['REMOTE_ADDR'], ['109.171.61.86'])) {
+if (in_array($_SERVER['REMOTE_ADDR'], ['109.171.61.86', '176.212.127.47'])) {
     defined('YII_DEBUG') or define('YII_DEBUG', true);
 } else {
     defined('YII_DEBUG') or define('YII_DEBUG', false);
