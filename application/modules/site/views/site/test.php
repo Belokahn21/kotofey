@@ -1,15 +1,46 @@
-<script src="https://www.google.com/recaptcha/api.js?render=6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL" ></script>
-<script type="text/javascript" >
-    grecaptcha.ready(function () {
-        grecaptcha.execute('6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL').then(
-            function (token) {
-                console.log(token);
-                // $('input[name="g-recaptcha-response"]').val(token);
-                // console.log($('input[name="g-recaptcha-response"]').val())
-            }
-        );
-    });
+<script src="https://www.google.com/recaptcha/api.js?render=6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL"></script>
+
+
+<script>
+    function onSubmit(token) {
+        alert('thanks ' + document.getElementById('field').value);
+    }
+
+    function validate(event) {
+        event.preventDefault();
+        if (!document.getElementById('field').value) {
+            alert("You must add text to the required field");
+        } else {
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL').then(
+                    function (token) {
+                        console.log(token);
+                        // $('input[name="g-recaptcha-response"]').val(token);
+                        // console.log($('input[name="g-recaptcha-response"]').val())
+                    }
+                );
+            });
+        }
+    }
+
+    function onload() {
+        var element = document.getElementById('submit');
+        element.onclick = validate;
+    }
+
 </script>
+
+<form>
+    Name: (required) <input id="field" name="field">
+
+
+    <div id='recaptcha' class="g-recaptcha"
+         data-sitekey="6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL"
+         data-callback="onSubmit"
+         data-size="invisible"></div>
+</form>
+
+
 
 
 <?php
