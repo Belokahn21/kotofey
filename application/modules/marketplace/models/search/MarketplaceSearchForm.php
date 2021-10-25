@@ -1,16 +1,16 @@
 <?php
 
-namespace app\modules\catalog\models\search;
+namespace app\modules\marketplace\models\search;
 
+use app\modules\marketplace\models\entity\Marketplace;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\modules\catalog\models\entity\Price;
 
-class PriceSearchForm extends Price
+class MarketplaceSearchForm extends Marketplace
 {
     public static function tableName()
     {
-        return Price::tableName();
+        return Marketplace::tableName();
     }
 
     public function rules()
@@ -28,7 +28,7 @@ class PriceSearchForm extends Price
 
     public function search($params)
     {
-        $query = Price::find()->orderBy(['id' => SORT_DESC]);
+        $query = Marketplace::find()->orderBy(['id' => SORT_DESC]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
