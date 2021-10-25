@@ -38,7 +38,12 @@
          data-sitekey="6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL"
          data-callback="onSubmit"
          data-size="invisible"></div>
+
+    <button id='submit'>submit</button>
+
 </form>
+
+<script>onload();</script>
 
 
 
