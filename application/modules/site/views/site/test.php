@@ -1,4 +1,5 @@
-<script src="https://www.google.com/recaptcha/api.js?render=6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
 
 
 <script>
