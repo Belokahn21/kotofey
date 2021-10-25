@@ -16,14 +16,16 @@ use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\ProductToBreed;
 use app\modules\catalog\models\entity\CompositionType;
 use app\modules\site\models\helpers\ProductMarkupHelper;
-use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\CompositionProducts;
 use app\modules\catalog\models\entity\TypeProductProperties;
+use app\modules\catalog\models\repository\ProductRepository;
 use app\modules\catalog\models\helpers\ProductToBreadHelper;
 use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
+use app\modules\catalog\models\repository\PropertiesVariantsRepository;
+use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -274,7 +276,9 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
             <fieldset class="fieldset-props">
                 <legend>
                     <?php
-                    $type = CompositionType::findOne($type_id);
+                    $type = Yii::$app->cache->getOrSet('findOne_CompositionType_' . $type_id, function () use ($type_id) {
+                        return CompositionType::find()->select(['name'])->where(['id' => $type_id])->one();
+                    });
                     if ($type) echo $type->name;
                     ?>
                 </legend>
@@ -388,10 +392,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
                                 <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
                                 <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
-                                    <?php $value = PropertiesProductValues::findAll([
-                                        'product_id' => $model->id,
-                                        'property_id' => $property->id
-                                    ]);
+                                    <?php $value = PropertiesProductValuesRepository::getValue($model->id, $property->id);
 
                                     if ($value) $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
 
@@ -401,12 +402,11 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                                     $variants = [];
 
                                     if ($property->type == TypeProductProperties::TYPE_CATALOG) {
-                                        $variants = ArrayHelper::map(Product::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
+                                        $variants = ArrayHelper::map(ProductRepository::getAll(), 'id', 'name');
                                         array_walk($variants, function (&$value, $key) {
                                             $value = $key . ' - ' . $value;
                                         });
-                                    } else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'); ?>
-                                    <?php /* <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?> */ ?>
+                                    } else $variants = ArrayHelper::map(PropertiesVariantsRepository::getVariantsByPropertyId($property->id), 'id', 'name'); ?>
                                     <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
                                         'data' => $variants,
                                         'options' => $drop_down_params,
