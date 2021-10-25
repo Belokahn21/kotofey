@@ -7,7 +7,7 @@ use yii\helpers\Url;
 
 class Module extends MainModule
 {
-    public $name = 'Медиа';
+    public $name = 'Маркетплейсы';
     public $controllerNamespace = 'app\modules\marketplace\controllers';
 
     public function init()
