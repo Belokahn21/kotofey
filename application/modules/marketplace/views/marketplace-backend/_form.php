@@ -37,7 +37,13 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-generals-edit" role="tabpanel" aria-labelledby="nav-generals-edit-tab">
         <div class="row">
-            <div class="col-sm-12">
+            <div class="col-sm-4">
+                <?= $form->field($model, 'is_active')->checkbox(); ?>
+            </div>
+            <div class="col-sm-4">
+                <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
+            </div>
+            <div class="col-sm-4">
                 <?= $form->field($model, 'name'); ?>
             </div>
         </div>
