@@ -15,6 +15,8 @@
 
             grecaptcha.execute();
 
+            console.log(grecaptcha.getResponse());
+
             // grecaptcha.ready(function () {
             //     grecaptcha.execute('6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL').then(
             //         function (token) {
