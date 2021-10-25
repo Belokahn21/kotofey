@@ -33,12 +33,25 @@ $this->title = Title::show("Маркетплейсы");
     'emptyText' => 'Маркетплейсы отсутствуют',
     'columns' => [
         'id',
-        'name',
         [
-            'attribute' => 'created_user_id',
+            'attribute' => 'is_active',
+            'filter' => ['Не активен', 'Активен'],
+            'format' => 'raw',
+            'value' => function ($model) {
+                if ($model->is_active) {
+                    return Html::tag('span', 'Активен', ['class' => 'green']);
+                } else {
+                    return Html::tag('span', 'Не активен', ['class' => 'red']);
+                }
+            }
+        ],
+        'name',
+        'sort',
+        [
+            'attribute' => 'created_at',
         ],
         [
-            'attribute' => 'updated_user_id',
+            'attribute' => 'updated_at',
         ],
         [
             'class' => 'yii\grid\ActionColumn',
