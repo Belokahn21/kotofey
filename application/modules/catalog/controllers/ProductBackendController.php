@@ -17,6 +17,7 @@ use app\modules\site\models\tools\Debug;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\modules\vendors\models\entity\Vendor;
+use app\modules\vendors\models\reopository\VendorRepository;
 use Yii;
 use app\modules\catalog\models\search\ProductSearchForm;
 use app\modules\site\controllers\MainBackendController;
@@ -281,9 +282,7 @@ class ProductBackendController extends MainBackendController
 
     private function getVendors()
     {
-        return Yii::$app->cache->getOrSet('product-vendors-backend', function () {
-            return Vendor::find()->all();
-        });
+        return VendorRepository::getAllVendors();
     }
 
     private function getAnimals()
