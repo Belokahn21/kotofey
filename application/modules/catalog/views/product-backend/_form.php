@@ -343,5 +343,3 @@ use app\modules\marketplace\models\repository\MarketplaceRepository;
         padding-inline-end: 2px;
     }
 </style>
-
-1
