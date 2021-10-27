@@ -10,16 +10,22 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\PriceProduct;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
+use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\ProductToBreed;
 use app\modules\catalog\models\entity\CompositionType;
 use app\modules\site\models\helpers\ProductMarkupHelper;
 use app\modules\catalog\models\entity\CompositionProducts;
+use app\modules\catalog\models\entity\TypeProductProperties;
+use app\modules\catalog\models\repository\ProductRepository;
 use app\modules\catalog\models\helpers\ProductToBreadHelper;
 use app\modules\catalog\models\helpers\ProductCategoryHelper;
+use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 use app\modules\marketplace\models\repository\MarketplaceRepository;
+use app\modules\catalog\models\repository\PropertiesVariantsRepository;
+use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -31,7 +37,6 @@ use app\modules\marketplace\models\repository\MarketplaceRepository;
  * @var $vendors Vendor[]
  * @var $animals \app\modules\pets\models\entity\Animal[]
  * @var $breeds \app\modules\pets\models\entity\Breed[]
- * @var $this \yii\web\View
  */
 
 ?>
@@ -372,11 +377,76 @@ use app\modules\marketplace\models\repository\MarketplaceRepository;
         <div class="js-add-new-line-item add-new-line-button" data-target="#ptb-new-line" data-counter="<?= $ptb_counter; ?>">+</div>
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
-        <?= $this->render('tabs/properties', [
-            'form' => $form,
-            'model' => $model,
-            'properties' => $properties,
-        ]); ?>
+        <div style="list-style: none; margin: 0; padding: 0;">
+            <?php try { ?>
+                <div style="list-style: none; margin: 0; padding: 0;">
+                    <?php foreach ($properties as $group_id => $props): ?>
+                        <fieldset class="fieldset-props">
+                            <legend>
+                                <?php
+                                $group = PropertyGroup::findOne($group_id);
+                                if ($group) echo $group->name;
+                                else echo "Без категории";
+                                ?>
+                            </legend>
+                            <?php foreach ($props as $property): ?>
+
+                                <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
+                                <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
+                                    <?php $value = PropertiesProductValuesRepository::getValue($model->id, $property->id);
+
+                                    if ($value) $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
+
+                                    $drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->is_multiple];
+                                    if ((boolean)$property->is_multiple == true) $drop_down_params['size'] = 10;
+
+                                    $variants = [];
+
+                                    if ($property->type == TypeProductProperties::TYPE_CATALOG) {
+                                        $variants = ArrayHelper::map(ProductRepository::getAll(), 'id', 'name');
+                                        array_walk($variants, function (&$value, $key) {
+                                            $value = $key . ' - ' . $value;
+                                        });
+                                    } else $variants = ArrayHelper::map(PropertiesVariantsRepository::getVariantsByPropertyId($property->id), 'id', 'name'); ?>
+                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
+                                        'data' => $variants,
+                                        'options' => $drop_down_params,
+                                    ])->label($property->name); ?>
+                                <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
+
+                                    <?php $value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id]); ?>
+
+                                    <?php if ($value): ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
+                                    <?php else: ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox()->label($property->name); ?>
+                                    <?php endif; ?>
+
+
+                                <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
+                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
+                                        'values' => ArrayHelper::getColumn(ArrayHelper::getColumn(PropertiesProductValues::findAll([
+                                            'product_id' => $model->id,
+                                            'property_id' => $property->id
+                                        ]), 'media'), 'id'),
+                                        'is_multiple' => true
+                                    ])->label($property->name); ?>
+                                <?php else: ?>
+                                    <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
+                                    <?php else: ?>
+                                        <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        </fieldset>
+                    <?php endforeach; ?>
+                </div>
+            <?php } catch (ErrorException $exception) { ?>
+                <?= $exception->getMessage(); ?>
+                <?= $exception->getLine(); ?>
+            <?php } ?>
+        </div>
     </div>
 
     <?php if (Yii::$app->hasModule('marketplace')): ?>
