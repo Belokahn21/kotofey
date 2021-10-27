@@ -39,15 +39,14 @@ class ProductToBreadHelper
 
     public static function getGroupedItems()
     {
-        return Yii::$app->cache->getOrSet('grouped_breeds', function () {
-            $breeds = Breed::find()->all();
-            $result = [];
+        $result = [];
 
-            foreach ($breeds as $breed) {
-                $result[$breed->animal->name][$breed->id] = $breed->name;
-            }
+        foreach (Yii::$app->cache->getOrSet('grouped_breeds', function () {
+            return Breed::find()->all();
+        }) as $breed) {
+            $result[$breed->animal->name][$breed->id] = $breed->name;
+        }
 
-            return $result;
-        });
+        return $result;
     }
 }
