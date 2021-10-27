@@ -1,56 +1,17 @@
+<!--data-sitekey="6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL"-->
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-
-
-
+<form id="messageForm" method="POST" action="process.php">
+    <input type="email" name="email" required="required">
+    <textarea name="message"    required="required"></textarea>
+    <!-- Кнопка, с подключённым к ней виджетом invisible reCAPTCHA -->
+    <button class="g-recaptcha" data-sitekey="6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL" data-callback="onSubmit">Отправить</button>
+</form>
 <script>
     function onSubmit(token) {
-        alert('thanks ' + document.getElementById('field').value);
+        // отправить форму на сервер
+        document.getElementById("messageForm").submit();
     }
-
-    function validate(event) {
-        event.preventDefault();
-        if (!document.getElementById('field').value) {
-            alert("You must add text to the required field");
-        } else {
-
-            grecaptcha.execute();
-
-            console.log(grecaptcha.getResponse());
-
-            // grecaptcha.ready(function () {
-            //     grecaptcha.execute('6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL').then(
-            //         function (token) {
-            //             console.log(token);
-            //             // $('input[name="g-recaptcha-response"]').val(token);
-            //             // console.log($('input[name="g-recaptcha-response"]').val())
-            //         }
-            //     );
-            // });
-        }
-    }
-
-    function onload() {
-        var element = document.getElementById('submit');
-        element.onclick = validate;
-    }
-
 </script>
-
-<form>
-    Name: (required) <input id="field" name="field">
-
-
-    <div id='recaptcha' class="g-recaptcha"
-         data-sitekey="6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL"
-         data-callback="onSubmit"
-         data-size="invisible"></div>
-
-    <button id='submit'>submit</button>
-
-</form>
-
-<script>onload();</script>
-
 
 
 
