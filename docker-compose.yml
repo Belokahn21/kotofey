@@ -7,7 +7,7 @@ services:
     build:
       context: ./docker/nginx
     ports:
-      - "27015:80"
+      - "8080:80"
     volumes:
       - ./:/var/www/kotofey.store:ro
       - ./docker/nginx/config:/etc/nginx/conf.d
@@ -29,4 +29,4 @@ services:
       MARIADB_PASSWORD: 123qweR%
       MYSQL_ROOT_PASSWORD: root
     ports:
-    - "3361:3306"
+    - "3306:3306"

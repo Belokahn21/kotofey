@@ -1,7 +1,7 @@
 <?php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=mariadb;port=3361;dbname=kotofey;',
+    'dsn' => 'mysql:host=mariadb;dbname=kotofey;',
     'username' => 'kotofey',
     'password' => '123qweR%',
     'charset' => 'utf8',
