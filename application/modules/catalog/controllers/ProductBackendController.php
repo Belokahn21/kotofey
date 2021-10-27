@@ -6,10 +6,12 @@ use app\modules\catalog\models\entity\Composition;
 use app\modules\catalog\models\entity\Price;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\form\PriceRepairForm;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\pets\models\entity\Animal;
 use app\modules\pets\models\entity\Breed;
+use app\modules\site\models\tools\Debug;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use app\modules\vendors\models\entity\Vendor;
@@ -19,6 +21,7 @@ use app\modules\site\controllers\MainBackendController;
 use app\modules\catalog\models\entity\ProductMarket;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\widgets\notification\Alert;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -56,10 +59,6 @@ class ProductBackendController extends MainBackendController
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $outProps = [];
-        foreach ($properties as $prop) {
-            $outProps[$prop->group_id][] = $prop;
-        }
 
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
@@ -79,7 +78,7 @@ class ProductBackendController extends MainBackendController
             'animals' => $animals,
             'breeds' => $breeds,
             'compositions' => $compositions,
-            'properties' => $outProps,
+            'properties' => $properties,
             'modelDelivery' => $modelDelivery,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -101,15 +100,6 @@ class ProductBackendController extends MainBackendController
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
-        $outProps = [];
-        foreach ($properties as $prop) {
-            $outProps[$prop->group_id][] = $prop;
-        }
-
-        if ($model->updateProduct()) {
-            Alert::setSuccessNotify('Продукт обновлен');
-            return $this->refresh();
-        }
 
         return $this->render('update', [
             'model' => $model,
@@ -120,7 +110,7 @@ class ProductBackendController extends MainBackendController
             'animals' => $animals,
             'breeds' => $breeds,
             'modelDelivery' => $modelDelivery,
-            'properties' => $outProps,
+            'properties' => $properties,
         ]);
     }
 
@@ -235,9 +225,30 @@ class ProductBackendController extends MainBackendController
 
     private function getProperties()
     {
-        return Yii::$app->cache->getOrSet('product-properties-backend', function () {
+        $outProps = [];
+        $group_ids = [];
+        $properties = Yii::$app->cache->getOrSet('product-properties-backend', function () {
             return Properties::find()->all();
         });
+
+        foreach ($properties as $prop) {
+            $group_ids[] = $prop->group_id;
+        }
+
+        $groups = Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__ . implode(',', $group_ids), function () use ($group_ids) {
+            return PropertyGroup::find()->where(['id' => $group_ids])->all();
+        });
+
+        foreach ($properties as $prop) {
+            $outProps[$prop->group_id]['properties'][] = $prop;
+
+            foreach ($groups as $_group) {
+                if ($_group->id == $prop->group_id) $outProps[$prop->group_id]['group'] = $_group;
+            }
+        }
+
+
+        return $outProps;
     }
 
     private function getPrices()
