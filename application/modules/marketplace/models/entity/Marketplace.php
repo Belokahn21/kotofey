@@ -3,8 +3,6 @@
 namespace app\modules\marketplace\models\entity;
 
 use Yii;
-use yii\behaviors\SluggableBehavior;
-use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "marketplace".
@@ -19,43 +17,38 @@ use yii\behaviors\TimestampBehavior;
  */
 class Marketplace extends \yii\db\ActiveRecord
 {
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'marketplace';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function rules()
     {
         return [
-            [['is_active'], 'boolean'],
-            [['is_active'], 'default', 'value' => true],
-
-
             [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
-            [['sort'], 'default', 'value' => 500],
-
             [['name', 'slug'], 'string', 'max' => 255],
         ];
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
-            'name' => 'Название',
-            'slug' => 'Символьный код',
-            'is_active' => 'Активность',
-            'sort' => 'Сортировка',
-            'created_at' => 'Дата создания',
-            'updated_at' => 'Дата обновления',
-        ];
-    }
-
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-            [
-                'class' => SluggableBehavior::className(),
-                'attribute' => 'name',
-                'ensureUnique' => true,
-                'immutable' => true
-            ],
+            'name' => 'Name',
+            'slug' => 'Slug',
+            'is_active' => 'Is Active',
+            'sort' => 'Sort',
+            'created_at' => 'Created At',
+            'updated_at' => 'Updated At',
         ];
     }
 }
