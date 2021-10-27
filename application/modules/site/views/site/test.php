@@ -8,7 +8,6 @@
 </form>
 <script>
     function onSubmit(token) {
-        console.log(token);
         // отправить форму на сервер
         document.getElementById("messageForm").submit();
     }
