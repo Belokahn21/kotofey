@@ -468,3 +468,5 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         padding-inline-end: 2px;
     }
 </style>
+
+1
