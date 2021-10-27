@@ -35,7 +35,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 
                         <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
                         <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
-                            <?php $value = PropertiesProductValuesRepository::getAllValues($model->id, $property->id);
+                            <?php $value = PropertiesProductValuesRepository::getValue($model->id, $property->id);
 
                             if ($value) $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
 
@@ -56,7 +56,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                             ])->label($property->name); ?>
                         <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
 
-                            <?php $value = PropertiesProductValuesRepository::getOneValue($model->id, $property->id); ?>
+                            <?php $value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id]); ?>
 
                             <?php if ($value): ?>
                                 <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
@@ -67,11 +67,14 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 
                         <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
                             <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
-                                'values' => ArrayHelper::getColumn(ArrayHelper::getColumn(PropertiesProductValuesRepository::getAllValues($model->id, $property->id), 'media'), 'id'),
+                                'values' => ArrayHelper::getColumn(ArrayHelper::getColumn(PropertiesProductValues::findAll([
+                                    'product_id' => $model->id,
+                                    'property_id' => $property->id
+                                ]), 'media'), 'id'),
                                 'is_multiple' => true
                             ])->label($property->name); ?>
                         <?php else: ?>
-                            <?php if ($value = PropertiesProductValuesRepository::getOneValue($model->id, $property->id)): ?>
+                            <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
                                 <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
                             <?php else: ?>
                                 <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>

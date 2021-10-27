@@ -61,6 +61,6 @@ class SiteSettings extends ActiveRecord
 
     public static function findByCode($code)
     {
-        return self::findOne(['code' => $code]);
+        return static::findOne(['code' => $code]);
     }
 }
