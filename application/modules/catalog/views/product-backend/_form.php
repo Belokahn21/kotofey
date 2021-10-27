@@ -7,23 +7,16 @@ use mihaildev\ckeditor\CKEditor;
 use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\PriceProduct;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
-use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\entity\ProductToBreed;
-use app\modules\catalog\models\entity\CompositionType;
 use app\modules\site\models\helpers\ProductMarkupHelper;
-use app\modules\catalog\models\entity\PropertiesVariants;
-use app\modules\catalog\models\entity\CompositionProducts;
-use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\helpers\ProductToBreadHelper;
 use app\modules\catalog\models\helpers\ProductCategoryHelper;
-use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
-use app\modules\catalog\models\helpers\CompositionMetricsHelper;
+use app\modules\marketplace\models\repository\MarketplaceRepository;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $modelDelivery \app\modules\catalog\models\entity\ProductOrder
@@ -35,6 +28,7 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
  * @var $vendors Vendor[]
  * @var $animals \app\modules\pets\models\entity\Animal[]
  * @var $breeds \app\modules\pets\models\entity\Breed[]
+ * @var $this \yii\web\View
  */
 
 ?>
@@ -47,6 +41,9 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
         <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
         <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
+        <?php if (Yii::$app->hasModule('marketplace')): ?>
+            <a class="nav-item nav-link" id="nav-marketplace-tab" data-toggle="tab" href="#nav-marketplace" role="tab" aria-controls="nav-marketplace" aria-selected="false">Маркетплейсы</a>
+        <?php endif; ?>
     </div>
 </nav>
 <div class="tab-content" id="backendFormsContent">
@@ -142,11 +139,11 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-image single">
-                            <?php if ($model->media): ?>
+                            <?php if ($media = $model->media): ?>
                                 <a data-lightbox="roadtrip" href="<?= ProductHelper::getImageUrl($model) ?>">
                                     <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                                 </a>
-                                <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
+                                <?php if ($media->location == Media::LOCATION_SERVER): ?>
                                     Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
                                 <?php endif; ?>
                             <?php endif; ?>
@@ -247,71 +244,11 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
     </div>
     <div class="tab-pane fade" id="nav-composition" role="tabpanel" aria-labelledby="nav-composition-tab">
 
-        <div>
-            <?= \kartik\select2\Select2::widget([
-                'name' => '',
-                'options' => ['class' => 'js-load-composition', 'placeholder' => 'Выбрать готовый состав ...'],
-                'data' => Yii::$app->cache->getOrSet('js-load-composition', function () {
-                    return ArrayHelper::map(ArrayHelper::getColumn(CompositionProducts::find()->select(['product_id'])->groupBy('product_id')->all(), 'product'), 'id', 'name');
-                }),
-            ]); ?>
-        </div>
-
-        <button type="button" class="js-reset-composition btn-main">Очистить состав товара</button>
-
-        <?php
-        $composition_model = new CompositionProducts();
-        $count = 0;
-        $grouped_composition = [];
-        foreach ($compositions as $composition) {
-            $grouped_composition[$composition->composition_type_id][] = $composition;
-        }
-        ?>
-
-
-        <?php foreach ($grouped_composition as $type_id => $composit_list): ?>
-
-            <fieldset class="fieldset-props">
-                <legend>
-                    <?php
-                    $type = CompositionType::findOne($type_id);
-                    if ($type) echo $type->name;
-                    ?>
-                </legend>
-
-                <?php foreach ($composit_list as $composit): ?>
-
-                    <?php $composit_element = null; ?>
-                    <?php if (!$model->isNewRecord): ?>
-                        <?php $composit_element = CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id]); ?>
-                    <?php endif; ?>
-
-                    <div class="row">
-                        <div class="col-4"><?= $composit->name; ?></div>
-                        <div class="col-4">
-                            <div class="hidden">
-                                <?= $form->field($composition_model, '[' . $count . ']composition_id')->hiddenInput(['value' => $composit->id, 'class' => 'form-control js-row-composition-id', 'data-composit-id' => $composit->id])->label(false); ?>
-                                <?= $form->field($composition_model, '[' . $count . ']product_id')->hiddenInput(['value' => $model->id, 'class' => 'form-control js-row-product-id'])->label(false); ?>
-                            </div>
-                            <?= $form->field($composition_model, '[' . $count . ']value')->textInput([
-                                'value' => $composit_element ? $composit_element->value : null,
-                                'placeholder' => $composit->name,
-                                'class' => 'js-row-composition form-control',
-                                'data-composit-id' => $composit->id,
-                            ])->label(false); ?>
-                        </div>
-                        <div class="col-4">
-                            <?= $form->field($composition_model, '[' . $count . ']metric_id')->dropDownList(CompositionMetricsHelper::getMetrics(), ['prompt' => 'Выбрать весовку',
-                                'options' => [$composit_element ? $composit_element->metric_id : null => ["Selected" => true]],
-                                'class' => 'js-row-metrik form-control',
-                                'data-composit-id' => $composit->id,
-                            ])->label(false); ?>
-                        </div>
-                    </div>
-                    <?php $count++; ?>
-                <?php endforeach; ?>
-            </fieldset>
-        <?php endforeach; ?>
+        <?= $this->render('tabs/composition', [
+            'form' => $form,
+            'model' => $model,
+            'compositions' => $compositions,
+        ]); ?>
 
     </div>
     <div class="tab-pane fade" id="nav-pet" role="tabpanel" aria-labelledby="nav-pet-tab">
@@ -368,85 +305,23 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 
         <div class="js-add-new-line-area "></div>
         <div class="js-add-new-line-item add-new-line-button" data-target="#ptb-new-line" data-counter="<?= $ptb_counter; ?>">+</div>
-
-
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
-        <div style="list-style: none; margin: 0; padding: 0;">
-            <?php try { ?>
-                <div style="list-style: none; margin: 0; padding: 0;">
-                    <?php foreach ($properties as $group_id => $props): ?>
-                        <fieldset class="fieldset-props">
-                            <legend>
-                                <?php
-                                $group = PropertyGroup::findOne($group_id);
-                                if ($group) echo $group->name;
-                                else echo "Без категории";
-                                ?>
-                            </legend>
-                            <?php foreach ($props as $property): ?>
-
-                                <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
-                                <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
-                                    <?php $value = PropertiesProductValues::findAll([
-                                        'product_id' => $model->id,
-                                        'property_id' => $property->id
-                                    ]);
-
-                                    if ($value) $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
-
-                                    $drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->is_multiple];
-                                    if ((boolean)$property->is_multiple == true) $drop_down_params['size'] = 10;
-
-                                    $variants = [];
-
-                                    if ($property->type == TypeProductProperties::TYPE_CATALOG) {
-                                        $variants = ArrayHelper::map(Product::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
-                                        array_walk($variants, function (&$value, $key) {
-                                            $value = $key . ' - ' . $value;
-                                        });
-                                    } else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'); ?>
-                                    <?php /* <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?> */ ?>
-                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
-                                        'data' => $variants,
-                                        'options' => $drop_down_params,
-                                    ])->label($property->name); ?>
-                                <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
-
-                                    <?php $value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id]); ?>
-
-                                    <?php if ($value): ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
-                                    <?php else: ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox()->label($property->name); ?>
-                                    <?php endif; ?>
-
-
-                                <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
-                                    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
-                                        'values' => ArrayHelper::getColumn(ArrayHelper::getColumn(PropertiesProductValues::findAll([
-                                            'product_id' => $model->id,
-                                            'property_id' => $property->id
-                                        ]), 'media'), 'id'),
-                                        'is_multiple' => true
-                                    ])->label($property->name); ?>
-                                <?php else: ?>
-                                    <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
-                                    <?php else: ?>
-                                        <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>
-                                    <?php endif; ?>
-                                <?php endif; ?>
-                            <?php endforeach; ?>
-                        </fieldset>
-                    <?php endforeach; ?>
-                </div>
-            <?php } catch (ErrorException $exception) { ?>
-                <?= $exception->getMessage(); ?>
-                <?= $exception->getLine(); ?>
-            <?php } ?>
-        </div>
+        <?= $this->render('tabs/properties', [
+            'form' => $form,
+            'model' => $model,
+            'properties' => $properties,
+        ]); ?>
     </div>
+
+    <?php if (Yii::$app->hasModule('marketplace')): ?>
+        <div class="tab-pane fade" id="nav-marketplace" role="tabpanel" aria-labelledby="nav-marketplace-tab">
+            <?php foreach (MarketplaceRepository::getAllMarketplace() as $marketplace): ?>
+                <?= $marketplace->name; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
 </div>
 
 <style type="text/css">
