@@ -27,7 +27,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                 <fieldset class="fieldset-props">
                     <legend>
                         <?php
-                        if ($group = ArrayHelper::getValue($properties[$group_id], 'group')) echo $group->name;
+                        if ($group = $properties[$group_id]['group']) echo $group->name;
                         else echo "Без категории";
                         ?>
                     </legend>
