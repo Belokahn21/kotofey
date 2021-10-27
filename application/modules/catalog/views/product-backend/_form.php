@@ -44,9 +44,7 @@ use app\modules\marketplace\models\repository\MarketplaceRepository;
         <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
         <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
-        <?php if (Yii::$app->hasModule('marketplace')): ?>
-            <a class="nav-item nav-link" id="nav-marketplace-tab" data-toggle="tab" href="#nav-marketplace" role="tab" aria-controls="nav-marketplace" aria-selected="false">Маркетплейсы</a>
-        <?php endif; ?>
+        <a class="nav-item nav-link" id="nav-marketplace-tab" data-toggle="tab" href="#nav-marketplace" role="tab" aria-controls="nav-marketplace" aria-selected="false">Маркетплейсы</a>
     </div>
 </nav>
 <div class="tab-content" id="backendFormsContent">
@@ -372,20 +370,18 @@ use app\modules\marketplace\models\repository\MarketplaceRepository;
         <div class="js-add-new-line-item add-new-line-button" data-target="#ptb-new-line" data-counter="<?= $ptb_counter; ?>">+</div>
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
-        <?= $this->render('tabs/properties', [
+        <?php /*= $this->render('tabs/properties', [
             'form' => $form,
             'model' => $model,
             'properties' => $properties,
-        ]); ?>
+        ]); */?>
     </div>
 
-    <?php if (Yii::$app->hasModule('marketplace')): ?>
-        <div class="tab-pane fade" id="nav-marketplace" role="tabpanel" aria-labelledby="nav-marketplace-tab">
-            <?php foreach (MarketplaceRepository::getAllMarketplace() as $marketplace): ?>
-                <?= $marketplace->name; ?>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+    <div class="tab-pane fade" id="nav-marketplace" role="tabpanel" aria-labelledby="nav-marketplace-tab">
+        <?php foreach (MarketplaceRepository::getAllMarketplace() as $marketplace): ?>
+            <?= $marketplace->name; ?>
+        <?php endforeach; ?>
+    </div>
 
 </div>
 
