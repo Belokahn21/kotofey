@@ -1,32 +1,37 @@
 version: "3.9"
-networks:
-  default:
-    name: "kotofey"
+
 services:
   nginx:
+    networks:
+      - demo_site
     build:
       context: ./docker/nginx
     ports:
       - "27015:80"
     volumes:
-      - ./:/var/www/kotofey.store:ro
+      - ./:/var/www/demo_site.store:ro
       - ./docker/nginx/config:/etc/nginx/conf.d
 
   php-fpm:
-    working_dir: "/var/www/kotofey.store"
+    networks:
+      - demo_site
+    working_dir: "/var/www/demo_site.store"
     build:
       context: ./docker/php-fpm
     volumes:
-      - ./:/var/www/kotofey.store
+      - ./:/var/www/demo_site.store
   mariadb:
-    image: mariadb:latest
+    networks:
+      - demo_site
+    image: library/mysql:5.7
     restart: "always"
     volumes:
       - ./docker/db/sql.sql:/docker-entrypoint-initdb.d/sql.sql
     environment:
-      MARIADB_DATABASE: kotofey
-      MARIADB_USER: kotofey
-      MARIADB_PASSWORD: 123qweR%
       MYSQL_ROOT_PASSWORD: root
     ports:
     - "3361:3306"
+
+networks:
+  demo_site:
+    driver: bridge
