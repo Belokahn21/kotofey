@@ -21,7 +21,7 @@ use app\modules\order\widgets\CustomerInput\CustomerInputWidget;
 use app\modules\order\widgets\FastManagerMessage\FastManagerMessage;
 use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 
-/* @var $model \app\modules\order\models\entity\Order
+/* @var $model \app\modules\marketplace\models\entity\Marketplace
  * @var $form \yii\widgets\ActiveForm
  */
 
@@ -37,14 +37,17 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-generals-edit" role="tabpanel" aria-labelledby="nav-generals-edit-tab">
         <div class="row">
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <?= $form->field($model, 'is_active')->checkbox(); ?>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
             </div>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
                 <?= $form->field($model, 'name'); ?>
+            </div>
+            <div class="col-sm-3">
+                <?= $form->field($model, 'type_export_id')->dropDownList($model->getTypeExport(), ['prompt' => 'Режим выгрузки товаров']); ?>
             </div>
         </div>
     </div>

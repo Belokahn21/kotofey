@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "marketplace".
  *
  * @property int $id
+ * @property int $type_export_id
  * @property string|null $name
  * @property string|null $slug
  * @property int|null $is_active
@@ -19,6 +20,10 @@ use yii\behaviors\TimestampBehavior;
  */
 class Marketplace extends \yii\db\ActiveRecord
 {
+    const TYPE_EXPORT_MANUAL = 1;
+    const TYPE_EXPORT_MANUAL_AND_STOCK = 2;
+    const TYPE_EXPORT_ONLY_STOCK = 3;
+
     public function rules()
     {
         return [
@@ -26,7 +31,7 @@ class Marketplace extends \yii\db\ActiveRecord
             [['is_active'], 'default', 'value' => true],
 
 
-            [['is_active', 'sort', 'created_at', 'updated_at'], 'integer'],
+            [['is_active', 'sort', 'created_at', 'updated_at', 'type_export_id'], 'integer'],
             [['sort'], 'default', 'value' => 500],
 
             [['name', 'slug'], 'string', 'max' => 255],
@@ -37,6 +42,7 @@ class Marketplace extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'type_export_id' => 'Режим выгрузки товаров',
             'name' => 'Название',
             'slug' => 'Символьный код',
             'is_active' => 'Активность',
@@ -56,6 +62,15 @@ class Marketplace extends \yii\db\ActiveRecord
                 'ensureUnique' => true,
                 'immutable' => true
             ],
+        ];
+    }
+
+    public function getTypeExport()
+    {
+        return [
+            self::TYPE_EXPORT_MANUAL => 'Ручное управление',
+            self::TYPE_EXPORT_MANUAL_AND_STOCK => 'Ручное + остатки склада',
+            self::TYPE_EXPORT_ONLY_STOCK => 'Остатки склада',
         ];
     }
 }
