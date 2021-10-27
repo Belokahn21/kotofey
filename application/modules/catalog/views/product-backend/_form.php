@@ -7,7 +7,6 @@ use mihaildev\ckeditor\CKEditor;
 use app\modules\media\models\entity\Media;
 use app\modules\stock\models\entity\Stocks;
 use app\modules\vendors\models\entity\Vendor;
-use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\PriceProduct;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\modules\catalog\models\entity\ProductStock;
@@ -24,6 +23,7 @@ use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\models\entity\PropertiesProductValues;
 use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
+use app\modules\marketplace\models\repository\MarketplaceRepository;
 use app\modules\catalog\models\repository\PropertiesVariantsRepository;
 use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
 
@@ -49,6 +49,9 @@ use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
         <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
         <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
+        <?php if (Yii::$app->hasModule('marketplace')): ?>
+            <a class="nav-item nav-link" id="nav-marketplace-tab" data-toggle="tab" href="#nav-marketplace" role="tab" aria-controls="nav-marketplace" aria-selected="false">Маркетплейсы</a>
+        <?php endif; ?>
     </div>
 </nav>
 <div class="tab-content" id="backendFormsContent">
@@ -372,8 +375,6 @@ use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
 
         <div class="js-add-new-line-area "></div>
         <div class="js-add-new-line-item add-new-line-button" data-target="#ptb-new-line" data-counter="<?= $ptb_counter; ?>">+</div>
-
-
     </div>
     <div class="tab-pane fade" id="nav-props" role="tabpanel" aria-labelledby="nav-props-tab">
         <div style="list-style: none; margin: 0; padding: 0;">
@@ -447,6 +448,15 @@ use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
             <?php } ?>
         </div>
     </div>
+
+    <?php if (Yii::$app->hasModule('marketplace')): ?>
+        <div class="tab-pane fade" id="nav-marketplace" role="tabpanel" aria-labelledby="nav-marketplace-tab">
+            <?php foreach (MarketplaceRepository::getAllMarketplace() as $marketplace): ?>
+                <?= $marketplace->name; ?>
+            <?php endforeach; ?>
+        </div>
+    <?php endif; ?>
+
 </div>
 
 <style type="text/css">
