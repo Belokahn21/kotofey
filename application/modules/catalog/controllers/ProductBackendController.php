@@ -103,10 +103,6 @@ class ProductBackendController extends MainBackendController
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
-        if ($model->updateProduct()) {
-            Alert::setSuccessNotify('Продукт успешно обновлен');
-            return $this->refresh();
-        }
 
         return $this->render('update', [
             'model' => $model,

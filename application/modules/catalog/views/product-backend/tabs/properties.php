@@ -1,6 +1,5 @@
 <?php
 
-use app\modules\catalog\models\entity\Product;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\entity\TypeProductProperties;
@@ -46,7 +45,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                             $variants = [];
 
                             if ($property->type == TypeProductProperties::TYPE_CATALOG) {
-                                $variants = ArrayHelper::map(Product::find()->select(['id', 'name'])->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
+                                $variants = ArrayHelper::map(ProductRepository::getAll(), 'id', 'name');
                                 array_walk($variants, function (&$value, $key) {
                                     $value = $key . ' - ' . $value;
                                 });
