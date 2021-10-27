@@ -139,11 +139,11 @@ use app\modules\marketplace\models\repository\MarketplaceRepository;
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="form-image single">
-                            <?php if ($model->media): ?>
+                            <?php if ($media = $model->media): ?>
                                 <a data-lightbox="roadtrip" href="<?= ProductHelper::getImageUrl($model) ?>">
                                     <img src="<?= ProductHelper::getImageUrl($model) ?>" width="150" title="<?= $model->name; ?>" alt="<?= $model->name; ?>">
                                 </a>
-                                <?php if ($model->media->location == Media::LOCATION_SERVER): ?>
+                                <?php if ($media->location == Media::LOCATION_SERVER): ?>
                                     Размер: <?= Yii::$app->formatter->asShortSize(filesize(Yii::getAlias('@webroot' . ProductHelper::getImageUrl($model)))); ?>
                                 <?php endif; ?>
                             <?php endif; ?>

@@ -11,10 +11,12 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\helpers\ProductCategoryHelper;
-use app\modules\catalog\models\entity\ProductCategory;
+use app\modules\user\models\repository\UserRepository;
 use app\modules\catalog\widgets\StockOut\StockOutWidget;
+use app\modules\vendors\models\reopository\VendorRepository;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
+use app\modules\catalog\models\repository\ProductCategoryRepository;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
@@ -24,6 +26,8 @@ use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
  * @var $prices \app\modules\catalog\models\entity\Price[]
  * @var $compositions \app\modules\catalog\models\entity\Composition[]
  * @var $vendors Vendor[]
+ * @var $animals \app\modules\pets\models\entity\Animal[]
+ * @var $breeds \app\modules\pets\models\entity\Breed[]
  */
 
 $this->title = Title::show('Товары');
@@ -95,10 +99,10 @@ $this->title = Title::show('Товары');
         ],
         [
             'attribute' => 'vendor_id',
-            'filter' => ArrayHelper::map(Vendor::find()->all(), 'id', 'name'),
+            'filter' => ArrayHelper::map(VendorRepository::getAllVendors(), 'id', 'name'),
             'format' => 'raw',
             'value' => function ($model) {
-                $vendor = Vendor::findOne($model->vendor_id);
+                $vendor = VendorRepository::getVendor($model->vendor_id);
                 if ($vendor) {
                     $currency = Currency::getInstance()->show();
                     $purchase_html = !$vendor->min_summary_sale ? "" : "Мин. закуп {$vendor->min_summary_sale}{$currency} ";
@@ -145,8 +149,7 @@ VENDOR
             'format' => 'raw',
             'filter' => ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'),
             'value' => function ($model) {
-                $category = ProductCategory::findOne($model->category_id);
-                if ($category) {
+                if ($category = ProductCategoryRepository::getCategory($model->category_id)) {
                     return Html::a($category->name, Url::to(['/admin/catalog/product-category-backend/index', 'id' => $model->category_id]), ['target' => '_blank']);
                 }
                 return "Без категории";
@@ -164,8 +167,7 @@ VENDOR
             'attribute' => 'created_user_id',
             'format' => 'raw',
             'value' => function ($model) {
-                $user = \app\modules\user\models\entity\User::findOne($model->created_user_id);
-                if ($user) {
+                if ($user = UserRepository::getUser($model->created_user_id)) {
                     return $user->email;
                 }
                 return "Не указано";
@@ -175,8 +177,7 @@ VENDOR
             'attribute' => 'updated_user_id',
             'format' => 'raw',
             'value' => function ($model) {
-                $user = \app\modules\user\models\entity\User::findOne($model->updated_user_id);
-                if ($user) {
+                if ($user = UserRepository::getUser($model->updated_user_id)) {
                     return $user->email;
                 }
                 return "Не указано";
