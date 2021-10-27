@@ -402,7 +402,7 @@ use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
                                     $variants = [];
 
                                     if ($property->type == TypeProductProperties::TYPE_CATALOG) {
-                                        $variants = ArrayHelper::map(ProductRepository::getAll(), 'id', 'name');
+                                        $variants = Product::find()->select(['id', 'name'])->orderBy(['created_at' => SORT_DESC])->all();
                                         array_walk($variants, function (&$value, $key) {
                                             $value = $key . ' - ' . $value;
                                         });
