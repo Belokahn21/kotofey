@@ -40,6 +40,7 @@ $this->title = Title::show('Товары');
         <?php endif; ?>
         <div class="info-panel-data">Создан: <?= date('d.m.Y', $model->created_at) ?></div>
         <div class="info-panel-data">Обновлен: <?= date('d.m.Y', $model->updated_at) ?></div>
+        <div class="info-panel-data"><?= ProductElastic::findOne($model->id) ? ' <span class="green">Elasticsearch: Ok</span>' : '<span>Elasticsearch: Not exist</span>' ?></div>
     </div>
 <?= $this->render('_form', [
     'model' => $model,
