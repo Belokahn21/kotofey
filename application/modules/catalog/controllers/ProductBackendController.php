@@ -3,12 +3,14 @@
 namespace app\modules\catalog\controllers;
 
 use app\modules\catalog\models\entity\Composition;
+use app\modules\catalog\models\entity\CompositionType;
 use app\modules\catalog\models\entity\Price;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\form\PriceRepairForm;
 use app\modules\catalog\models\helpers\PropertiesHelper;
+use app\modules\catalog\models\repository\CompositionProductsRepository;
 use app\modules\pets\models\entity\Animal;
 use app\modules\pets\models\entity\Breed;
 use app\modules\site\models\tools\Debug;
@@ -211,9 +213,28 @@ class ProductBackendController extends MainBackendController
 
     private function getCompositions()
     {
-        return Yii::$app->cache->getOrSet('product-composition-backend', function () {
+        $compositions = Yii::$app->cache->getOrSet('product-composition-backend', function () {
             return Composition::find()->where(['is_active' => true])->all();
         });
+
+        $grouped_composition = [];
+        $list_group_id = [];
+        foreach ($compositions as $composition) {
+            $list_group_id[] = $composition->id;
+        }
+
+
+        $groups = CompositionProductsRepository::getTypesByIds($list_group_id);
+        foreach ($compositions as $composition) {
+            $grouped_composition[$composition->composition_type_id]['compositions'][] = $composition;
+
+
+            foreach ($groups as $group) {
+                if ($group->id == $composition->composition_type_id) $grouped_composition[$composition->composition_type_id]['group'] = $group;
+            }
+        }
+
+        return $grouped_composition;
     }
 
     private function getStocks()
