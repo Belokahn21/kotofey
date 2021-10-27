@@ -28,7 +28,7 @@ class PriceSearchForm extends Price
 
     public function search($params)
     {
-        $query = Price::find()->orderBy(['id' => SORT_DESC]);
+        $query = Price::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,

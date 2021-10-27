@@ -349,9 +349,6 @@ $config = [
         'mailer' => [
             'class' => 'app\modules\mailer\Module',
         ],
-        'marketplace' => [
-            'class' => 'app\modules\marketplace\Module',
-        ]
     ],
     'params' => $params,
 ];
