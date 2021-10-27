@@ -1,20 +1,11 @@
 FROM php:7.1.33-fpm
+#FROM php:7.3.31-fpm
 
+RUN apt-get update \
+&& docker-php-ext-install pdo pdo_mysql
 
-COPY --from=mlocati/php-extension-installer /usr/bin/install-php-extensions /usr/local/bin/
-RUN install-php-extensions \
-        soap \
-        zip \
-        curl \
-        bcmath \
-        exif \
-        gd \
-        iconv \
-        intl \
-        mbstring \
-        opcache \
-        pdo_mysql \
-        pdo_pgsql \
-        imagick \
-        mongodb \
-        xdebug
+RUN apt update
+RUN apt install -y sudo
+
+RUN sudo apt install -y vim
+RUN sudo apt install -y make
