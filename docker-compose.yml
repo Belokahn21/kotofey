@@ -18,6 +18,11 @@ services:
       context: ./docker/php-fpm
     volumes:
       - ./:/var/www/kotofey.store
+      - ./docker/fpm/php.d:/usr/local/etc/php
+  memcache:
+    image: library/memcached:latest
+    ports:
+    - "11211:11211"
   mariadb:
     image: mariadb:latest
     restart: "always"

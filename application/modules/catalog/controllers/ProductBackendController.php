@@ -8,6 +8,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
 use app\modules\catalog\models\form\PriceRepairForm;
 use app\modules\catalog\models\helpers\PropertiesHelper;
+use app\modules\catalog\models\repository\PropertiesRepository;
 use app\modules\pets\models\entity\Animal;
 use app\modules\pets\models\entity\Breed;
 use app\modules\stock\models\entity\Stocks;
@@ -56,11 +57,6 @@ class ProductBackendController extends MainBackendController
         $searchModel = new ProductSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $outProps = [];
-        foreach ($properties as $prop) {
-            $outProps[$prop->group_id][] = $prop;
-        }
-
         if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
             Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
             return ActiveForm::validate($model);
@@ -79,7 +75,7 @@ class ProductBackendController extends MainBackendController
             'animals' => $animals,
             'breeds' => $breeds,
             'compositions' => $compositions,
-            'properties' => $outProps,
+            'properties' => $properties,
             'modelDelivery' => $modelDelivery,
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
@@ -101,11 +97,6 @@ class ProductBackendController extends MainBackendController
         if (ProductMarket::hasStored($model->id)) $model->has_store = true;
         if (!$modelDelivery = ProductOrder::findOneByProductId($model->id)) $modelDelivery = new ProductOrder();
 
-        $outProps = [];
-        foreach ($properties as $prop) {
-            $outProps[$prop->group_id][] = $prop;
-        }
-
         if ($model->updateProduct()) {
             Alert::setSuccessNotify('Продукт обновлен');
             return $this->refresh();
@@ -120,7 +111,7 @@ class ProductBackendController extends MainBackendController
             'animals' => $animals,
             'breeds' => $breeds,
             'modelDelivery' => $modelDelivery,
-            'properties' => $outProps,
+            'properties' => $properties,
         ]);
     }
 
@@ -235,9 +226,16 @@ class ProductBackendController extends MainBackendController
 
     private function getProperties()
     {
-        return Yii::$app->cache->getOrSet('product-properties-backend', function () {
-            return Properties::find()->all();
-        });
+        $result_properties = [];
+        $properties = PropertiesRepository::getAllProperties();
+
+        $outProps = [];
+        foreach ($properties as $prop) {
+            $outProps[$prop->group_id][] = $prop;
+        }
+
+
+        return $result_properties;
     }
 
     private function getPrices()
