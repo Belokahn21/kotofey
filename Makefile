@@ -44,15 +44,15 @@ init-dev:
 	cp application/config/params.local.php application/config/params.php
 	cp application/config/main.db.php application/config/db.php
 
-init-prod:
+config-prod:
 	cp application/web/index.prod.php application/web/index.php
 	cp application/config/params.prod.php application/config/params.php
 	cp application/config/main.db.php application/config/db.php
 
-init-test:
+config-test:
 	cp application/web/index.test.php application/web/index.php
 
-init-docker:
+config-docker:
 	cp application/web/index.dev.php application/web/index.php
 	cp application/config/params.local.php application/config/params.php
 	cp application/config/docker.db.php application/config/db.php
@@ -90,7 +90,7 @@ docker-build:
 docker-up:
 	docker-compose up -d
 
-docker: init-docker docker-build docker-up
+docker: config-docker docker-build docker-up
 
 migrate:
 	cd application && php yii migrate --interactive=0
@@ -125,7 +125,7 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/search/install/migrations --interactive=0
 
 deploy-local: pull init-dev cache migrate
-deploy: pull init-prod migrate cache
-deploy-test: pull init-test migrate
-deploy-docker: pull init-docker migrate
+deploy: pull config-prod migrate cache
+deploy-test: pull config-test migrate
+deploy-docker: pull config-docker migrate
 
