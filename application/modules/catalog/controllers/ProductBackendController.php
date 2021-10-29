@@ -6,9 +6,12 @@ use app\modules\catalog\models\entity\Composition;
 use app\modules\catalog\models\entity\Price;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\Properties;
+use app\modules\catalog\models\entity\PropertyGroup;
 use app\modules\catalog\models\form\PriceRepairForm;
 use app\modules\catalog\models\helpers\PropertiesHelper;
+use app\modules\catalog\models\repository\CompositionRepository;
 use app\modules\catalog\models\repository\PropertiesRepository;
+use app\modules\catalog\models\repository\PropertyGroupRepository;
 use app\modules\pets\models\entity\Animal;
 use app\modules\pets\models\entity\Breed;
 use app\modules\stock\models\entity\Stocks;
@@ -20,6 +23,7 @@ use app\modules\site\controllers\MainBackendController;
 use app\modules\catalog\models\entity\ProductMarket;
 use app\modules\catalog\models\entity\ProductOrder;
 use app\widgets\notification\Alert;
+use yii\helpers\ArrayHelper;
 use yii\widgets\ActiveForm;
 use yii\web\HttpException;
 use yii\helpers\Url;
@@ -212,9 +216,21 @@ class ProductBackendController extends MainBackendController
 
     private function getCompositions()
     {
-        return Yii::$app->cache->getOrSet('product-composition-backend', function () {
-            return Composition::find()->where(['is_active' => true])->all();
-        });
+        $result_array = [];
+        $compositions = CompositionRepository::getAllActiveCompositions();
+        $_groups_ids = ArrayHelper::map($compositions, 'id', 'group_id');
+        $_groups = PropertyGroupRepository::getGroupsByIds($_groups_ids);
+
+        foreach ($compositions as $item) {
+            $result_array[$item->group_id]['models'][] = $item;
+
+            foreach ($_groups as $group) {
+                if ($group->id == $item->group_id) $result_array[$item->group_id]['group'] = $group;
+            }
+        }
+
+
+        return $result_array;
     }
 
     private function getStocks()
@@ -226,16 +242,21 @@ class ProductBackendController extends MainBackendController
 
     private function getProperties()
     {
-        $result_properties = [];
+        $result_array = [];
         $properties = PropertiesRepository::getAllProperties();
+        $_groups_ids = ArrayHelper::map($properties, 'id', 'group_id');
+        $_groups = PropertyGroupRepository::getGroupsByIds($_groups_ids);
 
-        $outProps = [];
-        foreach ($properties as $prop) {
-            $outProps[$prop->group_id][] = $prop;
+        foreach ($properties as $item) {
+            $result_array[$item->group_id]['models'][] = $item;
+
+            foreach ($_groups as $group) {
+                if ($group->id == $item->group_id) $result_array[$item->group_id]['group'] = $group;
+            }
         }
 
 
-        return $result_properties;
+        return $result_array;
     }
 
     private function getPrices()

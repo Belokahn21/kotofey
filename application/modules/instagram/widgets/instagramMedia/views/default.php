@@ -8,7 +8,7 @@ use yii\helpers\StringHelper;
  */
 ?>
 <?php if ($media !== null): ?>
-    <?php if ($this->beginCache('instagramm-media-widget-' . count($media->data), ['duration' => $cacheTime])): ?>
+    <?php if ($this->beginCache('instagramm-media-widget', ['duration' => Yii::$app->params['cache_time']])): ?>
         <div class="page-title__group is-column">
             <h2 class="page-title">Наш Instagram</h2>
             <?php /* <a class="page-title__link" href="javascript:void(0);">Все бренды</a> */ ?>

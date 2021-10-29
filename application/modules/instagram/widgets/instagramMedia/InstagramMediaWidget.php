@@ -10,15 +10,13 @@ use yii\base\Widget;
 class InstagramMediaWidget extends Widget
 {
     public $view = 'default';
-    public $cacheTime = 36000;
 
     public function run()
     {
         $media = Instagram::getData();
 
         return $this->render($this->view, [
-            'media' => $media,
-            'cacheTime' => $this->cacheTime
+            'media' => $media
         ]);
     }
 }
