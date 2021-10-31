@@ -9,6 +9,15 @@ use Yii;
 
 class CompositionProductHelper
 {
+    public static function getValue(array $data, int $product_id, int $property_id)
+    {
+        $value = false;
+        foreach ($data as $item) {
+            if ($item->product_id == $product_id && $item->composition_id == $property_id) $value = $item;
+        }
+        return $value;
+    }
+
     public static function saveItems(int $product_id)
     {
         $count = count(Yii::$app->request->post('CompositionProducts', []));

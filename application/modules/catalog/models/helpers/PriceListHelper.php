@@ -16,4 +16,15 @@ class PriceListHelper
         }
         return $out;
     }
+
+    public static function getValue(array $data, int $product_id, int $price_id)
+    {
+        $value = false;
+
+        foreach ($data as $item) {
+            if ($item->product_id == $product_id && $price_id == $item->price_id) $value = $item;
+        }
+
+        return $value;
+    }
 }

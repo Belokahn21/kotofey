@@ -2,6 +2,7 @@
 
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\CompositionProducts;
+use app\modules\catalog\models\helpers\CompositionProductHelper;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 use app\modules\catalog\models\repository\CompositionRepository;
 
@@ -26,9 +27,14 @@ use app\modules\catalog\models\repository\CompositionRepository;
 <?php
 $composition_model = new CompositionProducts();
 $count = 0;
+$composition_ids = [];
 ?>
-
-
+<?php foreach ($compositions as $type_id => $data): ?>
+    <?php foreach ($data['models'] as $item): ?>
+        <?php $composition_ids[] = $item->id; ?>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+<?php $compositions_values = CompositionRepository::getValues($model->id, $composition_ids); ?>
 <?php foreach ($compositions as $type_id => $data): ?>
 
     <fieldset class="fieldset-props">
@@ -43,7 +49,7 @@ $count = 0;
 
             <?php $composit_element = null; ?>
             <?php if (!$model->isNewRecord): ?>
-                <?php $composit_element = CompositionProducts::findOne(['product_id' => $model->id, 'composition_id' => $composit->id]); ?>
+                <?php $composit_element = CompositionProductHelper::getValue($compositions_values, $model->id, $composit->id); ?>
             <?php endif; ?>
 
             <div class="row">
