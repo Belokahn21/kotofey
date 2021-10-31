@@ -2,7 +2,6 @@
 
 namespace app\modules\marketplace\controllers;
 
-use app\modules\marketplace\models\services\MarketplaceService;
 use app\modules\user\models\tool\BehaviorsRoleManager;
 use Yii;
 use yii\web\HttpException;
@@ -70,18 +69,5 @@ class MarketplaceBackendController extends MainBackendController
         if (!$model = $this->modelClass::findOne($id)) throw new HttpException(404, 'Элемент не найден');
         if ($model->delete()) Alert::setSuccessNotify("Элемент {$model->name} успешно удален");
         return $this->redirect(['index']);
-    }
-
-    public function actionTemplate($id)
-    {
-        $ms = new MarketplaceService();
-        switch ($id) {
-            case 'stock';
-                $ms->getTemplateStockOut();
-                break;
-            case 'new';
-                echo 'new';
-                break;
-        }
     }
 }

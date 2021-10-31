@@ -16,8 +16,6 @@ $this->title = Title::show($model->name);
     'title' => 'Маркетплейс: ' . $model->name,
     'links' => [
         ['title' => 'Назад', 'url' => Url::to(['index'])],
-        ['title' => 'Обновление остатков', 'url' => Url::to(['template', 'id' => 'stock'])],
-        ['title' => 'Добавление товара', 'url' => Url::to(['template', 'new'])],
     ]
 ]); ?>
 <?php $form = ActiveForm::begin([
