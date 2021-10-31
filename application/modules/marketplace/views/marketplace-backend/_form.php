@@ -1,5 +1,7 @@
 <?php
 
+use yii\helpers\Url;
+use yii\helpers\Html;
 use app\modules\marketplace\models\repository\MarketplaceProductRepository;
 
 /* @var $model \app\modules\marketplace\models\entity\Marketplace
@@ -38,7 +40,8 @@ use app\modules\marketplace\models\repository\MarketplaceProductRepository;
     <?php if (!$model->isNewRecord): ?>
         <div class="tab-pane fade " id="nav-products-edit" role="tabpanel" aria-labelledby="nav-products-edit-tab">
             <?php foreach (MarketplaceProductRepository::getAllForPlace($model->id) as $value): ?>
-                <?= $value->product->name; ?>
+                <?php $product = $value->product; ?>
+                <?= Html::a('[' . $product->article . '] ' . $product->name, Url::to(['product-backend/update', 'id' => $product->id])); ?>
             <?php endforeach; ?>
         </div>
     <?php endif; ?>

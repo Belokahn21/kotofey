@@ -81,5 +81,7 @@ if (!$model->isNewRecord) {
     <?php } catch (ErrorException $exception) { ?>
         <?= $exception->getMessage(); ?>
         <?= $exception->getLine(); ?>
+        <?= $exception->getFile(); ?>
+        <?php var_dump($exception->getTraceAsString()); ?>
     <?php } ?>
 </div>

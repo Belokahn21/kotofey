@@ -116,7 +116,7 @@ class ProductPropertiesValuesHelper
 
     public static function getValues(array $data, int $property_id, int $product_id)
     {
-        $values = false;
+        $values = [];
         foreach ($data as $item) {
             if ($item->product_id == $product_id && $item->property_id == $property_id) {
                 $values[] = $item;
