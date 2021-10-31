@@ -28,13 +28,14 @@ use app\modules\catalog\models\repository\CompositionRepository;
 $composition_model = new CompositionProducts();
 $count = 0;
 $composition_ids = [];
+$compositions_values = [];
 ?>
 <?php foreach ($compositions as $type_id => $data): ?>
     <?php foreach ($data['models'] as $item): ?>
         <?php $composition_ids[] = $item->id; ?>
     <?php endforeach; ?>
 <?php endforeach; ?>
-<?php $compositions_values = CompositionRepository::getValues($model->id, $composition_ids); ?>
+<?php if (!$model->isNewRecord) $compositions_values = CompositionRepository::getValues($model->id, $composition_ids); ?>
 <?php foreach ($compositions as $type_id => $data): ?>
 
     <fieldset class="fieldset-props">

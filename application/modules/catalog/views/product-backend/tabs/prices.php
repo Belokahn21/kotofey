@@ -23,18 +23,20 @@ use app\modules\catalog\models\repository\StockRepository;
     <div class="col-sm-6">
         <?php
         $price_product_model = new PriceProduct();
-        $price_ids = ArrayHelper::map($prices, 'id', 'id');
-        $price_values = PriceRepository::getValues($model->id, $price_ids);
+        $price_values = [];
+        if (!$model->isNewRecord) {
+            $price_ids = ArrayHelper::map($prices, 'id', 'id');
+            $price_values = PriceRepository::getValues($model->id, $price_ids);
+        }
+
         ?>
         <?php foreach ($prices as $count => $price): ?>
 
             <?php $value = null; ?>
-            <?php if (!$model->isNewRecord): ?>
-                <?php
+            <?php if (!$model->isNewRecord):
                 $value = PriceListHelper::getValue($price_values, $model->id, $price->id);
                 if ($value instanceof PriceProduct) $value = $value->value;
-                ?>
-            <?php endif; ?>
+            endif; ?>
 
             <div class="row">
                 <div class="col-12">
@@ -51,15 +53,20 @@ use app\modules\catalog\models\repository\StockRepository;
     <div class="col-sm-6">
         <?php
         $stock_model = new ProductStock();
-        $stock_ids = ArrayHelper::map($prices, 'id', 'id');
-        $stock_values = StockRepository::getValues($model->id, $stock_ids);
+        $stock_values = [];
+        if (!$model->isNewRecord) {
+            $stock_ids = ArrayHelper::map($prices, 'id', 'id');
+            $stock_values = StockRepository::getValues($model->id, $stock_ids);
+        }
         ?>
         <?php foreach ($stocks as $count => $stock): ?>
 
             <?php $value = null; ?>
             <?php
-            $value = StockHelper::getValue($stock_values, $model->id, $stock->id);
-            if ($value instanceof ProductStock) $value = $value->value;
+            if (!$model->isNewRecord) {
+                $value = StockHelper::getValue($stock_values, $model->id, $stock->id);
+                if ($value instanceof ProductStock) $value = $value->value;
+            }
             ?>
 
             <div class="row">
