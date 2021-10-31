@@ -101,8 +101,28 @@ class ProductPropertiesValuesHelper
         }
     }
 
-    public static function removePropertyValue($product_id, $property_id)
+    public static function getValue(array $data, int $property_id, int $product_id)
     {
-        return PropertiesProductValues::deleteAll(['product_id' => $product_id, 'property_id' => $property_id]);
+        $value = false;
+        foreach ($data as $item) {
+            if ($item->product_id == $product_id && $item->property_id == $property_id) {
+                $value = $item->value;
+                break;
+            }
+        }
+
+        return $value;
+    }
+
+    public static function getValues(array $data, int $property_id, int $product_id)
+    {
+        $values = false;
+        foreach ($data as $item) {
+            if ($item->product_id == $product_id && $item->property_id == $property_id) {
+                $values[] = $item;
+            }
+        }
+
+        return $values;
     }
 }

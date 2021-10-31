@@ -1,83 +1,78 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
-use app\modules\catalog\models\entity\PropertiesProductValues;
-use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 use app\modules\catalog\models\repository\ProductRepository;
+use app\modules\catalog\models\repository\PropertiesProductValuesRepository;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $properties \app\modules\catalog\models\entity\Properties[]
  * @var $form \yii\widgets\ActiveForm
  * @var $this \yii\web\View
  */
-
 ?>
+
+<?php
+$property_ids = [];
+$values = [];
+?>
+
+<?php foreach ($properties as $group_id => $data): ?>
+    <?php foreach ($data['models'] as $property): ?>
+        <?php $property_ids[] = $property->id; ?>
+    <?php endforeach; ?>
+<?php endforeach; ?>
+
+<?php
+$product_id = $model->id;
+$sorted_products = ProductRepository::getAllProductsSortedDesc();
+if (!$model->isNewRecord) {
+    $values = PropertiesProductValuesRepository::collectValues($property_ids, $product_id);
+}
+?>
+
 <div style="list-style: none; margin: 0; padding: 0;">
     <?php try { ?>
         <div style="list-style: none; margin: 0; padding: 0;">
             <?php foreach ($properties as $group_id => $data): ?>
                 <fieldset class="fieldset-props">
                     <legend>
-                        <?php
-                        $group = ArrayHelper::getValue($properties[$group_id], 'group');
-                        if ($group) echo $group->name;
-                        else echo "Без категории";
-                        ?>
+                        <?php if ($group = ArrayHelper::getValue($properties[$group_id], 'group')): ?>
+                            <?= $group->name; ?>
+                        <?php else: ?>
+                            <?= "Без категории"; ?>
+                        <?php endif; ?>
                     </legend>
                     <?php foreach ($data['models'] as $property): ?>
-
-                        <?php /* @var $property \app\modules\catalog\models\entity\Properties */ ?>
                         <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
-                            <?php $value = PropertiesProductValues::findAll([
-                                'product_id' => $model->id,
-                                'property_id' => $property->id
-                            ]);
-
-                            if ($value) $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
-
-                            $drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->is_multiple];
-                            if ((boolean)$property->is_multiple == true) $drop_down_params['size'] = 10;
-
-                            $variants = [];
-
-                            if ($property->type == TypeProductProperties::TYPE_CATALOG) {
-                                $variants = ArrayHelper::map(ProductRepository::getAllProductsSortedDesc(), 'id', 'name');
-                                array_walk($variants, function (&$value, $key) {
-                                    $value = $key . ' - ' . $value;
-                                });
-                            } else $variants = ArrayHelper::map(PropertiesVariants::find()->where(['property_id' => $property->id])->orderBy(['name' => SORT_ASC])->all(), 'id', 'name'); ?>
-                            <?php /* <?= $form->field($model, 'properties[' . $property->id . ']')->dropDownList($variants, $drop_down_params)->label($property->name); ?> */ ?>
-                            <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
-                                'data' => $variants,
-                                'options' => $drop_down_params,
-                            ])->label($property->name); ?>
+                            <?= $this->render('property/informer', [
+                                'form' => $form,
+                                'model' => $model,
+                                'values' => $values,
+                                'property' => $property,
+                                'sorted_products' => $sorted_products,
+                            ]); ?>
                         <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
-
-                            <?php $value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id]); ?>
-
-                            <?php if ($value): ?>
-                                <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox(['value' => $value->value, 'checked' => true])->label($property->name); ?>
-                            <?php else: ?>
-                                <?= $form->field($model, 'properties[' . $property->id . ']')->checkbox()->label($property->name); ?>
-                            <?php endif; ?>
-
-
+                            <?= $this->render('property/checkbox', [
+                                'form' => $form,
+                                'model' => $model,
+                                'property' => $property,
+                                'values' => $values,
+                            ]); ?>
                         <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
-                            <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(MediaBrowserWidget::className(), [
-                                'values' => ArrayHelper::getColumn(ArrayHelper::getColumn(PropertiesProductValues::findAll([
-                                    'product_id' => $model->id,
-                                    'property_id' => $property->id
-                                ]), 'media'), 'id'),
-                                'is_multiple' => true
-                            ])->label($property->name); ?>
+                            <?= $this->render('property/file', [
+                                'form' => $form,
+                                'model' => $model,
+                                'property' => $property,
+                                'values' => $values,
+                            ]); ?>
                         <?php else: ?>
-                            <?php if ($value = PropertiesProductValues::findOne(['product_id' => $model->id, 'property_id' => $property->id])): ?>
-                                <?= $form->field($model, 'properties[' . $property->id . ']')->textInput(['value' => $value->value])->label($property->name); ?>
-                            <?php else: ?>
-                                <?= $form->field($model, 'properties[' . $property->id . ']')->textInput()->label($property->name); ?>
-                            <?php endif; ?>
+                            <?= $this->render('property/common', [
+                                'form' => $form,
+                                'model' => $model,
+                                'property' => $property,
+                                'values' => $values,
+                            ]); ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </fieldset>

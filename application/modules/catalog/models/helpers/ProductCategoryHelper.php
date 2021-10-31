@@ -46,7 +46,7 @@ class ProductCategoryHelper
 
             return $this->formated_items;
         }, null, new DbDependency([
-            'sql' => 'select max(created_at) from product_category;'
+            'sql' => 'select max(created_at) from product_category limit 1;'
         ]));
     }
 
