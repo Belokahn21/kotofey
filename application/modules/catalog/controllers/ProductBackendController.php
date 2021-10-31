@@ -218,14 +218,14 @@ class ProductBackendController extends MainBackendController
     {
         $result_array = [];
         $compositions = CompositionRepository::getAllActiveCompositions();
-        $_groups_ids = ArrayHelper::map($compositions, 'id', 'group_id');
+        $_groups_ids = ArrayHelper::map($compositions, 'id', 'composition_type_id');
         $_groups = PropertyGroupRepository::getGroupsByIds($_groups_ids);
 
         foreach ($compositions as $item) {
-            $result_array[$item->group_id]['models'][] = $item;
+            $result_array[$item->composition_type_id]['models'][] = $item;
 
             foreach ($_groups as $group) {
-                if ($group->id == $item->group_id) $result_array[$item->group_id]['group'] = $group;
+                if ($group->id == $item->composition_type_id) $result_array[$item->composition_type_id]['group'] = $group;
             }
         }
 

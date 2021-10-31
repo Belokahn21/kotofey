@@ -1,17 +1,22 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\CompositionType;
 use app\modules\catalog\models\entity\CompositionProducts;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
+use app\modules\catalog\models\repository\CompositionRepository;
 
+/* @var $model \app\modules\catalog\models\entity\Product
+ * @var $form \yii\widgets\ActiveForm
+ * @var $compositions \app\modules\catalog\models\entity\Composition[]
+ * @var $this \yii\web\View
+ */
 ?>
     <div>
         <?= \kartik\select2\Select2::widget([
             'name' => '',
             'options' => ['class' => 'js-load-composition', 'placeholder' => 'Выбрать готовый состав ...'],
             'data' => Yii::$app->cache->getOrSet('js-load-composition', function () {
-                return ArrayHelper::map(ArrayHelper::getColumn(CompositionProducts::find()->select(['product_id'])->groupBy('product_id')->all(), 'product'), 'id', 'name');
+                return ArrayHelper::map(ArrayHelper::getColumn(CompositionRepository::getAlreadyProducts(), 'product'), 'id', 'name');
             }),
         ]); ?>
     </div>
@@ -21,24 +26,20 @@ use app\modules\catalog\models\helpers\CompositionMetricsHelper;
 <?php
 $composition_model = new CompositionProducts();
 $count = 0;
-$grouped_composition = [];
-foreach ($compositions as $composition) {
-    $grouped_composition[$composition->composition_type_id][] = $composition;
-}
 ?>
 
 
-<?php foreach ($grouped_composition as $type_id => $composit_list): ?>
+<?php foreach ($compositions as $type_id => $data): ?>
 
     <fieldset class="fieldset-props">
         <legend>
             <?php
-            $type = CompositionType::findOne($type_id);
+            $type = ArrayHelper::getValue($compositions[$type_id], 'group');
             if ($type) echo $type->name;
             ?>
         </legend>
 
-        <?php foreach ($composit_list as $composit): ?>
+        <?php foreach ($data['models'] as $composit): ?>
 
             <?php $composit_element = null; ?>
             <?php if (!$model->isNewRecord): ?>

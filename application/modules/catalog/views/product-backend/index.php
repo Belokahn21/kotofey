@@ -11,9 +11,11 @@ use app\modules\vendors\models\entity\Vendor;
 use app\modules\catalog\models\entity\Product;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
-use app\modules\catalog\models\helpers\ProductCategoryHelper;
+use app\modules\user\models\repository\UserRepository;
 use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\StockOut\StockOutWidget;
+use app\modules\vendors\models\repository\VendorRepository;
+use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
 
 /* @var $this \yii\web\View
@@ -95,10 +97,10 @@ $this->title = Title::show('Товары');
         ],
         [
             'attribute' => 'vendor_id',
-            'filter' => ArrayHelper::map(Vendor::find()->all(), 'id', 'name'),
+            'filter' => ArrayHelper::map(VendorRepository::getAll(), 'id', 'name'),
             'format' => 'raw',
             'value' => function ($model) {
-                $vendor = Vendor::findOne($model->vendor_id);
+                $vendor = VendorRepository::getOne($model->vendor_id);
                 if ($vendor) {
                     $currency = Currency::getInstance()->show();
                     $purchase_html = !$vendor->min_summary_sale ? "" : "Мин. закуп {$vendor->min_summary_sale}{$currency} ";
@@ -164,8 +166,7 @@ VENDOR
             'attribute' => 'created_user_id',
             'format' => 'raw',
             'value' => function ($model) {
-                $user = \app\modules\user\models\entity\User::findOne($model->created_user_id);
-                if ($user) {
+                if ($user = UserRepository::getOne($model->created_user_id)) {
                     return $user->email;
                 }
                 return "Не указано";
@@ -175,8 +176,7 @@ VENDOR
             'attribute' => 'updated_user_id',
             'format' => 'raw',
             'value' => function ($model) {
-                $user = \app\modules\user\models\entity\User::findOne($model->updated_user_id);
-                if ($user) {
+                if ($user = UserRepository::getOne($model->updated_user_id)) {
                     return $user->email;
                 }
                 return "Не указано";

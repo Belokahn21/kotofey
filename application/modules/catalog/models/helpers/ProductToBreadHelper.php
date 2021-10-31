@@ -3,6 +3,7 @@
 namespace app\modules\catalog\models\helpers;
 
 use app\modules\pets\models\entity\Breed;
+use app\modules\pets\models\repository\BreedRepository;
 use Yii;
 use app\modules\catalog\models\entity\ProductToBreed;
 use app\modules\site\models\tools\Debug;
@@ -41,10 +42,15 @@ class ProductToBreadHelper
     {
         $result = [];
 
-        foreach (Yii::$app->cache->getOrSet('grouped_breeds', function () {
-            return Breed::find()->all();
-        }) as $breed) {
-            $result[$breed->animal->name][$breed->id] = $breed->name;
+        $breeds = BreedRepository::getAll();
+
+        foreach ($breeds as $breed) {
+
+            $animal = Yii::$app->cache->getOrSet('get-animal' . $breed->getPrimaryKey(), function () use ($breed) {
+                return $breed->animal;
+            });
+
+            $result[$animal->name][$breed->id] = $breed->name;
         }
 
         return $result;

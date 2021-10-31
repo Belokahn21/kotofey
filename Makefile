@@ -39,7 +39,7 @@ admission:
 pull:
 	git pull
 
-init-dev:
+config-dev:
 	cp application/web/index.dev.php application/web/index.php
 	cp application/config/params.local.php application/config/params.php
 	cp application/config/main.db.php application/config/db.php
@@ -124,7 +124,7 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/mailer/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/search/install/migrations --interactive=0
 
-deploy-local: pull init-dev cache migrate
+deploy-local: pull config-dev cache migrate
 deploy: pull config-prod migrate cache
 deploy-test: pull config-test migrate
 deploy-docker: pull config-docker migrate

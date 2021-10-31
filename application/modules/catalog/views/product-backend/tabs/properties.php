@@ -1,10 +1,11 @@
 <?php
 
 use yii\helpers\ArrayHelper;
-use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\PropertiesVariants;
 use app\modules\catalog\models\entity\TypeProductProperties;
 use app\modules\catalog\models\entity\PropertiesProductValues;
+use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
+use app\modules\catalog\models\repository\ProductRepository;
 
 /* @var $model \app\modules\catalog\models\entity\Product
  * @var $properties \app\modules\catalog\models\entity\Properties[]
@@ -42,7 +43,7 @@ use app\modules\catalog\models\entity\PropertiesProductValues;
                             $variants = [];
 
                             if ($property->type == TypeProductProperties::TYPE_CATALOG) {
-                                $variants = ArrayHelper::map(Product::find()->orderBy(['created_at' => SORT_DESC])->all(), 'id', 'name');
+                                $variants = ArrayHelper::map(ProductRepository::getAllProductsSortedDesc(), 'id', 'name');
                                 array_walk($variants, function (&$value, $key) {
                                     $value = $key . ' - ' . $value;
                                 });
