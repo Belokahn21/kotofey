@@ -391,7 +391,7 @@ if (YII_ENV_DEV) {
     ];
 }
 
-//if (YII_ENV_DEV) {
+if (YII_DEBUG == true) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
@@ -406,6 +406,6 @@ if (YII_ENV_DEV) {
         // uncomment the following to add your IP if you are not connecting from localhost.
         'allowedIPs' => ['127.0.0.1', '::1', '109.195.36.227', '5.166.94.197'],
     ];
-//}
+}
 
 return $config;
