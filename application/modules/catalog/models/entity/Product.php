@@ -188,7 +188,7 @@ class Product extends \yii\db\ActiveRecord
                 'attr_at_save' => 'created_user_id',
                 'attr_at_update' => 'updated_user_id',
             ],
-            ElasticSearchBehavior::className(),
+//            ElasticSearchBehavior::className(),
             PriceHistoryBehavior::className(),
         ];
     }

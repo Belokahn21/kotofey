@@ -5,13 +5,20 @@ namespace app\modules\catalog\models\behaviors;
 
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\virtual\ProductElastic;
+use app\modules\search\Module;
 use yii\base\Behavior;
 use yii\db\BaseActiveRecord;
 
 class ElasticSearchBehavior extends Behavior
 {
+    public $module;
+
     public function init()
     {
+        $this->module = \Yii::$app->getModule('search');
+        if ($this->module->search_engine != Module::SEARCH_ENGINE_ELASTIC) {
+            return false;
+        }
     }
 
 
@@ -26,37 +33,41 @@ class ElasticSearchBehavior extends Behavior
 
     public function afterSave()
     {
-        /* @var $product Product */
-        $product = $this->owner;
+        if ($this->module->search_engine == Module::SEARCH_ENGINE_ELASTIC) {
+            /* @var $product Product */
+            $product = $this->owner;
 
-        $elastic = new ProductElastic();
-        $elastic->fillAttributes($product);
-        $elastic->insert();
-
-
-    }
-
-    public function afterUpdate()
-    {
-        /* @var $product Product */
-        $product = $this->owner;
-
-        $elastic = ProductElastic::findOne($product->id);
-        if ($elastic) {
-            $elastic->fillAttributes($product);
-            $elastic->update();
-        } else {
             $elastic = new ProductElastic();
             $elastic->fillAttributes($product);
             $elastic->insert();
         }
     }
 
+    public function afterUpdate()
+    {
+        if ($this->module->search_engine == Module::SEARCH_ENGINE_ELASTIC) {
+            /* @var $product Product */
+            $product = $this->owner;
+
+            $elastic = ProductElastic::findOne($product->id);
+            if ($elastic) {
+                $elastic->fillAttributes($product);
+                $elastic->update();
+            } else {
+                $elastic = new ProductElastic();
+                $elastic->fillAttributes($product);
+                $elastic->insert();
+            }
+        }
+    }
+
     public function afterDelete()
     {
-        /* @var $product Product */
-        $product = $this->owner;
-        $elastic = ProductElastic::findOne($product->id);
-        if ($elastic) $elastic->delete();
+        if ($this->module->search_engine == Module::SEARCH_ENGINE_ELASTIC) {
+            /* @var $product Product */
+            $product = $this->owner;
+            $elastic = ProductElastic::findOne($product->id);
+            if ($elastic) $elastic->delete();
+        }
     }
 }
