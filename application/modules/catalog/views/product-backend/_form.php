@@ -34,6 +34,9 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         <a class="nav-item nav-link" id="nav-stock-tab" data-toggle="tab" href="#nav-stock" role="tab" aria-controls="nav-stock" aria-selected="false">Складской учёт</a>
         <a class="nav-item nav-link" id="nav-composition-tab" data-toggle="tab" href="#nav-composition" role="tab" aria-controls="nav-composition" aria-selected="false">Состав товара</a>
         <a class="nav-item nav-link" id="nav-props-tab" data-toggle="tab" href="#nav-props" role="tab" aria-controls="nav-props" aria-selected="false">Свойства</a>
+        <?php if (Yii::$app->hasModule('marketplace')): ?>
+            <a class="nav-item nav-link" id="nav-marketplace-tab" data-toggle="tab" href="#nav-marketplace" role="tab" aria-controls="nav-props" aria-selected="false">Маркетплейсы</a>
+        <?php endif; ?>
     </div>
 </nav>
 <div class="tab-content" id="backendFormsContent">
@@ -221,6 +224,14 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
             'properties' => $properties,
         ]); ?>
     </div>
+    <?php if (Yii::$app->hasModule('marketplace')): ?>
+        <div class="tab-pane fade" id="nav-marketplace" role="tabpanel" aria-labelledby="nav-marketplace-tab">
+            <?= $this->render('tabs/marketplace', [
+                'form' => $form,
+                'model' => $model,
+            ]); ?>
+        </div>
+    <?php endif; ?>
 </div>
 
 <style type="text/css">

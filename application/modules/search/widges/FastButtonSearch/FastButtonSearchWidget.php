@@ -16,7 +16,7 @@ class FastButtonSearchWidget extends Widget
     {
         $models = \Yii::$app->cache->getOrSet('fast-button-search', function () {
             return SearchQuery::find()->where(['>', 'count_find', 0])->limit(10)->orderBy(['rand()' => SORT_DESC])->all();
-        }, 3600 * 60 * 24, new DbDependency([
+        }, \Yii::$app->params['cache_time'], new DbDependency([
             'sql' => 'select count(`id`) from `search_query`'
         ]));
 

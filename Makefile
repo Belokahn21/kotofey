@@ -123,6 +123,7 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/reviews/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/mailer/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/search/install/migrations --interactive=0
+	cd application && php yii migrate --migrationPath=@app/modules/marketplace/install/migrations --interactive=0
 
 deploy-local: pull config-dev cache migrate
 deploy: pull config-prod migrate cache

@@ -12,7 +12,7 @@ use yii\helpers\Url;
 class Module extends MainModule
 {
     public $controllerNamespace = 'app\modules\order\controllers';
-    private $name = 'Заказы';
+    private $name = 'Магазин';
 
     public $default_manager_id;
     public $mail_event_id_order_ready;
