@@ -20,10 +20,9 @@ $marketplace_values = MarketplaceProductRepository::getAllForProduct($product_id
     <?php
     $params = ['value' => $marketplace->id];
 
-    if (MarketplaceProductHelper::getValue($marketplace_values, $product_id, $marketplace->id)) {
+    if (!$model->isNewRecord && MarketplaceProductHelper::getValue($marketplace_values, $product_id, $marketplace->id)) {
         $params['checked'] = true;
     }
-
     ?>
 
     <div class="row">

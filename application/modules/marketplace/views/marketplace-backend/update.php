@@ -13,7 +13,7 @@ use app\modules\site\widgets\AdminMenu\AdminMenuWidget;
 $this->title = Title::show($model->name);
 ?>
 <?= AdminMenuWidget::widget([
-    'title' => 'Почтовое событие: ' . $model->name,
+    'title' => 'Маркетплейс: ' . $model->name,
     'links' => [
         ['title' => 'Назад', 'url' => Url::to(['index'])],
     ]
