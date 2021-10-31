@@ -36,6 +36,11 @@ use app\modules\marketplace\models\repository\MarketplaceProductRepository;
                 <?= $form->field($model, 'type_export_id')->dropDownList($model->getTypeExports(), ['prompt' => 'Выгрузка товаров']); ?>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <?= $form->field($model, 'shop_id'); ?>
+            </div>
+        </div>
     </div>
     <?php if (!$model->isNewRecord): ?>
         <div class="tab-pane fade " id="nav-products-edit" role="tabpanel" aria-labelledby="nav-products-edit-tab">

@@ -10,6 +10,7 @@ use yii\behaviors\TimestampBehavior;
  * This is the model class for table "marketplace".
  *
  * @property int $id
+ * @property int $shop_id
  * @property int|null $is_active
  * @property int|null $sort
  * @property string $name
@@ -46,7 +47,7 @@ class Marketplace extends \yii\db\ActiveRecord
             [['is_active'], 'boolean'],
             [['is_active'], 'default', 'value' => true],
 
-            [['sort', 'type_export_id', 'created_at', 'updated_at'], 'integer'],
+            [['sort', 'shop_id', 'type_export_id', 'created_at', 'updated_at'], 'integer'],
             [['sort'], 'default', 'value' => 500],
 
             [['name', 'slug'], 'required'],
@@ -59,6 +60,7 @@ class Marketplace extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
+            'shop_id' => 'ID магазина',
             'is_active' => 'Активность',
             'sort' => 'Сортровка',
             'name' => 'Название',
