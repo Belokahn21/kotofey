@@ -13,17 +13,6 @@ class MarketplaceBackendController extends MainBackendController
 {
     public $modelClass = 'app\modules\marketplace\models\entity\Marketplace';
 
-    public function behaviors()
-    {
-        $parentAccess = parent::behaviors();
-
-        BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['template'], 'roles' => ['Administrator']]
-        ]);
-
-        return $parentAccess;
-    }
-
     public function actionIndex()
     {
         $model = new $this->modelClass();

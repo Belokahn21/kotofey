@@ -23,22 +23,34 @@ use app\modules\marketplace\models\repository\MarketplaceProductRepository;
 <div class="tab-content" id="backendFormsContent">
     <div class="tab-pane fade show active" id="nav-generals-edit" role="tabpanel" aria-labelledby="nav-generals-edit-tab">
         <div class="row">
-            <div class="col-sm-3">
-                <?= $form->field($model, 'is_active')->checkbox(); ?>
+            <div class="col-sm-6">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <?= $form->field($model, 'is_active')->checkbox(); ?>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'shop_id'); ?>
+                    </div>
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
+                    </div>
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'name'); ?>
+                    </div>
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'type_export_id')->dropDownList($model->getTypeExports(), ['prompt' => 'Выгрузка товаров']); ?>
+                    </div>
+                </div>
+
             </div>
-            <div class="col-sm-3">
-                <?= $form->field($model, 'sort')->textInput(['value' => 500]); ?>
-            </div>
-            <div class="col-sm-3">
-                <?= $form->field($model, 'name'); ?>
-            </div>
-            <div class="col-sm-3">
-                <?= $form->field($model, 'type_export_id')->dropDownList($model->getTypeExports(), ['prompt' => 'Выгрузка товаров']); ?>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-3">
-                <?= $form->field($model, 'shop_id'); ?>
+            <div class="col-sm-6">
+                Список товаров площадки
+                <?php
+                $ms = new \app\modules\marketplace\models\services\MarketplaceService();
+                $ms->getGoods();
+                ?>
             </div>
         </div>
     </div>
