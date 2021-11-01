@@ -3,7 +3,6 @@
 
 namespace app\modules\site\models\services;
 
-
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\form\PriceUpdateForm;
 use app\modules\catalog\models\helpers\ProductHelper;
@@ -30,7 +29,7 @@ class PriceListService
             $result_price = PriceTool::normalize($price);
         }
 
-        return (int)$result_price;
+        return intval($result_price);
     }
 
     public function applyPrice(Product $product, $type_price, int $price, Vendor $vendor, int $default_markup, bool $force_markup)

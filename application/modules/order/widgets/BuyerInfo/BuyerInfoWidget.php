@@ -5,6 +5,7 @@ namespace app\modules\order\widgets\BuyerInfo;
 
 use app\modules\bonus\models\entity\UserBonus;
 use app\modules\bonus\models\entity\UserBonusHistory;
+use app\modules\bonus\models\repository\UserBonusHistoryRepository;
 use app\modules\order\models\entity\Order;
 use app\modules\user\models\entity\User;
 use yii\base\Widget;
@@ -21,7 +22,8 @@ class BuyerInfoWidget extends Widget
 
         $orderHistory = Order::find()->where(['phone' => $this->order->phone])->andWhere(['<>', 'id', $this->order->id])->orderBy(['created_at' => SORT_DESC])->all();
         $profile = User::findByPhone($this->order->phone);
-        $userBonus = UserBonusHistory::find()->where(['bonus_account_id' => $this->order->phone])->sum('count');
+//        $userBonus = UserBonusHistory::find()->where(['bonus_account_id' => $this->order->phone])->sum('count');
+        $userBonus = $userBonus = UserBonusHistoryRepository::getUserBonus($this->order->phone);
 
         return $this->render($this->view, [
             'model' => $this->order,

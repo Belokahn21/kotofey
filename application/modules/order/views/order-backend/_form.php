@@ -56,7 +56,8 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                     <div class="info-card-wrapper">
 
                         <?= BuyerInfoWidget::widget([
-                            'order' => $model
+                            'order' => $model,
+                            'view' => 'one-block',
                         ]); ?>
 
                         <div class="info-card">
@@ -129,7 +130,6 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                                 <div class="red text"><?= $model->promocodeEntity->code; ?>, -<?= $model->promocodeEntity->discount; ?>%</div>
                             </div>
                         <?php endif; ?>
-
                     </div>
                     <?= MapWidget::widget([
                         'model' => $model
