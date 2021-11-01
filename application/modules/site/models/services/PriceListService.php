@@ -19,7 +19,7 @@ class PriceListService
         });
     }
 
-    public function normalize($type, $price)
+    public function normalize($type, $price): int
     {
         $result_price = 0;
         if ($type == PriceUpdateForm::TYPE_PRICE_BASE) {
@@ -30,15 +30,15 @@ class PriceListService
             $result_price = PriceTool::normalize($price);
         }
 
-        return $result_price;
+        return (int)$result_price;
     }
 
     public function applyPrice(Product $product, $type_price, int $price, Vendor $vendor, int $default_markup, bool $force_markup)
     {
-        $old_markup = ProductHelper::getMarkup($product, intval($default_markup));
+        $old_markup = ProductHelper::getMarkup($product, $default_markup);
 
         if ($force_markup) {
-            $old_markup = intval($default_markup);
+            $old_markup = $default_markup;
         }
 
         if ($type_price == PriceUpdateForm::TYPE_PRICE_BASE) {

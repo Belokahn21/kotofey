@@ -69,13 +69,15 @@ class PriceListBackendController extends MainBackendController
 
                         $price = $price_list_service->normalize($model->type_price, $_price);
 
+                        if ($price == 0) continue;
+
                         foreach ($all_list as $_product) {
                             if ($_product->code == $code) $product = $_product;
                         }
 
                         if ($product) {
                             $product->scenario = Product::SCENARIO_STOCK_COUNT;
-                            $price_list_service->applyPrice($product, $model->type_price, $price, $vendor, $model->default_markup, $model->force_markup);
+                            $price_list_service->applyPrice($product, $model->type_price, $price, $vendor, (int)$model->default_markup, $model->force_markup);
 
                             if (!$product->validate()) {
                                 $error_elements[] = $product;
