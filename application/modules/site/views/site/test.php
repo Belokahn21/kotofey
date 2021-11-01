@@ -1,19 +1,10 @@
-<!--data-sitekey="6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL"-->
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<form id="messageForm" method="POST" action="process.php">
-    <input type="email" name="email" required="required">
-    <textarea name="message"    required="required"></textarea>
-    <!-- Кнопка, с подключённым к ней виджетом invisible reCAPTCHA -->
-    <button class="g-recaptcha" data-sitekey="6Le7tfEcAAAAAMHY1D_-l7wfBRyNkC-iLi7HuCrL" data-callback="onSubmit">Отправить</button>
-</form>
-<script>
-    function onSubmit(token) {
-        // отправить форму на сервер
-        document.getElementById("messageForm").submit();
-    }
-</script>
 
+<?php
 
+$product = \app\modules\catalog\models\entity\Product::findOne(12);
+
+\app\modules\site\models\tools\Debug::p($product->formName());
+?>
 
 <?php
 /*

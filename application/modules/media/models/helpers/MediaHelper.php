@@ -14,7 +14,7 @@ class MediaHelper
     public static function getImageUrl(ActiveRecord $model, $isFull = false, $options = [])
     {
         $url = '';
-        $media = \Yii::$app->cache->getOrSet(md5(__CLASS__ . __METHOD__ . $model->getPrimaryKey()), function () use ($model) {
+        $media = \Yii::$app->cache->getOrSet(md5(__CLASS__ . __METHOD__ . $model->formName() . $model->getPrimaryKey()), function () use ($model) {
             return ArrayHelper::getValue($model, 'media');
         });
 
