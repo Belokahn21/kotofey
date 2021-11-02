@@ -65,6 +65,14 @@ $this->params['breadcrumbs'][] = ['label' => 'Просмотр заказа', 'u
                         <?php endif; ?>
                     </div>
                 </div>
+                <?php if ($order->discount): ?>
+                    <div class="profile-order-info__row">
+                        <div class="profile-order-info__row">Скидка</div>
+                        <div class="profile-order-info__value">
+                            <?= $order->discount; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
                 <div class="profile-order-info__row">
                     <div class="profile-order-info__key">Статус</div>
                     <div class="profile-order-info__value"><?= OrderHelper::getStatus($order); ?></div>
