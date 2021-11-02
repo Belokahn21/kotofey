@@ -14,12 +14,13 @@ class MarketplaceService
             'Api-Key' => '58b731ca-9643-4977-affc-f964c70df59f',
         ];
         $client = new Client([
-            'baseUrl' => 'https://api-seller.ozon.ru/v1',
+            'baseUrl' => 'https://api-seller.ozon.ru',
         ]);
 
 
-        $response = $client->post('/product/list', [
-            'page' => 0
+        $response = $client->post('/v1/product/list', [
+            'page' => 1,
+            'page_size' => 20,
         ], $headers)->send();
 
         Debug::p($response->data);
