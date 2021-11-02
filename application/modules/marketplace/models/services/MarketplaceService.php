@@ -9,18 +9,19 @@ class MarketplaceService
 {
     public function getGoods()
     {
+        $headers = [
+            'Client-Id' => 217561,
+            'Api-Key' => '58b731ca-9643-4977-affc-f964c70df59f',
+        ];
         $client = new Client([
             'baseUrl' => 'https://api-seller.ozon.ru/v1',
-            ''
         ]);
 
-        $client->createRequest()->setHeaders([
-            'clientId' => 217561
-        ]);
 
         $response = $client->post('/product/list', [
-        ]);
+            'page' => 0
+        ], $headers)->send();
 
-        Debug::p($response);
+        Debug::p($response->data);
     }
 }
