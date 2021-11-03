@@ -26,7 +26,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 
 ?>
 
-<?php if ($this->beginCache('form-prods' . $model->id)): ?>
+<?php if ($this->beginCache('form-prods' . $model->id, ['duration' => Yii::$app->params['cache_time']])): ?>
     <nav>
         <div class="nav nav-tabs" id="backendForms" role="tablist">
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
