@@ -26,7 +26,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 
 ?>
 
-<?php if ($this->beginCache('form-prods')): ?>
+<?php if ($this->beginCache('form-prods' . $model->id)): ?>
     <nav>
         <div class="nav nav-tabs" id="backendForms" role="tablist">
             <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Основное</a>
