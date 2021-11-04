@@ -34,4 +34,5 @@ if ($property->type == TypeProductProperties::TYPE_CATALOG) {
 <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
     'data' => $variants,
     'options' => $drop_down_params,
+    'hashVarLoadPosition' => \yii\web\View::POS_END
 ])->label($property->name); ?>
