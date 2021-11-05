@@ -46,16 +46,13 @@ if (!$model->isNewRecord) {
                     </legend>
                     <?php foreach ($data['models'] as $property): ?>
                         <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
-                            <?php if ($this->beginCache('property/informer/' . $property->id, ['dependency' => new TagDependency(['tags' => 'count:products:' . count($sorted_products)]), 'duration' => Yii::$app->params['cache_time']])): ?>
-                                <?= $this->render('property/informer', [
-                                    'form' => $form,
-                                    'model' => $model,
-                                    'values' => $values,
-                                    'property' => $property,
-                                    'sorted_products' => $sorted_products,
-                                ]); ?>
-                                <?php $this->endCache(); ?>
-                            <?php endif; ?>
+                            <?= $this->render('property/informer', [
+                                'form' => $form,
+                                'model' => $model,
+                                'values' => $values,
+                                'property' => $property,
+                                'sorted_products' => $sorted_products,
+                            ]); ?>
                         <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
                             <?= $this->render('property/checkbox', [
                                 'form' => $form,
@@ -71,15 +68,12 @@ if (!$model->isNewRecord) {
                                 'values' => $values,
                             ]); ?>
                         <?php else: ?>
-                            <?php if ($this->beginCache('property/common/' . $property->id, ['dependency' => new TagDependency(['tags' => 'count:values:' . count($values)]), 'duration' => Yii::$app->params['cache_time']])): ?>
-                                <?= $this->render('property/common', [
-                                    'form' => $form,
-                                    'model' => $model,
-                                    'property' => $property,
-                                    'values' => $values,
-                                ]); ?>
-                                <?php $this->endCache(); ?>
-                            <?php endif; ?>
+                            <?= $this->render('property/common', [
+                                'form' => $form,
+                                'model' => $model,
+                                'property' => $property,
+                                'values' => $values,
+                            ]); ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </fieldset>

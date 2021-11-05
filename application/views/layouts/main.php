@@ -27,8 +27,8 @@ if (Yii::$app->request->get('comeback')) {
         'value' => Yii::$app->request->get('comeback'),
     ]));
 }
-$mb = new Mobile_Detect();
-if ($mb->isMobile() && Yii::$app->request->cookies->getValue('comeback', 'N') !== 'Y') Yii::$app->controller->redirect('https://m.kotofey.store');
+//$mb = new Mobile_Detect();
+//if ($mb->isMobile() && Yii::$app->request->cookies->getValue('comeback', 'N') !== 'Y') Yii::$app->controller->redirect('https://m.kotofey.store');
 
 
 AppAsset::register($this);
