@@ -2,6 +2,9 @@
 
 use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\helpers\ArrayHelper;
+use app\modules\catalog\models\entity\Product;
+use app\modules\marketplace\models\services\MarketplaceService;
 use app\modules\marketplace\models\repository\MarketplaceProductRepository;
 
 /* @var $model \app\modules\marketplace\models\entity\Marketplace
@@ -48,9 +51,31 @@ use app\modules\marketplace\models\repository\MarketplaceProductRepository;
             <div class="col-sm-6">
                 Список товаров площадки
                 <?php
-                $ms = new \app\modules\marketplace\models\services\MarketplaceService();
-                $ms->getGoods();
+                $ms = new MarketplaceService();
                 ?>
+                <div class="marketplace-products">
+                    <?php $ozon_stocks = $ms->countStock(); ?>
+                    <?php foreach ($ms->getProducts() as $good) : ?>
+                        <?php $product = Product::findOne(['article' => ArrayHelper::getValue($good, 'offer_id')]); ?>
+                        <?php
+                        $product_ozon_stock = false;
+                        foreach ($ozon_stocks as $item) {
+                            if ($item['offer_id'] == $product->article) $product_ozon_stock = $item;
+                        }
+                        ?>
+
+                        <div class="marketplace-products-item">
+                            <div class="marketplace-products-item__name"><?= $product->name; ?></div>
+                            <div class="marketplace-products-item__stock site">Кол-во на складе: <?= $product->count; ?></div>
+                            <div class="marketplace-products-item__stock marketplace">
+                                Кол-во на Ozon
+                                <?php foreach (ArrayHelper::getValue($product_ozon_stock, 'stocks') as $st): ?>
+                                    <div><?= ArrayHelper::getValue($st, 'type') ?>: <?= ArrayHelper::getValue($st, 'present'); ?>/<?= ArrayHelper::getValue($st, 'reserved'); ?></div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
             </div>
         </div>
     </div>

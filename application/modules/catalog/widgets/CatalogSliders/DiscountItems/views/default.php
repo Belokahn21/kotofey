@@ -15,7 +15,7 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 ?>
 
 <?php if ($models): ?>
-    <?php if ($this->beginCache('discount-items-widget', ['duration' => 3600 * 24 * 7])): ?>
+    <?php if ($this->beginCache('discount-items-widget', ['duration' => Yii::$app->params['cache_time']])): ?>
         <div class="page-title__group">
             <h2 class="page-title">Выгодные предложения</h2>
             <?php if (array_key_exists('brands', $formatArray) && array_key_exists('actions', $formatArray)): ?>

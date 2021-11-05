@@ -6,7 +6,7 @@
 ?>
 
 <?php if ($models): ?>
-    <?php if ($this->beginCache('many-purchase-items-widget', ['duration' => 3600 * 24 * 7])): ?>
+    <?php if ($this->beginCache('many-purchase-items-widget', ['duration' => Yii::$app->params['cache_time']])): ?>
         <div class="page-title__group">
             <h2 class="page-title">Покупатели выбирают</h2>
         </div>

@@ -9496,6 +9496,19 @@ html, body {
       .panel-menu-sub-item__link {
         color: black; }
 
+.marketplace-products-item {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+  border: 1px #c6c6c6 solid;
+  padding: 10px; }
+  .marketplace-products-item__name {
+    width: 100%; }
+  .marketplace-products-item__stock {
+    margin-right: 5px;
+    display: flex;
+    flex-direction: column; }
+
 /*-----------------------------------------------------------*/
 .content {
   width: 100%; }

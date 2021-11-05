@@ -7,7 +7,7 @@ use app\modules\content\models\helpers\SlidersImagesHelper;
 
 ?>
 <?php if ($images): ?>
-    <?php if ($this->beginCache('square-slider', ['duration' => 3600 * 24 * 7])): ?>
+    <?php if ($this->beginCache('square-slider', ['duration' => Yii::$app->params['cache_time']])): ?>
         <div class="mini-slider-container swiper-container">
             <div class="mini-slider-wrapper swiper-wrapper">
                 <?php foreach ($images as $image): ?>

@@ -1,0 +1,22 @@
+.marketplace {
+  &-products {
+    &-item {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+      border: 1px #c6c6c6 solid;
+      padding: 10px;
+
+      &__name {
+        width: 100%;
+      }
+
+      &__stock {
+        margin-right: 5px;
+
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+}
