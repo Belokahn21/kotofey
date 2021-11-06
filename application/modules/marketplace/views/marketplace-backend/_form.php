@@ -4,6 +4,7 @@ use yii\helpers\Url;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use app\modules\catalog\models\entity\Product;
+use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\marketplace\models\services\MarketplaceService;
 use app\modules\marketplace\models\repository\MarketplaceProductRepository;
 
@@ -55,23 +56,25 @@ use app\modules\marketplace\models\repository\MarketplaceProductRepository;
                 ?>
                 <div class="marketplace-products">
                     <?php $ozon_stocks = $ms->countStock(); ?>
-                    <?php foreach ($ms->getProducts() as $good) : ?>
-                        <?php $product = Product::findOne(['article' => ArrayHelper::getValue($good, 'offer_id')]); ?>
-                        <?php
-                        $product_ozon_stock = false;
-                        foreach ($ozon_stocks as $item) {
-                            if ($item['offer_id'] == $product->article) $product_ozon_stock = $item;
-                        }
-                        ?>
+                    <?php foreach ($ms->getProducts() as $ozon_element) : ?>
+                        <?php $product = Product::findOne(['article' => ArrayHelper::getValue($ozon_element, 'offer_id')]); ?>
+                        <?php $product_ozon_stock = false; ?>
+                        <?php foreach ($ozon_stocks as $item) : ?>
+                            <?php if ($item['offer_id'] == $product->article) $product_ozon_stock = $item; ?>
+                        <?php endforeach; ?>
 
-                        <div class="marketplace-products-item">
-                            <div class="marketplace-products-item__name"><?= $product->name; ?></div>
-                            <div class="marketplace-products-item__stock site">Кол-во на складе: <?= $product->count; ?></div>
-                            <div class="marketplace-products-item__stock marketplace">
-                                Кол-во на Ozon
-                                <?php foreach (ArrayHelper::getValue($product_ozon_stock, 'stocks') as $st): ?>
-                                    <div><?= ArrayHelper::getValue($st, 'type') ?>: <?= ArrayHelper::getValue($st, 'present'); ?>/<?= ArrayHelper::getValue($st, 'reserved'); ?></div>
-                                <?php endforeach; ?>
+                        <div class="marketplace-products-item-wrap">
+                            <div class="marketplace-products-item">
+                                <div class="marketplace-products-item-image-wrap">
+                                    <?= Html::img(ProductHelper::getImageUrl($product), ['class' => 'marketplace-products-item-image']); ?>
+                                </div>
+                                <a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id]); ?>" target="_blank" class="marketplace-products-item__name"><?= $product->name; ?></a>
+                                <div class="marketplace-products-item__stock marketplace">
+                                    <div>Склад: <?= $product->count; ?></div>
+                                    <?php foreach (ArrayHelper::getValue($product_ozon_stock, 'stocks') as $st): ?>
+                                        <div><?= ArrayHelper::getValue($st, 'type') ?>: <?= ArrayHelper::getValue($st, 'present'); ?>/<?= ArrayHelper::getValue($st, 'reserved'); ?></div>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
                         </div>
                     <?php endforeach; ?>

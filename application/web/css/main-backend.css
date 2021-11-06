@@ -9496,18 +9496,38 @@ html, body {
       .panel-menu-sub-item__link {
         color: black; }
 
-.marketplace-products-item {
+.marketplace-products {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 10px;
-  border: 1px #c6c6c6 solid;
-  padding: 10px; }
-  .marketplace-products-item__name {
-    width: 100%; }
-  .marketplace-products-item__stock {
-    margin-right: 5px;
+  margin: 0 -10px; }
+  .marketplace-products-item {
     display: flex;
-    flex-direction: column; }
+    flex-wrap: wrap;
+    border: 1px #c6c6c6 solid;
+    padding: 10px;
+    height: 100%; }
+    .marketplace-products-item-wrap {
+      padding: 10px;
+      width: 33%; }
+    .marketplace-products-item-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; }
+      .marketplace-products-item-image-wrap {
+        height: 150px; }
+    .marketplace-products-item__name {
+      line-height: 1.2;
+      width: 100%;
+      height: 40px;
+      overflow: hidden;
+      color: #00BFFF; }
+    .marketplace-products-item__stock {
+      margin-top: 15px;
+      width: 100%;
+      margin-right: 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between; }
 
 /*-----------------------------------------------------------*/
 .content {

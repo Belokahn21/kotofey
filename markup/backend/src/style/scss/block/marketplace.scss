@@ -1,21 +1,46 @@
 .marketplace {
   &-products {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -10px;
+
     &-item {
       display: flex;
       flex-wrap: wrap;
-      margin-bottom: 10px;
       border: 1px #c6c6c6 solid;
       padding: 10px;
+      height: 100%;
+
+      &-wrap {
+        padding: 10px;
+        width: 33%;
+      }
+
+      &-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+
+        &-wrap {
+          height: 150px;
+        }
+      }
 
       &__name {
+        line-height: 1.2;
         width: 100%;
+        height: 40px;
+        overflow: hidden;
+        color: $theme-color;
       }
 
       &__stock {
+        margin-top: 15px;
+        width: 100%;
         margin-right: 5px;
-
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
+        justify-content: space-between;
       }
     }
   }
