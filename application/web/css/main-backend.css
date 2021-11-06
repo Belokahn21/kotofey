@@ -9510,6 +9510,8 @@ html, body {
       border-color: #25D366; }
     .marketplace-products-item.warning {
       border-color: red; }
+    .marketplace-products-item.can {
+      border-color: #b3d4fc; }
     .marketplace-products-item-wrap {
       padding: 10px;
       width: 33%; }
