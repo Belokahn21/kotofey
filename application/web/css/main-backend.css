@@ -9506,6 +9506,10 @@ html, body {
     border: 1px #c6c6c6 solid;
     padding: 10px;
     height: 100%; }
+    .marketplace-products-item.good {
+      border-color: #25D366; }
+    .marketplace-products-item.warning {
+      border-color: red; }
     .marketplace-products-item-wrap {
       padding: 10px;
       width: 33%; }
@@ -9518,7 +9522,7 @@ html, body {
     .marketplace-products-item__name {
       line-height: 1.2;
       width: 100%;
-      height: 40px;
+      height: 85px;
       overflow: hidden;
       color: #00BFFF; }
     .marketplace-products-item__stock {

@@ -63,8 +63,14 @@ use app\modules\marketplace\models\repository\MarketplaceProductRepository;
                             <?php if ($item['offer_id'] == $product->article) $product_ozon_stock = $item; ?>
                         <?php endforeach; ?>
 
+                        <?php $status = ''; ?>
+                        <?php foreach (ArrayHelper::getValue($product_ozon_stock, 'stocks') as $st): ?>
+                            <?php if ((intval(ArrayHelper::getValue($st, 'present')) == $product->count) && $product->count > 0) $status = 'good'; ?>
+                            <?php if ((intval(ArrayHelper::getValue($st, 'present')) > $product->count) && $product->count > 0) $status = 'warning'; ?>
+                        <?php endforeach; ?>
+
                         <div class="marketplace-products-item-wrap">
-                            <div class="marketplace-products-item">
+                            <div class="marketplace-products-item <?= $status; ?>">
                                 <div class="marketplace-products-item-image-wrap">
                                     <?= Html::img(ProductHelper::getImageUrl($product), ['class' => 'marketplace-products-item-image']); ?>
                                 </div>
