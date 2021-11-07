@@ -1,11 +1,17 @@
 <?php
 
-$product = \app\modules\catalog\models\entity\Product::findOne(1);
+$product = \app\modules\catalog\models\entity\Product::findOne(9);
 $ozon_prod = new \app\modules\marketplace\models\entity\OzonProduct();
 $ozon_prod->loadAttrs($product);
-$ms = new \app\modules\marketplace\models\services\MarketplaceService();
 
-$ms->createProduct($ozon_prod);
+
+if ($ozon_prod->validate()) {
+    $ms = new \app\modules\marketplace\models\services\MarketplaceService();
+    var_dump($ms->createProduct($ozon_prod));
+} else {
+    \app\modules\site\models\tools\Debug::p($ozon_prod->getErrors());
+}
+
 
 //$product = \app\modules\catalog\models\entity\Product::findOne(12);
 //\app\modules\site\models\tools\Debug::p($product->formName());

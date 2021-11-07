@@ -22,10 +22,12 @@ $ms = new MarketplaceService();
         <?php endforeach; ?>
 
         <?php $status = ''; ?>
+        <?php \app\modules\site\models\tools\Debug::p($ms->getProduct($product->article)); ?>
         <?php foreach (ArrayHelper::getValue($product_ozon_stock, 'stocks') as $st): ?>
-            <?php if ((intval(ArrayHelper::getValue($st, 'present')) == $product->count) && $product->count > 0) $status = 'good'; ?>
-            <?php if ((intval(ArrayHelper::getValue($st, 'present')) > $product->count) && $product->count > 0) $status = 'warning'; ?>
-            <?php if ((intval(ArrayHelper::getValue($st, 'present')) < $product->count) && $product->count > 0) $status = 'can'; ?>
+            <?php $presents = intval(ArrayHelper::getValue($st, 'present')); ?>
+            <?php if (($presents == $product->count) && $product->count > 0) $status = 'good'; ?>
+            <?php if (($presents > $product->count) && $product->count > 0) $status = 'warning'; ?>
+            <?php if (($presents < $product->count) && $product->count > 0) $status = 'can'; ?>
         <?php endforeach; ?>
 
         <div class="marketplace-products-item-wrap">

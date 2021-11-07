@@ -7,6 +7,7 @@ use app\modules\marketplace\models\entity\OzonProduct;
 use app\modules\site\models\tools\Debug;
 use phpDocumentor\Reflection\Types\Object_;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\httpclient\Client;
 
 class MarketplaceService
@@ -19,6 +20,7 @@ class MarketplaceService
         $this->headers = [
             'Client-Id' => 217561,
             'Api-Key' => '58b731ca-9643-4977-affc-f964c70df59f',
+            'Content-type' => 'application/json',
         ];
 
         $this->client = new Client([
@@ -28,14 +30,14 @@ class MarketplaceService
 
     public function createProduct(OzonProduct $data)
     {
-        Debug::p($data);
-
+        $response = $this->postRequest('/v2/product/import', ArrayHelper::toArray($data));
+        return ArrayHelper::getValue($this->getData($response), 'task_id');
     }
 
     public function getProducts()
     {
         $response = $this->postRequest('/v1/product/list', []);
-        return $this->getData($response);
+        return ArrayHelper::getValue($this->getData($response), 'items');
     }
 
     public function getProduct($offer_id = null, $product_id = null, $sku = null)
@@ -60,7 +62,7 @@ class MarketplaceService
 
     private function postRequest(string $action, array $data)
     {
-        return $this->client->post($action, $data, $this->headers)->send();
+        return $this->client->post($action, !$data ? $data : Json::encode($data), $this->headers)->send();
     }
 
     private function getReq(array $data)
@@ -69,6 +71,6 @@ class MarketplaceService
 
     private function getData($response)
     {
-        return ArrayHelper::getValue($response, 'data.result.items');
+        return ArrayHelper::getValue($response, 'data.result');
     }
 }

@@ -11,10 +11,17 @@ class RestBackendController extends Controller
 {
     public function actionCreateProduct()
     {
-        $ms = new MarketplaceService();
-        $prod = new OzonProduct();
-        $prod->loadAttrs(Product::findOne(1));
-        $ms->createProduct($prod);
+        $product_id = strval(\Yii::$app->request->get('product_id'));
 
+        $product = Product::findOne($product_id);
+        $ozon_prod = new OzonProduct();
+        $ozon_prod->loadAttrs($product);
+
+        if ($ozon_prod->validate()) {
+            $ms = new MarketplaceService();
+            $task_id = $ms->createProduct($ozon_prod);
+
+
+        }
     }
 }
