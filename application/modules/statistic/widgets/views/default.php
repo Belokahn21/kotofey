@@ -145,6 +145,27 @@ $product = Product::find();
                     <?php endif; ?>
                 </div>
             </div>
+            <div class="statistic__item">
+                <div class="statistic__icon"><i class="fas fa-cloud-moon"></i></div>
+                <div class="statistic__content">
+                    <?php if ($last_admission): ?>
+                        <div class="statistic-summary">
+                            <?php foreach ($last_admission as $admission): ?>
+                                <div class="statistic-summary__item" title="<?= $admission->email; ?>">
+                                    <?= Html::a($admission->email . ' (' . date('d.m.Y', $admission->created_at) . ')', Url::to(['/admin/catalog/admission-backend/update', 'id' => $admission->id])) ?>
+                                    <p style="font-size: 8px; margin: 0;">
+                                        <?php $product = Product::findOne($admission->product_id); ?>
+
+                                        <?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $admission->product_id])) ?>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <span class="green">Новых товаров Ozon нет</span>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 

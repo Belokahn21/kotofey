@@ -9120,6 +9120,7 @@ html, body {
 .statistic-summary {
   padding: 5px 0; }
   .statistic-summary__item {
+    line-height: 1.2;
     font-size: 12px;
     color: silver;
     text-transform: uppercase; }

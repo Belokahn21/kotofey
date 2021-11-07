@@ -161,7 +161,10 @@ $this->beginPage() ?>
     </div>
 <?php endif ?>
 
-<?= $this->render('include/footer'); ?>
+<?php if ($this->beginCache('main-footer', ['duration' => Yii::$app->params['cache_time']])): ?>
+    <?= $this->render('include/footer'); ?>
+    <?php $this->endCache(); ?>
+<?php endif; ?>
 <?= PageUpWidget::widget(); ?>
 
 <?php if (Yii::$app->user->isGuest) {

@@ -2,26 +2,36 @@
 
 namespace app\modules\marketplace\controllers;
 
-use app\modules\catalog\models\entity\Product;
-use app\modules\marketplace\models\entity\OzonProduct;
-use app\modules\marketplace\models\services\MarketplaceService;
 use yii\rest\Controller;
+use app\modules\marketplace\models\entity\OzonProduct;
+use app\modules\catalog\models\repository\ProductRepository;
+use app\modules\marketplace\models\services\MarketplaceService;
+use app\modules\marketplace\models\services\MarketplaceProductStatusService;
 
 class RestBackendController extends Controller
 {
     public function actionCreateProduct()
     {
-        $product_id = strval(\Yii::$app->request->get('product_id'));
+        $result = 200;
+        $product_id = intval(\Yii::$app->request->get('product_id'));
 
-        $product = Product::findOne($product_id);
-        $ozon_prod = new OzonProduct();
-        $ozon_prod->loadAttrs($product);
+        $product = ProductRepository::getOne($product_id);
+        $ozon_model = new OzonProduct();
+        $ozon_model->loadAttrs($product);
 
-        if ($ozon_prod->validate()) {
-            $ms = new MarketplaceService();
-            $task_id = $ms->createProduct($ozon_prod);
-
-
+        if (!$ozon_model->validate()) {
+            $result = 500;
         }
+
+
+        $ms = new MarketplaceService();
+        $task_id = intval($ms->createProduct($ozon_model));
+
+        if (!MarketplaceProductStatusService::addHistory($product, $task_id)) $result = 500;
+
+        return [
+            'status' => $result,
+            'message' => 'Успешно'
+        ];
     }
 }

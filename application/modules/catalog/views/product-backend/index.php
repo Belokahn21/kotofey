@@ -147,8 +147,8 @@ VENDOR
             'format' => 'raw',
             'filter' => ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'),
             'value' => function ($model) {
-                $category = ProductCategoryRepository::getOne($model->category_id);
-                if ($category) {
+
+                if ($model->category_id && $category = ProductCategoryRepository::getOne($model->category_id)) {
                     return Html::a($category->name, Url::to(['/admin/catalog/product-category-backend/index', 'id' => $model->category_id]), ['target' => '_blank']);
                 }
                 return "Без категории";

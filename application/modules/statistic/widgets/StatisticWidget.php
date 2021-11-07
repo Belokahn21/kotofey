@@ -5,6 +5,7 @@ namespace app\modules\statistic\widgets;
 
 use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\logger\models\entity\Logger;
+use app\modules\marketplace\models\entity\MarketplaceProductStatus;
 use app\modules\order\models\entity\Order;
 use app\modules\reviews\models\entity\Reviews;
 use app\modules\search\models\entity\SearchQuery;
@@ -51,6 +52,10 @@ class StatisticWidget extends Widget
         }, $this->cacheTime, new DbDependency([
             'sql' => 'select count(*) from `notify_admission`'
         ]));
+
+        \Yii::$app->cache->getOrSet('last-five-marketplasce-history', function () {
+            return MarketplaceProductStatus::find()->limit(5)->orderBy(['created_at' => SORT_DESC])->all();
+        });
 
 
         return $this->render($this->view, [
