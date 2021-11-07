@@ -32,6 +32,7 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@ttskch/select2-bootstrap4-theme": "^1.5.2",
     "air-datepicker": "^2.2.3",
     "bootstrap": "^4.6.0",
     "cloudinary": "^1.25.1",
@@ -47,6 +48,7 @@
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "^17.0.1",
+    "select2": "4.0.3",
     "selectize": "^0.12.6",
     "swiper": "^5.3.8"
   }

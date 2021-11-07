@@ -11,7 +11,12 @@ use app\modules\catalog\models\repository\PropertiesVariantsRepository;
 
 $value = false;
 $variants = [];
-$drop_down_params = ['prompt' => $property->name, 'multiple' => (boolean)$property->is_multiple];
+$drop_down_params = [
+    'prompt' => $property->name,
+    'multiple' => (boolean)$property->is_multiple,
+    'class' => 'js-select2-element'
+];
+
 if (!$model->isNewRecord && $value = ProductPropertiesValuesHelper::getValues($values, $property->id, $model->id)) {
     $model->properties[$property->id] = ArrayHelper::getColumn($value, 'value');
 }
@@ -31,8 +36,10 @@ if ($property->type == TypeProductProperties::TYPE_CATALOG) {
 }
 ?>
 
-<?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
+<?php /* = $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
     'data' => $variants,
     'options' => $drop_down_params,
     'hashVarLoadPosition' => \yii\web\View::POS_END
-])->label($property->name); ?>
+])->label($property->name); */ ?>
+
+<?= $form->field($model, 'properties[' . $property->id . '][]')->dropDownList($variants, $drop_down_params)->label($property->name); ?>

@@ -2,6 +2,8 @@
 
 namespace app\modules\marketplace\models\services;
 
+use app\modules\catalog\models\entity\Product;
+use app\modules\marketplace\models\entity\OzonProduct;
 use app\modules\site\models\tools\Debug;
 use phpDocumentor\Reflection\Types\Object_;
 use yii\helpers\ArrayHelper;
@@ -22,6 +24,12 @@ class MarketplaceService
         $this->client = new Client([
             'baseUrl' => 'https://api-seller.ozon.ru',
         ]);
+    }
+
+    public function createProduct(OzonProduct $data)
+    {
+        Debug::p($data);
+
     }
 
     public function getProducts()

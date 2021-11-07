@@ -101,6 +101,12 @@ class ProductPropertiesValuesHelper
         }
     }
 
+    /**
+     * @param array $data
+     * @param int $property_id
+     * @param int $product_id
+     * @return bool
+     */
     public static function getValue(array $data, int $property_id, int $product_id)
     {
         $value = false;

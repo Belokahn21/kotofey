@@ -1,9 +1,14 @@
-
 <?php
 
-$product = \app\modules\catalog\models\entity\Product::findOne(12);
+$product = \app\modules\catalog\models\entity\Product::findOne(1);
+$ozon_prod = new \app\modules\marketplace\models\entity\OzonProduct();
+$ozon_prod->loadAttrs($product);
+$ms = new \app\modules\marketplace\models\services\MarketplaceService();
 
-\app\modules\site\models\tools\Debug::p($product->formName());
+$ms->createProduct($ozon_prod);
+
+//$product = \app\modules\catalog\models\entity\Product::findOne(12);
+//\app\modules\site\models\tools\Debug::p($product->formName());
 ?>
 
 <?php
