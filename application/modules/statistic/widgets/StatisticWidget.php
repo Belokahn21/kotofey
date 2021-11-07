@@ -53,9 +53,11 @@ class StatisticWidget extends Widget
             'sql' => 'select count(*) from `notify_admission`'
         ]));
 
-        \Yii::$app->cache->getOrSet('last-five-marketplasce-history', function () {
+        $ozon_new =\Yii::$app->cache->getOrSet('last-five-marketplasce-history', function () {
             return MarketplaceProductStatus::find()->limit(5)->orderBy(['created_at' => SORT_DESC])->all();
-        });
+        }, $this->cacheTime, new DbDependency([
+            'sql' => 'select max(`id`) from `marketplace_product_status`'
+        ]));
 
 
         return $this->render($this->view, [
@@ -66,6 +68,7 @@ class StatisticWidget extends Widget
             'logs' => $logs,
             'lastlogs' => $lastlogs,
             'ordersNow' => $ordersNow,
+            'ozon_new' => $ozon_new,
         ]);
     }
 }
