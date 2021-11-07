@@ -6,7 +6,7 @@ $ozon_prod->loadAttrs($product);
 
 
 if ($ozon_prod->validate()) {
-    $ms = new \app\modules\marketplace\models\services\MarketplaceService();
+    $ms = new \app\modules\marketplace\models\api\OzonApi();
     var_dump($ms->createProduct($ozon_prod));
 } else {
     \app\modules\site\models\tools\Debug::p($ozon_prod->getErrors());

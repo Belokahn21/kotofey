@@ -9906,11 +9906,14 @@ html, body {
     padding: 10px;
     height: 100%; }
     .marketplace-products-item.good {
-      border-color: #25D366; }
+      border-color: #25D366;
+      border-width: 2px; }
     .marketplace-products-item.warning {
-      border-color: red; }
+      border-color: red;
+      border-width: 2px; }
     .marketplace-products-item.can {
-      border-color: #b3d4fc; }
+      border-color: #b3d4fc;
+      border-width: 2px; }
     .marketplace-products-item-wrap {
       padding: 10px;
       width: 33%; }
