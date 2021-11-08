@@ -71,15 +71,16 @@ class OrderHelper
         return $summ;
     }
 
-    public static function applyDiscountToAmount(Order $order, $summ)
+    public static function applyDiscountToAmount(Order $order, int $summ)
     {
+
         if (!$order->discount) return $summ;
 
         if (is_numeric($order->discount)) return $summ + $order->discount;
 
 
         if (explode('%', $order->discount)) {
-            $tmpDiscount = str_replace('%', '', $order->discount);
+            $tmpDiscount = str_replace(['%', ' '], '', $order->discount);
 
             return $summ + round($summ * ($tmpDiscount / 100));
         }
