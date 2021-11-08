@@ -13,14 +13,17 @@
 
       &.good {
         border-color: $whatsapp-green;
+        border-width: 2px;
       }
 
       &.warning {
         border-color: red;
+        border-width: 2px;
       }
 
       &.can {
         border-color: #b3d4fc;
+        border-width: 2px;
       }
 
       &-wrap {

@@ -1,6 +1,12 @@
 import RestRequest from "../../../../frontend/src/js/tools/RestRequest";
 import config from "../react/config";
 
+var select2 = require('select2');
+
+$('.js-select2-element').select2({
+    theme: 'bootstrap4'
+});
+
 $('.js-load-composition').change(function (e) {
     let $this = $(this);
 

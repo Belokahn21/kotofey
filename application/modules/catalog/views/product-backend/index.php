@@ -12,11 +12,11 @@ use app\modules\catalog\models\entity\Product;
 use app\models\tool\parser\providers\SibagroTrade;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\user\models\repository\UserRepository;
-use app\modules\catalog\models\entity\ProductCategory;
 use app\modules\catalog\widgets\StockOut\StockOutWidget;
 use app\modules\vendors\models\repository\VendorRepository;
 use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\widgets\FillFromVendor\FillFromVendorWidget;
+use app\modules\catalog\models\repository\ProductCategoryRepository;
 
 /* @var $this \yii\web\View
  * @var $model \app\modules\catalog\models\entity\Product
@@ -147,8 +147,8 @@ VENDOR
             'format' => 'raw',
             'filter' => ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'),
             'value' => function ($model) {
-                $category = ProductCategory::findOne($model->category_id);
-                if ($category) {
+
+                if ($model->category_id && $category = ProductCategoryRepository::getOne($model->category_id)) {
                     return Html::a($category->name, Url::to(['/admin/catalog/product-category-backend/index', 'id' => $model->category_id]), ['target' => '_blank']);
                 }
                 return "Без категории";

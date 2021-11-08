@@ -6,6 +6,7 @@
  * @var $logs \app\modules\logger\models\entity\Logger[]
  * @var $this \yii\web\View
  * @var $no_attention_reviews \app\modules\reviews\models\entity\Reviews[]
+ * @var $ozon_new \app\modules\marketplace\models\entity\MarketplaceProductStatus[]
  */
 
 use app\modules\catalog\models\entity\Product;
@@ -142,6 +143,27 @@ $product = Product::find();
                         </div>
                     <?php else: ?>
                         <span class="green">Никто не подписан на товар</span>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="statistic__item">
+                <div class="statistic__icon"><i class="fas fa-cloud-moon"></i></div>
+                <div class="statistic__content">
+                    <?php if ($ozon_new): ?>
+                        <div class="statistic-summary">
+                            <?php foreach ($ozon_new as $model): ?>
+                                <div class="statistic-summary__item" title="<?= $model->product_id; ?>">
+                                    <?= Html::a($model->product_id . ' (' . date('d.m.Y', $model->created_at) . ')', Url::to(['/admin/catalog/admission-backend/update', 'id' => $model->id])) ?>
+                                    <p style="font-size: 8px; margin: 0;">
+                                        <?php $product = Product::findOne($model->product_id); ?>
+
+                                        <?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $model->product_id])) ?>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <span class="green">Новых товаров Ozon нет</span>
                     <?php endif; ?>
                 </div>
             </div>

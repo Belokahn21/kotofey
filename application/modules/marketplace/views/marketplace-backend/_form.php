@@ -46,7 +46,12 @@ use app\modules\marketplace\widgets\MarketplaceReport\MarketplaceReportWidget;
 
             </div>
             <div class="col-sm-6">
-                <?= MarketplaceReportWidget::widget(); ?>
+                <?php if (!$model->isNewRecord): ?>
+                    <div>
+                        <?= Html::a('Добавить товар на маркетплейс', Url::to(['marketplace-backend/create-product', 'id' => $model->id])); ?>
+                    </div>
+                    <?= MarketplaceReportWidget::widget(); ?>
+                <?php endif; ?>
             </div>
         </div>
     </div>

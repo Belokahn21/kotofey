@@ -5,6 +5,7 @@ namespace app\modules\statistic\widgets;
 
 use app\modules\catalog\models\entity\NotifyAdmission;
 use app\modules\logger\models\entity\Logger;
+use app\modules\marketplace\models\entity\MarketplaceProductStatus;
 use app\modules\order\models\entity\Order;
 use app\modules\reviews\models\entity\Reviews;
 use app\modules\search\models\entity\SearchQuery;
@@ -52,6 +53,12 @@ class StatisticWidget extends Widget
             'sql' => 'select count(*) from `notify_admission`'
         ]));
 
+        $ozon_new =\Yii::$app->cache->getOrSet('last-five-marketplasce-history', function () {
+            return MarketplaceProductStatus::find()->limit(5)->orderBy(['created_at' => SORT_DESC])->all();
+        }, $this->cacheTime, new DbDependency([
+            'sql' => 'select max(`id`) from `marketplace_product_status`'
+        ]));
+
 
         return $this->render($this->view, [
             'searches' => $searches,
@@ -61,6 +68,7 @@ class StatisticWidget extends Widget
             'logs' => $logs,
             'lastlogs' => $lastlogs,
             'ordersNow' => $ordersNow,
+            'ozon_new' => $ozon_new,
         ]);
     }
 }

@@ -227,10 +227,13 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
     </div>
     <?php if (Yii::$app->hasModule('marketplace')): ?>
         <div class="tab-pane fade" id="nav-marketplace" role="tabpanel" aria-labelledby="nav-marketplace-tab">
-            <?= $this->render('tabs/market', [
-                'form' => $form,
-                'model' => $model,
-            ]); ?>
+            <?php if ($this->beginCache('marketplace' . $model->getPrimaryKey())): ?>
+                <?= $this->render('tabs/market', [
+                    'form' => $form,
+                    'model' => $model,
+                ]); ?>
+                <?php $this->endCache(); ?>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
