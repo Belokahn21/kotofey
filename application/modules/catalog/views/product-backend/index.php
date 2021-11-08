@@ -100,8 +100,7 @@ $this->title = Title::show('Товары');
             'filter' => ArrayHelper::map(VendorRepository::getAll(), 'id', 'name'),
             'format' => 'raw',
             'value' => function ($model) {
-                $vendor = VendorRepository::getOne($model->vendor_id);
-                if ($vendor) {
+                if ($model->vendor_id && $vendor = VendorRepository::getOne($model->vendor_id)) {
                     $currency = Currency::getInstance()->show();
                     $purchase_html = !$vendor->min_summary_sale ? "" : "Мин. закуп {$vendor->min_summary_sale}{$currency} ";
 
