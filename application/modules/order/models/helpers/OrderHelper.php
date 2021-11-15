@@ -66,7 +66,6 @@ class OrderHelper
         foreach ($order->items as $item) $summ += $item->count * ($item->discount_price ? $item->discount_price : $item->price);
 
         $summ = self::applyDiscountToAmount($order, $summ);
-        $summ = self::applyPromocodeToAmount($order, $summ);
 
         return $summ;
     }
@@ -166,10 +165,15 @@ class OrderHelper
     /* прибыль заказа */
     public static function marginality(Order $order)
     {
+        $minus = 0;
+        $full_summary = self::orderSummary($order);
         $purchase = self::orderPurchase($order);
-        $out_summ = self::orderSummary($order);
 
-        return $out_summ - $purchase;
+        if ($order->payment_id == Payment::PAYMENT_TERMINAL) $minus += round($full_summary * 0.01);
+        if ($order->manager_id != 1) $minus += round($full_summary * 0.05);
+        $minus += round(($full_summary - $purchase) * 0.15);
+
+        return $full_summary - $purchase - $minus;
     }
 
 
