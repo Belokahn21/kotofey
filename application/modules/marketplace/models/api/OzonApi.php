@@ -58,11 +58,26 @@ class OzonApi
         return ArrayHelper::getValue($this->getData($response), 'items');
     }
 
+    public function listCategoryCharacteristic()
+    {
+        $response = $this->postRequest('/v3/category/attribute', [
+            'attribute_type' => "ALL",
+            'category_id' => [0],
+            'language' => "RU",
+        ]);
+
+        Debug::p($response);
+        exit();
+
+        return ArrayHelper::getValue($this->getData($response), 'result');
+    }
+
     private function postRequest(string $action, array $data)
     {
         $json_data = !$data ? $data : Json::encode($data);
         return $this->client->post($action, $json_data, $this->headers)->send();
     }
+
 
     private function getReq(array $data)
     {

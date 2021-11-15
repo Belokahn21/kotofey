@@ -37,7 +37,7 @@ class OzonProduct extends Model
 
 //        $this->images = ArrayHelper::getValue($model, 'images');
         $this->name = ArrayHelper::getValue($model, 'name');
-        $this->category_id = ArrayHelper::getValue($model, 'category_id');
+        $this->category_id = ArrayHelper::getValue($model, 'ozon_id');
 
         $this->offer_id = ArrayHelper::getValue($model, 'article');
 //        $this->price = ArrayHelper::getValue($model, 'price');
