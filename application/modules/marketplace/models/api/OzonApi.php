@@ -3,6 +3,7 @@
 namespace app\modules\marketplace\models\api;
 
 use app\modules\marketplace\models\entity\OzonProduct;
+use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\httpclient\Client;
@@ -59,7 +60,8 @@ class OzonApi
 
     private function postRequest(string $action, array $data)
     {
-        return $this->client->post($action, !$data ? $data : Json::encode($data), $this->headers)->send();
+        $json_data = !$data ? $data : Json::encode($data);
+        return $this->client->post($action, $json_data, $this->headers)->send();
     }
 
     private function getReq(array $data)

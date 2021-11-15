@@ -15,6 +15,7 @@ use app\modules\basket\widgets\addBasket\AddBasketWidget;
 use app\modules\catalog\models\helpers\HtmlProductHelper;
 use app\modules\catalog\models\helpers\ProductCategoryHelper;
 use app\modules\catalog\models\helpers\CompositionMetricsHelper;
+use app\modules\catalog\widgets\PriceHistory\PriceHistoryWidget;
 use app\modules\catalog\widgets\CatalogSliders\Analog\AnalogWidget;
 use app\modules\reviews\widgets\ProductReviews\ProductReviewsWidget;
 use app\modules\catalog\models\helpers\ProductPropertiesValuesHelper;
@@ -141,9 +142,9 @@ $this->title = ProductTitle::show($product->name);
             <?php if ($propertiesValues): ?>
                 <?php foreach ($propertiesValues as $property): ?>
                     <?php if ($property->property && $property->property->id == 1): ?>
-                        <div class="product-detail__brand" >
+                        <div class="product-detail__brand">
                             <div>Бренд</div>
-                            <a  href="<?= ProductPropertiesValuesHelper::getBrandDetailUrl($property->variant); ?>">
+                            <a href="<?= ProductPropertiesValuesHelper::getBrandDetailUrl($property->variant); ?>">
                                 <span itemprop="brand"><?= ProductPropertiesValuesHelper::getFinalValue($property); ?></span>
                             </a>
                         </div>
@@ -243,3 +244,4 @@ $this->title = ProductTitle::show($product->name);
     'product' => $product
 ]); */ ?>
 
+<?= PriceHistoryWidget::widget(['product' => $product]); ?>
