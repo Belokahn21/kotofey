@@ -17,20 +17,54 @@ use yii\helpers\ArrayHelper;
 </nav>
 <div class="tab-content" id="nav-tab-content-form">
     <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-        <?= $form->field($model, 'name'); ?>
-        <?= $form->field($model, 'parent_category_id')->dropDownList(ArrayHelper::map($categories, 'id', 'name'), ['prompt' => 'Родительская категория']); ?>
-        <?= $form->field($model, 'sort'); ?>
-        <?= $form->field($model, 'description')->widget(CKEditor::className(), [
-            'editorOptions' => [
-                'preset' => 'full',
-                'inline' => false
-            ]
-        ]); ?>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'name'); ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'sort'); ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <?= $form->field($model, 'parent_category_id')->dropDownList(ArrayHelper::map($categories, 'id', 'name'), ['prompt' => 'Родительская категория']); ?>
+            </div>
+            <div class="col-sm-6">
+                <?= $form->field($model, 'ozon_id'); ?>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'description')->widget(CKEditor::className(), [
+                    'editorOptions' => [
+                        'preset' => 'full',
+                        'inline' => false
+                    ]
+                ]); ?>
+            </div>
+        </div>
+
+
     </div>
     <div class="tab-pane fade" id="nav-seo" role="tabpanel" aria-labelledby="nav-seo-tab">
-        <?= $form->field($model, 'seo_title'); ?>
-        <?= $form->field($model, 'seo_keywords'); ?>
-        <?= $form->field($model, 'seo_description'); ?>
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'seo_title'); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'seo_keywords'); ?>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <?= $form->field($model, 'seo_description'); ?>
+            </div>
+        </div>
     </div>
     <div class="tab-pane fade" id="nav-gallery" role="tabpanel" aria-labelledby="nav-gallery-tab">
 

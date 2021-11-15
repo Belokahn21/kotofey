@@ -16,6 +16,7 @@ use yii\web\UploadedFile;
  * Category model
  *
  * @property integer $id
+ * @property integer $ozon_id
  * @property string $name
  * @property string $description
  * @property string $seo_title
@@ -60,7 +61,7 @@ class ProductCategory extends ActiveRecord
 
             [['seo_keywords', 'seo_description', 'description', 'seo_title'], 'string'],
 
-            [['sort', 'parent_category_id'], 'integer'],
+            [['sort', 'parent_category_id','ozon_id'], 'integer'],
 
             ['parent_category_id', 'default', 'value' => '0'],
 
@@ -73,6 +74,7 @@ class ProductCategory extends ActiveRecord
         return [
             'name' => 'Название',
             'slug' => 'Символьный код',
+            'ozon_id' => 'ID категории Ozon',
             'description' => 'Описание',
             'sort' => 'Сортировка',
             'parent_category_id' => 'Родительский раздел',
