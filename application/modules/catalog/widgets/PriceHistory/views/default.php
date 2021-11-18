@@ -12,12 +12,13 @@ foreach ($history as $item) {
 }
 $data->setAxisName(0, "Цены");
 
-$image = new Image(1100, 230, $data);
+$image = new Image(1165, 230, $data);
 $image->Antialias = false;
-$image->drawRectangle(0, 0, 1099, 229, ["R" => 0, "G" => 0, "B" => 0]);
-$image->setFontProperties(["FontName" => "verdana.ttf", "FontSize" => 11]);
-$image->setFontProperties(["FontName" => "verdana.ttf", "FontSize" => 6]);
-$image->setGraphArea(60, 40, 1099, 200);
+
+$image->drawRectangle(0, 0, 1164, 229, ["R" => 255, "G" => 255, "B" => 255]);
+//$image->drawRectangle(0, 0, 1164, 229, ["R" => 0, "G" => 0, "B" => 0]);
+//$image->setFontProperties(["FontName" => "verdana.ttf", "FontSize" => 6]);
+$image->setGraphArea(60, 40, 1160, 200);
 $scaleSettings = [
     "XMargin" => 10,
     "YMargin" => 10,
@@ -43,5 +44,5 @@ $file_name = '/assets/example.drawAreaChart.threshold.png';
 $file_path = Yii::getAlias("@webroot$file_name");
 $image->render($file_path);
 ?>
-
+<h5>История изменения цен</h5>
 <img src="<?= $file_name; ?>"/>
