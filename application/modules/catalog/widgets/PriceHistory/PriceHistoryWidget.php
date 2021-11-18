@@ -19,6 +19,7 @@ class PriceHistoryWidget extends Widget
     {
         $history = ProductPriceHistory::find()->where(['product_id' => $this->product->id])->asArray(true)->all();
 
+        if (!$history) return false;
 
         return $this->render($this->view, [
             'history' => $history
