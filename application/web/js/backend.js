@@ -3011,11 +3011,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ MarketplaceActions)
 /* harmony export */ });
+/* harmony import */ var _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../frontend/src/js/tools/RestRequest */ "../frontend/src/js/tools/RestRequest.js");
+/* harmony import */ var _react_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../react/config */ "./src/js/react/config.js");
+/* harmony import */ var _react_config__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_react_config__WEBPACK_IMPORTED_MODULE_1__);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
 
 var MarketplaceActions = /*#__PURE__*/function () {
   function MarketplaceActions() {
@@ -3025,13 +3031,31 @@ var MarketplaceActions = /*#__PURE__*/function () {
       'js-marketplace-refresh-count': 'refresh'
     };
     var element_refresh = document.querySelector('.js-marketplace-refresh-count');
-    if (element_refresh) element_refresh.onclick = this.refresh.bind();
+    if (element_refresh) element_refresh.onclick = this.refresh.bind(this);
   }
 
   _createClass(MarketplaceActions, [{
     key: "refresh",
-    value: function refresh() {
-      console.log('refresh');
+    value: function refresh(event) {
+      console.log('demo ssss');
+      var element = event.target;
+      var data = new FormData();
+      var article = element.getAttribute('data-article');
+      var amount = element.getAttribute('data-amount');
+
+      if (article.length === 0 || amount.length === 0) {
+        console.log('Артикул товара или количество не были переданы', article, amount);
+        return false;
+      }
+
+      data.append('article', article);
+      data.append('amount', amount);
+      console.log('demo 123');
+      _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__.default.post("".concat((_react_config__WEBPACK_IMPORTED_MODULE_1___default().restMarketplace), "refresh-count/"), {
+        body: data
+      }).then(function (data) {
+        console.log(data);
+      });
     }
   }]);
 
@@ -7716,6 +7740,7 @@ module.exports = {
   restOrderCustomer: url + '/backend/api/order/customer/',
   restDeliveryCalculate: url + '/backend/api/delivery/calculate/',
   restCdn: url + '/backend/api/cdn/',
+  restMarketplace: url + '/backend/api/marketplace/',
   restMedia: url + '/backend/api/media/',
   restMediaUpload: url + '/backend/api/media/upload/',
   restCatalog: url + '/backend/api/catalog/',

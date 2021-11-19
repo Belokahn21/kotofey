@@ -32,4 +32,12 @@ class MarketplaceService extends Model
 
         return true;
     }
+
+    public function updateStockCount(int $article, int $amount)
+    {
+        $api = new OzonApi();
+        $api->updateCount($amount, $article);
+
+        return true;
+    }
 }

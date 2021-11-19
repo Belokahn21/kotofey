@@ -72,6 +72,20 @@ class OzonApi
         return ArrayHelper::getValue($this->getData($response), 'result');
     }
 
+    public function updateCount(int $amount, int $article)
+    {
+        $response = $this->postRequest('/v2/products/stocks', [
+            'offer_id' => $article,
+            'stock' => $amount,
+            'warehouse_id' => 22215334034000,
+        ]);
+
+
+        Debug::p($response);
+        exit();
+        return ArrayHelper::getValue($this->getData($response), 'result');
+    }
+
     private function postRequest(string $action, array $data)
     {
         $json_data = !$data ? $data : Json::encode($data);
