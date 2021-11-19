@@ -31,12 +31,14 @@ import './include/maskedinput';
 import ProductVendorFill from './block/ProductVendorFill';
 import SetPrice from './block/SetPrice';
 import LoadBreedSizes from './block/LoadBreedSizes';
+import MarketplaceActions from "./block/MarketplaceActions";
 
 new ProductVendorFill();
 new SetPrice('.set-price');
 new CleanOrderPhone();
 new CopyFormElement();
 new LoadBreedSizes();
+new MarketplaceActions();
 
 let buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 if (buttonToggleSlider) {

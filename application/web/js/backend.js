@@ -3000,6 +3000,48 @@ var RenderFormElement = /*#__PURE__*/function (_React$Component) {
 
 /***/ }),
 
+/***/ "./src/js/block/MarketplaceActions.js":
+/*!********************************************!*\
+  !*** ./src/js/block/MarketplaceActions.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ MarketplaceActions)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var MarketplaceActions = /*#__PURE__*/function () {
+  function MarketplaceActions() {
+    _classCallCheck(this, MarketplaceActions);
+
+    var data = {
+      'js-marketplace-refresh-count': 'refresh'
+    };
+    var element_refresh = document.querySelector('.js-marketplace-refresh-count');
+    if (element_refresh) element_refresh.onclick = this.refresh.bind();
+  }
+
+  _createClass(MarketplaceActions, [{
+    key: "refresh",
+    value: function refresh() {
+      console.log('refresh');
+    }
+  }]);
+
+  return MarketplaceActions;
+}();
+
+
+
+/***/ }),
+
 /***/ "./src/js/block/OrderLoadProduct.js":
 /*!******************************************!*\
   !*** ./src/js/block/OrderLoadProduct.js ***!
@@ -63677,6 +63719,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./block/ProductVendorFill */ "./src/js/block/ProductVendorFill.js");
 /* harmony import */ var _block_SetPrice__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./block/SetPrice */ "./src/js/block/SetPrice.js");
 /* harmony import */ var _block_LoadBreedSizes__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./block/LoadBreedSizes */ "./src/js/block/LoadBreedSizes.js");
+/* harmony import */ var _block_MarketplaceActions__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./block/MarketplaceActions */ "./src/js/block/MarketplaceActions.js");
 
 
 window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
@@ -63705,11 +63748,13 @@ window.$ = window.jQuery = (jquery__WEBPACK_IMPORTED_MODULE_0___default());
 
 
 
+
 new _block_ProductVendorFill__WEBPACK_IMPORTED_MODULE_22__.default();
 new _block_SetPrice__WEBPACK_IMPORTED_MODULE_23__.default('.set-price');
 new (_block_CleanOrderPhone__WEBPACK_IMPORTED_MODULE_18___default())();
 new _block_CopyFormElement__WEBPACK_IMPORTED_MODULE_13__.default();
 new _block_LoadBreedSizes__WEBPACK_IMPORTED_MODULE_24__.default();
+new _block_MarketplaceActions__WEBPACK_IMPORTED_MODULE_25__.default();
 var buttonToggleSlider = document.querySelector('.js-toggle-sidebar');
 
 if (buttonToggleSlider) {

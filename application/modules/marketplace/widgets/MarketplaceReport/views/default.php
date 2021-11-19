@@ -34,10 +34,10 @@ use app\modules\marketplace\models\api\OzonApi;
 
                 <div class="marketplace-products-item-wrap">
                     <div class="marketplace-products-item <?= $status; ?>">
-                        <?php if ($status == 'warning'): ?>
-                        <div class="marketplace-products-item-action js-marketplace-refresh-count">
-                            <i class="fas fa-sync-alt"></i>
-                        </div>
+                        <?php if ($status == 'warning' || $status == 'can'): ?>
+                            <div class="marketplace-products-item-action js-marketplace-refresh-count">
+                                <i class="fas fa-sync-alt"></i>
+                            </div>
                         <?php endif; ?>
                         <div class="marketplace-products-item-image-wrap">
                             <?= Html::img(ProductHelper::getImageUrl($product), ['class' => 'marketplace-products-item-image']); ?>

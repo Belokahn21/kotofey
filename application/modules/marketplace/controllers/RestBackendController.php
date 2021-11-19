@@ -22,4 +22,9 @@ class RestBackendController extends Controller
             'message' => 'Успешно'
         ];
     }
+
+    public function actionRefreshCount()
+    {
+
+    }
 }
