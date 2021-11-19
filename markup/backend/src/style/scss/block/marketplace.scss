@@ -10,6 +10,7 @@
       border: 1px #c6c6c6 solid;
       padding: 10px;
       height: 100%;
+      position: relative;
 
       &.good {
         border-color: $whatsapp-green;
@@ -29,6 +30,12 @@
       &-wrap {
         padding: 10px;
         width: 33%;
+      }
+
+      &-action {
+        position: absolute;
+        top: 0;
+        right: 0;
       }
 
       &-image {
