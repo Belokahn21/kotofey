@@ -28,7 +28,7 @@ use app\modules\marketplace\models\api\OzonApi;
                 <?php foreach ($ozon_items as $st): ?>
                     <?php $presents = intval(ArrayHelper::getValue($st, 'present')); ?>
                     <?php if (($presents == $product->count) && $product->count > 0) $status = 'good'; ?>
-                    <?php if (($presents > $product->count) && $product->count > 0) $status = 'warning'; ?>
+                    <?php if (($presents > $product->count)) $status = 'warning'; ?>
                     <?php if (($presents < $product->count) && $product->count > 0) $status = 'can'; ?>
                 <?php endforeach; ?>
 
