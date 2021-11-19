@@ -2,12 +2,25 @@
 
 namespace app\modules\catalog\models\services;
 
+use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\entity\ProductPriceHistory;
 
 class PriceHistoryService
 {
+    public static function hasChanges(int $product_id): bool
+    {
+        $product = Product::findOne($product_id);
+        if (!$product) throw new \Exception('Товар не существует');
+
+        if (!$last_history_change = ProductPriceHistory::find()->where(['product_id' => $product_id])->max('created_at')->one()) throw new \Exception('Изменений в цене не было');
+
+        return intval($product->price) !== intval($last_history_change->value);
+    }
+
     public static function saveHistoryElement(int $product_id, int $value)
     {
+        if (!self::hasChanges($product_id)) return false;
+
         $model = new ProductPriceHistory();
         $model->product_id = $product_id;
         $model->value = $value;
