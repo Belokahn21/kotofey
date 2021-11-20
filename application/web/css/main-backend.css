@@ -9030,14 +9030,14 @@ html, body {
   .set-price-container {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     padding: 0; }
   .set-price__input {
     width: 40px;
     text-align: center;
     height: 100%;
     padding: 0 5px;
-    margin: 0 0 0 10px;
+    margin: 10px 0 0 10px;
     border: 1px silver solid; }
 
 .list-breeds {

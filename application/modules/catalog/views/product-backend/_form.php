@@ -45,36 +45,40 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
         <div class="row">
             <div class="col-sm-6">
                 <div class="row">
-                    <div class="col-sm-4"><?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара'])->label(false); ?></div>
-                    <div class="col-sm-4"><?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'), ['prompt' => 'Раздел товара'])->label(false); ?></div>
-                    <div class="col-sm-4"><?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map($vendors, 'id', 'name'), ['prompt' => 'Поставщик'])->label(false); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'status_id')->dropDownList($model->getStatusList(), ['prompt' => 'Статус товара']); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'category_id')->dropDownList(ArrayHelper::map(ProductCategoryHelper::getInstance()->getFormated(), 'id', 'name'), ['prompt' => 'Раздел товара']); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'vendor_id')->dropDownList(ArrayHelper::map($vendors, 'id', 'name'), ['prompt' => 'Поставщик']); ?></div>
                 </div>
 
                 <div class="row">
                     <div class="col-sm-12">
-                        <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название'])->label(false); ?>
+                        <?= $form->field($model, 'name')->textInput(['placeholder' => 'Название']); ?>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12">
-                        <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Символьный код'])->label(false); ?>
+                        <?= $form->field($model, 'slug')->textInput(['placeholder' => 'Символьный код']); ?>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6"><?= $form->field($model, 'has_store')->checkbox()->label(false); ?></div>
-                    <div class="col-sm-6"><?= $form->field($model, 'vitrine')->checkbox()->label(false); ?></div>
+                    <div class="col-sm-6"><?= $form->field($model, 'has_store')->checkbox(); ?></div>
+                    <div class="col-sm-6"><?= $form->field($model, 'vitrine')->checkbox(); ?></div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
-                        <?= $form->field($model, 'code')->textInput(['placeholder' => 'Внешний код'])->label(false); ?>
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'article')->textInput(['placeholder' => 'Артикул']); ?>
                     </div>
 
-                    <div class="col-sm-4">
-                        <?= $form->field($model, 'barcode')->textInput(['placeholder' => 'Штрих-код'])->label(false); ?>
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'code')->textInput(['placeholder' => 'Внешний код']); ?>
                     </div>
 
-                    <div class="col-sm-4">
-                        <?= $form->field($model, 'ident_key')->textInput(['placeholder' => 'Специальный ключ'])->label(false); ?>
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'barcode')->textInput(['placeholder' => 'Штрих-код']); ?>
+                    </div>
+
+                    <div class="col-sm-3">
+                        <?= $form->field($model, 'ident_key')->textInput(['placeholder' => 'Специальный ключ']); ?>
                     </div>
                 </div>
 
@@ -82,23 +86,23 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                 <div class="row">
                     <div class="col-sm-2">
                         <div class="form-element">
-                            <?= $form->field($model, 'discount_price')->textInput(['placeholder' => 'Цена со скидкой'])->label(false); ?>
+                            <?= $form->field($model, 'discount_price')->textInput(['placeholder' => 'Цена со скидкой']); ?>
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-element">
-                            <?= $form->field($model, 'base_price')->textInput(['placeholder' => 'Базовая цена'])->label(false); ?>
+                            <?= $form->field($model, 'base_price')->textInput(['placeholder' => 'Базовая цена']); ?>
                         </div>
                     </div>
                     <div class="col-sm-2">
                         <div class="form-element">
-                            <?= $form->field($model, 'purchase')->textInput(['id' => 'id-purchase', 'placeholder' => 'Закупочная цена'])->label(false); ?>
+                            <?= $form->field($model, 'purchase')->textInput(['id' => 'id-purchase', 'placeholder' => 'Закупочная цена']); ?>
                         </div>
                     </div>
 
                     <div class="col-sm-3 set-price-container">
                         <div class="form-element">
-                            <?= $form->field($model, 'price')->textInput(['id' => 'id-price', 'placeholder' => 'Цена продажи'])->label(false); ?>
+                            <?= $form->field($model, 'price')->textInput(['id' => 'id-price', 'placeholder' => 'Цена продажи']); ?>
                         </div>
 
                         <div class="set-price">
@@ -108,7 +112,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
 
                     <div class="col-sm-3">
                         <div class="form-element">
-                            <?= $form->field($model, 'count')->textInput(['placeholder' => 'Количество'])->label(false); ?>
+                            <?= $form->field($model, 'count')->textInput(['placeholder' => 'Количество']); ?>
                         </div>
                     </div>
                 </div>
@@ -118,7 +122,7 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                 <h5>Условия доставки заказа</h5>
                 <div class="row">
                     <div class="col-sm-4">
-                        <?= $form->field($model, 'is_product_order')->checkbox()->label(false); ?>
+                        <?= $form->field($model, 'is_product_order')->checkbox(); ?>
                     </div>
                     <div class="col-sm-4">
                         <?= $form->field($modelDelivery, 'start')->dropDownList(ProductOrder::availableDays(), ['prompt' => 'Выбрать минимальное значение']); ?>

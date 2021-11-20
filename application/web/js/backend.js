@@ -3030,6 +3030,7 @@ var MarketplaceActions = /*#__PURE__*/function () {
     var data = {
       'js-marketplace-refresh-count': 'refresh'
     };
+    console.log('demo 123');
     var element_refresh = document.querySelector('.js-marketplace-refresh-count');
     if (element_refresh) element_refresh.onclick = this.refresh.bind(this);
   }
