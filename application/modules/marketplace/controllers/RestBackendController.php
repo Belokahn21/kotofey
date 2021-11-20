@@ -28,6 +28,7 @@ class RestBackendController extends Controller
     public function actionRefreshCount()
     {
         $result = 200;
+        $message = 'Успешно';
         $article = strval(\Yii::$app->request->post('article'));
         $amount = intval(\Yii::$app->request->post('amount'));
 
@@ -38,12 +39,14 @@ class RestBackendController extends Controller
 
         $ms = new MarketplaceService();
         if (!$ms->updateStockCount($article, $amount)) {
+            $result = 500;
+            $message = 'Ошибка при обновлении остатков. Подробности в логах';
             $ms->getErrors();
         }
 
         return [
             'status' => $result,
-            'message' => 'Успешно'
+            'message' => $message
         ];
     }
 }
