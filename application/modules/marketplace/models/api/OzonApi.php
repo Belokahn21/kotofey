@@ -66,24 +66,22 @@ class OzonApi
             'language' => "RU",
         ]);
 
-        Debug::p($response);
-        exit();
-
-        return ArrayHelper::getValue($this->getData($response), 'result');
+        return $this->getData($response);
     }
 
-    public function updateCount(int $amount, int $article)
+    public function updateCount(int $amount, string $article)
     {
         $response = $this->postRequest('/v2/products/stocks', [
-            'offer_id' => $article,
-            'stock' => $amount,
-            'warehouse_id' => 22215334034000,
+            'stocks' => [
+                [
+                    'offer_id' => strval($article),
+                    'stock' => $amount,
+                    'warehouse_id' => 22215334034000,
+                ]
+            ]
         ]);
 
-
-        Debug::p($response);
-        exit();
-        return ArrayHelper::getValue($this->getData($response), 'result');
+        return $this->getData($response);
     }
 
     private function postRequest(string $action, array $data)

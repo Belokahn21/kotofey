@@ -38,11 +38,6 @@ class MarketplaceService extends Model
     {
         $api = new OzonApi();
         $result = $api->updateCount($amount, $article);
-
-        Debug::p($result);
-
-        exit();
-
-        return true;
+        return $result;
     }
 }
