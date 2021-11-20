@@ -25,8 +25,11 @@ use app\modules\marketplace\models\api\OzonApi;
             <?php $status = ''; ?>
             <?php $ozon_items = ArrayHelper::getValue($product_ozon_stock, 'stocks'); ?>
             <?php if ($ozon_items): ?>
-                <?php foreach ($ozon_items as $st): ?>
-                    <?php $presents = intval(ArrayHelper::getValue($st, 'present')); ?>
+
+                <?php foreach ($ozon_items as $ozon_type_stock): ?>
+                    <?php $type = ArrayHelper::getValue($ozon_type_stock, 'type'); ?>
+                    <?php if ($type == 'fbo') continue; ?>
+                    <?php $presents = intval(ArrayHelper::getValue($ozon_type_stock, 'present')); ?>
                     <?php if (($presents == $product->count) && $product->count > 0) $status = 'good'; ?>
                     <?php if (($presents > $product->count)) $status = 'warning'; ?>
                     <?php if (($presents < $product->count) && $product->count > 0) $status = 'can'; ?>
@@ -43,8 +46,8 @@ use app\modules\marketplace\models\api\OzonApi;
                         <a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $product->id]); ?>" target="_blank" class="marketplace-products-item__name"><?= $product->name; ?></a>
                         <div class="marketplace-products-item__stock marketplace">
                             <div>Склад: <?= $product->count; ?></div>
-                            <?php foreach ($ozon_items as $st): ?>
-                                <div><?= ArrayHelper::getValue($st, 'type') ?>: <?= ArrayHelper::getValue($st, 'present'); ?>/<?= ArrayHelper::getValue($st, 'reserved'); ?></div>
+                            <?php foreach ($ozon_items as $ozon_type_stock): ?>
+                                <div><?= ArrayHelper::getValue($ozon_type_stock, 'type') ?>: <?= ArrayHelper::getValue($ozon_type_stock, 'present'); ?>/<?= ArrayHelper::getValue($ozon_type_stock, 'reserved'); ?></div>
                             <?php endforeach; ?>
                         </div>
                     </div>
