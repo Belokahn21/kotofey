@@ -37,10 +37,14 @@ if ($property->type == TypeProductProperties::TYPE_CATALOG) {
     $variants = ArrayHelper::map(PropertiesVariantsRepository::variantsByPropertyId($property->id), 'id', 'name');
 }
 ?>
+<?php //if ($this->beginCache('informer:' . implode(array_keys($variants), '-'), ['duration' => Yii::$app->params['cache_time']])): ?>
 
     <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
         'data' => $variants,
         'options' => $drop_down_params,
+//        'pluginLoading' => false,
         'hashVarLoadPosition' => \yii\web\View::POS_BEGIN
     ])->label($property->name); ?>
 
+<!--    --><?php //$this->endCache(); ?>
+<?php //endif; ?>

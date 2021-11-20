@@ -5,6 +5,7 @@ namespace app\modules\marketplace\models\services;
 use app\modules\catalog\models\repository\ProductRepository;
 use app\modules\marketplace\models\api\OzonApi;
 use app\modules\marketplace\models\entity\OzonProduct;
+use app\modules\site\models\tools\Debug;
 use yii\base\Model;
 
 class MarketplaceService extends Model
@@ -33,10 +34,14 @@ class MarketplaceService extends Model
         return true;
     }
 
-    public function updateStockCount(int $article, int $amount)
+    public function updateStockCount(string $article, int $amount)
     {
         $api = new OzonApi();
-        $api->updateCount($amount, $article);
+        $result = $api->updateCount($amount, $article);
+
+        Debug::p($result);
+
+        exit();
 
         return true;
     }

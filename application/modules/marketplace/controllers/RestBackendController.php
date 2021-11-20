@@ -28,7 +28,7 @@ class RestBackendController extends Controller
     public function actionRefreshCount()
     {
         $result = 200;
-        $article = intval(\Yii::$app->request->post('article'));
+        $article = strval(\Yii::$app->request->post('article'));
         $amount = intval(\Yii::$app->request->post('amount'));
 
         if (empty($article) || empty($amount)) {

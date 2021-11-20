@@ -7,12 +7,15 @@ export default class MarketplaceActions {
             'js-marketplace-refresh-count': 'refresh',
         }
 
-        let element_refresh = document.querySelector('.js-marketplace-refresh-count');
-        if (element_refresh) element_refresh.onclick = this.refresh.bind(this);
+        let elements_refresh = document.querySelectorAll('.js-marketplace-refresh-count');
+        if (elements_refresh) {
+            elements_refresh.forEach(el => {
+                el.onclick = this.refresh.bind(this);
+            })
+        }
     }
 
     refresh(event) {
-        console.log('demo ssss');
         let element = event.target;
         let data = new FormData();
 
@@ -27,8 +30,6 @@ export default class MarketplaceActions {
         data.append('article', article);
         data.append('amount', amount);
 
-
-        console.log('demo 123');
         RestRequest.post(`${config.restMarketplace}refresh-count/`, {
             body: data
         }).then(data => {

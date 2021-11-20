@@ -3025,20 +3025,25 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 var MarketplaceActions = /*#__PURE__*/function () {
   function MarketplaceActions() {
+    var _this = this;
+
     _classCallCheck(this, MarketplaceActions);
 
     var data = {
       'js-marketplace-refresh-count': 'refresh'
     };
-    console.log('demo 123');
-    var element_refresh = document.querySelector('.js-marketplace-refresh-count');
-    if (element_refresh) element_refresh.onclick = this.refresh.bind(this);
+    var elements_refresh = document.querySelectorAll('.js-marketplace-refresh-count');
+
+    if (elements_refresh) {
+      elements_refresh.forEach(function (el) {
+        el.onclick = _this.refresh.bind(_this);
+      });
+    }
   }
 
   _createClass(MarketplaceActions, [{
     key: "refresh",
     value: function refresh(event) {
-      console.log('demo ssss');
       var element = event.target;
       var data = new FormData();
       var article = element.getAttribute('data-article');
@@ -3051,7 +3056,6 @@ var MarketplaceActions = /*#__PURE__*/function () {
 
       data.append('article', article);
       data.append('amount', amount);
-      console.log('demo 123');
       _frontend_src_js_tools_RestRequest__WEBPACK_IMPORTED_MODULE_0__.default.post("".concat((_react_config__WEBPACK_IMPORTED_MODULE_1___default().restMarketplace), "refresh-count/"), {
         body: data
       }).then(function (data) {
