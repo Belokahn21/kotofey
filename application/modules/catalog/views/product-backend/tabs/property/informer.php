@@ -7,6 +7,8 @@ use app\modules\catalog\models\repository\PropertiesVariantsRepository;
 
 /* @var $model \app\modules\catalog\models\entity\Product */
 /* @var $property \app\modules\catalog\models\entity\Properties */
+/* @var $this \yii\web\View */
+/* @var $form \yii\widgets\ActiveForm */
 
 
 $value = false;
@@ -36,9 +38,9 @@ if ($property->type == TypeProductProperties::TYPE_CATALOG) {
 }
 ?>
 
-<?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
-    'data' => $variants,
-    'options' => $drop_down_params,
-    'hashVarLoadPosition' => \yii\web\View::POS_END
-])->label($property->name); ?>
+    <?= $form->field($model, 'properties[' . $property->id . '][]')->widget(\kartik\select2\Select2::classname(), [
+        'data' => $variants,
+        'options' => $drop_down_params,
+        'hashVarLoadPosition' => \yii\web\View::POS_BEGIN
+    ])->label($property->name); ?>
 

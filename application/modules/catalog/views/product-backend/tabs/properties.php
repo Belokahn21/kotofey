@@ -45,40 +45,35 @@ if (!$model->isNewRecord) {
                         <?php endif; ?>
                     </legend>
                     <?php foreach ($data['models'] as $property): ?>
-                        <?php if ($this->beginCache('dd' . $model->getPrimaryKey() . $property->id, ['duration' => Yii::$app->params['cache_time']])): ?>
-
-                            <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
-                                <?= $this->render('property/informer', [
-                                    'form' => $form,
-                                    'model' => $model,
-                                    'values' => $values,
-                                    'property' => $property,
-                                    'sorted_products' => $sorted_products,
-                                ]); ?>
-                            <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
-                                <?= $this->render('property/checkbox', [
-                                    'form' => $form,
-                                    'model' => $model,
-                                    'property' => $property,
-                                    'values' => $values,
-                                ]); ?>
-                            <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
-                                <?= $this->render('property/file', [
-                                    'form' => $form,
-                                    'model' => $model,
-                                    'property' => $property,
-                                    'values' => $values,
-                                ]); ?>
-                            <?php else: ?>
-                                <?= $this->render('property/common', [
-                                    'form' => $form,
-                                    'model' => $model,
-                                    'property' => $property,
-                                    'values' => $values,
-                                ]); ?>
-
-                            <?php endif; ?>
-                            <?php $this->endCache(); ?>
+                        <?php if ($property->type == TypeProductProperties::TYPE_INFORMER || $property->type == TypeProductProperties::TYPE_CATALOG): ?>
+                            <?= $this->render('property/informer', [
+                                'form' => $form,
+                                'model' => $model,
+                                'values' => $values,
+                                'property' => $property,
+                                'sorted_products' => $sorted_products,
+                            ]); ?>
+                        <?php elseif ($property->type == TypeProductProperties::TYPE_CHECKBOX): ?>
+                            <?= $this->render('property/checkbox', [
+                                'form' => $form,
+                                'model' => $model,
+                                'property' => $property,
+                                'values' => $values,
+                            ]); ?>
+                        <?php elseif ($property->type == TypeProductProperties::TYPE_FILE): ?>
+                            <?= $this->render('property/file', [
+                                'form' => $form,
+                                'model' => $model,
+                                'property' => $property,
+                                'values' => $values,
+                            ]); ?>
+                        <?php else: ?>
+                            <?= $this->render('property/common', [
+                                'form' => $form,
+                                'model' => $model,
+                                'property' => $property,
+                                'values' => $values,
+                            ]); ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </fieldset>

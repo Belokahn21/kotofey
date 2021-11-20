@@ -7,9 +7,6 @@ export default class MarketplaceActions {
             'js-marketplace-refresh-count': 'refresh',
         }
 
-        console.log('demo 123');
-
-
         let element_refresh = document.querySelector('.js-marketplace-refresh-count');
         if (element_refresh) element_refresh.onclick = this.refresh.bind(this);
     }
