@@ -34,6 +34,13 @@ export default class MarketplaceActions {
             body: data
         }).then(data => {
             console.log(data);
+            if (parseInt(data.status) === 200) {
+                element.classList.remove('fas', 'fa-sync-alt');
+                element.classList.add('fas', 'fa-check-circle');
+            } else if (parseInt(data.status) === 500) {
+                element.classList.remove('fas', 'fa-sync-alt');
+                element.classList.add('fas', 'fa-times');
+            }
         });
     }
 }
