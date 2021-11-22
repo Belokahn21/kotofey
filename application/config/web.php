@@ -140,15 +140,15 @@ $config = [
 
 
                 'GET backend/api/<module>' => '<module>/rest-backend/index',
-                'GET backend/api/<module>/<action>' => '<module>/rest-backend/<action>',
+//                'GET backend/api/<module>/<action>' => '<module>/rest-backend/<action>',
                 'GET backend/api/<module>/<controller>' => '<module>/<controller>-rest-backend/index',
-                'GET backend/api/<module>/<controller>/<action>' => '<module>/<controller>-rest-backend/<action>',
+//                'GET backend/api/<module>/<controller>/<action>' => '<module>/<controller>-rest-backend/<action>',
 
 
                 'POST backend/api/<module>' => '<module>/rest-backend/create',
                 'POST backend/api/<module>/<action>' => '<module>/rest-backend/<action>',
                 'POST backend/api/<module>/<controller>' => '<module>/<controller>-rest-backend/create',
-                'POST backend/api/<module>/<controller>/<action>' => '<module>/<controller>-rest-backend/<action>',
+//                'POST backend/api/<module>/<controller>/<action>' => '<module>/<controller>-rest-backend/<action>',
 
                 'DELETE backend/api/<module>/<id[\w]+>' => '<module>/rest-backend/delete',
                 'DELETE backend/api/<module>/<controller>/<id[\w]+>' => '<module>/<controller>-rest-backend/delete',
@@ -160,9 +160,9 @@ $config = [
 
 
                 'GET api/<module>' => '<module>/rest/index',
-                'GET api/<module>/<action>' => '<module>/rest/<action>',
+//                'GET api/<module>/<action>' => '<module>/rest/<action>',
                 'GET api/<module>/<controller>' => '<module>/<controller>-rest/index',
-                'GET api/<module>/<controller>/<action>' => '<module>/<controller>-rest/<action>',
+//                'GET api/<module>/<controller>/<action>' => '<module>/<controller>-rest/<action>',
 
                 'POST api/<module>' => '<module>/rest/create',
                 'POST api/<module>/<controller>' => '<module>/<controller>-rest/create',
