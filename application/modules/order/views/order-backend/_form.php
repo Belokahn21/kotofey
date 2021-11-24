@@ -35,7 +35,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
 ?>
 <div class="new-design-form">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-12 col-lg-6">
 
             <div class="row">
                 <div class="col-sm-3"><?= $form->field($model, 'is_paid')->checkbox(); ?></div>
@@ -117,7 +117,7 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
         </div>
 
         <?php if (!$model->isNewRecord): ?>
-            <div class="col-sm-6">
+            <div class="col-12 col-lg-6">
 
                 <div class="info-card-wrapper">
 
