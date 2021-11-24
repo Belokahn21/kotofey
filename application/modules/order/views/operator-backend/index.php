@@ -27,8 +27,8 @@ $this->title = Title::show('Кабинет оператора');
     'method' => 'get'
 ]); ?>
 <div class="row">
-    <div class="col-4"><?= $form->field($filterModel, 'start_at')->textInput(['class' => 'js-datepicker form-control']); ?></div>
-    <div class="col-4"><?= $form->field($filterModel, 'end_at')->textInput(['class' => 'js-datepicker form-control']); ?></div>
+    <div class="col-4"><?= $form->field($filterModel, 'start_at')->textInput(['class' => 'js-datepicker form-control', 'value' => date('25.m.Y', strtotime(date('25.' . (date('m') - 1) . '.Y')))]); ?></div>
+    <div class="col-4"><?= $form->field($filterModel, 'end_at')->textInput(['class' => 'js-datepicker form-control', 'value' => date('25.m.Y')]); ?></div>
     <div class="col-4"><?= $form->field($filterModel, 'manager_id')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['class' => 'js-datepicker form-control']); ?></div>
 </div>
 <?= Html::submitButton('Получить отчёт', ['class' => 'btn-main']) ?>
