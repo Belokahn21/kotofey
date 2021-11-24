@@ -1,19 +1,19 @@
 version: "3.9"
 networks:
   default:
-    name: "kotofey"
+    name: ${PROJECT_NAME}
 services:
   nginx:
     build:
       context: ./docker/nginx
     ports:
-      - "8080:80"
+      - "27016:80"
     volumes:
       - ./:/var/www/kotofey.store:ro
-      - ./docker/nginx/config:/etc/nginx/conf.d
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
 
   php-fpm:
-    working_dir: "/var/www/kotofey.store"
+    working_dir: '/var/www/${PROJECT_NAME}'
     build:
       context: ./docker/php-fpm
     volumes:

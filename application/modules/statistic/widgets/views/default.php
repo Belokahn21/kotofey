@@ -7,6 +7,7 @@
  * @var $this \yii\web\View
  * @var $no_attention_reviews \app\modules\reviews\models\entity\Reviews[]
  * @var $ozon_new \app\modules\marketplace\models\entity\MarketplaceProductStatus[]
+ * @var $buy_items Product[]
  */
 
 use app\modules\catalog\models\entity\Product;
@@ -158,6 +159,24 @@ $product = Product::find();
                                         <?php $product = Product::findOne($model->product_id); ?>
 
                                         <?= Html::a($product->name, Url::to(['/admin/catalog/product-backend/update', 'id' => $model->product_id])) ?>
+                                    </p>
+                                </div>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php else: ?>
+                        <span class="green">Новых товаров Ozon нет</span>
+                    <?php endif; ?>
+                </div>
+            </div>
+            <div class="statistic__item">
+                <div class="statistic__icon"><i class="fas fa-cubes"></i></div>
+                <div class="statistic__content">
+                    <?php if ($buy_items): ?>
+                        <div class="statistic-summary">
+                            <?php foreach ($buy_items as $model): ?>
+                                <div class="statistic-summary__item" title="<?= $model->name; ?>">
+                                    <p style="font-size: 14px; margin: 0;">
+                                        <?= Html::a($model->name, Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->id])) ?>
                                     </p>
                                 </div>
                             <?php endforeach; ?>

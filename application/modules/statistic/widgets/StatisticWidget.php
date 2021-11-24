@@ -53,11 +53,26 @@ class StatisticWidget extends Widget
             'sql' => 'select count(*) from `notify_admission`'
         ]));
 
-        $ozon_new =\Yii::$app->cache->getOrSet('last-five-marketplasce-history', function () {
+        $ozon_new = \Yii::$app->cache->getOrSet('last-five-marketplasce-history', function () {
             return MarketplaceProductStatus::find()->limit(5)->orderBy(['created_at' => SORT_DESC])->all();
         }, $this->cacheTime, new DbDependency([
             'sql' => 'select max(`id`) from `marketplace_product_status`'
         ]));
+
+        $buy_items = \Yii::$app->cache->getOrSet('who-need-buy', function () {
+            $orders = Order::find()->where(['is_cancel' => false, 'is_paid' => false, 'is_close' => false])->andWhere(['<>', 'status', Order::STATUS_READY_TAKE])->all();
+            $items = [];
+
+            foreach ($orders as $order) {
+                if ($_items = $order->items) {
+                    foreach ($_items as $item) {
+                        $items[] = $item->product;
+                    }
+                }
+            }
+
+            return $items;
+        });
 
 
         return $this->render($this->view, [
@@ -69,6 +84,7 @@ class StatisticWidget extends Widget
             'lastlogs' => $lastlogs,
             'ordersNow' => $ordersNow,
             'ozon_new' => $ozon_new,
+            'buy_items' => $buy_items,
         ]);
     }
 }
