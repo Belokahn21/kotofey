@@ -183,7 +183,7 @@ $product = Product::find();
                             <?php endforeach; ?>
                         </div>
                     <?php else: ?>
-                        <span class="green">Новых товаров Ozon нет</span>
+                        <span class="green">Закупать для заказов ничего не требуется</span>
                     <?php endif; ?>
                 </div>
             </div>
