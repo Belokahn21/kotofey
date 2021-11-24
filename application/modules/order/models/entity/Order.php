@@ -239,6 +239,8 @@ class Order extends ActiveRecord
             'chargeBonus' => 'Начислить бонусы',
             'odd' => 'С какой суммы сдача?',
             'client' => 'Ваше ФИО',
+            'manager_id' => 'Менеджер',
+            'bonus' => 'Списать бонусы',
             'created_user_id' => 'Кем создан',
             'updated_user_id' => 'Кем обновлен',
         ];

@@ -8923,8 +8923,14 @@ html, body {
 .info-card {
   padding: 10px;
   margin: 10px;
-  max-width: 300px;
-  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2); }
+  width: 100%;
+  border: 2px silver solid;
+  border-radius: 5px;
+  display: flex; }
+  .info-card-block {
+    padding: 0 10px; }
+    .info-card-block:not(:last-child) {
+      border-right: 1px silver solid; }
   .info-card-wrapper {
     display: flex;
     flex-direction: row;
@@ -9732,6 +9738,18 @@ html, body {
 
 .hidden {
   display: none; }
+
+.new-design-form {
+  font-size: 14px;
+  padding: 0 10px; }
+  .new-design-form .form-control {
+    font-size: 14px;
+    line-height: 1;
+    padding: 4px;
+    height: auto; }
+  .new-design-form .control-label {
+    font-weight: bold;
+    margin: 0; }
 
 
 /*# sourceMappingURL=main-backend.css.map*/

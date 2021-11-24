@@ -85,3 +85,21 @@
 .hidden {
   display: none;
 }
+
+.new-design-form {
+  font-size: 14px;
+  padding: 0 10px;
+
+  .form-control {
+    font-size: 14px;
+    line-height: 1;
+    padding: 4px;
+    height: auto;
+    //height: calc(1.1em + 0.75rem + 2px);
+  }
+
+  .control-label {
+    font-weight: bold;
+    margin: 0;
+  }
+}

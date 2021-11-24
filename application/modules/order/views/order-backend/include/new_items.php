@@ -24,7 +24,7 @@ use app\modules\order\widgets\FindProductsWidgets\FindProducstWidgets;
         <div class="col-sm-2">
             <?= $form->field($itemsModel, '[' . $i . ']discount_price')->textInput(['class' => 'load-product-info__discount_price form-control', 'placeholder' => "Со скидкой"])->label(false); ?>
         </div>
-        <div class="col-sm-1">
+        <div class="col-sm-2">
             <?= $form->field($itemsModel, '[' . $i . ']product_id')->widget(FindProducstWidgets::className(), ['placeholder' => 'ID товара'])->label(false); ?>
         </div>
         <div class="col-sm-1">
