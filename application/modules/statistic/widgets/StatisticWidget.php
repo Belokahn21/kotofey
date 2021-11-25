@@ -60,7 +60,7 @@ class StatisticWidget extends Widget
         ]));
 
         $buy_items = \Yii::$app->cache->getOrSet('who-need-buy', function () {
-            $orders = Order::find()->where(['is_cancel' => false, 'is_paid' => false, 'is_close' => false])->andWhere(['<>', 'status', Order::STATUS_READY_TAKE])->all();
+            $orders = Order::find()->where(['is_cancel' => false, 'is_close' => false])->andWhere(['<>', 'status', Order::STATUS_READY_TAKE])->all();
             $items = [];
 
             foreach ($orders as $order) {
