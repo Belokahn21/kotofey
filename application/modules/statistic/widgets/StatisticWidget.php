@@ -9,6 +9,7 @@ use app\modules\marketplace\models\entity\MarketplaceProductStatus;
 use app\modules\order\models\entity\Order;
 use app\modules\reviews\models\entity\Reviews;
 use app\modules\search\models\entity\SearchQuery;
+use app\modules\site\models\tools\Debug;
 use yii\base\Widget;
 use yii\caching\DbDependency;
 
@@ -62,14 +63,19 @@ class StatisticWidget extends Widget
         $buy_items = \Yii::$app->cache->getOrSet('who-need-buy', function () {
             $orders = Order::find()->where(['is_cancel' => false, 'is_close' => false])->andWhere(['<>', 'status', Order::STATUS_READY_TAKE])->all();
             $items = [];
+            $ids = [];
 
             foreach ($orders as $order) {
                 if ($_items = $order->items) {
+                    $ids[] = $order->id;
+
                     foreach ($_items as $item) {
                         $items[] = $item->product;
                     }
                 }
             }
+
+            Debug::printFile($ids);
 
             return $items;
         });
