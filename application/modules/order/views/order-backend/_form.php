@@ -198,6 +198,75 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
                     <?php endif; ?>
                 </div>
 
+                <?php if (is_array($itemsModel)): ?>
+                    <h2>Товары в заказе</h2>
+                    <?= FastManagerMessage::widget([
+                        'items' => $itemsModel
+                    ]); ?>
+
+                    <?php $summary_weight = 0; ?>
+
+                    <div class="order-items-list">
+                        <?php foreach ($itemsModel as $item): ?>
+                            <div class="order-items-list__item<?= ($item->product && ($item->product->count >= $item->count)) ? ' isFull' : ''; ?>">
+                                <?php if ($item->product): ?>
+                                    <img class="order-items-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
+                                <?php else: ?>
+                                    <img class="order-items-list__image" src="/upload/images/not-image.png" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
+                                <?php endif; ?>
+
+                                <div class="order-items-list-info">
+                                    <?php if ($item->product): ?>
+                                        <div class="order-items-list-info__name"><a href="<?= Url::to(['/admin/catalog/product-backend/update', 'id' => $item->product->id]) ?>"><?= $item->name; ?></a></div>
+                                    <?php else: ?>
+                                        <div><?= $item->name; ?></div>
+                                    <?php endif; ?>
+                                    <?php if ($item->product): ?>
+
+
+                                        <div class="order-items-list-info__block">
+                                            <div>Внешний код: <?= $item->product && $item->product->vendor_id == 4 ? Html::a($item->product->code, SibagroTrade::getProductDetailByCode($item->product->code), ['target' => '_blank']) : $item->product->code; ?></div>
+                                            <?php
+                                            try { ?>
+                                                <div>Вес позиций: <?= $summary_weight += PropertiesHelper::getProductWeight($item->product->id) * $item->count; ?></div>
+
+                                            <?php } catch (Exception $exception) { ?>
+                                                <div class="red bold">При расчете веса возникла ошибка: <?= $exception->getMessage(); ?></div>
+                                            <?php } ?>
+                                        </div>
+                                    <?php endif; ?>
+
+                                    <div class="order-items-list-info__block">
+                                        <?php if ($item->product): ?>
+                                            <div>Сейчас на складе: <?= $item->product->count; ?></div>
+                                        <?php endif; ?>
+                                        <div>Кол-во: <?= $item->count; ?></div>
+                                    </div>
+
+
+                                    <div class="order-items-list-info__block">
+                                        <?php if ($item->product): ?>
+                                            <div>Зкупочная: <?= PriceTool::showFormat($item->product->purchase); ?></div>
+                                        <?php else: ?>
+                                            <div>Зкупочная: <?= PriceTool::showFormat($item->purchase); ?></div>
+                                        <?php endif; ?>
+                                        <div>К продаже за штуку: <?= PriceTool::showFormat($item->price); ?><?= $item->discount_price ? ' / со скидкой ' . PriceTool::showFormat($item->discount_price) : null; ?></div>
+                                    </div>
+
+
+                                    <div class="order-items-list-info__block">
+                                        <div>Итого к продаже:
+                                            <?= PriceTool::showFormat($item->price * $item->count) ?>
+                                            <?= $item->discount_price ? ' / со скидкой ' . PriceTool::showFormat($item->discount_price * $item->count) : null; ?>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                    <div>Общий вес заказа: <?= $summary_weight; ?> кг.</div>
+                <?php endif; ?>
+
 
                 <?= MapWidget::widget([
                     'model' => $model
