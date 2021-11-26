@@ -78,7 +78,12 @@ class StatisticWidget extends Widget
             Debug::printFile($ids);
 
             return $items;
-        });
+        }, \Yii::$app->params['cache_time'], new DbDependency([
+            'sql' => 'select count(`id`) from `order` where `is_cancel`=0 and `is_close`=0 and `status` != :status',
+            'params' => [
+                ':status' => Order::STATUS_READY_TAKE
+            ]
+        ]));
 
 
         return $this->render($this->view, [
