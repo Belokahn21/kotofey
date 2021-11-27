@@ -8,6 +8,7 @@ use app\modules\order\models\entity\OrderTracking;
 use app\modules\order\models\helpers\OrdersItemsHelpers;
 use app\modules\order\models\service\GroupBuyDataService;
 use app\modules\order\models\service\NotifyService;
+use app\modules\order\models\service\OrderService;
 use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\acquiring\banks\Sberbank;
 use app\modules\payment\models\services\acquiring\AcquiringTerminalService;
@@ -43,7 +44,7 @@ class OrderBackendController extends MainBackendController
         $parentAccess = parent::behaviors();
 
         BehaviorsRoleManager::extendRoles($parentAccess['access']['rules'], [
-            ['allow' => true, 'actions' => ['report', 'export', 'payment-link','group'], 'roles' => ['Administrator']]
+            ['allow' => true, 'actions' => ['report', 'export', 'payment-link', 'group'], 'roles' => ['Administrator']]
         ]);
 
         return $parentAccess;
@@ -61,43 +62,13 @@ class OrderBackendController extends MainBackendController
         $searchModel = new OrderSearchForm();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
         $trackForm = new OrderTracking();
+        $orderService = new OrderService();
 
-        if (\Yii::$app->request->isPost) {
-            $transaction = \Yii::$app->db->beginTransaction();
-
-            if ($model->load(\Yii::$app->request->post())) {
-
-                if ($model->validate()) {
-                    if (!$model->save()) {
-                        $transaction->rollBack();
-                        return $this->refresh();
-                    }
-                }
-
-
-                $item_saver = new OrdersItemsHelpers();
-                $save_result = $item_saver->loadItemsAndSave($model->id);
-                if ($save_result !== true) {
-                    $transaction->rollBack();
-                    return $this->refresh();
-                }
-
-                if ($dateDelivery->load(Yii::$app->request->post())) {
-                    $dateDelivery->order_id = $model->id;
-                    if ($dateDelivery->validate()) {
-                        $dateDelivery->save();
-                    }
-                }
-
-                $transaction->commit();
-                Alert::setSuccessNotify('Заказ успешно создан');
-
-                $ns = new NotifyService();
-                $ns->sendClientNotify(Order::findOne($model->id));
-
-                return $this->refresh();
-            }
+        if ($orderService->createOrder()) {
+            Alert::setSuccessNotify('Заказ успешно создан');
+            return $this->refresh();
         }
+
         return $this->render('index', [
             'itemsModel' => $itemsModel,
             'dateDelivery' => $dateDelivery,

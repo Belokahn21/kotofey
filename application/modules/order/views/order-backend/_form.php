@@ -32,10 +32,15 @@ use app\modules\delivery\widgets\ProfileTracking\ProfileTrackingWidget;
  * @var $form \yii\widgets\ActiveForm
  */
 
+
+$left_block_classes = 'col-12 col-lg-6';
+
+if ($model->isNewRecord) $left_block_classes = 'col-12 col-lg-12';
+
 ?>
 <div class="new-design-form">
     <div class="row">
-        <div class="col-12 col-lg-6">
+        <div class="<?= $left_block_classes; ?>">
 
             <div class="row">
                 <div class="col-sm-3"><?= $form->field($model, 'is_paid')->checkbox(); ?></div>

@@ -16,6 +16,18 @@ use yii\helpers\ArrayHelper;
 
 class OrderHelper
 {
+    public static function createOrder()
+    {
+        $data = \Yii::$app->request->post();
+        $model = new Order();
+
+        if (!$model->load($data)) return false;
+        if (!$model->validate() || !$model->save()) return false;
+
+
+        return $model->id;
+    }
+
     public static function containItemsWithDiscountPrice(Order $order)
     {
         foreach ($order->items as $item) {
@@ -23,11 +35,6 @@ class OrderHelper
         }
 
         return false;
-    }
-
-    public static function isEmptyItem(OrdersItems $item)
-    {
-        return empty($item->name) && empty($item->price) && empty($item->count);
     }
 
     public static function rotate($params = [])

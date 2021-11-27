@@ -82,7 +82,7 @@ class RestController extends ActiveController
             }
         } else {
             $item_saver = new OrdersItemsHelpers();
-            $result = $item_saver->loadItemsAndSave($order->id);
+            $result = $item_saver->saveItems($order->id);
 
             if ($result !== true) {
                 $response['status'] = 530;
