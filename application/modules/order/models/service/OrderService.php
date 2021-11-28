@@ -54,7 +54,6 @@ class OrderService
             'phone' => $model->phone,
         ]);
 
-
         $ss = new StockService($model);
         $ss->plus();
         $ss->minus();
