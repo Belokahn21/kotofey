@@ -81,14 +81,17 @@ class Checkout extends Component {
                 this.moveToElement(document.querySelectorAll('[aria-invalid="true"]')[0]);
             }
 
-            if (data.status === 200) {
+            let status = parseInt(data.status);
+
+            if (status === 200) {
                 if (parseInt(this.state.paymentId) === 1) {
                     this.paymentService(data.data.order.id);
                     return true;
                 }
 
-                if (ym !== undefined) {
+                try {
                     ym(55089223, 'reachGoal', 'create_order');
+                } catch (exception) {
                 }
 
                 form.reset();
@@ -97,6 +100,7 @@ class Checkout extends Component {
                     finish: true,
                     order: data.data.order
                 });
+
                 this.moveToElement(document.querySelector('.checkout-react')[0]);
             }
         });

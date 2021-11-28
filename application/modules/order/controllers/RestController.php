@@ -2,12 +2,9 @@
 
 namespace app\modules\order\controllers;
 
-use app\modules\basket\models\entity\Basket;
-use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\models\helpers\OrdersItemsHelpers;
-use app\modules\order\models\service\NotifyService;
+use app\modules\order\models\service\OrderService;
 use app\modules\site\models\tools\Currency;
 use app\modules\site\models\tools\PriceTool;
 use yii\filters\Cors;
@@ -47,52 +44,16 @@ class RestController extends ActiveController
 
     public function actionCreate()
     {
-        $order = new $this->modelClass(['scenario' => Order::SCENARIO_CLIENT_BUY]);
-        $items = new OrdersItems();
-        $response = [
-            'status' => 200,
-        ];
+        $response['status'] = 200;
+        $orderService = new OrderService();
 
-        if (!$order->load(\Yii::$app->request->post())) {
+        try {
+            $order = $orderService->createOrder(Order::SCENARIO_CLIENT_BUY);
+        } catch (\Exception $e) {
+            $response['errors'] = $orderService->getErrors();
             $response['status'] = 500;
-            $response['errors'] = 'Данные в модель Order не были загружены';
             return $response;
         }
-
-        if (!$order->validate()) {
-            $response['status'] = 510;
-            $response['errors'] = $order->getErrors();
-            return $response;
-        }
-
-        if (!$order->save()) {
-            $response['status'] = 510;
-            $response['errors'] = $order->getErrors();
-            return $response;
-        }
-
-        //bad code
-        // todo: need refactor
-        if (Basket::findAll()) {
-            $items->order_id = $order->id;
-            if (!$items->saveItems()) {
-                $response['status'] = 530;
-                $response['errors'] = $items->getErrors();
-                return $response;
-            }
-        } else {
-            $item_saver = new OrdersItemsHelpers();
-            $result = $item_saver->saveItems($order->id);
-
-            if ($result !== true) {
-                $response['status'] = 530;
-                $response['errors'] = $result->getErrors();
-                return $response;
-            }
-        }
-
-        $ns = new NotifyService();
-        $ns->sendClientNotify(Order::findOne($order->id));
 
         $response['data']['order'] = [
             'id' => $order->id,
@@ -103,6 +64,8 @@ class RestController extends ActiveController
             'address' => (!$order->city ? '' : 'г. ' . $order->city) . (!$order->street ? '' : ', ул. ' . $order->street) . (!$order->number_home ? '' : ', д. ' . $order->number_home) . (!$order->entrance ? '' : ', п. ' . $order->entrance) . (!$order->floor_house ? '' : ', эт. ' . $order->floor_house) . (!$order->number_appartament ? '' : ', кв. ' . $order->number_appartament),
             'total' => PriceTool::format(OrderHelper::orderSummary($order)) . ' ' . Currency::getInstance()->show(),
         ];
+
+
         return $response;
     }
 

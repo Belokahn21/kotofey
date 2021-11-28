@@ -54,13 +54,11 @@ class Debug
         }
     }
 
-    public static function modelErrors($model)
+    public static function modelErrors(ActiveRecord $model): string
     {
         $strError = '';
-        if ($model instanceof ActiveRecord) {
-            foreach ($model->getErrors() as $key => $errors) {
-                $strError .= '<br/>' . implode(';', $errors);
-            }
+        foreach ($model->getErrors() as $key => $errors) {
+            $strError .= PHP_EOL . implode(';', $errors);
         }
 
         return $strError;

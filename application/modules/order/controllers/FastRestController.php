@@ -52,7 +52,7 @@ class FastRestController extends Controller
         }
 
         $item_saver = new OrdersItemsHelpers();
-        $save_result = $item_saver->saveItems($order->id);
+        $save_result = $item_saver->save($order->id);
         if ($save_result !== true) {
             $response['status'] = 510;
             $response['errors'] = $save_result->getErrors();

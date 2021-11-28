@@ -64,8 +64,14 @@ class OrderBackendController extends MainBackendController
         $trackForm = new OrderTracking();
         $orderService = new OrderService();
 
-        if ($orderService->createOrder()) {
-            Alert::setSuccessNotify('Заказ успешно создан');
+        try {
+            if (Yii::$app->request->isPost && $orderService->createOrder()) {
+                Alert::setSuccessNotify('Заказ успешно создан');
+                return $this->refresh();
+            }
+        } catch (\Exception $e) {
+            Alert::setErrorNotify($e->getMessage());
+            Debug::printFile($orderService->getErrors());
             return $this->refresh();
         }
 

@@ -6,7 +6,7 @@ use app\modules\order\models\entity\OrderDate;
 
 class DateDeliveryHelper
 {
-    public function create(int $order_id)
+    public function save(int $order_id)
     {
         $model = new OrderDate();
         $data = \Yii::$app->request->post();

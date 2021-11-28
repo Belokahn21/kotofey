@@ -9,6 +9,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
+use app\modules\order\models\traits\ErrorTrait;
 use app\modules\payment\models\entity\Payment;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\site\models\tools\Debug;
@@ -16,16 +17,29 @@ use yii\helpers\ArrayHelper;
 
 class OrderHelper
 {
-    public static function createOrder()
+    use ErrorTrait;
+
+    public function createOrder(string $scenario = Order::SCENARIO_DEFAULT): Order
     {
         $data = \Yii::$app->request->post();
-        $model = new Order();
+        $model = new Order(['scenario' => $scenario]);
 
-        if (!$model->load($data)) return false;
-        if (!$model->validate() || !$model->save()) return false;
+        if (!$model->load($data)) {
+            throw new \Exception('Данные не загружены в модель Order');
+        }
+
+        if (!$model->validate()) {
+            $this->setErrors($model->getErrors());
+            throw new \Exception('Ошибка при валидации заказа: ' . Debug::modelErrors($model));
+        }
+
+        if (!$model->save()) {
+            $this->setErrors($model->getErrors());
+            throw new \Exception('Ошибка на этапе вызова метода save(); : ' . Debug::modelErrors($model));
+        }
 
 
-        return $model->id;
+        return $model;
     }
 
     public static function containItemsWithDiscountPrice(Order $order)

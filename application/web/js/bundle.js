@@ -5018,16 +5018,18 @@ var Checkout = /*#__PURE__*/function (_Component) {
           _this3.moveToElement(document.querySelectorAll('[aria-invalid="true"]')[0]);
         }
 
-        if (data.status === 200) {
+        var status = parseInt(data.status);
+
+        if (status === 200) {
           if (parseInt(_this3.state.paymentId) === 1) {
             _this3.paymentService(data.data.order.id);
 
             return true;
           }
 
-          if (ym !== undefined) {
+          try {
             ym(55089223, 'reachGoal', 'create_order');
-          }
+          } catch (exception) {}
 
           form.reset();
 
