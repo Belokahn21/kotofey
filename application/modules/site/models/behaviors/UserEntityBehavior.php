@@ -20,24 +20,18 @@ class UserEntityBehavior extends Behavior
 
     public function apply_user_id_when_save($event)
     {
-        // если модель не вызывается из консоли
-        if (property_exists(\Yii::$app, 'user')) {
-            $user_component = \Yii::$app->user;
-            if (!$user_component->isGuest) {
-                $this->owner->{$this->attr_at_save} = $user_component->id;
-            }
+        $user_component = \Yii::$app->user;
+        if (!$user_component->isGuest) {
+            $this->owner->{$this->attr_at_save} = $user_component->id;
         }
     }
 
 
     public function apply_user_id_when_update($event)
     {
-        // если модель не вызывается из консоли
-        if (property_exists(\Yii::$app, 'user')) {
-            $user_component = \Yii::$app->user;
-            if (!$user_component->isGuest) {
-                $this->owner->{$this->attr_at_update} = $user_component->id;
-            }
+        $user_component = \Yii::$app->user;
+        if (!$user_component->isGuest) {
+            $this->owner->{$this->attr_at_update} = $user_component->id;
         }
     }
 }

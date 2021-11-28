@@ -168,17 +168,6 @@ class Order extends ActiveRecord
 
     public function afterSave($insert, $changedAttributes)
     {
-
-        $ss = new StockService($this);
-        $ss->plus();
-        $ss->minus();
-
-        BonusService::getInstance()->addUserBonus($this);
-        OFDFermaService::getInstance()->doSendCheck($this, [
-            'email' => $this->email,
-            'phone' => $this->phone,
-        ]);
-
         // todo: херня выходит с пересохранением заказа, надо поправить
         if (!$this->is_update) {
             (new Manegment())->applyCodeToUser($this);

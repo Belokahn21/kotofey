@@ -3,6 +3,8 @@
 
 namespace app\modules\order\models\service;
 
+use app\modules\acquiring\models\services\ofd\OFDFermaService;
+use app\modules\bonus\models\service\BonusService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\helpers\DateDeliveryHelper;
@@ -37,9 +39,25 @@ class OrderService
         (new DateDeliveryHelper())->save($order_id);
 
 
+        //refresh model class
+        $model = Order::findOne($order_id);
+
         $notifyService = new NotifyService();
-        $notifyService->sendClientNotify(Order::findOne($order_id)); //todo: из-за того что в заказе нет товаров приходится выгружать из бд заного с заполнеными данными
+        $notifyService->sendClientNotify($model); //todo: из-за того что в заказе нет товаров приходится выгружать из бд заного с заполнеными данными
         $notifyService->sendMessageToVkontakte($order_id, ArrayHelper::getValue(\Yii::$app->params, 'vk.access_token'));
+
+
+        //ecommerce operations
+        BonusService::getInstance()->addUserBonus($model);
+        OFDFermaService::getInstance()->doSendCheck($model, [
+            'email' => $model->email,
+            'phone' => $model->phone,
+        ]);
+
+
+        $ss = new StockService($model);
+        $ss->plus();
+        $ss->minus();
 
         return $model;
     }
