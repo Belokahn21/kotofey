@@ -70,15 +70,15 @@ class OrderBackendController extends MainBackendController
         $searchModel = new OrderSearchForm();
         $trackForm = new OrderTracking();
 
-        $users = UserRepository::getAll();
-        $deliveries = DeliveryRepository::getAll();
-        $payments = PaymentRepository::getAll();
-        $status = OrderStatusRepository::getAll();
+        $users = $this->getUsers();
+        $deliveries = $this->getDeliveries();
+        $payments = $this->getPayments();
+        $status = $this->getStatuses();
 
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
         $this->service = new OrderService();
-        $this->service->addModel($model);
+        $this->service->setModel($model);
 
         try {
             if ($this->service->createOrder()) {
@@ -114,12 +114,12 @@ class OrderBackendController extends MainBackendController
             $itemsModel = new OrdersItems();
         }
 
-        $users = UserRepository::getAll();
-        $deliveries = DeliveryRepository::getAll();
-        $payments = PaymentRepository::getAll();
-        $status = OrderStatusRepository::getAll();
+        $users = $this->getUsers();
+        $deliveries = $this->getDeliveries();
+        $payments = $this->getPayments();
+        $status = $this->getStatuses();
 
-        $this->service->addModel($model);
+        $this->service->setModel($model);
         if (!$dateDelivery = OrderDate::findOneByOrderId($model->id)) $dateDelivery = new OrderDate();
         if (!$trackForm = OrderTracking::findByOrderId($model->id)) $trackForm = new OrderTracking();
 
@@ -334,5 +334,25 @@ class OrderBackendController extends MainBackendController
         }
 
         return $this->redirect(['update', 'id' => $order->id]);
+    }
+
+    private function getUsers()
+    {
+        return UserRepository::getAll();
+    }
+
+    private function getDeliveries()
+    {
+        return DeliveryRepository::getAll();
+    }
+
+    private function getPayments()
+    {
+        return PaymentRepository::getAll();
+    }
+
+    private function getStatuses()
+    {
+        return OrderStatusRepository::getAll();
     }
 }

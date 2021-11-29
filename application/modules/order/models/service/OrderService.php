@@ -118,7 +118,7 @@ class OrderService
     }
 
 
-    public function addModel(Order $model)
+    public function setModel(Order $model)
     {
         $this->model = $model;
     }
