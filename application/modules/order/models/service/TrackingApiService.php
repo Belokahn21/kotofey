@@ -16,7 +16,7 @@ use app\modules\order\models\entity\OrderTracking;
  * @var $_track_model OrderTracking
  * @var $_service Tracking
  */
-class TrackingService
+class TrackingApiService
 {
     private $_order;
     private $_service;

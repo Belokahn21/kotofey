@@ -1,22 +1,22 @@
 <?php
 
-namespace app\modules\user\models\repository;
+namespace app\modules\order\models\repository;
 
-use app\modules\user\models\entity\User;
+use app\modules\order\models\entity\OrderStatus;
 
-class UserRepository
+class OrderStatusRepository
 {
     public static function getAll()
     {
         return \Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__, function () {
-            return User::find()->all();
+            return OrderStatus::find()->all();
         });
     }
 
     public static function getOne(int $id)
     {
         return \Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__, function () use ($id) {
-            return User::findOne($id);
+            return OrderStatus::findOne($id);
         });
     }
 }

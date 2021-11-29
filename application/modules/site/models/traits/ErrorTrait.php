@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\order\models\traits;
+namespace app\modules\site\models\traits;
 
 trait ErrorTrait
 {

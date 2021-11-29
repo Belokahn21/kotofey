@@ -2,10 +2,8 @@
 
 namespace app\modules\order\models\service;
 
-use Yii;
-use yii\helpers\ArrayHelper;
 use app\modules\basket\models\entity\Basket;
-use app\modules\order\models\traits\ErrorTrait;
+use app\modules\site\models\traits\ErrorTrait;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrdersItemsHelpers;
 
@@ -15,7 +13,7 @@ class BasketService
 
     private $basket;
 
-    public function __construct(array $data)
+    public function load(array $data)
     {
         $this->clean();
         $this->basket = new Basket();
@@ -35,6 +33,10 @@ class BasketService
         }
     }
 
+    public function __construct()
+    {
+    }
+
     public function clean()
     {
         Basket::clear();
@@ -42,14 +44,17 @@ class BasketService
 
     public function save(int $order_id)
     {
+        OrdersItems::deleteAll(['order_id' => $order_id]);
+
         foreach (Basket::findAll() as $item) {
             $item->order_id = $order_id;
             if (!$item->validate() or !$item->save()) {
                 $this->setErrors($item->getErrors());
                 return false;
             }
-
         }
+
+        $this->clean();
 
         return true;
     }

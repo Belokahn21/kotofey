@@ -10,7 +10,7 @@ class StockService
 {
     private $_model;
 
-    public function __construct(Order $model)
+    public function setModel(Order $model)
     {
         $this->_model = $model;
     }

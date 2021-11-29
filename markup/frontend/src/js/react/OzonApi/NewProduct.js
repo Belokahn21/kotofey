@@ -2,16 +2,21 @@ import React, {useState} from "react";
 import {Modal, Button} from "react-bootstrap";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
+import NewProductCategories from "./render/NewProductCategories";
+import WaitLoader from "../WaitLoader";
 
 
 function NewProduct() {
     const [show, setShow] = useState(false);
+    const [categories, setCategories] = useState([]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
     function onShowModal() {
-        // RestRequest.post(config.restOzon);
+        RestRequest.post(config.restOzon).then(data => {
+            setCategories(data);
+        });
     }
 
     return (
@@ -25,9 +30,7 @@ function NewProduct() {
                     <Modal.Title>Добавить товар</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    Woohoo, you're reading this text in a modal!
-
-
+                    {categories ? <NewProductCategories models={categories}/> : <WaitLoader/>}
                 </Modal.Body>
 
 

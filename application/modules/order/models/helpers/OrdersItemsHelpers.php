@@ -5,7 +5,7 @@ namespace app\modules\order\models\helpers;
 
 use Yii;
 use yii\helpers\ArrayHelper;
-use app\modules\order\models\traits\ErrorTrait;
+use app\modules\site\models\traits\ErrorTrait;
 use app\modules\order\models\entity\OrdersItems;
 
 class OrdersItemsHelpers

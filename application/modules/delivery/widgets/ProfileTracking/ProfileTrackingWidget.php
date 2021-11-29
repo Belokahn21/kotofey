@@ -5,7 +5,7 @@ namespace app\modules\delivery\widgets\ProfileTracking;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrderTracking;
-use app\modules\order\models\service\TrackingService;
+use app\modules\order\models\service\TrackingApiService;
 use yii\base\Widget;
 
 /**
@@ -21,7 +21,7 @@ class ProfileTrackingWidget extends Widget
         $tracking_info = null;
         $track_model = OrderTracking::findByOrderId($this->order->id);
         try {
-            $trackServivce = new TrackingService($this->order);
+            $trackServivce = new TrackingApiService($this->order);
             $tracking_info = $trackServivce->getOrderInfo();
         } catch (\Exception $x) {
             LogService::saveWarningMessage($x->getMessage(), 'profile-order-tracking');

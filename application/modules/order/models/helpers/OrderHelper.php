@@ -9,7 +9,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\entity\OrderStatus;
-use app\modules\order\models\traits\ErrorTrait;
+use app\modules\site\models\traits\ErrorTrait;
 use app\modules\payment\models\entity\Payment;
 use app\modules\promocode\models\entity\Promocode;
 use app\modules\site\models\tools\Debug;
@@ -19,7 +19,51 @@ class OrderHelper
 {
     use ErrorTrait;
 
-    public function createOrder(string $scenario = Order::SCENARIO_DEFAULT): Order
+    public function create(Order $model): Order
+    {
+        $data = \Yii::$app->request->post();
+
+        if (!$model->load($data)) {
+            throw new \Exception('Данные не загружены в модель Order');
+        }
+
+        if (!$model->validate()) {
+            $this->setErrors($model->getErrors());
+            throw new \Exception('Ошибка при валидации заказа: ' . Debug::modelErrors($model));
+        }
+
+        if (!$model->save()) {
+            $this->setErrors($model->getErrors());
+            throw new \Exception('Ошибка на этапе вызова метода save(); : ' . Debug::modelErrors($model));
+        }
+
+
+        return $model;
+    }
+
+    public function update(Order $model): Order
+    {
+        $data = \Yii::$app->request->post();
+
+        if (!$model->load($data)) {
+            throw new \Exception('Данные не загружены в модель Order');
+        }
+
+        if (!$model->validate()) {
+            $this->setErrors($model->getErrors());
+            throw new \Exception('Ошибка при валидации заказа: ' . Debug::modelErrors($model));
+        }
+
+        if ($model->update() === false) {
+            $this->setErrors($model->getErrors());
+            throw new \Exception('Ошибка на этапе вызова метода update(); : ' . Debug::modelErrors($model));
+        }
+
+
+        return $model;
+    }
+
+    public function updateOrder(string $scenario = Order::SCENARIO_DEFAULT): Order
     {
         $data = \Yii::$app->request->post();
         $model = new Order(['scenario' => $scenario]);

@@ -7,19 +7,42 @@ use app\modules\acquiring\models\services\ofd\OFDFermaService;
 use app\modules\bonus\models\service\BonusService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
-use app\modules\order\models\helpers\DateDeliveryHelper;
-use app\modules\order\models\traits\ErrorTrait;
+use app\modules\site\models\traits\ErrorTrait;
 use yii\helpers\ArrayHelper;
 
+/**
+ * @property Order $model
+ * @property BasketService $basketService
+ * @property StockService $stockService
+ * @property NotifyService $notifyService
+ * @property OrderDateService $orderDateService
+ * @property OrderTrackingService $trackingService
+ */
 class OrderService
 {
     use ErrorTrait;
 
-    public function createOrder(string $scenario = Order::SCENARIO_DEFAULT): Order
+    private $model;
+    private $basketService;
+    private $stockService;
+    private $notifyService;
+
+    public function __construct()
     {
+        $this->basketService = new BasketService();
+        $this->stockService = new StockService();
+        $this->notifyService = new NotifyService();
+        $this->orderDateService = new OrderDateService();
+        $this->trackingService = new OrderTrackingService();
+    }
+
+    public function createOrder()
+    {
+        if (!\Yii::$app->request->isPost) return false;
+
         try {
             $helper = new OrderHelper();
-            $model = $helper->createOrder($scenario);
+            $model = $helper->create($this->model);
         } catch (\Exception $e) {
             $this->setErrors($helper->getErrors());
             throw new \Exception($e->getMessage());
@@ -27,36 +50,30 @@ class OrderService
 
         $order_id = $model->id;
 
-
-        $basket_service = new BasketService(\Yii::$app->request->post());
-        if (!$basket_service->save($order_id)) {
-            $this->setErrors($basket_service->getErrors());
+        $this->basketService->load(\Yii::$app->request->post());
+        if (!$this->basketService->save($order_id)) {
+            $this->setErrors($this->basketService->getErrors());
             throw new \Exception('Ошибка при сохранении товаров к заказу');
         }
 
-        $basket_service->clean();
+        $this->orderDateService->create($model);
 
-        (new DateDeliveryHelper())->save($order_id);
-
+        $this->trackingService->addOrderModel($model);
+        $this->trackingService->create();
 
         //refresh model class
         $model = Order::findOne($order_id);
-
-        $notifyService = new NotifyService();
-        $notifyService->sendClientNotify($model); //todo: из-за того что в заказе нет товаров приходится выгружать из бд заного с заполнеными данными
-        $notifyService->sendMessageToVkontakte($order_id, ArrayHelper::getValue(\Yii::$app->params, 'vk.access_token'));
-
-
+        $this->notifyService->sendClientNotify($model); //todo: из-за того что в заказе нет товаров приходится выгружать из бд заного с заполнеными данными
+        $this->notifyService->sendMessageToVkontakte($order_id, ArrayHelper::getValue(\Yii::$app->params, 'vk.access_token'));
         //ecommerce operations
         BonusService::getInstance()->addUserBonus($model);
         OFDFermaService::getInstance()->doSendCheck($model, [
             'email' => $model->email,
             'phone' => $model->phone,
         ]);
-
-        $ss = new StockService($model);
-        $ss->plus();
-        $ss->minus();
+        $this->stockService->setModel($model);
+        $this->stockService->plus();
+        $this->stockService->minus();
 
         return $model;
     }
@@ -67,5 +84,42 @@ class OrderService
 
     public function updateOrder()
     {
+        if (!\Yii::$app->request->isPost) return false;
+
+        try {
+            $helper = new OrderHelper();
+            $model = $helper->update($this->model);
+        } catch (\Exception $e) {
+            $this->setErrors($helper->getErrors());
+            throw new \Exception($e->getMessage());
+        }
+
+        $order_id = $model->id;
+
+
+        $this->basketService->load(\Yii::$app->request->post());
+        if (!$this->basketService->save($order_id)) {
+            $this->setErrors($this->basketService->getErrors());
+            throw new \Exception('Ошибка при сохранении товаров к заказу');
+        }
+
+        $this->orderDateService->update($model);
+
+        $this->trackingService->addOrderModel($model);
+        $this->trackingService->update();
+
+        $model = Order::findOne($order_id); //refresh model class
+
+        $this->stockService->setModel($model);
+        $this->stockService->plus();
+        $this->stockService->minus();
+
+        return $model;
+    }
+
+
+    public function addModel(Order $model)
+    {
+        $this->model = $model;
     }
 }

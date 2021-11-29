@@ -3,17 +3,21 @@
 namespace app\modules\order\controllers;
 
 use app\modules\acquiring\models\entity\AcquiringOrder;
+use app\modules\delivery\models\repository\DeliveryRepository;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\OrderTracking;
 use app\modules\order\models\helpers\OrdersItemsHelpers;
+use app\modules\order\models\repository\OrderStatusRepository;
 use app\modules\order\models\service\GroupBuyDataService;
 use app\modules\order\models\service\NotifyService;
 use app\modules\order\models\service\OrderService;
+use app\modules\payment\models\repository\PaymentRepository;
 use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
 use app\modules\payment\models\services\acquiring\banks\Sberbank;
 use app\modules\payment\models\services\acquiring\AcquiringTerminalService;
 use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\System;
+use app\modules\user\models\repository\UserRepository;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
@@ -38,6 +42,14 @@ use app\modules\site_settings\models\entity\SiteSettings;
 class OrderBackendController extends MainBackendController
 {
     public $modelClass = 'app\modules\order\models\entity\Order';
+    public $service;
+
+    public function __construct($id, $module, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+
+        $this->service = new OrderService();
+    }
 
     public function behaviors()
     {
@@ -55,23 +67,27 @@ class OrderBackendController extends MainBackendController
         $model = new $this->modelClass();
         $itemsModel = new OrdersItems();
         $dateDelivery = new OrderDate();
-        $users = User::find()->all();
-        $deliveries = Delivery::find()->all();
-        $payments = Payment::find()->all();
-        $status = OrderStatus::find()->all();
         $searchModel = new OrderSearchForm();
-        $dataProvider = $searchModel->search(Yii::$app->request->get());
         $trackForm = new OrderTracking();
-        $orderService = new OrderService();
+
+        $users = UserRepository::getAll();
+        $deliveries = DeliveryRepository::getAll();
+        $payments = PaymentRepository::getAll();
+        $status = OrderStatusRepository::getAll();
+
+        $dataProvider = $searchModel->search(Yii::$app->request->get());
+
+        $this->service = new OrderService();
+        $this->service->addModel($model);
 
         try {
-            if (Yii::$app->request->isPost && $orderService->createOrder()) {
+            if ($this->service->createOrder()) {
                 Alert::setSuccessNotify('Заказ успешно создан');
                 return $this->refresh();
             }
         } catch (\Exception $e) {
             Alert::setErrorNotify($e->getMessage());
-            Debug::printFile($orderService->getErrors());
+            Debug::printFile($this->service->getErrors());
             return $this->refresh();
         }
 
@@ -97,78 +113,25 @@ class OrderBackendController extends MainBackendController
         if (!$itemsModel = OrdersItems::find()->where(['order_id' => $model->id])->all()) {
             $itemsModel = new OrdersItems();
         }
-        $users = User::find()->all();
-        $deliveries = Delivery::find()->all();
-        $payments = Payment::find()->all();
-        $status = OrderStatus::find()->all();
 
-        if (!$dateDelivery = OrderDate::findOneByOrderId($model->id)) {
-            $dateDelivery = new OrderDate();
-        }
+        $users = UserRepository::getAll();
+        $deliveries = DeliveryRepository::getAll();
+        $payments = PaymentRepository::getAll();
+        $status = OrderStatusRepository::getAll();
 
-        if (!$trackForm = OrderTracking::findByOrderId($model->id)) {
-            $trackForm = new OrderTracking();
-        }
+        $this->service->addModel($model);
+        if (!$dateDelivery = OrderDate::findOneByOrderId($model->id)) $dateDelivery = new OrderDate();
+        if (!$trackForm = OrderTracking::findByOrderId($model->id)) $trackForm = new OrderTracking();
 
-        if (\Yii::$app->request->isPost) {
-            $transaction = \Yii::$app->db->beginTransaction();
-
-            if ($model->load(\Yii::$app->request->post())) {
-
-                if ($model->validate()) {
-                    if (!$model->update()) {
-                        $transaction->rollBack();
-                        return $this->refresh();
-                    }
-                }
-
-                OrdersItems::deleteAll(['order_id' => $model->id]);
-
-                $item_saver = new OrdersItemsHelpers();
-                $save_result = $item_saver->loadItemsAndSave($model->id);
-                if ($save_result !== true) {
-                    $transaction->rollBack();
-                    return $this->refresh();
-                }
-
-                if ($dateDelivery->isNewRecord) {
-                    if ($dateDelivery->load(Yii::$app->request->post())) {
-                        $dateDelivery->order_id = $model->id;
-                        if ($dateDelivery->validate()) {
-                            $dateDelivery->save();
-                        }
-
-                    }
-                } else {
-                    if ($dateDelivery->load(Yii::$app->request->post())) {
-                        if ($dateDelivery->validate()) {
-                            $dateDelivery->update();
-                        }
-                    }
-                }
-
-                if ($trackForm->isNewRecord) {
-                    if ($trackForm->load(Yii::$app->request->post())) {
-                        $trackForm->order_id = $model->id;
-                        if ($trackForm->validate()) {
-                            $trackForm->save();
-                        }
-
-                    }
-                } else {
-                    if ($trackForm->load(Yii::$app->request->post())) {
-                        if ($trackForm->validate()) {
-                            $trackForm->update();
-                        }
-                    }
-                }
-
-                $ns = new NotifyService();
-                $ns->sendClientNotify(Order::findOne($model->id));
-                $transaction->commit();
-                Alert::setSuccessNotify('Заказ успешно обновлён');
+        try {
+            if ($this->service->updateOrder()) {
+                Alert::setSuccessNotify('Заказ успешно обновлен');
                 return $this->refresh();
             }
+        } catch (\Exception $e) {
+            Alert::setErrorNotify($e->getMessage());
+            Debug::printFile($this->service->getErrors());
+            return $this->refresh();
         }
 
         return $this->render('update', [
