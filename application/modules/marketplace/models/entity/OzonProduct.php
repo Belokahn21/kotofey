@@ -64,7 +64,7 @@ class OzonProduct extends Model
             $dd = new OzonAttributes();
             $dd->load(0, 0, $cc);
 
-            $this->attrs = $dd;
+            $this->attrs[] = $dd;
         }
 
     }

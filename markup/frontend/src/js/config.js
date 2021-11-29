@@ -30,6 +30,8 @@ const config = {
     restAnimal: url + 'api/pets/animal/',
     restBreeds: url + 'api/pets/breed/',
     restPetCalculator: url + 'api/pets/calculate/',
+    //ozon
+    restOzon: url + 'api/marketplace/ozon/',
 };
 
 

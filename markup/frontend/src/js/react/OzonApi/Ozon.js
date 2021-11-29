@@ -1,18 +1,14 @@
 import React from "react";
 import ReactDom from "react-dom";
+import NewProduct from "./NewProduct";
 
-export default class Ozon extends React.Component {
-    constructor(props) {
-        super(props);
 
-    }
-
-    render() {
-        return (
-            <div>
-                demo api ozon
-            </div>
-        );
-    }
+function Ozon(props) {
+    return <div>
+        <NewProduct/>
+    </div>
 }
 
+
+let element = document.querySelector('.ozon-react');
+if (element) ReactDom.render(<Ozon/>, element);
