@@ -56,7 +56,8 @@ class OrderService
             throw new \Exception('Ошибка при сохранении товаров к заказу');
         }
 
-        $this->orderDateService->create($model);
+        $this->orderDateService->setOrderModel($model);
+        $this->orderDateService->create();
 
         $this->trackingService->addOrderModel($model);
         $this->trackingService->create();
@@ -103,7 +104,8 @@ class OrderService
             throw new \Exception('Ошибка при сохранении товаров к заказу');
         }
 
-        $this->orderDateService->update($model);
+        $this->orderDateService->setOrderModel($model);
+        $this->orderDateService->update();
 
         $this->trackingService->addOrderModel($model);
         $this->trackingService->update();
