@@ -8,4 +8,4 @@ use yii\helpers\Html;
 <div class="title-group">
     <?= Html::a('Очистить', Url::to(['site-backend/log-clear']), ['class' => 'btn-main']); ?>
 </div>
-<?= $data; ?>
+<?= $attributes; ?>

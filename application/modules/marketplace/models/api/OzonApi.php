@@ -58,12 +58,35 @@ class OzonApi
         return ArrayHelper::getValue($this->getData($response), 'items');
     }
 
-    public function listCategoryCharacteristic()
+    public function listCategoryCharacteristic(array $category_id)
     {
         $response = $this->postRequest('/v3/category/attribute', [
             'attribute_type' => "ALL",
-            'category_id' => [0],
+            'category_id' => $category_id,
             'language' => "RU",
+        ]);
+
+        return $this->getData($response);
+    }
+
+    public function categoryTree(int $category_id = 0)
+    {
+        $response = $this->postRequest('/v2/category/tree', [
+            'category_id' => $category_id,
+            'language' => "RU",
+        ]);
+
+        return $this->getData($response);
+    }
+
+    public function attributeValues(int $attribute_id, int $category_id)
+    {
+        $response = $this->postRequest('/v2/category/attribute/values', [
+            'attribute_id' => $attribute_id,
+            'category_id' => $category_id,
+            'language' => 'RU',
+            'limit' => 5000,
+//            'last_value_id' => 0
         ]);
 
         return $this->getData($response);

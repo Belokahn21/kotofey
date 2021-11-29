@@ -27,6 +27,7 @@ class OzonProduct extends Model
     public $height;
     public $images;
     public $primary_image;
+    public $attrs;
 
     public function loadAttrs(Product $model)
     {
@@ -52,12 +53,26 @@ class OzonProduct extends Model
         $this->height = (int)ArrayHelper::getValue(PropertiesHelper::extractPropertyById($model, PropertiesHelper::PROPERTY_HEIGHT), 'value');
         $this->width = (int)ArrayHelper::getValue(PropertiesHelper::extractPropertyById($model, PropertiesHelper::PROPERTY_WIDTH), 'value');
         $this->primary_image = ProductHelper::getImageUrl($model, true);
+
+
+        foreach ($model->properties as $property) {
+
+            $cc = new OzonAttributeValue();
+            $cc->dictionary_value_id = 1;
+            $cc->value = '1';
+
+            $dd = new OzonAttributes();
+            $dd->load(0, 0, $cc);
+
+            $this->attrs = $dd;
+        }
+
     }
 
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            [['name', 'category_id'], 'required'],
             [['name', 'vat', 'offer_id'], 'string'],
             [['price', 'old_price', 'category_id', 'height', 'weight', 'width', 'width', 'depth'], 'integer'],
         ];
