@@ -8,6 +8,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\models\entity\OrdersItems;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\rest\ActiveController;
 use yii\web\HttpException;
@@ -43,8 +44,10 @@ class RestController extends ActiveController
     {
         $data = \Yii::$app->request->post();
 
-        $product_id = $data['product_id'];
-        $count = $data['count'];
+        $product_id = ArrayHelper::getValue($data, 'product_id', false);
+        $count = ArrayHelper::getValue($data, 'count', false);
+
+        if (!$product_id || !$count) throw new \Exception('Не все элементы переданы.');
 
         $product = Product::find()->where(['id' => $product_id, 'status_id' => Product::STATUS_ACTIVE])->one();
         if (!$product) throw new HttpException(404, 'Товар не найден');
@@ -102,33 +105,23 @@ class RestController extends ActiveController
     {
         $data = [];
 
-//        foreach (Product::find()->limit(5)->all() as $product) {
-//            $data[] = [
-//                'id' => $product->id,
-//                'name' => $product->name,
-//                'price' => $product->price,
-//                'count' => rand(1, 10),
-//                'article' => $product->article,
-//                'detailUrl' => ProductHelper::getDetailUrl($product),
-//                'imageUrl' => ProductHelper::getImageUrl($product),
-//            ];
-//        }
-
         foreach ($this->modelClass::findAll() as $basketItem) {
             $product = $basketItem->getProduct();
-            if (!$product instanceof Product) continue;
-
-
-
-            $data[] = [
-                'id' => $product->id,
-                'name' => $product->name,
-                'price' => $product->getDiscountPrice() ?: $product->getPrice(),
+            $element = [
+                'id' => $basketItem->getId(),
+                'name' => $basketItem->getName(),
                 'count' => $basketItem->getCount(),
-                'article' => $product->article,
-                'detailUrl' => ProductHelper::getDetailUrl($product),
-                'imageUrl' => ProductHelper::getImageUrl($product),
+                'price' => $basketItem->getPrice(),
             ];
+
+            if ($product instanceof Product) {
+                $element['imageUrl'] = ProductHelper::getImageUrl($product);
+                $element['detailUrl'] = ProductHelper::getDetailUrl($product);
+                $element['article'] = $product->article;
+            }
+
+
+            $data[] = $element;
         }
 
         $response = [

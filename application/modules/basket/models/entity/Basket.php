@@ -36,7 +36,7 @@ class Basket extends Model
         $_SESSION[self::BASKET_KEY][$item->getId()] = $item;
     }
 
-    public function delete(int $product_id)
+    public function delete($product_id)
     {
         unset($_SESSION[self::BASKET_KEY][$product_id]);
         return true;

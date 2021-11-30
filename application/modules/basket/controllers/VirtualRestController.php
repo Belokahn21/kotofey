@@ -38,6 +38,7 @@ class VirtualRestController extends Controller
         $element->setPrice($price);
         $element->setCount($price);
         $element->setWeight($weight);
+        $element->setProductId($product_id);
 
         $basket = new Basket();
         $basket->add($element);
