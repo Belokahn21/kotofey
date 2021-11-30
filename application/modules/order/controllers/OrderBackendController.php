@@ -6,10 +6,8 @@ use app\modules\acquiring\models\entity\AcquiringOrder;
 use app\modules\delivery\models\repository\DeliveryRepository;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\OrderTracking;
-use app\modules\order\models\helpers\OrdersItemsHelpers;
 use app\modules\order\models\repository\OrderStatusRepository;
 use app\modules\order\models\service\GroupBuyDataService;
-use app\modules\order\models\service\NotifyService;
 use app\modules\order\models\service\OrderService;
 use app\modules\payment\models\repository\PaymentRepository;
 use app\modules\payment\models\services\acquiring\auth\SberbankAuthBasic;
@@ -26,12 +24,8 @@ use Yii;
 use yii\web\HttpException;
 use yii\web\ForbiddenHttpException;
 use app\widgets\notification\Alert;
-use app\modules\user\models\entity\User;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\entity\OrderDate;
-use app\modules\payment\models\entity\Payment;
-use app\modules\order\models\entity\OrderStatus;
-use app\modules\delivery\models\entity\Delivery;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrderHelper;
 use app\modules\order\models\search\OrderSearchForm;
@@ -65,6 +59,8 @@ class OrderBackendController extends MainBackendController
     public function actionIndex()
     {
         $model = new $this->modelClass();
+        $this->service->setModel($model);
+
         $itemsModel = new OrdersItems();
         $dateDelivery = new OrderDate();
         $searchModel = new OrderSearchForm();
@@ -77,8 +73,6 @@ class OrderBackendController extends MainBackendController
 
         $dataProvider = $searchModel->search(Yii::$app->request->get());
 
-        $this->service = new OrderService();
-        $this->service->setModel($model);
 
         try {
             if ($this->service->createOrder()) {
@@ -173,7 +167,7 @@ class OrderBackendController extends MainBackendController
         $sheet->getColumnDimension('G')->setWidth('8');
 
         // Заголовок
-        $sheet->setCellValue('A1', sprintf('Товарная наклданая №%s от %s', $order->id, date('d.m.Y', $order->created_at)));
+        $sheet->setCellValue('A1', sprintf('Товарная накладная №%s от %s', $order->id, date('d.m.Y', $order->created_at)));
         $sheet->mergeCells('A1:G1');
         $sheet->getStyle('A1')->getFont()->setBold(true);
         $sheet->getStyle('A1')->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);

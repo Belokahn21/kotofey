@@ -72,7 +72,7 @@ class OrderService
             'email' => $model->email,
             'phone' => $model->phone,
         ]);
-        $this->stockService->setModel($model);
+        $this->stockService->setOrderModel($model);
         $this->stockService->plus();
         $this->stockService->minus();
 
@@ -112,7 +112,7 @@ class OrderService
 
         $model = Order::findOne($order_id); //refresh model class
 
-        $this->stockService->setModel($model);
+        $this->stockService->setOrderModel($model);
         $this->stockService->plus();
         $this->stockService->minus();
 
