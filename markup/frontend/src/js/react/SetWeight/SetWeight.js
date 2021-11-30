@@ -1,4 +1,3 @@
-import ReactDom from "react-dom";
 import React from "react";
 import RestRequest from "../../tools/RestRequest";
 import config from "../../config";
@@ -7,7 +6,7 @@ import Currency from "../../tools/Currency";
 import {Modal} from 'react-bootstrap';
 import BuyOneClick from "../BuyOneClick/BuyOneClick";
 
-var slider = require('ion-rangeslider');
+require('ion-rangeslider');
 
 export default class SetWeight extends React.Component {
     constructor(props) {
@@ -16,7 +15,7 @@ export default class SetWeight extends React.Component {
         this.state = {
             product: {},
             show: false,
-            count: 0,
+            weight: 0,
         }
     }
 
@@ -53,14 +52,30 @@ export default class SetWeight extends React.Component {
             from: 0,
             grid: true,
             onChange: function (data) {
-                _this.setState({count: data.from});
+                _this.setState({weight: data.from});
             },
         });
     }
 
+    addBasket() {
+
+        let data = new FormData();
+
+        data.append('product_id', this.props.product_id);
+        data.append('weight', this.state.weight);
+        data.append('count', '1');
+
+
+        RestRequest.post(config.restBasketVirtual, {
+            body: data
+        }).then(data => {
+            console.log(data);
+        });
+    }
+
     render() {
-        const {show, product, count} = this.state;
-        let rate = Math.round(product.price / product.weight), result = Math.round(rate * count);
+        const {show, product, weight} = this.state;
+        let price_rate = Math.round(product.price / product.weight), result = Math.round(price_rate * weight);
 
         return (
             <div>
@@ -80,18 +95,18 @@ export default class SetWeight extends React.Component {
                         <div className="row">
                             <div className="col-sm-12">
                                 <div className="set-weight-product">
-                                    <img className="set-weight-product-image" src={product.imageUrl}/>
+                                    <img alt={product.name} className="set-weight-product-image" src={product.imageUrl}/>
                                 </div>
                             </div>
                         </div>
 
                         <div className="set-weight-rate">
-                            <div className="set-weight-rate-item value">{count}{count > 1 ? 'кг' : 'гр'}</div>
+                            <div className="set-weight-rate-item value">{weight}{weight > 1 ? 'кг' : 'гр'}</div>
 
                             <div className="set-weight-rate-item">x</div>
 
                             <div className="set-weight-rate-item value">
-                                <div className="set-weight-rate-item__value">{Price.format(rate)}{Currency.show()}</div>
+                                <div className="set-weight-rate-item__value">{Price.format(price_rate)}{Currency.show()}</div>
                                 <div className="set-weight-rate-item__label">за кг</div>
                             </div>
                             <div className="set-weight-rate-item">=</div>
@@ -113,7 +128,7 @@ export default class SetWeight extends React.Component {
                                 <BuyOneClick/>
                             </div>
                             <div className="col-sm-6 col-12">
-                                <button className="btn-main set-weight-basket">Добавить в корзину</button>
+                                <button onClick={this.addBasket.bind(this)} className="btn-main set-weight-basket">Добавить в корзину</button>
                             </div>
                         </div>
 

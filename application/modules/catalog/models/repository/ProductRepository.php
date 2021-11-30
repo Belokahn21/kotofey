@@ -7,6 +7,9 @@ use app\modules\catalog\models\entity\Product;
 
 class ProductRepository
 {
+    /**
+     * @return Product
+     */
     public static function getOne(int $product_id)
     {
         return \Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__ . $product_id, function () use ($product_id) {

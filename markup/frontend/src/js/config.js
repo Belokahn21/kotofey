@@ -11,6 +11,7 @@ const config = {
     restOrderStatus: url + 'api/order/status/',
     restOrderRepeat: url + 'api/order/repeat/',
     restBasket: url + 'api/basket/',
+    restBasketVirtual: url + 'api/basket/virtual/',
     restDelivery: url + 'api/delivery/',
     restDeliveryService: url + 'api/delivery/service/',
     restDeliveryCalculate: url + 'api/delivery/calculate/',

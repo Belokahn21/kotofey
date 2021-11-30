@@ -3,6 +3,7 @@
 namespace app\modules\basket\models\entity;
 
 
+use app\modules\basket\models\entity\interfaces\BasketItemInterface;
 use app\modules\site\models\tools\Debug;
 use app\modules\catalog\models\entity\Product;
 use app\modules\order\models\entity\OrdersItems;
@@ -30,12 +31,12 @@ class Basket extends Model
         \Yii::$app->session->open();
     }
 
-    public function add(OrdersItems $item)
+    public function add(BasketItemInterface $item)
     {
-        $_SESSION[self::BASKET_KEY][$item->product_id] = $item;
+        $_SESSION[self::BASKET_KEY][$item->getId()] = $item;
     }
 
-    public function delete($product_id)
+    public function delete(int $product_id)
     {
         unset($_SESSION[self::BASKET_KEY][$product_id]);
         return true;
@@ -45,7 +46,7 @@ class Basket extends Model
      * @param $product_id
      * @return OrdersItems
      */
-    public static function findOne($product_id)
+    public static function findOne(int $product_id)
     {
         $basket = \Yii::$app->session->get(self::BASKET_KEY);
         if ($basket !== null) {
@@ -57,17 +58,17 @@ class Basket extends Model
         return new OrdersItems();
     }
 
-    public function update(OrdersItems $item, $count)
+    public function update(BasketItemInterface $item, int $count)
     {
         /* @var $item OrdersItems */
-        if ($item = $_SESSION[self::BASKET_KEY][$item->product_id]) {
+        if ($item = $_SESSION[self::BASKET_KEY][$item->getId()]) {
             $item->count = $count;
         }
 
-        $_SESSION[self::BASKET_KEY][$item->product_id] = $item;
+        $_SESSION[self::BASKET_KEY][$item->getId()] = $item;
     }
 
-    public function exist($product_id)
+    public function exist(int $product_id)
     {
         \Yii::$app->session->open();
         $basket = \Yii::$app->session->get(self::BASKET_KEY);
@@ -80,7 +81,7 @@ class Basket extends Model
     }
 
     /**
-     * @return OrdersItems[]
+     * @return BasketItemInterface[]
      * */
     public static function findAll()
     {
@@ -120,17 +121,17 @@ class Basket extends Model
     }
 
 
-    public function cash($withDiscount = false)
+    public function cash(bool $withDiscount = false)
     {
         $cash = 0;
 
         if (!empty($_SESSION[self::BASKET_KEY])) {
-            /* @var $item OrdersItems */
+            /* @var $item BasketItemInterface */
             foreach ($_SESSION[self::BASKET_KEY] as $id => $item) {
                 if ($withDiscount) {
-                    $cash += ($item->discount_price ? $item->discount_price : $item->price) * $item->count;
+                    $cash += ($item->discount_price ? $item->discount_price : $item->getPrice()) * $item->getCount();
                 } else {
-                    $cash += $item->price * $item->count;
+                    $cash += $item->getCount() * $item->getCount();
                 }
             }
         }

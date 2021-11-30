@@ -3,9 +3,10 @@
 namespace app\modules\order\models\entity;
 
 use app\modules\basket\models\entity\Basket;
+use app\modules\basket\models\entity\interfaces\BasketItemInterface;
+use app\modules\catalog\models\repository\ProductRepository;
 use app\modules\delivery\models\entity\Delivery;
 use app\modules\catalog\models\entity\Product;
-use app\modules\site\models\tools\Debug;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
 
@@ -27,7 +28,7 @@ use yii\db\ActiveRecord;
  *
  * @property Product $product
  */
-class OrdersItems extends ActiveRecord
+class OrdersItems extends ActiveRecord implements BasketItemInterface
 {
     const EVENT_CREATE_ITEMS = 'create_items';
 
@@ -77,7 +78,6 @@ class OrdersItems extends ActiveRecord
         Basket::clear();
 
 
-
         return true;
     }
 
@@ -88,7 +88,7 @@ class OrdersItems extends ActiveRecord
 
     public function getProduct()
     {
-        return Product::findOne($this->product_id);
+        return ProductRepository::getOne($this->product_id);
     }
 
     public static function findByOrderId($order_id)
@@ -108,5 +108,55 @@ class OrdersItems extends ActiveRecord
             'order_id' => 'ID заказа',
             'need_delete' => 'Удалить',
         ];
+    }
+
+    public function setId($id)
+    {
+        // TODO: Implement setId() method.
+    }
+
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public function setName(string $name)
+    {
+        // TODO: Implement setName() method.
+    }
+
+    public function getName()
+    {
+        // TODO: Implement getName() method.
+    }
+
+    public function setCount(int $count)
+    {
+        // TODO: Implement setCount() method.
+    }
+
+    public function getCount()
+    {
+        // TODO: Implement getCount() method.
+    }
+
+    public function setPrice(int $price)
+    {
+        // TODO: Implement setPrice() method.
+    }
+
+    public function getPrice()
+    {
+        // TODO: Implement getPrice() method.
+    }
+
+    public function setWeight(float $price)
+    {
+        // TODO: Implement setWeight() method.
+    }
+
+    public function getWeight()
+    {
+        // TODO: Implement getWeight() method.
     }
 }

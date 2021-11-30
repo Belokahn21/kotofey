@@ -3,11 +3,9 @@
 namespace app\modules\basket\controllers;
 
 use app\modules\basket\models\entity\Basket;
-use app\modules\basket\models\entity\BasketItem;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
 use app\modules\order\models\entity\OrdersItems;
-use app\modules\site\models\tools\Debug;
 use yii\helpers\Json;
 use yii\rest\ActiveController;
 use yii\web\HttpException;
