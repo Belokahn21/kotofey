@@ -1,9 +1,9 @@
 <?php
 
+use app\modules\basket\models\helpers\BasketHelper as BasketHelperAlias;
 use app\modules\site\models\tools\PriceTool;
 use app\modules\basket\models\entity\Basket;
 use app\modules\site\models\tools\Currency;
-use app\modules\basket\models\tools\BasketHelper;
 use app\modules\compare\models\helpers\CompareHelper;
 
 /* @var $product_id integer
@@ -72,7 +72,7 @@ $resultPrice = $discount_price ?: $price;
 
 
             <?php if ($showButton): ?>
-                <?php if (BasketHelper::inBasket($product_id)): ?>
+                <?php if (BasketHelperAlias::inBasket($product_id)): ?>
                     <button class="add-basket" type="button">
                         <img class="add-basket__icon" src="/upload/images/arrow-success.png">
                         <span class="add-basket__label">В корзине</span>

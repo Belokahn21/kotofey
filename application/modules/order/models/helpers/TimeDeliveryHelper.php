@@ -2,7 +2,7 @@
 
 namespace app\modules\order\models\helpers;
 
-use app\modules\basket\models\tools\BasketHelper;
+use app\modules\basket\models\helpers\BasketHelper as BasketHelperAlias;
 
 class TimeDeliveryHelper
 {
@@ -118,7 +118,7 @@ class TimeDeliveryHelper
 
 	public static function isDeliveryRange($date)
 	{
-		if (BasketHelper::containVendor(1)) {
+		if (BasketHelperAlias::containVendor(1)) {
 			$numberDay = date('N', strtotime($date));
 
 			if ($numberDay > 1 and $numberDay < 3) {

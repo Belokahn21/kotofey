@@ -3,9 +3,8 @@
 namespace app\modules\order\models\service;
 
 
+use app\modules\basket\models\helpers\BasketHelper as BasketHelperAlias;
 use app\modules\order\models\helpers\TimeDeliveryHelper;
-use app\modules\site\models\tools\Debug;
-use app\modules\basket\models\tools\BasketHelper;
 
 class DeliveryTimeService
 {
@@ -61,7 +60,7 @@ class DeliveryTimeService
 
 		if (TimeDeliveryHelper::isDeliveryRange($date)) {
 			return TimeDeliveryHelper::getNightTimes();
-		} elseif (BasketHelper::containVendor(1)) {
+		} elseif (BasketHelperAlias::containVendor(1)) {
 			return;
 		}
 
