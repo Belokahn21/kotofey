@@ -3,8 +3,10 @@
 namespace app\modules\basket\controllers;
 
 use app\modules\basket\models\entity\Basket;
+use app\modules\basket\models\entity\OrmBasketItem;
 use app\modules\catalog\models\entity\Product;
 use app\modules\catalog\models\helpers\ProductHelper;
+use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\order\models\entity\OrdersItems;
 use yii\helpers\Json;
 use yii\rest\ActiveController;
@@ -54,16 +56,18 @@ class RestController extends ActiveController
             }
         }
 
-        $basketItem = new OrdersItems();
-        $basketItem->product_id = $product->id;
-        $basketItem->count = $count;
-        $basketItem->name = $product->name;
-        $basketItem->price = $product->getPrice();
-        if ($discount = $product->getDiscountPrice()) $basketItem->discount_price = $discount;
-        $basketItem->purchase = $product->purchase;
+        $basketItem = new OrmBasketItem();
+        $basketItem->setId($product->id);
+        $basketItem->setProductId($product->id);
+        $basketItem->setCount($count);
+        $basketItem->setName($product->name);
+        $basketItem->setPrice($product->getPrice());
+        $basketItem->setWeight(PropertiesHelper::getProductWeight($product->id));
+//        if ($discount = $product->getDiscountPrice()) $basketItem->discount_price = $discount;
+//        $basketItem->purchase = $product->purchase;
 
         $basket = new $this->modelClass();
-        if ($basket->exist($basketItem->product_id)) {
+        if ($basket->exist($basketItem->getId())) {
             $basket->update($basketItem, $count);
         } else {
             $basket->add($basketItem);
@@ -110,16 +114,20 @@ class RestController extends ActiveController
 //            ];
 //        }
 
-        /* @var $basketItem OrdersItems */
         foreach ($this->modelClass::findAll() as $basketItem) {
+            $product = $basketItem->getProduct();
+            if (!$product instanceof Product) continue;
+
+
+
             $data[] = [
-                'id' => $basketItem->product->id,
-                'name' => $basketItem->product->name,
-                'price' => $basketItem->product->getDiscountPrice() ?: $basketItem->product->getPrice(),
-                'count' => $basketItem->count,
-                'article' => $basketItem->product->article,
-                'detailUrl' => ProductHelper::getDetailUrl($basketItem->product),
-                'imageUrl' => ProductHelper::getImageUrl($basketItem->product),
+                'id' => $product->id,
+                'name' => $product->name,
+                'price' => $product->getDiscountPrice() ?: $product->getPrice(),
+                'count' => $basketItem->getCount(),
+                'article' => $product->article,
+                'detailUrl' => ProductHelper::getDetailUrl($product),
+                'imageUrl' => ProductHelper::getImageUrl($product),
             ];
         }
 

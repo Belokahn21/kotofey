@@ -345,7 +345,7 @@ class Product extends \yii\db\ActiveRecord
         return $this->getDiscountPrice() ?: $this->getPrice();
     }
 
-    public function getPrice()
+    public function getPrice(): int
     {
 //        $price = PriceHelper::getPriceByCode($this->id, 'sale');
 //        if ($price) return $price->value;

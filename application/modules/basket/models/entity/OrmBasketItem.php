@@ -5,14 +5,7 @@ namespace app\modules\basket\models\entity;
 use app\modules\basket\models\entity\interfaces\BasketItemInterface;
 use app\modules\catalog\models\repository\ProductRepository;
 
-/**
- * @property int $id
- * @property int $count
- * @property int $price
- * @property string $name
- * @property float $weight
- */
-class VirtualBasketItem implements BasketItemInterface
+class OrmBasketItem implements BasketItemInterface
 {
     private $id;
     private $name;
@@ -89,6 +82,6 @@ class VirtualBasketItem implements BasketItemInterface
 
     public function getProduct()
     {
-        if ($this->product_id) return ProductRepository::getOne($this->product_id);
+        return ProductRepository::getOne($this->product_id);
     }
 }

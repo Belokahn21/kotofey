@@ -10,8 +10,8 @@ class BasketHelper
     public static function inBasket($product_id)
     {
         foreach (Basket::findAll() as $item) {
-            if ($item->product) {
-                if ($item->product->id == $product_id) {
+            if ($product = $item->getProduct()) {
+                if ($product->id == $product_id) {
                     return true;
                 }
             }
@@ -23,8 +23,8 @@ class BasketHelper
     public static function containVendor($vendor_id)
     {
         foreach (Basket::findAll() as $item) {
-            if ($item->product) {
-                if ($item->product->vendor_id == $vendor_id) {
+            if ($product = $item->getProduct()) {
+                if ($product->vendor_id == $vendor_id) {
                     return true;
                 } else {
                     continue;
