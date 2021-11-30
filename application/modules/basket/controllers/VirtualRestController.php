@@ -36,7 +36,7 @@ class VirtualRestController extends Controller
         $element->setId($product_id . '_virtual');
         $element->setName($weight . 'кг. товара ' . $product->name);
         $element->setPrice($price);
-        $element->setCount($price);
+        $element->setCount($count);
         $element->setWeight($weight);
         $element->setProductId($product_id);
 

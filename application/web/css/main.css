@@ -10948,6 +10948,7 @@ Build date: 2019-12-19 16:51:02
     color: inherit; }
 
 .btn-main, .checkout-button-auth, .site-form__button, .last-news__go-detail, .form-delivery-calc__submit, .checkout-address-list__select, .eat-calculator-result-item__action, .set-weight-buy {
+  cursor: pointer;
   background: #fff;
   border: 1px #ff1a4a solid;
   color: #ff1a4a;

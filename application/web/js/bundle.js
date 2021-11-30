@@ -5779,6 +5779,7 @@ var CheckoutBasketElement = /*#__PURE__*/function (_React$Component) {
     key: "render",
     value: function render() {
       var element = this.props.element;
+      console.log(element);
       var removeButton;
 
       if (element.id) {
