@@ -14,6 +14,7 @@ class RestController extends ActiveController
 {
     public $modelClass = 'app\modules\order\models\entity\Order';
     public $searchModelClass = 'app\modules\order\models\search\OrderSearchForm';
+    public $service;
 
     public function actions()
     {
@@ -33,6 +34,13 @@ class RestController extends ActiveController
         return $actions;
     }
 
+    public function __construct($id, $module, $config = [])
+    {
+        parent::__construct($id, $module, $config);
+
+        $this->service = new OrderService();
+    }
+
     public function behaviors()
     {
         $behaviors = parent::behaviors();
@@ -45,12 +53,14 @@ class RestController extends ActiveController
     public function actionCreate()
     {
         $response['status'] = 200;
-        $orderService = new OrderService();
+
+        $model = new Order();
+        $this->service->setModel($model);
 
         try {
-            $order = $orderService->createOrder(Order::SCENARIO_CLIENT_BUY);
+            $order = $this->service->createOrder();
         } catch (\Exception $e) {
-            $response['errors'] = $orderService->getErrors();
+            $response['errors'] = $this->service->getErrors();
             $response['status'] = 500;
             return $response;
         }

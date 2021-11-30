@@ -13,10 +13,14 @@ class BasketService
 
     private $basket;
 
-    public function load(array $data)
+    public function load()
     {
         $this->clean();
         $this->basket = new Basket();
+
+        $data = \Yii::$app->request->post();
+
+        if (!array_key_exists('OrdersItems', $data)) return false;
 
         $count = count($data);
 
@@ -44,6 +48,8 @@ class BasketService
 
     public function save(int $order_id)
     {
+        $this->load();
+
         OrdersItems::deleteAll(['order_id' => $order_id]);
 
         foreach (Basket::findAll() as $item) {
