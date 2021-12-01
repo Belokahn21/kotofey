@@ -124,13 +124,13 @@ class OrderService
         $this->order->is_paid = true;
         $this->order->status = 3;
         $this->order->phone = (string)$this->order->phone;
-
+        $this->order->validate() && $this->order->update();
 
         $this->stockService->setOrderModel($this->order);
         $this->stockService->plus();
         $this->stockService->minus();
 
-        return $this->order->validate() && $this->order->update();
+        return true;
     }
 
 
