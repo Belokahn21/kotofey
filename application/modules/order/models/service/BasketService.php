@@ -42,8 +42,8 @@ class BasketService
                 $basket_item->setPrice($item->price);
                 $basket_item->setName($item->name);
                 $basket_item->setCount($item->count);
-                $basket_item->setPurchase($item->purchase);
-                $basket_item->setDiscountPrice($item->discount_price);
+                if ($item->purchase) $basket_item->setPurchase($item->purchase);
+                if ($item->discount_price) $basket_item->setDiscountPrice($item->discount_price);
                 if ($item->product_id) $basket_item->setProductId($item->product_id);
 
                 $this->basket->add($basket_item);
