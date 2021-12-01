@@ -4,6 +4,7 @@ namespace app\modules\logistic\models\forms;
 
 
 use app\modules\order\models\entity\Order;
+use app\modules\order\models\service\OrderService;
 use yii\base\Model;
 
 class LogisticForm extends Model
@@ -20,13 +21,8 @@ class LogisticForm extends Model
 
     public function start()
     {
-        if (!$order = Order::findOne($this->order_id)) return false;
-
-        $order->is_close = true;
-        $order->is_paid = true;
-        $order->status = 3;
-        $order->phone = (string)$order->phone;
-
-        return $order->validate() && $order->update();
+        $orderService = new OrderService();
+        $orderService->setModel(Order::findOne($this->order_id));
+        return $orderService->completeOrder();
     }
 }

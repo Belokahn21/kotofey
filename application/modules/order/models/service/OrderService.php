@@ -11,7 +11,7 @@ use app\modules\site\models\traits\ErrorTrait;
 use yii\helpers\ArrayHelper;
 
 /**
- * @property Order $model
+ * @property Order $order
  * @property BasketService $basketService
  * @property StockService $stockService
  * @property NotifyService $notifyService
@@ -42,7 +42,7 @@ class OrderService
 
         try {
             $helper = new OrderHelper();
-            $model = $helper->create($this->model);
+            $model = $helper->create($this->order);
         } catch (\Exception $e) {
             $this->setErrors($helper->getErrors());
             throw new \Exception($e->getMessage());
@@ -88,7 +88,7 @@ class OrderService
 
         try {
             $helper = new OrderHelper();
-            $model = $helper->update($this->model);
+            $model = $helper->update($this->order);
         } catch (\Exception $e) {
             $this->setErrors($helper->getErrors());
             throw new \Exception($e->getMessage());
@@ -118,9 +118,24 @@ class OrderService
         return $model;
     }
 
+    public function completeOrder()
+    {
+        $this->order->is_close = true;
+        $this->order->is_paid = true;
+        $this->order->status = 3;
+        $this->order->phone = (string)$this->order->phone;
+
+
+        $this->stockService->setOrderModel($this->order);
+        $this->stockService->plus();
+        $this->stockService->minus();
+
+        return $this->order->validate() && $this->order->update();
+    }
+
 
     public function setModel(Order $model)
     {
-        $this->model = $model;
+        $this->order = $model;
     }
 }
