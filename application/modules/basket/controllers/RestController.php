@@ -63,8 +63,8 @@ class RestController extends ActiveController
         $basketItem->setId($product->id);
         $basketItem->setProductId($product->id);
         $basketItem->setCount($count);
-        $basketItem->setDiscountPrice($product->getDiscountPrice());
-        $basketItem->setPurchase($product->getPurchase());
+        if ($discount_price = $product->getDiscountPrice()) $basketItem->setDiscountPrice($discount_price);
+        if ($purchase = $product->getPurchase()) $basketItem->setPurchase($purchase);
         $basketItem->setName($product->name);
         $basketItem->setPrice($product->getPrice());
         $basketItem->setWeight(PropertiesHelper::getProductWeight($product->id));

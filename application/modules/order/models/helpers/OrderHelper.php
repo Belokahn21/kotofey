@@ -285,7 +285,7 @@ class OrderHelper
         return true;
     }
 
-    public static function plusStockCount(Order $model)
+    public static function plusStockCount(Order $model): bool
     {
 
         if (!$items = $model->items) return false;
@@ -309,6 +309,7 @@ class OrderHelper
             }
 
             if ($product->update() !== false) {
+                exit();
                 $obj = new ProductTransferHistory();
                 $obj->order_id = $model->id;
                 $obj->count = $item->count;
