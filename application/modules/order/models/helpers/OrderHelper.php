@@ -63,30 +63,13 @@ class OrderHelper
         return $model;
     }
 
-    public function updateOrder(string $scenario = Order::SCENARIO_DEFAULT): Order
+    public static function getMaxOrderDiscount(Order $order)
     {
-        $data = \Yii::$app->request->post();
-        $model = new Order(['scenario' => $scenario]);
-
-        if (!$model->load($data)) {
-            throw new \Exception('Данные не загружены в модель Order');
-        }
-
-        if (!$model->validate()) {
-            $this->setErrors($model->getErrors());
-            throw new \Exception('Ошибка при валидации заказа: ' . Debug::modelErrors($model));
-        }
-
-        if (!$model->save()) {
-            $this->setErrors($model->getErrors());
-            throw new \Exception('Ошибка на этапе вызова метода save(); : ' . Debug::modelErrors($model));
-        }
-
-
-        return $model;
+        $order_summary = OrderHelper::orderSummary($order);
+        return round($order_summary * 0.1);
     }
 
-    public static function containItemsWithDiscountPrice(Order $order)
+    public static function containItemsWithDiscountPrice(Order $order): bool
     {
         foreach ($order->items as $item) {
             if ($item->discount_price) return true;

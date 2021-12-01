@@ -67,7 +67,12 @@ if ($model->isNewRecord) $left_block_classes = 'col-12 col-lg-12';
                 <div class="col-sm-3"><?= $form->field($model, 'client')->textInput(['placeholder' => 'ФИО клиента', 'class' => 'form-control clean-phone']) ?></div>
                 <div class="col-sm-3"><?= $form->field($model, 'odd')->textInput(['placeholder' => 'Сдача']) ?></div>
                 <div class="col-sm-3"><?= $form->field($model, 'manager_id')->dropDownList(ArrayHelper::map(UserHelper::getManagers(), 'id', 'email'), ['prompt' => 'Менеджер заказа']) ?></div>
-                <div class="col-sm-3"><?= $form->field($model, 'bonus')->textInput(['placeholder' => 'Списать клиентские бонусы']) ?></div>
+                <div class="col-sm-3">
+                    <?= $form->field($model, 'bonus')->textInput(['placeholder' => 'Списать клиентские бонусы']) ?>
+                    <?php if (!$model->isNewRecord): ?>
+                        <div style="line-height: 1; color: red;">Можно списать максимум <?= OrderHelper::getMaxOrderDiscount($model); ?> бонуса</div>
+                    <?php endif; ?>
+                </div>
             </div>
 
             <div class="row">

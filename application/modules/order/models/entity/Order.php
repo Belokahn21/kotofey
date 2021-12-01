@@ -2,6 +2,8 @@
 
 namespace app\modules\order\models\entity;
 
+use app\modules\order\models\helpers\OrderHelper;
+use app\modules\site\models\tools\Debug;
 use yii\db\ActiveRecord;
 use yii\helpers\ArrayHelper;
 use yii\behaviors\TimestampBehavior;
@@ -147,6 +149,18 @@ class Order extends ActiveRecord
                 return $model->delivery_id != 3;
             }],
             [['bonus'], 'integer'],
+            [['bonus'], 'integer', 'max' => OrderHelper::getMaxOrderDiscount($this), 'tooBig' => 'Максимально можно списать {max} бонуса'],
+            [['bonus'], function ($attribute, $params) {
+                if (!$this->isNewRecord) {
+                    $max_discount = OrderHelper::getMaxOrderDiscount($this);
+
+                    if ($max_discount) {
+                        if ($this->{$attribute} > $max_discount) {
+                            $this->addError($attribute, 'Максимально можно списать ' . $max_discount . ' бонуса.');
+                        }
+                    }
+                }
+            }, 'skipOnEmpty' => false],
         ];
     }
 
