@@ -69,13 +69,17 @@ import './react/OzonApi/Ozon';
 
 
 import SetWeight from "./react/SetWeight/SetWeight";
-const set_weight_element = document.querySelector('.set-weight-react');
-if (set_weight_element) {
-    ReactDom.render(<SetWeight product_id={set_weight_element.getAttribute('data-product-id')}/>, set_weight_element);
+
+const set_weight_elements = document.querySelectorAll('.set-weight-react');
+if (set_weight_elements) {
+    set_weight_elements.forEach(el => {
+        ReactDom.render(<SetWeight product_id={el.getAttribute('data-product-id')}/>, el);
+    });
 }
 
 
 import BuyOneClick from "./react/BuyOneClick/BuyOneClick";
+
 let buy_one_click_elements = document.querySelectorAll('.buy-one-click-react');
 if (buy_one_click_elements) {
     buy_one_click_elements.forEach(el => {

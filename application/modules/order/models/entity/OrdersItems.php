@@ -87,7 +87,7 @@ class OrdersItems extends ActiveRecord
 
     public function getProduct()
     {
-        return ProductRepository::getOne($this->product_id);
+        if($this->product_id) return ProductRepository::getOne($this->product_id);
     }
 
     public static function findByOrderId($order_id)

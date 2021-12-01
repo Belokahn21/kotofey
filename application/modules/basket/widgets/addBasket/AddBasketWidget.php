@@ -24,6 +24,7 @@ class AddBasketWidget extends Widget
     public $showOneClick = true;
     public $showPrice = false;
     public $showCompare = false;
+    public $showWeight = false;
 
     public function run()
     {
@@ -43,6 +44,7 @@ class AddBasketWidget extends Widget
             'discount_price' => $this->product->getDiscountPrice(),
             'showButton' => $this->showButton,
             'showInfo' => $this->showInfo,
+            'showWeight' => $this->showWeight,
             'showControl' => $this->showControl,
             'showOneClick' => $this->showOneClick,
             'showPrice' => $this->showPrice,

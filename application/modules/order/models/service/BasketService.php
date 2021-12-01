@@ -4,6 +4,7 @@ namespace app\modules\order\models\service;
 
 use app\modules\basket\models\entity\Basket;
 use app\modules\basket\models\entity\OrmBasketItem;
+use app\modules\basket\models\entity\VirtualBasketItem;
 use app\modules\catalog\models\entity\Product;
 use app\modules\site\models\traits\ErrorTrait;
 use app\modules\order\models\entity\OrdersItems;
@@ -41,7 +42,7 @@ class BasketService
                 $basket_item->setPrice($item->price);
                 $basket_item->setName($item->name);
                 $basket_item->setCount($item->count);
-                $basket_item->setProductId($item->product_id);
+                if ($item->product_id) $basket_item->setProductId($item->product_id);
 
                 $this->basket->add($basket_item);
             }
@@ -67,7 +68,7 @@ class BasketService
 
             $order_item = new OrdersItems();
 
-            $order_item->product_id = $basketItem->getProductId();
+            if (!$basketItem instanceof VirtualBasketItem) $order_item->product_id = $basketItem->getProductId();
             $order_item->name = $basketItem->getName();
             $order_item->price = $basketItem->getPrice();
             $order_item->count = $basketItem->getCount();

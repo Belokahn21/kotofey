@@ -80970,12 +80970,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-var set_weight_element = document.querySelector('.set-weight-react');
+var set_weight_elements = document.querySelectorAll('.set-weight-react');
 
-if (set_weight_element) {
-  react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_SetWeight_SetWeight__WEBPACK_IMPORTED_MODULE_40__.default, {
-    product_id: set_weight_element.getAttribute('data-product-id')
-  }), set_weight_element);
+if (set_weight_elements) {
+  set_weight_elements.forEach(function (el) {
+    react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_SetWeight_SetWeight__WEBPACK_IMPORTED_MODULE_40__.default, {
+      product_id: el.getAttribute('data-product-id')
+    }), el);
+  });
 }
 
 

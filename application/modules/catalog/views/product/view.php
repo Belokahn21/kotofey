@@ -156,6 +156,7 @@ $this->title = ProductTitle::show($product->name);
                 'product' => $product,
                 'showOrderButton' => true,
                 'showOneClick' => true,
+                'showWeight' => true,
             ]); ?>
             <?php /*= WhenCanBuyWidget::widget([
                 'product' => $product

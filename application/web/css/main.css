@@ -16589,7 +16589,16 @@ label[for="site-form-pet-avatar"] {
     outline: none; }
 
 .set-weight-buy {
-  max-width: 120px; }
+  max-width: 170px;
+  text-align: center;
+  margin-left: 10px;
+  margin-bottom: 5px; }
+
+.set-weight-react {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center; }
 
 .set-weight-basket {
   display: block;

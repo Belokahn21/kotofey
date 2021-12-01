@@ -1,7 +1,17 @@
 .set-weight {
   &-buy {
     @extend .btn-main;
-    max-width: 120px;
+    max-width: 170px;
+    text-align: center;
+    margin-left: 10px;
+    margin-bottom: 5px;
+  }
+
+  &-react {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
   }
 
   &-basket {

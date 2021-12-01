@@ -213,7 +213,8 @@ if ($model->isNewRecord) $left_block_classes = 'col-12 col-lg-12';
 
                     <div class="order-items-list">
                         <?php foreach ($itemsModel as $item): ?>
-                            <div class="order-items-list__item<?= ($item->product && ($item->product->count >= $item->count)) ? ' isFull' : ''; ?>">
+                            <?php $product = $item->product; ?>
+                            <div class="order-items-list__item<?= ($product && ($product->count >= $item->count)) ? ' isFull' : ''; ?>">
                                 <?php if ($item->product): ?>
                                     <img class="order-items-list__image" src="<?= ProductHelper::getImageUrl($item->product) ?>" title="<?= $item->name; ?>" alt="<?= $item->name; ?>">
                                 <?php else: ?>

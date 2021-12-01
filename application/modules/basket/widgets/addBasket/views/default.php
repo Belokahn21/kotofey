@@ -15,6 +15,7 @@ use app\modules\compare\models\helpers\CompareHelper;
  * @var $showControl boolean
  * @var $showOneClick boolean
  * @var $showPrice boolean
+ * @var $showWeight boolean
  * @var $showCompare boolean
  * @var $basket Basket
  */
@@ -83,10 +84,16 @@ $resultPrice = $discount_price ?: $price;
                         <span class="add-basket__label">В корзину</span>
                     </button>
                 <?php endif; ?>
+
             <?php endif; ?>
             <?php if ($showOneClick): ?>
                 <div class="buy-one-click-react" data-product-id="<?= $product_id; ?>"></div>
             <?php endif; ?>
+
+            <?php if (Yii::$app->user->id == 1 && $showWeight): ?>
+                <div class="set-weight-react" data-product-id="<?= $product_id; ?>"></div>
+            <?php endif; ?>
+
         </div>
         <?php if ($showCompare): ?>
             <div class="compare-button-react" data-already="<?= CompareHelper::isComparing($product_id); ?>" data-id="<?= $product_id; ?>">Сравнить товар</div>
