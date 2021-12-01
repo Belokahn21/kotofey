@@ -335,8 +335,6 @@ class Product extends \yii\db\ActiveRecord
 
     public function getPurchase()
     {
-//        $price = PriceHelper::getPriceByCode($this->id, 'purchase');
-//        if ($price) return $price->value;
         return $this->purchase;
     }
 
@@ -347,8 +345,6 @@ class Product extends \yii\db\ActiveRecord
 
     public function getPrice(): int
     {
-//        $price = PriceHelper::getPriceByCode($this->id, 'sale');
-//        if ($price) return $price->value;
         return $this->price;
     }
 

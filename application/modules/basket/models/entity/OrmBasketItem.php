@@ -12,6 +12,8 @@ class OrmBasketItem implements BasketItemInterface
     private $weight;
     private $count;
     private $price;
+    private $discount_price;
+    private $purchase;
     private $product_id;
 
     /**
@@ -83,5 +85,25 @@ class OrmBasketItem implements BasketItemInterface
     public function getProduct()
     {
         return ProductRepository::getOne($this->product_id);
+    }
+
+    public function setDiscountPrice(int $amount)
+    {
+        $this->discount_price = $amount;
+    }
+
+    public function getDiscountPrice()
+    {
+        return $this->discount_price;
+    }
+
+    public function setPurchase(int $amount)
+    {
+        $this->purchase = $amount;
+    }
+
+    public function getPurchase()
+    {
+        return $this->purchase;
     }
 }

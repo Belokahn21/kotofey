@@ -30,6 +30,14 @@ interface BasketItemInterface
 
     public function getProductId();
 
+    public function setDiscountPrice(int $amount);
+
+    public function getDiscountPrice();
+
+    public function setPurchase(int $amount);
+
+    public function getPurchase();
+
     /**
      * @return Product
      */
