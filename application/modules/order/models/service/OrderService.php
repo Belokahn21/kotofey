@@ -97,7 +97,6 @@ class OrderService
         $order_id = $model->id;
 
 
-        $this->basketService->loadBasket(\Yii::$app->request->post());
         if (!$this->basketService->save($order_id)) {
             $this->setErrors($this->basketService->getErrors());
             throw new \Exception('Ошибка при сохранении товаров к заказу');
