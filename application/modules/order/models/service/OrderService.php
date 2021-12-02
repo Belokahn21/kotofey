@@ -121,9 +121,13 @@ class OrderService
     {
         $this->order->is_close = true;
         $this->order->is_paid = true;
-        $this->order->status = 3;
+        $this->order->status = Order::STATUS_FINISHED;
         $this->order->phone = (string)$this->order->phone;
-        if (!$this->order->validate() && $this->order->update() === false) return false;
+
+        if (!$this->order->validate() || $this->order->update() === false) {
+            $this->setErrors($this->order->getErrors());
+            throw new \Exception('Ошибка при обновлении заказа');
+        }
 
         $this->stockService->setOrderModel($this->order);
         $this->stockService->plus();
