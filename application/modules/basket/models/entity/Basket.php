@@ -44,7 +44,7 @@ class Basket extends Model
 
     /**
      * @param $product_id
-     * @return OrdersItems
+     * @return BasketItemInterface
      */
     public static function findOne(int $product_id)
     {
@@ -55,7 +55,7 @@ class Basket extends Model
             }
         }
 
-        return new OrdersItems();
+        return new OrmBasketItem();
     }
 
     public function update(BasketItemInterface $item, int $count)

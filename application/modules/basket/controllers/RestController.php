@@ -120,6 +120,10 @@ class RestController extends ActiveController
                 $element['imageUrl'] = ProductHelper::getImageUrl($product);
                 $element['detailUrl'] = ProductHelper::getDetailUrl($product);
                 $element['article'] = $product->article;
+
+                if ($discount = $basketItem->getDiscountPrice()) {
+                    $element['price'] = $discount;
+                }
             }
 
 

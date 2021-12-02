@@ -17,7 +17,7 @@ use app\modules\compare\models\helpers\CompareHelper;
  * @var $showPrice boolean
  * @var $showWeight boolean
  * @var $showCompare boolean
- * @var $basket Basket
+ * @var $basket \app\modules\basket\models\entity\interfaces\BasketItemInterface
  */
 $resultPrice = $discount_price ?: $price;
 ?>
@@ -40,7 +40,7 @@ $resultPrice = $discount_price ?: $price;
                 <div class="product-calc__price-group-char-val">за/шт</div>
                 <div class="product-calc__price-group-char-equal">=</div>
                 <div class="product-calc__price-group-summary js-product-calc-summary">
-                    <div class="count"><?= PriceTool::format($resultPrice * ($basket->count ? $basket->count : 1)); ?></div>
+                    <div class="count"><?= PriceTool::format($resultPrice * ($basket->getCount() ? $basket->getCount() : 1)); ?></div>
                 </div>
                 <div class="product-calc__price-group-currency"><?= Currency::getInstance()->show(); ?></div>
             </div>
@@ -51,7 +51,7 @@ $resultPrice = $discount_price ?: $price;
                 <div class="div">
                     <?php if ($showControl): ?>
                         <button class="product-calc__control product-calc__minus js-product-calc-minus" type="button">-</button>
-                        <input name="count" type="text" class="product-calc__count js-product-calc-amount" value="<?= ($basket->count ? $basket->count : 1) ?>" placeholder="1">
+                        <input name="count" type="text" class="product-calc__count js-product-calc-amount" value="<?= ($basket->getCount() ? $basket->getCount() : 1) ?>" placeholder="1">
                         <button class="product-calc__control product-calc__plus js-product-calc-plus" type="button">+</button>
                     <?php endif; ?>
 
