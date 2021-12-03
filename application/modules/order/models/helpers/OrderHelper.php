@@ -292,7 +292,6 @@ class OrderHelper
             }
 
             if ($product->update() !== false) {
-                exit();
                 $obj = new ProductTransferHistory();
                 $obj->order_id = $model->id;
                 $obj->count = $item->count;
