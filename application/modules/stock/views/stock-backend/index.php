@@ -44,12 +44,6 @@ use yii\helpers\Url;
         'name',
         'address',
         [
-            'label' => 'Количетсво товаров',
-            'value' => function ($model) {
-                return Product::find()->where(['stock_id' => $model->id])->count();
-            },
-        ],
-        [
             'attribute' => 'created_at',
             'format' => ['date', 'dd.MM.YYYY'],
             'options' => ['width' => '200']
