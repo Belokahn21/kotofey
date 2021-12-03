@@ -2,11 +2,11 @@
 
 use app\modules\basket\models\helpers\BasketHelper as BasketHelperAlias;
 use app\modules\site\models\tools\PriceTool;
-use app\modules\basket\models\entity\Basket;
 use app\modules\site\models\tools\Currency;
 use app\modules\compare\models\helpers\CompareHelper;
 
 /* @var $product_id integer
+ * @var $product \app\modules\catalog\models\entity\Product
  * @var $showButton boolean
  * @var $price integer
  * @var $discount_price integer
@@ -90,7 +90,7 @@ $resultPrice = $discount_price ?: $price;
                 <div class="buy-one-click-react" data-product-id="<?= $product_id; ?>"></div>
             <?php endif; ?>
 
-            <?php if (Yii::$app->user->id == 1 && $showWeight): ?>
+            <?php if (Yii::$app->user->id == 1 && $showWeight && $product->is_weight): ?>
                 <div class="set-weight-react" data-product-id="<?= $product_id; ?>"></div>
             <?php endif; ?>
 

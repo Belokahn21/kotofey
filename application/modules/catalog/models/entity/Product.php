@@ -55,6 +55,7 @@ use function foo\func;
  * @property integer $purchase
  * @property integer $count
  * @property boolean $vitrine
+ * @property boolean $is_weight
  * @property string $code
  * @property string $ident_key
  * @property string $barcode
@@ -88,9 +89,9 @@ class Product extends \yii\db\ActiveRecord
     {
         $parent = parent::scenarios();
 
-        $parent[self::SCENARIO_NEW_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'instruction', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'instruction', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
-        $parent[self::SCENARIO_STOCK_COUNT] = ['price', 'count', 'purchase', 'discount_price', 'base_price'];
+        $parent[self::SCENARIO_NEW_PRODUCT] = ['is_weight', 'ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'instruction', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_UPDATE_PRODUCT] = ['is_weight', 'ident_key', 'created_user_id', 'updated_user_id', 'slug', 'media_id', 'barcode', 'status_id', 'instruction', 'vendor_id', 'discount_price', 'base_price', 'name', 'sort', 'category_id', 'description', 'price', 'purchase', 'count', 'vitrine', 'seo_description', 'seo_keywords', 'image', 'images', 'properties', 'code', 'has_store', 'is_product_order', 'feed'];
+        $parent[self::SCENARIO_STOCK_COUNT] = ['is_weight', 'price', 'count', 'purchase', 'discount_price', 'base_price'];
 
         return $parent;
     }
@@ -112,7 +113,7 @@ class Product extends \yii\db\ActiveRecord
 
             [['vitrine'], 'default', 'value' => 1],
 
-            [['has_store', 'is_product_order'], 'boolean'],
+            [['has_store', 'is_product_order', 'is_weight'], 'boolean'],
 
             [['code', 'slug', 'barcode', 'ident_key'], 'unique', 'message' => 'Такой {attribute} уже используется'],
 
@@ -152,6 +153,7 @@ class Product extends \yii\db\ActiveRecord
             'created_at' => 'Дата создания',
             'updated_at' => 'Дата обновления',
             'is_product_order' => 'Товар под заказ',
+            'is_weight' => 'Товар разновес',
             'feed' => 'Поисковой контент',
             'instruction' => 'Инструкция',
             'status_id' => 'Статус товара',

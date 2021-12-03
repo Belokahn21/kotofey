@@ -61,8 +61,9 @@ use app\modules\media\widgets\MediaBrowser\MediaBrowserWidget;
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6"><?= $form->field($model, 'has_store')->checkbox(); ?></div>
-                    <div class="col-sm-6"><?= $form->field($model, 'vitrine')->checkbox(); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'has_store')->checkbox(); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'vitrine')->checkbox(); ?></div>
+                    <div class="col-sm-4"><?= $form->field($model, 'is_weight')->checkbox(); ?></div>
                 </div>
                 <div class="row">
                     <div class="col-sm-3">

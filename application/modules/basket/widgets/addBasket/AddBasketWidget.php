@@ -39,6 +39,7 @@ class AddBasketWidget extends Widget
         return $this->render($this->view, [
             'basket' => $basket,
             'product_id' => $this->product->id,
+            'product' => $this->product,
             'count' => $this->count,
             'price' => $this->product->getPrice(),
             'discount_price' => $this->product->getDiscountPrice(),
