@@ -51,6 +51,7 @@ use app\modules\acquiring\models\services\ofd\OFDFermaService;
  * @property string $ip
  * @property string $discount
  * @property integer $manager_id
+ * @property integer $billing_id
  * @property integer $created_at
  * @property integer $updated_at
  *
@@ -84,10 +85,10 @@ class Order extends ActiveRecord
     public function scenarios()
     {
         return [
-            self::SCENARIO_DEFAULT => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CUSTOM => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
-            self::SCENARIO_CLIENT_BUY => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'type', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
-            self::SCENARIO_FAST => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'email', 'phone', 'type', 'is_paid', 'status', 'ip'],
+            self::SCENARIO_DEFAULT => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'billing_id', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CUSTOM => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'billing_id', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at'],
+            self::SCENARIO_CLIENT_BUY => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'client', 'odd', 'bonus', 'entrance', 'floor_house', 'discount', 'ip', 'email', 'postalcode', 'country', 'region', 'city', 'street', 'number_home', 'number_appartament', 'phone', 'is_close', 'billing_id', 'user_id', 'delivery_id', 'payment_id', 'comment', 'notes', 'status', 'is_paid', 'is_cancel', 'promocode', 'created_at', 'updated_at', 'address'],
+            self::SCENARIO_FAST => ['is_skip', 'created_user_id', 'updated_user_id', 'manager_id', 'email', 'phone', 'billing_id', 'is_paid', 'status', 'ip'],
         ];
     }
 
@@ -99,8 +100,6 @@ class Order extends ActiveRecord
 
             ['manager_id', 'integer'],
             ['manager_id', 'default', 'value' => $module->default_manager_id],
-
-            ['type', 'default', 'value' => '3'],
 
             [['phone'], 'string', 'max' => 25],
             [['phone'], 'required', 'message' => '{attribute} необходимо указать', 'on' => [self::SCENARIO_DEFAULT, self::SCENARIO_CLIENT_BUY, self::SCENARIO_FAST]],
@@ -115,7 +114,7 @@ class Order extends ActiveRecord
 
             [['created_user_id', 'updated_user_id'], 'default', 'value' => 0],
 
-            [['payment_id', 'delivery_id', 'user_id', 'type', 'select_billing', 'entrance', 'floor_house', 'odd', 'created_user_id', 'updated_user_id'], 'integer'],
+            [['payment_id', 'delivery_id', 'user_id', 'billing_id', 'select_billing', 'entrance', 'floor_house', 'odd', 'created_user_id', 'updated_user_id'], 'integer'],
 
 
             [['payment_id', 'delivery_id'], 'required', 'on' => self::SCENARIO_CLIENT_BUY, 'message' => 'Укажите {attribute}'],
