@@ -9,6 +9,7 @@ use app\modules\catalog\models\entity\Product;
 use app\modules\site\models\traits\ErrorTrait;
 use app\modules\order\models\entity\OrdersItems;
 use app\modules\order\models\helpers\OrdersItemsHelpers;
+use yii\helpers\ArrayHelper;
 
 class BasketService
 {
@@ -25,7 +26,7 @@ class BasketService
         $this->clean();
         $this->basket = new Basket();
 
-        $count = count($data);
+        $count = count(ArrayHelper::getValue($data, 'OrdersItems'));
 
         $items = [new OrdersItems()];
         for ($i = 1; $i < $count; $i++) {
