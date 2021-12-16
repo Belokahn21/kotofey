@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = ['label' => 'Оформление заказа'
     <?php /*
     <div class="checkout-form-attention">Уважаемые покупатели, Оформление заказа временно работает в тестовом режиме поэтому просим вас при возникновении проблем с заказом обращаться по телефону <a href="tel:<?= SiteSettings::getValueByCode('phone_1'); ?>" class="js-phone-mask"><?= SiteSettings::getValueByCode('phone_1'); ?></a>. Мы поможем вам с покупокй и сделаем сервис лучше!</div>
  */ ?>
-    <?php /* <div class="page__group-row checkout-react" data-user="<?= Yii::$app->user->id; ?>"></div> */ ?>
+    <?php /* <h1>Магазин больше не работает!</h1> */ ?>
+    <div class="page__group-row checkout-react" data-user="<?= Yii::$app->user->id; ?>"></div>
 
-    <h1>Магазин больше не работает!</h1>
 </div>
