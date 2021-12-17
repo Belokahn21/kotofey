@@ -179,7 +179,7 @@ $product = Product::find();
                                     <?php if (!$model instanceof Product) continue; ?>
                                     <div class="statistic-summary__item" title="<?= $model->name; ?>">
                                         <p style="font-size: 14px; margin: 0;">
-                                            <?= Html::a($model->name, Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->id])) ?>
+                                            <?= Html::a('(' . $model->count . ') ' . $model->name, Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->id])) ?>
                                         </p>
                                     </div>
                                 <?php endforeach; ?>
