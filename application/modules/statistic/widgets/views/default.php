@@ -173,13 +173,16 @@ $product = Product::find();
                 <div class="statistic__content">
                     <?php if ($buy_items): ?>
                         <div class="statistic-summary">
-                            <?php foreach ($buy_items as $model): ?>
-                                <?php if (!$model instanceof Product) continue; ?>
-                                <div class="statistic-summary__item" title="<?= $model->name; ?>">
-                                    <p style="font-size: 14px; margin: 0;">
-                                        <?= Html::a($model->name, Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->id])) ?>
-                                    </p>
-                                </div>
+                            <?php foreach ($buy_items as $vendor_block): ?>
+                                <?= \app\modules\vendors\models\repository\VendorRepository::getOne($vendor_block)->name; ?>
+                                <?php foreach ($vendor_block as $model): ?>
+                                    <?php if (!$model instanceof Product) continue; ?>
+                                    <div class="statistic-summary__item" title="<?= $model->name; ?>">
+                                        <p style="font-size: 14px; margin: 0;">
+                                            <?= Html::a($model->name, Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->id])) ?>
+                                        </p>
+                                    </div>
+                                <?php endforeach; ?>
                             <?php endforeach; ?>
                         </div>
                     <?php else: ?>

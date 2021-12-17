@@ -13,9 +13,11 @@ class VendorRepository
         });
     }
 
+    /**
+     * @return Vendor
+     */
     public static function getOne(int $id)
     {
-
         return \Yii::$app->cache->getOrSet(__CLASS__ . __METHOD__ . $id, function () use ($id) {
             return Vendor::findOne($id);
         });
