@@ -70,7 +70,7 @@ class StatisticWidget extends Widget
                     $ids[] = $order->id;
 
                     foreach ($_items as $item) {
-                        $items[$item->product->vendor_id][] = $item->product;
+                        $items[$item->product->vendor_id][] = $item;
                     }
                 }
             }
