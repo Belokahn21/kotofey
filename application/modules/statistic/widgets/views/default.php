@@ -173,8 +173,8 @@ $product = Product::find();
                 <div class="statistic__content">
                     <?php if ($buy_items): ?>
                         <div class="statistic-summary">
-                            <?php foreach ($buy_items as $vendor_block): ?>
-                                <?= \app\modules\vendors\models\repository\VendorRepository::getOne($vendor_block)->name; ?>
+                            <?php foreach ($buy_items as $vendor_id => $vendor_block): ?>
+                                <?= \app\modules\vendors\models\repository\VendorRepository::getOne($vendor_id)->name; ?>
                                 <?php foreach ($vendor_block as $model): ?>
                                     <?php if (!$model instanceof Product) continue; ?>
                                     <div class="statistic-summary__item" title="<?= $model->name; ?>">
