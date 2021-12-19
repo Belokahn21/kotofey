@@ -1,12 +1,23 @@
-<div class="set-weight-react" data-product-id="74"></div>
-
-
 <?php
-foreach (\app\modules\basket\models\entity\Basket::findAll() as $basketItem) {
-    echo "<hr>";
-    \app\modules\site\models\tools\Debug::p($basketItem->getName());
-    \app\modules\site\models\tools\Debug::p(\app\modules\site\models\tools\PriceTool::format($basketItem->getPrice()));
-    \app\modules\site\models\tools\Debug::p($basketItem->getWeight());
-    echo "<hr>";
+
+if ($curl = curl_init()) {
+
+
+    $params = [
+        11
+    ];
+
+
+    \app\modules\site\models\tools\Debug::p($params);
+
+
+    curl_setopt($curl, CURLOPT_URL, 'http://local.kotofey.store/api/delivery/tariffs/');
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLOPT_POST, true);
+    curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query($params));
+    $out = curl_exec($curl);
+    curl_close($curl);
+
+
+    echo $out;
 }
-?>
