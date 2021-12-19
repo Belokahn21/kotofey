@@ -11,10 +11,10 @@ use app\modules\catalog\models\helpers\ProductCategoryHelper;
 <header class="header page-container">
     <div class="logo">
         <?php if (empty(Yii::$app->request->getPathInfo())): ?>
-            <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
+            <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/images/logo150_150.png">
         <?php else: ?>
             <a href="/">
-                <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/upload/images/logo150_150.png">
+                <img title="Интернет-зоомагазин Котофей" alt="Интернет-зоомагазин Котофей" class="logo__image spin circle" src="/images/logo150_150.png">
             </a>
         <?php endif; ?>
         <a class="logo__link" href="/">
@@ -40,7 +40,7 @@ use app\modules\catalog\models\helpers\ProductCategoryHelper;
     </div>
     <div class="header-menu-mobile">
         <div class="phone">
-            <img class="phone__icon" src="/upload/images/phone.png" alt="Телефон">
+            <img class="phone__icon" src="/images/phone.png" alt="Телефон">
             <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>" class="js-phone-mask-8800"><?= SiteSettings::getValueByCode('phone_2'); ?></a>
         </div>
         <?= MenuWidget::widget([
@@ -53,26 +53,26 @@ use app\modules\catalog\models\helpers\ProductCategoryHelper;
         'view' => 'mobile'
     ]) ?>
     <div class="header-mobile-container">
-        <div class="header-mobile__hamburger"><img src="/upload/images/hamburger.svg"></div>
+        <div class="header-mobile__hamburger"><img src="/images/hamburger.svg"></div>
         <div class="header-mobile__logoheader-menu"><a class="header-mobile__link" href="/">kotofey.store</a>
         </div>
-        <div class="header-mobile__search js-search-toggle"><img src="/upload/images/search.png"></div>
+        <div class="header-mobile__search js-search-toggle"><img src="/images/search.png"></div>
         <div class="header-mobile__basket">
             <a href="<?= Url::to(['/checkout/']); ?>">
                 <?php if ($count = Basket::count()): ?>
                     <div class="counter"><?= $count; ?></div>
                 <?php endif; ?>
-                <img src="/upload/images/basket.png">
+                <img src="/images/basket.png">
             </a>
         </div>
         <div class="header-mobile__call">
-            <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>"><img src="/upload/images/phone.png"></a>
+            <a href="tel:<?= SiteSettings::getValueByCode('phone_2'); ?>"><img src="/images/phone.png"></a>
         </div>
     </div>
     <div class="header-mobile-full active">
         <div class="header-mobile-full__group">
             <div class="header-mobile-full__title">Зоотовары</div>
-            <div class="header-mobile-full__switch"><img src="/upload/images/arrow-top.svg" alt="Стрелка"></div>
+            <div class="header-mobile-full__switch"><img src="/images/arrow-top.svg" alt="Стрелка"></div>
         </div>
         <ul class="full-mobile-menu">
             <?php if ($parentCategories): ?>
@@ -91,12 +91,12 @@ use app\modules\catalog\models\helpers\ProductCategoryHelper;
                     <?php if (Yii::$app->user->isGuest): ?>
                         <a class="header-mobile-full-footer-menu__link" href="javascript:void(0);"
                            data-target="#signupModal" data-toggle="modal">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png" alt="lock"></div>
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/images/lock-white.png" alt="lock"></div>
                             <div class="header-mobile-full-footer-menu__label">Регистрация/Войти на сайт</div>
                         </a>
                     <?php else: ?>
                         <a class="header-mobile-full-footer-menu__link" href="<?= Url::to(['/user/profile/index']) ?>">
-                            <div class="header-mobile-full-footer-menu__icon"><img src="/upload/images/lock-white.png" alt="lock"></div>
+                            <div class="header-mobile-full-footer-menu__icon"><img src="/images/lock-white.png" alt="lock"></div>
                             <div class="header-mobile-full-footer-menu__label">Личный кабинет</div>
                         </a>
                     <?php endif; ?>
@@ -107,7 +107,7 @@ use app\modules\catalog\models\helpers\ProductCategoryHelper;
                             <?php if ($count = Basket::count() > 0): ?>
                                 <div class="counter"><?= $count; ?></div>
                             <?php endif; ?>
-                            <img src="/upload/images/basket-white.svg" alt="Корзина"></div>
+                            <img src="/images/basket-white.svg" alt="Корзина"></div>
                         <div class="header-mobile-full-footer-menu__label">Корзина заказа</div>
                     </a>
                 </li>

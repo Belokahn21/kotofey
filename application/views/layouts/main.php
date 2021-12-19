@@ -86,7 +86,7 @@ $this->beginPage() ?>
 
 <div class="menu-wrapper">
     <div class="menu page-container">
-        <div class="menu__item hamburger js-hamburger"><img alt="Показать меню" class="hamburger__icon" src="/upload/images/hamburger.svg"></div>
+        <div class="menu__item hamburger js-hamburger"><img alt="Показать меню" class="hamburger__icon" src="/images/hamburger.svg"></div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/catalog/']); ?>">Зоотовары</a></div>
         <div class="menu__item"><a class="menu__link" href="<?= Url::to(['/promotion/']); ?>">Акции и скидки</a></div>
         <div class="menu__item">
@@ -95,12 +95,12 @@ $this->beginPage() ?>
         <div class="menu__item">
             <?php if (Yii::$app->user->isGuest): ?>
                 <a class="menu__link profile" href="javascript:void(0);" data-toggle="modal" data-target="#signupModal">
-                    <img class="profile__icon" src="/upload/images/lock.png" alt="Регистрация"><span>Регистрация</span>
+                    <img class="profile__icon" src="/images/lock.png" alt="Регистрация"><span>Регистрация</span>
                 </a>
             <?php else: ?>
                 <a class="menu__link profile" href="<?= Url::to(['/user/profile/index']); ?>">
                     <div>
-                        <img class="profile__icon" src="/upload/images/lock.png" alt="Личный кабинет"><span>Личный кабинет</span>
+                        <img class="profile__icon" src="/images/lock.png" alt="Личный кабинет"><span>Личный кабинет</span>
                     </div>
 
                     <?php /* Вжух меню не вышло из-за ссылок

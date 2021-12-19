@@ -90,7 +90,7 @@ use app\modules\catalog\widgets\CatalogCategories\CatalogCategoriesWidget;
     <div class="footer-layer-2">
         <div class="requesites">
             <div class="requesites__item">ООО "Интернет-Зоомагазин Котофей", ОГРН: 1212200000022 ИНН: 2222889641 <a href="https://www.rusprofile.ru/id/1212200000022" target="_blank">(Проверить)</a></div>
-            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img alt="Разработка сайта" src="/upload/images/who_dev.png"></div>
+            <div class="requesites__item">Разработка сайта — <a href="https://adelfo-studio.ru/" target="_blank">Adelfo</a> <img alt="Разработка сайта" src="/images/who_dev.png"></div>
         </div>
 
         <?= MenuWidget::widget([
