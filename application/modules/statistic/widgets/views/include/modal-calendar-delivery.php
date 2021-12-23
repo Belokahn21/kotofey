@@ -19,7 +19,7 @@
                         <div class="col-sm-3 calendar-orders-item">
                             <?php foreach ($order_calendar as $order): ?>
                                 <?php if (date('d', $order->created_at) != $i) continue; ?>
-                                <a href="<?= \yii\helpers\Url::to(['order-backend/update', 'id' => $order->id]); ?>" style="display:block; font-size: 9px; line-height: 1; margin: 0;"><?= $order->email; ?></a>
+                                <a href="<?= \yii\helpers\Url::to(['/admin/order/order-backend/update/', 'id' => $order->id]); ?>" style="display:block; font-size: 9px; line-height: 1; margin: 0;"><?= $order->email; ?></a>
                             <?php endforeach; ?>
                         </div>
                     <?php endfor; ?>
