@@ -110,6 +110,11 @@ class OrderService
 
         $model = Order::findOne($order_id); //refresh model class
 
+        OFDFermaService::getInstance()->doSendCheck($model, [
+            'email' => $model->email,
+            'phone' => $model->phone,
+        ]);
+
         $this->stockService->setOrderModel($model);
         $this->stockService->plus();
         $this->stockService->minus();
