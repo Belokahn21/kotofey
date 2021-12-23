@@ -9,6 +9,7 @@ use app\modules\acquiring\Module;
 use app\modules\logger\models\service\LogService;
 use app\modules\order\models\entity\Order;
 use app\modules\order\models\helpers\OrderHelper;
+use app\modules\site\models\tools\Debug;
 use app\modules\site\models\tools\System;
 use yii\helpers\Json;
 
@@ -88,6 +89,8 @@ class OFDApi
         $response = $this->send($this->_action_create_check, $params);
 
         $result = Json::decode($response);
+
+        Debug::printFile($result);
 
         if ($result['Status'] == 'Success' && array_key_exists('Data', $result) && array_key_exists('ReceiptId', $result['Data'])) return $result['Data']['ReceiptId'];
 
