@@ -21,8 +21,10 @@ class ProfileTrackingWidget extends Widget
         $tracking_info = null;
         $track_model = OrderTracking::findByOrderId($this->order->id);
         try {
-            $trackServivce = new TrackingApiService($this->order);
-            $tracking_info = $trackServivce->getOrderInfo();
+            $trackingApiService = new TrackingApiService($this->order);
+            if ($trackingApiService) {
+                $tracking_info = $trackingApiService->getOrderInfo();
+            }
         } catch (\Exception $x) {
             LogService::saveWarningMessage($x->getMessage(), 'profile-order-tracking');
         }
