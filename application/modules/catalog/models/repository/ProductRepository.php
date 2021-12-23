@@ -20,7 +20,7 @@ class ProductRepository
     public static function getAllProductsSortedDesc()
     {
         return \Yii::$app->cache->getOrSet(md5(__CLASS__ . __METHOD__), function () {
-            return Product::find()->orderBy(['created_at' => SORT_DESC])->all();
+            return Product::find()->asArray(true)->select(['id', 'name'])->orderBy(['created_at' => SORT_DESC])->all();
         });
     }
 
