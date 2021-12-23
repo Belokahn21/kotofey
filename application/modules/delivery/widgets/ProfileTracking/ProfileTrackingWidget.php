@@ -21,7 +21,7 @@ class ProfileTrackingWidget extends Widget
         $tracking_info = null;
         $track_model = OrderTracking::findByOrderId($this->order->id);
 
-        if (!$track_model) return false;
+        if (empty($track_model->service_id)) return false;
 
         try {
             $trackingApiService = new TrackingApiService($this->order);
