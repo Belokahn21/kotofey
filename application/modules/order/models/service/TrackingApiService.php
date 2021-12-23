@@ -49,8 +49,6 @@ class TrackingApiService
             case OrderTracking::SERVICE_CDEK:
                 $this->_service = new CdekTracking();
                 break;
-            default:
-                throw new \Exception('Сервис доставки не указан.');
         }
     }
 
