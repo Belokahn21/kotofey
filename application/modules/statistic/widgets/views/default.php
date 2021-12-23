@@ -8,6 +8,7 @@
  * @var $no_attention_reviews \app\modules\reviews\models\entity\Reviews[]
  * @var $ozon_new \app\modules\marketplace\models\entity\MarketplaceProductStatus[]
  * @var $buy_items Product[]
+ * @var $order_calendar Order[]
  */
 
 use app\modules\catalog\models\entity\Product;
@@ -83,7 +84,7 @@ $product = Product::find();
                 </div>
             </div>
             <div class="statistic__item">
-                <div class="statistic__icon"><i class="fas fa-truck"></i></div>
+                <div class="statistic__icon" data-target="#orders-calendar" data-toggle="modal"><i class="fas fa-truck"></i></div>
                 <div class="statistic__content">
                     <div class="now-order-delivery-container">
                         <?php $now = new DateTime(); ?>
@@ -201,3 +202,6 @@ $product = Product::find();
 ]); ?>
 <?= $this->render('include/modal-last-order'); ?>
 <?= $this->render('include/modal-product-stat'); ?>
+<?= $this->render('include/modal-calendar-delivery', [
+    'order_calendar' => $order_calendar
+]); ?>

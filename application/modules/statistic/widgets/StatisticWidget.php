@@ -85,6 +85,16 @@ class StatisticWidget extends Widget
             ]
         ]));
 
+        $order_calendar = \Yii::$app->cache->getOrSet('order_calendar', function () {
+            $start_at = strtotime(date('1.m.Y'));
+            $end_at = strtotime(date('t.m.Y'));
+
+            return Order::find()->where(['and',
+                ['>', 'created_at', $start_at],
+                ['<', 'created_at', $end_at]
+            ])->all();
+        });
+
 
         return $this->render($this->view, [
             'searches' => $searches,
@@ -96,6 +106,7 @@ class StatisticWidget extends Widget
             'ordersNow' => $ordersNow,
             'ozon_new' => $ozon_new,
             'buy_items' => $buy_items,
+            'order_calendar' => $order_calendar,
         ]);
     }
 }

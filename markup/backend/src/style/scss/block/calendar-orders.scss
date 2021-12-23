@@ -1,0 +1,9 @@
+.calendar-orders {
+  max-width: 550px;
+  margin: auto;
+
+  &-item {
+    border: 1px silver solid;
+    min-height: 70px;
+  }
+}
