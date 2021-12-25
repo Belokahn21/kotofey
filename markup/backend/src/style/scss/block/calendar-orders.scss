@@ -5,5 +5,13 @@
   &-item {
     border: 1px silver solid;
     min-height: 70px;
+    padding-top: 15px;
+    position: relative;
+
+    &__day {
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
   }
 }

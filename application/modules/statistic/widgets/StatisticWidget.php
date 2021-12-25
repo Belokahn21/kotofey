@@ -86,13 +86,16 @@ class StatisticWidget extends Widget
         ]));
 
         $order_calendar = \Yii::$app->cache->getOrSet('order_calendar', function () {
-            $start_at = strtotime(date('1.m.Y'));
-            $end_at = strtotime(date('t.m.Y'));
+            $start_at = (date('1.m.Y'));
+            $end_at = (date('t.m.Y'));
 
-            return Order::find()->where(['and',
-                ['>', 'created_at', $start_at],
-                ['<', 'created_at', $end_at]
-            ])->all();
+            return $models = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')
+                ->where([
+                    'or',
+                    ['>', 'order_date.date', $start_at],
+                    ['<', 'order_date.date', $end_at],
+                ])
+                ->orderBy(['id' => SORT_ASC])->all();
         });
 
 

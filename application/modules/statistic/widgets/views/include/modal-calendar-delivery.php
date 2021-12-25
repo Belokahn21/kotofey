@@ -17,8 +17,9 @@
                 <div class="row calendar-orders">
                     <?php for ($i = 1; $i <= date('t'); $i++): ?>
                         <div class="col-sm-3 calendar-orders-item">
+                            <div class="calendar-orders-item__day"><?= $i; ?></div>
                             <?php foreach ($order_calendar as $order): ?>
-                                <?php if (date('d', $order->created_at) != $i) continue; ?>
+                                <?php if (date('d', strtotime($order->dateDelivery->date)) != $i) continue; ?>
                                 <a href="<?= \yii\helpers\Url::to(['/admin/order/order-backend/update/', 'id' => $order->id]); ?>" style="display:block; font-size: 9px; line-height: 1; margin: 0;"><?= $order->email; ?></a>
                             <?php endforeach; ?>
                         </div>
