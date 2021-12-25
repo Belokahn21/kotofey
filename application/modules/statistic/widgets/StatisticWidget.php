@@ -91,7 +91,7 @@ class StatisticWidget extends Widget
 
             return $models = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')
                 ->where([
-                    'or',
+                    'and',
                     ['>', 'order_date.date', $start_at],
                     ['<', 'order_date.date', $end_at],
                 ])
