@@ -177,7 +177,7 @@ $product = Product::find();
                             <?php foreach ($buy_items as $vendor_id => $vendor_block): ?>
                                 <?= \app\modules\vendors\models\repository\VendorRepository::getOne($vendor_id)->name; ?>
                                 <?php foreach ($vendor_block as $model): ?>
-                                    <?php if (!$model->product instanceof Product || $model->product == $model->count) continue; ?>
+                                    <?php if (!$model->product instanceof Product || $model->product->count == $model->count) continue; ?>
                                     <div class="statistic-summary__item" title="<?= $model->product->name; ?>">
                                         <p style="font-size: 12px; margin: 0; color: black;">
                                             <?= Html::a('(' . $model->count . ') ' . $model->product->name, Url::to(['/admin/catalog/product-backend/update/', 'id' => $model->product->id])) ?>
