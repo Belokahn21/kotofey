@@ -111,7 +111,10 @@ if ($model->isNewRecord) $left_block_classes = 'col-12 col-lg-12';
                 <div class="col-sm-6">
                     <h4>Дата и время доставки</h4>
                     <div class="row">
-                        <div class="col-sm-6"><?= $form->field($dateDelivery, 'date')->textInput(['class' => 'js-datepicker form-control', 'placeholder' => 'День доставки']) ?></div>
+                        <div class="col-sm-6"><?= $form->field($dateDelivery, 'date')->textInput(['class' => 'js-datepicker-as-datetime form-control', 'placeholder' => 'День доставки',
+                                'data-time-format' => 'YY-mm-dd',
+//                                'data-timepicker' => "true"
+                            ]) ?></div>
                         <div class="col-sm-6"><?= $form->field($dateDelivery, 'time')->textInput(['placeholder' => 'Время доставки']) ?></div>
                     </div>
                 </div>
