@@ -4,6 +4,7 @@ namespace app\modules\statistic\widgets;
 
 
 use app\modules\catalog\models\entity\NotifyAdmission;
+use app\modules\catalog\models\entity\Product;
 use app\modules\logger\models\entity\Logger;
 use app\modules\marketplace\models\entity\MarketplaceProductStatus;
 use app\modules\order\models\entity\Order;
@@ -70,6 +71,7 @@ class StatisticWidget extends Widget
                     $ids[] = $order->id;
 
                     foreach ($_items as $item) {
+                        if (!$item->product instanceof Product) continue;
                         $items[$item->product->vendor_id][] = $item;
                     }
                 }
