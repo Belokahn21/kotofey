@@ -88,9 +88,9 @@ $product = Product::find();
                 <div class="statistic__content">
                     <div class="now-order-delivery-container">
                         <?php $now = new DateTime(); ?>
-                        <?php $nowDate = $now->format('d.m.Y') ?>
+                        <?php $nowDate = $now->format('Y-m-d') ?>
                         <?php $now->add(new DateInterval('P1D')); ?>
-                        <?php $tomorowDate = $now->format('d.m.Y') ?>
+                        <?php $tomorowDate = $now->format('Y-m-d') ?>
                         <div class="now-order-delivery-dates">
                             <div class="now-order-delivery-dates__item"><a href="?deliveryDate=<?= $nowDate; ?>"><?= $nowDate; ?></a></div>
                             <div class="now-order-delivery-dates__item"><a href="?deliveryDate=<?= $tomorowDate; ?>"><?= $tomorowDate; ?></a></div>
