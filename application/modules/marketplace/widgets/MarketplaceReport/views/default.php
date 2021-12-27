@@ -19,7 +19,7 @@ use app\modules\marketplace\models\api\OzonApi;
             <?php $product = Product::findOne(['article' => ArrayHelper::getValue($ozon_element, 'offer_id')]); ?>
             <?php $product_ozon_stock = false; ?>
             <?php foreach ($ozon_stocks as $item) : ?>
-                <?php if (ArrayHelper::getValue($item, 'offer_id') == $product->article) $product_ozon_stock = $item; ?>
+                <?php if (ArrayHelper::getValue($item, 'offer_id') == ArrayHelper::getValue($product, 'article')) $product_ozon_stock = $item; ?>
             <?php endforeach; ?>
 
             <?php $status = ''; ?>
