@@ -38,7 +38,7 @@ class StatisticWidget extends Widget
 
 
         $ordersNow = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')
-            ->where(['order_date.date' => \Yii::$app->request->get('deliveryDate') ? \Yii::$app->request->get('deliveryDate') : date('d.m.Y')])
+            ->where(['order_date.date' => \Yii::$app->request->get('deliveryDate') ? \Yii::$app->request->get('deliveryDate') : date('Y-m-d')])
             ->andWhere(['is_close' => false])
             ->andWhere(['is_cancel' => false]);
         $ordersNow = $ordersNow->all();
