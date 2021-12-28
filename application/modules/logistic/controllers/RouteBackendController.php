@@ -14,7 +14,7 @@ class RouteBackendController extends MainBackendController
     {
         $model = new LogisticForm();
         $models = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')
-            ->where(['order_date.date' => date('d.m.Y')])
+            ->where(['order_date.date' => \Yii::$app->formatter->asDate('now', 'php:Y-m-d')])
             ->andWhere(['is_close' => false])
             ->andWhere(['is_cancel' => false])
             ->orderBy(['id' => SORT_ASC]);
