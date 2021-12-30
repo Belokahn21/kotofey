@@ -92,6 +92,8 @@ class SibagroController extends Controller
             }
         }
 
+        LogService::saveSuccessMessage("Обмен с sat-altai завершен.", self::UNIQ_LOG_CODE);
+
         return true;
     }
 
