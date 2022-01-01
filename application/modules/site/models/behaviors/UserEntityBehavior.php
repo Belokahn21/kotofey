@@ -20,18 +20,24 @@ class UserEntityBehavior extends Behavior
 
     public function apply_user_id_when_save($event)
     {
-        $user_component = \Yii::$app->user;
-        if (!$user_component->isGuest) {
-            $this->owner->{$this->attr_at_save} = $user_component->id;
+        try {
+            $user_component = \Yii::$app->user;
+            if (!$user_component->isGuest) {
+                $this->owner->{$this->attr_at_save} = $user_component->id;
+            }
+        } catch (\Exception $exception) {
         }
     }
 
 
     public function apply_user_id_when_update($event)
     {
-        $user_component = \Yii::$app->user;
-        if (!$user_component->isGuest) {
-            $this->owner->{$this->attr_at_update} = $user_component->id;
+        try {
+            $user_component = \Yii::$app->user;
+            if (!$user_component->isGuest) {
+                $this->owner->{$this->attr_at_update} = $user_component->id;
+            }
+        } catch (\Exception $exception) {
         }
     }
 }
