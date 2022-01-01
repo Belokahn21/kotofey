@@ -88,8 +88,8 @@ class StatisticWidget extends Widget
         ]));
 
         $order_calendar = \Yii::$app->cache->getOrSet('order_calendar', function () {
-            $start_at = (date('2021.12.01'));
-            $end_at = (date('2021.12.31'));
+            $start_at = (date('Y.m.01'));
+            $end_at = (date('Y.m.t'));
 
             return $models = Order::find()->leftJoin('order_date', 'order.id=order_date.order_id')
                 ->where(['between', 'order_date.date', $start_at, $end_at])
