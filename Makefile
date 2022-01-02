@@ -125,8 +125,8 @@ migrate:
 	cd application && php yii migrate --migrationPath=@app/modules/search/install/migrations --interactive=0
 	cd application && php yii migrate --migrationPath=@app/modules/marketplace/install/migrations --interactive=0
 
-deploy-local: pull config-dev cache migrate
-deploy: pull config-prod migrate cache
-deploy-test: pull config-test migrate
-deploy-docker: pull config-docker migrate
+deploy-local: pull config-dev cache migrate assets
+deploy: pull config-prod migrate cache assets
+deploy-test: pull config-test migrate assets
+deploy-docker: pull config-docker migrate assets
 
