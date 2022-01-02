@@ -73,7 +73,7 @@ chmod-cache:
 	chmod 777 -R application/runtime/cache/
 
 assets:
-	mkdir application/web/assets
+	[ ! -d "application/web/assets" ] && mkdir application/web/assets
 
 promo:
 	cd application && php yii promotion/group-notify
