@@ -60,9 +60,9 @@ class Basket extends Model
 
     public function update(BasketItemInterface $item, int $count)
     {
-        /* @var $item OrdersItems */
+        /* @var $item BasketItemInterface */
         if ($item = $_SESSION[self::BASKET_KEY][$item->getId()]) {
-            $item->count = $count;
+            $item->setCount($count);
         }
 
         $_SESSION[self::BASKET_KEY][$item->getId()] = $item;

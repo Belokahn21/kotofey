@@ -87,17 +87,15 @@ class RestController extends ActiveController
     public function actionUpdate()
     {
         $models = Json::decode(file_get_contents('php://input'));
-
+        $basket = new Basket();
         foreach ($models as $model) {
-            $orderItemModel = new OrdersItems();
-            $orderItemModel->setAttributes($model);
+            $orderItemModel = new OrmBasketItem();
+            $orderItemModel->setCount($model['count']);
+            $orderItemModel->setId($model['id']);
+            $orderItemModel->setProductId($model['id']);
 
-            $orderItemModel->product_id = $model['id'];
 
-            if ($orderItemModel->validate()) {
-                $basket = new Basket();
-                $basket->update($orderItemModel, $orderItemModel->count);
-            }
+            $basket->update($orderItemModel, $orderItemModel->getCount());
         }
 
         return $models;
