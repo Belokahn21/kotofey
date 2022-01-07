@@ -40,46 +40,7 @@ class NotifyService
             $access_token = $this->accessToken;
             $vk = new VKApiClient();
             if ($access_token) {
-                $order = Order::findOne($order_id);
-                $orderSumm = OrderHelper::orderSummary($order);
-                $orderSumm = PriceTool::format($orderSumm) . Currency::getInstance()->show();
-                $orderDateDelivery = OrderDate::findOne(['order_id' => $order->id]);
-                $detailUrlPage = Url::to(['/admin/order/order-backend/update', 'id' => $order->id], true);
-
-                if (!$order) {
-                    return false;
-                }
-
-                $message = "Новый заказ на сайте {$_SERVER['SERVER_NAME']}\n
-				Сумма заказа: {$orderSumm}\n\n";
-
-                $message .= "Клиент:\n";
-
-                if (!empty($order->phone)) $message .= "Телефон: {$order->phone}\n";
-                if (!empty($order->email)) $message .= "Email: {$order->email}\n\n";
-                $message .= "Оплата: " . OrderHelper::getPayment($order) . "\n";
-                $message .= "Доставка: " . OrderHelper::getDelivery($order) . "\n";
-
-                $message .= "\n\n";
-                if (!empty($order->comment)) {
-                    $message .= "Комментарий: " . $order->comment;
-                    $message .= "\n\n";
-                }
-
-                if ($orderDateDelivery) {
-                    $message .= "Дата доставки {$orderDateDelivery->date}, время: {$orderDateDelivery->time}\n\n";
-                }
-
-
-                /* @var $item OrdersItems */
-                foreach (OrdersItems::find()->where(['order_id' => $order->id])->all() as $item) {
-                    $message .= "{$item->count}шт . {$item->name}\n";
-                }
-                $message .= "\n";
-
-                $message .= "Подробнее {$detailUrlPage}\n";
-
-
+                $message = $this->buildMessage($order_id);
                 foreach (Yii::$app->params['vk']['adminVkontakteId'] as $vk_id) {
                     $message_response = $vk->messages()->send($access_token, [
                         'user_id' => $vk_id,
@@ -92,6 +53,60 @@ class NotifyService
             }
         } catch (\Exception $exception) {
         }
+    }
+
+    public function sendTgBot(int $order_id)
+    {
+        $message = $this->buildMessage($order_id);
+        $bot = new \app\modules\site\models\api\telegram_bot\TgBot();
+        try {
+            $result = $bot->sendMessage($message, $_ENV['TG_MY_CHAT_ID']);
+        } catch (\Exception $exception) {
+            exit();
+        }
+    }
+
+    private function buildMessage(int $order_id)
+    {
+        $order = Order::findOne($order_id);
+        $orderSumm = OrderHelper::orderSummary($order);
+        $orderSumm = PriceTool::format($orderSumm) . Currency::getInstance()->show();
+        $orderDateDelivery = OrderDate::findOne(['order_id' => $order->id]);
+        $detailUrlPage = Url::to(['/admin/order/order-backend/update', 'id' => $order->id], true);
+
+        if (!$order) {
+            return false;
+        }
+
+        $message = "Новый заказ на сайте {$_SERVER['SERVER_NAME']}\n\nСумма заказа: {$orderSumm}\n\n";
+
+        $message .= "Клиент:\n";
+
+        if (!empty($order->phone)) $message .= "Телефон: {$order->phone}\n";
+        if (!empty($order->email)) $message .= "Email: {$order->email}\n\n";
+        $message .= "Оплата: " . OrderHelper::getPayment($order) . "\n";
+        $message .= "Доставка: " . OrderHelper::getDelivery($order) . "\n";
+
+        $message .= "\n\n";
+        if (!empty($order->comment)) {
+            $message .= "Комментарий: " . $order->comment;
+            $message .= "\n\n";
+        }
+
+        if ($orderDateDelivery) {
+            $message .= "Дата доставки {$orderDateDelivery->date}, время: {$orderDateDelivery->time}\n\n";
+        }
+
+
+        /* @var $item OrdersItems */
+        foreach (OrdersItems::find()->where(['order_id' => $order->id])->all() as $item) {
+            $message .= "{$item->count}шт . {$item->name}\n";
+        }
+        $message .= "\n";
+
+        $message .= "Подробнее {$detailUrlPage}\n";
+
+        return $message;
     }
 
     public function sendVKAboutGruming(GrumingForm $data)

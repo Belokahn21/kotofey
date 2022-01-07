@@ -65,6 +65,7 @@ class OrderService
         $model = Order::findOne($order_id);
         $this->notifyService->sendClientNotify($model); //todo: из-за того что в заказе нет товаров приходится выгружать из бд заного с заполнеными данными
         $this->notifyService->sendMessageToVkontakte($order_id, ArrayHelper::getValue(\Yii::$app->params, 'vk.access_token'));
+        $this->notifyService->sendTgBot($order_id);
         //ecommerce operations
         BonusService::getInstance()->addUserBonus($model);
         OFDFermaService::getInstance()->doSendCheck($model, [

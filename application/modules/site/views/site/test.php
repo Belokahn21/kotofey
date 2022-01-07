@@ -24,3 +24,8 @@
 
 ?>
 
+<?php
+$notifyService = new \app\modules\order\models\service\NotifyService();
+$notifyService->sendTgBot(1010);
+
+?>

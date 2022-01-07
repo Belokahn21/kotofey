@@ -39,7 +39,8 @@
     "sendpulse/rest-api": "^1.0",
     "kartik-v/yii2-widget-select2": "dev-master",
     "yiisoft/yii2-elasticsearch": "~2.1.0",
-    "szymach/c-pchart": "^3.0"
+    "szymach/c-pchart": "^3.0",
+    "vlucas/phpdotenv": "^5.4"
   },
   "require-dev": {
     "yiisoft/yii2-debug": "~2.1.0",
