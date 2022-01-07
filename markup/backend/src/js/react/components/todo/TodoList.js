@@ -13,13 +13,12 @@ class TodoList extends React.Component {
         const {items, handleRemove} = this.props;
 
         return <ul className="todo-list">
-            <li className="todo-list__row todo-list-header">
-                <div className="todo-list-col">Название</div>
-                <div className="todo-list-col">Дата создания</div>
-                <div className="todo-list-col">Описание</div>
-                <div className="todo-list-col">Кому назначена</div>
-                <div className="todo-list-col"/>
-            </li>
+            {/*<li className="todo-list__row todo-list-header">*/}
+            {/*    <div className="todo-list-col"><i className="fas fa-tag" /></div>*/}
+            {/*    <div className="todo-list-col"><i className="fas fa-hourglass-half" /></div>*/}
+            {/*    <div className="todo-list-col"><i className="fas fa-feather-alt" /></div>*/}
+            {/*    <div className="todo-list-col"><i className="fas fa-user" /></div>*/}
+            {/*</li>*/}
             {items.map((item, index) => {
                 return <li className="todo-list__row todo-list-body" key={index}>
                     <div className="todo-list-col">{item.name}</div>
