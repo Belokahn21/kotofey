@@ -8353,6 +8353,9 @@ html, body {
 .green {
   color: green; }
 
+.orange {
+  color: orange; }
+
 .bold {
   font-weight: bold; }
 
@@ -9228,6 +9231,22 @@ html, body {
   border-radius: 50%;
   line-height: 1;
   text-align: center; }
+
+.logistic-statistic {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 5px 10px;
+  margin: 0 -5px; }
+  .logistic-statistic-item {
+    padding: 7px;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px #e6e6e6 solid;
+    border-radius: 4px; }
+    .logistic-statistic-item-wrap {
+      padding: 5px;
+      max-width: 170px; }
 
 .logistic-list {
   display: flex;

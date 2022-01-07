@@ -1,3 +1,24 @@
+.logistic-statistic {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 5px 10px;
+  margin: 0 -5px;
+
+  &-item {
+    padding: 7px;
+    font-weight: bold;
+    font-size: 13px;
+    border: 1px #e6e6e6 solid;
+    border-radius: 4px;
+
+    &-wrap {
+      padding: 5px;
+      max-width: 170px;
+    }
+  }
+}
+
 .logistic-list {
   display: flex;
   flex-direction: column;

@@ -21,6 +21,44 @@ $this->title = Title::show("Список доставок");
         <h1>Список доставок</h1>
     </div>
 
+    <div class="logistic-statistic">
+        <div class="logistic-statistic-item-wrap">
+            <div class="logistic-statistic-item">
+                <?php
+                $now_plus = function () use ($models) {
+                    $out = 0;
+                    foreach ($models as $order) {
+                        $out += OrderHelper::marginality($order);
+                    }
+
+                    return $out;
+                };
+                ?>
+                Доход на сегодня: +<span class="green"><?= $now_plus(); ?></span>
+            </div>
+        </div>
+        <?php
+        $has_terminal = function () use ($models) {
+            $result = false;
+            foreach ($models as $order) {
+                if ($order->payment_id == Payment::PAYMENT_TERMINAL) {
+                    $result = true;
+                    break;
+                }
+            }
+
+            return $result;
+        };
+        ?>
+
+        <?php if ($has_terminal): ?>
+            <div class="logistic-statistic-item-wrap">
+                <div class="logistic-statistic-item">
+                    <i class="fas fa-exclamation-triangle orange"></i><span class="orange">Требуется терминал</span>
+                </div>
+            </div>
+        <?php endif; ?>
+    </div>
 <?php if ($models): ?>
     <div class="logistic-list">
         <?php foreach ($models as $order): ?>
