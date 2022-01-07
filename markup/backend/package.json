@@ -50,6 +50,6 @@
     "react-dom": "^17.0.1",
     "select2": "4.0.3",
     "selectize": "^0.12.6",
-    "swiper": "^5.3.8"
+    "swiper": "^6.5.1"
   }
 }
