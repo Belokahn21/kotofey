@@ -29,8 +29,10 @@ class CanNowBuyWidget extends Widget
 
         return RenderSliderWidget::widget([
             'models' => $models,
-            'title' => 'Доставим сегодня!',
-            'subTitle' => 'Товары ниже — сейчас в наличии!',
+            'title' => 'Забирай сейчас!',
+            'subTitle' => 'Доставка в течении часа!',
+            'linkTitle' => 'Смотреть всё',
+            'link' => '/catalog/?CatalogFilter[available]=Y',
         ]);
     }
 }

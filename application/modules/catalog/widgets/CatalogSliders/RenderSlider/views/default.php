@@ -18,12 +18,22 @@ use app\modules\catalog\widgets\PreviewProperties\PreviewPropertiesWidget;
 ?>
 <?php if ($this->beginCache(md5($title . $uniqKey), ['duration' => 3600 * 24 * 7])): ?>
     <?php if ($models): ?>
-        <div class="page-title__group">
-            <h2 class="page-title"><?= $title; ?></h2>
+        <div class="page-title__group ">
+
 
             <?php if (!empty($subTitle)): ?>
-                <div class="page-title__note"><?= $subTitle; ?></div>
+                <div>
+                    <h2 class="page-title"><?= $title; ?></h2>
+                    <div class="page-title__note"><?= $subTitle; ?></div>
+                </div>
+            <?php else: ?>
+                <h2 class="page-title"><?= $title; ?></h2>
             <?php endif; ?>
+
+
+
+
+
 
             <?php if (!empty($link) && !empty($linkTitle)): ?>
                 <a class="page-title__link" href="<?= $link; ?>"><?= $linkTitle; ?></a>

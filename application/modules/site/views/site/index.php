@@ -3,16 +3,15 @@
  * @var $news \app\modules\news\models\entity\News[]
  */
 
-use app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget;
 use app\modules\catalog\widgets\CatalogSliders\LastWeekProducts\LastWeekProducts;
 use app\modules\catalog\widgets\CatalogSliders\DiscountItems\DiscountItemsWidget;
 use app\modules\catalog\widgets\CatalogSliders\ManyPurchase\ManyPurchasedGoods;
+use app\modules\content\widgets\sliders\CombineSlider\CombineSliderWidget;
+use app\modules\catalog\widgets\CatalogSliders\CanNowBuy\CanNowBuyWidget;
 use app\modules\instagram\widgets\instagramMedia\InstagramMediaWidget;
 use app\modules\search\widges\FastButtonSearch\FastButtonSearchWidget;
-use app\modules\content\widgets\informers_slider\InformerSliderWidget;
 use app\modules\news\widgets\last_news\LastNewsWidget;
 use app\modules\content\widgets\slider\SliderWidget;
-use app\modules\site\widgets\Gruming\GrumingWidget;
 use app\modules\seo\models\tools\Title;
 
 $this->title = Title::show("Зоотовары для животных в Барнауле");
@@ -21,7 +20,7 @@ $this->title = Title::show("Зоотовары для животных в Бар
 <?php if ($this->beginCache('demo-index-page', ['duration' => Yii::$app->params['cache_time']])): ?>
     <div class="page-container">
         <?= CombineSliderWidget::widget(['sliderId' => 1]) ?>
-        <?php //= CanNowBuyWidget::widget() ?>
+        <?= CanNowBuyWidget::widget() ?>
         <?= DiscountItemsWidget::widget(); ?>
         <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
         <?php /* if (Yii::$app->user->id == 1): ?>
