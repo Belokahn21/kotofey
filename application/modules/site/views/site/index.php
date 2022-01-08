@@ -24,10 +24,10 @@ $this->title = Title::show("Зоотовары для животных в Бар
         <?php //= CanNowBuyWidget::widget() ?>
         <?= DiscountItemsWidget::widget(); ?>
         <?= ManyPurchasedGoods::widget(['view' => 'interested']); ?>
-        <?php if (Yii::$app->user->id == 1): ?>
+        <?php /* if (Yii::$app->user->id == 1): ?>
             <div class="eat-calculator-react"></div>
             <?= ManyPurchasedGoods::widget(); ?>
-        <?php endif; ?>
+        <?php endif; */ ?>
         <div class="page-title__group">
             <h2 class="page-title">Интернет магазин для животных</h2><a class="page-title__link" href="/about/">Читать дальше</a>
         </div>
