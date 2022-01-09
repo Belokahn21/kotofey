@@ -3,6 +3,9 @@
 
 namespace app\modules\delivery\controllers;
 
+use app\modules\catalog\models\helpers\PropertiesHelper;
+use app\modules\catalog\models\repository\ProductRepository;
+use app\modules\site\models\tools\Converter;
 use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -86,6 +89,7 @@ abstract class delivery_serivce
 
 abstract class delivery_response implements delivery_response_normalize_interface
 {
+    public $name;
     public $min_day;
     public $max_day;
     public $total_sum;
@@ -105,6 +109,8 @@ class cdek_service extends delivery_serivce
 
     public function tariff(string $from, string $to, int $product_id)
     {
+        if (!$product = ProductRepository::getOne($product_id)) throw new \Exception('Такого товара не существует.');
+
         $response = $this->getApi()->tariff($from, $to, array(
             "type" => 1,
             "date" => date('Y-m-d\Th:i:s+0700'),
@@ -119,10 +125,10 @@ class cdek_service extends delivery_serivce
             ],
             'packages' => [
                 [
-                    'width' => 20,
-                    'height' => 20,
-                    'length' => 20,
-                    'weight' => 5000,
+                    'width' => PropertiesHelper::extractPropertyById($product, 16)->value,
+                    'height' => PropertiesHelper::extractPropertyById($product, 17)->value,
+                    'length' => PropertiesHelper::extractPropertyById($product, 18)->value,
+                    'weight' => round(floatval(PropertiesHelper::extractPropertyById($product, 2)->value) / 1000),
                 ]
             ],
 
@@ -143,20 +149,27 @@ class rupost_service extends delivery_serivce
 
     public function tariff(string $from, string $to, int $product_id)
     {
+        if (!$product = ProductRepository::getOne($product_id)) throw new \Exception('Такого товара не существует.');
+
+
+        $mass = floatval(PropertiesHelper::extractPropertyById($product, 2)->value);
+        if ($mass < 1) $mass = $mass * 1000;
+        else $mass = round($mass / 1000);
+
         $response = $this->getApi()->tariff($from, $to, array(
             'index-from' => $from,
             'index-to' => $to,
             'declared-value' => 0,
             'courier' => false,
-            'mass' => 5000,
+            'mass' => $mass,
             'mail-type' => 'ONLINE_PARCEL',
             'mail-category' => 'ORDINARY',
             'fragile' => false,
             'inventory' => false,
             'dimension' => [
-                'height' => 20,
-                'length' => 20,
-                'width' => 20,
+                'width' => PropertiesHelper::extractPropertyById($product, 16)->value,
+                'height' => PropertiesHelper::extractPropertyById($product, 17)->value,
+                'length' => PropertiesHelper::extractPropertyById($product, 18)->value,
             ]
         ));
 
@@ -210,7 +223,7 @@ class cdek_api implements delivery_api_interface
         $headers = [];
         if ($curl = curl_init()) {
 
-            $token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJvcmRlcjphbGwiLCJwYXltZW50OmFsbCJdLCJleHAiOjE2NDE3MzU3NzksImF1dGhvcml0aWVzIjpbInNoYXJkLWlkOnJ1LTAxIiwiZnVsbC1uYW1lOtCi0LXRgdGC0LjRgNC-0LLQsNC90LjQtSDQmNC90YLQtdCz0YDQsNGG0LjQuCDQmNCcLCDQntCR0KnQldCh0KLQktCeINChINCe0JPQoNCQ0J3QmNCn0JXQndCd0J7QmSDQntCi0JLQldCi0KHQotCS0JXQndCd0J7QodCi0KzQriIsImNvbnRyYWN0OtCY0Jwt0KDQpC3Qk9Cb0JMtMjIiLCJhY2NvdW50LWxhbmc6cnVzIiwiYXBpLXZlcnNpb246MS4xIiwiYWNjb3VudC11dWlkOmU5MjViZDBmLTA1YTYtNGM1Ni1iNzM3LTRiOTljMTRmNjY5YSIsImNsaWVudC1pZC1lYzU6ZWQ3NWVjZjQtMzBlZC00MTUzLWFmZTktZWI4MGJiNTEyZjIyIiwiY2xpZW50LWlkLWVjNDoxNDM0ODIzMSIsInNvbGlkLWFkZHJlc3M6ZmFsc2UiLCJjb250cmFnZW50LXV1aWQ6ZWQ3NWVjZjQtMzBlZC00MTUzLWFmZTktZWI4MGJiNTEyZjIyIiwiY2xpZW50LWNpdHk60J3QvtCy0L7RgdC40LHQuNGA0YHQuiwg0J3QvtCy0L7RgdC40LHQuNGA0YHQutCw0Y8g0L7QsdC7LiJdLCJqdGkiOiI5NzEwNWUxMy05M2I4LTQ0ZmUtOTQ2Ni0yNjYzNDI3Zjc1ZWYiLCJjbGllbnRfaWQiOiJFTXNjZDZyOUpuRmlRM2JMb3lqSlk2ZU03OEpySmNlSSJ9.kieW2gXWOayfUmi9vbcU_oGdnQtIsZETqoslurOHqbJ08uoWn7omDZjRaZCzugWHJWsGF6OvMVV3nsbbYTXf8FJ2DToTrmdyBKdvU46v-CW7POqTPE4hSaEWLgTwIc_SoqpQANYx7cnxF2KX2xa1tJMZ-jN4bZnSliG8q1GceDwmggRwfO9ivrj6mLZxgy3iA3zNzDo1HTlwFLRARdZDxqBsvsabPpmLC4htAd6qfQAJ1xEqyG_ObH6oo9fbu5Od_AOr992CvntqMMoxv48rGyUwXD1lE_8ap8ksPzU6lzpEne03RmzihCmSmJ8HJjFQmpXs7Z278x8txtIEZa3C_Q";
+            $token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJvcmRlcjphbGwiLCJwYXltZW50OmFsbCJdLCJleHAiOjE2NDE3NDAyMTksImF1dGhvcml0aWVzIjpbInNoYXJkLWlkOnJ1LTAxIiwiZnVsbC1uYW1lOtCi0LXRgdGC0LjRgNC-0LLQsNC90LjQtSDQmNC90YLQtdCz0YDQsNGG0LjQuCDQmNCcLCDQntCR0KnQldCh0KLQktCeINChINCe0JPQoNCQ0J3QmNCn0JXQndCd0J7QmSDQntCi0JLQldCi0KHQotCS0JXQndCd0J7QodCi0KzQriIsImFjY291bnQtbGFuZzpydXMiLCJjb250cmFjdDrQmNCcLdCg0KQt0JPQm9CTLTIyIiwiYXBpLXZlcnNpb246MS4xIiwiYWNjb3VudC11dWlkOmU5MjViZDBmLTA1YTYtNGM1Ni1iNzM3LTRiOTljMTRmNjY5YSIsImNsaWVudC1pZC1lYzU6ZWQ3NWVjZjQtMzBlZC00MTUzLWFmZTktZWI4MGJiNTEyZjIyIiwiY2xpZW50LWlkLWVjNDoxNDM0ODIzMSIsImNvbnRyYWdlbnQtdXVpZDplZDc1ZWNmNC0zMGVkLTQxNTMtYWZlOS1lYjgwYmI1MTJmMjIiLCJzb2xpZC1hZGRyZXNzOmZhbHNlIiwiY2xpZW50LWNpdHk60J3QvtCy0L7RgdC40LHQuNGA0YHQuiwg0J3QvtCy0L7RgdC40LHQuNGA0YHQutCw0Y8g0L7QsdC7LiJdLCJqdGkiOiI3Mzc1OWMyYi1mNmQ5LTRkMGUtYjE5NS1mYmUxMjI2MTVlYjgiLCJjbGllbnRfaWQiOiJFTXNjZDZyOUpuRmlRM2JMb3lqSlk2ZU03OEpySmNlSSJ9.Q_ucsF44D-hFyUHYXM8ivG8fo4KpyFsmdEU0MeWo4ohr-b_YdVOUTAnaAbG8MvEYN5Pt1gWuCGklb4uU8hE7cQHH-1gIIEXIjEZ85Mwt1lFozHgZV905Xy_GJdctqnPEQ7rjGmZ9EThH14HMJkMHxpxFN7_Lqp-tof5MexLJ3WZPGgd4_9txhLY-s3xU3HLntJ9qXGKW8o8ZDZGIezqmrxLWZB9EsyonmncFhkt_PqT4Tj7MOPDGDFj0v16xdS0Bg_CWz2FE1B4zYHRuXlE1t9hMqEbK_nD_1Cb8xVFmPKCtVVX88atxWe9nX3CRGeivjmSwu7RaeASIj2Xns1ze-w";
             $headers[] = "Authorization: Bearer {$token}";
             $headers[] = "Content-Type: application/json";
 
@@ -231,6 +244,7 @@ class cdek_response_normalize extends delivery_response
 {
     public function response(array $response)
     {
+        $this->name = 'Доставка Сдек до терминала';
         $this->min_day = ArrayHelper::getValue($response, 'period_min');
         $this->max_day = ArrayHelper::getValue($response, 'period_max');
         $this->total_sum = ArrayHelper::getValue($response, 'total_sum');
@@ -242,9 +256,10 @@ class rupost_response_normalize extends delivery_response
 {
     public function response(array $response)
     {
+        $this->name = 'Доставка Почта России';
         $this->min_day = ArrayHelper::getValue($response, 'delivery-time.min-days');
         $this->max_day = ArrayHelper::getValue($response, 'delivery-time.max-days');
-        $this->total_sum = ArrayHelper::getValue($response, 'total-rate');
+        $this->total_sum = Converter::pennyToRub(ArrayHelper::getValue($response, 'total-rate'), true);
         return $this;
     }
 }
