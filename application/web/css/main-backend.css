@@ -8348,13 +8348,13 @@ html, body {
   text-align: center; }
 
 .red {
-  color: red; }
+  color: red !important; }
 
 .green {
-  color: green; }
+  color: green !important; }
 
 .orange {
-  color: orange; }
+  color: orange !important; }
 
 .bold {
   font-weight: bold; }
