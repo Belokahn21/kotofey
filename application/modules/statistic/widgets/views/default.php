@@ -63,8 +63,7 @@ $product = Product::find();
                     <?php if ($lastSearch): ?>
                         <div class="statistic-summary">
                             <?php foreach ($lastSearch as $search): ?>
-                                <div class="statistic-summary__item"
-                                     title="<?= $search->text; ?>"><?= StringHelper::truncate($search->text, 25, '...'); ?></div>
+                                <div class="statistic-summary__item <?= ($search->count_find > 0 ? 'green' : ''); ?>" title="<?= $search->text; ?>"><?= StringHelper::truncate($search->text, 25, '...'); ?></div>
                             <?php endforeach; ?>
                         </div>
                     <?php endif; ?>
