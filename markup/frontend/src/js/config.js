@@ -4,6 +4,7 @@ if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url 
 
 const config = {
     restCompare: url + 'api/compare/',
+    restTariffs: url + 'api/delivery/tariffs/',
     restCompareMixed: url + 'api/compare/mixed/',
     restFavorite: url + 'api/favorite/',
     restOrder: url + 'api/order/',

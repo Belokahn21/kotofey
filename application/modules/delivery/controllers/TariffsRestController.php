@@ -6,7 +6,6 @@ namespace app\modules\delivery\controllers;
 use app\modules\catalog\models\helpers\PropertiesHelper;
 use app\modules\catalog\models\repository\ProductRepository;
 use app\modules\site\models\tools\Converter;
-use app\modules\site\models\tools\Debug;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\rest\Controller;
@@ -18,9 +17,9 @@ class TariffsRestController extends Controller
     {
         $post_data = \Yii::$app->request->post();
 
-        $from = ArrayHelper::getValue($post_data, 'from', 656000);
-        $to = ArrayHelper::getValue($post_data, 'to', 656000);
-        $product_id = ArrayHelper::getValue($post_data, 'product_id', 1);
+        $from = ArrayHelper::getValue($post_data, 'from');
+        $to = ArrayHelper::getValue($post_data, 'to');
+        $product_id = ArrayHelper::getValue($post_data, 'product_id');
 
         $response = array();
         $service_list = array(new rupost_service(), new cdek_service());

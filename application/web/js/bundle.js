@@ -4148,6 +4148,7 @@ var url = location.protocol + '//' + location.hostname + '/';
 if (location.hostname === "localhost" || location.hostname === "127.0.0.1") url = 'http://local.kotofey.store/';
 var config = {
   restCompare: url + 'api/compare/',
+  restTariffs: url + 'api/delivery/tariffs/',
   restCompareMixed: url + 'api/compare/mixed/',
   restFavorite: url + 'api/favorite/',
   restOrder: url + 'api/order/',
@@ -8026,6 +8027,72 @@ var ProductForm = /*#__PURE__*/function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ProductForm);
+
+/***/ }),
+
+/***/ "./src/js/react/QuickCalc/QuickCalc.js":
+/*!*********************************************!*\
+  !*** ./src/js/react/QuickCalc/QuickCalc.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/RestRequest */ "./src/js/tools/RestRequest.js");
+/* harmony import */ var _config__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../config */ "./src/js/config.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+function QuickCalc(_ref) {
+  var from = _ref.from,
+      to = _ref.to,
+      product_id = _ref.product_id;
+
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      tarrifs = _useState2[0],
+      setTarriffs = _useState2[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    var params = new FormData();
+    params.append('from', from);
+    params.append('to', to);
+    params.append('product_id', product_id);
+    _tools_RestRequest__WEBPACK_IMPORTED_MODULE_2__["default"].post(_config__WEBPACK_IMPORTED_MODULE_3__["default"].restTariffs, {
+      body: params
+    }).then(function (data) {
+      setTarriffs(data);
+    });
+  }, []);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, tarrifs.map(function (el, index) {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", {
+      key: index
+    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u041E\u0442\u043F\u0440\u0430\u0432\u043A\u0430 \u0441 \u043F\u043E\u043C\u043E\u0449\u044C\u044E ", el.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u0421\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C \u0434\u043E\u0441\u0442\u0430\u0432\u043A\u0438 ", el.total_sum), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("div", null, "\u0414\u043E\u0441\u0442\u0430\u0432\u043A\u0430 ", el.min_day, "-", el.max_day, " \u0434\u043D\u0435\u0439"));
+  }));
+}
+
+var element = document.querySelector('.quick-calc-rest');
+if (element) react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(QuickCalc, {
+  from: element.getAttribute('data-from'),
+  to: element.getAttribute('data-to'),
+  product_id: element.getAttribute('data-product-id')
+}), element);
 
 /***/ }),
 
@@ -80852,8 +80919,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _react_EatCalculator_EatCalculator__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./react/EatCalculator/EatCalculator */ "./src/js/react/EatCalculator/EatCalculator.js");
 /* harmony import */ var _react_RepeatOrder_RepeatOrder__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./react/RepeatOrder/RepeatOrder */ "./src/js/react/RepeatOrder/RepeatOrder.js");
 /* harmony import */ var _react_OzonApi_Ozon__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./react/OzonApi/Ozon */ "./src/js/react/OzonApi/Ozon.js");
-/* harmony import */ var _react_SetWeight_SetWeight__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./react/SetWeight/SetWeight */ "./src/js/react/SetWeight/SetWeight.js");
-/* harmony import */ var _react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./react/BuyOneClick/BuyOneClick */ "./src/js/react/BuyOneClick/BuyOneClick.js");
+/* harmony import */ var _react_QuickCalc_QuickCalc__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./react/QuickCalc/QuickCalc */ "./src/js/react/QuickCalc/QuickCalc.js");
+/* harmony import */ var _react_SetWeight_SetWeight__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./react/SetWeight/SetWeight */ "./src/js/react/SetWeight/SetWeight.js");
+/* harmony import */ var _react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./react/BuyOneClick/BuyOneClick */ "./src/js/react/BuyOneClick/BuyOneClick.js");
 
 
 
@@ -80915,11 +80983,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
+
 var set_weight_elements = document.querySelectorAll('.set-weight-react');
 
 if (set_weight_elements) {
   set_weight_elements.forEach(function (el) {
-    react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_SetWeight_SetWeight__WEBPACK_IMPORTED_MODULE_40__["default"], {
+    react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_SetWeight_SetWeight__WEBPACK_IMPORTED_MODULE_41__["default"], {
       product_id: el.getAttribute('data-product-id')
     }), el);
   });
@@ -80933,11 +81002,11 @@ if (buy_one_click_elements) {
     var product_id = el.getAttribute('data-product-id');
 
     if (product_id) {
-      react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_41__["default"], {
+      react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_42__["default"], {
         product_id: product_id
       }), el);
     } else {
-      react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_41__["default"], null), el);
+      react_dom__WEBPACK_IMPORTED_MODULE_2__.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3__.createElement(_react_BuyOneClick_BuyOneClick__WEBPACK_IMPORTED_MODULE_42__["default"], null), el);
     }
   });
 }

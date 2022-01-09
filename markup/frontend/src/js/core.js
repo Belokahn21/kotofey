@@ -66,6 +66,7 @@ import './react/Compare/CompareList';
 import './react/EatCalculator/EatCalculator';
 import './react/RepeatOrder/RepeatOrder';
 import './react/OzonApi/Ozon';
+import './react/QuickCalc/QuickCalc';
 
 
 import SetWeight from "./react/SetWeight/SetWeight";
