@@ -45,6 +45,11 @@ interface delivery_response_normalize_interface
     public function response(array $response);
 }
 
+interface delivery_auth_interface
+{
+    public function auth(array &$headers);
+}
+
 /**
  * @var $api delivery_api_interface
  * @var $normalizer delivery_response_normalize_interface
@@ -85,6 +90,19 @@ abstract class delivery_serivce
     {
         return $this->normalizer;
     }
+}
+
+abstract class delivery_auth implements delivery_auth_interface
+{
+
+}
+
+/**
+ * @var $auth delivery_auth_interface
+ */
+abstract class delivery_api implements delivery_api_interface
+{
+    public $auth;
 }
 
 abstract class delivery_response implements delivery_response_normalize_interface
@@ -177,7 +195,7 @@ class rupost_service extends delivery_serivce
     }
 }
 
-class rupost_api implements delivery_api_interface
+class rupost_api extends delivery_api
 {
 
     public function tariff(string $from, string $to, array $params)
@@ -191,9 +209,9 @@ class rupost_api implements delivery_api_interface
         $headers = [];
         $response = false;
         if ($curl = curl_init()) {
-            $headers[] = "Authorization: AccessToken 0t_jz_hNllKIgH5Z_Rc7z1cHI2RiMmqx";
-            $headers[] = "X-User-Authorization: Basic aW5mb0Brb3RvZmV5LnN0b3JlOjEyM3F3ZVIl";
-            $headers[] = "Content-Type: application/json;charset=UTF-8";
+
+            $auth = new rupost_auth();
+            $auth->auth($headers);
 
             if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
 
@@ -209,9 +227,8 @@ class rupost_api implements delivery_api_interface
     }
 }
 
-class cdek_api implements delivery_api_interface
+class cdek_api extends delivery_api
 {
-
     public function tariff(string $from, string $to, array $params)
     {
         return $this->execute('https://api.edu.cdek.ru/v2/calculator/tariff', $params);
@@ -221,12 +238,11 @@ class cdek_api implements delivery_api_interface
     {
         $response = false;
         $headers = [];
+
+        $auth = new cdek_auth();
+        $auth->auth($headers);
+
         if ($curl = curl_init()) {
-
-            $token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJvcmRlcjphbGwiLCJwYXltZW50OmFsbCJdLCJleHAiOjE2NDE3NDAyMTksImF1dGhvcml0aWVzIjpbInNoYXJkLWlkOnJ1LTAxIiwiZnVsbC1uYW1lOtCi0LXRgdGC0LjRgNC-0LLQsNC90LjQtSDQmNC90YLQtdCz0YDQsNGG0LjQuCDQmNCcLCDQntCR0KnQldCh0KLQktCeINChINCe0JPQoNCQ0J3QmNCn0JXQndCd0J7QmSDQntCi0JLQldCi0KHQotCS0JXQndCd0J7QodCi0KzQriIsImFjY291bnQtbGFuZzpydXMiLCJjb250cmFjdDrQmNCcLdCg0KQt0JPQm9CTLTIyIiwiYXBpLXZlcnNpb246MS4xIiwiYWNjb3VudC11dWlkOmU5MjViZDBmLTA1YTYtNGM1Ni1iNzM3LTRiOTljMTRmNjY5YSIsImNsaWVudC1pZC1lYzU6ZWQ3NWVjZjQtMzBlZC00MTUzLWFmZTktZWI4MGJiNTEyZjIyIiwiY2xpZW50LWlkLWVjNDoxNDM0ODIzMSIsImNvbnRyYWdlbnQtdXVpZDplZDc1ZWNmNC0zMGVkLTQxNTMtYWZlOS1lYjgwYmI1MTJmMjIiLCJzb2xpZC1hZGRyZXNzOmZhbHNlIiwiY2xpZW50LWNpdHk60J3QvtCy0L7RgdC40LHQuNGA0YHQuiwg0J3QvtCy0L7RgdC40LHQuNGA0YHQutCw0Y8g0L7QsdC7LiJdLCJqdGkiOiI3Mzc1OWMyYi1mNmQ5LTRkMGUtYjE5NS1mYmUxMjI2MTVlYjgiLCJjbGllbnRfaWQiOiJFTXNjZDZyOUpuRmlRM2JMb3lqSlk2ZU03OEpySmNlSSJ9.Q_ucsF44D-hFyUHYXM8ivG8fo4KpyFsmdEU0MeWo4ohr-b_YdVOUTAnaAbG8MvEYN5Pt1gWuCGklb4uU8hE7cQHH-1gIIEXIjEZ85Mwt1lFozHgZV905Xy_GJdctqnPEQ7rjGmZ9EThH14HMJkMHxpxFN7_Lqp-tof5MexLJ3WZPGgd4_9txhLY-s3xU3HLntJ9qXGKW8o8ZDZGIezqmrxLWZB9EsyonmncFhkt_PqT4Tj7MOPDGDFj0v16xdS0Bg_CWz2FE1B4zYHRuXlE1t9hMqEbK_nD_1Cb8xVFmPKCtVVX88atxWe9nX3CRGeivjmSwu7RaeASIj2Xns1ze-w";
-            $headers[] = "Authorization: Bearer {$token}";
-            $headers[] = "Content-Type: application/json";
-
             if ($headers) curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -261,5 +277,45 @@ class rupost_response_normalize extends delivery_response
         $this->max_day = ArrayHelper::getValue($response, 'delivery-time.max-days');
         $this->total_sum = Converter::pennyToRub(ArrayHelper::getValue($response, 'total-rate'), true);
         return $this;
+    }
+}
+
+class cdek_auth extends delivery_auth
+{
+    public function auth(array &$headers)
+    {
+        $response = false;
+        if ($curl = curl_init()) {
+            curl_setopt($curl, CURLOPT_URL, 'https://api.edu.cdek.ru/v2/oauth/token?parameters');
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($curl, CURLOPT_POST, true);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, http_build_query([
+                'grant_type' => 'client_credentials',
+                'client_id' => $_ENV['CDEK_client_id'],
+                'client_secret' => $_ENV['CDEK_client_secret'],
+            ]));
+            $response = curl_exec($curl);
+            curl_close($curl);
+        }
+
+        $_response = Json::decode($response);
+
+
+//        $token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzY29wZSI6WyJvcmRlcjphbGwiLCJwYXltZW50OmFsbCJdLCJleHAiOjE2NDE3NDAyMTksImF1dGhvcml0aWVzIjpbInNoYXJkLWlkOnJ1LTAxIiwiZnVsbC1uYW1lOtCi0LXRgdGC0LjRgNC-0LLQsNC90LjQtSDQmNC90YLQtdCz0YDQsNGG0LjQuCDQmNCcLCDQntCR0KnQldCh0KLQktCeINChINCe0JPQoNCQ0J3QmNCn0JXQndCd0J7QmSDQntCi0JLQldCi0KHQotCS0JXQndCd0J7QodCi0KzQriIsImFjY291bnQtbGFuZzpydXMiLCJjb250cmFjdDrQmNCcLdCg0KQt0JPQm9CTLTIyIiwiYXBpLXZlcnNpb246MS4xIiwiYWNjb3VudC11dWlkOmU5MjViZDBmLTA1YTYtNGM1Ni1iNzM3LTRiOTljMTRmNjY5YSIsImNsaWVudC1pZC1lYzU6ZWQ3NWVjZjQtMzBlZC00MTUzLWFmZTktZWI4MGJiNTEyZjIyIiwiY2xpZW50LWlkLWVjNDoxNDM0ODIzMSIsImNvbnRyYWdlbnQtdXVpZDplZDc1ZWNmNC0zMGVkLTQxNTMtYWZlOS1lYjgwYmI1MTJmMjIiLCJzb2xpZC1hZGRyZXNzOmZhbHNlIiwiY2xpZW50LWNpdHk60J3QvtCy0L7RgdC40LHQuNGA0YHQuiwg0J3QvtCy0L7RgdC40LHQuNGA0YHQutCw0Y8g0L7QsdC7LiJdLCJqdGkiOiI3Mzc1OWMyYi1mNmQ5LTRkMGUtYjE5NS1mYmUxMjI2MTVlYjgiLCJjbGllbnRfaWQiOiJFTXNjZDZyOUpuRmlRM2JMb3lqSlk2ZU03OEpySmNlSSJ9.Q_ucsF44D-hFyUHYXM8ivG8fo4KpyFsmdEU0MeWo4ohr-b_YdVOUTAnaAbG8MvEYN5Pt1gWuCGklb4uU8hE7cQHH-1gIIEXIjEZ85Mwt1lFozHgZV905Xy_GJdctqnPEQ7rjGmZ9EThH14HMJkMHxpxFN7_Lqp-tof5MexLJ3WZPGgd4_9txhLY-s3xU3HLntJ9qXGKW8o8ZDZGIezqmrxLWZB9EsyonmncFhkt_PqT4Tj7MOPDGDFj0v16xdS0Bg_CWz2FE1B4zYHRuXlE1t9hMqEbK_nD_1Cb8xVFmPKCtVVX88atxWe9nX3CRGeivjmSwu7RaeASIj2Xns1ze-w";
+        $token = ArrayHelper::getValue($_response, 'access_token');
+        $headers[] = "Authorization: Bearer {$token}";
+        $headers[] = "Content-Type: application/json";
+    }
+}
+
+class rupost_auth extends delivery_auth
+{
+    public function auth(array &$headers)
+    {
+        $login = $_ENV['RU_POST_LOGIN'];
+        $password = $_ENV['RU_POST_PWD'];
+        $headers[] = "Authorization: AccessToken " . $_ENV['RU_POST_TOKEN'];
+        $headers[] = "X-User-Authorization: Basic " . base64_encode("$login:$password");
+        $headers[] = "Content-Type: application/json;charset=UTF-8";
     }
 }
