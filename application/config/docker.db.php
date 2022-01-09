@@ -1,9 +1,9 @@
 <?php
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=mariadb;dbname=kotofey',
-    'username' => 'kotofey',
-    'password' => '123qweR%',
+    'dsn' => 'mysql:host=localhost;dbname=' . $_ENV['DB_NAME'],
+    'username' => $_ENV['DB_LOGIN'],
+    'password' => $_ENV['DB_PWD'],
     'charset' => 'utf8',
 
     // Schema cache options (for production environment)
