@@ -18,11 +18,18 @@ class TariffsRestController extends Controller
     {
         $post_data = \Yii::$app->request->post();
 
-        $rupost_service = new rupost_service();
-        $cdek_service = new cdek_service();
+        $from = ArrayHelper::getValue($post_data, 'from', 656000);
+        $to = ArrayHelper::getValue($post_data, 'to', 656000);
+        $product_id = ArrayHelper::getValue($post_data, 'product_id', 1);
 
-        Debug::p($rupost_service->tariff(656000, 443082, 1));
-        Debug::p($cdek_service->tariff(656000, 443082, 1));
+        $response = array();
+        $service_list = array(new rupost_service(), new cdek_service());
+
+        foreach ($service_list as $service) {
+            $response[] = $service->tariff($from, $to, $product_id);
+        }
+
+        return $response;
     }
 }
 
