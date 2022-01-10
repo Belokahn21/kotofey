@@ -10930,7 +10930,8 @@ Build date: 2019-12-19 16:51:02
   align-items: center;
   justify-content: center;
   outline: none !important;
-  transition: background-color 0.3s ease-in 0s; }
+  transition: background-color 0.3s ease-in 0s;
+  cursor: pointer; }
   .add-basket:hover {
     color: #fff;
     background: #ff1a4a; }

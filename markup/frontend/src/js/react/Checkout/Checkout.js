@@ -9,6 +9,7 @@ import Terminal from "../../tools/payment/terminal";
 import RestRequest from "../../tools/RestRequest";
 import Variants from "./html/widget/Variants";
 import DeliveryService from "./DeliveryService";
+import WaitButton from "./WaitButton";
 
 class Checkout extends Component {
     constructor(props) {
@@ -36,6 +37,7 @@ class Checkout extends Component {
             deliveryId: 0,
             user: null,
             finish: false,
+            isButton: false,
             selectedAddress: null,
             addr_index: "",
             addr_city: "",
@@ -70,9 +72,13 @@ class Checkout extends Component {
         e.preventDefault();
         const form = e.target;
 
+        this.setState({isButton: true});
+
         RestRequest.post(config.restOrder, {
             body: new FormData(form)
         }).then(data => {
+            alert();
+            this.setState({isButton: false});
             if (data.errors) {
                 this.setState({
                     errors: data.errors
@@ -481,7 +487,8 @@ class Checkout extends Component {
                         {/*</div>*/}
 
                         <div className="checkout-form__group-row" style={{alignItems: "center"}}>
-                            <button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>
+                            {/*<button type="submit" className="add-basket checkout-form__submit">{buttonLabel}</button>*/}
+                            <WaitButton active={this.state.isButton} label={buttonLabel}/>
                             <p className="checkout-agree-text">
                                 Нажимая на кнопку «Оформить заказ», вы принимаете условия <a href="/about/agree/">Согласия на обработку персональных данных</a>
                             </p>

@@ -22,7 +22,6 @@ class CheckoutBasketElement extends React.Component {
     render() {
         const element = this.props.element;
 
-        console.log(element);
         let removeButton;
 
         if (element.id) {

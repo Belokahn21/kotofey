@@ -11,7 +11,10 @@ class RestRequest {
         return fetch(url, {
             method: 'POST',
             ...options
-        }).then(response => response.json());
+        }).then(response => {
+            console.log(response);
+            return response.json();
+        });
     }
 
     static update(url, options) {
