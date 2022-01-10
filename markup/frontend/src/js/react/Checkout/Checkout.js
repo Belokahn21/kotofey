@@ -77,7 +77,6 @@ class Checkout extends Component {
         RestRequest.post(config.restOrder, {
             body: new FormData(form)
         }).then(data => {
-            alert();
             this.setState({isButton: false});
             if (data.errors) {
                 this.setState({

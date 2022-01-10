@@ -4926,8 +4926,6 @@ var Checkout = /*#__PURE__*/function (_Component) {
       _tools_RestRequest__WEBPACK_IMPORTED_MODULE_7__["default"].post(_config__WEBPACK_IMPORTED_MODULE_2__["default"].restOrder, {
         body: new FormData(form)
       }).then(function (data) {
-        alert();
-
         _this3.setState({
           isButton: false
         });
@@ -9159,8 +9157,7 @@ var RestRequest = /*#__PURE__*/function () {
       return fetch(url, _objectSpread({
         method: 'POST'
       }, options)).then(function (response) {
-        console.log(response);
-        return response.json();
+        return response;
       });
     }
   }, {

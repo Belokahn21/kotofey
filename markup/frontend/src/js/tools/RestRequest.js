@@ -12,8 +12,7 @@ class RestRequest {
             method: 'POST',
             ...options
         }).then(response => {
-            console.log(response);
-            return response.json();
+            return response;
         });
     }
 
