@@ -155,7 +155,7 @@ $config = [
 
 
                 //frontend rest
-//                'PATCH api/<module>' => '<module>/rest/update',
+                'PATCH api/<module>' => '<module>/rest/update',
 
                 'GET api/<module>/<id:[\d]+>' => '<module>/rest/view',
                 'GET api/<module>/<controller>/<id:[\d]+>' => '<module>/<controller>-rest/view',
