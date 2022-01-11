@@ -51,7 +51,7 @@ $this->title = Title::show("Список доставок");
         };
         ?>
 
-        <?php if ($has_terminal): ?>
+        <?php if ($has_terminal()):  ?>
             <div class="logistic-statistic-item-wrap">
                 <div class="logistic-statistic-item">
                     <i class="fas fa-exclamation-triangle orange"></i><span class="orange">Требуется терминал</span>
